@@ -2,13 +2,18 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,7 +29,12 @@ namespace FargowiltasSouls
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
             On_Item.AffixName += AffixName;
+            On_Player.ItemCheck_Shoot += InterruptShoot;
+            On_PlayerDrawLayers.DrawPlayer_27_HeldItem += DrawSwordsCorrectly;
         }
+
+        
+
         public void UnloadDetours()
         {
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
@@ -32,6 +42,8 @@ namespace FargowiltasSouls
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
             On_Item.AffixName -= AffixName;
+            On_Player.ItemCheck_Shoot -= InterruptShoot;
+            On_PlayerDrawLayers.DrawPlayer_27_HeldItem -= DrawSwordsCorrectly;
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -62,7 +74,27 @@ namespace FargowiltasSouls
 
             return true;
         }
+        private void DrawSwordsCorrectly(On_PlayerDrawLayers.orig_DrawPlayer_27_HeldItem orig, ref PlayerDrawSet drawinfo)
+        {
+            //if (SwordGlobalItem.IsBroadsword(drawinfo.heldItem))
+            //{
+            //    Asset<Texture2D> t = TextureAssets.Item[drawinfo.heldItem.type];
+            //    Main.EntitySpriteDraw(t.Value, drawinfo.Position, )
+            //}
+            orig(ref drawinfo);
+        }
+        private void InterruptShoot(On_Player.orig_ItemCheck_Shoot orig, Player self, int i, Item sItem, int weaponDamage)
+        {
+            
+            if (SwordGlobalItem.IsBroadsword(sItem) && sItem.TryGetGlobalItem<SwordGlobalItem>(out SwordGlobalItem sword) && !sword.VanillaShoot)
+            {
+                SwordPlayer mplayer = self.GetModPlayer<SwordPlayer>();
 
+                mplayer.shouldShoot = true;
+                return;
+            }
+            orig(self, i, sItem, weaponDamage);
+        }
         private void AddBuff(
             Terraria.On_Player.orig_AddBuff orig,
             Player self, int type, int timeToAdd, bool quiet, bool foodHack)

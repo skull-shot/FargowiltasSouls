@@ -374,7 +374,23 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+                case ProjectileID.Excalibur:
+                case ProjectileID.TrueExcalibur:
+                case ProjectileID.NightsEdge:
+                case ProjectileID.TrueNightsEdge:
+                case ProjectileID.TerraBlade2:
+                case ProjectileID.TheHorsemansBlade:
+                    {
+                        Player owner = Main.player[projectile.owner];
+                        SwordPlayer sword = owner.GetModPlayer<SwordPlayer>();
+                        if (sword.swingDirection == -1)
+                        {
+                            projectile.ai[0] *= -1;
+                        }
+                    }
+                    break;
 
+                
                 default:
                     break;
             }
@@ -504,7 +520,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
+                   
                 }
+
+                
 
                 //hook ai
                 if (player.HasEffect<MahoganyEffect>() && projectile.aiStyle == 7)
@@ -1115,7 +1134,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
-
+                
                 default:
                     break;
             }
