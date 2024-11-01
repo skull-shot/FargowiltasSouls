@@ -3614,11 +3614,11 @@ WillBooster: {
 
 CoffinRoominator: {
 	DisplayName: Coffin Roominator
-	Tooltip: 
-	'''
-	Spawns a Cursed Coffin room on your cursor
-	Overrides existing Cursed Coffin rooms
-	'''
+	Tooltip:
+		'''
+		Spawns a Cursed Coffin room on your cursor
+		Overrides existing Cursed Coffin rooms
+		'''
 }
 
 GildedSceptre: {
