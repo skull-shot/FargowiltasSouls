@@ -1242,18 +1242,27 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                         CustomRunePositions[i] = Player.Center + Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * 70f;
                         break;
                     }
-                    for (int attempts = 0; attempts < 20; attempts++)
+                    for (int attempts = 0; attempts < 100; attempts++)
                     {
                         bool valid = true;
                         offset = Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * Main.rand.NextFloat(60f, 450f);
-                        for (int j = 0; j < CustomRunePositions.Length; j++)
+
+                        if ((Player.Center + offset).Distance(Player.Center) < Player.height * 0.7f) // NEVER place on top of player
                         {
-                            if (i != j && offset.Distance(CustomRunePositions[j] - Player.Center) < 100)
+                            valid = false;
+                            attempts--;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < CustomRunePositions.Length; j++)
                             {
-                                valid = false;
-                                break;
+                                if (i != j && offset.Distance(CustomRunePositions[j] - Player.Center) < 100)
+                                {
+                                    valid = false;
+                                    break;
+                                }
+
                             }
-                            
                         }
                         if (valid)
                         {
