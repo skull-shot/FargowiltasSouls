@@ -1,3 +1,3 @@
 NEW UPDATE - V {ModVersion}
 
-Coffin Roominator can now be obtained by shimmering Urn of Souls and spawns a Cursed Coffin arena on your cursor
+Tweaked Lifelight rune spawn positions
