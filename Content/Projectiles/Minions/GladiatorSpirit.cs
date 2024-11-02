@@ -87,6 +87,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 if (++Projectile.frame >= Main.projFrames[Projectile.type])
                     Projectile.frame = 0;
             }
+            Projectile.direction = Projectile.spriteDirection = Projectile.velocity.X.NonZeroSign();
         }
 
         public override bool PreDraw(ref Color lightColor)
