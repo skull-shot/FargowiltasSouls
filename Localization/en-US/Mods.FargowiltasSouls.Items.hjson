@@ -996,6 +996,7 @@ WillForce: {
 		[i:FargowiltasSouls/GoldEnchant] Press the Gold hotkey to be encased in a golden shell, your attacks inflict Midas
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop 5x loot
+		'A mind of unbreakable determination'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }
