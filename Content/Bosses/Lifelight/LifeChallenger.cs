@@ -1298,6 +1298,17 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 RuneBlinkTimer = 40;
                 SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
             }
+            if (AI_Timer > FormationTime)
+            {
+                for (int i = 0; i < CustomRunePositions.Length; i++)
+                {
+                    Vector2 dif = CustomRunePositions[i] - Player.Center;
+                    if (dif.LengthSquared() < Math.Pow(Player.height * 0.8f, 2))
+                    {
+                        CustomRunePositions[i] += dif.SafeNormalize(Vector2.UnitX) * 6;
+                    }
+                }
+            }
                 
             if (AI_Timer == startup) // put hitboxes and eventual explosion
             {
@@ -1306,7 +1317,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 NPC.netUpdate = true;
                 for (int i = 0; i < RuneCount; i++)
                 {
-                    float runeRot = 0;
                     Vector2 runePos = CustomRunePositions[i];
 
                     if (FargoSoulsUtil.HostCheck)
@@ -2237,7 +2247,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             if (AI_Timer >= StartTime && AI_Timer <= StartTime + lerpTime)
             {
                 float progress = (float)(AI_Timer - StartTime) / lerpTime;
-                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(player.Center) * 22, progress);
+                NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.Lerp(LockVector2, NPC.DirectionTo(player.Center), 0.5f) * 22, progress);
             }
 
             // reset
