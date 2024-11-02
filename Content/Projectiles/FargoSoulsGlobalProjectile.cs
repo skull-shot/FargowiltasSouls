@@ -733,6 +733,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.Bottom = projectile.position;
                         projectile.hostile = true;
                         projectile.friendly = false;
+                        projectile.netUpdate = true;
                     }
                 }
 
