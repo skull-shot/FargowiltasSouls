@@ -177,8 +177,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.spriteDirection = Projectile.direction;
                 player.ChangeDir(Projectile.direction);
                 player.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
-                player.itemTime = 1;
-                player.itemAnimation = 1;
+                player.itemTime = 2;
+                player.itemAnimation = 2;
                 if (Projectile.spriteDirection == -1)
                 {
                     Projectile.rotation += MathHelper.ToRadians(-45f) + (float)Math.PI;
