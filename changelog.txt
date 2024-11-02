@@ -1,3 +1,31 @@
 NEW UPDATE - V {ModVersion}
 
-Tweaked Lifelight rune spawn positions
+
+Cursed Coffin: 
+-Reduced Spirit crawl speed and turning ability during gem attack below Masochist Mode
+-In For the Worthy, sand constantly falls from the ceiling
+-Fixed arena being breakable before the boss is killed in multiplayer
+-Coffin Roominator now generates an entrance to the room
+
+Lifelight:
+-Tweaked angle for boss' dash during spear stab
+-Tweaked behavior for mines to not overlap the player
+
+Eternity Brain of Cthulhu: Slightly reduced crawl speed and clone dash speed
+Eternity Twins: Tweaked delay before Phase 1 dashes
+Trojan Squirrel: Fixed explosions not damaging correctly in multiplayer
+Energized Eternity Plantera health 0.33x
+Reduced Vortex Pillar damage
+
+Spooky Enchant: Fixed scythes dealing less damage than intended
+Apprentice Enchant: Fixed sometimes granting 2 weapons as support rather than 1 and other obscure bugs
+Dark Artist Enchant: Flameburst minion damage 85 -> 72
+Spider Enchant: Removed inherent +10% summoner crit
+Necromantic Brew: Reduced dash speed increase from 50% to 30%
+Gladiator Enchant: Javelins have inherent 5 armor penetration, increased stat buffs to 8%
+Will Force: Spirit faces its movement direction, readded flavor text
+Tiki Enchant: Added tooltip stating that it undoes Eternity Mode whip melee speed nerf
+
+Added charge bar to Prisma Regalia
+Prisma Regalia can only spawn stars 2 times per swing
+Umbra Regalia | Nuke Fishron sell price 5 | 15 -> 25
