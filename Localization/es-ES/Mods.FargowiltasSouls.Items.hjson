@@ -622,7 +622,6 @@ SpiderEnchant: {
 	/* Tooltip:
 		'''
 		Your summon weapons can crit
-		+10% summon critical strike chance
 		'Arachnophobia is punishable by arachnid induced death'
 		''' */
 }
