@@ -152,7 +152,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         ClonefadeDashTimer++;
                         teleportTimer = cloneTime + 5;
                         Player player = Main.player[npc.target];
-                        npc.velocity += npc.DirectionTo(player.Center) * 0.35f;
+                        npc.velocity += npc.DirectionTo(player.Center) * 0.28f;
                     }
                     else
                     {

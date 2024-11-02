@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             else if (NPC.localAI[0] == attackDelay)
             {
                 NPC.Center = new Vector2(NPC.localAI[2], NPC.localAI[3]);
-                NPC.velocity = 18f * NPC.SafeDirectionTo(Main.player[NPC.target].Center);
+                NPC.velocity = 16f * NPC.SafeDirectionTo(Main.player[NPC.target].Center);
                 NPC.ai[2] = Main.player[NPC.target].Center.X;
                 NPC.ai[3] = Main.player[NPC.target].Center.Y;
                 NPC.netUpdate = true;
@@ -116,7 +116,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             }
             else //while dashing
             {
-                NPC.velocity *= 1.015f;
+                NPC.velocity *= 1.014f;
                 NPC.dontTakeDamage = false;
             }
         }
