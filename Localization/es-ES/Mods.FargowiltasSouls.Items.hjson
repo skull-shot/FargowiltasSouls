@@ -235,7 +235,7 @@ GladiatorEnchant: {
 		Spears will rain down on struck enemies, dealing ranged damage
 		Double tap down to place a banner that lasts 15 seconds
 		While close to the banner, spear rain is stronger
-		Being close to the banner also grants knockback immunity, +5% damage reduction and +5% damage
+		Being close to the banner also grants knockback immunity, +8% damage reduction and +8% damage
 		Banner can only be resummoned after it runs out
 		'Are you not entertained?'
 		''' */
@@ -996,6 +996,7 @@ WillForce: {
 		[i:FargowiltasSouls/GoldEnchant] Press the Gold hotkey to be encased in a golden shell, your attacks inflict Midas
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop 5x loot
+		'A mind of unbreakable determination'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }

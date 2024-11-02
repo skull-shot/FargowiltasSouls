@@ -316,6 +316,12 @@ namespace FargowiltasSouls.Core.Systems
 
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
+
+            int x = reader.ReadInt32();
+            int y = reader.ReadInt32();
+            int width = reader.ReadInt32();
+            int height = reader.ReadInt32();
+            CoffinArena.Rectangle = new(x, y, width, height);
         }
 
         public override void NetSend(BinaryWriter writer)
@@ -363,6 +369,10 @@ namespace FargowiltasSouls.Core.Systems
 
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);
+            writer.Write(CoffinArena.Rectangle.X);
+            writer.Write(CoffinArena.Rectangle.Y);
+            writer.Write(CoffinArena.Rectangle.Width);
+            writer.Write(CoffinArena.Rectangle.Height);
         }
     }
 }
