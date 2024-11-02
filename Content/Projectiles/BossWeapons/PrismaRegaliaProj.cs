@@ -1,3 +1,5 @@
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
+using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -65,6 +67,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.friendly = false;
                 if (chargeLevel < maxCharge)
                     chargeLevel++;
+                CooldownBarManager.Activate("PrismaRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/BossDrops/PrismaRegalia").Value, Color.DeepPink,
+                    () => Projectile.ai[0] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<PrismaRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
