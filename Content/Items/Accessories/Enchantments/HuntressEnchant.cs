@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 int bonus = modPlayer.ForceEffect<HuntressEnchant>() || redRiding ? 5 : 3;
                 if (player.HasBuff<GladiatorSpiritBuff>())
                     bonus = 15;
-                proj.ArmorPenetration = bonus * 2 * modPlayer.HuntressStage;
+                proj.ArmorPenetration += bonus * 2 * modPlayer.HuntressStage;
                 modifiers.SourceDamage.Flat += bonus * modPlayer.HuntressStage;
             }
         }

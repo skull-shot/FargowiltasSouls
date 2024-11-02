@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            float stats = 0.05f;
+            float stats = 0.08f;
             if (player.FargoSouls().ForceEffect<GladiatorEnchant>())
                 stats = 0.1f;
             player.GetDamage(DamageClass.Generic) += stats;
