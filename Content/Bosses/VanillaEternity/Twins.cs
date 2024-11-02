@@ -376,7 +376,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = WorldSavingSystem.MasochistModeReal ? 70 : 90;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -408,11 +408,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForSpaz))
                                 ai_StateTimer--;
-
-                            if (ai_StateTimer < prepTime - 30 && spazmatism.ai[2] < npc.ai[2])
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+                            if (ai_StateTimer < prepTime - flashDelay && spazmatism.ai[2] < npc.ai[2])
                                 npc.ai[2] = spazmatism.ai[2];
 
-                            if (ai_StateTimer == prepTime - (WorldSavingSystem.MasochistModeReal ? 25 : 35))
+                            if (ai_StateTimer == prepTime - flashDelay)
                             {
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -1100,7 +1100,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = 70;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -1131,14 +1131,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (retinazer.Distance(spazDesiredPos) <= 300)
                                 waitForReti = false;
 
-                            if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForReti))
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+
+                            if (ai_StateTimer < prepTime - flashDelay && (npc.Distance(desiredPos) > 300 || waitForReti))
                             {
                                 ai_StateTimer--;
                                 npc.netUpdate = true;
                             }
                                 
 
-                            if (ai_StateTimer < prepTime - 30 && retinazer.ai[2] < npc.ai[2])
+                            if (ai_StateTimer < prepTime - flashDelay && retinazer.ai[2] < npc.ai[2])
                             {
                                 npc.ai[2] = retinazer.ai[2];
                                 npc.netUpdate = true;
