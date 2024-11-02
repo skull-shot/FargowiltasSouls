@@ -1,6 +1,5 @@
 NEW UPDATE - V {ModVersion}
 
-
 Cursed Coffin: 
 -Reduced Spirit crawl speed and turning ability during gem attack below Masochist Mode
 -In For the Worthy, sand constantly falls from the ceiling
