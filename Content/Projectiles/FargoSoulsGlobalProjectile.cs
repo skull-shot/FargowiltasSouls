@@ -644,7 +644,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                                 int cdMultiplier = 2;
 
-                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage / cdMultiplier, 2, projectile.owner);
+                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage * cdMultiplier, 2, projectile.owner);
 
                                 SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.5f }, projectile.Center);
 
