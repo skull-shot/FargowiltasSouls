@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useAnimation = 18;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
-            Item.value = Item.sellPrice(0, 5);
+            Item.value = Item.sellPrice(0, 25);
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = null;
             Item.autoReuse = true;

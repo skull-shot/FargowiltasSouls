@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.knockBack = 7.7f;
             Item.UseSound = SoundID.Item62;
             Item.useAmmo = AmmoID.Rocket;
-            Item.value = Item.sellPrice(0, 15);
+            Item.value = Item.sellPrice(0, 25);
             Item.rare = ItemRarityID.Purple;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<FishNuke>();
