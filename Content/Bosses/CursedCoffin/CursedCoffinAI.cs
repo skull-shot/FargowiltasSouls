@@ -134,14 +134,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
 
             // Anti-hook technology
-            IEnumerable<Player> hookedPlayers = Main.player.Where(p => p.Alive() && p.FargoSouls().Grappled);
-            if (hookedPlayers.Any() && Main.GameUpdateCount % 20 == 0)
+            IEnumerable<Player> hookedPlayers = Main.player.Where(p => p.Alive() && (p.FargoSouls().Grappled || (Main.getGoodWorld && Main.GameUpdateCount % 30 == 0)));
+            if ((hookedPlayers.Any() && Main.GameUpdateCount % 20 == 0))
             {
                 foreach (Player p in hookedPlayers)
                 {
                     for (int x = -3; x < 3; x += 2)
                     {
-                        for (int y = 0; y < 10; y++)
+                        for (int y = 0; y < 50; y++)
                         {
                             Vector2 projPos = p.Center + Vector2.UnitX * x * 16 + Vector2.UnitY * -y * 16;
                             Point tile = projPos.ToTileCoordinates();
