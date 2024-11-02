@@ -35,7 +35,9 @@ namespace FargowiltasSouls.Content.Items.Consumables
             //Point point = new((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
             //WorldGen.KillTile(point.X, point.Y);
             //WorldGen.PlaceTile(point.X, point.Y, ModContent.TileType<CrackedSandstoneBricks>(), mute: true, forced: true);
-            CoffinArena.Place(Main.MouseWorld.ToTileCoordinates());
+            Point topCenter = Main.MouseWorld.ToTileCoordinates();
+            CoffinArena.Place(topCenter);
+            CoffinArena.PlacePassage(topCenter);
             return true;
         }
     }
