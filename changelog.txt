@@ -28,4 +28,5 @@ Tiki Enchant: Added tooltip stating that it undoes Eternity Mode whip melee spee
 
 Added charge bar to Prisma Regalia
 Prisma Regalia can only spawn stars 2 times per swing
+Fixed Slime King's Slasher not benefitting from Hellfire
 Umbra Regalia | Nuke Fishron sell price 5 | 15 -> 25
