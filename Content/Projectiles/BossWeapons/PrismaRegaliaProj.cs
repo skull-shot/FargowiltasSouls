@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class PrismaRegaliaProj : ModProjectile
     {
-
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Prisma Regalia");
@@ -45,6 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public float Extension = 0;
         int OrigAnimMax = 30;
         bool Charged;
+        public int Hits = 0;
         public override void AI()
         {
             ref float chargeLevel = ref Projectile.ai[0];
@@ -164,6 +164,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 return;
             }
+            if (Hits > 1)
+                return;
+            
             for (int i = 0; i < count; i++)
             {
                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * 10,
@@ -174,6 +177,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     //Main.projectile[p].
                 }
             }
+            Hits++;
         }
         public override bool PreDraw(ref Color lightColor)
         {
