@@ -1912,7 +1912,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
 		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/ShadowForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/ShadowForce] You fire additional weapons as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/ShadowForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage, press the Gold hotkey to encase yourself
 		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
