@@ -666,6 +666,7 @@ TikiEnchant: {
 		Summoner whips scale with your strongest class instead
 		+20% whip range
 		Whip your minions or projectiles to empower them for 1.2x damage on their next hit
+		In Eternity Mode, whips can benefit from melee speed again
 		'Aku Aku!'
 		'''
 }
