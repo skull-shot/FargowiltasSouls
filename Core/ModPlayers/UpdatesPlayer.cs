@@ -384,7 +384,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //    Player.velocity.X *= 1.1f;
                 //}
 
-                float dashSpeedBoost = 0.5f * Player.velocity.X;
+                float dashSpeedBoost = 0.3f * Player.velocity.X;
                 Player.position.X += dashSpeedBoost;
                 if (Collision.SolidCollision(Player.position, Player.width, Player.height))
                     Player.position.X -= dashSpeedBoost;

@@ -1432,7 +1432,7 @@ NecromanticBrew: {
 	Tooltip:
 		'''
 		Oferece imunidade a Letárgico
-		Aumenta a velocidade enquanto faz uma corrida em 50%
+		Aumenta a velocidade enquanto faz uma corrida em 30%
 		Enquanto faz uma corrida, você sofre 75% menos dano de contato e reflete 100% do dano de contato no atacante
 		Invoca 2 braços do Esqueletron para bater nos inimigos
 		'A solução de crescimento ósseo de um inimigo derrotado'
