@@ -80,20 +80,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool forceEffect = modPlayer.ForceEffect<ApprenticeEnchant>();
-            //update item cds
-            for (int i = 0; i < 10; i++)
+            //update item cd
+            if (modPlayer.ApprenticeItemCD > 0)
             {
-                int itemCD = modPlayer.ApprenticeItemCDs[i];
-
-                if (itemCD > 0)
-                {
-                    itemCD--;
-                    modPlayer.ApprenticeItemCDs[i] = itemCD;
-                }
+                modPlayer.ApprenticeItemCD--;
             }
+
             if (player.controlUseItem)
             {
-                int numExtraSlotsToUse = 1;
 
                 if (player.controlUseItem)
                 {
@@ -126,24 +120,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                         if (item2 != null && item2.damage > 0 && item2.shoot > ProjectileID.None && item2.ammo <= 0 && item.type != item2.type && !item2.channel)
                         {
-                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || item2.sentry || ContentSamples.ProjectilesByType[item2.shoot].minion || !PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player) || Blacklist.Contains(item2.type))
-                            {
+                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || item2.sentry || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
                                 continue;
-                            }
 
                             weaponsUsed++;
-
-                            if (weaponsUsed > numExtraSlotsToUse)
-                            {
+                            if (weaponsUsed > 1)
                                 break;
-                            }
 
-                            int itemCD = modPlayer.ApprenticeItemCDs[j];
+                            int itemCD = modPlayer.ApprenticeItemCD;
 
                             if (itemCD > 0)
-                            {
                                 continue;
-                            }
+
+                            if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
+                                continue;
 
                             Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
                             Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
@@ -172,7 +162,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             if (player.HasEffect<ShadowForceEffect>())
                                 divisor = 5;
 
-                            modPlayer.ApprenticeItemCDs[j] = item2.useAnimation * divisor;
+                            modPlayer.ApprenticeItemCD = item2.useAnimation * divisor;
 
                             
                             if (item2.useAmmo > 0)
@@ -195,13 +185,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                 item2.stack--;
                             }
                             
-                            //modPlayer.ApprenticeItemCDs[j] = item2.useAnimation * 4;
+                            //modPlayer.ApprenticeItemCD = item2.useAnimation * 4;
 
                             if (projToShoot == ProjectileID.RainbowFront || projToShoot == ProjectileID.RainbowBack) // prevent fucked up op interaction
                             {
                                 foreach (Projectile rainbow in Main.projectile.Where(p => (p.TypeAlive(ProjectileID.RainbowFront) || p.TypeAlive(ProjectileID.RainbowBack)) && p.owner == player.whoAmI))
                                     rainbow.Kill();
                             }
+
+                            break;
 
                             //int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
                             //Projectile proj = Main.projectile[p];

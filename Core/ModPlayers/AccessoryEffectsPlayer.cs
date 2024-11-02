@@ -92,9 +92,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             return count;
         }
-       
-
-        public int[] ApprenticeItemCDs = new int[10];
 
         //saved mount stats for squire
         //public Mount.MountData OriginalSquireMountData;

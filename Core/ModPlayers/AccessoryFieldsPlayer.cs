@@ -82,7 +82,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float SolarEnchCharge = 0;
         public float MeteorCD = 60;
 
-        public int ApprenticeCD;
+        public int ApprenticeItemCD;
         public bool IronRecipes = false;
         public bool CactusImmune = false;
         public int CactusProcCD;
