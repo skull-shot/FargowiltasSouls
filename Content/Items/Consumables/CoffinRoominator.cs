@@ -4,6 +4,8 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.WorldGeneration;
+using FargowiltasSouls.Core.Systems;
+using System;
 
 namespace FargowiltasSouls.Content.Items.Consumables
 {
@@ -37,7 +39,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
             //WorldGen.PlaceTile(point.X, point.Y, ModContent.TileType<CrackedSandstoneBricks>(), mute: true, forced: true);
             Point topCenter = Main.MouseWorld.ToTileCoordinates();
             CoffinArena.Place(topCenter);
-            CoffinArena.PlacePassage(topCenter);
+            CoffinArena.PlaceOpening(topCenter);
             return true;
         }
     }
