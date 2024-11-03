@@ -622,6 +622,7 @@ SpiderEnchant: {
 	Tooltip:
 		'''
 		Your summon weapons can crit
+		Summon crits only deal +50% damage if you're holding a non-Summoner weapon
 		'Arachnophobia is punishable by arachnid induced death'
 		'''
 }

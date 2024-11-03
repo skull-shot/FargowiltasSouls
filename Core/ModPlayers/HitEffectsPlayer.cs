@@ -90,6 +90,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
+                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                        hitInfo.Damage = (int)(hitInfo.Damage * 0.75);
                 }
 
                 if (Hexed)
