@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.defense = NPC.defDefense;
             if (Main.npc.Any(p => p.TypeAlive<CursedSpirit>()))
                 NPC.defense += 15;
-            if (StateMachine.CurrentState.Identifier != BehaviorStates.RandomStuff)
+            if (StateMachine != null && StateMachine.CurrentState != null && StateMachine.CurrentState.Identifier != BehaviorStates.RandomStuff)
                 NPC.rotation = 0;
 
             // Pushaway collision (solid object)
