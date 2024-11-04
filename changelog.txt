@@ -1,5 +1,3 @@
 NEW UPDATE - V {ModVersion}
 
-Spider Enchant crits are only 1.5x damage if held weapon is of non-Summoner class
-Capped Timber Force's palmwood projectile base damage to 8k maximum
-Added safety checks to Cursed Coffin AI to fix despawn issue in multiplayer
+Reverted projectile spawn behavior change to Apprentice Enchant due to critical issue; there should be a proper solution in the future

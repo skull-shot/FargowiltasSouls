@@ -145,9 +145,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                             //damage = (int)(damage * 0.75f);
 
-                            FargoSoulsGlobalProjectile.ApprenticeDamageCap = damage;
-                            ApprenticeEnchant.ApprenticeShoot(player, player.whoAmI, item2, damage);
-                            FargoSoulsGlobalProjectile.ApprenticeDamageCap = 0;
+                            //FargoSoulsGlobalProjectile.ApprenticeDamageCap = damage;
+                            //ApprenticeEnchant.ApprenticeShoot(player, player.whoAmI, item2, damage);
+                            //FargoSoulsGlobalProjectile.ApprenticeDamageCap = 0;
 
                             int divisor = 7;
                             if (modPlayer.DarkArtistEnchantActive && forceEffect)
@@ -193,14 +193,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                     rainbow.Kill();
                             }
 
+                            int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
+                            Projectile proj = Main.projectile[p];
+
+                            proj.noDropItem = true;
+
                             break;
-
-                            //int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
-                            //Projectile proj = Main.projectile[p];
-
-                            //proj.noDropItem = true;
-                            
-
                             /*
                             int shoot = item2.shoot;
                             if (shoot == 10) //purification powder
