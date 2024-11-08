@@ -20,6 +20,11 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle Zombie104 = new(SoundsPath + "Zombie_104");
         public static readonly SoundStyle GenericDeathray = new(SoundsPath + "GenericDeathray");
 
+        // weapons
+        public static readonly SoundStyle DiffractorStart = new(SoundsPath + "Weapons/DiffractorStart");
+        public static readonly SoundStyle DiffractorLoop = new(SoundsPath + "Weapons/DiffractorLoop");
+        public static readonly SoundStyle DiffractorEnd = new(SoundsPath + "Weapons/DiffractorEnd");
+
         // Baron
         public static readonly SoundStyle BaronLaserTelegraph = new(SoundsPath + "Challengers/Baron/BaronLaserTelegraph");
         public static readonly SoundStyle BaronLaserSoundSlow = new(SoundsPath + "Challengers/Baron/BaronLaserSound_Slow");
