@@ -1,8 +1,11 @@
+using FargowiltasSouls.Assets.Sounds;
+using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,6 +17,20 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         private int syncTimer;
         private Vector2 mousePos;
+        public LoopedSoundInstance Loop;
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.DiffractorStart, Projectile.Center);
+            
+            base.OnSpawn(source);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.DiffractorEnd, Main.LocalPlayer.Center);
+            base.OnKill(timeLeft);
+        }
 
         public override void SetStaticDefaults()
         {
@@ -65,6 +82,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             Player player = Main.player[Projectile.owner];
 
+            Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.DiffractorLoop, () =>
+            {
+                return !Projectile.active;
+            });
+
+            Loop.Update(Projectile.Center);
+         
+
             if (player.dead || !player.active)
                 Projectile.Kill();
 
@@ -88,11 +113,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 10;
             player.itemAnimation = 10;
-            Vector2 HoldOffset = new Vector2(Projectile.width / 3, 0).RotatedBy(MathHelper.WrapAngle(Projectile.velocity.ToRotation()));
+            
+            Vector2 HoldOffset = new Vector2(Projectile.width / 8, 0).RotatedBy(MathHelper.WrapAngle(Projectile.velocity.ToRotation()));
 
-            Projectile.Center += HoldOffset;
+            Projectile.Center += HoldOffset; 
             Projectile.spriteDirection = Projectile.direction * (int)player.gravDir;
             Projectile.rotation -= extrarotate;
+ 
 
             Projectile.frameCounter++;
             if (Projectile.frameCounter > 3)
@@ -127,6 +154,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (player.channel)
             {
                 timer++;
+
                 if (timer % 6 == 0)
                 {
                     if (player.inventory[player.selectedItem].UseSound != null)
@@ -134,7 +162,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     bool checkmana = player.CheckMana(player.inventory[player.selectedItem].mana, true, false);
                     if (!checkmana)
                         Projectile.Kill();
-
                 }
                 if (timer > 60)
                 {
@@ -147,7 +174,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + HoldOffset * 2, 22f * Projectile.velocity.RotatedBy(spread * i),
                             type, damage, Projectile.knockBack, Projectile.owner);
                     }
-                    SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, Projectile.Center);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/DiffractorOrb" + Main.rand.Next(1,3)), Projectile.Center); // not sound registeried because idk how to randomize using that.
                     /*int p = Projectile.NewProjectile(Projectile.Center + HoldOffset * 2, Projectile.velocity * 22, type, Projectile.damage, Projectile.knockBack, player.whoAmI);
 					if (p < 1000)
 					{

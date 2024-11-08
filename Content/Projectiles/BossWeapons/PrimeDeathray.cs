@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                 float rotation = player.itemRotation + (player.direction < 0 ? MathHelper.Pi : 0);
                 Projectile.velocity = rotation.ToRotationVector2();
-                Projectile.Center = player.MountedCenter + 87f * Projectile.velocity;
+                Projectile.Center = player.MountedCenter + 65f * Projectile.velocity;
 
                 Projectile.timeLeft++;
                 float rotdir = Projectile.ai[0] > 0 ? 1 : -1;
