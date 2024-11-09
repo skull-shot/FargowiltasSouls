@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using Microsoft.Xna.Framework;
@@ -31,7 +32,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 7.7f;
-            Item.UseSound = SoundID.Item62;
+            Item.UseSound = FargosSoundRegistry.NukeFishronFire;
             Item.useAmmo = AmmoID.Rocket;
             Item.value = Item.sellPrice(0, 25);
             Item.rare = ItemRarityID.Purple;

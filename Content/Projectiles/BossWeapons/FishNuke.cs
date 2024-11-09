@@ -1,18 +1,23 @@
+using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class FishNuke : ModProjectile
+    public class FishNuke : ModProjectile, IPixelatedPrimitiveRenderer
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Fish Nuke");
+            ProjectileID.Sets.TrailingMode[Type] = 1;
+            ProjectileID.Sets.TrailCacheLength[Type] = 20;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
@@ -64,7 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (++Projectile.localAI[0] >= 24f)
             {
                 Projectile.localAI[0] = 0f;
-                const int max = 18;
+                /*const int max = 18;
                 for (int index1 = 0; index1 < max; ++index1)
                 {
                     Vector2 vector2 = (Vector2.UnitX * -Projectile.width / 2f + -Vector2.UnitY.RotatedBy((double)index1 * 2 * 3.14159274101257 / max, new Vector2()) * new Vector2(8f, 16f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
@@ -74,13 +79,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Main.dust[index2].position = Projectile.Center + vector2 * 2f;
                     Main.dust[index2].velocity = Vector2.Normalize(Projectile.Center - Projectile.velocity * 3f - Main.dust[index2].position) * 1.25f;
                     //Main.dust[index2].velocity *= 2f;
-                }
+                }*/
             }
-            Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
+            /*Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
             int index21 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Torch, 0.0f, 0.0f, 0, new Color(), 1f);
             Main.dust[index21].position = Projectile.Center + vector21;
             Main.dust[index21].scale = 1.25f;
-            Main.dust[index21].noGravity = true;
+            Main.dust[index21].noGravity = true;*/
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
         }
@@ -122,7 +127,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item84, Projectile.Center);
+            SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
             if (Projectile.owner == Main.myPlayer)
             {
                 int modifier = Main.rand.NextBool() ? 1 : -1;
@@ -138,7 +143,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }*/
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage / 2, Projectile.knockBack * 2f, Projectile.owner);
             }
-            int num1 = 36;
+            /*int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
                 Vector2 vector2_1 = (Vector2.Normalize(Projectile.velocity) * new Vector2(Projectile.width / 2f, Projectile.height) * 0.75f).RotatedBy((index1 - (num1 / 2 - 1)) * 6.28318548202515 / num1, new Vector2()) + Projectile.Center;
@@ -147,7 +152,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].noLight = true;
                 Main.dust[index2].velocity = vector2_2;
-            }
+            }*/
         }
 
         private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
@@ -162,6 +167,24 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
                     Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
             }
+        }
+
+        public float WidthFunction(float completionRatio)
+        {
+            float baseWidth = Projectile.width * 0.8f;
+            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
+        }
+
+        public Color ColorFunction(float completionRatio)
+        {
+            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
+            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
 
         public override bool PreDraw(ref Color lightColor)

@@ -11,6 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             // DisplayName.SetDefault("EyeProjectile2");
             //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+            Main.projFrames[Projectile.type] = 4;
         }
 
         public override void SetDefaults()
@@ -51,6 +52,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center) * desiredFlySpeedInPixelsPerFrame;
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
                 }
+            }
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frameCounter = 0;
+                Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
+
             }
         }
 
