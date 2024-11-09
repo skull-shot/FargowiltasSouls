@@ -179,6 +179,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     player.velocity.Y = dashSpeed * -0.5f;
                 else if (player.controlDown)
                     player.velocity.Y = dashSpeed * 0.7f;
+                else
+                    player.velocity.Y = float.Epsilon;
             }
             player.velocity.X = dashSpeed * dir;
             if (modPlayer.IsDashingTimer < 30)
