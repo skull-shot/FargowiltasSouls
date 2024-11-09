@@ -24,6 +24,10 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle DiffractorStart = new(SoundsPath + "Weapons/DiffractorStart");
         public static readonly SoundStyle DiffractorLoop = new(SoundsPath + "Weapons/DiffractorLoop");
         public static readonly SoundStyle DiffractorEnd = new(SoundsPath + "Weapons/DiffractorEnd");
+        public static readonly SoundStyle NukeFishronFire = new(SoundsPath + "Weapons/NukeFishronFire");
+        public static readonly SoundStyle NukeFishronExplosion = new(SoundsPath + "Weapons/NukeFishronExplosion");
+        public static readonly SoundStyle GeminiSpaz = new(SoundsPath + "Weapons/GeminiSpaz");
+        public static readonly SoundStyle GeminiReti = new(SoundsPath + "Weapons/GeminiReti");
 
         // Baron
         public static readonly SoundStyle BaronLaserTelegraph = new(SoundsPath + "Challengers/Baron/BaronLaserTelegraph");

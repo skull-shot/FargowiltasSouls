@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -16,12 +17,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OpticStaffEX>();
-            // DisplayName.SetDefault("Gemini Glaives");
-            /* Tooltip.SetDefault("Fire different glaives depending on mouse click" +
-                "\nAlternating clicks will enhance attacks" +
-                "\n'The compressed forms of defeated foes..'"); */
-
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "被打败的敌人的压缩形态..");
         }
 
         public override void SetDefaults()
@@ -40,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.rare = ItemRarityID.Purple;
             Item.shootSpeed = 20;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = null;
             Item.autoReuse = true;
         }
 
@@ -58,11 +53,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             {
                 Item.shoot = ModContent.ProjectileType<Retiglaive>();
                 Item.shootSpeed = 15f;
+                Item.UseSound = FargosSoundRegistry.GeminiReti;
             }
             else
             {
                 Item.shoot = ModContent.ProjectileType<Spazmaglaive>();
                 Item.shootSpeed = 45f;
+                Item.UseSound = FargosSoundRegistry.GeminiSpaz;
             }
             return true;
         }
