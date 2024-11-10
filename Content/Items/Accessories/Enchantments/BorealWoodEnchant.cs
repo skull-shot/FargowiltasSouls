@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     return;
                 int damage = hitInfo.SourceDamage;
                 damage = (int)(damage * 0.35f);
-                damage = (int)MathHelper.Clamp(0, 800, damage); // big sting could be roughly 1700 here
+                damage = (int)MathHelper.Clamp(damage, 0, 800); // big sting could be roughly 1700 here
                 BorealSnowballs(player, damage);
             }
                 
