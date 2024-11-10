@@ -20,6 +20,7 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria.Localization;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -90,8 +91,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
-                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
-                        hitInfo.Damage = (int)(hitInfo.Damage * 0.75);
+                    if (MinionCrits)
+                    {
+                        bool reducedCritDamage = false;
+                        if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                            reducedCritDamage = true;
+                        else if (damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                            reducedCritDamage = true;
+                        if (reducedCritDamage)
+                            hitInfo.Damage = (int)(hitInfo.Damage * 0.75);
+                    }
+                       
                 }
 
                 if (Hexed)
