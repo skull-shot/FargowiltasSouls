@@ -96,7 +96,6 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool noInteractionWithNPCImmunityFrames;
         private int tempIframe;
 
-        public static int ApprenticeDamageCap;
         public int DamageCap;
         public bool EnchantmentProj;
         public float HeldProjMemorizedDamage;
@@ -456,11 +455,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (source is EntitySource_Parent parent3 && parent3.Entity is Projectile sourceProj && sourceProj.FargoSouls().DamageCap > 0)
                 DamageCap = sourceProj.FargoSouls().DamageCap;
-
-            if (ApprenticeDamageCap > 0)
-            {
-                DamageCap = ApprenticeDamageCap;
-            }
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
             {

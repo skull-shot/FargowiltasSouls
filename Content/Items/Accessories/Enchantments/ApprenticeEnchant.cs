@@ -192,10 +192,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                 foreach (Projectile rainbow in Main.projectile.Where(p => (p.TypeAlive(ProjectileID.RainbowFront) || p.TypeAlive(ProjectileID.RainbowBack)) && p.owner == player.whoAmI))
                                     rainbow.Kill();
                             }
-
                             int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
                             Projectile proj = Main.projectile[p];
 
+                            proj.FargoSouls().DamageCap = (int)MathHelper.Max(proj.FargoSouls().DamageCap, damage);
                             proj.noDropItem = true;
 
                             break;
