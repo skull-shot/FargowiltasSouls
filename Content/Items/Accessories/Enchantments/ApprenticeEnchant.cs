@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             }
 
                             if (player.HasEffect<ShadowForceEffect>())
-                                divisor = 5;
+                                divisor = 10;
 
                             modPlayer.ApprenticeItemCD = item2.useAnimation * divisor;
 
