@@ -25,8 +25,8 @@ namespace FargowiltasSouls.Content.Patreon.Volknet
 
         public override void SetDefaults()
         {
-            Item.width = 60;
-            Item.height = 30;
+            Item.width = 38;
+            Item.height = 38;
             Item.damage = 175;
             Item.knockBack = 2;
             Item.channel = true;
@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet
         public override void SafePostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Texture2D tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/Volknet/NanoCoreGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-            spriteBatch.Draw(tex, Item.Center - Main.screenPosition, new Rectangle(0, 0, tex.Width, tex.Height), Color.White, rotation, tex.Size() / 2, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(tex, Item.Center + new Vector2(0, -4) - Main.screenPosition, new Rectangle(0, 0, tex.Width, tex.Height), Color.White, rotation, tex.Size() / 2, scale, SpriteEffects.None, 0);
         }
 
         public override bool AltFunctionUse(Player player) => true;
