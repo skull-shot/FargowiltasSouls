@@ -711,7 +711,7 @@ TungstenEnchant: {
 }
 
 TurtleEnchant: {
-	DisplayName: Зачарование Черепахи
+	DisplayName: Зачарование черепахи
 	Tooltip:
 		'''
 		100% контактного урона отражается
