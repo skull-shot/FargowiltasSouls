@@ -89,3 +89,6 @@ tweaked check for purified on lizard altar
 maso ftw destro segments temporarily lose contact damage after each coil
 nerfed nebula pillar deathray damage
 touched vortex pillar lightning? idk if this reduced its damage gurasit
+
+reduced intensity of cosmos force moon trail
+cosmos force moons draw behind other projs

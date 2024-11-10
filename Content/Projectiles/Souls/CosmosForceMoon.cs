@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Cosmic Moon");
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
@@ -44,6 +44,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.Opacity = 0f;
 
             Projectile.FargoSouls().DeletionImmuneRank = 2;
+
+            Projectile.hide = false;
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
 
         ref float State => ref Projectile.ai[1];
@@ -215,9 +222,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
+                Color color27 = glow * 0.35f;
+                color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];
-                Main.spriteBatch.Draw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glow * 0.35f, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
+                Main.spriteBatch.Draw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
             }
             Main.spriteBatch.UseBlendState(BlendState.NonPremultiplied);
             Main.spriteBatch.Draw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
