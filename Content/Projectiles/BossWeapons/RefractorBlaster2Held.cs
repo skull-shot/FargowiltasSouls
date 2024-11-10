@@ -26,12 +26,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             base.OnSpawn(source);
         }
 
-        public override void OnKill(int timeLeft)
-        {
-            SoundEngine.PlaySound(FargosSoundRegistry.DiffractorEnd, Main.LocalPlayer.Center);
-            base.OnKill(timeLeft);
-        }
-
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 6;
@@ -88,6 +82,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             });
 
             Loop.Update(Projectile.Center);
+            
+            
+           
          
 
             if (player.dead || !player.active)
@@ -207,6 +204,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (!player.channel)
             {
                 Projectile.Kill();
+                SoundEngine.PlaySound(FargosSoundRegistry.DiffractorEnd, player.Center);
             }
         }
 
