@@ -70,17 +70,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 
                 if (hitInfo.Crit)
                 {
-                    if (Eternity)
-                    {
-                        hitInfo.Damage *= 5;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseSoul)
-                    {
-                        hitInfo.Damage *= 2;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseCore)
+                    if (UniverseCore) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
 
