@@ -72,13 +72,21 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     if (UniverseCore) // cosmic core
                     {
-                        float crit = Player.ActualClassCrit(damageClass) / 2;
-
-                        if (Main.rand.NextFloat(100) < crit) //supercrit
+                        if (UniverseSoul)
                         {
                             hitInfo.Damage *= 2;
                             target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                            SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
+                        }
+                        else
+                        {
+                            float crit = Player.ActualClassCrit(damageClass) / 2;
+
+                            if (Main.rand.NextFloat(100) < crit) //supercrit
+                            {
+                                hitInfo.Damage *= 2;
+                                target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
+                                SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
+                            }
                         }
                     }
                     if (MinionCrits)
