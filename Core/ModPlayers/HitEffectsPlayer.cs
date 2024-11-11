@@ -88,7 +88,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                             critDamageMult *= 0.75f;
                         if (damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
-                        if (critDamageMult != 0)
+                        if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
                        
