@@ -83,13 +83,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                     if (MinionCrits)
                     {
-                        bool reducedCritDamage = false;
+                        float critDamageMult = 1f;
                         if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                            reducedCritDamage = true;
-                        else if (damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
-                            reducedCritDamage = true;
-                        if (reducedCritDamage)
-                            hitInfo.Damage = (int)(hitInfo.Damage * 0.75);
+                            critDamageMult *= 0.75f;
+                        if (damageClass.CountsAsClass(DamageClass.Summon) && !Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                            critDamageMult *= 0.75f;
+                        if (critDamageMult != 0)
+                            hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
                        
                 }
