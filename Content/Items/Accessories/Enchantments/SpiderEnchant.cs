@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -59,7 +60,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             //minion crits
-            player.FargoSouls().MinionCrits = true;
+            if (!player.HasEffect<LifeForceEffect>())
+                player.FargoSouls().MinionCrits = true;
             //player.GetCritChance(DamageClass.Summon) += 10;
             if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))
                 player.GetCritChance(DamageClass.Summon) += 15;
