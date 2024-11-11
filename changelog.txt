@@ -1,3 +1,16 @@
 NEW UPDATE - V {ModVersion}
 
-Reverted projectile spawn behavior change to Apprentice Enchant due to critical issue; there should be a proper solution in the future
+New visuals and sound effects for Gemini Glaives, Nuke Fishron and Mutant nuke attack
+New sound effects for Diffractor Blaster
+Resprited Nano Core and slime balls
+
+Omniscience Staff damage 1200 -> 950
+Life Force and above now only provide summon damage crits with Ambrosia buff, with tweaked damage
+Decreased frequency of Apprentice support projectiles in Shadow Force
+Fixed Apprentice Enchant dealing way too much damage with certain weapons
+Fixed Timber Force projectiles scaling damage incorrectly
+Fixed Crystal Assassin Enchant horizontal dash resetting flight time
+Fixed Soul of the Universe providing crit effect without Cosmic Core
+
+Reduced intensity of Force of Cosmos moon trails
+Force of Cosmos moons draw behind other projectiles
