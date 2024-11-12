@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 if (FargoSoulsUtil.HostCheck)
                 {
                     int SplitDamage = (int)(Projectile.originalDamage / 2.5f);
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity / 4f, ModContent.ProjectileType<SpiritArrowFlame>(), SplitDamage, Projectile.knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity / 4f, ModContent.ProjectileType<SpiritArrowFlame>(), SplitDamage, Projectile.knockBack, Projectile.owner);
                 }
                 Projectile.ai[1] = 0;
                 //spawn spirit  flame
