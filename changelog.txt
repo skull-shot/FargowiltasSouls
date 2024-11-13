@@ -1,16 +1,7 @@
 NEW UPDATE - V {ModVersion}
 
-New visuals and sound effects for Gemini Glaives, Nuke Fishron and Mutant nuke attack
-New sound effects for Diffractor Blaster
-Resprited Nano Core and slime balls
+Ashwood/Obsidian Enchant now only counts a standard set list of debuffs; same list used for universal debuff immunities and Mothron random debuffs and such
 
-Omniscience Staff damage 1200 -> 950
-Life Force and above now only provide summon damage crits with Ambrosia buff, with tweaked damage
-Decreased frequency of Apprentice support projectiles in Shadow Force
-Fixed Apprentice Enchant dealing way too much damage with certain weapons
-Fixed Timber Force projectiles scaling damage incorrectly
-Fixed Crystal Assassin Enchant horizontal dash resetting flight time
-Fixed Soul of the Universe providing crit effect without Cosmic Core
-
-Reduced intensity of Force of Cosmos moon trails
-Force of Cosmos moons draw behind other projectiles
+Fixed Eternity vanilla boss behavior toggle being able to desync in multiplayer (Fixes DLC multiplayer boss desync issue)
+No Cursed Coffin arena generation code runs if Remmnants is enabled (should fix crash)
+Fixed Spirit Longbow arrow trail not being owned by owner
