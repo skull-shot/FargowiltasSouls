@@ -314,6 +314,8 @@ namespace FargowiltasSouls.Core.Systems
                 DownedBoss[i] = flags[bits];
             }
 
+            EternityVanillaBehaviour = reader.ReadBoolean();
+
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
 
@@ -366,6 +368,8 @@ namespace FargowiltasSouls.Core.Systems
                 bitsByte[bit] = DownedBoss[i];
             }
             writer.Write(bitsByte);
+
+            writer.Write(EternityVanillaBehaviour);
 
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);

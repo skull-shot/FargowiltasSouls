@@ -3639,7 +3639,7 @@ WillBooster: {
 
 CoffinRoominator: {
 	DisplayName: 棺材停放密室
-	Tooltip: 
+	Tooltip:
 		'''
 		在你的光标处生成一个咒缚灵棺停放密室
 		覆盖现有的咒缚灵棺房间
