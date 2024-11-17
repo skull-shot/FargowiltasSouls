@@ -156,6 +156,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int FlamethrowerCDOrUTurnStoredTargetX;
 
         public int SpecialAITimer;
+        public int SpecialAITimer2;
         public static int SpecialCountdownTimer;
 
         public int UTurnTotalSpacingDistance;
@@ -168,6 +169,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public const int CoilDiveTime = 60 * 30; // never reached naturally; set to heads that are designated to dive
         public static int CoilRadius => WorldSavingSystem.MasochistModeReal ? 500 : 600;
         public bool Coiling => Attack == (int)Attacks.Coil && SpecialAITimer < CoilDiveTime;
+
+        public int VileSpitLockoutDuration;
 
         public static int CursedFlameTimer;
         public static int HaveSpawnDR;
@@ -196,10 +199,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(UTurnTotalSpacingDistance);
             binaryWriter.Write7BitEncodedInt(UTurnIndividualSpacingPosition);
             binaryWriter.Write7BitEncodedInt(SpecialAITimer);
+            binaryWriter.Write7BitEncodedInt(SpecialAITimer2);
             binaryWriter.Write7BitEncodedInt(SpecialCountdownTimer);
             binaryWriter.Write7BitEncodedInt(CursedFlameTimer);
             binaryWriter.Write7BitEncodedInt(Attack);
             binaryWriter.Write7BitEncodedInt(CoilSpinDirection);
+            binaryWriter.Write7BitEncodedInt(VileSpitLockoutDuration);
             binaryWriter.Write(CoilDesiredRotation);
             binaryWriter.WriteVector2(CoilCenter);
             bitWriter.WriteBit(DoTheWave);
@@ -213,10 +218,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             UTurnTotalSpacingDistance = binaryReader.Read7BitEncodedInt();
             UTurnIndividualSpacingPosition = binaryReader.Read7BitEncodedInt();
             SpecialAITimer = binaryReader.Read7BitEncodedInt();
+            SpecialAITimer2 = binaryReader.Read7BitEncodedInt();
             SpecialCountdownTimer = binaryReader.Read7BitEncodedInt();
             CursedFlameTimer = binaryReader.Read7BitEncodedInt();
             Attack = binaryReader.Read7BitEncodedInt();
             CoilSpinDirection = binaryReader.Read7BitEncodedInt();
+            VileSpitLockoutDuration = binaryReader.Read7BitEncodedInt();
             CoilDesiredRotation = binaryReader.ReadSingle();
             CoilCenter = binaryReader.ReadVector2();
             DoTheWave = bitReader.ReadBit();
@@ -249,6 +256,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             //if (eaterResist > 0 && npc.whoAmI == NPC.FindFirstNPC(npc.type)) eaterResist--;
+
+            if (VileSpitLockoutDuration > 0)
+                VileSpitLockoutDuration--;
 
             int firstEater = NPC.FindFirstNPC(npc.type);
 
@@ -491,14 +501,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case Attacks.Coil:
                     {
 
-                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 30 : 45; // time between dives
+                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 40 : 55; // time between dives
                         float spinSeconds = 3f; // seconds per full spin
 
                         float spinFrames = spinSeconds * 60f;
 
                         SpecialCountdownTimer = 350;
                         if (!Main.npc.Any(n => n.TypeAlive(npc.type) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling && n.Distance(CoilCenter) > CoilRadius + 100))
+                        {
                             SpecialAITimer++;
+                            SpecialAITimer2++;
+                        }
+                            
                         if (firstEater == npc.whoAmI)
                         {
                             if (firstEater == npc.whoAmI)
@@ -537,8 +551,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                 }
                             }
-
-                            if (SpecialAITimer > diveDelay && SpecialAITimer % diveDelay == 0)
+                            int diveTimer = SpecialAITimer2 + 25;
+                            if (diveTimer > diveDelay && diveTimer % diveDelay == 0)
                             {
                                 List<NPC> coilingHeads = [];
                                 for (int i = 0; i < Main.maxNPCs; i++)
@@ -579,14 +593,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             npc.velocity = Vector2.Lerp(npc.velocity, desiredVelocity, 0.2f);
 
                             CoilDesiredRotation += CoilSpinDirection * MathHelper.TwoPi / spinFrames;
+
+                            VileSpitLockoutDuration = 100;
                         }
                         else
                         {
-                            if (SpecialAITimer > CoilDiveTime + 100)
+                            if (SpecialAITimer > CoilDiveTime + 80)
                             {
                                 if (!Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling))
                                 {
                                     SpecialAITimer = 0;
+                                    SpecialAITimer2 = 0;
                                     SpecialCountdownTimer = 0;
                                     CoilDesiredRotation = 0;
                                     Attack = (int)Attacks.NormalPostCoil;
@@ -600,7 +617,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 {
                                     Vector2 vectorToIdlePosition = Main.player[npc.target].Center - npc.Center;
                                     float num = vectorToIdlePosition.Length();
-                                    float speed = 22f;
+                                    float speed = 32f;
                                     float inertia = 32f;
                                     float deadzone = 150f;
                                     if (num > deadzone)
@@ -616,7 +633,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                     if (num < deadzone)
                                     {
-                                        SpecialAITimer = CoilDiveTime + 100;
+                                        SpecialAITimer = CoilDiveTime + 80;
                                     }
                                 }
                             }
@@ -913,7 +930,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead) && eowHead.Coiling))
+            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead) && eowHead.VileSpitLockoutDuration > 0))
                 npc.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
         }
 
