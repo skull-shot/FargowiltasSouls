@@ -99,11 +99,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (player.HasEffect<MythrilEffect>())
                 farg.AttackSpeed *= MathHelper.Lerp(1, 2f, lerper);
 
-            if (player.HasEffect<PalladiumEffect>())
+            if (player.HasEffect<PalladiumHealing>())
                 player.lifeRegen += (int)MathHelper.Lerp(5, 25, lerper);
 
             if (player.HasEffect<TitaniumEffect>())
-                player.endurance += (int)MathHelper.Lerp(0.1f, 0.25f, lerper);
+                player.endurance += MathHelper.Lerp(0.1f, 0.25f, lerper);
 
             //Main.NewText(player.GetAttackSpeed(DamageClass.Generic));
 
@@ -134,17 +134,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.EarthTimer <= 100)
+                return;
             float lerper = GetEarthForceLerpValue(player);
             int debuffDamage = (int)(baseDamage * MathHelper.Lerp(1, 0.75f, lerper));
             //divide by 2.3 because want to deal that damage over the course of ~6.6 seconds, deal a bit more than the actual missing damage to compensate for constant re-application of debuff without increasing the duration
             // Change damage to average of old and new damage to make it less affected by random extreme variation in damage
             target.FargoSouls().EarthDoTValue = (int)MathHelper.Lerp(target.FargoSouls().EarthDoTValue, debuffDamage / 2.3f, 0.5f);
             target.AddBuff(ModContent.BuffType<EarthPoison>(), 400);
-            //reduce iframes so that the accessory actually increases dps for real
-            if (projectile != null && !projectile.usesIDStaticNPCImmunity && !projectile.usesLocalNPCImmunity && projectile.penetrate != 1 && projectile.FargoSouls().AdamModifier == 3)
-            {
-                target.immune[player.whoAmI] = 3;
-            }
         }
         
         public static void EarthSplit(Projectile projectile, Player player)
@@ -155,7 +153,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 return;
             }
-            float angleDif = MathHelper.Lerp(2, 30, lerper);
+            float angleDif = MathHelper.Lerp(30, 2, lerper);
             float damageMult = 1f;
             foreach (Projectile p in FargoSoulsGlobalProjectile.SplitProj(projectile, 3, MathHelper.ToRadians(angleDif), damageMult))
             {
