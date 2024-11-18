@@ -2733,8 +2733,12 @@ FleshHand: {
 }
 
 LeashOfCthulhu: {
-	// DisplayName: Leash of Cthulhu
-	// Tooltip: "'The mutilated carcass of a defeated foe...'"
+	// DisplayName: Eyeleash
+	/* Tooltip:
+		'''
+		Servants gather around you whilst spun, flying towards your cursor when released.
+		'The mutilated carcass of a defeated foe...'	
+		''' */
 }
 
 RefractorBlaster: {
@@ -3004,8 +3008,14 @@ HellZone: {
 }
 
 MechanicalLeashOfCthulhu: {
-	// DisplayName: Mechanical Leash of Cthulhu
-	// Tooltip: "'The reward for a mighty rematch..'"
+	// DisplayName: Leash of Cthulhu
+	/* Tooltip:
+		'''
+		Spinning the leash spawns Homing Servants that fly around
+		Directly hitting enemies with the leash causes the eye to break free and dash at enemies
+		Only one eye can exist at a time
+		'The reward for a mighty rematch..'
+		''' */
 }
 
 NukeFishron: {

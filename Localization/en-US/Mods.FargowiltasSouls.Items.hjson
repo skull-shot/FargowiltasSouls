@@ -2712,8 +2712,12 @@ FleshHand: {
 }
 
 LeashOfCthulhu: {
-	DisplayName: Leash of Cthulhu
-	Tooltip: "'The mutilated carcass of a defeated foe...'"
+	DisplayName: Eyeleash
+	Tooltip:
+		'''
+		Servants gather around you whilst spun, flying towards your cursor when released
+		'The mutilated carcass of a defeated foe..'
+		'''
 }
 
 RefractorBlaster: {
@@ -2831,7 +2835,12 @@ HentaiSpear: {
 
 PhantasmalLeashOfCthulhu: {
 	DisplayName: Phantasmal Leash of Cthulhu
-	Tooltip: "'The True Eye's soul trapped for eternity..'"
+	Tooltip: 
+	'''
+	Spawns a flurry of homing eyes whilst spun and on hit
+	'The True Eye's soul trapped for eternity..'
+	'''
+
 }
 
 SlimeRain: {
@@ -2983,8 +2992,14 @@ HellZone: {
 }
 
 MechanicalLeashOfCthulhu: {
-	DisplayName: Mechanical Leash of Cthulhu
-	Tooltip: "'The reward for a mighty rematch..'"
+	DisplayName: Leash of Cthulhu
+	Tooltip:
+		'''
+		Spawns homing servants whilst spun
+		Directly hitting enemies with the leash causes the eye to break free and dash at enemies
+		Only one eye can be loose at a time
+		'The reward for a mighty rematch..'
+		'''
 }
 
 NukeFishron: {
@@ -3296,7 +3311,7 @@ CrystallineCongregation: {
 	Tooltip:
 		'''
 		Summon up to 30 crystal balls near your mouse cursor that home towards you 
-		 Release the button to send them towards your cursor
+		Release the button to send them towards your cursor
 		'''
 }
 

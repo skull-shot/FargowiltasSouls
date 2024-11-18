@@ -1,4 +1,6 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,6 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class EyeProjectile : ModProjectile
     {
+        public int EyeTimer = 0;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("EyeProjectile2");
@@ -21,13 +24,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.tileCollide = false;
             Projectile.penetrate = 1;
-            Projectile.timeLeft = 180;
+            Projectile.timeLeft = 250;
             AIType = ProjectileID.Bullet;
         }
 
         public override void AI()
         {
+            Player player = Main.LocalPlayer;
             if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
             {
                 //dust!
@@ -36,22 +41,19 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Main.dust[dustId].noGravity = true;
             }
 
-            const int aislotHomingCooldown = 0;
-            const int homingDelay = 10;
             const float desiredFlySpeedInPixelsPerFrame = 10;
-            const float amountOfFramesToLerpBy = 10; // minimum of 1, please keep in full numbers even though it's a float!
+            const float amountOfFramesToLerpBy = 30;
 
-            Projectile.ai[aislotHomingCooldown]++;
-            if (Projectile.ai[aislotHomingCooldown] > homingDelay)
+            if (player.channel)
             {
-                Projectile.ai[aislotHomingCooldown] = homingDelay; //cap this value 
-
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1000));
-                if (n.Alive())
-                {
-                    Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center) * desiredFlySpeedInPixelsPerFrame;
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
-                }
+                Vector2 desiredVelocity = Projectile.DirectionTo(player.Center) * desiredFlySpeedInPixelsPerFrame;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+            }        
+            else
+            {   
+                Vector2 desiredVelocity = Projectile.DirectionTo(Main.MouseWorld) * desiredFlySpeedInPixelsPerFrame;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                Projectile.timeLeft = 2;
             }
 
             if (++Projectile.frameCounter >= 5)
