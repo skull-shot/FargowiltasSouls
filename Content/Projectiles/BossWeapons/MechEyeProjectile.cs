@@ -16,7 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
-            Main.projFrames[Projectile.type] = 4;
         }
 
         public override void SetDefaults()
@@ -26,10 +25,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 180;
             AIType = ProjectileID.Bullet;
-            Projectile.scale = 1.5f;
 
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 10;
@@ -52,7 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.ai[aislotHomingCooldown] = homingDelay; //cap this value 
 
                 NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 600, true));
-                if (n.Alive() && Projectile.Distance(n.Center) > 300)
+                if (n.Alive() && Projectile.Distance(n.Center) > 100)
                 {
                     Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center) * desiredFlySpeedInPixelsPerFrame;
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
@@ -61,13 +59,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 {
                     Projectile.velocity *= 1.04f;
                 }
-            }
-
-            if (++Projectile.frameCounter >= 5)
-            {
-                Projectile.frameCounter = 0;
-                Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
-
             }
         }
 

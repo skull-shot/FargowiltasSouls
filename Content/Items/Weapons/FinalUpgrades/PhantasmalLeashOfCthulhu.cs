@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Item.shootSpeed = 45f;
             Item.UseSound = SoundID.Item1;
             Item.DamageType = DamageClass.Melee;
-            Item.channel = true;
         }
 
         public override void SafeModifyTooltips(List<TooltipLine> list)

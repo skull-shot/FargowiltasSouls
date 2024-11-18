@@ -11,7 +11,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
+            // DisplayName.SetDefault("Mechanical Leash of Cthulhu");
+            // Tooltip.SetDefault("'The reward for a mighty rematch..'");
+            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "机械克苏鲁连枷");
+            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励..'");
         }
 
         public override void SetDefaults()
@@ -32,7 +35,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.shootSpeed = 50f;
             Item.UseSound = SoundID.Item1;
             Item.DamageType = DamageClass.Melee;
-            Item.channel = true;
         }
 
         public override void AddRecipes()

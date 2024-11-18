@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             player.itemTime = 2;
             player.itemAnimation = 2;
 
-            Vector2 HoldOffset = new Vector2(30, 0).RotatedBy(Projectile.velocity.ToRotation());
+            Vector2 HoldOffset = new Vector2(60, 0).RotatedBy(Projectile.velocity.ToRotation());
             Projectile.Center += HoldOffset;
 
             DelegateMethods.v3_1 = new Vector3(1.2f, 1f, 0.3f);
