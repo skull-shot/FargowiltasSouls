@@ -112,7 +112,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         ];
         public static List<int> TungstenNerfedProjType = 
         [
-            ModContent.ProjectileType<SlimeKingSlasherProj>()
+            ModContent.ProjectileType<SlimeKingSlasherProj>()           
         ];
         public static bool TungstenAlwaysAffectProj(Projectile projectile)
         {
@@ -124,6 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         [
             ModContent.ProjectileType<FishStickProjTornado>(),
             ModContent.ProjectileType<FishStickWhirlpool>(),
+            ModContent.ProjectileType<ReleasedMechFlail>(),
             ProjectileID.ButchersChainsaw,
         ];
         public static List<int> TungstenNeverAffectProjStyle = 

@@ -70,6 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.DamageType = DamageClass.Melee;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
+            Projectile.tileCollide = false;
         }
 
         // This AI code was adapted from vanilla code: Terraria.Projectile.AI_015_Flails() 
