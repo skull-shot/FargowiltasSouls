@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
     public class EyeProjectile : ModProjectile
     {
         public int EyeTimer = 0;
+        public int RotationTimer = 0;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("EyeProjectile2");
@@ -32,22 +34,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
-            Player player = Main.LocalPlayer;
-            if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
-            {
-                //dust!
-                int dustId = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RedTorch, Projectile.velocity.X * 0.2f,
-                  Projectile.velocity.Y * 0.2f, 100, default, 2f);
-                Main.dust[dustId].noGravity = true;
-            }
+            Player player = Main.player[Projectile.owner];
 
             const float desiredFlySpeedInPixelsPerFrame = 10;
             const float amountOfFramesToLerpBy = 30;
 
             if (player.channel)
             {
-                Vector2 desiredVelocity = Projectile.DirectionTo(player.Center) * desiredFlySpeedInPixelsPerFrame;
+                Vector2 desiredVelocity = Projectile.DirectionTo(player.Center + Projectile.DirectionFrom(player.Center).RotatedByRandom(MathHelper.Pi) * 100) * desiredFlySpeedInPixelsPerFrame;
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                if (++RotationTimer >= 60)
+                Projectile.rotation = (Projectile.SafeDirectionTo(player.Center).ToRotation() + (float)Math.PI / 2);
             }        
             else
             {   
@@ -62,6 +59,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
             }
+
+
         }
 
         public override void OnKill(int timeleft)

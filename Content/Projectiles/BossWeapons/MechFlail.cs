@@ -70,6 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.DamageType = DamageClass.Melee;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
+            Projectile.tileCollide = false;
         }
 
         // This AI code was adapted from vanilla code: Terraria.Projectile.AI_015_Flails() 
@@ -396,7 +397,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (CurrentAIState != AIState.Spinning)
             {
                 SoundEngine.PlaySound(SoundID.Shatter, Projectile.Center);
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(5, 5),
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
                 ModContent.ProjectileType<ReleasedMechFlail>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                 Projectile.Kill();
             }
