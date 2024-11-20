@@ -74,9 +74,9 @@
 // HentaiSphereRing.DisplayName: Phantasmal Sphere
 // Hungry.DisplayName: Hungry
 // Hungry2.DisplayName: Hungry
-// LeashFlail.DisplayName: Leash Flail
+// LeashFlail.DisplayName: Eyeleash Flail
 // MechEyeProjectile.DisplayName: MechEyeProjectile
-// MechFlail.DisplayName: Mech Flail
+// MechFlail.DisplayName: Leash of Cthulhu Flail
 // PhantasmalBlast.DisplayName: Phantasmal Blast
 // PhantasmalBolt.DisplayName: Phantasmal Bolt
 // PhantasmalEyeBoundary.DisplayName: Phantasmal Eye
@@ -768,6 +768,6 @@
 // RockeaterAuraProj.DisplayName: Rockeater Aura Proj
 // FallenStarDay.DisplayName: Fallen Star Day
 // LightningRodLightning.DisplayName: Lightning Rod Lightning
+// ReleasedMechFlail.DisplayName: Leash of Cthulhu
 // Tome.DisplayName: Tome
 // TomeShot.DisplayName: Tome Shot
-// ReleasedMechFlail.DisplayName: Released Mech Flail

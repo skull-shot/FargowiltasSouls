@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {   
                 Vector2 desiredVelocity = Projectile.DirectionTo(Main.MouseWorld) * desiredFlySpeedInPixelsPerFrame;
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
-                Projectile.timeLeft = 2;
+                Projectile.timeLeft = 100;
             }
 
             if (++Projectile.frameCounter >= 5)

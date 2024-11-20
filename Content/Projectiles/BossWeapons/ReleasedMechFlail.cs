@@ -12,6 +12,8 @@ using Terraria.ModLoader;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Luminance.Core.Graphics;
 using XPT.Core.Audio.MP3Sharp.Decoding.Decoders.LayerIII;
+using Terraria.DataStructures;
+using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
@@ -26,7 +28,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         private static Asset<Texture2D> chainTexture;
 
         private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailChain";
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlail";
 
         public override void SetStaticDefaults()
         {
@@ -34,6 +35,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore1").Type, Projectile.scale * 0.8f);
+            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore2").Type, Projectile.scale * 0.8f);
+            Gore.goreTime = 5;
+            base.OnSpawn(source);
         }
 
         public override void Load()
@@ -61,7 +70,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
-            Player player = Main.LocalPlayer;
             if (speed == 0) //store homing speed
                 speed = Projectile.velocity.Length() * 2f;
 
@@ -75,33 +83,45 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {   
 
                 //redirect
-                if (++DashTimer <= 45)
+                if (++DashTimer <= 45 && DashAmount <= 4)
                 {
                     Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center + Projectile.DirectionFrom(n.Center) * 200) * desiredFlySpeedInPixelsPerFrame;
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
                 }
-                
+                //if last dash, go back farther
+                if (DashTimer <= 45 && DashAmount > 4)
+                {
+                    Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center + Projectile.DirectionFrom(n.Center) * 400) * desiredFlySpeedInPixelsPerFrame;
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                }
+
                 //dash
-                if (++DashTimer >= 45)
+                if (++DashTimer >= 45 && DashAmount < 4)
                 {
                     if (DashAmount < 4)
                     {
-                        SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.2f, MaxInstances = 1 }, Projectile.Center);
+                        //SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.05f, MaxInstances = 1 }, Projectile.Center);
                     }
                     Projectile.velocity = Projectile.SafeDirectionTo(n.Center + n.velocity * 10) * 65 + Main.rand.NextVector2Circular(5,5);
                     DashTimer = 0;
                     DashAmount += 1;
                 }
                 // bite
-                if (DashAmount >= 4 && DashTimer <= 1)
+                if (DashAmount >= 4 && DashTimer >= 45)
                 {
                     Projectile.velocity = Projectile.SafeDirectionTo(n.Center) * 85;
-                    Projectile.damage *= 2;
                 }
                 // kill
                 if (DashAmount >= 4 && Projectile.Distance(n.Center) <= 50)
                 {   
-                    
+                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
+                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    Particle p = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(45, 45), Color.DarkRed, 2f, 25);
+                    Particle p2 = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(35, 35), Color.DarkRed, 2f, 25);
+                    Particle p3 = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(25, 25), Color.DarkRed, 2f, 25);
+                    p.Spawn();
+                    p2.Spawn();
+                    p3.Spawn();
                     Projectile.Kill();
                 }
                 Projectile.rotation = Projectile.SafeDirectionTo(n.Center).ToRotation() + (float)Math.PI / 2;
@@ -120,12 +140,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Particle p = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(45, 45)) * 0.4f, Color.DarkRed, pscale1, 25);
             Particle p2 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(35, 35)) * 0.4f, Color.DarkRed, pscale2, 25);
             Particle p3 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(25, 25)) * 0.4f, Color.DarkRed, pscale3, 25);
-            if (DashAmount >= 3)
-            {
-                pscale1 = 4f;
-                pscale2 = 3.75f;
-                pscale3 = 2.5f;
-            }
             p.Spawn();
             p2.Spawn();
             p3.Spawn();
