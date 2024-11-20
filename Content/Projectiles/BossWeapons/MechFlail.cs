@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
 
         public int EyeTimer = 0;
+        public int WaitTimer = 0;
         
 
         private enum AIState
@@ -169,7 +170,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                 case AIState.LaunchingForward:
                     {
-                        SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.3f }, player.Center);
+                        //SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.3f }, player.Center);
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
                         if (shouldSwitchToRetracting)
@@ -396,10 +397,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (CurrentAIState != AIState.Spinning)
             {
-                SoundEngine.PlaySound(SoundID.Shatter, Projectile.Center);
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
                 ModContent.ProjectileType<ReleasedMechFlail>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                 Projectile.Kill();
+      
             }
 
 
@@ -455,7 +456,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 // chainDrawPosition is advanced along the vector back to the player by the chainSegmentLength
                 chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
                 chainCount++;
-                chainLengthRemainingToDraw -= chainSegmentLength;
+                chainLengthRemainingToDraw -= chainSegmentLength;        
+                if (!Projectile.active)
+                {
+                    Gore.NewGore(Projectile.GetSource_Death(), chainDrawPosition, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "ChainGore").Type, 1f);
+                    Gore.goreTime = 5;
+                }
+                               
             }
             Main.spriteBatch.Draw((CurrentAIState == AIState.Spinning) ? EyeTexture.Value : FlailTexture.Value, Projectile.Center - Main.screenPosition, null, Lighting.GetColor((int)Projectile.Center.X / 16, (int)(Projectile.Center.Y / 16f)), Projectile.rotation, new Vector2(32, 25), 1f, SpriteEffects.None, 0f);
 

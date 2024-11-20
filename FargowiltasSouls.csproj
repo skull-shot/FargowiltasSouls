@@ -23,6 +23,7 @@
     <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Gores\LeashOfCthulhu\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
