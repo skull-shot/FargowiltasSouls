@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Item.noUseGraphic = true;
             Item.shoot = ModContent.ProjectileType<PhantasmalFlail>();
             Item.shootSpeed = 45f;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;
             Item.channel = true;
         }

@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.noUseGraphic = true;
             Item.shoot = ModContent.ProjectileType<MechFlail>();
             Item.shootSpeed = 50f;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;
             Item.channel = true;
         }

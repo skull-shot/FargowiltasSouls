@@ -55,6 +55,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float RustRifleReloadZonePos = 0;
         public float RustRifleTimer = 0;
 
+        public int LeashHit;
+
         public int EgyptianFlailCD = 0;
         public int SKSCancelTimer;
 

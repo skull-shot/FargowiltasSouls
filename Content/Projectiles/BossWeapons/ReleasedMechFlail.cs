@@ -14,6 +14,7 @@ using Luminance.Core.Graphics;
 using XPT.Core.Audio.MP3Sharp.Decoding.Decoders.LayerIII;
 using Terraria.DataStructures;
 using static Terraria.GameContent.Animations.IL_Actions.Sprites;
+using FargowiltasSouls.Assets.Sounds;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
@@ -39,6 +40,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnSpawn(IEntitySource source)
         {
+            SoundEngine.PlaySound(FargosSoundRegistry.LeashBreak, Main.player[Projectile.owner].Center);
             Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore1").Type, Projectile.scale * 0.8f);
             Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore2").Type, Projectile.scale * 0.8f);
             Gore.goreTime = 5;
@@ -149,8 +151,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             vector55.Normalize();
             vector55 *= Main.rand.Next(45, 65) * 0.1f;
             vector55 = vector55.RotatedBy((Main.rand.NextDouble() - 0.5) * 1.5707963705062866);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].Center.X, Main.player[Projectile.owner].Center.Y, vector55.X, vector55.Y, ModContent.ProjectileType<MechEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].Center.X, Main.player[Projectile.owner].Center.Y, vector55.X, vector55.Y, ModContent.ProjectileType<MechEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].Center.X, Main.player[Projectile.owner].Center.Y, vector55.X, vector55.Y, ModContent.ProjectileType<MechEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
 
 
