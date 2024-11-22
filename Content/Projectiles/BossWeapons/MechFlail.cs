@@ -1,5 +1,7 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using Luminance.Core.Graphics;
+using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -23,6 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         private static Asset<Texture2D> FlailTexture;
 
         public bool HasHitEnemy = false;
+        public LoopedSoundInstance Loop;
 
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
 
@@ -74,7 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.tileCollide = false;
         }
 
-        // This AI code was adapted from vanilla code: Terraria.Projectile.AI_015_Flails() 
+        // This AI code was adapted from vanilla code: Terraria.Projectile.AI_015_Flails()
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
@@ -126,7 +129,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         {
                             Vector2 unitVectorTowardsMouse = mountedCenter.DirectionTo(Main.MouseWorld).SafeNormalize(Vector2.UnitX * player.direction);
                             player.ChangeDir((unitVectorTowardsMouse.X > 0f).ToDirectionInt());
-                            if (!player.channel) // If the player releases then change to moving forward mode
+                            if (!player.channel) 
                             {
                                 CurrentAIState = AIState.LaunchingForward;
                                 StateTimer = 0f;
@@ -139,10 +142,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             }
                         }
                         SpinningStateTimer += 0.85f;
-                        // This line creates a unit vector that is constantly rotated around the player. 10f controls how fast the projectile visually spins around the player
+                        
                         Vector2 offsetFromPlayer = new Vector2(player.direction).RotatedBy((float)Math.PI * 10f * (SpinningStateTimer / 60f) * player.direction);
 
-                        if (++EyeTimer >= 60)
+                        if (++EyeTimer >= 30)
                         {
                             Vector2 vector54 = Main.player[Projectile.owner].Center - Projectile.Center;
                             Vector2 vector55 = vector54 * -1f;
@@ -154,6 +157,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             EyeTimer = 0;
                         }
 
+                        Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.LeashSpin, () =>
+                        {
+                            return CurrentAIState != AIState.Spinning || !Projectile.active;
+                        });
+
+                        Loop.Update(player.Center);
 
                         offsetFromPlayer.Y *= 0.8f;
                         if (offsetFromPlayer.Y * player.gravDir > 0f)
@@ -162,7 +171,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         }
                         Projectile.Center = mountedCenter + offsetFromPlayer * 80f + new Vector2(0, player.gfxOffY);
                         Projectile.velocity = Vector2.Zero;
-                        Projectile.localNPCHitCooldown = spinHitCooldown; // set the hit speed to the spinning hit speed
+                        Projectile.localNPCHitCooldown = spinHitCooldown; 
 
 
 
@@ -170,7 +179,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                 case AIState.LaunchingForward:
                     {
-                        //SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.3f }, player.Center);
+                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/LeashThrow") with { Variants = [1, 2]}, player.Center);
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
                         if (shouldSwitchToRetracting)
@@ -179,7 +188,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             StateTimer = 0f;
                             Projectile.netUpdate = true;
                             Projectile.velocity *= 0.3f;
-                            // This is also where Drippler Crippler spawns its projectile, see above code.
                         }
                         player.ChangeDir((player.Center.X < Projectile.Center.X).ToDirectionInt());
                         Projectile.localNPCHitCooldown = movingHitCooldown;
@@ -190,7 +198,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Vector2 unitVectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
                         if (Projectile.Distance(mountedCenter) <= maxRetractSpeed)
                         {
-                            Projectile.Kill(); // Kill the projectile once it is close enough to the player
+                            Projectile.Kill(); 
                             return;
                         }
                         else
@@ -207,7 +215,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Vector2 unitVectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
                         if (Projectile.Distance(mountedCenter) <= maxForcedRetractSpeed)
                         {
-                            Projectile.Kill(); // Kill the projectile once it is close enough to the player
+                            Projectile.Kill(); 
                             return;
                         }
                         Projectile.velocity *= 0.98f;
@@ -216,7 +224,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Vector2 value = mountedCenter.DirectionFrom(target).SafeNormalize(Vector2.Zero);
                         if (Vector2.Dot(unitVectorTowardsPlayer, value) < 0f)
                         {
-                            Projectile.Kill(); // Kill projectile if it will pass the player
+                            Projectile.Kill(); 
                             return;
                         }
                         player.ChangeDir((player.Center.X < Projectile.Center.X).ToDirectionInt());
@@ -233,15 +241,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                 
             }
-            Projectile.ownerHitCheck = shouldOwnerHitCheck; // This prevents attempting to damage enemies without line of sight to the player. The custom Colliding code for spinning makes this necessary.
+            Projectile.ownerHitCheck = shouldOwnerHitCheck;
             Vector2 vectorTowardsPlayer = Projectile.DirectionTo(mountedCenter).SafeNormalize(Vector2.Zero);
             Projectile.rotation = vectorTowardsPlayer.ToRotation() - MathHelper.PiOver2;
 
 
 
-            Projectile.timeLeft = 2; // Makes sure the flail doesn't die (good when the flail is resting on the ground)
+            Projectile.timeLeft = 2; 
             player.heldProj = Projectile.whoAmI;
-            player.SetDummyItemTime(2); //Add a delay so the player can't button mash the flail
+            player.SetDummyItemTime(2); 
             player.itemRotation = Projectile.DirectionFrom(mountedCenter).ToRotation();
             if (Projectile.Center.X < mountedCenter.X)
             {
@@ -288,7 +296,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 CollisionCounter += 1f;
             }
 
-            // If in the Launched state, spawn sparks
             if (CurrentAIState == AIState.LaunchingForward)
             {
                 CurrentAIState = AIState.Ricochet;
@@ -302,7 +309,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.position -= velocity;
             }
 
-            // Here the tiles spawn dust indicating they've been hit
             if (impactIntensity > 0)
             {
                 Projectile.netUpdate = true;
@@ -314,23 +320,19 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
             }
 
-            // Force retraction if stuck on tiles while retracting
+
             if (CurrentAIState != AIState.Spinning && CurrentAIState != AIState.Ricochet && CurrentAIState != AIState.Dropping && CollisionCounter >= 10f)
             {
                 CurrentAIState = AIState.ForcedRetracting;
                 Projectile.netUpdate = true;
             }
 
-            // tModLoader currently does not provide the wetVelocity parameter, this code should make the flail bounce back faster when colliding with tiles underwater.
-            //if (Projectile.wet)
-            //	wetVelocity = Projectile.velocity;
-
             return false;
         }
 
         public override bool? CanDamage()
         {
-            // Flails in spin mode won't damage enemies within the first 12 ticks. Visually this delays the first hit until the player swings the flail around for a full spin before damaging anything.
+           
             if (CurrentAIState == AIState.Spinning && SpinningStateTimer <= 12f)
             {
                 return false;
@@ -340,22 +342,22 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            // Flails do special collision logic that serves to hit anything within an ellipse centered on the player when the flail is spinning around the player. For example, the projectile rotating around the player won't actually hit a bee if it is directly on the player usually, but this code ensures that the bee is hit. This code makes hitting enemies while spinning more consistent and not reliant of the actual position of the flail projectile.
+            
             if (CurrentAIState == AIState.Spinning)
             {
                 Vector2 mountedCenter = Main.player[Projectile.owner].MountedCenter;
                 Vector2 shortestVectorFromPlayerToTarget = targetHitbox.ClosestPointInRect(mountedCenter) - mountedCenter;
-                shortestVectorFromPlayerToTarget.Y /= 0.8f; // Makes the hit area an ellipse. Vertical hit distance is smaller due to this math.
-                float hitRadius = 120f; // The length of the semi-major radius of the ellipse (the long end)
+                shortestVectorFromPlayerToTarget.Y /= 0.8f; 
+                float hitRadius = 120f; 
                 return shortestVectorFromPlayerToTarget.Length() <= hitRadius;
             }
-            // Regular collision logic happens otherwise.
+            
             return base.Colliding(projHitbox, targetHitbox);
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            // Flails do a few custom things, you'll want to keep these to have the same feel as vanilla flails.
+            
 
             // Flails do 20% more damage while spinning
             if (CurrentAIState == AIState.Spinning)
@@ -385,7 +387,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-
+            FargoSoulsPlayer modPlayer = Main.LocalPlayer.FargoSouls();
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
@@ -395,14 +397,18 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }        
             }
 
-            if (CurrentAIState != AIState.Spinning)
+            if (CurrentAIState != AIState.Spinning && CurrentAIState != AIState.Retracting && CurrentAIState != AIState.ForcedRetracting)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
-                ModContent.ProjectileType<ReleasedMechFlail>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
-                Projectile.Kill();
+                modPlayer.LeashHit += 1;
       
             }
-
+            if (modPlayer.LeashHit >= 3)
+            {
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
+                ModContent.ProjectileType<ReleasedMechFlail>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, -10f);
+                Projectile.Kill();
+                modPlayer.LeashHit = 0;
+            }
 
             Particle p = new SparkParticle(target.Center, Main.rand.NextVector2Circular(2, 2), Color.DarkRed, 2f, 25);
             Particle p2 = new SparkParticle(target.Center, Main.rand.NextVector2Circular(2, 2), Color.DarkRed, 1.75f, 25);
@@ -413,17 +419,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             base.OnHitNPC(target, hit, damageDone);
         }
 
-        // PreDraw is used to draw a chain and trail before the projectile is drawn normally.
+
         public override bool PreDraw(ref Color lightColor)
         {
             Vector2 playerArmPosition = Main.GetPlayerArmPosition(Projectile);
 
-            // This fixes a vanilla GetPlayerArmPosition bug causing the chain to draw incorrectly when stepping up slopes. The flail itself still draws incorrectly due to another similar bug. This should be removed once the vanilla bug is fixed.
+           
             playerArmPosition.Y -= Main.player[Projectile.owner].gfxOffY;
 
             Rectangle? chainSourceRectangle = null;
-            // Drippler Crippler customizes sourceRectangle to cycle through sprite frames: sourceRectangle = asset.Frame(1, 6);
-            float chainHeightAdjustment = 0f; // Use this to adjust the chain overlap. 
+            
+            float chainHeightAdjustment = 0f;
 
             Vector2 chainOrigin = chainSourceRectangle.HasValue ? (chainSourceRectangle.Value.Size() / 2f) : (chainTexture.Size() / 2f);
             Vector2 chainDrawPosition = Projectile.Center;
@@ -432,28 +438,24 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
             if (chainSegmentLength == 0)
             {
-                chainSegmentLength = 10; // When the chain texture is being loaded, the height is 0 which would cause infinite loops.
+                chainSegmentLength = 10; 
             }
             float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
             int chainCount = 0;
             float chainLengthRemainingToDraw = vectorFromProjectileToPlayerArms.Length() + chainSegmentLength / 2f;
 
-            // This while loop draws the chain texture from the projectile to the player, looping to draw the chain texture along the path
+           
             while (chainLengthRemainingToDraw > 0f)
             {
-                // This code gets the lighting at the current tile coordinates
-                Color chainDrawColor = Lighting.GetColor((int)chainDrawPosition.X / 16, (int)(chainDrawPosition.Y / 16f));
 
-                // Flaming Mace and Drippler Crippler use code here to draw custom sprite frames with custom lighting.
-                // Cycling through frames: sourceRectangle = asset.Frame(1, 6, 0, chainCount % 6);
-                // This example shows how Flaming Mace works. It checks chainCount and changes chainTexture and draw color at different values
+                Color chainDrawColor = Lighting.GetColor((int)chainDrawPosition.X / 16, (int)(chainDrawPosition.Y / 16f));
 
                 var chainTextureToDraw = chainTexture;
 
-                // Here, we draw the chain texture at the coordinates
+               
                 Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
 
-                // chainDrawPosition is advanced along the vector back to the player by the chainSegmentLength
+               
                 chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
                 chainCount++;
                 chainLengthRemainingToDraw -= chainSegmentLength;        

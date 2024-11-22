@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.noUseGraphic = true;
             Item.shoot = ModContent.ProjectileType<LeashFlail>();
             Item.shootSpeed = 25f;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
             Item.channel = true;    
