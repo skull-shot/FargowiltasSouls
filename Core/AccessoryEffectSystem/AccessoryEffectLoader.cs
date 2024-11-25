@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -28,7 +29,9 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
             AccessoryEffectPlayer effectPlayer = player.AccessoryEffects();
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             effectPlayer.EquippedEffects[effect.Index] = true;
-            effectPlayer.EffectItems[effect.Index] = item;
+
+            if (effectPlayer.EffectItems[effect.Index] == null || item.ModItem is BaseEnchant) // enchants take priority
+                effectPlayer.EffectItems[effect.Index] = item;
 
             if (effectPlayer.DeactivatedEffects[effect.Index])
                 return false;
