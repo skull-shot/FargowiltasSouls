@@ -65,7 +65,7 @@ namespace FargowiltasSouls
         internal static ModKeybind DebuffInstallKey;
         internal static ModKeybind AmmoCycleKey;
 
-        internal static List<int> DebuffIDs;
+        public static List<int> DebuffIDs;
 
         internal static FargowiltasSouls Instance;
 

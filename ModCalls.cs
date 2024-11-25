@@ -46,7 +46,12 @@ namespace FargowiltasSouls
             bool? arg = argsWithoutCommand[0] as bool?;
             if (arg != null)
             {
+                bool old = WorldSavingSystem.EternityVanillaBehaviour;
                 WorldSavingSystem.EternityVanillaBehaviour = (bool)arg;
+                if (old != WorldSavingSystem.EternityVanillaBehaviour && Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.WorldData);
+                }
             }
             return BehaviourWasOn;
         }

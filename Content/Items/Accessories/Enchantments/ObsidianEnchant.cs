@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 for (int i = 0; i < Player.MaxBuffs; i++)
                 {
                     int type = player.buffType[i];
-                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type])
+                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
                         triggerFromDebuffs = true;
                 }
             }

@@ -192,7 +192,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player, true);
+                    TinEffect.TinHurt(Player);
                 }
             }
             else
