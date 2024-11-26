@@ -1,7 +1,25 @@
 NEW UPDATE - V {ModVersion}
 
-Ashwood/Obsidian Enchant now only counts a standard set list of debuffs; same list used for universal debuff immunities and Mothron random debuffs and such
+Eater of Worlds:
+-Vile Spit spawn is locked out for a small duration after coil dive attack
+-Slightly increased delay between coil dives
+-Tweaked movement of dive to cause less awkward blocks
 
-Fixed Eternity vanilla boss behavior toggle being able to desync in multiplayer (Fixes DLC multiplayer boss desync issue)
-No Cursed Coffin arena generation code runs if Remmnants is enabled (should fix crash)
-Fixed Spirit Longbow arrow trail not being owned by owner
+Cursed Coffin:
+-Slightly increased time before slam after triple hand attack
+-Reduced projectile frequency during Phase 2 gem throw attack
+-Tweaked sand wave hitbox
+
+Earth Force:
+-Split angle now decreases at higher charge
+-Fixed DR and life regen effect not working correctly
+-Fixed Cobalt explosions not having the right proc condition
+-Poison DoT now only procs at high charge level
+-Fixed providing more DoT multiplier than intended
+
+Spider Enchant: Reverted damage buff to 1.5x, 
+
+-All Enchantment effects now work even if you have their corresponding Force. Some of them now also stack with the corresponding Force effect.
+-Fixed Cosmo Force providing some unlisted base Enchant effects when Moons are toggled off
+-Tweaked Frigid Grasp and Pure Heart tooltip
+-Fixed Tin Enchant resetting to an incorrect value on boss spawn
