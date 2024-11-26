@@ -14,9 +14,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Spazmarang : ModProjectile
     {
-        //bool hitSomething = false;
-        int comebacktimer;
-        int dashamount;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmarang");

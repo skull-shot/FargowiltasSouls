@@ -14,10 +14,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Retirang : ModProjectile
     {
-        int comebacktimer;
         int counter;
         int howlongtowaitbeforecomingback;
-        int waitspintime;
 
         public override void SetStaticDefaults()
         {
