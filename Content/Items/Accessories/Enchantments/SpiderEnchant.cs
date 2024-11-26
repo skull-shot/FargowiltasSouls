@@ -62,9 +62,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //minion crits
             if (!HasEffectEnchant(player))
                 player.FargoSouls().MinionCrits = true;
-            //player.GetCritChance(DamageClass.Summon) += 10;
+            player.GetCritChance(DamageClass.Generic) += 10;
             if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))
-                player.GetCritChance(DamageClass.Summon) += 15;
+                player.GetCritChance(DamageClass.Generic) += 15;
         }
     }
 }
