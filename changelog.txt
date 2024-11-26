@@ -1,25 +1,7 @@
 NEW UPDATE - V {ModVersion}
 
-Eater of Worlds:
--Vile Spit spawn is locked out for a small duration after coil dive attack
--Slightly increased delay between coil dives
--Tweaked movement of dive to cause less awkward blocks
-
-Cursed Coffin:
--Slightly increased time before slam after triple hand attack
--Reduced projectile frequency during Phase 2 gem throw attack
--Tweaked sand wave hitbox
-
-Earth Force:
--Split angle now decreases at higher charge
--Fixed DR and life regen effect not working correctly
--Fixed Cobalt explosions not having the right proc condition
--Poison DoT now only procs at high charge level
--Fixed providing more DoT multiplier than intended
-
-Spider Enchant: Reverted damage buff to 1.5x, bonus crit chance now benefits all classes
-
--All Enchantment effects now work even if you have their corresponding Force. Some of them now also stack with the corresponding Force effect.
--Fixed Cosmo Force providing some unlisted base Enchant effects when Moons are toggled off
--Tweaked Frigid Grasp and Pure Heart tooltip
--Fixed Tin Enchant resetting to an incorrect value on boss spawn
+Fixed Spider Enchant not providing minion crits correctly
+Fixed Slime King's Slasher and Slime Slinging Slasher projectiles not counting as melee
+Fixed Meteor Enchant projectile not counting as Magic damage
+Fixed logic for Mythril Enchant bar showing
+Tweaked logic for allowing Eternity enemy spawns that are supposed to only spawn in no special biome
