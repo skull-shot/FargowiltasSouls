@@ -21,8 +21,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void SetDefaults()
         {
-            Projectile.width = 52;
-            Projectile.height = 70;
+            Projectile.width = 30;
+            Projectile.height = 55;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.penetrate = -1;
@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 Projectile.velocity.X *= 1.035f;
 
             ScaleX = Projectile.scale / 2 + (Math.Abs(Projectile.velocity.X) / 7);
-            Projectile.width = (int)(52f * ScaleX);
+            Projectile.width = (int)(30f * ScaleX);
 
             int p = Player.FindClosest(Projectile.Center, 0, 0);
             if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive())
@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
             Vector2 oldPos = Projectile.position;
             // lock on block grid
-            Projectile.position.Y = (MathF.Floor((Projectile.position.Y + Projectile.height) / 16) * 16) - Projectile.height;
+            Projectile.position.Y = (MathF.Floor((Projectile.position.Y + Projectile.height) / 16) * 16) - 70;
 
             int i = 0;
             const int maxIter = 10;
@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         public override bool PreDraw(ref Color lightColor)
         {
             float rotation = Projectile.rotation;
-            Vector2 drawPos = Projectile.Center + Vector2.UnitY * 10;
+            Vector2 drawPos = Projectile.Center - Vector2.UnitY * 10;
             Texture2D texture = TextureAssets.Projectile[Type].Value;
 
             Vector2 scale = Vector2.UnitX * ScaleX + Vector2.UnitY * Projectile.scale;
