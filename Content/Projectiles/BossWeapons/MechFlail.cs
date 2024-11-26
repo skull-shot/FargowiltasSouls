@@ -131,6 +131,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             player.ChangeDir((unitVectorTowardsMouse.X > 0f).ToDirectionInt());
                             if (!player.channel) 
                             {
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/LeashThrow") with { Variants = [1, 2] }, player.Center);
                                 CurrentAIState = AIState.LaunchingForward;
                                 StateTimer = 0f;
                                 Projectile.velocity = unitVectorTowardsMouse * launchSpeed + player.velocity;
@@ -157,7 +158,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             EyeTimer = 0;
                         }
 
-                        Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.LeashSpin, () =>
+                        Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.LeashSpin with { Volume = 0.5f}, () =>
                         {
                             return CurrentAIState != AIState.Spinning || !Projectile.active;
                         });
@@ -179,7 +180,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                 case AIState.LaunchingForward:
                     {
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/LeashThrow") with { Variants = [1, 2]}, player.Center);
+                        
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
                         if (shouldSwitchToRetracting)
@@ -267,11 +268,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (CurrentAIState == AIState.LaunchingForward || CurrentAIState == AIState.Ricochet)
             {
                 bounceFactor = 0.4f;
-            }
-
-            if (CurrentAIState == AIState.Dropping)
-            {
-                bounceFactor = 0f;
             }
 
             if (oldVelocity.X != Projectile.velocity.X)

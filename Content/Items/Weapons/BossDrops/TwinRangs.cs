@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -33,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.knockBack = 3;
             Item.value = 100000;
             Item.rare = ItemRarityID.Pink;
-            Item.shootSpeed = 20;
+            Item.shootSpeed = 10;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
@@ -49,12 +50,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             if (player.altFunctionUse == 2)
             {
                 Item.shoot = ModContent.ProjectileType<Retirang>();
-                Item.shootSpeed = 20f;
+                Item.shootSpeed = 10;
             }
             else
             {
                 Item.shoot = ModContent.ProjectileType<Spazmarang>();
-                Item.shootSpeed = 30f;
+                Item.shootSpeed = 15;
             }
             return true;
         }
@@ -62,7 +63,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
+            {
                 damage = (int)(damage * 0.75);
+            }
+
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
