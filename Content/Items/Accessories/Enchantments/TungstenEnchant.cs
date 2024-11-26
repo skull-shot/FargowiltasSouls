@@ -139,7 +139,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void TungstenIncreaseProjSize(Projectile projectile, FargoSoulsPlayer modPlayer, IEntitySource source)
         {
-            bool terraForce = modPlayer.Player.HasEffect<TerraLightningEffect>();
+            bool terraForce = !modPlayer.Player.HasEffectEnchant<TungstenEffect>();
             if (terraForce)
                 modPlayer.TungstenCD = 40;
 
@@ -209,7 +209,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void TungstenModifyDamage(Player player, ref NPC.HitModifiers modifiers)
         {
-            if (player.HasEffect<TerraLightningEffect>())
+            if (!player.HasEffectEnchant<TungstenEffect>())
                 return;
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();

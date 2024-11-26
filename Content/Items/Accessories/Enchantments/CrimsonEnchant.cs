@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<CrimsonEnchant>();
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
-            if (player.HasEffect<NatureEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             //if was already healing, stop the heal and do nothing
             if (player.HasBuff<CrimsonRegenBuff>())

@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (player.AddEffect<CosmoForceEffect>(Item))
                 player.AddEffect<CosmosMoonEffect>(Item);
 
-            if (!player.HasEffect<CosmosMoonEffect>())
+            if (!player.HasEffect<CosmoForceEffect>())
             {
                 //meteor shower
                 MeteorEnchant.AddEffects(player, Item);

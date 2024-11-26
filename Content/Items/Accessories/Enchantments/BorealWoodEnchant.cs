@@ -55,10 +55,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void TryAdditionalAttacks(Player player, int damage, DamageClass damageType)
         {
-            if (player.HasEffect<TimberEffect>())
-            {
+            if (!HasEffectEnchant(player))
                 return;
-            }
             BorealSnowballs(player, damage);
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)

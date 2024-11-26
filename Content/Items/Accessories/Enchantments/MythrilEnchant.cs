@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void CalcMythrilAttackSpeed(FargoSoulsPlayer modPlayer, Item item)
         {
-            if (modPlayer.Player.HasEffect<EarthForceEffect>())
+            if (!modPlayer.Player.HasEffectEnchant<MythrilEffect>())
                 return;
 
             if (item.DamageType != DamageClass.Default && item.pick == 0 && item.axe == 0 && item.hammer == 0 && item.type != ModContent.ItemType<PrismaRegalia>())
@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.MythrilTimer = mythrilEndTime;
 
             CooldownBarManager.Activate("MythrilEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
-                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && !player.HasEffect<EarthForceEffect>());
+                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && !player.HasEffectEnchant<MythrilEffect>());
         }
     }
 

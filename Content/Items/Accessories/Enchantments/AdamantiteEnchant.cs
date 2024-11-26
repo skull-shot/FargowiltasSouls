@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             //modPlayer.AdamantiteEnchantItem = item;

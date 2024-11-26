@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             //minion crits
-            if (!player.HasEffect<LifeForceEffect>())
+            if (!HasEffectEnchant(player))
                 player.FargoSouls().MinionCrits = true;
             //player.GetCritChance(DamageClass.Summon) += 10;
             if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))

@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ExtraAttackEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<ShadowForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             if (player.whoAmI == Main.myPlayer)
             {

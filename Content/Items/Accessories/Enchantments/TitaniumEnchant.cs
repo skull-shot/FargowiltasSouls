@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static float TitaniumDR(Player player, Entity attacker)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!player.HasEffectEnchant<TitaniumEffect>())
                 return 0;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (modPlayer.TitaniumCD)
                 return;
-            if (player.HasEffect<EarthForceEffect>())
+            if (!player.HasEffectEnchant<TitaniumEffect>())
                 return;
 
             player.AddBuff(306, 600, true, false);
@@ -132,7 +132,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateMiscEffects(Player player)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!player.HasEffectEnchant<TitaniumEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 

@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.HasEffect<NatureEffect>())
+            if (!HasEffectEnchant(player))
                 return;
 
             if (modPlayer.ShroomiteCD > 0)

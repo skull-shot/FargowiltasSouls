@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Localization;
@@ -68,6 +69,7 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         /// The item associated with this effect. Null if none is found.
         /// </summary>
         public Item EffectItem(Player player) => player.AccessoryEffects().EffectItems[Index];
+        public bool HasEffectEnchant(Player player) => EffectItem(player)?.ModItem is BaseEnchant;
         public IEntitySource GetSource_EffectItem(Player player) => player.GetSource_Accessory(EffectItem(player));
 
         #region Overridables
