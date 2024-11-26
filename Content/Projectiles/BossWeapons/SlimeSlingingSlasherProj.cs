@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public ref float ItemTime => ref Projectile.ai[0];
         public ref float FreezeTime => ref Projectile.ai[1];
@@ -72,7 +73,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         int j = i * Projectile.direction;
                         Vector2 vel = (Projectile.rotation + MathHelper.PiOver2 * j / 10f).ToRotationVector2() * 20f;
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.originalDamage, Projectile.knockBack, player.whoAmI);
+                        int p = Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.originalDamage, Projectile.knockBack, player.whoAmI);
+                        if (p.IsWithinBounds(Main.maxProjectiles))
+                            Main.projectile[p].DamageType = DamageClass.Melee;
                     }
                 }
                 ProjectileCheck = 1;
