@@ -1223,7 +1223,7 @@ FrigidGemstone: {
 		Right click to disable
 		Grants immunity to Frostburn and Chilled
 		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
+		Your ice blocks inflict Frostburn in Hardmode
 		'A torn off limb composed of ancient ice'
 		'''
 	VanityTooltip:
@@ -1241,7 +1241,7 @@ FrigidGemstoneInactive: {
 		Currently inactive, Right click to activate
 		Grants immunity to Frostburn and Chilled
 		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
+		Your ice blocks inflict Frostburn in Hardmode
 		'A torn off limb composed of ancient ice'
 		'''
 }
