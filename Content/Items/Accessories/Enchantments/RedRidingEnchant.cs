@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void SpawnArrowRain(Player player, NPC target)
         {
-            if (player.HasEffect<TimberEffect>())
+            if (!player.HasEffectEnchant<RedRidingEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Item effectItem = player.EffectItem<RedRidingEffect>();
