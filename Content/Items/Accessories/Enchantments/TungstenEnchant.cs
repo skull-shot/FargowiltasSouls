@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static float TungstenIncreaseWeaponSize(FargoSoulsPlayer modPlayer)
         {
-            return 1f + (modPlayer.ForceEffect<TungstenEnchant>() && !modPlayer.Player.HasEffect<TerraLightningEffect>() ? 2f : 1f);
+            return 1f + (modPlayer.ForceEffect<TungstenEnchant>() && modPlayer.Player.HasEffectEnchant<TungstenEffect>() ? 2f : 1f);
         }
 
         public static List<int> TungstenAlwaysAffectProjType =
