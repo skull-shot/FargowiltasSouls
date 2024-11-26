@@ -921,7 +921,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/NinjaEnchant] 根据弹幕速度增加弹幕伤害
 		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时增加弹幕速度
 		[i:FargowiltasSouls/NecroEnchant] 击杀敌人有概率掉落骨堆
-		[i:FargowiltasSouls/DarkArtistEnchant] 攻击时发射下一把武器的射弹作为辅助攻击
+		[i:FargowiltasSouls/DarkArtistEnchant] 攻击时发射快捷栏中最近的武器的射弹作为辅助攻击
 		[i:FargowiltasSouls/SpookyEnchant] 你的所有召唤物都会获得额外的镰刀攻击
 		“黑暗，更黑暗，还是更黑暗”
 		'''
