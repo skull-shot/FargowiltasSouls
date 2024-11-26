@@ -14,8 +14,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         /*
          * 0 = initial deployment
-         * 1 = firing
-         * 2 = despawning
+         * 1 = wind up
+         * 2 = firing
+         * 3 = despawning
          */
         public ref float state => ref Projectile.ai[0];
         public ref float projCount => ref Projectile.ai[1];
@@ -23,54 +24,68 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 6;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Main.projFrames[Type] = 8;
         }
 
         public override void SetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
+            Projectile.width = 40;
+            Projectile.height = 54;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.penetrate = -1;
+            Projectile.Opacity = 0.85f;
         }
 
         public override void AI()
         {
             float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
-            Projectile.rotation = rot + 5 * MathHelper.PiOver4;
-            if (state == 2 || Projectile.timeLeft <= 20)
+            Frame();
+            Projectile.rotation = rot + MathHelper.Pi;
+            if (state == 3 || Projectile.timeLeft <= 20)
             {
                 Projectile.velocity = Projectile.velocity * (0.98f);
                 Projectile.timeLeft = Math.Min(Projectile.timeLeft, 20);
-                Projectile.Opacity -= 1 / 20f;
+                Projectile.Opacity -= 1 / 40f;
                 return;
             }
             Player player = Main.player[Projectile.owner];
-            if (player.altFunctionUse == 2 && player.HeldItem.type == ModContent.ItemType<DarkTome>())
-            {
-                state = 1;
-            }
             Lighting.AddLight(Projectile.Center, TorchID.Shimmer);
             if (state == 0)
             {
+                if (player.altFunctionUse == 2 && player.HeldItem.type == ModContent.ItemType<DarkTome>())
+                {
+                    state = 1;
+                }
                 Vector2 vectorToMousePosition = Projectile.position - Main.MouseWorld;
                 float f = Projectile.Center.Distance(Main.MouseWorld) / 2000f;
-                Projectile.velocity += f * Vector2.One.RotatedBy(vectorToMousePosition.ToRotation() + 3 * MathHelper.PiOver4);
+                if (Projectile.velocity.Length() < 50)
+                    Projectile.velocity += f * Vector2.One.RotatedBy(vectorToMousePosition.ToRotation() + 3 * MathHelper.PiOver4);
                 return;
             }
-            if (projCount > 0 && timer++ % 5 == 0)
+
+            // Timer only starts after right click
+            timer++;
+            if (state == 1 && timer < 8)
+            {
+                Projectile.velocity *= 0.90f;
+            }
+            if (state == 2 && projCount > 0 && timer % 5 == 0)
             {
                 Vector2 vel = new Vector2(10f, 0f).RotatedBy(rot);
                 SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
+
+                // Determine random spread from book count
                 float spread = (MathHelper.Pi / 24) * (3 - player.ownedProjectileCounts[Type]);
                 float randRot = Main.rand.NextFloat(-spread, spread);
+
                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel.RotatedBy(randRot),
                     ModContent.ProjectileType<TomeShot>(), Projectile.damage, 0f, Projectile.owner);
-                Projectile.velocity -= 0.2f * vel;
+                
+                // Self-knockback
+                Projectile.velocity -= 0.15f * vel;
 
                 Dust d = Dust.NewDustDirect(Projectile.position, 0, 0, DustID.PinkTorch);
                 d.velocity = 0.2f * vel;
@@ -78,8 +93,37 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 projCount--;
                 if (projCount == 0)
                 {
-                    state = 2;
+                    state = 3;
                 }
+            }
+        }
+
+        void Frame()
+        {
+            switch (state)
+            {
+                case 0:
+                    Projectile.frame = 0;
+                    break;
+                case 1:
+                    if (timer % 2 == 0)
+                    {
+                        if (Projectile.frame < 4)
+                            Projectile.frame++;
+                        else
+                            state = 2;
+                    }
+                    break;
+                case 2:
+                    if (timer % 4 == 0)
+                    {
+                        if (++Projectile.frame > 7)
+                            Projectile.frame = 5;
+                    }
+                    break;
+                case 3:
+                    Projectile.frame = 4;
+                    break;
             }
         }
 
@@ -90,8 +134,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Player player = Main.player[Projectile.owner];
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
+
 
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
@@ -102,19 +146,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
-
-            int bookCount = Math.Min(player.ownedProjectileCounts[Type] - 1, 2);
-            Vector2 drawOrigin = new Vector2(texture2D13.Width * 0.5f, Projectile.height * 0.5f);
-            for (int k = Projectile.oldPos.Length - 1; k > 0; k--)
-            {
-                Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / ((float)Projectile.oldPos.Length));
-                float rot = Projectile.oldRot[k] + 3 * MathHelper.PiOver2;
-                Main.EntitySpriteDraw(texture2D13, drawPos, null, color, rot, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
-            }
-            Color color27 = Color.Lerp(color26, Color.Magenta, 0.5f);
-            //Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, scale, spriteEffects, 0);
-            // Normal Draw
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
         }

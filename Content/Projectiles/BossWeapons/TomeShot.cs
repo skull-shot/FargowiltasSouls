@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class TomeShot : ModProjectile
     {
-        //public override string Texture => "Terraria/Images/Projectile_712";
+        public override string Texture => "Terraria/Images/Projectile_712";
 
         public override void SetStaticDefaults()
         {
@@ -25,6 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 240;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
+            Projectile.Opacity = 0.85f;
         }
 
         public override void AI()
