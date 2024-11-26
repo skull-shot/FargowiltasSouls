@@ -17,7 +17,7 @@ Earth Force:
 -Poison DoT now only procs at high charge level
 -Fixed providing more DoT multiplier than intended
 
-Spider Enchant: Reverted damage buff to 1.5x, 
+Spider Enchant: Reverted damage buff to 1.5x, bonus crit chance now benefits all classes
 
 -All Enchantment effects now work even if you have their corresponding Force. Some of them now also stack with the corresponding Force effect.
 -Fixed Cosmo Force providing some unlisted base Enchant effects when Moons are toggled off
