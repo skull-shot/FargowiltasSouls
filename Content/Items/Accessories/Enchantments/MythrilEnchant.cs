@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.MythrilTimer = mythrilEndTime;
 
             CooldownBarManager.Activate("MythrilEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
-                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && !player.HasEffectEnchant<MythrilEffect>());
+                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && player.HasEffectEnchant<MythrilEffect>());
         }
     }
 
