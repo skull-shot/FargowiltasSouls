@@ -763,7 +763,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 if (Phase < 2) // shoot more in phase 1
                     shotTime -= 10;
                 else
-                    shotTime += 6;
+                    shotTime += 3;
 				if (Timer % shotTime == 0)
 				{
 					RandomProj = Main.rand.Next(3) switch
