@@ -1,8 +1,3 @@
 NEW UPDATE - V {ModVersion}
 
-Fixed Spider Enchant not providing minion crits correctly
-Fixed Slime King's Slasher and Slime Slinging Slasher projectiles not counting as melee
-Fixed Meteor Enchant projectile not counting as Magic damage
-Fixed logic for Mythril Enchant bar showing
-Fixed Red Riding Enchant not having the correct Force logic
-Tweaked logic for allowing Eternity enemy spawns that are supposed to only spawn in no special biome
+Spider Enchant effect is now disabled by Mutant's Presence
