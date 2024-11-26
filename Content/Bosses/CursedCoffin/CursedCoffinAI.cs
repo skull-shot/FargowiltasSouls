@@ -759,8 +759,11 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
                 NPC.velocity.X *= 0.7f; // moves slower horizontally 
 				int shotTime = WorldSavingSystem.MasochistModeReal ? 20 : 24;
+                
                 if (Phase < 2) // shoot more in phase 1
                     shotTime -= 10;
+                else
+                    shotTime += 6;
 				if (Timer % shotTime == 0)
 				{
 					RandomProj = Main.rand.Next(3) switch
