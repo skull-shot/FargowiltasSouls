@@ -9,16 +9,15 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class DarkTome : SoulsItem
     {
-        public override string Texture => "Terraria/Images/Item_531";
         public override void SetDefaults()
         {
             Item.noMelee = true;
-            Item.damage = 24;
+            Item.damage = 28;
             Item.DamageType = DamageClass.Magic;
             Item.mana = 50;
             Item.rare = ItemRarityID.Orange;
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 36;
+            Item.height = 40;
             Item.useTime = 25;
             Item.useAnimation = 25;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -76,7 +75,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             }
             float rot = (Main.MouseWorld - player.Center).ToRotation();
             Vector2 vel = new Vector2(5f, 0f).RotatedBy(rot);
-            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, Item.damage, 0, player.whoAmI, 0, 5);
+            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, Item.damage, 0, player.whoAmI, 0, 7);
             return false;
         }
     }
