@@ -241,7 +241,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 							for (int i = -1; i <= 1; i += 2)
 							{
 								Vector2 vel = Vector2.UnitX * i * 3;
-								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
 							}
 						}
 
@@ -451,7 +451,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						for (int i = -1; i <= 1; i += 2)
 						{
 							Vector2 vel = Vector2.UnitX * i * 3;
-							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
 						}
 					}
 					if (WorldSavingSystem.EternityMode && (Counter < 2 || Enraged))
@@ -601,7 +601,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                         for (int i = -1; i <= 1; i += 2)
                         {
                             Vector2 vel = Vector2.UnitX * i * 3;
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
                         }
                     }
 
