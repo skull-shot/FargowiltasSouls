@@ -21,8 +21,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void SetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 55;
+            Projectile.width = 20;
+            Projectile.height = 70;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.penetrate = -1;
@@ -56,7 +56,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
             Vector2 oldPos = Projectile.position;
             // lock on block grid
-            Projectile.position.Y = (MathF.Floor((Projectile.position.Y + Projectile.height) / 16) * 16) - 70;
+            int visualHeight = 70;
+            Projectile.position.Y = (MathF.Floor((Projectile.position.Y + visualHeight) / 16) * 16) - visualHeight;
 
             int i = 0;
             const int maxIter = 10;
@@ -122,7 +123,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 Color oldColor = Color.White;
                 oldColor *= 0.5f;
                 oldColor *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                Vector2 oldPos = Projectile.oldPos[i] + Projectile.Size / 2 + Vector2.UnitY * 10;
+                Vector2 oldPos = Projectile.oldPos[i] + Projectile.Size / 2 - Vector2.UnitY * 10;
                 float oldRot = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture, oldPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, Projectile.GetAlpha(oldColor),
                     oldRot, origin, scale, spriteEffects, 0);
