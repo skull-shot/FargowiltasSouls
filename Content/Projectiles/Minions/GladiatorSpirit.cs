@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             FargoSoulsPlayer localModPlayer = Main.LocalPlayer.FargoSouls();
 
-            if (player.whoAmI == Main.myPlayer && (player.dead || !player.HasEffectEnchant<GladiatorBanner>() || !player.HasEffect<GladiatorBanner>()))
+            if (player.whoAmI == Main.myPlayer && (player.dead || !player.HasEffect<WillEffect>() || !player.HasEffect<GladiatorBanner>()))
             {
                 Projectile.Kill();
                 return;
