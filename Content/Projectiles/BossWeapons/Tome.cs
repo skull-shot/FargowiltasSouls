@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Fargowiltas.Common.Systems.InstaVisual;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
@@ -25,6 +26,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 8;
+            ProjectileID.Sets.TrailCacheLength[Type] = 4;
+            ProjectileID.Sets.TrailingMode[Type] = 3;
         }
 
         public override void SetDefaults()
@@ -36,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.penetrate = -1;
-            Projectile.Opacity = 0.85f;
+            Projectile.Opacity = 0.65f;
         }
 
         public override void AI()
@@ -61,8 +64,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }
                 Vector2 vectorToMousePosition = Projectile.position - Main.MouseWorld;
                 float f = Projectile.Center.Distance(Main.MouseWorld) / 2000f;
-                if (Projectile.velocity.Length() < 50)
+                
+                if (Projectile.velocity.Length() <= 15.5f)
                     Projectile.velocity += f * Vector2.One.RotatedBy(vectorToMousePosition.ToRotation() + 3 * MathHelper.PiOver4);
+                else
+                    Projectile.velocity *= 0.95f;
+
                 return;
             }
 
@@ -106,7 +113,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.frame = 0;
                     break;
                 case 1:
-                    if (timer % 2 == 0)
+                    if (timer % 3 == 0)
                     {
                         if (Projectile.frame < 4)
                             Projectile.frame++;
@@ -143,6 +150,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Vector2 origin2 = rectangle.Size() / 2f;
 
             SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+            for (int k = Projectile.oldPos.Length - 1; k >= 0; k--)
+            {
+                Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + origin2 + new Vector2(0f, Projectile.gfxOffY);
+                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, color, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
+            }
 
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
