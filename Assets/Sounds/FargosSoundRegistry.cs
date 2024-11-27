@@ -66,6 +66,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle MutantPredictive = new(SoundsPath + "Siblings/Mutant/MutantPredictive");
         public static readonly SoundStyle PenetratorThrow = new(SoundsPath + "Siblings/Mutant/PenetratorThrow");
         public static readonly SoundStyle PenetratorExplosion = new(SoundsPath + "Siblings/Mutant/PenetratorExplosion");
+        public static readonly SoundStyle MutantSword = new(SoundsPath + "Siblings/Mutant/MutantSword");
 
         // Abominationn
 

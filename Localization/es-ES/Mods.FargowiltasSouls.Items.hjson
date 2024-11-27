@@ -2782,7 +2782,9 @@ TwinRangs: {
 	// DisplayName: Twinrangs
 	/* Tooltip:
 		'''
-		Fire a different twinrang depending on mouse click
+		Left click to launch a buzzsaw that rapidly rips enemies apart
+		Right click to launch a swift turret that fires lasers towards the nearest enemy
+		The Twinrangs explode upon contact with each other
 		'The compressed forms of defeated foes..'
 		''' */
 }

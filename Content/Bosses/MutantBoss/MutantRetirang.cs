@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             // DisplayName.SetDefault("Retirang");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            Main.projFrames[Projectile.type] = 2; //because it uses the same sprite as the retirang.
         }
 
         public override void SetDefaults()
@@ -46,6 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.velocity = Vector2.Normalize(Projectile.velocity) * Projectile.localAI[1] + acceleration;
 
             Projectile.rotation += 1f * Math.Sign(Projectile.ai[0]);
+            Projectile.frame = 0;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
