@@ -902,7 +902,7 @@ NatureForce: {
 		'''
 		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
 		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
-		[i:FargowiltasSouls/MoltenEnchant] Deal 1.2x damage to enemies in the aura
+		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
 		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
 		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
 		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds

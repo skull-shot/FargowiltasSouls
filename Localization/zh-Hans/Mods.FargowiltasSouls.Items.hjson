@@ -899,7 +899,7 @@ NatureForce: {
 		'''
 		[i:FargowiltasSouls/CrimsonEnchant] 你拥有一个可以吸取附近敌人生命值的光环
 		[i:FargowiltasSouls/CrimsonEnchant] 一段时间不受击会增强生命吸取效果
-		[i:FargowiltasSouls/MoltenEnchant] 光环内的敌人受到1.2倍伤害
+		[i:FargowiltasSouls/MoltenEnchant] 光环内的敌人受到1.15倍伤害
 		[i:FargowiltasSouls/ChlorophyteEnchant] 偶尔会向光环内的敌人发射叶绿水晶
 		[i:FargowiltasSouls/ShroomiteEnchant] 叶绿水晶击中后会产生一团蘑菇
 		[i:FargowiltasSouls/ShroomiteEnchant] 蘑菇可恢复50点生命值，食用蘑菇可获得蘑菇力量，持续20秒
