@@ -1329,7 +1329,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 float modifier = 1.2f;
                 if (!player.HasEffectEnchant<MoltenEffect>())
-                    modifier = 1.15f;
+                    modifier = 1.2f;
                 else if (player.ForceEffect<MoltenEffect>())
                     modifier = 1.3f;
                 modifiers.FinalDamage *= modifier;
