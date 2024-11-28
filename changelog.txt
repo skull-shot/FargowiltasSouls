@@ -1,3 +1,2 @@
 NEW UPDATE - V {ModVersion}
-
-Spider Enchant effect is now disabled by Mutant's Presence
+fixed nature force being actually 1.15x instead of 1.2x amplify
