@@ -25,8 +25,8 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
             //AIType = ProjectileID.VortexBeaterRocket;
 
             Projectile.DamageType = DamageClass.Summon;
-
-            Projectile.penetrate = 2;
+            //Projectile.MaxUpdates = 1;
+            Projectile.penetrate = 1;
 
             Projectile.timeLeft = 75 * (Projectile.extraUpdates + 1);
             Projectile.usesLocalNPCImmunity = true;
@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
 
         public override void OnKill(int timeLeft)
         {
-            if (Projectile.owner == Main.myPlayer && Projectile.localAI[1] == 1)
+            /*if (Projectile.owner == Main.myPlayer && Projectile.localAI[1] == 1)
             {
                 Projectile[] projs = FargoSoulsUtil.XWay(Main.rand.Next(3, 7), Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.type, 6, Projectile.damage, Projectile.knockBack);
                 foreach (Projectile proj in projs)
@@ -91,7 +91,7 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
                     if (proj != null)
                         proj.localAI[1] = 2;
                 }
-            }
+            }*/
 
             Color dustColor = color;
             dustColor.A = 100;
