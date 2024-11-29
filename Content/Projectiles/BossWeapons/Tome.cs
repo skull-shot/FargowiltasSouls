@@ -6,7 +6,6 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Fargowiltas.Common.Systems.InstaVisual;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
@@ -26,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 8;
-            ProjectileID.Sets.TrailCacheLength[Type] = 4;
+            ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 3;
         }
 
@@ -65,11 +64,16 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Vector2 vectorToMousePosition = Projectile.position - Main.MouseWorld;
                 float f = Projectile.Center.Distance(Main.MouseWorld) / 2000f;
                 
-                if (Projectile.velocity.Length() <= 15.5f)
+                if (Projectile.velocity.Length() <= 14.5f)
                     Projectile.velocity += f * Vector2.One.RotatedBy(vectorToMousePosition.ToRotation() + 3 * MathHelper.PiOver4);
                 else
                     Projectile.velocity *= 0.95f;
 
+                // Slows down near cursor
+                if (f < 0.15f)
+                {
+                    Projectile.velocity *= 0.97f;
+                }
                 return;
             }
 
@@ -154,12 +158,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             for (int k = Projectile.oldPos.Length - 1; k >= 0; k--)
             {
                 Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + origin2 + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / ((float)Projectile.oldPos.Length * 2));
                 Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, color, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
             }
 
             Color color26 = lightColor;
-            color26 = Projectile.GetAlpha(color26);
+            color26 = Projectile.GetAlpha(color26) * 0.5f;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
         }
