@@ -63,10 +63,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.alpha = 255 - (int)(Math.Cos(++Projectile.localAI[0] * MathHelper.Pi / 2 / maxTime) * 200);
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 6;
-        }
+        }*/
 
         /*public override Color? GetAlpha(Color lightColor)
         {

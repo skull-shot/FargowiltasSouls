@@ -100,10 +100,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             modifiers.FinalDamage *= Projectile.scale;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 6;
-        }
+        }*/
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
