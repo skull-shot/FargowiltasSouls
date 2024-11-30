@@ -14,10 +14,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Retirang : ModProjectile
     {
-        int comebacktimer;
         int counter;
         int howlongtowaitbeforecomingback;
-        int waitspintime;
 
         public override void SetStaticDefaults()
         {
@@ -63,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.ai[0] == 1)
             {
                 Projectile.extraUpdates = 0;
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 60, 1 / 60f);
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
 
                 //kill when back to player
                 if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
@@ -94,6 +92,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             {
                                 Main.projectile[p].DamageType = DamageClass.Melee;
                                 Main.projectile[p].tileCollide = false;
+                                
                             }
 
                             Projectile.velocity -= Vector2.Normalize(n.Center - Projectile.Center);
@@ -125,13 +124,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             if (Projectile.ai[0] != 2)
             Projectile.rotation += 0.22f;
-        }
-
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
-                    ModContent.ProjectileType<CobaltExplosion>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, -10f);
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)

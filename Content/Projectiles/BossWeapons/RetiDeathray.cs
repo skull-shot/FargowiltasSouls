@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.DamageType = DamageClass.Melee;
             Projectile.FargoSouls().CanSplit = false;
             Projectile.tileCollide = false;
+            Projectile.scale = 2f;
 
             Projectile.hide = true;
             Projectile.extraUpdates = 1;
@@ -71,7 +72,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.localAI[0] == 0f)
             {
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104") { Volume = 0.3f }, Projectile.Center);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104") { Volume = 0.1f }, Projectile.Center);
             }
             float num801 = .3f;
             Projectile.localAI[0] += 1f;

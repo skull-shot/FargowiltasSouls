@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             if (Projectile.localAI[0] == 0f)
             {
                 Projectile.localAI[0] = 1f;
-                SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
+                SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannon, Projectile.position);
             }
             Projectile.velocity.Y += 0.2f;
 

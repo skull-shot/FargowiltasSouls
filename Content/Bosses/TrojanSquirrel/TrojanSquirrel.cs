@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.BossBags;
@@ -53,8 +54,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             NPC.damage = 24;
             NPC.defense = 2;
-            NPC.HitSound = SoundID.NPCHit7;
-            NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.HitSound = new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanHit") with { Variants = [1, 2, 3, 4] , Volume = 0.2f};
+            NPC.DeathSound = FargosSoundRegistry.TrojanDeath;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             NPC.knockBackResist = 0f;
@@ -374,7 +375,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 if (Jumping) //landing effects
                 {
-                    SoundEngine.PlaySound(SoundID.Item14 with { Pitch = 0.4f }, NPC.Bottom);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2]}, NPC.Bottom);
                     for (int i = 0; i < 4; i++)
                     {
                         int side = i % 2 == 0 ? 1 : -1;
@@ -488,7 +489,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 FargoSoulsUtil.GrossVanillaDodgeDust(NPC);
 
-                SoundEngine.PlaySound(SoundID.Roar, Main.player[NPC.target].Center);
+                //SoundEngine.PlaySound(SoundID.Roar, Main.player[NPC.target].Center);
             }
 
             Player player = Main.player[NPC.target];
@@ -507,7 +508,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             if (NPC.localAI[0] % 10 == 0) //hermes boot clouds
                             {
-                                SoundEngine.PlaySound(SoundID.Run);
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanFootstep") with {Variants = [1, 2, 3], Volume = 0.5f}, NPC.Bottom);
                                 Vector2 vel = (-NPC.velocity).RotatedByRandom(MathHelper.Pi / 11f);
                                 vel /= 2;
                                 Gore gore = Gore.NewGoreDirect(player.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 10, vel, Main.rand.Next(11, 14), Scale: Main.rand.NextFloat(1.5f, 2f));
@@ -556,7 +557,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             if (WorldSavingSystem.MasochistModeReal)
                             {
-                                SoundEngine.PlaySound(SoundID.Item14, NPC.Center);
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2] }, NPC.Bottom);
 
                                 ExplodeAttack();
                             }
@@ -707,7 +708,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             NPC.netUpdate = true;
 
-                            SoundEngine.PlaySound(SoundID.Item14, NPC.Bottom);
+                            if (arms != null)
+                            {
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2] }, NPC.Bottom);
+                            }
+                            else
+                            {
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJumpExplosive") with { Variants = [1, 2] }, NPC.Bottom);
+                            }
+                            
 
                             for (int i = 0; i < 4; i++)
                             {
@@ -919,7 +928,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         private void ExplodeDust(Vector2 center)
         {
-            SoundEngine.PlaySound(SoundID.Item14, center);
+            SoundEngine.PlaySound(FargosSoundRegistry.TrojanLegsDeath, center);
 
             const int width = 32;
             const int height = 32;

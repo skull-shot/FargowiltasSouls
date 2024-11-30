@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -17,6 +18,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'一个被迫屈服的老对手..'");
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ElectricWhip>();
         }
 
         public override void SetDefaults()

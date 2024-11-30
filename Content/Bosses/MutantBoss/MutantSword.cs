@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Boss;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -124,7 +125,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnKill(int timeleft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath6, Projectile.Center);
+            SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 2f}, Projectile.Center);
             Projectile.position = Projectile.Center;
             Projectile.width = Projectile.height = 208;
             Projectile.Center = Projectile.position;

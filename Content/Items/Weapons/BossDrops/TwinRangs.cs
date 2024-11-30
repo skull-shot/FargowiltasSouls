@@ -27,8 +27,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.DamageType = DamageClass.Melee;
             Item.width = 30;
             Item.height = 30;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 35;
+            Item.useAnimation = 35;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
