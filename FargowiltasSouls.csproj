@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Assets\Gores\LeashOfCthulhu\" />
     <Folder Include="Assets\Gores\Twinrangs\" />
+    <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>

@@ -31,6 +31,20 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle LeashSpin = new(SoundsPath + "Weapons/LeashSpin");
         public static readonly SoundStyle LeashBreak = new(SoundsPath + "Weapons/LeashBreak");
 
+        // Trojan
+        public static readonly SoundStyle TrojanHeadDeath = new (SoundsPath + "Challengers/Trojan/TrojanHeadDeath");
+        public static readonly SoundStyle TrojanCannonDeath = new (SoundsPath + "Challengers/Trojan/TrojanCannonDeath");
+        public static readonly SoundStyle TrojanLegsDeath = new(SoundsPath + "Challengers/Trojan/TrojanLegsDeath");
+        public static readonly SoundStyle TrojanDeath = new (SoundsPath + "Challengers/Trojan/TrojanDeath");
+        public static readonly SoundStyle TrojanGunStartup = new (SoundsPath + "Challengers/Trojan/TrojanGunStartup");
+        public static readonly SoundStyle TrojanSnowball = new (SoundsPath + "Challengers/Trojan/TrojanSnowball");
+        public static readonly SoundStyle TrojanCannon = new(SoundsPath + "Challengers/Trojan/TrojanCannon");
+        public static readonly SoundStyle Minigun = new(SoundsPath + "Challengers/Trojan/Minigun");
+        public static readonly SoundStyle TrojanHookLoop = new(SoundsPath + "Challengers/Trojan/TrojanHookLoop");
+        public static readonly SoundStyle TrojanHookTelegraph = new(SoundsPath + "Challengers/Trojan/TrojanHookTelegraph");
+        public static readonly SoundStyle TrojanSummon = new(SoundsPath + "Challengers/Trojan/TrojanSummon");
+
+
         // Baron
         public static readonly SoundStyle BaronLaserTelegraph = new(SoundsPath + "Challengers/Baron/BaronLaserTelegraph");
         public static readonly SoundStyle BaronLaserSoundSlow = new(SoundsPath + "Challengers/Baron/BaronLaserSound_Slow");

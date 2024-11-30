@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -15,7 +16,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             base.SetDefaults();
 
             NPC.lifeMax = 600;
-
+            NPC.DeathSound = FargosSoundRegistry.TrojanHeadDeath;
             NPC.width = baseWidth = 80;
             NPC.height = baseHeight = 76;
         }
@@ -68,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     if (NPC.ai[1] == 0 && !WorldSavingSystem.MasochistModeReal)
                     {
                         //telegraph
-                        SoundEngine.PlaySound(SoundID.Item11, NPC.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.TrojanGunStartup, NPC.Center);
 
                         Vector2 pos = NPC.Center;
                         pos.X += 22 * NPC.direction; //FUCKING LAUGH
