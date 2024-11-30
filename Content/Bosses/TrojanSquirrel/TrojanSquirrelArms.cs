@@ -185,7 +185,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                         if (NPC.ai[1] > start && NPC.ai[1] % 4 == 0)
                         {
-                            SoundEngine.PlaySound(FargosSoundRegistry.MinigunMaso, GetShootPos());
+                            SoundEngine.PlaySound(FargosSoundRegistry.Minigun, GetShootPos());
                             if (NPC.ai[1] % 8 == 0)
                             {
                                 Vector2 pos = GetShootPos();
