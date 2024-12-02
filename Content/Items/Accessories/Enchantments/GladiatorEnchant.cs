@@ -75,6 +75,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             if (modPlayer.GladiatorStandardCD > 0)
                 modPlayer.GladiatorStandardCD--;
+
+            float stats = 0.08f;
+            if (modPlayer.ForceEffect<GladiatorEnchant>())
+                stats = 0.1f;
+            player.GetDamage(DamageClass.Generic) += stats;
+            player.endurance += stats;
+            player.noKnockback = true;
         }
 
         public static void ActivateGladiatorBanner(Player player)
