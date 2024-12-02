@@ -1,6 +1,7 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -50,6 +51,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<NatureHeader>();
         public override int ToggleItemType => ModContent.ItemType<CrimsonEnchant>();
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.CrimsonRegenTime > (modPlayer.ForceEffect<CrimsonEnchant>() ? 420 * 2 : 420))
+            { //if its force effect, end at 14 seconds instead of 7
+                player.DelBuff(player.FindBuffIndex(ModContent.BuffType<CrimsonRegenBuff>()));
+            }
+        }
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             if (!HasEffectEnchant(player))
