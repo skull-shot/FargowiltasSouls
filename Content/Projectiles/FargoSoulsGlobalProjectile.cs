@@ -434,8 +434,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 {
                     if (projectile.owner == Main.myPlayer && modPlayer.EarthTimer > 100 && modPlayer.EarthSplitTimer <= 0)
                     {
-                        EarthForceEffect.EarthSplit(projectile, Main.LocalPlayer);
                         AdamModifier = 3;
+                        EarthForceEffect.EarthSplit(projectile, Main.LocalPlayer);
                         modPlayer.EarthSplitTimer = 60 * 3;
                     }
                 }
@@ -449,8 +449,8 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 //apen is inherited from proj to proj
                 projectile.ArmorPenetration += projectile.damage / 2;
-                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
                 AdamModifier = modPlayer.ForceEffect<AdamantiteEnchant>() ? 3 : 2;
+                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
             }
 
             if (source is EntitySource_Parent parent3 && parent3.Entity is Projectile sourceProj && sourceProj.FargoSouls().DamageCap > 0)
