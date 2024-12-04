@@ -106,6 +106,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Item PlatinumEffect;
         public int PalladCounter;
         public int MythrilTimer;
+        public int MythrilDelay;
         public int MythrilSoundCooldown;
         public int MythrilMaxTime => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 300 : 180 : 180;
         public float MythrilMaxSpeedBonus => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 1.75f : 1.5f : 1.5f;

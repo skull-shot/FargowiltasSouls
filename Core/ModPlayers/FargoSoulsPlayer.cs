@@ -574,6 +574,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             MutantEyeCD = 60;
 
             MythrilTimer = 0;
+            MythrilDelay = 20;
             BeetleEnchantDefenseTimer = 0;
 
             Mash = false;

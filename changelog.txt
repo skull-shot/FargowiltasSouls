@@ -1,3 +1,3 @@
 NEW UPDATE - V {ModVersion}
 
-Spider Enchant effect is now disabled by Mutant's Presence
+Fixed Will Force not spawning Spirit correctly
