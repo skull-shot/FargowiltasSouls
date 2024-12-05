@@ -903,7 +903,7 @@ NatureForce: {
 		'''
 		[i:FargowiltasSouls/CrimsonEnchant] Даёт вокруг вас ауру, которая высасывает здоровье из врагов
 		[i:FargowiltasSouls/CrimsonEnchant] Аура высасывает больше здоровья, если вы не получали урона недавно
-		[i:FargowiltasSouls/MoltenEnchant] Вы наносите в 1,2 раза больше урона врагам в ауре
+		[i:FargowiltasSouls/MoltenEnchant] Вы наносите в 1,15 раза больше урона врагам в ауре
 		[i:FargowiltasSouls/ChlorophyteEnchant] Периодически выпускает лазер кристального листа во врагов внутри ауры
 		[i:FargowiltasSouls/ShroomiteEnchant] Лазер кристального листа создаёт облако из грибов при попадании
 		[i:FargowiltasSouls/ShroomiteEnchant] Грибы восстанавливают 50 ХП. Использование грибов даёт бафф «Сила грибов» на 20 секунд

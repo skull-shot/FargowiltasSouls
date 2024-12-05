@@ -863,7 +863,7 @@ EarthForce: {
 		[i:FargowiltasSouls/CobaltEnchant] 不攻击时你会在受到攻击时爆炸
 		[i:FargowiltasSouls/AdamantiteEnchant] 充能后一个射弹每3秒会分裂成三个，并增加武器攻击速度
 		[i:FargowiltasSouls/OrichalcumEnchant] 充能后攻击会施加大地腐蚀，造成攻击伤害一定比例的额外伤害
-		[i:FargowiltasSouls/OrichalcumEnchant] 敌人受到的减益伤害增加300%
+		[i:FargowiltasSouls/OrichalcumEnchant] 敌人受到的减益伤害增加250%
 		“盖亚的祝福照耀着你”
 		'''
 	SaveOldTooltip:
@@ -887,7 +887,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeetleEnchant] 仙馔密酒增益增加30%伤害和近战速度，增加20%伤害减免和5生命恢复
 		[i:FargowiltasSouls/BeetleEnchant] 仙馔密酒增益会使仆从和哨兵能够暴击
 		[i:FargowiltasSouls/TurtleEnchant] 反弹500%的接触伤害
-		[i:FargowiltasSouls/SpiderEnchant] 召唤暴击率增加15%
+		[i:FargowiltasSouls/SpiderEnchant] 增加15%暴击率
 		[i:FargowiltasSouls/BeeEnchant] 获得蜜蜂背包效果
 		“罕有生灵敢违背你的意愿”
 		'''
@@ -899,7 +899,7 @@ NatureForce: {
 		'''
 		[i:FargowiltasSouls/CrimsonEnchant] 你拥有一个可以吸取附近敌人生命值的光环
 		[i:FargowiltasSouls/CrimsonEnchant] 一段时间不受击会增强生命吸取效果
-		[i:FargowiltasSouls/MoltenEnchant] 光环内的敌人受到1.2倍伤害
+		[i:FargowiltasSouls/MoltenEnchant] 光环内的敌人受到1.15倍伤害
 		[i:FargowiltasSouls/ChlorophyteEnchant] 偶尔会向光环内的敌人发射叶绿水晶
 		[i:FargowiltasSouls/ShroomiteEnchant] 叶绿水晶击中后会产生一团蘑菇
 		[i:FargowiltasSouls/ShroomiteEnchant] 蘑菇可恢复50点生命值，食用蘑菇可获得蘑菇力量，持续20秒

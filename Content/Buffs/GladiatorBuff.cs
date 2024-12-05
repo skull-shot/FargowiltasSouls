@@ -11,14 +11,5 @@ namespace FargowiltasSouls.Content.Buffs
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
-        public override void Update(Player player, ref int buffIndex)
-        {
-            float stats = 0.08f;
-            if (player.FargoSouls().ForceEffect<GladiatorEnchant>())
-                stats = 0.1f;
-            player.GetDamage(DamageClass.Generic) += stats;
-            player.endurance += stats;
-            player.noKnockback = true;
-        }
     }
 }

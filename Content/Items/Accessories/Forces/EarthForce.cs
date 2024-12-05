@@ -165,6 +165,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 if (p.Alive())
                 {
                     p.FargoSouls().HuntressProj = projectile.FargoSouls().HuntressProj;
+                    p.FargoSouls().AdamModifier = projectile.FargoSouls().AdamModifier;
                     p.FargoSouls().Adamantite = true;
                 }
             }
