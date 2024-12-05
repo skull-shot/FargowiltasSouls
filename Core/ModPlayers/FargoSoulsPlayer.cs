@@ -652,6 +652,19 @@ namespace FargowiltasSouls.Core.ModPlayers
                 LifeReductionUpdateTimer = 0;
             }
         }
+        public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            if (Player.HasEffect<NinjaEffect>()
+                && item.shoot > ProjectileID.None
+                && item.shoot != ProjectileID.WireKite)
+            {
+                float maxSpeedRequired = Player.ForceEffect<NinjaEffect>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
+                if (Player.velocity.Length() < maxSpeedRequired)
+                {
+                    velocity *= 2f;
+                }
+            }
+        }
         public override float UseSpeedMultiplier(Item item)
         {
             int useTime = item.useTime;

@@ -404,7 +404,7 @@ NinjaEnchant: {
 	DisplayName: Ninja Enchantment
 	Tooltip:
 		'''
-		Your projectiles deal more damage the faster they're moving, up to 1.15x
+		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed while you're moving slowly
 		'Wait for when the moment is right'
 		'''

@@ -32,17 +32,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<NinjaDamageEffect>(Item);
         }
 
-        public static void NinjaSpeedSetup(FargoSoulsPlayer modPlayer, Projectile projectile, FargoSoulsGlobalProjectile globalProj)
-        {
-            Player player = modPlayer.Player;
-            float maxSpeedRequired = modPlayer.ForceEffect<NinjaEnchant>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
-            if (player.velocity.Length() < maxSpeedRequired)
-            {
-                const int speedIncrease = 1;
-                globalProj.NinjaSpeedup = projectile.extraUpdates + speedIncrease;
-            }
-        }
-
         public override void AddRecipes()
         {
             CreateRecipe()
