@@ -93,7 +93,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 float randRot = Main.rand.NextFloat(-spread, spread);
 
                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel.RotatedBy(randRot),
-                    ModContent.ProjectileType<TomeShot>(), Projectile.damage, 0f, Projectile.owner);
+                    ModContent.ProjectileType<TomeShot>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 
                 // Self-knockback
                 Projectile.velocity -= 0.15f * vel;
