@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using Microsoft.Xna.Framework;
 using System;
@@ -16,11 +17,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.StaffMinionSlotsRequired[Item.type] = 3;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<GeminiGlaives>();
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 950;
+            Item.damage = 160;
             Item.mana = 10;
             Item.DamageType = DamageClass.Summon;
             Item.width = 24;

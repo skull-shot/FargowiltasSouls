@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Prime Laser");
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
         public override void SetDefaults()
         {

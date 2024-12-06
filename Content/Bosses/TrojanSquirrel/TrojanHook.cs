@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -84,7 +85,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (Projectile.localAI[0] == 0)
             {
                 Projectile.localAI[0] = 1;
-                SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanHookShot") with { Variants = [1, 2] }, Projectile.Center);
             }
 
             Projectile.extraUpdates = WorldSavingSystem.EternityMode ? 1 : 0;

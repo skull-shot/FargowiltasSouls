@@ -146,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         
                         Vector2 offsetFromPlayer = new Vector2(player.direction).RotatedBy((float)Math.PI * 10f * (SpinningStateTimer / 60f) * player.direction);
 
-                        if (++EyeTimer >= 30)
+                        if (++EyeTimer >= 20)
                         {
                             Vector2 vector54 = Main.player[Projectile.owner].Center - Projectile.Center;
                             Vector2 vector55 = vector54 * -1f;

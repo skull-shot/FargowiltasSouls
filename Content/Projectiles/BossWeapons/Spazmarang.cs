@@ -1,4 +1,7 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -14,9 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Spazmarang : ModProjectile
     {
-        //bool hitSomething = false;
-        int comebacktimer;
-        int dashamount;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmarang");
@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.extraUpdates = 0;
                 Projectile.timeLeft = 2;
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 60, 1 / 60f);
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
 
                 //kill when back to player
                 if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
@@ -75,12 +75,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.rotation += 0.64f;
                 Projectile.velocity *= 0;
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 200, false, true));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 75, false, true));
                 if (n.Alive())
                 {
                     Projectile.velocity += n.velocity;
-                    //Projectile.Center = n.Center;
-                    
+                    Projectile.Center = n.Center;
                 }
 
                 if (Projectile.timeLeft <= 10)
@@ -92,7 +91,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
-                if (projectile.type == ModContent.ProjectileType<Retirang>() && projectile.active && projectile.Distance(Projectile.Center) <= 75 && Projectile.ai[0] != 2)
+                if (projectile.type == ModContent.ProjectileType<Retirang>() && projectile.active && projectile.Distance(Projectile.Center) <= 75 && Projectile.ai[0] != 2 && projectile.ai[0] != 0)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), projectile.Center, Vector2.Zero,
                     ModContent.ProjectileType<CobaltExplosion>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, -10f);
@@ -112,31 +111,39 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0; i < Main.maxProjectiles; i++)
+            NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 75, false, true));
+            if (n.Alive())
             {
-                Projectile projectile = Main.projectile[i];
-                if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
+                for (int i = 0; i < Main.maxProjectiles; i++)
                 {
-                    NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
-                    if (n.Alive())
+                    Projectile projectile = Main.projectile[i];
+                    if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
                     {
-                        Particle p1 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Green, 1f, 25);
-                        Particle p2 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Green, 1f, 25);
-                        Particle p3 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Green, 1f, 25);
+
+                        Particle p1 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
+                        Particle p2 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
+                        Particle p3 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
                         p1.Spawn();
                         p2.Spawn();
                         p3.Spawn();
+                        
+                            
+                        SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
+                        target.AddBuff(BuffID.CursedInferno, 120);
+                        return;
+                            
                     }
-                        
-                    SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
-                    return;
-                        
+                }
+                
+            }
+            if (n.Alive() && (n.type != NPCID.GolemFistLeft || n.type != NPCID.GolemFistRight || n.type != ModContent.NPCType<CrystalLeaf>()))
+            {
+                if (Projectile.timeLeft >= 10)
+                {
+                    Projectile.ai[0] = 2;
                 }
             }
-            if (Projectile.timeLeft >= 10)
-                Projectile.ai[0] = 2;
-            
-            target.AddBuff(BuffID.CursedInferno, 30);
+            target.AddBuff(BuffID.CursedInferno, 120);
             
         }
 

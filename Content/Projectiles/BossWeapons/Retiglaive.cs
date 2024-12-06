@@ -45,25 +45,27 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
 
             Projectile.extraUpdates = 1;
         }
 
-        public override bool? CanDamage() => false;
+        public override bool? CanDamage() => Projectile.ai[0] == 3 ? true : false;
 
         public override bool PreAI()
         {
             if (Projectile.ai[0] == 1)
             {
                 Projectile.ai[1]++;
-
                 Projectile.rotation += Projectile.direction * -0.4f;
 
                 if (Projectile.ai[1] <= 50)
                 {
+                    int buh = empowered ? 10 : 15;
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, Vector2.Zero, 0.1f);
                     //fire lasers at cursor
-                    if (Projectile.ai[1] % 10 == 0)
+                    if (Projectile.ai[1] % buh == 0)
                     {
                         Vector2 cursor = Main.MouseWorld;
                         Vector2 velocity = Vector2.Normalize(cursor - Projectile.Center);
@@ -87,24 +89,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                         Player player = Main.player[Projectile.owner];
 
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity);
+                        int projtype = empowered ? ModContent.ProjectileType<RetiDeathray>() : ModContent.ProjectileType<PrimeLaser>();
+                        Vector2 projvelocity = empowered ? velocity : Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20;
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, projvelocity, projtype, Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity);
                         Projectile.velocity = -velocity * 8;
-
-                        if (empowered)
-                        {
-                            float baseRotation = Main.rand.NextFloat(MathHelper.TwoPi);
-                            const int max = 3;
-                            for (int i = 0; i < max; i++)
-                            {
-                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 1.25f * velocity.RotatedBy(MathHelper.TwoPi / max * i + baseRotation),
-                                    ModContent.ProjectileType<MechElectricOrbHomingFriendly>(), Projectile.damage, 1f, Projectile.owner, -1, 0);
-                                if (p != Main.maxProjectiles)
-                                {
-                                    Main.projectile[p].DamageType = DamageClass.Melee;
-                                    Main.projectile[p].timeLeft = 90;
-                                }
-                            }
-                        }
                     }
                 }
 
@@ -147,7 +135,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             //travel back to player
             else if (Projectile.ai[0] == 2)
-            {
+            {   
+
                 Projectile.ai[1] += 0.6f;
                 //Projectile.extraUpdates = (Projectile.ai[1] < 40) ? 0 : 1;
                 float lerpspeed = Projectile.ai[1] < 40 ? 0.07f : 0.3f;
@@ -164,35 +153,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            /*if (!hitSomething)
-            {
-                hitSomething = true;
-                if (Projectile.owner == Main.myPlayer)
-                {
-                    for (int k = 0; k < Main.maxNPCs; k++)
-                    {
-                        if (k == target.whoAmI)
-                            continue;
-
-                        NPC npc = Main.npc[k];
-                        float distance = Vector2.Distance(npc.Center, Projectile.Center);
-
-                        if ((distance < 500) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height))
-                        {
-                            Vector2 velocity = (npc.Center - Projectile.Center) * 20;
-
-                            int p = Projectile.NewProjectile(Projectile.Center, velocity, ProjectileID.PurpleLaser, Projectile.damage, 0, Projectile.owner);
-                            if (p != Main.maxProjectiles)
-                            {
-                                Main.Projectile[p].melee = true;
-                                Main.Projectile[p].magic = false;
-                            }
-
-                            break;
-                        }
-                    }
-                }
-            }*/
+            
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
@@ -217,7 +178,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (empowered)
             {
-                Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Red with { A = 0 } * Projectile.Opacity, Main.GlobalTimeWrappedHourly * -2f, flare2.Size() * 0.5f, 0.3f, 0, 0f);
+                Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Red with { A = 0 } * Projectile.Opacity, Main.GlobalTimeWrappedHourly * -2f, flare2.Size() * 0.5f, 0.2f, 0, 0f);
                 DrawTrail = true;
             }
             
