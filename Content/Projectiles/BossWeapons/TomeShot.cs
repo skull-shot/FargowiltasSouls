@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 240;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
-            Projectile.Opacity = 0.85f;
+            Projectile.Opacity = 0.75f;
         }
 
         public override void AI()

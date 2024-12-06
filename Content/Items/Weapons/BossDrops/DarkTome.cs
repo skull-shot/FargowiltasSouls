@@ -12,17 +12,18 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override void SetDefaults()
         {
             Item.noMelee = true;
-            Item.damage = 28;
+            Item.damage = 36;
             Item.DamageType = DamageClass.Magic;
-            Item.mana = 50;
+            Item.mana = 40;
             Item.rare = ItemRarityID.Orange;
             Item.width = 36;
             Item.height = 40;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 45;
+            Item.useAnimation = 45;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = SoundID.Item8;
             Item.shoot = ModContent.ProjectileType<Tome>();
+            Item.knockBack = 2f;
         }
 
         public override bool AltFunctionUse(Player player)
@@ -32,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
         {
+            // Alt fire should cost nothing
             if (player.altFunctionUse == 2)
             {
                 mult = 0;
@@ -40,15 +42,22 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override bool CanUseItem(Player player)
         {
+            int bookCount = player.ownedProjectileCounts[Item.shoot];
             if (player.altFunctionUse == 2)
             {
-                Item.UseSound = SoundID.Item9;
+                if (bookCount > 0)
+                {
+                    Item.UseSound = SoundID.Item9;
+                    return base.CanUseItem(player);
+                }
+                return false;
             }
-            else
+            else if (bookCount < 3)
             {
                 Item.UseSound = SoundID.Item8;
+                return base.CanUseItem(player);
             }
-            return base.CanUseItem(player);
+            return false;
         }
 
         public override bool CanShoot(Player player)
@@ -75,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             }
             float rot = (Main.MouseWorld - player.Center).ToRotation();
             Vector2 vel = new Vector2(5f, 0f).RotatedBy(rot);
-            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, Item.damage, 0, player.whoAmI, 0, 7);
+            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, Item.damage, knockback, player.whoAmI, 0, 7);
             return false;
         }
     }
