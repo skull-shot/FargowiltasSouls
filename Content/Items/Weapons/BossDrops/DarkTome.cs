@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override void SetDefaults()
         {
             Item.noMelee = true;
-            Item.damage = 36;
+            Item.damage = 28;
             Item.DamageType = DamageClass.Magic;
             Item.mana = 40;
             Item.rare = ItemRarityID.Orange;
