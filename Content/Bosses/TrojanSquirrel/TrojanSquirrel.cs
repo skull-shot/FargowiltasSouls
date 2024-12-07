@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         protected int baseWidth;
         protected int baseHeight;
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -230,7 +229,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         private const float BaseWalkSpeed = 4f;
         string TownNPCName;
-
+        bool hasplayedbreaksound;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -837,6 +836,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             if (WorldSavingSystem.EternityMode)
             {
+                
                 bool wasImmune = NPC.dontTakeDamage;
                 NPC.dontTakeDamage = NPC.life < NPC.lifeMax / 2 && (head != null || arms != null);
 
@@ -903,6 +903,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     }
                 }
             }
+
+            // to prevent a bug where he played the sound again.
+            if (NPC.life < NPC.lifeMax / 2 && hasplayedbreaksound == false && (arms != null || head != null))
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.TrojanLegsDeath, NPC.Center);
+                hasplayedbreaksound = true;
+            }
         }
 
         private void ExplodeAttack()
@@ -928,7 +935,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         private void ExplodeDust(Vector2 center)
         {
-            SoundEngine.PlaySound(FargosSoundRegistry.TrojanLegsDeath, center);
+            
 
             const int width = 32;
             const int height = 32;

@@ -8,11 +8,15 @@ using Microsoft.Xna.Framework;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Assets.ExtraTextures;
 using Terraria.Audio;
+using Terraria.DataStructures;
+//using System.Drawing;
+using Terraria.GameContent;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class BloodScytheFriendly : ModProjectile//, IPixelatedPrimitiveRenderer
     {
+        int randomize;
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla1";
         public override void SetStaticDefaults()
         {
@@ -23,29 +27,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             return Color.Red * Projectile.Opacity;
         }
-        /*public float WidthFunction(float completionRatio)
-        {
-            float baseWidth = Projectile.scale * Projectile.width * 1.3f;
-            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
-        }
-
-        public static Color ColorFunction(float completionRatio)
-        {
-            return Color.Lerp(Color.Red, Color.Transparent, completionRatio) * 0.7f;
-        }
-
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
-            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
-
-            Vector2 glowDrawPosition = Projectile.Center;
-
-            Main.EntitySpriteDraw(glowTexture, glowDrawPosition, null, Color.Teal, Projectile.rotation, glowTexture.Size() * 0.5f, Projectile.scale * 0.4f, SpriteEffects.None, 0);
-        }
-        */
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.DemonScythe);
@@ -87,6 +68,19 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Main.dust[d].velocity = Projectile.velocity / velrando;
             Main.dust[d].noGravity = true;
             Main.dust[d].scale = 1.2f;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            randomize += Main.rand.Next(1, 4);
+            base.OnSpawn(source);
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla" + randomize).Value;
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, Color.DarkRed, Projectile.rotation, texture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+            return false;
         }
     }
 }
