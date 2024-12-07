@@ -60,6 +60,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public static void OnGraze(FargoSoulsPlayer fargoPlayer, int damage)
         {
+            int damagecap = 400;
+            damage = Math.Clamp(damage, 0, damagecap);
             fargoPlayer.CirnoGrazeCounter += damage;
             if (fargoPlayer.CirnoGrazeCounter > CIRNO_GRAZE_MAX)
                 fargoPlayer.CirnoGrazeCounter = CIRNO_GRAZE_MAX;
@@ -68,7 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 Projectile.NewProjectile(fargoPlayer.Player.GetSource_Misc(""), fargoPlayer.Player.Center, Vector2.Zero, ModContent.ProjectileType<CirnoBomb>(), 0, 0f, Main.myPlayer);
             }
 
-            CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/IceQueensCrown").Value, Color.Cyan, () => fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
+            CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/IceQueensCrown").Value, Color.Cyan, () => (float)fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
 
             if (!Main.dedServ)
             {
