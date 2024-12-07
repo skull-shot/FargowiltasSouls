@@ -47,8 +47,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.light = 0.4f;
             Projectile.tileCollide = false;
-            Projectile.width = 75;
-            Projectile.height = 75;
+            Projectile.width = 40;
+            Projectile.height = 90;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 60;
@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 {
                     //Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.8f, 1 / 60f); ;
                 }
-                if (Projectile.ai[1] >= 10)
+                if (Projectile.ai[1] >= 15)
                 {
                     Projectile.ai[0] = 1;
                     Projectile.ai[1] = 0;
@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 {
                     Projectile.extraUpdates = 0;
                     Projectile.timeLeft = 2;
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 1 / 60f);
 
                     //kill when back to player
                     if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
@@ -176,9 +176,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
             if (n.Alive())
             {
-                Particle p1 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
-                Particle p2 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
-                Particle p3 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
+                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
                 p1.Spawn();
                 p2.Spawn();
                 p3.Spawn();
@@ -270,22 +270,22 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
 
 
-            if (Projectile.ai[0] == 2)
-            {
-                Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 1.3f, SpriteEffects.None, 0);
-            }
-            if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
-            {
-                Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, scale, SpriteEffects.None, 0);
-            }
+            /*if (Projectile.ai[0] == 2)
+              {
+                  Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
+              }
+              if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
+              {
+                  Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
+            }*/
 
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
 
         public float WidthFunction(float completionRatio)
         {
-            float baseWidth = Projectile.width * 0.8f;
+            float baseWidth = Projectile.width * 1.4f;
             return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
         }
 

@@ -25,9 +25,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.DamageType = DamageClass.Melee;
             Item.width = 30;
             Item.height = 30;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
-            Item.reuseDelay = 20;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.reuseDelay = 25;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;

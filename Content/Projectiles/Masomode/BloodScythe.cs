@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,6 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class BloodScythe : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        int randomize;
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla1";
 
         public bool recolor => SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode && Projectile.ai[2] != 1;
@@ -23,6 +25,12 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             ProjectileID.Sets.TrailingMode[Type] = 1;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            randomize += Main.rand.Next(1, 4);
+            base.OnSpawn(source);
         }
 
         public override void SetDefaults()
@@ -94,7 +102,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
         public override bool PreDraw(ref Color lightColor)
         {   
-            Texture2D texture = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScythe1").Value : TextureAssets.Projectile[Type].Value;
+            Texture2D texture = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScythe" + randomize).Value : ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla" + randomize).Value;
             Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center + Projectile.velocity / 10f;

@@ -74,6 +74,8 @@ namespace FargowiltasSouls.Assets.Sounds
         // Deviantt
         public static readonly SoundStyle DeviSwing = new(SoundsPath + "Siblings/Deviantt/DeviSwing");
         public static readonly SoundStyle DeviHeartExplosion = new(SoundsPath + "Siblings/Deviantt/DeviHeartExplosion");
+        public static readonly SoundStyle DeviTeleport = new(SoundsPath + "Siblings/Deviantt/DeviTeleport");
+        public static readonly SoundStyle DeviDeathray = new(SoundsPath + "Siblings/Deviantt/DeviDeathray");
 
         // Mutant
         public static readonly SoundStyle MutantUnpredictive = new(SoundsPath + "Siblings/Mutant/MutantUnpredictive");
