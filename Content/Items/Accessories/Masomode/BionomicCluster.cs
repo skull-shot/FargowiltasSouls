@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -131,6 +132,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
         public override bool? UseItem(Player player) => true;
+
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<BionomicClusterInactive>());
+            return false;
+        }
 
         public override void AddRecipes()
         {
@@ -279,6 +287,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
         public override bool? UseItem(Player player) => true;
+
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<BionomicCluster>());
+            return false;
+        }
 
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
