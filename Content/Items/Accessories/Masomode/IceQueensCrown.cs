@@ -49,6 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 fargoPlayer.Graze = true;
                 fargoPlayer.CirnoGraze = true;
+                player.AddEffect<BombKeyEffect>(item);
             }
             player.AddEffect<MasoGrazeRing>(item);
             if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
@@ -99,5 +100,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
         public override bool MutantsPresenceAffects => true;
 
+    }
+    public class BombKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().BombKey();
+        }
     }
 }

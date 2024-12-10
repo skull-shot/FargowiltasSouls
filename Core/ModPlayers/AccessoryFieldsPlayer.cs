@@ -268,7 +268,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
-        public Item FrigidGemstoneItem;
         public int FrigidGemstoneCD;
         public int WretchedPouchCD;
         public bool NymphsPerfume;
@@ -280,7 +279,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
-        public bool CanAmmoCycle;
         public bool TribalCharm;
         public bool TribalCharmEquipped;
         public bool TribalCharmClickBonus;

@@ -1572,7 +1572,7 @@ namespace FargowiltasSouls.Content.Projectiles
             if (AdamModifier != 0)
                 ReduceIFrames(projectile, target, AdamModifier);
 
-            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].FargoSouls().FrigidGemstoneItem != null)
+            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
             {
                 target.AddBuff(BuffID.Frostburn, 360);
             }

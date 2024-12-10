@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
         }
     }
     public class AgitatingLensEffect : AccessoryEffect
@@ -65,5 +66,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<AgitatingLens>();
         
+    }
+    public class DebuffInstallKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().DebuffInstallKey();
+        }
     }
 }

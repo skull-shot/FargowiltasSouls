@@ -27,17 +27,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateInventory(Player player)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
         }
 
         public override void UpdateVanity(Player player)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
 
             player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[BuffID.VortexDebuff] = true;
@@ -56,5 +56,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 player.AddBuff(ModContent.BuffType<SaucerMinionBuff>(), 2);
         }
 
+    }
+    public class AmmoCycleEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            player.FargoSouls().AmmoCycleKey();
+        }
     }
 }

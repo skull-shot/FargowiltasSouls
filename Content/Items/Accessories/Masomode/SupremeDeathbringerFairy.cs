@@ -48,6 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //player.GetDamage(DamageClass.Generic) += 0.1f;
             player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;

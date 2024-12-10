@@ -354,7 +354,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             MasochistHeart = false;
             SandsofTime = false;
             SecurityWallet = false;
-            FrigidGemstoneItem = null;
             NymphsPerfume = false;
             NymphsPerfumeRespawn = false;
             RainbowSlime = false;
@@ -362,7 +361,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IceQueensCrown = false;
             CirnoGraze = false;
             MiniSaucer = false;
-            CanAmmoCycle = false;
             TribalCharm = false;
             TribalCharmEquipped = false;
             SupremeDeathbringerFairy = false;

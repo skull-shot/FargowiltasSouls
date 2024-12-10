@@ -1,10 +1,12 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Fargowiltas.FargoSets;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
@@ -38,6 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //player.buffImmune[ModContent.BuffType<Buffs.Boss.MutantPresence>()] = true;
 
             fargoPlayer.MutantEyeItem = Item;
+            player.AddEffect<BombKeyEffect>(Item);
             if (!hideVisual)
                 fargoPlayer.MutantEyeVisual = true;
 

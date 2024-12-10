@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Fargowiltas.FargoSets;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
@@ -39,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             BionomicCluster.PassiveEffect(player, Item);
 
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
             player.AddEffect<ChalicePotionEffect>(Item);
         }
 
@@ -87,6 +88,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //agitating lens
             //player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
             //player.honey = true;
@@ -220,6 +222,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.FusedLens = true;
             fargoPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
             player.AddEffect<GroundStickDR>(Item);
             player.noKnockback = true;
             if (player.onFire2)
@@ -230,6 +233,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //magical bulb
             player.buffImmune[BuffID.Venom] = true;
             fargoPlayer.MagicalBulb = true;
+            player.AddEffect<BulbKeyEffect>(Item);
 
             //ice queen's crown
             IceQueensCrown.AddEffects(player, Item);

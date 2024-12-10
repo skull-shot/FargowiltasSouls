@@ -103,23 +103,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), Player.Center);
                 }
-                /*else if (Player.HasEffect<SnowEffect>() && !Player.HasBuff(ModContent.BuffType<SnowstormCDBuff>())
-                    && !Player.HasBuff(ModContent.BuffType<MutantPresenceBuff>()))
-                {
-                    Player.AddBuff(ModContent.BuffType<SnowstormCDBuff>(), 60 * 60);
-
-                    ChillSnowstorm = true;
-                    chillLength = CHILL_DURATION;
-
-                    SoundEngine.PlaySound(SoundID.Item27, Player.Center);
-
-                    for (int i = 0; i < 30; i++)
-                    {
-                        int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.GemSapphire, 0, 0, 0, default, 3f);
-                        Main.dust[d].noGravity = true;
-                        Main.dust[d].velocity *= 9f;
-                    }
-                }*/
             }
 
             if (PrecisionSeal)
@@ -141,16 +124,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[3] = 0;
             }
 
-            if (FargowiltasSouls.AmmoCycleKey.JustPressed && CanAmmoCycle)
+            if (FargowiltasSouls.AmmoCycleKey.JustPressed && Player.HasEffect<AmmoCycleEffect>())
                 AmmoCycleKey();
 
             if (FargowiltasSouls.SoulToggleKey.JustPressed)
                 FargoUIManager.ToggleSoulToggler();
 
-            if (FargowiltasSouls.GoldKey.JustPressed && Player.HasEffect<GoldEffect>())
-            {
+            if (FargowiltasSouls.GoldKey.JustPressed && Player.HasEffect<GoldKeyEffect>())
                 GoldKey();
-            }
 
             #endregion
 
@@ -170,7 +151,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (FargowiltasSouls.MagicalBulbKey.JustPressed && MagicalBulb)
                 MagicalBulbKey();
 
-            if (FrigidGemstoneItem != null)
+            if (Player.HasEffect<FrigidGemstoneKeyEffect>())
             {
                 if (FrigidGemstoneCD > 0)
                     FrigidGemstoneCD--;

@@ -40,6 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // gold
             player.AddEffect<GoldToPiggy>(Item);
             player.AddEffect<GoldEffect>(Item);
+            player.AddEffect<GoldKeyEffect>(Item);
             // platinum
             modPlayer.PlatinumEffect = Item;
             // red riding
@@ -54,6 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 player.AddEffect<GladiatorSpears>(Item);
                 player.AddEffect<GoldEffect>(Item);
+                player.AddEffect<GoldKeyEffect>(Item);
                 player.AddEffect<RedRidingEffect>(Item);
             }
         }

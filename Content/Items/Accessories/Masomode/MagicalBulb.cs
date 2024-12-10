@@ -51,6 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             }
 
             player.FargoSouls().MagicalBulb = true;
+            player.AddEffect<BulbKeyEffect>(item);
         }
     }
     public class PlantMinionEffect : AccessoryEffect
@@ -62,6 +63,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())
                 player.AddBuff(ModContent.BuffType<PlanterasChildBuff>(), 2);
+        }
+    }
+    public class BulbKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().MagicalBulbKey();
         }
     }
 }

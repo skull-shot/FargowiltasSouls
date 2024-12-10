@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             fargoPlayer.NymphsPerfumeRespawn = true;
             fargoPlayer.ConcentratedRainbowMatter = true;
             player.AddEffect<RainbowHealEffect>(item);
-            fargoPlayer.FrigidGemstoneItem = item;
+            player.AddEffect<FrigidGemstoneKeyEffect>(item);
             player.AddEffect<StabilizedGravity>(item);
         }
 
@@ -214,7 +214,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             fargoPlayer.NymphsPerfumeRespawn = true;
             fargoPlayer.ConcentratedRainbowMatter = true;
             player.AddEffect<RainbowHealEffect>(item);
-            fargoPlayer.FrigidGemstoneItem = item;
+            player.AddEffect<FrigidGemstoneKeyEffect>(item);
             player.AddEffect<StabilizedGravity>(item);
         }
 

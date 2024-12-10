@@ -54,6 +54,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool ActiveSkill => true;
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
+            if (stunned)
+                return;
             player.FargoSouls().SpecialDashKey();
         }
     }

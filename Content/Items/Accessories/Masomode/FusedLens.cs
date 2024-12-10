@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.FargoSouls().FusedLens = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             if (player.onFire2)
                 player.FargoSouls().AttackSpeed += 0.15f;

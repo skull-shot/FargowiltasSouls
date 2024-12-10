@@ -248,7 +248,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Main.hardMode)
                 damage = 0;
 
-            Projectile.NewProjectile(Player.GetSource_Accessory(FrigidGemstoneItem), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGemstoneKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
         }
 
 

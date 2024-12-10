@@ -36,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<GoldEffect>(Item);
+            player.AddEffect<GoldKeyEffect>(Item);
             player.AddEffect<GoldToPiggy>(Item);
         }
         public override void AddRecipes()
@@ -61,6 +62,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             target.AddBuff(BuffID.Midas, 120, true);
+        }
+    }
+    public class GoldKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().GoldKey();
         }
     }
     public class GoldToPiggy : AccessoryEffect
