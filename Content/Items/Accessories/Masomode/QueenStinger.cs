@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -40,9 +41,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             // Stringer immune
             player.FargoSouls().QueenStingerItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
 
             if (player.honey)
                 player.GetArmorPenetration(DamageClass.Generic) += 10;
+        }
+    }
+
+    public class SpecialDashEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            player.FargoSouls().SpecialDashKey();
         }
     }
 }

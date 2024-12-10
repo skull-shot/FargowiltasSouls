@@ -65,6 +65,13 @@ namespace FargowiltasSouls
         internal static ModKeybind DebuffInstallKey;
         internal static ModKeybind AmmoCycleKey;
 
+        internal static ModKeybind ActiveSkill1Key;
+        internal static ModKeybind ActiveSkill2Key;
+        internal static ModKeybind ActiveSkill3Key;
+        internal static ModKeybind ActiveSkill4Key;
+        internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
+
+
         public static List<int> DebuffIDs;
 
         internal static FargowiltasSouls Instance;
@@ -124,6 +131,11 @@ namespace FargowiltasSouls
             FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
             DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
             AmmoCycleKey = KeybindLoader.RegisterKeybind(this, "AmmoCycle", "L");
+
+            ActiveSkill1Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill1", "Z");
+            ActiveSkill2Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill2", "X");
+            ActiveSkill3Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill3", "C");
+            ActiveSkill4Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill4", "V");
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();
@@ -242,6 +254,11 @@ namespace FargowiltasSouls
             FrigidSpellKey = null;
             DebuffInstallKey = null;
             AmmoCycleKey = null;
+
+            ActiveSkill1Key = null;
+            ActiveSkill2Key = null;
+            ActiveSkill3Key = null;
+            ActiveSkill4Key = null;
 
             DebuffIDs?.Clear();
 

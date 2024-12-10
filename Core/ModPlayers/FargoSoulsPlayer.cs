@@ -91,6 +91,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool BossAliveLastFrame = false;
 
+        public AccessoryEffect[] ActiveSkills = new AccessoryEffect[4];
+
         public override void SaveData(TagCompound tag)
         {
             var playerData = new List<string>();

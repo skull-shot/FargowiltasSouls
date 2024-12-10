@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -13,6 +14,23 @@ namespace FargowiltasSouls.Core.ModPlayers
     {
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
+            bool stunned = GoldShell || SpectreGhostTime > 0 || Player.CCed || NoUsingItems > 0;
+            
+            var keys = FargowiltasSouls.ActiveSkillKeys;
+            for (int i = 0; i < keys.Length; i++)
+            {
+                var key = keys[i];
+                var skill = ActiveSkills[i];
+                if (skill == null || !Player.AccessoryEffects().Active(skill))
+                    continue;
+                if (key.JustPressed)
+                    skill.ActiveSkillJustPressed(Player, stunned);
+                if (key.Current)
+                    skill.ActiveSkillHeld(Player, stunned);
+                if (key.JustReleased)
+                    skill.ActiveSkillJustReleased(Player, stunned);
+            }
+
             #region ignores stuns
 
             if (Mash)
@@ -136,7 +154,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             #endregion
 
-            if (GoldShell || SpectreGhostTime > 0 || Player.CCed || NoUsingItems > 0)
+            if (stunned)
             {
                 return;
             }
