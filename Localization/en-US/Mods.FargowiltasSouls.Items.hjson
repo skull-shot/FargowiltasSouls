@@ -2504,7 +2504,7 @@ NatureChampionRelic: {
 }
 
 ShadowChampionRelic: {
-	DisplayName: Shadow Champion Relic
+	DisplayName: Death Champion Relic
 	Tooltip: ""
 }
 
