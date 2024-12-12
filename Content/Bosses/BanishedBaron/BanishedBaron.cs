@@ -1296,6 +1296,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     }
                 }
             }
+            /*
             if ((Timer == 90 + ReactionTime + 15 || Timer == 90 + ReactionTime + 30) && WorldSavingSystem.EternityMode && AI3 != 1)
             {
                 SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
@@ -1306,6 +1307,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 3, player.whoAmI, trackingPower); //ai2 is tracking power, above 1 is pseudo-predictive
                 }
             }
+            */
             if (Timer > 90 + ReactionTime + 30 && NPC.velocity.Length() < 1.5f)
             {
                 NPC.noTileCollide = false;
@@ -1667,9 +1669,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         void P2RocketStorm()
         {
-            const int distance = 500;
+            const int distance = 620;
             float rotModifier = 1;
-            float minRot = 0.5f;
+            float minRot = 0.2f;
             if (Timer == 1)
             {
                 AI2 = Math.Sign(NPC.Center.X - player.Center.X);
@@ -1704,7 +1706,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
                 }
                 */
-                Movement(target, 30f, 2f);
+                Movement(target, 16f, 1.2f);
                 if (Timer > 2)
                 {
                     Timer = 2;
@@ -1716,14 +1718,39 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Movement(target, 20f, 0.75f);
             }
 
-
             if (AI3 != 0 && Timer < 300)
             {
 
-                bool volleyTime = (Timer > 40 && Timer < 100) || (Timer > 140 && Timer < 200) || (Timer > 240 && Timer < 300);
+                bool volleyTime = (Timer > 30 && Timer < 70) || (Timer > 85 && Timer < 125) || (Timer > 140 && Timer < 180);
+                bool volleyTimeReal = (Timer == 35 || Timer == 90 || Timer == 145);
                 if (volleyTime)
                 {
                     Anim = 1;
+                    if (volleyTimeReal)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            int bothSides = (Timer > 140) ? -2 : 0; // third barrage fires from both sides
+                            for (int j = 1; j > bothSides; j -= 2)
+                            {
+                                for (int i = 0; i < 7; i++)
+                                {
+                                    int side = (Timer > 70 && Timer < 140) ? -1 : 1;
+                                    side *= j;
+                                    float minspeed = (Timer > 140) ? 14f : 3f;
+                                    float speed = Main.rand.NextFloat(minspeed, 32);
+    
+                                    Vector2 vel = NPC.rotation.ToRotationVector2().RotatedBy(MathHelper.PiOver2 * side).RotatedByRandom(MathHelper.Pi / 8) * speed;
+                                    float trackingPower = WorldSavingSystem.MasochistModeReal ? 1 : 1;
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + (Vector2.Normalize(vel) * 20), vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 5, player.whoAmI, trackingPower); //ai2 is tracking power
+                                }
+                            }
+     
+                        }
+                            
+                    }
+                    /*
                     if (Timer % 8 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
@@ -1736,6 +1763,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + (Vector2.Normalize(vel) * 20), vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, player.whoAmI, trackingPower); //ai2 is tracking power
                         }
                     }
+                    */
                 }
                 else
                 {
@@ -1744,11 +1772,11 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 //fire rockets
             }
 
-            if (Timer > 300)
+            if (Timer > 200)
             {
                 Anim = 0;
             }
-            if (Timer > 310)
+            if (Timer > 210)
             {
                 NPC.velocity = Vector2.Zero;
                 StateReset();
