@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -11,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Tome : ModProjectile
     {
-
+        #region References
         /*
          * 0 = initial deployment
          * 1 = wind up
@@ -21,6 +23,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public ref float state => ref Projectile.ai[0];
         public ref float projCount => ref Projectile.ai[1];
         public ref float timer => ref Projectile.ai[2];
+        #endregion
 
         public override void SetStaticDefaults()
         {
@@ -44,6 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void AI()
         {
             float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
+            timer++;
             Frame();
             Projectile.rotation = rot + MathHelper.Pi;
             if (state == 3 || Projectile.timeLeft <= 20)
@@ -53,12 +57,18 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.Opacity -= 1 / 40f;
                 return;
             }
+            if (timer % 22 == 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item24 with { Volume = 0.4f }, Projectile.Center);
+            }
             Player player = Main.player[Projectile.owner];
             Lighting.AddLight(Projectile.Center, TorchID.Shimmer);
             if (state == 0)
             {
-                if (player.altFunctionUse == 2 && player.HeldItem.type == ModContent.ItemType<DarkTome>())
+                if (!player.channel && player.HeldItem.type == ModContent.ItemType<DarkTome>() && state == 0 && !player.controlUseItem)
                 {
+                    SoundEngine.PlaySound(SoundID.Item9, Projectile.Center);
+                    timer = 0;
                     state = 1;
                 }
                 Vector2 vectorToMousePosition = Projectile.position - Main.MouseWorld;
@@ -74,11 +84,20 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 {
                     Projectile.velocity *= 0.97f;
                 }
+
+                // Prevent books from stacking on top of each other
+                IEnumerable<Projectile> projs = Main.projectile.Where(p => p.active && p.type == ModContent.ProjectileType<Tome>() && p.whoAmI != Projectile.whoAmI);
+                foreach (Projectile p in projs)
+                {
+                    if (p.Center.Distance(Projectile.Center) < 16 && state == 0)
+                    {
+                        p.velocity -= 0.1f * p.SafeDirectionTo(Projectile.Center);
+                    }
+                }
+
                 return;
             }
 
-            // Timer only starts after right click
-            timer++;
             if (state == 1 && timer < 8)
             {
                 Projectile.velocity *= 0.90f;

@@ -3744,8 +3744,8 @@ DarkTome: {
 	DisplayName: Dark Tome
 	Tooltip:
 		'''
-		Summons up to 3 spectral books that chase your cursor
-		Right click to make the books release a volley of pages
+		Hold left click to summon up to 3 spectral books that chase your cursor
+		Release left click to make the books release a volley of pages
 		'The arcane grimoire of a defeated foe...'
 		'''
 }
