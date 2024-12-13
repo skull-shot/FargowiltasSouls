@@ -36,10 +36,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.direction = NPC.spriteDirection = body.direction;
             NPC.Center = body.Bottom + new Vector2(18f * NPC.direction, -105f) * body.scale;
 
-            if (NPC.ai[0] != 1 && Loop.HasLoopSoundBeenStarted == true)
+            if (NPC.ai[0] != 1 && Loop?.HasLoopSoundBeenStarted == true)
             {
                 looptimer = 0;
-                Loop.Stop();
+                Loop?.Stop();
             }
 
             switch ((int)NPC.ai[0])
@@ -95,11 +95,11 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 return NPC.ai[0] != 1 || !NPC.active;
                             });
 
-                            Loop.Update(NPC.Center);
+                            Loop?.Update(NPC.Center);
 
-                            if (Loop.HasBeenStopped && Loop.HasLoopSoundBeenStarted == true)
+                            if (Loop?.HasBeenStopped == true && Loop?.HasLoopSoundBeenStarted == true)
                             {
-                                Loop.Restart();
+                                Loop?.Restart();
                             }
                         }
 
@@ -153,8 +153,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         NPC.ai[1]++;
 
-                        
-
                         int start = 70;
                         int end = 340;
                         if (WorldSavingSystem.EternityMode)
@@ -185,7 +183,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                         if (NPC.ai[1] > start && NPC.ai[1] % 4 == 0)
                         {
-                            SoundEngine.PlaySound(FargosSoundRegistry.MinigunMaso, GetShootPos());
+                            SoundEngine.PlaySound(FargosSoundRegistry.Minigun, GetShootPos());
                             if (NPC.ai[1] % 8 == 0)
                             {
                                 Vector2 pos = GetShootPos();

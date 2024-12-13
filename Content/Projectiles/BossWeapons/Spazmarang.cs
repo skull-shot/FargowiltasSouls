@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if (n.Alive())
                 {
                     Projectile.velocity += n.velocity;
-                    Projectile.Center = n.Center;
+                    //Projectile.Center = n.Center;
                 }
 
                 if (Projectile.timeLeft <= 10)
@@ -120,9 +120,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
                     {
 
-                        Particle p1 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
-                        Particle p2 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
-                        Particle p3 = new SparkParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 1f, 25);
+                        Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                        Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                        Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
                         p1.Spawn();
                         p2.Spawn();
                         p3.Spawn();
