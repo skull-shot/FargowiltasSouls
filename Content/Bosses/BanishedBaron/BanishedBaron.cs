@@ -764,7 +764,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         void Phase2Transition()
         {
-
+            HitPlayer = false;
             const int transTime = 150;
             //comedy rotation anim to look at falling propeller
             if (Timer < 60)
@@ -857,7 +857,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         void DeathAnimation()
         {
             const int AnimTime = 200;
-
+            HitPlayer = false;
             Main.musicFade[Main.curMusic] = (float)Utils.Lerp(1f, 0.3f, Timer / AnimTime);
             NPC.velocity *= 0.96f;
             Trail = 8;
