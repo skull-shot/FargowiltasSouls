@@ -33,6 +33,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             #region ignores stuns
 
+            if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
+                FargoUIManager.ToggleActiveSkillMenu();
+
             if (Mash)
             {
                 Player.doubleTapCardinalTimer[0] = 0;

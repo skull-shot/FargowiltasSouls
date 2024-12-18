@@ -18,11 +18,15 @@ namespace FargowiltasSouls.Content.UI
 
         public static UserInterface TogglerToggleUserInterface { get; private set; }
 
+        public static UserInterface ActiveSkillUserInterface { get; private set; }
+
         public static UserInterface CooldownBarUserInterface { get; private set; }
 
         public static SoulToggler SoulToggler { get; private set; }
 
         public static SoulTogglerButton SoulTogglerButton { get; private set; }
+
+        public static ActiveSkillMenu ActiveSkillMenu { get; private set; }
 
         public static CooldownBarManager CooldownBarManager { get; private set; }
 
@@ -87,6 +91,7 @@ namespace FargowiltasSouls.Content.UI
                 // Initialize UserInterfaces
                 TogglerUserInterface = new();
                 TogglerToggleUserInterface = new();
+                ActiveSkillUserInterface = new();
                 CooldownBarUserInterface = new();
 
                 // Activate UIs
@@ -94,6 +99,8 @@ namespace FargowiltasSouls.Content.UI
                 SoulToggler.Activate();
                 SoulTogglerButton = new();
                 SoulTogglerButton.Activate();
+                ActiveSkillMenu = new();
+                ActiveSkillMenu.Activate();
                 CooldownBarManager = new();
                 CooldownBarManager.Activate();
 
@@ -141,6 +148,25 @@ namespace FargowiltasSouls.Content.UI
         public static void CloseSoulTogglerButton() => TogglerToggleUserInterface.SetState(null);
         public static void OpenSoulTogglerButton() => TogglerToggleUserInterface.SetState(SoulTogglerButton);
 
+        public static void ToggleActiveSkillMenu()
+        {
+            if (ActiveSkillUserInterface.CurrentState != null)
+            {
+                SoundEngine.PlaySound(SoundID.MenuClose);
+                CloseActiveSkillMenu();
+            }
+            else
+            {
+                ActiveSkillMenu = new();
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+                OpenActiveSkillMenu();
+            }
+                
+        }
+
+        public static void OpenActiveSkillMenu() => ActiveSkillUserInterface.SetState(ActiveSkillMenu);
+        public static void CloseActiveSkillMenu() => ActiveSkillUserInterface.SetState(null);
+
         public static void ToggleSoulToggler()
         {
             if (IsSoulTogglerOpen())
@@ -179,6 +205,14 @@ namespace FargowiltasSouls.Content.UI
                 {
                     if (LastUpdateUIGameTime != null && CooldownBarUserInterface?.CurrentState != null)
                         CooldownBarUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
+
+                    return true;
+                }, InterfaceScaleType.UI));
+
+                layers.Insert(index + 1, new LegacyGameInterfaceLayer("Fargos: Active Skill Menu", delegate
+                {
+                    if (LastUpdateUIGameTime != null && ActiveSkillUserInterface?.CurrentState != null)
+                        ActiveSkillUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
 
                     return true;
                 }, InterfaceScaleType.UI));

@@ -69,6 +69,7 @@ namespace FargowiltasSouls
         internal static ModKeybind ActiveSkill2Key;
         internal static ModKeybind ActiveSkill3Key;
         internal static ModKeybind ActiveSkill4Key;
+        internal static ModKeybind ActiveSkillMenuKey;
         internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
 
 
@@ -136,6 +137,7 @@ namespace FargowiltasSouls
             ActiveSkill2Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill2", "X");
             ActiveSkill3Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill3", "C");
             ActiveSkill4Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill4", "V");
+            ActiveSkillMenuKey = KeybindLoader.RegisterKeybind(this, "ActiveSkillMenu", "N");
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();
@@ -259,6 +261,7 @@ namespace FargowiltasSouls
             ActiveSkill2Key = null;
             ActiveSkill3Key = null;
             ActiveSkill4Key = null;
+            ActiveSkillMenuKey = null;
 
             DebuffIDs?.Clear();
 
