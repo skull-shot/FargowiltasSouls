@@ -126,6 +126,8 @@ namespace FargowiltasSouls.Content.UI
                 TogglerUserInterface.Update(gameTime);
             if (TogglerToggleUserInterface?.CurrentState != null)
                 TogglerToggleUserInterface.Update(gameTime);
+            if (ActiveSkillUserInterface.CurrentState != null)
+                ActiveSkillUserInterface.Update(gameTime);
         }
 
         public static bool IsSoulTogglerOpen() => TogglerUserInterface?.CurrentState == null;

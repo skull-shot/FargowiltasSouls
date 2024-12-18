@@ -1,15 +1,24 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Assets.UI;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Essences;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -22,15 +31,21 @@ namespace FargowiltasSouls.Content.UI
         public static int BackWidth => 300;
         public static int BackHeight => 520;
 
-        public FargoUIDragablePanel BackPanel;
+        public UIPanel BackPanel;
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
+
+        public static UIPanel MouseHeldElement = null;
+        public static bool ShouldRefresh;
+
+        public static int EquippedPanelHeight = 80;
+        public static int Outline = 6;
 
         public override void OnInitialize()
         {
             Vector2 offset = new(Main.screenWidth / 2f + BackWidth / 2, Main.screenHeight / 2f - 200);
 
-            BackPanel = new FargoUIDragablePanel();
+            BackPanel = new UIPanel();
             BackPanel.Left.Set(-BackWidth - 300, 1f);
             BackPanel.Top.Set(offset.Y, 0);
             BackPanel.Width.Set(BackWidth, 0);
@@ -38,21 +53,18 @@ namespace FargowiltasSouls.Content.UI
             BackPanel.PaddingLeft = BackPanel.PaddingRight = BackPanel.PaddingTop = BackPanel.PaddingBottom = 0;
             BackPanel.BackgroundColor = new Color(29, 33, 70) * 0.7f;
 
-            float equippedPanelHeight = 80;
-            float outline = 6;
-
             EquippedPanel = new UIPanel();
-            EquippedPanel.Width.Set(BackWidth - outline * 2, 0);
-            EquippedPanel.Height.Set(equippedPanelHeight, 0);
-            EquippedPanel.Left.Set(outline, 0);
-            EquippedPanel.Top.Set(outline, 0);
+            EquippedPanel.Width.Set(BackWidth - Outline * 2, 0);
+            EquippedPanel.Height.Set(EquippedPanelHeight, 0);
+            EquippedPanel.Left.Set(Outline, 0);
+            EquippedPanel.Top.Set(Outline, 0);
             EquippedPanel.BackgroundColor = new Color(73, 94, 171) * 0.9f;
 
             AvailablePanel = new UIPanel();
-            AvailablePanel.Width.Set(BackWidth - outline * 2, 0);
-            AvailablePanel.Height.Set(BackHeight - equippedPanelHeight - outline * 3, 0);
-            AvailablePanel.Left.Set(outline, 0);
-            AvailablePanel.Top.Set(equippedPanelHeight + outline * 2, 0);
+            AvailablePanel.Width.Set(BackWidth - Outline * 2, 0);
+            AvailablePanel.Height.Set(BackHeight - EquippedPanelHeight - Outline * 3, 0);
+            AvailablePanel.Left.Set(Outline, 0);
+            AvailablePanel.Top.Set(EquippedPanelHeight + Outline * 2, 0);
             AvailablePanel.BackgroundColor = new Color(73, 94, 171) * 0.9f;
 
             Append(BackPanel);
@@ -69,54 +81,72 @@ namespace FargowiltasSouls.Content.UI
             title2.Top.Set(AvailablePanel.Top.Pixels, 0);
             BackPanel.Append(title2);
 
+            UpdateSkillList();
+
+            base.OnInitialize();
+        }
+        public void UpdateSkillList()
+        {
+            EquippedPanel.RemoveAllChildren();
+            AvailablePanel.RemoveAllChildren();
+
             // Equipped boxes
             float spacing = 6;
             float boxWidth = 42;
-            float boxXAmt = 3; 
+            float boxXAmt = 3;
             for (int x = 0; x < boxXAmt; x++)
             {
-                var panel = new UIPanel();
+                var panel = new EquippedSkillBox(x, boxWidth);
                 panel.Width.Set(boxWidth, 0);
                 panel.Height.Set(boxWidth, 0);
                 panel.Left.Set(spacing * (x + 1) + boxWidth * x, 0);
                 panel.Top.Set(spacing, 0);
                 EquippedPanel.Append(panel);
             }
-
+            if (Main.gameMenu || Main.dedServ)
+                return;
             var equippedEffects = Main.LocalPlayer.AccessoryEffects().EquippedEffects;
-            int skills = 0;
+            Queue<AccessoryEffect> skillList = [];
             // Available boxes
             for (int i = 0; i < AccessoryEffectLoader.AccessoryEffects.Count; i++)
             {
-                if (equippedEffects[i] && AccessoryEffectLoader.AccessoryEffects[i].ActiveSkill)
-                    skills++;
+                var effect = AccessoryEffectLoader.AccessoryEffects[i];
+                if (equippedEffects[i] && effect.ActiveSkill && !Main.LocalPlayer.FargoSouls().ActiveSkills.Contains(effect))
+                {
+                    skillList.Enqueue(effect);
+                }
+
             }
-            float panelWidth = BackWidth - outline * 2;
+
+            float panelWidth = BackWidth - Outline * 2;
             boxXAmt = ((panelWidth - spacing) / (spacing + boxWidth)) - 1; // amount of boxes per row
             float height = spacing;
-            while (height < (BackHeight - equippedPanelHeight - outline * 3) - boxWidth - spacing && skills > 0)
+            while (height < (BackHeight - EquippedPanelHeight - Outline * 3) - boxWidth - spacing && skillList.Count > 0)
             {
                 for (int x = 0; x < boxXAmt; x++)
                 {
-                    var panel = new UIPanel();
+                    var skill = skillList.Dequeue();
+                    var panel = new ActiveSkillBox(skill, skill.Mod.Name, boxWidth);
                     panel.Width.Set(boxWidth, 0);
                     panel.Height.Set(boxWidth, 0);
                     panel.Left.Set(spacing * (x + 1) + boxWidth * x, 0);
                     panel.Top.Set(height, 0);
                     AvailablePanel.Append(panel);
-                    skills -= 1;
-                    if (skills <= 0)
+
+                    if (skillList.Count <= 0)
                         break;
                 }
                 height += boxWidth + spacing;
             }
-
-            base.OnInitialize();
         }
-
         public override void Update(GameTime gameTime)
         {
-            
+            base.Update(gameTime);
+            if (ShouldRefresh)
+            {
+                UpdateSkillList();
+                ShouldRefresh = false;
+            }
         }
     }
 }
