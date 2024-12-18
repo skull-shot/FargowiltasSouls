@@ -67,6 +67,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class GoldKeyEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<GoldEnchant>();
         public override bool ActiveSkill => true;
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {

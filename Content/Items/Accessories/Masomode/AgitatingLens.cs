@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -71,6 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<AgitatingLens>();
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

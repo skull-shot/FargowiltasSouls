@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -97,6 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<FrigidGemstone>();
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

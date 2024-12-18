@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -69,6 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<MagicalBulb>();
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

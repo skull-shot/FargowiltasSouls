@@ -71,6 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<StardustEnchant>();
         public const int TIMESTOP_DURATION = 60 * 6;
         public override void PostUpdateEquips(Player player)
         {

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -105,6 +106,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

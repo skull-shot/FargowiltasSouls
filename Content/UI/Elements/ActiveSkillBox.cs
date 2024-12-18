@@ -35,16 +35,28 @@ namespace FargowiltasSouls.Content.UI.Elements
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            CheckSlotElegible(Main.LocalPlayer);
             if (ContainsPoint(Main.MouseScreen))
             {
                 Main.LocalPlayer.mouseInterface = true;
             }
         }
+        public void CheckSlotElegible(Player player)
+        {
+            if (Effect != null && Effect.EffectItem(player) == null)
+            {
+                Effect = null;
+                ActiveSkillMenu.ShouldRefresh = true;
+            }
+
+        }
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
+            CheckSlotElegible(Main.LocalPlayer);
             Vector2 position = GetDimensions().Position();
             int item = -1;
+
             if (Effect != null)
             {
                 if (Effect.ToggleItemType > 0)
@@ -92,13 +104,25 @@ namespace FargowiltasSouls.Content.UI.Elements
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            CheckSlotElegible(Main.LocalPlayer);
             if (ContainsPoint(Main.MouseScreen))
             {
                 Main.LocalPlayer.mouseInterface = true;
             }
         }
+        public void CheckSlotElegible(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.ActiveSkills[Slot] != null && modPlayer.ActiveSkills[Slot].EffectItem(Main.LocalPlayer) == null)
+            {
+                modPlayer.ActiveSkills[Slot] = null;
+                ActiveSkillMenu.ShouldRefresh = true;
+                // net sync
+            }
+        }
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
+            CheckSlotElegible(Main.LocalPlayer);
             AccessoryEffect effect = Main.LocalPlayer.FargoSouls().ActiveSkills[Slot];
             base.DrawSelf(spriteBatch);
             var dims = GetDimensions();

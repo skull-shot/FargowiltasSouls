@@ -89,6 +89,7 @@ namespace FargowiltasSouls.Content.UI
         {
             EquippedPanel.RemoveAllChildren();
             AvailablePanel.RemoveAllChildren();
+            MouseHeldElement = null;
 
             // Equipped boxes
             float spacing = 6;
@@ -138,10 +139,28 @@ namespace FargowiltasSouls.Content.UI
                 }
                 height += boxWidth + spacing;
             }
+            float newHeight = height + boxWidth - spacing * 3;
+            float dif = newHeight - AvailablePanel.GetDimensions().Height;
+            AvailablePanel.Height.Set(newHeight, 0);
+            BackPanel.Height.Set(BackPanel.GetDimensions().Height + dif, 0);
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if (!BackPanel.IsMouseHovering && (Main.mouseLeft || Main.mouseRight))
+            {
+                if (Main.LocalPlayer.mouseInterface)
+                    ShouldRefresh = true;
+                /* absolutely don't enable this for netsync reasons
+                else if (MouseHeldElement != null)
+                {
+                    if (MouseHeldElement is ActiveSkillBox skillBox)
+                    {
+                        skillBox.Effect.ActiveSkillJustPressed(Main.LocalPlayer, false);
+                    }
+                }
+                */
+            }
             if (ShouldRefresh)
             {
                 UpdateSkillList();
