@@ -69,10 +69,6 @@ namespace FargowiltasSouls.Content.UI.Elements
                 }
                 else
                 {
-                    if (ActiveSkillMenu.MouseHeldElement is EquippedSkillBox mouseSkill)
-                    {
-                        Main.LocalPlayer.FargoSouls().ActiveSkills[mouseSkill.Slot] = null;
-                    }
                     ActiveSkillMenu.MouseHeldElement = null;
                     ActiveSkillMenu.ShouldRefresh = true;
                 }
@@ -130,20 +126,26 @@ namespace FargowiltasSouls.Content.UI.Elements
             Utils.DrawBorderString(spriteBatch, keyText, position + new Vector2(32, 32), Color.White);
             if (ContainsPoint(Main.MouseScreen) && Main.mouseLeft && Main.mouseLeftRelease)
             {
-                SoundEngine.PlaySound(SoundID.MenuTick);
+                FargoSoulsPlayer modPlayer = Main.LocalPlayer.FargoSouls();
                 //modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
                 //if (Main.netMode == NetmodeID.MultiplayerClient)
                 //    modPlayer.SyncToggle(Effect);
                 if (ActiveSkillMenu.MouseHeldElement == null)
                 {
-                    Main.LocalPlayer.FargoSouls().ActiveSkills[Slot] = null;
+                    if (modPlayer.ActiveSkills[Slot] != null)
+                    {
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                        modPlayer.ActiveSkills[Slot] = null;
+                    }
+                    
                     ActiveSkillMenu.ShouldRefresh = true;
                 }
                 else
                 {
                     if (ActiveSkillMenu.MouseHeldElement is ActiveSkillBox mouseSkill)
                     {
-                        Main.LocalPlayer.FargoSouls().ActiveSkills[Slot] = mouseSkill.Effect;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                        modPlayer.ActiveSkills[Slot] = mouseSkill.Effect;
                     }
                     ActiveSkillMenu.MouseHeldElement = null;
                     ActiveSkillMenu.ShouldRefresh = true;
