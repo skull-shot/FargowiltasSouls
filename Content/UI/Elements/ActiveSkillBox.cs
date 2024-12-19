@@ -118,6 +118,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                 modPlayer.ActiveSkills[Slot] = null;
                 ActiveSkillMenu.ShouldRefresh = true;
                 // net sync
+                if (Main.netMode == NetmodeID.MultiplayerClient)
+                    modPlayer.SyncActiveSkill(Slot);
             }
         }
         protected override void DrawSelf(SpriteBatch spriteBatch)
@@ -160,6 +162,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                     {
                         SoundEngine.PlaySound(SoundID.MenuTick);
                         modPlayer.ActiveSkills[Slot] = null;
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                            modPlayer.SyncActiveSkill(Slot);
                     }
                     
                     ActiveSkillMenu.ShouldRefresh = true;
@@ -170,6 +174,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                     {
                         SoundEngine.PlaySound(SoundID.MenuTick);
                         modPlayer.ActiveSkills[Slot] = mouseSkill.Effect;
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                            modPlayer.SyncActiveSkill(Slot);
                     }
                     ActiveSkillMenu.MouseHeldElement = null;
                     ActiveSkillMenu.ShouldRefresh = true;

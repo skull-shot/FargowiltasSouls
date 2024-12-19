@@ -606,6 +606,7 @@ namespace FargowiltasSouls
             SyncTogglesOnJoin,
             SyncOneToggle,
             SyncDefaultToggles,
+            SyncActiveSkill,
             SyncCanPlayMaso,
             SyncNanoCoreMode,
             //SpawnBossTryFromNPC,
@@ -755,6 +756,17 @@ namespace FargowiltasSouls
                         {
                             Player player = Main.player[reader.ReadByte()];
                             player.SetToggleValue(AccessoryEffectLoader.GetEffect(reader.ReadString()), reader.ReadBoolean());
+                        }
+                        break;
+                    case PacketID.SyncActiveSkill:
+                        {
+                            Player player = Main.player[reader.ReadByte()];
+                            int slotIndex = reader.ReadInt32();
+                            int skillIndex = reader.ReadInt32();
+                            AccessoryEffect skill = skillIndex < 0 ? null : AccessoryEffectLoader.AccessoryEffects[skillIndex];
+
+                            player.FargoSouls().ActiveSkills[slotIndex] = skill;
+
                         }
                         break;
                     case PacketID.SyncDefaultToggles:
