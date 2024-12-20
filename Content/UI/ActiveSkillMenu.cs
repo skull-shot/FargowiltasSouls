@@ -22,7 +22,6 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Header = FargowiltasSouls.Core.Toggler.Header;
 
 namespace FargowiltasSouls.Content.UI
 {

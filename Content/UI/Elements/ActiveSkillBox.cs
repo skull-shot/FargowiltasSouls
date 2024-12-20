@@ -65,26 +65,40 @@ namespace FargowiltasSouls.Content.UI.Elements
                     item = Effect.EffectItem(Main.LocalPlayer).type;
             }
             Vector2 itemPos = position + new Vector2(9, 9);
+            float scale = 1f;
             if (ActiveSkillMenu.MouseHeldElement == this)
-                itemPos = Main.MouseScreen - new Vector2(9, 9);
-            if (item > -1)
-                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos, Color.White);
-            if (ContainsPoint(Main.MouseScreen) && Main.mouseLeft && Main.mouseLeftRelease)
             {
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                //modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
-                //if (Main.netMode == NetmodeID.MultiplayerClient)
-                //    modPlayer.SyncToggle(Effect);
-                if (ActiveSkillMenu.MouseHeldElement == null)
+                scale = 1.2f * Main.cursorScale;
+                itemPos = Main.MouseScreen - new Vector2(14, 14);
+                
+            }
+            if (ContainsPoint(Main.MouseScreen))
+            {
+                if (scale == 1)
+                    scale = 1.2f;
+                if (Main.mouseLeft && Main.mouseLeftRelease)
                 {
-                    ActiveSkillMenu.MouseHeldElement = this;
-                }
-                else
-                {
-                    ActiveSkillMenu.MouseHeldElement = null;
-                    ActiveSkillMenu.ShouldRefresh = true;
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+                    //modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
+                    //if (Main.netMode == NetmodeID.MultiplayerClient)
+                    //    modPlayer.SyncToggle(Effect);
+                    if (ActiveSkillMenu.MouseHeldElement == null)
+                    {
+                        ActiveSkillMenu.MouseHeldElement = this;
+                    }
+                    else
+                    {
+                        ActiveSkillMenu.MouseHeldElement = null;
+                        ActiveSkillMenu.ShouldRefresh = true;
+                    }
                 }
             }
+            if (item > -1)
+            {
+                Vector2 scaleOffset = -Vector2.One * 10 * (scale - 1);
+                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, Color.White, scale);
+            }
+                
         }
     }
     public class EquippedSkillBox : UIPanel
@@ -130,6 +144,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             var dims = GetDimensions();
             Vector2 position = dims.Position();
             int item = -1;
+            Vector2 itemPos = position + new Vector2(9, 9);
+            float scale = 1f;
 
             if (effect != null)
             {
@@ -138,11 +154,12 @@ namespace FargowiltasSouls.Content.UI.Elements
                 else if (effect.EffectItem(Main.LocalPlayer).type > ItemID.None)
                     item = effect.EffectItem(Main.LocalPlayer).type;
 
-                Vector2 itemPos = position + new Vector2(9, 9);
                 if (ActiveSkillMenu.MouseHeldElement == this)
-                    itemPos = Main.MouseScreen - new Vector2(9, 9);
-                if (item > -1)
-                    Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos, Color.White);
+                {
+                    scale = 1.2f * Main.cursorScale;
+                    itemPos = Main.MouseScreen - new Vector2(14, 14);
+
+                }
             }
 
             var keys = FargowiltasSouls.ActiveSkillKeys[Slot].GetAssignedKeys();
@@ -150,37 +167,46 @@ namespace FargowiltasSouls.Content.UI.Elements
             foreach (var key in keys)
                 keyText += $"{key} ";
             Utils.DrawBorderString(spriteBatch, keyText, position + new Vector2(32, 32), Color.White);
-            if (ContainsPoint(Main.MouseScreen) && Main.mouseLeft && Main.mouseLeftRelease)
+            if (ContainsPoint(Main.MouseScreen))
             {
-                FargoSoulsPlayer modPlayer = Main.LocalPlayer.FargoSouls();
-                //modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
-                //if (Main.netMode == NetmodeID.MultiplayerClient)
-                //    modPlayer.SyncToggle(Effect);
-                if (ActiveSkillMenu.MouseHeldElement == null)
+                if (scale == 1f)
+                    scale = 1.2f;
+                if (Main.mouseLeft && Main.mouseLeftRelease)
                 {
-                    if (modPlayer.ActiveSkills[Slot] != null)
+                    FargoSoulsPlayer modPlayer = Main.LocalPlayer.FargoSouls();
+                    if (ActiveSkillMenu.MouseHeldElement == null)
                     {
-                        SoundEngine.PlaySound(SoundID.MenuTick);
-                        modPlayer.ActiveSkills[Slot] = null;
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                            modPlayer.SyncActiveSkill(Slot);
+                        if (modPlayer.ActiveSkills[Slot] != null)
+                        {
+                            SoundEngine.PlaySound(SoundID.MenuTick);
+                            modPlayer.ActiveSkills[Slot] = null;
+                            if (Main.netMode == NetmodeID.MultiplayerClient)
+                                modPlayer.SyncActiveSkill(Slot);
+                        }
+
+                        ActiveSkillMenu.ShouldRefresh = true;
                     }
-                    
-                    ActiveSkillMenu.ShouldRefresh = true;
+                    else
+                    {
+                        if (ActiveSkillMenu.MouseHeldElement is ActiveSkillBox mouseSkill)
+                        {
+                            SoundEngine.PlaySound(SoundID.MenuTick);
+                            modPlayer.ActiveSkills[Slot] = mouseSkill.Effect;
+                            if (Main.netMode == NetmodeID.MultiplayerClient)
+                                modPlayer.SyncActiveSkill(Slot);
+                        }
+                        ActiveSkillMenu.MouseHeldElement = null;
+                        ActiveSkillMenu.ShouldRefresh = true;
+                    }
                 }
-                else
+            }
+            if (effect != null)
+            {
+                if (item > -1)
                 {
-                    if (ActiveSkillMenu.MouseHeldElement is ActiveSkillBox mouseSkill)
-                    {
-                        SoundEngine.PlaySound(SoundID.MenuTick);
-                        modPlayer.ActiveSkills[Slot] = mouseSkill.Effect;
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                            modPlayer.SyncActiveSkill(Slot);
-                    }
-                    ActiveSkillMenu.MouseHeldElement = null;
-                    ActiveSkillMenu.ShouldRefresh = true;
+                    Vector2 scaleOffset = -Vector2.One * 10 * (scale - 1);
+                    Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, Color.White, scale);
                 }
-                
             }
         }
     }
