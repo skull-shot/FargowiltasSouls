@@ -34,7 +34,8 @@ namespace FargowiltasSouls.Content.UI
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
 
-        public static UIPanel MouseHeldElement = null;
+        public static ActiveSkillBox MouseHeldElement = null;
+        public static ActiveSkillBox MouseHoveredElement = null;
         public static bool ShouldRefresh;
 
         public static int EquippedPanelHeight = 80;
@@ -126,7 +127,7 @@ namespace FargowiltasSouls.Content.UI
                 for (int x = 0; x < boxXAmt; x++)
                 {
                     var skill = skillList.Dequeue();
-                    var panel = new ActiveSkillBox(skill, skill.Mod.Name, boxWidth);
+                    var panel = new AvailableSkillBox(skill, skill.Mod.Name, boxWidth);
                     panel.Width.Set(boxWidth, 0);
                     panel.Height.Set(boxWidth, 0);
                     panel.Left.Set(spacing * (x + 1) + boxWidth * x, 0);
@@ -150,20 +151,20 @@ namespace FargowiltasSouls.Content.UI
             {
                 if (Main.LocalPlayer.mouseInterface)
                     ShouldRefresh = true;
-                /* absolutely don't enable this for netsync reasons
-                else if (MouseHeldElement != null)
-                {
-                    if (MouseHeldElement is ActiveSkillBox skillBox)
-                    {
-                        skillBox.Effect.ActiveSkillJustPressed(Main.LocalPlayer, false);
-                    }
-                }
-                */
             }
             if (ShouldRefresh)
             {
                 UpdateSkillList();
                 ShouldRefresh = false;
+            }
+        }
+        protected override void DrawChildren(SpriteBatch spriteBatch)
+        {
+            base.DrawChildren(spriteBatch);
+            if (MouseHoveredElement != null) // Layer hovered element last so it's not under anything
+            {
+                MouseHoveredElement.Draw(spriteBatch);
+                MouseHoveredElement = null;
             }
         }
     }

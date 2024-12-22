@@ -1,0 +1,8 @@
+SpecialDashEffect: {
+	DisplayName: Special Dash
+	Tooltip:
+		'''
+		Dash towards your mouse
+		5 second cooldown
+		'''
+}
