@@ -99,7 +99,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<FrigidGemstone>();
-        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        public override void ActiveSkillHeld(Player player, bool stunned)
         {
             if (stunned)
                 return;

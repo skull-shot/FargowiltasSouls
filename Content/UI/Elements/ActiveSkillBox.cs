@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.UI.Elements
         public override void CheckSlotElegible(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.ActiveSkills[Slot] != null && modPlayer.ActiveSkills[Slot].EffectItem(Main.LocalPlayer) == null)
+            if (modPlayer.ActiveSkills[Slot] != null && !player.AccessoryEffects().Equipped(modPlayer.ActiveSkills[Slot]))
             {
                 modPlayer.ActiveSkills[Slot] = null;
                 ActiveSkillMenu.ShouldRefresh = true;
