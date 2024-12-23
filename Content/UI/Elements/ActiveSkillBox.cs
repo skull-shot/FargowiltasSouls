@@ -165,6 +165,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.ActiveSkills[Slot] != null && !player.AccessoryEffects().Equipped(modPlayer.ActiveSkills[Slot]))
             {
+                Main.NewText("e");
                 modPlayer.ActiveSkills[Slot] = null;
                 ActiveSkillMenu.ShouldRefresh = true;
                 // net sync
