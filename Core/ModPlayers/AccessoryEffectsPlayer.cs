@@ -27,10 +27,12 @@ namespace FargowiltasSouls.Core.ModPlayers
     public partial class FargoSoulsPlayer
     {
 
-        public void GoldKey()
+        public void GoldKey(bool stunned)
         {
             if (!Player.HasBuff(ModContent.BuffType<GoldenStasisBuff>()) && !Player.HasBuff(ModContent.BuffType<GoldenStasisCDBuff>()))
             {
+                if (stunned)
+                    return;
                 int duration = 300;
 
                 if (ForceEffect<GoldEnchant>())

@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (stunned)
                 return;
-            player.FargoSouls().GoldKey();
+            player.FargoSouls().GoldKey(stunned);
         }
     }
     public class GoldToPiggy : AccessoryEffect
