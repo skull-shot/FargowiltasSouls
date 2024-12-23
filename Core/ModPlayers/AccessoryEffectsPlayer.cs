@@ -254,7 +254,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
 
 
-        public void SpecialDashKey()
+        public void SpecialDashKey(bool heart = false)
         {
             if (SpecialDashCD <= 0)
             {
@@ -270,14 +270,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.controlDown = false;*/
                     Player.controlUseItem = false;
                     Player.controlUseTile = false;
-                    Player.controlHook = false;
+                    Player.controlHook = false; 
                     Player.controlMount = false;
 
                     Player.itemAnimation = 0;
                     Player.itemTime = 0;
                     Player.reuseDelay = 0;
 
-                    if (BetsysHeartItem != null)
+                    if (BetsysHeartItem != null && heart)
                     {
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
                         Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<Content.Projectiles.BetsyDash>(), (int)(100 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);

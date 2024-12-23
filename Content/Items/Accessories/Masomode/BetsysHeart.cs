@@ -32,6 +32,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.WitheredArmor] = true;
             player.FargoSouls().BetsysHeartItem = Item;
             player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
+        }
+    }
+    public class BetsyDashEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<BetsysHeart>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().SpecialDashKey(true);
         }
     }
 }

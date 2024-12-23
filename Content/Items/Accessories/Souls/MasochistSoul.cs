@@ -252,6 +252,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.WitheredWeapon] = true;
             player.buffImmune[BuffID.WitheredArmor] = true;
             fargoPlayer.BetsysHeartItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
 
             //pumpking's cape
             player.AddEffect<PumpkingsCapeEffect>(Item);

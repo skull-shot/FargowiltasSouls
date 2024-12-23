@@ -72,6 +72,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.WitheredWeapon] = true;
             player.buffImmune[BuffID.WitheredArmor] = true;
             fargoPlayer.BetsysHeartItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
 
             //mutant antibodies
             player.buffImmune[BuffID.Wet] = true;
