@@ -29,6 +29,8 @@ namespace FargowiltasSouls.Content.UI
     {
         public static int BackWidth => 300;
         public static int BackHeight => 520;
+        public static int EquippedPanelHeight => 80;
+        public static int Outline => 6;
 
         public UIPanel BackPanel;
         public UIPanel EquippedPanel;
@@ -37,9 +39,6 @@ namespace FargowiltasSouls.Content.UI
         public static ActiveSkillBox MouseHeldElement = null;
         public static ActiveSkillBox MouseHoveredElement = null;
         public static bool ShouldRefresh;
-
-        public static int EquippedPanelHeight = 80;
-        public static int Outline = 6;
 
         public override void OnInitialize()
         {
