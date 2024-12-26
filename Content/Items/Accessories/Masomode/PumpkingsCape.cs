@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Terraria;
@@ -32,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.GetDamage(DamageClass.Generic) += 0.05f;
             player.GetCritChance(DamageClass.Generic) += 5;
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
         }
     }

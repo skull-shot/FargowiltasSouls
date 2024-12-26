@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
@@ -257,6 +258,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //pumpking's cape
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //celestial rune
             /*
@@ -285,6 +287,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //dread shell
             player.AddEffect<DreadShellEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //deerclawps
             player.buffImmune[BuffID.Slow] = true;

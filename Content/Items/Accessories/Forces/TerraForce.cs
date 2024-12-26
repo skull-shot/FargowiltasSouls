@@ -52,6 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<LeadEffect>(Item);
             // silver
             player.AddEffect<SilverEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
             // tungsten
             player.AddEffect<TungstenEffect>(Item);
             // obsidian

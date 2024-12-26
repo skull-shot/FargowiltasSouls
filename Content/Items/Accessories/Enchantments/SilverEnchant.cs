@@ -29,6 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<SilverEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -51,5 +52,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
         public override int ToggleItemType => ModContent.ItemType<SilverEnchant>();
+    }
+    public class ParryEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<SilverEnchant>();
+        public override bool ActiveSkill => true;
     }
 }

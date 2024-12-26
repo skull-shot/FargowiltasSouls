@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -57,6 +58,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //pumpking's cape
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //ice queen's crown
             player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;

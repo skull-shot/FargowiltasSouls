@@ -952,8 +952,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                 wasHoldingShield = false;
                 return;
             }
-            Player.shieldRaised = Player.selectedItem != 58 && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
-                && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && PlayerInput.Triggers.Current.MouseRight;
+            bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem;
+            for (int i = 0; i < ActiveSkills.Length; i++)
+            {
+                if (ActiveSkills[i] is ParryEffect)
+                    holdingKey = FargowiltasSouls.ActiveSkillKeys[i].Current;
+            }
+            Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
+                && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && holdingKey;
 
             if (Player.shieldRaised)
             {

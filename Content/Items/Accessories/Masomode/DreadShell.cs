@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Terraria;
@@ -33,6 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.noKnockback = true;
             player.AddEffect<DreadShellEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
         }
     }
     public class DreadShellEffect : AccessoryEffect
