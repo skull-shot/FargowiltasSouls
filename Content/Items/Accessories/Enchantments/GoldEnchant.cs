@@ -71,8 +71,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ActiveSkill => true;
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
-            if (stunned)
-                return;
             player.FargoSouls().GoldKey(stunned);
         }
     }
