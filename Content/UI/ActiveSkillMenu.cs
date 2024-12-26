@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -86,9 +87,30 @@ namespace FargowiltasSouls.Content.UI
         }
         public void UpdateSkillList()
         {
+            if (Main.gameMenu || Main.dedServ)
+            {
+                FargoUIManager.CloseActiveSkillMenu();
+                return;
+            }
+
             EquippedPanel.RemoveAllChildren();
             AvailablePanel.RemoveAllChildren();
             MouseHeldElement = null;
+
+            FargoSoulsPlayer sPlayer = Main.LocalPlayer.FargoSouls();
+            AccessoryEffectPlayer aPlayer = Main.LocalPlayer.AccessoryEffects();
+
+            for (int i = 0; i < sPlayer.ActiveSkills.Length; i++)
+            {
+                var skill = sPlayer.ActiveSkills[i];
+                if (skill != null && !aPlayer.Equipped(skill))
+                {
+                    sPlayer.ActiveSkills[i] = null;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        sPlayer.SyncActiveSkill(i);
+                }
+            }
 
             // Equipped boxes
             float spacing = 6;
@@ -103,15 +125,13 @@ namespace FargowiltasSouls.Content.UI
                 panel.Top.Set(spacing, 0);
                 EquippedPanel.Append(panel);
             }
-            if (Main.gameMenu || Main.dedServ)
-                return;
-            var equippedEffects = Main.LocalPlayer.AccessoryEffects().EquippedEffects;
+            var equippedEffects = aPlayer.EquippedEffects;
             Queue<AccessoryEffect> skillList = [];
             // Available boxes
             for (int i = 0; i < AccessoryEffectLoader.AccessoryEffects.Count; i++)
             {
                 var effect = AccessoryEffectLoader.AccessoryEffects[i];
-                if (equippedEffects[i] && effect.ActiveSkill && !Main.LocalPlayer.FargoSouls().ActiveSkills.Contains(effect))
+                if (equippedEffects[i] && effect.ActiveSkill && !sPlayer.ActiveSkills.Contains(effect))
                 {
                     skillList.Enqueue(effect);
                 }

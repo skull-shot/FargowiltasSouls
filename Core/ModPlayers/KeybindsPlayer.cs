@@ -6,6 +6,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.ModPlayers
@@ -19,9 +20,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             var keys = FargowiltasSouls.ActiveSkillKeys;
             for (int i = 0; i < keys.Length; i++)
             {
+                AccessoryEffectPlayer aPlayer = Player.AccessoryEffects();
+
                 var key = keys[i];
                 var skill = ActiveSkills[i];
-                if (skill == null || !Player.AccessoryEffects().Active(skill))
+                if (skill == null || !aPlayer.Active(skill))
                     continue;
                 if (key.JustPressed)
                     skill.ActiveSkillJustPressed(Player, stunned);

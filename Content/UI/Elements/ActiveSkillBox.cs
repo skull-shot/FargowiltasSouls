@@ -21,6 +21,7 @@ using Terraria.Localization;
 using FargowiltasSouls.Core.ModPlayers;
 using Humanizer;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
+using System.Linq;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
@@ -28,6 +29,7 @@ namespace FargowiltasSouls.Content.UI.Elements
     {
         public static DynamicSpriteFont Font => Terraria.GameContent.FontAssets.ItemStack.Value;
         public string Mod;
+        public float Opacity = 1f;
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -41,6 +43,7 @@ namespace FargowiltasSouls.Content.UI.Elements
         public abstract AccessoryEffect GetEffect();
         public abstract void OnClicked();
         public virtual void PreDraw(SpriteBatch spriteBatch, Vector2 position) { }
+        public virtual void ModifyTooltip(ref string tooltip) { }
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             AccessoryEffect effect = GetEffect();
@@ -77,10 +80,15 @@ namespace FargowiltasSouls.Content.UI.Elements
                 itemPos = Main.MouseScreen - new Vector2(14, 14);
 
             }
+            if (hovering && scale == 1 && notHoldingOther)
+                scale = 1.2f;
+            if (item > -1)
+            {
+                Vector2 scaleOffset = -Vector2.One * 10 * (scale - 1);
+                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, Color.White, scale);
+            }
             if (hovering)
             {
-                if (scale == 1 && notHoldingOther)
-                    scale = 1.2f;
                 if (Main.mouseLeft && Main.mouseLeftRelease)
                 {
                     OnClicked();
@@ -91,9 +99,10 @@ namespace FargowiltasSouls.Content.UI.Elements
                     string locPath = $"Mods.{effect.Mod.Name}.ActiveSkills.{effect.Name}";
                     string name = Language.GetTextValue($"{locPath}.DisplayName");
                     string tooltip = Language.GetTextValue($"{locPath}.Tooltip");
-                    
+                    ModifyTooltip(ref tooltip);
 
                     string text = $"{name}\n{tooltip}";
+                    
                     if (!text.Contains($"Mods.{effect.Mod.Name}"))
                     {
                         Utils.DrawBorderString(
@@ -104,17 +113,12 @@ namespace FargowiltasSouls.Content.UI.Elements
                     }
                 }
             }
-            if (item > -1)
-            {
-                Vector2 scaleOffset = -Vector2.One * 10 * (scale - 1);
-                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, Color.White, scale);
-            }
+            
 
         }
     }
     public class AvailableSkillBox : ActiveSkillBox
     {
-
         public AccessoryEffect Effect;
 
         public AvailableSkillBox(AccessoryEffect effect, string mod, float width)
@@ -162,16 +166,16 @@ namespace FargowiltasSouls.Content.UI.Elements
         }
         public override void CheckSlotElegible(Player player)
         {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.ActiveSkills[Slot] != null && !player.AccessoryEffects().Equipped(modPlayer.ActiveSkills[Slot]))
+            /*
+            var skill = player.FargoSouls().ActiveSkills[Slot];
+            AccessoryEffectPlayer aPlayer = player.AccessoryEffects();
+            if (skill != null && !aPlayer.Active(skill))
             {
-                Main.NewText("e");
-                modPlayer.ActiveSkills[Slot] = null;
-                ActiveSkillMenu.ShouldRefresh = true;
-                // net sync
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                    modPlayer.SyncActiveSkill(Slot);
+                Opacity = 0.4f;
             }
+            else
+                Opacity = 1f;
+            */
         }
         public override AccessoryEffect GetEffect() => Main.LocalPlayer.FargoSouls().ActiveSkills[Slot];
         public override void OnClicked()
@@ -208,6 +212,14 @@ namespace FargowiltasSouls.Content.UI.Elements
             foreach (var key in keys)
                 keyText += $"{key} ";
             Utils.DrawBorderString(spriteBatch, keyText, position + new Vector2(32, 32), Color.White);
+        }
+        public override void ModifyTooltip(ref string tooltip)
+        {
+            if (Opacity < 1)
+            {
+                string prepend = Language.GetTextValue("Mods.FargowiltasSouls.UI.DisabledUnequipped");
+                tooltip = prepend + "\n" + tooltip;
+            }
         }
     }
 }
