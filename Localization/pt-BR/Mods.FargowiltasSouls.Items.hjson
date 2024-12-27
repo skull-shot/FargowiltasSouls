@@ -1202,12 +1202,7 @@ FrigidGemstone: {
 		Aperte a tecla Feitiço Frígido para lançar Bastão de Gelo
 		'Um fragmento de gelo mágico antigo'
 		'''
-	/* VanityTooltip:
-		'''
-		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
-		''' */
+	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FrigidGemstoneInactive: {
@@ -1216,8 +1211,6 @@ FrigidGemstoneInactive: {
 		'''
 		Currently inactive, Right click to activate
 		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn in Hardmode
 		'A torn off limb composed of ancient ice'
 		''' */
 }

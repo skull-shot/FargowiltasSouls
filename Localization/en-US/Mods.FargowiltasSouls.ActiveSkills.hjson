@@ -1,10 +1,8 @@
 SpecialDashEffect: {
 	DisplayName: Bee Dash
-	Tooltip:
-		'''
-		Perform a short quick bee dash towards your cursor
-		'''
+	Tooltip: Perform a short quick bee dash towards your cursor
 }
+
 BetsyDashEffect: {
 	DisplayName: Fireball Dash
 	Tooltip:
@@ -13,32 +11,36 @@ BetsyDashEffect: {
 		Shares cooldown slot with Bee Dash
 		'''
 }
+
 DiveEffect: {
 	DisplayName: Fastfall Dive
 	Tooltip:
 		'''
 		Activate in the air to fastfall
-		Defaults to Double Tap DOWN if unbound
+		Defaults to Double Tap DOWN if no key is bound to skill slot
 		'''
 }
+
 GoldKeyEffect: {
-	DisplayName: 
+	DisplayName: Golden Shell
 	Tooltip:
 		'''
-		Encase yourself in a Golden Shell
+		Encase yourself in a golden shell
 		You will not be able to move or attack, but will be immune to all damage
 		Press again to exit early
 		'''
 }
+
 ParryEffect: {
 	DisplayName: Guard Parry
 	Tooltip:
 		'''
 		Hold to guard
 		Guard shortly before being hit to parry
-		Defaults to Right Click if unbound
+		Defaults to Right Click if no key is bound to skill slot
 		'''
 }
+
 StardustEffect: {
 	DisplayName: Stardust Stasis
 	Tooltip:
@@ -47,13 +49,12 @@ StardustEffect: {
 		While time is frozen, your minions will continue to attack
 		'''
 }
+
 DebuffInstallKeyEffect: {
-	DisplayName: 
-	Tooltip:
-		'''
-		Go berserk, granting different effects depending on accessory
-		'''
+	DisplayName: Debuff Install
+	Tooltip: Install yourself with debuffs, granting different effects depending on accessory
 }
+
 FrigidGemstoneKeyEffect: {
 	DisplayName: Ice Rod
 	Tooltip:
@@ -62,6 +63,7 @@ FrigidGemstoneKeyEffect: {
 		Inflicts Frostburn in Hardmode
 		'''
 }
+
 BombKeyEffect: {
 	DisplayName: Freeze Bomb
 	Tooltip:
@@ -69,7 +71,8 @@ BombKeyEffect: {
 		Requires being charged by grazing attacks
 		Freezes almost all enemies and projectiles
 		'''
-}a
+}
+
 BulbKeyEffect: {
 	DisplayName: Magical Cleanse
 	Tooltip:
@@ -79,10 +82,8 @@ BulbKeyEffect: {
 		Cooldown depletes faster while not attacking
 		'''
 }
+
 AmmoCycleEffect: {
 	DisplayName: Cycle Ammo
-	Tooltip:
-		'''
-		Cycle your ammos (works from inventory and vanity)
-		'''
+	Tooltip: Cycle your ammos (works from inventory and vanity)
 }

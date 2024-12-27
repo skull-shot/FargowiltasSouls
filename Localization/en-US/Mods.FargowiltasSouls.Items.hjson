@@ -1037,7 +1037,7 @@ AgitatingLens: {
 		'''
 		Grants immunity to non-self inflicted Berserked
 		While dashing or running quickly you will create a trail of demon scythes, dealing magic damage
-		When berserk, massively increased offenses, massively lowered defenses, and you cannot stop attacking or moving
+		Debuff Install berserks you, granting massively increased offenses, massively lowered defenses, and you cannot stop attacking or moving
 		Berserk state lasts for 8 seconds and you are stunned for 2 seconds afterwards
 		'The irritable remnant of a defeated foe'
 		'''
@@ -1220,10 +1220,7 @@ FrigidGemstone: {
 		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		'''
-	VanityTooltip:
-		'''
-		Grants immunity to Frostburn and Chilled
-		'''
+	VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FrigidGemstoneInactive: {
@@ -1241,10 +1238,10 @@ FusedLens: {
 	Tooltip:
 		'''
 		Grants immunity to non-self inflicted Cursed Inferno and Ichor
-		While berserked, inflict yourself with Cursed Inferno and Ichor
+		Debuff Install inflicts yourself with Cursed Inferno and Ichor
 		When inflicted with Cursed Inferno, 15% increased attack speed
 		When inflicted with Ichor, 15% increased critical strike chance
-		When losing health to damage over time, you inflict Cursed Inferno and Ichor
+		While losing health to damage over time, you inflict Cursed Inferno and Ichor
 		'Too melted to improve vision'
 		'''
 }
