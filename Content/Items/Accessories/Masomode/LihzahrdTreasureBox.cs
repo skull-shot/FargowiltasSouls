@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.FargoSouls().LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<LihzahrdBoulders>(Item);
         }
     }

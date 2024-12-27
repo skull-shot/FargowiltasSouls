@@ -510,9 +510,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 fastFallCD--;
 
             bool canFastFall = Player.HasEffect<LihzahrdGroundPound>() || Player.HasEffect<DeerclawpsDive>();
-            if (Player.gravDir > 0 && canFastFall)
+            if (Player.gravDir > 0 && Player.HasEffect<DiveEffect>() && canFastFall)
             {
-                if (fastFallCD <= 0 && !Player.mount.Active && Player.controlDown && Player.releaseDown && !Player.controlJump && Player.doubleTapCardinalTimer[0] > 0 && Player.doubleTapCardinalTimer[0] != 15)
+                bool keying = Player.controlDown && Player.releaseDown && Player.doubleTapCardinalTimer[0] > 0 && Player.doubleTapCardinalTimer[0] != 15;
+                ModKeybind key = AccessoryEffectLoader.GetKeybind<DiveEffect>(this);
+                if (key != null)
+                    keying = key.JustPressed;
+                if (fastFallCD <= 0 && !Player.mount.Active && !Player.controlJump && keying)
                 {
                     if (Player.velocity.Y != 0f)
                     {
@@ -953,11 +957,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 return;
             }
             bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem;
-            for (int i = 0; i < ActiveSkills.Length; i++)
-            {
-                if (ActiveSkills[i] is ParryEffect)
-                    holdingKey = FargowiltasSouls.ActiveSkillKeys[i].Current;
-            }
+            ModKeybind key = AccessoryEffectLoader.GetKeybind<ParryEffect>(this);
+            if (key != null)
+                holdingKey = key.Current;
             Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
                 && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && holdingKey;
 

@@ -44,6 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<LihzahrdBoulders>(Item);
 
             //celestial rune

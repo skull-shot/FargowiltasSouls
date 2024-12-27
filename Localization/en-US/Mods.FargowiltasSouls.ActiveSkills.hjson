@@ -6,3 +6,10 @@ SpecialDashEffect: {
 		5 second cooldown
 		'''
 }
+DiveEffect: {
+	DisplayName: Fastfall Dive
+	Tooltip:
+		'''
+		Activate in the air to fastfall
+		'''
+}

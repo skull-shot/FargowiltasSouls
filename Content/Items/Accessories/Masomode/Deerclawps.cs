@@ -32,6 +32,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.Slow] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<DeerclawpsDive>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
         }
     }
@@ -65,6 +66,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 }
             }
         }
+    }
+    public class DiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
+        public override bool ActiveSkill => true;
     }
     public class DeerclawpsEffect : AccessoryEffect
     {

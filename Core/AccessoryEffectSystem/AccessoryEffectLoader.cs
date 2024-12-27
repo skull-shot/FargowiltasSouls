@@ -81,5 +81,22 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         public static IEntitySource GetSource_EffectItem<T>(this Player player) where T : AccessoryEffect => ModContent.GetInstance<T>().GetSource_EffectItem(player);
         public static T GetEffect<T>() where T : AccessoryEffect => ModContent.GetInstance<T>();
         public static AccessoryEffect GetEffect(string internalName) => ModContent.Find<AccessoryEffect>(internalName);
+        /// <summary>
+        /// If this is a bound Active Skill, returns the key it's bound to. <br></br>
+        /// Otherwise, returns null.
+        /// </summary>
+        public static ModKeybind GetKeybind<T>(FargoSoulsPlayer soulsPlayer) where T : AccessoryEffect
+        {
+            ModKeybind keybind = null;
+            for (int i = 0; i < soulsPlayer.ActiveSkills.Length; i++)
+            {
+                if (soulsPlayer.ActiveSkills[i] is T)
+                {
+                    keybind = FargowiltasSouls.ActiveSkillKeys[i];
+                    break;
+                }
+            }
+            return keybind;
+        }
     }
 }
