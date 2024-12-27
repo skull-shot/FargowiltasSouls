@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             // movement
             int deadzone = 500;
             float distance = Projectile.Distance(player.Center);
-            if (distance > deadzone)
+            if (distance > deadzone-100)
             {
                 float distanceFactor = (distance - deadzone);
                 distanceFactor /= 6000;
