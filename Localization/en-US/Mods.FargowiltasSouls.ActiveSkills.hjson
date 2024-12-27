@@ -1,9 +1,16 @@
 SpecialDashEffect: {
-	DisplayName: Special Dash
+	DisplayName: Bee Dash
 	Tooltip:
 		'''
-		Dash towards your mouse
-		5 second cooldown
+		Perform a short quick bee dash towards your cursor
+		'''
+}
+BetsyDashEffect: {
+	DisplayName: Fireball Dash
+	Tooltip:
+		'''
+		Perform a short invincible fireball dash towards your cursor
+		Shares cooldown slot with Bee Dash
 		'''
 }
 DiveEffect: {
@@ -11,5 +18,71 @@ DiveEffect: {
 	Tooltip:
 		'''
 		Activate in the air to fastfall
+		Defaults to Double Tap DOWN if unbound
+		'''
+}
+GoldKeyEffect: {
+	DisplayName: 
+	Tooltip:
+		'''
+		Encase yourself in a Golden Shell
+		You will not be able to move or attack, but will be immune to all damage
+		Press again to exit early
+		'''
+}
+ParryEffect: {
+	DisplayName: Guard Parry
+	Tooltip:
+		'''
+		Hold to guard
+		Guard shortly before being hit to parry
+		Defaults to Right Click if unbound
+		'''
+}
+StardustEffect: {
+	DisplayName: Stardust Stasis
+	Tooltip:
+		'''
+		Freezes time for a few seconds
+		While time is frozen, your minions will continue to attack
+		'''
+}
+DebuffInstallKeyEffect: {
+	DisplayName: 
+	Tooltip:
+		'''
+		Go berserk, granting different effects depending on accessory
+		'''
+}
+FrigidGemstoneKeyEffect: {
+	DisplayName: Ice Rod
+	Tooltip:
+		'''
+		Summons an ice block to your cursor
+		Inflicts Frostburn in Hardmode
+		'''
+}
+BombKeyEffect: {
+	DisplayName: Freeze Bomb
+	Tooltip:
+		'''
+		Requires being charged by grazing attacks
+		Freezes almost all enemies and projectiles
+		'''
+}a
+BulbKeyEffect: {
+	DisplayName: Magical Cleanse
+	Tooltip:
+		'''
+		Cure yourself of most debuffs on a long cooldown
+		Also amplifies damage over time effects for nearby enemies by 2x
+		Cooldown depletes faster while not attacking
+		'''
+}
+AmmoCycleEffect: {
+	DisplayName: Cycle Ammo
+	Tooltip:
+		'''
+		Cycle your ammos (works from inventory and vanity)
 		'''
 }

@@ -30,10 +30,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[BuffID.Frostburn] = true;
             player.buffImmune[BuffID.Chilled] = true;
-            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            Effects(player);
+            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
+        }
 
         public override void UpdateInventory(Player player) => Effects(player);
 

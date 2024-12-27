@@ -446,8 +446,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void DebuffInstallKey()
         {
-            if (Player.HasEffect<AgitatingLensInstall>()
-                && Player.controlUp && Player.controlDown)
+            if (Player.HasEffect<AgitatingLensInstall>())
             {
 				if (!Player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>())
 					&& !Player.HasBuff(ModContent.BuffType<BerserkerInstallCDBuff>()))

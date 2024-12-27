@@ -575,9 +575,8 @@ SilverEnchant: {
 	DisplayName: Silver Enchantment
 	Tooltip:
 		'''
-		Right Click to guard with your shield
-		Guard shortly before being hit to parry and negate up to 100 damage
 		Guard exactly when hit to perfect parry, gaining Striking Moment
+		Guard Parry negates up to 100 damage
 		'Reflection'
 		'''
 }
@@ -653,10 +652,8 @@ StardustEnchant: {
 	DisplayName: Stardust Enchantment
 	Tooltip:
 		'''
+		Stardust Stasis lasts for 6 seconds and has a 90 second cooldown
 		A stardust guardian will protect you from nearby enemies
-		Press the Freeze Key to freeze time for 6 seconds
-		While time is frozen, your minions will continue to attack
-		There is a 90 second cooldown for this effect
 		'The power of the Stand is yours'
 		'''
 }
@@ -1038,9 +1035,8 @@ AgitatingLens: {
 	DisplayName: Agitating Lens
 	Tooltip:
 		'''
-		Grants immunity to Berserked
+		Grants immunity to non-self inflicted Berserked
 		While dashing or running quickly you will create a trail of demon scythes, dealing magic damage
-		Press the Debuff Install key while holding UP and DOWN to go berserk
 		When berserk, massively increased offenses, massively lowered defenses, and you cannot stop attacking or moving
 		Berserk state lasts for 8 seconds and you are stunned for 2 seconds afterwards
 		'The irritable remnant of a defeated foe'
@@ -1053,7 +1049,7 @@ BetsysHeart: {
 		'''
 		Grants immunity to Oozed, Withered Weapon, and Withered Armor
 		Press the Special Dash key to perform a short invincible fireball dash
-		Hitting enemies with the dash inflicts 20 seconds of Betsy's Curse and halves your dash cooldown
+		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and halves your dash cooldown
 		'Lightly roasted, medium rare'
 		'''
 }
@@ -1187,11 +1183,11 @@ DreadShell: {
 		'''
 		Grants immunity to Anticoagulation
 		Grants immunity to knockback
-		Right Click to guard with your shield
 		Defense and damage reduction drastically decreased while and shortly after guarding
-		Guard exactly when hit to parry for up to 200 damage and counter it on a very long cooldown
+		Guard exactly when hit to parry and counterattack on a very long cooldown
 		Counterattack deals massive damage and inflicts Anticoagulation
-		Absorb Anticoagulation blood clots to gain 30% increased damage
+		Absorb Anticoagulation blood clots to gain 30% increased damage		
+		Guard Parry negates up to 200 damage
 		'It was a mistake to chum here'
 		'''
 }
@@ -1222,15 +1218,11 @@ FrigidGemstone: {
 		Works from inventory and vanity slots
 		Right click to disable
 		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn in Hardmode
 		'A torn off limb composed of ancient ice'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
 		'''
 }
 
@@ -1240,8 +1232,6 @@ FrigidGemstoneInactive: {
 		'''
 		Currently inactive, Right click to activate
 		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn in Hardmode
 		'A torn off limb composed of ancient ice'
 		'''
 }
@@ -1250,11 +1240,11 @@ FusedLens: {
 	DisplayName: Fused Lens
 	Tooltip:
 		'''
-		Grants immunity to Cursed Inferno and Ichor
+		Grants immunity to non-self inflicted Cursed Inferno and Ichor
+		While berserked, inflict yourself with Cursed Inferno and Ichor
 		When inflicted with Cursed Inferno, 15% increased attack speed
 		When inflicted with Ichor, 15% increased critical strike chance
 		When losing health to damage over time, you inflict Cursed Inferno and Ichor
-		Press the Debuff Install key to inflict yourself with Cursed Inferno and Ichor
 		'Too melted to improve vision'
 		'''
 }
@@ -1346,8 +1336,7 @@ IceQueensCrown: {
 		'''
 		Grants immunity to Hypothermia and Frozen
 		Increases damage reduction by 5%
-		Graze attacks to gain a bomb that will freeze almost all enemies and projectiles
-		Press the Bomb key to use your freeze bomb
+		Graze attacks to charge up Freeze Bomb
 		'The royal symbol of a defeated foe'
 		'''
 }
@@ -1386,9 +1375,6 @@ MagicalBulb: {
 	Tooltip:
 		'''
 		Grants immunity to Acid Venom, Ivy Venom, and Swarming
-		Press the Magical Cleanse key to cure yourself of most debuffs on a cooldown
-		Magical Cleanse also amplifies damage over time effects for nearby enemies by 2x
-		Cleanse cooldown is faster when not attacking
 		Increases life regeneration based on how much light you receive
 		Attracts a legendary plant's offspring which flourishes in combat
 		'Matricide?'
@@ -1501,10 +1487,10 @@ PumpkingsCape: {
 		'''
 		Grants immunity to Living Wasteland
 		Increases damage and critical strike chance by 5%
-		Right Click to guard with your cape for up to 200 damage
 		You have an aura of Rotting while guarding
 		Guard exactly when hit to parry and counter it on a very long cooldown
 		Counter an attack to gain life based on the blocked damage
+		Guard Parry negates up to 200 damage
 		'Somehow, it's the right size'
 		'''
 }
@@ -1583,7 +1569,6 @@ SaucerControlConsole: {
 	Tooltip:
 		'''
 		Grants immunity to Electrified and Distorted
-		Press the Ammo Cycle key to cycle ammos (works from inventory and vanity)
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
 		'Just keep it in airplane mode'
