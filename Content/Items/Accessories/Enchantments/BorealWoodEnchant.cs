@@ -70,8 +70,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (projectile != null && projectile.type == ProjectileID.SnowBallFriendly)
                     return;
                 int damage = hitInfo.SourceDamage;
-                damage = (int)(damage * 0.35f);
-                damage = (int)MathHelper.Clamp(damage, 0, 800); // big sting could be roughly 1700 here
+                damage = 800;
+                //damage = (int)(damage * 0.35f);
+                //damage = (int)MathHelper.Clamp(damage, 0, 800); // big sting could be roughly 1700 here
                 BorealSnowballs(player, damage);
             }
                 

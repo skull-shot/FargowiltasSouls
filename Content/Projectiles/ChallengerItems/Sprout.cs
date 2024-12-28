@@ -22,7 +22,8 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 10;
             Projectile.timeLeft = 360;
-
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 30;
             Projectile.scale = 1.5f;
         }
 
@@ -54,10 +55,6 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             }
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.immune[Projectile.owner] = 30;
-        }
 
         public override void OnKill(int timeLeft)
         {

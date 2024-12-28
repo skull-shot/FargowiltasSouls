@@ -33,6 +33,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             //Projectile.usesLocalNPCImmunity = true;
             //Projectile.localNPCHitCooldown = 8;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 5;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.tileCollide = false;
 
@@ -197,7 +199,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 5;
 
             target.AddBuff(BuffID.OnFire, 180, false);
             target.AddBuff(BuffID.Oiled, 180, false);

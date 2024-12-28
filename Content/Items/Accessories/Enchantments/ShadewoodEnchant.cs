@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (forceEffect)
                 dmg *= 3;
-            if (player.HasEffect<NatureEffect>())
+            if (player.HasEffect<TimberEffect>())
                 dmg *= 4;
 
             if (target.HasBuff(ModContent.BuffType<SuperBleedBuff>()) && modPlayer.ShadewoodCD == 0 && (projectile == null || projectile.type != ModContent.ProjectileType<SuperBlood>()) && player.whoAmI == Main.myPlayer)
