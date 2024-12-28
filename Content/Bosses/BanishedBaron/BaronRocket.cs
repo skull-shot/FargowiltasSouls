@@ -61,7 +61,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
 
             Projectile.rotation = Projectile.velocity.RotatedBy(MathHelper.Pi).ToRotation();
-
+            if (Projectile.ai[0] == 5 && Projectile.localAI[0] < 25) // faster startup for p2 rocket storm projs
+                Projectile.localAI[0] = 25;
             if (++Projectile.localAI[0] > 600f)
             {
                 Projectile.Kill();
@@ -102,19 +103,21 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 Projectile.velocity *= 1.05f;
             }
-            if (Projectile.ai[0] == 3 || Projectile.ai[0] == 1) //homing rocket or torpedo
+            if (Projectile.ai[0] == 3 || Projectile.ai[0] == 1 || Projectile.ai[0] == 5) //homing rocket or torpedo
             {
                 Player player = Main.player[(int)Projectile.ai[1]];
-                bool homeTime = (Projectile.ai[0] == 3 && Projectile.localAI[0] > 10) || (Projectile.ai[0] == 1 && Projectile.localAI[0] > 40);
+                bool homeTime = (Projectile.ai[0] == 3 && Projectile.localAI[0] > 10) || (Projectile.ai[0] != 3 && Projectile.localAI[0] > 40);
                 if (!homeTime)
                 {
                     Projectile.velocity *= 0.96f;
+                    if (Projectile.ai[0] == 5)
+                        Projectile.velocity *= 0.96f;
                 }
                 if (player != null && player.active && !player.ghost && homeTime)
                 {
                     Vector2 vectorToIdlePosition = LerpWithoutClamp(HomePos, player.Center, Projectile.ai[2]) - Projectile.Center;
-                    float speed = Projectile.ai[0] == 1 ? 24f : 18f;
-                    float inertia = Projectile.ai[0] == 1 ? 24f : 20f;
+                    float speed = Projectile.ai[0] != 3 ? 36f : 24f;
+                    float inertia = Projectile.ai[0] != 3 ? 40f : 26f;
                     float deadzone = WorldSavingSystem.MasochistModeReal ? 150f : 180f;
                     float num = vectorToIdlePosition.Length();
                     if (num > deadzone && home)
@@ -132,9 +135,10 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     {
                         BeenOutside = true;
                     }
-                    if (num < deadzone && BeenOutside)
+                    if ((num < deadzone && BeenOutside) || Projectile.localAI[0] > 85)
                     {
                         home = false;
+
                     }
                 }
             }

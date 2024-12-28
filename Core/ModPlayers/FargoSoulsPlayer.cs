@@ -16,6 +16,7 @@ using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public ToggleBackend Toggler = new();
 
         public Dictionary<AccessoryEffect, bool> TogglesToSync = [];
+
+        public Dictionary<int, AccessoryEffect> SkillsToSync = [];
 
         public List<AccessoryEffect> disabledToggles = [];
 
@@ -92,6 +95,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             => (Player.dashDelay == -1 || IsDashingTimer > 0) && Player.grapCount <= 0;
 
         public bool BossAliveLastFrame = false;
+
+        public AccessoryEffect[] ActiveSkills = new AccessoryEffect[4];
 
         public override void SaveData(TagCompound tag)
         {
@@ -354,7 +359,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             MasochistHeart = false;
             SandsofTime = false;
             SecurityWallet = false;
-            FrigidGemstoneItem = null;
             NymphsPerfume = false;
             NymphsPerfumeRespawn = false;
             RainbowSlime = false;
@@ -362,7 +366,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IceQueensCrown = false;
             CirnoGraze = false;
             MiniSaucer = false;
-            CanAmmoCycle = false;
             TribalCharm = false;
             TribalCharmEquipped = false;
             SupremeDeathbringerFairy = false;
@@ -576,6 +579,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             MutantEyeCD = 60;
 
             MythrilTimer = 0;
+            MythrilDelay = 20;
             BeetleEnchantDefenseTimer = 0;
 
             Mash = false;
@@ -651,6 +655,19 @@ namespace FargowiltasSouls.Core.ModPlayers
                 CurrentLifeReduction = 0;
                 MaxLifeReduction = 0;
                 LifeReductionUpdateTimer = 0;
+            }
+        }
+        public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            if (Player.HasEffect<NinjaEffect>()
+                && item.shoot > ProjectileID.None
+                && item.shoot != ProjectileID.WireKite)
+            {
+                float maxSpeedRequired = Player.ForceEffect<NinjaEffect>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
+                if (Player.velocity.Length() < maxSpeedRequired)
+                {
+                    velocity *= 2f;
+                }
             }
         }
         public override float UseSpeedMultiplier(Item item)
@@ -1407,6 +1424,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 TogglesToSync.Add(effect, Player.GetToggle(effect).ToggleBool);
         }
 
+        public void SyncActiveSkill(int index)
+        {
+            if (!SkillsToSync.ContainsKey(index))
+                SkillsToSync.Add(index, ActiveSkills[index]);
+        }
+
         public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
         {
             ModPacket defaultPacket = Mod.GetPacket();
@@ -1429,6 +1452,21 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             TogglesToSync.Clear();
+
+            foreach (KeyValuePair<int, AccessoryEffect> skill in SkillsToSync)
+            {
+                ModPacket packet = Mod.GetPacket();
+
+                packet.Write((byte)FargowiltasSouls.PacketID.SyncActiveSkill);
+                packet.Write((byte)Player.whoAmI);
+                packet.Write(skill.Key);
+                int skillIndex = skill.Value == null ? -1 : skill.Value.Index;
+                packet.Write(skillIndex);
+
+                packet.Send(toWho, fromWho);
+            }
+
+            SkillsToSync.Clear();
         }
         public override void SendClientChanges(ModPlayer clientPlayer)
         {

@@ -37,6 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
+            Projectile.DamageType = DamageClass.Melee;
 
             Projectile.ownerHitCheck = true;
         }

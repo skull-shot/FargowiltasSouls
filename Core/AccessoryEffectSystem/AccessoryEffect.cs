@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Localization;
@@ -8,9 +9,9 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
 {
 
     /// <summary>
-    /// Contains the behavior for an accessory effect. <para/>
-    /// All Toggles have a corresponding accessory effect. <para/>
-    /// Each accessory effect with a toggle needs a localized toggle description as Mods.YourMod.Toggler.YourAccessoryEffectName.<para/>
+    /// Contains the behavior for an accessory effect. <br/>
+    /// All Toggles have a corresponding accessory effect. <br/>
+    /// Each accessory effect with a toggle needs a localized toggle description as Mods.YourMod.Toggler.YourAccessoryEffectName. <br/>
     /// This type is not instanced per player. Put instanced things (such as fields) in a ModPlayer.
     /// </summary>
     public abstract class AccessoryEffect : ModType
@@ -24,32 +25,21 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
                 string desc = Language.GetTextValue($"Mods.{Mod.Name}.Toggler.{Name}");
                 if (ToggleItemType <= 0) return desc;
                 string itemIcon = $"[i:{ToggleItemType}]";
-                /*
-                ModItem modItem = ModContent.GetModItem(ToggleItemType);
-                if (modItem == null)
-                {
-                    itemIcon = $"[i:{ToggleItemType}]";
-                }
-                else
-                {
-                    itemIcon = $"[i:{modItem.Mod.Name}/{modItem.Name}]";
-                }
-                */
                 return $"{itemIcon} {desc}";
             }
         }
         /// <summary>
-        /// The toggle's header in the display. <para/>
+        /// The toggle's header in the display. <br/>
         /// If the effect shouldn't have a toggle, set this to null.
         /// </summary>
         public abstract Header ToggleHeader { get; }
         /// <summary>
-        /// The toggle's item icon in the display. <para/>
+        /// The toggle's item icon in the display. <br/>
         /// If the effect shouldn't have a toggle, you don't need to set this.
         /// </summary>
         public virtual int ToggleItemType => -1;
         /// <summary>
-        /// Whether the effect has a toggle. <para/>
+        /// Whether the effect has a toggle. <br/>
         /// Will be false if ToggleHeader is null.
         /// </summary>
         public bool HasToggle => ToggleHeader != null;
@@ -58,6 +48,12 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         public virtual bool ExtraAttackEffect => false;
         public virtual bool MutantsPresenceAffects => false;
         public virtual bool DefaultToggle => true;
+
+        /// <summary>
+        /// Whether the effect is an Active Skill.<br/>
+        /// Active Skill effects implement ActiveSkillJustPressed, ActiveSkillHeld or ActiveSkillJustReleased.
+        /// </summary>
+        public virtual bool ActiveSkill => false;
 
         protected sealed override void Register()
         {
@@ -68,6 +64,7 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         /// The item associated with this effect. Null if none is found.
         /// </summary>
         public Item EffectItem(Player player) => player.AccessoryEffects().EffectItems[Index];
+        public bool HasEffectEnchant(Player player) => EffectItem(player)?.ModItem is BaseEnchant;
         public IEntitySource GetSource_EffectItem(Player player) => player.GetSource_Accessory(EffectItem(player));
 
         #region Overridables
@@ -99,6 +96,21 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         public virtual void OnHurt(Player player, Player.HurtInfo info) { }
         public virtual bool PreKill(Player player, double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource) { return true; }
         public virtual void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) { }
+
+        #region Active Skill methods
+        public virtual void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+
+        }
+        public virtual void ActiveSkillHeld(Player player, bool stunned)
+        {
+
+        }
+        public virtual void ActiveSkillJustReleased(Player player, bool stunned)
+        {
+
+        }
+        #endregion
         #endregion
 
 

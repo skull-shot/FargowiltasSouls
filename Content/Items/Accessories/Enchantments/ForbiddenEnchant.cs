@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool MutantsPresenceAffects => true;
         public static void ActivateForbiddenStorm(Player player)
         {
-            if (player.HasEffect<ForbiddenEffect>() && !player.HasEffect<SpiritTornadoEffect>())
+            if (player.HasEffect<ForbiddenEffect>() && player.HasEffectEnchant<ForbiddenEffect>())
             {
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
                 if (modPlayer.CanSummonForbiddenStorm)
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void CommandForbiddenStorm(Player Player)
         {
-            if (Player.HasEffect<SpiritTornadoEffect>())
+            if (!Player.HasEffectEnchant<ForbiddenEffect>())
                 return;
             List<int> list = [];
             for (int i = 0; i < Main.maxProjectiles; i++)

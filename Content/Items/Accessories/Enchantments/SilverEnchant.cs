@@ -1,6 +1,7 @@
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,9 +11,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     [AutoloadEquip(EquipType.Shield)]
     public class SilverEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips => 
+            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            
         }
 
         public override Color nameColor => new(180, 180, 204);
@@ -29,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<SilverEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -49,7 +54,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class SilverEffect : AccessoryEffect
     {
 
-        public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
+        public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<SilverEnchant>();
+    }
+    public class ParryEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<SilverEnchant>();
+        public override bool ActiveSkill => true;
     }
 }

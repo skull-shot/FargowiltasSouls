@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
@@ -81,7 +83,10 @@ namespace FargowiltasSouls.Content.UI.Elements
                 IconHighlight.Draw(spriteBatch);
                 OncomingMutant.Draw(spriteBatch);
                 if (!Main.LocalPlayer.FargoSouls().HasClickedWrench && Main.GlobalTimeWrappedHourly % 1f < 0.5f)
-                    IconFlash.Draw(spriteBatch);
+                {
+                    if (Main.LocalPlayer.AccessoryEffects().EquippedEffects.Any(p => p))
+                        IconFlash.Draw(spriteBatch);
+                }
             }
 
         }

@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class PhantasmalEyeLeashProj : ModProjectile
     {
-        
+        public override string Texture => "Terraria/Images/Projectile_452";
 
         public override void SetStaticDefaults()
         {
@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
-            Main.projFrames[Projectile.type] = 4;
         }
 
         public override void SetDefaults()
@@ -54,13 +53,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
                     }
                 }
-            }
-
-            if (++Projectile.frameCounter >= 5)
-            {
-                Projectile.frameCounter = 0;
-                Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
-
             }
         }
 

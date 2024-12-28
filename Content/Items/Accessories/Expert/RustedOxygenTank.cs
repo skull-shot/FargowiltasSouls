@@ -1,4 +1,6 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,7 +20,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
             Item.height = 20;
             Item.rare = ItemRarityID.Expert;
             Item.value = Item.sellPrice(0, 4);
-
+            
             Item.expert = true;
         }
 
@@ -78,6 +80,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 
 
         }
+
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<RustedOxygenTankInactive>());
+            return false;
+        }
+
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
@@ -102,9 +112,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
             Item.height = 20;
             Item.rare = ItemRarityID.Expert;
             Item.value = Item.sellPrice(0, 4);
-
+            
             Item.expert = true;
         }
+
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<RustedOxygenTank>());
+            return false;
+        }
+
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
