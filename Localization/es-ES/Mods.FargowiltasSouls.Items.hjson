@@ -2706,12 +2706,8 @@ FleshHand: {
 }
 
 LeashOfCthulhu: {
-	// DisplayName: Eyeleash
-	/* Tooltip:
-		'''
-		Servants gather around you whilst spun, flying towards your cursor when released
-		'The mutilated carcass of a defeated foe..'
-		''' */
+	// DisplayName: Leash of Cthulhu
+	// Tooltip: "'The mutilated carcass of a defeated foe...'"
 }
 
 RefractorBlaster: {
@@ -3306,7 +3302,7 @@ CrystallineCongregation: {
 	/* Tooltip:
 		'''
 		Summon up to 30 crystal balls near your mouse cursor that home towards you 
-		Release the button to send them towards your cursor
+		 Release the button to send them towards your cursor
 		''' */
 }
 
