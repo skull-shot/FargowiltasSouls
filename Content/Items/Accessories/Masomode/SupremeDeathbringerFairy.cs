@@ -13,7 +13,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<SpecialDashEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -64,6 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.npcTypeNoAggro[234] = true;
             player.npcTypeNoAggro[235] = true;
             fargoPlayer.QueenStingerItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
             if (player.honey)
                 player.GetArmorPenetration(DamageClass.Generic) += 5;
 
