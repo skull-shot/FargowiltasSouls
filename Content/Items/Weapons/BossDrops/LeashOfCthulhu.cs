@@ -10,10 +10,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Leash of Cthulhu");
-            // Tooltip.SetDefault("'The mutilated carcass of a defeated foe...'");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "克苏鲁连枷");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'被打败的敌人的残尸...'");
+            ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
         }
 
         public override void SetDefaults()
@@ -34,6 +31,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
+            Item.channel = true;
         }
     }
 }
