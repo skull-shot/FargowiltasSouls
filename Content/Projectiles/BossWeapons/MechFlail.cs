@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
     {
         private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailChain";
         private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlail";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailEye";
+        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechEyeProjectile";
 
         private static Asset<Texture2D> chainTexture;
         private static Asset<Texture2D> EyeTexture;
