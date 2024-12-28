@@ -6,10 +6,10 @@ using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Fargowiltas.FargoSets;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
@@ -17,7 +17,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     public class MasochistSoul : BaseSoul
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
+             AccessoryEffectLoader.GetEffect<ParryEffect>(),
+             AccessoryEffectLoader.GetEffect<DiveEffect>(),
+             AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
         public override void SetDefaults()
         {

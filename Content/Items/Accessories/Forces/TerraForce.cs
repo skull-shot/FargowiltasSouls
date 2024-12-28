@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,7 +13,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     [AutoloadEquip(EquipType.Shield)]
     public class TerraForce : BaseForce
     {
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+    [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override void SetStaticDefaults()
         {
             Enchants[Type] =

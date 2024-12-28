@@ -1,3 +1,8 @@
+GrantsSkill: Grants Active Skill:
+GrantsSkillsPlural: Grants Active Skills:
+KeybindMenu: Press {0} to bind skills
+Unbound: Unbound
+
 SpecialDashEffect: {
 	DisplayName: Bee Dash
 	Tooltip: Perform a short quick bee dash towards your cursor
@@ -56,7 +61,7 @@ DebuffInstallKeyEffect: {
 }
 
 FrigidGemstoneKeyEffect: {
-	DisplayName: Ice Rod
+	DisplayName: Frigid Spell
 	Tooltip:
 		'''
 		Summons an ice block to your cursor
@@ -65,7 +70,7 @@ FrigidGemstoneKeyEffect: {
 }
 
 BombKeyEffect: {
-	DisplayName: Freeze Bomb
+	DisplayName: Graze Bomb
 	Tooltip:
 		'''
 		Requires being charged by grazing attacks

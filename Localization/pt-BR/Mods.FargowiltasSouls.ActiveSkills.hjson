@@ -1,3 +1,8 @@
+// GrantsSkill: Grants Active Skill:
+// GrantsSkillsPlural: Grants Active Skills:
+// KeybindMenu: Press {0} to bind skills
+// Unbound: Unbound
+
 SpecialDashEffect: {
 	// DisplayName: Bee Dash
 	// Tooltip: Perform a short quick bee dash towards your cursor
@@ -17,7 +22,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
-		Defaults to Double Tap DOWN if unbound
+		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }
 
@@ -37,7 +42,7 @@ ParryEffect: {
 		'''
 		Hold to guard
 		Guard shortly before being hit to parry
-		Defaults to Right Click if unbound
+		Defaults to Right Click if no key is bound to skill slot
 		''' */
 }
 
@@ -56,7 +61,7 @@ DebuffInstallKeyEffect: {
 }
 
 FrigidGemstoneKeyEffect: {
-	// DisplayName: Ice Rod
+	// DisplayName: Frigid Spell
 	/* Tooltip:
 		'''
 		Summons an ice block to your cursor
@@ -65,7 +70,7 @@ FrigidGemstoneKeyEffect: {
 }
 
 BombKeyEffect: {
-	// DisplayName: Freeze Bomb
+	// DisplayName: Graze Bomb
 	/* Tooltip:
 		'''
 		Requires being charged by grazing attacks

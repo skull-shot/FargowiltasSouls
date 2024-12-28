@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -12,6 +13,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class BionomicCluster : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips => 
+            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
 
         public override void SetStaticDefaults()
         {

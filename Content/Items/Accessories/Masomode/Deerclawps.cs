@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,9 +10,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
     public class Deerclawps : SoulsItem
     {
-
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DiveEffect>()];
         public override void SetStaticDefaults()
         {
 

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -11,6 +12,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class FrigidGemstone : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
 
         public override void SetStaticDefaults()
         {

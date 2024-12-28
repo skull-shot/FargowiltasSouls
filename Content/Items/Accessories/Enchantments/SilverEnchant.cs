@@ -1,6 +1,7 @@
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,9 +11,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     [AutoloadEquip(EquipType.Shield)]
     public class SilverEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips => 
+            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            
         }
 
         public override Color nameColor => new(180, 180, 204);

@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,6 +13,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class LumpOfFlesh : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ParryEffect>(),
+            AccessoryEffectLoader.GetEffect<DiveEffect>()];
 
         public override void SetStaticDefaults()
         {

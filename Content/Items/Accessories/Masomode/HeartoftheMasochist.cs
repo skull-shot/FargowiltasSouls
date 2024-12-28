@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -13,6 +14,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class HeartoftheMasochist : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
+             AccessoryEffectLoader.GetEffect<ParryEffect>(),
+             AccessoryEffectLoader.GetEffect<DiveEffect>(),
+             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
         public override void SetStaticDefaults()
         {
