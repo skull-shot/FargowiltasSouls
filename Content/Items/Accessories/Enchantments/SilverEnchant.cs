@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class SilverEffect : AccessoryEffect
     {
 
-        public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
+        public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<SilverEnchant>();
     }
     public class ParryEffect : AccessoryEffect
