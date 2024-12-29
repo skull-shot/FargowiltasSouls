@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -144,10 +145,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                        
                         Vector2 offsetFromPlayer = new Vector2(player.direction).RotatedBy((float)Math.PI * 10f * (SpinningStateTimer / 60f) * player.direction);
 
-                        if (++EyeTimer >= 60)
+                        if (++EyeTimer >= 40)
                         {
-                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(7, 7),
-                            ModContent.ProjectileType<EyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                            if (Main.projectile.Where(p => p.TypeAlive<EyeProjectile>() && p.ai[0] == 0 && p.owner == Projectile.owner).Count() < 4)
+                            {
+                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(7, 7),
+                                    ModContent.ProjectileType<EyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                            }
                             EyeTimer = 0;
                         }
 

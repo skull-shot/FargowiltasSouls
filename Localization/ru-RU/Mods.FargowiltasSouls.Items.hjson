@@ -3731,8 +3731,8 @@ DarkTome: {
 	// DisplayName: Dark Tome
 	/* Tooltip:
 		'''
-		Hold left click to summon up to 3 spectral books that chase your cursor
-		Release left click to make the books release a volley of pages
+		Hold button to summon up to 3 spectral books that chase your cursor
+		Releasing button causes the books to release a volley of pages
 		'The arcane grimoire of a defeated foe...'
 		''' */
 }

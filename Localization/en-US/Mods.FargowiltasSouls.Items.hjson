@@ -2687,10 +2687,10 @@ FleshHand: {
 LeashOfCthulhu: {
 	DisplayName: Eyeleash
 	Tooltip:
-	'''
-		Servants gather around you whilst spun, flying towards your cursor when released
-		'The mutilated carcass of a defeated foe..'
-	'''
+		'''
+			Servants gather around you whilst spun, flying towards your cursor when released
+			'The mutilated carcass of a defeated foe..'
+		'''
 }
 
 RefractorBlaster: {
