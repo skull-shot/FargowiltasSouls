@@ -116,41 +116,44 @@ namespace FargowiltasSouls.Content.Items
             if (activeSkills > 0)
             {
                 int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
-                string names = "";
-                string description = "";
-                for (int i = 0; i < activeSkills; i++)
+                if (firstTooltip >= 0)
                 {
-                    var skill = ActiveSkillTooltips[i];
-                    if (i == 0)
-                        description = Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.Tooltip");
-                    else
-                        names += ", ";
-                    names += Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.DisplayName");
-                    
-                }
-                string nameLoc = "GrantsSkillsPlural";
-                if (activeSkills == 1)
-                    nameLoc = "GrantsSkill";
-                string nameText = Language.GetTextValue($"Mods.FargowiltasSouls.ActiveSkills.{nameLoc}");
-                string key = $"[{Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")}]";
-                var keys = FargowiltasSouls.ActiveSkillMenuKey.GetAssignedKeys();
+                    string names = "";
+                    string description = "";
+                    for (int i = 0; i < activeSkills; i++)
+                    {
+                        var skill = ActiveSkillTooltips[i];
+                        if (i == 0)
+                            description = Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.Tooltip");
+                        else
+                            names += ", ";
+                        names += Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.DisplayName");
+
+                    }
+                    string nameLoc = "GrantsSkillsPlural";
+                    if (activeSkills == 1)
+                        nameLoc = "GrantsSkill";
+                    string nameText = Language.GetTextValue($"Mods.FargowiltasSouls.ActiveSkills.{nameLoc}");
+                    string key = $"[{Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")}]";
+                    var keys = FargowiltasSouls.ActiveSkillMenuKey.GetAssignedKeys();
                     if (keys.Count > 0)
                         key = keys[0];
-                string keybindMenuText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.KeybindMenu", key);
+                    string keybindMenuText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.KeybindMenu", key);
 
-                var namesTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkills", nameText + " " + names);
-                var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", keybindMenuText);
-                var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
+                    var namesTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkills", nameText + " " + names);
+                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", keybindMenuText);
+                    var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
 
-                Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.8f);
-                Color color2 = Color.LightBlue;
-                namesTooltip.OverrideColor = color1;
-                bindTooltip.OverrideColor = color1;
-                descTooltip.OverrideColor = color2;
-                tooltips.Insert(firstTooltip, namesTooltip);
-                tooltips.Insert(firstTooltip + 1, bindTooltip);
-                if (activeSkills == 1)
-                    tooltips.Insert(firstTooltip + 2, descTooltip);
+                    Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.8f);
+                    Color color2 = Color.LightBlue;
+                    namesTooltip.OverrideColor = color1;
+                    bindTooltip.OverrideColor = color1;
+                    descTooltip.OverrideColor = color2;
+                    tooltips.Insert(firstTooltip, namesTooltip);
+                    tooltips.Insert(firstTooltip + 1, bindTooltip);
+                    if (activeSkills == 1)
+                        tooltips.Insert(firstTooltip + 2, descTooltip);
+                }
             }
         }
     }
