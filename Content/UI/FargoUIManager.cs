@@ -181,7 +181,6 @@ namespace FargowiltasSouls.Content.UI
                 CloseSoulToggler();
             }
         }
-
         public static void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int index = layers.FindIndex((layer) => layer.Name == "Vanilla: Inventory");

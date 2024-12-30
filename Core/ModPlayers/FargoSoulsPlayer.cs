@@ -12,6 +12,7 @@ using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -138,6 +139,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void LoadData(TagCompound tag)
         {
+            FargoUIManager.CloseActiveSkillMenu();
+
             var playerData = tag.GetList<string>($"{Mod.Name}.{Player.name}.Data");
             MutantsPactSlot = playerData.Contains("MutantsPactSlot");
             MutantsDiscountCard = playerData.Contains("MutantsDiscountCard");
