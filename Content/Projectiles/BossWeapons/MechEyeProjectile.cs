@@ -26,13 +26,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 180;
             AIType = ProjectileID.Bullet;
             Projectile.scale = 1.5f;
 
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
             Projectile.extraUpdates = 1;
         }
