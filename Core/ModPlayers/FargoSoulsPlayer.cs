@@ -123,6 +123,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             tag.Add($"{Mod.Name}.{Player.name}.TogglesOff", togglesOff);
+
+            var activeSkills = new List<string>();
+            foreach (var slot in ActiveSkills)
+            {
+                if (slot == null)
+                    activeSkills.Add("Empty");
+                else
+                    activeSkills.Add(slot.Name);
+            }
+            tag.Add($"{Mod.Name}.{Player.name}.ActiveSkills", activeSkills);
             Toggler.Save();
         }
 
@@ -141,6 +151,14 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
             disabledToggles = ToggleLoader.LoadedToggles.Keys.Where(x => disabledToggleNames.Contains(x.Name)).ToList();
+
+            List<string> savedSkills = tag.GetList<string>($"{Mod.Name}.{Player.name}.ActiveSkills").ToList();
+            for (int i = 0; i < ActiveSkills.Length; i++)
+            {
+                if (savedSkills.Count <= i)
+                    break;
+                ActiveSkills[i] = savedSkills[i] == "Empty" ? null : AccessoryEffectLoader.AccessoryEffects.Find(x => x.Name == savedSkills[i]);
+            }
         }
         public override void OnEnterWorld()
         {
