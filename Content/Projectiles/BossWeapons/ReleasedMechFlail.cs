@@ -15,6 +15,7 @@ using XPT.Core.Audio.MP3Sharp.Decoding.Decoders.LayerIII;
 using Terraria.DataStructures;
 using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 using FargowiltasSouls.Assets.Sounds;
+using System.Threading;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
@@ -63,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.penetrate = -1;
             //AIType = ProjectileID.Bullet;
             Projectile.scale = 1.5f;
-            
+            Projectile.timeLeft = 120;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
@@ -82,7 +83,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2400, false, true));
             if (n.Alive())
-            {   
+            {
+                Projectile.timeLeft = 120;
+                if (Projectile.Distance(n.Center) >= 2400)
+                {
+                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
+                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    Projectile.Kill();
+                }
 
                 //redirect
                 if (++DashTimer <= 45 && DashAmount <= 4)
@@ -104,7 +112,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         //SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.05f, MaxInstances = 1 }, Projectile.Center);
                     }
-                    Projectile.velocity = Projectile.SafeDirectionTo(n.Center + n.velocity * 10) * 65 + Main.rand.NextVector2Circular(5,5);
+                    Projectile.velocity = Projectile.SafeDirectionTo(n.Center + n.velocity * 10) * 65 + Main.rand.NextVector2Circular(5, 5);
                     DashTimer = 0;
                     DashAmount += 1;
                 }
@@ -115,7 +123,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }
                 // kill
                 if (DashAmount >= 4 && Projectile.Distance(n.Center) <= 50)
-                {   
+                {
                     Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
                     Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
                     Particle p = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(45, 45), Color.DarkRed, 2f, 25);
@@ -127,8 +135,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.Kill();
                 }
                 Projectile.rotation = Projectile.SafeDirectionTo(n.Center).ToRotation() + (float)Math.PI / 2;
-                
-                
+
+
 
             }
                   
@@ -136,25 +144,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            float pscale1 = 2f;
-            float pscale2 = 1.75f;
-            float pscale3 = 1.5f;
-            Particle p = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(45, 45)) * 0.4f, Color.DarkRed, pscale1, 25);
-            Particle p2 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(35, 35)) * 0.4f, Color.DarkRed, pscale2, 25);
-            Particle p3 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(25, 25)) * 0.4f, Color.DarkRed, pscale3, 25);
+            Particle p = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(45, 45)) * 0.4f, Color.DarkRed, 2f, 25);
+            Particle p2 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(35, 35)) * 0.4f, Color.DarkRed, 1.75f, 25);
+            Particle p3 = new SparkParticle(target.Center, (Projectile.velocity + Main.rand.NextVector2Circular(25, 25)) * 0.4f, Color.DarkRed, 1.5f, 25);
             p.Spawn();
             p2.Spawn();
             p3.Spawn();
-
-            Vector2 vector54 = Main.player[Projectile.owner].Center - Projectile.Center;
-            Vector2 vector55 = vector54 * -1f;
-            vector55.Normalize();
-            vector55 *= Main.rand.Next(45, 65) * 0.1f;
-            vector55 = vector55.RotatedBy((Main.rand.NextDouble() - 0.5) * 1.5707963705062866);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].Center.X, Main.player[Projectile.owner].Center.Y, vector55.X, vector55.Y, ModContent.ProjectileType<MechEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
-
-
-
             base.OnHitNPC(target, hit, damageDone);
         }
 

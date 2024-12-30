@@ -907,7 +907,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
 		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile damage based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
