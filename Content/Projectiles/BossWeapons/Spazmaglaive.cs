@@ -176,9 +176,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
             if (n.Alive())
             {
-                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
+                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
+                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
                 p1.Spawn();
                 p2.Spawn();
                 p3.Spawn();

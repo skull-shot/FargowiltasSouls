@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -89,10 +90,24 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                         Player player = Main.player[Projectile.owner];
 
-                        int projtype = empowered ? ModContent.ProjectileType<RetiDeathray>() : ModContent.ProjectileType<PrimeLaser>();
-                        Vector2 projvelocity = empowered ? velocity : Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20;
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, projvelocity, projtype, Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity);
                         Projectile.velocity = -velocity * 8;
+
+                        if (!empowered)
+                        {
+                            SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
+                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                            if (p != Main.maxProjectiles)
+                            {
+                                Main.projectile[p].DamageType = DamageClass.Melee;
+                                Main.projectile[p].tileCollide = false;
+                                Main.projectile[p].localNPCHitCooldown = 30;
+                                Main.projectile[p].usesLocalNPCImmunity = true;
+                            }
+                        }
+                        else
+                        {
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity);
+                        }
                     }
                 }
 

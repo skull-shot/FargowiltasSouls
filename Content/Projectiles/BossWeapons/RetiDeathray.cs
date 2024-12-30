@@ -35,6 +35,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.FargoSouls().CanSplit = false;
             Projectile.tileCollide = false;
             Projectile.scale = 2f;
+            Projectile.localNPCHitCooldown = 40;
+            Projectile.usesLocalNPCImmunity = true;
 
             Projectile.hide = true;
             Projectile.extraUpdates = 1;
