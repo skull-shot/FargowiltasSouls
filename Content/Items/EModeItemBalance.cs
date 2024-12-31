@@ -384,6 +384,49 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.25f;
                     return EModeChange.Buff;
+                    
+                case ItemID.GolemFist:
+                    balanceTextKeys = ["GolemFist"];
+                    return EModeChange.Buff;
+
+                case ItemID.JackOLanternLauncher:
+                    balanceTextKeys = ["JackOLanternLauncher"];
+                    return EModeChange.Buff;
+
+                case ItemID.Stynger:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.MoltenFury:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.LaserMachinegun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.ChargedBlasterCannon:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
+                case ItemID.FireworksLauncher: //celebration mk1
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.SnowmanCannon:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TempestStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Nerf;
                 default:
                     return EModeChange.None;
             }
