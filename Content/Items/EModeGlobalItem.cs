@@ -283,6 +283,10 @@ namespace FargowiltasSouls.Content.Items
             {
                 velocity *= 2f;
             }
+            if (item.type == ItemID.JackOLanternLauncher)
+            {
+                velocity *= 1.5f;
+            }
         }
     }
 }
