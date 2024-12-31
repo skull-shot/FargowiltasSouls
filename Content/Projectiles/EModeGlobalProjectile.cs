@@ -1240,6 +1240,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                 }
             }
+            if (SourceItemType == ItemID.GolemFist)
+            {
+                if (projectile.owner.IsWithinBounds(Main.maxProjectiles))
+                {
+                    Player player = Main.player[projectile.owner];
+                    if (player.Alive())
+                    {
+                        float maxBonus = 2f;
+                        float bonus = maxBonus * player.Distance(target.Center) / 600f;
+                        bonus = MathHelper.Clamp(bonus, 0f, maxBonus*2);
+                        modifiers.FinalDamage *= 1 + bonus;
+                    }
+                }
+            }
             //if (projectile.arrow) //change archery and quiver to additive damage
             //{
             //    if (Main.player[projectile.owner].archery)
