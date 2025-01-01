@@ -98,5 +98,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle WoFSuck = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFSuck");
         public static readonly SoundStyle WoFScreech = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFScreech");
         public static readonly SoundStyle WoFGrowl = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFGrowl");
+        public static readonly SoundStyle WoFDeathrayTelegraph = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFDeathrayTelegraph" +
+            "");
     }
 }
