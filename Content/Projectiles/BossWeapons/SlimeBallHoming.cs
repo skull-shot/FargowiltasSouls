@@ -14,6 +14,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             base.SetDefaults();
             Projectile.penetrate = -1;
             Projectile.timeLeft = 30;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
         }
 
         public override void AI()
@@ -44,12 +46,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Main.dust[num469].velocity *= 2f;
             }
             */
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPC(target, hit, damageDone);
-            target.immune[Projectile.owner] = 9;
         }
     }
 }
