@@ -700,7 +700,7 @@ TungstenEnchant: {
 	DisplayName: Tungsten Enchantment
 	Tooltip:
 		'''
-		Increase melee weapon size by 50% and whip range by 20%
+		Increases melee weapon size by 50% and whip range by 20%
 		Your attacks cause a shockwave with huge knockback that hits other targets only
 		3 second cooldown
 		'Bigger is always better'
@@ -962,7 +962,7 @@ TerraForce: {
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt 
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
-		[i:FargowiltasSouls/TungstenEnchant] Your swords are 100% larger and other held weapons 50% larger
+		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 10%, increasing up to double your original crit chance or 50%
 		[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range (works in inventory and vanity)
 		'The land lends its strength'
@@ -1877,7 +1877,7 @@ TerrariaSoul: {
 		'''
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
-		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your swords are empowered
+		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] 10% set critical strike chance increased on hit, further item grab range, and you sometimes don't consume crafting ingredients
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
