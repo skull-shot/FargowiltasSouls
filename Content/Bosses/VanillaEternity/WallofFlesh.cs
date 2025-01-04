@@ -678,7 +678,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (t != -1)
                         {
                             if (npc.Distance(Main.player[t].Center) < 3000)
-                                SoundEngine.PlaySound(SoundID.Roar, Main.player[t].Center);
+                                SoundEngine.PlaySound(FargosSoundRegistry.WoFDeathrayTelegraph, Main.player[t].Center);
                             ai_State = -2f;
                             npc.ai[3] = (npc.Center - Main.player[t].Center).ToRotation();
                             if (npc.realLife != -1 && Main.npc[npc.realLife].velocity.X > 0)

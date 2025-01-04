@@ -1,94 +1,94 @@
-// GrantsSkill: Grants Active Skill:
-// GrantsSkillsPlural: Grants Active Skills:
-// KeybindMenu: Press {0} to bind skills
-// Unbound: Unbound
+GrantsSkill: Даёт активное умение:
+GrantsSkillsPlural: Даёт активные умения:
+KeybindMenu: Нажмите {0}, чтобы привязать умения
+Unbound: Не привязано
 
 SpecialDashEffect: {
-	// DisplayName: Bee Dash
-	// Tooltip: Perform a short quick bee dash towards your cursor
+	DisplayName: Пчелиный рывок
+	Tooltip: Короткий рывок на пчеле в сторону вашего курсора
 }
 
 BetsyDashEffect: {
-	// DisplayName: Fireball Dash
-	/* Tooltip:
+	DisplayName: Огненный рывок
+	Tooltip:
 		'''
-		Perform a short invincible fireball dash towards your cursor
-		Shares cooldown slot with Bee Dash
-		''' */
+		Короткий неуязвимый огненный рывок в сторону вашего курсора
+		Разделяет перезарядку с пчелиным рывком
+		'''
 }
 
 DiveEffect: {
-	// DisplayName: Fastfall Dive
-	/* Tooltip:
+	DisplayName: Быстрое падение
+	Tooltip:
 		'''
-		Activate in the air to fastfall
-		Defaults to Double Tap DOWN if no key is bound to skill slot
-		''' */
+		Активируйте в воздухе, чтобы совершить быстрое падение
+		Если к слоту для умений не привязана клавиша, активацией по умолчанию будет двойное нажатие ВНИЗ
+		'''
 }
 
 GoldKeyEffect: {
-	// DisplayName: Golden Shell
-	/* Tooltip:
+	DisplayName: Золотой панцирь
+	Tooltip:
 		'''
-		Encase yourself in a golden shell
-		You will not be able to move or attack, but will be immune to all damage
-		Press again to exit early
-		''' */
+		Заключает вас в золотой панцирь
+		Вы не сможете двигаться или атаковать, но будете получать никакого урона
+		Нажмите снова, чтобы выйти из панциря раньше времени
+		'''
 }
 
 ParryEffect: {
-	// DisplayName: Guard Parry
-	/* Tooltip:
+	DisplayName: Защитное парирование
+	Tooltip:
 		'''
-		Hold to guard
-		Guard shortly before being hit to parry
-		Defaults to Right Click if no key is bound to skill slot
-		''' */
+		Удерживайте, чтобы защититься
+		Поставьте защиту прямо перед тем, как получить урон, чтобы парировать
+		Если к слоту для умений не привязана клавиша, активацией по умолчанию будет правая кнопка мыши
+		'''
 }
 
 StardustEffect: {
-	// DisplayName: Stardust Stasis
-	/* Tooltip:
+	DisplayName: Стазис звёздной пыли
+	Tooltip:
 		'''
-		Freezes time for a few seconds
-		While time is frozen, your minions will continue to attack
-		''' */
+		Останавливает время на несколько секунд
+		Пока время остановлено, прислужники продолжают атаковать
+		'''
 }
 
 DebuffInstallKeyEffect: {
-	// DisplayName: Debuff Install
-	// Tooltip: Install yourself with debuffs, granting different effects depending on accessory
+	DisplayName: Установка дебаффа
+	Tooltip: Наложите на себя дебаффы, которые дают различные эффекты от аксессуара к аксессуару
 }
 
 FrigidGemstoneKeyEffect: {
-	// DisplayName: Frigid Spell
-	/* Tooltip:
+	DisplayName: Морозное заклинание
+	Tooltip:
 		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
-		''' */
+		Выпускает блок льда в сторону вашего курсора
+		В хардмоде блоки могут накладывать дебафф «Ледяной ожог»
+		'''
 }
 
 BombKeyEffect: {
-	// DisplayName: Graze Bomb
-	/* Tooltip:
+	DisplayName: Бомба грэйза
+	Tooltip:
 		'''
-		Requires being charged by grazing attacks
-		Freezes almost all enemies and projectiles
-		''' */
+		Нуждается в зарядке с помощью грэйза
+		Замораживает почти всех врагов и все снаряды
+		'''
 }
 
 BulbKeyEffect: {
-	// DisplayName: Magical Cleanse
-	/* Tooltip:
+	DisplayName: Магическое очищение
+	Tooltip:
 		'''
-		Cure yourself of most debuffs on a long cooldown
-		Also amplifies damage over time effects for nearby enemies by 2x
-		Cooldown depletes faster while not attacking
-		''' */
+		Излечивает вас от большинства дебаффов с долгой перезарядкой
+		Также усиляет весь постепенный урон для ближайших врагов в 2 раза
+		Пока вы не атакуете, умение перезаряжается быстрее
+		'''
 }
 
 AmmoCycleEffect: {
-	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	DisplayName: Смена боеприпасов
+	Tooltip: Меняет ваши боеприпасы по кругу (работает в инвентаре и слотах для украшений)
 }

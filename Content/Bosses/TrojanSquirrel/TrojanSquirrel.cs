@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -7,6 +8,7 @@ using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -774,13 +776,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 pos.X -= width / 2f;
                 pos.Y -= height / 2f;
 
-                for (int i = 0; i < 3; i++)
+                /*for (int i = 0; i < 3; i++)
                 {
                     int d = Dust.NewDust(pos, width, height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 2.5f);
                     Main.dust[d].velocity.Y -= 1.5f;
                     Main.dust[d].velocity *= 1.5f;
                     Main.dust[d].noGravity = true;
-                }
+                }*/
 
                 if (Main.rand.NextBool(3))
                 {
@@ -808,17 +810,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 pos.X -= width / 2f;
                 pos.Y -= height / 2f;
 
-                for (int i = 0; i < 2; i++)
+                /*for (int i = 0; i < 2; i++)
                 {
                     int d = Dust.NewDust(pos, width, height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 1.5f);
                     Main.dust[d].noGravity = true;
-                }
+                }*/
 
-                if (Main.rand.NextBool())
+                /*if (Main.rand.NextBool(6))
                 {
                     int d2 = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.4f, NPC.velocity.Y * 0.4f, 100, default, 3f);
                     Main.dust[d2].noGravity = true;
-                }
+                }*/
             }
             else
             {
@@ -826,13 +828,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 arms = FargoSoulsUtil.NPCExists(arms.whoAmI, ModContent.NPCType<TrojanSquirrelArms>());
             }
 
-            if (NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool(3))
+            /*if (NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool(3))
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 4f);
                 Main.dust[d].velocity.Y -= 1.5f;
                 Main.dust[d].velocity *= 1.5f;
                 Main.dust[d].noGravity = true;
-            }
+            }*/
 
             if (WorldSavingSystem.EternityMode)
             {
@@ -910,6 +912,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 SoundEngine.PlaySound(FargosSoundRegistry.TrojanLegsDeath, NPC.Center);
                 hasplayedbreaksound = true;
             }
+
+            SmokeVisuals();
         }
 
         private void ExplodeAttack()
@@ -930,6 +934,58 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     }
                 }
 
+            }
+        }
+
+        private void SmokeVisuals()
+        {
+            int headsmokedir = 0;
+            int armsmokedir = 0;
+
+            if (NPC.direction == 1)
+            {
+                headsmokedir = 50;
+                armsmokedir = 5;
+            }
+
+            if (NPC.direction == -1)
+            {
+                headsmokedir = 5;
+                armsmokedir = 25;
+            }
+            Vector2 headsmokepos = NPC.Center + new Vector2(headsmokedir, -35);
+
+            Vector2 armsmokepos = NPC.Center + new Vector2(armsmokedir, -35);
+
+            int smokeAmount = 1;
+
+            if (head == null)
+            {
+                smokeAmount = 5;
+            }
+
+            if (head == null && arms == null)
+            {
+                smokeAmount = 3;
+            }
+
+            if (head == null && arms == null && NPC.life == NPC.lifeMax / 2)
+            {
+                smokeAmount = 1;
+            }
+
+            if (Main.rand.NextBool(smokeAmount) && head == null)
+            {
+                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f);
+                p.Spawn();
+            }
+
+            if (Main.rand.NextBool(3) && arms == null && head != null)
+            {
+                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                p.Spawn();
+                //Particle p2 = new SmokeParticle(armsmokepos * -1, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                //p2.Spawn();
             }
         }
 
