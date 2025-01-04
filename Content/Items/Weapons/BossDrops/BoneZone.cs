@@ -61,7 +61,15 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             else
                 shoot = ModContent.ProjectileType<Bonez>();
 
-            Main.projectile[Projectile.NewProjectile(player.GetSource_ItemUse(Item), position, velocity, shoot, damage, knockback, player.whoAmI)].DamageType = DamageClass.Ranged;
+            int i = Projectile.NewProjectile(player.GetSource_ItemUse(Item), position, velocity, shoot, damage, knockback, player.whoAmI);
+
+            if (i != Main.maxProjectiles && shoot == ProjectileID.ClothiersCurse)
+            {
+                Main.projectile[i].DamageType = DamageClass.Ranged;
+                Main.projectile[i].localNPCHitCooldown = 10;
+                Main.projectile[i].usesLocalNPCImmunity = true;
+            }
+            
 
             counter++;
 
