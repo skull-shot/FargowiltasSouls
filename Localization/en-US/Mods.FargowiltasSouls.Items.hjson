@@ -700,9 +700,9 @@ TungstenEnchant: {
 	DisplayName: Tungsten Enchantment
 	Tooltip:
 		'''
-		Doubles melee weapon size
-		Once every 2/3 of a second a projectile will be doubled in size
-		Enlarged projectiles and non-projectile swords deal 7% more damage
+		Increase melee weapon size by 50% and whip range by 20%
+		Your attacks cause a shockwave with huge knockback that hits other targets only
+		3 second cooldown
 		'Bigger is always better'
 		'''
 }

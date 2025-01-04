@@ -2,6 +2,7 @@ using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -74,6 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateMiscEffects(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
+            player.whipRangeMultiplier += 0.2f;
             if (modPlayer.TungstenCD > 0)
                 modPlayer.TungstenCD--;
         }
@@ -141,8 +143,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void TungstenIncreaseProjSize(Projectile projectile, FargoSoulsPlayer modPlayer, IEntitySource source)
         {
             bool terraForce = !modPlayer.Player.HasEffectEnchant<TungstenEffect>();
-            if (terraForce)
-                modPlayer.TungstenCD = 40;
+            //if (terraForce)
+            //modPlayer.TungstenCD = 40; // effectively just removes the CD effect
 
             if (TungstenNeverAffectsProj(projectile))
             {
@@ -157,22 +159,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             else if (FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false))
             {
-                if (source != null && FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
-                {
-                    if (modPlayer.TungstenCD == 0)
-                        canAffect = true;
-                }
-                else if (source != null && source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
+                if (source != null && source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
                 {
                     if (sourceProj.GetGlobalProjectile<FargoSoulsGlobalProjectile>().TungstenScale != 1)
                     {
                         canAffect = true;
                         hasCD = false;
-                    }
-                    else if (sourceProj.minion || sourceProj.sentry || ProjectileID.Sets.IsAWhip[sourceProj.type])
-                    {
-                        if (modPlayer.TungstenCD == 0)
-                            canAffect = true;
                     }
                 }
             }
@@ -180,11 +172,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (canAffect)
             {
                 bool forceEffect = modPlayer.ForceEffect<TungstenEnchant>();
-                float scale = forceEffect ? 3f : 2f;
-                if (terraForce && !modPlayer.EquippedEnchants.Any(e => e.Type == ModContent.ItemType<TungstenEnchant>()))
-                    scale = 1.5f;
-                else if (TungstenNerfedProj(projectile))
-                    scale -= (scale - 1f) / 2f;
+                float scale = 1.5f;
                 projectile.position = projectile.Center;
                 projectile.scale *= scale;
                 projectile.width = (int)(projectile.width * scale);
@@ -195,7 +183,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword)
                     projectile.velocity *= scale;
-
+                /*
                 if (hasCD)
                 {
                     modPlayer.TungstenCD = 40;
@@ -205,31 +193,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     else if (forceEffect)
                         modPlayer.TungstenCD /= 2;
                 }
+                */
             }
         }
 
         public static void TungstenModifyDamage(Player player, ref NPC.HitModifiers modifiers)
         {
-            if (!player.HasEffectEnchant<TungstenEffect>())
-                return;
-
+            return;
+        }
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
+        {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            bool forceBuff = modPlayer.ForceEffect<TungstenEnchant>();
-            modifiers.FinalDamage *= forceBuff ? 1.14f : 1.07f;
-
-            /* fuck you tungsten enchant
-            int max = forceBuff ? 2 : 1;
-            for (int i = 0; i < max; i++)
+            if (modPlayer.TungstenCD == 0)
             {
-                // TODO: performance I guess
-                // if (crit)
-                    // break;
-
-                if (Main.rand.Next(0, 100) <= player.ActualClassCrit(damageClass))
-                {
-                    modifiers.SetCrit();
-                }
-            } */
+                int damage = baseDamage;
+                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<TungstenShockwave>(), damage, 10f, player.whoAmI, target.whoAmI);
+                modPlayer.TungstenCD = 60 * 3;
+            }
         }
     }
 }
