@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         }
         public override void OnSpawn(IEntitySource source)
         {
-            //SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { Pitch = 0.3f }, Projectile.Center);
             //Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -54,7 +54,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override void AI()
         {
             Projectile.position = Projectile.Center;
-            Projectile.scale += 5f / Duration;
+            float scaleModifier = Projectile.ai[1] == 1 ? 2 : 1;
+            Projectile.scale += scaleModifier * 5f / Duration;
             Projectile.width = Projectile.height = (int)(BaseRadius * Projectile.scale);
             Projectile.Center = Projectile.position;
 

@@ -36,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<TungstenEffect>(Item);
+            player.AddEffect<TungstenShockwaveEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -52,7 +53,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .Register();
         }
     }
+    public class TungstenShockwaveEffect : AccessoryEffect
+    {
 
+        public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
+        public override int ToggleItemType => ModContent.ItemType<TungstenEnchant>();
+        public override bool ExtraAttackEffect => true;
+        public override bool MutantsPresenceAffects => true;
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
+        {
+            if (!HasEffectEnchant(player))
+                return;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.TungstenCD == 0)
+            {
+                int damage = baseDamage;
+                float ai1 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;
+                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<TungstenShockwave>(), damage, 10f, player.whoAmI, target.whoAmI, ai1);
+                modPlayer.TungstenCD = 60 * 3;
+                if (ai1 == 1)
+                    modPlayer.TungstenCD /= 2;
+            }
+        }
+    }
     public class TungstenEffect : AccessoryEffect
     {
 
@@ -200,16 +223,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void TungstenModifyDamage(Player player, ref NPC.HitModifiers modifiers)
         {
             return;
-        }
-        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
-        {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.TungstenCD == 0)
-            {
-                int damage = baseDamage;
-                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<TungstenShockwave>(), damage, 10f, player.whoAmI, target.whoAmI);
-                modPlayer.TungstenCD = 60 * 3;
-            }
         }
     }
 }
