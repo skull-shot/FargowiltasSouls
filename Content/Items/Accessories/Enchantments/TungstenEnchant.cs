@@ -137,7 +137,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         ];
         public static List<int> TungstenNerfedProjType = 
         [
-            ModContent.ProjectileType<SlimeKingSlasherProj>()           
+            ModContent.ProjectileType<SlimeKingSlasherProj>(),
+            ModContent.ProjectileType<SlimeSlingingSlasherProj>()
         ];
         public static bool TungstenAlwaysAffectProj(Projectile projectile)
         {
@@ -196,6 +197,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 bool forceEffect = modPlayer.ForceEffect<TungstenEnchant>();
                 float scale = 1.5f;
+                if (TungstenNerfedProj(projectile))
+                    scale = 1.25f;
                 projectile.position = projectile.Center;
                 projectile.scale *= scale;
                 projectile.width = (int)(projectile.width * scale);
