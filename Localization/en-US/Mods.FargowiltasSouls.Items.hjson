@@ -699,7 +699,7 @@ TungstenEnchant: {
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
 		Your attacks cause a shockwave with huge knockback that hits other targets only
-		3 second cooldown
+		This has a 3 seconds cooldown
 		'Bigger is always better'
 		'''
 }
@@ -737,7 +737,7 @@ VortexEnchant: {
 	Tooltip:
 		'''
 		Your attacks against very distant enemies fire a piercing laser that deals ranged damage
-		10 second cooldown
+		This has a 10 seconds cooldown
 		'Tear into reality'
 		'''
 }

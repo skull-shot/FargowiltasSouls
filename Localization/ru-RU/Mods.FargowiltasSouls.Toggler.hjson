@@ -27,8 +27,8 @@ IronEffect: Железный магнит
 LeadPoisonEffect: Свинцовое отравление
 SilverEffect: Парирование серебра
 TinEffect: Криты олова
-TungstenEffect: Эффект вольфрама
-// TungstenShockwaveEffect: Tungsten Shockwave
+TungstenEffect: Увеличение вольфрама
+TungstenShockwaveEffect: Ударная волна вольфрама
 ObsidianProcEffect: Взрыв обсидиана
 AshWoodFireballs: Шары огня ясеня
 TerraLightningEffect: Сжатый артефакт Терры
