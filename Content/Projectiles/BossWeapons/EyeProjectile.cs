@@ -53,8 +53,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             Player player = Main.player[Projectile.owner];
 
-            const float desiredFlySpeedInPixelsPerFrame = 10;
-            const float amountOfFramesToLerpBy = 30;
+            const float desiredFlySpeedInPixelsPerFrame = 14;
+            const float amountOfFramesToLerpBy = 20;
 
             if (State == 0) // not launched
             {
