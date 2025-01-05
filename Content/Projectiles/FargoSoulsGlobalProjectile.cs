@@ -481,13 +481,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 //e.g. whips doing less damage after each hit
                 //the actual base damage of the weapon sometimes ends up 1 less than what is shown. idk why. nobody should miss it??
                 //player.gettotaldamage makes no sense btw fuck tmod
-                int weaponDamage = player.GetWeaponDamage(player.HeldItem);
+                long weaponDamage = player.GetWeaponDamage(player.HeldItem);
                 int weaponCrit = player.GetWeaponCrit(player.HeldItem);
                 if (HeldProjMemorizedDamage == 0)
                     HeldProjMemorizedDamage = weaponDamage;
                 if (HeldProjMemorizedCrit == 0)
                     HeldProjMemorizedCrit = weaponCrit;
-                projectile.damage = (int)Math.Round(projectile.damage * weaponDamage / HeldProjMemorizedDamage, 0, MidpointRounding.ToEven);
+                double finalDamage = (long)(projectile.damage * weaponDamage / HeldProjMemorizedDamage);
+                projectile.damage = (int)Math.Round(finalDamage, 0, MidpointRounding.ToEven);
                 projectile.CritChance = (int)Math.Round(projectile.CritChance * weaponCrit / HeldProjMemorizedCrit, 0, MidpointRounding.ToEven);
                 HeldProjMemorizedDamage = weaponDamage;
                 HeldProjMemorizedCrit = weaponCrit;
