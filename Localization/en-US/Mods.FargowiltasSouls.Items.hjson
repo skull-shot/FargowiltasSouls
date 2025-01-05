@@ -2928,7 +2928,7 @@ GeminiGlaives: {
 	DisplayName: Gemini Glaives
 	Tooltip:
 		'''
-		Left click to throw 3 Spazmaglaives that rapidly tear apart enemies
+		Left click to throw 3 Spazmaglaives that rapidly tear enemies apart
 		Right click to throw 3 Retiglaives that rapidly fire lasers at the cursor
 		Alternating clicks will enhance attacks
 		'The compressed forms of defeated foes..'
