@@ -2752,9 +2752,8 @@ TwinRangs: {
 	// DisplayName: Twinrangs
 	/* Tooltip:
 		'''
-		Left click to launch a buzzsaw that rapidly rips enemies apart
-		Right click to launch a swift turret that fires lasers towards the nearest enemy
-		The Twinrangs explode upon contact with each other
+		Left click to throw a Spazmarang that rapidly rips enemies apart
+		Right click to throw a Retirang that fires lasers towards the nearest enemy
 		'The compressed forms of defeated foes..'
 		''' */
 }
