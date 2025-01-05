@@ -38,6 +38,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
+            Projectile.FargoSouls().CanSplit = false;
 
             Projectile.scale = 1f;
 
