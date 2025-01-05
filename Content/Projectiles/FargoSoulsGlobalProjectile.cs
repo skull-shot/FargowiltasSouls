@@ -1070,6 +1070,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (!allowMoreSplit)
                             split.FargoSouls().CanSplit = false;
                         split.FargoSouls().TungstenScale = projectile.FargoSouls().TungstenScale;
+                        split.FargoSouls().ItemSource = projectile.FargoSouls().ItemSource;
 
                         projList.Add(split);
                     }
