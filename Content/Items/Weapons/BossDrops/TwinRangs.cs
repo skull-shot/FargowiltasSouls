@@ -41,14 +41,18 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         }
 
         public override bool AltFunctionUse(Player player)
-        {
+        {   
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<Retirang>()] >= 3)
+            {
+                return false;
+            }
             return true;
         }
 
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2)
-            {
+            if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Retirang>()] < 3)
+            {   
                 Item.shoot = ModContent.ProjectileType<Retirang>();
                 Item.shootSpeed = 10;
             }
