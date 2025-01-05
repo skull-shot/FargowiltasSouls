@@ -49,12 +49,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 LaunchDirection = buffer;
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (State != 0) // launched
+                modifiers.FinalDamage *= 1.2f;
+        }
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
 
-            const float desiredFlySpeedInPixelsPerFrame = 10;
-            const float amountOfFramesToLerpBy = 30;
+            const float desiredFlySpeedInPixelsPerFrame = 14;
+            const float amountOfFramesToLerpBy = 20;
 
             if (State == 0) // not launched
             {
