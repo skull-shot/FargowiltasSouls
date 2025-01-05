@@ -120,10 +120,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile projectile = Main.projectile[i];
                     if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
                     {
-
-                        Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
-                        Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
-                        Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.35f, 25, true);
+                        float scale = Main.rand.NextFloat(0.25f, 0.35f);
+                        Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                        Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                        Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
                         p1.Spawn();
                         p2.Spawn();
                         p3.Spawn();
@@ -198,14 +198,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
 
 
-            if (Projectile.ai[0] == 2)
+            /*if (Projectile.ai[0] == 2)
             {
                 Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 1.3f, SpriteEffects.None, 0);
             }
             if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
             {
                 Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, scale, SpriteEffects.None, 0);
-            }
+            }*/
 
             return false;
         }

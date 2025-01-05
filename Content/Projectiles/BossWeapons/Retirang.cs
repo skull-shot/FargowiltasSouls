@@ -1,5 +1,7 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles.Souls;
+using Luminance.Assets;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
     public class Retirang : ModProjectile
     {
         int counter;
-        int howlongtowaitbeforecomingback;
+        int returntime;
 
         public override void SetStaticDefaults()
         {
@@ -74,17 +76,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.frame = 1;
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0, 1 / 10f);
 
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1600, false, true));
                 if (n.Alive())
                 {
-                    if (counter < 5)
+                    if (counter < 8)
                     {
                         Projectile.rotation = Projectile.SafeDirectionTo(n.Center).ToRotation() + (float)Math.PI;
                     }
 
                     if (++Projectile.ai[1] > 25)
                     {
-                        if (Projectile.owner == Main.myPlayer && counter <= 5)
+                        if (Projectile.owner == Main.myPlayer && counter <= 8)
                         {
                             SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(n.Center - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -97,25 +99,31 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                             Projectile.velocity -= Vector2.Normalize(n.Center - Projectile.Center);
 
-                            Particle p1 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Red, 1f, 25);
-                            Particle p2 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Red, 1f, 25);
-                            Particle p3 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 5), Color.Red, 1f, 25);
+                            Particle p1 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            Particle p2 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            Particle p3 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
                             p1.Spawn();
                             p2.Spawn();
                             p3.Spawn();
+                            counter += 1;
                         }
                         Projectile.ai[1] = 0;
-                        counter += 1;
+                        
 
                     }
 
                 }
                 else
                 {
-                    counter = 5;
+                    if (++returntime >= 120)
+                    {
+                        Projectile.ai[0] = 1;
+                        Projectile.frame = 0;
+                    }
+                    Projectile.rotation = Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center).ToRotation() + (float)Math.PI;
                 }
 
-                if (counter >= 5 && ++howlongtowaitbeforecomingback >= 120)
+                if (counter >= 8 && ++returntime >= 120)
                 {
                     Projectile.ai[0] = 1;
                     Projectile.frame = 0;
