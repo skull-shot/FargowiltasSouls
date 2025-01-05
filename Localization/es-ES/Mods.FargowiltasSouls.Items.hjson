@@ -246,9 +246,6 @@ GoldEnchant: {
 	/* Tooltip:
 		'''
 		Your attacks inflict Midas
-		Press the Gold hotkey to be encased in a Golden Shell
-		You will not be able to move or attack, but will be immune to all damage
-		Press again to exit early
 		Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		'Gold makes the world go round'
 		''' */
