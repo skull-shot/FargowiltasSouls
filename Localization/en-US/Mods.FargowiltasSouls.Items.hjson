@@ -1983,7 +1983,7 @@ EridanusHat: {
 	DisplayName: Eridanus Hat
 	Tooltip:
 		'''
-		5% increased damage
+		10% increased damage
 		5% increased critical strike chance
 		Increases your max number of minions by 4
 		Increases your max number of sentries by 1
@@ -1994,7 +1994,7 @@ EridanusLegwear: {
 	DisplayName: Eridanus Legwear
 	Tooltip:
 		'''
-		5% increased damage
+		10% increased damage
 		5% increased critical strike chance
 		10% increased movement speed
 		'''

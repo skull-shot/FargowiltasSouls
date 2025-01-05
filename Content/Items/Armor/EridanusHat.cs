@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Armor
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Generic) += 0.05f;
+            player.GetDamage(DamageClass.Generic) += 0.10f;
             player.GetCritChance(DamageClass.Generic) += 5;
 
             player.maxMinions += 4;
@@ -132,7 +132,7 @@ namespace FargowiltasSouls.Content.Items.Armor
 
                 void Bonuses(DamageClass damageClass)
                 {
-                    player.GetDamage(damageClass) += 0.80f;
+                    player.GetDamage(damageClass) += 1.00f; // 100%
 
                     if (damageClass == DamageClass.Summon)
                         fargoPlayer.MinionCrits = true;
@@ -167,7 +167,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             {
                 DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
 
-                player.GetDamage(damageClass) += 0.20f;
+                player.GetDamage(damageClass) += 0.25f;
                 player.GetCritChance(damageClass) += 10;
             }
         }

@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Armor
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Generic) += 0.05f;
+            player.GetDamage(DamageClass.Generic) += 0.10f;
             player.GetCritChance(DamageClass.Generic) += 5;
             player.moveSpeed += 0.1f;
         }
