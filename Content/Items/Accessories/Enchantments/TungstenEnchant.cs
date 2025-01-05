@@ -70,8 +70,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (!HasEffectEnchant(player))
                 return;
+            bool weaponAttack = false;
+            if (item != null)
+                weaponAttack = true;
+            if (projectile != null && projectile.FargoSouls().ItemSource)
+                weaponAttack = true;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.TungstenCD == 0)
+            if (modPlayer.TungstenCD == 0 && weaponAttack)
             {
                 int damage = baseDamage;
                 float ai1 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;

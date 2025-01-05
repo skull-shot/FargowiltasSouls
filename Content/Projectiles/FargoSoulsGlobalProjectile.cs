@@ -53,6 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles
         /// <br/>When checking it, bear in mind that OnSpawn comes before a Projectile.NewProjectile() returns! High danger of infinite recursion
         /// </summary>
         public bool CanSplit = true;
+        public bool ItemSource = false;
         // private int numSplits = 1;
         public int stormTimer;
         public float TungstenScale = 1;
@@ -234,7 +235,18 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (projectile.friendly)
             {
-
+                if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
+                    ItemSource = true;
+                if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj3)
+                {
+                    //if (sourceProj3.FargoSouls().ItemSource)
+                    //    ItemSource = true;
+                    //projs shot by tiki-buffed projs will also inherit the tiki buff
+                    if (sourceProj3.FargoSouls().TikiTagged)
+                    {
+                        //TikiTagged = true;
+                    }
+                }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
                 {
                     for (int i = 0; i < 3; i++)
@@ -245,12 +257,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     //Projectile.NewProjectile(Entity.InheritSource(projectile), projectile.Center, projectile.velocity, ProjectileID.ConfettiGun, 0, 0f, projectile.owner);
                     projectile.active = false;
-                }
-
-                //projs shot by tiki-buffed projs will also inherit the tiki buff
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj3 && sourceProj3.FargoSouls().TikiTagged)
-                {
-                    //TikiTagged = true;
                 }
             }
 
@@ -393,7 +399,7 @@ namespace FargowiltasSouls.Content.Projectiles
             }
 
             if (player.HasEffect<HuntressEffect>()
-                && FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source)
+                && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
                 && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
@@ -405,7 +411,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 && CanSplit && Array.IndexOf(NoSplit, projectile.type) <= -1
                 && projectile.aiStyle != ProjAIStyleID.Spear
                 && !(AdamantiteEffect.AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type) || modPlayer.Player.heldProj == projectile.whoAmI)
-                && (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source)
+                && (ItemSource
                 || source is EntitySource_Parent parent2 && parent2.Entity is Projectile sourceProj2 && (sourceProj2.aiStyle == ProjAIStyleID.Spear || sourceProj2.minion || sourceProj2.sentry || ProjectileID.Sets.IsAWhip[sourceProj2.type] && !ProjectileID.Sets.IsAWhip[projectile.type]));
 
             if (player.HasEffect<EarthForceEffect>() && player.HasEffect<AdamantiteEffect>())
