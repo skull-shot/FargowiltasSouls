@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 int damage = baseDamage;
                 float ai1 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;
-                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<TungstenShockwave>(), damage, 10f, player.whoAmI, target.whoAmI, ai1);
+                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, player.DirectionTo(target.Center), ModContent.ProjectileType<TungstenShockwave>(), damage, 3f, player.whoAmI, target.whoAmI, ai1);
                 modPlayer.TungstenCD = 60 * 3;
                 if (ai1 == 1)
                     modPlayer.TungstenCD /= 2;
