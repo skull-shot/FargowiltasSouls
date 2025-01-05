@@ -49,6 +49,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 LaunchDirection = buffer;
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (State != 0) // launched
+                modifiers.FinalDamage *= 1.2f;
+        }
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
