@@ -60,6 +60,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<TungstenEnchant>();
         public override bool ExtraAttackEffect => true;
         public override bool MutantsPresenceAffects => true;
+        public override void PostUpdateMiscEffects(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.TungstenCD > 0)
+                modPlayer.TungstenCD--;
+        }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             if (!HasEffectEnchant(player))
@@ -97,10 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void PostUpdateMiscEffects(Player player)
         {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
             player.whipRangeMultiplier += 0.2f;
-            if (modPlayer.TungstenCD > 0)
-                modPlayer.TungstenCD--;
         }
         public static float TungstenIncreaseWeaponSize(FargoSoulsPlayer modPlayer)
         {
