@@ -18,6 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         bool empowered = false;
 
         public bool DrawTrail = false;
+        public Vector2 mousePos = Vector2.Zero;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Retiglaive");
@@ -28,11 +29,18 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write(empowered);
+            writer.Write(mousePos.X);
+            writer.Write(mousePos.Y);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             empowered = reader.ReadBoolean();
+            Vector2 buffer;
+            buffer.X = reader.ReadSingle();
+            buffer.Y = reader.ReadSingle();
+            if (Projectile.owner != Main.myPlayer)
+                mousePos = buffer;
         }
 
         public override void SetDefaults()
@@ -56,6 +64,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override bool PreAI()
         {
+            if (Projectile.owner == Main.myPlayer)
+            {
+                mousePos = Main.MouseWorld;
+            }
             if (Projectile.ai[0] == 1)
             {
                 Projectile.ai[1]++;
@@ -66,9 +78,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     int buh = empowered ? 10 : 15;
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, Vector2.Zero, 0.1f);
                     //fire lasers at cursor
+                    if (Projectile.ai[1] % buh == buh - 3) // mp sync
+                        Projectile.netUpdate = true;
                     if (Projectile.ai[1] % buh == 0)
                     {
-                        Vector2 cursor = Main.MouseWorld;
+                        Vector2 cursor = mousePos;
                         Vector2 velocity = Vector2.Normalize(cursor - Projectile.Center);
 
                         if (Projectile.ai[1] > 10)
@@ -89,24 +103,32 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         }
 
                         Player player = Main.player[Projectile.owner];
+                        if (!player.Alive())
+                        {
+                            Projectile.Kill();
+                            return false;
+                        }
 
                         Projectile.velocity = -velocity * 8;
 
                         if (!empowered)
                         {
                             SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
-                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                            if (p != Main.maxProjectiles)
+                            if (FargoSoulsUtil.HostCheck)
                             {
-                                Main.projectile[p].DamageType = DamageClass.Melee;
-                                Main.projectile[p].tileCollide = false;
-                                Main.projectile[p].localNPCHitCooldown = 30;
-                                Main.projectile[p].usesLocalNPCImmunity = true;
+                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(mousePos - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                if (p != Main.maxProjectiles)
+                                {
+                                    Main.projectile[p].DamageType = DamageClass.Melee;
+                                    Main.projectile[p].tileCollide = false;
+                                    Main.projectile[p].localNPCHitCooldown = 30;
+                                    Main.projectile[p].usesLocalNPCImmunity = true;
+                                }
                             }
                         }
-                        else
+                        else if (FargoSoulsUtil.HostCheck)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity);
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity, Projectile.Distance(mousePos) + 200);
                         }
                     }
                 }

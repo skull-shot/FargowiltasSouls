@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             behindProjectiles.Add(index);
         }
-
+        public override bool ShouldUpdatePosition() => false;
         public override void AI()
         {
             Vector2? vector78 = null;
@@ -97,6 +97,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             float[] array3 = new float[(int)num805];
             Collision.LaserScan(samplingPoint, Projectile.velocity, num806 * Projectile.scale, 2000f, array3);
+            for (int i = 0; i < array3.Length; i++)
+            {
+                if (array3[i] > Projectile.ai[2])
+                    array3[i] = Projectile.ai[2];
+            }
             //for (int i = 0; i < array3.Length; i++) array3[i] = Projectile.localAI[0] * Projectile.ai[1];
             float num807 = 0f;
             int num3;
@@ -120,13 +125,23 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         //public override Color? GetAlpha(Color lightColor) => new Color(255, 0, 0) * 0.80f;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 1.8f;
+        public float WidthFunction(float x)
+        {
+            float modifier = 1.8f;
+            if (x > 0.95f)
+                modifier = MathHelper.Lerp(modifier, 0f, (x - 0.95f) / 0.05f);
+            return Projectile.width* Projectile.scale * modifier;
+        }
 
         public static Color ColorFunction(float _)
         {
             Color color = Color.DarkRed;
             color.A = 0;
             return color;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
         }
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
@@ -136,7 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.RetinazerDeathray");
 
             // Get the laser end position.
-            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 2f;
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1];
 
             // Create 8 points that span across the draw distance from the projectile center.
             Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity * 20f;
