@@ -2752,8 +2752,9 @@ TwinRangs: {
 	// DisplayName: Twinrangs
 	/* Tooltip:
 		'''
-		Left click to throw a Spazmarang that rapidly rips enemies apart
+		Left click to throw a Spazmarang that rapidly tears enemies apart
 		Right click to throw a Retirang that fires lasers towards the nearest enemy
+		Only 3 Retirangs can exist at any given time
 		'The compressed forms of defeated foes..'
 		''' */
 }
@@ -2948,7 +2949,8 @@ GeminiGlaives: {
 	// DisplayName: Gemini Glaives
 	/* Tooltip:
 		'''
-		Fire different glaives depending on mouse click
+		Left click to throw 3 Spazmaglaives that rapidly tear enemies apart
+		Right click to throw 3 Retiglaives that rapidly fire lasers at the cursor
 		Alternating clicks will enhance attacks
 		'The compressed forms of defeated foes..'
 		''' */
@@ -3492,7 +3494,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	// StarlightTungsten: x0.40 damage when used with Tungsten Enchantment
+	// StarlightTungsten: 0.75x damage when used with Tungsten Enchantment
 	// DefensePrefixMaxLife: +{0} max life
 	// ViolentPrefix: +{0}% attack speed
 	// EternityItem: Eternity
