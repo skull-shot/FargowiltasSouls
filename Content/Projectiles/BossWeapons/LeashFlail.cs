@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             int launchTimeLimit = 12;  // How much time the projectile can go before retracting (speed and shootTimer will set the flail's range)
             float launchSpeed = 24f; // How fast the projectile can move
             float maxLaunchLength = 400f; // How far the projectile's chain can stretch before being forced to retract when in launched state
-            float retractAcceleration = 1f; // How quickly the projectile will accelerate back towards the player while retracting
+            float retractAcceleration = 1.5f; // How quickly the projectile will accelerate back towards the player while retracting
             float maxRetractSpeed = 20f; // The max speed the projectile will have while retracting
             float forcedRetractAcceleration = 6f; // How quickly the projectile will accelerate back towards the player while being forced to retract
             float maxForcedRetractSpeed = 15f; // The max speed the projectile will have while being forced to retract
