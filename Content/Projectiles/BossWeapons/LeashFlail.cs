@@ -71,7 +71,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.height = 42; 
             Projectile.friendly = true; 
             Projectile.penetrate = -1; 
-            Projectile.DamageType = DamageClass.Melee; 
+            Projectile.DamageType = DamageClass.Melee;
+            //Projectile.aiStyle = ProjAIStyleID.Flail;
             Projectile.usesLocalNPCImmunity = true; 
             Projectile.localNPCHitCooldown = 10; 
         }
@@ -446,7 +447,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
             if (chainSegmentLength == 0)
             {
-                chainSegmentLength = 10; 
+                chainSegmentLength = 10 * Projectile.scale; 
             }
             float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
             int chainCount = 0;
@@ -458,13 +459,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                 var chainTextureToDraw = chainTexture;
           
-                Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, Projectile.scale, SpriteEffects.None, 0f);
               
                 chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
                 chainCount++;
                 chainLengthRemainingToDraw -= chainSegmentLength;
             }
-            Main.spriteBatch.Draw((CurrentAIState == AIState.Spinning) ? EyeTexture.Value : FlailTexture.Value, Projectile.Center - Main.screenPosition, null, Lighting.GetColor((int)Projectile.Center.X / 16, (int)(Projectile.Center.Y / 16f)), Projectile.rotation, new Vector2(19, 20), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw((CurrentAIState == AIState.Spinning) ? EyeTexture.Value : FlailTexture.Value, Projectile.Center - Main.screenPosition, null, Lighting.GetColor((int)Projectile.Center.X / 16, (int)(Projectile.Center.Y / 16f)), Projectile.rotation, new Vector2(19, 20), Projectile.scale, SpriteEffects.None, 0f);
 
             return false;
         }
