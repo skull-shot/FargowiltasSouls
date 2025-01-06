@@ -180,7 +180,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
-                        if (player.controlUseItem) 
+                        if (false)//player.controlUseItem) 
                         {
                             CurrentAIState = AIState.Dropping;
                             StateTimer = 0f;
@@ -209,7 +209,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             Projectile.Kill(); 
                             return;
                         }
-                        if (player.controlUseItem) 
+                        if (false)//player.controlUseItem) 
                         {
                             CurrentAIState = AIState.Dropping;
                             StateTimer = 0f;
@@ -261,7 +261,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                     break;
                 case AIState.Dropping:
-                    if (!player.controlUseItem || Projectile.Distance(mountedCenter) > maxDroppedRange)
+                    if (true)//!player.controlUseItem || Projectile.Distance(mountedCenter) > maxDroppedRange)
                     {
                         CurrentAIState = AIState.ForcedRetracting;
                         StateTimer = 0f;
