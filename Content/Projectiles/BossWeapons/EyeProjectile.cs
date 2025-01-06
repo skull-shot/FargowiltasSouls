@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (State != 0) // launched
-                modifiers.FinalDamage *= 1.2f;
+                modifiers.FinalDamage *= 1.4f;
         }
         public override void AI()
         {
