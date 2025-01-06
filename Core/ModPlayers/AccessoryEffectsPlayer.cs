@@ -27,10 +27,12 @@ namespace FargowiltasSouls.Core.ModPlayers
     public partial class FargoSoulsPlayer
     {
 
-        public void GoldKey()
+        public void GoldKey(bool stunned)
         {
             if (!Player.HasBuff(ModContent.BuffType<GoldenStasisBuff>()) && !Player.HasBuff(ModContent.BuffType<GoldenStasisCDBuff>()))
             {
+                if (stunned)
+                    return;
                 int duration = 300;
 
                 if (ForceEffect<GoldEnchant>())
@@ -252,7 +254,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
 
 
-        public void SpecialDashKey()
+        public void SpecialDashKey(bool heart = false)
         {
             if (SpecialDashCD <= 0)
             {
@@ -268,14 +270,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.controlDown = false;*/
                     Player.controlUseItem = false;
                     Player.controlUseTile = false;
-                    Player.controlHook = false;
+                    Player.controlHook = false; 
                     Player.controlMount = false;
 
                     Player.itemAnimation = 0;
                     Player.itemTime = 0;
                     Player.reuseDelay = 0;
 
-                    if (BetsysHeartItem != null)
+                    if (BetsysHeartItem != null && heart)
                     {
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
                         Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<Content.Projectiles.BetsyDash>(), (int)(100 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
@@ -444,8 +446,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void DebuffInstallKey()
         {
-            if (Player.HasEffect<AgitatingLensInstall>()
-                && Player.controlUp && Player.controlDown)
+            if (Player.HasEffect<AgitatingLensInstall>())
             {
 				if (!Player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>())
 					&& !Player.HasBuff(ModContent.BuffType<BerserkerInstallCDBuff>()))
@@ -508,133 +509,141 @@ namespace FargowiltasSouls.Core.ModPlayers
                 fastFallCD--;
 
             bool canFastFall = Player.HasEffect<LihzahrdGroundPound>() || Player.HasEffect<DeerclawpsDive>();
-            if (Player.gravDir > 0 && canFastFall)
-            {
-                if (fastFallCD <= 0 && !Player.mount.Active && Player.controlDown && Player.releaseDown && !Player.controlJump && Player.doubleTapCardinalTimer[0] > 0 && Player.doubleTapCardinalTimer[0] != 15)
-                {
-                    if (Player.velocity.Y != 0f)
-                    {
-                        if (Player.velocity.Y < 15f)
-                        {
-                            Player.velocity.Y = 15f;
-                        }
+            if (!(Player.gravDir > 0 && Player.HasEffect<DiveEffect>() && canFastFall))
+                return;
 
-                        if (GroundPound <= 0)
-                        {
-                            GroundPound = 1;
-                        }
+            bool keying = Player.controlDown && Player.releaseDown && Player.doubleTapCardinalTimer[0] > 0 && Player.doubleTapCardinalTimer[0] != 15;
+            
+            ModKeybind key = AccessoryEffectLoader.GetKeybind<DiveEffect>(this);
+            if (key == null)
+                return;
+            if (key.GetAssignedKeys().Any())
+                keying = key.JustPressed;
+
+            if (fastFallCD <= 0 && !Player.mount.Active && !Player.controlJump && keying)
+            {
+                if (Player.velocity.Y != 0f)
+                {
+                    if (Player.velocity.Y < 15f)
+                    {
+                        Player.velocity.Y = 15f;
+                    }
+
+                    if (GroundPound <= 0)
+                    {
+                        GroundPound = 1;
+                    }
+                }
+            }
+
+            if (GroundPound > 0)
+            {
+                fastFallCD = 60;
+
+                if (Player.velocity.Y == 0f && Player.controlDown)
+                {
+                    Vector2 vec = Collision.TileCollision(Player.position, 15f * Vector2.UnitY, Player.width, Player.height, true, true, (int)Player.gravDir);
+                    if (vec != Vector2.Zero)
+                    {
+                        Player.position += vec;
+                        Player.velocity.Y = 15f;
                     }
                 }
 
-                if (GroundPound > 0)
+                if (Player.velocity.Y < 0f || Player.mount.Active || (Player.controlJump && !Player.controlDown))
                 {
-                    fastFallCD = 60;
-
-                    if (Player.velocity.Y == 0f && Player.controlDown)
-                    {
-                        Vector2 vec = Collision.TileCollision(Player.position, 15f * Vector2.UnitY, Player.width, Player.height, true, true, (int)Player.gravDir);
-                        if (vec != Vector2.Zero)
-                        {
-                            Player.position += vec;
-                            Player.velocity.Y = 15f;
-                        }
-                    }
-
-                    if (Player.velocity.Y < 0f || Player.mount.Active || (Player.controlJump && !Player.controlDown))
+                    GroundPound = 0;
+                }
+                else if (Player.velocity.Y == 0f && Player.oldVelocity.Y == 0f)
+                {
+                    int x = (int)Player.Center.X / 16;
+                    int y = (int)(Player.position.Y + Player.height + 8) / 16;
+                    if (/*GroundPound > 15 && */x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY
+                        && Main.tile[x, y] != null && Main.tile[x, y].HasUnactuatedTile && Main.tileSolid[Main.tile[x, y].TileType])
                     {
                         GroundPound = 0;
-                    }
-                    else if (Player.velocity.Y == 0f && Player.oldVelocity.Y == 0f)
-                    {
-                        int x = (int)Player.Center.X / 16;
-                        int y = (int)(Player.position.Y + Player.height + 8) / 16;
-                        if (/*GroundPound > 15 && */x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY
-                            && Main.tile[x, y] != null && Main.tile[x, y].HasUnactuatedTile && Main.tileSolid[Main.tile[x, y].TileType])
+
+                        if (Player.HasEffect<DeerclawpsDive>())
                         {
-                            GroundPound = 0;
+                            DeerclawpsDive.DeerclawpsLandingSpikes(Player, Player.Bottom);
+                        }
+                        if (Player.HasEffect<LihzahrdBoulders>())
+                        {
+                            if (!Main.dedServ)
+                                ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
 
-                            if (Player.HasEffect<DeerclawpsDive>())
+                            if (Player.whoAmI == Main.myPlayer)
                             {
-                                DeerclawpsDive.DeerclawpsLandingSpikes(Player, Player.Bottom);
-                            }
-                            if (Player.HasEffect<LihzahrdBoulders>())
-                            {
-                                if (!Main.dedServ)
-                                    ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
+                                int baseDam = 500;
+                                if (MasochistSoul)
+                                    baseDam *= 3;
 
-                                if (Player.whoAmI == Main.myPlayer)
+                                //explosion
+                                Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<MoonLordSunBlast>(), 0, 0f, Player.whoAmI);
+                                int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), (int)(baseDam * 2 * Player.ActualClassDamage(DamageClass.Melee)), 9f, Player.whoAmI);
+                                if (p != Main.maxProjectiles)
+                                    Main.projectile[p].DamageType = DamageClass.Melee;
+
+                                //boulders
+                                int dam = baseDam;
+                                for (int i = -5; i <= 5; i += 2)
                                 {
-                                    int baseDam = 500;
-                                    if (MasochistSoul)
-                                        baseDam *= 3;
+                                    Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, -10f * Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / 6 * i),
+                                        ModContent.ProjectileType<LihzahrdBoulderFriendly>(), (int)(dam * Player.ActualClassDamage(DamageClass.Melee)), 7.5f, Player.whoAmI);
+                                }
 
-                                    //explosion
-                                    Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<MoonLordSunBlast>(), 0, 0f, Player.whoAmI);
-                                    int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), (int)(baseDam * 2 * Player.ActualClassDamage(DamageClass.Melee)), 9f, Player.whoAmI);
-                                    if (p != Main.maxProjectiles)
-                                        Main.projectile[p].DamageType = DamageClass.Melee;
-
-                                    //boulders
-                                    int dam = baseDam;
-                                    for (int i = -5; i <= 5; i += 2)
+                                //geysers
+                                int baseDamage = (int)(baseDam / 2 * Player.ActualClassDamage(DamageClass.Melee));
+                                if (MasochistSoul)
+                                    baseDamage *= 3;
+                                y -= 2;
+                                for (int i = -3; i <= 3; i++)
+                                {
+                                    if (i == 0)
+                                        continue;
+                                    int tilePosX = x + 16 * i;
+                                    int tilePosY = y;
+                                    if (Main.tile[tilePosX, tilePosY] != null && tilePosX >= 0 && tilePosX < Main.maxTilesX)
                                     {
-                                        Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, -10f * Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / 6 * i),
-                                            ModContent.ProjectileType<LihzahrdBoulderFriendly>(), (int)(dam * Player.ActualClassDamage(DamageClass.Melee)), 7.5f, Player.whoAmI);
-                                    }
-
-                                    //geysers
-                                    int baseDamage = (int)(baseDam / 2 * Player.ActualClassDamage(DamageClass.Melee));
-                                    if (MasochistSoul)
-                                        baseDamage *= 3;
-                                    y -= 2;
-                                    for (int i = -3; i <= 3; i++)
-                                    {
-                                        if (i == 0)
-                                            continue;
-                                        int tilePosX = x + 16 * i;
-                                        int tilePosY = y;
-                                        if (Main.tile[tilePosX, tilePosY] != null && tilePosX >= 0 && tilePosX < Main.maxTilesX)
+                                        while (Main.tile[tilePosX, tilePosY] != null && tilePosY >= 0 && tilePosY < Main.maxTilesY
+                                            && !(Main.tile[tilePosX, tilePosY].HasUnactuatedTile && Main.tileSolid[Main.tile[tilePosX, tilePosY].TileType]))
                                         {
-                                            while (Main.tile[tilePosX, tilePosY] != null && tilePosY >= 0 && tilePosY < Main.maxTilesY
-                                                && !(Main.tile[tilePosX, tilePosY].HasUnactuatedTile && Main.tileSolid[Main.tile[tilePosX, tilePosY].TileType]))
-                                            {
-                                                tilePosY++;
-                                            }
-                                            Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), baseDamage, 8f, Player.whoAmI);
+                                            tilePosY++;
                                         }
+                                        Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), baseDamage, 8f, Player.whoAmI);
                                     }
                                 }
                             }
                         }
-
                     }
-                    else
+
+                }
+                else
+                {
+                    if (Player.controlDown && Player.velocity.Y < 15f)
                     {
-                        if (Player.controlDown && Player.velocity.Y < 15f)
-                        {
-                            Player.velocity.Y = 15f;
-                        }
+                        Player.velocity.Y = 15f;
+                    }
 
-                        Player.maxFallSpeed = 15f;
-                        GroundPound++;
+                    Player.maxFallSpeed = 15f;
+                    GroundPound++;
 
-                        if (Player.HasEffect<LihzahrdGroundPound>())
+                    if (Player.HasEffect<LihzahrdGroundPound>())
+                    {
+                        for (int i = 0; i < 5; i++)
                         {
-                            for (int i = 0; i < 5; i++)
-                            {
-                                int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Scale: 1.5f);
-                                Main.dust[d].noGravity = true;
-                                Main.dust[d].velocity *= 0.2f;
-                            }
+                            int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Scale: 1.5f);
+                            Main.dust[d].noGravity = true;
+                            Main.dust[d].velocity *= 0.2f;
                         }
-                        if (Player.HasEffect<DeerclawpsDive>())
+                    }
+                    if (Player.HasEffect<DeerclawpsDive>())
+                    {
+                        for (int i = 0; i < 5; i++)
                         {
-                            for (int i = 0; i < 5; i++)
-                            {
-                                int d = Dust.NewDust(Player.position, Player.width, Player.height, LumpOfFlesh ? DustID.CrimsonTorch : DustID.IceTorch, Scale: 1.5f);
-                                Main.dust[d].noGravity = true;
-                                Main.dust[d].velocity *= 0.2f;
-                            }
+                            int d = Dust.NewDust(Player.position, Player.width, Player.height, LumpOfFlesh ? DustID.CrimsonTorch : DustID.IceTorch, Scale: 1.5f);
+                            Main.dust[d].noGravity = true;
+                            Main.dust[d].velocity *= 0.2f;
                         }
                     }
                 }
@@ -940,9 +949,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             bool dreadEffect = Player.HasEffect<DreadShellEffect>();
             bool pumpkingEffect = Player.HasEffect<PumpkingsCapeEffect>();
             GuardRaised = false;
+            ModKeybind key = AccessoryEffectLoader.GetKeybind<ParryEffect>(this);
 
             //no need when player has brand of inferno
-            if ((!silverEffect && !dreadEffect && !pumpkingEffect) ||
+            if ((!silverEffect && !dreadEffect && !pumpkingEffect) || key == null ||
                 Player.inventory[Player.selectedItem].type == ItemID.DD2SquireDemonSword || Player.inventory[Player.selectedItem].type == ItemID.BouncingShield)
             {
                 shieldTimer = 0;
@@ -950,8 +960,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 wasHoldingShield = false;
                 return;
             }
-            Player.shieldRaised = Player.selectedItem != 58 && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
-                && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && PlayerInput.Triggers.Current.MouseRight;
+            bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem;
+            if (key.GetAssignedKeys().Any())
+                holdingKey = key.Current;
+            Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
+                && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && holdingKey;
 
             if (Player.shieldRaised)
             {

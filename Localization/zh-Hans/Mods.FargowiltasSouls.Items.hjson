@@ -1089,7 +1089,6 @@ BionomicCluster: {
 		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
 		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		[i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
 		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
 		''' */
 }

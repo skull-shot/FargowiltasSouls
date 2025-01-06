@@ -115,13 +115,12 @@ namespace FargowiltasSouls.Content.UI
             if (!Main.playerInventory && ClientConfig.Instance.HideTogglerWhenInventoryIsClosed)
                 CloseSoulToggler();
             if (!Main.playerInventory)
-            {
                 CloseSoulTogglerButton();
-            }
             else
-            {
                 OpenSoulTogglerButton();
-            }
+            if (Main.gameMenu)
+                CloseActiveSkillMenu();
+
             if (TogglerUserInterface?.CurrentState != null)
                 TogglerUserInterface.Update(gameTime);
             if (TogglerToggleUserInterface?.CurrentState != null)
@@ -192,6 +191,7 @@ namespace FargowiltasSouls.Content.UI
                 {
                     if (LastUpdateUIGameTime != null && TogglerUserInterface?.CurrentState != null)
                         TogglerUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
+
                     return true;
                 }, InterfaceScaleType.UI));
 
@@ -218,6 +218,7 @@ namespace FargowiltasSouls.Content.UI
 
                     return true;
                 }, InterfaceScaleType.UI));
+                
             }
         }
     }

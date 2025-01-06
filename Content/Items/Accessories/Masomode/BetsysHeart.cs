@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +11,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class BetsysHeart : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BetsyDashEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -32,6 +36,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.WitheredArmor] = true;
             player.FargoSouls().BetsysHeartItem = Item;
             player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
+        }
+    }
+    public class BetsyDashEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<BetsysHeart>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().SpecialDashKey(true);
         }
     }
 }

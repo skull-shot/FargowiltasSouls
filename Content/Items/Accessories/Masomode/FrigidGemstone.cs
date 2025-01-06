@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -11,6 +12,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class FrigidGemstone : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -30,10 +33,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[BuffID.Frostburn] = true;
             player.buffImmune[BuffID.Chilled] = true;
-            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            Effects(player);
+            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
+        }
 
         public override void UpdateInventory(Player player) => Effects(player);
 
@@ -99,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<FrigidGemstone>();
-        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        public override void ActiveSkillHeld(Player player, bool stunned)
         {
             if (stunned)
                 return;

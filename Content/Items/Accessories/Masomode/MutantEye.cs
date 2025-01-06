@@ -1,19 +1,20 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Fargowiltas.FargoSets;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
     public class MutantEye : SoulsItem
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BombKeyEffect>()];
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 18));

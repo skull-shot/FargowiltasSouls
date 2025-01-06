@@ -40,3 +40,4 @@ DisplayAll: 显示全部饰品效果
 DisplayEquipped: 显示已装备的饰品效果
 SearchText: 搜索……
 MainMenu: Fargo's
+// DisabledUnequipped: Disabled: Not equipped

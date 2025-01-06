@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class FusedLens : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
 
         public override void SetStaticDefaults()
         {

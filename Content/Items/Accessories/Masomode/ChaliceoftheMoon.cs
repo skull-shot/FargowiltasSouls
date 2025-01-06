@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,6 +13,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class ChaliceoftheMoon : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DiveEffect>(),
+             AccessoryEffectLoader.GetEffect<BulbKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -44,6 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<LihzahrdBoulders>(Item);
 
             //celestial rune

@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,10 +14,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class AgitatingLens : SoulsItem
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

@@ -1,6 +1,8 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +11,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class GoldEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<GoldKeyEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -71,9 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ActiveSkill => true;
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
-            if (stunned)
-                return;
-            player.FargoSouls().GoldKey();
+            player.FargoSouls().GoldKey(stunned);
         }
     }
     public class GoldToPiggy : AccessoryEffect

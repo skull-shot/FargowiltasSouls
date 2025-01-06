@@ -7,6 +7,7 @@ using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -18,6 +19,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class IceQueensCrown : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BombKeyEffect>()];
 
         public override void SetStaticDefaults()
         {

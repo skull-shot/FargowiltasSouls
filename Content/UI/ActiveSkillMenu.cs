@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,7 +23,6 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Header = FargowiltasSouls.Core.Toggler.Header;
 
 namespace FargowiltasSouls.Content.UI
 {
@@ -30,16 +30,16 @@ namespace FargowiltasSouls.Content.UI
     {
         public static int BackWidth => 300;
         public static int BackHeight => 520;
+        public static int EquippedPanelHeight => 80;
+        public static int Outline => 6;
 
         public UIPanel BackPanel;
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
 
-        public static UIPanel MouseHeldElement = null;
+        public static ActiveSkillBox MouseHeldElement = null;
+        public static ActiveSkillBox MouseHoveredElement = null;
         public static bool ShouldRefresh;
-
-        public static int EquippedPanelHeight = 80;
-        public static int Outline = 6;
 
         public override void OnInitialize()
         {
@@ -87,9 +87,30 @@ namespace FargowiltasSouls.Content.UI
         }
         public void UpdateSkillList()
         {
+            if (Main.gameMenu || Main.dedServ)
+            {
+                FargoUIManager.CloseActiveSkillMenu();
+                return;
+            }
+
             EquippedPanel.RemoveAllChildren();
             AvailablePanel.RemoveAllChildren();
             MouseHeldElement = null;
+
+            FargoSoulsPlayer sPlayer = Main.LocalPlayer.FargoSouls();
+            AccessoryEffectPlayer aPlayer = Main.LocalPlayer.AccessoryEffects();
+
+            for (int i = 0; i < sPlayer.ActiveSkills.Length; i++)
+            {
+                var skill = sPlayer.ActiveSkills[i];
+                if (skill != null && !aPlayer.Equipped(skill))
+                {
+                    sPlayer.ActiveSkills[i] = null;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        sPlayer.SyncActiveSkill(i);
+                }
+            }
 
             // Equipped boxes
             float spacing = 6;
@@ -104,15 +125,13 @@ namespace FargowiltasSouls.Content.UI
                 panel.Top.Set(spacing, 0);
                 EquippedPanel.Append(panel);
             }
-            if (Main.gameMenu || Main.dedServ)
-                return;
-            var equippedEffects = Main.LocalPlayer.AccessoryEffects().EquippedEffects;
+            var equippedEffects = aPlayer.EquippedEffects;
             Queue<AccessoryEffect> skillList = [];
             // Available boxes
             for (int i = 0; i < AccessoryEffectLoader.AccessoryEffects.Count; i++)
             {
                 var effect = AccessoryEffectLoader.AccessoryEffects[i];
-                if (equippedEffects[i] && effect.ActiveSkill && !Main.LocalPlayer.FargoSouls().ActiveSkills.Contains(effect))
+                if (equippedEffects[i] && effect.ActiveSkill && !sPlayer.ActiveSkills.Contains(effect))
                 {
                     skillList.Enqueue(effect);
                 }
@@ -127,7 +146,7 @@ namespace FargowiltasSouls.Content.UI
                 for (int x = 0; x < boxXAmt; x++)
                 {
                     var skill = skillList.Dequeue();
-                    var panel = new ActiveSkillBox(skill, skill.Mod.Name, boxWidth);
+                    var panel = new AvailableSkillBox(skill, skill.Mod.Name, boxWidth);
                     panel.Width.Set(boxWidth, 0);
                     panel.Height.Set(boxWidth, 0);
                     panel.Left.Set(spacing * (x + 1) + boxWidth * x, 0);
@@ -151,20 +170,20 @@ namespace FargowiltasSouls.Content.UI
             {
                 if (Main.LocalPlayer.mouseInterface)
                     ShouldRefresh = true;
-                /* absolutely don't enable this for netsync reasons
-                else if (MouseHeldElement != null)
-                {
-                    if (MouseHeldElement is ActiveSkillBox skillBox)
-                    {
-                        skillBox.Effect.ActiveSkillJustPressed(Main.LocalPlayer, false);
-                    }
-                }
-                */
             }
             if (ShouldRefresh)
             {
                 UpdateSkillList();
                 ShouldRefresh = false;
+            }
+        }
+        protected override void DrawChildren(SpriteBatch spriteBatch)
+        {
+            base.DrawChildren(spriteBatch);
+            if (MouseHoveredElement != null) // Layer hovered element last so it's not under anything
+            {
+                MouseHoveredElement.Draw(spriteBatch);
+                MouseHoveredElement = null;
             }
         }
     }

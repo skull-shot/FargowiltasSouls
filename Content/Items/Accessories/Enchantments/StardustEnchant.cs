@@ -1,11 +1,13 @@
 ﻿
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -15,6 +17,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class StardustEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<StardustEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
