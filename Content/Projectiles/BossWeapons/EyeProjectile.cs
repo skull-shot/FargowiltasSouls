@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (State != 0) // launched
-                modifiers.FinalDamage *= 1.4f;
+                modifiers.FinalDamage *= 1.5f;
         }
         public override void AI()
         {
@@ -74,6 +74,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     if (player.whoAmI == Main.myPlayer)
                         LaunchDirection = Projectile.DirectionTo(Main.MouseWorld).ToRotation();
                     Projectile.netUpdate = true;
+                    Projectile.velocity *= 0.4f;
                 }
                     
             }        
@@ -81,6 +82,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.velocity *= 0.92f;
                 Projectile.velocity += LaunchDirection.ToRotationVector2() * 1f;
+                if (player.whoAmI == Main.myPlayer && State < 20)
+                {
+                    LaunchDirection = LaunchDirection.ToRotationVector2().RotateTowards(Projectile.DirectionTo(Main.MouseWorld).ToRotation(), 0.01f).ToRotation();
+                    State++;
+                    if (State % 5 == 0)
+                        Projectile.netUpdate = true;
+                }
+                    
                 //Vector2 desiredVelocity = Projectile.DirectionTo(Main.MouseWorld) * desiredFlySpeedInPixelsPerFrame;
                 //Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
                 //Projectile.timeLeft = 100;
