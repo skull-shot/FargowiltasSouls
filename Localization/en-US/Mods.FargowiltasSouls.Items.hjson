@@ -3487,7 +3487,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	StarlightTungsten: x0.40 damage when used with Tungsten Enchantment
+	StarlightTungsten: "0.75x damage when used with Tungsten Enchantment"
 	DefensePrefixMaxLife: +{0} max life
 	ViolentPrefix: +{0}% attack speed
 	EternityItem: Eternity

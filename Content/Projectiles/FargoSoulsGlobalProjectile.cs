@@ -1458,7 +1458,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 modifiers.FinalDamage *= modPlayer.ForceEffect<ForbiddenEnchant>() ? 1.4f : 1.2f;
 
             if (TungstenScale != 1 && projectile.type == ProjectileID.PiercingStarlight)
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.75f;
 
             if (TikiTagged)
             {
