@@ -697,7 +697,7 @@ TungstenEnchant: {
 	DisplayName: Tungsten Enchantment
 	Tooltip:
 		'''
-		Increases melee weapon size by 50% and whip range by 20%
+		Increases melee weapon size by 75% and whip range by 20%
 		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
 		3 second cooldown
 		'Bigger is always better'
@@ -959,7 +959,7 @@ TerraForce: {
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt 
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
-		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
+		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 75% and whip range by 20%
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 10%, increasing up to double your original crit chance or 50%
 		[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range (works in inventory and vanity)
 		'The land lends its strength'
