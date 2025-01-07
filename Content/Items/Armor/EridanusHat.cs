@@ -132,7 +132,7 @@ namespace FargowiltasSouls.Content.Items.Armor
 
                 void Bonuses(DamageClass damageClass)
                 {
-                    player.GetDamage(damageClass) += 1.00f; // 100%
+                    player.GetDamage(damageClass) += 0.80f; // 80%
 
                     if (damageClass == DamageClass.Summon)
                         fargoPlayer.MinionCrits = true;
@@ -167,7 +167,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             {
                 DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
 
-                player.GetDamage(damageClass) += 0.25f;
+                player.GetDamage(damageClass) += 0.2f;
                 player.GetCritChance(damageClass) += 10;
             }
         }
