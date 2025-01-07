@@ -151,7 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             if (Main.projectile.Where(p => p.TypeAlive<EyeProjectile>() && p.ai[0] == 0 && p.owner == Projectile.owner).Count() < 7)
                             {
                                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(7, 7).RotatedByRandom(MathHelper.TwoPi),
-                                    ModContent.ProjectileType<EyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                    ModContent.ProjectileType<EyeProjectile>(), (int)(Projectile.damage * 1.6f), Projectile.knockBack, Projectile.owner);
                             }
                             EyeTimer = 0;
                         }
