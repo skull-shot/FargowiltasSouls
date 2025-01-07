@@ -28,7 +28,7 @@ EridanusOff:
 EridanusOn:
 	'''
 	Eridanus' blessing empowers a weapon class
-	The empowered class changes every 10 seconds
+	The empowered class changes every 12.5 seconds
 	Eridanus fights alongside you when you use the empowered class
 	70% increased damage for the empowered class
 	30% increased critical strike chance for the empowered class

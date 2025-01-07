@@ -66,7 +66,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                 modPlayer.EridanusEmpower = !modPlayer.EridanusEmpower;
             }
         }
-        public const int ClassDuration = 60 * 12;
+        public const int ClassDuration = 60 * 12 + 30;
         public static void EridanusSetBonus(Player player, Item item)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
