@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: Позиция шкал перезарядки по Y
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: ""
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {

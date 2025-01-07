@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: 冷却条竖直位置
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: ""
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {
