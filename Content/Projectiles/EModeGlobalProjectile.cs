@@ -1342,7 +1342,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 modifiers.FinalDamage *= 2;
         }
 
-
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(projectile, target, hit, damageDone);
