@@ -57,13 +57,13 @@ ClientConfig: {
 	}
 
 	SkillMenuX: {
-		// Label: Skill Menu X
-		// Tooltip: Measured from the right side of the screen.
+		Label: Положение меню умений по X
+		Tooltip: Отсчёт идёт от правой границы экрана.
 	}
 
 	SkillMenuY: {
-		// Label: Skill Menu Y
-		// Tooltip: ""
+		Label: Положение меню умений по Y
+		Tooltip: ""
 	}
 }
 
