@@ -1,8 +1,10 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,10 +14,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class AgitatingLens : SoulsItem
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -34,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
         }
     }
     public class AgitatingLensEffect : AccessoryEffect
@@ -65,5 +68,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<AgitatingLens>();
         
+    }
+    public class DebuffInstallKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<AgitatingLens>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().DebuffInstallKey();
+        }
     }
 }

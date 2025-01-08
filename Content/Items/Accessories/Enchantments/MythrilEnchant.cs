@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void CalcMythrilAttackSpeed(FargoSoulsPlayer modPlayer, Item item)
         {
-            if (modPlayer.Player.HasEffect<EarthForceEffect>())
+            if (!modPlayer.Player.HasEffectEnchant<MythrilEffect>())
                 return;
 
             if (item.DamageType != DamageClass.Default && item.pick == 0 && item.axe == 0 && item.hammer == 0 && item.type != ModContent.ItemType<PrismaRegalia>())
@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -80,15 +80,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             int mythrilEndTime = modPlayer.MythrilMaxTime - cooldown;
 
             if (modPlayer.WeaponUseTimer > 0)
+            {
                 modPlayer.MythrilTimer--;
+                modPlayer.MythrilDelay = 20;
+            }
             else
             {
-                modPlayer.MythrilTimer++;
-                if (modPlayer.MythrilTimer == modPlayer.MythrilMaxTime - 1 && player.whoAmI == Main.myPlayer && modPlayer.MythrilSoundCooldown <= 0)
+                if (modPlayer.MythrilDelay > 0)
+                    modPlayer.MythrilDelay--;
+                else
                 {
-                    SoundEngine.PlaySound(new SoundStyle($"{nameof(FargowiltasSouls)}/Assets/Sounds/Accessories/MythrilCharged"), player.Center);
-                    modPlayer.MythrilSoundCooldown = 90;
-                    //Projectile.NewProjectile(GetSource_EffectItem(player), player.Top, Vector2.Zero, ModContent.ProjectileType<EffectVisual>(), 0, 0, player.whoAmI, (float)EffectVisual.Effects.MythrilEnchant);
+                    modPlayer.MythrilTimer++;
+                    if (modPlayer.MythrilTimer == modPlayer.MythrilMaxTime - 1 && player.whoAmI == Main.myPlayer && modPlayer.MythrilSoundCooldown <= 0)
+                    {
+                        SoundEngine.PlaySound(new SoundStyle($"{nameof(FargowiltasSouls)}/Assets/Sounds/Accessories/MythrilCharged"), player.Center);
+                        modPlayer.MythrilSoundCooldown = 90;
+                        //Projectile.NewProjectile(GetSource_EffectItem(player), player.Top, Vector2.Zero, ModContent.ProjectileType<EffectVisual>(), 0, 0, player.whoAmI, (float)EffectVisual.Effects.MythrilEnchant);
+                    }
                 }
             }
 
@@ -98,7 +106,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.MythrilTimer = mythrilEndTime;
 
             CooldownBarManager.Activate("MythrilEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
-                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && !player.HasEffect<EarthForceEffect>());
+                () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && player.HasEffectEnchant<MythrilEffect>());
         }
     }
 

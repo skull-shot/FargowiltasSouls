@@ -106,6 +106,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Item PlatinumEffect;
         public int PalladCounter;
         public int MythrilTimer;
+        public int MythrilDelay;
         public int MythrilSoundCooldown;
         public int MythrilMaxTime => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 300 : 180 : 180;
         public float MythrilMaxSpeedBonus => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 1.75f : 1.5f : 1.5f;
@@ -267,7 +268,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
-        public Item FrigidGemstoneItem;
         public int FrigidGemstoneCD;
         public int WretchedPouchCD;
         public bool NymphsPerfume;
@@ -279,7 +279,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
-        public bool CanAmmoCycle;
         public bool TribalCharm;
         public bool TribalCharmEquipped;
         public bool TribalCharmClickBonus;

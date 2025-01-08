@@ -53,17 +53,25 @@ namespace FargowiltasSouls
     {
         public static Mod MutantMod;
 
-        internal static ModKeybind FreezeKey;
-        internal static ModKeybind GoldKey;
+        //internal static ModKeybind FreezeKey;
+        //internal static ModKeybind GoldKey;
         //internal static ModKeybind SmokeBombKey;
-        internal static ModKeybind SpecialDashKey;
-        internal static ModKeybind BombKey;
+        //internal static ModKeybind SpecialDashKey;
+        //internal static ModKeybind BombKey;
         internal static ModKeybind SoulToggleKey;
         internal static ModKeybind PrecisionSealKey;
-        internal static ModKeybind MagicalBulbKey;
-        internal static ModKeybind FrigidSpellKey;
-        internal static ModKeybind DebuffInstallKey;
-        internal static ModKeybind AmmoCycleKey;
+        //internal static ModKeybind MagicalBulbKey;
+        //internal static ModKeybind FrigidSpellKey;
+        //internal static ModKeybind DebuffInstallKey;
+        //internal static ModKeybind AmmoCycleKey;
+
+        internal static ModKeybind ActiveSkill1Key;
+        internal static ModKeybind ActiveSkill2Key;
+        internal static ModKeybind ActiveSkill3Key;
+        internal static ModKeybind ActiveSkill4Key; // Unused
+        internal static ModKeybind ActiveSkillMenuKey;
+        internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
+
 
         public static List<int> DebuffIDs;
 
@@ -113,17 +121,23 @@ namespace FargowiltasSouls
 
             SkyManager.Instance["FargowiltasSouls:MoonLordSky"] = new MoonLordSky();
 
-            FreezeKey = KeybindLoader.RegisterKeybind(this, "Freeze", "P");
-            GoldKey = KeybindLoader.RegisterKeybind(this, "Gold", "O");
+            //FreezeKey = KeybindLoader.RegisterKeybind(this, "Freeze", "P");
+            //GoldKey = KeybindLoader.RegisterKeybind(this, "Gold", "O");
             //SmokeBombKey = KeybindLoader.RegisterKeybind(this, "SmokeBomb", "I");
-            SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
-            BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
+            //SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
+            //BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
             SoulToggleKey = KeybindLoader.RegisterKeybind(this, "EffectToggle", ".");
             PrecisionSealKey = KeybindLoader.RegisterKeybind(this, "PrecisionSeal", "LeftShift");
-            MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
-            FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
-            DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
-            AmmoCycleKey = KeybindLoader.RegisterKeybind(this, "AmmoCycle", "L");
+            //MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
+            //FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
+            //DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
+            //AmmoCycleKey = KeybindLoader.RegisterKeybind(this, "AmmoCycle", "L");
+
+            ActiveSkill1Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill1", "Z");
+            ActiveSkill2Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill2", "X");
+            ActiveSkill3Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill3", "C");
+            //ActiveSkill4Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill4", "V");
+            ActiveSkillMenuKey = KeybindLoader.RegisterKeybind(this, "ActiveSkillMenu", "N");
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();
@@ -231,17 +245,23 @@ namespace FargowiltasSouls
 
             ToggleLoader.Unload();
 
-            FreezeKey = null;
-            GoldKey = null;
+            //FreezeKey = null;
+            //GoldKey = null;
             //SmokeBombKey = null;
-            SpecialDashKey = null;
-            BombKey = null;
+            //SpecialDashKey = null;
+            //BombKey = null;
             SoulToggleKey = null;
             PrecisionSealKey = null;
-            MagicalBulbKey = null;
-            FrigidSpellKey = null;
-            DebuffInstallKey = null;
-            AmmoCycleKey = null;
+            //MagicalBulbKey = null;
+            //FrigidSpellKey = null;
+            //DebuffInstallKey = null;
+            //AmmoCycleKey = null;
+
+            ActiveSkill1Key = null;
+            ActiveSkill2Key = null;
+            ActiveSkill3Key = null;
+            //ActiveSkill4Key = null;
+            ActiveSkillMenuKey = null;
 
             DebuffIDs?.Clear();
 
@@ -586,6 +606,7 @@ namespace FargowiltasSouls
             SyncTogglesOnJoin,
             SyncOneToggle,
             SyncDefaultToggles,
+            SyncActiveSkill,
             SyncCanPlayMaso,
             SyncNanoCoreMode,
             //SpawnBossTryFromNPC,
@@ -735,6 +756,17 @@ namespace FargowiltasSouls
                         {
                             Player player = Main.player[reader.ReadByte()];
                             player.SetToggleValue(AccessoryEffectLoader.GetEffect(reader.ReadString()), reader.ReadBoolean());
+                        }
+                        break;
+                    case PacketID.SyncActiveSkill:
+                        {
+                            Player player = Main.player[reader.ReadByte()];
+                            int slotIndex = reader.ReadInt32();
+                            int skillIndex = reader.ReadInt32();
+                            AccessoryEffect skill = skillIndex < 0 ? null : AccessoryEffectLoader.AccessoryEffects[skillIndex];
+
+                            player.FargoSouls().ActiveSkills[slotIndex] = skill;
+
                         }
                         break;
                     case PacketID.SyncDefaultToggles:
@@ -944,7 +976,7 @@ namespace FargowiltasSouls
         public static bool NoBiome(NPCSpawnInfo spawnInfo)
         {
             Player player = spawnInfo.Player;
-            return !player.ZoneJungle && !player.ZoneDungeon && !player.ZoneCorrupt && !player.ZoneCrimson && !player.ZoneHallow && !player.ZoneSnow && !player.ZoneUndergroundDesert;
+            return player.ZonePurity && !player.ZoneJungle && !player.ZoneDungeon && !player.ZoneCorrupt && !player.ZoneCrimson && !player.ZoneHallow && !player.ZoneSnow && !player.ZoneUndergroundDesert;
         }
 
         public static bool NoZoneAllowWater(NPCSpawnInfo spawnInfo) => !spawnInfo.Sky && !spawnInfo.Player.ZoneMeteor && !spawnInfo.SpiderCave;

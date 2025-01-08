@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +12,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class SupremeDeathbringerFairy : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<SpecialDashEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -48,6 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //player.GetDamage(DamageClass.Generic) += 0.1f;
             player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
@@ -60,6 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.npcTypeNoAggro[234] = true;
             player.npcTypeNoAggro[235] = true;
             fargoPlayer.QueenStingerItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
             if (player.honey)
                 player.GetArmorPenetration(DamageClass.Generic) += 5;
 

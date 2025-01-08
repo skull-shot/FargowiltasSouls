@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class DubiousCircuitry : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -38,6 +41,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             modPlayer.FusedLens = true;
             modPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
             if (player.onFire2)
                 player.FargoSouls().AttackSpeed += 0.15f;
             if (player.ichor)

@@ -8,13 +8,6 @@ namespace FargowiltasSouls.Content.Patreon.DanielTheRobot
 {
     public class ROBGyro : PatreonModItem
     {
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Crimetroid Egg");
-            // Tooltip.SetDefault("Summons the Baby\nNot to be confused with criminal androids");
-        }
-
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.ZephyrFish);

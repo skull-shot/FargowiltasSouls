@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             BionomicCluster.PassiveEffect(player, Item);
             AshWoodEnchant.PassiveEffect(player);
 
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
 
             player.FargoSouls().WoodEnchantDiscount = true;
 

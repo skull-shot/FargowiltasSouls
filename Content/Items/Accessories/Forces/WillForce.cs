@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -10,6 +11,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
     public class WillForce : BaseForce
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<GoldKeyEffect>()];
         public override void SetStaticDefaults()
         {
             Enchants[Type] =
@@ -40,6 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // gold
             player.AddEffect<GoldToPiggy>(Item);
             player.AddEffect<GoldEffect>(Item);
+            player.AddEffect<GoldKeyEffect>(Item);
             // platinum
             modPlayer.PlatinumEffect = Item;
             // red riding
@@ -54,6 +58,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 player.AddEffect<GladiatorSpears>(Item);
                 player.AddEffect<GoldEffect>(Item);
+                player.AddEffect<GoldKeyEffect>(Item);
                 player.AddEffect<RedRidingEffect>(Item);
             }
         }

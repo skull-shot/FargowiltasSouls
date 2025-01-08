@@ -36,8 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = 150;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.hide = true;
-
-            Projectile.FargoSouls().NinjaCanSpeedup = false;
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {

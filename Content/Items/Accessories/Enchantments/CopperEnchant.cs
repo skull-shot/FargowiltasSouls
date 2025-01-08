@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void CopperProc(Player player, NPC target)
         {
-            if (player.HasEffect<TerraLightningEffect>())
+            if (!player.HasEffectEnchant<CopperEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.CopperProcCD == 0)

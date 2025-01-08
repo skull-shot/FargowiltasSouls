@@ -957,9 +957,6 @@ namespace FargowiltasSouls.Core.Globals
             if (player.HasEffect<OrichalcumEffect>())
                 multiplier += OrichalcumEffect.OriDotModifier(npc, player.FargoSouls()) - 1;
 
-            if (player.HasEffect<EarthForceEffect>())
-                multiplier += 3;
-
             if (npc.FargoSouls().MagicalCurse)
                 multiplier += 1;
 
@@ -1311,7 +1308,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (CorruptedForce)
             {
-                int pen = player.HasEffect<TimberEffect>() ? 15 : 20;
+                int pen = player.HasEffectEnchant<EbonwoodEffect>() ? 20 : 15;
                 modifiers.FlatBonusDamage += pen;
             }
 
@@ -1331,9 +1328,9 @@ namespace FargowiltasSouls.Core.Globals
             if (MoltenAmplify)
             {
                 float modifier = 1.2f;
-                if (player.HasEffect<NatureEffect>())
+                if (!player.HasEffectEnchant<MoltenEffect>())
                     modifier = 1.15f;
-                else if (modPlayer.ForceEffect<MoltenEnchant>())
+                else if (player.ForceEffect<MoltenEffect>())
                     modifier = 1.3f;
                 modifiers.FinalDamage *= modifier;
             }

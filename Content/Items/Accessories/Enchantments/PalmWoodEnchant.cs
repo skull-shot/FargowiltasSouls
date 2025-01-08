@@ -75,7 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void ActivatePalmwoodSentry(Player player)
         {
-            if (player.HasEffect<PalmwoodEffect>() && !player.HasEffect<TimberEffect>())
+            if (player.HasEffect<PalmwoodEffect>() && player.HasEffectEnchant<PalmwoodEffect>())
             {
                 if (player.whoAmI == Main.myPlayer)
                 {

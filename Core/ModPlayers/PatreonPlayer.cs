@@ -221,7 +221,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 modifiers.FinalDamage *= 1.2f;
 
                 if (Player.manaSick)
-                    modifiers.FinalDamage *= Player.manaSickReduction;
+                    modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
                 for (int num468 = 0; num468 < 20; num468++)
                 {
@@ -243,7 +243,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 modifiers.FinalDamage *= 1.2f;
 
                 if (Player.manaSick)
-                    modifiers.FinalDamage *= Player.manaSickReduction;
+                    modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
                 for (int num468 = 0; num468 < 20; num468++)
                 {

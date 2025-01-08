@@ -55,16 +55,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpiderEnchant>();
+        public override bool MutantsPresenceAffects => true;
         //public override bool MinionEffect => true;
-        
+
         public override void PostUpdateEquips(Player player)
         {
             //minion crits
-            if (!player.HasEffect<LifeForceEffect>())
+            if (HasEffectEnchant(player))
                 player.FargoSouls().MinionCrits = true;
-            //player.GetCritChance(DamageClass.Summon) += 10;
+            player.GetCritChance(DamageClass.Generic) += 10;
             if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))
-                player.GetCritChance(DamageClass.Summon) += 15;
+                player.GetCritChance(DamageClass.Generic) += 15;
         }
     }
 }
