@@ -201,8 +201,10 @@ namespace FargowiltasSouls.Content.Items
         */
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
             if (item.type == ItemID.PalladiumSword)
-                scale += 0.25f;
+                scale += 0.4f;
         }
         public override bool? UseItem(Item item, Player player)
         {

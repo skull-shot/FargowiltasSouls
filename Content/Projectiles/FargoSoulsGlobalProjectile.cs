@@ -216,7 +216,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 scale += TungstenEffect.TungstenIncreaseProjSize(projectile, player.FargoSouls(), source);
 
             if (WorldSavingSystem.EternityMode && projectile.type == ProjectileID.PalladiumPike)
-                scale += 0.25f;
+                scale += 0.4f;
 
             if (scale == 1f)
                 return;
