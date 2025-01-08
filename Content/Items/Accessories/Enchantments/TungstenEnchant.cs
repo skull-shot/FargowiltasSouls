@@ -112,9 +112,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             player.whipRangeMultiplier += 0.2f;
         }
+        public const float SizeMult = 1.5f;
         public static float TungstenIncreaseWeaponSize(FargoSoulsPlayer modPlayer)
         {
-            return 1.75f;
+            return SizeMult;
         }
 
         public static List<int> TungstenAlwaysAffectProjType =
@@ -206,7 +207,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (canAffect)
             {
                 //bool forceEffect = modPlayer.ForceEffect<TungstenEnchant>();
-                float scale = 1.75f;
+                float scale = SizeMult;
                 if (TungstenNerfedProj(projectile))
                     scale = (scale / 2) + 0.5f;
                 projectile.position = projectile.Center;
