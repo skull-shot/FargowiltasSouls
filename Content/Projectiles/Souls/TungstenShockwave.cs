@@ -59,7 +59,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.scale += scaleModifier * 5f / Duration;
             Projectile.width = Projectile.height = (int)(BaseRadius * Projectile.scale);
             Projectile.Center = Projectile.position;
-
+            if (Projectile.timeLeft < 8)
+                Projectile.Opacity -= 0.15f;
         }
         public override bool ShouldUpdatePosition() => false;
         public override bool PreDraw(ref Color lightColor)
