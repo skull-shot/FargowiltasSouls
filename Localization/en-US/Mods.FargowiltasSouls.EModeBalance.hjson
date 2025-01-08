@@ -34,7 +34,7 @@ SummonMulticlass: Summon damage decreases when you attack using other classes (e
 ShadowDodge: Eternity Mode: Dodging will reduce your attack speed
 IceBarrier: Eternity Mode: 10% reduced damage
 SpearRework: Reworked spear swing animation
-PalladiumPikeRework: Increased size, Greatly increases life regeneration and heal 1 HP on first hit of swing
+PalladiumPikeRework: Increased size, Greatly increases life regeneration and heal 1 HP (once per second)
 CobaltNaginataRework: Causes a small explosion on striking enemies
 MythrilHalberdRework: After not attacking for 2 seconds, your next attack deals 8x damage, scaling with attack speed
 OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount

@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Content.Projectiles
         private int counter;
         private bool preAICheckDone;
         private bool firstTickAICheckDone;
-        public int HitCounter = 0;
 
         public static Dictionary<int, bool> IgnoreMinionNerf = [];
 
@@ -1357,8 +1356,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
                     {
                         player.AddBuff(BuffID.RapidHealing, 60 * 5);
-                        if (HitCounter == 0)
+                        if (player.Eternity().PalladiumHealTimer <= 0)
+                        {
                             player.FargoSouls().HealPlayer(1);
+                            player.Eternity().PalladiumHealTimer = 60;
+                        } 
                     }
                     break;
                 case ProjectileID.CobaltNaginata:
@@ -1380,7 +1382,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 default:
                     break;
             }
-            HitCounter += 1;
         }
 
         public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)

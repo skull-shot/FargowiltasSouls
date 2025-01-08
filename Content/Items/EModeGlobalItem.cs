@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.Items
     public class EModeGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
-        public int HitCounter = 0;
         public override void Load()
         {
             On_Player.GrantPrefixBenefits += EModePrefixChanges;
@@ -146,7 +145,6 @@ namespace FargowiltasSouls.Content.Items
             {
                 return base.CanUseItem(item, player);
             }
-            HitCounter = 0;
 
             EModePlayer ePlayer = player.Eternity();
 
@@ -270,13 +268,15 @@ namespace FargowiltasSouls.Content.Items
                         if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
                         {
                             player.AddBuff(BuffID.RapidHealing, 60 * 5);
-                            if (HitCounter == 0)
+                            if (player.Eternity().PalladiumHealTimer <= 0)
+                            {
                                 player.FargoSouls().HealPlayer(1);
+                                player.Eternity().PalladiumHealTimer = 60;
+                            }
                         }
                         break;
                     }
             }
-            HitCounter += 1;
         }
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
