@@ -271,7 +271,7 @@ namespace FargowiltasSouls.Content.Items
                             if (player.Eternity().PalladiumHealTimer <= 0)
                             {
                                 player.FargoSouls().HealPlayer(1);
-                                player.Eternity().PalladiumHealTimer = 60;
+                                player.Eternity().PalladiumHealTimer = 30;
                             }
                         }
                         break;
