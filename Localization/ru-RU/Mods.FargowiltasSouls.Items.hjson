@@ -3725,3 +3725,8 @@ FallenStarDayItem: {
 	DisplayName: Упавшая звезда
 	Tooltip: ""
 }
+
+TouhouStaff: {
+	// DisplayName: Children of Nature's Eulogy
+	// Tooltip: ""
+}

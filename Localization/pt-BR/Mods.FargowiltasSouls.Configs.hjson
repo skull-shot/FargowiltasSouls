@@ -169,4 +169,9 @@ SoulConfig: {
 		// Label: Performance Mode
 		// Tooltip: Disables the most performance-demanding visuals. Currently disables Mutant's eye attack trails.
 	}
+
+	PatreonTouhou: {
+		// Label: Patreon Touhou
+		// Tooltip: ""
+	}
 }
