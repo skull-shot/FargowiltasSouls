@@ -179,4 +179,9 @@ SoulConfig: {
 		Label: 性能模式
 		Tooltip: 禁用高性能要求的视觉效果。目前会禁用突变体幻影眼的拖尾绘制
 	}
+
+	PatreonTouhou: {
+		// Label: Patreon Touhou
+		// Tooltip: ""
+	}
 }

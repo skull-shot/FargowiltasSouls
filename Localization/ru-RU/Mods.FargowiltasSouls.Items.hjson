@@ -3721,3 +3721,8 @@ DarkTome: {
 		'Магический гримуар побеждённого врага...'
 		'''
 }
+
+TouhouStaff: {
+	// DisplayName: Children of Nature's Eulogy
+	// Tooltip: ""
+}

@@ -47,6 +47,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool RazorContainer;
 
+        public bool TouhouBuff;
+
         public static readonly SoundStyle RazorContainerTink = new("FargowiltasSouls/Assets/Sounds/Accessories/RazorTink")  { PitchVariance = 0.25f };
 
         public override void SaveData(TagCompound tag)
@@ -90,6 +92,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ChibiiRemii = false;
             Northstrider = false;
             RazorContainer = false;
+            TouhouBuff = false;
         }
 
         public override void OnEnterWorld()

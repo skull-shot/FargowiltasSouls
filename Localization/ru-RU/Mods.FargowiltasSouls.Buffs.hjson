@@ -808,3 +808,8 @@ MutantDesperationBuff: {
 	DisplayName: Фантазматическая ярость
 	Description: Его последний рывок. Ты получаешь вдвое больше урона!
 }
+
+TouhouHoardBuff: {
+	// DisplayName: Touhou Hoard Buff
+	// Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
+}

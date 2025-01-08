@@ -3473,7 +3473,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	StarlightTungsten: 0.75x damage when used with Tungsten Enchantment
+	StarlightTungsten: "0.75x damage when used with Tungsten Enchantment"
 	DefensePrefixMaxLife: +{0} max life
 	ViolentPrefix: +{0}% attack speed
 	EternityItem: Eternity
@@ -3719,4 +3719,9 @@ DarkTome: {
 		Releasing button causes the books to release a volley of pages
 		'The arcane grimoire of a defeated foe...'
 		'''
+}
+
+TouhouStaff: {
+	DisplayName: Children of Nature's Eulogy
+	Tooltip: ""
 }

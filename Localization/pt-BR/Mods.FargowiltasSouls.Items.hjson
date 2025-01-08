@@ -3664,3 +3664,8 @@ DarkTome: {
 		'The arcane grimoire of a defeated foe...'
 		''' */
 }
+
+TouhouStaff: {
+	// DisplayName: Children of Nature's Eulogy
+	// Tooltip: ""
+}

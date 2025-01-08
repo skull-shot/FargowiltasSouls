@@ -808,3 +808,8 @@ MutantDesperationBuff: {
 	DisplayName: 幻影杀手
 	Description: 他的最后一搏。你会受到双倍伤害！
 }
+
+TouhouHoardBuff: {
+	// DisplayName: Touhou Hoard Buff
+	// Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
+}
