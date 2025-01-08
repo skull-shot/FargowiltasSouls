@@ -209,7 +209,29 @@ namespace FargowiltasSouls.Content.Projectiles
 
             //            Fargowiltas.ModProjDict.TryGetValue(projectile.type, out ModProjID);
         }
+        public void ModifyProjectileSize(Projectile projectile, Player player, IEntitySource source)
+        {
+            float scale = 1f;
+            if (player.HasEffect<TungstenEffect>())
+                scale += TungstenEffect.TungstenIncreaseProjSize(projectile, player.FargoSouls(), source);
 
+            if (WorldSavingSystem.EternityMode && projectile.type == ProjectileID.PalladiumPike)
+                scale += 0.25f;
+
+            if (scale == 1f)
+                return;
+
+            projectile.position = projectile.Center;
+            projectile.scale *= scale;
+            projectile.width = (int)(projectile.width * scale);
+            projectile.height = (int)(projectile.height * scale);
+            projectile.Center = projectile.position;
+            FargoSoulsGlobalProjectile globalProjectile = projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
+            globalProjectile.TungstenScale = scale;
+
+            if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword)
+                projectile.velocity *= scale;
+        }
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             if (WorldGen.generatingWorld)
@@ -393,10 +415,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
             }
 
+            ModifyProjectileSize(projectile, player, source);
+            /*
             if (player.HasEffect<TungstenEffect>())
-            {
                 TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, source);
-            }
+            */
 
             if (player.HasEffect<HuntressEffect>()
                 && ItemSource
@@ -1292,10 +1315,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 DeletionImmuneRank = 2;
                 TimeFreezeImmune = true;
                 IsAHeldProj = true;
+                if (TungstenScale == 1)
+                    ModifyProjectileSize(projectile, player, null);
+                /*
                 if (player.HasEffect<TungstenEffect>() && TungstenScale == 1)
-                {
                     TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, null);
-                }
+                */
                 if (Adamantite)
                 {
                     if (Main.projectile.Any(p => p.TypeAlive(projectile.type) && p.owner == projectile.owner && p.whoAmI != projectile.whoAmI))// && !ProjectileID.Sets.IsAWhip[projectile.type] && projectile.aiStyle != ProjAIStyleID.Yoyo)

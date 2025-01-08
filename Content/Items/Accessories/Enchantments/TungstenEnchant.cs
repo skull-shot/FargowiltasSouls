@@ -175,7 +175,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 TungstenNeverAffectProjStyle.Contains(projectile.aiStyle);
         }
 
-        public static void TungstenIncreaseProjSize(Projectile projectile, FargoSoulsPlayer modPlayer, IEntitySource source)
+        public static float TungstenIncreaseProjSize(Projectile projectile, FargoSoulsPlayer modPlayer, IEntitySource source)
         {
             bool terraForce = !modPlayer.Player.HasEffectEnchant<TungstenEffect>();
             //if (terraForce)
@@ -183,7 +183,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (TungstenNeverAffectsProj(projectile))
             {
-                return;
+                return 0f;
             }
             bool canAffect = false;
             bool hasCD = true;
@@ -207,31 +207,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (canAffect)
             {
                 //bool forceEffect = modPlayer.ForceEffect<TungstenEnchant>();
-                float scale = SizeMult;
+                float scaleIncrease = SizeMult - 1;
                 if (TungstenNerfedProj(projectile))
-                    scale = (scale / 2) + 0.5f;
-                projectile.position = projectile.Center;
-                projectile.scale *= scale;
-                projectile.width = (int)(projectile.width * scale);
-                projectile.height = (int)(projectile.height * scale);
-                projectile.Center = projectile.position;
-                FargoSoulsGlobalProjectile globalProjectile = projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
-                globalProjectile.TungstenScale = scale;
-
-                if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword)
-                    projectile.velocity *= scale;
-                /*
-                if (hasCD)
-                {
-                    modPlayer.TungstenCD = 40;
-
-                    if (modPlayer.Eternity)
-                        modPlayer.TungstenCD = 0;
-                    else if (forceEffect)
-                        modPlayer.TungstenCD /= 2;
-                }
-                */
+                    scaleIncrease /= 2;
+                return scaleIncrease;
             }
+            return 0f;
         }
 
         public static void TungstenModifyDamage(Player player, ref NPC.HitModifiers modifiers)
