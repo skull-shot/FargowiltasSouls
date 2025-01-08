@@ -3459,7 +3459,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	StarlightTungsten: "0.75x damage when used with Tungsten Enchantment"
+	StarlightTungsten: 0.75x damage when used with Tungsten Enchantment
 	DefensePrefixMaxLife: +{0} max life
 	ViolentPrefix: +{0}% attack speed
 	EternityItem: Eternity
@@ -3699,5 +3699,8 @@ FallenStarDayItem: {
 
 TouhouStaff: {
 	DisplayName: Children of Nature's Eulogy
-	Tooltip: ""
+	Tooltip: 
+		'''
+		Summons up to five distinct minions
+		'''
 }

@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Main.projFrames[Projectile.type] = 3;
@@ -30,6 +31,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetDefaults()
         {
+            base.SetDefaults();
             Projectile.width = 31;
             Projectile.height = 29;
         }

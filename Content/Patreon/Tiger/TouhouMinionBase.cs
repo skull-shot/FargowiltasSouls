@@ -92,7 +92,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
                             //face target
                             Projectile.spriteDirection = (target.X - Projectile.Center.X) > 0 ? 1 : -1;
 
-                            Main.NewText(Projectile.spriteDirection);
+                            //Main.NewText(Projectile.spriteDirection);
 
                             MinionAttack(target);
                         }
