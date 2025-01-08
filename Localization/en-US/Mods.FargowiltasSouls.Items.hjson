@@ -195,14 +195,7 @@ EbonwoodEnchant: {
 
 ForbiddenEnchant: {
 	DisplayName: Forbidden Enchantment
-	Tooltip:
-		'''
-		Double tap down to call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.2x damage
-		Touch it yourself to add back missing wing time
-		Storm can be resummoned after touching the ground
-		'Walk like an Egyptian'
-		'''
+	Tooltip: "'Walk like an Egyptian'"
 }
 
 FossilEnchant: {
@@ -233,10 +226,7 @@ GladiatorEnchant: {
 	Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
-		Double tap down to place a banner that lasts 15 seconds
-		While close to the banner, spear rain is stronger
-		Being close to the banner also grants knockback immunity, +8% damage reduction and +8% damage
-		Banner can only be resummoned after it runs out
+		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		'''
 }
@@ -443,11 +433,7 @@ PalladiumEnchant: {
 
 PalmWoodEnchant: {
 	DisplayName: Palm Wood Enchantment
-	Tooltip:
-		'''
-		Double tap down to spawn a palm tree sentry that throws nuts at enemies
-		'Alarmingly calm'
-		'''
+	Tooltip: "'Alarmingly calm'"
 }
 
 PearlwoodEnchant: {
@@ -942,9 +928,6 @@ SpiritForce: {
 	DisplayName: Force of Spirit
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/ForbiddenEnchant] Double tap down to call an ancient tornado that scales with magic and summon damage
-		[i:FargowiltasSouls/ForbiddenEnchant] Any projectiles shot through your tornado deal 1.4x damage
-		[i:FargowiltasSouls/AncientHallowEnchant] The tornado tracks your mouse slightly 
 		[i:FargowiltasSouls/HallowEnchant] Healing potions restore more health but take effect over time
 		[i:FargowiltasSouls/SpectreEnchant] If you reach zero HP you will revive with 200 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/TikiEnchant] Increased whip range, whips scale with any class, and empower your projectiles they hit
@@ -3723,8 +3706,5 @@ DarkTome: {
 
 TouhouStaff: {
 	DisplayName: Children of Nature's Eulogy
-	Tooltip: 
-		'''
-		Summons up to five distinct minions
-		'''
+	Tooltip: Summons up to five distinct minions
 }

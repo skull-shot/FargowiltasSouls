@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Consumables;
@@ -122,7 +123,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             ForbiddenTornados.Clear();
             ShadowOrbs.Clear();
-            bool forbidden = Player.HasEffect<ForbiddenEffect>();
+            bool forbidden = Player.HasEffect<ForbiddenEffect>() || Player.HasEffect<SpiritTornadoEffect>();
             bool shadow = Player.HasEffect<ShadowBalls>();
             if (forbidden || shadow)
             {

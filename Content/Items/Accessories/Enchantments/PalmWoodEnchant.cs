@@ -2,6 +2,7 @@
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +12,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class PalmWoodEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<PalmwoodEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -49,9 +52,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class PalmwoodEffect : AccessoryEffect
     {
 
-        public override Header ToggleHeader => Header.GetHeader<TimberHeader>();
+        public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<PalmWoodEnchant>();
-        public override bool MinionEffect => !Main.LocalPlayer.HasEffect<TimberEffect>();
+        public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<PalmwoodEffect>();
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             if (player.HasEffect<TimberEffect>())
@@ -73,6 +76,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     player.FargoSouls().PalmWoodForceCD = 90;
                 }
             }
+        }
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (!stunned)
+                ActivatePalmwoodSentry(player);
         }
         public static void ActivatePalmwoodSentry(Player player)
         {
