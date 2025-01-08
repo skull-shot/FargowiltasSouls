@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: Позиция шкал перезарядки по Y
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		Label: Положение меню умений по X
+		Tooltip: Отсчёт идёт от правой границы экрана.
+	}
+
+	SkillMenuY: {
+		Label: Положение меню умений по Y
+		Tooltip: ""
+	}
 }
 
 SoulConfig: {

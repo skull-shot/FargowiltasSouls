@@ -1,6 +1,7 @@
 using Fargowiltas.NPCs;
 using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
@@ -17,6 +18,7 @@ using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -287,7 +289,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (teleportTarget == default ? NPC.Distance(player.Center) < range : NPC.Distance(teleportTarget) < 80)
                     return;
 
-                TeleportDust();
+                //TeleportDust();
                 if (FargoSoulsUtil.HostCheck)
                 {
                     if (teleportTarget != default)
@@ -300,7 +302,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     NPC.netUpdate = true;
                 }
                 TeleportDust();
-                SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.7f}, NPC.Center);
             };
 
             // Set this to false, it will be set to true below if needed.
@@ -542,7 +544,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Timer = 0;
                     SubTimer++;
 
-                    TeleportDust();
+                    //TeleportDust();
                     if (FargoSoulsUtil.HostCheck)
                     {
                         bool wasOnLeft = NPC.Center.X < player.Center.X;
@@ -942,7 +944,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
                 if (++Timer == 1)
                 {
-                    TeleportDust();
+                    //TeleportDust();
                     if (FargoSoulsUtil.HostCheck)
                     {
                         bool wasOnLeft = NPC.Center.X < player.Center.X;
@@ -955,7 +957,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                         NPC.netUpdate = true;
                     }
                     TeleportDust();
-                    SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.7f }, NPC.Center);
                 }
                 else if (Timer == attackTime)
                 {
@@ -1022,7 +1024,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     FirstFrameCheck = 1;
                     Timer = -45;
 
-                    TeleportDust();
+                    //TeleportDust();
                     if (FargoSoulsUtil.HostCheck)
                     {
                         bool wasOnLeft = NPC.Center.X < player.Center.X;
@@ -1032,7 +1034,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                     TeleportDust();
 
-                    SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.7f }, NPC.Center);
                     SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
 
                     if (FargoSoulsUtil.HostCheck)
@@ -1306,7 +1308,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                 if (Timer == 1) //tp above player
                 {
-                    TeleportDust();
+                    //TeleportDust();
                     if (FargoSoulsUtil.HostCheck)
                     {
                         NPC.Center = player.Center;
@@ -1316,7 +1318,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                     TeleportDust();
 
-                    SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.7f}, NPC.Center);
 
                     WallDirection = Main.rand.NextBool() ? -1 : 1; //randomly decide initial wall direction
                 }
@@ -2454,14 +2456,18 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         {
             for (int index1 = 0; index1 < 25; ++index1)
             {
-                int index2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.WitherLightning, 0f, 0f, 100, new Color(), 2f);
-                Main.dust[index2].noGravity = true;
+                /*int index2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.WitherLightning, 0f, 0f, 100, new Color(), 2f);
+                Main.dust[index2].noGravity = true;s
                 Main.dust[index2].velocity *= 7f;
                 Main.dust[index2].noLight = true;
                 int index3 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.WitherLightning, 0f, 0f, 100, new Color(), 1f);
                 Main.dust[index3].velocity *= 4f;
                 Main.dust[index3].noGravity = true;
-                Main.dust[index3].noLight = true;
+                Main.dust[index3].noLight = true;*/
+                Particle p = new SmallSparkle(NPC.Center, Main.rand.NextVector2Circular(8, 8), Color.Pink, 1, 50, 0, 0, false);
+                Particle p2 = new HeartParticle(NPC.Center, Main.rand.NextVector2Circular(12, 12), Color.Red, 1.5f, 35, false);
+                p.Spawn();
+                p2.Spawn();
             }
         }
 

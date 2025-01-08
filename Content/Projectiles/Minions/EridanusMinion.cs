@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Armor;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -85,7 +86,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 {
                     Projectile.direction = Projectile.spriteDirection = Projectile.Center.X < npc.Center.X ? 1 : -1;
 
-                    switch (player.FargoSouls().EridanusTimer / (60 * 10)) //attack according to current class
+                    switch (player.FargoSouls().EridanusTimer / EridanusHat.ClassDuration) //attack according to current class
                     {
                         case 0: //melee
                             {

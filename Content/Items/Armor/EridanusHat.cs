@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Armor
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Generic) += 0.05f;
+            player.GetDamage(DamageClass.Generic) += 0.10f;
             player.GetCritChance(DamageClass.Generic) += 5;
 
             player.maxMinions += 4;
@@ -66,6 +66,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                 modPlayer.EridanusEmpower = !modPlayer.EridanusEmpower;
             }
         }
+        public const int ClassDuration = 60 * 12 + 30;
         public static void EridanusSetBonus(Player player, Item item)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
@@ -76,12 +77,12 @@ namespace FargowiltasSouls.Content.Items.Armor
 
             if (fargoPlayer.EridanusEmpower)
             {
-                if (fargoPlayer.EridanusTimer % (60 * 10) == 1) //make dust whenever changing classes
+                if (fargoPlayer.EridanusTimer % ClassDuration == 1) //make dust whenever changing classes
                 {
                     SoundEngine.PlaySound(SoundID.Item4, player.Center);
 
                     int type;
-                    switch (fargoPlayer.EridanusTimer / (60 * 10))
+                    switch (fargoPlayer.EridanusTimer / ClassDuration)
                     {
                         case 0: type = 127; break; //solar
                         case 1: type = 229; break; //vortex
@@ -125,14 +126,14 @@ namespace FargowiltasSouls.Content.Items.Armor
                     //}
                 }
 
-                if (++fargoPlayer.EridanusTimer > 60 * 10 * 4) //handle loop
+                if (++fargoPlayer.EridanusTimer > ClassDuration * 4) //handle loop
                 {
                     fargoPlayer.EridanusTimer = 0;
                 }
 
                 void Bonuses(DamageClass damageClass)
                 {
-                    player.GetDamage(damageClass) += 0.80f;
+                    player.GetDamage(damageClass) += 0.70f; // 70%
 
                     if (damageClass == DamageClass.Summon)
                         fargoPlayer.MinionCrits = true;
@@ -143,7 +144,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                         fargoPlayer.AttackSpeed += .3f;
                 }
 
-                switch (fargoPlayer.EridanusTimer / (60 * 10)) //damage boost according to current class
+                switch (fargoPlayer.EridanusTimer / ClassDuration) //damage boost according to current class
                 {
                     case 0: Bonuses(DamageClass.Melee); break;
                     case 1: Bonuses(DamageClass.Ranged); break;
@@ -167,7 +168,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             {
                 DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
 
-                player.GetDamage(damageClass) += 0.20f;
+                player.GetDamage(damageClass) += 0.15f;
                 player.GetCritChance(damageClass) += 10;
             }
         }

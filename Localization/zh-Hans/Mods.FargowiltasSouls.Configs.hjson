@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: 冷却条竖直位置
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: Measured from the right side of the screen.
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {

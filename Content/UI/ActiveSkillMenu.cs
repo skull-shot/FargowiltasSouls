@@ -5,6 +5,7 @@ using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler;
@@ -28,12 +29,14 @@ namespace FargowiltasSouls.Content.UI
 {
     public class ActiveSkillMenu : UIState
     {
-        public static int BackWidth => 300;
-        public static int BackHeight => 520;
+        public const int BackWidth = 300;
+        public const int BackHeight = 520;
         public static int EquippedPanelHeight => 80;
+        public static int DragPanelHeight => 20;
         public static int Outline => 6;
 
         public UIPanel BackPanel;
+        public UIActiveSkillMenuDrag DragPanel;
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
 
@@ -43,15 +46,33 @@ namespace FargowiltasSouls.Content.UI
 
         public override void OnInitialize()
         {
-            Vector2 offset = new(Main.screenWidth / 2f + BackWidth / 2, Main.screenHeight / 2f - 200);
+            var config = ClientConfig.Instance;
+            if (config.SkillMenuX == 0f)
+            {
+                config.SkillMenuX = -BackWidth - 300;
+                config.OnChanged();
+            }
+            if (config.SkillMenuY == 0f)
+            {
+                config.SkillMenuY = Main.screenHeight / 2f - 200;
+                config.OnChanged();
+            }
+                
+            Vector2 offset = new(config.SkillMenuX, config.SkillMenuY);
 
             BackPanel = new UIPanel();
-            BackPanel.Left.Set(-BackWidth - 300, 1f);
+            BackPanel.Left.Set(offset.X, 1f);
             BackPanel.Top.Set(offset.Y, 0);
             BackPanel.Width.Set(BackWidth, 0);
             BackPanel.Height.Set(BackHeight, 0);
             BackPanel.PaddingLeft = BackPanel.PaddingRight = BackPanel.PaddingTop = BackPanel.PaddingBottom = 0;
             BackPanel.BackgroundColor = new Color(29, 33, 70) * 0.7f;
+
+            DragPanel = new();
+            DragPanel.Width.Set(BackWidth, 0);
+            DragPanel.Height.Set(DragPanelHeight, 0);
+            DragPanel.Left.Set(0, 0);
+            DragPanel.Top.Set(0, 0);
 
             EquippedPanel = new UIPanel();
             EquippedPanel.Width.Set(BackWidth - Outline * 2, 0);
@@ -68,6 +89,7 @@ namespace FargowiltasSouls.Content.UI
             AvailablePanel.BackgroundColor = new Color(73, 94, 171) * 0.9f;
 
             Append(BackPanel);
+            BackPanel.Append(DragPanel);
             BackPanel.Append(EquippedPanel);
             BackPanel.Append(AvailablePanel);
 

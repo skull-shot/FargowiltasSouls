@@ -246,9 +246,6 @@ GoldEnchant: {
 	Tooltip:
 		'''
 		Your attacks inflict Midas
-		Press the Gold hotkey to be encased in a Golden Shell
-		You will not be able to move or attack, but will be immune to all damage
-		Press again to exit early
 		Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		'Gold makes the world go round'
 		'''
@@ -700,9 +697,9 @@ TungstenEnchant: {
 	DisplayName: Tungsten Enchantment
 	Tooltip:
 		'''
-		Doubles melee weapon size
-		Once every 2/3 of a second a projectile will be doubled in size
-		Enlarged projectiles and non-projectile swords deal 7% more damage
+		Increases melee weapon size by 50% and whip range by 20%
+		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
+		3 second cooldown
 		'Bigger is always better'
 		'''
 }
@@ -918,7 +915,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envolop you in shade, making you invincible during the dash
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile damage based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
@@ -930,7 +927,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
 		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile damage based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
@@ -962,7 +959,7 @@ TerraForce: {
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt 
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
-		[i:FargowiltasSouls/TungstenEnchant] Your swords are 100% larger and other held weapons 50% larger
+		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 10%, increasing up to double your original crit chance or 50%
 		[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range (works in inventory and vanity)
 		'The land lends its strength'
@@ -1877,7 +1874,7 @@ TerrariaSoul: {
 		'''
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
-		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your swords are empowered
+		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] 10% set critical strike chance increased on hit, further item grab range, and you sometimes don't consume crafting ingredients
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
@@ -1975,7 +1972,7 @@ EridanusBattleplate: {
 	DisplayName: Eridanus Battleplate
 	Tooltip:
 		'''
-		10% increased damage
+		5% increased damage
 		10% increased critical strike chance
 		Reduces damage taken by 10%
 		Grants life regeneration
@@ -1986,7 +1983,7 @@ EridanusHat: {
 	DisplayName: Eridanus Hat
 	Tooltip:
 		'''
-		5% increased damage
+		10% increased damage
 		5% increased critical strike chance
 		Increases your max number of minions by 4
 		Increases your max number of sentries by 1
@@ -2685,8 +2682,12 @@ FleshHand: {
 }
 
 LeashOfCthulhu: {
-	DisplayName: Leash of Cthulhu
-	Tooltip: "'The mutilated carcass of a defeated foe...'"
+	DisplayName: Eyeleash
+	Tooltip:
+		'''
+		Servants gather around you whilst spun, flying towards your cursor when released
+		'The mutilated carcass of a defeated foe..'
+		'''
 }
 
 RefractorBlaster: {
@@ -2730,7 +2731,9 @@ TwinRangs: {
 	DisplayName: Twinrangs
 	Tooltip:
 		'''
-		Fire a different twinrang depending on mouse click
+		Left click to throw a Spazmarang that rapidly tears enemies apart
+		Right click to throw a Retirang that fires lasers towards the nearest enemy
+		Only 3 Retirangs can exist at any given time
 		'The compressed forms of defeated foes..'
 		'''
 }
@@ -2804,7 +2807,11 @@ HentaiSpear: {
 
 PhantasmalLeashOfCthulhu: {
 	DisplayName: Phantasmal Leash of Cthulhu
-	Tooltip: "'The True Eye's soul trapped for eternity..'"
+	Tooltip:
+		'''
+		Spawns a flurry of homing eyes whilst spun and on hit
+		'The True Eye's soul, trapped for all eternity..'
+		'''
 }
 
 SlimeRain: {
@@ -2921,7 +2928,8 @@ GeminiGlaives: {
 	DisplayName: Gemini Glaives
 	Tooltip:
 		'''
-		Fire different glaives depending on mouse click
+		Left click to throw 3 Spazmaglaives that rapidly tear enemies apart
+		Right click to throw 3 Retiglaives that rapidly fire lasers at the cursor
 		Alternating clicks will enhance attacks
 		'The compressed forms of defeated foes..'
 		'''
@@ -2956,8 +2964,14 @@ HellZone: {
 }
 
 MechanicalLeashOfCthulhu: {
-	DisplayName: Mechanical Leash of Cthulhu
-	Tooltip: "'The reward for a mighty rematch..'"
+	DisplayName: Leash of Cthulhu
+	Tooltip:
+		'''
+		Spawns homing servants whilst spun
+		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
+		Only one eye can be loose at a time
+		'The reward for a mighty rematch..'
+		'''
 }
 
 NukeFishron: {
@@ -3695,6 +3709,16 @@ TheDestroyer: {
 FallenStarDayItem: {
 	DisplayName: Fallen Star
 	Tooltip: ""
+}
+
+DarkTome: {
+	DisplayName: Dark Tome
+	Tooltip:
+		'''
+		Hold button to summon up to 3 spectral books that chase your cursor
+		Releasing button causes the books to release a volley of pages
+		'The arcane grimoire of a defeated foe...'
+		'''
 }
 
 TouhouStaff: {

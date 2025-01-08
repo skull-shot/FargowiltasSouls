@@ -768,6 +768,10 @@ PungentAuraProj.DisplayName: 喷气弹幕
 RockeaterAuraProj.DisplayName: 吞噬者光环
 FallenStarDay.DisplayName: 陨星日
 LightningRodLightning.DisplayName: 避雷针闪电
+// ReleasedMechFlail.DisplayName: Leash of Cthulhu
+// Tome.DisplayName: Tome
+// TomeShot.DisplayName: Tome Shot
+// TungstenShockwave.DisplayName: Tungsten Shockwave
 // CirnoIceCube.DisplayName: Cirno Ice Cube
 // CirnoMinion.DisplayName: Cirno Minion
 // DaiyouseiMinion.DisplayName: Daiyousei Minion

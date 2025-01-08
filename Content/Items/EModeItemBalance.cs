@@ -164,12 +164,17 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.88f;
                     return EModeChange.Nerf;
 
+                case ItemID.BeeGun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
                 case ItemID.MagicDagger:
                     {
                         if (!Main.hardMode)
                         {
                             balanceTextKeys = ["Damage", "Speed"];
-                            balanceNumber = 0.65f;
+                            balanceNumber = 0.5f;
                             return EModeChange.Nerf;
                         }
                         return EModeChange.None;

@@ -248,12 +248,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.eaterBoss = npc.whoAmI;
             FargoSoulsGlobalNPC.boss = npc.whoAmI;
 
-            if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 3000)
+            if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 6000)
             {
                 npc.velocity.Y += 0.25f;
                 if (npc.timeLeft > 120)
                     npc.timeLeft = 120;
             }
+
 
             //if (eaterResist > 0 && npc.whoAmI == NPC.FindFirstNPC(npc.type)) eaterResist--;
 

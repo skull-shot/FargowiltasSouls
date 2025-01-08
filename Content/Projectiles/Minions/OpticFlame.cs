@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 8;
+            //target.immune[Projectile.owner] = 8;
             target.AddBuff(BuffID.CursedInferno, 600);
         }
     }

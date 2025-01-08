@@ -14,14 +14,7 @@ using Terraria.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Audio;
-using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Core.Systems;
-using Microsoft.Xna.Framework.Input;
 using Terraria.Localization;
-using FargowiltasSouls.Core.ModPlayers;
-using Humanizer;
-using FargowiltasSouls.Content.Bosses.DeviBoss;
-using System.Linq;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
@@ -105,11 +98,23 @@ namespace FargowiltasSouls.Content.UI.Elements
                     
                     if (!text.Contains($"Mods.{effect.Mod.Name}"))
                     {
+                        Item hoverItem = new(2);
+                        hoverItem.createTile = -1;
+                        hoverItem.material = false;
+                        hoverItem.consumable = false;
+                        hoverItem.SetNameOverride(text);
+                        Main.HoverItem = hoverItem;
+                        Main.instance.MouseText("", 0, 0);
+                        Main.hoverItemName = text;
+                        Main.mouseText = true;
+                        //Main.instance.MouseText(text, 0, 0);
+                        /*
                         Utils.DrawBorderString(
                             spriteBatch,
                             text,
                             textPosition,
                             Color.White);
+                        */
                     }
                 }
             }

@@ -3748,6 +3748,16 @@ FallenStarDayItem: {
 	Tooltip: ""
 }
 
+DarkTome: {
+	// DisplayName: Dark Tome
+	/* Tooltip:
+		'''
+		Hold button to summon up to 3 spectral books that chase your cursor
+		Releasing button causes the books to release a volley of pages
+		'The arcane grimoire of a defeated foe...'
+		''' */
+}
+
 TouhouStaff: {
 	// DisplayName: Children of Nature's Eulogy
 	// Tooltip: ""

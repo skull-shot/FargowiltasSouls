@@ -1,3 +1,5 @@
+using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.BossBags;
@@ -6,6 +8,7 @@ using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -26,7 +29,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         protected int baseWidth;
         protected int baseHeight;
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -53,8 +55,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             NPC.damage = 24;
             NPC.defense = 2;
-            NPC.HitSound = SoundID.NPCHit7;
-            NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.HitSound = new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanHit") with { Variants = [1, 2, 3, 4] , Volume = 0.2f};
+            NPC.DeathSound = FargosSoundRegistry.TrojanDeath;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             NPC.knockBackResist = 0f;
@@ -229,7 +231,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         private const float BaseWalkSpeed = 4f;
         string TownNPCName;
-
+        bool hasplayedbreaksound;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -374,7 +376,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 if (Jumping) //landing effects
                 {
-                    SoundEngine.PlaySound(SoundID.Item14 with { Pitch = 0.4f }, NPC.Bottom);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2]}, NPC.Bottom);
                     for (int i = 0; i < 4; i++)
                     {
                         int side = i % 2 == 0 ? 1 : -1;
@@ -488,7 +490,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 FargoSoulsUtil.GrossVanillaDodgeDust(NPC);
 
-                SoundEngine.PlaySound(SoundID.Roar, Main.player[NPC.target].Center);
+                //SoundEngine.PlaySound(SoundID.Roar, Main.player[NPC.target].Center);
             }
 
             Player player = Main.player[NPC.target];
@@ -507,7 +509,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             if (NPC.localAI[0] % 10 == 0) //hermes boot clouds
                             {
-                                SoundEngine.PlaySound(SoundID.Run);
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanFootstep") with {Variants = [1, 2, 3], Volume = 0.5f}, NPC.Bottom);
                                 Vector2 vel = (-NPC.velocity).RotatedByRandom(MathHelper.Pi / 11f);
                                 vel /= 2;
                                 Gore gore = Gore.NewGoreDirect(player.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 10, vel, Main.rand.Next(11, 14), Scale: Main.rand.NextFloat(1.5f, 2f));
@@ -556,7 +558,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             if (WorldSavingSystem.MasochistModeReal)
                             {
-                                SoundEngine.PlaySound(SoundID.Item14, NPC.Center);
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2] }, NPC.Bottom);
 
                                 ExplodeAttack();
                             }
@@ -707,7 +709,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             NPC.netUpdate = true;
 
-                            SoundEngine.PlaySound(SoundID.Item14, NPC.Bottom);
+                            if (arms != null)
+                            {
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJump") with { Variants = [1, 2] }, NPC.Bottom);
+                            }
+                            else
+                            {
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanJumpExplosive") with { Variants = [1, 2] }, NPC.Bottom);
+                            }
+                            
 
                             for (int i = 0; i < 4; i++)
                             {
@@ -766,13 +776,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 pos.X -= width / 2f;
                 pos.Y -= height / 2f;
 
-                for (int i = 0; i < 3; i++)
+                /*for (int i = 0; i < 3; i++)
                 {
                     int d = Dust.NewDust(pos, width, height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 2.5f);
                     Main.dust[d].velocity.Y -= 1.5f;
                     Main.dust[d].velocity *= 1.5f;
                     Main.dust[d].noGravity = true;
-                }
+                }*/
 
                 if (Main.rand.NextBool(3))
                 {
@@ -800,17 +810,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 pos.X -= width / 2f;
                 pos.Y -= height / 2f;
 
-                for (int i = 0; i < 2; i++)
+                /*for (int i = 0; i < 2; i++)
                 {
                     int d = Dust.NewDust(pos, width, height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 1.5f);
                     Main.dust[d].noGravity = true;
-                }
+                }*/
 
-                if (Main.rand.NextBool())
+                /*if (Main.rand.NextBool(6))
                 {
                     int d2 = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.4f, NPC.velocity.Y * 0.4f, 100, default, 3f);
                     Main.dust[d2].noGravity = true;
-                }
+                }*/
             }
             else
             {
@@ -818,16 +828,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 arms = FargoSoulsUtil.NPCExists(arms.whoAmI, ModContent.NPCType<TrojanSquirrelArms>());
             }
 
-            if (NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool(3))
+            /*if (NPC.life < NPC.lifeMax / 2 && Main.rand.NextBool(3))
             {
                 int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Smoke, NPC.velocity.X, NPC.velocity.Y, 50, default, 4f);
                 Main.dust[d].velocity.Y -= 1.5f;
                 Main.dust[d].velocity *= 1.5f;
                 Main.dust[d].noGravity = true;
-            }
+            }*/
 
             if (WorldSavingSystem.EternityMode)
             {
+                
                 bool wasImmune = NPC.dontTakeDamage;
                 NPC.dontTakeDamage = NPC.life < NPC.lifeMax / 2 && (head != null || arms != null);
 
@@ -894,6 +905,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     }
                 }
             }
+
+            // to prevent a bug where he played the sound again.
+            if (NPC.life < NPC.lifeMax / 2 && hasplayedbreaksound == false && (arms != null || head != null))
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.TrojanLegsDeath, NPC.Center);
+                hasplayedbreaksound = true;
+            }
+
+            SmokeVisuals();
         }
 
         private void ExplodeAttack()
@@ -917,9 +937,61 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             }
         }
 
+        private void SmokeVisuals()
+        {
+            int headsmokedir = 0;
+            int armsmokedir = 0;
+
+            if (NPC.direction == 1)
+            {
+                headsmokedir = 50;
+                armsmokedir = 5;
+            }
+
+            if (NPC.direction == -1)
+            {
+                headsmokedir = 5;
+                armsmokedir = 25;
+            }
+            Vector2 headsmokepos = NPC.Center + new Vector2(headsmokedir, -35);
+
+            Vector2 armsmokepos = NPC.Center + new Vector2(armsmokedir, -35);
+
+            int smokeAmount = 1;
+
+            if (head == null)
+            {
+                smokeAmount = 5;
+            }
+
+            if (head == null && arms == null)
+            {
+                smokeAmount = 3;
+            }
+
+            if (head == null && arms == null && NPC.life == NPC.lifeMax / 2)
+            {
+                smokeAmount = 1;
+            }
+
+            if (Main.rand.NextBool(smokeAmount) && head == null)
+            {
+                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f);
+                p.Spawn();
+            }
+
+            if (Main.rand.NextBool(3) && arms == null && head != null)
+            {
+                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                p.Spawn();
+                //Particle p2 = new SmokeParticle(armsmokepos * -1, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                //p2.Spawn();
+            }
+        }
+
         private void ExplodeDust(Vector2 center)
         {
-            SoundEngine.PlaySound(SoundID.Item14, center);
+            
 
             const int width = 32;
             const int height = 32;

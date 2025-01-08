@@ -28,6 +28,22 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle NukeFishronExplosion = new(SoundsPath + "Weapons/NukeFishronExplosion");
         public static readonly SoundStyle GeminiSpaz = new(SoundsPath + "Weapons/GeminiSpaz");
         public static readonly SoundStyle GeminiReti = new(SoundsPath + "Weapons/GeminiReti");
+        public static readonly SoundStyle LeashSpin = new(SoundsPath + "Weapons/LeashSpin");
+        public static readonly SoundStyle LeashBreak = new(SoundsPath + "Weapons/LeashBreak");
+
+        // Trojan
+        public static readonly SoundStyle TrojanHeadDeath = new (SoundsPath + "Challengers/Trojan/TrojanHeadDeath");
+        public static readonly SoundStyle TrojanCannonDeath = new (SoundsPath + "Challengers/Trojan/TrojanCannonDeath");
+        public static readonly SoundStyle TrojanLegsDeath = new(SoundsPath + "Challengers/Trojan/TrojanLegsDeath");
+        public static readonly SoundStyle TrojanDeath = new (SoundsPath + "Challengers/Trojan/TrojanDeath");
+        public static readonly SoundStyle TrojanGunStartup = new (SoundsPath + "Challengers/Trojan/TrojanGunStartup");
+        public static readonly SoundStyle TrojanSnowball = new (SoundsPath + "Challengers/Trojan/TrojanSnowball");
+        public static readonly SoundStyle TrojanCannon = new(SoundsPath + "Challengers/Trojan/TrojanCannon");
+        public static readonly SoundStyle Minigun = new(SoundsPath + "Challengers/Trojan/Minigun");
+        public static readonly SoundStyle TrojanHookLoop = new(SoundsPath + "Challengers/Trojan/TrojanHookLoop");
+        public static readonly SoundStyle TrojanHookTelegraph = new(SoundsPath + "Challengers/Trojan/TrojanHookTelegraph");
+        public static readonly SoundStyle TrojanSummon = new(SoundsPath + "Challengers/Trojan/TrojanSummon");
+
 
         // Baron
         public static readonly SoundStyle BaronLaserTelegraph = new(SoundsPath + "Challengers/Baron/BaronLaserTelegraph");
@@ -58,12 +74,15 @@ namespace FargowiltasSouls.Assets.Sounds
         // Deviantt
         public static readonly SoundStyle DeviSwing = new(SoundsPath + "Siblings/Deviantt/DeviSwing");
         public static readonly SoundStyle DeviHeartExplosion = new(SoundsPath + "Siblings/Deviantt/DeviHeartExplosion");
+        public static readonly SoundStyle DeviTeleport = new(SoundsPath + "Siblings/Deviantt/DeviTeleport");
+        public static readonly SoundStyle DeviDeathray = new(SoundsPath + "Siblings/Deviantt/DeviDeathray");
 
         // Mutant
         public static readonly SoundStyle MutantUnpredictive = new(SoundsPath + "Siblings/Mutant/MutantUnpredictive");
         public static readonly SoundStyle MutantPredictive = new(SoundsPath + "Siblings/Mutant/MutantPredictive");
         public static readonly SoundStyle PenetratorThrow = new(SoundsPath + "Siblings/Mutant/PenetratorThrow");
         public static readonly SoundStyle PenetratorExplosion = new(SoundsPath + "Siblings/Mutant/PenetratorExplosion");
+        public static readonly SoundStyle MutantSword = new(SoundsPath + "Siblings/Mutant/MutantSword");
 
         // Abominationn
 
@@ -79,5 +98,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle WoFSuck = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFSuck");
         public static readonly SoundStyle WoFScreech = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFScreech");
         public static readonly SoundStyle WoFGrowl = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFGrowl");
+        public static readonly SoundStyle WoFDeathrayTelegraph = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFDeathrayTelegraph" +
+            "");
     }
 }

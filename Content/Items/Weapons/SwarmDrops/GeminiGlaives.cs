@@ -21,13 +21,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 454;
+            Item.damage = 210;
             Item.DamageType = DamageClass.Melee;
             Item.width = 30;
             Item.height = 30;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
-            Item.reuseDelay = 20;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.reuseDelay = 25;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
@@ -46,8 +46,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override bool CanUseItem(Player player)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] > 0 || player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] > 0)
-                return false;
+            //if (player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] > 3)
+             //  return false;
+
+            //if (player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] > 3)
+           // {
+           //     return false;
+           // }
 
             if (player.altFunctionUse == 2)
             {
@@ -55,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
                 Item.shootSpeed = 15f;
                 Item.UseSound = FargosSoundRegistry.GeminiReti;
             }
-            else
+            else 
             {
                 Item.shoot = ModContent.ProjectileType<Spazmaglaive>();
                 Item.shootSpeed = 45f;
@@ -64,7 +69,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             return true;
         }
 
-        public override bool CanShoot(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 && player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
+        public override bool CanShoot(Player player) => true; //player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 && player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

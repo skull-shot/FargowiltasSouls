@@ -154,6 +154,10 @@ namespace FargowiltasSouls.Content.UI
             if (ActiveSkillUserInterface.CurrentState != null)
             {
                 SoundEngine.PlaySound(SoundID.MenuClose);
+                var dragPanel = ((ActiveSkillMenu)ActiveSkillUserInterface.CurrentState)?.DragPanel;
+                if (dragPanel.dragging)
+                    dragPanel.DragEnd(Main.MouseScreen);
+
                 CloseActiveSkillMenu();
             }
             else
@@ -181,7 +185,6 @@ namespace FargowiltasSouls.Content.UI
                 CloseSoulToggler();
             }
         }
-
         public static void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int index = layers.FindIndex((layer) => layer.Name == "Vanilla: Inventory");

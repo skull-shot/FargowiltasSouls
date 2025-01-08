@@ -28,6 +28,7 @@ LeadPoisonEffect: 铅 中毒
 SilverEffect: 银 护盾
 TinEffect: 锡 暴击
 TungstenEffect: 钨 变大
+// TungstenShockwaveEffect: Tungsten Shockwave
 ObsidianProcEffect: 黑曜石 爆炸
 AshWoodFireballs: 灰烬木 火球
 TerraLightningEffect: 简化泰拉之力

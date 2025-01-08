@@ -21,9 +21,15 @@
   <ItemGroup>
     <None Remove="Assets\UI\OncomingMutantnt.png" />
     <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
+    <None Remove="Content\Projectiles\BossWeapons\MechFlailEye.png" />
+    <None Remove="Content\Projectiles\BossWeapons\PhantasmalEyeLeashProj.png" />
+    <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
     <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Gores\LeashOfCthulhu\" />
+    <Folder Include="Assets\Gores\Twinrangs\" />
+    <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>

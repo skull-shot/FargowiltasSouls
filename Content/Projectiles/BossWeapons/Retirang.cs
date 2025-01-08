@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles.Souls;
+using Luminance.Assets;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -11,11 +16,20 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Retirang : ModProjectile
     {
+        int counter;
+        int returntime;
+
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Retirang");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            Main.projFrames[Projectile.type] = 2;
+        }
+
+        public override bool? CanDamage()
+        {
+            return false;
         }
 
         public override void SetDefaults()
@@ -26,147 +40,98 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             Projectile.width = 50;
             Projectile.height = 50;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.aiStyle = -1;
+            Projectile.tileCollide = false;
         }
-
-        public override bool? CanDamage()
-        {
-            return false;
-        }
-
-        int counter;
-
-        public override bool PreAI()
-        {
-            //fire lasers at cursor
-            if (++counter > 15)
-            {
-                counter = 0;
-
-                if (Projectile.owner == Main.myPlayer)
-                {
-                    Vector2 cursor = Main.MouseWorld;
-                    Vector2 velocity = Vector2.Normalize(cursor - Projectile.Center) * 20;
-
-                    SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
-
-                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                    if (p != Main.maxProjectiles)
-                    {
-                        Main.projectile[p].DamageType = DamageClass.Melee;
-                    }
-                }
-            }
-
-            if (Projectile.ai[0] == 1)
-            {
-                Projectile.ai[1]++;
-
-                //stay in place
-                Projectile.position = Projectile.oldPosition;
-                Projectile.velocity *= 0.1f;
-                Projectile.rotation += Projectile.direction * 0.4f;
-
-                counter += 2;
-
-                if (Projectile.ai[1] > 15)
-                {
-                    Projectile.ai[0] = 2;
-                }
-
-                return false;
-            }
-
-            return true;
-        }
+      
 
         public override void AI()
         {
-            //travelling out
             if (Projectile.ai[0] == 0)
             {
                 Projectile.ai[1]++;
 
                 if (Projectile.ai[1] > 30)
                 {
-                    Projectile.ai[0] = 1;
+                    Projectile.ai[0] = 2;
                     Projectile.ai[1] = 0;
                     Projectile.netUpdate = true;
                 }
             }
-            //travel back to player
-            else if (Projectile.ai[0] == 2)
-            {
-                float speed = Math.Max(Projectile.velocity.Length() * 1.02f, 20f);
-                Projectile.velocity = Vector2.Normalize(Main.player[Projectile.owner].Center - Projectile.Center);
-                Projectile.velocity *= speed;
-
-                //kill when back to player
-                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= speed * 2)
-                    Projectile.Kill();
-            }
-
-            //spin
-            Projectile.rotation += Projectile.direction * 0.4f;
-
-            //dust!
-            int dustId = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y + 2f), Projectile.width, Projectile.height + 5, DustID.RedTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default, 2f);
-            Main.dust[dustId].noGravity = true;
 
             if (Projectile.ai[0] == 1)
             {
-                Projectile.localAI[0] += 0.1f;
-                Projectile.position += Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * Projectile.localAI[0];
+                Projectile.extraUpdates = 0;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
 
-                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= Projectile.localAI[0])
+                //kill when back to player
+                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
                     Projectile.Kill();
+
             }
-        }
 
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            if (Projectile.ai[0] == 0)
+            if (Projectile.ai[0] == 2)
             {
-                Projectile.ai[0] = 1;
-                Projectile.ai[1] = 0;
-            }
-            Projectile.tileCollide = false;
+                Projectile.frame = 1;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0, 1 / 10f);
 
-            return false;
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            /*if (!hitSomething)
-            {
-                hitSomething = true;
-                if (Projectile.owner == Main.myPlayer)
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1600, false, true));
+                if (n.Alive())
                 {
-                    for (int k = 0; k < Main.maxNPCs; k++)
+                    if (counter < 8)
                     {
-                        if (k == target.whoAmI)
-                            continue;
+                        Projectile.rotation = Projectile.SafeDirectionTo(n.Center).ToRotation() + (float)Math.PI;
+                    }
 
-                        NPC npc = Main.npc[k];
-                        float distance = Vector2.Distance(npc.Center, Projectile.Center);
-
-                        if ((distance < 500) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height))
+                    if (++Projectile.ai[1] > 25)
+                    {
+                        if (Projectile.owner == Main.myPlayer && counter <= 8)
                         {
-                            Vector2 velocity = (npc.Center - Projectile.Center) * 20;
-
-                            int p = Projectile.NewProjectile(Projectile.Center, velocity, ProjectileID.PurpleLaser, Projectile.damage, 0, Projectile.owner);
+                            SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
+                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(n.Center - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             if (p != Main.maxProjectiles)
                             {
-                                Main.Projectile[p].melee = true;
-                                Main.Projectile[p].magic = false;
+                                Main.projectile[p].DamageType = DamageClass.Melee;
+                                Main.projectile[p].tileCollide = false;
+                                
                             }
 
-                            break;
+                            Projectile.velocity -= Vector2.Normalize(n.Center - Projectile.Center);
+
+                            Particle p1 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            Particle p2 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            Particle p3 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            p1.Spawn();
+                            p2.Spawn();
+                            p3.Spawn();
+                            counter += 1;
                         }
+                        Projectile.ai[1] = 0;
+                        
+
                     }
+
                 }
-            }*/
+                else
+                {
+                    if (++returntime >= 120)
+                    {
+                        Projectile.ai[0] = 1;
+                        Projectile.frame = 0;
+                    }
+                    Projectile.rotation = Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center).ToRotation() + (float)Math.PI;
+                }
+
+                if (counter >= 8 && ++returntime >= 120)
+                {
+                    Projectile.ai[0] = 1;
+                    Projectile.frame = 0;
+                }
+
+            }
+            if (Projectile.ai[0] != 2)
+            Projectile.rotation += 0.22f;
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
@@ -190,7 +155,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
-                Color color27 = color26;
+                Color color27 = color26 * 0.4f;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];

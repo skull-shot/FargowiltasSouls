@@ -1127,6 +1127,11 @@ namespace FargowiltasSouls.Core.Globals
                     npcLoot.Add(BossDrop(ModContent.ItemType<BrainStaff>()));
                     break;
 
+                case NPCID.DD2DarkMageT1:
+                case NPCID.DD2DarkMageT3:
+                    npcLoot.Add(BossDrop(ModContent.ItemType<DarkTome>()));
+                    break;
+
                 case NPCID.QueenBee:
                     npcLoot.Add(BossDrop(ModContent.ItemType<TheSmallSting>()));
                     break;

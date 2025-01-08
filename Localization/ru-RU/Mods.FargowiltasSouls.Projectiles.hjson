@@ -74,9 +74,9 @@ HentaiSpearWand.DisplayName: Проникатель
 HentaiSphereRing.DisplayName: Фантазматическая сфера
 Hungry.DisplayName: Голодный
 Hungry2.DisplayName: Голодный
-LeashFlail.DisplayName: Булава-привязь
+LeashFlail.DisplayName: Булава-глаз
 MechEyeProjectile.DisplayName: МехГлазСнаряд
-MechFlail.DisplayName: Механическая булава
+MechFlail.DisplayName: Булава Ктулху
 PhantasmalBlast.DisplayName: Фантазматический взрыв
 PhantasmalBolt.DisplayName: Фантазматический снаряд
 PhantasmalEyeBoundary.DisplayName: Фантазматический глаз
@@ -768,6 +768,10 @@ PungentAuraProj.DisplayName: Едкая аура
 RockeaterAuraProj.DisplayName: Аура пожиракетомёта
 FallenStarDay.DisplayName: Упавшая дневная звезда
 LightningRodLightning.DisplayName: Молния громоотвода
+ReleasedMechFlail.DisplayName: Привязь Ктулху
+Tome.DisplayName: Том
+TomeShot.DisplayName: Выстрел из тома
+TungstenShockwave.DisplayName: Ударная волна вольфрама
 // CirnoIceCube.DisplayName: Cirno Ice Cube
 // CirnoMinion.DisplayName: Cirno Minion
 // DaiyouseiMinion.DisplayName: Daiyousei Minion

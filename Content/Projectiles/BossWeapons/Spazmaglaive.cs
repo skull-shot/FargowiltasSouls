@@ -1,4 +1,6 @@
 ﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles.Masomode;
 using Luminance.Assets;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -7,7 +9,9 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Map;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
@@ -43,14 +47,117 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.light = 0.4f;
             Projectile.tileCollide = false;
-            Projectile.width = 50;
-            Projectile.height = 50;
+            Projectile.width = 40;
+            Projectile.height = 90;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
+            Projectile.timeLeft = 60;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
         }
 
         public override void AI()
         {
+            //Projectile.Kill();
+            if (Projectile.ai[0] == 0)
+            {
+                if (Projectile.ai[2] == 0)
+                {
+                    Projectile.ai[2] = Main.rand.NextFloat(-MathHelper.Pi / 6, MathHelper.Pi / 6);
+                }
+                Projectile.ai[1]++;
+                ++Projectile.localAI[0];
+                const int maxTime = 45;
+                Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.localAI[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
+                DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[2] - Projectile.ai[2] * Projectile.localAI[0] / (maxTime / 2));
+                Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
+
+                if (Projectile.ai[1] >= 5)
+                {
+                    //Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.8f, 1 / 60f); ;
+                }
+                if (Projectile.ai[1] >= 15)
+                {
+                    Projectile.ai[0] = 1;
+                    Projectile.ai[1] = 0;
+                    Projectile.netUpdate = true;
+                }
+                Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Projectile.rotation * 2, 1 / 60f);
+
+            }
+
+            if (Projectile.ai[0] == 1 && !empowered)
+            {
+                Projectile.extraUpdates = 0;
+                Projectile.timeLeft = 2;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 35, 0.2f);
+
+                //kill when back to player
+                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 50)
+                    Projectile.Kill();
+
+            }
+
+            if (Projectile.ai[0] == 1 && empowered)
+            {
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1200, false, true));
+                if (n.Alive())
+                {   
+                    if (hitSomething == false)
+                    {
+                        Projectile.timeLeft = 60;
+                    }
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(n.Center) * 60, 0.2f);
+                }
+                else 
+                {
+                    Projectile.extraUpdates = 0;
+                    Projectile.timeLeft = 2;
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 1 / 60f);
+
+                    //kill when back to player
+                    if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
+                        Projectile.Kill();
+
+                }
+
+                if (Projectile.timeLeft <= 10)
+                {
+                    empowered = false;
+                    
+                }
+
+            }
+
+            if (Projectile.ai[0] == 2)
+            {
+                Projectile.rotation += 0.64f;
+                Projectile.velocity *= 0;
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 200, false, true));
+                if (n.Alive())
+                {
+                    Projectile.velocity += n.velocity;
+                    //Projectile.Center = n.Center;
+
+                }
+
+                if (Projectile.timeLeft <= 10)
+                {
+                    Projectile.ai[0] = 1;
+                }
+            }
+
+            if (Projectile.ai[0] != 2)
+                Projectile.rotation += 0.42f;
+
+
+            /*const int maxTime = 45;
+            Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.ai[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
+            DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[1] - Projectile.ai[1] * Projectile.ai[2] / (maxTime / 2));
+            Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
+            if (Projectile.ai[0] > maxTime)
+                Projectile.Kill();*/
+
             if (Projectile.ai[0] == ModContent.ProjectileType<Retiglaive>())
             {
                 empowered = true;
@@ -60,49 +167,37 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.ai[0] = 0;
             }
-            if (Projectile.ai[1] == 0)
-            {
-                Projectile.ai[1] = Main.rand.NextFloat(-MathHelper.Pi / 6, MathHelper.Pi / 6);
-            }
-            Projectile.rotation += Projectile.direction * -0.4f;
-            Projectile.ai[0]++;
-
-            const int maxTime = 45;
-            Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.ai[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
-            DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[1] - Projectile.ai[1] * Projectile.ai[0] / (maxTime / 2));
-            Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
-            if (Projectile.ai[0] > maxTime)
-                Projectile.Kill();
-
-            if (empowered && Projectile.ai[0] == maxTime / 2 && Projectile.owner == Main.myPlayer) //star spray on the rebound
-            {
-                Vector2 baseVel = Main.rand.NextVector2CircularEdge(1, 1);
-                const int max = 24;
-                for (int i = 0; i < max; i++)
-                {
-                    SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, Projectile.Center);
-                    Vector2 newvel = baseVel.RotatedBy(i * MathHelper.TwoPi / max);
-                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, newvel / 2, ModContent.ProjectileType<MechElectricOrbFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                    if (p < Main.maxProjectiles)
-                    {
-                        Main.projectile[p].DamageType = DamageClass.Melee;
-                        Main.projectile[p].timeLeft = 30;
-                        Main.projectile[p].netUpdate = true;
-                    }
-                }
-            }
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            return Projectile.Distance(new Vector2(targetHitbox.Center.X, targetHitbox.Center.Y)) < 150; //big circular hitbox because otherwise it misses too often
+            return Projectile.Distance(new Vector2(targetHitbox.Center.X, targetHitbox.Center.Y)) < 50; //big circular hitbox because otherwise it misses too often
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            hitSomething = true;
+            NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
+            if (n.Alive())
+            {
+                float scale = Main.rand.NextFloat(0.25f, 0.35f);
+                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                p1.Spawn();
+                p2.Spawn();
+                p3.Spawn();
+            }
+
+            SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
+            //return;
+    
+            if (Projectile.timeLeft >= 10)
+                Projectile.ai[0] = 2;
+
             target.AddBuff(BuffID.CursedInferno, 120);
 
-            if (!hitSomething)
+            /*if (!hitSomething)
             {
                 hitSomething = true;
                 if (Projectile.owner == Main.myPlayer)
@@ -130,29 +225,37 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                                 Main.Projectile[p].netUpdate = true;
                             }
                         }
-                    }*/
+                    }
                 }
                 Projectile.netUpdate = true;
-            }
+            }*/
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D flare2 = MiscTexturesRegistry.BloomFlare.Value;
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D SpazmaSaw = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SpazmarangSaw").Value;
+            int num156 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
+            Rectangle rectangle2 = new(0, y3, SpazmaSaw.Width, num156);
+            Vector2 origin22 = rectangle2.Size() / 2f;
 
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
+
+            float scale = 1;
+            scale = MathHelper.Lerp(Projectile.scale, 2f, 0.5f);
+
+            float opacity = 1;
+            opacity = MathHelper.Lerp(0, 1, 0.1f);
+
             if (empowered)
             {
-                Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Green with { A = 0 } * Projectile.Opacity, Main.GlobalTimeWrappedHourly * -2f, flare2.Size() * 0.5f, 0.3f, 0, 0f);
                 DrawTrail = true;
             }
-            
+
 
             for (float i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 0.33f)
             {
@@ -166,13 +269,28 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }
             }
 
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            if (Projectile.ai[0] <= 2)
+            {
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            }
+
+
+            /*if (Projectile.ai[0] == 2)
+              {
+                  Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
+              }
+              if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
+              {
+                  Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
+            }*/
+
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
 
         public float WidthFunction(float completionRatio)
         {
-            float baseWidth = Projectile.width * 0.8f;
+            float baseWidth = Projectile.width * 1.4f;
             return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
         }
 

@@ -1,4 +1,6 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -10,12 +12,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public class TrojanSquirrelArms : TrojanSquirrelLimb
     {
+        public LoopedSoundInstance Loop;
+        int looptimer;
         public override void SetDefaults()
         {
             base.SetDefaults();
 
             NPC.lifeMax = 450;
-
+            NPC.DeathSound = FargosSoundRegistry.TrojanCannonDeath;
             NPC.width = baseWidth = 114;
             NPC.height = baseHeight = 64;
         }
@@ -31,6 +35,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.target = body.target;
             NPC.direction = NPC.spriteDirection = body.direction;
             NPC.Center = body.Bottom + new Vector2(18f * NPC.direction, -105f) * body.scale;
+
+            if (NPC.ai[0] != 1 && Loop?.HasLoopSoundBeenStarted == true)
+            {
+                looptimer = 0;
+                Loop?.Stop();
+            }
 
             switch ((int)NPC.ai[0])
             {
@@ -78,6 +88,21 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 case 1: //chains
                     {
+                        if (++looptimer >= 90)
+                        {
+                            Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.TrojanHookLoop with { Volume = 0.5f }, () =>
+                            {
+                                return NPC.ai[0] != 1 || !NPC.active;
+                            });
+
+                            Loop?.Update(NPC.Center);
+
+                            if (Loop?.HasBeenStopped == true && Loop?.HasLoopSoundBeenStarted == true)
+                            {
+                                Loop?.Restart();
+                            }
+                        }
+
                         int start = 90;
                         if (WorldSavingSystem.EternityMode)
                             start -= 30;
@@ -90,8 +115,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         if (NPC.ai[1] < start) //better for animation
                         {
                             body.velocity.X *= 0.9f;
-                            if (NPC.ai[1] % teabagInterval == 0)
-                                SoundEngine.PlaySound(SoundID.NPCHit41, NPC.Center);
+                            if (NPC.ai[1] <= 1)
+                                SoundEngine.PlaySound(FargosSoundRegistry.TrojanHookTelegraph, NPC.Center);
                         }
 
                         NPC.ai[1]++;
@@ -145,7 +170,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             for (int i = 0; i < 2; i++)
                             {
                                 Vector2 pos = GetShootPos();
-                                SoundEngine.PlaySound(SoundID.Item11, pos);
+                                SoundEngine.PlaySound(FargosSoundRegistry.TrojanGunStartup, pos);
                                 for (int j = 0; j < 20; j++)
                                 {
                                     int d = Dust.NewDust(pos, 0, 0, DustID.SnowBlock, Scale: 3f);
@@ -158,11 +183,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                         if (NPC.ai[1] > start && NPC.ai[1] % 4 == 0)
                         {
+                            SoundEngine.PlaySound(FargosSoundRegistry.Minigun, GetShootPos());
                             if (NPC.ai[1] % 8 == 0)
                             {
                                 Vector2 pos = GetShootPos();
 
-                                SoundEngine.PlaySound(SoundID.Item11, pos);
+                                SoundEngine.PlaySound(FargosSoundRegistry.TrojanSnowball, pos);
 
                                 float ratio = (NPC.ai[1] - start) / (end - start);
 

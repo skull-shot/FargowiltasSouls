@@ -34,7 +34,7 @@ SummonMulticlass: O dano por lacaios diminui quando você ataca usando outras cl
 ShadowDodge: Modo Eternidade: Esquivar reduzirá sua velocidade de ataque
 IceBarrier: Modo Eternidade: 10% de redução nos danos
 // SpearRework: Reworked spear swing animation
-// PalladiumPikeRework: Greatly increases life regeneration after striking an enemy
+// PalladiumPikeRework: Increased size, Greatly increases life regeneration and heal 1 HP (1/2 second cooldown)
 // CobaltNaginataRework: Causes a small explosion on striking enemies
 // MythrilHalberdRework: After not attacking for 2 seconds, your next attack deals 8x damage, scaling with attack speed
 // OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount

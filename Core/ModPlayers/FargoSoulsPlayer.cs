@@ -12,6 +12,7 @@ using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -57,6 +58,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool RustRifleReloading = false;
         public float RustRifleReloadZonePos = 0;
         public float RustRifleTimer = 0;
+
+        public int LeashHit;
 
         public int EgyptianFlailCD = 0;
         public int SKSCancelTimer;
@@ -121,11 +124,23 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             tag.Add($"{Mod.Name}.{Player.name}.TogglesOff", togglesOff);
+
+            var activeSkills = new List<string>();
+            foreach (var slot in ActiveSkills)
+            {
+                if (slot == null)
+                    activeSkills.Add("Empty");
+                else
+                    activeSkills.Add(slot.Name);
+            }
+            tag.Add($"{Mod.Name}.{Player.name}.ActiveSkills", activeSkills);
             Toggler.Save();
         }
 
         public override void LoadData(TagCompound tag)
         {
+            FargoUIManager.CloseActiveSkillMenu();
+
             var playerData = tag.GetList<string>($"{Mod.Name}.{Player.name}.Data");
             MutantsPactSlot = playerData.Contains("MutantsPactSlot");
             MutantsDiscountCard = playerData.Contains("MutantsDiscountCard");
@@ -139,6 +154,14 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
             disabledToggles = ToggleLoader.LoadedToggles.Keys.Where(x => disabledToggleNames.Contains(x.Name)).ToList();
+
+            List<string> savedSkills = tag.GetList<string>($"{Mod.Name}.{Player.name}.ActiveSkills").ToList();
+            for (int i = 0; i < ActiveSkills.Length; i++)
+            {
+                if (savedSkills.Count <= i)
+                    break;
+                ActiveSkills[i] = savedSkills[i] == "Empty" ? null : AccessoryEffectLoader.AccessoryEffects.Find(x => x.Name == savedSkills[i]);
+            }
         }
         public override void OnEnterWorld()
         {

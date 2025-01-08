@@ -23,6 +23,8 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
 
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = -1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
 
             width = Projectile.width = 14;
             height = Projectile.height = 14;
@@ -169,7 +171,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             float ratio = 1f - Math.Abs(Projectile.velocity.X) / 4f;
             if (ratio < 0)
                 ratio = 0;
-            target.immune[Projectile.owner] = 10 + (int)(50 * ratio);
+            Projectile.idStaticNPCHitCooldown = 10 + (int)(50 * ratio);
         }
 
         public override bool PreDraw(ref Color lightColor)
