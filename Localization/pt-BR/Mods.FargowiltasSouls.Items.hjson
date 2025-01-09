@@ -2975,7 +2975,7 @@ ForgorGift: {
 		Clique com o botão direito no item no inventário para redefinir o pulo da fase 1 do Mutant
 		i forgor
 		'''
-	// Message: forgor
+	// Message: Flags reset successfully
 }
 
 Masochist: {
