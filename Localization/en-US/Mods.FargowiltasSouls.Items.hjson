@@ -2,10 +2,10 @@ AdamantiteEnchant: {
 	DisplayName: Adamantite Enchantment
 	Tooltip:
 		'''
-		Every weapon shot will split into 2
-		Weapon spread increases the longer you fire, and decreases while not firing
-		Weapon shots deal 70% damage, decreased to 60% for homing shots
-		All projectiles hit twice as fast and gain armor penetration equal to 50% damage
+		The longer you fire your weapon, the faster it fires, up to 30% faster
+		Weapon projectiles are also inaccurate, increasing the longer you fire
+		Halved effectiveness on homing weapons
+		Only works on weapons that directly fire projectiles
 		'Chaos'
 		'''
 }

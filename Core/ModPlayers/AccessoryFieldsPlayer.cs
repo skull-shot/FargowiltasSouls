@@ -135,6 +135,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HuntressStage;
         public int HuntressCD;
         public double AdamantiteSpread;
+        public bool HeldItemAdamantiteValid;
+        public Item AdamantiteItem;
 
         public bool CanCobaltJump;
         public bool JustCobaltJumped;

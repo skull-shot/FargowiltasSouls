@@ -719,6 +719,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     MythrilEffect.CalcMythrilAttackSpeed(this, item);
                 }
+
+                if (Player.HasEffect<AdamantiteEffect>())
+                {
+                    AdamantiteEffect.CalcAdamantiteAttackSpeed(Player, item);
+                }
                 
                 float originalAttackSpeed = AttackSpeed;
                 float originalUseTime = useTime / AttackSpeed;
