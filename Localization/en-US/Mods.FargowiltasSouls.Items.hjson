@@ -1872,7 +1872,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
 		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
-		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, press the Freeze Key to freeze time for 6 seconds with a 60 second cooldown
+		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
 		'A true master of Terraria'
 		'''
 }
