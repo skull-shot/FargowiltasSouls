@@ -1045,7 +1045,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
 
                             // movement
-                            float accel = 0.18f;
+                            float accel = 0.10f;
                             int side = 1;
                             if (npc.position.X + (float)(npc.width / 2) < player.position.X + (float)player.width)
                             {
@@ -1056,12 +1056,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float desiredX = player.Center.X + side * 400 - npc.Center.X;
                             float desiredY = player.Center.Y - npc.Center.Y;
 
-                            Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
+                            //Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
 
                             // reworked p1 fireballs
                             float delay = 58f;
                             if (WorldSavingSystem.MasochistModeReal)
                                 ai_ShotTimer += 0.25f;
+                            if (ai_ShotTimer < delay - 10)
+                                npc.velocity *= 0.92f;
                             if (ai_ShotTimer >= delay)
                             {
                                 ai_ShotTimer = 0f;
