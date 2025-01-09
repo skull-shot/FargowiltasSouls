@@ -2998,16 +2998,15 @@ TheBigSting: {
 }
 
 ForgorGift: {
-	DisplayName: Forgor Gift
+	DisplayName: Forgotten Gift
 	Tooltip:
 		'''
 		[c/ff0000:Debug item]
 		Resets vanilla and Souls mod invasion/boss flags, INCLUDING hardmode (Wall of Flesh downed flag)
 		Right click allows getting a new gift from Deviantt, resets credit/discount card, resets your emode slot, rabies vaccine, sinew dash, etc.
 		Right click on the item in inventory to reset Mutant phase 1 skip
-		i forgor
 		'''
-	Message: forgor
+	Message: Flags reset successfully
 }
 
 Masochist: {
