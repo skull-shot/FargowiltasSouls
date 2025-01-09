@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
@@ -33,6 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Summon;
+            //Projectile.Opacity = FargoClientConfig.Instance.TransparentFriendlyProjectiles;
 
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 6;
@@ -134,7 +136,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2f;
+        public float WidthFunction(float _) => (Projectile.width * Projectile.scale * 2f) /* FargoClientConfig.Instance.TransparentFriendlyProjectiles*/;
 
         public static Color ColorFunction(float _)
         {
@@ -160,12 +162,13 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
 
             // Set shader parameters.
-            shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
+            shader.TrySetParameter("mainColor", Color.LightSkyBlue);
             FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
             shader.TrySetParameter("stretchAmount", 0.25f);
             shader.TrySetParameter("scrollSpeed", 1f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);
             shader.TrySetParameter("useFadeIn", true);
+            shader.TrySetParameter("realopacity", FargoClientConfig.Instance.TransparentFriendlyProjectiles);
 
             PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 15);
         }
