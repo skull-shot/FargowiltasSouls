@@ -749,12 +749,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //tries to remove all buffs/debuffs
                 for (int i = Player.MaxBuffs - 1; i >= 0; i--)
                 {
-                    if (Player.buffType[i] > 0
-                        && !Main.debuff[Player.buffType[i]] && !Main.buffNoTimeDisplay[Player.buffType[i]]
-                        && !BuffID.Sets.TimeLeftDoesNotDecrease[Player.buffType[i]])
+                    int type = Player.buffType[i];
+                    if (type > 0
+                        && !Main.debuff[type] && !Main.buffNoTimeDisplay[type]
+                        && !BuffID.Sets.TimeLeftDoesNotDecrease[type] && !Main.lightPet[type] && !Main.vanityPet[type])
                     {
-                        if (!KnownBuffsToPurify.ContainsKey(Player.buffType[i]))
-                            KnownBuffsToPurify[Player.buffType[i]] = true;
+                        if (!KnownBuffsToPurify.ContainsKey(type))
+                            KnownBuffsToPurify[type] = true;
 
                         Player.DelBuff(i);
                     }
