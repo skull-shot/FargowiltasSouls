@@ -1262,7 +1262,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 {
                     if (!p.FargoSouls().TikiTagged)
                     {
-                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, p.Center);
+                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.35f, MaxInstances = 1 }, p.Center);
                         for (int i = 0; i < 8; i++)
                         {
                             int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
