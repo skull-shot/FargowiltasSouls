@@ -32,6 +32,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            // magilumi lighting
+            DelegateMethods.v3_1 = new Vector3(0.9f, 0.8f, 0.5f);
+            Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
+            Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
             AddEffects(player, Item);
         }
         public static void AddEffects(Player player, Item item)
