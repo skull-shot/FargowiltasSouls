@@ -6,6 +6,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -48,6 +49,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
+            if (Main.player[Projectile.owner].Alive())
+            {
+                if (Main.projectile.Where(p => p.TypeAlive(Type) && p.owner == Projectile.owner).Count() > 3) 
+                {
+                    Projectile.Kill();
+                }
+            }
             if (Projectile.ai[0] == 0)
             {
                 Projectile.ai[1]++;
