@@ -772,14 +772,14 @@ ReleasedMechFlail.DisplayName: Привязь Ктулху
 Tome.DisplayName: Том
 TomeShot.DisplayName: Выстрел из тома
 TungstenShockwave.DisplayName: Ударная волна вольфрама
-// CirnoIceCube.DisplayName: Cirno Ice Cube
-// CirnoMinion.DisplayName: Cirno Minion
-// DaiyouseiMinion.DisplayName: Daiyousei Minion
-// MystiaMinion.DisplayName: Mystia Minion
-// RumiaMinion.DisplayName: Rumia Minion
-// WriggleMinion.DisplayName: Wriggle Minion
-// CirnoIceChunk.DisplayName: Cirno Ice Chunk
-// DaiyoLeaf.DisplayName: Daiyo Leaf
-// MystiaNote.DisplayName: Mystia Note
-// MystiaNote2.DisplayName: Mystia Note2
-// RumiaOrb.DisplayName: Rumia Orb
+CirnoIceCube.DisplayName: Кубик льда Чирно
+CirnoMinion.DisplayName: Чирно миньон
+DaiyouseiMinion.DisplayName: Дайёсэй миньон
+MystiaMinion.DisplayName: Мистия миньон
+RumiaMinion.DisplayName: Румия миньон
+WriggleMinion.DisplayName: Риггл миньон
+CirnoIceChunk.DisplayName: Ледяной кусок Чирно
+DaiyoLeaf.DisplayName: Листок Дайёсэй
+MystiaNote.DisplayName: Нота Мистии
+MystiaNote2.DisplayName: Нота Мистии 2
+RumiaOrb.DisplayName: Сфера Румии
