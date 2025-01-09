@@ -48,7 +48,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.HoldShift"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedEternity"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedMasochist"),
-                Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedFeatures")
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedFeatures"),
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMultiplayer")
                 );
             OncomingMutant.Left.Set(610, 0);
             OncomingMutant.Top.Set(250, 0);

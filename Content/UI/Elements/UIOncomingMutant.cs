@@ -34,13 +34,14 @@ namespace FargowiltasSouls.Content.UI.Elements
         public string TextExpandedEternity;
         public string TextExpandedMaso;
         public string TextExpandedFeatures;
+        public string TextMasoMultiplayer;
 
         public int ToggleCooldown;
 
         public bool Hovering = false;
 
         public UIOncomingMutant(Texture2D tex, Texture2D auraTex, Texture2D emptyTex, string textEMode, string textMaso, string textDisabled, string textRightClick, 
-            string textHoldShift, string textExpandedEternity, string textExpandedMaso, string textExpandedFeatures)
+            string textHoldShift, string textExpandedEternity, string textExpandedMaso, string textExpandedFeatures, string textMasoMultiplayer)
         {
             Texture = tex;
             AuraTexture = auraTex;
@@ -53,6 +54,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             TextExpandedEternity = textExpandedEternity;
             TextExpandedMaso = textExpandedMaso;
             TextExpandedFeatures = textExpandedFeatures;
+            TextMasoMultiplayer = textMasoMultiplayer;
 
             Width.Set(24, 0);
             Height.Set(26, 0);
@@ -207,6 +209,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                     string difText = WorldSavingSystem.MasochistModeReal ? TextExpandedMaso : TextExpandedEternity;
                     text += $"\n{difText}";
                     text += $"\n{TextExpandedFeatures}";
+                    if (WorldSavingSystem.MasochistModeReal && Main.netMode != NetmodeID.SinglePlayer)
+                        text += $"\n{TextMasoMultiplayer}";
                 }
                 else
                     text += $"\n[c/787878:{TextHoldShift}]";

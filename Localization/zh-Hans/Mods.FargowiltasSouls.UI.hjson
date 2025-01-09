@@ -26,6 +26,7 @@ ExpandedFeatures:
 	- 不攻击时减益效果会更快消失
 	- 调整某些物品的功能和强度
 	'''
+// MasochistMultiplayer: -In Masochist multiplayer, each player can only respawn once per bossfight
 SavedToSlot: 已将饰品效果设置保存至自定义效果配置{0}！
 NoTogglesFound: 未找到自定义效果配置{0}
 TurnAllTogglesOff: 关闭全部饰品效果

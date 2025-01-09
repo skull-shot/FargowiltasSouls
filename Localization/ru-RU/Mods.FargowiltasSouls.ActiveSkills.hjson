@@ -125,5 +125,6 @@ SpiritTornadoEffect: {
 		'''
 		Call an ancient tornado which deals magic and summon damage
 		Any projectiles shot through the tornado deal 1.4x damage
+		The tornado tracks your mouse slightly
 		''' */
 }

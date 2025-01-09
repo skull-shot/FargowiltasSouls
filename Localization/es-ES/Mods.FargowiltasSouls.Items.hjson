@@ -928,7 +928,6 @@ SpiritForce: {
 	// DisplayName: Force of Spirit
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/AncientHallowEnchant] The tornado tracks your mouse slightly 
 		[i:FargowiltasSouls/HallowEnchant] Healing potions restore more health but take effect over time
 		[i:FargowiltasSouls/SpectreEnchant] If you reach zero HP you will revive with 200 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/TikiEnchant] Increased whip range, whips scale with any class, and empower your projectiles they hit
@@ -3036,8 +3035,9 @@ Masochist: {
 	// DisplayName: Mutant's Gift
 	/* Tooltip:
 		'''
-		World must be in Expert Mode or above
-		Enables Masochist Mode if world is in Master Mode and you've defeated the final Eternity boss in any world
+		[c/00FFFF:Enables Eternity Mode: A new mode above Expert for Terraria veterans. The intended Fargo experience.]
+		World must be in Expert Mode
+		Enables Masochist Mode if world is in Master Mode or above
 		Features include:
 
 		-Reworks bosses and enemies, making them stronger
@@ -3047,6 +3047,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking
 		-Changes the functionality and strength of certain items
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
