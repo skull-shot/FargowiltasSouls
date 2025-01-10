@@ -12,7 +12,7 @@ PearlwoodManaEffect: Pearlwood Mana Pickups
 PearlwoodRainbowEffect: Pearlwood Rainbow Trail
 TimberEffect: Concise Timber Force
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
-AdamantiteEffect: Adamantite Projectile Splitting
+AdamantiteEffect: Adamantite Speed and Spread
 CobaltEffect: Cobalt Hit Explosion
 AncientCobaltEffect: Ancient Cobalt Explosion Jump
 MythrilEffect: Mythril Weapon Speed
