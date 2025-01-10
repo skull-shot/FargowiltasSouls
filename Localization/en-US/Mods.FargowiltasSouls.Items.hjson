@@ -1111,7 +1111,7 @@ ChaliceoftheMoon: {
 		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
-		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type and you spawn Ancient Visions when taking damage
+		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
 		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side, [i:FargowiltasSouls/CelestialRune] and erupt into Ancient Visions when injured
 		'Always watching'
@@ -3707,5 +3707,5 @@ DarkTome: {
 
 TouhouStaff: {
 	DisplayName: Children of Nature's Eulogy
-	Tooltip: Summons up to five distinct minions
+	Tooltip: Summons up to five yokais and fairies to fight for you
 }

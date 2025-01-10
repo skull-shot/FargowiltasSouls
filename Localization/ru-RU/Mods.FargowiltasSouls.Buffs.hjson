@@ -801,7 +801,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2.5 ед. здоровья в секунду, миньоны могут наносить крит. урон
+	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2.5 ОЗ в секунду, миньоны могут наносить крит. урон
 }
 
 MutantDesperationBuff: {
@@ -810,6 +810,6 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	// DisplayName: Touhou Hoard Buff
-	// Description: The witches will fight for you
+	DisplayName: Бафф Орда на восток
+	Description: Мифические существа сражаются с вами
 }
