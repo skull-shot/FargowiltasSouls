@@ -656,7 +656,7 @@ TinEnchant: {
 		Ser atingido redefine seu crítico para 5%
 		'Retorno do Crítico'
 		'''
-	CritUp: +5% crítico
+	CritUp: +{0}% crítico
 	CritReset: -{0}% crítico
 }
 

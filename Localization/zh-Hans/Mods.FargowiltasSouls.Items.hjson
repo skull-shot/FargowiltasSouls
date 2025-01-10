@@ -678,7 +678,7 @@ TinEnchant: {
 		受伤会使暴击率恢复为5%
 		“暴击回归”
 		'''
-	CritUp: +5%暴击率
+	CritUp: +{0}%暴击率
 	CritReset: -{0}%暴击率
 }
 

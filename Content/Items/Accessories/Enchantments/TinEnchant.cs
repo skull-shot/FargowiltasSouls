@@ -96,7 +96,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
                     else
-                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp"));
+                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 5));
                 }
 
                 void TryHeal(int healDenominator, int healCooldown)

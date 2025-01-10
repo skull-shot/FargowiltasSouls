@@ -662,7 +662,7 @@ TinEnchant: {
 		Getting hit resets your crit to 5%
 		'Return of the Crit'
 		'''
-	CritUp: +5% crit
+	CritUp: +{0}% crit
 	CritReset: -{0}% crit
 }
 
