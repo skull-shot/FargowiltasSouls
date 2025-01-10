@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             // DisplayName.SetDefault("Spazmaglaive");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -98,7 +99,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (Projectile.ai[0] == 1 && empowered)
             {
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1200, false, true));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2400, false, true));
                 if (n.Alive())
                 {   
                     if (hitSomething == false)

@@ -69,13 +69,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             return true;
         }
 
-        public override bool CanShoot(Player player) => true; //player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 && player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
+        public override bool CanShoot(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 || player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
 
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        /*public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (lastThrown != type)
                 damage = (int)(damage * 1.5); //additional damage boost for switching
-        }
+        }*/
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
