@@ -181,7 +181,7 @@ SoulConfig: {
 	}
 
 	PatreonTouhou: {
-		// Label: Patreon Touhou
+		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
 		// Tooltip: ""
 	}
 }
