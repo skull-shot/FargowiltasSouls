@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 150;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
-
+            Projectile.friendly = true;
         }
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
