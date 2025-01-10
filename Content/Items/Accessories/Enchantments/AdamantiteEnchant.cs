@@ -132,6 +132,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             ItemID.Excalibur,
             ItemID.TrueExcalibur,
             ItemID.TerraBlade,
+            ItemID.TheHorsemansBlade,
             ModContent.ItemType<DecrepitAirstrikeRemote>()
         ];
 
