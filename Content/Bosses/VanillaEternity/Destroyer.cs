@@ -1052,15 +1052,26 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
                     modifiers.FinalDamage *= 0.001f;
+
+            PierceResistance(projectile, ref modifiers);
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             modifiers.FinalDamage *= 0.4f;
         }
+        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers, float max = 0.97f)
+        {
+            var eProj = projectile.Eternity();
+            modifiers.FinalDamage *= eProj.WormPierceResist;
+            if (eProj.WormPierceResist < max)
+                eProj.WormPierceResist += 0.25f;
+            if (eProj.WormPierceResist > max)
+                eProj.WormPierceResist = max;
+        }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            if (!FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj && projectile.damage > 5)
-                projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.75);
+            //if (!FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj && projectile.damage > 5)
+            //    projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.75);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
