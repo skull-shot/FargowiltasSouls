@@ -1027,7 +1027,7 @@ BetsysHeart: {
 	Tooltip:
 		'''
 		Grants immunity to Oozed, Withered Weapon, and Withered Armor
-		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and halves your dash cooldown
+		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
 		'Lightly roasted, medium rare'
 		'''
 }
