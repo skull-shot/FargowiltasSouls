@@ -58,13 +58,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             {
                 Item.shoot = ModContent.ProjectileType<Retiglaive>();
                 Item.shootSpeed = 15f;
-                Item.UseSound = FargosSoundRegistry.GeminiReti;
+                Item.UseSound = FargosSoundRegistry.GeminiReti with { Volume = 0.8f };
             }
             else 
             {
                 Item.shoot = ModContent.ProjectileType<Spazmaglaive>();
                 Item.shootSpeed = 45f;
-                Item.UseSound = FargosSoundRegistry.GeminiSpaz;
+                Item.UseSound = FargosSoundRegistry.GeminiSpaz with {Volume = 0.8f};
             }
             return true;
         }
