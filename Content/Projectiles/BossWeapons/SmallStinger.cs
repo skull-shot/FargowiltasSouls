@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.scale *= 1.5f;
             Projectile.height = (int)(Projectile.height * 1.5f);
             Projectile.width = (int)(Projectile.width * 1.5f);
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
         }
 
         public override void AI()

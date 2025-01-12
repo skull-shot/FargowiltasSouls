@@ -34,6 +34,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.scale = 0.5f;
             Projectile.penetrate = -1;
             Projectile.extraUpdates = 1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
         }
 
         public override void AI()

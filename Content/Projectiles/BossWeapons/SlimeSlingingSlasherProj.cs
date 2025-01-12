@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             target.AddBuff(BuffID.Slimed, 120);
             SoundEngine.PlaySound(SoundID.Item17);
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<Slimesplosion>(), damageDone, 1f, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<Slimesplosion>(), 0, 1f, Projectile.owner);
 
             FreezeTime = 4;
         }
@@ -73,9 +73,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         int j = i * Projectile.direction;
                         Vector2 vel = (Projectile.rotation + MathHelper.PiOver2 * j / 10f).ToRotationVector2() * 20f;
-                        int p = Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.originalDamage, Projectile.knockBack, player.whoAmI);
-                        if (p.IsWithinBounds(Main.maxProjectiles))
-                            Main.projectile[p].DamageType = DamageClass.Melee;
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.damage / 2, Projectile.knockBack, player.whoAmI);
                     }
                 }
                 ProjectileCheck = 1;

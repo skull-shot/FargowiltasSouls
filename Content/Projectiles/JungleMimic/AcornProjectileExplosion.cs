@@ -21,6 +21,8 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
             Projectile.DamageType = DamageClass.Ranged;
         }
 

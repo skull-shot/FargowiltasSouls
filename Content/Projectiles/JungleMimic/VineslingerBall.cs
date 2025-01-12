@@ -21,7 +21,10 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
             Projectile.aiStyle = 15;
+            
         }
         public override void PostAI()
         {
