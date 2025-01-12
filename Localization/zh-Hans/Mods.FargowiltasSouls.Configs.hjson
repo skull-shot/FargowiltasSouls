@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: 冷却条竖直位置
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: Measured from the right side of the screen.
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -168,5 +178,10 @@ SoulConfig: {
 	PerformanceMode: {
 		Label: 性能模式
 		Tooltip: 禁用高性能要求的视觉效果。目前会禁用突变体幻影眼的拖尾绘制
+	}
+
+	PatreonTouhou: {
+		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		// Tooltip: ""
 	}
 }

@@ -369,7 +369,7 @@ namespace FargowiltasSouls.Content.Items
                 return false;
             }
             */
-            if (item.IsWeaponWithDamageClass())
+            if (item.IsWeaponWithDamageClass() && item == player.HeldItem)
             {
                 player.FargoSouls().WeaponUseTimer = 2 + (int)Math.Round((Math.Max(item.useTime, item.useAnimation) + item.reuseDelay) / player.FargoSouls().AttackSpeed);
             }

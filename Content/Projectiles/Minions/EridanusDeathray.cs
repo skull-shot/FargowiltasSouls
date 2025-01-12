@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Main.dust[num812].alpha = 150;
                 num3 = num809;
             }
-            if (Main.rand.NextBool(5))
+            if (Main.rand.NextBool(10))
             {
                 Vector2 value29 = Projectile.velocity.RotatedBy(1.5707963705062866, default) * ((float)Main.rand.NextDouble() - 0.5f) * Projectile.width;
                 int num813 = Dust.NewDust(vector79 + value29 - Vector2.One * 4f, 8, 8, DustID.CopperCoin, 0f, 0f, 100, default, 1.5f);
@@ -131,7 +131,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
             if (Projectile.scale == 1f)
             {
-                for (int i = 0; i < 280; i++)
+                for (int i = 0; i < 80; i++)
                 {
                     int d = Dust.NewDust(Projectile.position + Projectile.velocity * Main.rand.NextFloat(6000),
                         Projectile.width, Projectile.height, DustID.CrystalPulse, 0f, 0f, 0, default, 1.5f);

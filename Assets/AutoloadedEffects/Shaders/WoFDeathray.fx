@@ -3,6 +3,7 @@ sampler uImage1 : register(s1);
 sampler uImage2 : register(s2);
 
 float globalTime;
+float realopacity;
 float3 mainColor;
 matrix uWorldViewProjection;
 
@@ -81,7 +82,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
         opacity *= pow(1 - (coords.x - 0.95) / 0.05, 6);
     */
     
-    return colorCorrected * opacity * 2;
+    return (colorCorrected * opacity * 2) * realopacity;
 }
 
 technique Technique1

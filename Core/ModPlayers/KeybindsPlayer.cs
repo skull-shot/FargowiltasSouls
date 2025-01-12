@@ -1,10 +1,12 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.ModPlayers
@@ -13,7 +15,29 @@ namespace FargowiltasSouls.Core.ModPlayers
     {
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
+            bool stunned = GoldShell || SpectreGhostTime > 0 || Player.CCed || NoUsingItems > 0;
+            
+            var keys = FargowiltasSouls.ActiveSkillKeys;
+            for (int i = 0; i < keys.Length; i++)
+            {
+                AccessoryEffectPlayer aPlayer = Player.AccessoryEffects();
+
+                var key = keys[i];
+                var skill = ActiveSkills[i];
+                if (skill == null || !aPlayer.Active(skill))
+                    continue;
+                if (key.JustPressed)
+                    skill.ActiveSkillJustPressed(Player, stunned);
+                if (key.Current)
+                    skill.ActiveSkillHeld(Player, stunned);
+                if (key.JustReleased)
+                    skill.ActiveSkillJustReleased(Player, stunned);
+            }
+
             #region ignores stuns
+
+            if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
+                FargoUIManager.ToggleActiveSkillMenu();
 
             if (Mash)
             {
@@ -61,49 +85,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     MashPressed[3] = false;
             }
 
-            if (FargowiltasSouls.FreezeKey.JustPressed)
-            {
-                if (Player.HasEffect<StardustEffect>() && !Player.HasBuff(ModContent.BuffType<TimeStopCDBuff>()))
-                {
-                    int cooldownInSeconds = 90;
-                    if (ForceEffect<StardustEnchant>())
-                        cooldownInSeconds = 75;
-                    if (TerrariaSoul)
-                        cooldownInSeconds = 60;
-                    if (Eternity)
-                        cooldownInSeconds = 30;
-                    Player.ClearBuff(ModContent.BuffType<TimeFrozenBuff>());
-                    for (int i = 0; i < Main.maxPlayers; i++)
-                    {
-                        if (Main.player[i] != null && Main.player[i].Alive())
-                            Main.player[i].AddBuff(ModContent.BuffType<TimeStopCDBuff>(), cooldownInSeconds * 60);
-                    }
-                    
-
-                    FreezeTime = true;
-                    freezeLength = StardustEffect.TIMESTOP_DURATION;
-
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), Player.Center);
-                }
-                /*else if (Player.HasEffect<SnowEffect>() && !Player.HasBuff(ModContent.BuffType<SnowstormCDBuff>())
-                    && !Player.HasBuff(ModContent.BuffType<MutantPresenceBuff>()))
-                {
-                    Player.AddBuff(ModContent.BuffType<SnowstormCDBuff>(), 60 * 60);
-
-                    ChillSnowstorm = true;
-                    chillLength = CHILL_DURATION;
-
-                    SoundEngine.PlaySound(SoundID.Item27, Player.Center);
-
-                    for (int i = 0; i < 30; i++)
-                    {
-                        int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.GemSapphire, 0, 0, 0, default, 3f);
-                        Main.dust[d].noGravity = true;
-                        Main.dust[d].velocity *= 9f;
-                    }
-                }*/
-            }
-
             if (PrecisionSeal)
             {
                 if (ClientConfig.Instance.PrecisionSealIsHold)
@@ -123,20 +104,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[3] = 0;
             }
 
-            if (FargowiltasSouls.AmmoCycleKey.JustPressed && CanAmmoCycle)
-                AmmoCycleKey();
-
             if (FargowiltasSouls.SoulToggleKey.JustPressed)
                 FargoUIManager.ToggleSoulToggler();
 
-            if (FargowiltasSouls.GoldKey.JustPressed && Player.HasEffect<GoldEffect>())
-            {
-                GoldKey();
-            }
-
             #endregion
 
-            if (GoldShell || SpectreGhostTime > 0 || Player.CCed || NoUsingItems > 0)
+            if (stunned)
             {
                 return;
             }
@@ -146,26 +119,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             //if (FargowiltasSouls.SmokeBombKey.JustPressed && CrystalEnchantActive && SmokeBombCD == 0)
             //    CrystalAssassinEnchant.SmokeBombKey(this);
 
-            if (FargowiltasSouls.SpecialDashKey.JustPressed && (BetsysHeartItem != null || QueenStingerItem != null))
-                SpecialDashKey();
-
-            if (FargowiltasSouls.MagicalBulbKey.JustPressed && MagicalBulb)
-                MagicalBulbKey();
-
-            if (FrigidGemstoneItem != null)
+            if (Player.HasEffect<FrigidGemstoneKeyEffect>())
             {
                 if (FrigidGemstoneCD > 0)
                     FrigidGemstoneCD--;
-
-                if (FargowiltasSouls.FrigidSpellKey.Current)
-                    FrigidGemstoneKey();
             }
-
-            if (FargowiltasSouls.BombKey.JustPressed)
-                BombKey();
-
-            if (FargowiltasSouls.DebuffInstallKey.JustPressed)
-                DebuffInstallKey();
 
             #endregion
         }

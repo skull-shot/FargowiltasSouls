@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -70,7 +71,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.height = 42; 
             Projectile.friendly = true; 
             Projectile.penetrate = -1; 
-            Projectile.DamageType = DamageClass.Melee; 
+            Projectile.DamageType = DamageClass.Melee;
+            //Projectile.aiStyle = ProjAIStyleID.Flail;
             Projectile.usesLocalNPCImmunity = true; 
             Projectile.localNPCHitCooldown = 10; 
         }
@@ -95,7 +97,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             int launchTimeLimit = 12;  // How much time the projectile can go before retracting (speed and shootTimer will set the flail's range)
             float launchSpeed = 24f; // How fast the projectile can move
             float maxLaunchLength = 400f; // How far the projectile's chain can stretch before being forced to retract when in launched state
-            float retractAcceleration = 1f; // How quickly the projectile will accelerate back towards the player while retracting
+            float retractAcceleration = 1.5f; // How quickly the projectile will accelerate back towards the player while retracting
             float maxRetractSpeed = 20f; // The max speed the projectile will have while retracting
             float forcedRetractAcceleration = 6f; // How quickly the projectile will accelerate back towards the player while being forced to retract
             float maxForcedRetractSpeed = 15f; // The max speed the projectile will have while being forced to retract
@@ -144,10 +146,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                        
                         Vector2 offsetFromPlayer = new Vector2(player.direction).RotatedBy((float)Math.PI * 10f * (SpinningStateTimer / 60f) * player.direction);
 
-                        if (++EyeTimer >= 60)
+                        if (++EyeTimer >= 29)
                         {
-                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(7, 7),
-                            ModContent.ProjectileType<EyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                            if (Main.projectile.Where(p => p.TypeAlive<EyeProjectile>() && p.ai[0] == 0 && p.owner == Projectile.owner).Count() < 7)
+                            {
+                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(7, 7).RotatedByRandom(MathHelper.TwoPi),
+                                    ModContent.ProjectileType<EyeProjectile>(), (int)(Projectile.damage * 1.6f), Projectile.knockBack, Projectile.owner);
+                            }
                             EyeTimer = 0;
                         }
 
@@ -175,7 +180,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         bool shouldSwitchToRetracting = StateTimer++ >= launchTimeLimit;
                         shouldSwitchToRetracting |= Projectile.Distance(mountedCenter) >= maxLaunchLength;
-                        if (player.controlUseItem) 
+                        if (false)//player.controlUseItem) 
                         {
                             CurrentAIState = AIState.Dropping;
                             StateTimer = 0f;
@@ -204,7 +209,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             Projectile.Kill(); 
                             return;
                         }
-                        if (player.controlUseItem) 
+                        if (false)//player.controlUseItem) 
                         {
                             CurrentAIState = AIState.Dropping;
                             StateTimer = 0f;
@@ -256,7 +261,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     }
                     break;
                 case AIState.Dropping:
-                    if (!player.controlUseItem || Projectile.Distance(mountedCenter) > maxDroppedRange)
+                    if (true)//!player.controlUseItem || Projectile.Distance(mountedCenter) > maxDroppedRange)
                     {
                         CurrentAIState = AIState.ForcedRetracting;
                         StateTimer = 0f;
@@ -442,7 +447,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             float chainSegmentLength = (chainSourceRectangle.HasValue ? chainSourceRectangle.Value.Height : chainTexture.Height()) + chainHeightAdjustment;
             if (chainSegmentLength == 0)
             {
-                chainSegmentLength = 10; 
+                chainSegmentLength = 10 * Projectile.scale; 
             }
             float chainRotation = unitVectorFromProjectileToPlayerArms.ToRotation() + MathHelper.PiOver2;
             int chainCount = 0;
@@ -454,13 +459,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                 var chainTextureToDraw = chainTexture;
           
-                Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(chainTextureToDraw.Value, chainDrawPosition - Main.screenPosition, chainSourceRectangle, chainDrawColor, chainRotation, chainOrigin, Projectile.scale, SpriteEffects.None, 0f);
               
                 chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
                 chainCount++;
                 chainLengthRemainingToDraw -= chainSegmentLength;
             }
-            Main.spriteBatch.Draw((CurrentAIState == AIState.Spinning) ? EyeTexture.Value : FlailTexture.Value, Projectile.Center - Main.screenPosition, null, Lighting.GetColor((int)Projectile.Center.X / 16, (int)(Projectile.Center.Y / 16f)), Projectile.rotation, new Vector2(19, 20), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw((CurrentAIState == AIState.Spinning) ? EyeTexture.Value : FlailTexture.Value, Projectile.Center - Main.screenPosition, null, Lighting.GetColor((int)Projectile.Center.X / 16, (int)(Projectile.Center.Y / 16f)), Projectile.rotation, new Vector2(19, 20), Projectile.scale, SpriteEffects.None, 0f);
 
             return false;
         }

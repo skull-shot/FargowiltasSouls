@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int MythrilHalberdTimer;
         public int CobaltHitCounter;
         public int CrossNecklaceTimer;
+        public int PalladiumHealTimer;
         private int WeaponUseTimer => Player.FargoSouls().WeaponUseTimer;
         public int Respawns;
 
@@ -209,6 +210,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (ShorterDebuffsTimer > 60)
                 ShorterDebuffsTimer = 60;
+
+            if (PalladiumHealTimer > 0)
+                PalladiumHealTimer--;
 
             //Main.NewText($"{MasomodeWeaponUseTimer} {MasomodeMinionNerfTimer} {ReduceMasomodeMinionNerf}");
         }

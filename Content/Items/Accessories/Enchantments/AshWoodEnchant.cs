@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void TryAdditionalAttacks(Player player, int damage, DamageClass damageType)
         {
-            if (player.HasEffect<TerraLightningEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool debuffed = false;

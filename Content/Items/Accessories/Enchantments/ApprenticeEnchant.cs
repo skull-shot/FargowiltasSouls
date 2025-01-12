@@ -76,6 +76,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<ApprenticeEnchant>();
         public override bool ExtraAttackEffect => true;
         public static List<int> Blacklist = [];
+        public static MethodInfo shootMethod;
+        public override void Load()
+        {
+            shootMethod = typeof(Player).GetMethod("ItemCheck_Shoot",  BindingFlags.NonPublic | BindingFlags.Instance);
+            base.Load();
+        }
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -140,9 +146,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             
                             int projToShoot = item2.shoot;
                             float speed = item2.shootSpeed;
-                            int damage = item2.damage;
+                            int damage = player.GetWeaponDamage(item2);
                             float KnockBack = item2.knockBack;
 
+                            int itemtime = player.itemTime;
+                            int itemtimemax = player.itemTimeMax;
+                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]);
+
+                            player.itemTime = itemtime;
+                            player.itemTimeMax = itemtimemax;
                             //damage = (int)(damage * 0.75f);
 
                             //FargoSoulsGlobalProjectile.ApprenticeDamageCap = damage;
@@ -159,19 +171,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                 divisor = 5;
                             }
 
-                            if (player.HasEffect<ShadowForceEffect>())
+                            if (!HasEffectEnchant(player))
                                 divisor = 10;
 
                             modPlayer.ApprenticeItemCD = item2.useAnimation * divisor;
-
-                            
-                            if (item2.useAmmo > 0)
-                            {
-                                player.PickAmmo(item2, out projToShoot, out speed, out damage, out KnockBack, out int usedAmmoItemId, ItemID.Sets.gunProj[item2.type]);
-                            }
-                            
-
-                            //damage = (int)(damage * 0.75f);
 
                             if (item2.mana > 0)
                             {
@@ -184,19 +187,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             {
                                 item2.stack--;
                             }
-                            
+
                             //modPlayer.ApprenticeItemCD = item2.useAnimation * 4;
+                            //if (projToShoot == ProjectileID.RainbowFront || projToShoot == ProjectileID.RainbowBack) // prevent fucked up op interaction
+                            //{
+                            //    foreach (Projectile rainbow in Main.projectile.Where(p => (p.TypeAlive(ProjectileID.RainbowFront) || p.TypeAlive(ProjectileID.RainbowBack)) && p.owner == player.whoAmI))
+                            //        rainbow.Kill();
+                            //}
+                            //int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
+                            //Projectile proj = Main.projectile[p];
 
-                            if (projToShoot == ProjectileID.RainbowFront || projToShoot == ProjectileID.RainbowBack) // prevent fucked up op interaction
-                            {
-                                foreach (Projectile rainbow in Main.projectile.Where(p => (p.TypeAlive(ProjectileID.RainbowFront) || p.TypeAlive(ProjectileID.RainbowBack)) && p.owner == player.whoAmI))
-                                    rainbow.Kill();
-                            }
-                            int p = Projectile.NewProjectile(player.GetSource_ItemUse(item), pos, Vector2.Normalize(velocity) * speed, projToShoot, damage, KnockBack, player.whoAmI);
-                            Projectile proj = Main.projectile[p];
-
-                            proj.FargoSouls().DamageCap = (int)MathHelper.Max(proj.FargoSouls().DamageCap, damage);
-                            proj.noDropItem = true;
+                            //proj.FargoSouls().DamageCap = (int)MathHelper.Max(proj.FargoSouls().DamageCap, damage);
+                            //proj.noDropItem = true;
 
                             break;
                             /*

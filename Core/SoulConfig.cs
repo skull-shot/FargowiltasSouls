@@ -101,6 +101,10 @@ namespace FargowiltasSouls.Core
         [ReloadRequired]
         public bool PatreonROB;
 
+        [DefaultValue(true)]
+        [ReloadRequired]
+        public bool PatreonTouhou;
+
         #endregion
     }
 }

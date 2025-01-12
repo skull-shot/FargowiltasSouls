@@ -9,3 +9,8 @@ MagicalBulb.DisplayName: Магическое очищение
 FrigidSpell.DisplayName: Морозное заклинание
 DebuffInstall.DisplayName: Установка дебаффа
 AmmoCycle.DisplayName: Смена боеприпасов
+ActiveSkill1.DisplayName: Активное умение 1
+ActiveSkill2.DisplayName: Активное умение 2
+ActiveSkill3.DisplayName: Активное умение 3
+ActiveSkill4.DisplayName: Активное умение 4
+ActiveSkillMenu.DisplayName: Меню активных умений

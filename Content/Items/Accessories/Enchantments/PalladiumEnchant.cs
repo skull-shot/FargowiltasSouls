@@ -49,7 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => null;
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
 
             if (!player.onHitRegen)

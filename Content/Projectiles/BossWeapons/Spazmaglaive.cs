@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             // DisplayName.SetDefault("Spazmaglaive");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 60;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 20;
         }
 
         public override void AI()
@@ -66,17 +67,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.ai[2] = Main.rand.NextFloat(-MathHelper.Pi / 6, MathHelper.Pi / 6);
                 }
                 Projectile.ai[1]++;
-                ++Projectile.localAI[0];
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.6f, 1 / 10f);
+                /*++Projectile.localAI[0];
                 const int maxTime = 45;
                 Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.localAI[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
                 DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[2] - Projectile.ai[2] * Projectile.localAI[0] / (maxTime / 2));
-                Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
+                Projectile.Center += Main.player[Projectile.owner].Center;*/
+                int maxtime = empowered ? 15 : 30;
 
-                if (Projectile.ai[1] >= 5)
-                {
-                    //Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.8f, 1 / 60f); ;
-                }
-                if (Projectile.ai[1] >= 15)
+                if (Projectile.ai[1] >= maxtime)
                 {
                     Projectile.ai[0] = 1;
                     Projectile.ai[1] = 0;
@@ -100,9 +99,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (Projectile.ai[0] == 1 && empowered)
             {
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1200, false, true));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2400, false, true));
                 if (n.Alive())
-                {
+                {   
+                    if (hitSomething == false)
+                    {
+                        Projectile.timeLeft = 60;
+                    }
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(n.Center) * 60, 0.2f);
                 }
                 else 
@@ -172,13 +175,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-
+            hitSomething = true;
             NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
             if (n.Alive())
             {
-                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                float scale = Main.rand.NextFloat(0.25f, 0.35f);
+                Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
                 p1.Spawn();
                 p2.Spawn();
                 p3.Spawn();

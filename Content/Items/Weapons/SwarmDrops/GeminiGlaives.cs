@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 454;
+            Item.damage = 210;
             Item.DamageType = DamageClass.Melee;
             Item.width = 30;
             Item.height = 30;
@@ -58,24 +58,24 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             {
                 Item.shoot = ModContent.ProjectileType<Retiglaive>();
                 Item.shootSpeed = 15f;
-                Item.UseSound = FargosSoundRegistry.GeminiReti;
+                Item.UseSound = FargosSoundRegistry.GeminiReti with { Volume = 0.8f };
             }
             else 
             {
                 Item.shoot = ModContent.ProjectileType<Spazmaglaive>();
                 Item.shootSpeed = 45f;
-                Item.UseSound = FargosSoundRegistry.GeminiSpaz;
+                Item.UseSound = FargosSoundRegistry.GeminiSpaz with {Volume = 0.8f};
             }
             return true;
         }
 
-        public override bool CanShoot(Player player) => true; //player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 && player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
+        public override bool CanShoot(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] <= 0 || player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] <= 0;
 
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        /*public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (lastThrown != type)
                 damage = (int)(damage * 1.5); //additional damage boost for switching
-        }
+        }*/
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

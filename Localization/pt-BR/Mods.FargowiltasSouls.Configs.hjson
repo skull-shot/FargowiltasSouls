@@ -55,6 +55,16 @@ ClientConfig: {
 		// Label: Cooldown Bars Y
 		// Tooltip: ""
 	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: Measured from the right side of the screen.
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -168,5 +178,10 @@ SoulConfig: {
 	PerformanceMode: {
 		// Label: Performance Mode
 		// Tooltip: Disables the most performance-demanding visuals. Currently disables Mutant's eye attack trails.
+	}
+
+	PatreonTouhou: {
+		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		// Tooltip: ""
 	}
 }

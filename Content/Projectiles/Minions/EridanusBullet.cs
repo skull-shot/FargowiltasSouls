@@ -103,39 +103,44 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 12; i++)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 100, default, 3f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 100, default, 1f);
                 Main.dust[dust].velocity *= 1.4f;
             }
 
-            for (int i = 0; i < 20; i++)
+            Projectile.position = Projectile.Center;
+            Projectile.width = 80;
+            Projectile.height = 80;
+            Projectile.Center = Projectile.position;
+
+            for (int i = 0; i < 8; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
                 Main.dust[dust].noGravity = true;
-                Main.dust[dust].velocity *= 7f;
+                Main.dust[dust].velocity *= 4f;
                 dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
-                Main.dust[dust].velocity *= 3f;
+                Main.dust[dust].velocity *= 2f;
             }
 
-            for (int index1 = 0; index1 < 50; ++index1)
+            for (int index1 = 0; index1 < 8; ++index1)
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 100, new Color(), 2f);
                 Main.dust[index2].noGravity = true;
-                Main.dust[index2].velocity *= 21f * Projectile.scale;
+                Main.dust[index2].velocity *= 5f * Projectile.scale;
                 Main.dust[index2].noLight = true;
                 int index3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 100, new Color(), 1f);
-                Main.dust[index3].velocity *= 12f;
+                Main.dust[index3].velocity *= 7f;
                 Main.dust[index3].noGravity = true;
                 Main.dust[index3].noLight = true;
             }
 
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 6; i++)
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 100, default, Main.rand.NextFloat(2f, 5f));
                 if (Main.rand.NextBool(3))
                     Main.dust[d].noGravity = true;
-                Main.dust[d].velocity *= Main.rand.NextFloat(12f, 18f);
+                Main.dust[d].velocity *= Main.rand.NextFloat(4f, 7f);
                 Main.dust[d].position = Projectile.Center;
             }
         }

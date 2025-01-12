@@ -329,7 +329,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 if (timer < 60 * 6)
                                     MovementAvoidWalls(player.Center + offset, speedMultiplier: 0.3f);
                                 else
-                                    MovementAvoidWalls(player.Center + offset.RotateTowards((-Vector2.UnitY).ToRotation(), 0.1f), speedMultiplier: 0.6f);
+                                    MovementAvoidWalls(player.Center + offset.RotateTowards((-Vector2.UnitY).ToRotation(), 0.1f), speedMultiplier: 0.2f);
                             }
                             else
                                 npc.velocity *= 0.6f;
@@ -385,23 +385,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                         }
                         break;
-                    case 2:  // vine funnels
+                    case 2:  // teeth spread
                         {
                             ref float repeatCheck = ref npc.localAI[1];
 
-                            const int vineSpawnTime = 100;
+                            const int vineSpawnTime = 40;
 
                             int shotStartTime = vineSpawnTime + (WorldSavingSystem.MasochistModeReal ? -20 : 20);
                             float endTime = vineSpawnTime * (repeatCheck == 1 ? 5f : 4.5f);
                             if (timer >= shotStartTime)
                             {
+                                Vector2 offset = player.DirectionTo(npc.Center) * 400f;
+                                if (!Main.projectile.Any(p => p.TypeAlive<PlanteraSpikevine>() && p.ai[0] < 60))
+                                    MovementAvoidWalls(player.Center + offset, speedMultiplier: 0.26f);
+                                else
+                                    npc.velocity *= 0.6f;
+
                                 float midTime = MathHelper.Lerp(shotStartTime, endTime, 0.5f);
                                 if (WorldSavingSystem.MasochistModeReal)
                                     midTime += 60;
-                                if (timer == (int)(midTime))
-                                    Vineburst();
-                                if (WorldSavingSystem.MasochistModeReal && timer == shotStartTime + 60)
-                                    Vineburst();
 
                                 int freq = 4;
                                 if (!WorldSavingSystem.MasochistModeReal)
@@ -412,7 +414,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     if (FargoSoulsUtil.HostCheck)
                                     {
                                         float maxSpread = MathHelper.PiOver2 * 0.73f;
-                                        float side = ai3 * (repeatCheck != 0 ? -1 : 1);
+                                        float side =  (repeatCheck != 0 ? -1 : 1);
                                         float angle = npc.DirectionTo(player.Center).RotatedBy(MathF.Sin(side * timer * MathHelper.TwoPi / 57f) * maxSpread).ToRotation();
 
                                         float speed = 1;
@@ -456,47 +458,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (timer < vineSpawnTime)
                             {
-
-                                float vineProgress = timer / vineSpawnTime;
-
-                                if (repeatCheck == 0)
-                                {
-                                    const int scanWidth2 = 500;
-                                    bool scanLeft = Collision.SolidTiles(npc.Center - Vector2.UnitX * scanWidth2, scanWidth2, npc.height);
-                                    bool scanRight = Collision.SolidTiles(npc.Center, scanWidth2, npc.height);
-                                    if (timer == 0)
-                                    {
-                                        ai3 = Math.Sign(npc.Center.X - player.Center.X);
-                                        if (scanLeft && !scanRight)
-                                            ai3 = 1;
-                                        if (!scanLeft && scanRight)
-                                            ai3 = -1;
-                                    }
-                                    if (ai3 == 0)
-                                        ai3 = Main.rand.NextBool() ? 1 : -1;
-                                    npc.netUpdate = true;
-                                }
-
-                                if (timer < vineSpawnTime * 0.7f)
-                                {
-                                    Vector2 offset = player.DirectionTo(npc.Center) * 270f;
-                                    MovementAvoidWalls(player.Center + offset.RotateTowards((-Vector2.UnitY).ToRotation(), 0.1f));
-                                }
-                                else
-                                    npc.velocity *= 0.96f;
-
-                                float side = ai3 * (repeatCheck != 0 ? -1 : 1);
-                                float attackAngle = -Vector2.UnitY.ToRotation() + vineProgress * side * MathHelper.Pi * 1.2f;
-
-                                const int freq = 5;
-                                if (timer % freq == freq - 1)
-                                {
-                                    if (FargoSoulsUtil.HostCheck)
-                                    {
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, attackAngle.ToRotationVector2().RotatedByRandom(MathHelper.PiOver4) * 24,
-                                            ModContent.ProjectileType<PlanteraTentacle>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, npc.whoAmI, attackAngle);
-                                    }
-                                }
+                                npc.velocity *= 0.96f;
+                                if (timer == 5)
+                                    Vineburst();
                             }
                             else 
                             {

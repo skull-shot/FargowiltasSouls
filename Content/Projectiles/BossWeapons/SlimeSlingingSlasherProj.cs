@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public ref float ItemTime => ref Projectile.ai[0];
         public ref float FreezeTime => ref Projectile.ai[1];

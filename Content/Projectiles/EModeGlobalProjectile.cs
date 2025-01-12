@@ -1356,7 +1356,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 modifiers.FinalDamage *= 2;
         }
 
-
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(projectile, target, hit, damageDone);
@@ -1368,7 +1367,14 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 case ProjectileID.PalladiumPike:
                     if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
+                    {
                         player.AddBuff(BuffID.RapidHealing, 60 * 5);
+                        if (player.Eternity().PalladiumHealTimer <= 0)
+                        {
+                            player.FargoSouls().HealPlayer(1);
+                            player.Eternity().PalladiumHealTimer = 30;
+                        } 
+                    }
                     break;
                 case ProjectileID.CobaltNaginata:
                     if (projectile.ai[2] < 2) //only twice per swing

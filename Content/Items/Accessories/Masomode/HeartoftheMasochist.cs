@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -12,6 +14,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class HeartoftheMasochist : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
+             AccessoryEffectLoader.GetEffect<ParryEffect>(),
+             AccessoryEffectLoader.GetEffect<DiveEffect>(),
+             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -33,19 +41,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateInventory(Player player)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
             player.AddEffect<ChalicePotionEffect>(Item);
         }
 
         public override void UpdateVanity(Player player)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
             player.AddEffect<ChalicePotionEffect>(Item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             ChaliceoftheMoon.DeactivateMinions(fargoPlayer, Item);
@@ -57,6 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //pumpking's cape
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //ice queen's crown
             player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
@@ -72,6 +81,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.WitheredWeapon] = true;
             player.buffImmune[BuffID.WitheredArmor] = true;
             fargoPlayer.BetsysHeartItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
 
             //mutant antibodies
             player.buffImmune[BuffID.Wet] = true;

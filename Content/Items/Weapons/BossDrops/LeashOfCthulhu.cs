@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 15;
+            Item.damage = 14;
             Item.width = 30;
             Item.height = 10;
             Item.value = Item.sellPrice(0, 1);
@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
-            Item.channel = true;    
+            Item.channel = true;
         }
     }
 }

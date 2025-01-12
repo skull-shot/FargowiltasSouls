@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -6,6 +7,7 @@ using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -17,6 +19,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class IceQueensCrown : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BombKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -49,6 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 fargoPlayer.Graze = true;
                 fargoPlayer.CirnoGraze = true;
+                player.AddEffect<BombKeyEffect>(item);
             }
             player.AddEffect<MasoGrazeRing>(item);
             if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
@@ -60,6 +65,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public static void OnGraze(FargoSoulsPlayer fargoPlayer, int damage)
         {
+            int damagecap = 400;
+            damage = Math.Clamp(damage, 0, damagecap);
             fargoPlayer.CirnoGrazeCounter += damage;
             if (fargoPlayer.CirnoGrazeCounter > CIRNO_GRAZE_MAX)
                 fargoPlayer.CirnoGrazeCounter = CIRNO_GRAZE_MAX;
@@ -68,7 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 Projectile.NewProjectile(fargoPlayer.Player.GetSource_Misc(""), fargoPlayer.Player.Center, Vector2.Zero, ModContent.ProjectileType<CirnoBomb>(), 0, 0f, Main.myPlayer);
             }
 
-            CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/IceQueensCrown").Value, Color.Cyan, () => fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
+            CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/IceQueensCrown").Value, Color.Cyan, () => (float)fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
 
             if (!Main.dedServ)
             {
@@ -97,5 +104,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
         public override bool MutantsPresenceAffects => true;
 
+    }
+    public class BombKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().BombKey();
+        }
     }
 }

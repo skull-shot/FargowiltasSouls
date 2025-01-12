@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Core.Systems
         internal static bool downedBetsy;
         internal static bool shouldBeEternityMode;
         internal static bool masochistModeReal;
-        internal static bool canPlayMaso;
+        internal static bool canPlayMaso = true;
         internal static bool downedFishronEX;
         internal static bool downedDevi;
         internal static bool downedAbom;
@@ -110,7 +110,7 @@ namespace FargowiltasSouls.Core.Systems
             ShouldBeEternityMode = false;
             EternityMode = false;
             EternityVanillaBehaviour = true;
-            CanPlayMaso = false;
+            CanPlayMaso = true;
             MasochistModeReal = false;
             DownedFishronEX = false;
             DownedDevi = false;
@@ -230,7 +230,7 @@ namespace FargowiltasSouls.Core.Systems
             ShouldBeEternityMode = downed.Contains("shouldBeEternityMode");
             EternityMode = downed.Contains("eternity") || downed.Contains("masochist");
             EternityVanillaBehaviour = true;
-            CanPlayMaso = downed.Contains("CanPlayMaso");
+            CanPlayMaso = true; // downed.Contains("CanPlayMaso");
             MasochistModeReal = downed.Contains("getReal");
             DownedFishronEX = downed.Contains("downedFishronEX");
             DownedDevi = downed.Contains("downedDevi");

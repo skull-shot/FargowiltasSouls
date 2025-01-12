@@ -33,7 +33,7 @@
 // Mythril: Max attack speed bonus increased and lasts longer
 // Nebula: Nebula shots deal increased damage and spawn 2 nebula boosters
 // Necro: Graves have increased size, float, and slightly home in on you when you're close
-// Ninja: Maximum damage bonus increased to 1.225x, maximum player speed where effect activates increased
+// Ninja: Maximum crit chance increased to 40%, maximum player speed where effect activates increased
 // Obsidian: Also grants explosions when afflicted with any debuff but with reduced damage, increased damage cap, reduced fireball cooldown
 // Orichalcum: Increases multiplier to 3.5x
 // Palladium: Rapid Healing always lasts 5 seconds, increases orb damage
@@ -47,10 +47,10 @@
 // Shadewood: Aura size and blood damage increased, additionally applies Ichor
 // Shinobi: Increased dash damage
 // Shroomite: Mushroom Power stats increased to 30%, mushroom damage and count increased
-// Silver: Parrying blocks up to 200 damage and always grants the Striking Moment buff
+// Silver: Parrying negates up to 200 damage and always grants the Striking Moment buff
 // Solar: Solar bursts deal increased damage in a larger radius
 // Spectre: Revive heal increased to 200, revive spirit count doubled, spirit damage doubled
-// Spider: 15% increased summon critical strike chance
+// Spider: 15% extra critical strike chance
 // Spooky: Decreased cooldown
 // Stardust: Timestop cooldown decreased from 90 to 75
 // Snow: Snowballs inflict Frostbite and freeze enemies solid
@@ -59,7 +59,7 @@
 // Tiki: Bonus whip range increased to 40%, projectile damage bonus increased to 1.4x
 // Tin: Minimum crit increased to 10%, max crit is at least 50%, reduced proc cooldown
 // Titanium: Shard damage increased, Titanium Shield duration increased to 5 seconds and maximum damage resistance increased by 10%
-// Tungsten: Weapon size tripled instead of doubled, damage bonus increased from 7% to 14%, and cooldown reduced
+// Tungsten: Shockwaves are 3x as large and frequent
 // Turtle: Occasionally recover a projectile block point, number of needles and damage increased
 // ValhallaKnight: Mount defense increased from 15 to 20, acceleration from 1.5x to 2x, and heal bonus from 15% to 20%
 // Vortex: Laser damage increased

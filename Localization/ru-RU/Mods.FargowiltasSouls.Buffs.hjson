@@ -776,7 +776,7 @@ WitheredWizardBuff: {
 
 MushroomPowerBuff: {
 	DisplayName: Сила грибов
-	Description: Увеличивает урон и шанс критической атаки
+	Description: Увеличивает урон и шанс критического удара
 }
 
 SolarBuff: {
@@ -786,7 +786,7 @@ SolarBuff: {
 
 VortexBuff: {
 	DisplayName: Усиление вихря
-	Description: Увеличивает шанс критической атаки
+	Description: Увеличивает шанс критического удара
 }
 
 NebulaBuff: {
@@ -807,4 +807,9 @@ AmbrosiaBuff: {
 MutantDesperationBuff: {
 	DisplayName: Фантазматическая ярость
 	Description: Его последний рывок. Ты получаешь вдвое больше урона!
+}
+
+TouhouHoardBuff: {
+	DisplayName: Бафф Орда на восток
+	Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
 }

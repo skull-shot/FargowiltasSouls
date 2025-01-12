@@ -1,0 +1,94 @@
+GrantsSkill: Grants Active Skill:
+GrantsSkillsPlural: Grants Active Skills:
+KeybindMenu: Press {0} to bind skills
+Unbound: Unbound
+
+SpecialDashEffect: {
+	DisplayName: Bee Dash
+	Tooltip: Perform a short quick bee dash towards your cursor
+}
+
+BetsyDashEffect: {
+	DisplayName: Fireball Dash
+	Tooltip:
+		'''
+		Perform a short invincible fireball dash towards your cursor
+		Shares cooldown slot with Bee Dash
+		'''
+}
+
+DiveEffect: {
+	DisplayName: Fastfall Dive
+	Tooltip:
+		'''
+		Activate in the air to fastfall
+		Defaults to Double Tap DOWN if no key is bound to skill slot
+		'''
+}
+
+GoldKeyEffect: {
+	DisplayName: Golden Shell
+	Tooltip:
+		'''
+		Encase yourself in a golden shell
+		You will not be able to move or attack, but will be immune to all damage
+		Press again to exit early
+		'''
+}
+
+ParryEffect: {
+	DisplayName: Guard Parry
+	Tooltip:
+		'''
+		Hold to guard
+		Guard shortly before being hit to parry
+		Defaults to Right Click if no key is bound to skill slot
+		'''
+}
+
+StardustEffect: {
+	DisplayName: Stardust Stasis
+	Tooltip:
+		'''
+		Freezes time for a few seconds
+		While time is frozen, your minions will continue to attack
+		'''
+}
+
+DebuffInstallKeyEffect: {
+	DisplayName: Debuff Install
+	Tooltip: Install yourself with debuffs, granting different effects depending on accessory
+}
+
+FrigidGemstoneKeyEffect: {
+	DisplayName: Frigid Spell
+	Tooltip:
+		'''
+		Summons an ice block to your cursor
+		Inflicts Frostburn in Hardmode
+		'''
+}
+
+BombKeyEffect: {
+	DisplayName: Graze Bomb
+	Tooltip:
+		'''
+		Requires being charged by grazing attacks
+		Freezes almost all enemies and projectiles
+		'''
+}
+
+BulbKeyEffect: {
+	DisplayName: Magical Cleanse
+	Tooltip:
+		'''
+		Cure yourself of most debuffs on a long cooldown
+		Also amplifies damage over time effects for nearby enemies by 2x
+		Cooldown depletes faster while not attacking
+		'''
+}
+
+AmmoCycleEffect: {
+	DisplayName: Cycle Ammo
+	Tooltip: Cycle your ammos (works from inventory and vanity)
+}

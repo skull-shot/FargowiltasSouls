@@ -1,5 +1,7 @@
 ﻿using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -42,6 +44,8 @@ There is a cooldown of 3 seconds between uses"); */
             //on cooldown
             if (dashCD > 0)
             {
+                CooldownBarManager.Activate("ParadoxCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/ParadoxWolf/ParadoxWolfSoul").Value, Color.DarkRed,
+                        () => (float)dashCD / 180f);
                 dashCD--;
 
                 if (dashCD == 0)

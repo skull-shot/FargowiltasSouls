@@ -14,7 +14,7 @@ TimberEffect: Сжатый артефакт Леса
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Разделение снарядов адамантита
 CobaltEffect: Взрыв при уроне кобальта
-AncientCobaltEffect: Взрывной прыжок древнего кобальта
+AncientCobaltEffect: Взрывной прыжок др. кобальта
 MythrilEffect: Скорость оружий мифрила
 OrichalcumEffect: Лепестки орихалка
 PalladiumHealing: Лечение палладия
@@ -27,7 +27,8 @@ IronEffect: Железный магнит
 LeadPoisonEffect: Свинцовое отравление
 SilverEffect: Парирование серебра
 TinEffect: Криты олова
-TungstenEffect: Эффект вольфрама
+TungstenEffect: Увеличение вольфрама
+TungstenShockwaveEffect: Ударная волна вольфрама
 ObsidianProcEffect: Взрыв обсидиана
 AshWoodFireballs: Шары огня ясеня
 TerraLightningEffect: Сжатый артефакт Терры
@@ -38,9 +39,9 @@ GoldEffect: Золотая счастливая монета
 GoldToPiggy: Золото в свинью-копилку
 HuntressEffect: Способность охотница
 RedRidingEffect: Дождь стрел красного наездника
-ValhallaDash: Наездный рывок вальгаллы
-SquireMountJump: Наездный прыжок оруженосца
-SquireMountSpeed: Скорость наездных питомцев оруженосца
+ValhallaDash: Ездовой рывок вальгаллы
+SquireMountJump: Ездовой прыжок оруженосца
+SquireMountSpeed: Скорость езд. предметов оруженосца
 WillEffect: Сжатый артефакт Воли
 LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: Цветы пчелы
@@ -103,11 +104,11 @@ DeerSinewEffect: Рывок сухожилия оленя
 ZephyrJump: Пердёжный прыжок
 MasoAeolusFlower: Цветочные сапоги
 MasoAeolusFrog: Лягушачий прыжок
-SinisterIconEffect: Скорость появления врагов зловещей иконы
-SinisterIconDropsEffect: Выпадающие предметы зловещей иконы
+SinisterIconEffect: Скорость появления врагов
+SinisterIconDropsEffect: Выпадение предметов
 MasoGraze: Грэйз
 MasoGrazeRing: Визуал радиуса грэйза
-DevianttHearts: Самонаводящиеся сердца во время атаки
+DevianttHearts: Самонавод. сердца при атаке
 AbomWandCrit: Поддержка призрачного Выродкка
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: Слизневые шары
@@ -120,7 +121,7 @@ BionomicHeader: "{$Mods.FargowiltasSouls.Items.BionomicCluster.DisplayName}"
 TimsConcoctionEffect: Смесь Тима
 MasoCarrotEffect: Увеличенный обзор морковки
 RainbowSlimeMinion: Прислужник радужный слизень
-RainbowHealEffect: Автом. использование лечебных зелий
+RainbowHealEffect: Автом. лечебные зелья
 NymphPerfumeEffect: Атаки создают сердца
 SqueakEffect: Игрушка-пищалка при уроне
 WretchedPouchEffect: Установка проклятья несчастья
@@ -159,7 +160,7 @@ ChalicePotionEffect: Бесплатные баффы зелий
 MasoTrueEyeMinion: Истинные глаза-миньоны
 MutantArmorHeader: Истинная броня Мутанта
 MasoAbom: Прислужник Выродокк
-MasoRing: Прислужник фантазматическое кольцо
+MasoRing: Фантазматическое кольцо
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"
 MeleeSpeedEffect: Ближняя скорость
 SniperScopeEffect: Снайперский прицел
@@ -198,7 +199,7 @@ TrawlerSporeSac: Споровый мешок
 TrawlerJump: Прыжок
 TrawlerGel: Нестабильный желатин
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
-EternityTin: Эффект накладывающихся критов Вечности
+EternityTin: Накладывающиеся криты Вечности
 PetHeader: Pets
 // the pets are no longer existing in game
 PetDinoConfig: Dino Pet

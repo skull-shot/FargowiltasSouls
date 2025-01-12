@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.height = 25;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = -1;
             Projectile.timeLeft = Main.projFrames[Type] * fpf;
             Projectile.tileCollide = false;

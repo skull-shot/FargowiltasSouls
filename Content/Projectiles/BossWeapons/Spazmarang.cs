@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.ai[1]++;
                 if (Projectile.ai[1] >= 30)
                 {
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.4f, 1 / 10f); ;
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.4f, 1 / 10f);
                 }
                 if (Projectile.ai[1] >= 60)
                 {
@@ -88,7 +88,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }
             }
 
-            for (int i = 0; i < Main.maxProjectiles; i++)
+            //explosion code
+            /*for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
                 if (projectile.type == ModContent.ProjectileType<Retirang>() && projectile.active && projectile.Distance(Projectile.Center) <= 75 && Projectile.ai[0] != 2 && projectile.ai[0] != 0)
@@ -103,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Gore.NewGore(projectile.GetSource_Death(), projectile.BottomLeft, projectile.velocity * -0.8f, ModContent.Find<ModGore>(Mod.Name, "Retigore2").Type, 0.9f);
                     Gore.goreTime = 5;
                 }
-            }
+            }*/
 
             if (Projectile.ai[0] != 2)
             Projectile.rotation += 0.42f;
@@ -119,15 +120,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile projectile = Main.projectile[i];
                     if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
                     {
-
-                        Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                        Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
-                        Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, 0.7f, 25, true);
+                        float scale = Main.rand.NextFloat(0.25f, 0.35f);
+                        Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                        Particle p2 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
+                        Particle p3 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
                         p1.Spawn();
                         p2.Spawn();
                         p3.Spawn();
-                        
-                            
+
+
                         SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
                         target.AddBuff(BuffID.CursedInferno, 120);
                         return;
@@ -197,14 +198,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
 
 
-            if (Projectile.ai[0] == 2)
+            /*if (Projectile.ai[0] == 2)
             {
                 Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 1.3f, SpriteEffects.None, 0);
             }
             if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
             {
                 Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, scale, SpriteEffects.None, 0);
-            }
+            }*/
 
             return false;
         }

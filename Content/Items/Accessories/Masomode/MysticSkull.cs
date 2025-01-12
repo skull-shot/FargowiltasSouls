@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -39,6 +40,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
 
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<MysticSkullInactive>());
+            return false;
+        }
+
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
@@ -76,6 +84,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void UpdateVanity(Player player) => Effects(player);
 
         public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
+
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<MysticSkull>());
+            return false;
+        }
 
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)

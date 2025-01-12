@@ -112,6 +112,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             {
                                 if (FargoSoulsUtil.HostCheck)
                                 {
+                                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannon, pos);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, distance + Main.rand.NextVector2Square(-0.5f, 0.5f),
                                         ModContent.ProjectileType<TrojanAcorn>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                                 }

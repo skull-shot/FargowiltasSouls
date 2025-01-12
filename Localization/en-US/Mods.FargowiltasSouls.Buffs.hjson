@@ -808,3 +808,8 @@ MutantDesperationBuff: {
 	DisplayName: Phantasmal Fury
 	Description: His final stand. You take double damage!
 }
+
+TouhouHoardBuff: {
+	DisplayName: Touhou Hoard Buff
+	Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
+}

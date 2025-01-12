@@ -1,10 +1,12 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,7 +17,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     public class MasochistSoul : BaseSoul
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
+             AccessoryEffectLoader.GetEffect<ParryEffect>(),
+             AccessoryEffectLoader.GetEffect<DiveEffect>(),
+             AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
         public override void SetDefaults()
         {
@@ -39,7 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             BionomicCluster.PassiveEffect(player, Item);
 
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
             player.AddEffect<ChalicePotionEffect>(Item);
         }
 
@@ -87,6 +97,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //agitating lens
             //player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
             //player.honey = true;
@@ -220,6 +231,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.FusedLens = true;
             fargoPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
             player.AddEffect<GroundStickDR>(Item);
             player.noKnockback = true;
             if (player.onFire2)
@@ -230,6 +242,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //magical bulb
             player.buffImmune[BuffID.Venom] = true;
             fargoPlayer.MagicalBulb = true;
+            player.AddEffect<BulbKeyEffect>(Item);
 
             //ice queen's crown
             IceQueensCrown.AddEffects(player, Item);
@@ -238,6 +251,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Burning] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<LihzahrdBoulders>(Item);
 
             //saucer control console
@@ -248,9 +262,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.WitheredWeapon] = true;
             player.buffImmune[BuffID.WitheredArmor] = true;
             fargoPlayer.BetsysHeartItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<BetsyDashEffect>(Item);
 
             //pumpking's cape
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //celestial rune
             /*
@@ -279,11 +296,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //dread shell
             player.AddEffect<DreadShellEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             //deerclawps
             player.buffImmune[BuffID.Slow] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<DeerclawpsDive>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
 
             //sadism
