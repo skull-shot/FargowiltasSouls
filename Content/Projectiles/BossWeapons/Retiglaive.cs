@@ -58,6 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = 10;
 
             Projectile.extraUpdates = 1;
+            Projectile.FargoSouls()
         }
 
         public override bool? CanDamage() => Projectile.ai[0] == 3 ? true : false;
@@ -128,7 +129,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         }
                         else if (FargoSoulsUtil.HostCheck)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity, Projectile.Distance(mousePos) + 200);
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity, Projectile.Distance(mousePos) + 320);
                         }
                     }
                 }
