@@ -42,3 +42,5 @@ DisplayEquipped: 显示已装备的饰品效果
 SearchText: 搜索……
 MainMenu: Fargo's
 // DisabledUnequipped: Disabled: Not equipped
+// ActiveSkills: Active Skills
+// AvailableSkills: Available Skills
