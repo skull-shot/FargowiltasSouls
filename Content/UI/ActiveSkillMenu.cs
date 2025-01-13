@@ -93,7 +93,7 @@ namespace FargowiltasSouls.Content.UI
             BackPanel.Append(EquippedPanel);
             BackPanel.Append(AvailablePanel);
 
-            var title = new UIText(Language.GetTextValue("Mods.FargowiltasSouls.UI.ActivfeSkills"));
+            var title = new UIText(Language.GetTextValue("Mods.FargowiltasSouls.UI.ActiveSkills"));
             title.Left.Set(-50, 0.5f);
             title.Top.Set(5, 0);
             BackPanel.Append(title);
