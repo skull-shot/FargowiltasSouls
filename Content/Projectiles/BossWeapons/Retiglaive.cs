@@ -58,7 +58,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = 10;
 
             Projectile.extraUpdates = 1;
-            Projectile.FargoSouls()
         }
 
         public override bool? CanDamage() => Projectile.ai[0] == 3 ? true : false;
@@ -71,6 +70,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             if (Projectile.ai[0] == 1)
             {
+                if (Projectile.ai[1] == 0)
+                    Projectile.velocity = Projectile.velocity.ClampLength(0, 15);
                 Projectile.ai[1]++;
                 Projectile.rotation += Projectile.direction * -0.4f;
 
