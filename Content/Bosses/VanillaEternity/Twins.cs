@@ -14,6 +14,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Terraria;
@@ -1063,7 +1064,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (WorldSavingSystem.MasochistModeReal)
                                 ai_ShotTimer += 0.25f;
                             if (ai_ShotTimer < delay - 10)
-                                npc.velocity *= 0.92f;
+                            {
+                                float slowdownMod = 1f;
+                                float distance = npc.Distance(player.Center);
+                                if (distance > 600)
+                                    slowdownMod *= MathHelper.Lerp(1, 0, (distance - 500) / 500);
+                                slowdownMod = MathHelper.Clamp(slowdownMod, 0, 1);
+                                npc.velocity *= 1f - 0.08f * slowdownMod;
+                            }
                             if (ai_ShotTimer >= delay)
                             {
                                 ai_ShotTimer = 0f;
