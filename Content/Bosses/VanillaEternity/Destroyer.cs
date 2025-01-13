@@ -1059,7 +1059,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             modifiers.FinalDamage *= 0.4f;
         }
-        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers, float max = 0.97f)
+        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers, float max = 0.99f)
         {
             var eProj = projectile.Eternity();
             modifiers.FinalDamage *= eProj.WormPierceResist;
