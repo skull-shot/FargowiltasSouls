@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -81,6 +82,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 int damage = baseDamage;
                 if (damage < 30)
                     damage = 30;
+                int falloffMin = 200;
+                if (damage > falloffMin)
+                {
+                    damage -= falloffMin;
+                    damage = (int)(damage * MathF.Exp(-damage / falloffMin));
+                    damage += falloffMin;
+                }
                 float ai1 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;
                 Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, player.DirectionTo(target.Center), ModContent.ProjectileType<TungstenShockwave>(), damage, 3f, player.whoAmI, target.whoAmI, ai1);
                 modPlayer.TungstenCD = LumUtils.SecondsToFrames(2.5f);
