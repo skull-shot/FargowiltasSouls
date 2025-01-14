@@ -12,7 +12,7 @@ Reworked, renamed and resprited Leash of Cthulhu into Eyeleash
 Reworked, renamed and resprited Mechanical Leash of Cthulhu into (a new) Leash of Cthulhu
 Reworked and resprited Phantasmal Leash of Cthulhu
 
-Reworked and resprited Retirang
+Reworked and resprited Twinrangs
 Reworked and resprited Gemini Glaives
 
 Reworked Adamantite Enchant: Now increases weapon firing speed the longer the weapon is fired, but the projectiles have spread
