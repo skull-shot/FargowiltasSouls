@@ -1034,8 +1034,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
-                modifiers.FinalDamage *= 2.0f / 3.0f + 1.0f / 3.0f * 1f / projectile.numHits;
             if (projectile.type == ProjectileID.RainFriendly)
                 modifiers.FinalDamage /= 2;
             if (projectile.type == ProjectileID.SoulDrain)
@@ -1059,14 +1057,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             modifiers.FinalDamage *= 0.4f;
         }
-        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers, float max = 0.97f)
+        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            var eProj = projectile.Eternity();
-            modifiers.FinalDamage *= eProj.WormPierceResist;
-            if (eProj.WormPierceResist < max)
-                eProj.WormPierceResist += 0.25f;
-            if (eProj.WormPierceResist > max)
-                eProj.WormPierceResist = max;
+            modifiers.FinalDamage *= 0.75f;
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
+                modifiers.FinalDamage *= 1f / MathF.Pow(2, projectile.numHits);
         }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {

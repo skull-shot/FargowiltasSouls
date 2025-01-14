@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<AdamantiteEnchant>();
 
         public override bool ExtraAttackEffect => true;
-        public const float SpreadCap = 20; // spread cap in DEGREES
+        public const float SpreadCap = 17; // spread cap in DEGREES
         public static bool CanBeAffected(Projectile projectile, Player player)
         {
             var modProj = projectile.FargoSouls();
@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
             if (!modPlayer.HeldItemAdamantiteValid)
                 return;
-            float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.5f : 0.3f;
+            float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.65f : 0.3f;
             if (ProjectileID.Sets.CultistIsResistantTo[item.shoot])
                 maxSpeed /= 2;
 
