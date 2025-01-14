@@ -48,3 +48,5 @@ WeatherPain: 伤害频率和最大穿透次数增加
 HoundiusShootius: 提高火球速度
 SniperRifle: 距离敌怪越远伤害越高，最高可翻倍
 ChlorophyteSaber: 弹幕速度更快，但命中后会减速
+// JackOLanternLauncher: Increased projectile speed by 50%
+// GolemFist: Deals up to triple damage to enemies the further out the fist is extended
