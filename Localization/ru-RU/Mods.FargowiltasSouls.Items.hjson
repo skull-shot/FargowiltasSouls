@@ -841,10 +841,10 @@ EarthForce: {
 	DisplayName: Артефакт Земли
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/MythrilEnchant] Пока вы не атакуете, вы накапливаете заряд. Атаки тратят заряд
+		[i:FargowiltasSouls/MythrilEnchant] Пока вы не атакуете, вы накапливаете заряд. Атаки тратят заряд, а заряд увеличивает скорость вашей атаки
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Увеличивает восстановление здоровья и сопротивление урону, увеличивается вместе с зарядом
 		[i:FargowiltasSouls/CobaltEnchant] Вы взрываетесь при получении урона, если не атакуете
-		[i:FargowiltasSouls/AdamantiteEnchant] Пока вы заряжены, каждые три секунды один снаряд будет разделяться на три, а также вы будете атаковать быстрее
+		[i:FargowiltasSouls/AdamantiteEnchant] Чем дольше вы атакуете, тем быстрее вы это делаете, но только пока у вас есть заряд
 		[i:FargowiltasSouls/OrichalcumEnchant] Пока вы заряжены, вы также накладываете дебафф «Яд Земли», который наносит процент от урона удара, наложившего дебафф
 		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают в 4 раза больше урона от дебаффов
 		'Благословение Геи озаряет вас'
