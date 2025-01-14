@@ -99,7 +99,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 if (farg.EarthAdamantiteCharge < adamTime)
                     farg.EarthAdamantiteCharge++;
             }
-            Main.NewText(farg.EarthAdamantiteCharge);
             if (!attacking || farg.EarthTimer == 0)
                 farg.EarthAdamantiteCharge = 0;
             CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
