@@ -138,6 +138,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void AdamantiteSplit(Projectile projectile, FargoSoulsPlayer modPlayer, int splitDegreeAngle)
         {
+            if (!modPlayer.Player.HasEffectEnchant<AdamantiteEffect>())
+                return;
             if (AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type))
                 return;
             modPlayer.HeldItemAdamantiteValid = true;
