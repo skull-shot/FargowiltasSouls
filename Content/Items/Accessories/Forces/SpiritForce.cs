@@ -9,11 +9,14 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
     public class SpiritForce : BaseForce
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<SpiritTornadoEffect>()];
         public override void SetStaticDefaults()
         {
             Enchants[Type] =
@@ -31,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             SetActive(player);
             player.AddEffect<SpiritTornadoEffect>(Item);
             // forbidden
-            player.AddEffect<ForbiddenEffect>(Item);
+            //player.AddEffect<ForbiddenEffect>(Item);
             // hallow
             player.AddEffect<HallowEffect>(Item);
             // ahallow
@@ -57,11 +60,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     public class SpiritTornadoEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        //public override int ToggleItemType => ModContent.ItemType<SpiritForce>();
-
+        public override int ToggleItemType => ModContent.ItemType<SpiritForce>();
+        public override bool ActiveSkill => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (!stunned)
+                ActivateSpiritStorm(player);
+        }
         public static void ActivateSpiritStorm(Player player)
         {
-            if (player.HasEffect<SpiritTornadoEffect>() && player.HasEffect<ForbiddenEffect>())
+            if (player.HasEffect<SpiritTornadoEffect>())
             {
                 CommandSpiritStorm(player);
             }

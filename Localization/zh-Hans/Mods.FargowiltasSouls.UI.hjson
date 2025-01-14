@@ -7,14 +7,14 @@ HoldShift: 按住Shift阅读更多内容
 ExpandedEternity:
 	'''
 	[c/00FFFF:为泰拉老玩家准备的一个新模式，预期的Fargo体验。]
-	世界必须处于专家模式或更高难度
-	如果世界处于大师模式，并且你已在任意世界击败过永恒模式最终Boss，则启用受虐模式
+	世界必须处于专家模式
+	如果世界处于大师模式或更高难度，则启用受虐模式
 	'''
 ExpandedMasochist:
 	'''
-	[c/33ffbe:永恒模式通关后的一个具有挑战难度的模式。]
+	[c/33ffbe:一个极具挑战性的模式。强烈建议在通关永恒模式后再来挑战！]
 	世界必须处于大师模式或更高难度
-	如果世界不在大师模式或更高难度，则启用永恒模式
+	如果世界处于专家难度，则启用永恒模式
 	'''
 ExpandedFeatures:
 	'''
@@ -26,6 +26,7 @@ ExpandedFeatures:
 	- 不攻击时减益效果会更快消失
 	- 调整某些物品的功能和强度
 	'''
+MasochistMultiplayer: - 在受虐多人模式中，每个玩家在每场Boss战中只能重生一次
 SavedToSlot: 已将饰品效果设置保存至自定义效果配置{0}！
 NoTogglesFound: 未找到自定义效果配置{0}
 TurnAllTogglesOff: 关闭全部饰品效果
@@ -40,4 +41,6 @@ DisplayAll: 显示全部饰品效果
 DisplayEquipped: 显示已装备的饰品效果
 SearchText: 搜索……
 MainMenu: Fargo's
-// DisabledUnequipped: Disabled: Not equipped
+DisabledUnequipped: 禁用：未装备
+ActiveSkills: 主动技能
+AvailableSkills: 可用技能

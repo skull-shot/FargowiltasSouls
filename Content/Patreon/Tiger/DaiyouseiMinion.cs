@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Main.projFrames[Projectile.type] = 4;
@@ -30,6 +31,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetDefaults()
         {
+            base.SetDefaults();
             Projectile.width = 41;
             Projectile.height = 31;
         }
@@ -38,7 +40,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
         {
             int leaf = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center,
                 Projectile.SafeDirectionTo(target) * 12, ModContent.ProjectileType<DaiyoLeaf>(),
-                Projectile.damage, Projectile.knockBack, Projectile.owner);
+                (int)(Projectile.damage * 0.3f), Projectile.knockBack, Projectile.owner);
 
             if (leaf > 0)
             {

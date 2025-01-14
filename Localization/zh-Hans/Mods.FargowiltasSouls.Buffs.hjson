@@ -810,6 +810,6 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	// DisplayName: Touhou Hoard Buff
-	// Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
+	DisplayName: 东方秘藏
+	Description: 幻想之物会为你而战
 }

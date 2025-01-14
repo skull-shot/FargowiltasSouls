@@ -12,6 +12,7 @@ using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -682,7 +683,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (Player.HasEffect<NinjaEffect>()
                 && item.shoot > ProjectileID.None
-                && item.shoot != ProjectileID.WireKite)
+                && item.shoot != ProjectileID.WireKite
+                && item.shoot != ModContent.ProjectileType<Retiglaive>())
             {
                 float maxSpeedRequired = Player.ForceEffect<NinjaEffect>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
                 if (Player.velocity.Length() < maxSpeedRequired)
@@ -718,6 +720,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.HasEffect<MythrilEffect>())
                 {
                     MythrilEffect.CalcMythrilAttackSpeed(this, item);
+                }
+
+                if (Player.HasEffect<AdamantiteEffect>())
+                {
+                    AdamantiteEffect.CalcAdamantiteAttackSpeed(Player, item);
                 }
                 
                 float originalAttackSpeed = AttackSpeed;

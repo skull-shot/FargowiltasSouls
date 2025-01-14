@@ -41,6 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public static Dictionary<int, bool> IgnoreMinionNerf = [];
 
         public int SourceItemType = 0;
+        public float WormPierceResist = 0f;
 
         public override void Unload()
         {
@@ -501,6 +502,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 OnFirstTick(projectile);
             }
+
+            if (WormPierceResist > 0)
+                WormPierceResist *= 0.99f;
+            if (WormPierceResist < 0.01f)
+                WormPierceResist = 0;
 
             //Slower friendly projectiles in Snow biome
             if (projectile.friendly)

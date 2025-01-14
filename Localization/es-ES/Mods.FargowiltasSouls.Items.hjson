@@ -2,10 +2,10 @@ AdamantiteEnchant: {
 	// DisplayName: Adamantite Enchantment
 	/* Tooltip:
 		'''
-		Every weapon shot will split into 2
-		Weapon spread increases the longer you fire, and decreases while not firing
-		Weapon shots deal 70% damage, decreased to 60% for homing shots
-		All projectiles hit twice as fast and gain armor penetration equal to 50% damage
+		The longer you fire your weapon, the faster it fires, up to 30% faster
+		Weapon projectiles are also inaccurate, increasing the longer you fire
+		Halved effectiveness on homing weapons
+		Only works on weapons that directly fire projectiles
 		'Chaos'
 		''' */
 }
@@ -195,14 +195,7 @@ EbonwoodEnchant: {
 
 ForbiddenEnchant: {
 	// DisplayName: Forbidden Enchantment
-	/* Tooltip:
-		'''
-		Double tap down to call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.2x damage
-		Touch it yourself to add back missing wing time
-		Storm can be resummoned after touching the ground
-		'Walk like an Egyptian'
-		''' */
+	// Tooltip: "'Walk like an Egyptian'"
 }
 
 FossilEnchant: {
@@ -233,10 +226,7 @@ GladiatorEnchant: {
 	/* Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
-		Double tap down to place a banner that lasts 15 seconds
-		While close to the banner, spear rain is stronger
-		Being close to the banner also grants knockback immunity, +8% damage reduction and +8% damage
-		Banner can only be resummoned after it runs out
+		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		''' */
 }
@@ -443,11 +433,7 @@ PalladiumEnchant: {
 
 PalmWoodEnchant: {
 	// DisplayName: Palm Wood Enchantment
-	/* Tooltip:
-		'''
-		Double tap down to spawn a palm tree sentry that throws nuts at enemies
-		'Alarmingly calm'
-		''' */
+	// Tooltip: "'Alarmingly calm'"
 }
 
 PearlwoodEnchant: {
@@ -676,7 +662,7 @@ TinEnchant: {
 		Getting hit resets your crit to 5%
 		'Return of the Crit'
 		''' */
-	// CritUp: +5% crit
+	// CritUp: +{0}% crit
 	// CritReset: -{0}% crit
 }
 
@@ -699,7 +685,7 @@ TungstenEnchant: {
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
 		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
-		3 second cooldown
+		2.5 second cooldown
 		'Bigger is always better'
 		''' */
 }
@@ -855,10 +841,10 @@ EarthForce: {
 	// DisplayName: Force of Earth
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge
+		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/CobaltEnchant] You also explode on hit while not attacking
-		[i:FargowiltasSouls/AdamantiteEnchant] While charged up, one projectile will split into three every 3 seconds, and weapons will fire faster
+		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
 		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 4x damage from debuffs
 		'Gaia's blessing shines upon you'
@@ -942,9 +928,6 @@ SpiritForce: {
 	// DisplayName: Force of Spirit
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/ForbiddenEnchant] Double tap down to call an ancient tornado that scales with magic and summon damage
-		[i:FargowiltasSouls/ForbiddenEnchant] Any projectiles shot through your tornado deal 1.4x damage
-		[i:FargowiltasSouls/AncientHallowEnchant] The tornado tracks your mouse slightly 
 		[i:FargowiltasSouls/HallowEnchant] Healing potions restore more health but take effect over time
 		[i:FargowiltasSouls/SpectreEnchant] If you reach zero HP you will revive with 200 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/TikiEnchant] Increased whip range, whips scale with any class, and empower your projectiles they hit
@@ -957,10 +940,10 @@ TerraForce: {
 	/* Tooltip:
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
-		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt 
+		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire two lightning bolts
+		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 50%, increasing by 25% up to 100% whenever a lightning bolt is fired
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 10%, increasing up to double your original crit chance or 50%
 		[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range (works in inventory and vanity)
 		'The land lends its strength'
 		''' */
@@ -1044,7 +1027,7 @@ BetsysHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Oozed, Withered Weapon, and Withered Armor
-		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and halves your dash cooldown
+		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
 		'Lightly roasted, medium rare'
 		''' */
 }
@@ -1100,7 +1083,7 @@ BionomicClusterInactive: {
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically use healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		    [i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
 		    [i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
@@ -1128,7 +1111,7 @@ ChaliceoftheMoon: {
 		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
-		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type and spawn
+		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
 		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side, [i:FargowiltasSouls/CelestialRune] and erupt into Ancient Visions when injured
 		'Always watching'
@@ -1896,7 +1879,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 10% set critical strike chance increased on hit, further item grab range, and you sometimes don't consume crafting ingredients
+		[i:FargowiltasSouls/TerraForce] 50% set critical strike chance increased when lightning bolts fire, further item grab range, and you sometimes don't consume crafting ingredients
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
@@ -1910,7 +1893,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
 		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
-		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, press the Freeze Key to freeze time for 6 seconds with a 60 second cooldown
+		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
 		'A true master of Terraria'
 		''' */
 }
@@ -3036,24 +3019,24 @@ TheBigSting: {
 }
 
 ForgorGift: {
-	// DisplayName: Forgor Gift
+	// DisplayName: Forgotten Gift
 	/* Tooltip:
 		'''
 		[c/ff0000:Debug item]
 		Resets vanilla and Souls mod invasion/boss flags, INCLUDING hardmode (Wall of Flesh downed flag)
 		Right click allows getting a new gift from Deviantt, resets credit/discount card, resets your emode slot, rabies vaccine, sinew dash, etc.
 		Right click on the item in inventory to reset Mutant phase 1 skip
-		i forgor
 		''' */
-	// Message: forgor
+	// Message: Flags reset successfully
 }
 
 Masochist: {
 	// DisplayName: Mutant's Gift
 	/* Tooltip:
 		'''
-		World must be in Expert Mode or above
-		Enables Masochist Mode if world is in Master Mode and you've defeated the final Eternity boss in any world
+		[c/00FFFF:Enables Eternity Mode: A new mode above Expert for Terraria veterans. The intended Fargo experience.]
+		World must be in Expert Mode
+		Enables Masochist Mode if world is in Master Mode or above
 		Features include:
 
 		-Reworks bosses and enemies, making them stronger
@@ -3063,6 +3046,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking
 		-Changes the functionality and strength of certain items
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
@@ -3744,5 +3728,5 @@ DarkTome: {
 
 TouhouStaff: {
 	// DisplayName: Children of Nature's Eulogy
-	// Tooltip: ""
+	// Tooltip: Summons up to five yokais and fairies to fight for you
 }

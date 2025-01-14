@@ -135,6 +135,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HuntressStage;
         public int HuntressCD;
         public double AdamantiteSpread;
+        public bool HeldItemAdamantiteValid;
+        public Item AdamantiteItem;
 
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
@@ -162,7 +164,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int IFrameDashTimer;
         public bool IFrameDash;
         public int EarthTimer;
-        public int EarthSplitTimer;
+        public int EarthAdamantiteCharge;
 
         //public int RainCD;
 

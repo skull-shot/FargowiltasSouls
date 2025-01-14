@@ -21,6 +21,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Main.projFrames[Projectile.type] = 3;
@@ -31,6 +32,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
 
         public override void SetDefaults()
         {
+            base.SetDefaults();
             Projectile.width = 20;
             Projectile.height = 16;
         }
@@ -39,7 +41,14 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
         public override void MinionAttack(Vector2 target)
         {
             //spawn a ring of bugs
-            FargoSoulsUtil.XWay(7, Projectile.GetSource_FromThis(), Projectile.Center, ProjectileID.Bee, 2, Projectile.damage / 2, 0);
+            var projs = FargoSoulsUtil.XWay(4, Projectile.GetSource_FromThis(), Projectile.Center, ProjectileID.Bee, 3, Projectile.damage / 3, 0);
+            foreach (var p in projs)
+            {
+                p.DamageType = DamageClass.Summon;
+                p.usesIDStaticNPCImmunity = true;
+                p.idStaticNPCHitCooldown = 20;
+                p.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
@@ -95,6 +96,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.TerraProcCD == 0 && player.HasEffect<CopperEffect>())
             {
+
                 int dmg = (int)(1500 * damageMultiplier);
                 int cdLength = 300;
 
@@ -113,8 +115,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
                 int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
                 FargoSoulsUtil.NewProjectileDirectSafe(modPlayer.Player.GetSource_ItemUse(modPlayer.Player.HeldItem), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
+                float modifier = 1f;
+                if (player.HasEffect<TinEffect>())
+                {
+                    modPlayer.TinCrit += 25;
+                    if (modPlayer.TinCrit > modPlayer.TinCritMax)
+                        modPlayer.TinCrit = modPlayer.TinCritMax;
+                    else
+                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
 
-                modPlayer.TerraProcCD = cdLength;
+                    if (modPlayer.TinCrit >= 75)
+                        modifier -= 0.2f;
+                    if (modPlayer.TinCrit >= 100)
+                        modifier -= 0.2f;
+                }
+                modPlayer.TerraProcCD = (int)(cdLength * modifier);
             }
         }
         public override void OnHurt(Player player, Player.HurtInfo info)

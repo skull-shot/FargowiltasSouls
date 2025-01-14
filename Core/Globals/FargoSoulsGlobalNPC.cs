@@ -1313,7 +1313,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (CorruptedForce)
             {
-                int pen = player.HasEffectEnchant<EbonwoodEffect>() ? 20 : 15;
+                int pen = 15;
                 modifiers.FlatBonusDamage += pen;
             }
 

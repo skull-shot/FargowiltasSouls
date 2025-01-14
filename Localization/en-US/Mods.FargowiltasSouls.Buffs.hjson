@@ -811,5 +811,5 @@ MutantDesperationBuff: {
 
 TouhouHoardBuff: {
 	DisplayName: Touhou Hoard Buff
-	Description: Mods.FargowiltasSouls.Buffs.TouhouHoardBuff.Description
+	Description: The mythical beings will fight for you
 }

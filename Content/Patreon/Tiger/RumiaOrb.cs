@@ -20,10 +20,13 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
             Projectile.DamageType = DamageClass.Summon;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 300; //
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 8;
             Projectile.FargoSouls().CanSplit = false;
             Projectile.tileCollide = false;
             Projectile.scale = 0.5f;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 20;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()

@@ -74,9 +74,9 @@ HentaiSpearWand.DisplayName: 洞察者
 HentaiSphereRing.DisplayName: 幻影球
 Hungry.DisplayName: 饿鬼
 Hungry2.DisplayName: 饿鬼
-LeashFlail.DisplayName: 克苏鲁连枷
+LeashFlail.DisplayName: 眼睑黏连连枷
 MechEyeProjectile.DisplayName: 机械眼球
-MechFlail.DisplayName: 机械克苏鲁连枷
+MechFlail.DisplayName: 克苏鲁连枷
 PhantasmalBlast.DisplayName: 幻象爆炸
 PhantasmalBolt.DisplayName: 幻影矢
 PhantasmalEyeBoundary.DisplayName: 幻影眼
@@ -768,18 +768,18 @@ PungentAuraProj.DisplayName: 喷气弹幕
 RockeaterAuraProj.DisplayName: 吞噬者光环
 FallenStarDay.DisplayName: 陨星日
 LightningRodLightning.DisplayName: 避雷针闪电
-// ReleasedMechFlail.DisplayName: Leash of Cthulhu
-// Tome.DisplayName: Tome
-// TomeShot.DisplayName: Tome Shot
-// TungstenShockwave.DisplayName: Tungsten Shockwave
-// CirnoIceCube.DisplayName: Cirno Ice Cube
-// CirnoMinion.DisplayName: Cirno Minion
-// DaiyouseiMinion.DisplayName: Daiyousei Minion
-// MystiaMinion.DisplayName: Mystia Minion
-// RumiaMinion.DisplayName: Rumia Minion
-// WriggleMinion.DisplayName: Wriggle Minion
-// CirnoIceChunk.DisplayName: Cirno Ice Chunk
-// DaiyoLeaf.DisplayName: Daiyo Leaf
-// MystiaNote.DisplayName: Mystia Note
-// MystiaNote2.DisplayName: Mystia Note2
-// RumiaOrb.DisplayName: Rumia Orb
+ReleasedMechFlail.DisplayName: 挣脱束缚的眼球
+Tome.DisplayName: 巨著
+TomeShot.DisplayName: 巨著书页
+TungstenShockwave.DisplayName: 钨冲击波
+CirnoIceCube.DisplayName: 琪露诺冰块
+CirnoMinion.DisplayName: 琪露诺
+DaiyouseiMinion.DisplayName: 大妖精
+MystiaMinion.DisplayName: 米斯蒂娅
+RumiaMinion.DisplayName: 露米娅
+WriggleMinion.DisplayName: 莉格露
+CirnoIceChunk.DisplayName: 琪露诺厚冰块
+DaiyoLeaf.DisplayName: 大妖精叶片
+MystiaNote.DisplayName: 米斯蒂娅音符
+MystiaNote2.DisplayName: 米斯蒂娅音符2
+RumiaOrb.DisplayName: 露米娅球

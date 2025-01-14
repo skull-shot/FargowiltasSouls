@@ -82,6 +82,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             FargoSoulsPlayer farg = player.FargoSouls();
             bool attacking =  farg.WeaponUseTimer > 0;
+            int adamTime = 300;
+            float adamSpeed = 0.6f;
 
             if (!attacking && farg.EarthTimer < EarthMaxCharge)
             {
@@ -94,7 +96,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 farg.EarthTimer--;
                 farg.MythrilDelay = 20;
+                if (farg.EarthAdamantiteCharge < adamTime)
+                    farg.EarthAdamantiteCharge++;
             }
+            if (!attacking || farg.EarthTimer == 0)
+                farg.EarthAdamantiteCharge = 0;
             CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
                 () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
 
@@ -109,6 +115,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
             if (player.HasEffect<TitaniumEffect>())
                 player.endurance += MathHelper.Lerp(0.1f, 0.25f, lerper);
+
+            if (player.HasEffect<AdamantiteEffect>())
+                farg.AttackSpeed += adamSpeed * (float)farg.EarthAdamantiteCharge / adamTime;
 
             //Main.NewText(player.GetAttackSpeed(DamageClass.Generic));
 
@@ -149,28 +158,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             target.FargoSouls().EarthDoTValue = (int)MathHelper.Lerp(target.FargoSouls().EarthDoTValue, debuffDamage / 2.3f, 0.5f);
             target.AddBuff(ModContent.BuffType<EarthPoison>(), 400);
         }
-        
-        public static void EarthSplit(Projectile projectile, Player player)
-        {
-            float lerper = GetEarthForceLerpValue(player);
-            FargoSoulsPlayer farg = player.FargoSouls();
-            if (!FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false) || AdamantiteEffect.AdamIgnoreItems.Contains(player.HeldItem.type))
-            {
-                return;
-            }
-            float angleDif = MathHelper.Lerp(30, 2, lerper);
-            float damageMult = 1f;
-            foreach (Projectile p in FargoSoulsGlobalProjectile.SplitProj(projectile, 3, MathHelper.ToRadians(angleDif), damageMult))
-            {
-                if (p.Alive())
-                {
-                    p.FargoSouls().HuntressProj = projectile.FargoSouls().HuntressProj;
-                    p.FargoSouls().AdamModifier = projectile.FargoSouls().AdamModifier;
-                    p.FargoSouls().Adamantite = true;
-                }
-            }
-            projectile.damage = (int)(projectile.damage * damageMult);
-
-        }
+       
     }
 }

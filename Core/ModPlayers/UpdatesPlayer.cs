@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Consumables;
@@ -122,7 +123,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             ForbiddenTornados.Clear();
             ShadowOrbs.Clear();
-            bool forbidden = Player.HasEffect<ForbiddenEffect>();
+            bool forbidden = Player.HasEffect<ForbiddenEffect>() || Player.HasEffect<SpiritTornadoEffect>();
             bool shadow = Player.HasEffect<ShadowBalls>();
             if (forbidden || shadow)
             {
@@ -516,7 +517,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 minioncount += Player.maxMinions - (int)Player.slotsMinions;
                 if (DeactivatedMinionEffectCount > 0)
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
-  
             }
 
             if (ToggleRebuildCooldown > 0)
@@ -616,9 +616,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (ChargeSoundDelay > 0)
                 ChargeSoundDelay--;
-
-            if (EarthSplitTimer > 0)
-                EarthSplitTimer--;
 
             if (RustRifleReloading && Player.HeldItem.type == ModContent.ItemType<NavalRustrifle>())
             {
@@ -748,12 +745,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //tries to remove all buffs/debuffs
                 for (int i = Player.MaxBuffs - 1; i >= 0; i--)
                 {
-                    if (Player.buffType[i] > 0
-                        && !Main.debuff[Player.buffType[i]] && !Main.buffNoTimeDisplay[Player.buffType[i]]
-                        && !BuffID.Sets.TimeLeftDoesNotDecrease[Player.buffType[i]])
+                    int type = Player.buffType[i];
+                    if (type > 0
+                        && !Main.debuff[type] && !Main.buffNoTimeDisplay[type]
+                        && !BuffID.Sets.TimeLeftDoesNotDecrease[type] && !Main.lightPet[type] && !Main.vanityPet[type])
                     {
-                        if (!KnownBuffsToPurify.ContainsKey(Player.buffType[i]))
-                            KnownBuffsToPurify[Player.buffType[i]] = true;
+                        if (!KnownBuffsToPurify.ContainsKey(type))
+                            KnownBuffsToPurify[type] = true;
 
                         Player.DelBuff(i);
                     }

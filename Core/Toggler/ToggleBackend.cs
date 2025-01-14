@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Core.Toggler
 
         public Dictionary<AccessoryEffect, Toggle> Toggles = [];
         //public Point TogglerPosition;
-        public bool CanPlayMaso;
+        public bool CanPlayMaso = true;
 
         public const int CustomPresetCount = 3;
         public List<AccessoryEffect>[] CustomPresets = new List<AccessoryEffect>[CustomPresetCount];
@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Core.Toggler
             //if (!Main.dedServ)
             //    FargoUIManager.SoulToggler.SetPositionToPoint(TogglerPosition);
 
-            CanPlayMaso = Config.Get("CanPlayMaso", false);
+            CanPlayMaso = true; // Config.Get("CanPlayMaso", true);
 
             //TODO: figure out how to extract a plain list from json, only using Dict rn because i know it can be loaded from json
             for (int i = 0; i < CustomPresets.Length; i++)
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Core.Toggler
 
             if (!Main.dedServ)
             {
-                Config.Put("CanPlayMaso", CanPlayMaso);
+                //Config.Put("CanPlayMaso", CanPlayMaso);
 
                 //Config.Put(TogglesByPlayer, ParsePackedToggles());
 

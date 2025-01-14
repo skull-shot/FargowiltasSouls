@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Leaf);
-
+            Projectile.DamageType = DamageClass.Summon;
             Projectile.tileCollide = false;
         }
 

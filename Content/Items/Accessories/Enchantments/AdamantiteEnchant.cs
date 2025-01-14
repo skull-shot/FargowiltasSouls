@@ -1,12 +1,19 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil;
+using System;
 using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -55,15 +62,54 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<AdamantiteEnchant>();
 
         public override bool ExtraAttackEffect => true;
+        public const float SpreadCap = 17; // spread cap in DEGREES
+        public static bool CanBeAffected(Projectile projectile, Player player)
+        {
+            var modProj = projectile.FargoSouls();
+            var modPlayer = player.FargoSouls();
+            return 
+                projectile.owner == Main.myPlayer && FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false)
+                && modProj.CanSplit && Array.IndexOf(FargoSoulsGlobalProjectile.NoSplit, projectile.type) <= -1
+                && projectile.aiStyle != ProjAIStyleID.Spear
+                && !(AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type) || modPlayer.Player.heldProj == projectile.whoAmI || modProj.IsAHeldProj)
+                && modProj.ItemSource;
+        }
+        public static void CalcAdamantiteAttackSpeed(Player player, Item item)
+        {
+            if (!player.HasEffectEnchant<AdamantiteEffect>())
+                return;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
 
+            if (!(item.DamageType != DamageClass.Default && item.pick == 0 && item.axe == 0 && item.hammer == 0 && item.type != ModContent.ItemType<PrismaRegalia>()))
+                return;
+            if (item.shoot <= ProjectileID.None)
+                return;
+            if (!modPlayer.HeldItemAdamantiteValid)
+                return;
+            float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.65f : 0.3f;
+            if (ProjectileID.Sets.CultistIsResistantTo[item.shoot])
+                maxSpeed /= 2;
+
+            float ratio = Math.Max((float)modPlayer.AdamantiteSpread / SpreadCap, 0);
+            modPlayer.AttackSpeed += maxSpeed * ratio;
+
+            CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/AdamantiteEnchant").Value, new(221, 85, 125),
+                () => (float)Main.LocalPlayer.FargoSouls().AdamantiteSpread / SpreadCap, activeFunction: player.HasEffect<AdamantiteEffect>, displayAtFull: true);
+
+        }
         public override void PostUpdateEquips(Player player)
         {
             if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            //modPlayer.AdamantiteEnchantItem = item;
+            if (player.HeldItem != null && player.HeldItem.IsWeapon())
+            {
+                if (modPlayer.AdamantiteItem != player.HeldItem)
+                    modPlayer.HeldItemAdamantiteValid = false;
+                modPlayer.AdamantiteItem = player.HeldItem;
+            }
 
-            int adaCap = 60; //ada cap in DEGREES
+            int adaCap = (int)SpreadCap; 
 
             const float incSeconds = 10;
             const float decSeconds = 1.5f;
@@ -86,42 +132,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             ItemID.Excalibur,
             ItemID.TrueExcalibur,
             ItemID.TerraBlade,
+            ItemID.TheHorsemansBlade,
             ModContent.ItemType<DecrepitAirstrikeRemote>()
         ];
 
         public static void AdamantiteSplit(Projectile projectile, FargoSoulsPlayer modPlayer, int splitDegreeAngle)
         {
-            bool adaForce = modPlayer.ForceEffect<AdamantiteEnchant>();
-            bool isProjHoming = ProjectileID.Sets.CultistIsResistantTo[projectile.type];
-            if (AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type))
-            {
+            if (!modPlayer.Player.HasEffectEnchant<AdamantiteEffect>())
                 return;
-            }
-
-            float adaDamageRatio = isProjHoming ? (adaForce ? 0.375f : 0.6f) : (adaForce ? 0.5f : 0.7f);
-            // if its homing, damage is 0.6x2/0.4x3 (+20%)
-            // if its not homing, damage is 0.7x2/0.5x3 (+40/50%)
-
-            foreach (Projectile p in FargoSoulsGlobalProjectile.SplitProj(projectile, 3, MathHelper.ToRadians(splitDegreeAngle), adaDamageRatio))
-            {
-                if (p.Alive())
-                {
-                    p.FargoSouls().HuntressProj = projectile.FargoSouls().HuntressProj;
-                    p.FargoSouls().AdamModifier = projectile.FargoSouls().AdamModifier;
-                    p.FargoSouls().Adamantite = true;
-                }
-            }
-
-            if (!adaForce) 
-            {
-                projectile.type = ProjectileID.None;
-                projectile.timeLeft = 0;
-                projectile.active = false;
-            }
-            else
-            {
-                projectile.damage = (int)(projectile.damage * adaDamageRatio);
-            }
+            if (AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type))
+                return;
+            modPlayer.HeldItemAdamantiteValid = true;
+            projectile.velocity = projectile.velocity.RotateRandom(MathHelper.ToRadians(splitDegreeAngle));
+            projectile.FargoSouls().Adamantite = true;
         }
     }
 }

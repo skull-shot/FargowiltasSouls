@@ -1,94 +1,131 @@
-// GrantsSkill: Grants Active Skill:
-// GrantsSkillsPlural: Grants Active Skills:
-// KeybindMenu: Press {0} to bind skills
-// Unbound: Unbound
+GrantsSkill: 获得主动技能：
+GrantsSkillsPlural: 获得主动技能：
+KeybindMenu: 按下{0}键来绑定技能
+Unbound: 未绑定
 
 SpecialDashEffect: {
-	// DisplayName: Bee Dash
-	// Tooltip: Perform a short quick bee dash towards your cursor
+	DisplayName: 蜜蜂冲刺
+	Tooltip: 朝光标方向进行快速蜜蜂冲刺
 }
 
 BetsyDashEffect: {
-	// DisplayName: Fireball Dash
-	/* Tooltip:
+	DisplayName: 火球冲刺
+	Tooltip:
 		'''
-		Perform a short invincible fireball dash towards your cursor
-		Shares cooldown slot with Bee Dash
-		''' */
+		朝光标方向进行无敌火球冲刺
+		和蜜蜂冲刺共用冷却时间
+		'''
 }
 
 DiveEffect: {
-	// DisplayName: Fastfall Dive
-	/* Tooltip:
+	DisplayName: 快速下落
+	Tooltip:
 		'''
-		Activate in the air to fastfall
-		Defaults to Double Tap DOWN if no key is bound to skill slot
-		''' */
+		在空中使用来快速下落
+		如果未绑定键位，默认为双击“下”键
+		'''
 }
 
 GoldKeyEffect: {
-	// DisplayName: Golden Shell
-	/* Tooltip:
+	DisplayName: 金身
+	Tooltip:
 		'''
-		Encase yourself in a golden shell
-		You will not be able to move or attack, but will be immune to all damage
-		Press again to exit early
-		''' */
+		将你包裹在一个黄金壳中
+		被包裹时你无法移动或攻击，但你免疫所有伤害
+		再次使用会使你提前离开黄金壳
+		'''
 }
 
 ParryEffect: {
-	// DisplayName: Guard Parry
-	/* Tooltip:
+	DisplayName: 盾牌格挡
+	Tooltip:
 		'''
-		Hold to guard
-		Guard shortly before being hit to parry
-		Defaults to Right Click if no key is bound to skill slot
-		''' */
+		按住以格挡
+		在受击前短时间内格挡来招架这次攻击
+		如果未绑定键位，默认为右键
+		'''
 }
 
 StardustEffect: {
-	// DisplayName: Stardust Stasis
-	/* Tooltip:
+	DisplayName: 星尘静滞
+	Tooltip:
 		'''
-		Freezes time for a few seconds
-		While time is frozen, your minions will continue to attack
-		''' */
+		冻结时间
+		你的召唤物不受时间冻结影响
+		'''
 }
 
 DebuffInstallKeyEffect: {
-	// DisplayName: Debuff Install
-	// Tooltip: Install yourself with debuffs, granting different effects depending on accessory
+	DisplayName: 减益负载
+	Tooltip: 为自身附加减益，根据饰品的不同，获得不同效果
 }
 
 FrigidGemstoneKeyEffect: {
-	// DisplayName: Frigid Spell
-	/* Tooltip:
+	DisplayName: 寒霜咒语
+	Tooltip:
 		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
-		''' */
+		放置冰雪魔杖之冰
+		在困难模式中，你的冰块会造成霜冻减益
+		'''
 }
 
 BombKeyEffect: {
-	// DisplayName: Graze Bomb
-	/* Tooltip:
+	DisplayName: 炸弹
+	Tooltip:
 		'''
-		Requires being charged by grazing attacks
-		Freezes almost all enemies and projectiles
-		''' */
+		擦弹来积攒一颗炸弹
+		释放炸弹能冻住几乎所有敌怪和射弹
+		'''
 }
 
 BulbKeyEffect: {
-	// DisplayName: Magical Cleanse
-	/* Tooltip:
+	DisplayName: 魔法净化
+	Tooltip:
 		'''
-		Cure yourself of most debuffs on a long cooldown
-		Also amplifies damage over time effects for nearby enemies by 2x
-		Cooldown depletes faster while not attacking
-		''' */
+		治愈你身上绝大多数的减益，此效果冷却时间较长
+		并使附近的敌人受到的减益伤害增加100%
+		不攻击时，冷却速度更快
+		'''
 }
 
 AmmoCycleEffect: {
-	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	DisplayName: 切换弹药
+	Tooltip: 循环切换弹药（放在背包和时装栏中也可生效）
+}
+
+GladiatorBanner: {
+	DisplayName: 角斗士旗子
+	Tooltip:
+		'''
+		召唤一个持续15秒的旗子
+		靠近旗子时可免疫击退，获得8%伤害减免和8%伤害加成
+		待旗子消失后才能重新召唤
+		'''
+}
+
+PalmwoodEffect: {
+	DisplayName: 棕榈木哨兵
+	Tooltip: 召唤一个会向敌人扔橡实的棕榈树哨兵
+}
+
+ForbiddenEffect: {
+	DisplayName: 禁戒风暴
+	Tooltip:
+		'''
+		在光标位置召唤远古风暴
+		风暴造成魔法和召唤伤害，受魔法和召唤伤害加成影响
+		穿过风暴的弹幕会造成1.2倍伤害
+		接触风暴可以恢复飞行时间
+		落地后才可重新召唤风暴
+		'''
+}
+
+SpiritTornadoEffect: {
+	DisplayName: 心灵飓风
+	Tooltip:
+		'''
+		召唤远古飓风，造成魔法和召唤伤害
+		穿过飓风的弹幕会造成1.4倍伤害
+		飓风会轻微地跟踪鼠标
+		'''
 }

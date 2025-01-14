@@ -70,6 +70,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             if (Projectile.ai[0] == 1)
             {
+                if (Projectile.ai[1] == 0)
+                    Projectile.velocity = Projectile.velocity.ClampLength(0, 15);
                 Projectile.ai[1]++;
                 Projectile.rotation += Projectile.direction * -0.4f;
 
@@ -128,7 +130,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         }
                         else if (FargoSoulsUtil.HostCheck)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity, Projectile.Distance(mousePos) + 200);
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<RetiDeathray>(), Projectile.damage, 1f, Projectile.owner, 0, Projectile.identity, Projectile.Distance(mousePos) + 320);
                         }
                     }
                 }

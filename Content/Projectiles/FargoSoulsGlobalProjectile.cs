@@ -23,6 +23,7 @@ using Luminance.Core.Graphics;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,6 @@ namespace FargowiltasSouls.Content.Projectiles
         // private int numSplits = 1;
         public int stormTimer;
         public float TungstenScale = 1;
-        public int AdamModifier;
         public bool TikiTagged;
         private int spookyCD;
         public bool FrostFreeze;
@@ -429,37 +429,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 && !FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
                 HuntressProj = 1;
-            }
-            bool canAdaSplit = projectile.owner == Main.myPlayer && FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false)
-                && CanSplit && Array.IndexOf(NoSplit, projectile.type) <= -1
-                && projectile.aiStyle != ProjAIStyleID.Spear
-                && !(AdamantiteEffect.AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type) || modPlayer.Player.heldProj == projectile.whoAmI)
-                && (ItemSource
-                || source is EntitySource_Parent parent2 && parent2.Entity is Projectile sourceProj2 && (sourceProj2.aiStyle == ProjAIStyleID.Spear || sourceProj2.minion || sourceProj2.sentry || ProjectileID.Sets.IsAWhip[sourceProj2.type] && !ProjectileID.Sets.IsAWhip[projectile.type]));
-
-            if (player.HasEffect<EarthForceEffect>() && player.HasEffect<AdamantiteEffect>())
-            {
-                if (canAdaSplit)
-                {
-                    if (projectile.owner == Main.myPlayer && modPlayer.EarthTimer > 100 && modPlayer.EarthSplitTimer <= 0)
-                    {
-                        AdamModifier = 3;
-                        EarthForceEffect.EarthSplit(projectile, Main.LocalPlayer);
-                        modPlayer.EarthSplitTimer = 60 * 3;
-                    }
-                }
-                //reduce iframes so that the accessory actually increases dps for real
-                if (projectile.usesIDStaticNPCImmunity && AdamModifier == 3)
-                {
-                    projectile.idStaticNPCHitCooldown = (int)(projectile.idStaticNPCHitCooldown * 0.3333f);
-                }
-            }
-            else if (player.HasEffect<AdamantiteEffect>() && canAdaSplit)
-            {
-                //apen is inherited from proj to proj
-                projectile.ArmorPenetration += projectile.damage / 2;
-                AdamModifier = modPlayer.ForceEffect<AdamantiteEnchant>() ? 3 : 2;
-                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
             }
 
             if (source is EntitySource_Parent parent3 && parent3.Entity is Projectile sourceProj && sourceProj.FargoSouls().DamageCap > 0)
@@ -1262,7 +1231,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 {
                     if (!p.FargoSouls().TikiTagged)
                     {
-                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, p.Center);
+                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.35f, MaxInstances = 1 }, p.Center);
                         for (int i = 0; i < 8; i++)
                         {
                             int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
@@ -1321,18 +1290,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 if (player.HasEffect<TungstenEffect>() && TungstenScale == 1)
                     TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, null);
                 */
-                if (Adamantite)
-                {
-                    if (Main.projectile.Any(p => p.TypeAlive(projectile.type) && p.owner == projectile.owner && p.whoAmI != projectile.whoAmI))// && !ProjectileID.Sets.IsAWhip[projectile.type] && projectile.aiStyle != ProjAIStyleID.Yoyo)
-                    {
-                        projectile.Kill();
-                        projectile.active = false;
-                    }
-                        
-                    projectile.damage = player.GetWeaponDamage(player.HeldItem);
-                    projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
-                    return;
-                }
 
                 if (player.HeldItem.IsWeapon())
                 {
@@ -1353,6 +1310,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     player.reuseDelay = Math.Max(0, 20 - counter);
                 }
             }
+
+            bool canAdaSplit = AdamantiteEffect.CanBeAffected(projectile, player);
+            if (player.HasEffect<AdamantiteEffect>() && canAdaSplit && !Adamantite)
+                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
 
             //graze
             if (projectile.hostile && projectile.damage > 0 && projectile.aiStyle != ProjAIStyleID.FallingTile && --GrazeCD < 0)
@@ -1602,8 +1563,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (AdamModifier != 0)
-                ReduceIFrames(projectile, target, AdamModifier);
 
             if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
             {

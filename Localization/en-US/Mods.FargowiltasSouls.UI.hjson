@@ -28,6 +28,7 @@ ExpandedFeatures:
 	-Debuffs wear off faster when not attacking
 	-Changes the functionality and strength of certain items
 	'''
+MasochistMultiplayer: -In Masochist multiplayer, each player can only respawn once per bossfight
 SavedToSlot: Toggles saved to custom set {0}!
 NoTogglesFound: No toggles found in custom set {0}.
 TurnAllTogglesOff: Turn all toggles off
@@ -43,3 +44,5 @@ DisplayEquipped: Display Equipped
 SearchText: Search...
 MainMenu: Fargo's
 DisabledUnequipped: Disabled: Not equipped
+ActiveSkills: Active Skills
+AvailableSkills: Available Skills

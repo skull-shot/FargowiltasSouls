@@ -1034,8 +1034,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
-                modifiers.FinalDamage *= 2.0f / 3.0f + 1.0f / 3.0f * 1f / projectile.numHits;
             if (projectile.type == ProjectileID.RainFriendly)
                 modifiers.FinalDamage /= 2;
             if (projectile.type == ProjectileID.SoulDrain)
@@ -1052,15 +1050,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
                     modifiers.FinalDamage *= 0.001f;
+
+            PierceResistance(projectile, ref modifiers);
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             modifiers.FinalDamage *= 0.4f;
         }
+        public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.75f;
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
+                modifiers.FinalDamage *= 1f / MathF.Pow(2, projectile.numHits);
+        }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            if (!FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj && projectile.damage > 5)
-                projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.75);
+            //if (!FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj && projectile.damage > 5)
+            //    projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.75);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

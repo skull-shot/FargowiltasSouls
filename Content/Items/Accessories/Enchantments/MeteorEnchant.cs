@@ -32,6 +32,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            // magilumi lighting
+            DelegateMethods.v3_1 = new Vector3(0.9f, 0.8f, 0.5f);
+            Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
+            Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
             AddEffects(player, Item);
         }
         public static void AddEffects(Player player, Item item)
@@ -131,7 +135,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
 
             bool forceEffect = modPlayer.ForceEffect<MeteorEnchant>();
-            int damage = forceEffect ? 400 : 90;
+            int damage = forceEffect ? 400 : 70;
             modPlayer.MeteorCD = Cooldown;
             CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
                 () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 

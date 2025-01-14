@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.WorldGeneration;
 using FargowiltasSouls.Core.Systems;
 using System;
+using FargowiltasSouls.Content.Items.Summons;
 
 namespace FargowiltasSouls.Content.Items.Consumables
 {
@@ -13,6 +14,10 @@ namespace FargowiltasSouls.Content.Items.Consumables
     {
         public override bool IsLoadingEnabled(Mod mod) => true;
         public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<CoffinSummon>();
+        }
         public override void SetDefaults()
         {
             Item.width = 20;
