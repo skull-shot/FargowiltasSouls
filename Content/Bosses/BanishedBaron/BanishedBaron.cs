@@ -1494,9 +1494,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 }
                 if (NPC.Distance(player.Center) < 200)
                     NPC.velocity -= NPC.SafeDirectionTo(player.Center);
-
                 LockVector1 = FargoSoulsUtil.PredictiveAim(NPC.Center, player.Center, player.velocity, PredictStr);
-                Vector2 dir = Vector2.Lerp(NPC.rotation.ToRotationVector2(), Vector2.Normalize(LockVector1), 0.2f);
+                Vector2 dir = Vector2.Lerp(NPC.rotation.ToRotationVector2(), Vector2.Normalize(LockVector1), 0.115f);
                 NPC.rotation = dir.ToRotation();
 
                 //LockVector1 = NPC.SafeDirectionTo(player.Center + (player.velocity * PredictStr)) * PredictStr;
@@ -1581,7 +1580,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             if (AI3 == 0) //startup, reach starting point
             {
                 float x = Xstart * AI2;
-                LockVector1 = player.Center + new Vector2(x, -YMin);
+                LockVector2 = player.Center;
+                LockVector1 = LockVector2 + new Vector2(x, -YMin);
                 NPC.rotation = NPC.SafeDirectionTo(LockVector1).ToRotation();
                 if (NPC.velocity.Length() < 30 + player.velocity.Length())
                 {
@@ -1593,6 +1593,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 if (NPC.Distance(LockVector1) < 25)
                 {
                     AI3 = 1; //reached point, start attack
+                    NPC.netUpdate = true;
                 }
             }
             if (AI3 > 0) //arc attack
@@ -1611,7 +1612,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Vector2 curve = Curve(prog);
                 Vector2 dydx = Curve(prog + 0.00001f) - curve;
                 NPC.rotation = dydx.ToRotation();
-                LockVector1 = player.Center + curve;
+                LockVector1 = LockVector2 + curve;
                 NPC.velocity = LockVector1 - NPC.Center;
                 AI3++;
 
