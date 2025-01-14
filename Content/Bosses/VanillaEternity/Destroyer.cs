@@ -1059,7 +1059,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 0.5f;
+            modifiers.FinalDamage *= 0.75f;
             if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
                 modifiers.FinalDamage *= 1f / MathF.Pow(2, projectile.numHits);
         }
