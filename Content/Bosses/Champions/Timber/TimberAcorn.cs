@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             if (Projectile.localAI[0] == 0f)
             {
                 Projectile.localAI[0] = 1f;
-                SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannon, Projectile.position);
+                //SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannon, Projectile.position);
             }
             Projectile.velocity.Y += 0.2f;
 

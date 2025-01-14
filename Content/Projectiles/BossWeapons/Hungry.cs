@@ -27,6 +27,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 4;
             Projectile.timeLeft = 240;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
             AIType = ProjectileID.Bullet;
         }
 

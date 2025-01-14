@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnSpawn(IEntitySource source)
         {
-            SoundEngine.PlaySound(FargosSoundRegistry.DiffractorStart, Projectile.Center);
+            SoundEngine.PlaySound(FargosSoundRegistry.DiffractorStart with { Volume = 0.5f}, Projectile.Center);
             
             base.OnSpawn(source);
         }
@@ -81,7 +81,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 return !Projectile.active;
             });
 
-            Loop.Update(Projectile.Center);
+            Loop.Update(Projectile.Center, sound =>
+            {
+                sound.Volume = 0.6f;
+            });
             
             
            
@@ -171,7 +174,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + HoldOffset * 2, 22f * Projectile.velocity.RotatedBy(spread * i),
                             type, damage, Projectile.knockBack, Projectile.owner);
                     }
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/DiffractorOrb" + Main.rand.Next(1,3)), Projectile.Center); // not sound registeried because idk how to randomize using that.
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/DiffractorOrb" + Main.rand.Next(1,3)) with { Volume = 0.6f}, Projectile.Center); // not sound registeried because idk how to randomize using that.
                     /*int p = Projectile.NewProjectile(Projectile.Center + HoldOffset * 2, Projectile.velocity * 22, type, Projectile.damage, Projectile.knockBack, player.whoAmI);
 					if (p < 1000)
 					{

@@ -44,6 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.penetrate = 1;
             Projectile.aiStyle = -1;
             Projectile.tileCollide = false;
+            Projectile.FargoSouls().CanSplit = false;
         }
       
 
@@ -102,6 +103,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             {
                                 Main.projectile[p].DamageType = DamageClass.Melee;
                                 Main.projectile[p].tileCollide = false;
+                                ProjectileID.Sets.CultistIsResistantTo[p] = true;
                                 
                             }
 

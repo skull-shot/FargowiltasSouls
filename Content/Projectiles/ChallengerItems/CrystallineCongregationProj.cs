@@ -42,6 +42,8 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 1200;
             Projectile.scale = 1f;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
 
         public override void AI()

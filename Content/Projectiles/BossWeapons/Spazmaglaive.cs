@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             // DisplayName.SetDefault("Spazmaglaive");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -66,17 +67,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.ai[2] = Main.rand.NextFloat(-MathHelper.Pi / 6, MathHelper.Pi / 6);
                 }
                 Projectile.ai[1]++;
-                ++Projectile.localAI[0];
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.6f, 1 / 10f);
+                /*++Projectile.localAI[0];
                 const int maxTime = 45;
                 Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.localAI[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
                 DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[2] - Projectile.ai[2] * Projectile.localAI[0] / (maxTime / 2));
-                Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
+                Projectile.Center += Main.player[Projectile.owner].Center;*/
+                int maxtime = empowered ? 15 : 30;
 
-                if (Projectile.ai[1] >= 5)
-                {
-                    //Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.8f, 1 / 60f); ;
-                }
-                if (Projectile.ai[1] >= 15)
+                if (Projectile.ai[1] >= maxtime)
                 {
                     Projectile.ai[0] = 1;
                     Projectile.ai[1] = 0;
@@ -100,7 +99,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (Projectile.ai[0] == 1 && empowered)
             {
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1200, false, true));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2400, false, true));
                 if (n.Alive())
                 {   
                     if (hitSomething == false)

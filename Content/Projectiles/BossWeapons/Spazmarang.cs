@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.ai[1]++;
                 if (Projectile.ai[1] >= 30)
                 {
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.4f, 1 / 10f); ;
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0.4f, 1 / 10f);
                 }
                 if (Projectile.ai[1] >= 60)
                 {

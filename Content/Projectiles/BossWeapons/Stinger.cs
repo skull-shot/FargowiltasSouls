@@ -24,6 +24,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 240;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
         }
 
         public override void AI()
