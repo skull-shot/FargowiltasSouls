@@ -3725,8 +3725,8 @@ DarkTome: {
 	Tooltip:
 		'''
 		按住左键以召唤至多3本跟随你的光标的幻影之书
-		松开鼠标会使它们发射书页Releasing button causes the books to release a volley of pages
-		'The arcane grimoire of a defeated foe...'
+		松开鼠标会使它们发射书页
+		“战败敌人的神秘魔法书……”
 		'''
 }
 
