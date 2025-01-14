@@ -57,13 +57,13 @@ ClientConfig: {
 	}
 
 	SkillMenuX: {
-		// Label: Skill Menu X
-		// Tooltip: Measured from the right side of the screen.
+		Label: 技能菜单水平位置
+		Tooltip: 离屏幕右侧的距离
 	}
 
 	SkillMenuY: {
-		// Label: Skill Menu Y
-		// Tooltip: ""
+		Label: 技能菜单竖直位置
+		Tooltip: ""
 	}
 }
 
@@ -181,7 +181,7 @@ SoulConfig: {
 	}
 
 	PatreonTouhou: {
-		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
-		// Tooltip: ""
+		Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		Tooltip: ""
 	}
 }

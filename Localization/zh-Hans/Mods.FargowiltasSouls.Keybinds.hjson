@@ -9,8 +9,8 @@ MagicalBulb.DisplayName: 魔法净化
 FrigidSpell.DisplayName: 寒霜咒语
 DebuffInstall.DisplayName: 减益负载
 AmmoCycle.DisplayName: 弹药切换
-// ActiveSkill1.DisplayName: Active Skill 1
-// ActiveSkill2.DisplayName: Active Skill 2
-// ActiveSkill3.DisplayName: Active Skill 3
-// ActiveSkill4.DisplayName: Active Skill 4
-// ActiveSkillMenu.DisplayName: Active Skill Menu
+ActiveSkill1.DisplayName: 主动技能1
+ActiveSkill2.DisplayName: 主动技能2
+ActiveSkill3.DisplayName: 主动技能3
+ActiveSkill4.DisplayName: 主动技能4
+ActiveSkillMenu.DisplayName: 主动技能菜单

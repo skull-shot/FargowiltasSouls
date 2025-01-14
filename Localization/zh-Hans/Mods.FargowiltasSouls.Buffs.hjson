@@ -810,6 +810,6 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	// DisplayName: Touhou Hoard Buff
-	// Description: The mythical beings will fight for you
+	DisplayName: 东方秘藏
+	Description: 幻想之物会为你而战
 }

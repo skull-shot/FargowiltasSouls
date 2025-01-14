@@ -2,10 +2,10 @@ AdamantiteEnchant: {
 	DisplayName: 精金魔石
 	Tooltip:
 		'''
-		你发射出的所有弹幕都会分裂成两个
+		持续攻击会提高武器使用速度，最高增加30%速度
 		弹幕散射角度会随武器持续使用而逐渐增大，在不使用武器时慢慢减少
-		弹幕只造成70%伤害，追踪的弹幕只造成60%伤害
-		弹幕造成伤害的频率翻倍，并获得与弹幕一半伤害相等的护甲穿透
+		追踪武器只有一半效果
+		只对直接发射弹幕的武器生效
 		“混乱”
 		'''
 }
@@ -192,15 +192,7 @@ EbonwoodEnchant: {
 
 ForbiddenEnchant: {
 	DisplayName: 禁戒魔石
-	Tooltip:
-		'''
-		双击“下”键会在光标位置召唤远古风暴
-		风暴造成魔法和召唤伤害受魔法和召唤伤害加成影响
-		穿过风暴的弹幕会造成1.2倍伤害
-		接触风暴可以恢复飞行时间
-		落地后才可重新召唤风暴
-		“走路像个埃及人”
-		'''
+	Tooltip: “走路像个埃及人”
 }
 
 FossilEnchant: {
@@ -231,10 +223,7 @@ GladiatorEnchant: {
 	Tooltip:
 		'''
 		长矛将倾泄在被攻击的敌人身上，造成远程伤害
-		双击下键召唤一个持续15秒的旗子
 		靠近旗子会增强长矛雨
-		靠近旗子时可免疫击退，获得8%伤害减免和8%伤害加成
-		旗子同时只能存在一个
 		“你不觉得刺激吗？！”
 		'''
 }
@@ -245,9 +234,6 @@ GoldEnchant: {
 		'''
 		攻击会造成迈达斯减益
 		捡起钱币时，自动将它们存进猪猪存钱罐中（这个效果放在在物品栏中也能生效）
-		按下“金身”键会将你包裹在一个黄金壳中
-		被包裹时你无法移动或攻击，但你免疫所有伤害
-		再次按下“金身”键会使你提前离开黄金壳
 		“有钱能使鬼推磨”
 		'''
 }
@@ -402,7 +388,7 @@ NinjaEnchant: {
 	DisplayName: 忍者魔石
 	Tooltip:
 		'''
-		弹幕会根据其速度获得增伤，最高可达1.15倍
+		弹幕会根据其速度增加暴击率，最高可达20%
 		当玩家缓慢移动时弹幕速度大幅增加
 		“等待正确的时机……”
 		'''
@@ -444,11 +430,7 @@ PalladiumEnchant: {
 
 PalmWoodEnchant: {
 	DisplayName: 棕榈木魔石
-	Tooltip:
-		'''
-		双击“下”键在鼠标处召唤一个会向敌人扔橡实的棕榈树哨兵
-		“出奇的宁静”
-		'''
+	Tooltip: “出奇的宁静”
 }
 
 PearlwoodEnchant: {
@@ -571,9 +553,8 @@ SilverEnchant: {
 	DisplayName: 银魔石
 	Tooltip:
 		'''
-		右键进行盾牌格挡
-		在受击前短时间内格挡可抵消最多100点伤害
 		在受击的一刻完美格挡可获得惊人一刻增益
+		在受击前短时间内格挡可抵消最多100点伤害
 		“反射”
 		'''
 }
@@ -649,10 +630,8 @@ StardustEnchant: {
 	DisplayName: 星尘魔石
 	Tooltip:
 		'''
+		星尘静滞会持续6秒，有90秒冷却时间
 		星尘守卫将保护你不受附近敌人的伤害
-		按下“冻结”键后会冻结时间，持续6秒
-		你的召唤物不受时间冻结影响
-		此效果有90秒冷却时间
 		“你成为了替身使者”
 		'''
 }
@@ -699,9 +678,9 @@ TungstenEnchant: {
 	DisplayName: 钨魔石
 	Tooltip:
 		'''
-		近战武器大小增加100%
-		每过2/3秒便会有一个随机弹幕的尺寸翻倍
-		变大的真近战剑刃和弹幕会额外造成7%伤害
+		近战武器大小增加50%，鞭子范围增加20%
+		你的攻击会造成冲击波，冲击波对原目标造成的伤害减少
+		此效果有2.5秒冷却时间
 		“大就是好”
 		'''
 }
@@ -847,7 +826,7 @@ CosmoForce: {
 		[i:FargowiltasSouls/SolarEnchant] 攻击会产生最多4颗围绕玩家旋转的月亮
 		[i:FargowiltasSouls/VortexEnchant] 停止攻击时月亮会向玩家鼠标处发射，飞行一段距离后爆炸产生月亮强化焰
 		[i:FargowiltasSouls/NebulaEnchant] 拾取月亮强化焰时会增加玩家的伤害、暴击、生命恢复或伤害减免
-		[i:FargowiltasSouls/StardustEnchant] 按下“冻结”键冻结时间6秒，冷却时间为75秒
+		[i:FargowiltasSouls/StardustEnchant] 星尘静滞会持续6秒，冷却时间为75秒
 		[i:FargowiltasSouls/MeteorEnchant] 增加移动速度和加速度，降低动量
 		[i:FargowiltasSouls/WizardEnchant] 升级所有魔石的效果
 		“自宇宙大爆炸以来就一直存在”
@@ -918,7 +897,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShinobiEnchant] 冲刺会把玩家笼罩在阴影中，使你在冲刺期间无敌。这个效果有4秒冷却时间
 		[i:FargowiltasSouls/ShinobiEnchant] 使用阴影冲刺冲过敌人会对其造成伤害并造成死亡标记
 		[i:FargowiltasSouls/AncientShadowEnchant] 冲刺会向玩家周围发射一连串暗影焰弹幕
-		[i:FargowiltasSouls/NinjaEnchant] 根据弹幕速度增加弹幕伤害
+		[i:FargowiltasSouls/NinjaEnchant] 根据弹幕速度增加弹幕暴击率
 		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时增加弹幕速度
 		[i:FargowiltasSouls/NecroEnchant] 击杀敌人有概率掉落骨堆
 		[i:FargowiltasSouls/DarkArtistEnchant] 攻击时发射快捷栏中最近的武器的射弹作为辅助攻击
@@ -930,7 +909,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShadowEnchant] 四颗暗影珠绕着你旋转
 		[i:FargowiltasSouls/AncientShadowEnchant] 攻击有几率造成黑暗减益
 		[i:FargowiltasSouls/NecroEnchant] 击杀敌人时有几率爆出一个骨堆，拥有骨头手套的效果
-		[i:FargowiltasSouls/NinjaEnchant] 根据射弹速度增加其伤害
+		[i:FargowiltasSouls/NinjaEnchant] 根据射弹速度增加弹幕暴击率
 		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时射弹速度增加
 		[i:FargowiltasSouls/CrystalAssassinEnchant] 你可以扔出烟雾弹、传送至烟雾弹的位置获得先发制人增益
 		[i:FargowiltasSouls/CrystalAssassinEnchant] 获得水晶刺客冲刺
@@ -946,9 +925,6 @@ SpiritForce: {
 	DisplayName: 心灵之力
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/ForbiddenEnchant] 双击下键召唤一个禁戒风暴，造成魔法和召唤伤害
-		[i:FargowiltasSouls/ForbiddenEnchant] 任何穿过风暴的弹幕都会造成1.4倍伤害
-		[i:FargowiltasSouls/AncientHallowEnchant] 风暴会轻微地跟踪鼠标
 		[i:FargowiltasSouls/HallowEnchant] 治疗药水可以恢复更多生命值，但会随着时间的推移而逐渐生效
 		[i:FargowiltasSouls/SpectreEnchant] 生命值降低至零时以200点生命值复活并清除减益效果
 		[i:FargowiltasSouls/TikiEnchant] 鞭子范围增加，鞭子伤害和暴击改为受最高职业伤害和暴击加成，并且能增强其击中的弹幕
@@ -961,10 +937,10 @@ TerraForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] 暴击有概率发射一道闪电，闪电击中后会爆炸并造成强化的铅中毒减益
-		[i:FargowiltasSouls/SilverEnchant] 右键进行格挡，成功格挡会抵消至多200点伤害，并发射一道闪电
+		[i:FargowiltasSouls/SilverEnchant] 成功格挡会抵消至多200点伤害，并发射两道闪电
+		[i:FargowiltasSouls/TinEnchant] 锡初始暴击率为50%，每发射一道闪电会增加25%暴击率，最高增加至100%
 		[i:FargowiltasSouls/LeadEnchant] 你受到的持续伤害降低60%
-		[i:FargowiltasSouls/TungstenEnchant] 你的剑类武器变大100%，其他手持武器变大50%
-		[i:FargowiltasSouls/TinEnchant] 锡初始暴击率为10%，最多可增加至原本暴击率的两倍或50%
+		[i:FargowiltasSouls/TungstenEnchant] 你的近战武器变大50%，鞭子范围增加20%
 		[i:FargowiltasSouls/IronEnchant] 第一次制作时有50%的概率不消耗任何物品，你会吸引更大范围的物品（背包和时装栏中也可生效）
 		“大地赐予它力量”
 		'''
@@ -994,8 +970,7 @@ WillForce: {
 		[i:FargowiltasSouls/RedRidingEnchant] 连续攻击可获得额外伤害，受到角斗士之力增益时伤害会更高
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 增加25%的治疗效果
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 坐骑获得冲刺能力和属性提升
-		[i:FargowiltasSouls/GoldEnchant] 按下“金身”键会被被包裹在金色外壳中，你的攻击会造成迈达斯减益
-		[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐（在背包和装饰栏中也会生效）
+		[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐（在背包和装饰栏中也会生效），你的攻击会造成迈达斯减益
 		[i:FargowiltasSouls/PlatinumEnchant] 敌人有33%概率掉落5倍战利品
 		“矢志不渝”
 		'''
@@ -1007,7 +982,7 @@ AbominableWand: {
 	Tooltip:
 		'''
 		免疫憎恶毒牙和憎恶驾到减益
-		增加闪烁崇心的擦弹伤害加成，红心发射冷却减半
+		增加闪烁崇心的擦弹充能效率，红心发射冷却减半
 		暴击时偶尔会召唤幽灵憎恶
 		装备冥河套装时，闪烁崇心擦弹计满也会增加冥河能量
 		受到致命伤害时，保留1点生命值并避免死亡
@@ -1039,8 +1014,7 @@ AgitatingLens: {
 		'''
 		免疫狂暴减益
 		冲刺或奔跑时会在身后留下一串鲜血镰刀，造成魔法伤害
-		按住“上”“下”的同时按下“减益负载”键进入狂暴状态
-		狂暴时，大幅提升进攻能力，大幅降低防御能力，且你无法停止攻击或移动
+		减益负载会使你狂暴，大幅提升进攻能力，大幅降低防御能力，且你无法停止攻击或移动
 		狂暴状态持续8秒，结束后会被昏迷2秒
 		“被打败的敌人的躁动残渣”
 		'''
@@ -1051,7 +1025,6 @@ BetsysHeart: {
 	Tooltip:
 		'''
 		免疫分泌物、枯萎武器和枯萎盔甲减益
-		按下“特殊冲刺”键后会进行短距离的无敌火球冲刺
 		冲刺命中敌人造成20秒双足翼龙诅咒减益并缩短冲刺冷却时间
 		“用文火，五分熟”
 		'''
@@ -1078,19 +1051,18 @@ BionomicCluster: {
 		    [i:FargowiltasSouls/OrdinaryCarrot]获得夜视效果，[i:FargowiltasSouls/SecurityWallet]并改善重铸结果
 		    [i:FargowiltasSouls/ConcentratedRainbowMatter][i:FargowiltasSouls/MysticSkull]需要时自动使用治疗和魔力药水，并增大自动拾取魔力星的范围
 		    [i:FargowiltasSouls/NymphsPerfume]你会以满生命值重生，[i:FargowiltasSouls/SandsofTime]没有Boss在场时加快重生速度
-		    [i:FargowiltasSouls/FrigidGemstone]按下“寒霜咒语”键放置冰雪魔杖之冰
 		    [i:FargowiltasSouls/OrdinaryCarrot]右键可改变视野范围
 		    [i:FargowiltasSouls/WyvernFeather]在太空和液体中恢复正常重力作用
 		“由上千普通敌人融合而成”
 		'''
-	/* VanityTooltip:
+	VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
-		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
-		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
-		''' */
+		免疫[i:FargowiltasSouls/SandsofTime]强风与仙人掌伤害、[i:FargowiltasSouls/MysticSkull]窒息、[i:FargowiltasSouls/FrigidGemstone]冷冻、[i:FargowiltasSouls/SqueakyToy]内疚减益
+		[i:FargowiltasSouls/OrdinaryCarrot]获得夜视效果，[i:FargowiltasSouls/SecurityWallet]并改善重铸结果
+		[i:FargowiltasSouls/ConcentratedRainbowMatter][i:FargowiltasSouls/MysticSkull]需要时自动使用治疗和魔力药水，并增大自动拾取魔力星的范围
+		[i:FargowiltasSouls/NymphsPerfume]你会以满生命值重生，[i:FargowiltasSouls/SandsofTime]没有Boss在场时加快重生速度
+		[i:FargowiltasSouls/OrdinaryCarrot]右键可改变视野范围
+		'''
 }
 
 BionomicClusterInactive: {
@@ -1140,12 +1112,10 @@ ChaliceoftheMoon: {
 		免疫[i:FargowiltasSouls/MagicalBulb]毒液、常春藤毒素、[i:FargowiltasSouls/LihzahrdTreasureBox]燃烧、导火索、下陷、蜥蜴诅咒和[i:FargowiltasSouls/CelestialRune]死亡标记减益
 		[i:FargowiltasSouls/MagicalBulb]按下“魔法净化”键治愈你受到的减益，并在一定时间内使附近敌人受到的持续伤害增加100%
 		[i:FargowiltasSouls/MagicalBulb]根据你受到的光照增加生命恢复速度
-		[i:FargowiltasSouls/LihzahrdTreasureBox]在空中双击“下”键快速下落
-		在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发
-		落地时生成一连串巨石
+		[i:FargowiltasSouls/LihzahrdTreasureBox]在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发，并生成一连串巨石
 		[i:FargowiltasSouls/CelestialRune]你根据武器类型发动额外攻击
 		[c/BC5252:将你所有附属仆从效果和空召唤栏位转换为+1%伤害（可切换）]
-		否则，[i:FargowiltasSouls/CelestialRune]受伤时爆发出远古幻象妖
+		否则，[i:FargowiltasSouls/MagicalBulb]召唤一株植物来为你而战，[i:FargowiltasSouls/CelestialRune]受伤时爆发出远古幻象妖
 		“时刻凝视”
 		'''
 }
@@ -1179,7 +1149,6 @@ Deerclawps: {
 		'''
 		免疫缓慢和冰冻
 		冲刺会留下一串冰刺，在空中时冰刺会指向最近的敌人
-		在空中双击“下”键快速下落
 		快速下落撞击地面时会爆发冰刺
 		“从被击败的敌人的脚上剪下来的指甲”
 		'''
@@ -1204,7 +1173,7 @@ DubiousCircuitry: {
 	Tooltip:
 		'''
 		免疫 [i:FargowiltasSouls/FusedLens] 诅咒狱火、灵液、 [i:FargowiltasSouls/GroundStick] 避雷针、 [i:FargowiltasSouls/ReinforcedPlating] 毫无防御、昏迷、纳米灌注减益和击退
-		[i:FargowiltasSouls/FusedLens] 按下“减益负载”键对你自己造成诅咒狱火和灵液，再次按下时取消
+		[i:FargowiltasSouls/FusedLens] 减益负载会对你自己造成诅咒狱火和灵液
 		[i:FargowiltasSouls/FusedLens] 当被诅咒狱火和灵液影响时，增加15%攻击速度，15%暴击率
 		[i:FargowiltasSouls/GroundStick] 带电攻击或激光击中你会使你超级充能，在未充能完毕时这些攻击的伤害减半
 		[i:FargowiltasSouls/GroundStick] 充能完毕后，增加移动速度和攻击速度，你的攻击会造成带电和避雷针减益
@@ -1226,16 +1195,9 @@ FrigidGemstone: {
 		放在背包和时装栏中也可生效
 		右键点击以禁用
 		免疫霜冻和冷冻减益
-		按下“寒霜咒语”键放置冰雪魔杖之冰
-		在困难模式中，你的冰块会造成霜冻减益
 		“古老的冰块留下的残肢”
 		'''
-	VanityTooltip:
-		'''
-		免疫霜冻和冷冻减益
-		按下“寒霜咒语”键放置冰雪魔杖之冰
-		在困难模式中，你的冰块会造成霜冻减益
-		'''
+	VanityTooltip: 免疫霜冻和冷冻减益
 }
 
 FrigidGemstoneInactive: {
@@ -1244,8 +1206,6 @@ FrigidGemstoneInactive: {
 		'''
 		当前未启用，右键点击以启用
 		免疫霜冻和冷冻减益
-		按下“寒霜咒语”键放置冰雪魔杖之冰
-		你的冰块会造成霜冻减益
 		“古老的冰块留下的残肢”
 		'''
 }
@@ -1254,11 +1214,11 @@ FusedLens: {
 	DisplayName: 融合晶状体
 	Tooltip:
 		'''
-		免疫诅咒狱火和灵液减益
+		免疫来自外部的诅咒狱火和灵液减益
+		减益负载会对你造成诅咒狱火和灵液
 		当被诅咒狱火影响时，增加15%攻击速度
 		当被灵液影响时，增加15%暴击率
 		因持续伤害失去生命值时，你的攻击造成诅咒狱火和灵液减益
-		按下“减益负载”键对你自己造成诅咒狱火和灵液，再次按下时取消
 		“融化过度，无法改善视力”
 		'''
 }
@@ -1330,13 +1290,13 @@ HeartoftheMasochist: {
 		免疫[i:FargowiltasSouls/IceQueensCrown]恐寒症、[i:FargowiltasSouls/GalacticGlobe]无效诅咒、翻转、灯火通明、不稳定、月之诅咒减益
 		免疫[i:FargowiltasSouls/PrecisionSeal]惩戒、[i:FargowiltasSouls/MutantAntibodies]潮湿、野性咬噬、突变啃啄、海洋重击和由水造成的减益
 		[i:FargowiltasSouls/PumpkingsCape][i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/IceQueensCrown]伤害和暴击率增加10%，伤害减免增加5%
-		[i:FargowiltasSouls/PumpkingsCape]右键点击来用披肩格挡，最多格挡200点伤害，完美格挡会根据被格挡的伤害治疗你
+		[i:FargowiltasSouls/PumpkingsCape]格挡会抵消最多200点伤害，完美格挡会根据被格挡的伤害治疗你
 		[i:FargowiltasSouls/PumpkingsCape]格挡时你周边会生成一个腐败区域
-		[i:FargowiltasSouls/BetsysHeart]按下“特殊冲刺”键后会进行短距离的无敌火球冲刺
+		[i:FargowiltasSouls/IceQueensCrown]擦弹可以积攒一颗能冻住几乎所有敌怪和射弹的炸弹
+		[i:FargowiltasSouls/BetsysHeart]火球冲刺会造成双足翼龙诅咒
 		[i:FargowiltasSouls/SaucerControlConsole]按下“弹药切换”键循环切换弹药（这个效果放在背包和时装栏中也可生效）
 		[i:FargowiltasSouls/MutantAntibodies]骑乘猪龙鱼坐骑时获得潮湿状态效果
 		[i:FargowiltasSouls/MutantAntibodies]浸在液体中重置飞行时间，增加最大飞行时间并增强移动力
-		[i:FargowiltasSouls/IceQueensCrown]擦弹可以积攒一颗能冻住几乎所有敌怪和射弹的炸弹
 		[i:FargowiltasSouls/PrecisionSeal]即使未显示碰撞箱也会缩小你对于敌对弹幕的碰撞判定
 		[i:FargowiltasSouls/GalacticGlobe]增加飞行时间按下“精确模式”键禁用冲刺和二段跳
 		[i:FargowiltasSouls/GalacticGlobe]获得大多数一般药水和增益站效果（这个效果放在背包和时装栏中也可生效）
@@ -1358,7 +1318,6 @@ IceQueensCrown: {
 		免疫恐寒症和冰冻减益
 		增加5%伤害减免
 		擦弹可以积攒一颗能冻住几乎所有敌怪和射弹的炸弹
-		按下“炸弹”键投掷炸弹
 		“击败的皇家敌人的象征”
 		'''
 }
@@ -1368,7 +1327,6 @@ LihzahrdTreasureBox: {
 	Tooltip:
 		'''
 		免疫燃烧、导火索、蜥蜴诅咒和下陷减益
-		在空中双击“下”键快速下落
 		在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发
 		“陷阱太多，打不开”
 		'''
@@ -1381,13 +1339,12 @@ LumpOfFlesh: {
 		免疫[i:FargowiltasSouls/DreadShell]击退、凝血失效、[i:FargowiltasSouls/PungentEyeball]黑视、遮蔽减益
 		免疫[i:FargowiltasSouls/SkullCharm]眩晕、[i:FargowiltasSouls/Deerclawps]缓慢、冰冻减益
 		[i:FargowiltasSouls/SkullCharm]增加15%伤害，获得一个眼球召唤物，眼球会在你攻击时蓄能，蓄能完毕后发射激光
+		[i:FargowiltasSouls/SkullCharm]降低敌人以你为目标的可能性
 		[i:FargowiltasSouls/PungentEyeball]增加稀有怪物的生成概率
 		[i:FargowiltasSouls/PungentEyeball]你的光标会导致附近的敌怪受到的伤害增加15%
-		[i:FargowiltasSouls/DreadShell]右键点击可进行格挡，最多格挡200点伤害，格挡成功会进行弹反
+		[i:FargowiltasSouls/DreadShell]格挡可抵消最多200点伤害，格挡成功会进行弹反
 		[i:FargowiltasSouls/DreadShell]格挡时和格挡后短时间内，防御力和伤害减免大幅下降
 		[i:FargowiltasSouls/Deerclawps]冲刺会留下一串血刺
-		[i:FargowiltasSouls/SkullCharm]降低敌人以你为目标的可能性
-		[i:FargowiltasSouls/Deerclawps]在空中双击“下”键快速下落
 		[i:FargowiltasSouls/Deerclawps]快速下落撞击地面时会爆发冰刺
 		“它在生长”
 		'''
@@ -1429,8 +1386,8 @@ MutantEye: {
 		将闪烁崇心的心攻击加强为爱之射线
 		增加闪烁崇心的擦弹伤害加成
 		提升幽灵憎恶的出现频率和攻击力
-		按下“炸弹”键时施放一圈幻影眼球，摧毁大多数敌对弹幕
-		突变炸弹有60秒的冷却时间
+		炸弹会施放一圈幻影眼球，摧毁大多数敌对弹幕
+		炸弹有60秒的冷却时间
 		“有点可疑”
 		'''
 }
@@ -1686,7 +1643,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/SlimyShield]增加50%最大下落速度
 		[i:FargowiltasSouls/SlimyShield]落地时召唤从天而降的凝胶球，掉落至光标位置
 		[i:FargowiltasSouls/AgitatingLens]冲刺或奔跑时会在身后留下一串鲜血镰刀
-		[i:FargowiltasSouls/AgitatingLens]按住“上”“下”的同时按下“减益负载”键进入狂暴状态
+		[i:FargowiltasSouls/AgitatingLens]减益负载键会使你狂暴，大幅提升进攻能力，大幅降低防御能力，且你无法停止攻击或移动
 		[i:FargowiltasSouls/QueenStinger]蜂蜜增益会增加5点护甲穿透，蜜蜂和较弱的黄蜂变得友好
 		[i:FargowiltasSouls/QueenStinger]按下“特殊冲刺”键后会进行短距离的快速蜜蜂冲刺
 		[i:FargowiltasSouls/NecromanticBrew]增加50%冲刺速度
@@ -1818,7 +1775,7 @@ DimensionSoul: {
 		增加8点生命再生
 		免疫击退和一些减益
 		增加敌人以你为目标的几率
-		使你获得超音速奔跑和无限飞行能力[c/BC5252：并禁用所有跳跃（可切换）]
+		使你获得超音速奔跑和无限飞行能力[c/BC5252:并禁用所有跳跃（可切换）]
 		大幅增加渔力且钓竿会额外扔出10根鱼线
 		增加50%物块和墙壁的放置速度
 		近乎无限的放置和挖掘距离，挖掘速度x3
@@ -1875,9 +1832,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/GuttedHeart]增加100%最大生命值，[i:FargowiltasSouls/MagicalBulb]大幅增加生命回复速度，[i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape]增加50%手持武器职业的伤害，[i:FargowiltasSouls/ReinforcedPlating]获得10%伤害减免
 		[i:FargowiltasSouls/PungentEyeball]大幅增加稀有敌人的生成概率， [i:FargowiltasSouls/SinisterIcon]刷新率翻倍，非Boss敌人掉落双倍战利品，[i:FargowiltasSouls/TimsConcoction]某些敌人会掉落药水
 		获得[i:FargowiltasSouls/SlimyShield]快速下落，[i:FargowiltasSouls/ReinforcedPlating]击退免疫，[i:FargowiltasSouls/PureHeart]免疫生物群落减益，[i:FargowiltasSouls/GalacticGlobe]获得大多数一般药水和增益站效果（在背包和时装栏中也可生效），免疫几乎所有永恒模式减益
-		[i:FargowiltasSouls/BetsysHeart]按下“特殊冲刺”键后会进行短距离无敌冲刺，[i:FargowiltasSouls/PrecisionSeal]按下“精确模式”键禁用冲刺和二段跳，[i:FargowiltasSouls/AgitatingLens] [i:FargowiltasSouls/FusedLens]按下“减益负载”键对自己造成减益并加强自己
-		[i:FargowiltasSouls/FrigidGemstone]按下“寒霜咒语”键施放冰霜魔杖，[i:FargowiltasSouls/IceQueensCrown]擦弹积攒能量后按下“炸弹”键可冻结所有物体，右键点击[i:FargowiltasSouls/OrdinaryCarrot]缩放视野并[i:FargowiltasSouls/DreadShell][i:FargowiltasSouls/PumpkingsCape]进行格挡，最多格挡200点伤害
-		[i:FargowiltasSouls/Deerclawps][i:FargowiltasSouls/LihzahrdTreasureBox]双击“下”键快速坠落并产生爆炸，落地时产生冰刺
+		[i:FargowiltasSouls/PrecisionSeal]按下“精确模式”键禁用冲刺和二段跳
 		[i:FargowiltasSouls/PrecisionSeal]减少伤害判定框大小，[i:FargowiltasSouls/NecromanticBrew]增加冲刺距离，[i:FargowiltasSouls/PungentEyeball]使光标附近敌人受到最多1.15倍伤害
 		改善[i:FargowiltasSouls/SecurityWallet]重铸结果，获得[i:FargowiltasSouls/OrdinaryCarrot]夜视，提高[i:FargowiltasSouls/NymphsPerfume]重生生命值，缩短[i:FargowiltasSouls/SandsofTime]重生时间, 根据需要使用[i:FargowiltasSouls/ConcentratedRainbowMatter]治疗药水和[i:FargowiltasSouls/MysticSkull]魔力药水
 		[i:FargowiltasSouls/SqueakyToy]受击有5%概率发出吱吱声并只受到1点伤害，[i:FargowiltasSouls/NecromanticBrew]冲刺时会反弹伤害
@@ -1926,7 +1881,7 @@ TerrariaSoul: {
 		'''
 		[i:FargowiltasSouls/TimberForce] 获得一个可以发射各种弹幕、强化钩爪和攻击时偶尔产生魔力星星的光环
 		[i:FargowiltasSouls/TimberForce] 拾取物品时获得额外暴击，图鉴解锁加快和根据图鉴解锁进度商店提供折扣
-		[i:FargowiltasSouls/TerraForce] 暴击会发射强大的闪电，右键单击可格挡最多200点伤害，减少受到的减益伤害，强化剑类武器
+		[i:FargowiltasSouls/TerraForce] 暴击和格挡会发射强大的闪电，减少受到的减益伤害，近战武器变大
 		[i:FargowiltasSouls/TerraForce] 攻击时增加10%暴击率，增加物品吸取范围，制作有几率不消耗制作材料
 		[i:FargowiltasSouls/EarthForce] 不攻击时获得防御增益，攻击时获得攻击增益
 		[i:FargowiltasSouls/EarthForce] 敌人受到的减益伤害增加300%，不攻击时受到攻击会爆炸
@@ -1938,10 +1893,10 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/SpiritForce] 生命值降低至0时以300生命值复活并净化减益
 		[i:FargowiltasSouls/ShadowForce] 每4秒获得一次无敌的暗影冲刺，根据移速增加射弹各种属性
 		[i:FargowiltasSouls/ShadowForce] 发射一把额外的武器作为辅助攻击，召唤物会进行镰刀辅助攻击，屠戮敌人可能会掉落骨堆
-		[i:FargowiltasSouls/WillForce] 召唤角斗士灵魂增加你的治疗和坐骑属性，连续攻击会获得额外伤害，按下“金身”键将自己包裹起来
+		[i:FargowiltasSouls/WillForce] 召唤角斗士灵魂增加你的治疗和坐骑属性，连续攻击会获得额外伤害
 		[i:FargowiltasSouls/WillForce] 拾取时钱币自动将钱币储存到存钱罐（在背包和时装栏中也可生效），敌人可能会掉落额外的战利品
 		[i:FargowiltasSouls/CosmoForce] 攻击偶尔会向敌人发射月亮并爆炸产生月亮强化焰
-		[i:FargowiltasSouls/CosmoForce] 增加你的移动速度和加速度并降低你的动量，按下冻结键可冻结6秒时间，冷却时间为60秒		
+		[i:FargowiltasSouls/CosmoForce] 增加你的移动速度和加速度并降低你的动量，星尘静滞冷却时间为60秒		
 		“泰拉之主，天地共证”
 		'''
 }
@@ -2024,7 +1979,7 @@ EridanusBattleplate: {
 	DisplayName: 波江战甲
 	Tooltip:
 		'''
-		增加10%伤害
+		增加5%伤害
 		增加10%暴击率
 		所受伤害减少10%
 		增加生命恢复速度
@@ -2035,7 +1990,7 @@ EridanusHat: {
 	DisplayName: 波江帽
 	Tooltip:
 		'''
-		增加5%伤害
+		增加10%伤害
 		增加5%暴击率
 		增加4个召唤栏位
 		增加1个哨兵栏位
@@ -2737,8 +2692,12 @@ FleshHand: {
 }
 
 LeashOfCthulhu: {
-	DisplayName: 克苏鲁连枷
-	Tooltip: “被击败的敌人的残尸……”
+	DisplayName: 眼睑黏连
+	Tooltip:
+		'''
+		挥舞连枷时在身边聚集眼球侍从，释放连枷会使其飞向光标
+		“被击败的敌人的残尸……”
+		'''
 }
 
 RefractorBlaster: {
@@ -2782,7 +2741,9 @@ TwinRangs: {
 	DisplayName: 双子
 	Tooltip:
 		'''
-		根据鼠标左右键点击射出不同的双子回旋镖
+		左键扔出快速撕裂敌人的魔焰镖
+		右键扔出朝敌人发射激光的激光镖
+		最多存在3个激光镖
 		“被击败的敌人的压缩形态……”
 		'''
 }
@@ -2972,7 +2933,8 @@ GeminiGlaives: {
 	DisplayName: 双生旋刃
 	Tooltip:
 		'''
-		根据鼠标左右键点击射出不同的飞轮刃
+		左键扔出3个快速撕裂敌人的魔焰旋刃
+		右键扔出3个快速朝光标发射激光的激光旋刃
 		左右键交替攻击会增强攻击
 		“被击败的敌人的压缩形态……”
 		'''
@@ -3007,8 +2969,14 @@ HellZone: {
 }
 
 MechanicalLeashOfCthulhu: {
-	DisplayName: 机械克苏鲁连枷
-	Tooltip: “巅峰再战的奖励……”
+	DisplayName: 克苏鲁连枷
+	Tooltip:
+		'''
+		挥舞时生成追踪眼球
+		连枷在每第三次命中时会使眼球挣脱束缚，冲向敌人
+		存在已释放的眼球时不会继续计数
+		“巅峰再战的奖励……”
+		'''
 }
 
 NukeFishron: {
@@ -3059,18 +3027,17 @@ ForgorGift: {
 		左键重置原版和魂石Mod中的事件与Boss进度，包括困难模式（击败血肉墙）
 		右键允许从戴薇安处再拿一次新手礼包，重置突变体的信用卡/优惠卡、你的永恒模式饰品栏、狂犬病疫苗、鹿筋冲刺等等
 		在物品栏内对物品右键来重置突变体的一阶段跳过机制
-		我忘啦！
 		'''
-	Message: 已失忆
+	Message: 成功重置
 }
 
 Masochist: {
 	DisplayName: 突变体的礼物
 	Tooltip:
 		'''
-		世界必须处于专家模式或更高难度
-		开关永恒模式
-		如果世界处于大师模式并且已在任何世界中击败永恒模式最终Boss，则启用受虐模式
+		[c/00FFFF:开启永恒模式：一个基于专家模式、为泰拉老玩家准备的模式。预期的Fargo体验]
+		世界必须处于专家模式
+		如果世界处于大师模式或更高难度，则启用受虐模式
 		效果包括：
 			- 重制的Boss和敌人，使其更加强大
 			- 启用大师模式掉落
@@ -3079,6 +3046,7 @@ Masochist: {
 			- 增强玩家基础属性并将玩家伤害减免限制在75%以下
 			- 不攻击时减益效果会更快消失
 			- 调整某些物品的功能和强度
+			- 在受虐多人模式中，每个玩家在每场Boss战中只能重生一次
 		不能在任意Boss存活时使用
 		[i:1612][c/00ff00:推荐与Fargo突变模组的减益显示一起使用（在模组配置里打开）]
 		[c/ff0000:不推荐与其他内容型模组及其他模组难度同时开启！！！]
@@ -3510,7 +3478,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	StarlightTungsten: 装备钨魔石时只造成40%伤害
+	StarlightTungsten: 装备钨魔石时只造成75%伤害
 	DefensePrefixMaxLife: +{0} 最大生命值
 	ViolentPrefix: +{0}% 攻击速度
 	EternityItem: 永恒
@@ -3749,16 +3717,16 @@ FallenStarDayItem: {
 }
 
 DarkTome: {
-	// DisplayName: Dark Tome
-	/* Tooltip:
+	DisplayName: 黑暗巨著
+	Tooltip:
 		'''
-		Hold button to summon up to 3 spectral books that chase your cursor
-		Releasing button causes the books to release a volley of pages
+		按住左键以召唤至多3本跟随你的光标的幻影之书
+		松开鼠标会使它们发射书页Releasing button causes the books to release a volley of pages
 		'The arcane grimoire of a defeated foe...'
-		''' */
+		'''
 }
 
 TouhouStaff: {
-	// DisplayName: Children of Nature's Eulogy
-	// Tooltip: Summons up to five yokais and fairies to fight for you
+	DisplayName: 自然少女之悼词
+	Tooltip: 召唤至多5个妖怪或妖精为你而战
 }

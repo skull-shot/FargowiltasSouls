@@ -34,7 +34,7 @@ SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降�
 ShadowDodge: 永恒模式：闪避会降低你的攻击速度
 IceBarrier: 永恒模式：你造成的伤害减少10%
 SpearRework: 重做长矛挥舞动画
-PalladiumPikeRework: 击中敌人后大幅增加生命恢复速度
+PalladiumPikeRework: 增加大小，击中敌人后大幅增加生命恢复速度并恢复1点生命值（0.5秒冷却）
 CobaltNaginataRework: 击中敌人会造成小范围爆炸
 MythrilHalberdRework: 不攻击持续2秒后下一击造成八倍伤害，受攻击速度加成
 OrichalcumHalberdRework: 对受减益伤害的敌人造成最多两倍伤害，随敌人的减益伤害增加而增加
