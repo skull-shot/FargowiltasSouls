@@ -43,6 +43,19 @@ Ice Queen's Crown: Added graze cap
 Computation Orb: Fixed having incorrect mana sick damage reduction; Mana drain on use is now half of weapon usetime instead of flat 10
 Dragon's Breath: Damage 55 -> 40
 Betsy Dash onhit reduced cooldown 2.5s -> 3.25s
+Omniscience Staff iframes 10 -> 20
+Blastbiter use time 46 -> 35
+Slime Slinging Slasher:
+-slime ball projectiles now use 10 static iframes instead of 9 global iframes
+-"slimesplosion" no longer deals damage, fixes crit scaling bug
+-fixed slime ball projectiles not scaling with damage
+compensations:
+-slime ball projectiles now deal 50% of base damage rather than 100%
+-damage buffed 745->845
+Lightning Rod (weapon):
+-iframes fixed to 10 static for rod and 20 static for lightning, so both the rod and staff can hit simultaneously 
+-fixed lightning damage decreasing alongside the pierce deterioration of the throw
+-however, lightning now deals 50% of base damage
 
 Banished Baron:
 -Tweaked homing rocket behavior
@@ -70,11 +83,20 @@ Pets are no longer removed by Purified debuff
 Decreased Werewolf non-full moon spawn rate
 
 Magic Dagger damage and speed 0.65x -> 0.5x
-Bee Gun damage 1x -> 1.3x
-Flying Dragon 0.75x -> 0.9x
-Horseman's Blade 1x -> 1.12x
+Bee Gun: 1.3x
+Flying Dragon: 0.75x -> 0.9x
+Horseman's Blade: 1.12x
+Stynger: 1.5x
+Tempest Staff: 1.2x
+Molten Fury: 0.75x
+Laser Machinegun: 0.75x
+Charged Blaster Cannon: 0.8x
 Tungsten + Starlight 0.4x damage -> 0.75x
 Palladium Sword and Pike: Increased base size, heals 1 HP on hit, once every 0.5s
+Golem Fist: Deals up to triple damage to enemies the further out the fist is extended
+Jack o Lantern: Increased projectile speed by 50%
+Celebration: Speed 1.3x
+Snowman Cannon: Speed 0.7x
 
 OTHER CHANGES:
 Soul Toggler wrench now only flashes if you have an equipped togglable effect
@@ -87,8 +109,9 @@ Mutant Twinrangs now visually spin slower
 Deviantt's deathray now visually oscillates faster
 Tweaked Big Brain Buster balance
 Tiki Enchant tag sound is now quieter
-Fixes for Big Brain Buster, Omniscience Staff, Devious Aestheticus, Prime Staff, 
-Mounted Acorn Gun, Snowball Effect, Trere Sword, Dragon's Breath, Dragon's Demise iframes
+Lump of Flesh now has a similar deathray to Eternity Wall of Flesh
+Fixes for Blender, Big Brain Buster, Omniscience Staff, Devious Aestheticus, Prime Staff, 
+Mounted Acorn Gun, Snowball Effect, Tree Sword, Dragon's Breath, Dragon's Demise etc iframes; rebalanced to compensate where necessary
 Aestheticus devrockets no longer split into more of itself sometimes on projectile death
 Fixed Spider Enchant reducing damage of non-summoner crits
 Fixed bug where Shadewood damage was incorrectly increased by Nature Force instead of Timber Force

@@ -1234,7 +1234,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (SourceItemType == ItemID.SniperRifle)
             {
-                if (projectile.owner.IsWithinBounds(Main.maxProjectiles))
+                if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                 {
                     Player player = Main.player[projectile.owner];
                     if (player.Alive())
@@ -1248,7 +1248,7 @@ namespace FargowiltasSouls.Content.Projectiles
             }
             if (SourceItemType == ItemID.GolemFist)
             {
-                if (projectile.owner.IsWithinBounds(Main.maxProjectiles))
+                if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                 {
                     Player player = Main.player[projectile.owner];
                     if (player.Alive())
