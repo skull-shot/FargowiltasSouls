@@ -105,7 +105,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (player.HeldItem != null && player.HeldItem.IsWeapon())
             {
                 if (modPlayer.AdamantiteItem != player.HeldItem)
+                {
                     modPlayer.HeldItemAdamantiteValid = false;
+                    modPlayer.AdamantiteSpread = 0;
+                }
                 modPlayer.AdamantiteItem = player.HeldItem;
             }
 
