@@ -1445,6 +1445,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
+                return;
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
@@ -1461,7 +1463,7 @@ namespace FargowiltasSouls.Content.Projectiles
             }
                 
 
-            if (player.HasEffect<NinjaDamageEffect>())
+            if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
                 float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.2f;
                 float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
