@@ -65,7 +65,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Color lightColor2 = Color.Lerp(outerColor, Color.White, 0.5f);
 
             Vector2 auraPos = Projectile.Center;
-            float radius = threshold;
+            float leeway = Projectile.width / 2 * Projectile.scale;
+            leeway *= 0.75f;
+            float radius = threshold - leeway;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargosTextureRegistry.WavyNoise;
