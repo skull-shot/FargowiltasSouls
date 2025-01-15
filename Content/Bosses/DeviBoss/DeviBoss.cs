@@ -1362,7 +1362,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 {
                     NPC.netUpdate = true;
 
-                    SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_DarkMageSummonSkeleton, Main.LocalPlayer.Center);
 
                     BabyGuardianWall();
                 }
@@ -1387,7 +1387,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     {
                         if (Phase > 1 && WorldSavingSystem.MasochistModeReal) //another wave in maso
                         {
-                            SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center); //eoc roar
+                            SoundEngine.PlaySound(SoundID.DD2_DarkMageSummonSkeleton, NPC.Center); //eoc roar
                             BabyGuardianWall();
                         }
 
@@ -1396,7 +1396,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                     if (Phase > 1 && Timer == 270) //surprise!
                     {
-                        SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center); //eoc roar
+                        SoundEngine.PlaySound(SoundID.DD2_DarkMageSummonSkeleton, NPC.Center); //eoc roar
 
                         BabyGuardianWall();
                     }
@@ -1466,7 +1466,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     if (++SubTimer > 2)
                     {
                         SubTimer = 0;
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1, 3)) with { Volume = 0.7f}, NPC.Center);
+                        SoundEngine.PlaySound(SoundID.Item21, NPC.Center);
 
                         if (FargoSoulsUtil.HostCheck)
                         {
@@ -1823,7 +1823,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (FirstFrameCheck == 0)
                 {
                     StrongAttackTeleport(player.Center + new Vector2(300 * Math.Sign(NPC.Center.X - player.Center.X), -100));
-
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), NPC.Center);
                     FirstFrameCheck = 1;
 
                     if (WorldSavingSystem.EternityMode && FargoSoulsUtil.HostCheck) //spawn ritual for strong attacks
@@ -1850,6 +1850,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                         const int loveOffset = 90;
                         if (FargoSoulsUtil.HostCheck)
                         {
+                            
                             int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + -Vector2.UnitY.RotatedBy(angle) * loveOffset, Vector2.Zero, ModContent.ProjectileType<DeviSparklingLove>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 2), 0f, Main.myPlayer, NPC.whoAmI, loveOffset);
                                 
                         }
@@ -1908,7 +1909,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     //targetPos.Y -= 200;
                     NPC.velocity = (targetPos - NPC.Center) / 30;
                     NPC.netUpdate = true;
-                    SoundEngine.PlaySound(FargosSoundRegistry.DeviSwing, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, NPC.Center);
                     NPC.direction = NPC.spriteDirection = Math.Sign(SubTimer);
 
                     if (!WorldSavingSystem.MasochistModeReal && Math.Sign(targetPos.X - NPC.Center.X) != Math.Sign(SubTimer))
@@ -1935,8 +1936,9 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                             {
                                 foreach (Projectile proj in Main.projectile.Where(p => (p.TypeAlive<DeviAxe>() || p.TypeAlive<DeviSparklingLove>()) && p.ai[0] == NPC.whoAmI))
                                 {
+                                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), NPC.Center);
                                     proj.Kill();
-                                    SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, proj.Center);
+                                    
                                 }
                                 NPC.velocity = Vector2.UnitX * NPC.HorizontalDirectionTo(player.Center) * 12 + Vector2.UnitY * -12;
                                 
@@ -1969,7 +1971,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 {
                     foreach (Projectile proj in Main.projectile.Where(p => (p.TypeAlive<DeviAxe>() || p.TypeAlive<DeviSparklingLove>()) && p.ai[0] == NPC.whoAmI))
                     {
-                        SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, proj.Center);
                         proj.timeLeft = 2;
                     }
                 }
@@ -2020,7 +2021,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                             RefreshAttackQueue();
                         }
 
-                        //State = (int)DevianttAttackTypes.MedusaRay;
+                        State = (int)DevianttAttackTypes.SparklingLove;
                     }
                 }
             }
