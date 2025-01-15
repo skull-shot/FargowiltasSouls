@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.Items
                     var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + " " + keybindMenuText);
                     var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
 
-                    Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.8f);
+                    Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.7f);
                     Color color2 = Color.LightBlue;
                     namesTooltip.OverrideColor = color1;
                     bindTooltip.OverrideColor = color1;

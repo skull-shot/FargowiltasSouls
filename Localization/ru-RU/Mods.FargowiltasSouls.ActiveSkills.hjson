@@ -2,7 +2,7 @@ GrantsSkill: Даёт активное умение:
 GrantsSkillsPlural: Даёт активные умения:
 KeybindMenu: Нажмите {0}, чтобы привязать умения
 Unbound: Не привязано
-// BoundTo: Bound to {0}
+// BoundTo: Bound to {0}!
 
 SpecialDashEffect: {
 	DisplayName: Пчелиный рывок
