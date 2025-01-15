@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             }
             if (!attacking || farg.EarthTimer == 0)
                 farg.EarthAdamantiteCharge = 0;
-            CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
+            CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Forces/EarthForce").Value, MythrilEnchant.NameColor, 
                 () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
 
             float lerper = GetEarthForceLerpValue(player);
