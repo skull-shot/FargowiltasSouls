@@ -1,7 +1,8 @@
 GrantsSkill: Grants Active Skill:
 GrantsSkillsPlural: Grants Active Skills:
 KeybindMenu: Press {0} to bind skills
-Unbound: Unbound
+Unbound: Unbound!
+BoundTo: Bound to {0}!
 
 SpecialDashEffect: {
 	DisplayName: Bee Dash
