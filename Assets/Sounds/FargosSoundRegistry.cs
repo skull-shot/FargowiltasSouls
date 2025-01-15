@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Terraria.Audio;
 
@@ -76,6 +77,16 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle DeviHeartExplosion = new(SoundsPath + "Siblings/Deviantt/DeviHeartExplosion");
         public static readonly SoundStyle DeviTeleport = new(SoundsPath + "Siblings/Deviantt/DeviTeleport");
         public static readonly SoundStyle DeviDeathray = new(SoundsPath + "Siblings/Deviantt/DeviDeathray");
+        public static readonly SoundStyle DeviAxeImpact = new(SoundsPath + "Siblings/Deviantt/DeviAxeImpact");
+        public static readonly SoundStyle DeviMimicSmall = new(SoundsPath + "Siblings/Deviantt/DeviMimicSmall");
+        public static readonly SoundStyle DeviMimicBig = new(SoundsPath + "Siblings/Deviantt/DeviMimicBig");
+        public static readonly SoundStyle DeviPaladinTeleport = new(SoundsPath + "Siblings/Deviantt/DeviPaladinTeleport");
+        public static readonly SoundStyle DeviPaladinThrow = new(SoundsPath + "Siblings/Deviantt/DeviPaladinThrow");
+        public static readonly SoundStyle DeviWyvernOrb = new(SoundsPath + "Siblings/Deviantt/DeviWyvernOrb");
+        public static readonly SoundStyle DeviWyvernOrbImpact = new(SoundsPath + "Siblings/Deviantt/DeviWyvernOrbImpact");
+        public static readonly SoundStyle DeviIceOrb = new(SoundsPath + "Siblings/Deviantt/DeviIceOrb");
+        public static readonly SoundStyle DeviHeartCast = new(SoundsPath + "Siblings/Deviantt/DeviHeartCast");
+
 
         // Mutant
         public static readonly SoundStyle MutantUnpredictive = new(SoundsPath + "Siblings/Mutant/MutantUnpredictive");
@@ -98,7 +109,6 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle WoFSuck = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFSuck");
         public static readonly SoundStyle WoFScreech = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFScreech");
         public static readonly SoundStyle WoFGrowl = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFGrowl");
-        public static readonly SoundStyle WoFDeathrayTelegraph = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFDeathrayTelegraph" +
-            "");
+        public static readonly SoundStyle WoFDeathrayTelegraph = new(SoundsPath + "VanillaEternity/WallofFlesh/WoFDeathrayTelegraph");
     }
 }

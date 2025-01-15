@@ -302,7 +302,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     NPC.netUpdate = true;
                 }
                 TeleportDust();
-                SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.7f}, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 0.5f}, NPC.Center);
             };
 
             // Set this to false, it will be set to true below if needed.
@@ -557,7 +557,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                         NPC.netUpdate = true;
                     }
                     TeleportDust();
-                    SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviPaladinTeleport, NPC.Center);
 
                     if (SubTimer == TeleportCount)
                     {
@@ -583,7 +583,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                     FargoSoulsUtil.DustRing(NPC.Center, 36, 246, 9f, default, 3f, true);
 
-                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviPaladinThrow, NPC.Center);
 
                     if (FargoSoulsUtil.HostCheck) //hammers
                     {
@@ -646,7 +646,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                     else
                     {
-                        SoundEngine.PlaySound(SoundID.Item43, NPC.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.DeviHeartCast, NPC.Center);
 
                         if (FargoSoulsUtil.HostCheck)
                         {
@@ -737,7 +737,15 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     {
                         SubTimer = 0;
 
-                        SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                        if (Phase > 1)
+                        {
+                            SoundEngine.PlaySound(FargosSoundRegistry.DeviMimicBig, NPC.Center);
+                        }
+                        else
+                        {
+                            SoundEngine.PlaySound(FargosSoundRegistry.DeviMimicSmall, NPC.Center);
+                        }
+                        
 
                         int delay = Phase > 1 ? 45 : 60;
                         Vector2 target = player.Center;
@@ -763,8 +771,15 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                 }
                 else if (Timer == 180) //big wave of mimics, aimed ahead of you
-                {
-                    SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+                {   
+                    if (Phase > 1)
+                    {
+                        SoundEngine.PlaySound(FargosSoundRegistry.DeviMimicBig, NPC.Center);
+                    }
+                    else
+                    {
+                        SoundEngine.PlaySound(FargosSoundRegistry.DeviMimicSmall, NPC.Center);
+                    }
 
                     int modifier = 150;
                     if (player.velocity.X != 0)
@@ -1451,7 +1466,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     if (++SubTimer > 2)
                     {
                         SubTimer = 0;
-                        SoundEngine.PlaySound(SoundID.Item44, NPC.Center);
+                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1, 3)) with { Volume = 0.7f}, NPC.Center);
 
                         if (FargoSoulsUtil.HostCheck)
                         {
@@ -1921,6 +1936,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                                 foreach (Projectile proj in Main.projectile.Where(p => (p.TypeAlive<DeviAxe>() || p.TypeAlive<DeviSparklingLove>()) && p.ai[0] == NPC.whoAmI))
                                 {
                                     proj.Kill();
+                                    SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, proj.Center);
                                 }
                                 NPC.velocity = Vector2.UnitX * NPC.HorizontalDirectionTo(player.Center) * 12 + Vector2.UnitY * -12;
                                 
@@ -1953,6 +1969,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 {
                     foreach (Projectile proj in Main.projectile.Where(p => (p.TypeAlive<DeviAxe>() || p.TypeAlive<DeviSparklingLove>()) && p.ai[0] == NPC.whoAmI))
                     {
+                        SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, proj.Center);
                         proj.timeLeft = 2;
                     }
                 }

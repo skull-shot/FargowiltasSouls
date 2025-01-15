@@ -104,8 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
             if (Projectile.timeLeft == 2)
             {
-                SoundEngine.PlaySound(SoundID.NPCDeath6, Projectile.Center);
-                SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
+                //SoundEngine.PlaySound(SoundID.NPCDeath6, Projectile.Center);
 
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -14);
