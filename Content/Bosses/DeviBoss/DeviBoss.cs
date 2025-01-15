@@ -1823,7 +1823,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (FirstFrameCheck == 0)
                 {
                     StrongAttackTeleport(player.Center + new Vector2(300 * Math.Sign(NPC.Center.X - player.Center.X), -100));
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), NPC.Center);
+                  
                     FirstFrameCheck = 1;
 
                     if (WorldSavingSystem.EternityMode && FargoSoulsUtil.HostCheck) //spawn ritual for strong attacks
@@ -1936,7 +1936,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                             {
                                 foreach (Projectile proj in Main.projectile.Where(p => (p.TypeAlive<DeviAxe>() || p.TypeAlive<DeviSparklingLove>()) && p.ai[0] == NPC.whoAmI))
                                 {
-                                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), NPC.Center);
+                                    //SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), NPC.Center);
                                     proj.Kill();
                                     
                                 }
@@ -2021,7 +2021,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                             RefreshAttackQueue();
                         }
 
-                        State = (int)DevianttAttackTypes.SparklingLove;
+                        //State = (int)DevianttAttackTypes.SparklingLove;
                     }
                 }
             }

@@ -89,8 +89,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                         if (FargoSoulsUtil.HostCheck)
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -16 + scaleCounter);
 
-     
                         
+
                     }
                 }
 
@@ -172,6 +172,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnSpawn(IEntitySource source)
         {
+            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), Projectile.Center);
             base.OnSpawn(source);
         }
 
