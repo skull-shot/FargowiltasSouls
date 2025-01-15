@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,6 +34,12 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
             Projectile.penetrate = -1;
             Projectile.timeLeft = 270;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.DeviWyvernOrb, Projectile.position);
+            base.OnSpawn(source);
         }
 
         public override void OnKill(int timeLeft)
