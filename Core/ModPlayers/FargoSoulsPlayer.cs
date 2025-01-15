@@ -682,6 +682,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (Player.HasEffect<NinjaEffect>()
+                && item.IsWeapon()
                 && item.shoot > ProjectileID.None
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())

@@ -48,7 +48,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         num4 -= 2.0 * Math.PI;
                     if (num4 < -1.0 * Math.PI)
                         num4 += 2.0 * Math.PI;
-                    Projectile.velocity = Projectile.velocity.RotatedBy(num4 * 0.1f);
+                    if (Projectile.velocity != Vector2.Zero)
+                        Projectile.velocity = Projectile.velocity.RotatedBy(num4 * 0.1f * Projectile.velocity.Length() / 7f);
                 }
                 else
                 {
