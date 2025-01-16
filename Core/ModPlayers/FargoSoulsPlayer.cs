@@ -683,6 +683,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (Player.HasEffect<NinjaEffect>()
                 && item.IsWeapon()
+                && !ProjectileID.Sets.IsAWhip[item.shoot]
                 && item.shoot > ProjectileID.None
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())
