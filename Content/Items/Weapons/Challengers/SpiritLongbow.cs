@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
             if (player.channel && player.ownedProjectileCounts[Item.shoot] < 1 && delay == 0)
             {
-                Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, Item.damage, Item.knockBack, player.whoAmI);
+                Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, (int)(player.ActualClassDamage(DamageClass.Ranged) * Item.damage), Item.knockBack, player.whoAmI);
             }
         }
 
