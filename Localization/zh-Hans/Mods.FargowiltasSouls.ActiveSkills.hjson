@@ -2,7 +2,7 @@ GrantsSkill: 获得主动技能：
 GrantsSkillsPlural: 获得主动技能：
 KeybindMenu: 按下{0}键来绑定技能
 Unbound: 未绑定
-// BoundTo: Bound to {0}!
+BoundTo: 已绑定至{0}！
 
 SpecialDashEffect: {
 	DisplayName: 蜜蜂冲刺
