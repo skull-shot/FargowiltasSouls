@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         {
             float rot = (Main.MouseWorld - player.Center).ToRotation();
             Vector2 vel = new Vector2(5f, 0f).RotatedBy(rot);
-            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, Item.damage, knockback, player.whoAmI, 0, 7);
+            Projectile.NewProjectile(source, player.Center, vel, Item.shoot, damage, knockback, player.whoAmI, 0, 7);
             return false;
         }
     }

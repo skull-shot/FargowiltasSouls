@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             {
                 for (float i = -10f; i <= 10f; i += 10f)
                 {
-                    Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<EgyptianFlailProjectile>(), 16, 2, player.whoAmI, i, modPlayer.EgyptianFlailCD);
+                    Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<EgyptianFlailProjectile>(), damage, knockback, player.whoAmI, i, modPlayer.EgyptianFlailCD);
                 }
             }
             return false;
