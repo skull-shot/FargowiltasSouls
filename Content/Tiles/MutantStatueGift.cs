@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -15,6 +16,7 @@ namespace FargowiltasSouls.Content.Tiles
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
+            TileID.Sets.HasOutlines[Type] = true;
             Main.tileNoAttach[Type] = true;
             TileID.Sets.PreventsTileRemovalIfOnTopOfIt[Type] = true;
 
@@ -35,6 +37,10 @@ namespace FargowiltasSouls.Content.Tiles
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = ModContent.ItemType<Items.Masochist>();
+        }
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
+        {
+            return true;
         }
         public override bool RightClick(int i, int j)
         {

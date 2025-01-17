@@ -2,6 +2,7 @@ using FargowiltasSouls.Content.Items.Placables;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -15,6 +16,7 @@ namespace FargowiltasSouls.Content.Tiles
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileLighted[Type] = true;
+            TileID.Sets.HasOutlines[Type] = true;
             TileID.Sets.IsValidSpawnPoint[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;
             TileID.Sets.InteractibleByNPCs[Type] = true;
@@ -30,6 +32,11 @@ namespace FargowiltasSouls.Content.Tiles
             AddMapEntry(Color.Pink, name);
 
             AnimationFrameHeight = 54;
+        }
+
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
+        {
+            return true;
         }
 
         public override bool RightClick(int i, int j)

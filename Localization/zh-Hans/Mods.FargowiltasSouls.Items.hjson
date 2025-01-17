@@ -3241,11 +3241,6 @@ LifeRevitalizer: {
 		'''
 }
 
-AbomMusicBox: {
-	DisplayName: 音乐盒（憎恶）
-	Tooltip: Yuri O 'Laevateinn'
-}
-
 ChampionMusicBox: {
 	DisplayName: 音乐盒（英灵）
 	Tooltip: 削除 - 《Ordeal》
@@ -3733,4 +3728,44 @@ DarkTome: {
 TouhouStaff: {
 	DisplayName: 自然少女之悼词
 	Tooltip: 召唤至多5个妖怪或妖精为你而战
+}
+
+BaronP1MusicBox: {
+	// DisplayName: Music Box (Banished Baron - Phase 1)
+	// Tooltip: zentaque & Azathoths 'Will of the Waves'
+}
+
+BaronP2MusicBox: {
+	// DisplayName: Music Box (Banished Baron - Phase 2)
+	// Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+TrojanMusicBox: {
+	// DisplayName: Music Box (Trojan Squirrel)
+	// Tooltip: ProduceVGM 'Nuts And Bolts'
+}
+
+AbominationnP1MusicBox: {
+	// DisplayName: Music Box (Abominationn - Phase 1)
+	// Tooltip: Yuri O 'Laevateinn'
+}
+
+AbominationnP2MusicBox: {
+	// DisplayName: Music Box (Abominationn - Phase 2)
+	// Tooltip: Yuri O 'Laevateinn'
+}
+
+CoffinMusicBox: {
+	// DisplayName: Music Box (Cursed Coffin)
+	// Tooltip: zentaque & Azathoth 'Shifting Sands'
+}
+
+EridanusMusicBox: {
+	// DisplayName: Music Box (Eridanus)
+	// Tooltip: Yuri O 'Platinum Star'
+}
+
+LifelightMusicBox: {
+	// DisplayName: Music Box (Lifelight)
+	// Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }

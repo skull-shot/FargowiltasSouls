@@ -3217,11 +3217,6 @@ LifeRevitalizer: {
 		'''
 }
 
-AbomMusicBox: {
-	DisplayName: Music Box (Abominationn)
-	Tooltip: Yuri O 'Laevateinn'
-}
-
 ChampionMusicBox: {
 	DisplayName: Music Box (Champions)
 	Tooltip: Sakuzyo 'Ordeal'
@@ -3708,4 +3703,44 @@ DarkTome: {
 TouhouStaff: {
 	DisplayName: Children of Nature's Eulogy
 	Tooltip: Summons up to five yokais and fairies to fight for you
+}
+
+BaronP1MusicBox: {
+	DisplayName: Music Box (Banished Baron - Phase 1)
+	Tooltip: zentaque & Azathoths 'Will of the Waves'
+}
+
+BaronP2MusicBox: {
+	DisplayName: Music Box (Banished Baron - Phase 2)
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+TrojanMusicBox: {
+	DisplayName: Music Box (Trojan Squirrel)
+	Tooltip: ProduceVGM 'Nuts And Bolts'
+}
+
+AbominationnP1MusicBox: {
+	DisplayName: Music Box (Abominationn - Phase 1)
+	Tooltip: Yuri O 'Laevateinn'
+}
+
+AbominationnP2MusicBox: {
+	DisplayName: Music Box (Abominationn - Phase 2)
+	Tooltip: Yuri O 'Laevateinn'
+}
+
+CoffinMusicBox: {
+	DisplayName: Music Box (Cursed Coffin)
+	Tooltip: zentaque & Azathoth 'Shifting Sands'
+}
+
+EridanusMusicBox: {
+	DisplayName: Music Box (Eridanus)
+	Tooltip: Yuri O 'Platinum Star'
+}
+
+LifelightMusicBox: {
+	DisplayName: Music Box (Lifelight)
+	Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }
