@@ -3726,7 +3726,7 @@ DarkTome: {
 }
 
 TouhouStaff: {
-	DisplayName: 自然少女之悼词
+	DisplayName: 自然少女挽歌
 	Tooltip: 召唤至多5个妖怪或妖精为你而战
 }
 

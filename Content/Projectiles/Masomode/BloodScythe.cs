@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class BloodScythe : ModProjectile, IPixelatedPrimitiveRenderer
     {
-        int randomize;
+        public ref float randomize => ref Projectile.ai[0];
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla1";
 
         public bool recolor => SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode && Projectile.ai[2] != 1;
@@ -25,12 +25,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             ProjectileID.Sets.TrailingMode[Type] = 1;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
-        }
-
-        public override void OnSpawn(IEntitySource source)
-        {
-            randomize += Main.rand.Next(1, 4);
-            base.OnSpawn(source);
         }
 
         public override void SetDefaults()
@@ -43,6 +37,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.timeLeft = 300;
             Projectile.tileCollide = false;
             CooldownSlot = 1;
+
+            randomize = 0;
         }
 
         public override void AI()
@@ -102,6 +98,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
         public override bool PreDraw(ref Color lightColor)
         {   
+            if (randomize == 0)
+            {
+                randomize += Main.rand.Next(1, 4);
+                Projectile.netUpdate = true;
+            }
             Texture2D texture = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScythe" + randomize).Value : ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla" + randomize).Value;
             Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
 
