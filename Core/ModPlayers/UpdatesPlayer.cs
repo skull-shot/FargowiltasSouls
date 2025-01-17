@@ -511,6 +511,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             TimeSinceHurt++;
 
+            if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
+                Toggler_MinionsDisabled = false;
+
             if (GalacticMinionsDeactivated)
             {
                 int minioncount = DeactivatedMinionEffectCount;
