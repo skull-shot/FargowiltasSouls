@@ -3221,11 +3221,6 @@ LifeRevitalizer: {
 		'''
 }
 
-AbomMusicBox: {
-	DisplayName: Музыкальная шкатулка (Выродокк)
-	Tooltip: Yuri O 'Laevateinn'
-}
-
 ChampionMusicBox: {
 	DisplayName: Музыкальная шкатулка (Чемпионы)
 	Tooltip: Sakuzyo 'Ordeal'
@@ -3712,4 +3707,44 @@ DarkTome: {
 TouhouStaff: {
 	DisplayName: Дети природной хвалы
 	Tooltip: Призывает до пяти ёкаев и фей, сражающихся за вас
+}
+
+BaronP1MusicBox: {
+	DisplayName: Музыкальная шкатулка (Бранный Барон – Фаза 1)
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+BaronP2MusicBox: {
+	DisplayName: Музыкальная шкатулка (Бранный Барон – Фаза 2)
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+TrojanMusicBox: {
+	DisplayName: Музыкальная шкатулка (Троянская белка)
+	Tooltip: ProduceVGM 'Nuts And Bolts'
+}
+
+AbominationnP1MusicBox: {
+	DisplayName: Музыкальная шкатулка (Выродокк – Фаза 1)
+	Tooltip: Yuri O 'Laevateinn'
+}
+
+AbominationnP2MusicBox: {
+	DisplayName: Музыкальная шкатулка (Выродокк – 2)
+	Tooltip: Yuri O 'Laevateinn'
+}
+
+CoffinMusicBox: {
+	DisplayName: Музыкальная шкатулка (Скверный Саркофаг)
+	Tooltip: zentaque & Azathoth 'Shifting Sands'
+}
+
+EridanusMusicBox: {
+	DisplayName: Музыкальная шкатулка (Эриданус)
+	Tooltip: Yuri O 'Platinum Star'
+}
+
+LifelightMusicBox: {
+	DisplayName: Музыкальная шкатулка (Жизнесвет)
+	Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }

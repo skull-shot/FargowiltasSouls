@@ -145,7 +145,7 @@ namespace FargowiltasSouls
                     () => WorldSavingSystem.DownedAbom,
                     () => true,
                     [
-                        ModContent.ItemType<AbomMusicBox>(),
+                        ModContent.ItemType<AbominationnP1MusicBox>(),
                         ModContent.ItemType<AbomEnergy>(),
                         ModContent.ItemType<AbomTrophy>(),
                         ModContent.ItemType<BabyScythe>(),
