@@ -846,7 +846,7 @@ EarthForce: {
 		[i:FargowiltasSouls/CobaltEnchant] You also explode on hit while not attacking
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 4x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
 		'Gaia's blessing shines upon you'
 		'''
 	SaveOldTooltip:
