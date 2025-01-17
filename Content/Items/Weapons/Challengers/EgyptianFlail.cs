@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
     {
         public override void SetDefaults()
         {
-            Item.DefaultToWhip(ModContent.ProjectileType<EgyptianFlailProjectile>(), 16, 2, 4, 40);
+            Item.DefaultToWhip(ModContent.ProjectileType<EgyptianFlailProjectile>(), 10, 2, 4, 40);
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 2);
         }
