@@ -12,6 +12,7 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
+using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -35,6 +36,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
     public class BanishedBaron : ModNPC
     {
         Player player => Main.player[NPC.target];
+        public LoopedSoundInstance ThrusterLoop;
 
         #region Variables
         public enum StateEnum //ALL states
@@ -492,7 +494,25 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             return base.PreAI();
         }
         public override void AI()
-        {
+        {   
+
+            if (Phase == 2)
+            {
+                ThrusterLoop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.BaronThrusterLoop, () =>
+                {
+                    return !NPC.active || State == (int)StateEnum.DeathAnimation;
+                });
+
+                ThrusterLoop?.Update(NPC.Center, sound =>
+                {
+                    sound.Volume = 0.8f;
+                });
+            }
+
+
+
+
+
             if (State == (int)StateEnum.DeathAnimation)
             {
                 //un-duke your fishron
@@ -746,8 +766,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
             if (Timer == 60)
             {
-                SoundEngine.PlaySound(SoundID.Item21, NPC.Center);
-                SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                //SoundEngine.PlaySound(SoundID.Item21, NPC.Center);
+                //SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -24);
@@ -793,7 +813,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == 45)
             {
-                SoundEngine.PlaySound(SoundID.DD2_KoboldExplosion, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronPropellerEject with {Volume = 64}, NPC.Center);
                 Vector2 propellerPos = NPC.Center - NPC.rotation.ToRotationVector2() * (NPC.width * 0.25f);
                 if (!Main.dedServ)
                 {
@@ -1029,7 +1049,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Anim = 0;
             if (Timer == 30)
             {
-                SoundEngine.PlaySound(SoundID.Item61, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeShoot, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = NPC.rotation.ToRotationVector2() * 10f;
@@ -1459,7 +1479,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == ReactTime - 5) //slight telegraph sound to be cute
             {
-                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronShine") with {Variants = [1, 2, 3], Volume = 0.5f }, NPC.Center);
             }
             if (Timer < ReactTime - 5) //stop aligning 5 frames before dashing
             {
@@ -2130,7 +2150,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 HitPlayer = true;
                 if (WorldSavingSystem.EternityMode)
                 {
-                    SoundEngine.PlaySound(SoundID.Item61, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeShoot, NPC.Center);
                     if (FargoSoulsUtil.HostCheck)
                     {
                         Vector2 vel = NPC.rotation.ToRotationVector2() * 10f;

@@ -52,7 +52,12 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle BaronHit = new(SoundsPath + "Challengers/Baron/BaronHit");
         public static readonly SoundStyle BaronRoar = new(SoundsPath + "Challengers/Baron/BaronRoar");
         public static readonly SoundStyle BaronYell = new(SoundsPath + "Challengers/Baron/BaronYell");
+        public static readonly SoundStyle BaronAmbience = new(SoundsPath + "Challengers/Baron/BaronAmbience");
+        public static readonly SoundStyle BaronThrusterLoop = new(SoundsPath + "Challengers/Baron/BaronThrusterLoop");
+        public static readonly SoundStyle BaronPropellerEject = new(SoundsPath + "Challengers/Baron/BaronPropellerEject");
         public static readonly SoundStyle NukeBeep = new(SoundsPath + "Challengers/Baron/NukeBeep");
+        public static readonly SoundStyle BaronNukeShoot = new(SoundsPath + "Challengers/Baron/NukeShoot");
+        public static readonly SoundStyle BaronNukeExplosion = new(SoundsPath + "Challengers/Baron/NukeExplosion");
 
         // Lifelight
         public static readonly SoundStyle LifelightDash = new(SoundsPath + "Challengers/Lifelight/LifelightDash");
