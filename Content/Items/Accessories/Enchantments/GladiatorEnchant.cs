@@ -64,6 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<GladiatorEnchant>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<GladiatorBanner>();
+        public override bool MutantsPresenceAffects => !ActiveSkill;
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
