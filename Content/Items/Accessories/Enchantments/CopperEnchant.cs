@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         Vector2 velocity = Vector2.Normalize(ai) * 20;
 
                         int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                        FargoSoulsUtil.NewProjectileDirectSafe(modPlayer.Player.GetSource_ItemUse(modPlayer.Player.HeldItem), target.Center, velocity, ModContent.ProjectileType<CopperLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation(), damage);
+                        FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<CopperEffect>(), target.Center, velocity, ModContent.ProjectileType<CopperLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation(), damage);
                     }
                     else
                     {

@@ -61,9 +61,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class GladiatorBanner : AccessoryEffect
     {
 
-        public override Header ToggleHeader => null;
+        public override Header ToggleHeader => Main.LocalPlayer.HasEffect<WillEffect>() ? Header.GetHeader<WillHeader>() : null;
         public override int ToggleItemType => ModContent.ItemType<GladiatorEnchant>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<GladiatorBanner>();
+        public override bool MutantsPresenceAffects => Main.LocalPlayer.HasEffect<WillEffect>();
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

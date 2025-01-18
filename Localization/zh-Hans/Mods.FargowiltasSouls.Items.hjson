@@ -773,7 +773,7 @@ OccultistsEssence: {
 	DisplayName: 术士精华
 	Tooltip:
 		'''
-		增加20%召唤伤害
+		增加18%召唤伤害
 		增加10%鞭子范围
 		增加1个召唤栏位
 		“这只是个开始……”
@@ -784,7 +784,7 @@ SharpshootersEssence: {
 	DisplayName: 神射手精华
 	Tooltip:
 		'''
-		增加20%远程伤害
+		增加18%远程伤害
 		10%几率不消耗弹药
 		增加8%远程暴击率
 		“这只是个开始……”
@@ -3731,41 +3731,41 @@ TouhouStaff: {
 }
 
 BaronP1MusicBox: {
-	// DisplayName: Music Box (Banished Baron - Phase 1)
-	// Tooltip: zentaque & Azathoths 'Will of the Waves'
+	DisplayName: 音乐盒（放逐遗爵 一阶段）
+	Tooltip: zentaque & Azathoths - 《Will of the Waves》
 }
 
 BaronP2MusicBox: {
-	// DisplayName: Music Box (Banished Baron - Phase 2)
-	// Tooltip: zentaque & Azathoth 'Will of the Waves'
+	DisplayName: 音乐盒（放逐遗爵 二阶段）
+	Tooltip: zentaque & Azathoth - 《Will of the Waves》
 }
 
 TrojanMusicBox: {
-	// DisplayName: Music Box (Trojan Squirrel)
-	// Tooltip: ProduceVGM 'Nuts And Bolts'
+	DisplayName: 音乐盒（特洛伊松鼠）
+	Tooltip: ProduceVGM - 《Nuts And Bolts》
 }
 
 AbominationnP1MusicBox: {
-	// DisplayName: Music Box (Abominationn - Phase 1)
-	// Tooltip: Yuri O 'Laevateinn'
+	DisplayName: 音乐盒（憎恶 一阶段）
+	Tooltip: Yuri O - 《Laevateinn》
 }
 
 AbominationnP2MusicBox: {
-	// DisplayName: Music Box (Abominationn - Phase 2)
-	// Tooltip: Yuri O 'Laevateinn'
+	DisplayName: 音乐盒（憎恶 二阶段）
+	Tooltip: Yuri O - 《Laevateinn》
 }
 
 CoffinMusicBox: {
-	// DisplayName: Music Box (Cursed Coffin)
-	// Tooltip: zentaque & Azathoth 'Shifting Sands'
+	DisplayName: 音乐盒（咒缚灵棺）
+	Tooltip: zentaque & Azathoth - 《Shifting Sands》
 }
 
 EridanusMusicBox: {
-	// DisplayName: Music Box (Eridanus)
-	// Tooltip: Yuri O 'Platinum Star'
+	DisplayName: 音乐盒（厄里达诺斯，宇宙英灵）
+	Tooltip: Yuri O - 《Platinum Star》
 }
 
 LifelightMusicBox: {
-	// DisplayName: Music Box (Lifelight)
-	// Tooltip: ProduceVGM 'Illustrious Illuminescence'
+	DisplayName: 音乐盒（飘渺游光）
+	Tooltip: ProduceVGM - 《Illustrious Illuminescence》
 }

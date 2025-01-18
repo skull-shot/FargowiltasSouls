@@ -765,6 +765,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                     AttackSpeed = .1f;
             }
 
+            if (item.shoot >= ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot] && AttackSpeed > 1)
+            {
+                Player.GetAttackSpeed(DamageClass.SummonMeleeSpeed) += AttackSpeed - 1f;
+                return 1f;
+            }
+
             return AttackSpeed;
         }
         public override void OnConsumeMana(Item item, int manaConsumed)

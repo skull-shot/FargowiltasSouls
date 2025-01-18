@@ -114,7 +114,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 Vector2 velocity = Vector2.Normalize(ai) * 20;
 
                 int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                FargoSoulsUtil.NewProjectileDirectSafe(modPlayer.Player.GetSource_ItemUse(modPlayer.Player.HeldItem), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
+                FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
                 float modifier = 1f;
                 if (player.HasEffect<TinEffect>())
                 {
