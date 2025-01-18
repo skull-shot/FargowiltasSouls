@@ -1814,7 +1814,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к дебаффам биомов
 		[i:FargowiltasSouls/GalacticGlobe] Даёт иммунитет почти ко всем дебаффам режима Вечность, базовые баффы зелий и классовых станций (работает в инвентаре и слотах для украшений) и др.
-		Нажмите [i:FargowiltasSouls/PrecisionSeal] клавишу печати точности, чтобы отключить рывки и двойные прыжки.
+		[i:FargowiltasSouls/PrecisionSeal] Зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки.
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, [i:FargowiltasSouls/NecromanticBrew] увеличивает дистанцию рывка и [i:FargowiltasSouls/PungentEyeball] заставляет врагов рядом с вашим курсором получать в 1,15 раза больше урона
 		Улучшает [i:FargowiltasSouls/SecurityWallet] перековки, [i:FargowiltasSouls/OrdinaryCarrot] видимость ночью, [i:FargowiltasSouls/NymphsPerfume] здоровье при возрождении [i:FargowiltasSouls/SandsofTime] и время возрождения
 		Автоматически использует [i:FargowiltasSouls/ConcentratedRainbowMatter] лечебные зелья и [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости.
