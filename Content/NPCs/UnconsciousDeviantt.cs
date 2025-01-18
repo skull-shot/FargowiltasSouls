@@ -117,7 +117,7 @@ namespace FargowiltasSouls.Content.NPCs
                     sound.Volume = 2f;
                 });
 
-                CameraPanSystem.PanTowards(NPC.Center, ++camerapaninterpolant * 0.004f);
+                //CameraPanSystem.PanTowards(NPC.Center, ++camerapaninterpolant * 0.004f);
                 NPC.velocity.X += 0.05f * NPC.spriteDirection;
                 if (++textpopup >= 5)
                 {
