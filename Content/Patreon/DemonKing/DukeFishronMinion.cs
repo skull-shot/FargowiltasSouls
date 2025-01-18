@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
             Projectile.scale *= 0.75f;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.ArmorPenetration = 400;
         }
 
@@ -132,6 +132,7 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
                 float moveSpeed = 1f;
                 if (Projectile.localAI[0] == 30f) //just about to dash
                 {
+                    Projectile.ResetLocalNPCHitImmunity();
                     if (Projectile.ai[0] >= 0 && Main.npc[ai0].CanBeChasedBy()) //has target
                     {
                         Projectile.velocity = Main.npc[ai0].Center - Projectile.Center + Main.npc[ai0].velocity * 10f;
@@ -289,8 +290,8 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
                 if (Projectile.owner == Main.myPlayer)
                 {
                     int modifier = Main.rand.NextBool() ? -1 : 1;
-                    SpawnRazorbladeRing(7, 24f, -0.75f * modifier);
-                    SpawnRazorbladeRing(7, 24f, 1.5f * modifier);
+                    SpawnRazorbladeRing(5, 24f, -0.75f * modifier);
+                    SpawnRazorbladeRing(5, 24f, 1.5f * modifier);
                 }
             }
         }

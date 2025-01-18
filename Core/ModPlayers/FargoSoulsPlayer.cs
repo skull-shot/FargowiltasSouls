@@ -700,7 +700,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             int useTime = item.useTime;
             int useAnimate = item.useAnimation;
 
-            if (useTime <= 0 || useAnimate <= 0 || item.damage <= 0 || (item.shoot >= ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot]))
+            if (useTime <= 0 || useAnimate <= 0 || item.damage <= 0)
                 return base.UseSpeedMultiplier(item);
 
             if (!HaveCheckedAttackSpeed)
@@ -763,6 +763,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (AttackSpeed < .1f)
                     AttackSpeed = .1f;
+            }
+
+            if (item.shoot >= ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot] && AttackSpeed > 1)
+            {
+                Player.GetAttackSpeed(DamageClass.SummonMeleeSpeed) += AttackSpeed - 1f;
+                return 1f;
             }
 
             return AttackSpeed;
