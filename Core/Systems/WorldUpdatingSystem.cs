@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Core.Systems
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.WorldData);
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
+                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyEmode") with { Volume = 0.8f }, Main.LocalPlayer.Center);
                 }
             }
             else if (EternityMode)
@@ -121,7 +121,7 @@ namespace FargowiltasSouls.Core.Systems
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData);
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyDeactivate"), Main.LocalPlayer.Center);
             }
 
             if (EternityMode)
@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Core.Systems
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.WorldData);
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
+                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyMaso") with { Volume = 0.8f }, Main.LocalPlayer.Center);
                 }
             }
 
@@ -168,7 +168,7 @@ namespace FargowiltasSouls.Core.Systems
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData);
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyDeactivate"), Main.LocalPlayer.Center);
             }
 
             if (rainCD > 0)

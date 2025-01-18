@@ -15,6 +15,7 @@ using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
@@ -927,6 +928,7 @@ namespace FargowiltasSouls
 
                     case PacketID.ToggleEternityMode:
                         {
+                            
                             Player player = FargoSoulsUtil.PlayerExists(reader.ReadByte());
                             if (Main.netMode == NetmodeID.Server)
                             {
@@ -935,8 +937,8 @@ namespace FargowiltasSouls
                                     if (!LumUtils.AnyBosses())
                                     {
                                         WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
-
-                                        int deviType = ModContent.NPCType<Deviantt>();
+                                        string mode;
+                                        int deviType = ModContent.NPCType<UnconsciousDeviantt>();
                                         if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
                                         {
                                             WorldSavingSystem.SpawnedDevi = true;
@@ -947,7 +949,20 @@ namespace FargowiltasSouls
                                             FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
                                         }
 
-                                        SoundEngine.PlaySound(SoundID.Roar, player.Center);
+                                        if (WorldSavingSystem.EternityMode)
+                                        {
+                                            mode = "Deactivate";
+                                        }
+                                        else
+                                            mode = "Emode";
+
+                                        if (WorldSavingSystem.masochistModeReal)
+                                        {
+                                            mode = "Deactivate";
+                                        }
+                                        else
+                                            mode = "Maso";
+                                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = 0.8f}, player.Center);
 
                                         if (Main.netMode == NetmodeID.Server)
                                             NetMessage.SendData(MessageID.WorldData); //sync world

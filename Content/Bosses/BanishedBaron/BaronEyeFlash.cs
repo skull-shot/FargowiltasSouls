@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             if (Projectile.localAI[0] == 1)
             {
                 Projectile.ai[1] = Main.rand.NextBool() ? 1 : -1;
-                SoundEngine.PlaySound(SoundID.MaxMana, Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronShine") with { Variants = [1, 2, 3]}, Projectile.Center);
             }
             Projectile.rotation += Projectile.ai[1] * MathHelper.TwoPi / 90;
 
