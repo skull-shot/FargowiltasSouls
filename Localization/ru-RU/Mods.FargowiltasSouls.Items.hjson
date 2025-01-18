@@ -120,7 +120,7 @@ ChlorophyteEnchant: {
 		Создаёт кольцо лиственных кристаллов, стреляющих в ближайших врагов
 		Пока вы используете крылья, споры будут непрерывно появляться
 		Даёт двойной споровый прыжок
-		Даёт возможность делать короткий рывок\
+		Даёт возможность делать короткий рывок
 		'Душа джунглей кристаллизуется вокруг тебя'
 		'''
 }
@@ -623,8 +623,8 @@ SquireEnchant: {
 	DisplayName: Зачарование оруженосца
 	Tooltip:
 		'''
-		Увеличивает ускорение, максимальную скорость, и высоту прыжка наездных питомцев
-		Пока вы верхом, даёт 10 защиты, пердёжный прыжок, и иммунитет к урону от падения
+		Увеличивает ускорение, максимальную скорость и высоту прыжка наездных питомцев
+		Пока вы верхом, даёт 10 защиты, пердёжный прыжок и иммунитет к урону от падения
 		Увеличивает эффективность источников исцеления на 10%
 		Часовой баллиста пробивает больше врагов и паникует, когда вы получаете урон
 		'Оруженосец, может поторопишься?'
@@ -710,7 +710,7 @@ ValhallaKnightEnchant: {
 	DisplayName: Зачарование рыцаря из Вальгаллы
 	Tooltip:
 		'''
-		Увеличивает ускорение, максимальную скорость, и высоту прыжка наездных питомцев
+		Увеличивает ускорение, максимальную скорость и высоту прыжка наездных питомцев
 		Пока вы верхом, даёт 15 защиты, пердёжный прыжок, иммунитет к урону от падения и рывок
 		Увеличивает эффективность источников исцеления на 15%
 		Значительно увеличивает эффективность часового баллисты
@@ -846,7 +846,7 @@ EarthForce: {
 		[i:FargowiltasSouls/CobaltEnchant] Вы взрываетесь при получении урона, если не атакуете
 		[i:FargowiltasSouls/AdamantiteEnchant] Чем дольше вы атакуете, тем быстрее вы это делаете, но только пока у вас есть заряд
 		[i:FargowiltasSouls/OrichalcumEnchant] Пока вы заряжены, вы также накладываете дебафф «Яд Земли», который наносит процент от урона удара, наложившего дебафф
-		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают в 4 раза больше урона от дебаффов
+		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают в 3,5 раза больше урона от дебаффов
 		'Благословение Геи озаряет вас'
 		'''
 	SaveOldTooltip:
@@ -1299,7 +1299,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/SaucerControlConsole] Даёт базовые баффы зелий (работает в инвентаре и слотах для украшений)
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает [i:FargowiltasSouls/GalacticGlobe] маленькие истинные глаза Ктулху и [i:FargowiltasSouls/SaucerControlConsole] дружелюбную мини-тарелку, которая замедляет врагов при попадании
-		'Тёплое, бьётся, и не нуждается в теле'
+		'Тёплое, бьётся и не нуждается в теле'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Нажмите клавишу смены боеприпасов, чтобы переключить используемые боеприпасы и [i:FargowiltasSouls/GalacticGlobe] даёт базовые баффы зелий"
 }
@@ -1332,7 +1332,7 @@ LumpOfFlesh: {
 		Даёт иммунитет к [i:FargowiltasSouls/DreadShell] отбрасыванию, дебаффам «Несвёртываемость», [i:FargowiltasSouls/PungentEyeball] «Чёрная пелена», «Затемнение», [i:FargowiltasSouls/SkullCharm] «Ошеломление», [i:FargowiltasSouls/Deerclawps] «Замедление» и «Заморозка»
 		[i:FargowiltasSouls/PungentEyeball] Враги, находящиеся близко к вашему курсору, получают в 1,15 раза больше урона
 		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает частоту появления редких врагов
-		[i:FargowiltasSouls/SkullCharm] Увеличивает наносимый урон на 15%, и даёт прислужника глазное яблоко, заряжающегося пока вы атакуете
+		[i:FargowiltasSouls/SkullCharm] Увеличивает наносимый урон на 15% и даёт прислужника глазное яблоко, заряжающегося пока вы атакуете
 		[i:FargowiltasSouls/SkullCharm] Враги с меньшей вероятностью будут вас атаковать
 		[i:FargowiltasSouls/DreadShell] Защита аннулирует до 200 урона, парирования производят сильную контратаку
 		[i:FargowiltasSouls/DreadShell] Во время и некоторое время после поднятия щита, ваши защита и сопротивление урону значительно снижаются
@@ -1347,7 +1347,7 @@ MagicalBulb: {
 	DisplayName: Магический бутон
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Кислотный яд», «Яд плюща», и «Рой»
+		Даёт иммунитет к дебаффам «Кислотный яд», «Яд плюща» и «Рой»
 		Увеличивает регенерацию здоровья в зависимости от получаемого света
 		Привлекает потомка легендарного растения, расцветающего в бою
 		'Матереубийство?'
@@ -3710,41 +3710,41 @@ TouhouStaff: {
 }
 
 BaronP1MusicBox: {
-	// DisplayName: Music Box (Banished Baron - Phase 1)
-	// Tooltip: zentaque & Azathoths 'Will of the Waves'
+	DisplayName: Музыкальная шкатулка (Бранный Барон – Фаза 1)
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 BaronP2MusicBox: {
-	// DisplayName: Music Box (Banished Baron - Phase 2)
-	// Tooltip: zentaque & Azathoth 'Will of the Waves'
+	DisplayName: Музыкальная шкатулка (Бранный Барон – Фаза 2)
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 TrojanMusicBox: {
-	// DisplayName: Music Box (Trojan Squirrel)
-	// Tooltip: ProduceVGM 'Nuts And Bolts'
+	DisplayName: Музыкальная шкатулка (Троянская белка)
+	Tooltip: ProduceVGM 'Nuts And Bolts'
 }
 
 AbominationnP1MusicBox: {
-	// DisplayName: Music Box (Abominationn - Phase 1)
-	// Tooltip: Yuri O 'Laevateinn'
+	DisplayName: Музыкальная шкатулка (Выродокк – Фаза 1)
+	Tooltip: Yuri O 'Laevateinn'
 }
 
 AbominationnP2MusicBox: {
-	// DisplayName: Music Box (Abominationn - Phase 2)
-	// Tooltip: Yuri O 'Laevateinn'
+	DisplayName: Музыкальная шкатулка (Выродокк – 2)
+	Tooltip: Yuri O 'Laevateinn'
 }
 
 CoffinMusicBox: {
-	// DisplayName: Music Box (Cursed Coffin)
-	// Tooltip: zentaque & Azathoth 'Shifting Sands'
+	DisplayName: Музыкальная шкатулка (Скверный Саркофаг)
+	Tooltip: zentaque & Azathoth 'Shifting Sands'
 }
 
 EridanusMusicBox: {
-	// DisplayName: Music Box (Eridanus)
-	// Tooltip: Yuri O 'Platinum Star'
+	DisplayName: Музыкальная шкатулка (Эриданус)
+	Tooltip: Yuri O 'Platinum Star'
 }
 
 LifelightMusicBox: {
-	// DisplayName: Music Box (Lifelight)
-	// Tooltip: ProduceVGM 'Illustrious Illuminescence'
+	DisplayName: Музыкальная шкатулка (Жизнесвет)
+	Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }

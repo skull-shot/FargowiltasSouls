@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool AltFunctionUse(Player player)
         {
             SoundEngine.PlaySound(SoundID.Grab);
-            player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
+            //player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
             return false;
         }
 
@@ -54,10 +54,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
-            player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
+            //player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
         }
     }
-
+    /*
     public class FrigidGemstoneInactive : SoulsItem
     {
         public override bool Eternity => true;
@@ -100,6 +100,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstone>());
         }
     }
+    */
     public class FrigidGemstoneKeyEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;

@@ -700,7 +700,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             int useTime = item.useTime;
             int useAnimate = item.useAnimation;
 
-            if (useTime <= 0 || useAnimate <= 0 || item.damage <= 0)
+            if (useTime <= 0 || useAnimate <= 0 || item.damage <= 0 || (item.shoot >= ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot]))
                 return base.UseSpeedMultiplier(item);
 
             if (!HaveCheckedAttackSpeed)
