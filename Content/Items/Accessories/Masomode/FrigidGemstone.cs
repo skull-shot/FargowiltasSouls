@@ -42,20 +42,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         }
 
         public override void UpdateInventory(Player player) => Effects(player);
-
+        /*
         public override bool AltFunctionUse(Player player)
         {
             SoundEngine.PlaySound(SoundID.Grab);
             //player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
             return false;
         }
+        */
 
         public override void UpdateVanity(Player player) => Effects(player);
-        public override bool CanRightClick() => true;
-        public override void RightClick(Player player)
-        {
+        //public override bool CanRightClick() => true;
+        //public override void RightClick(Player player)
+        //{
             //player.ReplaceItem(Item, ModContent.ItemType<FrigidGemstoneInactive>());
-        }
+        //}
     }
     /*
     public class FrigidGemstoneInactive : SoulsItem

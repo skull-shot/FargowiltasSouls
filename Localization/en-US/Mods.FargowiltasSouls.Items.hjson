@@ -1191,21 +1191,10 @@ FrigidGemstone: {
 	Tooltip:
 		'''
 		Works from inventory and vanity slots
-		Right click to disable
 		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		'''
 	VanityTooltip: Grants immunity to Frostburn and Chilled
-}
-
-FrigidGemstoneInactive: {
-	DisplayName: Frigid Grasp (Inactive)
-	Tooltip:
-		'''
-		Currently inactive, Right click to activate
-		Grants immunity to Frostburn and Chilled
-		'A torn off limb composed of ancient ice'
-		'''
 }
 
 FusedLens: {

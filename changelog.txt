@@ -1,11 +1,25 @@
 NEW UPDATE - V {ModVersion}
-Added more Deviantt sound effects
-Devious Aestheticus damage 399 -> 292
-Switching weapon now instantly sets Adamantite spread and speed to 0
-Abominationn Maso/FTW borders now display with a smaller radius, resulting in more accurate hitbox
-Earth Force charge bar now has Earth Force sprite to avoid confusion
-Active skill tooltips now mention if it's unbound or what key it's bound to
-Ninja Enchant can no longer make projectiles with 0 crit able to crit
-Ninja Enchant speed now only affects weapons
-Nuke Fishron turn speed is now dependent on movement speed (fixes Ninja Enchant issue)
-Fixed Blood Scythe texture bug in multiplayer
+Added new Music Boxes and resprited all Music Boxes; there are now music boxes for every Fargo's Music Mod track
+Added new Charge Sound (used for lightslinger, prisma regalia, umbra regalia, solar enchant, crystalline congregation)
+Fixed Spirit Longbow, Rockslide, Dark Tome and Nekhakha not scaling with class damage, rebalanced to compensate
+Added Life Revitalizer and Mutant Statue smart cursor functionality
+
+Universe Soul no longer makes Cosmic Core stronger
+Mutant health 13770000 -> 9700000
+Mutant item balance:
+-Staff of Unleashed Ocean: Increased hit cooldowns (now hits once per dash), spawns less razorblades on hit, damage 80 -> 70
+-Blender: Damage 345 -> 340
+-Gemini Glaives: Damage 210 -> 395
+
+Blender and Dicer no longer copy defaults of Kraken, fixing DLC issue
+Whips no longer gain range from Souls Mod-granted attack speed bonuses
+Removed inactive version of Frigid Grasp as it is no longer necessary
+Fixed a bug where Adamantite Enchant bar remained on screen when equipped alongside Force of Earth and then removing Adamantite Enchant
+Fixed bug where Vortex Enchant laser and Copper/Terra lightning counted as item projectiles from your held item, causing issues with Adamantite Enchant
+Fixed Earth Force stating incorrect DoT multiplier
+Fixed Occultist and Sharpshooter essence giving 20% damage instead of 18%
+Fixed Shroomite Enchant shrooms acitvating own effect
+Fixed Crystalline Congregation iframe issue
+Fixed Mutant's Presence not affecting Gladiator Spirit
+Fixed regular accessory minions toggle secretly still existing after accessing the Heart of the Master/Galactic Globe minion toggle
+Actually fixed Blood Scythe texture erroring in multiplayer
