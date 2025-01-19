@@ -256,6 +256,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //saucer control console
             player.buffImmune[BuffID.Electrified] = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
 
             //betsy's heart
             player.buffImmune[BuffID.OgreSpit] = true;
