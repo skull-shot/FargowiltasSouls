@@ -52,7 +52,14 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle BaronHit = new(SoundsPath + "Challengers/Baron/BaronHit");
         public static readonly SoundStyle BaronRoar = new(SoundsPath + "Challengers/Baron/BaronRoar");
         public static readonly SoundStyle BaronYell = new(SoundsPath + "Challengers/Baron/BaronYell");
+        public static readonly SoundStyle BaronAmbience = new(SoundsPath + "Challengers/Baron/BaronAmbience");
+        public static readonly SoundStyle BaronThrusterLoop = new(SoundsPath + "Challengers/Baron/BaronThrusterLoop");
+        public static readonly SoundStyle BaronPropellerEject = new(SoundsPath + "Challengers/Baron/BaronPropellerEject");
         public static readonly SoundStyle NukeBeep = new(SoundsPath + "Challengers/Baron/NukeBeep");
+        public static readonly SoundStyle BaronNukeShoot = new(SoundsPath + "Challengers/Baron/NukeShoot");
+        public static readonly SoundStyle BaronNukeExplosion = new(SoundsPath + "Challengers/Baron/NukeExplosion");
+        public static readonly SoundStyle BaronDashP1 = new(SoundsPath + "Challengers/Baron/BaronP1Dash");
+        public static readonly SoundStyle BaronDashP2 = new(SoundsPath + "Challengers/Baron/BaronP2Dash");
 
         // Lifelight
         public static readonly SoundStyle LifelightDash = new(SoundsPath + "Challengers/Lifelight/LifelightDash");
@@ -86,6 +93,10 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle DeviWyvernOrbImpact = new(SoundsPath + "Siblings/Deviantt/DeviWyvernOrbImpact");
         public static readonly SoundStyle DeviIceOrb = new(SoundsPath + "Siblings/Deviantt/DeviIceOrb");
         public static readonly SoundStyle DeviHeartCast = new(SoundsPath + "Siblings/Deviantt/DeviHeartCast");
+
+        public static readonly SoundStyle DeviFloorImpact = new(SoundsPath + "Siblings/Deviantt/DeviFloorImpact");
+        public static readonly SoundStyle DeviFallLoop = new(SoundsPath + "Siblings/Deviantt/DeviFallLoop");
+
 
 
         // Mutant

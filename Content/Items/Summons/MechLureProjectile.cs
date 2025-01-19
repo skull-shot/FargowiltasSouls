@@ -1,7 +1,9 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -26,6 +28,12 @@ namespace FargowiltasSouls.Content.Items.Summons
             Projectile.penetrate = -1;
             Projectile.timeLeft = 60 * 8;
             Projectile.light = 1;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.BaronAmbience, Projectile.Center);
+            base.OnSpawn(source);
         }
         public override void AI()
         {

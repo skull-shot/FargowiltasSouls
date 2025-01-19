@@ -1,6 +1,6 @@
 ﻿using Fargowiltas.NPCs;
 using Fargowiltas.Projectiles;
-
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -19,6 +19,7 @@ namespace FargowiltasSouls.Content.Items
     {
         public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
 
+        public string mode;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Mutant's Gift");
@@ -91,7 +92,7 @@ Cannot be used while a boss is alive
                 {
                     WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
 
-                    int deviType = ModContent.NPCType<Deviantt>();
+                    int deviType = ModContent.NPCType<UnconsciousDeviantt>();
                     if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
                     {
                         WorldSavingSystem.SpawnedDevi = true;
@@ -102,7 +103,20 @@ Cannot be used while a boss is alive
                         FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
                     }
 
-                    SoundEngine.PlaySound(SoundID.Roar, player.Center);
+                    /*if (WorldSavingSystem.EternityMode)
+                    {
+                        mode = "Deactivate";
+                    }
+                    else
+                        mode = "Emode";
+
+                    if (WorldSavingSystem.masochistModeReal)
+                    {
+                        mode = "Deactivate";
+                    }
+                    else
+                        mode = "Maso";
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode), player.Center);*/
 
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.WorldData); //sync world

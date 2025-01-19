@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -114,6 +115,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (++Timer >= Duration - 2)
             {
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeExplosion, Projectile.Center);
                 Projectile.tileCollide = false;
                 Projectile.alpha = 0;
                 Projectile.position = Projectile.Center;
@@ -199,7 +201,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
             }
-            SoundEngine.PlaySound(SoundID.Item62 with { Pitch = -0.2f }, Projectile.Center);
+            
 
             if (WorldSavingSystem.MasochistModeReal)
             {
