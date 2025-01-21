@@ -552,7 +552,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 screenshake += 2;
                 FargoSoulsUtil.ScreenshakeRumble(screenshake);
-                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.3f}, npc.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.6f}, npc.Center);
             }
 
             // initial charge up
@@ -590,8 +590,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (DeathTimer == 299 && FargoSoulsUtil.HostCheck)
             {
                 FargoSoulsUtil.ScreenshakeRumble(7f);
-                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.8f }, npc.Center);
-                SoundEngine.PlaySound(SoundID.NPCDeath64, npc.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantKSKill, npc.Center);
             }
         }
     }

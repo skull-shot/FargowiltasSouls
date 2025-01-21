@@ -38,12 +38,14 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void ChatBubblePosition(ref Vector2 position, ref SpriteEffects spriteEffects)
         {
+
+            position.Y += 8;
             if (NPC.spriteDirection == -1)
             {
-                position.X -= 5;
+                position.X += -10;
             }
             else
-                position.X += 5;
+                position.X += 10;
             base.ChatBubblePosition(ref position, ref spriteEffects);
         }
 
@@ -166,7 +168,7 @@ namespace FargowiltasSouls.Content.NPCs
                 if (landsound == false)
                 {
                     FargoSoulsUtil.ScreenshakeRumble(5);
-                    SoundEngine.PlaySound(FargosSoundRegistry.DeviFloorImpact, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.MutantLand, NPC.Center);
                     NPC.ai[0] = 1;
                     landsound = true;
                     Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
@@ -185,7 +187,7 @@ namespace FargowiltasSouls.Content.NPCs
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 bluh = new Vector2(0, (float)Math.Sin(Main.GameUpdateCount / 90f * MathHelper.TwoPi) * 2f);
-            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/DeviQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/MutantQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rectangle = new(0, 0, QuestionMark.Width, QuestionMark.Height);
             if (NPC.ai[0] == 2 && NPC.ai[1] >= 15)
             {
