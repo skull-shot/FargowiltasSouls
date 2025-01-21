@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class BloodScytheFriendly : ModProjectile//, IPixelatedPrimitiveRenderer
     {
-        int randomize = 1;
+        public ref float randomize => ref Projectile.ai[1];
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla1";
         public override void SetStaticDefaults()
         {
@@ -47,8 +47,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override void AI()
         {
             Projectile.rotation += (float)Projectile.direction * 0.8f;
-            if (Projectile.ai[0] == 0)
-                randomize += Main.rand.Next(0, 3);
             Projectile.ai[0] += 1f;
             if (!(Projectile.ai[0] < 30f))
             {
@@ -75,6 +73,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (randomize == 0)
+            {
+                randomize += Main.rand.Next(1, 4);
+                Projectile.netUpdate = true;
+            }
             Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodScytheVanilla" + randomize).Value;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, Color.DarkRed, Projectile.rotation, texture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
             return false;
