@@ -1,6 +1,8 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
@@ -9,6 +11,7 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
 using System;
 using System.Linq;
 using System.Threading;
@@ -501,11 +504,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (FargoSoulsUtil.HostCheck
                 && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
                 && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type))
-            {
+            {   
+
                 // manual gore spawn
                 Gore.NewGore(npc.GetSource_FromThis(), npc.Center, -15 * Vector2.UnitY, GoreID.KingSlimeCrown);
 
-                int n = NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, mutant.Type);
+                int n = NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<ReleasedMutant>());
                 if (n != Main.maxNPCs && Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
             }
@@ -534,14 +538,22 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             Particle p;
             float scaleMult;
+            int screenshake = 3;
             npc.velocity.X *= 0.9f;
             Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);
             // Dust
             if (Main.rand.NextBool(5))
-            {
+            {          
                 SoundEngine.PlaySound(npc.HitSound, npc.Center);
             }
             Dust.NewDust(npc.TopLeft, npc.width, npc.height, DustID.t_Slime);
+
+            if (DeathTimer == 100 || DeathTimer == 200 || DeathTimer == 250)
+            {
+                screenshake += 2;
+                FargoSoulsUtil.ScreenshakeRumble(screenshake);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.3f}, npc.Center);
+            }
 
             // initial charge up
             if (DeathTimer >= 180 && DeathTimer < 270)
@@ -577,7 +589,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             // grand finale
             if (DeathTimer == 299 && FargoSoulsUtil.HostCheck)
             {
-                FargoSoulsUtil.ScreenshakeRumble(4.5f);
+                FargoSoulsUtil.ScreenshakeRumble(7f);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.8f }, npc.Center);
                 SoundEngine.PlaySound(SoundID.NPCDeath64, npc.Center);
             }
         }

@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle GeminiReti = new(SoundsPath + "Weapons/GeminiReti");
         public static readonly SoundStyle LeashSpin = new(SoundsPath + "Weapons/LeashSpin");
         public static readonly SoundStyle LeashBreak = new(SoundsPath + "Weapons/LeashBreak");
+        public static readonly SoundStyle StyxCharge = new(SoundsPath + "StyxCharge");
 
         // Trojan
         public static readonly SoundStyle TrojanHeadDeath = new (SoundsPath + "Challengers/Trojan/TrojanHeadDeath");

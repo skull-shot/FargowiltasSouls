@@ -381,15 +381,15 @@ EMode: {
 
 UnconsciousDeviantt: {
 	// DisplayName: ???
+	// Unconscious: ...
+	// UnconsciousChatButton: Wake her up
+	// Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
+	// IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems you've met them already, they're the coolest!
+}
 
-	TownNPCMood: {
-		// Content: I am content.
-		// NoHome: I hate not having a home.
-		// FarFromHome: I am too far from home.
-		// LoveSpace: I love having so much space.
-		// DislikeCrowded: I dislike how crowded I am.
-		// HateCrowded: I hate how crowded I am.
-		// LikeNPC_Princess: I like {NPCName}.
-		// Princess_LovesNPC: I like {NPCName}.
-	}
+ReleasedMutant: {
+	// DisplayName: ???
+	// Chat: Was about time I got out of that bath. What? Giant slime? Those are the same thing, aren't they?
+	// TalkToHim: Who are you?
+	// Introduction: Names {0}, though I'm sure you've heard of me before. I'll sell to you what I have, granted you give me money, of course.
 }
