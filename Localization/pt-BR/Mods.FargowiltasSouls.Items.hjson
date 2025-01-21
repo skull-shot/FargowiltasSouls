@@ -1204,16 +1204,6 @@ FrigidGemstone: {
 	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
-FrigidGemstoneInactive: {
-	// DisplayName: Frigid Grasp (Inactive)
-	/* Tooltip:
-		'''
-		Currently inactive, Right click to activate
-		Grants immunity to Frostburn and Chilled
-		'A torn off limb composed of ancient ice'
-		''' */
-}
-
 FusedLens: {
 	DisplayName: Lentes Fundidas
 	Tooltip:

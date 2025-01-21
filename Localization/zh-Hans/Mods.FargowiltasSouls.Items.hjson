@@ -1200,16 +1200,6 @@ FrigidGemstone: {
 	VanityTooltip: 免疫霜冻和冷冻减益
 }
 
-FrigidGemstoneInactive: {
-	DisplayName: 霜寒之握 (未启用)
-	Tooltip:
-		'''
-		当前未启用，右键点击以启用
-		免疫霜冻和冷冻减益
-		“古老的冰块留下的残肢”
-		'''
-}
-
 FusedLens: {
 	DisplayName: 融合晶状体
 	Tooltip:
