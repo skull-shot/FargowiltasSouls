@@ -107,6 +107,9 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle PenetratorExplosion = new(SoundsPath + "Siblings/Mutant/PenetratorExplosion");
         public static readonly SoundStyle MutantSword = new(SoundsPath + "Siblings/Mutant/MutantSword");
 
+        public static readonly SoundStyle MutantLand = new(SoundsPath + "Siblings/Mutant/MutantLand");
+        public static readonly SoundStyle MutantKSKill = new(SoundsPath + "Siblings/Mutant/MutantKSKill");
+
         // Abominationn
 
         // Mechs
