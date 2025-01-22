@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             #region ignores stuns
 
             if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
-                FargoUIManager.ToggleActiveSkillMenu();
+                FargoUIManager.Toggle<ActiveSkillMenu>();
 
             if (Mash)
             {
@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             if (FargowiltasSouls.SoulToggleKey.JustPressed)
-                FargoUIManager.ToggleSoulToggler();
+                FargoUIManager.Toggle<SoulToggler>();
 
             #endregion
 

@@ -27,8 +27,11 @@ using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI
 {
-    public class ActiveSkillMenu : UIState
+    public class ActiveSkillMenu : FargoUI
     {
+        public override bool MenuToggleSound => true;
+        public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex + 1;
+        public override string InterfaceLayerName => "Fargos: Active Skill Menu";
         public const int BackWidth = 300;
         public const int BackHeight = 520;
         public static int EquippedPanelHeight => 80;
@@ -43,6 +46,23 @@ namespace FargowiltasSouls.Content.UI
         public static ActiveSkillBox MouseHeldElement = null;
         public static ActiveSkillBox MouseHoveredElement = null;
         public static bool ShouldRefresh;
+
+        public override void UpdateUI()
+        {
+            if (Main.gameMenu)
+                FargoUIManager.Close<ActiveSkillMenu>();
+        }
+        public override void OnOpen()
+        {
+            RemoveAllChildren();
+            OnInitialize();
+            //UpdateSkillList();
+        }
+        public override void OnClose()
+        {
+            if (DragPanel.dragging)
+                DragPanel.DragEnd(Main.MouseScreen);
+        }
 
         public override void OnInitialize()
         {
@@ -109,12 +129,11 @@ namespace FargowiltasSouls.Content.UI
         }
         public void UpdateSkillList()
         {
-            if (Main.gameMenu || Main.dedServ)
+            if ((Main.gameMenu || Main.dedServ))
             {
-                FargoUIManager.CloseActiveSkillMenu();
+                FargoUIManager.Close<ActiveSkillMenu>();
                 return;
             }
-
             EquippedPanel.RemoveAllChildren();
             AvailablePanel.RemoveAllChildren();
             MouseHeldElement = null;

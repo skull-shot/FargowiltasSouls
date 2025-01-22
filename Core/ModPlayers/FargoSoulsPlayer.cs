@@ -140,7 +140,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void LoadData(TagCompound tag)
         {
-            FargoUIManager.CloseActiveSkillMenu();
+            FargoUIManager.Close<ActiveSkillMenu>();
 
             var playerData = tag.GetList<string>($"{Mod.Name}.{Player.name}.Data");
             MutantsPactSlot = playerData.Contains("MutantsPactSlot");

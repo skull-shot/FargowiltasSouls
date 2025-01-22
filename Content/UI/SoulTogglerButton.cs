@@ -1,20 +1,34 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.UI;
 
-namespace FargowiltasSouls.Content.UI.Elements
+namespace FargowiltasSouls.Content.UI
 {
-    public class SoulTogglerButton : UIState
+    public class SoulTogglerButton : FargoUI
     {
+        public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex;
+        public override string InterfaceLayerName => "Fargos: Soul Toggler Toggler";
         public UIImage Icon;
         public FargoUIHoverTextImageButton IconHighlight;
         public UIImage IconFlash;
         public UIOncomingMutant OncomingMutant;
-
+        public override void OnLoad()
+        {
+            FargoUIManager.Open<SoulTogglerButton>();
+        }
+        public override void UpdateUI()
+        {
+            if (!Main.playerInventory)
+                FargoUIManager.Close<SoulTogglerButton>();
+            else
+                FargoUIManager.Open<SoulTogglerButton>();
+        }
         public override void OnActivate()
         {
             const int x = 570;
@@ -38,12 +52,12 @@ namespace FargowiltasSouls.Content.UI.Elements
             IconHighlight.OnLeftClick += IconHighlight_OnClick;
             Icon.Append(IconHighlight);
 
-            OncomingMutant = new UIOncomingMutant(FargoUIManager.OncomingMutantTexture.Value, 
-                FargoUIManager.OncomingMutantAuraTexture.Value, 
-                FargoUIManager.OncomingMutantntTexture.Value, 
-                Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityEnabled"), 
-                Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistEnabled"), 
-                Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityDisabled"), 
+            OncomingMutant = new UIOncomingMutant(FargoUIManager.OncomingMutantTexture.Value,
+                FargoUIManager.OncomingMutantAuraTexture.Value,
+                FargoUIManager.OncomingMutantntTexture.Value,
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityEnabled"),
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistEnabled"),
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityDisabled"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.RightClickToggle"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.HoldShift"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedEternity"),
@@ -59,7 +73,7 @@ namespace FargowiltasSouls.Content.UI.Elements
         }
         private void IconHighlight_MouseOver(UIMouseEvent evt, UIElement listeningElement)
         {
-            FargoUIManager.SoulToggler.NeedsToggleListBuilding = true;
+            FargoUIManager.Get<SoulToggler>().NeedsToggleListBuilding = true;
         }
         private void IconHighlight_OnClick(UIMouseEvent evt, UIElement listeningElement)
         {
@@ -69,7 +83,7 @@ namespace FargowiltasSouls.Content.UI.Elements
 
             }
 
-            FargoUIManager.ToggleSoulToggler();
+            FargoUIManager.Toggle<SoulToggler>();
             Main.LocalPlayer.FargoSouls().HasClickedWrench = true;
         }
 

@@ -9,14 +9,20 @@ using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
-    public class CooldownBarManager : UIState
+    public class CooldownBarManager : FargoUI
     {
+        public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex + 1;
+        public override string InterfaceLayerName => "Fargos: Cooldown Bars";
         public static List<UICooldownBar> uiCooldownBars = [];
         public static CooldownBarManager Instance;
         //public static List<UICooldownBar> CooldownBars;
         public const int BarWidth = 100;
         public const int BarHeight = 20;
         public const int SpaceBetweenBars = 20;
+        public override void OnLoad()
+        {
+            FargoUIManager.Open<CooldownBarManager>();
+        }
         public static void Activate(string nameKey, Texture2D itemTexture, Color fillColor, Func<float> fillRatio, bool displayAtFull = false, int fadeDelay = 0, Func<bool> activeFunction = null, int animationFrames = 1)
         {
             if (!ClientConfig.Instance.CooldownBars)

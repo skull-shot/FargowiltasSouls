@@ -216,7 +216,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             string keyText = "";
             foreach (var key in keys)
                 keyText += $"{key} ";
-            Utils.DrawBorderString(spriteBatch, keyText, position + new Vector2(32, 32), Color.White);
+            keyText = keyText.Replace("Mouse", "M");
+            Utils.DrawBorderString(spriteBatch, keyText, position + new Vector2(-3 /*32*/, 32), Color.White);
         }
         public override void ModifyTooltip(ref string tooltip)
         {
