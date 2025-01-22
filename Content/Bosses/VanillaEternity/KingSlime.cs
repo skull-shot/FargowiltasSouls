@@ -1,5 +1,8 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
@@ -7,7 +10,11 @@ using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
 using System;
+using System.Linq;
+using System.Threading;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -37,8 +44,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         const int SummonWaves = 6;
         public float SummonCounter = SummonWaves - 1;
         public bool SpecialJumping = false;
+
+        public int DeathTimer = -1;
         public override bool SafePreAI(NPC npc)
         {
+            if (DeathTimer >= 0) {
+                DeathAnimation(npc);
+                if (++DeathTimer >= 300)
+                {
+                    npc.life = 0;
+                    npc.dontTakeDamage = false;
+                    npc.checkDead();
+                }
+                return false;
+            }
+
             EModeGlobalNPC.slimeBoss = npc.whoAmI;
             npc.color = Main.DiscoColor * 0.3f; // Rainbow colour
 
@@ -448,6 +468,35 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             return base.CanFallThroughPlatforms(npc);
         }
+
+        public override bool CheckDead(NPC npc)
+        {
+            if (DeathTimer != -1)
+                return true;
+
+            // Dont do the anim if mutant already exists
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
+                || (ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && NPC.AnyNPCs(mutant.Type)))
+            {
+                return true;
+            }
+
+            npc.life = 1;
+            npc.active = true;
+
+            if (FargoSoulsUtil.HostCheck)
+            {
+                // remove normal crown gore (manually spawned later)
+                foreach (Gore gore in Main.gore.Where(g => g.active && g.type == GoreID.KingSlimeCrown))
+                    gore.active = false;
+                DeathTimer++;
+                npc.dontTakeDamage = true;
+                FargoSoulsUtil.ClearHostileProjectiles(2, npc.whoAmI);
+                npc.netUpdate = true;
+            }
+            return false;
+        }
+
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
@@ -455,8 +504,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (FargoSoulsUtil.HostCheck
                 && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
                 && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type))
-            {
-                int n = NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, mutant.Type);
+            {   
+
+                // manual gore spawn
+                Gore.NewGore(npc.GetSource_FromThis(), npc.Center, -15 * Vector2.UnitY, GoreID.KingSlimeCrown);
+
+                int n = NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<ReleasedMutant>());
                 if (n != Main.maxNPCs && Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
             }
@@ -479,6 +532,66 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadExtra(recolor, 39);
 
             LoadSpecial(recolor, ref TextureAssets.Ninja, ref FargowiltasSouls.TextureBuffer.Ninja, "Ninja");
+        }
+
+        public void DeathAnimation(NPC npc)
+        {
+            Particle p;
+            float scaleMult;
+            int screenshake = 3;
+            npc.velocity.X *= 0.9f;
+            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);
+            // Dust
+            if (Main.rand.NextBool(5))
+            {          
+                SoundEngine.PlaySound(npc.HitSound, npc.Center);
+            }
+            Dust.NewDust(npc.TopLeft, npc.width, npc.height, DustID.t_Slime);
+
+            if (DeathTimer == 100 || DeathTimer == 200 || DeathTimer == 250)
+            {
+                screenshake += 2;
+                FargoSoulsUtil.ScreenshakeRumble(screenshake);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantSword with { Volume = 0.6f}, npc.Center);
+            }
+
+            // initial charge up
+            if (DeathTimer >= 180 && DeathTimer < 270)
+            {
+                Vector2 pos = npc.Center + 5 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+                scaleMult = (DeathTimer - 180) / 23f;
+                p = new SparkParticle(pos, Vector2.UnitX.RotatedBy((pos - npc.Center).ToRotation()), Color.Teal, scaleMult * 0.1f, 10);
+                p.Spawn();
+            }
+
+            if (DeathTimer >= 270)
+            {
+                // eye glow
+                scaleMult = (DeathTimer - 270) / 14f;
+                p = new SparkParticle(mutantEyePos, Vector2.UnitY, Color.Teal, 1.5f, 120);
+                p.Scale *= scaleMult;
+                p.Spawn();
+                p = new SparkParticle(mutantEyePos, Vector2.UnitX, Color.Teal, 1.5f, 120);
+                p.Scale *= scaleMult;
+                p.Spawn();
+
+                // explosions
+                if (FargoSoulsUtil.HostCheck && DeathTimer % 5 == 0)
+                {
+                    Vector2 spawnPos = npc.position + new Vector2(Main.rand.Next(npc.width), Main.rand.Next(npc.height));
+                    int type = ModContent.ProjectileType<MutantBombSmall>();
+                    Projectile proj = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
+                    proj.scale *= 0.43f * scaleMult;
+                    SoundEngine.PlaySound(SoundID.Item14, npc.Center);
+                    FargoSoulsUtil.ScreenshakeRumble((DeathTimer - 270) / 15f);
+                }
+            }
+            // grand finale
+            if (DeathTimer == 299 && FargoSoulsUtil.HostCheck)
+            {
+                FargoSoulsUtil.ScreenshakeRumble(7f);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantKSKill, npc.Center);
+            }
         }
     }
     /*

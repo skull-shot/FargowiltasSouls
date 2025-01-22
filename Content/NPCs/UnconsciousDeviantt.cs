@@ -2,6 +2,8 @@
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Core.ModPlayers;
+using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
@@ -17,6 +19,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Core.Globals;
 
 namespace FargowiltasSouls.Content.NPCs
 {
@@ -26,8 +30,10 @@ namespace FargowiltasSouls.Content.NPCs
         int slide;
         float number;
         int textpopup;
-        int camerapaninterpolant;
+        int speedlerp;
+        int questionmarkinterpolant;
         LoopedSoundInstance FallingLoop;
+        string npcname;
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 3;
@@ -39,38 +45,59 @@ namespace FargowiltasSouls.Content.NPCs
             NPC.townNPC = true;
             NPC.friendly = true;
             NPC.aiStyle = -1;
-            NPC.lifeMax = 100;
+            NPC.lifeMax = 250;
+            NPC.height = 10;
+            NPC.width = 30;
             NPC.dontTakeDamageFromHostiles = true;
             NPC.noTileCollide = false;
         }
 
         public override void SetChatButtons(ref string button, ref string button2)
         {
-            button = "Wake her up?";
+            button = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.UnconsciousChatButton");
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
             if (firstButton)
             {
-                Main.npcChatText = Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.Chat.Introduction");
                 NPC.Transform(ModContent.NPCType<Deviantt>());
+                int DeviIndex = NPC.FindFirstNPC(ModContent.NPCType<Deviantt>());
+                if (DeviIndex != -1)
+                {
+                    NPC devi = Main.npc[DeviIndex];
+                    if (devi.active)
+                    {
+                        npcname = devi.GivenName;
+                        NPC.velocity.Y += -3;
+                    }
+                }
+
+                if (FargoSoulsUtil.HostCheck && (ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type) && ModContent.TryFind("Fargowiltas", "Abominationn", out ModNPC abom) && !NPC.AnyNPCs(abom.Type)))
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
+                else
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", NPC.GivenName);
+                }
+                     
             }
         }
 
         public override string GetChat()
         {
-            return Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.Chat.Unconscious");
+            return Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Unconscious");
         }
 
         public override void ChatBubblePosition(ref Vector2 position, ref SpriteEffects spriteEffects)
         {
+            position.Y -= 10;
             if (NPC.spriteDirection == -1)
             {
-                position.X -= 20;
+                position.X -= 5;
             }
             else
-                position.X += 20;
+                position.X += 5;
+
             
         }
 
@@ -102,11 +129,15 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void AI()
         {
-
-            DrawOffsetY = 3;
+            //DrawOffsetY = 2;
             if (NPC.ai[0] == 0)
             {
-                MusicFade();
+                float velocity = MathHelper.Lerp(0, 0.2f, ++speedlerp * 0.003f);
+                if (velocity >= 0.2f)
+                {
+                    velocity = 0.2f;
+                }
+                NPC.velocity.X += velocity * NPC.spriteDirection;
                 FallingLoop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.DeviFallLoop, () =>
                 {
                     return !NPC.active || NPC.ai[0] != 0;
@@ -119,10 +150,11 @@ namespace FargowiltasSouls.Content.NPCs
 
                 //CameraPanSystem.PanTowards(NPC.Center, ++camerapaninterpolant * 0.004f);
                 NPC.velocity.X += 0.05f * NPC.spriteDirection;
-                if (++textpopup >= 5)
+                if (++textpopup >= 10)
                 {
                     textpopup = 0;
-                    CombatText.NewText(NPC.Hitbox, Color.Pink, "A", true);
+                    int i = CombatText.NewText(NPC.Hitbox, Color.Pink, "A", true);
+                   
                 }
             }
             if (NPC.ai[0] == 1)
@@ -139,23 +171,14 @@ namespace FargowiltasSouls.Content.NPCs
                 }
             }
 
-           
+            //wake up on her own if it becomes nighttime
+            if (Main.dayTime == false)
+            {
+                NPC.Transform(ModContent.NPCType<Deviantt>());
+                NPC.velocity.Y += -3;                              
+            }
             
-        }
-
-        public void MusicFade()
-        {
-            if (NPC.ai[0] == 0)
-            {
-                Main.musicFade[Main.curMusic] = MathHelper.Lerp(Main.musicFade[Main.curMusic], 0, 0.05f);
-            }
-            else
-            {
-                Main.musicFade[Main.curMusic] = MathHelper.Lerp(Main.musicFade[Main.curMusic], 1, 0.02f);
-            }
-        }
-
-       
+        }      
 
         public override void FindFrame(int frameHeight)
         {   
@@ -169,6 +192,9 @@ namespace FargowiltasSouls.Content.NPCs
                 if (landsound == false)
                 {
                     FargoSoulsUtil.ScreenshakeRumble(5);
+                    NPC.life -= 1;
+                    CombatText.NewText(NPC.Hitbox, Color.Red, "1", false, true);
+                    SoundEngine.PlaySound(new SoundStyle($"FargowiltasSouls/Assets/Sounds/SqueakyToy/squeak{Main.rand.Next(1, 7)}") with { Volume = 0.1f }, NPC.Center);
                     SoundEngine.PlaySound(FargosSoundRegistry.DeviFloorImpact, NPC.Center);
                     NPC.ai[0] = 1;
                     landsound = true;
@@ -178,6 +204,32 @@ namespace FargowiltasSouls.Content.NPCs
                 NPC.frame.Y = 1 * frameHeight;
                 NPC.rotation = 0;
             }
+        }
+
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Vector2 bluh = new Vector2(0, (float)Math.Sin(Main.GameUpdateCount / 90f * MathHelper.TwoPi) * 2f);
+            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/DeviQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Rectangle rectangle = new(0, 0, QuestionMark.Width, QuestionMark.Height);
+            if (NPC.ai[0] == 1)
+            {
+                float opacity = MathHelper.Lerp(0, 1f, ++questionmarkinterpolant * 0.08f);
+                if (opacity >= 1f)
+                {
+                    opacity = 1f;
+                }
+
+                float scale = MathHelper.Lerp(0, 1f, questionmarkinterpolant * 0.04f);
+                if (scale >= 1f)
+                {
+                    scale = 1f;
+                }
+
+                Vector2 origin2 = rectangle.Size() / 2f;
+                spriteBatch.Draw(QuestionMark, NPC.Center + bluh - Main.screenPosition + new Vector2(0, -50), new Rectangle?(rectangle), Color.White * opacity, 0, origin2, scale, SpriteEffects.None, 0);
+            }
+           
+            base.PostDraw(spriteBatch, screenPos, drawColor);
         }
 
 

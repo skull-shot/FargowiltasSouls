@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle GeminiReti = new(SoundsPath + "Weapons/GeminiReti");
         public static readonly SoundStyle LeashSpin = new(SoundsPath + "Weapons/LeashSpin");
         public static readonly SoundStyle LeashBreak = new(SoundsPath + "Weapons/LeashBreak");
+        public static readonly SoundStyle StyxCharge = new(SoundsPath + "StyxCharge");
 
         // Trojan
         public static readonly SoundStyle TrojanHeadDeath = new (SoundsPath + "Challengers/Trojan/TrojanHeadDeath");
@@ -105,6 +106,9 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle PenetratorThrow = new(SoundsPath + "Siblings/Mutant/PenetratorThrow");
         public static readonly SoundStyle PenetratorExplosion = new(SoundsPath + "Siblings/Mutant/PenetratorExplosion");
         public static readonly SoundStyle MutantSword = new(SoundsPath + "Siblings/Mutant/MutantSword");
+
+        public static readonly SoundStyle MutantLand = new(SoundsPath + "Siblings/Mutant/MutantLand");
+        public static readonly SoundStyle MutantKSKill = new(SoundsPath + "Siblings/Mutant/MutantKSKill");
 
         // Abominationn
 
