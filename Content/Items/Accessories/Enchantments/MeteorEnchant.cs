@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort, pos);
 
             int force = forceEffect ? 1 : 0;
-            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), FargoSoulsUtil.HighestDamageTypeScaling(player, damage), 0.5f, player.whoAmI, force);
+            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 0.5f, player.whoAmI, force);
         }
     }
 }

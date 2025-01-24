@@ -524,7 +524,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                 dmg = 50;
                             }
 
-                            int damage = FargoSoulsUtil.HighestDamageTypeScaling(player, dmg);
+                            int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
                             Projectile[] balls = FargoSoulsUtil.XWay(numBalls, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, damage, 0);
 
                             foreach (Projectile ball in balls)
