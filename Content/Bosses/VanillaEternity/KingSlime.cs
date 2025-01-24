@@ -5,6 +5,7 @@ using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -476,7 +477,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             // Dont do the anim if mutant already exists
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
-                || (ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && NPC.AnyNPCs(mutant.Type)))
+                || (ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && NPC.AnyNPCs(mutant.Type)) || !SoulConfig.Instance.BossRecolors)
             {
                 return true;
             }
@@ -484,7 +485,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.life = 1;
             npc.active = true;
 
-            if (FargoSoulsUtil.HostCheck)
+            if (true)
             {
                 // remove normal crown gore (manually spawned later)
                 foreach (Gore gore in Main.gore.Where(g => g.active && g.type == GoreID.KingSlimeCrown))
@@ -546,6 +547,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {          
                 SoundEngine.PlaySound(npc.HitSound, npc.Center);
             }
+            bool recolor = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
             Dust.NewDust(npc.TopLeft, npc.width, npc.height, DustID.t_Slime);
 
             if (DeathTimer == 100 || DeathTimer == 200 || DeathTimer == 250)
@@ -576,18 +578,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 p.Spawn();
 
                 // explosions
-                if (FargoSoulsUtil.HostCheck && DeathTimer % 5 == 0)
+                if (DeathTimer % 5 == 0)
                 {
-                    Vector2 spawnPos = npc.position + new Vector2(Main.rand.Next(npc.width), Main.rand.Next(npc.height));
-                    int type = ModContent.ProjectileType<MutantBombSmall>();
-                    Projectile proj = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
-                    proj.scale *= 0.43f * scaleMult;
+                    if (FargoSoulsUtil.HostCheck) {
+                        Vector2 spawnPos = npc.position + new Vector2(Main.rand.Next(npc.width), Main.rand.Next(npc.height));
+                        int type = ModContent.ProjectileType<MutantBombSmall>();
+                        Projectile proj = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
+                        proj.scale *= 0.43f * scaleMult;
+                    }
                     SoundEngine.PlaySound(SoundID.Item14, npc.Center);
                     FargoSoulsUtil.ScreenshakeRumble((DeathTimer - 270) / 15f);
                 }
             }
             // grand finale
-            if (DeathTimer == 299 && FargoSoulsUtil.HostCheck)
+            if (DeathTimer == 298)
             {
                 FargoSoulsUtil.ScreenshakeRumble(7f);
                 SoundEngine.PlaySound(FargosSoundRegistry.MutantKSKill, npc.Center);

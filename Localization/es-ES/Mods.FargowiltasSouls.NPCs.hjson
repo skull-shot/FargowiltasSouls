@@ -392,4 +392,5 @@ ReleasedMutant: {
 	// Chat: Was about time I got out of that bath. What? Giant slime? Those are the same thing, aren't they?
 	// TalkToHim: Who are you?
 	// Introduction: Names {0}, though I'm sure you've heard of me before. I'll sell to you what I have, granted you give me money, of course.
+	// Census.SpawnCondition: Conditions unknown
 }
