@@ -784,16 +784,16 @@ namespace FargowiltasSouls.Core.Globals
                     damage = 5;
             }
 
-            //20 dps 
+            //12 dps 
             if (OriPoison)
             {
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
 
-                npc.lifeRegen -= 40;
+                npc.lifeRegen -= 24;
 
-                if (damage < 4)
-                    damage = 4;
+                if (damage < 2)
+                    damage = 2;
             }
             if (EarthPoison)
             {
