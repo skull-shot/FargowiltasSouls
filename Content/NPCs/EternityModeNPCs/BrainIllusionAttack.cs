@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             return NPC.alpha == 0;
         }
 
-        private const int attackDelay = 120;
+        public const int attackDelay = 120;
 
         public override void AI()
         {
