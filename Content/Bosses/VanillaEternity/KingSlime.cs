@@ -485,16 +485,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.life = 1;
             npc.active = true;
 
-            if (true)
-            {
-                // remove normal crown gore (manually spawned later)
-                foreach (Gore gore in Main.gore.Where(g => g.active && g.type == GoreID.KingSlimeCrown))
-                    gore.active = false;
-                DeathTimer++;
-                npc.dontTakeDamage = true;
-                FargoSoulsUtil.ClearHostileProjectiles(2, npc.whoAmI);
-                npc.netUpdate = true;
-            }
+            // remove normal crown gore (manually spawned later)
+            foreach (Gore gore in Main.gore.Where(g => g.active && g.type == GoreID.KingSlimeCrown))
+                gore.active = false;
+            DeathTimer++;
+            npc.dontTakeDamage = true;
+            FargoSoulsUtil.ClearHostileProjectiles(2, npc.whoAmI);
+            npc.netUpdate = true;
+
             return false;
         }
 
