@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.NPCs
         {
             Main.npcFrameCount[NPC.type] = 3;
             NPCID.Sets.NoTownNPCHappiness[Type] = true;
+            this.ExcludeFromBestiary();
         }
 
         public override void ChatBubblePosition(ref Vector2 position, ref SpriteEffects spriteEffects)
@@ -71,16 +72,12 @@ namespace FargowiltasSouls.Content.NPCs
             if (firstButton)
             {
                 NPC.Transform(ModContent.NPCType<Mutant>());
-                int DeviIndex = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
-                if (DeviIndex != -1)
+                int mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
+                if (mutant >= 0)
                 {
-                    NPC devi = Main.npc[DeviIndex];
-                    if (devi.active)
-                    {
-                        npcname = devi.GivenName;
-                    }
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction", Main.npc[mutant].GivenName);
                 }
-                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction", NPC.GivenName);
+                
             }
         }
 
@@ -187,7 +184,7 @@ namespace FargowiltasSouls.Content.NPCs
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 bluh = new Vector2(0, (float)Math.Sin(Main.GameUpdateCount / 90f * MathHelper.TwoPi) * 2f);
-            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/MutantQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/ReleasedMutant_Head", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rectangle = new(0, 0, QuestionMark.Width, QuestionMark.Height);
             if (NPC.ai[0] == 2 && NPC.ai[1] >= 15)
             {
