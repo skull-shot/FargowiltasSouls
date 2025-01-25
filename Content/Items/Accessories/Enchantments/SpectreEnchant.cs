@@ -63,11 +63,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool spiritForce = modPlayer.ForceEffects.Contains(ModContent.ItemType<SpiritForce>());
 
-            int spiritDamage = 200;
+            int spiritDamage = 160;
             if (modPlayer.ForceEffect<SpectreEnchant>())
             {
-                spiritDamage = 400;
+                spiritDamage = 320;
             }
+            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
 
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
             {
@@ -312,11 +313,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.FargoSouls().TerrariaSoul)
                 return;
-            int spiritDamage = 200;
+            int spiritDamage = 160;
             if (player.FargoSouls().ForceEffect<SpectreEnchant>())
             {
-                spiritDamage = 400;
+                spiritDamage = 320;
             }
+            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
             int damageCopy = info.Damage;
             for (int i = 0; i < 5; i++)
             {
