@@ -38,6 +38,7 @@ namespace FargowiltasSouls.Content.NPCs
         {
             Main.npcFrameCount[NPC.type] = 3;
             NPCID.Sets.NoTownNPCHappiness[Type] = true;
+            this.ExcludeFromBestiary();
         }
 
         public override void SetDefaults()
