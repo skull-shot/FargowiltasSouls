@@ -1190,8 +1190,7 @@ FrigidGemstone: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
-		Grants immunity to Frostburn and Chilled
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
 		'A torn off limb composed of ancient ice'
 		''' */
 	// VanityTooltip: Grants immunity to Frostburn and Chilled
@@ -2174,7 +2173,7 @@ OrdinaryCarrot: {
 		{$CommonItemTooltip.MinorStats}
 		Increases life regeneration
 		1 minute duration
-		Right click to increase view range (works from inventory and vanity slots)
+		Right click to increase view range (works from inventory and vanity)
 		'Plucked from the face of a defeated foe'
 		''' */
 	// VanityTooltip: Right click to increase view range
