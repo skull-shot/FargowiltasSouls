@@ -22,7 +22,6 @@ EridanusOff:
 	'''
 	15% increased damage for your current weapon class
 	10% increased critical strike chance for your current weapon class
-	10% increased attack speed for your current weapon class
 	Double tap {0} to activate Eridanus' blessing
 	'''
 EridanusOn:
