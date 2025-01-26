@@ -42,6 +42,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.knockBackResist = 0f;
             NPC.lavaImmune = true;
             NPC.aiStyle = -1;
+
+            NPC.Opacity = 0;
         }
 
         int trueAlpha;
@@ -88,7 +90,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 NPC.ai[2] = 9999;
             if (NPC.ai[2] < time && NPC.HasPlayerTarget)
             {
-                NPC.velocity += NPC.DirectionTo(Main.player[NPC.target].Center) * 0.28f;
+                if (NPC.Opacity < 1)
+                    NPC.Opacity += 0.05f;
+                Player player = Main.player[NPC.target];
+                if (brain.GetGlobalNPC<BrainofCthulhu>().ClonefadeDashTimer <= 0 && NPC.ai[1] == 0) // ai1: if has not yet dashed
+                {
+                    NPC.velocity *= 0;
+                    NPC.Center = player.Center + (player.Center - brain.Center);
+                }
+                else
+                {
+                    NPC.velocity += NPC.DirectionTo(player.Center) * 0.28f;
+                    NPC.ai[1] = 1; // lock to "dashing state" for rest of duration
+                }
+                   
             }
             else
             {
