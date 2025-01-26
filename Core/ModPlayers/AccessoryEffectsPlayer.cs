@@ -843,8 +843,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                             int targetID = FargoSoulsUtil.FindClosestHostileNPC(Player.Center, 1000, true, true);
                             if (targetID.IsWithinBounds(Main.maxNPCs) && Main.npc[targetID] is NPC target && target.Alive())
                             {
-                                for (int i = 0; i < 2; i++)
-                                    TerraLightningEffect.LightningProc(Player, target, 4f);
+                                TerraLightningEffect.LightningProc(Player, target, 7f);
                             }
                             
                         }
