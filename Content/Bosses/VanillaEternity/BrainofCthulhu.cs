@@ -124,7 +124,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (EnteredPhase2)
             {
-                Main.NewText(ConfusionTimer);
                 int confusionThreshold = 400;
                 int confusionThreshold2 = confusionThreshold - 60;
                 // Fade dash
