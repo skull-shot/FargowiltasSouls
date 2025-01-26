@@ -941,7 +941,7 @@ TerraForce: {
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire two lightning bolts
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 50%, increasing by 25% up to 100% whenever a lightning bolt is fired
+		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range (works in inventory and vanity)
@@ -1190,8 +1190,7 @@ FrigidGemstone: {
 	DisplayName: Frigid Grasp
 	Tooltip:
 		'''
-		Works from inventory and vanity slots
-		Grants immunity to Frostburn and Chilled
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
 		'A torn off limb composed of ancient ice'
 		'''
 	VanityTooltip: Grants immunity to Frostburn and Chilled
@@ -1847,7 +1846,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 50% set critical strike chance increased when lightning bolts fire, further item grab range, and you sometimes don't consume crafting ingredients
+		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, and you sometimes don't consume crafting ingredients
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
@@ -2153,7 +2152,7 @@ OrdinaryCarrot: {
 		{$CommonItemTooltip.MinorStats}
 		Increases life regeneration
 		1 minute duration
-		Right click to increase view range (works from inventory and vanity slots)
+		Right click to increase view range (works from inventory and vanity)
 		'Plucked from the face of a defeated foe'
 		'''
 	VanityTooltip: Right click to increase view range

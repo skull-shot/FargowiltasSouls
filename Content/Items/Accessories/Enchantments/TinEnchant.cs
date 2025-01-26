@@ -1,6 +1,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -54,6 +55,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
         public override int ToggleItemType => ModContent.ItemType<TinEnchant>();
 
+        public static int TinFloor(Player player)
+        {
+            if (player.HasEffectEnchant<TinEffect>())
+            {
+                if (player.FargoSouls().ForceEffect<TinEnchant>())
+                    return 10;
+                return 5;
+            }
+            if (player.FargoSouls().Eternity)
+                return 50;
+            return 75;
+        }
+
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -71,6 +85,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (modPlayer.TinProcCD > 0)
                 modPlayer.TinProcCD--;
+
+            int floor = TinFloor(player);
+            if (modPlayer.TinCrit < floor)
+                modPlayer.TinCrit = floor;
 
             if (Main.myPlayer == player.whoAmI)
                 CooldownBarManager.Activate("TinCritCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TinEnchant").Value, new(162, 139, 78), 
@@ -90,9 +108,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.TinCritBuffered && modPlayer.TinProcCD <= 0)
             {
                 modPlayer.TinCritBuffered = false;
-                if (player.HasEffectEnchant<TinEffect>())
+                if (player.HasEffectEnchant<TinEffect>() || modPlayer.Eternity)
                 {
-                    modPlayer.TinCrit += 5;
+                    modPlayer.TinCrit += modPlayer.Eternity ? 10 : 5;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
                     else
@@ -144,15 +162,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             float oldCrit = modPlayer.TinCrit;
             if (modPlayer.Eternity)
                 modPlayer.TinEternityDamage = 0;
-            if (player.HasEffectEnchant<TinEffect>())
-            {
-                if (modPlayer.ForceEffect<TinEnchant>())
-                    modPlayer.TinCrit = 10;
-                else
-                    modPlayer.TinCrit = 5;
-            }
-            else
-                modPlayer.TinCrit = 50;
+
+            modPlayer.TinCrit = TinFloor(player);
 
             double diff = Math.Round(oldCrit - modPlayer.TinCrit, 1);
             if (diff > 0)

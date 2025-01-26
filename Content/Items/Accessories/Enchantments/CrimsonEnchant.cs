@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.CrimsonRegenTime > (modPlayer.ForceEffect<CrimsonEnchant>() ? 420 * 2 : 420))
             { //if its force effect, end at 14 seconds instead of 7
-                player.DelBuff(player.FindBuffIndex(ModContent.BuffType<CrimsonRegenBuff>()));
+                player.ClearBuff(ModContent.BuffType<CrimsonRegenBuff>());
             }
         }
         public override void OnHurt(Player player, Player.HurtInfo info)
