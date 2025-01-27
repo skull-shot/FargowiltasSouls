@@ -112,8 +112,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     Projectile.NewProjectile(player.GetSource_EffectItem<GladiatorBanner>(), player.Top, Vector2.UnitY * 25, GladiatorStandard, modPlayer.ForceEffect<GladiatorEnchant>() ? 300 : 100, 3f, player.whoAmI);
                     modPlayer.GladiatorStandardCD = LumUtils.SecondsToFrames(15);
 
-                    CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
-                        () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
+                            () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
                 }
             }
         }

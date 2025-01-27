@@ -102,8 +102,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 farg.IFrameDashTimer--;
             }
-            CooldownBarManager.Activate("DeathForceIframeCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24),
-                () => 1 - farg.IFrameDashTimer / 250f, activeFunction: () => player.HasEffect<ShadowForceDashEffect>());
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("DeathForceIframeCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24),
+                    () => 1 - farg.IFrameDashTimer / 250f, activeFunction: () => player.HasEffect<ShadowForceDashEffect>());
             if (farg.IFrameDashTimer == 1)
             {
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f });

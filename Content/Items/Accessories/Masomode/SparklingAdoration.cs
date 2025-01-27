@@ -74,7 +74,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             }
             fargoPlayer.DeviGrazeCounter = -1; //reset counter whenever successful graze
 
-            CooldownBarManager.Activate("SparklingAdorationGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SparklingAdoration").Value, Color.Pink, () => (float)(fargoPlayer.DeviGrazeBonus / GrazeCap(fargoPlayer)), true, 0, () => fargoPlayer.DeviGraze, 11);
+            if (fargoPlayer.Player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("SparklingAdorationGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SparklingAdoration").Value, Color.Pink, () => (float)(fargoPlayer.DeviGrazeBonus / GrazeCap(fargoPlayer)), true, 0, () => fargoPlayer.DeviGraze, 11);
 
             if (!Main.dedServ)
             {

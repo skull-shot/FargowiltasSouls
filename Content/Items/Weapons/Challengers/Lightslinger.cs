@@ -85,8 +85,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
         public override bool? UseItem(Player player)
         {
             FargoSoulsPlayer soulsPlayer = player.FargoSouls();
-            CooldownBarManager.Activate("LightslingerCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/ChallengerItems/LightslingerBomb").Value, Color.Pink, 
-                () => (float)Main.LocalPlayer.FargoSouls().LightslingerHitShots / ReqShots, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<Lightslinger>());
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("LightslingerCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/ChallengerItems/LightslingerBomb").Value, Color.Pink, 
+                    () => (float)Main.LocalPlayer.FargoSouls().LightslingerHitShots / ReqShots, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<Lightslinger>());
             if (player.altFunctionUse == 2)
             {
                 soulsPlayer.LightslingerHitShots = 0;
