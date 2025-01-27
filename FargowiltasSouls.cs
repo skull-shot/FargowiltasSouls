@@ -620,6 +620,7 @@ namespace FargowiltasSouls
             RequestEnvironmentalProjectile,
             ToggleEternityMode,
             WakeUpDeviantt,
+            WakeUpMutant
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -984,6 +985,15 @@ namespace FargowiltasSouls
                             if (npc.ModNPC is UnconsciousDeviantt && Main.netMode == NetmodeID.Server)
                             {
                                 UnconsciousDeviantt.WakeUp(npc);
+                            }
+                        }
+                        break;
+                    case PacketID.WakeUpMutant:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            if (npc.ModNPC is ReleasedMutant && Main.netMode == NetmodeID.Server)
+                            {
+                                npc.Transform(ModContent.NPCType<Mutant>());
                             }
                         }
                         break;

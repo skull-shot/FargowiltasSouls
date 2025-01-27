@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Steamworks;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using Terraria;
@@ -21,6 +22,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -47,9 +49,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool SpecialJumping = false;
 
         public int DeathTimer = -1;
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write7BitEncodedInt(DeathTimer);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            DeathTimer = binaryReader.Read7BitEncodedInt();
+        }
         public override bool SafePreAI(NPC npc)
         {
-            if (DeathTimer >= 0) {
+            if (DeathTimer >= 0) 
+            {
                 DeathAnimation(npc);
                 if (++DeathTimer >= 300)
                 {
@@ -578,7 +589,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 // explosions
                 if (DeathTimer % 5 == 0)
                 {
-                    if (FargoSoulsUtil.HostCheck) {
+                    if (FargoSoulsUtil.HostCheck) 
+                    {
                         Vector2 spawnPos = npc.position + new Vector2(Main.rand.Next(npc.width), Main.rand.Next(npc.height));
                         int type = ModContent.ProjectileType<MutantBombSmall>();
                         Projectile proj = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);

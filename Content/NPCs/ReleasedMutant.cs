@@ -19,6 +19,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs
 {
@@ -71,7 +72,15 @@ namespace FargowiltasSouls.Content.NPCs
         {
             if (firstButton)
             {
-                NPC.Transform(ModContent.NPCType<Mutant>());
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    var packet = Mod.GetPacket();
+                    packet.Write((byte)FargowiltasSouls.PacketID.WakeUpMutant);
+                    packet.Write((byte)NPC.whoAmI);
+                    packet.Send();
+                }
+                else
+                    NPC.Transform(ModContent.NPCType<Mutant>());
                 int mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
                 if (mutant >= 0)
                 {
@@ -81,7 +90,6 @@ namespace FargowiltasSouls.Content.NPCs
             }
         }
 
-
         public override string GetChat()
         {
             return Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Chat");
@@ -89,10 +97,6 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void OnSpawn(IEntitySource source)
         {
-            
-
-
-
             if (NPC.Center.X < Main.LocalPlayer.Center.X)
             {
                 NPC.spriteDirection = 1;
@@ -113,7 +117,6 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void AI()
         {
-
             DrawOffsetY = -2;
             
 
@@ -146,13 +149,23 @@ namespace FargowiltasSouls.Content.NPCs
                     }
                 }
 
-                if (NPC.Distance(Main.LocalPlayer.Center) >= 1500)
+                int p = Player.FindClosest(NPC.Center, 3000, 3000);
+                if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive() && NPC.Distance(player.Center) >= 1500)
                 {
                     NPC.Transform(ModContent.NPCType<Mutant>());
                 }
                 
             }
 
+            if (NPC.velocity.Y == 0 && landsound == false)
+            {
+                FargoSoulsUtil.ScreenshakeRumble(5);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantLand, NPC.Center);
+                NPC.ai[0] = 1;
+                landsound = true;
+                Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+                Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+            }
         }
         public override void FindFrame(int frameHeight)
         {
@@ -162,15 +175,6 @@ namespace FargowiltasSouls.Content.NPCs
             }
             if (NPC.velocity.Y == 0)
             {
-                if (landsound == false)
-                {
-                    FargoSoulsUtil.ScreenshakeRumble(5);
-                    SoundEngine.PlaySound(FargosSoundRegistry.MutantLand, NPC.Center);
-                    NPC.ai[0] = 1;
-                    landsound = true;
-                    Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
-                    Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
-                }
                 NPC.frame.Y = 1 * frameHeight;
                 NPC.rotation = 0;
             }
