@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle ZaWarudo = new(SoundsPath + "Accessories/ZaWarudo");
         public static readonly SoundStyle Zombie104 = new(SoundsPath + "Zombie_104");
         public static readonly SoundStyle GenericDeathray = new(SoundsPath + "GenericDeathray");
+        public static readonly SoundStyle ChargeSound = new SoundStyle(SoundsPath + "ChargeSound") with { Volume = 0.5f };
 
         // weapons
         public static readonly SoundStyle DiffractorStart = new(SoundsPath + "Weapons/DiffractorStart");

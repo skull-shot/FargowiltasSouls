@@ -44,7 +44,8 @@ There is a cooldown of 3 seconds between uses"); */
             //on cooldown
             if (dashCD > 0)
             {
-                CooldownBarManager.Activate("ParadoxCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/ParadoxWolf/ParadoxWolfSoul").Value, Color.DarkRed,
+                if (player.whoAmI == Main.myPlayer)
+                    CooldownBarManager.Activate("ParadoxCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/ParadoxWolf/ParadoxWolfSoul").Value, Color.DarkRed,
                         () => (float)dashCD / 180f);
                 dashCD--;
 

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
 using Microsoft.Xna.Framework;
@@ -57,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             {
                 if (player.whoAmI == Main.myPlayer)
                 {
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), player.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, player.Center);
                 }
                 //dust
                 double spread = 2 * Math.PI / 36;
