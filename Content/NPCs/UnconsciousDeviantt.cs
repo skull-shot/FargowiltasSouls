@@ -60,27 +60,36 @@ namespace FargowiltasSouls.Content.NPCs
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {   
+        {
             if (firstButton)
-            {   
-                
-                int Devi = NPC.FindFirstNPC(ModContent.NPCType<Deviantt>());
+            {
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    var packet = Mod.GetPacket();
+                    packet.Write((byte)FargowiltasSouls.PacketID.WakeUpDeviantt);
+                    packet.Write((byte)NPC.whoAmI);
+                    packet.Send();
+                }
+                else
+                    WakeUp(NPC);
+
                 int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
                 int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
-                NPC.Transform(ModContent.NPCType<Deviantt>());
-                
-                if (Devi >= 0)
-                {
-                    NPC.velocity.Y += -3;
-                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Main.npc[Devi].GivenName);
 
-                    if (Mutant >= 0 || Abom >= 0)
-                    {
-                        Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", Main.npc[Devi].GivenName);
-                    }
-                    
-                }                  
+
+                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
+
+                if (Mutant >= 0 || Abom >= 0)
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", NPC.GivenName);
+                }
             }
+        }
+
+        public static void WakeUp(NPC npc)
+        {
+            npc.Transform(ModContent.NPCType<Deviantt>());
+            npc.velocity.Y += -3;
         }
 
         public override string GetChat()
@@ -104,14 +113,15 @@ namespace FargowiltasSouls.Content.NPCs
         public override void OnSpawn(IEntitySource source)
         {
             for (int index1 = 0; index1 < 25; ++index1)
-            {   Particle p = new SmallSparkle(NPC.Center, Main.rand.NextVector2Circular(8, 8), Color.Pink, 1, 50, 0, 0, false);
+            {   Particle p1 = new SmallSparkle(NPC.Center, Main.rand.NextVector2Circular(8, 8), Color.Pink, 1, 50, 0, 0, false);
                 Particle p2 = new HeartParticle(NPC.Center, Main.rand.NextVector2Circular(12, 12), Color.Red, 1.5f, 35, false);
-                p.Spawn();
+                p1.Spawn();
                 p2.Spawn();
             }
                 
             SoundEngine.PlaySound(FargosSoundRegistry.DeviTeleport with { Volume = 2f}, NPC.Center);
-            if (NPC.Center.X < Main.LocalPlayer.Center.X)
+            int p = Player.FindClosest(NPC.Center, 3000, 3000);
+            if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive() && NPC.Center.X < player.Center.X)
             {
                 NPC.spriteDirection = 1;
                 number = 5;
@@ -177,18 +187,9 @@ namespace FargowiltasSouls.Content.NPCs
                 NPC.Transform(ModContent.NPCType<Deviantt>());
                 NPC.velocity.Y += -3;                              
             }
-            
-        }      
 
-        public override void FindFrame(int frameHeight)
-        {   
-            if (NPC.velocity.Y > 0)
+            if (NPC.velocity.Y == 0)
             {
-                NPC.frame.Y = 0 * frameHeight;
-                NPC.rotation += 0.1f * NPC.spriteDirection;
-            }
-           if (NPC.velocity.Y == 0)
-           {    
                 if (landsound == false)
                 {
                     FargoSoulsUtil.ScreenshakeRumble(5);
@@ -199,8 +200,20 @@ namespace FargowiltasSouls.Content.NPCs
                     NPC.ai[0] = 1;
                     landsound = true;
                     Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
-                    Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5,0), Main.rand.Next(11, 14), Scale: 0.8f);
-                }            
+                    Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+                }
+            }
+        }      
+
+        public override void FindFrame(int frameHeight)
+        {   
+            if (NPC.velocity.Y > 0)
+            {
+                NPC.frame.Y = 0 * frameHeight;
+                NPC.rotation += 0.1f * NPC.spriteDirection;
+            }
+            if (NPC.velocity.Y == 0)
+            {
                 NPC.frame.Y = 1 * frameHeight;
                 NPC.rotation = 0;
             }
