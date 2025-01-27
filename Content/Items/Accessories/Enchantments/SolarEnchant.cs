@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -83,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.SolarEnchCharge += 1;
                     if (modPlayer.SolarEnchCharge == 240)
                     {
-                        SoundEngine.PlaySound(, player.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, player.Center);
                     }
                 }
                 else
