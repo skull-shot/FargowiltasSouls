@@ -940,7 +940,7 @@ TerraForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
-		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire two lightning bolts
+		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
