@@ -53,6 +53,7 @@ namespace FargowiltasSouls.Core.Systems
         internal static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
         internal static bool wOFDroppedDeviGift2;
         internal static bool shiftingSandEvent;
+        internal static bool haveForcedMutantFromKS;
 
         public static bool EternityMode { get; set; }
 
@@ -93,6 +94,8 @@ namespace FargowiltasSouls.Core.Systems
         public static bool DownedBetsy { get => downedBetsy; set => downedBetsy = value; }
 
         public static bool SwarmActive { get => swarmActive; set => swarmActive = value; }
+        
+        public static bool HaveForcedMutantFromKS { get => haveForcedMutantFromKS; set => haveForcedMutantFromKS = value;}
 
         public static bool PlacedMutantStatue;
 
@@ -119,6 +122,7 @@ namespace FargowiltasSouls.Core.Systems
             AngryMutant = false;
 
             HaveForcedAbomFromGoblins = false;
+            HaveForcedMutantFromKS = false;
             SkipMutantP1 = 0;
 
             ReceivedTerraStorage = false;
@@ -174,6 +178,9 @@ namespace FargowiltasSouls.Core.Systems
 
             if (HaveForcedAbomFromGoblins)
                 downed.Add("haveForcedAbomFromGoblins");
+
+            if (haveForcedMutantFromKS)
+                downed.Add("haveForcedMutantFromKS");
 
             if (ReceivedTerraStorage)
                 downed.Add("ReceivedTerraStorage");
@@ -238,6 +245,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = downed.Contains("downedMutant");
             AngryMutant = downed.Contains("AngryMutant");
             HaveForcedAbomFromGoblins = downed.Contains("haveForcedAbomFromGoblins");
+            haveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
             ReceivedTerraStorage = downed.Contains("ReceivedTerraStorage");
             SpawnedDevi = downed.Contains("spawnedDevi");
             DownedAnyBoss = downed.Contains("downedAnyBoss");
@@ -294,6 +302,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = flags[5];
             AngryMutant = flags[6];
             HaveForcedAbomFromGoblins = flags[7];
+            haveForcedMutantFromKS = flags[8];
 
             flags = reader.ReadByte();
             ReceivedTerraStorage = flags[0];
@@ -339,7 +348,8 @@ namespace FargowiltasSouls.Core.Systems
                 [4] = DownedAbom,
                 [5] = DownedMutant,
                 [6] = AngryMutant,
-                [7] = HaveForcedAbomFromGoblins
+                [7] = HaveForcedAbomFromGoblins,
+                [8] = HaveForcedMutantFromKS
             });
 
             writer.Write(new BitsByte

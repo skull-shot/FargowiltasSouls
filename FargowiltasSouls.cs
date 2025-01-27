@@ -948,10 +948,11 @@ namespace FargowiltasSouls
 
                                             FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
                                         }
-
+                                        float volume = 0.5f;
                                         if (WorldSavingSystem.EternityMode)
                                         {
                                             mode = "Deactivate";
+                                            volume = 1;
                                         }
                                         else
                                             mode = "Emode";
@@ -959,10 +960,11 @@ namespace FargowiltasSouls
                                         if (WorldSavingSystem.masochistModeReal)
                                         {
                                             mode = "Deactivate";
+                                            volume = 1;
                                         }
                                         else
                                             mode = "Maso";
-                                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = 0.8f}, player.Center);
+                                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = volume});
 
                                         if (Main.netMode == NetmodeID.Server)
                                             NetMessage.SendData(MessageID.WorldData); //sync world

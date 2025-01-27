@@ -24,6 +24,7 @@ using FargowiltasSouls.Core.Globals;
 
 namespace FargowiltasSouls.Content.NPCs
 {
+    [AutoloadHead]
     public class UnconsciousDeviantt : ModNPC
     {
         bool landsound = false;
@@ -59,28 +60,26 @@ namespace FargowiltasSouls.Content.NPCs
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
+        {   
             if (firstButton)
-            {
+            {   
+                
+                int Devi = NPC.FindFirstNPC(ModContent.NPCType<Deviantt>());
+                int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
+                int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
                 NPC.Transform(ModContent.NPCType<Deviantt>());
-                int DeviIndex = NPC.FindFirstNPC(ModContent.NPCType<Deviantt>());
-                if (DeviIndex != -1)
+                
+                if (Devi >= 0)
                 {
-                    NPC devi = Main.npc[DeviIndex];
-                    if (devi.active)
-                    {
-                        npcname = devi.GivenName;
-                        NPC.velocity.Y += -3;
-                    }
-                }
+                    NPC.velocity.Y += -3;
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Main.npc[Devi].GivenName);
 
-                if (FargoSoulsUtil.HostCheck && (ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type) && ModContent.TryFind("Fargowiltas", "Abominationn", out ModNPC abom) && !NPC.AnyNPCs(abom.Type)))
-                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
-                else
-                {
-                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", NPC.GivenName);
-                }
-                     
+                    if (Mutant >= 0 || Abom >= 0)
+                    {
+                        Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", Main.npc[Devi].GivenName);
+                    }
+                    
+                }                  
             }
         }
 
@@ -210,7 +209,7 @@ namespace FargowiltasSouls.Content.NPCs
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 bluh = new Vector2(0, (float)Math.Sin(Main.GameUpdateCount / 90f * MathHelper.TwoPi) * 2f);
-            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/DeviQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/UnconsciousDeviantt_Head", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rectangle = new(0, 0, QuestionMark.Width, QuestionMark.Height);
             if (NPC.ai[0] == 1)
             {
