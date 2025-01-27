@@ -682,6 +682,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.whoAmI == Main.myPlayer)
             {
+                int type = ModContent.ProjectileType<Bloodshed>();
+                const float speed = 12f;
+                Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), Player.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
+
                 int projDamage = FargoSoulsUtil.HighestDamageTypeScaling(Player, 1000);
 
                 const int max = 20;
