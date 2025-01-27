@@ -116,7 +116,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
                 FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
                 float modifier = 1f;
-                if (player.HasEffect<TinEffect>())
+                if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {
                     modPlayer.TinCrit += 25;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
@@ -124,10 +124,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     else
                         CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
 
-                    if (modPlayer.TinCrit >= 75)
-                        modifier -= 0.2f;
                     if (modPlayer.TinCrit >= 100)
-                        modifier -= 0.2f;
+                        modifier -= 0.4f;
                 }
                 modPlayer.TerraProcCD = (int)(cdLength * modifier);
             }

@@ -380,17 +380,17 @@ GelatinFlyer.DisplayName: Райский слизень
 CursedCoffinInactive.DisplayName: Загадочный Саркофаг
 
 UnconsciousDeviantt: {
-	// DisplayName: ???
-	// Unconscious: ...
-	// UnconsciousChatButton: Wake her up
-	// Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
-	// IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems you've met them already, they're the coolest!
+	DisplayName: ???
+	Unconscious: ...
+	UnconsciousChatButton: Разбудить её
+	Introduction: Привет! А? В порядке ли я? А почему нет? Меня зовут {0}! Я бы представила тебе своих братьев, но, похоже, их здесь пока нет. Но они точно когда-нибудь появятся!
+	IntroductionHasMetBros: Привет! А? В порядке ли я? А почему нет? Меня зовут {0}! Я бы представила тебе своих братьев, но, похоже, ты уже с ними знаком, ну правда же они крутые!
 }
 
 ReleasedMutant: {
-	// DisplayName: ???
-	// Chat: Was about time I got out of that bath. What? Giant slime? Those are the same thing, aren't they?
-	// TalkToHim: Who are you?
-	// Introduction: Names {0}, though I'm sure you've heard of me before. I'll sell to you what I have, granted you give me money, of course.
-	// Census.SpawnCondition: Conditions unknown
+	DisplayName: ???
+	Chat: Пора уже было вылезать из ванны. Чего? Огромный слизень? В смысле, это всё разве не одно и то же?
+	TalkToHim: Кто ты?
+	Introduction: Зовут {0}, но ты наверняка уже слышал обо мне. Я продам тебе всё, что у меня есть, если у тебя будут деньги, конечно.
+	Census.SpawnCondition: Условия неизвестны
 }

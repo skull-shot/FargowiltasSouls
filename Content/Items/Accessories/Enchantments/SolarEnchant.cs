@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -72,8 +73,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            CooldownBarManager.Activate("SolarEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SolarEnchant").Value, SolarEnchant.NameColor, 
-                () => Main.LocalPlayer.FargoSouls().SolarEnchCharge / 240, true, activeFunction: () => player.HasEffect<SolarFlareEffect>());
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("SolarEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SolarEnchant").Value, SolarEnchant.NameColor, 
+                    () => Main.LocalPlayer.FargoSouls().SolarEnchCharge / 240, true, activeFunction: () => player.HasEffect<SolarFlareEffect>());
 
             player.endurance += 0.2f * modPlayer.SolarEnchCharge / 240f;
             if (player.HeldItem != null && player.HeldItem.damage > 0 && player.controlUseItem)
@@ -83,7 +85,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.SolarEnchCharge += 1;
                     if (modPlayer.SolarEnchCharge == 240)
                     {
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), player.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, player.Center);
                     }
                 }
                 else

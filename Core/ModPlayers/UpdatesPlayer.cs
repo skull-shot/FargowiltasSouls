@@ -652,8 +652,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 DreadShellVulnerabilityTimer--;
 
-                Player.statDefense -= 30;
-                Player.endurance -= 0.3f;
+                Player.statDefense -= 15;
+                Player.endurance -= 0.15f;
             }
 
             if (HallowHealTime > 0)

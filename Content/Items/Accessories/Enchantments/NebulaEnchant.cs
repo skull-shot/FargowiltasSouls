@@ -65,8 +65,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             
             int max = 3 * 60;
-            CooldownBarManager.Activate("NebulaEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/NebulaEnchant").Value, NebulaEnchant.NameColor, 
-                () => (float)(max - Main.LocalPlayer.FargoSouls().NebulaEnchCD) / max, activeFunction: () => player.HasEffect<NebulaEffect>());
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("NebulaEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/NebulaEnchant").Value, NebulaEnchant.NameColor, 
+                    () => (float)(max - Main.LocalPlayer.FargoSouls().NebulaEnchCD) / max, activeFunction: () => player.HasEffect<NebulaEffect>());
 
             if (player.setNebula)
                 return;

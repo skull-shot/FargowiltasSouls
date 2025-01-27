@@ -137,8 +137,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bool forceEffect = modPlayer.ForceEffect<MeteorEnchant>();
             int damage = forceEffect ? 400 : 70;
             modPlayer.MeteorCD = Cooldown;
-            CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
-                () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
+
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
+                
+                    () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
 
             Vector2 pos = new(player.Center.X + Main.rand.NextFloat(-1000, 1000), player.Center.Y - 1000);
             Vector2 vel = new(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(8, 12));
