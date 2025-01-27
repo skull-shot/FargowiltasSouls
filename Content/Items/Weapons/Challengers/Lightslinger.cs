@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
@@ -97,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
                     if (soulsPlayer.ChargeSoundDelay <= 0)
                     {
                         soulsPlayer.ChargeSoundDelay = 120;
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), player.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, player.Center);
                     }
                     Vector2 direction = player.itemRotation.ToRotationVector2() * player.direction;
                     Vector2 perpDirection = direction.RotatedBy(MathHelper.PiOver2) * player.direction;

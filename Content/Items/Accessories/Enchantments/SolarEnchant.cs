@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.SolarEnchCharge += 1;
                     if (modPlayer.SolarEnchCharge == 240)
                     {
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), player.Center);
+                        SoundEngine.PlaySound(, player.Center);
                     }
                 }
                 else
