@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     BeeSwarm();
                     if (Projectile.ai[2] == 1) // life force
                     {
-                        Main.LocalPlayer.AddBuff(ModContent.BuffType<AmbrosiaBuff>(), 60 * 10);
+                        Main.LocalPlayer.AddBuff(ModContent.BuffType<AmbrosiaBuff>(), 60 * 6);
                         Main.LocalPlayer.wingTime = Main.LocalPlayer.wingTimeMax;
                         Main.LocalPlayer.FargoSouls().HealPlayer(10);
                     }

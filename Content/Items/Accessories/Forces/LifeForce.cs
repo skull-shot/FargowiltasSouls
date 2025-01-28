@@ -77,9 +77,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             player.wingsLogic = ArmorIDs.Wing.LongTrailRainbowWings;
             ascentWhenFalling = 1.25f;
-            ascentWhenRising = 0.35f;
-            maxCanAscendMultiplier = 1.25f;
-            maxAscentMultiplier = 2f;
+            ascentWhenRising = 0.32f;
+            maxCanAscendMultiplier = 1.22f;
+            maxAscentMultiplier = 1.9f;
             constantAscend = 0.15f;
             if (player.controlUp)
             {
@@ -90,8 +90,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 18f;
-            acceleration = 0.75f;
+            speed = 17f;
+            acceleration = 0.72f;
         }
     }
     public class LifeForceEffect : AccessoryEffect
