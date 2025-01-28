@@ -179,7 +179,7 @@ namespace FargowiltasSouls.Core.Systems
             if (HaveForcedAbomFromGoblins)
                 downed.Add("haveForcedAbomFromGoblins");
 
-            if (haveForcedMutantFromKS)
+            if (HaveForcedMutantFromKS)
                 downed.Add("haveForcedMutantFromKS");
 
             if (ReceivedTerraStorage)
@@ -245,7 +245,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = downed.Contains("downedMutant");
             AngryMutant = downed.Contains("AngryMutant");
             HaveForcedAbomFromGoblins = downed.Contains("haveForcedAbomFromGoblins");
-            haveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
+            HaveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
             ReceivedTerraStorage = downed.Contains("ReceivedTerraStorage");
             SpawnedDevi = downed.Contains("spawnedDevi");
             DownedAnyBoss = downed.Contains("downedAnyBoss");
@@ -302,7 +302,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = flags[5];
             AngryMutant = flags[6];
             HaveForcedAbomFromGoblins = flags[7];
-            haveForcedMutantFromKS = flags[8];
+            HaveForcedMutantFromKS = flags[8];
 
             flags = reader.ReadByte();
             ReceivedTerraStorage = flags[0];
