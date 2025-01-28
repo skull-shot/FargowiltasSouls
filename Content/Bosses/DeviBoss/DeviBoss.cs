@@ -905,7 +905,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             void RuneWizard()
             {
 
-
+                Timer = 4;
                 int threshold = WorldSavingSystem.MasochistModeReal ? 400 : 450;
 
                 Player localPlayer = Main.LocalPlayer;
@@ -2313,7 +2313,11 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 // Inner ring.
                 Color innerColor = Color.Red;
                 innerColor.A = 0;
-                spriteBatch.Draw(FargosTextureRegistry.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargosTextureRegistry.HardEdgeRing.Value.Size() * 0.5f, 0.65f, SpriteEffects.None, 0f);
+                float radius = FargosTextureRegistry.HardEdgeRing.Width() / 2;
+                int size = WorldSavingSystem.MasochistModeReal ? 200 : 150;
+                float scale = size / radius;
+                
+                spriteBatch.Draw(FargosTextureRegistry.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargosTextureRegistry.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
                 // Outer ring.
                 Color outerColor = Color.Green;
