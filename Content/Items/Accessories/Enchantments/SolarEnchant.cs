@@ -103,10 +103,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 bool wizBoost = modPlayer.ForceEffect<SolarEnchant>();
                 int multiplier = wizBoost ? 2 : 1;
-                int damage = 3 * 1800 * multiplier;
+                int damage = 3200 * multiplier;
                 int speed = wizBoost ? 17 : 13;
 
-                Projectile.NewProjectile(player.GetSource_EffectItem<SolarFlareEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<SolarEnchFlare>(), damage, 1f, player.whoAmI, ai2: speed);
+                Projectile.NewProjectile(player.GetSource_EffectItem<SolarFlareEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<SolarEnchFlare>(), (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 1f, player.whoAmI, ai2: speed);
 
                 modPlayer.SolarEnchCharge = 0;
             }

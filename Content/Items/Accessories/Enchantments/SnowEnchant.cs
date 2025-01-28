@@ -145,7 +145,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             Vector2 vel = (Main.MouseWorld - proj.Center).SafeNormalize(-Vector2.UnitY);
                             vel *= stayFrosty ? 20f : 10f;
                             int attackType = stayFrosty ? ProjectileID.Blizzard : ProjectileID.SnowBallFriendly;
-                            int p = Projectile.NewProjectile(GetSource_EffectItem(player), proj.Center, vel, attackType, FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 1f, player.whoAmI);
+                            int p = Projectile.NewProjectile(GetSource_EffectItem(player), proj.Center, vel, attackType, (int)(dmg * player.ActualClassDamage(DamageClass.Magic)), 1f, player.whoAmI);
                             if (p != Main.maxProjectiles)
                             {
                                 Main.projectile[p].DamageType = DamageClass.Magic;

@@ -291,12 +291,12 @@ namespace FargowiltasSouls.Content.Projectiles
                         && projectile.aiStyle != 190 // fancy sword swings like excalibur
                         && !projectile.minion) 
                     {
-                        int damage = Math.Max(1200, projectile.originalDamage);
+                        int damage = Math.Max(1200, projectile.damage);
                         damage = (int)MathHelper.Clamp(damage, 0, 3000);
                         if (modPlayer.ForceEffect<NebulaEnchant>())
                             damage = (int)(damage * 1.66667f);
 
-                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), damage, 1f, player.whoAmI, 0);
+                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 1f, player.whoAmI, 0);
                         projectile.active = false;
                         modPlayer.NebulaEnchCD = 3 * 60;
                     }
@@ -524,7 +524,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                 dmg = 50;
                             }
 
-                            int damage = FargoSoulsUtil.HighestDamageTypeScaling(player, dmg);
+                            int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
                             Projectile[] balls = FargoSoulsUtil.XWay(numBalls, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, damage, 0);
 
                             foreach (Projectile ball in balls)

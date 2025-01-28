@@ -100,13 +100,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddBuff(306, 600, true, false);
             if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] < 20)
             {
-                int damage = 50;
-                if (modPlayer.ForceEffect(player.EffectItem<TitaniumEffect>().ModItem))
-                {
-                    damage = FargoSoulsUtil.HighestDamageTypeScaling(player, damage);
-                }
-
-                Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
+                int damage = 20;
+                damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
+                int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
+                Main.projectile[sh].DamageType = DamageClass.Melee;
             }
             else
             {
