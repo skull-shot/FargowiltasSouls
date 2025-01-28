@@ -943,8 +943,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (shieldCD < cooldown)
                 shieldCD = cooldown;
-
-            CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, () => (float)shieldCD / cooldown);
         }
 
         public void UpdateShield()
