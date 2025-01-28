@@ -3046,7 +3046,7 @@ ComputationOrb: {
 	Tooltip:
 		'''
 		Non-magic/summon attacks deal 1.2x damage but are affected by Mana Sickness
-		Non-magic/summon weapons require 10 mana to use
+		Non-magic/summon weapons require mana to use
 		'Within the core, a spark of hope remains.'
 		'''
 }
