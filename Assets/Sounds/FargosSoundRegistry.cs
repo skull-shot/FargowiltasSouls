@@ -12,27 +12,31 @@ namespace FargowiltasSouls.Assets.Sounds
     {
         public const string SoundsPath = "FargowiltasSouls/Assets/Sounds/";
 
+        public const string WeaponsPath = SoundsPath + "Weapons/";
+        public const string AccessoriesPath = SoundsPath + "Accessories/";
+
         public static readonly SoundStyle ThrowShort = new(SoundsPath + "ThrowShort");
         public static readonly SoundStyle ReticleBeep = new(SoundsPath + "ReticleBeep");
         public static readonly SoundStyle ReticleLockOn = new(SoundsPath + "ReticleLockOn");
-        public static readonly SoundStyle StyxGazer = new(SoundsPath + "Siblings/Abominationn/StyxGazer");
         public static readonly SoundStyle Thunder = new(SoundsPath + "Thunder");
-        public static readonly SoundStyle ZaWarudo = new(SoundsPath + "Accessories/ZaWarudo");
         public static readonly SoundStyle Zombie104 = new(SoundsPath + "Zombie_104");
         public static readonly SoundStyle GenericDeathray = new(SoundsPath + "GenericDeathray");
-        public static readonly SoundStyle ChargeSound = new SoundStyle(SoundsPath + "ChargeSound") with { Volume = 0.5f };
+        public static readonly SoundStyle StyxCharge = new(SoundsPath + "StyxCharge");
+
+        // accessories
+        public static readonly SoundStyle ZaWarudo = new(AccessoriesPath + "ZaWarudo");
+        public static readonly SoundStyle ChargeSound = new SoundStyle(AccessoriesPath + "ChargeSound") with { Volume = 0.5f };
 
         // weapons
-        public static readonly SoundStyle DiffractorStart = new(SoundsPath + "Weapons/DiffractorStart");
-        public static readonly SoundStyle DiffractorLoop = new(SoundsPath + "Weapons/DiffractorLoop");
-        public static readonly SoundStyle DiffractorEnd = new(SoundsPath + "Weapons/DiffractorEnd");
-        public static readonly SoundStyle NukeFishronFire = new(SoundsPath + "Weapons/NukeFishronFire");
-        public static readonly SoundStyle NukeFishronExplosion = new(SoundsPath + "Weapons/NukeFishronExplosion");
-        public static readonly SoundStyle GeminiSpaz = new(SoundsPath + "Weapons/GeminiSpaz");
-        public static readonly SoundStyle GeminiReti = new(SoundsPath + "Weapons/GeminiReti");
-        public static readonly SoundStyle LeashSpin = new(SoundsPath + "Weapons/LeashSpin");
-        public static readonly SoundStyle LeashBreak = new(SoundsPath + "Weapons/LeashBreak");
-        public static readonly SoundStyle StyxCharge = new(SoundsPath + "StyxCharge");
+        public static readonly SoundStyle DiffractorStart = new(WeaponsPath + "DiffractorStart");
+        public static readonly SoundStyle DiffractorLoop = new(WeaponsPath + "DiffractorLoop");
+        public static readonly SoundStyle DiffractorEnd = new(WeaponsPath + "DiffractorEnd");
+        public static readonly SoundStyle NukeFishronFire = new(WeaponsPath + "NukeFishronFire");
+        public static readonly SoundStyle NukeFishronExplosion = new(WeaponsPath + "NukeFishronExplosion");
+        public static readonly SoundStyle GeminiSpaz = new(WeaponsPath + "GeminiSpaz");
+        public static readonly SoundStyle GeminiReti = new(WeaponsPath + "GeminiReti");
+        public static readonly SoundStyle LeashSpin = new(WeaponsPath + "LeashSpin");
+        public static readonly SoundStyle LeashBreak = new(WeaponsPath + "LeashBreak");
 
         // Trojan
         public static readonly SoundStyle TrojanHeadDeath = new (SoundsPath + "Challengers/Trojan/TrojanHeadDeath");
@@ -112,6 +116,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle MutantKSKill = new(SoundsPath + "Siblings/Mutant/MutantKSKill");
 
         // Abominationn
+        public static readonly SoundStyle StyxGazer = new(SoundsPath + "Siblings/Abominationn/StyxGazer");
 
         // Mechs
 
