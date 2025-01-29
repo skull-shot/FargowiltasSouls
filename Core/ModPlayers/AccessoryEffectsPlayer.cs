@@ -894,11 +894,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        private const int BASE_PARRY_WINDOW = 20;
-        private const int BASE_SHIELD_COOLDOWN = 100;
-        private const int HARD_PARRY_WINDOW = 10;
-        private const int LONG_SHIELD_COOLDOWN = 360;
-        private const int PERFECT_PARRY_WINDOW = 10;
+        public const int BASE_PARRY_WINDOW = 20;
+        public const int BASE_SHIELD_COOLDOWN = 100;
+        public const int HARD_PARRY_WINDOW = 10;
+        public const int LONG_SHIELD_COOLDOWN = 360;
+        public const int PERFECT_PARRY_WINDOW = 10;
+
+        public static int ShieldCooldown(Player player) => player.HasEffect<DreadShellEffect>() || player.HasEffect<PumpkingsCapeEffect>() ? LONG_SHIELD_COOLDOWN : BASE_SHIELD_COOLDOWN;
 
         void RaisedShieldEffects()
         {
@@ -939,7 +941,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.velocity.Y *= 0.85f;
             }
 
-            int cooldown = dreadEffect || pumpkingEffect ? LONG_SHIELD_COOLDOWN : BASE_SHIELD_COOLDOWN;
+            int cooldown = ShieldCooldown(Player);
 
             if (shieldCD < cooldown)
                 shieldCD = cooldown;

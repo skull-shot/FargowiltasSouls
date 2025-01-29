@@ -1,9 +1,18 @@
 SoulTogglerButton: Переключатель эффектов аксессуаров
+// Standard: Standard Mode
+// Eternity: Eternity Mode
+// Masochist: Masochist Mode
 EternityEnabled: Включён режим Вечность
 MasochistEnabled: Включён режим Мазохиста
 EternityDisabled: Режим Вечность выключен
-RightClickToggle: ПКМ для переключения
+// LeftClickEnable: Left Click to enable
+// RightClickSelectDifficulty: Right Click to select difficulty
 HoldShift: Удерж. Shift для большей информации
+/* ExpandedStandard:
+	'''
+	Disables Eternity or Masochist Mode.
+	World difficulty (Expert, Master) remains unchanged.
+	''' */
 ExpandedEternity:
 	'''
 	[c/00FFFF:Новый режим, сложнее режима Эксперта, для ветеранов Террарии. Предпологаемый опыт модов Fargo.]
@@ -16,6 +25,16 @@ ExpandedMasochist:
 	Мир должен быть в режиме Мастера или выше
 	Включает режим Вечность, если мир в Режиме Эксперт
 	'''
+/* EternityOption:
+	'''
+	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
+	Sets world difficulty to Expert Mode
+	''' */
+/* MasochistOption:
+	'''
+	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
+	Sets world difficulty to Master Mode
+	''' */
 ExpandedFeatures:
 	'''
 	Режим включает в себя:
@@ -46,3 +65,4 @@ MainMenu: Fargo's
 DisabledUnequipped: Отключено: Не экипировано
 ActiveSkills: Активные умения
 AvailableSkills: Доступные умения
+// SelectDifficulty: Select Difficulty

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -67,8 +68,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateEquips(Player player)
         {
+            int cooldown = FargoSoulsPlayer.ShieldCooldown(player);
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, () => (float)shieldCD / cooldown);
+                CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown);
         }
     }
 }

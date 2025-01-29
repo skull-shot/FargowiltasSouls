@@ -1,9 +1,18 @@
 // SoulTogglerButton: Effect Toggler
+// Standard: Standard Mode
+// Eternity: Eternity Mode
+// Masochist: Masochist Mode
 // EternityEnabled: Eternity Mode is enabled
 // MasochistEnabled: Masochist Mode is enabled
 // EternityDisabled: Eternity Mode is disabled
-// RightClickToggle: Right Click to toggle
+// LeftClickEnable: Left Click to enable
+// RightClickSelectDifficulty: Right Click to select difficulty
 // HoldShift: Hold Shift to read more
+/* ExpandedStandard:
+	'''
+	Disables Eternity or Masochist Mode.
+	World difficulty (Expert, Master) remains unchanged.
+	''' */
 /* ExpandedEternity:
 	'''
 	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
@@ -14,7 +23,17 @@
 	'''
 	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
 	World must be in Master Mode or above
-	Enables Eternity if world is in Expert Mode
+	Enables Eternity Mode if world is in Expert Mode
+	''' */
+/* EternityOption:
+	'''
+	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
+	Sets world difficulty to Expert Mode
+	''' */
+/* MasochistOption:
+	'''
+	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
+	Sets world difficulty to Master Mode
 	''' */
 /* ExpandedFeatures:
 	'''
@@ -46,3 +65,4 @@
 // DisabledUnequipped: Disabled: Not equipped
 // ActiveSkills: Active Skills
 // AvailableSkills: Available Skills
+// SelectDifficulty: Select Difficulty

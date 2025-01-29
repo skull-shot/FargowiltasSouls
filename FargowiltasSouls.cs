@@ -40,12 +40,14 @@ using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Creative;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using static Terraria.GameContent.Creative.CreativePowers;
 
 
 namespace FargowiltasSouls
@@ -930,52 +932,75 @@ namespace FargowiltasSouls
 
                     case PacketID.ToggleEternityMode:
                         {
-                            
                             Player player = FargoSoulsUtil.PlayerExists(reader.ReadByte());
+                            int diff = reader.ReadByte();
                             if (Main.netMode == NetmodeID.Server)
                             {
-                                if (FargoSoulsUtil.WorldIsExpertOrHarder())
+                                string toggle = diff == 2 ? "Master" : diff == 1 ? "Expert" : "None";
+                                if (diff != 0)
                                 {
-                                    if (!LumUtils.AnyBosses())
+                                    bool changed = false;
+                                    if (Main.GameModeInfo.IsJourneyMode)
                                     {
-                                        WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
-                                        string mode;
-                                        int deviType = ModContent.NPCType<UnconsciousDeviantt>();
-                                        if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
+                                        float value = diff == 2 ? 1f : 0.66f;
+                                        var slider = CreativePowerManager.Instance.GetPower<DifficultySliderPower>();
+                                        typeof(CreativePowers.DifficultySliderPower).GetMethod("SetValueKeyboardForced", LumUtils.UniversalBindingFlags).Invoke(slider, [value]);
+                                    }
+                                    else
+                                    {
+                                        switch (diff)
                                         {
-                                            WorldSavingSystem.SpawnedDevi = true;
-
-                                            Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? player.Center : player.Center - 1000 * Vector2.UnitY;
-                                            Projectile.NewProjectile(player.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                                            FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
+                                            case 1:
+                                                if (Main.GameMode != GameModeID.Expert)
+                                                    changed = true;
+                                                Main.GameMode = GameModeID.Expert;
+                                                break;
+                                            case 2:
+                                                if (Main.GameMode != GameModeID.Master)
+                                                    changed = true;
+                                                Main.GameMode = GameModeID.Master;
+                                                break;
                                         }
-                                        float volume = 0.5f;
-                                        if (WorldSavingSystem.EternityMode)
-                                        {
-                                            mode = "Deactivate";
-                                            volume = 1;
-                                        }
-                                        else
-                                            mode = "Emode";
+                                    }
+                                    if (changed)
+                                        FargoSoulsUtil.PrintLocalization($"Mods.Fargowiltas.Items.ModeToggle.{toggle}", new Color(175, 75, 255));
+                                }
 
-                                        if (WorldSavingSystem.masochistModeReal)
-                                        {
-                                            mode = "Deactivate";
-                                            volume = 1;
-                                        }
-                                        else
-                                            mode = "Maso";
-                                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = volume});
+                                WorldSavingSystem.ShouldBeEternityMode = diff != 0;
+                                if (diff != 0)
+                                {
+                                    int deviType = ModContent.NPCType<UnconsciousDeviantt>();
+                                    if (FargoSoulsUtil.HostCheck && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
+                                    {
+                                        WorldSavingSystem.SpawnedDevi = true;
 
-                                        if (Main.netMode == NetmodeID.Server)
-                                            NetMessage.SendData(MessageID.WorldData); //sync world
+                                        Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? Main.LocalPlayer.Center : Main.LocalPlayer.Center - 1000 * Vector2.UnitY;
+                                        Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
+
+                                        FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
                                     }
                                 }
-                                else
+
+                                NetMessage.SendData(MessageID.WorldData); //sync world
+                            }
+                            else
+                            {
+                                string mode;
+                                float volume = 0.5f;
+                                switch (diff)
                                 {
-                                    FargoSoulsUtil.PrintLocalization($"Mods.FargowiltasSouls.Items.Masochist.WrongDifficulty", new Color(175, 75, 255));
+                                    case 1:
+                                        mode = "Emode";
+                                        break;
+                                    case 2:
+                                        mode = "Maso";
+                                        break;
+                                    default:
+                                        mode = "Deactivate";
+                                        volume = 1;
+                                        break;
                                 }
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = volume });
                             }
                         }
                         break;

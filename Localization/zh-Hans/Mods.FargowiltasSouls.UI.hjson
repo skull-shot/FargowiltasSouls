@@ -1,9 +1,18 @@
 SoulTogglerButton: 饰品效果配置
+// Standard: Standard Mode
+// Eternity: Eternity Mode
+// Masochist: Masochist Mode
 EternityEnabled: 永恒模式已开启
 MasochistEnabled: 受虐模式已开启
 EternityDisabled: 永恒模式已关闭
-RightClickToggle: 右键点击切换
+// LeftClickEnable: Left Click to enable
+// RightClickSelectDifficulty: Right Click to select difficulty
 HoldShift: 按住Shift阅读更多内容
+/* ExpandedStandard:
+	'''
+	Disables Eternity or Masochist Mode.
+	World difficulty (Expert, Master) remains unchanged.
+	''' */
 ExpandedEternity:
 	'''
 	[c/00FFFF:为泰拉老玩家准备的一个新模式，预期的Fargo体验。]
@@ -16,6 +25,16 @@ ExpandedMasochist:
 	世界必须处于大师模式或更高难度
 	如果世界处于专家难度，则启用永恒模式
 	'''
+/* EternityOption:
+	'''
+	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
+	Sets world difficulty to Expert Mode
+	''' */
+/* MasochistOption:
+	'''
+	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
+	Sets world difficulty to Master Mode
+	''' */
 ExpandedFeatures:
 	'''
 	- 重制的Boss和敌人，使其更加强大
@@ -44,3 +63,4 @@ MainMenu: Fargo's
 DisabledUnequipped: 禁用：未装备
 ActiveSkills: 主动技能
 AvailableSkills: 可用技能
+// SelectDifficulty: Select Difficulty

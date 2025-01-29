@@ -64,6 +64,7 @@ namespace FargowiltasSouls.Content.UI
         {
             UserInterfaces.Add(ui.GetType().Name, new(ui));
         }
+        public static FargoUserInterface GetFromDict(FargoUI ui) => UserInterfaces[ui.GetType().Name];
         public static FargoUserInterface GetFromDict<T>() where T : FargoUI => UserInterfaces[typeof(T).Name];
         public static T Get<T>() where T : FargoUI => GetFromDict<T>().FargoUI as T;
         public static void Open<T>() where T : FargoUI
@@ -71,6 +72,16 @@ namespace FargowiltasSouls.Content.UI
             if (IsOpen<T>())
                 return;
             var ui = GetFromDict<T>();
+            ui.UserInterface.SetState(ui.FargoUI);
+            ui.FargoUI.OnOpen();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+        }
+        public static void Open(FargoUI fargoUI)
+        {
+            if (IsOpen(fargoUI))
+                return;
+            var ui = GetFromDict(fargoUI);
             ui.UserInterface.SetState(ui.FargoUI);
             ui.FargoUI.OnOpen();
             if (ui.FargoUI.MenuToggleSound)
@@ -86,6 +97,16 @@ namespace FargowiltasSouls.Content.UI
             if (ui.FargoUI.MenuToggleSound)
                 SoundEngine.PlaySound(SoundID.MenuClose);
         }
+        public static void Close(FargoUI fargoUI)
+        {
+            if (!IsOpen(fargoUI))
+                return;
+            var ui = GetFromDict(fargoUI);
+            ui.UserInterface.SetState(null);
+            ui.FargoUI.OnClose();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuClose);
+        }
         public static void Toggle<T>() where T: FargoUI
         {
             if (!IsOpen<T>())
@@ -93,9 +114,21 @@ namespace FargowiltasSouls.Content.UI
             else
                 Close<T>();
         }
+        public static void Toggle(FargoUI fargoUI)
+        {
+            if (!IsOpen(fargoUI))
+                Open(fargoUI);
+            else
+                Close(fargoUI);
+        }
         public static bool IsOpen<T>() where T : FargoUI
         {
             var ui = GetFromDict<T>();
+            return ui.UserInterface?.CurrentState != null;
+        }
+        public static bool IsOpen(FargoUI fargoUI)
+        {
+            var ui = GetFromDict(fargoUI);
             return ui.UserInterface?.CurrentState != null;
         }
 
