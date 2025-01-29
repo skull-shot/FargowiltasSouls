@@ -493,6 +493,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return true;
             }
 
+            //if (WorldSavingSystem.HaveForcedMutantFromKS)
+                //return true;
+
             npc.life = 1;
             npc.active = true;
 
@@ -515,7 +518,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
                 && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type))
             {   
-
+                
                 // manual gore spawn
                 Gore.NewGore(npc.GetSource_FromThis(), npc.Center, -15 * Vector2.UnitY, GoreID.KingSlimeCrown);
 

@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void HealRepel(Player player)
         {
             Item effectItem = player.EffectItem<HallowEffect>();
-            if (effectItem != null || !player.HasEffectEnchant<HallowEffect>())
+            if (!player.HasEffectEnchant<HallowEffect>())
                 return;
             SoundEngine.PlaySound(SoundID.Item72);
             Particle p = new HallowEnchantBarrier(player.Center, Vector2.Zero, RepelRadius / 160f, 32);

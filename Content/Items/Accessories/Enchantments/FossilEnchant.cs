@@ -147,9 +147,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             int damageCopy = info.Damage;
             for (int i = 0; i < 5; i++)
             {
-                if (damageCopy < 30)
+                if (damageCopy < 40)
                     break;
-                damageCopy -= 30;
+                damageCopy -= 40;
 
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;

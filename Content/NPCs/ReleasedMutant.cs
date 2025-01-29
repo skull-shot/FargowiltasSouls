@@ -20,6 +20,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Core.Systems;
 
 namespace FargowiltasSouls.Content.NPCs
 {
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Content.NPCs
         int slide;
         float number;
         int questionmarkinterpolant;
-        string npcname;
+
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 3;
@@ -78,11 +79,19 @@ namespace FargowiltasSouls.Content.NPCs
                     packet.Write((byte)FargowiltasSouls.PacketID.WakeUpMutant);
                     packet.Write((byte)NPC.whoAmI);
                     packet.Send();
+
+                    WorldSavingSystem.HaveForcedMutantFromKS = true;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.WorldData);
                 }
                 else
+                {
                     NPC.Transform(ModContent.NPCType<Mutant>());
+                    WorldSavingSystem.HaveForcedMutantFromKS = true;
+                }
+                    
                 int mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
-                if (mutant >= 0)
+                if (mutant != -1)
                 {
                     Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction", Main.npc[mutant].GivenName);
                 }
@@ -123,10 +132,12 @@ namespace FargowiltasSouls.Content.NPCs
             if (NPC.ai[0] == 1)
             {
                 NPC.velocity.X = MathHelper.Lerp(number, 0, ++slide * 0.02f);
+                NPC.netUpdate = true;
                 if (NPC.velocity.X >= 0 && number == -3)
                 {
                     NPC.velocity.X = 0;
                     NPC.ai[0] = 2;
+
                 }
 
                 if (NPC.velocity.X <= 0 && number == 3)
@@ -153,6 +164,9 @@ namespace FargowiltasSouls.Content.NPCs
                 if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive() && NPC.Distance(player.Center) >= 1500)
                 {
                     NPC.Transform(ModContent.NPCType<Mutant>());
+                    WorldSavingSystem.HaveForcedMutantFromKS = true;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.WorldData);
                 }
                 
             }

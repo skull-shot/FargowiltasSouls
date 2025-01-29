@@ -179,7 +179,7 @@ namespace FargowiltasSouls.Core.Systems
             if (HaveForcedAbomFromGoblins)
                 downed.Add("haveForcedAbomFromGoblins");
 
-            if (haveForcedMutantFromKS)
+            if (HaveForcedMutantFromKS)
                 downed.Add("haveForcedMutantFromKS");
 
             if (ReceivedTerraStorage)
@@ -245,7 +245,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = downed.Contains("downedMutant");
             AngryMutant = downed.Contains("AngryMutant");
             HaveForcedAbomFromGoblins = downed.Contains("haveForcedAbomFromGoblins");
-            haveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
+            HaveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
             ReceivedTerraStorage = downed.Contains("ReceivedTerraStorage");
             SpawnedDevi = downed.Contains("spawnedDevi");
             DownedAnyBoss = downed.Contains("downedAnyBoss");
@@ -302,7 +302,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = flags[5];
             AngryMutant = flags[6];
             HaveForcedAbomFromGoblins = flags[7];
-            haveForcedMutantFromKS = flags[8];
+            
 
             flags = reader.ReadByte();
             ReceivedTerraStorage = flags[0];
@@ -327,6 +327,7 @@ namespace FargowiltasSouls.Core.Systems
 
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
+            HaveForcedMutantFromKS = reader.ReadBoolean();
 
             int x = reader.ReadInt32();
             int y = reader.ReadInt32();
@@ -349,7 +350,6 @@ namespace FargowiltasSouls.Core.Systems
                 [5] = DownedMutant,
                 [6] = AngryMutant,
                 [7] = HaveForcedAbomFromGoblins,
-                [8] = HaveForcedMutantFromKS
             });
 
             writer.Write(new BitsByte
@@ -383,6 +383,7 @@ namespace FargowiltasSouls.Core.Systems
 
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);
+            writer.Write(HaveForcedMutantFromKS);
             writer.Write(CoffinArena.Rectangle.X);
             writer.Write(CoffinArena.Rectangle.Y);
             writer.Write(CoffinArena.Rectangle.Width);
