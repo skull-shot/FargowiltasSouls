@@ -79,10 +79,6 @@ namespace FargowiltasSouls.Content.NPCs
                     packet.Write((byte)FargowiltasSouls.PacketID.WakeUpMutant);
                     packet.Write((byte)NPC.whoAmI);
                     packet.Send();
-
-                    WorldSavingSystem.HaveForcedMutantFromKS = true;
-                    if (Main.netMode == NetmodeID.Server)
-                        NetMessage.SendData(MessageID.WorldData);
                 }
                 else
                 {

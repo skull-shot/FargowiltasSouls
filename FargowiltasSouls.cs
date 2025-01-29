@@ -1019,7 +1019,10 @@ namespace FargowiltasSouls
                             if (npc.ModNPC is ReleasedMutant && Main.netMode == NetmodeID.Server)
                             {
                                 npc.Transform(ModContent.NPCType<Mutant>());
+                                WorldSavingSystem.HaveForcedMutantFromKS = true;
+                                NetMessage.SendData(MessageID.WorldData);
                             }
+
                         }
                         break;
 

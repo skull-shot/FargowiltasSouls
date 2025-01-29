@@ -493,8 +493,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return true;
             }
 
-            //if (WorldSavingSystem.HaveForcedMutantFromKS)
-                //return true;
+            if (WorldSavingSystem.HaveForcedMutantFromKS)
+                return true;
 
             npc.life = 1;
             npc.active = true;
