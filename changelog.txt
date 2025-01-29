@@ -1,8 +1,49 @@
 NEW UPDATE - V {ModVersion}
+Eternity toggler UI and Mutant's Gift now open a new Difficulty Selection UI, instead of directly toggling Eternity Mode
 Added new spawn animation for Deviantt when enabling Eternity Mode
 Added new spawn animation for Mutant when killing King Slime
-
 Added more new sound effects
 
+Eternity Brain of Cthulhu:
+-After flipping confusion, idles for a second (not in Masochist)
+-Masochist Permanent clone removed; now spawns a dashing clone opposite to the player when dash attack starts
+-Said clone is slightly more annoying on FTW
+
+Eternity Twins: Now have circular hitboxes
+Improved visual for Deviantt rune wizard inner circle: was previously too big below Masochist and too small in Masochist
+
+Terra Force:
+-Prevented tin crit from ever being able to be below floor value
+-Force effect's tin crit now starts at 75, only one lightning is needed to reach 100
+-Parries only spawn one lightning, but increased damage
+-Lightning base damage 1500 -> 1150
+-Restored old Soul of Eternity tin crit functionality
+
+Life Force:
+-Decreased horizontal acceleration and max speed
+-Slightly decreased vertical max speed
+-Decreased Ambrosia duration 10s -> 6s
+
+Dread Shell: Lowered vulnerability window defense and DR reduction 30 ->15 and 30% -> 15%, spawns a blood clot pickup instantly on parry
+Wretched Pouch: DR reduction now scales with charge buildup, Increased damage by 16%
+Heart of the Master: Bonus flight time 100% -> 50%. Chalice still 100%
+Copper Enchant: Wizard effect base damage 200 -> 160
+Fossil/Spectre Enchant: Spawns a bone/spirit every 40 hp lost instead of 30
+Orichalcum Enchant: Poison dps 20 -> 12
+Titanium, Monk, Shinobi, Spectre, Solar, Nebula, Ancient Shadow Enchant, Razor Container: Now properly uses class damage, decreased damage of some effects to compensate
+Shadow Force: Dash now counts as melee damage, decreased damage to compensate
+
+Added ModCall for setting Projectile deletion immunity rank (request from Shadows of Abaddon)
+Changed positioning of keybind text in Active Skill UI, and concatenated "Mouse" to "M" (for example Mouse3 -> M3)
+Parry cooldown bar now shows up more consistently
+
+Fixed several enchantments scaling with highest class damage instead of their specified class damage
+Fixed Hallow Enchant shockwave not working correctly
+Fixed Eridanus non-empowered set bonus incorrectly stating that it grants attack speed
+Fixed Shroomite Enchant only having a damage cap if Wizard effect is active
+Fixed Spirit Longbow not spawning projectiles in multiplayer
 Fixed SotM only granting Ammo Cycle skill when in inventory
+Fixed some cooldown bars displaying for other players in multiplayer
 Fixed Frigid Grasp dissappearing when right clicked
+Fixed Frigid Grasp description incorrectly implying the active skill works from inventory
+Fixed Crimson Enchant index error issue
