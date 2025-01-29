@@ -34,7 +34,6 @@ namespace FargowiltasSouls.Content.NPCs
         int speedlerp;
         int questionmarkinterpolant;
         LoopedSoundInstance FallingLoop;
-        string npcname;
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 3;
@@ -74,17 +73,16 @@ namespace FargowiltasSouls.Content.NPCs
                     WakeUp(NPC);
 
                 int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
-                int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
-
+                int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());             
 
                 Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
 
-                if (Mutant >= 0 || Abom >= 0)
+                if (Mutant != -1 || Abom != -1)
                 {
                     Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", NPC.GivenName);
+                    }
                 }
             }
-        }
 
         public static void WakeUp(NPC npc)
         {
@@ -148,6 +146,7 @@ namespace FargowiltasSouls.Content.NPCs
                     velocity = 0.2f;
                 }
                 NPC.velocity.X += velocity * NPC.spriteDirection;
+                NPC.netUpdate = true;
                 FallingLoop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.DeviFallLoop, () =>
                 {
                     return !NPC.active || NPC.ai[0] != 0;
@@ -184,8 +183,15 @@ namespace FargowiltasSouls.Content.NPCs
             //wake up on her own if it becomes nighttime
             if (Main.dayTime == false)
             {
-                NPC.Transform(ModContent.NPCType<Deviantt>());
-                NPC.velocity.Y += -3;                              
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    var packet = Mod.GetPacket();
+                    packet.Write((byte)FargowiltasSouls.PacketID.WakeUpDeviantt);
+                    packet.Write((byte)NPC.whoAmI);
+                    packet.Send();
+                }
+                else
+                    WakeUp(NPC);
             }
 
             if (NPC.velocity.Y == 0)
