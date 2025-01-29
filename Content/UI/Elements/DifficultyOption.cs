@@ -110,6 +110,9 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
             else
             {
+                if (WorldSavingSystem.ShouldBeEternityMode)
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + "Deactivate") with { Volume = 0.5f });
+
                 var netMessage = FargowiltasSouls.Instance.GetPacket();
                 netMessage.Write((byte)FargowiltasSouls.PacketID.ToggleEternityMode);
                 netMessage.Write((byte)Main.LocalPlayer.whoAmI);
@@ -172,6 +175,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
             else
             {
+                if (Main.GameMode != GameModeID.Expert || !WorldSavingSystem.ShouldBeEternityMode)
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + "Emode") with { Volume = 1f });
                 var netMessage = FargowiltasSouls.Instance.GetPacket();
                 netMessage.Write((byte)FargowiltasSouls.PacketID.ToggleEternityMode);
                 netMessage.Write((byte)Main.LocalPlayer.whoAmI);
@@ -236,6 +241,9 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
             else
             {
+                if (Main.GameMode != GameModeID.Master || !WorldSavingSystem.ShouldBeEternityMode)
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + "Maso") with { Volume = 1f });
+
                 var netMessage = FargowiltasSouls.Instance.GetPacket();
                 netMessage.Write((byte)FargowiltasSouls.PacketID.ToggleEternityMode);
                 netMessage.Write((byte)Main.LocalPlayer.whoAmI);
