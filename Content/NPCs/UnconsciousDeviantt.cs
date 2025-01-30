@@ -75,14 +75,9 @@ namespace FargowiltasSouls.Content.NPCs
                 int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
                 int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());             
 
-                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
-
-                if (Mutant != -1 || Abom != -1)
-                {
-                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.IntroductionHasMetBros", NPC.GivenName);
-                    }
-                }
+                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction");
             }
+        }
 
         public static void WakeUp(NPC npc)
         {
@@ -140,12 +135,12 @@ namespace FargowiltasSouls.Content.NPCs
             //DrawOffsetY = 2;
             if (NPC.ai[0] == 0)
             {
-                float velocity = MathHelper.Lerp(0, 0.2f, ++speedlerp * 0.003f);
-                if (velocity >= 0.2f)
+                NPC.ai[1] = MathHelper.Lerp(0, 0.2f, ++speedlerp * 0.003f);
+                if (NPC.ai[1] >= 0.2f)
                 {
-                    velocity = 0.2f;
+                    NPC.ai[1] = 0.2f;
                 }
-                NPC.velocity.X += velocity * NPC.spriteDirection;
+                NPC.velocity.X += NPC.ai[1] * NPC.spriteDirection;
                 NPC.netUpdate = true;
                 FallingLoop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.DeviFallLoop, () =>
                 {

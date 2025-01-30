@@ -383,14 +383,13 @@ UnconsciousDeviantt: {
 	DisplayName: ???
 	Unconscious: ...
 	UnconsciousChatButton: Wake her up
-	Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
-	IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems you've met them already, they're the coolest!
+	Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
+	IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? It seems you've met my bros already, they're the coolest! 
 }
 
 ReleasedMutant: {
 	DisplayName: ???
-	Chat: Was about time I got out of that bath. What? Giant slime? Those are the same thing, aren't they?
+	Chat: "*yawns* ...why did you wake me up? Giant slime monster? You mean my bed? Ah, forget it... I'll get a new one later."
 	TalkToHim: Who are you?
-	Introduction: Names {0}, though I'm sure you've heard of me before. I'll sell to you what I have, granted you give me money, of course.
-	Census.SpawnCondition: Conditions unknown
+	Introduction: Just a regular old shopkeep. I think you'd know the deal already, I'll sell to you what I have, granted you give me money, of course.
 }
