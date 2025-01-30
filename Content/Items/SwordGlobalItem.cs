@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -51,20 +51,6 @@ namespace FargowiltasSouls.Content.Items
             }
             return (item.CountsAsClass(DamageClass.Melee) && item.IsWeapon() && item.useStyle == ItemUseStyleID.Swing && !item.noMelee && !item.noUseGraphic) || Broadswords.Contains(item.type);
         }
-        public override void HoldItem(Item item, Player player)
-        {
-            
-            base.HoldItem(item, player);
-        }
-        public override void UpdateInventory(Item item, Player player)
-        {
-            
-            base.UpdateInventory(item, player);
-        }
-        public override bool CanUseItem(Item item, Player player)
-        {
-            return base.CanUseItem(item, player);
-        }
         public override bool? UseItem(Item item, Player player)
         {
             if (Main.myPlayer == player.whoAmI && IsBroadsword(item))
@@ -77,7 +63,7 @@ namespace FargowiltasSouls.Content.Items
         {
             if (IsBroadsword(item))
             {
-                SwordPlayer mplayer = player.GetModPlayer<SwordPlayer>();
+                FargoSoulsPlayer mplayer = player.FargoSouls();
 
                 
                 mplayer.useDirection = -1;
@@ -127,18 +113,14 @@ namespace FargowiltasSouls.Content.Items
             }
             base.UseStyle(item, player, heldItemFrame);
         }
-        public override void UseItemFrame(Item item, Player player)
-        {
-            base.UseItemFrame(item, player);
-        }
         
         public override void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
         {
             if (IsBroadsword(item))
             {
                 
-                SwordPlayer mplayer = player.GetModPlayer<SwordPlayer>();
-                int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (item.scale));
+                FargoSoulsPlayer mplayer = player.FargoSouls();
+                int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (player.GetAdjustedItemScale(item)));
                 hitbox = new Rectangle(0, 0, itemWidth, itemWidth);
                 hitbox.Location = (player.Center + new Vector2(itemWidth, 0).RotatedBy(player.itemRotation - MathHelper.ToRadians(mplayer.useDirection == 1 ? 40 : 140)) - hitbox.Size()/2).ToPoint();
                 

@@ -14,56 +14,30 @@ using Terraria.GameContent;
 using Terraria.Graphics.Light;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Core.Globals
+namespace FargowiltasSouls.Content.PlayerDrawLayers
 {
-    public class SwordPlayer : ModPlayer
-    {
-        public bool shouldShoot;
-        public int useDirection = -1;
-        public float useRotation = 0;
-        public int swingDirection = 1;
-        public float itemScale = 0.5f;
-        public override void PostUpdate()
-        {
-        }
-        public override void HideDrawLayers(PlayerDrawSet drawInfo)
-        {
-            //for (int i = 0; i < PlayerDrawLayerLoader.Layers.Count; i++)
-            //{
-            //    if (PlayerDrawLayerLoader.Layers[i] == PlayerDrawLayers.HeldItem && SwordGlobalItem.IsBroadsword(drawInfo.heldItem) && drawInfo.drawPlayer.ItemAnimationActive)
-            //    {
-            //        PlayerDrawLayerLoader.Layers[i].Hide();
-            //    }
-            //}
-            if (SwordGlobalItem.IsBroadsword(drawInfo.heldItem) && drawInfo.drawPlayer.ItemAnimationActive)
-            {
-                PlayerDrawLayers.HeldItem.Hide();
-            }
-            
-        }
-    }
     public class SwordDrawLayer : PlayerDrawLayer
     {
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             return SwordGlobalItem.IsBroadsword(drawInfo.drawPlayer.HeldItem) && drawInfo.drawPlayer.ItemAnimationActive;
         }
-        public override Position GetDefaultPosition() => new Between(PlayerDrawLayers.SolarShield, PlayerDrawLayers.HeldItem);
-        
+        public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.SolarShield, Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
+
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             Asset<Texture2D> t = TextureAssets.Item[drawInfo.drawPlayer.HeldItem.type];
 
-            SwordPlayer player = drawInfo.drawPlayer.GetModPlayer<SwordPlayer>();
+            FargoSoulsPlayer player = drawInfo.drawPlayer.FargoSouls();
             Vector2 position = drawInfo.drawPlayer.itemLocation - Main.screenPosition;
 
             int dir = drawInfo.drawPlayer.direction;
-            int swingDir = drawInfo.drawPlayer.GetModPlayer<SwordPlayer>().swingDirection;
+            int swingDir = player.swingDirection;
 
             SpriteEffects effects = SpriteEffects.None;
             float rotationAdd = 0;
             Vector2 origin = new Vector2(2, t.Height() - 2);
-            if ((dir == -1 && swingDir == 1) || (swingDir == -1 && dir == 1))
+            if (dir == -1 && swingDir == 1 || swingDir == -1 && dir == 1)
             {
 
                 effects = SpriteEffects.FlipHorizontally;
@@ -72,10 +46,10 @@ namespace FargowiltasSouls.Core.Globals
             if (swingDir == -1)
             {
                 rotationAdd += MathHelper.ToRadians(90 * dir);
-                
+
             }
 
-   
+
             drawInfo.DrawDataCache.Add(new DrawData(
                 t.Value,
                 position,
@@ -83,14 +57,14 @@ namespace FargowiltasSouls.Core.Globals
                 Lighting.GetColor(drawInfo.drawPlayer.itemLocation.ToTileCoordinates()),
                 drawInfo.drawPlayer.itemRotation + rotationAdd,
                 origin,
-                drawInfo.drawPlayer.HeldItem.scale,
+                drawInfo.drawPlayer.GetAdjustedItemScale(drawInfo.heldItem),
                 effects,
                 0
-                
+
 
                 )
             );
-            
+
         }
     }
 }
