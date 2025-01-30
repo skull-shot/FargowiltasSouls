@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Items.Explosives;
+using Fargowiltas.NPCs;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -20,6 +21,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -30,6 +32,15 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void PreUpdate()
         {
             Toggler.TryLoad();
+
+            if (DevianttIntroduction)
+            {
+                if (Player.TalkNPC?.type == ModContent.NPCType<Deviantt>() && Player.TalkNPC.HasGivenName)
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Player.TalkNPC.GivenName);
+                    DevianttIntroduction = false;
+                }
+            }
 
             if (Player.CCed)
             {

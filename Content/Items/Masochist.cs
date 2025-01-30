@@ -87,7 +87,7 @@ Cannot be used while a boss is alive
 
         public override bool? UseItem(Player player)
         {
-            if (Main.netMode == NetmodeID.SinglePlayer || Main.myPlayer == player.whoAmI)
+            if ((Main.netMode == NetmodeID.SinglePlayer || Main.myPlayer == player.whoAmI) && CanToggleEternity())
                 FargoUIManager.Toggle<DifficultySelectionMenu>();
             return true;
         }

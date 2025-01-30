@@ -113,7 +113,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             if (Main.LocalPlayer.FargoSouls().EmodeToggleCooldown <= 0 && !dragging && conditions && ContainsPoint(Main.MouseScreen) && Main.mouseRight && PlayerInput.MouseInfoOld.RightButton == ButtonState.Released)
             {
                 Main.LocalPlayer.FargoSouls().EmodeToggleCooldown = 15;
-                FargoUIManager.Toggle<DifficultySelectionMenu>();
+                if (Masochist.CanToggleEternity())
+                    FargoUIManager.Toggle<DifficultySelectionMenu>();
             }
 
             if (dragging)

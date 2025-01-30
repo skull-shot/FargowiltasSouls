@@ -231,7 +231,7 @@ namespace FargowiltasSouls.Content.Items
             }
             if (modPlayer.BoxofGizmos)
             {
-                if (item.DamageType == DamageClass.Default && item.damage <= 0)
+                if (item.DamageType == DamageClass.Default && item.damage <= 0 && item.fishingPole <= 0)
                 {
                     return true;
                 }

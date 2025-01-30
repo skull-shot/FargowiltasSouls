@@ -62,20 +62,20 @@ namespace FargowiltasSouls.Content.NPCs
         {
             if (firstButton)
             {
+                FargowiltasSouls.Instance.Call("GiveDevianttGifts");
+
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
                     var packet = Mod.GetPacket();
                     packet.Write((byte)FargowiltasSouls.PacketID.WakeUpDeviantt);
                     packet.Write((byte)NPC.whoAmI);
                     packet.Send();
+                    Main.LocalPlayer.FargoSouls().DevianttIntroduction = true;
                 }
                 else
                     WakeUp(NPC);
 
-                int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
-                int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());             
-
-                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction");
+                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
             }
         }
 
@@ -189,7 +189,7 @@ namespace FargowiltasSouls.Content.NPCs
                     WakeUp(NPC);
             }
 
-            if (NPC.velocity.Y == 0)
+            if (NPC.velocity.Y == 0 && speedlerp > 5)
             {
                 if (landsound == false)
                 {

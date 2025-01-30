@@ -49,13 +49,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Respawns = 0;
         }
 
+        public bool PreventRespawn() => WorldSavingSystem.MasochistModeReal && LumUtils.AnyBosses() && Respawns >= 2;
         public override void UpdateDead()
         {
             ResetEffects();
 
             MasomodeMinionNerfTimer = 0;
             ShorterDebuffsTimer = 0;
-            if (WorldSavingSystem.MasochistModeReal && LumUtils.AnyBosses() && Respawns >= 2)
+            if (PreventRespawn())
                 Player.respawnTimer = 60 * 5;
         }
 

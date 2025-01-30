@@ -419,16 +419,15 @@ GelatinFlyer.DisplayName: 飞翔史莱姆
 CursedCoffinInactive.DisplayName: 神秘的棺材
 
 UnconsciousDeviantt: {
-	// DisplayName: ???
-	// Unconscious: ...
-	// UnconsciousChatButton: Wake her up
-	// Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
-	// IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? It seems you've met my bros already, they're the coolest!
+	DisplayName: ？？？
+	Unconscious: …………
+	UnconsciousChatButton: 检查脉搏
+	Introduction: 哈？我没事吧？看来我那精心策划的从天而降确实有点疼呢。我是{0}，你的新晋（而且比那个更酷的）向导！出发前收好这些东西，定能助你一臂之力！
 }
 
 ReleasedMutant: {
-	// DisplayName: ???
-	// Chat: *yawns* ...why did you wake me up? Giant slime monster? You mean my bed? Ah, forget it... I'll get a new one later.
-	// TalkToHim: Who are you?
-	// Introduction: Just a regular old shopkeep. I think you'd know the deal already, I'll sell to you what I have, granted you give me money, of course.
+	DisplayName: ？？？
+	Chat: （哈欠）……吵醒我干嘛？巨型史莱姆？你指我那坨床垫？算了……回头再换一个。
+	TalkToHim: 你是？
+	Introduction: 你早就听说过我了。至于你呢？不是，我才不关心你的名字呢。我只关心你有多少钱能买我的东西。
 }

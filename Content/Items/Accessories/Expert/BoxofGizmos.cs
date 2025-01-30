@@ -27,8 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
         void PassiveEffect(Player player)
         {
             player.FargoSouls().BoxofGizmos = true;
-
-            if (player.whoAmI == Main.myPlayer && player.FargoSouls().IsStandingStill && player.itemAnimation == 0 && player.HeldItem.fishingPole <= 0)
+            if (player.whoAmI == Main.myPlayer && player.FargoSouls().IsStandingStill && player.itemAnimation == 0 && player.HeldItem != null)
             {
                 if (++counter > 60)
                 {

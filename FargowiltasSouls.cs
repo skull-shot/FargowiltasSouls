@@ -969,16 +969,7 @@ namespace FargowiltasSouls
                                 WorldSavingSystem.ShouldBeEternityMode = diff != 0;
                                 if (diff != 0)
                                 {
-                                    int deviType = ModContent.NPCType<UnconsciousDeviantt>();
-                                    if (FargoSoulsUtil.HostCheck && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
-                                    {
-                                        WorldSavingSystem.SpawnedDevi = true;
-
-                                        Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? Main.LocalPlayer.Center : Main.LocalPlayer.Center - 1000 * Vector2.UnitY;
-                                        Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                                        FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
-                                    }
+                                    WorldSavingSystem.SpawnedDevi = true;
                                 }
 
                                 NetMessage.SendData(MessageID.WorldData); //sync world
@@ -1007,9 +998,10 @@ namespace FargowiltasSouls
                     case PacketID.WakeUpDeviantt:
                         {
                             NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
-                            if (npc.ModNPC is UnconsciousDeviantt && Main.netMode == NetmodeID.Server)
+                            if (npc.ModNPC is UnconsciousDeviantt)
                             {
-                                UnconsciousDeviantt.WakeUp(npc);
+                                if (Main.netMode == NetmodeID.Server)
+                                    UnconsciousDeviantt.WakeUp(npc);
                             }
                         }
                         break;

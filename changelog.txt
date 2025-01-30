@@ -30,9 +30,12 @@ Heart of the Master: Bonus flight time 100% -> 50%. Chalice still 100%
 Copper Enchant: Wizard effect base damage 200 -> 160
 Fossil/Spectre Enchant: Spawns a bone/spirit every 40 hp lost instead of 30
 Orichalcum Enchant: Poison dps 20 -> 12
+Shadewood Enchant: Wizard effect Ichor 0.5s -> 2s
 Titanium, Monk, Shinobi, Spectre, Solar, Nebula, Ancient Shadow Enchant, Razor Container: Now properly uses class damage, decreased damage of some effects to compensate
 Shadow Force: Dash now counts as melee damage, decreased damage to compensate
+Eternity Mythril Sword/Halberd: Reduced Attack Speed scaling
 
+Added text on death screen when you run out of respawns in Masochist multiplayer
 Added ModCall for setting Projectile deletion immunity rank (request from Shadows of Abaddon)
 Changed positioning of keybind text in Active Skill UI, and concatenated "Mouse" to "M" (for example Mouse3 -> M3)
 Parry cooldown bar now shows up more consistently
@@ -47,3 +50,4 @@ Fixed some cooldown bars displaying for other players in multiplayer
 Fixed Frigid Grasp dissappearing when right clicked
 Fixed Frigid Grasp description incorrectly implying the active skill works from inventory
 Fixed Crimson Enchant index error issue
+Fixed Box of Gizmo's not-Fishing Pole check not working correctly
