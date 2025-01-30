@@ -48,3 +48,4 @@ Fixed some cooldown bars displaying for other players in multiplayer
 Fixed Frigid Grasp dissappearing when right clicked
 Fixed Frigid Grasp description incorrectly implying the active skill works from inventory
 Fixed Crimson Enchant index error issue
+Fixed Box of Gizmo's not-Fishing Pole check not working correctly
