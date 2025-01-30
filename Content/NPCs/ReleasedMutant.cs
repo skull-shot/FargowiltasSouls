@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.NPCs
                 int mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
                 if (mutant != -1)
                 {
-                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction", Main.npc[mutant].GivenName);
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction");
                 }
                 
             }
