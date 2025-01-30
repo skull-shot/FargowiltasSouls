@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Core.Globals
         public int useDirection = -1;
         public float useRotation = 0;
         public int swingDirection = 1;
-        public float itemScale = 1;
+        public float itemScale = 0.5f;
         public override void PostUpdate()
         {
         }
@@ -39,7 +39,6 @@ namespace FargowiltasSouls.Core.Globals
             {
                 PlayerDrawLayers.HeldItem.Hide();
             }
-
             
         }
     }
@@ -84,7 +83,7 @@ namespace FargowiltasSouls.Core.Globals
                 Lighting.GetColor(drawInfo.drawPlayer.itemLocation.ToTileCoordinates()),
                 drawInfo.drawPlayer.itemRotation + rotationAdd,
                 origin,
-                drawInfo.drawPlayer.HeldItem.scale + player.itemScale,
+                drawInfo.drawPlayer.HeldItem.scale,
                 effects,
                 0
                 

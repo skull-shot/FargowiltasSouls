@@ -96,15 +96,18 @@ namespace FargowiltasSouls.Content.Items
 
                 float x = 1-  (float)player.itemAnimation / player.itemAnimationMax;
                 //ease in out quint
-                float lerp = x < 0.5f ? 16 * x * x * x * x * x : 1 - (float)Math.Pow(-2 * x + 2, 5) / 2;
+                float lerp = x < 0.5f ? 4 * x * x * x : 1 - (float)Math.Pow(-2 * x + 2, 3) / 2;
 
                 player.itemRotation = mplayer.useRotation + MathHelper.ToRadians(mplayer.useDirection == 1 ? 45 : 135) + MathHelper.ToRadians(MathHelper.Lerp(-140, 110, mplayer.swingDirection == 1 ? lerp : 1 - lerp)* mplayer.useDirection);
                 if (player.gravDir == -1f)
                 {
                     player.itemRotation = -player.itemRotation;
                 }
-                
-                if (player.itemAnimation == (int)(player.itemAnimationMax * 0.6f) && mplayer.shouldShoot)
+
+                bool shooter = player.itemAnimation == (int)(player.itemAnimationMax * 0.6f) && mplayer.shouldShoot && !FargoSoulsGlobalProjectile.FancySwings.Contains(item.shoot);
+                if (player.itemAnimation == player.itemAnimationMax && mplayer.shouldShoot && FargoSoulsGlobalProjectile.FancySwings.Contains(item.shoot)) shooter = true;
+
+                if (shooter)
                 {
                     mplayer.shouldShoot = false;
                     VanillaShoot = true;
@@ -135,7 +138,7 @@ namespace FargowiltasSouls.Content.Items
             {
                 
                 SwordPlayer mplayer = player.GetModPlayer<SwordPlayer>();
-                int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (item.scale + mplayer.itemScale));
+                int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (item.scale));
                 hitbox = new Rectangle(0, 0, itemWidth, itemWidth);
                 hitbox.Location = (player.Center + new Vector2(itemWidth, 0).RotatedBy(player.itemRotation - MathHelper.ToRadians(mplayer.useDirection == 1 ? 40 : 140)) - hitbox.Size()/2).ToPoint();
                 

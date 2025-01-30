@@ -452,6 +452,13 @@ namespace FargowiltasSouls.Content.Projectiles
                 projectile.ownerHitCheckDistance *= projectile.scale;
         }
 
+
+        public static int[] FancySwings => [
+            ProjectileID.TerraBlade2,
+            ProjectileID.TrueExcalibur,
+            ProjectileID.TheHorsemansBlade,
+            ProjectileID.Excalibur
+        ];
         public static int[] NoSplit => [
             ProjectileID.SandnadoFriendly,
             ProjectileID.LastPrism,
@@ -576,6 +583,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     }
                 }
+
+                
             }
 
             if (ChilledTimer > 0)
@@ -1292,6 +1301,23 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
+            }
+
+            if (projectile.owner == player.whoAmI)
+            {
+                if (FancySwings.Contains(projectile.type))
+                {
+                    float rotation = -90;
+                    if (player.direction == 1 && projectile.ai[0] == -1)
+                    {
+                        rotation = 0;
+                    }
+                    else if (player.direction == -1 && projectile.ai[0] == 1)
+                    {
+                        rotation = -180;   
+                    }
+                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
+                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
