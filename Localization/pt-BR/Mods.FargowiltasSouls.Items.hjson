@@ -47,7 +47,7 @@ ApprenticeEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/4 as often as they would normally and deal 75% damage
+		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
 		Flameburst field of view and range are dramatically increased
@@ -60,7 +60,7 @@ AshWoodEnchant: {
 	/* Tooltip:
 		'''
 		Fire debuffs don't damage you
-		While you're burning, attacks are accompanied by balls of fire
+		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
 		'"You're telling me this isn't wood?"'
@@ -108,6 +108,7 @@ CactusEnchant: {
 		Inimigos explodirão em agulhas na morte se eles forem atingidos com suas agulhas
 		'Não tem nada igual, é!'
 		'''
+	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -170,7 +171,9 @@ DarkArtistEnchant: {
 	// DisplayName: Dark Artist Enchantment
 	/* Tooltip:
 		'''
-		While attacking, fire your next 2 closest weapons' projectiles as support
+		While attacking, fire your next closest weapon's projectile as support
+		The support weapon will fire 1/5 as often as they would normally
+		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
 		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
@@ -253,6 +256,7 @@ HallowEnchant: {
 		Using a healing potion creates a shockwave that repels nearby enemy projectiles
 		'Hit me with your best shot'
 		''' */
+	// OverTime: over time
 }
 
 HuntressEnchant: {
@@ -276,6 +280,13 @@ IronEnchant: {
 		Does not work on Crucible of the Cosmos items
 		You attract items from a larger range
 		'Strike while the iron is hot'
+		''' */
+	/* VanityTooltip:
+		'''
+		When crafting an item, each material has a 33% chance to not be consumed
+		Works once per material type, ever
+		Does not work on Crucible of the Cosmos items
+		You attract items from a larger range
 		''' */
 }
 
@@ -306,7 +317,7 @@ MeteorEnchant: {
 	/* Tooltip:
 		'''
 		Increases your movement speed and acceleration, and decreases your momentum
-		Hitting an enemy occasionally drops a meteor on them
+		Hitting an enemy occasionally drops a meteor on them, dealing magic damage
 		Meteor cooldown is decreased faster the more you move around
 		'Drop a draco on 'em'
 		''' */
@@ -383,7 +394,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles deal more damage the faster they're moving, up to 1.15x
+		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -466,9 +477,11 @@ RainEnchant: {
 		It will break after blocking 200 damage
 		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
+		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		Effects of Inner Tube
 		'Come again some other day'
 		''' */
+	// VanityTooltip: Grants immunity to lightning strikes in Eternity Mode
 }
 
 RedRidingEnchant: {
@@ -537,6 +550,7 @@ ShroomiteEnchant: {
 		Durante o modo sorrateiro, mais cogumelos surgirão
 		'Feito com cogumelos de verdade!'
 		'''
+	// AndMushroomPower: and grants the Mushroom Power buff
 }
 
 SilverEnchant: {
@@ -661,9 +675,9 @@ TungstenEnchant: {
 	// DisplayName: Tungsten Enchantment
 	/* Tooltip:
 		'''
-		Doubles melee weapon size
-		Once every 2/3 of a second a projectile will be doubled in size
-		Enlarged projectiles and non-projectile swords deal 7% more damage
+		Increases melee weapon size by 50% and whip range by 20%
+		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
+		3 second cooldown
 		'Bigger is always better'
 		''' */
 }
@@ -680,6 +694,7 @@ TurtleEnchant: {
 		Inimigos explodirão em agulhas na morte se eles forem atingidos com suas agulhas
 		'De repente, você tem vontade de se esconder em um casco'
 		'''
+	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
 }
 
 ValhallaKnightEnchant: {
@@ -709,7 +724,8 @@ WizardEnchant: {
 	// DisplayName: Wizard Enchantment
 	/* Tooltip:
 		'''
-		Upgrades the enchantment directly below this accessory to its Force effect
+		Upgrades the Enchantment in the accessory slot directly below this
+		Upgraded effects are stated in the description
 		'We love casting spells'
 		''' */
 }
@@ -780,6 +796,12 @@ BoxofGizmos: {
 		Oferece disparo automático a todos os itens
 		Reduz a velocidade de uso dos itens afetados em 20%
 		'''
+	/* VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
 }
 
 UniverseCore: {
@@ -885,7 +907,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
 		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile damage based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
@@ -927,6 +949,7 @@ TerraForce: {
 		[i:5516] Oferece imunidade a fogo e lava
 		'A terra empresta sua força'
 		'''
+	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range"
 }
 
 TimberForce: {
@@ -956,6 +979,7 @@ WillForce: {
 		[i:5543] Aumenta a eficiência de fontes de cura em 50%
 		'Uma mente de determinação inquebrável'
 		'''
+	// VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }
 
 AbominableWand: {
@@ -1034,6 +1058,14 @@ BionomicCluster: {
 		    Clique com o botão direito para afastar e melhora consideravelmente as reforjas
 		'O amálgama nascido de mil inimigos comuns'
 		'''
+	/* VanityTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
+		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
+		''' */
 }
 
 BionomicClusterInactive: {
@@ -1045,7 +1077,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
-		[i:FargowiltasSouls/SqueakyToy] Attacks have a chance to squeak and deal 1 damage to you
+		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by 10%
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
 		[i:FargowiltasSouls/ConcentratedRainbowMatter] Summons a friendly rainbow slime
@@ -1054,7 +1086,7 @@ BionomicClusterInactive: {
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically use healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		    [i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
 		    [i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
@@ -1100,6 +1132,7 @@ ConcentratedRainbowMatter: {
 		Invoca uma geleia do arco-íris bebê para lutar por você
 		'Cadê o tesouro?'
 		'''
+	// VanityTooltip: Automatically use healing potions when needed
 }
 
 DarkenedHeart: {
@@ -1168,6 +1201,7 @@ FrigidGemstone: {
 		Aperte a tecla Feitiço Frígido para lançar Bastão de Gelo
 		'Um fragmento de gelo mágico antigo'
 		'''
+	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FrigidGemstoneInactive: {
@@ -1176,8 +1210,6 @@ FrigidGemstoneInactive: {
 		'''
 		Currently inactive, Right click to activate
 		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
 		'A torn off limb composed of ancient ice'
 		''' */
 }
@@ -1206,12 +1238,14 @@ GalacticGlobe: {
 		Aumenta o tempo de voo em 100%
 		'Sempre observando'
 		'''
+	// VanityTooltip: Grants most standard potion and station buffs
 	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
 	/* ExpandedTooltip:
 		'''
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
-		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed]
+		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Honey]
 		''' */
 }
 
@@ -1272,6 +1306,7 @@ HeartoftheMasochist: {
 		Invoca um Mini Disco Voador e verdadeiros olhos de Cthulhu amigáveis
 		'Quente, batendo e sem necessidade de um corpo'
 		'''
+	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion buffs"
 }
 
 IceQueensCrown: {
@@ -1364,6 +1399,12 @@ MysticSkull: {
 		Aumenta o alcance de coleta das estrelas de mana
 		'A cabeça de um inimigo derrotado que quietamente murmura'
 		'''
+	/* VanityTooltip:
+		'''
+		Grants immunity to Suffocation
+		Automatically use mana potions when needed
+		Increases pickup range for mana stars
+		''' */
 }
 
 MysticSkullInactive: {
@@ -1383,7 +1424,7 @@ NecromanticBrew: {
 	Tooltip:
 		'''
 		Oferece imunidade a Letárgico
-		Aumenta a velocidade enquanto faz uma corrida em 50%
+		Aumenta a velocidade enquanto faz uma corrida em 30%
 		Enquanto faz uma corrida, você sofre 75% menos dano de contato e reflete 100% do dano de contato no atacante
 		Invoca 2 braços do Esqueletron para bater nos inimigos
 		'A solução de crescimento ósseo de um inimigo derrotado'
@@ -1399,6 +1440,7 @@ NymphsPerfume: {
 		Seus ataques ocasionalmente produzem corações
 		'O cheiro é um pouco avassalador'
 		'''
+	// VanityTooltip: You respawn with more life
 }
 
 PrecisionSeal: {
@@ -1490,6 +1532,12 @@ SandsofTime: {
 		Use para teleportar-se para o seu último ponto de morte
 		'Faça o que fizer, não derrube-o'
 		'''
+	/* VanityTooltip:
+		'''
+		Grants immunity to Mighty Wind and cactus damage
+		You respawn twice as fast when no boss is alive
+		Use to teleport to your last death point
+		''' */
 }
 
 SaucerControlConsole: {
@@ -1502,6 +1550,7 @@ SaucerControlConsole: {
 		O raio trator do disco voador desacelera inimigos atingidos por ele
 		'Basta mantê-lo no modo avião'
 		'''
+	// VanityTooltip: Press the Ammo Cycle key to cycle ammos
 }
 
 SecurityWallet: {
@@ -1512,6 +1561,11 @@ SecurityWallet: {
 		Melhora consideravelmente as reforjas
 		'Não está segura de ser saqueada do corpo de alguém'
 		'''
+	/* VanityTooltip:
+		'''
+		Grants immunity to Midas
+		Drastically improves reforges
+		''' */
 }
 
 SinisterIcon: {
@@ -1631,6 +1685,7 @@ WyvernFeather: {
 		Seus ataques têm 10% de chance de infligir Asas Cortadas em inimigos não-chefes
 		'Morno ao toque'
 		'''
+	// VanityTooltip: Stabilizes gravity in space and in liquids
 }
 
 ZephyrBoots: {
@@ -1779,6 +1834,7 @@ MasochistSoul: {
 		Invoca a ajuda de todos os chefes do Modo Eternidade para o seu lado
 		'Aceite a maestria, aceite a eternidade'
 		'''
+	// VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
 }
 
 SnipersSoul: {
@@ -2115,7 +2171,7 @@ MutantsDiscountCard: {
 
 MutantsPact: {
 	DisplayName: Pacto do Mutant
-	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Force or Soul
+	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
 }
 
 OrdinaryCarrot: {
@@ -2128,6 +2184,7 @@ OrdinaryCarrot: {
 		Clique com o botão direito para aumentar o alcance de visualização enquanto estiver no inventário
 		'Arrancado do rosto de um inimigo derrotado'
 		'''
+	// VanityTooltip: Right click to increase view range
 }
 
 RabiesShot: {
@@ -2789,7 +2846,7 @@ BigBrainBuster: {
 		'''
 		Repeated summons increase the size and damage of the minion
 		This caps at 16 slots
-		'The reward for slaughtering many...'
+		'The reward for a mighty rematch..'
 		''' */
 }
 
@@ -2904,7 +2961,7 @@ TheBigSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The reward for slaughtering many..'
+		'The reward for a mighty rematch..'
 		''' */
 }
 
@@ -3099,7 +3156,7 @@ AnglerEnchant: {
 
 LifelightBag: {
 	// DisplayName: Treasure Bag (Lifelight)
-	// Tooltip: Right click to open
+	// Tooltip: Right Click to open
 }
 
 LifelightMasterPet: {
@@ -3252,7 +3309,7 @@ DecrepitAirstrikeRemote: {
 
 BanishedBaronBag: {
 	// DisplayName: Treasure Bag (Banished Baron)
-	// Tooltip: Right click to open
+	// Tooltip: Right Click to open
 }
 
 RustedOxygenTank: {
@@ -3362,6 +3419,7 @@ OncomingMutantItem: {
 Extra: {
 	// StarlightTungsten: x0.40 damage when used with Tungsten Enchantment
 	// DefensePrefixMaxLife: +{0} max life
+	// ViolentPrefix: +{0}% attack speed
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
@@ -3390,7 +3448,7 @@ RazorContainer: {
 	/* Tooltip:
 		'''
 		Spawns a razor blade that hovers around your cursor
-		Hit it with a sword to send it flying
+		Hit it with a standard broadsword to send it flying
 		While flying it always critically strikes and has increased armor penetration
 		'Some yellow fur is still stuck at the bottom' 
 		''' */
@@ -3489,7 +3547,11 @@ WillBooster: {
 
 CoffinRoominator: {
 	// DisplayName: Coffin Roominator
-	// Tooltip: ""
+	/* Tooltip:
+		'''
+		Spawns a Cursed Coffin room on your cursor
+		Overrides existing Cursed Coffin rooms
+		''' */
 }
 
 GildedSceptre: {
@@ -3539,7 +3601,7 @@ SpiritLongbow: {
 
 CursedCoffinBag: {
 	// DisplayName: Treasure Bag (Cursed Coffin)
-	// Tooltip: ""
+	// Tooltip: Right Click to open
 }
 
 CursedCoffinRelic: {
@@ -3557,15 +3619,48 @@ UmbraRegalia: {
 	/* Tooltip:
 		'''
 		Left Click to rapidly stab with the spear
-		Hold Right Click to wind up and release to throw the spear
-		Spear hits release homing umbral crystals
-		Spear throw leaves a trail of umbral crystals in its wake
-		Fully charged spear throws deal more damage and hits release more crystals
-		'The dark side of a defeated foe..'
+		Hold Right Click to charge a spear toss
+		Becomes stronger when fully charged
+		Can continue to gain damage for a while after full charge
+		'The reward for a mighty rematch...'
 		''' */
 }
 
 CoffinPainting: {
 	// DisplayName: Coffin Painting
 	// Tooltip: ""
+}
+
+ElectricWhip: {
+	// DisplayName: Voltaic Chain
+	/* Tooltip:
+		'''
+		Whip enemies to fire chain lightning from nearby minions, up to 4 times per swing
+		'The lifeblood of a defeated foe...'
+		''' */
+}
+
+TheDestroyer: {
+	// DisplayName: The Destroyer
+	/* Tooltip:
+		'''
+		Whip your minions to fire a laser at a nearby enemy, up to 6 times per swing
+		Every 20th swing, the destroyer breaks loose and tracks your mouse for 5 seconds
+		'The reward for a mighty rematch..'
+		''' */
+}
+
+FallenStarDayItem: {
+	// DisplayName: Fallen Star
+	// Tooltip: ""
+}
+
+DarkTome: {
+	// DisplayName: Dark Tome
+	/* Tooltip:
+		'''
+		Hold button to summon up to 3 spectral books that chase your cursor
+		Releasing button causes the books to release a volley of pages
+		'The arcane grimoire of a defeated foe...'
+		''' */
 }
