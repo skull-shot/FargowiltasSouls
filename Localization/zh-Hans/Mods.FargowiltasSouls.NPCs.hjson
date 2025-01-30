@@ -421,14 +421,13 @@ CursedCoffinInactive.DisplayName: 神秘的棺材
 UnconsciousDeviantt: {
 	// DisplayName: ???
 	// Unconscious: ...
-	// UnconsciousChatButton: Wake her up
-	// Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
-	// IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? It seems you've met my bros already, they're the coolest!
+	// UnconsciousChatButton: Check for a pulse
+	// Introduction: Huh? Am I okay? I guess my totally planned falling out of the sky trick looked like it hurt. I'm {0}, your new (and way cooler than the other) guide! Take these before you head off, I'm sure they'll be useful to you!
 }
 
 ReleasedMutant: {
 	// DisplayName: ???
-	// Chat: *yawns* ...why did you wake me up? Giant slime monster? You mean my bed? Ah, forget it... I'll get a new one later.
+	// Chat: *yawns* ...why did you wake me up? Giant slime monster? ...you mean my bed? Ah, forget it... I'll just get a new one.
 	// TalkToHim: Who are you?
-	// Introduction: Just a regular old shopkeep. I think you'd know the deal already, I'll sell to you what I have, granted you give me money, of course.
+	// Introduction: Name's {0}, though I'm sure you've heard of me before. Are you gonna buy something or not?
 }

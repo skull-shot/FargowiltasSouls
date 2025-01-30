@@ -62,6 +62,8 @@ namespace FargowiltasSouls.Content.NPCs
         {
             if (firstButton)
             {
+                FargowiltasSouls.Instance.Call("GiveDevianttGifts");
+
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
                     var packet = Mod.GetPacket();
@@ -72,10 +74,7 @@ namespace FargowiltasSouls.Content.NPCs
                 else
                     WakeUp(NPC);
 
-                int Abom = NPC.FindFirstNPC(ModContent.NPCType<Abominationn>());
-                int Mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());             
-
-                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction");
+                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", NPC.GivenName);
             }
         }
 
