@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.NPCs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -483,7 +484,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                             if (FargoSoulsUtil.HostCheck)
                             {
                                 if (!Main.dedServ)
-                                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Thunder") { Volume = 0.8f, Pitch = 0.5f }, NPC.Center);
+                                    SoundEngine.PlaySound(FargosSoundRegistry.Thunder with { Volume = 0.8f, Pitch = 0.5f }, NPC.Center);
                                 const int max = 16;
                                 for (int i = 0; i < max; i++)
                                 {
@@ -906,6 +907,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         }
 
                         int threshold = 70; //NPC.localAI[2] == 0 ? 70 : 50;
+                        if (WorldSavingSystem.MasochistModeReal)
+                            threshold = 50;
                         if (++NPC.ai[2] <= threshold)
                         {
                             targetPos = player.Center;
@@ -1228,6 +1231,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<CosmosReticle>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
                     }
 
+                    if (WorldSavingSystem.MasochistModeReal && NPC.ai[1] == 60 && FargoSoulsUtil.HostCheck)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<CosmosReticle>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
+                    }
+
                     if (NPC.ai[1] > 60)
                     {
                         if (++NPC.ai[3] == 3)
@@ -1460,7 +1468,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         NPC.localAI[0] = Main.rand.NextFloat(2 * (float)Math.PI);
 
                         if (!Main.dedServ)
-                            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), player.Center);
+                            SoundEngine.PlaySound(FargosSoundRegistry.ZaWarudo, player.Center);
 
                         //if (FargoSoulsUtil.HostCheck) Projectile.NewProjectile(npc.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -18);
 
@@ -1914,8 +1922,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 glowColor *= NPC.Opacity;
 
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.UseBlendState(BlendState.Additive);
             }
 
             if (NPC.localAI[2] != 0 || Animation == -4f)
@@ -1941,8 +1948,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
             if (!NPC.IsABestiaryIconDummy)
             {
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.UseBlendState(BlendState.NonPremultiplied);
             }
 
             Main.EntitySpriteDraw(npcTex, drawPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
@@ -1951,13 +1957,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 Main.EntitySpriteDraw(npcGlow2, drawPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, NPC.rotation, origin2, NPC.scale, effects, 0);
 
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.UseBlendState(BlendState.Additive);
 
                 Main.EntitySpriteDraw(npcGlow2, drawPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, NPC.rotation, origin2, NPC.scale, effects, 0);
 
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.ResetToDefault();
             }
             return false;
         }

@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.WorldGeneration
                     if (!validSpot) 
                         continue;
                     Point arenaTopCenter = new(pyramidTop.X + curXSearch, pyramidTop.Y + curYSearch);
-                    ExtendPyramid(pyramidTop, arenaTopCenter.Y + StructureSize.Y);
+                    ExtendPyramid(pyramidTop, arenaTopCenter.Y + StructureSize.Y + 4);
                     Place(arenaTopCenter);
                     PlacePassage(arenaTopCenter);
                     return;
@@ -75,6 +75,8 @@ namespace FargowiltasSouls.Content.WorldGeneration
             for (int y = pyramidTop.Y; y <= yToExtendTo; y++)
             {
                 int i = y - pyramidTop.Y;
+                if (i < 30)
+                    continue;
                 int halfWidth = i + 1;
                 for (int x = pyramidTop.X - halfWidth - 2; x <= pyramidTop.X + halfWidth; x++)
                 {
@@ -98,16 +100,6 @@ namespace FargowiltasSouls.Content.WorldGeneration
                     throw new Exception("Fargo's Souls: Cursed Coffin arena generation could not retrieve dimensions for the arena.");
             Point16 arenaTopLeft = new(arenaTopCenter.X - (StructureSize.X / 2) + 1, arenaTopCenter.Y);
             StructureHelper.Generator.GenerateStructure(arenaPath, arenaTopLeft, mod);
-            foreach (int x in new List<int> { arenaTopLeft.X - 1, arenaTopLeft.X + StructureSize.X })
-            {
-                for (int y = 0; y < StructureSize.Y; y++)
-                {
-                    Point point = new(x, arenaTopCenter.Y + y);
-                    WorldGen.KillTile(point.X, point.Y);
-                    WorldGen.KillWall(point.X, point.Y);
-                    WorldGen.PlaceTile(point.X, point.Y, RandomSandstoneBrick(), mute: true, forced: true);
-                }
-            }
             SetArenaPosition(new(arenaTopCenter.X, arenaTopCenter.Y + Height / 2));
 
         }
@@ -123,7 +115,7 @@ namespace FargowiltasSouls.Content.WorldGeneration
         {
             int arenaLeft = arenaTopCenter.X - (Width / 2);
             int arenaRight = arenaTopCenter.X + (Width / 2);
-            int arenaBottom = arenaTopCenter.Y + Height;
+            int arenaBottom = arenaTopCenter.Y + Height - 2;
             int dir = 0;
             // Search for passage, horizontally
             for (int xOff = 1; xOff < 150; xOff++) // Start at 2 because otherwise it detects the wall inside the arena and breaks
@@ -156,6 +148,42 @@ namespace FargowiltasSouls.Content.WorldGeneration
                         WorldGen.PlaceTile(point.X, point.Y, TileID.SandstoneBrick, mute: true, forced: true);
                     else
                         WorldGen.PlaceWall(point.X, point.Y, WallID.SandstoneBrick, mute: true);
+                }
+            }
+        }
+        public static void PlaceOpening(Point arenaTopCenter) // Manual item only
+        {
+            int arenaLeft = arenaTopCenter.X - (Width / 2);
+            int arenaRight = arenaTopCenter.X + (Width / 2);
+            int arenaBottom = arenaTopCenter.Y + Height - 2;
+            int dir = 0;
+            // Search for passage, horizontally
+            for (int xOff = 1; xOff < 150; xOff++) // Start at 2 because otherwise it detects the wall inside the arena and breaks
+            {
+                Tile left = Main.tile[arenaLeft - xOff, arenaBottom];
+                Tile right = Main.tile[arenaRight + xOff, arenaBottom];
+
+                if (!left.HasTile && left.WallType == WallID.SandstoneBrick) // Search left for passage
+                    dir = -1;
+                if (!right.HasTile && right.WallType == WallID.SandstoneBrick) // Search right for passage
+                    dir = 1;
+                if (dir != 0)
+                    break;
+            }
+            if (dir == 0)
+                dir = Math.Sign(PyramidGenSystem.PyramidLocation.X - arenaTopCenter.X);
+            for (int pY = -1; pY < 5; pY++)
+            {
+                for (int pX = -1; pX < 150; pX++) // Start at 1 to drill the wall and not stop inside the arena
+                {
+                    int extraX = dir == 1 ? 1 : 0; // Needed because it's uncentered! Width is even.
+
+                    Point point = new(arenaTopCenter.X + dir * ((Width / 2) + pX + extraX), arenaBottom - pY);
+                    Tile tile = Main.tile[point.X, point.Y];
+                    if (!tile.HasTile || tile.TileType != TileID.SandstoneBrick)
+                        break;
+                    WorldGen.KillTile(point.X, point.Y);
+                    //WorldGen.KillWall(point.X, point.Y);
                 }
             }
         }

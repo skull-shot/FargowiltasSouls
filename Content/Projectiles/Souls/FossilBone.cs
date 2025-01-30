@@ -95,8 +95,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Vector2 origin2 = rectangle.Size() / 2f;
             Color color = Color.White;
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int j = 0; j < 12; j++)
             {
                 Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 3f;
@@ -104,11 +103,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
                 Main.EntitySpriteDraw(texture, drawPosition + afterimageOffset, rectangle, glowColor, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0f);
             }
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture, drawPosition, rectangle, color, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
-            return base.PreDraw(ref lightColor);
+            return false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using System;
@@ -43,7 +44,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             if (Projectile.localAI[0] == 0)
             {
                 Projectile.localAI[0] = 1;
-                SoundEngine.PlaySound(SoundID.Item44, Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1,3)), Projectile.Center);
             }
 
             // Fade into 50 alpha from 150
@@ -61,7 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnKill(int timeLeft)
         {
             FargoSoulsUtil.HeartDust(Projectile.Center, Projectile.rotation + MathHelper.PiOver2);
-
+            SoundEngine.PlaySound(FargosSoundRegistry.DeviHeartExplosion with { MaxInstances = 0, Volume = 0.33f }, Projectile.Center);
             /*for (int i = 0; i < 10; i++)
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 86, 0f, 0f, 0, default(Color), 2f);

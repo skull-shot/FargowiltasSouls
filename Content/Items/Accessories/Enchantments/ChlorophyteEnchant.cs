@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Chlorofuck>()] == 0)
             {
-                int dmg = player.FargoSouls().ForceEffect<ChlorophyteEnchant>() ? 65 : 35;
+                int dmg = 29;
                 const int max = 5;
                 float rotation = 2f * (float)Math.PI / max;
                 for (int i = 0; i < max; i++)

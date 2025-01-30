@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

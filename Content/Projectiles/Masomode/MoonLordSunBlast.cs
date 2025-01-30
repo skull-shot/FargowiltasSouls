@@ -6,8 +6,10 @@ using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -29,6 +31,23 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.width = 70;
             Projectile.height = 70;
             CooldownSlot = 1;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            if (source is EntitySource_Parent parent && parent.Entity is NPC npc
+                && (npc.type == NPCID.GolemFistLeft || npc.type == NPCID.GolemFistRight))
+                Projectile.localAI[2] = 1;
+        }
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(Projectile.localAI[2]);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.localAI[2] = reader.ReadSingle();
         }
 
         public override bool? CanDamage()
@@ -67,7 +86,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             {
                 SoundEngine.PlaySound(SoundID.Item88, Projectile.Center);
                 Projectile.position = Projectile.Center;
-                Projectile.scale = Main.rand.NextFloat(1.5f, 4f); //ensure no gaps
+                Projectile.scale = Projectile.localAI[2] == 0 ? Main.rand.NextFloat(1.5f, 4f) //ensure no gaps
+                    : 3f;
                 Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
                 Projectile.width = (int)(Projectile.width * Projectile.scale);
                 Projectile.height = (int)(Projectile.height * Projectile.scale);

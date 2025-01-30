@@ -3,11 +3,7 @@ MutantStatue.MapEntry: Статуя Мутанта
 MutantStatueGift.MapEntry: Статуя Мутанта
 SquidwardDoorClosed.MapEntry: Дверь-Сквидвард
 SquidwardDoorOpen.MapEntry: Дверь-Сквидвард
-LifeRevitalizerPlaced.MapEntry: Восстановитель Жизни
-AbomMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-ChampionMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-DeviMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-MutantMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-RePrologueMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-StoriaMusicBoxSheet.MapEntry: Музыкальная Шкатулка
-// CrackedSandstoneBricks.MapEntry: Cracked Sandstone Bricks
+LifeRevitalizerPlaced.MapEntry: Восстановитель жизни
+ChampionMusicBoxSheet.MapEntry: Музыкальная шкатулка
+MutantMusicBoxSheet.MapEntry: Музыкальная шкатулка
+CrackedSandstoneBricks.MapEntry: Треснувший песчаный кирпич

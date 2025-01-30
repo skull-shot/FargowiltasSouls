@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Items
 {
     public class EModeGlobalItem : GlobalItem
     {
+        public override bool InstancePerEntity => true;
         public override void Load()
         {
             On_Player.GrantPrefixBenefits += EModePrefixChanges;
@@ -25,6 +26,7 @@ namespace FargowiltasSouls.Content.Items
         {
             On_Player.GrantPrefixBenefits -= EModePrefixChanges;
         }
+        const float newViolentBaseAttackSpeed = 0.005f;
         private static void EModePrefixChanges(On_Player.orig_GrantPrefixBenefits orig, Player self, Item item)
         {
             orig(self, item);
@@ -37,6 +39,12 @@ namespace FargowiltasSouls.Content.Items
                     self.statDefense -= 1;
                 }
                 self.statLifeMax2 += 5;
+            }
+            if (item.prefix >= PrefixID.Wild && item.prefix <= PrefixID.Violent)
+            {
+                int prefixMultiplier = item.prefix - PrefixID.Wild + 1;
+                self.GetAttackSpeed(DamageClass.Melee) -= 0.01f * prefixMultiplier;
+                self.FargoSouls().AttackSpeed += newViolentBaseAttackSpeed * prefixMultiplier;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -62,6 +70,18 @@ namespace FargowiltasSouls.Content.Items
                         }
 
                         tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.DefensePrefixMaxLife", life);
+                    }
+                }
+            }
+            if (item.prefix >= PrefixID.Wild && item.prefix <= PrefixID.Violent)
+            {
+                foreach (TooltipLine tooltip in tooltips)
+                {
+                    if (tooltip.Name == "PrefixAccMeleeSpeed")
+                    {
+                        int prefixMultiplier = item.prefix - PrefixID.Wild + 1;
+                        float attackSpeed = (float)System.Math.Round(newViolentBaseAttackSpeed * prefixMultiplier * 100, 1);
+                        tooltip.Text = Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.ViolentPrefix", attackSpeed);
                     }
                 }
             }
@@ -126,7 +146,6 @@ namespace FargowiltasSouls.Content.Items
                 return base.CanUseItem(item, player);
             }
 
-
             EModePlayer ePlayer = player.Eternity();
 
             if (item.damage <= 0 && (item.type == ItemID.RodofDiscord || item.type == ItemID.ActuationRod || item.type == ItemID.WireKite || item.type == ItemID.WireCutter || item.type == ItemID.Wrench || item.type == ItemID.BlueWrench || item.type == ItemID.GreenWrench || item.type == ItemID.MulticolorWrench || item.type == ItemID.YellowWrench || item.type == ItemID.Actuator))
@@ -178,6 +197,13 @@ namespace FargowiltasSouls.Content.Items
             base.GetHealMana(item, player, quickHeal, ref healValue);
         }
         */
+        public override void ModifyItemScale(Item item, Player player, ref float scale)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+            if (item.type == ItemID.PalladiumSword)
+                scale += 0.4f;
+        }
         public override bool? UseItem(Item item, Player player)
         {
             if (!WorldSavingSystem.EternityMode)
@@ -188,7 +214,6 @@ namespace FargowiltasSouls.Content.Items
             {
                 Main.time = 18000;
             }
-
             return base.UseItem(item, player);
         }
         public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
@@ -241,7 +266,14 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.PalladiumSword:
                     {
                         if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
+                        {
                             player.AddBuff(BuffID.RapidHealing, 60 * 5);
+                            if (player.Eternity().PalladiumHealTimer <= 0)
+                            {
+                                player.FargoSouls().HealPlayer(1);
+                                player.Eternity().PalladiumHealTimer = 30;
+                            }
+                        }
                         break;
                     }
             }
@@ -259,6 +291,14 @@ namespace FargowiltasSouls.Content.Items
             {
                 type = ProjectileID.ConfettiGun;
                 damage = 0;
+            }
+            if (item.type == ItemID.ChlorophyteSaber)
+            {
+                velocity *= 2f;
+            }
+            if (item.type == ItemID.JackOLanternLauncher)
+            {
+                velocity *= 1.5f;
             }
         }
     }

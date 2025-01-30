@@ -87,11 +87,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 7f;
-                Main.dust[dust].shader = GameShaders.Armor.GetSecondaryShader(41, Main.LocalPlayer);
+                //Main.dust[dust].shader = GameShaders.Armor.GetSecondaryShader(41, Main.LocalPlayer);
                 int dust2 = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                 Main.dust[dust2].velocity *= 3f;
-                Main.dust[dust2].shader = GameShaders.Armor.GetSecondaryShader(41, Main.LocalPlayer);
+                //Main.dust[dust2].shader = GameShaders.Armor.GetSecondaryShader(41, Main.LocalPlayer);
             }
 
             float scaleFactor9 = 0.5f;
@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
-            Color color26 = Color.Fuchsia;
+            Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
             color26.A = (byte)Projectile.alpha;
 
@@ -129,7 +129,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if (i >= 5)
                     lerpamount = 0.8f;
 
-                Color color27 = Color.Lerp(Color.Fuchsia, Color.Black, lerpamount) * 0.75f * 0.5f;
+                Color color27 = lightColor * 0.75f * 0.5f;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 float scale = Projectile.scale * (ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];

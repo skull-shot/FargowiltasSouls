@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 Projectile.localAI[1] = Projectile.ai[1] + 1;
 
                 //SoundEngine.PlaySound(SoundID.Zombie20, Projectile.Center);
-                SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
+                //SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
 
                 /*switch ((int)Projectile.ai[1])
                 {
@@ -215,30 +215,10 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void OnKill(int timeleft)
         {
-            SoundEngine.PlaySound(SoundID.Item84, Projectile.Center);
-            if (Projectile.owner == Main.myPlayer)
-            {
-                SpawnRazorbladeRing(12, 12.5f, 0.75f);
-                SpawnRazorbladeRing(12, 10f, -2f);
-            }
+            for (int i = 0; i < 20; i++)
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.YellowTorch, Scale: Main.rand.NextFloat(1, 2));
         }
 
-        private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
-        {
-            float rotation = 2f * (float)Math.PI / max;
-            Vector2 vel = Projectile.velocity;
-            vel.Normalize();
-            vel *= speed;
-            int type = ModContent.ProjectileType<AbomScytheFriendly>();
-            for (int i = 0; i < max; i++)
-            {
-                vel = vel.RotatedBy(rotation);
-                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 3,
-                    Projectile.knockBack / 4f, Projectile.owner, rotationModifier * Projectile.spriteDirection);
-                if (p != Main.maxProjectiles)
-                    Main.projectile[p].DamageType = Projectile.DamageType;
-            }
-        }
 
         public override bool PreDraw(ref Color lightColor)
         {
@@ -277,6 +257,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Vector2 origin2 = rectangle.Size() / 2f;
 
             Color color26 = Color.White * Projectile.Opacity;
+            color26 *= 0.25f;
 
             for (int x = 0; x < 6; x++)
             {

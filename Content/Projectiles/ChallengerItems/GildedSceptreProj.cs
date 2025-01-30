@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -48,6 +49,11 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             }
             if (Triggered == 0)
             {
+                if (!Projectile.owner.IsWithinBounds(Main.maxPlayers) || !Main.player[Projectile.owner].Alive() || Main.player[Projectile.owner].HeldItem.type != ModContent.ItemType<GildedSceptre>())
+                {
+                    Projectile.Kill();
+                    return;
+                }
                 if (originPos == Vector2.Zero)
                     originPos = Projectile.Center;
                 //Vector2 desiredPos = originPos + (MathF.Tau * (Projectile.ai[1] % 20) / 20).ToRotationVector2() * 6;
@@ -113,6 +119,8 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
         private static readonly Color GlowColor = new(224, 196, 252, 0);
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Projectile.owner != Main.myPlayer && Triggered == 0)
+                return false;
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY);
 

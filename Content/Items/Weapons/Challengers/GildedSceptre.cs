@@ -79,10 +79,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             if (!shots.Any())
                 return;
             int shotCount = shots.Count();
+            bool notAttacking = player.FargoSouls().WeaponUseTimer <= 0;
 
             if (shotCount < 4)
             {
-                if (Main.mouseLeftRelease)
+                if (notAttacking)
                 {
                     foreach (var shot in shots)
                     {
@@ -111,7 +112,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             error /= shotCount;
             if (error < Threshold)
             {
-                if (Main.mouseLeftRelease)
+                if (notAttacking)
                 {
                     foreach (var shot in shots)
                     {
@@ -125,7 +126,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
                     SoundEngine.PlaySound(CursedCoffin.BigShotSFX, circleCenter);
                 }
             }
-            else if (Main.mouseLeftRelease)
+            else if (notAttacking)
             {
                 float bonus = 0.5f * (Threshold / error);
                 bonus = MathHelper.Clamp(bonus, 0, 0.5f);

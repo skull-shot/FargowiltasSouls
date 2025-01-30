@@ -18,6 +18,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     [AutoloadEquip(EquipType.Shield)]
     public class TerrariaSoul : BaseSoul
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<GoldKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<ParryEffect>(),
+             AccessoryEffectLoader.GetEffect<StardustEffect>(),
+             AccessoryEffectLoader.GetEffect<SpiritTornadoEffect>()];
+
         public static List<int> Forces = 
             [
             ModContent.ItemType<TimberForce>(),

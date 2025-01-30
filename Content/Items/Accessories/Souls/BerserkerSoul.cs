@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Accessories.Essences;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -25,10 +26,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.FargoSouls().UniverseSoul)
-                return;
-            player.GetDamage(DamageClass.Melee) += 0.3f;
-            player.GetCritChance(DamageClass.Melee) += 15;
+            player.GetDamage(DamageClass.Melee) += 0.22f;
+            player.GetCritChance(DamageClass.Melee) += 10;
 
             player.AddEffect<MeleeSpeedEffect>(Item);
 
@@ -60,7 +59,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(null, "BarbariansEssence")
+            .AddIngredient<BarbariansEssence>()
             .AddIngredient(ItemID.StingerNecklace)
             .AddIngredient(ItemID.YoyoBag)
             .AddIngredient(ItemID.FireGauntlet)

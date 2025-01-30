@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using Luminance.Core.Graphics;
@@ -17,7 +18,6 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
         public static readonly int ExplosionDiameter = 450;
         public override string Texture => "FargowiltasSouls/Content/Bosses/BanishedBaron/BaronNuke";
 
-        private SoundStyle Beep = new("FargowiltasSouls/Assets/Sounds/Challengers/Baron/NukeBeep");
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             }
             if (Projectile.timeLeft % 5 == 0)
             {
-                SoundEngine.PlaySound(Beep, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.NukeBeep, Projectile.Center);
             }
         }
 

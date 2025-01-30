@@ -48,13 +48,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(28 + Main.rand.NextFloat(1f, 35f)));
                 newVelocity *= 1f - Main.rand.NextFloat(0.3f);
-                Projectile.NewProjectileDirect(source, position, newVelocity, type, damage, knockback, player.whoAmI);
+                Projectile.NewProjectileDirect(source, position, newVelocity, type, damage, knockback, player.whoAmI, 0, 1);
             }
             for (int i = 0; i < NumProjectiles; i++)
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(-28 + Main.rand.NextFloat(-1f, -35f)));
                 newVelocity *= 1f - Main.rand.NextFloat(0.3f);
-                Projectile.NewProjectileDirect(source, position, newVelocity, type, damage, knockback, player.whoAmI);
+                Projectile.NewProjectileDirect(source, position, newVelocity, type, damage, knockback, player.whoAmI, 0, 1);
             }
 
             return false; // Return false because we don't want tModLoader to shoot projectile

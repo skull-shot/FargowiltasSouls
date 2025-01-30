@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
             .AddIngredient(ItemID.FragmentVortex, 35)
             .AddIngredient(ItemID.LunarBar, 5)
             .AddIngredient(ModContent.ItemType<CelestialRune>())
-            .AddIngredient(ModContent.Find<ModItem>("Fargowiltas", "EnergizerCultist"))
+            //.AddIngredient(ModContent.Find<ModItem>("Fargowiltas", "EnergizerCultist"))
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
 

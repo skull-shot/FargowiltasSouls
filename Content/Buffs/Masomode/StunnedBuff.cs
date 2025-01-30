@@ -18,18 +18,8 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.controlLeft = false;
-            player.controlRight = false;
-            player.controlJump = false;
-            player.controlDown = false;
-            player.controlUseItem = false;
-            player.controlUseTile = false;
-            player.controlHook = false;
-            player.releaseHook = true;
-            if (player.mount.Active)
-                player.mount.Dismount(player);
+            player.Incapacitate();
             player.FargoSouls().Stunned = true;
-            player.FargoSouls().NoUsingItems = 2;
 
             if (player.whoAmI == Main.myPlayer && player.buffTime[buffIndex] % 60 == 55)
                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));

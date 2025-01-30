@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             return Projectile.ai[1] <= 0 || WorldSavingSystem.MasochistModeReal;
         }
-
+        public ref float TargetID => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -50,11 +50,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Projectile.netUpdate = true;
                 Projectile.velocity = Vector2.Zero;
             }
-
-            if (--Projectile.ai[1] == 0)
+            int targetID = (int)TargetID;
+            if (--Projectile.ai[1] == 0 && targetID.IsWithinBounds(Main.maxPlayers))
             {
                 Projectile.netUpdate = true;
-                Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
+                Player target = Main.player[targetID];
+                if (!target.Alive())
+                    return;
                 Projectile.velocity = Projectile.SafeDirectionTo(target.Center);
                 if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>()) && Main.npc[EModeGlobalNPC.abomBoss].localAI[3] > 1)
                     Projectile.velocity *= 7f;

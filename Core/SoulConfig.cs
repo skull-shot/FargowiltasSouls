@@ -17,15 +17,6 @@ namespace FargowiltasSouls.Core
         private const string ModName = "FargowiltasSouls";
 
         [DefaultValue(true)]
-        public bool HideTogglerWhenInventoryIsClosed;
-
-        [DefaultValue(true)]
-        public bool ItemDisabledTooltip;
-
-        [DefaultValue(false)]
-        public bool ToggleSearchReset;
-
-        [DefaultValue(true)]
         public bool DeviChatter;
 
         [DefaultValue(false)]
@@ -37,23 +28,6 @@ namespace FargowiltasSouls.Core
         [DefaultValue(true)]
         public bool ForcedFilters;
 
-        private const float max4kX = 3840f;
-
-        private const float max4kY = 2160f;
-
-        [DefaultValue(true)]
-        public bool CooldownBars;
-
-        [Increment(1f)]
-        [Range(0f, max4kX)]
-        [DefaultValue(40f)]
-        public float CooldownBarsX;
-
-        [Increment(1f)]
-        [Range(0f, max4kY)]
-        [DefaultValue(300f)]
-        public float CooldownBarsY;
-
         #region maso
 
         [Header("Maso")]
@@ -62,20 +36,6 @@ namespace FargowiltasSouls.Core
         [ReloadRequired]
         public bool BossRecolors;
 
-        [DefaultValue(true)]
-        public bool PrecisionSealIsHold;
-
-
-        [Increment(1f)]
-        [Range(0f, max4kX)]
-        [DefaultValue(610f)]
-        public float OncomingMutantX;
-
-
-        [Increment(1f)]
-        [Range(0f, max4kY)]
-        [DefaultValue(250f)]
-        public float OncomingMutantY;
         #endregion
 
         #region patreon
@@ -141,13 +101,10 @@ namespace FargowiltasSouls.Core
         [ReloadRequired]
         public bool PatreonROB;
 
-        #endregion
+        [DefaultValue(true)]
+        [ReloadRequired]
+        public bool PatreonTouhou;
 
-        [OnDeserialized]
-        internal void OnDeserializedMethod(StreamingContext context)
-        {
-            OncomingMutantX = Utils.Clamp(OncomingMutantX, 0, max4kX);
-            OncomingMutantY = Utils.Clamp(OncomingMutantY, 0, max4kY);
-        }
+        #endregion
     }
 }

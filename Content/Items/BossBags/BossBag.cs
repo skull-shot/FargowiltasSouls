@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
         public sealed override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Treasure Bag");
-            // Tooltip.SetDefault("Right click to open");
+            // Tooltip.SetDefault("Right Click to open");
 
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "宝藏袋");
             //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "右键点击可打开");

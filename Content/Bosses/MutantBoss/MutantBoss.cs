@@ -1,6 +1,8 @@
 using Fargowiltas.Common.Configs;
 using Fargowiltas.NPCs;
 using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -18,6 +20,7 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,6 +42,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     public class MutantBoss : ModNPC
     {
         public override string Texture => $"FargowiltasSouls/Content/Bosses/MutantBoss/MutantBoss{FargoSoulsUtil.TryAprilFoolsTexture}";
+
+        public SlotId? TelegraphSound = null;
 
         Player player => Main.player[NPC.target];
 
@@ -113,7 +118,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC.damage = 444+44;
             NPC.defense = 255;
             NPC.value = Item.buyPrice(15);
-            NPC.lifeMax = Main.expertMode ? 17000000 : 7700000;
+            NPC.lifeMax = Main.expertMode ? 9700000 : 5100000;
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
@@ -124,6 +129,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC.aiStyle = -1;
             NPC.netAlways = true;
             NPC.timeLeft = NPC.activeTime * 30;
+            NPC.BossBar = ModContent.GetInstance<MutantBossBar>();
             if (WorldSavingSystem.AngryMutant)
             {
                 NPC.damage *= 17;
@@ -238,6 +244,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC.direction = NPC.spriteDirection = NPC.Center.X < player.Center.X ? 1 : -1;
 
             bool drainLifeInP3 = true;
+
+            if (TelegraphSound != null)
+            {
+                if (SoundEngine.TryGetActiveSound(TelegraphSound.Value, out ActiveSound s))
+                {
+                    s.Position = NPC.Center;
+                }
+            }
 
             switch ((int)AttackChoice)
             {
@@ -480,7 +494,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         Main.LocalPlayer.AddBuff(ModContent.BuffType<GoldenStasisCDBuff>(), 2);
                         if (WorldSavingSystem.MasochistModeReal)
+                        {
                             Main.LocalPlayer.AddBuff(ModContent.BuffType<TimeStopCDBuff>(), 2);
+                            Main.LocalPlayer.AddBuff(ModContent.BuffType<MutantDesperationBuff>(), 2);
+                        }
+                            
                     }
                     //if (FargowiltasSouls.Instance.CalamityLoaded)
                     //{
@@ -754,7 +772,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         bool Phase2Check()
         {
-            if (Main.expertMode && NPC.life < NPC.lifeMax / 2)
+            if (Main.expertMode && NPC.life < NPC.lifeMax * (2f / 3))
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
@@ -1162,7 +1180,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     return;
                 NPC.ai[3] = 1;
                 if (FargoSoulsUtil.HostCheck)
+                {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 240); // 250);
+                    TelegraphSound = SoundEngine.PlaySound(FargosSoundRegistry.MutantUnpredictive with {Volume = 2f}, NPC.Center);
+                }
+                    
 
                 EdgyBossText(GFBQuote(4));
             }
@@ -1472,7 +1494,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
 
                 //moon chain explosions
+                int explosions = 0;
                 if (WorldSavingSystem.EternityMode && AttackChoice != 9 || WorldSavingSystem.MasochistModeReal)
+                    explosions = 8;
+                else if (WorldSavingSystem.EternityMode)
+                    explosions = 5;
+                if (explosions > 0)
                 {
                     if (!Main.dedServ)
                         SoundEngine.PlaySound(SoundID.Thunder with { Pitch = -0.5f }, NPC.Center);
@@ -1485,7 +1512,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Vector2 spawnPos = NPC.Center + length * offset;
                     Vector2 baseDirection = player.DirectionFrom(spawnPos);
 
-                    const int max = 8; //spread
+                    int max = explosions; //spread
                     for (int i = 0; i < max; i++)
                     {
                         Vector2 angle = baseDirection.RotatedBy(MathHelper.TwoPi / max * i);
@@ -1689,8 +1716,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[3] = 1;
                 //NPC.velocity = NPC.DirectionFrom(player.Center) * NPC.velocity.Length();
                 if (FargoSoulsUtil.HostCheck)
+                {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 180); // + 60);
-
+                    TelegraphSound = SoundEngine.PlaySound(FargosSoundRegistry.MutantPredictive with { Volume = 8f }, NPC.Center);
+                }
+                    
                 EdgyBossText(GFBQuote(9));
             }
 
@@ -2059,8 +2089,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[3] = 1;
                 //NPC.velocity = NPC.DirectionFrom(player.Center) * NPC.velocity.Length();
                 if (FargoSoulsUtil.HostCheck)
+                {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 180);// + (WorldSavingSystem.MasochistMode ? 10 : 20));
-
+                    TelegraphSound = SoundEngine.PlaySound(FargosSoundRegistry.MutantUnpredictive with { Volume = 2f }, NPC.Center);
+                }
+                    
                 EdgyBossText(GFBQuote(14));
             }
 
@@ -2318,7 +2351,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 for (int i = 0; i <= max; i++)
                 {
                     Vector2 dir = Vector2.UnitX.RotatedBy(NPC.ai[2] * i * MathHelper.Pi / max) * 6; //rotate initial velocity of telegraphs by 180 degrees depending on velocity of lasers
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir, Vector2.Zero, ModContent.ProjectileType<MutantGlowything>(), 0, 0f, Main.myPlayer, dir.ToRotation(), NPC.whoAmI);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir, Vector2.Zero, ModContent.ProjectileType<MutantGlowything>(), 0, 0f, Main.myPlayer, dir.ToRotation(), NPC.whoAmI, 0f);
                 }
             }
 
@@ -4027,7 +4060,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             Main.EntitySpriteDraw(texture2D13, position, new Rectangle?(rectangle), NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
 
-            Vector2 auraPosition = AuraCenter + new Vector2(0f, NPC.gfxOffY);
+            Vector2 auraPosition = AuraCenter;
             if (ShouldDrawAura)
                 DrawAura(spriteBatch, auraPosition, AuraScale);
 
@@ -4044,16 +4077,18 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Color lightColor2 = Color.Lerp(outerColor, Color.White, 0.5f);
 
             Vector2 auraPos = position;
-            float radius = 2000f * AuraScale;
+            float radius = 2000f * auraScale;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return;
             var maxOpacity = NPC.Opacity;
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.MutantP1Aura");
             borderShader.TrySetParameter("colorMult", 7.35f);
             borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
-            borderShader.TrySetParameter("radius", radius * auraScale);
+            borderShader.TrySetParameter("radius", radius);
             borderShader.TrySetParameter("anchorPoint", auraPos);
             borderShader.TrySetParameter("screenPosition", Main.screenPosition);
             borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());

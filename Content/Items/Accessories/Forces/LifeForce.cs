@@ -50,22 +50,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // Beetle Enchant
 
             if (player.HasEffect<LifeForceEffect>())
-            {
                 player.AddEffect<BeetleEffect>(Item);
-                if (modPlayer.LifeBeetleDuration > 0 && player.HasEffect<BeetleEffect>())
-                {
-                    player.AddBuff(BuffID.BeetleMight3, modPlayer.LifeBeetleDuration);
-                    player.AddBuff(BuffID.BeetleEndurance3, modPlayer.LifeBeetleDuration);
-                    player.beetleOffense = true;
-                    player.beetleDefense = true;
-                    player.GetDamage(DamageClass.Generic) += 0.3f;
-                    player.GetDamage(DamageClass.Melee) -= 0.3f; //offset the actual vanilla beetle buff
-                }
-            }
             else
-            {
-
                 BeetleEnchant.AddEffects(player, Item);
+
+            //hover
+            if (player.controlDown && player.controlJump && !player.mount.Active)
+            {
+                player.position.Y -= player.velocity.Y;
+                if (player.velocity.Y > 0.1f)
+                    player.velocity.Y = 0.1f;
+                else if (player.velocity.Y < -0.1f)
+                    player.velocity.Y = -0.1f;
             }
         }
 
@@ -81,9 +77,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             player.wingsLogic = ArmorIDs.Wing.LongTrailRainbowWings;
             ascentWhenFalling = 1.25f;
-            ascentWhenRising = 0.35f;
-            maxCanAscendMultiplier = 1.25f;
-            maxAscentMultiplier = 2f;
+            ascentWhenRising = 0.32f;
+            maxCanAscendMultiplier = 1.22f;
+            maxAscentMultiplier = 1.9f;
             constantAscend = 0.15f;
             if (player.controlUp)
             {
@@ -94,13 +90,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 18f;
-            acceleration = 0.75f;
+            speed = 17f;
+            acceleration = 0.72f;
         }
     }
     public class LifeForceEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
-        public override int ToggleItemType => ModContent.ItemType<LifeForce>();
+        public override Header ToggleHeader => null;
+        //public override int ToggleItemType => ModContent.ItemType<LifeForce>();
     }
 }

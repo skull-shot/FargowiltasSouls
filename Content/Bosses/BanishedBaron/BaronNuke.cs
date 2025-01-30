@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -114,6 +115,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (++Timer >= Duration - 2)
             {
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeExplosion, Projectile.Center);
                 Projectile.tileCollide = false;
                 Projectile.alpha = 0;
                 Projectile.position = Projectile.Center;
@@ -174,7 +176,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 return;
             }
             target.FargoSouls().MaxLifeReduction += 50;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 30);
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 20);
             target.AddBuff(BuffID.OnFire3, 60 * 10);
             target.AddBuff(BuffID.BrokenArmor, 60 * 40);
 
@@ -199,7 +201,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
             }
-            SoundEngine.PlaySound(SoundID.Item62 with { Pitch = -0.2f }, Projectile.Center);
+            
 
             if (WorldSavingSystem.MasochistModeReal)
             {
@@ -253,8 +255,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
             SpriteEffects effects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
                 Color color27 = color26 * 0.5f;
@@ -263,8 +264,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 float num165 = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, value4 + drawOffset + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
             }
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
 

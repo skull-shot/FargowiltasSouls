@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -39,6 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
         public override int ToggleItemType => ModContent.ItemType<PungentEyeball>();
+        public override bool MutantsPresenceAffects => true;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
@@ -53,18 +55,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                     }
                 }
 
-                for (int i = 0; i < 32; i++)
+                int visualProj = ModContent.ProjectileType<PungentAuraProj>();
+                if (player.ownedProjectileCounts[visualProj] <= 0)
                 {
-                    Vector2 spawnPos = Main.MouseWorld + Main.rand.NextVector2CircularEdge(distance, distance);
-                    Dust dust = Main.dust[Dust.NewDust(spawnPos, 0, 0, DustID.GemRuby, 0, 0, 100, Color.White)];
-                    dust.scale = 0.5f;
-                    dust.velocity = Vector2.Zero;
-                    if (Main.rand.NextBool(3))
-                    {
-                        dust.velocity += Vector2.Normalize(Main.MouseWorld - dust.position) * Main.rand.NextFloat(5f);
-                        dust.position += dust.velocity * 5f;
-                    }
-                    dust.noGravity = true;
+                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, visualProj, 0, 0, Main.myPlayer);
                 }
             }
         }

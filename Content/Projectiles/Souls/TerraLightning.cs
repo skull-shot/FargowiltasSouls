@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero,
-                    ModContent.ProjectileType<ObsidianExplosion>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    ModContent.ProjectileType<ObsidianExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
             }
         }

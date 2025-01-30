@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.TitaniumStormShard);
+            Projectile.DamageType = DamageClass.Melee;
         }
 
         public override void AI()

@@ -58,6 +58,9 @@ namespace FargowiltasSouls.Content.Sky
 
                     var blackTile = TextureAssets.MagicPixel;
 
+                    if (!blackTile.IsLoaded)
+                        return;
+
                     ManagedShader blackShader = ShaderManager.GetShader("FargowiltasSouls.AbomRitualBackgroundShader");
                     blackShader.TrySetParameter("radius", radius * scale);
                     blackShader.TrySetParameter("anchorPoint", auraPos);

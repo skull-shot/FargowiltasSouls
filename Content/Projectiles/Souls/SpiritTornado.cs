@@ -61,6 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Player player = Main.player[Projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
+            /* Collision is done in FargoSoulsGlobalProjectile:PreAI
             if (player.HasEffect<SpiritTornadoEffect>())
             {
                 foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && !p.hostile && p.owner == Projectile.owner && p.type != Projectile.type && p.Colliding(p.Hitbox, Projectile.Hitbox)))
@@ -68,6 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     p.FargoSouls().stormTimer = 240;
                 }
             };
+            */
 
             Projectile.damage = (int)(125f * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
 
@@ -211,8 +213,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
 
             float halfheight = 220;
             float density = 50f;
@@ -236,8 +237,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     0);
             }
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
 
             return false;
         }

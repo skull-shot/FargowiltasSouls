@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                             Projectile.NewProjectile(npc.GetSource_FromThis(),
                                   npc.Center, spawnVel.RotatedBy(Math.PI / 7 * i),
                                   ModContent.ProjectileType<FakeHeart2>(),
-                                  20, 0f, Main.myPlayer, 30, 90 + 10 * i);
+                                  20, 0f, Main.myPlayer, 30, 90 + 10 * i, ai2: npc.target);
                         }
                     }
                 }

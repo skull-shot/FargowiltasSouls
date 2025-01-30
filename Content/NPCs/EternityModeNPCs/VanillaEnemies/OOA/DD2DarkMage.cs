@@ -4,6 +4,7 @@ using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,6 +21,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             base.AI(npc);
 
+            if (npc.Distance(Main.LocalPlayer.Center) > 3000 && !DD2Event.Ongoing)
+            {
+                npc.active = false;
+            }
+
             int radius = npc.type == NPCID.DD2DarkMageT1 ? 600 : 900;
 
             EModeGlobalNPC.Aura(npc, radius, ModContent.BuffType<LethargicBuff>(), false, 254);
@@ -33,6 +39,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     Main.dust[d].noLight = true;
                 }
             }
+            
         }
     }
 }

@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool SafePreAI(NPC npc)
         {
-            if (!WorldSavingSystem.SwarmActive && !npc.dontTakeDamage && HealPerSecond != 0)
+            if (!npc.dontTakeDamage && HealPerSecond != 0)
             {
                 npc.life += HealPerSecond / 60; //healing stuff
                 if (npc.life > npc.lifeMax)
@@ -66,7 +66,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (++HealCounter >= 75)
                 {
                     HealCounter = Main.rand.Next(30);
-                    CombatText.NewText(npc.Hitbox, CombatText.HealLife, HealPerSecond);
+                    if (HealPerSecond != 9999)
+                    {
+                        CombatText.NewText(npc.Hitbox, CombatText.HealLife, HealPerSecond);
+                    }
+                                        
                 }
             }
             return base.SafePreAI(npc);
@@ -168,9 +172,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bool result = base.SafePreAI(npc);
             NPC.golemBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return result;
-
             /*if (npc.ai[0] == 0f && npc.velocity.Y == 0f) //manipulating golem jump ai
             {
                 if (npc.ai[1] > 0f)
@@ -192,7 +193,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     p.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
             }
 
-            HealPerSecond = 180; // WorldSavingSystem.MasochistModeReal ? 360 : 180;
+            HealPerSecond = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 360 : 180;
             if (!IsInTemple) //temple enrage, more horiz move and fast jumps
             {
                 HealPerSecond *= 2;
@@ -240,10 +241,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 StompAttackCounter++;
 
                             Vector2 spawnPos = new(npc.position.X, npc.Center.Y); //floor geysers
-                            spawnPos.X -= npc.width * 7;
+                            int originalNpcWidth = (int)Math.Round(npc.width / npc.scale);
+                            spawnPos.X -= (int)(originalNpcWidth * 7);
                             for (int i = 0; i < 6; i++)
                             {
-                                int tilePosX = (int)spawnPos.X / 16 + npc.width * i * 3 / 16;
+                                int tilePosX = (int)spawnPos.X / 16 + originalNpcWidth * i * 3 / 16;
                                 int tilePosY = (int)spawnPos.Y / 16;// + 1;
 
                                 if (FargoSoulsUtil.HostCheck)
@@ -253,7 +255,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             spawnPos = npc.Center;
                             for (int i = -3; i <= 3; i++) //ceiling geysers
                             {
-                                int tilePosX = (int)spawnPos.X / 16 + npc.width * i * 3 / 16;
+                                int tilePosX = (int)spawnPos.X / 16 + originalNpcWidth * i * 3 / 16;
                                 int tilePosY = (int)spawnPos.Y / 16;// + 1;
 
                                 if (FargoSoulsUtil.HostCheck)
@@ -314,10 +316,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     else //outside temple
                     {
                         Vector2 spawnPos = new(npc.position.X, npc.Center.Y);
-                        spawnPos.X -= npc.width * 7;
+                        int originalNpcWidth = (int)Math.Round(npc.width / npc.scale);
+                        spawnPos.X -= originalNpcWidth * 7;
                         for (int i = 0; i < 6; i++)
                         {
-                            int tilePosX = (int)spawnPos.X / 16 + npc.width * i * 3 / 16;
+                            int tilePosX = (int)spawnPos.X / 16 + originalNpcWidth * i * 3 / 16;
                             int tilePosY = (int)spawnPos.Y / 16;// + 1;
 
                             for (int j = 0; j < 100; j++)
@@ -373,8 +376,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             //spray spiky balls
-            /*
-            if (WorldSavingSystem.MasochistModeReal && ++SpikyBallTimer >= 900)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && ++SpikyBallTimer >= 900)
             {
                 if (CheckTempleWalls(npc.Center))
                 {
@@ -398,7 +400,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                 }
             }
-            */
 
             //golem's anti-air fireball spray (when player is above)
             //if (WorldSavingSystem.MasochistModeReal && ++AntiAirTimer > 240 && npc.velocity.Y == 0)
@@ -516,8 +517,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             if (npc.HasValidTarget && Golem.CheckTempleWalls(Main.player[npc.target].Center))
             {
@@ -536,6 +535,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (npc.velocity.Length() > 10)
                     npc.position -= Vector2.Normalize(npc.velocity) * (npc.velocity.Length() - 10);
             }
+
+            npc.chaseable = false;
 
             if (npc.ai[0] == 0f && DoAttackOnFistImpact)
             {
@@ -560,12 +561,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool? DrawHealthBar(NPC npc, byte hbPosition, ref float scale, ref Vector2 position) => false;
 
+        public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.Null();
+        }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
 
             if (WorldSavingSystem.MasochistModeReal && projectile.maxPenetrate != 1 && FargoSoulsUtil.CanDeleteProjectile(projectile))
                 projectile.timeLeft = 0;
+        }
+        public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
+        {
+            hit.Null();
         }
     }
 
@@ -637,8 +646,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bool result = base.SafePreAI(npc);
             if (npc.damage < 165)
                 npc.damage = 165;
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             NPC golem = FargoSoulsUtil.NPCExists(NPC.golemBoss, NPCID.Golem);
             if (npc.type == NPCID.GolemHead)
@@ -669,7 +676,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     if (IsInTemple) //nerf golem movement during deathray dash, provided we're in temple
                     {
-                        if (golem.HasValidTarget)
+                        if (golem != null && golem.HasValidTarget && !(WorldSavingSystem.MasochistModeReal && Main.getGoodWorld))
                         {
                             //golem.velocity.X = 0f;
 
@@ -806,7 +813,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         //do nothing
                     }
-                    else if (AttackTimer < fireTime + 150 && DoDeathray)
+                    else if (AttackTimer < fireTime + 240 && DoDeathray)
                     {
                         npc.velocity.X += SweepToLeft ? -.15f : .15f;
                         bool wallCheck = Golem.CheckTempleWalls(npc.Center);

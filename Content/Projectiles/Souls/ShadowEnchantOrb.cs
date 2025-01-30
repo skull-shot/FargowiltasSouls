@@ -94,43 +94,6 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     Projectile.netUpdate = true;
                 }
                 Projectile.rotation = Projectile.ai[1] + (float)Math.PI / 2f;
-
-
-                //wait for CD
-                if (Projectile.ai[0] != 0f)
-                {
-                    return;
-                }
-
-                //detect being hit
-                foreach (Projectile proj in Main.projectile.Where(proj => proj.active && proj.friendly && !proj.hostile && proj.owner == Projectile.owner && proj.damage > 0
-                && !FargoSoulsUtil.IsSummonDamage(proj, false) && proj.type != ModContent.ProjectileType<ShadowBall>() && proj.Colliding(proj.Hitbox, Projectile.Hitbox)))
-                {
-                    int numBalls = 5;
-                    int dmg = 25;
-
-                    if (modPlayer.AncientShadowEnchantActive)
-                    {
-                        numBalls = 7;
-                        dmg = 50;
-                    }
-
-                    int damage = FargoSoulsUtil.HighestDamageTypeScaling(player, dmg);
-                    Projectile[] balls = FargoSoulsUtil.XWay(numBalls, Projectile.GetSource_FromThis(), Projectile.Center, ModContent.ProjectileType<ShadowBall>(), 6, damage, 0);
-
-                    foreach (Projectile ball in balls)
-                    {
-                        ball.originalDamage = damage;
-                    }
-
-
-                    if (FargoSoulsUtil.CanDeleteProjectile(proj))
-                        proj.Kill();
-
-                    Projectile.ai[0] = 300;
-
-                    break;
-                }
             }
         }
 

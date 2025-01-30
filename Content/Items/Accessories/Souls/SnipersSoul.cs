@@ -19,15 +19,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.FargoSouls().UniverseSoul)
-                return;
             //reduce ammo consume
             player.FargoSouls().RangedSoul = true;
-            player.GetDamage(DamageClass.Ranged) += 0.3f;
-            player.GetCritChance(DamageClass.Ranged) += 15;
+            player.GetDamage(DamageClass.Ranged) += 0.22f;
+            player.GetCritChance(DamageClass.Ranged) += 10;
 
             //add new effects
-
+            player.magicQuiver = true;
         }
 
         public override void AddRecipes()

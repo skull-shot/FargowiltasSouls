@@ -21,19 +21,8 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.controlLeft = false;
-            player.controlRight = false;
-            player.controlJump = false;
-            player.controlDown = false;
-            player.controlUseItem = false;
-            player.controlUseTile = false;
-            player.controlHook = false;
-            player.releaseHook = true;
-            player.RemoveAllGrapplingHooks();
-            if (player.mount.Active)
-                player.mount.Dismount(player);
+            player.Incapacitate();
             player.FargoSouls().Stunned = true;
-            player.FargoSouls().NoUsingItems = 2;
 
             player.velocity = Vector2.Normalize(player.velocity) * 30;
             player.fullRotation = player.velocity.ToRotation() + MathHelper.PiOver2;

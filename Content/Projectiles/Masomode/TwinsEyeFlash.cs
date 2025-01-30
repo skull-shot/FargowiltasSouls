@@ -73,8 +73,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             NPC npc = Main.npc[(int)Projectile.ai[0]];
             if (npc.TypeAlive(NPCID.Spazmatism))
                 color = Color.LimeGreen;
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             Texture2D star = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Effects/LifeStar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rect = new(0, 0, star.Width, star.Height);
             float scale = Projectile.scale * Main.rand.NextFloat(1.5f, 3f);
@@ -85,8 +84,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             GameShaders.Misc["LCWingShader"].UseColor(color * Projectile.Opacity).UseSecondaryColor(color * Projectile.Opacity);
             GameShaders.Misc["LCWingShader"].Apply(new DrawData?());
             starDraw.Draw(Main.spriteBatch);
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
             return false;
         }
     }

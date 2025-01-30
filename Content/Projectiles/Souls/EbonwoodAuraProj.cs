@@ -77,6 +77,8 @@ namespace FargowiltasSouls.Content.Projectiles
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return false;
             var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
@@ -91,6 +93,7 @@ namespace FargowiltasSouls.Content.Projectiles
             borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
             borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
             borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
+            borderShader.TrySetParameter("opacityAmp", 1f);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
 

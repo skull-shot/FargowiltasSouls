@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             if (Projectile.localAI[0] == 1)
             {
                 Projectile.ai[1] = Main.rand.NextBool() ? 1 : -1;
-                SoundEngine.PlaySound(SoundID.MaxMana, Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronShine") with { Variants = [1, 2, 3]}, Projectile.Center);
             }
             Projectile.rotation += Projectile.ai[1] * MathHelper.TwoPi / 90;
 
@@ -68,8 +68,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             Texture2D star = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Effects/LifeStar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rect = new(0, 0, star.Width, star.Height);
             float scale = Projectile.scale * Main.rand.NextFloat(1.5f, 3f);
@@ -80,8 +79,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             GameShaders.Misc["LCWingShader"].UseColor(Color.HotPink * Projectile.Opacity).UseSecondaryColor(Color.HotPink * Projectile.Opacity);
             GameShaders.Misc["LCWingShader"].Apply(new DrawData?());
             starDraw.Draw(Main.spriteBatch);
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
             return false;
         }
     }

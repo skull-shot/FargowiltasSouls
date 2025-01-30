@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
             Projectile.DamageType = DamageClass.Summon;
             Projectile.timeLeft = 45;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = 120;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

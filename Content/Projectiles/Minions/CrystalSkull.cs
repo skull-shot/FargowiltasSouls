@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -121,6 +122,8 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 clickTimer--;
 
                 Projectile.localAI[0]++;
+                if (Projectile.owner == Main.myPlayer)
+                    CooldownBarManager.Activate("CrystalSkullMinionCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SkullCharm").Value, Color.WhiteSmoke, () => Projectile.localAI[0] / (chargeTime * 2f), displayAtFull: true, activeFunction: Projectile.Alive);
 
                 if (Projectile.localAI[0] == chargeTime * 2f)
                 {

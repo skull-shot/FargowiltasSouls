@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
@@ -97,7 +98,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Projectile.alpha = 0;
                     if (target != -1)
                     {
-                        SoundEngine.PlaySound(SoundID.Item89, Projectile.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort with { Pitch = -0.5f }, Projectile.Center);
+                        //SoundEngine.PlaySound(SoundID.Item89, Projectile.Center);
                         Projectile.velocity = Main.player[target].Center - Projectile.Center;
                         float distance = Projectile.velocity.Length();
                         Projectile.velocity.Normalize();

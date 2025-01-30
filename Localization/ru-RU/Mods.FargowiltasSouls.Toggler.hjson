@@ -1,271 +1,276 @@
-DisableAllAttackEffects: Отключить Все Эффекты с Доп. Атаками
-DisableAllMinionEffects: Отключить Все Эффекты с Прислужниками
+DisableAllAttackEffects: Отключить все эффекты с доп. атаками
+DisableAllMinionEffects: Отключить все эффекты с прислужниками
 TimberHeader: "{$Mods.FargowiltasSouls.Items.TimberForce.DisplayName}"
-WoodCompletionEffect: Ускоренное Заполнение Дерева
-BorealEffect: Снежки Заснеженной Дерева
-MahoganyEffect: Скорость Крюков Красной Дерева
-EbonwoodEffect: Аура Порчи Чёрной Дерева
-ShadewoodEffect: Кровавые Гейзеры При Ударе
-PalmwoodEffect: Часовой-Пальма
-PearlwoodStarEffect: Звёзды Жемчужного Дерева
-PearlwoodManaEffect: Звёзды Маны Жемчужного Дерева
-PearlwoodRainbowEffect: Радужный Хвост Жемчужного Дерева
-TimberEffect: Ветви Леса
+WoodCompletionEffect: Ускоренное заполнение дерева
+BorealEffect: Снежки заснеженной древесины
+MahoganyEffect: Скорость крюков красной древесины
+EbonwoodEffect: Увядание чёрной древесины
+ShadewoodEffect: Кровотечение мрачной древесины
+PalmwoodEffect: Часовой-пальма
+PearlwoodStarEffect: Звёзды жемчужной древесины
+PearlwoodManaEffect: Звёзды маны жемчужной древесины
+PearlwoodRainbowEffect: Радужный хвост жемчужной древесины
+TimberEffect: Сжатый артефакт Леса
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
-AdamantiteEffect: Разделение Снарядов Адамантита
-CobaltEffect: Взрыв При Уроне Кобальта
-AncientCobaltEffect: Взрывной Прыжок Древнего Кобальта
-MythrilEffect: Скорость Оружий Мифрила
-OrichalcumEffect: Лепестки Орихалка
-PalladiumHealing: Лечение Палладия
-PalladiumEffect: Палладиевые Сферы
-TitaniumEffect: Осколки Титана
-EarthForceEffect: Заряд Оружия Земли
+AdamantiteEffect: Скорость и разброс адамантита
+CobaltEffect: Взрыв при уроне кобальта
+AncientCobaltEffect: Взрывной прыжок др. кобальта
+MythrilEffect: Скорость оружий мифрила
+OrichalcumEffect: Лепестки орихалка
+PalladiumHealing: Лечение палладия
+PalladiumEffect: Палладиевые сферы
+TitaniumEffect: Титановые осколки
+EarthForceEffect: Сжатый артефакт Земли
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
-CopperEffect: Молния Меди
-IronEffect: Магнит Железа
-LeadPoisonEffect: Свинцовое Отравление
-SilverEffect: Парирование Серебра
-TinEffect: Криты Олова
-TungstenEffect: Эффект Вольфрама
-ObsidianProcEffect: Взрыв Обсидиана
-AshWoodFireballs: Шары Огня Ясеня
-TerraLightningEffect: Молния Терры
+CopperEffect: Медная молния
+IronEffect: Железный магнит
+LeadPoisonEffect: Свинцовое отравление
+SilverEffect: Парирование серебра
+TinEffect: Криты олова
+TungstenEffect: Увеличение вольфрама
+TungstenShockwaveEffect: Ударная волна вольфрама
+ObsidianProcEffect: Взрыв обсидиана
+AshWoodFireballs: Шары огня ясеня
+TerraLightningEffect: Сжатый артефакт Терры
 WillHeader: "{$Mods.FargowiltasSouls.Items.WillForce.DisplayName}"
-GladiatorSpears: Копья Гладиатора
-GladiatorBanner: Знамя Гладиатора
-GoldEffect: Счастливая Монета Золота
-GoldToPiggy: Золото в Свинью-копилку
-HuntressEffect: Способность Охотница
-RedRidingEffect: Дождь Стрел Красного Наездника
-ValhallaDash: Наездный Рывок Вальгаллы
-SquireMountJump: Наездный Прыжок Оруженосца
-SquireMountSpeed: Скорость Наездных Питомцев Оруженосца
-WillEffect: Дух Гладиатора Воли
+GladiatorSpears: Копья гладиатора
+GladiatorBanner: Аура гёадиатора
+GoldEffect: Золотая счастливая монета
+GoldToPiggy: Золото в свинью-копилку
+HuntressEffect: Способность охотница
+RedRidingEffect: Дождь стрел красного наездника
+ValhallaDash: Ездовой рывок вальгаллы
+SquireMountJump: Ездовой прыжок оруженосца
+SquireMountSpeed: Скорость езд. предметов оруженосца
+WillEffect: Сжатый артефакт Воли
 LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
-BeeEffect: Цветы Пчелы
+BeeEffect: Цветы пчелы
 BeetleEffect: Жуки
-CactusEffect: Иглы Кактуса
-PumpkinEffect: Растущие Тыквы
-SpiderEffect: Криты Паука
-TurtleEffect: Бафф Черепашьего Панциря
-// LifeForceEffect: Concise Life Force
+CactusEffect: Иглы кактуса
+PumpkinEffect: Растущие тыквы
+SpiderEffect: Криты паука
+TurtleEffect: Черепаший панцирь
+LifeForceEffect: Сжатый артефакт Жизни
 NatureHeader: "{$Mods.FargowiltasSouls.Items.NatureForce.DisplayName}"
-ChloroMinion: Кристальный Лист Хлорофита
-CrimsonEffect: Лечение Багрянца
-RainUmbrellaEffect: Зонт Дождя
-RainInnerTubeEffect: Воздушная Камера
-SnowEffect: Замораживающие Снежки
-JungleJump: Прыжок и Споры Джунглей
-JungleDashEffect: Рывок Джунглей
-MoltenEffect: Бафф Литого Инферно
-// ShroomiteHealEffect: Shroomite Consumption Buff
-// ShroomiteMushroomPriority: Mushrooms Take Potion Priority
-ShroomiteShroomEffect: Грибы Грибов
-// NatureEffect: Concise Nature Force
+ChloroMinion: Кристальный лист хлорофита
+CrimsonEffect: Лечение багрянца
+RainUmbrellaEffect: Мягкое падение дождя
+RainInnerTubeEffect: Воздушная камера
+RainFeatherfallEffect: Мягкое падение дождя
+SnowEffect: Замораживающие снежки
+JungleJump: Прыжок и споры джунглей
+JungleDashEffect: Рывок джунглей
+MoltenEffect: Литое инферно
+ShroomiteHealEffect: Бафф за поедание грибов
+ShroomiteMushroomPriority: Приоритет грибов при быстром лечении
+ShroomiteShroomEffect: Грибные облака
+NatureEffect: Сжатый артефакт Природы
 ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
-DarkArtistMinion: Огнемётный Миньон
-ApprenticeSupport: Эффект Ученика
-NecroEffect: Могилы Некро
-ShadowBalls: Сферы Тени
-AncientShadowDarkness: Тьма Древней Тени
-MonkDashEffect: Рывок Монаха
-ShinobiDashEffect: Рывок Монаха Улучшение Шиноби
-ShinobiThroughWalls: Шиноби Через Стены
-SpookyEffect: Косы Жути
-NinjaEffect: Скорость Ниндзя
-CrystalAssassinDash: Рывок Хрустального Убийцы
-ShadowForceDashEffect: Рывок Тени
-// ShadowForceEffect: Concise Death Force
+DarkArtistMinion: Огнемётный миньон
+ApprenticeSupport: Эффект ученика
+NecroEffect: Могилы некро
+ShadowBalls: Теневые сферы
+AncientShadowDarkness: Тьма древней тени
+MonkDashEffect: Рывок монаха
+ShinobiDashEffect: Рывок монаха: улучшение шиноби
+ShinobiThroughWalls: Шиноби через стены
+SpookyEffect: Косы жути
+NinjaEffect: Скорость ниндзя
+CrystalAssassinDash: Рывок хрустального убийцы
+CrystalDiagonalDash: Диагональный рывок
+ShadowForceDashEffect: Теневой рывок
+ShadowForceEffect: Сжатый артефакт Смерти
 SpiritHeader: "{$Mods.FargowiltasSouls.Items.SpiritForce.DisplayName}"
-FossilBones: Ископаемые Кости При Ударе
-HallowEffect: Лечебные Зелья Освящения
-AncientHallowMinion: Клинок Древнего Освящения
-// SpectreOnHitEffect: Spirits On Hit
-ForbiddenEffect: Запретный Шторм
-TikiEffect: Миньоны Тики
-SpiritTornadoEffect: Торнадо Духа
+FossilBones: Ископаемые кости при ударе
+HallowEffect: Лечебные зелья освящения
+AncientHallowMinion: Клинок древнего освящения
+SpectreOnHitEffect: Духи при ударе
+ForbiddenEffect: Запретный шторм
+TikiEffect: Миньоны тики
+SpiritTornadoEffect: Сжатый артефакт Духа
 CosmoHeader: "{$Mods.FargowiltasSouls.Items.CosmoForce.DisplayName}"
-MeteorMomentumEffect: Скорость Метеора
-MeteorEffect: Метеоритный Дождь
-MeteorTrailEffect: След из Искр Метеора
-NebulaEffect: Усилители Туманности
-SolarEffect: Щит и Рывок Солнечной Вспышки
-SolarFlareEffect: Дебафф Солнечная Вспышка
-StardustMinionEffect: Защитник Звёздной Пыли
-// VortexEffect: Vortex Laser
-CosmosMoonEffect: Луны Космоса
-// CosmosForceEffect: Concise Cosmo Force
-DeviEnergyHeader: Аксессуары Режима Вечность
-DeerSinewEffect: Рывок Сухожилия Оленя
-ZephyrJump: Пердёжный Прыжок
-MasoAeolusFlower: Цветочные Сапоги
-MasoAeolusFrog: Лягушачий Прыжок
-SinisterIconEffect: Скорость Появления Врагов Зловещей Иконы
-SinisterIconDropsEffect: Выпадающие Предметы Зловещей Иконы
+MeteorMomentumEffect: Скорость метеора
+MeteorEffect: Метеоритный удар
+MeteorTrailEffect: След из искр метеора
+NebulaEffect: Усилители туманности
+SolarEffect: Щит и рывок солнечной вспышки
+SolarFlareEffect: Солнечная вспышка
+StardustMinionEffect: Защитник звёздной пыли
+VortexEffect: Лазер вихря
+CosmosMoonEffect: Луны космоса
+CosmoForceEffect: Сжатый артефакт Космоса
+DeviEnergyHeader: Аксессуары режима Вечность
+DeerSinewEffect: Рывок сухожилия оленя
+ZephyrJump: Пердёжный прыжок
+MasoAeolusFlower: Цветочные сапоги
+MasoAeolusFrog: Лягушачий прыжок
+SinisterIconEffect: Скорость появления врагов
+SinisterIconDropsEffect: Выпадение предметов
 MasoGraze: Грэйз
-MasoGrazeRing: Визуал Радиуса Грэйза
-DevianttHearts: Самонаводящиеся Сердца Во Время Атаки
-AbomWandCrit: Поддержка Призрачного Выродкка
+MasoGrazeRing: Визуал радиуса грэйза
+DevianttHearts: Самонавод. сердца при атаке
+AbomWandCrit: Поддержка призрачного Выродкка
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
-SlimyShieldEffect: Слизневые Шары
-SlimeFallEffect: Увеличенная Скорость Падения
-AgitatingLensEffect: Косы При Рывках
-AgitatingLensInstall: Установка Свирепости
-SkeleMinionEffect: Прислужники Руки Скелетрона
-NecroBrewSpin: Крутящийся Рывок Скелетрона
+SlimyShieldEffect: Слизневые шары
+SlimeFallEffect: Увеличенная скорость падения
+AgitatingLensEffect: Косы при рывках
+AgitatingLensInstall: Установка свирепости
+SkeleMinionEffect: Прислужники руки Скелетрона
+NecroBrewSpin: Крутящийся рывок Скелетрона
 BionomicHeader: "{$Mods.FargowiltasSouls.Items.BionomicCluster.DisplayName}"
 TimsConcoctionEffect: Смесь Тима
-MasoCarrotEffect: Обзор Морковки
-RainbowSlimeMinion: Прислужник Радужный Слизень
-RainbowHealEffect: Автом. Использование Лечебных Зелий
-NymphPerfumeEffect: Атаки Создают Сердца
-SqueakEffect: Игрушка-Пищалка При Уроне
-WretchedPouchEffect: Установка Проклятья Несчастья
-ClippedEffect: Дебафф Оборванные Крылья
-WyvernBalls: Светлые Сферы Полёта
-TribalCharmClickBonus: Бонус Клика Амулета Племени
-StabilizedGravity: Стабилизированная Гравитация
+MasoCarrotEffect: Увеличенный обзор морковки
+RainbowSlimeMinion: Прислужник радужный слизень
+RainbowHealEffect: Автом. лечебные зелья
+NymphPerfumeEffect: Атаки создают сердца
+SqueakEffect: Игрушка-пищалка при уроне
+WretchedPouchEffect: Теневое пламя несчастья
+ClippedEffect: Накладывать оборванные крылья
+WyvernBalls: Светлые сферы полёта
+TribalCharmClickBonus: Бонус кликов амулета племени
+StabilizedGravity: Стабилизированная гравитация
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
-FusedLensInstall: Установка Близнецов
-GroundStickDR: Подзарядка При Уроне
-ProbeMinionEffect: Прислужник Дрон
+FusedLensInstall: Установка близнецов
+GroundStickDR: Подзарядка при уроне
+ProbeMinionEffect: Прислужник дрон
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
-DarkenedHeartEaters: Маленькие Пожиратели
-GuttedHeartMinions: Щит из Ползунов
-GelicWingSpikes: Гелеподобные Шипы
-GelicWingJump: Гелеподобный Прыжок
+DarkenedHeartEaters: Маленькие пожиратели
+GuttedHeartMinions: Щит из ползунов
+GelicWingSpikes: Гелеподобные шипы
+GelicWingJump: Гелеподобный прыжок
 LumpofFleshHeader: "{$Mods.FargowiltasSouls.Items.LumpOfFlesh.DisplayName}"
-PungentEyeballCursor: Курсор Едкого Глазного Яблока
-PungentMinion: Прислужник Кусок Плоти
-DeerclawpsDive: Пикирование Циклешненя
-DeerclawpsEffect: След из Шипов При Рывке Циклешненя
-DreadShellEffect: Парирование Панциря Ужаса
+PungentEyeballCursor: Курсор едкого глазного яблока
+PungentMinion: Прислужник кусок плоти
+DeerclawpsDive: Пикирование циклешненя
+DeerclawpsEffect: След из шипов при рывке циклешненя
+DreadShellEffect: Парирование панциря ужаса
 ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
-CultistMinionEffect: Прислужник Культист
 PlantMinionEffect: Прислужник Плантера
-LihzahrdGroundPound: Быстрое Падение Ящщеров
-LihzahrdBoulders: Валуны и Гейзеры Топота
-CelestialRuneAttacks: Поддержка Небесной Руны
+LihzahrdGroundPound: Быстрое падение ящщеров
+LihzahrdBoulders: Валуны и гейзеры топота
+CelestialRuneAttacks: Поддержка небесной руны
+CelestialRuneOnhit: Древние видения при уроне
+MinionsDeactivatedEffect: Отключить эффекты миньонов для урона
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
-PrecisionSealHurtbox: Уменьшенный Размер Хёртбокса
-PumpkingsCapeEffect: Парирование Плаща Тыквенного Короля
+PrecisionSealHurtbox: Уменьшенный размер хёртбокса
+PumpkingsCapeEffect: Парирование плаща Тыквенного короля
 IceQueenGraze: Грэйз
-UfoMinionEffect: Прислужник Тарелка
-// ChalicePotionEffect: Free Potion Buffs
-MutantArmorHeader: Истинная Броня Мутанта
+UfoMinionEffect: Прислужник тарелка
+ChalicePotionEffect: Бесплатные баффы зелий
+MasoTrueEyeMinion: Истинные глаза-миньоны
+MutantArmorHeader: Истинная броня Мутанта
 MasoAbom: Прислужник Выродокк
-MasoRing: Прислужник Фантазматическое Кольцо
+MasoRing: Фантазматическое кольцо
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"
-MeleeSpeedEffect: Ближняя Скорость
-SniperScopeEffect: Снайперский Прицел
-UniverseSpeedEffect: Скорость Атаки Вселенной
+MeleeSpeedEffect: Ближняя скорость
+SniperScopeEffect: Снайперский прицел
+UniverseSpeedEffect: Скорость атаки Вселенной
 WorldShaperHeader: "{$Mods.FargowiltasSouls.Items.WorldShaperSoul.DisplayName}"
-MiningHunt: Бафф Охотника
-MiningDanger: Бафф Чувства Опасности
-MiningSpelunk: Бафф Шахтёра
-MiningShine: Бафф Света
-BuilderEffect: Режим Строителя
+MiningHunt: Бафф охотника
+MiningDanger: Бафф чувства опасности
+MiningSpelunk: Бафф шахтёра
+MiningShine: Бафф света
+BuilderEffect: Режим строителя
 ColossusHeader: "{$Mods.FargowiltasSouls.Items.ColossusSoul.DisplayName}"
-DefenseStarEffect: Звёзды При Уроне
-DefenseBrainEffect: Мозги Запутанности
-DefenseBeeEffect: Пчёлы При Уроне
-FleshKnuckleEffect: Агро Кастета из Плоти
-PaladinShieldEffect: Щит Паладина
-FrozenTurtleEffect: Ледяной Черепаший Панцирь
-ShimmerImmunityEffect: Иммунитет к Симмеру
+DefenseStarEffect: Звёзды при уроне
+DefenseBrainEffect: Мозги запутанности
+DefenseBeeEffect: Пчёлы при уроне
+FleshKnuckleEffect: Агро кастета из плоти
+PaladinShieldEffect: Щит паладина
+FrozenTurtleEffect: Ледяной черепаший панцирь
+ShimmerImmunityEffect: Иммунитет к симмеру
 FlightMasteryHeader: "{$Mods.FargowiltasSouls.Items.FlightMasterySoul.DisplayName}"
-FlightMasteryInsignia: Ускорение Парящей Эмблемы
-FlightMasteryGravity: Усиленная Гравитация
-// JumpsDisabled: Disable All Jumps
+FlightMasteryInsignia: Ускорение парящей эмблемы
+FlightMasteryGravity: Усиленная гравитация
+JumpsDisabled: Отключить все прыжки
 SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
-RunSpeed: Увеличенная Базовая Скорость Бега
-NoMomentum: Нет Инерции
-SupersonicTabi: Рывок Таби
-SupersonicClimbing: Альпинистский Набор Тигра
+RunSpeed: Увеличенная базовая скорость бега
+NoMomentum: Нет инерции
+SupersonicTabi: Рывок таби
+SupersonicClimbing: Альпинистский набор тигра
 SupersonicJumps: Прыжки
-SupersonicRocketBoots: Реактивные Сапоги
+SupersonicRocketBoots: Реактивные сапоги
 SupersonicCarpet: Ковёр-самолёт
 CthulhuShield: Щит Ктулху
-BlackBelt: Чёрный Пояс
-SupersonicPanic: Паника При Уроне
+BlackBelt: Чёрный пояс
+SupersonicPanic: Паника при уроне
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
-TrawlerSporeSac: Споровый Мешок
+TrawlerSporeSac: Споровый мешок
 TrawlerJump: Прыжок
-TrawlerGel: Нестабильный Желатин
+TrawlerGel: Нестабильный желатин
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
-EternityTin: Эффект Накладывающихся Критов Вечности
+EternityTin: Накладывающиеся криты Вечности
+PetHeader: Pets
 // the pets are no longer existing in game
-// PetHeader: Pets
-// PetDinoConfig: Dino Pet
-// PetEaterConfig: Eater Pet
-// PetFaceMonsterConfig: Face Monster Pet
-// PetGrinchConfig: Grinch Pet
-// PetHornetConfig: Hornet Pet
-// PetImpConfig: Imp Pet
-// PetPenguinConfig: Penguin Pet
-// PetPandaConfig: Pet Red Panda
-// PetDGConfig: Dungeon Guardian Pet
-// PetSnowmanConfig: Snowman Pet
-// PetShroomConfig: Truffle Pet
-// PetWerewolfConfig: Pet Werewolf
-// PetBernieConfig: Pet Bernie
-// PetBlackCatConfig: Black Cat Pet
-// PetChesterConfig: Chester Pet
-// PetCompanionCubeConfig: Companion Cube Pet
-// PetCursedSaplingConfig: Cursed Sapling Pet
-// PetKittenConfig: Kitten Pet
-// PetEsteeConfig: Estee Pet
-// PetEyeSpringConfig: Eye Spring Pet
-// PetFoxConfig: Fennec Fox Pet
-// PetButterflyConfig: Butterfly Pet
-// PetGlommerConfig: Glommer Pet
-// PetDragonConfig: Dragon Pet
-// PetHarpyConfig: Harpy Pet
-// PetLizardConfig: Lizard Pet
-// PetMinitaurConfig: Mini Minotaur Pet
-// PetParrotConfig: Parrot Pet
-// PetPigmanConfig: Pigman Pet
-// PetPlanteroConfig: Plantero Pet
-// PetGatoConfig: Gato Pet
-// PetPupConfig: Puppy Pet
-// PetSeedConfig: Seedling Pet
-// PetSpiderConfig: Spider Pet
-// PetMimicConfig: Mimic Pet
-// PetSharkConfig: Shark Pet
-// PetSquashConfig: Squashling Pet
-// PetGliderConfig: Sugar Glider Pet
-// PetTikiConfig: Tiki Pet
-// PetTurtleConfig: Turtle Pet
-// PetVoltConfig: Volt Bunny Pet
-// PetZephyrConfig: Zephyr Fish Pet
-// PetHeartConfig: Crimson Heart Pet
-// PetNaviConfig: Fairy Pet
-// PetFlickerConfig: Flickerwick Pet
-// PetLanternConfig: Magic Lantern Pet
-// PetOrbConfig: Shadow Orb Pet
-// PetSuspEyeConfig: Suspicious Eye Pet
-// PetWispConfig: Wisp Pet
-// PetKSConfig: King Slime Pet
-// PetEoCConfig: Eye of Cthulhu Pet
-// PetEoWConfig: Eater of World Pet
-// PetBoCConfig: Brain of Cthulhu Pet
-// PetDeerConfig: Deerclops Pet
-// PetQBConfig: Queen Bee Pet
-// PetSkeleConfig: Skeletron Pet
-// PetQSConfig: Queen Slime Pet
-// PetDestroyerConfig: Destroyer Pet
-// PetTwinsConfig: Twins Pet
-// PetSkelePrimeConfig: Skeletron Prime Pet
-// PetOgreConfig: Ogre Pet
-// PetPlanteraConfig: Plantera Pet
-// PetPumpkingConfig: Pumpking Pet
-// PetEverscreamConfig: Everscream Pet
-// PetIceQueenConfig: Ice Queen Pet
-// PetDukeConfig: Duke Fishron Pet
-// PetGolemConfig: Golem Pet
-// PetEoLConfig: Empress of Light Pet
-// PetBetsyConfig: Besty Pet
-// PetMartianConfig: Martian Pet
-// PetLCConfig: Phantasmal Dragon Pet
-// PetMLConfig: Moonling Pet
+PetDinoConfig: Dino Pet
+PetEaterConfig: Eater Pet
+PetFaceMonsterConfig: Face Monster Pet
+PetGrinchConfig: Grinch Pet
+PetHornetConfig: Hornet Pet
+PetImpConfig: Imp Pet
+PetPenguinConfig: Penguin Pet
+PetPandaConfig: Pet Red Panda
+PetDGConfig: Dungeon Guardian Pet
+PetSnowmanConfig: Snowman Pet
+PetShroomConfig: Truffle Pet
+PetWerewolfConfig: Pet Werewolf
+PetBernieConfig: Pet Bernie
+PetBlackCatConfig: Black Cat Pet
+PetChesterConfig: Chester Pet
+PetCompanionCubeConfig: Companion Cube Pet
+PetCursedSaplingConfig: Cursed Sapling Pet
+PetKittenConfig: Kitten Pet
+PetEsteeConfig: Estee Pet
+PetEyeSpringConfig: Eye Spring Pet
+PetFoxConfig: Fennec Fox Pet
+PetButterflyConfig: Butterfly Pet
+PetGlommerConfig: Glommer Pet
+PetDragonConfig: Dragon Pet
+PetHarpyConfig: Harpy Pet
+PetLizardConfig: Lizard Pet
+PetMinitaurConfig: Mini Minotaur Pet
+PetParrotConfig: Parrot Pet
+PetPigmanConfig: Pigman Pet
+PetPlanteroConfig: Plantero Pet
+PetGatoConfig: Gato Pet
+PetPupConfig: Puppy Pet
+PetSeedConfig: Seedling Pet
+PetSpiderConfig: Spider Pet
+PetMimicConfig: Mimic Pet
+PetSharkConfig: Shark Pet
+PetSquashConfig: Squashling Pet
+PetGliderConfig: Sugar Glider Pet
+PetTikiConfig: Tiki Pet
+PetTurtleConfig: Turtle Pet
+PetVoltConfig: Volt Bunny Pet
+PetZephyrConfig: Zephyr Fish Pet
+PetHeartConfig: Crimson Heart Pet
+PetNaviConfig: Fairy Pet
+PetFlickerConfig: Flickerwick Pet
+PetLanternConfig: Magic Lantern Pet
+PetOrbConfig: Shadow Orb Pet
+PetSuspEyeConfig: Suspicious Eye Pet
+PetWispConfig: Wisp Pet
+PetKSConfig: King Slime Pet
+PetEoCConfig: Eye of Cthulhu Pet
+PetEoWConfig: Eater of World Pet
+PetBoCConfig: Brain of Cthulhu Pet
+PetDeerConfig: Deerclops Pet
+PetQBConfig: Queen Bee Pet
+PetSkeleConfig: Skeletron Pet
+PetQSConfig: Queen Slime Pet
+PetDestroyerConfig: Destroyer Pet
+PetTwinsConfig: Twins Pet
+PetSkelePrimeConfig: Skeletron Prime Pet
+PetOgreConfig: Ogre Pet
+PetPlanteraConfig: Plantera Pet
+PetPumpkingConfig: Pumpking Pet
+PetEverscreamConfig: Everscream Pet
+PetIceQueenConfig: Ice Queen Pet
+PetDukeConfig: Duke Fishron Pet
+PetGolemConfig: Golem Pet
+PetEoLConfig: Empress of Light Pet
+PetBetsyConfig: Besty Pet
+PetMartianConfig: Martian Pet
+PetLCConfig: Phantasmal Dragon Pet
+PetMLConfig: Moonling Pet

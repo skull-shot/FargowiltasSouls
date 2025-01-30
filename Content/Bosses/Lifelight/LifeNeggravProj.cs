@@ -53,8 +53,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 Main.dust[index2].velocity.X *= 0.5f;
                 Main.dust[index2].velocity.Y *= 0.5f;
             }
-            Projectile.velocity.Y -= 0.25f;
-            Projectile.velocity.X = Projectile.velocity.X * 0.999f;
+            Projectile.velocity.Y -= 0.5f * Projectile.ai[1];
+            Projectile.velocity.X += Projectile.ai[2];
+            Projectile.velocity.X *= 0.999f;
             if (Projectile.ai[0] > 360f)
             {
                 Projectile.Kill();

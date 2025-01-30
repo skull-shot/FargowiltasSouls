@@ -34,13 +34,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         public int AttackTimer;
         public int HealCounter;
         public int AuraSync;
-        public bool SpawnedDuringLunarEvent;
+        public bool SpawnedDuringLunarEvent = true;
 
         public int Attack = 0;
         public int OldAttack = 0;
         public abstract List<int> RandomAttacks { get; }
 
         public bool spawned;
+        public bool DeathAnimation = false;
 
         public override void SetDefaults(NPC npc)
         {
@@ -97,6 +98,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             }
             return false;
         }
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {
+            if (npc.life < 0)
+            {
+                DeathAnimation = true;
+            }
+        }
         public override void AI(NPC npc)
         {
             bool DontRunAI = npc.type == NPCID.LunarTowerSolar && (Attack == 1);//don't run vanilla AI during solar slam attack or fireball spit attack
@@ -104,7 +112,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             {
                 base.AI(npc);
             }
-            if (!WorldSavingSystem.EternityMode || !NPC.LunarApocalypseIsUp)
+            if (!WorldSavingSystem.EternityMode || !SpawnedDuringLunarEvent)
             {
                 return;
             }
@@ -114,16 +122,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             }
             if (!spawned)
             {
-                npc.lifeMax = npc.life = MaxHP;
-                npc.damage = Damage;
                 spawned = true;
                 SpawnedDuringLunarEvent = NPC.LunarApocalypseIsUp;
+                if (!SpawnedDuringLunarEvent)
+                    return;
+                npc.lifeMax = npc.life = MaxHP;
+                npc.damage = Damage;
+                int extra = npc.type == NPCID.LunarTowerVortex ? 20 : 150;
                 npc.damage += 150;
                 npc.defDamage += 150;
-                npc.netUpdate = true;
                 npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
+                npc.netUpdate = true;
             }
-
             //fix the funny where solar pillar rockets down when killed mid-dive attack
             if (npc.dontTakeDamage && npc.velocity.Y > 1)
                 npc.velocity.Y = 1;
@@ -164,13 +174,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     CombatText.NewText(npc.Hitbox, CombatText.HealLife, heal);
                 }
             }
+            if (DeathAnimation)
+                return;
             bool anyPlayersClose = AnyPlayerWithin(npc, AuraSize);
             if (anyPlayersClose)
             {
                 AttackTimer++;
                 npc.defense = npc.defDefense;
             }
-            if (npc.dontTakeDamage)
+            if (ShieldStrength <= 0)
+                npc.dontTakeDamage = false;
+
+            if (npc.dontTakeDamage && npc.life > npc.lifeMax / 2)
             {
                 AuraSize = 5000;
                 if (anyPlayersClose)
@@ -205,6 +220,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                             }
                         }
                         ShieldStrength = 0;
+                        npc.netUpdate = true;
+                        npc.dontTakeDamage = false;
+                        NetSync(npc);
                     }
                 }
                 if (npc.life < npc.lifeMax)
@@ -212,7 +230,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     npc.life = npc.lifeMax;
                 }
             }
-            else
+            else if (!npc.dontTakeDamage)
             {
                 if (AuraSize > 1500)
                 {
@@ -299,6 +317,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 Attack = (int)Vortex.LunarTowerVortex.Attacks.VortexVortex;
             }
             AttackTimer = 0;
+            npc.netUpdate = true;
             NetSync(npc);
         }
         public void EndAttack(NPC npc)

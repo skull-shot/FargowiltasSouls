@@ -1,4 +1,5 @@
 ﻿
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
@@ -17,6 +18,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
             // DisplayName.SetDefault("Sparkling Love");
             /* Tooltip.SetDefault(@"Right click to summon the soul of Deviantt
 Right click pattern becomes denser with up to 12 empty minion slots
@@ -31,17 +33,18 @@ Right click pattern becomes denser with up to 12 empty minion slots
             Item.useTime = 27;
             Item.shootSpeed = 16f;
             Item.knockBack = 14f;
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = 122;
+            Item.height = 118;
             Item.scale = 2f;
             Item.rare = ItemRarityID.Purple;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = FargosSoundRegistry.DeviSwing;
             Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.SparklingLove>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true; //no melee hitbox
             Item.noUseGraphic = true; //dont draw Item
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
+            
         }
 
         public override bool AltFunctionUse(Player player)

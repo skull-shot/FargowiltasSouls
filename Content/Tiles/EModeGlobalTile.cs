@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Tiles
                 && Collision.CanHit(new Vector2(i * 16 + 8, j * 16 + 8), 0, 0, Main.LocalPlayer.Center, 0, 0)
                 && Framing.GetTileSafely(Main.LocalPlayer.Center).WallType == WallID.LihzahrdBrickUnsafe)
             {
-                if (!Main.LocalPlayer.HasBuff(ModContent.BuffType<LihzahrdBlessingBuff>()))
+                if (!Main.LocalPlayer.HasBuff<LihzahrdBlessingBuff>() && !Main.LocalPlayer.HasBuff<PurifiedBuff>())
                 {
                     Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Buffs.LihzahrdBlessingBuff.Message"), Color.Orange);
                     SoundEngine.PlaySound(SoundID.Item4, Main.LocalPlayer.Center);

@@ -2,6 +2,7 @@
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +12,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class PalmWoodEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<PalmwoodEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -49,9 +52,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class PalmwoodEffect : AccessoryEffect
     {
 
-        public override Header ToggleHeader => Header.GetHeader<TimberHeader>();
+        public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<PalmWoodEnchant>();
-        public override bool MinionEffect => true;
+        public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<PalmwoodEffect>();
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             if (player.HasEffect<TimberEffect>())
@@ -60,9 +63,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     return;
                 if (player.FargoSouls().PalmWoodForceCD <= 0 && Collision.CanHit(player.Center, 0, 0, target.Center, 0, 0))
                 {
-                    Vector2 velocity = Vector2.Normalize(target.Center - player.Center) * 10;
+                    Vector2 velocity = Vector2.Normalize(target.Center - player.Center) * 18;
 
-                    int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, velocity, ProjectileID.SeedlerNut, (int)(hitInfo.SourceDamage * 1f), 2, player.whoAmI);
+                    int damage = 1000;
+                    //int damage = hitInfo.SourceDamage;
+                    //damage = (int)MathHelper.Clamp(damage, 0, 8000);
+
+                    int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, velocity, ProjectileID.SeedlerNut, damage, 2, player.whoAmI);
                     if (p != Main.maxProjectiles)
                         Main.projectile[p].DamageType = DamageClass.Summon;
 
@@ -70,9 +77,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
             }
         }
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (!stunned)
+                ActivatePalmwoodSentry(player);
+        }
         public static void ActivatePalmwoodSentry(Player player)
         {
-            if (player.HasEffect<PalmwoodEffect>() && !player.HasEffect<TimberEffect>())
+            if (player.HasEffect<PalmwoodEffect>() && player.HasEffectEnchant<PalmwoodEffect>())
             {
                 if (player.whoAmI == Main.myPlayer)
                 {

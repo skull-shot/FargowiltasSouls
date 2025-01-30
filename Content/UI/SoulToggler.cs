@@ -1,5 +1,8 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,8 +18,12 @@ using Header = FargowiltasSouls.Core.Toggler.Header;
 
 namespace FargowiltasSouls.Content.UI
 {
-    public class SoulToggler : UIState
+    public class SoulToggler : FargoUI
     {
+        public override bool MenuToggleSound => true;
+        public override string InterfaceLayerName => "Fargos: Soul Toggler";
+        public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex - 1;
+
         public readonly static Regex RemoveItemTags = new(@"\[[^\[\]]*\]");
 
         public bool NeedsToggleListBuilding;
@@ -40,6 +47,21 @@ namespace FargowiltasSouls.Content.UI
         public FargoUIPresetButton[] CustomButton = new FargoUIPresetButton[3];
         public FargoUIDisplayAllButton DisplayAllButton;
         //public FargoUIReloadButton ReloadButton;
+        public override void UpdateUI()
+        {
+            if (!Main.playerInventory && ClientConfig.Instance.HideTogglerWhenInventoryIsClosed)
+                FargoUIManager.Close<SoulToggler>();
+        }
+
+        public override void OnClose()
+        {
+            if (ClientConfig.Instance.ToggleSearchReset)
+            {
+                SearchBar.Input = "";
+
+            }
+            NeedsToggleListBuilding = true;
+        }
 
         public override void OnInitialize()
         {
@@ -173,7 +195,6 @@ namespace FargowiltasSouls.Content.UI
         private void SearchBar_OnTextChange(string oldText, string currentText) => NeedsToggleListBuilding = true;
 
         private void HotbarScrollFix(UIScrollWheelEvent evt, UIElement listeningElement) => Main.LocalPlayer.ScrollHotbar(PlayerInput.ScrollWheelDelta / 120);
-
         public override void Update(GameTime gameTime)
         {
             if (Main.LocalPlayer.mouseInterface && (Main.mouseLeft || Main.mouseRight))
@@ -206,6 +227,9 @@ namespace FargowiltasSouls.Content.UI
 
             bool hasMinions = false;
             bool hasExtraAttacks = false;
+
+            var deactivatedMinions = AccessoryEffectLoader.GetEffect<MinionsDeactivatedEffect>();
+
             for (int i = 0; i < AccessoryEffectLoader.AccessoryEffects.Count; i++)
             {
                 if (effectPlayer.EquippedEffects[i] && AccessoryEffectLoader.AccessoryEffects[i].MinionEffect)
@@ -213,7 +237,9 @@ namespace FargowiltasSouls.Content.UI
                 if (effectPlayer.EquippedEffects[i] && AccessoryEffectLoader.AccessoryEffects[i].ExtraAttackEffect)
                     hasExtraAttacks = true;
             }
-            if (hasMinions)
+            if (effectPlayer.EquippedEffects[deactivatedMinions.Index])
+                ToggleList.Add(new UIToggle(deactivatedMinions, deactivatedMinions.Mod.Name));
+            else if (hasMinions)
                 ToggleList.Add(new MinionsToggle());
             if (hasExtraAttacks)
                 ToggleList.Add(new ExtraAttacksToggle());
@@ -231,6 +257,7 @@ namespace FargowiltasSouls.Content.UI
                         return
                         (effectPlayer.Equipped(toggle.Effect) || alwaysDisplay) &&
                         toggle.Header == header &&
+                        toggle.Effect.Index != deactivatedMinions.Index &&
                         (string.IsNullOrEmpty(DisplayMod) || toggle.Mod == DisplayMod) &&
                         (string.IsNullOrEmpty(SortCategory) || toggle.Category == SortCategory) &&
                         (string.IsNullOrEmpty(SearchBar.Input) || SearchMatches(words) || SearchMatches(headerWords));

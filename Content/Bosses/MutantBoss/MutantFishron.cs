@@ -132,7 +132,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     }
                     Vector2 targetPos = Main.player[ai0].Center + new Vector2(Projectile.ai[0], Projectile.ai[1]);
                     Vector2 distance = (targetPos - Projectile.Center) / 4f;
-                    Projectile.velocity = (Projectile.velocity * 19f + distance) / 20f;
+                    if (Projectile.Distance(targetPos) < 50)
+                        Projectile.velocity = (Projectile.velocity * 19f + distance) / 20f;
+                    else
+                        Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, targetPos, Projectile.velocity, 3f, 2f);
                     Projectile.position += Main.player[ai0].velocity / 2f;
                     /*vel.Y -= 200f;
                     vel.Normalize();

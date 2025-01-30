@@ -1,11 +1,14 @@
 ﻿using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace FargowiltasSouls.Content.Items
 {
@@ -50,6 +53,7 @@ namespace FargowiltasSouls.Content.Items
         /// Whether this item currently has togglable effects that are disabled. Used for tooltip. <br />
         /// </summary>
         public bool HasDisabledEffects = false;
+        public virtual List<AccessoryEffect> ActiveSkillTooltips => [];
 
         /// <summary>
         /// Allows you to draw things in front of this item. This method is called even if PreDrawInWorld returns false. <br />
@@ -88,6 +92,16 @@ namespace FargowiltasSouls.Content.Items
                 //itemNameLine.ArticlePrefixAdjustment(Articles.ToArray());
             }
 
+            string vanityKey = $"Mods.{Mod.Name}.Items.{Name}.VanityTooltip";
+            if (Language.Exists(vanityKey))
+            {
+                if (tooltips.FindIndex(line => line.Name == "SocialDesc") is int socialIndex && socialIndex != -1)
+                {
+                    tooltips.RemoveAt(socialIndex);
+                    tooltips.Insert(socialIndex, new TooltipLine(Mod, "SoulsVanityTooltip", Language.GetTextValue(vanityKey)));
+                }
+            }
+
             SafeModifyTooltips(tooltips);
 
             // Add the Eternity toolip after tooltip modification in order to be displayed underneath any manual tooltips (i.e. SoE cycling).
@@ -97,6 +111,64 @@ namespace FargowiltasSouls.Content.Items
             {
                 string text = $"[i:{ModContent.ItemType<TogglerIconItem>()}] [c/BC5252:{Language.GetTextValue($"Mods.FargowiltasSouls.Items.Extra.DisabledEffects")}]";
                 tooltips.Add(new TooltipLine(Mod, $"{Mod.Name}:DisabledEffects", text));
+            }
+            int activeSkills = ActiveSkillTooltips.Count;
+            if (activeSkills > 0)
+            {
+                int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                if (firstTooltip >= 0)
+                {
+                    string names = "";
+                    string description = "";
+                    for (int i = 0; i < activeSkills; i++)
+                    {
+                        var skill = ActiveSkillTooltips[i];
+                        if (i == 0)
+                            description = Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.Tooltip");
+                        else
+                            names += ", ";
+                        names += Language.GetTextValue($"Mods.{skill.Mod.Name}.ActiveSkills.{skill.Name}.DisplayName");
+
+                    }
+                    string nameLoc = "GrantsSkillsPlural";
+                    if (activeSkills == 1)
+                        nameLoc = "GrantsSkill";
+                    string nameText = Language.GetTextValue($"Mods.FargowiltasSouls.ActiveSkills.{nameLoc}");
+                    string key = $"[{Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")}]";
+                    var keys = FargowiltasSouls.ActiveSkillMenuKey.GetAssignedKeys();
+                    if (keys.Count > 0)
+                        key = keys[0];
+                    string keybindMenuText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.KeybindMenu", key);
+                    string boundText = "";
+                    if (activeSkills == 1)
+                    {
+                        boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound");
+                        var boundSkills = Main.LocalPlayer.FargoSouls().ActiveSkills;
+                        for (int i = 0; i < boundSkills.Length; i++)
+                        {
+                            if (boundSkills[i] == ActiveSkillTooltips[0])
+                            {
+                                var skillKeys = FargowiltasSouls.ActiveSkillKeys[i].GetAssignedKeys();
+                                if (skillKeys.Count > 0)
+                                    boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.BoundTo", skillKeys[0]);
+                            }
+                        }
+                    }
+
+                    var namesTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkills", nameText + " " + names);
+                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + " " + keybindMenuText);
+                    var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
+
+                    Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.7f);
+                    Color color2 = Color.LightBlue;
+                    namesTooltip.OverrideColor = color1;
+                    bindTooltip.OverrideColor = color1;
+                    descTooltip.OverrideColor = color2;
+                    tooltips.Insert(firstTooltip, namesTooltip);
+                    tooltips.Insert(firstTooltip + 1, bindTooltip);
+                    if (activeSkills == 1)
+                        tooltips.Insert(firstTooltip + 2, descTooltip);
+                }
             }
         }
     }

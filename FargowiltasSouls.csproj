@@ -19,44 +19,17 @@
     <None Remove="Folders to Port\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Assets\AutoloadedEffects\Shaders\AbomRitualBackgroundShader.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\GenericInnerAura.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\MoltenEnchantShader.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\MutantP1Aura.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\MutantP2Aura.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\SolarEnchantShader.fx" />
-    <None Remove="Assets\AutoloadedEffects\Shaders\StyxGazerShader.fx" />
-    <None Remove="Assets\Gores\Meteor\MeteorGore1.png" />
-    <None Remove="Assets\Gores\Meteor\MeteorGore2.png" />
-    <None Remove="Assets\Gores\Meteor\MeteorGore3.png" />
-    <None Remove="Assets\Gores\Meteor\MeteorGore4.png" />
-    <None Remove="Assets\Gores\Meteor\MeteorGore5.png" />
-    <None Remove="Assets\UI\CooldownBar.png" />
-    <None Remove="Assets\UI\CooldownBarFill.png" />
-    <None Remove="Content\Bosses\AbomBoss\AbomDeathScythe.png" />
-    <None Remove="Content\Bosses\AbomBoss\AbomRocket.png" />
-    <None Remove="Content\Bosses\AbomBoss\AbomScytheFlaming.png" />
-    <None Remove="Content\Bosses\AbomBoss\AbomSword.png" />
-    <None Remove="Content\Buffs\Souls\MushroomPowerBuff.png" />
-    <None Remove="Content\Items\Weapons\Challengers\SpiritLongbow.png" />
-    <None Remove="Content\Projectiles\BossWeapons\SlimeKingSlasherProjSlash.png" />
-    <None Remove="Content\Projectiles\Masomode\GolemBoulder.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraSpikevine.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraSpikevineEnd.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraTooth.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraTooth2.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraToothSmall.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraToothVanilla.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraToothVanilla2.png" />
-    <None Remove="Content\Projectiles\Masomode\PlanteraToothVanillaSmall.png" />
-    <None Remove="Content\Projectiles\Souls\MeteorEnchantMeatball.png" />
-    <None Remove="Content\Projectiles\Souls\MeteorEnchantMeatballGlow.png" />
-    <None Remove="Content\Projectiles\Souls\MeteorEnchantMeatballWizard.png" />
-    <None Remove="Content\Projectiles\Souls\MeteorExplosion.png" />
-    <None Remove="Content\Projectiles\Souls\SpectreSpiritFlying.png" />
+    <None Remove="Assets\UI\OncomingMutantnt.png" />
+    <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
+    <None Remove="Content\Projectiles\BossWeapons\MechFlailEye.png" />
+    <None Remove="Content\Projectiles\BossWeapons\PhantasmalEyeLeashProj.png" />
+    <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
+    <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\ExtraTextures\Noise\" />
+    <Folder Include="Assets\Gores\LeashOfCthulhu\" />
+    <Folder Include="Assets\Gores\Twinrangs\" />
+    <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>

@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Core.Systems
             Shadow,
             Monk,
             Jungle,
+            Crystal,
             DeerSinew
         }
         public static void AddDashes(Player player)
@@ -31,6 +32,10 @@ namespace FargowiltasSouls.Core.Systems
             if (player.HasEffect<JungleDashEffect>())
             {
                 JungleDashEffect.AddDash(player);
+            }
+            if (player.HasEffect<CrystalAssassinDash>())
+            {
+                CrystalAssassinDash.AddDash(player);
             }
             if (player.HasEffect<MonkDashEffect>())
             {
@@ -79,6 +84,11 @@ namespace FargowiltasSouls.Core.Systems
                                 MonkDashEffect.MonkDash(Player, dir);
                             }
                             break;
+                        case DashType.Crystal:
+                            {
+                                CrystalAssassinDash.CrystalDash(Player, dir);
+                            }
+                            break;
                         case DashType.Jungle:
                             {
                                 JungleDashEffect.JungleDash(Player, dir);
@@ -95,6 +105,17 @@ namespace FargowiltasSouls.Core.Systems
                             }
                             break;
                     }
+                }
+            }
+            if (Player.dashDelay == -1 && !Player.mount.Active)
+            {
+                switch (modPlayer.FargoDash)
+                {
+                    case DashType.Crystal:
+                        {
+                            CrystalAssassinDash.WhileDashing(Player);
+                        }
+                        break;
                 }
             }
         }

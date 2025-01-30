@@ -133,7 +133,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (modPlayer.IcicleCount >= 1 && player.controlUseItem && player.HeldItem.IsWeapon() && player.HeldItem.createTile == -1 && player.HeldItem.createWall == -1 && player.HeldItem.ammo == AmmoID.None)
                 {
 
-                    int dmg = modPlayer.ForceEffect<FrostEnchant>() ? 100 : (player.HasEffect<FrostEffect>() ? 50 : 20);
+                    int dmg = modPlayer.ForceEffect<FrostEnchant>() ? 100 : (player.HasEffect<FrostEffect>() ? 50 : 30);
 
                     for (int i = 0; i < Main.maxProjectiles; i++)
                     {
@@ -145,11 +145,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             Vector2 vel = (Main.MouseWorld - proj.Center).SafeNormalize(-Vector2.UnitY);
                             vel *= stayFrosty ? 20f : 10f;
                             int attackType = stayFrosty ? ProjectileID.Blizzard : ProjectileID.SnowBallFriendly;
-                            int p = Projectile.NewProjectile(GetSource_EffectItem(player), proj.Center, vel, attackType, FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 1f, player.whoAmI);
+                            int p = Projectile.NewProjectile(GetSource_EffectItem(player), proj.Center, vel, attackType, (int)(dmg * player.ActualClassDamage(DamageClass.Magic)), 1f, player.whoAmI);
                             if (p != Main.maxProjectiles)
                             {
+                                Main.projectile[p].DamageType = DamageClass.Magic;
                                 Main.projectile[p].FargoSouls().CanSplit = false;
-                                Main.projectile[p].FargoSouls().FrostFreeze = true;
+                                if (player.HasEffect<FrostEffect>() || player.ForceEffect<SnowEffect>())
+                                    Main.projectile[p].FargoSouls().FrostFreeze = true;
                             }
 
                             proj.Kill();

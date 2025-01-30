@@ -14,17 +14,17 @@ namespace FargowiltasSouls.Content.UI
 {
     public static class FargoUIManager
     {
-        public static UserInterface TogglerUserInterface { get; private set; }
-
-        public static UserInterface TogglerToggleUserInterface { get; private set; }
-
-        public static UserInterface CooldownBarUserInterface { get; private set; }
-
-        public static SoulToggler SoulToggler { get; private set; }
-
-        public static SoulTogglerButton SoulTogglerButton { get; private set; }
-
-        public static CooldownBarManager CooldownBarManager { get; private set; }
+        public struct FargoUserInterface
+        {
+            public UserInterface UserInterface;
+            public FargoUI FargoUI;
+            public FargoUserInterface(FargoUI fargoUI)
+            {
+                UserInterface = new();
+                FargoUI = fargoUI;
+            }
+        }
+        public static Dictionary<string, FargoUserInterface> UserInterfaces = [];
 
         private static GameTime LastUpdateUIGameTime { get; set; }
 
@@ -55,9 +55,82 @@ namespace FargowiltasSouls.Content.UI
 
         public static Asset<Texture2D> OncomingMutantAuraTexture { get; private set; }
 
+        public static Asset<Texture2D> OncomingMutantntTexture { get; private set; }
+
         public static Asset<Texture2D> CooldownBarTexture { get; private set; }
 
         public static Asset<Texture2D> CooldownBarFillTexture { get; private set; }
+        public static void Register(FargoUI ui)
+        {
+            UserInterfaces.Add(ui.GetType().Name, new(ui));
+        }
+        public static FargoUserInterface GetFromDict(FargoUI ui) => UserInterfaces[ui.GetType().Name];
+        public static FargoUserInterface GetFromDict<T>() where T : FargoUI => UserInterfaces[typeof(T).Name];
+        public static T Get<T>() where T : FargoUI => GetFromDict<T>().FargoUI as T;
+        public static void Open<T>() where T : FargoUI
+        {
+            if (IsOpen<T>())
+                return;
+            var ui = GetFromDict<T>();
+            ui.UserInterface.SetState(ui.FargoUI);
+            ui.FargoUI.OnOpen();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+        }
+        public static void Open(FargoUI fargoUI)
+        {
+            if (IsOpen(fargoUI))
+                return;
+            var ui = GetFromDict(fargoUI);
+            ui.UserInterface.SetState(ui.FargoUI);
+            ui.FargoUI.OnOpen();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+        }
+        public static void Close<T>() where T : FargoUI
+        {
+            if (!IsOpen<T>())
+                return;
+            var ui = GetFromDict<T>();
+            ui.UserInterface.SetState(null);
+            ui.FargoUI.OnClose();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuClose);
+        }
+        public static void Close(FargoUI fargoUI)
+        {
+            if (!IsOpen(fargoUI))
+                return;
+            var ui = GetFromDict(fargoUI);
+            ui.UserInterface.SetState(null);
+            ui.FargoUI.OnClose();
+            if (ui.FargoUI.MenuToggleSound)
+                SoundEngine.PlaySound(SoundID.MenuClose);
+        }
+        public static void Toggle<T>() where T: FargoUI
+        {
+            if (!IsOpen<T>())
+                Open<T>();
+            else
+                Close<T>();
+        }
+        public static void Toggle(FargoUI fargoUI)
+        {
+            if (!IsOpen(fargoUI))
+                Open(fargoUI);
+            else
+                Close(fargoUI);
+        }
+        public static bool IsOpen<T>() where T : FargoUI
+        {
+            var ui = GetFromDict<T>();
+            return ui.UserInterface?.CurrentState != null;
+        }
+        public static bool IsOpen(FargoUI fargoUI)
+        {
+            var ui = GetFromDict(fargoUI);
+            return ui.UserInterface?.CurrentState != null;
+        }
 
         public static void LoadUI()
         {
@@ -78,77 +151,27 @@ namespace FargowiltasSouls.Content.UI
                 ReloadButtonTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ReloadButton", AssetRequestMode.ImmediateLoad);
                 OncomingMutantTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutant", AssetRequestMode.ImmediateLoad);
                 OncomingMutantAuraTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutantAura", AssetRequestMode.ImmediateLoad);
+                OncomingMutantntTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutantnt", AssetRequestMode.ImmediateLoad);
                 CooldownBarTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CooldownBar", AssetRequestMode.ImmediateLoad);
                 CooldownBarFillTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CooldownBarFill", AssetRequestMode.ImmediateLoad);
 
-                // Initialize UserInterfaces
-                TogglerUserInterface = new();
-                TogglerToggleUserInterface = new();
-                CooldownBarUserInterface = new();
-
-                // Activate UIs
-                SoulToggler = new();
-                SoulToggler.Activate();
-                SoulTogglerButton = new();
-                SoulTogglerButton.Activate();
-                CooldownBarManager = new();
-                CooldownBarManager.Activate();
-
-                TogglerToggleUserInterface.SetState(SoulTogglerButton);
-                CooldownBarUserInterface.SetState(CooldownBarManager);
+                foreach (var ui in UserInterfaces)
+                {
+                    ui.Value.FargoUI.OnLoad();
+                    ui.Value.FargoUI.Activate();
+                }
+                    
             }
         }
         public static void UpdateUI(GameTime gameTime)
         {
             LastUpdateUIGameTime = gameTime;
 
-            if (!Main.playerInventory && SoulConfig.Instance.HideTogglerWhenInventoryIsClosed)
-                CloseSoulToggler();
-            if (!Main.playerInventory)
+            foreach (var ui in UserInterfaces)
             {
-                CloseSoulTogglerButton();
-            }
-            else
-            {
-                OpenSoulTogglerButton();
-            }
-            if (TogglerUserInterface?.CurrentState != null)
-                TogglerUserInterface.Update(gameTime);
-            if (TogglerToggleUserInterface?.CurrentState != null)
-                TogglerToggleUserInterface.Update(gameTime);
-        }
-
-        public static bool IsSoulTogglerOpen() => TogglerUserInterface?.CurrentState == null;
-
-        public static void CloseSoulToggler()
-        {
-            TogglerUserInterface?.SetState(null);
-
-            if (SoulConfig.Instance.ToggleSearchReset)
-            {
-                SoulToggler.SearchBar.Input = "";
-
-            }
-            SoulToggler.NeedsToggleListBuilding = true;
-        }
-
-        public static bool IsTogglerOpen() => TogglerUserInterface.CurrentState == SoulToggler;
-
-        public static void OpenToggler() => TogglerUserInterface.SetState(SoulToggler);
-        public static void CloseSoulTogglerButton() => TogglerToggleUserInterface.SetState(null);
-        public static void OpenSoulTogglerButton() => TogglerToggleUserInterface.SetState(SoulTogglerButton);
-
-        public static void ToggleSoulToggler()
-        {
-            if (IsSoulTogglerOpen())
-            {
-                SoundEngine.PlaySound(SoundID.MenuOpen);
-                OpenToggler();
-            }
-            else if (IsTogglerOpen())
-            {
-                SoundEngine.PlaySound(SoundID.MenuClose);
-                CloseSoulToggler();
+                ui.Value.FargoUI.UpdateUI();
+                if (ui.Value.UserInterface?.CurrentState != null)
+                    ui.Value.UserInterface.Update(gameTime);
             }
         }
 
@@ -157,28 +180,19 @@ namespace FargowiltasSouls.Content.UI
             int index = layers.FindIndex((layer) => layer.Name == "Vanilla: Inventory");
             if (index != -1)
             {
-                layers.Insert(index - 1, new LegacyGameInterfaceLayer("Fargos: Soul Toggler", delegate
+                foreach (var ui in UserInterfaces)
                 {
-                    if (LastUpdateUIGameTime != null && TogglerUserInterface?.CurrentState != null)
-                        TogglerUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
-                    return true;
-                }, InterfaceScaleType.UI));
+                    int insertIndex = ui.Value.FargoUI.InterfaceIndex(layers, index);
+                    var userInterface = ui.Value.UserInterface;
+                    string name = ui.Value.FargoUI.InterfaceLayerName;
+                    layers.Insert(index - 1, new LegacyGameInterfaceLayer(name, delegate
+                    {
+                        if (LastUpdateUIGameTime != null && userInterface?.CurrentState != null)
+                            userInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
 
-                layers.Insert(index, new LegacyGameInterfaceLayer("Fargos: Soul Toggler Toggler", delegate
-                {
-                    if (LastUpdateUIGameTime != null && TogglerToggleUserInterface?.CurrentState != null)
-                        TogglerToggleUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
-
-                    return true;
-                }, InterfaceScaleType.UI));
-
-                layers.Insert(index + 1, new LegacyGameInterfaceLayer("Fargos: Cooldown Bars", delegate
-                {
-                    if (LastUpdateUIGameTime != null && CooldownBarUserInterface?.CurrentState != null)
-                        CooldownBarUserInterface.Draw(Main.spriteBatch, LastUpdateUIGameTime);
-
-                    return true;
-                }, InterfaceScaleType.UI));
+                        return true;
+                    }, InterfaceScaleType.UI));
+                }
             }
         }
     }

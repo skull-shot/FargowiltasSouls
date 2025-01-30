@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -70,7 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Main.dust[d].velocity *= 4.5f;
                     Main.dust[d].noGravity = true;
                 }
-                SoundEngine.PlaySound(SoundID.Item1, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.DeviSwing, Projectile.Center);
             }
 
             Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.ai[1]);

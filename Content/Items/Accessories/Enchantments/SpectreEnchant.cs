@@ -63,11 +63,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool spiritForce = modPlayer.ForceEffects.Contains(ModContent.ItemType<SpiritForce>());
 
-            int spiritDamage = 200;
+            int spiritDamage = 160;
             if (modPlayer.ForceEffect<SpectreEnchant>())
             {
-                spiritDamage = 400;
+                spiritDamage = 320;
             }
+            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
 
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
             {
@@ -111,7 +112,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     }
                 }
 
-                if (!player.HasEffect<SpiritTornadoEffect>() && !modPlayer.TerrariaSoul && !modPlayer.Eternity)
+                if (player.HasEffectEnchant<SpectreEffect>() && !modPlayer.TerrariaSoul && !modPlayer.Eternity)
                     modPlayer.SpectreGhostTime = LumUtils.SecondsToFrames(5f);
 
                 string text = Language.GetTextValue($"Mods.{FargowiltasSouls.Instance.Name}.Message.Revived");
@@ -125,13 +126,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 Revive(player.statLifeMax2 / 2 > 300 ? player.statLifeMax2 / 2 : 300, 10800);
                 //if (player.HasEffect<SpectreOnHitEffect>())
-                    XWay(30, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, spiritDamage, 0, player.whoAmI);
+                 //   XWay(30, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, spiritDamage, 0, player.whoAmI);
             }
             else if (modPlayer.TerrariaSoul)
             {
                 Revive(300, 14400);
                 //if (player.HasEffect<SpectreOnHitEffect>())
-                    XWay(25, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, spiritDamage, 0, player.whoAmI);
+                //    XWay(25, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, spiritDamage, 0, player.whoAmI);
             }
             else
             {
@@ -165,7 +166,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.ownedProjectileCounts[ModContent.ProjectileType<SpectreGhostProj>()] <= 0)
                 Projectile.NewProjectile(player.GetSource_EffectItem<SpectreEffect>(), player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<SpectreGhostProj>(), 0, 0, Main.myPlayer);
-            player.moveSpeed *= 2f;
+            player.moveSpeed *= 1.3f;
         }
 
         /*
@@ -312,17 +313,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.FargoSouls().TerrariaSoul)
                 return;
-            int spiritDamage = 200;
+            int spiritDamage = 160;
             if (player.FargoSouls().ForceEffect<SpectreEnchant>())
             {
-                spiritDamage = 400;
+                spiritDamage = 320;
             }
+            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
             int damageCopy = info.Damage;
             for (int i = 0; i < 5; i++)
             {
-                if (damageCopy < 30)
+                if (damageCopy < 40)
                     break;
-                damageCopy -= 30;
+                damageCopy -= 40;
 
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;

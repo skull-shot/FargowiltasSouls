@@ -110,7 +110,8 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<PumpkinEnchant>(),
                     ModContent.ItemType<ShadewoodEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
-                    ModContent.ItemType<CactusEnchant>()
+                    ModContent.ItemType<CactusEnchant>(),
+                    ModContent.ItemType<TinEnchant>()
                 );
             }
             else if (!NPC.downedBoss1)
@@ -118,7 +119,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                 summonType = ItemID.SuspiciousLookingEye;
                 build += GetBuildText(
                     Main.rand.Next(new int[] { ItemID.HermesBoots, ItemID.SailfishBoots, ItemID.FlurryBoots, ItemID.RocketBoots, ItemID.SpectreBoots }),
-                    Main.rand.Next(new int[] { ItemID.CloudinaBalloon, ItemID.SharkronBalloon, ItemID.SandstorminaBalloon, ItemID.BlizzardinaBalloon })
+                    Main.rand.Next(new int[] { ItemID.CloudinaBalloon, ItemID.SharkronBalloon, ItemID.SandstorminaBalloon, ItemID.BlizzardinaBalloon, ModContent.ItemType<JungleEnchant>() })
                 ) + GetBuildTextRandom(
                     3,
                     ItemID.CharmofMyths,
@@ -144,7 +145,8 @@ namespace FargowiltasSouls.Content.Items.Misc
                      ModContent.ItemType<NinjaEnchant>(),
                     ModContent.ItemType<CactusEnchant>(),
                     ModContent.ItemType<PalmWoodEnchant>(),
-                    ModContent.ItemType<TungstenEnchant>()
+                    ModContent.ItemType<TungstenEnchant>(),
+                    ModContent.ItemType<GladiatorEnchant>()
                 );
             }
             else if (!NPC.downedBoss2)
@@ -160,7 +162,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<EbonwoodEnchant>(),
                     ModContent.ItemType<CactusEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
-                    ModContent.ItemType<CopperEnchant>()
+                    ModContent.ItemType<CopperEnchant>(),
+                    ModContent.ItemType<AgitatingLens>(),
+                    ModContent.ItemType<FossilEnchant>(),
+                    ModContent.ItemType<LeadEnchant>()
                 );
             }
             else if (!NPC.downedQueenBee)
@@ -176,7 +181,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                                 ModContent.ItemType<TungstenEnchant>(),
                                 ModContent.ItemType<ShadowEnchant>(),
                                 ModContent.ItemType<ShadewoodEnchant>(),
-                                ModContent.ItemType<NinjaEnchant>()
+                                ModContent.ItemType<NinjaEnchant>(),
+                                ModContent.ItemType<GladiatorEnchant>(),
+                                ModContent.ItemType<FossilEnchant>(),
+                                ModContent.ItemType<LeadEnchant>(),
                     })
                 );
                 other += $"[i:{ModContent.Find<ModItem>("Fargowiltas", "CityBuster").Type}]";
@@ -195,7 +203,8 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<TinEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
                     ModContent.ItemType<NinjaEnchant>(),
-                    ModContent.ItemType<CrimsonEnchant>()
+                    ModContent.ItemType<CrimsonEnchant>(),
+                    ModContent.ItemType<FossilEnchant>()
                 );
             }
             else if (!NPC.downedDeerclops)
@@ -212,7 +221,8 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<ShadowEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
                     ModContent.ItemType<TinEnchant>(),
-                    ModContent.ItemType<NinjaEnchant>()
+                    ModContent.ItemType<NinjaEnchant>(),
+                    ModContent.ItemType<GladiatorEnchant>()
                 );
             }
             else if (!WorldSavingSystem.DownedDevi)
@@ -223,7 +233,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ItemID.EoCShield, ModContent.ItemType<JungleEnchant>(), ModContent.ItemType<QueenStinger>(), ModContent.ItemType<MeteorEnchant>() }),
                     Main.rand.Next(new int[] { ItemID.BundleofBalloons, ItemID.HorseshoeBundle, ModContent.ItemType<BeeEnchant>() }),
                     Main.rand.Next(new int[] { ModContent.ItemType<NymphsPerfume>(), ModContent.ItemType<ShadowEnchant>() }),
-                    Main.rand.Next(new int[] { ModContent.ItemType<TinEnchant>(), ModContent.ItemType<NinjaEnchant>(), ModContent.ItemType<TungstenEnchant>() })
+                    Main.rand.Next(new int[] { ModContent.ItemType<TinEnchant>(), ModContent.ItemType<NinjaEnchant>(), ModContent.ItemType<TungstenEnchant>(), ModContent.ItemType<FossilEnchant>() })
                     );
             }
             else if (!Main.hardMode)
@@ -236,6 +246,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<TinEnchant>(),
                     ModContent.ItemType<SkullCharm>(),
                     ModContent.ItemType<CopperEnchant>(),
+                    ModContent.ItemType<FossilEnchant>(),
                     ModContent.ItemType<NinjaEnchant>());
                 other += $"[i:{ModContent.Find<ModItem>("Fargowiltas", "DoubleObsidianInstabridge").Type}]";
                 meleeSpecific = [ModContent.ItemType<TungstenEnchant>()];
@@ -369,7 +380,8 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<HallowEnchant>(),
                     ModContent.ItemType<MythrilEnchant>(),
                     ModContent.ItemType<AdamantiteEnchant>(),
-                    ModContent.ItemType<DubiousCircuitry>()
+                    ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
@@ -381,13 +393,14 @@ namespace FargowiltasSouls.Content.Items.Misc
             {
                 summonType = ModContent.TryFind("Fargowiltas", "PlanterasFruit", out ModItem modItem) ? modItem.Type : ItemID.PlanteraMask;
                 build += GetBuildText(
-                    Main.rand.Next(new int[] { ModContent.ItemType<AeolusBoots>(), ModContent.ItemType<MeteorEnchant>() }),
+                    Main.rand.Next(new int[] { ModContent.ItemType<AeolusBoots>(), ModContent.ItemType<MeteorEnchant>() }),  
                     Main.rand.Next(new int[] { ItemID.FlameWings, ItemID.FrozenWings, ItemID.BeeWings, ModContent.ItemType<GelicWings>() })
                 ) + GetBuildTextRandom(
                     3,
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<ChlorophyteEnchant>(),
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<AncientShadowEnchant>(),
                     ModContent.ItemType<OrichalcumEnchant>(),
                     ModContent.ItemType<ApprenticeEnchant>(),
@@ -410,12 +423,14 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     Main.rand.Next(new int[] { ItemID.MasterNinjaGear, ModContent.ItemType<MonkEnchant>(), ModContent.ItemType<ChlorophyteEnchant>(), ModContent.ItemType<MeteorEnchant>() }),
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<CrimsonEnchant>(),
                     ModContent.ItemType<HallowEnchant>(),
                     ModContent.ItemType<AncientHallowEnchant>(),
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<AdamantiteEnchant>(),
-                    ModContent.ItemType<LumpOfFlesh>()
+                    ModContent.ItemType<LumpOfFlesh>(),
+                    ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 other += $"[i:{ModContent.Find<ModItem>("Fargowiltas", "LihzahrdInstactuationBomb").Type}]";
@@ -435,9 +450,11 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     Main.rand.Next(new int[] { ItemID.MasterNinjaGear, ModContent.ItemType<MonkEnchant>(), ModContent.ItemType<ChlorophyteEnchant>(), ModContent.ItemType<MeteorEnchant>() }),
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<CrimsonEnchant>(),
-                    ModContent.ItemType<HallowEnchant>()
+                    ModContent.ItemType<HallowEnchant>(),
+                    ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 meleeSpecific = [ModContent.ItemType<BeetleEnchant>(), ModContent.ItemType<TungstenEnchant>()];
@@ -453,10 +470,12 @@ namespace FargowiltasSouls.Content.Items.Misc
                 ) + GetBuildTextRandom(
                     3,
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
                     ModContent.ItemType<LumpOfFlesh>(),
-                    ModContent.ItemType<PumpkingsCape>()
+                    ModContent.ItemType<PumpkingsCape>(),
+                    ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 other += GetBuildText(ModContent.ItemType<RabiesVaccine>());
@@ -474,9 +493,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
                     ModContent.ItemType<SpectreEnchant>(),
-                    ModContent.ItemType<RainEnchant>()
+                    ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 meleeSpecific = [ModContent.ItemType<BeetleEnchant>(), ModContent.ItemType<TungstenEnchant>()];
@@ -493,9 +513,11 @@ namespace FargowiltasSouls.Content.Items.Misc
                 ) + GetBuildTextRandom(
                     2,
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
                     ModContent.ItemType<LumpOfFlesh>(),
-                    ModContent.ItemType<SpectreEnchant>()
+                    ModContent.ItemType<SpectreEnchant>(),
+                     ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 meleeSpecific = [ModContent.ItemType<BeetleEnchant>(), ModContent.ItemType<TungstenEnchant>()];
@@ -517,11 +539,13 @@ namespace FargowiltasSouls.Content.Items.Misc
                     4,
                     Main.rand.NextBool() ? ModContent.ItemType<AeolusBoots>() : ModContent.ItemType<ValhallaKnightEnchant>(),
                     ModContent.ItemType<DubiousCircuitry>(),
+                    ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<PrecisionSeal>(),
                     ModContent.ItemType<MutantAntibodies>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
                     ModContent.ItemType<LumpOfFlesh>(),
-                    ModContent.ItemType<SpectreEnchant>()
+                    ModContent.ItemType<SpectreEnchant>(),
+                    ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 meleeSpecific = [ModContent.ItemType<BeetleEnchant>(), ModContent.ItemType<TungstenEnchant>()];
@@ -531,20 +555,21 @@ namespace FargowiltasSouls.Content.Items.Misc
             {
                 summonType = ModContent.ItemType<SigilOfChampions>();
                 build += GetBuildText(
-                    ModContent.ItemType<FlightMasterySoul>(),
+                    Main.rand.NextBool() ? ModContent.ItemType<FlightMasterySoul>() : ModContent.ItemType<LifeForce>(),
                     Main.rand.NextBool() ? ModContent.ItemType<SupersonicSoul>() : ModContent.ItemType<ColossusSoul>()
                     ) + GetBuildTextRandom(
-                    4,
-                    ModContent.ItemType<NebulaEnchant>(),
+                    3,
                     ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
                     ModContent.ItemType<ShadowForce>(),
-                    ModContent.ItemType<NatureForce>()
+                    ModContent.ItemType<NatureForce>(),
+                    ModContent.ItemType<WillForce>(),
+                    ModContent.ItemType<HeartoftheMasochist>()
                 );
-                meleeSpecific = [ModContent.ItemType<BerserkerSoul>()];
-                rangerSpecific = [ModContent.ItemType<SnipersSoul>()];
-                mageSpecific = [ModContent.ItemType<ArchWizardsSoul>()];
-                summonerSpecific = [ModContent.ItemType<ConjuristsSoul>(), ModContent.ItemType<SpiritForce>()];
+                meleeSpecific = [ModContent.ItemType<BerserkerSoul>(), ModContent.ItemType<TimberForce>(), ModContent.ItemType<SolarEnchant>()];
+                rangerSpecific = [ModContent.ItemType<SnipersSoul>(), ModContent.ItemType<VortexEnchant>()];
+                mageSpecific = [ModContent.ItemType<ArchWizardsSoul>(), ModContent.ItemType<NebulaEnchant>()];
+                summonerSpecific = [ModContent.ItemType<ConjuristsSoul>(), ModContent.ItemType<SpiritForce>(), ModContent.ItemType<StardustEnchant>()];
             }
             else if (!WorldSavingSystem.DownedAbom)
             {
@@ -555,13 +580,14 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<ColossusSoul>()
                 ) + GetBuildTextRandom(
                     3,
+                    ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
-                    ModContent.ItemType<CosmoForce>(),
-                    ModContent.ItemType<SpiritForce>(),
+                    ModContent.ItemType<ShadowForce>(),
                     ModContent.ItemType<NatureForce>(),
+                    ModContent.ItemType<WillForce>(),
                     ModContent.ItemType<HeartoftheMasochist>()
                 );
-                meleeSpecific = [ModContent.ItemType<BerserkerSoul>()];
+                meleeSpecific = [ModContent.ItemType<BerserkerSoul>(), ModContent.ItemType<TimberForce>()];
                 rangerSpecific = [ModContent.ItemType<SnipersSoul>()];
                 mageSpecific = [ModContent.ItemType<ArchWizardsSoul>()];
                 summonerSpecific = [ModContent.ItemType<ConjuristsSoul>(), ModContent.ItemType<SpiritForce>()];

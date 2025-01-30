@@ -150,7 +150,7 @@ MutantFangBuff: {
 
 MutantPresenceBuff: {
 	DisplayName: 突变驾到
-	Description: 减少防御力、伤害减免和生命恢复速度，关闭几乎所有魂的效果，减小擦弹范围
+	Description: 减少防御力、伤害减免和生命恢复速度，减小擦弹范围，关闭部分饰品效果
 }
 
 HellFireBuff: {
@@ -180,7 +180,7 @@ AnticoagulationBuff: {
 
 AntisocialBuff: {
 	DisplayName: 社恐
-	Description: 你没有朋友，也无法造成召唤伤害
+	Description: 你朋友很少，鞭子伤害也很低
 }
 
 AtrophiedBuff: {
@@ -239,8 +239,12 @@ FlippedBuff: {
 }
 
 HallowIlluminatedBuff: {
-	// DisplayName: Illuminated
-	// Description: Increased brightness, spawn rates and damage increased in bright areas
+	DisplayName: 灯火通明
+	Description:
+		'''
+		增加亮度和生成率
+		在明亮区域受到的伤害和造成的伤害都会增加
+		'''
 }
 
 FusedBuff: {
@@ -331,8 +335,8 @@ LowGroundBuff: {
 }
 
 LowGroundEridanusBuff: {
-	// DisplayName: Low Ground
-	// Description: Cannot stand on platforms
+	DisplayName: 下陷
+	Description: 不能站在平台上
 }
 
 MarkedforDeathBuff: {
@@ -404,7 +408,7 @@ RefreshedBuff: {
 
 ReverseManaFlowBuff: {
 	DisplayName: 魔力逆流
-	Description: 你的魔法武器消耗生命而不是魔力
+	Description: 你的魔法武器会锁定一段时间魔力 // for patch
 }
 
 RottingBuff: {
@@ -634,8 +638,8 @@ SuperBleedBuff: {
 }
 
 CorruptingBuff: {
-	DisplayName: 腐化之力
-	Description: 你正在腐烂
+	DisplayName: 凋零
+	Description: 你正在凋零
 }
 
 TimeFrozenBuff: {
@@ -684,13 +688,13 @@ WretchedHexBuff: {
 }
 
 CorruptedBuff: {
-	// DisplayName: Withered
-	// Description: You have withered
+	DisplayName: 凋零
+	Description: 你已凋零
 }
 
 CorruptedBuffForce: {
-	// DisplayName: Withered (Force)
-	// Description: You have withered
+	DisplayName: 凋零（力级）
+	Description: 你已凋零
 }
 
 JungleMimicSummonBuff: {
@@ -700,12 +704,12 @@ JungleMimicSummonBuff: {
 
 GladiatorBuff: {
 	DisplayName: 角斗士之力
-	Description: +5%伤害减免，+5%伤害，免疫击退，增强长矛雨
+	Description: 增加伤害和伤害减免，免疫击退，增强长矛雨
 }
 
 GladiatorSpiritBuff: {
-	// DisplayName: Gladiator Strength
-	// Description: +15% damage reduction, +30% damage, knockback immunity, improved successive hit damage
+	DisplayName: 角斗士之力
+	Description: +15%伤害减免，+30%伤害，免疫击退，增强连续攻击的伤害
 }
 
 ROBBuff: {
@@ -746,31 +750,66 @@ MoonFangBuff: {
 }
 
 WitheredForceBuff: {
-	// DisplayName: Withered Force Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
+	DisplayName: 凋零的力级增益
+	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
 TimberBleedBuff: {
-	// DisplayName: Timber Bleed Buff
-	// Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
+	DisplayName: 木材流血增益
+	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
 }
 
 EarthPoison: {
-	// DisplayName: Earth Poison
-	// Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
+	DisplayName: 大地腐蚀
+	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
 }
 
 WitheredBuff: {
-	// DisplayName: Withered Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
+	DisplayName: 凋零
+	Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
 }
 
 WitheredWizardBuff: {
-	// DisplayName: Withered Wizard Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
+	DisplayName: 凋零（巫师）
+	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
-	// DisplayName: Mushroom Power Buff
-	// Description: Mods.FargowiltasSouls.Buffs.MushroomPowerBuff.Description
+	DisplayName: 蘑菇之力
+	Description: 增加伤害和暴击率
+}
+
+SolarBuff: {
+	DisplayName: 日耀之力
+	Description: 增加伤害减免
+}
+
+VortexBuff: {
+	DisplayName: 星旋之力
+	Description: 增加暴击率
+}
+
+NebulaBuff: {
+	DisplayName: 星云之力
+	Description: 增加生命再生
+}
+
+StardustBuff: {
+	DisplayName: 星尘之力
+	Description: 增加伤害
+}
+
+AmbrosiaBuff: {
+	DisplayName: 仙馔密酒
+	Description: +30%伤害，+30%近战攻速，+20%伤害减免，+5生命再生
+}
+
+MutantDesperationBuff: {
+	DisplayName: 幻影杀手
+	Description: 他的最后一搏。你会受到双倍伤害！
+}
+
+TouhouHoardBuff: {
+	DisplayName: 东方秘藏
+	Description: 幻想之物会为你而战
 }

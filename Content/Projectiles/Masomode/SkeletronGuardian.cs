@@ -45,11 +45,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             if (SkeletronBone.SourceIsSkeletron(source))
             {
-                Projectile.ai[2] = 1;
+                Projectile.localAI[2] = 1;
                 Projectile.netUpdate = true;
             }
         }
-
+        public ref float TargetID => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -74,8 +74,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
                 if (Projectile.velocity.Length() < 1)
                 {
-                    int p = Player.FindClosest(Projectile.Center, 0, 0);
-                    if (p != -1)
+                    int p = (int)TargetID;
+                    if (p.IsWithinBounds(Main.maxPlayers))
                     {
                         Projectile.velocity = Projectile.SafeDirectionTo(Main.player[p].Center);
                         Projectile.ai[0] = 1f;
@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override bool PreDraw(ref Color lightColor)
         {
             bool recolor =
-                Projectile.ai[2] == 1 &&
+                Projectile.localAI[2] == 1 &&
                 SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
 
             Texture2D texture2D13 = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/DeviBoss/DeviGuardian_Recolor").Value : TextureAssets.Projectile[Type].Value;

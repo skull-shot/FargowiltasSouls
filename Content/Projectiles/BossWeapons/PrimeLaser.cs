@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Prime Laser");
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
         public override void SetDefaults()
         {
@@ -46,21 +47,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Lighting.AddLight((int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16, 0.8f, 0f, 0.9f);
             float num1 = 100f;
             float num2 = 3f;
-            if (Projectile.ai[1] == 0.0)
-            {
-                Projectile.localAI[0] += num2;
-                if (Projectile.localAI[0] > (double)num1)
-                    Projectile.localAI[0] = num1;
-            }
-            else
-            {
-                Projectile.localAI[0] -= num2;
-                if (Projectile.localAI[0] <= 0.0)
-                {
-                    Projectile.Kill();
-                    return;
-                }
-            }
+            Projectile.localAI[0] += num2;
+            if (Projectile.localAI[0] > (double)num1)
+                Projectile.localAI[0] = num1;
+
+            Projectile.ai[0]++;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -68,7 +59,20 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.velocity = oldVelocity;
             return true;
         }
-
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            float chargeupTime = 10;
+            if (Projectile.ai[1] == 1)
+            {
+                if (Projectile.ai[0] < chargeupTime)
+                {
+                    float modifier = Projectile.ai[0] / chargeupTime;
+                    modifiers.SourceDamage *= 0.4f + 0.6f * modifier;
+                }
+            }
+            
+            base.ModifyHitNPC(target, ref modifiers);
+        }
         public override void OnKill(int timeLeft)
         {
             int num = Main.rand.Next(6, 8);
@@ -92,12 +96,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.getRect().Intersects(value7))
             {
                 Vector2 value8 = new(Projectile.position.X - Main.screenPosition.X + num150, Projectile.position.Y - Main.screenPosition.Y + Projectile.height / 2 + Projectile.gfxOffY);
-                float num176 = 100f * (Projectile.ai[0] == 1 ? 1.5f : 1f);
+                float num176 = 100f;
                 float scaleFactor = 3f;
-                if (Projectile.ai[1] == 1f)
-                {
-                    num176 = (int)Projectile.localAI[0];
-                }
                 int num43;
                 for (int num177 = 1; num177 <= (int)Projectile.localAI[0]; num177 = num43 + 1)
                 {

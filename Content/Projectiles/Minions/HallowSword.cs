@@ -28,10 +28,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public const int MaxDistance = 300;
         public bool Reflected = false;
         ref float SlashCD => ref Projectile.ai[1];
-        ref float Action => ref Projectile.ai[0];
 
         ref float SlashRotation => ref Projectile.localAI[0];
         ref float SlashArc => ref Projectile.localAI[1];
+        ref float Action => ref Projectile.localAI[2];
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("HallowSword");
@@ -59,15 +59,18 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         {
             writer.Write(mousePos.X);
             writer.Write(mousePos.Y);
+            writer.Write(Action);
         }
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             Vector2 buffer;
             buffer.X = reader.ReadSingle();
             buffer.Y = reader.ReadSingle();
+            float actionBuffer = reader.ReadSingle();
             if (Projectile.owner != Main.myPlayer)
             {
                 mousePos = buffer;
+                Action = actionBuffer;
             }
         }
 
@@ -107,10 +110,16 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Recover(player);
             }
 
-            if (CheckRightClick(player) && SlashCD <= 0)
+            if (CheckRightClick(player) && SlashCD <= 0 && Projectile.owner == Main.myPlayer)
+            {
+                Action = 22;
+                Projectile.netUpdate = true;
+            }
+            if (Action == 22)
             {
                 HitsLeft = 10;
                 Slash(player);
+                Projectile.netUpdate = true;
             }
             //ai156_blacklistedTargets.Clear();
 
@@ -257,6 +266,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             {
                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/parrynmuse"), p.Center);
                 Reflected = true;
+                p.FargoSouls().Reflected = true;
                 p.hostile = false;
                 p.friendly = true;
                 player.AddBuff(ModContent.BuffType<HallowCooldownBuff>(), 60 * 15);

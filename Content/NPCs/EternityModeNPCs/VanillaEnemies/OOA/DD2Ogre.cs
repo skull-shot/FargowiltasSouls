@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -32,6 +33,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void AI(NPC npc)
         {
             base.AI(npc);
+
+            if (npc.Distance(Main.LocalPlayer.Center) > 3000 && !DD2Event.Ongoing)
+            {
+                npc.active = false;
+            }
 
             EModeGlobalNPC.Aura(npc, 500, BuffID.Stinky, false, 188);
         }

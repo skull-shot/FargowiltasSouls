@@ -35,6 +35,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
         }
+        public override bool PreKill(NPC npc)
+        {
+            if (!NPC.LunarApocalypseIsUp && !NPC.downedAncientCultist)
+                return false;
+            return base.PreKill(npc);
+        }
     }
 
     public class NebulaBrain : EModeNPCBehaviour

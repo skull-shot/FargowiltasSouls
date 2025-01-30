@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return Color.Fuchsia;
+            return base.GetAlpha(lightColor); // Color.Fuchsia;
         }
         public override void AI()
         {

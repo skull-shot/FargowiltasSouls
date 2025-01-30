@@ -53,6 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<NecroEnchant>();
         public override bool ExtraAttackEffect => true;
+        public override bool MutantsPresenceAffects => true;
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.CursedCoffin
@@ -72,7 +73,9 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 			{
 				StateMachine.RegisterTransition(state, BehaviorStates.StunPunish, false, () => 
 				{
-					return Main.player.Any(p => p.Alive() && p.HasBuff<StunnedBuff>() && !p.HasBuff<GrabbedBuff>()) && !Main.projectile.Any(p => p.TypeAlive<CoffinHand>());
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        return false;
+                    return Main.player.Any(p => p.Alive() && p.HasBuff(BuffID.Dazed) && !p.HasBuff<GrabbedBuff>()) && !Main.projectile.Any(p => p.TypeAlive<CoffinHand>());
 				});
 			}, BehaviorStates.StunPunish, BehaviorStates.PhaseTransition, BehaviorStates.YouCantEscape, BehaviorStates.SpiritGrabPunish);
 
@@ -81,6 +84,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             {
                 StateMachine.RegisterTransition(state, BehaviorStates.YouCantEscape, false, () =>
                 {
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        return false;
 					return Main.player.Any(p => p.Alive() && !CoffinArena.PaddedRectangle.Contains(p.Center.ToTileCoordinates()) && !p.HasBuff<GrabbedBuff>());
                 });
             }, BehaviorStates.StunPunish, BehaviorStates.PhaseTransition, BehaviorStates.YouCantEscape, BehaviorStates.SpiritGrabPunish);
@@ -105,7 +110,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 NPC.velocity.Y = -6;
             });
 
-            StateMachine.RegisterTransition(BehaviorStates.GrabbyHands, BehaviorStates.SlamWShockwave, false, () => Timer > 60 && Frame <= 0 && Timer > AI3 + 1, () =>
+            StateMachine.RegisterTransition(BehaviorStates.GrabbyHands, BehaviorStates.SlamWShockwave, false, () => Timer > 72 && Frame <= 0 && Timer > AI3 + 1, () =>
             {
                 NPC.noTileCollide = true;
                 LockVector1 = Player.Top - Vector2.UnitY * 250;
@@ -115,15 +120,9 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     NPC.velocity.X = 0;
             });
 
-            // Ghost spawn transition
-            StateMachine.ApplyToAllStatesExcept((state) =>
-            {
-                StateMachine.RegisterTransition(state, BehaviorStates.PhaseTransition, false, () => AttackCounter == 3 && !Main.npc.Any(p => p.TypeAlive<CursedSpirit>()));
-            }, BehaviorStates.PhaseTransition);
-
             #region End-of-sequence attacks
 
-            StateMachine.RegisterTransition(BehaviorStates.SpiritGrabPunish, BehaviorStates.SlamWShockwave, false, () => Timer > 90, () =>
+            StateMachine.RegisterTransition(BehaviorStates.SpiritGrabPunish, BehaviorStates.SlamWShockwave, false, () => Timer > 70, () =>
             {
                 NPC.noTileCollide = true;
                 LockVector1 = Player.Top - Vector2.UnitY * 250;
@@ -218,6 +217,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             // if it returns anything other than the provided state.
             StateMachine.AddTransitionStateHijack(originalState =>
             {
+                NPC.netUpdate = true;
                 if (Phase < 3 && Enraged)
                 {
                     StateMachine.StateStack.Clear();

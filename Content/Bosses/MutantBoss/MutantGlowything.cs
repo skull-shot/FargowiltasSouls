@@ -35,15 +35,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (spawnPoint == Vector2.Zero)
                 spawnPoint = Projectile.Center;
+            NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1]);
+            if (npc != null)
+                spawnPoint = npc.Center;
             Projectile.Center = spawnPoint + Vector2.UnitX.RotatedBy(Projectile.ai[0]) * 96 * Projectile.scale;
 
-            if (Projectile.scale < 4f) //grow over time
+            int maxScale = Projectile.ai[2] == 0 ? 4 : 2;
+            if (Projectile.scale < maxScale) //grow over time
             {
                 Projectile.scale += 0.2f;
             }
             else //if full size, start fading away
             {
-                Projectile.scale = 4f;
+                Projectile.scale = maxScale;
                 Projectile.alpha += 10;
             }
             if (Projectile.alpha > 255) //die if fully faded away
@@ -59,7 +63,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             int rect2 = 0;
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
-            Color glowcolor = new(255, 0, 0, 0);
+            Color glowcolor = Projectile.ai[2] == 0f ? Color.Red : Color.Yellow;
 
             float scale = Projectile.scale;
             Main.EntitySpriteDraw(glow, Projectile.Center + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glowrectangle), Projectile.GetAlpha(glowcolor),

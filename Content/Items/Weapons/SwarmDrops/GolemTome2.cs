@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             // DisplayName.SetDefault("The Landslide");
-            // Tooltip.SetDefault("'The reward for slaughtering many...'");
+            // Tooltip.SetDefault("'The reward for a mighty rematch...'");
 
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "山崩 EX");
             //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励'");

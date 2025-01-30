@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -40,7 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                         float distanceScale = MathHelper.Clamp(npc.Distance(targetPoint) / 1000f, 0f, 1f);
                         float vel = 5f + 20f * distanceScale;
                         npc.velocity = npc.DirectionTo(targetPoint) * vel;
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ThrowShort") with { Pitch = 0.5f }, npc.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort with { Pitch = 0.5f }, npc.Center);
                     }
                         
                 }
@@ -52,6 +53,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             }
             
             return base.SafePreAI(npc);
+        }
+
+        public override void OnHitNPC(NPC npc, NPC target, NPC.HitInfo hit)
+        {
+            base.OnHitNPC(npc, target, hit);
+
+            if (target.townNPC && (hit.InstantKill || target.life < hit.Damage))
+            {
+                target.Transform(npc.type);
+                //SoundEngine.PlaySound(SoundID.);
+            }
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

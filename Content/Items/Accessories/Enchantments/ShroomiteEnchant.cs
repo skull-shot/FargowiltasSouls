@@ -60,8 +60,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<ShroomiteEnchant>();
         public override void PostUpdateEquips(Player player)
         {
-            if (!player.FargoSouls().TerrariaSoul)
-                player.shroomiteStealth = true;
+            //if (!player.FargoSouls().TerrariaSoul)
+            //    player.shroomiteStealth = true;
         }
     }
     public class ShroomiteMushroomPriority : AccessoryEffect
@@ -83,13 +83,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.HasEffect<NatureEffect>())
+            if (!HasEffectEnchant(player))
                 return;
 
             if (modPlayer.ShroomiteCD > 0)
                 return;
 
-            if (projectile != null && (projectile.penetrate > 1 || projectile.penetrate < 0) && projectile.maxPenetrate == projectile.penetrate)
+            if (projectile != null && (projectile.penetrate > 1 || projectile.penetrate < 0) && projectile.maxPenetrate == projectile.penetrate && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
             {
                 SpawnShrooms(player, target, baseDamage);
             }
@@ -104,9 +104,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 num = 5;
                 damage = (int)(baseDamage / 2.5f);
-                if (damage > 115)
-                    damage = 115;
             }
+            if (damage > 115)
+                damage = 115;
             Projectile[] projs = FargoSoulsUtil.XWay(num, player.GetSource_EffectItem<ShroomiteShroomEffect>(), target.Center, ModContent.ProjectileType<ShroomiteShroom>(), 16, damage, 0f);
 
             foreach (Projectile p in projs)

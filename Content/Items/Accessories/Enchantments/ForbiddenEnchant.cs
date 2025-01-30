@@ -16,6 +16,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class ForbiddenEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ForbiddenEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -65,10 +67,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<SpiritHeader>();
         public override int ToggleItemType => ModContent.ItemType<ForbiddenEnchant>();
+        public override bool ActiveSkill => true;
         public override bool MutantsPresenceAffects => true;
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (!stunned)
+                ActivateForbiddenStorm(player);
+        }
         public static void ActivateForbiddenStorm(Player player)
         {
-            if (player.HasEffect<ForbiddenEffect>() && !player.HasEffect<SpiritTornadoEffect>())
+            if (player.HasEffect<ForbiddenEffect>() && player.HasEffectEnchant<ForbiddenEffect>())
             {
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
                 if (modPlayer.CanSummonForbiddenStorm)
@@ -80,7 +88,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void CommandForbiddenStorm(Player Player)
         {
-            if (Player.HasEffect<SpiritTornadoEffect>())
+            if (!Player.HasEffectEnchant<ForbiddenEffect>())
                 return;
             List<int> list = [];
             for (int i = 0; i < Main.maxProjectiles; i++)

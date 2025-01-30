@@ -21,8 +21,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void SetDefaults()
         {
-            Projectile.width = 52;
-            Projectile.height = 70;
+            Projectile.width = 20;
+            Projectile.height = 48;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.penetrate = -1;
@@ -37,6 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         public float ScaleX = 1;
         public override void AI()
         {
+            const int VisualHeight = 70;
 
             int frameCounterMax = (int)Math.Round(12 - MathHelper.Clamp(6 * Projectile.velocity.X / 60f, 0, 6));
             Projectile.Animate(frameCounterMax);
@@ -45,7 +46,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 Projectile.velocity.X *= 1.035f;
 
             ScaleX = Projectile.scale / 2 + (Math.Abs(Projectile.velocity.X) / 7);
-            Projectile.width = (int)(52f * ScaleX);
+            Projectile.width = (int)(30f * ScaleX);
 
             int p = Player.FindClosest(Projectile.Center, 0, 0);
             if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive())
@@ -57,13 +58,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             Vector2 oldPos = Projectile.position;
             // lock on block grid
             Projectile.position.Y = (MathF.Floor((Projectile.position.Y + Projectile.height) / 16) * 16) - Projectile.height;
-
+             
             int i = 0;
             const int maxIter = 10;
             do
             {
+                Vector2 bottom = Projectile.Bottom - Vector2.UnitY * 16;
                 i++;
-                Point tilePos = Projectile.Bottom.ToTileCoordinates();
+                Point tilePos = bottom.ToTileCoordinates();
                 Tile tile = Main.tile[tilePos.X, tilePos.Y - 1];
                 Tile tileBelow = Main.tile[tilePos.X, tilePos.Y];
                 bool tileSolid = tile.HasUnactuatedTile && (Main.tileSolid[tile.TileType] || Main.tileSolidTop[tile.TileType]);
@@ -95,16 +97,18 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            modifiers.SetMaxDamage(1);
+            modifiers.Null();
+            modifiers.Knockback *= 0;
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<StunnedBuff>(), 60 * 2);
+            target.AddBuff(BuffID.Dazed, 60 * 2);
         }
         public override bool PreDraw(ref Color lightColor)
         {
             float rotation = Projectile.rotation;
-            Vector2 drawPos = Projectile.Center + Vector2.UnitY * 10;
+            Vector2 offset = Vector2.UnitY * -10;
+            Vector2 drawPos = Projectile.Center + offset;
             Texture2D texture = TextureAssets.Projectile[Type].Value;
 
             Vector2 scale = Vector2.UnitX * ScaleX + Vector2.UnitY * Projectile.scale;
@@ -115,21 +119,19 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             Vector2 origin = rectangle.Size() / 2f;
             SpriteEffects spriteEffects = Projectile.velocity.X >= 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
             {
-                Color oldColor = lightColor;
+                Color oldColor = Color.White;
                 oldColor *= 0.5f;
                 oldColor *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                Vector2 oldPos = Projectile.oldPos[i] + Projectile.Size / 2 + Vector2.UnitY * 10;
+                Vector2 oldPos = Projectile.oldPos[i] + Projectile.Size / 2 + offset;
                 float oldRot = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture, oldPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, Projectile.GetAlpha(oldColor),
                     oldRot, origin, scale, spriteEffects, 0);
             }
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
-            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, Projectile.GetAlpha(lightColor),
+            Main.spriteBatch.ResetToDefault();
+            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, Projectile.GetAlpha(Color.White),
                     rotation, origin, scale, spriteEffects, 0);
 
             return false;

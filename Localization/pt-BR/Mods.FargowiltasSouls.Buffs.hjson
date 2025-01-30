@@ -240,7 +240,11 @@ FlippedBuff: {
 
 HallowIlluminatedBuff: {
 	// DisplayName: Illuminated
-	// Description: Increased brightness, spawn rates and damage increased in bright areas
+	/* Description:
+		'''
+		Increased brightness and spawn rate
+		Damage taken and dealt increased in bright areas
+		''' */
 }
 
 FusedBuff: {
@@ -771,6 +775,41 @@ WitheredWizardBuff: {
 }
 
 MushroomPowerBuff: {
-	// DisplayName: Mushroom Power Buff
-	// Description: Mods.FargowiltasSouls.Buffs.MushroomPowerBuff.Description
+	// DisplayName: Mushroom Power
+	// Description: Increased damage and critical strike chance
+}
+
+SolarBuff: {
+	// DisplayName: Solar Buff
+	// Description: Increased damage reduction
+}
+
+VortexBuff: {
+	// DisplayName: Vortex Buff
+	// Description: Increased critical strike chance
+}
+
+NebulaBuff: {
+	// DisplayName: Nebula Buff
+	// Description: Increased life regeneration
+}
+
+StardustBuff: {
+	// DisplayName: Stardust Buff
+	// Description: Increased damage
+}
+
+AmbrosiaBuff: {
+	// DisplayName: Ambrosia Buff
+	// Description: +30% damage, +30% melee speed, +20% damage reduction, +5 life regeneration, summon damage can crit
+}
+
+MutantDesperationBuff: {
+	// DisplayName: Phantasmal Fury
+	// Description: His final stand. You take double damage!
+}
+
+TouhouHoardBuff: {
+	// DisplayName: Touhou Hoard Buff
+	// Description: The mythical beings will fight for you
 }

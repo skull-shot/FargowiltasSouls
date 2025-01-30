@@ -1,15 +1,16 @@
 MasochistModeUnlocked: "{$Mods.FargowiltasSouls.Items.Masochist.DisplayName} тонет в новых силах...!"
 
 WorldUpdatingSystem: {
-	EternityOn: Режим Вечность активирован!
-	EternityOff: Режим Вечность деактивирован.
-	EternityWrongDifficulty: Слишком низкая сложность, режим Вечность деактивирован...
-	EternityMasterWarning: Внимание! Режим Вечность не предназначена для режима Мастера; режим Эксперта рекомендован!
-	MasochistOn: Мастер и Вечность объединены: режим Мазохиста активирован!!
-	MasochistOnZenith: Режим Мастера и сид Зенит объединены: режим Мазохиста активирован!!
+	EternityOn: Режим Вечность включён!
+	EternityOff: Режим Вечность выключен.
+	EternityWrongDifficulty: Слишком низкая сложность, режим Вечность не может быть включен.
+	EternityMasterWarning: Внимание! Режим Вечность не предназначен для режима Мастера; режим Эксперта рекомендован!
+	MasochistOn: Режим Мастера и Вечность объединены: режим Мазохиста активирован!!
+	MasochistOnZenith: Режим Мастера и сид Get fixed boi объединены: режим Мазохиста активирован!!
 	MasochistFTWWarning: Мазохист и FTW объединены! Этот режим [c/FF0000:чрезвычайно] сложный!! Продолжайте на свой страх и риск!
 	MasochistOff: Режим Мазохиста деактивирован.
 	BloodMoonCancel: Кровавая луна передумала и ушла...
+	ShiftingSands: Пески двигаются под вашими ногами...
 }
 
 Revived: Вы были возрождены!
@@ -19,4 +20,4 @@ NoDLC1: Мы обнаружили, что вы включили мод Fargo's S
 NoDLC2: Мы рекомендуем использовать мод "Fargo's Souls DLC" для совместимости и контента для этих модов!
 Wiki: Официальная вики Fargo's, теперь на [c/3989FF:https://fargosmods.wiki.gg]!
 PatreonNameEffect: Ваши специальные эффекты Patreon включены
-MoonsDeathPenalty: Прогресс события регрессировала!
+MoonsDeathPenalty: Прогресс события регрессировал!

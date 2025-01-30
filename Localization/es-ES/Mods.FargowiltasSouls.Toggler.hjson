@@ -12,7 +12,7 @@
 // PearlwoodRainbowEffect: Pearlwood Rainbow Trail
 // TimberEffect: Concise Timber Force
 // EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
-// AdamantiteEffect: Adamantite Projectile Splitting
+// AdamantiteEffect: Adamantite Speed and Spread
 // CobaltEffect: Cobalt Hit Explosion
 // AncientCobaltEffect: Ancient Cobalt Explosion Jump
 // MythrilEffect: Mythril Weapon Speed
@@ -27,7 +27,8 @@
 // LeadPoisonEffect: Lead Poison
 // SilverEffect: Silver Parry
 // TinEffect: Tin Crits
-// TungstenEffect: Tungsten Effect
+// TungstenEffect: Tungsten Size
+// TungstenShockwaveEffect: Tungsten Shockwave
 // ObsidianProcEffect: Obsidian Explosions
 // AshWoodFireballs: Ash Fireballs
 // TerraLightningEffect: Concise Terra Force
@@ -53,8 +54,9 @@
 // NatureHeader: "{$Mods.FargowiltasSouls.Items.NatureForce.DisplayName}"
 // ChloroMinion: Chlorophyte Leaf Crystal
 // CrimsonEffect: Crimson Healing
-// RainUmbrellaEffect: Rain Umbrella
+// RainUmbrellaEffect: Umbrella Shield
 // RainInnerTubeEffect: Inner Tube
+// RainFeatherfallEffect: Umbrella Featherfall
 // SnowEffect: Freezing Snowballs
 // JungleJump: Jungle Jump and Spores
 // JungleDashEffect: Jungle Dash
@@ -75,6 +77,7 @@
 // SpookyEffect: Spooky Scythes
 // NinjaEffect: Ninja Speed
 // CrystalAssassinDash: Crystal Assassin Dash
+// CrystalDiagonalDash: Diagonal Dash
 // ShadowForceDashEffect: Shadow Dash
 // ShadowForceEffect: Concise Death Force
 // SpiritHeader: "{$Mods.FargowiltasSouls.Items.SpiritForce.DisplayName}"
@@ -89,13 +92,13 @@
 // MeteorMomentumEffect: Meteor Speed
 // MeteorEffect: Meteor Strike
 // MeteorTrailEffect: Meteor Spark Trail
-// NebulaEffect: Nebula Boosters
+// NebulaEffect: Nebula Blazes
 // SolarEffect: Solar Shield & Dash
-// SolarFlareEffect: Inflict Solar Flare
+// SolarFlareEffect: Solar Flare
 // StardustMinionEffect: Stardust Guardian
 // VortexEffect: Vortex Laser
 // CosmosMoonEffect: Cosmic Moons
-// CosmosForceEffect: Concise Cosmo Force
+// CosmoForceEffect: Concise Cosmo Force
 // DeviEnergyHeader: Eternity Mode Accessories
 // DeerSinewEffect: Deer Sinew Dash
 // ZephyrJump: Fart Jump
@@ -121,7 +124,7 @@
 // RainbowHealEffect: Auto-Use Healing Potions
 // NymphPerfumeEffect: Attacks Spawn Hearts
 // SqueakEffect: Squeaky Toy On Hit
-// WretchedPouchEffect: Wretched Hex Install
+// WretchedPouchEffect: Wretched Shadowflame
 // ClippedEffect: Inflict Clipped Wings
 // WyvernBalls: Flight Light Orbs
 // TribalCharmClickBonus: Tribal Charm Click Bonus
@@ -142,17 +145,19 @@
 // DeerclawpsEffect: Deerclawps Spike Dash Trail
 // DreadShellEffect: Dread Shell Parry
 // ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
-// CultistMinionEffect: Cultist Minion
 // PlantMinionEffect: Plantera Minion
 // LihzahrdGroundPound: Lihzahrd Fastfall
 // LihzahrdBoulders: Ground Pound Spray
 // CelestialRuneAttacks: Celestial Rune Support
+// CelestialRuneOnhit: Ancient Visions On Hit
+// MinionsDeactivatedEffect: Disabled Minion Effects for Damage
 // HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 // PrecisionSealHurtbox: Reduced Hurtbox Size
 // PumpkingsCapeEffect: Pumpking's Cape Parry
 // IceQueenGraze: Graze
 // UfoMinionEffect: Saucer Minion
 // ChalicePotionEffect: Free Potion Buffs
+// MasoTrueEyeMinion: True Eye Minions
 // MutantArmorHeader: True Mutant Armor
 // MasoAbom: Abominationn Minion
 // MasoRing: Phantasmal Ring Minion
@@ -179,7 +184,7 @@
 // FlightMasteryGravity: Amplified Gravity
 // JumpsDisabled: Disable All Jumps
 // SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
-// RunSpeed: Higher Base Run Speede
+// RunSpeed: Higher Base Run Speed
 // NoMomentum: No Momentum
 // SupersonicTabi: Tabi Dash
 // SupersonicClimbing: Tiger Climbing Gear
@@ -195,8 +200,8 @@
 // TrawlerGel: Volatile Gelatin
 // EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 // EternityTin: Eternity Crit Effect Stacking
-// the pets are no longer existing in game
 // PetHeader: Pets
+// the pets are no longer existing in game
 // PetDinoConfig: Dino Pet
 // PetEaterConfig: Eater Pet
 // PetFaceMonsterConfig: Face Monster Pet

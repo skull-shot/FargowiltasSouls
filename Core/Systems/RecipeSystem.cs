@@ -223,12 +223,14 @@ namespace FargowiltasSouls.Core.Systems
                     recipe.DisableDecraft();
 
                 // disable pre-evil meteorite recipes
+                /*
                 if (recipe.HasIngredient(ItemID.MeteoriteBar))
                 {
                     LocalizedText desc = Language.GetText($"Mods.FargowiltasSouls.Conditions.PostEvilEternity");
                     Condition c = new(desc, () => WorldSavingSystem.EternityMode && Condition.DownedEowOrBoc.IsMet());
                     recipe.AddCondition(c);
                 }
+                */
             }
         }
     }

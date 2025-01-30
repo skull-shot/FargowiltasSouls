@@ -55,26 +55,6 @@ namespace FargowiltasSouls
         /// <param name="texture">The texture to set</param>
         public static void SetShaderTexture2(this MiscShaderData shader, Asset<Texture2D> texture) => shaderTextureField2.SetValue(shader, texture);
 
-        /// <summary>
-        /// Prepares a <see cref="SpriteBatch"/> for shader-based drawing.
-        /// </summary>
-        /// <param name="spriteBatch">The sprite batch.</param>
-        public static void EnterShaderRegion(this SpriteBatch spriteBatch)
-        {
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-        }
-
-        /// <summary>
-        /// Ends changes to a <see cref="SpriteBatch"/> based on shader-based drawing in favor of typical draw begin states.
-        /// </summary>
-        /// <param name="spriteBatch">The sprite batch.</param>
-        public static void ExitShaderRegion(this SpriteBatch spriteBatch)
-        {
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-        }
-
         public static void SetTexture1(this Texture2D texture) => Main.instance.GraphicsDevice.Textures[1] = texture;
 
         public static void SetTexture2(this Texture2D texture) => Main.instance.GraphicsDevice.Textures[2] = texture;
@@ -114,8 +94,7 @@ namespace FargowiltasSouls
 
             if (additiveTrail)
             {
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
             }
             for (int i = 0; i < trailLength.Value; i++)
             {
@@ -134,8 +113,7 @@ namespace FargowiltasSouls
             GenericProjectileDraw(projectile, lightColor, texture);
             if (additiveTrail && alsoAdditiveMainSprite)
             {
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                Main.spriteBatch.ResetToDefault();
             }
         }
         public static string EmptyTexture => "FargowiltasSouls/Content/Projectiles/Empty";

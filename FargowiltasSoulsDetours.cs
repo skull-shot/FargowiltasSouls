@@ -1,21 +1,19 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace FargowiltasSouls
 {
@@ -23,18 +21,15 @@ namespace FargowiltasSouls
     {
         public void LoadDetours()
         {
-
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
             On_Item.AffixName += AffixName;
-            On_Player.ItemCheck_Shoot += InterruptShoot;
-            On_PlayerDrawLayers.DrawPlayer_27_HeldItem += DrawSwordsCorrectly;
+            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
         }
-
-        
-
         public void UnloadDetours()
         {
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
@@ -42,8 +37,8 @@ namespace FargowiltasSouls
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
             On_Item.AffixName -= AffixName;
-            On_Player.ItemCheck_Shoot -= InterruptShoot;
-            On_PlayerDrawLayers.DrawPlayer_27_HeldItem -= DrawSwordsCorrectly;
+            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -74,27 +69,7 @@ namespace FargowiltasSouls
 
             return true;
         }
-        private void DrawSwordsCorrectly(On_PlayerDrawLayers.orig_DrawPlayer_27_HeldItem orig, ref PlayerDrawSet drawinfo)
-        {
-            //if (SwordGlobalItem.IsBroadsword(drawinfo.heldItem))
-            //{
-            //    Asset<Texture2D> t = TextureAssets.Item[drawinfo.heldItem.type];
-            //    Main.EntitySpriteDraw(t.Value, drawinfo.Position, )
-            //}
-            orig(ref drawinfo);
-        }
-        private void InterruptShoot(On_Player.orig_ItemCheck_Shoot orig, Player self, int i, Item sItem, int weaponDamage)
-        {
-            
-            if (SwordGlobalItem.IsBroadsword(sItem) && sItem.TryGetGlobalItem<SwordGlobalItem>(out SwordGlobalItem sword) && !sword.VanillaShoot)
-            {
-                SwordPlayer mplayer = self.GetModPlayer<SwordPlayer>();
 
-                mplayer.shouldShoot = true;
-                return;
-            }
-            orig(self, i, sItem, weaponDamage);
-        }
         private void AddBuff(
             Terraria.On_Player.orig_AddBuff orig,
             Player self, int type, int timeToAdd, bool quiet, bool foodHack)
@@ -163,6 +138,28 @@ namespace FargowiltasSouls
                 text = text.ArticlePrefixAdjustmentString(soulsItem.Articles.ToArray());
             }
             return text;
+        }
+        public static void TargetClosestBetsy(On_NPCUtils.orig_TargetClosestBetsy orig, NPC searcher, bool faceTarget = true, Vector2? checkPosition = null)
+        {
+            if (searcher.TypeAlive(NPCID.DD2Betsy) && searcher.TryGetGlobalNPC(out Betsy betsy) && betsy.TargetPlayer)
+            {
+                NPCUtils.TargetClosestCommon(searcher, faceTarget, checkPosition);
+                return;
+            }
+            orig(searcher, faceTarget, checkPosition);
+        }
+        public static void MouseText_DrawItemTooltip_GetLinesInfo(On_Main.orig_MouseText_DrawItemTooltip_GetLinesInfo orig, Item item, ref int yoyoLogo, ref int researchLine, float oldKB, ref int numLines, string[] toolTipLine, bool[] preFixLine, bool[] badPreFixLine, string[] toolTipNames, out int prefixlineIndex)
+        {
+            DrawingTooltips = true;
+            orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames, out prefixlineIndex);
+            DrawingTooltips = false;
+        }
+        public static void HorsemansBlade_SpawnPumpkin(On_Player.orig_HorsemansBlade_SpawnPumpkin orig, Player self, int npcIndex, int dmg, float kb)
+        {
+            NPC npc = Main.npc[npcIndex];
+            if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode  && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
+                return;
+            orig(self, npcIndex, dmg, kb);
         }
     }
 }

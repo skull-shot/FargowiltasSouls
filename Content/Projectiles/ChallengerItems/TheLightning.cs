@@ -13,9 +13,9 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Melee;
 
-            Projectile.usesIDStaticNPCImmunity = false;
-            Projectile.idStaticNPCHitCooldown = 0;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = false;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 20;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         float collideHeight;

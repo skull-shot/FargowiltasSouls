@@ -60,6 +60,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Nerf;
 
                 case ItemID.BrainOfConfusion:
+                    if (ModLoader.HasMod("CalamityMod"))
+                        return EModeChange.None;
                     balanceTextKeys = ["BrainOfConfusion"];
                     return EModeChange.Nerf;
 
@@ -83,6 +85,9 @@ namespace FargowiltasSouls.Content.Items
                         return EModeChange.Nerf;
                     }
 
+                case ItemID.ChlorophyteBullet:
+                    balanceTextKeys = ["ChlorophyteBullet"];
+                    return EModeChange.Nerf;
 
                 case ItemID.VampireKnives:
                     balanceTextKeys = ["VampireKnives"];
@@ -99,6 +104,11 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.CoinGun:
                     balanceTextKeys = ["CoinGun"];
+                    return EModeChange.Nerf;
+
+                case ItemID.Starfury:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
                     return EModeChange.Nerf;
 
                 case ItemID.StarCannon:
@@ -141,7 +151,12 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.75f;
+                    balanceNumber = 0.9f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TheHorsemansBlade:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.12f;
                     return EModeChange.Nerf;
 
                 case ItemID.Uzi:
@@ -149,12 +164,17 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.88f;
                     return EModeChange.Nerf;
 
+                case ItemID.BeeGun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
                 case ItemID.MagicDagger:
                     {
                         if (!Main.hardMode)
                         {
                             balanceTextKeys = ["Damage", "Speed"];
-                            balanceNumber = 0.65f;
+                            balanceNumber = 0.5f;
                             return EModeChange.Nerf;
                         }
                         return EModeChange.None;
@@ -172,11 +192,12 @@ namespace FargowiltasSouls.Content.Items
                         return EModeChange.None;
                     }
 
-
+                    /*
                 case ItemID.FetidBaghnakhs:
                     balanceTextKeys = ["Speed"];
                     balanceNumber = 0.75f;
                     return EModeChange.Nerf;
+                    */
 
                 case ItemID.MoonlordTurretStaff:
                     balanceTextKeys = ["Damage"];
@@ -221,6 +242,31 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
+                case ItemID.MonkStaffT2: //ghastly glaive
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.55f;
+                    return EModeChange.Buff;
+
+                case ItemID.MonkStaffT1: // sleepy octopod
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.7f;
+                    return EModeChange.Buff;
+
+                case ItemID.MonkStaffT3: //sky dragon fury
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.4f;
+                    return EModeChange.Buff;
+
+                case ItemID.BookStaff: // tome of inf wisdom
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.1f;
+                    return EModeChange.Buff;
+
+                case ItemID.DD2SquireDemonSword: // brand of inferno
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
                 case ItemID.PumpkinMoonMedallion:
                     balanceNumber = PumpkinMoonBosses.WAVELOCK;
                     if (WorldSavingSystem.MasochistModeReal)
@@ -249,6 +295,7 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.CrossNecklace:
                     balanceTextKeys = ["CrossNecklaceNerf"];
                     return EModeChange.Nerf;
+
                 case ItemID.StarCloak:
                 case ItemID.StarVeil:
                 case ItemID.BeeCloak:
@@ -338,6 +385,58 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["SniperRifle"];
                     return EModeChange.Buff;
 
+                case ItemID.ChlorophyteSaber:
+                    balanceTextKeys = ["Damage", "ChlorophyteSaber"];
+                    balanceNumber = 1.25f;
+                    return EModeChange.Buff;
+
+                case ItemID.Gladius:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.25f;
+                    return EModeChange.Buff;
+                    
+                case ItemID.GolemFist:
+                    balanceTextKeys = ["GolemFist"];
+                    return EModeChange.Buff;
+
+                case ItemID.JackOLanternLauncher:
+                    balanceTextKeys = ["JackOLanternLauncher"];
+                    return EModeChange.Buff;
+
+                case ItemID.Stynger:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.MoltenFury:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.LaserMachinegun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.ChargedBlasterCannon:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
+                case ItemID.FireworksLauncher: //celebration mk1
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.SnowmanCannon:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TempestStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Nerf;
                 default:
                     return EModeChange.None;
             }
@@ -478,6 +577,10 @@ namespace FargowiltasSouls.Content.Items
             if (item.prefix >= PrefixID.Hard && item.prefix <= PrefixID.Warding)
             {
                 ItemBalance(tooltips, EModeChange.Neutral, "DefensePrefix" + (Main.hardMode ? "_HM" : ""));
+            }
+            if (item.prefix >= PrefixID.Wild && item.prefix <= PrefixID.Violent)
+            {
+                ItemBalance(tooltips, EModeChange.Neutral, "ViolentPrefix");
             }
             //else if (item.CountsAsClass(DamageClass.Summon))
             //{

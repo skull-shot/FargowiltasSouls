@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             BionomicCluster.PassiveEffect(player, Item);
             AshWoodEnchant.PassiveEffect(player);
 
-            player.FargoSouls().CanAmmoCycle = true;
+            player.AddEffect<AmmoCycleEffect>(Item);
 
             player.FargoSouls().WoodEnchantDiscount = true;
 
@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //UNIVERSE
             modPlayer.UniverseSoul = modPlayer.UniverseSoulBuffer = true;
-            modPlayer.UniverseCore = true;
+            //modPlayer.UniverseCore = true;
             player.GetDamage(DamageClass.Generic) += 2.5f;
             player.AddEffect<UniverseSpeedEffect>(Item);
             player.maxMinions += 20;

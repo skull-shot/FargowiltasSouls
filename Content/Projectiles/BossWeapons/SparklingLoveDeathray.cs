@@ -59,11 +59,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            if (Projectile.localAI[0] == 0f)
-            {
-                SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
-                //SoundEngine.PlaySound(SoundID.Zombie104, Projectile.Center);
-            }
             float num801 = 0.5f;
             Projectile.localAI[0] += 1f;
             if (Projectile.localAI[0] >= maxTime)

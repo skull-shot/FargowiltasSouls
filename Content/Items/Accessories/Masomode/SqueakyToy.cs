@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             if (!lastLMouse && Main.mouseLeft)
             {
-                FargoSoulsPlayer.Squeak(player.Center);
+                FargoSoulsPlayer.Squeak(player.Center, 0.25f);
             }
             lastLMouse = Main.mouseLeft;
         }

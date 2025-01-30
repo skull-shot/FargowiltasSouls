@@ -1,8 +1,10 @@
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Content.UI.Elements;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -22,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
         public override void SetDefaults()
         {
-            Item.damage = 280;
+            Item.damage = 158;
             Item.mana = 22;
             Item.DamageType = DamageClass.Magic;
             Item.width = 20;
@@ -61,15 +63,17 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
                 {
                     Vector2 vel = Vector2.Normalize(Main.MouseWorld - player.Center).RotatedByRandom(MathHelper.Pi / 32) * Item.shootSpeed;
                     Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Top + Vector2.UnitY * 8, vel, Item.shoot, (int)(player.ActualClassDamage(DamageClass.Magic) * Item.damage), Item.knockBack, player.whoAmI);
-                    player.velocity -= vel;
+                    player.velocity -= vel * 0.8f;
                 }
                 if (Charges >= 6)
                 {
                     SoundEngine.PlaySound(SoundID.Item68, player.Center);
                 }
-                player.reuseDelay = 45;
+                player.reuseDelay = 20;
                 Charges = 0;
             }
+            if (Charges > 0 && player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("RoseTintedVisorCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/RoseTintedVisor").Value, Color.Pink, () => (float)Charges / 6f, true, 60, () => Main.LocalPlayer.HeldItem == Item);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

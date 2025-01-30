@@ -32,7 +32,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.AddEffect<SlimeFallEffect>(Item);
 
-            player.FargoSouls().SlimyShieldItem = Item;
+            if (player.AddEffect<SlimyShieldEffect>(Item))
+                player.FargoSouls().SlimyShieldItem = Item;
         }
     }
     public class SlimeFallEffect : AccessoryEffect

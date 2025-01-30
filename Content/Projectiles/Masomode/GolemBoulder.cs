@@ -163,14 +163,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
             Color color26 = Color.Orange * Projectile.Opacity * 0.75f;
             if (recolor)
-                color26 = Color.Gray * Projectile.Opacity * 0.75f;
+                color26 = Color.LightGray * Projectile.Opacity * 0.75f;
             color26.A = 20;
 
             for (float i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 0.5f)
             {
                 Color color27 = color26;
                 float fade = (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                color27 *= fade * fade;
+                color27 *= fade;
                 int max0 = (int)i - 1;//Math.Max((int)i - 1, 0);
                 if (max0 < 0)
                     continue;
@@ -178,6 +178,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Vector2 center = Vector2.Lerp(Projectile.oldPos[(int)i], Projectile.oldPos[max0], 1 - i % 1);
                 center += Projectile.Size / 2;
                 Main.EntitySpriteDraw(texture, center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, spriteEffects, 0);
+            }
+
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 3f;
+                Color glowColor = color26;
+
+                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) + afterimageOffset, rectangle, glowColor, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0f);
             }
 
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);

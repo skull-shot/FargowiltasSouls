@@ -11,7 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             // DisplayName.SetDefault("The Blender");
-            // Tooltip.SetDefault("'The reward for slaughtering many...'");
+            // Tooltip.SetDefault("'The reward for a mighty rematch...'");
 
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "绞肉机");
             //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励...'");
@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 512;
+            Item.damage = 340;
 
             Item.value = Item.sellPrice(0, 25);
             Item.rare = ItemRarityID.Purple;

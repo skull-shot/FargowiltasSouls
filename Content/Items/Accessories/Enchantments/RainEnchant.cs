@@ -38,8 +38,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<RainUmbrellaEffect>(item);
             player.AddEffect<RainInnerTubeEffect>(item);
             player.AddEffect<RainWetEffect>(item);
+            player.AddEffect<LightningImmunity>(item);
         }
-
+        public override void UpdateVanity(Player player)
+        {
+            player.AddEffect<LightningImmunity>(Item);
+        }
+        public override void UpdateInventory(Player player)
+        {
+            player.AddEffect<LightningImmunity>(Item);
+        }
         public override void AddRecipes()
         {
             CreateRecipe()
@@ -65,14 +73,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!player.HasBuff(ModContent.BuffType<RainCDBuff>()))
             {
                 player.FargoSouls().AddMinion(EffectItem(player), true, ModContent.ProjectileType<RainUmbrella>(), 0, 0);
-
-                if (!player.controlDown && !player.HasEffect<NatureEffect>())
+                if (!player.controlDown && player.HasEffect<RainFeatherfallEffect>() && !player.HasEffect<NatureEffect>())
                 {
                     player.slowFall = true;
                 }
             }
         }
     }
+    public class RainFeatherfallEffect : AccessoryEffect
+    {
+        public override int ToggleItemType => ModContent.ItemType<RainEnchant>();
+        public override Header ToggleHeader => Header.GetHeader<NatureHeader>();
+    }
+
     public class RainWetEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
@@ -90,5 +103,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.hasFloatingTube = true;
             player.canFloatInWater = true;
         }
+    }
+    public class LightningImmunity : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
     }
 }

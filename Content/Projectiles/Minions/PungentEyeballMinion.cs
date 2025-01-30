@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -77,6 +78,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     Projectile.localAI[0]++;
                     if (player.FargoSouls().MasochistSoul)
                         Projectile.localAI[0] += 2;
+
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("FleshLumpMinionCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/LumpOfFlesh").Value, Color.DarkRed, () => Projectile.localAI[0] / (chargeTime * 2f), displayAtFull: true, activeFunction: Projectile.Alive);
                 }
                 if (Projectile.localAI[0] == chargeTime)
                 {

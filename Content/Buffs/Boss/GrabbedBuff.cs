@@ -23,15 +23,7 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 
             fargoPlayer.Mash = true;
 
-            player.controlUseItem = false;
-            player.controlUseTile = false;
-            player.controlHook = false;
-            player.RemoveAllGrapplingHooks();
-            player.releaseHook = true;
-            if (player.mount.Active)
-                player.mount.Dismount(player);
-            //fargoPlayer.Stunned = true;
-            fargoPlayer.NoUsingItems = 2;
+            player.Incapacitate();
         }
     }
 }

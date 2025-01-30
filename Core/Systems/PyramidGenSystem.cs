@@ -14,11 +14,14 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class PyramidGenSystem : ModSystem
     {
+        public static bool ShouldGenerateArena => !ModLoader.HasMod("Remnants");
         public override void Load()
         {
             On_WorldGen.Pyramid += OnPyramidGen;
             On_WorldGen.PlaceTile += OnPlaceTile;
             On_WorldGen.CanKillTile_int_int_refBoolean += OnCanKillTile;
+            On_Player.PickWall += OnPickWall;
+            On_WorldGen.KillWall += OnKillWall;
         }
         public override void Unload()
         {
@@ -34,7 +37,7 @@ namespace FargowiltasSouls.Core.Systems
         public static bool OnPyramidGen(On_WorldGen.orig_Pyramid orig, int i, int j)
         {
             bool ret = orig(i, j);
-            if (ret)
+            if (ret && ShouldGenerateArena)
             {
                 if (PyramidLocation == Point.Zero)
                 {
@@ -55,6 +58,18 @@ namespace FargowiltasSouls.Core.Systems
             if (FargoGlobalTile.SolidTile(x, y) && CoffinProtectionActive(x, y))
                 ret = false;
             return ret;
+        }
+        public static void OnPickWall(On_Player.orig_PickWall orig, Player player, int x, int y, int damage)
+        {
+            if (CoffinProtectionActive(x, y))
+                return;
+            orig(player, x, y, damage);
+        }
+        public static void OnKillWall(On_WorldGen.orig_KillWall orig, int i, int j, bool fail = false)
+        {
+            if (CoffinProtectionActive(i, j))
+                return;
+            orig(i, j, fail);
         }
         // Tile protection with this is done in FargoGlobalTile.
         public static bool CoffinProtectionActive(int x, int y) => !WorldGen.generatingWorld && !WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.CursedCoffin] && CoffinArena.PaddedRectangle.Contains(x, y);
@@ -99,11 +114,11 @@ namespace FargowiltasSouls.Core.Systems
             double worldSizeXMod = (double)Main.maxTilesX / 4200.0;
             DunesBiome dunesBiome = GenVars.configuration.CreateBiome<DunesBiome>();
             bool success = false;
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 Point dunePoint = Point.Zero;
                 int huh = 0; // what's up with this variable. it's very strange.
-                for (int j = 0; j < 10000; j++)
+                for (int j = 0; j < 1000; j++)
                 {
                     dunePoint = WorldGen.RandomWorldPoint(0, 500, 0, 500);
                     bool nearJungle = Math.Abs(dunePoint.X - GenVars.jungleOriginX) < (int)(600.0 * worldSizeXMod);
@@ -144,8 +159,8 @@ namespace FargowiltasSouls.Core.Systems
                 }
                    
             }
-            if (!success)
-                throw new Exception("Fargo's Souls: Pyramid position could not be correctly designated. Post a bug report in Fargo's Mods Discord and provide this world's seed and your modlist.");
+            //if (!success)
+            //    throw new Exception("Fargo's Souls: Pyramid position could not be correctly designated. Post a bug report in Fargo's Mods Discord and provide this world's seed and your modlist.");
 
         }
         // Rummages through the world until it finds a valid spot for a Pyramid
@@ -228,6 +243,8 @@ namespace FargowiltasSouls.Core.Systems
         public bool SaveDrunkWorldGen;
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
+            if (!ShouldGenerateArena)
+                return;
             // Find index of Dunes pass
             int dunesIndex = tasks.FindIndex(g => g.Name == "Dunes");
             // After Dunes pass, generate a Dunes biome and designate a Pyramid spot if no pyramid spot was designated
@@ -264,20 +281,17 @@ namespace FargowiltasSouls.Core.Systems
             // Generate Cursed Coffin arena right after Pyramid pass
             tasks.Insert(pyramidIndex + 1, new PassLegacy("CursedCoffinArena", (progress, config) =>
             {
-                if (!ModLoader.HasMod("Remnants")) // don't do this if remnants is enabled, because it's not compatible. instead use item that spawns the arena if you have remnants
+                progress.Message = "Burying a sarcophagus";
+                if (PyramidLocation == Point.Zero)
                 {
-                    progress.Message = "Burying a sarcophagus";
-                    if (PyramidLocation == Point.Zero)
-                    {
-                        Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
-                        int x = undergroundDesertLocation.Center.X;
-                        int y = undergroundDesertLocation.Top - 10;
-                        WorldGen.Pyramid(x, y);
-                    }
-                    if (PyramidLocation != Point.Zero)
-                    {
-                        CoffinArena.Generate(PyramidLocation);
-                    }
+                    Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
+                    int x = undergroundDesertLocation.Center.X;
+                    int y = undergroundDesertLocation.Top - 10;
+                    WorldGen.Pyramid(x, y);
+                }
+                if (PyramidLocation != Point.Zero)
+                {
+                    CoffinArena.Generate(PyramidLocation);
                 }
             }));
         }

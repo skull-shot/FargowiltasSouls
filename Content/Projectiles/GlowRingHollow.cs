@@ -1,14 +1,20 @@
+using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.Champions.Life;
 using FargowiltasSouls.Content.Bosses.Champions.Terra;
+using FargowiltasSouls.Content.Bosses.Lifelight;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -219,28 +225,17 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
-                case 11: //retinazer aura
+                case 11: //lifelight crystalline tell
                     {
-                        color = Color.Red;
-
-                        if (Projectile.localAI[0] > maxTime / 2) //NEVER fade normally
-                            Projectile.localAI[0] = maxTime / 2;
-
-                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], NPCID.Retinazer);
+                        color = Color.DeepPink;
+                        maxTime = 30;
+                        alphaModifier = 3;
+                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[2], ModContent.NPCType<LifeChallenger>());
                         if (npc != null)
                         {
                             Projectile.Center = npc.Center;
-                            radius = 2000 - 1200 * npc.GetGlobalNPC<Retinazer>().AuraRadiusCounter / 180f;
-                            if (WorldSavingSystem.MasochistModeReal)
-                                radius *= 0.75f;
-                            if (radius == 2000)
-                                Projectile.localAI[0] = -1;
                         }
-                        else
-                        {
-                            Projectile.Kill();
-                            return;
-                        }
+                        radius = Projectile.ai[1] * (float)Math.Sqrt(Math.Sin(Math.PI / 2 * Projectile.localAI[0] / maxTime));
                     }
                     break;
 
@@ -340,9 +335,14 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Projectile.ai[0] == 6) // destroyer telegraph
+            {
+                DrawDestroyerTelegraph();
+                return false;
+            }
             //spriteBatch.End(); spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
             int num156 = texture2D13.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
@@ -351,6 +351,42 @@ namespace FargowiltasSouls.Content.Projectiles
 
             //spriteBatch.End(); spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             return false;
+        }
+        public void DrawDestroyerTelegraph()
+        {
+            bool recolor = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
+            Color color = Color.DeepSkyBlue;
+            if (!recolor)
+                color = Color.Red;
+
+            Vector2 auraPos = Projectile.Center;
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            float radius = texture.Width * Projectile.scale / 2;
+
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return;
+            var maxOpacity = 0.3f * Projectile.Opacity * (Main.mouseTextColor / 255f) * 0.9f;
+
+            ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.DestroyerCircleTelegraph");
+            borderShader.TrySetParameter("colorMult", 7.35f);
+            borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            borderShader.TrySetParameter("radius", radius);
+            borderShader.TrySetParameter("anchorPoint", auraPos);
+            borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+            borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+            borderShader.TrySetParameter("maxOpacity", maxOpacity);
+            borderShader.TrySetParameter("color", color.ToVector4());
+
+            Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
         }
     }
 }

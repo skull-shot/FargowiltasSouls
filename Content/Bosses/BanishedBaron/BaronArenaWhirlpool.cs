@@ -179,21 +179,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     {
                         if (OutsideRangex2)
                         {
-                            player.controlLeft = false;
-                            player.controlRight = false;
-                            player.controlUp = false;
-                            player.controlDown = false;
-                            player.controlUseItem = false;
-                            player.controlUseTile = false;
-                            player.controlJump = false;
-                            player.controlHook = false;
-                            if (player.grapCount > 0)
-                                player.RemoveAllGrapplingHooks();
-                            if (player.mount.Active)
-                                player.mount.Dismount(player);
+                            player.Incapacitate();
                             player.velocity.X = 0f;
                             //player.velocity.Y = -0.4f;
-                            player.FargoSouls().NoUsingItems = 2;
                         }
 
                         Vector2 movement = new(location.X - player.Center.X, 0);

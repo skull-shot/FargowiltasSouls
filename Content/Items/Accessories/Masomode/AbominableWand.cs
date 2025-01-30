@@ -124,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 vel.Normalize();
                 vel *= 27f;
 
-                int dam = 150;
+                int dam = 300;
                 if (modPlayer.MutantEyeItem != null)
                     dam *= 3;
 

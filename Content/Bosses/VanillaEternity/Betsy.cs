@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public bool DroppedSummon;
 
+        public bool TargetPlayer = false;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -42,6 +43,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bitWriter.WriteBit(DoFuryRingAttack);
             bitWriter.WriteBit(InFuryRingAttackCooldown);
             bitWriter.WriteBit(InPhase2);
+            bitWriter.WriteBit(TargetPlayer);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -51,6 +53,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             DoFuryRingAttack = bitReader.ReadBit();
             InFuryRingAttackCooldown = bitReader.ReadBit();
             InPhase2 = bitReader.ReadBit();
+            TargetPlayer = bitReader.ReadBit();
         }
 
         public override void SetDefaults(NPC npc)
@@ -63,8 +66,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             EModeGlobalNPC.betsyBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return true;
+            TargetPlayer = true;
 
             //npc.boss = npc.HasPlayerTarget || !DD2Event.Ongoing; //allow players to respawn in mp if everyone is dead during event
 
@@ -242,7 +244,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (FuryRingTimer % 2 == 0)
                     return false;
             }
-
             if (!DD2Event.Ongoing && npc.HasPlayerTarget && (!Main.player[npc.target].active || Main.player[npc.target].dead || npc.Distance(Main.player[npc.target].Center) > 3000))
             {
                 int p = Player.FindClosest(npc.Center, 0, 0); //extra despawn code for when summoned outside event

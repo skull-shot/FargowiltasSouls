@@ -1,5 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Souls;
+using Microsoft.Xna.Framework;
+using System.Reflection;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
@@ -28,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Misc
         public abstract void PickupEffect(BoosterPlayer boosterPlayer);
         public override bool OnPickup(Player player)
         {
-            //SoundEngine.PlaySound(SoundID.Grab, Item.position);
+            SoundEngine.PlaySound(SoundID.Grab, Item.position);
             PickupEffect(player.GetModPlayer<BoosterPlayer>());
             return false;
         }
@@ -36,10 +39,19 @@ namespace FargowiltasSouls.Content.Items.Misc
         {
             grabRange += 100;
         }
+        public static MethodInfo PullItem_PickupMethod
+        {
+            get;
+            set;
+        }
+        public override void Load()
+        {
+            PullItem_PickupMethod = typeof(Player).GetMethod("PullItem_Pickup", LumUtils.UniversalBindingFlags);
+        }
         public override bool GrabStyle(Player player)
         {
             object[] args = [Item, 12f, 5];
-            typeof(Player).GetMethod("PullItem_Pickup", LumUtils.UniversalBindingFlags).Invoke(player, args);
+            PullItem_PickupMethod.Invoke(player, args);
             return true;
         }
         public override Color? GetAlpha(Color lightColor)
@@ -55,6 +67,7 @@ namespace FargowiltasSouls.Content.Items.Misc
             if (boosterPlayer.SolarTimer <= 0)
                 CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Activate", 15), true);
             boosterPlayer.SolarTimer = LunarDuration;
+            boosterPlayer.Player.AddBuff(ModContent.BuffType<SolarBuff>(), LunarDuration);
         }
     }
     public class VortexBooster : Booster
@@ -66,6 +79,7 @@ namespace FargowiltasSouls.Content.Items.Misc
             if (boosterPlayer.VortexTimer <= 0)
                 CombatText.NewText(boosterPlayer.Player.Hitbox, Color.LightCyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.VortexBooster.Activate", 25), true);
             boosterPlayer.VortexTimer = LunarDuration;
+            boosterPlayer.Player.AddBuff(ModContent.BuffType<VortexBuff>(), LunarDuration);
         }
     }
     public class NebulaBooster : Booster
@@ -77,6 +91,7 @@ namespace FargowiltasSouls.Content.Items.Misc
             if (boosterPlayer.NebulaTimer <= 0)
                 CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Activate", 5), true);
             boosterPlayer.NebulaTimer = LunarDuration;
+            boosterPlayer.Player.AddBuff(ModContent.BuffType<NebulaBuff>(), LunarDuration);
         }
     }
     public class StardustBooster : Booster
@@ -88,11 +103,13 @@ namespace FargowiltasSouls.Content.Items.Misc
             if (boosterPlayer.StardustTimer <= 0)
                 CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.StardustBooster.Activate", 25), true);
             boosterPlayer.StardustTimer = LunarDuration;
+            boosterPlayer.Player.AddBuff(ModContent.BuffType<StardustBuff>(), LunarDuration);
         }
     }
     #endregion
 
     #region Terraria Soul
+    /*
     public class TimberBooster : Booster // damage
     {
         public override int Frames => 6;
@@ -183,5 +200,6 @@ namespace FargowiltasSouls.Content.Items.Misc
             boosterPlayer.CosmosTimer = TerrariaDuration;
         }
     }
+    */
     #endregion
 }

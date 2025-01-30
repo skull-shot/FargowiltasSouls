@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -114,7 +115,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                     if (++player.ownedProjectileCounts[scytheType] >= MAX_SCYTHES)
                     {
                         if (!Main.dedServ)
-                            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/FullMeter"), player.Center);
+                            SoundEngine.PlaySound(FargosSoundRegistry.StyxCharge, player.Center);
                     }
                 }
             }

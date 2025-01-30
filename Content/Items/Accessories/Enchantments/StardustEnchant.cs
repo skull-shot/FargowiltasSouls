@@ -1,10 +1,13 @@
 ﻿
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -14,6 +17,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class StardustEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<StardustEffect>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -69,6 +74,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class StardustEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<StardustEnchant>();
         public const int TIMESTOP_DURATION = 60 * 6;
         public override void PostUpdateEquips(Player player)
         {
@@ -150,6 +157,33 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             npc.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
                     }
                 }
+            }
+        }
+
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (player.HasEffect<StardustEffect>() && !player.HasBuff(ModContent.BuffType<TimeStopCDBuff>()))
+            {
+                int cooldownInSeconds = 90;
+                if (modPlayer.ForceEffect<StardustEnchant>())
+                    cooldownInSeconds = 75;
+                if (modPlayer.TerrariaSoul)
+                    cooldownInSeconds = 60;
+                if (modPlayer.Eternity)
+                    cooldownInSeconds = 30;
+                player.ClearBuff(ModContent.BuffType<TimeFrozenBuff>());
+                for (int i = 0; i < Main.maxPlayers; i++)
+                {
+                    if (Main.player[i] != null && Main.player[i].Alive())
+                        Main.player[i].AddBuff(ModContent.BuffType<TimeStopCDBuff>(), cooldownInSeconds * 60);
+                }
+
+
+                modPlayer.FreezeTime = true;
+                modPlayer.freezeLength = TIMESTOP_DURATION;
+
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), player.Center);
             }
         }
     }

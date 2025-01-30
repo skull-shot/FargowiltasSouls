@@ -1,12 +1,15 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
@@ -29,6 +32,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            // magilumi lighting
+            DelegateMethods.v3_1 = new Vector3(0.9f, 0.8f, 0.5f);
+            Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
+            Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
             AddEffects(player, Item);
         }
         public static void AddEffects(Player player, Item item)
@@ -48,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.StarCannon)
             .AddIngredient(ItemID.Magiluminescence)
             .AddIngredient(ItemID.PlaceAbovetheClouds)
-
+            .AddCondition(Condition.DownedEowOrBoc)
             .AddTile(TileID.DemonAltar)
             .Register();
         }
@@ -128,10 +135,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
 
             bool forceEffect = modPlayer.ForceEffect<MeteorEnchant>();
-            int damage = forceEffect ? 400 : 90;
+            int damage = forceEffect ? 400 : 70;
             modPlayer.MeteorCD = Cooldown;
-            CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
-                () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
+
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
+                
+                    () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
 
             Vector2 pos = new(player.Center.X + Main.rand.NextFloat(-1000, 1000), player.Center.Y - 1000);
             Vector2 vel = new(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(8, 12));
@@ -141,16 +151,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //can retarget better at them, but dont aim meteors upwards
             Vector2 predictive = Main.rand.NextFloat(10f, 30f) * target.velocity;
             pos.X += predictive.X;
-            Vector2 targetPos = target.Center + predictive;
+            Vector2 targetPos = target.Center;
             if (pos.Y < targetPos.Y)
             {
-                Vector2 accurateVel = vel.Length() * pos.SafeDirectionTo(targetPos);
-                vel = Vector2.Lerp(vel, accurateVel, 0.9f);
+                vel = FargoSoulsUtil.PredictiveAim(pos, targetPos, target.velocity / 3, 12f);
             }
-            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ThrowShort"), pos);
+            SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort, pos);
 
             int force = forceEffect ? 1 : 0;
-            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), FargoSoulsUtil.HighestDamageTypeScaling(player, damage), 0.5f, player.whoAmI, force);
+            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 0.5f, player.whoAmI, force);
         }
     }
 }

@@ -18,11 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeChalDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public static readonly SoundStyle ScreechSound1 = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Challengers/Lifelight/LifelightScreech1") with { Volume = 1.5f };
-        public static readonly SoundStyle DashSound1 = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Challengers/Lifelight/LifelightDash") with { Volume = 1.5f };
-        public static readonly SoundStyle DashSound2 = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Challengers/Lifelight/LifelightPixieDash") with { Volume = 1.5f };
-        public static readonly SoundStyle RuneSound1 = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Challengers/Lifelight/LifelightRuneSound") with { Volume = 1.5f };
-        public static readonly SoundStyle TelegraphSound1 = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Challengers/Lifelight/LifelightShotPrep") with { Volume = 1.5f };
 
         public PixelationPrimitiveLayer LayerToRenderTo => PixelationPrimitiveLayer.AfterProjectiles;
 

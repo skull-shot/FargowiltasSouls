@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[0] = 1;
                 Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
-                SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+
             }
 
             if (++Projectile.frameCounter >= 3)

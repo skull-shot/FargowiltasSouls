@@ -89,9 +89,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             EModeGlobalNPC.deerBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return result;
-
             const int MaxBerserkTime = 600;
 
             BerserkSpeedupTimer -= 1;
@@ -172,10 +169,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             {
                                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 
-                                SpawnFreezeHands(npc);
+                                SpawnFreezeHands(npc, Main.player[npc.target]);
                             }
 
                             npc.alpha += 5;
+                            if (WorldSavingSystem.SwarmActive)
+                                npc.alpha -= 2;
                             if (npc.alpha > 255)
                             {
                                 npc.alpha = 255;
@@ -399,7 +398,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             && Main.player[npc.target].Bottom.Y < npc.Top.Y - 16 * 5)
                         {
                             //freeze them and drag them down
-                            SpawnFreezeHands(npc);
+                            SpawnFreezeHands(npc, Main.player[npc.target]);
                         }
                     }
                     break;
@@ -437,15 +436,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             return result;
         }
 
-        static void SpawnFreezeHands(NPC npc)
+        public static void SpawnFreezeHands(Entity source, Player targetPlayer)
         {
             if (FargoSoulsUtil.HostCheck)
             {
                 const int max = 12;
                 for (int i = 0; i < 12; i++)
                 {
-                    Vector2 spawnPos = Main.player[npc.target].Center + 16 * Main.rand.NextFloat(6, 36) * Vector2.UnitX.RotatedBy(MathHelper.TwoPi / max * (i + Main.rand.NextFloat()));
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<DeerclopsHand>(), 0, 0f, Main.myPlayer, npc.target);
+                    Vector2 spawnPos = targetPlayer.Center + 16 * Main.rand.NextFloat(6, 36) * Vector2.UnitX.RotatedBy(MathHelper.TwoPi / max * (i + Main.rand.NextFloat()));
+                    Projectile.NewProjectile(source.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<DeerclopsHand>(), 0, 0f, Main.myPlayer, targetPlayer.whoAmI);
                 }
             }
         }

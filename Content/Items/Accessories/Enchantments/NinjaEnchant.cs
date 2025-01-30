@@ -29,17 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<NinjaEffect>(Item);
-        }
-
-        public static void NinjaSpeedSetup(FargoSoulsPlayer modPlayer, Projectile projectile, FargoSoulsGlobalProjectile globalProj)
-        {
-            Player player = modPlayer.Player;
-            float maxSpeedRequired = modPlayer.ForceEffect<NinjaEnchant>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
-            if (player.velocity.Length() < maxSpeedRequired)
-            {
-                const int speedIncrease = 1;
-                globalProj.NinjaSpeedup = projectile.extraUpdates + speedIncrease;
-            }
+            player.AddEffect<NinjaDamageEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -60,5 +50,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<NinjaEnchant>();
+    }
+    public class NinjaDamageEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
     }
 }

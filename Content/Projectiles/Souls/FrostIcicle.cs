@@ -28,6 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.timeLeft = 2;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
+            Projectile.DamageType = DamageClass.Magic;
 
             Projectile.FargoSouls().CanSplit = false;
         }

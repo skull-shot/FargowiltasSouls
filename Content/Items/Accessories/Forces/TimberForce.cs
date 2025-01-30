@@ -66,8 +66,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public class TimberEffect : AccessoryEffect
         {
-            public override Header ToggleHeader => Header.GetHeader<TimberHeader>();
-            public override int ToggleItemType => ModContent.ItemType<TimberForce>();
+            public override Header ToggleHeader => null;
+            //public override int ToggleItemType => ModContent.ItemType<TimberForce>();
         }
     }
 }

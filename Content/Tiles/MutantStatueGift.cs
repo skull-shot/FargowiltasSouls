@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -14,6 +16,7 @@ namespace FargowiltasSouls.Content.Tiles
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
+            TileID.Sets.HasOutlines[Type] = true;
             Main.tileNoAttach[Type] = true;
             TileID.Sets.PreventsTileRemovalIfOnTopOfIt[Type] = true;
 
@@ -35,6 +38,10 @@ namespace FargowiltasSouls.Content.Tiles
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = ModContent.ItemType<Items.Masochist>();
         }
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
+        {
+            return true;
+        }
         public override bool RightClick(int i, int j)
         {
 
@@ -46,6 +53,16 @@ namespace FargowiltasSouls.Content.Tiles
             i += 1;
             j += 2;
             WorldGen.KillTile(i, j, noItem: true);
+
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+                ModPacket packet = Mod.GetPacket();
+
+                packet.Write((byte)FargowiltasSouls.PacketID.DropMutantGift);
+                packet.Write(i);
+                packet.Write(j);
+                packet.Send();
+            }
 
             return true;
         }
@@ -59,14 +76,17 @@ namespace FargowiltasSouls.Content.Tiles
             i += 1;
             j += 2;
 
-            Item.NewItem(new EntitySource_TileBreak(i, j - 1), i * 16, j * 16, 48, 48, ModContent.ItemType<Items.Masochist>());
             WorldGen.PlaceTile(i, j, ModContent.TileType<MutantStatue>());
+        }
+        public override IEnumerable<Item> GetItemDrops(int i, int j)
+        {
+            yield return new Item(ModContent.ItemType<Items.Masochist>());
         }
         public override void NumDust(int i, int j, bool fail, ref int num)
         {
             num = 0;
         }
-        public override bool CanDrop(int i, int j) => false;
+        //public override bool CanDrop(int i, int j) => false;
 
     }
 }

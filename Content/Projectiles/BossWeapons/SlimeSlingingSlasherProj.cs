@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public ref float ItemTime => ref Projectile.ai[0];
         public ref float FreezeTime => ref Projectile.ai[1];
@@ -58,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             target.AddBuff(BuffID.Slimed, 120);
             SoundEngine.PlaySound(SoundID.Item17);
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<Slimesplosion>(), damageDone, 1f, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<Slimesplosion>(), 0, 1f, Projectile.owner);
 
             FreezeTime = 4;
         }
@@ -66,11 +67,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             void SlimeProjs(Player player)
             {
-                for (int i = -7; i < 7; i++)
+                if (Main.myPlayer == Projectile.owner)
                 {
-                    int j = i * Projectile.direction;
-                    Vector2 vel = (Projectile.rotation + MathHelper.PiOver2 * j / 10f).ToRotationVector2() * 20f;
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.originalDamage, Projectile.knockBack, player.whoAmI);
+                    for (int i = -7; i < 7; i++)
+                    {
+                        int j = i * Projectile.direction;
+                        Vector2 vel = (Projectile.rotation + MathHelper.PiOver2 * j / 10f).ToRotationVector2() * 20f;
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), player.RotatedRelativePoint(player.MountedCenter, true) + Vector2.Normalize(vel) * Projectile.height * (1f), vel, ModContent.ProjectileType<SlimeBallHoming>(), Projectile.damage / 2, Projectile.knockBack, player.whoAmI);
+                    }
                 }
                 ProjectileCheck = 1;
             }
@@ -109,6 +113,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if (animProgress < 0.2f && !FirstSwing)
                     flip = true;
                 Projectile.ResetLocalNPCHitImmunity();
+                Projectile.damage = player.GetWeaponDamage(player.HeldItem);
+                Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
             }
             else if (progress < firstSwingEnd)
             {
@@ -140,6 +146,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     flip = true;
                 Swinging = false;
                 Projectile.ResetLocalNPCHitImmunity();
+                Projectile.damage = player.GetWeaponDamage(player.HeldItem);
+                Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -46,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     BeeSwarm();
                     if (Projectile.ai[2] == 1) // life force
                     {
-                        Main.LocalPlayer.FargoSouls().LifeBeetleDuration = 60 * 10;
+                        Main.LocalPlayer.AddBuff(ModContent.BuffType<AmbrosiaBuff>(), 60 * 6);
                         Main.LocalPlayer.wingTime = Main.LocalPlayer.wingTimeMax;
                         Main.LocalPlayer.FargoSouls().HealPlayer(10);
                     }
@@ -78,6 +79,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 if (p != Main.maxProjectiles)
                 {
                     Main.projectile[p].DamageType = Projectile.DamageType;
+                    Main.projectile[p].usesLocalNPCImmunity = true;
+                    Main.projectile[p].localNPCHitCooldown = 15;
                     if (Projectile.ai[2] == 1)
                         Main.projectile[p].extraUpdates = 10;
                 }

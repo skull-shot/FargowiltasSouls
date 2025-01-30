@@ -1,4 +1,8 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using Fargowiltas.Items.Summons.SwarmSummons.Energizers;
+using Fargowiltas.Items.Tiles;
+using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
+using FargowiltasSouls.Content.Projectiles.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -13,7 +17,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             // DisplayName.SetDefault("Destruction Cannon");
-            // Tooltip.SetDefault("Becomes longer and faster with up to 5 empty minion slots\n'The reward for slaughtering many...'");
+            // Tooltip.SetDefault("Becomes longer and faster with up to 5 empty minion slots\n'The reward for a mighty rematch...'");
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "毁灭者之枪 EX");
             //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励...'");
         }
@@ -47,11 +51,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(null, "DestroyerGun")
-            .AddIngredient(null, "AbomEnergy", 10)
-            .AddIngredient(ModContent.Find<ModItem>("Fargowiltas", "EnergizerDestroy"))
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
-
+            .AddIngredient<DestroyerGun>()
+            .AddIngredient<AbomEnergy>(10)
+            .AddIngredient<EnergizerDestroy>()
+            .AddTile<CrucibleCosmosSheet>()
             .Register();
         }
     }

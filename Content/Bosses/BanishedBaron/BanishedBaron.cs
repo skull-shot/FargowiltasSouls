@@ -1,4 +1,5 @@
 ﻿
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -11,6 +12,7 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
+using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -34,9 +36,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
     public class BanishedBaron : ModNPC
     {
         Player player => Main.player[NPC.target];
-
-        public static readonly SoundStyle BaronRoar = new("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronRoar");
-        public static readonly SoundStyle BaronYell = new("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronYell");
+        public LoopedSoundInstance ThrusterLoop;
 
         #region Variables
         public enum StateEnum //ALL states
@@ -276,7 +276,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             target.AddBuff(BuffID.Rabies, 60 * 10);
             target.FargoSouls().MaxLifeReduction += 50;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 30);
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 20);
         }
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
@@ -327,9 +327,6 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             //Unused: 8-10
             //P2 Normal fly loop: 11-16 (Anim 0)
             //P2 Open mouth: 17-18 (Anim 1)
-            bool ftw = Main.getGoodWorld;
-            if (ftw)
-                Phase = 0;
 
             double fpf = 60 / (10 * AnimationSpeed); //  60/fps
             int StartFrame = 0;
@@ -497,7 +494,25 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             return base.PreAI();
         }
         public override void AI()
-        {
+        {   
+
+            if (Phase == 2)
+            {
+                ThrusterLoop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.BaronThrusterLoop, () =>
+                {
+                    return !NPC.active || State == (int)StateEnum.DeathAnimation;
+                });
+
+                ThrusterLoop?.Update(NPC.Center, sound =>
+                {
+                    sound.Volume = 0.8f;
+                });
+            }
+
+
+
+
+
             if (State == (int)StateEnum.DeathAnimation)
             {
                 //un-duke your fishron
@@ -751,8 +766,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
             if (Timer == 60)
             {
-                SoundEngine.PlaySound(SoundID.Item21, NPC.Center);
-                SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                //SoundEngine.PlaySound(SoundID.Item21, NPC.Center);
+                //SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -24);
@@ -769,7 +784,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         void Phase2Transition()
         {
-
+            HitPlayer = false;
             const int transTime = 150;
             //comedy rotation anim to look at falling propeller
             if (Timer < 60)
@@ -790,15 +805,15 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
             if (Timer == 1)
             {
-                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronHit"), NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronHit, NPC.Center);
 
                 HitPlayer = false;
                 LockVector1 = Vector2.UnitX * Math.Sign(player.Center.X - NPC.Center.X); //register for rotation animation
-
+                Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;
             }
             if (Timer == 45)
             {
-                SoundEngine.PlaySound(SoundID.DD2_KoboldExplosion, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronPropellerEject with {Volume = 64}, NPC.Center);
                 Vector2 propellerPos = NPC.Center - NPC.rotation.ToRotationVector2() * (NPC.width * 0.25f);
                 if (!Main.dedServ)
                 {
@@ -832,11 +847,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             if (Timer == transTime)
             {
                 NPC.velocity = NPC.rotation.ToRotationVector2() * 20;
-                SoundEngine.PlaySound(BaronYell, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronYell, NPC.Center);
                 Phase = 2;
                 FargoSoulsUtil.ClearHostileProjectiles(2, NPC.whoAmI);
-
-                Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;
 
             }
             if (Timer > transTime)
@@ -864,7 +877,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         void DeathAnimation()
         {
             const int AnimTime = 200;
-
+            HitPlayer = false;
             Main.musicFade[Main.curMusic] = (float)Utils.Lerp(1f, 0.3f, Timer / AnimTime);
             NPC.velocity *= 0.96f;
             Trail = 8;
@@ -1036,7 +1049,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Anim = 0;
             if (Timer == 30)
             {
-                SoundEngine.PlaySound(SoundID.Item61, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeShoot, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = NPC.rotation.ToRotationVector2() * 10f;
@@ -1103,7 +1116,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == 40)
             {
-                SoundEngine.PlaySound(BaronYell, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronYell, NPC.Center);
 
             }
             if (Timer > 60)
@@ -1252,7 +1265,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 NPC.Opacity = 1;
                 NPC.dontTakeDamage = false;
-                SoundEngine.PlaySound(BaronRoar, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronDashP1, NPC.Center);
 
                 NPC.velocity = NPC.rotation.ToRotationVector2() * (baseSpeed + extraSpeed);
 
@@ -1303,6 +1316,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     }
                 }
             }
+            /*
             if ((Timer == 90 + ReactionTime + 15 || Timer == 90 + ReactionTime + 30) && WorldSavingSystem.EternityMode && AI3 != 1)
             {
                 SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
@@ -1313,6 +1327,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 3, player.whoAmI, trackingPower); //ai2 is tracking power, above 1 is pseudo-predictive
                 }
             }
+            */
             if (Timer > 90 + ReactionTime + 30 && NPC.velocity.Length() < 1.5f)
             {
                 NPC.noTileCollide = false;
@@ -1333,7 +1348,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 AI2 = Math.Sign(NPC.Center.X - player.Center.X);
                 LockVector1 = player.Center + new Vector2(Xstart * AI2, 0);
-                SoundEngine.PlaySound(BaronYell, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronDashP1, NPC.Center);
                 NPC.netUpdate = true;
             }
             if (AI3 == 0)
@@ -1464,7 +1479,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == ReactTime - 5) //slight telegraph sound to be cute
             {
-                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronShine") with {Variants = [1, 2, 3], Volume = 0.5f }, NPC.Center);
             }
             if (Timer < ReactTime - 5) //stop aligning 5 frames before dashing
             {
@@ -1499,9 +1514,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 }
                 if (NPC.Distance(player.Center) < 200)
                     NPC.velocity -= NPC.SafeDirectionTo(player.Center);
-
                 LockVector1 = FargoSoulsUtil.PredictiveAim(NPC.Center, player.Center, player.velocity, PredictStr);
-                Vector2 dir = Vector2.Lerp(NPC.rotation.ToRotationVector2(), Vector2.Normalize(LockVector1), 0.2f);
+                Vector2 dir = Vector2.Lerp(NPC.rotation.ToRotationVector2(), Vector2.Normalize(LockVector1), 0.115f);
                 NPC.rotation = dir.ToRotation();
 
                 //LockVector1 = NPC.SafeDirectionTo(player.Center + (player.velocity * PredictStr)) * PredictStr;
@@ -1515,7 +1529,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == ReactTime)
             {
-                SoundEngine.PlaySound(BaronRoar, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronDashP2, NPC.Center);
                 Trail = 8;
                 NPC.velocity = NPC.rotation.ToRotationVector2() * PredictStr;
                 Vector2 uv = Vector2.Normalize(NPC.velocity);
@@ -1561,7 +1575,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Timer == ReactTime + 90 && WorldSavingSystem.EternityMode)
             {
-                SoundEngine.PlaySound(BaronRoar, NPC.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.BaronDashP2, NPC.Center);
                 NPC.velocity = NPC.rotation.ToRotationVector2() * PredictStr * 1.2f;
 
             }
@@ -1586,7 +1600,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             if (AI3 == 0) //startup, reach starting point
             {
                 float x = Xstart * AI2;
-                LockVector1 = player.Center + new Vector2(x, -YMin);
+                LockVector2 = player.Center;
+                LockVector1 = LockVector2 + new Vector2(x, -YMin);
                 NPC.rotation = NPC.SafeDirectionTo(LockVector1).ToRotation();
                 if (NPC.velocity.Length() < 30 + player.velocity.Length())
                 {
@@ -1598,6 +1613,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 if (NPC.Distance(LockVector1) < 25)
                 {
                     AI3 = 1; //reached point, start attack
+                    NPC.netUpdate = true;
                 }
             }
             if (AI3 > 0) //arc attack
@@ -1616,7 +1632,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Vector2 curve = Curve(prog);
                 Vector2 dydx = Curve(prog + 0.00001f) - curve;
                 NPC.rotation = dydx.ToRotation();
-                LockVector1 = player.Center + curve;
+                LockVector1 = LockVector2 + curve;
                 NPC.velocity = LockVector1 - NPC.Center;
                 AI3++;
 
@@ -1634,7 +1650,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 if (prog >= 1)
                 {
                     AI3 = -1; //end attack, start next part
-                    SoundEngine.PlaySound(BaronYell, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronYell, NPC.Center);
                 }
             }
             if (AI3 < 0) //home into player after arc
@@ -1674,9 +1690,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         void P2RocketStorm()
         {
-            const int distance = 500;
+            const int distance = 620;
             float rotModifier = 1;
-            float minRot = 0.5f;
+            float minRot = 0.2f;
             if (Timer == 1)
             {
                 AI2 = Math.Sign(NPC.Center.X - player.Center.X);
@@ -1711,7 +1727,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
                 }
                 */
-                Movement(target, 30f, 2f);
+                Movement(target, 16f, 1.2f);
                 if (Timer > 2)
                 {
                     Timer = 2;
@@ -1723,14 +1739,39 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 Movement(target, 20f, 0.75f);
             }
 
-
             if (AI3 != 0 && Timer < 300)
             {
 
-                bool volleyTime = (Timer > 40 && Timer < 100) || (Timer > 140 && Timer < 200) || (Timer > 240 && Timer < 300);
+                bool volleyTime = (Timer > 30 && Timer < 70) || (Timer > 85 && Timer < 125) || (Timer > 140 && Timer < 180);
+                bool volleyTimeReal = (Timer == 35 || Timer == 90 || Timer == 145);
                 if (volleyTime)
                 {
                     Anim = 1;
+                    if (volleyTimeReal)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            int bothSides = (Timer > 140) ? -2 : 0; // third barrage fires from both sides
+                            for (int j = 1; j > bothSides; j -= 2)
+                            {
+                                for (int i = 0; i < 7; i++)
+                                {
+                                    int side = (Timer > 70 && Timer < 140) ? -1 : 1;
+                                    side *= j;
+                                    float minspeed = (Timer > 140) ? 14f : 3f;
+                                    float speed = Main.rand.NextFloat(minspeed, 32);
+    
+                                    Vector2 vel = NPC.rotation.ToRotationVector2().RotatedBy(MathHelper.PiOver2 * side).RotatedByRandom(MathHelper.Pi / 8) * speed;
+                                    float trackingPower = WorldSavingSystem.MasochistModeReal ? 1 : 1;
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + (Vector2.Normalize(vel) * 20), vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 5, player.whoAmI, trackingPower); //ai2 is tracking power
+                                }
+                            }
+     
+                        }
+                            
+                    }
+                    /*
                     if (Timer % 8 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.Item64, NPC.Center);
@@ -1743,6 +1784,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + (Vector2.Normalize(vel) * 20), vel, ModContent.ProjectileType<BaronRocket>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, player.whoAmI, trackingPower); //ai2 is tracking power
                         }
                     }
+                    */
                 }
                 else
                 {
@@ -1751,11 +1793,11 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 //fire rockets
             }
 
-            if (Timer > 300)
+            if (Timer > 200)
             {
                 Anim = 0;
             }
-            if (Timer > 310)
+            if (Timer > 210)
             {
                 NPC.velocity = Vector2.Zero;
                 StateReset();
@@ -1817,7 +1859,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     NPC.rotation += Main.rand.NextFloat(-MathHelper.PiOver2 * 0.04f, MathHelper.PiOver2 * 0.04f);
                     if (Math.Abs(AI2) == rotStart)
                     {
-                        SoundEngine.PlaySound(BaronYell, NPC.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.BaronYell, NPC.Center);
                     }
                 }
                 else //prepare for dash and dash
@@ -1827,7 +1869,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     RotateTowards(player.Center, 6f);
                     if (Math.Abs(AI2) > dashStart + reactTime)
                     {
-                        SoundEngine.PlaySound(BaronRoar, NPC.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.BaronRoar, NPC.Center);
                         SoundEngine.PlaySound(SoundID.Item14, NPC.Center);
                         NPC.velocity = NPC.rotation.ToRotationVector2() * DashSpeed;
                         AI3 = -1;
@@ -2108,7 +2150,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 HitPlayer = true;
                 if (WorldSavingSystem.EternityMode)
                 {
-                    SoundEngine.PlaySound(SoundID.Item61, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeShoot, NPC.Center);
                     if (FargoSoulsUtil.HostCheck)
                     {
                         Vector2 vel = NPC.rotation.ToRotationVector2() * 10f;
@@ -2141,7 +2183,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 NPC.velocity *= 0.8f;
                 if (Timer == PositioningTime)
                 {
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronLaserTelegraph") with { Volume = 1.25f }, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronLaserTelegraph with { Volume = 1.25f }, NPC.Center);
                     AI3 = Main.rand.NextBool() ? 1 : -1; //sign for rotation
                     LockVector1 = (player.Center - NPC.Center).RotatedBy(AI3 * MaxRot);
                     if (FargoSoulsUtil.HostCheck)
@@ -2176,7 +2218,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
                     AI4 = FargoSoulsUtil.RotationDifference(NPC.rotation.ToRotationVector2(), (player.Center - NPC.Center)); //cache rotation direction towards player
 
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronLaserSound_Slow") with { Pitch = -0.2f }, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronLaserSoundSlow with { Pitch = -0.2f }, NPC.Center);
                     if (FargoSoulsUtil.HostCheck)
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.rotation.ToRotationVector2(), ModContent.ProjectileType<BaronDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai0: NPC.whoAmI, ai2: AttackTime);
@@ -2235,7 +2277,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             AI2 = 0;
             AI3 = 0;
         }
-        void RandomizeState() //it's done this way so it cycles between attacks in a random order: for increased variety
+        void RandomizeState() // cycles between attacks in a random order: for increased variety
         {
             int index;
             if (availablestates.Count < 1)

@@ -26,19 +26,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPCID.Sets.SpecificDebuffImmunity[Type] = NPCID.Sets.SpecificDebuffImmunity[NPCID.QueenSlimeBoss];
 
             NPCID.Sets.BossBestiaryPriority.Add(NPC.type);
-        }
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-        {
-            bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(
-                   ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[NPCID.QueenSlimeBoss],
-                   quickUnlock: true
-               );
-            bestiaryEntry.Info.AddRange([
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
-                new FlavorTextBestiaryInfoElement($"Mods.FargowiltasSouls.Bestiary.{Name}")
-            ]);
+            this.ExcludeFromBestiary();
         }
 
         public override void SetDefaults()

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -160,7 +161,16 @@ namespace FargowiltasSouls.Core.Globals
                     if (Main.player[npc.target].ZoneJungle)
                         npc.AddBuff(BuffID.Poisoned, 2, true);
                 }
+
+
+
+                //if (!npc.boss && !npc.friendly && Main.SceneMetrics.EnoughTilesForSnow)
+                //{
+                //    npc.AddBuff(ModContent.BuffType<FrozenBuff>(), 3600);
+                //}
             }
+
+            
 
             return true;
         }
@@ -188,7 +198,6 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
-
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
             if (WorldSavingSystem.EternityMode)
@@ -258,6 +267,8 @@ namespace FargowiltasSouls.Core.Globals
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
 
             bool bossCanSpawn = WorldSavingSystem.MasochistModeReal && !spawnInfo.Player.HasEffect<SinisterIconEffect>() && !LumUtils.AnyBosses();
+
+
 
             //MASOCHIST MODE
             if (WorldSavingSystem.EternityMode)
@@ -345,8 +356,8 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (noBiome && NPC.downedBoss3)
                                 pool[NPCID.DarkCaster] = .02f;
-                            if (noBiome && (!pool.ContainsKey(NPCID.RockGolem) || pool[NPCID.RockGolem] < 0.03f))
-                                pool[NPCID.RockGolem] = 0.03f;
+                            if (noBiome && (!pool.ContainsKey(NPCID.RockGolem) || pool[NPCID.RockGolem] < 0.01f))
+                                pool[NPCID.RockGolem] = 0.01f;
                                 
                         }
 
@@ -463,8 +474,8 @@ namespace FargowiltasSouls.Core.Globals
                             if (noInvasion && !oldOnesArmy && bossCanSpawn)
                             {
                                 pool[NPCID.Clown] = 0.01f;
-                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.02f)
-                                    pool[NPCID.Werewolf] = 0.02f;
+                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.005f)
+                                    pool[NPCID.Werewolf] = 0.005f;
                             }
                                 
 
@@ -1495,7 +1506,20 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }*/
-
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            bool ret = base.CanHitPlayer(npc, target, ref cooldownSlot);
+            if (!WorldSavingSystem.EternityMode)
+                return ret;
+            if (npc.type is NPCID.Sharkron or NPCID.Sharkron2)
+            {
+                int halfwidth = npc.width / 2;
+                Vector2 dir = npc.velocity.SafeNormalize(Vector2.Zero);
+                if (!Collision.CheckAABBvLineCollision(target.position, target.Size, npc.Center - dir * halfwidth, npc.Center + dir * halfwidth))
+                    return false;
+            }
+            return ret;
+        }
         public static void CustomReflect(NPC npc, int dustID, int ratio = 1)
         {
             float distance = 2f * 16;

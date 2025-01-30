@@ -1,5 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
+using System.Security.Principal;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -25,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             if (npc.ai[0] == 5)
             {
                 int ritual = (int)npc.ai[2];
+                ritual = FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)npc.ai[2], ProjectileID.CultistRitual);
                 if (ritual > -1 && ritual < Main.maxProjectiles && Main.projectile[ritual].active && Main.projectile[ritual].type == ProjectileID.CultistRitual)
                 {
                     Projectile.Center = Main.projectile[ritual].Center;

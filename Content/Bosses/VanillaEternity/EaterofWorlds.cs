@@ -1,3 +1,5 @@
+using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption;
 using FargowiltasSouls.Content.Projectiles.Masomode;
@@ -5,7 +7,9 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Humanizer;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -14,6 +18,7 @@ using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -75,8 +80,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (WorldSavingSystem.SwarmActive)
-                return base.CheckDead(npc);
 
             int count = 0;
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -92,9 +95,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
+            if (npc.lifeRegen >= 0)
+                return;
+            npc.lifeRegen /= 3;
             damage /= 3;
             if (UseMassDefense)
+            {
                 damage /= 10;
+                npc.lifeRegen /= 10;
+            }
         }
 
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
@@ -111,11 +120,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (EaterofWorldsHead.HaveSpawnDR > 0)
                 modifiers.FinalDamage /= projectile.numHits + 1;
+
+            if (projectile.FargoSouls().IsAHeldProj)
+                modifiers.FinalDamage *= 0.6f;
         }
 
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            if (!FargoSoulsUtil.IsSummonDamage(projectile) && projectile.damage > 5)
+            if (!FargoSoulsUtil.IsSummonDamage(projectile) && projectile.damage > 5 && !projectile.FargoSouls().IsAHeldProj)
                 projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.8);
 
             base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
@@ -144,6 +156,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int FlamethrowerCDOrUTurnStoredTargetX;
 
         public int SpecialAITimer;
+        public int SpecialAITimer2;
         public static int SpecialCountdownTimer;
 
         public int UTurnTotalSpacingDistance;
@@ -157,6 +170,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static int CoilRadius => WorldSavingSystem.MasochistModeReal ? 500 : 600;
         public bool Coiling => Attack == (int)Attacks.Coil && SpecialAITimer < CoilDiveTime;
 
+        public int VileSpitLockoutDuration;
+
         public static int CursedFlameTimer;
         public static int HaveSpawnDR;
 
@@ -166,6 +181,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool DroppedSummon;
 
         public int NoSelfDestructTimer = 15;
+
+        public float CoilBorderOpacity = 0f;
 
         public enum Attacks
         {
@@ -182,10 +199,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(UTurnTotalSpacingDistance);
             binaryWriter.Write7BitEncodedInt(UTurnIndividualSpacingPosition);
             binaryWriter.Write7BitEncodedInt(SpecialAITimer);
+            binaryWriter.Write7BitEncodedInt(SpecialAITimer2);
             binaryWriter.Write7BitEncodedInt(SpecialCountdownTimer);
             binaryWriter.Write7BitEncodedInt(CursedFlameTimer);
             binaryWriter.Write7BitEncodedInt(Attack);
             binaryWriter.Write7BitEncodedInt(CoilSpinDirection);
+            binaryWriter.Write7BitEncodedInt(VileSpitLockoutDuration);
             binaryWriter.Write(CoilDesiredRotation);
             binaryWriter.WriteVector2(CoilCenter);
             bitWriter.WriteBit(DoTheWave);
@@ -199,10 +218,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             UTurnTotalSpacingDistance = binaryReader.Read7BitEncodedInt();
             UTurnIndividualSpacingPosition = binaryReader.Read7BitEncodedInt();
             SpecialAITimer = binaryReader.Read7BitEncodedInt();
+            SpecialAITimer2 = binaryReader.Read7BitEncodedInt();
             SpecialCountdownTimer = binaryReader.Read7BitEncodedInt();
             CursedFlameTimer = binaryReader.Read7BitEncodedInt();
             Attack = binaryReader.Read7BitEncodedInt();
             CoilSpinDirection = binaryReader.Read7BitEncodedInt();
+            VileSpitLockoutDuration = binaryReader.Read7BitEncodedInt();
             CoilDesiredRotation = binaryReader.ReadSingle();
             CoilCenter = binaryReader.ReadVector2();
             DoTheWave = bitReader.ReadBit();
@@ -227,17 +248,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.eaterBoss = npc.whoAmI;
             FargoSoulsGlobalNPC.boss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return true;
-
-            if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 3000)
+            if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 6000)
             {
                 npc.velocity.Y += 0.25f;
                 if (npc.timeLeft > 120)
                     npc.timeLeft = 120;
             }
 
+
             //if (eaterResist > 0 && npc.whoAmI == NPC.FindFirstNPC(npc.type)) eaterResist--;
+
+            if (VileSpitLockoutDuration > 0)
+                VileSpitLockoutDuration--;
 
             int firstEater = NPC.FindFirstNPC(npc.type);
 
@@ -480,14 +502,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case Attacks.Coil:
                     {
 
-                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 30 : 45; // time between dives
+                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 40 : 55; // time between dives
                         float spinSeconds = 3f; // seconds per full spin
 
                         float spinFrames = spinSeconds * 60f;
 
                         SpecialCountdownTimer = 350;
                         if (!Main.npc.Any(n => n.TypeAlive(npc.type) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling && n.Distance(CoilCenter) > CoilRadius + 100))
+                        {
                             SpecialAITimer++;
+                            SpecialAITimer2++;
+                        }
+                            
                         if (firstEater == npc.whoAmI)
                         {
                             if (firstEater == npc.whoAmI)
@@ -526,8 +552,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                 }
                             }
-
-                            if (SpecialAITimer > diveDelay && SpecialAITimer % diveDelay == 0)
+                            int diveTimer = SpecialAITimer2 + 25;
+                            if (diveTimer > diveDelay && diveTimer % diveDelay == 0)
                             {
                                 List<NPC> coilingHeads = [];
                                 for (int i = 0; i < Main.maxNPCs; i++)
@@ -546,6 +572,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                         diveNPC.velocity += Main.player[diveNPC.target].DirectionTo(diveNPC.Center) * 22f;
                                         diveNPC.GetGlobalNPC<EaterofWorldsHead>().SpecialAITimer = CoilDiveTime;
                                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, diveNPC.Center);
+                                        diveNPC.netUpdate = true;
+                                        NetSync(diveNPC);
                                     }
                                 }
                                 
@@ -566,14 +594,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             npc.velocity = Vector2.Lerp(npc.velocity, desiredVelocity, 0.2f);
 
                             CoilDesiredRotation += CoilSpinDirection * MathHelper.TwoPi / spinFrames;
+
+                            VileSpitLockoutDuration = 100;
                         }
                         else
                         {
-                            if (SpecialAITimer > CoilDiveTime + 100)
+                            if (SpecialAITimer > CoilDiveTime + 80)
                             {
                                 if (!Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling))
                                 {
                                     SpecialAITimer = 0;
+                                    SpecialAITimer2 = 0;
                                     SpecialCountdownTimer = 0;
                                     CoilDesiredRotation = 0;
                                     Attack = (int)Attacks.NormalPostCoil;
@@ -587,7 +618,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 {
                                     Vector2 vectorToIdlePosition = Main.player[npc.target].Center - npc.Center;
                                     float num = vectorToIdlePosition.Length();
-                                    float speed = 22f;
+                                    float speed = 32f;
                                     float inertia = 32f;
                                     float deadzone = 150f;
                                     if (num > deadzone)
@@ -603,7 +634,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                     if (num < deadzone)
                                     {
-                                        SpecialAITimer = CoilDiveTime + 100;
+                                        SpecialAITimer = CoilDiveTime + 80;
                                     }
                                 }
                             }
@@ -642,15 +673,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             // coil
                             int headCount = NPC.CountNPCS(npc.type);
-                            if (headCount > 1 || WorldSavingSystem.MasochistModeReal) // only do coil when it's split at least once
+                            if (headCount > 1) // only do coil when it's split at least once
                             {
-
                                 //initiate coil
-                                if (SpecialCountdownTimer > 350 && FargoSoulsUtil.HostCheck && Attack == (int)Attacks.Normal)
+                                if (SpecialCountdownTimer > 350 && Attack == (int)Attacks.Normal)
                                 {
-                                    if (npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) < 2400)
+                                    SoundEngine.PlaySound(SoundID.ForceRoarPitched, Main.player[npc.target].Center);
+                                    if (FargoSoulsUtil.HostCheck && npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) < 2400)
                                     {
-                                        SoundEngine.PlaySound(SoundID.ForceRoarPitched, Main.player[npc.target].Center);
                                         FargoSoulsUtil.ClearHostileProjectiles(2);
 
                                         Attack = (int)Attacks.Coil;
@@ -779,6 +809,64 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadBossHeadSprite(recolor, 2);
             LoadGoreRange(recolor, 24, 29);
         }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            int firstEater = NPC.FindFirstNPC(npc.type);
+
+            if (npc.whoAmI == firstEater && (Attacks)Attack == Attacks.Coil)
+            {
+                if (CoilBorderOpacity < 1)
+                    CoilBorderOpacity += 0.025f;
+            }
+            else if (CoilBorderOpacity > 0)
+                CoilBorderOpacity -= 0.025f;
+
+            if (CoilBorderOpacity > 0)
+            {
+                Color darkColor = Color.Magenta;
+                Color mediumColor = Color.MediumPurple;
+                Color lightColor2 = Color.Lerp(Color.Purple, Color.White, 0.35f);
+                float greyLerp = 0.3f;
+                darkColor = Color.Lerp(darkColor, Color.SlateGray, greyLerp);
+                mediumColor = Color.Lerp(mediumColor, Color.SlateGray, greyLerp);
+                lightColor2 = Color.Lerp(lightColor2, Color.SlateGray, greyLerp);
+
+                Vector2 auraPos = CoilCenter;
+                float radius = CoilRadius;
+                var target = Main.LocalPlayer;
+                var blackTile = TextureAssets.MagicPixel;
+                var diagonalNoise = FargosTextureRegistry.SmokyNoise;
+                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                    return false;
+                var maxOpacity = CoilBorderOpacity;
+
+                ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
+                borderShader.TrySetParameter("colorMult", 7.35f);
+                borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+                borderShader.TrySetParameter("radius", radius);
+                borderShader.TrySetParameter("anchorPoint", auraPos);
+                borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+                borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+                borderShader.TrySetParameter("playerPosition", target.Center);
+                borderShader.TrySetParameter("maxOpacity", maxOpacity);
+                borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
+                borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
+                borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
+                borderShader.TrySetParameter("opacityAmp", 1f * CoilBorderOpacity);
+
+                Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+                Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            }
+                
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
     }
 
     public class EaterofWorldsSegment : EModeNPCBehaviour
@@ -843,7 +931,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead) && eowHead.Coiling))
+            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead) && eowHead.VileSpitLockoutDuration > 0))
                 npc.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
         }
 

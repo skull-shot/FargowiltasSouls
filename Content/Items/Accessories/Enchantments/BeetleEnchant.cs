@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 Player.beetleDefense = true;
                 Player.beetleCounter += 1f;
-                int cap = modPlayer.TerrariaSoul ? 3 : 2;
+                int cap = modPlayer.TerrariaSoul || modPlayer.ForceEffect<BeetleEnchant>() ? 3 : 2;
                 int time = 180 * 3 / cap;
                 if (Player.beetleCounter >= time)
                 {
@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (Player.beetleCounter > num2 + num3 + num4 + num3)
                     Player.beetleCounter = num2 + num3 + num4 + num3;
-                if (modPlayer.TerrariaSoul && Player.beetleCounter > num2 + num3 + num4)
+                if ((modPlayer.TerrariaSoul || modPlayer.ForceEffect<BeetleEnchant>()) && Player.beetleCounter > num2 + num3 + num4)
                 {
                     Player.AddBuff(BuffID.BeetleMight3, 5, false);
                     beetles = 3;

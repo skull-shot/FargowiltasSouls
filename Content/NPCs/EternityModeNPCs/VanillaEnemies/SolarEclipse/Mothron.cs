@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SolarEcl
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-
             npc.knockBackResist *= 0.1f;
         }
 

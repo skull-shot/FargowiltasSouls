@@ -73,6 +73,24 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             int shrapnel = embeddedShrapnel.Count();
             if (shrapnel >= 15)
             {
+                if (Main.netMode == NetmodeID.SinglePlayer)
+                {
+                    foreach (Projectile proj in embeddedShrapnel)
+                    {
+                        proj.ai[1] = 2;
+                        proj.netUpdate = true;
+                    }
+                }
+                else
+                {
+                    // remember that this is target client side; we sync to server
+                    var netMessage = Mod.GetPacket();
+                    netMessage.Write((byte)FargowiltasSouls.PacketID.SyncTuskRip);
+                    netMessage.Write((byte)target.whoAmI);
+                    netMessage.Write((byte)player.whoAmI);
+                    netMessage.Send();
+                }
+
                 SoundEngine.PlaySound(SoundID.Item68, target.Center);
                 modifiers.FlatBonusDamage += 15 * Item.damage / 2.5f + (shrapnel * Item.damage / 6);
                 modifiers.SetCrit();

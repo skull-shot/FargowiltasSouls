@@ -109,6 +109,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.PearlwoodCritDuration <= 0)
                 return;
 
+            if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
+                return;
+
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {

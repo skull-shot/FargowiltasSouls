@@ -1,54 +1,34 @@
-SoulConfig: {
-	DisplayName: Конфигурация мода Souls
+ClientConfig: {
+	DisplayName: Конфигурация: Сторона клиента
 
 	Headers: {
 		Maso: Режим Вечность
-		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
+		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Patreon Items]"
 	}
 
 	HideTogglerWhenInventoryIsClosed: {
-		Label: Показывать Переключатель Эффектов только когда инвентарь открыт
-		Tooltip: Если включена, Переключатель Эффектов автоматически закрывается вместе с инвентарём.
+		Label: Показывать переключатель эффектов только при открытом инвентаре
+		Tooltip: Если включена, переключатель эффектов автоматически выключается когда инвентарь закрыт.
 	}
 
 	ItemDisabledTooltip: {
-		Label: Описания о Выключенных Эффектах
-		Tooltip: Если включена, у предметов с любыми эффектами, выключенными в Переключателе Эффектов, в описании появится строчка, говорящая об этом.
-	}
-
-	DeviChatter: {
-		Label: Чиби Деви может говорить
-		Tooltip: ""
+		Label: Описание о выключенном эффекте
+		Tooltip: Если включена, у предметов с любыми выключенными эффектами в описании будет строчка об этом.
 	}
 
 	ToggleSearchReset: {
-		Label: Меню Эффектов Аксессуаров выключает строку поиска при закрытии
+		Label: Полоска поиска меню переключателей эффектов перезапускается при закрытии
 		Tooltip: ""
 	}
 
-	BigTossMode: {
-		Label: Режим Большого Броска
-		Tooltip: ""
-	}
-
-	ForcedFilters: {
-		Label: Включать настройку Качества волн (игнорирует настройки игры)
-		Tooltip: Необходимо для корректной работы некоторых визуальных эффектов.
-	}
-
-	BossRecolors: {
-		Label: Боссы используют другие спрайты
+	RainbowHealThreshold: {
+		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Максимум здоровья для автоматического лечения"
 		Tooltip: ""
 	}
 
 	PrecisionSealIsHold: {
-		Label: Кнопка Печати Точности удерживается
-		Tooltip: Если выключена, режим точности будет переключаться по нажатию кнопки.
-	}
-
-	PreBossNightGlow: {
-		Label: Существа светятся до убийства босса
-		Tooltip: В режиме Вечность, существа светятся ночью, если ещё не был убит какой-либо босс.
+		Label: "[i:FargowiltasSouls/PrecisionSeal] Кнопка печати точности должна быть зажата"
+		Tooltip: Если выключена, кнопка печати точности будет переключать режим точности.
 	}
 
 	OncomingMutantX: {
@@ -58,6 +38,65 @@ SoulConfig: {
 
 	OncomingMutantY: {
 		Label: Позиция иконки режима Вечность в инвентаре по Y
+		Tooltip: ""
+	}
+
+	CooldownBars: {
+		Label: Шкалы перезарядки
+		Tooltip: ""
+	}
+
+	CooldownBarsX: {
+		Label: Позиция шкал перезарядки по X
+		Tooltip: ""
+	}
+
+	CooldownBarsY: {
+		Label: Позиция шкал перезарядки по Y
+		Tooltip: ""
+	}
+
+	SkillMenuX: {
+		Label: Положение меню умений по X
+		Tooltip: Отсчёт идёт от правой границы экрана.
+	}
+
+	SkillMenuY: {
+		Label: Положение меню умений по Y
+		Tooltip: ""
+	}
+}
+
+SoulConfig: {
+	DisplayName: Конфигурация: Souls
+
+	Headers: {
+		Maso: Режим Вечность
+		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
+	}
+
+	DeviChatter: {
+		Label: Чиби Деви может говорить
+		Tooltip: ""
+	}
+
+	ToggleSearchReset: {
+		Label: Полоска поиска меню переключателей эффектов перезапускается при закрытии
+		Tooltip: ""
+	}
+
+	BigTossMode: {
+		Label: Режим большого броска
+		Tooltip: ""
+	}
+
+	ForcedFilters: {
+		Label: Включать настройку качества волн (игнорирует настройки игры)
+		Tooltip: Необходимо для корректной работы некоторых визуальных эффектов.
+	}
+
+	BossRecolors: {
+		Label: Боссы используют другие спрайты
 		Tooltip: ""
 	}
 
@@ -137,22 +176,12 @@ SoulConfig: {
 	}
 
 	PerformanceMode: {
-		// Label: Performance Mode
-		// Tooltip: Disables the most performance-demanding visuals. Currently disables Mutant's eye attack trails.
+		Label: Режим производительности
+		Tooltip: Выключает большинство визуальных эффектов, влияющих на производительность. На данный момент выключает хвосты глаз Мутанта
 	}
 
-	CooldownBars: {
-		// Label: Cooldown Bars
-		// Tooltip: ""
-	}
-
-	CooldownBarsX: {
-		// Label: Cooldown Bars X
-		// Tooltip: ""
-	}
-
-	CooldownBarsY: {
-		// Label: Cooldown Bars Y
-		// Tooltip: ""
+	PatreonTouhou: {
+		Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		Tooltip: ""
 	}
 }

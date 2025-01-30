@@ -1,5 +1,6 @@
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Systems;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -7,6 +8,7 @@ using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
 {
+    
     public class NoclipFliers : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() =>
@@ -42,7 +44,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
         public override void AI(NPC npc)
         {
             base.AI(npc);
-
+            if (!WorldSavingSystem.MasochistModeReal)
+                return;
             if (MPSyncSpawnTimer > 0)
             {
                 if (--MPSyncSpawnTimer == 0)
@@ -58,4 +61,5 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             npc.noTileCollide = CanNoclip && npc.HasPlayerTarget && !Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0);
         }
     }
+    
 }

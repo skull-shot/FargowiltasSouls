@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.tileCollide = false;
             Projectile.width = 38;
             Projectile.height = 54;
+            Projectile.DamageType = DamageClass.Melee;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;

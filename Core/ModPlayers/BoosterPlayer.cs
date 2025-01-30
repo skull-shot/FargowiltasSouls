@@ -105,14 +105,14 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 CosmosTimer--;
             }
-            if (SolarTimer == 1)
+            /* if (SolarTimer == 1)
                 CombatText.NewText(Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Deactivate", 15), true);
             if (VortexTimer == 1)
                 CombatText.NewText(Player.Hitbox, Color.LightCyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.VortexBooster.Deactivate", 25), true);
             if (NebulaTimer == 1)
                 CombatText.NewText(Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Deactivate", 5), true);
             if (StardustTimer == 1)
-                CombatText.NewText(Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.StardustBooster.Deactivate", 25), true);
+                CombatText.NewText(Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.StardustBooster.Deactivate", 25), true); */
 
             if (TimberTimer == 1)
                 CombatText.NewText(Player.Hitbox, Color.SandyBrown, Language.GetTextValue("Mods.FargowiltasSouls.Items.TimberBooster.Deactivate", 30), true);

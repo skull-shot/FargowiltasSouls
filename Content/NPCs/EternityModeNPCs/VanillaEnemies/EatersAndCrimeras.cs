@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -27,6 +28,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
 
             if (NPC.downedBoss2 && Main.rand.NextBool(5) && npc.FargoSouls().CanHordeSplit)
                 EModeGlobalNPC.Horde(npc, 5);
+
+            if (npc.type == NPCID.EaterofSouls || npc.type == NPCID.BigEater || npc.type == NPCID.LittleEater)
+                npc.buffImmune[BuffID.CursedInferno] = true;
         }
 
         public override void AI(NPC npc)

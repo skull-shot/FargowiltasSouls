@@ -40,6 +40,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             int time = 360;
             int maxScale = 3;
+            float rotationMult = WorldSavingSystem.MasochistModeReal ? 1.4f : 1f;
 
             if (Projectile.ai[1] == 0)
                 time = 30;
@@ -123,7 +124,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 Projectile.scale = maxScale;
                 Projectile.alpha = 0;
-                Projectile.rotation = Projectile.rotation - (float)Math.PI / 60f;
+                Projectile.rotation = Projectile.rotation - rotationMult * (float)Math.PI / 60f;
                 if (Main.rand.NextBool())
                 {
                     Vector2 spinningpoint = Vector2.UnitY.RotatedByRandom(6.28318548202515) * Projectile.scale;
@@ -141,6 +142,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     Suck();
 
                     int lightningTime = WorldSavingSystem.EternityMode && Projectile.ai[1] != 1f ? 6 : 15;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        lightningTime = WorldSavingSystem.EternityMode && Projectile.ai[1] != 1f ? 5 : 8;
+
                     if (Projectile.localAI[0] % lightningTime == 0) //shoot lightning out, rotate 48 degrees per second by default
                     {
                         //Projectile.localAI[0] = 0;
@@ -160,7 +164,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                             }
                         }
 
-                        Projectile.localAI[1] += MathHelper.ToRadians(48f / 60f * lightningTime) * Projectile.ai[1];
+                        Projectile.localAI[1] += rotationMult * MathHelper.ToRadians(48f / 60f * lightningTime) * Projectile.ai[1];
                     }
 
                     //emode, ai1 check is a phase 2 check
@@ -186,7 +190,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 Projectile.scale = (float)(1.0 - (Projectile.ai[0] - time) / 60.0) * maxScale;
                 Projectile.alpha = 255 - (int)(255 * Projectile.scale / maxScale);
-                Projectile.rotation = Projectile.rotation - (float)Math.PI / 30f;
+                Projectile.rotation = Projectile.rotation - rotationMult * (float)Math.PI / 30f;
                 if (Projectile.alpha >= 255)
                     Projectile.Kill();
 

@@ -1,4 +1,5 @@
-﻿using Fargowiltas.Items.Tiles;
+﻿/*
+using Fargowiltas.Items.Tiles;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -73,3 +74,4 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
         }
     }
 }
+*/

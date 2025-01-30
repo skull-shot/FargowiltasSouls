@@ -48,12 +48,13 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         {
             writer.Write(RotDir);
             writer.Write(Timer);
-            writer.Write7BitEncodedInt(TargetPlayer);
+            writer.Write(TargetPlayer);
         }
         public override void ReceiveExtraAI(BinaryReader reader)
         {
+            RotDir = reader.ReadSingle();
             Timer = reader.ReadSingle();
-            TargetPlayer = reader.Read7BitEncodedInt();
+            TargetPlayer = reader.ReadInt32();
         }
         
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
@@ -70,6 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             Projectile.velocity = -Vector2.UnitY * 5;
             Projectile.damage = 0;
             CaughtPlayer = target.whoAmI;
+            Projectile.netUpdate = true;
             modifiers.Null();
         }
         public override bool CanHitPlayer(Player target)
@@ -97,8 +99,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 Projectile.scale = 0.2f;
                 Projectile.localAI[0] = 1;
             }
+            if (State < 9 && State != 1)
+            {
+                RotDir = State;
+                State = 1;
+                Projectile.netUpdate = true;
+            }
                 
-            if (State != 1 && State != 2)
+            if (State != 1 && State != 10)
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             Projectile.Opacity = (float)Utils.Lerp(Projectile.Opacity, 1, 0.1f);
@@ -141,7 +149,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                             Projectile.Kill();
                     }
                     break;  
-                case 2:
+                case 10:
                     {
                         float divisor = WorldSavingSystem.MasochistModeReal ? 2f : 3f;
                         float speed = (Timer - 25) / divisor;
@@ -155,6 +163,13 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     }
                     break;
                 case 22: //stun punish grab
+                    {
+                        if (Projectile.velocity.Length() < 30f)
+                            Projectile.velocity *= 1.08f;
+                        if (WorldSavingSystem.EternityMode && ++Timer < 60)
+                            Projectile.velocity = Projectile.velocity.RotateTowards(Projectile.DirectionTo(target.Center).ToRotation(), 0.01f);
+                    }
+                    break;
                 case 44: // YOU CAN'T ESCAPE
                     {
                         Vector2 vectorToIdlePosition = target.Center - Projectile.Center;

@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-            if (WorldSavingSystem.SwarmActive || !WorldSavingSystem.EternityMode)
+            if (!WorldSavingSystem.EternityMode)
                 return;
             SpawnGrace = 60 * 4;
         }
@@ -104,9 +104,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bool result = base.SafePreAI(npc);
 
             EModeGlobalNPC.skeleBoss = npc.whoAmI;
-
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             if (SpawnGrace > 0)
                 SpawnGrace--;
@@ -368,6 +365,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         void SprayHomingBabies(NPC npc)
         {
+            if (!npc.HasPlayerTarget)
+                return;
             const int max = 30;
             float modifier = 1f - (float)npc.life / npc.lifeMax;
             modifier *= 4f / 3f; //scaling maxes at 25% life
@@ -379,7 +378,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 float speed = Main.rand.NextFloat(3f, 9f);
                 Vector2 velocity = speed * npc.DirectionFrom(Main.player[npc.target].Center).RotatedBy(Math.PI * (Main.rand.NextDouble() - 0.5));
                 float ai1 = speed / (60f + Main.rand.NextFloat(actualNumberToSpawn * 2));
-                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, velocity, ModContent.ProjectileType<SkeletronGuardian>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, 0f, ai1);
+                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, velocity, ModContent.ProjectileType<SkeletronGuardian>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, 0f, ai1, ai2: npc.target);
             }
         }
 
@@ -444,7 +443,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
         }
 
-        static bool ArmDR(NPC npc) => !WorldSavingSystem.SwarmActive && Main.npc.Any(n => n.active && n.type == NPCID.SkeletronHand && n.ai[1] == npc.whoAmI);
+        static bool ArmDR(NPC npc) => Main.npc.Any(n => n.active && n.type == NPCID.SkeletronHand && n.ai[1] == npc.whoAmI);
         static float GetDR(NPC npc)
         {
             if (ArmDR(npc))
@@ -460,19 +459,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
-            if (npc.lifeRegen < 0)
-                npc.lifeRegen = (int)(npc.lifeRegen * GetDR(npc));
+            if (npc.lifeRegen >= 0)
+                return;
+            float markiplier = GetDR(npc);
+            npc.lifeRegen = (int)(npc.lifeRegen * markiplier);
+            damage = (int)(damage * markiplier);
         }
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f && !WorldSavingSystem.SwarmActive)
+            if (npc.ai[1] != 2f)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 
                 npc.life = npc.lifeMax / 176;
                 if (npc.life < 50)
                     npc.life = 50;
+
+                if (WorldSavingSystem.SwarmActive && npc.life > 333)
+                    npc.life = 333;
 
                 npc.defense = 9999;
                 npc.damage = npc.defDamage * 15;
@@ -566,10 +571,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
-            
-
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronHead);
             if (head == null)
@@ -651,7 +652,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void SafePostAI(NPC npc)
         {
-            if (WorldSavingSystem.SwarmActive || Main.dayTime)
+            if (Main.dayTime)
                 return;
 
             NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronHead);

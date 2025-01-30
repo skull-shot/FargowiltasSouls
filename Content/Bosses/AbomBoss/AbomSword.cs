@@ -1,6 +1,8 @@
 ﻿
 
 using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -61,8 +63,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 if (!Main.dedServ)
                 {
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Abominationn/StyxGazer") with { Volume = 1.5f }, Projectile.Center);
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/Mechs/RetinazerDeathray"), Projectile.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.StyxGazer with { Volume = 1.5f }, Projectile.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.GenericDeathray, Projectile.Center);
                 }
             }
             float num801 = 1f;
@@ -80,22 +82,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             float rotation = Projectile.velocity.ToRotation();
             if ((abom.velocity != Vector2.Zero || abom.ai[0] == 19) && abom.ai[0] != 20)
             {
-                if (false) //(Projectile.ai[2] == 1)
-                {
-                    float totalRotation = maxTime * Projectile.ai[0] / Projectile.MaxUpdates;
-                    float dx = 1 / (maxTime);
-                    //acceleration logic from math on paper
-                    float x = Projectile.localAI[0] / (maxTime);
-                    Main.NewText(x);
-                    float rotationSpeed = totalRotation * (6 * x * x - 4 * x * x * x);
-                    rotation += rotationSpeed * dx;
-                }
-                else
-                {
-                    rotation += Projectile.ai[0] / Projectile.MaxUpdates;
-                }
+                rotation += Projectile.ai[0] / Projectile.MaxUpdates;
             }
-            
+
             Projectile.rotation = rotation - 1.57079637f;
             Projectile.velocity = rotation.ToRotationVector2();
             float num805 = 3f;
@@ -143,28 +132,63 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 //DelegateMethods.v3_1 = new Vector3(0.3f, 0.65f, 0.7f);
                 //Utils.PlotTileLine(Projectile.Center, Projectile.Center + Projectile.velocity * Projectile.localAI[1], (float)Projectile.width * Projectile.scale, new Utils.PerLinePoint(DelegateMethods.CastLight));
 
-                if (abom.velocity != Vector2.Zero && --counter < 0)
+                if (abom.velocity != Vector2.Zero)
                 {
-                    counter = 5;
-                    if (FargoSoulsUtil.HostCheck) //spawn bonus projs
+                    if (--counter < 0)
                     {
-                        Vector2 spawnPos = Projectile.Center;
-                        Vector2 vel = Projectile.velocity.RotatedBy(Math.PI / 2 * Math.Sign(Projectile.ai[0]));
-                        const int max = 15;
-                        for (int i = 1; i <= max; i++)
+                        counter = 5;
+                        if (FargoSoulsUtil.HostCheck) //spawn bonus projs
                         {
-                            spawnPos += Projectile.velocity * 3000f / max;
-                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), spawnPos, vel, ModContent.ProjectileType<AbomSickle2>(), Projectile.damage, 0f, Projectile.owner);
+                            Vector2 spawnPos = Projectile.Center;
+                            Vector2 vel = Projectile.velocity.RotatedBy(Math.PI / 2 * Math.Sign(Projectile.ai[0]));
+                            const int max = 15;
+                            for (int i = 1; i <= max; i++)
+                            {
+                                spawnPos += Projectile.velocity * 3000f / max;
+                                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), spawnPos, vel, ModContent.ProjectileType<AbomSickle2>(), Projectile.damage, 0f, Projectile.owner);
+                            }
+                        }
+                    }
+                    // spark visuals
+                    const float sparks = 60;
+                    for (int i = 2; i < sparks; i++)
+                    {
+                        if (Main.rand.NextBool(6))
+                        {
+                            float lerper = i + Main.rand.NextFloat(-0.7f, 0.7f);
+                            Vector2 spawnPos = Projectile.Center + lerper * Projectile.velocity * 3000f / sparks;
+                            Vector2 vel = Projectile.velocity.RotatedBy(Math.PI / 2 * -Math.Sign(Projectile.ai[0]));
+                            vel *= Main.rand.NextFloat(6, 12f);
+                            vel = vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f);
+                            Particle p = new RectangleParticle(spawnPos, vel, Color.OrangeRed, Main.rand.NextFloat(0.2f, 0.4f), Main.rand.Next(20, 40), true, true, Color.Yellow);
+                            p.Spawn();
+                        }
+                    }
+                    const float smoke = 20;
+                    for (int i = 2; i < smoke; i++)
+                    {
+                        if (Main.rand.NextBool(10))
+                        {
+                            float lerper = i + Main.rand.NextFloat(-0.7f, 0.7f);
+                            Vector2 spawnPos = Projectile.Center + lerper * Projectile.velocity * 3000f / smoke;
+                            Vector2 vel = Projectile.velocity.RotatedBy(Math.PI / 2 * -Math.Sign(Projectile.ai[0]));
+                            vel *= Main.rand.NextFloat(2f, 4f);
+                            vel = vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f);
+
+                            int index = Gore.NewGore(Projectile.GetSource_FromThis(), spawnPos, vel, Main.rand.Next(61, 64), 1f);
+                            Main.gore[index].scale *= Main.rand.NextFloat(0.6f, 0.9f);
+                            Main.gore[index].rotation = Main.rand.NextFloat(MathHelper.TwoPi);
                         }
                     }
                 }
-
+                /*
                 for (int i = 0; i < 15; i++)
                 {
                     int d = Dust.NewDust(Projectile.position + Projectile.velocity * Main.rand.NextFloat(2000), Projectile.width, Projectile.height, DustID.GemTopaz, 0f, 0f, 0, default, 1.5f);
                     Main.dust[d].noGravity = true;
                     Main.dust[d].velocity *= 4f;
                 }
+                */
             }
 
             if (!spawnedHandle)
@@ -264,13 +288,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 */
             }
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-
             if (drawHandle)
             {
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
 
                 // glow
                 for (int j = 0; j < 12; j++)
@@ -281,11 +301,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     Main.EntitySpriteDraw(hiltTexture, projectile.Center + offset + afterimageOffset - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, glowColor,
                         direction.ToRotation() + MathHelper.PiOver2, Vector2.UnitX * hiltTexture.Width / 2, projectile.scale, SpriteEffects.None, 0);
                 }
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.ResetToDefault();
 
                 Main.EntitySpriteDraw(hiltTexture, projectile.Center + offset - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, lightColor,
                     direction.ToRotation() + MathHelper.PiOver2, Vector2.UnitX * hiltTexture.Width / 2, projectile.scale, SpriteEffects.None, 0);
+            }
+            else
+            {
+                Main.spriteBatch.ResetToDefault();
             }
         }
     }

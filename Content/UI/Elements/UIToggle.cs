@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.UI.Elements
                     modPlayer.SyncToggle(Effect);
             }
 
-            bool disabledByMinos = (Effect.MinionEffect || Effect.ExtraAttackEffect) && modPlayer.PrimeSoulActive;
+            bool disabledByMinos = Effect.MinionEffect && modPlayer.GalacticMinionsDeactivated;
             bool disabledByPresence = modPlayer.MutantPresence && (Effect.MutantsPresenceAffects || Effect.MinionEffect);
             bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled);
             bool toggled = Main.LocalPlayer.GetToggleValue(Effect, true);
@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             if (disabledByMinos)
             {
                 color = Color.Cyan * 0.5f;
-                text += $" [i:{ModContent.ItemType<PrimeSoul>()}]";
+                //text += $" [i:{ModContent.ItemType<GalacticGlobe>()}]";
             }
             else if (disabledByPresence)
             {

@@ -4,10 +4,6 @@ MutantStatueGift.MapEntry: 突变体雕像
 SquidwardDoorClosed.MapEntry: 章鱼哥的大门
 SquidwardDoorOpen.MapEntry: 章鱼哥的大门
 LifeRevitalizerPlaced.MapEntry: 生命复苏站
-AbomMusicBoxSheet.MapEntry: 音乐盒
-ChampionMusicBoxSheet.MapEntry: 音乐盒
-DeviMusicBoxSheet.MapEntry: 音乐盒
-MutantMusicBoxSheet.MapEntry: 音乐盒
-RePrologueMusicBoxSheet.MapEntry: 音乐盒
-StoriaMusicBoxSheet.MapEntry: 音乐盒
-// CrackedSandstoneBricks.MapEntry: Cracked Sandstone Bricks
+ChampionMusicBoxSheet.MapEntry: 英灵音乐盒
+MutantMusicBoxSheet.MapEntry: 突变体音乐盒
+CrackedSandstoneBricks.MapEntry: 裂纹砂岩砖

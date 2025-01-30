@@ -62,9 +62,40 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 npc.damage = (int)Math.Round(npc.damage * 0.5);
         }
 
+        public override void FindFrame(NPC npc, int frameHeight)
+        {
+            //pretending to be chest
+            if (npc.ai[0] == 0)
+            {
+                npc.frame.Y = 0;
+                npc.frameCounter = 0;
+            }
+        }
+
         public override bool SafePreAI(NPC npc)
         {
             Player player = Main.player[npc.target];
+
+            if (!(npc.type == NPCID.Mimic || npc.type == NPCID.PresentMimic || npc.type == NPCID.IceMimic))
+            {
+                return true;
+            }
+
+            if (player.active && player.Center.Distance(npc.Center) > 600)
+            {
+                npc.ai[0] = 0f;
+                npc.ai[1] = 0f;
+                npc.ai[2] = 0f;
+                npc.ai[3] = 0f;
+                npc.velocity = new Vector2(0, 10);
+
+                npc.position.X = (int)(npc.position.X / 16) * 16;
+                //npc.position.Y = (int)(npc.position.Y / 16) * 16;
+                npc.dontTakeDamage = true;
+
+                return false;
+            }
+
             bool returnbool = base.SafePreAI(npc); //used so entire PreAI always runs
 
             if (!Main.hardMode && npc.life > npc.lifeMax / 2)
@@ -116,7 +147,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         //npc.noTileCollide = false;
                     }
 
-
                     if (Timer >= 160)
                     {
                         AttackTimer = 0;
@@ -165,6 +195,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         AttackTimer = 0;
                     }
                 }
+
                 void Flight()
                 {
 
@@ -191,6 +222,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         npc.velocity = Vector2.Zero;
                     }
                 }
+
                 void FlyToward(Vector2 v)
                 {
                     float inertia = 5f;
@@ -209,6 +241,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         npc.velocity.Y = -0.05f;
                     }
                 }
+
                 if (npc.life < npc.lifeMax && npc.ai[0] == 1 && player.active && !player.dead) //if mimic awake and target active
                 {
                     if (AttackTimer < AttackCD) //only do flight when not attacking
@@ -276,7 +309,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
         {
             base.AI(npc);
 
-            if (npc.type == NPCID.Mimic || npc.type == NPCID.PresentMimic)
+            if (npc.type == NPCID.Mimic || npc.type == NPCID.PresentMimic || npc.type == NPCID.IceMimic)
             {
                 npc.dontTakeDamage = false;
                 if (npc.justHit && Main.hardMode)

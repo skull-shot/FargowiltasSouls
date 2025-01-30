@@ -41,13 +41,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Player player = Main.player[Projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (player.HasEffect<ForbiddenEffect>())
-            {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && !p.hostile && p.owner == Projectile.owner && p.type != Projectile.type && p.Colliding(p.Hitbox, Projectile.Hitbox)))
-                {
-                    p.FargoSouls().stormTimer = 240;
-                }
-            };
+            // Collision is done in FargoSoulsGlobalProjectile:PreAI
+
             if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
             {
                 if (Projectile.Colliding(Projectile.Hitbox, Main.LocalPlayer.Hitbox))

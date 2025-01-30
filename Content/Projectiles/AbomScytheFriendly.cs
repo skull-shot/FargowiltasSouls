@@ -77,6 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
+            color26 *= 1f;
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 2)
             {

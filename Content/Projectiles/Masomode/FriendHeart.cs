@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.height = 12;
             Projectile.timeLeft = 900;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.Magic;
             Projectile.aiStyle = -1;
 
             Projectile.tileCollide = false;

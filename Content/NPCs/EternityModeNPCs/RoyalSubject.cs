@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using Fargowiltas;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;

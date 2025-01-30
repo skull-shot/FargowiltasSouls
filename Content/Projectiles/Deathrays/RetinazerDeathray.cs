@@ -1,23 +1,36 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Assets;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
-    public class RetinazerDeathray : BaseDeathray
+    public class RetinazerDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public RetinazerDeathray() : base(240, sheeting: TextureSheeting.Vertical) { }
+        public RetinazerDeathray() : base(240/*, sheeting: TextureSheeting.Vertical*/) { }
 
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
             // DisplayName.SetDefault("Blazing Deathray");
-            Main.projFrames[Projectile.type] = 4;
+            //Main.projFrames[Projectile.type] = 4;
+        }
+
+        public override void SetDefaults()
+        {
+            Projectile.hide = true;
+            Projectile.tileCollide = false;
+            base.SetDefaults();
         }
 
         public override void AI()
@@ -30,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], NPCID.Retinazer);
             if (npc != null)
             {
-                Vector2 offset = new Vector2(npc.width - 24, 0).RotatedBy(npc.rotation + 1.57079633);
+                Vector2 offset = new Vector2(npc.width - 24, 0.5f).RotatedBy(npc.rotation + 1.57079637);
                 Projectile.Center = npc.Center + offset;
 
                 if (npc.GetGlobalNPC<Retinazer>().DeathrayState >= 3 && Projectile.localAI[0] < maxTime - 30)
@@ -45,15 +58,10 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            if (Projectile.localAI[0] == 0f)
-            {
-                if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/Mechs/RetinazerDeathray") with { Volume = 1.5f }, Projectile.Center);
-            }
             float maxScale = 1f;
             if (WorldSavingSystem.MasochistModeReal)
             {
-                maxScale = Main.rand.NextFloat(2.5f, 5f);
+                maxScale = 5f;
                 FargoSoulsUtil.ScreenshakeRumble(6);
             }
             Projectile.localAI[0] += 1f;
@@ -115,21 +123,64 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             //DelegateMethods.v3_1 = new Vector3(0.3f, 0.65f, 0.7f);
             //Utils.PlotTileLine(Projectile.Center, Projectile.Center + Projectile.velocity * Projectile.localAI[1], (float)Projectile.width * Projectile.scale, new Utils.PerLinePoint(DelegateMethods.CastLight));
 
-            if (++Projectile.frameCounter > 2)
+            /*if (++Projectile.frameCounter > 2)
             {
                 Projectile.frameCounter = 0;
                 if (++Projectile.frame >= Main.projFrames[Projectile.type])
                     Projectile.frame = 0;
-            }
+            }*/
         }
 
-        public override Color? GetAlpha(Color lightColor) => new Color(255, 100, 100, 100) * 0.95f;
+        //public override Color? GetAlpha(Color lightColor) => new Color(255, 100, 100, 100) * 0.95f;
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Burning, 300);
             target.AddBuff(BuffID.OnFire, 300);
             target.AddBuff(BuffID.Ichor, 300);
+        }
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindNPCs.Add(index);
+        }
+
+        public override bool PreDraw(ref Color lightColor) => false;
+
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.masochistModeReal ? 0.5f : 1.5f);
+
+        public static Color ColorFunction(float _)
+        {
+            Color color = Color.Red;
+            color.A = 0;
+            return color;
+        }
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            if (Projectile.hide)
+                return;
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.RetinazerDeathray");
+
+            // Get the laser end position.
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.5f;
+
+            // Create 8 points that span across the draw distance from the projectile center.
+            Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity * 15f;
+            Vector2[] baseDrawPoints = new Vector2[8];
+            for (int i = 0; i < baseDrawPoints.Length; i++)
+                baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
+
+            // Set shader parameters.
+            shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
+            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
+            shader.TrySetParameter("stretchAmount", 0.5);
+            shader.TrySetParameter("scrollSpeed", 4f);
+            shader.TrySetParameter("uColorFadeScaler", 0.8f);
+            shader.TrySetParameter("useFadeIn", true);
+            //shader.SetTexture(FargosTextureRegistry.Techno1Noise.Value, 1, SamplerState.LinearWrap);
+
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.masochistModeReal ? 40 : 20);
         }
     }
 }

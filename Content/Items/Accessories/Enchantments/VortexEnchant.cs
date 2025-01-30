@@ -88,20 +88,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.VortexCD <= 0 && player.Distance(target.Hitbox.ClosestPointInRect(player.Center)) > 850)
+            if (modPlayer.VortexCD <= 0 && player.Distance(target.Hitbox.ClosestPointInRect(player.Center)) > 450)
             {
                 bool force = modPlayer.ForceEffect<VortexEnchant>();
                 int dmg = 9750;
                 if (force)
                     dmg = 18000;
+                dmg /= 2;
                 Vector2 velocity = player.DirectionTo(target.Center);
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                FargoSoulsUtil.NewProjectileDirectSafe(modPlayer.Player.GetSource_ItemUse(modPlayer.Player.HeldItem), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), damage, 0f, modPlayer.Player.whoAmI, 1f);
+                int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
+                FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), damage, 0f, modPlayer.Player.whoAmI, 1f);
                 float cd = 10;
                 modPlayer.VortexCD = LumUtils.SecondsToFrames(cd);
 
-                CooldownBarManager.Activate("VortexEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/VortexEnchant").Value, new(0, 242, 170), 
-                    () => 1f - Main.LocalPlayer.FargoSouls().VortexCD / (float)LumUtils.SecondsToFrames(cd), activeFunction: () => player.HasEffect<VortexEffect>());
+                if (player.whoAmI == Main.myPlayer)
+                    CooldownBarManager.Activate("VortexEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/VortexEnchant").Value, new(0, 242, 170), 
+                        () => 1f - Main.LocalPlayer.FargoSouls().VortexCD / (float)LumUtils.SecondsToFrames(cd), activeFunction: player.HasEffect<VortexEffect>);
             }
         }
     }

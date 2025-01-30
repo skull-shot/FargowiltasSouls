@@ -55,9 +55,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Lighting.AddLight(Projectile.Center, .4f, 1.2f, .4f);
 
 
-            if (Projectile.localAI[0] == 0) //random rotation direction
+            if (Projectile.localAI[2] == 0) //random rotation direction
             {
-                Projectile.localAI[0] = Main.rand.NextBool() ? 1 : -1;
+                Projectile.localAI[2] = Main.rand.NextFloat(0.5f, 1f) * MathHelper.PiOver2;
+                Projectile.localAI[2] *= Main.rand.NextBool() ? 1f : -1f;
             }
 
             if (Projectile.localAI[1] >= 0)
@@ -118,7 +119,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 if (Projectile.localAI[0] < -30 && Projectile.localAI[0] > -120)
                 {
                     Projectile.scale += 0.06f;
-                    Projectile.rotation += 0.3f * Projectile.localAI[0];
+                    Projectile.rotation += 0.2f * Projectile.localAI[2] * (float)Math.Sin(Projectile.localAI[0] / 60 * MathHelper.Pi + Projectile.localAI[2]);
                 }
                 else if (Projectile.localAI[0] == -120)
                 {

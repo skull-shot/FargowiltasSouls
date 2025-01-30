@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +13,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class PumpkingsCape : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -32,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.GetDamage(DamageClass.Generic) += 0.05f;
             player.GetCritChance(DamageClass.Generic) += 5;
             player.AddEffect<PumpkingsCapeEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
         }
     }

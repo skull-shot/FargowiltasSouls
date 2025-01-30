@@ -65,8 +65,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     }
     public class EarthForceEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
-        public override int ToggleItemType => ModContent.ItemType<EarthForce>();
+        public override Header ToggleHeader => null;
+        //public override int ToggleItemType => ModContent.ItemType<EarthForce>();
 
         //modify this number and equation to balance out the timer stuff
         public static int EarthMaxCharge = 400;
@@ -81,17 +81,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer farg = player.FargoSouls();
-            bool attacking = player.HeldItem != null && player.HeldItem.damage > 0 && player.controlUseItem;
+            bool attacking =  farg.WeaponUseTimer > 0;
+            int adamTime = 300;
+            float adamSpeed = 0.6f;
 
             if (!attacking && farg.EarthTimer < EarthMaxCharge)
             {
-                farg.EarthTimer += 2;
-            }else if (attacking && farg.EarthTimer > 0)
+                if (farg.MythrilDelay > 0)
+                    farg.MythrilDelay--;
+                else
+                    farg.EarthTimer += 2;
+            }
+            else if (attacking && farg.EarthTimer > 0)
             {
                 farg.EarthTimer--;
+                farg.MythrilDelay = 20;
+                if (farg.EarthAdamantiteCharge < adamTime)
+                    farg.EarthAdamantiteCharge++;
             }
-            CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
-                () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
+            if (!attacking || farg.EarthTimer == 0)
+                farg.EarthAdamantiteCharge = 0;
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Forces/EarthForce").Value, MythrilEnchant.NameColor, 
+                    () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
 
             float lerper = GetEarthForceLerpValue(player);
             //player.GetDamage(DamageClass.Generic) *= MathHelper.Lerp(1, 0.3f, lerper);
@@ -99,11 +111,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (player.HasEffect<MythrilEffect>())
                 farg.AttackSpeed *= MathHelper.Lerp(1, 2f, lerper);
 
-            if (player.HasEffect<PalladiumEffect>())
+            if (player.HasEffect<PalladiumHealing>())
                 player.lifeRegen += (int)MathHelper.Lerp(5, 25, lerper);
 
             if (player.HasEffect<TitaniumEffect>())
-                player.endurance += (int)MathHelper.Lerp(0.1f, 0.25f, lerper);
+                player.endurance += MathHelper.Lerp(0.1f, 0.25f, lerper);
+
+            if (player.HasEffect<AdamantiteEffect>())
+                farg.AttackSpeed += adamSpeed * (float)farg.EarthAdamantiteCharge / adamTime;
 
             //Main.NewText(player.GetAttackSpeed(DamageClass.Generic));
 
@@ -134,38 +149,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.EarthTimer <= 100)
+                return;
             float lerper = GetEarthForceLerpValue(player);
             int debuffDamage = (int)(baseDamage * MathHelper.Lerp(1, 0.75f, lerper));
             //divide by 2.3 because want to deal that damage over the course of ~6.6 seconds, deal a bit more than the actual missing damage to compensate for constant re-application of debuff without increasing the duration
             // Change damage to average of old and new damage to make it less affected by random extreme variation in damage
             target.FargoSouls().EarthDoTValue = (int)MathHelper.Lerp(target.FargoSouls().EarthDoTValue, debuffDamage / 2.3f, 0.5f);
             target.AddBuff(ModContent.BuffType<EarthPoison>(), 400);
-            //reduce iframes so that the accessory actually increases dps for real
-            if (projectile != null && !projectile.usesIDStaticNPCImmunity && !projectile.usesLocalNPCImmunity && projectile.penetrate != 1 && projectile.FargoSouls().AdamModifier == 3)
-            {
-                target.immune[player.whoAmI] = 3;
-            }
         }
-        
-        public static void EarthSplit(Projectile projectile, Player player)
-        {
-            float lerper = GetEarthForceLerpValue(player);
-            FargoSoulsPlayer farg = player.FargoSouls();
-            if (!FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false) || AdamantiteEffect.AdamIgnoreItems.Contains(player.HeldItem.type))
-            {
-                return;
-            }
-            float angleDif = MathHelper.Lerp(2, 30, lerper);
-            float damageMult = 1f;
-            foreach (Projectile p in FargoSoulsGlobalProjectile.SplitProj(projectile, 3, MathHelper.ToRadians(angleDif), damageMult))
-            {
-                if (p.Alive())
-                {
-                    p.FargoSouls().HuntressProj = projectile.FargoSouls().HuntressProj;
-                }
-            }
-            projectile.damage = (int)(projectile.damage * damageMult);
-
-        }
+       
     }
 }

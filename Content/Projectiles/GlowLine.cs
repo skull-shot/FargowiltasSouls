@@ -273,7 +273,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], NPCID.Retinazer);
                         if (npc != null)
                         {
-                            Vector2 offset = new Vector2(npc.width - 24, 0).RotatedBy(npc.rotation + 1.57079633);
+                            Vector2 offset = new Vector2(npc.width - 24, 0).RotatedBy(npc.rotation + 1.57079637);
                             Projectile.Center = npc.Center + offset;
                             Projectile.rotation = npc.rotation + MathHelper.PiOver2;
                         }
@@ -329,10 +329,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
 
                         if (counter == 0)
+                        {
                             Projectile.localAI[0] = Main.rand.NextFloat(0.9f, 1.1f);
+                            Projectile.netUpdate = true;
+                        }
+                            
 
                         color = npc.ai[2] == 0 ? Color.Cyan : Color.Blue;
-                        if (!WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors)
+                        if (!(WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors))
                             color = npc.ai[2] == 0 ? Color.DarkRed : Color.OrangeRed;
                         Projectile.Center = npc.Center;
 
@@ -474,6 +478,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 case 16: //destroyer blue laser line up true telegraph
                     {
                         color = Color.SkyBlue;
+                        if (!(WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors))
+                            color = Color.DarkRed;
                         maxTime = 30;
                         alphaModifier = -1;
                         Projectile.Opacity = Math.Clamp(1f - (float)counter / maxTime, 0f, 1f);

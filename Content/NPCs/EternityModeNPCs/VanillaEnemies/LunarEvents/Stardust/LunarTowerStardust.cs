@@ -136,12 +136,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             }
             else
             {
+                npc.dontTakeDamage = false;
+                ShieldStrength = 0;
                 if (npc.defense != 0) //trigger shield going down animation
                 {
                     CellState((int)States.Idle);
                     npc.defense = 0;
                     npc.ai[3] = 1f;
                     npc.netUpdate = true;
+                    npc.dontTakeDamage = false;
                     NetSync(npc);
                 }
                 if (NPC.CountNPCS(NPCID.CultistDragonHead) <= 0) //spawn james
@@ -356,6 +359,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<StardustMinion>())
                 {
                     Main.npc[i].ai[1] = state;
+                    Main.npc[i].netUpdate = true;
                 }
             }
         }
@@ -367,6 +371,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 spawn.ai[1] = 1;
                 spawn.ai[2] = npc.whoAmI;
                 spawn.ai[3] = cell;
+                NetSync(spawn);
             }
             return;
         }

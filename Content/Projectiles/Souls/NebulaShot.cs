@@ -19,6 +19,12 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
     {
         public override string Texture => "Terraria/Images/Projectile_634";
 
+        private static readonly int[] choices =
+                [
+                                                            3453,
+                                                            3454
+                ];
+
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
@@ -69,12 +75,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             int total = player.FargoSouls().ForceEffect<NebulaEnchant>() ? 2 : 1;
             for (int j = 0; j < total; j++)
             {
-                int boosterType = Utils.SelectRandom(Main.rand, new int[]
-                {
-                                                            3453,
-                                                            3454,
-                                                            3455
-                });
+                int boosterType = Utils.SelectRandom(Main.rand, choices);
                 Item.NewItem(player.GetSource_OpenItem(boosterType), (int)target.position.X, (int)target.position.Y, target.width, target.height, boosterType, 1, false, 0, false, false);
             }
         }

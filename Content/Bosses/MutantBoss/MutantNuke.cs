@@ -1,8 +1,11 @@
+using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
-    public class MutantNuke : ModProjectile
+    public class MutantNuke : ModProjectile, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantNuke_April" :
@@ -72,27 +75,27 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (++Projectile.localAI[0] >= 24f)
             {
                 Projectile.localAI[0] = 0f;
-                for (int index1 = 0; index1 < 36; ++index1)
+                /*for (int index1 = 0; index1 < 36; ++index1)
                 {
                     Vector2 vector2 = (Vector2.UnitX * -8f + -Vector2.UnitY.RotatedBy(index1 * 3.14159274101257 / 36 * 2, new Vector2()) * new Vector2(2f, 4f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
                     int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.IceTorch, 0.0f, 0.0f, 0, new Color(), 1f);
                     Main.dust[index2].scale = 2f;
                     Main.dust[index2].noGravity = true;
                     Main.dust[index2].position = Projectile.Center + vector2 * 6f;
-                    Main.dust[index2].velocity = Projectile.velocity * 0.0f;
-                }
+                    Main.dust[index2].velocity = Projectile.velocity * 0.0f
+                }*/
             }
 
-            Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
+            /*Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
             int index21 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Torch, 0.0f, 0.0f, 0, new Color(), 1f);
             Main.dust[index21].position = Projectile.Center + vector21;
             Main.dust[index21].scale = 1.5f;
-            Main.dust[index21].noGravity = true;
+            Main.dust[index21].noGravity = true;*/
         }
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item84, Projectile.Center);
+            SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion with { Volume = 6}, Projectile.Center);
             int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
@@ -122,6 +125,24 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 900);
         }
 
+        public float WidthFunction(float completionRatio)
+        {
+            float baseWidth = Projectile.width * 1.2f;
+            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
+        }
+
+        public Color ColorFunction(float completionRatio)
+        {
+            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
+            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
+        }
+
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
@@ -130,7 +151,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
-            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 5)
+            /*for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 5)
             {
                 Color color27 = Color.Cyan;
                 color27.A = 0;
@@ -138,7 +159,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
-            }
+            }*/
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;

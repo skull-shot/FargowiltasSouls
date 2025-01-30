@@ -224,8 +224,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             EModeGlobalNPC.queenSlimeBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return true;
             void TrySpawnMinions(ref bool check, double threshold)
             {
                 if (!check && npc.life < npc.lifeMax * threshold)
@@ -516,6 +514,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
+            if (npc.lifeRegen >= 0)
+                return;
             if (npc.life < npc.lifeMax / 2)
                 modifiers.FinalDamage *= 0.8f;
 
@@ -529,9 +529,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (npc.lifeRegen < 0)
             {
                 if (npc.life < npc.lifeMax / 2)
+                {
                     npc.lifeRegen = (int)Math.Round(npc.lifeRegen * 0.8f);
+                    damage = (int)(Math.Round(damage *0.8f));
+                }
+                    
                 if (GelatinSubjectDR)
+                {
                     npc.lifeRegen /= 10;
+                    damage /= 10;
+                }
             }
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

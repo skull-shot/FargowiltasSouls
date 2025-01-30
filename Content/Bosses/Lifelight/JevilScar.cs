@@ -2,7 +2,10 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -55,47 +58,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
             return Math.Sqrt(dX * dX + dY * dY) <= Projectile.width / 2;
         }
-
+        public ref float Timer => ref Projectile.ai[0];
+        public ref float TargetID => ref Projectile.ai[1];
+        public ref float LockedRotation => ref Projectile.ai[2];
+        public ref float KillTimer => ref Projectile.localAI[0];
         public override void AI()
         {
-            //Old AI, for jevilsknife attack
-            /*
-			if (!init)
-			{
-				//at this time, Projectile.ai[1] is rotation in degrees
-				lifelight = Main.npc[(int)Projectile.ai[0]]; //get npc
-				ScopeAtPlayer = lifelight.Center + new Vector2(0, 600);
-				Projectile.ai[0] = 0;
-				init = true;
-			}
-			Projectile.rotation += 0.5f;
-			if (Projectile.ai[0] > 60 * 12)
-				Projectile.alpha += 10;
-
-			if (Projectile.alpha > 250)
-				Projectile.Kill();
-
-			//teleport method, correct and superior but less cool
-			//max amplitude MaxHeight, rotation during wave bounceTime, rotation starts at Projectile.ai[1] (provided by NewProjectile). 
-			const int bounceTime = 100; //ticks per bounce
-			const float MaxHeight = 500; //max distance from center
-			const int degPB = 175; //degrees per bounce
-			if (Projectile.ai[0] >= (bounceTime / 2)) //start at 40 ticks means we start at max height and get 40 seconds of reaction time before movement
-			{
-
-				float dist = Math.Abs(MaxHeight * (float)Math.Sin(Projectile.ai[0] * (Math.PI / bounceTime))); // pi/x means x is ticks per bounce, half of x is peak of bounce
-
-
-
-				float spin = Projectile.ai[1] * (float)Math.PI / 180f;
-				Projectile.Center = ScopeAtPlayer + dist * spin.ToRotationVector2();
-				Projectile.ai[1] += (degPB / bounceTime); // degrees/bounce rotation
-			}
-			Projectile.ai[0]++;
-			*/
-
-            //New AI, for hexagon attack
-
             if (Projectile.frameCounter > 4)
             {
                 Projectile.frame %= 3;
@@ -103,27 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             }
             Projectile.frameCounter++;
 
-            if (Projectile.ai[0] > 30f)
-            {
-                if (Projectile.ai[0] == 31f)
-                    Projectile.ai[1] = Player.FindClosest(Projectile.Center, 0, 0);
-
-                if (Main.player[(int)Projectile.ai[1]].active && !Main.player[(int)Projectile.ai[1]].dead)
-                {
-                    Vector2 vectorToIdlePosition = Main.player[(int)Projectile.ai[1]].Center - Projectile.Center;
-                    float speed = 30f;
-                    float inertia = 64f;
-                    vectorToIdlePosition.Normalize();
-                    vectorToIdlePosition *= speed;
-                    Projectile.velocity = (Projectile.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
-                    if (Projectile.velocity == Vector2.Zero)
-                    {
-                        Projectile.velocity.X = -0.15f;
-                        Projectile.velocity.Y = -0.05f;
-                    }
-                }
-            }
-            if (Projectile.ai[0] > 1200 || NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1) //set to 1200 at end of attack by Lifelight, then fades out
+            if (++KillTimer > 1200 || NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1) //set to 1200 at end of attack by Lifelight, then fades out
             {
                 Projectile.alpha += 17;
                 Projectile.hostile = false;
@@ -132,14 +80,96 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             {
                 Projectile.Kill();
             }
-            Projectile.ai[0] += 1f;
+            const int CycleTime = 105;
+            const int DashTime = 30;
+            const int TelegraphTime = 35;
+            int targetID = (int)TargetID;
+            if (!targetID.IsWithinBounds(Main.maxPlayers))
+            {
+                Projectile.Kill();
+                return;
+            }
+            Player target = Main.player[targetID];
+            if (!target.Alive())
+            {
+                Projectile.Kill();
+                return;
+            }
 
-            if (rotspeed == 0)
-                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
-            if (rotspeed < MathHelper.Pi / 10)
-                rotspeed += MathHelper.Pi / 10 / 90;
+            if (Timer < DashTime) // dashing
+            {
+                Projectile.hostile = true;
+                if (Timer < DashTime * 0.7f)
+                {
+                    rotspeed = 0;
+                    Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
+                    if (KillTimer > DashTime) // not right after spawn
+                        Projectile.velocity += Projectile.velocity.SafeNormalize(Vector2.Zero) * 1.8f;
+                }
+                else
+                {
+                    Projectile.velocity *= 0.925f;
+                    if (rotspeed < MathHelper.Pi / 10)
+                        rotspeed += MathHelper.Pi / 10 / 10;
+                    Projectile.rotation += rotspeed;
+                }
+            }
+            else if (Timer < CycleTime - TelegraphTime) // spinning
+            {
+                Projectile.hostile = false;
+                if (Timer == DashTime)
+                {
+                    LockedRotation = target.DirectionTo(Projectile.Center).ToRotation();
+                    LockedRotation += Main.rand.NextFloat(MathHelper.PiOver4 * 0.6f, MathHelper.PiOver2) * (Main.rand.NextBool() ? 1 : -1);
+                    Projectile.netUpdate = true;
+                }
 
-            Projectile.rotation += rotspeed;
+                if (rotspeed < MathHelper.Pi / 10)
+                    rotspeed += MathHelper.Pi / 10 / 10;
+                Projectile.rotation += rotspeed;
+
+                Vector2 dir = LockedRotation.ToRotationVector2();
+                /*
+                List<Projectile> swords = Main.projectile.Where(p => p.TypeAlive(Projectile.type)).ToList();
+                int i = swords.IndexOf(Projectile);
+                if (swords.Count > 0)
+                {
+                    i -= swords.Count / 2;
+                    i /= swords.Count / 2;
+                }
+                dir = dir.RotatedBy(MathHelper.PiOver2 * 0.6f * i);
+                */
+                Vector2 desiredPos = target.Center + dir * 270f;
+                Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, desiredPos, Projectile.velocity, 1.4f, 1.4f);
+            }
+            else // telegraphing new dash
+            {
+                Projectile.hostile = false;
+                Projectile.velocity *= 0.93f;
+                rotspeed = 0;
+                float desiredRot = Projectile.DirectionTo(target.Center).ToRotation() + MathHelper.PiOver4;
+                Projectile.rotation = MathHelper.Lerp(Projectile.rotation, desiredRot, 6f / TelegraphTime);
+
+                int rearbackTime = 25;
+                if (CycleTime - Timer < rearbackTime)
+                {
+                    float modifier = (Timer - (CycleTime - rearbackTime)) / (float)rearbackTime;
+                    modifier = 1 - modifier;
+                    Projectile.velocity -= Projectile.DirectionTo(target.Center) * 1.2f * modifier;
+                }
+                
+
+                //Vector2 desiredPos = target.Center + target.DirectionTo(Projectile.Center) * 300f;
+                //Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, desiredPos, Projectile.velocity, 2f, 2f);
+            }
+            if (Timer >= CycleTime) // dash
+            {
+                Timer = 0;
+                Projectile.velocity = Projectile.DirectionTo(target.Center) * 4;
+                SoundEngine.PlaySound(SoundID.Item71 with { Volume = 0.75f }, Projectile.Center);
+            }
+
+            Timer += 1f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

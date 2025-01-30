@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using Fargowiltas;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Terraria;
@@ -32,6 +33,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.FargoSouls().ConcentratedRainbowMatter = true;
             player.AddEffect<RainbowSlimeMinion>(Item);
             player.AddEffect<RainbowHealEffect>(Item);
+        }
+        public override void UpdateVanity(Player player)
+        {
+            player.AddEffect<RainbowHealEffect>(Item);
+            player.FargoSouls().ConcentratedRainbowMatter = true;
+        }
+        public override void UpdateInventory(Player player)
+        {
+            player.AddEffect<RainbowHealEffect>(Item);
+            player.FargoSouls().ConcentratedRainbowMatter = true;
         }
     }
     public class RainbowHealEffect : AccessoryEffect

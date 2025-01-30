@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -58,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (Projectile.timeLeft % 20 == 0)
             {
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep"), Projectile.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ReticleBeep, Projectile.Center);
             }
 
             if (Projectile.timeLeft < 10) //fade in and out

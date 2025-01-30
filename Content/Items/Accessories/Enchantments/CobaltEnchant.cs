@@ -55,8 +55,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             bool canProc = true;
-            if (!player.HasEffect<EarthForceEffect>())
-                canProc = player.HeldItem != null && player.HeldItem.damage > 0 && player.controlUseItem;
+            if (!HasEffectEnchant(player))
+                canProc = player.FargoSouls().WeaponUseTimer <= 0;
             if (player.whoAmI == Main.myPlayer && canProc)
             {
                 FargoSoulsPlayer modPlayer = player.FargoSouls();

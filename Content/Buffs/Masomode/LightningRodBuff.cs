@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 
                 float ai1 = obj.Center.Y;
                 //int damage = (Main.hardMode ? 120 : 60) / 4;
-                Projectile.NewProjectile(obj.GetSource_Misc(""), tileCoordinates.X * 16 + 8, (tileCoordinates.Y * 16 + 17) - 900, 0f, 0f, ModContent.ProjectileType<RainLightning>(), damage, 2f, Main.myPlayer,
+                int p = Projectile.NewProjectile(obj.GetSource_Misc(""), tileCoordinates.X * 16 + 8, (tileCoordinates.Y * 16 + 17) - 900, 0f, 0f, ModContent.ProjectileType<LightningRodLightning>(), damage, 2f, Main.myPlayer,
                     Vector2.UnitY.ToRotation(), ai1);
             }
             else

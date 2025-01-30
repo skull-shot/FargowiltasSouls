@@ -121,7 +121,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                             if (player.HasEffect<CrimsonEffect>() && !healed)
                                             {
                                                 healed = true;
-                                                player.FargoSouls().HealPlayer(damage / 100);
+                                                player.FargoSouls().HealPlayer(damage / 80);
                                             }  
                                         }
                                     }

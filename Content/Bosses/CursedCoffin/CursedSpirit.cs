@@ -129,8 +129,6 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
                 BittenPlayer = target.whoAmI;
                 BiteTimer = 360;
-                if (Main.netMode == NetmodeID.Server)
-                    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, NPC.whoAmI);
 
                 NPC owner = FargoSoulsUtil.NPCExists(Owner, ModContent.NPCType<CursedCoffin>());
                 if (owner.TypeAlive<CursedCoffin>())
@@ -138,14 +136,25 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     // Forces Coffin to enter grab punish state
                     owner.As<CursedCoffin>().ForceGrabPunish = 1;
                     owner.netUpdate = true;
-                    if (Main.netMode == NetmodeID.Server)
-                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, owner.whoAmI);
+                }
+
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    // remember that this is target client side; we sync to server
+                    var netMessage = Mod.GetPacket();
+                    netMessage.Write((byte)FargowiltasSouls.PacketID.SyncCursedSpiritGrab);
+                    netMessage.Write((byte)NPC.whoAmI);
+                    netMessage.Write((byte)BittenPlayer);
+                    netMessage.Write(BiteTimer);
+                    netMessage.Send();
                 }
             }
         }
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
             if (NPC.Opacity < 1)
+                return false;
+            if (target.HasBuff<GrabbedBuff>())
                 return false;
             Vector2 boxPos = target.position;
             Vector2 boxDim = target.Size;
@@ -257,7 +266,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 // being held
                 Player victim = Main.player[BittenPlayer];
                 if (BiteTimer > 0 && victim.active && !victim.ghost && !victim.dead
-                    && (NPC.Distance(victim.Center) < 160 || victim.whoAmI != Main.myPlayer)
+                    && (NPC.Distance(victim.Center) < 160)
                     && victim.FargoSouls().MashCounter < 20)
                 {
                     victim.AddBuff(ModContent.BuffType<GrabbedBuff>(), 2);
@@ -272,6 +281,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
                     // dash away otherwise it's bullshit
                     NPC.velocity = -NPC.SafeDirectionTo(victim.Center) * 12;
+                    victim.immune = true;
+                    victim.immuneTime = Math.Max(victim.immuneTime, 30);
+                    victim.hurtCooldowns[0] = Math.Max(victim.hurtCooldowns[0], 30);
+                    victim.hurtCooldowns[1] = Math.Max(victim.hurtCooldowns[1], 30);
 
                     NPC.netUpdate = true;
                     Timer = 0;
@@ -279,6 +292,15 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, NPC.whoAmI);
+
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    {
+                        var netMessage = Mod.GetPacket();
+                        netMessage.Write((byte)FargowiltasSouls.PacketID.SyncCursedSpiritRelease);
+                        netMessage.Write((byte)NPC.whoAmI);
+                        netMessage.Write((byte)victim.whoAmI);
+                        netMessage.Send();
+                    }
                 }
                 return;
             }
@@ -467,12 +489,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 else // Slow crawling
                 {
                     Vector2 vectorToIdlePosition = player.Center - NPC.Center;
-                    float speed = 6.5f;
-                    if (!WorldSavingSystem.EternityMode)
-                        speed /= 2;
-                    else if (!WorldSavingSystem.MasochistModeReal)
-                        speed /= 1.1f;
+                    float speed = WorldSavingSystem.MasochistModeReal ? 6.5f : WorldSavingSystem.EternityMode ? 5.5f : 3f;
                     float inertia = 20f;
+                    if (!WorldSavingSystem.MasochistModeReal)
+                        inertia *= 1.5f;
                     vectorToIdlePosition.Normalize();
                     vectorToIdlePosition *= speed;
                     NPC.velocity = (NPC.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;

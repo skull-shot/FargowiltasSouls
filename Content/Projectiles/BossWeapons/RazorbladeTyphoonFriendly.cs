@@ -30,6 +30,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 60;
             Projectile.alpha = 100;
             Projectile.penetrate = -1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
 
             Projectile.FargoSouls().CanSplit = false;
             Projectile.DamageType = DamageClass.Ranged;

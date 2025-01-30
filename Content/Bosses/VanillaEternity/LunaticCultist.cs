@@ -75,7 +75,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (npc.ai[3] == -1f && FargoSoulsUtil.IsSummonDamage(projectile) && !ProjectileID.Sets.IsAWhip[projectile.type])
                 return false;
-
+            if (npc.ai[3] == -1f && Main.netMode != NetmodeID.SinglePlayer) // during ritual, only nearby players can hit
+            {
+                if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    return null;
+                Player player = Main.player[projectile.owner];
+                if (!player.Alive())
+                    return false;
+                if (player.Distance(npc.Center) > 300)
+                    return false;
+            }
             return base.CanBeHitByProjectile(npc, projectile);
         }
 
@@ -85,8 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             EModeGlobalNPC.cultBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return result;
+            Main.LocalPlayer.buffImmune[BuffID.Frozen] = true;
 
             if (npc.ai[3] == -1f)
             {
@@ -407,8 +415,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (FargoSoulsUtil.IsSummonDamage(projectile) && !ProjectileID.Sets.IsAWhip[projectile.type])
                 return false;
-
-            return base.CanBeHitByProjectile(npc, projectile);
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+                if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    return null;
+                Player player = Main.player[projectile.owner];
+                if (!player.Alive())
+                    return false;
+                if (player.Distance(npc.Center) > 300)
+                    return false;
+            }
+            return null;
         }
 
         public override bool SafePreAI(NPC npc)
@@ -460,22 +477,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return result;
         }
-
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
             base.HitEffect(npc, hit);
 
-            if (!WorldSavingSystem.SwarmActive)
-            {
-                NPC cultist = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.CultistBoss);
+            NPC cultist = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.CultistBoss);
 
-                //yes, this spawns two clones without the check
-                if (cultist != null && NPC.CountNPCS(npc.type) < (WorldSavingSystem.MasochistModeReal ? Math.Min(TotalCultistCount + 1, 12) : TotalCultistCount))
+            //yes, this spawns two clones without the check
+            if (cultist != null && NPC.CountNPCS(npc.type) < (WorldSavingSystem.MasochistModeReal ? Math.Min(TotalCultistCount + 1, 12) : TotalCultistCount))
+            {
+                if (FargoSoulsUtil.HostCheck)
                 {
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        FargoSoulsUtil.NewNPCEasy(cultist.GetSource_FromAI(), npc.Center, NPCID.CultistBossClone, 0, npc.ai[0], npc.ai[1], npc.ai[2], npc.ai[3], npc.target);
-                    }
+                    FargoSoulsUtil.NewNPCEasy(cultist.GetSource_FromAI(), npc.Center, NPCID.CultistBossClone, 0, npc.ai[0], npc.ai[1], npc.ai[2], npc.ai[3], npc.target);
                 }
             }
         }
@@ -575,9 +588,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
-
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             npc.dontTakeDamage = true;
             npc.immortal = true;

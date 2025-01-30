@@ -64,8 +64,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void AI()
         {
             const int startup = 60;
+            float multiplier = WorldSavingSystem.MasochistModeReal ? 1.15f : 1f;
+            if (Projectile.localAI[0] == 0)
+                Projectile.timeLeft = (int)(Projectile.timeLeft / multiplier);
             if (Projectile.localAI[0] < startup)
-                Projectile.velocity += Projectile.ai[1].ToRotationVector2() * Projectile.localAI[1] / startup;
+                Projectile.velocity += multiplier * Projectile.ai[1].ToRotationVector2() * Projectile.localAI[1] / startup;
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
 

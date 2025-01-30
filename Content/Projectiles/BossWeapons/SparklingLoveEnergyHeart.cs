@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Sounds;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -54,6 +55,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void OnKill(int timeLeft)
         {
             FargoSoulsUtil.HeartDust(Projectile.Center, Projectile.rotation + MathHelper.PiOver2);
+            SoundEngine.PlaySound(FargosSoundRegistry.DeviHeartExplosion, Projectile.Center);
 
             /*for (int i = 0; i < 10; i++)
             {

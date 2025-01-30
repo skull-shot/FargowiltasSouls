@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Armor;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -85,7 +86,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 {
                     Projectile.direction = Projectile.spriteDirection = Projectile.Center.X < npc.Center.X ? 1 : -1;
 
-                    switch (player.FargoSouls().EridanusTimer / (60 * 10)) //attack according to current class
+                    switch (player.FargoSouls().EridanusTimer / EridanusHat.ClassDuration) //attack according to current class
                     {
                         case 0: //melee
                             {
@@ -315,8 +316,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             int add = 150;
             Color glowColor = new(add + Main.DiscoR / 3, add + Main.DiscoG / 3, add + Main.DiscoB / 3);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
@@ -328,17 +328,14 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Main.EntitySpriteDraw(glowTex, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor * 0.5f, num165, origin2, Projectile.scale, flipper, 0);
             }
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.NonPremultiplied);
             Main.EntitySpriteDraw(projTex, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), projColor, Projectile.rotation, origin2, Projectile.scale, flipper, 0);
             Main.EntitySpriteDraw(glowerTex, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, Projectile.rotation, origin2, Projectile.scale, flipper, 0);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             Main.EntitySpriteDraw(glowerTex, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, Projectile.rotation, origin2, Projectile.scale, flipper, 0);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
             return false;
         }
     }

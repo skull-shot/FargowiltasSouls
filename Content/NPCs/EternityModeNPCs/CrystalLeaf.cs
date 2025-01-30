@@ -82,7 +82,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.buffType[0] != 0)
                 NPC.DelBuff(0);
             NPC plantera = FargoSoulsUtil.NPCExists(NPC.ai[0], NPCID.Plantera);
-            if (plantera == null || WorldSavingSystem.SwarmActive)
+            if (plantera == null)
             {
                 NPC.life = 0;
                 NPC.HitEffect();

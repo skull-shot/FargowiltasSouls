@@ -1,4 +1,6 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,7 +9,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class QueenStinger : SoulsItem
     {
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<SpecialDashEffect>()];
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -40,9 +43,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             // Stringer immune
             player.FargoSouls().QueenStingerItem = Item;
+            player.AddEffect<SpecialDashEffect>(Item);
 
             if (player.honey)
                 player.GetArmorPenetration(DamageClass.Generic) += 10;
+        }
+    }
+
+    public class SpecialDashEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<QueenStinger>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().SpecialDashKey();
         }
     }
 }

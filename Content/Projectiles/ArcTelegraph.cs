@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.Projectiles
             }
             vertexStrip.PrepareStrip(positions.ToArray(), rotations.ToArray(), ColorFunction, WidthFunction, -Main.screenPosition, includeBacksides: true);
             vertexStrip.DrawTrail();
-            Main.spriteBatch.ExitShaderRegion();
+            Main.spriteBatch.ResetToDefault();
             return false;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

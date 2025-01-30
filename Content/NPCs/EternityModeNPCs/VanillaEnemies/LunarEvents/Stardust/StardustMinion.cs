@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         ];
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Crystal Slime");
             Main.npcFrameCount[NPC.type] = 2;
             NPCID.Sets.CantTakeLunchMoney[Type] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type] = NPCID.Sets.SpecificDebuffImmunity[NPCID.LunarTowerStardust];
@@ -55,11 +54,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write(NPC.localAI[0]);
+            writer.WriteVector2(LockPos);
+            writer.WriteVector2(initialLock);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             NPC.localAI[0] = reader.ReadSingle();
+            LockPos = reader.ReadVector2();
+            initialLock = reader.ReadVector2();
         }
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
@@ -179,10 +182,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         {
                             if (parentModNPC.AttackTimer > ReactionTime && player.active && !player.ghost && Math.Abs(toPlayer - fromCenter) < MathHelper.Pi / 8)
                             {
-
                                 substate = 0;
                                 SoundEngine.PlaySound(SoundID.Item96, NPC.Center);
                                 State = (int)States.Rush;
+                                NPC.netUpdate = true;
                             }
                         }
                         break;
@@ -195,11 +198,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         {
                             NPC.velocity = NPC.SafeDirectionTo(player.Center) * RushSpeed;
                             substate = (float)States.Rush;
+                            NPC.netUpdate = true;
                         }
                         if (NPC.Distance(parent.Center) > parentModNPC.AuraSize)
                         {
                             substate = 0;
                             State = (int)States.Contract;
+                            NPC.netUpdate = true;
                         }
                         break;
                     }
@@ -210,6 +215,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         {
                             initialLock = player.Center;
                             substate = (int)States.PrepareScissor;
+                            NPC.netUpdate = true;
                         }
                         if (WorldSavingSystem.MasochistModeReal)
                         {
@@ -236,6 +242,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         if (NPC.Distance(desiredLocation) <= 100)
                         {
                             State = (int)States.Idle;
+                            NPC.netUpdate = true;
                         }
                         break;
                     }
@@ -261,11 +268,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         {
                             LockPos = Vector2.Zero;
                             substate = -1;
+                            NPC.netUpdate = true;
                         }
                         if (NPC.Distance(parent.Center) <= NearParent && substate == HomeBack)
                         {
                             substate = 0;
                             State = (float)States.Idle;
+                            NPC.netUpdate = true;
                         }
                         break;
                     }

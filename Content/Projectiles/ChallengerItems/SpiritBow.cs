@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -36,15 +37,26 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
         {
             Projectile.frame = (int)charge;
             Player player = Main.player[Projectile.owner];
-            Vector2 offset = new Vector2(Projectile.width / 2f, Projectile.height / 2f);
-            float rot = (Main.MouseWorld - (player.Center + offset)).ToRotation();
+
+            Vector2 playerRotatedPoint = player.RotatedRelativePoint(player.MountedCenter, true);
+            if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.velocity = player.DirectionTo(Main.MouseWorld);
+            }
+
+            float rot = Projectile.velocity.ToRotation();
+
+            Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
+
+            float offset = 0f * Projectile.scale;
+            Projectile.Center = playerRotatedPoint + Projectile.rotation.ToRotationVector2() * offset;
+
             if (player.channel && !player.noItems && !player.CCed)
             {
                 player.heldProj = Projectile.whoAmI;
                 player.SetDummyItemTime(2);
                 Projectile.timeLeft++;
 
-                Projectile.position = player.Center - offset;
                 Projectile.rotation = rot + MathHelper.Pi;
                 
                 Projectile.direction = Main.MouseWorld.DirectionTo(player.Center).X < 0 ? 1 : -1;
@@ -82,11 +94,11 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             }
             else
             {
-                if (FargoSoulsUtil.HostCheck)
+                if (Main.myPlayer == Projectile.owner)
                 {
-                    Vector2 shootspeed = new Vector2(10f * charge, 0f);
+                    Vector2 shootspeed = new(10f * charge, 0f);
                     SoundEngine.PlaySound(SpiritLongbow.ReleaseSound with { Pitch = -0.5f }, player.Center);
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, shootspeed.RotatedBy(rot), ModContent.ProjectileType<SpiritArrow>(), (int)(Projectile.originalDamage * charge), 3f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, shootspeed.RotatedBy(rot), ModContent.ProjectileType<SpiritArrow>(), (int)(Projectile.damage * charge), 3f, Projectile.owner);
                 }
                 Projectile.Kill();
             }

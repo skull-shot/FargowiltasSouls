@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public ref float TimeUntilFall => ref Projectile.ai[0];
         public ref float RotationSpeed => ref Projectile.ai[1];
+        public override bool? CanDamage() => TimeUntilFall > 0 ? false : base.CanDamage();
         public override void AI()
         {
             Projectile.Opacity = MathHelper.Lerp(Projectile.Opacity, 1, 0.05f);
@@ -73,5 +74,6 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             if (Projectile.hide)
                 behindNPCsAndTiles.Add(index);
         }
+        public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;
     }
 }

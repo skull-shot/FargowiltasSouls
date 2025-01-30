@@ -1,4 +1,8 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,6 +19,15 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             Main.debuff[Type] = true;
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "已复活");
             //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "最近经历过复活");
+        }
+        public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
+        {
+            if (Main.LocalPlayer.HasEffect<SpectreEffect>())
+            {
+                Texture2D tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Buffs/Souls/SpectreReviveCDBuff").Value;
+                drawParams.Texture = tex;
+            }
+            return base.PreDraw(spriteBatch, buffIndex, ref drawParams);
         }
     }
 }

@@ -1,7 +1,9 @@
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -44,7 +46,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             Projectile.ignoreWater = true;
             Projectile.alpha = 255;
             Projectile.light = 0.5f;
-            Projectile.scale = 1f;
+            Projectile.scale = 2f;
         }
         public override bool? CanDamage() => Projectile.ai[0] >= 30f ? base.CanDamage() : false;
         public override void AI()
@@ -83,12 +85,20 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 Vector2 vectorToIdlePosition = Projectile.Center;
                 float speed = 8f;
                 float inertia = 5f;
-                if (Projectile.ai[1] <= 90f)
+                if (Projectile.ai[1] <= 1000f)
                 {
                     vectorToIdlePosition = lifelight.Center - Projectile.Center;
-                    speed = 8f;
+                    float maxSpeed = 10f;
+                    speed = ((Projectile.ai[0] - 30) / 15) * maxSpeed;
+                    speed = MathHelper.Clamp(speed, 0, maxSpeed);
+                    if (Projectile.ai[1] > 50)
+                    {
+                        speed = 16f;
+                        inertia = 2f;
+                    }
+                        
                 }
-                if (Projectile.ai[1] > 90f)
+                else
                 {
                     if (lifelight.HasPlayerTarget)
                     {
@@ -100,13 +110,14 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     home = false;
                 }
                 float num = vectorToIdlePosition.Length();
-                if (num < 200f && homingonPlayer)
+                if (homingonPlayer)
                 {
                     home = false;
                 }
                 if (num < 20f)
                 {
                     Projectile.ai[1] += 1f;
+                    Projectile.velocity = (lifelight.Center - Projectile.Center) * 1f;
                 }
                 if (num > 20f && home)
                 {
@@ -123,12 +134,17 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 {
                     if (!WorldSavingSystem.EternityMode)
                         Projectile.Kill();
-                    double rotationrad = MathHelper.ToRadians(Main.rand.Next(-100, 100));
                     vectorToIdlePosition.Normalize();
-                    vectorToIdlePosition = vectorToIdlePosition.RotatedBy(rotationrad) * speed;
+                    float amplitude = 0.6f;
+                    if (!WorldSavingSystem.EternityMode)
+                        amplitude = 1f;
+                    vectorToIdlePosition = vectorToIdlePosition.RotatedBy(MathF.Sin(MathF.PI * Projectile.ai[2] * 0.16f) * amplitude);
+                    vectorToIdlePosition *= 15;
                     Projectile.velocity = vectorToIdlePosition;
                     chosenDirection = true;
+                    SoundEngine.PlaySound(SoundID.DD2_WitherBeastCrystalImpact, Projectile.Center);
                 }
+                    
             }
             if (Projectile.ai[0] > 600f)
             {

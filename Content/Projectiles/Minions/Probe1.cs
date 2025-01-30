@@ -51,7 +51,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 if (Projectile.ai[1] > 0)
                 {
                     Projectile.ai[1]--;
-
                     if (Projectile.ai[1] % 10 == 0)
                     {
                         List<NPC> npcs = Main.npc.Where(n => n.CanBeChasedBy() && Projectile.Distance(n.Center) < 1200 && Collision.CanHitLine(Projectile.Center, 0, 0, n.Center, 0, 0)).ToList();
@@ -75,7 +74,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     {
                         if (player.controlUseItem && player.HeldItem.IsWeapon())
                         {
-                            Projectile.localAI[0] = player.FargoSouls().MasochistSoul ? 15f : 30f;
+                            Projectile.localAI[0] = player.FargoSouls().MasochistSoul ? 15f : player.FargoSouls().DubiousCircuitry ? 60f : 30f;
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(8f, 0f).RotatedBy(Projectile.rotation),
                                 ModContent.ProjectileType<ProbeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             Projectile.netUpdate = true;

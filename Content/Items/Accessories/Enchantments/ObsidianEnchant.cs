@@ -61,7 +61,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ObsidianCD > 0)
                 modPlayer.ObsidianCD--;
 
-            if (modPlayer.ForceEffect<ObsidianEnchant>() || player.lavaWet || modPlayer.LavaWet)
+            bool triggerFromDebuffs = false;
+            if (modPlayer.ForceEffect<ObsidianEnchant>())
+            {
+                for (int i = 0; i < Player.MaxBuffs; i++)
+                {
+                    int type = player.buffType[i];
+                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                        triggerFromDebuffs = true;
+                }
+            }
+            if (triggerFromDebuffs || player.lavaWet || modPlayer.LavaWet)
             {
                 player.AddEffect<ObsidianProcEffect>(item);
             }
@@ -92,23 +102,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ExtraAttackEffect => true;
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
-            if (player.HasEffect<TerraLightningEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             if (player.FargoSouls().ObsidianCD == 0)
             {
                 int damage = baseDamage;
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
-                damage = Math.Min(damage, FargoSoulsUtil.HighestDamageTypeScaling(player, 200));
+                int cap = player.ForceEffect<ObsidianProcEffect>() ? 200 : 50;
+                damage = Math.Min(damage, FargoSoulsUtil.HighestDamageTypeScaling(player, cap));
 
                 if (player.lavaWet || modPlayer.LavaWet)
                     damage = (int)(damage * 1.3f);
+                if (!player.ForceEffect<ObsidianProcEffect>())
+                    damage = (int)(damage * 0.875f);
 
                 if (damage > 250)
                     damage = 250;
 
                 Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<ObsidianExplosion>(), damage, 0, player.whoAmI);
 
-                modPlayer.ObsidianCD = 40;
+                modPlayer.ObsidianCD = 50;
             }
         }
     }

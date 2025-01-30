@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
 
         private int counter;
-        private const int attackTime = 150;
+        private int attackTime = 150;
 
         public override void AI()
         {
@@ -74,6 +74,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.localAI[0] = npc.Center.X;
             Projectile.localAI[1] = npc.Center.Y;
 
+            counter++;
+            if (WorldSavingSystem.SwarmActive)
+            {
+                attackTime = 100;
+            }
             if (Projectile.velocity == Vector2.Zero)
             {
                 Projectile.frame = 0;
@@ -81,10 +86,9 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             }
             else
             {
-                if (counter == 0)
+                if (counter == 1)
                     SoundEngine.PlaySound(SoundID.Item5, Projectile.Center);
-
-                if (++counter < attackTime)
+                if (counter < attackTime)
                 {
                     Projectile.position += npc.velocity / 3;
 
@@ -218,6 +222,56 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             SpriteEffects effects = SpriteEffects.None;
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
+
+            // glow overlay
+            float fadeInTime = attackTime;
+            float fadeDelay = 60;
+            float fadeOutTime = 30f;
+            if (counter < fadeInTime + fadeDelay + fadeOutTime)
+            {
+
+                float glowOpacity;
+                if (counter < fadeInTime)
+                    glowOpacity = counter / fadeInTime;
+                else if (counter < fadeInTime + fadeDelay)
+                    glowOpacity = 1;
+                else
+                    glowOpacity = 1 - ((counter - fadeInTime - fadeDelay) / fadeOutTime);
+                Color glowColor = Color.White * glowOpacity;
+
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                if (Projectile.localAI[0] != 0 && Projectile.localAI[1] != 0)
+                {
+                    Texture2D texture = TextureAssets.Chain27.Value;
+                    Vector2 position = Projectile.Center;
+                    Vector2 mountedCenter = new(Projectile.localAI[0], Projectile.localAI[1]);
+                    Rectangle? sourceRectangle = new Rectangle?();
+                    Vector2 origin = new(texture.Width * 0.5f, texture.Height * 0.5f);
+                    float num1 = texture.Height;
+                    Vector2 vector24 = mountedCenter - position;
+                    float rotation = (float)Math.Atan2(vector24.Y, vector24.X) - 1.57f;
+                    bool flag = true;
+                    if (float.IsNaN(position.X) && float.IsNaN(position.Y))
+                        flag = false;
+                    if (float.IsNaN(vector24.X) && float.IsNaN(vector24.Y))
+                        flag = false;
+                    while (flag)
+                        if (vector24.Length() < num1 + 1.0)
+                        {
+                            flag = false;
+                        }
+                        else
+                        {
+                            Vector2 vector21 = vector24;
+                            vector21.Normalize();
+                            position += vector21 * num1;
+                            vector24 = mountedCenter - position;
+                            Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, glowColor, rotation, origin, 1f, SpriteEffects.None, 0);
+                        }
+                }
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, Projectile.rotation, origin2, Projectile.scale, effects, 0);
+                Main.spriteBatch.ResetToDefault();
+            }
             return false;
         }
     }

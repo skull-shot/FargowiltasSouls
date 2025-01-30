@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.UI.Elements;
@@ -5,6 +6,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -34,8 +36,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 150;
             Projectile.DamageType = DamageClass.Melee;
-
-            Projectile.FargoSouls().NinjaCanSpeedup = false;
+            Projectile.hide = true;
+        }
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
@@ -46,7 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Vector2 HitboxCenter = Projectile.Center + Vector2.Normalize(Projectile.velocity) * (Projectile.Size.Length() / 2f - HitboxSize.Length() / 2f);
             hitbox = new Rectangle((int)(HitboxCenter.X - HitboxSize.X / 2f), (int)(HitboxCenter.Y - HitboxSize.Y / 2f), (int)HitboxSize.X, (int)HitboxSize.Y);
         }
-        public float maxCharge = 60 * 1.5f;
+        public float maxCharge = 90f; // in frames
         public int SwingDirection = 1;
         public float Extension = 0;
         int OrigAnimMax = 30;
@@ -154,13 +159,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.velocity = player.SafeDirectionTo(Main.MouseWorld);
                 Projectile.Center = player.MountedCenter + Projectile.velocity * HoldoutRangeMin;
                 Projectile.friendly = false;
-                if (chargeLevel < maxCharge)
+                if (chargeLevel < maxCharge * 5) //yes, allow overcharge
                     chargeLevel++;
-                CooldownBarManager.Activate("UmbraRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/UmbraRegalia").Value, Color.DarkRed, 
-                    () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<UmbraRegalia>());
+                if (player.whoAmI == Main.myPlayer)
+                    CooldownBarManager.Activate("UmbraRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/UmbraRegalia").Value, Color.DarkRed, 
+                        () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<UmbraRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
                 }
                 Projectile.localAI[1] = chargeLevel; //store the charge amount
                                                      //int d = Dust.NewDust(player.MountedCenter + Projectile.velocity * Projectile.Size.Length() * 0.95f, 0, 0, DustID.CrystalPulse);
@@ -171,8 +177,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.spriteDirection = Projectile.direction;
                 player.ChangeDir(Projectile.direction);
                 player.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
-                player.itemTime = 1;
-                player.itemAnimation = 1;
+                player.itemTime = 2;
+                player.itemAnimation = 2;
                 if (Projectile.spriteDirection == -1)
                 {
                     Projectile.rotation += MathHelper.ToRadians(-45f) + (float)Math.PI;
@@ -187,9 +193,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.friendly = true;
                 if (chargeLevel > -1) //check once
                 {
-                    Projectile.damage = (int)(Projectile.damage * (1.15f + chargeLevel / 18f)); //modify this to change damage charge
-                    Charged = chargeLevel == maxCharge;
-                    Projectile.velocity = Vector2.Normalize(Projectile.velocity) * (25f + 25f * (chargeLevel / maxCharge));
+                    Projectile.damage = (int)(Projectile.damage * 1f * (chargeLevel / maxCharge)); //modify this to change damage charge
+                    Charged = chargeLevel >= maxCharge;
+                    Projectile.velocity = Vector2.Normalize(Projectile.velocity) * (25f + 25f * Math.Min(1f, chargeLevel / maxCharge));
                     chargeLevel = -1;
                     Projectile.timeLeft = 60 * 2;
                     thrown = 2;
@@ -200,7 +206,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if ((int)(thrown % frequency) < 1)
                 {
                     Vector2 pos = Projectile.Center + Vector2.Normalize(Projectile.velocity) * (Projectile.Size.Length() / 2f);
-
                     int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, -Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f) * 0.6f,
                             ProjectileID.FairyQueenMagicItemShot, Projectile.damage / 6, Projectile.knockBack, Projectile.owner, -1, Main.rand.NextFloat(1)); //random ai1 decides color completely randomly
                     if (Main.projectile[p] != null && p != Main.maxProjectiles)
@@ -275,14 +280,25 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 for (int j = 0; j < 16; j++)
                 {
-                    float offsetDistance = 4f * (Projectile.localAI[1] / maxCharge);
+                    float offsetDistance = 4f * Math.Min(1f, Projectile.localAI[1] / maxCharge);
                     Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * offsetDistance;
                     Color glowColor = Color.DarkRed * 0.3f;
-                    Main.spriteBatch.Draw(texture2D13, pos + afterimageOffset, null, glowColor, Projectile.rotation, origin2, Projectile.scale, effects, 0f);
+                    float scale = Projectile.scale * ((Main.mouseTextColor / 200f - 0.35f) * 0.2f + 0.9f);
+                    Main.spriteBatch.Draw(texture2D13, pos + afterimageOffset, null, glowColor, Projectile.rotation, origin2, scale, effects, 0f);
                 }
             }
 
             Main.EntitySpriteDraw(texture2D13, pos, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+
+            ref float chargeLevel = ref Projectile.ai[2];
+            if (chargeLevel > maxCharge)
+            {
+                Color newColor = Color.Red;
+                newColor.A = 0;
+                newColor *= 0.75f;
+                float scale = Projectile.scale * ((Main.mouseTextColor / 200f - 0.35f) * 0.2f + 0.9f);
+                Main.EntitySpriteDraw(texture2D13, pos, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(newColor), Projectile.rotation, origin2, scale, effects, 0);
+            }
             return false;
         }
     }

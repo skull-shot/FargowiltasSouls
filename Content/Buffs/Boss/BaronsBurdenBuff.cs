@@ -18,6 +18,7 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 
         public override void Update(Player player, ref int buffIndex)
         {
+            player.FargoSouls().BaronsBurden = true;
             player.gills = true;
             player.ignoreWater = true;
             if (!player.wet)

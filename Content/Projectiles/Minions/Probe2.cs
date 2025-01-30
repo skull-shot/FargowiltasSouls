@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             {
                 if (++Projectile.localAI[1] > 20f)
                 {
-                    Projectile.localAI[1] = player.FargoSouls().MasochistSoul ? 10f : 0f;
+                    Projectile.localAI[1] = player.FargoSouls().MasochistSoul ? 10f : player.FargoSouls().DubiousCircuitry ? -20f : 0f;
                     followMouse = true;
 
                     int n = FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000f, true);

@@ -72,9 +72,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             EModeGlobalNPC.empressBoss = npc.whoAmI;
 
-            if (WorldSavingSystem.SwarmActive)
-                return base.SafePreAI(npc);
-
             if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
 
@@ -166,6 +163,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                         npc.position -= npc.velocity / (npc.ai[3] == 0 ? 2 : 4); //move slower
                     }
+                    if (npc.ai[1] < 90)
+                        PullNonTargets(npc, npc.Center, 600);
                     break;
 
                 case 7: //sword walls, ends at ai1=260
@@ -300,7 +299,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private void SwordCircle(NPC npc, float stop)
         {
             int startDelay = 60;
-
             if (AttackTimer == 0)
             {
                 SoundEngine.PlaySound(SoundID.Item161, npc.HasValidTarget ? Main.player[npc.target].Center : npc.Center);
@@ -316,6 +314,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             const float radius = 600;
             if (Main.player[npc.target].Distance(targetPos) > radius)
                 targetPos = Main.player[npc.target].Center + Main.player[npc.target].SafeDirectionTo(targetPos) * radius;
+
+            if (AttackTimer < startDelay + 30)
+            {
+                PullNonTargets(npc, targetPos, radius);
+            }
 
             if (AttackTimer % 90 == 30) //rapid fire sound effect
                 SoundEngine.PlaySound(SoundID.Item164, Main.player[npc.target].Center);
@@ -622,14 +625,50 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
         }
 
+        private void PullNonTargets(NPC npc, Vector2 center, float radius)
+        {
+            if (npc.target == Main.myPlayer)
+                return;
+            float distance = center.Distance(Main.LocalPlayer.Center);
+            float threshold = radius;
+            Player player = Main.LocalPlayer;
+            if (player.active && !player.dead && !player.ghost) //pull into arena
+            {
+                if (distance > threshold && distance < 3500)
+                {
+                    if (distance > 1500)
+                    {
+                        player.Incapacitate();
+                        player.velocity.X = 0f;
+                        player.velocity.Y = -0.4f;
+                    }
+
+                    Vector2 movement = center - player.Center;
+                    float difference = movement.Length() - threshold;
+                    movement.Normalize();
+                    movement *= difference < 32f ? difference : 32f;
+                    player.position += movement;
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        int DustType = Main.rand.NextFromList(DustID.RainbowTorch);
+                        int d = Dust.NewDust(player.position, player.width, player.height, DustType, 0f, 0f, 0, default, 1.25f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].velocity *= 5f;
+                    }
+                }
+            }
+        }
+
         #endregion helper funcs
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
-            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 1800);
+            if (target.HasBuff<SmiteBuff>())
+                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 900);
         }
 
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)

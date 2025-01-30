@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
@@ -197,7 +198,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         second = true;
                     }
                     const int Bolts = 24;
-                    SoundEngine.PlaySound(NukeBeep, player.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.NukeBeep, player.Center);
                     for (int i = 0; i < Bolts; i++)
                     {
                         int x = i;
@@ -258,7 +259,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     for (int side = -1; side < 2; side += 2)
                     {
                         Vector2 pos = npc.Center + Vector2.UnitX * (distance * i * side);
-                        SoundEngine.PlaySound(NukeBeep, pos);
+                        SoundEngine.PlaySound(FargosSoundRegistry.NukeBeep, pos);
                         if (FargoSoulsUtil.HostCheck)
                         {
 
@@ -331,7 +332,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             }
         }
 
-        private readonly SoundStyle NukeBeep = new("FargowiltasSouls/Assets/Sounds/Challengers/Baron/NukeBeep");
         private void SpawnLightning(NPC parent, Vector2 position)
         {
 
@@ -342,7 +342,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 for (int i = 0; i < 14; i++)
                 {
                     Vector2 pos = posOrig - (Vector2.UnitY * 150 * i);
-                    Projectile.NewProjectile(parent.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<LightningTelegraph>(), FargoSoulsUtil.ScaledProjectileDamage(parent.damage), 2f, Main.myPlayer, i);
+                    Projectile.NewProjectile(parent.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<LightningTelegraph>(), FargoSoulsUtil.ScaledProjectileDamage(parent.defDamage), 2f, Main.myPlayer, i);
                 }
             }
         }

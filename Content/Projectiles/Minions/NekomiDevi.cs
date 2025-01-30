@@ -41,12 +41,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override bool? CanDamage() => false;
 
-        public override bool PreAI()
-        {
-            Projectile.FargoSouls().NinjaSpeedup = 0;
-            return base.PreAI();
-        }
-
         public override void AI()
         {
             Projectile.scale = 1;

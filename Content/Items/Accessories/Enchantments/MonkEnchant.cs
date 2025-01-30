@@ -1,8 +1,10 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -103,12 +105,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             Vector2 pos = player.Center;
 
-            int damage = monkForce ? (shinobiForce ? 1500 : 1000) : 500;
-
+            int damage = monkForce ? (shinobiForce ? 1080 : 720) : 360;
+            damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
             Projectile.NewProjectile(player.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<MonkDashDamage>(), damage, 0);
 
             modPlayer.DashCD = 100;
             player.dashDelay = 100;
+
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MonkEnchant").Value, Color.Red, () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
             if (player.FargoSouls().IsDashingTimer < 20)
                 player.FargoSouls().IsDashingTimer = 20;
 
@@ -154,7 +159,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     }
                     else
                     {
-                        teleportPos.X -= 18 * direction;
+                        //teleportPos.X -= 18 * direction;
                         tryGoThroughWalls = true;
                         break;
                     }
@@ -174,7 +179,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         }
                     }
                 }
-
                 if (teleportPos.X > 50 && teleportPos.X < (double)(Main.maxTilesX * 16 - 50) && teleportPos.Y > 50 && teleportPos.Y < (double)(Main.maxTilesY * 16 - 50))
                 {
                     FargoSoulsUtil.GrossVanillaDodgeDust(player);

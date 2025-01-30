@@ -30,6 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 900;
             Projectile.Opacity = 0f;
+            Projectile.light = 0f;
         }
 
         bool spawned;
@@ -37,9 +38,9 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public ref float Timer => ref Projectile.ai[0];
         public ref float PlayerID => ref Projectile.ai[1];
 
-        int telegraphTime = 60;
+        int telegraphTime = 120;
         int aimTime = 30;
-        int chargeTime = 60;
+        int chargeTime = 120;
 
 
         public override void AI()
@@ -51,11 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost, Projectile.Center);
             }
 
-            Color light = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
-            float lightLevel = light.R + light.G + light.B;
-            if (lightLevel > 500)
-                fading = true;
-            if (fading)
+            if (fading && Timer > telegraphTime)
             {
                 Projectile.Opacity -= 0.05f;
                 if (Projectile.Opacity < 0.1f)
@@ -82,8 +79,15 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                     return;
                 }
                 Player player = Main.player[(int)PlayerID];
+
                 if (!player.Alive())
                     return;
+
+                Color light = Lighting.GetColor(player.Center.ToTileCoordinates());
+                float lightLevel = light.R + light.G + light.B;
+                if (lightLevel > 500)
+                    fading = true;
+
                 Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(Projectile.DirectionTo(player.Center).ToRotation(), 0.1f).ToRotation();
                 Projectile.velocity *= 0.96f;
                 if (Timer == 90)
@@ -102,8 +106,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Player player = Main.player[(int)PlayerID];
                 if (!player.Alive())
                     return;
-                Projectile.velocity += Projectile.DirectionTo(player.Center) * 0.2f;
-                Projectile.velocity = Projectile.velocity.ClampLength(0f, 5f);
+                Projectile.velocity += Projectile.DirectionTo(player.Center) * 0.1f;
+                Projectile.velocity = Projectile.velocity.ClampLength(0f, 4f);
                 Projectile.rotation = Projectile.velocity.ToRotation();
             }
             else
@@ -128,10 +132,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Frostburn, 90);
-            if (WorldSavingSystem.MasochistModeReal)
-                target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 900);
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
+            //target.AddBuff(BuffID.Frostburn, 90);
+            //if (WorldSavingSystem.MasochistModeReal)
+            //    target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 900);
+            //target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
         }
 
         //public override Color? GetAlpha(Color lightColor)
@@ -147,8 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
-            Color color26 = lightColor;
-            color26 = Color.Black * Projectile.Opacity;
+            Color color26 = Color.Black * Projectile.Opacity;
 
             SpriteEffects effects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 

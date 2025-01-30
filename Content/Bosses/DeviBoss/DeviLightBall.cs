@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Assets.ExtraTextures;
-
-
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using Luminance.Core.Graphics;
@@ -9,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -36,11 +36,17 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.timeLeft = 270;
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.DeviWyvernOrb, Projectile.position);
+            base.OnSpawn(source);
+        }
+
         public override void OnKill(int timeLeft)
         {
             base.OnKill(timeLeft);
 
-            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+            SoundEngine.PlaySound(FargosSoundRegistry.DeviWyvernOrbImpact, Projectile.position);
             for (int index1 = 0; index1 < 10; ++index1)
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, -Projectile.velocity.X * 0.2f, -Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);

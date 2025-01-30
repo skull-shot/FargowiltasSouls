@@ -65,9 +65,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            if (WorldSavingSystem.SwarmActive)
-                return;
-
             EModeGlobalNPC.guardBoss = npc.whoAmI;
             npc.damage = npc.defDamage;
             npc.defense = npc.defDefense;

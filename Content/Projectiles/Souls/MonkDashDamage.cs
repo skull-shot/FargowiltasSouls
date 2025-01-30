@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         {
             Player player = Main.player[Projectile.owner];
 
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Melee;
             Projectile.friendly = true;
             Projectile.width = player.width;
             Projectile.height = player.height;
@@ -40,26 +40,25 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             {
                 Projectile.Kill();
             }
-            Projectile.Center = player.Center;
+            Projectile.velocity = player.Center - Projectile.Center;
 
         }
 
         public override string Texture => FargoSoulsUtil.EmptyTexture;
 
-        /*public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float collisionPoint = 0f;
-            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.position, Projectile.oldPos[1], Projectile.width, ref collisionPoint))
+            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center - Projectile.velocity, Projectile.width, ref collisionPoint))
             {
                 return true;
             }
-            return false;
-        }*/
+            return null;
+        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.damage = (int)(Math.Round(Projectile.damage * 0.8));
-            //CHANGE THIS SOUND EFFECT!!!!!!!!!!!!!!!!!!!!!! TOO MUCH RAINBOW GUN
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, target.Center);
 
             //vanilla muramasa slash spawn logic
@@ -100,6 +99,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.SuperStarSlash);
+            Projectile.DamageType = DamageClass.Melee;
             Projectile.aiStyle = -1;
         }
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 200);

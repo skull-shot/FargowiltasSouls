@@ -647,7 +647,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         public override void UpdateLifeRegen(ref int damage)
         {
             if (NPC.lifeRegen < 0)
+            {
                 NPC.lifeRegen /= 2;
+                damage /= 2;
+            }
         }
 
         public override void FindFrame(int frameHeight)
@@ -837,7 +840,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
             if (!NPC.IsABestiaryIconDummy)
             {
-                spriteBatch.End(); spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.UseBlendState(BlendState.Additive);
             }
 
             Texture2D star = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Effects/LifeStar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
@@ -853,7 +856,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
             if (!NPC.IsABestiaryIconDummy)
             {
-                spriteBatch.End(); spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                spriteBatch.ResetToDefault();
             }
         }
     }

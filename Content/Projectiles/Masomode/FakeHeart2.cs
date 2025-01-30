@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
         }
-
+        public ref float TargetID => ref Projectile.ai[2];
         public override void AI()
         {
             float rand = Main.rand.Next(90, 111) * 0.01f * (Main.essScale * 0.5f);
@@ -42,12 +42,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Projectile.ai[1]--;
                 if (Projectile.ai[1] == 0)
                 {
-                    Player target = FargoSoulsUtil.PlayerExists(Player.FindClosest(Projectile.Center, 0, 0));
+                    Player target = FargoSoulsUtil.PlayerExists(TargetID);
                     if (target != null)
                     {
                         Projectile.velocity = Projectile.SafeDirectionTo(target.Center) * 1;
                         Projectile.netUpdate = true;
                     }
+                    else
+                        Projectile.Kill();
                 }
                 if (Projectile.ai[1] <= 0)
                 {

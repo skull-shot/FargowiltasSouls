@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -93,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 if (Projectile.ai[1] % 15 == 0)
                 {
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep"), Projectile.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ReticleBeep, Projectile.Center);
                 }
 
                 if (Projectile.ai[1] == 45)
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     Projectile.netUpdate = true;
 
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleLockOn"), Projectile.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.ReticleLockOn, Projectile.Center);
 
                     if (FargoSoulsUtil.HostCheck)
                         Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -5);

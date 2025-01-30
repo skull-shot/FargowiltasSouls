@@ -37,6 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
+            Projectile.DamageType = DamageClass.Melee;
 
             Projectile.ownerHitCheck = true;
         }
@@ -50,6 +51,13 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (HitsLeft <= 0)
                 return false;
             return base.CanHitNPC(target);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().HellFire)
+            {
+                modifiers.FinalDamage *= 1.2f;
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -103,6 +111,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if (animProgress < 0.2f && !FirstSwing)
                     flip = true;
                 Projectile.ResetLocalNPCHitImmunity();
+
+                Projectile.damage = player.GetWeaponDamage(player.HeldItem);
+                Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
             }
             else if (progress < firstSwingEnd)
             {
@@ -130,6 +141,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     flip = true;
                 Swinging = false;
                 Projectile.ResetLocalNPCHitImmunity();
+                Projectile.damage = player.GetWeaponDamage(player.HeldItem);
+                Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
             }
             else
             {

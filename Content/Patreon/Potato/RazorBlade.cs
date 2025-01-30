@@ -136,7 +136,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
         {
             if (Projectile.soundDelay == 0)
             {
-                SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Dig with { Volume = 0.5f }, Projectile.Center);
             }
             Projectile.soundDelay = 10;
             if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)

@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override bool ExtraAttackEffect => true;
 
-        public static void OriDotModifier(NPC npc, FargoSoulsPlayer modPlayer, ref int damage)
+        public static float OriDotModifier(NPC npc, FargoSoulsPlayer modPlayer)
         {
             float multiplier = 2.5f;
 
@@ -62,21 +62,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 multiplier = 3.5f;
             }
-
-            npc.lifeRegen = (int)(npc.lifeRegen * multiplier);
-            damage = (int)(damage * multiplier);
-
-            //half as effective if daybreak applied
-            if (npc.daybreak)
-            {
-                npc.lifeRegen /= 2;
-                damage /= 2;
-            }
+            return multiplier;
         }
 
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<EarthForceEffect>())
+            if (!HasEffectEnchant(player))
                 return;
             player.onHitPetal = true;
         }

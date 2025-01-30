@@ -3,6 +3,10 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls.Content.Tiles;
+using FargowiltasSouls.Content.WorldGeneration;
+using FargowiltasSouls.Core.Systems;
+using System;
+using FargowiltasSouls.Content.Items.Summons;
 
 namespace FargowiltasSouls.Content.Items.Consumables
 {
@@ -10,6 +14,10 @@ namespace FargowiltasSouls.Content.Items.Consumables
     {
         public override bool IsLoadingEnabled(Mod mod) => true;
         public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<CoffinSummon>();
+        }
         public override void SetDefaults()
         {
             Item.width = 20;
@@ -31,10 +39,12 @@ namespace FargowiltasSouls.Content.Items.Consumables
 
         public override bool? UseItem(Player player)
         {
-            Point point = new((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
-            WorldGen.KillTile(point.X, point.Y);
-            WorldGen.PlaceTile(point.X, point.Y, ModContent.TileType<CrackedSandstoneBricks>(), mute: true, forced: true);
-            //CoffinArena.Place(Main.MouseWorld.ToTileCoordinates());
+            //Point point = new((int)(Main.MouseWorld.X / 16), (int)(Main.MouseWorld.Y / 16));
+            //WorldGen.KillTile(point.X, point.Y);
+            //WorldGen.PlaceTile(point.X, point.Y, ModContent.TileType<CrackedSandstoneBricks>(), mute: true, forced: true);
+            Point topCenter = Main.MouseWorld.ToTileCoordinates();
+            CoffinArena.Place(topCenter);
+            CoffinArena.PlaceOpening(topCenter);
             return true;
         }
     }

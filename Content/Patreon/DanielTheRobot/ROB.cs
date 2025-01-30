@@ -42,6 +42,8 @@ namespace FargowiltasSouls.Content.Patreon.DanielTheRobot
             {
                 Projectile.timeLeft = 2;
             }
+            if (!Collision.SolidCollision(Projectile.Bottom + Vector2.UnitY * 8, 2, 2))
+                Projectile.ai[0] = 1;
             HandleAnimation();
             return true;
         }

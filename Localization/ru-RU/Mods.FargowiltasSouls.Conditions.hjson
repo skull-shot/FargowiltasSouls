@@ -1,16 +1,16 @@
 // Conditions (used in recipes, NPC shop, etc)
 RoombaPetSold: Когда включена конфигурация Румбы
 // ItemDropRuleConditions (used in NPC loot, etc)
-DownedEvilBoss: После победы над любым боссом Зла
+DownedEvilBoss: После победы над любым боссом зла
 EMode: "[i:FargowiltasSouls/Masochist] Шанс выпадения в режиме Вечность"
-EModeEarlyBirdHM: "[i:FargowiltasSouls/Masochist] Шанс выпадения в режиме Вечность в Сложном режиме"
-EModeEarlyBirdPHM: "[i:FargowiltasSouls/Masochist] Шанс выпадения в режиме Вечность в Простом режиме"
-EModeNotMaster: Шанс выпадения в режиме Мастера/Вечность
+EModeEarlyBirdHM: "[i:FargowiltasSouls/Masochist] Шанс выпадения в режиме Вечность в хардмоде"
+EModeEarlyBirdPHM: "[i:FargowiltasSouls/Masochist] Шанс выпадения в режиме Вечность в пре-хардмоде"
+EModeNotMaster: Шанс выпадения в режиме Мастера / Вечность
 NotEMode: "[i:FargowiltasSouls/Masochist] Шанс выпадения вне режима Вечность"
-TimsConcoction: "[i:FargowiltasSouls/TimsConcoction] Шанс выпадения со Смесью Тима"
+TimsConcoction: "[i:FargowiltasSouls/TimsConcoction] Шанс выпадения со смесью Тима"
 Patreon: "[i:FargowiltasSouls/RoombaPet] Предмет Патреона"
 PatreonEMode: "[i:FargowiltasSouls/RoombaPet] Предмет Патреона, в режиме Вечность"
-PatreonPlant: "[i:FargowiltasSouls/RoombaPet] Предмет Патреона, в джунглях во время Кровавой Луны"
+PatreonPlant: "[i:FargowiltasSouls/RoombaPet] Предмет Патреона, в джунглях во время кровавой луны"
 FirstKill: Выпадает при первом убийстве в режиме Вечность
-// DownedCursedCoffin: After defeating Cursed Coffin
-// PostEvilEternity: Eternity Mode: After any Evil Boss has been defeated
+DownedCursedCoffin: После победы над Скверным Саркофагом
+PostEvilEternity: Режим Вечность: После победы над любым боссом зла

@@ -88,7 +88,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (player.GetJumpState(ExtraJump.BlizzardInABottle).Available || player.GetJumpState(ExtraJump.SandstormInABottle).Available || player.GetJumpState(ExtraJump.CloudInABottle).Available || player.GetJumpState(ExtraJump.FartInAJar).Available || player.GetJumpState(ExtraJump.TsunamiInABottle).Available || player.GetJumpState(ExtraJump.UnicornMount).Available)
                 {
                 }
-                else
+                else if (!modPlayer.ChlorophyteEnchantActive)
                 {
                     if (player.jump == 0 && player.releaseJump && player.velocity.Y != 0f && !player.mount.Active && modPlayer.CanJungleJump)
                     {
@@ -140,6 +140,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             p.idStaticNPCHitCooldown = 10;
                             p.FargoSouls().noInteractionWithNPCImmunityFrames = true;
                             p.extraUpdates += 1;
+                            p.DamageType = DamageClass.Default;
                         }
                     }
                 }

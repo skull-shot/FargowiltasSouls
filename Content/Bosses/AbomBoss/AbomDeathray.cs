@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -49,7 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (Projectile.localAI[0] == 0f)
             {
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/Mechs/RetinazerDeathray"), Projectile.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.GenericDeathray, Projectile.Center);
                 spawnPos = Projectile.Center;
             }
             else //vibrate beam

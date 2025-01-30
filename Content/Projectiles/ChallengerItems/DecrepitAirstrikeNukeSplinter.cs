@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.scale = 1f;
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         public override void AI()

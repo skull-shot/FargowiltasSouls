@@ -135,7 +135,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             ringorigin = ringrect.Size() / 2f;
             Main.EntitySpriteDraw(ringTexture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(ringrect), RingColor, Projectile.rotation, ringorigin, RingScale, SpriteEffects.None, 0);
             return false;
-            
+
             /*
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             }
             vertexStrip.PrepareStrip(positions.ToArray(), rotations.ToArray(), ColorFunction, WidthFunction, -Main.screenPosition, includeBacksides: true);
             vertexStrip.DrawTrail();
-            Main.spriteBatch.ExitShaderRegion();
+            Main.spriteBatch.EnterDefaultRegion();
             return false;
             */
         }

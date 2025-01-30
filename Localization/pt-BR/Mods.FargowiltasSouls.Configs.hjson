@@ -1,19 +1,78 @@
+ClientConfig: {
+	// DisplayName: Client Config
+
+	Headers: {
+		// Maso: Eternity Mode
+		// Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Patreon Items]"
+	}
+
+	HideTogglerWhenInventoryIsClosed: {
+		// Label: Only show effect toggler when inventory is open
+		// Tooltip: If true, the effect toggler is automatically hidden when your inventory is closed.
+	}
+
+	ItemDisabledTooltip: {
+		// Label: Disabled Effect Tooltip
+		// Tooltip: If true, items with any effects disabled by the Effect Toggler will have a tooltip line stating this.
+	}
+
+	ToggleSearchReset: {
+		// Label: Accessory Effects menu resets search bar when closed
+		// Tooltip: ""
+	}
+
+	RainbowHealThreshold: {
+		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold"
+		// Tooltip: ""
+	}
+
+	PrecisionSealIsHold: {
+		// Label: "[i:FargowiltasSouls/PrecisionSeal] Precision Seal Key must be held"
+		// Tooltip: If false, precision mode is instead toggled with the key.
+	}
+
+	OncomingMutantX: {
+		// Label: Eternity Mode inventory icon X position
+		// Tooltip: ""
+	}
+
+	OncomingMutantY: {
+		// Label: Eternity Mode inventory icon Y position
+		// Tooltip: ""
+	}
+
+	CooldownBars: {
+		// Label: Cooldown Bars
+		// Tooltip: ""
+	}
+
+	CooldownBarsX: {
+		// Label: Cooldown Bars X
+		// Tooltip: ""
+	}
+
+	CooldownBarsY: {
+		// Label: Cooldown Bars Y
+		// Tooltip: ""
+	}
+
+	SkillMenuX: {
+		// Label: Skill Menu X
+		// Tooltip: Measured from the right side of the screen.
+	}
+
+	SkillMenuY: {
+		// Label: Skill Menu Y
+		// Tooltip: ""
+	}
+}
+
 SoulConfig: {
 	// DisplayName: Soul Config
 
 	Headers: {
 		Maso: Modo Eternidade
 		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Itens do Patreon]"
-	}
-
-	HideTogglerWhenInventoryIsClosed: {
-		Label: Mostrar o alternador de efeitos apenas quando o inventário estiver aberto
-		Tooltip: Se verdadeiro, o alternador de efeitos é escondido automaticamente quando o seu inventário está fechado.
-	}
-
-	ItemDisabledTooltip: {
-		// Label: Disabled Effect Tooltip
-		// Tooltip: If true, items with any effects disabled by the Effect Toggler will have a tooltip line stating this.
 	}
 
 	DeviChatter: {
@@ -38,26 +97,6 @@ SoulConfig: {
 
 	BossRecolors: {
 		// Label: Bosses use alternative sprites
-		// Tooltip: ""
-	}
-
-	PrecisionSealIsHold: {
-		// Label: Precision Seal Key must be held
-		// Tooltip: If false, precision mode is instead toggled with the key.
-	}
-
-	PreBossNightGlow: {
-		// Label: Pre-Boss Enemy Glow
-		// Tooltip: In Eternity Mode, enemies glow at night before any boss has been killed
-	}
-
-	OncomingMutantX: {
-		// Label: Eternity Mode inventory icon X position
-		// Tooltip: ""
-	}
-
-	OncomingMutantY: {
-		// Label: Eternity Mode inventory icon Y position
 		// Tooltip: ""
 	}
 
@@ -141,18 +180,8 @@ SoulConfig: {
 		// Tooltip: Disables the most performance-demanding visuals. Currently disables Mutant's eye attack trails.
 	}
 
-	CooldownBars: {
-		// Label: Cooldown Bars
-		// Tooltip: ""
-	}
-
-	CooldownBarsX: {
-		// Label: Cooldown Bars X
-		// Tooltip: ""
-	}
-
-	CooldownBarsY: {
-		// Label: Cooldown Bars Y
+	PatreonTouhou: {
+		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
 		// Tooltip: ""
 	}
 }

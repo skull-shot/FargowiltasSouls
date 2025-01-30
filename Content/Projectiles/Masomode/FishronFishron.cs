@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
             //target.AddBuff(BuffID.WitheredWeapon, 600);
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 20 * 60);
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
             target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 25;
         }
 

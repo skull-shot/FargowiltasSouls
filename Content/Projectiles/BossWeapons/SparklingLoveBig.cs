@@ -1,4 +1,5 @@
-﻿using Luminance.Core.Graphics;
+﻿using FargowiltasSouls.Assets.Sounds;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -52,9 +53,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Vector2 offset = new Vector2(0, -360).RotatedBy(Math.PI / 4 * devi.spriteDirection);
                     Projectile.Center = devi.Center + offset;
                     Projectile.rotation = (float)Math.PI / 4 * devi.spriteDirection - (float)Math.PI / 4;
+                    SoundEngine.PlaySound(FargosSoundRegistry.DeviSwing, Projectile.Center);
                 }
                 else //swinging down
                 {
+                    
                     if (Projectile.timeLeft == 15) //confirm facing the right direction with right offset
                         Projectile.rotation = (float)Math.PI / 4 * devi.spriteDirection - (float)Math.PI / 4;
 
@@ -147,6 +150,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             if (!Main.dedServ && Main.LocalPlayer.active)
                 ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 60);
+            
 
             MakeDust();
 

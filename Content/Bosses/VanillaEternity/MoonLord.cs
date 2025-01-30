@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
         {
             int masoStateML = GetVulnerabilityState(npc);
-            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4 && !player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] && !WorldSavingSystem.SwarmActive)
+            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4 && !player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
                 return false;
 
             return base.CanBeHitByItem(npc, player, item);
@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
         {
-            if (!Main.player[projectile.owner].buffImmune[ModContent.BuffType<NullificationCurseBuff>()] && !WorldSavingSystem.SwarmActive)
+            if (!Main.player[projectile.owner].buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
             {
 
                 switch (GetVulnerabilityState(npc))
@@ -131,9 +131,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bool result = base.SafePreAI(npc);
 
             EModeGlobalNPC.moonBoss = npc.whoAmI;
-
-            if (WorldSavingSystem.SwarmActive)
-                return result;
 
             if (!SpawnedRituals)
             {
@@ -636,8 +633,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool SafePreAI(NPC npc)
         {
-            if (WorldSavingSystem.SwarmActive)
-                return true;
 
             NPC core = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.MoonLordCore);
 

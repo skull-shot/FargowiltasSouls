@@ -22,16 +22,16 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void SetDefaults()
         {
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.timeLeft = 60 * 4;
             Projectile.tileCollide = false;
             Projectile.width = 80;
             Projectile.height = 80;
             Projectile.penetrate = 1;
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 120;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            //Projectile.usesIDStaticNPCImmunity = true;
+            //Projectile.idStaticNPCHitCooldown = 120;
+            //Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
             Projectile.FargoSouls().CanSplit = false;
             Projectile.extraUpdates = 2;
 
@@ -177,8 +177,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Vector2 circleOffset = normalizedVel * 4f * Projectile.scale;
             Main.EntitySpriteDraw(circle, Projectile.Center + circleOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, OrangeColor * 0.1f * Projectile.Opacity, Projectile.rotation, circle.Size() / 2f, circleScale, effects, 0);
             //glow
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             float count = 12f;
             Color glowColor = Color.Lerp(Color.White, OrangeColor, 1f) * (1 / (count * 0.1f)) * Projectile.Opacity;
             for (int j = 0; j < count; j++)
@@ -191,13 +190,11 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Vector2 glowOffset = normalizedVel * 3.5f;
             Main.EntitySpriteDraw(texture, Projectile.Center + glowOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(rectangle), OrangeColor * 1f * Projectile.Opacity, Projectile.rotation, origin2, Projectile.scale, effects, 0f);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(rectangle), drawColor, Projectile.rotation, origin2, Projectile.scale, effects, 0);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int i = 0; i < 3; i++)
             {
                 Texture2D glowTexture = ModContent.Request<Texture2D>(textureString + "Glow").Value;
@@ -206,8 +203,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 Rectangle glowRect = new(0, 0, glowTexture.Width, glowTexture.Height);
                 Main.EntitySpriteDraw(glowTexture, Projectile.Center + offset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowRect, OrangeColor with { A = 160 } * Projectile.Opacity * 0.8f, normalizedVel.ToRotation() + MathHelper.PiOver2, glowTexture.Size() / 2, glowScale, effects, 0f);
             }
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }

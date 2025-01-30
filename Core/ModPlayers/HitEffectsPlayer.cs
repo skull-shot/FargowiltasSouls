@@ -20,6 +20,7 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria.Localization;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -39,7 +40,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (SqueakyToy)
             {
                 modifiers.FinalDamage.Base = 1;
-                Squeak(target.Center);
+                Squeak(target.Center, 0.4f);
                 return;
             }
 
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (SqueakyToy)
             {
                 modifiers.SetMaxDamage(1);
-                Squeak(target.Center);
+                Squeak(target.Center, 0.4f);
                 return;
             }
 
@@ -69,17 +70,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 
                 if (hitInfo.Crit)
                 {
-                    if (Eternity)
-                    {
-                        hitInfo.Damage *= 5;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseSoul)
-                    {
-                        hitInfo.Damage *= 2;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseCore)
+                    if (UniverseCore) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
 
@@ -90,8 +81,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
-                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && !TerrariaSoul)
-                        hitInfo.Damage = (int)(hitInfo.Damage * 0.75);
+                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
+                    {
+                        float critDamageMult = 0.75f; // 1f
+                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                            //critDamageMult *= 0.75f;
+                        if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                            critDamageMult *= 0.75f;
+                        if (critDamageMult != 1)
+                            hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
+                    }
+                       
                 }
 
                 if (Hexed)
@@ -435,6 +435,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DeathMarked)
                 modifiers.SourceDamage *= 1.5f;
 
+            if (MutantDesperation)
+                modifiers.SourceDamage *= 2f;
+
             if (Player.whoAmI == Main.myPlayer && !noDodge && Player.HasEffect<SqueakEffect>())
             {
                 int chanceDenominator = 10;
@@ -443,7 +446,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Main.rand.NextBool(chanceDenominator))
                 {
-                    Squeak(Player.Center);
+                    Squeak(Player.Center, 0.4f);
                     modifiers.SetMaxDamage(1);
                 }
             }

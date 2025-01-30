@@ -274,8 +274,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 drawPos.X += 8 * Projectile.spriteDirection;
                 drawPos.Y -= 11;
 
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
 
                 Main.spriteBatch.Draw(star, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(rect), color * opacity, rotation, origin, sansScale, SpriteEffects.None, 0);
                 Main.spriteBatch.Draw(star, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(rect), Color.White * opacity * 0.75f, rotation, origin, sansScale, SpriteEffects.None, 0);
@@ -284,8 +283,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 GameShaders.Misc["LCWingShader"].Apply(starDraw);
                 starDraw.Draw(spriteBatch);*/
 
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+                Main.spriteBatch.ResetToDefault();
             }
 
             //if (auraTrail) Main.EntitySpriteDraw(lightning, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(lightningRectangle), Color.White * Projectile.Opacity, Projectile.rotation, lightningRectangle.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);

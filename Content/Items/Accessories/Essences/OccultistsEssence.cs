@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Essences
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(DamageClass.Summon) += 0.2f;
+            player.GetDamage(DamageClass.Summon) += 0.18f;
             player.whipRangeMultiplier += 0.1f;
             player.maxMinions += 1;
         }

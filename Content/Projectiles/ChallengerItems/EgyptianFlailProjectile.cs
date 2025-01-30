@@ -63,15 +63,19 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 if (player.Alive() && player.FargoSouls() is FargoSoulsPlayer modPlayer && modPlayer.EgyptianFlailCD <= 0)
                 {
                     modPlayer.EgyptianFlailCD = EgyptianFlail.maxCooldown;
-                    CooldownBarManager.Activate("NekhakhaCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/EgyptianFlail").Value, Color.DarkMagenta, 
-                        () => 1 - (float)modPlayer.EgyptianFlailCD / EgyptianFlail.maxCooldown, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<EgyptianFlail>());
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("NekhakhaCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/EgyptianFlail").Value, Color.DarkMagenta, 
+                            () => 1 - (float)modPlayer.EgyptianFlailCD / EgyptianFlail.maxCooldown, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<EgyptianFlail>());
                 }
             }
+
+            // Whip damage falloff
+            Projectile.damage = (int)(Projectile.damage * 0.7);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            List<Vector2> list = new List<Vector2>();
+            List<Vector2> list = [];
             Projectile.FillWhipControlPoints(Projectile, list);
 
             DrawLine(list);

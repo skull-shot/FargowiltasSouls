@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath1 with { Volume = 0.5f }, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.NPCDeath1 with { Volume = 0.2f }, Projectile.Center);
 
             for (int k = 0; k < 20; k++)
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Blood, 0f, -1f);
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 Main.gore[g].rotation = Main.rand.NextFloat(MathHelper.TwoPi);
             }
 
-            SoundEngine.PlaySound(SoundID.Item14 with { Volume = 0.5f }, Projectile.Center);
+            /*SoundEngine.PlaySound(SoundID.Item14 with { Volume = 0.5f }, Projectile.Center);
 
             for (int i = 0; i < 10; i++)
             {
@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, default, Main.rand.Next(61, 64));
                 Main.gore[gore].velocity *= 0.4f;
                 Main.gore[gore].velocity += new Vector2(1f, 1f).RotatedBy(MathHelper.TwoPi / 2 * j);
-            }
+            }*/
         }
 
         public override bool PreDraw(ref Color lightColor)

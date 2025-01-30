@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.thorns = 1f;
 
 
-            if (player.HasEffect<TurtleEffect>() && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()) && modPlayer.IsStandingStill && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+            if (player.HasEffect<TurtleEffect>() && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()) && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
             {
                 modPlayer.TurtleCounter++;
 

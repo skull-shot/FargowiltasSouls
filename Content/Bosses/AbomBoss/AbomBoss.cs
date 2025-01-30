@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -106,6 +107,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             NPC.aiStyle = -1;
             NPC.netAlways = true;
             NPC.timeLeft = NPC.activeTime * 30;
+            NPC.BossBar = ModContent.GetInstance<AbominationnBossBar>();
 
             Music = MusicID.OtherworldlyPlantera;
             bool foundMod = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod);
@@ -207,7 +209,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 if (WorldSavingSystem.EternityMode && NPC.localAI[3] == 2 && FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<AbomRitual>()) == null)
                     ritualProj = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<AbomRitual>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, NPC.whoAmI);
 
-                if (WorldSavingSystem.MasochistModeReal && FargoSoulsUtil.ProjectileExists(ritualProjMaso, ModContent.ProjectileType<AbomRitualMaso>()) == null)
+                if (WorldSavingSystem.MasochistModeReal && NPC.localAI[3] > 0 && FargoSoulsUtil.ProjectileExists(ritualProjMaso, ModContent.ProjectileType<AbomRitualMaso>()) == null)
                     ritualProjMaso = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<AbomRitualMaso>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, NPC.whoAmI);
 
                 if (Main.getGoodWorld && NPC.localAI[3] == 2 && FargoSoulsUtil.ProjectileExists(ritualProjFTW, ModContent.ProjectileType<AbomRitualFTW>()) == null)
@@ -283,23 +285,19 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Stigma");
                 }
 
-                if (WorldSavingSystem.EternityMode)
-                {
-                    //because this breaks the background???
-                    if (Main.GameModeInfo.IsJourneyMode && CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
-                        CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().SetPowerInfo(false);
+                //because this breaks the background???
+                if (Main.GameModeInfo.IsJourneyMode && CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
+                    CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().SetPowerInfo(false);
 
-                    if (!SkyManager.Instance["FargowiltasSouls:AbomBoss"].IsActive())
-                        SkyManager.Instance.Activate("FargowiltasSouls:AbomBoss");
+                if (!SkyManager.Instance["FargowiltasSouls:AbomBoss"].IsActive())
+                    SkyManager.Instance.Activate("FargowiltasSouls:AbomBoss");
 
-                    Main.dayTime = false;
-                    Main.time = 16200; //midnight
+                Main.dayTime = false;
+                Main.time = 16200; //midnight
 
-                    Main.raining = false; //disable rain
-                    Main.rainTime = 0;
-                    Main.maxRaining = 0;
-
-                }
+                Main.raining = false; //disable rain
+                Main.rainTime = 0;
+                Main.maxRaining = 0;
             }
 
             return base.PreAI();
@@ -597,10 +595,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 float extendedDelay = NPC.localAI[3] > 1 ? 90 : 40;
                                 float speed = NPC.localAI[3] > 1 ? 40 : 10;
                                 float offset = NPC.ai[2] % 2 == 0 ? 0 : 0.5f;
-                                if (FargoSoulsUtil.HostCheck)
+                                if (FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget)
                                 {
                                     for (int i = 0; i < max; i++)
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.TwoPi / max * (i + offset)) * speed, ModContent.ProjectileType<AbomScytheFlaming>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, baseDelay, baseDelay + extendedDelay);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.TwoPi / max * (i + offset)) * speed, ModContent.ProjectileType<AbomScytheFlaming>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, baseDelay, baseDelay + extendedDelay, ai2: NPC.target);
                                 }
                                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
                             }
@@ -620,7 +618,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     {
                         if (NPC.localAI[3] > 1) //emode modified tells
                         {
-                            if (NPC.ai[1] == 30)
+                            if (NPC.ai[1] == 30 && WorldSavingSystem.EternityMode)
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRingHollow>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 3, NPC.whoAmI);
                             else if (NPC.ai[1] == 210)
                             {
@@ -1782,6 +1780,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 var target = Main.LocalPlayer;
                 var blackTile = TextureAssets.MagicPixel;
                 var diagonalNoise = FargosTextureRegistry.WavyNoise;
+                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                    return false;
                 var maxOpacity = NPC.Opacity;
 
                 ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.MutantP1Aura");

@@ -27,13 +27,14 @@
 // WhipStack: Whip buffs/debuffs can't stack
 // DefensePrefix: Adjusted prefix stats: reduced defense before Hardmode, +5 max life
 // DefensePrefix_HM: Adjusted prefix stats: +5 max life
+// ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed
 // ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 // MinionStack: Damage of minions diminishes when summoning over 3 copies (effect caps at 12)
 // SummonMulticlass: Summon damage decreases when you attack using other classes (except in OOA)
 // ShadowDodge: Eternity Mode: Dodging will reduce your attack speed
 // IceBarrier: Eternity Mode: 10% reduced damage
 // SpearRework: Reworked spear swing animation
-// PalladiumPikeRework: Greatly increases life regeneration after striking an enemy
+// PalladiumPikeRework: Increased size, Greatly increases life regeneration and heal 1 HP (1/2 second cooldown)
 // CobaltNaginataRework: Causes a small explosion on striking enemies
 // MythrilHalberdRework: After not attacking for 2 seconds, your next attack deals 8x damage, scaling with attack speed
 // OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount
@@ -46,3 +47,6 @@
 // WeatherPain: Increased hit frequency and pierce
 // HoundiusShootius: Increased fireball velocity
 // SniperRifle: Deals up to double damage to enemies the further away they are
+// ChlorophyteSaber: Faster projectiles that slow down on hit
+// JackOLanternLauncher: Increased projectile speed by 50%
+// GolemFist: Deals up to triple damage to enemies the further out the fist is extended

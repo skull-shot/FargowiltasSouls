@@ -11,8 +11,10 @@ using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -21,6 +23,7 @@ using Luminance.Core.Graphics;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +33,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -50,24 +54,18 @@ namespace FargowiltasSouls.Content.Projectiles
         /// <br/>When checking it, bear in mind that OnSpawn comes before a Projectile.NewProjectile() returns! High danger of infinite recursion
         /// </summary>
         public bool CanSplit = true;
-        /// <summary>
-        /// Whether Ninja Enchant can speed this up.
-        /// <br/>When trying to disable it, do so in SetDefaults!
-        /// </summary>
-        public bool NinjaCanSpeedup = true;
+        public bool ItemSource = false;
         // private int numSplits = 1;
         public int stormTimer;
         public float TungstenScale = 1;
-        public int AdamModifier;
         public bool TikiTagged;
         private int spookyCD;
         public bool FrostFreeze;
         //        public bool SuperBee;
         public bool ChilledProj;
         public int ChilledTimer;
-        public int NinjaSpeedup;
         public bool canUmbrellaReflect = true;
-
+        public bool Adamantite = false;
         public int HuntressProj = -1; // -1 = non weapon proj, doesnt matter if it hits
                                       //1 = marked as weapon proj
                                       //2 = has successfully hit an enemy
@@ -92,6 +90,12 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool noInteractionWithNPCImmunityFrames;
         private int tempIframe;
+
+        public int DamageCap;
+        public bool EnchantmentProj;
+        public float HeldProjMemorizedDamage;
+        public float HeldProjMemorizedCrit;
+        public bool Reflected;
 
         public static List<int> ShroomiteBlacklist =
         [
@@ -181,10 +185,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     ProjectileID.Sets.MinionShot[projectile.type] = true;
                     break;
 
-                case ProjectileID.MechanicalPiranha:
-                    NinjaCanSpeedup = false;
-                    break;
-
                 case ProjectileID.SpiderEgg:
                 case ProjectileID.BabySpider:
                 case ProjectileID.FrostBlastFriendly:
@@ -209,12 +209,44 @@ namespace FargowiltasSouls.Content.Projectiles
 
             //            Fargowiltas.ModProjDict.TryGetValue(projectile.type, out ModProjID);
         }
+        public void ModifyProjectileSize(Projectile projectile, Player player, IEntitySource source)
+        {
+            float scale = 1f;
+            if (player.HasEffect<TungstenEffect>())
+                scale += TungstenEffect.TungstenIncreaseProjSize(projectile, player.FargoSouls(), source);
 
+            if (WorldSavingSystem.EternityMode && projectile.type == ProjectileID.PalladiumPike)
+                scale += 0.4f;
+
+            if (scale == 1f)
+                return;
+
+            projectile.position = projectile.Center;
+            projectile.scale *= scale;
+            projectile.width = (int)(projectile.width * scale);
+            projectile.height = (int)(projectile.height * scale);
+            projectile.Center = projectile.position;
+            FargoSoulsGlobalProjectile globalProjectile = projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
+            globalProjectile.TungstenScale = scale;
+
+            if (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword)
+                projectile.velocity *= scale;
+        }
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             if (WorldGen.generatingWorld)
             {
                 return;
+            }
+
+            if (source is EntitySource_Parent parentReflected && parentReflected.Entity is Projectile parentReflectedProj && parentReflectedProj.FargoSouls().Reflected)
+            {
+                projectile.hostile = false;
+                projectile.friendly = true;
+                Reflected = true;
+                projectile.owner = parentReflectedProj.owner;
+                projectile.DamageType = parentReflectedProj.DamageType;
+                projectile.netUpdate = true;
             }
             //not doing this causes player array index error during worldgen in some cases maybe??
             if (projectile.owner < 0 || projectile.owner >= Main.maxPlayers)
@@ -225,7 +257,18 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (projectile.friendly)
             {
-
+                if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
+                    ItemSource = true;
+                if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj3)
+                {
+                    //if (sourceProj3.FargoSouls().ItemSource)
+                    //    ItemSource = true;
+                    //projs shot by tiki-buffed projs will also inherit the tiki buff
+                    if (sourceProj3.FargoSouls().TikiTagged)
+                    {
+                        //TikiTagged = true;
+                    }
+                }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
                 {
                     for (int i = 0; i < 3; i++)
@@ -237,22 +280,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     //Projectile.NewProjectile(Entity.InheritSource(projectile), projectile.Center, projectile.velocity, ProjectileID.ConfettiGun, 0, 0f, projectile.owner);
                     projectile.active = false;
                 }
-
-                //projs shot by tiki-buffed projs will also inherit the tiki buff
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj && sourceProj.FargoSouls().TikiTagged)
-                {
-                    //TikiTagged = true;
-                }
-            }
-            if (player.HasEffect<NinjaEffect>()
-                && FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, true)
-                && projectile.type != ProjectileID.WireKite
-                && projectile.whoAmI != player.heldProj
-                && NinjaCanSpeedup
-                && projectile.aiStyle != 190 //fancy sword swings like excalibur
-                && !projectile.minion)
-            {
-                NinjaEnchant.NinjaSpeedSetup(modPlayer, projectile, this);
             }
 
             if (player.HasEffect<NebulaEffect>() && projectile.type != ModContent.ProjectileType<NebulaShot>())
@@ -264,12 +291,12 @@ namespace FargowiltasSouls.Content.Projectiles
                         && projectile.aiStyle != 190 // fancy sword swings like excalibur
                         && !projectile.minion) 
                     {
-                        int damage = Math.Max(1200, projectile.originalDamage);
+                        int damage = Math.Max(1200, projectile.damage);
                         damage = (int)MathHelper.Clamp(damage, 0, 3000);
                         if (modPlayer.ForceEffect<NebulaEnchant>())
                             damage = (int)(damage * 1.66667f);
 
-                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), damage, 1f, player.whoAmI, 0);
+                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 1f, player.whoAmI, 0);
                         projectile.active = false;
                         modPlayer.NebulaEnchCD = 3 * 60;
                     }
@@ -374,34 +401,28 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
-                case ProjectileID.Excalibur:
-                case ProjectileID.TrueExcalibur:
-                case ProjectileID.NightsEdge:
-                case ProjectileID.TrueNightsEdge:
-                case ProjectileID.TerraBlade2:
-                case ProjectileID.TheHorsemansBlade:
+                case ProjectileID.SeedlerThorn:
                     {
-                        Player owner = Main.player[projectile.owner];
-                        SwordPlayer sword = owner.GetModPlayer<SwordPlayer>();
-                        if (sword.swingDirection == -1)
+                        if (source is EntitySource_Parent parent && parent.Entity is Projectile parentProj && parentProj.type == ProjectileID.SeedlerNut && parentProj.DamageType == DamageClass.Summon)
                         {
-                            projectile.ai[0] *= -1;
+                            projectile.DamageType = DamageClass.Summon;
+                            EnchantmentProj = true;
                         }
+                            
                     }
                     break;
-
-                
                 default:
                     break;
             }
 
+            ModifyProjectileSize(projectile, player, source);
+            /*
             if (player.HasEffect<TungstenEffect>())
-            {
                 TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, source);
-            }
+            */
 
             if (player.HasEffect<HuntressEffect>()
-                && FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source)
+                && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
                 && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
@@ -409,42 +430,19 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 HuntressProj = 1;
             }
-            bool canAdaSplit = projectile.owner == Main.myPlayer && FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false)
-                && CanSplit && Array.IndexOf(NoSplit, projectile.type) <= -1
-                && projectile.aiStyle != ProjAIStyleID.Spear
-                && !(AdamantiteEffect.AdamIgnoreItems.Contains(modPlayer.Player.HeldItem.type) || modPlayer.Player.heldProj == projectile.whoAmI)
-                && (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source)
-                || source is EntitySource_Parent parent2 && parent2.Entity is Projectile sourceProj2 && (sourceProj2.aiStyle == ProjAIStyleID.Spear || sourceProj2.minion || sourceProj2.sentry || ProjectileID.Sets.IsAWhip[sourceProj2.type] && !ProjectileID.Sets.IsAWhip[projectile.type]));
 
-            if (player.HasEffect<EarthForceEffect>() && player.HasEffect<AdamantiteEffect>())
-            {
-                if (canAdaSplit)
-                {
-                    if (projectile.owner == Main.myPlayer && modPlayer.EarthTimer > 100 && modPlayer.EarthSplitTimer <= 0)
-                    {
-                        EarthForceEffect.EarthSplit(projectile, Main.LocalPlayer);
-                        AdamModifier = 3;
-                        modPlayer.EarthSplitTimer = 60 * 3;
-                    }
-                }
-                //reduce iframes so that the accessory actually increases dps for real
-                if (projectile.usesIDStaticNPCImmunity && AdamModifier == 3)
-                {
-                    projectile.idStaticNPCHitCooldown = (int)(projectile.idStaticNPCHitCooldown * 0.3333f);
-                }
-            }
-            else if (player.HasEffect<AdamantiteEffect>() && canAdaSplit)
-            {
-                //apen is inherited from proj to proj
-                projectile.ArmorPenetration += projectile.damage / 2;
-                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
-                AdamModifier = modPlayer.ForceEffect<AdamantiteEnchant>() ? 3 : 2;
-            }
+            if (source is EntitySource_Parent parent3 && parent3.Entity is Projectile sourceProj && sourceProj.FargoSouls().DamageCap > 0)
+                DamageCap = sourceProj.FargoSouls().DamageCap;
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
             {
-                if (player.whoAmI == Main.myPlayer && modPlayer.FishSoul2)
-                    SplitProj(projectile, 11, MathHelper.Pi / 3, 1);
+                int splitCount = 0;
+                if (modPlayer.FishSoul2)
+                    splitCount = 11;
+                else if (modPlayer.FishSoul1 && modPlayer.ForceEffect<AnglerEnchant>())
+                    splitCount = 6;
+                if (player.whoAmI == Main.myPlayer && splitCount > 0)
+                    SplitProj(projectile, splitCount, MathHelper.Pi / 3, 1);
             }
 
             // Fix for extended sword hitboxes having a maximum range for some reason
@@ -452,13 +450,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 projectile.ownerHitCheckDistance *= projectile.scale;
         }
 
-
-        public static int[] FancySwings => [
-            ProjectileID.TerraBlade2,
-            ProjectileID.TrueExcalibur,
-            ProjectileID.TheHorsemansBlade,
-            ProjectileID.Excalibur
-        ];
         public static int[] NoSplit => [
             ProjectileID.SandnadoFriendly,
             ProjectileID.LastPrism,
@@ -481,17 +472,79 @@ namespace FargowiltasSouls.Content.Projectiles
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             counter++;
 
-            //doing it here in case the proj's AI() sets custom weapon damage, so it can override this
             if (IsAHeldProj)
             {
-                projectile.damage = player.GetWeaponDamage(player.HeldItem);
-                projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
+                //doing it this janky way so that it takes the relative item stat difference, and applies it to itself
+                //this way if proj modifies its own damage, that isn't overridden
+                //e.g. whips doing less damage after each hit
+                //the actual base damage of the weapon sometimes ends up 1 less than what is shown. idk why. nobody should miss it??
+                //player.gettotaldamage makes no sense btw fuck tmod
+                long weaponDamage = player.GetWeaponDamage(player.HeldItem);
+                int weaponCrit = player.GetWeaponCrit(player.HeldItem);
+                if (HeldProjMemorizedDamage == 0)
+                    HeldProjMemorizedDamage = weaponDamage;
+                if (HeldProjMemorizedCrit == 0)
+                    HeldProjMemorizedCrit = weaponCrit;
+                double finalDamage = (long)(projectile.damage * weaponDamage / HeldProjMemorizedDamage);
+                projectile.damage = (int)Math.Round(finalDamage, 0, MidpointRounding.ToEven);
+                projectile.CritChance = (int)Math.Round(projectile.CritChance * weaponCrit / HeldProjMemorizedCrit, 0, MidpointRounding.ToEven);
+                HeldProjMemorizedDamage = weaponDamage;
+                HeldProjMemorizedCrit = weaponCrit;
             }
 
             if (spookyCD > 0)
             {
                 spookyCD--;
             }
+            if (projectile.active && projectile.friendly && !projectile.hostile)
+            {
+                foreach (int tornadoIndex in modPlayer.ForbiddenTornados)
+                {
+                    Projectile storm = Main.projectile[tornadoIndex];
+                    if (storm.Alive() &&  projectile.owner == storm.owner && projectile.type != storm.type && projectile.Colliding(projectile.Hitbox, storm.Hitbox))
+                    {
+                        stormTimer = 240;
+                    }
+                }
+                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>())
+                {
+                    foreach (int orbIndex in modPlayer.ShadowOrbs)
+                    {
+                        Projectile orb = Main.projectile[orbIndex];
+                        //wait for CD
+                        //detect being hit
+                        if (orb.Alive() && orb.ai[0] == 0f && projectile.owner == orb.owner && projectile.Colliding(projectile.Hitbox, orb.Hitbox))
+                        {
+                            int numBalls = 5;
+                            int dmg = 25;
+
+                            if (modPlayer.AncientShadowEnchantActive)
+                            {
+                                numBalls = 7;
+                                dmg = 50;
+                            }
+
+                            int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
+                            Projectile[] balls = FargoSoulsUtil.XWay(numBalls, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, damage, 0);
+
+                            foreach (Projectile ball in balls)
+                            {
+                                ball.originalDamage = damage;
+                            }
+
+
+                            if (FargoSoulsUtil.CanDeleteProjectile(projectile))
+                                projectile.Kill();
+
+                            orb.ai[0] = 300;
+                            orb.netUpdate = true;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
             if (projectile.owner == Main.myPlayer)
             {
                 //reset tungsten size
@@ -527,10 +580,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
-                   
                 }
-
-                
 
                 //hook ai
                 if (player.HasEffect<MahoganyEffect>() && projectile.aiStyle == 7)
@@ -567,7 +617,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                                 int cdMultiplier = 2;
 
-                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage / cdMultiplier, 2, projectile.owner);
+                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage * cdMultiplier, 2, projectile.owner);
 
                                 SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.5f }, projectile.Center);
 
@@ -583,8 +633,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     }
                 }
-
-                
             }
 
             if (ChilledTimer > 0)
@@ -658,6 +706,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.Bottom = projectile.position;
                         projectile.hostile = true;
                         projectile.friendly = false;
+                        projectile.netUpdate = true;
                     }
                 }
 
@@ -866,6 +915,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.FlowerPetal:
                 case ProjectileID.SporeCloud:
                 case ProjectileID.ChlorophyteOrb:
+                case ProjectileID.PaladinsHammerFriendly:
                     {
                         if (projectile.scale != 1)
                         {
@@ -1012,6 +1062,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (!allowMoreSplit)
                             split.FargoSouls().CanSplit = false;
                         split.FargoSouls().TungstenScale = projectile.FargoSouls().TungstenScale;
+                        split.FargoSouls().ItemSource = projectile.FargoSouls().ItemSource;
 
                         projList.Add(split);
                     }
@@ -1143,7 +1194,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
-                
+
                 default:
                     break;
             }
@@ -1164,14 +1215,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 projectile.position -= projectile.velocity * 0.5f;
             }
 
-            if (NinjaSpeedup > 0 && player.heldProj != projectile.whoAmI)
-            {
-                projectile.extraUpdates = Math.Max(projectile.extraUpdates, NinjaSpeedup);
-
-                if (projectile.owner == Main.myPlayer && !player.HasEffect<NinjaEffect>())
-                    projectile.Kill();
-            }
-
             if (projectile.bobber && modPlayer.FishSoul1)
             {
                 //ai0 = in water, localai1 = counter up to catching an item
@@ -1188,7 +1231,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 {
                     if (!p.FargoSouls().TikiTagged)
                     {
-                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, p.Center);
+                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.35f, MaxInstances = 1 }, p.Center);
                         for (int i = 0; i < 8; i++)
                         {
                             int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
@@ -1231,6 +1274,9 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
+            if (DamageCap > 0 && projectile.damage > DamageCap)
+                projectile.damage = DamageCap;
+
             if (projectile.whoAmI == player.heldProj
                 || projectile.aiStyle == ProjAIStyleID.HeldProjectile
                 || projectile.type == ProjectileID.LastPrismLaser)
@@ -1238,6 +1284,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 DeletionImmuneRank = 2;
                 TimeFreezeImmune = true;
                 IsAHeldProj = true;
+                if (TungstenScale == 1)
+                    ModifyProjectileSize(projectile, player, null);
+                /*
+                if (player.HasEffect<TungstenEffect>() && TungstenScale == 1)
+                    TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, null);
+                */
 
                 if (player.HeldItem.IsWeapon())
                 {
@@ -1258,6 +1310,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     player.reuseDelay = Math.Max(0, 20 - counter);
                 }
             }
+
+            bool canAdaSplit = AdamantiteEffect.CanBeAffected(projectile, player);
+            if (player.HasEffect<AdamantiteEffect>() && canAdaSplit && !Adamantite)
+                AdamantiteEffect.AdamantiteSplit(projectile, modPlayer, 1 + (int)modPlayer.AdamantiteSpread);
 
             //graze
             if (projectile.hostile && projectile.damage > 0 && projectile.aiStyle != ProjAIStyleID.FallingTile && --GrazeCD < 0)
@@ -1301,23 +1357,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
-            }
-
-            if (projectile.owner == player.whoAmI)
-            {
-                if (FancySwings.Contains(projectile.type))
-                {
-                    float rotation = -90;
-                    if (player.direction == 1 && projectile.ai[0] == -1)
-                    {
-                        rotation = 0;
-                    }
-                    else if (player.direction == -1 && projectile.ai[0] == 1)
-                    {
-                        rotation = -180;   
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
-                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
@@ -1406,14 +1445,16 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
+                return;
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             if (stormTimer > 0)
-                modifiers.FinalDamage *= modPlayer.ForceEffect<ForbiddenEnchant>() ? 1.6f : 1.3f;
+                modifiers.FinalDamage *= modPlayer.ForceEffect<ForbiddenEnchant>() ? 1.4f : 1.2f;
 
             if (TungstenScale != 1 && projectile.type == ProjectileID.PiercingStarlight)
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.75f;
 
             if (TikiTagged)
             {
@@ -1422,10 +1463,12 @@ namespace FargowiltasSouls.Content.Projectiles
             }
                 
 
-            if (player.HasEffect<NinjaEffect>())
+            if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxDamageIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.225f : 0.15f;
-                modifiers.FinalDamage *= 1f + (maxDamageIncrease * Math.Min((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 1));
+                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.2f;
+                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
+                if (Main.rand.NextFloat() < increase)
+                    modifiers.SetCrit();
 
             }
 
@@ -1473,7 +1516,7 @@ namespace FargowiltasSouls.Content.Projectiles
             if (noInteractionWithNPCImmunityFrames)
                 target.immune[projectile.owner] = tempIframe;
 
-            if (Main.player[projectile.owner].HasEffect<NinjaEffect>())
+            if (Main.player[projectile.owner].HasEffect<NinjaDamageEffect>())
             {
                 const float maxKnockbackMult = 2f;
                 hit.Knockback *= (maxKnockbackMult * Math.Min((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40, 1f));
@@ -1491,6 +1534,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                 }
             }
+
+            //if (projectile.type == ProjectileID.SeedlerNut && projectile.owner.IsWithinBounds(Main.maxPlayers) && EnchantmentProj && Main.player[projectile.owner].HasEffect<TimberEffect>())
+            //{
+            //    ShadewoodEffect.ShadewoodProc(Main.player[projectile.owner], target, projectile);
+            //}
 
             if (FrostFreeze)
             {
@@ -1517,10 +1565,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (AdamModifier != 0)
-                ReduceIFrames(projectile, target, AdamModifier);
 
-            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].FargoSouls().FrigidGemstoneItem != null)
+            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
             {
                 target.AddBuff(BuffID.Frostburn, 360);
             }
@@ -1533,7 +1579,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         void ReduceIFrames(Projectile projectile, NPC target, int iframeModifier)
         {
-            if (projectile.maxPenetrate != 1 && !projectile.usesLocalNPCImmunity)
+            if (projectile.maxPenetrate != 1 && !projectile.usesLocalNPCImmunity && !IsAHeldProj)
             {
                 //biased towards rounding down, making it a slight dps increase for compatible weapons
                 double RoundReduce(float iframes)

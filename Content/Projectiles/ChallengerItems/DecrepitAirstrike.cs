@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +14,6 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/TargetingReticle";
 
         const int maxTime = 60 * 3;
-        private SoundStyle Beep = new("FargowiltasSouls/Assets/Sounds/Challengers/Baron/NukeBeep");
         public override void SetDefaults()
         {
             Projectile.width = 80;
@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 Projectile.rotation = (float)Math.PI * 2 / 30 * modifier;
                 if (Projectile.timeLeft % 60 == 0 && Projectile.timeLeft > 30)
                 {
-                    SoundEngine.PlaySound(Beep, Projectile.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.NukeBeep, Projectile.Center);
                     CombatText.NewText(Projectile.Hitbox, Color.Red, Projectile.timeLeft / 60, true);
                 }
                 if (Projectile.timeLeft == 30)

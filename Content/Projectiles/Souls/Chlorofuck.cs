@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             }
 
             Projectile.netUpdate = true;
-            Projectile.Opacity = player.HasEffect<NatureEffect>() ? 0 : 1;
+            Projectile.Opacity = player.HasEffect<NatureEffect>() ? 0.4f : 1;
 
             float num395 = Main.mouseTextColor / 200f - 0.35f;
             num395 *= 0.2f;
@@ -109,8 +109,16 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     num406 = 10f / num406;
                     num404 *= num406;
                     num405 *= num406;
+                    int damage = Projectile.damage;
+                    if (player.ForceEffect<ChloroMinion>())
+                        damage = (int)(damage * 1.7f);
+                    if (player.HasEffect<NatureEffect>())
+                        damage *= 6;
                     if (Projectile.owner == Main.myPlayer)
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(num404, num405), ProjectileID.CrystalLeafShot, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    {
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(num404, num405), ProjectileID.CrystalLeafShot, damage, Projectile.knockBack, Projectile.owner);
+                    }
+                        
                     Projectile.ai[0] = Cooldown;
                 }
             }

@@ -124,13 +124,16 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
                 BiteTimer = 360;
                 //NetSync(npc, false);
 
-                // remember that this is target client side; we sync to server
-                var netMessage = Mod.GetPacket();
-                netMessage.Write((byte)FargowiltasSouls.PacketID.SyncSnatcherGrab);
-                netMessage.Write((byte)npc.whoAmI);
-                netMessage.Write((byte)BittenPlayer);
-                netMessage.Write(BiteTimer);
-                netMessage.Send();
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    // remember that this is target client side; we sync to server
+                    var netMessage = Mod.GetPacket();
+                    netMessage.Write((byte)FargowiltasSouls.PacketID.SyncSnatcherGrab);
+                    netMessage.Write((byte)npc.whoAmI);
+                    netMessage.Write((byte)BittenPlayer);
+                    netMessage.Write(BiteTimer);
+                    netMessage.Send();
+                }
             }
 
             if (WorldSavingSystem.MasochistModeReal && npc.type == NPCID.ManEater && target.Male)

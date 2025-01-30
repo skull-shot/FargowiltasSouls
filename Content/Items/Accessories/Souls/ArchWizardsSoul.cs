@@ -16,11 +16,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.FargoSouls().UniverseSoul)
-                return;
             player.FargoSouls().MagicSoul = true;
-            player.GetDamage(DamageClass.Magic) += .3f;
-            player.GetCritChance(DamageClass.Magic) += 15;
+            player.GetDamage(DamageClass.Magic) += .22f;
+            player.GetCritChance(DamageClass.Magic) += 10;
             player.statManaMax2 += 200;
             //accessorys
             player.manaFlower = true;

@@ -3,6 +3,7 @@
 float colorMult;
 float time;
 float maxOpacity;
+float opacityAmp;
 float radius;
 
 float2 screenPosition;
@@ -45,7 +46,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float noiseMesh3 = tex2D(diagonalNoise, frac(noiseUV * 1.57 + vec3 * adjustedTime)).g;
     float textureMesh = noiseMesh1 * 0.3 + noiseMesh2 * 0.3 + noiseMesh3 * 0.3;
     
-    float opacity = 0.25;
+    float opacity = 0.2 * opacityAmp;
     
     
     // Thresholds

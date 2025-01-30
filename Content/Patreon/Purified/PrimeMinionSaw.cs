@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Patreon.Purified
             Projectile.DamageType = DamageClass.Summon;
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 15;
         }
         public override void AI()
         {
@@ -122,7 +122,9 @@ namespace FargowiltasSouls.Content.Patreon.Purified
 
                     float movespeed = Math.Max(Projectile.Distance(Main.projectile[head].Center) / 40f, 14f);
 
-                    if (Projectile.Distance(Main.projectile[head].Center) > 32)
+                    if (Projectile.Distance(Main.projectile[head].Center) > 1000)
+                        Projectile.Center = Main.projectile[head].Center;
+                    else if (Projectile.Distance(Main.projectile[head].Center) > 32)
                         Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.projectile[head].Center) * movespeed, 0.04f);
                 }
 

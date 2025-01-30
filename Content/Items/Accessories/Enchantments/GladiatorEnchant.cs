@@ -9,6 +9,7 @@ using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -19,6 +20,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class GladiatorEnchant : BaseEnchant
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<GladiatorBanner>()];
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -58,10 +61,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class GladiatorBanner : AccessoryEffect
     {
 
-        public override Header ToggleHeader => Header.GetHeader<WillHeader>();
+        public override Header ToggleHeader => Main.LocalPlayer.HasEffect<WillEffect>() ? Header.GetHeader<WillHeader>() : null;
         public override int ToggleItemType => ModContent.ItemType<GladiatorEnchant>();
-        public override bool MinionEffect => false;
-        public override bool MutantsPresenceAffects => true;
+        public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<GladiatorBanner>();
+        public override bool MutantsPresenceAffects => Main.LocalPlayer.HasEffect<WillEffect>();
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -75,12 +78,25 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             if (modPlayer.GladiatorStandardCD > 0)
                 modPlayer.GladiatorStandardCD--;
+            if (player.HasBuff<GladiatorBuff>())
+            {
+                float stats = 0.08f;
+                if (modPlayer.ForceEffect<GladiatorEnchant>())
+                    stats = 0.1f;
+                player.GetDamage(DamageClass.Generic) += stats;
+                player.endurance += stats;
+                player.noKnockback = true;
+            }
         }
-
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (!stunned)
+                ActivateGladiatorBanner(player);
+        }
         public static void ActivateGladiatorBanner(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.HasEffect<WillEffect>())
+            if (!player.HasEffectEnchant<GladiatorBanner>())
                 return;
             if (player.whoAmI == Main.myPlayer && player.HasEffect<GladiatorBanner>())
             {
@@ -96,8 +112,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     Projectile.NewProjectile(player.GetSource_EffectItem<GladiatorBanner>(), player.Top, Vector2.UnitY * 25, GladiatorStandard, modPlayer.ForceEffect<GladiatorEnchant>() ? 300 : 100, 3f, player.whoAmI);
                     modPlayer.GladiatorStandardCD = LumUtils.SecondsToFrames(15);
 
-                    CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
-                        () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
+                            () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
                 }
             }
         }

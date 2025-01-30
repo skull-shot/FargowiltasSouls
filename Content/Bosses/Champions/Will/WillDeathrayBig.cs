@@ -1,5 +1,6 @@
 ﻿
 
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             if (Projectile.localAI[0] == 0f)
             {
                 if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104"), new Vector2(Projectile.Center.X, Main.LocalPlayer.Center.Y));
+                    SoundEngine.PlaySound(FargosSoundRegistry.Zombie104, new Vector2(Projectile.Center.X, Main.LocalPlayer.Center.Y));
             }
             float num801 = 10f;
             Projectile.localAI[0] += 1f;

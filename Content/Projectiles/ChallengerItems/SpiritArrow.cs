@@ -51,10 +51,10 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.ai[1] >= 2 * (40 / Projectile.velocity.Length())) //adjust this 40 according to max shoot speed
             {
-                if (FargoSoulsUtil.HostCheck)
+                if (Main.myPlayer == Projectile.owner)
                 {
                     int SplitDamage = (int)(Projectile.originalDamage / 2.5f);
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity / 4f, ModContent.ProjectileType<SpiritArrowFlame>(), SplitDamage, Projectile.knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity / 4f, ModContent.ProjectileType<SpiritArrowFlame>(), SplitDamage, Projectile.knockBack, Projectile.owner);
                 }
                 Projectile.ai[1] = 0;
                 //spawn spirit  flame

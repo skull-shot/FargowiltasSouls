@@ -92,6 +92,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargosTextureRegistry.WavyNoise;
 
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return false;
+
             var maxOpacity = Projectile.Opacity;
             float scale = MathF.Sqrt(VisualScale);
 

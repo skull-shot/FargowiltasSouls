@@ -1,23 +1,23 @@
-﻿using System;
-using System.IO;
+﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Items.Placables.Relics;
+using FargowiltasSouls.Content.Items.Placables.Trophies;
+using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using FargowiltasSouls.Core.Systems;
+using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
+using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using Terraria.GameContent.Bestiary;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.Graphics.Shaders;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Content.Buffs.Souls;
-using Microsoft.CodeAnalysis;
-using System.Linq;
-using FargowiltasSouls.Content.Items.Weapons.Challengers;
-using Terraria.GameContent.ItemDropRules;
-using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Items.Placables.Trophies;
-using FargowiltasSouls.Content.Items.Placables.Relics;
 
 namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 {
@@ -121,8 +121,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.HitSound = SoundID.NPCHit54; 
             NPC.DeathSound = SoundID.NPCDeath6;
 
-			Music = MusicID.OtherworldlyBoss1;
-			SceneEffectPriority = SceneEffectPriority.BossLow;
+            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod _)
+                ? MusicLoader.GetMusicSlot(Mod, "Assets/Sounds/Silent") : MusicID.OtherworldlyBoss1;
+
+            SceneEffectPriority = SceneEffectPriority.BossLow;
 
 			NPC.value = Item.buyPrice(0, 2);
 
@@ -192,14 +194,12 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             writer.Write7BitEncodedInt(LastAttackChoice);
             writer.Write7BitEncodedInt(Phase);
             writer.Write(Timer);
+            writer.WriteVector2(LockVector1);
 
-            // 1. Write the number of states on the stack.
-            writer.Write(StateMachine.StateStack.Count);
-
-			// 2. Write the state IDs as ints to the stack in the order they are on the stack. Also write the timers.
-			var stackArray = StateMachine.StateStack.ToArray();
-			for (int i = 0; i < StateMachine.StateStack.Count; i++)
-				writer.Write((int)stackArray[i].Identifier);
+            var stateStack = (StateMachine?.StateStack ?? new()).ToList();
+            writer.Write(stateStack.Count);
+            for (int i = stateStack.Count - 1; i >= 0; i--)
+                writer.Write((byte)stateStack[i].Identifier);
 		}
 
 		public override void ReceiveExtraAI(BinaryReader reader)
@@ -211,14 +211,13 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 			LastAttackChoice = reader.Read7BitEncodedInt();
             Phase = reader.Read7BitEncodedInt();
 			Timer = reader.ReadSingle();
+            LockVector1 = reader.ReadVector2();
 
-			// 1. Read the number of states that should be added to the stack and were written.
-			int stackCount = reader.ReadInt32();
-			// Clear the stack in preperation for pushing the written states to it.
 			StateMachine.StateStack.Clear();
-			// 2. Read the state IDs and push them to the stack.
-			for (int i = 0; i < stackCount; i++)
-				StateMachine.StateStack.Push(StateMachine.StateRegistry[(BehaviorStates)reader.ReadInt32()]);
+
+            int stateStackCount = reader.ReadInt32();
+            for (int i = 0; i < stateStackCount; i++)
+                StateMachine.StateStack.Push(StateMachine.StateRegistry[(BehaviorStates)reader.ReadByte()]);
 		}
 		#endregion
 
@@ -255,7 +254,16 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			if (NPC.IsABestiaryIconDummy)
-				return true;
+            {
+                if (Main.getGoodWorld)
+                {
+                    Texture2D whitecoffin = ModContent.Request<Texture2D>(Texture + "_FTW").Value;
+                    spriteBatch.Draw(whitecoffin, NPC.position - screenPos, null, NPC.GetAlpha(drawColor), 0f, Vector2.Zero, NPC.scale, SpriteEffects.None, 0f);
+                    return false;
+                }
+                return true;
+            }
+				
             if (DrawcodeOpacity < 1f)
                 DrawcodeOpacity += 0.025f;
 

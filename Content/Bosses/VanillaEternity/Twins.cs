@@ -1,3 +1,5 @@
+using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -7,13 +9,19 @@ using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Assets;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -39,6 +47,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool Resist;
         public int RespawnTimer;
 
+        public bool ShouldDrawAura = false;
+        public float AuraOpacity = 0f;
+
+        public float AuraRadius()
+        {
+            float radius = 2000 - 1200 * AuraRadiusCounter / 180f;
+            if (WorldSavingSystem.MasochistModeReal)
+                radius *= 0.75f;
+            return radius;
+        }
+
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write7BitEncodedInt(LaserSide);
@@ -46,6 +65,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(AuraRadiusCounter);
             binaryWriter.Write7BitEncodedInt(MechElectricOrbTimer);
             bitWriter.WriteBit(StoredDirectionToPlayer);
+            bitWriter.WriteBit(ShouldDrawAura);
             binaryWriter.Write(LockedRotation);
         }
 
@@ -56,6 +76,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             AuraRadiusCounter = binaryReader.Read7BitEncodedInt();
             MechElectricOrbTimer = binaryReader.Read7BitEncodedInt();
             StoredDirectionToPlayer = bitReader.ReadBit();
+            ShouldDrawAura = bitReader.ReadBit();
             LockedRotation = binaryReader.ReadSingle();
         }
 
@@ -167,9 +188,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.retiBoss = npc.whoAmI;
 
             Resist = false;
-
-            if (WorldSavingSystem.SwarmActive)
-                return true;
 
             if (!npc.HasValidTarget || !Main.player[npc.target].active || Main.player[npc.target].dead)
             {
@@ -359,7 +377,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = WorldSavingSystem.MasochistModeReal ? 70 : 90;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -391,11 +409,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForSpaz))
                                 ai_StateTimer--;
-
-                            if (ai_StateTimer < prepTime - 30 && spazmatism.ai[2] < npc.ai[2])
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+                            if (ai_StateTimer < prepTime - flashDelay && spazmatism.ai[2] < npc.ai[2])
                                 npc.ai[2] = spazmatism.ai[2];
 
-                            if (ai_StateTimer == prepTime - (WorldSavingSystem.MasochistModeReal ? 25 : 35))
+                            if (ai_StateTimer == prepTime - flashDelay)
                             {
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -511,10 +529,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         //npc.ai[0] = 4f;
                         npc.ai[0] = 604f; //initiate spin immediately
                         npc.netUpdate = true;
-                        SoundEngine.PlaySound(SoundID.Roar, npc.Center);
+                        //SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 
-                        if (FargoSoulsUtil.HostCheck)
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRingHollow>(), 0, 0f, Main.myPlayer, 11, npc.whoAmI);
+                        ShouldDrawAura = true;
+
+                        //if (FargoSoulsUtil.HostCheck)
+                        //    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRingHollow>(), 0, 0f, Main.myPlayer, 11, npc.whoAmI);
                     }
                 }
                 else //in phase 3
@@ -564,9 +584,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             AuraRadiusCounter = 180;
                     }
 
-                    float auraDistance = 2000 - 1200 * AuraRadiusCounter / 180f;
-                    if (WorldSavingSystem.MasochistModeReal)
-                        auraDistance *= 0.75f;
+                    float auraDistance = AuraRadius();
                     if (auraDistance < 2000 - 1)
                     {
                         EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>());
@@ -580,21 +598,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             {
                                 if (distance > threshold * 2f)
                                 {
-                                    localPlayer.controlLeft = false;
-                                    localPlayer.controlRight = false;
-                                    localPlayer.controlUp = false;
-                                    localPlayer.controlDown = false;
-                                    localPlayer.controlUseItem = false;
-                                    localPlayer.controlUseTile = false;
-                                    localPlayer.controlJump = false;
-                                    localPlayer.controlHook = false;
-                                    if (localPlayer.grapCount > 0)
-                                        localPlayer.RemoveAllGrapplingHooks();
-                                    if (localPlayer.mount.Active)
-                                        localPlayer.mount.Dismount(localPlayer);
+                                    localPlayer.Incapacitate();
                                     localPlayer.velocity.X = 0f;
                                     localPlayer.velocity.Y = -0.4f;
-                                    localPlayer.FargoSouls().NoUsingItems = 2;
                                 }
 
                                 Vector2 movement = npc.Center - localPlayer.Center;
@@ -638,7 +644,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     if (FargoSoulsUtil.HostCheck)
                                         Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, npc.whoAmI, npc.type);
 
-                                    SoundEngine.PlaySound(SoundID.ForceRoarPitched, npc.Center); //eoc roar
+                                    SoundEngine.PlaySound(FargosSoundRegistry.TwinsWarning with {Volume = 4f }, npc.Center); 
                                 }
 
                                 if (Main.netMode == NetmodeID.Server)
@@ -653,6 +659,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             //if (--npc.ai[2] > 295f) npc.ai[2] = 295f;
                             npc.ai[3] -= (npc.ai[0] - 4f) / 120f * rotationInterval * (StoredDirectionToPlayer ? 1f : -1f);
                             npc.rotation = -npc.ai[3];
+                            
 
                             if (npc.ai[0] == 35f)
                             {
@@ -664,6 +671,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (npc.ai[0] >= 155f) //FIRE LASER
                             {
+                                if (!Main.dedServ)
+                                    SoundEngine.PlaySound(FargosSoundRegistry.TwinsDeathray with { Volume = 2f }, npc.Center);
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     Vector2 speed = Vector2.UnitX.RotatedBy(npc.rotation);
@@ -738,6 +747,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return true;
         }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            return Spazmatism.CircularHitbox(npc, target.position, target.Size);
+        }
+
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (Resist)
@@ -755,7 +769,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (WorldSavingSystem.SwarmActive || WorldSavingSystem.MasochistModeReal)
+            if (WorldSavingSystem.MasochistModeReal)
                 return base.CheckDead(npc);
 
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.spazBoss, NPCID.Spazmatism) && Main.npc[EModeGlobalNPC.spazBoss].life > 1) //spaz still active
@@ -776,6 +790,69 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             return base.CheckDead(npc);
         }
 
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Vector2 AuraPosition = npc.Center;
+            if (ShouldDrawAura)
+                DrawAura(npc, spriteBatch, AuraPosition);
+
+            Vector2 offset = new Vector2(npc.width - 24, 0).RotatedBy(npc.rotation + 1.57079637);
+            Vector2 position = npc.Center + offset;
+            Texture2D flare = MiscTexturesRegistry.BloomFlare.Value;
+            float flarescale = Main.rand.NextFloat(0.1f, 0.15f);
+            
+
+            if (npc.GetGlobalNPC<Retinazer>().DeathrayState == 2)
+            {
+                Main.spriteBatch.Draw(flare, position - Main.screenPosition, null, Color.Red with {A= 0}, Main.GlobalTimeWrappedHourly * -2f, flare.Size() * 0.5f, flarescale, 0, 0f);
+                Main.spriteBatch.Draw(flare, position - Main.screenPosition, null, Color.Red with {A = 0}, Main.GlobalTimeWrappedHourly * 2f, flare.Size() * 0.5f, flarescale, 0, 0f);
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+
+            }
+            
+            
+                
+            return true;
+        }
+        public void DrawAura(NPC npc, SpriteBatch spriteBatch, Vector2 position)
+        {
+            if (AuraOpacity < 1f)
+                AuraOpacity += 0.05f;
+
+            Color darkColor = Color.DarkRed;
+            Color mediumColor = Color.Red;
+            Color lightColor2 = Color.Lerp(Color.IndianRed, Color.White, 0.35f);
+            Vector2 auraPos = position;
+            float radius = AuraRadius();
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return;
+            var maxOpacity = npc.Opacity * AuraOpacity;
+
+            ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.TwinsAuraShader");
+            borderShader.TrySetParameter("colorMult", 7.35f); 
+            borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            borderShader.TrySetParameter("radius", radius);
+            borderShader.TrySetParameter("anchorPoint", auraPos);
+            borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+            borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+            borderShader.TrySetParameter("maxOpacity", maxOpacity);
+            borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
+            borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
+            borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
+
+            spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+        }
+        
         public override void LoadSprites(NPC npc, bool recolor)
         {
             base.LoadSprites(npc, recolor);
@@ -842,9 +919,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.spazBoss = npc.whoAmI;
 
             Resist = false;
-
-            if (WorldSavingSystem.SwarmActive)
-                return true;
 
             if (!npc.HasValidTarget || !Main.player[npc.target].active || Main.player[npc.target].dead)
             {
@@ -978,7 +1052,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
 
                             // movement
-                            float accel = 0.18f;
+                            float accel = 0.10f;
                             int side = 1;
                             if (npc.position.X + (float)(npc.width / 2) < player.position.X + (float)player.width)
                             {
@@ -989,12 +1063,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float desiredX = player.Center.X + side * 400 - npc.Center.X;
                             float desiredY = player.Center.Y - npc.Center.Y;
 
-                            Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
+                            //Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
 
                             // reworked p1 fireballs
                             float delay = 58f;
                             if (WorldSavingSystem.MasochistModeReal)
                                 ai_ShotTimer += 0.25f;
+                            if (ai_ShotTimer < delay - 10)
+                            {
+                                float slowdownMod = 1f;
+                                float distance = npc.Distance(player.Center);
+                                if (distance > 600)
+                                    slowdownMod *= MathHelper.Lerp(1, 0, (distance - 500) / 500);
+                                slowdownMod = MathHelper.Clamp(slowdownMod, 0, 1);
+                                npc.velocity *= 1f - 0.08f * slowdownMod;
+                            }
                             if (ai_ShotTimer >= delay)
                             {
                                 ai_ShotTimer = 0f;
@@ -1033,7 +1116,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = 70;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -1064,14 +1147,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (retinazer.Distance(spazDesiredPos) <= 300)
                                 waitForReti = false;
 
-                            if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForReti))
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+
+                            if (ai_StateTimer < prepTime - flashDelay && (npc.Distance(desiredPos) > 300 || waitForReti))
                             {
                                 ai_StateTimer--;
                                 npc.netUpdate = true;
                             }
                                 
 
-                            if (ai_StateTimer < prepTime - 30 && retinazer.ai[2] < npc.ai[2])
+                            if (ai_StateTimer < prepTime - flashDelay && retinazer.ai[2] < npc.ai[2])
                             {
                                 npc.ai[2] = retinazer.ai[2];
                                 npc.netUpdate = true;
@@ -1406,7 +1491,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
         {
-            return !(npc.ai[1] == 0f && FlameWheelSpreadTimer < 30);
+            return !(npc.ai[1] == 0f && FlameWheelSpreadTimer < 30) && CircularHitbox(npc, target.position, target.Size);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
@@ -1426,7 +1511,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (WorldSavingSystem.SwarmActive || WorldSavingSystem.MasochistModeReal)
+            if ( WorldSavingSystem.MasochistModeReal)
                 return base.CheckDead(npc);
 
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.retiBoss, NPCID.Retinazer) && Main.npc[EModeGlobalNPC.retiBoss].life > 1) //reti still active
@@ -1457,6 +1542,36 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadGoreRange(recolor, 143, 146);
 
             LoadSpecial(recolor, ref TextureAssets.Chain12, ref FargowiltasSouls.TextureBuffer.Chain12, "Chain12");
+        }
+
+        public static bool CircularHitbox(NPC npc, Vector2 boxPos, Vector2 boxDim)
+        {
+            //circular hitbox-inator
+            Vector2 ellipseDim = npc.Size;
+            Vector2 ellipseCenter = npc.position + 0.5f * new Vector2(npc.width, npc.height);
+
+            float x = 0f; //ellipse center
+            float y = 0f; //ellipse center
+            if (boxPos.X > ellipseCenter.X)
+            {
+                x = boxPos.X - ellipseCenter.X; //left corner
+            }
+            else if (boxPos.X + boxDim.X < ellipseCenter.X)
+            {
+                x = boxPos.X + boxDim.X - ellipseCenter.X; //right corner
+            }
+            if (boxPos.Y > ellipseCenter.Y)
+            {
+                y = boxPos.Y - ellipseCenter.Y; //top corner
+            }
+            else if (boxPos.Y + boxDim.Y < ellipseCenter.Y)
+            {
+                y = boxPos.Y + boxDim.Y - ellipseCenter.Y; //bottom corner
+            }
+            float a = ellipseDim.X / 2f;
+            float b = ellipseDim.Y / 2f;
+
+            return x * x / (a * a) + y * y / (b * b) < 1; //point collision detection
         }
     }
 }

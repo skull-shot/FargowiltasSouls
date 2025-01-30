@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class DubiousCircuitry : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -33,9 +36,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.NanoInjectionBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.LightningRodBuff>()] = true;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            player.FargoSouls().FusedLens = true;
+            modPlayer.FusedLens = true;
+            modPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<DebuffInstallKeyEffect>(Item);
             if (player.onFire2)
                 player.FargoSouls().AttackSpeed += 0.15f;
             if (player.ichor)

@@ -121,7 +121,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     {
                         float num = i + rand;
                         int fake = randReal == i ? 0 : 1;
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<NebulaPillarProj>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage * 2), 3f, Main.myPlayer, num, fake, npc.whoAmI);
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<NebulaPillarProj>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 1.5f), 3f, Main.myPlayer, num, fake, npc.whoAmI);
                     }
                 }
             }
