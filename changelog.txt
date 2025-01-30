@@ -32,6 +32,7 @@ Fossil/Spectre Enchant: Spawns a bone/spirit every 40 hp lost instead of 30
 Orichalcum Enchant: Poison dps 20 -> 12
 Titanium, Monk, Shinobi, Spectre, Solar, Nebula, Ancient Shadow Enchant, Razor Container: Now properly uses class damage, decreased damage of some effects to compensate
 Shadow Force: Dash now counts as melee damage, decreased damage to compensate
+Eternity Mythril Sword/Halberd: Reduced Attack Speed scaling
 
 Added ModCall for setting Projectile deletion immunity rank (request from Shadows of Abaddon)
 Changed positioning of keybind text in Active Skill UI, and concatenated "Mouse" to "M" (for example Mouse3 -> M3)
