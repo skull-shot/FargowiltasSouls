@@ -189,7 +189,7 @@ namespace FargowiltasSouls.Content.NPCs
                     WakeUp(NPC);
             }
 
-            if (NPC.velocity.Y == 0)
+            if (NPC.velocity.Y == 0 && speedlerp > 5)
             {
                 if (landsound == false)
                 {

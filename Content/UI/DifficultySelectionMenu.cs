@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.UI
             BackPanel.RemoveAllChildren();
 
             var title = new UIText(Language.GetTextValue("Mods.FargowiltasSouls.UI.SelectDifficulty"));
-            title.Left.Set(-57, 0.5f);
+            title.Left.Set(-60, 0.5f);
             title.Top.Set(5, 0);
             BackPanel.Append(title);
 

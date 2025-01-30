@@ -390,6 +390,6 @@ UnconsciousDeviantt: {
 ReleasedMutant: {
 	// DisplayName: ???
 	// Chat: *yawns* ...why did you wake me up? Giant slime monster? You mean my bed? Ah, forget it... I'll get a new one later.
-	// TalkToHim: Who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
+	// TalkToHim: Who are you?
 	// Introduction: Just a regular old shopkeep. I think you'd know the deal already, I'll sell to you what I have, granted you give me money, of course.
 }
