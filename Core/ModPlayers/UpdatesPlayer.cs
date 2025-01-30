@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 if (Player.TalkNPC?.type == ModContent.NPCType<Deviantt>() && Player.TalkNPC.HasGivenName)
                 {
-                    Main.NewText("a");
                     Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Player.TalkNPC.GivenName);
                     DevianttIntroduction = false;
                 }
