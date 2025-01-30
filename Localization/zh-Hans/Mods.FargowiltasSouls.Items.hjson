@@ -937,8 +937,8 @@ TerraForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] 暴击有概率发射一道闪电，闪电击中后会爆炸并造成强化的铅中毒减益
-		[i:FargowiltasSouls/SilverEnchant] 成功格挡会抵消至多200点伤害，并发射两道闪电
-		[i:FargowiltasSouls/TinEnchant] 锡初始暴击率为50%，每发射一道闪电会增加25%暴击率，最高增加至100%
+		[i:FargowiltasSouls/SilverEnchant] 成功格挡会抵消至多200点伤害，并发射一道闪电
+		[i:FargowiltasSouls/TinEnchant] 锡初始暴击率为75%，每发射一道闪电会增加25%暴击率，最高增加至100%
 		[i:FargowiltasSouls/LeadEnchant] 你受到的持续伤害降低60%
 		[i:FargowiltasSouls/TungstenEnchant] 你的近战武器变大50%，鞭子范围增加20%
 		[i:FargowiltasSouls/IronEnchant] 第一次制作时有50%的概率不消耗任何物品，你会吸引更大范围的物品（背包和时装栏中也可生效）
@@ -1041,7 +1041,7 @@ BionomicCluster: {
 		[i:FargowiltasSouls/WyvernFeather]攻击会造成折翼减益，[i:FargowiltasSouls/NymphsPerfume]并生成红心
 		[i:FargowiltasSouls/WyvernFeather]你会定期释放光球，触碰光球可以恢复你的飞行时间
 		[i:FargowiltasSouls/SqueakyToy]你受到伤害时有几率发出吱吱声，并使这次受到的伤害降至1点
-		[i:FargowiltasSouls/WretchedPouch]攻击时进行暗影焰充能并降低10%伤害减免
+		[i:FargowiltasSouls/WretchedPouch]攻击时进行暗影焰充能并降低至多10%伤害减免
 		[i:FargowiltasSouls/WretchedPouch]停止攻击时释放暗影焰能量，爆发出一阵暗影触手，造成魔法伤害
 		[i:FargowiltasSouls/ConcentratedRainbowMatter]召唤一只友好的彩虹史莱姆
 		[i:FargowiltasSouls/TimsConcoction]某些敌人在死亡时会掉落药水
@@ -1076,7 +1076,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/WyvernFeather]攻击会造成折翼减益，[i:FargowiltasSouls/NymphsPerfume]并生成红心
 		[i:FargowiltasSouls/WyvernFeather]你会定期释放光球，触碰光球可以恢复你的飞行时间
 		[i:FargowiltasSouls/SqueakyToy]你受到伤害时有5%概率发出吱吱声，并使这次受到的伤害降至1点
-		[i:FargowiltasSouls/WretchedPouch]攻击时进行暗影焰充能并降低10%伤害减免
+		[i:FargowiltasSouls/WretchedPouch]攻击时进行暗影焰充能并降低至多10%伤害减免
 		[i:FargowiltasSouls/WretchedPouch]停止攻击时释放暗影焰能量，爆发出一阵暗影触手，造成魔法伤害
 		[i:FargowiltasSouls/ConcentratedRainbowMatter]召唤一只友好的彩虹史莱姆
 		[i:FargowiltasSouls/TimsConcoction]某些敌人在死亡时会掉落药水
@@ -1192,9 +1192,7 @@ FrigidGemstone: {
 	DisplayName: 霜寒之握
 	Tooltip:
 		'''
-		放在背包和时装栏中也可生效
-		右键点击以禁用
-		免疫霜冻和冷冻减益
+		免疫霜冻和冷冻减益（放在背包和时装栏中也可生效）
 		“古老的冰块留下的残肢”
 		'''
 	VanityTooltip: 免疫霜冻和冷冻减益
@@ -1667,7 +1665,7 @@ WretchedPouch: {
 	Tooltip:
 		'''
 		免疫暗影焰减益
-		攻击时进行暗影焰充能但会降低10%伤害减免
+		攻击时进行暗影焰充能但会降低至多10%伤害减免
 		停止攻击时会释放暗影焰能量，爆发出一阵暗影触手，造成魔法伤害
 		“被打败的敌人的诅咒燃烧火药”
 		'''
@@ -3072,7 +3070,7 @@ ComputationOrb: {
 	Tooltip:
 		'''
 		非魔法非召唤攻击将造成1.2倍伤害，但会被魔力病所影响
-		非魔法非召唤武器需要10魔力攻击
+		非魔法非召唤武器需要消耗魔力来攻击
 		“在核心内，仍然闪烁着希望的火花。”
 		'''
 }
