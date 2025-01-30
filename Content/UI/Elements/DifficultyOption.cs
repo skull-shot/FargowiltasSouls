@@ -161,17 +161,6 @@ namespace FargowiltasSouls.Content.UI.Elements
                     FargoSoulsUtil.PrintLocalization("Mods.Fargowiltas.Items.ModeToggle.Expert", new Color(175, 75, 255));
 
                 WorldSavingSystem.ShouldBeEternityMode = true;
-
-                int deviType = ModContent.NPCType<UnconsciousDeviantt>();
-                if (FargoSoulsUtil.HostCheck && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
-                {
-                    WorldSavingSystem.SpawnedDevi = true;
-
-                    Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? Main.LocalPlayer.Center : Main.LocalPlayer.Center - 1000 * Vector2.UnitY;
-                    Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                    FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
-                }
             }
             else
             {
@@ -182,6 +171,16 @@ namespace FargowiltasSouls.Content.UI.Elements
                 netMessage.Write((byte)Main.LocalPlayer.whoAmI);
                 netMessage.Write((byte)1); // 1 = set to emode
                 netMessage.Send();
+            }
+            int deviType = ModContent.NPCType<UnconsciousDeviantt>();
+            if (!WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
+            {
+                WorldSavingSystem.SpawnedDevi = true;
+
+                Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? Main.LocalPlayer.Center : Main.LocalPlayer.Center - 1000 * Vector2.UnitY;
+                Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
+
+                FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
             }
         }
         public override void OnClicked()

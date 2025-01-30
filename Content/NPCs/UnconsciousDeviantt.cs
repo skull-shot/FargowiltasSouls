@@ -70,6 +70,7 @@ namespace FargowiltasSouls.Content.NPCs
                     packet.Write((byte)FargowiltasSouls.PacketID.WakeUpDeviantt);
                     packet.Write((byte)NPC.whoAmI);
                     packet.Send();
+                    Main.LocalPlayer.FargoSouls().DevianttIntroduction = true;
                 }
                 else
                     WakeUp(NPC);
