@@ -30,6 +30,7 @@ Heart of the Master: Bonus flight time 100% -> 50%. Chalice still 100%
 Copper Enchant: Wizard effect base damage 200 -> 160
 Fossil/Spectre Enchant: Spawns a bone/spirit every 40 hp lost instead of 30
 Orichalcum Enchant: Poison dps 20 -> 12
+Shadewood Enchant: Wizard effect Ichor 0.5s -> 2s
 Titanium, Monk, Shinobi, Spectre, Solar, Nebula, Ancient Shadow Enchant, Razor Container: Now properly uses class damage, decreased damage of some effects to compensate
 Shadow Force: Dash now counts as melee damage, decreased damage to compensate
 Eternity Mythril Sword/Halberd: Reduced Attack Speed scaling

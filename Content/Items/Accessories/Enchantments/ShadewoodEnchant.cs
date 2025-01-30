@@ -118,7 +118,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (forceEffect)
                 {
-                    target.AddBuff(BuffID.Ichor, 30);
+                    target.AddBuff(BuffID.Ichor, 120);
                 }
             }
         }
