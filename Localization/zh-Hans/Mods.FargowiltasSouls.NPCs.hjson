@@ -429,5 +429,5 @@ ReleasedMutant: {
 	// DisplayName: ???
 	// Chat: *yawns* ...why did you wake me up? Giant slime monster? ...you mean my bed? Ah, forget it... I'll just get a new one.
 	// TalkToHim: Who are you?
-	// Introduction: Name's {0}, though I'm sure you've heard of me before. Are you gonna buy something or not?
+	// Introduction: You've already heard of me. But who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
 }

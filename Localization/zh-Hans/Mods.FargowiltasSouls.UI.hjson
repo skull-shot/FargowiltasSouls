@@ -64,3 +64,4 @@ DisabledUnequipped: 禁用：未装备
 ActiveSkills: 主动技能
 AvailableSkills: 可用技能
 SelectDifficulty: 选择难度
+// NoRespawn: Respawn prevented: Only one respawn per boss in Masochist Mode multiplayer!
