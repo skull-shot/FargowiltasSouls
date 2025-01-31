@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             {
                 npc.buffTime[buffIndex] = 60;
             }
-            npc.FargoSouls().Corrupted = true;
+            //npc.FargoSouls().Corrupted = true;
         }
     }
 }

@@ -284,7 +284,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             LavaWet = false;
 
             WoodEnchantDiscount = false;
-
             SnowVisual = false;
             ApprenticeEnchantActive = false;
             DarkArtistEnchantActive = false;
