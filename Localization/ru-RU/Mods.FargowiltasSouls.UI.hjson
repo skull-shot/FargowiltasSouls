@@ -66,4 +66,4 @@ DisabledUnequipped: Отключено: Не экипировано
 ActiveSkills: Активные умения
 AvailableSkills: Доступные умения
 SelectDifficulty: Выбрать сложность
-// NoRespawn: Respawn prevented: Only one respawn per boss in Masochist Mode multiplayer!
+NoRespawn: В режиме Мазохиста вы можете переродиться только один раз за битву!
