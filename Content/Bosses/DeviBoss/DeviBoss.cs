@@ -904,8 +904,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             }
             void RuneWizard()
             {
-
-                Timer = 4;
                 int threshold = WorldSavingSystem.MasochistModeReal ? 400 : 450;
 
                 Player localPlayer = Main.LocalPlayer;
