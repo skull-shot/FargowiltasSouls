@@ -74,7 +74,6 @@ namespace FargowiltasSouls.Core
 
             public override void KillMultiTile(int i, int j, int frameX, int frameY)
             {
-                //Item.NewItem(Item.GetSource_None(), new Vector2(i * 16, j * 16), new Vector2(32, 32), (int)TileLoader.GetItemDropFromTypeAndStyle(Type));
                 base.KillMultiTile(i, j, frameX, frameY);
             }
 
