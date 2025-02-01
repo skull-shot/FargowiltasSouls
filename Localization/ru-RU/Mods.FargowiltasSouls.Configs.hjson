@@ -55,6 +55,16 @@ ClientConfig: {
 		Label: Позиция шкал перезарядки по Y
 		Tooltip: ""
 	}
+
+	SkillMenuX: {
+		Label: Положение меню умений по X
+		Tooltip: Отсчёт идёт от правой границы экрана.
+	}
+
+	SkillMenuY: {
+		Label: Положение меню умений по Y
+		Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -168,5 +178,10 @@ SoulConfig: {
 	PerformanceMode: {
 		Label: Режим производительности
 		Tooltip: Выключает большинство визуальных эффектов, влияющих на производительность. На данный момент выключает хвосты глаз Мутанта
+	}
+
+	PatreonTouhou: {
+		Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		Tooltip: ""
 	}
 }

@@ -128,6 +128,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     return;
                 npc.lifeMax = npc.life = MaxHP;
                 npc.damage = Damage;
+                int extra = npc.type == NPCID.LunarTowerVortex ? 20 : 150;
                 npc.damage += 150;
                 npc.defDamage += 150;
                 npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;

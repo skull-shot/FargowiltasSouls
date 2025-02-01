@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (forceEffect)
                 dmg *= 3;
-            if (player.HasEffect<NatureEffect>())
+            if (player.HasEffect<TimberEffect>())
                 dmg *= 4;
 
             if (target.HasBuff(ModContent.BuffType<SuperBleedBuff>()) && modPlayer.ShadewoodCD == 0 && (projectile == null || projectile.type != ModContent.ProjectileType<SuperBlood>()) && player.whoAmI == Main.myPlayer)
@@ -113,12 +113,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.ShadewoodCD = 120;
                 for (int i = 0; i < Main.rand.Next(3, 6); i++)
                 {
-                    Projectile.NewProjectile(player.GetSource_Misc(""), target.Center.X, target.Center.Y - 20, 0f + Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5), ModContent.ProjectileType<SuperBlood>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 0f, Main.myPlayer);
+                    Projectile.NewProjectile(player.GetSource_Misc(""), target.Center.X, target.Center.Y - 20, 0f + Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5), ModContent.ProjectileType<SuperBlood>(), (int)(dmg * player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
                 }
 
                 if (forceEffect)
                 {
-                    target.AddBuff(BuffID.Ichor, 30);
+                    target.AddBuff(BuffID.Ichor, 120);
                 }
             }
         }

@@ -12,7 +12,7 @@
 // PearlwoodRainbowEffect: Pearlwood Rainbow Trail
 // TimberEffect: Concise Timber Force
 // EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
-// AdamantiteEffect: Adamantite Projectile Splitting
+// AdamantiteEffect: Adamantite Speed and Spread
 // CobaltEffect: Cobalt Hit Explosion
 // AncientCobaltEffect: Ancient Cobalt Explosion Jump
 // MythrilEffect: Mythril Weapon Speed
@@ -27,7 +27,8 @@
 // LeadPoisonEffect: Lead Poison
 // SilverEffect: Silver Parry
 // TinEffect: Tin Crits
-// TungstenEffect: Tungsten Effect
+// TungstenEffect: Tungsten Size
+// TungstenShockwaveEffect: Tungsten Shockwave
 // ObsidianProcEffect: Obsidian Explosions
 // AshWoodFireballs: Ash Fireballs
 // TerraLightningEffect: Concise Terra Force
@@ -123,7 +124,7 @@
 // RainbowHealEffect: Auto-Use Healing Potions
 // NymphPerfumeEffect: Attacks Spawn Hearts
 // SqueakEffect: Squeaky Toy On Hit
-// WretchedPouchEffect: Wretched Hex Install
+// WretchedPouchEffect: Wretched Shadowflame
 // ClippedEffect: Inflict Clipped Wings
 // WyvernBalls: Flight Light Orbs
 // TribalCharmClickBonus: Tribal Charm Click Bonus
@@ -183,7 +184,7 @@
 // FlightMasteryGravity: Amplified Gravity
 // JumpsDisabled: Disable All Jumps
 // SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
-// RunSpeed: Higher Base Run Speede
+// RunSpeed: Higher Base Run Speed
 // NoMomentum: No Momentum
 // SupersonicTabi: Tabi Dash
 // SupersonicClimbing: Tiger Climbing Gear

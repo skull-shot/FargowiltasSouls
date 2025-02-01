@@ -64,8 +64,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool TimeFrozen;
         public bool HellFire;
         public bool HellFireMarked;
-        public bool Corrupted;
-        public bool CorruptedForce;
+        // public bool Corrupted;
+        // public bool CorruptedForce;
         public bool Infested;
         public int MaxInfestTime;
         public float InfestedDust;
@@ -90,8 +90,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool SnowChilled;
         public int SnowChilledTimer;
-
-        public int EbonCorruptionTimer;
 
         public bool Chilled;
         public bool Smite;
@@ -129,8 +127,8 @@ namespace FargowiltasSouls.Core.Globals
             SolarFlare = false;
             HellFire = false;
             HellFireMarked = false;
-            Corrupted = false;
-            CorruptedForce = false;
+            // Corrupted = false;
+            // CorruptedForce = false;
             OriPoison = false;
             EarthPoison = false;
             Infested = false;
@@ -272,10 +270,6 @@ namespace FargowiltasSouls.Core.Globals
             //                }
 
             //            }
-            if (!npc.HasBuff<CorruptingBuff>())
-            {
-                EbonCorruptionTimer -= Math.Min(1, EbonCorruptionTimer);
-            }
             if (SnowChilled)
             {
                 SnowChilledTimer--;
@@ -371,6 +365,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
+            /*
             if (Corrupted || CorruptedForce)
             {
                 if (Main.rand.Next(8) < 9)
@@ -382,6 +377,7 @@ namespace FargowiltasSouls.Core.Globals
                     d.velocity.Y -= 10f;
                 }
             }
+            */
 
             if (OriPoison)
             {
@@ -784,16 +780,16 @@ namespace FargowiltasSouls.Core.Globals
                     damage = 5;
             }
 
-            //20 dps 
+            //12 dps 
             if (OriPoison)
             {
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
 
-                npc.lifeRegen -= 40;
+                npc.lifeRegen -= 24;
 
-                if (damage < 4)
-                    damage = 4;
+                if (damage < 2)
+                    damage = 2;
             }
             if (EarthPoison)
             {
@@ -956,9 +952,6 @@ namespace FargowiltasSouls.Core.Globals
 
             if (player.HasEffect<OrichalcumEffect>())
                 multiplier += OrichalcumEffect.OriDotModifier(npc, player.FargoSouls()) - 1;
-
-            if (player.HasEffect<EarthForceEffect>())
-                multiplier += 3;
 
             if (npc.FargoSouls().MagicalCurse)
                 multiplier += 1;
@@ -1128,6 +1121,11 @@ namespace FargowiltasSouls.Core.Globals
 
                 case NPCID.BrainofCthulhu:
                     npcLoot.Add(BossDrop(ModContent.ItemType<BrainStaff>()));
+                    break;
+
+                case NPCID.DD2DarkMageT1:
+                case NPCID.DD2DarkMageT3:
+                    npcLoot.Add(BossDrop(ModContent.ItemType<DarkTome>()));
                     break;
 
                 case NPCID.QueenBee:
@@ -1305,14 +1303,9 @@ namespace FargowiltasSouls.Core.Globals
             Player player = Main.player[Main.myPlayer];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (Corrupted)
+            if (player.HasEffect<EbonwoodEffect>())
             {
-                modifiers.FlatBonusDamage += 5;
-            }
-            if (CorruptedForce)
-            {
-                int pen = player.HasEffect<TimberEffect>() ? 15 : 20;
-                modifiers.FlatBonusDamage += pen;
+                modifiers.FlatBonusDamage += (int) (modPlayer.EbonwoodCharge / 50);
             }
 
             if (OceanicMaul)
@@ -1331,9 +1324,9 @@ namespace FargowiltasSouls.Core.Globals
             if (MoltenAmplify)
             {
                 float modifier = 1.2f;
-                if (player.HasEffect<NatureEffect>())
+                if (!player.HasEffectEnchant<MoltenEffect>())
                     modifier = 1.15f;
-                else if (modPlayer.ForceEffect<MoltenEnchant>())
+                else if (player.ForceEffect<MoltenEffect>())
                     modifier = 1.3f;
                 modifiers.FinalDamage *= modifier;
             }

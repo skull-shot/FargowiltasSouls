@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 88;
+            Item.damage = 50;
             Item.DamageType = DamageClass.Magic;
             Item.width = 38;
             Item.height = 46;
@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float ItemShootSpeed = Item.shootSpeed;
-            int ItemDamage = Item.damage;
             float ItemKnockBack = Item.knockBack;
             ItemKnockBack = player.GetWeaponKnockback(Item, ItemKnockBack);
             player.itemTime = Item.useTime;
@@ -99,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
                 localProjX *= sqrtSpeed;
                 localProjY *= sqrtSpeed;
 
-                Projectile.NewProjectile(player.GetSource_ItemUse(Item), position.X, position.Y, localProjX, localProjY, ModContent.ProjectileType<GolemGib>(), ItemDamage, ItemKnockBack, Main.myPlayer, 0, Main.rand.Next(1, 12));
+                Projectile.NewProjectile(player.GetSource_ItemUse(Item), position.X, position.Y, localProjX, localProjY, ModContent.ProjectileType<GolemGib>(), damage, ItemKnockBack, Main.myPlayer, 0, Main.rand.Next(1, 12));
             }
 
             return false;

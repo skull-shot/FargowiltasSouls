@@ -42,6 +42,17 @@ namespace FargowiltasSouls.Core
         [DefaultValue(400f)]
         public float CooldownBarsY;
 
+        [Increment(1f)]
+        [Range(-max4kX, 0)]
+        [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
+        public float SkillMenuX; // From the right of the screen
+
+
+        [Increment(1f)]
+        [Range(0f, max4kY)]
+        [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
+        public float SkillMenuY;
+
         #region maso
 
         [Header("Maso")]

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -88,8 +89,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                         if (FargoSoulsUtil.HostCheck)
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -16 + scaleCounter);
 
-                        SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
                         
+
                     }
                 }
 
@@ -104,8 +105,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
             if (Projectile.timeLeft == 2)
             {
-                SoundEngine.PlaySound(SoundID.NPCDeath6, Projectile.Center);
-                SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
+                //SoundEngine.PlaySound(SoundID.NPCDeath6, Projectile.Center);
 
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -14);
@@ -168,6 +168,12 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnKill(int timeLeft)
         {
             MakeDust();
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), Projectile.Center);
+            base.OnSpawn(source);
         }
 
         private void MakeDust()

@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +13,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class LumpOfFlesh : SoulsItem
     {
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ParryEffect>(),
+            AccessoryEffectLoader.GetEffect<DiveEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -58,10 +63,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[ModContent.BuffType<AnticoagulationBuff>()] = true;
             player.noKnockback = true;
             player.AddEffect<DreadShellEffect>(Item);
+            player.AddEffect<ParryEffect>(Item);
 
             player.buffImmune[BuffID.Slow] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<DeerclawpsDive>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
         }
 

@@ -1,6 +1,7 @@
 ﻿using Fargowiltas.NPCs;
 using Fargowiltas.Projectiles;
-
+using FargowiltasSouls.Content.NPCs;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -19,6 +20,7 @@ namespace FargowiltasSouls.Content.Items
     {
         public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
 
+        public string mode;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Mutant's Gift");
@@ -85,38 +87,13 @@ Cannot be used while a boss is alive
 
         public override bool? UseItem(Player player)
         {
-            if (FargoSoulsUtil.WorldIsExpertOrHarder())
-            {
-                if (CanToggleEternity())
-                {
-                    WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
-
-                    int deviType = ModContent.NPCType<Deviantt>();
-                    if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
-                    {
-                        WorldSavingSystem.SpawnedDevi = true;
-
-                        Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? player.Center : player.Center - 1000 * Vector2.UnitY;
-                        Projectile.NewProjectile(player.GetSource_ItemUse(Item), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                        FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
-                    }
-
-                    SoundEngine.PlaySound(SoundID.Roar, player.Center);
-
-                    if (Main.netMode == NetmodeID.Server)
-                        NetMessage.SendData(MessageID.WorldData); //sync world
-                }
-            }
-            else
-            {
-                FargoSoulsUtil.PrintLocalization($"Mods.{Mod.Name}.Items.{Name}.WrongDifficulty", new Color(175, 75, 255));
-            }
+            if ((Main.netMode == NetmodeID.SinglePlayer || Main.myPlayer == player.whoAmI) && CanToggleEternity())
+                FargoUIManager.Toggle<DifficultySelectionMenu>();
             return true;
         }
         public static bool CanToggleEternity() // exists for DLC compat
         {
-            return FargoSoulsUtil.WorldIsExpertOrHarder() && !LumUtils.AnyBosses();
+            return !LumUtils.AnyBosses();
         }
     }
 }

@@ -74,9 +74,9 @@
 // HentaiSphereRing.DisplayName: Phantasmal Sphere
 // Hungry.DisplayName: Hungry
 // Hungry2.DisplayName: Hungry
-// LeashFlail.DisplayName: Leash Flail
+// LeashFlail.DisplayName: Eyeleash Flail
 // MechEyeProjectile.DisplayName: MechEyeProjectile
-// MechFlail.DisplayName: Mech Flail
+// MechFlail.DisplayName: Leash of Cthulhu Flail
 // PhantasmalBlast.DisplayName: Phantasmal Blast
 // PhantasmalBolt.DisplayName: Phantasmal Bolt
 // PhantasmalEyeBoundary.DisplayName: Phantasmal Eye
@@ -768,3 +768,18 @@
 // RockeaterAuraProj.DisplayName: Rockeater Aura Proj
 // FallenStarDay.DisplayName: Fallen Star Day
 // LightningRodLightning.DisplayName: Lightning Rod Lightning
+// ReleasedMechFlail.DisplayName: Leash of Cthulhu
+// Tome.DisplayName: Tome
+// TomeShot.DisplayName: Tome Shot
+// TungstenShockwave.DisplayName: Tungsten Shockwave
+// CirnoIceCube.DisplayName: Cirno Ice Cube
+// CirnoMinion.DisplayName: Cirno Minion
+// DaiyouseiMinion.DisplayName: Daiyousei Minion
+// MystiaMinion.DisplayName: Mystia Minion
+// RumiaMinion.DisplayName: Rumia Minion
+// WriggleMinion.DisplayName: Wriggle Minion
+// CirnoIceChunk.DisplayName: Cirno Ice Chunk
+// DaiyoLeaf.DisplayName: Daiyo Leaf
+// MystiaNote.DisplayName: Mystia Note
+// MystiaNote2.DisplayName: Mystia Note2
+// RumiaOrb.DisplayName: Rumia Orb

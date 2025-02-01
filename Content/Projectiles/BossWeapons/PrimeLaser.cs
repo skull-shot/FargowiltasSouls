@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Prime Laser");
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
         public override void SetDefaults()
         {
@@ -61,11 +62,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             float chargeupTime = 10;
-            if (Projectile.ai[0] < chargeupTime)
+            if (Projectile.ai[1] == 1)
             {
-                float modifier = Projectile.ai[0] / chargeupTime;
-                modifiers.SourceDamage *= 0.4f + 0.6f * modifier;
+                if (Projectile.ai[0] < chargeupTime)
+                {
+                    float modifier = Projectile.ai[0] / chargeupTime;
+                    modifiers.SourceDamage *= 0.4f + 0.6f * modifier;
+                }
             }
+            
             base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnKill(int timeLeft)

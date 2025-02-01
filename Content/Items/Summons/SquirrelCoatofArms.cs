@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using Terraria;
 using Terraria.ID;
@@ -20,6 +21,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.rare = ItemRarityID.Blue;
             Item.maxStack = 20;
             Item.useAnimation = 30;
+            Item.UseSound = FargosSoundRegistry.TrojanSummon;
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.consumable = true;

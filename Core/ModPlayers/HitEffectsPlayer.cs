@@ -20,6 +20,7 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria.Localization;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -69,17 +70,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 
                 if (hitInfo.Crit)
                 {
-                    if (Eternity)
-                    {
-                        hitInfo.Damage *= 5;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseSoul)
-                    {
-                        hitInfo.Damage *= 2;
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
-                    }
-                    else if (UniverseCore)
+                    if (UniverseCore) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
 
@@ -90,6 +81,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
+                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
+                    {
+                        float critDamageMult = 0.75f; // 1f
+                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                            //critDamageMult *= 0.75f;
+                        if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                            critDamageMult *= 0.75f;
+                        if (critDamageMult != 1)
+                            hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
+                    }
+                       
                 }
 
                 if (Hexed)
@@ -307,8 +309,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
             dr += NecromanticBrew.NecroBrewDashDR(Player);
 
-            if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
-                dr += 0.2f;
+            //if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
+            //    dr += 0.2f;
 
             if (npc.FargoSouls().BloodDrinker)
                 dr -= 0.3f;

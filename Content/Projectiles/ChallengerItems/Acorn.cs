@@ -23,6 +23,8 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 3;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
         }
 
         public override void OnKill(int timeLeft)

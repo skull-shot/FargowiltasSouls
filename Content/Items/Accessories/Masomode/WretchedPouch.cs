@@ -55,12 +55,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             if (player.HeldItem != null && player.HeldItem.damage > 0 && player.controlUseItem) // build up charges
             {
                 modPlayer.WretchedPouchCD += 1;
-                if (!modPlayer.MasochistSoul)
-                    player.endurance -= 0.1f;
 
                 float charge = modPlayer.WretchedPouchCD / (float)MaxChargeTime;
                 charge = MathHelper.Clamp(charge, 0, 1);
                 int freq = 30 - (int)MathF.Round(29 * charge);
+
+                if (!modPlayer.MasochistSoul)
+                    player.endurance -= 0.1f * charge;
+
                 if (Main.GameUpdateCount % freq == 0)
                 {
                     int d = Dust.NewDust(player.position, player.width, player.height, DustID.Shadowflame, player.velocity.X * 0.4f, player.velocity.Y * 0.4f, 0, new Color(), 3f);
@@ -90,7 +92,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
                     SoundEngine.PlaySound(SoundID.Item103, player.Center);
 
-                    int dam = 50 + (int)(50 * charge * 6);
+                    int dam = 58 + (int)(58 * charge * 6);
                     if (modPlayer.MasochistSoul)
                         dam *= 10;
                     dam = (int)(dam * player.ActualClassDamage(DamageClass.Magic));

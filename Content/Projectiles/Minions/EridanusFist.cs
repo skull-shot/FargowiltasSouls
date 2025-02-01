@@ -60,25 +60,28 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     Projectile.frame = 0;
             }
 
-            int index = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
-                DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y, 100, new Color(), 1.2f);
-            Main.dust[index].position = (Main.dust[index].position + Projectile.Center) / 2f;
-            Main.dust[index].noGravity = true;
-            Main.dust[index].velocity = Main.dust[index].velocity * 0.3f;
-            Main.dust[index].velocity = Main.dust[index].velocity - Projectile.velocity * 0.1f;
+            if (Main.rand.NextBool(4))
+            {
+                int index = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
+                    DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y, 100, new Color(), 1.2f);
+                Main.dust[index].position = (Main.dust[index].position + Projectile.Center) / 2f;
+                Main.dust[index].noGravity = true;
+                Main.dust[index].velocity = Main.dust[index].velocity * 0.3f;
+                Main.dust[index].velocity = Main.dust[index].velocity - Projectile.velocity * 0.1f;
+            }
         }
 
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
                 Main.dust[dust].velocity *= 1.4f;
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
                 Main.dust[dust].noGravity = true;

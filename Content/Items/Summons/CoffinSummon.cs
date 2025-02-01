@@ -7,6 +7,8 @@ using Terraria.Audio;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.WorldGeneration;
 using Microsoft.Xna.Framework;
+using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Items.Consumables;
 
 namespace FargowiltasSouls.Content.Items.Summons
 {
@@ -18,6 +20,8 @@ namespace FargowiltasSouls.Content.Items.Summons
             //DisplayName.SetDefault("Coffin Summon");
             //Tooltip.SetDefault("While in the underground Desert, summon the Cursed Coffin");
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
+
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<CoffinRoominator>();
         }
 
         public override bool IsLoadingEnabled(Mod mod) => CursedCoffin.Enabled;
@@ -43,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Summons
                 .AddIngredient(ItemID.FossilOre, 8)
                 .AddRecipeGroup("FargowiltasSouls:AnyGem", 4)
                 .AddTile(TileID.DemonAltar)
-                .DisableDecraft()
+                //.DisableDecraft()
                 .Register();
         }
 

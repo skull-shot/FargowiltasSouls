@@ -1,8 +1,10 @@
 ﻿using Fargowiltas.Items.Explosives;
+using Fargowiltas.NPCs;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Consumables;
@@ -19,6 +21,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -29,6 +32,15 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void PreUpdate()
         {
             Toggler.TryLoad();
+
+            if (DevianttIntroduction)
+            {
+                if (Player.TalkNPC?.type == ModContent.NPCType<Deviantt>() && Player.TalkNPC.HasGivenName)
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Player.TalkNPC.GivenName);
+                    DevianttIntroduction = false;
+                }
+            }
 
             if (Player.CCed)
             {
@@ -122,7 +134,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             ForbiddenTornados.Clear();
             ShadowOrbs.Clear();
-            bool forbidden = Player.HasEffect<ForbiddenEffect>();
+            bool forbidden = Player.HasEffect<ForbiddenEffect>() || Player.HasEffect<SpiritTornadoEffect>();
             bool shadow = Player.HasEffect<ShadowBalls>();
             if (forbidden || shadow)
             {
@@ -192,7 +204,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player, true);
+                    TinEffect.TinHurt(Player);
                 }
             }
             else
@@ -384,7 +396,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //    Player.velocity.X *= 1.1f;
                 //}
 
-                float dashSpeedBoost = 0.5f * Player.velocity.X;
+                float dashSpeedBoost = 0.3f * Player.velocity.X;
                 Player.position.X += dashSpeedBoost;
                 if (Collision.SolidCollision(Player.position, Player.width, Player.height))
                     Player.position.X -= dashSpeedBoost;
@@ -510,13 +522,15 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             TimeSinceHurt++;
 
+            if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
+                Toggler_MinionsDisabled = false;
+
             if (GalacticMinionsDeactivated)
             {
                 int minioncount = DeactivatedMinionEffectCount;
                 minioncount += Player.maxMinions - (int)Player.slotsMinions;
                 if (DeactivatedMinionEffectCount > 0)
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
-  
             }
 
             if (ToggleRebuildCooldown > 0)
@@ -550,6 +564,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
+
+            if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
+                EbonwoodCharge--;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
             if (SquireEnchantActive)
@@ -617,9 +634,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (ChargeSoundDelay > 0)
                 ChargeSoundDelay--;
 
-            if (EarthSplitTimer > 0)
-                EarthSplitTimer--;
-
             if (RustRifleReloading && Player.HeldItem.type == ModContent.ItemType<NavalRustrifle>())
             {
                 RustRifleTimer++;
@@ -652,8 +666,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 DreadShellVulnerabilityTimer--;
 
-                Player.statDefense -= 30;
-                Player.endurance -= 0.3f;
+                Player.statDefense -= 15;
+                Player.endurance -= 0.15f;
             }
 
             if (HallowHealTime > 0)
@@ -748,12 +762,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //tries to remove all buffs/debuffs
                 for (int i = Player.MaxBuffs - 1; i >= 0; i--)
                 {
-                    if (Player.buffType[i] > 0
-                        && !Main.debuff[Player.buffType[i]] && !Main.buffNoTimeDisplay[Player.buffType[i]]
-                        && !BuffID.Sets.TimeLeftDoesNotDecrease[Player.buffType[i]])
+                    int type = Player.buffType[i];
+                    if (type > 0
+                        && !Main.debuff[type] && !Main.buffNoTimeDisplay[type]
+                        && !BuffID.Sets.TimeLeftDoesNotDecrease[type] && !Main.lightPet[type] && !Main.vanityPet[type])
                     {
-                        if (!KnownBuffsToPurify.ContainsKey(Player.buffType[i]))
-                            KnownBuffsToPurify[Player.buffType[i]] = true;
+                        if (!KnownBuffsToPurify.ContainsKey(type))
+                            KnownBuffsToPurify[type] = true;
 
                         Player.DelBuff(i);
                     }

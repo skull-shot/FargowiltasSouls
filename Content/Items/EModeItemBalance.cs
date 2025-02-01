@@ -151,7 +151,12 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.75f;
+                    balanceNumber = 0.9f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TheHorsemansBlade:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.12f;
                     return EModeChange.Nerf;
 
                 case ItemID.Uzi:
@@ -159,12 +164,17 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.88f;
                     return EModeChange.Nerf;
 
+                case ItemID.BeeGun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
                 case ItemID.MagicDagger:
                     {
                         if (!Main.hardMode)
                         {
                             balanceTextKeys = ["Damage", "Speed"];
-                            balanceNumber = 0.65f;
+                            balanceNumber = 0.5f;
                             return EModeChange.Nerf;
                         }
                         return EModeChange.None;
@@ -384,6 +394,49 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.25f;
                     return EModeChange.Buff;
+                    
+                case ItemID.GolemFist:
+                    balanceTextKeys = ["GolemFist"];
+                    return EModeChange.Buff;
+
+                case ItemID.JackOLanternLauncher:
+                    balanceTextKeys = ["JackOLanternLauncher"];
+                    return EModeChange.Buff;
+
+                case ItemID.Stynger:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.MoltenFury:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.LaserMachinegun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;
+
+                case ItemID.ChargedBlasterCannon:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
+                case ItemID.FireworksLauncher: //celebration mk1
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.SnowmanCannon:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TempestStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Nerf;
                 default:
                     return EModeChange.None;
             }

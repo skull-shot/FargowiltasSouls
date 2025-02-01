@@ -12,6 +12,7 @@ using ReLogic.Content;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -26,6 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.BrainofCthulhu);
 
         public int ConfusionTimer;
+        public int ConfusionIdleTimer;
         public int IllusionTimer;
         public int ForceDespawnTimer;
 
@@ -40,11 +42,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public float GlowOpacity = 0f;
 
+        public const int ConfusionIdleTime = 60;
+
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
 
             binaryWriter.Write7BitEncodedInt(ConfusionTimer);
+            binaryWriter.Write7BitEncodedInt(ConfusionIdleTimer);
             binaryWriter.Write7BitEncodedInt(IllusionTimer);
             binaryWriter.Write7BitEncodedInt(ClonefadeDashTimer);
             binaryWriter.Write(CloneFade);
@@ -57,6 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.ReceiveExtraAI(npc, bitReader, binaryReader);
 
             ConfusionTimer = binaryReader.Read7BitEncodedInt();
+            ConfusionIdleTimer = binaryReader.Read7BitEncodedInt();
             IllusionTimer = binaryReader.Read7BitEncodedInt();
             ClonefadeDashTimer = binaryReader.Read7BitEncodedInt();
             CloneFade = binaryReader.ReadSingle();
@@ -121,7 +127,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 int confusionThreshold = 400;
                 int confusionThreshold2 = confusionThreshold - 60;
                 // Fade dash
-                float cloneTime = 50;
+                float cloneTime = WorldSavingSystem.MasochistModeReal ? 50 : 50;
                 int dashTime = 60;
                 ref float teleportTimer = ref npc.localAI[1];
                 bool confused = npc.HasPlayerTarget && Main.player[npc.target].HasBuff(BuffID.Confused);
@@ -130,6 +136,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 //    noFadeDash = false;
                 if (teleportTimer >= cloneTime - 25 && !noFadeDash)
                 {
+                    if (CloneFade == 0 && npc.HasPlayerTarget)
+                    {
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Player player = Main.player[npc.target];
+                            if (WorldSavingSystem.MasochistModeReal)
+                                FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), player.Center + (player.Center - npc.Center), ModContent.NPCType<BrainClone>(), npc.whoAmI);
+                        }
+                    }
                     if (CloneFade < 1)
                         CloneFade += 0.05f;
                 }
@@ -145,14 +160,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                     if (ClonefadeDashTimer < dashTime && npc.HasPlayerTarget)
                     {
+                        Player player = Main.player[npc.target];
                         if (ClonefadeDashTimer == 0)
+                        {
                             npc.netUpdate = true;
+                        }
+                            
 
                         KnockbackImmune = true;
                         ClonefadeDashTimer++;
                         teleportTimer = cloneTime + 5;
-                        Player player = Main.player[npc.target];
-                        npc.velocity += npc.DirectionTo(player.Center) * 0.35f;
+                        npc.velocity += npc.DirectionTo(player.Center) * 0.28f;
                     }
                     else
                     {
@@ -234,7 +252,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         CloneFade = 0;
                     }
 
-                    if (!Main.player[npc.target].HasBuff(BuffID.Confused))
+                    bool isConfused = Main.player[npc.target].HasBuff(BuffID.Confused);
+                    bool shouldMove = ConfusionTimer == confusionThreshold2 + 1 ? confused : !confused;
+
+                    if (shouldMove)
                     {
                         if (npc.HasPlayerTarget)
                         {
@@ -245,7 +266,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             npc.velocity = Vector2.Lerp(npc.velocity, npc.DirectionTo(desiredPos) * Math.Min(10, npc.Distance(desiredPos)), 0.2f);
                             KnockbackImmune = true;
                         }
-                        
                     }
                     void TelegraphCircle()
                     {
@@ -262,21 +282,47 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             TelegraphCircle();
                             SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep"), Main.LocalPlayer.Center);
                         }
-                            
 
-                    if (ConfusionTimer == confusionThreshold2 + 1 && !WorldSavingSystem.MasochistModeReal)
-                        if (!Main.dedServ)
+
+                    if (ConfusionTimer == confusionThreshold2 + 2)
+                    {
+                        if (!WorldSavingSystem.MasochistModeReal)
                         {
-                            TelegraphCircle();
-                            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep") with { Pitch = -0.5f }, Main.LocalPlayer.Center);
+                            ConfusionIdleTimer = ConfusionIdleTime;
+                            npc.netUpdate = true;
+                            if (!Main.dedServ)
+                            {
+                                TelegraphCircle();
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep") with { Pitch = -0.5f }, Main.LocalPlayer.Center);
+                            }
                         }
+                        if (npc.Distance(Main.LocalPlayer.Center) < 3000) //inflict confusion
+                        {
+                            if (!Main.LocalPlayer.HasBuff(BuffID.Confused))
+                            {
+                                int idle = WorldSavingSystem.MasochistModeReal ? 0 : ConfusionIdleTime;
+                                FargoSoulsUtil.AddDebuffFixedDuration(Main.LocalPlayer, BuffID.Confused, confusionThreshold + 10 + idle, false);
+                            }
+                            else
+                                Main.LocalPlayer.ClearBuff(BuffID.Confused);
+                        }
+                    }
+
+                    if (ConfusionTimer == confusionThreshold2 + 1)
+                    {
+                        if (ConfusionIdleTimer > 0)
+                        {
+                            ConfusionIdleTimer--;
+                            ConfusionTimer++; // stall
+                        }
+                    }
                 }
                 else if (ConfusionTimer == confusionThreshold2)
                 {
                     //npc.netUpdate = true; //disabled because might be causing mp issues???
                     //NetSync(npc);
 
-                    if (Main.player[npc.target].HasBuff(BuffID.Confused))
+                    if (!Main.player[npc.target].HasBuff(BuffID.Confused))
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, npc.Center);
                         TelegraphConfusion(npc.Center);
@@ -325,11 +371,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         LaserSpread(new Vector2(spawnPos.X + offset.X, spawnPos.Y - offset.Y));
                         LaserSpread(new Vector2(spawnPos.X - offset.X, spawnPos.Y + offset.Y));
                         LaserSpread(new Vector2(spawnPos.X - offset.X, spawnPos.Y - offset.Y));
-                    }
-
-                    if (npc.Distance(Main.LocalPlayer.Center) < 3000 && !Main.LocalPlayer.HasBuff(BuffID.Confused)) //inflict confusion
-                    {
-                        FargoSoulsUtil.AddDebuffFixedDuration(Main.LocalPlayer, BuffID.Confused, confusionThreshold + 10, false);
                     }
                 }
 
@@ -386,9 +427,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, type, npc.whoAmI, npc.whoAmI, -1, 1);
                     FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, type, npc.whoAmI, npc.whoAmI, 1, -1);
                     FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, type, npc.whoAmI, npc.whoAmI, 1, 1);
-
-                    if (WorldSavingSystem.MasochistModeReal)
-                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, ModContent.NPCType<BrainClone>(), npc.whoAmI);
 
                     for (int i = 0; i < Main.maxProjectiles; i++) //clear old golden showers
                     {

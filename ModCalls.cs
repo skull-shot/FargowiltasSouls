@@ -46,7 +46,12 @@ namespace FargowiltasSouls
             bool? arg = argsWithoutCommand[0] as bool?;
             if (arg != null)
             {
+                bool old = WorldSavingSystem.EternityVanillaBehaviour;
                 WorldSavingSystem.EternityVanillaBehaviour = (bool)arg;
+                if (old != WorldSavingSystem.EternityVanillaBehaviour && Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.WorldData);
+                }
             }
             return BehaviourWasOn;
         }
@@ -381,6 +386,27 @@ namespace FargowiltasSouls
         protected override object SafeProcess(params object[] argsWithoutCommand)
         {
             return Main.LocalPlayer.FargoSouls().AttackSpeed;
+        }
+    }
+    internal sealed class DeletionImmuneRankCall : ModCall
+    {
+        public override IEnumerable<string> GetCallCommands()
+        {
+            yield return "DeletionImmuneRank";
+            yield return "SetDeletionImmuneRank";
+            yield return "SetProjectileDeletionImmuneRank";
+            yield return "ProjectileDEletionImmuneRank";
+        }
+        public override IEnumerable<Type> GetInputTypes()
+        {
+            yield return typeof(Projectile);
+            yield return typeof(int);
+        }
+        protected override object SafeProcess(params object[] argsWithoutCommand)
+        {
+            var proj = argsWithoutCommand[0] as Projectile;
+            proj.FargoSouls().DeletionImmuneRank = (int)(argsWithoutCommand[1]);
+            return ModCallManager.DefaultObject;
         }
     }
 }

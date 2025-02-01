@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void SetDefaults()
         {
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.timeLeft = 60 * 4;
             Projectile.tileCollide = false;

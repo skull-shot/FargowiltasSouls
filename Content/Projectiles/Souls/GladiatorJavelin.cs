@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -29,9 +30,13 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 10;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
         }
-
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.ArmorPenetration += 5;
+        }
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;

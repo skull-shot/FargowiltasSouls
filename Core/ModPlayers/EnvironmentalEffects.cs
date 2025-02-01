@@ -15,6 +15,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Localization;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using Fargowiltas.Content.Buffs;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -335,7 +336,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
                 else
                 {
-                    if (!Player.resistCold && !Player.HasBuff(BuffID.Campfire) && !ItemID.Sets.Torches[Player.HeldItem.type])
+                    if (!Player.resistCold && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff<Semistation>() && !Player.HasBuff<Omnistation>() && !Main.SceneMetrics.HasCampfire && !ItemID.Sets.Torches[Player.HeldItem.type])
                     {
                         FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Chilled, 2);
                     }

@@ -394,7 +394,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles deal more damage the faster they're moving, up to 1.15x
+		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -656,7 +656,7 @@ TinEnchant: {
 		Ser atingido redefine seu crítico para 5%
 		'Retorno do Crítico'
 		'''
-	CritUp: +5% crítico
+	CritUp: +{0}% crítico
 	CritReset: -{0}% crítico
 }
 
@@ -675,9 +675,9 @@ TungstenEnchant: {
 	// DisplayName: Tungsten Enchantment
 	/* Tooltip:
 		'''
-		Doubles melee weapon size
-		Once every 2/3 of a second a projectile will be doubled in size
-		Enlarged projectiles and non-projectile swords deal 7% more damage
+		Increases melee weapon size by 50% and whip range by 20%
+		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
+		2.5 second cooldown
 		'Bigger is always better'
 		''' */
 }
@@ -907,7 +907,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
 		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile damage based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
@@ -1064,7 +1064,6 @@ BionomicCluster: {
 		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
 		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		[i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
 		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
 		''' */
 }
@@ -1078,8 +1077,8 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
-		[i:FargowiltasSouls/SqueakyToy] Attacks have a chance to squeak and deal 1 damage to you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by 10%
+		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
+		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
 		[i:FargowiltasSouls/ConcentratedRainbowMatter] Summons a friendly rainbow slime
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
@@ -1087,7 +1086,7 @@ BionomicClusterInactive: {
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically use healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		    [i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
 		    [i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
@@ -1202,24 +1201,7 @@ FrigidGemstone: {
 		Aperte a tecla Feitiço Frígido para lançar Bastão de Gelo
 		'Um fragmento de gelo mágico antigo'
 		'''
-	/* VanityTooltip:
-		'''
-		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
-		''' */
-}
-
-FrigidGemstoneInactive: {
-	// DisplayName: Frigid Grasp (Inactive)
-	/* Tooltip:
-		'''
-		Currently inactive, Right click to activate
-		Grants immunity to Frostburn and Chilled
-		Press the Frigid Spell key to cast Ice Rod
-		Your ice blocks inflict Frostburn
-		'A torn off limb composed of ancient ice'
-		''' */
+	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1432,7 +1414,7 @@ NecromanticBrew: {
 	Tooltip:
 		'''
 		Oferece imunidade a Letárgico
-		Aumenta a velocidade enquanto faz uma corrida em 50%
+		Aumenta a velocidade enquanto faz uma corrida em 30%
 		Enquanto faz uma corrida, você sofre 75% menos dano de contato e reflete 100% do dano de contato no atacante
 		Invoca 2 braços do Esqueletron para bater nos inimigos
 		'A solução de crescimento ósseo de um inimigo derrotado'
@@ -2983,7 +2965,7 @@ ForgorGift: {
 		Clique com o botão direito no item no inventário para redefinir o pulo da fase 1 do Mutant
 		i forgor
 		'''
-	// Message: forgor
+	// Message: Flags reset successfully
 }
 
 Masochist: {
@@ -3179,11 +3161,6 @@ LifeRevitalizer: {
 		Right click tile to set your spawn point
 		No housing required
 		''' */
-}
-
-AbomMusicBox: {
-	// DisplayName: Music Box (Abominationn)
-	// Tooltip: Yuri O 'Laevateinn'
 }
 
 ChampionMusicBox: {
@@ -3425,7 +3402,7 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	// StarlightTungsten: x0.40 damage when used with Tungsten Enchantment
+	// StarlightTungsten: 0.75x damage when used with Tungsten Enchantment
 	// DefensePrefixMaxLife: +{0} max life
 	// ViolentPrefix: +{0}% attack speed
 	EternityItem: Eternidade
@@ -3555,7 +3532,11 @@ WillBooster: {
 
 CoffinRoominator: {
 	// DisplayName: Coffin Roominator
-	// Tooltip: ""
+	/* Tooltip:
+		'''
+		Spawns a Cursed Coffin room on your cursor
+		Overrides existing Cursed Coffin rooms
+		''' */
 }
 
 GildedSceptre: {
@@ -3657,4 +3638,64 @@ TheDestroyer: {
 FallenStarDayItem: {
 	// DisplayName: Fallen Star
 	// Tooltip: ""
+}
+
+DarkTome: {
+	// DisplayName: Dark Tome
+	/* Tooltip:
+		'''
+		Hold button to summon up to 3 spectral books that chase your cursor
+		Releasing button causes the books to release a volley of pages
+		'The arcane grimoire of a defeated foe...'
+		''' */
+}
+
+TouhouStaff: {
+	// DisplayName: Children of Nature's Eulogy
+	// Tooltip: Summons up to five yokais and fairies to fight for you
+}
+
+BaronP1MusicBox: {
+	// DisplayName: Music Box (Banished Baron - Phase 1)
+	// Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+BaronP2MusicBox: {
+	// DisplayName: Music Box (Banished Baron - Phase 2)
+	// Tooltip: zentaque & Azathoth 'Will of the Waves'
+}
+
+TrojanMusicBox: {
+	// DisplayName: Music Box (Trojan Squirrel)
+	// Tooltip: ProduceVGM 'Nuts And Bolts'
+}
+
+AbominationnP1MusicBox: {
+	// DisplayName: Music Box (Abominationn - Phase 1)
+	// Tooltip: Yuri O 'Laevateinn'
+}
+
+AbominationnP2MusicBox: {
+	// DisplayName: Music Box (Abominationn - Phase 2)
+	// Tooltip: Yuri O 'Laevateinn'
+}
+
+CoffinMusicBox: {
+	// DisplayName: Music Box (Cursed Coffin)
+	// Tooltip: zentaque & Azathoth 'Shifting Sands'
+}
+
+EridanusMusicBox: {
+	// DisplayName: Music Box (Eridanus)
+	// Tooltip: Yuri O 'Platinum Star'
+}
+
+LifelightMusicBox: {
+	// DisplayName: Music Box (Lifelight)
+	// Tooltip: ProduceVGM 'Illustrious Illuminescence'
+}
+
+MainMenuMusicBox: {
+	// DisplayName: Music Box (Main Menu)
+	// Tooltip: Sakuzyo 'Nein'
 }

@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Core.Systems
         internal static bool downedBetsy;
         internal static bool shouldBeEternityMode;
         internal static bool masochistModeReal;
-        internal static bool canPlayMaso;
+        internal static bool canPlayMaso = true;
         internal static bool downedFishronEX;
         internal static bool downedDevi;
         internal static bool downedAbom;
@@ -53,6 +53,7 @@ namespace FargowiltasSouls.Core.Systems
         internal static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
         internal static bool wOFDroppedDeviGift2;
         internal static bool shiftingSandEvent;
+        internal static bool haveForcedMutantFromKS;
 
         public static bool EternityMode { get; set; }
 
@@ -93,6 +94,8 @@ namespace FargowiltasSouls.Core.Systems
         public static bool DownedBetsy { get => downedBetsy; set => downedBetsy = value; }
 
         public static bool SwarmActive { get => swarmActive; set => swarmActive = value; }
+        
+        public static bool HaveForcedMutantFromKS { get => haveForcedMutantFromKS; set => haveForcedMutantFromKS = value;}
 
         public static bool PlacedMutantStatue;
 
@@ -110,7 +113,7 @@ namespace FargowiltasSouls.Core.Systems
             ShouldBeEternityMode = false;
             EternityMode = false;
             EternityVanillaBehaviour = true;
-            CanPlayMaso = false;
+            CanPlayMaso = true;
             MasochistModeReal = false;
             DownedFishronEX = false;
             DownedDevi = false;
@@ -119,6 +122,7 @@ namespace FargowiltasSouls.Core.Systems
             AngryMutant = false;
 
             HaveForcedAbomFromGoblins = false;
+            HaveForcedMutantFromKS = false;
             SkipMutantP1 = 0;
 
             ReceivedTerraStorage = false;
@@ -175,6 +179,9 @@ namespace FargowiltasSouls.Core.Systems
             if (HaveForcedAbomFromGoblins)
                 downed.Add("haveForcedAbomFromGoblins");
 
+            if (HaveForcedMutantFromKS)
+                downed.Add("haveForcedMutantFromKS");
+
             if (ReceivedTerraStorage)
                 downed.Add("ReceivedTerraStorage");
 
@@ -230,7 +237,7 @@ namespace FargowiltasSouls.Core.Systems
             ShouldBeEternityMode = downed.Contains("shouldBeEternityMode");
             EternityMode = downed.Contains("eternity") || downed.Contains("masochist");
             EternityVanillaBehaviour = true;
-            CanPlayMaso = downed.Contains("CanPlayMaso");
+            CanPlayMaso = true; // downed.Contains("CanPlayMaso");
             MasochistModeReal = downed.Contains("getReal");
             DownedFishronEX = downed.Contains("downedFishronEX");
             DownedDevi = downed.Contains("downedDevi");
@@ -238,6 +245,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = downed.Contains("downedMutant");
             AngryMutant = downed.Contains("AngryMutant");
             HaveForcedAbomFromGoblins = downed.Contains("haveForcedAbomFromGoblins");
+            HaveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
             ReceivedTerraStorage = downed.Contains("ReceivedTerraStorage");
             SpawnedDevi = downed.Contains("spawnedDevi");
             DownedAnyBoss = downed.Contains("downedAnyBoss");
@@ -294,6 +302,7 @@ namespace FargowiltasSouls.Core.Systems
             DownedMutant = flags[5];
             AngryMutant = flags[6];
             HaveForcedAbomFromGoblins = flags[7];
+            
 
             flags = reader.ReadByte();
             ReceivedTerraStorage = flags[0];
@@ -314,8 +323,17 @@ namespace FargowiltasSouls.Core.Systems
                 DownedBoss[i] = flags[bits];
             }
 
+            EternityVanillaBehaviour = reader.ReadBoolean();
+
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
+            HaveForcedMutantFromKS = reader.ReadBoolean();
+
+            int x = reader.ReadInt32();
+            int y = reader.ReadInt32();
+            int width = reader.ReadInt32();
+            int height = reader.ReadInt32();
+            CoffinArena.Rectangle = new(x, y, width, height);
         }
 
         public override void NetSend(BinaryWriter writer)
@@ -331,7 +349,7 @@ namespace FargowiltasSouls.Core.Systems
                 [4] = DownedAbom,
                 [5] = DownedMutant,
                 [6] = AngryMutant,
-                [7] = HaveForcedAbomFromGoblins
+                [7] = HaveForcedAbomFromGoblins,
             });
 
             writer.Write(new BitsByte
@@ -361,8 +379,15 @@ namespace FargowiltasSouls.Core.Systems
             }
             writer.Write(bitsByte);
 
+            writer.Write(EternityVanillaBehaviour);
+
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);
+            writer.Write(HaveForcedMutantFromKS);
+            writer.Write(CoffinArena.Rectangle.X);
+            writer.Write(CoffinArena.Rectangle.Y);
+            writer.Write(CoffinArena.Rectangle.Width);
+            writer.Write(CoffinArena.Rectangle.Height);
         }
     }
 }

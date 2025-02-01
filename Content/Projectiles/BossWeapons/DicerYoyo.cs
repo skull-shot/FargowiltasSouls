@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void SetDefaults()
         {
-            Projectile.CloneDefaults(ProjectileID.Kraken);
+            //Projectile.CloneDefaults(ProjectileID.Kraken);
             Projectile.extraUpdates = 0;
             Projectile.width = 30;
             Projectile.height = 30;

@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class PyramidGenSystem : ModSystem
     {
+        public static bool ShouldGenerateArena => !ModLoader.HasMod("Remnants");
         public override void Load()
         {
             On_WorldGen.Pyramid += OnPyramidGen;
@@ -36,7 +37,7 @@ namespace FargowiltasSouls.Core.Systems
         public static bool OnPyramidGen(On_WorldGen.orig_Pyramid orig, int i, int j)
         {
             bool ret = orig(i, j);
-            if (ret)
+            if (ret && ShouldGenerateArena)
             {
                 if (PyramidLocation == Point.Zero)
                 {
@@ -242,6 +243,8 @@ namespace FargowiltasSouls.Core.Systems
         public bool SaveDrunkWorldGen;
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
+            if (!ShouldGenerateArena)
+                return;
             // Find index of Dunes pass
             int dunesIndex = tasks.FindIndex(g => g.Name == "Dunes");
             // After Dunes pass, generate a Dunes biome and designate a Pyramid spot if no pyramid spot was designated
@@ -278,20 +281,17 @@ namespace FargowiltasSouls.Core.Systems
             // Generate Cursed Coffin arena right after Pyramid pass
             tasks.Insert(pyramidIndex + 1, new PassLegacy("CursedCoffinArena", (progress, config) =>
             {
-                if (!ModLoader.HasMod("Remnants")) // don't do this if remnants is enabled, because it's not compatible. instead use item that spawns the arena if you have remnants
+                progress.Message = "Burying a sarcophagus";
+                if (PyramidLocation == Point.Zero)
                 {
-                    progress.Message = "Burying a sarcophagus";
-                    if (PyramidLocation == Point.Zero)
-                    {
-                        Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
-                        int x = undergroundDesertLocation.Center.X;
-                        int y = undergroundDesertLocation.Top - 10;
-                        WorldGen.Pyramid(x, y);
-                    }
-                    if (PyramidLocation != Point.Zero)
-                    {
-                        CoffinArena.Generate(PyramidLocation);
-                    }
+                    Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
+                    int x = undergroundDesertLocation.Center.X;
+                    int y = undergroundDesertLocation.Top - 10;
+                    WorldGen.Pyramid(x, y);
+                }
+                if (PyramidLocation != Point.Zero)
+                {
+                    CoffinArena.Generate(PyramidLocation);
                 }
             }));
         }

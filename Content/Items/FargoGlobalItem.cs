@@ -231,7 +231,7 @@ namespace FargowiltasSouls.Content.Items
             }
             if (modPlayer.BoxofGizmos)
             {
-                if (item.DamageType == DamageClass.Default && item.damage <= 0)
+                if (item.DamageType == DamageClass.Default && item.damage <= 0 && item.fishingPole <= 0)
                 {
                     return true;
                 }
@@ -369,7 +369,7 @@ namespace FargowiltasSouls.Content.Items
                 return false;
             }
             */
-            if (item.IsWeaponWithDamageClass())
+            if (item.IsWeaponWithDamageClass() && item == player.HeldItem)
             {
                 player.FargoSouls().WeaponUseTimer = 2 + (int)Math.Round((Math.Max(item.useTime, item.useAnimation) + item.reuseDelay) / player.FargoSouls().AttackSpeed);
             }

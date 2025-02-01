@@ -776,7 +776,7 @@ WitheredWizardBuff: {
 
 MushroomPowerBuff: {
 	DisplayName: Сила грибов
-	Description: Увеличивает урон и шанс критической атаки
+	Description: Увеличивает урон и шанс критического удара
 }
 
 SolarBuff: {
@@ -786,7 +786,7 @@ SolarBuff: {
 
 VortexBuff: {
 	DisplayName: Усиление вихря
-	Description: Увеличивает шанс критической атаки
+	Description: Увеличивает шанс критического удара
 }
 
 NebulaBuff: {
@@ -801,10 +801,15 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +30% к урону, +30% к ближней скорости атаки, +20% к сопротивлению урона, +2.5 ед. здоровья в секунду
+	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2.5 ОЗ в секунду, миньоны могут наносить крит. урон
 }
 
 MutantDesperationBuff: {
 	DisplayName: Фантазматическая ярость
 	Description: Его последний рывок. Ты получаешь вдвое больше урона!
+}
+
+TouhouHoardBuff: {
+	DisplayName: Бафф Орда на восток
+	Description: Мифические существа сражаются с вами
 }

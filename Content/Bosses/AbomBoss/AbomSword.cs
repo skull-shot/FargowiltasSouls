@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             Vector2 vel = Projectile.velocity.RotatedBy(Math.PI / 2 * -Math.Sign(Projectile.ai[0]));
                             vel *= Main.rand.NextFloat(6, 12f);
                             vel = vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f);
-                            Particle p = new SparkParticle(spawnPos, vel, Color.OrangeRed, Main.rand.NextFloat(0.4f, 0.8f), Main.rand.Next(20, 40), true, Color.Yellow);
+                            Particle p = new RectangleParticle(spawnPos, vel, Color.OrangeRed, Main.rand.NextFloat(0.2f, 0.4f), Main.rand.Next(20, 40), true, true, Color.Yellow);
                             p.Spawn();
                         }
                     }

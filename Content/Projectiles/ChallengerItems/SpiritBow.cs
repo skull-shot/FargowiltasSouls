@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 {
                     Vector2 shootspeed = new(10f * charge, 0f);
                     SoundEngine.PlaySound(SpiritLongbow.ReleaseSound with { Pitch = -0.5f }, player.Center);
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, shootspeed.RotatedBy(rot), ModContent.ProjectileType<SpiritArrow>(), (int)(Projectile.originalDamage * charge), 3f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, shootspeed.RotatedBy(rot), ModContent.ProjectileType<SpiritArrow>(), (int)(Projectile.damage * charge), 3f, Projectile.owner);
                 }
                 Projectile.Kill();
             }

@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Assets.ExtraTextures;
-
-
+using FargowiltasSouls.Assets.Sounds;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,7 +38,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             if (Projectile.localAI[0] == 0f)
             {
                 Projectile.localAI[0] = 1f;
-                SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.DeviIceOrb, Projectile.Center);
             }
 
             //int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 135, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);

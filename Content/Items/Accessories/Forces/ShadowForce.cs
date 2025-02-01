@@ -102,8 +102,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 farg.IFrameDashTimer--;
             }
-            CooldownBarManager.Activate("DeathForceIframeCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24),
-                () => 1 - farg.IFrameDashTimer / 250f, activeFunction: () => player.HasEffect<ShadowForceDashEffect>());
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("DeathForceIframeCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24),
+                    () => 1 - farg.IFrameDashTimer / 250f, activeFunction: () => player.HasEffect<ShadowForceDashEffect>());
             if (farg.IFrameDashTimer == 1)
             {
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f });
@@ -179,6 +180,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     player.velocity.Y = dashSpeed * -0.5f;
                 else if (player.controlDown)
                     player.velocity.Y = dashSpeed * 0.7f;
+                else
+                    player.velocity.Y = float.Epsilon;
             }
             player.velocity.X = dashSpeed * dir;
             if (modPlayer.IsDashingTimer < 30)
@@ -201,7 +204,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     boom2.Spawn();
                 }
 
-                int proj = Projectile.NewProjectile(player.GetSource_EffectItem<ShadowForceDashEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<ShadowDash>(), 5000, 3, player.whoAmI);
+                int proj = Projectile.NewProjectile(player.GetSource_EffectItem<ShadowForceDashEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<ShadowDash>(), (int)(3600 * player.ActualClassDamage(DamageClass.Melee)), 3, player.whoAmI);
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                     NetMessage.SendData(MessageID.SyncProjectile, number: proj);
 

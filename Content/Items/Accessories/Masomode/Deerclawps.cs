@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,9 +10,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
     public class Deerclawps : SoulsItem
     {
-
         public override bool Eternity => true;
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DiveEffect>()];
         public override void SetStaticDefaults()
         {
 
@@ -32,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.Slow] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<DeerclawpsDive>(Item);
+            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
         }
     }
@@ -65,6 +67,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 }
             }
         }
+    }
+    public class DiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
+        public override bool ActiveSkill => true;
     }
     public class DeerclawpsEffect : AccessoryEffect
     {

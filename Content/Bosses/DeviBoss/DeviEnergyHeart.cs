@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             if (Projectile.localAI[0] == 0)
             {
                 Projectile.localAI[0] = 1;
-                SoundEngine.PlaySound(SoundID.Item44, Projectile.Center);
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1,3)), Projectile.Center);
             }
 
             // Fade into 50 alpha from 150

@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void CopperProc(Player player, NPC target)
         {
-            if (player.HasEffect<TerraLightningEffect>())
+            if (!player.HasEffectEnchant<CopperEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.CopperProcCD == 0)
@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (forceEffect)
                 {
-                    dmg = 200;
+                    dmg = 160;
                     maxTargets = 5;
                     cdLength = 150;
                 }
@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         Vector2 velocity = Vector2.Normalize(ai) * 20;
 
                         int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                        FargoSoulsUtil.NewProjectileDirectSafe(modPlayer.Player.GetSource_ItemUse(modPlayer.Player.HeldItem), target.Center, velocity, ModContent.ProjectileType<CopperLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation(), damage);
+                        FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<CopperEffect>(), target.Center, velocity, ModContent.ProjectileType<CopperLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation(), damage);
                     }
                     else
                     {

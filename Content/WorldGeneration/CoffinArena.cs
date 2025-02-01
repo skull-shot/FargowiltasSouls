@@ -151,6 +151,42 @@ namespace FargowiltasSouls.Content.WorldGeneration
                 }
             }
         }
+        public static void PlaceOpening(Point arenaTopCenter) // Manual item only
+        {
+            int arenaLeft = arenaTopCenter.X - (Width / 2);
+            int arenaRight = arenaTopCenter.X + (Width / 2);
+            int arenaBottom = arenaTopCenter.Y + Height - 2;
+            int dir = 0;
+            // Search for passage, horizontally
+            for (int xOff = 1; xOff < 150; xOff++) // Start at 2 because otherwise it detects the wall inside the arena and breaks
+            {
+                Tile left = Main.tile[arenaLeft - xOff, arenaBottom];
+                Tile right = Main.tile[arenaRight + xOff, arenaBottom];
+
+                if (!left.HasTile && left.WallType == WallID.SandstoneBrick) // Search left for passage
+                    dir = -1;
+                if (!right.HasTile && right.WallType == WallID.SandstoneBrick) // Search right for passage
+                    dir = 1;
+                if (dir != 0)
+                    break;
+            }
+            if (dir == 0)
+                dir = Math.Sign(PyramidGenSystem.PyramidLocation.X - arenaTopCenter.X);
+            for (int pY = -1; pY < 5; pY++)
+            {
+                for (int pX = -1; pX < 150; pX++) // Start at 1 to drill the wall and not stop inside the arena
+                {
+                    int extraX = dir == 1 ? 1 : 0; // Needed because it's uncentered! Width is even.
+
+                    Point point = new(arenaTopCenter.X + dir * ((Width / 2) + pX + extraX), arenaBottom - pY);
+                    Tile tile = Main.tile[point.X, point.Y];
+                    if (!tile.HasTile || tile.TileType != TileID.SandstoneBrick)
+                        break;
+                    WorldGen.KillTile(point.X, point.Y);
+                    //WorldGen.KillWall(point.X, point.Y);
+                }
+            }
+        }
 
         public static Vector2 ClampWithinArena(Vector2 vector, Entity entityToPadBasedOn)
         {

@@ -1239,21 +1239,30 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     Vector2 offset = Vector2.Zero;
                     if (i == CustomRunePositions.Length - 1 && !CustomRunePositions.Any(p => p.Distance(Player.Center) < 100))
                     {
-                        CustomRunePositions[i] = Player.Center + Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * 70f;
+                        CustomRunePositions[i] = Player.Center + Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * 200f;
                         break;
                     }
-                    for (int attempts = 0; attempts < 20; attempts++)
+                    for (int attempts = 0; attempts < 100; attempts++)
                     {
                         bool valid = true;
-                        offset = Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * Main.rand.NextFloat(60f, 450f);
-                        for (int j = 0; j < CustomRunePositions.Length; j++)
+                        offset = Vector2.UnitX.RotatedBy(MathF.Tau * i / RuneCount).RotatedByRandom(MathF.PI * 0.1f) * Main.rand.NextFloat(100f, 450f);
+
+                        if ((Player.Center + offset).Distance(Player.Center) < Player.height * 0.7f) // NEVER place on top of player
                         {
-                            if (i != j && offset.Distance(CustomRunePositions[j] - Player.Center) < 100)
+                            valid = false;
+                            attempts--;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < CustomRunePositions.Length; j++)
                             {
-                                valid = false;
-                                break;
+                                if (i != j && offset.Distance(CustomRunePositions[j] - Player.Center) < 100)
+                                {
+                                    valid = false;
+                                    break;
+                                }
+
                             }
-                            
                         }
                         if (valid)
                         {
@@ -1262,6 +1271,8 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                         }
                             
                     }
+                    if (offset.Length() < 120f)
+                        offset += offset.SafeNormalize(Vector2.Zero) * 100;
                     CustomRunePositions[i] = Player.Center + offset;
                 }
 
@@ -1287,6 +1298,17 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 RuneBlinkTimer = 40;
                 SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
             }
+            if (AI_Timer > FormationTime)
+            {
+                for (int i = 0; i < CustomRunePositions.Length; i++)
+                {
+                    Vector2 dif = CustomRunePositions[i] - Player.Center;
+                    if (dif.LengthSquared() < Math.Pow(Player.height * 0.8f, 2))
+                    {
+                        CustomRunePositions[i] += dif.SafeNormalize(Vector2.UnitX) * 6;
+                    }
+                }
+            }
                 
             if (AI_Timer == startup) // put hitboxes and eventual explosion
             {
@@ -1295,7 +1317,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 NPC.netUpdate = true;
                 for (int i = 0; i < RuneCount; i++)
                 {
-                    float runeRot = 0;
                     Vector2 runePos = CustomRunePositions[i];
 
                     if (FargoSoulsUtil.HostCheck)
@@ -2226,7 +2247,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             if (AI_Timer >= StartTime && AI_Timer <= StartTime + lerpTime)
             {
                 float progress = (float)(AI_Timer - StartTime) / lerpTime;
-                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(player.Center) * 22, progress);
+                NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.Lerp(LockVector2, NPC.DirectionTo(player.Center), 0.5f) * 22, progress);
             }
 
             // reset

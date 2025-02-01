@@ -60,6 +60,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //force of timber
         public bool MahoganyCanUseDR;
+        public float EbonwoodCharge;
         public int ShadewoodCD;
         public bool WoodEnchantDiscount;
         public int PearlwoodCritDuration;
@@ -82,7 +83,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float SolarEnchCharge = 0;
         public float MeteorCD = 60;
 
-        public int ApprenticeCD;
+        public int ApprenticeItemCD;
         public bool IronRecipes = false;
         public bool CactusImmune = false;
         public int CactusProcCD;
@@ -106,6 +107,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Item PlatinumEffect;
         public int PalladCounter;
         public int MythrilTimer;
+        public int MythrilDelay;
         public int MythrilSoundCooldown;
         public int MythrilMaxTime => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 300 : 180 : 180;
         public float MythrilMaxSpeedBonus => Player.HasEffect<MythrilEffect>() ? Player.ForceEffect<MythrilEffect>() ? 1.75f : 1.5f : 1.5f;
@@ -134,6 +136,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HuntressStage;
         public int HuntressCD;
         public double AdamantiteSpread;
+        public bool HeldItemAdamantiteValid;
+        public Item AdamantiteItem;
 
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
@@ -161,7 +165,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int IFrameDashTimer;
         public bool IFrameDash;
         public int EarthTimer;
-        public int EarthSplitTimer;
+        public int EarthAdamantiteCharge;
 
         //public int RainCD;
 
@@ -267,7 +271,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
-        public Item FrigidGemstoneItem;
         public int FrigidGemstoneCD;
         public int WretchedPouchCD;
         public bool NymphsPerfume;
@@ -279,7 +282,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
-        public bool CanAmmoCycle;
         public bool TribalCharm;
         public bool TribalCharmEquipped;
         public bool TribalCharmClickBonus;

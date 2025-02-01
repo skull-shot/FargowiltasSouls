@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             FargoSoulsPlayer localModPlayer = Main.LocalPlayer.FargoSouls();
 
-            if (player.whoAmI == Main.myPlayer && (player.dead || !player.HasEffect<WillEffect>() || !player.HasEffect<GladiatorBanner>()))
+            if (player.whoAmI == Main.myPlayer && (player.dead || !player.HasEffect<WillEffect>() || !player.HasEffect<GladiatorBanner>() || player.FargoSouls().MutantPresence))
             {
                 Projectile.Kill();
                 return;
@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             // movement
             int deadzone = 500;
             float distance = Projectile.Distance(player.Center);
-            if (distance > deadzone)
+            if (distance > deadzone-100)
             {
                 float distanceFactor = (distance - deadzone);
                 distanceFactor /= 6000;
@@ -87,6 +87,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 if (++Projectile.frame >= Main.projFrames[Projectile.type])
                     Projectile.frame = 0;
             }
+            Projectile.direction = Projectile.spriteDirection = Projectile.velocity.X.NonZeroSign();
         }
 
         public override bool PreDraw(ref Color lightColor)

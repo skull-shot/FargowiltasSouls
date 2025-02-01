@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Core.Systems
         {
             FargoUIManager.UpdateUI(gameTime);
         }
-
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             FargoUIManager.ModifyInterfaceLayers(layers);

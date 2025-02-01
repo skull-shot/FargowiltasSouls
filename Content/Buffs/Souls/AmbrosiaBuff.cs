@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             player.GetDamage(DamageClass.Generic) += 0.3f;
             player.GetAttackSpeed(DamageClass.Melee) += 0.3f;
             player.FargoSouls().Ambrosia = true;
+            player.FargoSouls().MinionCrits = true;
         }
         
     }

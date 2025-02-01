@@ -92,13 +92,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                     modPlayer.HuntressCD = 30;
 
-                    CooldownBarManager.Activate("HuntressBuildup", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/HuntressEnchant").Value, new(122, 192, 76),
-                        () => modPlayer.HuntressStage / 10f, true, activeFunction: () => player.HasEffect<HuntressEffect>());
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("HuntressBuildup", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/HuntressEnchant").Value, new(122, 192, 76),
+                            () => modPlayer.HuntressStage / 10f, true, activeFunction: () => player.HasEffect<HuntressEffect>());
                 }
                 int bonus = modPlayer.ForceEffect<HuntressEnchant>() || redRiding ? 5 : 3;
                 if (player.HasBuff<GladiatorSpiritBuff>())
                     bonus = 15;
-                proj.ArmorPenetration = bonus * 2 * modPlayer.HuntressStage;
+                proj.ArmorPenetration += bonus * 2 * modPlayer.HuntressStage;
                 modifiers.SourceDamage.Flat += bonus * modPlayer.HuntressStage;
             }
         }

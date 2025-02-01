@@ -1,6 +1,7 @@
 ﻿using Fargowiltas.NPCs;
 using Fargowiltas.Projectiles;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -34,13 +35,16 @@ namespace FargowiltasSouls.Content.UI.Elements
         public string TextExpandedEternity;
         public string TextExpandedMaso;
         public string TextExpandedFeatures;
+        public string TextMasoMultiplayer;
 
         public int ToggleCooldown;
 
         public bool Hovering = false;
 
+        public string mode;
+
         public UIOncomingMutant(Texture2D tex, Texture2D auraTex, Texture2D emptyTex, string textEMode, string textMaso, string textDisabled, string textRightClick, 
-            string textHoldShift, string textExpandedEternity, string textExpandedMaso, string textExpandedFeatures)
+            string textHoldShift, string textExpandedEternity, string textExpandedMaso, string textExpandedFeatures, string textMasoMultiplayer)
         {
             Texture = tex;
             AuraTexture = auraTex;
@@ -53,6 +57,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             TextExpandedEternity = textExpandedEternity;
             TextExpandedMaso = textExpandedMaso;
             TextExpandedFeatures = textExpandedFeatures;
+            TextMasoMultiplayer = textMasoMultiplayer;
 
             Width.Set(24, 0);
             Height.Set(26, 0);
@@ -108,47 +113,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             if (Main.LocalPlayer.FargoSouls().EmodeToggleCooldown <= 0 && !dragging && conditions && ContainsPoint(Main.MouseScreen) && Main.mouseRight && PlayerInput.MouseInfoOld.RightButton == ButtonState.Released)
             {
                 Main.LocalPlayer.FargoSouls().EmodeToggleCooldown = 15;
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                {
-                    if (FargoSoulsUtil.WorldIsExpertOrHarder())
-                    {
-                        if (Masochist.CanToggleEternity())
-                        {
-                            WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
-
-                            int deviType = ModContent.NPCType<Deviantt>();
-                            if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
-                            {
-                                WorldSavingSystem.SpawnedDevi = true;
-
-                                Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? Main.LocalPlayer.Center : Main.LocalPlayer.Center - 1000 * Vector2.UnitY;
-                                Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                                FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
-                            }
-
-                            SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
-
-                            if (Main.netMode == NetmodeID.Server)
-                                NetMessage.SendData(MessageID.WorldData); //sync world
-                        }
-                    }
-                    else
-                    {
-                        if (FargoSoulsUtil.WorldIsExpertOrHarder())
-                            if (!LumUtils.AnyBosses())
-                                SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
-                        FargoSoulsUtil.PrintLocalization($"Mods.FargowiltasSouls.Items.Masochist.WrongDifficulty", new Color(175, 75, 255));
-                    }
-                }
-                else
-                {
-                    var netMessage = FargowiltasSouls.Instance.GetPacket();
-                    netMessage.Write((byte)FargowiltasSouls.PacketID.ToggleEternityMode);
-                    netMessage.Write((byte)Main.LocalPlayer.whoAmI);
-                    netMessage.Send();
-                }
-                
+                if (Masochist.CanToggleEternity())
+                    FargoUIManager.Toggle<DifficultySelectionMenu>();
             }
 
             if (dragging)
@@ -207,6 +173,8 @@ namespace FargowiltasSouls.Content.UI.Elements
                     string difText = WorldSavingSystem.MasochistModeReal ? TextExpandedMaso : TextExpandedEternity;
                     text += $"\n{difText}";
                     text += $"\n{TextExpandedFeatures}";
+                    if (WorldSavingSystem.MasochistModeReal && Main.netMode != NetmodeID.SinglePlayer)
+                        text += $"\n{TextMasoMultiplayer}";
                 }
                 else
                     text += $"\n[c/787878:{TextHoldShift}]";

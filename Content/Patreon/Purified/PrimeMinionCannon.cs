@@ -129,7 +129,8 @@ namespace FargowiltasSouls.Content.Patreon.Purified
                             {
                                 Main.projectile[p].DamageType = DamageClass.Summon;
                                 Main.projectile[p].usesIDStaticNPCImmunity = false;
-                                Main.projectile[p].usesLocalNPCImmunity = false;
+                                Main.projectile[p].usesLocalNPCImmunity = true;
+                                Main.projectile[p].localNPCHitCooldown = 10;
                             }
                         }
                     }

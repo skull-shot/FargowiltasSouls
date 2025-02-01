@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -22,39 +23,43 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 50;
+            Item.damage = 39;
             Item.DamageType = DamageClass.Melee;
             Item.width = 30;
             Item.height = 30;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 35;
+            Item.useAnimation = 35;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = 100000;
             Item.rare = ItemRarityID.Pink;
-            Item.shootSpeed = 20;
+            Item.shootSpeed = 10;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
         }
 
         public override bool AltFunctionUse(Player player)
-        {
+        {   
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<Retirang>()] >= 3)
+            {
+                return false;
+            }
             return true;
         }
 
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2)
-            {
+            if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Retirang>()] < 3)
+            {   
                 Item.shoot = ModContent.ProjectileType<Retirang>();
-                Item.shootSpeed = 20f;
+                Item.shootSpeed = 10;
             }
             else
             {
                 Item.shoot = ModContent.ProjectileType<Spazmarang>();
-                Item.shootSpeed = 30f;
+                Item.shootSpeed = 15;
             }
             return true;
         }
@@ -62,7 +67,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
+            {
                 damage = (int)(damage * 0.75);
+            }
+
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }

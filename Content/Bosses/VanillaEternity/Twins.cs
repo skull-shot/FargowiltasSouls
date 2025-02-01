@@ -14,6 +14,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Terraria;
@@ -376,7 +377,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = WorldSavingSystem.MasochistModeReal ? 70 : 90;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -408,11 +409,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForSpaz))
                                 ai_StateTimer--;
-
-                            if (ai_StateTimer < prepTime - 30 && spazmatism.ai[2] < npc.ai[2])
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+                            if (ai_StateTimer < prepTime - flashDelay && spazmatism.ai[2] < npc.ai[2])
                                 npc.ai[2] = spazmatism.ai[2];
 
-                            if (ai_StateTimer == prepTime - (WorldSavingSystem.MasochistModeReal ? 25 : 35))
+                            if (ai_StateTimer == prepTime - flashDelay)
                             {
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -746,6 +747,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return true;
         }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            return Spazmatism.CircularHitbox(npc, target.position, target.Size);
+        }
+
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (Resist)
@@ -783,6 +789,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return base.CheckDead(npc);
         }
+
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 AuraPosition = npc.Center;
@@ -1045,7 +1052,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
 
                             // movement
-                            float accel = 0.18f;
+                            float accel = 0.10f;
                             int side = 1;
                             if (npc.position.X + (float)(npc.width / 2) < player.position.X + (float)player.width)
                             {
@@ -1056,12 +1063,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float desiredX = player.Center.X + side * 400 - npc.Center.X;
                             float desiredY = player.Center.Y - npc.Center.Y;
 
-                            Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
+                            //Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 2);
 
                             // reworked p1 fireballs
                             float delay = 58f;
                             if (WorldSavingSystem.MasochistModeReal)
                                 ai_ShotTimer += 0.25f;
+                            if (ai_ShotTimer < delay - 10)
+                            {
+                                float slowdownMod = 1f;
+                                float distance = npc.Distance(player.Center);
+                                if (distance > 600)
+                                    slowdownMod *= MathHelper.Lerp(1, 0, (distance - 500) / 500);
+                                slowdownMod = MathHelper.Clamp(slowdownMod, 0, 1);
+                                npc.velocity *= 1f - 0.08f * slowdownMod;
+                            }
                             if (ai_ShotTimer >= delay)
                             {
                                 ai_ShotTimer = 0f;
@@ -1100,7 +1116,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = 70;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
 
                             if (ai_StateTimer == 0)
                             {
@@ -1131,14 +1147,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (retinazer.Distance(spazDesiredPos) <= 300)
                                 waitForReti = false;
 
-                            if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForReti))
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+
+                            if (ai_StateTimer < prepTime - flashDelay && (npc.Distance(desiredPos) > 300 || waitForReti))
                             {
                                 ai_StateTimer--;
                                 npc.netUpdate = true;
                             }
                                 
 
-                            if (ai_StateTimer < prepTime - 30 && retinazer.ai[2] < npc.ai[2])
+                            if (ai_StateTimer < prepTime - flashDelay && retinazer.ai[2] < npc.ai[2])
                             {
                                 npc.ai[2] = retinazer.ai[2];
                                 npc.netUpdate = true;
@@ -1473,7 +1491,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
         {
-            return !(npc.ai[1] == 0f && FlameWheelSpreadTimer < 30);
+            return !(npc.ai[1] == 0f && FlameWheelSpreadTimer < 30) && CircularHitbox(npc, target.position, target.Size);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
@@ -1524,6 +1542,36 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadGoreRange(recolor, 143, 146);
 
             LoadSpecial(recolor, ref TextureAssets.Chain12, ref FargowiltasSouls.TextureBuffer.Chain12, "Chain12");
+        }
+
+        public static bool CircularHitbox(NPC npc, Vector2 boxPos, Vector2 boxDim)
+        {
+            //circular hitbox-inator
+            Vector2 ellipseDim = npc.Size;
+            Vector2 ellipseCenter = npc.position + 0.5f * new Vector2(npc.width, npc.height);
+
+            float x = 0f; //ellipse center
+            float y = 0f; //ellipse center
+            if (boxPos.X > ellipseCenter.X)
+            {
+                x = boxPos.X - ellipseCenter.X; //left corner
+            }
+            else if (boxPos.X + boxDim.X < ellipseCenter.X)
+            {
+                x = boxPos.X + boxDim.X - ellipseCenter.X; //right corner
+            }
+            if (boxPos.Y > ellipseCenter.Y)
+            {
+                y = boxPos.Y - ellipseCenter.Y; //top corner
+            }
+            else if (boxPos.Y + boxDim.Y < ellipseCenter.Y)
+            {
+                y = boxPos.Y + boxDim.Y - ellipseCenter.Y; //bottom corner
+            }
+            float a = ellipseDim.X / 2f;
+            float b = ellipseDim.Y / 2f;
+
+            return x * x / (a * a) + y * y / (b * b) < 1; //point collision detection
         }
     }
 }

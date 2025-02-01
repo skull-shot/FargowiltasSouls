@@ -45,12 +45,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override bool? CanDamage() => Projectile.timeLeft < 5;
 
-        public override bool PreAI()
-        {
-            Projectile.FargoSouls().NinjaSpeedup = 0;
-            return base.PreAI();
-        }
-
         public override void AI()
         {
             //the important part

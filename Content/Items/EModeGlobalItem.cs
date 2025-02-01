@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Items
 {
     public class EModeGlobalItem : GlobalItem
     {
+        public override bool InstancePerEntity => true;
         public override void Load()
         {
             On_Player.GrantPrefixBenefits += EModePrefixChanges;
@@ -145,7 +146,6 @@ namespace FargowiltasSouls.Content.Items
                 return base.CanUseItem(item, player);
             }
 
-
             EModePlayer ePlayer = player.Eternity();
 
             if (item.damage <= 0 && (item.type == ItemID.RodofDiscord || item.type == ItemID.ActuationRod || item.type == ItemID.WireKite || item.type == ItemID.WireCutter || item.type == ItemID.Wrench || item.type == ItemID.BlueWrench || item.type == ItemID.GreenWrench || item.type == ItemID.MulticolorWrench || item.type == ItemID.YellowWrench || item.type == ItemID.Actuator))
@@ -197,6 +197,13 @@ namespace FargowiltasSouls.Content.Items
             base.GetHealMana(item, player, quickHeal, ref healValue);
         }
         */
+        public override void ModifyItemScale(Item item, Player player, ref float scale)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+            if (item.type == ItemID.PalladiumSword)
+                scale += 0.4f;
+        }
         public override bool? UseItem(Item item, Player player)
         {
             if (!WorldSavingSystem.EternityMode)
@@ -207,14 +214,16 @@ namespace FargowiltasSouls.Content.Items
             {
                 Main.time = 18000;
             }
-
             return base.UseItem(item, player);
         }
         public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
         {
             if (player.Eternity().MythrilHalberdTimer >= 120 && (item.type == ItemID.MythrilSword))
             {
-                damage *= 8 * player.FargoSouls().AttackSpeed;
+                float attackSpeedContrib = player.FargoSouls().AttackSpeed - 1;
+                attackSpeedContrib /= 3;
+                attackSpeedContrib += 1;
+                damage *= 8 * attackSpeedContrib;
             }
         }
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -260,7 +269,14 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.PalladiumSword:
                     {
                         if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
+                        {
                             player.AddBuff(BuffID.RapidHealing, 60 * 5);
+                            if (player.Eternity().PalladiumHealTimer <= 0)
+                            {
+                                player.FargoSouls().HealPlayer(1);
+                                player.Eternity().PalladiumHealTimer = 30;
+                            }
+                        }
                         break;
                     }
             }
@@ -282,6 +298,10 @@ namespace FargowiltasSouls.Content.Items
             if (item.type == ItemID.ChlorophyteSaber)
             {
                 velocity *= 2f;
+            }
+            if (item.type == ItemID.JackOLanternLauncher)
+            {
+                velocity *= 1.5f;
             }
         }
     }

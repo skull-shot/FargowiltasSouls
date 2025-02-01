@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Armor;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -62,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (Projectile.rotation > PI)
                 Projectile.rotation -= 2f * PI;
 
-            Projectile.frame = (Main.player[Projectile.owner].FargoSouls().EridanusTimer / (60 * 10)) switch
+            Projectile.frame = (Main.player[Projectile.owner].FargoSouls().EridanusTimer / EridanusHat.ClassDuration) switch
             {
                 0 => 1,
                 1 => 2,
@@ -71,7 +72,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             };
 
             //handle countdown between phase changes
-            Projectile.localAI[0] = Main.player[Projectile.owner].FargoSouls().EridanusTimer % (float)(60 * 10) / (60 * 10) * 12f - 1f;
+            Projectile.localAI[0] = Main.player[Projectile.owner].FargoSouls().EridanusTimer % (float)EridanusHat.ClassDuration / EridanusHat.ClassDuration * 12f - 1f;
         }
 
         public override bool? CanDamage()

@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.UI.Elements
         private Vector2 offset;
         public bool dragging;
         public UIElement[] ExtraChildren;
+        public bool PanelsDraggable = true;
 
         public FargoUIDragablePanel() { }
         public FargoUIDragablePanel(params UIElement[] countMeAsChildren)
@@ -59,7 +60,7 @@ namespace FargowiltasSouls.Content.UI.Elements
 
                     foreach (UIElement element in children)
                     {
-                        if (element.ContainsPoint(Main.MouseScreen) && element as UIPanel == null)
+                        if (element.ContainsPoint(Main.MouseScreen) && (!PanelsDraggable || element as UIPanel == null))
                         {
                             upperMost = false;
                             break;

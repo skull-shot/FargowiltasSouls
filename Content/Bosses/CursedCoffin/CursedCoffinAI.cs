@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.defense = NPC.defDefense;
             if (Main.npc.Any(p => p.TypeAlive<CursedSpirit>()))
                 NPC.defense += 15;
-            if (StateMachine.CurrentState.Identifier != BehaviorStates.RandomStuff)
+            if (StateMachine != null && StateMachine.CurrentState != null && StateMachine.CurrentState.Identifier != BehaviorStates.RandomStuff)
                 NPC.rotation = 0;
 
             // Pushaway collision (solid object)
@@ -134,14 +134,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
 
             // Anti-hook technology
-            IEnumerable<Player> hookedPlayers = Main.player.Where(p => p.Alive() && p.FargoSouls().Grappled);
-            if (hookedPlayers.Any() && Main.GameUpdateCount % 20 == 0)
+            IEnumerable<Player> hookedPlayers = Main.player.Where(p => p.Alive() && (p.FargoSouls().Grappled || (Main.getGoodWorld && Main.GameUpdateCount % 30 == 0)));
+            if ((hookedPlayers.Any() && Main.GameUpdateCount % 20 == 0))
             {
                 foreach (Player p in hookedPlayers)
                 {
                     for (int x = -3; x < 3; x += 2)
                     {
-                        for (int y = 0; y < 10; y++)
+                        for (int y = 0; y < 50; y++)
                         {
                             Vector2 projPos = p.Center + Vector2.UnitX * x * 16 + Vector2.UnitY * -y * 16;
                             Point tile = projPos.ToTileCoordinates();
@@ -241,7 +241,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 							for (int i = -1; i <= 1; i += 2)
 							{
 								Vector2 vel = Vector2.UnitX * i * 3;
-								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
 							}
 						}
 
@@ -451,7 +451,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						for (int i = -1; i <= 1; i += 2)
 						{
 							Vector2 vel = Vector2.UnitX * i * 3;
-							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
 						}
 					}
 					if (WorldSavingSystem.EternityMode && (Counter < 2 || Enraged))
@@ -601,7 +601,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                         for (int i = -1; i <= 1; i += 2)
                         {
                             Vector2 vel = Vector2.UnitX * i * 3;
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 50, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
                         }
                     }
 
@@ -759,8 +759,11 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
                 NPC.velocity.X *= 0.7f; // moves slower horizontally 
 				int shotTime = WorldSavingSystem.MasochistModeReal ? 20 : 24;
+                
                 if (Phase < 2) // shoot more in phase 1
                     shotTime -= 10;
+                else
+                    shotTime += 3;
 				if (Timer % shotTime == 0)
 				{
 					RandomProj = Main.rand.Next(3) switch

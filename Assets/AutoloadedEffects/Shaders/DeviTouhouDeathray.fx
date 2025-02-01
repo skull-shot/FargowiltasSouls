@@ -51,12 +51,12 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     // The clamping basically stops it before it shrinks below the point where it wraps around. Change the max
     // clamp value if you copy this and it does weird artifacts at the top and bottom of the trail.
     // ->
-	float y = sin(15 * globalTime - 5.2 * coords.x) * 0.2;
+	float y = sin(19.95 * globalTime - 5.2 * coords.x) * 0.2;
 
     float widthScale = float((y + (1 - coords.x * 0.25)) / 2);
     
-    if (coords.x < 0.13)
-        widthScale /= pow(coords.x / 0.13, 0.61);
+    if (coords.x < 0.15)
+        widthScale /= pow(coords.x / 0.15, 0.61);
     
     coords.y = ((coords.y - 0.5) * clamp(widthScale, 0, 2)) + 0.5;
     // <-
@@ -75,12 +75,12 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     // If the inner color is sufficiently faded in, lerp between the inner and outer to make them connect.
     if (innerColorFinal.a < 0.1)
     {
-        float interpolant = innerColorFinal.a * 10;
+        float interpolant = innerColorFinal.a * 5;
         finalColor = lerp(color, innerColorFinal, interpolant);
     }
     // Else, just lerp between the two colors but make it brighter.
     else
-        finalColor = lerp(color, innerColorFinal, innerColor.r) * 1.2;  
+        finalColor = lerp(color, innerColorFinal, innerColor.r) * 1.3;  
     
     //// Fade out at the top and bottom of the streak.
     if (coords.x < 0.05)

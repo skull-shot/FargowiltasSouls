@@ -12,7 +12,7 @@ PearlwoodManaEffect: 珍珠木 魔力星掉落
 PearlwoodRainbowEffect: 珍珠木 彩虹轨迹
 TimberEffect: 简化森林之力
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
-AdamantiteEffect: 精金 弹幕分裂
+AdamantiteEffect: 精金 攻击速度和散射
 CobaltEffect: 钴蓝 受击爆炸
 AncientCobaltEffect: 远古钴蓝 爆炸跳跃
 MythrilEffect: 秘银 速度加成
@@ -27,7 +27,8 @@ IronEffect: 铁 吸引掉落物
 LeadPoisonEffect: 铅 中毒
 SilverEffect: 银 护盾
 TinEffect: 锡 暴击
-TungstenEffect: 钨 变大
+TungstenEffect: 钨 大小
+TungstenShockwaveEffect: 钨冲击波
 ObsidianProcEffect: 黑曜石 爆炸
 AshWoodFireballs: 灰烬木 火球
 TerraLightningEffect: 简化泰拉之力
@@ -123,7 +124,7 @@ RainbowSlimeMinion: 彩虹史莱姆召唤物
 RainbowHealEffect: 自动使用治疗药水
 NymphPerfumeEffect: 攻击生成心
 SqueakEffect: 击中发出吱吱声
-WretchedPouchEffect: 获得诅咒之魔
+WretchedPouchEffect: 诅咒暗影焰
 ClippedEffect: 造成折翼减益
 WyvernBalls: 飞行光球
 TribalCharmClickBonus: 部落挂坠点击加成

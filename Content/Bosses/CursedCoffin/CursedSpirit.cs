@@ -489,12 +489,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 else // Slow crawling
                 {
                     Vector2 vectorToIdlePosition = player.Center - NPC.Center;
-                    float speed = 6.5f;
-                    if (!WorldSavingSystem.EternityMode)
-                        speed /= 2;
-                    else if (!WorldSavingSystem.MasochistModeReal)
-                        speed /= 1.1f;
+                    float speed = WorldSavingSystem.MasochistModeReal ? 6.5f : WorldSavingSystem.EternityMode ? 5.5f : 3f;
                     float inertia = 20f;
+                    if (!WorldSavingSystem.MasochistModeReal)
+                        inertia *= 1.5f;
                     vectorToIdlePosition.Normalize();
                     vectorToIdlePosition *= speed;
                     NPC.velocity = (NPC.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;

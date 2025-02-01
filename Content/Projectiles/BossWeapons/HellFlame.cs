@@ -44,6 +44,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.extraUpdates = 1;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.aiStyle = -1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 5;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
 
@@ -155,7 +157,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 5;
             target.AddBuff(BuffID.OnFire, 180, false);
             target.AddBuff(BuffID.Oiled, 180, false);
             target.AddBuff(BuffID.BetsysCurse, 180, false);

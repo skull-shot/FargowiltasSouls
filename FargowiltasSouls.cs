@@ -15,6 +15,7 @@ using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
@@ -39,12 +40,14 @@ using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Creative;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using static Terraria.GameContent.Creative.CreativePowers;
 
 
 namespace FargowiltasSouls
@@ -53,19 +56,27 @@ namespace FargowiltasSouls
     {
         public static Mod MutantMod;
 
-        internal static ModKeybind FreezeKey;
-        internal static ModKeybind GoldKey;
+        //internal static ModKeybind FreezeKey;
+        //internal static ModKeybind GoldKey;
         //internal static ModKeybind SmokeBombKey;
-        internal static ModKeybind SpecialDashKey;
-        internal static ModKeybind BombKey;
+        //internal static ModKeybind SpecialDashKey;
+        //internal static ModKeybind BombKey;
         internal static ModKeybind SoulToggleKey;
         internal static ModKeybind PrecisionSealKey;
-        internal static ModKeybind MagicalBulbKey;
-        internal static ModKeybind FrigidSpellKey;
-        internal static ModKeybind DebuffInstallKey;
-        internal static ModKeybind AmmoCycleKey;
+        //internal static ModKeybind MagicalBulbKey;
+        //internal static ModKeybind FrigidSpellKey;
+        //internal static ModKeybind DebuffInstallKey;
+        //internal static ModKeybind AmmoCycleKey;
 
-        internal static List<int> DebuffIDs;
+        internal static ModKeybind ActiveSkill1Key;
+        internal static ModKeybind ActiveSkill2Key;
+        internal static ModKeybind ActiveSkill3Key;
+        internal static ModKeybind ActiveSkill4Key; // Unused
+        internal static ModKeybind ActiveSkillMenuKey;
+        internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
+
+
+        public static List<int> DebuffIDs;
 
         internal static FargowiltasSouls Instance;
 
@@ -113,17 +124,23 @@ namespace FargowiltasSouls
 
             SkyManager.Instance["FargowiltasSouls:MoonLordSky"] = new MoonLordSky();
 
-            FreezeKey = KeybindLoader.RegisterKeybind(this, "Freeze", "P");
-            GoldKey = KeybindLoader.RegisterKeybind(this, "Gold", "O");
+            //FreezeKey = KeybindLoader.RegisterKeybind(this, "Freeze", "P");
+            //GoldKey = KeybindLoader.RegisterKeybind(this, "Gold", "O");
             //SmokeBombKey = KeybindLoader.RegisterKeybind(this, "SmokeBomb", "I");
-            SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
-            BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
+            //SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
+            //BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
             SoulToggleKey = KeybindLoader.RegisterKeybind(this, "EffectToggle", ".");
             PrecisionSealKey = KeybindLoader.RegisterKeybind(this, "PrecisionSeal", "LeftShift");
-            MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
-            FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
-            DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
-            AmmoCycleKey = KeybindLoader.RegisterKeybind(this, "AmmoCycle", "L");
+            //MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
+            //FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
+            //DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
+            //AmmoCycleKey = KeybindLoader.RegisterKeybind(this, "AmmoCycle", "L");
+
+            ActiveSkill1Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill1", "Z");
+            ActiveSkill2Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill2", "X");
+            ActiveSkill3Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill3", "C");
+            //ActiveSkill4Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill4", "V");
+            ActiveSkillMenuKey = KeybindLoader.RegisterKeybind(this, "ActiveSkillMenu", "N");
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();
@@ -231,17 +248,23 @@ namespace FargowiltasSouls
 
             ToggleLoader.Unload();
 
-            FreezeKey = null;
-            GoldKey = null;
+            //FreezeKey = null;
+            //GoldKey = null;
             //SmokeBombKey = null;
-            SpecialDashKey = null;
-            BombKey = null;
+            //SpecialDashKey = null;
+            //BombKey = null;
             SoulToggleKey = null;
             PrecisionSealKey = null;
-            MagicalBulbKey = null;
-            FrigidSpellKey = null;
-            DebuffInstallKey = null;
-            AmmoCycleKey = null;
+            //MagicalBulbKey = null;
+            //FrigidSpellKey = null;
+            //DebuffInstallKey = null;
+            //AmmoCycleKey = null;
+
+            ActiveSkill1Key = null;
+            ActiveSkill2Key = null;
+            ActiveSkill3Key = null;
+            //ActiveSkill4Key = null;
+            ActiveSkillMenuKey = null;
 
             DebuffIDs?.Clear();
 
@@ -586,6 +609,7 @@ namespace FargowiltasSouls
             SyncTogglesOnJoin,
             SyncOneToggle,
             SyncDefaultToggles,
+            SyncActiveSkill,
             SyncCanPlayMaso,
             SyncNanoCoreMode,
             //SpawnBossTryFromNPC,
@@ -597,6 +621,8 @@ namespace FargowiltasSouls
             DropMutantGift,
             RequestEnvironmentalProjectile,
             ToggleEternityMode,
+            WakeUpDeviantt,
+            WakeUpMutant
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -735,6 +761,17 @@ namespace FargowiltasSouls
                         {
                             Player player = Main.player[reader.ReadByte()];
                             player.SetToggleValue(AccessoryEffectLoader.GetEffect(reader.ReadString()), reader.ReadBoolean());
+                        }
+                        break;
+                    case PacketID.SyncActiveSkill:
+                        {
+                            Player player = Main.player[reader.ReadByte()];
+                            int slotIndex = reader.ReadInt32();
+                            int skillIndex = reader.ReadInt32();
+                            AccessoryEffect skill = skillIndex < 0 ? null : AccessoryEffectLoader.AccessoryEffects[skillIndex];
+
+                            player.FargoSouls().ActiveSkills[slotIndex] = skill;
+
                         }
                         break;
                     case PacketID.SyncDefaultToggles:
@@ -896,36 +933,88 @@ namespace FargowiltasSouls
                     case PacketID.ToggleEternityMode:
                         {
                             Player player = FargoSoulsUtil.PlayerExists(reader.ReadByte());
+                            int diff = reader.ReadByte();
                             if (Main.netMode == NetmodeID.Server)
                             {
-                                if (FargoSoulsUtil.WorldIsExpertOrHarder())
+                                string toggle = diff == 2 ? "Master" : diff == 1 ? "Expert" : "None";
+                                if (diff != 0)
                                 {
-                                    if (!LumUtils.AnyBosses())
+                                    bool changed = false;
+                                    if (Main.GameModeInfo.IsJourneyMode)
                                     {
-                                        WorldSavingSystem.ShouldBeEternityMode = !WorldSavingSystem.ShouldBeEternityMode;
-
-                                        int deviType = ModContent.NPCType<Deviantt>();
-                                        if (FargoSoulsUtil.HostCheck && WorldSavingSystem.ShouldBeEternityMode && !WorldSavingSystem.SpawnedDevi && !NPC.AnyNPCs(deviType))
-                                        {
-                                            WorldSavingSystem.SpawnedDevi = true;
-
-                                            Vector2 spawnPos = (Main.zenithWorld || Main.remixWorld) ? player.Center : player.Center - 1000 * Vector2.UnitY;
-                                            Projectile.NewProjectile(player.GetSource_Misc(""), spawnPos, Vector2.Zero, ModContent.ProjectileType<SpawnProj>(), 0, 0, Main.myPlayer, deviType);
-
-                                            FargoSoulsUtil.PrintLocalization("Announcement.HasAwoken", new Color(175, 75, 255), Language.GetTextValue("Mods.Fargowiltas.NPCs.Deviantt.DisplayName"));
-                                        }
-
-                                        SoundEngine.PlaySound(SoundID.Roar, player.Center);
-
-                                        if (Main.netMode == NetmodeID.Server)
-                                            NetMessage.SendData(MessageID.WorldData); //sync world
+                                        float value = diff == 2 ? 1f : 0.66f;
+                                        var slider = CreativePowerManager.Instance.GetPower<DifficultySliderPower>();
+                                        typeof(CreativePowers.DifficultySliderPower).GetMethod("SetValueKeyboardForced", LumUtils.UniversalBindingFlags).Invoke(slider, [value]);
                                     }
+                                    else
+                                    {
+                                        switch (diff)
+                                        {
+                                            case 1:
+                                                if (Main.GameMode != GameModeID.Expert)
+                                                    changed = true;
+                                                Main.GameMode = GameModeID.Expert;
+                                                break;
+                                            case 2:
+                                                if (Main.GameMode != GameModeID.Master)
+                                                    changed = true;
+                                                Main.GameMode = GameModeID.Master;
+                                                break;
+                                        }
+                                    }
+                                    if (changed)
+                                        FargoSoulsUtil.PrintLocalization($"Mods.Fargowiltas.Items.ModeToggle.{toggle}", new Color(175, 75, 255));
                                 }
-                                else
+
+                                WorldSavingSystem.ShouldBeEternityMode = diff != 0;
+                                if (diff != 0)
                                 {
-                                    FargoSoulsUtil.PrintLocalization($"Mods.FargowiltasSouls.Items.Masochist.WrongDifficulty", new Color(175, 75, 255));
+                                    WorldSavingSystem.SpawnedDevi = true;
                                 }
+
+                                NetMessage.SendData(MessageID.WorldData); //sync world
                             }
+                            else
+                            {
+                                string mode;
+                                float volume = 0.5f;
+                                switch (diff)
+                                {
+                                    case 1:
+                                        mode = "Emode";
+                                        break;
+                                    case 2:
+                                        mode = "Maso";
+                                        break;
+                                    default:
+                                        mode = "Deactivate";
+                                        volume = 1;
+                                        break;
+                                }
+                                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Difficulty" + mode) with { Volume = volume });
+                            }
+                        }
+                        break;
+                    case PacketID.WakeUpDeviantt:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            if (npc.ModNPC is UnconsciousDeviantt)
+                            {
+                                if (Main.netMode == NetmodeID.Server)
+                                    UnconsciousDeviantt.WakeUp(npc);
+                            }
+                        }
+                        break;
+                    case PacketID.WakeUpMutant:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            if (npc.ModNPC is ReleasedMutant && Main.netMode == NetmodeID.Server)
+                            {
+                                npc.Transform(ModContent.NPCType<Mutant>());
+                                WorldSavingSystem.HaveForcedMutantFromKS = true;
+                                NetMessage.SendData(MessageID.WorldData);
+                            }
+
                         }
                         break;
 
@@ -944,7 +1033,7 @@ namespace FargowiltasSouls
         public static bool NoBiome(NPCSpawnInfo spawnInfo)
         {
             Player player = spawnInfo.Player;
-            return !player.ZoneJungle && !player.ZoneDungeon && !player.ZoneCorrupt && !player.ZoneCrimson && !player.ZoneHallow && !player.ZoneSnow && !player.ZoneUndergroundDesert;
+            return player.ZonePurity && !player.ZoneJungle && !player.ZoneDungeon && !player.ZoneCorrupt && !player.ZoneCrimson && !player.ZoneHallow && !player.ZoneSnow && !player.ZoneUndergroundDesert;
         }
 
         public static bool NoZoneAllowWater(NPCSpawnInfo spawnInfo) => !spawnInfo.Sky && !spawnInfo.Player.ZoneMeteor && !spawnInfo.SpiderCave;

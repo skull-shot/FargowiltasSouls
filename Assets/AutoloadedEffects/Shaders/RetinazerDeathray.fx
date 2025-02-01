@@ -59,6 +59,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     
     if (coords.x < 0.02)
         widthScale /= pow(coords.x / 0.02, 10);
+   
 
     
     coords.y = ((coords.y - clamp(0.48, 0.45, 0.49)) * clamp(widthScale, 0, 2)) + 0.5;
@@ -70,6 +71,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     
     // Use the red value for the opacity, as the provided image *should* be grayscale.
     float opacity = fadeMapColor.r;
+    if (coords.x > 0.9)
+        opacity *= pow(1 - (coords.x - 0.9) / 0.1, 5);
     // Lerp between the base color, and the provided color based on the opacity of the fademap.
     float4 changedColor = lerp(float4(mainColor, 1), color, 0.5f);
     float4 colorCorrected = lerp(color, changedColor, fadeMapColor.r);
