@@ -3757,3 +3757,8 @@ LifelightMusicBox: {
 	DisplayName: 音乐盒（飘渺游光）
 	Tooltip: ProduceVGM - 《Illustrious Illuminescence》
 }
+
+MainMenuMusicBox: {
+	// DisplayName: Music Box (Main Menu)
+	// Tooltip: Sakuzyo 'Nein'
+}
