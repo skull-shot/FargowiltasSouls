@@ -395,7 +395,7 @@ namespace FargowiltasSouls
             yield return "DeletionImmuneRank";
             yield return "SetDeletionImmuneRank";
             yield return "SetProjectileDeletionImmuneRank";
-            yield return "ProjectileDEletionImmuneRank";
+            yield return "ProjectileDeletionImmuneRank";
         }
         public override IEnumerable<Type> GetInputTypes()
         {
