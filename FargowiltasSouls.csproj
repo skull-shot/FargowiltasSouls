@@ -27,8 +27,9 @@
     <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Gores\LeashOfCthulhu\" />
-    <Folder Include="Assets\Gores\Twinrangs\" />
+    <Folder Include="Assets\Gores\Weapons\LeashOfCthulhu\" />
+    <Folder Include="Assets\Gores\Weapons\BigSting\" />
+    <Folder Include="Assets\Gores\Weapons\Twinrangs\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\WorldGen\" />
