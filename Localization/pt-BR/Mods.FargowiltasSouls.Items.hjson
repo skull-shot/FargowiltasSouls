@@ -3657,7 +3657,7 @@ TouhouStaff: {
 
 BaronP1MusicBox: {
 	// DisplayName: Music Box (Banished Baron - Phase 1)
-	// Tooltip: zentaque & Azathoths 'Will of the Waves'
+	// Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 BaronP2MusicBox: {
@@ -3693,4 +3693,9 @@ EridanusMusicBox: {
 LifelightMusicBox: {
 	// DisplayName: Music Box (Lifelight)
 	// Tooltip: ProduceVGM 'Illustrious Illuminescence'
+}
+
+MainMenuMusicBox: {
+	// DisplayName: Music Box (Main Menu)
+	// Tooltip: Sakuzyo 'Nein'
 }

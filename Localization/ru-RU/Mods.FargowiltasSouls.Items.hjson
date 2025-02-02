@@ -3737,3 +3737,8 @@ LifelightMusicBox: {
 	DisplayName: Музыкальная шкатулка (Жизнесвет)
 	Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }
+
+MainMenuMusicBox: {
+	// DisplayName: Music Box (Main Menu)
+	// Tooltip: Sakuzyo 'Nein'
+}

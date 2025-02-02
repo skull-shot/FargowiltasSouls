@@ -309,8 +309,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
             dr += NecromanticBrew.NecroBrewDashDR(Player);
 
-            if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
-                dr += 0.2f;
+            //if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
+            //    dr += 0.2f;
 
             if (npc.FargoSouls().BloodDrinker)
                 dr -= 0.3f;
