@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         {
             if (drawInfo.shadow == 0f)
             {
-                float scale = 2f;
+                //float scale = 2f;
 
                 Player player = drawInfo.drawPlayer;
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -28,13 +28,13 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
                 Vector2 offset = (Vector2.UnitY * 150 * player.gravDir).RotatedBy(-drawInfo.rotation);
 
-                int barWidth = (int)((barRectangle.Width - 16) * scale);
+                int barWidth = (int)((barRectangle.Width - 32));   
 
                 Vector2 barPos = pos + offset;
                 Vector2 barPos0 = barPos - (Vector2.UnitX * barWidth / 2).RotatedBy(-drawInfo.rotation);
 
 
-                DrawData bar = new(barTexture, barPos, barRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, barRectangle.Size() / 2, scale, SpriteEffects.None, 0);
+                DrawData bar = new(barTexture, barPos, barRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, barRectangle.Size() / 2, 1, SpriteEffects.None, 0);
                 drawInfo.DrawDataCache.Add(bar);
 
                 Texture2D zoneTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/PlayerDrawLayers/RustrifleReloadZone", AssetRequestMode.ImmediateLoad).Value;
@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
 
                 Vector2 zonePos = barPos0 + (Vector2.UnitX * barWidth * modPlayer.RustRifleReloadZonePos).RotatedBy(-drawInfo.rotation);
-                DrawData zone = new(zoneTexture, zonePos, zoneRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, zoneRectangle.Size() / 2, scale, SpriteEffects.None, 0);
+                DrawData zone = new(zoneTexture, zonePos, zoneRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, zoneRectangle.Size() / 2, 1, SpriteEffects.None, 0);
                 drawInfo.DrawDataCache.Add(zone);
 
                 Texture2D sliderTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/PlayerDrawLayers/RustrifleReloadSlider", AssetRequestMode.ImmediateLoad).Value;
@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
                 float ReloadProgress = NavalRustrifle.ReloadProgress(modPlayer.RustRifleTimer);
                 Vector2 sliderPos = barPos0 + (Vector2.UnitX * barWidth * ReloadProgress).RotatedBy(-drawInfo.rotation);
-                DrawData slider = new(sliderTexture, sliderPos, sliderRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, sliderRectangle.Size() / 2, scale, SpriteEffects.None, 0);
+                DrawData slider = new(sliderTexture, sliderPos, sliderRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi - drawInfo.rotation : 0f - drawInfo.rotation, sliderRectangle.Size() / 2, 1, SpriteEffects.None, 0);
                 drawInfo.DrawDataCache.Add(slider);
             }
         }
