@@ -23,8 +23,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void SetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
+            Projectile.width = 52;
+            Projectile.height = 76;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
             //AIType = ProjectileID.Bullet;
-            Projectile.scale = 2f;
+            //Projectile.scale = 2f;
         }
 
         public override void AI()
