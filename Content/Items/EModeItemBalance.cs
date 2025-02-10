@@ -368,8 +368,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.ObsidianSwordfish:
-                    balanceNumber = 0.8f;
-                    balanceTextKeys = ["Damage", "SpearRework"];
+                    balanceNumber = 1;
+                    balanceTextKeys = ["SpearRework"];
                     return EModeChange.Buff;
                 #endregion
 
