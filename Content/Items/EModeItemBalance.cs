@@ -437,6 +437,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
                     return EModeChange.Nerf;
+                case ItemID.Bladetongue:
+                    balanceTextKeys = ["Bladetongue"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
                 default:
                     return EModeChange.None;
             }
