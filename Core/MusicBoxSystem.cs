@@ -55,9 +55,11 @@ namespace FargowiltasSouls.Core
                 TileObjectData.newTile.Origin = new Point16(0, 1);
                 TileObjectData.newTile.LavaDeath = false;
                 TileObjectData.newTile.DrawYOffset = 2;
+                TileObjectData.newTile.StyleLineSkip = 2;
                 //TileLoader.GetItemDropFromTypeAndStyle(Type, 1);
                 TileObjectData.addTile(Type);
                 AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.MusicBox"));
+                
             }
             public override void MouseOver(int i, int j)
             {
@@ -71,13 +73,6 @@ namespace FargowiltasSouls.Core
             {
                 return true;
             }
-
-            public override void KillMultiTile(int i, int j, int frameX, int frameY)
-            {
-                //Item.NewItem(Item.GetSource_None(), new Vector2(i * 16, j * 16), new Vector2(32, 32), (int)TileLoader.GetItemDropFromTypeAndStyle(Type));
-                base.KillMultiTile(i, j, frameX, frameY);
-            }
-
             public override void DrawEffects(int i, int j, SpriteBatch spriteBatch, ref TileDrawInfo drawData)
             {
                 // This code spawns the music notes when the music box is open.

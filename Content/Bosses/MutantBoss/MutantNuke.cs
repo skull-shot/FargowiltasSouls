@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             Projectile.width = 20;
             Projectile.height = 20;
-            Projectile.scale = 4f;
+            Projectile.scale = 2f;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hostile = true;

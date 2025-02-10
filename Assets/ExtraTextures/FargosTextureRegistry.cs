@@ -15,6 +15,8 @@ namespace FargowiltasSouls.Assets.ExtraTextures
 		public static Asset<Texture2D> DeviBorderTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/DeviBorder");
         public static Asset<Texture2D> HardEdgeRing => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/HardEdgeRing");
         public static Asset<Texture2D> SoftEdgeRing => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/SoftEdgeRing");
+        public static Asset<Texture2D> Scorch => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/Scorch");
+        public static Asset<Texture2D> Smoke => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/Smoke");
         #endregion
 
         #region Misc Shader Textures
