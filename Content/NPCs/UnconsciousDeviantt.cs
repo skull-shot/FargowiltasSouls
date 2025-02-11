@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void SetDefaults()
         {
-            NPC.townNPC = true;
             NPC.friendly = true;
             NPC.aiStyle = -1;
             NPC.lifeMax = 250;
@@ -52,6 +51,8 @@ namespace FargowiltasSouls.Content.NPCs
             NPC.dontTakeDamageFromHostiles = true;
             NPC.noTileCollide = false;
         }
+
+        public override bool CanChat() => true;
 
         public override void SetChatButtons(ref string button, ref string button2)
         {

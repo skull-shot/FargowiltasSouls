@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿/*
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Linq;
 using Terraria;
@@ -22,3 +23,4 @@ namespace FargowiltasSouls.Content.Buffs.Souls
         }
     }
 }
+*/

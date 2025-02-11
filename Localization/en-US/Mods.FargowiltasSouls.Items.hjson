@@ -186,9 +186,9 @@ EbonwoodEnchant: {
 	DisplayName: Ebonwood Enchantment
 	Tooltip:
 		'''
-		You are surrounded by an aura that builds up Withering on enemies
-		After 3 seconds of buildup they burst, Withering all nearby enemies
-		Withered enemies take 5 extra flat damage from all hits and deal 20% less contact damage
+		You are surrounded by an aura of corruption
+		Having enemies in the aura builds up Corruption
+		Corruption grants you up to 5 flat damage and 5% damage reduction
 		'Untapped potential'
 		'''
 }
@@ -3695,7 +3695,7 @@ TouhouStaff: {
 
 BaronP1MusicBox: {
 	DisplayName: Music Box (Banished Baron - Phase 1)
-	Tooltip: zentaque & Azathoths 'Will of the Waves'
+	Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 BaronP2MusicBox: {
@@ -3731,4 +3731,9 @@ EridanusMusicBox: {
 LifelightMusicBox: {
 	DisplayName: Music Box (Lifelight)
 	Tooltip: ProduceVGM 'Illustrious Illuminescence'
+}
+
+MainMenuMusicBox: {
+	DisplayName: Music Box (Main Menu)
+	Tooltip: Sakuzyo 'Nein'
 }
