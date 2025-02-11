@@ -71,19 +71,6 @@ namespace FargowiltasSouls.Content.Buffs
                         SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));
                     break;
 
-
-                case BuffID.ThornWhipPlayerBuff:
-                case BuffID.SwordWhipPlayerBuff:
-                case BuffID.ScytheWhipPlayerBuff:
-                case BuffID.CoolWhipPlayerBuff:
-                    if (WorldSavingSystem.EternityMode)
-                    {
-                        if (player.Eternity().HasWhipBuff)
-                            player.buffTime[buffIndex] = Math.Min(player.buffTime[buffIndex], 1);
-                        player.Eternity().HasWhipBuff = true;
-                    }
-                    break;
-
                 default:
                     break;
             }
@@ -163,16 +150,6 @@ namespace FargowiltasSouls.Content.Buffs
                     if (WorldSavingSystem.EternityMode && Main.raining && npc.position.Y < Main.worldSurface * 16
                         && Framing.GetTileSafely(npc.Center).WallType == WallID.None && npc.buffTime[buffIndex] > 2)
                         npc.buffTime[buffIndex] -= 1;
-                    break;
-
-                case BuffID.BoneWhipNPCDebuff:
-                case BuffID.MaceWhipNPCDebuff:
-                case BuffID.RainbowWhipNPCDebuff:
-                case BuffID.SwordWhipNPCDebuff:
-                case BuffID.ThornWhipNPCDebuff:
-                    if (WorldSavingSystem.EternityMode && npc.Eternity().HasWhipDebuff)
-                        npc.buffTime[buffIndex] = Math.Min(npc.buffTime[buffIndex], 1);
-                    npc.Eternity().HasWhipDebuff = true;
                     break;
 
                 default:

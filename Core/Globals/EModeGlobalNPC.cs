@@ -33,7 +33,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool PaladinsShield;
         public bool isWaterEnemy;
-        public bool HasWhipDebuff;
 
         //public List<int> auraDebuffs = new List<int>();
 #pragma warning disable CA2211
@@ -70,7 +69,6 @@ namespace FargowiltasSouls.Core.Globals
         public override void ResetEffects(NPC npc)
         {
             PaladinsShield = false;
-            HasWhipDebuff = false;
 
             if (BeetleTimer > 0 && --BeetleTimer <= 0)
             {
