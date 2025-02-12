@@ -97,6 +97,8 @@ namespace FargowiltasSouls.Content.Projectiles
         public float HeldProjMemorizedCrit;
         public bool Reflected;
 
+        public float TagStackMultiplier = 1;
+
         public static List<int> ShroomiteBlacklist =
         [
             
