@@ -4,12 +4,14 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Hooking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -21,8 +23,12 @@ using Terraria.Utilities;
 
 namespace FargowiltasSouls
 {
-    public partial class FargowiltasSouls
+    public partial class FargowiltasSouls : ICustomDetourProvider
     {
+        private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
+
+        public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
+
         public void LoadDetours()
         {
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
@@ -34,6 +40,8 @@ namespace FargowiltasSouls
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+
+
         }
         public void UnloadDetours()
         {
@@ -45,6 +53,12 @@ namespace FargowiltasSouls
             On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+        }
+
+
+        void ICustomDetourProvider.ModifyMethods()
+        {
+            HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -196,6 +210,30 @@ namespace FargowiltasSouls
                     new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
             }
+        }
+        public static void CombinedHooks_ModifyHitNPCWithProj(Orig_CombinedHooks_ModifyHitNPCWithProj orig, Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers)
+        {
+            // Whip tag damage nerf
+            if (WorldSavingSystem.EternityMode)
+            {
+                int tags = 0;
+                for (int i = 0; i < nPC.buffType.Length; i++)
+                {
+                    int type = nPC.buffType[i];
+                    if (BuffID.Sets.IsATagBuff[type])
+                        tags++;
+                }
+                if (tags > 1)
+                {
+                    float perStack = 0.5f;
+                    float mult = (1 - perStack + perStack * tags) / tags;
+                    ProjectileID.Sets.SummonTagDamageMultiplier[projectile.type] *= mult;
+                    // IMPORTANT that this is reset after the hit!
+                    // This is done in FargoSoulsPlayer.OnHitNPCWithProj using the following variable
+                    projectile.FargoSouls().TagStackMultiplier = mult;
+                }
+            }
+            orig(projectile, nPC, ref modifiers);
         }
     }
 }

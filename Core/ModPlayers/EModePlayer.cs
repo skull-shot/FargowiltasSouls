@@ -24,7 +24,6 @@ namespace FargowiltasSouls.Core.ModPlayers
     public partial class EModePlayer : ModPlayer
     {
         public bool ReduceMasomodeMinionNerf;
-        public bool HasWhipBuff;
         public const int MaxMasomodeMinionNerfTimer = 300;
         public const int MaxShorterDebuffsTimer = 60;
         public int MasomodeCrystalTimer;
@@ -43,7 +42,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void ResetEffects()
         {
             ReduceMasomodeMinionNerf = false;
-            HasWhipBuff = false;
 
             if (!LumUtils.AnyBosses())
                 Respawns = 0;
