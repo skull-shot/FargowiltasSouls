@@ -77,8 +77,15 @@ namespace FargowiltasSouls.Content.UI.Elements
                 scale = 1.2f;
             if (item > -1)
             {
+                
                 Vector2 scaleOffset = -Vector2.One * 10 * (scale - 1);
-                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, Color.White, scale);
+                Color color = Color.White;
+                Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, color, scale);
+                if (!Main.LocalPlayer.AccessoryEffects().Equipped(effect))
+                {
+                    Texture2D cross = FargoUIManager.Cross.Value;
+                    Main.spriteBatch.Draw(cross, itemPos + new Vector2(-3, -12), null, Color.Red * 0.8f, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+                }
             }
             if (hovering)
             {
@@ -88,13 +95,16 @@ namespace FargowiltasSouls.Content.UI.Elements
                 }
                 else if (ActiveSkillMenu.MouseHeldElement == null && effect != null)
                 {
-                    Vector2 textPosition = Main.MouseScreen + new Vector2(21, 21);
-                    string locPath = $"Mods.{effect.Mod.Name}.ActiveSkills.{effect.Name}";
-                    string name = Language.GetTextValue($"{locPath}.DisplayName");
-                    string tooltip = Language.GetTextValue($"{locPath}.Tooltip");
+                    string locPath = $"Mods.{effect.Mod.Name}.ActiveSkills";
+                    string name = Language.GetTextValue($"{locPath}.{effect.Name}.DisplayName");
+                    string tooltip = Language.GetTextValue($"{locPath}.{effect.Name}.Tooltip");
+                    string unequipped = Language.GetTextValue($"{locPath}.Unequipped");
                     ModifyTooltip(ref tooltip);
 
                     string text = $"{name}\n{tooltip}";
+
+                    if (!Main.LocalPlayer.AccessoryEffects().Equipped(effect))
+                        text = "[c/BC5252:" + unequipped + "]" + "\n" + text;
                     
                     if (!text.Contains($"Mods.{effect.Mod.Name}"))
                     {
