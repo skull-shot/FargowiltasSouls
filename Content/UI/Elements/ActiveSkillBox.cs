@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             {
                 if (effect.ToggleItemType > 0)
                     item = effect.ToggleItemType;
-                else if (effect.EffectItem(Main.LocalPlayer).type > ItemID.None)
+                else if (effect.EffectItem(Main.LocalPlayer) != null && effect.EffectItem(Main.LocalPlayer).type > ItemID.None)
                     item = effect.EffectItem(Main.LocalPlayer).type;
             }
             Vector2 itemPos = position + new Vector2(9, 9);
