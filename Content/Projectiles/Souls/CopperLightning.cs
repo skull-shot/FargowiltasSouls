@@ -241,7 +241,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
                 if (closestNPC != null)
                 {
-                    Vector2 velocity = target.SafeDirectionTo(closestNPC.Center) * 20f;
+                    Vector2 velocity = Projectile.SafeDirectionTo(closestNPC.Center) * 20f;
                     float ai0 = velocity.ToRotation();
                     //Projectile.Center = closestNPC.Center; //help ensure it hits
                     //Projectile.netUpdate = true;
