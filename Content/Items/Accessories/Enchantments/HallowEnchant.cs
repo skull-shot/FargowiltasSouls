@@ -72,13 +72,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void PostUpdateEquips(Player player)
         {
-            if (player.itemTime == 1)
-            {
-                int duration = player.ForceEffect<HallowEffect>() ? 120 : 60;
-                player.FargoSouls().HallowRepelTime = duration;
-                Particle p = new HallowEnchantBarrier(player.Center, Vector2.Zero, RepelRadius / 160f, duration + 20, player: player, baseOpacity: 0.5f);
-                p.Spawn();
-            }
             if (player.FargoSouls().HallowRepelTime > 0)
             {
                 player.FargoSouls().HallowRepelTime--;
