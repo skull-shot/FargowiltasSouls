@@ -184,6 +184,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int chillLength;
         public int CHILL_DURATION => Player.HasEffect<FrostEffect>() ? 60 * 20 : 60 * 15;
 
+        public int HallowRepelTime;
         public int TurtleCounter;
         public int TurtleShellHP = 25;
         public int turtleRecoverCD = 240;

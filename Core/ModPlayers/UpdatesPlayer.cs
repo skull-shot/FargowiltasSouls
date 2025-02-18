@@ -568,6 +568,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
                 EbonwoodCharge = 0;
 
+            if (HallowRepelTime > 0 && !Player.HasEffect<HallowEffect>())
+                HallowRepelTime = 0;
+
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
             if (SquireEnchantActive)
                 Player.setSquireT2 = true;
