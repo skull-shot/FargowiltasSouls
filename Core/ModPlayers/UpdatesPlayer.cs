@@ -566,7 +566,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HuntressStage--;
 
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
-                EbonwoodCharge--;
+                EbonwoodCharge = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
             if (SquireEnchantActive)

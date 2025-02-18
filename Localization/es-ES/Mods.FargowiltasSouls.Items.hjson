@@ -139,9 +139,9 @@ CopperEnchant: {
 	// DisplayName: Copper Enchantment
 	/* Tooltip:
 		'''
-		Critical strikes can shock enemies with chain lightning that arcs between 4 enemies
+		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies
 		Wet enemies can be shocked without a critical strike
-		5 second cooldown, reduced by critical strikes and hits on wet enemies
+		4 second cooldown, reduced by critical strikes and hits on wet enemies
 		'And his music was electric'
 		''' */
 }
