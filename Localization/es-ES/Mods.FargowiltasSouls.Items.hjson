@@ -955,7 +955,7 @@ TimberForce: {
 	// DisplayName: Force of Timber
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Withering and Bleeding
+		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
 		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
 		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2.5x as fast
 		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
@@ -1579,6 +1579,7 @@ SlimyShield: {
 		'''
 		Grants immunity to Slimed
 		Increases fall speed
+		Hold down to fall through platforms
 		When you land after a jump, slime will fall from the sky over your cursor
 		Slime inflicts Slimed and Oiled
 		'Torn from the innards of a defeated foe'
@@ -1612,7 +1613,7 @@ SupremeDeathbringerFairy: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
-		[i:FargowiltasSouls/SlimyShield] Increases fall speed and landing spawns slime over your cursor
+		[i:FargowiltasSouls/SlimyShield] Increases fall speed and landing spawns slime over your cursor, hold down to fall through platforms
 		[i:FargowiltasSouls/AgitatingLens] While dashing or running quickly you will create a trail of blood scythes
 		[i:FargowiltasSouls/AgitatingLens] Debuff Install makes you go berserk, reducing control and defense for massive offensive bonuses
 		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
