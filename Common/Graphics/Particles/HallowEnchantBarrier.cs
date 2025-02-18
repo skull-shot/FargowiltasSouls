@@ -34,9 +34,9 @@ namespace FargowiltasSouls.Common.Graphics.Particles
         {
             if (Player != null && Player.Alive())
                 Position = Player.Center;
-            if (LifetimeRatio > 0.3f)
+            if (LifetimeRatio > 0.6f)
             {
-                float decay = (LifetimeRatio - 0.3f) / 0.7f;
+                float decay = (LifetimeRatio - 0.6f) / 0.4f;
                 Opacity = BaseOpacity * (1 - decay);
                 CurrentFrame = (int)(decay * FrameCount);
             }
@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Common.Graphics.Particles
         public override void Draw(SpriteBatch spriteBatch)
         {
             int height = Texture.Frame.Height / FrameCount;
-            Frame = new(0, CurrentFrame * height, Texture.Frame.Width, height);
+            Frame = new(0, CurrentFrame * height, Texture.Frame.Width, height - 8);
 
             Vector2 screenPos = Position - Main.screenPosition;
 
