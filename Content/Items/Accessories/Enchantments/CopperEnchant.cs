@@ -1,8 +1,10 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -58,6 +60,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.CopperProcCD > 0)
                 modPlayer.CopperProcCD--;
+            CooldownBarManager.Activate("CopperEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/CopperEnchant").Value, new(213, 102, 23),
+                () => Main.LocalPlayer.FargoSouls().CopperProcCD / (60f * 4), true, activeFunction: player.HasEffect<CopperEffect>);
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
@@ -65,6 +69,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if ((hitInfo.Crit || wetCheck))
             {
                 CopperProc(player, target);
+                FargoSoulsPlayer modPlayer = player.FargoSouls();
+                if (modPlayer.CopperProcCD > 0)
+                    modPlayer.CopperProcCD -= 3;
             }
         }
 
@@ -73,61 +80,25 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!player.HasEffectEnchant<CopperEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.CopperProcCD == 0)
+            if (modPlayer.CopperProcCD <= 0)
             {
                 bool forceEffect = modPlayer.ForceEffect<CopperEnchant>();
                 target.AddBuff(BuffID.Electrified, 180);
 
-                int dmg = 50;
-                int maxTargets = 1;
-                int cdLength = 300;
+                int dmg = 60;
+                int arcs = 5;
+                int cdLength = 60 * 4;
 
                 if (forceEffect)
                 {
-                    dmg = 160;
-                    maxTargets = 5;
-                    cdLength = 150;
+                    dmg = 250;
+                    arcs = 8;
                 }
 
-                List<int> npcIndexes = [];
-                float closestDist = 500f;
-                NPC closestNPC;
+                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
 
-                for (int i = 0; i < maxTargets; i++)
-                {
-                    closestNPC = null;
-
-                    //find closest npc to target that has not been chained to yet
-                    for (int j = 0; j < Main.maxNPCs; j++)
-                    {
-                        NPC npc = Main.npc[j];
-
-                        if (npc.active && npc.whoAmI != target.whoAmI && npc.CanBeChasedBy() && npc.Distance(target.Center) < closestDist && !npcIndexes.Contains(npc.whoAmI)
-                            && Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0))
-                        {
-                            closestNPC = npc;
-                            closestDist = npc.Distance(target.Center);
-                            //break;
-                        }
-                    }
-
-                    if (closestNPC != null)
-                    {
-                        npcIndexes.Add(closestNPC.whoAmI);
-
-                        Vector2 ai = closestNPC.Center - target.Center;
-                        Vector2 velocity = Vector2.Normalize(ai) * 20;
-
-                        int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                        FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<CopperEffect>(), target.Center, velocity, ModContent.ProjectileType<CopperLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation(), damage);
-                    }
-                    else
-                    {
-                        break;
-                    }
-
-                    target = closestNPC;
-                }
+                Projectile.NewProjectile(player.GetSource_EffectItem<CopperEffect>(), player.Center, player.DirectionTo(target.Center) * 20, ModContent.ProjectileType<CopperLightning>(), 
+                    damage, 0f, modPlayer.Player.whoAmI, player.DirectionTo(target.Center).ToRotation(), damage, ai2: arcs);
 
                 modPlayer.CopperProcCD = cdLength;
             }
