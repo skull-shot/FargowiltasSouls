@@ -229,6 +229,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         //maso items
         public Item SlimyShieldItem;
         public bool SlimyShieldFalling;
+        public int FallthroughCD;
         public int AgitatingLensCD;
         public Item DarkenedHeartItem;
         public int DarkenedHeartCD;

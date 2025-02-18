@@ -542,6 +542,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
 
+            if (FallthroughCD > 0)
+                FallthroughCD--;
+
             if (VortexCD > 0)
                 VortexCD--;
 
