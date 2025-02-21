@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Core.Systems
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.WorldData);
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(SoundID.Roar, Main.LocalPlayer.Center);
+                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyDeactivate"), Main.LocalPlayer.Center);
                 }
                 else if (!EternityMode && FargoSoulsUtil.WorldIsExpertOrHarder() && !LumUtils.AnyBosses())
                 {

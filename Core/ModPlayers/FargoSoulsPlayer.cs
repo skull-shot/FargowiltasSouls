@@ -68,6 +68,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int RockeaterDistance = EaterLauncher.BaseDistance;
 
         public int The22Incident;
+        public bool DevianttIntroduction = false;
 
         public bool SpawnedCoffinGhost = false;
         public bool Grappled = false;
@@ -283,7 +284,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             LavaWet = false;
 
             WoodEnchantDiscount = false;
-
             SnowVisual = false;
             ApprenticeEnchantActive = false;
             DarkArtistEnchantActive = false;
@@ -538,6 +538,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             SandsofTime = wasSandsOfTime;
             NymphsPerfumeRespawn = wasNymphsPerfumeRespawn;
+
+            DevianttIntroduction = false;
 
             if (!SpawnedCoffinGhost && NPC.AnyNPCs(ModContent.NPCType<CursedCoffin>()))
             {

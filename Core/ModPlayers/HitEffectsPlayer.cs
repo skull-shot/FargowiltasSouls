@@ -147,6 +147,14 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
                 TryAdditionalAttacks(proj.damage, proj.DamageType);
 
+            if (proj.FargoSouls().TagStackMultiplier != 1)
+            {
+                // Reset the whip tag damage nerf
+                // Nerf itself is done in FargowiltasSoulsDetours detour for CombinedHooks.ModifyHitNPCWithProj
+                ProjectileID.Sets.SummonTagDamageMultiplier[proj.type] /= proj.FargoSouls().TagStackMultiplier;
+                proj.FargoSouls().TagStackMultiplier = 1;
+            }
+
             OnHitNPCEither(target, hit, proj.DamageType, projectile: proj);
         }
 
@@ -309,8 +317,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
             dr += NecromanticBrew.NecroBrewDashDR(Player);
 
-            if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
-                dr += 0.2f;
+            //if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
+            //    dr += 0.2f;
 
             if (npc.FargoSouls().BloodDrinker)
                 dr -= 0.3f;

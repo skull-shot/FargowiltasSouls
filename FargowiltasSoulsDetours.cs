@@ -4,21 +4,31 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Hooking;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
 namespace FargowiltasSouls
 {
-    public partial class FargowiltasSouls
+    public partial class FargowiltasSouls : ICustomDetourProvider
     {
+        private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
+
+        public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
+
         public void LoadDetours()
         {
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
@@ -29,6 +39,9 @@ namespace FargowiltasSouls
             On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
+            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+
+
         }
         public void UnloadDetours()
         {
@@ -39,6 +52,13 @@ namespace FargowiltasSouls
             On_Item.AffixName -= AffixName;
             On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+        }
+
+
+        void ICustomDetourProvider.ModifyMethods()
+        {
+            HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -160,6 +180,60 @@ namespace FargowiltasSouls
             if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode  && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
                 return;
             orig(self, npcIndex, dmg, kb);
+        }
+
+        public static void DrawInterface_35_YouDied(On_Main.orig_DrawInterface_35_YouDied orig)
+        {
+            orig();
+            if (Main.LocalPlayer.dead && Main.LocalPlayer.Eternity().PreventRespawn())
+            {
+                float num = -60f;
+                string value = Lang.inter[38].Value;
+                //DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, FontAssets.DeathText.Value, value, new Vector2((float)(screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(value).X / 2f, (float)(screenHeight / 2) + num), player[myPlayer].GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+                if (Main.LocalPlayer.lostCoins > 0)
+                {
+                    num += 50f;
+                    //string textValue = Language.GetTextValue("Game.DroppedCoins", player[myPlayer].lostCoinString);
+                    //DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, FontAssets.MouseText.Value, textValue, new Vector2((float)(screenWidth / 2) - FontAssets.MouseText.Value.MeasureString(textValue).X / 2f, (float)(screenHeight / 2) + num), player[myPlayer].GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+                }
+                num += (float)((Main.LocalPlayer.lostCoins > 0) ? 24 : 50);
+                num += 20f;
+                float num2 = 0.7f;
+                //string textValue2 = Language.GetTextValue("Game.RespawnInSuffix", ((float)(int)(1f + (float)player[myPlayer].respawnTimer / 60f)).ToString());
+                //DynamicSpriteFontExtensionMethods.DrawString(spriteBatch, FontAssets.DeathText.Value, textValue2, new Vector2((float)(screenWidth / 2) - FontAssets.MouseText.Value.MeasureString(textValue2).X * num2 / 2f, (float)(screenHeight / 2) + num), player[myPlayer].GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default(Vector2), num2, SpriteEffects.None, 0f);
+
+                // draw our maso you can't respawn text
+                num += 60;
+                num2 = 0.5f;
+                string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn");
+                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text, 
+                    new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
+                    Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
+            }
+        }
+        public static void CombinedHooks_ModifyHitNPCWithProj(Orig_CombinedHooks_ModifyHitNPCWithProj orig, Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers)
+        {
+            // Whip tag damage nerf
+            if (WorldSavingSystem.EternityMode)
+            {
+                int tags = 0;
+                for (int i = 0; i < nPC.buffType.Length; i++)
+                {
+                    int type = nPC.buffType[i];
+                    if (BuffID.Sets.IsATagBuff[type])
+                        tags++;
+                }
+                if (tags > 1)
+                {
+                    float perStack = 0.5f;
+                    float mult = (1 - perStack + perStack * tags) / tags;
+                    ProjectileID.Sets.SummonTagDamageMultiplier[projectile.type] *= mult;
+                    // IMPORTANT that this is reset after the hit!
+                    // This is done in FargoSoulsPlayer.OnHitNPCWithProj using the following variable
+                    projectile.FargoSouls().TagStackMultiplier = mult;
+                }
+            }
+            orig(projectile, nPC, ref modifiers);
         }
     }
 }

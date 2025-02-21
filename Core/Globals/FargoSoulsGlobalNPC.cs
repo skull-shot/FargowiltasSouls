@@ -64,8 +64,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool TimeFrozen;
         public bool HellFire;
         public bool HellFireMarked;
-        public bool Corrupted;
-        public bool CorruptedForce;
+        // public bool Corrupted;
+        // public bool CorruptedForce;
         public bool Infested;
         public int MaxInfestTime;
         public float InfestedDust;
@@ -90,8 +90,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool SnowChilled;
         public int SnowChilledTimer;
-
-        public int EbonCorruptionTimer;
 
         public bool Chilled;
         public bool Smite;
@@ -129,8 +127,8 @@ namespace FargowiltasSouls.Core.Globals
             SolarFlare = false;
             HellFire = false;
             HellFireMarked = false;
-            Corrupted = false;
-            CorruptedForce = false;
+            // Corrupted = false;
+            // CorruptedForce = false;
             OriPoison = false;
             EarthPoison = false;
             Infested = false;
@@ -272,10 +270,6 @@ namespace FargowiltasSouls.Core.Globals
             //                }
 
             //            }
-            if (!npc.HasBuff<CorruptingBuff>())
-            {
-                EbonCorruptionTimer -= Math.Min(1, EbonCorruptionTimer);
-            }
             if (SnowChilled)
             {
                 SnowChilledTimer--;
@@ -371,6 +365,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
+            /*
             if (Corrupted || CorruptedForce)
             {
                 if (Main.rand.Next(8) < 9)
@@ -382,6 +377,7 @@ namespace FargowiltasSouls.Core.Globals
                     d.velocity.Y -= 10f;
                 }
             }
+            */
 
             if (OriPoison)
             {
@@ -1307,14 +1303,9 @@ namespace FargowiltasSouls.Core.Globals
             Player player = Main.player[Main.myPlayer];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (Corrupted)
+            if (player.HasEffect<EbonwoodEffect>())
             {
-                modifiers.FlatBonusDamage += 5;
-            }
-            if (CorruptedForce)
-            {
-                int pen = 15;
-                modifiers.FlatBonusDamage += pen;
+                modifiers.FlatBonusDamage += (int) (modPlayer.EbonwoodCharge / 50);
             }
 
             if (OceanicMaul)

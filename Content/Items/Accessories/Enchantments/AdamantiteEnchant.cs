@@ -93,7 +93,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             float ratio = Math.Max((float)modPlayer.AdamantiteSpread / SpreadCap, 0);
             modPlayer.AttackSpeed += maxSpeed * ratio;
 
-            CooldownBarManager.Activate("AdamantiteEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/AdamantiteEnchant").Value, new(221, 85, 125),
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("AdamantiteEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/AdamantiteEnchant").Value, new(221, 85, 125),
                 () => (float)Main.LocalPlayer.FargoSouls().AdamantiteSpread / SpreadCap, activeFunction: player.HasEffectEnchant<AdamantiteEffect>, displayAtFull: true);
 
         }

@@ -14,6 +14,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
     {
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
 
+        public int vfxinterpolant;
+
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Fish Nuke");
@@ -39,12 +41,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
+
+            Projectile.rotation = Projectile.ai[2];
+
             if (Projectile.localAI[0] == 0)
             {
                 Projectile.localAI[0] = 1;
 
                 //SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     int dust = Dust.NewDust(Projectile.position, Projectile.width,
                         Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
@@ -111,15 +116,19 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D flare2 = MiscTexturesRegistry.BloomFlare.Value;
-            
-            Projectile.scale = MathHelper.Lerp(Projectile.scale, 0.5f, 0.2f);
-            if (Projectile.timeLeft <= 10)
+            Texture2D flare2 = FargosTextureRegistry.Smoke.Value;
+            Texture2D flare = FargosTextureRegistry.Scorch.Value;
+
+            float smokesize = MathHelper.Lerp(0, 0.7f, ++vfxinterpolant * 0.07f);
+
+
+
+            if (Projectile.timeLeft <= 15)
             {
-                Projectile.Opacity = MathHelper.Lerp(Projectile.Opacity, 0f, 0.2f);
+                Projectile.Opacity = MathHelper.Lerp(Projectile.Opacity, 0f, 0.1f);
             }
-            Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 } * Projectile.Opacity, Main.GlobalTimeWrappedHourly * -2f, flare2.Size() * 0.5f, Projectile.scale, 0, 0f);
-            Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Blue with { A = 0 } * Projectile.Opacity, Main.GlobalTimeWrappedHourly * 2f, flare2.Size() * 0.5f, Projectile.scale, 0, 0f);
+            Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Gray with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
+            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * 4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             return false;

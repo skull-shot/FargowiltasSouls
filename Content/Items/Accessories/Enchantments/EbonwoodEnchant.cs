@@ -1,8 +1,10 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 using Terraria;
@@ -20,7 +22,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             base.SetStaticDefaults();
         }
 
-        public override Color nameColor => new(100, 90, 141);
+        public static readonly Color NameColor = new(100, 90, 141);
+        public override Color nameColor => NameColor;
 
 
         public override void SetDefaults()
@@ -64,24 +67,58 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (player.whoAmI != Main.myPlayer)
                 return;
 
+            if (modPlayer.EbonwoodCharge < 0)
+                modPlayer.EbonwoodCharge = 0;
+
             bool forceEffect = modPlayer.ForceEffect<EbonwoodEnchant>();
+            float chargeCap = forceEffect ? 500 : 250;
+            float chargeSpeed = forceEffect ? 2f : 1f;
+            float decaySpeed = chargeSpeed / 2.5f;
+            bool hasIncreased = false; // If charge has increased this frame
             int dist = ShadewoodEffect.Range(player, forceEffect);
+            float LCharge = modPlayer.EbonwoodCharge;
+
             foreach (NPC npc in Main.npc.Where(n => n.active && !n.friendly && n.lifeMax > 5 && !n.dontTakeDamage))
             {
                 Vector2 npcComparePoint = FargoSoulsUtil.ClosestPointInHitbox(npc, player.Center);
-                if (player.Distance(npcComparePoint) < dist && (forceEffect || Collision.CanHitLine(player.Center, 0, 0, npcComparePoint, 0, 0)))
+                // npc is in aura
+                if (player.Distance(npcComparePoint) < dist && Collision.CanHitLine(player.Center, 0, 0, npcComparePoint, 0, 0))
                 {
-                    if (!(npc.HasBuff<WitheredWizardBuff>() || npc.HasBuff<WitheredBuff>()))
-                    {
-                        npc.AddBuff(ModContent.BuffType<CorruptingBuff>(), 2);
-                    }
-                }
-                float corruptTime = player.HasEffect<TimberEffect>() ? 10f : 60 * 3;
-                if (npc.FargoSouls().EbonCorruptionTimer > corruptTime && (!(npc.HasBuff<WitheredWizardBuff>() || npc.HasBuff<WitheredBuff>())))
-                {
-                    EbonwoodProc(player, npc, dist, forceEffect, 5);
+                    if (modPlayer.EbonwoodCharge < chargeCap)
+                        modPlayer.EbonwoodCharge += chargeSpeed;
+                    hasIncreased = true;
+                    break;
                 }
             }
+
+            if (!hasIncreased && modPlayer.EbonwoodCharge > 0)
+                modPlayer.EbonwoodCharge -= decaySpeed;
+
+            player.endurance += 0.01f * modPlayer.EbonwoodCharge / 50;
+
+            
+            CooldownBarManager.Activate("EbonwoodEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/EbonwoodEnchant").Value, EbonwoodEnchant.NameColor,
+                () => Main.LocalPlayer.FargoSouls().EbonwoodCharge / chargeCap, true, activeFunction: () => player.HasEffect<EbonwoodEffect>());
+            
+            // charge visual/sound effects
+            if (hasIncreased && modPlayer.EbonwoodCharge % (chargeCap / 5) == 0 && modPlayer.EbonwoodCharge != LCharge)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath55, player.Center);
+                for (int i = 0; i < 60; i++)
+                {
+                    Vector2 offset = new();
+                    double angle = Main.rand.NextDouble() * 2d * Math.PI;
+                    offset.X += (float)(Math.Sin(angle));
+                    offset.Y += (float)(Math.Cos(angle));
+                    Vector2 spawnPos = player.Center + offset - new Vector2(4, 4);
+                    Dust dust = Main.dust[Dust.NewDust(spawnPos, 0, 0, DustID.Shadowflame, 0, 0, 100, Color.White, 1f)];
+                    dust.velocity = player.velocity;
+                    if (Main.rand.NextBool(3))
+                        dust.velocity += Vector2.Normalize(offset) * -5f;
+                    dust.noGravity = true;
+                }
+            }
+
             //dust
             if (!MoltenAuraProj.CombinedAura(player))
             {
@@ -92,6 +129,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
             }
         }
+
+        /*
         public static void EbonwoodProc(Player player, NPC npc, int AoE, bool force, int limit)
         {
             //corrupt all in vicinity
@@ -136,5 +175,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             npc.AddBuff(ModContent.BuffType<WitheredBuff>(), 60 * 4);
         }
+        */
     }
 }

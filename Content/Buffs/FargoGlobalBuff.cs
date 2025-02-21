@@ -71,19 +71,6 @@ namespace FargowiltasSouls.Content.Buffs
                         SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));
                     break;
 
-
-                case BuffID.ThornWhipPlayerBuff:
-                case BuffID.SwordWhipPlayerBuff:
-                case BuffID.ScytheWhipPlayerBuff:
-                case BuffID.CoolWhipPlayerBuff:
-                    if (WorldSavingSystem.EternityMode)
-                    {
-                        if (player.Eternity().HasWhipBuff)
-                            player.buffTime[buffIndex] = Math.Min(player.buffTime[buffIndex], 1);
-                        player.Eternity().HasWhipBuff = true;
-                    }
-                    break;
-
                 default:
                     break;
             }
@@ -133,7 +120,7 @@ namespace FargowiltasSouls.Content.Buffs
                                         if (target.active && !target.friendly && Vector2.Distance(npc.Center, target.Center) < 250)
                                         {
                                             Vector2 velocity = Vector2.Normalize(target.Center - npc.Center) * 5;
-                                            int p = Projectile.NewProjectile(player.GetSource_FromThis(), npc.Center, velocity, ProjectileID.ShadowFlame, 40 + FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
+                                            int p = Projectile.NewProjectile(player.GetSource_FromThis(), npc.Center, velocity, ProjectileID.ShadowFlame, (int)((30 + FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage)) * player.ActualClassDamage(DamageClass.Magic)), 0, Main.myPlayer);
                                             if (p.IsWithinBounds(Main.maxProjectiles))
                                             {
                                                 Main.projectile[p].friendly = true;
@@ -163,16 +150,6 @@ namespace FargowiltasSouls.Content.Buffs
                     if (WorldSavingSystem.EternityMode && Main.raining && npc.position.Y < Main.worldSurface * 16
                         && Framing.GetTileSafely(npc.Center).WallType == WallID.None && npc.buffTime[buffIndex] > 2)
                         npc.buffTime[buffIndex] -= 1;
-                    break;
-
-                case BuffID.BoneWhipNPCDebuff:
-                case BuffID.MaceWhipNPCDebuff:
-                case BuffID.RainbowWhipNPCDebuff:
-                case BuffID.SwordWhipNPCDebuff:
-                case BuffID.ThornWhipNPCDebuff:
-                    if (WorldSavingSystem.EternityMode && npc.Eternity().HasWhipDebuff)
-                        npc.buffTime[buffIndex] = Math.Min(npc.buffTime[buffIndex], 1);
-                    npc.Eternity().HasWhipDebuff = true;
                     break;
 
                 default:

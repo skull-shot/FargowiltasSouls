@@ -682,6 +682,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.whoAmI == Main.myPlayer)
             {
+                int type = ModContent.ProjectileType<Bloodshed>();
+                const float speed = 12f;
+                Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), Player.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
+
                 int projDamage = FargoSoulsUtil.HighestDamageTypeScaling(Player, 1000);
 
                 const int max = 20;
@@ -890,11 +894,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        private const int BASE_PARRY_WINDOW = 20;
-        private const int BASE_SHIELD_COOLDOWN = 100;
-        private const int HARD_PARRY_WINDOW = 10;
-        private const int LONG_SHIELD_COOLDOWN = 360;
-        private const int PERFECT_PARRY_WINDOW = 10;
+        public const int BASE_PARRY_WINDOW = 20;
+        public const int BASE_SHIELD_COOLDOWN = 100;
+        public const int HARD_PARRY_WINDOW = 10;
+        public const int LONG_SHIELD_COOLDOWN = 360;
+        public const int PERFECT_PARRY_WINDOW = 10;
+
+        public static int ShieldCooldown(Player player) => player.HasEffect<DreadShellEffect>() || player.HasEffect<PumpkingsCapeEffect>() ? LONG_SHIELD_COOLDOWN : BASE_SHIELD_COOLDOWN;
 
         void RaisedShieldEffects()
         {
@@ -935,12 +941,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.velocity.Y *= 0.85f;
             }
 
-            int cooldown = dreadEffect || pumpkingEffect ? LONG_SHIELD_COOLDOWN : BASE_SHIELD_COOLDOWN;
+            int cooldown = ShieldCooldown(Player);
 
             if (shieldCD < cooldown)
                 shieldCD = cooldown;
-
-            CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, () => (float)shieldCD / cooldown);
         }
 
         public void UpdateShield()

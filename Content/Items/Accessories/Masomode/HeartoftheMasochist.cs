@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<ChalicePotionEffect>(Item);
             player.AddEffect<MasoTrueEyeMinion>(Item);
             fargoPlayer.GravityGlobeEXItem = Item;
-            fargoPlayer.WingTimeModifier += 1f;
+            fargoPlayer.WingTimeModifier += 0.5f;
 
             //precision seal
             player.buffImmune[ModContent.BuffType<SmiteBuff>()] = true;

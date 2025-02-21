@@ -44,7 +44,8 @@ There is a cooldown of 3 seconds between uses"); */
             //on cooldown
             if (dashCD > 0)
             {
-                CooldownBarManager.Activate("ParadoxCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/ParadoxWolf/ParadoxWolfSoul").Value, Color.DarkRed,
+                if (player.whoAmI == Main.myPlayer)
+                    CooldownBarManager.Activate("ParadoxCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Patreon/ParadoxWolf/ParadoxWolfSoul").Value, Color.DarkRed,
                         () => (float)dashCD / 180f);
                 dashCD--;
 
@@ -133,7 +134,7 @@ There is a cooldown of 3 seconds between uses"); */
                 player.dashDelay = -1;
                 dashTime = 20;
 
-                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, new Vector2(player.velocity.X, 0), ModContent.ProjectileType<WolfDashProj>(), (int)(50 * player.GetDamage(DamageClass.Melee).Additive), 0f, player.whoAmI);
+                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, new Vector2(player.velocity.X, 0), ModContent.ProjectileType<WolfDashProj>(), (int)(50 * player.ActualClassDamage(DamageClass.Melee)), 0f, player.whoAmI);
 
                 SoundEngine.PlaySound(SoundID.NPCDeath8, player.Center);
             }

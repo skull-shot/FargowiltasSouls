@@ -60,16 +60,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void HealRepel(Player player)
         {
             Item effectItem = player.EffectItem<HallowEffect>();
-            if (effectItem != null || !player.HasEffectEnchant<HallowEffect>())
+            if (!player.HasEffectEnchant<HallowEffect>())
                 return;
+            int duration = player.ForceEffect<HallowEffect>() ? 120 : 60;
+            player.FargoSouls().HallowRepelTime = duration;
+
             SoundEngine.PlaySound(SoundID.Item72);
-            Particle p = new HallowEnchantBarrier(player.Center, Vector2.Zero, RepelRadius / 160f, 32);
+            Particle p = new HallowEnchantBarrier(player.Center, Vector2.Zero, RepelRadius / 160f, duration + 20, player: player, baseOpacity: 0.5f);
             p.Spawn();
 
-            foreach (Projectile projectile in Main.projectile.Where(p => p.hostile && FargoSoulsUtil.CanDeleteProjectile(p) && p.Distance(player.Center) <= RepelRadius))
+        }
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.FargoSouls().HallowRepelTime > 0)
             {
-                projectile.velocity = Vector2.Normalize(projectile.Center - player.Center) * projectile.velocity.Length();
-                projectile.hostile = false;
+                player.FargoSouls().HallowRepelTime--;
+                foreach (Projectile projectile in Main.projectile.Where(p => p.hostile && FargoSoulsUtil.CanDeleteProjectile(p) && p.Distance(player.Center) <= RepelRadius * 0.6f))
+                {
+                    projectile.velocity = Vector2.Normalize(projectile.Center - player.Center) * projectile.velocity.Length();
+                    projectile.hostile = false;
+                }
             }
         }
     }

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.UI.Elements;
@@ -160,11 +161,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.friendly = false;
                 if (chargeLevel < maxCharge * 5) //yes, allow overcharge
                     chargeLevel++;
-                CooldownBarManager.Activate("UmbraRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/UmbraRegalia").Value, Color.DarkRed, 
-                    () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<UmbraRegalia>());
+                if (player.whoAmI == Main.myPlayer)
+                    CooldownBarManager.Activate("UmbraRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/UmbraRegalia").Value, Color.DarkRed, 
+                        () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<UmbraRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ChargeSound"), Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
                 }
                 Projectile.localAI[1] = chargeLevel; //store the charge amount
                                                      //int d = Dust.NewDust(player.MountedCenter + Projectile.velocity * Projectile.Size.Length() * 0.95f, 0, 0, DustID.CrystalPulse);

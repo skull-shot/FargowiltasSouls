@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.UI
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityEnabled"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistEnabled"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityDisabled"),
-                Language.GetTextValue("Mods.FargowiltasSouls.UI.RightClickToggle"),
+                Language.GetTextValue("Mods.FargowiltasSouls.UI.RightClickSelectDifficulty"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.HoldShift"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedEternity"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedMasochist"),

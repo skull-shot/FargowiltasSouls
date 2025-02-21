@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Items.Explosives;
+using Fargowiltas.NPCs;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -20,6 +21,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -30,6 +32,15 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void PreUpdate()
         {
             Toggler.TryLoad();
+
+            if (DevianttIntroduction)
+            {
+                if (Player.TalkNPC?.type == ModContent.NPCType<Deviantt>() && Player.TalkNPC.HasGivenName)
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.UnconsciousDeviantt.Introduction", Player.TalkNPC.GivenName);
+                    DevianttIntroduction = false;
+                }
+            }
 
             if (Player.CCed)
             {
@@ -531,6 +542,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
 
+            if (FallthroughCD > 0)
+                FallthroughCD--;
+
             if (VortexCD > 0)
                 VortexCD--;
 
@@ -553,6 +567,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
+
+            if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
+                EbonwoodCharge = 0;
+
+            if (HallowRepelTime > 0 && !Player.HasEffect<HallowEffect>())
+                HallowRepelTime = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
             if (SquireEnchantActive)
@@ -652,8 +672,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 DreadShellVulnerabilityTimer--;
 
-                Player.statDefense -= 30;
-                Player.endurance -= 0.3f;
+                Player.statDefense -= 15;
+                Player.endurance -= 0.15f;
             }
 
             if (HallowHealTime > 0)

@@ -23,7 +23,9 @@ namespace FargowiltasSouls.Common.Graphics.Particles
 			UseBloom = useBloom;
 			bloomColor ??= Color.White;
 			BloomColor = bloomColor.Value;
-		}
+
+            Rotation = -MathHelper.PiOver2;
+        }
 
 		public override void Update()
 		{

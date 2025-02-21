@@ -19,6 +19,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
+using FargowiltasSouls.Core.Systems;
 
 namespace FargowiltasSouls.Content.NPCs
 {
@@ -29,7 +31,7 @@ namespace FargowiltasSouls.Content.NPCs
         int slide;
         float number;
         int questionmarkinterpolant;
-        string npcname;
+
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 3;
@@ -52,7 +54,6 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void SetDefaults()
         {
-            NPC.townNPC = true;
             NPC.friendly = true;
             NPC.aiStyle = -1;
             NPC.lifeMax = 250;
@@ -61,6 +62,8 @@ namespace FargowiltasSouls.Content.NPCs
             NPC.height = 46;
             NPC.width = 18;
         }
+
+        public override bool CanChat() => true;
 
         public override void SetChatButtons(ref string button, ref string button2)
         {
@@ -71,20 +74,27 @@ namespace FargowiltasSouls.Content.NPCs
         {
             if (firstButton)
             {
-                NPC.Transform(ModContent.NPCType<Mutant>());
-                int DeviIndex = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
-                if (DeviIndex != -1)
+                if (Main.netMode != NetmodeID.SinglePlayer)
                 {
-                    NPC devi = Main.npc[DeviIndex];
-                    if (devi.active)
-                    {
-                        npcname = devi.GivenName;
-                    }
+                    var packet = Mod.GetPacket();
+                    packet.Write((byte)FargowiltasSouls.PacketID.WakeUpMutant);
+                    packet.Write((byte)NPC.whoAmI);
+                    packet.Send();
                 }
-                Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction", NPC.GivenName);
+                else
+                {
+                    NPC.Transform(ModContent.NPCType<Mutant>());
+                    WorldSavingSystem.HaveForcedMutantFromKS = true;
+                }
+                    
+                int mutant = NPC.FindFirstNPC(ModContent.NPCType<Mutant>());
+                if (mutant != -1)
+                {
+                    Main.npcChatText = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.ReleasedMutant.Introduction");
+                }
+                
             }
         }
-
 
         public override string GetChat()
         {
@@ -93,10 +103,6 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void OnSpawn(IEntitySource source)
         {
-            
-
-
-
             if (NPC.Center.X < Main.LocalPlayer.Center.X)
             {
                 NPC.spriteDirection = 1;
@@ -117,17 +123,18 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void AI()
         {
-
             DrawOffsetY = -2;
             
 
             if (NPC.ai[0] == 1)
             {
                 NPC.velocity.X = MathHelper.Lerp(number, 0, ++slide * 0.02f);
+                NPC.netUpdate = true;
                 if (NPC.velocity.X >= 0 && number == -3)
                 {
                     NPC.velocity.X = 0;
                     NPC.ai[0] = 2;
+
                 }
 
                 if (NPC.velocity.X <= 0 && number == 3)
@@ -150,13 +157,26 @@ namespace FargowiltasSouls.Content.NPCs
                     }
                 }
 
-                if (NPC.Distance(Main.LocalPlayer.Center) >= 1500)
+                int p = Player.FindClosest(NPC.Center, 3000, 3000);
+                if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p] is Player player && player.Alive() && NPC.Distance(player.Center) >= 1500)
                 {
                     NPC.Transform(ModContent.NPCType<Mutant>());
+                    WorldSavingSystem.HaveForcedMutantFromKS = true;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.WorldData);
                 }
                 
             }
 
+            if (NPC.velocity.Y == 0 && landsound == false)
+            {
+                FargoSoulsUtil.ScreenshakeRumble(5);
+                SoundEngine.PlaySound(FargosSoundRegistry.MutantLand, NPC.Center);
+                NPC.ai[0] = 1;
+                landsound = true;
+                Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+                Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+            }
         }
         public override void FindFrame(int frameHeight)
         {
@@ -166,15 +186,6 @@ namespace FargowiltasSouls.Content.NPCs
             }
             if (NPC.velocity.Y == 0)
             {
-                if (landsound == false)
-                {
-                    FargoSoulsUtil.ScreenshakeRumble(5);
-                    SoundEngine.PlaySound(FargosSoundRegistry.MutantLand, NPC.Center);
-                    NPC.ai[0] = 1;
-                    landsound = true;
-                    Gore gore = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
-                    Gore gore1 = Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
-                }
                 NPC.frame.Y = 1 * frameHeight;
                 NPC.rotation = 0;
             }
@@ -188,7 +199,7 @@ namespace FargowiltasSouls.Content.NPCs
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 bluh = new Vector2(0, (float)Math.Sin(Main.GameUpdateCount / 90f * MathHelper.TwoPi) * 2f);
-            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/MutantQuestionMark", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D QuestionMark = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/ReleasedMutant_Head", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rectangle = new(0, 0, QuestionMark.Width, QuestionMark.Height);
             if (NPC.ai[0] == 2 && NPC.ai[1] >= 15)
             {

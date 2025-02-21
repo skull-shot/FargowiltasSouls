@@ -60,6 +60,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //force of timber
         public bool MahoganyCanUseDR;
+        public float EbonwoodCharge;
         public int ShadewoodCD;
         public bool WoodEnchantDiscount;
         public int PearlwoodCritDuration;
@@ -183,6 +184,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int chillLength;
         public int CHILL_DURATION => Player.HasEffect<FrostEffect>() ? 60 * 20 : 60 * 15;
 
+        public int HallowRepelTime;
         public int TurtleCounter;
         public int TurtleShellHP = 25;
         public int turtleRecoverCD = 240;
@@ -227,6 +229,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         //maso items
         public Item SlimyShieldItem;
         public bool SlimyShieldFalling;
+        public int FallthroughCD;
         public int AgitatingLensCD;
         public Item DarkenedHeartItem;
         public int DarkenedHeartCD;

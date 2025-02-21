@@ -380,17 +380,15 @@ GelatinFlyer.DisplayName: Райский слизень
 CursedCoffinInactive.DisplayName: Загадочный Саркофаг
 
 UnconsciousDeviantt: {
-	// DisplayName: ???
+	DisplayName: ???
 	// Unconscious: ...
-	// UnconsciousChatButton: Wake her up
-	// Introduction: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems like they aren't around right now. I'm sure they'll show up eventually!
-	// IntroductionHasMetBros: Hi! Huh? Am I okay? Why wouldn't I be? I'm {0}! I would introduce you to my bros but it seems you've met them already, they're the coolest!
+	// UnconsciousChatButton: Check for a pulse
+	// Introduction: Huh? Am I okay? I guess my totally planned falling out of the sky trick looked like it hurt. I'm {0}, your new (and way cooler than the other) guide! Take these before you head off, I'm sure they'll be useful to you!
 }
 
 ReleasedMutant: {
-	// DisplayName: ???
-	// Chat: Was about time I got out of that bath. What? Giant slime? Those are the same thing, aren't they?
+	DisplayName: ???
+	// Chat: *yawns* ...why did you wake me up? Giant slime monster? ...you mean my bed? Ah, forget it... I'll just get a new one.
 	// TalkToHim: Who are you?
-	// Introduction: Names {0}, though I'm sure you've heard of me before. I'll sell to you what I have, granted you give me money, of course.
-	// Census.SpawnCondition: Conditions unknown
+	// Introduction: You've already heard of me. But who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
 }

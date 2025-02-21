@@ -24,7 +24,7 @@ MiningHelmet: Increases Undead Miner spawn rates
 MoonsDrops: Bosses and minibosses drop no items until wave {0}
 MoonsWaves: Dying decreases wave progress
 WhipSpeed: Does not benefit from melee speed bonuses
-WhipStack: Whip buffs/debuffs can't stack
+WhipStack: Tag damage has reduced effect when stacked
 DefensePrefix: Adjusted prefix stats: reduced defense before Hardmode, +5 max life
 DefensePrefix_HM: Adjusted prefix stats: +5 max life
 ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed

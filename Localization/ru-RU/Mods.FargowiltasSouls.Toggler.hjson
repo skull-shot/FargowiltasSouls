@@ -112,6 +112,7 @@ DevianttHearts: Самонавод. сердца при атаке
 AbomWandCrit: Поддержка призрачного Выродкка
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: Слизневые шары
+// PlatformFallthroughEffect: Fall Through Platforms
 SlimeFallEffect: Увеличенная скорость падения
 AgitatingLensEffect: Косы при рывках
 AgitatingLensInstall: Установка свирепости
@@ -124,7 +125,7 @@ RainbowSlimeMinion: Прислужник радужный слизень
 RainbowHealEffect: Автом. лечебные зелья
 NymphPerfumeEffect: Атаки создают сердца
 SqueakEffect: Игрушка-пищалка при уроне
-WretchedPouchEffect: Установка проклятья несчастья
+WretchedPouchEffect: Теневое пламя несчастья
 ClippedEffect: Накладывать оборванные крылья
 WyvernBalls: Светлые сферы полёта
 TribalCharmClickBonus: Бонус кликов амулета племени

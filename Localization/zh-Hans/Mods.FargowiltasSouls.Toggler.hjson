@@ -112,6 +112,7 @@ DevianttHearts: 追踪红心攻击
 AbomWandCrit: 幽灵憎恶攻击
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: 凝胶球
+// PlatformFallthroughEffect: Fall Through Platforms
 SlimeFallEffect: 提高下落速度
 AgitatingLensEffect: 鲜血镰刀
 AgitatingLensInstall: 狂暴负载
@@ -124,7 +125,7 @@ RainbowSlimeMinion: 彩虹史莱姆召唤物
 RainbowHealEffect: 自动使用治疗药水
 NymphPerfumeEffect: 攻击生成心
 SqueakEffect: 击中发出吱吱声
-WretchedPouchEffect: 获得诅咒之魔
+WretchedPouchEffect: 诅咒暗影焰
 ClippedEffect: 造成折翼减益
 WyvernBalls: 飞行光球
 TribalCharmClickBonus: 部落挂坠点击加成

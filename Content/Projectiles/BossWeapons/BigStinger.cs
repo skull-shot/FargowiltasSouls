@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Common.Graphics.Particles;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -8,13 +11,14 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class BigStinger : ModProjectile
+    public class BigStinger : ModProjectile, IPixelatedPrimitiveRenderer
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Big Stinger");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
@@ -25,9 +29,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 240;
-            Projectile.width = 12;
-            Projectile.height = 12;
-            Projectile.scale *= 3f;
+            Projectile.width = 22;
+            Projectile.height = 38;
             Projectile.extraUpdates = 2;
 
             Projectile.penetrate = 1;
@@ -35,6 +38,16 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame += 1;
+                if (Projectile.frame > 1)
+                    Projectile.frame = 0;
+                Projectile.frameCounter = 0;
+            }
+                
+
+
             //stuck in enemy
             if (Projectile.ai[0] == 1)
             {
@@ -155,18 +168,21 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             for (int i = 0; i < 10; i++)
             {
-                int num92 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, Projectile.velocity.X, Projectile.velocity.Y, 0, default, 0.9f);
+                /*int num92 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, Projectile.velocity.X, Projectile.velocity.Y, 0, default, 0.9f);
                 Main.dust[num92].noGravity = true;
                 Main.dust[num92].velocity *= 0.25f;
-                Main.dust[num92].fadeIn = 1.3f;
+                Main.dust[num92].fadeIn = 1.3f;*/
+                Particle p = new RectangleParticle(Projectile.Center, Projectile.velocity * 0.7f + Main.rand.NextVector2Circular(15, 45), Color.Yellow, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
+                p.Spawn();
             }
+            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity, ModContent.Find<ModGore>(Mod.Name, "BigStingerGore").Type, Projectile.scale);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
         }
 
         private static void DustRing(Projectile proj, int max)
         {
             //dust
-            for (int i = 0; i < max; i++)
+            /*for (int i = 0; i < max; i++)
             {
                 Vector2 vector6 = Vector2.UnitY * 5f;
                 vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + proj.Center;
@@ -174,7 +190,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.GemTopaz, 0f, 0f, 0, default, 1.5f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity = vector7;
-            }
+            }*/
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -191,7 +207,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             float num160 = 0f;
 
             int num161 = num159;
-            while (Projectile.ai[0] != 1 && num161 < num157) //doesnt draw trail while stuck in enemy
+            /*while (Projectile.ai[0] != 1 && num161 < num157) //doesnt draw trail while stuck in enemy
             {
                 Color color26 = color25;
                 color26 = Projectile.GetAlpha(color26);
@@ -202,11 +218,33 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 SpriteEffects effects = spriteEffects;
                 Main.EntitySpriteDraw(texture2D3, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, num165 + Projectile.rotation * num160 * (num161 - 1) * -(float)spriteEffects.HasFlag(SpriteEffects.FlipHorizontally).ToDirectionInt(), origin2, Projectile.scale * 0.8f, effects, 0);
                 num161++;
-            }
+            }*/
+
+            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/BigStingerGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+
+            Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0.5f, Projectile.gfxOffY - 0.1f), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.Orange, Projectile.rotation, origin2, Projectile.scale * 1.1f * Main.cursorScale, spriteEffects, 0);
 
             Color color29 = Projectile.GetAlpha(color25);
             Main.EntitySpriteDraw(texture2D3, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color29, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
+        }
+
+        public float WidthFunction(float completionRatio)
+        {
+            float baseWidth = Projectile.width * 0.8f;
+            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
+        }
+
+        public Color ColorFunction(float completionRatio)
+        {
+            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.StingerTrail");
+            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }
 }
