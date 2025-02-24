@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items
         /// </summary>
         public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
         {
-            return EmodeBalancePerType(item.type, ref balanceNumber, ref balanceTextKeys, ref extra);
+            return EmodeBalancePerID(item.type, ref balanceNumber, ref balanceTextKeys, ref extra);
         }
         public static EModeChange EmodeBalancePerID(int itemType, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
         {
