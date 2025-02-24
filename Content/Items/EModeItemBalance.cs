@@ -24,7 +24,11 @@ namespace FargowiltasSouls.Content.Items
         /// </summary>
         public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
         {
-            switch (item.type)
+            return EmodeBalancePerType(item.type, ref balanceNumber, ref balanceTextKeys, ref extra);
+        }
+        public static EModeChange EmodeBalancePerID(int itemType, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
+        {
+            switch (itemType)
             {
                 case ItemID.RodofDiscord:
                 case ItemID.RodOfHarmony:
@@ -440,6 +444,15 @@ namespace FargowiltasSouls.Content.Items
                 default:
                     return EModeChange.None;
             }
+        }
+
+        public static bool HasEmodeChange(Player player, int itemID)
+        {
+            string extra = string.Empty;
+            float balanceNumber = -1;
+            string[] balanceTextKeys = null;
+            EModeChange balance = EmodeBalancePerID(itemID, ref balanceNumber, ref balanceTextKeys, ref extra);
+            return balance != EModeChange.None;
         }
 
         public static void BalanceWeaponStats(Player player, Item item, ref StatModifier damage)
