@@ -128,7 +128,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
-
+                    /*
                 case ItemID.NorthPole:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.12f;
@@ -138,7 +138,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.1f;
                     return EModeChange.Buff;
-
+                    */
                 case ItemID.Razorpine:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.8f;
@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Nerf;
 
                 case ItemID.SlimeStaff:
-                case ItemID.ImpStaff:
+                //case ItemID.ImpStaff:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.1f;
                     return EModeChange.Buff;
