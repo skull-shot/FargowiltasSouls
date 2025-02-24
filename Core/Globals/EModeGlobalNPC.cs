@@ -124,6 +124,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!npc.dontTakeDamage)
             {
+                /*
                 bool boss = npc.boss || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsTail;
                 if (npc.position.Y / 16 < Main.worldSurface * 0.35f && !boss) //enemy in space
                     npc.AddBuff(BuffID.Suffocation, 2, true);
@@ -133,7 +134,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (FargoSoulsUtil.HostCheck)
                         npc.AddBuff(BuffID.OnFire, 2);
                 }
-
+                */
                 Vector2 tileCenter = npc.Center;
                 tileCenter.X /= 16;
                 tileCenter.Y /= 16;
