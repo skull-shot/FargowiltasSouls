@@ -257,7 +257,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void ShadowDodgeNerf()
         {
-            if (Player.shadowDodge) //prehurt hook not called on titanium dodge
+            if (Player.shadowDodge && EmodeItemBalance.HasEmodeChange(Player, ItemID.HallowedPlateMail)) //prehurt hook not called on titanium dodge
                 Player.AddBuff(ModContent.BuffType<HolyPriceBuff>(), 600);
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
