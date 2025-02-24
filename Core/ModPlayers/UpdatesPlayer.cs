@@ -542,6 +542,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
 
+            if (FallthroughCD > 0)
+                FallthroughCD--;
+
             if (VortexCD > 0)
                 VortexCD--;
 
@@ -566,7 +569,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HuntressStage--;
 
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
-                EbonwoodCharge--;
+                EbonwoodCharge = 0;
+
+            if (HallowRepelTime > 0 && !Player.HasEffect<HallowEffect>())
+                HallowRepelTime = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
             if (SquireEnchantActive)

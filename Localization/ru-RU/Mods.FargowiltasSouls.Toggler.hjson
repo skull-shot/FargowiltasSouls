@@ -112,6 +112,7 @@ DevianttHearts: Самонавод. сердца при атаке
 AbomWandCrit: Поддержка призрачного Выродкка
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: Слизневые шары
+// PlatformFallthroughEffect: Fall Through Platforms
 SlimeFallEffect: Увеличенная скорость падения
 AgitatingLensEffect: Косы при рывках
 AgitatingLensInstall: Установка свирепости

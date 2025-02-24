@@ -1,8 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -24,6 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         float colorlerp;
         bool playedsound = false;
         int spawnedDamage;
+
         public override void SetDefaults()
         {
             Projectile.width = 20;
@@ -43,7 +47,6 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.idStaticNPCHitCooldown = 180;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
-
         public override void AI()
         {
             Projectile.frameCounter = Projectile.frameCounter + 1;
@@ -184,44 +187,72 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.damage > spawnedDamage / 5)
-                Projectile.damage = (int)Math.Min(Projectile.damage - 1, Projectile.damage * 0.6);
+                Projectile.damage = (int)Math.Min(Projectile.damage - 1, Projectile.damage * 0.8);
 
             Projectile.velocity = Projectile.velocity.RotatedByRandom(MathHelper.TwoPi);
             Projectile.ai[0] = Projectile.velocity.ToRotation();
             Projectile.netUpdate = true;
 
-            if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[Projectile.type] < 30)
+            if (Projectile.owner == Main.myPlayer)
             {
                 target.AddBuff(BuffID.Electrified, 120);
+
+                // Arc count finished
+                if (Projectile.ai[2] <= 0)
+                {
+                    Projectile.Kill();
+                    Projectile.timeLeft = 0;                    
+                    return;
+                }
 
                 float closestDist = 1000f;
                 NPC closestNPC = null;
 
+                bool Conditions(NPC npc) => npc.active && npc.CanBeChasedBy() && npc.whoAmI != target.whoAmI && npc.Distance(target.Center) < closestDist && !npc.HasBuff(BuffID.Electrified)
+                        && Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0)
+                        && Projectile.perIDStaticNPCImmunity[Projectile.type][npc.whoAmI] < Main.GameUpdateCount;
+
+                // Prioritize bosses
                 for (int j = 0; j < Main.maxNPCs; j++)
                 {
                     NPC npc = Main.npc[j];
 
-                    if (npc.active && npc.CanBeChasedBy() && npc.whoAmI != target.whoAmI && npc.Distance(target.Center) < closestDist && !npc.HasBuff(BuffID.Electrified)
-                        && Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0)
-                        && Projectile.perIDStaticNPCImmunity[Projectile.type][npc.whoAmI] < Main.GameUpdateCount)
+                    if (Conditions(npc) && npc.boss)
                     {
                         closestNPC = npc;
                         closestDist = npc.Distance(target.Center);
                     }
                 }
+                // Didn't find a boss
+                // Find a non-boss instead
+                if (closestNPC == null)
+                {
+                    for (int j = 0; j < Main.maxNPCs; j++)
+                    {
+                        NPC npc = Main.npc[j];
+
+                        if (Conditions(npc))
+                        {
+                            closestNPC = npc;
+                            closestDist = npc.Distance(target.Center);
+                        }
+                    }
+                }
 
                 if (closestNPC != null)
                 {
-                    Vector2 velocity = target.SafeDirectionTo(closestNPC.Center) * 20f;
+                    Vector2 velocity = Projectile.SafeDirectionTo(closestNPC.Center) * 20f;
                     float ai0 = velocity.ToRotation();
                     //Projectile.Center = closestNPC.Center; //help ensure it hits
                     //Projectile.netUpdate = true;
 
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, velocity, Projectile.type, Projectile.damage, Projectile.knockBack, Projectile.owner, ai0, spawnedDamage);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, Projectile.type, Projectile.damage, Projectile.knockBack, Projectile.owner, ai0, spawnedDamage, Projectile.ai[2] - 1);
                     Main.player[Projectile.owner].ownedProjectileCounts[Projectile.type]++;
 
                     //ensure it hits.. ?
                     //closestNPC.StrikeNPC(Projectile.damage, 0, Projectile.direction);
+                    Projectile.Kill();
+                    Projectile.timeLeft = 0;
                 }
             }
         }

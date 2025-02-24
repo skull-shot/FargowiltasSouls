@@ -41,6 +41,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.Slimed] = true;
 
             player.AddEffect<SlimeFallEffect>(Item);
+            player.AddEffect<PlatformFallthroughEffect>(Item);
 
             if (player.AddEffect<SlimyShieldEffect>(Item))
             {

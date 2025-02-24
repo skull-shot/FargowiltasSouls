@@ -66,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     Projectile.netUpdate = true;
                 }
 
-                Projectile.rotation = (Main.MouseWorld - Projectile.Center).ToRotation() - 5;
+                Projectile.rotation = (Main.MouseWorld - Projectile.Center).ToRotation() + MathHelper.PiOver2;
             }
 
             if (Main.netMode == NetmodeID.Server)
