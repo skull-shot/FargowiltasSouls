@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.value = Item.sellPrice(0, 4, 0);
             Item.rare = ItemRarityID.LightRed;
             Item.shootsEveryUse = true;
-            //Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<BaronTuskShrapnel>();
             Item.shootSpeed = 15f;

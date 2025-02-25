@@ -27,17 +27,17 @@ namespace FargowiltasSouls.Content.Items
             {
                 //item.noMelee = false;
                 if (!Broadswords.Contains(item.type))
-                    Broadswords = Broadswords.Append(item.type).ToArray();
+                    Broadswords.Add(item.type);
 
             }
         }
         public bool VanillaShoot = false;
         public SoundStyle? SwingSound = null;
         //phasesabers and shiny swings in by default because vanilla fucks them up
-        public static int[] Broadswords = { ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.YellowPhasesaber, ItemID.OrangePhasesaber, ItemID.RedPhasesaber, ItemID.WhitePhasesaber,
-            ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade};
+        public static List<int> Broadswords = [ ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.YellowPhasesaber, ItemID.OrangePhasesaber, ItemID.RedPhasesaber, ItemID.WhitePhasesaber,
+            ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade];
 
-        public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>() };
+        public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<TreeSword>() };
         public static bool IsBroadsword(Item item)
         {
             
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Items
                 {
                     mplayer.shouldShoot = false;
                     VanillaShoot = true;
-                    MethodInfo PlayerItemCheck_Shoot = typeof(Player).GetMethod("ItemCheck_Shoot", BindingFlags.NonPublic | BindingFlags.Instance);
+                    MethodInfo PlayerItemCheck_Shoot = typeof(Player).GetMethod("ItemCheck_Shoot", LumUtils.UniversalBindingFlags);
                     PlayerItemCheck_Shoot.Invoke(player, [player.whoAmI, item, item.damage]);
                     VanillaShoot = false;
 
