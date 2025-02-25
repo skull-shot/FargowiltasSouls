@@ -1766,7 +1766,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.NebulaSphere:
                 case ProjectileID.NebulaLaser:
                 case ProjectileID.NebulaBolt:
-                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
                     target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
                     break;
 
