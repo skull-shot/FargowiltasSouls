@@ -1,3 +1,4 @@
+using Fargowiltas;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -1059,7 +1060,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type])
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
         }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
