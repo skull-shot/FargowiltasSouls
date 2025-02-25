@@ -340,7 +340,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float progress = MathHelper.Clamp((timer * 2f) / attackDuration, 0, 1);
                             int shotTime = (int)(17f * MathHelper.Lerp(startMult, 1f, progress));
                             shotTimer++;
-                            if (shotTimer >= shotTime && timer < 60 * 6)
+                            if (shotTimer >= shotTime && timer > 0 && timer < 60 * 6)
                             {
                                 shotTimer = 0;
                                 foreach (NPC leaf in Main.npc.Where(n => n.active && n.type == ModContent.NPCType<CrystalLeaf>() && n.ai[0] == npc.whoAmI && n.ai[1] == innerRingDistance))
@@ -475,7 +475,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     else
                                     {
                                         repeatCheck = 0;
-                                        timer = 0;
+                                        timer = -90;
                                         state = 3;
                                         npc.TargetClosest(false);
                                     }
@@ -499,7 +499,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     //if (offset.Y > 0)
                                     //    MovementAvoidWalls(player.Center + offset.RotateTowards(Vector2.UnitY.ToRotation(), 0.1f));
                                     //else
-                                    MovementAvoidWalls(player.Center + offset.RotateTowards((-Vector2.UnitY).ToRotation(), 0.05f));
+                                    float speed = 0.05f;
+                                    if (timer < 0)
+                                        speed /= 8;
+                                    MovementAvoidWalls(player.Center + offset.RotateTowards((-Vector2.UnitY).ToRotation(), speed));
                                 }
                                 else
                                     npc.velocity *= 0.96f;
@@ -548,9 +551,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                             ModContent.ProjectileType<PlanteraMushroomThing>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
                                     }
                                 }
-                                if (timer == vineSpawnTime * 5 - 110)
+                                const int endTime = 550;
+                                if (timer == endTime - 110)
                                     Vineburst();
-                                if (timer == vineSpawnTime * 5 - 60) // kill and instantly respawn ring, 1 second before attack1 starts
+                                if (timer == endTime - 60) // kill and instantly respawn ring, 1 second before attack1 starts
                                 {
                                     for (int i = 0; i < Main.maxNPCs; i++)
                                     {
@@ -562,9 +566,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                                     
                                 }
-                                if (timer > vineSpawnTime * 5)
+                                if (timer > endTime)
                                 {
-                                    timer = 0;
+                                    timer = -90;
                                     state = 1;
                                     npc.TargetClosest(false);
                                 }
