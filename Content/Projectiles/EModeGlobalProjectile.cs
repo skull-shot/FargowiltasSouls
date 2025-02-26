@@ -509,7 +509,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 WormPierceResist = 0;
 
             //Slower friendly projectiles in Snow biome
-            if (projectile.friendly)
+            if (projectile.friendly && !ProjectileID.Sets.IsAWhip[projectile.type])
             {
                 Player player = Main.player[projectile.owner];
                 if (player.HasBuff(ModContent.BuffType<HypothermiaBuff>()) && projectile.velocity.Length() > 3f)
