@@ -170,7 +170,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 CrossNecklaceTimer = 0;
             }
 
-            if (Player.iceBarrier)
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
                 Player.GetDamage(DamageClass.Generic) -= 0.10f;
 
             if (Player.setSquireT2 || Player.setSquireT3 || Player.setMonkT2 || Player.setMonkT3 || Player.setHuntressT2 || Player.setHuntressT3 || Player.setApprenticeT2 || Player.setApprenticeT3 || Player.setForbidden)

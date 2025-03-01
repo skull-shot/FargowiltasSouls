@@ -22,6 +22,7 @@ using FargowiltasSouls.Content.Bosses.Champions.Terra;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -114,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant)
+                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith))
                     {
                         projectile.usesLocalNPCImmunity = false;
                         projectile.localNPCHitCooldown = 0;
@@ -201,7 +202,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     EModeCanHurt = false;
                     break;
                 case ProjectileID.SuperStar:
-                    projectile.penetrate = 7;
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
+                        projectile.penetrate = 7;
                     break;
                 case ProjectileID.WeatherPainShot:
                     projectile.idStaticNPCHitCooldown = 10;
@@ -256,7 +258,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.VampireHeal:
                     //each lifesteal hits timer again when above 50% life (total, halved lifesteal rate)
-                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 / 3)
+                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 / 3 && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.VampireKnives))
                         Main.player[projectile.owner].lifeSteal -= projectile.ai[1];
 
                     //each lifesteal hits timer again when above 75% life (stacks with above, total 1/3rd lifesteal rate)
@@ -1392,6 +1394,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.IceBolt: //Ice Blade projectile
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.IceBlade))
                     target.AddBuff(BuffID.Frostburn, 60 * 3);
                     break;
                 case ProjectileID.SporeCloud:
