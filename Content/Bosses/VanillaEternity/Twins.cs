@@ -496,7 +496,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                     if (npc.ai[1] == 0)
                         shotVel *= 2;
-                    npc.velocity -= shotVel / 4f;
+                    npc.velocity -= shotVel / 7f;
                     
 
                 }
@@ -654,6 +654,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             break;
 
                         case 1: //slowing down, beginning rotation
+                            if (npc.HasPlayerTarget)
+                            {
+                                Player player = Main.player[npc.target];
+                                Vector2 pos = player.Center + player.DirectionTo(npc.Center) * 250;
+                                npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, pos, npc.velocity, 0.9f, 0.9f);
+                            }
                             npc.velocity *= 1f - (npc.ai[0] - 4f) / 120f;
                             npc.localAI[1] = 0f;
                             //if (--npc.ai[2] > 295f) npc.ai[2] = 295f;

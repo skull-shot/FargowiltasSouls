@@ -1643,7 +1643,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 //target.AddBuff(ModContent.BuffType<MutantNibble>(), 300);
                 target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 300);
                 //target.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
+                //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
             }
             target.AddBuff(BuffID.Bleeding, 600);
         }

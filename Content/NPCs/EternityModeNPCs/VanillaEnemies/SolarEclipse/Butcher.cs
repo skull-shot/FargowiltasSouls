@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SolarEcl
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 240);
             target.AddBuff(BuffID.Bleeding, 600);
         }
     }

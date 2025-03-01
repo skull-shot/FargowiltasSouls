@@ -511,7 +511,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 WormPierceResist = 0;
 
             //Slower friendly projectiles in Snow biome
-            if (projectile.friendly)
+            if (projectile.friendly && !ProjectileID.Sets.IsAWhip[projectile.type])
             {
                 Player player = Main.player[projectile.owner];
                 if (player.HasBuff(ModContent.BuffType<HypothermiaBuff>()) && projectile.velocity.Length() > 3f)
@@ -1769,7 +1769,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.NebulaSphere:
                 case ProjectileID.NebulaLaser:
                 case ProjectileID.NebulaBolt:
-                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
                     target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
                     break;
 

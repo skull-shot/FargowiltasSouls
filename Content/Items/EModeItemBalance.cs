@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items
         /// Default extra is empty. <br />
         /// Number and extra is used on the first tooltip line.
         /// </summary>
-        public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
+        public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra) // don't change this method definition in order to not break detours
         {
             return EmodeBalancePerID(item.type, ref balanceNumber, ref balanceTextKeys, ref extra);
         }

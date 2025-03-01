@@ -190,7 +190,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+                //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }
