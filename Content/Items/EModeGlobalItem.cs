@@ -11,6 +11,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items
 {
@@ -201,8 +202,18 @@ namespace FargowiltasSouls.Content.Items
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            if (item.type == ItemID.PalladiumSword)
-                scale += 0.4f;
+            string extra = string.Empty;
+            float balanceNumber = -1;
+            string[] balanceTextKeys = null;
+            EmodeItemBalance.EmodeBalance(ref item, ref balanceNumber, ref balanceTextKeys, ref extra);
+            if (balanceTextKeys != null)
+            {
+                for (int i = 0; i < balanceTextKeys.Length; i++)
+                {
+                    if (balanceTextKeys[i] == "Scale" || balanceTextKeys[i] == "ScaleNoTooltip")
+                        scale += float.Parse(extra);
+                }
+            }
         }
         public override bool? UseItem(Item item, Player player)
         {

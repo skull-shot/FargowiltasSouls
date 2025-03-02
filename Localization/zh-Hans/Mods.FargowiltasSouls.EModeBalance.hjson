@@ -5,6 +5,8 @@ Damage: 伤害降低{0}%
 DamagePositive: 伤害提升{0}%
 Speed: 攻击速度降低{0}%
 SpeedPositive: 攻击速度提升{0}%
+// Scale: Reduced size by {0}%
+// ScalePositive: Increased size by {0}%
 RodofDiscord: 在Boss战中，每次使用都会消耗生命
 Split: 降低分裂频率
 ChlorophyteBullet: 速度减慢，存在时间降低

@@ -5,6 +5,8 @@ Damage: Урон снижен на {0}%
 DamagePositive: Урон увеличен на {0}%
 Speed: Скорость снижена на {0}%
 SpeedPositive: Скорость увеличена на {0}%
+// Scale: Reduced size by {0}%
+// ScalePositive: Increased size by {0}%
 RodofDiscord: Во время битвы боссов требует ваше здоровье для использования
 Split: Уменьшена частота разделения
 ChlorophyteBullet: Снижены скорость и длительность

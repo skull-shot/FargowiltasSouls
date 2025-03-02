@@ -5,6 +5,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -337,11 +338,13 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
                 case ItemID.PalladiumPike:
                     balanceNumber = -1;
-                    balanceTextKeys = ["SpearRework", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["SpearRework", "Scale", "PalladiumPikeRework"];
                     return EModeChange.Buff;
                 case ItemID.PalladiumSword:
                     balanceNumber = 1.25f;
-                    balanceTextKeys = ["Speed", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["Speed", "Scale", "PalladiumPikeRework"];
                     return EModeChange.Buff;
 
                 case ItemID.TitaniumSword:
@@ -550,8 +553,19 @@ namespace FargowiltasSouls.Content.Items
                                 break;
                             }
 
+                        case "Scale":
+                            {
+                                float scaleNumber = float.Parse(extra);
+                                EModeChange change = scaleNumber > 0 ? EModeChange.Buff : scaleNumber < 1 ? EModeChange.Nerf : EModeChange.Neutral;
+                                int amount = (int)Math.Round(scaleNumber * 100f);
+                                string key = change == EModeChange.Buff ? "ScalePositive" : "Scale";
+                                ItemBalance(tooltips, change, key, amount);
+                                break;
+                            }
+
                         case "DamageNoTooltip":
                         case "SpeedNoTooltip":
+                        case "ScaleNoTooltip":
                             break;
 
                         default:
@@ -561,7 +575,7 @@ namespace FargowiltasSouls.Content.Items
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], (int)balanceNumber);
                                 }
-                                else if (extra != string.Empty && balanceTextKeys != null && i == 0)
+                                else if (extra != string.Empty && balanceTextKeys != null && i == 0 && !balanceTextKeys.Any(k => k == "Scale" || k == "ScaleNoTooltip"))
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], extra);
                                 }
