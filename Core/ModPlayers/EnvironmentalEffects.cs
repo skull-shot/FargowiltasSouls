@@ -16,6 +16,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using Fargowiltas.Content.Buffs;
+using Terraria.GameContent.Events;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int LightLevelCounter;
         public int HallowFlipCheckTimer;
 
-       
+
         public override void PreUpdate()
         {
             if (!WorldSavingSystem.EternityMode)
@@ -47,6 +48,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
 
+            
             //water biome effects
             if (WaterWet && !waterEffectImmune)
             {
