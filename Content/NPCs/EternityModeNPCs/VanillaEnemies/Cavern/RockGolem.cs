@@ -49,7 +49,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
-
+            if (!Main.hardMode && npc.GetLifePercent() > 0.95f)
+            {
+                if (Main.GameUpdateCount % 49 == 0)
+                    CombatText.NewText(npc.Hitbox, Color.Gray, "z");
+                return false;
+            }
+                
             const float gravity = 0.4f;
 
             if (JumpTimer > 360) //initiate jump
