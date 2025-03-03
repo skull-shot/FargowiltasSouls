@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
+    [AutoloadEquip(EquipType.Face)]
     public class ChaliceoftheMoon : SoulsItem
     {
         public override bool Eternity => true;
