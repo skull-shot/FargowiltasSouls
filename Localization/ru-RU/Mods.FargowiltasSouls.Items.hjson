@@ -2230,7 +2230,7 @@ EternalEnergy: {
 }
 
 PhantasmalEnergy: {
-	DisplayName: Фантазмальная энергия
+	DisplayName: Сломанная гарда
 	Tooltip: ""
 }
 
