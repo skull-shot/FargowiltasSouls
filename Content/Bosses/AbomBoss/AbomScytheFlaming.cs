@@ -80,9 +80,15 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     return;
                 Projectile.velocity = Projectile.SafeDirectionTo(target.Center);
                 if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>()) && Main.npc[EModeGlobalNPC.abomBoss].localAI[3] > 1)
+                {
                     Projectile.velocity *= 7f;
+                }
                 else
+                {
+                    if (WorldSavingSystem.MasochistModeReal)
+                        Projectile.velocity = Projectile.SafeDirectionTo(target.Center + target.velocity * 25);
                     Projectile.velocity *= 24f;
+                }
                 SoundEngine.PlaySound(SoundID.Item84, Projectile.Center);
             }
 
