@@ -22,7 +22,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             base.SetStaticDefaults();
             // DisplayName.SetDefault("Abominationn Seal");
         }
-
+        public int Timer = 0;
+        public static int StartTime = 90;
         protected override void Movement(NPC npc)
         {
             Projectile.velocity = npc.Center - Projectile.Center;
@@ -36,13 +37,24 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             base.AI();
             Projectile.rotation -= 1f;
+            if (Timer < StartTime)
+            {
+                Timer++;
+                threshold = MathHelper.Lerp(2000f, 1100f, (float)Timer / StartTime);
+            }
+                
         }
 
         public override Color? GetAlpha(Color lightColor)
         {
             return new Color(255, 255, 0, 0) * Projectile.Opacity * (targetPlayer == Main.myPlayer ? 1f : 0.15f);
         }
-
+        public override bool CanHitPlayer(Player target)
+        {
+            if (Timer < StartTime)
+                return false;
+            return base.CanHitPlayer(target);
+        }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
