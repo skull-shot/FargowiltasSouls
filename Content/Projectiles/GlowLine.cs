@@ -95,7 +95,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case 1: //abom split sickle box telegraph, hides until after the sickles split
                     {
                         color = Color.Orange;
-                        maxTime = 90 + 60;
+                        maxTime = 90 + 60 + 60;
                         Projectile.rotation = Projectile.ai[1];
                         alphaModifier = 1;
                         if (counter < 90)

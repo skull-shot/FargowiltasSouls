@@ -2,6 +2,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -33,9 +34,12 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override bool? CanDamage()
         {
-            return Projectile.ai[1] <= 0 || WorldSavingSystem.MasochistModeReal;
+            return null;
+            //return Projectile.ai[1] <= 0 || WorldSavingSystem.MasochistModeReal;
         }
         public ref float TargetID => ref Projectile.ai[2];
+        public Vector2 StartPosition = Vector2.Zero;
+        public float StartTime = 0;
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -43,8 +47,25 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Projectile.localAI[0] = Main.rand.NextBool() ? 1 : -1;
                 Projectile.localAI[1] = Projectile.ai[1] - Projectile.ai[0]; //store difference for animated spin startup
                 Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
-            }
 
+                if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>()) && Main.npc[EModeGlobalNPC.abomBoss].localAI[3] > 1) // phase 2
+                {
+                    float speed = Projectile.velocity.Length();
+                    StartPosition = Projectile.Center;
+                    StartTime = Projectile.ai[0];
+                    float distance = speed * StartTime;
+                    Projectile.localAI[2] = distance;
+                    Projectile.velocity.Normalize();
+                    Projectile.netUpdate = true;
+                }
+            }
+            if (Projectile.ai[0] > 0 && StartTime != 0)
+            {
+                Vector2 endPosition = StartPosition + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[2];
+                float lerp = 1 - (Projectile.ai[0] / StartTime);
+                Vector2 desiredPos = Vector2.Lerp(StartPosition, endPosition, MathF.Pow(lerp, 2f));
+                Projectile.Center = desiredPos;
+            }
             if (--Projectile.ai[0] == 0)
             {
                 Projectile.netUpdate = true;
@@ -126,7 +147,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color(255, 255, 255, Projectile.ai[1] < 0 ? 150 : 255) * Projectile.Opacity * (Projectile.ai[1] <= 0 || WorldSavingSystem.MasochistModeReal ? 1f : 0.5f);
+            return new Color(255, 255, 255, Projectile.ai[1] < 0 ? 150 : 255) * Projectile.Opacity;
         }
     }
 }

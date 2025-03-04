@@ -310,6 +310,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Vector2 targetPos;
             float speedModifier;
 
+            NPC.ai[0] = 6;
              // perma laevaetinn debug
              /*
             if (NPC.localAI[3] > 1 && NPC.ai[0] == 0)
@@ -591,14 +592,18 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             {
                                 NPC.ai[1] = 80;
 
-                                float baseDelay = NPC.localAI[3] > 1 ? 40 : 20;
+                                float baseDelay = NPC.localAI[3] > 1 ? WorldSavingSystem.MasochistModeReal ? 60 : 90 : 20;
                                 float extendedDelay = NPC.localAI[3] > 1 ? 90 : 40;
-                                float speed = NPC.localAI[3] > 1 ? 40 : 10;
+                                float speed = NPC.localAI[3] > 1 ? 20 : 10;
                                 float offset = NPC.ai[2] % 2 == 0 ? 0 : 0.5f;
+                                
                                 if (FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget)
                                 {
                                     for (int i = 0; i < max; i++)
+                                    {
                                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.TwoPi / max * (i + offset)) * speed, ModContent.ProjectileType<AbomScytheFlaming>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, baseDelay, baseDelay + extendedDelay, ai2: NPC.target);
+                                    }
+                                        
                                 }
                                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
                             }
