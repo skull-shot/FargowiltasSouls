@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -166,6 +167,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnSpawn(IEntitySource source)
         {
+            int[] rituals = [ModContent.ProjectileType<AbomRitual>(), ModContent.ProjectileType<AbomRitualMaso>(), ModContent.ProjectileType<AbomRitualFTW>(), ModContent.ProjectileType<AbomRitual2>()];
+            for (int i = 0; i <  Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i] != null && Main.projectile[i].active && rituals.Contains(Main.projectile[i].type))
+                {
+                    Main.projectile[i].Kill();
+                }
+            }
             if (ModContent.TryFind("Fargowiltas", "Abominationn", out ModNPC modNPC))
             {
                 int n = NPC.FindFirstNPC(modNPC.Type);
@@ -310,7 +319,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Vector2 targetPos;
             float speedModifier;
 
-            NPC.ai[0] = 6;
              // perma laevaetinn debug
              /*
             if (NPC.localAI[3] > 1 && NPC.ai[0] == 0)
