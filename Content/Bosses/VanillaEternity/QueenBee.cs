@@ -474,7 +474,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
 
                         // bees
-                        if (NPC.CountNPCS(NPCID.Bee) < 4f && timer % 5 == 0)
+                        if (NPC.CountNPCS(NPCID.Bee) < 8f && timer % 3 == 0)
                         {
                             SoundEngine.PlaySound(SoundID.NPCHit1, npc.position);
                             if (FargoSoulsUtil.HostCheck)
