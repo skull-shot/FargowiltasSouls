@@ -142,6 +142,9 @@ namespace FargowiltasSouls.Content.Projectiles
                             while (targetRot > (float)Math.PI)
                                 targetRot -= 2f * (float)Math.PI;
                             Projectile.rotation = Projectile.rotation.AngleLerp(targetRot, 0.05f);
+
+                            if (WorldSavingSystem.MasochistModeReal)
+                                Projectile.Center -= Projectile.rotation.ToRotationVector2() * 1500;
                         }
                     }
                     break;
@@ -166,6 +169,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                         Projectile.position -= Projectile.velocity;
                         Projectile.rotation = Projectile.velocity.ToRotation();
+                        if (WorldSavingSystem.MasochistModeReal)
+                            Projectile.Center -= Projectile.rotation.ToRotationVector2() * 1500;
                     }
                     break;
 
