@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
             Color glowcolor = Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(255, 255, 255, 0), Color.Transparent, 0.85f);
 
-            if (WorldSavingSystem.MasochistModeReal)
+            if (WorldSavingSystem.MasochistModeReal && !Main.getGoodWorld)
             {
                 Asset<Texture2D> line = TextureAssets.Extra[178];
                 float opacity = 1f;
