@@ -40,6 +40,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool DroppedSummon;
         public bool SubjectDR;
 
+        public Vector2 LockVector1;
+        public int ShotTimer = 0;
+        private object vector86;
+
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
@@ -47,6 +51,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(HiveThrowTimer);
             binaryWriter.Write7BitEncodedInt(StingerRingTimer);
             binaryWriter.Write7BitEncodedInt(BeeSwarmTimer);
+            binaryWriter.WriteVector2(LockVector1);
             bitWriter.WriteBit(SpawnedRoyalSubjectWave1);
             bitWriter.WriteBit(SpawnedRoyalSubjectWave2);
             bitWriter.WriteBit(InPhase2);
@@ -59,6 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             HiveThrowTimer = binaryReader.Read7BitEncodedInt();
             StingerRingTimer = binaryReader.Read7BitEncodedInt();
             BeeSwarmTimer = binaryReader.Read7BitEncodedInt();
+            LockVector1 = binaryReader.ReadVector2();
             SpawnedRoyalSubjectWave1 = bitReader.ReadBit();
             SpawnedRoyalSubjectWave2 = bitReader.ReadBit();
             InPhase2 = bitReader.ReadBit();
@@ -81,8 +87,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
+            //FargoSoulsUtil.PrintAI(npc);
 
             EModeGlobalNPC.beeBoss = npc.whoAmI;
+
+            if (npc.ai[0] == 0) // sound fix
+            {
+                int oldDash = ShotTimer;
+                ShotTimer = (int)npc.localAI[0];
+                if (oldDash != ShotTimer && ShotTimer == 1)
+                    SoundEngine.PlaySound(SoundID.Zombie125, npc.position);
+            }
 
             if (npc.ai[0] == 2 && npc.HasValidTarget)
             {
@@ -244,12 +259,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                 }
 
+                
                 if (npc.ai[0] == 0 && npc.ai[1] == 1f) //if qb tries to start doing dashes of her own volition
                 {
                     npc.ai[0] = 3f;
                     npc.ai[1] = 0f; //don't
+                    npc.ai[2] = 0f;
+                    npc.localAI[0] = 0f;
                     npc.netUpdate = true;
                 }
+                
             }
 
             //only while stationary mode
@@ -290,7 +309,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         else if (BeeSwarmTimer > 630)
                         {
                             BeeSwarmTimer--; //stall this section until has line of sight
-                            return true;
+                            return MovementRework(npc, true);
                         }
                     }
                     else if (BeeSwarmTimer < 840) //spray bees
@@ -328,20 +347,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (Main.netMode == NetmodeID.Server)
                             NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npc.whoAmI);
                     }
-                    return false;
-                }
-
-                int threshold = WorldSavingSystem.MasochistModeReal ? 90 : 120;
-
-                if (++StingerRingTimer > threshold * 3)
-                    StingerRingTimer = 0;
-
-                if (StingerRingTimer % threshold == 0)
-                {
-                    float speed = WorldSavingSystem.MasochistModeReal ? 6 : 5;
-
-                    if (FargoSoulsUtil.HostCheck)
-                        FargoSoulsUtil.XWay(StingerRingTimer == threshold * 3 ? 16 : 8, npc.GetSource_FromThis(), npc.Center, ProjectileID.QueenBeeStinger, speed, 11, 1);
+                    return MovementRework(npc, false);
                 }
             }
 
@@ -377,7 +383,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.velocity *= 0.95f;
                     npc.ai[2]++;
 
-                    return false;
+                    return MovementRework(npc, false);
                 }
             }
 
@@ -393,9 +399,275 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             EModeUtils.DropSummon(npc, "Abeemination2", NPC.downedQueenBee, ref DroppedSummon);
 
+            return MovementRework(npc, result);
+        }
+        public bool MovementRework(NPC npc, bool result)
+        {
+            if (result && npc.HasPlayerTarget) // ai rework normal flying ai rework
+            {
+                Player player = Main.player[npc.target];
+                if (npc.ai[0] == 2) // replaces preparing bees
+                {
+                    result = false;
+                    ref float timer = ref npc.ai[1];
+                    float speedMod = 1f;
+                    npc.spriteDirection = npc.direction = (int)npc.HorizontalDirectionTo(player.Center);
+
+                    // speed
+                    timer++;
+                    int duration = 60 * 6;
+                    float durationDiv = 1f;
+                    float lifeFraction = npc.GetLifePercent();
+                    if (lifeFraction < 0.75)
+                        durationDiv += 0.25f;
+                    if (lifeFraction < 0.5)
+                        durationDiv += 0.25f;
+                    if (lifeFraction < 0.25)
+                        durationDiv += 0.25f;
+                    if (lifeFraction < 0.1)
+                        durationDiv += 0.25f;
+                    if (NPC.AnyNPCs(ModContent.NPCType<RoyalSubject>()))
+                        durationDiv = 1.5f;
+                    duration = (int)Math.Round(duration / durationDiv);
+
+                    float progress = timer / duration;
+
+                    float positionFrac = 0.25f;
+                    float spreadFrac = 110f / duration;
+                    float straightFrac = 1f - spreadFrac;
+                    if (progress < positionFrac) // get in position
+                    {
+                        speedMod = 1.5f;
+                    }
+                    else if (progress < straightFrac) // straight shots
+                    {
+                        speedMod = 0.8f;
+                        float spread = MathHelper.PiOver2 * 0.05f;
+
+                        float baseFrequency = 15f;
+                        float frequency = (int)Math.Round(baseFrequency / durationDiv);
+                        if (timer % frequency == 0)
+                        {
+                            float angle = Main.rand.NextFloat(-spread, spread);
+                            SoundEngine.PlaySound(SoundID.Item97, npc.position);
+                            float speed = 7f;
+                            speed += 5f * ((progress - positionFrac) / straightFrac);
+                            Shot(angle, 0f, speed);
+                        }
+                    }
+                    else if (progress < 1) // spread shots
+                    {
+                        speedMod = 0.05f;
+                        float spreadProgress = (progress - straightFrac) / (1f - straightFrac);
+                        float spread = MathHelper.PiOver2 * 1.4f * spreadProgress;
+
+                        float baseFrequency = 5f;
+                        float frequency = (int)Math.Round(baseFrequency / durationDiv);
+                        if (frequency < 3)
+                            frequency = 3;
+                        if (timer % frequency == 0)
+                        {
+                            float angle = Main.rand.NextFloat(-spread, spread);
+                            SoundEngine.PlaySound(SoundID.Item97, npc.position);
+                            float speed = 12f;
+                            Shot(angle, 0f, speed);
+                        }
+
+                        // bees
+                        if (NPC.CountNPCS(NPCID.Bee) < 4f && timer % 5 == 0)
+                        {
+                            SoundEngine.PlaySound(SoundID.NPCHit1, npc.position);
+                            if (FargoSoulsUtil.HostCheck)
+                            {
+                                Vector2 vector84 = new Vector2(npc.position.X + (float)(npc.width / 2) + (float)(Main.rand.Next(20) * npc.direction), npc.position.Y + (float)npc.height * 0.8f);
+                                int num670 = Main.rand.Next(210, 212);
+                                int num671 = NPC.NewNPC(npc.GetSource_FromAI(), (int)vector84.X, (int)vector84.Y, num670);
+                                Main.npc[num671].velocity = player.Center - npc.Center;
+                                Main.npc[num671].velocity.Normalize();
+                                NPC nPC3 = Main.npc[num671];
+                                nPC3.velocity *= 5f;
+                                Main.npc[num671].CanBeReplacedByOtherNPCs = true;
+                                Main.npc[num671].localAI[0] = 60f;
+                                Main.npc[num671].netUpdate = true;
+                            }
+                        }
+                    }
+
+                    // exit as normal
+                    if (timer > duration)
+                    {
+                        Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 300f;
+                        Movement(npc, desiredPos, 0.5f, (int)(10 + player.velocity.Length()));
+                        if (npc.Distance(player.Center) < 400f && (npc.velocity.Length() < 4f || timer > duration * 1.25f))
+                        {
+                            npc.ai[0] = -1f;
+                            npc.ai[1] = 1f;
+                            npc.netUpdate = true;
+                            return result;
+                        }
+                    }
+                    else
+                    {
+                        float rectDist = 500f;
+                        int side = (int)player.HorizontalDirectionTo(npc.Center);
+                        int ySide = (int)Math.Sign(npc.Center.Y - player.Center.Y);
+                        Vector2 desiredPos = player.Center + Vector2.UnitX * side * rectDist + Vector2.UnitY * ySide * rectDist;
+                        Vector2 chosenPos = player.Center;
+                        for (float i = 0.2f; i <= 1f; i += 0.05f)
+                        {
+                            Vector2 newchosenPos = Vector2.Lerp(player.Center, desiredPos, i);
+                            if (!Collision.CanHitLine(newchosenPos - npc.Size / 2, npc.width, npc.height, player.Center, 1, 1))
+                                break;
+                            chosenPos = newchosenPos;
+                        }
+                        Movement(npc, chosenPos, speedMod, 20);
+                    }
+                }
+                if (npc.ai[0] == 3) // normal flying ai with stingers
+                {
+                    result = false;
+                    float enrageFactor = 0f;
+                    if ((double)(npc.position.Y / 16f) < Main.worldSurface)
+                    {
+                        enrageFactor += 1f;
+                    }
+                    if (!Main.player[npc.target].ZoneJungle)
+                    {
+                        enrageFactor += 1f;
+                    }
+                    if (Main.getGoodWorld)
+                    {
+                        enrageFactor += 0.5f;
+                    }
+                    npc.ai[1] += 1f;
+                    float lifeFraction = npc.GetLifePercent();
+                    int shotFrequency = lifeFraction < 0.1f ? 30 : lifeFraction < (1f / 3) ? 40 : lifeFraction <= 2 ? 45 : 50;
+                    shotFrequency -= (int)(5f * enrageFactor);
+
+                    // real AI
+                    ref float timer = ref npc.ai[1];
+                    if (timer - (int)timer > 0 && !NPC.AnyNPCs(ModContent.NPCType<RoyalSubject>()))
+                        timer = (int)timer;
+                    int cycle = (int)(shotFrequency * 2);
+                    if (cycle < 50)
+                        cycle = 50;
+                    float cycleProgress = (timer / cycle) % 1;
+                    npc.spriteDirection = npc.direction = (int)npc.HorizontalDirectionTo(player.Center);
+                    if (timer % cycle <= 1) // start of cycle, get position
+                    {
+                        int maxIter = 40;
+                        for (int i = 0; i < maxIter; i++)
+                        {
+                            float randomMax = MathHelper.PiOver2 * 0.25f;
+                            float randomRot = Main.rand.NextFloat(-randomMax, randomMax);
+                            LockVector1 = player.Center + player.DirectionTo(npc.Center).RotatedBy(randomRot) * 240f;
+                            if (Collision.CanHit(LockVector1 - npc.Size / 2, npc.width, npc.height, player.Center, 1, 1))
+                                break;
+                        }
+                        npc.netUpdate = true;
+
+                    }
+                    if (timer % cycle > 5) // give time for sync
+                    {
+                        float speedMod = 1f;
+                        int maxSpeed = 15;
+                        if (enrageFactor > 0)
+                        {
+                            maxSpeed = 25;
+                            speedMod += 1f * enrageFactor;
+                        }
+                        speedMod += ((70f - shotFrequency) / 70f) * 0.4f;
+                        Vector2 desiredPos = LockVector1;
+                        Movement(npc, desiredPos, speedMod, maxSpeed);
+                    }
+                    if (cycleProgress < 0.5f) // movement part of cycle
+                    {
+                        ShotTimer = 0;
+                    }
+                    else // attack part of cycle
+                    {
+                        if (timer - (int)timer < 0.4f)
+                            ShotTimer++;
+
+                        int frequency = lifeFraction < 0.1f ? 10 : lifeFraction < (1f / 3) ? 10 : lifeFraction <= 2 ? 12 : 14;
+                        //frequency += 2;
+                        if (ShotTimer % frequency == 0 && timer - (int)timer < 0.4f)
+                        {
+                            float spreadFactor = (float)ShotTimer / frequency;
+                            spreadFactor = (int)(spreadFactor);
+                            spreadFactor -= 1;
+                            float spread = spreadFactor * MathHelper.PiOver2 * 0.18f;
+                            if (spreadFactor < 3)
+                            {
+                                SoundEngine.PlaySound(SoundID.Item17, npc.position);
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    int stop = 0;
+                                    if (spreadFactor >= 1)
+                                        stop = 1;
+                                    else
+                                        spread = 0;
+                                    for (int i = -1; i <= stop; i += 2)
+                                    {
+                                        Shot(spread * i, enrageFactor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    float durationScale = 20f;
+                    durationScale -= 5f * enrageFactor;
+                    if (npc.ai[1] > (float)shotFrequency * durationScale)
+                    {
+                        npc.ai[0] = -1f;
+                        npc.ai[1] = 3f;
+                        npc.netUpdate = true;
+                    }
+                }
+            }
+            void Shot(float angle, float enrageFactor, float speed = 10f)
+            {
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    speed += 7f * enrageFactor;
+                    int num681 = (int)(80f - 39f * enrageFactor);
+                    int num682 = (int)(40f - 19f * enrageFactor);
+                    if (num681 < 1)
+                    {
+                        num681 = 1;
+                    }
+                    if (num682 < 1)
+                    {
+                        num682 = 1;
+                    }
+                    Vector2 vector86 = new Vector2(npc.position.X + (float)(npc.width / 2) + (float)(Main.rand.Next(20) * npc.direction), npc.position.Y + (float)npc.height * 0.8f);
+                    float num683 = Main.player[npc.target].position.X + (float)Main.player[npc.target].width * 0.5f - vector86.X + (float)Main.rand.Next(-num681, num681 + 1);
+                    float num684 = Main.player[npc.target].position.Y + (float)Main.player[npc.target].height * 0.5f - vector86.Y + (float)Main.rand.Next(-num682, num682 + 1);
+                    float num685 = (float)Math.Sqrt(num683 * num683 + num684 * num684);
+                    num685 = speed / num685;
+                    num683 *= num685;
+                    num684 *= num685;
+                    int num686 = 11;
+                    int num687 = 719;
+                    Vector2 vel = new(num683, num684);
+                    vel = vel.RotatedBy(angle);
+                    int num688 = Projectile.NewProjectile(npc.GetSource_FromAI(), vector86.X, vector86.Y, vel.X, vel.Y, num687, num686, 0f, Main.myPlayer);
+                    Main.projectile[num688].timeLeft = 300;
+                }
+            }
             return result;
         }
+        public void Movement(NPC npc, Vector2 desiredPos, float speedMod, int maxMovementSpeed)
+        {
+            float Acceleration = 0.25f;
 
+            speedMod *= 1.6f;
+            float accel = Acceleration * speedMod;
+            float decel = Acceleration * 2 * speedMod;
+            float max = maxMovementSpeed * speedMod;
+            float resistance = npc.velocity.Length() * accel / max;
+            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel - resistance, decel + resistance);
+        }
         public override void SafePostAI(NPC npc)
         {
             base.SafePostAI(npc);
