@@ -181,7 +181,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     
                 //boss environs??
                 //deerclops
-                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses())
+                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses())
                 {
                     DeerclopsHands();
                 }
