@@ -64,7 +64,7 @@ AshWoodEnchant: {
 		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
-		'"You're telling me this isn't wood?"'
+		'You're telling me this isn't wood?'
 		'''
 }
 
@@ -3067,7 +3067,7 @@ DeviousAestheticus: {
 	DisplayName: Devious Aestheticus
 	Tooltip:
 		'''
-		Shot spread scales with up to 6 empty minion slots
+		Shot spread scales with up to 7 empty minion slots
 		'If you're seeing this, You've been in a coma for 20 years, I don't know where this message will be, but please wake up'
 		'''
 }
