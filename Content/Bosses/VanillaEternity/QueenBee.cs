@@ -302,6 +302,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 BeeSwarmTimer += 30;
                         }
 
+                        Player p = Main.player[npc.target];
+                        if (npc.Distance(p.Center) > 500)
+                        {
+                            Movement(npc, p.Center + p.DirectionTo(npc.Center) * 500, 1f, 12);
+                        }
                         if (Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
                         {
                             npc.velocity *= 0.975f;
@@ -474,7 +479,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
 
                         // bees
-                        if (NPC.CountNPCS(NPCID.Bee) < 8f && timer % 3 == 0)
+                        if (NPC.CountNPCS(NPCID.Bee) + NPC.CountNPCS(NPCID.BeeSmall) < 8f && timer % 5 == 0)
                         {
                             SoundEngine.PlaySound(SoundID.NPCHit1, npc.position);
                             if (FargoSoulsUtil.HostCheck)
@@ -663,7 +668,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             speedMod *= 1.6f;
             float accel = Acceleration * speedMod;
-            float decel = Acceleration * 2 * speedMod;
+            float decel = Acceleration * 5 * speedMod;
             float max = maxMovementSpeed * speedMod;
             float resistance = npc.velocity.Length() * accel / max;
             npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel - resistance, decel + resistance);
