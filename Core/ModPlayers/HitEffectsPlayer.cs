@@ -175,7 +175,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (StyxSet)
             {
-                StyxMeter += hitInfo.Damage;
+                StyxMeter += (int)(hitInfo.Damage * StyxCrown.StyxChargeMultiplier(Player, StyxCrown.ChargeContext.DealDamage));
                 if (StyxTimer <= 0 && !target.friendly && target.lifeMax > 5 && target.type != NPCID.TargetDummy)
                     StyxTimer = 60;
             }

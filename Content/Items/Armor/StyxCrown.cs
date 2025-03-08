@@ -127,7 +127,16 @@ namespace FargowiltasSouls.Content.Items.Armor
                 fargoPlayer.StyxAttackReadyTimer = FargoSoulsPlayer.SuperAttackMaxWindow;
             }
         }
-
+        public enum ChargeContext
+        {
+            DealDamage,
+            DPS,
+            Graze
+        }
+        public static float StyxChargeMultiplier(Player player, ChargeContext context)
+        {
+            return 1f;
+        }
         public override void AddRecipes()
         {
             CreateRecipe()

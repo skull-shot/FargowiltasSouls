@@ -1,4 +1,5 @@
 
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -70,7 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 fargoPlayer.DeviGrazeBonus = grazeCap;
                 if (fargoPlayer.StyxSet)
-                    fargoPlayer.StyxMeter += FargoSoulsUtil.HighestDamageTypeScaling(Main.LocalPlayer, damage) * 4; //as if gaining the damage, times SOU crit
+                    fargoPlayer.StyxMeter += (int)(FargoSoulsUtil.HighestDamageTypeScaling(Main.LocalPlayer, damage) * 4 * StyxCrown.StyxChargeMultiplier(fargoPlayer.Player, StyxCrown.ChargeContext.Graze)); //as if gaining the damage, times SOU crit
             }
             fargoPlayer.DeviGrazeCounter = -1; //reset counter whenever successful graze
 
