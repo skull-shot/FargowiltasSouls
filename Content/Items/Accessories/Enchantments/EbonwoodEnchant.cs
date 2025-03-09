@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             int dist = ShadewoodEffect.Range(player, forceEffect);
             float LCharge = modPlayer.EbonwoodCharge;
 
-            foreach (NPC npc in Main.npc.Where(n => n.active && !n.friendly && n.lifeMax > 5 && !n.dontTakeDamage))
+            foreach (NPC npc in Main.npc.Where(n => n.active && !n.friendly && n.lifeMax > 10 && !n.dontTakeDamage && (n.damage > 0 || n.defDamage > 0)))
             {
                 Vector2 npcComparePoint = FargoSoulsUtil.ClosestPointInHitbox(npc, player.Center);
                 // npc is in aura
