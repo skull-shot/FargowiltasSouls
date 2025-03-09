@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             if (fargoPlayer.DeviGrazeBonus > grazeCap)
             {
                 fargoPlayer.DeviGrazeBonus = grazeCap;
-                if (fargoPlayer.StyxSet)
+                if (fargoPlayer.StyxSet && fargoPlayer.AbomWandItem != null)
                     fargoPlayer.StyxMeter += (int)(FargoSoulsUtil.HighestDamageTypeScaling(Main.LocalPlayer, damage) * 4 * StyxCrown.StyxChargeMultiplier(fargoPlayer.Player, StyxCrown.ChargeContext.Graze)); //as if gaining the damage, times SOU crit
             }
             fargoPlayer.DeviGrazeCounter = -1; //reset counter whenever successful graze
