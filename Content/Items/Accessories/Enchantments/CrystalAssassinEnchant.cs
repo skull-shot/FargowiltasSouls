@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
@@ -165,12 +166,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     player.velocity.Y = float.Epsilon;
             }
 
-            if (player.ForceEffect<CrystalAssassinDash>() && modPlayer.CrystalDashFirstStrikeCD <= 0)
-            {
-                player.AddBuff(ModContent.BuffType<FirstStrikeBuff>(), 60);
-                modPlayer.CrystalDashFirstStrikeCD = 60 * 5;
-            }
-
 
             player.velocity.X = dashSpeed * direction;
             if (modPlayer.IsDashingTimer < 20)
@@ -220,6 +215,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     {
                         player.velocity.X = Math.Sign(player.velocity.X) * 30;
                         player.velocity.Y = -10;
+                        if (player.FargoSouls().CrystalDashFirstStrikeCD <= 0)
+                        {
+                            player.AddBuff(ModContent.BuffType<FirstStrikeBuff>(), 60);
+                            int cd = player.ForceEffect<CrystalDiagonalDash>() ? 2 : 5;
+                            player.FargoSouls().CrystalDashFirstStrikeCD = 60 * cd;
+                        }
                     }
                 }
             } 
