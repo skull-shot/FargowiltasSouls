@@ -399,7 +399,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
             }
-
+            /*
             if (ModContent.GetInstance<SoulConfig>().BigTossMode)
             {
                 AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
@@ -412,6 +412,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (attacker != default)
                     Player.velocity = Vector2.Normalize(Player.Center - attacker) * 30 * 2;
             }
+            */
         }
 
         public override bool CanBeHitByNPC(NPC npc, ref int CooldownSlot)

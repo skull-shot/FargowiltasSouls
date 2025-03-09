@@ -85,11 +85,6 @@ SoulConfig: {
 		// Tooltip: ""
 	}
 
-	BigTossMode: {
-		// Label: Big Toss Mode
-		// Tooltip: ""
-	}
-
 	ForcedFilters: {
 		// Label: Turns on Waves Quality (overrides vanilla setting)
 		// Tooltip: Needed for certain visual effects to function
