@@ -92,7 +92,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             }
             NPC.damage = 240;
             NPC.defense = 80;
-            NPC.lifeMax = 750000;
+            NPC.lifeMax = 680000;
             if (Main.expertMode) //compensate universe core
                 NPC.lifeMax *= 2;
             if (WorldSavingSystem.MasochistModeReal) //he's tanky enough

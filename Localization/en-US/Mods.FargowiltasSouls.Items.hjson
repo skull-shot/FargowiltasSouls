@@ -818,7 +818,7 @@ UniverseCore: {
 	Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to half of your critical strike chance
+		The chance of this is equal to 1/3 of your critical strike chance
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		'''
@@ -987,8 +987,9 @@ AbominableWand: {
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
 		Increased damage gained per Sparkling Adoration graze and halves heart cooldown
+		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
-		With Styx armor, charges energy when graze is maxed
+		With Styx armor, charges energy when grazing
 		You can endure any attack and survive with 1 life
 		Endurance recovers when you reach full life again
 		'Seems like something's missing'
