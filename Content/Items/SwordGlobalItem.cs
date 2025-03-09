@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace FargowiltasSouls.Content.Items
         public override bool InstancePerEntity => true;
         public override void SetDefaults(Item item)
         {
-            if (IsBroadsword(item))
+            if (BroadswordRework(item))
             {
                 //item.noMelee = false;
                 if (!Broadswords.Contains(item.type))
@@ -38,9 +39,10 @@ namespace FargowiltasSouls.Content.Items
             ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade];
 
         public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<TreeSword>() };
-        public static bool IsBroadsword(Item item)
+        public static bool BroadswordRework(Item item)
         {
-            
+            if (!WorldSavingSystem.EternityMode)
+                return false;
             if (item.type == ItemID.StaffofRegrowth || item.type == ItemID.GravediggerShovel)
             {
                 return false;
@@ -53,7 +55,7 @@ namespace FargowiltasSouls.Content.Items
         }
         public override bool? UseItem(Item item, Player player)
         {
-            if (Main.myPlayer == player.whoAmI && IsBroadsword(item))
+            if (Main.myPlayer == player.whoAmI && BroadswordRework(item))
             {
                 
             }
@@ -61,7 +63,7 @@ namespace FargowiltasSouls.Content.Items
         }
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
-            if (IsBroadsword(item))
+            if (BroadswordRework(item))
             {
                 FargoSoulsPlayer mplayer = player.FargoSouls();
 
@@ -84,7 +86,15 @@ namespace FargowiltasSouls.Content.Items
                 //ease in out quint
                 float lerp = x < 0.5f ? 4 * x * x * x : 1 - (float)Math.Pow(-2 * x + 2, 3) / 2;
 
-                player.itemRotation = mplayer.useRotation + MathHelper.ToRadians(mplayer.useDirection == 1 ? 45 : 135) + MathHelper.ToRadians(MathHelper.Lerp(-110, 90, mplayer.swingDirection == 1 ? lerp : 1 - lerp)* mplayer.useDirection);
+                float arcMult = 1f;
+                if (player.itemAnimationMax > 20)
+                {
+                    arcMult += 0.4f * (player.itemAnimationMax - 20) / 30;
+                }
+                arcMult = MathHelper.Clamp(arcMult, 1f, 1.3f);
+                float arcStart = -110 * arcMult;
+                float arcEnd = 90 * arcMult;
+                player.itemRotation = mplayer.useRotation + MathHelper.ToRadians(mplayer.useDirection == 1 ? 45 : 135) + MathHelper.ToRadians(MathHelper.Lerp(arcStart, arcEnd, mplayer.swingDirection == 1 ? lerp : 1 - lerp)* mplayer.useDirection);
                 if (player.gravDir == -1f)
                 {
                     player.itemRotation = -player.itemRotation;
@@ -98,7 +108,7 @@ namespace FargowiltasSouls.Content.Items
                     mplayer.shouldShoot = false;
                     VanillaShoot = true;
                     MethodInfo PlayerItemCheck_Shoot = typeof(Player).GetMethod("ItemCheck_Shoot", LumUtils.UniversalBindingFlags);
-                    PlayerItemCheck_Shoot.Invoke(player, [player.whoAmI, item, item.damage]);
+                    PlayerItemCheck_Shoot.Invoke(player, [player.whoAmI, item, player.GetWeaponDamage(item)]);
                     VanillaShoot = false;
 
                 }
@@ -116,7 +126,7 @@ namespace FargowiltasSouls.Content.Items
         
         public override void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
         {
-            if (IsBroadsword(item))
+            if (BroadswordRework(item))
             {
                 FargoSoulsPlayer mplayer = player.FargoSouls();
                 int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (player.GetAdjustedItemScale(item)));
@@ -129,7 +139,7 @@ namespace FargowiltasSouls.Content.Items
         }
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (IsBroadsword(item) && !VanillaShoot)
+            if (BroadswordRework(item) && !VanillaShoot)
             {
                 return false;
             }

@@ -597,6 +597,10 @@ namespace FargowiltasSouls.Content.Items
                 ItemBalance(tooltips, EModeChange.Neutral, "ManaPots");
             }
             */
+            if (SwordGlobalItem.BroadswordRework(item))
+            {
+                ItemBalance(tooltips, EModeChange.Buff, "SwordRework");
+            }
             if (item.shoot > ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot])
             {
                 if (!Main.LocalPlayer.HasEffect<TikiEffect>())

@@ -37,6 +37,7 @@ MinionStack: 同时召唤超过3个相同召唤物时，它们的伤害会降低
 SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降低（在撒旦军队中除外）
 ShadowDodge: 永恒模式：闪避会降低你的攻击速度
 IceBarrier: 永恒模式：你造成的伤害减少10%
+// SwordRework: Reworked broadsword swing animation
 SpearRework: 重做长矛挥舞动画
 PalladiumPikeRework: 增加大小，击中敌人后大幅增加生命恢复速度并恢复1点生命值（0.5秒冷却）
 CobaltNaginataRework: 击中敌人会造成小范围爆炸

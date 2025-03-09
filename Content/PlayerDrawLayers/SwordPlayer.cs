@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
     {
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
-            return SwordGlobalItem.IsBroadsword(drawInfo.drawPlayer.HeldItem) && drawInfo.drawPlayer.ItemAnimationActive;
+            return SwordGlobalItem.BroadswordRework(drawInfo.drawPlayer.HeldItem) && drawInfo.drawPlayer.ItemAnimationActive;
         }
         public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.SolarShield, Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
 

@@ -1398,7 +1398,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             //        }
             //    }
             //}
-            if (SwordGlobalItem.IsBroadsword(drawInfo.heldItem) && drawInfo.drawPlayer.ItemAnimationActive)
+            if (SwordGlobalItem.BroadswordRework(drawInfo.heldItem) && drawInfo.drawPlayer.ItemAnimationActive)
             {
 
                 Terraria.DataStructures.PlayerDrawLayers.HeldItem.Hide();
