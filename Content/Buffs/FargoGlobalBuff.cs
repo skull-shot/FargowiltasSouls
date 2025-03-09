@@ -21,10 +21,18 @@ namespace FargowiltasSouls.Content.Buffs
         {
             if (WorldSavingSystem.EternityMode)
             {
-                if (type == BuffID.ShadowDodge)
-                    tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
-                else if (type == BuffID.IceBarrier)
-                    tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                switch (type)
+                {
+                    case BuffID.ShadowDodge:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
+                        break;
+                    case BuffID.IceBarrier:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                        break;
+                    case BuffID.ChaosState:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        break;
+                }
             }
         }
 
@@ -32,6 +40,7 @@ namespace FargowiltasSouls.Content.Buffs
             BuffID.Frozen,
             BuffID.Stoned,
             BuffID.Cursed,
+            BuffID.ChaosState,
             ModContent.BuffType<FusedBuff>(),
             ModContent.BuffType<TimeFrozenBuff>(),
             ModContent.BuffType<StunnedBuff>()

@@ -40,7 +40,7 @@ namespace FargowiltasSouls
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
-
+            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
         }
         public void UnloadDetours()
@@ -234,6 +234,18 @@ namespace FargowiltasSouls
                 }
             }
             orig(projectile, nPC, ref modifiers);
+        }
+
+        private static bool IsItemTransformLocked(On_ShimmerTransforms.orig_IsItemTransformLocked orig, int type)
+        {
+            bool ret = orig(type);
+            //Rod of Harmony post Mutant
+            if (type == ItemID.RodofDiscord)
+            {
+                return !WorldSavingSystem.DownedMutant;
+            }
+
+            return ret;
         }
     }
 }

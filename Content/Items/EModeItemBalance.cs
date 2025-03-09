@@ -32,9 +32,11 @@ namespace FargowiltasSouls.Content.Items
             switch (itemType)
             {
                 case ItemID.RodofDiscord:
-                case ItemID.RodOfHarmony:
                     balanceTextKeys = ["RodofDiscord"];
                     return EModeChange.Nerf;
+                case ItemID.RodOfHarmony:
+                    balanceTextKeys = ["RodofHarmony"];
+                    return EModeChange.Neutral;
 
                 case ItemID.WaterBolt:
                     if (!NPC.downedBoss3)

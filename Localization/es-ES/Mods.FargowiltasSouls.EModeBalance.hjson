@@ -7,7 +7,9 @@
 // SpeedPositive: Increased speed by {0}%
 // Scale: Reduced size by {0}%
 // ScalePositive: Increased size by {0}%
-// RodofDiscord: During boss fights, every use takes life
+// RodofDiscord: Chaos State reduces your damage, defense and damage reduction by 25%
+// ChaosState: Reduced damage, defense and damage reduction by 25%
+// RodofHarmony: Can only be obtained after defeating the Mutant
 // Split: Reduced split frequency
 // ChlorophyteBullet: Reduced speed and duration
 // WaterBolt: Cannot be used until Skeletron is defeated

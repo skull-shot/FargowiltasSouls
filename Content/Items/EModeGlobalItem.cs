@@ -156,16 +156,12 @@ namespace FargowiltasSouls.Content.Items
                     return false;
             }
 
-            if (item.type == ItemID.RodofDiscord && LumUtils.AnyBosses())
-            {
-                player.chaosState = true;
-            }
-
             if (item.type == ItemID.CobaltSword)
             {
                 ePlayer.CobaltHitCounter = 0;
             }
 
+            /*
             if (item.type == ItemID.RodOfHarmony && LumUtils.AnyBosses())
             {
                 player.hurtCooldowns[0] = 0;
@@ -176,8 +172,8 @@ namespace FargowiltasSouls.Content.Items
                 player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.RodOfHarmony", player.name)), player.statLifeMax2 / 7, 0, false, false, 0, false);
                 player.statDefense = defense;
                 player.endurance = endurance;
-
             }
+            */
             //TODO: mana pot rework
             /*
             if (item.healMana > 0)
