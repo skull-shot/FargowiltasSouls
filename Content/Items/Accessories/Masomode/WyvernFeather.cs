@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
-            player.AddEffect<ClippedEffect>(Item);
             player.AddEffect<StabilizedGravity>(Item);
             player.AddEffect<WyvernBalls>(Item);
         }
@@ -62,21 +61,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 player.ignoreWater = true; // allow full movement then restrict the horizontal
                 float speedLoss = player.honeyWet ? 0.75f : 0.5f; // 25% speed in honey, 50% otherwise
                 player.position.X -= speedLoss * player.velocity.X; // simulate slower horizontal movement
-            }
-        }
-    }
-    public class ClippedEffect : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
-        public override int ToggleItemType => ModContent.ItemType<WyvernFeather>();
-        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
-        {
-            if (!target.boss && !target.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] && Main.rand.NextBool(10))
-            {
-                target.velocity.X = 0f;
-                target.velocity.Y = 10f;
-                target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 240);
-                target.netUpdate = true;
             }
         }
     }

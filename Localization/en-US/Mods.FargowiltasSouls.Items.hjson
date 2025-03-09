@@ -1040,7 +1040,7 @@ BionomicCluster: {
 		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
 		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
+		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
@@ -1073,7 +1073,7 @@ BionomicClusterInactive: {
 		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
 		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
+		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
@@ -1659,7 +1659,6 @@ WyvernFeather: {
 	Tooltip:
 		'''
 		Grants immunity to Clipped Wings and Crippled
-		Your attacks have a 10% chance to inflict Clipped Wings on non-boss enemies
 		You periodically shed light orbs, touch them to refresh your flight time
 		Stabilizes gravity in space and in liquids (works from inventory and vanity)
 		'Warm to the touch'
