@@ -809,7 +809,7 @@ UniverseCore: {
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to half of your critical strike chance
+		The chance of this is equal to 1/3 of your critical strike chance
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
