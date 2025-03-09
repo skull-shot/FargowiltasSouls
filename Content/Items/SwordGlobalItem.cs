@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items
                 //ease in out quint
                 float lerp = x < 0.5f ? 4 * x * x * x : 1 - (float)Math.Pow(-2 * x + 2, 3) / 2;
 
-                player.itemRotation = mplayer.useRotation + MathHelper.ToRadians(mplayer.useDirection == 1 ? 45 : 135) + MathHelper.ToRadians(MathHelper.Lerp(-140, 110, mplayer.swingDirection == 1 ? lerp : 1 - lerp)* mplayer.useDirection);
+                player.itemRotation = mplayer.useRotation + MathHelper.ToRadians(mplayer.useDirection == 1 ? 45 : 135) + MathHelper.ToRadians(MathHelper.Lerp(-110, 90, mplayer.swingDirection == 1 ? lerp : 1 - lerp)* mplayer.useDirection);
                 if (player.gravDir == -1f)
                 {
                     player.itemRotation = -player.itemRotation;
@@ -118,10 +118,10 @@ namespace FargowiltasSouls.Content.Items
         {
             if (IsBroadsword(item))
             {
-                
                 FargoSoulsPlayer mplayer = player.FargoSouls();
                 int itemWidth = (int)(TextureAssets.Item[item.type].Width() * (player.GetAdjustedItemScale(item)));
                 hitbox = new Rectangle(0, 0, itemWidth, itemWidth);
+                hitbox.Inflate(itemWidth / 8, itemWidth / 8);
                 hitbox.Location = (player.Center + new Vector2(itemWidth, 0).RotatedBy(player.itemRotation - MathHelper.ToRadians(mplayer.useDirection == 1 ? 40 : 140)) - hitbox.Size()/2).ToPoint();
                 
             }
