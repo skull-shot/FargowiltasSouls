@@ -222,7 +222,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC owner = FargoSoulsUtil.NPCExists(Owner, ModContent.NPCType<CursedCoffin>());
             if (!owner.TypeAlive<CursedCoffin>())
             {
-                NPC.StrikeInstantKill();
+                if (FargoSoulsUtil.HostCheck)
+                    NPC.StrikeInstantKill();
                 return;
             }
 
@@ -238,8 +239,11 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
 
             // share healthbar
-            NPC.lifeMax = owner.lifeMax = Math.Min(NPC.lifeMax, owner.lifeMax);
-            NPC.life = owner.life = Math.Min(NPC.life, owner.life);
+            if (FargoSoulsUtil.HostCheck)
+            {
+                NPC.lifeMax = owner.lifeMax = Math.Min(NPC.lifeMax, owner.lifeMax);
+                NPC.life = owner.life = Math.Min(NPC.life, owner.life);
+            }
 
             RotateToVelocity = true;
             NPC.dontTakeDamage = NPC.scale < 0.5f;
@@ -317,6 +321,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     {
                         Timer = 0;
                         AI3 = 0;
+                        NPC.netUpdate = true;
                     }
                     Movement(player.Center + player.Center.SafeDirectionTo(NPC.Center) * 300, 0.1f, 10, 5, 0.08f, 20);
                     break;
@@ -325,6 +330,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     {
                         Timer = 0;
                         AI3 = 0;
+                        NPC.netUpdate = true;
                     }
                     Artillery(owner);
                     break;
@@ -333,6 +339,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     {
                         Timer = 0;
                         AI3 = 0;
+                        NPC.netUpdate = true;
                     }
                     SlamSupport(owner);
                     break;
@@ -350,6 +357,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     {
                         Timer = 0;
                         AI3 = 0;
+                        NPC.netUpdate = true;
                     }
                     SlowCharges(owner, coffin.StateMachine.CurrentState.Identifier);
                     break;
