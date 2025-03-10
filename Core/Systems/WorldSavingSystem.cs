@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class WorldSavingSystem : ModSystem
     {
-        internal enum Downed //to keep them organized and synced, DO NOT rearrange
+        public enum Downed //to keep them organized and synced, DO NOT rearrange
         {
             TimberChampion,
             TerraChampion,
