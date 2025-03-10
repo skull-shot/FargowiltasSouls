@@ -18,6 +18,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 {
@@ -349,6 +350,9 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             rule.OnSuccess(ItemDropRule.Common(ItemID.Ruby, 5, 1, 2));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Amber, 3, 2, 6));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Diamond, 7, 1, 1));
+
+            rule.OnSuccess(ItemDropRule.Common(ItemID.PharaohsMask, 4));
+            rule.OnSuccess(ItemDropRule.Common(ItemID.PharaohsRobe, 4));
 
             npcLoot.Add(rule);
         }

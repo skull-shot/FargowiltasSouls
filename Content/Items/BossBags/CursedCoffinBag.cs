@@ -26,6 +26,8 @@ namespace FargowiltasSouls.Content.Items.BossBags
             itemLoot.Add(ItemDropRule.Common(ItemID.Ruby, 5, 1, 2));
             itemLoot.Add(ItemDropRule.Common(ItemID.Amber, 3, 2, 6));
             itemLoot.Add(ItemDropRule.Common(ItemID.Diamond, 7, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ItemID.PharaohsMask, 4));
+            itemLoot.Add(ItemDropRule.Common(ItemID.PharaohsRobe, 4));
         }
     }
 }
