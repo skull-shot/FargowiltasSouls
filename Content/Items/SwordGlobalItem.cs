@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using FargowiltasSouls.Content.Items.Weapons.FinalUpgrades;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -38,10 +40,12 @@ namespace FargowiltasSouls.Content.Items
         public static List<int> Broadswords = [ ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.YellowPhasesaber, ItemID.OrangePhasesaber, ItemID.RedPhasesaber, ItemID.WhitePhasesaber,
             ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade];
 
-        public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<TreeSword>() };
+        public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<TreeSword>(), ModContent.ItemType<SlimeRain>() };
         public static bool BroadswordRework(Item item)
         {
             if (!WorldSavingSystem.EternityMode)
+                return false;
+            if (!SoulConfig.Instance.WeaponReworks)
                 return false;
             if (item.type == ItemID.StaffofRegrowth || item.type == ItemID.GravediggerShovel)
             {

@@ -95,6 +95,11 @@ SoulConfig: {
 		Tooltip: ""
 	}
 
+	WeaponReworks: {
+		Label: Weapon Reworks
+		Tooltip: Toggles the reworks of certain weapons in Eternity Mode, such as broadswords and spears
+	}
+
 	PatreonRoomba: {
 		Label: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:{$Mods.FargowiltasSouls.Items.RoombaPet.DisplayName}]"
 		Tooltip: ""

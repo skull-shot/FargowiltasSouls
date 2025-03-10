@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinMoon;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using System;
@@ -530,6 +531,7 @@ namespace FargowiltasSouls.Content.Items
             string[] balanceTextKeys = null;
             EModeChange balance = EmodeBalance(ref item, ref balanceNumber, ref balanceTextKeys, ref extra);
 
+
             if (balanceTextKeys != null)
             {
                 for (int i = 0; i < balanceTextKeys.Length; i++)
@@ -572,6 +574,8 @@ namespace FargowiltasSouls.Content.Items
 
                         default:
                             {
+                                if (!SoulConfig.Instance.WeaponReworks && balanceTextKeys[i] == "SpearRework")
+                                    continue;
                                 EModeChange change = balance;
                                 if (balanceNumber != -1 && balanceTextKeys != null && i == 0)
                                 {

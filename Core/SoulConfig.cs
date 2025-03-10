@@ -33,6 +33,10 @@ namespace FargowiltasSouls.Core
         [ReloadRequired]
         public bool BossRecolors;
 
+
+        [DefaultValue(true)]
+        public bool WeaponReworks;
+
         #endregion
 
         #region patreon
