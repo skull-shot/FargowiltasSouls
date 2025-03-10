@@ -26,9 +26,8 @@ namespace FargowiltasSouls.Content.Items
         public override bool InstancePerEntity => true;
         public override void SetDefaults(Item item)
         {
-            if (BroadswordRework(item))
+            if (CountsAsBroadsword(item))
             {
-                //item.noMelee = false;
                 if (!Broadswords.Contains(item.type))
                     Broadswords.Add(item.type);
 
@@ -47,6 +46,10 @@ namespace FargowiltasSouls.Content.Items
                 return false;
             if (!SoulConfig.Instance.WeaponReworks)
                 return false;
+            return CountsAsBroadsword(item);
+        }
+        public static bool CountsAsBroadsword(Item item)
+        {
             if (item.type == ItemID.StaffofRegrowth || item.type == ItemID.GravediggerShovel)
             {
                 return false;
