@@ -350,6 +350,18 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Speed", "Scale", "PalladiumPikeRework"];
                     return EModeChange.Buff;
 
+                case ItemID.CopperBroadsword:
+                case ItemID.TinBroadsword:
+                case ItemID.IronBroadsword:
+                case ItemID.LeadBroadsword:
+                case ItemID.SilverBroadsword:
+                case ItemID.TungstenBroadsword:
+                case ItemID.GoldBroadsword:
+                case ItemID.PlatinumBroadsword:
+                    extra = "0.3";
+                    balanceTextKeys = ["Scale"];
+                    return EModeChange.Buff;
+
                 case ItemID.TitaniumSword:
                 case ItemID.AdamantiteSword:
                     balanceNumber = 1.20f;
