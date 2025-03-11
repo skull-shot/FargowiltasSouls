@@ -519,8 +519,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return false;
             }
 
+            // share healthbar
+            if (FargoSoulsUtil.HostCheck)
+            {
+                if (npc.lifeMax < head.lifeMax)
+                    npc.life = npc.lifeMax = head.lifeMax;
+                npc.life = head.life = Math.Min(npc.life, head.life);
+            }
+
             if (!head.HasValidTarget || head.ai[1] == 3) //return to default ai when death
                 return true;
+
 
             if (head.ai[0] != 2f) //head in phase 1
             {
@@ -1002,6 +1011,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item) => NoContactDamageTimer <= 0 ? null : false;
         public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile) => NoContactDamageTimer <= 0 ? null : false;
         public override bool CanBeHitByNPC(NPC npc, NPC attacker) => NoContactDamageTimer <= 0;
+        public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.1f;
+        }
+        public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
+        {
+            // share healthbar
+            NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronPrime);
+            if (FargoSoulsUtil.HostCheck && head != null)
+            {
+                if (npc.lifeMax < head.lifeMax)
+                    npc.life = npc.lifeMax = head.lifeMax;
+                npc.life = head.life = Math.Min(npc.life, head.life);
+            }
+        }
         public override bool ModifyCollisionData(NPC npc, Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
         {
             if (NoContactDamageTimer > 0)
