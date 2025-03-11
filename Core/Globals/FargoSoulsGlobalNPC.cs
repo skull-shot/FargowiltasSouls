@@ -1309,7 +1309,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 float divisor = 50;
                 if (player.HasEffect<TimberEffect>())
-                    divisor = 25;
+                    divisor = 35;
                 modifiers.FlatBonusDamage += (int) (modPlayer.EbonwoodCharge / divisor);
             }
 
