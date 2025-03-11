@@ -1,3 +1,4 @@
+using Fargowiltas.Items.Ammos;
 using Fargowiltas.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -1133,8 +1134,9 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.SkeletronHead:
-                    npcLoot.Add(BossDrop(ModContent.ItemType<BoneZone>()));
-                    //npcLoot.Add(BossDrop(ModContent.ItemType<BrittleBone>(), 200));
+                    var drop = new DropBasedOnEMode(ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 3), ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 10));
+                    drop.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BrittleBone>(), 1, 200, 200));
+                    npcLoot.Add(drop);
                     break;
 
                 case NPCID.WallofFlesh:
