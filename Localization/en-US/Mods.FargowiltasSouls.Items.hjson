@@ -3447,6 +3447,7 @@ Extra: {
 	EternityItem: Eternity
 	DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Patreon Item <<
+	CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 }

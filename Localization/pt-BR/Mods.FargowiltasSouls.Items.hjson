@@ -809,7 +809,7 @@ UniverseCore: {
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to 1/3 of your critical strike chance
+		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
@@ -3407,6 +3407,7 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
+	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 }

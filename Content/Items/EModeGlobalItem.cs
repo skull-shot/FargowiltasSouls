@@ -86,6 +86,16 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
+            if (item.type == ItemID.CactusHelmet || item.type == ItemID.CactusBreastplate || item.type == ItemID.CactusLeggings)
+            {
+                foreach (var tooltip in tooltips)
+                {
+                    if (tooltip.Name == "SetBonus")
+                    {
+                        tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.CactusImmunity");
+                    }
+                }
+            }
         }
         public override void PickAmmo(Item weapon, Item ammo, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback)
         {
