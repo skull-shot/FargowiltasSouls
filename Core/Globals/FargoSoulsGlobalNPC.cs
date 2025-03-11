@@ -1307,7 +1307,10 @@ namespace FargowiltasSouls.Core.Globals
 
             if (player.HasEffect<EbonwoodEffect>())
             {
-                modifiers.FlatBonusDamage += (int) (modPlayer.EbonwoodCharge / 50);
+                float divisor = 50;
+                if (player.HasEffect<TimberEffect>())
+                    divisor = 25;
+                modifiers.FlatBonusDamage += (int) (modPlayer.EbonwoodCharge / divisor);
             }
 
             if (OceanicMaul)

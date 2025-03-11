@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -74,6 +75,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             float chargeCap = forceEffect ? 500 : 250;
             float chargeSpeed = forceEffect ? 2f : 1f;
             float decaySpeed = chargeSpeed / 2.5f;
+            if (player.HasEffect<TimberEffect>())
+                decaySpeed /= 3;
             bool hasIncreased = false; // If charge has increased this frame
             int dist = ShadewoodEffect.Range(player, forceEffect);
             float LCharge = modPlayer.EbonwoodCharge;
