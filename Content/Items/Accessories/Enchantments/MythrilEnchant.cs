@@ -90,8 +90,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.MythrilDelay--;
                 else
                 {
-                    modPlayer.MythrilTimer++;
-                    if (modPlayer.MythrilTimer == modPlayer.MythrilMaxTime - 1 && player.whoAmI == Main.myPlayer && modPlayer.MythrilSoundCooldown <= 0)
+                    modPlayer.MythrilTimer += 1.125f;
+                    float diff = (modPlayer.MythrilMaxTime - modPlayer.MythrilTimer);
+                    if (diff > 0 && diff < 2 && player.whoAmI == Main.myPlayer && modPlayer.MythrilSoundCooldown <= 0)
                     {
                         SoundEngine.PlaySound(new SoundStyle($"{nameof(FargowiltasSouls)}/Assets/Sounds/Accessories/MythrilCharged"), player.Center);
                         modPlayer.MythrilSoundCooldown = 90;
