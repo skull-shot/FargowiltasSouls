@@ -10,6 +10,10 @@ float2 screenSize;
 float2 anchorPoint;
 float2 playerPosition;
 
+float4 darkColor;
+float4 midColor;
+float4 lightColor;
+
 // This code has roots in the Providence arena shader in The Calamity Mod.
 // I'm still learning the ropes of shader drawing, and like to have a reference point as a foundation.
 
@@ -24,7 +28,6 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float2 provUV = anchorPoint / screenSize;
     float worldDistance = distance(worldUV, anchorPoint);
     float adjustedTime = time * 0.1;
-    
     
     // Pixelate the uvs
     float2 pixelatedUV = worldUV / screenSize;
@@ -71,11 +74,6 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     if (colorMult == 1 && (opacity == 0 || worldDistance < radius))
         return sampleColor;
     
-    
-    float4 darkColor = float4(1, 0.07, 0.57, 1);
-    float4 midColor = float4(1, 0.4, 0.7, 1);
-    float4 lightColor = float4(1, 1, 1, 1);
-    
     float colorLerp = pow(colorMult, 4);
     //colorLerp = lerp(colorLerp, colorLerp * textureMesh + 0.3, 0.2);
     float4 color;
@@ -90,7 +88,8 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
         colorLerp = pow((colorLerp - split) / (1 - split), 3);
         color = lerp(midColor, lightColor, colorLerp);
     }
-    color *= pow(abs(textureMesh), 0.03);
+    color *= pow(abs(textureMesh), 0.05);
+    color *= tex2D(diagonalNoise, frac(noiseUV * 1.46 + float2(0, 1) * adjustedTime * 3));
 
     if (!border)
         colorMult += 0.05;

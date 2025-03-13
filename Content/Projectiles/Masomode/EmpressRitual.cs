@@ -123,13 +123,17 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             var target = Main.LocalPlayer;
              
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargosTextureRegistry.ColorNoiseMap;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
 
             var maxOpacity = Projectile.Opacity;
             float scale = MathF.Sqrt(VisualScale);
+
+            Color darkColor = Main.hslToRgb((Timer / 60f + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+            Color mediumColor = Color.Lerp(darkColor, Color.White, 0.5f);
+            Color lightColor2 = Color.White;
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.EmpressRitualShader");
             borderShader.TrySetParameter("colorMult", 7.35f);
@@ -140,6 +144,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
             borderShader.TrySetParameter("playerPosition", target.Center);
             borderShader.TrySetParameter("maxOpacity", maxOpacity);
+
+            borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
+            borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
+            borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
 

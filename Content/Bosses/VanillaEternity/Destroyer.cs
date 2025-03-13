@@ -742,7 +742,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     modifiers.FinalDamage *= 0.1f;
                 }
             }
-            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120 || npc.life < npc.lifeMax / 10)
+            else if (npc.life < npc.lifeMax / 10)
+            {
+                modifiers.FinalDamage *= 0.1f;
+            }
+            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
             {
                 modifiers.FinalDamage *= 0.1f;
             }
