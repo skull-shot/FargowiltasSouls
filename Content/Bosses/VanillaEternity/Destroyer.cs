@@ -739,7 +739,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.1f;
+                    modifiers.FinalDamage *= 0.4f;
                 }
             }
             else if (npc.life < npc.lifeMax / 10)
@@ -748,7 +748,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
             {
-                modifiers.FinalDamage *= 0.1f;
+                modifiers.FinalDamage *= 0.4f;
             }
         }
 
