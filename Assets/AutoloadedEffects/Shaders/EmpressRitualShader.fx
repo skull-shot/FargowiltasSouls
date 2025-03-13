@@ -14,6 +14,8 @@ float4 darkColor;
 float4 midColor;
 float4 lightColor;
 
+bool sensMode;
+
 // This code has roots in the Providence arena shader in The Calamity Mod.
 // I'm still learning the ropes of shader drawing, and like to have a reference point as a foundation.
 
@@ -88,8 +90,10 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
         colorLerp = pow((colorLerp - split) / (1 - split), 3);
         color = lerp(midColor, lightColor, colorLerp);
     }
-    color *= pow(abs(textureMesh), 0.05);
-    color *= tex2D(diagonalNoise, frac(noiseUV * 1.46 + float2(0, 1) * adjustedTime * 3));
+    color *= pow(abs(textureMesh), 0.1);
+    if (!sensMode)
+        color *= tex2D(diagonalNoise, frac(noiseUV * 1.46 + float2(0, 1) * adjustedTime * 3));
+    
 
     if (!border)
         colorMult += 0.05;

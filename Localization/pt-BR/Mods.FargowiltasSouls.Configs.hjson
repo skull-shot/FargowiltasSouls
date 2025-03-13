@@ -65,6 +65,11 @@ ClientConfig: {
 		// Label: Skill Menu Y
 		// Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		// Label: Photosensitivity Mode
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {

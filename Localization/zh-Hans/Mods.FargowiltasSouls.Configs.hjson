@@ -65,6 +65,11 @@ ClientConfig: {
 		Label: 技能菜单竖直位置
 		Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		// Label: Photosensitivity Mode
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {

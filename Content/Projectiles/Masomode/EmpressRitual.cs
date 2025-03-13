@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -131,7 +132,15 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             var maxOpacity = Projectile.Opacity;
             float scale = MathF.Sqrt(VisualScale);
 
-            Color darkColor = Main.hslToRgb((Timer / 60f + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+            float timerDiv = 60f;
+            if (ClientConfig.Instance.PhotosensitivityMode)
+            {
+                timerDiv = 300f;
+                diagonalNoise = FargosTextureRegistry.PerlinNoise;
+            }
+
+            Color darkColor = Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+
             Color mediumColor = Color.Lerp(darkColor, Color.White, 0.5f);
             Color lightColor2 = Color.White;
 
@@ -144,6 +153,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
             borderShader.TrySetParameter("playerPosition", target.Center);
             borderShader.TrySetParameter("maxOpacity", maxOpacity);
+            borderShader.TrySetParameter("sensMode", ClientConfig.Instance.PhotosensitivityMode);
 
             borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
             borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
