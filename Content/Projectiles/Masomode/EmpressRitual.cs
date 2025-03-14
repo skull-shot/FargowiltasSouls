@@ -17,13 +17,13 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class EmpressRitual : BaseArena
     {
-        public override string Texture => FargoSoulsUtil.EmptyTexture;
+        public override string Texture => "Terraria/Images/Projectile_872";
 
         private const float realRotation = MathHelper.Pi / 180f;
         public float VisualScale = 0f;
         public int Timer = 0;
 
-        public EmpressRitual() : base(realRotation, 600f, NPCID.HallowBoss, DustID.HallowedTorch, visualCount: 64) { }
+        public EmpressRitual() : base(realRotation, 600f, NPCID.HallowBoss, DustID.HallowedTorch, visualCount: 18) { }
 
         public override void SetStaticDefaults()
         {
@@ -114,12 +114,57 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
         public override bool PreDraw(ref Color lightColor)
         {
-           // base.PreDraw(ref lightColor);
             Vector2 auraPos = Projectile.Center;
 
             float leeway = Projectile.width / 2 * Projectile.scale;
             leeway *= 0.75f;
             float radius = threshold - leeway;
+
+            bool enraged = NPC.ShouldEmpressBeEnraged();
+            Color enragedColor = Color.White;
+            if (enraged)
+            {
+                float lerpValue = Utils.GetLerpValue(0f, 60f, (int)Main.time, clamped: true);
+                enragedColor = Color.Lerp(Color.White, Main.OurFavoriteColor, lerpValue) * Projectile.Opacity;
+            }
+
+            // projectiles
+            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            float rotationTimer = -Timer * realRotation * 2;
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int x = 0; x < visualCount; x++)
+            {
+                int framesX = 2;
+                int frame = (Projectile.frame + x) % Main.projFrames[Projectile.type];
+                int y3 = num156 * frame; //ypos of upper left corner of sprite to draw
+                Rectangle rectangle = new(0, y3, texture2D13.Width / framesX, num156);
+                Vector2 origin2 = rectangle.Size() / 2f;
+                Color color26 = enraged ? enragedColor : Main.hslToRgb((((float)x / visualCount) + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+
+                Vector2 drawOffset = new Vector2(radius * Projectile.scale, 0f).RotatedBy(rotationTimer);
+                drawOffset = drawOffset.RotatedBy(2f * MathHelper.Pi / visualCount * x);
+
+                float rotation = drawOffset.ToRotation();
+                const int max = 4;
+                for (int i = 0; i < max; i++)
+                {
+                    Color color27 = color26;
+                    color27 *= (float)(max - i) / max;
+                    Vector2 value4 = Projectile.Center + drawOffset.RotatedBy(rotationPerTick * -i);
+                    float rot = rotation;
+                    Main.EntitySpriteDraw(texture2D13, value4 - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, rot, origin2, Projectile.scale, SpriteEffects.None, 0);
+                }
+
+                float finalRot = rotation;
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, finalRot, origin2, Projectile.scale, SpriteEffects.None, 0);
+            }
+            Main.spriteBatch.ResetToDefault();
+
+
+            // base.PreDraw(ref lightColor);
+
 
             var target = Main.LocalPlayer;
              
@@ -130,6 +175,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 return false;
 
             var maxOpacity = Projectile.Opacity;
+            if (enraged)
+                maxOpacity *= 0.8f;
             float scale = MathF.Sqrt(VisualScale);
 
             float timerDiv = 60f;
@@ -139,7 +186,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 diagonalNoise = FargosTextureRegistry.PerlinNoise;
             }
 
-            Color darkColor = Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+            Color darkColor = enraged ? enragedColor : Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
 
             Color mediumColor = Color.Lerp(darkColor, Color.White, 0.5f);
             Color lightColor2 = Color.White;
@@ -153,7 +200,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
             borderShader.TrySetParameter("playerPosition", target.Center);
             borderShader.TrySetParameter("maxOpacity", maxOpacity);
-            borderShader.TrySetParameter("sensMode", ClientConfig.Instance.PhotosensitivityMode);
+            borderShader.TrySetParameter("sensMode", enraged || ClientConfig.Instance.PhotosensitivityMode);
 
             borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
             borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
