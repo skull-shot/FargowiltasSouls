@@ -200,7 +200,7 @@ namespace FargowiltasSouls
         public static void DrawInterface_35_YouDied(On_Main.orig_DrawInterface_35_YouDied orig)
         {
             orig();
-            if (Main.LocalPlayer.dead && Main.LocalPlayer.Eternity().PreventRespawn())
+            if (Main.LocalPlayer.dead && Main.LocalPlayer.Eternity().PreventRespawn() && Main.netMode != NetmodeID.SinglePlayer)
             {
                 float num = -60f;
                 string value = Lang.inter[38].Value;
