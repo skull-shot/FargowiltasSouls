@@ -549,7 +549,7 @@ MutantRebirthBuff: {
 
 BabyLifelightBuff: {
 	DisplayName: Жизнесветомец
-	Description: Узри, это - свет ангела
+	Description: Узри, это — свет ангела
 }
 
 BrokenShellBuff: {
