@@ -67,8 +67,8 @@ ClientConfig: {
 	}
 
 	PhotosensitivityMode: {
-		// Label: Photosensitivity Mode
-		// Tooltip: ""
+		Label: Режим светочувствительности
+		Tooltip: ""
 	}
 }
 
