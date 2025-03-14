@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 80;
+            Item.damage = 66;
             Item.value = Item.sellPrice(0, 10);
             Item.rare = ItemRarityID.Yellow;
         }

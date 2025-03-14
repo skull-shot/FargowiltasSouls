@@ -888,7 +888,7 @@ NatureForce: {
 		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
 		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
 		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +30% damage and crit and increases your aura size
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +20% damage and crit and increases your aura size
 		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
 		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
 		'Tapped into every secret of the wilds'
@@ -1100,7 +1100,6 @@ CelestialRune: {
 		'''
 		Grants immunity to Marked for Death
 		You may periodically fire additional attacks depending on weapon type
-		Taking damage creates a friendly Ancient Vision to attack enemies
 		'A fallen enemy's spells, repurposed'
 		''' */
 }
@@ -1116,7 +1115,7 @@ ChaliceoftheMoon: {
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
 		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side, [i:FargowiltasSouls/CelestialRune] and erupt into Ancient Visions when injured
+		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side
 		'Always watching'
 		''' */
 }

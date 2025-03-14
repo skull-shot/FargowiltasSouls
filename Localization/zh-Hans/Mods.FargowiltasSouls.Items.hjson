@@ -882,7 +882,7 @@ NatureForce: {
 		[i:FargowiltasSouls/ChlorophyteEnchant] 偶尔会向光环内的敌人发射叶绿水晶
 		[i:FargowiltasSouls/ShroomiteEnchant] 叶绿水晶击中后会产生一团蘑菇
 		[i:FargowiltasSouls/ShroomiteEnchant] 蘑菇可恢复50点生命值，食用蘑菇可获得蘑菇力量，持续20秒
-		[i:FargowiltasSouls/ShroomiteEnchant]蘑菇力量增加30%的伤害和暴击率，并增加光环大小
+		[i:FargowiltasSouls/ShroomiteEnchant]蘑菇力量增加20%的伤害和暴击率，并增加光环大小
 		[i:FargowiltasSouls/FrostEnchant] 你的攻击会造成短暂的霜冻和冻伤
 		[i:FargowiltasSouls/RainEnchant] 产生一把伞，可从上方抵挡最多200点伤害
 		“走遍荒野的每一个秘密角落”
@@ -1099,7 +1099,6 @@ CelestialRune: {
 		'''
 		免疫死亡标记
 		根据武器类型，定期发动额外的攻击
-		受伤时召唤几个友好的远古幻影妖来攻击敌人
 		“陨落的敌人曾运用的魔咒，现在到你手上了”
 		'''
 }
@@ -1115,7 +1114,7 @@ ChaliceoftheMoon: {
 		[i:FargowiltasSouls/LihzahrdTreasureBox]在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发，并生成一连串巨石
 		[i:FargowiltasSouls/CelestialRune]你根据武器类型发动额外攻击
 		[c/BC5252:将你所有附属仆从效果和空召唤栏位转换为+1%伤害（可切换）]
-		否则，[i:FargowiltasSouls/MagicalBulb]召唤一株植物来为你而战，[i:FargowiltasSouls/CelestialRune]受伤时爆发出远古幻象妖
+		否则，[i:FargowiltasSouls/MagicalBulb]召唤一株植物来为你而战
 		“时刻凝视”
 		'''
 }

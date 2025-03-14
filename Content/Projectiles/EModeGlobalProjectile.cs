@@ -22,6 +22,7 @@ using FargowiltasSouls.Content.Bosses.Champions.Terra;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -235,6 +236,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 SourceItemType = itemUse.Item.type;
             }
 
+            switch (SourceItemType)
+            {
+                case ItemID.ProximityMineLauncher:
+                case ItemID.PiranhaGun:
+                    projectile.ContinuouslyUpdateDamageStats = true;
+                    break;
+            }
+
             if (FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
                 if (projectile.minion && !(IgnoreMinionNerf.TryGetValue(projectile.type, out bool ignoreNerf1) && ignoreNerf1))
@@ -350,6 +359,24 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                     }
+                    break;
+
+                case ProjectileID.PygmySpear:
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
+                    {
+                        int pygmy = sourceProj.type;
+                        if (pygmy == 191 || pygmy == 192 || pygmy == 193 || pygmy == 194) // the 4 pygmy variations
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+                            projectile.penetrate = 2;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.GladiusStab:
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = -1;
                     break;
 
                 default:
@@ -1195,6 +1222,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+
+                case ProjectileID.FlowerPow:
+                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.FlowerPow))
+                    {
+                        projectile.localAI[0] += 2f; // tripled petal firerate
+                        projectile.netUpdate = true;
+                    }
+                    break;
             }
         }
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -1240,7 +1275,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (player.Alive())
                     {
                         float maxBonus = 1f;
-                        float bonus = maxBonus * player.Distance(target.Center) / 1200f;
+                        float bonus = maxBonus * player.Distance(target.Center) / 1800f;
                         bonus = MathHelper.Clamp(bonus, 0f, maxBonus);
                         modifiers.FinalDamage *= 1 + bonus;
                     }

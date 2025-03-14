@@ -41,6 +41,10 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
             Projectile.FargoSouls().CanSplit = false;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
             Projectile.FargoSouls().TimeFreezeImmune = true;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -213,6 +217,8 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
             else
             {
                 Projectile.velocity = Projectile.SafeDirectionTo(mousePos);
+                bool tooFar = Projectile.Center.Distance(Main.player[Projectile.owner].Center) > 1200;
+                Projectile.velocity *= tooFar ? 30f : 5f; // drastically faster if offscreen
             }
 
             Lighting.AddLight(Projectile.Center, 0.4f, 0.85f, 0.9f);

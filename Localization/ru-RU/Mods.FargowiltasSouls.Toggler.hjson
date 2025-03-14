@@ -149,7 +149,7 @@ PlantMinionEffect: Прислужник Плантера
 LihzahrdGroundPound: Быстрое падение ящщеров
 LihzahrdBoulders: Валуны и гейзеры топота
 CelestialRuneAttacks: Поддержка небесной руны
-CelestialRuneOnhit: Древние видения при уроне
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: Отключить эффекты миньонов для урона
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: Уменьшенный размер хёртбокса

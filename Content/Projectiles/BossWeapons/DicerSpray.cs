@@ -13,6 +13,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             AIType = ProjectileID.SeedlerThorn;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 120;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 15; // Similarly to Blender
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
     }
 }

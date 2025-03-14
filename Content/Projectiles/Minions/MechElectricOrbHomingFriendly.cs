@@ -24,6 +24,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = -1;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 6;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()
@@ -52,9 +56,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Projectile.velocity *= 1.065f;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+      /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 6;
-        }
+        }*/
     }
 }

@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 360;
             Projectile.penetrate = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
         }
@@ -138,8 +140,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Daybreak, 240);
-            if (Projectile.penetrate == -1)
-                target.immune[Projectile.owner] = 0;
+          //if (Projectile.penetrate == -1)
+          //    target.immune[Projectile.owner] = 0;
         }
 
         public override void OnKill(int timeLeft)
