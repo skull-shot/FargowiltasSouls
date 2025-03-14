@@ -142,6 +142,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
+            if (Player.chaosState)
+            {
+                Player.statDefense *= 0.6f;
+                Player.endurance -= 0.4f;
+                Player.GetDamage(DamageClass.Generic) *= 0.6f;
+            }
         }
 
         public override void UpdateBadLifeRegen()

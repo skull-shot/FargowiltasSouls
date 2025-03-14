@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -91,7 +92,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             }
             NPC.damage = 240;
             NPC.defense = 80;
-            NPC.lifeMax = 750000;
+            NPC.lifeMax = 680000;
             if (Main.expertMode) //compensate universe core
                 NPC.lifeMax *= 2;
             if (WorldSavingSystem.MasochistModeReal) //he's tanky enough
@@ -166,6 +167,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnSpawn(IEntitySource source)
         {
+            int[] rituals = [ModContent.ProjectileType<AbomRitual>(), ModContent.ProjectileType<AbomRitualMaso>(), ModContent.ProjectileType<AbomRitualFTW>(), ModContent.ProjectileType<AbomRitual2>()];
+            for (int i = 0; i <  Main.projectile.Length; i++)
+            {
+                if (Main.projectile[i] != null && Main.projectile[i].active && rituals.Contains(Main.projectile[i].type))
+                {
+                    Main.projectile[i].Kill();
+                }
+            }
             if (ModContent.TryFind("Fargowiltas", "Abominationn", out ModNPC modNPC))
             {
                 int n = NPC.FindFirstNPC(modNPC.Type);
@@ -501,9 +510,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         if (NPC.ai[3] == 0)
                         {
                             NPC.ai[3] = 1;
-                            if (NPC.localAI[3] > 1 && WorldSavingSystem.MasochistModeReal) //phase 2 saucers
+                            if (WorldSavingSystem.MasochistModeReal) //phase 2 saucers
                             {
-                                int max = NPC.localAI[3] > 1 && WorldSavingSystem.MasochistModeReal ? 6 : 3;
+                                int max = NPC.localAI[3] > 1 ? 6 : 2;
                                 for (int i = 0; i < max; i++)
                                 {
                                     float ai2 = i * MathHelper.TwoPi / max; //rotation offset
@@ -591,14 +600,18 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             {
                                 NPC.ai[1] = 80;
 
-                                float baseDelay = NPC.localAI[3] > 1 ? 40 : 20;
+                                float baseDelay = NPC.localAI[3] > 1 ? WorldSavingSystem.MasochistModeReal ? 60 : 90 : 20;
                                 float extendedDelay = NPC.localAI[3] > 1 ? 90 : 40;
-                                float speed = NPC.localAI[3] > 1 ? 40 : 10;
+                                float speed = NPC.localAI[3] > 1 ? 20 : 10;
                                 float offset = NPC.ai[2] % 2 == 0 ? 0 : 0.5f;
+                                
                                 if (FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget)
                                 {
                                     for (int i = 0; i < max; i++)
+                                    {
                                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.TwoPi / max * (i + offset)) * speed, ModContent.ProjectileType<AbomScytheFlaming>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, baseDelay, baseDelay + extendedDelay, ai2: NPC.target);
+                                    }
+                                        
                                 }
                                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
                             }
@@ -613,6 +626,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         break;
 
                     NPC.velocity *= 0.9f;
+                    if (WorldSavingSystem.MasochistModeReal && NPC.localAI[3] <= 1)
+                        NPC.velocity *= 0.8f;
 
                     if (NPC.ai[2] == 0) //first dash only
                     {
@@ -637,8 +652,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     {
                         NPC.velocity *= 0.9f;
                     }*/
-
-                    if (++NPC.ai[1] > (NPC.ai[2] == 0 && NPC.localAI[3] > 1 && WorldSavingSystem.EternityMode ? 240 : 30)) //delay on first entry here
+                    int windup = 30;
+                    if (WorldSavingSystem.MasochistModeReal && NPC.localAI[3] <= 1)
+                        windup = NPC.ai[2] == 0 ? 30 : 10;
+                    if (++NPC.ai[1] > (NPC.ai[2] == 0 && NPC.localAI[3] > 1 && WorldSavingSystem.EternityMode ? 240 : windup)) //delay on first entry here
                     {
                         NPC.netUpdate = true;
                         NPC.ai[0]++;
@@ -762,23 +779,18 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 {
                                     Vector2 straightSpeed = new Vector2(baseSpeed, 0).RotatedBy(baseRot + Math.PI / 2 * i);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<AbomSickleSplit1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() - MathHelper.PiOver2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4 + MathHelper.Pi);
-                                    }
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver2);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() - MathHelper.PiOver2);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4 + MathHelper.Pi);
 
                                     Vector2 diagonalSpeed = new Vector2(baseSpeed, baseSpeed).RotatedBy(baseRot + Math.PI / 2 * i);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<AbomSickleSplit1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() + MathHelper.PiOver2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() - MathHelper.PiOver2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * i);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * (i + 0.5f));
-                                    }
+
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() + MathHelper.PiOver2);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() - MathHelper.PiOver2);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * i);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * (i + 0.5f));
                                 }
                             }
                             SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
@@ -794,6 +806,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     NPC.velocity *= 0.99f;
                     if (NPC.ai[2] == 0)
                     {
+
                         NPC.ai[2] = 1;
                         if (FargoSoulsUtil.HostCheck)
                         {

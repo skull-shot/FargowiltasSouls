@@ -20,9 +20,6 @@ namespace FargowiltasSouls.Core
         public bool DeviChatter;
 
         [DefaultValue(false)]
-        public bool BigTossMode;
-
-        [DefaultValue(false)]
         public bool PerformanceMode;
 
         [DefaultValue(true)]
@@ -35,6 +32,10 @@ namespace FargowiltasSouls.Core
         [DefaultValue(true)]
         [ReloadRequired]
         public bool BossRecolors;
+
+
+        [DefaultValue(true)]
+        public bool WeaponReworks;
 
         #endregion
 

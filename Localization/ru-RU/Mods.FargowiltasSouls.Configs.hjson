@@ -65,6 +65,11 @@ ClientConfig: {
 		Label: Положение меню умений по Y
 		Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		Label: Режим светочувствительности
+		Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -85,11 +90,6 @@ SoulConfig: {
 		Tooltip: ""
 	}
 
-	BigTossMode: {
-		Label: Режим большого броска
-		Tooltip: ""
-	}
-
 	ForcedFilters: {
 		Label: Включать настройку качества волн (игнорирует настройки игры)
 		Tooltip: Необходимо для корректной работы некоторых визуальных эффектов.
@@ -98,6 +98,11 @@ SoulConfig: {
 	BossRecolors: {
 		Label: Боссы используют другие спрайты
 		Tooltip: ""
+	}
+
+	WeaponReworks: {
+		Label: Переработка оружий
+		Tooltip: Переключает переработки некоторых оружий в режиме Вечность, напр. мечей и копий
 	}
 
 	PatreonRoomba: {

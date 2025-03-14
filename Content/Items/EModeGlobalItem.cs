@@ -11,6 +11,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items
 {
@@ -85,6 +86,16 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
+            if (item.type == ItemID.CactusHelmet || item.type == ItemID.CactusBreastplate || item.type == ItemID.CactusLeggings)
+            {
+                foreach (var tooltip in tooltips)
+                {
+                    if (tooltip.Name == "SetBonus")
+                    {
+                        tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.CactusImmunity");
+                    }
+                }
+            }
         }
         public override void PickAmmo(Item weapon, Item ammo, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback)
         {
@@ -155,16 +166,12 @@ namespace FargowiltasSouls.Content.Items
                     return false;
             }
 
-            if (item.type == ItemID.RodofDiscord && LumUtils.AnyBosses())
-            {
-                player.chaosState = true;
-            }
-
             if (item.type == ItemID.CobaltSword)
             {
                 ePlayer.CobaltHitCounter = 0;
             }
 
+            /*
             if (item.type == ItemID.RodOfHarmony && LumUtils.AnyBosses())
             {
                 player.hurtCooldowns[0] = 0;
@@ -175,8 +182,8 @@ namespace FargowiltasSouls.Content.Items
                 player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.RodOfHarmony", player.name)), player.statLifeMax2 / 7, 0, false, false, 0, false);
                 player.statDefense = defense;
                 player.endurance = endurance;
-
             }
+            */
             //TODO: mana pot rework
             /*
             if (item.healMana > 0)
@@ -201,10 +208,19 @@ namespace FargowiltasSouls.Content.Items
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            if (item.type == ItemID.PalladiumSword)
-                scale += 0.4f;
-            if (item.type == ItemID.Bladetongue)
-                scale += 0.3f;
+
+            string extra = string.Empty;
+            float balanceNumber = -1;
+            string[] balanceTextKeys = null;
+            EmodeItemBalance.EmodeBalance(ref item, ref balanceNumber, ref balanceTextKeys, ref extra);
+            if (balanceTextKeys != null)
+            {
+                for (int i = 0; i < balanceTextKeys.Length; i++)
+                {
+                    if (balanceTextKeys[i] == "Scale" || balanceTextKeys[i] == "ScaleNoTooltip")
+                        scale += float.Parse(extra);
+                }
+            }
         }
         public override bool? UseItem(Item item, Player player)
         {

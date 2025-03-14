@@ -63,7 +63,7 @@ AshWoodEnchant: {
 		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
-		'"You're telling me this isn't wood?"'
+		'You're telling me this isn't wood?'
 		''' */
 }
 
@@ -809,7 +809,7 @@ UniverseCore: {
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to half of your critical strike chance
+		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
@@ -1075,7 +1075,7 @@ BionomicClusterInactive: {
 		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
 		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
+		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
@@ -3027,7 +3027,7 @@ DeviousAestheticus: {
 	DisplayName: Estéticus Desonesto
 	Tooltip:
 		'''
-		O espalhamento dos tiros escala com até 6 espaços de lacaio vazios
+		O espalhamento dos tiros escala com até 7 espaços de lacaio vazios
 		'Se você está vendo isto, você está em coma há 20 anos, eu não sei onde esta mensagem estará, mas por favor, acorde'
 		'''
 }
@@ -3407,6 +3407,7 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
+	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 }

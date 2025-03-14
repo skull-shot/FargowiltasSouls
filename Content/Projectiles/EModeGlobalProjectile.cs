@@ -274,25 +274,41 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
-                case ProjectileID.DeerclopsIceSpike: //note to future self: these are all mp compatible apparently?
-
-                    if (WorldSavingSystem.MasochistModeReal)
-                        projectile.ai[0] -= 20;
-
-                    if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.deerBoss, NPCID.Deerclops))
+                case ProjectileID.DeerclopsRangedProjectile:
                     {
-                        if (Main.npc[EModeGlobalNPC.deerBoss].ai[0] == 4) //double walls
-                        {
-                            projectile.ai[0] -= 30;
-                            if (Main.npc[EModeGlobalNPC.deerBoss].GetGlobalNPC<Deerclops>().EnteredPhase2)
-                                projectile.ai[0] -= 30;
-                            if (Main.npc[EModeGlobalNPC.deerBoss].GetGlobalNPC<Deerclops>().EnteredPhase3)
-                                projectile.ai[0] -= 120;
-                        }
+                        if (projectile.light < 1f)
+                            projectile.light = 1f;
                     }
+                    break;
 
+                case ProjectileID.DeerclopsIceSpike: //note to future self: these are all mp compatible apparently?
+                    if (sourceProj is Projectile && sourceProj.type == projectile.type == sourceProj.Eternity().altBehaviour)
+                    {
+                        altBehaviour = true;
+                        float diff = (projectile.Bottom.Y - sourceProj.Bottom.Y);
+                        projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * diff;
+                    }
+                        
                     if (projectile.GetSourceNPC() is NPC && projectile.GetSourceNPC().type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
+                        projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
+                        altBehaviour = true;
+
+                        if (WorldSavingSystem.MasochistModeReal)
+                            projectile.ai[0] -= 20;
+
+                        if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.deerBoss, NPCID.Deerclops))
+                        {
+                            if (Main.npc[EModeGlobalNPC.deerBoss].ai[0] == 4) //double walls
+                            {
+                                projectile.ai[0] -= 30;
+                                if (Main.npc[EModeGlobalNPC.deerBoss].GetGlobalNPC<Deerclops>().EnteredPhase2)
+                                    projectile.ai[0] -= 30;
+                                if (Main.npc[EModeGlobalNPC.deerBoss].GetGlobalNPC<Deerclops>().EnteredPhase3)
+                                    projectile.ai[0] -= 120;
+                            }
+                        }
+
                         //is a final spike of the attack
                         if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
@@ -576,6 +592,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.DeerclopsIceSpike:
+                    if (altBehaviour)
+                    {
+                        if (projectile.ai[0] < -0)
+                            projectile.ai[0] = -0;
+                    }
                     if (counter == 2f && projectile.hostile && projectile.ai[1] > 1.3f) //only larger spikes
                     {
                         float ai1 = 1.3f;

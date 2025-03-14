@@ -65,6 +65,11 @@ ClientConfig: {
 		Label: 技能菜单竖直位置
 		Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		// Label: Photosensitivity Mode
+		// Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -85,11 +90,6 @@ SoulConfig: {
 		Tooltip: ""
 	}
 
-	BigTossMode: {
-		Label: 乱扔瞎甩模式，所有敌怪和弹幕都会把你撞飞
-		Tooltip: ""
-	}
-
 	ForcedFilters: {
 		Label: 当某些视觉效果激活时，强制开启水波质量（覆盖原版设置）
 		Tooltip: 开启后某些视觉效果可以正常作用
@@ -98,6 +98,11 @@ SoulConfig: {
 	BossRecolors: {
 		Label: Boss贴图替换
 		Tooltip: ""
+	}
+
+	WeaponReworks: {
+		// Label: Weapon Reworks
+		// Tooltip: Toggles the reworks of certain weapons in Eternity Mode, such as broadswords and spears
 	}
 
 	PatreonRoomba: {

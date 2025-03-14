@@ -1,3 +1,4 @@
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -46,8 +47,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = Projectile.SafeDirectionTo(player.Center) * 7f;
-                    for (int i = -1; i <= 1; i++)
-                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel.RotatedBy(MathHelper.ToRadians(10) * i), ModContent.ProjectileType<AbomFrostWave>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    float iter = 1;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        iter = 0.5f;
+                    for (float i = -1; i <= 1; i+= iter)
+                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel.RotatedBy(MathHelper.ToRadians(33) * i), ModContent.ProjectileType<AbomFrostWave>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
             }
 

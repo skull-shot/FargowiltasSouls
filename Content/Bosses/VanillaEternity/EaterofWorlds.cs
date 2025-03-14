@@ -255,6 +255,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.timeLeft = 120;
             }
 
+            if (npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) > 2500)
+            {
+                Vector2 dir = npc.DirectionTo(Main.player[npc.target].Center);
+                if (npc.velocity.Length() < 25)
+                    npc.velocity += dir * 1f;
+                npc.velocity = npc.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+            }
 
             //if (eaterResist > 0 && npc.whoAmI == NPC.FindFirstNPC(npc.type)) eaterResist--;
 
@@ -881,9 +888,27 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override bool SafePreAI(NPC npc)
         {
-            NPC head = FargoSoulsUtil.NPCExists(npc.realLife, NPCID.EaterofWorldsHead);
-            if (head.Alive())
+            //FargoSoulsUtil.PrintAI(npc);
+            NPC head = null;
+            int headID = (int)npc.ai[1];
+            for (int i = 0; i < 200; i++)
             {
+                if (headID.IsWithinBounds(Main.maxNPCs) && Main.npc[headID] is NPC ahead)
+                {
+                    if (ahead.type == NPCID.EaterofWorldsHead)
+                    {
+                        break;
+                    }
+                    headID = (int)ahead.ai[1];
+                }
+                else
+                    break; // how
+            }
+            if (headID.IsWithinBounds(Main.maxNPCs))
+                head = Main.npc[headID];
+            if (head != null && head.Alive())
+            {
+                npc.timeLeft = 60 * 60;
                 EaterofWorldsHead headEternity = head.GetGlobalNPC<EaterofWorldsHead>();
                 if (headEternity.Coiling && head.HasPlayerTarget)
                 {

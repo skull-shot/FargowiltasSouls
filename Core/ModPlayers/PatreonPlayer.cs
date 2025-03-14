@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.Patreon.Potato;
 using Luminance.Core.Graphics;
@@ -37,6 +38,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool JojoTheGamer;
         public bool PrimeMinion;
+
+        public bool Eight3One;
 
         public bool Crimetroid;
         public bool ROB;
@@ -97,7 +100,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void OnEnterWorld()
         {
-            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider)
+            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One)
             {
                 string text = Language.GetTextValue($"Mods.{Mod.Name}.Message.PatreonNameEffect");
                 Main.NewText($"{text}, {Player.name}!");
@@ -109,61 +112,58 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CompOrbDrainCooldown > 0)
                 CompOrbDrainCooldown -= 1;
 
-            if (Player.name == "iverhcamer")
+            switch (Player.name)
             {
-                Gittle = true;
-                Player.pickSpeed -= .15f;
-                //shine effect
-                Lighting.AddLight(Player.Center, 0.8f, 0.8f, 0);
-            }
+                case "iverhcamer":
+                    Gittle = true;
+                    Player.pickSpeed -= .15f;
+                    //shine effect
+                    Lighting.AddLight(Player.Center, 0.8f, 0.8f, 0);
+                    break;
+                case "Sasha":
+                    Sasha = true;
 
-            if (Player.name == "Sasha")
-            {
-                Sasha = true;
+                    Player.lavaImmune = true;
+                    Player.fireWalk = true;
+                    Player.buffImmune[BuffID.OnFire] = true;
+                    Player.buffImmune[BuffID.CursedInferno] = true;
+                    Player.buffImmune[BuffID.Burning] = true;
+                    break;
+                case "Dove":
+                    ManliestDove = true;
+                    break;
+                case "cat":
+                    Cat = true;
 
-                Player.lavaImmune = true;
-                Player.fireWalk = true;
-                Player.buffImmune[BuffID.OnFire] = true;
-                Player.buffImmune[BuffID.CursedInferno] = true;
-                Player.buffImmune[BuffID.Burning] = true;
-            }
+                    if (NPC.downedMoonlord)
+                    {
+                        Player.maxMinions += 4;
+                    }
+                    else if (Main.hardMode)
+                    {
+                        Player.maxMinions += 2;
+                    }
 
-            if (Player.name == "Dove")
-            {
-                ManliestDove = true;
-            }
+                    Player.GetDamage(DamageClass.Summon) += Player.maxMinions * 0.5f;
+                    break;
+                case "VirtualDefender":
+                    JojoTheGamer = true;
+                    break;
+                case "Northstrider":
+                    Northstrider = true;
 
-            if (Player.name == "cat")
-            {
-                Cat = true;
+                    Player.wingsLogic = 3;
+                    Player.wings = 3;
 
-                if (NPC.downedMoonlord)
-                {
-                    Player.maxMinions += 4;
-                }
-                else if (Main.hardMode)
-                {
-                    Player.maxMinions += 2;
-                }
-
-                Player.GetDamage(DamageClass.Summon) += Player.maxMinions * 0.5f;
-            }
-
-            if (Player.name == "VirtualDefender")
-            {
-                JojoTheGamer = true;
-            }
-
-            if (Player.name == "Northstrider")
-            {
-                Northstrider = true;
-
-                Player.wingsLogic = 3;
-                Player.wings = 3;
-
-                Player.wingTimeMax = 100;
-                Player.wingAccRunSpeed = 9f;
-                Player.wingRunAccelerationMult = 9f;
+                    Player.wingTimeMax = 100;
+                    Player.wingAccRunSpeed = 9f;
+                    Player.wingRunAccelerationMult = 9f;
+                    break;
+                case "Eight3One":
+                    if (Player.dashType == 0)
+                        Player.dashType = DashID.TabiAndMasterNinjaGear;
+                    Eight3One = true;
+                    break;
             }
 
             if (CompOrb && Player.itemAnimation > 0)
@@ -180,6 +180,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.CheckMana(10, true, false))
                     Player.manaRegenDelay = Player.maxRegenDelay;
             }
+            if (Eight3One && Main.rand.NextBool(20))
+                target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -189,6 +191,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.CheckMana(10, true, false))
                     Player.manaRegenDelay = Player.maxRegenDelay;
             }
+            if (Eight3One && Main.rand.NextBool(20))
+                target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

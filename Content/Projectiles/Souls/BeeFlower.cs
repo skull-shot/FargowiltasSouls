@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -59,6 +60,22 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             }
 
         }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = Projectile.ai[2] == 1 ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Souls/BeeFlowerForce", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value: Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition;
+            int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
+            Rectangle rectangle = new(0, y3, texture.Width, num156);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            Color color = Projectile.GetAlpha(lightColor);
+
+            Main.EntitySpriteDraw(texture, drawPosition, rectangle, color, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            return false;
+        }
+
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             BeeSwarm();

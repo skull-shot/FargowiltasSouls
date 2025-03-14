@@ -64,7 +64,7 @@ AshWoodEnchant: {
 		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
-		'"You're telling me this isn't wood?"'
+		'You're telling me this isn't wood?'
 		''' */
 }
 
@@ -163,9 +163,9 @@ CrystalAssassinEnchant: {
 		'''
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
-		Jump while dashing into ground to get a speed boost
-		Using the Rod of Discord will grant the First Strike Buff
+		Jump while dashing into ground to get a speed boost and gain the First Strike buff
 		First Strike ensures your next attack hits a vital spot dealing 3x damage and reducing defense by 10
+		First Strike has a 5 second cooldown
 		'Reach for the summit'
 		''' */
 }
@@ -606,6 +606,7 @@ SpiderEnchant: {
 		'''
 		Your summon weapons can crit for 1.5x damage
 		Summon crits deal reduced damage if you're holding a non-Summoner weapon
+		Extra base damage from summon crits is capped at 100
 		+10% critical strike chance
 		'Arachnophobia is punishable by arachnid induced death'
 		''' */
@@ -818,7 +819,7 @@ UniverseCore: {
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to half of your critical strike chance
+		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
@@ -987,8 +988,9 @@ AbominableWand: {
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
 		Increased damage gained per Sparkling Adoration graze and halves heart cooldown
+		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
-		With Styx armor, charges energy when graze is maxed
+		With Styx armor, charges energy when grazing
 		You can endure any attack and survive with 1 life
 		Endurance recovers when you reach full life again
 		'Seems like something's missing'
@@ -1040,7 +1042,7 @@ BionomicCluster: {
 		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
 		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
+		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
@@ -1073,7 +1075,7 @@ BionomicClusterInactive: {
 		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
 		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/WyvernFeather] Your attacks can inflict Clipped Wings [i:FargowiltasSouls/NymphsPerfume] and produce hearts
+		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
 		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
@@ -1282,7 +1284,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
 		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
-		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/GalacticGlobe] grants increases flight time
+		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/GalacticGlobe] grants increased flight time
 		[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion buffs (works from inventory and vanity)
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
 		Otherwise, summons [i:FargowiltasSouls/GalacticGlobe] mini True Eyes of Cthulhu and [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer which slows enemies it hits
@@ -1659,7 +1661,6 @@ WyvernFeather: {
 	/* Tooltip:
 		'''
 		Grants immunity to Clipped Wings and Crippled
-		Your attacks have a 10% chance to inflict Clipped Wings on non-boss enemies
 		You periodically shed light orbs, touch them to refresh your flight time
 		Stabilizes gravity in space and in liquids (works from inventory and vanity)
 		'Warm to the touch'
@@ -2241,7 +2242,7 @@ EternalEnergy: {
 }
 
 PhantasmalEnergy: {
-	// DisplayName: Phantasmal Energy
+	// DisplayName: Broken Shaft
 	// Tooltip: ""
 }
 
@@ -3088,7 +3089,7 @@ DeviousAestheticus: {
 	// DisplayName: Devious Aestheticus
 	/* Tooltip:
 		'''
-		Shot spread scales with up to 6 empty minion slots
+		Shot spread scales with up to 7 empty minion slots
 		'If you're seeing this, You've been in a coma for 20 years, I don't know where this message will be, but please wake up'
 		''' */
 }
@@ -3468,6 +3469,7 @@ Extra: {
 	// EternityItem: Eternity
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	// PatreonItem: >> Patreon Item <<
+	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	// ItemStolen: An item was stolen from you!
 }

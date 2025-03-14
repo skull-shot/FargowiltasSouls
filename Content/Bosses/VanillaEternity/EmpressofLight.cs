@@ -1,5 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
+using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -27,10 +29,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool DroppedSummon;
 
         private float startRotation;
-        private Vector2 targetPos;
+        public Vector2 targetPos;
 
         private static int SwordWallCap => WorldSavingSystem.MasochistModeReal ? 4 : 3;
         public bool DoParallelSwordWalls => P2SwordsAttackCounter % SwordWallCap > 0;
+        public bool Ritual = false;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -71,6 +74,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             EModeGlobalNPC.empressBoss = npc.whoAmI;
+            Ritual = false;
 
             if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
@@ -298,15 +302,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         private void SwordCircle(NPC npc, float stop)
         {
+            Ritual = true;
+            int spinTime = WorldSavingSystem.MasochistModeReal ? 210 : 160;
+            float spins = /*WorldSavingSystem.MasochistModeReal ? 2 :*/ 1.5f;
             int startDelay = 60;
             if (AttackTimer == 0)
             {
                 SoundEngine.PlaySound(SoundID.Item161, npc.HasValidTarget ? Main.player[npc.target].Center : npc.Center);
+
+                if (FargoSoulsUtil.HostCheck)
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<EmpressRitual>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, 0f, npc.whoAmI, ai2: spinTime * spins + startDelay * 2);
             }
             else if (AttackTimer == startDelay)
             {
                 targetPos = Main.player[npc.target].Center;
                 startRotation = npc.HasValidTarget ? Main.player[npc.target].velocity.ToRotation() : 0;
+            }
+            else if (AttackTimer < startDelay) // for ritual visual
+            {
+                targetPos = Main.player[npc.target].Center;
             }
 
             AttackTimer++;
@@ -314,17 +328,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             const float radius = 600;
             if (Main.player[npc.target].Distance(targetPos) > radius)
                 targetPos = Main.player[npc.target].Center + Main.player[npc.target].SafeDirectionTo(targetPos) * radius;
-
+            
+            /*
             if (AttackTimer < startDelay + 30)
             {
                 PullNonTargets(npc, targetPos, radius);
             }
+            */
 
             if (AttackTimer % 90 == 30) //rapid fire sound effect
                 SoundEngine.PlaySound(SoundID.Item164, Main.player[npc.target].Center);
 
-            int spinTime = WorldSavingSystem.MasochistModeReal ? 210 : 160;
-            float spins = /*WorldSavingSystem.MasochistModeReal ? 2 :*/ 1.5f;
             if (AttackTimer > startDelay && AttackTimer <= spinTime * spins + startDelay && AttackTimer % 2 == 0)
             {
                 int max = WorldSavingSystem.MasochistModeReal ? 3 : 2;
@@ -342,6 +356,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         appearVel *= WorldSavingSystem.MasochistModeReal ? 7.5f : 2.5f;
                         Projectile.NewProjectile(npc.GetSource_FromThis(), spawnPos - appearVel * 60, appearVel, ProjectileID.FairyQueenLance, FargoSoulsUtil.ScaledProjectileDamage(BaseProjDmg(npc), 1.5f), 0f, Main.myPlayer, vel.ToRotation(), ai1);
 
+                        /*
                         float angleOffset = MathHelper.ToRadians(45);
                         for (int j = -1; j <= 1; j++)
                         {
@@ -351,6 +366,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             Vector2 fancyVel = 2.5f * (j + 2) * newBaseVel.RotatedBy(MathHelper.PiOver2 * j);
                             Projectile.NewProjectile(npc.GetSource_FromThis(), newPos - fancyVel * 60f, fancyVel, ProjectileID.FairyQueenLance, FargoSoulsUtil.ScaledProjectileDamage(BaseProjDmg(npc), 1.5f), 0f, Main.myPlayer, newBaseVel.ToRotation() + MathHelper.Pi + angleOffset * j, ai1);
                         }
+                        */
                     }
                 }
             }

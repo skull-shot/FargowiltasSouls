@@ -25,7 +25,7 @@ BiteSizeBaronBuff: {
 
 ChibiDeviBuff: {
 	DisplayName: Чиби Деви
-	Description: Она заинтересована в 'Вас'
+	Description: Она заинтересована в 'вас'
 }
 
 MutantSpawnBuff: {
@@ -50,7 +50,7 @@ MonkBuff: {
 
 ObsidianLavaWetBuff: {
 	DisplayName: Мокрая лава
-	Description: С Вас капает лава
+	Description: С вас капает лава
 }
 
 TitaniumDRBuff: {
@@ -65,17 +65,17 @@ KingSlimeMinionBuff: {
 
 DukeFishronBuff: {
 	DisplayName: Герцог Рыброн
-	Description: Герцог Рыброн сражается за Вас
+	Description: Герцог Рыброн сражается за вас
 }
 
 RoombaPetBuff: {
 	DisplayName: Румба
-	Description: Эта румба следует за Вами
+	Description: Эта румба следует за вами
 }
 
 DoveBuff: {
 	DisplayName: Голубь
-	Description: Голубь следует за Вами
+	Description: Голубь следует за вами
 }
 
 ChibiiRemiiBuff: {
@@ -85,17 +85,17 @@ ChibiiRemiiBuff: {
 
 PrimeMinionBuff: {
 	DisplayName: Миниатюрный Прайм
-	Description: Скелетрон Прайм сражается за Вас
+	Description: Скелетрон Прайм сражается за вас
 }
 
 FishMinionBuff: {
 	DisplayName: Рыба
-	Description: Эта рыба сражается за Вас
+	Description: Эта рыба сражается за вас
 }
 
 CrimetroidBuff: {
 	DisplayName: Малыш Криметроид
-	Description: Малыш следует за Вами
+	Description: Малыш следует за вами
 }
 
 BerserkerInstallBuff: {
@@ -115,7 +115,7 @@ BetsyDashBuff: {
 
 AbomFangBuff: {
 	DisplayName: Клык мерзости
-	Description: Сила режима Вечность подчиняет Вас
+	Description: Сила режима Вечность подчиняет вас
 }
 
 AbomPresenceBuff: {
@@ -145,7 +145,7 @@ GrabbedBuff: {
 
 MutantFangBuff: {
 	DisplayName: Клык Мутанта
-	Description: Сила Режима Вечность подчиняет Вас
+	Description: Сила Режима Вечность подчиняет вас
 }
 
 MutantPresenceBuff: {
@@ -180,7 +180,7 @@ AnticoagulationBuff: {
 
 AntisocialBuff: {
 	DisplayName: Необщительный
-	Description: У Вас меньше друзей и урона хлыстов
+	Description: У вас меньше друзей и урона хлыстов
 }
 
 AtrophiedBuff: {
@@ -220,7 +220,7 @@ CrippledBuff: {
 
 CurseoftheMoonBuff: {
 	DisplayName: Проклятье луны
-	Description: Гнев луны поглощает Вас
+	Description: Гнев луны поглощает вас
 }
 
 DefenselessBuff: {
@@ -230,7 +230,7 @@ DefenselessBuff: {
 
 FlamesoftheUniverseBuff: {
 	DisplayName: Пламя Космоса
-	Description: Сами небеса судят Вас
+	Description: Сами небеса судят вас
 }
 
 FlippedBuff: {
@@ -274,7 +274,7 @@ HolyPriceBuff: {
 
 HypothermiaBuff: {
 	DisplayName: Гипотермия
-	Description: Дружественные снаряды замедлены, и Вы получаете увеличенный урон от атак холодом
+	Description: Дружественные снаряды замедлены, и вы получаете увеличенный урон от атак холодом
 }
 
 InfestedBuff: {
@@ -306,7 +306,7 @@ LightningRodBuff: {
 LihzahrdBlessingBuff: {
 	DisplayName: Благословение ящщеров
 	Description: Включены провода и снижена частота появления врагов в Храме Джунглей
-	Message: Свет алтаря пал на Вас!
+	Message: Свет алтаря пал на вас!
 }
 
 LihzahrdCurseBuff: {
@@ -316,12 +316,12 @@ LihzahrdCurseBuff: {
 
 LivingWastelandBuff: {
 	DisplayName: Живая пустошь
-	Description: Все вокруг Вас начинают гнить
+	Description: Все вокруг вас начинают гнить
 }
 
 LoosePocketsBuff: {
 	DisplayName: Широкие карманы
-	Description: У Вас могут забрать предметы
+	Description: У вас могут забрать предметы
 }
 
 LovestruckBuff: {
@@ -418,13 +418,13 @@ RottingBuff: {
 
 RushJobBuff: {
 	DisplayName: Работа в спешке
-	Description: Медсестра пока не может Вас вылечить
+	Description: Медсестра пока не может вас вылечить
 	NurseChat: С ЭТОЙ штукой за твоей спиной? Ну уж нет, сперва иди убей её!
 }
 
 SadismBuff: {
 	DisplayName: Вечность
-	Description: Сила режима Вечность с Вами
+	Description: Сила режима Вечность с вами
 }
 
 ShadowflameBuff: {
@@ -434,7 +434,7 @@ ShadowflameBuff: {
 
 SmiteBuff: {
 	DisplayName: Сражённый
-	Description: Регенерация здоровья снижена и Вы получаете на 20% больше урона
+	Description: Регенерация здоровья снижена и вы получаете на 20% больше урона
 }
 
 SqueakyToyBuff: {
@@ -469,77 +469,77 @@ UnstableBuff: {
 
 BigBrainMinionBuff: {
 	DisplayName: Большой мозг Ктулху
-	Description: Мозг Ктулху сражается за Вас
+	Description: Мозг Ктулху сражается за вас
 }
 
 BrainMinionBuff: {
 	DisplayName: Мозг Ктулху
-	Description: Миниатюрный Мозг Ктулху сражается за Вас
+	Description: Миниатюрный Мозг Ктулху сражается за вас
 }
 
 CrystalSkullBuff: {
 	DisplayName: Кристальный череп
-	Description: Кристальный череп защищает Вас
+	Description: Кристальный череп защищает вас
 }
 
 EaterMinionBuff: {
 	DisplayName: Пожиратель миров
-	Description: Миниатюрный пожиратель миров сражается за Вас
+	Description: Миниатюрный пожиратель миров сражается за вас
 }
 
 LunarCultistBuff: {
 	DisplayName: Лунный культист
-	Description: Лунный культист защищает Вас
+	Description: Лунный культист защищает вас
 }
 
 MutantPowerBuff: {
 	DisplayName: Сила Мутанта
-	Description: Сила Мутанта с Вами
+	Description: Сила Мутанта с вами
 }
 
 PlanterasChildBuff: {
 	DisplayName: Дитя Плантеры
-	Description: Дитя Плантеры защищает Вас
+	Description: Дитя Плантеры защищает вас
 }
 
 ProbesBuff: {
 	DisplayName: Зонды
-	Description: Зонды защищают Вас
+	Description: Зонды защищают вас
 }
 
 PungentEyeballBuff: {
 	DisplayName: Едкий глаз
-	Description: Едкий глаз защищает Вас
+	Description: Едкий глаз защищает вас
 }
 
 RainbowSlimeBuff: {
 	DisplayName: Радужный слизень
-	Description: Радужный слизень защищает Вас
+	Description: Радужный слизень защищает вас
 }
 
 SaucerMinionBuff: {
 	DisplayName: Маленькая летающая тарелка
-	Description: Маленькая летающая тарелка защищает Вас
+	Description: Маленькая летающая тарелка защищает вас
 }
 
 SkeletronArmsBuff: {
 	DisplayName: Руки Скелетрона
-	Description: Руки Скелетрона защищают Вас
+	Description: Руки Скелетрона защищают вас
 }
 
 SouloftheMasochistBuff: {
 	DisplayName: Душа Властителя
-	Description: Сила режима Вечность с Вами
+	Description: Сила режима Вечность с вами
 }
 
 TrueEyesBuff: {
 	DisplayName: Истинные глаза Ктулху
-	Description: Истинные глаза Ктулху защищают Вас
+	Description: Истинные глаза Ктулху защищают вас
 }
 
 TwinsEXBuff: {
 	DisplayName: Близнецы EX
-	Description: Настоящие Близнецы сражаются за Вас
+	Description: Настоящие Близнецы сражаются за вас
 }
 
 MutantRebirthBuff: {
@@ -549,7 +549,7 @@ MutantRebirthBuff: {
 
 BabyLifelightBuff: {
 	DisplayName: Жизнесветомец
-	Description: Узри, это - свет ангела
+	Description: Узри, это — свет ангела
 }
 
 BrokenShellBuff: {
@@ -563,7 +563,7 @@ CrimsonRegenBuff: {
 }
 
 FirstStrikeBuff: {
-	DisplayName: Ударный момент
+	DisplayName: Первый удар
 	Description: Ваша следующая атака будет усилена
 }
 
@@ -674,7 +674,7 @@ MoonBowBuff: {
 
 TribalCharmClickBuff: {
 	DisplayName: Амулет племени
-	Description: Получите на мгновение увеличенный урон, когда Вы не зажимаете кнопку для атаки
+	Description: Получите на мгновение увеличенный урон, когда вы не зажимаете кнопку для атаки
 }
 
 TwinsInstallBuff: {
@@ -699,7 +699,7 @@ CorruptedBuffForce: {
 
 JungleMimicSummonBuff: {
 	DisplayName: Мимик джунглей
-	Description: Мимик джунглей сражается за Вас
+	Description: Мимик джунглей сражается за вас
 }
 
 GladiatorBuff: {
@@ -708,7 +708,7 @@ GladiatorBuff: {
 }
 
 GladiatorSpiritBuff: {
-	DisplayName: Gladiator Strength
+	DisplayName: Сила Гладиатора
 	Description: +15% к сопротивлению урону, +30% к урону, даёт иммунитет к отбрасыванию, улучшает урон за попадания
 }
 
@@ -811,5 +811,5 @@ MutantDesperationBuff: {
 
 TouhouHoardBuff: {
 	DisplayName: Бафф Орда на восток
-	Description: Мифические существа сражаются с Вами
+	Description: Мифические существа сражаются с вами
 }

@@ -5,7 +5,11 @@ Damage: 伤害降低{0}%
 DamagePositive: 伤害提升{0}%
 Speed: 攻击速度降低{0}%
 SpeedPositive: 攻击速度提升{0}%
+// Scale: Reduced size by {0}%
+// ScalePositive: Increased size by {0}%
 RodofDiscord: 在Boss战中，每次使用都会消耗生命
+// ChaosState: Reduced damage, defense and damage reduction by 40%
+// RodofHarmony: Can only be obtained after defeating the Mutant
 Split: 降低分裂频率
 ChlorophyteBullet: 速度减慢，存在时间降低
 WaterBolt: 在骷髅王被击败前无法使用
@@ -33,6 +37,7 @@ MinionStack: 同时召唤超过3个相同召唤物时，它们的伤害会降低
 SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降低（在撒旦军队中除外）
 ShadowDodge: 永恒模式：闪避会降低你的攻击速度
 IceBarrier: 永恒模式：你造成的伤害减少10%
+// SwordRework: Reworked broadsword swing animation
 SpearRework: 重做长矛挥舞动画
 PalladiumPikeRework: 增加大小，击中敌人后大幅增加生命恢复速度并恢复1点生命值（0.5秒冷却）
 CobaltNaginataRework: 击中敌人会造成小范围爆炸

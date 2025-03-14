@@ -308,6 +308,7 @@ namespace FargowiltasSouls.Core.Globals
                             }
                         }
 
+                        /*
                         if (normalSpawn && WorldSavingSystem.DownedAnyBoss)
                         {
                             if (snow)
@@ -316,7 +317,7 @@ namespace FargowiltasSouls.Core.Globals
                             if (desert)
                                 pool[NPCID.SandElemental] = .005f;
                         }
-
+                        */
                         if (Main.slimeRain && NPC.downedBoss2 && bossCanSpawn)
                             pool[NPCID.KingSlime] = 0.004f;
 

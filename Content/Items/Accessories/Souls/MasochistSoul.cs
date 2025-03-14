@@ -181,7 +181,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 player.FargoSouls().DevianttHearts = true;*/
 
             //dragon fang
-            player.AddEffect<ClippedEffect>(Item);
 
             //frigid gemstone
             player.buffImmune[BuffID.Frostburn] = true;

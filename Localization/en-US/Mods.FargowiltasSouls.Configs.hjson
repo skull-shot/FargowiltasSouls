@@ -65,6 +65,11 @@ ClientConfig: {
 		Label: Skill Menu Y
 		Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		Label: Photosensitivity Mode
+		Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -85,11 +90,6 @@ SoulConfig: {
 		Tooltip: ""
 	}
 
-	BigTossMode: {
-		Label: Big Toss Mode
-		Tooltip: ""
-	}
-
 	ForcedFilters: {
 		Label: Turns on Waves Quality (overrides vanilla setting)
 		Tooltip: Needed for certain visual effects to function
@@ -98,6 +98,11 @@ SoulConfig: {
 	BossRecolors: {
 		Label: Bosses use alternative sprites
 		Tooltip: ""
+	}
+
+	WeaponReworks: {
+		Label: Weapon Reworks
+		Tooltip: Toggles the reworks of certain weapons in Eternity Mode, such as broadswords and spears
 	}
 
 	PatreonRoomba: {

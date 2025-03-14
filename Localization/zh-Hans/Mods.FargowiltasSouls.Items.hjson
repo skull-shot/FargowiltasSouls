@@ -3089,7 +3089,7 @@ DeviousAestheticus: {
 	DisplayName: 艳岚谲锋
 	Tooltip:
 		'''
-		攻击道数随着召唤栏的增加而增加，上限为6道（使用6个召唤栏）
+		攻击道数随着召唤栏的增加而增加，上限为7道（使用7个召唤栏）
 		“如果你看到了这条消息，说明你已经沉睡了二十年了。我不知道这条消息会发送到哪里，但请醒来”
 		'''
 }
@@ -3471,6 +3471,7 @@ Extra: {
 	EternityItem: 永恒
 	DisabledEffects: 有效果被饰品效果配置禁用
 	PatreonItem: >> 捐赠者物品 <<
+	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: 你有东西被偷了！
 }

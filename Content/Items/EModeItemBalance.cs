@@ -1,10 +1,12 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinMoon;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -31,9 +33,11 @@ namespace FargowiltasSouls.Content.Items
             switch (itemType)
             {
                 case ItemID.RodofDiscord:
-                case ItemID.RodOfHarmony:
                     balanceTextKeys = ["RodofDiscord"];
                     return EModeChange.Nerf;
+                case ItemID.RodOfHarmony:
+                    balanceTextKeys = ["RodofHarmony"];
+                    return EModeChange.Neutral;
 
                 case ItemID.WaterBolt:
                     if (!NPC.downedBoss3)
@@ -339,11 +343,25 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
                 case ItemID.PalladiumPike:
                     balanceNumber = -1;
-                    balanceTextKeys = ["SpearRework", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["SpearRework", "Scale", "PalladiumPikeRework"];
                     return EModeChange.Buff;
                 case ItemID.PalladiumSword:
                     balanceNumber = 1.25f;
-                    balanceTextKeys = ["Speed", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["Speed", "Scale", "PalladiumPikeRework"];
+                    return EModeChange.Buff;
+
+                case ItemID.CopperBroadsword:
+                case ItemID.TinBroadsword:
+                case ItemID.IronBroadsword:
+                case ItemID.LeadBroadsword:
+                case ItemID.SilverBroadsword:
+                case ItemID.TungstenBroadsword:
+                case ItemID.GoldBroadsword:
+                case ItemID.PlatinumBroadsword:
+                    extra = "0.3";
+                    balanceTextKeys = ["Scale"];
                     return EModeChange.Buff;
 
                 case ItemID.TitaniumSword:
@@ -541,6 +559,7 @@ namespace FargowiltasSouls.Content.Items
             string[] balanceTextKeys = null;
             EModeChange balance = EmodeBalance(ref item, ref balanceNumber, ref balanceTextKeys, ref extra);
 
+
             if (balanceTextKeys != null)
             {
                 for (int i = 0; i < balanceTextKeys.Length; i++)
@@ -566,18 +585,31 @@ namespace FargowiltasSouls.Content.Items
                                 break;
                             }
 
+                        case "Scale":
+                            {
+                                float scaleNumber = float.Parse(extra);
+                                EModeChange change = scaleNumber > 0 ? EModeChange.Buff : scaleNumber < 1 ? EModeChange.Nerf : EModeChange.Neutral;
+                                int amount = (int)Math.Round(scaleNumber * 100f);
+                                string key = change == EModeChange.Buff ? "ScalePositive" : "Scale";
+                                ItemBalance(tooltips, change, key, amount);
+                                break;
+                            }
+
                         case "DamageNoTooltip":
                         case "SpeedNoTooltip":
+                        case "ScaleNoTooltip":
                             break;
 
                         default:
                             {
+                                if (!SoulConfig.Instance.WeaponReworks && balanceTextKeys[i] == "SpearRework")
+                                    continue;
                                 EModeChange change = balance;
                                 if (balanceNumber != -1 && balanceTextKeys != null && i == 0)
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], (int)balanceNumber);
                                 }
-                                else if (extra != string.Empty && balanceTextKeys != null && i == 0)
+                                else if (extra != string.Empty && balanceTextKeys != null && i == 0 && !balanceTextKeys.Any(k => k == "Scale" || k == "ScaleNoTooltip"))
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], extra);
                                 }
@@ -597,6 +629,10 @@ namespace FargowiltasSouls.Content.Items
                 ItemBalance(tooltips, EModeChange.Neutral, "ManaPots");
             }
             */
+            if (SwordGlobalItem.BroadswordRework(item))
+            {
+                ItemBalance(tooltips, EModeChange.Buff, "SwordRework");
+            }
             if (item.shoot > ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot])
             {
                 if (!Main.LocalPlayer.HasEffect<TikiEffect>())

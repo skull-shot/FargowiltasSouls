@@ -178,7 +178,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public Color ColorFunction(float completionRatio)
         {
-            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+            float opacity = 1f;
+            float threshold = 0.5f;
+            if (completionRatio < threshold)
+                opacity *= MathF.Pow(completionRatio / threshold, 2);
+            return Projectile.GetAlpha(Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio) * opacity);
         }
 
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)

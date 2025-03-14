@@ -73,7 +73,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (UniverseCore) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
-
                         if (Main.rand.NextFloat(100) < crit) //supercrit
                         {
                             hitInfo.Damage *= 2;
@@ -88,6 +87,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                             //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
+                        if (!EridanusSet && !Ambrosia)
+                        {
+                            float damageCap = (hitInfo.Damage / 2) + 100;
+                            if (hitInfo.Damage * critDamageMult > damageCap)
+                            {
+                                critDamageMult = damageCap / hitInfo.Damage;
+                            }
+                        }
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
@@ -175,7 +182,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (StyxSet)
             {
-                StyxMeter += hitInfo.Damage;
+                StyxMeter += (int)(hitInfo.Damage * StyxCrown.StyxChargeMultiplier(Player, StyxCrown.ChargeContext.DealDamage));
                 if (StyxTimer <= 0 && !target.friendly && target.lifeMax > 5 && target.type != NPCID.TargetDummy)
                     StyxTimer = 60;
             }
@@ -399,7 +406,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
             }
-
+            /*
             if (ModContent.GetInstance<SoulConfig>().BigTossMode)
             {
                 AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
@@ -412,6 +419,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (attacker != default)
                     Player.velocity = Vector2.Normalize(Player.Center - attacker) * 30 * 2;
             }
+            */
         }
 
         public override bool CanBeHitByNPC(NPC npc, ref int CooldownSlot)

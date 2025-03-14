@@ -29,7 +29,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
 
             Counter = binaryReader.Read7BitEncodedInt();
         }
-
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (npc.GetLifePercent() >= 1f)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void AI(NPC npc)
         {
             base.AI(npc);
