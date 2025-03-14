@@ -53,7 +53,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             float maxTime = Projectile.ai[2];
             float endTime = 30f;
             Projectile.scale = 1f;
-            VisualScale = 1f;
             //NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], npcType);
             /*
             if (npc.TypeAlive(NPCID.HallowBoss))
@@ -105,6 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                     Projectile.Kill();
                 }
             }
+            VisualScale = Projectile.Opacity;
         }
         public override bool CanHitPlayer(Player target) => base.CanHitPlayer(target);
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
@@ -119,13 +119,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             float leeway = Projectile.width / 2 * Projectile.scale;
             leeway *= 0.75f;
             float radius = threshold - leeway;
+            float scale = MathF.Sqrt(VisualScale) * Projectile.scale;
 
             bool enraged = NPC.ShouldEmpressBeEnraged();
             Color enragedColor = Color.White;
             if (enraged)
             {
                 float lerpValue = Utils.GetLerpValue(0f, 60f, (int)Main.time, clamped: true);
-                enragedColor = Color.Lerp(Color.White, Main.OurFavoriteColor, lerpValue) * Projectile.Opacity;
+                enragedColor = Color.Lerp(Color.White, Main.OurFavoriteColor, lerpValue);
             }
 
             // projectiles
@@ -133,6 +134,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             float rotationTimer = -Timer * realRotation * 2;
 
+            Vector2 starPos = Projectile.Center;
             Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int x = 0; x < visualCount; x++)
             {
@@ -141,9 +143,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 int y3 = num156 * frame; //ypos of upper left corner of sprite to draw
                 Rectangle rectangle = new(0, y3, texture2D13.Width / framesX, num156);
                 Vector2 origin2 = rectangle.Size() / 2f;
-                Color color26 = enraged ? enragedColor : Main.hslToRgb((((float)x / visualCount) + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+                Color color26 = enraged ? enragedColor : Main.hslToRgb((((float)x / visualCount) + 0.5f) % 1f, 1f, 0.5f); // empress color
+                color26 *= Projectile.Opacity;
 
-                Vector2 drawOffset = new Vector2(radius * Projectile.scale, 0f).RotatedBy(rotationTimer);
+                Vector2 drawOffset = new Vector2(radius * scale, 0f).RotatedBy(rotationTimer);
                 drawOffset = drawOffset.RotatedBy(2f * MathHelper.Pi / visualCount * x);
 
                 float rotation = drawOffset.ToRotation();
@@ -152,13 +155,13 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 {
                     Color color27 = color26;
                     color27 *= (float)(max - i) / max;
-                    Vector2 value4 = Projectile.Center + drawOffset.RotatedBy(rotationPerTick * -i);
+                    Vector2 value4 = starPos + drawOffset.RotatedBy(rotationPerTick * -i);
                     float rot = rotation;
                     Main.EntitySpriteDraw(texture2D13, value4 - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, rot, origin2, Projectile.scale, SpriteEffects.None, 0);
                 }
 
                 float finalRot = rotation;
-                Main.EntitySpriteDraw(texture2D13, Projectile.Center + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, finalRot, origin2, Projectile.scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture2D13, starPos + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, finalRot, origin2, Projectile.scale, SpriteEffects.None, 0);
             }
             Main.spriteBatch.ResetToDefault();
 
@@ -177,7 +180,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             var maxOpacity = Projectile.Opacity;
             if (enraged)
                 maxOpacity *= 0.8f;
-            float scale = MathF.Sqrt(VisualScale);
 
             float timerDiv = 60f;
             if (ClientConfig.Instance.PhotosensitivityMode)
@@ -186,7 +188,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 diagonalNoise = FargosTextureRegistry.PerlinNoise;
             }
 
-            Color darkColor = enraged ? enragedColor : Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f) * Projectile.Opacity; // empress color
+            Color darkColor = enraged ? enragedColor : Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f); // empress color
+            darkColor *= Projectile.Opacity;
 
             Color mediumColor = Color.Lerp(darkColor, Color.White, 0.5f);
             Color lightColor2 = Color.White;
