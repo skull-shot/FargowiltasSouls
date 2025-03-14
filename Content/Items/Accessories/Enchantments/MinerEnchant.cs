@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            float speed = modPlayer.ForceEffect<MinerEnchant>() ? 1.25f : .75f;
+            float speed = modPlayer.ForceEffect<MinerEnchant>() ? .75f : .5f;
             AddEffects(player, speed, Item);
         }
 
