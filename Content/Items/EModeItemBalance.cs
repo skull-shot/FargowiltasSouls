@@ -364,6 +364,11 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Scale"];
                     return EModeChange.Buff;
 
+                case ItemID.Bladetongue:
+                    extra = "0.3";
+                    balanceTextKeys = ["Scale"];
+                    return EModeChange.Buff;
+
                 case ItemID.TitaniumSword:
                 case ItemID.AdamantiteSword:
                     balanceNumber = 1.20f;
@@ -460,10 +465,6 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.TempestStaff:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
-                    return EModeChange.Buff;
-
-                case ItemID.Bladetongue:
-                    balanceTextKeys = ["Bladetongue"];
                     return EModeChange.Buff;
 
                 case ItemID.BouncingShield: //sergeant united shield
