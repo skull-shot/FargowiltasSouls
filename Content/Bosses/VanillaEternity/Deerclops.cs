@@ -303,7 +303,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 if (npc.ai[1] == firstVolleyTime) // first volley
                                 {
                                     npc.TargetClosest();
-                                    //SoundEngine.PlaySound(SoundID.DeerclopsRubbleAttack, npc.Center);
                                     for (int i = -1; i <= 1; i += 2)
                                     {
                                         SpawnHand(Vector2.UnitX * i);
@@ -315,7 +314,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 if (npc.ai[1] == secondVolleyTime) // second volley
                                 {
                                     npc.TargetClosest();
-                                    //SoundEngine.PlaySound(SoundID.DeerclopsRubbleAttack, npc.Center);
                                     if (EnteredPhase2)
                                     {
                                         for (int i = -1; i <= 1; i += 2)
