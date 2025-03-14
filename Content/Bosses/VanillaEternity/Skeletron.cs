@@ -610,7 +610,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         else if (AttackTimer % 7 == 0 && FargoSoulsUtil.HostCheck) 
                         {
                             Vector2 vel = npc.SafeDirectionTo(Main.player[npc.target].Center);
-                            if (AttackTimer < GuardianTime * 3 / 4) //first quarter of projectiles are shot towards player, other three quarters are shot straight out
+                            if (AttackTimer < GuardianTime * 7 / 8) //first quarter of projectiles are shot towards player, other three quarters are shot straight out
                             {
                                 vel = head.SafeDirectionTo(npc.Center);
                             }
