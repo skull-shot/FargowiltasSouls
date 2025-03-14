@@ -286,6 +286,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                             if (HandsCooldown <= 0)
                             {
+                                npc.velocity.X = 0;
                                 int attackDuration = 140;
                                 int firstVolleyTime = 10;
                                 int secondVolleyTime = 85;
