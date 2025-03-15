@@ -495,7 +495,7 @@ RichMahoganyEnchant: {
 	Tooltip:
 		'''
 		All grappling hooks pull 1.5x as fast, shoot 2x as fast, and retract 3x as fast
-		While grappling you gain 10% damage resistance for one hit and a 50% thorns effect
+		While grappling you gain 10% damage reduction for one hit and a 50% thorns effect
 		'Guaranteed to keep you hooked'
 		'''
 }
@@ -574,7 +574,7 @@ SolarEnchant: {
 	Tooltip:
 		'''
 		Build up solar charge while attacking
-		Gain damage resistance the more charge is stored, up to 20%
+		Gain damage reduction the more charge is stored, up to 20%
 		Stop attacking when fully charged to release a large solar burst
 		Solar bursts inflict the Solar Flare debuff and deal melee damage
 		'Too hot to handle'
@@ -666,8 +666,8 @@ TitaniumEnchant: {
 	Tooltip:
 		'''
 		Attacking generates a defensive barrier of up to 20 titanium shards that deal melee damage
-		When you reach the maximum amount, you gain resistance to most debuffs on hit and 10-30% damage resistance
-		Damage resistance increases the closer to the enemy you are when hit
+		When you reach the maximum amount, you gain resistance to most debuffs on hit and 10-30% damage reduction
+		Damage reduction increases the closer to the enemy you are when hit
 		Resistance effects remain for a few seconds after initial hit
 		This has a cooldown of 15 seconds, during which you cannot gain shards
 		'Who needs a dodge when you're indestructible'
@@ -691,7 +691,7 @@ TurtleEnchant: {
 		'''
 		100% of contact damage is reflected
 		When grounded, not pressing movement keys and not attacking, you will enter your shell
-		While in your shell, you will gain 90% damage resistance 
+		While in your shell, you will gain 90% damage reduction 
 		Additionally you will destroy incoming projectiles and deal 10x more thorns damage
 		The shell lasts at least 1 second and up to 20 attacks blocked
 		Enemies will explode into needles on death if they are struck with your needles
