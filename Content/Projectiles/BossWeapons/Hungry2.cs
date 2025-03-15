@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                 if (Projectile.scale < 5f)
                 {
-                    Projectile.scale *= 1.008f;
+                    Projectile.scale *= 1.008f * (((player.FargoSouls().AttackSpeed - 1f) / 60f) + 1f);
 
                     if (Projectile.scale >= 5f) //dust indicates full charge
                     {
