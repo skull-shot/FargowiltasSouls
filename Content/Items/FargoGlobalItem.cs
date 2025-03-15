@@ -52,8 +52,7 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer p = player.FargoSouls();
             //ignore money, hearts, mana stars
-            if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>() && item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
-                item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart)
+            if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 int rangeBonus = 160;
                 if (p.ForceEffect<IronEnchant>())
@@ -76,12 +75,15 @@ namespace FargowiltasSouls.Content.Items
             {
                 OnRetrievePickup(player);
             }
+            else
+                IronPickupEffect.OnPickup(player);
 
             return base.OnPickup(item, player);
         }
         public static void OnRetrievePickup(Player player)
         {
             PearlwoodEffect.OnPickup(player);
+            IronPickupEffect.OnPickup(player);
         }
 
         public override void PickAmmo(Item weapon, Item ammo, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback)
@@ -453,45 +455,14 @@ namespace FargowiltasSouls.Content.Items
 
         }
 
-        //        public override bool ReforgePrice(Item item, ref int reforgePrice, ref bool canApplyDiscount)
-        //        {
-        //            if (Main.LocalPlayer.FargoSouls().SecurityWallet)
-        //                reforgePrice /= 2;
-        //            return true;
-        //        }
-
-        //        //summon variants
-        //        private static readonly int[] Summon = { ItemID.NimbusRod, ItemID.CrimsonRod, ItemID.BeeGun, ItemID.WaspGun, ItemID.PiranhaGun, ItemID.BatScepter };
-
-        //        public override bool CanRightClick(Item item)
-        //        {
-        //            if (Array.IndexOf(Summon, item.type) > -1)
-        //            {
-        //                return true;
-        //            }
-
-        //            return base.CanRightClick(item);
-        //        }
-
-        //        public override void RightClick(Item item, Player player)
-        //        {
-        //            int newType = -1;
-
-        //            if (Array.IndexOf(Summon, item.type) > -1)
-        //            {
-        //                newType = mod.ItemType(ItemID.GetUniqueKey(item.type).Replace("Terraria ", string.Empty) + "Summon");
-        //            }
-
-        //            if (newType != -1)
-        //            {
-        //                int num = Item.NewItem(player.getRect(), newType, prefixGiven: item.prefix);
-
-        //                if (Main.netMode == NetmodeID.MultiplayerClient)
-        //                {
-        //                    NetMessage.SendData(MessageID.SyncItem, number: num, number2: 1f);
-        //                }
-        //            }
-        //        }
+        public override bool ReforgePrice(Item item, ref int reforgePrice, ref bool canApplyDiscount)
+        {
+            if (Main.LocalPlayer.HasEffect<IronPassiveEffect>() && canApplyDiscount)
+                reforgePrice = (int)(reforgePrice * 1.5);
+            if (Main.LocalPlayer.FargoSouls().SecurityWallet && canApplyDiscount)
+                reforgePrice /= 2;
+            return base.ReforgePrice(item, ref reforgePrice, ref canApplyDiscount);
+        }
 
         public override bool WingUpdate(int wings, Player player, bool inUse)
         {
@@ -600,84 +571,20 @@ namespace FargowiltasSouls.Content.Items
 
         public override bool AllowPrefix(Item item, int pre)
         {
-            if (!Main.gameMenu && Main.LocalPlayer.active && Main.LocalPlayer.FargoSouls().SecurityWallet)
+            if (!Main.gameMenu && Main.LocalPlayer.active && Main.LocalPlayer.HasEffect<IronPassiveEffect>())
             {
-                switch (pre)
+                List<int> allowed = [PrefixID.Legendary, PrefixID.Legendary2, PrefixID.Mythical, PrefixID.Unreal, PrefixID.Godly, PrefixID.Demonic, PrefixID.Ruthless];
+                if (item.accessory)
+                    allowed.AddRange([PrefixID.Violent, PrefixID.Quick, PrefixID.Menacing, PrefixID.Warding, PrefixID.Lucky, PrefixID.Arcane]);
+                if (item.pick > 0 || item.axe > 0 || item.hammer > 0)
+                    allowed.Add(PrefixID.Light);
+                allowed.Remove(item.prefix);
+                if (pre < 85 && !allowed.Contains(pre))
                 {
-                    #region actually bad
-
-                    case PrefixID.Hard:
-                    case PrefixID.Guarding:
-                    case PrefixID.Jagged:
-                    case PrefixID.Spiked:
-                    case PrefixID.Brisk:
-                    case PrefixID.Fleeting:
-                    case PrefixID.Wild:
-                    case PrefixID.Rash:
-
-                    case PrefixID.Broken:
-                    case PrefixID.Damaged:
-                    case PrefixID.Shoddy:
-                    case PrefixID.Weak:
-
-                    case PrefixID.Slow:
-                    case PrefixID.Sluggish:
-                    case PrefixID.Lazy:
-                    case PrefixID.Annoying:
-
-                    case PrefixID.Tiny:
-                    case PrefixID.Small:
-                    case PrefixID.Dull:
-                    case PrefixID.Shameful:
-                    case PrefixID.Terrible:
-                    case PrefixID.Unhappy:
-
-                    case PrefixID.Awful:
-                    case PrefixID.Lethargic:
-                    case PrefixID.Awkward:
-
-                    case PrefixID.Inept:
-                    case PrefixID.Ignorant:
-                    case PrefixID.Deranged:
-
-                    #endregion actually bad
-
-                    #region mediocre
-
-                    case PrefixID.Hasty:
-                    case PrefixID.Intense:
-                    case PrefixID.Frenzying:
-                    case PrefixID.Dangerous:
-                    case PrefixID.Bulky:
-                    case PrefixID.Heavy:
-                    case PrefixID.Sighted:
-                    case PrefixID.Adept:
-                    case PrefixID.Taboo:
-                    case PrefixID.Furious:
-                    case PrefixID.Keen:
-                    case PrefixID.Forceful:
-                    case PrefixID.Quick:
-                    case PrefixID.Nimble:
-                    case PrefixID.Nasty:
-                    case PrefixID.Manic:
-                    case PrefixID.Strong:
-                    case PrefixID.Zealous:
-                    case PrefixID.Large:
-                    case PrefixID.Intimidating:
-                    case PrefixID.Unpleasant:
-
-                        #endregion mediocre
-
-                        if (++infiniteLoopHackFix < 30)
-                            return false;
-                        else
-                            break;
-
-                    default:
-                        break;
+                    if (++infiniteLoopHackFix < 2000)
+                        return false;
                 }
             }
-
             infiniteLoopHackFix = 0;
 
             return base.AllowPrefix(item, pre);

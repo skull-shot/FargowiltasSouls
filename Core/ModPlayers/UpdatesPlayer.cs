@@ -539,6 +539,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (EmodeToggleCooldown > 0)
                 EmodeToggleCooldown--;
 
+            if (!Player.ItemAnimationActive)
+                swingDirection = -1;
+
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
 

@@ -55,7 +55,7 @@ ObsidianLavaWetBuff: {
 
 TitaniumDRBuff: {
 	// DisplayName: Titanium Shield
-	// Description: You have extra damage resistance and resist most debuffs
+	// Description: You have extra damage reduction and resist most debuffs
 }
 
 KingSlimeMinionBuff: {
@@ -704,7 +704,7 @@ JungleMimicSummonBuff: {
 
 GladiatorBuff: {
 	// DisplayName: Gladiator Strength
-	// Description: Increased damage and damage resistance, knockback immunity, improved spear rain
+	// Description: Increased damage and damage reduction, knockback immunity, improved spear rain
 }
 
 GladiatorSpiritBuff: {

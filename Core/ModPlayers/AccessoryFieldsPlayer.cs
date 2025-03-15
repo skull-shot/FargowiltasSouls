@@ -77,6 +77,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool TinCritBuffered;
         public int TungstenCD;
         public int AshwoodCD;
+        public int IronReductionDuration;
 
         //force of cosmos
         public float NebulaEnchCD = 3 * 60;
@@ -84,7 +85,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float MeteorCD = 60;
 
         public int ApprenticeItemCD;
-        public bool IronRecipes = false;
         public bool CactusImmune = false;
         public int CactusProcCD;
         public bool ChlorophyteEnchantActive = false;

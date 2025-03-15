@@ -73,8 +73,12 @@ namespace FargowiltasSouls.Content.Items
             if (BroadswordRework(item))
             {
                 FargoSoulsPlayer mplayer = player.FargoSouls();
+                if (player.itemAnimation == player.itemAnimationMax)
+                {
+                    mplayer.swingDirection *= -1;
 
-                
+                }
+
                 mplayer.useDirection = -1;
                 if (Main.MouseWorld.X >= player.Center.X)
                 {
@@ -120,11 +124,8 @@ namespace FargowiltasSouls.Content.Items
 
                 }
                 
-                if (player.itemAnimation == 1)
-                {
-                    mplayer.swingDirection *= -1;
-                    
-                }
+                
+                
                 player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, player.itemRotation + MathHelper.ToRadians(-135 * mplayer.useDirection));
                 player.itemLocation = player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, player.itemRotation + MathHelper.ToRadians(-135 * mplayer.useDirection));
             }

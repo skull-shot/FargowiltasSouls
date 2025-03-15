@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             base.OnFirstTick(npc);
 
             if (npc.type == NPCID.Shark && Main.rand.NextBool(3) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, Main.rand.Next(1, 5));
+                EModeGlobalNPC.Horde(npc, Main.rand.Next(1, 2));
         }
 
         public override void AI(NPC npc)

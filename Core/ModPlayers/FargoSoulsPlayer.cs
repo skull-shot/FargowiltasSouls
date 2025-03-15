@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool shouldShoot;
         public int useDirection = -1;
         public float useRotation = 0;
-        public int swingDirection = 1;
+        public int swingDirection = -1;
 
         public Dictionary<int, bool> KnownBuffsToPurify = [];
 
@@ -294,7 +294,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             ApprenticeEnchantActive = false;
             DarkArtistEnchantActive = false;
             CrystalEnchantActive = false;
-            IronRecipes = false;
             ChlorophyteEnchantActive = false;
 
             if (!MonkEnchantActive)

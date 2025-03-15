@@ -685,16 +685,16 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (!hallow && !corruption && !crimson)
                             {
-                                pool[NPCID.SandShark] = .2f;
+                                pool[NPCID.SandShark] = .1f;
                             }
                             else
                             {
                                 if (hallow)
-                                    pool[NPCID.SandsharkHallow] = .2f;
+                                    pool[NPCID.SandsharkHallow] = .1f;
                                 if (corruption)
-                                    pool[NPCID.SandsharkCorrupt] = .2f;
+                                    pool[NPCID.SandsharkCorrupt] = .1f;
                                 if (crimson)
-                                    pool[NPCID.SandsharkCrimson] = .2f;
+                                    pool[NPCID.SandsharkCrimson] = .1f;
                             }
                         }
                     }
@@ -1314,7 +1314,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (PaladinsShield)
                     modifiers.FinalDamage *= 0.5f;
 
-                if (WorldSavingSystem.MasochistModeReal && (npc.boss || LumUtils.AnyBosses() && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
+                if (WorldSavingSystem.MasochistModeReal && ((npc.boss || LumUtils.AnyBosses()) && FargoSoulsGlobalNPC.boss.IsWithinBounds(Main.maxNPCs) && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
                     modifiers.FinalDamage *= 0.9f;
             }
 
