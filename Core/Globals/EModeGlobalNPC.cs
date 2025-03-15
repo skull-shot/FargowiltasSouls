@@ -1314,7 +1314,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (PaladinsShield)
                     modifiers.FinalDamage *= 0.5f;
 
-                if (WorldSavingSystem.MasochistModeReal && (npc.boss || LumUtils.AnyBosses() && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
+                if (WorldSavingSystem.MasochistModeReal && ((npc.boss || LumUtils.AnyBosses()) && FargoSoulsGlobalNPC.boss.IsWithinBounds(Main.maxNPCs) && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
                     modifiers.FinalDamage *= 0.9f;
             }
 

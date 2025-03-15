@@ -1275,6 +1275,8 @@ namespace FargowiltasSouls.Content.Projectiles
         }
 
         public static int[] FancySwings => [
+            ProjectileID.NightsEdge,
+            ProjectileID.TrueNightsEdge,
             ProjectileID.Excalibur,
             ProjectileID.TrueExcalibur,
             ProjectileID.TerraBlade2,
