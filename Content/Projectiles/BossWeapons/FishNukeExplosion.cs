@@ -43,6 +43,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
 
             Projectile.rotation = Projectile.ai[2];
+            vfxinterpolant++;
+            if (Projectile.timeLeft <= 15)
+            {
+                Projectile.Opacity = MathHelper.Lerp(Projectile.Opacity, 0f, 0.1f);
+            }
 
             if (Projectile.localAI[0] == 0)
             {
@@ -55,13 +60,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
                     Main.dust[dust].velocity *= 1.4f;
                 }
-                /*for (int i = 0; i < 30; i++)
-                {
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IceTorch, 0f, 0f, 0, default, 3.5f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].noLight = true;
-                    Main.dust[d].velocity *= 4f;
-                }*/
                 for (int i = 0; i < 20; i++)
                 {
                     int dust = Dust.NewDust(Projectile.position, Projectile.width,
@@ -72,23 +70,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                     Main.dust[dust].velocity *= 3f;
                 }
-
-                /*for (int i = 0; i < 5; i++)
-                {
-                    float scaleFactor9 = 0.5f;
-                    if (i == 1 || i == 3) scaleFactor9 = 1f;
-
-                    for (int j = 0; j < 4; j++)
-                    {
-                        int gore = Gore.NewGore(Projectile.Center,
-                            default(Vector2),
-                            Main.rand.Next(61, 64));
-
-                        Main.gore[gore].velocity *= scaleFactor9;
-                        Main.gore[gore].velocity.X += 1f;
-                        Main.gore[gore].velocity.Y += 1f;
-                    }
-                }*/
             }
         }
 
@@ -119,14 +100,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Texture2D flare2 = FargosTextureRegistry.Smoke.Value;
             Texture2D flare = FargosTextureRegistry.Scorch.Value;
 
-            float smokesize = MathHelper.Lerp(0, 0.7f, ++vfxinterpolant * 0.07f);
+            float smokesize = MathHelper.Lerp(0, 0.7f, vfxinterpolant * 0.07f);
 
 
 
-            if (Projectile.timeLeft <= 15)
-            {
-                Projectile.Opacity = MathHelper.Lerp(Projectile.Opacity, 0f, 0.1f);
-            }
             Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Gray with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
             Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
