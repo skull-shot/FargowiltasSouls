@@ -29,6 +29,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.timeLeft = 300;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()

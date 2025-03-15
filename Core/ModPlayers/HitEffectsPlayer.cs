@@ -151,8 +151,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-            if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-                TryAdditionalAttacks(proj.damage, proj.DamageType);
+          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {

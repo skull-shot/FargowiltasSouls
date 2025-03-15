@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -34,6 +34,10 @@ namespace FargowiltasSouls.Content.Patreon.Duck
             Projectile.penetrate = -1;
 
             Projectile.FargoSouls().TimeFreezeImmune = true;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 12;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -178,7 +182,7 @@ namespace FargowiltasSouls.Content.Patreon.Duck
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 12;
+          //target.immune[Projectile.owner] = 12;
             target.AddBuff(BuffID.Electrified, 600);
 
             if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<Content.Projectiles.LightningArc>()] < 60)
@@ -193,7 +197,7 @@ namespace FargowiltasSouls.Content.Patreon.Duck
                             break;
                         Vector2 vel = Main.rand.NextFloat(10f, 20f) * target.SafeDirectionTo(n.Center);
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, vel, ModContent.ProjectileType<Content.Projectiles.LightningArc>(),
-                            Projectile.damage / 10, Projectile.knockBack / 10, Projectile.owner, vel.ToRotation(), Main.rand.Next(80));
+                            Projectile.damage / 3, Projectile.knockBack / 10, Projectile.owner, vel.ToRotation(), Main.rand.Next(80));
                     }
                 }
                 int spray = (max + count) / 2;
@@ -201,7 +205,7 @@ namespace FargowiltasSouls.Content.Patreon.Duck
                 {
                     Vector2 vel = Main.rand.NextFloat(10f, 20f) * Projectile.velocity.RotatedBy(MathHelper.ToRadians(30) / spray * (i + Main.rand.NextFloat(-0.5f, 0.5f)));
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, vel, ModContent.ProjectileType<Content.Projectiles.LightningArc>(),
-                        Projectile.damage / 10, Projectile.knockBack / 10, Projectile.owner, vel.ToRotation(), Main.rand.Next(80));
+                        Projectile.damage / 3, Projectile.knockBack / 10, Projectile.owner, vel.ToRotation(), Main.rand.Next(80));
                 }
                 Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<Content.Projectiles.LightningArc>()] += max * 2;
             }

@@ -276,7 +276,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             if (fargoPlayer.AdditionalAttacksTimer > 0)
                 fargoPlayer.AdditionalAttacksTimer -= 2;
             */
-            player.AddEffect<CelestialRuneOnhit>(Item);
+          //player.AddEffect<CelestialRuneOnhit>(Item);
 
             //chalice
             fargoPlayer.MoonChalice = true;

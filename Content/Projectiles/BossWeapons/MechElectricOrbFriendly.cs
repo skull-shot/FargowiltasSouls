@@ -20,17 +20,21 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.hostile = false;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
-        public override void OnSpawn(IEntitySource source)
+      /*public override void OnSpawn(IEntitySource source)
         {
             if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj && sourceProj.type == ModContent.ProjectileType<RefractorBlaster2Held>())
             {
                 Projectile.penetrate = 1;
                 hasIframes = false;
             }
-        }
+        }*/
 
         public override void AI()
         {
@@ -44,11 +48,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.velocity *= 1.02f;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+      /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hasIframes)
                 target.immune[Projectile.owner] = 6;
-        }
+        }*/
 
         public override bool PreKill(int timeleft)
         {

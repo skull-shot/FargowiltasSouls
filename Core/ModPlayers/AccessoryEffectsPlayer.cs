@@ -654,7 +654,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (AbominableWandRevived) //has been revived already
             {
-                if (Player.statLife >= Player.statLifeMax2) //can revive again
+                if (Player.statLife >= Player.statLifeMax2 && Player.statLife >= 400) //can revive again
                 {
                     AbominableWandRevived = false;
 

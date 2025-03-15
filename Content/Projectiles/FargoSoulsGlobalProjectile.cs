@@ -269,7 +269,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     //projs shot by tiki-buffed projs will also inherit the tiki buff
                     if (sourceProj3.FargoSouls().TikiTagged)
                     {
-                        //TikiTagged = true;
+                        TikiTagged = true;
+                        sourceProj3.FargoSouls().TikiTagged = false;
                     }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
@@ -1230,7 +1231,8 @@ namespace FargowiltasSouls.Content.Projectiles
             if (ProjectileID.Sets.IsAWhip[projectile.type] && projectile.owner == Main.myPlayer
                 && Main.player[projectile.owner].HasEffect<TikiEffect>())
             {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && !p.hostile && p.owner == Main.myPlayer
+                foreach (Projectile p in Main.projectile.Where(p => p.active && (p.friendly || FargoSoulsUtil.IsSummonDamage(p, true, false)) 
+                    && !p.hostile && p.owner == Main.myPlayer
                     && !ProjectileID.Sets.IsAWhip[p.type]
                     && projectile.Colliding(projectile.Hitbox, p.Hitbox)))
                 {

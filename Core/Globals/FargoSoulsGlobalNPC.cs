@@ -758,7 +758,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
 
-                int hellfireMarkedMultiplier = HellFireMarked ? 5 : 1;
+                int hellfireMarkedMultiplier = HellFireMarked ? 10 : 1;
 
                 npc.lifeRegen -= 200 * hellfireMarkedMultiplier;
 

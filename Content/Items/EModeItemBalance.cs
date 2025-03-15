@@ -161,11 +161,12 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
                     return EModeChange.Nerf;
-
+                    /*
                 case ItemID.TheHorsemansBlade:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.12f;
                     return EModeChange.Nerf;
+                    */
 
                 case ItemID.Uzi:
                     balanceTextKeys = ["Damage"];
@@ -413,8 +414,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.Gladius:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.25f;
+                    balanceTextKeys = ["Gladius"];
                     return EModeChange.Buff;
                     
                 case ItemID.GolemFist:
@@ -459,6 +459,67 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
                     return EModeChange.Nerf;
+
+                case ItemID.FlowerPow:
+                    balanceTextKeys = ["FlowerPow"];
+                    return EModeChange.Buff;
+                    
+                case ItemID.GrenadeLauncher:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.Keybrand:
+                    balanceTextKeys = ["Scale"];
+                    extra = "0.3";
+                    return EModeChange.Buff;
+
+                case ItemID.MaceWhip: // Morning Star
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.NettleBurst:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.PaladinsHammer:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.PiranhaGun:
+                    balanceTextKeys = ["PiranhaGun"];
+                    return EModeChange.Neutral;
+                    
+                case ItemID.ProximityMineLauncher:
+                    balanceTextKeys = ["ProximityMineLauncher"];
+                    return EModeChange.Neutral;
+
+                case ItemID.PygmyStaff:
+                    balanceTextKeys = ["PygmyStaff"];
+                    return EModeChange.Buff;
+
+                case ItemID.RocketLauncher:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
+                case ItemID.SpectreStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TacticalShotgun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
+                case ItemID.ToxicFlask:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
                 default:
                     return EModeChange.None;
             }
