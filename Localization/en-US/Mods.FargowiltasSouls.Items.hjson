@@ -1531,6 +1531,7 @@ SaucerControlConsole: {
 		Grants immunity to Electrified and Distorted
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
+		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		'''
 	VanityTooltip: Press the Ammo Cycle key to cycle ammos
