@@ -325,7 +325,7 @@ CursedCoffin: {
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.CursedCoffin.DisplayName}"
-		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/CoffinSummon] под землёй в пустыне.
+		SpawnInfo: Пробуждается с помощью [i:FargowiltasSouls/CoffinSummon] в особенной комнате в пирамиде
 		DespawnMessage: Скверный Саркофаг закапывается обратно в песчаные глубины...
 	}
 }
