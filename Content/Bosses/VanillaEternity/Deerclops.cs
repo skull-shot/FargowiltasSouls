@@ -364,7 +364,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (FirstFrameOfRubble)
                     {
                         FirstFrameOfRubble = false;
-                        float mult = Main.getGoodWorld ? WorldSavingSystem.MasochistModeReal ? 0f : 0.3f : 0.3f;
+                        float mult = Main.getGoodWorld ? WorldSavingSystem.MasochistModeReal ? 0f : 0.1f : 0.3f;
                         npc.ai[1] = (int)(-telegraphTime * mult);
                     }
                     if (timer < telegraphTime)
