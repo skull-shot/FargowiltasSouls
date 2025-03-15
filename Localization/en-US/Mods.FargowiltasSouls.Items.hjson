@@ -1688,7 +1688,7 @@ ArchWizardsSoul: {
 	Tooltip:
 		'''
 		22% increased magic damage
-		20% increased spell casting speed
+		20% reduced mana cost
 		10% increased magic critical strike chance
 		Increases your maximum mana by 200
 		Effects of Celestial Cuffs and Mana Flower

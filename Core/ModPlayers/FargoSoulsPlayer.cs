@@ -722,10 +722,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     AttackSpeed += .1f;
                 }
 
-                if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
-                {
-                    AttackSpeed += .2f;
-                }
+                //if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
+                //{
+                //    AttackSpeed += .2f;
+                //}
 
                 if (Player.HasEffect<MythrilEffect>())
                 {
