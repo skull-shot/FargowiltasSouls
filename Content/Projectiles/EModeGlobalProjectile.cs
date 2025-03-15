@@ -293,8 +293,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceProj is Projectile && sourceProj.type == projectile.type == sourceProj.Eternity().altBehaviour)
                     {
                         altBehaviour = true;
-                        float diff = (projectile.Bottom.Y - sourceProj.Bottom.Y);
-                        projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * diff;
+                        //float diff = (projectile.Bottom.Y - sourceProj.Bottom.Y);
+                        //projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * diff;
                     }
                         
                     if (projectile.GetSourceNPC() is NPC && projectile.GetSourceNPC().type == NPCID.Deerclops && sourceProj is not Projectile)
@@ -620,8 +620,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.DeerclopsIceSpike:
                     if (altBehaviour)
                     {
-                        if (projectile.ai[0] < -0)
-                            projectile.ai[0] = -0;
+                        if (projectile.ai[0] < -40)
+                            projectile.ai[0] = -40;
                     }
                     if (counter == 2f && projectile.hostile && projectile.ai[1] > 1.3f) //only larger spikes
                     {
@@ -1417,6 +1417,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (NPC.downedGolemBoss && projectile.type == ProjectileID.VortexLightning)
                 modifiers.FinalDamage *= 2;
+
+            if (projectile.type == ProjectileID.DeerclopsIceSpike)
+            {
+                target.longInvince = true;
+            }
         }
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)

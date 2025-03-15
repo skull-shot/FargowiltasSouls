@@ -845,15 +845,6 @@ EarthForce: {
 		[i:FargowiltasSouls/OrichalcumEnchant] 敌人受到的减益伤害增加250%
 		“盖亚的祝福照耀着你”
 		'''
-	SaveOldTooltip:
-		'''
-		[i:FargowiltasSouls/CobaltEnchant] 额外获得一次爆炸二段跳，受击时你会剧烈爆炸
-		[i:FargowiltasSouls/MythrilEnchant] 停止攻击以逐渐增加攻击速度，最多持续5秒
-		[i:FargowiltasSouls/PalladiumEnchant] 暴击敌人会快速治疗，基于回复的血量放出生命能量球
-		[i:FargowiltasSouls/OrichalcumEnchant] 攻击生成花瓣，伤害性减益造成3.5倍伤害
-		[i:FargowiltasSouls/AdamantiteEnchant] 你发射的所有弹幕都会分裂成三个，每个造成50%伤害，并随着武器持续使用弹幕分散角度会逐渐增大
-		[i:FargowiltasSouls/TitaniumEnchant] 攻击生成钛金碎片防御屏障，达到最大个数获得钛金护盾
-		'''
 }
 
 LifeForce: {
@@ -903,21 +894,6 @@ ShadowForce: {
 		[i:FargowiltasSouls/DarkArtistEnchant] 攻击时发射快捷栏中最近的武器的射弹作为辅助攻击
 		[i:FargowiltasSouls/SpookyEnchant] 你的所有召唤物都会获得额外的镰刀攻击
 		“黑暗，更黑暗，还是更黑暗”
-		'''
-	SavingOldTooltip:
-		'''
-		[i:FargowiltasSouls/ShadowEnchant] 四颗暗影珠绕着你旋转
-		[i:FargowiltasSouls/AncientShadowEnchant] 攻击有几率造成黑暗减益
-		[i:FargowiltasSouls/NecroEnchant] 击杀敌人时有几率爆出一个骨堆，拥有骨头手套的效果
-		[i:FargowiltasSouls/NinjaEnchant] 根据射弹速度增加弹幕暴击率
-		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时射弹速度增加
-		[i:FargowiltasSouls/CrystalAssassinEnchant] 你可以扔出烟雾弹、传送至烟雾弹的位置获得先发制人增益
-		[i:FargowiltasSouls/CrystalAssassinEnchant] 获得水晶刺客冲刺
-		[i:FargowiltasSouls/SpookyEnchant] 你的召唤物能进行额外的镰刀攻击
-		[i:FargowiltasSouls/MonkEnchant] 不攻击可以进行一次武僧冲刺
-		[i:FargowiltasSouls/ShinobiEnchant] 朝墙壁冲刺时会直接穿过去
-		[i:FargowiltasSouls/ApprenticeEnchant] 快捷栏中的下三把武器会随玩家攻击发射其弹幕作为辅助攻击
-		[i:FargowiltasSouls/DarkArtistEnchant] 召唤一个爆炸烈焰仆从随玩家的攻击而攻击
 		'''
 }
 
@@ -2745,7 +2721,7 @@ MoonBow: {
 		Release at the right time to temporarily receive a lunar blessing
 		When blessed, drastically increased attack speed and altered arrow gravity
 		66% chance to save ammo
-		'The restrung mouth of a defeated foe..'
+		'The restrung mouth of a defeated foe...'
 		''' */
 }
 

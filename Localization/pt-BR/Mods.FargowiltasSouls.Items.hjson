@@ -835,15 +835,6 @@ EarthForce: {
 		[i:5540] Ataques geram fragmentos de titânio, atingir o máximo concede Escudo de Titânio
 		'A bênção de Gaia brilha sobre você'
 		'''
-	/* SaveOldTooltip:
-		'''
-		[i:FargowiltasSouls/CobaltEnchant] Grants an explosion jump and you explode on hit
-		[i:FargowiltasSouls/MythrilEnchant] Stop attacking to gradually increase attack speed for up to 5 seconds
-		[i:FargowiltasSouls/PalladiumEnchant] Grants Rapid Healing after striking an enemy and spawn life orbs based on healing
-		[i:FargowiltasSouls/OrichalcumEnchant] Attacks spawn flower petals and damaging debuffs deal 3.5x damage
-		[i:FargowiltasSouls/AdamantiteEnchant] Every weapon shot will split into 3, 50% damage each, with higher spread the longer you fire
-		[i:FargowiltasSouls/TitaniumEnchant] Attacks generate titanium shards, reaching max grants Titanium Shield
-		''' */
 }
 
 LifeForce: {
@@ -895,20 +886,6 @@ ShadowForce: {
 		[i:5496] Invoca um lacaio de Chamas Explosivas que viajará para o seu mouse depois de carregar
 		'Escuro, Mais Escuro, Ainda Mais Escuro'
 		'''
-	/* SavingOldTooltip:
-		'''
-		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
-		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
-		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
-		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
-		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
-		[i:FargowiltasSouls/MonkEnchant] Don't attack to gain a single use monk dash
-		[i:FargowiltasSouls/ShinobiEnchant] Dash into any walls, to teleport through them to the next opening
-		[i:FargowiltasSouls/ApprenticeEnchant] While attacking, fire your next 3 closest weapons' projectiles as support
-		[i:FargowiltasSouls/DarkArtistEnchant] Summons a Flameburst minion that will also fire when you attack
-		''' */
 }
 
 SpiritForce: {
@@ -2686,7 +2663,7 @@ TheSmallSting: {
 		50% chance to not consume ammo
 		Stingers will stick to enemies, hitting the same spot again will deal extra damage
 		Scales with your bee damage and knockback increases
-		'Repurposed from the abdomen of a defeated foe..'
+		'Repurposed from the abdomen of a defeated foe...'
 		''' */
 }
 
@@ -2709,7 +2686,7 @@ MoonBow: {
 		Release at the right time to temporarily receive a lunar blessing
 		When blessed, drastically increased attack speed and altered arrow gravity
 		66% chance to save ammo
-		'The restrung mouth of a defeated foe..'
+		'The restrung mouth of a defeated foe...'
 		''' */
 }
 
@@ -2829,7 +2806,7 @@ BigBrainBuster: {
 		'''
 		Repeated summons increase the size and damage of the minion
 		This caps at 16 slots
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2944,7 +2921,7 @@ TheBigSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -3323,7 +3300,7 @@ BaronRelic: {
 
 HiveStaff: {
 	// DisplayName: Hive Staff
-	// Tooltip: "'The enslaved minions of a defeated foe..'"
+	// Tooltip: "'The enslaved minions of a defeated foe...'"
 }
 
 ROBGyro: {
@@ -3362,7 +3339,7 @@ EaterLauncherJr: {
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
 		Increased damage to enemies in the given range
-		'The rotting remains of a defeated foe..'
+		'The rotting remains of a defeated foe...'
 		''' */
 }
 
@@ -3373,7 +3350,7 @@ TheBiggestSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The Queen's unwavering swarm..'
+		'The Queen's unwavering swarm...'
 		''' */
 }
 
@@ -3624,7 +3601,7 @@ TheDestroyer: {
 		'''
 		Whip your minions to fire a laser at a nearby enemy, up to 6 times per swing
 		Every 20th swing, the destroyer breaks loose and tracks your mouse for 5 seconds
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
