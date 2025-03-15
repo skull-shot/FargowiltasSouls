@@ -38,7 +38,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int Respawns;
 
         public bool WaterWet => Player.wet && !Player.lavaWet && !Player.honeyWet && !Player.shimmerWet && !Player.FargoSouls().MutantAntibodies;
-
         public override void ResetEffects()
         {
             ReduceMasomodeMinionNerf = false;

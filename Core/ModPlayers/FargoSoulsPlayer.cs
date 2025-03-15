@@ -294,7 +294,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             ApprenticeEnchantActive = false;
             DarkArtistEnchantActive = false;
             CrystalEnchantActive = false;
-            IronRecipes = false;
             ChlorophyteEnchantActive = false;
 
             if (!MonkEnchantActive)

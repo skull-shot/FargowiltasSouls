@@ -274,20 +274,13 @@ IronEnchant: {
 	// DisplayName: Iron Enchantment
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
-		When crafting an item, each material has a 33% chance to not be consumed
-		Works once per material type, ever
-		Does not work on Crucible of the Cosmos items
-		You attract items from a larger range
+		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
+		Increases item grab range
+		Works from inventory and vanity slots:
+		Your reforges always grant a great prefix for double cost
 		'Strike while the iron is hot'
 		''' */
-	/* VanityTooltip:
-		'''
-		When crafting an item, each material has a 33% chance to not be consumed
-		Works once per material type, ever
-		Does not work on Crucible of the Cosmos items
-		You attract items from a larger range
-		''' */
+	// VanityTooltip: Your reforges always grant a great prefix for double cost
 }
 
 JungleEnchant: {
@@ -949,7 +942,7 @@ TerraForce: {
 		[i:5516] Oferece imunidade a fogo e lava
 		'A terra empresta sua força'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 50% chance to not consume each item on first craft and you attract items from a larger range"
+	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for double cost"
 }
 
 TimberForce: {
@@ -1061,7 +1054,7 @@ BionomicCluster: {
 	/* VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
@@ -1085,7 +1078,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and drastically improves reforges
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		    [i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
@@ -1554,7 +1547,7 @@ SecurityWallet: {
 	/* VanityTooltip:
 		'''
 		Grants immunity to Midas
-		Drastically improves reforges
+		Reduces reforge cost by 50%
 		''' */
 }
 
