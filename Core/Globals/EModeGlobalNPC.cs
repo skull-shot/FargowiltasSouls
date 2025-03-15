@@ -685,16 +685,16 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (!hallow && !corruption && !crimson)
                             {
-                                pool[NPCID.SandShark] = .2f;
+                                pool[NPCID.SandShark] = .1f;
                             }
                             else
                             {
                                 if (hallow)
-                                    pool[NPCID.SandsharkHallow] = .2f;
+                                    pool[NPCID.SandsharkHallow] = .1f;
                                 if (corruption)
-                                    pool[NPCID.SandsharkCorrupt] = .2f;
+                                    pool[NPCID.SandsharkCorrupt] = .1f;
                                 if (crimson)
-                                    pool[NPCID.SandsharkCrimson] = .2f;
+                                    pool[NPCID.SandsharkCrimson] = .1f;
                             }
                         }
                     }
