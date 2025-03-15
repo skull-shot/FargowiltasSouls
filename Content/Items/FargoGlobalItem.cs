@@ -1,5 +1,6 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
@@ -441,10 +442,16 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
+            float velocityMult = 1f;
             if (modPlayer.Eternity)
-                velocity *= 2;
-            else if (modPlayer.UniverseSoul)
-                velocity *= 1.5f;
+                velocityMult += 1f;
+            if (modPlayer.UniverseSoul)
+                velocityMult += 0.5f;
+            if (modPlayer.RangedSoul && item.CountsAsClass(DamageClass.Ranged))
+                velocityMult += 0.2f;
+            if (modPlayer.RangedEssence  && item.CountsAsClass(DamageClass.Ranged))
+                velocityMult += 0.1f;
+            velocity *= velocityMult;
 
         }
 

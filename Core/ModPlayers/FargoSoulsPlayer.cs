@@ -721,10 +721,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     AttackSpeed += .1f;
                 }
 
-                if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
-                {
-                    AttackSpeed += .2f;
-                }
+                //if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
+                //{
+                //    AttackSpeed += .2f;
+                //}
 
                 if (Player.HasEffect<MythrilEffect>())
                 {
@@ -1354,13 +1354,13 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if (weapon.CountsAsClass(DamageClass.Ranged))
-            {
-                if (RangedEssence && Main.rand.NextBool(10))
-                    return false;
-                if (RangedSoul && Main.rand.NextBool(5))
-                    return false;
-            }
+            //if (weapon.CountsAsClass(DamageClass.Ranged))
+            //{
+            //    if (RangedEssence && Main.rand.NextBool(10))
+            //        return false;
+            //    if (RangedSoul && Main.rand.NextBool(5))
+            //        return false;
+            //}
             if (GaiaSet && Main.rand.NextBool(10))
                 return false;
             return true;

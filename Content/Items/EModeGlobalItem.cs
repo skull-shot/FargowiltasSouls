@@ -208,6 +208,7 @@ namespace FargowiltasSouls.Content.Items
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
+
             string extra = string.Empty;
             float balanceNumber = -1;
             string[] balanceTextKeys = null;

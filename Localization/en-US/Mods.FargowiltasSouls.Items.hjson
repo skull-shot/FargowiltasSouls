@@ -784,7 +784,7 @@ SharpshootersEssence: {
 	Tooltip:
 		'''
 		18% increased ranged damage
-		10% chance to not consume ammo
+		10% increased ranged projectile velocity
 		8% increased ranged critical chance
 		'This is only the beginning...'
 		'''
@@ -1501,6 +1501,7 @@ SaucerControlConsole: {
 		Grants immunity to Electrified and Distorted
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
+		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		'''
 	VanityTooltip: Press the Ammo Cycle key to cycle ammos
@@ -1658,7 +1659,7 @@ ArchWizardsSoul: {
 	Tooltip:
 		'''
 		22% increased magic damage
-		20% increased spell casting speed
+		20% reduced mana cost
 		10% increased magic critical strike chance
 		Increases your maximum mana by 200
 		Effects of Celestial Cuffs and Mana Flower
@@ -1698,7 +1699,7 @@ ConjuristsSoul: {
 		'''
 		22% increased summon damage
 		15% increased whip range
-		Increases your max number of minions by 5
+		Increases your max number of minions by 3
 		Increases your max number of sentries by 1
 		Increased minion knockback
 		'An army at your disposal'
@@ -1788,7 +1789,7 @@ SnipersSoul: {
 	Tooltip:
 		'''
 		22% increased ranged damage
-		20% chance to not consume ammo
+		20% increased ranged projectile velocity
 		10% increased ranged critical chance
 		Effects of Sniper Scope and Magic Quiver
 		'Ready, aim, fire'
