@@ -3,7 +3,7 @@ ClientConfig: {
 
 	Headers: {
 		Maso: Режим Вечность
-		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Patreon Items]"
+		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
 	}
 
 	HideTogglerWhenInventoryIsClosed: {

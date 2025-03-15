@@ -25,7 +25,7 @@ BiteSizeBaronBuff: {
 
 ChibiDeviBuff: {
 	DisplayName: Чиби Деви
-	Description: Она заинтересована в 'вас'
+	Description: Она заинтересована в «вас»
 }
 
 MutantSpawnBuff: {
@@ -100,7 +100,7 @@ CrimetroidBuff: {
 
 BerserkerInstallBuff: {
 	DisplayName: Установка свирепости
-	Description: "'Достань их! Берсерк!'"
+	Description: «Достань их! Берсерк!»
 }
 
 BerserkerInstallCDBuff: {
@@ -120,7 +120,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	DisplayName: Мерзкое присутствие
-	Description: Защита, сопротивление урону и скорость восстановления здоровья снижены; эффекты дебаффа 'Лунный укус'
+	Description: Защита, сопротивление урону и скорость восстановления здоровья снижены; эффекты дебаффа «Лунный укус»
 }
 
 BaronsBurdenBuff: {
@@ -305,7 +305,7 @@ LightningRodBuff: {
 
 LihzahrdBlessingBuff: {
 	DisplayName: Благословение ящщеров
-	Description: Включены провода и снижена частота появления врагов в Храме Джунглей
+	Description: Включены провода и снижена частота появления врагов в храме джунглей
 	Message: Свет алтаря пал на вас!
 }
 
@@ -382,7 +382,7 @@ OceanicSealBuff: {
 }
 
 OiledBuff: {
-	DisplayName: В масле
+	DisplayName: Промасленный
 	Description: Вы получаете больше урона от огня
 }
 
@@ -402,7 +402,7 @@ PurifiedBuff: {
 }
 
 RefreshedBuff: {
-	DisplayName: Освежённый
+	DisplayName: Освежение
 	Description: Увеличена мобильность и время полёта
 }
 
@@ -549,7 +549,7 @@ MutantRebirthBuff: {
 
 BabyLifelightBuff: {
 	DisplayName: Жизнесветомец
-	Description: Узри, это — свет ангела
+	Description: Узри же ангельский свет
 }
 
 BrokenShellBuff: {
@@ -583,7 +583,7 @@ GoldenStasisBuff: {
 }
 
 GoldenStasisCDBuff: {
-	DisplayName: Перезарядка Золотого застоя
+	DisplayName: Перезарядка золотого застоя
 	Description: Вы пока не можете озолотиться
 }
 
@@ -703,18 +703,18 @@ JungleMimicSummonBuff: {
 }
 
 GladiatorBuff: {
-	DisplayName: Сила Гладиатора
+	DisplayName: Сила гладиатора
 	Description: Увеличивает сопротивление урону и урон, даёт иммунитет к отбрасыванию, улучшает дождь копий
 }
 
 GladiatorSpiritBuff: {
-	DisplayName: Сила Гладиатора
+	DisplayName: Сила гладиатора
 	Description: +15% к сопротивлению урону, +30% к урону, даёт иммунитет к отбрасыванию, улучшает урон за попадания
 }
 
 ROBBuff: {
 	DisplayName: R.O.B
-	DescPatreon: Друг, которого ты никогда не покидал с самого Brawl-а
+	DescPatreon: Друг, которого ты никогда не покидал с самого Brawl'а
 	DescNonPatreon: Он наконец-то в высшем классе!
 	Description: Mods.FargowiltasSouls.Buffs.ROBBuff.Description
 }
@@ -801,7 +801,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2.5 ОЗ в секунду, миньоны могут наносить крит. урон
+	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2,5 ОЗ в секунду, миньоны могут наносить крит. урон
 }
 
 MutantDesperationBuff: {
