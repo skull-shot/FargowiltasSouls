@@ -250,7 +250,8 @@ namespace FargowiltasSouls.Content.Items
                 return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
             switch (item.type)
             {
-
+                default:
+                    break;
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
         }

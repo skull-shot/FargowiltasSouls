@@ -651,7 +651,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         {
             if (NPC.hide)
             {
-                Main.instance.DrawCacheNPCsBehindNonSolidTiles.Add(index);
+                if (Collision.SolidTiles(NPC.position + NPC.velocity, NPC.width, NPC.height))
+                    Main.instance.DrawCacheNPCsBehindNonSolidTiles.Add(index);
+                else
+                    Main.instance.DrawCacheNPCProjectiles.Add(index);
             }
         }
 

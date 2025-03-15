@@ -110,8 +110,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (target.HasBuff(ModContent.BuffType<SuperBleedBuff>()) && modPlayer.ShadewoodCD == 0 && (projectile == null || projectile.type != ModContent.ProjectileType<SuperBlood>()) && player.whoAmI == Main.myPlayer)
             {
-                modPlayer.ShadewoodCD = 120;
-                for (int i = 0; i < Main.rand.Next(3, 6); i++)
+                modPlayer.ShadewoodCD = 30;
+                for (int i = 0; i < 2; i++)
                 {
                     Projectile.NewProjectile(player.GetSource_Misc(""), target.Center.X, target.Center.Y - 20, 0f + Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5), ModContent.ProjectileType<SuperBlood>(), (int)(dmg * player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
                 }

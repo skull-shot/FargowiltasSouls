@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -20,17 +21,79 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
 
         public override void SetDefaults()
         {
-            Projectile.CloneDefaults(ProjectileID.EnchantedBoomerang);
-            AIType = ProjectileID.EnchantedBoomerang;
+          //Projectile.CloneDefaults(ProjectileID.EnchantedBoomerang);
+          //AIType = ProjectileID.EnchantedBoomerang;
+            Projectile.friendly = true;
             Projectile.width = 32;
             Projectile.height = 32;
             Projectile.scale = 2f;
-            Projectile.penetrate = 4;
-            Projectile.extraUpdates = 1;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+          //Projectile.extraUpdates = 1;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 7;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()
         {
+            // here's my poor reimplementation of vanilla boomerang AI -Habble
+		    Projectile.rotation += 1f;
+            if (Projectile.ai[0] == 0f)
+            {
+                Projectile.ai[1] += 1f;
+                if (Projectile.ai[1] >= 30f)
+                {
+                    Projectile.ai[0] = 1f;
+                    Projectile.ai[1] = 0f;
+                    Projectile.netUpdate = true;
+                }
+            }
+            else
+            {
+                Player owner = Main.player[Projectile.owner];
+                float returningSpeed = 2f * 15f;
+                float projAccel = 3f;
+                ref Vector2 vel = ref Projectile.velocity;
+                float xDistance = owner.Center.X - Projectile.Center.X;
+                float yDistance = owner.Center.Y - Projectile.Center.Y;
+                float distance = (float)Math.Sqrt((double)(xDistance * xDistance + yDistance * yDistance));
+                if (distance > 3000f)
+                {
+                    Projectile.Kill();
+                }
+                distance = returningSpeed / distance;
+                xDistance *= distance;
+                yDistance *= distance;
+                if (vel.X < xDistance)
+                {
+                    vel.X += projAccel;
+                    if (vel.X < 0f && xDistance > 0f)
+                        vel.X += projAccel;
+                }
+                else if (vel.X > xDistance)
+                {
+                    vel.X -= projAccel;
+                    if (vel.X > 0f && xDistance < 0f)
+                        vel.X -= projAccel;
+                }
+                if (vel.Y < yDistance)
+                {
+                    vel.Y += projAccel;
+                    if (vel.Y < 0f && yDistance > 0f)
+                        vel.Y += projAccel;
+                }
+                else if (vel.Y > yDistance)
+                {
+                    vel.Y -= projAccel;
+                    if (vel.Y > 0f && yDistance < 0f)
+                        vel.Y -= projAccel;
+                }
+                if (Projectile.owner == Main.myPlayer)
+                    if (Projectile.Hitbox.Intersects(owner.Hitbox))
+                        Projectile.Kill();
+            }
             //dust!
             int dustId = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y + 2f), Projectile.width, Projectile.height + 5, DustID.Ice, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default, .5f);
             Main.dust[dustId].noGravity = true;
@@ -38,24 +101,24 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Projectile.position += Projectile.velocity / 240f * timer++; //gradually speed up
         }
 
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+      /*public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             //smaller tile hitbox
             width = 20;
             height = 20;
             return true;
-        }
+        }*/
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 7;
+          //target.immune[Projectile.owner] = 7;
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
             if (Projectile.owner == Main.myPlayer)
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Main.rand.NextVector2Circular(12f, 12f), ModContent.ProjectileType<PufferSpray>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Main.rand.NextVector2Circular(12f, 12f), ModContent.ProjectileType<PufferSpray>(), (int)(Projectile.damage * 0.15), Projectile.knockBack, Projectile.owner);
                 }
             }
 

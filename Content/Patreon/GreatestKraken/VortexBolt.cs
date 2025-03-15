@@ -19,9 +19,9 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
             base.SetDefaults();
             Projectile.DamageType = DamageClass.Magic;
 
-            Projectile.usesIDStaticNPCImmunity = false;
-            Projectile.idStaticNPCHitCooldown = 0;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = false;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
 
             Projectile.timeLeft = 30 * (Projectile.extraUpdates + 1);
         }

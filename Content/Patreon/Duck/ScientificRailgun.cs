@@ -20,7 +20,7 @@ Higher valued coins do more damage
 
         public override void SetDefaults()
         {
-            Item.damage = 2160;
+            Item.damage = 1000;
             Item.crit = 26;
             Item.DamageType = DamageClass.Ranged;
             Item.noMelee = true;

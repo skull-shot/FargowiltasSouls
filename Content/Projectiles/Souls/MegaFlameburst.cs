@@ -25,6 +25,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.penetrate = 1;
             Projectile.timeLeft = 300;
             AIType = ProjectileID.Bullet;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()
@@ -70,7 +74,12 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         {
             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileID.InfernoFriendlyBlast, Projectile.damage, 0, Projectile.owner);
             if (p != Main.maxProjectiles)
+            {
                 Main.projectile[p].timeLeft = 15;
+                Main.projectile[p].usesIDStaticNPCImmunity = true;
+                Main.projectile[p].idStaticNPCHitCooldown = 10;
+                Main.projectile[p].FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            }
         }
     }
 }

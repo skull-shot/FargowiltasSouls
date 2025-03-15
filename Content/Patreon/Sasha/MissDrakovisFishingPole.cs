@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             {
                 //melee
                 case 1:
-                    Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<PufferRang>(), damage, knockback, player.whoAmI);
+                    Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<PufferRang>(), (int)(damage * 0.75), knockback, player.whoAmI, 0f, 1f);
                     break;
 
                 //range
@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                         {
                             float modifier = 1f - 0.75f / 2f * Math.Abs(i);
                             Projectile.NewProjectile(source, position, modifier * speed.RotatedBy(MathHelper.ToRadians(9) * i),
-                                ModContent.ProjectileType<Bubble>(), damage, knockback, player.whoAmI);
+                                ModContent.ProjectileType<Bubble>(), damage / 2, knockback, player.whoAmI);
                         }
                     }
                     break;
@@ -141,7 +141,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                     Item.useAnimation = 12;
                     Item.UseSound = SoundID.Item1;
                     Item.knockBack = 6;
-                    Item.noMelee = false;
+                    Item.noMelee = true;
                     Item.shootSpeed = 15f;
                     break;
 
@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                 //magic
                 case 3:
                     Item.DamageType = DamageClass.Magic;
-                    Item.mana = 15;
+                    Item.mana = 45;
                     Item.shoot = ModContent.ProjectileType<Bubble>();
 
                     Item.knockBack = 3f;

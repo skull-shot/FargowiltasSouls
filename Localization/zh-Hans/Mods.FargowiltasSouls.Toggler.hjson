@@ -149,7 +149,7 @@ PlantMinionEffect: 世纪之花召唤物
 LihzahrdGroundPound: 蜥蜴快速下落
 LihzahrdBoulders: 下落坠地火焰
 CelestialRuneAttacks: 天界符文额外攻击
-CelestialRuneOnhit: 受伤产生远古幻象妖
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: 禁用仆从效果来提高伤害
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: 缩小碰撞箱

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -24,8 +24,12 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Projectile.width = 32;
             Projectile.height = 32;
             Projectile.scale = 1.5f;
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 60;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()
@@ -35,10 +39,10 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Main.dust[dustId].noGravity = true;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+      /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 7;
-        }
+        }*/
 
         public override void OnKill(int timeLeft)
         {

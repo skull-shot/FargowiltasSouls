@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 
         public override void SetDefaults()
         {
-            Item.damage = 22;
+            Item.damage = 77; // 22 * 7/2
 
             Item.width = 20;
             Item.height = 20;

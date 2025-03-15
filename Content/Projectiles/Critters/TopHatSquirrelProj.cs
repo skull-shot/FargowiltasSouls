@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles.Critters
             {
                 int proj2 = ModContent.ProjectileType<TopHatSquirrelLaser>();
 
-                FargoSoulsUtil.XWay(16, Projectile.GetSource_FromThis(), Projectile.Center, proj2, Projectile.velocity.Length() * 2f, Projectile.damage * 4, Projectile.knockBack);
+                FargoSoulsUtil.XWay(16, Projectile.GetSource_FromThis(), Projectile.Center, proj2, Projectile.velocity.Length() * 2f, Projectile.damage, Projectile.knockBack);
 
                 int max = Main.player[Projectile.owner].ownedProjectileCounts[proj2] >= 50 ? 25 : 50;
                 for (int i = 0; i < max; i++)
@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Projectiles.Critters
                         Vector2.Normalize(Projectile.velocity.RotatedBy(MathHelper.Pi / 2)) * Main.rand.NextFloat(-900, 900);
 
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, -Projectile.velocity * Main.rand.NextFloat(2f, 3f), proj2,
-                        Projectile.damage * 4, Projectile.knockBack, Main.myPlayer);
+                        Projectile.damage, Projectile.knockBack, Main.myPlayer);
                 }
             }
         }
