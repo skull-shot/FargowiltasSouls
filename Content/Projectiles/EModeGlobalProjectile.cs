@@ -566,7 +566,7 @@ namespace FargowiltasSouls.Content.Projectiles
             counter++;
 
             //delay the very bottom piece of sharknados spawning in, also delays spawning sharkrons
-            if (counter < 30 && projectile.ai[0] == 15 && !WorldSavingSystem.MasochistModeReal
+            if (counter < 30 && projectile.ai[0] == 15
                 && (projectile.type == ProjectileID.Sharknado || projectile.type == ProjectileID.Cthulunado)
                 && projectile.ai[1] == (projectile.type == ProjectileID.Sharknado ? 15 : 24))
             {
