@@ -9,9 +9,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearThrown : ModProjectile
+    public class PenetratorThrown : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         //throw with 25 velocity, 1000 damage, 10 knockback
 
@@ -85,10 +85,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         Main.projectile[p].DamageType = Projectile.DamageType;
 
                     /*Vector2 vel = baseVel.RotatedByRandom(Math.PI / 4);
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 8f * vel, ModContent.ProjectileType<HentaiSpearArc>(), 
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 8f * vel, ModContent.ProjectileType<PenetratorArc>(), 
                         Projectile.damage, Projectile.knockBack / 2, Projectile.owner, vel.ToRotation(), Projectile.timeLeft / Projectile.MaxUpdates);
                     vel = -baseVel.RotatedByRandom(Math.PI / 4);
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 8f * vel, ModContent.ProjectileType<HentaiSpearArc>(),
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 8f * vel, ModContent.ProjectileType<PenetratorArc>(),
                         Projectile.damage, Projectile.knockBack / 2, Projectile.owner, vel.ToRotation(), Projectile.timeLeft / Projectile.MaxUpdates);*/
                 }
             }
@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 if (Projectile.owner == Main.myPlayer)
                 {
                     int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(Projectile.velocity),
-                        ModContent.ProjectileType<HentaiSpearDeathray>(), Projectile.damage, Projectile.knockBack,
+                        ModContent.ProjectileType<PenetratorDeathray>(), Projectile.damage, Projectile.knockBack,
                         Projectile.owner, 0f, Projectile.velocity.Length() * Projectile.MaxUpdates);
                     if (p != Main.maxProjectiles)
                         Main.projectile[p].DamageType = Projectile.DamageType;

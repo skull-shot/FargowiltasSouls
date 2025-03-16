@@ -59,18 +59,18 @@ HellFlame.DisplayName: Chama do Inferno
 HellSkeletron.DisplayName: Esqueletron do Inferno
 HellSkull2.DisplayName: Caveira do Inferno
 HentaiNuke.DisplayName: Explosão Fantasmagórica
-HentaiSpear.DisplayName: O Penetrador
-HentaiSpearArc.DisplayName: Arco do Relâmpago
-HentaiSpearBigDeathray.DisplayName: Raio da Morte Fantasmagórico
-HentaiSpearDeathray.DisplayName: Raio da Morte Fantasmagórico
-HentaiSpearDeathray2.DisplayName: Raio da Morte Fantasmagórico
-HentaiSpearDive.DisplayName: O Penetrador
-HentaiSpearHeld.DisplayName: O Penetrador
-HentaiSpearSpin.DisplayName: O Penetrador
-HentaiSpearSpinBoundary.DisplayName: O Penetrador
-HentaiSpearSpinThrown.DisplayName: O Penetrador
-HentaiSpearThrown.DisplayName: O Penetrador
-HentaiSpearWand.DisplayName: O Penetrador
+Penetrator.DisplayName: O Penetrador
+PenetratorArc.DisplayName: Arco do Relâmpago
+PenetratorBigDeathray.DisplayName: Raio da Morte Fantasmagórico
+PenetratorDeathray.DisplayName: Raio da Morte Fantasmagórico
+PenetratorDeathray2.DisplayName: Raio da Morte Fantasmagórico
+PenetratorDive.DisplayName: O Penetrador
+PenetratorHeld.DisplayName: O Penetrador
+PenetratorSpin.DisplayName: O Penetrador
+PenetratorSpinBoundary.DisplayName: O Penetrador
+PenetratorSpinThrown.DisplayName: O Penetrador
+PenetratorThrown.DisplayName: O Penetrador
+PenetratorWand.DisplayName: O Penetrador
 HentaiSphereRing.DisplayName: Anel Fantasmagórico
 Hungry.DisplayName: Faminto
 Hungry2.DisplayName: Faminto
@@ -580,7 +580,7 @@ PlasmaProj.DisplayName: Raio de Plasma
 // AbomFlocko3.DisplayName: Super Flocko
 // AbomLaser.DisplayName: Laser
 // EyeProjectile.DisplayName: EyeProjectile2
-// HentaiSpearDash.DisplayName: The Penetrator
+// PenetratorDash.DisplayName: The Penetrator
 // CosmosFireball.DisplayName: Cosmic Fireball
 // CosmosFireball2.DisplayName: Cosmic Fireball
 // ShadowFlameburst.DisplayName: Flameburst

@@ -16,9 +16,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearBigDeathray : MutantSpecialDeathray
+    public class PenetratorBigDeathray : MutantSpecialDeathray
     {
-        public HentaiSpearBigDeathray() : base(60, 1.5f) { }
+        public PenetratorBigDeathray() : base(60, 1.5f) { }
 
         public override void SetStaticDefaults()
         {
@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.velocity = -Vector2.UnitY;
             }
 
-            Projectile spear = FargoSoulsUtil.ProjectileExists(FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)Projectile.ai[1], ModContent.ProjectileType<HentaiSpearWand>()));
+            Projectile spear = FargoSoulsUtil.ProjectileExists(FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)Projectile.ai[1], ModContent.ProjectileType<PenetratorWand>()));
             if (spear != null)
             {
                 Projectile.timeLeft = 2;
@@ -107,7 +107,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (Projectile.localAI[0] == maxTime / 2)
             {
-                if (Projectile.owner == Main.myPlayer && !(player.controlUseTile && player.altFunctionUse == 2 && player.HeldItem.type == ModContent.ItemType<Items.Weapons.FinalUpgrades.HentaiSpear>()))
+                if (Projectile.owner == Main.myPlayer && !(player.controlUseTile && player.altFunctionUse == 2 && player.HeldItem.type == ModContent.ItemType<Items.Weapons.FinalUpgrades.Penetrator>()))
                     Projectile.localAI[0] += 1f; //if stop firing, proceed to die
                 else
                     Projectile.localAI[0] -= 1f; //otherwise, stay (also for multiplayer!)

@@ -2733,7 +2733,7 @@ TreeSword: {
 	Tooltip: Dispara uma bolota
 }
 
-HentaiSpear: {
+Penetrator: {
 	DisplayName: O Penetrador
 	Tooltip:
 		'''

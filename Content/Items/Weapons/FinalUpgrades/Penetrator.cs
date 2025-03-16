@@ -12,7 +12,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
-    public class HentaiSpear : SoulsItem
+    [LegacyName("HentaiSword")]
+    public class Penetrator : SoulsItem
     {
         public override void SetStaticDefaults()
         {
@@ -41,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             //Item.scale = 1.3f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.HentaiSpear>();
+            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true;
             Item.noUseGraphic = true;
@@ -75,19 +76,19 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             {
                 if (player.controlUp && player.controlDown)
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearWand>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorWand>();
                     Item.shootSpeed = 6f;
                     Item.useAnimation = 16;
                     Item.useTime = 16;
                 }
                 else if (player.controlUp && !player.controlDown)
                 {
-                    /*Item.shoot = ModContent.ProjectileType<HentaiSpearSpinThrown>();
+                    /*Item.shoot = ModContent.ProjectileType<PenetratorSpinThrown>();
                     Item.shootSpeed = 6f;
                     Item.useAnimation = 16;
                     Item.useTime = 16;*/
 
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearSpinBoundary>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorSpinBoundary>();
                     Item.shootSpeed = 1f;
                     Item.useAnimation = 16;
                     Item.useTime = 16;
@@ -95,7 +96,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 }
                 else if (player.controlDown && !player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearSpinBoundary>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorSpinBoundary>();
                     Item.shootSpeed = 1f;
                     Item.useAnimation = 16;
                     Item.useTime = 16;
@@ -103,7 +104,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 }
                 else
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearThrown>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorThrown>();
                     Item.shootSpeed = 25f;
                     Item.useAnimation = 85;
                     Item.useTime = 85;
@@ -115,18 +116,18 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             {
                 if (player.controlUp && !player.controlDown)
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearSpin>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorSpin>();
                     Item.shootSpeed = 1f;
                     Item.useTurn = true;
                 }
                 else if (player.controlDown && !player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSpearDive>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorDive>();
                     Item.shootSpeed = 6f;
                 }
                 else if (player.controlDown && player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.HentaiSpear>();
+                    Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
                     Item.shootSpeed = 6f;
                 }
                 else
@@ -171,7 +172,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                     if (player.controlDown) // Giga-beam
                         return player.ownedProjectileCounts[Item.shoot] < 1;
 
-                    /*if (player.ownedProjectileCounts[Item.shoot] < 1) // Remember to transfer any changes here to hentaispearspinthrown!
+                    /*if (player.ownedProjectileCounts[Item.shoot] < 1) // Remember to transfer any changes here to Penetratorspinthrown!
                     {
                         Vector2 speed = Main.MouseWorld - player.MountedCenter;
 

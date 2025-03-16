@@ -2743,7 +2743,7 @@ TreeSword: {
 	Tooltip: Выстреливает жёлудем
 }
 
-HentaiSpear: {
+Penetrator: {
 	DisplayName: Проникатель
 	Tooltip:
 		'''

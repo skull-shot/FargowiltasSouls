@@ -59,18 +59,18 @@ HellFlame.DisplayName: Hell Flame
 HellSkeletron.DisplayName: Hell Skeletron
 HellSkull2.DisplayName: Hell Skull
 HentaiNuke.DisplayName: Phantasmal Blast
-HentaiSpear.DisplayName: The Penetrator
-HentaiSpearArc.DisplayName: Lightning Arc
-HentaiSpearBigDeathray.DisplayName: Phantasmal Deathray
-HentaiSpearDeathray.DisplayName: Phantasmal Deathray
-HentaiSpearDeathray2.DisplayName: Phantasmal Deathray
-HentaiSpearDive.DisplayName: The Penetrator
-HentaiSpearHeld.DisplayName: The Penetrator
-HentaiSpearSpin.DisplayName: The Penetrator
-HentaiSpearSpinBoundary.DisplayName: The Penetrator
-HentaiSpearSpinThrown.DisplayName: The Penetrator
-HentaiSpearThrown.DisplayName: The Penetrator
-HentaiSpearWand.DisplayName: The Penetrator
+Penetrator.DisplayName: The Penetrator
+PenetratorArc.DisplayName: Lightning Arc
+PenetratorBigDeathray.DisplayName: Phantasmal Deathray
+PenetratorDeathray.DisplayName: Phantasmal Deathray
+PenetratorDeathray2.DisplayName: Phantasmal Deathray
+PenetratorDive.DisplayName: The Penetrator
+PenetratorHeld.DisplayName: The Penetrator
+PenetratorSpin.DisplayName: The Penetrator
+PenetratorSpinBoundary.DisplayName: The Penetrator
+PenetratorSpinThrown.DisplayName: The Penetrator
+PenetratorThrown.DisplayName: The Penetrator
+PenetratorWand.DisplayName: The Penetrator
 HentaiSphereRing.DisplayName: Phantasmal Sphere
 Hungry.DisplayName: Hungry
 Hungry2.DisplayName: Hungry
@@ -580,7 +580,7 @@ AbomFlocko2.DisplayName: Super Flocko
 AbomFlocko3.DisplayName: Super Flocko
 AbomLaser.DisplayName: Laser
 EyeProjectile.DisplayName: EyeProjectile2
-HentaiSpearDash.DisplayName: The Penetrator
+PenetratorDash.DisplayName: The Penetrator
 CosmosFireball.DisplayName: Cosmic Fireball
 CosmosFireball2.DisplayName: Cosmic Fireball
 ShadowFlameburst.DisplayName: Flameburst

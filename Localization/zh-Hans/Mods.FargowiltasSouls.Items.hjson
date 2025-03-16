@@ -2768,7 +2768,7 @@ TreeSword: {
 	Tooltip: 射出橡实
 }
 
-HentaiSpear: {
+Penetrator: {
 	DisplayName: 洞察者
 	Tooltip:
 		'''

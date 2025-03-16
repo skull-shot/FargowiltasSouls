@@ -2761,7 +2761,7 @@ TreeSword: {
 	// Tooltip: Shoots an acorn
 }
 
-HentaiSpear: {
+Penetrator: {
 	// DisplayName: The Penetrator
 	/* Tooltip:
 		'''
