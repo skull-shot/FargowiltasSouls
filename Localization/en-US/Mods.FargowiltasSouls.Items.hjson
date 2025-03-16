@@ -1529,7 +1529,7 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Non-boss enemies will drop doubled loot
+		Enemies and bosses will drop doubled loot
 		'Most definitely not alive'
 		'''
 }

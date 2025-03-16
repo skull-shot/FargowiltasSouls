@@ -1,6 +1,7 @@
 using Fargowiltas.Items.Ammos;
 using Fargowiltas.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -1064,7 +1065,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 lootMultiplierCheck = true;
 
-                if (player.HasEffect<SinisterIconDropsEffect>() && !npc.boss && !IllegalLootMultiplierNPCs.Contains(npc.type))
+                if (player.HasEffect<SinisterIconDropsEffect>() && npc.type != ModContent.NPCType<MutantBoss>())// && !npc.boss && !IllegalLootMultiplierNPCs.Contains(npc.type))
                 {
                     npc.NPCLoot();
                 }
