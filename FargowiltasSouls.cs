@@ -177,7 +177,7 @@ namespace FargowiltasSouls
 
                 // GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(qsRef, "QueenSlime");
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
-                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime_5_1"));
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime"));
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage2("Images/Extra_" + 179);
 
                 //GameShaders.Misc["PulseUpwards"] = new MiscShaderData(textRef, "PulseUpwards");
