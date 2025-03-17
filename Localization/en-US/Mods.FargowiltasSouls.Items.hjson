@@ -1530,6 +1530,7 @@ SinisterIcon: {
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
 		Enemies and bosses will drop doubled loot
+		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		'''
 }
