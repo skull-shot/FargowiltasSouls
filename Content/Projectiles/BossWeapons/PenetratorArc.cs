@@ -8,7 +8,7 @@ using Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearArc : ModProjectile
+    public class PenetratorArc : ModProjectile
     {
         public int counter;
 

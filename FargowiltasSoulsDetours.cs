@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
@@ -43,6 +44,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot += InterruptShoot;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
 
         }
         public void UnloadDetours()
@@ -106,7 +108,6 @@ namespace FargowiltasSouls
                     || modPlayer.ImmuneToDamage
                     || modPlayer.ShellHide
                     || modPlayer.MonkDashing > 0
-                    || modPlayer.CobaltImmuneTimer > 0
                     || modPlayer.TitaniumDRBuff)
                 && DebuffIDs.Contains(type))
             {
@@ -261,6 +262,66 @@ namespace FargowiltasSouls
             }
 
             return ret;
+        }
+
+        private static int AI_123_Deerclops_TryMakingSpike_FindBestY(On_NPC.orig_AI_123_Deerclops_TryMakingSpike_FindBestY orig, NPC self, ref Point sourceTileCoords, int x)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return orig(self, ref sourceTileCoords, x);
+
+            int num = sourceTileCoords.Y;
+            NPCAimedTarget targetData = self.GetTargetData();
+            if (!targetData.Invalid)
+            {
+                Rectangle hitbox = targetData.Hitbox;
+                Vector2 vector = new Vector2(hitbox.Center.X, hitbox.Bottom);
+                int num2 = (int)(vector.Y / 16f);
+                int num3 = Math.Sign(num2 - num);
+                int num4 = num2 + num3 * 15;
+                int? num5 = null;
+                float num6 = float.PositiveInfinity;
+                for (int i = num; i != num4; i += num3)
+                {
+                    if (WorldGen.SolidTile(x, i))
+                    {
+                        float num7 = new Point(x, i).ToWorldCoordinates().Distance(vector);
+                        if (!num5.HasValue || !(num7 >= num6))
+                        {
+                            num5 = i;
+                            num6 = num7;
+                        }
+                    }
+                }
+                if (num5.HasValue)
+                {
+                    num = num5.Value;
+                }
+            }
+            for (int j = 0; j < 20; j++)
+            {
+                if (num < 10)
+                {
+                    break;
+                }
+                if (!WorldGen.SolidTile(x, num))
+                {
+                    break;
+                }
+                num--;
+            }
+            for (int k = 0; k < 20; k++)
+            {
+                if (num > Main.maxTilesY - 10)
+                {
+                    break;
+                }
+                if (WorldGen.SolidTile(x, num))
+                {
+                    break;
+                }
+                num++;
+            }
+            return num;
         }
     }
 }

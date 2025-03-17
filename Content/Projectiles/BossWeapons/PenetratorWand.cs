@@ -8,9 +8,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearWand : ModProjectile
+    public class PenetratorWand : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         private int syncTimer;
         private Vector2 mousePos;
@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             Player player = Main.player[Projectile.owner];
             if (Projectile.owner == Main.myPlayer && Projectile.localAI[0] > 5
-                && player.ownedProjectileCounts[ModContent.ProjectileType<HentaiSpearBigDeathray>()] < 1)
+                && player.ownedProjectileCounts[ModContent.ProjectileType<PenetratorBigDeathray>()] < 1)
             {
                 Projectile.Kill();
                 return;
@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 return;
             }
 
-            if (player.HeldItem.type == ModContent.ItemType<Items.Weapons.FinalUpgrades.HentaiSpear>())
+            if (player.HeldItem.type == ModContent.ItemType<Items.Weapons.FinalUpgrades.Penetrator>())
             {
                 Projectile.damage = Main.player[Projectile.owner].GetWeaponDamage(Main.player[Projectile.owner].HeldItem);
                 Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);
@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 if (Projectile.owner == Main.myPlayer)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<HentaiSpearBigDeathray>(),
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<PenetratorBigDeathray>(),
                       Projectile.damage, Projectile.knockBack, player.whoAmI, 0, Projectile.identity);
                 }
             }

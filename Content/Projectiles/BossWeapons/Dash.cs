@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             player.fallStart2 = player.fallStart;
 
             if (Projectile.velocity.Length() < baseSpeed * 0.9f)
-                Projectile.localAI[0] = 1; //flag for if speed dips too low for some reason, hentaispear checks this
+                Projectile.localAI[0] = 1; //flag for if speed dips too low for some reason, Penetrator checks this
 
             if (Projectile.owner == Main.myPlayer)
             {
@@ -123,8 +123,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                         if (Projectile.localAI[1] == 1 && Projectile.ai[1] == 1) //super dash rays on spawn, 1 tick delay
                         {
                             Vector2 speed = Projectile.ai[0].ToRotationVector2();
-                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center + speed * 1500, speed, ModContent.ProjectileType<HentaiSpearDeathray2>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
-                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center + speed * 1500, -speed, ModContent.ProjectileType<HentaiSpearDeathray2>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center + speed * 1500, speed, ModContent.ProjectileType<PenetratorDeathray2>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center + speed * 1500, -speed, ModContent.ProjectileType<PenetratorDeathray2>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                         }
 
                         if (Projectile.localAI[1] > 0) //edge case, dont do this on the tick it spawns

@@ -102,7 +102,7 @@ namespace FargowiltasSouls.Content.Patreon
                 AddPatreonDrop(
                         () => SoulConfig.Instance.PatreonFishron,
                         ModContent.ItemType<StaffOfUnleashedOcean>(),
-                        25);
+                        12);
             }
         }
     }

@@ -14,7 +14,8 @@ AncientCobaltEnchant: {
 	// DisplayName: Ancient Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and grants brief invulnerability
+		Grants an explosion jump that inflicts Oiled and deals melee damage
+		Hold down to fall faster
 		'Ancient Kobold'
 		''' */
 }
@@ -129,8 +130,9 @@ CobaltEnchant: {
 	// DisplayName: Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and grants brief invulnerability
-		When you are hurt, you violently explode to damage nearby enemies
+		Grants an explosion jump that inflicts Oiled and deals melee damage
+		Your other jumps are stronger and cause explosions on a short cooldown
+		Hold down to fall faster
 		'I can't believe it's not Palladium'
 		''' */
 }
@@ -164,8 +166,8 @@ CrystalAssassinEnchant: {
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
 		Jump while dashing into ground to get a speed boost and gain the First Strike buff
-		First Strike ensures your next attack hits a vital spot dealing 3x damage and reducing defense by 10
-		First Strike has a 5 second cooldown
+		First Strike causes your next attack to deal 1.5x damage, guarantees a critical strike, and reduces defense by 10
+		First Strike has a 10 second cooldown
 		'Reach for the summit'
 		''' */
 }
@@ -270,10 +272,12 @@ IronEnchant: {
 	// DisplayName: Iron Enchantment
 	/* Tooltip:
 		'''
-		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
-		Increases item grab range
 		Works from inventory and vanity slots:
 		Your reforges always grant a great prefix for +50% cost
+		Increases item grab range
+		Works when equipped:
+		Item grab range affects pickups such as Hearts and Mana Stars
+		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		''' */
 	// VanityTooltip: Your reforges always grant a great prefix for +50% cost
@@ -784,7 +788,7 @@ SharpshootersEssence: {
 	/* Tooltip:
 		'''
 		18% increased ranged damage
-		10% chance to not consume ammo
+		10% increased ranged projectile velocity
 		8% increased ranged critical chance
 		'This is only the beginning...'
 		''' */
@@ -838,20 +842,11 @@ EarthForce: {
 		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
-		[i:FargowiltasSouls/CobaltEnchant] You also explode on hit while not attacking
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
 		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
-		''' */
-	/* SaveOldTooltip:
-		'''
-		[i:FargowiltasSouls/CobaltEnchant] Grants an explosion jump and you explode on hit
-		[i:FargowiltasSouls/MythrilEnchant] Stop attacking to gradually increase attack speed for up to 5 seconds
-		[i:FargowiltasSouls/PalladiumEnchant] Grants Rapid Healing after striking an enemy and spawn life orbs based on healing
-		[i:FargowiltasSouls/OrichalcumEnchant] Attacks spawn flower petals and damaging debuffs deal 3.5x damage
-		[i:FargowiltasSouls/AdamantiteEnchant] Every weapon shot will split into 3, 50% damage each, with higher spread the longer you fire
-		[i:FargowiltasSouls/TitaniumEnchant] Attacks generate titanium shards, reaching max grants Titanium Shield
 		''' */
 }
 
@@ -902,20 +897,6 @@ ShadowForce: {
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
 		'Dark, Darker, Yet Darker'
-		''' */
-	/* SavingOldTooltip:
-		'''
-		[i:FargowiltasSouls/ShadowEnchant] Four Shadow Orbs will orbit around you
-		[i:FargowiltasSouls/AncientShadowEnchant] Your attacks may inflict Darkness on enemies
-		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
-		[i:FargowiltasSouls/CrystalAssassinEnchant] Throw a smoke bomb to teleport to it and gain the First Strike Buff
-		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
-		[i:FargowiltasSouls/MonkEnchant] Don't attack to gain a single use monk dash
-		[i:FargowiltasSouls/ShinobiEnchant] Dash into any walls, to teleport through them to the next opening
-		[i:FargowiltasSouls/ApprenticeEnchant] While attacking, fire your next 3 closest weapons' projectiles as support
-		[i:FargowiltasSouls/DarkArtistEnchant] Summons a Flameburst minion that will also fire when you attack
 		''' */
 }
 
@@ -1524,6 +1505,7 @@ SaucerControlConsole: {
 		Grants immunity to Electrified and Distorted
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
+		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		''' */
 	// VanityTooltip: Press the Ammo Cycle key to cycle ammos
@@ -1551,7 +1533,8 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Non-boss enemies will drop doubled loot
+		Enemies and bosses will drop doubled loot
+		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		''' */
 }
@@ -1681,7 +1664,7 @@ ArchWizardsSoul: {
 	/* Tooltip:
 		'''
 		22% increased magic damage
-		20% increased spell casting speed
+		20% reduced mana cost
 		10% increased magic critical strike chance
 		Increases your maximum mana by 200
 		Effects of Celestial Cuffs and Mana Flower
@@ -1832,7 +1815,7 @@ SnipersSoul: {
 	/* Tooltip:
 		'''
 		22% increased ranged damage
-		20% chance to not consume ammo
+		20% increased ranged projectile velocity
 		10% increased ranged critical chance
 		Effects of Sniper Scope and Magic Quiver
 		'Ready, aim, fire'
@@ -2611,13 +2594,13 @@ BoneZone: {
 		'''
 		Uses bones for ammo
 		33% chance to not consume ammo
-		'The shattered remains of a defeated foe..'
+		'The shattered remains of a defeated foe...'
 		''' */
 }
 
 BrainStaff: {
 	// DisplayName: Mind Break
-	// Tooltip: "'An old foe beaten into submission..'"
+	// Tooltip: "'An old foe beaten into submission...'"
 }
 
 DestroyerGun: {
@@ -2625,7 +2608,7 @@ DestroyerGun: {
 	/* Tooltip:
 		'''
 		Becomes longer and faster with up to 3 empty minion slots
-		'An old foe beaten into submission..'
+		'An old foe beaten into submission...'
 		''' */
 }
 
@@ -2640,7 +2623,7 @@ DragonBreath: {
 		'''
 		Uses gel for ammo
 		33% chance to not consume ammo
-		'The shrunken body of a defeated foe..'
+		'The shrunken body of a defeated foe...'
 		''' */
 }
 
@@ -2649,7 +2632,7 @@ EaterStaff: {
 	/* Tooltip:
 		'''
 		Summons 4 segments for each minion slot
-		'An old foe beaten into submission..'
+		'An old foe beaten into submission...'
 		''' */
 }
 
@@ -2660,13 +2643,13 @@ FishStick: {
 		Right click to deploy a typhoon
 		The typhoon fires sharks when you attack
 		Sharks ignore 20 enemy defense
-		'The carcass of a defeated foe shoved violently on a stick..'
+		'The carcass of a defeated foe shoved violently on a stick...'
 		''' */
 }
 
 FleshHand: {
 	// DisplayName: Flesh Hand
-	// Tooltip: "'The enslaved minions of a defeated foe..'"
+	// Tooltip: "'The enslaved minions of a defeated foe...'"
 }
 
 LeashOfCthulhu: {
@@ -2674,7 +2657,7 @@ LeashOfCthulhu: {
 	/* Tooltip:
 		'''
 		Servants gather around you whilst spun, flying towards your cursor when released
-		'The mutilated carcass of a defeated foe..'
+		'The mutilated carcass of a defeated foe...'
 		''' */
 }
 
@@ -2684,13 +2667,13 @@ RefractorBlaster: {
 		'''
 		Fires two angled spreads of lasers
 		Lasers deal less damage right after being fired
-		'Modified from the arm of a defeated foe..'
+		'Modified from the arm of a defeated foe...'
 		''' */
 }
 
 RockSlide: {
 	// DisplayName: The Rockslide
-	// Tooltip: "'The crumbling remains of a defeated foe..'"
+	// Tooltip: "'The crumbling remains of a defeated foe...'"
 }
 
 SlimeKingsSlasher: {
@@ -2699,7 +2682,7 @@ SlimeKingsSlasher: {
 		'''
 		Deals 20% increased damage to enemies on fire
 		Reduced size benefit from Tungsten Enchantment
-		'Torn from the insides of a defeated foe..'
+		'Torn from the insides of a defeated foe...'
 		''' */
 }
 
@@ -2711,7 +2694,7 @@ TheSmallSting: {
 		50% chance to not consume ammo
 		Stingers will stick to enemies, hitting the same spot again will deal extra damage
 		Scales with your bee damage and knockback increases
-		'Repurposed from the abdomen of a defeated foe..'
+		'Repurposed from the abdomen of a defeated foe...'
 		''' */
 }
 
@@ -2722,7 +2705,7 @@ TwinRangs: {
 		Left click to throw a Spazmarang that rapidly tears enemies apart
 		Right click to throw a Retirang that fires lasers towards the nearest enemy
 		Only 3 Retirangs can exist at any given time
-		'The compressed forms of defeated foes..'
+		'The compressed forms of defeated foes...'
 		''' */
 }
 
@@ -2736,7 +2719,7 @@ MoonBow: {
 		Release at the right time to temporarily receive a lunar blessing
 		When blessed, drastically increased attack speed and altered arrow gravity
 		66% chance to save ammo
-		'The restrung mouth of a defeated foe..'
+		'The restrung mouth of a defeated foe...'
 		''' */
 }
 
@@ -2783,7 +2766,7 @@ TreeSword: {
 	// Tooltip: Shoots an acorn
 }
 
-HentaiSpear: {
+Penetrator: {
 	// DisplayName: The Penetrator
 	/* Tooltip:
 		'''
@@ -2798,13 +2781,13 @@ PhantasmalLeashOfCthulhu: {
 	/* Tooltip:
 		'''
 		Spawns a flurry of homing eyes whilst spun and on hit
-		'The True Eye's soul, trapped for all eternity..'
+		'The True Eye's soul, trapped for all eternity...'
 		''' */
 }
 
 SlimeRain: {
 	// DisplayName: Slime Rain
-	// Tooltip: "'The King's innards spread across the land..'"
+	// Tooltip: "'The King's innards spread across the land...'"
 }
 
 SparklingLove: {
@@ -2860,13 +2843,13 @@ BigBrainBuster: {
 		'''
 		Repeated summons increase the size and damage of the minion
 		This caps at 16 slots
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
 Blender: {
 	// DisplayName: The Blender
-	// Tooltip: "'The reward for a mighty rematch..'"
+	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
 DestroyerGun2: {
@@ -2874,7 +2857,7 @@ DestroyerGun2: {
 	/* Tooltip:
 		'''
 		Becomes longer and faster with up to 5 empty minion slots
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2884,7 +2867,7 @@ DragonBreath2: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2898,7 +2881,7 @@ EaterLauncher: {
 		Press Right Click to increase this range
 		The range then gradually decreases to normal
 		50% chance to not consume ammo
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2919,7 +2902,7 @@ GeminiGlaives: {
 		Left click to throw 3 Spazmaglaives that rapidly tear enemies apart
 		Right click to throw 3 Retiglaives that rapidly fire lasers at the cursor
 		Alternating clicks will enhance attacks
-		'The compressed forms of defeated foes..'
+		'The compressed forms of defeated foes...'
 		''' */
 }
 
@@ -2929,7 +2912,7 @@ GolemTome2: {
 		'''
 		Deals more damage when firing many heads at once
 		Automatically fires weak heads when fully charged
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2947,7 +2930,7 @@ HellZone: {
 		Left click attack inflicts Hellfire
 		Right click to fire a skull that marks enemies
 		Marked enemies take 5x damage over time from Hellfire
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2958,7 +2941,7 @@ MechanicalLeashOfCthulhu: {
 		Spawns homing servants whilst spun
 		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
 		Only one eye can be loose at a time
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -2977,18 +2960,18 @@ OpticStaffEX: {
 		'''
 		Summons the real twins to fight for you
 		Needs 3 minion slots
-		'The reward for a mighty rematch..''
+		'The reward for a mighty rematch...''
 		''' */
 }
 
 RefractorBlaster2: {
 	// DisplayName: Diffractor Blaster
-	// Tooltip: "'The reward for a mighty rematch..'"
+	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
 SlimeSlingingSlasher: {
 	// DisplayName: Slime Slinging Slasher
-	// Tooltip: "'The reward for a mighty rematch..'"
+	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
 TheBigSting: {
@@ -2998,7 +2981,7 @@ TheBigSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 
@@ -3385,7 +3368,7 @@ BaronRelic: {
 
 HiveStaff: {
 	// DisplayName: Hive Staff
-	// Tooltip: "'The enslaved minions of a defeated foe..'"
+	// Tooltip: "'The enslaved minions of a defeated foe...'"
 }
 
 ROBGyro: {
@@ -3424,7 +3407,7 @@ EaterLauncherJr: {
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
 		Increased damage to enemies in the given range
-		'The rotting remains of a defeated foe..'
+		'The rotting remains of a defeated foe...'
 		''' */
 }
 
@@ -3435,7 +3418,7 @@ TheBiggestSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The Queen's unwavering swarm..'
+		'The Queen's unwavering swarm...'
 		''' */
 }
 
@@ -3686,7 +3669,7 @@ TheDestroyer: {
 		'''
 		Whip your minions to fire a laser at a nearby enemy, up to 6 times per swing
 		Every 20th swing, the destroyer breaks loose and tracks your mouse for 5 seconds
-		'The reward for a mighty rematch..'
+		'The reward for a mighty rematch...'
 		''' */
 }
 

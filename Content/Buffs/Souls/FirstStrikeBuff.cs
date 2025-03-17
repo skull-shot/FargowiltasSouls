@@ -20,10 +20,10 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             player.buffTime[buffIndex]++;
             player.FargoSouls().FirstStrike = true;
 
-            player.shroomiteStealth = true;
-            player.stealth = .2f;
-            player.stealthTimer = 0;
-            player.aggro -= 1200;
+            //player.shroomiteStealth = true;
+            //player.stealth = .2f;
+            //player.stealthTimer = 0;
+            //player.aggro -= 1200;
         }
     }
 }

@@ -8,9 +8,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearSpinBoundary : HentaiSpearSpin
+    public class PenetratorSpinBoundary : PenetratorSpin
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         public override void SetStaticDefaults()
         {

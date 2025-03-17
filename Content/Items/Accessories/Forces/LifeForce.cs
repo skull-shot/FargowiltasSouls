@@ -77,9 +77,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             player.wingsLogic = ArmorIDs.Wing.LongTrailRainbowWings;
             ascentWhenFalling = 1.25f;
-            ascentWhenRising = 0.32f;
-            maxCanAscendMultiplier = 1.22f;
-            maxAscentMultiplier = 1.9f;
+            ascentWhenRising = 0.35f;
+            maxCanAscendMultiplier = 1.25f;
+            maxAscentMultiplier = 2f;
             constantAscend = 0.15f;
             if (player.controlUp)
             {

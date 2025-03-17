@@ -32,12 +32,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void PassiveEffects(Player player, Item item)
         {
             player.AddEffect<IronPassiveEffect>(item);
+            player.AddEffect<IronEffect>(item);
         }
         public static void AddEffects(Player player, Item item)
         {
             PassiveEffects(player, item);
-            player.AddEffect<IronEffect>(item);
             player.AddEffect<IronPickupEffect>(item);
+            player.AddEffect<IronEquippedEffect>(item);
         }
 
         public override void AddRecipes()
@@ -55,6 +56,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
     }
     public class IronPassiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<IronEnchant>();
+
+    }
+    public class IronEquippedEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<IronEnchant>();

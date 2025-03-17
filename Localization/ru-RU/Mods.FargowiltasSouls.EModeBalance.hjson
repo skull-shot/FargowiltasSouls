@@ -55,8 +55,8 @@ SniperRifle: Наносит до x2 урона в зависимости от т
 ChlorophyteSaber: Снаряды летят быстрее, но замедляются при попадании
 JackOLanternLauncher: Скорость снарядов увеличена на 50%
 GolemFist: Наносит врагам больше урона в зависимости от пройденного расстояния, вплоть до x3
-// Gladius: Hit rate increased to match swing speed
-// FlowerPow: Tripled petal firerate
-// PiranhaGun: Projectile damage updates dynamically
-// ProximityMineLauncher: Projectile damage updates dynamically
-// PygmyStaff: Spears can now pierce once
+Gladius: Частота ударов увеличена, чтобы соответствовать скорости ударов
+FlowerPow: Лепестки вылетают в три раза чаще
+PiranhaGun: Урон снарядов обновляется постоянно
+ProximityMineLauncher: Урон снарядов обновляется постоянно
+PygmyStaff: Spears can now pierce once

@@ -1,6 +1,7 @@
 using Fargowiltas.Items.Ammos;
 using Fargowiltas.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -27,6 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -103,6 +105,7 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool PungentGazeWasApplied;
         public int PungentGazeTime;
+        public bool SinisterIconFullFight;
 
         public int GrazeCD;
 
@@ -170,6 +173,18 @@ namespace FargowiltasSouls.Core.Globals
             if (npc.rarity > 0 && !RareNPCs.Contains(npc.type))
                 RareNPCs.Add(npc.type);
         }
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            base.OnSpawn(npc, source);
+            if (SinisterIconBoss(npc))
+            {
+                foreach (var player in Main.ActivePlayers)
+                {
+                    if (player.Alive() && player.HasEffect<SinisterIconDropsEffect>())
+                        SinisterIconFullFight = true;
+                }
+            }
+        }
         public override bool PreAI(NPC npc)
         {
             if (npc.boss || npc.type == NPCID.EaterofWorldsHead)
@@ -183,6 +198,15 @@ namespace FargowiltasSouls.Core.Globals
                 npc.position = npc.oldPosition;
                 npc.frameCounter = 0;
                 retval = false;
+            }
+
+            if (SinisterIconBoss(npc))
+            {
+                foreach (var player in Main.ActivePlayers)
+                {
+                    if (!(player.Alive() && player.HasEffect<SinisterIconDropsEffect>()))
+                        SinisterIconFullFight = false;
+                }
             }
 
             if (!FirstTick)
@@ -1043,7 +1067,8 @@ namespace FargowiltasSouls.Core.Globals
         }
 
         private bool lootMultiplierCheck;
-        private static int[] IllegalLootMultiplierNPCs => [
+        public static bool SinisterIconBoss(NPC npc) => npc.boss || IllegalLootMultiplierNPCs.Contains(npc.type);
+        public static int[] IllegalLootMultiplierNPCs => [
             NPCID.DD2Betsy,
             NPCID.EaterofWorldsBody,
             NPCID.EaterofWorldsHead,
@@ -1064,9 +1089,15 @@ namespace FargowiltasSouls.Core.Globals
             {
                 lootMultiplierCheck = true;
 
-                if (player.HasEffect<SinisterIconDropsEffect>() && !npc.boss && !IllegalLootMultiplierNPCs.Contains(npc.type))
+                if (player.HasEffect<SinisterIconDropsEffect>() && npc.type != ModContent.NPCType<MutantBoss>())// && !npc.boss && !IllegalLootMultiplierNPCs.Contains(npc.type))
                 {
-                    npc.NPCLoot();
+                    if (SinisterIconBoss(npc))
+                    {
+                        if (npc.FargoSouls().SinisterIconFullFight)
+                            npc.NPCLoot();
+                    }
+                    else
+                        npc.NPCLoot();
                 }
 
                 if (player.FargoSouls().PlatinumEffect != null && !npc.boss)

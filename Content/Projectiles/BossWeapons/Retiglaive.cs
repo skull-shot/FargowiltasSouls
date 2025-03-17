@@ -118,7 +118,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                             SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(mousePos - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(mousePos - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack, Projectile.owner);
                                 if (p != Main.maxProjectiles)
                                 {
                                     Main.projectile[p].DamageType = DamageClass.Melee;

@@ -6,9 +6,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearHeld : ModProjectile
+    public class PenetratorHeld : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         public const int useTime = 90;
 
@@ -117,7 +117,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.owner == Main.myPlayer)
             {
                 int damage = (int)(Projectile.damage * (1f + Projectile.ai[0] / useTime));
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<HentaiSpearThrown>(), damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<PenetratorThrown>(), damage, Projectile.knockBack, Projectile.owner);
             }
         }
 

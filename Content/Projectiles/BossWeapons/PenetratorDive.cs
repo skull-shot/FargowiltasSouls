@@ -1,8 +1,8 @@
 ﻿namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearDive : HentaiSpear
+    public class PenetratorDive : Penetrator
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         public override void AI()
         {
