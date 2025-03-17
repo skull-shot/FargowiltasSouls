@@ -14,6 +14,7 @@ using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -106,7 +107,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool BossAliveLastFrame = false;
 
         public AccessoryEffect[] ActiveSkills = new AccessoryEffect[4];
-
         public override void SaveData(TagCompound tag)
         {
             var playerData = new List<string>();
@@ -1211,6 +1211,36 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
+        public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound)
+        {
+            if (Player.HasEffect<CobaltEffect>())
+            {
+                if (Player.whoAmI == Main.myPlayer && CobaltJumpCooldown <= 0)
+                {
+                    CobaltJumpCooldown = 15;
+                    int baseDamage = 75;
+
+                    if (Player.ForceEffect<CobaltEffect>())
+                    {
+                        baseDamage = 150;
+                    }
+
+                    if (Player.HasEffect<EarthForceEffect>() || TerrariaSoul)
+                    {
+                        baseDamage = 600;
+                    }
+
+                    Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_EffectItem<CobaltEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(baseDamage * Player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
+                    if (p != null)
+                        p.FargoSouls().CanSplit = false;
+                }
+            }
+        }
+        public override void ModifyExtraJumpDurationMultiplier(ExtraJump jump, ref float duration)
+        {
+            if (Player.HasEffect<CobaltEffect>())
+                duration *= 1.5f;
+        }
         public void AddPet(bool toggle, bool vanityToggle, int buff, int proj)
         {
             if (vanityToggle)

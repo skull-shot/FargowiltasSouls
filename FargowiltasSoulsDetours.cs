@@ -108,7 +108,6 @@ namespace FargowiltasSouls
                     || modPlayer.ImmuneToDamage
                     || modPlayer.ShellHide
                     || modPlayer.MonkDashing > 0
-                    || modPlayer.CobaltImmuneTimer > 0
                     || modPlayer.TitaniumDRBuff)
                 && DebuffIDs.Contains(type))
             {

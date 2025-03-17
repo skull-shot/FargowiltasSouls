@@ -1,7 +1,9 @@
-﻿using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,6 +30,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<AncientCobaltEffect>(Item);
+            player.AddEffect<AncientCobaltFallEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -54,16 +57,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.CobaltImmuneTimer > 0)
-            {
-                player.immune = true;
-                modPlayer.CobaltImmuneTimer--;
-            }
             if (modPlayer.CobaltCooldownTimer > 0)
             {
                 modPlayer.CobaltCooldownTimer--;
             }
-
 
             if (player.jump <= 0 && player.velocity.Y == 0f)
             {
@@ -74,34 +71,43 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.CanCobaltJump = false;
             }
-
+            bool notAncient = EffectItem(player).type != ModContent.ItemType<AncientCobaltEnchant>();
             if (player.controlJump && player.releaseJump && modPlayer.CanCobaltJump && !modPlayer.JustCobaltJumped && modPlayer.CobaltCooldownTimer <= 0)
             {
-                bool upgrade = EffectItem(player).type != ModContent.ItemType<AncientCobaltEnchant>() || player.ForceEffect<AncientCobaltEffect>();
+                bool upgrade = notAncient || player.ForceEffect<AncientCobaltEffect>();
 
                 int projType = ModContent.ProjectileType<CobaltExplosion>();
-                int damage = 100;
+                int damage = 150;
                 if (upgrade) 
                     damage = 250;
 
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, damage, 0, player.whoAmI);
+                if (notAncient && player.ForceEffect<AncientCobaltEffect>())
+                    damage = 350;
+
+                float scale = 1.5f;
+                if (upgrade)
+                    scale = 2f;
+
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 0, player.whoAmI, ai0: scale);
 
                 modPlayer.JustCobaltJumped = true;
 
+                /*
                 int time = upgrade ? 15 : 8;
 
                 if (modPlayer.CobaltImmuneTimer <= 0)
                     modPlayer.CobaltImmuneTimer = time;
+                */
 
                 if (modPlayer.CobaltCooldownTimer <= 10)
                     modPlayer.CobaltCooldownTimer = 10;
             }
 
-            if (modPlayer.CanCobaltJump || modPlayer.JustCobaltJumped && !player.GetJumpState(ExtraJump.CloudInABottle).Active && !player.GetJumpState(ExtraJump.BlizzardInABottle).Active && !player.GetJumpState(ExtraJump.FartInAJar).Active && !player.GetJumpState(ExtraJump.TsunamiInABottle).Active && !player.GetJumpState(ExtraJump.SandstormInABottle).Active && !modPlayer.JungleJumping)
+            if (modPlayer.CanCobaltJump || modPlayer.JustCobaltJumped && !player.ExtraJumps.ToArray().Any(j => j.Active) && !modPlayer.JungleJumping)
             {
-                if (player.HasEffect<CobaltEffect>())
+                if (notAncient || player.ForceEffect<AncientCobaltEffect>())
                 {
-                    player.jumpSpeedBoost += 10f;
+                    player.jumpSpeedBoost += 7.5f;
                 }
                 else
                 {
@@ -109,6 +115,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
             }
         }
+    }
+
+    public class AncientCobaltFallEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
+        public override int ToggleItemType => ModContent.ItemType<AncientCobaltEnchant>();
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.controlDown)
+            {
+                player.maxFallSpeed *= 1.5f;
+                if (player.velocity.Y != 0)
+                    player.velocity.Y += 0.1f;
+            }
+        }
+
     }
 
 }

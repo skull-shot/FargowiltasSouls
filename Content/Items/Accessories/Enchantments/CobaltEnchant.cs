@@ -29,6 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<CobaltEffect>(Item);
+            player.AddEffect<AncientCobaltFallEffect>(Item);
             player.AddEffect<AncientCobaltEffect>(Item);
         }
 
@@ -51,42 +52,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<CobaltEnchant>();
-
-        public override void OnHurt(Player player, Player.HurtInfo info)
+        public override void PostUpdateEquips(Player player)
         {
-            bool canProc = true;
-            if (!HasEffectEnchant(player))
-                canProc = player.FargoSouls().WeaponUseTimer <= 0;
-            if (player.whoAmI == Main.myPlayer && canProc)
-            {
-                FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-                int baseDamage = 75;
-                int multiplier = 2;
-                int cap = 150;
-
-                if (player.ForceEffect<CobaltEffect>())
-                {
-                    baseDamage = 150;
-                    multiplier = 4;
-                    cap = 400;
-                }
-
-                if (player.HasEffect<EarthForceEffect>() || modPlayer.TerrariaSoul)
-                {
-                    baseDamage = 600;
-                    multiplier = 5;
-                    cap = 2500;
-                }
-
-                int explosionDamage = baseDamage + info.Damage * multiplier;
-                if (explosionDamage > cap)
-                    explosionDamage = cap;
-
-                Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_Accessory(player.EffectItem<CobaltEffect>()), player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(explosionDamage * player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
-                if (p != null)
-                    p.FargoSouls().CanSplit = false;
-            }
+            if (player.FargoSouls().CobaltJumpCooldown > 0)
+                player.FargoSouls().CobaltJumpCooldown--;
         }
     }
 }
