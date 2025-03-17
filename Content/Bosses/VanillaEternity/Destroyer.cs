@@ -1050,7 +1050,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 modifiers.FinalDamage *= 0.3f;
 
             if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.7f;
 
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
@@ -1060,7 +1060,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 0.4f;
+            modifiers.FinalDamage *= 0.7f;
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
