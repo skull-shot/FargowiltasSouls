@@ -37,6 +37,7 @@ namespace FargowiltasSouls.Content.UI
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
             //drawColor = Color.Cyan; // Changes the draw color of the logo
+            drawColor = Color.White;
             return true;
         }
     }
