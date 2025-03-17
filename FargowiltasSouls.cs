@@ -153,7 +153,6 @@ namespace FargowiltasSouls
                 Ref<Effect> lcRef = new(Assets.Request<Effect>("Assets/Effects/Armor/LifeChampionShader", AssetRequestMode.ImmediateLoad).Value);
                 Ref<Effect> wcRef = new(Assets.Request<Effect>("Assets/Effects/Armor/WillChampionShader", AssetRequestMode.ImmediateLoad).Value);
                 Ref<Effect> gaiaRef = new(Assets.Request<Effect>("Assets/Effects/Armor/GaiaShader", AssetRequestMode.ImmediateLoad).Value);
-                Ref<Effect> qsRef = new(Assets.Request<Effect>("Assets/Effects/Boss/QueenSlime", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> textRef = new(Assets.Request<Effect>("Assets/Effects/TextShader", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> invertRef = new(Assets.Request<Effect>("Assets/Effects/Invert", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> finalSparkRef = new(Assets.Request<Effect>("Assets/Effects/FinalSpark", AssetRequestMode.ImmediateLoad).Value);
