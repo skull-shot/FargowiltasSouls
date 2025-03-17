@@ -153,6 +153,7 @@ namespace FargowiltasSouls
                 Ref<Effect> lcRef = new(Assets.Request<Effect>("Assets/Effects/Armor/LifeChampionShader", AssetRequestMode.ImmediateLoad).Value);
                 Ref<Effect> wcRef = new(Assets.Request<Effect>("Assets/Effects/Armor/WillChampionShader", AssetRequestMode.ImmediateLoad).Value);
                 Ref<Effect> gaiaRef = new(Assets.Request<Effect>("Assets/Effects/Armor/GaiaShader", AssetRequestMode.ImmediateLoad).Value);
+                Ref<Effect> qsRef = new(Assets.Request<Effect>("Assets/Effects/Boss/QueenSlime", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> textRef = new(Assets.Request<Effect>("Assets/Effects/TextShader", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> invertRef = new(Assets.Request<Effect>("Assets/Effects/Invert", AssetRequestMode.ImmediateLoad).Value);
                 //Ref<Effect> finalSparkRef = new(Assets.Request<Effect>("Assets/Effects/FinalSpark", AssetRequestMode.ImmediateLoad).Value);
@@ -173,6 +174,11 @@ namespace FargowiltasSouls
 
                 GameShaders.Misc["GaiaShader"] = new MiscShaderData(gaiaRef, "GaiaGlow");
                 GameShaders.Armor.BindShader(ModContent.ItemType<GaiaDye>(), new ArmorShaderData(gaiaRef, "GaiaArmor").UseColor(new Color(0.44f, 1, 0.09f)).UseSecondaryColor(new Color(0.5f, 1f, 0.9f)));
+
+                // GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(qsRef, "QueenSlime");
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime_5_1"));
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage2("Images/Extra_" + 179);
 
                 //GameShaders.Misc["PulseUpwards"] = new MiscShaderData(textRef, "PulseUpwards");
                 //GameShaders.Misc["PulseDiagonal"] = new MiscShaderData(textRef, "PulseDiagonal");
