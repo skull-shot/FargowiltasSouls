@@ -12,14 +12,14 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -549,12 +549,74 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            return false;
-        }
+            // Draw the Ninja (Mutant).
+            var ninjaOffset = new Vector2(-npc.velocity.X * 2f, -npc.velocity.Y);
+            var ninjaRotation = npc.velocity.X * 0.05f;
+            
+            switch (npc.frame.Y)
+            {
+                case 120:
+                    ninjaOffset.Y += 2f;
+                    break;
 
-        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        {
-            base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+                case 360:
+                    ninjaOffset.Y -= 2f;
+                    break;
+
+                case 480:
+                    ninjaOffset.Y -= 6f;
+                    break;
+            }
+            
+            spriteBatch.Draw(TextureAssets.Ninja.Value, new Vector2(npc.position.X - screenPos.X + npc.width / 2f + ninjaOffset.X, npc.position.Y - screenPos.Y + npc.height / 2f + ninjaOffset.Y), new Rectangle(0, 0, TextureAssets.Ninja.Width(), TextureAssets.Ninja.Height()), drawColor, ninjaRotation, TextureAssets.Ninja.Size() / 2f, 1f, SpriteEffects.None, 0f);
+            
+            // We have to manually set drawing to immediate mode when rendering
+            // the NPC normally.  Bestiary icons don't have this requirement.
+            if (!npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
+            }
+
+            // Can also use npc.type instead.
+            var ksTexture = TextureAssets.Npc[NPCID.KingSlime].Value;
+            
+            // Render KS through DrawData since we need to apply a game shader.
+            var frameCount = Main.npcFrameCount[npc.type];
+            var frameVertical = npc.frame.Y / npc.frame.Height;
+            var frame = ksTexture.Frame(1, frameCount, 0, frameVertical);
+            frame.Inflate(0, -2);
+            
+            var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor with { A = 200 }, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            GameShaders.Misc["FargowiltasSouls:KingSlime"].Apply(drawData);
+            drawData.Draw(spriteBatch);
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            
+            if (!npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+            }
+            
+            // Render the crown normally without the shader.
+            var crownTexture = TextureAssets.Extra[39].Value;
+            var center = npc.Center;
+
+            var yOffset = (npc.frame.Y / (ksTexture.Height / Main.npcFrameCount[NPCID.KingSlime])) switch
+            {
+                0 => 2f,
+                1 => -6f,
+                2 => 2f,
+                3 => 10f,
+                4 => 2f,
+                5 => 0f,
+                _ => 0f,
+            };
+
+            var spriteEffects = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            center.Y += npc.gfxOffY - (70f - yOffset) * npc.scale;
+            spriteBatch.Draw(crownTexture, center - screenPos, null, Color.White, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+            return false;
         }
 
         public void DeathAnimation(NPC npc)
