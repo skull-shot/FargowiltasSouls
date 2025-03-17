@@ -549,21 +549,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Main.GameViewMatrix.TransformationMatrix);
-
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.RainbowSlime");
-            shader.Apply();
-            
-            return true;
+            return false;
         }
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
-            
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
         }
 
         public void DeathAnimation(NPC npc)
