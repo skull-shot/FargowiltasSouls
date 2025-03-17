@@ -15,6 +15,7 @@ EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Скорость и разброс адамантита
 CobaltEffect: Взрыв при уроне кобальта
 AncientCobaltEffect: Взрывной прыжок др. кобальта
+// AncientCobaltFallEffect: Cobalt Fall Speed
 MythrilEffect: Скорость оружий мифрила
 OrichalcumEffect: Лепестки орихалка
 PalladiumHealing: Лечение палладия

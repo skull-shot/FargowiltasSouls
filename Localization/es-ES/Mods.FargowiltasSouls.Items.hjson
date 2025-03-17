@@ -14,7 +14,7 @@ AncientCobaltEnchant: {
 	// DisplayName: Ancient Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled
+		Grants an explosion jump that inflicts Oiled and deals melee damage
 		Hold down to fall faster
 		'Ancient Kobold'
 		''' */
@@ -130,7 +130,7 @@ CobaltEnchant: {
 	// DisplayName: Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled
+		Grants an explosion jump that inflicts Oiled and deals melee damage
 		Your other jumps are stronger and cause explosions on a short cooldown
 		Hold down to fall faster
 		'I can't believe it's not Palladium'
@@ -842,10 +842,10 @@ EarthForce: {
 		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
-		[i:FargowiltasSouls/CobaltEnchant] You also explode on hit while not attacking
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
 		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
 }
