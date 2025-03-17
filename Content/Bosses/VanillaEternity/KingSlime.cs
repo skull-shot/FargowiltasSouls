@@ -587,7 +587,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             var frame = ksTexture.Frame(1, frameCount, 0, frameVertical);
             frame.Inflate(0, -2);
             
-            var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor with { A = 200 }, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor /*with { A = 200 }*/, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             GameShaders.Misc["FargowiltasSouls:KingSlime"].Apply(drawData);
             drawData.Draw(spriteBatch);
             Main.pixelShader.CurrentTechnique.Passes[0].Apply();
