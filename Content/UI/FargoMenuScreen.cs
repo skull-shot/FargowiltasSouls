@@ -16,6 +16,8 @@ namespace FargowiltasSouls.Content.UI
             ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ForgorMenuLogo") :
             ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MenuLogo");
 
+        private Asset<Texture2D> LogoGlow => ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/UI/{(forgor ? "ForgorMenu" : "MenuLogo")}_Glow");
+
         //public override Asset<Texture2D> SunTexture => ModContent.Request<Texture2D>($"");
 
         //public override Asset<Texture2D> MoonTexture => ModContent.Request<Texture2D>($"");
@@ -37,8 +39,14 @@ namespace FargowiltasSouls.Content.UI
         public override bool PreDrawLogo(SpriteBatch spriteBatch, ref Vector2 logoDrawCenter, ref float logoRotation, ref float logoScale, ref Color drawColor)
         {
             //drawColor = Color.Cyan; // Changes the draw color of the logo
-            drawColor = Color.White;
             return true;
+        }
+
+        public override void PostDrawLogo(SpriteBatch spriteBatch, Vector2 logoDrawCenter, float logoRotation, float logoScale, Color drawColor)
+        {
+            base.PostDrawLogo(spriteBatch, logoDrawCenter, logoRotation, logoScale, drawColor);
+            
+            spriteBatch.Draw(LogoGlow.Value, logoDrawCenter, null, Color.White, logoRotation, LogoGlow.Value.Size() / 2, logoScale, SpriteEffects.None, 0f);
         }
     }
 }
