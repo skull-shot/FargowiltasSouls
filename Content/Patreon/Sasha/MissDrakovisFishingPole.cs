@@ -48,6 +48,13 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                 modeSwitchCD--;
         }
 
+        public override bool NeedsAmmo(Player player)
+        {
+            // Fixes a bug where having no ammo in the ranged mode prevents
+            // switching.
+            return player.altFunctionUse != 2 || modeSwitchCD > 0;
+        }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //right click
