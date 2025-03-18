@@ -3716,3 +3716,63 @@ MainMenuMusicBox: {
 	DisplayName: Music Box (Main Menu)
 	Tooltip: Sakuzyo 'Nein'
 }
+
+BaronMask: {
+	DisplayName: Banished Baron Mask
+	Tooltip: ""
+}
+
+CoffinMask: {
+	DisplayName: Cursed Coffin Mask
+	Tooltip: ""
+}
+
+DeathMask: {
+	DisplayName: Death Champion Mask
+	Tooltip: ""
+}
+
+EarthMask: {
+	DisplayName: Earth Champion Mask
+	Tooltip: ""
+}
+
+LifelightMask: {
+	DisplayName: Lifelight Mask
+	Tooltip: ""
+}
+
+LifeMask: {
+	DisplayName: Life Champion Mask
+	Tooltip: ""
+}
+
+NatureMask: {
+	DisplayName: Nature Champion Mask
+	Tooltip: ""
+}
+
+SpiritMask: {
+	DisplayName: Spirit Champion Mask
+	Tooltip: ""
+}
+
+TerraMask: {
+	DisplayName: Terra Champion Mask
+	Tooltip: ""
+}
+
+TimberMask: {
+	DisplayName: Timber Champion Mask
+	Tooltip: ""
+}
+
+TrojanMask: {
+	DisplayName: Trojan Squirrel Mask
+	Tooltip: ""
+}
+
+WillMask: {
+	DisplayName: Will Champion Mask
+	Tooltip: ""
+}
