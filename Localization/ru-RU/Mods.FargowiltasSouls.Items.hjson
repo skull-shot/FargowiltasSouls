@@ -1082,7 +1082,7 @@ CelestialRune: {
 }
 
 ChaliceoftheMoon: {
-	DisplayName: Галактический глобус
+	DisplayName: Зеленеющая маска провидца рока
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Даёт иммунитет к дебаффам «Рой», «Атрофированный», «Заклинивший», «Обратный поток маны» и «Необщительный»
