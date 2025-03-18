@@ -3807,3 +3807,63 @@ BrokenSpearhead: {
 	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
+
+BaronMask: {
+	// DisplayName: Baron Mask
+	// Tooltip: ""
+}
+
+CoffinMask: {
+	// DisplayName: Coffin Mask
+	// Tooltip: ""
+}
+
+DeathMask: {
+	// DisplayName: Death Mask
+	// Tooltip: ""
+}
+
+EarthMask: {
+	// DisplayName: Earth Mask
+	// Tooltip: ""
+}
+
+LifelightMask: {
+	// DisplayName: Lifelight Mask
+	// Tooltip: ""
+}
+
+LifeMask: {
+	// DisplayName: Life Mask
+	// Tooltip: ""
+}
+
+NatureMask: {
+	// DisplayName: Nature Mask
+	// Tooltip: ""
+}
+
+SpiritMask: {
+	// DisplayName: Spirit Mask
+	// Tooltip: ""
+}
+
+TerraMask: {
+	// DisplayName: Terra Mask
+	// Tooltip: ""
+}
+
+TimberMask: {
+	// DisplayName: Timber Mask
+	// Tooltip: ""
+}
+
+TrojanMask: {
+	// DisplayName: Trojan Mask
+	// Tooltip: ""
+}
+
+WillMask: {
+	// DisplayName: Will Mask
+	// Tooltip: ""
+}
