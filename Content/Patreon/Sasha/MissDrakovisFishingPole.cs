@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
 
         public override bool AltFunctionUse(Player player)
         {
-            return true;
+            return modeSwitchCD <= 0;
         }
 
         public override void HoldItem(Player player)
@@ -60,16 +60,12 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             //right click
             if (player.altFunctionUse == 2)
             {
-                if (modeSwitchCD <= 0)
-                {
-                    if (++mode > 4)
-                        mode = 1;
+                if (++mode > 4)
+                    mode = 1;
 
-                    SetUpItem();
+                SetUpItem();
 
-                    modeSwitchCD = Item.useTime;
-                }
-
+                modeSwitchCD = Item.useTime;
                 return false;
             }
 
