@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             //meme speed, solar flare,
             SetActive(player);
+            modPlayer.CosmosForce = true;
             modPlayer.WizardEnchantActive = true;
             player.AddEffect<MeteorMomentumEffect>(Item);
             player.AddEffect<StardustEffect>(Item);

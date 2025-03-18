@@ -52,6 +52,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int TerraProcCD;
         public int CosmosMoonTimer;
         public int CosmosMoonCycle;
+        public bool CosmosForce;
         public bool LifeForceActive;
         public float AuraSizeBonus;
         public int TerrariaSoulProcCD;
