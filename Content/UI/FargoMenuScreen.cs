@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.UI
             ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ForgorMenuLogo") :
             ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MenuLogo");
 
-        private Asset<Texture2D> LogoGlow => ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/UI/{(forgor ? "ForgorMenu" : "MenuLogo")}_Glow");
+        private Asset<Texture2D> LogoGlow => ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/UI/{(forgor ? "Forgor" : "")}MenuLogo_Glow");
 
         //public override Asset<Texture2D> SunTexture => ModContent.Request<Texture2D>($"");
 
