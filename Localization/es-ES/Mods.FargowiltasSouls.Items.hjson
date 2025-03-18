@@ -3739,22 +3739,22 @@ MainMenuMusicBox: {
 }
 
 BaronMask: {
-	// DisplayName: Baron Mask
+	// DisplayName: Banished Baron Mask
 	// Tooltip: ""
 }
 
 CoffinMask: {
-	// DisplayName: Coffin Mask
+	// DisplayName: Cursed Coffin Mask
 	// Tooltip: ""
 }
 
 DeathMask: {
-	// DisplayName: Death Mask
+	// DisplayName: Death Champion Mask
 	// Tooltip: ""
 }
 
 EarthMask: {
-	// DisplayName: Earth Mask
+	// DisplayName: Earth Champion Mask
 	// Tooltip: ""
 }
 
@@ -3764,36 +3764,36 @@ LifelightMask: {
 }
 
 LifeMask: {
-	// DisplayName: Life Mask
+	// DisplayName: Life Champion Mask
 	// Tooltip: ""
 }
 
 NatureMask: {
-	// DisplayName: Nature Mask
+	// DisplayName: Nature Champion Mask
 	// Tooltip: ""
 }
 
 SpiritMask: {
-	// DisplayName: Spirit Mask
+	// DisplayName: Spirit Champion Mask
 	// Tooltip: ""
 }
 
 TerraMask: {
-	// DisplayName: Terra Mask
+	// DisplayName: Terra Champion Mask
 	// Tooltip: ""
 }
 
 TimberMask: {
-	// DisplayName: Timber Mask
+	// DisplayName: Timber Champion Mask
 	// Tooltip: ""
 }
 
 TrojanMask: {
-	// DisplayName: Trojan Mask
+	// DisplayName: Trojan Squirrel Mask
 	// Tooltip: ""
 }
 
 WillMask: {
-	// DisplayName: Will Mask
+	// DisplayName: Will Champion Mask
 	// Tooltip: ""
 }
