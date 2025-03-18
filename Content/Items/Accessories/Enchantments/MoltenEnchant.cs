@@ -94,8 +94,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                                 if (!nature)
                                 {
-                                    if (player.FindBuffIndex(BuffID.OnFire) == -1)
-                                        player.AddBuff(BuffID.OnFire, 10);
+                                    //if (player.FindBuffIndex(BuffID.OnFire) == -1)
+                                    //    player.AddBuff(BuffID.OnFire, 10);
 
                                     if (npc.FindBuffIndex(buff) == -1)
                                         npc.AddBuff(buff, 120);

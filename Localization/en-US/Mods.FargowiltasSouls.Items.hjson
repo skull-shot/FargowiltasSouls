@@ -332,7 +332,7 @@ MoltenEnchant: {
 	DisplayName: Molten Enchantment
 	Tooltip:
 		'''
-		Ignite yourself while enemies are close
+		You are surrounded by an inferno ring
 		Enemies in the inferno ring take 1.2x damage and are ignited
 		'They shall know the fury of hell' 
 		'''
