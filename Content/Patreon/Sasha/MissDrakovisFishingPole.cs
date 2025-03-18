@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
 
         public override bool AltFunctionUse(Player player)
         {
-            return true;
+            return modeSwitchCD <= 0;
         }
 
         public override void HoldItem(Player player)
@@ -48,10 +48,17 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                 modeSwitchCD--;
         }
 
+        public override bool NeedsAmmo(Player player)
+        {
+            // Fixes a bug where having no ammo in the ranged mode prevents
+            // switching.
+            return player.altFunctionUse != 2;
+        }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //right click
-            if (player.altFunctionUse == 2 && modeSwitchCD <= 0)
+            if (player.altFunctionUse == 2)
             {
                 if (++mode > 4)
                     mode = 1;
@@ -59,7 +66,6 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                 SetUpItem();
 
                 modeSwitchCD = Item.useTime;
-
                 return false;
             }
 

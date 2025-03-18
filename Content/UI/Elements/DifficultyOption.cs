@@ -36,6 +36,12 @@ namespace FargowiltasSouls.Content.UI.Elements
         public abstract string NameKey { get; }
         public abstract string TooltipText();
 
+        public DifficultyOption()
+        {
+            // Better sub-pixel scaling for sprites; makes them not-blurry.
+            OverrideSamplerState = SamplerState.PointClamp;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

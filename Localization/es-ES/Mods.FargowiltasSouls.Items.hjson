@@ -14,7 +14,8 @@ AncientCobaltEnchant: {
 	// DisplayName: Ancient Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and grants brief invulnerability
+		Grants an explosion jump that inflicts Oiled and deals melee damage
+		Hold down to fall faster
 		'Ancient Kobold'
 		''' */
 }
@@ -129,8 +130,9 @@ CobaltEnchant: {
 	// DisplayName: Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and grants brief invulnerability
-		When you are hurt, you violently explode to damage nearby enemies
+		Grants an explosion jump that inflicts Oiled and deals melee damage
+		Your other jumps are stronger and cause explosions on a short cooldown
+		Hold down to fall faster
 		'I can't believe it's not Palladium'
 		''' */
 }
@@ -270,10 +272,12 @@ IronEnchant: {
 	// DisplayName: Iron Enchantment
 	/* Tooltip:
 		'''
-		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
-		Increases item grab range
 		Works from inventory and vanity slots:
 		Your reforges always grant a great prefix for +50% cost
+		Increases item grab range
+		Works when equipped:
+		Item grab range affects pickups such as Hearts and Mana Stars
+		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		''' */
 	// VanityTooltip: Your reforges always grant a great prefix for +50% cost
@@ -838,10 +842,10 @@ EarthForce: {
 		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
-		[i:FargowiltasSouls/CobaltEnchant] You also explode on hit while not attacking
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
 		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
 }
@@ -1530,6 +1534,7 @@ SinisterIcon: {
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
 		Enemies and bosses will drop doubled loot
+		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		''' */
 }
