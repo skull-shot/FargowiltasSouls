@@ -161,6 +161,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Projectile CrystalSmokeBombProj = null;
         public bool FirstStrike;
         public int SmokeBombCD;
+        public bool CrystalAssassinDiagonal;
 
         public int ShadowDashTimer;
         public int IFrameDashTimer;

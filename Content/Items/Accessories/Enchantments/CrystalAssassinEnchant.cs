@@ -52,79 +52,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<CrystalAssassinDash>(item);
             player.AddEffect<CrystalDiagonalDash>(item);
         }
-        /*
-        public static void SmokeBombKey(FargoSoulsPlayer modPlayer)
-        {
-            //throw smoke bomb
-            if (modPlayer.CrystalSmokeBombProj == null)
-            {
-                const float gravity = 0.18f;
-                float time = 60f;
-                Vector2 distance = Main.MouseWorld - modPlayer.Player.Center;
-                distance.X /= time;
-                distance.Y = distance.Y / time - 0.5f * gravity * time;
-
-                modPlayer.CrystalSmokeBombProj = Main.projectile[Projectile.NewProjectile(modPlayer.Player.GetSource_Misc(""), modPlayer.Player.Center, distance + Main.rand.NextVector2Square(0, 0) * 2,
-                        ProjectileID.SmokeBomb, 0, 0f, Main.myPlayer)];
-
-                modPlayer.SmokeBombCD = 15;
-            }
-            //already threw smoke bomb, tele to it
-            else
-            {
-                Vector2 teleportPos = new(modPlayer.CrystalSmokeBombProj.position.X, modPlayer.CrystalSmokeBombProj.position.Y - 30);
-                Vector2 originalPos = new(teleportPos.X, teleportPos.Y);
-
-                //spiral out to find a save spot
-                int count = 0;
-                int increase = 10;
-                while (Collision.SolidCollision(teleportPos, modPlayer.Player.width, modPlayer.Player.height))
-                {
-                    teleportPos = originalPos;
-
-                    switch (count)
-                    {
-                        case 0:
-                            teleportPos.X -= increase;
-                            break;
-                        case 1:
-                            teleportPos.X += increase;
-                            break;
-                        case 2:
-                            teleportPos.Y += increase;
-                            break;
-                        default:
-                            teleportPos.Y -= increase;
-                            increase += 10;
-                            break;
-                    }
-                    count++;
-
-                    if (count >= 4)
-                    {
-                        count = 0;
-                    }
-
-                    if (increase > 100)
-                    {
-                        return;
-                    }
-                }
-
-                if (teleportPos.X > 50 && teleportPos.X < (double)(Main.maxTilesX * 16 - 50) && teleportPos.Y > 50 && teleportPos.Y < (double)(Main.maxTilesY * 16 - 50))
-                {
-                    modPlayer.Player.Teleport(teleportPos, 1);
-                    NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, modPlayer.Player.whoAmI, teleportPos.X, teleportPos.Y, 1);
-
-                    modPlayer.Player.AddBuff(ModContent.BuffType<FirstStrikeBuff>(), 60);
-
-                    modPlayer.CrystalSmokeBombProj.timeLeft = 120;
-                    modPlayer.SmokeBombCD = 300;
-                    modPlayer.CrystalSmokeBombProj = null;
-                }
-            }
-        }
-        */
 
         public override void AddRecipes()
         {
@@ -149,13 +76,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             modPlayer.FargoDash = DashManager.DashType.Crystal;
+            if (player.HasEffect<CrystalDiagonalDash>())
+                modPlayer.CrystalAssassinDiagonal = true;
             modPlayer.HasDash = true;
         }
         public static void CrystalDash(Player player, int direction)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dashSpeed = 22f;
-            if (player.HasEffect<CrystalDiagonalDash>())
+            if (modPlayer.CrystalAssassinDiagonal)
             {
                 player.velocity.Y *= 0;
                 if (player.controlUp)
@@ -204,7 +133,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bub.Spawn();
 
             player.velocity *= 0.95f;
-            if (player.HasEffect<CrystalDiagonalDash>())
+            if (player.FargoSouls().CrystalAssassinDiagonal)
             {
                 if (player.velocity.Y == 0)
                     player.FargoSouls().CoyoteTime = 30;
@@ -215,7 +144,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     {
                         player.velocity.X = Math.Sign(player.velocity.X) * 30;
                         player.velocity.Y = -10;
-                        if (player.FargoSouls().CrystalDashFirstStrikeCD <= 0)
+                        if (player.FargoSouls().CrystalDashFirstStrikeCD <= 0 && player.HasEffect<CrystalAssassinDash>())
                         {
                             player.AddBuff(ModContent.BuffType<FirstStrikeBuff>(), 60);
                             int cd = player.ForceEffect<CrystalDiagonalDash>() ? 5 : 10;

@@ -307,6 +307,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ValhallaEnchantActive = false;
             TitaniumDRBuff = false;
             TitaniumCD = false;
+            CrystalAssassinDiagonal = false;
 
             CactusImmune = false;
 

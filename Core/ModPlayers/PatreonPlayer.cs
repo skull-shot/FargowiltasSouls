@@ -1,7 +1,9 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.Patreon.Potato;
+using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -160,8 +162,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.wingRunAccelerationMult = 9f;
                     break;
                 case "Eight3One":
-                    if (Player.dashType == 0)
-                        Player.dashType = DashID.TabiAndMasterNinjaGear;
                     Eight3One = true;
                     break;
             }
@@ -171,7 +171,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.manaRegenDelay = Player.maxRegenDelay;
             }
         }
-
+        public static void AddDash_Eight3One(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            modPlayer.FargoDash = DashManager.DashType.Crystal;
+            modPlayer.CrystalAssassinDiagonal = true;
+            modPlayer.HasDash = true;
+        }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (CompOrb && CompOrbDrainCooldown <= 0 && item.DamageType != DamageClass.Magic && item.DamageType != DamageClass.Summon)
