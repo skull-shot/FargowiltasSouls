@@ -61,6 +61,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //force of timber
         public bool MahoganyCanUseDR;
+        public int MahoganyTimer;
         public float EbonwoodCharge;
         public int ShadewoodCD;
         public bool WoodEnchantDiscount;

@@ -500,6 +500,7 @@ RichMahoganyEnchant: {
 		'''
 		All grappling hooks pull 1.5x as fast, shoot 2x as fast, and retract 3x as fast
 		While grappling you gain 10% damage reduction for one hit and a 50% thorns effect
+		This damage reduction persists for a second after grappling
 		'Guaranteed to keep you hooked'
 		'''
 }
