@@ -15,7 +15,7 @@ EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: 精金 攻击速度和散射
 CobaltEffect: 钴蓝 受击爆炸
 AncientCobaltEffect: 远古钴蓝 爆炸跳跃
-// AncientCobaltFallEffect: Cobalt Fall Speed
+// AncientCobaltFallEffect: Ancient Cobalt Fall Speed
 MythrilEffect: 秘银 速度加成
 OrichalcumEffect: 山铜 花瓣
 PalladiumHealing: 钯金 生命恢复
