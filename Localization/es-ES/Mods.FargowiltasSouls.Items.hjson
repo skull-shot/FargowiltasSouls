@@ -164,8 +164,8 @@ CrystalAssassinEnchant: {
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
 		Jump while dashing into ground to get a speed boost and gain the First Strike buff
-		First Strike ensures your next attack hits a vital spot dealing 3x damage and reducing defense by 10
-		First Strike has a 5 second cooldown
+		First Strike causes your next attack to deal 1.5x damage, guarantees a critical strike, and reduces defense by 10
+		First Strike has a 10 second cooldown
 		'Reach for the summit'
 		''' */
 }
@@ -1529,7 +1529,7 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Non-boss enemies will drop doubled loot
+		Enemies and bosses will drop doubled loot
 		'Most definitely not alive'
 		''' */
 }
