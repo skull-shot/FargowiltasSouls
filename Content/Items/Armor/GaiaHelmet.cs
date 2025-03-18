@@ -89,6 +89,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             fargoPlayer.GaiaSet = true;
 
             player.GetAttackSpeed(DamageClass.Melee) += 0.1f;
+            player.statManaMax2 += 30;
             player.manaCost -= 0.1f;
             player.maxMinions += 4;
 
