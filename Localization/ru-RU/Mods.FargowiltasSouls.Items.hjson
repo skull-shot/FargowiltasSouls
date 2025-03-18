@@ -333,7 +333,7 @@ MoltenEnchant: {
 	DisplayName: Зачарование литья
 	Tooltip:
 		'''
-		Вы горите, когда рядом с вами враги
+		Создаёт вокруг вас кольцо адского пламени
 		Враги, находящиеся в кольце адского пламени, получают в 1,2 раза больше урона и поджигаются
 		«Они познают ярость ада»
 		'''
@@ -3724,61 +3724,61 @@ MainMenuMusicBox: {
 }
 
 BaronMask: {
-	// DisplayName: Banished Baron Mask
-	// Tooltip: ""
+	DisplayName: Маска Бранного Барона
+	Tooltip: ""
 }
 
 CoffinMask: {
-	// DisplayName: Cursed Coffin Mask
-	// Tooltip: ""
+	DisplayName: Маска Скверного Саркофага
+	Tooltip: ""
 }
 
 DeathMask: {
-	// DisplayName: Death Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Смерти
+	Tooltip: ""
 }
 
 EarthMask: {
-	// DisplayName: Earth Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Земли
+	Tooltip: ""
 }
 
 LifelightMask: {
-	// DisplayName: Lifelight Mask
-	// Tooltip: ""
+	DisplayName: Маска Жизнесвета
+	Tooltip: ""
 }
 
 LifeMask: {
-	// DisplayName: Life Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Жизни
+	Tooltip: ""
 }
 
 NatureMask: {
-	// DisplayName: Nature Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Природы
+	Tooltip: ""
 }
 
 SpiritMask: {
-	// DisplayName: Spirit Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Духа
+	Tooltip: ""
 }
 
 TerraMask: {
-	// DisplayName: Terra Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Терры
+	Tooltip: ""
 }
 
 TimberMask: {
-	// DisplayName: Timber Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Леса
+	Tooltip: ""
 }
 
 TrojanMask: {
-	// DisplayName: Trojan Squirrel Mask
-	// Tooltip: ""
+	DisplayName: Маска Троянской белки
+	Tooltip: ""
 }
 
 WillMask: {
-	// DisplayName: Will Champion Mask
-	// Tooltip: ""
+	DisplayName: Маска чемпиона Воли
+	Tooltip: ""
 }

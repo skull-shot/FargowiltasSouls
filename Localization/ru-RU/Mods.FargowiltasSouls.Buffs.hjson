@@ -249,7 +249,11 @@ HallowIlluminatedBuff: {
 
 FusedBuff: {
 	DisplayName: Фитиль
-	Description: Сейчас вылетит бомба!
+	Description:
+		'''
+		Сейчас вылетит бомба!
+		Стойте на месте 1 секунду, чтобы потушить фитиль
+		'''
 }
 
 GodEaterBuff: {
