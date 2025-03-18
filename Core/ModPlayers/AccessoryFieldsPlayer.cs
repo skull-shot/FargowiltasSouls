@@ -327,6 +327,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Unstable;
         private int unstableCD;
         public bool Fused;
+        public int FusedStandStillTime;
         public bool Shadowflame;
         public bool Oiled;
         public bool DeathMarked;

@@ -533,6 +533,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
             }
 
+            if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
+            {
+                FusedStandStillTime++;
+                if (FusedStandStillTime >= 60)
+                {
+                    Player.ClearBuff(ModContent.BuffType<FusedBuff>());
+                }
+            }
+            else
+                FusedStandStillTime = 0;
+
             if (ToggleRebuildCooldown > 0)
                 ToggleRebuildCooldown--;
 
