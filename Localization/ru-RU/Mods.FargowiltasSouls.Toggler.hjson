@@ -13,9 +13,9 @@ PearlwoodRainbowEffect: Радужный хвост жемчужной древ�
 TimberEffect: Сжатый артефакт Леса
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Скорость и разброс адамантита
-CobaltEffect: Взрыв при уроне кобальта
+CobaltEffect: Усиленные прыжки кобальта
 AncientCobaltEffect: Взрывной прыжок др. кобальта
-// AncientCobaltFallEffect: Cobalt Fall Speed
+AncientCobaltFallEffect: Быстрое падение др. кобальта
 MythrilEffect: Скорость оружий мифрила
 OrichalcumEffect: Лепестки орихалка
 PalladiumHealing: Лечение палладия
