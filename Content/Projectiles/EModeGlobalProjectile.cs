@@ -1094,8 +1094,9 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.BombSkeletronPrime: //needs to be set every tick
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.UndeadMiner)
-                        projectile.damage = sourceNPC.damage / 2;
-                    projectile.damage = 40;
+                        projectile.damage = FargoSoulsUtil.ScaledProjectileDamage(sourceNPC.damage, 1.25f);
+                    else
+                        projectile.damage = 40;
                     break;
 
                 case ProjectileID.DD2BetsyFireball: //when spawned, also spawn a phoenix
