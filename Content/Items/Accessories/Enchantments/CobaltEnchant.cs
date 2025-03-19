@@ -1,8 +1,10 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -54,8 +56,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<CobaltEnchant>();
         public override void PostUpdateEquips(Player player)
         {
-            if (player.FargoSouls().CobaltJumpCooldown > 0)
-                player.FargoSouls().CobaltJumpCooldown--;
+            var modPlayer = player.FargoSouls();
+
+            if (modPlayer.CobaltJumpCooldown > 0)
+                modPlayer.CobaltJumpCooldown--;
+
+            if (modPlayer.CanCobaltJump || modPlayer.JustCobaltJumped && !player.ExtraJumps.ToArray().Any(j => j.Active) && !modPlayer.JungleJumping)
+            {
+                
+            }
+            else
+                player.jumpSpeedBoost += 3f;
+        }
+        public override void PostUpdate(Player player)
+        {
+            //player.jump *= 2;
         }
     }
 }
