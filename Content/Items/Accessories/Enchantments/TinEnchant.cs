@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.Eternity)
                 modPlayer.TinEternityDamage = 0;
 
-            modPlayer.TinCrit = TinFloor(player);
+            modPlayer.TinCrit = Math.Max(modPlayer.TinCrit / 2, TinFloor(player));
 
             double diff = Math.Round(oldCrit - modPlayer.TinCrit, 1);
             if (diff > 0)

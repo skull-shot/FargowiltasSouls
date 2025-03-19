@@ -659,7 +659,7 @@ TinEnchant: {
 		'''
 		Sets your critical strike chance to 5%
 		Every crit will increase it by 5% up to double your original critical strike chance or 15%
-		Getting hit resets your crit to 5%
+		Getting hit reduces your crit by half, to a minimum of 5%
 		'Return of the Crit'
 		''' */
 	// CritUp: +{0}% crit
