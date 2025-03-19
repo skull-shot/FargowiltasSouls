@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -34,7 +36,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             if (target.active)
             {
                 //follow the target
-                Projectile.Center = new Vector2(target.Center.X, target.Center.Y - 1000);
+                Projectile.Center = new Vector2(target.Center.X, target.Center.Y - 600);
             }
 
             //delay
@@ -45,11 +47,14 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
             if (launchArrow)
             {
-                Vector2 position = new(Projectile.Center.X + Main.rand.Next(-100, 100), Projectile.Center.Y + Main.rand.Next(-75, 75));
+                Vector2 position = new(Projectile.Center.X + Main.rand.Next(-200, 200), Projectile.Center.Y + Main.rand.Next(-75, 75));
                 Vector2 velocity;
                 if (target.active)
                 {
-                    velocity = Vector2.Normalize(target.Center - Projectile.position) * 25;
+                    const int arrivalTime = 12;
+                    Vector2 aim = target.Center + (target.velocity * arrivalTime);
+                    float speed = (aim - position).Length() / arrivalTime;
+                    velocity = Vector2.Normalize(aim - position).RotatedByRandom(MathHelper.Pi / 200) * speed;
                 }
                 else
                 {
@@ -65,6 +70,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 //{
                 //    velocity = new Vector2(Main.rand.NextFloat(-2, 0), Main.rand.NextFloat(20, 25));
                 //}
+
+
 
                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, (int)Projectile.ai[0], Projectile.damage, 0, Projectile.owner);
                 Main.projectile[p].noDropItem = true;
