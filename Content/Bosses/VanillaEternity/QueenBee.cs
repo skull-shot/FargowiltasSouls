@@ -410,6 +410,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public bool MovementRework(NPC npc, bool result)
         {
+            if (!npc.HasPlayerTarget)
+            {
+                npc.TargetClosest();
+                Player p = Main.player[npc.target];
+                if (!p.active || p.dead || Vector2.Distance(npc.Center, p.Center) > 5000f)
+                {
+                    npc.noTileCollide = true;
+                    if (npc.timeLeft > 30)
+                        npc.timeLeft = 30;
+                    npc.velocity.Y += 1f;
+                    return false;
+                }
+            }
             if (result && npc.HasPlayerTarget) // ai rework normal flying ai rework
             {
                 if (npc.ai[0] != 0) // reset charge memory
