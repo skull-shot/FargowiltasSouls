@@ -249,7 +249,11 @@ HallowIlluminatedBuff: {
 
 FusedBuff: {
 	// DisplayName: Fused
-	// Description: You're going out with a bang
+	/* Description:
+		'''
+		You're going out with a bang
+		Stand still for a second to defuse yourself
+		''' */
 }
 
 GodEaterBuff: {

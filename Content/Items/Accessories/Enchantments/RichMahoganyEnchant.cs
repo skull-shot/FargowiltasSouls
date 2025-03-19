@@ -60,14 +60,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (player.grapCount > 0)
             {
                 player.thorns += forceEffect ? 5.0f : 0.5f;
-
-                if (modPlayer.MahoganyCanUseDR)
-                    player.endurance += forceEffect ? 0.3f : 0.1f;
+                modPlayer.MahoganyTimer = 0;
             }
             else //when not grapple, refresh DR
             {
-                modPlayer.MahoganyCanUseDR = true;
+                if (modPlayer.MahoganyTimer >= 60)
+                {
+                    modPlayer.MahoganyCanUseDR = true;
+                }
+                else
+                    modPlayer.MahoganyTimer++;
             }
+            if (modPlayer.MahoganyCanUseDR && modPlayer.MahoganyTimer < 60)
+                player.endurance += forceEffect ? 0.3f : 0.1f;
         }
         public static void MahoganyHookAI(Projectile projectile, FargoSoulsPlayer modPlayer)
         {

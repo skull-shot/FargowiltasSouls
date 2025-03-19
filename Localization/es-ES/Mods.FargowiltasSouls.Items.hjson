@@ -332,7 +332,7 @@ MoltenEnchant: {
 	// DisplayName: Molten Enchantment
 	/* Tooltip:
 		'''
-		Ignite yourself while enemies are close
+		You are surrounded by an inferno ring
 		Enemies in the inferno ring take 1.2x damage and are ignited
 		'They shall know the fury of hell' 
 		''' */
@@ -500,6 +500,7 @@ RichMahoganyEnchant: {
 		'''
 		All grappling hooks pull 1.5x as fast, shoot 2x as fast, and retract 3x as fast
 		While grappling you gain 10% damage reduction for one hit and a 50% thorns effect
+		This damage reduction persists for a second after grappling
 		'Guaranteed to keep you hooked'
 		''' */
 }
@@ -3736,4 +3737,64 @@ LifelightMusicBox: {
 MainMenuMusicBox: {
 	// DisplayName: Music Box (Main Menu)
 	// Tooltip: Sakuzyo 'Nein'
+}
+
+BaronMask: {
+	// DisplayName: Banished Baron Mask
+	// Tooltip: ""
+}
+
+CoffinMask: {
+	// DisplayName: Cursed Coffin Mask
+	// Tooltip: ""
+}
+
+DeathMask: {
+	// DisplayName: Death Champion Mask
+	// Tooltip: ""
+}
+
+EarthMask: {
+	// DisplayName: Earth Champion Mask
+	// Tooltip: ""
+}
+
+LifelightMask: {
+	// DisplayName: Lifelight Mask
+	// Tooltip: ""
+}
+
+LifeMask: {
+	// DisplayName: Life Champion Mask
+	// Tooltip: ""
+}
+
+NatureMask: {
+	// DisplayName: Nature Champion Mask
+	// Tooltip: ""
+}
+
+SpiritMask: {
+	// DisplayName: Spirit Champion Mask
+	// Tooltip: ""
+}
+
+TerraMask: {
+	// DisplayName: Terra Champion Mask
+	// Tooltip: ""
+}
+
+TimberMask: {
+	// DisplayName: Timber Champion Mask
+	// Tooltip: ""
+}
+
+TrojanMask: {
+	// DisplayName: Trojan Squirrel Mask
+	// Tooltip: ""
+}
+
+WillMask: {
+	// DisplayName: Will Champion Mask
+	// Tooltip: ""
 }

@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Content.Items
                     player.itemRotation = -player.itemRotation;
                 }
 
-                bool shooter = player.itemAnimation == (int)(player.itemAnimationMax * 0.6f) && mplayer.shouldShoot && !FargoSoulsGlobalProjectile.FancySwings.Contains(item.shoot);
+                bool shooter = mplayer.shouldShoot && !FargoSoulsGlobalProjectile.FancySwings.Contains(item.shoot);
                 if (player.itemAnimation == player.itemAnimationMax && mplayer.shouldShoot && FargoSoulsGlobalProjectile.FancySwings.Contains(item.shoot)) shooter = true;
 
                 if (shooter)

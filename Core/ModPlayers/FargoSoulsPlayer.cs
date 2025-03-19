@@ -283,6 +283,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             PetsActive = true;
             //CrimsonRegen = false;
             LifeForceActive = false;
+            CosmosForce = false;
             MinionCrits = false;
             FirstStrike = false;
             ShellHide = false;
@@ -306,6 +307,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ValhallaEnchantActive = false;
             TitaniumDRBuff = false;
             TitaniumCD = false;
+            CrystalAssassinDiagonal = false;
 
             CactusImmune = false;
 
@@ -1604,16 +1606,19 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 if (WizardedItem != null && !WizardedItem.IsAir && WizardedItem.type == type)
                     return true;
-                return (BaseEnchant.CraftsInto[type] > 0 && CheckWizard(BaseEnchant.CraftsInto[type]));
+                return BaseEnchant.CraftsInto[type] > 0 && CheckWizard(BaseEnchant.CraftsInto[type]);
             }
             if (TerrariaSoul)
                 return true;
 
-            if (ForceEffects.Contains(ModContent.ItemType<CosmoForce>()))
+            if (CosmosForce)
                 return true;
 
             if ((Main.gamePaused && !allowPaused) || modItem == null || modItem.Item == null || modItem.Item.IsAir)
                 return false;
+
+            if (modItem is BaseSoul || modItem is BaseForce)
+                return true;
 
             if (modItem is BaseEnchant)
             {
@@ -1621,8 +1626,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     return true;
             }
 
-            if (modItem is BaseSoul || modItem is BaseForce)
-                return true;
 
             return false;
         }

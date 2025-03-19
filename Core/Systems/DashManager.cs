@@ -28,7 +28,11 @@ namespace FargowiltasSouls.Core.Systems
             // Vanilla dashes are processed before this method
             // Other mods depends on their ordering
 
-            
+            if (player.name == "Eight3One")
+            {
+                PatreonPlayer.AddDash_Eight3One(player);
+            }
+
             if (player.HasEffect<JungleDashEffect>())
             {
                 JungleDashEffect.AddDash(player);

@@ -333,7 +333,7 @@ MoltenEnchant: {
 	DisplayName: Зачарование литья
 	Tooltip:
 		'''
-		Вы горите, когда рядом с вами враги
+		Создаёт вокруг вас кольцо адского пламени
 		Враги, находящиеся в кольце адского пламени, получают в 1,2 раза больше урона и поджигаются
 		«Они познают ярость ада»
 		'''
@@ -501,7 +501,8 @@ RichMahoganyEnchant: {
 	Tooltip:
 		'''
 		Все крюки притягивают в 1,5 раза быстрее, вылетают в 2 раза быстрее и возвращаются в 3 раза быстрее
-		Пока цепляетесь, вы получаете 10% сопротивление урону на один удар и 50% эффекта шипов 
+		Пока цепляетесь, вы получаете +10% к сопротивлению урону на один удар и 50%-ный эффект шипов
+		Этот эффект действует ещё секунду после того, как вы отцепитесь
 		«Гарантируем, что вас затянет»
 		'''
 }
@@ -1081,7 +1082,7 @@ CelestialRune: {
 }
 
 ChaliceoftheMoon: {
-	DisplayName: Галактический глобус
+	DisplayName: Зеленеющая маска провидца рока
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Даёт иммунитет к дебаффам «Рой», «Атрофированный», «Заклинивший», «Обратный поток маны» и «Необщительный»
@@ -3721,4 +3722,64 @@ LifelightMusicBox: {
 MainMenuMusicBox: {
 	DisplayName: Музыкальная шкатулка (Главное меню)
 	Tooltip: Проигрывает «Nein», авт. Sakuzyo
+}
+
+BaronMask: {
+	DisplayName: Маска Бранного Барона
+	Tooltip: ""
+}
+
+CoffinMask: {
+	DisplayName: Маска Скверного Саркофага
+	Tooltip: ""
+}
+
+DeathMask: {
+	DisplayName: Маска чемпиона Смерти
+	Tooltip: ""
+}
+
+EarthMask: {
+	DisplayName: Маска чемпиона Земли
+	Tooltip: ""
+}
+
+LifelightMask: {
+	DisplayName: Маска Жизнесвета
+	Tooltip: ""
+}
+
+LifeMask: {
+	DisplayName: Маска чемпиона Жизни
+	Tooltip: ""
+}
+
+NatureMask: {
+	DisplayName: Маска чемпиона Природы
+	Tooltip: ""
+}
+
+SpiritMask: {
+	DisplayName: Маска чемпиона Духа
+	Tooltip: ""
+}
+
+TerraMask: {
+	DisplayName: Маска чемпиона Терры
+	Tooltip: ""
+}
+
+TimberMask: {
+	DisplayName: Маска чемпиона Леса
+	Tooltip: ""
+}
+
+TrojanMask: {
+	DisplayName: Маска Троянской белки
+	Tooltip: ""
+}
+
+WillMask: {
+	DisplayName: Маска чемпиона Воли
+	Tooltip: ""
 }
