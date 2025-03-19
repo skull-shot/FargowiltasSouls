@@ -262,8 +262,8 @@ HuntressEnchant: {
 		Attacks ignore 6 enemy defense and deal 3 flat extra damage
 		Each successive attack ignores an additional 6 defense and deals 3 more damage
 		This stacks up to 10 times
+		Missing any attack will halve your stacks
 		Homing and minion attacks do not increase these bonuses
-		Missing any attack will reset these bonuses
 		'Accuracy brings power'
 		''' */
 }
@@ -488,8 +488,8 @@ RedRidingEnchant: {
 		Each successive attack ignores an additional 10 defense and deals 5 more damage
 		Upon reaching 10 stacks, spawn a rain of arrows, dealing ranged damage
 		The arrow type defaults to Venom or whatever is first in your inventory
+		Missing any attack will halve your stacks
 		Homing and minion attacks do not increase these bonuses
-		Missing any attack will reset these bonuses
 		'Big Bad Red Riding Hood'
 		''' */
 }
