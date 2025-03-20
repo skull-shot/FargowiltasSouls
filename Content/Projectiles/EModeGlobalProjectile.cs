@@ -382,8 +382,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.PygmySpear:
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
                     {
-                        int pygmy = sourceProj.type;
-                        if (pygmy == 191 || pygmy == 192 || pygmy == 193 || pygmy == 194) // the 4 pygmy variations
+                        if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
                         {
                             projectile.usesLocalNPCImmunity = true;
                             projectile.localNPCHitCooldown = -1;

@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.penetrate = -1;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 20;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
         }
