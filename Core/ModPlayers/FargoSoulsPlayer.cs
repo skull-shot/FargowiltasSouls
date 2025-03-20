@@ -1241,7 +1241,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void ModifyExtraJumpDurationMultiplier(ExtraJump jump, ref float duration)
         {
             if (Player.HasEffect<CobaltEffect>())
-                duration *= 1.5f;
+                duration *= 1.2f;
         }
         public void AddPet(bool toggle, bool vanityToggle, int buff, int proj)
         {

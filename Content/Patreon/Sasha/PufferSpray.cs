@@ -48,14 +48,14 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
         {
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
                 Main.dust[dust].velocity *= 1.4f;
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             }
 
             float scaleFactor9 = 0.5f;
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < 1; j++)
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
                     default,

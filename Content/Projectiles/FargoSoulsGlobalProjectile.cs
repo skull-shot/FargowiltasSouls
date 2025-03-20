@@ -1356,7 +1356,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
             {
-                modPlayer.HuntressStage = 0;
+                modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 HuntressProj = -1;
                 //sound effect
@@ -1661,7 +1661,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1) //dying without hitting anything
             {
-                modPlayer.HuntressStage = 0;
+                modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 //sound effect
             }

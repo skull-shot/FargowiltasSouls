@@ -204,7 +204,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player);
+                    TinEffect.TinHurt(Player, true);
+                    EbonwoodCharge = 0;
                 }
             }
             else

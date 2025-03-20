@@ -156,14 +156,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             TinHurt(player);
         }
         //reset crit
-        public static void TinHurt(Player player)
+        public static void TinHurt(Player player, bool forceReset = false)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float oldCrit = modPlayer.TinCrit;
             if (modPlayer.Eternity)
                 modPlayer.TinEternityDamage = 0;
 
-            modPlayer.TinCrit = TinFloor(player);
+            if (forceReset)
+                modPlayer.TinCrit = TinFloor(player);
+            else
+                modPlayer.TinCrit = Math.Max(modPlayer.TinCrit / 2, TinFloor(player));
 
             double diff = Math.Round(oldCrit - modPlayer.TinCrit, 1);
             if (diff > 0)

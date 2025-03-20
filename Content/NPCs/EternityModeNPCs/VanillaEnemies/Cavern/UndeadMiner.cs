@@ -56,7 +56,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                     speed.Y += Main.rand.Next(-20, 21);
                     speed.Normalize();
                     speed *= 12f;
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed, ProjectileID.BombSkeletronPrime, (int)(npc.damage * .7), 0f, Main.myPlayer);
+                    int p = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed, ProjectileID.BombSkeletronPrime, FargoSoulsUtil.ScaledProjectileDamage(npc.damage, 1.25f), 0f, Main.myPlayer);
+                    if (p.IsWithinBounds(Main.maxProjectiles))
+                    {
+                        //Main.projectile[p].damage = 1;
+                    }
+                        
                 }
             }
         }
