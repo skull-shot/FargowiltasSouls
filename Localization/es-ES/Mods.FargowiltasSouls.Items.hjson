@@ -2842,7 +2842,7 @@ BigBrainBuster: {
 	// DisplayName: Big Brain Buster
 	/* Tooltip:
 		'''
-		Repeated summons increase the size and damage of the minion
+		Repeated summons increase the size and firing rate of the minion
 		This caps at 16 slots
 		'The reward for a mighty rematch...'
 		''' */

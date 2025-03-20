@@ -4,6 +4,8 @@ using FargowiltasSouls.Content.Buffs.Masomode;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -39,11 +41,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.localNPCHitCooldown = 10;
         }
 
+        public static float TrailFadeTime => 20;
         public override void AI()
         {
             //stuck in enemy
             if (Projectile.ai[0] == 1)
             {
+                if (Projectile.ai[2] < TrailFadeTime) // trail timer
+                    Projectile.ai[2]++;
                 Projectile.aiStyle = -1;
 
                 Projectile.ignoreWater = true;
@@ -216,7 +221,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.StingerTrail");
             FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
-            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
+            float progress = 1 - (Projectile.ai[2] / TrailFadeTime);
+            int num = (int)Math.Round(Projectile.oldPos.Length * progress);
+            Vector2[] trail = Projectile.oldPos.Take(num).ToArray();
+            PrimitiveRenderer.RenderTrail(trail, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }
 }
