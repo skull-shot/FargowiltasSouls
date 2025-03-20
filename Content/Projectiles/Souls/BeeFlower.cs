@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Projectiles;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -33,6 +34,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override bool? CanDamage() => Projectile.frame == Main.projFrames[Projectile.type] - 1; //only damage when fully grown
         public override void AI()
         {
+            Projectile.GetGlobalProjectile<FargoGlobalProjectile>().lowRender = false;
+
             if (Projectile.frame < Main.projFrames[Projectile.type] - 1) //petalinate
             {
                 if (++Projectile.frameCounter % 60 == 0)

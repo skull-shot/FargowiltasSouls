@@ -121,15 +121,15 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                     int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Main.rand.NextVector2Circular(12f, 12f), ModContent.ProjectileType<PufferSpray>(), (int)(Projectile.damage * 0.15), Projectile.knockBack, Projectile.owner);
                 }
             }
-
-            for (int i = 0; i < 20; i++)
+            /*
+            for (int i = 0; i < 4; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
                 Main.dust[dust].velocity *= 1.4f;
             }
-
-            for (int i = 0; i < 10; i++)
+            */
+            for (int i = 0; i < 3; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
@@ -141,7 +141,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             }
 
             float scaleFactor9 = 0.5f;
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < 1; j++)
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
                     default,
