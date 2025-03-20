@@ -5,11 +5,11 @@ Damage: 伤害降低{0}%
 DamagePositive: 伤害提升{0}%
 Speed: 攻击速度降低{0}%
 SpeedPositive: 攻击速度提升{0}%
-// Scale: Reduced size by {0}%
-// ScalePositive: Increased size by {0}%
-RodofDiscord: 在Boss战中，每次使用都会消耗生命
-// ChaosState: Reduced damage, defense and damage reduction by 40%
-// RodofHarmony: Can only be obtained after defeating the Mutant
+Scale: 尺寸减少{0}%
+ScalePositive: 尺寸增加{0}%
+RodofDiscord: 混乱状态会降低你40%的伤害、防御和伤害减免
+ChaosState: 伤害、防御和伤害减免降低40%
+RodofHarmony: 在打败突变体后才能获取
 Split: 降低分裂频率
 ChlorophyteBullet: 速度减慢，存在时间降低
 WaterBolt: 在骷髅王被击败前无法使用
@@ -28,7 +28,7 @@ MiningHelmet: 提高不死矿工的刷新率
 MoonsDrops: Boss和迷你Boss在{0}波前不会掉落物品
 MoonsWaves: 死亡会降低当前波数
 WhipSpeed: 不接受近战攻速加成
-WhipStack: 鞭子的增益/减益不能堆叠
+WhipStack: 标记伤害堆叠时效果降低
 DefensePrefix: 词缀效果调整：+5 最大生命值，但困难模式前从词缀获得的防御-1
 DefensePrefix_HM: 词缀效果调整：+5 最大生命值
 ViolentPrefix: 词缀效果调整：不再增加近战攻速，但增加全职业攻速
@@ -37,7 +37,7 @@ MinionStack: 同时召唤超过3个相同召唤物时，它们的伤害会降低
 SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降低（在撒旦军队中除外）
 ShadowDodge: 永恒模式：闪避会降低你的攻击速度
 IceBarrier: 永恒模式：你造成的伤害减少10%
-// SwordRework: Reworked broadsword swing animation
+SwordRework: 重做阔剑挥舞动画
 SpearRework: 重做长矛挥舞动画
 PalladiumPikeRework: 增加大小，击中敌人后大幅增加生命恢复速度并恢复1点生命值（0.5秒冷却）
 CobaltNaginataRework: 击中敌人会造成小范围爆炸
@@ -55,8 +55,8 @@ SniperRifle: 距离敌怪越远伤害越高，最高可翻倍
 ChlorophyteSaber: 弹幕速度更快，但命中后会减速
 JackOLanternLauncher: 增加50%弹幕速度
 GolemFist: 根据拳头伸长距离造成至多三倍伤害
-// Gladius: Hit rate increased to match swing speed
-// FlowerPow: Tripled petal firerate
-// PiranhaGun: Projectile damage updates dynamically
-// ProximityMineLauncher: Projectile damage updates dynamically
-// PygmyStaff: Spears can now pierce once
+Gladius: 提高命中频率以和挥舞速度一致
+FlowerPow: 花瓣发射频率增加200%
+PiranhaGun: 弹幕伤害会动态更新
+ProximityMineLauncher: 弹幕伤害会动态更新
+PygmyStaff: 长矛可以穿透一次

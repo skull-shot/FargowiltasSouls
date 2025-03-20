@@ -13,9 +13,9 @@ PearlwoodRainbowEffect: 珍珠木 彩虹轨迹
 TimberEffect: 简化森林之力
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: 精金 攻击速度和散射
-CobaltEffect: 钴蓝 受击爆炸
+CobaltEffect: 钴蓝 跳跃增强
 AncientCobaltEffect: 远古钴蓝 爆炸跳跃
-// AncientCobaltFallEffect: Ancient Cobalt Fall Speed
+AncientCobaltFallEffect: 远古钴蓝 下落速度
 MythrilEffect: 秘银 速度加成
 OrichalcumEffect: 山铜 花瓣
 PalladiumHealing: 钯金 生命恢复
