@@ -192,7 +192,7 @@ namespace FargowiltasSouls //lets everything access it without using
         /// <returns></returns>
         public static float ActualClassCrit(this Player player, DamageClass damageClass)
             => damageClass == DamageClass.Summon
-            && !(player.HasEffect<SpiderEffect>())
+            && !(player.FargoSouls().MinionCrits)
             ? 0
             : player.GetTotalCritChance(damageClass);
 
