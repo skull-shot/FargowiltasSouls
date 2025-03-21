@@ -80,7 +80,6 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             if (hits > 1)
             {
                 modifiers.FinalDamage *= 1f / hits;
-                Main.NewText(modifiers.FinalDamage.ApplyTo(1000));
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
