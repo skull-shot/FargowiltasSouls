@@ -280,7 +280,7 @@ IronEnchant: {
 		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		'''
-	VanityTooltip: 
+	VanityTooltip:
 		'''
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range

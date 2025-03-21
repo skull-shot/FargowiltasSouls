@@ -282,7 +282,11 @@ IronEnchant: {
 		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		''' */
-	// VanityTooltip: Your reforges always grant a great prefix for +50% cost
+	/* VanityTooltip:
+		'''
+		Your reforges always grant a great prefix for +50% cost
+		Increases item grab range
+		''' */
 }
 
 JungleEnchant: {
@@ -921,7 +925,7 @@ TerraForce: {
 		[i:5516] Oferece imunidade a fogo e lava
 		'A terra empresta sua força'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost"
+	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range"
 }
 
 TimberForce: {
