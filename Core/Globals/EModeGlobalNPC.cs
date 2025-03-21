@@ -408,7 +408,7 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (jungle)
                     {
-                        if (WorldSavingSystem.MasochistModeReal && normalSpawn)
+                        if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && normalSpawn)
                             pool[NPCID.Parrot] = .01f;
                     }
 
