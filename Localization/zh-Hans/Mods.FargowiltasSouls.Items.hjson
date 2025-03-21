@@ -277,7 +277,7 @@ IronEnchant: {
 		拾取物品或拾取物后5秒内增加20%伤害减免
 		“趁热打铁”
 		'''
-	VanityTooltip: 
+	VanityTooltip:
 		'''
 		重铸消耗额外50%钱币来获得更高级的前缀
 		增加物品拾取范围
