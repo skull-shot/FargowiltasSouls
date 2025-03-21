@@ -11,6 +11,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Content.Buffs.Souls;
 using Terraria.Audio;
 using Terraria.ID;
+using System;
 
 namespace FargowiltasSouls.Content.Projectiles.Souls
 {
@@ -25,6 +26,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         ref float Decrement => ref Projectile.ai[1];
 
         ref float speed => ref Projectile.ai[2];
+
+        public int hits = 0;
 
         public override void SetStaticDefaults()
         {
@@ -71,7 +74,15 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
             Timer++;
         }
-
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            hits += 1;
+            if (hits > 1)
+            {
+                modifiers.FinalDamage *= 1f / hits;
+                Main.NewText(modifiers.FinalDamage.ApplyTo(1000));
+            }
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.Item45 with {Pitch = -0.5f, Volume = 1.5f}, target.Center);
