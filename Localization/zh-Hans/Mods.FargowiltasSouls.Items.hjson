@@ -271,13 +271,17 @@ IronEnchant: {
 		'''
 		在物品栏中即可生效：
 		重铸消耗额外50%钱币来获得更高级的前缀
-		物品的吸附范围扩大
+		增加物品拾取范围
 		装备时生效：
 		物品拾取范围会影响拾取物（心、魔力星、钱币等）
 		拾取物品或拾取物后5秒内增加20%伤害减免
 		“趁热打铁”
 		'''
-	VanityTooltip: 重铸消耗额外50%钱币来获得更高级的前缀
+	VanityTooltip:
+		'''
+		重铸消耗额外50%钱币来获得更高级的前缀
+		增加物品拾取范围
+		'''
 }
 
 JungleEnchant: {
@@ -922,7 +926,7 @@ TerraForce: {
 		[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀（在背包和时装栏中也可生效）
 		“大地赐予它力量”
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀"
+	VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀，增加物品拾取范围"
 }
 
 TimberForce: {
