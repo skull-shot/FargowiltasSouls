@@ -1,2 +1,243 @@
 NEW UPDATE - V {ModVersion}
-Fixed Deviantt rune wizard attack not working correctly
+
+Ebonwood Enchant mini-rework:
+-You are surrounded by an aura of corruption
+-Having enemies in the aura builds up Corruption
+-Corruption grants you up to 5 flat damage and 5% damage reduction
+
+Copper Enchant mini-rework:
+-Chain lightning arcs between 5 enemies, then stops
+-Chain lightning homes onto target enemy
+-Increased base damage and reduced cooldown to compensate
+-Crits or hitting wet enemies reduces cooldown marginally
+-Wizard effect: Increased arc count to 8, increased damage
+
+Iron Enchant mini-rework:
+-Works from inventory:
+--Your reforges always grant a great prefix for +50% cost
+--Increases item grab range
+-Works when equipped:
+--Picking up an item or pickup increases damage reduction by 20% for 5 seconds
+--Item grab range also affects combat pickups
+
+Ancient Cobalt Enchant mini-rework:
+-Grants an explosion jump that inflicts Oiled and deals melee damage
+-Hold down to fall faster
+(Increased explosion damage and size, force effect now also increases jump height and explosion size)
+
+Cobalt Enchant mini-rework:
+-Grants an explosion jump that inflicts Oiled and deals melee damage
+-Your other jumps are stronger and cause explosions on a short cooldown
+-Hold down to fall faster
+
+Shadewood Enchant:
+-Decreased cooldown 2s -> 0.5s
+-Always spawns exactly 2 blood (instead of randomly 2-5)
+-Blood now has local iframes but can only hit each enemy once
+
+Saucer Control Console:
+-Damage is now reduced if Golem has not been defeated
+-Left and right click attacks can no longer be used at the same time
+-Rockets can no longer hit the same enemy twice
+-Lasers can no longer travel through blocks
+
+Celestial Rune:
+-Removed summoning Ancient Vision on taking damage
+-Tweaked projectile damage balance, damage also no longer increases in Galactic Globe
+-Fireballs now have -1 local IFrames, preventing them from doublehitting
+-Ice Spikes and Ice Mist now inflict Frostbite instead of Frostburn
+
+Security Wallet: Improves reforges -> reduces reforge cost by 50%
+Force of Life: Tweaked vertical flight stats
+Bee Enchant: Bees now use 10 static iframes instead of 15 local iframes
+Crystal Assassin Enchant: Now grants First Strike on ground boost instead of from Rod of Discord, wizard effect now reduces cooldown
+Hallow Enchant: Repel aura now lasts for 1 second, 2 seconds with wizard
+Adamantite Enchant: Decreased attack speed with Wizard Enchant from 65% to 50%
+Mythril Enchant: Slightly increased buildup speed
+Tiki Enchant: Now interacts with non-contact projectile minions
+Molten Enchant: Removed self-burn
+Solar Enchant: Now has damage falloff on successive hits
+Rich Mahogany Enchant: Damage reduction sticks around for a second after grappling
+Tin Enchant: Getting hit only removes half your current crit, to a minimum of 5%
+Huntress Enchant: Miss halves your stacks instead of removing them all
+Red Riding Enchant: Tweaked arrow rain pattern
+Spider Enchant: Crit bonus cannot increase damage by more than 100
+Force of Nature Chlorophyte minion damage reduced
+Slimy Shield and upgrades have new toggle that lets you fall through platforms, on a tiny cooldown
+Sinister Icon can now increase boss drops, except Mutant, but needs to be equipped for the full bossfight
+Wyvern Feather: Removed Clipped Wings application
+Cosmic Core supercrit chance 1/2 -> 1/3 of your crit
+Abom's Wand: Increases graze cap by 20%, Fixed not being required for Styx armor to overcharge graze
+Mutant's Eye: Graze cap increase 100% -> 25%, stacks linearly with Abom's Wand
+Sharpshooter's Essence now increases ranged weapon velocity by 10% instead of reducing ammo consumption chance by 10%
+Sniper's Soul now increases ranged weapon velocity by 20% instead of reducing ammo consumption chance by 20%
+Arch Wizard's Soul now decreases mana cost by 20% instead of increasing magic weapon attack speed by 20%
+Conjurist's Soul minion slot increase decreased from 5 to 3
+Prevented minions from activating effects like Boreal Wood snowballs as active weapons already accomplish this
+Accessories that increase projectile velocity now stack additively (except ninja ench)
+Gaia set bonus now gives +30 max mana
+Eridanus Mage Blessing now gives +30 max mana
+
+Prime Staff:
+-Damage increased 18->24
+-Drop rate increased 5%->20%
+-Shooting arms no longer deal contact damage
+-Contact arms hit cooldown increased slightly (15->20 local)
+-Cannonballs no longer pierce
+
+Regurgitator:
+-Damage decreased, but lasers no longer pierce and charged hungry deals 3x previous damage
+-Lasers now rotate faster and have a smaller degree of rotation
+-Charged hungry growth rate now scales with attack speed
+-No longer inflicts global IFrames
+
+Resprited several items, renamed and resprited Galactic Globe into Verdant Doomsayer Mask
+Improved Nuke Fishron projectile visuals
+Improved Small Sting and Big Sting projectile visuals
+Reduced Nano Core recipe Saucer trophies 99 -> 1
+Bone Zone now drops alongside 200 Brittle Bones
+Fixed Baron's Tusk projectiles not being affected by flasks, fixed projectiles being able to double hit an enemy on tusk ripout
+Vineslinger damage decreased from 51 to 40, leaf damage is now based on hit damage instead of weapon damage
+Crystalline Congregation damage decreased from 56 to 40, usetime from 5 to 6
+Twinrangs damage decreased from 39 to 30
+Gemini Glaives: Halved unempowered retirang damage
+Staff of Unleashed Ocean: Increased drop rate 1/25 -> 1/12
+Remote Control probe lasers local iframes increased
+Fixed Golem eye beams not counting as lasers for Remote Control DR
+Miss Drakovi's Fishing Pole: Rebalanced damage, tweaked melee projectile AI, reduced melee projectile dust, allow cycling damage types without ammo, don't shoot while right-clicking, disable alt-function use when cooldown is still pending
+Big Brain Buster: Reworked damage formula and base damage, repeated summons now increase firing rate instead of damage
+Devious Aestheticus: Reduced base damage
+Scientific Railgun lightning arcs now deal 0.33x base instead of 0.1x, reduced base damage
+Hell Zone: Decreased base damage, increased Marked multiplier
+Increased orb speed of Vortex Ritual orb, decreased base damage
+Top Hat Squirrel: Rebalanced damage multipliers and base damage
+Diffractor Blaster: Reduced base damage
+Vortex Ritual, Rainbow Slime minion, Hell Zone, Fish Stick whirlpool, Top Hat Squirrel lasers, The Dicer, Scientific Railgun, Miss Drakovi's Fishing Pole, Diffractor Blaster, Dark Artist minion,
+Destruction Cannon, detatched The Destroyer orbs, no longer inflict global IFrames
+
+Abominationn:
+-Abominationn base health 750000 ->680000 (compensation for Cosmic Core change)
+-Split scythe line telegraphs last longer, to actually telegraph the scythe movement
+-Phase 2 scythes before bouncy scythe attack start slow and accelerate (faster in Maso), now also deal damage in Eternity
+-Flocko attack now has slightly more spread in Phase 2, and fires 5 per spread in Masochist
+-Deletes all existing auras on spawn (can no longer stack if you spawn him fast enough after previous one despawning)
+-Tweaked maso arena to not hit you at the start of the fight
+-Solar eclipse border only hits player in Masochist, otherwise burns you
+-Masochist Mode only:
+--Now has 2 ufos during phase 1 scythe attack
+--Phase 1 delayed scythe projectiles are predictive
+--Phase 1 dashes are much faster
+--Now has split scythe line telegraph
+--Laevaetinn now telegraphs both sides
+
+Mutant:
+-Masochist Mode only:
+--Void rays now have a subtle short telegraph from the eyes (not on FTW)
+
+Cursed Coffin: 
+-25% chance to drop each Pharaoh set piece
+-Fixed sometimes inexplicitly exploding in multiplayer
+-Reworded sand shifting message to "The sand is shifting underneath you"
+-Boss checklist spawn info is now more accurate
+-Fixed Cursed Spirit drawing under tablet in the arena
+
+ETERNITY MODE:
+Queen Bee:
+-Completely reworked standard vanilla flying movement and stinger attack
+-Completely reworked standard vanilla bee attack
+-Removed Eternity+ stinger ring
+-Now moves away before charging if too close, removed honey telegraph after bee swarm
+-Reduced bee enemy amounts
+-Bee enemies now have a slight yellow outline
+-If too far, moves closer to player when preparing bee swarm attack
+-Royal Subjects have no contact damage for 2 seconds when spawned
+-Fixed not playing dash sounds
+-Fixed sometimes keeping the dash sprite when canceling dashes
+
+Eternity Deerclops:
+-Added new shadow hand attack
+-Removed contact damage
+-Ice spikes can no longer spawn on platforms
+-Rubble projectiles now emit light
+-Now passively emits red light during night
+-Rubble attack telegraphs with dust on the ground, and has a longer windup in non-Masochist
+-Decreased lingering duration of certain ice spikes
+-Ice spikes now grant you a longer iframe window on hit, to avoid double hits
+-No longer inflicts Slow
+-Slightly increased grab attack cooldown
+ 
+Twins:
+-Decreased retinazer recoil in phase 2
+-Retinazer now moves close to player while preparing deathray
+-Decreased time of Burning debuff from deathray
+
+Skeletron Prime: Now shares health with arms, arms have 90% DR, but increased base health 1.2x -> 1.4x
+Destroyer: Damage reduction during coil 90% -> 60% (except for final phase), Reduced held weapon resistance
+Empress of Light: New arena visual during big blender spin attack, Added photosensitivity config for this
+Eater of Worlds: Now launches towards you if you go way too far away, fixed some issues with coil
+Plantera: Increased delays between Phase 3 attacks
+Queen Slime: Gelatin Subjects have no contact damage for 2 seconds when spawned
+Skeletron: Tweaked projectile pattern during phase 1 hand clap
+Duke Fishron: Sharknado telefrag fix is no longer reverted in Masochist
+Banished Baron: Nuke now only inflicts Broken Armor and Oceanic Maul with the actual explosion
+Abominationn: No longer inflicts Berserked with any attacks
+Eridanus: No longer inflicts Berserked with any attacks, final ritual no longer inflicts Hexed
+Overhauls to King Slime and Queen Slime sprite visuals
+
+All NPCs and enemies no longer passively suffocate in Space or burn in Hell
+All environmental effects are now disabled during bossfights
+Underground shadow hands are now exclusive to the Snow biome
+Flying Knife is now exempt from Destroyer's pierce resistance per hit
+Fixed Electric Orbs debuffs not being tied to their color type (Retinazer orbs now only inflict Ichor, Spazmatism orbs only inflict Cursed Inferno)
+Reduced duration of Berserked from most sources
+Hypothermia no longer affects whips
+Living Wasteland no longer rots town NPCs
+Fused is now defused by standing still for a full second
+
+Ice Golem and Sand Elemental:
+-No longer spawns randomly in pre-Hardmode. Instead, being in a Sandstorm/Blizzard for enough time spawns them, with a chat message warning about their spawn
+-Don't deal contact damage until they fall below 100% hp
+Pre-Hardmode Rock Golems start as idle until below 95% health
+Moved Masochist Pre-hm Parrots and instakill Man Eaters, Parrots and Nutcrackers to Masochist FTW
+Goldfish and Jellyfish can no longer randomly transform into Sharks
+Flying Fish: Greatly decreased water spout fire rate
+Sand Poachers: Added telegraph for spit
+Crawdads and Crabs: Replaced bubble spam with backhop bubble attack
+Corruptors: Tweaked flamethrower attack, more telegraphed
+Fixed Undead Miner bomb dealing more damage than intended
+Reduced Skeleton Archer fire rate
+Basilisks now only inflict Stoned on Masochist Mode
+Reduced maximum Horde of Sharks 5 -> 2
+Reduced Eternity sand shark spawn rate
+
+Reworked the swing style of most standard Broadswords, can now be swung in any direction with new animation
+Added config for Eternity melee weapon reworks
+Removed whip-stacking deletion, replaced with: Whip tag damage has reduced effect when stacked
+Eternity Rod of Discord: Chaos State now reduces your damage, defense and damage reduction by 40%, no longer takes damage on use
+All basic ore broadswords(Copper, Tin,...Gold, Platinum): Increased size by 30%
+Bladetongue: Increased size by 30%
+Removed damage decrease for Obsidian Swordfish
+Removed damage increases for North Pole, Elf Melter, and Imp Staff
+Rebalanced several Golem-tier weapons
+ Removed Gladius' damage buff and increased its hit rate to match its swing speed
+Cactus Armor set bonus tooltip now states immunity to cactus damage in Eternity
+
+OTHER CHANGES:
+Added Masks for all Champions and non-Sibling bosses
+Added the Main Menu Music Box
+Equipped Active Skills are now crossed out and unusable when accessory effect is disabled/removed, instead of being removed from the slot
+New Patreon name effect: Eight3One: Get a Crystal Assassin Enchant dash, attacks have a chance to inflict Lightning Rod
+Tweaked main menu logo lighting and added glowmask
+Improved sub-pixel scaling for difficulty selection screen
+Fixed several small description issues and clarified some wording
+Removed Big Toss Mode
+
+Fixed issues with Music Box tiles
+Fixed an edgecase with Ninja Enchantment enabling summon crits
+Fixed Frost Enchant icicles not always visually pointing at the mouse correctly
+Bee Enchant flowers are no longer affected by friendly projectile transparency
+Fixed Devious Aestheticus description stating incorrect max amount of minion slots (6 -> 7)
+Fixed Smart Cursor or hovering a town NPC overriding parrying if parry is not bound to right click
+Fixed Abominable Wand revive exploit with low max health characters through Death Fruit
+Fixed Masochist multiplayer respawn prevention text sometimes displaying in singleplayer
+Fixed other niche rare errors
