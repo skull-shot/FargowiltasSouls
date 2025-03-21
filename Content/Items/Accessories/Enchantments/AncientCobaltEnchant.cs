@@ -126,8 +126,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (player.controlDown)
             {
                 player.maxFallSpeed *= 1.5f;
-                if (player.velocity.Y != 0)
-                    player.velocity.Y += 0.1f;
+
+                bool holdingDown = player.controlDown && !player.controlJump;
+                bool notInLiquid = !player.wet;
+                bool notOnRope = !player.pulley && player.ropeCount == 0;
+                bool notGrappling = player.grappling[0] == -1;
+                bool airborne = player.velocity.Y != 0;
+                if (holdingDown && notInLiquid && notOnRope && notGrappling && airborne)
+                {
+                    player.velocity.Y += player.gravity * player.gravDir * 0.5f;
+                    if (player.velocity.Y * player.gravDir > player.maxFallSpeed)
+                        player.velocity.Y = player.maxFallSpeed * player.gravDir;
+                }
             }
         }
 
