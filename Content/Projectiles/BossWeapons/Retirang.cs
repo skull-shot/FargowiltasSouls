@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.light = 0.4f;
 
-            Projectile.width = 50;
+            Projectile.width = 25;
             Projectile.height = 50;
             Projectile.penetrate = 1;
             Projectile.aiStyle = -1;
@@ -50,6 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
+            Player player = Main.LocalPlayer;
             if (Main.player[Projectile.owner].Alive())
             {
                 if (Main.projectile.Where(p => p.TypeAlive(Type) && p.owner == Projectile.owner).Count() > 3) 
@@ -61,9 +62,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             {
                 Projectile.ai[1]++;
 
-                if (Projectile.ai[1] > 30)
+                if (Projectile.ai[1] > 15)
                 {
-                    Projectile.ai[0] = 2;
+                    Projectile.ai[0] = 1.5f;
                     Projectile.ai[1] = 0;
                     Projectile.netUpdate = true;
                 }
@@ -75,27 +76,44 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
 
                 //kill when back to player
-                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
+                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 25)
                     Projectile.Kill();
 
             }
 
+            if (Projectile.ai[0] == 1.5f)
+            {
+                Projectile.extraUpdates = 0;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 35, 0.2f);
+
+                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 50)
+                    Projectile.ai[0] = 2;
+            }
+
+
             if (Projectile.ai[0] == 2)
             {
                 Projectile.frame = 1;
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity * 0, 1 / 10f);
+                int distance = 80;
+                float spinFrames = 120;
+                var moons = Main.projectile.Where(p => p.TypeAlive(Type) && p.owner == player.whoAmI).ToList();
+                float offset = moons.IndexOf(Projectile) * MathF.Tau / moons.Count;
+                float rotation = MathF.Tau * (Main.GameUpdateCount % spinFrames) / spinFrames;
+                Projectile.Center = player.Center + new Vector2(30, 0) + Vector2.UnitX.RotatedBy(offset + rotation) * distance;
+
+
 
                 NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1600, false, true));
                 if (n.Alive())
                 {
-                    if (counter < 8)
+                    if (counter < 14)
                     {
                         Projectile.rotation = Projectile.SafeDirectionTo(n.Center).ToRotation() + (float)Math.PI;
                     }
 
                     if (++Projectile.ai[1] > 25)
                     {
-                        if (Projectile.owner == Main.myPlayer && counter <= 8)
+                        if (Projectile.owner == Main.myPlayer && counter <= 14)
                         {
                             SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Normalize(n.Center - Projectile.Center) * 20, ModContent.ProjectileType<PrimeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -107,14 +125,14 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                                 
                             }
 
-                            Projectile.velocity -= Vector2.Normalize(n.Center - Projectile.Center);
+                            //Projectile.velocity -= Vector2.Normalize(n.Center - Projectile.Center) * 5;
 
                             Particle p1 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
                             Particle p2 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
-                            Particle p3 = new SparkParticle(Projectile.Center, ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
-                            p1.Spawn();
-                            p2.Spawn();
-                            p3.Spawn();
+                            Particle p3 = new SparkParticle(Projectile.Center, Projectile.velocity + ((n.Center - Projectile.Center) * 0.02f) + Main.rand.NextVector2Circular(5, 0), Color.Red, 0.66f, 25);
+                            //p1.Spawn();
+                            //p2.Spawn();
+                            //p3.Spawn();
                             counter += 1;
                         }
                         Projectile.ai[1] = 0;
@@ -133,9 +151,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.rotation = Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center).ToRotation() + (float)Math.PI;
                 }
 
-                if (counter >= 8 && ++returntime >= 120)
+                if (counter >= 14 && ++returntime >= 120)
                 {
+                    Projectile.velocity -= Vector2.Normalize(player.Center - Projectile.Center) * 5;
                     Projectile.ai[0] = 1;
+
                     Projectile.frame = 0;
                 }
 

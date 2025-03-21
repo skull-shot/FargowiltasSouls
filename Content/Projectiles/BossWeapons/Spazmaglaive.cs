@@ -16,12 +16,11 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class Spazmaglaive : ModProjectile, IPixelatedPrimitiveRenderer
+    public class Spazmaglaive : ModProjectile
     {
-        bool empowered = false;
-        bool hitSomething = false;
 
         public bool DrawTrail = false;
+        public Vector2 mousePos = Vector2.Zero;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmaglaive");
@@ -32,14 +31,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void SendExtraAI(BinaryWriter writer)
         {
-            writer.Write(empowered);
-            writer.Write(hitSomething);
+            writer.Write(mousePos.X);
+            writer.Write(mousePos.Y);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            empowered = reader.ReadBoolean();
-            hitSomething = reader.ReadBoolean();
+            Vector2 buffer;
+            buffer.X = reader.ReadSingle();
+            buffer.Y = reader.ReadSingle();
+            if (Projectile.owner != Main.myPlayer)
+                mousePos = buffer;
         }
 
         public override void SetDefaults()
@@ -48,19 +50,19 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.friendly = true;
             Projectile.light = 0.4f;
             Projectile.tileCollide = false;
-            Projectile.width = 40;
+            Projectile.width = 90;
             Projectile.height = 90;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 60;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 5;
         }
 
         public override void AI()
         {
             //Projectile.Kill();
-            if (Projectile.ai[0] == 0)
+            /*if (Projectile.ai[0] == 0)
             {
                 if (Projectile.ai[2] == 0)
                 {
@@ -72,7 +74,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 const int maxTime = 45;
                 Vector2 DistanceOffset = new Vector2(950 * (float)Math.Sin(Projectile.localAI[0] * Math.PI / maxTime), 0).RotatedBy(Projectile.velocity.ToRotation());
                 DistanceOffset = DistanceOffset.RotatedBy(Projectile.ai[2] - Projectile.ai[2] * Projectile.localAI[0] / (maxTime / 2));
-                Projectile.Center += Main.player[Projectile.owner].Center;*/
+                Projectile.Center += Main.player[Projectile.owner].Center;/
                 int maxtime = empowered ? 15 : 30;
 
                 if (Projectile.ai[1] >= maxtime)
@@ -156,16 +158,31 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.Center = Main.player[Projectile.owner].Center + DistanceOffset;
             if (Projectile.ai[0] > maxTime)
                 Projectile.Kill();*/
+            if (Projectile.owner == Main.myPlayer)
+            {
+                mousePos = Main.MouseWorld;
+            }
 
-            if (Projectile.ai[0] == ModContent.ProjectileType<Retiglaive>())
+            if (Main.LocalPlayer.channel)
             {
-                empowered = true;
-                Projectile.ai[0] = 0;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(mousePos) * 35, 0.2f);
+
+                Projectile.timeLeft = 2;
             }
-            else if (Projectile.ai[0] == ModContent.ProjectileType<Spazmaglaive>())
+            else
             {
-                Projectile.ai[0] = 0;
+                Projectile.extraUpdates = 0;
+                Projectile.timeLeft = 2;
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(Main.player[Projectile.owner].Center) * 25, 0.2f);
+
+                //kill when back to player
+                if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
+                    Projectile.Kill();
+
             }
+
+            Projectile.rotation += 0.62f;
+
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -175,7 +192,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            hitSomething = true;
             NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 800, false, true));
             if (n.Alive())
             {
@@ -189,45 +205,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
 
             SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
+            Projectile.velocity += Vector2.Normalize(n.Center - Projectile.Center) * 35;
             //return;
-    
+
             if (Projectile.timeLeft >= 10)
                 Projectile.ai[0] = 2;
 
             target.AddBuff(BuffID.CursedInferno, 120);
 
-            /*if (!hitSomething)
-            {
-                hitSomething = true;
-                if (Projectile.owner == Main.myPlayer)
-                {
-                    SoundEngine.PlaySound(SoundID.Item74, Projectile.Center);
-                    Vector2 baseVel = Main.rand.NextVector2CircularEdge(1, 1);
-                    float ai0 = 78;//empowered ? 120 : 78;
-                    for (int i = 0; i < 5; i++)
-                    {
-                        Vector2 newvel = baseVel.RotatedBy(i * MathHelper.TwoPi / 5);
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, newvel, ModContent.ProjectileType<SpazmaglaiveExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner, ai0, target.whoAmI);
-                    }
-                    /*if (empowered)
-                    {
-                        for (int i = 0; i < 12; i++)
-                        {
-                            SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, Projectile.Center);
-                            Vector2 newvel = baseVel.RotatedBy(i * MathHelper.TwoPi / 12);
-                            int p = Projectile.NewProjectile(target.Center, newvel/2, ModContent.ProjectileType<MechElectricOrbFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0, target.whoAmI);
-                            if(p < 1000)
-                            {
-                                Main.Projectile[p].magic = false;
-                                Main.Projectile[p].melee = true;
-                                Main.Projectile[p].timeLeft = 30;
-                                Main.Projectile[p].netUpdate = true;
-                            }
-                        }
-                    }
-                }
-                Projectile.netUpdate = true;
-            }*/
+            
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -250,12 +236,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             float opacity = 1;
             opacity = MathHelper.Lerp(0, 1, 0.1f);
 
-            if (empowered)
-            {
-                DrawTrail = true;
-            }
-
-
             for (float i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 0.33f)
             {
                 int max0 = Math.Max((int)i - 1, 0);
@@ -273,39 +253,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             }
 
-
-            /*if (Projectile.ai[0] == 2)
-              {
-                  Main.EntitySpriteDraw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), -Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
-              }
-              if (Projectile.ai[1] >= 35 || Projectile.ai[0] == 1)
-              {
-                  Main.spriteBatch.Draw(SpazmaSaw, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin22, Projectile.scale * 2f, SpriteEffects.None, 0);
-            }*/
-
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
-        }
-
-        public float WidthFunction(float completionRatio)
-        {
-            float baseWidth = Projectile.width * 1.4f;
-            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
-        }
-
-        public Color ColorFunction(float completionRatio)
-        {
-            return Color.Lerp(Color.DarkGreen, Color.Green, completionRatio);
-        }
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.Techno1Noise.Value);
-            if (DrawTrail)
-            {
-                PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
-            }
-            
         }
     }
 }

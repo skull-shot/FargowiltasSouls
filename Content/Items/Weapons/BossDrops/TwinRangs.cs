@@ -36,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.rare = ItemRarityID.Pink;
             Item.shootSpeed = 10;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
+            Item.channel = true;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
         }
@@ -54,13 +55,19 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Retirang>()] < 3)
             {   
                 Item.shoot = ModContent.ProjectileType<Retirang>();
-                Item.shootSpeed = 10;
+                Item.shootSpeed = 15;
+                Item.useTime = 25;
+                Item.useAnimation = 25;
             }
             else
             {
                 Item.shoot = ModContent.ProjectileType<Spazmarang>();
                 Item.shootSpeed = 15;
             }
+
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<Spazmarang>()] > 0)
+                return false;
+
             return true;
         }
 
@@ -70,6 +77,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             {
                 damage = (int)(damage * 0.75);
             }
+
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
