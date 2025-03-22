@@ -1,3 +1,2 @@
 NEW UPDATE - V {ModVersion}
-Ancient Hallow Enchant minion no longer takes a minion slot
-Russian and Chinese localization updates
+Fixed Eternity item scale buffs not working correctly when text localization is set to certain other languages
