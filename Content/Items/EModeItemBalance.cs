@@ -6,6 +6,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -636,7 +637,7 @@ namespace FargowiltasSouls.Content.Items
 
                         case "Scale":
                             {
-                                float scaleNumber = float.Parse(extra);
+                                float scaleNumber = float.Parse(extra, System.Globalization.NumberStyles.Float, CultureInfo.InvariantCulture);
                                 EModeChange change = scaleNumber > 0 ? EModeChange.Buff : scaleNumber < 1 ? EModeChange.Nerf : EModeChange.Neutral;
                                 int amount = (int)Math.Round(scaleNumber * 100f);
                                 string key = change == EModeChange.Buff ? "ScalePositive" : "Scale";
