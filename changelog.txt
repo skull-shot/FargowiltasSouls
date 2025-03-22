@@ -1,2 +1,3 @@
 NEW UPDATE - V {ModVersion}
+Fixed new Eternity Ice Golem early-bird spawn not having the exact correct blizzard conditions
 Fixed Eternity item scale buffs not working correctly when text localization is set to certain other languages
