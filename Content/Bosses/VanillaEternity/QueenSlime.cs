@@ -15,6 +15,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Core;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -569,6 +570,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
+            if (!resprite)
+                return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+
             GameShaders.Misc["FargowiltasSouls:QueenSlimeBuffer"] = GameShaders.Misc["QueenSlime"];
             GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlime"];
             
