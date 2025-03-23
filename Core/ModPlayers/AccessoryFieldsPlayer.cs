@@ -52,6 +52,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int TerraProcCD;
         public int CosmosMoonTimer;
         public int CosmosMoonCycle;
+        public bool CosmosForce;
         public bool LifeForceActive;
         public float AuraSizeBonus;
         public int TerrariaSoulProcCD;
@@ -60,6 +61,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //force of timber
         public bool MahoganyCanUseDR;
+        public int MahoganyTimer;
         public float EbonwoodCharge;
         public int ShadewoodCD;
         public bool WoodEnchantDiscount;
@@ -77,6 +79,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool TinCritBuffered;
         public int TungstenCD;
         public int AshwoodCD;
+        public int IronReductionDuration;
 
         //force of cosmos
         public float NebulaEnchCD = 3 * 60;
@@ -84,7 +87,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float MeteorCD = 60;
 
         public int ApprenticeItemCD;
-        public bool IronRecipes = false;
         public bool CactusImmune = false;
         public int CactusProcCD;
         public bool ChlorophyteEnchantActive = false;
@@ -142,7 +144,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
         public int CobaltCooldownTimer;
-        public int CobaltImmuneTimer;
+        public int CobaltJumpCooldown;
         public bool ApprenticeEnchantActive;
         public bool DarkArtistEnchantActive;
         public int BeeCD;
@@ -160,6 +162,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Projectile CrystalSmokeBombProj = null;
         public bool FirstStrike;
         public int SmokeBombCD;
+        public bool CrystalAssassinDiagonal;
 
         public int ShadowDashTimer;
         public int IFrameDashTimer;
@@ -326,6 +329,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Unstable;
         private int unstableCD;
         public bool Fused;
+        public int FusedStandStillTime;
         public bool Shadowflame;
         public bool Oiled;
         public bool DeathMarked;

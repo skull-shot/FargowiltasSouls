@@ -87,6 +87,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                             //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
+                        if (!EridanusSet && !Ambrosia)
+                        {
+                            float damageCap = (hitInfo.Damage / 2) + 100;
+                            if (hitInfo.Damage * critDamageMult > damageCap)
+                            {
+                                critDamageMult = damageCap / hitInfo.Damage;
+                            }
+                        }
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
@@ -143,8 +151,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-            if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-                TryAdditionalAttacks(proj.damage, proj.DamageType);
+          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {

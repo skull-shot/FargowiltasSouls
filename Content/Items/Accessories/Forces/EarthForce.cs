@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // COBALT
             if (!player.HasEffect<EarthForceEffect>())
                 player.AddEffect<AncientCobaltEffect>(Item);
+            player.AddEffect<AncientCobaltFallEffect>(Item);
             player.AddEffect<CobaltEffect>(Item);
             // PALLADIUM
             if (!player.HasEffect<EarthForceEffect>())

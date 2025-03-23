@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 LockVector1;
         public int ShotTimer = 0;
-        private object vector86;
+        public bool ChargePosition;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -55,6 +55,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bitWriter.WriteBit(SpawnedRoyalSubjectWave1);
             bitWriter.WriteBit(SpawnedRoyalSubjectWave2);
             bitWriter.WriteBit(InPhase2);
+            bitWriter.WriteBit(ChargePosition);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -68,6 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             SpawnedRoyalSubjectWave1 = bitReader.ReadBit();
             SpawnedRoyalSubjectWave2 = bitReader.ReadBit();
             InPhase2 = bitReader.ReadBit();
+            ChargePosition = bitReader.ReadBit();
         }
 
         public override void SetDefaults(NPC npc)
@@ -258,7 +260,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, time - 5);
                     }
                 }
-
                 
                 if (npc.ai[0] == 0 && npc.ai[1] == 1f) //if qb tries to start doing dashes of her own volition
                 {
@@ -268,7 +269,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.localAI[0] = 0f;
                     npc.netUpdate = true;
                 }
-                
             }
 
             //only while stationary mode
@@ -362,6 +362,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     if (npc.ai[2] == -44) //telegraph
                     {
+                        /*
                         SoundEngine.PlaySound(SoundID.Item21, npc.Center);
 
                         for (int i = 0; i < 44; i++)
@@ -376,6 +377,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Main.dust[d].velocity *= 4.4f;
                             }
                         }
+                        */
 
                         if (WorldSavingSystem.MasochistModeReal)
                             npc.ai[2] = 0;
@@ -408,8 +410,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public bool MovementRework(NPC npc, bool result)
         {
+            if (!npc.HasPlayerTarget)
+            {
+                npc.TargetClosest();
+                Player p = Main.player[npc.target];
+                if (!p.active || p.dead || Vector2.Distance(npc.Center, p.Center) > 5000f)
+                {
+                    npc.noTileCollide = true;
+                    if (npc.timeLeft > 30)
+                        npc.timeLeft = 30;
+                    npc.velocity.Y += 1f;
+                    return false;
+                }
+            }
             if (result && npc.HasPlayerTarget) // ai rework normal flying ai rework
             {
+                if (npc.ai[0] != 0) // reset charge memory
+                    ChargePosition = false;
+
                 Player player = Main.player[npc.target];
                 if (npc.ai[0] == 2) // replaces preparing bees
                 {
@@ -479,7 +497,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
 
                         // bees
-                        if (NPC.CountNPCS(NPCID.Bee) + NPC.CountNPCS(NPCID.BeeSmall) < 8f && timer % 5 == 0)
+                        if (timer % 10 == 0 && NPC.CountNPCS(NPCID.Bee) + NPC.CountNPCS(NPCID.BeeSmall) < 6f)
                         {
                             SoundEngine.PlaySound(SoundID.NPCHit1, npc.position);
                             if (FargoSoulsUtil.HostCheck)
@@ -528,7 +546,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         Movement(npc, chosenPos, speedMod, 20);
                     }
                 }
-                if (npc.ai[0] == 3) // normal flying ai with stingers
+                else if (npc.ai[0] == 3) // normal flying ai with stingers
                 {
                     result = false;
                     float enrageFactor = 0f;
@@ -627,6 +645,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         npc.ai[0] = -1f;
                         npc.ai[1] = 3f;
                         npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[0] == 0) // charging 
+                {
+                    if (!ChargePosition)
+                    {
+                        float distX = MathF.Abs(npc.Center.X - player.Center.X);
+                        float desiredDist = 550f;
+                        if (distX < desiredDist)
+                        {
+                            Vector2 desiredPos = player.Center + Vector2.UnitX * player.HorizontalDirectionTo(npc.Center) * (desiredDist + 50);
+                            Movement(npc, desiredPos, 2f, (int)(10 + player.velocity.Length()));
+                            result = false;
+                        }
+                        else
+                        {
+                            ChargePosition = true;
+                            npc.netUpdate = true;
+                        }
                     }
                 }
             }

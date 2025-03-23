@@ -37,6 +37,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Player.Alive())
                 return;
 
+            if (LumUtils.AnyBosses())
+                return;
+
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
             bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden;
 

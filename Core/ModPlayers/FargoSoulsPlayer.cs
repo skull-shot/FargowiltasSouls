@@ -14,6 +14,7 @@ using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -79,7 +80,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool shouldShoot;
         public int useDirection = -1;
         public float useRotation = 0;
-        public int swingDirection = 1;
+        public int swingDirection = -1;
 
         public Dictionary<int, bool> KnownBuffsToPurify = [];
 
@@ -106,7 +107,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool BossAliveLastFrame = false;
 
         public AccessoryEffect[] ActiveSkills = new AccessoryEffect[4];
-
         public override void SaveData(TagCompound tag)
         {
             var playerData = new List<string>();
@@ -283,6 +283,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             PetsActive = true;
             //CrimsonRegen = false;
             LifeForceActive = false;
+            CosmosForce = false;
             MinionCrits = false;
             FirstStrike = false;
             ShellHide = false;
@@ -294,7 +295,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             ApprenticeEnchantActive = false;
             DarkArtistEnchantActive = false;
             CrystalEnchantActive = false;
-            IronRecipes = false;
             ChlorophyteEnchantActive = false;
 
             if (!MonkEnchantActive)
@@ -307,6 +307,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ValhallaEnchantActive = false;
             TitaniumDRBuff = false;
             TitaniumCD = false;
+            CrystalAssassinDiagonal = false;
 
             CactusImmune = false;
 
@@ -722,10 +723,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     AttackSpeed += .1f;
                 }
 
-                if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
-                {
-                    AttackSpeed += .2f;
-                }
+                //if (MagicSoul && item.CountsAsClass(DamageClass.Magic))
+                //{
+                //    AttackSpeed += .2f;
+                //}
 
                 if (Player.HasEffect<MythrilEffect>())
                 {
@@ -1212,6 +1213,36 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
+        public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound)
+        {
+            if (Player.HasEffect<CobaltEffect>())
+            {
+                if (Player.whoAmI == Main.myPlayer && CobaltJumpCooldown <= 0)
+                {
+                    CobaltJumpCooldown = 15;
+                    int baseDamage = 75;
+
+                    if (Player.ForceEffect<CobaltEffect>())
+                    {
+                        baseDamage = 150;
+                    }
+
+                    if (Player.HasEffect<EarthForceEffect>() || TerrariaSoul)
+                    {
+                        baseDamage = 600;
+                    }
+
+                    Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_EffectItem<CobaltEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(baseDamage * Player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
+                    if (p != null)
+                        p.FargoSouls().CanSplit = false;
+                }
+            }
+        }
+        public override void ModifyExtraJumpDurationMultiplier(ExtraJump jump, ref float duration)
+        {
+            if (Player.HasEffect<CobaltEffect>())
+                duration *= 1.2f;
+        }
         public void AddPet(bool toggle, bool vanityToggle, int buff, int proj)
         {
             if (vanityToggle)
@@ -1355,13 +1386,13 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if (weapon.CountsAsClass(DamageClass.Ranged))
-            {
-                if (RangedEssence && Main.rand.NextBool(10))
-                    return false;
-                if (RangedSoul && Main.rand.NextBool(5))
-                    return false;
-            }
+            //if (weapon.CountsAsClass(DamageClass.Ranged))
+            //{
+            //    if (RangedEssence && Main.rand.NextBool(10))
+            //        return false;
+            //    if (RangedSoul && Main.rand.NextBool(5))
+            //        return false;
+            //}
             if (GaiaSet && Main.rand.NextBool(10))
                 return false;
             return true;
@@ -1575,16 +1606,19 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 if (WizardedItem != null && !WizardedItem.IsAir && WizardedItem.type == type)
                     return true;
-                return (BaseEnchant.CraftsInto[type] > 0 && CheckWizard(BaseEnchant.CraftsInto[type]));
+                return BaseEnchant.CraftsInto[type] > 0 && CheckWizard(BaseEnchant.CraftsInto[type]);
             }
             if (TerrariaSoul)
                 return true;
 
-            if (ForceEffects.Contains(ModContent.ItemType<CosmoForce>()))
+            if (CosmosForce)
                 return true;
 
             if ((Main.gamePaused && !allowPaused) || modItem == null || modItem.Item == null || modItem.Item.IsAir)
                 return false;
+
+            if (modItem is BaseSoul || modItem is BaseForce)
+                return true;
 
             if (modItem is BaseEnchant)
             {
@@ -1592,8 +1626,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     return true;
             }
 
-            if (modItem is BaseSoul || modItem is BaseForce)
-                return true;
 
             return false;
         }

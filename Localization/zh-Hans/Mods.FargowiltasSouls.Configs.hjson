@@ -65,6 +65,11 @@ ClientConfig: {
 		Label: 技能菜单竖直位置
 		Tooltip: ""
 	}
+
+	PhotosensitivityMode: {
+		Label: 光敏模式
+		Tooltip: ""
+	}
 }
 
 SoulConfig: {
@@ -96,8 +101,8 @@ SoulConfig: {
 	}
 
 	WeaponReworks: {
-		// Label: Weapon Reworks
-		// Tooltip: Toggles the reworks of certain weapons in Eternity Mode, such as broadswords and spears
+		Label: 武器重做
+		Tooltip: 开关永恒模式的一些武器重做，比如阔剑和长矛挥舞动画
 	}
 
 	PatreonRoomba: {

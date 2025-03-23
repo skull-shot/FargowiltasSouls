@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.timeLeft % Projectile.MaxUpdates == 0)
                 Projectile.position += Main.player[Projectile.owner].position - Main.player[Projectile.owner].oldPosition;
 
-            if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<HentaiSpearSpinBoundary>()] < 1)
+            if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<PenetratorSpinBoundary>()] < 1)
             {
                 Projectile.Kill();
                 return;

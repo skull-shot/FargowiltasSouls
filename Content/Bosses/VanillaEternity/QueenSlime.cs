@@ -8,11 +8,14 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Core;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -563,6 +566,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadProjectile(recolor, ProjectileID.QueenSlimeMinionPinkBall);
             LoadProjectile(recolor, ProjectileID.QueenSlimeMinionBlueSpike);
 
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
+            if (!resprite)
+                return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+
+            GameShaders.Misc["FargowiltasSouls:QueenSlimeBuffer"] = GameShaders.Misc["QueenSlime"];
+            GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlime"];
+            
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
+
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+            
+            GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlimeBuffer"];
         }
     }
 

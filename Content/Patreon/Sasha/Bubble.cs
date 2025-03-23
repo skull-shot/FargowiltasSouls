@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -21,12 +21,16 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
             Projectile.extraUpdates = 1;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 7;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+      /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 7;
-        }
+        }*/
 
         public override void OnKill(int timeLeft)
         {
@@ -35,7 +39,13 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
                 Vector2 speed = 5f * Vector2.UnitX.RotatedByRandom(2 * Math.PI);
                 for (int i = 0; i < 4; i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, speed.RotatedBy(2 * Math.PI / 4 * i), ProjectileID.WaterStream, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, speed.RotatedBy(2 * Math.PI / 4 * i), ProjectileID.WaterStream, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    if (p != Main.maxProjectiles)
+                    {
+                        Main.projectile[p].usesIDStaticNPCImmunity = true;
+                        Main.projectile[p].idStaticNPCHitCooldown = 10;
+                        Main.projectile[p].FargoSouls().noInteractionWithNPCImmunityFrames = true;
+                    }
                 }
             }
         }

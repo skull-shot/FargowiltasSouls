@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateIn
             target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
             //target.AddBuff(ModContent.BuffType<LivingWasteland>(), 600);
 
-            if (WorldSavingSystem.MasochistModeReal && npc.type == NPCID.Parrot && !target.Male)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && npc.type == NPCID.Parrot && !target.Male)
             {
                 target.KillMe(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Parrots", target.name)), 999999, 0);
             }

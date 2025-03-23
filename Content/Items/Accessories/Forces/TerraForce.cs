@@ -33,12 +33,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         public override void UpdateInventory(Player player)
         {
             AshWoodEnchant.PassiveEffect(player);
-            IronEnchant.AddEffects(player, Item);
+            IronEnchant.PassiveEffects(player, Item);
         }
         public override void UpdateVanity(Player player)
         {
             AshWoodEnchant.PassiveEffect(player);
-            IronEnchant.AddEffects(player, Item);
+            IronEnchant.PassiveEffects(player, Item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

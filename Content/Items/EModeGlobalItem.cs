@@ -3,7 +3,9 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
@@ -208,6 +210,7 @@ namespace FargowiltasSouls.Content.Items
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
+
             string extra = string.Empty;
             float balanceNumber = -1;
             string[] balanceTextKeys = null;
@@ -217,7 +220,7 @@ namespace FargowiltasSouls.Content.Items
                 for (int i = 0; i < balanceTextKeys.Length; i++)
                 {
                     if (balanceTextKeys[i] == "Scale" || balanceTextKeys[i] == "ScaleNoTooltip")
-                        scale += float.Parse(extra);
+                        scale += float.Parse(extra, System.Globalization.NumberStyles.Float, CultureInfo.InvariantCulture);
                 }
             }
         }
@@ -249,7 +252,8 @@ namespace FargowiltasSouls.Content.Items
                 return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
             switch (item.type)
             {
-
+                default:
+                    break;
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
         }

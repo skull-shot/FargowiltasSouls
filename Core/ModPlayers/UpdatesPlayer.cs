@@ -204,7 +204,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player);
+                    TinEffect.TinHurt(Player, true);
+                    EbonwoodCharge = 0;
                 }
             }
             else
@@ -533,11 +534,25 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
             }
 
+            if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
+            {
+                FusedStandStillTime++;
+                if (FusedStandStillTime >= 60)
+                {
+                    Player.ClearBuff(ModContent.BuffType<FusedBuff>());
+                }
+            }
+            else
+                FusedStandStillTime = 0;
+
             if (ToggleRebuildCooldown > 0)
                 ToggleRebuildCooldown--;
 
             if (EmodeToggleCooldown > 0)
                 EmodeToggleCooldown--;
+
+            if (!Player.ItemAnimationActive)
+                swingDirection = -1;
 
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;

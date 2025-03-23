@@ -9,9 +9,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpearDeathray2 : MutantSpecialDeathray
+    public class PenetratorDeathray2 : MutantSpecialDeathray
     {
-        public HentaiSpearDeathray2() : base(90) { }
+        public PenetratorDeathray2() : base(90) { }
 
         public override void SetStaticDefaults()
         {

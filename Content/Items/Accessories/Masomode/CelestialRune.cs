@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.AddEffect<CelestialRuneAttacks>(Item);
-            player.AddEffect<CelestialRuneOnhit>(Item);
+          //player.AddEffect<CelestialRuneOnhit>(Item);
         }
     }
 
@@ -50,9 +50,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 modPlayer.AdditionalAttacksTimer = 60;
 
-                float projDamage = 65f;
-                if (modPlayer.MoonChalice)
-                    projDamage *= 1.5f;
+                float projDamage = 50f;
+              //if (modPlayer.MoonChalice)
+              //    projDamage *= 1.5f;
 
                 Vector2 position = player.Center;
                 Vector2 velocity = Vector2.Normalize(Main.MouseWorld - position);
@@ -73,12 +73,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                         float ai1 = Main.rand.Next(100);
                         Vector2 vel = Vector2.Normalize(velocity.RotatedByRandom(Math.PI / 4)).RotatedBy(MathHelper.ToRadians(5) * i) * 7f;
                         Projectile.NewProjectile(GetSource_EffectItem(player), position, vel, ModContent.ProjectileType<CelestialRuneLightningArc>(),
-                            (int)(projDamage * player.ActualClassDamage(DamageClass.Ranged)), 1f, player.whoAmI, velocity.ToRotation(), ai1);
+                            (int)(projDamage * player.ActualClassDamage(DamageClass.Ranged) * 2), 1f, player.whoAmI, velocity.ToRotation(), ai1);
                     }
                 }
                 if (damageType.CountsAsClass(DamageClass.Magic)) //ice mist
                 {
-                    Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(projDamage * player.ActualClassDamage(DamageClass.Magic)), 4f, player.whoAmI);
+                    Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(projDamage * player.ActualClassDamage(DamageClass.Magic) * 2), 4f, player.whoAmI);
                 }
                 if (damageType.CountsAsClass(DamageClass.Summon)) //ancient vision
                 {
@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             }
         }
     }
-    public class CelestialRuneOnhit : AccessoryEffect
+  /*public class CelestialRuneOnhit : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
         public override int ToggleItemType => ModContent.ItemType<CelestialRune>();
@@ -119,5 +119,5 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 }
             }
         }
-    }
+    }*/
 }

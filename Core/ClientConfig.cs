@@ -76,6 +76,9 @@ namespace FargowiltasSouls.Core
         [Range(0f, max4kY)]
         [DefaultValue(250f)]
         public float OncomingMutantY;
+
+        [DefaultValue(false)]
+        public bool PhotosensitivityMode;
         #endregion
 
         [OnDeserialized]

@@ -2,9 +2,9 @@
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
-    public class MutantSpearThrownFriendly : HentaiSpearThrown
+    public class MutantSpearThrownFriendly : PenetratorThrown
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/HentaiSpear";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
 
         public override void SetDefaults()
         {

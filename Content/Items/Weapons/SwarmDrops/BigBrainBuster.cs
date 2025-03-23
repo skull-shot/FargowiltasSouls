@@ -24,7 +24,7 @@ $"This caps at {BigBrainProj.MaxMinionSlots} slots\n" +
 
         public override void SetDefaults()
         {
-            Item.damage = 170;
+            Item.damage = 150;
             Item.DamageType = DamageClass.Summon;
             Item.mana = 10;
             Item.width = 26;
@@ -50,7 +50,7 @@ $"This caps at {BigBrainProj.MaxMinionSlots} slots\n" +
             Vector2 spawnPos = player.Center - Main.MouseWorld;
             if (player.ownedProjectileCounts[type] == 0)
             {
-                FargoSoulsUtil.NewSummonProjectile(source, player.Center, Vector2.Zero, type, Item.damage, knockback, player.whoAmI, 0, spawnPos.ToRotation());
+                FargoSoulsUtil.NewSummonProjectile(source, player.Center, Vector2.Zero, type, damage, knockback, player.whoAmI, 0, spawnPos.ToRotation());
             }
             else
             {

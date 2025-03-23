@@ -3,7 +3,7 @@ ClientConfig: {
 
 	Headers: {
 		Maso: Режим Вечность
-		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Patreon Items]"
+		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
 	}
 
 	HideTogglerWhenInventoryIsClosed: {
@@ -63,6 +63,11 @@ ClientConfig: {
 
 	SkillMenuY: {
 		Label: Положение меню умений по Y
+		Tooltip: ""
+	}
+
+	PhotosensitivityMode: {
+		Label: Режим светочувствительности
 		Tooltip: ""
 	}
 }

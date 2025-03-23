@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
     public class GelatinSubject : ModNPC
     {
         public override string Texture => "Terraria/Images/NPC_660";
-
+        public int ContactDamageTimer = 0;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Gelatin Subject");
@@ -49,6 +49,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         }
         public int ShotTimer;
         const int ShotCD = 60 * 5;
+        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+        {
+            return ContactDamageTimer >= 120;
+        }
         public override void AI()
         {
             if (!FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.queenSlimeBoss, NPCID.QueenSlimeBoss)
@@ -59,6 +63,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 NPC.checkDead();
                 return;
             }
+
+            if (ContactDamageTimer < 120)
+                ContactDamageTimer++;
 
             const float IdleAccel = 0.025f;
             foreach (NPC n in Main.npc.Where(n => n.active && n.type == NPC.type && n.whoAmI != NPC.whoAmI && NPC.Distance(n.Center) < NPC.width))

@@ -76,25 +76,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             modPlayer.TerrariaSoul = true;
             modPlayer.WizardEnchantActive = true;
 
-            /*
-            // super moons
-            player.AddEffect<TerrariaMoonEffect>(Item);
-            // revive
-            player.AddEffect<FossilEffect>(Item);
-            // meteor movement
-            player.AddEffect<MeteorMomentumEffect>(Item);
-            // coins to piggy
-            player.AddEffect<GoldToPiggy>(Item);
-            // platinum loot
-            modPlayer.PlatinumEffect = Item;
-            // wood discount and completion
-            player.FargoSouls().WoodEnchantDiscount = true;
-            player.AddEffect<WoodCompletionEffect>(Item);
-            // iron items and attraction
-            IronEnchant.AddEffects(player, Item);
-            */
-
-            
             //TIMBER
             ModContent.GetInstance<TimberForce>().UpdateAccessory(player, hideVisual);
             //TERRA
@@ -121,7 +102,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.FargoSouls().WoodEnchantDiscount = true;
             player.AddEffect<GoldToPiggy>(Item);
             AshWoodEnchant.PassiveEffect(player);
-            IronEnchant.AddEffects(player, Item);
+            IronEnchant.PassiveEffects(player, Item);
         }
 
         public override void UpdateInventory(Player player)
@@ -129,7 +110,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.FargoSouls().WoodEnchantDiscount = true;
             player.AddEffect<GoldToPiggy>(Item);
             AshWoodEnchant.PassiveEffect(player);
-            IronEnchant.AddEffects(player, Item);
+            IronEnchant.PassiveEffects(player, Item);
         }
 
         public override void AddRecipes()

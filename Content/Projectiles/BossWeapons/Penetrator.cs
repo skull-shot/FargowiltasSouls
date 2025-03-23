@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSpear : ModProjectile
+    public class Penetrator : ModProjectile
     {
         public override void SetStaticDefaults()
         {

@@ -305,13 +305,13 @@ namespace FargowiltasSouls.Core.Systems
         public void PostUpdateWorld_Eternity()
         {
             // ice golem and sand elemental early spawn
-            if (!Main.hardMode && DownedAnyBoss)
+            if (!Main.hardMode && DownedAnyBoss && !LumUtils.AnyBosses())
             {
                 int baseCooldown = LumUtils.SecondsToFrames(40);
                 int postSpawnCooldown = LumUtils.MinutesToFrames(5);
                 int messageDelay = LumUtils.SecondsToFrames(10);
                 bool sandstorm = Sandstorm.Happening;
-                bool blizzard = sandstorm && Main.IsItRaining;
+                bool blizzard = Main.IsItRaining;
                 Player desertPlayer = null;
                 Player snowPlayer = null;
                 if (sandstorm)

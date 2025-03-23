@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.penetrate = -1;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 20;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
         }
@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn, 240);
+            target.AddBuff(BuffID.Frostburn2, 240);
         }
 
         public override Color? GetAlpha(Color lightColor)

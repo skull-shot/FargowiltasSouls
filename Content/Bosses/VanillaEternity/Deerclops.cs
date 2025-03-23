@@ -14,6 +14,8 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core;
+using Terraria.Graphics.CameraModifiers;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -33,6 +35,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public int ForceDespawnTimer;
         public int LockDirection;
+        public bool FirstFrameOfRubble;
+
+        public int HandsCooldown = 2;
+        public bool HandsCheck;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -41,9 +47,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(BerserkSpeedupTimer);
             binaryWriter.Write7BitEncodedInt(TeleportTimer);
             binaryWriter.Write7BitEncodedInt(WalkingSpeedUpTimer);
+            binaryWriter.Write7BitEncodedInt(HandsCooldown);
             bitWriter.WriteBit(EnteredPhase2);
             bitWriter.WriteBit(EnteredPhase3);
             bitWriter.WriteBit(DoLaserAttack);
+            bitWriter.WriteBit(FirstFrameOfRubble);
+            bitWriter.WriteBit(HandsCheck);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -53,9 +62,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             BerserkSpeedupTimer = binaryReader.Read7BitEncodedInt();
             TeleportTimer = binaryReader.Read7BitEncodedInt();
             WalkingSpeedUpTimer = binaryReader.Read7BitEncodedInt();
+            HandsCooldown = binaryReader.Read7BitEncodedInt();
             EnteredPhase2 = bitReader.ReadBit();
             EnteredPhase3 = bitReader.ReadBit();
             DoLaserAttack = bitReader.ReadBit();
+            FirstFrameOfRubble = bitReader.ReadBit();
+            HandsCheck = bitReader.ReadBit();
         }
 
         public override void SetDefaults(NPC npc)
@@ -77,10 +89,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
         {
+            return false;
+            /*
             if (npc.alpha > 0)
                 return false;
 
             return base.CanHitPlayer(npc, target, ref CooldownSlot);
+            */
         }
 
         public override bool SafePreAI(NPC npc)
@@ -96,8 +111,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (npc.localAI[3] > 0 || EnteredPhase3)
                 npc.localAI[2]++; //cry about it
 
-            const int TeleportThreshold = 780;
-
+            const int TeleportThreshold = 800;
+            
             if (npc.ai[0] != 0)
             {
                 npc.alpha -= 10;
@@ -112,12 +127,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (EnteredPhase3)
                 TeleportTimer++;
 
+            if (!Main.IsItDay())
+                Lighting.AddLight(npc.Center, SoulConfig.Instance.BossRecolors ? TorchID.Red : TorchID.Blue);
+
             if (Main.LocalPlayer.active && !Main.LocalPlayer.ghost && !Main.LocalPlayer.dead && npc.Distance(Main.LocalPlayer.Center) < 1000)
             {
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
                 Main.LocalPlayer.buffImmune[BuffID.Frozen] = true;
+                Main.LocalPlayer.buffImmune[BuffID.Slow] = true;
             }
-                
+            if (npc.ai[0] != 1)
+                HandsCheck = true;
+            if (npc.ai[0] != 2)
+                FirstFrameOfRubble = true;
 
             switch ((int)npc.ai[0])
             {
@@ -168,7 +190,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (npc.alpha == 0)
                             {
                                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
-
+                                foreach (Projectile p in Main.ActiveProjectiles)
+                                {
+                                    if (p.TypeAlive(ProjectileID.DeerclopsRangedProjectile))
+                                        p.Kill();
+                                }
                                 SpawnFreezeHands(npc, Main.player[npc.target]);
                             }
 
@@ -243,6 +269,82 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     break;
 
                 case 1: //ice wave, npc.localai[1] counts them, attacks at ai1=30, last spike 52, ends at ai1=80
+
+                    if (HandsCheck)
+                    {
+                        if (!npc.HasPlayerTarget)
+                        {
+                            HandsCooldown = 3;
+                            HandsCheck = false;
+                            npc.netUpdate = true;
+                        }
+                        else
+                        {
+                            if (HandsCooldown <= 0 && npc.ai[1] == 0 && Main.rand.NextBool(2))
+                            {
+                                HandsCooldown = 1;
+                            }
+                            if (HandsCooldown <= 0)
+                            {
+                                npc.velocity.X = 0;
+                                int attackDuration = 140;
+                                int firstVolleyTime = 10;
+                                int secondVolleyTime = 85;
+                                float distance = 300;
+                                void SpawnHand(Vector2 dir)
+                                {
+                                    if (!FargoSoulsUtil.HostCheck)
+                                        return;
+                                    Vector2 spawnposition = Main.player[npc.target].Center + dir.SafeNormalize(-Vector2.UnitY) * distance;
+                                    float angle = -dir.ToRotation();
+                                    Vector2 spawnvelocity = Vector2.Zero; // angle.ToRotationVector2() * velocity;
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), spawnposition, spawnvelocity, ModContent.ProjectileType<DeerclopsDarknessHand>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 1f), 0f, Main.myPlayer, ai2: 1);
+                                }
+                                if (npc.ai[1] == firstVolleyTime) // first volley
+                                {
+                                    npc.TargetClosest();
+                                    for (int i = -1; i <= 1; i += 2)
+                                    {
+                                        SpawnHand(Vector2.UnitX * i);
+                                    }
+                                    if (EnteredPhase2)
+                                        SpawnHand(-Vector2.UnitY);
+
+                                }
+                                if (npc.ai[1] == secondVolleyTime) // second volley
+                                {
+                                    npc.TargetClosest();
+                                    if (EnteredPhase2)
+                                    {
+                                        for (int i = -1; i <= 1; i += 2)
+                                        {
+                                            SpawnHand(Vector2.UnitX * i - Vector2.UnitY);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        SpawnHand(-Vector2.UnitY);
+                                    }
+                                }
+                                npc.ai[1]++;
+                                if (npc.ai[1] > attackDuration)
+                                {
+                                    HandsCheck = false;
+                                    HandsCooldown = 3;
+                                    npc.ai[1] = 0;
+                                    npc.netUpdate = true;
+                                }
+                                result = false;
+                                break;
+                            }
+                            else
+                            {
+                                HandsCheck = false;
+                                HandsCooldown--;
+                                npc.netUpdate = true;
+                            }
+                        }
+                    }
                     WalkingSpeedUpTimer = 0;
 
                     if (npc.ai[1] < 30)
@@ -251,11 +353,58 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         {
                             npc.ai[1] += 0.5f;
                             npc.frameCounter += 0.5;
+                            
+                            
                         }
                     }
                     break;
 
                 case 2: //debris attack
+                    int num8 = 4;
+                    int telegraphTime = 8 * num8;
+                    ref float timer = ref npc.ai[1];
+                    if (FirstFrameOfRubble)
+                    {
+                        FirstFrameOfRubble = false;
+                        float mult = Main.getGoodWorld ? WorldSavingSystem.MasochistModeReal ? 0f : 0f : 0.3f;
+                        npc.ai[1] = (int)(-telegraphTime * mult);
+                    }
+                    if (timer < telegraphTime)
+                    {
+                        // vanilla code for rubble positions
+                        Point sourceTileCoords = npc.Top.ToTileCoordinates();
+                        int distancedByThisManyTiles = 1;
+                        sourceTileCoords.X += npc.direction * 3;
+                        sourceTileCoords.Y -= 10;
+
+                        for (int count = 0; count < 2; count++)
+                        {
+                            int num10 = 20;
+                            int num11 = Main.rand.Next(1, 60 - telegraphTime);
+                            int num12 = 1;
+                            int num13 = num11 / num12 * num12;
+                            int num14 = num13 + num12;
+                            if (num11 % num12 != 0)
+                            {
+                                num14 = num13;
+                            }
+                            int max = Math.Min(num14, num10);
+                            int whichOne = Main.rand.Next(Math.Min(num13, max - 1), max);
+                            int num2 = whichOne * distancedByThisManyTiles;
+                            int i = Main.rand.Next(0, 35);
+                            int num3 = sourceTileCoords.X + num2 * npc.direction;
+                            int num4 = sourceTileCoords.Y + i;
+                            Vector2 pos = new(num3 * 16 + 8, num4 * 16 - 8);
+                            pos.Y -= 200;
+                            pos.Y = LumUtils.FindGroundVertical(pos.ToTileCoordinates()).ToWorldCoordinates().Y;
+                            pos.X += Main.rand.NextFloat(-30, 30);
+                            int d = Dust.NewDust(pos, 0, 0, DustID.SnowSpray);
+                            Main.dust[d].velocity = new(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-2, -1));
+                            Main.dust[d].noGravity = false;
+                        }
+                    }
+                        
+
                     break;
 
                 case 3: //roar at 30, ends at ai1=60
@@ -435,7 +584,27 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return result;
         }
-
+        public override void FindFrame(NPC npc, int frameHeight)
+        {
+            if (npc.ai[0] == 1)
+            {
+                if (HandsCheck && npc.HasPlayerTarget && HandsCooldown <= 0)
+                {
+                    if (npc.frameCounter > 4)
+                        npc.frameCounter = 4;
+                }
+            }
+            if (npc.ai[0] == 2)
+            {
+                if (npc.frameCounter < 8)
+                    npc.frameCounter = 8;
+                if (npc.ai[1] < 0 && npc.frameCounter > 8)
+                {
+                    npc.frameCounter = 8;
+                }
+                    
+            }
+        }
         public static void SpawnFreezeHands(Entity source, Player targetPlayer)
         {
             if (FargoSoulsUtil.HostCheck)

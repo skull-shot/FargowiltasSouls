@@ -13,8 +13,9 @@ PearlwoodRainbowEffect: Pearlwood Rainbow Trail
 TimberEffect: Concise Timber Force
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Adamantite Speed and Spread
-CobaltEffect: Cobalt Hit Explosion
+CobaltEffect: Cobalt Boosted Jumps
 AncientCobaltEffect: Ancient Cobalt Explosion Jump
+AncientCobaltFallEffect: Ancient Cobalt Fall Speed
 MythrilEffect: Mythril Weapon Speed
 OrichalcumEffect: Orichalcum Petals
 PalladiumHealing: Palladium Healing
@@ -149,7 +150,7 @@ PlantMinionEffect: Plantera Minion
 LihzahrdGroundPound: Lihzahrd Fastfall
 LihzahrdBoulders: Ground Pound Spray
 CelestialRuneAttacks: Celestial Rune Support
-CelestialRuneOnhit: Ancient Visions On Hit
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: Disabled Minion Effects for Damage
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: Reduced Hurtbox Size

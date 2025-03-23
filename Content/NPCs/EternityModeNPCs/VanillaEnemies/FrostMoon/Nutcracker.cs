@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoo
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            if (WorldSavingSystem.MasochistModeReal && target.Male)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && target.Male)
             {
                 target.KillMe(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Nutcracker", target.name)), 999999, 0);
             }
