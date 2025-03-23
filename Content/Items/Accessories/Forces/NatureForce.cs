@@ -46,6 +46,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 player.AddEffect<ShroomiteMushroomPriority>(Item);
             player.AddEffect<ShroomiteShroomEffect>(Item);
         }
+        public override void UpdateVanity(Player player)
+        {
+            player.AddEffect<LightningImmunity>(Item);
+        }
+        public override void UpdateInventory(Player player)
+        {
+            player.AddEffect<LightningImmunity>(Item);
+        }
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             float bonus = 4f * Main.LocalPlayer.statLife / 50;
