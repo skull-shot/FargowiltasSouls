@@ -370,7 +370,7 @@ NeurotoxinBuff: {
 
 NullificationCurseBuff: {
 	DisplayName: Nullification Curse
-	Description: Moon Lord has cycling damage type immunities!
+	Description: Moon Lord has cycling damage type resistances!
 }
 
 OceanicMaulBuff: {
