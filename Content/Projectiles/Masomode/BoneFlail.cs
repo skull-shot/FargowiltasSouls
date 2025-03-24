@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
@@ -44,15 +45,16 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Asset<Texture2D> chain = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/LeashFlailChain");
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
+            Color glowColorBase = AngryBones.weaponGlowColor((int)Projectile.localAI[0]);
             for (int j = 0; j < 10; j++)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 1;
-                Color glowColor = Color.Blue with { A = 0 } * 0.7f * lightLevel;
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 10f).ToRotationVector2() * 1;
+                Color glowColor = glowColorBase with { A = 0 } * 0.7f * lightLevel;
 
 
                 Main.EntitySpriteDraw(t.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, t.Size() / 2, Projectile.scale, SpriteEffects.None);
             }
-            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !Bones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
+            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !AngryBones.AllBones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
             {
 
                 Projectile.ai[0] = -1;
@@ -96,14 +98,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             return false;
             return base.OnTileCollide(oldVelocity);
         }
-        public static int[] Bones = [NPCID.AngryBones,
-            NPCID.AngryBonesBig,
-            NPCID.AngryBonesBigHelmet,
-            NPCID.AngryBonesBigMuscle];
         public override void AI()
         {
             
-            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !Bones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
+            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !AngryBones.AllBones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
             {
                 
                 Projectile.ai[0] = -1;
@@ -122,6 +120,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             else
             {
                 NPC owner = Main.npc[(int)Projectile.ai[0]];
+                Projectile.localAI[0] = owner.type;
                 if (Projectile.ai[2] == 0)
                 {
                     owner.knockBackResist = 0.3f;

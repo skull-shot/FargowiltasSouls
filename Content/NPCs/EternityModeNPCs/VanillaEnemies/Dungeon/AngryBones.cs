@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Terraria;
 using Terraria.Audio;
@@ -16,13 +17,43 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
     public class AngryBones : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(
-            NPCID.AngryBones,
-            NPCID.AngryBonesBig,
-            NPCID.AngryBonesBigHelmet,
-            NPCID.AngryBonesBigMuscle
+            AllBones
         );
 
         //public int BoneSprayTimer;
+        public static int[] AngryBone = [NPCID.AngryBones,
+            NPCID.AngryBonesBig,
+            NPCID.AngryBonesBigHelmet,
+            NPCID.AngryBonesBigMuscle];
+        public static int[] BlueBone = [NPCID.BlueArmoredBones,
+        NPCID.BlueArmoredBonesMace,
+        NPCID.BlueArmoredBonesNoPants,
+        NPCID.BlueArmoredBonesSword];
+        public static int[] HellBone = [NPCID.HellArmoredBones,
+        NPCID.HellArmoredBonesMace,
+        NPCID.HellArmoredBonesSpikeShield,
+        NPCID.HellArmoredBonesSword];
+        public static int[] RustBone = [NPCID.RustyArmoredBonesAxe,
+        NPCID.RustyArmoredBonesFlail,
+        NPCID.RustyArmoredBonesSword,
+        NPCID.RustyArmoredBonesSwordNoArmor];
+        public static int[] AllBones = [.. AngryBone, .. BlueBone, .. HellBone, .. RustBone];
+        public static Color weaponGlowColor(int npcType)
+        {
+            if (BlueBone.Contains(npcType))
+            {
+                return Color.Blue;
+            }
+            if (HellBone.Contains(npcType))
+            {
+                return Color.Orange;
+            }
+            if (RustBone.Contains(npcType))
+            {
+                return Color.Red;
+            }
+            return Color.White;
+        }
         public int BabyTimer;
         public override void OnSpawn(NPC npc, IEntitySource source)
         {

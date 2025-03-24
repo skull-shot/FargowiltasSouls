@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !Bones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
+            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !AngryBones.AllBones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
             {
 
                 Projectile.ai[0] = -1;
@@ -47,17 +47,18 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             }
 
             SpriteEffects effects = SpriteEffects.None;
-            
+            Color glowColorBase = AngryBones.weaponGlowColor((int)Projectile.localAI[0]);
             if (Projectile.ai[0] > -1 && Main.npc[(int)Projectile.ai[0]].spriteDirection == -1)
             {
+                
                 effects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
                 origin = t.Size() - new Vector2(36, 36);
             }
 
             for (int j = 0; j < 10; j++)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 1 ;
-                Color glowColor = Color.Blue with { A = 0 } * 0.7f * lightLevel;
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 10f).ToRotationVector2() * 1 ;
+                Color glowColor = glowColorBase with { A = 0 } * 0.7f * lightLevel;
 
 
                 Main.EntitySpriteDraw(head.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, origin, Projectile.scale, effects);
@@ -110,14 +111,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             
             return base.OnTileCollide(oldVelocity);
         }
-        public static int[] Bones = [NPCID.AngryBones,
-            NPCID.AngryBonesBig,
-            NPCID.AngryBonesBigHelmet,
-            NPCID.AngryBonesBigMuscle];
         public override void AI()
         {
             
-            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !Bones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
+            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !AngryBones.AllBones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
             {
                 
                 Projectile.ai[0] = -1;
@@ -135,8 +132,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             }
             else
             {
-                Projectile.timeLeft = 200;
                 NPC owner = Main.npc[(int)Projectile.ai[0]];
+                Projectile.localAI[0] = owner.type;
+                Projectile.timeLeft = 200;
+                
                 Projectile.Center = owner.Center;
                 Projectile.velocity = Vector2.Zero;
 
