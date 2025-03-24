@@ -1,6 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Eternity Moon Lord: Wrong class now only deals 40% damage instead of nothing (20% maso, 0% ftw)
-Mutant's Gift and Difficulty Selector now state that you cannot die to debuffs unless in Masochist Mode
-Reduced Ancient Cobalt Enchant base explosion damage
-Advisor no longer recommends Ancient Hallow Enchant too early
-Fixed King and Queen Slime still drawing shaders when resprites are disabled
+Updated Nullification Curse description
+Tweaked Iron Enchant description to clarify pickups being specifically pickup items
+Updated Children of Nature's Eulogy buff name
+Fixed Voltaic Chain not working correctly in multiplayer
+Fixed Rain Explosion still dealing damage with Lightning Immunity and Force of Nature not granting it passively
