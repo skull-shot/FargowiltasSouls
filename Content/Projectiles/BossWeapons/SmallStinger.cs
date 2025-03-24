@@ -1,21 +1,27 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Masomode;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class SmallStinger : ModProjectile
+    public class SmallStinger : ModProjectile, IPixelatedPrimitiveRenderer
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Small Stinger");
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 1;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
@@ -28,18 +34,21 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 120;
             Projectile.width = 10;
             Projectile.height = 18;
-            Projectile.scale *= 1.5f;
-            Projectile.height = (int)(Projectile.height * 1.5f);
-            Projectile.width = (int)(Projectile.width * 1.5f);
+            //Projectile.scale *= 1.5f;
+            Projectile.height = 28;
+            Projectile.width = 14;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
         }
 
+        public static float TrailFadeTime => 20;
         public override void AI()
         {
             //stuck in enemy
             if (Projectile.ai[0] == 1)
             {
+                if (Projectile.ai[2] < TrailFadeTime) // trail timer
+                    Projectile.ai[2]++;
                 Projectile.aiStyle = -1;
 
                 Projectile.ignoreWater = true;
@@ -122,12 +131,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 15; i++)
             {
-                int num92 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, Projectile.velocity.X, Projectile.velocity.Y, 0, default, 0.9f);
-                Main.dust[num92].noGravity = true;
-                Main.dust[num92].velocity *= 0.25f;
-                Main.dust[num92].fadeIn = 1.3f;
+                //int num92 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs, Projectile.velocity.X, Projectile.velocity.Y, 0, default, 0.9f);
+                //Main.dust[num92].noGravity = true;
+                //Main.dust[num92].velocity *= 0.25f;
+                //Main.dust[num92].fadeIn = 1.3f;
+
+                Particle p = new RectangleParticle(Projectile.Center, Projectile.velocity * 0.7f + Main.rand.NextVector2Circular(15, 45), Color.Yellow, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
+                p.Spawn();
             }
             SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
         }
@@ -135,7 +147,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         private static void DustRing(Projectile proj, int max)
         {
             //dust
-            for (int i = 0; i < max; i++)
+            /*for (int i = 0; i < max; i++)
             {
                 Vector2 vector6 = Vector2.UnitY * 5f;
                 vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + proj.Center;
@@ -143,8 +155,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.CorruptGibs, 0f, 0f, 0, default, 1.5f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity = vector7;
-            }
+            }*/
         }
+
 
         public override bool PreDraw(ref Color lightColor)
         {
@@ -158,25 +171,30 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             int num157 = 7;
             int num159 = 0;
             float num160 = 0f;
+            Color yellow = Projectile.GetAlpha(Color.Orange);
 
+            Color color26 = lightColor;
+            color26 = Projectile.GetAlpha(color26);
 
             int num161 = num159;
-            while (Projectile.ai[0] != 1 && num161 < num157) //doesnt draw trail while stuck in enemy
-            {
-                Color color26 = color25;
-                color26 = Projectile.GetAlpha(color26);
-                float num164 = num157 - num161;
-                color26 *= num164 / (ProjectileID.Sets.TrailCacheLength[Projectile.type] * 1.5f);
-                color26 *= 0.75f;
-                Vector2 value4 = Projectile.oldPos[num161];
-                float num165 = Projectile.rotation;
-                SpriteEffects effects = spriteEffects;
-                Main.EntitySpriteDraw(texture2D3, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, num165 + Projectile.rotation * num160 * (num161 - 1) * -(float)spriteEffects.HasFlag(SpriteEffects.FlipHorizontally).ToDirectionInt(), origin2, Projectile.scale * 0.8f, effects, 0);
-                num161++;
-            }
 
-            Color color29 = Projectile.GetAlpha(color25);
-            Main.EntitySpriteDraw(texture2D3, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color29, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
+            /*for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
+            {
+                Vector2 value4 = Projectile.oldPos[i];
+                float num165 = Projectile.oldRot[i];
+                if (i < 4)
+                {
+                    Color color27 = color26;
+                    color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                    Main.EntitySpriteDraw(texture2D3, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27 * 0.4f, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
+                }
+            }*/
+
+            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SmallStingerGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+
+            Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0.5f, Projectile.gfxOffY - 0.1f), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.Orange, Projectile.rotation, origin2, Projectile.scale * 1.1f * Main.cursorScale, spriteEffects, 0);
+            Main.EntitySpriteDraw(texture2D3, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
+            
             return false;
         }
 
@@ -186,6 +204,27 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             width = 8;
             height = 8;
             return true;
+        }
+
+        public float WidthFunction(float completionRatio)
+        {
+            float baseWidth = Projectile.width * 0.8f;
+            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
+        }
+
+        public Color ColorFunction(float completionRatio)
+        {
+            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.StingerTrail");
+            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            float progress = 1 - (Projectile.ai[2] / TrailFadeTime);
+            int num = (int)Math.Round(Projectile.oldPos.Length * progress);
+            Vector2[] trail = Projectile.oldPos.Take(num).ToArray();
+            PrimitiveRenderer.RenderTrail(trail, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }
 }

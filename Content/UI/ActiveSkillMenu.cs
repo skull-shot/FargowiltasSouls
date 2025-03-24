@@ -141,6 +141,7 @@ namespace FargowiltasSouls.Content.UI
             FargoSoulsPlayer sPlayer = Main.LocalPlayer.FargoSouls();
             AccessoryEffectPlayer aPlayer = Main.LocalPlayer.AccessoryEffects();
 
+            /*
             for (int i = 0; i < sPlayer.ActiveSkills.Length; i++)
             {
                 var skill = sPlayer.ActiveSkills[i];
@@ -152,6 +153,7 @@ namespace FargowiltasSouls.Content.UI
                         sPlayer.SyncActiveSkill(i);
                 }
             }
+            */
 
             // Equipped boxes
             float spacing = 6;

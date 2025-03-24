@@ -1,7 +1,12 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -55,7 +60,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
 
         public override bool CheckDead(NPC npc)
         {
-            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee))
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee) && Main.npc[EModeGlobalNPC.beeBoss] is NPC n && n.TryGetGlobalNPC(out QueenBee qb) && qb.RunEmodeAI)
             {
                 npc.life = 0;
                 npc.HitEffect();
@@ -71,6 +76,24 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
 
             target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
             target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);
+        }
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee) && Main.npc[EModeGlobalNPC.beeBoss] is NPC n && n.TryGetGlobalNPC(out QueenBee qb) && qb.RunEmodeAI)
+            {
+                SpriteEffects effects = npc.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f;
+                    Color glowColor = Color.Goldenrod;
+
+                    Main.EntitySpriteDraw(TextureAssets.Npc[npc.type].Value, npc.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, npc.gfxOffY), npc.frame, glowColor,
+                        npc.rotation, npc.frame.Size() / 2, npc.scale, effects, 0);
+                }
+                Main.spriteBatch.ResetToDefault();
+            }
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
     }
 }

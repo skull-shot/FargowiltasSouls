@@ -19,6 +19,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             base.AI(npc);
 
             //damage = 28/35, ID.VenomArrow
+            npc.ai[1] += 0.5f;
             if (npc.ai[2] > 0f && npc.ai[1] <= 40f)
             {
                 if (FargoSoulsUtil.HostCheck)

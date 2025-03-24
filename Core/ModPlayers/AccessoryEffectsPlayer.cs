@@ -654,7 +654,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (AbominableWandRevived) //has been revived already
             {
-                if (Player.statLife >= Player.statLifeMax2) //can revive again
+                if (Player.statLife >= Player.statLifeMax2 && Player.statLife >= 400) //can revive again
                 {
                     AbominableWandRevived = false;
 
@@ -967,8 +967,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem;
             if (key.GetAssignedKeys().Any())
                 holdingKey = key.Current;
+            bool preventRightClick = Main.HoveringOverAnNPC || Main.SmartInteractShowingGenuine;
+            if (key != null)
+                preventRightClick = false;
             Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
-                && !Main.HoveringOverAnNPC && !Main.SmartInteractShowingGenuine && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && holdingKey;
+                && !preventRightClick && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0 && holdingKey;
 
             if (Player.shieldRaised)
             {

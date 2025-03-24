@@ -37,10 +37,12 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         bool fading = false;
         public ref float Timer => ref Projectile.ai[0];
         public ref float PlayerID => ref Projectile.ai[1];
+        public ref float DeerclopsCheck => ref Projectile.ai[2];
+        public bool FromDeerclops => DeerclopsCheck == 1;
 
-        int telegraphTime = 120;
-        int aimTime = 30;
-        int chargeTime = 120;
+        int telegraphTime => FromDeerclops ? 20 : 120;
+        int aimTime => FromDeerclops ? 20 : 30;
+        int chargeTime => FromDeerclops ? 30 : 120;
 
 
         public override void AI()
@@ -83,10 +85,13 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 if (!player.Alive())
                     return;
 
-                Color light = Lighting.GetColor(player.Center.ToTileCoordinates());
-                float lightLevel = light.R + light.G + light.B;
-                if (lightLevel > 500)
-                    fading = true;
+                if (!FromDeerclops)
+                {
+                    Color light = Lighting.GetColor(player.Center.ToTileCoordinates());
+                    float lightLevel = light.R + light.G + light.B;
+                    if (lightLevel > 500)
+                        fading = true;
+                }
 
                 Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(Projectile.DirectionTo(player.Center).ToRotation(), 0.1f).ToRotation();
                 Projectile.velocity *= 0.96f;
@@ -106,8 +111,12 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Player player = Main.player[(int)PlayerID];
                 if (!player.Alive())
                     return;
-                Projectile.velocity += Projectile.DirectionTo(player.Center) * 0.1f;
-                Projectile.velocity = Projectile.velocity.ClampLength(0f, 4f);
+                float accel = FromDeerclops ? 4f : 0.1f;
+                float maxSpeed = FromDeerclops ? 16f : 4f;
+                bool shouldAccel = !FromDeerclops || Timer < telegraphTime + aimTime + 5;
+                if (shouldAccel)
+                    Projectile.velocity += Projectile.DirectionTo(player.Center) * accel;
+                Projectile.velocity = Projectile.velocity.ClampLength(0f, maxSpeed);
                 Projectile.rotation = Projectile.velocity.ToRotation();
             }
             else

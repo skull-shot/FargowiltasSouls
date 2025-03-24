@@ -1,4 +1,5 @@
 
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -55,11 +56,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
                 Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, Vector2.Zero, ModContent.ProjectileType<GrazeRing>(), 0, 0f, Main.myPlayer);
         }
-        public static double GrazeCap(FargoSoulsPlayer fargoPlayer) => 0.25 + (fargoPlayer.MutantEyeItem != null ? 0.25 : 0);
+        public static double GrazeCap(FargoSoulsPlayer fargoPlayer) => 0.25 + (fargoPlayer.AbomWandItem != null ? 0.25 * 0.2 : 0) + (fargoPlayer.MutantEyeItem != null ? 0.25 * 0.25 : 0);
         public static void OnGraze(FargoSoulsPlayer fargoPlayer, int damage)
         {
             double grazeCap = GrazeCap(fargoPlayer);
-
             double grazeGain = 0.0125;
             grazeGain *= 0.75;
             if (fargoPlayer.AbomWandItem != null)
@@ -69,8 +69,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             if (fargoPlayer.DeviGrazeBonus > grazeCap)
             {
                 fargoPlayer.DeviGrazeBonus = grazeCap;
-                if (fargoPlayer.StyxSet)
-                    fargoPlayer.StyxMeter += FargoSoulsUtil.HighestDamageTypeScaling(Main.LocalPlayer, damage) * 4; //as if gaining the damage, times SOU crit
+                if (fargoPlayer.StyxSet && fargoPlayer.AbomWandItem != null)
+                    fargoPlayer.StyxMeter += (int)(FargoSoulsUtil.HighestDamageTypeScaling(Main.LocalPlayer, damage) * 4 * StyxCrown.StyxChargeMultiplier(fargoPlayer.Player, StyxCrown.ChargeContext.Graze)); //as if gaining the damage, times SOU crit
             }
             fargoPlayer.DeviGrazeCounter = -1; //reset counter whenever successful graze
 

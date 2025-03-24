@@ -1,3 +1,4 @@
+using Fargowiltas;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Masomode;
@@ -738,12 +739,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.1f;
+                    modifiers.FinalDamage *= 0.4f;
                 }
             }
-            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120 || npc.life < npc.lifeMax / 10)
+            else if (npc.life < npc.lifeMax / 10)
             {
                 modifiers.FinalDamage *= 0.1f;
+            }
+            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
+            {
+                modifiers.FinalDamage *= 0.4f;
             }
         }
 
@@ -1045,7 +1050,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 modifiers.FinalDamage *= 0.3f;
 
             if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.7f;
 
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
@@ -1055,11 +1060,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 0.4f;
+            modifiers.FinalDamage *= 0.7f;
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type])
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
         }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)

@@ -59,18 +59,18 @@ HellFlame.DisplayName: Адское пламя
 HellSkeletron.DisplayName: Адский Скелетрон
 HellSkull2.DisplayName: Адский череп
 HentaiNuke.DisplayName: Фантазматический взрыв
-HentaiSpear.DisplayName: Проникатель
-HentaiSpearArc.DisplayName: Молния
-HentaiSpearBigDeathray.DisplayName: Фантазматический луч смерти
-HentaiSpearDeathray.DisplayName: Фантазматический луч смерти
-HentaiSpearDeathray2.DisplayName: Фантазматический луч смерти
-HentaiSpearDive.DisplayName: Проникатель
-HentaiSpearHeld.DisplayName: Проникатель
-HentaiSpearSpin.DisplayName: Проникатель
-HentaiSpearSpinBoundary.DisplayName: Проникатель
-HentaiSpearSpinThrown.DisplayName: Проникатель
-HentaiSpearThrown.DisplayName: Проникатель
-HentaiSpearWand.DisplayName: Проникатель
+Penetrator.DisplayName: Проникатель
+PenetratorArc.DisplayName: Молния
+PenetratorBigDeathray.DisplayName: Фантазматический луч смерти
+PenetratorDeathray.DisplayName: Фантазматический луч смерти
+PenetratorDeathray2.DisplayName: Фантазматический луч смерти
+PenetratorDive.DisplayName: Проникатель
+PenetratorHeld.DisplayName: Проникатель
+PenetratorSpin.DisplayName: Проникатель
+PenetratorSpinBoundary.DisplayName: Проникатель
+PenetratorSpinThrown.DisplayName: Проникатель
+PenetratorThrown.DisplayName: Проникатель
+PenetratorWand.DisplayName: Проникатель
 HentaiSphereRing.DisplayName: Фантазматическая сфера
 Hungry.DisplayName: Голодный
 Hungry2.DisplayName: Голодный
@@ -580,7 +580,7 @@ AbomFlocko2.DisplayName: Супер-флоко
 AbomFlocko3.DisplayName: Супер-флоко
 AbomLaser.DisplayName: Лазер
 EyeProjectile.DisplayName: ГлазСнаряд2
-HentaiSpearDash.DisplayName: Проникатель
+PenetratorDash.DisplayName: Проникатель
 CosmosFireball.DisplayName: Космический огненный шар
 CosmosFireball2.DisplayName: Космический огненный шар
 ShadowFlameburst.DisplayName: Огнемёт
@@ -783,3 +783,4 @@ DaiyoLeaf.DisplayName: Листок Дайёсэй
 MystiaNote.DisplayName: Нота Мистии
 MystiaNote2.DisplayName: Нота Мистии 2
 RumiaOrb.DisplayName: Сфера Румии
+EmpressRitual.DisplayName: Ритуал Императрицы

@@ -5,7 +5,11 @@
 // DamagePositive: Increased damage by {0}%
 // Speed: Reduced speed by {0}%
 // SpeedPositive: Increased speed by {0}%
-// RodofDiscord: During boss fights, every use takes life
+// Scale: Reduced size by {0}%
+// ScalePositive: Increased size by {0}%
+// RodofDiscord: Chaos State reduces your damage, defense and damage reduction by 40%
+// ChaosState: Reduced damage, defense and damage reduction by 40%
+// RodofHarmony: Can only be obtained after defeating the Mutant
 // Split: Reduced split frequency
 // ChlorophyteBullet: Reduced speed and duration
 // WaterBolt: Cannot be used until Skeletron is defeated
@@ -24,7 +28,7 @@
 // MoonsDrops: Bosses and minibosses drop no items until wave {0}
 // MoonsWaves: Dying decreases wave progress
 // WhipSpeed: Does not benefit from melee speed bonuses
-// WhipStack: Whip buffs/debuffs can't stack
+// WhipStack: Tag damage has reduced effect when stacked
 // DefensePrefix: Adjusted prefix stats: reduced defense before Hardmode, +5 max life
 // DefensePrefix_HM: Adjusted prefix stats: +5 max life
 // ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed
@@ -33,8 +37,9 @@
 // SummonMulticlass: Summon damage decreases when you attack using other classes (except in OOA)
 // ShadowDodge: Eternity Mode: Dodging will reduce your attack speed
 // IceBarrier: Eternity Mode: 10% reduced damage
+// SwordRework: Reworked broadsword swing animation
 // SpearRework: Reworked spear swing animation
-// PalladiumPikeRework: Increased size, Greatly increases life regeneration and heal 1 HP (1/2 second cooldown)
+// PalladiumPikeRework: Greatly increases life regeneration and heal 1 HP (1/2 second cooldown)
 // CobaltNaginataRework: Causes a small explosion on striking enemies
 // MythrilHalberdRework: After not attacking for 2 seconds, your next attack deals 8x damage, scaling with attack speed
 // OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount
@@ -50,3 +55,8 @@
 // ChlorophyteSaber: Faster projectiles that slow down on hit
 // JackOLanternLauncher: Increased projectile speed by 50%
 // GolemFist: Deals up to triple damage to enemies the further out the fist is extended
+// Gladius: Hit rate increased to match swing speed
+// FlowerPow: Tripled petal firerate
+// PiranhaGun: Projectile damage updates dynamically
+// ProximityMineLauncher: Projectile damage updates dynamically
+// PygmyStaff: Spears can now pierce once

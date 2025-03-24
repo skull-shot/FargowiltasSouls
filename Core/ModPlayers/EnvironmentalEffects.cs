@@ -16,6 +16,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using Fargowiltas.Content.Buffs;
+using Terraria.GameContent.Events;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -27,13 +28,16 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int LightLevelCounter;
         public int HallowFlipCheckTimer;
 
-       
+
         public override void PreUpdate()
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
 
             if (!Player.Alive())
+                return;
+
+            if (LumUtils.AnyBosses())
                 return;
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
@@ -47,6 +51,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
 
+            
             //water biome effects
             if (WaterWet && !waterEffectImmune)
             {
@@ -179,7 +184,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     
                 //boss environs??
                 //deerclops
-                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses())
+                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses())
                 {
                     DeerclopsHands();
                 }

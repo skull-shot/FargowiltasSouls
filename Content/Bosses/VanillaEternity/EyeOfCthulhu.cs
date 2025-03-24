@@ -652,7 +652,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

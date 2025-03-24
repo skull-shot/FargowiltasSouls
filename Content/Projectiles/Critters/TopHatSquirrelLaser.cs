@@ -21,6 +21,10 @@ namespace FargowiltasSouls.Content.Projectiles.Critters
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 180;
             Projectile.light = 0;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override Color? GetAlpha(Color lightColor)

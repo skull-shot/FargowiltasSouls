@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Core;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -32,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles
             ];
         public override void PostAI(Projectile projectile)
         {
-            if (WorldSavingSystem.EternityMode)
+            if (WorldSavingSystem.EternityMode && SoulConfig.Instance.WeaponReworks)
             {
                 if (ReworkedSpears.Contains(projectile.type))
                 {

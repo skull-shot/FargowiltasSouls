@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -33,6 +33,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.FargoSouls().TimeFreezeImmune = true;
 
             Projectile.hide = true;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 6;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
@@ -139,7 +143,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 6;
+          //target.immune[Projectile.owner] = 6;
             target.AddBuff(BuffID.OnFire, 600);
         }
 

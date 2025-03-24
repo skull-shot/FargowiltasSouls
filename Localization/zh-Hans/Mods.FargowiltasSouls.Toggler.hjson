@@ -13,8 +13,9 @@ PearlwoodRainbowEffect: 珍珠木 彩虹轨迹
 TimberEffect: 简化森林之力
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: 精金 攻击速度和散射
-CobaltEffect: 钴蓝 受击爆炸
+CobaltEffect: 钴蓝 跳跃增强
 AncientCobaltEffect: 远古钴蓝 爆炸跳跃
+AncientCobaltFallEffect: 远古钴蓝 下落速度
 MythrilEffect: 秘银 速度加成
 OrichalcumEffect: 山铜 花瓣
 PalladiumHealing: 钯金 生命恢复
@@ -112,6 +113,7 @@ DevianttHearts: 追踪红心攻击
 AbomWandCrit: 幽灵憎恶攻击
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: 凝胶球
+PlatformFallthroughEffect: 下落直穿平台
 SlimeFallEffect: 提高下落速度
 AgitatingLensEffect: 鲜血镰刀
 AgitatingLensInstall: 狂暴负载
@@ -125,7 +127,6 @@ RainbowHealEffect: 自动使用治疗药水
 NymphPerfumeEffect: 攻击生成心
 SqueakEffect: 击中发出吱吱声
 WretchedPouchEffect: 诅咒暗影焰
-ClippedEffect: 造成折翼减益
 WyvernBalls: 飞行光球
 TribalCharmClickBonus: 部落挂坠点击加成
 StabilizedGravity: 重力稳定
@@ -149,7 +150,7 @@ PlantMinionEffect: 世纪之花召唤物
 LihzahrdGroundPound: 蜥蜴快速下落
 LihzahrdBoulders: 下落坠地火焰
 CelestialRuneAttacks: 天界符文额外攻击
-CelestialRuneOnhit: 受伤产生远古幻象妖
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: 禁用仆从效果来提高伤害
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: 缩小碰撞箱

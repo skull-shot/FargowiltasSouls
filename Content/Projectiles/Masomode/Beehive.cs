@@ -78,9 +78,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                     if (Main.npc[i].active && (Main.npc[i].type == NPCID.Bee || Main.npc[i].type == NPCID.BeeSmall))
                         beeCount++;
                 }
-                for (int i = 0; i < 9; i++)
+                int bees = WorldSavingSystem.MasochistModeReal ? 9 : 4;
+                int beeMax = WorldSavingSystem.MasochistModeReal ? 22 : 10;
+                for (int i = 0; i < bees; i++)
                 {
-                    if (beeCount < 22) //22
+                    if (beeCount < beeMax) //22
                     {
                         int n = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, Main.rand.NextBool() ? NPCID.Bee : NPCID.BeeSmall);
                         if (n != Main.maxNPCs)

@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
+    [AutoloadEquip(EquipType.Face)]
     public class ChaliceoftheMoon : SoulsItem
     {
         public override bool Eternity => true;
@@ -54,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //celestial rune
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.AddEffect<CelestialRuneAttacks>(Item);
-            player.AddEffect<CelestialRuneOnhit>(Item);
+          //player.AddEffect<CelestialRuneOnhit>(Item);
 
             //chalice
             player.buffImmune[ModContent.BuffType<AtrophiedBuff>()] = true;

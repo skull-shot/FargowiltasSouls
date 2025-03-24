@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 var key = keys[i];
                 var skill = ActiveSkills[i];
-                if (skill == null || !aPlayer.Active(skill))
+                if (skill == null || !aPlayer.Equipped(skill) || !aPlayer.Active(skill))
                     continue;
                 if (key.JustPressed)
                     skill.ActiveSkillJustPressed(Player, stunned);

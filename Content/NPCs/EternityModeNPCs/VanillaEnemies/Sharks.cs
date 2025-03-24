@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             base.OnFirstTick(npc);
 
             if (npc.type == NPCID.Shark && Main.rand.NextBool(3) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, Main.rand.Next(1, 5));
+                EModeGlobalNPC.Horde(npc, Main.rand.Next(1, 2));
         }
 
         public override void AI(NPC npc)
@@ -189,29 +189,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             }
 
             return base.GetAlpha(npc, drawColor);
-        }
-    }
-
-    public class SharkTransformables : EModeNPCBehaviour
-    {
-        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(
-            NPCID.Goldfish,
-            NPCID.GoldfishWalker,
-            NPCID.BlueJellyfish,
-            NPCID.GreenJellyfish,
-            NPCID.PinkJellyfish
-        );
-
-        public override void OnFirstTick(NPC npc)
-        {
-            base.OnFirstTick(npc);
-
-            if (Main.rand.NextBool(6)) //random sharks
-            {
-                npc.position = npc.Bottom;
-                npc.Transform(NPCID.Shark);
-                npc.Bottom = npc.position;
-            }
         }
     }
 }

@@ -22,6 +22,7 @@ using FargowiltasSouls.Content.Bosses.Champions.Terra;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -114,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant)
+                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith))
                     {
                         projectile.usesLocalNPCImmunity = false;
                         projectile.localNPCHitCooldown = 0;
@@ -201,7 +202,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     EModeCanHurt = false;
                     break;
                 case ProjectileID.SuperStar:
-                    projectile.penetrate = 7;
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
+                        projectile.penetrate = 7;
                     break;
                 case ProjectileID.WeatherPainShot:
                     projectile.idStaticNPCHitCooldown = 10;
@@ -235,6 +237,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 SourceItemType = itemUse.Item.type;
             }
 
+            switch (SourceItemType)
+            {
+                case ItemID.ProximityMineLauncher:
+                case ItemID.PiranhaGun:
+                    projectile.ContinuouslyUpdateDamageStats = true;
+                    break;
+            }
+
             if (FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
                 if (projectile.minion && !(IgnoreMinionNerf.TryGetValue(projectile.type, out bool ignoreNerf1) && ignoreNerf1))
@@ -256,7 +266,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.VampireHeal:
                     //each lifesteal hits timer again when above 50% life (total, halved lifesteal rate)
-                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 / 3)
+                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 / 3 && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.VampireKnives))
                         Main.player[projectile.owner].lifeSteal -= projectile.ai[1];
 
                     //each lifesteal hits timer again when above 75% life (stacks with above, total 1/3rd lifesteal rate)
@@ -272,7 +282,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
+                case ProjectileID.DeerclopsRangedProjectile:
+                    {
+                        if (projectile.light < 1f)
+                            projectile.light = 1f;
+                    }
+                    break;
+
                 case ProjectileID.DeerclopsIceSpike: //note to future self: these are all mp compatible apparently?
+                    if (sourceProj is Projectile && sourceProj.type == projectile.type == sourceProj.Eternity().altBehaviour)
+                    {
+                        altBehaviour = true;
+                        //float diff = (projectile.Bottom.Y - sourceProj.Bottom.Y);
+                        //projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * diff;
+                    }
 
                     if (WorldSavingSystem.MasochistModeReal)
                         projectile.ai[0] -= 20;
@@ -291,6 +314,10 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     if (projectile.GetSourceNPC() is NPC && projectile.GetSourceNPC().type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
+                        projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
+                        altBehaviour = true;
+
+
                         //is a final spike of the attack
                         if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
@@ -350,6 +377,23 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                     }
+                    break;
+
+                case ProjectileID.PygmySpear:
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
+                    {
+                        if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+                            projectile.penetrate = 2;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.GladiusStab:
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = -1;
                     break;
 
                 default:
@@ -509,7 +553,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 WormPierceResist = 0;
 
             //Slower friendly projectiles in Snow biome
-            if (projectile.friendly)
+            if (projectile.friendly && !ProjectileID.Sets.IsAWhip[projectile.type])
             {
                 Player player = Main.player[projectile.owner];
                 if (player.HasBuff(ModContent.BuffType<HypothermiaBuff>()) && projectile.velocity.Length() > 3f)
@@ -521,7 +565,7 @@ namespace FargowiltasSouls.Content.Projectiles
             counter++;
 
             //delay the very bottom piece of sharknados spawning in, also delays spawning sharkrons
-            if (counter < 30 && projectile.ai[0] == 15 && !WorldSavingSystem.MasochistModeReal
+            if (counter < 30 && projectile.ai[0] == 15
                 && (projectile.type == ProjectileID.Sharknado || projectile.type == ProjectileID.Cthulunado)
                 && projectile.ai[1] == (projectile.type == ProjectileID.Sharknado ? 15 : 24))
             {
@@ -574,6 +618,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.DeerclopsIceSpike:
+                    if (altBehaviour)
+                    {
+                        if (projectile.ai[0] < -40)
+                            projectile.ai[0] = -40;
+                    }
                     if (counter == 2f && projectile.hostile && projectile.ai[1] > 1.3f) //only larger spikes
                     {
                         float ai1 = 1.3f;
@@ -1044,8 +1093,9 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.BombSkeletronPrime: //needs to be set every tick
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.UndeadMiner)
-                        projectile.damage = sourceNPC.damage / 2;
-                    projectile.damage = 40;
+                        projectile.damage = FargoSoulsUtil.ScaledProjectileDamage(sourceNPC.damage, 1.25f);
+                    else
+                        projectile.damage = 40;
                     break;
 
                 case ProjectileID.DD2BetsyFireball: //when spawned, also spawn a phoenix
@@ -1195,6 +1245,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+
+                case ProjectileID.FlowerPow:
+                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.FlowerPow))
+                    {
+                        projectile.localAI[0] += 2f; // tripled petal firerate
+                        projectile.netUpdate = true;
+                    }
+                    break;
             }
         }
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -1240,7 +1298,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (player.Alive())
                     {
                         float maxBonus = 1f;
-                        float bonus = maxBonus * player.Distance(target.Center) / 1200f;
+                        float bonus = maxBonus * player.Distance(target.Center) / 1800f;
                         bonus = MathHelper.Clamp(bonus, 0f, maxBonus);
                         modifiers.FinalDamage *= 1 + bonus;
                     }
@@ -1360,6 +1418,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (NPC.downedGolemBoss && projectile.type == ProjectileID.VortexLightning)
                 modifiers.FinalDamage *= 2;
+
+            if (projectile.type == ProjectileID.DeerclopsIceSpike)
+            {
+                target.longInvince = true;
+            }
         }
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
@@ -1392,6 +1455,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.IceBolt: //Ice Blade projectile
+                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.IceBlade))
                     target.AddBuff(BuffID.Frostburn, 60 * 3);
                     break;
                 case ProjectileID.SporeCloud:
@@ -1766,7 +1830,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.NebulaSphere:
                 case ProjectileID.NebulaLaser:
                 case ProjectileID.NebulaBolt:
-                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+                    target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
                     target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
                     break;
 

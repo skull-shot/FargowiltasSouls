@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
         }
         public override bool PreKill(NPC npc)

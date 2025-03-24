@@ -86,6 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Slimed] = true;
 
             player.AddEffect<SlimeFallEffect>(Item);
+            player.AddEffect<PlatformFallthroughEffect>(Item);
 
             /*
             if (player.AddEffect<SlimyShieldEffect>(Item))
@@ -180,7 +181,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 player.FargoSouls().DevianttHearts = true;*/
 
             //dragon fang
-            player.AddEffect<ClippedEffect>(Item);
 
             //frigid gemstone
             player.buffImmune[BuffID.Frostburn] = true;
@@ -276,7 +276,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             if (fargoPlayer.AdditionalAttacksTimer > 0)
                 fargoPlayer.AdditionalAttacksTimer -= 2;
             */
-            player.AddEffect<CelestialRuneOnhit>(Item);
+          //player.AddEffect<CelestialRuneOnhit>(Item);
 
             //chalice
             fargoPlayer.MoonChalice = true;

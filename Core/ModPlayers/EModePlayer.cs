@@ -24,7 +24,6 @@ namespace FargowiltasSouls.Core.ModPlayers
     public partial class EModePlayer : ModPlayer
     {
         public bool ReduceMasomodeMinionNerf;
-        public bool HasWhipBuff;
         public const int MaxMasomodeMinionNerfTimer = 300;
         public const int MaxShorterDebuffsTimer = 60;
         public int MasomodeCrystalTimer;
@@ -39,11 +38,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int Respawns;
 
         public bool WaterWet => Player.wet && !Player.lavaWet && !Player.honeyWet && !Player.shimmerWet && !Player.FargoSouls().MutantAntibodies;
-
         public override void ResetEffects()
         {
             ReduceMasomodeMinionNerf = false;
-            HasWhipBuff = false;
 
             if (!LumUtils.AnyBosses())
                 Respawns = 0;
@@ -144,6 +141,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
+            if (Player.chaosState)
+            {
+                Player.statDefense *= 0.6f;
+                Player.endurance -= 0.4f;
+                Player.GetDamage(DamageClass.Generic) *= 0.6f;
+            }
         }
 
         public override void UpdateBadLifeRegen()
@@ -172,7 +175,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 CrossNecklaceTimer = 0;
             }
 
-            if (Player.iceBarrier)
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
                 Player.GetDamage(DamageClass.Generic) -= 0.10f;
 
             if (Player.setSquireT2 || Player.setSquireT3 || Player.setMonkT2 || Player.setMonkT3 || Player.setHuntressT2 || Player.setHuntressT3 || Player.setApprenticeT2 || Player.setApprenticeT3 || Player.setForbidden)
@@ -259,7 +262,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void ShadowDodgeNerf()
         {
-            if (Player.shadowDodge) //prehurt hook not called on titanium dodge
+            if (Player.shadowDodge && EmodeItemBalance.HasEmodeChange(Player, ItemID.HallowedPlateMail)) //prehurt hook not called on titanium dodge
                 Player.AddBuff(ModContent.BuffType<HolyPriceBuff>(), 600);
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)

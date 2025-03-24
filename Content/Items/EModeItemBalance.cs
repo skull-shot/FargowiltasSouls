@@ -1,10 +1,13 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinMoon;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -22,14 +25,20 @@ namespace FargowiltasSouls.Content.Items
         /// Default extra is empty. <br />
         /// Number and extra is used on the first tooltip line.
         /// </summary>
-        public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
+        public static EModeChange EmodeBalance(ref Item item, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra) // don't change this method definition in order to not break detours
         {
-            switch (item.type)
+            return EmodeBalancePerID(item.type, ref balanceNumber, ref balanceTextKeys, ref extra);
+        }
+        public static EModeChange EmodeBalancePerID(int itemType, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
+        {
+            switch (itemType)
             {
                 case ItemID.RodofDiscord:
-                case ItemID.RodOfHarmony:
                     balanceTextKeys = ["RodofDiscord"];
                     return EModeChange.Nerf;
+                case ItemID.RodOfHarmony:
+                    balanceTextKeys = ["RodofHarmony"];
+                    return EModeChange.Neutral;
 
                 case ItemID.WaterBolt:
                     if (!NPC.downedBoss3)
@@ -128,7 +137,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
-
+                    /*
                 case ItemID.NorthPole:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.12f;
@@ -138,7 +147,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.1f;
                     return EModeChange.Buff;
-
+                    */
                 case ItemID.Razorpine:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.8f;
@@ -152,16 +161,6 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
-                    return EModeChange.Nerf;
-
-                case ItemID.TheHorsemansBlade:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.12f;
-                    return EModeChange.Nerf;
-
-                case ItemID.Uzi:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.88f;
                     return EModeChange.Nerf;
 
                 case ItemID.BeeGun:
@@ -209,7 +208,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Nerf;
 
                 case ItemID.SlimeStaff:
-                case ItemID.ImpStaff:
+                //case ItemID.ImpStaff:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.1f;
                     return EModeChange.Buff;
@@ -333,11 +332,30 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
                 case ItemID.PalladiumPike:
                     balanceNumber = -1;
-                    balanceTextKeys = ["SpearRework", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["SpearRework", "Scale", "PalladiumPikeRework"];
                     return EModeChange.Buff;
                 case ItemID.PalladiumSword:
                     balanceNumber = 1.25f;
-                    balanceTextKeys = ["Speed", "PalladiumPikeRework"];
+                    extra = "0.4";
+                    balanceTextKeys = ["Speed", "Scale", "PalladiumPikeRework"];
+                    return EModeChange.Buff;
+
+                case ItemID.CopperBroadsword:
+                case ItemID.TinBroadsword:
+                case ItemID.IronBroadsword:
+                case ItemID.LeadBroadsword:
+                case ItemID.SilverBroadsword:
+                case ItemID.TungstenBroadsword:
+                case ItemID.GoldBroadsword:
+                case ItemID.PlatinumBroadsword:
+                    extra = "0.3";
+                    balanceTextKeys = ["Scale"];
+                    return EModeChange.Buff;
+
+                case ItemID.Bladetongue:
+                    extra = "0.3";
+                    balanceTextKeys = ["Scale"];
                     return EModeChange.Buff;
 
                 case ItemID.TitaniumSword:
@@ -368,8 +386,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.ObsidianSwordfish:
-                    balanceNumber = 0.8f;
-                    balanceTextKeys = ["Damage", "SpearRework"];
+                    balanceNumber = 1;
+                    balanceTextKeys = ["SpearRework"];
                     return EModeChange.Buff;
                 #endregion
 
@@ -391,8 +409,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.Gladius:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.25f;
+                    balanceTextKeys = ["Gladius"];
                     return EModeChange.Buff;
                     
                 case ItemID.GolemFist:
@@ -436,10 +453,90 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.TempestStaff:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
+                case ItemID.BouncingShield: //sergeant united shield
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.DaedalusStormbow:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.7f;
                     return EModeChange.Nerf;
+
+                case ItemID.FlowerPow:
+                    balanceTextKeys = ["FlowerPow"];
+                    return EModeChange.Buff;
+                    
+                case ItemID.GrenadeLauncher:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.Keybrand:
+                    balanceTextKeys = ["Scale"];
+                    extra = "0.3";
+                    return EModeChange.Buff;
+
+                case ItemID.MaceWhip: // Morning Star
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.NettleBurst:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.5f;
+                    return EModeChange.Buff;
+
+                case ItemID.PaladinsHammer:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
+                case ItemID.PiranhaGun:
+                    balanceTextKeys = ["PiranhaGun"];
+                    return EModeChange.Neutral;
+                    
+                case ItemID.ProximityMineLauncher:
+                    balanceTextKeys = ["ProximityMineLauncher"];
+                    return EModeChange.Neutral;
+
+                case ItemID.PygmyStaff:
+                    balanceTextKeys = ["PygmyStaff"];
+                    return EModeChange.Buff;
+
+                case ItemID.RocketLauncher:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
+                case ItemID.SpectreStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
+                    return EModeChange.Nerf;
+
+                case ItemID.TacticalShotgun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
+
+                case ItemID.ToxicFlask:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.2f;
+                    return EModeChange.Buff;
                 default:
                     return EModeChange.None;
             }
+        }
+
+        public static bool HasEmodeChange(Player player, int itemID)
+        {
+            string extra = string.Empty;
+            float balanceNumber = -1;
+            string[] balanceTextKeys = null;
+            EModeChange balance = EmodeBalancePerID(itemID, ref balanceNumber, ref balanceTextKeys, ref extra);
+            return balance == EModeChange.None;
         }
 
         public static void BalanceWeaponStats(Player player, Item item, ref StatModifier damage)
@@ -512,6 +609,7 @@ namespace FargowiltasSouls.Content.Items
             string[] balanceTextKeys = null;
             EModeChange balance = EmodeBalance(ref item, ref balanceNumber, ref balanceTextKeys, ref extra);
 
+
             if (balanceTextKeys != null)
             {
                 for (int i = 0; i < balanceTextKeys.Length; i++)
@@ -537,18 +635,31 @@ namespace FargowiltasSouls.Content.Items
                                 break;
                             }
 
+                        case "Scale":
+                            {
+                                float scaleNumber = float.Parse(extra, System.Globalization.NumberStyles.Float, CultureInfo.InvariantCulture);
+                                EModeChange change = scaleNumber > 0 ? EModeChange.Buff : scaleNumber < 1 ? EModeChange.Nerf : EModeChange.Neutral;
+                                int amount = (int)Math.Round(scaleNumber * 100f);
+                                string key = change == EModeChange.Buff ? "ScalePositive" : "Scale";
+                                ItemBalance(tooltips, change, key, amount);
+                                break;
+                            }
+
                         case "DamageNoTooltip":
                         case "SpeedNoTooltip":
+                        case "ScaleNoTooltip":
                             break;
 
                         default:
                             {
+                                if (!SoulConfig.Instance.WeaponReworks && balanceTextKeys[i] == "SpearRework")
+                                    continue;
                                 EModeChange change = balance;
                                 if (balanceNumber != -1 && balanceTextKeys != null && i == 0)
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], (int)balanceNumber);
                                 }
-                                else if (extra != string.Empty && balanceTextKeys != null && i == 0)
+                                else if (extra != string.Empty && balanceTextKeys != null && i == 0 && !balanceTextKeys.Any(k => k == "Scale" || k == "ScaleNoTooltip"))
                                 {
                                     ItemBalance(tooltips, change, balanceTextKeys[i], extra);
                                 }
@@ -568,6 +679,10 @@ namespace FargowiltasSouls.Content.Items
                 ItemBalance(tooltips, EModeChange.Neutral, "ManaPots");
             }
             */
+            if (SwordGlobalItem.BroadswordRework(item))
+            {
+                ItemBalance(tooltips, EModeChange.Buff, "SwordRework");
+            }
             if (item.shoot > ProjectileID.None && ProjectileID.Sets.IsAWhip[item.shoot])
             {
                 if (!Main.LocalPlayer.HasEffect<TikiEffect>())

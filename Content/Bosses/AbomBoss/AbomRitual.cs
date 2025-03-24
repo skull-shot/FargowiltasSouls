@@ -59,8 +59,36 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Projectile.Opacity = 0.5f;
             if (VisualScale < 1)
                 VisualScale += 0.01f;
-        }
 
+            if (!WorldSavingSystem.MasochistModeReal)
+            {
+                Player player = Main.LocalPlayer;
+                if (player.active && !player.dead && !player.ghost)
+                {
+                    float distance = player.Distance(Projectile.Center);
+                    if (distance > threshold && distance < threshold * 1.4f)
+                    {
+                        if (WorldSavingSystem.EternityMode)
+                        {
+                            player.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 70);
+                            //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
+                            //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
+                        }
+                        player.buffImmune[BuffID.Burning] = false;
+                        player.AddBuff(BuffID.Bleeding, 70);
+                        player.AddBuff(BuffID.Burning, 70);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+        public override bool CanHitPlayer(Player target)
+        {
+            return WorldSavingSystem.MasochistModeReal ? base.CanHitPlayer(target) : false;
+        }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             base.OnHitPlayer(target, info);
@@ -69,7 +97,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
                 //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
+                //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
             }
             target.AddBuff(BuffID.Bleeding, 600);
         }

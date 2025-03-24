@@ -249,7 +249,11 @@ HallowIlluminatedBuff: {
 
 FusedBuff: {
 	DisplayName: 导火线
-	Description: 你和爆炸有个约会
+	Description:
+		'''
+		你和爆炸有个约会
+		站定不动1秒以拆除引信
+		'''
 }
 
 GodEaterBuff: {

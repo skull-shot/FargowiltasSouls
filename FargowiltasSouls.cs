@@ -174,6 +174,14 @@ namespace FargowiltasSouls
                 GameShaders.Misc["GaiaShader"] = new MiscShaderData(gaiaRef, "GaiaGlow");
                 GameShaders.Armor.BindShader(ModContent.ItemType<GaiaDye>(), new ArmorShaderData(gaiaRef, "GaiaArmor").UseColor(new Color(0.44f, 1, 0.09f)).UseSecondaryColor(new Color(0.5f, 1f, 0.9f)));
 
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime"));
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage2("Images/Extra_" + 179);
+                
+                GameShaders.Misc["FargowiltasSouls:KingSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
+                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityKingSlime"));
+                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage2("Images/Extra_" + 179);
+
                 //GameShaders.Misc["PulseUpwards"] = new MiscShaderData(textRef, "PulseUpwards");
                 //GameShaders.Misc["PulseDiagonal"] = new MiscShaderData(textRef, "PulseDiagonal");
                 //GameShaders.Misc["PulseCircle"] = new MiscShaderData(textRef, "PulseCircle");
@@ -408,7 +416,7 @@ namespace FargowiltasSouls
                     69,
                     70,
                     80,
-                    88,
+                    //88, this is chaos state
                     //BuffID.ManaSickness, this is mana sickness, why was it here?
                     103,
                     137,

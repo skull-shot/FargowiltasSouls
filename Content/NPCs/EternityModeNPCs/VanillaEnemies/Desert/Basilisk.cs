@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -30,7 +31,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
-            target.FargoSouls().AddBuffNoStack(BuffID.Stoned, 60);
+            if (WorldSavingSystem.MasochistModeReal)
+                target.FargoSouls().AddBuffNoStack(BuffID.Stoned, 60);
         }
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)

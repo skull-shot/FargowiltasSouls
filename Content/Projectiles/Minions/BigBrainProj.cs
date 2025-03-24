@@ -72,14 +72,15 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
             if (targetting)
             {
-                if (++Projectile.localAI[0] > 5)
+                float frequency = 60f / Projectile.minionSlots;
+                if (++Projectile.localAI[0] > frequency)
                 {
                     Projectile.localAI[0] = 0;
 
                     if (Projectile.owner == Main.myPlayer)
                     {
                         const float speed = 18f;
-                        int damage = (int)(Projectile.damage * Projectile.scale); //damage directly proportional to Projectile scale, change later???
+                        int damage = (int)(Projectile.damage);
                         int type = ModContent.ProjectileType<BigBrainIllusion>();
 
                         //Vector2 spawnpos = targetnpc.Center + Main.rand.NextVector2CircularEdge(150, 150);

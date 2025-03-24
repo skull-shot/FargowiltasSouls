@@ -30,6 +30,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.scale = 2f;
             Projectile.timeLeft = 120;
             Projectile.extraUpdates = 1;
+            
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 8;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()
@@ -39,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.immune[Projectile.owner] = 8;
+          //target.immune[Projectile.owner] = 8;
             target.AddBuff(ModContent.BuffType<HellFireBuff>(), 60);
         }
 

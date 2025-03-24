@@ -12,6 +12,7 @@ using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
+using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Content.Projectiles.Minions;
@@ -96,6 +97,8 @@ namespace FargowiltasSouls.Content.Projectiles
         public float HeldProjMemorizedDamage;
         public float HeldProjMemorizedCrit;
         public bool Reflected;
+
+        public float TagStackMultiplier = 1;
 
         public static List<int> ShroomiteBlacklist =
         [
@@ -266,7 +269,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     //projs shot by tiki-buffed projs will also inherit the tiki buff
                     if (sourceProj3.FargoSouls().TikiTagged)
                     {
-                        //TikiTagged = true;
+                        TikiTagged = true;
+                        sourceProj3.FargoSouls().TikiTagged = false;
                     }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
@@ -633,6 +637,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     }
                 }
+
+                
             }
 
             if (ChilledTimer > 0)
@@ -1225,7 +1231,8 @@ namespace FargowiltasSouls.Content.Projectiles
             if (ProjectileID.Sets.IsAWhip[projectile.type] && projectile.owner == Main.myPlayer
                 && Main.player[projectile.owner].HasEffect<TikiEffect>())
             {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && !p.hostile && p.owner == Main.myPlayer
+                foreach (Projectile p in Main.projectile.Where(p => p.active && (p.friendly || FargoSoulsUtil.IsSummonDamage(p, true, false)) 
+                    && !p.hostile && p.owner == Main.myPlayer
                     && !ProjectileID.Sets.IsAWhip[p.type]
                     && projectile.Colliding(projectile.Hitbox, p.Hitbox)))
                 {
@@ -1268,6 +1275,13 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
         }
+
+        public static int[] FancySwings => [
+            ProjectileID.Excalibur,
+            ProjectileID.TrueExcalibur,
+            ProjectileID.TerraBlade2,
+            ProjectileID.TheHorsemansBlade
+        ];
 
         public override void PostAI(Projectile projectile)
         {
@@ -1342,7 +1356,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
             {
-                modPlayer.HuntressStage = 0;
+                modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 HuntressProj = -1;
                 //sound effect
@@ -1357,6 +1371,28 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
+            }
+
+            if (projectile.owner == player.whoAmI)
+            {
+                if (FancySwings.Contains(projectile.type))
+                {
+                    if (player.FargoSouls().swingDirection != player.direction)
+                    {
+                        projectile.ai[0] = -player.direction;
+                    }
+
+                    float rotation = -90;
+                    if (projectile.ai[0] == -1 && player.direction == -1)
+                    {
+                        rotation = -180;
+                    }
+                    else if (projectile.ai[0] == -1 && player.direction == 1)
+                    {
+                        rotation = 0;
+                    }
+                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
+                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
@@ -1625,7 +1661,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1) //dying without hitting anything
             {
-                modPlayer.HuntressStage = 0;
+                modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 //sound effect
             }

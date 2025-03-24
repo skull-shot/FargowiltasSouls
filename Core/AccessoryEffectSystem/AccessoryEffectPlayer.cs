@@ -177,8 +177,8 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
                     effect.OnHitNPCWithProj(Player, proj, target, hit, damageDone);
             }
 
-            if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-                TryAdditionalAttacks(proj.damage, proj.DamageType);
+          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             OnHitNPCEither(target, hit, proj.DamageType, projectile: proj);
 

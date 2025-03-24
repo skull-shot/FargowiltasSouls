@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,7 +21,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantNuke_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/FishNuke";
+            "FargowiltasSouls/Content/Bosses/MutantBoss/MutantNuke";
 
         public override void SetStaticDefaults()
         {
@@ -33,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             Projectile.width = 20;
             Projectile.height = 20;
-            Projectile.scale = 4f;
+            Projectile.scale = FargoSoulsUtil.AprilFools ? 2f : 1f;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hostile = true;

@@ -42,6 +42,17 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         {
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
             Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+
+            if (Projectile.ai[0] > 0)
+            {
+                float newScale = Projectile.scale * Projectile.ai[0];
+                float mult = newScale / Projectile.scale;
+                Projectile.position = Projectile.Center;
+                Projectile.scale = newScale;
+                Projectile.width = (int)(Projectile.width * mult);
+                Projectile.height = (int)(Projectile.height * mult);
+                Projectile.Center = Projectile.position;
+            }
         }
         public override void AI()
         {

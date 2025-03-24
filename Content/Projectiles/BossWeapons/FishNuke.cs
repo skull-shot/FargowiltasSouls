@@ -23,8 +23,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void SetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
+            Projectile.width = 52;
+            Projectile.height = 76;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
             //AIType = ProjectileID.Bullet;
-            Projectile.scale = 2f;
+            //Projectile.scale = 2f;
         }
 
         public override void AI()
@@ -142,7 +142,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
                         ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
                 }*/
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage / 2, Projectile.knockBack * 2f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage / 2, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
             }
             /*int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
@@ -165,8 +165,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             for (int i = 0; i < max; i++)
             {
                 vel = vel.RotatedBy(rotation);
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
-                    Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
+                //Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
+                    //Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
             }
         }
 
@@ -178,7 +178,11 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public Color ColorFunction(float completionRatio)
         {
-            return Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio);
+            float opacity = 1f;
+            float threshold = 0.5f;
+            if (completionRatio < threshold)
+                opacity *= MathF.Pow(completionRatio / threshold, 2);
+            return Projectile.GetAlpha(Color.Lerp(Color.DarkOrange, Color.Orange, completionRatio) * opacity);
         }
 
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)

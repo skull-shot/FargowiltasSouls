@@ -13,8 +13,9 @@ PearlwoodRainbowEffect: Радужный хвост жемчужной древ�
 TimberEffect: Сжатый артефакт Леса
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Скорость и разброс адамантита
-CobaltEffect: Взрыв при уроне кобальта
+CobaltEffect: Усиленные прыжки кобальта
 AncientCobaltEffect: Взрывной прыжок др. кобальта
+AncientCobaltFallEffect: Быстрое падение др. кобальта
 MythrilEffect: Скорость оружий мифрила
 OrichalcumEffect: Лепестки орихалка
 PalladiumHealing: Лечение палладия
@@ -112,6 +113,7 @@ DevianttHearts: Самонавод. сердца при атаке
 AbomWandCrit: Поддержка призрачного Выродкка
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: Слизневые шары
+PlatformFallthroughEffect: Падение через платформы
 SlimeFallEffect: Увеличенная скорость падения
 AgitatingLensEffect: Косы при рывках
 AgitatingLensInstall: Установка свирепости
@@ -125,7 +127,6 @@ RainbowHealEffect: Автом. лечебные зелья
 NymphPerfumeEffect: Атаки создают сердца
 SqueakEffect: Игрушка-пищалка при уроне
 WretchedPouchEffect: Теневое пламя несчастья
-ClippedEffect: Накладывать оборванные крылья
 WyvernBalls: Светлые сферы полёта
 TribalCharmClickBonus: Бонус кликов амулета племени
 StabilizedGravity: Стабилизированная гравитация
@@ -149,7 +150,7 @@ PlantMinionEffect: Прислужник Плантера
 LihzahrdGroundPound: Быстрое падение ящщеров
 LihzahrdBoulders: Валуны и гейзеры топота
 CelestialRuneAttacks: Поддержка небесной руны
-CelestialRuneOnhit: Древние видения при уроне
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: Отключить эффекты миньонов для урона
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: Уменьшенный размер хёртбокса

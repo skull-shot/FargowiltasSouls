@@ -33,7 +33,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool PaladinsShield;
         public bool isWaterEnemy;
-        public bool HasWhipDebuff;
 
         //public List<int> auraDebuffs = new List<int>();
 #pragma warning disable CA2211
@@ -70,7 +69,6 @@ namespace FargowiltasSouls.Core.Globals
         public override void ResetEffects(NPC npc)
         {
             PaladinsShield = false;
-            HasWhipDebuff = false;
 
             if (BeetleTimer > 0 && --BeetleTimer <= 0)
             {
@@ -126,6 +124,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!npc.dontTakeDamage)
             {
+                /*
                 bool boss = npc.boss || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsTail;
                 if (npc.position.Y / 16 < Main.worldSurface * 0.35f && !boss) //enemy in space
                     npc.AddBuff(BuffID.Suffocation, 2, true);
@@ -135,7 +134,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (FargoSoulsUtil.HostCheck)
                         npc.AddBuff(BuffID.OnFire, 2);
                 }
-
+                */
                 Vector2 tileCenter = npc.Center;
                 tileCenter.X /= 16;
                 tileCenter.Y /= 16;
@@ -309,6 +308,7 @@ namespace FargowiltasSouls.Core.Globals
                             }
                         }
 
+                        /*
                         if (normalSpawn && WorldSavingSystem.DownedAnyBoss)
                         {
                             if (snow)
@@ -317,7 +317,7 @@ namespace FargowiltasSouls.Core.Globals
                             if (desert)
                                 pool[NPCID.SandElemental] = .005f;
                         }
-
+                        */
                         if (Main.slimeRain && NPC.downedBoss2 && bossCanSpawn)
                             pool[NPCID.KingSlime] = 0.004f;
 
@@ -408,7 +408,7 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (jungle)
                     {
-                        if (WorldSavingSystem.MasochistModeReal && normalSpawn)
+                        if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && normalSpawn)
                             pool[NPCID.Parrot] = .01f;
                     }
 
@@ -685,16 +685,16 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (!hallow && !corruption && !crimson)
                             {
-                                pool[NPCID.SandShark] = .2f;
+                                pool[NPCID.SandShark] = .1f;
                             }
                             else
                             {
                                 if (hallow)
-                                    pool[NPCID.SandsharkHallow] = .2f;
+                                    pool[NPCID.SandsharkHallow] = .1f;
                                 if (corruption)
-                                    pool[NPCID.SandsharkCorrupt] = .2f;
+                                    pool[NPCID.SandsharkCorrupt] = .1f;
                                 if (crimson)
-                                    pool[NPCID.SandsharkCrimson] = .2f;
+                                    pool[NPCID.SandsharkCrimson] = .1f;
                             }
                         }
                     }
@@ -1314,7 +1314,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (PaladinsShield)
                     modifiers.FinalDamage *= 0.5f;
 
-                if (WorldSavingSystem.MasochistModeReal && (npc.boss || LumUtils.AnyBosses() && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
+                if (WorldSavingSystem.MasochistModeReal && ((npc.boss || LumUtils.AnyBosses()) && FargoSoulsGlobalNPC.boss.IsWithinBounds(Main.maxNPCs) && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
                     modifiers.FinalDamage *= 0.9f;
             }
 

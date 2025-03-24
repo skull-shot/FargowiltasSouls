@@ -1,18 +1,22 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Hooking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
@@ -21,8 +25,12 @@ using Terraria.Utilities;
 
 namespace FargowiltasSouls
 {
-    public partial class FargowiltasSouls
+    public partial class FargowiltasSouls : ICustomDetourProvider
     {
+        private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
+
+        public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
+
         public void LoadDetours()
         {
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
@@ -33,7 +41,11 @@ namespace FargowiltasSouls
             On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
+            On_Player.ItemCheck_Shoot += InterruptShoot;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
+
         }
         public void UnloadDetours()
         {
@@ -44,7 +56,14 @@ namespace FargowiltasSouls
             On_Item.AffixName -= AffixName;
             On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.ItemCheck_Shoot -= InterruptShoot;
             On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+        }
+
+
+        void ICustomDetourProvider.ModifyMethods()
+        {
+            HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -89,7 +108,6 @@ namespace FargowiltasSouls
                     || modPlayer.ImmuneToDamage
                     || modPlayer.ShellHide
                     || modPlayer.MonkDashing > 0
-                    || modPlayer.CobaltImmuneTimer > 0
                     || modPlayer.TitaniumDRBuff)
                 && DebuffIDs.Contains(type))
             {
@@ -168,10 +186,22 @@ namespace FargowiltasSouls
             orig(self, npcIndex, dmg, kb);
         }
 
+        private void InterruptShoot(On_Player.orig_ItemCheck_Shoot orig, Player self, int i, Item sItem, int weaponDamage)
+        {
+
+            if (SwordGlobalItem.BroadswordRework(sItem) && sItem.TryGetGlobalItem<SwordGlobalItem>(out SwordGlobalItem sword) && !sword.VanillaShoot)
+            {
+                FargoSoulsPlayer mplayer = self.FargoSouls();
+
+                mplayer.shouldShoot = true;
+                return;
+            }
+            orig(self, i, sItem, weaponDamage);
+        }
         public static void DrawInterface_35_YouDied(On_Main.orig_DrawInterface_35_YouDied orig)
         {
             orig();
-            if (Main.LocalPlayer.dead && Main.LocalPlayer.Eternity().PreventRespawn())
+            if (Main.LocalPlayer.dead && Main.LocalPlayer.Eternity().PreventRespawn() && Main.netMode != NetmodeID.SinglePlayer)
             {
                 float num = -60f;
                 string value = Lang.inter[38].Value;
@@ -196,6 +226,102 @@ namespace FargowiltasSouls
                     new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
             }
+        }
+        public static void CombinedHooks_ModifyHitNPCWithProj(Orig_CombinedHooks_ModifyHitNPCWithProj orig, Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers)
+        {
+            // Whip tag damage nerf
+            if (WorldSavingSystem.EternityMode)
+            {
+                int tags = 0;
+                for (int i = 0; i < nPC.buffType.Length; i++)
+                {
+                    int type = nPC.buffType[i];
+                    if (BuffID.Sets.IsATagBuff[type])
+                        tags++;
+                }
+                if (tags > 1)
+                {
+                    float perStack = 0.5f;
+                    float mult = (1 - perStack + perStack * tags) / tags;
+                    ProjectileID.Sets.SummonTagDamageMultiplier[projectile.type] *= mult;
+                    // IMPORTANT that this is reset after the hit!
+                    // This is done in FargoSoulsPlayer.OnHitNPCWithProj using the following variable
+                    projectile.FargoSouls().TagStackMultiplier = mult;
+                }
+            }
+            orig(projectile, nPC, ref modifiers);
+        }
+
+        private static bool IsItemTransformLocked(On_ShimmerTransforms.orig_IsItemTransformLocked orig, int type)
+        {
+            bool ret = orig(type);
+            //Rod of Harmony post Mutant
+            if (type == ItemID.RodofDiscord)
+            {
+                return !WorldSavingSystem.DownedMutant;
+            }
+
+            return ret;
+        }
+
+        private static int AI_123_Deerclops_TryMakingSpike_FindBestY(On_NPC.orig_AI_123_Deerclops_TryMakingSpike_FindBestY orig, NPC self, ref Point sourceTileCoords, int x)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return orig(self, ref sourceTileCoords, x);
+
+            int num = sourceTileCoords.Y;
+            NPCAimedTarget targetData = self.GetTargetData();
+            if (!targetData.Invalid)
+            {
+                Rectangle hitbox = targetData.Hitbox;
+                Vector2 vector = new Vector2(hitbox.Center.X, hitbox.Bottom);
+                int num2 = (int)(vector.Y / 16f);
+                int num3 = Math.Sign(num2 - num);
+                int num4 = num2 + num3 * 15;
+                int? num5 = null;
+                float num6 = float.PositiveInfinity;
+                for (int i = num; i != num4; i += num3)
+                {
+                    if (WorldGen.SolidTile(x, i))
+                    {
+                        float num7 = new Point(x, i).ToWorldCoordinates().Distance(vector);
+                        if (!num5.HasValue || !(num7 >= num6))
+                        {
+                            num5 = i;
+                            num6 = num7;
+                        }
+                    }
+                }
+                if (num5.HasValue)
+                {
+                    num = num5.Value;
+                }
+            }
+            for (int j = 0; j < 20; j++)
+            {
+                if (num < 10)
+                {
+                    break;
+                }
+                if (!WorldGen.SolidTile(x, num))
+                {
+                    break;
+                }
+                num--;
+            }
+            for (int k = 0; k < 20; k++)
+            {
+                if (num > Main.maxTilesY - 10)
+                {
+                    break;
+                }
+                if (WorldGen.SolidTile(x, num))
+                {
+                    break;
+                }
+                num++;
+            }
+            return num;
         }
     }
 }

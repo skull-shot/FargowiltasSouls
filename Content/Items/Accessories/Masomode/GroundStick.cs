@@ -57,7 +57,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             ProjectileID.SaucerLaser,
             ProjectileID.NebulaLaser,
             ProjectileID.VortexVortexLightning,
-            ProjectileID.DD2LightningBugZap
+            ProjectileID.DD2LightningBugZap,
+            ProjectileID.EyeBeam
 ];
         public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {

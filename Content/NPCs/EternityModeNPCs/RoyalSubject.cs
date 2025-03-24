@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
     public class RoyalSubject : ModNPC
     {
         //public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_222";
-
+        public int ContactDamageTimer = 0;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Royal Subject");
@@ -63,7 +63,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.lifeMax = (int)(NPC.lifeMax * 0.7 * System.Math.Max(1.0, balance / 2));
             NPC.damage = (int)(NPC.damage * 0.9);
         }
-
+        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+        {
+            return ContactDamageTimer >= 120;
+        }
         public override void AI()
         {
             if (!FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee)
@@ -74,6 +77,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 NPC.checkDead();
                 return;
             }
+
+            if (ContactDamageTimer < 120)
+                ContactDamageTimer++;
 
             //tries to stinger, force into dash
             if (NPC.ai[0] != 0)

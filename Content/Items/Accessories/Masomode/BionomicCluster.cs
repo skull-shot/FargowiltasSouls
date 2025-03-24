@@ -79,7 +79,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             // Dragon fang
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
-            player.AddEffect<ClippedEffect>(Item);
 
             // Frigid gemstone
             player.buffImmune[BuffID.Frostburn] = true;
@@ -237,7 +236,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             // Dragon fang
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
-            player.AddEffect<ClippedEffect>(Item);
 
             // Frigid gemstone
             player.buffImmune[BuffID.Frostburn] = true;

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Core.Systems.DashManager;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
 {
@@ -22,14 +23,28 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
         {
             base.AI(npc);
 
-            if (npc.type == NPCID.DesertScorpionWall && ++Counter > 240)
+            if (npc.type == NPCID.DesertScorpionWall)
             {
-                Counter = 0;
-
-                if (FargoSoulsUtil.HostCheck && npc.HasPlayerTarget)
+                Counter++;
+                if (Counter > 195 && Counter < 210)
                 {
-                    Vector2 vel = npc.SafeDirectionTo(Main.player[npc.target].Center) * 14;
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel, ModContent.ProjectileType<VenomSpit>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
+                    npc.velocity *= 1f - (Counter - 195) / 15f;
+                }
+                if (Counter == 210)
+                {
+                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Web, 5f, default, 2f);
+                }
+                if (Counter >= 210)
+                    npc.velocity *= 0f;
+                if (Counter > 240)
+                {
+                    Counter = 0;
+
+                    if (FargoSoulsUtil.HostCheck && npc.HasPlayerTarget)
+                    {
+                        Vector2 vel = npc.SafeDirectionTo(Main.player[npc.target].Center) * 14;
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel, ModContent.ProjectileType<VenomSpit>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
+                    }
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -73,11 +74,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bool forceEffect = modPlayer.ForceEffect<EbonwoodEnchant>();
             float chargeCap = forceEffect ? 500 : 250;
             float chargeSpeed = forceEffect ? 2f : 1f;
+            float decaySpeed = chargeSpeed / 2.5f;
+            if (player.HasEffect<TimberEffect>())
+                decaySpeed /= 3;
             bool hasIncreased = false; // If charge has increased this frame
             int dist = ShadewoodEffect.Range(player, forceEffect);
             float LCharge = modPlayer.EbonwoodCharge;
 
-            foreach (NPC npc in Main.npc.Where(n => n.active && !n.friendly && n.lifeMax > 5 && !n.dontTakeDamage))
+            foreach (NPC npc in Main.npc.Where(n => n.active && !n.friendly && n.lifeMax > 10 && !n.dontTakeDamage && (n.damage > 0 || n.defDamage > 0)))
             {
                 Vector2 npcComparePoint = FargoSoulsUtil.ClosestPointInHitbox(npc, player.Center);
                 // npc is in aura
@@ -91,7 +95,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
 
             if (!hasIncreased && modPlayer.EbonwoodCharge > 0)
-                modPlayer.EbonwoodCharge -= chargeSpeed;
+                modPlayer.EbonwoodCharge -= decaySpeed;
 
             player.endurance += 0.01f * modPlayer.EbonwoodCharge / 50;
 

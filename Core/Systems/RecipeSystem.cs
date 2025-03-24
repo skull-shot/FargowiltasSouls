@@ -14,35 +14,6 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class RecipeSystem : ModSystem
     {
-        public readonly static Recipe.ConsumeItemCallback IronBonusBars = (Recipe recipe, int type, ref int amount) =>
-        {
-            Player player = Main.LocalPlayer;
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            if (!player.HasEffect<IronEffect>())
-                return;
-
-            if (!WorldSavingSystem.IronUsedList.Contains(type))
-            {
-                int chance = 3;
-
-                if (modPlayer.ForceEffect<IronEnchant>())
-                {
-                    chance = 2;
-                }
-
-                WorldSavingSystem.IronUsedList.Add(type);
-
-                int amountUsed = 0;
-                for (int i = 0; i < amount; i++)
-                {
-                    if (!Main.rand.NextBool(chance))
-                        amountUsed++;
-                }
-
-                amount = amountUsed;
-            }
-        };
         public static string AnyItem(int id) => $"{Lang.misc[37]} {Lang.GetItemName(id)}";
 
         public static string AnyItem(string fargoSoulsLocalizationKey) => $"{Lang.misc[37]} {Language.GetTextValue($"Mods.FargowiltasSouls.RecipeGroups.{fargoSoulsLocalizationKey}")}";
@@ -214,10 +185,6 @@ namespace FargowiltasSouls.Core.Systems
         {
             foreach (Recipe recipe in Main.recipe)
             {
-                // add iron enchant bonus
-                if (!recipe.requiredTile.Contains(ModContent.TileType<Fargowiltas.Items.Tiles.CrucibleCosmosSheet>()))
-                    recipe.AddConsumeItemCallback(IronBonusBars);
-
                 //disable shimmer decrafts
                 if (recipe.createItem.ModItem != null && (recipe.createItem.ModItem is BaseEnchant || recipe.createItem.ModItem is BaseForce || recipe.createItem.ModItem is BaseSoul || recipe.createItem.ModItem is BaseEssence))
                     recipe.DisableDecraft();

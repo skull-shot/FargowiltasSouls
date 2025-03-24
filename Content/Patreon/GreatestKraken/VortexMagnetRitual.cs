@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
 
         public override void SetDefaults()
         {
-            Item.damage = 333;
+            Item.damage = 111;
             Item.DamageType = DamageClass.Magic;
             Item.useTime = 16;
             Item.useAnimation = 16;

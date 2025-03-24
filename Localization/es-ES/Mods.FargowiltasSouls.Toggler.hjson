@@ -13,8 +13,9 @@
 // TimberEffect: Concise Timber Force
 // EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 // AdamantiteEffect: Adamantite Speed and Spread
-// CobaltEffect: Cobalt Hit Explosion
+// CobaltEffect: Cobalt Boosted Jumps
 // AncientCobaltEffect: Ancient Cobalt Explosion Jump
+// AncientCobaltFallEffect: Ancient Cobalt Fall Speed
 // MythrilEffect: Mythril Weapon Speed
 // OrichalcumEffect: Orichalcum Petals
 // PalladiumHealing: Palladium Healing
@@ -112,6 +113,7 @@
 // AbomWandCrit: Spectral Abominationn Support
 // SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 // SlimyShieldEffect: Slimy Balls
+// PlatformFallthroughEffect: Fall Through Platforms
 // SlimeFallEffect: Increased Fall Speed
 // AgitatingLensEffect: Scythes When Dashing
 // AgitatingLensInstall: Berserker Install
@@ -125,7 +127,6 @@
 // NymphPerfumeEffect: Attacks Spawn Hearts
 // SqueakEffect: Squeaky Toy On Hit
 // WretchedPouchEffect: Wretched Shadowflame
-// ClippedEffect: Inflict Clipped Wings
 // WyvernBalls: Flight Light Orbs
 // TribalCharmClickBonus: Tribal Charm Click Bonus
 // StabilizedGravity: Stabilized Gravity

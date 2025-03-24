@@ -92,7 +92,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             //target.AddBuff(BuffID.Obstructed, 15);
-            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
         }
     }
 

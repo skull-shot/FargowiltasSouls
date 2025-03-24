@@ -1787,7 +1787,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 target.AddBuff(BuffID.Burning, 120);
                 target.AddBuff(BuffID.Electrified, 300);
-                target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
+                //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
                 target.AddBuff(BuffID.Frostburn, 300);
             }
         }

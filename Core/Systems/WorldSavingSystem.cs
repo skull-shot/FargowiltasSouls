@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class WorldSavingSystem : ModSystem
     {
-        internal enum Downed //to keep them organized and synced, DO NOT rearrange
+        public enum Downed //to keep them organized and synced, DO NOT rearrange
         {
             TimberChampion,
             TerraChampion,
@@ -98,8 +98,6 @@ namespace FargowiltasSouls.Core.Systems
         public static bool HaveForcedMutantFromKS { get => haveForcedMutantFromKS; set => haveForcedMutantFromKS = value;}
 
         public static bool PlacedMutantStatue;
-
-        public static List<int> IronUsedList = [];
 
         public static Point CoffinArenaCenter { get; set; }
 
@@ -200,24 +198,6 @@ namespace FargowiltasSouls.Core.Systems
             if (PlacedMutantStatue)
                 downed.Add("PlacedMutantStatue");
 
-            if (IronUsedList.Count > 0)
-            {
-                string ironData = "IronUsedList";
-                foreach (int type in IronUsedList)
-                {
-                    if (type >= ItemID.Count) // modded item, variable type, add name instead
-                    {
-                        if (ItemLoader.GetItem(type) is ModItem modItem && modItem != null)
-                            ironData += $"_{modItem.FullName}";
-                    }
-                    else // vanilla item
-                    {
-                        ironData += $"_{type}";
-                    }
-                }
-                downed.Add(ironData);
-            }
-
             for (int i = 0; i < DownedBoss.Length; i++)
             {
                 if (DownedBoss[i])
@@ -228,6 +208,8 @@ namespace FargowiltasSouls.Core.Systems
             tag.Add("mutantP1", SkipMutantP1);
             tag.Add("CoffinArenaCenterX", CoffinArenaCenter.X);
             tag.Add("CoffinArenaCenterY", CoffinArenaCenter.Y);
+            tag.Add("IceGolemTimer", WorldUpdatingSystem.IceGolemTimer);
+            tag.Add("SandElementalTimer", WorldUpdatingSystem.SandElementalTimer);
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -253,28 +235,6 @@ namespace FargowiltasSouls.Core.Systems
             ShiftingSandEvent = downed.Contains("ShiftingSandEvent");
             PlacedMutantStatue = downed.Contains("PlacedMutantStatue");
 
-            if (downed.Contains("IronUsedList_"))
-            {
-                string ironData = downed.First(i => i.Contains("IronUsedList"));
-                string[] ironEntries = ironData.Split("_");
-                foreach (string entry in ironEntries)
-                {
-                    if (entry != "IronUsedList")
-                    {
-                        if (int.TryParse(entry, out int type) && type < ItemID.Count)
-                        {
-                            IronUsedList.Add(type);
-                        }
-                        else
-                        {
-                            ModItem item = ModContent.Find<ModItem>(entry);
-                            IronUsedList.Add(item.Type);
-                        }
-
-                    }
-                }
-            }
-
             for (int i = 0; i < DownedBoss.Length; i++)
                 DownedBoss[i] = downed.Contains($"downedBoss{i}") || downed.Contains($"downedChampion{i}");
 
@@ -287,6 +247,11 @@ namespace FargowiltasSouls.Core.Systems
             if (tag.ContainsKey("CoffinArenaCenterY"))
                 coffinY = tag.GetAsInt("CoffinArenaCenterY");
             CoffinArena.SetArenaPosition(new(coffinX, coffinY));
+
+            if (tag.ContainsKey("IceGolemTimer"))
+                WorldUpdatingSystem.IceGolemTimer = tag.GetAsInt("IceGolemTimer");
+            if (tag.ContainsKey("SandElementalTimer"))
+                WorldUpdatingSystem.SandElementalTimer = tag.GetAsInt("SandElementalTimer");
         }
 
         public override void NetReceive(BinaryReader reader)

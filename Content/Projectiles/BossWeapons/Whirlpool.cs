@@ -31,6 +31,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.ignoreWater = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
+
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 
         public override void AI()

@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
 {
     public class FlyingFish : Shooters
     {
-        public FlyingFish() : base(70, ProjectileID.WaterStream, 10, 1, DustID.Water, 250) { }
+        public FlyingFish() : base(300, ProjectileID.WaterStream, 10, 1, DustID.Water, 250) { }
 
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.FlyingFish);
 

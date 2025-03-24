@@ -21,10 +21,18 @@ namespace FargowiltasSouls.Content.Buffs
         {
             if (WorldSavingSystem.EternityMode)
             {
-                if (type == BuffID.ShadowDodge)
-                    tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
-                else if (type == BuffID.IceBarrier)
-                    tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                switch (type)
+                {
+                    case BuffID.ShadowDodge:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
+                        break;
+                    case BuffID.IceBarrier:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                        break;
+                    case BuffID.ChaosState:
+                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        break;
+                }
             }
         }
 
@@ -32,6 +40,7 @@ namespace FargowiltasSouls.Content.Buffs
             BuffID.Frozen,
             BuffID.Stoned,
             BuffID.Cursed,
+            BuffID.ChaosState,
             ModContent.BuffType<FusedBuff>(),
             ModContent.BuffType<TimeFrozenBuff>(),
             ModContent.BuffType<StunnedBuff>()
@@ -69,19 +78,6 @@ namespace FargowiltasSouls.Content.Buffs
                 case BuffID.Dazed:
                     if (player.whoAmI == Main.myPlayer && player.buffTime[buffIndex] % 60 == 55)
                         SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));
-                    break;
-
-
-                case BuffID.ThornWhipPlayerBuff:
-                case BuffID.SwordWhipPlayerBuff:
-                case BuffID.ScytheWhipPlayerBuff:
-                case BuffID.CoolWhipPlayerBuff:
-                    if (WorldSavingSystem.EternityMode)
-                    {
-                        if (player.Eternity().HasWhipBuff)
-                            player.buffTime[buffIndex] = Math.Min(player.buffTime[buffIndex], 1);
-                        player.Eternity().HasWhipBuff = true;
-                    }
                     break;
 
                 default:
@@ -163,16 +159,6 @@ namespace FargowiltasSouls.Content.Buffs
                     if (WorldSavingSystem.EternityMode && Main.raining && npc.position.Y < Main.worldSurface * 16
                         && Framing.GetTileSafely(npc.Center).WallType == WallID.None && npc.buffTime[buffIndex] > 2)
                         npc.buffTime[buffIndex] -= 1;
-                    break;
-
-                case BuffID.BoneWhipNPCDebuff:
-                case BuffID.MaceWhipNPCDebuff:
-                case BuffID.RainbowWhipNPCDebuff:
-                case BuffID.SwordWhipNPCDebuff:
-                case BuffID.ThornWhipNPCDebuff:
-                    if (WorldSavingSystem.EternityMode && npc.Eternity().HasWhipDebuff)
-                        npc.buffTime[buffIndex] = Math.Min(npc.buffTime[buffIndex], 1);
-                    npc.Eternity().HasWhipDebuff = true;
                     break;
 
                 default:
