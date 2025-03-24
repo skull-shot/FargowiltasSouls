@@ -43,10 +43,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
             Asset<Texture2D> chain = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/LeashFlailChain");
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
+            float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
             for (int j = 0; j < 10; j++)
             {
                 Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 1;
-                Color glowColor = Color.Blue with { A = 0 } * 0.7f;
+                Color glowColor = Color.Blue with { A = 0 } * 0.7f * lightLevel;
 
 
                 Main.EntitySpriteDraw(t.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, t.Size() / 2, Projectile.scale, SpriteEffects.None);
@@ -78,6 +79,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             base.OnKill(timeLeft);
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Bone);
+                d.velocity *= 0.5f;
+            }
         }
         
         public override bool OnTileCollide(Vector2 oldVelocity)

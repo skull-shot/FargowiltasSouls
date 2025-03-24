@@ -3,8 +3,11 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
+using System.Reflection.Metadata.Ecma335;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -23,19 +26,65 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         public int BabyTimer;
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
+
             if (FargoSoulsUtil.HostCheck)
             {
-                int weapon = Main.rand.NextFromList([ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>()]);
-                weapon = ModContent.ProjectileType<BoneFlail>();
-                Projectile.NewProjectileDirect(source, npc.Center, Vector2.Zero, weapon, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI);
+                int weapon = Main.rand.NextFromList([ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>(), ModContent.ProjectileType<BoneShield>()]);
+                //weapon = ModContent.ProjectileType<BoneShield>();
+                
+                HeldProjectile = Projectile.NewProjectileDirect(source, npc.Center, Vector2.Zero, weapon, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI).whoAmI;
+                
             }
             base.OnSpawn(npc, source);
         }
-
+        public int HeldProjectile = -1;
+        public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
+        {
+            //hit.SourceDamage = 0;
+            if (HeldProjectile >= 0)
+            {
+                Projectile proj = Main.projectile[HeldProjectile];
+                if (proj != null && proj.active && proj.type == ModContent.ProjectileType<BoneShield>() && proj.ai[0] == npc.whoAmI && hit.HitDirection == -npc.direction && projectile.FargoSouls().DeletionImmuneRank == 0)
+                {
+                    projectile.Kill();
+                }
+            }
+            base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
+        }
+        public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
+        {
+            if (HeldProjectile >= 0)
+            {
+                Projectile proj = Main.projectile[HeldProjectile];
+                if (proj != null && proj.active && proj.type == ModContent.ProjectileType<BoneShield>() && proj.ai[0] == npc.whoAmI && modifiers.HitDirection != npc.spriteDirection)
+                {
+                    SoundEngine.PlaySound(SoundID.NPCHit4, npc.Center);
+                    proj.ai[1] -= player.GetWeaponDamage(player.HeldItem);
+                    modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) => hitInfo.Null();
+                }
+            }
+        }
+        
         public override void AI(NPC npc)
         {
+            //Main.NewText(Main.hardMode);
             base.AI(npc);
-
+            if (HeldProjectile >= 0)
+            {
+                Projectile held = Main.projectile[HeldProjectile];
+                if (held != null && held.active && held.ai[0] == npc.whoAmI)
+                {
+                    if (held.type == ModContent.ProjectileType<BoneShield>())
+                    {
+                        //makes them walk through walls dont do this lol
+                        //npc.position.X += npc.velocity.X * 0.2f;
+                    }
+                    if (held.type == ModContent.ProjectileType<BoneFlail>())
+                    {
+                        npc.position.X -= npc.velocity.X * 0.2f;
+                    }
+                }
+            }
             //if (--BoneSprayTimer > 0 && BoneSprayTimer % 6 == 0) //spray bones
             //{
             //    Vector2 speed = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
