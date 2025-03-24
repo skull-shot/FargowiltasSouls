@@ -1,3 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Fixed new Eternity Ice Golem early-bird spawn not having the exact correct blizzard conditions
-Fixed Eternity item scale buffs not working correctly when text localization is set to certain other languages
+Eternity Moon Lord: Wrong class now only deals 40% damage instead of nothing (20% maso, 0% ftw)
+Mutant's Gift and Difficulty Selector now state that you cannot die to debuffs unless in Masochist Mode
+Reduced Ancient Cobalt Enchant base explosion damage
+Advisor no longer recommends Ancient Hallow Enchant too early
+Fixed King and Queen Slime still drawing shaders when resprites are disabled

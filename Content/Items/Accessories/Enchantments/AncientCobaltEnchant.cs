@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool upgrade = notAncient || player.ForceEffect<AncientCobaltEffect>();
 
                 int projType = ModContent.ProjectileType<CobaltExplosion>();
-                int damage = 150;
+                int damage = 90;
                 if (upgrade) 
                     damage = 250;
 
