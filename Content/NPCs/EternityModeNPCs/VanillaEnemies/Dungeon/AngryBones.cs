@@ -25,7 +25,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         {
             if (FargoSoulsUtil.HostCheck)
             {
-                Projectile.NewProjectileDirect(source, npc.Center, Vector2.Zero, ModContent.ProjectileType<BoneSpear>(), FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI);
+                int weapon = Main.rand.NextFromList([ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>()]);
+                weapon = ModContent.ProjectileType<BoneFlail>();
+                Projectile.NewProjectileDirect(source, npc.Center, Vector2.Zero, weapon, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI);
             }
             base.OnSpawn(npc, source);
         }

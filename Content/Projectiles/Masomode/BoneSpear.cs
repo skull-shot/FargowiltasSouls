@@ -31,6 +31,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !Bones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
+            {
+
+                Projectile.ai[0] = -1;
+            }
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
             Asset<Texture2D> head = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BoneSpearHead");
             Vector2 origin = t.Size() - new Vector2(16, 16);
@@ -39,16 +44,24 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             {
                 origin = t.Size() / 2;
             }
+
+            SpriteEffects effects = SpriteEffects.None;
             
+            if (Projectile.ai[0] > -1 && Main.npc[(int)Projectile.ai[0]].spriteDirection == -1)
+            {
+                effects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
+                origin = t.Size() - new Vector2(36, 36);
+            }
+
             for (int j = 0; j < 10; j++)
             {
                 Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 1 ;
                 Color glowColor = Color.Blue with { A = 0 } * 0.7f;
 
 
-                Main.EntitySpriteDraw(head.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
+                Main.EntitySpriteDraw(head.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, origin, Projectile.scale, effects);
             }
-            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, origin, 1, SpriteEffects.None);
+            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, origin, 1, effects);
             return false;
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
@@ -68,6 +81,12 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             {
                 vec = Projectile.Center - new Vector2(19, 19).RotatedBy(Projectile.rotation) * Projectile.scale;
             }
+            if (Projectile.ai[0] > -1 && Main.npc[(int)Projectile.ai[0]].spriteDirection == -1)
+            {
+                vec = Projectile.Center + new Vector2(29, 29).RotatedBy(Projectile.rotation) * Projectile.scale;
+            }
+            //Dust d = Dust.NewDustDirect(vec, 1, 1, DustID.Terra);
+            //d.velocity = Vector2.Zero;
             Point center = vec.ToPoint();
             
             
@@ -119,15 +138,31 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 NPC owner = Main.npc[(int)Projectile.ai[0]];
                 Projectile.Center = owner.Center;
                 Projectile.velocity = Vector2.Zero;
-                if (owner.spriteDirection == 1)
+
+                //if (owner.spriteDirection == 1)
+                //{
+                //  Projectile.rotation = MathHelper.ToRadians(135);
+                //}
+                //else
+                //{
+                //    Projectile.rotation = MathHelper.ToRadians(315);
+                //}
+                float downAngle = owner.spriteDirection == 1 ? 155 : 115;
+                float upAngle = owner.spriteDirection == 1 ? 125 : 145;
+                //Main.NewText(owner.frame.Y);
+                if ((owner.frame.Y >= 5 * owner.frame.Height && owner.frame.Y <= 7 * owner.frame.Height) || (owner.frame.Y >= 12 * owner.frame.Height && owner.frame.Y <= 14 * owner.frame.Height))
                 {
-                    Projectile.rotation = MathHelper.ToRadians(135);
+                    //Main.NewText("byeah");
+                    Projectile.rotation = Utils.AngleLerp(Projectile.rotation, MathHelper.ToRadians(downAngle), 0.08f);
                 }
                 else
                 {
-                    Projectile.rotation = MathHelper.ToRadians(315);
+                    Projectile.rotation = Utils.AngleLerp(Projectile.rotation, MathHelper.ToRadians(upAngle), 0.08f);
                 }
+                
             }
+
+            
             base.AI();
         }
     }
