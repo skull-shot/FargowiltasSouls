@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
             Color glowColorBase = AngryBones.weaponGlowColor((int)Projectile.localAI[0]);
-            if (Projectile.ai[2] > 0)
+            if (Projectile.ai[2] > 0 || Projectile.ai[0] < 0)
             {
                 for (int j = 0; j < 12; j++)
                 {

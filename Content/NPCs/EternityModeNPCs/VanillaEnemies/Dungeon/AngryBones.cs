@@ -1,8 +1,11 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Mono.Cecil;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Terraria;
@@ -54,27 +57,42 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             }
             return Color.White;
         }
-        public int BabyTimer;
-        public override void OnSpawn(NPC npc, IEntitySource source)
+        public override void OnFirstTick(NPC npc)
         {
-
+            // Main.NewText(HeldProjectile);
+            List<int> weapons = [ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>(), ModContent.ProjectileType<BoneShield>()];
             if (FargoSoulsUtil.HostCheck && HeldProjectile == -1)
             {
-                int weapon = Main.rand.NextFromList([ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>(), ModContent.ProjectileType<BoneShield>()]);
-                //weapon = ModContent.ProjectileType<BoneShield>();
-                
-                HeldProjectile = Projectile.NewProjectileDirect(source, npc.Center, Vector2.Zero, weapon, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI).whoAmI;
-                
+                int weapon = Main.rand.NextFromList(weapons.ToArray());
+                HeldProjectile = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, weapon, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI).whoAmI;
+                weapons.Remove(weapon);
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    
+                    int weapon2 = Main.rand.NextFromList(weapons.ToArray());
+                    MasoHeldProjectile = Projectile.NewProjectileDirect(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, weapon2, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, -1, npc.whoAmI).whoAmI;
+                }
+
             }
-            base.OnSpawn(npc, source);
         }
+
         public int HeldProjectile = -1;
+        public int MasoHeldProjectile = -1;
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             //hit.SourceDamage = 0;
-            if (HeldProjectile >= 0)
+            if (HeldProjectile >= 0 || MasoHeldProjectile >= 0)
             {
-                Projectile proj = Main.projectile[HeldProjectile];
+
+                Projectile proj = null;
+                if (MasoHeldProjectile >= 0 && Main.projectile[MasoHeldProjectile].type == ModContent.ProjectileType<BoneShield>())
+                {
+                    proj = Main.projectile[MasoHeldProjectile];
+                }
+                else if (HeldProjectile >= 0)
+                {
+                    proj = Main.projectile[HeldProjectile];
+                }
                 if (proj != null && proj.active && proj.type == ModContent.ProjectileType<BoneShield>() && proj.ai[0] == npc.whoAmI && hit.HitDirection == -npc.direction && projectile.FargoSouls().DeletionImmuneRank == 0)
                 {
                     projectile.Kill();
@@ -84,9 +102,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         }
         public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
         {
-            if (HeldProjectile >= 0)
+            if (HeldProjectile >= 0 || MasoHeldProjectile >= 0)
             {
-                Projectile proj = Main.projectile[HeldProjectile];
+
+                Projectile proj = null;
+                if (MasoHeldProjectile >= 0 && Main.projectile[MasoHeldProjectile].type == ModContent.ProjectileType<BoneShield>())
+                {
+                    proj = Main.projectile[MasoHeldProjectile];
+                }
+                else if (HeldProjectile >= 0)
+                {
+                    proj = Main.projectile[HeldProjectile];
+                }
                 if (proj != null && proj.active && proj.type == ModContent.ProjectileType<BoneShield>() && proj.ai[0] == npc.whoAmI && modifiers.HitDirection != npc.spriteDirection)
                 {
                     SoundEngine.PlaySound(SoundID.NPCHit4, npc.Center);
@@ -94,74 +121,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
                     modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) => hitInfo.Null();
                 }
             }
-        }
-        
-        public override void AI(NPC npc)
-        {
-            //Main.NewText(Main.hardMode);
-            base.AI(npc);
-            if (HeldProjectile >= 0)
-            {
-                Projectile held = Main.projectile[HeldProjectile];
-                if (held != null && held.active && held.ai[0] == npc.whoAmI)
-                {
-                    if (held.type == ModContent.ProjectileType<BoneShield>())
-                    {
-                        //makes them walk through walls dont do this lol
-                        //npc.position.X += npc.velocity.X * 0.2f;
-                    }
-                    if (held.type == ModContent.ProjectileType<BoneFlail>())
-                    {
-                        npc.position.X -= npc.velocity.X * 0.2f;
-                    }
-                }
-            }
-            //if (--BoneSprayTimer > 0 && BoneSprayTimer % 6 == 0) //spray bones
-            //{
-            //    Vector2 speed = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
-            //    speed.Normalize();
-            //    speed *= 5f;
-            //    speed.Y -= Math.Abs(speed.X) * 0.2f;
-            //    speed.Y -= 3f;
-            //    if (FargoSoulsUtil.HostCheck)
-            //        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed, ProjectileID.SkeletonBone, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-            //}
-
-            //if (npc.justHit)
-            //{
-            //    //BoneSprayTimer = 120;
-            //    BabyTimer += 20;
-            //}
-
-            //if (++BabyTimer > 300) //shoot baby guardians
-            //{
-            //    BabyTimer = 0;
-            //    if (FargoSoulsUtil.HostCheck && npc.HasValidTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
-            //        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, npc.SafeDirectionTo(Main.player[npc.target].Center), ModContent.ProjectileType<SkeletronGuardian2>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
-            //}
-        }
-
-        public override void OnKill(NPC npc)
-        {
-            base.OnKill(npc);
-
-            //if (FargoSoulsUtil.HostCheck)
-            //{
-            //    if (Main.rand.NextBool(5))
-            //        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.CursedSkull);
-
-            //    for (int i = 0; i < 15; i++)
-            //    {
-            //        Vector2 speed = new(Main.rand.Next(-50, 51), Main.rand.Next(-100, 1));
-            //        speed.Normalize();
-            //        speed *= Main.rand.NextFloat(3f, 6f);
-            //        speed.Y -= Math.Abs(speed.X) * 0.2f;
-            //        speed.Y -= 3f;
-            //        speed.Y *= Main.rand.NextFloat(1.5f);
-            //        if (FargoSoulsUtil.HostCheck)
-            //            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed, ProjectileID.SkeletonBone, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
-            //    }
-            //}
         }
     }
 }
