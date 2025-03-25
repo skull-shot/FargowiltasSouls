@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
 
-            if (FargoSoulsUtil.HostCheck)
+            if (FargoSoulsUtil.HostCheck && HeldProjectile == -1)
             {
                 int weapon = Main.rand.NextFromList([ModContent.ProjectileType<BoneSpear>(), ModContent.ProjectileType<BoneFlail>(), ModContent.ProjectileType<BoneShield>()]);
                 //weapon = ModContent.ProjectileType<BoneShield>();

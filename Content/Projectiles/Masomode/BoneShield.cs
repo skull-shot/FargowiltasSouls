@@ -46,9 +46,9 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             {
                 effects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
             }
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 12; j++)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 10f).ToRotationVector2() * 1;
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2;
                 Color glowColor = glowColorBase with { A = 0 } * 0.7f * lightLevel;
 
 
@@ -135,7 +135,15 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 owner.knockBackResist = 0;
                 Projectile.tileCollide = false;
                 Projectile.timeLeft = 200;
-                Projectile.Center = owner.Center + new Vector2(15 * owner.spriteDirection, 0);
+                if (owner.spriteDirection == 1)
+                {
+                    Projectile.Center = owner.Left + new Vector2(20, 0);
+                }
+                else
+                {
+                    Projectile.Center = owner.Right + new Vector2(-20, 0);
+                }
+                //Projectile.Center += new Vector2(15 * owner.spriteDirection, 0);
                 Projectile.velocity = Vector2.Zero;
                 float downAngle = owner.spriteDirection == 1 ? 20 : -20;
                 float upAngle = owner.spriteDirection == 1 ? -15 : 15;

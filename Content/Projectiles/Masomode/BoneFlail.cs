@@ -46,13 +46,16 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
             Color glowColorBase = AngryBones.weaponGlowColor((int)Projectile.localAI[0]);
-            for (int j = 0; j < 10; j++)
+            if (Projectile.ai[2] > 0)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 10f).ToRotationVector2() * 1;
-                Color glowColor = glowColorBase with { A = 0 } * 0.7f * lightLevel;
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2;
+                    Color glowColor = glowColorBase with { A = 0 } * 0.7f * lightLevel;
 
 
-                Main.EntitySpriteDraw(t.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, t.Size() / 2, Projectile.scale, SpriteEffects.None);
+                    Main.EntitySpriteDraw(t.Value, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, t.Size() / 2, Projectile.scale, SpriteEffects.None);
+                }
             }
             if ((int)Projectile.ai[0] >= 0 && (Main.npc[(int)Projectile.ai[0]] == null || !Main.npc[(int)Projectile.ai[0]].active || !AngryBones.AllBones.Contains(Main.npc[(int)Projectile.ai[0]].type)))
             {
