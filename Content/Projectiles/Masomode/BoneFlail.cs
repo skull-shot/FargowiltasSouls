@@ -89,6 +89,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Bone);
                 d.velocity *= 0.5f;
             }
+            if (AngryBones.HellBone.Contains((int)Projectile.localAI[0]))
+            {
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FusedExplosion>(), Projectile.damage, 10);
+            }
+            if (AngryBones.RustBone.Contains((int)Projectile.localAI[0]))
+            {
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BloodDroplet>(), Projectile.damage, 10);
+            }
         }
         
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -97,7 +105,11 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Projectile.velocity.Y = -oldVelocity.Y;
             if (oldVelocity.X != Projectile.velocity.X)
                 Projectile.velocity.X = -oldVelocity.X;
-            Projectile.velocity *= 0.7f;
+            if (!AngryBones.BlueBone.Contains((int)Projectile.localAI[0]))
+            {
+                Projectile.velocity *= 0.7f;
+            }
+
             return false;
             return base.OnTileCollide(oldVelocity);
         }

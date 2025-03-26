@@ -83,6 +83,19 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Bone);
+                d.velocity *= 0.5f;
+            }
+            if (AngryBones.HellBone.Contains((int)Projectile.localAI[0]))
+            {
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FusedExplosion>(), Projectile.damage, 10);
+            }
+            if (AngryBones.RustBone.Contains((int)Projectile.localAI[0]))
+            {
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BloodDroplet>(), Projectile.damage, 10);
+            }
             base.OnKill(timeLeft);
         }
         public override bool CanHitPlayer(Player target)
@@ -95,15 +108,26 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (Collision.SolidCollision(Projectile.TopLeft, Projectile.width, -6))
+            if (!AngryBones.BlueBone.Contains((int)Projectile.localAI[0]))
             {
-                Projectile.velocity.Y = 5;
+                if (Collision.SolidCollision(Projectile.TopLeft, Projectile.width, -6))
+                {
+                    Projectile.velocity.Y = 5;
 
-                Projectile.velocity.X = oldVelocity.X;
-                return false;
+                    Projectile.velocity.X = oldVelocity.X;
+                    return false;
+                }
+                if (Projectile.oldVelocity.Y <= 0)
+                {
+                    return false;
+                }
             }
-            if (Projectile.oldVelocity.Y <= 0)
+            else
             {
+                if (oldVelocity.Y != Projectile.velocity.Y)
+                    Projectile.velocity.Y = -oldVelocity.Y;
+                if (oldVelocity.X != Projectile.velocity.X)
+                    Projectile.velocity.X = -oldVelocity.X;
                 return false;
             }
             return base.OnTileCollide(oldVelocity);
