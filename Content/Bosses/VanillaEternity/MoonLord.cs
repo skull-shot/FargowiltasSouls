@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
         {
-            if (WorldSavingSystem.EternityMode && !Main.getGoodWorld)
+            if (WorldSavingSystem.EternityMode)
                 return false;
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
