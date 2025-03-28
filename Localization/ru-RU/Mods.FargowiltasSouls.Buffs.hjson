@@ -815,7 +815,7 @@ MutantDesperationBuff: {
 
 TouhouHoardBuff: {
 	DisplayName: Мистическая орда
-	Description: Мифические существа сражаются с вами
+	Description: Мифические существа сражаются за вас
 }
 
 BleedingOut: {
