@@ -734,7 +734,7 @@ namespace FargowiltasSouls.Core.Globals
                     npc.lifeRegen = 0;
                 }
 
-                int dot = npc.type == NPCID.EaterofWorldsBody ? 4 : 20;
+                int dot = npc.type == NPCID.EaterofWorldsBody ? 4 : 16;
 
                 //calamity worms mod compat
                 if (ModLoader.HasMod("CalamityMod"))
