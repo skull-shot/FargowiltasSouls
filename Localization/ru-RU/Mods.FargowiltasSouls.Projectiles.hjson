@@ -787,8 +787,8 @@ EmpressRitual.DisplayName: Ритуал Императрицы
 BoneSpear.DisplayName: Костяное копьё
 BoneFlail.DisplayName: Костяная булава
 BoneShield.DisplayName: Костяной щит
-// BloodDroplet.DisplayName: Blood Droplet
-// BloodPuddle.DisplayName: Blood Puddle
-// VikingHook.DisplayName: Viking Hook
-// PaladinHammer.DisplayName: Paladin Hammer
-// DungeonDebris.DisplayName: Dungeon Debris
+BloodDroplet.DisplayName: Капля крови
+BloodPuddle.DisplayName: Кровавая лужа
+VikingHook.DisplayName: Крюк викинга
+PaladinHammer.DisplayName: Молот паладина
+DungeonDebris.DisplayName: Обломки темницы
