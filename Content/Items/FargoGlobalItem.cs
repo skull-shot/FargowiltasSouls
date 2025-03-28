@@ -571,10 +571,14 @@ namespace FargowiltasSouls.Content.Items
         }
 
         static int infiniteLoopHackFix;
-
+        public static bool Reforging = false;
+        public override void PreReforge(Item item)
+        {
+            Reforging = true;
+        }
         public override bool AllowPrefix(Item item, int pre)
         {
-            if (!Main.gameMenu && Main.LocalPlayer.active && Main.LocalPlayer.HasEffect<IronPassiveEffect>())
+            if (!Main.gameMenu && Main.LocalPlayer.active && Main.LocalPlayer.HasEffect<IronPassiveEffect>() && Reforging)
             {
                 List<int> allowed = [PrefixID.Legendary, PrefixID.Legendary2, PrefixID.Mythical, PrefixID.Unreal, PrefixID.Godly, PrefixID.Demonic, PrefixID.Ruthless];
                 if (item.accessory)
@@ -591,6 +595,10 @@ namespace FargowiltasSouls.Content.Items
             infiniteLoopHackFix = 0;
 
             return base.AllowPrefix(item, pre);
+        }
+        public override void PostReforge(Item item)
+        {
+            Reforging = false;
         }
     }
 }

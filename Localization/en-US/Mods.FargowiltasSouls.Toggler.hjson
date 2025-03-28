@@ -24,6 +24,7 @@ TitaniumEffect: Titanium Shards
 EarthForceEffect: Concise Earth Force
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
 CopperEffect: Copper Lightning
+IronPassiveEffect: Iron Reforges
 IronEffect: Iron Magnet
 LeadPoisonEffect: Lead Poison
 SilverEffect: Silver Parry
