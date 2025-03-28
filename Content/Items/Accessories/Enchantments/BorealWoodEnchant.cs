@@ -67,32 +67,39 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     return;
                 if (projectile != null && projectile.type == ProjectileID.SnowBallFriendly)
                     return;
-                int damage = hitInfo.SourceDamage;
-                damage = 800;
+                //int damage = hitInfo.SourceDamage;
+                //damage = 800;
                 //damage = (int)(damage * 0.35f);
                 //damage = (int)MathHelper.Clamp(damage, 0, 800); // big sting could be roughly 1700 here
-                BorealSnowballs(player, damage);
+                BorealSnowballs(player, baseDamage);
             }
                 
         }
-        public void BorealSnowballs(Player player, int damage)
+        public void BorealSnowballs(Player player, int baseDamage)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.BorealCD <= 0 && player.whoAmI == Main.myPlayer)
             {
                 Item item = EffectItem(player);
                 bool forceEffect = modPlayer.ForceEffect(item.type);
+                Item heldItem = player.HeldItem;
                 modPlayer.BorealCD = forceEffect ? 30 : 60;
                 if (player.HasEffect<TimberEffect>())
                     modPlayer.BorealCD = 90;
 
                 Vector2 vel = Vector2.Normalize(Main.MouseWorld - player.Center) * 17f;
-                int snowballDamage = damage / 2;
-                int damagecap = forceEffect ? 300 : 30;
+
+                float snowballDamage = baseDamage / 2;
+                if (!player.HasEffect<TimberEffect>() && heldItem != null && heldItem.IsWeaponWithDamageClass())
+                {
+                    snowballDamage *= player.ActualClassDamage(DamageClass.Ranged);
+                    float softcapMult = forceEffect ? (20f / 3f) : 1f;
+                    if (snowballDamage > (15f * softcapMult)) // diminishing returns above 15 snowballDamage for non wiz, 100 for wiz
+                        snowballDamage = (float)Math.Round(((30f * softcapMult) + snowballDamage) / 3f); // e.g. non wiz 30 -> 20, wiz 200 -> 150 etc. (https://www.desmos.com/calculator/vyaqqoegxq)
+                }
                 if (player.HasEffect<TimberEffect>())
-                    damagecap = 800;
-                snowballDamage = Math.Min(snowballDamage, FargoSoulsUtil.HighestDamageTypeScaling(player, damagecap));
-                int p = Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, vel, ProjectileID.SnowBallFriendly, snowballDamage, 1, Main.myPlayer);
+                    snowballDamage = 400;
+                int p = Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, vel, ProjectileID.SnowBallFriendly, (int)snowballDamage, 1, Main.myPlayer);
 
                 int numSnowballs = forceEffect ? 7 : 3;
                 if (p != Main.maxProjectiles)
