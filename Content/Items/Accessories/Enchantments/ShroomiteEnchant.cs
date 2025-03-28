@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+﻿using System;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -91,23 +92,28 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (projectile != null && (projectile.penetrate > 1 || projectile.penetrate < 0) && projectile.maxPenetrate == projectile.penetrate && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
             {
-                SpawnShrooms(player, target, baseDamage);
+                SpawnShrooms(player, target, hitInfo, baseDamage);
             }
         }
 
-        public static void SpawnShrooms(Player player, NPC target, int baseDamage)
+        public static void SpawnShrooms(Player player, NPC target, NPC.HitInfo hitInfo, int baseDamage)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            int damage = baseDamage / 4;
+            float shroomDamage = baseDamage / 4; // 0.25x or 25%
             int num = 3;
             if (modPlayer.ForceEffect<ShroomiteEnchant>())
             {
                 num = 5;
-                damage = (int)(baseDamage / 2.5f);
+                shroomDamage = baseDamage / 2.5f; // 0.4x or 40%
             }
-            if (damage > 115)
-                damage = 115;
-            Projectile[] projs = FargoSoulsUtil.XWay(num, player.GetSource_EffectItem<ShroomiteShroomEffect>(), target.Center, ModContent.ProjectileType<ShroomiteShroom>(), 16, damage, 0f);
+            if (!player.HasEffect<NatureEffect>())
+            {
+                shroomDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(hitInfo.DamageType);
+                shroomDamage = (float)Math.Round(shroomDamage);
+            }
+            if (shroomDamage > 115f)
+                shroomDamage = (230f + shroomDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
+            Projectile[] projs = FargoSoulsUtil.XWay(num, player.GetSource_EffectItem<ShroomiteShroomEffect>(), target.Center, ModContent.ProjectileType<ShroomiteShroom>(), 16, (int)shroomDamage, 0f);
 
             foreach (Projectile p in projs)
             {
