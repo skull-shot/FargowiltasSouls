@@ -152,8 +152,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     if (!modPlayer.TerrariaSoul)
                     {
                         float softcapMult = force ? 5f : 1f;
-                        if (spearDamage > (10f * softcapMult))
-                            spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
+                        if (spearDamage > (20f * softcapMult))
+                            spearDamage = ((40f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
                     }
 
                     Item effectItem = EffectItem(player);
