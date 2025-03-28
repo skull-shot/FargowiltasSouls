@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         }
         public override void SetDefaults()
         {
-            Projectile.width = 46;
+            Projectile.width = 20;
             Projectile.height = 8;
             Projectile.tileCollide = false;
             Projectile.aiStyle = -1;
@@ -40,17 +40,30 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override void AI()
         {
             Projectile.localAI[0]++;
-            if (Projectile.localAI[0] >= 20)
+            if (Projectile.localAI[0] >= 10)
             {
                 Projectile.frame++;
                 Projectile.localAI[0] = 0;
-                if (Projectile.frame > 5)
+                if (Projectile.frame > 4)
                 {
-                    Projectile.frame = 0;
+                    Projectile.frame = 3;
+                }
+            }
+            Projectile.localAI[1]++;
+            if (Projectile.localAI[1] >= 5)
+            {
+                Projectile.localAI[2]++;
+                Projectile.localAI[1] = 0;
+                if (Projectile.localAI[2] > 4)
+                {
+                    Projectile.localAI[2] = 0;
                 }
             }
 
-            
+            if (!Collision.SolidCollision(Projectile.Bottom - new Vector2(0, 5), 1, 1))
+            {
+                Projectile.position.Y += 1;
+            }
             Player target = null;
             if (Projectile.ai[0] == 0) {
                 int p = Player.FindClosest(Projectile.Center, 1, 1);
@@ -93,7 +106,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> vein = ModContent.Request<Texture2D>("Terraria/Images/Chain12");
+            Asset<Texture2D> vein = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodTendril");
             int frameHeight = t.Height() / Main.projFrames[Type];
            // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 
@@ -102,22 +115,26 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Player target = Main.player[(int)Projectile.ai[2]];
                 if (target != null && target.active)
                 {
-                    Vector2 bigPoint = Vector2.Lerp(Projectile.Center, target.Center, 1 - Projectile.ai[1] / 120f);
+                    int veinFrameHeight = vein.Height() / 5;
                     //Dust d = Dust.NewDustDirect(bigPoint, 1, 1, DustID.Terra);
                     //d.velocity *= 0;
-                    for (int i = 0; i < Projectile.Distance(target.Center); i += (int)(vein.Height()/3 * Projectile.scale))
+                    for (int i = 0; i < Projectile.Distance(target.Center); i += (int)(veinFrameHeight * Projectile.scale * 0.5f))
                     {
                         float y = Projectile.Distance(target.Center) /300;
                         Vector2 shakeOffset = new Vector2(MathHelper.Lerp(0, 1f, y*y), 0).RotatedByRandom(MathHelper.TwoPi);
                         Vector2 pos = Projectile.Center + Projectile.AngleTo(target.Center).ToRotationVector2() * i;
-                        float x = 1 - pos.Distance(bigPoint) / Projectile.Distance(target.Center);
-                        float scaleAdd = MathHelper.Lerp(0, 0.5f, (x == 0 ? 0 : MathF.Pow(2, 10 * x - 10)));
-                        Main.EntitySpriteDraw(vein.Value, pos - Main.screenPosition + shakeOffset, new Rectangle(0, (int)(vein.Height()/3 * ( i / 9 % (vein.Height() / 9))), vein.Width(), vein.Height()/3), lightColor, Projectile.AngleTo(target.Center) + MathHelper.PiOver2, new Vector2(vein.Width(), vein.Height()/3)/2, Projectile.scale + scaleAdd, SpriteEffects.None);
+
+                        int frame = (int)pos.Distance(target.Center) / (int)(veinFrameHeight * Projectile.scale * 0.5f) % 5;
+                        frame += (int)Projectile.localAI[2];
+                        if (frame > 4) frame -= 5;
+                        frame = (int)Projectile.localAI[2];
+                        //Main.NewText(frame);
+                        Main.EntitySpriteDraw(vein.Value, pos - Main.screenPosition + shakeOffset, new Rectangle(0, (int)(veinFrameHeight * frame), vein.Width(), veinFrameHeight), lightColor, Projectile.AngleTo(target.Center) + MathHelper.PiOver2, new Vector2(vein.Width(), veinFrameHeight)/2, Projectile.scale * 0.5f, SpriteEffects.None);
                     }
 
                 }
             }
-            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight) / 2, Projectile.scale, SpriteEffects.None);
+            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition - new Vector2(0, 5), new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight) / 2, Projectile.scale, SpriteEffects.None);
 
             return false;   
         }
