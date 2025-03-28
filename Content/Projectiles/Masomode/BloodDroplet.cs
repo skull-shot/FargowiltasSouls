@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 Projectile.timeLeft = 30;
                 if (Projectile.ai[1] == 0)
                 {
-                    Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center + new Vector2(0, 5), Vector2.Zero, ModContent.ProjectileType<BloodPuddle>(), 0, 1);
+                    Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BloodPuddle>(), 0, 1);
                     SoundEngine.PlaySound(SoundID.NPCDeath9, Projectile.Center);
                 }
             }
