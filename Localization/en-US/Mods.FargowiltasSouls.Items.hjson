@@ -77,7 +77,7 @@ BeeEnchant: {
 		While flying, leave behind flowers that take 4 seconds to form petals
 		Touching fully formed flowers gives you the Honey buff and creates a swarm of bees
 		Enemies touching the flowers also trigger the bee swarm
-		Effects of Hive Pack
+		[i:HiveBackpack] Effects of Hive Pack
 		'According to all known laws of aviation, there is no way a bee should be able to fly'
 		'''
 }
@@ -229,6 +229,7 @@ GladiatorEnchant: {
 	Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
+		Spears ignore 5 enemy defense
 		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		'''
@@ -276,7 +277,7 @@ IronEnchant: {
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range
 		Works when equipped:
-		Item grab range affects pickups such as Hearts and Mana Stars
+		Item grab range affects pickup items such as Hearts, Mana Stars and Nebula Boosters
 		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		'''
@@ -313,7 +314,7 @@ MeteorEnchant: {
 	DisplayName: Meteor Enchantment
 	Tooltip:
 		'''
-		Increases your movement speed and acceleration, and decreases your momentum
+		Greatly increases your movement speed and acceleration, and decreases your momentum
 		Hitting an enemy occasionally drops a meteor on them, dealing magic damage
 		Meteor cooldown is decreased faster the more you move around
 		'Drop a draco on 'em'
@@ -478,7 +479,7 @@ RainEnchant: {
 		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
-		Effects of Inner Tube
+		[i:FloatingTube] Effects of Inner Tube
 		'Come again some other day'
 		'''
 	VanityTooltip: Grants immunity to lightning strikes in Eternity Mode
@@ -1254,8 +1255,8 @@ HeartoftheMasochist: {
 	DisplayName: Heart of the Master
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Electrified, Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon	
+		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Electrified, Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Guard Parry negates up to 200 damage. Parries heal you based on damage. While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
@@ -2995,7 +2996,7 @@ Masochist: {
 		-New Eternity-exclusive item drops
 		-Deviantt provides a starter pack and progress-based advice
 		-Improves base stats and caps player DR at 75%
-		-Debuffs wear off faster when not attacking
+		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
 		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
 
@@ -3165,7 +3166,7 @@ AnglerEnchant: {
 		'''
 		Increases fishing power
 		You catch fish almost instantly
-		Effects of Lavaproof Tackle Bag
+		[i:LavaproofTackleBag] Effects of Lavaproof Tackle Bag
 		'As long as they aren't all shoes, you can go home happily'
 		'''
 }

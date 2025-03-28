@@ -370,7 +370,7 @@ NeurotoxinBuff: {
 
 NullificationCurseBuff: {
 	// DisplayName: Nullification Curse
-	// Description: Moon Lord has cycling damage type immunities!
+	// Description: Moon Lord has cycling damage type resistances!
 }
 
 OceanicMaulBuff: {
@@ -814,6 +814,6 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	// DisplayName: Touhou Hoard Buff
+	// DisplayName: Mystical Horde
 	// Description: The mythical beings will fight for you
 }

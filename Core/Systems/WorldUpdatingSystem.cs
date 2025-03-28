@@ -311,7 +311,7 @@ namespace FargowiltasSouls.Core.Systems
                 int postSpawnCooldown = LumUtils.MinutesToFrames(5);
                 int messageDelay = LumUtils.SecondsToFrames(10);
                 bool sandstorm = Sandstorm.Happening;
-                bool blizzard = sandstorm && Main.IsItRaining;
+                bool blizzard = Main.IsItRaining;
                 Player desertPlayer = null;
                 Player snowPlayer = null;
                 if (sandstorm)

@@ -162,7 +162,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet
                 .AddIngredient(ItemID.XenoStaff)
                 .AddIngredient(ModContent.ItemType<Eridanium>(), 99)
                 .AddIngredient(ModContent.ItemType<AbomEnergy>(), 99)
-                .AddIngredient(ItemID.MartianSaucerTrophy, 99)
+                .AddIngredient(ItemID.MartianSaucerTrophy, 1)
                 .AddIngredient(ItemID.LunarBar, 99)
                 .AddIngredient(ItemID.Nanites, 999)
                 .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))

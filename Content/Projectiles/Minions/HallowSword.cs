@@ -49,7 +49,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.DamageType = DamageClass.Summon;
             Projectile.minion = true;
             Projectile.timeLeft = 18000;
-            //Projectile.minionSlots = 0;
+            Projectile.minionSlots = 0;
             Projectile.hide = false;
 
             Projectile.scale = 1;

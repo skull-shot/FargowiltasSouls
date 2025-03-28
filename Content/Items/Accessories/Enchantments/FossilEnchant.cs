@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.FossilHelm)
                 .AddIngredient(ItemID.FossilShirt)
                 .AddIngredient(ItemID.FossilPants)
-                .AddIngredient(ItemID.BoneDagger, 100)
+                .AddIngredient(ItemID.BoneDagger, 120)
                 .AddIngredient(ItemID.AmberStaff)
                 .AddIngredient(ItemID.AntlionClaw)
 
