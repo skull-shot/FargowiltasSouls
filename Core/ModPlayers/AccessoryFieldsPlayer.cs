@@ -379,7 +379,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MutantDesperation;
         public int PresenceTogglerTimer;
         public bool MutantFang;
-        public bool DevianttPresence;
         public bool Swarming;
         public bool LowGround;
         public bool Flipped;

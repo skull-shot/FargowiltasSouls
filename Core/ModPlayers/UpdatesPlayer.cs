@@ -873,7 +873,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             */
 
-            if (MutantPresence || DevianttPresence)
+            if (MutantPresence)
             {
                 Player.statDefense /= 2;
                 Player.endurance /= 2;
