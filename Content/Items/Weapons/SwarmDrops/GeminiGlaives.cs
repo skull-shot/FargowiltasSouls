@@ -36,7 +36,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.shootSpeed = 20;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.UseSound = null;
-            Item.channel = true;
             Item.autoReuse = true;
         }
 
@@ -55,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
            //     return false;
            // }
 
-            if (player.altFunctionUse == 2 && player.ownedProjectileCounts[ModContent.ProjectileType<Retiglaive>()] < 7)
+            if (player.altFunctionUse == 2)
             {
                 Item.shoot = ModContent.ProjectileType<Retiglaive>();
                 Item.shootSpeed = 15f;
@@ -67,8 +66,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
                 Item.shootSpeed = 45f;
                 Item.UseSound = FargosSoundRegistry.GeminiSpaz with {Volume = 0.8f};
             }
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<Spazmaglaive>()] > 0)
-                return false;
             return true;
         }
 
@@ -82,22 +79,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int num = 1;
-            int rot = 30;
-            if (type == ModContent.ProjectileType<Spazmaglaive>())
+            for (int i = -1; i <= 1; i++)
             {
-                num = 1;
-                rot = 50;
-            }
-            else
-            {
-                num = 4;
-                rot = 30;
-            }
-
-            for (int i = -1; i <= num; i++)
-            {
-                Projectile.NewProjectile(source, position, velocity.RotatedBy(MathHelper.ToRadians(rot) * i), type, damage, knockback, player.whoAmI, 0);
+                Projectile.NewProjectile(source, position, velocity.RotatedBy(MathHelper.ToRadians(30) * i), type, damage, knockback, player.whoAmI, lastThrown);
             }
 
             lastThrown = type;

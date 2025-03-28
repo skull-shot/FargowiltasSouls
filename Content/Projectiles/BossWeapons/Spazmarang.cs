@@ -7,7 +7,6 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -18,20 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class Spazmarang : ModProjectile
     {
-        public Vector2 mousePos = Vector2.Zero;
-        public override void SendExtraAI(BinaryWriter writer)
-        {
-            writer.Write(mousePos.X);
-            writer.Write(mousePos.Y);
-        }
-        public override void ReceiveExtraAI(BinaryReader reader)
-        {
-            Vector2 buffer;
-            buffer.X = reader.ReadSingle();
-            buffer.Y = reader.ReadSingle();
-            if (Projectile.owner != Main.myPlayer)
-                mousePos = buffer;
-        }
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmarang");
@@ -57,7 +42,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void AI()
         {
-            /*if (Projectile.ai[0] == 0)
+            if (Projectile.ai[0] == 0)
             {
                 Projectile.ai[1]++;
                 if (Projectile.ai[1] >= 30)
@@ -72,19 +57,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 }
                 Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Projectile.rotation * 2, 1 / 60f);
 
-            }*/
-            if (Projectile.owner == Main.myPlayer)
-            {
-                mousePos = Main.MouseWorld;
             }
 
-            if (Main.LocalPlayer.channel)
-            {
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDirectionTo(mousePos) * 25, 0.2f);
-                    
-                Projectile.timeLeft = 2;
-            }
-            else
+            if (Projectile.ai[0] == 1)
             {
                 Projectile.extraUpdates = 0;
                 Projectile.timeLeft = 2;
@@ -93,9 +68,25 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 //kill when back to player
                 if (Projectile.Distance(Main.player[Projectile.owner].Center) <= 30)
                     Projectile.Kill();
-
+                
             }
 
+            if (Projectile.ai[0] == 2)
+            {
+                Projectile.rotation += 0.64f;
+                Projectile.velocity *= 0;
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 75, false, true));
+                if (n.Alive())
+                {
+                    Projectile.velocity += n.velocity;
+                    //Projectile.Center = n.Center;
+                }
+
+                if (Projectile.timeLeft <= 10)
+                {
+                    Projectile.ai[0] = 1;
+                }
+            }
 
             //explosion code
             /*for (int i = 0; i < Main.maxProjectiles; i++)
@@ -127,7 +118,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 for (int i = 0; i < Main.maxProjectiles; i++)
                 {
                     Projectile projectile = Main.projectile[i];
-                    if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active)
+                    if (projectile.type == ModContent.ProjectileType<Spazmarang>() && projectile.active && projectile.ai[0] == 2)
                     {
                         float scale = Main.rand.NextFloat(0.25f, 0.35f);
                         Particle p1 = new RectangleParticle(n.Center, ((n.Center - Projectile.Center) * 0.2f) + Main.rand.NextVector2Circular(5, 15), Color.Green, scale, 25, true);
@@ -140,14 +131,18 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                         SoundEngine.PlaySound(SoundID.Item22, Projectile.Center);
                         target.AddBuff(BuffID.CursedInferno, 120);
-                        Projectile.velocity += Vector2.Normalize(n.Center - Projectile.Center) * 45;
                         return;
-
-                        
                             
                     }
                 }
                 
+            }
+            if (n.Alive() && (n.type != NPCID.GolemFistLeft || n.type != NPCID.GolemFistRight || n.type != ModContent.NPCType<CrystalLeaf>()))
+            {
+                if (Projectile.timeLeft >= 10)
+                {
+                    Projectile.ai[0] = 2;
+                }
             }
             target.AddBuff(BuffID.CursedInferno, 120);
             
