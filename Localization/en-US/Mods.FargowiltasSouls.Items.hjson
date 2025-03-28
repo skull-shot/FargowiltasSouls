@@ -229,6 +229,7 @@ GladiatorEnchant: {
 	Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
+		Spears ignore 5 enemy defense
 		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		'''
