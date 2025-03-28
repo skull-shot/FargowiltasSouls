@@ -370,7 +370,7 @@ NeurotoxinBuff: {
 
 NullificationCurseBuff: {
 	DisplayName: Проклятье нуллификации
-	Description: Лунный лорд переключает сопротивляемости к видам урона!
+	Description: Лунный лорд переключает сопротивления к видам урона!
 }
 
 OceanicMaulBuff: {
