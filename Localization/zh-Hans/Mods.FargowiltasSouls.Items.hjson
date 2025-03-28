@@ -73,7 +73,7 @@ BeeEnchant: {
 	DisplayName: 蜜蜂魔石
 	Tooltip:
 		'''
-		增加友好蜜蜂的力量
+		[i:HiveBackpack] 增加友好蜜蜂的力量
 		允许飞行和缓慢下落
 		飞行时会留下花朵，花朵4秒后会开花
 		接触开花的花朵可提供蜂蜜增益，并产生一群蜜蜂
@@ -271,13 +271,17 @@ IronEnchant: {
 		'''
 		在物品栏中即可生效：
 		重铸消耗额外50%钱币来获得更高级的前缀
-		物品的吸附范围扩大
+		增加物品拾取范围
 		装备时生效：
 		物品拾取范围会影响拾取物（心、魔力星、钱币等）
 		拾取物品或拾取物后5秒内增加20%伤害减免
 		“趁热打铁”
 		'''
-	VanityTooltip: 重铸消耗额外50%钱币来获得更高级的前缀
+	VanityTooltip:
+		'''
+		重铸消耗额外50%钱币来获得更高级的前缀
+		增加物品拾取范围
+		'''
 }
 
 JungleEnchant: {
@@ -470,7 +474,7 @@ RainEnchant: {
 		雨伞反射射弹的伤害合计超过200点后会破裂
 		获得羽落药水的效果
 		永恒模式下免疫雷击（在背包和时装栏也可生效）
-		拥有浮游圈的效果
+		拥有[i:FloatingTube]浮游圈的效果
 		“改日再来”
 		'''
 	VanityTooltip: 永恒模式下免疫雷击
@@ -922,7 +926,7 @@ TerraForce: {
 		[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀（在背包和时装栏中也可生效）
 		“大地赐予它力量”
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀"
+	VanityTooltip: "[i:FargowiltasSouls/IronEnchant] 重铸消耗额外50%钱币来获得更高级的前缀，增加物品拾取范围"
 }
 
 TimberForce: {
@@ -1083,7 +1087,7 @@ CelestialRune: {
 }
 
 ChaliceoftheMoon: {
-	DisplayName: 银河球
+	DisplayName: 苍翠恶兆面具
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon]免疫蜂群、萎缩、卡壳、魔力逆流和社恐减益
@@ -3185,7 +3189,7 @@ AnglerEnchant: {
 		'''
 		增加渔力
 		你几乎可以立即钓到鱼
-		拥有防熔岩渔具袋效果
+		拥有[i:LavaproofTackleBag]防熔岩渔具袋效果
 		“只要不全是旧鞋，你就能高高兴兴地回家”
 		'''
 }

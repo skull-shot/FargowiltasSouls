@@ -1609,7 +1609,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (projectile.type == ProjectileID.CrystalLeafShot && player.HasEffect<NatureEffect>() && player.HasEffect<ShroomiteShroomEffect>())
             {
-                ShroomiteShroomEffect.SpawnShrooms(player, target, (int)(damageDone * 1f));
+                ShroomiteShroomEffect.SpawnShrooms(player, target, hit, (int)(damageDone * 1f));
             }
         }
 

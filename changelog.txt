@@ -1,2 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Fixed Deviantt rune wizard attack not working correctly
+Updated Nullification Curse description
+Tweaked Iron Enchant description to clarify pickups being specifically pickup items
+Updated Children of Nature's Eulogy buff name
+Fixed Voltaic Chain not working correctly in multiplayer
+Fixed Rain Explosion still dealing damage with Lightning Immunity and Force of Nature not granting it passively

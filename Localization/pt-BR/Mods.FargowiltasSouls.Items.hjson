@@ -75,7 +75,7 @@ BeeEnchant: {
 		While flying, leave behind flowers that take 4 seconds to form petals
 		Touching fully formed flowers gives you the Honey buff and creates a swarm of bees
 		Enemies touching the flowers also trigger the bee swarm
-		Effects of Hive Pack
+		[i:HiveBackpack] Effects of Hive Pack
 		'According to all known laws of aviation, there is no way a bee should be able to fly'
 		''' */
 }
@@ -278,7 +278,7 @@ IronEnchant: {
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range
 		Works when equipped:
-		Item grab range affects pickups such as Hearts and Mana Stars
+		Item grab range affects pickup items such as Hearts, Mana Stars and Nebula Boosters
 		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		''' */
@@ -315,7 +315,7 @@ MeteorEnchant: {
 	// DisplayName: Meteor Enchantment
 	/* Tooltip:
 		'''
-		Increases your movement speed and acceleration, and decreases your momentum
+		Greatly increases your movement speed and acceleration, and decreases your momentum
 		Hitting an enemy occasionally drops a meteor on them, dealing magic damage
 		Meteor cooldown is decreased faster the more you move around
 		'Drop a draco on 'em'
@@ -477,7 +477,7 @@ RainEnchant: {
 		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
-		Effects of Inner Tube
+		[i:FloatingTube] Effects of Inner Tube
 		'Come again some other day'
 		''' */
 	// VanityTooltip: Grants immunity to lightning strikes in Eternity Mode
@@ -3115,7 +3115,7 @@ AnglerEnchant: {
 		'''
 		Increases fishing power
 		You catch fish almost instantly
-		Effects of Lavaproof Tackle Bag
+		[i:LavaproofTackleBag] Effects of Lavaproof Tackle Bag
 		'As long as they aren't all shoes, you can go home happily'
 		''' */
 }

@@ -549,6 +549,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
+            if (!resprite)
+                return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
             // Draw the Ninja (Mutant).
             var ninjaOffset = new Vector2(-npc.velocity.X * 2f, -npc.velocity.Y);
             var ninjaRotation = npc.velocity.X * 0.05f;

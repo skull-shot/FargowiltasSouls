@@ -34,21 +34,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[BuffID.Suffocation] = true;
         }
 
-        public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
-        {
-            return false;
-        }
-
-        public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
+        public static float nerf => Main.getGoodWorld ? 0f : WorldSavingSystem.MasochistModeReal ? 0.2f : 0.4f;
+        public bool IsItemValid(NPC npc, Player player, Item item)
         {
             int masoStateML = GetVulnerabilityState(npc);
             if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4 && !player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
                 return false;
-
-            return base.CanBeHitByItem(npc, player, item);
+            return true;
         }
-
-        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        public bool IsProjectileValid(NPC npc, Projectile projectile)
         {
             if (!Main.player[projectile.owner].buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
             {
@@ -62,11 +56,43 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     default: break;
                 }
             }
-
-
+            return true;
+        }
+        public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
+        {
+            if (Main.getGoodWorld)
+            {
+                if (!IsItemValid(npc, player, item)) 
+                    return false;
+            }
+            return base.CanBeHitByItem(npc, player, item);
+        }
+        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        {
+            if (Main.getGoodWorld)
+            {
+                if (!IsProjectileValid(npc, projectile))
+                    return false;
+            }
             return base.CanBeHitByProjectile(npc, projectile);
         }
+        public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+        {
+            if (!IsItemValid(npc, player, item))
+                modifiers.FinalDamage *= nerf;
+        }
+        public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            if (!IsProjectileValid(npc, projectile))
+                modifiers.FinalDamage *= nerf;
+        }
 
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (WorldSavingSystem.EternityMode)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void LoadSprites(NPC npc, bool recolor)
         {
             base.LoadSprites(npc, recolor);

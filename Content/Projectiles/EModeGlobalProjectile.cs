@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool EModeCanHurt = true;
         public int NerfDamageBasedOnProjTypeCount;
         public bool altBehaviour;
-
+        private List<Tuple<int, float>> medusaList = typeof(Projectile).GetField("_medusaHeadTargetList", LumUtils.UniversalBindingFlags).GetValue(null) as List<Tuple<int, float>>;
         private int counter;
         private bool preAICheckDone;
         private bool firstTickAICheckDone;
@@ -1287,6 +1287,18 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.OrichalcumHalberd:
                     modifiers.FinalDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
+                    break;
+                case ProjectileID.MedusaHeadRay:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (player.Alive())
+                        {
+                            float maxBonus = 1.25f;                    // Medusa Head can target up to 3 enemies max, this EMode buff makes it so that
+                            float bonus = maxBonus / medusaList.Count; // for every enemy target slot that's empty, the damage goes up by +0.625x,
+                            modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
+                        }
+                    }
                     break;
             }
 

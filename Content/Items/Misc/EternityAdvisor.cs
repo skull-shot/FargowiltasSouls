@@ -340,7 +340,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                 meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
                 rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
                 mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<AncientHallowEnchant>()];
+                summonerSpecific = [ModContent.ItemType<OccultistsEssence>()];
             }
             else if (!NPC.downedMechBoss3)
             {

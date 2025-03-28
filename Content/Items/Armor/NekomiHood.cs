@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         public override void UpdateEquip(Player player)
         {
             player.GetDamage(DamageClass.Generic) += 0.07f;
-            player.maxMinions += 2;
+            player.maxMinions += 1;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -98,6 +98,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             player.GetDamage(DamageClass.Generic) += 0.07f;
             player.GetCritChance(DamageClass.Generic) += 7;
+            player.maxMinions += 1;
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.Graze = true;

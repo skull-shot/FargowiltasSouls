@@ -106,20 +106,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
             if (player.FargoSouls().ObsidianCD == 0)
             {
-                int damage = baseDamage;
+                float explosionDamage = baseDamage;
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
-                int cap = player.ForceEffect<ObsidianProcEffect>() ? 200 : 50;
-                damage = Math.Min(damage, FargoSoulsUtil.HighestDamageTypeScaling(player, cap));
+                bool force = player.ForceEffect<ObsidianProcEffect>();
+                float softcapMult = force ? 4f : 1f;
 
-                if (player.lavaWet || modPlayer.LavaWet)
-                    damage = (int)(damage * 1.3f);
-                if (!player.ForceEffect<ObsidianProcEffect>())
-                    damage = (int)(damage * 0.875f);
+                if (force) // this section is just imitating the previous version but cleaner
+                {
+                    explosionDamage *= 1.5f; // technically meant to result to 1.3f but we'll see
+                    if (!(player.lavaWet || modPlayer.LavaWet))
+                        explosionDamage *= 0.75f;
+                }
 
-                if (damage > 250)
-                    damage = 250;
+                if (explosionDamage > 50f * softcapMult)
+                    explosionDamage = ((100f * softcapMult) + explosionDamage) / 3f;
 
-                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<ObsidianExplosion>(), damage, 0, player.whoAmI);
+                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, Vector2.Zero, ModContent.ProjectileType<ObsidianExplosion>(), (int)explosionDamage, 0, player.whoAmI);
 
                 modPlayer.ObsidianCD = 50;
             }

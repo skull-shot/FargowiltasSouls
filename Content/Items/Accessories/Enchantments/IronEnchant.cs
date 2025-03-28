@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     }
     public class IronPassiveEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => null;
+        public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
         public override int ToggleItemType => ModContent.ItemType<IronEnchant>();
 
     }
