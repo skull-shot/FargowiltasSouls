@@ -4,7 +4,7 @@ Several Enchantments now use softcaps with diminishing returns and properly scal
 - Boreal Wood snowballs
 - Gladiator spears
 - Obsidian explosion (scaling unchanged)
-- Shroommite shrooms
+- Shroomite shrooms
 Resprited all Champion relics
 Resprited Mutant Statue
 Moved one minion slots from Nekomi Armor hood to set bonus
