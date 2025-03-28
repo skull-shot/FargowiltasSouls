@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.GladiatorStandardCD--;
             if (player.HasBuff<GladiatorBuff>())
             {
-                float stats = 0.08f;
+                float stats = 0.05f;
                 if (modPlayer.ForceEffect<GladiatorEnchant>())
                     stats = 0.1f;
                 player.GetDamage(DamageClass.Generic) += stats;
@@ -140,7 +140,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool force = modPlayer.ForceEffect<GladiatorEnchant>();
 
                 bool buff = player.HasBuff<GladiatorBuff>();
-                float spearDamage = baseDamage / (buff ? 3f : 5f);
+                float spearDamage = baseDamage / (buff ? 4f : 6f);
                 spearDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(hitInfo.DamageType);
                 spearDamage = (float)Math.Round(spearDamage);
 

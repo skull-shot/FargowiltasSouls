@@ -143,7 +143,7 @@ CopperEnchant: {
 		'''
 		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies
 		Wet enemies can be shocked without a critical strike
-		4 second cooldown, reduced by critical strikes and hits on wet enemies
+		5 second cooldown, reduced by critical strikes and hits on wet enemies
 		'And his music was electric'
 		'''
 }
@@ -191,7 +191,7 @@ EbonwoodEnchant: {
 		'''
 		You are surrounded by an aura of corruption
 		Having enemies in the aura builds up Corruption
-		Corruption grants you up to 5 flat damage and 5% damage reduction
+		Corruption grants you up to 4 flat damage and 4% damage reduction
 		'Untapped potential'
 		'''
 }
@@ -689,7 +689,7 @@ TungstenEnchant: {
 	Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
+		Your attacks cause a shockwave with huge knockback
 		2.5 second cooldown
 		'Bigger is always better'
 		'''
