@@ -86,6 +86,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (!IsProjectileValid(npc, projectile))
                 modifiers.FinalDamage *= nerf;
         }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (WorldSavingSystem.EternityMode)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void LoadSprites(NPC npc, bool recolor)
         {
             base.LoadSprites(npc, recolor);

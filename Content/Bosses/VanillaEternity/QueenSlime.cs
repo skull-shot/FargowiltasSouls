@@ -568,13 +568,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         }
 
+        private static MiscShaderData queenSlimeBuffer;
+
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
             if (!resprite)
                 return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
 
-            GameShaders.Misc["FargowiltasSouls:QueenSlimeBuffer"] = GameShaders.Misc["QueenSlime"];
+            queenSlimeBuffer = GameShaders.Misc["QueenSlime"];
             GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlime"];
             
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
@@ -583,8 +585,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+         
+            bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
+            if (!resprite)
+            {
+                return;
+            }
             
-            GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlimeBuffer"];
+            GameShaders.Misc["QueenSlime"] = queenSlimeBuffer;
         }
     }
 
