@@ -881,7 +881,7 @@ namespace FargowiltasSouls.Core.Globals
                 conditionalRule.OnSuccess(rule);
                 npcLoot.Add(conditionalRule);
             }
-
+            
             switch (npc.type)
             {
                 case NPCID.BlueSlime:
@@ -926,6 +926,7 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.IlluminantBat:
                 case NPCID.CaveBat:
                 case NPCID.GiantBat:
+                case NPCID.SporeBat:
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.SonarPotion));
                     break;
 
