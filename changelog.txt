@@ -1,6 +1,20 @@
 NEW UPDATE - V {ModVersion}
-Updated Nullification Curse description
-Tweaked Iron Enchant description to clarify pickups being specifically pickup items
-Updated Children of Nature's Eulogy buff name
-Fixed Voltaic Chain not working correctly in multiplayer
-Fixed Rain Explosion still dealing damage with Lightning Immunity and Force of Nature not granting it passively
+Several Enchantments now use softcaps with diminishing returns and properly scale with their intended class:
+- Ash Wood Enchantment fireballs
+- Boreal Wood snowballs
+- Gladiator spears
+- Obsidian explosion (scaling unchanged)
+- Shroommite shrooms
+Resprited all Champion relics
+Resprited Mutant Statue
+Moved one minion slots from Nekomi Armor hood to set bonus
+Fossil Enchant recipe 100 -> 120 bone daggers
+Spore Bats now Tim's Concoction-drop Sonar Potion alongside other bats
+Eternity Medusa Head: Deals up to 2.25x damage the fewer enemies are hit
+Gladiator Enchantment now mentions the spears' innate armor penetration in tooltip
+Eternity Moon Lord parts can now never ever deal contact damage
+Renamed Abominationn sword projectile to Laevateinn
+Added toggle for Iron Enchant reforges
+Fixed Iron Enchant applying to non-reforge prefixes
+Fixed Queen Slime not working if Eternity resprites are disabled
+Fixed slight error with Royal Subject sprite sheet
