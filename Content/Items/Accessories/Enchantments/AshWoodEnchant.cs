@@ -93,21 +93,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : player.HasEffect<ObsidianProcEffect>() ? 25 : 35;
 
-                int cap = 60;
+                float softcapMult = 2f;
                 int effectItemType = EffectItem(player).type;
+                Item heldItem = player.HeldItem;
                 int ashwood = ModContent.ItemType<AshWoodEnchant>();
                 int obsidian = ModContent.ItemType<ObsidianEnchant>();
                 if (!player.ForceEffect<AshWoodFireballs>() && (effectItemType == ashwood || effectItemType == obsidian))
-                    cap = 30;
+                    softcapMult = 1f;
 
-                int fireballDamage = damage;
+                float fireballDamage = damage;
+                if (!modPlayer.TerrariaSoul && heldItem != null && heldItem.IsWeaponWithDamageClass())
+                {
+                    fireballDamage *= player.ActualClassDamage(DamageClass.Magic);
+                    if (fireballDamage > 30f * softcapMult)
+                    fireballDamage = (float)Math.Round(((60f * softcapMult) + fireballDamage) / 3f);
+                }
                 Vector2 vel = Vector2.Normalize(Main.MouseWorld - player.Center) * 17f;
                 vel = vel.RotatedByRandom(Math.PI / 10);
-                if (!modPlayer.TerrariaSoul)
-                    fireballDamage = Math.Min(fireballDamage, FargoSoulsUtil.HighestDamageTypeScaling(player, cap));
 
                 if (player.whoAmI == Main.myPlayer)
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, fireballDamage, 1, Main.myPlayer);
+                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, (int)fireballDamage, 1, Main.myPlayer);
             }
         }
     }

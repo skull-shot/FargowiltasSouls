@@ -229,6 +229,7 @@ GladiatorEnchant: {
 	Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
+		Spears ignore 5 enemy defense
 		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		'''
@@ -276,7 +277,7 @@ IronEnchant: {
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range
 		Works when equipped:
-		Item grab range affects pickups such as Hearts and Mana Stars
+		Item grab range affects pickup items such as Hearts, Mana Stars and Nebula Boosters
 		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'Strike while the iron is hot'
 		'''

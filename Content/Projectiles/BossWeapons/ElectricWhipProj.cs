@@ -82,9 +82,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     if (p.Alive() && p.minion && p.owner == Projectile.owner && Cooldowns[p.whoAmI] <= 0 && p.Distance(target.Center) < 300)
                     {
                         SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap, Projectile.Center);
-                        if (FargoSoulsUtil.HostCheck)
-                            Projectile.NewProjectile(Projectile.InheritSource(Projectile), p.Center, p.DirectionTo(target.Center), ModContent.ProjectileType<ElectricWhipLightning>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner, ai2: p.Distance(target.Center));
-                        Cooldowns[p.whoAmI] = /*Cooldowns[otherMinion.whoAmI] = */45;
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), p.Center, p.DirectionTo(target.Center), ModContent.ProjectileType<ElectricWhipLightning>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner, ai2: p.Distance(target.Center));
+                        Cooldowns[p.whoAmI] = 45;
                         LightningCounter++;
                         if (LightningCounter >= 4)
                             return;
