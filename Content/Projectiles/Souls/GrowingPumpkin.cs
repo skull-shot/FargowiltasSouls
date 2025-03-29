@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                     {
                         if (Main.myPlayer == hitPlayer.whoAmI)
                         {
-                            int heal = 20;
+                            int heal = 18;
                             if (modPlayer.ForceEffect<PumpkinEnchant>())
                                 heal *= 2;
                             FargoGlobalItem.OnRetrievePickup(hitPlayer);
