@@ -721,10 +721,10 @@ namespace FargowiltasSouls.Core.Globals
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
 
-                npc.lifeRegen -= 100;
+                npc.lifeRegen -= 20;
 
-                if (damage < 5)
-                    damage = 5;
+                if (damage < 2)
+                    damage = 2;
             }
 
             if (LeadPoison)
@@ -799,10 +799,10 @@ namespace FargowiltasSouls.Core.Globals
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
 
-                npc.lifeRegen -= 50;
+                npc.lifeRegen -= 20;
 
-                if (damage < 5)
-                    damage = 5;
+                if (damage < 2)
+                    damage = 2;
             }
 
             //12 dps 
@@ -1363,7 +1363,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (MoltenAmplify)
             {
-                float modifier = 1.2f;
+                float modifier = 1.15f;
                 if (!player.HasEffectEnchant<MoltenEffect>())
                     modifier = 1.15f;
                 else if (player.ForceEffect<MoltenEffect>())
