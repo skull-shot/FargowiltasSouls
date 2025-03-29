@@ -207,7 +207,7 @@ FossilEnchant: {
 		'''
 		If you reach zero HP you will revive with 50 HP, self-cleanse debuffs, and spawn several bones
 		You will also spawn a few bones on every hit
-		Collect the bones to heal for 20 HP each
+		Collect the bones to heal for 15 HP each
 		'Beyond a forgotten age'
 		'''
 }
@@ -464,7 +464,7 @@ PumpkinEnchant: {
 	Tooltip:
 		'''
 		You will grow pumpkins while moving
-		When fully grown, they will heal 25 HP and spawn damaging embers
+		When fully grown, they will heal 20 HP and spawn damaging embers
 		Enemies that touch them will destroy them and take damage
 		'Your sudden pumpkin craving will never be satisfied'
 		'''
