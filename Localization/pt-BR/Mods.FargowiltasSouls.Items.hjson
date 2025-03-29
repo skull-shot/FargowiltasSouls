@@ -393,7 +393,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -675,7 +675,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback that deals less damage on the original target
+		Your attacks cause a shockwave with huge knockback
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
