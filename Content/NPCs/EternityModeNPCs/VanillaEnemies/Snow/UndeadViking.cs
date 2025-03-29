@@ -41,23 +41,26 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                 return base.SafePreAI(npc);
             Player target = Main.player[npc.target];
 
-            if (npc.Center.Distance(target.Center) > 550)
+            if (npc.Center.Distance(target.Center) > 1500 || !target.active || target.dead)
                 return base.SafePreAI(npc);
 
             AttackTimer++;
 
-            // audio cue
+            // spawn proj
             if (AttackTimer == 150)
-                SoundEngine.PlaySound(SoundID.Unlock);
-
-            if (AttackTimer == 180)
             {
-                AttackTimer = 0;
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = 10 * Vector2.UnitX.RotatedBy((target.Center - npc.Center).ToRotation());
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel, ModContent.ProjectileType<VikingHook>(), 1, 0f, ai0: npc.whoAmI, ai2: -1);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel, ModContent.ProjectileType<VikingHook>(), 1, 0f, ai0: npc.whoAmI, ai1: -30 , ai2: -1);
                 }
+                SoundEngine.PlaySound(SoundID.Unlock);
+            }
+
+            // sound cue
+            if (AttackTimer == 180)
+            {
+                AttackTimer = 0;
                 SoundEngine.PlaySound(SoundID.Item1);
             }
             return base.SafePreAI(npc);

@@ -14,6 +14,7 @@ using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using System.Runtime.InteropServices;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Core.Systems;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
@@ -37,14 +38,34 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.penetrate = -1;
         }
 
+        public int maxRange = WorldSavingSystem.MasochistModeReal ? 600 : 400;
+
         public override void AI()
         {
             NPC owner = Main.npc[(int)Projectile.ai[0]];
             if (!owner.active)
                 Projectile.Kill();
 
+
             float rot = (owner.Center - Projectile.Center).ToRotation();
             float dist = Projectile.Center.Distance(owner.Center);
+            Projectile.rotation = rot - MathHelper.PiOver2;
+            if (Projectile.ai[1] < 0)
+            {
+                rot = (Main.player[owner.target].Center - owner.Center).ToRotation();
+                Projectile.ai[1]++;
+                if (Projectile.ai[1] == 0)
+                {
+                    Projectile.velocity = 10 * Vector2.UnitX.RotatedBy(rot);
+                }
+                else
+                {
+                    Projectile.Center = owner.Center + 10 * Vector2.UnitX.RotatedBy(rot);
+                    Projectile.rotation = rot + MathHelper.PiOver2;
+                }
+                return;
+            }
+
             Projectile.rotation = rot - MathHelper.PiOver2;
 
             if (Projectile.ai[1] >= 1)
@@ -82,11 +103,18 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 }
             }
 
-            if (dist > 750)
+            if (dist > maxRange)
             {
                 // retract state
                 Projectile.ai[1] = 1;
             }
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            // retract state
+            Projectile.ai[1] = 1;
+            return false;
         }
 
         public override bool? CanDamage() => false;
