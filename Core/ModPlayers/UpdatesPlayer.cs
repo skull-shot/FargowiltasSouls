@@ -311,7 +311,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.ClearBuff(ModContent.BuffType<TwinsInstallBuff>());
 
             if (Player.HasBuff<BerserkerInstallBuff>() && !Player.HasEffect<AgitatingLensInstall>())
+            {
                 Player.ClearBuff(ModContent.BuffType<BerserkerInstallBuff>());
+                int stunDuration = 120; //2sec
+                Player.AddBuff(ModContent.BuffType<BerserkerInstallCDBuff>(), 60 * 10);
+                Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
+            }
 
             if ((BetsysHeartItem != null || QueenStingerItem != null))
             {
