@@ -350,9 +350,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             dr += NecromanticBrew.NecroBrewDashDR(Player);
 
-            if (Player.HasBuff(ModContent.BuffType<ShellHideBuff>()))
-                dr -= 0.9f;
-
             if (Smite)
                 dr -= 0.2f;
 
