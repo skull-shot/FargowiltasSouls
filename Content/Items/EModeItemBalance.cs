@@ -525,6 +525,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
+
+                case ItemID.MedusaHead:
+                    balanceTextKeys = ["MedusaHead"];
+                    return EModeChange.Buff;
                 default:
                     return EModeChange.None;
             }

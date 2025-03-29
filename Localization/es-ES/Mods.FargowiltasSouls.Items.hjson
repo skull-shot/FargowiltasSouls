@@ -191,7 +191,7 @@ EbonwoodEnchant: {
 		'''
 		You are surrounded by an aura of corruption
 		Having enemies in the aura builds up Corruption
-		Corruption grants you up to 5 flat damage and 5% damage reduction
+		Corruption grants you up to 4 flat damage and 4% damage reduction
 		'Untapped potential'
 		''' */
 }
@@ -229,6 +229,7 @@ GladiatorEnchant: {
 	/* Tooltip:
 		'''
 		Spears will rain down on struck enemies, dealing ranged damage
+		Spears ignore 5 enemy defense
 		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		''' */

@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.GladiatorStandardCD--;
             if (player.HasBuff<GladiatorBuff>())
             {
-                float stats = 0.08f;
+                float stats = 0.05f;
                 if (modPlayer.ForceEffect<GladiatorEnchant>())
                     stats = 0.1f;
                 player.GetDamage(DamageClass.Generic) += stats;
@@ -140,15 +140,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool force = modPlayer.ForceEffect<GladiatorEnchant>();
 
                 bool buff = player.HasBuff<GladiatorBuff>();
-                int spearDamage = baseDamage / (buff ? 3 : 5);
+                float spearDamage = baseDamage / (buff ? 4f : 6f);
+                spearDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(hitInfo.DamageType);
+                spearDamage = (float)Math.Round(spearDamage);
 
                 if (force)
                     spearDamage *= 2;
 
-                if (spearDamage > 0)
+                if ((int)spearDamage > 0)
                 {
                     if (!modPlayer.TerrariaSoul)
-                        spearDamage = Math.Min(spearDamage, FargoSoulsUtil.HighestDamageTypeScaling(player, 300));
+                    {
+                        float softcapMult = force ? 5f : 1f;
+                        if (spearDamage > (10f * softcapMult))
+                            spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
+                    }
+
                     Item effectItem = EffectItem(player);
                     for (int i = 0; i < 3; i++)
                     {
@@ -160,7 +167,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         //speed.Normalize();
                         //speed *= 15f * Main.rand.NextFloat(0.8f, 1.2f);
 
-                        Projectile.NewProjectile(player.GetSource_Accessory(effectItem), spawn, Vector2.Normalize(aim - spawn).RotatedByRandom(MathHelper.Pi / 20) * speed, ModContent.ProjectileType<GladiatorJavelin>(), spearDamage, 4f, Main.myPlayer);
+                        Projectile.NewProjectile(player.GetSource_Accessory(effectItem), spawn, Vector2.Normalize(aim - spawn).RotatedByRandom(MathHelper.Pi / 20) * speed, ModContent.ProjectileType<GladiatorJavelin>(), (int)spearDamage, 4f, Main.myPlayer);
                     }
 
                     modPlayer.GladiatorCD = force ? 10 : 30;

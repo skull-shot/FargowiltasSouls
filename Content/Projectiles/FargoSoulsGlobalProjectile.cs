@@ -1501,7 +1501,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.2f;
+                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.12f;
                 float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
                 if (Main.rand.NextFloat() < increase)
                     modifiers.SetCrit();
@@ -1609,7 +1609,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (projectile.type == ProjectileID.CrystalLeafShot && player.HasEffect<NatureEffect>() && player.HasEffect<ShroomiteShroomEffect>())
             {
-                ShroomiteShroomEffect.SpawnShrooms(player, target, (int)(damageDone * 1f));
+                ShroomiteShroomEffect.SpawnShrooms(player, target, hit, (int)(damageDone * 1f));
             }
         }
 
