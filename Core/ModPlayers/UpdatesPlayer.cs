@@ -590,7 +590,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HallowRepelTime = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
-            if (SquireEnchantActive)
+            /*if (SquireEnchantActive)
                 Player.setSquireT2 = true;
             if (ValhallaEnchantActive)
                 Player.setSquireT3 = true;
@@ -604,7 +604,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT2 = true;
 
             if (ShinobiEnchantActive)
-                Player.setMonkT3 = true;
+                Player.setMonkT3 = true;*/
 
 
             if (Player.channel && WeaponUseTimer < 2)
