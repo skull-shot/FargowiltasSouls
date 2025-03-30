@@ -28,16 +28,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.UseSound = SoundID.Item6;
         }
 
-        static void PassiveEffect(Player player)
+        public static void PassiveEffects(Player player)
         {
             player.buffImmune[BuffID.WindPushed] = true;
             player.FargoSouls().SandsofTime = true;
             player.FargoSouls().CactusImmune = true;
         }
+        public static void ActiveEffects(Player player) => PassiveEffects(player);
 
-        public override void UpdateInventory(Player player) => PassiveEffect(player);
-        public override void UpdateVanity(Player player) => PassiveEffect(player);
-        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffect(player);
+        public override void UpdateInventory(Player player) => PassiveEffects(player);
+        public override void UpdateVanity(Player player) => PassiveEffects(player);
+        public override void UpdateAccessory(Player player, bool hideVisual) => ActiveEffects(player);
 
         public static void Use(Player player)
         {

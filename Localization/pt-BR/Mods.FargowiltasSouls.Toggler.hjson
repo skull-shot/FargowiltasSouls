@@ -101,7 +101,9 @@
 // VortexEffect: Vortex Laser
 // CosmosMoonEffect: Cosmic Moons
 // CosmoForceEffect: Concise Cosmo Force
-// DeviEnergyHeader: Eternity Mode Accessories
+// DeviEnergyHeader: Eternity Mode Items
+// MasoCarrotEffect: Carrot Zoom
+// RainbowHealEffect: Auto-Use Healing Potions
 // DeerSinewEffect: Deer Sinew Dash
 // ZephyrJump: Fart Jump
 // MasoAeolusFlower: Flower Boots
@@ -120,14 +122,15 @@
 // AgitatingLensInstall: Berserker Install
 // SkeleMinionEffect: Skeletron Arms Minion
 // NecroBrewSpin: Skeletron Spin Dash
+// DeerclawpsEffect: Deerclawps Spike Dash Trail
 // BionomicHeader: "{$Mods.FargowiltasSouls.Items.BionomicCluster.DisplayName}"
 // TimsConcoctionEffect: Tim's Concoction
-// MasoCarrotEffect: Carrot Zoom
-// RainbowSlimeMinion: Rainbow Slime Minion
-// RainbowHealEffect: Auto-Use Healing Potions
 // NymphPerfumeEffect: Attacks Spawn Hearts
 // SqueakEffect: Squeaky Toy On Hit
+// LithosphericHeader: "{$Mods.FargowiltasSouls.Items.LithosphericCluster.DisplayName}"
+// PungentMinion: Crystal Skull Minion
 // WretchedPouchEffect: Wretched Shadowflame
+// DreadShellEffect: Dread Shell Parry
 // WyvernBalls: Flight Light Orbs
 // TribalCharmClickBonus: Tribal Charm Click Bonus
 // StabilizedGravity: Stabilized Gravity
@@ -140,12 +143,7 @@
 // GuttedHeartMinions: Creeper Shield
 // GelicWingSpikes: Gelic Spikes
 // GelicWingJump: Gelic Jump
-// LumpofFleshHeader: "{$Mods.FargowiltasSouls.Items.LumpOfFlesh.DisplayName}"
 // PungentEyeballCursor: Pungent Eye Cursor
-// PungentMinion: Lump of Flesh Minion
-// DeerclawpsDive: Deerclawps Dive
-// DeerclawpsEffect: Deerclawps Spike Dash Trail
-// DreadShellEffect: Dread Shell Parry
 // ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
 // PlantMinionEffect: Plantera Minion
 // LihzahrdGroundPound: Lihzahrd Fastfall

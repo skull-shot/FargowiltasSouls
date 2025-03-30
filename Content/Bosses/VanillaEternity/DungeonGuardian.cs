@@ -423,7 +423,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<GodEaterBuff>(), 420);
-            target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
+            //target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
             target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 420);
 
             //target.immune = false; //handled by special checks in ai

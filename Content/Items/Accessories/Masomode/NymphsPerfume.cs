@@ -24,28 +24,33 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 4);
         }
-
-        public override void UpdateInventory(Player player)
+        public static void PassiveEffects(Player player, Item item)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.NymphsPerfumeRespawn = true;
         }
-
-        public override void UpdateVanity(Player player)
+        public static void ActiveEffects(Player player, Item item)
         {
-            FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            fargoPlayer.NymphsPerfumeRespawn = true;
-        }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
+            PassiveEffects(player, item);
             player.buffImmune[BuffID.Lovestruck] = true;
             player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
             player.buffImmune[BuffID.Stinky] = true;
-            FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            fargoPlayer.NymphsPerfumeRespawn = true;
-            player.AddEffect<NymphPerfumeEffect>(Item);
+            player.AddEffect<NymphPerfumeEffect>(item);
+        }
+        public override void UpdateInventory(Player player)
+        {
+            PassiveEffects(player, Item);
+        }
+
+        public override void UpdateVanity(Player player)
+        {
+            PassiveEffects(player, Item);
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
         }
     }
     public class NymphPerfumeEffect : AccessoryEffect

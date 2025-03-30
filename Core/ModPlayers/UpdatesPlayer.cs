@@ -219,7 +219,29 @@ namespace FargowiltasSouls.Core.ModPlayers
                 SpectreEffect.GhostUpdate(Player);
 
             if (DeerSinew)
-                Player.AddEffect<DeerSinewEffect>(ModContent.GetInstance<DeerSinew>().Item);
+            {
+                if (Player.AddEffect<DeerSinewEffect>(ModContent.GetInstance<DeerSinew>().Item))
+                {
+                    if (DeerSinewFreezeCD > 0)
+                        DeerSinewFreezeCD--;
+                }
+            }
+
+            if (OrdinaryCarrot)
+            {
+                if (Player.AddEffect<MasoCarrotEffect>(ModContent.GetInstance<OrdinaryCarrot>().Item))
+                {
+                    Player.scope = true;
+                }
+            }
+                
+
+            if (ConcentratedRainbowMatter)
+            {
+                Player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
+                Player.AddEffect<RainbowHealEffect>(ModContent.GetInstance<ConcentratedRainbowMatter>().Item);
+            }
+                
 
             if (NoMomentum && !Player.mount.Active)
             {
@@ -382,7 +404,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             DashManager.AddDashes(Player);
             DashManager.ManageDashes(Player);
 
-            if (LihzahrdTreasureBoxItem != null || Player.HasEffect<DeerclawpsDive>())
+            if (LihzahrdTreasureBoxItem != null)
                 TryFastfallUpdate();
             if (Player.HasEffect<DeerclawpsEffect>() && IsInADashState)
                 DeerclawpsEffect.DeerclawpsAttack(Player, Player.Bottom);

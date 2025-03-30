@@ -429,7 +429,6 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<AncientHallowEnchant>(),
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<AdamantiteEnchant>(),
-                    ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<ShroomiteEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
@@ -451,7 +450,6 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ItemID.MasterNinjaGear, ModContent.ItemType<MonkEnchant>(), ModContent.ItemType<ChlorophyteEnchant>(), ModContent.ItemType<MeteorEnchant>() }),
                     ModContent.ItemType<DubiousCircuitry>(),
                     ModContent.ItemType<PureHeart>(),
-                    ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<CrimsonEnchant>(),
                     ModContent.ItemType<HallowEnchant>(),
                     ModContent.ItemType<ShroomiteEnchant>()
@@ -473,7 +471,6 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<ForbiddenEnchant>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
-                    ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<PumpkingsCape>(),
                     ModContent.ItemType<ShroomiteEnchant>()
                 );
@@ -515,7 +512,6 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<DubiousCircuitry>(),
                     ModContent.ItemType<PureHeart>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
-                    ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<SpectreEnchant>(),
                      ModContent.ItemType<ShroomiteEnchant>()
                 );
@@ -543,7 +539,6 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<PrecisionSeal>(),
                     ModContent.ItemType<MutantAntibodies>(),
                     ModContent.ItemType<DarkArtistEnchant>(),
-                    ModContent.ItemType<LumpOfFlesh>(),
                     ModContent.ItemType<SpectreEnchant>(),
                     ModContent.ItemType<ShroomiteEnchant>()
                 );
@@ -623,17 +618,27 @@ namespace FargowiltasSouls.Content.Items.Misc
                 );
             }
 
+            if (WorldSavingSystem.DownedDevi)
+            {
+                if (!player.inventory.Any(i => !i.IsAir && i.type == ModContent.ItemType<BionomicCluster>())
+                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<BionomicCluster>())
+                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<BionomicCluster>())
+                    && !WorldSavingSystem.DownedAbom)
+                {
+                    other += $" [i:{ModContent.ItemType<BionomicCluster>()}]";
+                }
+            }
 
             if (Main.hardMode)
             {
                 if (NPC.downedMechBossAny)
                 {
-                    if (!player.inventory.Any(i => !i.IsAir && i.type == ModContent.ItemType<BionomicCluster>())
-                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<BionomicCluster>())
-                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<MasochistSoul>())
+                    if (!player.inventory.Any(i => !i.IsAir && i.type == ModContent.ItemType<LithosphericCluster>())
+                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<LithosphericCluster>())
+                    && !player.armor.Any(i => !i.IsAir && i.type == ModContent.ItemType<LithosphericCluster>())
                     && !WorldSavingSystem.DownedAbom)
                     {
-                        other += $" [i:{ModContent.ItemType<BionomicCluster>()}]";
+                        other += $" [i:{ModContent.ItemType<LithosphericCluster>()}]";
                     }
                 }
 

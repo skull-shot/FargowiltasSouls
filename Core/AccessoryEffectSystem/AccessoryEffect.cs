@@ -43,10 +43,21 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         /// Will be false if ToggleHeader is null.
         /// </summary>
         public bool HasToggle => ToggleHeader != null;
-
+        /// <summary>
+        /// Whether the effect counts as a minion. Defaults to false.
+        /// </summary>
         public virtual bool MinionEffect => false;
+        /// <summary>
+        /// Whether the effect counts as an extra attack. Defaults to false.
+        /// </summary>
         public virtual bool ExtraAttackEffect => false;
+        /// <summary>
+        /// Whether Mutant's Presence disables the effect. Defaults to false.
+        /// </summary>
         public virtual bool MutantsPresenceAffects => false;
+        /// <summary>
+        /// Whether the effect should be toggled on or off by default. Defaults to true.
+        /// </summary>
         public virtual bool DefaultToggle => true;
 
         /// <summary>

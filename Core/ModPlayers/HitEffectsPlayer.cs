@@ -319,7 +319,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
-            dr += NecromanticBrew.NecroBrewDashDR(Player);
 
             //if (npc.FargoSouls().Corrupted || npc.FargoSouls().CorruptedForce)
             //    dr += 0.2f;
@@ -347,8 +346,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
-
-            dr += NecromanticBrew.NecroBrewDashDR(Player);
 
             if (Smite)
                 dr -= 0.2f;
@@ -454,8 +451,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.whoAmI == Main.myPlayer && !noDodge && Player.HasEffect<SqueakEffect>())
             {
                 int chanceDenominator = 10;
-                if (Player.EffectItem<SqueakEffect>() == null || Player.EffectItem<SqueakEffect>().type != ModContent.ItemType<SqueakyToy>())
-                    chanceDenominator = 20;
 
                 if (Main.rand.NextBool(chanceDenominator))
                 {

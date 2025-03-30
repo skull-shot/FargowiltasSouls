@@ -23,12 +23,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 3);
         }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public static void ActiveEffects(Player player, Item item)
         {
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.SqueakyToyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.GuiltyBuff>()] = true;
-            player.AddEffect<SqueakEffect>(Item);
+            player.AddEffect<SqueakEffect>(item);
+        }
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
         }
         private bool lastLMouse = false;
         public override void HoldItem(Player player) //doing this instead of making an item use animation lo

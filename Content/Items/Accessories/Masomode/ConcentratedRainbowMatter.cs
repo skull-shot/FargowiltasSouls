@@ -22,44 +22,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             Item.width = 20;
             Item.height = 20;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Pink;
+            Item.useStyle = ItemUseStyleID.EatFood;
+            Item.useAnimation = 17;
+            Item.useTime = 17;
+            Item.consumable = true;
+            Item.UseSound = SoundID.Item2;
+
             Item.value = Item.sellPrice(0, 4);
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public override bool? UseItem(Player player)
         {
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.FlamesoftheUniverseBuff>()] = true;
-            player.FargoSouls().ConcentratedRainbowMatter = true;
-            player.AddEffect<RainbowSlimeMinion>(Item);
-            player.AddEffect<RainbowHealEffect>(Item);
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.AddEffect<RainbowHealEffect>(Item);
-            player.FargoSouls().ConcentratedRainbowMatter = true;
-        }
-        public override void UpdateInventory(Player player)
-        {
-            player.AddEffect<RainbowHealEffect>(Item);
-            player.FargoSouls().ConcentratedRainbowMatter = true;
+            if (player.itemAnimation > 0 && player.itemTime == 0)
+            {
+                player.FargoSouls().ConcentratedRainbowMatter = true;
+            }
+            return true;
         }
     }
     public class RainbowHealEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
         public override int ToggleItemType => ModContent.ItemType<ConcentratedRainbowMatter>();
         
-    }
-    public class RainbowSlimeMinion : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
-        public override int ToggleItemType => ModContent.ItemType<ConcentratedRainbowMatter>();
-        public override bool MinionEffect => true;
-        public override void PostUpdateEquips(Player player)
-        {
-            if (!player.HasBuff<SouloftheMasochistBuff>())
-                player.AddBuff(ModContent.BuffType<Buffs.Minions.RainbowSlimeBuff>(), 2);
-        }
     }
 }

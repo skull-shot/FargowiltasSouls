@@ -29,19 +29,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.value = Item.sellPrice(0, 4);
             Item.defense = 2;
         }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public static void ActiveEffects(Player player, Item item)
         {
             player.buffImmune[ModContent.BuffType<AnticoagulationBuff>()] = true;
 
             player.noKnockback = true;
-            player.AddEffect<DreadShellEffect>(Item);
-            player.AddEffect<ParryEffect>(Item);
+            player.AddEffect<DreadShellEffect>(item);
+            player.AddEffect<ParryEffect>(item);
+        }
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
         }
     }
     public class DreadShellEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
+        public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<DreadShell>();
     }
 }

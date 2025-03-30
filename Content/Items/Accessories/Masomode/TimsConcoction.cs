@@ -26,7 +26,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.AddEffect<TimsConcoctionEffect>(Item);
+            ActiveEffects(player, Item);
+        }
+        public static void ActiveEffects(Player player, Item item)
+        {
+            player.AddEffect<TimsConcoctionEffect>(item);
         }
     }
     public class TimsConcoctionEffect : AccessoryEffect

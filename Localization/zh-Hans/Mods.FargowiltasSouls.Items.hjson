@@ -1076,6 +1076,54 @@ BionomicClusterInactive: {
 		'''
 }
 
+LithosphericCluster: {
+	// DisplayName: Lithospheric Cluster
+	/* Tooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
+		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
+		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam
+		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
+		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
+		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
+		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
+		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
+		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		'The amalgamate born of a thousand common enemies'
+		''' */
+	/* VanityTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		''' */
+}
+
+LithosphericClusterInactive: {
+	// DisplayName: Lithospheric Cluster (Inactive)
+	/* Tooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
+		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
+		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam
+		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
+		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
+		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
+		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
+		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
+		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		'The amalgamate born of a thousand common enemies'
+		''' */
+}
+
 CelestialRune: {
 	DisplayName: 天界符文
 	Tooltip:
@@ -1111,7 +1159,6 @@ ConcentratedRainbowMatter: {
 		召唤一个彩虹史莱姆宝宝
 		“遇上彩虹，吃定彩虹！”
 		'''
-	VanityTooltip: 需要时自动使用治疗药水
 }
 
 DarkenedHeart: {
@@ -1299,24 +1346,6 @@ LihzahrdTreasureBox: {
 		免疫燃烧、导火索、蜥蜴诅咒和下陷减益
 		在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发
 		“陷阱太多，打不开”
-		'''
-}
-
-LumpOfFlesh: {
-	DisplayName: 血肉团
-	Tooltip:
-		'''
-		免疫[i:FargowiltasSouls/DreadShell]击退、凝血失效、[i:FargowiltasSouls/PungentEyeball]黑视、遮蔽减益
-		免疫[i:FargowiltasSouls/SkullCharm]眩晕、[i:FargowiltasSouls/Deerclawps]缓慢、冰冻减益
-		[i:FargowiltasSouls/SkullCharm]增加15%伤害，获得一个眼球召唤物，眼球会在你攻击时蓄能，蓄能完毕后发射激光
-		[i:FargowiltasSouls/SkullCharm]降低敌人以你为目标的可能性
-		[i:FargowiltasSouls/PungentEyeball]增加稀有怪物的生成概率
-		[i:FargowiltasSouls/PungentEyeball]你的光标会导致附近的敌怪受到的伤害增加15%
-		[i:FargowiltasSouls/DreadShell]格挡可抵消最多200点伤害，格挡成功会进行弹反
-		[i:FargowiltasSouls/DreadShell]格挡时和格挡后短时间内，防御力和伤害减免大幅下降
-		[i:FargowiltasSouls/Deerclawps]冲刺会留下一串血刺
-		[i:FargowiltasSouls/Deerclawps]快速下落撞击地面时会爆发冰刺
-		“它在生长”
 		'''
 }
 
@@ -2162,7 +2191,6 @@ OrdinaryCarrot: {
 		右键点击可以增加视野（在背包和时装栏中也可生效）
 		“从被打败的敌人的脸上拔下来的”
 		'''
-	VanityTooltip: 右键点击可以增加视野
 }
 
 RabiesShot: {

@@ -359,7 +359,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.SharpTears:
                 case ProjectileID.DeerclopsIceSpike:
                     {
-                        if (source is EntitySource_ItemUse parent1 && (parent1.Item.type == ModContent.ItemType<Deerclawps>() || parent1.Item.type == ModContent.ItemType<LumpOfFlesh>() || parent1.Item.type == ModContent.ItemType<MasochistSoul>()))
+                        if (source is EntitySource_ItemUse parent1 && (parent1.Item.type == ModContent.ItemType<Deerclawps>() || parent1.Item.type == ModContent.ItemType<SupremeDeathbringerFairy>() || parent1.Item.type == ModContent.ItemType<MasochistSoul>()))
                         {
                             projectile.hostile = false;
                             projectile.friendly = true;

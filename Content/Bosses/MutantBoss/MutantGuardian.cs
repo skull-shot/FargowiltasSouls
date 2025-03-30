@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     target.AddBuff(ModContent.BuffType<GodEaterBuff>(), 420);
                 }
-                target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
+                //target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
                 target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 420);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
             }

@@ -1,4 +1,6 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -27,18 +29,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.value = Item.sellPrice(0, 4);
         }
 
-        static void Effects(Player player)
+        public static void PassiveEffects(Player player)
         {
             player.buffImmune[BuffID.Suffocation] = true;
             player.manaMagnet = true;
             player.manaFlower = true;
         }
+        public override void UpdateInventory(Player player) => PassiveEffects(player);
 
-        public override void UpdateInventory(Player player) => Effects(player);
+        public override void UpdateVanity(Player player) => PassiveEffects(player);
 
-        public override void UpdateVanity(Player player) => Effects(player);
-
-        public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
+        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffects(player);
 
         public override bool AltFunctionUse(Player player)
         {

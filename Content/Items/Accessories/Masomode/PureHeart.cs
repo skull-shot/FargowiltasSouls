@@ -50,6 +50,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<GelicWingSpikes>(Item);
 
             player.FargoSouls().WingTimeModifier += .3f;
+
+            // pungent eyeball effect
+            player.buffImmune[BuffID.Blackout] = true;
+            player.buffImmune[BuffID.Obstructed] = true;
+            player.AddEffect<PungentEyeballCursor>(Item);
+            player.FargoSouls().PungentEyeball = true;
         }
 
         public override void AddRecipes()
@@ -59,6 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             .AddIngredient(ModContent.ItemType<DarkenedHeart>())
             .AddIngredient(ModContent.ItemType<GuttedHeart>())
             .AddIngredient(ModContent.ItemType<GelicWings>())
+            .AddIngredient(ModContent.ItemType<PungentEyeball>())
             .AddIngredient(ItemID.PurificationPowder, 30)
             .AddIngredient(ItemID.GreenSolution, 50)
             .AddIngredient(ItemID.ChlorophyteBar, 5)

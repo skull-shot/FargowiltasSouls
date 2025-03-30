@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.value = Item.sellPrice(0, 4);
         }
 
-        private void Effects(Player player)
+        public static void PassiveEffects(Player player)
         {
             player.buffImmune[Terraria.ModLoader.ModContent.BuffType<Buffs.Masomode.MidasBuff>()] = true;
             player.buffImmune[Terraria.ModLoader.ModContent.BuffType<Buffs.Masomode.LoosePocketsBuff>()] = true;
@@ -30,17 +30,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateInventory(Player player)
         {
-            Effects(player);
+            PassiveEffects(player);
         }
 
         public override void UpdateVanity(Player player)
         {
-            Effects(player);
+            PassiveEffects(player);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            Effects(player);
+            PassiveEffects(player);
         }
     }
 }

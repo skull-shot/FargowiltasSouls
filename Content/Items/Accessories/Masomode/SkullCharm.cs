@@ -24,21 +24,24 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 6);
         }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public static void ActiveEffects(Player player, Item item, bool hasDownsides)
         {
             player.buffImmune[BuffID.Dazed] = true;
             player.GetDamage(DamageClass.Generic) += 0.15f;
-            player.endurance -= 0.1f;
+            if (hasDownsides)
+                player.endurance -= 0.1f;
             player.aggro -= 400;
             player.FargoSouls().SkullCharm = true;
-            player.AddEffect<PungentMinion>(Item);
-
+            player.AddEffect<PungentMinion>(item);
+        }
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item, true);
         }
     }
     public class PungentMinion : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
+        public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<SkullCharm>();
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)

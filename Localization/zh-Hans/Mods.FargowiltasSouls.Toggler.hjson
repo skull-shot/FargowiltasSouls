@@ -102,6 +102,8 @@ VortexEffect: 星旋 激光
 CosmosMoonEffect: 宇宙 月亮
 CosmoForceEffect: 简化宇宙之力
 DeviEnergyHeader: 永恒模式饰品
+MasoCarrotEffect: 狙击镜效果
+RainbowHealEffect: 自动使用治疗药水
 DeerSinewEffect: 鹿筋冲刺
 ZephyrJump: 风神跳跃
 MasoAeolusFlower: 花靴
@@ -120,14 +122,15 @@ AgitatingLensEffect: 鲜血镰刀
 AgitatingLensInstall: 狂暴负载
 SkeleMinionEffect: 骷髅王手臂
 NecroBrewSpin: 骷髅王旋转冲刺
+DeerclawpsEffect: 冲刺留下冰刺
 BionomicHeader: "{$Mods.FargowiltasSouls.Items.BionomicCluster.DisplayName}"
 TimsConcoctionEffect: 蒂姆的秘药
-MasoCarrotEffect: 狙击镜效果
-RainbowSlimeMinion: 彩虹史莱姆召唤物
-RainbowHealEffect: 自动使用治疗药水
 NymphPerfumeEffect: 攻击生成心
 SqueakEffect: 击中发出吱吱声
+// LithosphericHeader: "{$Mods.FargowiltasSouls.Items.LithosphericCluster.DisplayName}"
+PungentMinion: 眼球召唤物
 WretchedPouchEffect: 诅咒暗影焰
+DreadShellEffect: 恐惧螺壳格挡
 WyvernBalls: 飞行光球
 TribalCharmClickBonus: 部落挂坠点击加成
 StabilizedGravity: 重力稳定
@@ -140,12 +143,7 @@ DarkenedHeartEaters: 迷你噬魂者
 GuttedHeartMinions: 飞眼怪
 GelicWingSpikes: 明胶尖刺
 GelicWingJump: 明胶羽翼跳跃
-LumpofFleshHeader: "{$Mods.FargowiltasSouls.Items.LumpOfFlesh.DisplayName}"
 PungentEyeballCursor: 易伤区域光标
-PungentMinion: 眼球召唤物
-DeerclawpsDive: 冰鹿爪快速下落
-DeerclawpsEffect: 冲刺留下冰刺
-DreadShellEffect: 恐惧螺壳格挡
 ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
 PlantMinionEffect: 世纪之花召唤物
 LihzahrdGroundPound: 蜥蜴快速下落

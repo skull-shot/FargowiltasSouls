@@ -41,6 +41,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<LihzahrdBoulders>(Item);
         }
     }
+    public class DiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
+        public override bool ActiveSkill => true;
+    }
     public class LihzahrdGroundPound : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();

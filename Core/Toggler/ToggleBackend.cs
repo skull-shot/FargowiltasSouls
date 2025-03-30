@@ -173,7 +173,6 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<AgitatingLensEffect>(false);
             player.SetToggleValue<SkeleMinionEffect>(false);
             player.SetToggleValue<MasoCarrotEffect>(false);
-            player.SetToggleValue<RainbowSlimeMinion>(false);
             player.SetToggleValue<NymphPerfumeEffect>(false);
             player.SetToggleValue<WretchedPouchEffect>(false);
             player.SetToggleValue<ProbeMinionEffect>(false);
