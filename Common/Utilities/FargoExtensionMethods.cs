@@ -191,8 +191,7 @@ namespace FargowiltasSouls //lets everything access it without using
         /// <param name="damageClass"></param>
         /// <returns></returns>
         public static float ActualClassCrit(this Player player, DamageClass damageClass)
-            => damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed
-            && !(player.FargoSouls().MinionCrits)
+            => (damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed) && !(player.FargoSouls().MinionCrits)
             ? 0
             : player.GetTotalCritChance(damageClass);
 

@@ -814,7 +814,7 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	DisplayName: 东方秘藏
+	DisplayName: 幻想天团
 	Description: 幻想之物会为你而战
 }
 

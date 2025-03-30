@@ -1,20 +1,3 @@
 NEW UPDATE - V {ModVersion}
-Several Enchantments now use softcaps with diminishing returns and properly scale with their intended class:
-- Ash Wood Enchantment fireballs
-- Boreal Wood snowballs
-- Gladiator spears
-- Obsidian explosion (scaling unchanged)
-- Shroomite shrooms
-Resprited all Champion relics
-Resprited Mutant Statue
-Moved one minion slots from Nekomi Armor hood to set bonus
-Fossil Enchant recipe 100 -> 120 bone daggers
-Spore Bats now Tim's Concoction-drop Sonar Potion alongside other bats
-Eternity Medusa Head: Deals up to 2.25x damage the fewer enemies are hit
-Gladiator Enchantment now mentions the spears' innate armor penetration in tooltip
-Eternity Moon Lord parts can now never ever deal contact damage
-Renamed Abominationn sword projectile to Laevateinn
-Added toggle for Iron Enchant reforges
-Fixed Iron Enchant applying to non-reforge prefixes
-Fixed Queen Slime not working if Eternity resprites are disabled
-Fixed slight error with Royal Subject sprite sheet
+Fixed issue with Spider Enchant
+Updated localization
