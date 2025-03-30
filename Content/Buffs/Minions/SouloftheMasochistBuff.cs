@@ -46,14 +46,6 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                 }
 
 
-                if (player.AddEffect<RainbowSlimeMinion>(item))
-                {
-                    fargoPlayer.RainbowSlime = true;
-                    const int damage = 105;
-                    if (player.ownedProjectileCounts[ModContent.ProjectileType<RainbowSlime>()] < 1)
-                        FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<RainbowSlime>(), damage, 3f, player.whoAmI);
-                }
-
                 if (player.AddEffect<ProbeMinionEffect>(item))
                 {
                     fargoPlayer.Probes = true;

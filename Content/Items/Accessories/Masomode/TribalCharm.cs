@@ -27,24 +27,32 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.value = Item.sellPrice(0, 4);
             Item.defense = 6;
         }
-
-        public override void UpdateInventory(Player player)
+        public static void PassiveEffects(Player player)
         {
             player.FargoSouls().TribalCharm = true;
         }
-
-        public override void UpdateVanity(Player player)
+        public static void ActiveEffects(Player player, Item item)
         {
-            player.FargoSouls().TribalCharm = true;
-        }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
+            PassiveEffects(player);
             player.buffImmune[BuffID.Webbed] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.PurifiedBuff>()] = true;
             player.FargoSouls().TribalCharm = true;
             player.FargoSouls().TribalCharmEquipped = true;
-            player.AddEffect<TribalCharmClickBonus>(Item);
+            player.AddEffect<TribalCharmClickBonus>(item);
+        }
+        public override void UpdateInventory(Player player)
+        {
+            PassiveEffects(player);
+        }
+
+        public override void UpdateVanity(Player player)
+        {
+            PassiveEffects(player);
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
         }
 
         public static void Effects(FargoSoulsPlayer modPlayer)

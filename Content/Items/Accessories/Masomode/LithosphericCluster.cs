@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -10,11 +11,12 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
-    public class BionomicCluster : SoulsItem
+    [AutoloadEquip(EquipType.Shield)]
+    public class LithosphericCluster : SoulsItem
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override bool Eternity => true;
-        public override List<AccessoryEffect> ActiveSkillTooltips => 
-            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -29,30 +31,34 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 6);
-            Item.defense = 3;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
-            Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.defense = 6;
+            //Item.useTime = 180;
+            //Item.useAnimation = 180;
+            //Item.useStyle = ItemUseStyleID.HoldUp;
+            //Item.useTurn = true;
+            //Item.UseSound = SoundID.Item6;
         }
 
         public static void PassiveEffect(Player player, Item item)
         {
-            FrigidGemstone.PassiveEffects(player, item);
-            SandsofTime.PassiveEffects(player);
-            //SqueakyToy.PassiveEffects(player, item);
-            NymphsPerfume.PassiveEffects(player, item);
-            //TimsConcoction.PassiveEffects(player, item);
+            SecurityWallet.PassiveEffects(player);
+            WyvernFeather.PassiveEffects(player, item);
+            MysticSkull.PassiveEffects(player);
+            TribalCharm.PassiveEffects(player);
+            //WretchedPouch.PassiveEffects(player, item);
+            //SkullCharm.PassiveEffects(player, item);
+            //DreadShell.PassiveEffects(player, item);
         }
         public static void ActiveEffect(Player player, Item item)
         {
             PassiveEffect(player, item);
-            FrigidGemstone.ActiveEffects(player, item);
-            //SandsofTime.ActiveEffects(player, Item);
-            SqueakyToy.ActiveEffects(player, item);
-            NymphsPerfume.ActiveEffects(player, item);
-            TimsConcoction.ActiveEffects(player, item);
+            //SecurityWallet.ActiveEffects(player, item);
+            WyvernFeather.ActiveEffects(player, item);
+            //MysticSkull.ActiveEffects(player, item);
+            TribalCharm.ActiveEffects(player, item);
+            WretchedPouch.ActiveEffects(player, item);
+            SkullCharm.ActiveEffects(player, item, false);
+            DreadShell.ActiveEffects(player, item);
         }
 
         public override void UpdateInventory(Player player) => PassiveEffect(player, Item);
@@ -62,41 +68,45 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             ActiveEffect(player, Item);
         }
+        //public override bool? UseItem(Player player) => true;
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
-        public override bool? UseItem(Player player) => true;
 
-        public override bool AltFunctionUse(Player player)
-        {
-            SoundEngine.PlaySound(SoundID.Grab);
-            player.ReplaceItem(Item, ModContent.ItemType<BionomicClusterInactive>());
-            return false;
-        }
 
         public override void AddRecipes()
         {
             CreateRecipe()
 
-            .AddIngredient<FrigidGemstone>()
-            .AddIngredient<SandsofTime>()
-            .AddIngredient<SqueakyToy>()
-            .AddIngredient<NymphsPerfume>()
-            .AddIngredient<TimsConcoction>()
-            .AddIngredient(ItemID.HellstoneBar, 5)
+            .AddIngredient<SecurityWallet>()
+            .AddIngredient<WyvernFeather>()
+            .AddIngredient<MysticSkull>()
+            .AddIngredient<TribalCharm>()
+            .AddIngredient<WretchedPouch>()
+            .AddIngredient<SkullCharm>()
+            .AddIngredient<DreadShell>()
+            .AddIngredient(ItemID.HallowedBar, 5)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.MythrilAnvil)
             .DisableDecraft()
             .Register();
         }
+        public override bool AltFunctionUse(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.Grab);
+            player.ReplaceItem(Item, ModContent.ItemType<LithosphericClusterInactive>());
+            return false;
+        }
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
-            player.ReplaceItem(Item, ModContent.ItemType<BionomicClusterInactive>());
+            player.ReplaceItem(Item, ModContent.ItemType<LithosphericClusterInactive>());
         }
     }
-    public class BionomicClusterInactive : SoulsItem
+    [AutoloadEquip(EquipType.Shield)]
+    public class LithosphericClusterInactive : SoulsItem
     {
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -124,23 +134,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            BionomicCluster.ActiveEffect(player, Item);
+            LithosphericCluster.ActiveEffect(player, Item);
         }
-
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
         public override bool? UseItem(Player player) => true;
 
         public override bool AltFunctionUse(Player player)
         {
             SoundEngine.PlaySound(SoundID.Grab);
-            player.ReplaceItem(Item, ModContent.ItemType<BionomicCluster>());
+            player.ReplaceItem(Item, ModContent.ItemType<LithosphericCluster>());
             return false;
         }
 
         public override bool CanRightClick() => true;
         public override void RightClick(Player player)
         {
-            player.ReplaceItem(Item, ModContent.ItemType<BionomicCluster>());
+            player.ReplaceItem(Item, ModContent.ItemType<LithosphericCluster>());
         }
     }
 }

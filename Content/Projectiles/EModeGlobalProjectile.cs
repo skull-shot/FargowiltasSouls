@@ -1686,7 +1686,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.RuneWizard)
                     {
-                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 60);
+                        //target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 60);
                         target.AddBuff(BuffID.Suffocation, 240);
                     }
                     break;

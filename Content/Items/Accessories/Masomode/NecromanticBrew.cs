@@ -34,18 +34,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<SkeleMinionEffect>(Item);
 
         }
-
-        public static float NecroBrewDashDR(Player player)
-        {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            float dr = 0;
-            if (modPlayer.NecromanticBrewItem != null && modPlayer.IsInADashState)
-            {
-                dr += 0.15f;
-            }
-
-            return dr;
-        }
     }
     public class NecroBrewSpin : AccessoryEffect
     {

@@ -75,6 +75,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             fargoPlayer.NecromanticBrewItem = Item;
             player.AddEffect<NecroBrewSpin>(Item);
             player.AddEffect<SkeleMinionEffect>(Item);
+
+            // deerclawps
+
         }
 
         public override void AddRecipes()
@@ -84,6 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             .AddIngredient(ModContent.ItemType<SlimyShield>())
             .AddIngredient(ModContent.ItemType<AgitatingLens>())
             .AddIngredient(ModContent.ItemType<QueenStinger>())
+            .AddIngredient(ModContent.ItemType<Deerclawps>())
             .AddIngredient(ModContent.ItemType<NecromanticBrew>())
             .AddIngredient(ItemID.HellstoneBar, 10)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 5)

@@ -113,6 +113,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         void PassiveEffect(Player player)
         {
             BionomicCluster.PassiveEffect(player, Item);
+            LithosphericCluster.PassiveEffect(player, Item);
             AshWoodEnchant.PassiveEffect(player);
 
             player.AddEffect<AmmoCycleEffect>(Item);

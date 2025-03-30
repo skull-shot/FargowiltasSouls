@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     }
     public class PungentEyeballCursor : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
+        public override Header ToggleHeader => Header.GetHeader<PureHeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<PungentEyeball>();
         public override bool MutantsPresenceAffects => true;
         public override void PostUpdateEquips(Player player)

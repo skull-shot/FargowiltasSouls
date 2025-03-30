@@ -28,23 +28,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 4);
         }
-
+        public static void PassiveEffects(Player player, Item item)
+        {
+            player.AddEffect<StabilizedGravity>(item);
+        }
+        public static void ActiveEffects(Player player, Item item)
+        {
+            ActiveEffects(player, item);
+            player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
+            player.AddEffect<WyvernBalls>(item);
+        }
         public override void UpdateInventory(Player player)
         {
-            player.AddEffect<StabilizedGravity>(Item);
+            PassiveEffects(player, Item);
         }
 
         public override void UpdateVanity(Player player)
         {
-            player.AddEffect<StabilizedGravity>(Item);
+            PassiveEffects(player, Item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
-            player.AddEffect<StabilizedGravity>(Item);
-            player.AddEffect<WyvernBalls>(Item);
+            ActiveEffects(player, Item);
         }
     }
     public class StabilizedGravity : AccessoryEffect

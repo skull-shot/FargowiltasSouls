@@ -102,6 +102,8 @@ VortexEffect: Лазер вихря
 CosmosMoonEffect: Луны космоса
 CosmoForceEffect: Сжатый артефакт Космоса
 DeviEnergyHeader: Аксессуары режима Вечность
+MasoCarrotEffect: Увеличенный обзор морковки
+RainbowHealEffect: Автом. лечебные зелья
 DeerSinewEffect: Рывок сухожилия оленя
 ZephyrJump: Пердёжный прыжок
 MasoAeolusFlower: Цветочные сапоги
@@ -120,14 +122,15 @@ AgitatingLensEffect: Косы при рывках
 AgitatingLensInstall: Установка свирепости
 SkeleMinionEffect: Прислужники руки Скелетрона
 NecroBrewSpin: Крутящийся рывок Скелетрона
+DeerclawpsEffect: След из шипов при рывке циклешненя
 BionomicHeader: "{$Mods.FargowiltasSouls.Items.BionomicCluster.DisplayName}"
 TimsConcoctionEffect: Смесь Тима
-MasoCarrotEffect: Увеличенный обзор морковки
-RainbowSlimeMinion: Прислужник радужный слизень
-RainbowHealEffect: Автом. лечебные зелья
 NymphPerfumeEffect: Атаки создают сердца
 SqueakEffect: Игрушка-пищалка при уроне
+// LithosphericHeader: "{$Mods.FargowiltasSouls.Items.LithosphericCluster.DisplayName}"
+PungentMinion: Прислужник кусок плоти
 WretchedPouchEffect: Теневое пламя несчастья
+DreadShellEffect: Парирование панциря ужаса
 WyvernBalls: Светлые сферы полёта
 TribalCharmClickBonus: Бонус кликов амулета племени
 StabilizedGravity: Стабилизированная гравитация
@@ -140,12 +143,7 @@ DarkenedHeartEaters: Маленькие пожиратели
 GuttedHeartMinions: Щит из ползунов
 GelicWingSpikes: Гелеподобные шипы
 GelicWingJump: Гелеподобный прыжок
-LumpofFleshHeader: "{$Mods.FargowiltasSouls.Items.LumpOfFlesh.DisplayName}"
 PungentEyeballCursor: Курсор едкого глазного яблока
-PungentMinion: Прислужник кусок плоти
-DeerclawpsDive: Пикирование циклешненя
-DeerclawpsEffect: След из шипов при рывке циклешненя
-DreadShellEffect: Парирование панциря ужаса
 ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
 PlantMinionEffect: Прислужник Плантера
 LihzahrdGroundPound: Быстрое падение ящщеров

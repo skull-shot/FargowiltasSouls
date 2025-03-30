@@ -272,7 +272,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MasochistSoul;
         public Item MasochistSoulItem;
         public bool MasochistHeart;
-        public bool MutantsPactSlot;
         public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
@@ -295,9 +294,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public Item MutantSetBonusItem;
         public bool AbomMinion;
         public bool PhantasmalRing;
-        public bool MutantsDiscountCard;
-        public bool MutantsCreditCard;
-        public bool DeerSinew;
         public bool RabiesVaccine;
         public bool TwinsEX;
         public bool TimsConcoction;
@@ -319,6 +315,13 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool PrecisionSeal;
         public bool PrecisionSealNoDashNoJump;
         public Item GelicWingsItem;
+
+        // consumable perma
+        public bool MutantsDiscountCard;
+        public bool MutantsCreditCard;
+        public bool MutantsPactSlot;
+        public bool DeerSinew;
+        public bool OrdinaryCarrot;
         public bool ConcentratedRainbowMatter;
 
         // buffs

@@ -52,7 +52,6 @@ ApprenticeEnchant: {
 		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
-		Flameburst field of view and range are dramatically increased
 		'A long way to perfection'
 		'''
 }
@@ -180,7 +179,6 @@ DarkArtistEnchant: {
 		The support weapon will fire 1/5 as often as they would normally
 		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
-		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
 		'''
 }
@@ -352,7 +350,6 @@ MonkEnchant: {
 		You are briefly immune to damage and debuffs after dashing
 		Dash through an enemy to deal massive melee damage
 		Dash cooldown is much longer than normal dashes
-		Lightning Aura can now crit and strikes faster
 		'Return to Monk'
 		'''
 }
@@ -541,7 +538,6 @@ ShinobiEnchant: {
 		Dash cooldown is longer than normal dashes
 		Dash is longer and deals more damage
 		Dash into any walls to teleport through them to the next opening
-		Greatly enhances Lightning Aura effectiveness
 		'Village Hidden in the Wall'
 		'''
 }
@@ -631,7 +627,6 @@ SquireEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 10 defense, a fart jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
-		Ballista pierces more targets and panics when you take damage
 		'Squire, will you hurry?'
 		'''
 }
@@ -718,7 +713,6 @@ ValhallaKnightEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
 		Increases the effectiveness of healing sources by 15%
-		Greatly enhances Ballista effectiveness
 		'Valhalla calls'
 		'''
 }
@@ -968,7 +962,7 @@ AbominableWand: {
 	Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Increased damage gained per Sparkling Adoration graze and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -1020,32 +1014,20 @@ BionomicCluster: {
 	DisplayName: Bionomic Cluster
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
-		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
 		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
-		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
-		[i:FargowiltasSouls/ConcentratedRainbowMatter] Summons a friendly rainbow slime
+		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
+		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		    [i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
+		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		[i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
 		'''
 }
 
@@ -1053,24 +1035,62 @@ BionomicClusterInactive: {
 	DisplayName: Bionomic Cluster (Inactive)
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/ConcentratedRainbowMatter] Flames of the Cosmos, 
-		[i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
 		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
-		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 5% chance to squeak and only deal 1 damage to you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
-		[i:FargowiltasSouls/ConcentratedRainbowMatter] Summons a friendly rainbow slime
+		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
+		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
+		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
+		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		'The amalgamate born of a thousand common enemies'
+		'''
+}
+
+LithosphericCluster: {
+	DisplayName: Lithospheric Cluster
+	Tooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
+		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
+		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam
+		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
+		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
+		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
+		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
+		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
+		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		'The amalgamate born of a thousand common enemies'
+		'''
+	VanityTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		'''
+}
+
+LithosphericClusterInactive: {
+	DisplayName: Lithospheric Cluster (Inactive)
+	Tooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
+		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
+		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam
+		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
+		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
+		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
+		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
 		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 30%
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/MysticSkull] Suffocation, [i:FargowiltasSouls/FrigidGemstone] Chilled, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/OrdinaryCarrot] improves your nightvision, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter] Automatically uses healing & [i:FargowiltasSouls/MysticSkull] mana potions when needed and increases pickup range for mana stars
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		    [i:FargowiltasSouls/FrigidGemstone] Press the Frigid Spell key to cast Ice Rod
-		    [i:FargowiltasSouls/OrdinaryCarrot] Press right click to zoom in
+		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		'''
 }
@@ -1105,12 +1125,11 @@ ConcentratedRainbowMatter: {
 	DisplayName: Concentrated Rainbow Matter
 	Tooltip:
 		'''
-		Grants immunity to Flames of the Cosmos
-		Summons a baby rainbow slime to fight for you
-		Automatically use healing potions when needed (Works from inventory and vanity)
+		Permanent effect once consumed:
+		Automatically use healing potions when needed (can be toggled)
+		Grants immunity to Flames of the Universe
 		'Taste the rainbow'
 		'''
-	VanityTooltip: Automatically use healing potions when needed
 }
 
 DarkenedHeart: {
@@ -1130,7 +1149,7 @@ Deerclawps: {
 		'''
 		Grants immunity to Slow and Frozen
 		Dashing leaves a trail of ice spikes, pointed towards the closest enemy if airborne
-		Fastfall creates a glacial eruption on impact
+		While dashing, gain 15% damage reduction and reflect 100% of contact damage on attacker
 		'The trimmed nails of a defeated foe'
 		'''
 }
@@ -1294,23 +1313,6 @@ LihzahrdTreasureBox: {
 		'''
 }
 
-LumpOfFlesh: {
-	DisplayName: Lump of Flesh
-	Tooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/DreadShell] knockback, Anticoagulation, [i:FargowiltasSouls/PungentEyeball] Blackout, Obstructed, [i:FargowiltasSouls/SkullCharm] Dazed, [i:FargowiltasSouls/Deerclawps] Slow, and Frozen
-		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.15x damage
-		[i:FargowiltasSouls/PungentEyeball] Massively increases spawn rate of rare enemies
-		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15%, and gives you an eyeball minion which charges up as you attack
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
-		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
-		[i:FargowiltasSouls/Deerclawps] Dashing leaves a trail of blood spikes
-		[i:FargowiltasSouls/Deerclawps] Fastfall will create a glacial eruption on impact
-		'It's growing'
-		'''
-}
-
 MagicalBulb: {
 	DisplayName: Magical Bulb
 	Tooltip:
@@ -1387,7 +1389,6 @@ NecromanticBrew: {
 		'''
 		Grants immunity to Lethargic
 		Increases speed when dashing by 30%
-		When dashing, take 15% less damage and reflect 100% of contact damage on attacker
 		Summons 2 Skeletron arms to whack enemies
 		'The bone-growing solution of a defeated foe'
 		'''
@@ -1453,7 +1454,7 @@ PureHeart: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs
-		Grants immunity to [i:FargowiltasSouls/DarkenedHeart] Rotting and [i:FargowiltasSouls/GuttedHeart] Bloodthirsty
+		Grants immunity to [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 		[i:FargowiltasSouls/DarkenedHeart] Increased movement speed and turnaround traction
 		[i:FargowiltasSouls/DarkenedHeart] Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Sublimation (DoT and defense reduction)
 		[i:FargowiltasSouls/GuttedHeart] Up to 3 creepers hover around you blocking some damage, respawning faster when not moving
@@ -1461,6 +1462,8 @@ PureHeart: {
 		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump
 		[i:FargowiltasSouls/GelicWings] When you land after a jump, slime spikes shoot out to the sides
 		[i:FargowiltasSouls/GelicWings] Increases wing time by 30%
+		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.15x damage
+		[i:FargowiltasSouls/PungentEyeball] Massively increases spawn rate of rare enemies
 		'It pulses with vitality'
 		'''
 }
@@ -1596,13 +1599,15 @@ SupremeDeathbringerFairy: {
 	DisplayName: Supreme Deathbringer Fairy
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
+		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/NecromanticBrew] Lethargic, [i:FargowiltasSouls/Deerclawps] Slow, and Frozen
 		[i:FargowiltasSouls/SlimyShield] Increases fall speed and landing spawns slime over your cursor, hold down to fall through platforms
 		[i:FargowiltasSouls/AgitatingLens] While dashing or running quickly you will create a trail of blood scythes
 		[i:FargowiltasSouls/AgitatingLens] Debuff Install makes you go berserk, reducing control and defense for massive offensive bonuses
 		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
 		[i:FargowiltasSouls/QueenStinger] Press the Special Dash key to perform a short quick bee dash
-		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less contact damage while dashing, and reflect all damage back to attacker while dashing
+		[i:FargowiltasSouls/Deerclawps] Dashing leaves a trail of blood spikes
+		[i:FargowiltasSouls/Deerclawps] While dashing, gain 15% damage reduction and reflect 100% of contact damage on attacker
+		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed
 		[i:FargowiltasSouls/NecromanticBrew] Summons 2 Skeletron arms to whack enemies
 		'Supremacy not necessarily guaranteed'
 		'''
@@ -1784,11 +1789,11 @@ MasochistSoul: {
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (works from inventory and vanity), immunity to almost all Eternity Mode debuffs, and more
 		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
 		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50% [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/MysticSkull] mana potions as needed
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
+		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
 		'''
@@ -2137,10 +2142,10 @@ OrdinaryCarrot: {
 		{$CommonItemTooltip.MinorStats}
 		Increases life regeneration
 		1 minute duration
-		Right click to increase view range (works from inventory and vanity)
+		Permanent effect once consumed:
+		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		'''
-	VanityTooltip: Right click to increase view range
 }
 
 RabiesShot: {

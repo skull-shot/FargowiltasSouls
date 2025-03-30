@@ -116,6 +116,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (ReceivedMasoGift) playerData.Add("ReceivedMasoGift");
             if (RabiesVaccine) playerData.Add("RabiesVaccine");
             if (DeerSinew) playerData.Add("DeerSinew");
+            if (OrdinaryCarrot) playerData.Add("OrdinaryCarrot");
+            if (ConcentratedRainbowMatter) playerData.Add("ConcentratedRainbowMatter");
             if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
@@ -156,6 +158,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             ReceivedMasoGift = playerData.Contains("ReceivedMasoGift");
             RabiesVaccine = playerData.Contains("RabiesVaccine");
             DeerSinew = playerData.Contains("DeerSinew");
+            OrdinaryCarrot = playerData.Contains("OrdinaryCarrot");
+            ConcentratedRainbowMatter = playerData.Contains("ConcentratedRainbowMatter");
             HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");

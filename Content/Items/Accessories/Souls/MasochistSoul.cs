@@ -45,12 +45,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
         public override bool? UseItem(Player player) => true;
 
-        void PassiveEffect(Player player, Item item)
+        public static void PassiveEffect(Player player, Item item)
         {
-            BionomicCluster.PassiveEffect(player, Item);
+            BionomicCluster.PassiveEffect(player, item);
+            LithosphericCluster.PassiveEffect(player, item);
 
-            player.AddEffect<AmmoCycleEffect>(Item);
-            player.AddEffect<ChalicePotionEffect>(Item);
+            player.AddEffect<AmmoCycleEffect>(item);
+            player.AddEffect<ChalicePotionEffect>(item);
         }
 
         public override void UpdateInventory(Player player) => PassiveEffect(player, Item);
@@ -61,6 +62,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             ChaliceoftheMoon.DeactivateMinions(fargoPlayer, Item);
 
             BionomicCluster.PassiveEffect(player, Item);
+            LithosphericCluster.PassiveEffect(player, Item);
+
+            BionomicCluster.ActiveEffect(player, Item);
+            LithosphericCluster.ActiveEffect(player, Item);
 
             fargoPlayer.MasochistSoul = true;
             fargoPlayer.MasochistSoulItem = Item;
@@ -117,6 +122,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.NecromanticBrewItem = Item;
             player.AddEffect<NecroBrewSpin>(Item);
 
+            //deerclawps
+            player.buffImmune[BuffID.Slow] = true;
+            player.buffImmune[BuffID.Frozen] = true;
+            player.AddEffect<DeerclawpsEffect>(Item);
+            player.AddEffect<DeerclawpsDashDR>(Item);
+
             //supreme deathbringer fairy
             fargoPlayer.SupremeDeathbringerFairy = true;
 
@@ -172,58 +183,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //sinister icon
             player.AddEffect<SinisterIconEffect>(Item);
             player.AddEffect<SinisterIconDropsEffect>(Item);
-
-            //sparkling adoration
-            /*if (SoulConfig.Instance.GetValue(SoulConfig.Instance.Graze, false))
-                player.FargoSouls().Graze = true;
-
-            if (SoulConfig.Instance.GetValue(SoulConfig.Instance.DevianttHearts))
-                player.FargoSouls().DevianttHearts = true;*/
-
-            //dragon fang
-
-            //frigid gemstone
-            player.buffImmune[BuffID.Frostburn] = true;
-
-            //wretched pouch
-            player.buffImmune[BuffID.ShadowFlame] = true;
-            player.buffImmune[ModContent.BuffType<ShadowflameBuff>()] = true;
-            //player.AddEffect<WretchedPouchEffect>(Item);
-
-            //sands of time
-            player.buffImmune[BuffID.WindPushed] = true;
-            fargoPlayer.SandsofTime = true;
-
-            //mystic skull
-            player.buffImmune[BuffID.Suffocation] = true;
-            player.manaFlower = true;
-
-            //security wallet
-            fargoPlayer.SecurityWallet = true;
-
-            //carrot
-            player.nightVision = true;
-            player.AddEffect<MasoCarrotEffect>(Item);
-
-            //squeaky toy
-            player.AddEffect<SqueakEffect>(Item);
-
-            //tribal charm
-            player.buffImmune[BuffID.Webbed] = true;
-            fargoPlayer.TribalCharm = true;
-            fargoPlayer.TribalCharmEquipped = true;
-
-            //nymph's perfume
-            player.buffImmune[BuffID.Lovestruck] = true;
-            player.buffImmune[BuffID.Stinky] = true;
-            fargoPlayer.NymphsPerfumeRespawn = true;
-            player.AddEffect<NymphPerfumeEffect>(Item);
-
-            //tim's concoction
-            player.AddEffect<TimsConcoctionEffect>(Item);
-
-            //wyvern feather
-            //player.AddEffect<WyvernBalls>(Item); pointless; you have infinite flight at this point
 
             //dubious circuitry
             player.buffImmune[BuffID.CursedInferno] = true;
@@ -299,13 +258,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<DreadShellEffect>(Item);
             player.AddEffect<ParryEffect>(Item);
 
-            //deerclawps
-            player.buffImmune[BuffID.Slow] = true;
-            player.buffImmune[BuffID.Frozen] = true;
-            player.AddEffect<DeerclawpsDive>(Item);
-            player.AddEffect<DiveEffect>(Item);
-            player.AddEffect<DeerclawpsEffect>(Item);
-
             //sadism
             player.buffImmune[ModContent.BuffType<AnticoagulationBuff>()] = true;
             player.buffImmune[ModContent.BuffType<AntisocialBuff>()] = true;
@@ -360,9 +312,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<SinisterIcon>())
             .AddIngredient(ModContent.ItemType<SupremeDeathbringerFairy>())
             .AddIngredient(ModContent.ItemType<BionomicCluster>())
+            .AddIngredient(ModContent.ItemType<LithosphericCluster>())
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
-            .AddIngredient(ModContent.ItemType<LumpOfFlesh>())
             .AddIngredient(ModContent.ItemType<ChaliceoftheMoon>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
             .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)

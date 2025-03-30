@@ -52,9 +52,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
         
         public override void PostUpdateEquips(Player player)
         {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.DeerSinewFreezeCD > 0)
-                modPlayer.DeerSinewFreezeCD--;
+            
         }
         public static void AddDash(Player player)
         {

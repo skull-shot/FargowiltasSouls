@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items
         public SoundStyle? SwingSound = null;
         //phasesabers and shiny swings in by default because vanilla fucks them up
         public static List<int> Broadswords = [ ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.YellowPhasesaber, ItemID.OrangePhasesaber, ItemID.RedPhasesaber, ItemID.WhitePhasesaber,
-            ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade];
+            ItemID.NightsEdge, ItemID.Excalibur, ItemID.TrueExcalibur, ItemID.TrueNightsEdge, ItemID.TheHorsemansBlade, ItemID.TerraBlade, ItemID.LucyTheAxe];
 
         public static int[] AllowedModdedSwords = { ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<TreeSword>(), ModContent.ItemType<SlimeRain>() };
         public static bool BroadswordRework(Item item)

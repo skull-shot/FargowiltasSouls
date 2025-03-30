@@ -32,13 +32,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 4);
         }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
+        public static void ActiveEffects(Player player, Item item)
         {
             player.buffImmune[BuffID.ShadowFlame] = true;
             player.buffImmune[ModContent.BuffType<ShadowflameBuff>()] = true;
 
-            player.AddEffect<WretchedPouchEffect>(Item);
+            player.AddEffect<WretchedPouchEffect>(item);
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
         }
     }
     public class WretchedPouchEffect : AccessoryEffect

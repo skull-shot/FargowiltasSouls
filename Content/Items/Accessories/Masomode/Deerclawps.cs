@@ -11,8 +11,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     public class Deerclawps : SoulsItem
     {
         public override bool Eternity => true;
-        public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<DiveEffect>()];
         public override void SetStaticDefaults()
         {
 
@@ -32,51 +30,40 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[BuffID.Slow] = true;
             player.buffImmune[BuffID.Frozen] = true;
-            player.AddEffect<DeerclawpsDive>(Item);
-            player.AddEffect<DiveEffect>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
+            player.AddEffect<DeerclawpsDashDR>(Item);
         }
-    }
-    public class DeerclawpsDive : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
-        public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
-        public static void DeerclawpsLandingSpikes(Player player, Vector2 pos)
-        {
-            if (player.whoAmI == Main.myPlayer)
-            {
-                const int max = 4;
-                for (int i = -max; i <= max; i++)
-                {
-                    Vector2 vel = 16f * -Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / max * i).RotatedByRandom(MathHelper.ToRadians(10));
 
-                    int dam = 32;
-                    int type = ProjectileID.DeerclopsIceSpike;
-                    float ai0 = -15f;
-                    float ai1 = Main.rand.NextFloat(0.5f, 1f);
-                    if (player.FargoSouls().LumpOfFlesh)
-                    {
-                        dam = 48;
-                        type = ProjectileID.SharpTears;
-                        ai0 *= 2f;
-                        ai1 += 0.5f;
-                    }
-                    dam = (int)(dam * player.ActualClassDamage(DamageClass.Melee));
-
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dam, 4f, Main.myPlayer, ai0, ai1);
-                }
-            }
-        }
     }
-    public class DiveEffect : AccessoryEffect
+    public class DeerclawpsDashDR : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
-        public override bool ActiveSkill => true;
+        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        {
+            return DashDR(player);
+        }
+        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        {
+            return DashDR(player);
+        }
+
+
+        public static float DashDR(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            float dr = 0;
+            if (modPlayer.IsInADashState)
+            {
+                dr += 0.15f;
+            }
+
+            return dr;
+        }
     }
     public class DeerclawpsEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LumpofFleshHeader>();
+        public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
         public static void DeerclawpsAttack(Player player, Vector2 pos)
         {
@@ -88,9 +75,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 int type = ProjectileID.DeerclopsIceSpike;
                 float ai0 = -15f;
                 float ai1 = Main.rand.NextFloat(0.5f, 1f);
-                if (player.FargoSouls().LumpOfFlesh)
+                if (player.FargoSouls().SupremeDeathbringerFairy)
                 {
-                    dam = 48;
+                    dam = 32;
                     type = ProjectileID.SharpTears;
                     ai0 *= 2f;
                     ai1 += 0.5f;

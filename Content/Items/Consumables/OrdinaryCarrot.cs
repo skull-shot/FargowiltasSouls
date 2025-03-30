@@ -29,29 +29,26 @@ namespace FargowiltasSouls.Content.Items.Consumables
             Item.value = Item.sellPrice(0, 0, 10, 0);
         }
 
-        public override void UpdateInventory(Player player)
-        {
-            player.AddEffect<MasoCarrotEffect>(Item);
-        }
-
         public override bool? UseItem(Player player)
         {
             if (player.itemAnimation > 0 && player.itemTime == 0)
             {
                 player.AddBuff(BuffID.NightOwl, 3600);
                 player.AddBuff(BuffID.WellFed, 3600);
+                player.FargoSouls().OrdinaryCarrot = true;
             }
             return true;
         }
     }
     public class MasoCarrotEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override bool DefaultToggle => false;
+        public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
         public override int ToggleItemType => ModContent.ItemType<OrdinaryCarrot>();
         
         public override void PostUpdateEquips(Player player)
         {
-            player.scope = true;
+            //player.scope = true;
         }
     }
 }

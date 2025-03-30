@@ -461,7 +461,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (fastFallCD > 0)
                 fastFallCD--;
 
-            bool canFastFall = Player.HasEffect<LihzahrdGroundPound>() || Player.HasEffect<DeerclawpsDive>();
+            bool canFastFall = Player.HasEffect<LihzahrdGroundPound>();
             if (!(Player.gravDir > 0 && Player.HasEffect<DiveEffect>() && canFastFall))
                 return;
 
@@ -516,10 +516,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         GroundPound = 0;
 
-                        if (Player.HasEffect<DeerclawpsDive>())
-                        {
-                            DeerclawpsDive.DeerclawpsLandingSpikes(Player, Player.Bottom);
-                        }
                         if (Player.HasEffect<LihzahrdBoulders>())
                         {
                             if (!Main.dedServ)
@@ -586,15 +582,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                         for (int i = 0; i < 5; i++)
                         {
                             int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Scale: 1.5f);
-                            Main.dust[d].noGravity = true;
-                            Main.dust[d].velocity *= 0.2f;
-                        }
-                    }
-                    if (Player.HasEffect<DeerclawpsDive>())
-                    {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            int d = Dust.NewDust(Player.position, Player.width, Player.height, LumpOfFlesh ? DustID.CrimsonTorch : DustID.IceTorch, Scale: 1.5f);
                             Main.dust[d].noGravity = true;
                             Main.dust[d].velocity *= 0.2f;
                         }

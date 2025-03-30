@@ -219,7 +219,29 @@ namespace FargowiltasSouls.Core.ModPlayers
                 SpectreEffect.GhostUpdate(Player);
 
             if (DeerSinew)
-                Player.AddEffect<DeerSinewEffect>(ModContent.GetInstance<DeerSinew>().Item);
+            {
+                if (Player.AddEffect<DeerSinewEffect>(ModContent.GetInstance<DeerSinew>().Item))
+                {
+                    if (DeerSinewFreezeCD > 0)
+                        DeerSinewFreezeCD--;
+                }
+            }
+
+            if (OrdinaryCarrot)
+            {
+                if (Player.AddEffect<MasoCarrotEffect>(ModContent.GetInstance<OrdinaryCarrot>().Item))
+                {
+                    Player.scope = true;
+                }
+            }
+                
+
+            if (ConcentratedRainbowMatter)
+            {
+                Player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
+                Player.AddEffect<RainbowHealEffect>(ModContent.GetInstance<ConcentratedRainbowMatter>().Item);
+            }
+                
 
             if (NoMomentum && !Player.mount.Active)
             {
@@ -311,7 +333,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.ClearBuff(ModContent.BuffType<TwinsInstallBuff>());
 
             if (Player.HasBuff<BerserkerInstallBuff>() && !Player.HasEffect<AgitatingLensInstall>())
+            {
                 Player.ClearBuff(ModContent.BuffType<BerserkerInstallBuff>());
+                int stunDuration = 120; //2sec
+                Player.AddBuff(ModContent.BuffType<BerserkerInstallCDBuff>(), 60 * 10);
+                Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
+            }
 
             if ((BetsysHeartItem != null || QueenStingerItem != null))
             {
@@ -382,7 +409,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             DashManager.AddDashes(Player);
             DashManager.ManageDashes(Player);
 
-            if (LihzahrdTreasureBoxItem != null || Player.HasEffect<DeerclawpsDive>())
+            if (LihzahrdTreasureBoxItem != null)
                 TryFastfallUpdate();
             if (Player.HasEffect<DeerclawpsEffect>() && IsInADashState)
                 DeerclawpsEffect.DeerclawpsAttack(Player, Player.Bottom);
@@ -593,7 +620,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HallowRepelTime = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
-            if (SquireEnchantActive)
+            /*if (SquireEnchantActive)
                 Player.setSquireT2 = true;
             if (ValhallaEnchantActive)
                 Player.setSquireT3 = true;
@@ -607,7 +634,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT2 = true;
 
             if (ShinobiEnchantActive)
-                Player.setMonkT3 = true;
+                Player.setMonkT3 = true;*/
 
 
             if (Player.channel && WeaponUseTimer < 2)
