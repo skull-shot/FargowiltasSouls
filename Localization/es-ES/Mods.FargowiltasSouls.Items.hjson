@@ -207,7 +207,7 @@ FossilEnchant: {
 		'''
 		If you reach zero HP you will revive with 50 HP, self-cleanse debuffs, and spawn several bones
 		You will also spawn a few bones on every hit
-		Collect the bones to heal for 20 HP each
+		Collect the bones to heal for 12 HP each
 		'Beyond a forgotten age'
 		''' */
 }
@@ -278,7 +278,7 @@ IronEnchant: {
 		Increases item grab range
 		Works when equipped:
 		Item grab range affects pickup items such as Hearts, Mana Stars and Nebula Boosters
-		Picking up an item or pickup increases damage reduction by 20% for 5 seconds
+		Picking up an item or pickup increases damage reduction by 14% for 5 seconds
 		'Strike while the iron is hot'
 		''' */
 	/* VanityTooltip:
@@ -464,7 +464,7 @@ PumpkinEnchant: {
 	/* Tooltip:
 		'''
 		You will grow pumpkins while moving
-		When fully grown, they will heal 25 HP and spawn damaging embers
+		When fully grown, they will heal 18 HP and spawn damaging embers
 		Enemies that touch them will destroy them and take damage
 		'Your sudden pumpkin craving will never be satisfied'
 		''' */
@@ -1119,7 +1119,7 @@ DarkenedHeart: {
 		'''
 		Grants immunity to Rotting
 		10% increased movement speed and increased turnaround traction
-		You spawn mini eaters that inflict Cursed Inferno to seek out enemies every few attacks
+		Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies
 		'Flies refuse to approach it'
 		''' */
 }
