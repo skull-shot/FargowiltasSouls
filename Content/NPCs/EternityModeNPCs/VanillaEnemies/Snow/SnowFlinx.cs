@@ -40,6 +40,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
 
         public override bool SafePreAI(NPC npc)
         {
+
             AttackTimer++;
             if (AttackTimer >= 240)
             {
@@ -65,8 +66,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                     SoundEngine.PlaySound(SoundID.Item51, npc.Center);
                     FargoSoulsUtil.ScreenshakeRumble(2f);
                     npc.velocity = 10 * Vector2.UnitX.RotatedBy(-(MathHelper.PiOver2 + (npc.direction * MathHelper.PiOver4)));
-                    npc.rotation = 0;
-                    State = 0;
+                    npc.rotation = npc.velocity.ToRotation() + MathHelper.PiOver2;
+                    State = 2;
                     AttackTimer = 0;
                 }
                 return false;
@@ -89,14 +90,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             float xSpeed = Math.Abs(npc.velocity.X);
+            // draw snowball second so it's in front
             if (State == 1)
             {
-                // draw flinx behind the snowball for "transformation"
                 Texture2D texture = TextureAssets.Npc[npc.type].Value;
                 Rectangle frame = npc.frame;
                 SpriteEffects flip = npc.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
                 Main.EntitySpriteDraw(texture, npc.Center - screenPos, frame, drawColor, npc.rotation, new Vector2(frame.Width / 2, frame.Height / 2), npc.scale, flip);
 
+                // draw snowball second so it's in front
                 Texture2D sTexture = ModContent.Request<Texture2D>("Terraria/Images/Projectile_109", AssetRequestMode.ImmediateLoad).Value;
                 Rectangle sFrame = new(0, 0, sTexture.Width, sTexture.Height);
                 
