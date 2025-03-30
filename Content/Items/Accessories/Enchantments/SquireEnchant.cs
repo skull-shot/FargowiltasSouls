@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             modPlayer.SquireEnchantActive = true;
 
-            player.buffImmune[BuffID.BallistaPanic] = true;
+            //player.buffImmune[BuffID.BallistaPanic] = true;
 
             Mount mount = player.mount;
 

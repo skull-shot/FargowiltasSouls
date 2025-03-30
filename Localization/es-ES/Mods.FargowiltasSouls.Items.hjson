@@ -52,7 +52,6 @@ ApprenticeEnchant: {
 		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
-		Flameburst field of view and range are dramatically increased
 		'A long way to perfection'
 		''' */
 }
@@ -180,7 +179,6 @@ DarkArtistEnchant: {
 		The support weapon will fire 1/5 as often as they would normally
 		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
-		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -352,7 +350,6 @@ MonkEnchant: {
 		You are briefly immune to damage and debuffs after dashing
 		Dash through an enemy to deal massive melee damage
 		Dash cooldown is much longer than normal dashes
-		Lightning Aura can now crit and strikes faster
 		'Return to Monk'
 		''' */
 }
@@ -541,7 +538,6 @@ ShinobiEnchant: {
 		Dash cooldown is longer than normal dashes
 		Dash is longer and deals more damage
 		Dash into any walls to teleport through them to the next opening
-		Greatly enhances Lightning Aura effectiveness
 		'Village Hidden in the Wall'
 		''' */
 }
@@ -631,7 +627,6 @@ SquireEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 10 defense, a fart jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
-		Ballista pierces more targets and panics when you take damage
 		'Squire, will you hurry?'
 		''' */
 }
@@ -718,7 +713,6 @@ ValhallaKnightEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
 		Increases the effectiveness of healing sources by 15%
-		Greatly enhances Ballista effectiveness
 		'Valhalla calls'
 		''' */
 }
@@ -968,7 +962,7 @@ AbominableWand: {
 	/* Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Increased damage gained per Sparkling Adoration graze and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -1602,7 +1596,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/AgitatingLens] Debuff Install makes you go berserk, reducing control and defense for massive offensive bonuses
 		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
 		[i:FargowiltasSouls/QueenStinger] Press the Special Dash key to perform a short quick bee dash
-		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less contact damage while dashing, and reflect all damage back to attacker while dashing
+		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less damage while dashing, and reflect all damage back to attacker while dashing
 		[i:FargowiltasSouls/NecromanticBrew] Summons 2 Skeletron arms to whack enemies
 		'Supremacy not necessarily guaranteed'
 		''' */
