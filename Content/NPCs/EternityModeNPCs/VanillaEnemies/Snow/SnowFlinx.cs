@@ -1,12 +1,14 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using Microsoft.Build.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,12 +19,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
     public class SnowFlinx : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.SnowFlinx);
-
-        private static Texture2D snowballTexture;
-        public override void Load()
-        {
-            snowballTexture = TextureAssets.Projectile[ProjectileID.SnowBallHostile].Value;
-        }
 
         public int AttackTimer;
         public int State;
@@ -45,43 +41,66 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
         public override bool SafePreAI(NPC npc)
         {
             AttackTimer++;
-            //Main.NewText(AttackTimer);
-            if (AttackTimer > 240)
+            if (AttackTimer >= 240)
             {
                 State = 1;
                 if (Math.Abs(npc.velocity.X) < 15)
                     npc.velocity.X = npc.direction * (float) Math.Pow(1.1, (AttackTimer - 300));
+                else if (AttackTimer % 2 == 0)
+                {
+                    Dust d = Dust.NewDustDirect(npc.Bottom, 0, 0, DustID.Snow);
+                    d.velocity *= 0.5f;
+                }
+
+                // rotation cap
                 float rot = (AttackTimer - 240) / 50f;
                 if (rot > 0.6f)
                     rot = 0.6f;
-
-                Main.NewText(rot);
                 npc.rotation += npc.direction * rot;
-                if (AttackTimer > 360)
+
+                // check if it is ABOUT to hit a wall
+                if (Collision.SolidCollision(npc.position + npc.velocity, npc.width, npc.height))
                 {
+                    SoundEngine.PlaySound(SoundID.Item14, npc.Center);
+                    SoundEngine.PlaySound(SoundID.Item51, npc.Center);
+                    FargoSoulsUtil.ScreenshakeRumble(2f);
+                    npc.velocity = 10 * Vector2.UnitX.RotatedBy(-(MathHelper.PiOver2 + (npc.direction * MathHelper.PiOver4)));
+                    npc.rotation = 0;
+                    State = 0;
                     AttackTimer = 0;
                 }
                 return false;
             }
-            State = 0;
 
             return base.SafePreAI(npc);
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
+            // Immune to kb and less damage taken during roll
             if (State == 1)
+            {
                 modifiers.Knockback *= 0;
+                modifiers.FinalDamage *= 0.5f;
+            }
             base.ModifyIncomingHit(npc, ref modifiers);
         }
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (State == 1 && AttackTimer > 300)
+            float xSpeed = Math.Abs(npc.velocity.X);
+            if (State == 1)
             {
-                Rectangle frame = new(0, 0, snowballTexture.Width, snowballTexture.Height);
+                // draw flinx behind the snowball for "transformation"
+                Texture2D texture = TextureAssets.Npc[npc.type].Value;
+                Rectangle frame = npc.frame;
+                SpriteEffects flip = npc.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                Main.EntitySpriteDraw(texture, npc.Center - screenPos, frame, drawColor, npc.rotation, new Vector2(frame.Width / 2, frame.Height / 2), npc.scale, flip);
 
-                Main.EntitySpriteDraw(snowballTexture, npc.Center, frame, drawColor, npc.rotation, new Vector2(frame.Width / 2, frame.Height / 2), npc.scale, SpriteEffects.None);
+                Texture2D sTexture = ModContent.Request<Texture2D>("Terraria/Images/Projectile_109", AssetRequestMode.ImmediateLoad).Value;
+                Rectangle sFrame = new(0, 0, sTexture.Width, sTexture.Height);
+                
+                Main.EntitySpriteDraw(sTexture, npc.Center - screenPos, sFrame, drawColor, npc.rotation, new Vector2(sFrame.Width / 2, sFrame.Height / 2), 3.5f * npc.scale * ((xSpeed)/15f), flip);
                 return false;
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
