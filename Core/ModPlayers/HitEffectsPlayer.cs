@@ -326,9 +326,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (npc.FargoSouls().BloodDrinker)
                 dr -= 0.3f;
 
-            if (Player.HasBuff(ModContent.BuffType<ShellHideBuff>()))
-                dr -= 1;
-
             if (Smite)
                 dr -= 0.2f;
 

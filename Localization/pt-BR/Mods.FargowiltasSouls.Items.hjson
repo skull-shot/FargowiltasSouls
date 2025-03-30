@@ -50,7 +50,6 @@ ApprenticeEnchant: {
 		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
-		Flameburst field of view and range are dramatically increased
 		'A long way to perfection'
 		''' */
 }
@@ -175,7 +174,6 @@ DarkArtistEnchant: {
 		The support weapon will fire 1/5 as often as they would normally
 		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
-		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -619,7 +617,6 @@ SquireEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 10 defense, a fart jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
-		Ballista pierces more targets and panics when you take damage
 		'Squire, will you hurry?'
 		''' */
 }
@@ -703,7 +700,6 @@ ValhallaKnightEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
 		Increases the effectiveness of healing sources by 15%
-		Greatly enhances Ballista effectiveness
 		'Valhalla calls'
 		''' */
 }
