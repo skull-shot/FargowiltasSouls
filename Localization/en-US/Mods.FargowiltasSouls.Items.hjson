@@ -2017,7 +2017,7 @@ NekomiHood: {
 	Tooltip:
 		'''
 		7% increased damage
-		Increases max number of minions by 2
+		Increases max number of minions by 1
 		'''
 }
 
