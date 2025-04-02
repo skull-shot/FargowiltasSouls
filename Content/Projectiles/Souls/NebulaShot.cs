@@ -76,7 +76,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             for (int j = 0; j < total; j++)
             {
                 int boosterType = Utils.SelectRandom(Main.rand, choices);
-                Item.NewItem(player.GetSource_OpenItem(boosterType), (int)target.position.X, (int)target.position.Y, target.width, target.height, boosterType, 1, false, 0, false, false);
+                int n = Item.NewItem(player.GetSource_OpenItem(boosterType), (int)target.position.X, (int)target.position.Y, target.width, target.height, boosterType, 1, false, 0, false, false);
+
+                if (Main.netMode == NetmodeID.MultiplayerClient)
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, n, 1f);
             }
         }
 
