@@ -35,8 +35,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
-            Projectile.scale = 0;
+            Projectile.scale = 1f;
             Projectile.Opacity = 1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 20;
         }
 
         public override void AI()
@@ -54,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.localAI[0] = 1;
 
                 //SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                for (int i = 0; i < 10; i++)
+                /*for (int i = 0; i < 10; i++)
                 {
                     int dust = Dust.NewDust(Projectile.position, Projectile.width,
                         Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
@@ -69,7 +71,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     dust = Dust.NewDust(Projectile.position, Projectile.width,
                         Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                     Main.dust[dust].velocity *= 3f;
-                }
+                }*/
             }
         }
 

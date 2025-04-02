@@ -131,10 +131,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
             if (Projectile.owner == Main.myPlayer)
             {
-                int modifier = Main.rand.NextBool() ? 1 : -1;
+                /*int modifier = Main.rand.NextBool() ? 1 : -1;
                 SpawnRazorbladeRing(6, 17f, 1f * -modifier);
                 SpawnRazorbladeRing(6, 17f, 0.5f * modifier);
-                /*const int max = 16;
+                const int max = 16;
                 Vector2 baseVel = Vector2.UnitX.RotatedByRandom(2 * Math.PI);
                 for (int i = 0; i < max; i++)
                 {
@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }*/
         }
 
-        private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
+        /*private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
         {
             float rotation = 2f * (float)Math.PI / max;
             Vector2 vel = Vector2.UnitX.RotatedByRandom(2 * Math.PI); //Projectile.velocity; vel.Normalize();
@@ -165,10 +165,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             for (int i = 0; i < max; i++)
             {
                 vel = vel.RotatedBy(rotation);
-                //Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
-                    //Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
+                    Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
             }
-        }
+        }*/
 
         public float WidthFunction(float completionRatio)
         {
