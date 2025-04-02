@@ -41,6 +41,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.idStaticNPCHitCooldown = 20;
         }
 
+        internal static NPC? fishNukeTarget;
+
         public override void AI()
         {
 
@@ -111,6 +113,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * 4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             return false;
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if (fishNukeTarget == target)
+                return false;
+            return base.CanHitNPC(target);
+        }
+        public override void OnKill(int timeLeft)
+        {
+            fishNukeTarget = null;
+            base.OnKill(timeLeft);
         }
     }
 }

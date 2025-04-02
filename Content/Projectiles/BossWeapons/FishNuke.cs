@@ -32,6 +32,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 1800;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = Projectile.extraUpdates * 20;
             //AIType = ProjectileID.Bullet;
             //Projectile.scale = 2f;
         }
@@ -116,6 +118,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
             target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);*/
             target.AddBuff(BuffID.Frostburn, 300);
+            FishNukeExplosion.fishNukeTarget = target;
         }
 
         /*public override bool OnTileCollide(Vector2 oldVelocity)
@@ -142,7 +145,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
                         ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
                 }*/
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage / 2, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
             }
             /*int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
