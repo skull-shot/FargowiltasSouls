@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.idStaticNPCHitCooldown = 20;
         }
 
-        internal static NPC? fishNukeTarget;
+        internal static NPC? fishNukeTarget; // temp solution to prevent explosion from hitting original target until better solution
 
         public override void AI()
         {
@@ -95,8 +95,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //target.immune[Projectile.owner] = 0;
             /*target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);*/
-            target.AddBuff(BuffID.Frostburn, 300);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
+            target.AddBuff(BuffID.Frostburn, 300);*/
         }
 
         public override bool PreDraw(ref Color lightColor)
