@@ -32,8 +32,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.timeLeft = 1800;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = Projectile.extraUpdates * 20;
             //AIType = ProjectileID.Bullet;
             //Projectile.scale = 2f;
         }
