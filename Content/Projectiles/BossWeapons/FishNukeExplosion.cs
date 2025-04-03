@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.width = 400;
             Projectile.height = 400;
             Projectile.aiStyle = -1;
-            Projectile.friendly = true;
+            Projectile.friendly = false; // explosion damage is temporarily disabled until I figure out what to do with this -Habble
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 20;
@@ -40,8 +40,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 20;
         }
-
-        internal static NPC? fishNukeTarget; // temp solution to prevent explosion from hitting original target until better solution
 
         public override void AI()
         {
@@ -88,16 +86,16 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 damage = 0;
                 modifiers.DisableCrit();
             }
-        }*/
+        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            //target.immune[Projectile.owner] = 0;
-            /*target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
+            target.immune[Projectile.owner] = 0;
+            target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
             target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
-            target.AddBuff(BuffID.Frostburn, 300);*/
-        }
+            target.AddBuff(BuffID.Frostburn, 300);
+        }*/
 
         public override bool PreDraw(ref Color lightColor)
         {
@@ -113,17 +111,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * 4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             return false;
-        }
-        public override bool? CanHitNPC(NPC target)
-        {
-            if (fishNukeTarget == target)
-                return false;
-            return base.CanHitNPC(target);
-        }
-        public override void OnKill(int timeLeft)
-        {
-            fishNukeTarget = null;
-            base.OnKill(timeLeft);
         }
     }
 }

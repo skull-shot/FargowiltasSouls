@@ -1,5 +1,6 @@
 using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,10 +29,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.timeLeft = 1800;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             //AIType = ProjectileID.Bullet;
             //Projectile.scale = 2f;
         }
@@ -59,7 +62,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             else
             {
-                if (++Projectile.localAI[1] > 12f)
+                if (++Projectile.localAI[1] > 12f && Projectile.ai[0] != -2)
                 {
                     Projectile.localAI[1] = 0f;
                     Projectile.ai[0] = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 500, true);
@@ -116,7 +119,18 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
             target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
             target.AddBuff(BuffID.Frostburn, 300);*/
-            FishNukeExplosion.fishNukeTarget = target;
+            
+            if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400)
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                Projectile.timeLeft = 20;
+                Projectile.hide = true;
+                Projectile.ai[0] = -2f;
+                Projectile.velocity *= 0;
+                Projectile.knockBack *= 2f;
+                Projectile.Resize(200, 200);
+            }
         }
 
         /*public override bool OnTileCollide(Vector2 oldVelocity)
@@ -129,10 +143,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
-            if (Projectile.owner == Main.myPlayer)
+            /*if (Projectile.owner == Main.myPlayer)
             {
-                /*int modifier = Main.rand.NextBool() ? 1 : -1;
+                int modifier = Main.rand.NextBool() ? 1 : -1;
                 SpawnRazorbladeRing(6, 17f, 1f * -modifier);
                 SpawnRazorbladeRing(6, 17f, 0.5f * modifier);
                 const int max = 16;
@@ -142,10 +155,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     float speed = i % 2 == 0 ? 16f : 14f;
                     Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
                         ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
-                }*/
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                }
             }
-            /*int num1 = 36;
+            int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
                 Vector2 vector2_1 = (Vector2.Normalize(Projectile.velocity) * new Vector2(Projectile.width / 2f, Projectile.height) * 0.75f).RotatedBy((index1 - (num1 / 2 - 1)) * 6.28318548202515 / num1, new Vector2()) + Projectile.Center;
@@ -188,6 +200,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
+            if (Projectile.hide)
+                return;
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
             FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
