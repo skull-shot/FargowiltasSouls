@@ -1,8 +1,2 @@
 NEW UPDATE - V {ModVersion}
-Fixed Nebula Enchant and Cosmos Force moons not syncing in multiplayer
-Fixed Squire and Valhalla Knight enchants giving immunity to Ballista Panic and still mentioning they enable it
-Apprentice, Dark Artist, Monk, Shinobi Infiltrator Enchants no longer buff their respective sentries (including Apprentice and D.Artist buffing Phantom Phoenix through the set bonuses)
-Fixed Turtle Enchant shell DR working incorrectly
-Fixed Supreme Deathbringer Fairy tooltip mentioning contact damage DR rather than general DR during a dash
-Fixed Berserker Install exploit
-Text tweaks and fixes
+April Fools now only lasts for 1 day, instead of a whole week
