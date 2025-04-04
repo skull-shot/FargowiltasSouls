@@ -1277,14 +1277,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     modifiers.FinalDamage *= 0.275f;
                     break;
 
-                case ProjectileID.StarCloakStar:
-                case ProjectileID.StarVeilStar:
-                case ProjectileID.BeeCloakStar:
-                case ProjectileID.ManaCloakStar:
-                    if (!Main.hardMode)
-                        modifiers.FinalDamage *= 0.33f;
-                    break;
-
                 case ProjectileID.OrichalcumHalberd:
                     modifiers.FinalDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                     break;
