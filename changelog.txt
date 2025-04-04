@@ -1,2 +1,3 @@
 NEW UPDATE - V {ModVersion}
-April Fools now only lasts for 1 day, instead of a whole week
+Tweaked and rebalanced Nuke Fishron
+Eternity Plantera now drops a Lihzahrd Instactuation Bomb on first kill
