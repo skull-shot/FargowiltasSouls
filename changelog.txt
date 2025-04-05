@@ -1,3 +1,3 @@
 NEW UPDATE - V {ModVersion}
-Fixed issue with Spider Enchant
-Updated localization
+Tweaked and rebalanced Nuke Fishron
+Eternity Plantera now drops a Lihzahrd Instactuation Bomb on first kill
