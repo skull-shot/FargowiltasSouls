@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 Item item = EffectItem(player);
                 bool forceEffect = modPlayer.ForceEffect(item.type);
                 Item heldItem = player.HeldItem;
-                modPlayer.BorealCD = forceEffect ? 30 : 60;
+                modPlayer.BorealCD = forceEffect ? 45 : 60;
                 if (player.HasEffect<TimberEffect>())
                     modPlayer.BorealCD = 90;
 
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (!player.HasEffect<TimberEffect>() && heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
                     snowballDamage *= player.ActualClassDamage(DamageClass.Ranged);
-                    float softcapMult = forceEffect ? (20f / 3f) : 1f;
+                    float softcapMult = forceEffect ? (15f / 3f) : 1f;
                     if (snowballDamage > (12f * softcapMult)) // diminishing returns above 15 snowballDamage for non wiz, 100 for wiz
                         snowballDamage = (float)Math.Round(((24f * softcapMult) + snowballDamage) / 3f); // e.g. non wiz 30 -> 20, wiz 200 -> 150 etc. (https://www.desmos.com/calculator/vyaqqoegxq)
                 }

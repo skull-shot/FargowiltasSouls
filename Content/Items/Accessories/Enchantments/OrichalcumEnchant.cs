@@ -56,11 +56,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static float OriDotModifier(NPC npc, FargoSoulsPlayer modPlayer)
         {
-            float multiplier = 2.5f;
+            float multiplier = 1.7f;
 
             if (modPlayer.Player.ForceEffect<OrichalcumEffect>())
             {
-                multiplier = 3.5f;
+                multiplier = 2.4f;
             }
             return multiplier;
         }
@@ -69,16 +69,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (!HasEffectEnchant(player))
                 return;
-            player.onHitPetal = true;
+            //player.onHitPetal = true;
         }
 
         public override void OnHitNPCWithProj(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (proj.type == ProjectileID.FlowerPetal)
-            {
-                target.AddBuff(ModContent.BuffType<Content.Buffs.Souls.OriPoisonBuff>(), 300);
-                target.immune[proj.owner] = 2;
-            }
+            target.AddBuff(ModContent.BuffType<Content.Buffs.Souls.OriPoisonBuff>(), 60);
         }
     }
 }

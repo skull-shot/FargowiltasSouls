@@ -112,7 +112,7 @@ namespace FargowiltasSouls.Content.Buffs
                 case BuffID.Darkness:
                     npc.color = Color.Gray;
 
-                    if (npc.buffTime[buffIndex] % 30 == 0)
+                    if (npc.buffTime[buffIndex] % 60 == 0)
                     {
                         if (FargoSoulsUtil.HostCheck)
                         {
@@ -122,14 +122,14 @@ namespace FargowiltasSouls.Content.Buffs
                                 FargoSoulsPlayer modPlayer = player.FargoSouls();
                                 if (modPlayer.AncientShadowFlameCooldown <= 0)
                                 {
-                                    modPlayer.AncientShadowFlameCooldown = 30;
+                                    modPlayer.AncientShadowFlameCooldown = 60;
                                     for (int i = 0; i < Main.maxNPCs; i++)
                                     {
                                         NPC target = Main.npc[i];
                                         if (target.active && !target.friendly && Vector2.Distance(npc.Center, target.Center) < 250)
                                         {
                                             Vector2 velocity = Vector2.Normalize(target.Center - npc.Center) * 5;
-                                            int p = Projectile.NewProjectile(player.GetSource_FromThis(), npc.Center, velocity, ProjectileID.ShadowFlame, (int)((30 + FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage)) * player.ActualClassDamage(DamageClass.Magic)), 0, Main.myPlayer);
+                                            int p = Projectile.NewProjectile(player.GetSource_FromThis(), npc.Center, velocity, ProjectileID.ShadowFlame, (int)(0.75 * (30 + FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage)) * player.ActualClassDamage(DamageClass.Magic)), 0, Main.myPlayer);
                                             if (p.IsWithinBounds(Main.maxProjectiles))
                                             {
                                                 Main.projectile[p].friendly = true;

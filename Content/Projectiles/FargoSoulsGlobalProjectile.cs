@@ -524,7 +524,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                             if (modPlayer.AncientShadowEnchantActive)
                             {
-                                numBalls = 7;
+                                numBalls = 5;
                                 dmg = 50;
                             }
 
@@ -540,7 +540,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             if (FargoSoulsUtil.CanDeleteProjectile(projectile))
                                 projectile.Kill();
 
-                            orb.ai[0] = 300;
+                            orb.ai[0] = 400;
                             orb.netUpdate = true;
 
                             break;

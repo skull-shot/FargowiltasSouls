@@ -2,7 +2,7 @@ AdamantiteEnchant: {
 	// DisplayName: Adamantite Enchantment
 	/* Tooltip:
 		'''
-		The longer you fire your weapon, the faster it fires, up to 30% faster
+		The longer you fire your weapon, the faster it fires, up to 22% faster
 		Weapon projectiles are also inaccurate, increasing the longer you fire
 		Halved effectiveness on homing weapons
 		Only works on weapons that directly fire projectiles
@@ -165,7 +165,7 @@ CrystalAssassinEnchant: {
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
 		Jump while dashing into ground to get a speed boost and gain the First Strike buff
-		First Strike causes your next attack to deal 1.5x damage, guarantees a critical strike, and reduces defense by 10
+		First Strike causes your next attack to deal 1.25x damage, guarantees a critical strike, and reduces defense by 10
 		First Strike has a 10 second cooldown
 		'Reach for the summit'
 		''' */
@@ -415,8 +415,8 @@ OrichalcumEnchant: {
 	// DisplayName: Orichalcum Enchantment
 	/* Tooltip:
 		'''
-		Flower petals will cause extra damage to your target and inflict Orichalcum Poison
-		Damaging debuffs deal 2.5x damage
+		Your attacks inflict Orichalcum Poison for a short duration
+		Your damaging debuffs deal 1.7x damage
 		'Nature blesses you'
 		''' */
 }
@@ -844,7 +844,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 2.1x damage from debuffs
 		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */

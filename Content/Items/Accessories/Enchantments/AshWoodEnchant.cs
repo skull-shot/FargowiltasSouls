@@ -93,7 +93,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : player.HasEffect<ObsidianProcEffect>() ? 25 : 35;
 
-                float softcapMult = 2f;
+                float softcapMult = 1.75f;
                 int effectItemType = EffectItem(player).type;
                 Item heldItem = player.HeldItem;
                 int ashwood = ModContent.ItemType<AshWoodEnchant>();

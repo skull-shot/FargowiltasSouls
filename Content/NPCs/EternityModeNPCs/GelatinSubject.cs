@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             AIType = NPCID.QueenSlimeMinionPurple;
 
             //because they will double dip on expert/master scaling otherwise
-            NPC.lifeMax = 120;
+            NPC.lifeMax = 75;
             NPC.damage = 50;
 
             NPC.lifeMax *= 10;

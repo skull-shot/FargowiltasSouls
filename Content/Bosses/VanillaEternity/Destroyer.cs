@@ -734,21 +734,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (npc.life < npc.lifeMax / 10)
                 {
-                    float modifier = Math.Min(1f, AttackModeTimer / 480f);
+                    float modifier = Math.Min(1f, 0.1f + AttackModeTimer / 480f);
                     modifiers.FinalDamage *= modifier;
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.4f;
+                    modifiers.FinalDamage *= 0.75f;
                 }
             }
             else if (npc.life < npc.lifeMax / 10)
             {
-                modifiers.FinalDamage *= 0.1f;
+                modifiers.FinalDamage *= 0.2f;
             }
             else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
             {
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.75f;
             }
         }
 
@@ -1015,17 +1015,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (npc.life < npc.lifeMax / 10)
                 {
-                    float modifier = Math.Min(1f, destroyerEmode.AttackModeTimer / 480f);
+                    float modifier = Math.Min(1f, 0.2f + destroyerEmode.AttackModeTimer / 480f);
                     modifiers.FinalDamage *= modifier;
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.1f;
+                    modifiers.FinalDamage *= 0.2f;
                 }
             }
             else if (destroyerEmode.PrepareToCoil || destroyerEmode.AttackModeTimer >= Destroyer.P2_COIL_BEGIN_TIME - 120 || destroyer.life < destroyer.lifeMax / 10)
             {
-                modifiers.FinalDamage *= 0.1f;
+                modifiers.FinalDamage *= 0.75f;
             }
 
             if (Main.npc.Count(n => n.active && n.type == npc.type && n.Distance(npc.Center) < npc.width * 0.75) > 4)
@@ -1050,7 +1050,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 modifiers.FinalDamage *= 0.3f;
 
             if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.7f;
+                modifiers.FinalDamage *= 0.75f;
 
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
@@ -1060,12 +1060,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 0.7f;
+            modifiers.FinalDamage *= 0.75f;
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type])
-                modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
+                modifiers.FinalDamage *= 1f / MathF.Pow(1.5f, projectile.numHits);
         }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
