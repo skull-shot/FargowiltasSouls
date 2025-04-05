@@ -112,7 +112,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.7f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.5f);
 
             if (WorldSavingSystem.SwarmActive)
                 npc.lifeMax /= 3;

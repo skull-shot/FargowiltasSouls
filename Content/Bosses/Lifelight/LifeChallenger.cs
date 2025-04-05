@@ -242,7 +242,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void SetDefaults()
         {
             NPC.aiStyle = -1;
-            NPC.lifeMax = 55000;
+            NPC.lifeMax = 45000;
             NPC.defense = 28;
             NPC.damage = 70;
             NPC.knockBackResist = 0f;

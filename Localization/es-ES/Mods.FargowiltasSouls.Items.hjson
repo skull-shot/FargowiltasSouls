@@ -258,8 +258,8 @@ HuntressEnchant: {
 	// DisplayName: Huntress Enchantment
 	/* Tooltip:
 		'''
-		Attacks ignore 6 enemy defense and deal 3 flat extra damage
-		Each successive attack ignores an additional 6 defense and deals 3 more damage
+		Attacks deal 3 flat extra damage
+		Each successive attack deals an additional 3 flat damage
 		This stacks up to 10 times
 		Missing any attack will halve your stacks
 		Homing and minion attacks do not increase these bonuses
@@ -486,8 +486,8 @@ RedRidingEnchant: {
 	// DisplayName: Red Riding Enchantment
 	/* Tooltip:
 		'''
-		Attacks ignore 10 enemy defense and deal 5 flat extra damage
-		Each successive attack ignores an additional 10 defense and deals 5 more damage
+		Attacks deal 5 flat extra damage
+		Each successive attack deals an additional 5 flat damage
 		Upon reaching 10 stacks, spawn a rain of arrows, dealing ranged damage
 		The arrow type defaults to Venom or whatever is first in your inventory
 		Missing any attack will halve your stacks
@@ -1137,7 +1137,7 @@ DarkenedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
-		10% increased movement speed and increased turnaround traction
+		Increased movement speed and increased turnaround traction
 		Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Rotting
 		'Flies refuse to approach it'
 		''' */
@@ -1443,7 +1443,7 @@ PungentEyeball: {
 		'''
 		Grants immunity to Blackout and Obstructed
 		Increases spawn rate of rare enemies
-		Your cursor causes nearby enemies to take up to 1.15x damage
+		Your cursor causes nearby enemies to take up to 1.12x damage
 		Effect intensifies the longer you track them
 		'It's fermenting'
 		''' */
@@ -1462,7 +1462,7 @@ PureHeart: {
 		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump
 		[i:FargowiltasSouls/GelicWings] When you land after a jump, slime spikes shoot out to the sides
 		[i:FargowiltasSouls/GelicWings] Increases wing time by 30%
-		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.15x damage
+		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.12x damage
 		[i:FargowiltasSouls/PungentEyeball] Massively increases spawn rate of rare enemies
 		'It pulses with vitality'
 		''' */
