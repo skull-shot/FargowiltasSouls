@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 {
     public class NekomiRitual : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/FakeHeart";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
 
         private const float threshold = 150 / 2f;
 

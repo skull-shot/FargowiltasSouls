@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 {
     public class MechElectricOrbHomingFriendly : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/MechElectricOrb";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

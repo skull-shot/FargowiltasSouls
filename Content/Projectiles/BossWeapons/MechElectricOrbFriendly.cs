@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class MechElectricOrbFriendly : Masomode.MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/MechElectricOrb";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
 
         bool hasIframes = true;
 

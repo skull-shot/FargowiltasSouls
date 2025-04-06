@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class FlightBall : LightBall
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/LightBall";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/SkyAndRain/LightBall";
 
         public override void SetDefaults()
         {

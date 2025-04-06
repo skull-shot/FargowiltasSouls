@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
     public class DeviRainHeart2 : DeviRainHeart
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/FakeHeart";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
 
         public override void OnKill(int timeLeft)
         {

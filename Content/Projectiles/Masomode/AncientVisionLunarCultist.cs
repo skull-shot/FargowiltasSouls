@@ -7,7 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class AncientVisionLunarCultist : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/AncientVision";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/AncientVision";
 
         public override void SetStaticDefaults()
         {

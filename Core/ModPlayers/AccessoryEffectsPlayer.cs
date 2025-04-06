@@ -1,5 +1,4 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using Microsoft.Xna.Framework;
 using System;
@@ -21,6 +20,10 @@ using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

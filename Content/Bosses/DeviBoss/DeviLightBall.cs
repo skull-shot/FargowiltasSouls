@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override bool DoNotSpawnDust => true;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/LightBall";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/SkyAndRain/LightBall";
 
         public override void SetStaticDefaults()
         {

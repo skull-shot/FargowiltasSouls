@@ -23,6 +23,11 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Betsy;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
 
 namespace FargowiltasSouls.Content.Projectiles
 {

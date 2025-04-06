@@ -11,7 +11,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
     public class NatureBullet : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/SniperBullet";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Dungeon/SniperBullet";
 
         public int stopped;
 

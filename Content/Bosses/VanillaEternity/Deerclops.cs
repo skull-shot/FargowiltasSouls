@@ -16,6 +16,7 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core;
 using Terraria.Graphics.CameraModifiers;
+using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

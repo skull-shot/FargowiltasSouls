@@ -5,7 +5,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
 {
     public class MechElectricOrbHoming : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/MechElectricOrb";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
         public override void AI()
         {
             base.AI();
