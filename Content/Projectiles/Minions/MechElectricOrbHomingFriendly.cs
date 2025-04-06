@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.BionomicCluster;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         }
         public static void ActiveEffects(Player player, Item item)
         {
-            PassiveEffects(player, item);
+            ActiveEffects(player, item);
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.AddEffect<WyvernBalls>(item);

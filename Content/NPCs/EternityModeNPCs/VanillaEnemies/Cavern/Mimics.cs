@@ -4,7 +4,6 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -59,12 +58,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            if (!Main.hardMode && !Main.remixWorld)
-            {
-                npc.damage = (int)Math.Round(npc.damage * (30/80f));
-                npc.lifeMax = (int)(Math.Round(npc.lifeMax * (300 / 500f)));
-            }
-                
+            if (!Main.hardMode)
+                npc.damage = (int)Math.Round(npc.damage * 0.5);
         }
 
         public override void FindFrame(NPC npc, int frameHeight)
@@ -333,16 +328,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 
             target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
         }
-        public override bool PreKill(NPC npc)
-        {
-            if (!Main.hardMode)
-            {
-                List<int> items = [ItemID.StarCloak, ItemID.DualHook, ItemID.MagicDagger, ItemID.PhilosophersStone, ItemID.CrossNecklace, ItemID.TitanGlove, ItemID.Frostbrand, ItemID.IceBow, ItemID.FlowerofFrost, ItemID.ToySled];
-                foreach (int item in items)
-                    NPCLoader.blockLoot.Add(item);
-            }
-            return base.PreKill(npc);
-        }
+
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);

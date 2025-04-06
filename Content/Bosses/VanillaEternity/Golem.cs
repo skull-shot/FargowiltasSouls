@@ -20,6 +20,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

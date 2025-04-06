@@ -24,6 +24,7 @@ using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask;
+using FargowiltasSouls.Content.Projectiles.Masomode;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

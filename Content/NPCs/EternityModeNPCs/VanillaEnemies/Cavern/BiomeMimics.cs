@@ -1,7 +1,7 @@
 using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh;
 using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern.BiomeMimics;
+using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;

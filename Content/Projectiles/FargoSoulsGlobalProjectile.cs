@@ -15,6 +15,7 @@ using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

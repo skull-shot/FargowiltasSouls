@@ -20,7 +20,6 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria.Localization;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Mutant;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 
 namespace FargowiltasSouls.Core.ModPlayers

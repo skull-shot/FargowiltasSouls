@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
