@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
+﻿using Fargowiltas.Items.Explosives;
+using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Pets;
@@ -320,7 +321,7 @@ namespace FargowiltasSouls.Core.Globals
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.WormTooth, 1, 3, 9));
                     break;
                 case var _ when Mimics.Contains(npc.type):
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.GoldenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.GoldenCrate, 1, 2, 2));
                     switch (npc.type)
                     {
                         case NPCID.BigMimicCorruption:
@@ -531,13 +532,13 @@ namespace FargowiltasSouls.Core.Globals
                         break;
 
                     case NPCID.Mimic:
-                        npcLoot.RemoveWhere(rule => rule is OneFromOptionsDropRule drop && drop.dropIds.Contains(ItemID.DualHook) && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.TitanGlove, ItemID.PhilosophersStone, ItemID.CrossNecklace, ItemID.DualHook));
+                        //npcLoot.RemoveWhere(rule => rule is OneFromOptionsDropRule drop && drop.dropIds.Contains(ItemID.DualHook) && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
+                        //FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.TitanGlove, ItemID.PhilosophersStone, ItemID.CrossNecklace, ItemID.DualHook));
                         break;
 
                     case NPCID.IceMimic:
-                        npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.ToySled && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.TitanGlove, ItemID.PhilosophersStone, ItemID.CrossNecklace, ItemID.DualHook));
+                        //npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.ToySled && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
+                        //FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.TitanGlove, ItemID.PhilosophersStone, ItemID.CrossNecklace, ItemID.DualHook));
                         break;
 
                     case NPCID.AngryNimbus:
@@ -562,7 +563,7 @@ namespace FargowiltasSouls.Core.Globals
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            IItemDropRule rule = null;
+            IItemDropRule? rule = null;
 
             if (npc.type == ModContent.NPCType<TrojanSquirrel>())
             {
@@ -577,76 +578,14 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.EyeofCthulhu:
                     rule = FirstKillDrop(3, ItemID.LifeCrystal);
                     break;
+                case NPCID.Plantera:
+                    rule = FirstKillDrop(1, ModContent.ItemType<LihzahrdInstactuationBomb>());
+                    break;
             }
 
             if (rule is not null)
                 npcLoot.Add(rule);
         }
-
-        /*
-        public override void OnKill(NPC npc)
-        {
-            switch (npc.type)
-            {
-                //Set the flags here instead of ModifyNPCLoot in order to let loot happen properly
-                case NPCID.KingSlime:
-                    NPC.SetEventFlagCleared(ref StorageWorld.kingSlimeDiamond, -1);
-                    break;
-                case NPCID.EyeofCthulhu:
-                    NPC.SetEventFlagCleared(ref StorageWorld.boss1Diamond, -1);
-                    break;
-                case NPCID.EaterofWorldsHead:
-                case NPCID.EaterofWorldsBody:
-                case NPCID.EaterofWorldsTail:
-                    if (npc.boss)
-                        NPC.SetEventFlagCleared(ref StorageWorld.boss2Diamond, -1);
-                    break;
-                case NPCID.BrainofCthulhu:
-                    NPC.SetEventFlagCleared(ref StorageWorld.boss2Diamond, -1);
-                    break;
-                case NPCID.SkeletronHead:
-                    NPC.SetEventFlagCleared(ref StorageWorld.boss3Diamond, -1);
-                    break;
-                case NPCID.QueenBee:
-                    NPC.SetEventFlagCleared(ref StorageWorld.queenBeeDiamond, -1);
-                    break;
-                case NPCID.WallofFlesh:
-                    NPC.SetEventFlagCleared(ref StorageWorld.hardmodeDiamond, -1);
-                    break;
-                case NPCID.TheDestroyer:
-                    NPC.SetEventFlagCleared(ref StorageWorld.mechBoss1Diamond, -1);
-                    break;
-                case NPCID.Retinazer:
-                case NPCID.Spazmatism:
-                    NPC.SetEventFlagCleared(ref StorageWorld.mechBoss2Diamond, -1);
-                    break;
-                case NPCID.SkeletronPrime:
-                    NPC.SetEventFlagCleared(ref StorageWorld.mechBoss3Diamond, -1);
-                    break;
-                case NPCID.Plantera:
-                    NPC.SetEventFlagCleared(ref StorageWorld.plantBossDiamond, -1);
-                    break;
-                case NPCID.Golem:
-                    NPC.SetEventFlagCleared(ref StorageWorld.golemBossDiamond, -1);
-                    break;
-                case NPCID.DukeFishron:
-                    NPC.SetEventFlagCleared(ref StorageWorld.fishronDiamond, -1);
-                    break;
-                case NPCID.CultistBoss:
-                    NPC.SetEventFlagCleared(ref StorageWorld.ancientCultistDiamond, -1);
-                    break;
-                case NPCID.MoonLordCore:
-                    NPC.SetEventFlagCleared(ref StorageWorld.moonlordDiamond, -1);
-                    break;
-                case NPCID.QueenSlimeBoss:
-                    NPC.SetEventFlagCleared(ref StorageWorld.queenSlimeDiamond, -1);
-                    break;
-                case NPCID.HallowBoss:
-                    NPC.SetEventFlagCleared(ref StorageWorld.empressDiamond, -1);
-                    break;
-            }
-        }
-        */
 
         private static IItemDropRule Drop(int count, int itemID) => ItemDropRule.Common(itemID, minimumDropped: count, maximumDropped: count);
 
@@ -667,6 +606,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 NPCID.KingSlime => !NPC.downedSlimeKing,
                 NPCID.EyeofCthulhu => !NPC.downedBoss1,
+                NPCID.Plantera => !NPC.downedPlantBoss,
                 _ => info.npc.type == ModContent.NPCType<TrojanSquirrel>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel] //needed outside switch because modded npctype not constant
             };
 

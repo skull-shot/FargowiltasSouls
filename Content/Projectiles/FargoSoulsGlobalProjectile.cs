@@ -405,16 +405,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
-                case ProjectileID.SeedlerThorn:
-                    {
-                        if (source is EntitySource_Parent parent && parent.Entity is Projectile parentProj && parentProj.type == ProjectileID.SeedlerNut && parentProj.DamageType == DamageClass.Summon)
-                        {
-                            projectile.DamageType = DamageClass.Summon;
-                            EnchantmentProj = true;
-                        }
-                            
-                    }
-                    break;
                 default:
                     break;
             }
@@ -524,7 +514,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                             if (modPlayer.AncientShadowEnchantActive)
                             {
-                                numBalls = 7;
+                                numBalls = 5;
                                 dmg = 50;
                             }
 
@@ -540,7 +530,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             if (FargoSoulsUtil.CanDeleteProjectile(projectile))
                                 projectile.Kill();
 
-                            orb.ai[0] = 300;
+                            orb.ai[0] = 400;
                             orb.netUpdate = true;
 
                             break;

@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             Vector2 pos = player.Center;
 
-            int damage = monkForce ? (shinobiForce ? 1080 : 720) : 360;
+            int damage = monkForce ? (shinobiForce ? 600 : 400) : 200;
             damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
             Projectile.NewProjectile(player.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<MonkDashDamage>(), damage, 0);
 

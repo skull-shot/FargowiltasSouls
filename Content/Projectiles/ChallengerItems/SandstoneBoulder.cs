@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 if (timer >= 30 && !player.channel && !player.CCed && !player.noItems)
                 {
                     float angle = Projectile.Center.AngleTo(Main.MouseWorld);
-                    Projectile.velocity = new Vector2(20f, 0f).RotatedBy(angle);
+                    Projectile.velocity = new Vector2(22f, 0f).RotatedBy(angle);
                     Projectile.velocity += player.velocity / 1.25f;
                     launched = true;
                     Projectile.hide = false;

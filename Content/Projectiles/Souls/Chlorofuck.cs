@@ -11,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 {
     public class Chlorofuck : ModProjectile
     {
-        public const float Cooldown = 50f;
+        public const float Cooldown = 120f;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Chlorofuck");

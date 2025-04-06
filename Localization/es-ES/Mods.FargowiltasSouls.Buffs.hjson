@@ -702,7 +702,7 @@ CorruptedBuffForce: {
 }
 
 JungleMimicSummonBuff: {
-	// DisplayName: Jungle Mimic Summon Buff
+	// DisplayName: Jungle Mimic
 	// Description: The Jungle Mimic will fight for you
 }
 

@@ -168,17 +168,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
 
-                case ItemID.MagicDagger:
-                    {
-                        if (!Main.hardMode)
-                        {
-                            balanceTextKeys = ["Damage", "Speed"];
-                            balanceNumber = 0.5f;
-                            return EModeChange.Nerf;
-                        }
-                        return EModeChange.None;
-                    }
-
 
                 case ItemID.DemonScythe:
                     {
@@ -295,16 +284,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["CrossNecklaceNerf"];
                     return EModeChange.Nerf;
 
-                case ItemID.StarCloak:
-                case ItemID.StarVeil:
-                case ItemID.BeeCloak:
-                case ItemID.ManaCloak:
-                    if (!Main.hardMode)
-                    {
-                        balanceTextKeys = ["StarCloak"];
-                        return EModeChange.Nerf;
-                    }
-                    return EModeChange.None;
                 #region Sword and Spear Reworks
                 case ItemID.CobaltNaginata:
                     balanceNumber = -1;

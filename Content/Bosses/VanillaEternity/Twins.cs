@@ -84,7 +84,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
+            // balance with spaz
             npc.lifeMax = (int)(npc.lifeMax * 1.2);
+            // weaken slightly
+            npc.lifeMax = (int)(npc.lifeMax * 0.9);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -889,7 +892,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool Resist;
         public float RealRotation;
         public int RespawnTimer;
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
 
+            // weaken slightly
+            npc.lifeMax = (int)(npc.lifeMax * 0.9);
+        }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);

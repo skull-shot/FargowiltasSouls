@@ -115,7 +115,7 @@ ForbiddenEffect: {
 	Tooltip:
 		'''
 		Call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.2x damage
+		Any projectiles shot through your storm deal 1.15x damage
 		Touch it yourself to add back missing wing time
 		Storm can be resummoned after touching the ground
 		'''

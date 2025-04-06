@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -69,9 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     //int damage = hitInfo.SourceDamage;
                     //damage = (int)MathHelper.Clamp(damage, 0, 8000);
 
-                    int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, velocity, ProjectileID.SeedlerNut, damage, 2, player.whoAmI);
-                    if (p != Main.maxProjectiles)
-                        Main.projectile[p].DamageType = DamageClass.Summon;
+                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<PalmwoodShot>(), damage, 2, player.whoAmI);
 
                     player.FargoSouls().PalmWoodForceCD = 90;
                 }
@@ -110,7 +109,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     }
 
                     Vector2 offset = forceEffect ? (-40 * Vector2.UnitX) + (-120 * Vector2.UnitY) : (-41 * Vector2.UnitY);
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), mouse + offset, Vector2.Zero, ModContent.ProjectileType<PalmTreeSentry>(), forceEffect ? 100 : 12, 0f, player.whoAmI, ai1: -60);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), mouse + offset, Vector2.Zero, ModContent.ProjectileType<PalmTreeSentry>(), forceEffect ? 140 : 18, 0f, player.whoAmI, ai1: -30);
                 }
             }
         }

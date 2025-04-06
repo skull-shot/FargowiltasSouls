@@ -11,6 +11,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 {
@@ -159,7 +160,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 return true;
             return false;
         }
-
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item89, Projectile.position);
@@ -181,7 +181,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 List<int> possibleBoosters = [solar, vortex, nebula, stardust];
 
                 int itemType = possibleBoosters[(int)FragmentType];
-                Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Hitbox, itemType, noGrabDelay: true);
+                int n = Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Hitbox, itemType, noGrabDelay: true);
+
+                if (Main.netMode == NetmodeID.MultiplayerClient)
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, n, 1f);
             }
 
 

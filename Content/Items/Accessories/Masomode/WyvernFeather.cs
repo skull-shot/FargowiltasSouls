@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         }
         public static void ActiveEffects(Player player, Item item)
         {
-            ActiveEffects(player, item);
+            PassiveEffects(player, item);
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.AddEffect<WyvernBalls>(item);

@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 float explosionDamage = baseDamage;
                 FargoSoulsPlayer modPlayer = player.FargoSouls();
                 bool force = player.ForceEffect<ObsidianProcEffect>();
-                float softcapMult = force ? 4f : 1f;
+                float softcapMult = force ? 2.5f : 1f;
 
                 if (force) // this section is just imitating the previous version but cleaner
                 {

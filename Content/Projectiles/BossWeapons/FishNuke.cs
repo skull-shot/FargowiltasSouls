@@ -28,10 +28,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.timeLeft = 1800;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             //AIType = ProjectileID.Bullet;
             //Projectile.scale = 2f;
         }
@@ -59,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
             else
             {
-                if (++Projectile.localAI[1] > 12f)
+                if (++Projectile.localAI[1] > 12f && Projectile.ai[0] != -2)
                 {
                     Projectile.localAI[1] = 0f;
                     Projectile.ai[0] = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 500, true);
@@ -110,12 +112,24 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 damage = target.lifeMax / 25;
             if (Projectile.owner == Main.myPlayer)
                 Projectile.NewProjectile(Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(),
-                    damage, Projectile.knockBack * 2f, Projectile.owner);*/
+                    damage, Projectile.knockBack * 2f, Projectile.owner);
 
-            /*target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
+            target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);*/
-            target.AddBuff(BuffID.Frostburn, 300);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
+            target.AddBuff(BuffID.Frostburn, 300);*/
+            
+            if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400)
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                Projectile.timeLeft = 20;
+                Projectile.hide = true;
+                Projectile.ai[0] = -2f;
+                Projectile.velocity *= 0;
+                Projectile.knockBack *= 2f;
+                Projectile.Resize(200, 200);
+            }
         }
 
         /*public override bool OnTileCollide(Vector2 oldVelocity)
@@ -128,23 +142,21 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
-            if (Projectile.owner == Main.myPlayer)
+            /*if (Projectile.owner == Main.myPlayer)
             {
                 int modifier = Main.rand.NextBool() ? 1 : -1;
                 SpawnRazorbladeRing(6, 17f, 1f * -modifier);
                 SpawnRazorbladeRing(6, 17f, 0.5f * modifier);
-                /*const int max = 16;
+                const int max = 16;
                 Vector2 baseVel = Vector2.UnitX.RotatedByRandom(2 * Math.PI);
                 for (int i = 0; i < max; i++)
                 {
                     float speed = i % 2 == 0 ? 16f : 14f;
                     Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
                         ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
-                }*/
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage / 2, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                }
             }
-            /*int num1 = 36;
+            int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
                 Vector2 vector2_1 = (Vector2.Normalize(Projectile.velocity) * new Vector2(Projectile.width / 2f, Projectile.height) * 0.75f).RotatedBy((index1 - (num1 / 2 - 1)) * 6.28318548202515 / num1, new Vector2()) + Projectile.Center;
@@ -156,7 +168,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }*/
         }
 
-        private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
+        /*private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
         {
             float rotation = 2f * (float)Math.PI / max;
             Vector2 vel = Vector2.UnitX.RotatedByRandom(2 * Math.PI); //Projectile.velocity; vel.Normalize();
@@ -165,10 +177,10 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             for (int i = 0; i < max; i++)
             {
                 vel = vel.RotatedBy(rotation);
-                //Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
-                    //Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
+                    Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
             }
-        }
+        }*/
 
         public float WidthFunction(float completionRatio)
         {
@@ -187,6 +199,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
+            if (Projectile.hide)
+                return;
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
             FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
