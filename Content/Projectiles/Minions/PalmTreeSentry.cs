@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,6 +7,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Content.Projectiles.Minions
 {
@@ -41,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
 
-            if (!(player.Alive() && player.HasEffect<PalmwoodEffect>()))
+            if (!(player.Alive() && player.HasEffect<PalmwoodEffect>() && !player.HasEffect<TimberEffect>()))
             {
                 Projectile.Kill();
                 return;
@@ -85,11 +87,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
                     if (Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, target.position, target.width, target.height))
                     {
-                        Vector2 velocity = Vector2.Normalize(target.Center - Projectile.Center) * 16;
+                        Vector2 offset = -Vector2.UnitY * 55 * MathHelper.Clamp(Projectile.Distance(target.Center) / 420, 0, 1);
+                        Vector2 velocity = Vector2.Normalize(target.Center + offset - Projectile.Center) * 16;
 
-                        int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ProjectileID.SeedlerNut, Projectile.damage, 2, Projectile.owner);
-                        if (p != Main.maxProjectiles)
-                            Main.projectile[p].DamageType = DamageClass.Summon;
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<PalmwoodShot>(), Projectile.damage, 2, Projectile.owner);
                     }
                 }
                 Projectile.ai[1] = 0f;
