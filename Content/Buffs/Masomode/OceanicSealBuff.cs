@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+﻿using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.DukeFishron;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Terraria;

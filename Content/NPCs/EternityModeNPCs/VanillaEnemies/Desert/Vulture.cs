@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Desert;
 using FargowiltasSouls.Core.NPCMatching;
 using System.IO;
 using Terraria;

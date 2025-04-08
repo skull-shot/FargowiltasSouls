@@ -1,7 +1,6 @@
 using System.IO;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -16,6 +15,8 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core;
 using Terraria.Graphics.CameraModifiers;
+using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Deerclops;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

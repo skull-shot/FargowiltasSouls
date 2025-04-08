@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

@@ -2,6 +2,7 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -66,7 +67,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)(npc.lifeMax * 1.15);
+            npc.lifeMax = (int)(npc.lifeMax * 1.4);
         }
 
         public override void OnFirstTick(NPC npc)

@@ -1,4 +1,6 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -1,7 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Projectiles;
 using Microsoft.Xna.Framework;
@@ -21,6 +20,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria.Localization;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

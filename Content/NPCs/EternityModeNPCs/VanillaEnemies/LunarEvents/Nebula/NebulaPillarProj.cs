@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 {
     public class NebulaPillarProj : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/CelestialPillar";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
 
         public override void SetStaticDefaults()
         {

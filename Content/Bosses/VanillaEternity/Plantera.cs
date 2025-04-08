@@ -21,6 +21,7 @@ using Microsoft.Xna.Framework.Graphics;
 using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Terraria.DataStructures;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -112,7 +113,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.5f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.7f);
 
             if (WorldSavingSystem.SwarmActive)
                 npc.lifeMax /= 3;

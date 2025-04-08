@@ -15,6 +15,9 @@ using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
 
 namespace FargowiltasSouls.Content.Projectiles
 {

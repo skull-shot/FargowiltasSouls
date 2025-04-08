@@ -19,6 +19,7 @@ using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Terraria.DataStructures;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

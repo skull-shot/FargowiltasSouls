@@ -64,6 +64,8 @@
     <Folder Include="Assets\Gores\Weapons\Twinrangs\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
+    <Folder Include="Content\Projectiles\Masomode\Enemies\Vanilla\Crimson\" />
+    <Folder Include="Content\Projectiles\Masomode\Enemies\Vanilla\OOA\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
   <ItemGroup>

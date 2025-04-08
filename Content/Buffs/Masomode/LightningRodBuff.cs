@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Terraria;

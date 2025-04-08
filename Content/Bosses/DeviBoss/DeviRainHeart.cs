@@ -11,7 +11,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
     public class DeviRainHeart : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/FakeHeart";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
 
         public override void SetStaticDefaults()
         {

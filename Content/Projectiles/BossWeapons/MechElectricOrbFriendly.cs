@@ -1,15 +1,15 @@
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class MechElectricOrbFriendly : Masomode.MechElectricOrb
+    public class MechElectricOrbFriendly : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/MechElectricOrb";
+        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
 
         bool hasIframes = true;
 

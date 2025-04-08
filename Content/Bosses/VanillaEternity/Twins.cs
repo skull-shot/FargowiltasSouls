@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -84,10 +85,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            // balance with spaz
             npc.lifeMax = (int)(npc.lifeMax * 1.2);
-            // weaken slightly
-            npc.lifeMax = (int)(npc.lifeMax * 0.9);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -892,13 +890,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool Resist;
         public float RealRotation;
         public int RespawnTimer;
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
 
-            // weaken slightly
-            npc.lifeMax = (int)(npc.lifeMax * 0.9);
-        }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);

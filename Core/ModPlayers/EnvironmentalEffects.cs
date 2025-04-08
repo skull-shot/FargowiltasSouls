@@ -14,9 +14,9 @@ using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Localization;
-using FargowiltasSouls.Content.Projectiles.Masomode;
 using Fargowiltas.Content.Buffs;
 using Terraria.GameContent.Events;
+using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

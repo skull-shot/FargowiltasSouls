@@ -14,7 +14,7 @@ using FargowiltasSouls.Content.Items.Weapons.Misc;
 using FargowiltasSouls.Content.NPCs.Critters;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ModPlayers;

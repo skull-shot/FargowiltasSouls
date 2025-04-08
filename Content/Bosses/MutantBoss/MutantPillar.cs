@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantPillar_April" :
-            "FargowiltasSouls/Content/Projectiles/Masomode/CelestialPillar";
+            "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
 
         private int target = -1;
 
