@@ -157,6 +157,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void PostUpdate()
         {
+            Main.NewText(FargowiltasSouls.Instance.BossChecklistValues["DeviBoss"]);
             if (!FreeEaterSummon && !Main.npc.Any(n => n.active && (n.type == NPCID.EaterofWorldsHead || n.type == NPCID.EaterofWorldsBody || n.type == NPCID.EaterofWorldsTail)))
             {
                 FreeEaterSummon = true;

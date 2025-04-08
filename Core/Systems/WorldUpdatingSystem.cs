@@ -26,7 +26,6 @@ namespace FargowiltasSouls.Core.Systems
         public override void PostUpdateWorld()
         {
             //NPC.LunarShieldPowerMax = NPC.downedMoonlord ? 50 : 100;
-
             if (!downedBoss[(int)Downed.CursedCoffin] && !Main.hardMode)
             {
                 bool noCoffin = !NPC.AnyNPCs(ModContent.NPCType<CursedCoffinInactive>()) && !NPC.AnyNPCs(ModContent.NPCType<CursedCoffin>());
