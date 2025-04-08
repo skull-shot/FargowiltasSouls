@@ -58,7 +58,7 @@ namespace FargowiltasSouls
         /// </summary>
         public Dictionary<string, float> BossChecklistValues = new()
         {
-            {"DeviBoss", 6.9f},
+            {"DeviBoss", 7f - 1e-4f},
             {"AbomBoss", 20f},
             {"MutantBoss", 23f},
             {"TimberChampion", 18.1f},
