@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
 
         public override void SetDefaults()
         {
-            Projectile.width = 8;
+            Projectile.width = 4;
             Projectile.height = 8;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
 
             float length = Math.Max(Projectile.width, Projectile.velocity.Length() * 2);
             float dummy = 0f;
-            Vector2 offset = length / 2 * Projectile.scale * (Projectile.rotation - MathHelper.ToRadians(135f)).ToRotationVector2();
+            Vector2 offset = length / 3 * Projectile.scale * (Projectile.rotation - MathHelper.ToRadians(135f)).ToRotationVector2();
             Vector2 end = Projectile.Center - offset;
             Vector2 tip = Projectile.Center + offset;
 

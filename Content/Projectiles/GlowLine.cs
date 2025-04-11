@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Glow Line");
-            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 2400;
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
 
         public override void SetDefaults()
@@ -359,14 +359,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 if (counter == maxTime)
                                 {
-                                    //only make blue telegraph in emode
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
-                                            Projectile.Center, Projectile.rotation.ToRotationVector2(),
-                                            Projectile.type,
-                                            Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
-                                    }
+                                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
+                                        Projectile.Center, Projectile.rotation.ToRotationVector2(),
+                                        Projectile.type,
+                                        Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
 
                                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
                                         Projectile.Center, Projectile.localAI[0] * Projectile.rotation.ToRotationVector2(),
@@ -378,14 +374,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 if (counter > maxTime - 20 && counter % 10 == 0)
                                 {
-                                    //only make blue telegraph in emode
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
-                                            Projectile.Center, Projectile.rotation.ToRotationVector2(),
-                                            Projectile.type,
-                                            Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
-                                    }
+                                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
+                                        Projectile.Center, Projectile.rotation.ToRotationVector2(),
+                                        Projectile.type,
+                                        Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
 
                                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
                                         Projectile.Center, Projectile.localAI[0] * Projectile.rotation.ToRotationVector2(),
@@ -668,7 +660,9 @@ namespace FargowiltasSouls.Content.Projectiles
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
-            const int length = 3000;
+            int length = 3000;
+            if (Projectile.ai[0] == 11) // destroyer laser
+                length = 5000;
             Vector2 offset = Projectile.rotation.ToRotationVector2() * length / 2f;
             Vector2 position = Projectile.Center - Main.screenLastPosition + new Vector2(0f, Projectile.gfxOffY) + offset;
             const float resolutionCompensation = 128f / 24f; //i made the image higher res, this compensates to keep original display size

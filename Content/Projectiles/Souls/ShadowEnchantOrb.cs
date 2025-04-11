@@ -80,8 +80,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             {
                 //rotation mumbo jumbo
                 float distanceFromPlayer = 250;
-
-                Lighting.AddLight(Projectile.Center, 0.1f, 0.4f, 0.2f);
+                if (Projectile.ai[0] <= 0)
+                    Lighting.AddLight(Projectile.Center, 0.1f, 0.4f, 0.2f);
 
                 Projectile.position = player.Center + new Vector2(distanceFromPlayer, 0f).RotatedBy(Projectile.ai[1]);
                 Projectile.position.X -= Projectile.width / 2;

@@ -37,6 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int LaserTimer;
         public int SecondaryAttackTimer;
         public int RotationDirection = 1;
+        public int LightshowSlowTimer;
 
         public bool InPhase2;
         public bool IsCoiling;
@@ -64,6 +65,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(LaserTimer);
             binaryWriter.Write7BitEncodedInt(SecondaryAttackTimer);
             binaryWriter.Write7BitEncodedInt(RotationDirection);
+            binaryWriter.Write7BitEncodedInt(LightshowSlowTimer);
             bitWriter.WriteBit(InPhase2);
             bitWriter.WriteBit(IsCoiling);
             bitWriter.WriteBit(PrepareToCoil);
@@ -78,6 +80,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LaserTimer = binaryReader.Read7BitEncodedInt();
             SecondaryAttackTimer = binaryReader.Read7BitEncodedInt();
             RotationDirection = binaryReader.Read7BitEncodedInt();
+            LightshowSlowTimer = binaryReader.Read7BitEncodedInt();
             InPhase2 = bitReader.ReadBit();
             IsCoiling = bitReader.ReadBit();
             PrepareToCoil = bitReader.ReadBit();
@@ -355,6 +358,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                 }
             }
+            if (LightshowSlowTimer > 0)
+            {
+                if (maxSpeed > 4)
+                maxSpeed = 4;
+                LightshowSlowTimer--;
+            }
+                
 
             MovementAI(npc, target, num15, num16, maxSpeed);
 
@@ -553,6 +563,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     if (AttackModeTimer < laserThreshold + 300 && ++SecondaryAttackTimer % 90 == 20)
                     {
+                        LightshowSlowTimer = 120;
                         bool flip = Main.rand.NextBool();
                         bool spawn = true;
                         foreach (NPC n in Main.npc.Where(n => n.active && n.realLife == npc.whoAmI))

@@ -22,7 +22,6 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
             base.Update(player, ref buffIndex);
 
             player.FargoSouls().Illuminated = true;
-            Lighting.GlobalBrightness += 1;
 
             if (player.Center.Y / 16 <= Main.worldSurface) //above ground, purge debuff immediately
             {
