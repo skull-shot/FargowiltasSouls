@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
                 Projectile.localAI[0] = 1f;
                 SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
             }
-            Projectile.velocity.Y += 0.15f;
+            Projectile.velocity.Y += 0.3f;
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
         }

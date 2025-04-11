@@ -2,6 +2,7 @@
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime;
@@ -13,6 +14,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -30,25 +32,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.KingSlime);
 
-        public int SpikeRainCounter; // Was Counter[0]
-
-        public bool IsBerserk; // Was masoBool[0]
-        public bool LandingAttackReady; // Was masoBool[1]
-        public bool CurrentlyJumping; // Was masoBool[3]
-        public bool DidSpecialTeleport;
-        public int CertainAttackCooldown;
-
         public bool DroppedSummon;
 
-        public float JumpTimer = 0;
-        const int SpecialJumpTime = 60 * 15;
-        public int SpecialJumpWindupTimer;
-
-        const int SummonWaves = 6;
-        public float SummonCounter = SummonWaves - 1;
-        public bool SpecialJumping = false;
-
         public int DeathTimer = -1;
+
+        public NPC NPC;
+        public Player Target => Main.player[NPC.target];
+        public ref float Cycle => ref NPC.ai[0];
+        public ref float State => ref NPC.ai[1];
+        public ref float Phase => ref NPC.ai[2];
+        public ref float Timer => ref NPC.ai[3];
+        public enum States
+        {
+            Spawn,
+            JumpCycle,
+            Burst,
+            Teleport
+        };
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write7BitEncodedInt(DeathTimer);
@@ -59,7 +59,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override bool SafePreAI(NPC npc)
         {
-            if (DeathTimer >= 0) 
+            NPC = npc;
+            NPC.noGravity = false;
+
+            if (DeathTimer >= 0)
             {
                 DeathAnimation(npc);
                 if (++DeathTimer >= 300)
@@ -71,414 +74,241 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return false;
             }
 
+
             EModeGlobalNPC.slimeBoss = npc.whoAmI;
-            // npc.color = Main.DiscoColor * 0.3f; // Rainbow colour
 
-            ref float teleportTimer = ref npc.ai[2];
-
-            if (CertainAttackCooldown > 0)
-                CertainAttackCooldown--;
-
-            Player player = Main.player[npc.target];
-
-            /*
-            if (JumpTimer < SpecialJumpTime)
+            // despawn
+            int maxDist = 3000;
+            if (Main.player[npc.target].dead || Vector2.Distance(npc.Center, Main.player[npc.target].Center) > maxDist)
             {
-                JumpTimer += Math.Min(2 - npc.GetLifePercent(), SpecialJumpTime - JumpTimer);
-            }
-            */
-            if (teleportTimer >= 145 && teleportTimer < 150) //at half of teleport timer progress, pause it and do special jump
-            {
-                if (JumpTimer < SpecialJumpTime)
-                    JumpTimer = SpecialJumpTime;
-                teleportTimer = 145;
-            }
-            if (npc.GetLifePercent() < SummonCounter / SummonWaves && (CertainAttackCooldown <= 0 || WorldSavingSystem.MasochistModeReal))
-            {
-                const int Slimes = 6;
-                CertainAttackCooldown = 180;
-                if (FargoSoulsUtil.HostCheck)
+                npc.TargetClosest();
+                if (Main.player[npc.target].dead || Vector2.Distance(npc.Center, Main.player[npc.target].Center) > maxDist)
                 {
-                    for (int i = 0; i < Slimes; i++)
-                    {
-                        int x = (int)(npc.position.X + Main.rand.NextFloat(npc.width - 32));
-                        int y = (int)(npc.position.Y + Main.rand.NextFloat(npc.height - 32));
-                        int type = ModContent.NPCType<SlimeSwarm>();
-                        int slime = NPC.NewNPC(npc.GetSource_FromThis(), x, y, type);
-                        if (slime.IsWithinBounds(Main.maxNPCs))
-                        {
-                            Main.npc[slime].SetDefaults(type);
-                            Main.npc[slime].velocity.X = Main.rand.NextFloat(-15, 16) * 0.1f;
-                            Main.npc[slime].velocity.Y = Main.rand.NextFloat(-30, -15) * 0.3f;
-
-                            if (npc.HasValidTarget)
-                            {
-                                Main.npc[slime].ai[0] = Math.Sign(player.Center.X - npc.Center.X);
-                                Main.npc[slime].velocity.X = Main.rand.NextFloat(10, 16) * 0.4f * -npc.HorizontalDirectionTo(player.Center);
-                            }
-
-                            //Main.npc[slime].ai[0] = -1000 * Main.rand.Next(3);
-                            //Main.npc[slime].ai[1] = 0f;
-                            if (Main.netMode == NetmodeID.Server)
-                            {
-                                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, slime);
-                            }
-                        }
-                    }
-                }
-
-                SoundEngine.PlaySound(SoundID.Item167, npc.Center);
-                SummonCounter--;
-            }
-
-            if (WorldSavingSystem.MasochistModeReal)
-                npc.position.X += npc.velocity.X * 0.2f;
-            //FargoSoulsUtil.PrintAI(npc);
-            // Attack that happens when landing
-            if (LandingAttackReady)
-            {
-                if (npc.velocity.Y == 0f)
-                {
-                    LandingAttackReady = false;
-
-
-                    if (JumpTimer >= SpecialJumpTime && !SpecialJumping && (CertainAttackCooldown <= 0 || WorldSavingSystem.MasochistModeReal))
-                    {
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSCharge"), npc.Center);
-                        Particle p = new ExpandingBloomParticle(npc.Center, Vector2.Zero, Color.Blue, Vector2.One, Vector2.One * 60, 40, true, Color.Transparent);
-                        SpecialJumping = true;
-                        CertainAttackCooldown = 240;
-                        SpecialJumpWindupTimer = 60;
-                        p.Spawn();
-
-                    }
-                    else
-                    {
-                        if (SpecialJumping)
-                        {
-                            JumpTimer = 0;
-                            SpecialJumping = false;
-                            teleportTimer = 150; //continue teleport timer
-                        }
-                        else
-                        {
-                            if (FargoSoulsUtil.HostCheck)
-                            {
-                                /*
-                                if (WorldSavingSystem.MasochistModeReal)
-                                {
-                                    for (int i = 0; i < 30; i++) //spike spray
-                                    {
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(npc.Center.X + Main.rand.Next(-5, 5), npc.Center.Y - 15),
-                                            new Vector2(Main.rand.NextFloat(-6, 6), Main.rand.NextFloat(-8, -5)),
-                                            ProjectileID.SpikedSlimeSpike, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
-                                    }
-                                }
-                                */
-
-                                
-                                if (WorldSavingSystem.MasochistModeReal && npc.HasValidTarget)
-                                {
-                                    SoundEngine.PlaySound(SoundID.Item21, player.Center);
-                                    if (FargoSoulsUtil.HostCheck)
-                                    {
-                                        for (int i = 0; i < 6; i++)
-                                        {
-                                            Vector2 spawn = player.Center;
-                                            spawn.X += Main.rand.Next(-150, 151);
-                                            spawn.Y -= Main.rand.Next(600, 901);
-                                            Vector2 speed = player.Center - spawn;
-                                            speed.Normalize();
-                                            speed *= IsBerserk ? 10f : 5f;
-                                            speed = speed.RotatedByRandom(MathHelper.ToRadians(4));
-                                            Projectile.NewProjectile(npc.GetSource_FromThis(), spawn, speed, ModContent.ProjectileType<SlimeBallHostile>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 4f / 6), 0f, Main.myPlayer);
-                                        }
-                                    }
-                                }
-                                
-                            }
-                        }
-                    }
-
-                }
-            }
-            else if (npc.velocity.Y > 0)
-            {
-                // If they're in the air, flag that the landing attack should be used next time they land
-                LandingAttackReady = true;
-            }
-
-            if (npc.velocity.Y < 0) // Jumping up
-            {
-                if (!CurrentlyJumping) // Once per jump...
-                {
-                    CurrentlyJumping = true;
-
-
-                    if (SpecialJumping) //special jump
-                    {
-                        npc.velocity.Y = -18;
-                        int direction = Math.Sign(player.Center.X - npc.Center.X);
-                        int pastPlayer = 1000;
-                        Vector2 desiredDestination = player.Center + (Vector2.UnitX * pastPlayer * direction);
-
-                        //funny highschool physics math
-                        float jumpTime = Math.Abs(2 * npc.velocity.Y / npc.gravity);
-                        npc.velocity.X = (desiredDestination.X - npc.Center.X) / jumpTime;
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSJump"), npc.Center);
-                    }
-                    else
-                    {
-
-                        bool shootSpikes = false;
-
-                        if (WorldSavingSystem.MasochistModeReal)
-                            shootSpikes = true;
-
-
-
-                        if (npc.HasValidTarget)
-                        {
-                            // If player is well above me, jump higher
-                            if (player.Center.Y < npc.position.Y + npc.height - 240)
-                            {
-                                npc.velocity.Y *= 1.5f;
-                                //shootSpikes = true;
-                            }
-
-                            //jump longer when player is further than threshold, scaling with distance up to cap
-                            const int XThreshold = 0;
-                            float xDif = Math.Abs(player.Center.X - npc.Center.X);
-                            if (xDif > XThreshold)
-                            {
-                                float modifier = xDif - XThreshold;
-                                modifier /= 700f;
-                                modifier *= modifier;
-                                modifier += 1;
-                                modifier = MathHelper.Clamp(modifier, 1, 3);
-                                npc.velocity.X *= modifier;
-                                npc.velocity.Y *= Math.Min((float)Math.Cbrt(modifier), 1.5f);
-
-                                // Flat addition
-                                npc.velocity.X += Math.Sign(npc.velocity.X) * 2.25f;
-                            }
-
-                        }
-                        if (npc.ai[1] == 0) // big jump
-                            shootSpikes = false;
-
-                        if (shootSpikes && FargoSoulsUtil.HostCheck)
-                        {
-                            const float gravity = 0.15f;
-                            float time = 90f;
-                            Vector2 distance = player.Center - npc.Center + player.velocity * 30f;
-                            distance.X /= time;
-                            distance.Y = distance.Y / time - 0.5f * gravity * time;
-                            for (int i = 0; i < 15; i++)
-                            {
-                                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, distance + Main.rand.NextVector2Square(-1f, 1f),
-                                    ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                CurrentlyJumping = false;
-            }
-
-            if (npc.velocity.Y == 0) //on ground
-            {
-                if (SpecialJumpWindupTimer > 0)
-                {
-                    npc.ai[0] = -999; // no jumping until this is done
-                    SpecialJumpWindupTimer--;
-                    if (SpecialJumpWindupTimer == 0)
-                        npc.ai[0] = -1; // ok now you can jump
-                }
-
-            }
-            else //midair
-            {
-                if (SpecialJumping) //special jump
-                {
-                    JumpTimer++;
-
-
-
-                    const int ProjTime = 5;
-                    if (Math.Sign(npc.velocity.X) != Math.Sign(npc.DirectionTo(player.Center).X) && Math.Abs(npc.Center.X - player.Center.X) > 250 && npc.velocity.Y > 0)
-                    {
-                        npc.velocity.X /= 5;
-                        SpecialJumping = false;
-                        JumpTimer = 0;
-                        teleportTimer = 150; //continue teleport timer
-                    }
-
-                    else if (JumpTimer % ProjTime < 1 && (JumpTimer % (ProjTime * 3) > 1 || WorldSavingSystem.MasochistModeReal))
-                    {
-                        SoundEngine.PlaySound(SoundID.Item17, npc.Center);
-                        if (FargoSoulsUtil.HostCheck)
-                        {
-                            Vector2 spawnPos = npc.Bottom;
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), spawnPos, Vector2.Zero,
-                                ModContent.ProjectileType<SlimeSpike2>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 4f / 6), 0f, Main.myPlayer);
-                        }
-                    }
+                    return true; // run vanilla despawn code
                 }
             }
 
-
-            if ((IsBerserk || npc.life < npc.lifeMax * .66f) && npc.HasValidTarget && !SpecialJumping)
-            {
-                if (--SpikeRainCounter < 0) // Spike rain
-                {
-                    SpikeRainCounter = 240;
-
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        const int Gap = 110;
-                        Vector2 spawnPos = player.Center + (Vector2.UnitX * Main.rand.Next(-Gap / 2, Gap / 2));
-                        for (int i = -12; i <= 12; i++)
-                        {
-                            Vector2 spikePos = spawnPos;
-                            spikePos.X += Gap * i;
-                            spikePos.Y -= 500;
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), spikePos, (IsBerserk ? 6f : 0f) * Vector2.UnitY,
-                                ModContent.ProjectileType<SlimeSpike2>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 4f / 6), 0f, Main.myPlayer);
-                        }
-                    }
-                }
-            }
-
-            /*if (!masoBool[0]) //is not berserk
-            {
-                SharkCount = 0;
-
-                if (npc.HasPlayerTarget)
-                {
-                    Player player = player;
-                    if (player.active && !player.dead && player.Center.Y < npc.position.Y && npc.Distance(player.Center) < 1000f)
-                    {
-                        Counter[1]++; //timer runs if player is above me and nearby
-                        if (Counter[1] >= 600 && FargoSoulsUtil.HostCheck) //go berserk
-                        {
-                            masoBool[0] = true;
-                            npc.netUpdate = true;
-                            NetUpdateMaso(npc.whoAmI);
-                            if (Main.netMode == NetmodeID.Server)
-                                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("King Slime has enraged!"), new Color(175, 75, 255));
-                            else
-                                Main.NewText("King Slime has enraged!", 175, 75, 255);
-                        }
-                    }
-                    else
-                    {
-                        Counter[1] = 0;
-                    }
-                }
-            }
-            else //is berserk
-            {
-                SharkCount = 1;
-
-                if (!masoBool[2])
-                {
-                    masoBool[2] = true;
-                    SoundEngine.PlaySound(SoundID.Roar, npc.Center);
-                }
-
-                if (Counter[0] > 45) //faster slime spike rain
-                    Counter[0] = 45;
-
-                if (++Counter[2] > 30) //aimed spikes
-                {
-                    Counter[2] = 0;
-                    const float gravity = 0.15f;
-                    float time = 45f;
-                    Vector2 distance = player.Center - npc.Center + player.velocity * 30f;
-                    distance.X = distance.X / time;
-                    distance.Y = distance.Y / time - 0.5f * gravity * time;
-                    for (int i = 0; i < 15; i++)
-                    {
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, distance + Main.rand.NextVector2Square(-1f, 1f) * 2f,
-                            ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                    }
-                }
-
-                if (npc.HasValidTarget && FargoSoulsUtil.HostCheck && player.position.Y > npc.position.Y) //player went back down
-                {
-                    masoBool[0] = false;
-                    masoBool[2] = false;
-                    NetUpdateMaso(npc.whoAmI);
-                }
-            }*/
-
-            if (npc.ai[1] == 5) //when teleporting
-            {
-                if (npc.HasPlayerTarget && npc.ai[0] == 1) //update y pos once
-                    npc.localAI[2] = player.Center.Y;
-
-                Vector2 tpPos = new(npc.localAI[1], npc.localAI[2]);
-                tpPos.X -= npc.width / 2;
-
-                for (int i = 0; i < 10; i++)
-                {
-                    int d = Dust.NewDust(tpPos, npc.width, npc.height / 2, DustID.t_Slime, 0, 0, 75, new Color(78, 136, 255, 80), 2.5f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity.Y -= 3f;
-                    Main.dust[d].velocity *= 3f;
-                }
-            }
-
-            /* special teleport
-            if (npc.life < npc.lifeMax / 3)
-            {
-                
-                if (npc.ai[1] == 5) //when teleporting
-                {
-                    if (npc.ai[0] == 1 && !DidSpecialTeleport)
-                        SoundEngine.PlaySound(SoundID.Roar, npc.Center);
-
-                    if (npc.HasPlayerTarget && !DidSpecialTeleport) //live update tp position
-                    {
-                        Vector2 desiredTeleport = player.Center;
-                        desiredTeleport.X += 800 * System.Math.Sign(player.Center.X - npc.Center.X); //tp ahead of player
-
-                        if (Collision.CanHitLine(desiredTeleport, 0, 0, player.position, player.width, player.height))
-                        {
-                            npc.localAI[1] = desiredTeleport.X;
-                            npc.localAI[2] = desiredTeleport.Y;
-                        }
-                    }
-                }
-                else if (npc.ai[1] == 6) //actually did the teleport and now regrowing
-                {
-                    DidSpecialTeleport = true;
-                }
-                else
-                {
-                    if (!DidSpecialTeleport)
-                        teleportTimer += 60;
-
-                    teleportTimer += 1f / 3f; //always increment the teleport timer
-                }
-                
-            }
-            */
             // Drop summon
             EModeUtils.DropSummon(npc, "SlimyCrown", NPC.downedSlimeKing, ref DroppedSummon);
 
-            return base.SafePreAI(npc);
+            // Scaling (from vanilla)
+            float num255 = (float)npc.life / (float)npc.lifeMax;
+            num255 = num255 * 0.5f + 0.75f;
+            float num236 = 1f;
+            float num237 = 1f;
+            float num238 = 2f;
+            if (Main.getGoodWorld)
+            {
+                num238 -= 1f - (float)npc.life / (float)npc.lifeMax;
+                num237 *= num238;
+            }
+            num255 *= num236;
+            num255 *= num237;
+            if (num255 != npc.scale)
+            {
+                npc.position.X += npc.width / 2;
+                npc.position.Y += npc.height;
+                npc.scale = num255;
+                npc.width = (int)(98f * npc.scale);
+                npc.height = (int)(92f * npc.scale);
+                npc.position.X -= npc.width / 2;
+                npc.position.Y -= npc.height;
+            }
+
+            int state = (int)State;
+            switch ((States)state)
+            {
+                case States.Spawn:
+                    {
+                        if (NPC.velocity.Y == 0)
+                        {
+                            Timer++;
+                            if (Timer > 40)
+                            {
+                                State = (int)States.JumpCycle;
+                                Timer = 0;
+                                NPC.netUpdate = true;
+                            }
+                        }
+                    }
+                    break;
+                case States.JumpCycle:
+                    {
+                        if (Cycle > 2)
+                        {
+                            Cycle = 0;
+                            NPC.netUpdate = true;
+                        }
+                        if (Cycle < 2) // normal jump
+                        {
+                            NormalJump();
+                        }
+                        else if (Cycle == 2) // big jump
+                        {
+                            BigJump();
+                        }
+                    }
+                    break;
+            }
+            return false;
+        }
+        public void NormalJump()
+        {
+            float xDir = NPC.HorizontalDirectionTo(Target.Center);
+            if (Timer == 0) // before jump
+            {
+                if (NPC.velocity.Y == 0) // grounded
+                {
+                    float x = MathF.Abs(Target.Center.X - NPC.Center.X) / 1200;
+                    if (x > 1)
+                        x = 1;
+                    int side = 17;
+                    int up = 30;
+                    if (Cycle == 0)
+                    {
+                        side = 10;
+                        up = 22;
+                    }
+                    NPC.velocity.X = xDir * side * x;
+                    NPC.velocity.Y = -up;
+                    Timer = 1;
+                    NPC.netUpdate = true;
+                }
+            }
+            else if (Timer == 1) // during jump
+            {
+                float threshold = 400;
+                float distanceFactor = MathF.Abs(Target.Center.X - NPC.Center.X) / threshold;
+                if (NPC.velocity.X.NonZeroSign() != xDir || distanceFactor > 1)
+                    NPC.velocity.X += xDir * 0.7f;
+                else
+                    NPC.velocity.X += xDir * 0.7f * distanceFactor;
+                int cap = 17;
+                if (Cycle == 0)
+                    cap = 10;
+                NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -cap, cap);
+                NPC.noGravity = NPC.velocity.Y > 0;
+                if (NPC.velocity.Y == 0)
+                {
+                    NPC.velocity.X = 0;
+                    Timer = 2;
+                    NPC.netUpdate = true;
+                    // spike burst
+                    
+                    for (int j = -1; j < 2; j += 2)
+                    {
+                        Vector2 vel = new(j * 7, -10);
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitX * j * Main.rand.NextFloat(0.7f, 1.3f) * NPC.width * NPC.scale / 4, vel + Main.rand.NextVector2Square(-1f, 1f) * 4f,
+                                ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if (NPC.velocity.Y < 20)
+                        NPC.velocity.Y += 1;
+                }
+                    
+            }
+            else // after jump
+            {
+                Timer++;
+                float delay = 35;
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    delay -= 20;
+                }
+                delay += NPC.GetLifePercent() * 35;
+                if (Timer > delay)
+                {
+                    IncrementCycle();
+                    return;
+                }
+            }
+        }
+        public void BigJump()
+        {
+            float xDir = NPC.HorizontalDirectionTo(Target.Center);
+            if (Timer == 0) // before jump
+            {
+                if (NPC.velocity.Y == 0) // grounded
+                {
+                    NPC.velocity.X = xDir * 18;
+                    NPC.velocity.Y = -38;
+                    Timer = 1;
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSJump"), NPC.Center);
+                    NPC.netUpdate = true;
+                }
+            }
+            else if (Timer >= 1) // during jump
+            {
+                float threshold = 200;
+                float xDist = MathF.Abs(Target.Center.X - NPC.Center.X);
+                if (Timer == 1 && (xDist < threshold || NPC.velocity.Y > 0))
+                    Timer = 2;
+                if (Timer > 1)
+                {
+                    Timer++;
+                    NPC.velocity.X *= 0.96f;
+                }
+                    
+                NPC.noGravity = NPC.velocity.Y > 0;
+                if (NPC.velocity.Y == 0)
+                {
+                    NPC.velocity.X = 0;
+                    Timer = -1;
+                    NPC.netUpdate = true;
+
+                    // spike burst
+                    for (int j = -1; j < 2; j += 2)
+                    {
+                        Vector2 vel = new(j * 10, -4);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitX * j * Main.rand.NextFloat(0.7f, 1.3f) * NPC.width * NPC.scale / 4, vel + Main.rand.NextVector2Square(-1f, 1f) * 2f,
+                                ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        }
+                    }
+
+                }
+                else
+                {
+                    float gravity = Timer == 1 ? 0.5f : 1.5f;
+                    if (NPC.velocity.Y < 20)
+                        NPC.velocity.Y += gravity;
+                }
+
+            }
+            else // after jump
+            {
+                Timer--;
+                float delay = 35;
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    delay -= 20;
+                }
+                delay += NPC.GetLifePercent() * 35;
+                if (Timer < -delay)
+                {
+                    IncrementCycle();
+                    return;
+                }
+            }
+        }
+        public void IncrementCycle()
+        {
+            Timer = 0;
+            Cycle++;
+            NPC.netUpdate = true;
         }
         public override bool? CanFallThroughPlatforms(NPC npc)
         {
-            if (SpecialJumping && !LandingAttackReady)
-            {
-                return false;
-            }
-            return base.CanFallThroughPlatforms(npc);
+            if (!npc.HasPlayerTarget)
+                return base.CanFallThroughPlatforms(npc);
+            return (Main.player[npc.target].Top.Y > npc.Bottom.Y + 30) ? true : null;
         }
 
         public override bool CheckDead(NPC npc)
