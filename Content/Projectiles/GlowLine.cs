@@ -356,14 +356,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 if (counter == maxTime)
                                 {
-                                    //only make blue telegraph in emode
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
-                                            Projectile.Center, Projectile.rotation.ToRotationVector2(),
-                                            Projectile.type,
-                                            Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
-                                    }
+                                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
+                                        Projectile.Center, Projectile.rotation.ToRotationVector2(),
+                                        Projectile.type,
+                                        Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
 
                                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
                                         Projectile.Center, Projectile.localAI[0] * Projectile.rotation.ToRotationVector2(),
@@ -375,14 +371,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 if (counter > maxTime - 20 && counter % 10 == 0)
                                 {
-                                    //only make blue telegraph in emode
-                                    if (!WorldSavingSystem.MasochistModeReal)
-                                    {
-                                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
-                                            Projectile.Center, Projectile.rotation.ToRotationVector2(),
-                                            Projectile.type,
-                                            Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
-                                    }
+                                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
+                                        Projectile.Center, Projectile.rotation.ToRotationVector2(),
+                                        Projectile.type,
+                                        Projectile.damage, Projectile.knockBack, Projectile.owner, 16f);
 
                                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile),
                                         Projectile.Center, Projectile.localAI[0] * Projectile.rotation.ToRotationVector2(),
