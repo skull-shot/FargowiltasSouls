@@ -389,7 +389,7 @@ namespace FargowiltasSouls.Core.Systems
         {
             if (Main.LocalPlayer.FargoSouls().Illuminated)
             {
-                scale += 0.5f;
+                scale += 0.08f;
             }
         }
     }
