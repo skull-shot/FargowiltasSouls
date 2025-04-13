@@ -8,19 +8,19 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
 {
-    public class SlimeSpike : ModProjectile
+    public class KingSlimeBall : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_605";
+        public override string Texture => "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeBall_2";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Slime Spike");
+            Main.projFrames[Type] = 4;
         }
 
         public override void SetDefaults()
         {
-            Projectile.width = 6;
-            Projectile.height = 6;
+            Projectile.width = 24;
+            Projectile.height = 24;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.alpha = 255;
@@ -37,19 +37,25 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
                 Projectile.alpha = 0;
             if (Projectile.alpha == 0 && Main.rand.NextBool(3) && (Projectile.tileCollide || !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height)))
             {
-                int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.TintableDust, 0f, 0f, 150, new Color(78, 136, 255, 80), 1.2f);
+                int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.t_Slime, 0f, 0f, 150, default, 1.2f);
                 Main.dust[d].velocity *= 0.3f;
                 Main.dust[d].velocity += Projectile.velocity * 0.3f;
                 Main.dust[d].noGravity = true;
             }
             if (Projectile.localAI[0] == 0f)
             {
-                Projectile.localAI[0] = 1f;
-                SoundEngine.PlaySound(SoundID.Item17, Projectile.position);
+                Projectile.localAI[0] = Main.rand.NextBool() ? 1 : 2;
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSCharge"), Projectile.position);
             }
             Projectile.velocity.Y += 0.3f;
 
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
+            Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2f;
+
+            if (++Projectile.frameCounter % 4 == 0)
+            {
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
+            }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -64,7 +70,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            SpriteEffects effects = Projectile.localAI[0] == 2 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;
         }
     }

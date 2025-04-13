@@ -42,6 +42,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public ref float State => ref NPC.ai[1];
         public ref float Phase => ref NPC.ai[2];
         public ref float Timer => ref NPC.ai[3];
+        public int TeleportCD;
+        public float Stretch;
+        public float[] CustomAI = new float[3];
+        public bool PhaseTwo => NPC.GetLifePercent() < 0.65f;
+
         public enum States
         {
             Spawn,
@@ -52,10 +57,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write7BitEncodedInt(DeathTimer);
+            binaryWriter.Write7BitEncodedInt(TeleportCD);
+            for (int i = 0; i < CustomAI.Length; i++)
+            {
+                binaryWriter.Write(CustomAI[i]);
+            }
+            
         }
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             DeathTimer = binaryReader.Read7BitEncodedInt();
+            TeleportCD = binaryReader.Read7BitEncodedInt();
+            for (int i = 0; i < CustomAI.Length; i++)
+            {
+                CustomAI[i] = binaryReader.ReadSingle();
+            }
         }
         public override bool SafePreAI(NPC npc)
         {
@@ -64,6 +80,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (DeathTimer >= 0)
             {
+                Stretch = 0;
                 DeathAnimation(npc);
                 if (++DeathTimer >= 300)
                 {
@@ -125,9 +142,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             Timer++;
                             if (Timer > 40)
                             {
-                                State = (int)States.JumpCycle;
-                                Timer = 0;
-                                NPC.netUpdate = true;
+                                ResetToJumps();
                             }
                         }
                     }
@@ -149,11 +164,45 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                     }
                     break;
+                case States.Teleport:
+                    Teleport();
+                    break;
             }
+            return false;
+        }
+        public bool JumpWindup()
+        {
+            ref float timer = ref CustomAI[0];
+            if (timer >= 0)
+            {
+                if (NPC.velocity.Y == 0)
+                    timer++;
+                else
+                    timer = 0;
+                float delay = WorldSavingSystem.MasochistModeReal ? 22 : 25;
+                float progress = timer / delay;
+                Stretch = FargoSoulsUtil.SineInOut(2 * progress);
+                Stretch = MathF.Pow(Stretch, 0.5f);
+                Stretch = MathHelper.Clamp(Stretch, 0, 1);
+
+                NPC.position.Y += NPC.height;
+                float yScale = NPC.scale - Stretch * 0.45f;
+                NPC.height = (int)(92f * yScale);
+                NPC.position.Y -= NPC.height;
+
+                if (timer >= delay - 3)
+                {
+                    timer = -1;
+                }
+                return true;
+            }
+            Stretch = 0;
             return false;
         }
         public void NormalJump()
         {
+            if (JumpWindup())
+                return;
             float xDir = NPC.HorizontalDirectionTo(Target.Center);
             if (Timer == 0) // before jump
             {
@@ -162,12 +211,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float x = MathF.Abs(Target.Center.X - NPC.Center.X) / 1200;
                     if (x > 1)
                         x = 1;
-                    int side = 17;
-                    int up = 30;
+                    int side = 14;
+                    int up = 27;
                     if (Cycle == 0)
                     {
-                        side = 10;
-                        up = 22;
+                        side = 12;
+                        up = 23;
                     }
                     NPC.velocity.X = xDir * side * x;
                     NPC.velocity.Y = -up;
@@ -183,9 +232,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     NPC.velocity.X += xDir * 0.7f;
                 else
                     NPC.velocity.X += xDir * 0.7f * distanceFactor;
-                int cap = 17;
+                int cap = 14;
                 if (Cycle == 0)
-                    cap = 10;
+                    cap = 12;
                 NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -cap, cap);
                 NPC.noGravity = NPC.velocity.Y > 0;
                 if (NPC.velocity.Y == 0)
@@ -197,18 +246,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     
                     for (int j = -1; j < 2; j += 2)
                     {
-                        Vector2 vel = new(j * 7, -10);
-                        for (int i = 0; i < 3; i++)
+                        int count = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                        for (int i = 0; i < count; i++)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitX * j * Main.rand.NextFloat(0.7f, 1.3f) * NPC.width * NPC.scale / 4, vel + Main.rand.NextVector2Square(-1f, 1f) * 4f,
-                                ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                            float xS = (float)(i+1) / count;
+                            Vector2 vel = new(j * 6f * xS, -11);
+                            Vector2 rand = Main.rand.NextFloat(-2, 2) * Vector2.UnitX + Main.rand.NextFloat(-1, 1) * Vector2.UnitY;
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitX * j * Main.rand.NextFloat(0.7f, 1.3f) * NPC.width * NPC.scale / 4, vel + rand,
+                                ModContent.ProjectileType<KingSlimeBall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                         }
                     }
                     
                 }
                 else
                 {
-                    if (NPC.velocity.Y < 20)
+                    if (NPC.velocity.Y < 18)
                         NPC.velocity.Y += 1;
                 }
                     
@@ -216,12 +268,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else // after jump
             {
                 Timer++;
-                float delay = 35;
+                float delay = 25;
                 if (WorldSavingSystem.MasochistModeReal)
                 {
-                    delay -= 20;
+                    delay -= 10;
                 }
-                delay += NPC.GetLifePercent() * 35;
+                delay += NPC.GetLifePercent() * 25;
                 if (Timer > delay)
                 {
                     IncrementCycle();
@@ -231,12 +283,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public void BigJump()
         {
+            if (JumpWindup())
+                return;
             float xDir = NPC.HorizontalDirectionTo(Target.Center);
             if (Timer == 0) // before jump
             {
                 if (NPC.velocity.Y == 0) // grounded
                 {
-                    NPC.velocity.X = xDir * 18;
+                    NPC.velocity.X = xDir * 24;
                     NPC.velocity.Y = -38;
                     Timer = 1;
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSJump"), NPC.Center);
@@ -265,11 +319,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     // spike burst
                     for (int j = -1; j < 2; j += 2)
                     {
-                        Vector2 vel = new(j * 10, -4);
+                        
                         for (int i = 0; i < 4; i++)
                         {
+                            Vector2 vel = new(j * 10, -5.5f + 1.2f * i);
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitX * j * Main.rand.NextFloat(0.7f, 1.3f) * NPC.width * NPC.scale / 4, vel + Main.rand.NextVector2Square(-1f, 1f) * 2f,
-                                ModContent.ProjectileType<SlimeSpike>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                ModContent.ProjectileType<KingSlimeBall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                         }
                     }
 
@@ -277,7 +332,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 else
                 {
                     float gravity = Timer == 1 ? 0.5f : 1.5f;
-                    if (NPC.velocity.Y < 20)
+                    if (NPC.velocity.Y < 18)
                         NPC.velocity.Y += gravity;
                 }
 
@@ -285,12 +340,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else // after jump
             {
                 Timer--;
-                float delay = 35;
+                float delay = 25;
                 if (WorldSavingSystem.MasochistModeReal)
                 {
-                    delay -= 20;
+                    delay -= 5;
                 }
-                delay += NPC.GetLifePercent() * 35;
+                delay += NPC.GetLifePercent() * 25;
                 if (Timer < -delay)
                 {
                     IncrementCycle();
@@ -298,10 +353,97 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
         }
+
+        public void Teleport()
+        {
+            ref float hasTeleported = ref CustomAI[0];
+            ref float teleX = ref CustomAI[1];
+            ref float teleY = ref CustomAI[2];
+            int fadeTime = 60;
+            if ((int)Timer < fadeTime) // pre teleport
+            {
+                if (Timer < fadeTime / 6)
+                {
+                    teleX = Target.Bottom.X;
+                    teleY = Target.Bottom.Y;
+                }
+                NPC.scale *= 1f - Timer / fadeTime;
+
+                // dust at npc position
+                for (int num249 = 0; num249 < 10; num249++)
+                {
+                    float x = teleX - NPC.width / 2;
+                    float y = teleY - NPC.height;
+                    int num250 = Dust.NewDust(new Vector2(x, y) + Vector2.UnitX * -20f, NPC.width + 40, NPC.height, DustID.TintableDust, NPC.velocity.X, NPC.velocity.Y, 150, new Color(78, 136, 255, 80), 2f);
+                    Main.dust[num250].noGravity = true;
+                    Dust dust = Main.dust[num250];
+                    dust.velocity *= 0.5f;
+                }
+            }
+            else // post teleport
+            {
+                if (hasTeleported == 0) // teleport frame
+                {
+                    hasTeleported = 1;
+                    NPC.Bottom = new(teleX, teleY);
+                    NPC.netUpdate = true;
+                }
+                float lerp = (Timer - fadeTime) / fadeTime;
+                NPC.scale *= lerp;
+                if (Timer > fadeTime * 2)
+                {
+                    TeleportCD = 4;
+                    ResetToJumps();
+                    return;
+                }
+            }
+
+            NPC.position.X += NPC.width / 2;
+            NPC.position.Y += NPC.height;
+            NPC.width = (int)(98f * NPC.scale);
+            NPC.height = (int)(92f * NPC.scale);
+            NPC.position.X -= NPC.width / 2;
+            NPC.position.Y -= NPC.height;
+
+            // dust at npc position
+            for (int num249 = 0; num249 < 10; num249++)
+            {
+                int num250 = Dust.NewDust(NPC.position + Vector2.UnitX * -20f, NPC.width + 40, NPC.height, DustID.TintableDust, NPC.velocity.X, NPC.velocity.Y, 150, new Color(78, 136, 255, 80), 2f);
+                Main.dust[num250].noGravity = true;
+                Dust dust = Main.dust[num250];
+                dust.velocity = (dust.position - NPC.Center).SafeNormalize(Main.rand.NextVector2CircularEdge(1, 1)) * Main.rand.NextFloat(4, 7);
+            }
+
+            float speedScale = 2f - NPC.GetLifePercent();
+            Timer += speedScale;
+        }
+        public void ResetToJumps()
+        {
+            State = (int)States.JumpCycle;
+            Timer = 0;
+            Cycle = 0;
+            for (int i = 0; i < CustomAI.Length; i++)
+                CustomAI[i] = 0;
+            NPC.netUpdate = true;
+        }
         public void IncrementCycle()
         {
             Timer = 0;
             Cycle++;
+            for (int i = 0; i < CustomAI.Length; i++)
+                CustomAI[i] = 0;
+            if (NPC.HasPlayerTarget)
+            {
+                bool shouldTP = false;
+                if (PhaseTwo && TeleportCD <= 0 && Main.rand.NextBool(3))
+                    shouldTP = true;
+                if (shouldTP || !Collision.CanHitLine(NPC.Center, 0, 0, Main.player[NPC.target].Center, 0, 0) || Math.Abs(NPC.Top.Y - Main.player[NPC.target].Bottom.Y) > 400)
+                {
+                    State = (int)States.Teleport;
+                }
+                else if (TeleportCD > 0)
+                    TeleportCD--;
+            }
             NPC.netUpdate = true;
         }
         public override bool? CanFallThroughPlatforms(NPC npc)
@@ -380,8 +522,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
-            if (!resprite)
-                return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+
             // Draw the Ninja (Mutant).
             var ninjaOffset = new Vector2(-npc.velocity.X * 2f, -npc.velocity.Y);
             var ninjaRotation = npc.velocity.X * 0.05f;
@@ -405,7 +546,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             
             // We have to manually set drawing to immediate mode when rendering
             // the NPC normally.  Bestiary icons don't have this requirement.
-            if (!npc.IsABestiaryIconDummy)
+            if (!npc.IsABestiaryIconDummy && resprite)
             {
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
@@ -415,17 +556,26 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             var ksTexture = TextureAssets.Npc[NPCID.KingSlime].Value;
             
             // Render KS through DrawData since we need to apply a game shader.
+            // We also want to stretch him.
             var frameCount = Main.npcFrameCount[npc.type];
             var frameVertical = npc.frame.Y / npc.frame.Height;
             var frame = ksTexture.Frame(1, frameCount, 0, frameVertical);
             frame.Inflate(0, -2);
+
+            Vector2 scale = Vector2.One * npc.scale;
+            if (Stretch > 0)
+                scale.Y *= 1 - Stretch * 0.45f;
             
-            var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor /*with { A = 200 }*/, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
-            GameShaders.Misc["FargowiltasSouls:KingSlime"].Apply(drawData);
-            drawData.Draw(spriteBatch);
-            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor /*with { A = 200 }*/, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             
-            if (!npc.IsABestiaryIconDummy)
+            if (resprite)
+            {
+                GameShaders.Misc["FargowiltasSouls:KingSlime"].Apply(drawData);
+                drawData.Draw(spriteBatch);
+                Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            }
+            
+            if (!npc.IsABestiaryIconDummy && resprite)
             {
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
@@ -447,7 +597,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             };
 
             var spriteEffects = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            center.Y += npc.gfxOffY - (70f - yOffset) * npc.scale;
+            center.Y += npc.gfxOffY - (70f - yOffset) * scale.Y;
             spriteBatch.Draw(crownTexture, center - screenPos, null, Color.White, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
             return false;
         }
