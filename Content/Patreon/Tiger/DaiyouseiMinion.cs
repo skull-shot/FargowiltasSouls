@@ -1,15 +1,8 @@
-﻿using FargowiltasSouls.Content.Patreon.Sasha;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
-using Fargowiltas.Projectiles;
+using Fargowiltas.Content.Projectiles;
 
 namespace FargowiltasSouls.Content.Patreon.Tiger
 {

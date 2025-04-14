@@ -1,4 +1,4 @@
-﻿using Fargowiltas.Projectiles;
+﻿using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;

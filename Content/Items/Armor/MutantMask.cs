@@ -1,4 +1,5 @@
-﻿using Fargowiltas.Items.Tiles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using Fargowiltas.Content.Items.Vanity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Minions;
@@ -88,7 +89,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<Fargowiltas.Items.Vanity.MutantMask>()
+            .AddIngredient<MutantMask>()
             .AddIngredient<AbomEnergy>(10)
             .AddIngredient<EternalEnergy>(10)
             .AddTile<CrucibleCosmosSheet>()

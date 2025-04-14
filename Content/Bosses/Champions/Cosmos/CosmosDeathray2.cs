@@ -1,4 +1,4 @@
-﻿using Fargowiltas.NPCs;
+﻿using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -18,8 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Cosmic Deathray");
         }
 
         public override bool? CanDamage()
