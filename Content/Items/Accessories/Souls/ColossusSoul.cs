@@ -1,4 +1,4 @@
-﻿using Fargowiltas.Items.Tiles;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;

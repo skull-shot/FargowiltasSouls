@@ -4,12 +4,10 @@ using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Items.Materials;
-using Fargowiltas.Items.Summons.SwarmSummons.Energizers;
-using Fargowiltas.Items.Tiles;
+using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using Terraria.Audio;
 using FargowiltasSouls.Content.Projectiles.Minions;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops

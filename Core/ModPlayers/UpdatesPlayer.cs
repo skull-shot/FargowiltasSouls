@@ -1,5 +1,5 @@
-﻿using Fargowiltas.Items.Explosives;
-using Fargowiltas.NPCs;
+﻿using Fargowiltas.Content.Items.Explosives;
+using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;

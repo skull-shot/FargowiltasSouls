@@ -1,4 +1,4 @@
-using Fargowiltas.NPCs;
+using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;

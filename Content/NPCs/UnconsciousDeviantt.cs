@@ -1,26 +1,17 @@
-﻿using Fargowiltas.NPCs;
-using FargowiltasSouls.Assets.Particles;
+﻿using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Core.ModPlayers;
-using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Core.Globals;
 
 namespace FargowiltasSouls.Content.NPCs
 {
