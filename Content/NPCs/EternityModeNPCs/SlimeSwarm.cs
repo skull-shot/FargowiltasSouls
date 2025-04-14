@@ -34,8 +34,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.noGravity = false;
 
             //NPC.scale *= 1.5f;
-            NPC.lifeMax *= 3;
+            NPC.lifeMax /= 2;
             NPC.damage = 32;
+            NPC.value = 0;
 
             NPC.GravityMultiplier *= 2;
         }
@@ -79,6 +80,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
         }
 
+        public override bool CheckActive()
+        {
+            return false;
+        }
+
+        public override bool PreKill()
+        {
+            return false;
+        }
 
         public override void FindFrame(int frameHeight)
         {

@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
             if (Projectile.localAI[0] == 0f)
             {
                 Projectile.localAI[0] = Main.rand.NextBool() ? 1 : 2;
-                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSCharge"), Projectile.position);
+                SoundEngine.PlaySound(SoundID.Item154, Projectile.position);
             }
             Projectile.velocity.Y += 0.3f;
 
