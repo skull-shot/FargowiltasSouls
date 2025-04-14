@@ -1,5 +1,5 @@
-﻿using Fargowiltas.Items.Summons.SwarmSummons.Energizers;
-using Fargowiltas.Items.Tiles;
+﻿using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using Microsoft.Xna.Framework;
@@ -14,13 +14,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Big Sting");
-            /* Tooltip.SetDefault("Uses darts for ammo" +
-                "\n66% chance to not consume ammo" +
-                "\n'The reward for a mighty rematch..'"); */
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "大螫刺");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励..'");
         }
 
         public override void SetDefaults()

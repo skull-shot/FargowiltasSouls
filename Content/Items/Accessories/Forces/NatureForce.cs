@@ -1,12 +1,11 @@
-﻿using Fargowiltas.Items.Tiles;
-using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using Fargowiltas.Content.Items.Tiles;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {

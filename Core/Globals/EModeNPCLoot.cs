@@ -1,4 +1,4 @@
-﻿using Fargowiltas.Items.Explosives;
+﻿using Fargowiltas.Content.Items.Explosives;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;

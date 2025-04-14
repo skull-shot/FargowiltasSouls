@@ -1,19 +1,10 @@
-﻿using Fargowiltas.NPCs;
-using Fargowiltas.Projectiles;
-using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Core;
-using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
-using Terraria.ID;
-using Terraria.Localization;
-using Terraria.ModLoader;
-using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {

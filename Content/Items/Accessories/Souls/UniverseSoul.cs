@@ -1,5 +1,4 @@
-using Fargowiltas.Items.Tiles;
-using FargowiltasSouls.Content.Items.Accessories.Expert;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
