@@ -100,6 +100,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             var modPlayer = player.FargoSouls();
             bool wiz = player.ForceEffect<BeetleEffect>();
             int beetleCap = wiz ? 9 : 6;
+            if (modPlayer.BeetleHitCD > 0)
+                return;
             if (modPlayer.Beetles >= beetleCap)
                 return;
 
