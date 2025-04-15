@@ -481,7 +481,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void Explosion()
         {
             int telegraphTime = 70;
-            int explosionTime = 45;
+            int explosionTime = 70;
             if (Timer == 0)
             {
                 Particle p = new ExpandingBloomParticle(NPC.Center, Vector2.Zero, Color.Blue, Vector2.One, Vector2.One * 60, telegraphTime, true, Color.Transparent);
