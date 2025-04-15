@@ -1,1 +1,2 @@
 NEW UPDATE - V {ModVersion}
+Fixed several Eternity item changes not working correctly
