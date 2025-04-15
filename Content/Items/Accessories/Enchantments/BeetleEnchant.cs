@@ -108,7 +108,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (buildup > hitCap)
                 buildup = hitCap;
             if (wiz)
-                buildup *= 1.75f;
+                buildup *= 1.5f;
             modPlayer.BeetleCharge += buildup / 2000f;
             CooldownBarManager.Activate("BeetleEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/BeetleEnchant").Value, new(109, 92, 133),
                 () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
@@ -126,7 +126,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             modPlayer.Beetles -= 2;
             if (modPlayer.Beetles < 0)
                 modPlayer.Beetles = 0;
-            modPlayer.BeetleHitCD = 60 * 5;
+            modPlayer.BeetleHitCD = 60 * 3;
         }
 
     }

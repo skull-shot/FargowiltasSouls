@@ -87,7 +87,7 @@ BeetleEnchant: {
 		'''
 		Hitting enemies generates up to 6 beetles
 		Beetles grant 3% damage reduction each and attack nearby enemies
-		Getting hit loses 2 beetles (once every 5 seconds)
+		Getting hit loses 2 beetles (once every 3 seconds)
 		'The unseen life of dung courses through your veins'
 		'''
 }
