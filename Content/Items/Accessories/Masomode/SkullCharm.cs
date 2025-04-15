@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            if (!player.FargoSouls().LumpOfFlesh && !player.HasBuff<SouloftheMasochistBuff>())
+            if (!player.HasBuff<SouloftheMasochistBuff>())
                 player.AddBuff(ModContent.BuffType<Buffs.Minions.CrystalSkullBuff>(), 5);
         }
     }

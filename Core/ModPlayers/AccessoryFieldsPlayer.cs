@@ -255,7 +255,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool PlanterasChild;
         public bool SkullCharm;
         public bool PungentEyeball;
-        public bool LumpOfFlesh;
         public Item LihzahrdTreasureBoxItem;
         public int GroundPound;
         public Item BetsysHeartItem;
