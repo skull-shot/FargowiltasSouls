@@ -385,7 +385,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.PygmySpear:
-                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
+                    if (sourceProj is Projectile && EmodeItemBalance.HasEmodeChange(Main.player[sourceProj.owner], ItemID.PygmyStaff))
                     {
                         if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
                         {

@@ -1,14 +1,2 @@
 NEW UPDATE - V {ModVersion}
-
-Eternity Eater of Worlds: Decreased frequency of worm dashes during coil
-
-Eternity Destroyer:
-- Lengthened lightshow telegraph lines
-- Tweaked hitbox of lasers (also affects BoC)
-- Tweaked movement during lightshow, no longer ever speeds up towards the end
-- Extended lightshow telegraph is no longer removed in Masochist
-
-Sinister Icon and Platinum Enchant now only affect drops and no other on-kill effects
-Increased Deviantt's boss checklist value to always be past other modded pre-Hardmode bosses
-Tweaked Illuminated brightness increase
-Fixed Shadow Enchant orbs emitting light when invisible
+Fixed several Eternity item changes not working correctly
