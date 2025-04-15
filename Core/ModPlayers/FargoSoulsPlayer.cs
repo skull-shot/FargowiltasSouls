@@ -614,7 +614,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             MythrilTimer = 0;
             MythrilDelay = 20;
-            BeetleEnchantDefenseTimer = 0;
 
             Mash = false;
             WizardEnchantActive = false;

@@ -149,7 +149,10 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool DarkArtistEnchantActive;
         public int BeeCD;
         public int JungleCD;
-        public int BeetleEnchantDefenseTimer;
+        public int BeetleAttackCD;
+        public int Beetles;
+        public float BeetleCharge;
+        public int BeetleHitCD;
         public int BorealCD;
         public int PalmWoodForceCD;
         public bool CrystalEnchantActive = false;
