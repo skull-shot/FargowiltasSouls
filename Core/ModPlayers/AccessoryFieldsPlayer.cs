@@ -153,6 +153,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int Beetles;
         public float BeetleCharge;
         public int BeetleHitCD;
+        public int SpookyCD;
         public int BorealCD;
         public int PalmWoodForceCD;
         public bool CrystalEnchantActive = false;

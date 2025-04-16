@@ -856,6 +856,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.HasEffect<CelestialRuneAttacks>() && AdditionalAttacksTimer > 0)
                 AdditionalAttacksTimer--;
 
+            if (Player.HasEffect<SpookyEffect>() && SpookyCD > 0)
+                SpookyCD--;
+
             /* TODO: Mutant's Presence toggle visual
             if (PresenceTogglerTimer == 5)
             {

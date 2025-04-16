@@ -613,11 +613,7 @@ SpiderEnchant: {
 
 SpookyEnchant: {
 	DisplayName: Spooky Enchantment
-	Tooltip:
-		'''
-		All of your minions gain an extra scythe attack
-		'Melting souls since 1902'
-		'''
+	Tooltip: "'Melting souls since 1902'"
 }
 
 SquireEnchant: {

@@ -28,13 +28,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.scale *= .5f;
             Projectile.timeLeft = 300;
 
-            //this deals more dmg generally but e
-            /*Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = -1;*/
-
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
 
         public override void AI()
