@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.height = 84;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.SummonMeleeSpeed; // applies flasks
             Projectile.penetrate = 3;
             Projectile.timeLeft = 50;
             Projectile.tileCollide = false;

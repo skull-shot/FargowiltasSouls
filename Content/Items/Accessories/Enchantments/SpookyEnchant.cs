@@ -75,7 +75,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (Main.myPlayer == player.whoAmI)
             {
                 int baseDmg = wiz ? 550 : 400;
-                int dmg = (int)(baseDmg * player.ActualClassDamage(DamageClass.Summon));
+                float melee = player.ActualClassDamage(DamageClass.Melee);
+                float summon = player.ActualClassDamage (DamageClass.Summon);
+                int dmg = (int)(baseDmg * (((melee + summon - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), dmg, 1f, player.whoAmI);
             }
             int cd = wiz ? 8 : 12;
