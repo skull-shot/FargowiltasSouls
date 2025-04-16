@@ -361,7 +361,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool HidePetToggle1 = true;
         public bool Kneecapped;             //disables running :v
         public bool Defenseless;            //-30 defense, no damage reduction, cross necklace and knockback prevention effects disabled
-        public bool Purified;               //purges all other buffs
         public bool Infested;               //weak DOT that grows exponentially stronger
         public int MaxInfestTime;
         public bool FirstInfection = true;

@@ -22,8 +22,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
 
             target.AddBuff(ModContent.BuffType<SqueakyToyBuff>(), 120);
             //target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
-            target.FargoSouls().MaxLifeReduction += 50;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 1800);
+            target.FargoSouls().MaxLifeReduction += 30;
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
         }
 
         public override void OnKill(NPC npc)

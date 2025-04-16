@@ -1485,7 +1485,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (TikiTagged)
             {
-                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.4f : 1.2f;
+                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.35f : 1.15f;
                 TikiTagged = false;
             }
                 

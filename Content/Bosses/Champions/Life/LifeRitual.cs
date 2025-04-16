@@ -49,8 +49,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         {
             base.OnHitPlayer(target, info);
 
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
         }
     }
 }

@@ -150,7 +150,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax *= 3;
+            npc.lifeMax *= 2;
         }
 
         public override bool SafePreAI(NPC npc)
@@ -758,7 +758,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            //if (npc.type == NPCID.MoonLordHead) npc.lifeMax /= 2;
+           if (npc.type == NPCID.MoonLordHead || npc.type == NPCID.MoonLordHand) npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.75f);
         }
     }
 }

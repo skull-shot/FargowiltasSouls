@@ -39,8 +39,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.DukeFishron
         {
             base.OnHitPlayer(target, info);
 
-            target.FargoSouls().MaxLifeReduction += 50;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
+            target.FargoSouls().MaxLifeReduction += 30;
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
         }
 
         public override Color? GetAlpha(Color lightColor)

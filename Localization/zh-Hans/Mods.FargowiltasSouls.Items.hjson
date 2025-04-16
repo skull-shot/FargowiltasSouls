@@ -1081,7 +1081,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam
@@ -1108,7 +1108,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, Purified, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a shadowflame beam

@@ -78,8 +78,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.PurifiedBuff>(), 300);
+
         }
 
         public override Color? GetAlpha(Color lightColor)

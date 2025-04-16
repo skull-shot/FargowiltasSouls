@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             base.OnHitPlayer(npc, target, hurtInfo);
 
             if (npc.type == NPCID.EnchantedSword)
-                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 300);
             else if (npc.type == NPCID.CursedHammer)
                 target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 300);
             else if (npc.type == NPCID.CrimsonAxe)

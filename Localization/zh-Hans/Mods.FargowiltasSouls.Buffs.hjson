@@ -400,11 +400,6 @@ PurgedBuff: {
 	Description: 闪避效果不会生效
 }
 
-PurifiedBuff: {
-	DisplayName: 净化
-	Description: 你被净化了
-}
-
 RefreshedBuff: {
 	DisplayName: 焕然一新
 	Description: 机动性提升，飞行时间延长

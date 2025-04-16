@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRa
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+
         }
 
         public override Color? GetAlpha(Color lightColor)

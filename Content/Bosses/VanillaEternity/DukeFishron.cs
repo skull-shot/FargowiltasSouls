@@ -438,8 +438,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         RemovedInvincibility = false;
                         if (npc.ai[2] == 120)
                         {
-                            int heal = npc.lifeMax - npc.life;
-                            npc.life = npc.lifeMax;
+                            int p2Heal = (int)MathF.Round(npc.lifeMax * 0.8f);
+                            int heal = p2Heal - npc.life;
+                            npc.life = p2Heal;
                             CombatText.NewText(npc.Hitbox, CombatText.HealLife, heal);
                         }
                         break;
@@ -547,7 +548,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                         if (npc.ai[2] == 120)
                         {
-                            int max = WorldSavingSystem.MasochistModeReal ? npc.lifeMax / 2 : npc.lifeMax / 3;
+                            int max = WorldSavingSystem.MasochistModeReal ? npc.lifeMax / 3 : npc.lifeMax / 4;
                             int heal = max - npc.life;
                             npc.life = max;
                             CombatText.NewText(npc.Hitbox, CombatText.HealLife, heal);
@@ -828,8 +829,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             //target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
             target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
             target.AddBuff(BuffID.Rabies, 3600);
-            target.FargoSouls().MaxLifeReduction += 50;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
+            target.FargoSouls().MaxLifeReduction += 30;
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
@@ -986,8 +987,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             //target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
             target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
-            target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 25;
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
+            target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
@@ -1023,8 +1024,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
-            target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 25;
+            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
+            target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
         }
     }
 }

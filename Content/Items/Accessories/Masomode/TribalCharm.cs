@@ -35,7 +35,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             PassiveEffects(player);
             player.buffImmune[BuffID.Webbed] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.PurifiedBuff>()] = true;
             player.FargoSouls().TribalCharm = true;
             player.FargoSouls().TribalCharmEquipped = true;
             player.AddEffect<TribalCharmClickBonus>(item);

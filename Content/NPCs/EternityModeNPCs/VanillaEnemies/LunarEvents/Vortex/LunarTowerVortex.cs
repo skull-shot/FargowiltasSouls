@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             new NPCMatcher().MatchType(NPCID.LunarTowerVortex);
 
         public LunarTowerVortex() : base(ModContent.BuffType<JammedBuff>(), DustID.Vortex) { }
-        public override int MaxHP => 65000;
+        public override int MaxHP => 46000;
         public override int Damage => 80;
         public enum Attacks
         {

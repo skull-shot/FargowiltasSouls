@@ -1540,8 +1540,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.HallowBossRainbowStreak:
                 case ProjectileID.HallowBossLastingRainbow:
                 case ProjectileID.HallowBossSplitShotCore:
-                    if (target.HasBuff<SmiteBuff>())
-                        target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
                     target.AddBuff(ModContent.BuffType<SmiteBuff>(), 900);
                     break;
 
@@ -1605,7 +1603,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.DrManFlyFlask:
-                    switch (Main.rand.Next(7))
+                    switch (Main.rand.Next(6))
                     {
                         case 0:
                             target.AddBuff(BuffID.Venom, 300);
@@ -1624,9 +1622,6 @@ namespace FargowiltasSouls.Content.Projectiles
                             break;
                         case 5:
                             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-                            break;
-                        case 6:
-                            target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 600);
                             break;
 
                         default:
@@ -1804,9 +1799,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         if (sourceNPC.type == NPCID.Golem)
                         {
-                            //target.AddBuff(BuffID.BrokenArmor, 600);
                             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-                            //target.AddBuff(BuffID.WitheredArmor, 600);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
                                 target.AddBuff(BuffID.Burning, 120);
@@ -1853,8 +1846,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
                     target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-                    target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 15 * 60);
-                    target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 25;
+                    target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
+                    target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
                     break;
 
                 case ProjectileID.FlamingScythe:

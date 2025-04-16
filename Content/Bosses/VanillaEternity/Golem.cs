@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.damage = (int)Math.Round(npc.damage * 1.1);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.75);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.2);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -81,9 +81,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(BuffID.BrokenArmor, 600);
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-            target.AddBuff(BuffID.WitheredArmor, 600);
         }
 
         public static string DungeonVariant => 
@@ -164,7 +162,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax *= 3; //From 5, compensation for 1.4.4 nerf
+            npc.lifeMax *= 3; // Compensation for 1.4.4 buff
             npc.damage = (int)(npc.damage * 1.2);
         }
 
@@ -194,7 +192,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     p.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
             }
 
-            HealPerSecond = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 360 : 180;
+            HealPerSecond = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 200 : 0;
             if (!IsInTemple) //temple enrage, more horiz move and fast jumps
             {
                 HealPerSecond *= 2;
@@ -581,7 +579,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
     public class GolemHead : GolemPart
     {
-        public GolemHead() : base(180) { }
+        public GolemHead() : base(0) { }
 
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.GolemHead, NPCID.GolemHeadFree);
 

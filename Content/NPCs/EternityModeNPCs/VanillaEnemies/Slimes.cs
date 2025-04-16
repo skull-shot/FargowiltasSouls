@@ -179,7 +179,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     break;
 
                 case NPCID.IlluminantSlime:
-                    target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+                    target.AddBuff(ModContent.BuffType<SmiteBuff>(), 300);
                     break;
 
                 case NPCID.GoldenSlime:

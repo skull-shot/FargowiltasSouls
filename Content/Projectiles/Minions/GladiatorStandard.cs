@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             
 
             //FargoSoulsUtil.AuraDust(Projectile, AuraSize, DustID.GoldCoin);
-            if (FargoSoulsUtil.ClosestPointInHitbox(Main.LocalPlayer.Hitbox, Projectile.Center).Distance(Projectile.Center) < AuraSize(player) && player.HasEffect<GladiatorBanner>() && !localModPlayer.Purified)
+            if (FargoSoulsUtil.ClosestPointInHitbox(Main.LocalPlayer.Hitbox, Projectile.Center).Distance(Projectile.Center) < AuraSize(player) && player.HasEffect<GladiatorBanner>())
             {
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<GladiatorBuff>(), 2);
             }
