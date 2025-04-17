@@ -35,7 +35,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-            return;
             if (Main.rand.NextBool(3) && npc.FargoSouls().CanHordeSplit)
                 EModeGlobalNPC.Horde(npc, Main.rand.Next(10) + 1);
         }
