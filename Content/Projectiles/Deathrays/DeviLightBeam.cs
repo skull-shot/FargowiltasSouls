@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 1.2f;

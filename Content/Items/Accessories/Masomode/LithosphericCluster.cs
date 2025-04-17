@@ -52,6 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public static void ActiveEffect(Player player, Item item)
         {
             PassiveEffect(player, item);
+            player.AddEffect<LithosphericEffect>(item);
             //SecurityWallet.ActiveEffects(player, item);
             WyvernFeather.ActiveEffects(player, item);
             //MysticSkull.ActiveEffects(player, item);
@@ -150,5 +151,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.ReplaceItem(Item, ModContent.ItemType<LithosphericCluster>());
         }
+    }
+    public class LithosphericEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<LithosphericCluster>();
     }
 }

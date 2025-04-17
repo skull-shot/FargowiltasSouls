@@ -29,9 +29,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
             NPC npc = FargoSoulsUtil.NPCExists(NPC.golemBoss, NPCID.Golem);
             if (npc != null)
             {
-                //target.AddBuff(BuffID.BrokenArmor, 600);
                 target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-                //target.AddBuff(BuffID.WitheredArmor, 600);
                 if (Main.tile[(int)npc.Center.X / 16, (int)npc.Center.Y / 16] == null || //outside temple
                     Main.tile[(int)npc.Center.X / 16, (int)npc.Center.Y / 16].WallType != WallID.LihzahrdBrickUnsafe)
                 {

@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer && modPlayer.AdditionalAttacksTimer <= 0)
             {
-                modPlayer.AdditionalAttacksTimer = 60;
+                modPlayer.AdditionalAttacksTimer = 100;
 
                 float projDamage = 50f;
               //if (modPlayer.MoonChalice)

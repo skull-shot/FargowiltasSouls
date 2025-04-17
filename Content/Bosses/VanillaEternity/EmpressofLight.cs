@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.5, MidpointRounding.ToEven);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.15, MidpointRounding.ToEven);
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
@@ -682,8 +682,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            if (target.HasBuff<SmiteBuff>())
-                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
             target.AddBuff(ModContent.BuffType<SmiteBuff>(), 900);
         }
 

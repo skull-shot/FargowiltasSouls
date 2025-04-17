@@ -83,9 +83,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.BrokenArmor, 600);
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-            target.AddBuff(BuffID.WitheredArmor, 600);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

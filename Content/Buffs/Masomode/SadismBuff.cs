@@ -54,7 +54,6 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
             player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<PurifiedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ReverseManaFlowBuff>()] = true;
             player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ShadowflameBuff>()] = true;

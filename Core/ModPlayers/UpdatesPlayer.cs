@@ -206,6 +206,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     BossAliveLastFrame = true;
                     TinEffect.TinHurt(Player, true);
                     EbonwoodCharge = 0;
+
+                    Beetles = 0;
+                    BeetleCharge = 0;
+                    BeetleHitCD = 0;
                 }
             }
             else
@@ -808,29 +812,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //Player.noKnockback = false;
             }
 
-            if (Purified)
-            {
-                //tries to remove all buffs/debuffs
-                for (int i = Player.MaxBuffs - 1; i >= 0; i--)
-                {
-                    int type = Player.buffType[i];
-                    if (type > 0
-                        && !Main.debuff[type] && !Main.buffNoTimeDisplay[type]
-                        && !BuffID.Sets.TimeLeftDoesNotDecrease[type] && !Main.lightPet[type] && !Main.vanityPet[type])
-                    {
-                        if (!KnownBuffsToPurify.ContainsKey(type))
-                            KnownBuffsToPurify[type] = true;
-
-                        Player.DelBuff(i);
-                    }
-                }
-
-                foreach (int b in KnownBuffsToPurify.Keys)
-                {
-                    Player.buffImmune[b] = true;
-                }
-            }
-
             if (Asocial)
             {
                 KillPets();
@@ -874,6 +855,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<CelestialRuneAttacks>() && AdditionalAttacksTimer > 0)
                 AdditionalAttacksTimer--;
+
+            if (Player.HasEffect<SpookyEffect>() && SpookyCD > 0)
+                SpookyCD--;
 
             /* TODO: Mutant's Presence toggle visual
             if (PresenceTogglerTimer == 5)

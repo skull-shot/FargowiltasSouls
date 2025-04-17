@@ -1,3 +1,6 @@
+using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -71,6 +74,14 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Main.dust[index2].scale *= 1.2f;
                 Main.dust[index2].noGravity = true;
             }
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Projectile.owner.IsWithinBounds(Main.maxPlayers) && Main.player[Projectile.owner].Alive() && Main.player[Projectile.owner].HasEffect<LithosphericEffect>() && Main.player[Projectile.owner].HasEffect<WretchedPouchEffect>())
+            {
+                target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 4);
+            }
+            base.OnHitNPC(target, hit, damageDone);
         }
     }
 }

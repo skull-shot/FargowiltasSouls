@@ -102,7 +102,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
                         if (Projectile.Colliding(Projectile.Hitbox, Main.player[p].Hitbox))
                         {
-                            player.FargoSouls().HealPlayer(20);
+                            player.FargoSouls().HealPlayer(12);
                             TargetNPC = Projectile.FindTargetWithLineOfSight(2000);
                             if (TargetNPC.IsWithinBounds(Main.maxNPCs) && Main.npc[TargetNPC].Alive())
                                 Projectile.velocity = Projectile.DirectionTo(Main.npc[TargetNPC].Center);

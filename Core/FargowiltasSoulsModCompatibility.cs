@@ -109,17 +109,6 @@ namespace FargowiltasSouls
                                 })
                             }
                         }
-                    // available,
-                    // collectibles,
-                    // spawnItems,
-                    // hasKilledAllMessage ? new Func<NPC, string>(npc => AllPlayersAreDead() ? $"Mods.{Name}.BossChecklist.{bossName}KilledAll" : $"Mods.{Name}.BossChecklist.{bossName}Despawn") : $"Mods.{Name}.BossChecklist.{bossName}Despawn",
-                    // portrait == null ? null : new Action<SpriteBatch, Rectangle, Color>((spriteBatch, rect, color) =>
-                    // {
-                    //     Texture2D tex = Assets.Request<Texture2D>(portrait, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                    //     Rectangle sourceRect = tex.Bounds;
-                    //     float scale = Math.Min(1f, (float)rect.Width / sourceRect.Width);
-                    //     spriteBatch.Draw(tex, rect.Center.ToVector2(), sourceRect, color, 0f, sourceRect.Size() / 2, scale, SpriteEffects.None, 0);
-                    // })
                     );
                 }
                 bool calamity = ModLoader.HasMod("CalamityMod");

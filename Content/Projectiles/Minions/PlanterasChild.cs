@@ -144,13 +144,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         {
             return false;
         }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(ModContent.BuffType<InfestedBuff>(), 360);
-            target.AddBuff(BuffID.Venom, 360);
-            target.AddBuff(BuffID.Poisoned, 360);
-        }
+        public override bool? CanHitNPC(NPC target) => false;
 
         public override bool PreDraw(ref Color lightColor)
         {

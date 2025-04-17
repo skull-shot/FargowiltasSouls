@@ -141,9 +141,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            //target.AddBuff(BuffID.BrokenArmor, 600);
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-            //target.AddBuff(BuffID.WitheredArmor, 600);
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -152,7 +150,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
 
             if (recolor)
-                texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/GolemBoulder").Value;
+                texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/Golem/GolemBoulder").Value;
 
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

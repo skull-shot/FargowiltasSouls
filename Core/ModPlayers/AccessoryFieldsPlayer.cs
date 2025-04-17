@@ -149,7 +149,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool DarkArtistEnchantActive;
         public int BeeCD;
         public int JungleCD;
-        public int BeetleEnchantDefenseTimer;
+        public int BeetleAttackCD;
+        public int Beetles;
+        public float BeetleCharge;
+        public int BeetleHitCD;
+        public int SpookyCD;
         public int BorealCD;
         public int PalmWoodForceCD;
         public bool CrystalEnchantActive = false;
@@ -255,7 +259,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool PlanterasChild;
         public bool SkullCharm;
         public bool PungentEyeball;
-        public bool LumpOfFlesh;
         public Item LihzahrdTreasureBoxItem;
         public int GroundPound;
         public Item BetsysHeartItem;
@@ -359,7 +362,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool HidePetToggle1 = true;
         public bool Kneecapped;             //disables running :v
         public bool Defenseless;            //-30 defense, no damage reduction, cross necklace and knockback prevention effects disabled
-        public bool Purified;               //purges all other buffs
         public bool Infested;               //weak DOT that grows exponentially stronger
         public int MaxInfestTime;
         public bool FirstInfection = true;

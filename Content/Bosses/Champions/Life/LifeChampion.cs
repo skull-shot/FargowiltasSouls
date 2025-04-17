@@ -714,8 +714,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+
         }
 
         public override void HitEffect(NPC.HitInfo hit)

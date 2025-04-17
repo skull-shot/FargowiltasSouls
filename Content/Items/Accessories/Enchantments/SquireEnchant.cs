@@ -195,7 +195,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!vertical)
             {
                 player.FargoSouls().MonkDashing = 10;
-                player.velocity.X = 50 * (float)direction;
+                player.velocity.X = 22 * (float)direction;
             }
             else
             {
@@ -204,12 +204,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 //down
                 if (direction == 1)
                 {
-                    multi = 80;
+                    multi = 32;
                 }
                 //up
                 else
                 {
-                    multi = 40;
+                    multi = 18;
                 }
 
                 player.FargoSouls().MonkDashing = -10;

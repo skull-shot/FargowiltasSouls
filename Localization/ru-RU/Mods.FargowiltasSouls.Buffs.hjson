@@ -400,11 +400,6 @@ PurgedBuff: {
 	Description: Эффекты уворота не действуют
 }
 
-PurifiedBuff: {
-	DisplayName: Очищенный
-	Description: Вы чисты
-}
-
 RefreshedBuff: {
 	DisplayName: Освежение
 	Description: Увеличена мобильность и время полёта
