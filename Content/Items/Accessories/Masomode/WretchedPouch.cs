@@ -53,6 +53,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         
         public override void PostUpdateEquips(Player player)
         {
+            if (player.HasEffect<LithosphericEffect>() && player.HasEffect<PungentMinion>()) // combined
+                return;
             const int MaxChargeTime = 60 * 8;
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -62,7 +63,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 if (modPlayer.TribalCharmClickBonus)
                 {
                     modPlayer.TribalCharmClickBonus = false;
-                    player.GetDamage(DamageClass.Generic) += 0.30f;
+                    player.GetDamage(DamageClass.Generic) += 0.20f;
+                    if (player.HasEffect<PungentMinion>() && player.HasEffect<LithosphericEffect>())
+                    {
+                        foreach (Projectile p in Main.ActiveProjectiles)
+                        {
+                            if (p.TypeAlive<CrystalSkull>() && p.owner == player.whoAmI)
+                            {
+                                int charge = 30;
+                                if (p.localAI[0] >= 0 && p.localAI[0] < charge)
+                                    p.localAI[0] = charge;
+                                p.netUpdate = true;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             else if (player.ItemTimeIsZero && player.HasEffect<TribalCharmClickBonus>())
