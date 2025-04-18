@@ -60,20 +60,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                 State = 3;
                 return;
             }
-
-            // round npc.Top down to the nearest multiple of 16
-            targetPos = new (npc.Top.X - (npc.Top.X%16), npc.Top.Y - (npc.Top.Y % 16));
-            Tile t = Framing.GetTileSafely(targetPos);
-            // Find the yPos where the water ends
-            while (t.LiquidAmount > 0)
-            {
-                t = Framing.GetTileSafely(targetPos);
-                if (t.TileType == TileID.BreakableIce)
-                    break;
-                targetPos.Y -= 16;
-            }
-
-
         }
 
         public override bool SafePreAI(NPC npc)
@@ -103,9 +89,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                     bool inRange = Math.Abs(target.Center.X - npc.Center.X) < attackDist;
                     if (inRange)
                     {
-                        if (canStrike(target))
+                        if (canStrike(npc, target))
                         {
-                            destroyIce(target.Bottom.Y - (target.Bottom.Y % 16));
+                            destroyIce(target);
                             targetPos = target.Center;
                             State = 1;
                         }
@@ -139,33 +125,31 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
             return false;
         }
 
-        public bool canStrike(Player player)
+        public bool canStrike(NPC npc, Player player)
         {
             if (!player.active || player.dead)
                 return false;
 
-            // Check that the player is standing on breakable ice and the layer found in first tick matches the layer the player is standing on
             Tile bottom = Framing.GetTileSafely(player.Bottom);
-            float y1 = player.Bottom.Y - (player.Bottom.Y % 16);
-
             if (bottom.TileType != TileID.BreakableIce)
                 return false;
 
-            float y2 = targetPos.Y;
-            return y1 == y2;
+            return Collision.CanHitLine(npc.Center, 1, 1, player.Bottom + (16 * Vector2.UnitY), 1, 1);
         }
 
-        public void destroyIce(float yPos)
+        public void destroyIce(Player player)
         {
             if (!FargoSoulsUtil.HostCheck)
                 return;
 
             // Iterate to the right
-            int yPosition = (int) (yPos / 16f);
+            float xPos = player.Bottom.X - (player.Bottom.X % 16);
+            float y = player.Bottom.Y - (player.Bottom.Y % 16);
+            int yPosition = (int) (y / 16f);
             int x = 0;
             while (true)
             {
-                int xPosition = (int)(x + (targetPos.X / 16f));
+                int xPosition = (int)(x + (xPos / 16f));
 
                 if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
                     break;
@@ -194,7 +178,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
             x = -1;
             while (true)
             {
-                int xPosition = (int)(x + (targetPos.X / 16f));
+                int xPosition = (int)(x + (xPos / 16f));
 
                 if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
                     break;
