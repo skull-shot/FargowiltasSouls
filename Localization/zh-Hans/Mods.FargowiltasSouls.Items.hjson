@@ -1085,7 +1085,7 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly grant some shadowflame charge
+		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
 		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
 		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
 		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
@@ -1112,7 +1112,7 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly grant some shadowflame charge
+		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
 		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
 		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
 		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
