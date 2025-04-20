@@ -400,11 +400,6 @@ PurgedBuff: {
 	Description: Dodge effects don't work
 }
 
-PurifiedBuff: {
-	DisplayName: Purified
-	Description: You are cleansed
-}
-
 RefreshedBuff: {
 	DisplayName: Refreshed
 	Description: Increased mobility and flight time

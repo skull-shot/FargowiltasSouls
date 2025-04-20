@@ -56,6 +56,7 @@
     <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot2.png" />
+    <None Remove="Content\Projectiles\Souls\SpookySpinScythe.png" />
     <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
   <ItemGroup>

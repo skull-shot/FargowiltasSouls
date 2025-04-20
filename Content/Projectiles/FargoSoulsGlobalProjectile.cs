@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public int stormTimer;
         public float TungstenScale = 1;
         public bool TikiTagged;
-        private int spookyCD;
+        public int spookyCD;
         public bool FrostFreeze;
         //        public bool SuperBee;
         public bool ChilledProj;
@@ -582,54 +582,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 {
                     MahoganyEffect.MahoganyHookAI(projectile, modPlayer);
                 }
-
-                if (!projectile.hostile && !projectile.trap && !projectile.npcProj)
-                {
-
-                    if (player.HasEffect<SpookyEffect>()
-                        && projectile.minionSlots > 0 && spookyCD == 0)
-                    {
-                        float minDistance = 500f;
-                        int npcIndex = -1;
-                        for (int i = 0; i < Main.maxNPCs; i++)
-                        {
-                            NPC target = Main.npc[i];
-
-                            if (target.active && Vector2.Distance(projectile.Center, target.Center) < minDistance && Main.npc[i].CanBeChasedBy(projectile, false))
-                            {
-                                npcIndex = i;
-                                minDistance = Vector2.Distance(projectile.Center, target.Center);
-                            }
-                        }
-
-                        if (npcIndex != -1)
-                        {
-                            NPC target = Main.npc[npcIndex];
-
-                            if (Collision.CanHit(projectile.Center, 0, 0, target.Center, 0, 0))
-                            {
-                                Vector2 velocity = Vector2.Normalize(target.Center - projectile.Center) * 20;
-
-                                int cdMultiplier = 2;
-
-                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage * cdMultiplier, 2, projectile.owner);
-
-                                SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.5f }, projectile.Center);
-
-                                spookyCD = 30 + Main.rand.Next(player.maxMinions * 5);
-
-                                if (modPlayer.ForceEffect<SpookyEnchant>())
-                                {
-                                    spookyCD -= 10;
-                                }
-                                spookyCD *= cdMultiplier;
-                            }
-                        }
-
-                    }
-                }
-
-                
             }
 
             if (ChilledTimer > 0)
@@ -1485,7 +1437,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (TikiTagged)
             {
-                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.4f : 1.2f;
+                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.35f : 1.15f;
                 TikiTagged = false;
             }
                 

@@ -468,7 +468,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<OceanicSealBuff>(),
                     ModContent.BuffType<OiledBuff>(),
                     ModContent.BuffType<PurgedBuff>(),
-                    ModContent.BuffType<PurifiedBuff>(),
                     ModContent.BuffType<RushJobBuff>(),
                     ModContent.BuffType<ReverseManaFlowBuff>(),
                     ModContent.BuffType<RottingBuff>(),

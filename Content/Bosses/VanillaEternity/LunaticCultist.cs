@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)(npc.lifeMax * 5f / 3f); //Down from x2, compensation for 1.4.4 buff
+            npc.lifeMax = (int)(npc.lifeMax * 4f / 3f);
 
         }
 
@@ -648,8 +648,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
         }
     }
 

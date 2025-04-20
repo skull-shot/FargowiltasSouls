@@ -162,7 +162,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Obstructed] = true;
             player.buffImmune[BuffID.Dazed] = true;
             fargoPlayer.SkullCharm = true;
-            fargoPlayer.LumpOfFlesh = true;
             fargoPlayer.PungentEyeball = true;
             player.AddEffect<PungentEyeballCursor>(Item);
             player.buffImmune[ModContent.BuffType<CrystalSkullBuff>()] = true;
@@ -293,7 +292,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<PurifiedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ReverseManaFlowBuff>()] = true;
             player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ShadowflameBuff>()] = true;

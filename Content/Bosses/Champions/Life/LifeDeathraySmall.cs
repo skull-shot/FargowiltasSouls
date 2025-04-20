@@ -117,8 +117,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<PurifiedBuff>(), 300);
+
         }
     }
 }

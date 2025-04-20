@@ -118,7 +118,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.PurifiedBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<Buffs.Masomode.LethargicBuff>(), 300);
             }
 

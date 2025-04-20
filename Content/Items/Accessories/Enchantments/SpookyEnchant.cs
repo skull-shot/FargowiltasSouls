@@ -1,6 +1,11 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,7 +18,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             base.SetStaticDefaults();
         }
-
+        public override List<AccessoryEffect> ActiveSkillTooltips => 
+            [AccessoryEffectLoader.GetEffect<SpookyEffect>()];
         public override Color nameColor => new(100, 78, 116);
 
 
@@ -54,6 +60,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpookyEnchant>();
-        public override bool ExtraAttackEffect => true;
+        public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<SpookyEffect>();
+        public override void PostUpdateEquips(Player player)
+        {
+            
+        }
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            if (player.FargoSouls().SpookyCD > 0)
+                return;
+            bool wiz = player.ForceEffect<SpookyEffect>();
+            if (Main.myPlayer == player.whoAmI)
+            {
+                int baseDmg = wiz ? 550 : 400;
+                float melee = player.ActualClassDamage(DamageClass.Melee);
+                float summon = player.ActualClassDamage (DamageClass.Summon);
+                int dmg = (int)(baseDmg * (((melee + summon - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), dmg, 1f, player.whoAmI);
+            }
+            int cd = wiz ? 8 : 12;
+            player.FargoSouls().SpookyCD = cd * 60;
+            CooldownBarManager.Activate("SpookyEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SpookyEnchant").Value, new(100, 78, 116),
+                () => Main.LocalPlayer.FargoSouls().SpookyCD / (cd * 60f), true, activeFunction: player.HasEffect<SpookyEffect>);
+        }
     }
 }

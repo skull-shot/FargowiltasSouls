@@ -248,10 +248,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 float threshold = 400;
                 float distanceFactor = MathF.Abs(Target.Center.X - NPC.Center.X) / threshold;
+                float accel = 0.4f;
                 if (NPC.velocity.X.NonZeroSign() != xDir || distanceFactor > 1)
-                    NPC.velocity.X += xDir * 0.7f;
+                    NPC.velocity.X += xDir * accel;
                 else
-                    NPC.velocity.X += xDir * 0.7f * distanceFactor;
+                    NPC.velocity.X += xDir * accel * distanceFactor;
                 int cap = 14;
                 if (Cycle == 0)
                     cap = 12;
@@ -316,7 +317,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (NPC.velocity.Y == 0) // grounded
                 {
-                    NPC.velocity.X = xDir * 24;
+                    float x = MathF.Abs(Target.Center.X - NPC.Center.X) / 350;
+                    x = MathHelper.Clamp(x, 0.2f, 1f);
+                    NPC.velocity.X = xDir * 24 * x;
                     NPC.velocity.Y = -38;
                     Timer = 1;
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/VanillaEternity/KingSlime/KSJump"), NPC.Center);
@@ -372,7 +375,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                         }
                     }
-
                 }
                 else
                 {
@@ -482,6 +484,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             int telegraphTime = 70;
             int explosionTime = 70;
+            if (WorldSavingSystem.MasochistModeReal)
+            {
+                telegraphTime /= 2;
+                explosionTime /= 2;
+            }
             if (Timer == 0)
             {
                 Particle p = new ExpandingBloomParticle(NPC.Center, Vector2.Zero, Color.Blue, Vector2.One, Vector2.One * 60, telegraphTime, true, Color.Transparent);
@@ -490,19 +497,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             if (Timer == telegraphTime)
             {
-                SoundEngine.PlaySound(SoundID.Item167, NPC.Center);
-                int halfBlobs = 6;
-                if (FargoSoulsUtil.HostCheck)
-                {
-                    for (int i = -halfBlobs; i <= halfBlobs; i++)
-                    {
-                        Vector2 dir = -Vector2.UnitY.RotatedBy(MathHelper.PiOver2 * 0.6f * i / halfBlobs);
-                        dir = dir.RotatedByRandom(MathHelper.PiOver2 * 0.07f);
-
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir * Main.rand.NextFloat(10f, 40f), dir * Main.rand.NextFloat(11f, 18f), ModContent.ProjectileType<KingSlimeBall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                    }
-                }
-
+                ExplosionProjectiles();
             }
             if (Timer >= telegraphTime + explosionTime)
             {
@@ -511,6 +506,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return;
             }
             Timer++;
+        }
+        public void ExplosionProjectiles()
+        {
+            SoundEngine.PlaySound(SoundID.Item167, NPC.Center);
+            int halfBlobs = 6;
+            if (FargoSoulsUtil.HostCheck)
+            {
+                for (int i = -halfBlobs; i <= halfBlobs; i++)
+                {
+                    Vector2 dir = -Vector2.UnitY.RotatedBy(MathHelper.PiOver2 * 0.6f * i / halfBlobs);
+                    dir = dir.RotatedByRandom(MathHelper.PiOver2 * 0.07f);
+
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir * Main.rand.NextFloat(10f, 40f), dir * Main.rand.NextFloat(11f, 18f), ModContent.ProjectileType<KingSlimeBall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                }
+            }
         }
         public void ResetState()
         {
@@ -552,6 +562,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public void CheckExplosion()
         {
+            if (WorldSavingSystem.MasochistModeReal)
+            {
+                if (Cycle == 2) // after big jump
+                {
+                    ResetState();
+                    State = (int)States.Explosion;
+                }
+                return;
+            }
             if (ExplosionCD > 0)
             {
                 ExplosionCD--;

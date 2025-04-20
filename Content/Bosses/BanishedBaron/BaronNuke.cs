@@ -179,8 +179,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
             if (Timer >= Duration - 2)
             {
-                target.FargoSouls().MaxLifeReduction += 50;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 20);
+                target.FargoSouls().MaxLifeReduction += 30;
+                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 12);
                 target.AddBuff(BuffID.BrokenArmor, 60 * 40);
             }
         }

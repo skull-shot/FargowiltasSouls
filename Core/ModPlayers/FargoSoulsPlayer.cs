@@ -377,7 +377,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             PlanterasChild = false;
             SkullCharm = false;
             PungentEyeball = false;
-            LumpOfFlesh = false;
             LihzahrdTreasureBoxItem = null;
             BetsysHeartItem = null;
             BetsyDashing = false;
@@ -446,7 +445,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Asocial = false;
             Kneecapped = false;
             Defenseless = false;
-            Purified = false;
             Infested = false;
             Rotting = false;
             SqueakyToy = false;
@@ -615,7 +613,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             MythrilTimer = 0;
             MythrilDelay = 20;
-            BeetleEnchantDefenseTimer = 0;
 
             Mash = false;
             WizardEnchantActive = false;
@@ -641,6 +638,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ManageLifeReduction()
         {
+            if (MaxLifeReduction > 100)
+                MaxLifeReduction = 100;
+
             if (OceanicMaul && LifeReductionUpdateTimer <= 0)
                 LifeReductionUpdateTimer = 1; //trigger life reduction behaviour
 
@@ -838,17 +838,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Main.dust[dust].velocity *= 1.8f;
                     Main.dust[dust].velocity.Y -= 0.5f;
                     drawInfo.DustCache.Add(dust);
-                }
-            }
-
-            if (Purified)
-            {
-                if (drawInfo.shadow == 0f)
-                {
-                    int index2 = Dust.NewDust(Player.position, Player.width, Player.height, DustID.GemDiamond, 0.0f, 0.0f, 100, default, 2.5f);
-                    Main.dust[index2].velocity *= 2f;
-                    Main.dust[index2].noGravity = true;
-                    drawInfo.DustCache.Add(index2);
                 }
             }
 
