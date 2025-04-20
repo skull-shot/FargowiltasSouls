@@ -140,6 +140,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             p.idStaticNPCHitCooldown = 10;
                             p.FargoSouls().noInteractionWithNPCImmunityFrames = true;
                             p.extraUpdates += 1;
+                            p.velocity = p.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.15f);
+                            p.velocity *= Main.rand.NextFloat(0.8f, 1.2f);
                             p.DamageType = DamageClass.Default;
                         }
                     }

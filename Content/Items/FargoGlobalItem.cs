@@ -491,7 +491,13 @@ namespace FargowiltasSouls.Content.Items
                     SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.5f }, player.Center);
                     foreach (Projectile p in FargoSoulsUtil.XWay(10, player.GetSource_EffectItem<JungleJump>(), new Vector2(player.Center.X, player.Center.Y + player.height / 2), ProjectileID.SporeCloud, 3f, FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 0))
                     {
+                        p.usesIDStaticNPCImmunity = true;
+                        p.idStaticNPCHitCooldown = 10;
+                        p.FargoSouls().noInteractionWithNPCImmunityFrames = true;
                         p.extraUpdates += 1;
+                        p.velocity = p.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.15f);
+                        p.velocity *= Main.rand.NextFloat(0.8f, 1.2f);
+                        p.DamageType = DamageClass.Default;
                     }
 
                     modPlayer.JungleCD = 24;
