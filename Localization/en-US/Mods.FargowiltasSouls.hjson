@@ -96,4 +96,5 @@ Emotes: {
 	TimberEmote.Command: timber
 	TrojanEmote.Command: trojan
 	WillEmote.Command: will
+	SoulOfEternityEmote.Command: soe
 }

@@ -83,9 +83,9 @@ PetMLConfig: "[i:4810][c/ffffff:{$Mods.FargowiltasSouls.Toggler.PetMLConfig}]"
 Emotes: {
 	// BaronEmote.Command: baron
 	// CoffinEmote.Command: coffin
-	// DeathEmote.Command: death
+	// DeathEmote.Command: deathchamp
 	// EarthEmote.Command: earth
-	// EnchantEmote.Command: enchante
+	// EnchantEmote.Command: enchantment
 	// EridanusEmote.Command: eridanus
 	// GiftEmote.Command: gift
 	// LifeEmote.Command: life
@@ -96,4 +96,5 @@ Emotes: {
 	// TimberEmote.Command: timber
 	// TrojanEmote.Command: trojan
 	// WillEmote.Command: will
+	// SoulOfEternityEmote.Command: soulofeternityemote
 }
