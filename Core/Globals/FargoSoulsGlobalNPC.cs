@@ -14,6 +14,7 @@ using FargowiltasSouls.Content.NPCs.Critters;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.ChallengerItems;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.UI.Emotes;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -28,6 +29,7 @@ using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.GameContent.UI;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -1275,7 +1277,7 @@ namespace FargowiltasSouls.Core.Globals
                 WoodCompletionEffect.WoodCheckDead(modPlayer, npc);
             }
 
-            if (player.HasEffect<CactusEffect>() && npc.lifeMax > 10 && !npc.townNPC && npc.lifeMax != int.MaxValue) //super dummy
+            if (Needled && npc.lifeMax > 10 && !npc.townNPC && npc.lifeMax != int.MaxValue) //super dummy
             {
                 CactusEffect.CactusProc(npc, player);
             }
@@ -1430,6 +1432,51 @@ namespace FargowiltasSouls.Core.Globals
                 shop[nextSlot] = ModContent.ItemType<MechLure>();
                 nextSlot++;
             }
+        }
+
+        public override int? PickEmote(NPC npc, Player closestPlayer, List<int> emoteList, WorldUIAnchor otherAnchor)
+        {
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[9])
+                emoteList.Add(ModContent.EmoteBubbleType<TrojanEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[11])
+                emoteList.Add(ModContent.EmoteBubbleType<CoffinEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[12])
+                emoteList.Add(ModContent.EmoteBubbleType<BaronEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[10])
+                emoteList.Add(ModContent.EmoteBubbleType<LifelightEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[0])
+                emoteList.Add(ModContent.EmoteBubbleType<TimberEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[1])
+                emoteList.Add(ModContent.EmoteBubbleType<TerraEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[2])
+                emoteList.Add(ModContent.EmoteBubbleType<EarthEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[3])
+                emoteList.Add(ModContent.EmoteBubbleType<NatureEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[4])
+                emoteList.Add(ModContent.EmoteBubbleType<LifeEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[5])
+                emoteList.Add(ModContent.EmoteBubbleType<DeathEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[6])
+                emoteList.Add(ModContent.EmoteBubbleType<SpiritEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[7])
+                emoteList.Add(ModContent.EmoteBubbleType<WillEmote>());
+
+            if (Main.rand.NextBool(3) && WorldSavingSystem.DownedBoss[8])
+                emoteList.Add(ModContent.EmoteBubbleType<EridanusEmote>());
+
+
+            return base.PickEmote(npc, closestPlayer, emoteList, otherAnchor);
         }
 
     }

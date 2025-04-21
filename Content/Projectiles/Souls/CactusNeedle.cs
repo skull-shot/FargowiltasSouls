@@ -51,8 +51,6 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.timeLeft = 0;
-
             if (Projectile.ai[0] == 1)
             {
                 target.FargoSouls().Needled = true;

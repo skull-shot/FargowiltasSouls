@@ -79,3 +79,22 @@
 // PetMartianConfig: "[i:4815][c/ffffff:{$Mods.FargowiltasSouls.Toggler.PetMartianConfig}]"
 // PetLCConfig: "[i:4809][c/ffffff:{$Mods.FargowiltasSouls.Toggler.PetLCConfig}]"
 // PetMLConfig: "[i:4810][c/ffffff:{$Mods.FargowiltasSouls.Toggler.PetMLConfig}]"
+
+Emotes: {
+	// BaronEmote.Command: baron
+	// CoffinEmote.Command: coffin
+	// DeathEmote.Command: deathchamp
+	// EarthEmote.Command: earth
+	// EnchantEmote.Command: enchantment
+	// EridanusEmote.Command: eridanus
+	// GiftEmote.Command: gift
+	// LifeEmote.Command: life
+	// LifelightEmote.Command: lifelight
+	// NatureEmote.Command: nature
+	// SpiritEmote.Command: spirit
+	// TerraEmote.Command: terra
+	// TimberEmote.Command: timber
+	// TrojanEmote.Command: trojan
+	// WillEmote.Command: will
+	// SoulOfEternityEmote.Command: soulofeternityemote
+}
