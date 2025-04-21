@@ -103,6 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public ref float AI0 => ref NPC.localAI[0];
         public ref float AI1 => ref NPC.localAI[1];
         public ref float PreviousState => ref NPC.localAI[2];
+        public ref float Squimgsh => ref NPC.localAI[3];
 
         public override bool SafePreAI(NPC npc)
         {
@@ -122,7 +123,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             if (!NPC.HasValidTarget)
                 return true;
-
+            if (!PhaseTwo)
+                NPC.noGravity = false;
             // ai here
             switch ((States)State)
             {
@@ -151,8 +153,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         #region States
         private void Hops()
         {
-            int startup = 15;
-            int hops = 2;
+            int startup = 40;
+            int hops = 1;
             if (Timer < startup)
             {
                 Timer++;
@@ -203,8 +205,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private void NormalSlam()
         {
             // go straight above player, then slam straight down 
-            int slamPrepTime = 25;
-            int endTime = 30;
+            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
+            int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
             int abovePlayer = 250;
             if (Timer == 0) // moving to slam
             {
@@ -284,8 +286,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private void MinionSlam()
         {
             // go straight above player, then slam straight down 
-            int slamPrepTime = 25;
-            int endTime = 20;
+            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
+            int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
             int abovePlayer = 250;
             if (Timer == 0) // moving to slam
             {
@@ -401,7 +403,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Target.Bottom.Y < NPC.Bottom.Y)
                         y = -18;
                     NPC.velocity.Y = y;
+                    if (Math.Abs(Target.Center.X - NPC.Center.X) < 240)
+                        NPC.velocity.X *= -0.7f;
                     Timer++;
+
+                    if (!WorldSavingSystem.MasochistModeReal)
+                        minionTimer *= -1;
+                    minionTimer = minionTimer.NonZeroSign();
+                    minionDir = NPC.HorizontalDirectionTo(Target.Center);
                 }
                 else
                 {
@@ -414,10 +423,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         return;
                     }
                 }
-                if (!WorldSavingSystem.MasochistModeReal)
-                    minionTimer *= -1;
-                minionTimer = minionTimer.NonZeroSign();
-                minionDir = NPC.HorizontalDirectionTo(Target.Center);
             }
             else
             {
@@ -430,7 +435,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (FargoSoulsUtil.HostCheck)
                         {
                             int i = (int)(minionTimer / freq) - 2; // -1, 0, 1
-                            int offset = i * 250 * (int)minionDir; // offset in x-position from player when diving
+                            int offset = i * 240 * (int)minionDir; // offset in x-position from player when diving
                             Vector2 dir = new(-minionDir * 700 + offset / 10, -300);
                             dir.Normalize();
                             Vector2 vel = 20f * dir;
@@ -445,7 +450,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NPC.velocity.Y += 0.4f;
                 float horDir = NPC.HorizontalDirectionTo(Target.Center);
                 if (NPC.velocity.X.NonZeroSign() != horDir)
-                    NPC.velocity.X += horDir * 0.5f;
+                    NPC.velocity.X += horDir * 0.15f;
             }
 
 

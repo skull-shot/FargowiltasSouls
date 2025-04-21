@@ -2,6 +2,7 @@ using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -61,7 +62,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         }
         public ref float Offset => ref NPC.ai[0];
         public ref float Timer => ref NPC.ai[1];
-        public ref float Dir => ref NPC.ai[2];
         public override void AI()
         {
             if (!NPC.AnyNPCs(NPCID.QueenSlimeBoss) || !EModeGlobalNPC.queenSlimeBoss.IsWithinBounds(Main.maxNPCs))
@@ -88,10 +88,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.HasPlayerTarget)
             {
                 Player player = Main.player[NPC.target];
-                if (Dir == 0)
-                {
-                    Dir = NPC.HorizontalDirectionTo(player.Center);
-                }
                 if (Timer <= 0)
                 {
                     Timer--;
@@ -106,7 +102,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 else
                 {
                     Timer++;
-                    NPC.velocity.X = MathHelper.Lerp(NPC.velocity.X, Dir * 8, 0.1f);
+                    float dir = queenSlime.HorizontalDirectionTo(player.Center);
+                    NPC.velocity.X = MathHelper.Lerp(NPC.velocity.X, dir * 13, 0.1f);
                     NPC.velocity.Y += 0.5f;
                     if (Timer > 100)
                     {
@@ -123,7 +120,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         }
         public void Movement(Vector2 targetPos)
         {
-            float speedModifier = 0.85f;
+            float speedModifier = 1.2f;
             float accel = 1f * speedModifier;
             float decel = 1.5f * speedModifier;
             float resistance = NPC.velocity.Length() * accel / (22f * speedModifier);
