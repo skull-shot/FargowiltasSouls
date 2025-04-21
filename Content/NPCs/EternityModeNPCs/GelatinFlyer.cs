@@ -59,9 +59,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             modifiers.Knockback *= 0f;
             modifiers.DisableKnockback();
         }
-        public ref float StopHoming => ref NPC.ai[0];
-        public ref float BeenOutside => ref NPC.ai[1];
-        public ref float Timer => ref NPC.ai[2];
+        public ref float Offset => ref NPC.ai[0];
+        public ref float Timer => ref NPC.ai[1];
+        public ref float Dir => ref NPC.ai[2];
         public override void AI()
         {
             if (!NPC.AnyNPCs(NPCID.QueenSlimeBoss) || !EModeGlobalNPC.queenSlimeBoss.IsWithinBounds(Main.maxNPCs))
@@ -88,37 +88,31 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.HasPlayerTarget)
             {
                 Player player = Main.player[NPC.target];
-                Vector2 vectorToIdlePosition = player.Center - NPC.Center;
-                float num = vectorToIdlePosition.Length();
-                float speed = 18f;
-                float inertia = 45f;
-                float deadzone = 150f;
-                if (num > deadzone && StopHoming == 0)
+                if (Dir == 0)
                 {
-                    vectorToIdlePosition.Normalize();
-                    vectorToIdlePosition *= speed;
-                    NPC.velocity = (NPC.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
+                    Dir = NPC.HorizontalDirectionTo(player.Center);
                 }
-                else if (NPC.velocity == Vector2.Zero)
+                if (Timer <= 0)
                 {
-                    NPC.velocity.X = -0.15f;
-                    NPC.velocity.Y = -0.05f;
+                    Timer--;
+                    Vector2 hoverPos = new(player.Center.X + Offset, player.Center.Y - 190);
+                    Movement(hoverPos);
+                    if (NPC.Distance(hoverPos) < 60 && Timer < -30)
+                    {
+                        Timer = 1;
+                        NPC.netUpdate = true;
+                    }
                 }
-                if (num > deadzone)
+                else
                 {
-                    BeenOutside = 1;
-                }
-                if (num < deadzone && BeenOutside != 0)
-                {
-                    StopHoming = 1;
-                }
-                if (++Timer > 60)
-                    StopHoming = 1;
-
-                if (NPC.Distance(player.Center) > 1200 || Timer > 60 * 5)
-                {
-                    NPC.active = false;
-                    return;
+                    Timer++;
+                    NPC.velocity.X = MathHelper.Lerp(NPC.velocity.X, Dir * 8, 0.1f);
+                    NPC.velocity.Y += 0.5f;
+                    if (Timer > 100)
+                    {
+                        NPC.active = false;
+                        return;
+                    }
                 }
             }
             else
@@ -126,6 +120,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 NPC.active = false;
                 return;
             }
+        }
+        public void Movement(Vector2 targetPos)
+        {
+            float speedModifier = 0.85f;
+            float accel = 1f * speedModifier;
+            float decel = 1.5f * speedModifier;
+            float resistance = NPC.velocity.Length() * accel / (22f * speedModifier);
+            NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Center, targetPos, NPC.velocity, accel - resistance, decel + resistance);
         }
 
         /*

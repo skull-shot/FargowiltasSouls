@@ -86,12 +86,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC parent = Main.npc[EModeGlobalNPC.queenSlimeBoss];
 
             //move slower during rain attack
-            if (NPC.Distance(Main.player[NPC.target].Center) < 600 &&
-                (parent.GetGlobalNPC<QueenSlime>().RainTimer > 0
-                || NPC.AnyNPCs(ModContent.NPCType<GelatinSlime>())))
+            /*
+            if (NPC.Distance(Main.player[NPC.target].Center) < 600 && (parent.GetGlobalNPC<QueenSlime>().RainTimer > 0 || NPC.AnyNPCs(ModContent.NPCType<GelatinSlime>())))
             {
                 NPC.localAI[0] = cooldown;
             }
+            */
 
             if (NPC.Distance(parent.Center) > 2000)
                 NPC.Center = parent.Center;

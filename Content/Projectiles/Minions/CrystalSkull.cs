@@ -124,7 +124,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     }
                 }
             }
-            else if (player.controlUseItem || clickTimer > 0 && Projectile.localAI[0] <= chargeTime * 2f)
+            else if ((player.HeldItem != null && player.HeldItem.IsWeapon() && player.controlUseItem) || clickTimer > 0 && Projectile.localAI[0] <= chargeTime * 2f)
             {
                 clickTimer--;
 
@@ -183,7 +183,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 
             }
 
-            if (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0)
+            if (player.HeldItem != null && player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
                 clickTimer = 20;
 
             Projectile.spriteDirection = System.Math.Abs(MathHelper.WrapAngle(Projectile.rotation)) > MathHelper.PiOver2 ? -1 : 1;

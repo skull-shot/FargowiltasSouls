@@ -55,8 +55,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         {
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.queenSlimeBoss, NPCID.QueenSlimeBoss))
             {
-                if (Main.npc[EModeGlobalNPC.queenSlimeBoss].GetGlobalNPC<QueenSlime>().RainTimer > -90)
-                    Main.npc[EModeGlobalNPC.queenSlimeBoss].GetGlobalNPC<QueenSlime>().RainTimer = -90;
+                //if (Main.npc[EModeGlobalNPC.queenSlimeBoss].GetGlobalNPC<QueenSlime>().RainTimer > -90)
+                //    Main.npc[EModeGlobalNPC.queenSlimeBoss].GetGlobalNPC<QueenSlime>().RainTimer = -90;
 
                 if (!WorldSavingSystem.MasochistModeReal)
                 {
@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
                     NPC.position.Y -= 16;
 
-                if (NPC.ai[0] < -210)
+                if (NPC.ai[0] < -100)
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {

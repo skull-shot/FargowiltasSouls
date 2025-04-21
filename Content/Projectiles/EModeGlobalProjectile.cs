@@ -1168,54 +1168,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.QueenSlimeGelAttack:
-
-                    if (!WorldSavingSystem.MasochistModeReal)
-                    {
-                        float ratio = Math.Max(0, 1f - counter / 60f / projectile.MaxUpdates);
-                        projectile.position -= projectile.velocity * ratio; //accel startup
-                        projectile.velocity.Y -= 0.15f * ratio; //compensate the gravity
-                    }
-
-                    if (!firstTickAICheckDone)
-                    {
-                        //if (projectile.velocity.Y > 0)
-                        //    projectile.velocity.Y *= -.5f; //shoot up instead
-
-                        //p1 always shoots up
-                        if (sourceNPC is NPC && sourceNPC.type == NPCID.QueenSlimeBoss && sourceNPC.life > sourceNPC.lifeMax / 2)
-                            projectile.velocity.Y -= 6f;
-                    }
-
-                    //when begins falling, spray out
-                    if (projectile.velocity.Y > 0 && projectile.localAI[0] == 0)
-                    {
-                        projectile.localAI[0] = 1;
-
-                        for (int j = -1; j <= 1; j += 2)
-                        {
-                            if (Math.Sign(projectile.velocity.X) == -j) //very specific phrasing so 0 horiz sprays both ways
-                                continue;
-
-                            Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(10 * j));
-                            const int max = 12;
-                            for (int i = 0; i < max; i++)
-                            {
-                                Vector2 vel = Main.rand.NextFloat(6f, 18f) * j * baseVel.RotatedBy(MathHelper.PiOver4 / max * (i + 0.5f) * -j);
-                                vel *= WorldSavingSystem.MasochistModeReal ? 2f : 1.5f;
-                                if (FargoSoulsUtil.HostCheck)
-                                    Projectile.NewProjectile(Entity.InheritSource(projectile), projectile.Center, vel, ProjectileID.QueenSlimeMinionBlueSpike, projectile.damage, 0f, Main.myPlayer);
-                            }
-                        }
-                    }
+                    projectile.velocity.Y += 0.12f;
                     break;
 
                 case ProjectileID.QueenSlimeMinionPinkBall:
-                    if (!WorldSavingSystem.MasochistModeReal)
-                    {
-                        float ratio = Math.Max(0, 1f - counter / 60f / projectile.MaxUpdates);
-                        projectile.position -= projectile.velocity * ratio; //accel startup
-                        projectile.velocity.Y -= 0.15f * ratio; //compensate the gravity
-                    }
                     break;
 
                 default:

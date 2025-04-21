@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 {
                     modPlayer.TribalCharmClickBonus = false;
                     player.GetDamage(DamageClass.Generic) += 0.20f;
-                    if (player.HasEffect<PungentMinion>() && player.HasEffect<LithosphericEffect>())
+                    if (player.HasEffect<PungentMinion>() && player.HasEffect<LithosphericEffect>() && player.HeldItem != null && player.HeldItem.IsWeapon())
                     {
                         foreach (Projectile p in Main.ActiveProjectiles)
                         {
