@@ -29,9 +29,9 @@ namespace FargowiltasSouls.Content.Buffs
 
             player.FargoSouls().Berserked = true;
 
-            player.FargoSouls().AttackSpeed += 0.50f;
-            player.GetDamage(DamageClass.Generic) += 0.20f;
-            player.GetCritChance(DamageClass.Generic) += 20;
+            player.FargoSouls().AttackSpeed += 0.35f;
+            //player.GetDamage(DamageClass.Generic) += 0.20f;
+            //player.GetCritChance(DamageClass.Generic) += 20;
             player.moveSpeed += 0.20f;
 
             player.hasMagiluminescence = true;
