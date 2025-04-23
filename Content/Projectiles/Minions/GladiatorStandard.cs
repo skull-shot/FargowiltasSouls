@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         {
             hits++;
         }
-        public static int AuraSize(Player player) => player.FargoSouls().ForceEffect<GladiatorEnchant>() ? 800 : 400;
+        public static int AuraSize(Player player) => 400;
         public override void AI()
         {
             if (!Projectile.owner.IsWithinBounds(Main.maxPlayers))

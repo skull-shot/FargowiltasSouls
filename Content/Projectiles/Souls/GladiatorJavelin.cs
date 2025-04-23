@@ -27,8 +27,6 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 1;
             Projectile.penetrate = 1;
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
             
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
