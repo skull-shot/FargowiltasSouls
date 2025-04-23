@@ -1222,6 +1222,8 @@ namespace FargowiltasSouls.Content.Projectiles
         private int FadeTimer = 0;
         public override void PostAI(Projectile projectile)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
