@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     foreach (Projectile p in Main.projectile.Where(p => p.TypeAlive(GladiatorStandard) && p.owner == player.whoAmI))
                         p.Kill();
-                    Projectile.NewProjectile(player.GetSource_EffectItem<GladiatorBanner>(), player.Top, Vector2.UnitY * 25, GladiatorStandard, modPlayer.ForceEffect<GladiatorEnchant>() ? 300 : 100, 3f, player.whoAmI);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<GladiatorBanner>(), player.Top, Vector2.UnitY * 25, GladiatorStandard, modPlayer.ForceEffect<GladiatorEnchant>() ? 200 : 50, 3f, player.whoAmI);
                     modPlayer.GladiatorStandardCD = LumUtils.SecondsToFrames(15);
 
                     if (player.whoAmI == Main.myPlayer)
@@ -170,7 +170,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         Projectile.NewProjectile(player.GetSource_Accessory(effectItem), spawn, Vector2.Normalize(aim - spawn).RotatedByRandom(MathHelper.Pi / 20) * speed, ModContent.ProjectileType<GladiatorJavelin>(), (int)spearDamage, 4f, Main.myPlayer);
                     }
 
-                    modPlayer.GladiatorCD = force ? 10 : 30;
+                    modPlayer.GladiatorCD = 30;
                     modPlayer.GladiatorCD = buff ? modPlayer.GladiatorCD : (int)Math.Round(modPlayer.GladiatorCD * 1.5f);
                 }
             }
