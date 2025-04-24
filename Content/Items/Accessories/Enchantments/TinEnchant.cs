@@ -145,7 +145,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
                 else
                 {
-                    modPlayer.TinProcCD = 60;
+                    modPlayer.TinProcCD = 90;
                 }
             }
         }
