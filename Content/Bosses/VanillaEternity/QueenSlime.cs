@@ -38,6 +38,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private const float StompTravelTime = 60;
         private const float StompGravity = 1.6f;
 
+        public List<States> AvailableStates = [];
+
         // phase 1 cycles between attacks randomly, without direct repetition
         // mixes in superslam on consistent 10 second cooldown
         public enum States
@@ -55,7 +57,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             MinionChargeDirect,
             MinionChargeSide,
             Artillery,
-            Rain
+            SpikeRain
         }
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
@@ -128,6 +130,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             // ai here
             switch ((States)State)
             {
+                // p1
                 case States.Hops:
                     Hops();
                     break;
@@ -140,8 +143,22 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case States.QuickHops:
                     QuickHops();
                     break;
+                // both
                 case States.TripleSuperslam:
                     Stompy();
+                    break;
+                // p2
+                case States.MinionChargeDirect:
+                    MinionChargeDirect();
+                    break;
+                case States.MinionChargeSide:
+                    MinionChargeSide();
+                    break;
+                case States.Artillery:
+                    Artillery();
+                    break;
+                case States.SpikeRain:
+                    SpikeRain();
                     break;
             }
             if (StompTimer < 0)
@@ -524,6 +541,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     StompCounter = 0;
                     StompTimer = -720;
+                    if (PhaseTwo)
+                        StompTimer *= 2;
 
                     npc.velocity.X = 0;
 
@@ -596,6 +615,54 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return;
             }
         }
+        private void MinionChargeDirect()
+        {
+
+        }
+        private void MinionChargeSide()
+        {
+
+        }
+        private void Artillery()
+        {
+            int windup = 35;
+            int attackLength = 60;
+            int endlag = 30;
+            float horDir = NPC.HorizontalDirectionTo(Target.Center);
+            Vector2 desiredPos = Target.Center + Vector2.UnitX * -horDir * 490;
+            Movement(desiredPos, 1f);
+
+            Timer++;
+            if (Timer < windup)
+            {
+
+            }
+            else if (Timer < windup + attackLength)
+            {
+                float attackTimer = Timer - windup;
+                float progress = attackTimer / attackLength;
+                if (attackTimer % 5 == 0)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        float vel = 10f + 20f * MathF.Pow(progress, 0.8f);
+                        float sqrt2 = MathF.Sqrt(2);
+                        float verticalDir = MathHelper.Lerp(-0.6f, -0.9f, MathF.Pow(progress, 0.8f));
+                        Vector2 dir = new(horDir / sqrt2, verticalDir / sqrt2);
+                        Vector2 offset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + offset + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
+                    }
+                }
+            }
+            else if (Timer > windup + attackLength + endlag)
+            {
+                ResetToNeutral();
+            }
+        }
+        private void SpikeRain()
+        {
+
+        }
         #endregion
         #region Help Methods
         public void ResetState()
@@ -616,7 +683,22 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else
             {
-
+                if (AvailableStates.Count == 0)
+                {
+                    List<States> states = [
+                        //States.MinionChargeDirect, 
+                        //States.MinionChargeSide, 
+                        States.Artillery,
+                        //States.SpikeRain
+                        ];
+                    AvailableStates.AddRange(states);
+                }
+                //AvailableStates.Remove((States)State);
+                State = (int)Main.rand.NextFromCollection(AvailableStates);
+                AvailableStates.Remove((States)State);
+                NetSync(NPC);
+                NPC.netUpdate = true;
+                ResetState();
             }
             CheckStompy();
         }
@@ -635,14 +717,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void CheckStompy()
         {
             if (StompTimer < 0 && (!Collision.CanHitLine(NPC.position, NPC.width, NPC.height, Target.Center, 1, 1) || NPC.Distance(Target.Center) > 1200))
+            {
+                StompCounter = -3; // enrage
                 StompTimer = 0;
+            }
+                
             if (StompTimer >= 0)
             {
                 State = (int)States.TripleSuperslam;
                 NetSync(NPC);
             }
         }
-        #endregion
+        public void Movement(Vector2 targetPos, float speedModifier)
+        {
+            float accel = 1f * speedModifier;
+            float decel = 1.5f * speedModifier;
+            float resistance = NPC.velocity.Length() * accel / (22f * speedModifier);
+            NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Center, targetPos, NPC.velocity, accel - resistance, decel + resistance);
+        }
         private static bool Grounded(NPC npc) => npc.velocity.Y == 0 || NPCInAnyTiles(npc);
         private static bool NPCInAnyTiles(NPC npc)
         {
@@ -663,6 +755,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             return isInTilesIncludingPlatforms;
         }
+        #endregion
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
