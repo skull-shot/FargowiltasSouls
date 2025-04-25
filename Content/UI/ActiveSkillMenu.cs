@@ -11,6 +11,7 @@ using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace FargowiltasSouls.Content.UI
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
         public UICloseButton CloseButton;
+        public UIOpenKeybindsButton OpenKeybindsButton;
 
         public static ActiveSkillBox MouseHeldElement = null;
         public static ActiveSkillBox MouseHoveredElement = null;
@@ -50,11 +52,12 @@ namespace FargowiltasSouls.Content.UI
 
         public override void UpdateUI()
         {
-            if (Main.gameMenu)
+            if (Main.gameMenu || !Main.playerInventory)
                 FargoUIManager.Close<ActiveSkillMenu>();
         }
         public override void OnOpen()
         {
+            Main.playerInventory = true;
             RemoveAllChildren();
             OnInitialize();
             //UpdateSkillList();
@@ -114,11 +117,23 @@ namespace FargowiltasSouls.Content.UI
             CloseButton.Top.Set(-2, 0);
             CloseButton.OnLeftClick += CloseButton_OnLeftClick;
 
+            var keybindsTexture = Main.Assets.Request<Texture2D>("Images/UI/Settings_Inputs", (AssetRequestMode)1);
+            OpenKeybindsButton = new UIOpenKeybindsButton(keybindsTexture, keybindsTexture.Frame(2, 2))
+            {
+                VAlign = 0f,
+                HAlign = 0f
+            };
+            OpenKeybindsButton.Left.Set(-100, 1f);
+            OpenKeybindsButton.Top.Set(30f, 0f);
+            OpenKeybindsButton.OnLeftClick += OpenKeybindsButton_OnLeftClick;
+
+
             Append(BackPanel);
             BackPanel.Append(DragPanel);
             BackPanel.Append(EquippedPanel);
             BackPanel.Append(AvailablePanel);
             BackPanel.Append(CloseButton);
+            BackPanel.Append(OpenKeybindsButton);
 
             var title = new UIText(Language.GetTextValue("Mods.FargowiltasSouls.UI.ActiveSkills"));
             title.Left.Set(-50, 0.5f);
@@ -137,6 +152,10 @@ namespace FargowiltasSouls.Content.UI
         private void CloseButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
         {
             FargoUIManager.Close<ActiveSkillMenu>();
+        }
+        private void OpenKeybindsButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
+        {
+            IngameFancyUI.OpenKeybinds();
         }
         public void UpdateSkillList()
         {
