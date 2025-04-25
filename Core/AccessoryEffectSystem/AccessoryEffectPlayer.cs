@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.UI;
+using FargowiltasSouls.Core.ModPlayers;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -93,7 +95,23 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
             foreach (AccessoryEffect effect in HookPostUpdate)
             {
                 if (Active(effect))
+                {
                     effect.PostUpdate(Player);
+                }
+                    
+            }
+
+            foreach (AccessoryEffect effect in AccessoryEffectLoader.AccessoryEffects)
+            {
+                if (Active(effect) && effect.ActiveSkill)
+                {
+                    FargoSoulsPlayer modPlayer = Player.FargoSouls();
+                    if (!modPlayer.HasEquippedSkill && Main.myPlayer == Player.whoAmI)
+                    {
+                        FargoUIManager.Open<ActiveSkillMenu>();
+                        modPlayer.HasEquippedSkill = true;
+                    }
+                }
             }
         }
         private static List<AccessoryEffect> HookPostUpdateMiscEffects = AddHook<Action<Player>>(p => p.PostUpdateMiscEffects);
