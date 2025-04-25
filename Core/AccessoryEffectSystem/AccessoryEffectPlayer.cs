@@ -101,12 +101,12 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
                     
             }
 
-            foreach (AccessoryEffect effect in AccessoryEffectLoader.AccessoryEffects)
+            FargoSoulsPlayer modPlayer = Player.FargoSouls();
+            if (!modPlayer.HasEquippedSkill && Main.myPlayer == Player.whoAmI)
             {
-                if (Active(effect) && effect.ActiveSkill)
+                foreach (AccessoryEffect effect in AccessoryEffectLoader.AccessoryEffects)
                 {
-                    FargoSoulsPlayer modPlayer = Player.FargoSouls();
-                    if (!modPlayer.HasEquippedSkill && Main.myPlayer == Player.whoAmI)
+                    if (Active(effect) && effect.ActiveSkill)
                     {
                         FargoUIManager.Open<ActiveSkillMenu>();
                         modPlayer.HasEquippedSkill = true;
