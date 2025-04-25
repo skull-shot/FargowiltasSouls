@@ -8,6 +8,7 @@ MasochistEnabled: Modo Masoquista está ativado
 // LeftClickEnable: Left Click to enable
 // RightClickSelectDifficulty: Right Click to select difficulty
 // HoldShift: Hold Shift to read more
+// Close: Close
 /* ExpandedStandard:
 	'''
 	Disables Eternity or Masochist Mode.

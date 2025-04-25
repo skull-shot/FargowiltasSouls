@@ -42,6 +42,7 @@ namespace FargowiltasSouls.Content.UI
         public UIActiveSkillMenuDrag DragPanel;
         public UIPanel EquippedPanel;
         public UIPanel AvailablePanel;
+        public UICloseButton CloseButton;
 
         public static ActiveSkillBox MouseHeldElement = null;
         public static ActiveSkillBox MouseHoveredElement = null;
@@ -108,10 +109,16 @@ namespace FargowiltasSouls.Content.UI
             AvailablePanel.Top.Set(EquippedPanelHeight + Outline * 2, 0);
             AvailablePanel.BackgroundColor = new Color(73, 94, 171) * 0.9f;
 
+            CloseButton = new UICloseButton();
+            CloseButton.Left.Set(-18, 1f);
+            CloseButton.Top.Set(-2, 0);
+            CloseButton.OnLeftClick += CloseButton_OnLeftClick;
+
             Append(BackPanel);
             BackPanel.Append(DragPanel);
             BackPanel.Append(EquippedPanel);
             BackPanel.Append(AvailablePanel);
+            BackPanel.Append(CloseButton);
 
             var title = new UIText(Language.GetTextValue("Mods.FargowiltasSouls.UI.ActiveSkills"));
             title.Left.Set(-50, 0.5f);
@@ -126,6 +133,10 @@ namespace FargowiltasSouls.Content.UI
             UpdateSkillList();
 
             base.OnInitialize();
+        }
+        private void CloseButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
+        {
+            FargoUIManager.Close<ActiveSkillMenu>();
         }
         public void UpdateSkillList()
         {

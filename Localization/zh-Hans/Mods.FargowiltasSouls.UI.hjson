@@ -8,6 +8,7 @@ EternityDisabled: 永恒模式已关闭
 LeftClickEnable: 左键单击以启用
 RightClickSelectDifficulty: 右键单击以选择难度
 HoldShift: 按住Shift阅读更多内容
+// Close: Close
 ExpandedStandard:
 	'''
 	禁用永恒或受虐模式

@@ -8,6 +8,7 @@ EternityDisabled: Режим Вечность выключен
 LeftClickEnable: ЛКМ, чтобы включить
 RightClickSelectDifficulty: ПКМ, чтобы выбрать сложность
 HoldShift: Удерж. Shift для большей информации
+// Close: Close
 ExpandedStandard:
 	'''
 	Выключает режим Вечность или Мазохиста.
