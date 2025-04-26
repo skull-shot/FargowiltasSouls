@@ -66,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Projectile.timeLeft = 2;
 
             if (Projectile.originalDamage == 0)
-                Projectile.originalDamage = 30;
+                Projectile.originalDamage = 20;
 
             Vector2 vector2_1 = new(0f, -60f); //movement code
             Vector2 vector2_2 = player.MountedCenter + vector2_1;
@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Projectile.localAI[0]++;
                 Projectile.frame = 1;
 
-                if (Projectile.localAI[0] % 5 == 0)
+                if (Projectile.localAI[0] % 10 == 0)
                 {
                     SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
                     if (Projectile.owner == Main.myPlayer)
