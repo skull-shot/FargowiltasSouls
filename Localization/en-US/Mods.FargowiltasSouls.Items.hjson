@@ -1469,7 +1469,7 @@ QueenStinger: {
 	Tooltip:
 		'''
 		Grants immunity to Infested
-		Honey buff increases your armor penetration by 10
+		Honey buff increases your armor penetration by 7
 		Bees and weak Hornets become friendly
 		'Ripped right off of a defeated foe'
 		'''
