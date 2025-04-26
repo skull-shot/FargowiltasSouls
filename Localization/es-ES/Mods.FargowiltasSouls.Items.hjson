@@ -990,7 +990,7 @@ AgitatingLens: {
 		'''
 		Grants immunity to non-self inflicted Berserked
 		While dashing or running quickly you will create a trail of demon scythes, dealing magic damage
-		Debuff Install berserks you, granting massively increased offenses, massively lowered defenses, and you cannot stop attacking or moving
+		Debuff Install berserks you, massively increasing movement and attack speed, massively lowering defenses, and you cannot stop attacking or moving
 		Berserk state lasts for 8 seconds and you are stunned for 2 seconds afterwards
 		'The irritable remnant of a defeated foe'
 		''' */

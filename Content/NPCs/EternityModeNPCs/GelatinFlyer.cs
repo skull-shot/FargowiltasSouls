@@ -62,6 +62,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         }
         public ref float Offset => ref NPC.ai[0];
         public ref float Timer => ref NPC.ai[1];
+        public ref float AIType => ref NPC.ai[2];
         public override void AI()
         {
             if (!NPC.AnyNPCs(NPCID.QueenSlimeBoss) || !EModeGlobalNPC.queenSlimeBoss.IsWithinBounds(Main.maxNPCs))
@@ -88,27 +89,54 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.HasPlayerTarget)
             {
                 Player player = Main.player[NPC.target];
-                if (Timer <= 0)
+                if (AIType == 0) // diving
                 {
-                    Timer--;
-                    Vector2 hoverPos = new(player.Center.X + Offset, player.Center.Y - 190);
-                    Movement(hoverPos);
-                    if (NPC.Distance(hoverPos) < 60 && Timer < -30)
+                    if (Timer <= 0)
                     {
-                        Timer = 1;
-                        NPC.netUpdate = true;
+                        Timer--;
+                        Vector2 hoverPos = new(player.Center.X + Offset, player.Center.Y - 190);
+                        Movement(hoverPos);
+                        if (NPC.Distance(hoverPos) < 60 && Timer < -30)
+                        {
+                            Timer = 1;
+                            NPC.netUpdate = true;
+                        }
+                    }
+                    else
+                    {
+                        Timer++;
+                        float dir = queenSlime.HorizontalDirectionTo(player.Center);
+                        NPC.velocity.X = MathHelper.Lerp(NPC.velocity.X, dir * 13, 0.1f);
+                        NPC.velocity.Y += 0.5f;
+                        if (Timer > 100)
+                        {
+                            NPC.active = false;
+                            return;
+                        }
                     }
                 }
-                else
+                else if (AIType == 1) // straight towards player
                 {
-                    Timer++;
-                    float dir = queenSlime.HorizontalDirectionTo(player.Center);
-                    NPC.velocity.X = MathHelper.Lerp(NPC.velocity.X, dir * 13, 0.1f);
-                    NPC.velocity.Y += 0.5f;
-                    if (Timer > 100)
+                    if (Timer <= 0)
                     {
-                        NPC.active = false;
-                        return;
+                        Timer--;
+                        Vector2 hoverPos = player.Center;
+                        Movement(hoverPos);
+                        if (Timer < -30)
+                        {
+                            Timer = 1;
+                            NPC.netUpdate = true;
+                        }
+                    }
+                    else
+                    {
+                        Timer++;
+                        NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.velocity.SafeNormalize(Vector2.UnitY) * 16, 0.1f);
+                        if (Timer > 100)
+                        {
+                            NPC.active = false;
+                            return;
+                        }
                     }
                 }
             }
