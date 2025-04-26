@@ -1549,7 +1549,7 @@ SkullCharm: {
 	Tooltip:
 		'''
 		Grants immunity to Dazed
-		Increases damage dealt by 15% and damage taken by 10%
+		Increases damage dealt by 15% and damage taken by 20%
 		Enemies are less likely to target you
 		The crystal skull charges energy to attack as you attack
 		'Part of a collective consciousness'
