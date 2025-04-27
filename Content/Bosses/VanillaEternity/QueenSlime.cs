@@ -22,6 +22,7 @@ using static tModPorter.ProgressUpdate;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using FargowiltasSouls.Content.Items.Armor;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -73,9 +74,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(StompCounter);
             binaryWriter.Write(StompVelocityX);
             binaryWriter.Write(StompVelocityY);
-            binaryWriter.Write(AI0);
-            binaryWriter.Write(AI1);
-            binaryWriter.Write(PreviousState);
+            for (int i = 0; i < CustomAI.Length; i++)
+                binaryWriter.Write(CustomAI[i]);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -86,9 +86,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             StompCounter = binaryReader.Read7BitEncodedInt();
             StompVelocityX = binaryReader.ReadSingle();
             StompVelocityY = binaryReader.ReadSingle();
-            AI0 = binaryReader.ReadSingle();
-            AI1 = binaryReader.ReadSingle();
-            PreviousState = binaryReader.ReadSingle();
+            for (int i = 0; i < CustomAI.Length; i++)
+                CustomAI[i] = binaryReader.ReadSingle();
         }
 
         public override void SetDefaults(NPC npc)
@@ -103,13 +102,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public bool PhaseTwo => NPC.GetLifePercent() <= 0.5f;
         public NPC NPC = null;
         public Player Target => Main.player[NPC.target];
-        public ref float State => ref NPC.ai[0];
-        public ref float Timer => ref NPC.ai[1];
-        public ref float NoContactDamage => ref NPC.ai[2];
-        public ref float Split => ref NPC.ai[3];
-        public ref float AI0 => ref NPC.localAI[0];
-        public ref float AI1 => ref NPC.localAI[1];
-        public ref float PreviousState => ref NPC.localAI[2];
+
+        public float[] CustomAI = new float[7];
+        public ref float State => ref CustomAI[0];
+        public ref float Timer => ref CustomAI[1];
+        public ref float NoContactDamage => ref CustomAI[2];
+        public ref float Split => ref CustomAI[3];
+        public ref float AI0 => ref CustomAI[4];
+        public ref float AI1 => ref CustomAI[5];
+        public ref float PreviousState => ref CustomAI[6];
 
         public static int MaxSubjects => 9;
 
@@ -137,6 +138,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NPC.noGravity = true;
 
             NoContactDamage = 0;
+            npc.ai[0] = 0; // set to 4 for afterimages
 
             float desiredScale = 1f;
             int subjects = NPC.CountNPCS(ModContent.NPCType<GelatinSubject>());
@@ -144,17 +146,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (subjects > 0)
             {
                 desiredScale *= 1 - subjectScale;
-                float minScale = 0.2f;
             }
                 
             NPC.dontTakeDamage = subjects > 0;
 
-            if (NPC.scale != desiredScale)
+            float oldScale = NPC.scale;
+            NPC.scale = MathHelper.Lerp(NPC.scale, desiredScale, 0.1f);
+
+            if (NPC.scale != oldScale)
             {
                 int baseWidth = 114;
                 int baseHeight = 100;
                 NPC.position = NPC.Center;
-                NPC.scale = desiredScale;
                 float minScale = 0.2f;
                 float scale = Math.Max(minScale, NPC.scale);
                 NPC.width = (int)(baseWidth * scale);
@@ -258,6 +261,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void NormalSlam()
         {
+            NPC.ai[0] = 4; // afterimages
+
             // go straight above player, then slam straight down 
             int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
             int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
@@ -338,6 +343,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void MinionSlam()
         {
+            NPC.ai[0] = 4; // afterimages
+
             // go straight above player, then slam straight down 
             int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
             int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
@@ -511,6 +518,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             NPC npc = NPC;
             NPC.noGravity = false;
+            npc.ai[0] = 4; // afterimages
+
             if (StompTimer == 0) //ready to super stomp
             {
                 StompTimer = 1;
@@ -671,9 +680,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 NoContactDamage = 1;
                 Vector2 desiredPos = Target.Center + Target.DirectionTo(NPC.Center) * 120;
-                Movement(desiredPos, 1.4f);
+                Movement(desiredPos, 1.1f);
                 if (NPC.Distance(desiredPos) > 50 && Timer > startupTime - 5)
                     Timer--;
+                if (NPC.Distance(Target.Center) < 75)
+                    NPC.Center = Target.Center + Target.DirectionTo(NPC.Center) * 75;
             }
             else if (Timer < startupTime + backdashTime)
             {
@@ -734,7 +745,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Timer > startupTime + backdashTime + minionMinTime)
                     {
                         Timer--;
-                        shouldReposition = true;
+                        //shouldReposition = true;
                     }
                         
                 }
@@ -787,14 +798,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         private void FlightExplosions()
         {
-            int startup = 35;
+            int startup = 40;
             int explosions = 4;
             int windup = 60;
-            int endlag = 35;
+            int endlag = 50;
             int cycleTime = windup + endlag;
             NPC.noGravity = true;
 
-
+            NPC.ai[0] = 0;
             Timer++;
             int cycleTimer = Timer <= startup ? -1 : (int)(Timer - startup) % cycleTime;
             if (cycleTimer < 0)
@@ -802,16 +813,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NoContactDamage = 1;
                 Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 350, -200);
                 Movement(desiredPos, 1f);
+
+                NPC.ai[1] = 0; // reset animation timer
             }
             else if (cycleTimer < windup)
             {
-                for (int num27 = 0; num27 < 10; num27++)
+                float windupStart = (int)(windup * 0.35f);
+                if (cycleTimer > windupStart)
                 {
-                    Vector2 size = NPC.Size;
-                    size *= 1 - ((float)cycleTimer / windup) * 0.8f;
+                    NPC.ai[0] = 5; // explosion animation
+                    NPC.ai[1]++; // animation timer
+                    for (int num27 = 0; num27 < 10; num27++)
+                    {
+                        Vector2 size = NPC.Size;
+                        size *= 1 - ((float)(cycleTimer - windupStart) / (1 - windupStart)) * 0.8f;
 
-                    QSDust(NPC.Center - size / 2, (int)size.X, (int)size.Y, NPC.velocity.X / 4, NPC.velocity.Y / 4);
+                        QSDust(NPC.Center - size / 2, (int)size.X, (int)size.Y, NPC.velocity.X / 4, NPC.velocity.Y / 4);
+                    }
                 }
+                
             }
             else if (cycleTimer == windup)
             {
@@ -819,6 +839,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     int projs = WorldSavingSystem.MasochistModeReal ? 14 : 14;
                     float rotOffset = NPC.DirectionTo(Target.Center).ToRotation();
+                    rotOffset = rotOffset.ToRotationVector2().RotateTowards(-Vector2.UnitY.ToRotation(), 0.1f).ToRotation();
+                    rotOffset += Main.rand.NextFloat(MathHelper.PiOver2 * 0.07f);
                     for (int i = 0; i < projs; i++)
                     {
                         float rot = ((float)i / projs) * MathHelper.TwoPi;
@@ -833,6 +855,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else
             {
+                NPC.ai[1] = 0; // reset animation timer
                 if (WorldSavingSystem.MasochistModeReal)
                 {
                     if (cycleTimer % 15 == 0)
@@ -870,7 +893,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Timer < startup)
             {
                 Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 100, -400);
-                Movement(desiredPos, 1f);
+                Movement(desiredPos, 2f);
             }
             else if (Timer == startup)
             {
@@ -1311,6 +1334,136 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             
+        }
+
+        public override void FindFrame(NPC npc, int frameHeight)
+        {
+            bool p2 = PhaseTwo;
+            npc.frame.Width = 180;
+            int num9 = npc.frame.Y / frameHeight;
+            if ((States)State == States.FlightExplosions)
+            {
+                if (npc.ai[0] == 5f)
+                {
+                    npc.frameCounter = 0.0;
+                    num9 = ((int)npc.ai[1] / 3 % 3) switch
+                    {
+                        1 => 14,
+                        2 => 15,
+                        _ => 13,
+                    };
+                    npc.frame.Y = num9 * frameHeight;
+                }
+            }
+
+            /*
+            if ((flag && noGravity) || velocity.Y < 0f)
+            {
+                if (num9 < 20 || num9 > 23)
+                {
+                    if (num9 < 4 || num9 > 7)
+                    {
+                        num9 = 4;
+                        frameCounter = -1.0;
+                    }
+                    if ((frameCounter += 1.0) >= 4.0)
+                    {
+                        frameCounter = 0.0;
+                        num9++;
+                        if (num9 >= 7)
+                        {
+                            num9 = ((!flag) ? 7 : 22);
+                        }
+                    }
+                }
+                else if ((frameCounter += 1.0) >= 5.0)
+                {
+                    frameCounter = 0.0;
+                    num9++;
+                    if (num9 >= 24)
+                    {
+                        num9 = 20;
+                    }
+                }
+                frame.Y = num9 * num;
+            }
+            else if (velocity.Y > 0f)
+            {
+                if (num9 < 8 || num9 > 10)
+                {
+                    num9 = 8;
+                    frameCounter = -1.0;
+                }
+                if ((frameCounter += 1.0) >= 8.0)
+                {
+                    frameCounter = 0.0;
+                    num9++;
+                    if (num9 >= 10)
+                    {
+                        num9 = 10;
+                    }
+                }
+                frame.Y = num9 * num;
+            }
+            else
+            {
+                if (velocity.Y != 0f)
+                {
+                    break;
+                }
+                if (ai[0] == 5f)
+                {
+                    frameCounter = 0.0;
+                    num9 = ((int)ai[1] / 3 % 3) switch
+                    {
+                        1 => 14,
+                        2 => 15,
+                        _ => 13,
+                    };
+                }
+                else if (ai[0] == 4f)
+                {
+                    frameCounter = 0.0;
+                    switch ((int)ai[1] / 15)
+                    {
+                        default:
+                            num9 = 12;
+                            break;
+                        case 1:
+                            num9 = 11;
+                            break;
+                        case 2:
+                        case 3:
+                            num9 = 10;
+                            break;
+                    }
+                }
+                else
+                {
+                    bool flag2 = num9 >= 10 && num9 <= 12;
+                    int num10 = 10;
+                    if (flag2)
+                    {
+                        num10 = 6;
+                    }
+                    if (!flag2 && num9 >= 4)
+                    {
+                        num9 = 0;
+                        frameCounter = -1.0;
+                    }
+                    if ((frameCounter += 1.0) >= (double)num10)
+                    {
+                        frameCounter = 0.0;
+                        num9++;
+                        if ((!flag2 || num9 == 13) && num9 >= 4)
+                        {
+                            num9 = 0;
+                        }
+                    }
+                }
+                frame.Y = num9 * num;
+            }
+            */
         }
     }
 
