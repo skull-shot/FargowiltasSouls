@@ -1,2 +1,10 @@
 NEW UPDATE - V {ModVersion}
-Fixed several Eternity item changes not working correctly
+Active Skill Menu changes:
+- Added a menu-closing "x" to active skill menu
+- Added a button to open the keybind menu from active skill menu
+- The active skill menu now automatically closes when your inventory is closed, and opening it also opens your inventory
+- The active skill menu is automatically opened the first time you equip any active skill
+
+Removed Shellphone from World Shaper Soul
+Tweaked Illuminated brightness
+Fixed a few obscure things applying outside of Eternity
