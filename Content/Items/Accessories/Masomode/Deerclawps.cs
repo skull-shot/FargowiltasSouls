@@ -95,7 +95,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                     if (!npc.Alive())
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1 / 2);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
 
                 }
                     

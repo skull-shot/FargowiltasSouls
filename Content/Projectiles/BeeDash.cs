@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Venom, 600);
+            target.AddBuff(BuffID.Poisoned, 1800);
         }
 
         public override void OnKill(int timeLeft)

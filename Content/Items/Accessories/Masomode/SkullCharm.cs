@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.buffImmune[BuffID.Dazed] = true;
             player.GetDamage(DamageClass.Generic) += 0.15f;
             if (hasDownsides)
-                player.endurance -= 0.1f;
+                player.endurance -= 0.2f;
             player.aggro -= 400;
             player.FargoSouls().SkullCharm = true;
             player.AddEffect<PungentMinion>(item);

@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<SpecialDashEffect>(Item);
 
             if (player.honey)
-                player.GetArmorPenetration(DamageClass.Generic) += 10;
+                player.GetArmorPenetration(DamageClass.Generic) += 7;
         }
     }
 
