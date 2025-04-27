@@ -320,8 +320,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 for (int i = 0; i < 6; i++)
                 {
-                    int dust = Main.rand.NextFromCollection([DustID.BlueCrystalShard, DustID.PurpleCrystalShard]);
-                    Dust.NewDust(NPC.position, NPC.width, NPC.height, dust);
+                    QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
                 if (NPC.velocity.Y == 0) // hit ground
                 {
@@ -382,8 +381,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 for (int i = 0; i < 6; i++)
                 {
-                    int dust = Main.rand.NextFromCollection([DustID.BlueCrystalShard, DustID.PurpleCrystalShard]);
-                    Dust.NewDust(NPC.position, NPC.width, NPC.height, dust);
+                    QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
                 if (NPC.velocity.Y == 0) // hit ground
                 {
@@ -522,12 +520,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, npc.whoAmI, NPCID.WallofFleshEye);
 
+                if (PhaseTwo)
+                    NPC.noGravity = true;
+
                 npc.netUpdate = true;
                 NetSync(npc);
                 return;
             }
             else if (StompTimer > 0 && StompTimer < 30) //give time to react
             {
+                if (PhaseTwo)
+                    NPC.noGravity = true;
                 StompTimer++;
 
                 npc.rotation = 0;
@@ -701,9 +704,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     for (int i = 0; i < 220; i++)
                     {
-                        int dust = Main.rand.NextFromCollection([DustID.BlueCrystalShard, DustID.PurpleCrystalShard]);
-                        int d = Dust.NewDust(NPC.position - NPC.Size, NPC.width * 2, NPC.height * 2, dust);
-                        Main.dust[d].noGravity = true;
+                        QSDust(NPC.position - NPC.Size, NPC.width * 2, NPC.height * 2, 0, 0);
                     }
 
                     Vector2 lockon = Target.Center + toTarget * distance;
@@ -718,11 +719,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     lockonX = lockon.X;
                     lockonY = lockon.Y;
                 }
-                Vector2 desiredPos = new(lockonX, lockonY);
-                Movement(desiredPos, 0.9f);
+                bool shouldReposition = false;
 
                 if (!NPC.AnyNPCs(ModContent.NPCType<GelatinSubject>()))
                 {
+                    shouldReposition = true;
                     if (Timer > startupTime + backdashTime + minionMinTime  + endTime)
                     {
                         ResetToNeutral();
@@ -731,8 +732,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 else
                 {
                     if (Timer > startupTime + backdashTime + minionMinTime)
+                    {
                         Timer--;
+                        shouldReposition = true;
+                    }
+                        
                 }
+                Vector2 desiredPos = new(lockonX, lockonY);
+                if (shouldReposition)
+                    desiredPos = Target.Center + Target.DirectionTo(NPC.Center) * 250;
+                Movement(desiredPos, 0.9f);
             }
         }
         private void MinionChargeSide()
@@ -778,7 +787,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         private void FlightExplosions()
         {
-            int startup = 45;
+            int startup = 35;
             int explosions = 4;
             int windup = 60;
             int endlag = 35;
@@ -796,7 +805,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (cycleTimer < windup)
             {
+                for (int num27 = 0; num27 < 10; num27++)
+                {
+                    Vector2 size = NPC.Size;
+                    size *= 1 - ((float)cycleTimer / windup) * 0.8f;
 
+                    QSDust(NPC.Center - size / 2, (int)size.X, (int)size.Y, NPC.velocity.X / 4, NPC.velocity.Y / 4);
+                }
             }
             else if (cycleTimer == windup)
             {
@@ -854,7 +869,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Timer++;
             if (Timer < startup)
             {
-                Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 400, -400);
+                Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 100, -400);
                 Movement(desiredPos, 1f);
             }
             else if (Timer == startup)
@@ -876,11 +891,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer < startup + rainDuration) // just chill
             {
-                Vector2 desiredPos = Target.Center + Vector2.UnitY * 200;
-                Movement(desiredPos, 1f);
+                NoContactDamage = 1;
+                if (Timer < startup + 50)
+                {
+                    Vector2 desiredPos = Target.Center - Vector2.UnitY * 350;
+                    Movement(desiredPos, 1f);
+                }
+                NPC.velocity *= 0.9f;
             }
             else // end attack
             {
+                Vector2 desiredPos = Target.Center - Vector2.UnitY * 350;
+                Movement(desiredPos, 0.5f);
+
                 if (Timer == startup + rainDuration)
                 {
                     foreach (NPC npc in Main.ActiveNPCs)
@@ -888,6 +911,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (npc.TypeAlive<GelatinSubject>())
                             npc.ai[1] = -1;
                     }
+                }
+                if (!NPC.AnyNPCs(ModContent.NPCType<GelatinSubject>()))
+                {
+                    ResetToNeutral();
+                    return;
                 }
             }
         }
@@ -918,7 +946,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         //States.MinionChargeSide, 
                         States.Artillery,
                         States.FlightExplosions,
-                        //States.SpikeRain
+                        States.SpikeRain
                         ];
                     AvailableStates.AddRange(states);
                 }
@@ -963,6 +991,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             float decel = 1.5f * speedModifier;
             float resistance = NPC.velocity.Length() * accel / (22f * speedModifier);
             NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Center, targetPos, NPC.velocity, accel - resistance, decel + resistance);
+        }
+        public static void QSDust(Vector2 pos, int width, int height, float velX, float velY, float velMult = 2f)
+        {
+            Color newColor2 = NPC.AI_121_QueenSlime_GetDustColor();
+            newColor2.A = 150;
+            int num28 = Dust.NewDust(pos + Vector2.UnitX * -20f, width + 40, height, DustID.TintableDust, velX, velY, 50, newColor2, 1.5f);
+            Main.dust[num28].noGravity = true;
+            Main.dust[num28].velocity *= velMult;
         }
         private static bool Grounded(NPC npc) => npc.velocity.Y == 0 || NPCInAnyTiles(npc);
         private static bool NPCInAnyTiles(NPC npc)

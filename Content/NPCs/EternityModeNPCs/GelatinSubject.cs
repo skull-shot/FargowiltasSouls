@@ -1,4 +1,5 @@
 using Fargowiltas;
+using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -94,7 +95,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                         }
                         else
                         {
-                            ReturnToSlime();
+                            ReturnToSlime(Timer);
                         }
                     }
                     break;
@@ -104,31 +105,56 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                         {
                             Timer++;
                             // do the rain thing
+                            if (!parent.HasPlayerTarget)
+                            {
+                                return;
+                            }
+                            Player player = Main.player[parent.target];
+                            float x = parent.Center.X;
+                            float interval = WorldSavingSystem.MasochistModeReal ? 220 : 300;
+                            float divisor = WorldSavingSystem.MasochistModeReal ? 130 : 150;
+                            x += Index * 300;
+                            x += MathF.Sin(MathF.Tau * Timer / divisor) * 200;
+                            float y = player.Center.Y - 500;
+                            float speedMod = 1f + Timer / 60;
+                            if (speedMod > 5)
+                                speedMod = 5;
+                            Vector2 pos = new(x, y);
+                            Movement(pos, speedMod);
+
+                            if (Timer > 70 && NPC.Distance(pos) < 30 && Timer % 5 == 0)
+                            {
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    Vector2 spawnPos = NPC.Center + Main.rand.NextVector2Circular(32, 32);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, 8f * Vector2.UnitY,
+                                      ProjectileID.QueenSlimeMinionBlueSpike, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                }
+                            }
                         }
                         else
                         {
-                            ReturnToSlime();
+                            Timer--;
+                            ReturnToSlime(-Timer * 2);
                         }
                     }
                     break;
             }
-            void ReturnToSlime() // by dm dokuro
+            void ReturnToSlime(float timer) // by dm dokuro
             {
                 if (NPC.Distance(parent.Center) > 70)
                 {
-                    float speedMod = 0.3f + Timer / 80;
+                    float speedMod = 0.3f + timer / 80;
                     Movement(parent.Center, speedMod);
                 }
                 else
                 {
-                    NPC.velocity = (parent.Center - NPC.Center) * 0.05f;
+                    NPC.velocity = (parent.Center - NPC.Center) * 0.15f;
                     NPC.scale *= 0.92f;
                     for (int i = 0; i < 3; i++)
                     {
-                        int dust = Main.rand.NextFromCollection([DustID.BlueCrystalShard, DustID.PurpleCrystalShard]);
                         int radius = 50;
-                        int d = Dust.NewDust(NPC.Center - Vector2.One * radius, 2 * radius, 2 * radius, dust);
-                        Main.dust[d].noGravity = true;
+                        QueenSlime.QSDust(NPC.Center - Vector2.One * radius, 2 * radius, 2 * radius, 0, 0);
                     }
                     if (NPC.scale < 0.1f)
                     {
