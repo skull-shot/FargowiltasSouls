@@ -108,6 +108,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<BuilderEffect>(item);
 
             //cell phone
+            /*
             Player.accWatch = 3;
             Player.accDepthMeter = 1;
             Player.accCompass = 1;
@@ -120,8 +121,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.accThirdEye = true;
             Player.accCalendar = true;
             Player.accWeatherRadio = true;
+            */
             Player.chiselSpeed = true;
             Player.treasureMagnet = true;
+            
         }
 
         public override void AddRecipes()
