@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             if (Projectile.owner == Main.myPlayer)
             {
                 //rotation mumbo jumbo
-                float distanceFromPlayer = 250;
+                float distanceFromPlayer = 200;
                 if (Projectile.ai[0] <= 0)
                     Lighting.AddLight(Projectile.Center, 0.1f, 0.4f, 0.2f);
 

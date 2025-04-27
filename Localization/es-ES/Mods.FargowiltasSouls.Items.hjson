@@ -1469,7 +1469,7 @@ QueenStinger: {
 	/* Tooltip:
 		'''
 		Grants immunity to Infested
-		Honey buff increases your armor penetration by 10
+		Honey buff increases your armor penetration by 7
 		Bees and weak Hornets become friendly
 		'Ripped right off of a defeated foe'
 		''' */
@@ -1549,7 +1549,7 @@ SkullCharm: {
 	/* Tooltip:
 		'''
 		Grants immunity to Dazed
-		Increases damage dealt by 15% and damage taken by 10%
+		Increases damage dealt by 15% and damage taken by 20%
 		Enemies are less likely to target you
 		The crystal skull charges energy to attack as you attack
 		'Part of a collective consciousness'
