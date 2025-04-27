@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         }
         public ref float Offset => ref NPC.ai[0];
         public ref float Timer => ref NPC.ai[1];
-        public ref float AIType => ref NPC.ai[2];
+        public ref float AIVariant => ref NPC.ai[2];
         public override void AI()
         {
             if (!NPC.AnyNPCs(NPCID.QueenSlimeBoss) || !EModeGlobalNPC.queenSlimeBoss.IsWithinBounds(Main.maxNPCs))
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.HasPlayerTarget)
             {
                 Player player = Main.player[NPC.target];
-                if (AIType == 0) // diving
+                if (AIVariant == 0) // diving
                 {
                     if (Timer <= 0)
                     {
@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                         }
                     }
                 }
-                else if (AIType == 1) // straight towards player
+                else if (AIVariant == 1) // straight towards player
                 {
                     if (Timer <= 0)
                     {

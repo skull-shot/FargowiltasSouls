@@ -19,6 +19,9 @@ using FargowiltasSouls.Core;
 using System.Collections.Generic;
 using Luminance.Common.Utilities;
 using static tModPorter.ProgressUpdate;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -107,7 +110,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public ref float AI0 => ref NPC.localAI[0];
         public ref float AI1 => ref NPC.localAI[1];
         public ref float PreviousState => ref NPC.localAI[2];
-        public ref float Squimgsh => ref NPC.localAI[3];
+
+        public static int MaxSubjects => 9;
 
         public override bool SafePreAI(NPC npc)
         {
@@ -129,6 +133,34 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return true;
             if (!PhaseTwo)
                 NPC.noGravity = false;
+            else
+                NPC.noGravity = true;
+
+            NoContactDamage = 0;
+
+            float desiredScale = 1f;
+            int subjects = NPC.CountNPCS(ModContent.NPCType<GelatinSubject>());
+            float subjectScale = LumUtils.Saturate(subjects / MaxSubjects);
+            if (subjects > 0)
+            {
+                desiredScale *= 1 - subjectScale;
+                float minScale = 0.2f;
+            }
+                
+            NPC.dontTakeDamage = subjects > 0;
+
+            if (NPC.scale != desiredScale)
+            {
+                int baseWidth = 114;
+                int baseHeight = 100;
+                NPC.position = NPC.Center;
+                NPC.scale = desiredScale;
+                float minScale = 0.2f;
+                float scale = Math.Max(minScale, NPC.scale);
+                NPC.width = (int)(baseWidth * scale);
+                NPC.height = (int)(baseHeight * scale);
+                NPC.Center = NPC.position;
+            }
             // ai here
             switch ((States)State)
             {
@@ -244,6 +276,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer < slamPrepTime) // preparing slam
             {
+                NoContactDamage = 1;
                 if (Timer < slamPrepTime / 5)
                 {
                     Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
@@ -283,7 +316,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer == slamPrepTime) // slamming
             {
-                NoContactDamage = 0;
                 NPC.noGravity = true;
 
                 for (int i = 0; i < 6; i++)
@@ -325,6 +357,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer < slamPrepTime) // preparing slam
             {
+                NoContactDamage = 1;
                 if (Timer < slamPrepTime / 5)
                 {
                     Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
@@ -345,7 +378,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer == slamPrepTime) // slamming
             {
-                NoContactDamage = 0;
                 NPC.noGravity = true;
 
                 for (int i = 0; i < 6; i++)
@@ -480,6 +512,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private void Stompy()
         {
             NPC npc = NPC;
+            NPC.noGravity = false;
             if (StompTimer == 0) //ready to super stomp
             {
                 StompTimer = 1;
@@ -622,7 +655,85 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void MinionChargeDirect()
         {
+            ref float lockonX = ref AI0;
+            ref float lockonY = ref AI1;
+            float startupTime = 30;
+            float backdashTime = 15;
+            float minionMinTime = 60;
+            int endTime = 5;
 
+            Timer++;
+            NPC.noGravity = true;
+            if (Timer < startupTime)
+            {
+                NoContactDamage = 1;
+                Vector2 desiredPos = Target.Center + Target.DirectionTo(NPC.Center) * 120;
+                Movement(desiredPos, 1.4f);
+                if (NPC.Distance(desiredPos) > 50 && Timer > startupTime - 5)
+                    Timer--;
+            }
+            else if (Timer < startupTime + backdashTime)
+            {
+                NPC.velocity *= 0.96f;
+                NPC.velocity -= NPC.DirectionTo(Target.Center);
+            }
+            else
+            {
+                int distance = 600;
+                Vector2 toTarget = NPC.DirectionTo(Target.Center);
+                if (Timer == startupTime + backdashTime)
+                {
+                    SoundEngine.PlaySound(SoundID.Item155 with { Pitch = -0.5f}, NPC.Center);
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        for (int i = 0; i < MaxSubjects; i++)
+                        {
+                            int j = i - (MaxSubjects / 2);
+                            float vel = 20f;
+                            vel += Math.Abs(j) * 4;
+                            Vector2 dir = -toTarget.RotatedBy(j * MathHelper.PiOver2 * 4.7f / MaxSubjects);
+                            Vector2 velocity = dir * vel;
+                            velocity += -toTarget.RotatedBy(MathHelper.PiOver2 * Math.Sign(j)) * 9f * Math.Abs(j);
+                            FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center + dir * 24f, ModContent.NPCType<GelatinSubject>(), NPC.whoAmI, target: NPC.target,
+                                        velocity: velocity, ai0: 0);
+                        }
+                    }
+
+                    for (int i = 0; i < 220; i++)
+                    {
+                        int dust = Main.rand.NextFromCollection([DustID.BlueCrystalShard, DustID.PurpleCrystalShard]);
+                        int d = Dust.NewDust(NPC.position - NPC.Size, NPC.width * 2, NPC.height * 2, dust);
+                        Main.dust[d].noGravity = true;
+                    }
+
+                    Vector2 lockon = Target.Center + toTarget * distance;
+                    lockonX = lockon.X;
+                    lockonY = lockon.Y;
+                    NPC.netUpdate = true;
+                    Timer++;
+                }
+                if (Timer < startupTime + backdashTime + (minionMinTime * 0.4f))
+                {
+                    Vector2 lockon = Target.Center + toTarget * distance;
+                    lockonX = lockon.X;
+                    lockonY = lockon.Y;
+                }
+                Vector2 desiredPos = new(lockonX, lockonY);
+                Movement(desiredPos, 0.9f);
+
+                if (!NPC.AnyNPCs(ModContent.NPCType<GelatinSubject>()))
+                {
+                    if (Timer > startupTime + backdashTime + minionMinTime  + endTime)
+                    {
+                        ResetToNeutral();
+                    }
+                }
+                else
+                {
+                    if (Timer > startupTime + backdashTime + minionMinTime)
+                        Timer--;
+                }
+            }
         }
         private void MinionChargeSide()
         {
@@ -667,6 +778,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         private void FlightExplosions()
         {
+            int startup = 45;
             int explosions = 4;
             int windup = 60;
             int endlag = 35;
@@ -675,8 +787,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
             Timer++;
-            int cycleTimer = (int)Timer % cycleTime;
-            if (cycleTimer < windup)
+            int cycleTimer = Timer <= startup ? -1 : (int)(Timer - startup) % cycleTime;
+            if (cycleTimer < 0)
+            {
+                NoContactDamage = 1;
+                Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 350, -200);
+                Movement(desiredPos, 1f);
+            }
+            else if (cycleTimer < windup)
             {
 
             }
@@ -731,7 +849,47 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void SpikeRain()
         {
-
+            int startup = 30;
+            int rainDuration = 60 * 4;
+            Timer++;
+            if (Timer < startup)
+            {
+                Vector2 desiredPos = Target.Center + new Vector2(Target.HorizontalDirectionTo(NPC.Center) * 400, -400);
+                Movement(desiredPos, 1f);
+            }
+            else if (Timer == startup)
+            {
+                SoundEngine.PlaySound(SoundID.Item155 with { Pitch = -0.5f }, NPC.Center);
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    for (int i = 0; i < MaxSubjects; i++)
+                    {
+                        int j = i - (MaxSubjects / 2);
+                        float vel = 10f;
+                        vel += Math.Abs(j) * 2;
+                        Vector2 dir = new(-1, j * 2 / MaxSubjects);
+                        Vector2 velocity = dir * vel;
+                        FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center + dir * 24f, ModContent.NPCType<GelatinSubject>(), NPC.whoAmI, target: NPC.target,
+                                    velocity: velocity, ai0: 1, ai2: j);
+                    }
+                }
+            }
+            else if (Timer < startup + rainDuration) // just chill
+            {
+                Vector2 desiredPos = Target.Center + Vector2.UnitY * 200;
+                Movement(desiredPos, 1f);
+            }
+            else // end attack
+            {
+                if (Timer == startup + rainDuration)
+                {
+                    foreach (NPC npc in Main.ActiveNPCs)
+                    {
+                        if (npc.TypeAlive<GelatinSubject>())
+                            npc.ai[1] = -1;
+                    }
+                }
+            }
         }
         #endregion
         #region Help Methods
@@ -756,7 +914,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (AvailableStates.Count == 0)
                 {
                     List<States> states = [
-                        //States.MinionChargeDirect, 
+                        States.MinionChargeDirect, 
                         //States.MinionChargeSide, 
                         States.Artillery,
                         States.FlightExplosions,
@@ -827,7 +985,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             return isInTilesIncludingPlatforms;
         }
         #endregion
-
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (npc.lifeRegen >= 0)
@@ -883,26 +1040,241 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
-            if (!resprite)
-                return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
-
-            queenSlimeBuffer = GameShaders.Misc["QueenSlime"];
-            GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlime"];
-            
-            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+            if (resprite)
+            {
+                queenSlimeBuffer = GameShaders.Misc["QueenSlime"];
+                GameShaders.Misc["QueenSlime"] = GameShaders.Misc["FargowiltasSouls:QueenSlime"];
+            }
+            Draw(npc, spriteBatch, screenPos, drawColor);
+            if (resprite)
+            {
+                GameShaders.Misc["QueenSlime"] = queenSlimeBuffer;
+            }
+            return false;
         }
+        public void Draw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            // hellish modified vanilla drawcode
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (npc.spriteDirection == 1)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally;
+            }
+            Color npcColor = Lighting.GetColor((int)((double)npc.position.X + (double)npc.width * 0.5) / 16, (int)(((double)npc.position.Y + (double)npc.height * 0.5) / 16.0));
+            if (npc.IsABestiaryIconDummy)
+            {
+                npcColor = npc.GetBestiaryEntryColor();
+            }
 
+            Texture2D value10 = TextureAssets.Npc[npc.type].Value;
+            Vector2 position7 = npc.Bottom - screenPos;
+            position7.Y += 2f;
+            int num53 = Main.npcFrameCount[npc.type];
+            int num54 = npc.frame.Y / npc.frame.Height;
+            Rectangle rectangle3 = value10.Frame(2, 16, num54 / num53, num54 % num53);
+            rectangle3.Inflate(0, -2);
+            Vector2 origin4 = rectangle3.Size() * new Vector2(0.5f, 1f);
+            Color originColor = Color.Lerp(Microsoft.Xna.Framework.Color.White, npcColor, 0.5f);
+            if (npc.life <= npc.lifeMax / 2)
+            {
+                // wings !!
+
+                Texture2D value = TextureAssets.Extra[185].Value;
+                Microsoft.Xna.Framework.Rectangle rectangle = value.Frame(1, 4, 0, (int)npc.localAI[3] / 6);
+                float scale = 0.8f * npc.scale;
+                for (int i = 0; i < 2; i++)
+                {
+                    float x = 1f;
+                    float num = 0f;
+                    SpriteEffects effects = SpriteEffects.None;
+                    if (i == 1)
+                    {
+                        x = 0f;
+                        num = 0f - num + 2f;
+                        effects = SpriteEffects.FlipHorizontally;
+                    }
+                    Vector2 origin = rectangle.Size() * new Vector2(x, 0.5f);
+                    Vector2 vector = new Vector2(npc.Center.X + num, npc.Center.Y);
+                    if (npc.rotation != 0f)
+                    {
+                        vector = vector.RotatedBy(npc.rotation, npc.Bottom);
+                    }
+                    vector -= screenPos;
+                    float num2 = MathHelper.Clamp(npc.velocity.Y, -6f, 6f) * -0.1f;
+                    if (i == 0)
+                    {
+                        num2 *= -1f;
+                    }
+                    spriteBatch.Draw(value, vector, rectangle, originColor, npc.rotation + num2, origin, scale, effects, 0f);
+                }
+            }
+            Texture2D value11 = TextureAssets.Extra[186].Value; // gem?
+            Microsoft.Xna.Framework.Rectangle rectangle4 = value11.Frame();
+            Vector2 origin5 = rectangle4.Size() * new Vector2(0.5f, 0.5f);
+            Vector2 vector16 = new Vector2(npc.Center.X, npc.Center.Y);
+            float num55 = 0f;
+            switch (num54)
+            {
+                case 1:
+                case 6:
+                    num55 -= 10f;
+                    break;
+                case 3:
+                case 5:
+                    num55 += 10f;
+                    break;
+                case 4:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                    num55 += 18f;
+                    break;
+                case 7:
+                case 8:
+                    num55 -= 14f;
+                    break;
+                case 9:
+                    num55 -= 16f;
+                    break;
+                case 10:
+                    num55 -= 18f;
+                    break;
+                case 11:
+                    num55 += 20f;
+                    break;
+                case 20:
+                    num55 -= 14f;
+                    break;
+                case 21:
+                case 23:
+                    num55 -= 18f;
+                    break;
+                case 22:
+                    num55 -= 22f;
+                    break;
+            }
+            vector16.Y += num55;
+            if (npc.rotation != 0f)
+            {
+                vector16 = vector16.RotatedBy(npc.rotation, npc.Bottom);
+            }
+            vector16 -= screenPos;
+            if (!npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
+            }
+            GameShaders.Misc["QueenSlime"].Apply();
+            if (npc.ai[0] == 4f && npc.velocity.Y != 0f)
+            {
+                float num56 = 1f;
+                if (npc.ai[2] == 1f)
+                {
+                    num56 = 6f;
+                }
+                for (int num57 = 7; num57 >= 0; num57--)
+                {
+                    float num58 = 1f - (float)num57 / 8f;
+                    Vector2 vector17 = npc.oldPos[num57] + new Vector2((float)npc.width * 0.5f, npc.height);
+                    vector17 -= (npc.Bottom - Vector2.Lerp(vector17, npc.Bottom, 0.75f)) * num56;
+                    vector17 -= screenPos;
+                    Microsoft.Xna.Framework.Color color16 = originColor * num58;
+                    spriteBatch.Draw(value10, vector17, rectangle3, color16, npc.rotation, origin4, npc.scale, spriteEffects ^ SpriteEffects.FlipHorizontally, 0f);
+                }
+            }
+            if (!npc.IsABestiaryIconDummy)
+            {
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                if (NPC.scale < 1)
+                {
+                    for (int j = 0; j < 12; j++)
+                    {
+                        Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 3f;
+                        Color glowColor = Color.Purple;
+                        spriteBatch.Draw(value11, vector16 + afterimageOffset, rectangle4, glowColor, npc.rotation, origin5, 1f, spriteEffects ^ SpriteEffects.FlipHorizontally, 0f);
+                    }
+                }
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+            }
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+
+            spriteBatch.Draw(value11, vector16, rectangle4, originColor, npc.rotation, origin5, 1f, spriteEffects ^ SpriteEffects.FlipHorizontally, 0f);
+            GameShaders.Misc["QueenSlime"].Apply();
+            if (!npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
+            }
+            DrawData value12 = new DrawData(value10, position7, rectangle3, npc.GetAlpha(originColor), npc.rotation, origin4, npc.scale, spriteEffects ^ SpriteEffects.FlipHorizontally);
+            GameShaders.Misc["QueenSlime"].Apply(value12);
+            value12.Draw(spriteBatch);
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            if (!npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+            }
+            Texture2D value13 = TextureAssets.Extra[177].Value; // crown
+            rectangle3 = value13.Frame();
+            origin4 = rectangle3.Size() * new Vector2(0.5f, 0.5f);
+            position7 = new Vector2(npc.Center.X, npc.Top.Y - (float)rectangle3.Bottom + 44f);
+            float num59 = 0f;
+            switch (num54)
+            {
+                case 1:
+                    num59 -= 10f;
+                    break;
+                case 3:
+                case 5:
+                case 6:
+                    num59 += 10f;
+                    break;
+                case 4:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                    num59 += 18f;
+                    break;
+                case 7:
+                case 8:
+                    num59 -= 14f;
+                    break;
+                case 9:
+                    num59 -= 16f;
+                    break;
+                case 10:
+                    num59 -= 18f;
+                    break;
+                case 11:
+                    num59 += 20f;
+                    break;
+                case 20:
+                    num59 -= 14f;
+                    break;
+                case 21:
+                case 23:
+                    num59 -= 18f;
+                    break;
+                case 22:
+                    num59 -= 22f;
+                    break;
+            }
+            position7.Y += num59;
+            if (npc.rotation != 0f)
+            {
+                position7 = position7.RotatedBy(npc.rotation, npc.Bottom);
+            }
+            position7 -= screenPos;
+            spriteBatch.Draw(value13, position7, rectangle3, originColor, npc.rotation, origin4, npc.scale, spriteEffects ^ SpriteEffects.FlipHorizontally, 0f);
+            return;
+        }
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            base.PostDraw(npc, spriteBatch, screenPos, drawColor);
-         
-            bool resprite = WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors;
-            if (!resprite)
-            {
-                return;
-            }
             
-            GameShaders.Misc["QueenSlime"] = queenSlimeBuffer;
         }
     }
 
