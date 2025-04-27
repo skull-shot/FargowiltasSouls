@@ -43,6 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateInventory(Player player)
         {
             //cell phone
+            /*
             player.accWatch = 3;
             player.accDepthMeter = 1;
             player.accCompass = 1;
@@ -55,6 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.accThirdEye = true;
             player.accCalendar = true;
             player.accWeatherRadio = true;
+            */
             player.chiselSpeed = true;
             player.treasureMagnet = true;
         }
