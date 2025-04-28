@@ -61,7 +61,7 @@ AshWoodEnchant: {
 	/* Tooltip:
 		'''
 		Fire debuffs don't damage you
-		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
+		While afflicted with a debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
 		'You're telling me this isn't wood?'
@@ -402,9 +402,8 @@ ObsidianEnchant: {
 	/* Tooltip:
 		'''
 		Grants immunity to lava
-		You have normal movement and can swim in lava
-		While standing in lava or lava wet, your attacks spawn explosions
-		While afflicted with any debuff or standing in lava, attacks are accompanied by balls of fire that deal magic damage
+		You have normal movement and can swim in lava, granting the lava wet buff
+		While afflicted with a debuff or lava wet, your attacks spawn explosions
 		Fire debuffs don't damage you
 		Grants immunity to Oiled
 		'The earth calls'
