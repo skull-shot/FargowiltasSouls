@@ -1,4 +1,5 @@
 using Fargowiltas;
+using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -33,39 +34,36 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         public override void SetDefaults()
         {
             NPC.CloneDefaults(NPCID.QueenSlimeMinionPurple);
-            AIType = NPCID.QueenSlimeMinionPurple;
+            AIType = 0;
+            NPC.aiStyle = -1;
 
             //because they will double dip on expert/master scaling otherwise
             NPC.lifeMax = 75;
             NPC.damage = 50;
 
+            // this isn't right but makes the hitboxes feel better
+            NPC.width /= 2;
+            NPC.height /= 2;
+
             NPC.lifeMax *= 10;
             NPC.timeLeft = NPC.activeTime * 30;
             NPC.scale *= 1.5f;
             NPC.width = NPC.height = (int)(NPC.height * 0.9);
-            NPC.knockBackResist *= 0.5f;
-            if (WorldSavingSystem.MasochistModeReal)
-                NPC.knockBackResist *= 0.2f;
+            NPC.knockBackResist = 0f;
+            NPC.noGravity = true;
+            NPC.noTileCollide = true;
         }
-        public int ShotTimer;
-        const int ShotCD = 60 * 5;
-        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
-        {
-            return ContactDamageTimer >= 120;
-        }
+        public ref float AIVariant => ref NPC.ai[0];
+        public ref float Timer => ref NPC.ai[1];
+        public ref float Index => ref NPC.ai[2];
         public override void AI()
         {
             if (!FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.queenSlimeBoss, NPCID.QueenSlimeBoss)
                 && !NPC.AnyNPCs(NPCID.QueenSlimeBoss))
             {
-                NPC.life = 0;
-                NPC.HitEffect();
-                NPC.checkDead();
+                NPC.active = false;
                 return;
             }
-
-            if (ContactDamageTimer < 120)
-                ContactDamageTimer++;
 
             const float IdleAccel = 0.025f;
             foreach (NPC n in Main.npc.Where(n => n.active && n.type == NPC.type && n.whoAmI != NPC.whoAmI && NPC.Distance(n.Center) < NPC.width))
@@ -75,83 +73,107 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 n.velocity.X += IdleAccel * (n.Center.X < NPC.Center.X ? -1 : 1);
                 n.velocity.Y += IdleAccel * (n.Center.Y < NPC.Center.Y ? -1 : 1);
             }
-
-            //if (NPC.HasValidTarget && NPC.Distance(Main.player[NPC.target].Center) > 300)
-            //    NPC.velocity += NPC.SafeDirectionTo(Main.player[NPC.target].Center) * 0.05f;
-
-            NPC.spriteDirection = NPC.direction;
-            NPC.rotation = Math.Abs(NPC.velocity.X * .1f) * NPC.direction;
-
-            const int cooldown = 90;
             NPC parent = Main.npc[EModeGlobalNPC.queenSlimeBoss];
 
-            //move slower during rain attack
-            /*
-            if (NPC.Distance(Main.player[NPC.target].Center) < 600 && (parent.GetGlobalNPC<QueenSlime>().RainTimer > 0 || NPC.AnyNPCs(ModContent.NPCType<GelatinSlime>())))
+            // share healthbar
+            if (FargoSoulsUtil.HostCheck)
             {
-                NPC.localAI[0] = cooldown;
-            }
-            */
-
-            if (NPC.Distance(parent.Center) > 2000)
-                NPC.Center = parent.Center;
-
-            if (NPC.localAI[0] > 0)
-            {
-                NPC.localAI[0]--;
+                if (NPC.lifeMax != parent.lifeMax)
+                    NPC.life = NPC.lifeMax = parent.lifeMax;
+                NPC.life = parent.life = Math.Min(NPC.life, parent.life);
             }
 
-            //if moving towards you, slow down
-            if (NPC.HasValidTarget && Math.Abs(MathHelper.WrapAngle(NPC.velocity.ToRotation() - NPC.SafeDirectionTo(Main.player[NPC.target].Center).ToRotation())) < MathHelper.PiOver2)
+            switch ((int)AIVariant)
             {
-                if (NPC.Distance(Main.player[NPC.target].Center) < 16 * 5)
-                {
-                    NPC.position -= NPC.velocity * 0.33f;
-                }
-                else if (NPC.localAI[0] > 0)
-                {
-                    float ratio = NPC.localAI[0] / cooldown;
-                    NPC.position -= NPC.velocity * 0.66f * ratio;
-                }
+                case 0: // idle a bit, then dash at qs to reform
+                    {
+                        float startTime = 60;
+                        Timer++;
+                        if (Timer < startTime)
+                        {
+                            NPC.velocity *= 0.93f;
+                        }
+                        else
+                        {
+                            ReturnToSlime(Timer);
+                        }
+                    }
+                    break;
+                case 1: //rainer
+                    {
+                        if (Timer >= 0)
+                        {
+                            Timer++;
+                            // do the rain thing
+                            if (!parent.HasPlayerTarget)
+                            {
+                                return;
+                            }
+                            Player player = Main.player[parent.target];
+                            float x = parent.Center.X;
+                            float interval = WorldSavingSystem.MasochistModeReal ? 220 : 300;
+                            float divisor = WorldSavingSystem.MasochistModeReal ? 130 : 150;
+                            x += Index * 300;
+                            x += MathF.Sin(MathF.Tau * Timer / divisor) * 200;
+                            float y = player.Center.Y - 500;
+                            float speedMod = 1f + Timer / 60;
+                            if (speedMod > 5)
+                                speedMod = 5;
+                            Vector2 pos = new(x, y);
+                            Movement(pos, speedMod);
+
+                            if (Timer > 70 && NPC.Distance(pos) < 30 && Timer % 5 == 0)
+                            {
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    Vector2 spawnPos = NPC.Center + Main.rand.NextVector2Circular(32, 32);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, 8f * Vector2.UnitY,
+                                      ProjectileID.QueenSlimeMinionBlueSpike, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Timer--;
+                            ReturnToSlime(-Timer * 2);
+                        }
+                    }
+                    break;
             }
-
-            // in p1, occasionally stop and fire projectile
-            if (parent.GetLifePercent() > 0.5f && parent.GetGlobalNPC<QueenSlime>().StompTimer < 0)
+            void ReturnToSlime(float timer) // by dm dokuro
             {
-                
-                // sync projectile timer
-                foreach (NPC otherNPC in Main.npc.Where(n => n.TypeAlive<GelatinSubject>()))
+                if (NPC.Distance(parent.Center) > 70)
                 {
-                    if (otherNPC.whoAmI > NPC.whoAmI)
-                        otherNPC.As<GelatinSubject>().ShotTimer = ShotTimer;
+                    float speedMod = 0.3f + timer / 80;
+                    Movement(parent.Center, speedMod);
                 }
-                
-
-                if (NPC.HasValidTarget)
-                    ShotTimer++;
                 else
-                    ShotTimer = 0;
-                if (ShotTimer == ShotCD) // telegraph
                 {
-                    FargoSoulsUtil.DustRing(NPC.Center, 32, DustID.PinkSlime, 5f, default, 2f);
-                    NPC.netUpdate = true;
-                    SoundEngine.PlaySound(SoundID.Item154, NPC.Center);
-                }
-                if (ShotTimer > ShotCD) // stop
-                {
-                    NPC.velocity *= 0.5f;
-                }
-                if (ShotTimer > ShotCD + 30 && NPC.HasValidTarget) // fire and reset
-                {
-                    Player player = Main.player[NPC.target];
-                    Vector2 shotVel = NPC.DirectionTo(player.Center) * 14f;
-                    if (FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, shotVel, ProjectileID.QueenSlimeMinionBlueSpike, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                    NPC.velocity -= shotVel / 3;
-                    ShotTimer = 0;
-                    NPC.netUpdate = true;
+                    NPC.velocity = (parent.Center - NPC.Center) * 0.15f;
+                    NPC.scale *= 0.92f;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int radius = 50;
+                        QueenSlime.QSDust(NPC.Center - Vector2.One * radius, 2 * radius, 2 * radius, 0, 0);
+                    }
+                    if (NPC.scale < 0.1f)
+                    {
+                        NPC.active = false;
+                        return;
+                    }
                 }
             }
+        }
+        public void Movement(Vector2 targetPos, float speedModifier = 1.2f)
+        {
+            float accel = 1f * speedModifier;
+            float decel = 1.5f * speedModifier;
+            float resistance = NPC.velocity.Length() * accel / (22f * speedModifier);
+            NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Center, targetPos, NPC.velocity, accel - resistance, decel + resistance);
+        }
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
+            modifiers.FinalDamage /= 5;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
@@ -238,5 +260,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
             return false;
         }
+
     }
 }

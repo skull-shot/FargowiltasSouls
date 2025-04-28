@@ -6,6 +6,7 @@ using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -66,6 +67,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                         pos = tilePos.ToWorldCoordinates();
                         if (pos.Distance(player.Center) < 16 * 30)
                         {
+                            float yDif = player.Center.Y - pos.Y;
+                            while (pos.Y > player.Center.Y && Collision.SolidCollision(pos - Vector2.UnitY * yDif, 1, (int)Math.Abs(yDif) + 1))
+                            {
+                                pos.Y -= 16;
+                                yDif = player.Center.Y - pos.Y;
+                            }
+                            pos.Y += 16;
+                                
                             EaterAttack(pos + pos.DirectionTo(player.Center) * 20, player);
                             break;
                         }
