@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             player.AddEffect<AshWoodEffect>(item);
-            player.AddEffect<AshWoodFireballs>(item);
+            //player.AddEffect<AshWoodFireballs>(item);
             player.AddEffect<ObsidianEffect>(item);
 
             player.lavaImmune = true;
@@ -62,16 +62,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.ObsidianCD--;
 
             bool triggerFromDebuffs = false;
-            if (modPlayer.ForceEffect<ObsidianEnchant>())
-            {
                 for (int i = 0; i < Player.MaxBuffs; i++)
                 {
                     int type = player.buffType[i];
                     if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
                         triggerFromDebuffs = true;
                 }
-            }
-            if (triggerFromDebuffs || player.lavaWet || modPlayer.LavaWet)
+            if ((modPlayer.ForceEffect<ObsidianEnchant>()) || (triggerFromDebuffs || player.lavaWet || modPlayer.LavaWet))
             {
                 player.AddEffect<ObsidianProcEffect>(item);
             }

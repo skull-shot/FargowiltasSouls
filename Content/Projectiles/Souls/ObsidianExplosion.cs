@@ -76,6 +76,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 if (Projectile.owner.IsWithinBounds(Main.maxProjectiles) && Main.player[Projectile.owner].HasEffect<LeadEffect>())
                     target.AddBuff(ModContent.BuffType<LeadPoisonBuff>(), 60 * 5);
             }
+            else
+            {
+                target.AddBuff(BuffID.OnFire, 300);
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {
