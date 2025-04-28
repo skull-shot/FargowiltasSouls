@@ -1449,123 +1449,123 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Oferece imunidade a efeitos negativos de bioma
 		Oferece imunidade a [i:FargowiltasSouls/DarkenedHeart] Apodrecendo e [i:FargowiltasSouls/GuttedHeart] Sanguinário
 		[i:FargowiltasSouls/DarkenedHeart] Aumenta a velocidade dos movimentos e tração ao virar
-		[i:FargowiltasSouls/DarkenedHeart] You spawn mini eaters to seek out enemies every few attacks, inflicting Sublimation (DoT and defense reduction)
-		[i:FargowiltasSouls/GuttedHeart] Up to 5 creepers hover around you blocking some damage, respawning faster when not moving
-		[i:FargowiltasSouls/GuttedHeart] Gives 10% increased max life
-		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump
-		[i:FargowiltasSouls/GelicWings] When you land after a jump, slime spikes shoot out to the sides
-		[i:FargowiltasSouls/GelicWings] Increases wing time by 30%
-		'It pulses with vitality'
+		[i:FargowiltasSouls/DarkenedHeart] Você cria mini devoradores de mundo para atacar inimigos, infligindo Sublimação (Dano ao longo do tempo e diminuição na redução de dano)
+		[i:FargowiltasSouls/GuttedHeart] Até 5 creepers circulam em volta de você, te protegendo de danos, renascem mais rapidamente quando você não está se movendo
+		[i:FargowiltasSouls/GuttedHeart] 10% de aumento na vida máxima
+		[i:FargowiltasSouls/GelicWings] Permite que você faça um pulo duplo
+		[i:FargowiltasSouls/GelicWings] Quando você pousa após um pulo, espinhos de geleia voam para todos os lados
+		[i:FargowiltasSouls/GelicWings] 30% de aumento no tempo de voo
+		'Pulsa com Vitalidade'
 		'''
 }
 
 QueenStinger: {
-	DisplayName: The Queen's Stinger
+	DisplayName: O ferrão da Rainha
 	Tooltip:
 		'''
-		Oferece imunidade a Infested
-		Honey buff increases your armor penetration by 10
-		Bees and weak Hornets become friendly
-		'Ripped right off of a defeated foe'
+		Oferece imunidade a Infestado
+		O buff de mel aumenta sua perfuração de blindagem em 10
+		Abelhas e vespas fracas se tornam amigáveis
+		'Arrancado diretamente de um inimigo derrotado'
 		'''
 }
 
 ReinforcedPlating: {
-	DisplayName: Reinforced Plating
+	DisplayName: Blindagem Reforçada
 	Tooltip:
 		'''
-		Oferece imunidade a Defenseless, Nano Injection, and knockback
-		Reduces damage taken by 5%
-		'The sturdiest piece of a defeated foe'
+		Oferece imunidade a Indefeso, Nano Injeção, e recuo
+		5% de aumento na redução de danos
+		'A parte mais resistente de um inimigo derrotado'
 		'''
 }
 
 SandsofTime: {
-	DisplayName: Sands of Time
+	DisplayName: Areias do Tempo
 	Tooltip:
 		'''
-		Funciona do inventário e visual slots
-		Oferece imunidade a Mighty Wind and cactus damage
-		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
-		'Whatever you do, don't drop it'
+		Funciona do inventário e visual 
+		Oferece imunidade a Vento Poderoso e dano de cacto
+		Você renasce duas vezes mais rápido quando nenhum chefe está vivo
+		Use para voltar ao último lugar em que você morreu
+		'O que quer que faça, não deixe cair'
 		'''
 	VanityTooltip:
 		'''
-		Oferece imunidade a Mighty Wind and cactus damage
-		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
+		Oferece imunidade a Vento Poderoso e dano de cacto
+		Você renasce duas vezes mais rápido quando nenhum chefe está vivo
+		Use para voltar ao último lugar em que você morreu
 		'''
 }
 
 SaucerControlConsole: {
-	DisplayName: Saucer Control Console
+	DisplayName: Console de Controle do Disco Voador
 	Tooltip:
 		'''
-		Oferece imunidade a Electrified and Distorted
-		Summons a friendly Mini Saucer
-		The saucer's tractor beam slows enemies hit by it
-		Reduced damage before Golem is defeated
-		'Just keep it in airplane mode'
+		Oferece imunidade a Eletrificado e Distorcido
+		Invoca um mini Disco Voador amigável
+		O raio dele desacelera os inimigos atingidos
+		Dano reduzido antes do Golem ser derrotado
+		'Mantenha no modo avião'
 		'''
-	VanityTooltip: Press the Ammo Cycle key to cycle ammos
+	VanityTooltip: Aperte o botão de Ciclagem de Munições para ciclar a munição
 }
 
 SecurityWallet: {
-	DisplayName: Security Wallet
+	DisplayName: Carteira de Segurança
 	Tooltip:
 		'''
-		Funciona do inventário e visual slots
+		Funciona do inventário e visual
 		Oferece imunidade a Midas
-		Reduces reforge cost by 50%
-		'Not secure against being looted off of one's corpse'
+		Reduz o custo das reforjas em 50%
+		'Não protege de ser roubada do cadáver de alguém'
 		'''
 	VanityTooltip:
 		'''
 		Oferece imunidade a Midas
-		Reduces reforge cost by 50%
+		Reduz o custo das reforjas em 50%
 		'''
 }
 
 SinisterIcon: {
-	DisplayName: Sinister Icon
+	DisplayName: Ícone Sinistro
 	Tooltip:
 		'''
-		Oferece imunidade a Unlucky and Stunned
-		Increases spawn rate
-		Enemies and bosses will drop doubled loot
-		Only affects bosses if this was equipped for the full fight
-		'Most definitely not alive'
+		Oferece imunidade a Azarado e Atordoado
+		Aumenta a taxa de criação
+		Inimigos e chefes derrubam o dobro dos tesouros
+		Afeta chefes apenas se estiver equipado desde o ínicio da luta
+		'Definitivamente não está vivo'
 		'''
 }
 
 SkullCharm: {
-	DisplayName: Crystal Skull
+	DisplayName: Caveira de Cristal
 	Tooltip:
 		'''
-		Oferece imunidade a Dazed
-		Increases damage dealt by 15% and damage taken by 10%
-		Enemies are less likely to target you
-		The crystal skull charges energy to attack as you attack
-		'Part of a collective consciousness'
+		Oferece imunidade a Tonto
+		Aumenta o dano causado em 15% e o dano recebido em 10%
+		Inimigos têm chance menor de te atacar
+		A caveira carrega energia para atacar enquanto você ataca
+		'Parte de uma consciência coletiva'
 		'''
 }
 
 SlimyShield: {
-	DisplayName: Slimy Shield
+	DisplayName: Escudo Viscoso
 	Tooltip:
 		'''
-		Oferece imunidade a Slimed
-		Increases fall speed
-		Hold down to fall through platforms
-		When you land after a jump, slime will fall from the sky over your cursor
-		Slime inflicts Slimed and Oiled
-		'Torn from the innards of a defeated foe'
+		Oferece imunidade a Geleia
+		Aumenta a velocidade de queda
+		Segure para baixo para cair por plataformas
+		Quando você pousa após um pulo, geleia cairá do céu em cima do seu cursor
+		A Geleia inflige Geleia e Oleoso
+		'Rasgado do interior de um inimigos derrotado'
 		'''
 }
 
 SparklingAdoration: {
-	DisplayName: Sparkling Adoration
+	DisplayName: Adoração Cintilante
 	Tooltip:
 		'''
 		Oferece imunidade a Lovestruck and Fake Hearts
