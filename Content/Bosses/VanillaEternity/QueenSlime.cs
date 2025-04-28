@@ -18,6 +18,7 @@ using Terraria.ModLoader.IO;
 using FargowiltasSouls.Core;
 using System.Collections.Generic;
 using Luminance.Common.Utilities;
+using static tModPorter.ProgressUpdate;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -57,6 +58,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             MinionChargeDirect,
             MinionChargeSide,
             Artillery,
+            FlightExplosions,
             SpikeRain
         }
 
@@ -156,6 +158,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     break;
                 case States.Artillery:
                     Artillery();
+                    break;
+                case States.FlightExplosions:
+                    FlightExplosions();
                     break;
                 case States.SpikeRain:
                     SpikeRain();
@@ -457,7 +462,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             dir.Normalize();
                             Vector2 vel = 20f * dir;
                             FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<GelatinFlyer>(), NPC.whoAmI, target: NPC.target,
-                                velocity: vel, ai0: offset, ai2: minionDir);
+                                velocity: vel, ai0: offset, ai2: 0);
                         }
                             
                     }
@@ -625,7 +630,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void Artillery()
         {
-            int windup = 35;
+            int windup = 45;
             int attackLength = 60;
             int endlag = 30;
             float horDir = NPC.HorizontalDirectionTo(Target.Center);
@@ -659,6 +664,71 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 ResetToNeutral();
             }
         }
+
+        private void FlightExplosions()
+        {
+            int explosions = 4;
+            int windup = 60;
+            int endlag = 35;
+            int cycleTime = windup + endlag;
+            NPC.noGravity = true;
+
+
+            Timer++;
+            int cycleTimer = (int)Timer % cycleTime;
+            if (cycleTimer < windup)
+            {
+
+            }
+            else if (cycleTimer == windup)
+            {
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    int projs = WorldSavingSystem.MasochistModeReal ? 14 : 14;
+                    float rotOffset = NPC.DirectionTo(Target.Center).ToRotation();
+                    for (int i = 0; i < projs; i++)
+                    {
+                        float rot = ((float)i / projs) * MathHelper.TwoPi;
+                        rot += rotOffset;
+
+                        Vector2 dir = rot.ToRotationVector2();
+                        float vel = 11f;
+                        Vector2 offset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + offset + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
+                    }
+                }
+            }
+            else
+            {
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    if (cycleTimer % 15 == 0)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item155, NPC.Center);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Vector2 dir = -NPC.DirectionTo(Target.Center).RotatedByRandom(MathHelper.PiOver2 * 0.6f);
+                            Vector2 vel = 20f * dir;
+                            FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<GelatinFlyer>(), NPC.whoAmI, target: NPC.target,
+                                    velocity: vel, ai0: 0, ai2: 1);
+                        }
+                    }
+                }
+            }
+            if (Timer > cycleTime * explosions)
+            {
+                ResetToNeutral();
+                return;
+            }
+
+            float desiredX = Target.Center.X;
+            float desiredY = Target.Center.Y - 200;
+            float xAccel = 0.4f;
+            int xMax = 18;
+            NPC.velocity.X += Math.Sign(desiredX - NPC.Center.X) * xAccel;
+            NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -xMax, xMax);
+            NPC.velocity.Y = MathHelper.Lerp(NPC.velocity.Y, (desiredY - NPC.Center.Y) * 0.1f, 0.05f);
+        }
         private void SpikeRain()
         {
 
@@ -689,11 +759,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         //States.MinionChargeDirect, 
                         //States.MinionChargeSide, 
                         States.Artillery,
+                        States.FlightExplosions,
                         //States.SpikeRain
                         ];
                     AvailableStates.AddRange(states);
                 }
-                //AvailableStates.Remove((States)State);
+                AvailableStates.Remove((States)State);
                 State = (int)Main.rand.NextFromCollection(AvailableStates);
                 AvailableStates.Remove((States)State);
                 NetSync(NPC);
