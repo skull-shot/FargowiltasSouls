@@ -510,8 +510,8 @@ namespace FargowiltasSouls.Content.Projectiles
                         //detect being hit
                         if (orb.Alive() && orb.ai[0] == 0f && projectile.owner == orb.owner && projectile.Colliding(projectile.Hitbox, orb.Hitbox))
                         {
-                            int numBalls = 4;
-                            int dmg = 20;
+                            int numBalls = 5;
+                            int dmg = 25;
 
                             if (modPlayer.AncientShadowEnchantActive)
                             {
