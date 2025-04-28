@@ -1,70 +1,70 @@
 // Maybe move into entries of each enchant
-// Adamantite: Speed bonus increased to 50%
-// Apprentice: Secondary weapon frequency increased to 1/5
-// AncientHallow: Sword damage increased, projectile damage cap increased to 200
-// AncientShadow: Number of Shadow Orbs increased
-// AncientCobalt: Increased jump height and explosion damage and size
-// Angler: All fishing rods have 5 extra lures
-// Bee: Increased wing strength and bee swarm damage
-// Beetle: Beetle buffs can reach tier 3
-// BorealWood: Fires more snowballs more often
-// Cactus: Number of needles and damage increased
-// Chlorophyte: Damage of ring and spores increased, cooldown of spores reduced
-// Cobalt: Increased explosion damage
-// Copper: Arc count increased to 8, lightning damage increased
-// Crimson: Timer doubled, but the heal triggers twice. Once in the middle, and once at the end
-// CrystalAssassin: Reduced dash cooldown, reduced First Strike cooldown to 5 seconds
-// DarkArtist: Secondary weapon frequency increased to 1/3
-// Ebonwood: Aura size increased, flat damage and damage reduction cap increased to 10 and 10% respectively
-// Forbidden: Damage boost increased from 1.2x to 1.4x
-// Fossil: Revive heal increased to 200 and revive bone count doubled
-// Frost: Icicle damage doubled
-// Gladiator: Increased banner aura size and doubled stat buff, improved spear rain damage and cooldown
-// Gold: Increased shell duration
-// Hallow: Increased potion heal bonus from 40 to 70%, doubled repel duration
-// Huntress: Armor penetration and flat damage increased to 10 and 5 respectively
-// Iron: Increases grab range, increases damage reduction to 35%
-// Jungle: Spore damage increased, cooldown decreased
-// Lead: Lead Poisoning damage increased, DoT resistance increased to 60%
-// Meteor: Increased meteor damage, size and frequency
-// Miner: Increased mining speed
-// Molten: Inferno ring is larger and more damaging, damage bonus increased from 20% to 30%
-// Monk: Increased dash damage
-// Mythril: Max attack speed bonus increased and lasts longer
-// Nebula: Nebula shots deal increased damage and spawn 2 nebula boosters
-// Necro: Graves have increased size, float, and slightly home in on you when you're close
-// Ninja: Maximum crit chance increased to 40%, maximum player speed where effect activates increased
-// Obsidian: Also grants explosions when afflicted with any debuff but with reduced damage, increased damage cap, reduced fireball cooldown
-// Orichalcum: Increases multiplier to 3.5x
-// Palladium: Rapid Healing always lasts 5 seconds, increases orb damage
-// PalmWood: Attack speed, damage, and size increased
-// Pearlwood: Your crits reroll twice, increased star damage
-// Platinum: Bonus replaced with 33% chance for enemies to drop 5x loot
-// Pumpkin: Pumpkins can grow while flying, heal for twice as much, and flame damage is increased to 45
-// Rain: Umbrella can block up to 400 damage and reflected damage is tripled
-// RedRiding: Arrow rain has less cooldown and deals more damage
-// RichMahogany: Hooks pull 2.5x as fast, damage reduction and thorns increased greatly
-// Shadewood: Aura size and blood damage increased, additionally applies Ichor
-// Shinobi: Increased dash damage
-// Shroomite: Mushroom Power stats increased to 30%, mushroom damage and count increased
-// Silver: Parrying negates up to 200 damage and always grants the Striking Moment buff
-// Solar: Solar bursts deal increased damage in a larger radius
-// Spectre: Revive heal increased to 200, revive spirit count doubled, spirit damage doubled
-// Spider: 15% extra critical strike chance
-// Spooky: Decreased cooldown
-// Stardust: Timestop cooldown decreased from 90 to 75
-// Snow: Snowballs inflict Frostbite and freeze enemies solid
-// Shadow: Number of Shadow Orbs increased
-// Squire: Mount defense increased from 10 to 15, speed and acceleration from 1.25x to 1.5x, heal bonus from 10% to 15%
-// Tiki: Bonus whip range increased to 40%, projectile damage bonus increased to 1.4x
-// Tin: Minimum crit increased to 10%, max crit is at least 50%, reduced proc cooldown
-// Titanium: Shard damage increased, Titanium Shield duration increased to 5 seconds and maximum damage reduction increased by 10%
-// Tungsten: Shockwaves are 3x as large and frequent
-// Turtle: Occasionally recover a projectile block point, number of needles and damage increased
-// ValhallaKnight: Mount defense increased from 15 to 20, acceleration from 1.5x to 2x, and heal bonus from 15% to 20%
-// Vortex: Laser damage increased
-// Wood: Bestiary and banner multiplier increased to 5
-// AshWood: Reduced Fireball cooldown, increased fireball damage cap
-// NoUpgrade: No upgrade
-// Active: Active
-// Inactive: Inactive
+Adamantite: Bônus de velocidade ampliado para 50%
+Apprentice: Frequência das armas secundárias ampliada para 1/5
+AncientHallow: Dano da espada aumentado, limite de dano dos projéteis refletidos ampliado para 200
+AncientShadow: Número de orbes sombrios ampliado
+AncientCobalt: Altura do pulo ampliado, dano e tamanho da explosão ampliados
+Angler: Todas as varas de pescar lançam 5 iscas a mais
+Bee: Força das asas e abelhas ampliadas
+Beetle: Buff de besouro pode chegar ao nível 3
+BorealWood: Lança mais bolas de neve de forma mais frequente
+Cactus: Número de agulhas e dano ampliados
+Chlorophyte: Dano do anel e esporos ampliado, tempo de recarga dos esporos reduzido
+Cobalt: Dano da explosão ampliado
+Copper: choques em cadeia ampliados para 8, dano dos raios ampliado
+Crimson: Temporizador dobrado, mas a cura acontece duas vezes. Uma no meio, e uma no final
+CrystalAssassin: Tempo de recarga da corrida reduzido, tempo de recarga do Primeiro Golpe reduzido para 5 segundos
+DarkArtist: Frequência das armas secundárias ampliada para 1/3
+Ebonwood: Tamanho da aura ampliado, dano extra plano ampliado para 10, e redução de dano ampliada para 10%
+Forbidden: Impulso de dano ampliado de 1.2x para 1.4x
+Fossil: Cura ao renascer ampliada para 200, contagem de ossos dobrada
+Frost: Dano dos gelos ampliado
+Gladiator: Tamanho da aura ampliado, efeitos dos buffs dobrados, dano ampliado e tempo de recarga da chuva de flechas reduzido
+Gold: Duração do casco ampliada
+Hallow: Melhoria na cura das poções aumentada de 40% para 70%, duração do afastamento dobrada
+Huntress: Penetração de armadura e dano plano aumentados para 10 e 5 respectivamente.
+Iron: Alcance aumentado, redução de dano ampliada para 35%
+Jungle: Dano dos esporos ampliado, tempo de recarga reduzido
+Lead: Dano do envenenamento por chumbo aumentado, resistência a efeitos negativos ampliada para 60%
+Meteor: Dano, frequência e tamanho do meteoro melhorados
+Miner: Velocidade de mineração ampliada
+Molten: Anel infernal é maior e causa mais dano, dano bônus aumentado de 20% para 30%
+Monk: Dano da corrida aumentado
+Mythril: Bônus máximo de velocidade de ataque aumentado e ele dura mais tempo
+Nebula: Ataques nebulosos possuem dano maior e criam 2 impulsionadores nebulosos
+Necro: Covas tem tamanho ampliado, flutuam, e se aproximam lentamente de você quando você está próximo
+Ninja: Chance máxima de ataques críticos aumentada para 40%, velocidade de jogador máxima onde o efeito ativa aumentada
+Obsidian: Também causa explosões com dano reduzido quando afligido com qualquer efeito negativo, limite de dano aumentado, tempo de recarga das bolas de fogo reduzido
+Orichalcum: Multiplicador aumentado para 3.5x
+Palladium: Cura acelerada sempre dura 5 segundos, dano do orbe aumentado
+PalmWood: Velocidade de ataque, dano e tamanho ampliados
+Pearlwood: Seus críticos rolam novamente duas vezes, dano da estrela aumentado
+Platinum: Bônus substituído por uma chance de 33% de inimigos derrubarem 5x mais tesouros
+Pumpkin: Abóboras crescem enquanto voa, curam o dobro, e dano das chamas é aumentado para 45
+Rain: Guarda-chuva consegue bloquear até 400 de dano e dano refletido é triplicado
+RedRiding: Chuva de flechas tem tempo de recarga reduzido e causa mais dano
+RichMahogany: Ganchos puxam 2.5x mais rápido, redução de dano e espinhos muito ampliados
+Shadewood: Tamanho da aura e dano do sangue aumentados, adicionalmente aplica ichor
+Shinobi: Dano da corrida aumentado
+Shroomite: Estatísticas do poder do cogumento ampliadas para 30%, dano e quantidade de cogumentos aumentados
+Silver: Aparar ataques nega até 200 de dano e sempre garante o buff de Primeiro Golpe
+Solar: Explosões solares causam mais dano em uma área maior
+Spectre: Cura ao renascer ampliada para 200, quantidade de espiritos ao renascer dobrado, dano dos espíritos aumentado
+Spider: Chance de ataque crítico aumentada em 15%
+Spooky: Tempo de recarga reduzido
+Stardust: Tempo de recarga reduzido de 90 para 75 segundos
+Snow: Bolas de neve infligem queimadura de frio e congelam inimigos
+Shadow: Número de orbes sombrios aumentado
+Squire: Defesa da montaria ampliada de 10 para 15, velocidade e aceleração de 1.25x para 1.5x, e cura bônus de 10% para 15%
+Tiki: Bônus de alcance do chicote aumentado para 40%, bônus de dano aumentado para 1.4x
+Tin: Chance mínima de crítico aumentada para 10%, chance máxima é no mínimo 50%, reduz o tempo de recarga entre impulsos
+Titanium: Dano dos fragmentos aumentado, duração do Escudo de Titânio aumentado para 5 segundos e redução de dano máxima aumentada por 10%
+Tungsten: Ondas de choque são 3x maiores e mais frequentes
+Turtle: Recupera ocasionalmente um bloqueio de projétil, número e dano das agulhos ampliados
+ValhallaKnight: Defesa da montaria ampliada de 15 para 20, aceleração de 1.5x para 2x, e cura bônus de 15% para 20%
+Vortex: Dano do laser aumentado
+Wood: Multiplicador de bestiário e bandeira ampliado para 5
+AshWood: Tempo de recarga das bolas de fogo reduzido, limite de dano das bolas de fogo aumentado
+NoUpgrade: Sem melhoria
+Active: Ativo
+Inactive: Inativo

@@ -1,16 +1,16 @@
-// Freeze.DisplayName: Freeze
-// Gold.DisplayName: Turn Gold
+Freeze.DisplayName: Congelamento
+Gold.DisplayName: Virar Ouro
 // SmokeBomb.DisplayName: Throw Smoke Bomb
-// SpecialDash.DisplayName: Special Dash
-// Bomb.DisplayName: Bomb
-// EffectToggle.DisplayName: Open Effect Toggler
-// PrecisionSeal.DisplayName: Precision Movement
-// MagicalBulb.DisplayName: Magical Cleanse
-// FrigidSpell.DisplayName: Frigid Spell
-// DebuffInstall.DisplayName: Debuff Install
-// AmmoCycle.DisplayName: Ammo Cycle
-// ActiveSkill1.DisplayName: Active Skill 1
-// ActiveSkill2.DisplayName: Active Skill 2
-// ActiveSkill3.DisplayName: Active Skill 3
-// ActiveSkill4.DisplayName: Active Skill 4
-// ActiveSkillMenu.DisplayName: Active Skill Menu
+SpecialDash.DisplayName: Corrida Especial
+Bomb.DisplayName: Bomba
+EffectToggle.DisplayName: Abrir Habilitador de Efeitos
+PrecisionSeal.DisplayName: Movimento Preciso
+MagicalBulb.DisplayName: Limpeza Mágica
+FrigidSpell.DisplayName: Feitiço Frígido
+DebuffInstall.DisplayName: Instalação de Efeitos Negativos
+AmmoCycle.DisplayName: Ciclagem de Munição
+ActiveSkill1.DisplayName: Habilidade Ativa 1
+ActiveSkill2.DisplayName: Habilidade Ativa 2
+ActiveSkill3.DisplayName: Habilidade Ativa 3
+ActiveSkill4.DisplayName: Habilidade Ativa 4
+ActiveSkillMenu.DisplayName: Menu de Habilidades

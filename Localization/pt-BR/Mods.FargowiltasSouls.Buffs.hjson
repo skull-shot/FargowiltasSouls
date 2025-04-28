@@ -1,819 +1,819 @@
 TrojanSquirrelMountBuff: {
 	DisplayName: Esquilo de Tróia
-	Description: Você está montado em um esquilo mecânico
+	Description: Você está pilotando um esquilo mecha
 }
 
 AccursedSarcophagusBuff: {
-	DisplayName: Sarcófago Maldito
-	Description: Ele não tocará em nada
+	DisplayName: Sarcófago Amaldiçoado
+	Description: Ele vai tirar as mão
 }
 
 BabyAbomBuff: {
-	DisplayName: Abom Bebê
-	Description: Fazendo kickflips em uma foice
+	DisplayName: Abom Bêbê
+	Description: Fazendo um kickflip em uma foice
 }
 
 BabySilhouetteBuff: {
-	DisplayName: Silhueta Bebê
-	Description: Ele não verá a luz até que já esteja crescido
+	DisplayName: Silhueta Bêbê
+	Description: Não verá a luz até crescer
 }
 
 BiteSizeBaronBuff: {
-	DisplayName: Pequeno Barão
-	Description: Não inclui a forma X
+	DisplayName: Barão do tamanho de uma mordida
+	Description: Forma EX não inclusa
 }
 
 ChibiDeviBuff: {
 	DisplayName: Devi Chibi
-	Description: Ela está interessada em 'você'
+	Description: Ela está interessada em "você"
 }
 
 MutantSpawnBuff: {
-	DisplayName: Prole Mutante
-	Description: Prole Mutante
+	DisplayName: Prole Mutant
+	Description: Prole Mutant
 }
 
 SeekerOfTreasuresBuff: {
-	DisplayName: Caçador de Tesouros
-	Description: Dê a ele alguns milhares de anos para crescer
+	DisplayName: Buscador de Tesouros
+	Description: Lhe dê mais alguns milhares de anos para crescer
 }
 
 NibbleBuff: {
-	// DisplayName: Nibble
-	// Description: Just one tiny bite (please)
+	DisplayName: Mordiscada
+	Description: Só uma mordidinha (por favor)
 }
 
 MonkBuff: {
-	// DisplayName: Meditation
-	// Description: Your Monk Dash is ready
+	DisplayName: Meditação
+	Description: Sua corrida monge está pronta
 }
 
 ObsidianLavaWetBuff: {
 	DisplayName: Molhado de Lava
-	Description: Você está vazando lava
+	Description: Você está pingando lava
 }
 
 TitaniumDRBuff: {
 	DisplayName: Escudo de Titânio
-	Description: Você tem resistência adicional aos danos
+	Description: Você tem redução de danos extra e resite a maioria dos efeitos negativos
 }
 
 KingSlimeMinionBuff: {
-	DisplayName: Mini Geleia Rei
-	Description: A Mini Geleia Rei protegerá você
+	DisplayName: Rei Slime Mini
+	Description: Esse Rei Slime mini irá te proteger
 }
 
 DukeFishronBuff: {
 	DisplayName: Duque Peixe-dragão
-	Description: O Duque Peixe-dragão lutará por você
+	Description: O Duque Peixe-dragão irá lutar por você
 }
 
 RoombaPetBuff: {
-	// DisplayName: Roomba
-	Description: Este Roomba está seguindo você
+	DisplayName: Roomba
+	Description: Este Roomba está te seguindo!
 }
 
 DoveBuff: {
 	DisplayName: Pomba
-	Description: Uma Pomba está seguindo você
+	Description: Uma pomba está te seguindo
 }
 
 ChibiiRemiiBuff: {
-	DisplayName: Remii Chibii
-	Description: Demônio 'Remilia Stretch'
+	DisplayName: Remii Chibi
+	Description: Demônio "Remilia Stretch"
 }
 
 PrimeMinionBuff: {
-	DisplayName: Mini Alfa
-	Description: O Esqueletron Alfa lutará por você
+	DisplayName: Prime Mini
+	Description: O Skeletron Prime irá lutar por você
 }
 
 FishMinionBuff: {
 	DisplayName: Peixe
-	Description: Este peixe lutará por você
+	Description: Este peixe irá lutar por você
 }
 
 CrimetroidBuff: {
-	// DisplayName: Baby Crimetroid
-	// Description: The Baby is following you
+	DisplayName: Crimetroid Bêbê
+	Description: Este bêbê está te seguindo
 }
 
 BerserkerInstallBuff: {
-	// DisplayName: Berserker Install
-	// Description: "'Get them! Berserker!'"
+	DisplayName: Instalação de Fúria
+	Description: "'Pega eles, Berserker!'"
 }
 
 BerserkerInstallCDBuff: {
-	// DisplayName: Berserker Cooldown
-	// Description: You cannot go berserk yet
+	DisplayName: Tempo de Recarga da Fúria
+	Description: Você não pode ficar furioso ainda
 }
 
 BetsyDashBuff: {
-	// DisplayName: Dash
-	// Description: You're moving at high speed!
+	DisplayName: Corrida
+	Description: Você está se movendo em altas velocidades
 }
 
 AbomFangBuff: {
-	// DisplayName: Abominable Fang
-	// Description: The power of Eternity Mode compels you
+	DisplayName: Presa Abominável
+	Description: O poder do modo Eternidade te compele
 }
 
 AbomPresenceBuff: {
-	// DisplayName: Abominable Presence
-	// Description: Defense, damage reduction, and life regen reduced; Moon Leech effect
+	DisplayName: Presença Abominável
+	Description: Defesa, Redução de dano, Recuperação de vida reduzida, efeito do sanguessuga lunar
 }
 
 BaronsBurdenBuff: {
-	// DisplayName: Baron's Burden
-	/* Description:
+	DisplayName: Fardo do Barão
+	Description:
 		'''
-		Gravity heavily increased outside water
-		Breathe water but cannot breathe air
-		Improved underwater movement
-		''' */
+		Gravidade aumentada fora da água
+		Respire água mas não ar
+		Movimento aquático aprimorado
+		'''
 }
 
 DeviPresenceBuff: {
-	// DisplayName: Deviant Presence
-	// Description: Friendly NPCs take massively increased damage
+	DisplayName: Presença Divergente
+	Description: NPCs amigáveis levam muito mais dano
 }
 
 GrabbedBuff: {
-	// DisplayName: Grabbed
-	// Description: Mash movement keys to escape!
+	DisplayName: Agarrado
+	Description: Aperte as teclas de movimento rapidamente para escapar!
 }
 
 MutantFangBuff: {
-	// DisplayName: Mutant Fang
-	// Description: The power of Eternity Mode compels you
+	DisplayName: Presa Mutante
+	Description: O poder do modo Eternidade te compele
 }
 
 MutantPresenceBuff: {
-	// DisplayName: Mutant Presence
-	// Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
+	DisplayName: Presença Mutante
+	Description: Defesa, redução de dano e cura reduzidas, quase todos os efeitos de alma desabilitados, efeito do estado de caos
 }
 
 HellFireBuff: {
-	// DisplayName: Hell Fire
-	// Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+	DisplayName: Hell Fire
+	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
 }
 
 MagicalCleanseCDBuff: {
-	// DisplayName: Magical Cleanse Cooldown
-	// Description: You cannot cleanse debuffs yet
+	DisplayName: Tempo de recarga da Limpeza Mágica
+	Description: Você não pode limpar seus efeitos negativos ainda
 }
 
 AbomCooldownBuff: {
-	// DisplayName: Abominable Cooldown
-	// Description: Cannot endure another attack yet
+	DisplayName: Tempo de Recarga Abominável
+	Description: Não pode aguentar mais um ataque ainda
 }
 
 AbomRebirthBuff: {
-	// DisplayName: Abominable Rebirth
-	// Description: You cannot die unless struck
+	DisplayName: Renascimento Abominável
+	Description: Você não pode morrer se não for atingido
 }
 
 AnticoagulationBuff: {
-	// DisplayName: Anticoagulation
-	// Description: Losing life, shed blood when hurt, enemies will drink it and grow stronger
+	DisplayName: Anticoagulação
+	Description: Perdendo vida, derramando sangue quando atingido, inimigos vão beber seu sangue e se tornarem mais fortes
 }
 
 AntisocialBuff: {
-	// DisplayName: Antisocial
-	// Description: You have less friends and whip damage
+	DisplayName: Antisocial
+	Description: Você tem menos amigos :( e menos dano de chicote
 }
 
 AtrophiedBuff: {
-	// DisplayName: Atrophied
-	// Description: Your muscles are deteriorating
+	DisplayName: Atrofiado
+	Description: Seus músculos estão deteriorando
 }
 
 BerserkedBuff: {
-	// DisplayName: Berserked
-	// Description: Increased offense, decreased defense, and you cannot control yourself
+	DisplayName: Enfurecido
+	Description: Ataque aumentado, defesa reduzida, você não consegue se controlar
 }
 
 BloodDrinkerBuff: {
-	// DisplayName: Blood Drinker
-	// Description: 30% increased damage
+	DisplayName: Bebedor de Sangue
+	Description: Dano aumentado em 30%
 }
 
 BloodthirstyBuff: {
-	// DisplayName: Bloodthirsty
-	// Description: Hugely increased enemy spawn rate
+	DisplayName: Sanguinário
+	Description: Taxa de criação de inimigos muito aumentada
 }
 
 BrainOfConfusionBuff: {
-	// DisplayName: Cerebral Mindbreak
-	// Description: 30% decreased damage dealt
+	DisplayName: Quebra Mental Cerebral
+	Description: Dano causado diminuido em 30%
 }
 
 ClippedWingsBuff: {
-	// DisplayName: Clipped Wings
-	// Description: You cannot fly or use rocket boots
+	DisplayName: Asas Cortadas
+	Description: Você não pode voar ou usar botas foguete
 }
 
 CrippledBuff: {
-	// DisplayName: Crippled
-	// Description: You cannot run
+	DisplayName: aleijado
+	Description: Você não pode correr
 }
 
 CurseoftheMoonBuff: {
-	// DisplayName: Curse of the Moon
-	// Description: The moon's wrath consumes you
+	DisplayName: Maldição da Lua
+	Description: A ira lunar te consume
 }
 
 DefenselessBuff: {
-	// DisplayName: Defenseless
-	// Description: Your guard is completely broken
+	DisplayName: Indefeso
+	Description: Sua guarda está completamente quebrada
 }
 
 FlamesoftheUniverseBuff: {
-	// DisplayName: Flames of the Cosmos
-	// Description: The heavens themselves have judged you
+	DisplayName: Chama dos Cosmos
+	Description: O próprio céu te julgou
 }
 
 FlippedBuff: {
-	// DisplayName: Flipped
-	// Description: Your gravity is reversed
+	DisplayName: Virado
+	Description: Sua gravidade está reversa
 }
 
 HallowIlluminatedBuff: {
-	// DisplayName: Illuminated
-	/* Description:
+	DisplayName: Iluminado
+	Description:
 		'''
-		Increased brightness and spawn rate
-		Damage taken and dealt increased in bright areas
-		''' */
+		Brilho e taxa de criação de inimigos aumentados
+		Dano causado e recebido aumentado em áreas claras
+		'''
 }
 
 FusedBuff: {
-	// DisplayName: Fused
-	/* Description:
+	DisplayName: Fusível
+	Description:
 		'''
-		You're going out with a bang
-		Stand still for a second to defuse yourself
-		''' */
+		Você vai sair com um estrondo
+		Fique parado por um segundo para se defusar
+		'''
 }
 
 GodEaterBuff: {
-	// DisplayName: God Eater
-	// Description: Your soul is cursed by divine wrath
+	DisplayName: Devorador de Deuses
+	Description: Sua alma está sendo consumida por ira DIVINA
 }
 
 GuiltyBuff: {
-	// DisplayName: Guilty
-	// Description: Weapons dulled by the guilt of slaying innocent critters
+	DisplayName: Culpado
+	Description: Armas enfraquecidas pela culpa de ter matado criaturas inocentes
 }
 
 HexedBuff: {
-	// DisplayName: Hexed
-	// Description: Your attacks heal enemies
+	DisplayName: Enfeitiçado
+	Description: Seus ataques curam inimigos
 }
 
 HolyPriceBuff: {
-	// DisplayName: Holy Price
-	// Description: 30% decreased attack speed
+	DisplayName: Preço Sagrado
+	Description: Velocidade de ataque diminuida em 30%
 }
 
 HypothermiaBuff: {
-	// DisplayName: Hypothermia
-	// Description: Friendly projectiles are slowed down and you take increased damage from cold attacks
+	DisplayName: Hipotermia
+	Description: Projéteis amigáveis são desacelerados e você recebe dano extra de ataques gelados
 }
 
 InfestedBuff: {
-	// DisplayName: Infested
-	// Description: This can only get worse
+	DisplayName: Infestado
+	Description: Isso só pode piorar
 }
 
 IvyVenomBuff: {
-	// DisplayName: Ivy Venom
-	// Description: Losing life, will become Neurotoxin at 20 seconds
-	Transform: A sua Peçonha de Hera se tornou Neurotoxina!!
+	DisplayName: Hera Venenosa
+	Description: Perdendo vida, irá se tornar Neurotoxina em 20 segundos
+	Transform: Sua Hera Venenosa se tornou Neurotoxina!!!
 }
 
 JammedBuff: {
-	// DisplayName: Jammed
-	// Description: Your ranged weapons are faulty
+	DisplayName: Emperrado
+	Description: Suas armas à distância estão defeituosas
 }
 
 LethargicBuff: {
-	// DisplayName: Lethargic
-	// Description: Your weapons feel sluggish
+	DisplayName: Letárgico
+	Description: Suas armas se sentem lentas
 }
 
 LightningRodBuff: {
-	// DisplayName: Lightning Rod
-	// Description: You attract thunderbolts
+	DisplayName: Pára-Raios
+	Description: Você atrai trovões
 }
 
 LihzahrdBlessingBuff: {
-	// DisplayName: Lihzahrd Blessing
-	// Description: Wires enabled and reduced spawn rates in Jungle Temple
+	DisplayName: Benção Lagharta
+	Description: Habilita fios e reduz a taxa de criação de inimigos
 	Message: A luz do altar brilha em você!
 }
 
 LihzahrdCurseBuff: {
-	// DisplayName: Lihzahrd Curse
-	// Description: Wires disabled in Jungle Temple
+	DisplayName: Maldição Lagharta
+	Description: Desabilita fios e posicionamento
 }
 
 LivingWastelandBuff: {
-	// DisplayName: Living Wasteland
-	// Description: Everyone around you turns to rot
+	DisplayName: Terreno Baldio Vivo
+	Description: Tudo em sua volta apodrece
 }
 
 LoosePocketsBuff: {
-	// DisplayName: Loose Pockets
-	// Description: An item might be taken from you
+	DisplayName: Bolsos Frouxos
+	Description: Um item pode ser pego de você
 }
 
 LovestruckBuff: {
-	// DisplayName: Lovestruck
-	// Description: You are in love!
+	DisplayName: Apaixonado
+	Description: Você está apaixonado!
 }
 
 LowGroundBuff: {
-	// DisplayName: Low Ground
-	// Description: No hooks, cannot stand on platforms or liquids
+	DisplayName: Terreno Baixo
+	Description: Sem ganchos, não consegue pisar em plataformas ou líquidos
 }
 
 LowGroundEridanusBuff: {
-	// DisplayName: Low Ground
-	// Description: Cannot stand on platforms
+	DisplayName: Terreno Baixo
+	Description: Não consegue pisar em plataformas
 }
 
 MarkedforDeathBuff: {
-	// DisplayName: Marked for Death
-	// Description: Just don't get hit
+	DisplayName: Marcado para Morrer
+	Description: É só não ser atingido
 }
 
 MidasBuff: {
-	// DisplayName: Midas
-	// Description: Drop money on hit
+	DisplayName: Midas
+	Description: Derruba dinheiro ao ser atingido
 }
 
 MutantNibbleBuff: {
-	// DisplayName: Mutant Nibble
-	// Description: You cannot heal at all
+	DisplayName: Mordida Mutante
+	Description: Você não consegue se curar de nenhuma forma
 }
 
 NanoInjectionBuff: {
-	// DisplayName: Nano Injection
-	// Description: Life regeneration and stats reduced
+	DisplayName: Nano Injeção
+	Description: Regeneração de vida e estatísticas reduzidas
 }
 
 NeurotoxinBuff: {
-	// DisplayName: Neurotoxin
-	// Description: Your body is shutting down
+	DisplayName: Neurotoxina
+	Description: Seu corpo está desligando
 }
 
 NullificationCurseBuff: {
-	// DisplayName: Nullification Curse
-	// Description: Moon Lord has cycling damage type resistances!
+	DisplayName: Maldição Nulificadora
+	Description: Desabilita desvios. O Senhor da Lua cicla por resistências a diferentes tipos de dano!
 }
 
 OceanicMaulBuff: {
-	// DisplayName: Oceanic Maul
-	// Description: Defensive stats and max life are savaged
-	LifeUp: +5 vida máxima
-	LifeDown: -5 vida máxima
+	DisplayName: Mandíbula Oceânica
+	Description: Estatísticas defensivas e vida máxima ferozmente atacadas
+	LifeUp: +5 máx vida
+	LifeDown: -5 máx vida
 }
 
 OceanicSealBuff: {
-	// DisplayName: Oceanic Seal
-	// Description: No dodging, no lifesteal, no supersonic, no escape
+	DisplayName: Selo Oceânico
+	Description: Sem desvios, sem roubo de vida, sem supersônico, sem escapatória
 }
 
 OiledBuff: {
-	// DisplayName: Oiled
-	// Description: Taking more damage from being on fire
+	DisplayName: Oleado
+	Description: Tomando mais dano por pegar fogo
 }
 
 PungentGazeBuff: {
-	// DisplayName: Pungent Gaze
-	// Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
+	DisplayName: Pungent Gaze
+	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
 PurgedBuff: {
-	// DisplayName: Purged
-	// Description: Dodge effects don't work
+	DisplayName: Purgado
+	Description: Efeitos de desvio não funcionam
 }
 
 PurifiedBuff: {
-	// DisplayName: Purified
-	// Description: You are cleansed
+	DisplayName: Purificado
+	Description: Você está limpo
 }
 
 RefreshedBuff: {
-	// DisplayName: Refreshed
-	// Description: Increased mobility and flight time
+	DisplayName: Refrescado
+	Description: Mobilidade e tempo de voo aumentados
 }
 
 ReverseManaFlowBuff: {
-	// DisplayName: Reverse Mana Flow
-	// Description: Your magic weapons lock your mana for a duration
+	DisplayName: Fluxo de Mana Reverso
+	Description: Suas armas mágicas trancam mana por um período de tempo
 }
 
 RottingBuff: {
-	// DisplayName: Rotting
-	// Description: Your body is wasting away
+	DisplayName: Apodrecendo
+	Description: Seu corpo está apodrecendo
 }
 
 RushJobBuff: {
-	// DisplayName: Rush Job
-	// Description: The Nurse cannot heal you again yet
-	// NurseChat: With THAT monstrous thing still chasing you? Go kill it first!
+	DisplayName: Trabalho Urgente
+	Description: A enfermeira não pode te curar novamente
+	NurseChat: Com AQUELA MONSTRUOSIDADE te perseguindo? Vai matar ela primeiro!
 }
 
 SadismBuff: {
-	// DisplayName: Eternity
-	// Description: The power of Eternity Mode is with you
+	DisplayName: Eternidade
+	Description: O poder do modo Eternidade está com você
 }
 
 ShadowflameBuff: {
-	// DisplayName: Shadowflame
-	// Description: Losing life
+	DisplayName: Chamas das Sombras
+	Description: Perdendo Vida
 }
 
 SmiteBuff: {
-	// DisplayName: Smite
-	// Description: Life regen reduced and 20% more damage taken
+	DisplayName: Julgamento
+	Description: Recuperação de vida reduzido e dano recebido aumentado em 20%
 }
 
 SqueakyToyBuff: {
-	// DisplayName: Squeaky Toy
-	// Description: Your attacks are squeaky toys!
+	DisplayName: Brinquedo Barulhento
+	Description: Os seus ataques são brinquedos barulhentos!
 }
 
 StunnedBuff: {
-	// DisplayName: Stunned
-	// Description: You're too dizzy to move
+	DisplayName: Atordoado
+	Description: Você está muito tonto para se mover
 }
 
 SwarmingBuff: {
-	// DisplayName: Swarming
-	// Description: Hornets are attacking from every direction!
+	DisplayName: Enxame
+	Description: Vespas estão atacando de todos os lados!
 }
 
 ThiefCDBuff: {
-	// DisplayName: Thief Cooldown
-	// Description: Your items cannot be stolen again yet
+	DisplayName: Tempo de Recarga de Roubo
+	Description: Seus itens não podem ser roubados novamente
 }
 
 UnluckyBuff: {
-	// DisplayName: Unlucky
-	// Description: You are feeling pretty unlucky
+	DisplayName: Azarado
+	Description: Você está se sentindo bem azarado
 }
 
 UnstableBuff: {
-	// DisplayName: Unstable
-	// Description: You don't quite fit into reality
+	DisplayName: Instável
+	Description: Você não se encaixa muito bem na realidade
 }
 
 BigBrainMinionBuff: {
-	// DisplayName: Big Brain of Cthulhu
-	// Description: The Brain of Cthulhu will fight for you
+	DisplayName: Grande Cérebro de Cthulhu
+	Description: O Cérebro de Cthulhu irá lutar por você
 }
 
 BrainMinionBuff: {
-	// DisplayName: Brain of Cthulhu
-	// Description: The mini Brain of Cthulhu will fight for you
+	DisplayName: Cérebro de Cthulhu
+	Description: O mini Cérebro de Cthulhu irá lutar por você
 }
 
 CrystalSkullBuff: {
-	// DisplayName: Crystal Skull
-	// Description: The crystal skull will protect you
+	DisplayName: Caveira de Cristal
+	Description: A caveira de cristal irá te proteger
 }
 
 EaterMinionBuff: {
-	// DisplayName: Eater of Worlds
-	// Description: The mini Eater of Worlds will fight for you
+	DisplayName: Devorador de Mundos
+	Description: O mini Devorador de Mundos irá lutar por você
 }
 
 LunarCultistBuff: {
-	// DisplayName: Lunar Cultist
-	// Description: The Lunar Cultist will protect you
+	DisplayName: Cultista Lunar
+	Description: O Cultista Lunar irá lutar por você
 }
 
 MutantPowerBuff: {
-	// DisplayName: Mutant Power
-	// Description: The power of Mutant is with you
+	DisplayName: Poder Mutante
+	Description: O poder do Mutant está com você
 }
 
 PlanterasChildBuff: {
-	// DisplayName: Plantera's Child
-	// Description: The child of Plantera will protect you
+	DisplayName: Filho da Plantera
+	Description: O filho da Plantera irá te proteger
 }
 
 ProbesBuff: {
-	// DisplayName: Probes
-	// Description: The probes will protect you
+	DisplayName: Sondas
+	Description: As sondas irão te proteger
 }
 
 PungentEyeballBuff: {
-	// DisplayName: Pungent Eyeball
-	// Description: The pungent eyeball will protect you
+	DisplayName: Globo Ocular Pungente
+	Description: O globo ocular pungente irá te proteger
 }
 
 RainbowSlimeBuff: {
-	// DisplayName: Rainbow Slime
-	// Description: The Rainbow Slime will protect you
+	DisplayName: Geleia Arco-íris
+	Description: A geleia Arco-íris irá te proteger
 }
 
 SaucerMinionBuff: {
-	// DisplayName: Mini Saucer
-	// Description: The Mini Saucer will protect you
+	DisplayName: Mini Disco Voador
+	Description: O mini disco voador irá te proteger
 }
 
 SkeletronArmsBuff: {
-	// DisplayName: Skeletron Arms
-	// Description: The Skeletron arms will protect you
+	DisplayName: Braços do Skeletron
+	Description: Os braços do Skeletron irão te proteger
 }
 
 SouloftheMasochistBuff: {
-	// DisplayName: Soul of the Master
-	// Description: The power of Eternity Mode is with you
+	DisplayName: Alma do Mestre
+	Description: O poder do modo Eternidade está com você
 }
 
 TrueEyesBuff: {
-	// DisplayName: True Eyes of Cthulhu
-	// Description: The eyes of Cthulhu will protect you
+	DisplayName: Verdadeiros Olhos de Cthulhu
+	Description: Os olhos de cthulhu irão te proteger
 }
 
 TwinsEXBuff: {
-	// DisplayName: Twins EX
-	// Description: The real Twins will fight for you
+	DisplayName: Gêmeos EX
+	Description: Os reais Gêmeos irão lutar por você
 }
 
 MutantRebirthBuff: {
-	// DisplayName: Mutant Rebirth
-	// Description: Deathray revive is recharging
+	DisplayName: Renascimento Mutante
+	Description: O renascimento de raio da morte está recarregando
 }
 
 BabyLifelightBuff: {
-	// DisplayName: Petlight
-	// Description: Behold, the light of an angel
+	DisplayName: Luz Pet
+	Description: Contemple, a luz de um anjo
 }
 
 BrokenShellBuff: {
-	// DisplayName: Broken Shell
-	// Description: You cannot enter your shell yet
+	DisplayName: Casco Quebrado
+	Description: Você não pode entrar em seu casco ainda
 }
 
 CrimsonRegenBuff: {
-	// DisplayName: Crimson Healing
-	// Description: Your lifeforce is building up
+	DisplayName: Cura Carmim
+	Description: Sua força vital está crescendo
 }
 
 FirstStrikeBuff: {
-	// DisplayName: First Strike
-	// Description: Your next attack will be enhanced
+	DisplayName: Primeiro Golpe
+	Description: Seu próximo ataque será empoderado
 }
 
 FossilReviveCDBuff: {
-	// DisplayName: Revived
-	// Description: You cannot revive again
+	DisplayName: Revivido
+	Description: Você não pode reviver novamente
 }
 
 FrozenBuff: {
-	// DisplayName: Frozen
-	// Description: You cannot move
+	DisplayName: Congelado
+	Description: Você não consegue se mexer
 }
 
 GoldenStasisBuff: {
-	// DisplayName: Golden Stasis
-	// Description: You are immune to all damage, but cannot move
+	DisplayName: Estase Dourado
+	Description: Você está imune a todos os danos, mas não pode se mover
 }
 
 GoldenStasisCDBuff: {
-	// DisplayName: Golden Stasis Cooldown
-	// Description: You cannot turn gold yet
+	DisplayName: Tempo de recarga da Estase Dourada
+	Description: Você não pode virar ouro ainda
 }
 
 HallowCooldownBuff: {
-	// DisplayName: Hallowed Sword Cooldown
-	// Description: Your sword cannot reflect projectiles yet
+	DisplayName: Tempo de recarga da Espada Abençoada
+	Description: Sua espada não pode refletir projéteis ainda
 }
 
 HuntressBleedBuff: {
-	// DisplayName: Huntress Bleed
-	// Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
+	DisplayName: Huntress Bleed
+	Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
 }
 
 HuntressCDBuff: {
-	// DisplayName: Arrow Rain Cooldown
-	// Description: You cannot trigger another rain of arrows yet
+	DisplayName: Tempo de recarga da Chuva de Flechas
+	Description: Você não pode causar outra chuva de flechas ainda
 }
 
 LeadPoisonBuff: {
-	// DisplayName: Lead Poison
-	// Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
+	DisplayName: Lead Poison
+	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
 MoltenAmplifyBuff: {
-	// DisplayName: Molten Amplify
-	// Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff
+	DisplayName: Molten Amplify
+	Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff
 }
 
 OriPoisonBuff: {
-	// DisplayName: Orichalcum Poison
-	// Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
+	DisplayName: Orichalchum Poison
+	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
 }
 
 ShellHideBuff: {
-	// DisplayName: Shell Hide
-	// Description: Projectiles are being blocked
+	DisplayName: Pele de Casco
+	Description: Projéteis estão sendo bloqueados
 }
 
 SnowstormCDBuff: {
-	// DisplayName: Snowstorm Cooldown
-	// Description: You cannot chill yet
+	DisplayName: Tempo de recarga da Tempestade de Neve
+	Description: Você não pode chamar outra tempestade ainda
 }
 
 SolarFlareBuff: {
-	// DisplayName: Solar Flare
-	// Description: Mods.FargowiltasSouls.BuffDescription.SolarFlareBuff
+	DisplayName: Solar Flare
+	Description: Mods.FargowiltasSouls.BuffDescription.SolarFlareBuff
 }
 
 SuperBleedBuff: {
-	// DisplayName: Blood Geyser
-	// Description: Mods.FargowiltasSouls.BuffDescription.SuperBleedBuff
+	DisplayName: Blood Geiser
+	Description: Mods.FargowiltasSouls.BuffDescription.SuperBleedBuff
 }
 
 CorruptingBuff: {
-	// DisplayName: Withering
-	// Description: You are withering
+	DisplayName: Murchando
+	Description: Você está secando
 }
 
 TimeFrozenBuff: {
-	// DisplayName: Time Frozen
-	// Description: You are stopped in time
+	DisplayName: Tempo Congelado
+	Description: Você está parado no tempo
 }
 
 TimeStopCDBuff: {
-	// DisplayName: Time Stop Cooldown
-	// Description: You cannot stop time yet
+	DisplayName: Tempo de Recarga do Tempo Parado
+	Description: Você não pode parar o tempo ainda
 }
 
 TitaniumCDBuff: {
-	// DisplayName: Titanium Shield Cooldown
-	// Description: You are charging up Titanium Shield
+	DisplayName: Tempo de recarga do Escudo de Titânio
+	Description: Você está carregando o escudo de titânio
 }
 
 VortexCDBuff: {
-	// DisplayName: Vortex Cooldown
-	// Description: You cannot spawn another vortex yet
+	DisplayName: Tempo de recarga do Vórtice
+	Description: Você não pode criar outro Vórtice ainda
 }
 
 SuperchargedBuff: {
-	// DisplayName: Supercharged
-	// Description: 20% increased move speed, 10% increased attack speed, your attacks electrify
+	DisplayName: Supercarregado
+	Description: Movimentação aumentada em 20%, velocidade de ataque aumentada em 10%, seus ataques eletrificam
 }
 
 MoonBowBuff: {
-	// DisplayName: Crescent Smile
-	// Description: Your bow is empowered by lunar magic
+	DisplayName: Sorriso Crescente
+	Description: Seu arco é empoderado por magia lunar
 }
 
 TribalCharmClickBuff: {
-	// DisplayName: Tribal Charm
-	// Description: Gain an instant of increased damage when you click to attack
+	DisplayName: Amuleto Tribal
+	Description: Ganha um instante de dano aumentado caso clique para atacar
 }
 
 TwinsInstallBuff: {
-	// DisplayName: Twins Install
-	// Description: Effects of Cursed Inferno and Ichor
+	DisplayName: Instalação dos Gêmeos
+	Description: Efeitos de chamas amaldiçoadas e ichor
 }
 
 WretchedHexBuff: {
-	// DisplayName: Wretched Hex
-	// Description: Shadowflame tentacles and vastly increased damage, but vastly decreased speed and defenses
+	DisplayName: Feitiço Desgraçado
+	Description: Tentáculos de chama das sombras, mas defesa e velocidade reduzidas
 }
 
 CorruptedBuff: {
-	// DisplayName: Withered
-	// Description: You have withered
+	DisplayName: Apodrecido
+	Description: Você apodreceu
 }
 
 CorruptedBuffForce: {
-	// DisplayName: Withered (Force)
-	// Description: You have withered
+	DisplayName: Apodrecido (Força)
+	Description: Você tem Apodrecido
 }
 
 JungleMimicSummonBuff: {
 	DisplayName: Mímico da Selva
-	Description: O Mímico da Selva lutará por você
+	Description: O mímico da selva irá lutar por você
 }
 
 GladiatorBuff: {
-	// DisplayName: Gladiator Strength
-	// Description: Increased damage and damage reduction, knockback immunity, improved spear rain
+	DisplayName: Força de Gladiador
+	Description: Aumento de danos e redução de danos, imunidade a recuos, chuva de flechas melhorada
 }
 
 GladiatorSpiritBuff: {
-	// DisplayName: Gladiator Strength
-	// Description: +15% damage reduction, +30% damage, knockback immunity, improved successive hit damage
+	DisplayName: Força de Gladiador
+	Description: +15% redução de danos, 30% aumento nos danos, imunidade a recuos, e danos de ataques em sucessão aumentados
 }
 
 ROBBuff: {
-	// DisplayName: R.O.B
-	// DescPatreon: The friend you've never left since Brawl
-	// DescNonPatreon: He's finally a top tier!
-	// Description: Mods.FargowiltasSouls.Buffs.ROBBuff.Description
+	DisplayName: R.O.B
+	DescPatreon: O amigo que você nunca deixou desde o Brawl
+	DescNonPatreon: Ele finalmente é um top tier!
+	Description: Mods.FargowiltasSouls.Buffs.ROBBuff.Description
 }
 
 RainCDBuff: {
-	// DisplayName: Rain Umbrella Cooldown
-	// Description: Your umbrella isn't ready yet
+	DisplayName: Tempo de recarga do Guarda-chuva
+	Description: Seu guarda-chuva não está pronto ainda
 }
 
 SublimationBuff: {
-	// Description: Mods.FargowiltasSouls.Buffs.SublimationBuff.Description
-	// DisplayName: Sublimation Buff
+	Description: Mods.FargowiltasSouls.Buffs.SublimationBuff.Description
+	DisplayName: Sublimation Buff
 }
 
 CoffinTossBuff: {
-	// DisplayName: Coffin Toss Buff
-	// Description: ""
+	DisplayName: Coffin Toss Buff
+	Description: ""
 }
 
 HellFireMarkedBuff: {
-	// DisplayName: Hell Fire Marked
-	// Description: Mods.FargowiltasSouls.Buffs.HellFireMarked.Description
+	DisplayName: Hell Fire Marked
+	Description: Mods.FargowiltasSouls.Buffs.HellFireMarked.Description
 }
 
 MagicalCurseBuff: {
-	// DisplayName: Magical Curse Buff
-	// Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
+	DisplayName: Magical Curse Buff
+	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
 MoonFangBuff: {
-	// DisplayName: Moon Fang
-	// Description: Cannot regenerate life
+	DisplayName: Presa da Lua
+	Description: Não consegue regenerar vida
 }
 
 WitheredForceBuff: {
-	// DisplayName: Withered Force Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
+	DisplayName: Withered Force Buff
+	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
 TimberBleedBuff: {
-	// DisplayName: Timber Bleed Buff
-	// Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
+	DisplayName: Timber Bleed Buff
+	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
 }
 
 EarthPoison: {
-	// DisplayName: Earth Poison
-	// Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
+	DisplayName: Earth Poison
+	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
 }
 
 WitheredBuff: {
-	// DisplayName: Withered Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
+	DisplayName: Withered Buff
+	Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
 }
 
 WitheredWizardBuff: {
-	// DisplayName: Withered Wizard Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
+	DisplayName: Withered Wizard Buff
+	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
-	// DisplayName: Mushroom Power
-	// Description: Increased damage and critical strike chance
+	DisplayName: Poder dos Cogumelos
+	Description: Dano e chance de ataques críticos aumentados
 }
 
 SolarBuff: {
-	// DisplayName: Solar Buff
-	// Description: Increased damage reduction
+	DisplayName: Buff Solar
+	Description: Redução de danos aumentada
 }
 
 VortexBuff: {
-	// DisplayName: Vortex Buff
-	// Description: Increased critical strike chance
+	DisplayName: Buff do Vórtice
+	Description: Chance de ataque crítico aumentada
 }
 
 NebulaBuff: {
-	// DisplayName: Nebula Buff
-	// Description: Increased life regeneration
+	DisplayName: Buff Nebuloso
+	Description: Regeneração de vida aumentada
 }
 
 StardustBuff: {
-	// DisplayName: Stardust Buff
-	// Description: Increased damage
+	DisplayName: Buff de Pó das Estrelas
+	Description: Dano aumentado
 }
 
 AmbrosiaBuff: {
-	// DisplayName: Ambrosia Buff
-	// Description: +30% damage, +30% melee speed, +20% damage reduction, +5 life regeneration, summon damage can crit
+	DisplayName: Buff de Ambrósia
+	Description: +30% dano, +30% velocidade de ataque físico, +20% redução aos danos, +5 regeneração de vida, e seus lacaios podem causar danos críticos
 }
 
 MutantDesperationBuff: {
-	// DisplayName: Phantasmal Fury
-	// Description: His final stand. You take double damage!
+	DisplayName: Fúria Fantasmagórica
+	Description: Sua última chance. Você recebe dano em dobro!
 }
 
 TouhouHoardBuff: {
-	// DisplayName: Mystical Horde
-	// Description: The mythical beings will fight for you
+	DisplayName: Horda Mística
+	Description: As críaturas místicas irão lutar por você
 }

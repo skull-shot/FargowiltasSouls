@@ -1,63 +1,63 @@
 Nerf: "[c/ff0000:Modo Eternidade: ]"
 Buff: "[c/00ff00:Modo Eternidade: ]"
 Neutral: "[c/ffff00:Modo Eternidade: ]"
-Damage: Dano reduzido em {0}%
-// DamagePositive: Increased damage by {0}%
-Speed: Velocidade reduzida em {0}%
-// SpeedPositive: Increased speed by {0}%
-// Scale: Reduced size by {0}%
-// ScalePositive: Increased size by {0}%
-RodofDiscord: Durante batalhas contra chefes, cada uso leva vida
-// ChaosState: Reduced damage, defense and damage reduction by 40%
-// RodofHarmony: Can only be obtained after defeating the Mutant
-Split: Frequência de divisão reduzida
-ChlorophyteBullet: Velocidade e duração reduzidos
-WaterBolt: Não pode ser usado até que Esqueletron seja derrotado
-// SpaceGun: Cannot be used until an evil boss is defeated
-// DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: A ativação da Esquiva Divina reduzirá temporariamente a sua velocidade do ataque
-FrozenTurtleShell: A barreira congelada reduz levemente o seu dano causado
-BrainOfConfusion: Reduz o seu dano ao efetuar uma esquiva
-ZenithNone: Nenhum enfraquecimento em vigor
-ZenithHitRate: "Taxa de acerto consideravelmente reduzida, melhora ao derrotar: "
-VampireKnives: Reduz a taxa de roubo de vida quando acima de 33% de vida
-Zapinator: Não pode acumular multiplicadores de dano
-// CoinGun: Damage of Platinum and Gold Coins heavily reduced, damage of Silver Coins slightly reduced, and damage of Copper Coins increased
-OOASet: O bônus de conjunto aumenta o dano de invocação mínimo quando você ataca usando outras classes
-MiningHelmet: Aumenta a taxa de criação do Minerador Zumbi
-MoonsDrops: Os chefes e minichefes não deixam cair itens até ondas tardias
-MoonsWaves: Morrer diminui o progresso da onda
-WhipSpeed: Não se beneficia de bônus de velocidade do ataque físico
-WhipStack: Efeitos e efeitos negativos de chicote não podem acumular
-// DefensePrefix: Adjusted prefix stats: reduced defense before Hardmode, +5 max life
-// DefensePrefix_HM: Adjusted prefix stats: +5 max life
-// ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed
-// ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
-MinionStack: O dano dos lacaios diminui ao invocar mais de 3 cópias (o limite do efeito é 12)
-SummonMulticlass: O dano por lacaios diminui quando você ataca usando outras classes (exceto no EdA)
-ShadowDodge: Modo Eternidade: Esquivar reduzirá sua velocidade de ataque
-IceBarrier: Modo Eternidade: 10% de redução nos danos
-// SwordRework: Reworked broadsword swing animation
-// SpearRework: Reworked spear swing animation
-// PalladiumPikeRework: Greatly increases life regeneration and heal 1 HP (1/2 second cooldown)
-// CobaltNaginataRework: Causes a small explosion on striking enemies
-// MythrilHalberdRework: After not attacking for 2 seconds, your next attack deals 8x damage, scaling with attack speed
-// OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount
-// SuperStarCannon: Decreased maximum pierce to 7
-// WarmthPotionNerf: Halved damage reduction effect and now applies post-mitigation
-// CrossNecklaceNerf: Longer invincibility doesn't trigger on rapid successive hits
-// IceBladeFrostburn: Projectile inflicts Frostburn on-hit
-// JungleRose: Increases Plantera's Fruit drop rate from Snatcher-type enemies
-// StarCloak: 33% star damage before Hardmode
-// WeatherPain: Increased hit frequency and pierce
-// HoundiusShootius: Increased fireball velocity
-// SniperRifle: Deals up to double damage to enemies the further away they are
-// ChlorophyteSaber: Faster projectiles that slow down on hit
-// JackOLanternLauncher: Increased projectile speed by 50%
-// GolemFist: Deals up to triple damage to enemies the further out the fist is extended
-// Gladius: Hit rate increased to match swing speed
-// FlowerPow: Tripled petal firerate
-// PiranhaGun: Projectile damage updates dynamically
-// ProximityMineLauncher: Projectile damage updates dynamically
-// PygmyStaff: Spears can now pierce once
-// MedusaHead: Deals up to 2.25x damage on fewer enemies
+Damage: Dano reduzido por {0}%
+DamagePositive: Dano aumentado por {0}%
+Speed: Velocidade reduzida por {0}%
+SpeedPositive: Velocidade aumentada por {0}%
+Scale: Tamanho reduzido por {0}%
+ScalePositive: Tamanho aumentado por {0}%
+RodofDiscord: Estado de caos reduz seu dano, defesa e redução de dano em 40%
+ChaosState: Dano, defesa e redução de dano reduzidos por 40%
+RodofHarmony: Só pode ser obtida após derrotar o Mutant
+Split: Frequência de separação reduzida
+ChlorophyteBullet: Velocidade e duração reduzidas
+WaterBolt: Não pode ser usada até o skeletron ser derrotado
+SpaceGun: Não pode ser usada até um chefe maligno ser derrotado
+DemonScythe: Dano e velocidade reduzidos em 40% até um chefe maligno ser derrotado
+HolyDodge: Ativar o Desvio Sagrado temporariamente reduz sua velocidade de ataque
+FrozenTurtleShell: Barreira congelada levemente reduz seu dano
+BrainOfConfusion: Chance de desvio cortada ao meio
+ZenithNone: No nerfs in effect
+ZenithHitRate: "Taxa de ataque altamente reduzida, aumenta ao derrotar: "
+VampireKnives: Taxa de roubo de vida reduzida quando acima de 50% de vida
+Zapinator: Não pode ter vários modificadores de ataque ao mesmo tempo
+CoinGun: Dano de moedas de ouro e platina reduzidas, dano de moedas de prata levemente reduzidas, e dano de moedas de cobre aumentado
+OOASet: Bônus definido aumenta o dano minimo por invocação ao atacar com outras classes
+MiningHelmet: Aumenta a taxa de criação de esqueletos mineradores
+MoonsDrops: Chefes e minichefes não derrubam itens até a onda {0}
+MoonsWaves: Morrer diminui o progresso das ondas
+WhipSpeed: Não se beneficia de aumentos de velocidade de ataques físicos
+WhipStack: Marcas de dano têm efeitos reduzidos quando misturadas
+DefensePrefix: Estatísticas ajustadas, defesa reduzida antes do modo díficil, +5 vida máxima
+DefensePrefix_HM: Estatísticas ajustadas: +5 vida máxima
+ViolentPrefix: Estatísticas ajustadas: aumenta velocidade de ataque, não velocidade de ataques físicos
+ManaPots: Não pode ser utilizado durante enjoo por mana, mas restoram 50% mais mana
+MinionStack: Dano de lacaios diminuidos quando invocando mais de 3 cópias (chega ao limite em 12)
+SummonMulticlass: Danos de invocação diminuídos ao usar outras classes (exceto durante o exército do ancião)
+ShadowDodge: Modo Eternidade: Desviar reduz sua velocidade de ataque
+IceBarrier: Modo Eternidade: dano reduzido em 10%
+SwordRework: Animação das espadas largas retrabalhadas
+SpearRework: Animação das lanças retrabalhada
+PalladiumPikeRework: Aumenta a regeneração de vida e cura 1 PV
+CobaltNaginataRework: Causa uma pequena explosão ao atingir inimigos
+MythrilHalberdRework: Depois de não atacar por 2 segundos, seu próximo ataque causa 8x dano
+OrichalcumHalberdRework: Causa até o dobro de dano em inimigos com efeitos negativos
+SuperStarCannon: Perfuração máxima reduzida para 7
+WarmthPotionNerf: Corta ao meio a redução de dano oferecida e causa o efeito pós-mitigação
+CrossNecklaceNerf: Invencibilidade mais longa não funciona em ataques em sucessão
+IceBladeFrostburn: projétil inflige queimadura de gelo
+JungleRose: Aumenta a chance da fruta da plantera ser derrubada de plantas carnívoras
+StarCloak: dano da estrela reduzido em 33% antes do modo díficil
+WeatherPain: Aumenta a taxa de golpes e acertos
+HoundiusShootius: Velocidade das bolas de fogo aumentadas
+SniperRifle: Causa até o dobro do dano em inimigos que estão longe
+ChlorophyteSaber: Projéteis mais rápidos que desaceleram ao atingirem inimigos
+JackOLanternLauncher: Velocidade dos projéteis aumentada em 50%
+GolemFist: Causa até o triplo do dano em inimigos quanto mais extendido o punho está
+Gladius: Taxa de acertos aumentada
+FlowerPow: Taxa de ataque das pétalas triplicada
+PiranhaGun: Dano de projétil é atualizado periodicamente
+ProximityMineLauncher: Dano de projétil é atualizado periodicamente
+PygmyStaff: Lanças podem perfurar uma vez
+MedusaHead: Causa até 2.25x dano quanto menos inimigos forem atingidos'
