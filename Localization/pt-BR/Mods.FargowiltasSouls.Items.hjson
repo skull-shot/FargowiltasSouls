@@ -907,7 +907,7 @@ SpiritForce: {
 		'''
 		[i:FargowiltasSouls/HallowEnchant] Poções de cura recuperam mais vida mas tem efeito ao longo do tempo
 		[i:FargowiltasSouls/SpectreEnchant] Se você chegar a 0 de PV, você revive com 200 PV e limpa seus efeitos negativos
-		[i:FargowiltasSouls/TikiEnchant] Alcance do chicote aumentado, chicotes recebem bônus de qualquer classe, e empoderam os seus projéteis que eles acertarem
+		[i:FargowiltasSouls/TikiEnchant] Alcance do chicote aumentado, chicotes recebem estatísticas bônus de qualquer classe, e empoderam os seus projéteis atingidos
 		'Ascenda deste plano mortal'
 		'''
 }
@@ -1819,102 +1819,102 @@ SupersonicSoul: {
 }
 
 TerrariaSoul: {
-	DisplayName: Soul of Terraria
+	DisplayName: Alma do Terraria
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
-		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
-		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
-		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
-		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
-		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
-		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
-		[i:FargowiltasSouls/LifeForce] You reflect contact damage, effects of Hive Pack
-		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
-		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
-		[i:FargowiltasSouls/ShadowForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/ShadowForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
-		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
-		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
-		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
-		'A true master of Terraria'
+		[i:FargowiltasSouls/TimberForce] Ganhe uma aura que atira projéteis, ganchos são melhorados e estrelas de mana são criadas ocasionalmente
+		[i:FargowiltasSouls/TimberForce] Ganhe críticos que rolam novamente ao pegar itens, preenchimento do bestiário e desconto
+		[i:FargowiltasSouls/TerraForce] Acerto críticos e aparadas lançam relâmpagos poderosos, você recebe menos dano de efeitos negativos e suas armas físicas são maiores
+		[i:FargowiltasSouls/TerraForce] Chance de acerto crítico definida para 75%, aumentada quando relâmpagos são atirados, maior alcance de coleta de itens, redução de dano aumentada ao pegar coletáveis
+		[i:FargowiltasSouls/EarthForce] Você ganha bônus defensivo enquanto não ataca e bônus ofensivos enquanto ataca
+		[i:FargowiltasSouls/EarthForce] 4x dano de efeitos negativos e você explode ao ser atingido se não estiver atacando
+		[i:FargowiltasSouls/NatureForce] Você tem uma aura que rouba vida, aumenta o dano recebido,e atira tiros de folha em inimigos próximos
+		[i:FargowiltasSouls/NatureForce] Cura de Cogumelos é melhorada e oferece buffs, seus ataques infligem diversos efeitos negativos, e você tem um guarda-chuva
+		[i:FargowiltasSouls/LifeForce] Deixe para trás flores poderosas enquanto voa  que oferecem bônus incríveis quando tocadas
+		[i:FargowiltasSouls/LifeForce] Você reflete o dano de contato, efeito do Pacote de Colmeias
+		[i:FargowiltasSouls/SpiritForce] Aperte para baixo duas vezes para chamar um tornado ancião, poções de cura recuperam mais vida ao longo do tempo, e seus chicotes são melhorados
+		[i:FargowiltasSouls/SpiritForce] Se você chegar a 0 PV você reviverá com 300 de PV e limpa seus efeitos negativos
+		[i:FargowiltasSouls/ShadowForce] Oferece uma corrida sombria, e uma corrida invencível das sombras a cada 4 segundos, estastísticas de projéteis melhoradas dependendo da sua velocidade
+		[i:FargowiltasSouls/ShadowForce] Você atira uma arma extra como suporte, seus lacaios recebem um ataque de foice, e inimigos derrotados derrubam uma pilha de ossos
+		[i:FargowiltasSouls/WillForce] Invoca um espírito gladiador, melhora a sua cura e estatísticas das montarias, e ataques em sucessão ganham dano bônus
+		[i:FargowiltasSouls/WillForce] Automaticamente envia moedas ao seu porquinhos quando coletadas (funciona do inventário e visual), inimigos podem derrubar tesouros extras
+		[i:FargowiltasSouls/CosmoForce] Atacar ocasionalmente lança luas nos inimigos que explodem em Impulsionadores Lunares
+		[i:FargowiltasSouls/CosmoForce] Aumenta a sua velocidade de movimento e aceleração e diminui o seu impulso, Congelamento de Pó das Estrelas tem um tempo de recarga de 60 segundos
+		'Um verdadeiro mestre do Terraria'
 		'''
 }
 
 TrawlerSoul: {
-	DisplayName: Trawler Soul
+	DisplayName: Alma do Arrastão
 	Tooltip:
 		'''
-		Increases fishing skill substantially
-		All fishing rods will have 10 extra lures
-		You catch fish almost instantly
-		Permanent Sonar and Crate Buffs
-		Effects of Angler Tackle Bag, Volatile Gel, and Spore Sac 
-		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
-		'Fish fear me'
+		Aumenta muito a habilidade de pesca
+		Todas as varas de pesca lançam 10 iscas extras
+		Você captura peixes quase instantaneamente
+		Buffs de Caixote e Sonar permanentes
+		Efeitos da Bolsa do Pescador, Gelatina Volátil, e Bolsa de Esporos 
+		Efeitos do Balão de Ferradura Rosa e Equipamento de Mergulho Ártico 
+		'Peixes têm medo de mim'
 		'''
 }
 
 UniverseSoul: {
-	DisplayName: Soul of the Universe
+	DisplayName: Alma do Universo
 	Tooltip:
 		'''
-		50% increased damage for your current weapon class
-		25% increased critical chance for your current weapon class
-		25% increased attack speed
-		50% increased shoot velocity
-		All weapons have double knockback
-		Increases your maximum mana by 300
-		Increases your max number of minions by 2
-		Increases your max number of sentries by 1
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
-		Effects of Sniper Scope, Celestial Cuffs and Mana Flower
-		'The heavens themselves bow to you'
+		50% de aumento nos danos da sua classe de armas atual
+		25% de aumento na chance de acerto crítico para sua classe de armas atual
+		25% de aumento na velocidade de ataque
+		50% de aumenta na velocidade dos tiros
+		Todas as armas têm o dobro do recuo
+		Aumenta o máximo de mana em 300
+		Aumenta o número máximo de lacaios que você pode ter em 2
+		Aumenta o número máximo de sentinelas em 1
+		Efeitos da Manopla de Fogo, Bolsa de Ioiô, e Casco Celestial
+		Efeitos da Luneta do Atirador, Algemas Celestiais e Flor de Mana 
+		'Os céus se curvam perante a você'
 		'''
 }
 
 WorldShaperSoul: {
-	DisplayName: World Shaper Soul
+	DisplayName: Alma do Modelador de Mundos
 	Tooltip:
 		'''
-		Oferece imunidade a mining explosives
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach
-		Mining speed tripled, plus effect of Ancient Chisel
-		Shows the location of enemies, traps, and treasures
-		Auto paint and actuator effect
-		Provides light and allows gravity control
-		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
-		    Increased placement speed and range
-		Effect can be disabled in Effect Toggles menu
-		Effects of the Cell Phone, Royal Gel and Treasure Magnet
-		Summons a pet Magic Lantern
-		'Living in a world of cardboard'
+		Oferece imunidade a explosivos de mineração
+		Aumento na velocidade de posicionamento de blocos e paredes em 50%
+		Alcance de posicionamento e mineração quase infinitos
+		Velocidade de mineração triplicada, mais os efeitos do Formão Antigo
+		Mostra a localização de inimigos, armadilhas, e tesouros
+		Efeitos da pintura e atuadores automáticos
+		Fornece luz e permite controle da gravidade
+		Permite ativar o Modo de Construção:
+		    Paredes não serão consumidas
+		    Aumenta a velocidade e alcance do posicionamento
+		Efeitos podem ser desativados no Habilitador de Efeitos
+		Efeitos do Telefone Celular, Geleia Real e Imã de Tesouros
+		Invoca um pet de Lanterna Mágica
+		'Vivendo em um mundo de papelão'
 		'''
 }
 
 FargoArrow: {
-	DisplayName: Amalgamated Arrow Quiver
+	DisplayName: Aljava de Flechas Amalgamada
 	Tooltip:
 		'''
-		Bounces several times
-		Each impact explodes, summons falling stars, and fires laser arrows
-		Inflicts several debuffs
+		Quica várias vezes
+		Cada impacto explode, cria estrelas cadentes e atira lasers
+		Inflige diversos efeitos negativos
 		'''
 }
 
 FargoBullet: {
-	DisplayName: Amalgamated Bullet Pouch
+	DisplayName: Bolsa de Balas Amalgamada
 	Tooltip:
 		'''
-		Chases after your enemy
-		Bounces several times
-		Each impact causes an explosion of crystal shards
-		Inflicts several debuffs
+		Persegue seus inimigos
+		Quica várias vezes
+		Cada impacto cria uma explosão de fragmentos de cristal
+		Inflige diversos efeitos negativos
 		'''
 }
 
