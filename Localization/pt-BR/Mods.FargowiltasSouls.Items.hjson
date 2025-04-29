@@ -1558,8 +1558,8 @@ SlimyShield: {
 		Oferece imunidade a Geleia
 		Aumenta a velocidade de queda
 		Segure para baixo para cair por plataformas
-		Quando você pousa após um pulo, geleia cairá do céu em cima do seu cursor
-		A Geleia inflige Geleia e Oleoso
+		Quando você pousa após um pulo, bolas de geleia cairão do céu em cima do seu cursor
+		As bolas de geleia infligem Geleia e Oleoso
 		'Rasgado do interior de um inimigos derrotado'
 		'''
 }
@@ -1568,21 +1568,21 @@ SparklingAdoration: {
 	DisplayName: Adoração Cintilante
 	Tooltip:
 		'''
-		Oferece imunidade a Lovestruck and Fake Hearts
-		Graze attacks to gain up to x1.25 increased damage
-		Damage bonus decreases over time and is fully lost on hit
-		Your attacks periodically summon life-draining hearts, dealing magic damage
-		'With all of your emotion!'
+		Oferece imunidade a Apaixonado e Corações falsos
+		Aproxime-se de ataques para ganhar até 1.25x dano 
+		Bônus de dano diminui com o tempo e é totalmente perdido ao ser atingido
+		Seus ataques às vezes criar corações que roubam vida, causando dano de magia
+		'Com toda a sua emoção!'
 		'''
 }
 
 SqueakyToy: {
-	DisplayName: Squeaky Toy
+	DisplayName: Brinquedo Barulhento
 	Tooltip:
 		'''
-		Oferece imunidade a Squeaky Toy and Guilty
-		Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
-		'The beloved toy of a defeated foe...?'
+		Oferece imunidade a Brinquedo Barulhento e Culpado
+		Ataques de inimigos têm uma chance de 10% de apenas fazer barulho e causar 1 de dano
+		'O brinquedo amado de um inimigo derrotado...?'
 		'''
 }
 
