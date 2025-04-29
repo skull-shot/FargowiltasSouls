@@ -59,7 +59,7 @@ AshWoodEnchant: {
 	/* Tooltip:
 		'''
 		Fire debuffs don't damage you
-		While afflicted with any (non-Potion/Mana Sickness/Water Candle) debuff, attacks are accompanied by balls of fire that deal magic damage
+		While afflicted with a debuff, attacks are accompanied by balls of fire that deal magic damage
 		Grants immunity to Oiled
 		Reduces damage from touching lava
 		'You're telling me this isn't wood?'
