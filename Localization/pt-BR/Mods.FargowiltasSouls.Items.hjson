@@ -1582,7 +1582,7 @@ SqueakyToy: {
 		'''
 		Oferece imunidade a Brinquedo Barulhento e Culpado
 		Ataques de inimigos têm uma chance de 10% de apenas fazer barulho e causar 1 de dano
-		'O brinquedo amado de um inimigo derrotado...?'
+		'O brinquedo favorito de um inimigo derrotado...?'
 		'''
 }
 
@@ -1590,231 +1590,231 @@ SupremeDeathbringerFairy: {
 	DisplayName: Supreme Deathbringer Fairy
 	Tooltip:
 		'''
-		Oferece imunidade a [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
-		[i:FargowiltasSouls/SlimyShield] Increases fall speed and landing spawns slime over your cursor, hold down to fall through platforms
-		[i:FargowiltasSouls/AgitatingLens] While dashing or running quickly you will create a trail of blood scythes
-		[i:FargowiltasSouls/AgitatingLens] Instalação de Efeitos Negativos makes you go berserk, reducing control and defense for massive offensive bonuses
-		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
-		[i:FargowiltasSouls/QueenStinger] Press the Special Dash key to perform a short quick bee dash
-		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less damage while dashing, and reflect all damage back to attacker while dashing
-		[i:FargowiltasSouls/NecromanticBrew] Summons 2 Skeletron arms to whack enemies
-		'Supremacy not necessarily guaranteed'
+		Oferece imunidade a [i:FargowiltasSouls/SlimyShield] Geleia, [i:FargowiltasSouls/AgitatingLens] Furioso, [i:FargowiltasSouls/QueenStinger] Infestado, e [i:FargowiltasSouls/NecromanticBrew] Letárgico
+		[i:FargowiltasSouls/SlimyShield] Aumenta a velocidade de queda e pousar cria geleia acima do seu cursor, segure para baixo para cair por plataformas
+		[i:FargowiltasSouls/AgitatingLens] Enquanto correndo ou se movimentando rapidamente você criará um rastro de foices de sangue
+		[i:FargowiltasSouls/AgitatingLens] Instalação de Efeitos Negativos faz você ficar furioso, trocando o controle e a defesa por grandes bônus ofensivos
+		[i:FargowiltasSouls/QueenStinger] O buff de mel aumenta sua perfuração de blindagemk por 5, e abelhas e vespas fracas se tornam mais amigáveis
+		[i:FargowiltasSouls/QueenStinger] Aperte o botão de corrida especial para fazer uma pequena corrida rápida de abelha
+		[i:FargowiltasSouls/NecromanticBrew] Aumenta muito a velocidade da corrida, receba menos dano ao correr, e você reflete todo o dano recebido ao inimigo enquanto corre
+		[i:FargowiltasSouls/NecromanticBrew] Invoca 2 braços do Skeletron para bater em inimigos
+		'Supremacia não garantida'
 		'''
 }
 
 TimsConcoction: {
-	DisplayName: Tim's Concoction
+	DisplayName: Mistura do Tim
 	Tooltip:
 		'''
-		Certain enemies will drop potions when defeated
-		'Smells funny'
+		Certos inimigos derrubam poções quando morrem
+		'Tem cheiro engraçado'
 		'''
 }
 
 TribalCharm: {
-	DisplayName: Tribal Charm
+	DisplayName: Charme Tribal
 	Tooltip:
 		'''
-		When attacking by manually clicking, increases non-summon damage by 30%
-		Oferece imunidade a Webbed and Purified
-		'An idol of the ancient jungle dwellers'
+		Quando atacando clicando manualmente, aumenta o dano em 30% (exceto dano por invocação)
+		Oferece imunidade a Preso e Purificado
+		'Um ídolo dos moradores antigos da selva...'
 		'''
 }
 
 WretchedPouch: {
-	DisplayName: Wretched Pouch
+	DisplayName: Bolsa Miserável
 	Tooltip:
 		'''
-		Oferece imunidade a Shadowflame
-		While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
-		Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
-		'The accursed incendiary powder of a defeated foe'
+		Oferece imunidade a Chama das Sombras
+		Enquanto ataca, carrega energia de Chama das Sombras mas reduz a redução de dano por 10%
+		Pare de atacar para consumir a energia de Chama das Sombras, liberando uma explosão de tentáculos de Chama das Sombras que causa dano de magia
+		'O poder incendiário maldito de um inimigo derrotado'
 		'''
 }
 
 WyvernFeather: {
-	DisplayName: Wyvern Feather
+	DisplayName: Pena de Serpe
 	Tooltip:
 		'''
-		Oferece imunidade a Clipped Wings and Crippled
-		You periodically shed light orbs, touch them to refresh your flight time
-		Stabilizes gravity in space and in liquids (Funciona do inventário e visual)
-		'Warm to the touch'
+		Oferece imunidade a Armas Cortadas e Aleijado
+		Você periodicamente libera orbes de luz, toque neles para recuperar seu tempo de voo
+		Estabiliza a gravidade no espaço e nos líquidos (Funciona do inventário e visual)
+		'Quente ao toque'
 		'''
-	VanityTooltip: Stabilizes gravity in space and in liquids
+	VanityTooltip: Estabiliza a gravidade no espaço e nos líquidos
 }
 
 ZephyrBoots: {
-	DisplayName: Zephyr Boots
+	DisplayName: Botas de Zéfiro
 	Tooltip:
 		'''
-		Allows flight, super fast running, and extra mobility on ice
-		8% increased movement speed
-		Provides the ability to walk on water, honey and lava
-		Oferece imunidade a fire blocks and 7 seconds of immunity to lava
-		Reduces damage from touching lava
-		Allows the holder to double jump
-		Increases jump height and negates fall damage
-		'Run like the wind'
+		Permite o voo, corrida super-rápida, e mobilidade extra no gelo
+		8% de aumento na velocidade dos movimentos
+		Permite andar sobre a água, o mel e a lava
+		Oferece imunidade a blocos de fogo e 7 segundos de imunidade a lava
+		Reduz o dano sofrido ao entrar em contato com a lava
+		Permite pulos duplos
+		Aumenta a altura dos pulos e nega dano de queda
+		'Corra como o vento'
 		'''
 }
 
 ArchWizardsSoul: {
-	DisplayName: Arch Wizard's Soul
+	DisplayName: Alma do Arcanista
 	Tooltip:
 		'''
-		22% increased magic damage
-		20% reduced mana cost
-		10% increased magic critical strike chance
-		Increases your maximum mana by 200
-		Effects of Celestial Cuffs and Mana Flower
-		'Arcane to the core'
+		22% de aumento nos danos por magia
+		20% de redução no custo de mana
+		10% de aumento na chance de ataque mágico crítico
+		Aumenta a mana máxima em 200
+		Efeitos das Algemas Celestiais e da Flor de Mana
+		'Arcano até o núcleo'
 		'''
 }
 
 BerserkerSoul: {
-	DisplayName: Berserker's Soul
+	DisplayName: Alma do Furioso
 	Tooltip:
 		'''
-		22% increased melee damage
-		20% increased melee speed
-		10% increased melee crit chance
-		Increased melee knockback
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
-		'None shall live to tell the tale'
+		22% de aumento nos danos por ataques físicos
+		20% de aumento na velocidade do ataque físico
+		10% de aumento na chance de acerto crítico em ataque físico
+		Aumenta o recuo dos ataques físicos
+		Efeitos da Manopla de Fogo, Bolsa de Ioiô, e Casco Celestial
+		'Ninguém vai sobreviver para contar a história'
 		'''
 }
 
 ColossusSoul: {
-	DisplayName: Colossus Soul
+	DisplayName: Alma do Colosso
 	Tooltip:
 		'''
-		+100 max health, +10% damage reduction, increases life regeneration by 5
-		Oferece imunidade a knockback, several debuffs, Shimmering, and fall damage
-		Enemies are more likely to target you
-		Effects of Brain of Confusion, Star Veil, Charm of Myths and Bee Cloak
-		Effects of Shiny Stone, Paladin's Shield, and Frozen Turtle Shell
-		'Nothing can stop you'
+		+100 de PV máximo, +10% de redução de dano, aumenta a regeneração de vida em 5
+		Oferece imunidade a recuo, diversos efeitos negativos, Shimmer, e dano de queda
+		A chance dos inimigos mirarem em você é maior
+		Efeitos do Cérebro da Confusão, Manto das Estrelas, Amuleto dos Mitos e Manto de Abelhas
+		Efeitos da Pedra Brilhante, Escudo do Paladino, e Casco de Tartaruga Congelada
+		'Nada pode te parar'
 		'''
 }
 
 ConjuristsSoul: {
-	DisplayName: Conjurist's Soul
+	DisplayName: Alma do Conjurador
 	Tooltip:
 		'''
-		22% increased summon damage
-		15% increased whip range
-		Increases your max number of minions by 3
-		Increases your max number of sentries by 1
-		Increased minion knockback
-		'An army at your disposal'
+		22% de aumento nos danos por invocação
+		15% de aumento no alcance dos chicotes
+		Aumenta o seu número máximo de lacaios em 3
+		Aumenta o seu número máximo de sentinelas em 1
+		Aumenta o recuo causado dos lacaios
+		'Um exército a sua disposição'
 		'''
 }
 
 DimensionSoul: {
-	DisplayName: Soul of Dimensions
+	DisplayName: Alma das Dimensões
 	Tooltip:
 		'''
-		+300 max health, +20% damage reduction, increases life regeneration by 8
-		Oferece imunidade a knockback and several debuffs
-		Enemies are more likely to target you
-		Allows Supersonic running and infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
-		Increases fishing skill substantially, All fishing rods will have 10 extra lures
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach, Mining speed tripled
-		Shine, Spelunker, Hunter, and Dangersense effects
-		Auto paint and actuator effect
-		Grants the ability to enable Builder Mode
-		Effects of the Brain of Confusion, Star Veil, Sweetheart Necklace, Bee Cloak, Spore Sac, and Shiny Stone
-		Effects of Paladin's Shield, Frozen Turtle Shell, Arctic Diving Gear, Frog Legs, and Flying Carpet
-		Effects of Lava Waders, Angler Tackle Bag, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
-		Effects of Shield of Cthulhu and Master Ninja Gear
-		'The dimensions of Terraria at your fingertips'
+		+300 de vida máxima, +20% de redução de dano, Aumenta a regeneração de vida em 8
+		Oferece imunidade a recuo e diversos efeitos negativos
+		A chance dos inimigos mirarem em você é maior
+		Permite a movimentação Supersônica e voo infinito, [c/BC5252:Desabilita todos os pulos (ativável)]
+		Aumenta muito a habilidade de pesca, todas as varas de pescar lançam 10 iscas extras
+		Aumenta a velocidade de posicionamento dos blocos e paredes em 50%
+		Alcance do posicionamento e mineração quase infinitos, velocidade de mineração triplicada
+		Efeitos do Brilho, Espeleólogo, Caçador e Sentido-perigo
+		Efeitos da pintura e atuadores automáticos
+		Oferece a habilidade de ativar o Modo de Construção
+		Efeitos do Cérebro da Confusão, Manto das Estrelas, Colar da Amada, Manto de Abelhas, Bolso de Esporos, e Pedra Brilhante
+		Efeitos do Escudo de Paladino, Casco de Tartaruga Congelada, Equipamento de Mergulho Ártico, Pernas de Sapo, e Tapete Voador
+		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra, Telefone Celular, e Globo da Gravidade
+		Efeitos do Escudo de Cthulhu e Equipamento de Mestre Ninja
+		'As dimensões do Terraria na ponta dos seus dedos'
 		'''
 }
 
 EternitySoul: {
-	DisplayName: Soul of Eternity
+	DisplayName: Alma da Eternidade
 	Tooltip:
 		'''
-		Crit chance is set to 50%
-		Crit to increase it by 10%
-		At 100% every attack gains 10% life steal
-		You also gain +5% damage and +5 defense
-		This stacks up to 950 times until you get hit
+		A chance de acertos críticos é definida para 50%
+		Acertos críticos aumentam essa chance em 10%
+		Quando você em 100% cada ataque ganha 10% de roubo de vida
+		Você também ganha 5% de dano e 5 de defesa
+		Isso pode ser empilhado 950 vezes até você ser atingido
 		'''
 
 	Extra: {
-		Additional: Additionally grants:
+		Additional: Também Oferece:
 		// Additional effects are automatically pulled from material tooltips
 		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		StartsWithFilter: "'"
 		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		ContainsFilter: Following effects|Grants togglable
-		Flavor: "'Mortal or Immortal, all things acknowledge your claim to divinity.'"
+		Flavor: "'Mortal ou Imortal, Todas as coisas reconhecem a sua reivindicação à Divindade.'"
 	}
 }
 
 FlightMasterySoul: {
-	DisplayName: Flight Mastery Soul
+	DisplayName: Alma da Maestria do Voo
 	Tooltip:
 		'''
-		Allows for infinite flight
-		Hold DOWN and JUMP to hover
-		Hold UP to boost faster
-		Increases gravity
-		[c/BC5252:Disables all of your jumps (togglable)]
-		'Pierce the heavens'
+		Permite o voo infinito
+		Segura para BAIXO e PULO para flutuar
+		Segura para CIMA para subir mais rápido
+		Aumenta a gravidade
+		[c/BC5252:Desabilita todos os seus pulos (ativável)]
+		'Perfure os Céus'
 		'''
 }
 
 MasochistSoul: {
-	DisplayName: Soul of the Master
+	DisplayName: Alma do Mestre
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Increases wing time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (Funciona do inventário e visual), immunity to almost all Eternity Mode debuffs, and more
-		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
-		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		'Embrace mastery, embrace eternity'
+		[i:FargowiltasSouls/GalacticGlobe] Aumento o tempo de voo em 200%, [i:FargowiltasSouls/QueenStinger] Perfuração de blindagem em 50, [i:FargowiltasSouls/GalacticGlobe] e velocidade de movimento 20%
+		[i:FargowiltasSouls/GuttedHeart] Aumenta a vida máxima em 100%, [i:FargowiltasSouls/MagicalBulb] regeneração de vida, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] dano a sua classe de armas atual em 50%, e [i:FargowiltasSouls/ReinforcedPlating] redução de dano em 10%
+		[i:FargowiltasSouls/PungentEyeball] Aumenta muito a taxa de criação de inimigos raros, [i:FargowiltasSouls/SinisterIcon] dobra a taxa de criação de inimigos, faz inimigos normais derrubarem o dobro dos tesouros, e [i:FargowiltasSouls/TimsConcoction] faz certos inimigos derrrubarem poções
+		Oferece [i:FargowiltasSouls/SlimyShield] Queda rápida, [i:FargowiltasSouls/ReinforcedPlating] imunidade a recuos, [i:FargowiltasSouls/PureHeart] imunidade a efeitos negativos de bioma, [i:FargowiltasSouls/GalacticGlobe] a maioria dos buffs de poções e estações (Funciona do inventário e visual), imunidade a quase todos os efeitos negativos do Modo Eternidade, e mais
+		[i:FargowiltasSouls/PrecisionSeal] Aperte o botão do Selo de Precisão para desativar corridas e pulos
+		[i:FargowiltasSouls/PrecisionSeal] Reduz o tamanho da hurtbox, [i:FargowiltasSouls/NecromanticBrew] aumenta a distância da corrida, e [i:FargowiltasSouls/PungentEyeball] faz com que inimigos próximos ao seu cursor recebam 1.15x dano
+		[i:FargowiltasSouls/SecurityWallet] reduz o preço das reforjas em 50%, melhora a sua [i:FargowiltasSouls/OrdinaryCarrot] visão noturna, [i:FargowiltasSouls/NymphsPerfume] PV de renascimento, e [i:FargowiltasSouls/SandsofTime] tempo de renascimento, assim como usa poções de [i:FargowiltasSouls/ConcentratedRainbowMatter] cura e [i:FargowiltasSouls/MysticSkull] mana quando necessário
+		Quando atingido, [i:FargowiltasSouls/SqueakyToy] você tem uma chance de 5% de levar apenas 1 de dano, e [i:FargowiltasSouls/NecromanticBrew] você reflete o dano recebido enquanto faz uma corrida
+		Seus ataques [i:FargowiltasSouls/NymphsPerfume] produzem corações e infligem um coquetel de efeitos negativos do Modo Eternidade
+		[c/BC5252:Converte todos os seus efeitos de lacaios e slots de lacaios em 1% de dano cada (ativável)]
+		Caso desativado, invoca [i:FargowiltasSouls/NecromanticBrew] Braços do Skeletron, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] uma geleia arco-íris, [i:FargowiltasSouls/GroundStick] duas sondas amigáveis, [i:FargowiltasSouls/SkullCharm] um olho lacaio, [i:FargowiltasSouls/SaucerControlConsole] um mini disco voador, [i:FargowiltasSouls/MagicalBulb] uma planta, [i:FargowiltasSouls/CelestialRune] um cultista, [i:FargowiltasSouls/GalacticGlobe] e Verdadeiros olhos de Cthulhu para lutarem por você
+		[i:FargowiltasSouls/SandsofTime] Use para teletransportar ao último lugar em que você morreu
+		'Aceite a Maestria, Aceite a Eternidade.'
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Oferece a maioria dos efeitos de poções"
 }
 
 SnipersSoul: {
-	DisplayName: Sniper's Soul
+	DisplayName: Alma do Atirador de Elite
 	Tooltip:
 		'''
-		22% increased ranged damage
-		20% increased ranged projectile velocity
-		10% increased ranged critical chance
-		Effects of Sniper Scope and Magic Quiver
-		'Ready, aim, fire'
+		22% de aumento nos danos por ataque à distância
+		20% de aumento de velocidade de projéteis
+		10% de aumento na chance de acerto crítico à distância
+		Efeitos da Luneta do Atirador e Aljava Mágica
+		'Preparar, Apontar... Fogo!'
 		'''
 }
 
 SupersonicSoul: {
-	DisplayName: Supersonic Soul
+	DisplayName: Alma Supersônica
 	Tooltip:
 		'''
-		Allows Supersonic running, flight, and extra mobility on ice
-		Allows the holder to quintuple jump if no wings are equipped
-		Increases jump height, jump speed, and allows auto-jump
-		Flowers grow on the grass you walk on
-		Grants the ability to swim and greatly extends underwater breathing
-		Provides the ability to walk on water and lava
-		Oferece imunidade a lava and fall damage
-		Effects of Flying Carpet, Shield of Cthulhu and Master Ninja Gear
-		Effects of Sweetheart Necklace and Amber Horseshoe Balloon
-		'I am speed'
+		Permite a movimentação e voo Supersônicos e mobilidade extra no gelo
+		Permite você fazer um pulo quintúplo caso nenhuma asa estiver equipada
+		Aumenta a velocidade e altura dos pulos, e permite o pulo automático
+		Flores crescem no chão em que você pisa
+		Oferece a habilidade de nadar e aumenta muito o seu fôlego
+		Oferece a habilidade de andar sobre líquidos
+		Oferece imunidade a lava e dano de queda
+		Efeitos do Tapete Voador, Escudo de Cthulhu e Equipamento do Mestre Ninja
+		Efeitos do Colar da Amada e Balão da Ferradura de Âmbar
+		'Eu sou a velocidade'
 		'''
 }
 
