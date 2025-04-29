@@ -2756,87 +2756,87 @@ Penetrator: {
 }
 
 PhantasmalLeashOfCthulhu: {
-	DisplayName: Phantasmal Leash of Cthulhu
+	DisplayName: Coleira Fantasmagórica de Cthulhu
 	Tooltip:
 		'''
-		Spawns a flurry of homing eyes whilst spun and on hit
-		'The True Eye's soul, trapped for all eternity...'
+		Invoca uma enxurrada de olhos teleguiados ao girar e ao acertar um inimigo
+		'A alma verdadeira do Olho, presa para toda a Eternidade...'
 		'''
 }
 
 SlimeRain: {
-	DisplayName: Slime Rain
-	Tooltip: "'The King's innards spread across the land...'"
+	DisplayName: Chuva de Geleias
+	Tooltip: "'As entranhas do Rei espalhadas pela terra...'"
 }
 
 SparklingLove: {
-	DisplayName: Sparkling Love
+	DisplayName: Amor Cintilante
 	Tooltip:
 		'''
-		Right click to summon the soul of Deviantt
-		Right click pattern becomes denser with up to 12 empty minion slots
-		'The soul-consuming demon axe of love and justice from a defeated foe...'
+		Botão direito para invocar a alma da Deviantt
+		O padrão do botão direito se torna mais denso com até 12 slots de lacaios livres
+		'O machado demoníaco consumir de almas de amor e justiça de um inimigo derrotado...'
 		'''
 }
 
 StyxGazer: {
-	DisplayName: Styx Gazer
+	DisplayName: Contemplador de Styx
 	Tooltip:
 		'''
-		Right click to wield a blade of infernal magic
-		'The blazing scythe wand sword destruction ray of a defeated foe...'
+		Botão Direito para empunhar uma lâmina de magia infernal
+		'A foice bastão espada raio de destruição ardente de um inimigo derrotado...'
 		'''
 }
 
 Mahoguny: {
-	DisplayName: Mahoguny
+	DisplayName: Morgnarma
 	Tooltip:
 		'''
-		Uses acorns as ammo
-		Fires leaves and acorns
+		Usa bolotas como munição
+		Atira folhas e bolotas
 		'''
 }
 
 OvergrownKey: {
-	DisplayName: Overgrown Key
+	DisplayName: Chave Coberta
 	Tooltip:
 		'''
-		Summons a Jungle Mimic to fight for you
-		Needs 2 minion slots
+		Invoca um Mímico da Selva para lutar por você
+		Precisa de 2 slots de lacaio
 		'''
 }
 
 TophatSquirrelWeapon: {
-	DisplayName: Top Hat Squirrel
-	Tooltip: "'Who knew this squirrel had phenomenal cosmic power?'"
+	DisplayName: Esquilo de Cartola
+	Tooltip: "'Quem advinharia que esse esquilo tinha poder cósmico fenomenal?'"
 }
 
 Vineslinger: {
-	DisplayName: Vineslinger
-	Tooltip: Hitting an enemy fires leaves
+	DisplayName: Lança-vinhas
+	Tooltip: Atingir um inimigo atira folhas
 }
 
 BigBrainBuster: {
-	DisplayName: Big Brain Buster
+	DisplayName: Grande Destruidor de Cérebros
 	Tooltip:
 		'''
-		Repeated summons increase the size and firing rate of the minion
-		This caps at 16 slots
-		'The reward for a mighty rematch...'
+		Invocar repetidamente aumenta o tamanho e taxa de ataque do lacaio
+		Isso tem limite de 16 slots
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 Blender: {
-	DisplayName: The Blender
-	Tooltip: "'The reward for a mighty rematch...'"
+	DisplayName: O Liquidificador
+	Tooltip: "'A recompensa por uma revanche poderosa...'"
 }
 
 DestroyerGun2: {
-	DisplayName: Destruction Cannon
+	DisplayName: Canhão da Destruição
 	Tooltip:
 		'''
-		Becomes longer and faster with up to 5 empty minion slots
-		'The reward for a mighty rematch...'
+		Se torna mais longo e rápido com até 5 slots de lacaio livres
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2846,7 +2846,7 @@ DragonBreath2: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2860,7 +2860,7 @@ EaterLauncher: {
 		Press Right Click to increase this range
 		The range then gradually decreases to normal
 		50% chance to not consume ammo
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2891,7 +2891,7 @@ GolemTome2: {
 		'''
 		Deals more damage when firing many heads at once
 		Automatically fires weak heads when fully charged
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2909,7 +2909,7 @@ HellZone: {
 		Left click attack inflicts Hellfire
 		Right click to fire a skull that marks enemies
 		Marked enemies take 5x damage over time from Hellfire
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2920,7 +2920,7 @@ MechanicalLeashOfCthulhu: {
 		Spawns homing servants whilst spun
 		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
 		Only one eye can be loose at a time
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
@@ -2939,18 +2939,18 @@ OpticStaffEX: {
 		'''
 		Summons the real twins to fight for you
 		Needs 3 minion slots
-		'The reward for a mighty rematch...''
+		'A recompensa por uma revanche poderosa...''
 		'''
 }
 
 RefractorBlaster2: {
 	DisplayName: Diffractor Blaster
-	Tooltip: "'The reward for a mighty rematch...'"
+	Tooltip: "'A recompensa por uma revanche poderosa...'"
 }
 
 SlimeSlingingSlasher: {
 	DisplayName: Slime Slinging Slasher
-	Tooltip: "'The reward for a mighty rematch...'"
+	Tooltip: "'A recompensa por uma revanche poderosa...'"
 }
 
 TheBigSting: {
@@ -2960,7 +2960,7 @@ TheBigSting: {
 		Uses darts for ammo
 		Scales with your bee damage and knockback increases
 		66% chance to not consume ammo
-		'The reward for a mighty rematch...'
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
