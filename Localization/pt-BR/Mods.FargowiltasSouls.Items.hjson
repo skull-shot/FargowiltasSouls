@@ -2090,182 +2090,182 @@ DeerSinew: {
 	DisplayName: Tendão de Cervo
 	Tooltip:
 		'''
-		Allows the ability to dash without a dash accessory
+		Permite que você faça uma corrida sem um acessório de corrida
 		Aperte uma direção duas vezes
-		Taking damage may briefly freeze you
-		Deal less damage as your speed increases, down to 0.85x at max
-		All effects negated if toggled off or another dash is already in use
-		'Cold but twitching'
+		Tomar dano pode te congelar brevemente
+		Cause dano menor quanto mais rápido você se move, até 0.85x no máximo
+		Todos os efeitos são negados caso desligado ou caso outra corrida já esteja em uso
+		'Frio mas contraindo'
 		'''
 }
 
 MutantsCreditCard: {
-	DisplayName: Mutant's Credit Card
+	DisplayName: Cartão de Crédito do Mutant
 	Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 30%
-		'Wait, how did you get this?'
+		Permanentemente reduz o preço dos itens do Mutant em 30%
+		'Pera, como que você achou isso?'
 		'''
 }
 
 MutantsDiscountCard: {
-	DisplayName: Mutant's Discount Card
+	DisplayName: Cartão de desconto do Mutant
 	Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 20%
+		Permanentemente reduz o preço dos itens do Mutant em 20%
 		{$CommonItemTooltip.MajorStats}
-		'It's not used how you think'
+		'Não é usado como você pensa'
 		'''
 }
 
 MutantsPact: {
-	DisplayName: Mutant's Pact
-	Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
+	DisplayName: Pacto do Mutant
+	Tooltip: Te fornece um slot de acesório permanente onde podem ser usadas Essências, Encantamentos, Forças e Almas
 }
 
 OrdinaryCarrot: {
-	DisplayName: Ordinary Carrot
+	DisplayName: Cenoura Normal
 	Tooltip:
 		'''
-		Increases night vision
+		Aumenta a visão noturna
 		{$CommonItemTooltip.MinorStats}
-		Increases life regeneration
-		1 minute duration
-		Right click to increase view range (Funciona do inventário e visual)
-		'Plucked from the face of a defeated foe'
+		Aumenta a regeneração de vida
+		Duração de 1 minuto
+		Clique com o botão direito para aumentar o alcance de visão (Funciona do inventário e visual)
+		'Puxado de um inimigo derrotado'
 		'''
-	VanityTooltip: Right click to increase view range
+	VanityTooltip: Clique com o botão direito para aumentar o alcance de visão
 }
 
 RabiesShot: {
-	DisplayName: Rabies Shot
-	Tooltip: Cures Feral Bite
+	DisplayName: Injeção contra a raiva
+	Tooltip: Cura a Mordida Feroz
 }
 
 RabiesVaccine: {
-	DisplayName: Rabies Vaccine
-	Tooltip: Permanently Oferece imunidade a Feral Bite
+	DisplayName: Vacina da Raiva
+	Tooltip: Permanentemente oferece imunidade a Mordida Feroz
 }
 
 LifeDye: {
-	DisplayName: Heavenly Dye
+	DisplayName: Tintura dos Céus
 	Tooltip: ""
 }
 
 WillDye: {
-	DisplayName: Willpower Dye
+	DisplayName: Tintura da Força de Vontade
 	Tooltip: ""
 }
 
 GaiaDye: {
-	DisplayName: Gaia Dye
+	DisplayName: Tintura Gaia
 	Tooltip: ""
 }
 
 AbomEnergy: {
-	DisplayName: Abominable Energy
+	DisplayName: Energia Abominável
 	Tooltip: ""
 }
 
 BrokenBlade: {
-	DisplayName: Broken Blade
+	DisplayName: Lâmina Quebrada
 	Tooltip: ""
 }
 
 BrokenHilt: {
-	DisplayName: Broken Hilt
+	DisplayName: Punho Quebrado
 	Tooltip: ""
 }
 
 DeviatingEnergy: {
-	DisplayName: Deviating Energy
+	DisplayName: Energia Divergente
 	Tooltip: ""
 }
 
 Eridanium: {
 	DisplayName: Eridanium
-	Tooltip: A shard of cosmic power
+	Tooltip: Um fragmento de poder cósmico
 }
 
 EternalEnergy: {
-	DisplayName: Eternal Energy
+	DisplayName: Energia Eterna
 	Tooltip:
 		'''
-		Oferece imunidade a almost all Eternity Mode debuffs
-		'Proof of having embraced eternity'
+		Oferece imunidade a quase todos os efeitos negativos do Modo Eternidade
+		'A prova de ter aceitado a Eternidade'
 		'''
 }
 
 PhantasmalEnergy: {
-	DisplayName: Broken Shaft
+	DisplayName: Eixo Quebrado
 	Tooltip: ""
 }
 
 EternityAdvisor: {
-	DisplayName: Eternity Advisor
-	Tooltip: Suggests loadouts for Eternity Mode based on progression
-	General: General: {0}
-	ClassSpecific: Class-Specific: {0}
-	Other: Other: {0}
-	Summon: Summon Item: {0}
+	DisplayName: Conselheira da Eternidade
+	Tooltip: Sugere equipamentos para o Modo Eternidade baseado na sua progressão
+	General: Geral: {0}
+	ClassSpecific: Específicas de uma classe: {0}
+	Other: Outros: {0}
+	Summon: Item de invocação: {0}
 }
 
 GalacticReformer: {
-	DisplayName: Galactic Reformer
+	DisplayName: Reformador Galáctico
 	Tooltip:
 		'''
-		Destroys an incredibly massive area
-		Use at your own risk
+		Destrói uma área incrívelmente massiva
+		Use por sua conta e risco
 		'''
 }
 
 MutantsFury: {
-	DisplayName: Mutant's Fury
-	Tooltip: "'REALLY enrages Mutant... or doesn't'"
-	On: Mutant is angered!
-	Off: Mutant is calm.
+	DisplayName: Fúria do Mutant
+	Tooltip: "'REALMENTE ENFURECE O MUTANT... ou não'"
+	On: Mutant está ENFURECIDO!
+	Off: Mutant está calmo.
 }
 
 TopHatSquirrelCaught: {
-	DisplayName: Top Hat Squirrel
+	DisplayName: Esquilo de Cartola
 	Tooltip: ""
 }
 
 UniversalCollapse: {
-	DisplayName: Universal Collapse
-	Tooltip: Destroys the Universe
+	DisplayName: Colapso Universal
+	Tooltip: DESTRÓI O UNIVERSO
 }
 
-AcornConstruct: {
-	DisplayName: Acorn Construct
-	Tooltip: Ride the Squirrel
+AcornConstruct: { 
+	DisplayName: Construção de Bolota
+	Tooltip: Passeie no Esquilo
 }
 
 AccursedRags: {
-	DisplayName: Accursed Rags
+	DisplayName: Trapos Malditos
 	Tooltip:
 		'''
-		Summons a small accursed sarcophagus
-		'That's why yo' rags cursed-y'
+		Invoca um pequeno Sarcófago maldito
+		'Jaqueta... paguei 1000 reais, relógio 30k'
 		'''
 }
 
 BabyScythe: {
-	DisplayName: Baby Scythe
+	DisplayName: Foice de Bebê
 	Tooltip:
 		'''
-		Summons Baby Abom
-		'Don't worry, it's dull'
+		Invoca o Abom Bebê
+		'Não se preocupe, não está afiada'
 		'''
 }
 
 ChibiHat: {
-	DisplayName: Chibi Hat
+	DisplayName: Chapéu Chibi
 	Tooltip:
 		'''
-		Summons Chibi Devi
-		She follows your mouse
-		'Cute! Cute! Cute!'
+		Invoca a Deviantt Chibi
+		Ela segue o seu cursor
+		'Fofo! Fofo! Fofo!'
 		'''
 
 	DeviChatter: {
@@ -2342,416 +2342,416 @@ ChibiHat: {
 }
 
 EnerGear: {
-	DisplayName: Ener-Gear
+	DisplayName: Engrenagem de Energia
 	Tooltip:
 		'''
-		Summons a bite-size baron
-		'100% rust-proof or your money back'
+		Invoca um barão pequenininho
+		'100% a prova de ferrugem ou você recebe o dinheiro de volta'
 		'''
 }
 
 MostlyOrdinaryRock: {
-	DisplayName: Mostly Ordinary Rock
+	DisplayName: Pedra Bem Ordinária
 	Tooltip:
 		'''
-		Summons a seeker of treasures
-		'Freshly hatched from a... rock?'
+		Invoca um buscador do tesouros
+		'Acabou de chocar... de uma pedra?'
 		'''
 }
 
 PortableFogMachine: {
-	DisplayName: Portable Fog Machine
+	DisplayName: Máquina de Névoa Portátil
 	Tooltip:
 		'''
-		Summons a baby shadow creature
-		'Born in the darkness, molded by it'
+		Invoca uma criatura sombria bebê
+		'Nascido na escuridão, moldado por ela'
 		'''
 }
 
 SpawnSack: {
-	DisplayName: Spawn Sack
+	DisplayName: Saco da Prole
 	Tooltip:
 		'''
-		Summons the spawn of Mutant
-		'You think you're safe?'
+		Invoca a prole do Mutant
+		'Você acha que está seguro?'
 		'''
-	NotSafe: You think you're safe?
+	NotSafe: Você acha que está seguro?
 }
 
 HokeyBall: {
-	DisplayName: Hokey Ball
+	DisplayName: Hoké-bola
 	Tooltip:
 		'''
-		Summons Nibble
-		'Show Nibble'
+		Invoca Nibble
+		'Mostrar Nibble'
 		'''
 }
 
 AbomRelic: {
-	DisplayName: Abominationn Relic
+	DisplayName: Relíquia do Abominationn 
 	Tooltip: ""
 }
 
 DeviRelic: {
-	DisplayName: Deviantt Relic
+	DisplayName: Relíquia da Deviantt 
 	Tooltip: ""
 }
 
 EarthChampionRelic: {
-	DisplayName: Earth Champion Relic
+	DisplayName: Relíquia do Campeão da Terra
 	Tooltip: ""
 }
 
 EridanusRelic: {
-	DisplayName: Eridanus Relic
+	DisplayName: Relíquia do Eridanus 
 	Tooltip: ""
 }
 
 LifeChampionRelic: {
-	DisplayName: Life Champion Relic
+	DisplayName: Relíquia do Campeão da Vida
 	Tooltip: ""
 }
 
 MutantRelic: {
-	DisplayName: Mutant Relic
+	DisplayName: Relíquia do Mutant
 	Tooltip: ""
 }
 
 NatureChampionRelic: {
-	DisplayName: Nature Champion Relic
+	DisplayName: Relíquia do Campeão da Natureza
 	Tooltip: ""
 }
 
 ShadowChampionRelic: {
-	DisplayName: Death Champion Relic
+	DisplayName: Relíquia do Campeão da Morte
 	Tooltip: ""
 }
 
 SpiritChampionRelic: {
-	DisplayName: Spirit Champion Relic
+	DisplayName: Relíquia do Campeão do Espírito 
 	Tooltip: ""
 }
 
 TerraChampionRelic: {
-	DisplayName: Terra Champion Relic
+	DisplayName: Relíquia do Campeão do Solo
 	Tooltip: ""
 }
 
 TimberChampionRelic: {
-	DisplayName: Timber Champion Relic
+	DisplayName: Relíquia do Campeão da Madeira
 	Tooltip: ""
 }
 
 TrojanSquirrelRelic: {
-	DisplayName: Trojan Squirrel Relic
+	DisplayName: Relíquia do Esquilo de Tróia
 	Tooltip: ""
 }
 
 WillChampionRelic: {
-	DisplayName: Will Champion Relic
+	DisplayName: Relíquia do Campeão da Vontade
 	Tooltip: ""
 }
 
 AbomTrophy: {
-	DisplayName: Abominationn Trophy
+	DisplayName: Troféu do Abominationn
 	Tooltip: ""
 }
 
 DeviTrophy: {
-	DisplayName: Deviantt Trophy
+	DisplayName: Troféu da Deviantt
 	Tooltip: ""
 }
 
 EridanusTrophy: {
-	DisplayName: Eridanus Trophy
+	DisplayName: Troféu do Eridanus
 	Tooltip: ""
 }
 
 MutantTrophy: {
-	DisplayName: Mutant Trophy
+	DisplayName: Troféu do Mutant
 	Tooltip: ""
 }
 
 TrojanSquirrelTrophy: {
-	DisplayName: Trojan Squirrel Trophy
+	DisplayName: Troféu do Esquilo de Tróia
 	Tooltip: ""
 }
 
 MutantStatue: {
-	DisplayName: Mutant Statue
+	DisplayName: Estátua do Mutant
 	Tooltip: ""
 }
 
 MutantStatueGift: {
-	DisplayName: Mutant Statue (Gift)
+	DisplayName: Estátua do Mutant (Presente)
 	Tooltip: ""
 }
 
 ScremPainting: {
-	DisplayName: Screm Painting
+	DisplayName: Pintura Screm
 	Tooltip: "'Merry N. Tuse'"
 }
 
 TophatSquirrelBanner: {
-	DisplayName: Tophat Squirrel Banner
+	DisplayName: Bandeira do Esquilo de Cartola
 	Tooltip: ""
 }
 
 TwentyTwoPainting: {
-	DisplayName: 22 Painting
+	DisplayName: Pintura 22
 	Tooltip: "'Keuhm E. Dee'"
 }
 
 AbominationnVoodooDoll: {
-	DisplayName: Abominationn Voodoo Doll
+	DisplayName: Boneco de vodu do Abominationn
 	Tooltip:
 		'''
-		Summons Abominationn to your town
-		'You are a terrible person'
+		Invoca o Abominationn para sua cidade
+		'Você é uma pessoa terrível'
 		'''
 	// the custom spawn message is unused
 	Summon: Mutant has been enraged by the death of his brother!
-	Fail: The doll teleports back into your hands. Maybe it shouldn't be used underground...
+	Fail: O boneco volta para suas mãos, talvez ele não deva ser usado no subterrâneo...
 }
 
 AbomsCurse: {
-	DisplayName: Abominationn's Curse
-	Tooltip: Must be used on the surface
+	DisplayName: Maldição do Abominationn
+	Tooltip: Deve ser usado na superfície
 }
 
 ChampionySigil: {
-	DisplayName: Championy Sigil
-	Tooltip: Summons the Champions
+	DisplayName: Símbolo Meio Campeão
+	Tooltip: Invoca os Campeões
 }
 
 DevisCurse: {
-	DisplayName: Deviantt's Curse
+	DisplayName: Maldição da Deviantt
 	Tooltip: ""
 }
 
 MutantsCurse: {
-	DisplayName: Mutant's Curse
+	DisplayName: Maldição do Mutant
 	Tooltip:
 		'''
-		Must be used on the surface
-		'At least this way, you don't need that doll'
+		Deve ser usado na superfície
+		'Pelo menos desta forma, você não precisa daquele boneco'
 		'''
 }
 
 SigilOfChampions: {
-	DisplayName: Sigil of Champions
+	DisplayName: Símbolo dos Campeões
 	Tooltip:
 		'''
-		Summons the Champions
-		Summons vary depending on time and biome
-		Right click to check for possible summons
-		Not consumed on use
+		Invoca os Campeões
+		Qual é invocado depende do bioma e horário 
+		Clique com o Botão direito para testar diferentes invocações
+		Não consumível
 		'''
 
 	Message: {
-		Timber: You are surrounded by the rustling of trees...
-		Terra: The stones tremble around you...
-		Spirit: A strong spirit stirs...
-		Life: A wave of warmth passes over you...
-		Shadow: The darkness of the night feels deeper...
-		Nature: A verdant wind is blowing...
-		Will: Metallic groans echo from the depths...
-		Earth: The core of the planet rumbles...
-		Cosmos: The stars are aligning...
-		Nothing: Nothing seems to answer the call...
+		Timber: Você está rodeado do sussuro das árvores...
+		Terra: As pedras tremem ao seu redor...
+		Spirit: Um espírito forte se agita...
+		Life: Uma onda de calor passa por você...
+		Shadow: A escuridão da luz sente mais profunda...
+		Nature: Um vento verdejante está a soprar...
+		Will: Gemidos metálicos podem ser escutados nas profundezas...
+		Earth: O núcleo do planeta treme...
+		Cosmos: As estrelas estão se alinhando...
+		Nothing: Nada parece responder o chamado...
 	}
 }
 
 SquirrelCoatofArms: {
-	DisplayName: Squirrel Coat of Arms
-	Tooltip: Summons squirrelly wrath
+	DisplayName: Brasão de Armas dos Esquilos
+	Tooltip: Invoca a ira dos Esquilos
 }
 
 BoneZone: {
-	DisplayName: The Bone Zone
+	DisplayName: A Zona do Osso
 	Tooltip:
 		'''
-		Uses bones for ammo
-		33% chance to not consume ammo
-		'The shattered remains of a defeated foe...'
+		Usa ossos como munição
+		33% de chance de não consumir munição
+		'Os restos quebrados de um inimigo derrotado...'
 		'''
 }
 
 BrainStaff: {
-	DisplayName: Mind Break
-	Tooltip: "'An old foe beaten into submission...'"
+	DisplayName: Quebra Cerebral
+	Tooltip: "'Um inimigo antigo espancado até se render...'"
 }
 
 DestroyerGun: {
-	DisplayName: Destroyer Gun
+	DisplayName: Arma do Destruidor
 	Tooltip:
 		'''
-		Becomes longer and faster with up to 3 empty minion slots
-		'An old foe beaten into submission...'
+		Se torna mais longa e rápida com até 3 slots de lacaios vazios
+		'Um inimigo antigo espancado até se render...'
 		'''
 }
 
 Dicer: {
-	DisplayName: The Dicer
-	Tooltip: "'A defeated foe's attack now on a string'"
+	DisplayName: O Cortador
+	Tooltip: "'O ataque de um inimigo antigo agora amarrado por um fio'"
 }
 
 DragonBreath: {
-	DisplayName: Dragon's Breath
+	DisplayName: Bafo do Dragão
 	Tooltip:
 		'''
-		Uses gel for ammo
-		33% chance to not consume ammo
-		'The shrunken body of a defeated foe...'
+		Usa Geleia como munição
+		33% de chance de não consumir munição
+		'O corpo diminuido de um inimigo derrotado...'
 		'''
 }
 
 EaterStaff: {
-	DisplayName: Eater of Worlds Staff
+	DisplayName: Cajado do Devorador de Mundos
 	Tooltip:
 		'''
-		Summons 4 segments for each minion slot
-		'An old foe beaten into submission...'
+		Invoca 4 segmentos para cada slot de lacaios
+		'Um inimigo antigo espancado até se render...'
 		'''
 }
 
 FishStick: {
-	DisplayName: Fish Stick
+	DisplayName: Espeto de Peixe
 	Tooltip:
 		'''
-		Right click to deploy a typhoon
-		The typhoon fires sharks when you attack
-		Sharks ignore 20 enemy defense
-		'The carcass of a defeated foe shoved violently on a stick...'
+		Clique com o botão direito para implantar um Tufão
+		O tufão atira tubarões quando você ataca
+		Tubarões ignoram 20 de defesa
+		'A carcaça de um inimigo derrotada enfiada agressivamente em um pedaço de pau...'
 		'''
 }
 
 FleshHand: {
-	DisplayName: Flesh Hand
-	Tooltip: "'The enslaved minions of a defeated foe...'"
+	DisplayName: Mão de Carne
+	Tooltip: "'Os lacaios escravizados de um inimigo derrotado...'"
 }
 
 LeashOfCthulhu: {
-	DisplayName: Eyeleash
+	DisplayName: Colheira de Olho
 	Tooltip:
 		'''
-		Servants gather around you whilst spun, flying towards your cursor when released
-		'The mutilated carcass of a defeated foe...'
+		Servos se reunem em volta de você enquanto você roda o mangual, voando até o seu cursor quando este é solto
+		'A carcaça multilada de um inimigo derrotado...'
 		'''
 }
 
 RefractorBlaster: {
-	DisplayName: Refractor Blaster
+	DisplayName: Canhão Refrator
 	Tooltip:
 		'''
-		Fires two angled spreads of lasers
-		Lasers deal less damage right after being fired
-		'Modified from the arm of a defeated foe...'
+		Atira duas fortes dispersões de lasers anguladas
+		Lasers causam menos dano logo após serem atirados
+		'Modificado de um dos braços de um inimigo derrotado...'
 		'''
 }
 
 RockSlide: {
-	DisplayName: The Rockslide
-	Tooltip: "'The crumbling remains of a defeated foe...'"
+	DisplayName: Deslizamento de Rochas
+	Tooltip: "'Os restos em ruínas de um inimigo derrotado...'"
 }
 
 SlimeKingsSlasher: {
-	DisplayName: Slime King's Slasher
+	DisplayName: Corte do Rei Geleia
 	Tooltip:
 		'''
-		Deals 20% increased damage to enemies on fire
-		Reduced size benefit from Tungsten Enchantment
-		'Torn from the insides of a defeated foe...'
+		Causa 20% de dano a mais em inimigos pegando fogo
+		Recebe benefícios menores de tamanho do encantamento de Tungstênio
+		'Arrancado das entranhas de um inimigo derrotado...'
 		'''
 }
 
 TheSmallSting: {
-	DisplayName: The Small Sting
+	DisplayName: A Ferroadinha
 	Tooltip:
 		'''
-		Uses darts for ammo
-		50% chance to not consume ammo
-		Stingers will stick to enemies, hitting the same spot again will deal extra damage
-		Scales with your bee damage and knockback increases
-		'Repurposed from the abdomen of a defeated foe...'
+		Usa dardos como munição
+		50% de chance de não consumir munição
+		Ferrões irão grudar nos inimigos, atingir o mesmo lugar de novo causa dano extra
+		O dano e recuo aumentam baseado na força das suas abelhas
+		'Reutilizado do Abdómen de um inimigo derrotado...'
 		'''
 }
 
 TwinRangs: {
-	DisplayName: Twinrangs
+	DisplayName: Gêmeorangue
 	Tooltip:
 		'''
-		Left click to throw a Spazmarang that rapidly tears enemies apart
-		Right click to throw a Retirang that fires lasers towards the nearest enemy
-		Only 3 Retirangs can exist at any given time
-		'The compressed forms of defeated foes...'
+		Botão esquerdo para lançar um spazmarangue que rapidamente eviscera inimigos
+		Botão direito para lançar um Retinerangue que atira lasers no inimigo mais próximo
+		Apenas 3 Retinerangues podem existir de uma vez
+		'As formas compressas de inimigos derrotados...'
 		'''
 }
 
 MoonBow: {
-	DisplayName: Crescent Moon
+	DisplayName: Lua Crescente
 	Tooltip:
 		'''
-		Wooden arrows turn into Luminite bolts
-		Arrows create portals that fire Luminite bolts
-		Hold right click to gather power
-		Release at the right time to temporarily receive a lunar blessing
-		When blessed, drastically increased attack speed and altered arrow gravity
-		66% chance to save ammo
-		'The restrung mouth of a defeated foe...'
+		Flechas de Madeira se transformam em raios de Luminita
+		Flechas criam portais que atiram raios de Luminita
+		Segure o Botão direito para armazenar poder
+		Solte no tempo certo para temporariamente receber a Benção Lunar
+		Quando abençoado, a velocidade de ataque é aumentada drasticamente e a gravidade das flechas é alterada
+		66% de chance de não consumir munição
+		'A boca de um inimigo derrotado...'
 		'''
 }
 
 KamikazeSquirrelStaff: {
-	DisplayName: Kamikaze Squirrel Staff
+	DisplayName: Cajado do Esquilo Kamikaze
 	Tooltip:
 		'''
-		Summons friendly squirrels to cuddle your foes
-		Right click to make them explode
+		Invoca esquilos amigáveis para abraçar seus inimigos
+		Botão direito para explodir eles
 		'''
 }
 
 MountedAcornGun: {
-	DisplayName: Mounted Acorn Gun
+	DisplayName: Arma de Bolota Montada
 	Tooltip:
 		'''
-		Uses acorns as ammo
-		50% chance to not consume ammo
-		Shoots acorns that sprout on enemies
+		Usa bolotas como munição
+		50% de chance de não consumir munição
+		Atira bolotas que brotam nos inimigos
 		'''
 }
 
 SnowballStaff: {
-	DisplayName: The Snowball Effect
+	DisplayName: O Efeito Bola de Neve
 	Tooltip:
 		'''
-		Creates a snowball that grows as you roll it
-		Must use continuously to sustain snowball
-		Right click to recall the snowball to yourself
+		Cria uma bola de neve que creace quando você rola ela
+		Deve usar continuamente para manter a Bola de Neve
+		Botão direito para chamar a bola de neve até você
 		'''
 }
 
 TheLightningRod: {
-	DisplayName: The Pára-raios
+	DisplayName: O Pára-raios
 	Tooltip:
 		'''
-		Charges power as it is spun
-		Damage decreases per hit when thrown
+		Carrega poder enquanto gira
+		Dano diminui por golpe quando lançado
 		'''
 }
 
 TreeSword: {
-	DisplayName: Tree Sword
-	Tooltip: Shoots an acorn
+	DisplayName: Espada da Árvore
+	Tooltip: Atira uma bolota
 }
 
 Penetrator: {
-	DisplayName: The Penetrator
+	DisplayName: O Penetrador
 	Tooltip:
 		'''
-		Has different attacks when using left or right click
-		Has different attacks when used while holding up, down, or both
-		'The reward for embracing eternity...'
+		Tem ataques diferentes quando usando os botões direito ou esquerdo
+		Tem ataques diferentes enquanto você segura cima, baixo, ou os dois
+		'A recompensa por abraçar a Eternidade...'
 		'''
 }
 
