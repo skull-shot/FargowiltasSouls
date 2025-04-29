@@ -1,6 +1,6 @@
 Freeze.DisplayName: Congelamento
 Gold.DisplayName: Virar Ouro
-// SmokeBomb.DisplayName: Throw Smoke Bomb
+SmokeBomb.DisplayName: Lançar Bomba de Fumaça
 SpecialDash.DisplayName: Corrida Especial
 Bomb.DisplayName: Bomba
 EffectToggle.DisplayName: Abrir Habilitador de Efeitos
