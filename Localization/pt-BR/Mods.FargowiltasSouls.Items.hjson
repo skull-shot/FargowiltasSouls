@@ -2841,172 +2841,172 @@ DestroyerGun2: {
 }
 
 DragonBreath2: {
-	DisplayName: Dragon's Demise
+	DisplayName: Extinção do Dragão
 	Tooltip:
 		'''
-		Uses gel for ammo
-		66% chance to not consume ammo
+		Usa geleia como munição
+		66% de chance de não consumir munição
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 EaterLauncher: {
-	DisplayName: Rockeater Launcher
+	DisplayName: Lança-foguedevoradores
 	Tooltip:
 		'''
-		Uses rockets for ammo
-		Fires a spread of rockeaters
-		Increased damage to enemies in the given range
-		Press Right Click to increase this range
-		The range then gradually decreases to normal
-		50% chance to not consume ammo
+		Usa foguetes como munição
+		Atira foguedevoradores
+		Dano aumentado em inimigos dentro do alcance dado
+		Aperte o botão direito para aumentar o alcance
+		Depois disso, o alcance vai diminuindo de volta ao normal
+		50% de chance de não consumir munição
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 FleshCannon: {
-	DisplayName: The Regurgitator
+	DisplayName: O Regurgitador
 	Tooltip:
 		'''
-		Grows a Hungry when firing
-		Hungry deals much more damage when fully charged
-		'The enslaved face of a defeated foe...'
+		Cresce um faminto enquanto atira
+		Famintos causam muito mais dano quando totalmente carregados
+		'O rosto escravizado de um inimigo derrotado...'
 		'''
 }
 
 GeminiGlaives: {
-	DisplayName: Gemini Glaives
+	DisplayName: Gládios Gêmeos
 	Tooltip:
 		'''
-		Left click to throw 3 Spazmaglaives that rapidly tear enemies apart
-		Right click to throw 3 Retiglaives that rapidly fire lasers at the cursor
-		Alternating clicks will enhance attacks
-		'The compressed forms of defeated foes...'
+		Botão esquerdo para lançar 3 Spazmagládios que evisceram inimigos rapidamente
+		Botão direito para lançar 3 Retinagládios que atiram lasers na direção do cursor rapidamente
+		Alternar os botões fortalece os ataques
+		'As formas compressas de inimigos derrotados...'
 		'''
 }
 
 GolemTome2: {
-	DisplayName: The Landslide
+	DisplayName: O Deslizamento de Terras
 	Tooltip:
 		'''
-		Deals more damage when firing many heads at once
-		Automatically fires weak heads when fully charged
+		Causa mais dano quando atirando várias cabeças de uma vez
+		Automaticamente atira cabeças fracas quando totalmente carregado
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 GuardianTome: {
-	DisplayName: The Guardian
-	Tooltip: "'It's their turn to run'"
+	DisplayName: O Guardião
+	Tooltip: "'É a vez deles de correr'"
 }
 
 HellZone: {
-	DisplayName: Hell Zone
+	DisplayName: A Zona Infernal
 	Tooltip:
 		'''
-		Uses bones for ammo
-		80% chance to not consume ammo
-		Left click attack inflicts Hellfire
-		Right click to fire a skull that marks enemies
-		Marked enemies take 5x damage over time from Hellfire
+		Usa ossos como munição
+		80% de chance de não consumir munição
+		Ataques com o botão esquerdo infligem Fogo do Inferno
+		Aperte o botão direito para atirar uma caveira que marca inimigos
+		Inimigos marcados recebem 5x mais danos de Fogo do Inferno
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 MechanicalLeashOfCthulhu: {
-	DisplayName: Leash of Cthulhu
+	DisplayName: Coleira de Cthulhu
 	Tooltip:
 		'''
-		Spawns homing servants whilst spun
-		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
-		Only one eye can be loose at a time
+		Invoca servos teleguiados enquanto girada
+		A cada 3 acertos diretos com a coleira, o Olho se solta e avança em inimigos
+		Apenas um Olho pode se soltar por vez
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 NukeFishron: {
-	DisplayName: Nuke Fishron
+	DisplayName: Nuke Peixe-dragão
 	Tooltip:
 		'''
-		Uses rockets for ammo
-		'The highly weaponized remains of a defeated foe...'
+		Usa foguetes como munição
+		'Os restos altamente armados de um inimigo derrotado...'
 		'''
 }
 
 OpticStaffEX: {
-	DisplayName: Omniscience Staff
+	DisplayName: Cajado da Omnisciência
 	Tooltip:
 		'''
-		Summons the real twins to fight for you
-		Needs 3 minion slots
+		Invoca os verdadeiros gêmeos para lutar por você
+		Precisa de 3 slots de lacaio
 		'A recompensa por uma revanche poderosa...''
 		'''
 }
 
 RefractorBlaster2: {
-	DisplayName: Diffractor Blaster
+	DisplayName: Canhão Difrator
 	Tooltip: "'A recompensa por uma revanche poderosa...'"
 }
 
 SlimeSlingingSlasher: {
-	DisplayName: Slime Slinging Slasher
+	DisplayName: Corte Esmagador de Geleias
 	Tooltip: "'A recompensa por uma revanche poderosa...'"
 }
 
 TheBigSting: {
-	DisplayName: The Big Sting
+	DisplayName: O Ferroadão
 	Tooltip:
 		'''
-		Uses darts for ammo
-		Scales with your bee damage and knockback increases
-		66% chance to not consume ammo
+		Usa dardos como munição
+		Dano e recuo aumentam com a força das suas abelhas
+		66% de chance de não consumir munição
 		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 ForgorGift: {
-	DisplayName: Forgotten Gift
+	DisplayName: Presente Esquecido
 	Tooltip:
 		'''
-		[c/ff0000:Debug item]
-		Resets vanilla and Souls mod invasion/boss flags, INCLUDING hardmode (Wall of Flesh downed flag)
-		Right click allows getting a new gift from Deviantt, resets credit/discount card, resets your emode slot, rabies vaccine, sinew dash, etc.
-		Right click on the item in inventory to reset Mutant phase 1 skip
+		[c/ff0000:Item Debug]
+		Reseta o progresso de chefes do vanilla e souls (incluindo parede de carne)
+		Botão direito reseta upgrades permanentes e o presente da Deviantt
+		Clique com o botão direito no item no inventário para resetar o progresso na luta do Mutant
 		'''
-	Message: Flags reset successfully
+	Message: Progresso resetado com sucesso
 }
 
 Masochist: {
-	DisplayName: Mutant's Gift
+	DisplayName: Presente do Mutant
 	Tooltip:
 		'''
-		[c/00FFFF:Enables Eternity Mode: A new mode above Expert for Terraria veterans. The intended Fargo experience.]
-		World must be in Expert Mode
-		Enables Masochist Mode if world is in Master Mode or above
-		Features include:
+		[c/00FFFF:Habilita o Modo Eternidade: Um novo modo acima do Perito para veteranos de Terraria. A experiência preferida do Fargo's.]
+		Mundo deve estar no modo Perito
+		Habilita o Modo Masoquista se o mundo estiver nas dificuldades Mestre ou acima
+		Características do Modo Eternidade incluem:
 
-		-Reworks bosses and enemies, making them stronger
-		-Enables Master Mode drops
-		-New Eternity-exclusive item drops
-		-Deviantt provides a starter pack and progress-based advice
-		-Improves base stats and caps player DR at 75%
-		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
-		-Changes the functionality and strength of certain items
-		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
+	        -Retrabalha chefes e inimigos, os tornando mais poderosos
+	        -Habilita itens do Modo Mestre
+	        -Novos itens exclusivos ao Modo Eternidade
+	        -Deviantt providencia um kit de iniciante e dicas baseadas em sua progressão
+	        -Melhora as estatistícas básicas e limita a redução de danos do jogador para 75%
+	        -Efeitos negativos acabam mais rapidamente quando você não ataca, efeitos negativos não podem te matar exceto no Modo Masoquista 
+	        -Muda a funcionalidade e a força de certos itens
+                -No Masoquista multiplayer, cada jogador pode reviver apenas uma vez por luta
 
-		Cannot be used while a boss is alive
-		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
-		[c/ff0000:NOT INTENDED FOR USE WITH OTHER CONTENT MODS OR MODDED DIFFICULTIES]
+		Não pode ser usado enquanto um chefe está vivo
+		[i:1612][c/00ff00:Recomendado usar a exibição de efeitos negativos do Fargo's Mutant Mod (nas configurações)]
+		[c/ff0000:NÃO FOI FEITO PARA SER JOGADO COM OUTROS MODS DE CONTEÚDO OU DIFICULDADE MODIFICADAS]
 		'''
-	WrongDifficulty: World must be Expert difficulty or harder!
-	ExtraTooltip: "[i:FargowiltasSouls/MutantsPact] Enables Masochist Mode when used in Master Mode"
+	WrongDifficulty: Mundo deve estar na dificuldade Perito ou acima!
+	ExtraTooltip: "[i:FargowiltasSouls/MutantsPact] Habilita o Modo Masoquista quando utilizado em um mundo no Modo Mestre"
 }
 
 MasochistReal: {
-	DisplayName: Forgotten Gift
+	DisplayName: Presente Esquecido
 	Tooltip:
 		'''
-		[c/ff0000:Debug item]
+		[c/ff0000:Item Debuf]
 		Left click: Toggles session ability to play Maso
 		Right click: Toggles world ability to play Maso
 		'''
@@ -3016,388 +3016,388 @@ MasochistReal: {
 }
 
 MedallionoftheFallenKing: {
-	DisplayName: Medallion of the Fallen King
-	Tooltip: Spawns a King Slime Minion that scales with summon damage
+	DisplayName: Medalhão do Rei Caído
+	Tooltip: Invoca um lacaio de Rei Geleia que escala com os slots de lacaio vazios
 }
 
 ComputationOrb: {
-	DisplayName: Computation Orb
+	DisplayName: Orbe de Computação
 	Tooltip:
 		'''
-		Non-magic/summon attacks deal 1.2x damage but are affected by Mana Sickness
-		Non-magic/summon weapons require mana to use
-		'Within the core, a spark of hope remains.'
+		Ataques não mágicos/invocação causam 1.2x mais dano mas são afetados por Enjoo de Mana
+		Armas não mágicas/invocação precisam de mana para serem usadas
+		'Dentro do núcleo, uma faísca de esperança é mantida.'
 		'''
 }
 
 StaffOfUnleashedOcean: {
-	DisplayName: Staff of Unleashed Ocean
+	DisplayName: Cajado do Oceano Desencadeado
 	Tooltip:
 		'''
-		Summons Duke Fishron to fight for you
-		Duke Fishron ignores up to 400 enemy defense
-		'Now channel your rage against them!'
+		Invoca o Duque Peixe-dragão para lutar por você
+		O Duque Peixe-dragão ignora até 400 de defesa 
+		'Agora use sua Ira contra eles!'
 		'''
 }
 
 DeviousAestheticus: {
-	DisplayName: Devious Aestheticus
+	DisplayName: Estéticos Desonesto
 	Tooltip:
 		'''
-		Shot spread scales with up to 7 empty minion slots
-		'If you're seeing this, You've been in a coma for 20 years, I don't know where this message will be, but please wake up'
+		Número de projéteis escala com os seus slots de lacaio vazios, até 7
+		'Se você está vendo isso, você está em um coma há 20 anos, por favor acorde.'
 		'''
 }
 
 ScientificRailgun: {
-	DisplayName: Scientific Railgun
+	DisplayName: Canhão Científico de Energia
 	Tooltip:
 		'''
-		Uses coins for ammo
-		Higher valued coins do more damage
-		'Particular and specific'
+		Usa moedas como munição
+		Moedas mais valiosas causam mais dano
+		'Particular e Específico'
 		'''
 }
 
 RoombaPet: {
 	DisplayName: Roomba
-	Tooltip: Summons a Roomba to follow you around in hopes of cleaning the whole world
+	Tooltip: Invoca um Roomba pra te seguir, com a esperança de limpar todo o mundo
 }
 
 VortexMagnetRitual: {
-	DisplayName: Vortex Ritual
-	Tooltip: "'Power surges in your hand'"
+	DisplayName: Ritual de Vortex
+	Tooltip: "'Todo o Poder nas suas mãos'"
 }
 
 PiranhaPlantVoodooDoll: {
-	DisplayName: Piranha Plant Voodoo Doll
+	DisplayName: Boneco de Vodu da Planta Carnívora
 	Tooltip:
 		'''
-		Toggle that will grant all enemies the ability to...
-		'In loving memory of Masochist mode EX. I always hated you.'
+		Ativar deixa todos os inimigos...
+		'Em memória do Modo Masoquista EX. Eu sempre te odiei.'
 		'''
-	On: The suffering continues...
-	Off: The suffering wanes...
+	On: O sofrimento continua...
+	Off: O sofrimento diminui...
 }
 
 FigBranch: {
-	DisplayName: Fig Branch
-	Tooltip: Summons a Dove companion
+	DisplayName: Galho de Figueira
+	Tooltip: Invoca uma Pomba companheira
 }
 
 ParadoxWolfSoul: {
-	DisplayName: Paradox Wolf Soul
+	DisplayName: Alma do Lobo do Paradoxo
 	Tooltip:
 		'''
-		Double tap to dash through and damage enemies
-		There is a cooldown of 3 seconds between uses
+		Botão direito para correr por inimigos e causar dano
+		Tem um tempo de recarga de 3 segundos
 		'''
 }
 
 VermillionTopHat: {
-	DisplayName: Vermillion Top Hat
+	DisplayName: Cartola Vermelha
 	Tooltip:
 		'''
-		Summons a dead princess
-		'Duck, Duck, Bat'
+		Invoca uma princesa morta
+		'Jogo do morceguinho.'
 		'''
 }
 
 PrimeStaff: {
-	DisplayName: Prime Staff
+	DisplayName: Cajado Alfa
 	Tooltip:
 		'''
-		Summons Skeletron Prime to fight for you
-		'Using expert hacking skills (turning it off and on again), you've reprogrammed a terror of the night!'
+		Invoca o Skeletron Alfa para lutar por você
+		'Usando habilidades de hacker (desligar e ligar de novo), você reprogramou o terror da noite!'
 		'''
 }
 
 SquidwardDoor: {
-	DisplayName: Squidward Door
-	Tooltip: "'After you Mr. Squidward'"
+	DisplayName: Porta dop Lula Molusco
+	Tooltip: "'Depois de você Lula Molusco'"
 }
 
 MissDrakovisFishingPole: {
-	DisplayName: Miss Drakovi's Fishing Pole
+	DisplayName: Vara de Pesca da Senhorita Drakovi
 	Tooltip:
 		'''
-		Right click to cycle through options of attack
-		Every damage type has one
+		Botão direito para ciclar por opções de ataque
+		Todas as classes de armas tem um
 		'''
 }
 
 CrimetroidEgg: {
-	DisplayName: Crimetroid Egg
+	DisplayName: Ovo Crimetroid
 	Tooltip:
 		'''
-		Summons the Baby
-		Not to be confused with criminal androids
+		Invoca o Bebê
+		Não confunda com androides assassinos
 		'''
 }
 
 NanoCore: {
-	DisplayName: Nano Core
+	DisplayName: Nano Núcleo
 	Tooltip:
 		'''
-		When holding this, 7 nano units will appear and construct weapons.
-		Left click to attack and right click to switch weapons.
-		'The science sits in our side.'
+		Enquanto o segura, 7 nano unidades aparecerão e construirão armas.
+		Botão esquerdo para atacar e botão direito para trocar o tipo de arma.
+		'A Ciência está do nosso lado.'
 		'''
 }
 
 NekomiLeggings: {
-	DisplayName: Nekomi Leggings
+	DisplayName: Calças Nekomi
 	Tooltip:
 		'''
-		7% increased critical strike chance
-		10% increased movement speed
+		7% de aumento na chance de acerto crítico
+		10% de aumento na velocidade dos movimentos
 		'''
 }
 
 AnglerEnchant: {
-	DisplayName: Angler Enchantment
+	DisplayName: Encantamento do Pescador
 	Tooltip:
 		'''
-		Increases fishing power
-		You catch fish almost instantly
-		[i:LavaproofTackleBag] Effects of Lavaproof Tackle Bag
-		'As long as they aren't all shoes, you can go home happily'
+		Aumenta o poder de pesca
+		Você captura peixes quase instantaneamente
+		[i:LavaproofTackleBag] Efeitos da Bolsa do Pescador à Prova de Lava
+		'Se eles não forem todos sapatos, dá pra ir pra casa feliz'
 		'''
 }
 
 LifelightBag: {
-	DisplayName: Treasure Bag (Lifelight)
-	Tooltip: Right Click to open
+	DisplayName: Bolsa do Tesouro (Lifelight)
+	Tooltip: Clique com o botão direito para abrir
 }
 
 LifelightMasterPet: {
-	DisplayName: Gold-Tinged Feather
-	Tooltip: Summons a lesser angel that provides light
+	DisplayName: Pena Dourada
+	Tooltip: Invoca um anjo menor que cria luz
 }
 
 LifeRevitalizer: {
 	DisplayName: Revigorador da Vida
 	Tooltip:
 		'''
-		Right click tile to set your spawn point
-		No housing required
+		Clique em cima com o botão direito quando posicionado para salvar o local como seu ponto de renascimento
+		Não requer casas
 		'''
 }
 
 ChampionMusicBox: {
-	DisplayName: Music Box (Champions)
+	DisplayName: Caixa de música (Campeões)
 	Tooltip: Sakuzyo 'Ordeal'
 }
 
 DeviMusicBox: {
-	DisplayName: Music Box (Deviantt)
+	DisplayName: Caixa de música (Deviantt)
 	Tooltip: Yuri O 'Sparkly Strawberry Sunrise'
 }
 
 MutantMusicBox: {
-	DisplayName: Music Box (Mutant)
+	DisplayName: Caixa de música (Mutant)
 	Tooltip: Sakuzyo 'Steel Red'
 }
 
 RePrologueMusicBox: {
-	DisplayName: Music Box (???)
+	DisplayName: Caixa de música (???)
 	Tooltip: Sakuzyo 'rePrologue'
 }
 
 StoriaMusicBox: {
-	DisplayName: Music Box (???)
+	DisplayName: Caixa de música (???)
 	Tooltip: Xi vs Sakuzyo 'Storia'
 }
 
 LifelightRelic: {
-	DisplayName: Lifelight Relic
+	DisplayName: Relíquia da Lifelight
 	Tooltip: ""
 }
 
 LifelightTrophy: {
-	DisplayName: Lifelight Trophy
+	DisplayName: Troféu da Lifelight
 	Tooltip: ""
 }
 
 FragilePixieLamp: {
-	DisplayName: Crystalline Effigy
-	Tooltip: While in the Hallow during day, hold out to break, angering the pixies' master
+	DisplayName: Efígie Cristalina
+	Tooltip: Enquanto no Consagrado durante o dia, segure para quebrar, enfurecendo a mestre das fadas
 }
 
 CrystallineCongregation: {
-	DisplayName: Crystalline Congregation
+	DisplayName: Congregação Cristalina
 	Tooltip:
 		'''
-		Summon up to 30 crystal balls near your mouse cursor that home towards you 
-		 Release the button to send them towards your cursor
+		Invoque até 30 bolas de cristal perto do seu cursor que te seguem
+		Solte o botão para lançá-las na direção do seu cursor 
 		'''
 }
 
 EnchantedLifeblade: {
-	DisplayName: Enchanted Lifeblade
-	Tooltip: A living blade that will attack your mouse position
+	DisplayName: Lâmina da Vida Encantada
+	Tooltip: Uma lâmina viva que ataca a posição do seu cursor
 }
 
 KamikazePixieStaff: {
-	DisplayName: Expixive Staff
-	Tooltip: Summons friendly pixies that fire shots for a while, then charge into enemies and explode
+	DisplayName: Cajado da Fada Explosiva
+	Tooltip: Invoca fadas amigáveis que atiram alguns tiros, depois fazem uma investida até os inimigos e explodem
 }
 
 Lightslinger: {
-	DisplayName: Lightslinger
+	DisplayName: Atirador de Luz
 	Tooltip:
 		'''
-		Converts bullets to hallowed shots of light
-		After 40 shots, press Right Click to fire a lightbomb
-		25% chance to not consume ammo
+		Converte balas em tiros consagrados de luz
+		Depois de 40 tiros, aperte o botão direito para atirar uma bomba
+		25% de chance de não consumir munição
 		'''
 }
 
 MostlyOrdinaryrock.Tooltip: Mods.FargowiltasSouls.ItemTooltip.MostlyOrdinaryrock
 
 WiresPainting: {
-	DisplayName: Wires Painting
-	Tooltip: Look inside
+	DisplayName: Pintura Wires
+	Tooltip: Olhe dentro
 }
 
 PrismaRegalia: {
-	DisplayName: Prisma Regalia
+	DisplayName: Regalia Prismática
 	Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
-		'The radiant power of a foe's pure essence...'
+		Atingir com a ponta da lança solta estrelas teleguiadas
+		Segure para carregar para causar mais dano
+		Enquanto totalmente carregada, todos os golpes soltam estrelas adicionais
+		'O poder radiante da essência pura de um inimigo...'
 		'''
 }
 
 MechLure: {
-	DisplayName: Mechanical Lure
-	Tooltip: Throw while underwater at the Ocean to lure out a shrouded creature
-	TooltipTravelingMerchant: Can be sold by the Travelling Merchant
+	DisplayName: Isca Mecânica
+	Tooltip: Solte enquanto dentro d'água no oceano para atrair uma criatura misteriosa
+	TooltipTravelingMerchant: Pode ser vendida pelo Caixeiro Viajante
 }
 
 TheBaronsTusk: {
-	DisplayName: The Baron's Tusk
+	DisplayName: A Presa do Barão
 	Tooltip:
 		'''
-		Swings emit flying shrapnel that can embed in enemies
-		Hitting enemies that have more than 15 embedded shrapnel with the tusk rips it out
-		The rip deals a large chunk of damage and is guaranteed to critically strike
-		Shrapnel is also ripped out when the enemy dies
+		Ataques lançam lâminas que se prendem a inimigos
+		Atingir inimigos que tem mais de 15 lâminas com a Presa arranca elas
+		A arrancada causa uma quantidade grande de dano e sempre acerta criticamente
+		As lâminas também são retiradas quando um inimigo morre
 		'''
 }
 
 NavalRustrifle: {
-	DisplayName: Naval Rustrifle
+	DisplayName: Rifle Naval Enferrujado
 	Tooltip:
 		'''
-		Manually reload after each shot
-		Time the reload correctly to empower your next shot
-		Empowered shots deal double damage and are guaranteed to critically strike
+		Recarregue manualmente após cada tiro
+		Recarregue na hora certa para empoderar seu próximo tiro
+		Tiros empoderados causam o dobro de dano e sempre acertam criticamente
 		'''
 }
 
 DecrepitAirstrikeRemote: {
-	DisplayName: Decrepit Airstrike Remote
+	DisplayName: Controle Remoto de Ataque aéreo Decrépito
 	Tooltip:
 		'''
-		Marks a location with a reticle, consuming all your sentries
-		In a few seconds, a massive airstrike explosion will hit it, dealing damage depending on your sentry slots
-		All your minions hit by the explosion are blown up into homing splinters
+		Marca uma localização com uma retícula, consumindo todas as suas sentinelas
+		Em poucos segundos, uma explosão de ataque aéreo gigante vai acertar o local, causando dano que escala com sua quantidade de sentinelas máxima
+		Todos os seus lacaios atingidos pela explosão são explodidos em lascas teleguiadas
 		'''
 }
 
 BanishedBaronBag: {
-	DisplayName: Treasure Bag (Banished Baron)
-	Tooltip: Right Click to open
+	DisplayName: Bolsa do Tesouro (Banished Baron)
+	Tooltip: Aperte o botão direito para abrir
 }
 
 RustedOxygenTank: {
-	DisplayName: Rusted Oxygen Tank
+	DisplayName: Tanque de Oxigênio Enferrujado
 	Tooltip:
 		'''
-		Works while in the inventory
-		Right click to disable
-		You count as wet outside water
-		Grants floaty water movement outside of liquid
-		Increased movement speed while in any liquid
-		'Nobody knows how it works'
+		Funciona no inventário
+		Botão direito para desativar
+		Você conta como molhado fora d'água
+		Oferece movimento leve fora de líquidos
+		Velocidade dos movimentos aumentada dentro de líquidos
+		'Ninguém sabe como funciona'
 		'''
 }
 
 RoseTintedVisor: {
-	DisplayName: Rose Tinted Visor
+	DisplayName: Visor Pintado de Rosa
 	Tooltip:
 		'''
-		Fires up to 6 lasers on release, depending on charge time
-		Has extra critical strike chance depending on lasers charged, up to 100%
+		Atira até 6 lasers, dependendo do quanto você carregar
+		Tem chance de acerto crítico extra dependendo da quantidade de lasers carregada, até 100%
 		'''
 }
 
 BaronTrophy: {
-	DisplayName: Banished Baron Trophy
+	DisplayName: Troféu do Banished Baron
 	Tooltip: ""
 }
 
 BaronRelic: {
 	Tooltip: ""
-	DisplayName: Banished Baron Relic
+	DisplayName: Relíquia do Banished Baron
 }
 
 HiveStaff: {
-	DisplayName: Hive Staff
-	Tooltip: "'The enslaved minions of a defeated foe...'"
+	DisplayName: Cajado da Colmeia
+	Tooltip: "'Os lacaios escravizados de um inimigo derrotado...'"
 }
 
 ROBGyro: {
-	DisplayName: Sentient Gyro
+	DisplayName: Giroscópio Sentiente
 	Tooltip:
 		'''
-		'Has a mind of its own'
-		Summons a powerful robot that doesn't fight
+		'Tem mente própria'
+		Invoca um robô poderoso que não luta
 		'''
 }
 
 EulogistsDoomsdayScenario: {
-	DisplayName: Eulogist's Doomsday Scenario
-	Tooltip: Blow up a small area around you, killing all town npcs and yourself
+	DisplayName: Cenário de Fim do Mundo do Eulogist
+	Tooltip: Explode uma pequena área em volta de você, matando todos os NPCs e você mesmo
 }
 
 RustedOxygenTankInactive: {
-	DisplayName: Rusted Oxygen Tank (Inactive)
+	DisplayName: Tanque de Oxigênio Enferrujado (Inativo)
 	Tooltip:
 		'''
-		Works while in the inventory
-		Effects are currently inactive, Right click to reactivate
-		You count as wet outside water
-		Grants floaty water movement outside of liquid
-		Increased movement speed while in any liquid
-		'Nobody knows how it works'
+		Funciona no inventário
+		Desativado, botão direito para reativar
+		Você conta como molhado fora d'água
+		Oferece movimento leve fora de líquidos
+		Velocidade dos movimentos aumentada dentro de líquidos
+		'Ninguém sabe como funciona'
 		'''
 }
 
 EaterLauncherJr: {
-	DisplayName: The Blastbiter
+	DisplayName: O Mordexplosões
 	Tooltip:
 		'''
-		Right Click in inventory to load a Rotten Chunk for ammunition
-		Attempting to fire also loads a Rotten Chunk if necessary
-		Each Rotten Chunk provides 100 rounds, up to 1000
-		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
-		'The rotting remains of a defeated foe...'
+		Aperte com o botão direito no inventário para carregar um pedaço podre como munição
+		Tentar atirar também carrega um pedaço podre
+		Cada pedaço podre serve como 100 tiros, até 1000
+		Atira um pedaço de carne podre
+		Dano maior aos inimigos dentro da área dada
+		'Os restos apodrecidos de um inimigo derrotado...'
 		'''
 }
 
 TheBiggestSting: {
-	DisplayName: The Biggest Sting
+	DisplayName: A Maior Ferroada
 	Tooltip:
 		'''
-		Uses darts for ammo
-		Scales with your bee damage and knockback increases
-		66% chance to not consume ammo
-		'The Queen's unwavering swarm...'
+		Usa dardos como munição
+		Dano e recuo ficam mais fortes de acordo com a força das suas abelhas
+		66% de chance de não consumir munição
+		'O Enxame Incessante da Rainha...'
 		'''
 }
 
@@ -3418,13 +3418,13 @@ OncomingMutantItem: {
 }
 
 Extra: {
-	StarlightTungsten: 0.75x damage when used with Tungsten Enchantment
-	DefensePrefixMaxLife: +{0} max life
-	ViolentPrefix: +{0}% attack speed
-	EternityItem: Eternity
-	DisabledEffects: Has effects disabled by the Effect Toggles menu
-	PatreonItem: >> Patreon Item <<
-	CactusImmunity: Oferece imunidade a cactus damage in Eternity Mode
+	StarlightTungsten: 0.75x de dano quando usado com o encantamento de tungstênio
+	DefensePrefixMaxLife: +{0} vida máx
+	ViolentPrefix: +{0}% velocidade de ataque
+	EternityItem: Eternidade
+	DisabledEffects: Tem efeitos desligados pelo Habilitador de Efeitos
+	PatreonItem: >> Item do Patreon <<
+	CactusImmunity: Oferece imunidade a dano por cacto no Modo Eternidade
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 }
@@ -3435,8 +3435,8 @@ GravityTestItem: {
 }
 
 CoffinSummon: {
-	DisplayName: Urn of Souls
-	Tooltip: Open in the deep pyramid chamber to awaken the ancient coffin
+	DisplayName: Urna das Almas
+	Tooltip: Abra na câmara especial do egito para acordar o caixão antigo...
 }
 
 // Dummy Item
@@ -3446,139 +3446,139 @@ TogglerIconItem: {
 }
 
 RazorContainer: {
-	DisplayName: Razor Container
+	DisplayName: Recipiente de Serra
 	Tooltip:
 		'''
-		Spawns a razor blade that hovers around your cursor
-		Hit it with a standard broadsword to send it flying
-		While flying it always critically strikes and has increased armor penetration
-		'Some yellow fur is still stuck at the bottom' 
+		Invoca uma serra que flutua próxima ao seu cursor
+		Bata nela com uma espada para lançá-la
+		Enquanto lançada ela sempre acerta criticamente e tem perfuração aumentada
+		'Pelo amarelo ainda está preso embaixo' 
 		'''
 }
 
 NebulaBooster: {
-	DisplayName: Nebula Booster
+	DisplayName: Impulsionador Nebuloso
 	Tooltip: ""
-	Activate: +{0} life regen
-	Deactivate: -{0} life regen
+	Activate: +{0} Regen vida
+	Deactivate: -{0} Regen vida
 }
 
 SolarBooster: {
-	DisplayName: Solar Booster
+	DisplayName: Impulsionador Solar
 	Tooltip: ""
-	Activate: +{0}% DR
-	Deactivate: -{0}% DR
+	Activate: +{0}% redução Dano
+	Deactivate: -{0}% redução Dano
 }
 
 StardustBooster: {
-	DisplayName: Stardust Booster
+	DisplayName: Impulsionador de Pó das Estrelas
 	Tooltip: ""
-	Activate: +{0}% damage
-	Deactivate: -{0}% damage
+	Activate: +{0}% dano
+	Deactivate: -{0}% dano
 }
 
 VortexBooster: {
-	DisplayName: Vortex Booster
+	DisplayName: Impulsionador do Vórtice
 	Tooltip: ""
-	Activate: +{0}% crit chance
-	Deactivate: -{0}% crit chance
+	Activate: +{0}% chance crít
+	Deactivate: -{0}% chance crít
 }
 
 CosmosBooster: {
-	DisplayName: Cosmos Booster
+	DisplayName: Impulsionador Cosmos
 	Tooltip: ""
-	Activate: +{0}% crit damage
-	Deactivate: -{0}% crit damage
+	Activate: +{0}% dano crít
+	Deactivate: -{0}% dano crít
 }
 
 DeathBooster: {
-	DisplayName: Death Booster
+	DisplayName: Impulsionador da Morte
 	Tooltip: ""
-	Activate: +{0} armor pen
-	Deactivate: -{0} armor pen
+	Activate: +{0} perf armadura
+	Deactivate: -{0} perf armadura
 }
 
 EarthBooster: {
-	DisplayName: Earth Booster
+	DisplayName: Impulsionador da Terra
 	Tooltip: ""
-	Activate: +{0}% DR
-	Deactivate: -{0}% DR
+	Activate: +{0}% redução Dano
+	Deactivate: -{0}% redução Dano
 }
 
 LifeBooster: {
-	DisplayName: Life Booster
+	DisplayName: Impulsionador da Vida
 	Tooltip: ""
-	Activate: +{0} life regen
-	Deactivate: -{0} life regen
+	Activate: +{0} regen vida
+	Deactivate: -{0} regen vida
 }
 
 NatureBooster: {
-	DisplayName: Nature Booster
+	DisplayName: Impulsionador da Natureza
 	Tooltip: ""
-	Activate: +{0} defense
-	Deactivate: -{0} defense
+	Activate: +{0} defesa
+	Deactivate: -{0} defesa
 }
 
 SpiritBooster: {
-	DisplayName: Spirit Booster
+	DisplayName: Impulsionador do Espírito
 	Tooltip: ""
-	Activate: +{0} mana regen
-	Deactivate: -{0} mana regen
+	Activate: +{0} regen mana
+	Deactivate: -{0} regen mana
 }
 
 TerraBooster: {
-	DisplayName: Terra Booster
+	DisplayName: Impulsionador do Solo
 	Tooltip: ""
-	Activate: +{0}% crit chance
-	Deactivate: -{0}% crit chance
+	Activate: +{0}% chance crít
+	Deactivate: -{0}% chance crít
 }
 
 TimberBooster: {
-	DisplayName: Timber Booster
+	DisplayName: Impulsionador da Madeira
 	Tooltip: ""
-	Activate: +{0}% damage
-	Deactivate: -{0}% damage
+	Activate: +{0}% dano
+	Deactivate: -{0}% dano
 }
 
 WillBooster: {
-	DisplayName: Will Booster
+	DisplayName: Impulsionador da Vontade
 	Tooltip: ""
-	Activate: +{0} flat damage
-	Deactivate: -{0} flat damage
+	Activate: +{0} dano plano
+	Deactivate: -{0} dano plano
 }
 
 CoffinRoominator: {
-	DisplayName: Coffin Roominator
+	DisplayName: Criador de Câmara
 	Tooltip:
 		'''
-		Spawns a Cursed Coffin room on your cursor
-		Overrides existing Cursed Coffin rooms
+		Cria uma câmara do Cursed Coffin no seu cursor
+		Toma prioridade sobre salas do Cursed Coffin existentes
 		'''
 }
 
 GildedSceptre: {
-	DisplayName: Gilded Sceptre
+	DisplayName: Cetro Dourada
 	Tooltip:
 		'''
-		Draw a circle to activate projectiles
-		Activated projectiles chase after the nearest enemy
-		Activated projectiles deal more damage based on circle accuracy
+		Desenhe um círculo para ativar projéteis
+		Projéteis seguem o inimigo mais próximo
+		Projéteis causam mais dano quanto melhor for o círculo
 		'''
 }
 
 AccursedAnkh: {
-	DisplayName: Accursed Ankh
-	Tooltip: While held out, increases life regeneration and debuff depletion, but decreases defense by 10
+	DisplayName: Ankh Amaldiçoada
+	Tooltip: Enquanto usada, aumenta a regeneração de vida e faz efeitos negativos passarem mais rapidamente, mas reduz a defesa em 10
 }
 
 SisypheanFist: {
-	DisplayName: Sisyphean Gauntlet
+	DisplayName: Punhos de Sísifo
 	Tooltip:
 		'''
-		While grounded, grab a huge boulder from the earth
-		Release the button to hurl it towards your cursor
-		Boulder damage scales with its speed
-		Pierces enemies with low health
+		Enquanto no chão, pegue uma grande rocha do solo
+		Solte o botão para lançá-la em direção ao cursor
+		Dano da rocha escala com sua velocidade
+		Perfura inimigos com pouca vida
 		'''
 }
 
@@ -3586,193 +3586,193 @@ EgyptianFlail: {
 	DisplayName: Nekhakha
 	Tooltip:
 		'''
-		Your summons will focus struck enemies
-		Occasionally causes shadowflame explosions
+		As invocações atacaram o inimigo que você atingir
+		Ocasionalmente causa explosões de Chama das Sombras
 		'''
 }
 
 SpiritLongbow: {
-	DisplayName: Spirit Longbow
+	DisplayName: Arco Longo do Espírito
 	Tooltip:
 		'''
-		Converts arrows to Spirit Arrows that release spirit flames behind them
-		Hold button to charge shots for more damage and higher speed
-		Pierces enemies with low health
+		Converte flechas em flechas espirituais que soltar chamas 
+		Segure o botão para carregar ataques para mais dano e velocidade mais alta
+		Perfura inimigos com pouca vida
 		'''
 }
 
 CursedCoffinBag: {
-	DisplayName: Treasure Bag (Cursed Coffin)
-	Tooltip: Right Click to open
+	DisplayName: Bolsa do Tesouro (Cursed Coffin)
+	Tooltip: Aperte o botão direito para abrir
 }
 
 CursedCoffinRelic: {
-	DisplayName: Cursed Coffin Relic
+	DisplayName: Relíquia do Cursed Coffin 
 	Tooltip: ""
 }
 
 CursedCoffinTrophy: {
-	DisplayName: Cursed Coffin Trophy
+	DisplayName: Troféu do Cursed Coffin 
 	Tooltip: ""
 }
 
 UmbraRegalia: {
-	DisplayName: Umbra Regalia
+	DisplayName: Regalia Sombria
 	Tooltip:
 		'''
-		Left Click to rapidly stab with the spear
-		Hold Right Click to charge a spear toss
-		Becomes stronger when fully charged
-		Can continue to gain damage for a while after full charge
-		'The reward for a mighty rematch...'
+		Botão esquerdo para rapidamente atacar com a lança
+		Segure o botão direito para carregar e lançar
+		Se torna mais forte quando totalmente carregada
+		Pode continuar ganhando dano por um tempo após terminar de carregar
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 CoffinPainting: {
-	DisplayName: Coffin Painting
+	DisplayName: Pintura do Caixão
 	Tooltip: ""
 }
 
 ElectricWhip: {
-	DisplayName: Voltaic Chain
+	DisplayName: Corrente Voltaíca
 	Tooltip:
 		'''
-		Whip enemies to fire chain lightning from nearby minions, up to 4 times per swing
-		'The lifeblood of a defeated foe...'
+		Chicoteie inimigos para atirar relâmpagos em cadeira de lacaios próximos, até 4 vezes por ataque
+		'O sangue vital de um inimigo derrotado...'
 		'''
 }
 
 TheDestroyer: {
-	DisplayName: The Destroyer
+	DisplayName: O Destruidor
 	Tooltip:
 		'''
-		Whip your minions to fire a laser at a nearby enemy, up to 6 times per swing
-		Every 20th swing, the destroyer breaks loose and tracks your mouse for 5 seconds
-		'The reward for a mighty rematch...'
+		Chicoteie seus lacaios para que eles atirem um laser em um inimigo próximo, até 6 vezes por ataque
+		A cada vigésimo ataque, o Destruidor se solta e segue seu cursor por 5 segundos
+		'A recompensa por uma revanche poderosa...'
 		'''
 }
 
 FallenStarDayItem: {
-	DisplayName: Fallen Star
+	DisplayName: Estrela caída
 	Tooltip: ""
 }
 
 DarkTome: {
-	DisplayName: Dark Tome
+	DisplayName: Tomo Sombrio
 	Tooltip:
 		'''
-		Hold button to summon up to 3 spectral books that chase your cursor
-		Releasing button causes the books to release a volley of pages
-		'The arcane grimoire of a defeated foe...'
+		Segure para invocar até 3 livros espectrais que seguem seu cursor
+		Soltar o botão faz com que os livros liberem um voleio de páginas
+		'O livro sagrado de um inimigo derrotado...'
 		'''
 }
 
 TouhouStaff: {
-	DisplayName: Children of Nature's Eulogy
-	Tooltip: Summons up to five yokais and fairies to fight for you
+	DisplayName: Crianças do Louvor da Natureza
+	Tooltip: Invoca até 5 yokais e fadas para lutar por você
 }
 
 BaronP1MusicBox: {
-	DisplayName: Music Box (Banished Baron - Phase 1)
+	DisplayName: Caixa de música (Banished Baron - Fase 1)
 	Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 BaronP2MusicBox: {
-	DisplayName: Music Box (Banished Baron - Phase 2)
+	DisplayName: Caixa de música (Banished Baron - Fase 2)
 	Tooltip: zentaque & Azathoth 'Will of the Waves'
 }
 
 TrojanMusicBox: {
-	DisplayName: Music Box (Trojan Squirrel)
+	DisplayName: Caixa de música (Trojan Squirrel)
 	Tooltip: ProduceVGM 'Nuts And Bolts'
 }
 
 AbominationnP1MusicBox: {
-	DisplayName: Music Box (Abominationn - Phase 1)
+	DisplayName: Caixa de música (Abominationn - Fase 1)
 	Tooltip: Yuri O 'Laevateinn'
 }
 
 AbominationnP2MusicBox: {
-	DisplayName: Music Box (Abominationn - Phase 2)
+	DisplayName: Caixa de música (Abominationn - Fase 2)
 	Tooltip: Yuri O 'Laevateinn'
 }
 
 CoffinMusicBox: {
-	DisplayName: Music Box (Cursed Coffin)
+	DisplayName: Caixa de música (Cursed Coffin)
 	Tooltip: zentaque & Azathoth 'Shifting Sands'
 }
 
 EridanusMusicBox: {
-	DisplayName: Music Box (Eridanus)
+	DisplayName: Caixa de música (Eridanus)
 	Tooltip: Yuri O 'Platinum Star'
 }
 
 LifelightMusicBox: {
-	DisplayName: Music Box (Lifelight)
+	DisplayName: Caixa de música (Lifelight)
 	Tooltip: ProduceVGM 'Illustrious Illuminescence'
 }
 
 MainMenuMusicBox: {
-	DisplayName: Music Box (Main Menu)
+	DisplayName: Caixa de música (Menu Principal)
 	Tooltip: Sakuzyo 'Nein'
 }
 
 BaronMask: {
-	DisplayName: Banished Baron Mask
+	DisplayName: Máscara do Banished Baron 
 	Tooltip: ""
 }
 
 CoffinMask: {
-	DisplayName: Cursed Coffin Mask
+	DisplayName: Máscara do Cursed Coffin 
 	Tooltip: ""
 }
 
 DeathMask: {
-	DisplayName: Death Champion Mask
+	DisplayName: Máscara do Campeão da Morte
 	Tooltip: ""
 }
 
 EarthMask: {
-	DisplayName: Earth Champion Mask
+	DisplayName: Máscara do Campeão da Terra 
 	Tooltip: ""
 }
 
 LifelightMask: {
-	DisplayName: Lifelight Mask
+	DisplayName: Máscara da Lifelight 
 	Tooltip: ""
 }
 
 LifeMask: {
-	DisplayName: Life Champion Mask
+	DisplayName: Máscara do Campeão da Vida
 	Tooltip: ""
 }
 
 NatureMask: {
-	DisplayName: Nature Champion Mask
+	DisplayName: Máscara do Campeão da Natureza
 	Tooltip: ""
 }
 
 SpiritMask: {
-	DisplayName: Spirit Champion Mask
+	DisplayName: Máscara do Campeão do Espírito
 	Tooltip: ""
 }
 
 TerraMask: {
-	DisplayName: Terra Champion Mask
+	DisplayName: Máscara do Campeão do Solo 
 	Tooltip: ""
 }
 
 TimberMask: {
-	DisplayName: Timber Champion Mask
+	DisplayName: Máscara do Campeão da Madeira
 	Tooltip: ""
 }
 
 TrojanMask: {
-	DisplayName: Trojan Squirrel Mask
+	DisplayName: Máscara do Esquilo de Tróia
 	Tooltip: ""
 }
 
 WillMask: {
-	DisplayName: Will Champion Mask
+	DisplayName: Máscara do Campeão da Vontade
 	Tooltip: ""
 }
