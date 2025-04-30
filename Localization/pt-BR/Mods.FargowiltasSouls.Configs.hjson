@@ -1,79 +1,79 @@
 ClientConfig: {
-	// DisplayName: Configuração do Cliente
+	 DisplayName: Configuração do Cliente
 
 	Headers: {
-		// Maso: Modo Eternidade
-		// Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Itens do Patreon]"
+		 Maso: Modo Eternidade
+		 Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Itens do Patreon]"
 	}
 
 	HideTogglerWhenInventoryIsClosed: {
-		// Label: Mostra o Habilitador de efeitos apenas quando o invetário está aberto
-		// Tooltip: Caso ligado, o Habilitador de efeitos fecha automaticamente ao fechar seu inventário.
+		 Label: Mostra o Habilitador de efeitos apenas quando o invetário está aberto
+		 Tooltip: Caso ligado, o Habilitador de efeitos fecha automaticamente ao fechar seu inventário.
 	}
 
 	ItemDisabledTooltip: {
-		// Label: Aviso de efeitos desativados
-		// Tooltip: Caso ligado, itens com efeitos desativados pelo Habilitador de efeitos vão te avisar disso em suas descrições.
+		 Label: Aviso de efeitos desativados
+		 Tooltip: Caso ligado, itens com efeitos desativados pelo Habilitador de efeitos vão te avisar disso em suas descrições.
 	}
 
 	ToggleSearchReset: {
-		// Label: O menu de efeitos de acessórios reseta a barra de pesquista ao ser fechado
-		// Tooltip: ""
+		 Label: O menu de efeitos de acessórios reseta a barra de pesquista ao ser fechado
+		 Tooltip: ""
 	}
 
 	RainbowHealThreshold: {
-		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Limite para cura automática"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Limite para cura automática"
+		 Tooltip: ""
 	}
 
 	PrecisionSealIsHold: {
-		// Label: "[i:FargowiltasSouls/PrecisionSeal] Botão de Selo de Precisão deve ser segurado"
-		// Tooltip: Caso desligado, o modo de precisão pode ser ligado e desligado apenas apertando.
+		 Label: "[i:FargowiltasSouls/PrecisionSeal] Botão de Selo de Precisão deve ser segurado"
+		 Tooltip: Caso desligado, o modo de precisão pode ser ligado e desligado apenas apertando.
 	}
 
 	OncomingMutantX: {
-		// Label: Posição X do ícone do Modo Eternidade no inventário
-		// Tooltip: ""
+		 Label: Posição X do ícone do Modo Eternidade no inventário
+		 Tooltip: ""
 	}
 
 	OncomingMutantY: {
-		// Label: Posição Y do ícone do Modo Eternidade no inventário
-		// Tooltip: ""
+		 Label: Posição Y do ícone do Modo Eternidade no inventário
+		 Tooltip: ""
 	}
 
 	CooldownBars: {
-		// Label: Barras de Tempo de Recarga
-		// Tooltip: ""
+		 Label: Barras de Tempo de Recarga
+		 Tooltip: ""
 	}
 
 	CooldownBarsX: {
-		// Label: Barras de Tempo de Recarga X
-		// Tooltip: ""
+		 Label: Barras de Tempo de Recarga X
+		 Tooltip: ""
 	}
 
 	CooldownBarsY: {
-		// Label: Barras de Tempo de Recarga Y 
-		// Tooltip: ""
+		 Label: Barras de Tempo de Recarga Y 
+		 Tooltip: ""
 	}
 
 	SkillMenuX: {
-		// Label: Menu de habilidades X
-		// Tooltip: Mensurado do lado direito ao esquerdo da tela.
+		 Label: Menu de habilidades X
+		 Tooltip: Mensurado do lado direito ao esquerdo da tela.
 	}
 
 	SkillMenuY: {
-		// Label: Menu de habilidades X
-		// Tooltip: ""
+		 Label: Menu de habilidades X
+		 Tooltip: ""
 	}
 
 	PhotosensitivityMode: {
-		// Label: Modo de Fotosensitividade
-		// Tooltip: ""
+		 Label: Modo de Fotosensitividade
+		 Tooltip: ""
 	}
 }
 
 SoulConfig: {
-	// DisplayName: Configuração do Souls
+	 DisplayName: Configuração do Souls
 
 	Headers: {
 		Maso: Modo Eternidade
@@ -82,111 +82,111 @@ SoulConfig: {
 
 	DeviChatter: {
 		Label: Devi Chibi pode falar
-		// Tooltip: ""
+		 Tooltip: ""
 	}
 
 	ToggleSearchReset: {
-		// Label: O menu de efeitos de acessórios reseta a barra de pesquista ao ser fechado
-		// Tooltip: ""
+		 Label: O menu de efeitos de acessórios reseta a barra de pesquista ao ser fechado
+		 Tooltip: ""
 	}
 
 	ForcedFilters: {
-		// Label: Liga a qualidade das ondas (tem prioridade sobre a opção do vanilla)
-		// Tooltip: Necessário para que alguns efeitos visuais funcionem
+		 Label: Liga a qualidade das ondas (tem prioridade sobre a opção do vanilla)
+		 Tooltip: Necessário para que alguns efeitos visuais funcionem
 	}
 
 	BossRecolors: {
-		// Label: Chefes usam visuais diferentes
-		// Tooltip: ""
+		 Label: Chefes usam visuais diferentes
+		 Tooltip: ""
 	}
 
 	WeaponReworks: {
-		// Label: Armas retrabalhadas
-		// Tooltip: Controla as mudanças de certas armas no Modo Eternidade, como Espadas Largas e Lanças
+		 Label: Armas retrabalhadas
+		 Tooltip: Controla as mudanças de certas armas no Modo Eternidade, como Espadas Largas e Lanças
 	}
 
 	PatreonRoomba: {
-		// Label: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:{$Mods.FargowiltasSouls.Items.RoombaPet.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:{$Mods.FargowiltasSouls.Items.RoombaPet.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonOrb: {
-		// Label: "[i:FargowiltasSouls/ComputationOrb] [c/ffffff:{$Mods.FargowiltasSouls.Items.ComputationOrb.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/ComputationOrb] [c/ffffff:{$Mods.FargowiltasSouls.Items.ComputationOrb.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonFishingRod: {
-		// Label: "[i:FargowiltasSouls/MissDrakovisFishingPole] [c/ffffff:{$Mods.FargowiltasSouls.Items.MissDrakovisFishingPole.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/MissDrakovisFishingPole] [c/ffffff:{$Mods.FargowiltasSouls.Items.MissDrakovisFishingPole.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonDoor: {
-		// Label: "[i:FargowiltasSouls/SquidwardDoor] [c/ffffff:{$Mods.FargowiltasSouls.Items.SquidwardDoor.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/SquidwardDoor] [c/ffffff:{$Mods.FargowiltasSouls.Items.SquidwardDoor.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonWolf: {
-		// Label: "[i:FargowiltasSouls/ParadoxWolfSoul] [c/ffffff:{$Mods.FargowiltasSouls.Items.ParadoxWolfSoul.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/ParadoxWolfSoul] [c/ffffff:{$Mods.FargowiltasSouls.Items.ParadoxWolfSoul.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonDove: {
-		// Label: "[i:FargowiltasSouls/FigBranch] [c/ffffff:{$Mods.FargowiltasSouls.Items.FigBranch.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/FigBranch] [c/ffffff:{$Mods.FargowiltasSouls.Items.FigBranch.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonKingSlime: {
-		// Label: "[i:FargowiltasSouls/MedallionoftheFallenKing] [c/ffffff:{$Mods.FargowiltasSouls.Items.MedallionoftheFallenKing.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/MedallionoftheFallenKing] [c/ffffff:{$Mods.FargowiltasSouls.Items.MedallionoftheFallenKing.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonFishron: {
-		// Label: "[i:FargowiltasSouls/StaffOfUnleashedOcean] [c/ffffff:{$Mods.FargowiltasSouls.Items.StaffOfUnleashedOcean.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/StaffOfUnleashedOcean] [c/ffffff:{$Mods.FargowiltasSouls.Items.StaffOfUnleashedOcean.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonPlant: {
-		// Label: "[i:FargowiltasSouls/PiranhaPlantVoodooDoll] [c/ffffff:{$Mods.FargowiltasSouls.Items.PiranhaPlantVoodooDoll.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/PiranhaPlantVoodooDoll] [c/ffffff:{$Mods.FargowiltasSouls.Items.PiranhaPlantVoodooDoll.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonDevious: {
-		// Label: "[i:FargowiltasSouls/DeviousAestheticus] [c/ffffff:{$Mods.FargowiltasSouls.Items.DeviousAestheticus.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/DeviousAestheticus] [c/ffffff:{$Mods.FargowiltasSouls.Items.DeviousAestheticus.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonVortex: {
-		// Label: "[i:FargowiltasSouls/VortexMagnetRitual] [c/ffffff:{$Mods.FargowiltasSouls.Items.VortexMagnetRitual.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/VortexMagnetRitual] [c/ffffff:{$Mods.FargowiltasSouls.Items.VortexMagnetRitual.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonPrime: {
-		// Label: "[i:FargowiltasSouls/PrimeStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.PrimeStaff.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/PrimeStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.PrimeStaff.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonCrimetroid: {
-		// Label: "[i:FargowiltasSouls/CrimetroidEgg] [c/ffffff:{$Mods.FargowiltasSouls.Items.CrimetroidEgg.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/CrimetroidEgg] [c/ffffff:{$Mods.FargowiltasSouls.Items.CrimetroidEgg.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonNanoCore: {
-		// Label: "[i:FargowiltasSouls/NanoCore] [c/ffffff:{$Mods.FargowiltasSouls.Items.NanoCore.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/NanoCore] [c/ffffff:{$Mods.FargowiltasSouls.Items.NanoCore.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PatreonROB: {
-		// Label: "[i:FargowiltasSouls/ROBGyro] [c/ffffff:{$Mods.FargowiltasSouls.Items.ROBGyro.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/ROBGyro] [c/ffffff:{$Mods.FargowiltasSouls.Items.ROBGyro.DisplayName}]"
+		 Tooltip: ""
 	}
 
 	PerformanceMode: {
-		// Label: Modo de Performance
-		// Tooltip: Desabilita os visuais mais pesados. Por enquanto desabilita o rastro do ataque de Olho do Mutant.
+		 Label: Modo de Performance
+		 Tooltip: Desabilita os visuais mais pesados. Por enquanto desabilita o rastro do ataque de Olho do Mutant.
 	}
 
 	PatreonTouhou: {
-		// Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
-		// Tooltip: ""
+		 Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
+		 Tooltip: ""
 	}
 }
