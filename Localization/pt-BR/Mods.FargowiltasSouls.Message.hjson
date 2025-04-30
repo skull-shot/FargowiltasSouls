@@ -3,8 +3,8 @@ MasochistModeUnlocked: "{$Mods.FargowiltasSouls.Items.Masochist.DisplayName} bri
 WorldUpdatingSystem: {
 	EternityOn: Modo Eternidade Ativado!
 	EternityOff: Modo Eternidade Desativado.
-	EternityWrongDifficulty: Difficulty too low, Eternity Mode deactivated...
-	EternityMasterWarning: Warning! Eternity not designed for use with Master; Expert recommended!
+	EternityWrongDifficulty: Dificuldade muito baixa, Modo Eternidade desativado...
+	EternityMasterWarning: Aviso! Eternidade não feito para ser usado com Mestre; Perito Recomendado!
 	MasochistOn: Mestre e Eternidade combinados: Modo Masoquista Ativado!!
 	MasochistOnZenith: Master and Zenith seed combined: Masochist Mode activated!!
 	MasochistFTWWarning: Masoquista e FTW combinados! Esse modo é [c/FF0000:extremamente] Díficil!! Prosiga por conta própria!
