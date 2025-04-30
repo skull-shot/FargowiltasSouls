@@ -302,7 +302,7 @@ LifeChallenger: {
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
 		SpawnInfo: Invoque usando [i:FargowiltasSouls/FragilePixieLamp] no consagrado durante o dia.
-		DespawnMessage: Lifelight fades away...
+		DespawnMessage: Lifelight Desaparece...
 	}
 
 	FatherOfLies: Foi um erro ter vindo aqui.
@@ -314,7 +314,7 @@ BanishedBaron: {
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.BanishedBaron.DisplayName}"
 		SpawnInfo: Invoque usando [i:FargowiltasSouls/MechLure] debaixo d'água no oceano.
-		DespawnMessage: The Banished Baron dives deeper into the ocean...
+		DespawnMessage: O Banished Baron se aprofunda no oceano...
 	}
 
 	Slurp: slurp
@@ -326,7 +326,7 @@ CursedCoffin: {
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.CursedCoffin.DisplayName}"
 		SpawnInfo: Acorde usando [i:FargowiltasSouls/CoffinSummon] em uma câmara especial na pirâmide do deserto.
-		DespawnMessage: The Cursed Coffin burrows back into the sandy depths...
+		DespawnMessage: O Cursed Coffin se esconde nas areias...
 	}
 }
 
