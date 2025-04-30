@@ -2269,75 +2269,75 @@ ChibiHat: {
 		'''
 
 	DeviChatter: {
-		Spawn1: Heya! Mind if I come with?
-		Spawn2: I'll light your way!
-		Spawn3: Onwards to the next big adventure!
-		Spawn4: I'll be in your care!
-		Spawn5: Hello world!
-		Spawn6: Chibi Devi is on the case!
-		Spawn7: Lead the way!
-		Respawn1: We won't let it end the same way again!
-		Respawn2: Time to run it back!
-		Respawn3: Take a deep breath. We'll get this eventually!
-		Respawn4: Gotta do more than that to keep us down!
-		Respawn5: Let's see what we can do to change it up!
-		Respawn6: We can do this!
-		Respawn7: How about a minute to rest and refresh? Couldn't hurt!
-		Idle1: We'll collect everything there is to collect!
-		Idle2: Battle, blood, money - nothing beats, am I right?
-		Idle3: Just remember, I'm not an emergency ration.
-		Idle4: Ever tried mining with Boom Shurikens? Heh heh...
-		Idle5: We should take over the world. Kidding! Mostly.
-		Idle6: I wanna see you kill more things!
-		Idle7: Still feels weird to be called a light pet...
-		Idle8: Nothing to do? Murder something!
-		Idle9: Bet you there's a quality of life trick we could try out.
-		Idle10: Mind if I play with those accessory toggles of yours?
-		Idle11: Fun fact: my real name is... a secret! Gotcha!
-		Idle12: Wherever you go, I'll follow!
-		Sleep1: I feel asleep...
-		Sleep2: Good night...
-		Sleep3: Gonna squeeze in a quick nap...
-		Sleep4: Gotta recharge...
-		Sleep5: Wake me up when there's violence...
-		Wake1: What did I miss?
-		Wake2: Morning!
-		Wake3: Go time? Go time!
-		Wake4: Rise and shine!
-		Wake5: Devi has awoken! Hand over the money!
-		ProjDeath1: No! Don't put me back in the hat!
-		ProjDeath2: But I have so much to explore!
-		ProjDeath3: Hello darkness, my old friend...
-		ProjDeath4: Please don't put me away, I'll do anything!
-		PlayerDeath1: You can do it! You can - oh.
-		PlayerDeath2: We'll make you pay for this!
-		PlayerDeath3: Noooo!!
-		PlayerDeath4: Where did that come from?! That wasn't fair!
-		PlayerDeath5: Dang! We'll get them next time.
-		PlayerDeath6: What?! No way!
-		PlayerDeath7: That wasn't very cash money...
-		BossAlmostDead1: Almost there!
-		BossAlmostDead2: You got this!
-		BossAlmostDead3: In the home stretch now!
-		BossAlmostDead4: Just a little bit more!
-		BossAlmostDead5: Finish them off!
-		BossAlmostDead6: This is our chance!
-		KillBoss1: What a fun beatdown! Who's next?
-		KillBoss2: Nothing like the feeling of victory!
-		KillBoss3: Again! Again! Again!
-		KillBoss4: Blood for the blood gods! And by that I mean us.
+		Spawn1: Eae? tem problema eu te seguir?
+		Spawn2: Eu vou iluminar o seu caminho!
+		Spawn3: Em frente para a próxima aventura!
+		Spawn4: Eu vou cuidar de você!
+		Spawn5: Olá mundo!
+		Spawn6: A Devi está no caso!
+		Spawn7: Lidere o caminho!
+		Respawn1: Nós não vamos deixar que isso se repita!
+		Respawn2: Hora de tentar de novo!
+		Respawn3: Respire fundo. dessa vez vai!
+		Respawn4: Precisam de fazer mais que isso para nos derrubar!
+		Respawn5: Vamos ver o que podemos mudar!
+		Respawn6: Podemos fazer isso!
+		Respawn7: Que tal um minuto para descansar e refrescar? Não pode doer!
+		Idle1: Vamos coletar tudo que tem pra coletar!
+		Idle2: Batalha, sangue, dinheiro - nada melhor, certo?
+		Idle3: Só se lembre, eu não sou uma ração de emergência.
+		Idle4: Você já tentou minerar com shurikens explosivas? Heh Heh...
+		Idle5: Nós deveriamos dominar o mundo! To brincando. mais ou menos.
+		Idle6: Eu quero ver você matar mais gente!
+		Idle7: É meio estranho ser chamada de um pet de luz...
+		Idle8: Nada para fazer? mate algo!
+		Idle9: Te aposto que tem algum truque de qualidade de vida que podemos usar.
+		Idle10: Você se importa se eu mexer com as suas habilidades um pouco?
+		Idle11: Fato do dia: meu nome verdadeiro é... Segredo! Te peguei!
+		Idle12: Onde você for, eu te sigo!
+		Sleep1: Eu sinto dormindo...
+		Sleep2: Boa noite...
+		Sleep3: Vou tirar uma sonequinha...
+		Sleep4: Tenho que recarregar...
+		Sleep5: Me acorde quando tiver violência...
+		Wake1: Que que eu perdi?
+		Wake2: Bom dia!
+		Wake3: Hora de ir? Hora de ir!
+		Wake4: Levante-se e brilhe!
+		Wake5: A Devi acordou! Passa a grana!
+		ProjDeath1: Não! Não me coloca de volta no chapéu!
+		ProjDeath2: Mas eu tenho tanto pra explorar!
+		ProjDeath3: Olá escuridão, minha velha amiga...
+		ProjDeath4: Por favor não me jogue fora! Eu faço qualquer coisa!
+		PlayerDeath1: Você consegue! Você conse- ah.
+		PlayerDeath2: Você vai pagar por isso!
+		PlayerDeath3: Nãooooooo!!
+		PlayerDeath4: De onde saiu isso?! Isso não foi justo!
+		PlayerDeath5: Caramba! Na próxima a gente consegue.
+		PlayerDeath6: Quê?! Mentira!
+		PlayerDeath7: Isso não foi muito sigma...
+		BossAlmostDead1: Quase lá!
+		BossAlmostDead2: Você consegue!
+		BossAlmostDead3: No finalzinho agora!
+		BossAlmostDead4: Só mais um pouquinho!
+		BossAlmostDead5: Finaliza ele!
+		BossAlmostDead6: Essa é a nossa chance!
+		KillBoss1: Que espancamento divertido! Quem é o próximo?
+		KillBoss2: Nada como o gosto da vitória!
+		KillBoss3: De novo! De novo! De novo!
+		KillBoss4: Sangue para o Deus do Sangue! quer dizer, nós.
 		KillBoss5: Devi gaming.
-		KillBoss6: YATTA! Uh, you didn't hear that.
-		KillBoss7: Yeah! That's what I've been waiting for! That's what it's all about!
-		BossSpawn1: You can do it!
-		BossSpawn2: Here they come!
-		BossSpawn3: I'm cheering you on! Go!
-		BossSpawn4: Bring it on!
-		BossSpawn5: We can take them!
-		BossSpawn6: Do your best!
-		BossSpawn7: Wipe the floor with them!
-		BossSpawn8: Let's do this!
-		Count1: Psst... can you hear me? This is a secret message! Hi!
+		KillBoss6: YATTA! Uh, você não escutou essa.
+		KillBoss7: Isso aí! É disso que eu tava esperando! É disso que eu to falando!
+		BossSpawn1: Você pode vencer!
+		BossSpawn2: Lá vem eles!
+		BossSpawn3: Eu estou te apoiando! Vai!
+		BossSpawn4: Pode vir!
+		BossSpawn5: Nós conseguimos vencer deles!
+		BossSpawn6: Faça o seu melhor!
+		BossSpawn7: Limpa o chão com eles!
+		BossSpawn8: Vamos nessa!
+		Count1: Psst... você consegue me ouvir? Essa é uma mensagem secreta! Mǐfàn hé dòu lèi!
 	}
 }
 
@@ -3683,7 +3683,7 @@ BaronP2MusicBox: {
 }
 
 TrojanMusicBox: {
-	DisplayName: Caixa de música (Trojan Squirrel)
+	DisplayName: Caixa de música (Esquilo de Tróia)
 	Tooltip: ProduceVGM 'Nuts And Bolts'
 }
 
