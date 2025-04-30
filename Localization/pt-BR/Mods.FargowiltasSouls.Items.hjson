@@ -1746,10 +1746,10 @@ EternitySoul: {
 
 	Extra: {
 		Additional: Também Oferece:
-		// Additional effects are automatically pulled from material tooltips
-		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
+		Additional effects are automatically pulled from material tooltips
+		Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		StartsWithFilter: "'"
-		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
+		Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		ContainsFilter: Following effects|Grants togglable
 		Flavor: "'Mortal ou Imortal, Todas as coisas reconhecem a sua reivindicação à Divindade.'"
 	}
@@ -2509,7 +2509,7 @@ AbominationnVoodooDoll: {
 		Invoca o Abominationn para sua cidade
 		'Você é uma pessoa terrível'
 		'''
-	// the custom spawn message is unused
+	the custom spawn message is unused
 	Summon: Mutant has been enraged by the death of his brother!
 	Fail: O boneco volta para suas mãos, talvez ele não deva ser usado no subterrâneo...
 }
