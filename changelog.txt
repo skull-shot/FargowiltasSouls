@@ -1,10 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Active Skill Menu changes:
-- Added a menu-closing "x" to active skill menu
-- Added a button to open the keybind menu from active skill menu
-- The active skill menu now automatically closes when your inventory is closed, and opening it also opens your inventory
-- The active skill menu is automatically opened the first time you equip any active skill
-
-Removed Shellphone from World Shaper Soul
-Tweaked Illuminated brightness
-Fixed a few obscure things applying outside of Eternity
+Improved the behavior of Low Ground and Slimy Shield fallthrough using more complex code
+Saucer Control Console: Right click now takes priority when both are held instead of not firing anything
+Eternity Mode now prevents Gills Potion from causing drowning in FTW
+Added a config to disable respawn prevention in Masochist Mode, and added toggle to add it to Eternity aswell
+Updated localization and fixed some text issues
