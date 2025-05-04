@@ -1,24 +1,24 @@
-MasochistModeUnlocked: "{$Mods.FargowiltasSouls.ItemName.Masochist} surge com novos poderes...!"
+MasochistModeUnlocked: "{$Mods.FargowiltasSouls.Items.Masochist.DisplayName} brilha com novo poder...!"
 
 WorldUpdatingSystem: {
-	// EternityOn: Eternity Mode activated!
-	// EternityOff: Eternity Mode deactivated.
-	// EternityWrongDifficulty: Difficulty too low, Eternity Mode deactivated...
-	// EternityMasterWarning: Warning! Eternity not designed for use with Master; Expert recommended!
-	// MasochistOn: Master and Eternity combined: Masochist Mode activated!!
-	// MasochistOnZenith: Master and Zenith seed combined: Masochist Mode activated!!
-	// MasochistFTWWarning: Masochist and FTW combined! This mode is [c/FF0000:extremely] difficult!! Proceed at your own risk!
-	// MasochistOff: Masochist Mode deactivated.
-	// BloodMoonCancel: The Blood Moon changed its mind and left...
-	// ShiftingSands: The sand is shifting underneath you...
-	// MightyFoe: A mighty foe is approaching...
+	EternityOn: Modo Eternidade Ativado!
+	EternityOff: Modo Eternidade Desativado.
+	EternityWrongDifficulty: Dificuldade muito baixa, Modo Eternidade desativado...
+	EternityMasterWarning: Aviso! Eternidade não feito para ser usado com Mestre; Perito Recomendado!
+	MasochistOn: Mestre e Eternidade combinados: Modo Masoquista Ativado!!
+	MasochistOnZenith: Master and Zenith seed combined: Masochist Mode activated!!
+	MasochistFTWWarning: Masoquista e FTW combinados! Esse modo é [c/FF0000:extremamente] Díficil!! Prosiga por conta própria!
+	MasochistOff: Modo Masoquista Desativado.
+	BloodMoonCancel: A lua de sangue mudou de ideia e foi embora...
+	ShiftingSands: As areias estão tremendo embaixo de você...
+	MightyFoe: Um oponente poderoso está se aproximando...
 }
 
 Revived: Você foi revivido!
 NoMusic1: Fargo's Music Mod não encontrado!
-NoMusic2: Instale Fargo's Music Mod para ter a experiência completa!!
-// NoDLC1: We detected that you're playing Fargo's Souls Mod together with {0}.
-// NoDLC2: It's recommended to use the "Fargo's Souls DLC" mod for compatibility and content between these mods!
-// Wiki: Check out the official Fargo's Wiki at [c/3989FF:https://fargosmods.wiki.gg]!
-PatreonNameEffect: Seus efeitos especiais do patreon estão ativos
-MoonsDeathPenalty: O progresso da onda regrediu!
+NoMusic2: Por favor habilite o fargo's music mod para uma melhor experiência!!
+NoDLC1: Nós detectamos que você está jogando Fargo's Souls junto com {0}.
+NoDLC2: É recomendado usar o mod "Fargo's Souls DLC" para compatibilidade e conteúdo melhorados entre os mods!
+Wiki: Confira a wiki oficial de Fargo's em [c/3989FF:https://fargosmods.wiki.gg]!
+PatreonNameEffect: Seus efeitos especiais do patreon estão em efeito
+MoonsDeathPenalty: O progresso da onda regressou!
