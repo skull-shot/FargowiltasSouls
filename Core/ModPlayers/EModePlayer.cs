@@ -51,11 +51,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Main.netMode == NetmodeID.SinglePlayer)
                 return false;
             bool diff;
-            string? mode = SoulConfig.Instance.MultiplayerRespawnPrevention;
+            var mode = SoulConfig.Instance.MultiplayerRespawnPrevention;
 
-            if (mode == "Masochist")
+            if (mode == RespawnPreventionSetting.Masochist)
                 diff = WorldSavingSystem.MasochistModeReal;
-            else if (mode == "Eternity")
+            else if (mode == RespawnPreventionSetting.Eternity)
                 diff = WorldSavingSystem.EternityMode;
             else
                 diff = false;

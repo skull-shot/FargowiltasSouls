@@ -192,6 +192,13 @@ SoulConfig: {
 
 	MultiplayerRespawnPrevention: {
 		Label: Multiplayer Respawn Prevention
-		Tooltip: "Selects in what mode respawning multiple times during a bossfight should be disabled in multiplayer."
+		Tooltip: Selects in what mode respawning multiple times during a bossfight should be prevented in multiplayer.
 	}
+}
+
+RespawnPreventionSetting: {
+	Tooltip: ""
+	Eternity.Label: Eternity Mode
+	Masochist.Label: Masochist Mode
+	Disabled.Label: Disabled
 }

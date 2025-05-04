@@ -38,9 +38,8 @@ namespace FargowiltasSouls.Core
         public bool WeaponReworks;
 
         [DrawTicks]
-        [OptionStrings(["Eternity", "Masochist", "Disabled"])]
-        [DefaultValue("Masochist")]
-        public string? MultiplayerRespawnPrevention;
+        [DefaultValue(RespawnPreventionSetting.Masochist)]
+        public RespawnPreventionSetting MultiplayerRespawnPrevention;
 
         #endregion
 
