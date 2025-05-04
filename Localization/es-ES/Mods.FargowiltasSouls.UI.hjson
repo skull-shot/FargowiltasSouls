@@ -68,4 +68,4 @@
 // ActiveSkills: Active Skills
 // AvailableSkills: Available Skills
 // SelectDifficulty: Select Difficulty
-// NoRespawn: Respawn prevented: Only one respawn per boss in Masochist Mode multiplayer!
+// NoRespawn: Respawn prevented: Only one respawn per boss in {0} multiplayer!

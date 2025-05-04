@@ -2992,7 +2992,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
-		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]

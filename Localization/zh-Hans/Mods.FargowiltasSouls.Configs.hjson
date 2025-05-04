@@ -189,4 +189,9 @@ SoulConfig: {
 		Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
 		Tooltip: ""
 	}
+
+	MultiplayerRespawnPrevention: {
+		// Label: Multiplayer Respawn Prevention
+		// Tooltip: ""
+	}
 }

@@ -37,6 +37,11 @@ namespace FargowiltasSouls.Core
         [DefaultValue(true)]
         public bool WeaponReworks;
 
+        [DrawTicks]
+        [OptionStrings(["Eternity", "Masochist", "Disabled"])]
+        [DefaultValue("Masochist")]
+        public string? MultiplayerRespawnPrevention;
+
         #endregion
 
         #region patreon
