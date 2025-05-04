@@ -33,31 +33,46 @@ namespace FargowiltasSouls
 
         public void LoadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName += AffixName;
-            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning += PreventGillsDrowning;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot += InterruptShoot;
-            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
-            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
+
+            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName += AffixName;
+
             On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
         }
         public void UnloadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName -= AffixName;
-            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning -= PreventGillsDrowning;
+            On_Player.HorsemansBlade_SpawnPumpkin -= HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot -= InterruptShoot;
-            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+
+            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName -= AffixName;
+
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY -= AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
         }
 
 
@@ -322,6 +337,21 @@ namespace FargowiltasSouls
                 num++;
             }
             return num;
+        }
+
+        private static void PreventGillsDrowning(On_Player.orig_CheckDrowning orig, Player player)
+        {
+            bool hadGills = false;
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            {
+                hadGills = player.gills;
+                player.gills = false;
+            }
+            orig(player);
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            {
+                player.gills = hadGills;
+            }
         }
     }
 }
