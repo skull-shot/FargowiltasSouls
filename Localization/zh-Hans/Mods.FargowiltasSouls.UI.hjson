@@ -66,4 +66,4 @@ DisabledUnequipped: 禁用：未装备
 ActiveSkills: 主动技能
 AvailableSkills: 可用技能
 SelectDifficulty: 选择难度
-NoRespawn: 禁止重生：在受虐多人模式中每个玩家每场Boss战只能重生一次！
+NoRespawn: 禁止重生：在{0}多人模式中每个玩家每场Boss战只能重生一次！
