@@ -191,7 +191,7 @@ SoulConfig: {
 	}
 
 	MultiplayerRespawnPrevention: {
-		// Label: Multiplayer Respawn Prevention
-		// Tooltip: ""
+		Label: Возрождения в мультиплеере
+		Tooltip: Позволяет выбрать режим, в котором многократное возрождение при битвах с боссами в мультиплеере будет отключено.
 	}
 }
