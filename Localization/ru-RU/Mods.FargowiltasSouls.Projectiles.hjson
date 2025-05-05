@@ -546,8 +546,8 @@ StyxArmorScythe2.DisplayName: Коса Стикс
 StyxGazerArmor.DisplayName: Созерцатель Стикс
 UniversalCollapseProj.DisplayName: Атомная бомба
 KingSlimeBallPiercing.DisplayName: Шар слизи
-// KingSlimeBall.DisplayName: King Slime Ball
-KingSlimeMinion.DisplayName: Король Слизней
+KingSlimeBall.DisplayName: Шар Короля слизней
+KingSlimeMinion.DisplayName: Король слизней
 KingSlimeSpike.DisplayName: Слизневый шип
 DukeFishronMinion.DisplayName: Герцог Рыброн
 RazorbladeTyphoonFriendly2.DisplayName: Бритвенный тайфун
@@ -793,8 +793,8 @@ BloodPuddle.DisplayName: Кровавая лужа
 VikingHook.DisplayName: Крюк викинга
 PaladinHammer.DisplayName: Молот паладина
 DungeonDebris.DisplayName: Обломки темницы
-// PalmwoodShot.DisplayName: Palmwood Shot
-// BeetleEnchantBeetle.DisplayName: Beetle Enchant Beetle
-// SpookySpinScythe.DisplayName: Spooky Spin Scythe
-// SnowMist.DisplayName: Snow Mist
-// IceShard.DisplayName: Ice Shard
+PalmwoodShot.DisplayName: Выстрел пальмы
+BeetleEnchantBeetle.DisplayName: Жук зачарования жука
+SpookySpinScythe.DisplayName: Крутящаяся коса жути
+SnowMist.DisplayName: Снежный туман
+IceShard.DisplayName: Ледяной осколок

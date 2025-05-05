@@ -65,6 +65,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.ashWoodBonus = true;
         }
+        public static bool TriggerFromDebuffs(Player player)
+        {
+            bool debuffed = false;
+            for (int i = 0; i < Player.MaxBuffs; i++)
+                {
+                    int type = player.buffType[i];
+                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                        debuffed = true;
+                }
+            return debuffed;
+        }
     }
     public class AshWoodFireballs : AccessoryEffect
     {
@@ -82,14 +93,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            bool debuffed = false;
-            for (int i = 0; i < Player.MaxBuffs; i++)
-            {
-                int type = player.buffType[i];
-                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
-                    debuffed = true;
-            }
-            if (modPlayer.AshwoodCD <= 0 && (debuffed || player.HasEffect<ObsidianProcEffect>()))
+            if (modPlayer.AshwoodCD <= 0 && (AshWoodEffect.TriggerFromDebuffs(player) || player.HasEffect<ObsidianProcEffect>()))
             {
                 modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : player.HasEffect<ObsidianProcEffect>() ? 25 : 35;
 
