@@ -79,8 +79,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 {
                     dam = 32;
                     type = ProjectileID.SharpTears;
-                    ai0 *= 2f;
-                    ai1 += 0.5f;
+                    //ai0 *= 2f;
+                    //ai1 += 0.5f;
                 }
                 dam = (int)(dam * player.ActualClassDamage(DamageClass.Melee));
 
