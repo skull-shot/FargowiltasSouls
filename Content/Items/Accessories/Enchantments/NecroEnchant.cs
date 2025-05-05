@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 globalNPC.NecroDamage = 0;
 
-                int dam = npc.lifeMax / 25;
+                int dam = npc.lifeMax / 33;
                 if (dam > 0)
                     Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<NecroEffect>()), npc.Bottom, new Vector2(0, -4), ModContent.ProjectileType<NecroGrave>(), 0, 0, player.whoAmI, dam);
             }

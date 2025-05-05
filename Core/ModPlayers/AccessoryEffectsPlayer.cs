@@ -199,13 +199,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Player.CheckMana(6, true))
                 return;
 
-            FrigidGemstoneCD = 10;
+            FrigidGemstoneCD = 20;
             Player.manaRegenDelay = Math.Max(Player.manaRegenDelay, 30);
 
             SoundEngine.PlaySound(SoundID.Item28, Player.Center);
             int damage = (int)(14 * Player.ActualClassDamage(DamageClass.Magic));
-            if (!Main.hardMode)
-                damage = 0;
 
             Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGemstoneKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
         }
