@@ -138,7 +138,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SlimyShieldFalling = false;
                     if (Player.whoAmI == Main.myPlayer && Player.gravDir > 0)
                     {
-                        if (SlimyShieldItem != null)
+                        if (SlimyShieldItem != null && Player.HasEffect<SlimyShieldEffect>())
                         {
                             SoundEngine.PlaySound(SoundID.Item21 with { Volume = 0.5f }, Player.Center);
                             Vector2 mouse = Main.MouseWorld;

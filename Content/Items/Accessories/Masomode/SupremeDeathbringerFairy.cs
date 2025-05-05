@@ -43,15 +43,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<SlimeFallEffect>(Item);
             player.AddEffect<PlatformFallthroughEffect>(Item);
 
-            if (player.AddEffect<SlimyShieldEffect>(Item))
-            {
-                player.FargoSouls().SlimyShieldItem = Item;
-            }
+            //if (player.AddEffect<SlimyShieldEffect>(Item))
+            //{
+            //    player.FargoSouls().SlimyShieldItem = Item;
+            //}
 
             //agitating lens
             player.buffImmune[ModContent.BuffType<BerserkedBuff>()] = true;
             //player.GetDamage(DamageClass.Generic) += 0.1f;
-            player.AddEffect<AgitatingLensEffect>(Item);
+            //player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
 
@@ -67,17 +67,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.npcTypeNoAggro[235] = true;
             fargoPlayer.QueenStingerItem = Item;
             player.AddEffect<SpecialDashEffect>(Item);
-            if (player.honey)
-                player.GetArmorPenetration(DamageClass.Generic) += 5;
+            //if (player.honey)
+                //player.GetArmorPenetration(DamageClass.Generic) += 5;
 
             //necromantic brew
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             fargoPlayer.NecromanticBrewItem = Item;
             player.AddEffect<NecroBrewSpin>(Item);
-            player.AddEffect<SkeleMinionEffect>(Item);
+            //player.AddEffect<SkeleMinionEffect>(Item);
 
             // deerclawps
-
+            player.AddEffect<DeerclawpsDashDR>(Item);
+            player.AddEffect<DeerclawpsEffect>(Item);
         }
 
         public override void AddRecipes()
