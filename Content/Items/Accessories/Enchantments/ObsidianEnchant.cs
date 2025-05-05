@@ -61,14 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ObsidianCD > 0)
                 modPlayer.ObsidianCD--;
 
-            bool triggerFromDebuffs = false;
-                for (int i = 0; i < Player.MaxBuffs; i++)
-                {
-                    int type = player.buffType[i];
-                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
-                        triggerFromDebuffs = true;
-                }
-            if ((modPlayer.ForceEffect<ObsidianEnchant>()) || (triggerFromDebuffs || player.lavaWet || modPlayer.LavaWet))
+            if (modPlayer.ForceEffect<ObsidianEnchant>() || AshWoodEffect.TriggerFromDebuffs(player) || player.lavaWet || modPlayer.LavaWet)
             {
                 player.AddEffect<ObsidianProcEffect>(item);
             }
@@ -111,7 +104,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (force) // this section is just imitating the previous version but cleaner
                 {
                     explosionDamage *= 1.5f; // technically meant to result to 1.3f but we'll see
-                    if (!(player.lavaWet || modPlayer.LavaWet))
+                    if (!(player.lavaWet || modPlayer.LavaWet || AshWoodEffect.TriggerFromDebuffs(player)))
                         explosionDamage *= 0.75f;
                 }
 
