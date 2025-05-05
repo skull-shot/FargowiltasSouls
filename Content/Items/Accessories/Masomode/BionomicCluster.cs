@@ -61,6 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffect(player, Item);
+            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
         }
 
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
