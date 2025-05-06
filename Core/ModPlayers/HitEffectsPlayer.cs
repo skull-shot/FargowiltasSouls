@@ -127,10 +127,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (FirstStrike)
             {
                 modifiers.SetCrit();
-                modifiers.FinalDamage *= 1.25f;
+                //modifiers.FinalDamage *= 1.25f;
                 Player.ClearBuff(ModContent.BuffType<FirstStrikeBuff>());
                 //target.defense -= 5;
-                target.AddBuff(BuffID.BrokenArmor, 600);
+                //target.AddBuff(BuffID.BrokenArmor, 600);
             }
 
             if (Illuminated)

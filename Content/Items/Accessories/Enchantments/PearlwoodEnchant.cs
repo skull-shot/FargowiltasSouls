@@ -177,7 +177,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (Main.netMode == NetmodeID.SinglePlayer)
                 {
-                    Item.NewItem(player.GetSource_OnHit(target), target.Hitbox, ItemID.Star);
+                    Item.NewItem(player.GetSource_OnHit(target), target.Hitbox, ItemID.ManaCloakStar);
                 }
                 else if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
