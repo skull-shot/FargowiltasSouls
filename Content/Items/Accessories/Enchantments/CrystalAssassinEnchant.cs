@@ -148,7 +148,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         {
                             player.AddBuff(ModContent.BuffType<FirstStrikeBuff>(), 60);
                             int cd = player.ForceEffect<CrystalDiagonalDash>() ? 5 : 10;
-                            player.FargoSouls().CrystalDashFirstStrikeCD = 60 * cd;
+                            player.FargoSouls().CrystalDashFirstStrikeCD = 0 * cd;
                         }
                     }
                 }
