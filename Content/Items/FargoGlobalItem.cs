@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items
             if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 if (player.HasEffect<IronEquippedEffect>() || (item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
-                    item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart))
+                    item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart && item.type != ItemID.ManaCloakStar))
                 {
                     int rangeBonus = 160;
                     if (p.ForceEffect<IronEnchant>())
@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Items
             if (player.whoAmI == Main.myPlayer && player.HasEffect<GoldToPiggy>())
                 modPlayer.GoldEnchMoveCoins = true;
             
-            if (ItemID.Sets.IsAPickup[item.type])
+            if (ItemID.Sets.IsAPickup[item.type] || item.type == ItemID.ManaCloakStar) //only vanilla pickup that doesnt set IsAPickup
             {
                 OnRetrievePickup(player);
             }
