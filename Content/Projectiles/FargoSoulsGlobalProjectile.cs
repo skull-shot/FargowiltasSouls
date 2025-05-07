@@ -516,7 +516,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             if (modPlayer.AncientShadowEnchantActive)
                             {
                                 numBalls = 5;
-                                dmg = 50;
+                                dmg = 40;
                             }
 
                             int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
