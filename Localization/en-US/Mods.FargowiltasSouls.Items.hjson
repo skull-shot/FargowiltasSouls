@@ -2,7 +2,7 @@ AdamantiteEnchant: {
 	DisplayName: Adamantite Enchantment
 	Tooltip:
 		'''
-		The longer you fire your weapon, the faster it fires, up to 22% faster
+		The longer you fire your weapon, the faster it fires, up to 20% faster
 		Weapon projectiles are also inaccurate, increasing the longer you fire
 		Halved effectiveness on homing weapons
 		Only works on weapons that directly fire projectiles

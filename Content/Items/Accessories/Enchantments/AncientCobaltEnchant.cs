@@ -79,10 +79,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 int projType = ModContent.ProjectileType<CobaltExplosion>();
                 int damage = 35;
                 if (upgrade) 
-                    damage = 250;
+                    damage = 150;
 
                 if (notAncient && player.ForceEffect<AncientCobaltEffect>())
-                    damage = 350;
+                    damage = 300;
 
                 float scale = 1.5f;
                 if (upgrade)
@@ -107,11 +107,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 if (notAncient || player.ForceEffect<AncientCobaltEffect>())
                 {
-                    player.jumpSpeedBoost += 7.5f;
+                    player.jumpSpeedBoost += 5f;
                 }
                 else
                 {
-                    player.jumpSpeedBoost += 3f;
+                    player.jumpSpeedBoost += 2.5f;
                 }
             }
         }
