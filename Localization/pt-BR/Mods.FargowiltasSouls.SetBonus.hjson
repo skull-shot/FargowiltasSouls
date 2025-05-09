@@ -23,6 +23,7 @@ EridanusOff:
 	20% de aumento nos danos para sua classe de armas atual
 	10% de aumento na chance de acerto crítico para sua classe de armas atual
 	10% de aumento na velocidade do ataque pra sua classe de armas atual
+	Aumenta o número máximo de lacaios em 3
 	Aperte {0} duas vezes para ativar a bênção de Eridanus 
 	'''
 EridanusOn:
@@ -33,6 +34,7 @@ EridanusOn:
 	80% de aumento nos danos para a classe fortalecida
 	30% de aumento na chance de acerto crítico para a classe fortalecida
 	30% de aumento na velocidade do ataque para a classe fortalecida
+	Aumenta o número máximo de lacaios em 3
 	Aperte {0} duas vezes para desativar a bênção de Eridanus
 	'''
 Styx:

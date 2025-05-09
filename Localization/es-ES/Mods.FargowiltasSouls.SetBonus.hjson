@@ -23,6 +23,7 @@
 	'''
 	15% increased damage for your current weapon class
 	10% increased critical strike chance for your current weapon class
+	Increases your max number of minions by 3
 	Double tap {0} to activate Eridanus' blessing
 	''' */
 /* EridanusOn:
@@ -33,7 +34,7 @@
 	70% increased damage for the empowered class
 	30% increased critical strike chance for the empowered class
 	30% increased attack speed for the empowered class
-	Increases max mana by 30 with mage empowerment
+	Increases your max number of minions by 3
 	Your summon weapons can crit with summoner empowerment
 	Double tap {0} to deactivate Eridanus' blessing
 	''' */

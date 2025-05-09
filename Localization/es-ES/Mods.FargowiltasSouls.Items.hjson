@@ -1956,7 +1956,8 @@ EridanusHat: {
 		'''
 		10% increased damage
 		5% increased critical strike chance
-		Increases your max number of minions by 4
+		Increases max mana by 30
+		Increases your max number of minions by 1
 		Increases your max number of sentries by 1
 		''' */
 }
