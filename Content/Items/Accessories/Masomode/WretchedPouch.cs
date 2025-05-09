@@ -98,9 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
                     SoundEngine.PlaySound(SoundID.Item103, player.Center);
 
-                    int dam = 58 + (int)(58 * charge * 6);
-                    if (modPlayer.MasochistSoul)
-                        dam *= 10;
+                    int dam = 40 + (int)(40 * charge * 6);
                     dam = (int)(dam * player.ActualClassDamage(DamageClass.Magic));
 
                     void ShootTentacle(Vector2 baseVel, float variance, int aiMin, int aiMax)

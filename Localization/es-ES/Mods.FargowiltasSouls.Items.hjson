@@ -2,7 +2,7 @@ AdamantiteEnchant: {
 	// DisplayName: Adamantite Enchantment
 	/* Tooltip:
 		'''
-		The longer you fire your weapon, the faster it fires, up to 22% faster
+		The longer you fire your weapon, the faster it fires, up to 20% faster
 		Weapon projectiles are also inaccurate, increasing the longer you fire
 		Halved effectiveness on homing weapons
 		Only works on weapons that directly fire projectiles
@@ -165,8 +165,7 @@ CrystalAssassinEnchant: {
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
 		Jump while dashing into ground to get a speed boost and gain the First Strike buff
-		First Strike causes your next attack to deal 1.25x damage, guarantees a critical strike, and reduces defense by 10
-		First Strike has a 10 second cooldown
+		First Strike causes your next attack to guarantee a critical strike
 		'Reach for the summit'
 		''' */
 }
