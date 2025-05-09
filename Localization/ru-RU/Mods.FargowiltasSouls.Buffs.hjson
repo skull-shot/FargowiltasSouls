@@ -195,7 +195,7 @@ BerserkedBuff: {
 
 BloodDrinkerBuff: {
 	DisplayName: Кровопийца
-	Description: Урон увеличен на 30%
+	Description: Урон увеличен на 15%
 }
 
 BloodthirstyBuff: {

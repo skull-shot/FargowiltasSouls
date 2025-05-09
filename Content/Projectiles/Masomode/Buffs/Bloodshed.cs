@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Buffs
                             Projectile.ai[1] = 1;
                             Projectile.netUpdate = true;
                             Projectile.Kill();
+                            FargoGlobalItem.OnRetrievePickup(Main.LocalPlayer);
                             return;
                         }
                     }

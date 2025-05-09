@@ -628,7 +628,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 const float speed = 12f;
                 Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), Player.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
 
-                int projDamage = FargoSoulsUtil.HighestDamageTypeScaling(Player, 1000);
+                int projDamage = (int)(300 * Player.ActualClassDamage(DamageClass.Melee));
 
                 const int max = 20;
                 for (int i = 0; i < max; i++)
