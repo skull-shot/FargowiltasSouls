@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetDamage(DamageClass.Generic) += 0.30f;
+            player.GetDamage(DamageClass.Generic) += 0.15f;
         }
 
         public override void Update(NPC npc, ref int buffIndex)
