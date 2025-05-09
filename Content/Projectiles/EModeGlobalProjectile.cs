@@ -1302,6 +1302,19 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+                case ProjectileID.MoonlordTurretLaser:
+                    modifiers.FinalDamage *= 0.5f;
+                    break;
+                case ProjectileID.RainbowCrystalExplosion:
+                    modifiers.FinalDamage *= 0.6f;
+                    break;
+                case ProjectileID.Tempest:
+                case ProjectileID.MiniSharkron:
+                    modifiers.FinalDamage *= 1.2f;
+                    break;
+                case ProjectileID.HoundiusShootiusFireball:
+                    modifiers.FinalDamage *= 1.2f;
+                    break;
             }
 
             if (SourceItemType == ItemID.SniperRifle)
