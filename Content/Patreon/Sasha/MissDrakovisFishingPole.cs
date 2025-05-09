@@ -158,8 +158,8 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
 
                     Item.knockBack = 6.5f;
                     Item.useStyle = ItemUseStyleID.Shoot;
-                    Item.useAnimation = 50;
-                    Item.useTime = 50;
+                    Item.useAnimation = 65;
+                    Item.useTime = 65;
                     Item.useAmmo = AmmoID.Bullet;
                     Item.UseSound = SoundID.Item36;
                     Item.shootSpeed = 12f;
