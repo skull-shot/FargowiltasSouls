@@ -668,7 +668,7 @@ namespace FargowiltasSouls
                         {
                             int p = reader.ReadByte();
                             int n = reader.ReadByte();
-                            Item.NewItem(Main.player[p].GetSource_OnHit(Main.npc[n]), Main.npc[n].Hitbox, ItemID.Star);
+                            Item.NewItem(Main.player[p].GetSource_OnHit(Main.npc[n]), Main.npc[n].Hitbox, ItemID.ManaCloakStar);
                         }
                         break;
 

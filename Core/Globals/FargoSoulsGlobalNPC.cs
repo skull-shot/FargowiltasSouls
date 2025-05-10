@@ -72,6 +72,7 @@ namespace FargowiltasSouls.Core.Globals
         public int MaxInfestTime;
         public float InfestedDust;
         public bool Electrified;
+        public bool Slimed;
         public bool CurseoftheMoon;
         public int lightningRodTimer;
         public bool Sadism;
@@ -855,6 +856,13 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (damage < 4)
                     damage = 4;
+            }
+
+            if (Slimed)
+            {
+                if (!ModLoader.HasMod("CalamityMod"))
+                    if (npc.onFire || npc.onFire2 || npc.onFire3 || npc.onFrostBurn || npc.onFrostBurn2 || npc.shadowFlame)
+                        npc.lifeRegen -= 20;
             }
 
             if (CurseoftheMoon)
