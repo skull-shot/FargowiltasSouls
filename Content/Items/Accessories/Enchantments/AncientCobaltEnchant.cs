@@ -111,9 +111,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
                 else
                 {
-                    player.jumpSpeedBoost += 2.5f;
+                    player.jumpSpeedBoost += 3.75f;
                 }
             }
+        }
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
+        {
+            if (EffectItem(player).type != ModContent.ItemType<AncientCobaltEnchant>())
+                target.AddBuff(BuffID.Oiled, 600);
+            else
+                target.AddBuff(BuffID.Slimed, 600);
         }
     }
 
