@@ -107,7 +107,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> vein = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BloodTendril");
+            Asset<Texture2D> vein = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Environment/BloodTendril");
             int frameHeight = t.Height() / Main.projFrames[Type];
             // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 
