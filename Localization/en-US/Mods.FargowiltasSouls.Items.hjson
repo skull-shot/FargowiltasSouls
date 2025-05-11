@@ -14,7 +14,7 @@ AncientCobaltEnchant: {
 	DisplayName: Ancient Cobalt Enchantment
 	Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and deals melee damage
+		Grants an explosion jump that inflicts Slimed and deals melee damage
 		Hold down to fall faster
 		'Ancient Kobold'
 		'''
@@ -1562,7 +1562,7 @@ SlimyShield: {
 		Increases fall speed
 		Hold down to fall through platforms
 		When you land after a jump, slime will fall from the sky over your cursor
-		Slime inflicts Slimed and Oiled
+		Slime inflicts Slimed, increasing fire debuff damage
 		'Torn from the innards of a defeated foe'
 		'''
 }

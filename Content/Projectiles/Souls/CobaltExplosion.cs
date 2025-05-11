@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            target.AddBuff(BuffID.Oiled, 600);
+            //target.AddBuff(BuffID.Oiled, 600);
         }
         public override bool PreDraw(ref Color lightColor)
         {

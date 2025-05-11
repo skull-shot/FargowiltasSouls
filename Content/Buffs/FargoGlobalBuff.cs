@@ -151,6 +151,10 @@ namespace FargowiltasSouls.Content.Buffs
                     npc.FargoSouls().Electrified = true;
                     break;
 
+                case BuffID.Slimed:
+                    npc.FargoSouls().Slimed = true;
+                    break;
+
                 case BuffID.Suffocation:
                     npc.FargoSouls().Suffocation = true;
                     break;
