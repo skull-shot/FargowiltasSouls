@@ -94,12 +94,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.05, MidpointRounding.ToEven);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.25, MidpointRounding.ToEven);
 
             StompTimer = -360;
             NPC = npc;
         }
-        public bool PhaseTwo => NPC.GetLifePercent() <= 0.5f;
+        public bool PhaseTwoHP => NPC.GetLifePercent() < 0.5f;
+        public bool PhaseTwo => NPC.GetLifePercent() <= 0.5f && State >= (int)States.TripleSuperslam;
         public NPC NPC = null;
         public Player Target => Main.player[NPC.target];
 
@@ -136,6 +137,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NPC.noGravity = false;
             else
                 NPC.noGravity = true;
+            NPC.noTileCollide = false;
 
             NoContactDamage = 0;
             npc.ai[0] = 0; // set to 4 for afterimages
@@ -676,6 +678,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Timer++;
             NPC.noGravity = true;
+            NPC.noTileCollide = true;
             if (Timer < startupTime)
             {
                 NoContactDamage = 1;
@@ -761,6 +764,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void Artillery()
         {
+            NPC.noTileCollide = true;
             int windup = 45;
             int attackLength = 60;
             int endlag = 30;
@@ -804,6 +808,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int endlag = 50;
             int cycleTime = windup + endlag;
             NPC.noGravity = true;
+            NPC.noTileCollide = true;
 
             NPC.ai[0] = 0;
             Timer++;
@@ -887,6 +892,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void SpikeRain()
         {
+            NPC.noTileCollide = true;
             int startup = 30;
             int rainDuration = 60 * 4;
             Timer++;
@@ -908,7 +914,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         Vector2 dir = new(-1, j * 2 / MaxSubjects);
                         Vector2 velocity = dir * vel;
                         FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center + dir * 24f, ModContent.NPCType<GelatinSubject>(), NPC.whoAmI, target: NPC.target,
-                                    velocity: velocity, ai0: 1, ai2: j);
+                                    velocity: velocity, ai0: 1, ai2: j, ai3: Target.Center.Y - 500);
                     }
                 }
             }
@@ -954,7 +960,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public void ResetToNeutral()
         {
-            if (!PhaseTwo)
+            if (!PhaseTwoHP)
             {
                 PreviousState = State;
                 State = (int)States.Hops;
