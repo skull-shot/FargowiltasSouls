@@ -1231,10 +1231,15 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                     if (Timer == 241 && WorldSavingSystem.EternityMode)
                     {
+                        float sniperTelegraph = 315 - 241;
+                        if (WorldSavingSystem.MasochistModeReal && FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<DeviSniperTelegraph>(), 0, 0f, Main.myPlayer, ai0: NPC.whoAmI, ai1: -sniperTelegraph);
+                        }
+
                         float tpDistance = WorldSavingSystem.MasochistModeReal ? 180 : 420;
                         StrongAttackTeleport(player.Center + tpDistance * NPC.SafeDirectionTo(player.Center).RotatedByRandom(MathHelper.PiOver4));
                     }
-
                     if (Timer == 315)
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center); //eoc roar
