@@ -464,8 +464,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Target.Bottom.Y < NPC.Bottom.Y)
                         y = -18;
                     NPC.velocity.Y = y;
-                    if (Math.Abs(Target.Center.X - NPC.Center.X) < 240)
-                        NPC.velocity.X *= -0.7f;
+                    //if (Math.Abs(Target.Center.X - NPC.Center.X) < 240)
+                        //NPC.velocity.X *= -0.7f;
                     Timer++;
 
                     if (!WorldSavingSystem.MasochistModeReal)
@@ -490,18 +490,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (minionTimer > 0) // every other jump
                 {
                     int freq = 8;
-                    if (minionTimer % freq == 0 && minionTimer <= 3 * freq)
+                    if (minionTimer % freq == 0 && minionTimer <= 1 * freq && NPC.CountNPCS(ModContent.NPCType<GelatinFlyer>()) < 2)
                     {
                         SoundEngine.PlaySound(SoundID.Item155, NPC.Center);
                         if (FargoSoulsUtil.HostCheck)
                         {
                             int i = (int)(minionTimer / freq) - 2; // -1, 0, 1
                             int offset = i * 240 * (int)minionDir; // offset in x-position from player when diving
-                            Vector2 dir = new(-minionDir * 700 + offset / 10, -300);
+                            Vector2 dir = new(-minionDir * 700 + offset / 10, -1000);
                             dir.Normalize();
-                            Vector2 vel = 20f * dir;
+                            Vector2 vel = 12f * dir;
                             FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<GelatinFlyer>(), NPC.whoAmI, target: NPC.target,
-                                velocity: vel, ai0: offset, ai2: 0);
+                                velocity: vel, ai0: 0, ai2: 2);
                         }
                             
                     }
@@ -802,10 +802,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         private void FlightExplosions()
         {
-            int startup = 40;
+            int startup = 42;
             int explosions = 4;
-            int windup = 60;
-            int endlag = 50;
+            int windup = 80;
+            int endlag = 30;
             int cycleTime = windup + endlag;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
@@ -876,7 +876,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                 }
             }
-            if (Timer > cycleTime * explosions)
+            if (Timer > startup + cycleTime * explosions)
             {
                 ResetToNeutral();
                 return;
@@ -991,8 +991,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void ChooseAttackP1()
         {
             ResetState();
-            List<States> states = [States.NormalSlam, States.MinionSlam, States.QuickHops];
-            states.Remove((States)PreviousState);
+            List<States> states;
+            if (PreviousState != (int)States.MinionSlam && PreviousState != (int)States.QuickHops)
+                states = [States.MinionSlam, States.QuickHops];
+            else
+                states = [States.NormalSlam];
             State = (int)Main.rand.NextFromCollection(states);
             NetSync(NPC);
 

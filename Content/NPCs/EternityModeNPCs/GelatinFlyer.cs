@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.CloneDefaults(NPCID.QueenSlimeMinionPurple);
 
             //because they will double dip on expert/master scaling otherwise
-            NPC.lifeMax = 110;
+            NPC.lifeMax = 100;
             NPC.damage = 50;
 
             NPC.aiStyle = -1;
@@ -138,6 +138,23 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                             return;
                         }
                     }
+                }
+                else if (AIVariant == 2) // chasing (evil)
+                {
+                    Vector2 vectorToIdlePosition = player.Center - NPC.Center;
+                    float speed = 22f;
+                    float inertia = 50f;
+                    vectorToIdlePosition.Normalize();
+                    vectorToIdlePosition *= speed;
+                    NPC.velocity = (NPC.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
+                    if (NPC.velocity == Vector2.Zero)
+                    {
+                        NPC.velocity.X = -0.15f;
+                        NPC.velocity.Y = -0.05f;
+                    }
+                    const int MaxSpeed = 35;
+                    if (NPC.velocity.Length() > MaxSpeed)
+                        NPC.velocity = Vector2.Normalize(NPC.velocity) * MaxSpeed;
                 }
             }
             else
