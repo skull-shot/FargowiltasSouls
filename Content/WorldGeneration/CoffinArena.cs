@@ -47,8 +47,7 @@ namespace FargowiltasSouls.Content.WorldGeneration
             string arenaPath = "Content/WorldGeneration/CoffinArena";
             Mod mod = ModLoader.GetMod("FargowiltasSouls");
             if (StructureSize == Point16.Zero)
-                if (!Generator.GetDimensions(arenaPath, mod, ref StructureSize))
-                    throw new Exception("Fargo's Souls: Cursed Coffin arena generation could not retrieve dimensions for the arena.");
+                StructureSize = StructureHelper.API.Generator.GetStructureDimensions(arenaPath, mod);
 
             // Find bottom of pyramid
             int curYSearch = 0;
@@ -96,10 +95,9 @@ namespace FargowiltasSouls.Content.WorldGeneration
             string arenaPath = "Content/WorldGeneration/CoffinArena";
             Mod mod = ModLoader.GetMod("FargowiltasSouls");
             if (StructureSize == Point16.Zero)
-                if (!Generator.GetDimensions(arenaPath, mod, ref StructureSize))
-                    throw new Exception("Fargo's Souls: Cursed Coffin arena generation could not retrieve dimensions for the arena.");
+                StructureSize = StructureHelper.API.Generator.GetStructureDimensions(arenaPath, mod);
             Point16 arenaTopLeft = new(arenaTopCenter.X - (StructureSize.X / 2) + 1, arenaTopCenter.Y);
-            StructureHelper.Generator.GenerateStructure(arenaPath, arenaTopLeft, mod);
+            StructureHelper.API.Generator.GenerateStructure(arenaPath, arenaTopLeft, mod);
             SetArenaPosition(new(arenaTopCenter.X, arenaTopCenter.Y + Height / 2));
 
         }
