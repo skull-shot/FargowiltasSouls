@@ -107,7 +107,7 @@ GladiatorBanner: {
 
 PalmwoodEffect: {
 	// DisplayName: Palm Tree Sentry
-	// Tooltip: Place a palm tree sentry that throws nuts at enemies
+	// Tooltip: Place a palm tree sentry that throws fruit at enemies
 }
 
 SpookyEffect: {
