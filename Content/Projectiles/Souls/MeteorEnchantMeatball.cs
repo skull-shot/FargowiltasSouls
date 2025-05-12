@@ -125,8 +125,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.OnFire, 60 * 5);
-            target.AddBuff(BuffID.OnFire3, 60 * 5);
+            target.AddBuff(BuffID.OnFire3, 180);
         }
         public static readonly Color OrangeColor = Color.Lerp(Color.OrangeRed, Color.Orange, 0.4f);
         public float WidthFunction(float completionRatio)
