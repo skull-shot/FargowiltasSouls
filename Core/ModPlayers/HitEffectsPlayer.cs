@@ -507,7 +507,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (NekomiSet && NekomiHitCD <= 0)
             {
-                NekomiHitCD = 90;
+                NekomiHitCD = 60;
 
                 const int heartsLost = 1;
                 int meterPerHeart = NekomiHood.MAX_METER / NekomiHood.MAX_HEARTS;
