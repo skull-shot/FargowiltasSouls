@@ -1,9 +1,11 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -523,7 +525,30 @@ namespace FargowiltasSouls.Content.Items
                     modPlayer.BeeCD--;
             }
 
-            return base.WingUpdate(wings, player, inUse);
+            if (player.HasEffect<GelicWingSpikes>() && inUse)
+            {
+                if (modPlayer.GelicCD == 0)
+                {
+                    int dam = 25;
+                    int angle = (int)player.velocity.Y * -10;
+                    if (angle > 80)
+                        angle = 80;
+                    for (int j = -1; j <= 1; j += 2)
+                    {
+                        Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(angle * j));
+                        int max = 2;
+                        for (int i = 0; i < max; i++)
+                        {
+                            Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
+                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dam), 5f, Main.myPlayer);
+                        }
+                    }
+                    modPlayer.GelicCD = 22;
+                }
+                if (modPlayer.GelicCD > 0)
+                    modPlayer.GelicCD--;
+            }
+                return base.WingUpdate(wings, player, inUse);
         }
 
         public override void VerticalWingSpeeds(Item item, Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
