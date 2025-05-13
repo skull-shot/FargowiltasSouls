@@ -1167,7 +1167,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                             if (FargoSoulsUtil.HostCheck) //shadowbeam
                             {
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, 6f * Vector2.UnitX.RotatedBy(NPC.localAI[0]), ProjectileID.ShadowBeamHostile, projectileDamage, 0f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, 6f * Vector2.UnitX.RotatedBy(NPC.localAI[0]), ModContent.ProjectileType<DeviShadowbeam>(), projectileDamage, 0f, Main.myPlayer);
                             }
 
                             if (WorldSavingSystem.MasochistModeReal) //maso shotgun
