@@ -165,7 +165,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                             }
                         }
 
-                        if (GelicWingsItem != null && Player.HasEffect<GelicWingSpikes>())
+                        /*if (GelicWingsItem != null && Player.HasEffect<GelicWingSpikes>())
                         {
                             int dam = 60; //deliberately no scaling
                             for (int j = -1; j <= 1; j += 2)
@@ -178,7 +178,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                                     Projectile.NewProjectile(Player.GetSource_Accessory(GelicWingsItem), Player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), dam, 5f, Main.myPlayer);
                                 }
                             }
-                        }
+                        }*/
                     }
                 }
             }

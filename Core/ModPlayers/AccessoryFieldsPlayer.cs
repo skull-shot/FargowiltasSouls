@@ -318,6 +318,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool PrecisionSeal;
         public bool PrecisionSealNoDashNoJump;
         public Item GelicWingsItem;
+        public int GelicCD;
 
         // consumable perma
         public bool MutantsDiscountCard;
