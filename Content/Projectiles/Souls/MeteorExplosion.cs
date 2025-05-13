@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.height = 200;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = -1;
             Projectile.timeLeft = Main.projFrames[Type] * fpf;
             Projectile.tileCollide = false;
@@ -61,8 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.OnFire, 60 * 5);
-            target.AddBuff(BuffID.OnFire3, 60 * 5);
+            target.AddBuff(BuffID.OnFire3, 180);
         }
         public override bool PreDraw(ref Color lightColor)
         {

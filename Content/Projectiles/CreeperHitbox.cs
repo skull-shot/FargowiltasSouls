@@ -41,9 +41,9 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             modifiers.HitDirectionOverride = Main.player[Projectile.owner].Center.X > target.Center.X ? -1 : 1;
             if (Projectile.ai[0] == 0) //gutted
-                target.AddBuff(BuffID.Ichor, 60 * 10);
+                target.AddBuff(BuffID.Ichor, 300);
             else
-                target.AddBuff(ModContent.BuffType<SublimationBuff>(), 60 * 10);
+                target.AddBuff(ModContent.BuffType<SublimationBuff>(), 300);
         }
     }
 }

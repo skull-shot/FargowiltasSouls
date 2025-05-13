@@ -23,8 +23,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 45;
-            Item.crit = 0;
+            Item.damage = 30;
+            Item.crit = 10;
             Item.DamageType = DamageClass.Ranged;
             Item.useTime = 36;
             Item.useAnimation = 36;
@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         }
 
         // Remove the Crit Chance line because of a custom crit method
-        public override void SafeModifyTooltips(List<TooltipLine> tooltips) => tooltips.Remove(tooltips.FirstOrDefault(line => line.Name == "CritChance" && line.Mod == "Terraria"));
+        //public override void SafeModifyTooltips(List<TooltipLine> tooltips) => tooltips.Remove(tooltips.FirstOrDefault(line => line.Name == "CritChance" && line.Mod == "Terraria"));
 
         //make them hold it different
         public override Vector2? HoldoutOffset() => new Vector2(-10, 0);

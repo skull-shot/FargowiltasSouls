@@ -37,6 +37,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //Projectile.scale *= 1.5f;
             Projectile.height = 28;
             Projectile.width = 14;
+            Projectile.hostile = false;
+            Projectile.friendly = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
         }
@@ -47,6 +49,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //stuck in enemy
             if (Projectile.ai[0] == 1)
             {
+                Projectile.damage = 0;
                 if (Projectile.ai[2] < TrailFadeTime) // trail timer
                     Projectile.ai[2]++;
                 Projectile.aiStyle = -1;
@@ -99,7 +102,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.DisableCrit();
+            //modifiers.DisableCrit();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -110,8 +113,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
                 if (p.active && p.type == Projectile.type && p != Projectile && Projectile.Hitbox.Intersects(p.Hitbox))
                 {
-                    target.SimpleStrikeNPC(Projectile.damage / 2, 0, noPlayerInteraction: true, crit: false);
+                    //target.SimpleStrikeNPC(Projectile.damage / 2, 0, noPlayerInteraction: true);
                     // target.StrikeNPC(damage / 2, 0, 0, true); //normal damage but looks like a crit ech
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), p.Center, Vector2.Zero, ModContent.ProjectileType<SmallStingHitbox>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
                     target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
                     DustRing(p, 16);
                     p.Kill();
@@ -124,7 +128,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.ai[1] = target.whoAmI;
             Projectile.velocity = (Main.npc[target.whoAmI].Center - Projectile.Center) * 1f; //distance it sticks out
             Projectile.aiStyle = -1;
-            Projectile.damage = 0;
             Projectile.timeLeft = 300;
             Projectile.netUpdate = true;
         }

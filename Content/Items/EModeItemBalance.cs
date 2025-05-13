@@ -218,7 +218,7 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.PewMaticHorn:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.4f;
+                    balanceNumber = 1.1f;
                     return EModeChange.Buff;
 
                 case ItemID.WeatherPain:
