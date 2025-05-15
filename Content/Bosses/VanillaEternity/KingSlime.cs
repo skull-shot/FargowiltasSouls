@@ -89,6 +89,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (DeathTimer >= 0)
             {
                 Stretch = 0;
+                int scale = 1;
+                if (scale != npc.scale)
+                {
+                    npc.position.X += npc.width / 2;
+                    npc.position.Y += npc.height;
+                    npc.scale = scale;
+                    npc.width = (int)(98f * npc.scale);
+                    npc.height = (int)(92f * npc.scale);
+                    npc.position.X -= npc.width / 2;
+                    npc.position.Y -= npc.height;
+                }
+
                 DeathAnimation(npc);
                 if (++DeathTimer >= 300)
                 {
