@@ -69,11 +69,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             bool debuffed = false;
             for (int i = 0; i < Player.MaxBuffs; i++)
-                {
-                    int type = player.buffType[i];
-                    if (type > 0 && type is not BuffID.PotionSickness or BuffID.ManaSickness or BuffID.WaterCandle && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
-                        debuffed = true;
-                }
+            {
+                int type = player.buffType[i];
+                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                    debuffed = true;
+            }
             return debuffed;
         }
     }
@@ -93,30 +93,36 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.AshwoodCD <= 0 && (AshWoodEffect.TriggerFromDebuffs(player) || player.HasEffect<ObsidianProcEffect>()))
+            if (modPlayer.AshwoodCD <= 0 && AshWoodEffect.TriggerFromDebuffs(player))
             {
-                modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : player.HasEffect<ObsidianProcEffect>() ? 25 : 35;
+                modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : 35;
 
                 float softcapMult = 1.75f;
                 int effectItemType = EffectItem(player).type;
                 Item heldItem = player.HeldItem;
                 int ashwood = ModContent.ItemType<AshWoodEnchant>();
-                int obsidian = ModContent.ItemType<ObsidianEnchant>();
-                if (!player.ForceEffect<AshWoodFireballs>() && (effectItemType == ashwood || effectItemType == obsidian))
+                if (!player.ForceEffect<AshWoodFireballs>() && (effectItemType == ashwood))
                     softcapMult = 1f;
 
                 float fireballDamage = damage;
                 if (!modPlayer.TerrariaSoul && heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
-                    fireballDamage *= player.ActualClassDamage(DamageClass.Magic);
+                    //fireballDamage *= player.ActualClassDamage(DamageClass.Magic);
                     if (fireballDamage > 24f * softcapMult)
-                    fireballDamage = (float)Math.Round(((48f * softcapMult) + fireballDamage) / 3f);
+                        fireballDamage = (float)Math.Round(((48f * softcapMult) + fireballDamage) / 3f);
                 }
                 Vector2 vel = Vector2.Normalize(Main.MouseWorld - player.Center) * 17f;
                 vel = vel.RotatedByRandom(Math.PI / 10);
 
                 if (player.whoAmI == Main.myPlayer)
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, (int)fireballDamage, 1, Main.myPlayer);
+                {
+                    int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, (int)fireballDamage, 1, Main.myPlayer);
+                    if (p != Main.maxProjectiles)
+                    {
+                        Main.projectile[p].DamageType = DamageClass.Generic;
+                    }
+                }
+
             }
         }
     }

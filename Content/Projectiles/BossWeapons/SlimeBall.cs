@@ -56,8 +56,6 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Slimed, 240);
-            if (oil)
-                target.AddBuff(BuffID.Oiled, 240);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

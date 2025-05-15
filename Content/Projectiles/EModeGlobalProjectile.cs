@@ -1716,11 +1716,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.ShadowBeamHostile:
-                    if (!(sourceNPC is NPC && sourceNPC.type == ModContent.NPCType<DeviBoss>()))
-                    {
-                        target.AddBuff(ModContent.BuffType<RottingBuff>(), 1800);
-                        target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
-                    }
+                    target.AddBuff(ModContent.BuffType<RottingBuff>(), 1800);
+                    target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
                     break;
 
                 case ProjectileID.PhantasmalDeathray:
@@ -1740,7 +1737,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.RocketSkeleton:
-                    target.AddBuff(BuffID.Dazed, 120);
+                    target.AddBuff(BuffID.Dazed, 60);
                     target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 300);
                     break;
 

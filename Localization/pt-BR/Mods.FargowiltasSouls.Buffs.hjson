@@ -195,7 +195,7 @@ BerserkedBuff: {
 
 BloodDrinkerBuff: {
 	// DisplayName: Blood Drinker
-	// Description: 30% increased damage
+	// Description: 15% increased damage
 }
 
 BloodthirstyBuff: {

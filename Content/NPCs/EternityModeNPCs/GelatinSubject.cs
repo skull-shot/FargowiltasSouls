@@ -56,6 +56,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         public ref float AIVariant => ref NPC.ai[0];
         public ref float Timer => ref NPC.ai[1];
         public ref float Index => ref NPC.ai[2];
+        public ref float Height => ref NPC.ai[3];
         public override void AI()
         {
             if (!FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.queenSlimeBoss, NPCID.QueenSlimeBoss)
@@ -110,12 +111,19 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                                 return;
                             }
                             Player player = Main.player[parent.target];
+
+                            float minDistance = 350;
+                            if (Timer < 70)
+                                minDistance = 500;
+                            if (player.Center.Y < Height + minDistance)
+                                Height = MathHelper.Lerp(Height, player.Center.Y - Math.Min(500, minDistance), 0.1f);
+
                             float x = parent.Center.X;
                             float interval = WorldSavingSystem.MasochistModeReal ? 220 : 300;
                             float divisor = WorldSavingSystem.MasochistModeReal ? 130 : 150;
                             x += Index * 300;
                             x += MathF.Sin(MathF.Tau * Timer / divisor) * 200;
-                            float y = player.Center.Y - 500;
+                            float y = Height;
                             float speedMod = 1f + Timer / 60;
                             if (speedMod > 5)
                                 speedMod = 5;

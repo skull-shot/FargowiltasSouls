@@ -171,7 +171,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 return;
             }
 
-            if (CanHit == 1)
+            if (CanHit == 1 && damageDone > 50)
             {
                 player.FargoSouls().HealPlayer(damageDone / 20);
                 CanHit = 2;

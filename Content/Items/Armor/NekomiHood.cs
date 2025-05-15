@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             return Language.GetTextValue($"Mods.FargowiltasSouls.SetBonus.Nekomi", key);
         }
 
-        public const int MAX_METER = 60 * 60;
+        public const int MAX_METER = 2000;
         public const int MAX_HEARTS = 9;
 
         public static void NekomiSetBonusKey(Player player)
@@ -66,7 +66,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                 bool superAttack = modPlayer.NekomiAttackReadyTimer > 0;
                 if (superAttack)
                 {
-                    int baseDamage = (2222 / 3) - 80;
+                    int baseDamage = 300;
                     if (!Main.hardMode)
                         baseDamage /= 2;
                     FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), player.Center, Vector2.Zero, ModContent.ProjectileType<NekomiDevi>(), baseDamage, 16f, player.whoAmI);
@@ -118,7 +118,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                 if (fargoPlayer.NekomiMeter > MAX_METER)
                     fargoPlayer.NekomiMeter = MAX_METER;
             }
-            else if (--fargoPlayer.NekomiTimer < -decayTime)
+            /* else if (--fargoPlayer.NekomiTimer < -decayTime)
             {
                 if (fargoPlayer.NekomiTimer < -decayTime * 2)
                     fargoPlayer.NekomiTimer = -decayTime * 2;
@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Items.Armor
                 fargoPlayer.NekomiMeter -= (int)MathHelper.Lerp(1, MAX_METER / decayTime, depreciation / decayTime);
                 if (fargoPlayer.NekomiMeter < 0)
                     fargoPlayer.NekomiMeter = 0;
-            }
+            } */
 
             if (player.whoAmI == Main.myPlayer)
             {

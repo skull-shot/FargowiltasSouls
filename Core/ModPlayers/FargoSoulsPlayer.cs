@@ -14,6 +14,7 @@ using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
@@ -25,6 +26,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -1228,6 +1230,23 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_EffectItem<CobaltEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(baseDamage * Player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
                     if (p != null)
                         p.FargoSouls().CanSplit = false;
+                }
+            }
+            if (Player.HasEffect<GelicWingSpikes>())
+            {
+                if (Player.whoAmI == Main.myPlayer && jump is UnicornMountJump)
+                {
+                    int dam = 25;
+                    for (int j = -1; j <= 1; j += 2)
+                    {
+                        Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(-10 * j));
+                        int max = 4;
+                        for (int i = 0; i < max; i++)
+                        {
+                            Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
+                            Projectile.NewProjectile(Player.GetSource_Accessory(Player.EffectItem<GelicWingSpikes>()), Player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(Player, dam), 5f, Main.myPlayer);
+                        }
+                    }
                 }
             }
         }

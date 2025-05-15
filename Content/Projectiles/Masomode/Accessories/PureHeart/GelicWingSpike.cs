@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,13 +23,17 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
             Projectile.hostile = false;
             Projectile.friendly = true;
             Projectile.timeLeft = 300;
-
-            Projectile.penetrate = 2;
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            Projectile.DamageType = DamageClass.Generic;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
+        }
+
+        public override bool PreAI()
+        {
+            if (Projectile.ai[1] == 0)
+                SoundEngine.PlaySound(SoundID.Item154 with {Volume = 0.5f});
+                Projectile.ai[1] = 1;
+            return true;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

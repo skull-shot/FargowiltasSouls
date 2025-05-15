@@ -638,14 +638,6 @@ namespace FargowiltasSouls.Content.Projectiles
             if (firstTick)
             {
 
-                if (projectile.type == ProjectileID.ShadowBeamHostile)
-                {
-                    if (projectile.GetSourceNPC() is NPC sourceNPC && sourceNPC.type == ModContent.NPCType<DeviBoss>())
-                    {
-                        projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 1200 : 420;
-                    }
-                }
-
                 if (projectile.type == ProjectileID.DD2ExplosiveTrapT3Explosion && projectile.hostile)
                 {
                     if (projectile.GetSourceNPC() is NPC sourceNPC && (sourceNPC.type == ModContent.NPCType<TrojanSquirrel>() || sourceNPC.type == ModContent.NPCType<TimberChampion>()))

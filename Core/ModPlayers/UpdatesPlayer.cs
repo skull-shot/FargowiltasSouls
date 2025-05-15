@@ -206,6 +206,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     BossAliveLastFrame = true;
                     TinEffect.TinHurt(Player, true);
                     EbonwoodCharge = 0;
+                    NekomiMeter = 0;
 
                     Beetles = 0;
                     BeetleCharge = 0;
