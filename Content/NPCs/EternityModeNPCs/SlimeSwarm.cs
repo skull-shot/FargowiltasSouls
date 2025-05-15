@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (p.IsWithinBounds(Main.maxPlayers) && Main.player[p].Distance(NPC.Center) < 1500)
                 playerFar = false;
 
-            NPC.damage = (timer > 60) ? NPC.defDamage : 0;
+            //NPC.damage = (timer > 60) ? NPC.defDamage : 0;
 
             if (++timer > 60 * 15 || playerFar)
             {
