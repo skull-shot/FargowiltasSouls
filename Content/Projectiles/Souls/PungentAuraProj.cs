@@ -68,6 +68,12 @@ namespace FargowiltasSouls.Content.Projectiles
             Color darkColor = Color.DarkRed;
             Color mediumColor = Color.Red;
             Color lightColor2 = Color.Lerp(Color.IndianRed, Color.White, 0.35f);
+            if (player.FargoSouls().PureHeart)
+            {
+                darkColor = Color.DarkGreen;
+                mediumColor = Color.Lime;
+                lightColor2 = Color.Teal;
+            }
 
             Vector2 auraPos = Main.MouseWorld;
             float radius = Projectile.ai[0];

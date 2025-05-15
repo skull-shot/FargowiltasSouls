@@ -137,6 +137,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HallowHealTime;
         public int HuntressStage;
         public int HuntressCD;
+        public int HuntressMissCD;
         public double AdamantiteSpread;
         public bool HeldItemAdamantiteValid;
         public Item AdamantiteItem;
