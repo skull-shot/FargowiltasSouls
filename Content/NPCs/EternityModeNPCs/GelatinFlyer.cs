@@ -143,7 +143,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 {
                     Vector2 vectorToIdlePosition = player.Center - NPC.Center;
                     float speed = 22f;
-                    float inertia = 50f;
+                    float inertia = 75f;
                     vectorToIdlePosition.Normalize();
                     vectorToIdlePosition *= speed;
                     NPC.velocity = (NPC.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;

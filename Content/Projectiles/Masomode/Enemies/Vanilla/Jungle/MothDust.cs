@@ -46,10 +46,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Jungle
         {
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.deviBoss, ModContent.NPCType<DeviBoss>()))
             {
-                target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-                target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 240);
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 240);
-                target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
                 target.AddBuff(ModContent.BuffType<RottingBuff>(), 240);
             }
             else
