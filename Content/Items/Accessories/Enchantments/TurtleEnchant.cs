@@ -39,8 +39,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             //player.AddEffect<CactusEffect>(item);
             player.AddEffect<TurtleEffect>(item);
-            if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, true);
             if (player.HasEffect<TurtleEffect>() && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
             {
                 modPlayer.TurtleCounter++;
@@ -90,6 +88,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
     public class TurtleEffect : AccessoryEffect
     {
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, activeFunction: () => player.HasEffect<TurtleEffect>() && player.HasEffectEnchant<TurtleEffect>());
+        }
+
         public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
             return TurtleDR(player, npc);
