@@ -194,8 +194,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public int HallowRepelTime;
         public int TurtleCounter;
-        public int TurtleShellHP = 25;
-        public int turtleRecoverCD = 240;
+        public int TurtleShellHP = 1000;
         public bool ShellHide;
         public int ValhallaDashCD;
         public int VortexCD;

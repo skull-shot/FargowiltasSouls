@@ -422,9 +422,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override bool CanBeHitByProjectile(Projectile proj)
         {
+            FargoSoulsPlayer modPlayer = Player.FargoSouls();
             if (ImmuneToDamage)
                 return false;
-            if (Player.HasEffect<PrecisionSealHurtbox>() && !proj.Colliding(proj.Hitbox, GetPrecisionHurtbox()))
+            if (!modPlayer.ShellHide && Player.HasEffect<PrecisionSealHurtbox>() && !proj.Colliding(proj.Hitbox, GetPrecisionHurtbox()))
                 return false;
             return true;
         }
@@ -493,6 +494,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void OnHurt(Player.HurtInfo info)
         {
+            Player player = Main.player[Main.myPlayer];
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
             WasHurtBySomething = true;
 
             MahoganyCanUseDR = false;
@@ -525,10 +528,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (ShellHide)
             {
-                TurtleShellHP--;
-
+                int force = (int)(player.ForceEffect<TurtleEffect>() ? 1.5 : 1);
+                TurtleShellHP -= info.SourceDamage * force;
                 //some funny dust
-                const int max = 30;
+                /*const int max = 30;
                 for (int i = 0; i < max; i++)
                 {
                     Vector2 vector6 = Vector2.UnitY * 5f;
@@ -537,7 +540,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.GoldFlame, 0f, 0f, 0, default, 2f);
                     Main.dust[d].noGravity = true;
                     Main.dust[d].velocity = vector7;
-                }
+                }*/
             }
 
             if (Defenseless)

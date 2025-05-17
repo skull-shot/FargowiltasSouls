@@ -84,7 +84,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.Bladetongue)
             .AddIngredient(ItemID.ObsidianSwordfish)
             .AddIngredient(ItemID.FuzzyCarrot)
-            .AddIngredient(ItemID.HardySaddle)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
 
