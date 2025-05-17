@@ -1,8 +1,11 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,27 +34,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             AddEffects(player, Item);
         }
-        public override void UpdateVanity(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
-        }
-        public override void UpdateInventory(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
-        }
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            modPlayer.CactusImmune = true;
-            player.AddEffect<CactusEffect>(item);
+            //player.AddEffect<CactusEffect>(item);
             player.AddEffect<TurtleEffect>(item);
-
-            player.turtleThorns = true;
-            player.thorns = 1f;
-
-
-            if (player.HasEffect<TurtleEffect>() && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()) && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, true);
+            if (player.HasEffect<TurtleEffect>() && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
             {
                 modPlayer.TurtleCounter++;
 
@@ -65,16 +55,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.TurtleCounter = 0;
             }
 
-            if (modPlayer.TurtleShellHP < 20 && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()) && !modPlayer.ShellHide && modPlayer.ForceEffect<TurtleEnchant>())
+            if (modPlayer.TurtleShellHP < 1000 && !modPlayer.ShellHide || player.ForceEffect<TurtleEffect>())
             {
-                modPlayer.turtleRecoverCD--;
-                if (modPlayer.turtleRecoverCD <= 0)
-                {
-                    modPlayer.turtleRecoverCD = 240;
-
-                    modPlayer.TurtleShellHP++;
-                }
+                modPlayer.TurtleShellHP++;
             }
+            if (modPlayer.TurtleShellHP < 0)
+                modPlayer.TurtleShellHP = 0;
+            if (modPlayer.TurtleShellHP > 1000)
+                modPlayer.TurtleShellHP = 1000;
 
             //Main.NewText($"shell HP: {TurtleShellHP}, counter: {TurtleCounter}, recovery: {turtleRecoverCD}");
         }
@@ -85,9 +73,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.TurtleHelmet)
             .AddIngredient(ItemID.TurtleScaleMail)
             .AddIngredient(ItemID.TurtleLeggings)
-            .AddIngredient(null, "CactusEnchant")
             .AddIngredient(ItemID.ChlorophytePartisan)
             .AddIngredient(ItemID.Yelets)
+            .AddIngredient(ItemID.HardySaddle)
 
             //chloro saber
             //
@@ -102,6 +90,36 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
     public class TurtleEffect : AccessoryEffect
     {
+        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        {
+            return TurtleDR(player, npc);
+        }
+        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        {
+            return TurtleDR(player, projectile);
+        }
+        public static float TurtleDR(Player player, Entity attacker)
+        {
+            if (!player.HasEffectEnchant<TurtleEffect>())
+                return 0;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (!modPlayer.ShellHide)
+                return 0;
+            NPC sourceNPC = null;
+            if (attacker is NPC attackerNPC)
+                sourceNPC = attackerNPC;
+            if (attacker is Projectile projectile && projectile.GetSourceNPC() is NPC projNPC)
+                sourceNPC = projNPC;
+
+            if (sourceNPC != null)
+            {
+                float hp = modPlayer.TurtleShellHP;
+                float dr = 0.5f + (hp / (10000/3f));
+                return dr;
+            }
+            return 0;
+        }
+
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<TurtleEnchant>();
 

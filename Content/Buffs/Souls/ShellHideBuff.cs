@@ -1,8 +1,11 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Core.ModPlayers;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
@@ -25,28 +28,25 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             player.noKnockback = true;
-            player.endurance += 0.9f;
-            player.thorns *= 10;
-
+            //player.endurance += modPlayer.TurtleShellHP / 250f;
+            if (player.thorns == 0f)
+                player.thorns = 1f;
+            player.thorns *= 5f;
             modPlayer.ShellHide = true;
-
-            float distance = 3f * 16;
 
             if (player.ownedProjectileCounts[ModContent.ProjectileType<TurtleShield>()] < 1)
             {
                 Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TurtleShield>(), 0, 0, player.whoAmI);
             }
 
-            if (modPlayer.TurtleCounter > 80)
-            {
-                Main.projectile.Where(x => x.active && x.hostile && x.damage > 0 && Vector2.Distance(x.Center, player.Center) <= distance && ProjectileLoader.CanDamage(x) != false && ProjectileLoader.CanHitPlayer(x, player) && FargoSoulsUtil.CanDeleteProjectile(x)).ToList().ForEach(x =>
+                Main.projectile.Where(x => x.active && x.hostile && x.damage > 0 && x.Hitbox.Intersects(player.Hitbox) && ProjectileLoader.CanDamage(x) != false && ProjectileLoader.CanHitPlayer(x, player) && FargoSoulsUtil.CanDeleteProjectile(x)).ToList().ForEach(x =>
                 {
-                    int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.GoldFlame, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100,
+                    /*int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.GoldFlame, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100,
                         default, 2f);
                     Main.dust[dustId].noGravity = true;
                     int dustId3 = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.GoldFlame, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100,
                         default, 2f);
-                    Main.dust[dustId3].noGravity = true;
+                    Main.dust[dustId3].noGravity = true;*/
 
                     // Turn around
                     x.velocity *= -1f;
@@ -62,31 +62,13 @@ namespace FargowiltasSouls.Content.Buffs.Souls
                         x.direction = -1;
                         x.spriteDirection = -1;
                     }
-
+                    
                     x.hostile = false;
                     x.friendly = true;
-
-                    modPlayer.TurtleShellHP--;
+                    x.damage *= 5;
+                    SoundEngine.PlaySound(SoundID.Item150, player.Center);
                 });
-            }
-
-            if (modPlayer.TurtleShellHP <= 0)
-            {
-                player.AddBuff(ModContent.BuffType<BrokenShellBuff>(), 1800);
-                modPlayer.TurtleShellHP = 19;
-
-                //some funny dust
-                const int max = 30;
-                for (int i = 0; i < max; i++)
-                {
-                    Vector2 vector6 = Vector2.UnitY * 5f;
-                    vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + Main.LocalPlayer.Center;
-                    Vector2 vector7 = vector6 - Main.LocalPlayer.Center;
-                    int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.GreenBlood, 0f, 0f, 0, default, 2f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity = vector7;
-                }
-            }
         }
+
     }
 }

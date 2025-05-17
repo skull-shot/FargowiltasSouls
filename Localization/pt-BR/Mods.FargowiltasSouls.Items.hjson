@@ -690,7 +690,6 @@ TurtleEnchant: {
 		Inimigos explodirão em agulhas na morte se eles forem atingidos com suas agulhas
 		'De repente, você tem vontade de se esconder em um casco'
 		'''
-	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
 }
 
 ValhallaKnightEnchant: {

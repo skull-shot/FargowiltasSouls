@@ -373,6 +373,8 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
+            Player player = Main.player[Main.myPlayer];
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (LeadPoison)
             {
                 if (Main.rand.Next(4) < 3)
@@ -663,7 +665,10 @@ namespace FargowiltasSouls.Core.Globals
                     float sparkTime = 15;
                     Vector2 sparkVel = (npc.Center - sparkCenter) / sparkTime;
                     float sparkScale = MathHelper.Lerp(0.25f, 1.5f,ratio);
-                    Particle spark = new SmallSparkle(npc.Center, sparkVel, Color.Red, sparkScale, (int)sparkTime);
+                    Color color = Color.Red;
+                    if (modPlayer.PureHeart)
+                        color = Color.Lime;
+                    Particle spark = new SmallSparkle(npc.Center, sparkVel, color, sparkScale, (int)sparkTime);
                     spark.Spawn();
                 }
             }

@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
         public override bool PreAI()
         {
             if (Projectile.ai[1] == 0)
-                SoundEngine.PlaySound(SoundID.Item154 with {Volume = 0.5f});
+                SoundEngine.PlaySound(SoundID.Item154 with {Volume = 0.5f}, Projectile.Center);
                 Projectile.ai[1] = 1;
             return true;
         }
