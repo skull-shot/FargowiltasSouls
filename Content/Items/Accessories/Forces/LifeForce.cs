@@ -28,6 +28,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             SetActive(player);
             player.AddEffect<LifeForceEffect>(Item);
             modPlayer.LifeForceActive = true;
+            // Cactus Enchant
+            //player.AddEffect<CactusEffect>(Item);
             // Pumpkin Enchant
             if (!player.HasEffect<LifeForceEffect>())
                 player.AddEffect<PumpkinEffect>(Item);
@@ -37,16 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // Spider Enchant
             player.AddEffect<SpiderEffect>(Item);
             // Turtle Enchant
-            if (player.HasEffect<LifeForceEffect>())
-            {
-                player.turtleThorns = true;
-                player.thorns = 5f;
-                modPlayer.CactusImmune = true;
-            }
-            else
-            {
-                TurtleEnchant.AddEffects(player, Item);
-            }
+            player.AddEffect<TurtleEffect>(Item);
             // Beetle Enchant
 
             if (player.HasEffect<LifeForceEffect>())

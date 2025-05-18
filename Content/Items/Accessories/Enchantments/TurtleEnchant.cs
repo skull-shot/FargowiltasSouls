@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -63,6 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
     public class TurtleEffect : AccessoryEffect
     {
+        public override bool MutantsPresenceAffects => true;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
@@ -75,6 +77,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (modPlayer.TurtleCounter > 20)
                 {
                     player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
+                }
+            }
+            else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+            {
+                modPlayer.TurtleCounter++;
+
+                if (modPlayer.TurtleCounter > 40)
+                {
+                        player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
                 }
             }
             else
