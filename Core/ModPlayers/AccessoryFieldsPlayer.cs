@@ -137,6 +137,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HallowHealTime;
         public int HuntressStage;
         public int HuntressCD;
+        public int HuntressMissCD;
         public double AdamantiteSpread;
         public bool HeldItemAdamantiteValid;
         public Item AdamantiteItem;
@@ -193,8 +194,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public int HallowRepelTime;
         public int TurtleCounter;
-        public int TurtleShellHP = 25;
-        public int turtleRecoverCD = 240;
+        public int TurtleShellHP = 1000;
         public bool ShellHide;
         public int ValhallaDashCD;
         public int VortexCD;

@@ -1289,11 +1289,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 HuntressProj = -1;
+                modPlayer.HuntressMissCD = 30;
                 //sound effect
             }
 
@@ -1594,9 +1595,10 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (HuntressProj == 1) //dying without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
+                modPlayer.HuntressMissCD = 30;
                 //Main.NewText("MISS");
                 //sound effect
             }

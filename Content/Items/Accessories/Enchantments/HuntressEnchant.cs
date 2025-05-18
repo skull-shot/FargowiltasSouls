@@ -65,6 +65,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.HuntressCD--;
             }
+            if (modPlayer.HuntressMissCD > 0)
+            {
+                modPlayer.HuntressMissCD--;
+            }
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {

@@ -688,16 +688,12 @@ TurtleEnchant: {
 	DisplayName: Turtle Enchantment
 	Tooltip:
 		'''
-		100% of contact damage is reflected
-		When grounded, not pressing movement keys and not attacking, you will enter your shell
-		While in your shell, you will gain 90% damage reduction 
-		Additionally you will destroy incoming projectiles and deal 10x more thorns damage
-		The shell lasts at least 1 second and up to 20 attacks blocked
-		Enemies will explode into needles on death if they are struck with your needles
-		Grants immunity to cactus damage in Eternity Mode (Works from inventory and vanity)
+		Grants immunity to knockback
+		When standing still, you will enter a shell, reducing damage taken by 80%
+		Taking damage in the shell decreases damage reduction to a minimum of 50%, slowly recovers while not shelled
+		While shelled, resist most debuffs on hit and all projectiles and contact damage are reflected for 500% damage
 		'You suddenly have the urge to hide in a shell'
 		'''
-	VanityTooltip: Grants immunity to cactus damage in Eternity Mode
 }
 
 ValhallaKnightEnchant: {
@@ -854,7 +850,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
-		[i:FargowiltasSouls/TurtleEnchant] 500% of contact damage is reflected
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
 		'Rare is a living thing that dare disobey your will'
 		'''
@@ -1836,7 +1832,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
-		[i:FargowiltasSouls/LifeForce] You reflect contact damage, effects of Hive Pack
+		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, effects of Hive Pack
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
 		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/ShadowForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed

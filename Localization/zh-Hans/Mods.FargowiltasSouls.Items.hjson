@@ -704,7 +704,6 @@ TurtleEnchant: {
 		使你免受永恒模式的仙人掌伤害（在背包和时装栏中也可生效）
 		“你突然有一种想躲进壳里的冲动”
 		'''
-	VanityTooltip: 永恒模式下免疫仙人掌伤害
 }
 
 ValhallaKnightEnchant: {
