@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -36,35 +37,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void AddEffects(Player player, Item item)
         {
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            //player.AddEffect<CactusEffect>(item);
             player.AddEffect<TurtleEffect>(item);
-            if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, true);
-            if (player.HasEffect<TurtleEffect>() && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
-            {
-                modPlayer.TurtleCounter++;
-
-                if (modPlayer.TurtleCounter > 20)
-                {
-                    player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
-                }
-            }
-            else
-            {
-                modPlayer.TurtleCounter = 0;
-            }
-
-            if (modPlayer.TurtleShellHP < 1000 && !modPlayer.ShellHide || player.ForceEffect<TurtleEffect>())
-            {
-                modPlayer.TurtleShellHP++;
-            }
-            if (modPlayer.TurtleShellHP < 0)
-                modPlayer.TurtleShellHP = 0;
-            if (modPlayer.TurtleShellHP > 1000)
-                modPlayer.TurtleShellHP = 1000;
-
-            //Main.NewText($"shell HP: {TurtleShellHP}, counter: {TurtleCounter}, recovery: {turtleRecoverCD}");
+            player.noKnockback = true;
         }
 
         public override void AddRecipes()
@@ -90,6 +64,47 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
     public class TurtleEffect : AccessoryEffect
     {
+        public override bool MutantsPresenceAffects => true;
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, activeFunction: () => player.HasEffect<TurtleEffect>() || player.HasEffectEnchant<TurtleEffect>());
+                FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (!player.HasEffect<LifeForceEffect>() && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+            {
+                modPlayer.TurtleCounter++;
+
+                if (modPlayer.TurtleCounter > 20)
+                {
+                    player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
+                }
+            }
+            else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+            {
+                modPlayer.TurtleCounter++;
+
+                if (modPlayer.TurtleCounter > 40)
+                {
+                        player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
+                }
+            }
+            else
+            {
+                modPlayer.TurtleCounter = 0;
+            }
+
+            if (modPlayer.TurtleShellHP < 1000 && !modPlayer.ShellHide || player.ForceEffect<TurtleEffect>())
+            {
+                modPlayer.TurtleShellHP++;
+            }
+            if (modPlayer.TurtleShellHP < 0)
+                modPlayer.TurtleShellHP = 0;
+            if (modPlayer.TurtleShellHP > 1000)
+               modPlayer.TurtleShellHP = 1000;
+
+            //Main.NewText($"shell HP: {TurtleShellHP}, counter: {TurtleCounter}, recovery: {turtleRecoverCD}");
+        }
+
         public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
             return TurtleDR(player, npc);
