@@ -1,5 +1,6 @@
 using Fargowiltas;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -371,37 +372,84 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.position += npc.velocity * (.5f - flySpeedModifierRatio);
         }
 
+        private void SpawnProbes(NPC npc, int probeCount)
+        {
+            List<NPC> segments = Main.npc.Where(n => n.active && n.realLife == npc.whoAmI && n.type == NPCID.TheDestroyerBody).ToList();
+            Player player = Main.player[npc.target];
+
+            // take 50 closest segments to target as applicable spawn locations
+            segments = segments.OrderBy(n => n.DistanceSQ(player.Center)).ToList();
+            segments = segments.Take(50).ToList();
+
+            // randomize list and spawn some probes from the first few randomly selected segments
+            segments = segments.OrderBy(_ => Main.rand.NextFloat()).ToList();
+            for (int i = 0; i < probeCount; i++)
+            {
+                if (i >= segments.Count - 1)
+                    break;
+                NPC segment = segments[i];
+
+                segment.HitEffect();
+                SoundEngine.PlaySound(SoundID.Item14, segment.Center);
+                segment.GetGlobalNPC<DestroyerSegment>().DisabledTime = 60 * 6;
+                segment.netUpdate = true;
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    FargoSoulsUtil.NewNPCEasy(segment.GetSource_FromAI(), segment.Center, NPCID.Probe);
+                }
+
+                for (int j = 0; j < 11; j++)
+                {
+                    SparkParticle p = new SparkParticle(Main.rand.NextVector2FromRectangle(segment.Hitbox), Main.rand.NextVector2Circular(8, 8), Color.Cyan, 1f, 20, true, Color.DarkBlue);
+                    p.Spawn();
+                }
+            }
+        }
+
+        private void ProbeLasers(int count)
+        {
+            List<NPC> probes = Main.npc.Where(n => n.active && n.type == NPCID.Probe).ToList();
+
+            int max = probes.Count;
+            int attempt = Main.rand.Next(max);
+            int probesActivated = 0;
+            for (int i = 0; i < max; i++)
+            {
+                NPC probe = probes[attempt];
+                if (!probe.GetGlobalNPC<Probe>().ShootLaser)
+                {
+                    probe.GetGlobalNPC<Probe>().ShootLaser = true;
+                    probe.GetGlobalNPC<Probe>().AttackTimer = 0;
+
+                    if (++probesActivated >= count)
+                        break;
+
+                    attempt += Main.rand.Next(max);
+                }
+
+                attempt = (attempt + 1) % max; //start from a random point in the probe collection and try to make one shoot a laser, looping around at end of list
+            }
+        }
+
         private void NonCoilAttacksAI(NPC npc, ref float num15, ref float num16, ref Vector2 target, ref float maxSpeed, ref float flySpeedModifierRatio)
         {
             int MechElectricOrbThreshold = P2_ATTACK_SPACING * 3;
             int laserThreshold = P2_ATTACK_SPACING * 2;
-
+            if (AttackModeTimer == P2_ATTACK_SPACING - 120) // spawn probes
+            {
+                int probeCount = WorldSavingSystem.MasochistModeReal ? 7 : 5;
+                probeCount -= NPC.CountNPCS(NPCID.Probe);
+                if (probeCount > 0)
+                {
+                    SpawnProbes(npc, probeCount);
+                }
+            }
             if (FargoSoulsUtil.HostCheck && AttackModeTimer > P2_ATTACK_SPACING - 120 && AttackModeTimer < P2_ATTACK_SPACING * 2 - 60)
             {
                 int interval = WorldSavingSystem.MasochistModeReal ? 40 : 120;
                 if (AttackModeTimer % interval == 12) //make a probe shoot
                 {
-                    List<NPC> probes = Main.npc.Where(n => n.active && n.type == NPCID.Probe).ToList();
-
-                    int max = probes.Count;
-                    int attempt = Main.rand.Next(max);
-                    int probesActivated = 0;
-                    for (int i = 0; i < max; i++)
-                    {
-                        NPC probe = probes[attempt];
-                        if (!probe.GetGlobalNPC<Probe>().ShootLaser)
-                        {
-                            probe.GetGlobalNPC<Probe>().ShootLaser = true;
-                            probe.GetGlobalNPC<Probe>().AttackTimer = 0;
-
-                            if (++probesActivated >= 2)
-                                break;
-
-                            attempt += Main.rand.Next(max);
-                        }
-
-                        attempt = (attempt + 1) % max; //start from a random point in the probe collection and try to make one shoot a laser, looping around at end of list
-                    }
+                    ProbeLasers(2);
                 }
             }
 
@@ -692,6 +740,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (!InPhase2)
             {
+                AttackModeTimer++;
+                if (NPC.CountNPCS(NPCID.Probe) < 2 && AttackModeTimer % 120 == 0)
+                {
+                    SpawnProbes(npc, 1);
+                }
+                if (AttackModeTimer % 120 == 80) // make a probe shoot
+                {
+                    ProbeLasers(1);
+                }
                 if (npc.life < (int)(npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.95 : .75)))
                 {
                     InPhase2 = true;
@@ -806,6 +863,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int ProbeReleaseTimer;
         public int IntangibleTimer;
         public bool GoIntangibleAfterCoil;
+        public int DisabledTime;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -814,6 +872,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(ProjectileCooldownTimer);
             binaryWriter.Write7BitEncodedInt(AttackTimer);
             binaryWriter.Write7BitEncodedInt(ProbeReleaseTimer);
+            binaryWriter.Write7BitEncodedInt(DisabledTime);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -823,6 +882,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             ProjectileCooldownTimer = binaryReader.Read7BitEncodedInt();
             AttackTimer = binaryReader.Read7BitEncodedInt();
             ProbeReleaseTimer = binaryReader.Read7BitEncodedInt();
+            DisabledTime = binaryReader.Read7BitEncodedInt();
         }
 
         public override void SetDefaults(NPC npc)
@@ -844,6 +904,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
+
+            if (npc.type == NPCID.TheDestroyerBody || npc.type == NPCID.TheDestroyerTail)
+            {
+                npc.ai[2] = 1; // set to "probe deployed" state; no natural probes
+                if (DisabledTime > 0)
+                    DisabledTime--;
+            }
 
             if (IntangibleTimer > 0)
                 IntangibleTimer--;
@@ -917,68 +984,28 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (AttackTimer > 1000)
                     AttackTimer = 1000;
             }
-
-            if (npc.ai[2] == 0) //shoot lasers
+            int rarity = 5200;
+            if (AttackTimer == 0)
+                AttackTimer = Main.rand.Next(rarity - 60);
+            AttackTimer += Main.rand.Next(3);
+            if (AttackTimer >= Main.rand.Next(rarity, 36000))
             {
-                if (++ProbeReleaseTimer > 60)
+                AttackTimer = 1;
+                npc.TargetClosest();
+                if (FargoSoulsUtil.HostCheck)
                 {
-                    ProbeReleaseTimer = -Main.rand.Next(360);
-                    float lifeThreshold = WorldSavingSystem.MasochistModeReal ? 0.8f : 0.4f;
-                    if (Main.npc[npc.realLife].life < Main.npc[npc.realLife].lifeMax * lifeThreshold && NPC.CountNPCS(NPCID.Probe) < 10 && FargoSoulsUtil.HostCheck)
-                    {
-                        if (Main.rand.NextBool(WorldSavingSystem.MasochistModeReal ? 5 : 10)) //higher chance in maso
-                        {
-                            npc.ai[2] = 1;
-                            npc.HitEffect();
-                            npc.netUpdate = true;
+                    Vector2 distance = Main.player[npc.target].Center - npc.Center;
 
-                            FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.Probe);
-                        }
-                    }
-                }
+                    float modifier = 28f * (1f - (float)Main.npc[npc.realLife].life / Main.npc[npc.realLife].lifeMax);
+                    if (modifier < 12)
+                        modifier = 12;
 
-                AttackTimer += Main.rand.Next(6);
-                if (AttackTimer > Main.rand.Next(1200, 22000)) //replacement for vanilla lasers
-                {
-                    AttackTimer = 0;
-                    npc.TargetClosest();
-                    if (Collision.CanHit(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0) && FargoSoulsUtil.HostCheck)
-                    {
-                        float speed = 2f + npc.Distance(Main.player[npc.target].Center) / 360;
-                        if (speed > 16f)
-                            speed = 16f;
-                        int p = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed * npc.SafeDirectionTo(Main.player[npc.target].Center), ProjectileID.DeathLaser, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
-                        if (p != Main.maxProjectiles)
-                            Main.projectile[p].timeLeft = Math.Min((int)(npc.Distance(Main.player[npc.target].Center) / speed) + 180, 600);
-                    }
-                    npc.netUpdate = true;
-                }
-            }
-            else //light is out, shoot Electric Orb
-            {
-                int cap = Main.npc[npc.realLife].lifeMax / Main.npc[npc.realLife].life;
-                if (cap > 20) //prevent meme scaling at super low life
-                    cap = 20;
-                AttackTimer += Main.rand.Next(2 + cap) + 1;
-                if (AttackTimer >= Main.rand.Next(3600, 36000))
-                {
-                    AttackTimer = 0;
-                    npc.TargetClosest();
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        Vector2 distance = Main.player[npc.target].Center - npc.Center;
+                    int delay = (int)(distance.Length() / modifier) / 2;
+                    if (delay < 0)
+                        delay = 0;
 
-                        float modifier = 28f * (1f - (float)Main.npc[npc.realLife].life / Main.npc[npc.realLife].lifeMax);
-                        if (modifier < 12)
-                            modifier = 12;
-
-                        int delay = (int)(distance.Length() / modifier) / 2;
-                        if (delay < 0)
-                            delay = 0;
-
-                        int type = ModContent.ProjectileType<MechElectricOrbHoming>();
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Normalize(distance) * modifier, type, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, npc.target, -delay, ai2: MechElectricOrb.Blue);
-                    }
+                    int type = ModContent.ProjectileType<MechElectricOrbHoming>();
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Normalize(distance) * modifier, type, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, npc.target, -delay, ai2: MechElectricOrb.Blue);
                 }
             }
 
@@ -1099,6 +1126,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             LoadNPCSprite(recolor, npc.type);
         }
+        public override void FindFrame(NPC npc, int frameHeight)
+        {
+            if (npc.type == NPCID.TheDestroyerBody ||npc.type == NPCID.TheDestroyerTail) // segments always active
+            {
+                if (DisabledTime > 0)
+                {
+                    npc.frame.Y = frameHeight;
+                    int[] blinkTimes = [10, 20, 40, 60, 90, 130, 170, 220];
+                    foreach (int i in blinkTimes)
+                    {
+                        if (Math.Abs(DisabledTime - i) < 5)
+                            npc.frame.Y = 0;
+                    }
+                }
+                else
+                    npc.frame.Y = 0;
+            }
+            base.FindFrame(npc, frameHeight);
+        }
     }
 
     public class Probe : EModeNPCBehaviour
@@ -1113,6 +1159,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public bool ShootLaser;
 
+        public int FallingState;
 
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
@@ -1164,6 +1211,38 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
+
+            if (FallingState > 0)
+            {
+                npc.dontTakeDamage = true;
+                npc.velocity.X *= 0.96f;
+                npc.velocity.Y += 0.7f;
+                npc.rotation += npc.velocity.X / 30;
+                if (Collision.SolidCollision(npc.position, npc.width, npc.height))
+                {
+                    FallingState = 2;
+                    npc.life = 0;
+                    npc.HitEffect();
+                    npc.checkDead();
+                }
+                    
+
+                if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.destroyBoss, NPCID.TheDestroyer))
+                {
+                    List<NPC> segments = Main.npc.Where(n => n.type is NPCID.TheDestroyer or NPCID.TheDestroyerBody or NPCID.TheDestroyerTail).ToList();
+                    segments = segments.OrderBy(n => n.DistanceSQ(npc.Center)).ToList();
+                    NPC closestSegment = segments[0];
+                    if (closestSegment.Hitbox.Intersects(npc.Hitbox))
+                    {
+                        FallingState = 2;
+                        closestSegment.SimpleStrikeNPC(npc.lifeMax, (int)npc.HorizontalDirectionTo(closestSegment.Center));
+                        npc.life = 0;
+                        npc.HitEffect();
+                        npc.checkDead();
+                    }
+                }
+                return false;
+            }
 
             if (!FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.destroyBoss, NPCID.TheDestroyer))
                 return result;
@@ -1282,6 +1361,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
+            if (FallingState < 2)
+            {
+                if (FallingState == 0)
+                    npc.velocity *= 0.7f;
+                npc.dontTakeDamage = true;
+                FallingState = 1;
+                npc.life = 1;
+                npc.active = true;
+                return false;
+            }
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.destroyBoss, NPCID.TheDestroyer))
             {
                 npc.active = false;
