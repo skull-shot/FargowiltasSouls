@@ -1231,9 +1231,9 @@ GelicWings: {
 	/* Tooltip:
 		'''
 		Allows flight and slow fall
+		While flying, crystal spikes leak from your wings
+		Allows the wearer to double jump, spawning more crystal spikes
 		Grants immunity to Illuminated caused by the Underground Hallow
-		Allows the wearer to double jump
-		When you land after a jump, slime spikes shoot out to your sides
 		'Step on me'
 		''' */
 }
@@ -1454,7 +1454,7 @@ PureHeart: {
 		[i:FargowiltasSouls/GuttedHeart] Up to 3 creepers hover around you blocking some damage, respawning faster when not moving
 		[i:FargowiltasSouls/GuttedHeart] Gives 10% increased max life
 		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump
-		[i:FargowiltasSouls/GelicWings] When you land after a jump, slime spikes shoot out to the sides
+		[i:FargowiltasSouls/GelicWings] Flying leaks crystal spikes
 		[i:FargowiltasSouls/GelicWings] Increases wing time by 30%
 		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.12x damage
 		[i:FargowiltasSouls/PungentEyeball] Massively increases spawn rate of rare enemies
