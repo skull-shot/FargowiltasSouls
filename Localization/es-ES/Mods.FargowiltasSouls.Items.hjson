@@ -690,7 +690,7 @@ TurtleEnchant: {
 		'''
 		Grants immunity to knockback
 		When standing still, you will enter a shell, reducing damage taken by 80%
-		Taking damage in the shell decreases damage reduction to a minimum of 50%, slowly recovers while not shelled
+		Taking damage in the shell decreases damage reduction to a minimum of 40%, slowly recovers while not shelled
 		While shelled, resist most debuffs on hit and all projectiles and contact damage are reflected for 500% damage
 		'You suddenly have the urge to hide in a shell'
 		''' */
