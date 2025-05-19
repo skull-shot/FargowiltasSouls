@@ -21,7 +21,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.DamageType = DamageClass.Ranged;
             Item.width = 22;
             Item.height = 22;
-            Item.damage = (int)(22 * 22 * 2.2);
+            Item.damage = (int)(22 * 22 * 2.2 / 1.44); //ruined the bit im sorry
+            Item.crit = 18; //22 with 4% base crit
             Item.useTime = 22 * 2;
             Item.useAnimation = 22 * 2;
             Item.useStyle = ItemUseStyleID.Shoot;

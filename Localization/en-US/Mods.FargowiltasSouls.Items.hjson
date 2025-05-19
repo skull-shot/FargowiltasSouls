@@ -846,7 +846,8 @@ LifeForce: {
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] The flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time when touched
+		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance

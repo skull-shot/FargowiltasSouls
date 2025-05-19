@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             Enchants[Type] =
             [
+                ModContent.ItemType<CactusEnchant>(),
                 ModContent.ItemType<PumpkinEnchant>(),
                 ModContent.ItemType<BeeEnchant>(),
                 ModContent.ItemType<SpiderEnchant>(),
@@ -29,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<LifeForceEffect>(Item);
             modPlayer.LifeForceActive = true;
             // Cactus Enchant
-            //player.AddEffect<CactusEffect>(Item);
+            player.AddEffect<CactusEffect>(Item);
             // Pumpkin Enchant
             if (!player.HasEffect<LifeForceEffect>())
                 player.AddEffect<PumpkinEffect>(Item);

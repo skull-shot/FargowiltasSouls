@@ -1,6 +1,8 @@
 ﻿using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -81,7 +83,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            BeeSwarm();
+            if (Projectile.ai[1] == 1)
+                BeeSwarm();
+            else if (Projectile.ai[2] == 1)
+                CactusBomb();
         }
         public override void OnKill(int timeLeft)
         {
@@ -105,6 +110,29 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                         Main.projectile[p].extraUpdates = 10;
                 }
                     
+            }
+        }
+        public void CactusBomb()
+        {
+            Player player = Main.player[Main.myPlayer];
+            if (player.HasEffect<CactusEffect>())
+            {
+                for (int i = 0; i < 24; i++)
+                {
+                    int spread = (int)MathHelper.Lerp(0.9f, 4.5f, i);
+                    Vector2 pos = Main.rand.NextVector2FromRectangle(Projectile.Hitbox);
+                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.UnitX.RotatedBy(spread + Main.rand.NextFloat(-0.2f, 0.2f)) * (4 + Main.rand.NextFloat(-0.5f, 0.5f)) * 4, ModContent.ProjectileType<CactusNeedle>(), Projectile.damage, 5f);
+                    if (p != Main.maxProjectiles)
+                    {
+                        Projectile proj = Main.projectile[p];
+                        if (proj != null && proj.active)
+                        {
+                            proj.usesIDStaticNPCImmunity = false;
+                            proj.penetrate = 1;
+                        }
+
+                    }
+                }
             }
         }
     }
