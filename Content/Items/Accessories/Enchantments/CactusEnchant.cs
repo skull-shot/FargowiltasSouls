@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void TryAdditionalAttacks(Player player, int damage, DamageClass damageType)
         {
-            if (player.whoAmI != Main.myPlayer)
+            if (player.whoAmI != Main.myPlayer || !HasEffectEnchant(player))
                 return;
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();
