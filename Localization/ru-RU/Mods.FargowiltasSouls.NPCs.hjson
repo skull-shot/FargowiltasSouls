@@ -42,7 +42,7 @@ EarthChampion: {
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.EarthChampion.DisplayName}"
-		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/SigilOfChampions] в преисподней.
+		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/SigilOfChampions] в Преисподней.
 		DespawnMessage: Чемпион Земли скрывается под магмой...
 	}
 }
@@ -290,7 +290,7 @@ DeviBoss: {
 		Accept3: Ай, к чёрту! Но это наш маленький секрет, ладно?
 		Reject1: Покажи, что ты силён, и я не буду против, но ни секундой раньше!
 		Reject2: Вот, забери обратно.
-		Reject3: А теперь же вернёмся к нашим баранам!
+		Reject3: А теперь, продолжим же наше выступление!
 	}
 }
 

@@ -107,7 +107,7 @@ GladiatorBanner: {
 
 PalmwoodEffect: {
 	DisplayName: Часовой-пальма
-	Tooltip: Ставит часового-пальму, кидающего кокосы и бананы во врагов
+	Tooltip: Ставит часового-пальму, кидающего фрукты во врагов
 }
 
 SpookyEffect: {
