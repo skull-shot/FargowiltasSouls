@@ -109,6 +109,7 @@ namespace FargowiltasSouls
                     || modPlayer.ShellHide
                     || modPlayer.MonkDashing > 0
                     || modPlayer.TitaniumDRBuff)
+                && modPlayer.TurtleShellHP > 0
                 && DebuffIDs.Contains(type))
             {
                 return; //doing it this way so that debuffs previously had are retained, but existing debuffs also cannot be extended by reapplying
