@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             if (player.FargoSouls().MasochistSoul)
                 dam *= 2;
             Vector2 vel = pos.DirectionTo(player.Center).RotatedByRandom(MathHelper.PiOver2 * 0.7f) * Main.rand.NextFloat(6, 10);
-            int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, (int)(dam * player.ActualClassDamage(DamageClass.Melee)), 1.75f, player.whoAmI);
+            int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, (int)(dam * player.ActualClassDamage(DamageClass.Generic)), 1.75f, player.whoAmI);
             if (p.IsWithinBounds(Main.maxProjectiles))
             {
                 Main.projectile[p].DamageType = DamageClass.Default;

@@ -1379,8 +1379,8 @@ namespace FargowiltasSouls.Core.Globals
                 modifiers.ArmorPenetration += 20;
             if (CurseoftheMoon)
                 modifiers.ArmorPenetration += 10;
-            if (Rotting)
-                modifiers.ArmorPenetration += 10;
+            //if (Rotting)
+            //    modifiers.ArmorPenetration += 10;
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;
             if (Smite)
