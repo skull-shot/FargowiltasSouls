@@ -2209,9 +2209,9 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: Сломанная гарда
-	Tooltip: ""
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }
 
 EternityAdvisor: {
@@ -3785,4 +3785,9 @@ TrojanMask: {
 WillMask: {
 	DisplayName: Маска чемпиона Воли
 	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }

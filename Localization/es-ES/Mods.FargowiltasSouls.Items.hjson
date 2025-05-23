@@ -2218,8 +2218,8 @@ EternalEnergy: {
 		''' */
 }
 
-PhantasmalEnergy: {
-	// DisplayName: Broken Shaft
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
 
@@ -3796,5 +3796,10 @@ TrojanMask: {
 
 WillMask: {
 	// DisplayName: Will Champion Mask
+	// Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }

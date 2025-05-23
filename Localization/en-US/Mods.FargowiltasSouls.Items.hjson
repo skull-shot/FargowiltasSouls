@@ -3777,3 +3777,8 @@ WillMask: {
 	DisplayName: Will Champion Mask
 	Tooltip: ""
 }
+
+BrokenSpearhead: {
+	DisplayName: Broken Spearhead
+	Tooltip: ""
+}

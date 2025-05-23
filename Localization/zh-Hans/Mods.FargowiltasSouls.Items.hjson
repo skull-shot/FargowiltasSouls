@@ -2220,9 +2220,9 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: 破损的剑柄
-	Tooltip: ""
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }
 
 EternityAdvisor: {
@@ -3801,4 +3801,9 @@ TrojanMask: {
 WillMask: {
 	DisplayName: 意志英灵面具
 	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }

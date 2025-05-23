@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.netImportant = true;
-            Projectile.scale = .5f;
+            Projectile.scale = 1f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
