@@ -1434,8 +1434,8 @@ PungentEyeball: {
 		'''
 		Grants immunity to Blackout and Obstructed
 		Increases spawn rate of rare enemies
-		Your cursor causes nearby enemies to take up to 1.12x damage
-		Effect intensifies the longer you track them
+		Your cursor gains an aura that reduces enemy defense
+		Defense reduction intensifies the longer you track them, up to half of enemy defense
 		'It's fermenting'
 		'''
 }

@@ -1400,7 +1400,11 @@ namespace FargowiltasSouls.Core.Globals
 
             if (PungentGazeTime > 0)
             {
-                modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
+                float def = npc.defense/2;
+                if (def > 50)
+                    def = 50;
+                modifiers.ArmorPenetration += def * PungentGazeTime / PungentGazeBuff.MAX_TIME;
+                //modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
             }
 
             //            //if (modPlayer.KnightEnchant && Villain && !npc.boss)
