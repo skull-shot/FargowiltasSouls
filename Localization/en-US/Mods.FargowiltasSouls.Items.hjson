@@ -1483,7 +1483,8 @@ SandsofTime: {
 	DisplayName: Sands of Time
 	Tooltip:
 		'''
-		Works from inventory and vanity slots
+		4% increased damage when equipped
+		Works from inventory and vanity slots:
 		Grants immunity to Mighty Wind and cactus damage
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point

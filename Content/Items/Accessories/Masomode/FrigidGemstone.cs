@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 4);
+            Item.defense = 3;
         }
 
         public static void PassiveEffects(Player player, Item item)

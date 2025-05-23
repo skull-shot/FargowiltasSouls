@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 {
@@ -38,7 +39,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateInventory(Player player) => PassiveEffects(player);
         public override void UpdateVanity(Player player) => PassiveEffects(player);
-        public override void UpdateAccessory(Player player, bool hideVisual) => ActiveEffects(player);
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            player.GetDamage(DamageClass.Generic) += 0.04f;
+            ActiveEffects(player);
+        }
 
         public static void Use(Player player)
         {
