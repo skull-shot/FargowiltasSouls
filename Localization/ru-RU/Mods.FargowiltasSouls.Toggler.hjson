@@ -23,8 +23,9 @@ PalladiumEffect: Палладиевые сферы
 TitaniumEffect: Титановые осколки
 EarthForceEffect: Сжатый артефакт Земли
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
-CopperEffect: Медная молния
-IronEffect: Железный магнит
+CopperEffect: Молния меди
+IronPassiveEffect: Перековки железа
+IronEffect: Магнит железа
 LeadPoisonEffect: Свинцовое отравление
 SilverEffect: Парирование серебра
 TinEffect: Криты олова

@@ -1,6 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Updated Nullification Curse description
-Tweaked Iron Enchant description to clarify pickups being specifically pickup items
-Updated Children of Nature's Eulogy buff name
-Fixed Voltaic Chain not working correctly in multiplayer
-Fixed Rain Explosion still dealing damage with Lightning Immunity and Force of Nature not granting it passively
+Improved the behavior of Low Ground and Slimy Shield fallthrough using more complex code
+Saucer Control Console: Right click now takes priority when both are held instead of not firing anything
+Eternity Mode now prevents Gills Potion from causing drowning in FTW
+Added a config to disable respawn prevention in Masochist Mode, and added toggle to add it to Eternity aswell
+Updated localization and fixed some text issues

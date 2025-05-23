@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             player.noKnockback = true;
-            player.endurance = .9f;
+            player.endurance += 0.9f;
             player.thorns *= 10;
 
             modPlayer.ShellHide = true;

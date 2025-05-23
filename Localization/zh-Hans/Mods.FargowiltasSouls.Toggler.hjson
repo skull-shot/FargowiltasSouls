@@ -24,6 +24,7 @@ TitaniumEffect: 钛金 碎片
 EarthForceEffect: 简化大地之力
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
 CopperEffect: 铜 闪电
+IronPassiveEffect: 铁 改善重铸
 IronEffect: 铁 吸引掉落物
 LeadPoisonEffect: 铅 中毒
 SilverEffect: 银 护盾

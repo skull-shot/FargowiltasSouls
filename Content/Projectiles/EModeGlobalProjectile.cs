@@ -380,7 +380,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.PygmySpear:
-                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
+                    if (sourceProj is Projectile && EmodeItemBalance.HasEmodeChange(Main.player[sourceProj.owner], ItemID.PygmyStaff))
                     {
                         if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
                         {
@@ -1222,6 +1222,8 @@ namespace FargowiltasSouls.Content.Projectiles
         private int FadeTimer = 0;
         public override void PostAI(Projectile projectile)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
@@ -1299,6 +1301,19 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
+                    break;
+                case ProjectileID.MoonlordTurretLaser:
+                    modifiers.FinalDamage *= 0.5f;
+                    break;
+                case ProjectileID.RainbowCrystalExplosion:
+                    modifiers.FinalDamage *= 0.6f;
+                    break;
+                case ProjectileID.Tempest:
+                case ProjectileID.MiniSharkron:
+                    modifiers.FinalDamage *= 1.2f;
+                    break;
+                case ProjectileID.HoundiusShootiusFireball:
+                    modifiers.FinalDamage *= 1.2f;
                     break;
             }
 

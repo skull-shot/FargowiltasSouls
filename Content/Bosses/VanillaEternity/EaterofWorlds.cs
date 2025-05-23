@@ -509,7 +509,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case Attacks.Coil:
                     {
 
-                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 40 : 55; // time between dives
+                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 60 : 80; // time between dives
                         float spinSeconds = 3f; // seconds per full spin
 
                         float spinFrames = spinSeconds * 60f;
@@ -559,7 +559,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                 }
                             }
-                            int diveTimer = SpecialAITimer2 + 25;
+                            int diveTimer = SpecialAITimer2 + 65;
                             if (diveTimer > diveDelay && diveTimer % diveDelay == 0)
                             {
                                 List<NPC> coilingHeads = [];
