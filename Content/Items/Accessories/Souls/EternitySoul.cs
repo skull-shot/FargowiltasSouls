@@ -14,6 +14,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI.Chat;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {

@@ -26,6 +26,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using Terraria;
 using Terraria.DataStructures;
@@ -1074,7 +1075,22 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.EaterofWorldsHead,
             NPCID.EaterofWorldsTail
         ];
+        public static MethodInfo NPCLoot_DropItems = typeof(NPC).GetMethod("NPCLoot_DropItems", LumUtils.UniversalBindingFlags);
+        public static MethodInfo NPCLoot_DropMoney = typeof(NPC).GetMethod("NPCLoot_DropMoney", LumUtils.UniversalBindingFlags);
+        public static MethodInfo NPCLoot_DropHeals = typeof(NPC).GetMethod("NPCLoot_DropHeals", LumUtils.UniversalBindingFlags);
+        public static void DropLoot(NPC npc) // actual NPCLoot without running other on kill methods
+        {
+            // copied from NPCLoot
+            // unnecessary from OnKill but still
+            if (Main.netMode == NetmodeID.MultiplayerClient || (Main.getGoodWorld && !NPC.downedBoss3 && 
+                (npc.type == NPCID.AngryBones || npc.type == NPCID.AngryBonesBig || npc.type == NPCID.AngryBonesBigHelmet || npc.type == NPCID.AngryBonesBigMuscle || npc.type == NPCID.DarkCaster || npc.type == NPCID.CursedSkull || npc.type == NPCID.DungeonSlime)))
+                return;
 
+            Player closestPlayer = Main.player[Player.FindClosest(npc.position, npc.width, npc.height)];
+            NPCLoot_DropItems.Invoke(npc, [closestPlayer]);
+            NPCLoot_DropMoney.Invoke(npc, [closestPlayer]);
+            NPCLoot_DropHeals.Invoke(npc, [closestPlayer]);
+        }
         public override void OnKill(NPC npc)
         {
             Player player = Main.player[npc.lastInteraction];
@@ -1094,10 +1110,10 @@ namespace FargowiltasSouls.Core.Globals
                     if (SinisterIconBoss(npc))
                     {
                         if (npc.FargoSouls().SinisterIconFullFight)
-                            npc.NPCLoot();
+                            DropLoot(npc);
                     }
                     else
-                        npc.NPCLoot();
+                        DropLoot(npc);
                 }
 
                 if (player.FargoSouls().PlatinumEffect != null && !npc.boss)
@@ -1111,7 +1127,7 @@ namespace FargowiltasSouls.Core.Globals
                         npc.extraValue /= repeats;
 
                         for (int i = 0; i < repeats - 1; i++)
-                            npc.NPCLoot();
+                            DropLoot(npc);
                     }
                 }
             }

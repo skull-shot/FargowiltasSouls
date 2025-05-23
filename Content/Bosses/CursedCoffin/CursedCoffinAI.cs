@@ -423,14 +423,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 			ref float Counter = ref AI2;
 
 			NPC.noTileCollide = (NPC.Bottom.Y + NPC.velocity.Y < Player.Bottom.Y - 16);
-
-
-
             if (Timer >= 0)
 			{
-				//if (Timer < 15) // no funny double hits from weird terrain
-				//  NPC.noTileCollide = true;
-
 				NPC.velocity.X *= 0.97f;
                 float speedUp = Counter == 2 ? 0.35f : 0.2f;
                 if (WorldSavingSystem.EternityMode)

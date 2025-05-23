@@ -384,5 +384,16 @@ namespace FargowiltasSouls.Core.Systems
             }
         }
         public static bool CanActuallyPlayMaso => (FargoSoulsUtil.WorldIsMaster() && CanPlayMaso) || Main.zenithWorld;
+
+        public override void ModifyLightingBrightness(ref float scale)
+        {
+            /*
+            if (Main.LocalPlayer.FargoSouls().Illuminated)
+            {
+                if (scale < 1.08f)
+                    scale += 0.08f;
+            }
+            */
+        }
     }
 }

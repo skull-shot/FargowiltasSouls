@@ -31,6 +31,9 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
             drawPosition += new Vector2(-9, -7) * drawinfo.drawPlayer.Directions;
 
+            //Main.NewText(drawPosition.Floor());
+            //Main.NewText(drawinfo.Position.Floor());
+
             Texture2D wingTexture = TextureAssets.Wings[drawinfo.drawPlayer.wings].Value;
 
             int frameCount = 5;

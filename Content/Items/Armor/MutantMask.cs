@@ -1,6 +1,7 @@
 ﻿using Fargowiltas.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -40,6 +41,8 @@ namespace FargowiltasSouls.Content.Items.Armor
 
             player.manaCost -= 0.25f;
             player.ammoCost75 = true;
+
+            
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

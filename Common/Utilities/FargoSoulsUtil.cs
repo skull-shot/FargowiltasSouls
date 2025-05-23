@@ -665,7 +665,7 @@ namespace FargowiltasSouls //lets everything access it without using
             return source is EntitySource_ItemUse parent && parent.Item.type == Main.player[proj.owner].HeldItem.type;
         }
 
-        public static bool AprilFools => DateTime.Today.Month == 4 && DateTime.Today.Day <= 7;
+        public static bool AprilFools => DateTime.Today.Month == 4 && DateTime.Today.Day <= 1;
         public static string TryAprilFoolsTexture => AprilFools ? "_April" : "";
 
         public static void ScreenshakeRumble(float strength)

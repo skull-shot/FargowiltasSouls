@@ -1364,50 +1364,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 RuneFormation = Formations.Circle;
                 RuneFormationTimer = 0;
             }
-
-            /*
-            Vector2 RouletteTpPos = Player.Center + 500 * RandomAngle.ToRotationVector2();
-            TeleportX = RouletteTpPos.X; //exposing so proj can access
-            TeleportY = RouletteTpPos.Y;
-
-            if (AI_Timer == 1 && FargoSoulsUtil.HostCheck)
-            {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), RouletteTpPos, Vector2.Zero, ModContent.ProjectileType<LifeTpTelegraph>(), 0, 0f, Main.myPlayer, -40, NPC.whoAmI);
-            }
-
-            if (AI_Timer == 40)
-            {
-                NPC.Center = RouletteTpPos;
-                SoundEngine.PlaySound(SoundID.Item8, NPC.Center); //PLACEHOLDER
-                LockVector1 = NPC.SafeDirectionTo(Player.Center);
-                TeleportY = 0;
-                NPC.netUpdate = true;
-            }
-            */
-
-            /*
-            if (AI_Timer > 40)
-            {
-                float angleDiff = MathHelper.WrapAngle(NPC.SafeDirectionTo(Player.Center).ToRotation() - LockVector1.ToRotation());
-                if (Math.Abs(angleDiff) > MathHelper.Pi / 3f)
-                {
-                    LockVector1 = NPC.SafeDirectionTo(Player.Center);
-                    NPC.netUpdate = true;
-                }
-            }
-
-            if (AI_Timer < 420 + 120 && AI_Timer % 9 == 0 && AI_Timer > 60 && FargoSoulsUtil.HostCheck)
-            {
-                const float speed = 20f;
-                Vector2 offset1 = LockVector1.RotatedBy(MathHelper.Pi / 3f) * speed;
-                Vector2 offset2 = LockVector1.RotatedBy(-MathHelper.Pi / 3f) * speed;
-
-                TeleportY++;
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, offset1, ModContent.ProjectileType<LifeProjSmall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, 0, 3);
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, offset2, ModContent.ProjectileType<LifeProjSmall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, 0, 4);
-            }
-            */
-
             Vector2 desiredPos = Player.Center + Player.DirectionTo(NPC.Center) * 320;
             FlyingState(0.55f, false, desiredPos);
 

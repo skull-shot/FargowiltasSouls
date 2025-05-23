@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Armor
             player.GetDamage(DamageClass.Generic) += 0.10f;
             player.GetCritChance(DamageClass.Generic) += 5;
 
-            player.maxMinions += 4;
+            player.maxMinions += 1;
             player.maxTurrets += 1;
         }
 
@@ -71,6 +71,8 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.EridanusSet = true;
+            player.statManaMax2 += 30;
+            player.maxMinions += 3;
 
             //if (player.whoAmI == Main.myPlayer && fargoPlayer.DoubleTap)
             //fargoPlayer.EridanusEmpower = !fargoPlayer.EridanusEmpower;
@@ -142,9 +144,6 @@ namespace FargowiltasSouls.Content.Items.Armor
 
                     if (player.HeldItem.CountsAsClass(damageClass))
                         fargoPlayer.AttackSpeed += .3f;
-
-                    if (damageClass == DamageClass.Magic)
-                        player.statManaMax2 += 30;
                 }
 
                 switch (fargoPlayer.EridanusTimer / ClassDuration) //damage boost according to current class

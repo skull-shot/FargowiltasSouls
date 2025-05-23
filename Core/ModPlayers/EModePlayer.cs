@@ -46,7 +46,22 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Respawns = 0;
         }
 
-        public bool PreventRespawn() => WorldSavingSystem.MasochistModeReal && LumUtils.AnyBosses() && Respawns >= 2;
+        public bool PreventRespawn()
+        {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+                return false;
+            bool diff;
+            var mode = SoulConfig.Instance.MultiplayerRespawnPrevention;
+
+            if (mode == RespawnPreventionSetting.Masochist)
+                diff = WorldSavingSystem.MasochistModeReal;
+            else if (mode == RespawnPreventionSetting.Eternity)
+                diff = WorldSavingSystem.EternityMode;
+            else
+                diff = false;
+
+            return diff && LumUtils.AnyBosses() && Respawns >= 2;
+        }
         public override void UpdateDead()
         {
             ResetEffects();

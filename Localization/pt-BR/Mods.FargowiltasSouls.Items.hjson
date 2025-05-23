@@ -50,7 +50,6 @@ ApprenticeEnchant: {
 		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
-		Flameburst field of view and range are dramatically increased
 		'A long way to perfection'
 		''' */
 }
@@ -175,7 +174,6 @@ DarkArtistEnchant: {
 		The support weapon will fire 1/5 as often as they would normally
 		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
-		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -619,7 +617,6 @@ SquireEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 10 defense, a fart jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
-		Ballista pierces more targets and panics when you take damage
 		'Squire, will you hurry?'
 		''' */
 }
@@ -703,7 +700,6 @@ ValhallaKnightEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
 		Increases the effectiveness of healing sources by 15%
-		Greatly enhances Ballista effectiveness
 		'Valhalla calls'
 		''' */
 }
@@ -1737,7 +1733,7 @@ DimensionSoul: {
 		Oferece a capacidade de habilitar o Modo do Construtor
 		Efeitos do Cérebro da Confusão, Véu das Estrelas, Colar da Amada, Manto de Abelhas, Bolsa de Esporos e Pedra Brilhante
 		Efeitos do Escudo do Paladino, Casco de Tartaruga Congelada, Equipamento de Mergulho Ártico, Perna de Rã e Tapete Mágico
-		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra, Telefone Celular e Globo da Gravidade
+		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra e Globo da Gravidade
 		Efeitos do Escudo de Cthulhu e Equipamento de Mestre Ninja
 		'As dimensões do Terraria na ponta de seus dedos'
 		'''
@@ -1907,7 +1903,7 @@ WorldShaperSoul: {
 		Qualquer coisa que crie uma peça não será consumida e pode ser usada muito mais rápido
 		Nenhum inimigo pode surgir
 		O efeito pode ser desativado no menu de Alternância de Almas
-		Efeitos do Telefone Celular e Gel Real
+		Efeitos do Gel Real
 		Invoca uma Lanterna Mágica de estimação
 		'Possibilidades ilimitadas'
 		'''
@@ -1952,8 +1948,9 @@ EridanusHat: {
 		'''
 		5% de aumento nos danos
 		5% de aumento na chance de acerto crítico
-		Aumenta o número máximo de lacaios em 4
-		Aumenta o número máximo de sentinelas em 4
+		Increases max mana by 30
+		Aumenta o número máximo de lacaios em 1
+		Aumenta o número máximo de sentinelas em 1
 		'''
 }
 
@@ -2034,7 +2031,7 @@ NekomiHood: {
 	Tooltip:
 		'''
 		7% de aumento nos danos
-		Aumenta o número máximo de lacaios em 2
+		Aumenta o número máximo de lacaios em 1
 		'''
 }
 

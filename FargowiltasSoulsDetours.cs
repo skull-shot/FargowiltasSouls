@@ -33,31 +33,46 @@ namespace FargowiltasSouls
 
         public void LoadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName += AffixName;
-            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning += PreventGillsDrowning;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot += InterruptShoot;
-            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
-            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
+
+            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName += AffixName;
+
             On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
         }
         public void UnloadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName -= AffixName;
-            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning -= PreventGillsDrowning;
+            On_Player.HorsemansBlade_SpawnPumpkin -= HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot -= InterruptShoot;
-            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+
+            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName -= AffixName;
+
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY -= AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
         }
 
 
@@ -221,7 +236,8 @@ namespace FargowiltasSouls
                 // draw our maso you can't respawn text
                 num += 60;
                 num2 = 0.5f;
-                string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn");
+                string mode = WorldSavingSystem.MasochistModeReal ? Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMode") : Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityMode");
+                string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn", mode);
                 DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text, 
                     new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
@@ -322,6 +338,21 @@ namespace FargowiltasSouls
                 num++;
             }
             return num;
+        }
+
+        private static void PreventGillsDrowning(On_Player.orig_CheckDrowning orig, Player player)
+        {
+            bool hadGills = false;
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            {
+                hadGills = player.gills;
+                player.gills = false;
+            }
+            orig(player);
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            {
+                player.gills = hadGills;
+            }
         }
     }
 }
