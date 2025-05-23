@@ -14,10 +14,12 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -1154,13 +1156,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int OrbitChangeTimer;
         public int OrbitDirection;
         public int AttackTimer;
+        public int GlowmaskFadeTimer;
 
         public float TargetOrbitRotation;
 
         public bool ShootLaser;
 
         public int FallingState;
-
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -1169,6 +1171,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(OrbitChangeTimer);
             binaryWriter.Write7BitEncodedInt(OrbitDirection);
             binaryWriter.Write7BitEncodedInt(AttackTimer);
+            binaryWriter.Write7BitEncodedInt(GlowmaskFadeTimer);
             binaryWriter.Write(TargetOrbitRotation);
             bitWriter.WriteBit(ShootLaser);
         }
@@ -1180,6 +1183,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             OrbitChangeTimer = binaryReader.Read7BitEncodedInt();
             OrbitDirection = binaryReader.Read7BitEncodedInt();
             AttackTimer = binaryReader.Read7BitEncodedInt();
+            GlowmaskFadeTimer = binaryReader.Read7BitEncodedInt();
             TargetOrbitRotation = binaryReader.ReadSingle();
             ShootLaser = bitReader.ReadBit();
         }
@@ -1280,11 +1284,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (AttackTimer == 0)
                     {
                         TargetOrbitRotation = Main.player[npc.target].SafeDirectionTo(npc.Center).ToRotation(); //when shooting laser, stop orbiting
-
+                        
                         npc.netUpdate = true;
                         NetSync(npc);
                     }
-
+                        
                     const int attackTime = 110;
 
                     Vector2 towardsPlayer = 6f * npc.SafeDirectionTo(Main.player[npc.target].Center);
@@ -1298,6 +1302,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (FargoSoulsUtil.HostCheck)
                             Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, towardsPlayer, ProjectileID.DeathLaser, (int)(1.1 * FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage)), 0f, Main.myPlayer);
 
+                        npc.velocity -= towardsPlayer * 2.5f;
                         AttackTimer = 0;
                         ShootLaser = false;
 
@@ -1388,6 +1393,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             LoadNPCSprite(recolor, npc.type);
             LoadSpecial(recolor, ref TextureAssets.Probe, ref FargowiltasSouls.TextureBuffer.Probe, "Probe");
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            float opacity = 1;
+            if (FallingState > 0)
+                opacity = MathHelper.Lerp(1, 0, ++GlowmaskFadeTimer * 0.04f);
+            if (opacity < 0)
+                opacity = 0;
+            Rectangle rectangle = npc.frame;
+            Vector2 origin2 = rectangle.Size() / 2f;
+            Main.EntitySpriteDraw(TextureAssets.Npc[npc.type].Value, npc.Center - Main.screenPosition, new Rectangle?(rectangle), drawColor, npc.rotation, rectangle.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+
+            Main.EntitySpriteDraw(TextureAssets.Probe.Value, npc.Center - Main.screenPosition, new Rectangle?(rectangle), Color.White * opacity, npc.rotation, rectangle.Size() / 2, npc.scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+            return false;
         }
     }
 }

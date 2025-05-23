@@ -528,8 +528,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (ShellHide)
             {
-                int force = (int)(player.ForceEffect<TurtleEffect>() ? 1.5 : 1);
-                TurtleShellHP -= info.SourceDamage * force;
+                int shelldmg = info.SourceDamage / (int)(player.ForceEffect<TurtleEffect>() ? 2 : 1);
+                TurtleShellHP -= shelldmg;
                 //some funny dust
                 /*const int max = 30;
                 for (int i = 0; i < max; i++)
