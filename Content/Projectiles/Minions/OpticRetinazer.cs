@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Retinazer");
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
@@ -118,11 +118,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (++Projectile.frameCounter > 4)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= 6)
-                    Projectile.frame = 3;
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 1;
             }
-            if (Projectile.frame < 3)
-                Projectile.frame = 3;
 
             const float IdleAccel = 0.05f;
             int otherMinion = ModContent.ProjectileType<OpticSpazmatism>();

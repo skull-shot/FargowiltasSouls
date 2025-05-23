@@ -165,7 +165,7 @@ namespace FargowiltasSouls
                         ModContent.ItemType<EternalEnergy>(),
                         ModContent.ItemType<MutantTrophy>(),
                         ModContent.ItemType<SpawnSack>(),
-                        ModContent.ItemType<PhantasmalEnergy>()
+                        ModContent.ItemType<BrokenSpearhead>()
                     ],
                     [ModContent.ItemType<AbominationnVoodooDoll>()],
                     true
