@@ -85,6 +85,16 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             }
             vector3 += nPC.velocity * num9;
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), vector3, spinningpoint, ModContent.ProjectileType<MonkDashSlash>(), (int)((float)Projectile.damage * 0.5f), 0f, Main.myPlayer, num6);
+
+            Player player = Main.player[Main.myPlayer];
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (Projectile.numHits < 1)
+            {
+                player.immune = true;
+                player.immuneTime = Math.Max(player.immuneTime, 10);
+                player.hurtCooldowns[0] = Math.Max(player.hurtCooldowns[0], 10);
+                player.hurtCooldowns[1] = Math.Max(player.hurtCooldowns[1], 10);
+            }
         }
 
     }

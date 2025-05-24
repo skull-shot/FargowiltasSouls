@@ -90,10 +90,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             float speed = player.HasEffect<ShinobiDashEffect>() ? 8 : 16;
             player.velocity.X = speed * direction;
 
-            int invul = player.HasEffect<ShinobiDashEffect>() ? 10 : 20;
+            int invul = 20;
             modPlayer.MonkDashing = invul;
 
-            if (!player.FargoSouls().MutantPresence)
+            if (player.HasEffect<ShinobiDashEffect>())
             {
                 player.immune = true;
                 player.immuneTime = Math.Max(player.immuneTime, invul);

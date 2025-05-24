@@ -1444,17 +1444,12 @@ PureHeart: {
 	// DisplayName: Pure Heart
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs
-		Grants immunity to [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
-		[i:FargowiltasSouls/DarkenedHeart] Increased movement speed and turnaround traction
-		[i:FargowiltasSouls/DarkenedHeart] Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Sublimation (DoT and defense reduction)
-		[i:FargowiltasSouls/GuttedHeart] Up to 3 creepers hover around you blocking some damage, respawning faster when not moving
-		[i:FargowiltasSouls/GuttedHeart] Gives 10% increased max life
-		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump
+		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+		Increases [i:FargowiltasSouls/GelicWings] wing time by 30%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
+		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
+		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/DarkenedHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
 		[i:FargowiltasSouls/GelicWings] Flying emits crystal spikes
-		[i:FargowiltasSouls/GelicWings] Increases wing time by 30%
-		[i:FargowiltasSouls/PungentEyeball] Your cursor causes nearby enemies to take up to 1.12x damage
-		[i:FargowiltasSouls/PungentEyeball] Massively increases spawn rate of rare enemies
+		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
 		''' */
 }
@@ -1484,7 +1479,8 @@ SandsofTime: {
 	// DisplayName: Sands of Time
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		4% increased damage when equipped
+		Works from inventory and vanity slots:
 		Grants immunity to Mighty Wind and cactus damage
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
