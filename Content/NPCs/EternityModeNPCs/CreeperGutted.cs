@@ -183,6 +183,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
             if (NPC.life <= 0)
             {
+                Player player = Main.player[Main.myPlayer];
+                if (player.HasEffect<DarkenedHeartEaters>())
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), NPC.Center, -NPC.velocity.RotatedByRandom(MathHelper.PiOver2 * 2f), ProjectileID.TinyEater, (int)(35 * player.ActualClassDamage(DamageClass.Generic)), 1.75f, player.whoAmI);
+                        if (p.IsWithinBounds(Main.maxProjectiles))
+                        {
+                            Main.projectile[p].DamageType = DamageClass.Default;
+                        }
+                    }
+                }
                 //SoundEngine.PlaySound(NPC.DeathSound, NPC.Center);
                 for (int i = 0; i < 20; i++)
                 {
@@ -192,6 +204,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 }
             }
         }
+
 
         public override bool CheckActive() => false;
 

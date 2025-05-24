@@ -45,13 +45,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             //gelic effect
             player.FargoSouls().GelicWingsItem = Item;
-
-            player.AddEffect<GelicWingJump>(Item);
+            //player.AddEffect<GelicWingJump>(Item);
             player.AddEffect<GelicWingSpikes>(Item);
-
             player.FargoSouls().WingTimeModifier += .3f;
 
-            // pungent eyeball effect
+            //pungent effect
             player.buffImmune[BuffID.Blackout] = true;
             player.buffImmune[BuffID.Obstructed] = true;
             player.AddEffect<PungentEyeballCursor>(Item);

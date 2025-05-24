@@ -2,6 +2,7 @@ using Fargowiltas.Content.Items.Ammos;
 using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -105,6 +106,7 @@ namespace FargowiltasSouls.Core.Globals
 
         public bool PungentGazeWasApplied;
         public int PungentGazeTime;
+        public int PureGazeTime;
         public bool SinisterIconFullFight;
 
         public int GrazeCD;
@@ -321,13 +323,6 @@ namespace FargowiltasSouls.Core.Globals
                     npc.defense = 0;
             }
 
-            if (Sublimation)
-            {
-                npc.defense = originalDefense - 15; //ichor 2
-                if (npc.defense < 0)
-                    npc.defense = 0;
-            }
-
             if (SnowChilled)
             {
                 int dustId = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Snow, npc.velocity.X, npc.velocity.Y, 100, default, 1f);
@@ -438,10 +433,10 @@ namespace FargowiltasSouls.Core.Globals
             {
                 if (Main.rand.NextBool(4))
                 {
-                    int d = Dust.NewDust(npc.position, npc.width, npc.height, DustID.PortalBolt, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 0, new Color(220, 255, 220), 2.5f);
-                    Main.dust[d].velocity.Y -= 1;
-                    Main.dust[d].velocity *= 1.5f;
-                    Main.dust[d].noGravity = true;
+                    //int d = Dust.NewDust(npc.position, npc.width, npc.height, DustID.PortalBolt, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 0, new Color(220, 255, 220), 2.5f);
+                    //Main.dust[d].velocity.Y -= 1;
+                    //Main.dust[d].velocity *= 1.5f;
+                    //Main.dust[d].noGravity = true;
                 }
             }
 
@@ -665,13 +660,33 @@ namespace FargowiltasSouls.Core.Globals
                     float sparkTime = 15;
                     Vector2 sparkVel = (npc.Center - sparkCenter) / sparkTime;
                     float sparkScale = MathHelper.Lerp(0.25f, 1.5f,ratio);
-                    Color color = Color.Red;
-                    if (modPlayer.PureHeart)
-                        color = Color.Lime;
-                    Particle spark = new SmallSparkle(npc.Center, sparkVel, color, sparkScale, (int)sparkTime);
+                    Particle spark = new SmallSparkle(npc.Center, sparkVel, Color.Red, sparkScale, (int)sparkTime);
                     spark.Spawn();
                 }
             }
+
+            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly)
+            {
+                if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                    PureGazeTime += 1;
+                else if (PureGazeTime > 0)
+                    PureGazeTime -= 2;
+                if (PureGazeTime > PungentGazeBuff.MAX_TIME)
+                    PureGazeTime = PungentGazeBuff.MAX_TIME;
+                if (PureGazeTime > 0 && Main.rand.NextBool(3))
+                {
+                    float ratio = (float)PureGazeTime / PungentGazeBuff.MAX_TIME;
+                    Vector2 sparkDir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+                    float sparkDistance = 20 * Main.rand.NextFloat(0.6f, 1.3f);
+                    Vector2 sparkCenter = npc.Center + sparkDir * sparkDistance * 2;
+                    float sparkTime = 15;
+                    Vector2 sparkVel = (npc.Center - sparkCenter) / sparkTime;
+                    float sparkScale = MathHelper.Lerp(0.25f, 1.5f, ratio);
+                    Particle spark = new SmallSparkle(npc.Center, sparkVel, Color.Lime, sparkScale, (int)sparkTime);
+                    spark.Spawn();
+                }
+            }
+
             if (DeathMarked)
             {
                 drawColor.R = (byte)(drawColor.R * 0.7f);
@@ -798,16 +813,16 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            //25 dps which is 1 more than  
+            //40 dps (up to)  
             if (Sublimation)
             {
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
+                int dmg = 20 + (PureGazeTime / 5);
+                npc.lifeRegen -= dmg;
 
-                npc.lifeRegen -= 20;
-
-                if (damage < 2)
-                    damage = 2;
+                if (damage < dmg / 5)
+                    damage = dmg / 5;
             }
 
             //12 dps 
@@ -1379,8 +1394,15 @@ namespace FargowiltasSouls.Core.Globals
                 modifiers.ArmorPenetration += 20;
             if (CurseoftheMoon)
                 modifiers.ArmorPenetration += 10;
-            if (Rotting)
-                modifiers.ArmorPenetration += 10;
+            //if (Rotting)
+            //    modifiers.ArmorPenetration += 10;
+            if (Sublimation)
+            {
+                float def = npc.defense / 3 * PureGazeTime / PungentGazeBuff.MAX_TIME;
+                if (def > 40)
+                    def = 40;
+                modifiers.ArmorPenetration += 10 + def;
+            }
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;
             if (Smite)
@@ -1400,7 +1422,11 @@ namespace FargowiltasSouls.Core.Globals
 
             if (PungentGazeTime > 0)
             {
-                modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
+                float def = npc.defense / 2;
+                if (def > 50)
+                    def = 50;
+                modifiers.ArmorPenetration += def * PungentGazeTime / PungentGazeBuff.MAX_TIME;
+                //modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
             }
 
             //            //if (modPlayer.KnightEnchant && Villain && !npc.boss)

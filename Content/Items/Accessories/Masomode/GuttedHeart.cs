@@ -49,6 +49,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             if (Player.velocity == Vector2.Zero && Player.itemAnimation == 0)
                 modPlayer.GuttedHeartCD--;
+            Vector2 pos = player.Center + Main.rand.NextVector2Circular(16 * 18, 16 * 18);
+            if (player.FargoSouls().PureHeart && WorldGen.SolidTile(LumUtils.FindGroundVertical(pos.ToTileCoordinates())))
+                modPlayer.GuttedHeartCD--;
 
             if (modPlayer.GuttedHeartCD <= 0)
             {
