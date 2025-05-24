@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon
                     AddPatreonDrop(
                         () => SoulConfig.Instance.PatreonKingSlime && WorldSavingSystem.EternityMode,
                         ModContent.ItemType<MedallionoftheFallenKing>(),
-                        100,
+                        10,
                         "PatreonEMode");
                     break;
 
