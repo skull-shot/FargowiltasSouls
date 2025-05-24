@@ -798,6 +798,6 @@ BeetleEnchantBeetle.DisplayName: Жук зачарования жука
 SpookySpinScythe.DisplayName: Крутящаяся коса жути
 SnowMist.DisplayName: Снежный туман
 IceShard.DisplayName: Ледяной осколок
-// DeviSniperTelegraph.DisplayName: Devi Sniper Telegraph
-// SmallStingHitbox.DisplayName: Small Stinger
-// DeviShadowbeam.DisplayName: Devi Shadowbeam
+DeviSniperTelegraph.DisplayName: Деви снайпер телеграф
+SmallStingHitbox.DisplayName: Маленькое жало
+DeviShadowbeam.DisplayName: Теневой луч Девиантт
