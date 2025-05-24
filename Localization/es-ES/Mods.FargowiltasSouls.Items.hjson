@@ -346,9 +346,8 @@ MonkEnchant: {
 		'''
 		Allows the ability to dash
 		Double tap a direction
-		You are briefly immune to damage and debuffs after dashing
-		Dash through an enemy to deal massive melee damage
-		Dash cooldown is much longer than normal dashes
+		Dash through an enemy to receive brief invulnerability and deal massive melee damage
+		Dash cooldown is longer than normal dashes
 		'Return to Monk'
 		''' */
 }
@@ -531,7 +530,7 @@ ShinobiEnchant: {
 		'''
 		Allows the ability to teleport dash
 		Double tap a direction
-		You are briefly immune to damage and debuffs after dashing
+		You are briefly immune to damage after dashing
 		Teleport through an enemy to deal massive melee damage
 		Dash cooldown is longer than normal dashes
 		Dash is longer and deals more damage

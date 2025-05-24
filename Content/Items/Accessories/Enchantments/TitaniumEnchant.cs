@@ -98,14 +98,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
 
             player.AddBuff(306, 600, true, false);
-            if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] < 20)
+            if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] < 20 && player.titaniumStormCooldown == 0)
             {
-                int damage = 20;
+                int damage = 30;
                 damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
                 int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
                 Main.projectile[sh].DamageType = DamageClass.Melee;
+                player.titaniumStormCooldown = 10;
             }
-            else
+            else if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] > 19)
             {
                 if (!player.HasBuff(ModContent.BuffType<TitaniumDRBuff>()))
                 {

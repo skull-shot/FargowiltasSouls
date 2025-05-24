@@ -1479,6 +1479,10 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 modifiers.SetCrit();
             }
+            if (projectile.type == ProjectileID.TitaniumStormShard && projectile.DamageType == DamageClass.Melee)
+            {
+                modifiers.DisableCrit();
+            }
         }
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
