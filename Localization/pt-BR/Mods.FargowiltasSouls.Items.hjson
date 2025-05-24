@@ -3214,7 +3214,7 @@ Lightslinger: {
 	/* Tooltip:
 		'''
 		Converts bullets to hallowed shots of light
-		After 40 shots, press Right Click to fire a lightbomb
+		After hitting 40 shots, press Right Click to fire a lightbomb
 		25% chance to not consume ammo
 		''' */
 }

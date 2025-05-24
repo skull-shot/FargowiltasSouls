@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Security.Policy;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -54,6 +55,13 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 Projectile.Kill();
             }
             Projectile.ai[0] += 1f;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Player player = Main.player[Projectile.owner];
+            if (Projectile.ai[1] == 0)
+                player.FargoSouls().LightslingerHitShots++;
         }
 
         public override void OnKill(int timeLeft)

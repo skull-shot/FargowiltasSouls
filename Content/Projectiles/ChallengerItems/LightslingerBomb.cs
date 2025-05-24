@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.ChallengerItems
                 Vector2 vector = Projectile.velocity.RotatedBy(rad) * speed;
                 if (FargoSoulsUtil.HostCheck)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vector, ModContent.ProjectileType<LightslingerShot>(), damage, knockBack, Main.myPlayer, 0, 1);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vector, ModContent.ProjectileType<LightslingerShot>(), damage, knockBack, Main.myPlayer, 1, 1);
                 }
             }
 
