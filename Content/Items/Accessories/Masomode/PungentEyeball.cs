@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -45,13 +46,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             if (player.whoAmI == Main.myPlayer)
             {
-                const float distance = 16 * 5;
+                const float distance = 80;
 
                 foreach (NPC n in Main.npc.Where(n => n.active && !n.dontTakeDamage && n.lifeMax > 5 && !n.friendly))
                 {
                     if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(n.Hitbox, Main.MouseWorld)) < distance)
                     {
-                        n.AddBuff(ModContent.BuffType<PungentGazeBuff>(), 2, true);
+                        if (!player.FargoSouls().PureHeart)
+                            n.AddBuff(ModContent.BuffType<PungentGazeBuff>(), 2, true);
+                        else
+                            n.AddBuff(ModContent.BuffType<SublimationBuff>(), 30, true);
                     }
                 }
 

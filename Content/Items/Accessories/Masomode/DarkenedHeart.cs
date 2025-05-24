@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.WeaponUseTimer > 0 && modPlayer.DarkenedHeartCD <= 0)
+            if (modPlayer.WeaponUseTimer > 0 && modPlayer.DarkenedHeartCD <= 0 && !player.FargoSouls().PureHeart)
             {
                 modPlayer.DarkenedHeartCD = 25;
 

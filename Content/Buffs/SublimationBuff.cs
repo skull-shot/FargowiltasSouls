@@ -16,6 +16,8 @@ namespace FargowiltasSouls.Content.Buffs
         public override void Update(NPC npc, ref int buffIndex)
         {
             npc.FargoSouls().Sublimation = true;
+            if (npc.FargoSouls().PureGazeTime > 0)
+                npc.buffTime[buffIndex] += 1;
         }
     }
 }

@@ -15,6 +15,7 @@ using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Projectiles.Souls;
@@ -101,14 +102,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
-        public static List<int> ShroomiteBlacklist =
+        public static List<int> PureProjectile =
         [
-            
-        ];
-        public static List<int> ShroomiteNerfList =
-        [
-            ModContent.ProjectileType<MechEyeProjectile>(),
-            ModContent.ProjectileType<MechFlail>()
+            ModContent.ProjectileType<GelicWingSpike>(),
+            ModContent.ProjectileType<CreeperHitbox>(),
+            ProjectileID.TinyEater
         ];
 
         public override void SetStaticDefaults()
@@ -1546,6 +1544,12 @@ namespace FargowiltasSouls.Content.Projectiles
             if (projectile.type == ProjectileID.CrystalLeafShot && player.HasEffect<NatureEffect>() && player.HasEffect<ShroomiteShroomEffect>())
             {
                 ShroomiteShroomEffect.SpawnShrooms(player, target, hit, (int)(damageDone * 1f));
+            }
+            if (PureProjectile.Contains(projectile.type) && player.FargoSouls().PureHeart)
+            {
+                FargoSoulsGlobalNPC globalNPC = target.FargoSouls();
+                if (globalNPC.PureGazeTime > 0)
+                    globalNPC.PureGazeTime += 5;
             }
         }
 
