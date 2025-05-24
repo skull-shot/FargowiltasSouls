@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Rarities;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -18,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             Item.width = 18;
             Item.height = 18;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.value = Item.sellPrice(0, 50);
             Item.defense = 50;
         }

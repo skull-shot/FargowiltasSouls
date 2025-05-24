@@ -3,11 +3,13 @@ using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -19,6 +21,7 @@ namespace FargowiltasSouls.Content.Items.Armor
     {
         public override void SetStaticDefaults()
         {
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 4));
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             Item.width = 18;
             Item.height = 18;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.value = Item.sellPrice(0, 50);
             Item.defense = 50;
         }
