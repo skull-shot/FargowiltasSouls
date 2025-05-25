@@ -80,17 +80,6 @@ namespace FargowiltasSouls.Content.Items.Armor
             player.FargoSouls().AttackSpeed += .2f;
         }
 
-        public override void SafeModifyTooltips(List<TooltipLine> list)
-        {
-            foreach (TooltipLine line2 in list)
-            {
-                if (line2.Mod == "Terraria" && line2.Name == "ItemName")
-                {
-                    line2.OverrideColor = new Color(Main.DiscoR, 51, 255 - (int)(Main.DiscoR * 0.4));
-                }
-            }
-        }
-
         public override void AddRecipes()
         {
             CreateRecipe()
