@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
         {
             type = ShotType;
             if (player.altFunctionUse == 2)
-                damage *= 10;
+                damage *= 6;
         }
         public override Vector2? HoldoutOffset()
         {
@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             }
             else
             {
-                if (++soulsPlayer.LightslingerHitShots >= ReqShots && player.whoAmI == Main.myPlayer)
+                if (soulsPlayer.LightslingerHitShots >= ReqShots && player.whoAmI == Main.myPlayer)
                 {
                     if (soulsPlayer.ChargeSoundDelay <= 0)
                     {
