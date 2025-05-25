@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmatism");
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.netImportant = true;
-            Projectile.scale = .5f;
+            Projectile.scale = 1f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
@@ -137,11 +137,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (++Projectile.frameCounter > 4)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= 6)
-                    Projectile.frame = 3;
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 1;
             }
-            if (Projectile.frame < 3)
-                Projectile.frame = 3;
 
             if (collide)
             {

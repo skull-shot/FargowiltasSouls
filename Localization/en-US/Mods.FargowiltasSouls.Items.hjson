@@ -1983,7 +1983,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	DisplayName: True Mutant Body
+	DisplayName: Eternal Core
 	Tooltip:
 		'''
 		70% increased damage and 30% increased critical strike chance
@@ -1994,7 +1994,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	DisplayName: True Mutant Head
+	DisplayName: Eternal Flame
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2005,7 +2005,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	DisplayName: True Mutant Pants
+	DisplayName: Eternal Leggings
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2197,8 +2197,8 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: Broken Shaft
+BrokenSpearHead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }
 
@@ -3775,5 +3775,10 @@ TrojanMask: {
 
 WillMask: {
 	DisplayName: Will Champion Mask
+	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }

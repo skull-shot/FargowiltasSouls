@@ -1,12 +1,15 @@
 ﻿using Fargowiltas.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -18,6 +21,7 @@ namespace FargowiltasSouls.Content.Items.Armor
     {
         public override void SetStaticDefaults()
         {
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 4));
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             Item.width = 18;
             Item.height = 18;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.value = Item.sellPrice(0, 50);
             Item.defense = 50;
         }
@@ -40,6 +44,8 @@ namespace FargowiltasSouls.Content.Items.Armor
 
             player.manaCost -= 0.25f;
             player.ammoCost75 = true;
+
+            
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -72,17 +78,6 @@ namespace FargowiltasSouls.Content.Items.Armor
             player.FargoSouls().MutantSetBonusItem = item;
             player.FargoSouls().GodEaterImbue = true;
             player.FargoSouls().AttackSpeed += .2f;
-        }
-
-        public override void SafeModifyTooltips(List<TooltipLine> list)
-        {
-            foreach (TooltipLine line2 in list)
-            {
-                if (line2.Mod == "Terraria" && line2.Name == "ItemName")
-                {
-                    line2.OverrideColor = new Color(Main.DiscoR, 51, 255 - (int)(Main.DiscoR * 0.4));
-                }
-            }
         }
 
         public override void AddRecipes()

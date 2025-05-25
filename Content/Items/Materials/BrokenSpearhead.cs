@@ -6,7 +6,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Materials
 {
-    public class PhantasmalEnergy : SoulsItem
+    [LegacyName("PhantasmalEnergy")]
+    public class BrokenSpearhead : SoulsItem
     {
         public override void SetStaticDefaults()
         {
