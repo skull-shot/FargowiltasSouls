@@ -99,19 +99,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.CobaltImmuneTimer = time;
                 */
 
-                if (modPlayer.CobaltCooldownTimer <= 10)
-                    modPlayer.CobaltCooldownTimer = 10;
+                if (modPlayer.CobaltCooldownTimer <= 30)
+                    modPlayer.CobaltCooldownTimer = 30;
             }
 
             if (modPlayer.CanCobaltJump || modPlayer.JustCobaltJumped && !player.ExtraJumps.ToArray().Any(j => j.Active) && !modPlayer.JungleJumping)
             {
+                player.jumpBoost = true; //balloon effect
                 if (notAncient || player.ForceEffect<AncientCobaltEffect>())
                 {
-                    player.jumpSpeedBoost += 5f;
+                    player.jumpSpeedBoost += 5f; //+100%
                 }
                 else
                 {
-                    player.jumpSpeedBoost += 3.75f;
+                    player.jumpSpeedBoost += 2.5f; //+50%
                 }
             }
         }

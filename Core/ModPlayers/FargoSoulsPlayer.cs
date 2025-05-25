@@ -1212,9 +1212,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (Player.HasEffect<CobaltEffect>())
             {
-                if (Player.whoAmI == Main.myPlayer && CobaltJumpCooldown <= 0)
+                if (Player.whoAmI == Main.myPlayer)
                 {
-                    CobaltJumpCooldown = 15;
                     int baseDamage = 75;
 
                     if (Player.ForceEffect<CobaltEffect>())
