@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.aiStyle = -1;
             Projectile.tileCollide = false;
 
-            Projectile.minionSlots = 1f / 3f;
+            Projectile.minionSlots = 1f / 2f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
@@ -46,11 +46,13 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override bool? CanDamage() => Projectile.timeLeft <= 0;
         private bool foundTarget = false;
         private float speed = 22f; //22
+        private float timer;
 
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
             {
+                timer = 10;
                 Projectile.localAI[0] = 1;
                 SoundEngine.PlaySound(SoundID.Pixie, Projectile.Center);
             }
@@ -59,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (Projectile.ai[1] == 0)
             {
                 Projectile.ai[0] = -1;
-                Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center);
+                //Projectile.velocity = Vector2.Normalize(player.Center - Projectile.Center);
             }
             Projectile.rotation = 0;
             Projectile.spriteDirection = Projectile.direction;
@@ -112,18 +114,22 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 if (foundTarget)
                 {
                     NPC npc = Main.npc[(int)Projectile.ai[0]];
+                    int delay = (int)Main.rand.NextFloat(0f, 5f);
                     if (npc.active && npc.CanBeChasedBy()) //target is still valid
                     {
                         //hard predictive shot
                         Vector2 prediction = npc.Center + npc.velocity * 10;
                         Vector2 targetCenter = npc.Center - new Vector2((float)Math.Sin(MathHelper.ToRadians(Projectile.ai[1] * (360 / 60))), 250);
                         FlyToward(targetCenter);
-                        if (Projectile.ai[1] % 30 == 0 && Vector2.Distance(npc.Center, Projectile.Center) <= 450)
+                        if (timer == 0 && Vector2.Distance(npc.Center, Projectile.Center) <= 450)
                         {
                             SoundEngine.PlaySound(SoundID.Item12, Projectile.position);
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, (prediction - Projectile.Center) / 10,
-                                            ModContent.ProjectileType<LightslingerBombshot>(), (int)(Projectile.damage * 0.6f), Projectile.knockBack, Main.myPlayer, 0, Projectile.whoAmI);
+                                            ModContent.ProjectileType<LightslingerBombshot>(), (int)(Projectile.damage), Projectile.knockBack, Main.myPlayer, 0, Projectile.whoAmI);
+                            timer = 28 + Main.rand.Next(0, 5);
                         }
+                        else if (timer > 0)
+                            timer--;
                     }
                     else //we lost em boys
                     {
@@ -154,7 +160,10 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     Projectile.frame = 0;
             }
 
-            Projectile.ai[1]++;
+            if (Projectile.ai[0] > -1)
+                Projectile.ai[1]++;
+            else
+                Projectile.ai[1] = 1;
         }
 
         public void FlyToward(Vector2 v)
@@ -200,7 +209,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Blood, 0, -1f);
                     Main.dust[d].scale += 0.5f;
                 }
-                Projectile.damage *= 6;
+                Projectile.damage *= 10;
                 Projectile.position = Projectile.Center;
                 Projectile.width = Projectile.height = 128;
                 Projectile.Center = Projectile.position;

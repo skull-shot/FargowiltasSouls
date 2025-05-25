@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.BossBags;
+﻿using System;
+using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -23,12 +24,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
         public override void SetDefaults()
         {
-            Item.damage = 47;
+            Item.damage = 22;
             Item.DamageType = DamageClass.Summon;
             Item.width = 50;
             Item.height = 50;
-            Item.useTime = 46;
-            Item.useAnimation = 46;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = Item.sellPrice(0, 10);
@@ -43,7 +44,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            velocity = velocity.RotatedBy(Math.PI / 2) * 10;
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, velocity);
+            player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, -velocity);
             return false;
         }
 
