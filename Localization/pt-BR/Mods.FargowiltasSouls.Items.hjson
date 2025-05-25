@@ -3206,7 +3206,7 @@ EnchantedLifeblade: {
 
 KamikazePixieStaff: {
 	// DisplayName: Expixive Staff
-	// Tooltip: Summons friendly pixies that fire shots for a while, then charge into enemies and explode
+	// Tooltip: Summons two friendly pixies that fire shots for a while, then charge into enemies and explode
 }
 
 Lightslinger: {

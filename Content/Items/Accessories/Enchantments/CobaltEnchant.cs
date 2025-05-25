@@ -57,16 +57,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             var modPlayer = player.FargoSouls();
-
-            if (modPlayer.CobaltJumpCooldown > 0)
-                modPlayer.CobaltJumpCooldown--;
-
             if (modPlayer.CanCobaltJump || modPlayer.JustCobaltJumped && !player.ExtraJumps.ToArray().Any(j => j.Active) && !modPlayer.JungleJumping)
             {
                 
             }
             else
-                player.jumpSpeedBoost += 3.75f;
+                player.jumpSpeedBoost += 3.75f; //+75%
         }
         public override void PostUpdate(Player player)
         {

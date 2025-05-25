@@ -14,7 +14,8 @@ AncientCobaltEnchant: {
 	// DisplayName: Ancient Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Slimed and deals melee damage
+		Grants an explosion jump with greatly increased jump height and speed
+		Explosion inflicts Slimed and deals melee damage
 		Hold down to fall faster
 		'Ancient Kobold'
 		''' */
@@ -129,8 +130,9 @@ CobaltEnchant: {
 	// DisplayName: Cobalt Enchantment
 	/* Tooltip:
 		'''
-		Grants an explosion jump that inflicts Oiled and deals melee damage
-		Your other jumps are stronger and cause explosions on a short cooldown
+		Grants an explosion jump with greatly increased jump height and speed
+		Explosion jump inflicts Oiled and deals melee damage
+		Your double jumps are stronger and cause explosions
 		Hold down to fall faster
 		'I can't believe it's not Palladium'
 		''' */
@@ -3258,7 +3260,7 @@ EnchantedLifeblade: {
 
 KamikazePixieStaff: {
 	// DisplayName: Expixive Staff
-	// Tooltip: Summons friendly pixies that fire shots for a while, then charge into enemies and explode
+	// Tooltip: Summons two friendly pixies that fire shots for a while, then charge into enemies and explode
 }
 
 Lightslinger: {
