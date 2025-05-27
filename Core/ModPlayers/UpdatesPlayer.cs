@@ -437,7 +437,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //Collision.StepUp(ref Player.position, ref Player.velocity, Player.width, Player.height, ref Player.stepSpeed, ref Player.gfxOffY, (int)Player.gravDir, Player.controlUp);
 
                 Player.noKnockback = true;
-                Player.thorns = 4f;
 
                 NecromanticBrewRotation += 0.6f * Math.Sign(Player.velocity.X == 0 ? Player.direction : Player.velocity.X);
                 Player.fullRotation = NecromanticBrewRotation;
@@ -542,7 +541,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 LeadEffect.ProcessLeadEffectLifeRegen(Player);
 
-                FusedLensCanDebuff = true;
+                FusedLensCursed = true;
             }
 
             //placed here so it runs after our modded dots

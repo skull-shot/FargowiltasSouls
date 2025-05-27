@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dr = 0;
-            if (modPlayer.IsInADashState)
+            if (modPlayer.IsInADashState || modPlayer.SpecialDash)
             {
                 dr += 0.15f;
             }
@@ -71,13 +72,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 Vector2 vel = 16f * -Vector2.UnitY.RotatedByRandom(MathHelper.ToRadians(30));
 
-                int dam = 32;
+                int dam = 24;
                 int type = ProjectileID.DeerclopsIceSpike;
                 float ai0 = -15f;
                 float ai1 = Main.rand.NextFloat(0.5f, 1f);
                 if (player.FargoSouls().SupremeDeathbringerFairy)
                 {
-                    dam = 32;
                     type = ProjectileID.SharpTears;
                     //ai0 *= 2f;
                     //ai1 += 0.5f;
