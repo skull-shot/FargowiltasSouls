@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 }
                 dam = (int)(dam * player.ActualClassDamage(DamageClass.Melee));
 
-                if (player.velocity.Y == 0)
+                if (player.velocity.Y == 0 && player.timeSinceLastDashStarted % 2 == 0)
                     Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dam, 4f, Main.myPlayer, ai0, ai1);
                 else
                 {
@@ -95,8 +95,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                     if (!npc.Alive())
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
-
+                    if (player.timeSinceLastDashStarted % 2 == 0)
+                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
                 }
                     
             }

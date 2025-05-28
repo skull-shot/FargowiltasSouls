@@ -1508,7 +1508,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                 }
             }
-
+            if (projectile.type == ProjectileID.DeerclopsIceSpike && !projectile.usesLocalNPCImmunity && projectile.usesIDStaticNPCImmunity && projectile.idStaticNPCHitCooldown == 10 && noInteractionWithNPCImmunityFrames)
+            {
+                target.AddBuff(BuffID.Frostburn, 150);
+            }
             //if (projectile.type == ProjectileID.SeedlerNut && projectile.owner.IsWithinBounds(Main.maxPlayers) && EnchantmentProj && Main.player[projectile.owner].HasEffect<TimberEffect>())
             //{
             //    ShadewoodEffect.ShadewoodProc(Main.player[projectile.owner], target, projectile);
