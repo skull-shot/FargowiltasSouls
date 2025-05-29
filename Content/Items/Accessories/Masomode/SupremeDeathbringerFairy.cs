@@ -13,8 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<SpecialDashEffect>()];
+            [AccessoryEffectLoader.GetEffect<SupremeDashEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -29,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(0, 4);
-            Item.defense = 2;
+            //Item.defense = 2;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -51,9 +50,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //agitating lens
             player.buffImmune[ModContent.BuffType<BerserkedBuff>()] = true;
             //player.GetDamage(DamageClass.Generic) += 0.1f;
-            //player.AddEffect<AgitatingLensEffect>(Item);
+            player.AddEffect<AgitatingLensEffect>(Item);
             player.AddEffect<AgitatingLensInstall>(Item);
-            player.AddEffect<DebuffInstallKeyEffect>(Item);
+            //player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
@@ -66,7 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.npcTypeNoAggro[234] = true;
             player.npcTypeNoAggro[235] = true;
             fargoPlayer.QueenStingerItem = Item;
-            player.AddEffect<SpecialDashEffect>(Item);
+            player.AddEffect<SupremeDashEffect>(Item);
             //if (player.honey)
                 //player.GetArmorPenetration(DamageClass.Generic) += 5;
 
@@ -96,6 +95,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             .AddTile(TileID.DemonAltar)
 
             .Register();
+        }
+    }
+    public class SupremeDashEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<SupremeDeathbringerFairy>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().SpecialDashKey();
         }
     }
 }

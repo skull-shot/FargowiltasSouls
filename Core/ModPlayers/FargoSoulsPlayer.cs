@@ -422,6 +422,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ConcentratedRainbowMatter = false;
 
             Ambrosia = false;
+            SpecialDash = false;
 
             //debuffs
             Hexed = false;

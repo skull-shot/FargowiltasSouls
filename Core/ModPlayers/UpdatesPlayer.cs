@@ -337,7 +337,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.HasBuff<TwinsInstallBuff>() && !Player.HasEffect<FusedLensInstall>())
                 Player.ClearBuff(ModContent.BuffType<TwinsInstallBuff>());
 
-            if (Player.HasBuff<BerserkerInstallBuff>() && !Player.HasEffect<AgitatingLensInstall>())
+            if (Player.HasBuff<BerserkerInstallBuff>() && !Player.HasEffect<AgitatingLensInstall>() && !Player.HasEffect<SupremeDashEffect>())
             {
                 Player.ClearBuff(ModContent.BuffType<BerserkerInstallBuff>());
                 int stunDuration = 120; //2sec
@@ -345,7 +345,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
             }
 
-            if ((BetsysHeartItem != null || QueenStingerItem != null))
+            if (BetsysHeartItem != null || QueenStingerItem != null)
             {
                 if (SpecialDashCD > 0)
                     SpecialDashCD--;
@@ -355,7 +355,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                     for (int i = 0; i < 30; i++)
                     {
-                        int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.GemTopaz, 0, 0, 0, default, 2.5f);
+                        int dust = DustID.GemTopaz;
+                        if (Player.HasEffect<SupremeDashEffect>())
+                            dust = DustID.Bone;
+                        int d = Dust.NewDust(Player.position, Player.width, Player.height, dust, 0, 0, 0, default, 2.5f);
                         Main.dust[d].noGravity = true;
                         Main.dust[d].velocity *= 4f;
                     }
@@ -437,7 +440,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //Collision.StepUp(ref Player.position, ref Player.velocity, Player.width, Player.height, ref Player.stepSpeed, ref Player.gfxOffY, (int)Player.gravDir, Player.controlUp);
 
                 Player.noKnockback = true;
-                Player.thorns = 4f;
 
                 NecromanticBrewRotation += 0.6f * Math.Sign(Player.velocity.X == 0 ? Player.direction : Player.velocity.X);
                 Player.fullRotation = NecromanticBrewRotation;
@@ -542,7 +544,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 LeadEffect.ProcessLeadEffectLifeRegen(Player);
 
-                FusedLensCanDebuff = true;
+                FusedLensCursed = true;
             }
 
             //placed here so it runs after our modded dots

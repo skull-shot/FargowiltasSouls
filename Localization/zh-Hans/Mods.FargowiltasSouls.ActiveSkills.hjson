@@ -19,6 +19,15 @@ BetsyDashEffect: {
 		'''
 }
 
+SupremeDashEffect: {
+	// DisplayName: Supreme
+	/* Tooltip:
+		'''
+		Perform a short fist dash towards your cursor
+		Hit enemies to deal high knockback and bounce yourself backwards
+		''' */
+}
+
 DiveEffect: {
 	DisplayName: 快速下落
 	Tooltip:

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dr = 0;
-            if (modPlayer.IsInADashState)
+            if (modPlayer.IsInADashState || modPlayer.SpecialDash)
             {
                 dr += 0.15f;
             }
@@ -71,20 +72,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             {
                 Vector2 vel = 16f * -Vector2.UnitY.RotatedByRandom(MathHelper.ToRadians(30));
 
-                int dam = 32;
+                int dam = 24;
                 int type = ProjectileID.DeerclopsIceSpike;
                 float ai0 = -15f;
                 float ai1 = Main.rand.NextFloat(0.5f, 1f);
                 if (player.FargoSouls().SupremeDeathbringerFairy)
                 {
-                    dam = 32;
                     type = ProjectileID.SharpTears;
                     //ai0 *= 2f;
                     //ai1 += 0.5f;
                 }
                 dam = (int)(dam * player.ActualClassDamage(DamageClass.Melee));
 
-                if (player.velocity.Y == 0)
+                if (player.velocity.Y == 0 && player.timeSinceLastDashStarted % 2 == 0)
                     Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dam, 4f, Main.myPlayer, ai0, ai1);
                 else
                 {
@@ -95,8 +95,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                     if (!npc.Alive())
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
-
+                    if (player.timeSinceLastDashStarted % 2 == 0)
+                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
                 }
                     
             }

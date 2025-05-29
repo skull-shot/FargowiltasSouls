@@ -17,8 +17,8 @@ namespace FargowiltasSouls.Content.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             //avoid double dipping when they overlap
-            if (!player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>()))
-                BerserkerInstallBuff.DebuffPlayerStats(player);
+            /*if (!player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>()))
+                BerserkerInstallBuff.DebuffPlayerStats(player);*/
         }
     }
 }
