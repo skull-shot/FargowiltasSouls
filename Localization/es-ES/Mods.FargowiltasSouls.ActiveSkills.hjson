@@ -12,10 +12,15 @@ SpecialDashEffect: {
 
 BetsyDashEffect: {
 	// DisplayName: Fireball Dash
+	// Tooltip: Perform a short invincible fireball dash towards your cursor
+}
+
+SupremeDashEffect: {
+	// DisplayName: Supreme
 	/* Tooltip:
 		'''
-		Perform a short invincible fireball dash towards your cursor
-		Shares cooldown slot with Bee Dash
+		Perform a short fist dash towards your cursor
+		Hit enemies to deal high knockback and bounce yourself backwards
 		''' */
 }
 

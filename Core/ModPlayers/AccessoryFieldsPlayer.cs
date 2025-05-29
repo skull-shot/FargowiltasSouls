@@ -237,6 +237,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SlimyShieldFalling;
         public int FallthroughCD;
         public int AgitatingLensCD;
+        public bool BerserkedFromAgitation = false;
         public Item DarkenedHeartItem;
         public int DarkenedHeartCD;
         public int GuttedHeartCD = 60; //should prevent spawning despite disabled toggle when loading into world
@@ -329,6 +330,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         // buffs
         public bool Ambrosia;
+        public bool SpecialDash;
 
         //debuffs
         public bool Hexed;

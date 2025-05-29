@@ -2,6 +2,8 @@ using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs
@@ -25,15 +27,13 @@ namespace FargowiltasSouls.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            DebuffPlayerStats(player);
-
+            if (player.FargoSouls().BerserkedFromAgitation)
+                DebuffPlayerStats(player);
             player.FargoSouls().Berserked = true;
-
             player.FargoSouls().AttackSpeed += 0.35f;
             //player.GetDamage(DamageClass.Generic) += 0.20f;
             //player.GetCritChance(DamageClass.Generic) += 20;
             player.moveSpeed += 0.20f;
-
             player.hasMagiluminescence = true;
             player.noKnockback = true;
 
@@ -52,11 +52,12 @@ namespace FargowiltasSouls.Content.Buffs
             if (player.buffTime[buffIndex] > 2)
                 player.FargoSouls().NoMomentum = true;
 
-            if (player.buffTime[buffIndex] == 2)
+            if (player.buffTime[buffIndex] == 2 && player.FargoSouls().BerserkedFromAgitation)
             {
                 int stunDuration = 120; //2sec
                 player.AddBuff(ModContent.BuffType<BerserkerInstallCDBuff>(), 60 * 10);
                 player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
+                player.FargoSouls().BerserkedFromAgitation = false;
             }
         }
     }

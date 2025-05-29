@@ -1588,15 +1588,11 @@ SupremeDeathbringerFairy: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/NecromanticBrew] Lethargic, [i:FargowiltasSouls/Deerclawps] Slow, and Frozen
-		[i:FargowiltasSouls/SlimyShield] Increases fall speed and landing spawns slime over your cursor, hold down to fall through platforms
-		[i:FargowiltasSouls/AgitatingLens] While dashing or running quickly you will create a trail of blood scythes
-		[i:FargowiltasSouls/AgitatingLens] Debuff Install makes you go berserk, reducing control and defense for massive offensive bonuses
-		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
-		[i:FargowiltasSouls/QueenStinger] Press the Special Dash key to perform a short quick bee dash
-		[i:FargowiltasSouls/Deerclawps] Dashing leaves a trail of blood spikes
-		[i:FargowiltasSouls/Deerclawps] While dashing, gain 15% damage reduction and reflect 100% of contact damage on attacker
-		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed
-		[i:FargowiltasSouls/NecromanticBrew] Summons 2 Skeletron arms to whack enemies
+		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
+		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, you will create a trail of blood scythes
+		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 15% damage reduction
+		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
+		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, greatly increasing attack speed
 		'Supremacy not necessarily guaranteed'
 		''' */
 }

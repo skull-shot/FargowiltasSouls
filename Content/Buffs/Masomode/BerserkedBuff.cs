@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
         {
             //causes player to constantly use weapon
             //seemed to have strange interactions with stunning debuffs like frozen or stoned...
-            player.GetDamage(DamageClass.Generic) += 0.1f;
+            //player.GetDamage(DamageClass.Generic) += 0.1f;
             player.FargoSouls().Berserked = true;
             player.moveSpeed += 0.1f;
             player.endurance -= 0.1f;

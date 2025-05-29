@@ -130,6 +130,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //supreme deathbringer fairy
             fargoPlayer.SupremeDeathbringerFairy = true;
+            player.AddEffect<SupremeDashEffect>(Item);
 
             //pure heart
             fargoPlayer.PureHeart = true;

@@ -52,9 +52,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 modPlayer.AgitatingLensCD = 0;
                 if ((Math.Abs(player.velocity.X) >= 5 || Math.Abs(player.velocity.Y) >= 5) && player.whoAmI == Main.myPlayer)
                 {
+                    if (modPlayer.SupremeDeathbringerFairy && modPlayer.IsDashingTimer > 0 || modPlayer.SpecialDash)
+                        return;
                     int damage = 18;
-                    if (modPlayer.SupremeDeathbringerFairy)
-                        damage *= 2;
                     if (modPlayer.MasochistSoul)
                         damage *= 2;
                     damage = (int)(damage * player.ActualClassDamage(DamageClass.Magic));
