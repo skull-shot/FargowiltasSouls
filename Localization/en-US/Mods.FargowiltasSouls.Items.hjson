@@ -499,9 +499,9 @@ RichMahoganyEnchant: {
 	DisplayName: Rich Mahogany Enchantment
 	Tooltip:
 		'''
-		All grappling hooks pull 1.5x as fast, shoot 2x as fast, and retract 3x as fast
-		While grappling you gain 10% damage reduction for one hit and a 50% thorns effect
-		This damage reduction persists for a second after grappling
+		All grappling hooks pull 1.5x as fast and shoot and retract 2x as fast
+		After grappling you briefly gain 10% damage reduction for one hit and immunity to knockback
+		Launching into an enemy with a grapple deals high damage and knockback on contact, scaling with launch speed
 		'Guaranteed to keep you hooked'
 		'''
 }
@@ -925,7 +925,7 @@ TimberForce: {
 		'''
 		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
 		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
-		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2.5x as fast
+		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
 		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
 		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
 		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
@@ -1722,7 +1722,7 @@ DimensionSoul: {
 		Grants the ability to enable Builder Mode
 		Effects of the Brain of Confusion, Star Veil, Sweetheart Necklace, Bee Cloak, Spore Sac, and Shiny Stone
 		Effects of Paladin's Shield, Frozen Turtle Shell, Arctic Diving Gear, Frog Legs, and Flying Carpet
-		Effects of Lava Waders, Angler Tackle Bag, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
+		Effects of Lava Waders, Angler Tackle Bag, Glowing Fishing Bobber, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
 		Effects of Shield of Cthulhu and Master Ninja Gear
 		'The dimensions of Terraria at your fingertips'
 		'''
@@ -1847,7 +1847,7 @@ TrawlerSoul: {
 		All fishing rods will have 10 extra lures
 		You catch fish almost instantly
 		Permanent Sonar and Crate Buffs
-		Effects of Angler Tackle Bag, Volatile Gel, and Spore Sac 
+		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Volatile Gel, and Spore Sac 
 		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
 		'Fish fear me'
 		'''
@@ -3155,7 +3155,7 @@ AnglerEnchant: {
 		'''
 		Increases fishing power
 		You catch fish almost instantly
-		[i:LavaproofTackleBag] Effects of Lavaproof Tackle Bag
+		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
 		'As long as they aren't all shoes, you can go home happily'
 		'''
 }

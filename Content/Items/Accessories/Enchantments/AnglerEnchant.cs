@@ -31,7 +31,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.accTackleBox = true;
             player.accLavaFishing = true;
 
-
+            //glowing fishing bobber
+            player.accFishingBobber = true;
+            player.overrideFishingBobber = 987;
         }
 
         public override void AddRecipes()
@@ -41,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.AnglerVest)
                 .AddIngredient(ItemID.AnglerPants)
                 .AddIngredient(ItemID.LavaproofTackleBag)
-                .AddIngredient(ItemID.BloodFishingRod)
+                .AddIngredient(ItemID.FishingBobberGlowingStar)
                 .AddIngredient(ItemID.FiberglassFishingPole)
                 .AddTile(TileID.DemonAltar)
                 .Register();

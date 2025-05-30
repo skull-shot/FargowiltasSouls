@@ -1632,24 +1632,22 @@ namespace FargowiltasSouls.Content.Projectiles
             if (player.HasEffect<MahoganyEffect>())
             {
                 float multiplier = 1.5f;
-
                 if (modPlayer.ForceEffect<RichMahoganyEnchant>())
                 {
-                    multiplier = 2.5f;
+                    multiplier = 2f;
                 }
-
                 speed *= multiplier;
             }
         }
 
-        public override void GrappleRetreatSpeed(Projectile projectile, Player player, ref float speed)
+        /*public override void GrappleRetreatSpeed(Projectile projectile, Player player, ref float speed)
         {
             if (player.HasEffect<MahoganyEffect>())
             {
                 float multiplier = 3f;
                 speed *= multiplier;
             }
-        }
+        }*/ //already covered by extraupdates
 
         public override void PostDraw(Projectile projectile, Color lightColor)
         {
