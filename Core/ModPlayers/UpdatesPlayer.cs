@@ -544,7 +544,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 LeadEffect.ProcessLeadEffectLifeRegen(Player);
 
-                FusedLensCursed = true;
+                FusedLensCanDebuff = true;
             }
 
             //placed here so it runs after our modded dots
