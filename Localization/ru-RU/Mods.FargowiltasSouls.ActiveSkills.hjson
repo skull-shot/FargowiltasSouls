@@ -12,16 +12,12 @@ SpecialDashEffect: {
 
 BetsyDashEffect: {
 	DisplayName: Огненный рывок
-	Tooltip:
-		'''
-		Короткий неуязвимый огненный рывок в сторону вашего курсора
-		Разделяет перезарядку с пчелиным рывком
-		'''
+	Tooltip: Короткий неуязвимый огненный рывок в сторону вашего курсора
 }
 
 SupremeDashEffect: {
-	// DisplayName: Supreme Dash
-	// Tooltip: Perform a short fist dash towards your cursor
+	DisplayName: Верховный рывок
+	Tooltip: Короткий рывок-кулак в сторону вашего курсора
 }
 
 DiveEffect: {
