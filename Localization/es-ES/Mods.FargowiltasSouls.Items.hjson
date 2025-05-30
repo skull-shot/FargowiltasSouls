@@ -500,8 +500,8 @@ RichMahoganyEnchant: {
 	/* Tooltip:
 		'''
 		All grappling hooks pull 1.5x as fast and shoot and retract 2x as fast
-		While grappling you gain 10% damage reduction for one hit and a 50% thorns effect
-		This damage reduction persists for a second after grappling
+		After grappling you briefly gain 10% damage reduction for one hit and immunity to knockback
+		Launching into an enemy with a grapple deals high damage and knockback on contact, scaling with launch speed
 		'Guaranteed to keep you hooked'
 		''' */
 }
@@ -925,7 +925,7 @@ TimberForce: {
 		'''
 		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
 		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
-		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2.5x as fast
+		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
 		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
 		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
 		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
