@@ -1141,7 +1141,7 @@ Deerclawps: {
 		'''
 		Grants immunity to Slow and Frozen
 		Dashing leaves a trail of ice spikes, pointed towards the closest enemy if airborne
-		Reduce damage taken by 15% while dashing
+		Reduces damage taken by 15% while dashing
 		'The trimmed nails of a defeated foe'
 		'''
 }
