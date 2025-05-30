@@ -17,10 +17,7 @@ BetsyDashEffect: {
 
 SupremeDashEffect: {
 	DisplayName: Supreme Dash
-	Tooltip:
-		'''
-		Perform a short fist dash towards your cursor
-		'''
+	Tooltip: Perform a short fist dash towards your cursor
 }
 
 DiveEffect: {

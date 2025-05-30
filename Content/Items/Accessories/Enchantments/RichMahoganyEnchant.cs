@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<TimberHeader>();
         public override int ToggleItemType => ModContent.ItemType<RichMahoganyEnchant>();
-        
+
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -59,7 +59,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.grapCount > 0)
             {
-                player.thorns += forceEffect ? 5.0f : 0.5f;
                 modPlayer.MahoganyTimer = 0;
             }
             else //when not grapple, refresh DR
@@ -72,7 +71,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.MahoganyTimer++;
             }
             if (modPlayer.MahoganyCanUseDR && modPlayer.MahoganyTimer < 60)
+            {
                 player.endurance += forceEffect ? 0.3f : 0.1f;
+                player.noKnockback = true;
+                //player.thorns += forceEffect ? 5.0f : 0.5f;
+
+                //launch damage
+                float speed = player.velocity.Length() * 5;
+                if (speed > 1000)
+                    speed = 1000; //no mappygaming moment allowed
+                if (forceEffect)
+                    speed *= 3;
+                for (int i = 0; i < Main.maxNPCs; i++)
+                {
+                    NPC npc = Main.npc[i];
+                    if (player.velocity.Length() > 10 && npc.active && !npc.friendly && !npc.dontTakeDamage && !npc.CountsAsACritter)
+                    {
+                        player.CollideWithNPCs(player.Hitbox, speed, speed * 0.3f, 5, 0, DamageClass.Melee);
+                    }
+                }
+            }
         }
         public static void MahoganyHookAI(Projectile projectile, FargoSoulsPlayer modPlayer)
         {
