@@ -7,9 +7,11 @@ using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Consumables;
@@ -77,6 +79,7 @@ namespace FargowiltasSouls
 
 
         public static List<int> DebuffIDs;
+        public static List<int> DefenseReducingDebuffs;
 
         internal static FargowiltasSouls Instance;
 
@@ -487,6 +490,29 @@ namespace FargowiltasSouls
 
                     ModContent.BuffType<TimeFrozenBuff>()
                 ];
+                DefenseReducingDebuffs =
+                [
+                    33,
+                    36,
+                    69,
+                    195,
+                    203,
+                    ModContent.BuffType<CurseoftheMoonBuff>(),
+                    ModContent.BuffType<BerserkedBuff>(), //technically only reduces dr but eh
+                    ModContent.BuffType<DefenselessBuff>(),
+                    ModContent.BuffType<FlamesoftheUniverseBuff>(),
+                    ModContent.BuffType<NanoInjectionBuff>(),
+                    ModContent.BuffType<OceanicMaulBuff>(),
+                    ModContent.BuffType<TwinsInstallBuff>()
+                ];
+                if (EmodeItemBalance.HasEmodeChange(Main.player[Main.myPlayer], ItemID.RodofDiscord))
+                {
+                    DefenseReducingDebuffs.Add(88);
+                }
+                if (Main.player[Main.myPlayer].FargoSouls().BerserkedFromAgitation == true)
+                {
+                    DefenseReducingDebuffs.Add(ModContent.BuffType<BerserkerInstallBuff>());
+                }
 
                 const int k = 1000;
                 FargoSets.NPCs.SwarmHealth[ModContent.NPCType<RoyalSubject>()] = 5100;

@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             for (int i = 0; i < Player.MaxBuffs; i++)
             {
                 int type = player.buffType[i];
-                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DefenseReducingDebuffs.Contains(type))
                 {
                     player.FargoSouls().FusedLensIchor = true;
                     player.GetCritChance(DamageClass.Generic) += 15;
