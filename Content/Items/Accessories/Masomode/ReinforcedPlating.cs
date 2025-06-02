@@ -21,15 +21,25 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 4);
-            Item.defense = 15;
+            Item.defense = 8;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
-            player.endurance += 0.05f;
+            player.endurance += 0.04f;
             player.noKnockback = true;
+
+            for (int i = 0; i < Player.MaxBuffs; i++)
+            {
+                int type = player.buffType[i];
+                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                {
+                    player.statDefense += 8;
+                    player.endurance += 0.08f;
+                }
+            }
         }
     }
 }

@@ -1469,7 +1469,8 @@ ReinforcedPlating: {
 	Tooltip:
 		'''
 		Grants immunity to Defenseless, Nano Injection, and knockback
-		Reduces damage taken by 5%
+		Reduces damage taken by 4%
+		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
 		'''
 }
