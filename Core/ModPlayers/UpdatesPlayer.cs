@@ -544,7 +544,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 LeadEffect.ProcessLeadEffectLifeRegen(Player);
 
-                FusedLensCanDebuff = true;
+                FusedLensCursed = true;
             }
 
             //placed here so it runs after our modded dots
@@ -861,6 +861,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<SpookyEffect>() && SpookyCD > 0)
                 SpookyCD--;
+
+            if (Player.HasEffect<RemoteLightningEffect>() && RemoteCD > 0)
+                RemoteCD--;
 
             /* TODO: Mutant's Presence toggle visual
             if (PresenceTogglerTimer == 5)

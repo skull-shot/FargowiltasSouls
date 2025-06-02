@@ -1240,11 +1240,10 @@ GroundStick: {
 	DisplayName: Remote Control
 	Tooltip:
 		'''
-		Grants immunity to Lightning Rod
-		Electric and ray attacks supercharge you and do halved damage if not already supercharged
-		While supercharged, you have increased movement speed, attack speed, and inflict Electrified and Lightning Rod
-		Two friendly probes fight by your side and will supercharge with you
-		'A defeated foe's segment with an antenna glued on'
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
 		'''
 }
 
@@ -1266,7 +1265,7 @@ HeartoftheMasochist: {
 	DisplayName: Heart of the Master
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Electrified, Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
 		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Guard Parry negates up to 200 damage. Parries heal you based on damage. While guarding, gain an aura of Rotting
@@ -1499,7 +1498,7 @@ SaucerControlConsole: {
 	DisplayName: Saucer Control Console
 	Tooltip:
 		'''
-		Grants immunity to Electrified and Distorted
+		Grants immunity to Distorted
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
 		Reduced damage before Golem is defeated

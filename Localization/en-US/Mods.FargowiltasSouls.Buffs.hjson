@@ -501,11 +501,6 @@ PlanterasChildBuff: {
 	Description: The child of Plantera will protect you
 }
 
-ProbesBuff: {
-	DisplayName: Probes
-	Description: The probes will protect you
-}
-
 PungentEyeballBuff: {
 	DisplayName: Pungent Eyeball
 	Description: The pungent eyeball will protect you

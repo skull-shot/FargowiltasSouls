@@ -33,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[BuffID.CursedInferno] = true;
             player.buffImmune[BuffID.Ichor] = true;
+            player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.NanoInjectionBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.LightningRodBuff>()] = true;
@@ -49,6 +50,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteLightningEffect>(Item);
 
             player.endurance += 0.05f;
             player.noKnockback = true;

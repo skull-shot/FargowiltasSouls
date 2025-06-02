@@ -18,10 +18,16 @@ namespace FargowiltasSouls.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.onFire2 = true;
+            //player.onFire2 = true;
             player.ichor = true;
+            if (player.lifeRegen > 0)
+                player.lifeRegen = 0;
+            player.lifeRegenTime = 0f;
+            player.lifeRegen -= 24;
+            player.statDefense -= 15;
             if (player.buffTime[buffIndex] < 2)
                 player.buffTime[buffIndex] = 2;
+            player.FargoSouls().TwinsInstall = true;
         }
     }
 }

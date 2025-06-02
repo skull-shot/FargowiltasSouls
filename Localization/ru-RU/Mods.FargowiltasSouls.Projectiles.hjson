@@ -802,3 +802,7 @@ DeviSniperTelegraph.DisplayName: Деви снайпер телеграф
 SmallStingHitbox.DisplayName: Маленькое жало
 DeviShadowbeam.DisplayName: Теневой луч Девиантт
 // SupremeDash.DisplayName: Supreme Dash
+// RemoteLightningExplosion.DisplayName: Remote Rain Explosion
+// RemoteLightning.DisplayName: Remote Rain Lightning
+// RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+// RemoteProbe.DisplayName: Remote Probe

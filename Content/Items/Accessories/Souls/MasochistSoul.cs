@@ -187,6 +187,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //dubious circuitry
             player.buffImmune[BuffID.CursedInferno] = true;
             player.buffImmune[BuffID.Ichor] = true;
+            player.buffImmune[BuffID.Electrified] = true;
             fargoPlayer.FusedLens = true;
             fargoPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
@@ -214,7 +215,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<LihzahrdBoulders>(Item);
 
             //saucer control console
-            player.buffImmune[BuffID.Electrified] = true;
             player.AddEffect<AmmoCycleEffect>(Item);
 
             //betsy's heart
