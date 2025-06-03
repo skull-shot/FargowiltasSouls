@@ -17,7 +17,7 @@ CobaltEffect: Усиленные прыжки кобальта
 AncientCobaltEffect: Взрывной прыжок др. кобальта
 AncientCobaltFallEffect: Быстрое падение др. кобальта
 MythrilEffect: Скорость оружий мифрила
-OrichalcumEffect: Лепестки орихалка
+OrichalcumEffect: Орихалковое отравление
 PalladiumHealing: Лечение палладия
 PalladiumEffect: Палладиевые сферы
 TitaniumEffect: Титановые осколки
@@ -138,7 +138,7 @@ DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: Установка близнецов
 GroundStickDR: Подзарядка при уроне
 ProbeMinionEffect: Прислужник дрон
-// RemoteLightningEffect: Lightning Strike
+RemoteLightningEffect: Удары молний
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
 DarkenedHeartEaters: Маленькие пожиратели
 GuttedHeartMinions: Щит из ползунов

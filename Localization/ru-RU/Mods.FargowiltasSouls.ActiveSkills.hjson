@@ -64,12 +64,12 @@ DebuffInstallKeyEffect: {
 }
 
 RemoteLightningEffect: {
-	// DisplayName: Lightning Strike
-	/* Tooltip:
+	DisplayName: Удары молний
+	Tooltip:
 		'''
-		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
-		12 second cooldown
-		''' */
+		Пускает молнии в сторону курсора, наносящие огромный дистанционный урон врагам и игрокам
+		Перезарядка 12 секунд
+		'''
 }
 
 FrigidGemstoneKeyEffect: {
