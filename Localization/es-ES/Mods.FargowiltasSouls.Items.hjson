@@ -1165,12 +1165,11 @@ DubiousCircuitry: {
 	// DisplayName: Dubious Circuitry
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] Defenseless, Nano Injection, and knockback
+		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] Defenseless, Nano Injection, and knockback
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While being debuffed by Ichor and Cursed Inferno, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/GroundStick] Your attacks have a small chance to inflict Lightning Rod and get supercharged on electric attacks
-		[i:FargowiltasSouls/GroundStick] Two friendly probes fight by your side and will supercharge with you
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 5%
+		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
+		[i:FargowiltasSouls/GroundStick] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
+		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		''' */
 }
@@ -1469,7 +1468,8 @@ ReinforcedPlating: {
 	/* Tooltip:
 		'''
 		Grants immunity to Defenseless, Nano Injection, and knockback
-		Reduces damage taken by 5%
+		Reduces damage taken by 4%
+		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
 		''' */
 }

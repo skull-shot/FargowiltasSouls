@@ -191,13 +191,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.FusedLens = true;
             fargoPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
             player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<ProbeMinionEffect>(Item);
+            player.AddEffect<RemoteLightningEffect>(Item);
+            player.AddEffect<ReinforcedStats>(Item);
             player.noKnockback = true;
-            if (player.onFire2)
-                player.FargoSouls().AttackSpeed += 0.15f;
-            if (player.ichor)
-                player.GetCritChance(DamageClass.Generic) += 15;
 
             //magical bulb
             player.buffImmune[BuffID.Venom] = true;

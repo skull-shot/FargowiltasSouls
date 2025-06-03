@@ -34,8 +34,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.FargoSouls().FusedLens = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-
+        }
+    }
+    public class FusedLensStats : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override void PostUpdateEquips(Player player)
+        {
             if (player.lifeRegen < 0)
             {
                 player.FargoSouls().FusedLensCursed = true;

@@ -101,6 +101,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             player.FargoSouls().WoodEnchantDiscount = true;
             player.AddEffect<GoldToPiggy>(Item);
+            player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);
         }
@@ -109,6 +110,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             player.FargoSouls().WoodEnchantDiscount = true;
             player.AddEffect<GoldToPiggy>(Item);
+            player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);
         }

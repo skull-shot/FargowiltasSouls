@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             float rng = Main.rand.Next(50, 71);
             if (++Projectile.localAI[1] > rng)
             {
-                Projectile.localAI[1] = player.FargoSouls().DubiousCircuitry ? -60f : 0f;
+                Projectile.localAI[1] = player.FargoSouls().DubiousCircuitry ? -15f : 0f;
                 followMouse = true;
 
                 int n = FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000f, true);

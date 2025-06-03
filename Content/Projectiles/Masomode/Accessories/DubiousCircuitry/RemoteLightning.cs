@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
             Projectile.hostile = true;
             Projectile.penetrate = 10;
             Projectile.extraUpdates += 1;
+            Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
         public override void OnSpawn(IEntitySource source)
         {

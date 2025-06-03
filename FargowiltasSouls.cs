@@ -480,15 +480,13 @@ namespace FargowiltasSouls
                     ModContent.BuffType<StunnedBuff>(),
                     ModContent.BuffType<SwarmingBuff>(),
                     ModContent.BuffType<UnstableBuff>(),
-
                     ModContent.BuffType<AbomFangBuff>(),
                     ModContent.BuffType<AbomPresenceBuff>(),
                     ModContent.BuffType<MutantFangBuff>(),
                     ModContent.BuffType<MutantPresenceBuff>(),
-
                     ModContent.BuffType<AbomRebirthBuff>(),
-
-                    ModContent.BuffType<TimeFrozenBuff>()
+                    ModContent.BuffType<TimeFrozenBuff>(),
+                    ModContent.BuffType<TwinsInstallBuff>()
                 ];
                 DefenseReducingDebuffs =
                 [

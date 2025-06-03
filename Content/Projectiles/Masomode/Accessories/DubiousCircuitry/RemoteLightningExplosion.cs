@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.scale = 3;
+            Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
            => Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < projHitbox.Width * 0.9f / 2;
