@@ -352,14 +352,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
-                case ProjectileID.SpiritHeal:
-                    if (player.HasEffect<SpectreEffect>() && !modPlayer.TerrariaSoul)
-                    {
-                        projectile.extraUpdates = 1;
-                        projectile.timeLeft = 180 * projectile.MaxUpdates;
-                    }
-                    break;
-
                 case ProjectileID.DD2ExplosiveTrapT3Explosion:
                     {
                         if (projectile.damage > 0 && source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.active
