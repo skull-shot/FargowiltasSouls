@@ -25,6 +25,7 @@ using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Common.Graphics.Particles;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -441,14 +442,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SoundEngine.PlaySound(SoundID.Item119, Player.Center);
 
                     Player.AddBuff(buffType, 2);
-
-                    int max = 60;
-                    for (int i = 0; i < max; i++)
+                    for (int i = 0; i < 30; i++)
                     {
-                        float scale = 3f;
-                        int index2 = Dust.NewDust(Player.position, Player.width, Player.height, Main.rand.NextBool() ? 90 : 89, 0f, 0f, 0, new Color(), scale);
-                        Main.dust[index2].noGravity = true;
-                        Main.dust[index2].velocity *= scale * 3;
+                        Vector2 dir = Main.rand.NextVector2Circular(20, 15);
+                        Color color = Main.rand.NextFromList(Color.Green, Color.Yellow);
+                        Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, color, Main.rand.NextFloat(0.5f, 0.75f), Main.rand.Next(30, 40), false);
+                        p.Spawn();
                     }
                 }
             }

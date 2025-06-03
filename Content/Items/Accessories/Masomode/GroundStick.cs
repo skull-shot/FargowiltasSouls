@@ -1,12 +1,25 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.Champions.Will;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
@@ -23,7 +36,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<RemoteLightningEffect>()];
         public override void SetDefaults()
         {
             Item.width = 20;
@@ -35,114 +49,44 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.AddEffect<GroundStickDR>(Item);
             player.AddEffect<ProbeMinionEffect>(Item);
+            player.AddEffect<RemoteLightningEffect>(Item);
         }
     }
     public class GroundStickDR : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
         public override int ToggleItemType => ModContent.ItemType<GroundStick>();
-        private static readonly int[] ElectricAttacks =
-[
-            ProjectileID.DeathLaser,
-            ProjectileID.EyeLaser,
-            ProjectileID.PinkLaser,
-            ProjectileID.EyeBeam,
-            ProjectileID.MartianTurretBolt,
-            ProjectileID.BrainScramblerBolt,
-            ProjectileID.GigaZapperSpear,
-            ProjectileID.RayGunnerLaser,
-            ProjectileID.SaucerLaser,
-            ProjectileID.NebulaLaser,
-            ProjectileID.VortexVortexLightning,
-            ProjectileID.DD2LightningBugZap,
-            ProjectileID.EyeBeam
-];
         public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
-
-            bool electricAttack = false;
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            Projectile proj = projectile;
-
-            if (proj.ModProjectile == null)
-            {
-                if (proj.aiStyle == ProjAIStyleID.MartianDeathRay
-                    || proj.aiStyle == ProjAIStyleID.ThickLaser
-                    || proj.aiStyle == ProjAIStyleID.LightningOrb
-                    || ElectricAttacks.Contains(proj.type))
-                {
-                    electricAttack = true;
-                }
-            }
-            else if (proj.ModProjectile is BaseDeathray)
-            {
-                electricAttack = true;
-            }
-            else
-            {
-                string name = proj.ModProjectile.Name.ToLower();
-                if (name.Contains("lightning") || name.Contains("electr") || name.Contains("thunder") || name.Contains("laser"))
-                    electricAttack = true;
-            }
-
-            if (NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
-                electricAttack = false;
-
-            if (electricAttack && player.whoAmI == Main.myPlayer && !player.HasBuff(ModContent.BuffType<SuperchargedBuff>()))
+            bool lightningskill = projectile.type == ModContent.ProjectileType<RemoteLightning>() || projectile.type == ModContent.ProjectileType<RemoteLightningExplosion>();
+            if (projectile.FargoSouls().electricAttack && player.whoAmI == Main.myPlayer && !player.HasBuff<SuperchargedBuff>() || lightningskill)
             {
                 dr = 0.5f;
-
-                player.AddBuff(ModContent.BuffType<SuperchargedBuff>(), 60 * 30);
-
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.minion && p.owner == player.whoAmI
-                    && (p.type == ModContent.ProjectileType<Probe1>() || p.type == ModContent.ProjectileType<Probe2>())))
+                int duration = projectile.originalDamage * 30;
+                if (duration > 3600)
+                    duration = 3600;
+                if (lightningskill)
                 {
-                    p.ai[1] = 180;
-                    p.netUpdate = true;
+                    if (Main.masterMode) duration = 2700;
+                    else if (Main.expertMode) duration = 1800;
+                    else duration = 1200;
                 }
-
+                player.AddBuff(ModContent.BuffType<SuperchargedBuff>(), duration);
                 SoundEngine.PlaySound(SoundID.NPCDeath6, player.Center);
                 SoundEngine.PlaySound(SoundID.Item92, player.Center);
                 SoundEngine.PlaySound(SoundID.Item14, player.Center);
 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < duration/80; i++)
                 {
-                    int dust = Dust.NewDust(player.position, player.width, player.height, DustID.Vortex, 0f, 0f, 100, default, 3f);
-                    Main.dust[dust].velocity *= 1.4f;
-                }
-
-                for (int i = 0; i < 10; i++)
-                {
-                    int dust = Dust.NewDust(player.position, player.width, player.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
-                    Main.dust[dust].noGravity = true;
-                    Main.dust[dust].velocity *= 7f;
-                    dust = Dust.NewDust(player.position, player.width, player.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
-                    Main.dust[dust].velocity *= 3f;
-                }
-
-                for (int index1 = 0; index1 < 30; ++index1)
-                {
-                    int index2 = Dust.NewDust(player.position, player.width, player.height, DustID.Vortex, 0f, 0f, 100, new Color(), 2f);
-                    Main.dust[index2].noGravity = true;
-                    Main.dust[index2].velocity *= 21f;
-                    Main.dust[index2].noLight = true;
-                    int index3 = Dust.NewDust(player.position, player.width, player.height, DustID.Vortex, 0f, 0f, 100, new Color(), 1f);
-                    Main.dust[index3].velocity *= 12f;
-                    Main.dust[index3].noGravity = true;
-                    Main.dust[index3].noLight = true;
-                }
-
-                for (int i = 0; i < 20; i++)
-                {
-                    int d = Dust.NewDust(player.position, player.width, player.height, DustID.Vortex, 0f, 0f, 100, default, Main.rand.NextFloat(2f, 5f));
-                    if (Main.rand.NextBool(3))
-                        Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= Main.rand.NextFloat(12f, 18f);
-                    Main.dust[d].position = player.Center;
+                    Vector2 dir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) - player.velocity / 10;
+                    Vector2 spd = Main.rand.NextVector2Circular(15, 15);
+                    Particle p = new ElectricSpark(player.Center + dir * 10, spd, Color.Teal, Main.rand.NextFloat(2f, 4f), 120);
+                    p.Spawn();
                 }
             }
             return dr;
@@ -155,8 +99,46 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            if (!player.HasBuff<SouloftheMasochistBuff>())
-                player.AddBuff(ModContent.BuffType<ProbesBuff>(), 2);
+            player.FargoSouls().Probes = true;
+            if (player.whoAmI == Main.myPlayer && player.HasEffect<ProbeMinionEffect>() && player.FargoSouls().Supercharged)
+            {
+                player.FargoSouls().Probes = true;
+                const int damage = 30;
+                const int max = 3;
+                float rotation = 2f * (float)Math.PI / max;
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<RemoteProbe>()] < 3)
+                {
+                    for (int i = 0; i < max; i++)
+                    {
+                        Vector2 spawnPos = player.Center + new Vector2(60, 0f).RotatedBy(rotation * i);
+                        FargoSoulsUtil.NewSummonProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<RemoteProbe>(), damage, 10f, player.whoAmI, rotation * i);
+                    }
+                }
+            }
+            else
+                player.FargoSouls().Probes = false;
+        }
+    }
+    public class RemoteLightningEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
+        public override int ToggleItemType => ModContent.ItemType<GroundStick>();
+        public override bool ActiveSkill => Main.LocalPlayer.HasEffect<RemoteLightningEffect>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            if (player.FargoSouls().RemoteCD > 0)
+                return;
+            if (Main.myPlayer == player.whoAmI)
+            {
+                int dmg = (int)(800 * player.ActualClassDamage(DamageClass.Ranged));
+                Vector2 pos = new(Main.MouseWorld.ToTileCoordinates().X * 16 + 8, player.Center.Y - 575);
+                float angle = MathHelper.Pi * 0.7f;
+                Projectile.NewProjectile(GetSource_EffectItem(player), pos, Vector2.Zero, ModContent.ProjectileType<RemoteScanTelegraph>(), dmg, 0f, Main.myPlayer, 0, angle, 1000);
+            }
+            player.FargoSouls().RemoteCD = 720;
+            CooldownBarManager.Activate("RemoteCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/GroundStick").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);
         }
     }
 }

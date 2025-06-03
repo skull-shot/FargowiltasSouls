@@ -34,16 +34,20 @@ namespace FargowiltasSouls.Common.Graphics.Particles
             {
                 Velocity.Y += 0.33f;
             }
-            
-			Velocity *= 0.95f;
+            else //reverse gravity bc nothing else uses this without gravity on rn
+            {
+                Velocity.Y -= 0.33f;
+            }
+
+                Velocity *= 0.95f;
 			Scale *= 0.95f;
 			Opacity = FargoSoulsUtil.SineInOut(1f - LifetimeRatio);
-			Rotation = Velocity.ToRotation() + MathHelper.PiOver2;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			Vector2 scale = new Vector2(0.5f, 1.6f) * Scale;
+            Rotation = Velocity.ToRotation() + MathHelper.PiOver2;
+            Vector2 scale = new Vector2(0.5f, 1.6f) * Scale;
 			spriteBatch.Draw(Texture, Position - Main.screenPosition, null, DrawColor, Rotation, null, scale, 0);
 			spriteBatch.Draw(Texture, Position - Main.screenPosition, null, DrawColor, Rotation, null, scale * new Vector2(0.45f, 1f), 0);
 

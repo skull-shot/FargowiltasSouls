@@ -1,7 +1,16 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask;
+using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,7 +20,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<RemoteLightningEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -26,13 +36,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 5);
-            Item.defense = 10;
+            Item.defense = 8;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.buffImmune[BuffID.CursedInferno] = true;
             player.buffImmune[BuffID.Ichor] = true;
+            player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.NanoInjectionBuff>()] = true;
             player.buffImmune[ModContent.BuffType<Buffs.Masomode.LightningRodBuff>()] = true;
@@ -41,16 +52,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             modPlayer.FusedLens = true;
             modPlayer.DubiousCircuitry = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-            if (player.onFire2)
-                player.FargoSouls().AttackSpeed += 0.15f;
-            if (player.ichor)
-                player.GetCritChance(DamageClass.Generic) += 15;
 
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteLightningEffect>(Item);
 
-            player.endurance += 0.05f;
+            player.AddEffect<ReinforcedStats>(Item);
+            player.endurance += 0.04f;
             player.noKnockback = true;
         }
 

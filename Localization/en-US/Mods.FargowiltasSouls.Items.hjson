@@ -414,8 +414,8 @@ OrichalcumEnchant: {
 	DisplayName: Orichalcum Enchantment
 	Tooltip:
 		'''
+		Your damaging debuffs deal 1.75x damage
 		Your attacks inflict Orichalcum Poison for a short duration
-		Your damaging debuffs deal 1.7x damage
 		'Nature blesses you'
 		'''
 }
@@ -835,8 +835,8 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 2.1x damage from debuffs
-		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 2.5x damage from debuffs
+		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
 		'Gaia's blessing shines upon you'
 		'''
 }
@@ -1165,12 +1165,11 @@ DubiousCircuitry: {
 	DisplayName: Dubious Circuitry
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] Defenseless, Nano Injection, and knockback
+		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] Defenseless, Nano Injection, and knockback
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While being debuffed by Ichor and Cursed Inferno, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/GroundStick] Your attacks have a small chance to inflict Lightning Rod and get supercharged on electric attacks
-		[i:FargowiltasSouls/GroundStick] Two friendly probes fight by your side and will supercharge with you
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 5%
+		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
+		[i:FargowiltasSouls/GroundStick] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
+		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		'''
 }
@@ -1195,10 +1194,9 @@ FusedLens: {
 	Tooltip:
 		'''
 		Grants immunity to non-self inflicted Cursed Inferno and Ichor
+		While losing health to damage over time, 15% increased attack speed and attacks inflict Cursed Inferno
+		While having defense reduced by a debuff, 15% increased critical strike chance and attacks inflict Ichor
 		Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		When inflicted with Cursed Inferno, 15% increased attack speed
-		When inflicted with Ichor, 15% increased critical strike chance
-		While losing health to damage over time, you inflict Cursed Inferno and Ichor
 		'Too melted to improve vision'
 		'''
 }
@@ -1240,11 +1238,10 @@ GroundStick: {
 	DisplayName: Remote Control
 	Tooltip:
 		'''
-		Grants immunity to Lightning Rod
-		Electric and ray attacks supercharge you and do halved damage if not already supercharged
-		While supercharged, you have increased movement speed, attack speed, and inflict Electrified and Lightning Rod
-		Two friendly probes fight by your side and will supercharge with you
-		'A defeated foe's segment with an antenna glued on'
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
 		'''
 }
 
@@ -1266,7 +1263,7 @@ HeartoftheMasochist: {
 	DisplayName: Heart of the Master
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Electrified, Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
 		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Guard Parry negates up to 200 damage. Parries heal you based on damage. While guarding, gain an aura of Rotting
@@ -1471,7 +1468,8 @@ ReinforcedPlating: {
 	Tooltip:
 		'''
 		Grants immunity to Defenseless, Nano Injection, and knockback
-		Reduces damage taken by 5%
+		Reduces damage taken by 4%
+		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
 		'''
 }
@@ -1499,7 +1497,7 @@ SaucerControlConsole: {
 	DisplayName: Saucer Control Console
 	Tooltip:
 		'''
-		Grants immunity to Electrified and Distorted
+		Grants immunity to Distorted
 		Summons a friendly Mini Saucer
 		The saucer's tractor beam slows enemies hit by it
 		Reduced damage before Golem is defeated

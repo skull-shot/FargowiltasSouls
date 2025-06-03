@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Minions
 {
-    public class Probe2 : ModProjectile
+    public class RemoteProbe : ModProjectile
     {
         public override string Texture => "Terraria/Images/NPC_139";
 
@@ -48,51 +49,29 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.ai[0] -= (float)Math.PI / 60f;
             Projectile.Center = player.Center + new Vector2(-60, 0).RotatedBy(Projectile.ai[0]);
 
-            if (Projectile.ai[1] > 0)
+            float rng = Main.rand.Next(50, 71);
+            if (++Projectile.localAI[1] > rng)
             {
-                Projectile.ai[1]--;
+                Projectile.localAI[1] = player.FargoSouls().DubiousCircuitry ? -15f : 0f;
+                followMouse = true;
 
-                if (Projectile.ai[1] % 10 == 5)
+                int n = FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000f, true);
+                if (n != -1 && n != Main.maxNPCs)
                 {
-                    List<NPC> npcs = Main.npc.Where(n => n.CanBeChasedBy() && Projectile.Distance(n.Center) < 1200 && Collision.CanHitLine(Projectile.Center, 0, 0, n.Center, 0, 0)).ToList();
-                    if (npcs.Count > 0)
-                    {
-                        NPC npc = Main.rand.Next(npcs);
-                        Projectile.rotation = Projectile.SafeDirectionTo(npc.Center).ToRotation();
-                        int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(16f, 0f).RotatedBy(Projectile.rotation).RotatedByRandom(MathHelper.PiOver4 / 2),
-                            ModContent.ProjectileType<LightningArc>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.rotation, Main.rand.Next(100));
-                        if (p != Main.maxProjectiles)
-                            Main.projectile[p].DamageType = Projectile.DamageType;
-                        Projectile.rotation += MathHelper.Pi;
-                    }
+                    followMouse = false;
+
+                    Projectile.rotation = Projectile.SafeDirectionTo(Main.npc[n].Center).ToRotation();
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(12f, 0f).RotatedBy(Projectile.rotation),
+                        ModContent.ProjectileType<ProbeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.rotation += MathHelper.Pi;
                 }
+                Projectile.netUpdate = true;
             }
-            else
-            {
-                if (++Projectile.localAI[1] > 20f)
-                {
-                    Projectile.localAI[1] = player.FargoSouls().MasochistSoul ? 10f : player.FargoSouls().DubiousCircuitry ? -20f : 0f;
-                    followMouse = true;
+            if (followMouse && Projectile.owner == Main.myPlayer)
+                Projectile.rotation = (Main.MouseWorld - Projectile.Center).ToRotation() + (float)Math.PI;
+    }
 
-                    int n = FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000f, true);
-                    if (n != -1 && n != Main.maxNPCs)
-                    {
-                        followMouse = false;
-
-                        Projectile.rotation = Projectile.SafeDirectionTo(Main.npc[n].Center).ToRotation();
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(8f, 0f).RotatedBy(Projectile.rotation),
-                            ModContent.ProjectileType<ProbeLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                        Projectile.rotation += MathHelper.Pi;
-                    }
-
-                    Projectile.netUpdate = true;
-                }
-
-                if (followMouse && Projectile.owner == Main.myPlayer)
-                    Projectile.rotation = (Main.MouseWorld - Projectile.Center).ToRotation() + (float)Math.PI;
-            }
-        }
-
+        public override bool? CanHitNPC(NPC target) => false;
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;

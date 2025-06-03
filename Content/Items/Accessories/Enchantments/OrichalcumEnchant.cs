@@ -56,11 +56,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static float OriDotModifier(NPC npc, FargoSoulsPlayer modPlayer)
         {
-            float multiplier = 1.7f;
+            float multiplier = 1.75f;
 
             if (modPlayer.Player.ForceEffect<OrichalcumEffect>())
             {
-                multiplier = 2.4f;
+                multiplier = 2.5f;
             }
             return multiplier;
         }

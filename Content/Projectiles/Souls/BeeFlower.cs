@@ -32,6 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.timeLeft = 60 * 15;
             Projectile.penetrate = 1;
             Projectile.light = 1;
+            Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
         public override bool? CanDamage() => Projectile.frame == Main.projFrames[Projectile.type] - 1; //only damage when fully grown
         public override void AI()

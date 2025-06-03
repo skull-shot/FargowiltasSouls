@@ -251,9 +251,13 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool CrystalSkullMinion;
         public int WyvernBallsCD;
         public bool FusedLens;
-        public bool FusedLensCanDebuff;
+        public bool FusedLensCursed;
+        public bool FusedLensIchor;
         public bool DubiousCircuitry;
         public bool Supercharged;
+        public bool TwinsInstall;
+        public int RemoteCD;
+        public bool SuperInstall;
         public bool Probes;
         public bool MagicalBulb;
         public bool PlanterasChild;

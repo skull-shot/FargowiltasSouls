@@ -72,7 +72,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             IceQueensCrown.AddEffects(player, Item);
 
             //saucer control console
-            player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[BuffID.VortexDebuff] = true;
             player.AddEffect<UfoMinionEffect>(Item);
             player.AddEffect<AmmoCycleEffect>(Item);

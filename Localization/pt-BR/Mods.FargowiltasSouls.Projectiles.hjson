@@ -802,3 +802,7 @@ PlasmaProj.DisplayName: Raio de Plasma
 // SmallStingHitbox.DisplayName: Small Stinger
 // DeviShadowbeam.DisplayName: Devi Shadowbeam
 // SupremeDash.DisplayName: Supreme Dash
+// RemoteLightningExplosion.DisplayName: Remote Rain Explosion
+// RemoteLightning.DisplayName: Remote Rain Lightning
+// RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+// RemoteProbe.DisplayName: Remote Probe

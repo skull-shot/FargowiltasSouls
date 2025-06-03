@@ -30,12 +30,12 @@ namespace FargowiltasSouls.Common.Graphics.Particles
             Velocity *= 0.95f;
             Scale *= 0.95f;
             Opacity = FargoSoulsUtil.SineInOut(1f - LifetimeRatio);
-            Rotation = Velocity.ToRotation() + MathHelper.PiOver2;
         }
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			AtlasTexture lightningTexture = Texture;
+            Rotation = Velocity.ToRotation() + MathHelper.PiOver2;
+            AtlasTexture lightningTexture = Texture;
             int lightningFrames = 5;
 
             Rectangle GetRandomLightningFrame()

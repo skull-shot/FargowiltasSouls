@@ -42,8 +42,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<AmmoCycleEffect>(Item);
-
-            player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[BuffID.VortexDebuff] = true;
             player.AddEffect<UfoMinionEffect>(Item);
 

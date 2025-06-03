@@ -501,11 +501,6 @@ PlanterasChildBuff: {
 	Description: Дитя Плантеры защищает вас
 }
 
-ProbesBuff: {
-	DisplayName: Зонды
-	Description: Зонды защищают вас
-}
-
 PungentEyeballBuff: {
 	DisplayName: Едкий глаз
 	Description: Едкий глаз защищает вас

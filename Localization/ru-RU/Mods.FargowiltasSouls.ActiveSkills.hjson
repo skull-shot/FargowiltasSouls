@@ -63,6 +63,15 @@ DebuffInstallKeyEffect: {
 	Tooltip: Наложите на себя дебаффы, которые дают различные эффекты от аксессуара к аксессуару
 }
 
+RemoteLightningEffect: {
+	// DisplayName: Lightning Strike
+	/* Tooltip:
+		'''
+		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		12 second cooldown
+		''' */
+}
+
 FrigidGemstoneKeyEffect: {
 	DisplayName: Морозное заклинание
 	Tooltip:

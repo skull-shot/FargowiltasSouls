@@ -34,12 +34,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             player.FargoSouls().FusedLens = true;
             player.AddEffect<FusedLensInstall>(Item);
+            player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-
-            if (player.onFire2)
+        }
+    }
+    public class FusedLensStats : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.lifeRegen < 0)
+            {
+                player.FargoSouls().FusedLensCursed = true;
                 player.FargoSouls().AttackSpeed += 0.15f;
-            if (player.ichor)
-                player.GetCritChance(DamageClass.Generic) += 15;
+            }
+            for (int i = 0; i < Player.MaxBuffs; i++)
+            {
+                int type = player.buffType[i];
+                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DefenseReducingDebuffs.Contains(type))
+                {
+                    player.FargoSouls().FusedLensIchor = true;
+                    player.GetCritChance(DamageClass.Generic) += 15;
+                }
+            }
         }
     }
     public class FusedLensInstall : AccessoryEffect

@@ -501,11 +501,6 @@ PlanterasChildBuff: {
 	Description: 世纪之花的孩子将会保护你
 }
 
-ProbesBuff: {
-	DisplayName: 探测器
-	Description: 探测器将会保护你
-}
-
 PungentEyeballBuff: {
 	DisplayName: 尖刻眼球
 	Description: 尖刻眼球将会保护你

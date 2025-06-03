@@ -3126,7 +3126,7 @@ AnglerEnchant: {
 		'''
 		Increases fishing power
 		You catch fish almost instantly
-		[i:LavaproofTackleBag] Effects of Lavaproof Tackle Bag
+		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
 		'As long as they aren't all shoes, you can go home happily'
 		''' */
 }

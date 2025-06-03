@@ -67,6 +67,15 @@ DebuffInstallKeyEffect: {
 	Tooltip: 为自身附加减益，根据饰品的不同，获得不同效果
 }
 
+RemoteLightningEffect: {
+	// DisplayName: Lightning Strike
+	/* Tooltip:
+		'''
+		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		12 second cooldown
+		''' */
+}
+
 FrigidGemstoneKeyEffect: {
 	DisplayName: 寒霜咒语
 	Tooltip:

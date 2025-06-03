@@ -1,3 +1,4 @@
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
@@ -22,6 +23,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -371,7 +373,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             PungentEyeballMinion = false;
             CrystalSkullMinion = false;
             FusedLens = false;
-            FusedLensCanDebuff = false;
+            FusedLensCursed = false;
+            FusedLensIchor = false;
+            TwinsInstall = false;
             DubiousCircuitry = false;
             Supercharged = false;
             Probes = false;
@@ -1002,9 +1006,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Supercharged)
             {
-                if (Main.rand.NextBool() && drawInfo.shadow == 0f)
+                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f)
                 {
-                    int dust = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Vortex, Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f);
+                    Vector2 dir = Main.rand.NextVector2Circular(20, 15);
+                    Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, Color.Teal, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
+                    p.Spawn();
+                    /*int dust = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Vortex, Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f);
                     Main.dust[dust].scale += 0.5f;
                     Main.dust[dust].noGravity = true;
                     Main.dust[dust].velocity *= 1.8f;
@@ -1012,11 +1019,20 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         Main.dust[dust].noGravity = false;
                         Main.dust[dust].scale *= 0.5f;
-                    }
+                    }*/
                 }
             }
 
-
+            if (TwinsInstall)
+            {
+                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f)
+                {
+                    Vector2 dir = Main.rand.NextVector2Circular(20, 15);
+                    Color color = Main.rand.NextFromList(Color.Green, Color.Yellow);
+                    Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, color, Main.rand.NextFloat(0.1f, 0.25f), 25, false);
+                    p.Spawn();
+                }
+            }
         }
         public void ConcentratedRainbowMatterTryAutoHeal()
         {

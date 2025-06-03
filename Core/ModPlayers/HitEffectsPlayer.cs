@@ -284,16 +284,16 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (FusedLens)
             {
-                if (Player.onFire2 || FusedLensCanDebuff)
-                    target.AddBuff(BuffID.CursedInferno, 360);
-                if (Player.ichor || FusedLensCanDebuff)
-                    target.AddBuff(BuffID.Ichor, 360);
+                if (FusedLensCursed)
+                    target.AddBuff(BuffID.CursedInferno, 120);
+                if (FusedLensIchor)
+                    target.AddBuff(BuffID.Ichor, 120);
             }
 
             if (Supercharged)
             {
                 target.AddBuff(BuffID.Electrified, 240);
-                target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
+                //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
             }
         }
 

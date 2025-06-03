@@ -17,7 +17,7 @@
 // AncientCobaltEffect: Ancient Cobalt Explosion Jump
 // AncientCobaltFallEffect: Ancient Cobalt Fall Speed
 // MythrilEffect: Mythril Weapon Speed
-// OrichalcumEffect: Orichalcum Petals
+// OrichalcumEffect: Orichalcum Poison
 // PalladiumHealing: Palladium Healing
 // PalladiumEffect: Palladium Orbs
 // TitaniumEffect: Titanium Shards
@@ -138,6 +138,7 @@
 // FusedLensInstall: Twins Install
 // GroundStickDR: Supercharge When Hit
 // ProbeMinionEffect: Probes Minion
+// RemoteLightningEffect: Lightning Strike
 // PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
 // DarkenedHeartEaters: Tiny Eaters
 // GuttedHeartMinions: Creeper Shield
