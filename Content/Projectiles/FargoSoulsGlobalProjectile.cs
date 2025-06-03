@@ -543,7 +543,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         stormTimer = 240;
                     }
                 }
-                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>())
+                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>() && (FargoSoulsUtil.CanDeleteProjectile(projectile)))
                 {
                     foreach (int orbIndex in modPlayer.ShadowOrbs)
                     {
@@ -568,10 +568,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 ball.originalDamage = damage;
                             }
-
-
-                            if (FargoSoulsUtil.CanDeleteProjectile(projectile))
-                                projectile.Kill();
+                            projectile.Kill();
 
                             orb.ai[0] = 400;
                             orb.netUpdate = true;
