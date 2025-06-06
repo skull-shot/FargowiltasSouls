@@ -429,17 +429,6 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (Sublimation)
-            {
-                if (Main.rand.NextBool(4))
-                {
-                    //int d = Dust.NewDust(npc.position, npc.width, npc.height, DustID.PortalBolt, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 0, new Color(220, 255, 220), 2.5f);
-                    //Main.dust[d].velocity.Y -= 1;
-                    //Main.dust[d].velocity *= 1.5f;
-                    //Main.dust[d].noGravity = true;
-                }
-            }
-
             if (HellFire)
             {
                 if (Main.rand.Next(4) < 3)
@@ -670,7 +659,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
                     PureGazeTime += 1;
                 else if (PureGazeTime > 0)
-                    PureGazeTime -= 2;
+                    PureGazeTime -= 3;
                 if (PureGazeTime > PungentGazeBuff.MAX_TIME)
                     PureGazeTime = PungentGazeBuff.MAX_TIME;
                 if (PureGazeTime > 0 && Main.rand.NextBool(3))
@@ -686,6 +675,8 @@ namespace FargowiltasSouls.Core.Globals
                     spark.Spawn();
                 }
             }
+            else if (PureGazeTime > 0)
+                PureGazeTime -= 3;
 
             if (DeathMarked)
             {
