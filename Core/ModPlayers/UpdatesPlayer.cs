@@ -731,7 +731,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 const int healDelay = 60;
                 if (Player.HasEffect<HallowEffect>() && HallowHealTime % healDelay == 0)
                 {
-                    int heal = Player.ForceEffect<HallowEffect>() ? 17 : 14;
+                    int heal = (int)Math.Round(HallowHealTotal / 10);
                     Player.Heal(heal);
                 }
                 HallowHealTime--;
