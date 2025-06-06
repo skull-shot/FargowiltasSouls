@@ -84,9 +84,9 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.ai[1] == 1)
+            if (Projectile.ai[2] != 1)
                 BeeSwarm();
-            else if (Projectile.ai[2] == 1)
+            else
                 CactusBomb();
         }
         public override void OnKill(int timeLeft)

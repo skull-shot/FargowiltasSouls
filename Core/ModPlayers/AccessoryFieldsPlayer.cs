@@ -135,6 +135,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool GoldShell;
         private int goldHP;
         public int HallowHealTime;
+        public float HallowHealTotal;
         public int HuntressStage;
         public int HuntressCD;
         public int HuntressMissCD;
