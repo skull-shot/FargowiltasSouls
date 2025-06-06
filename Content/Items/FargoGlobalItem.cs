@@ -159,7 +159,9 @@ namespace FargowiltasSouls.Content.Items
                     int hallowIndex = ModContent.GetInstance<HallowEffect>().Index;
                     // Hallow needs to disabled so it doesn't set GetHealLife to 0
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = false;
-                    modPlayer.HallowHealTime = 6 * player.GetHealLife(item);
+                    float mult = modPlayer.ForceEffect<HallowEnchant>() ? 1.7f : 1.4f;
+                    modPlayer.HallowHealTotal = player.GetHealLife(item) * mult;
+                    modPlayer.HallowHealTime = 600;
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = true;
                     HallowEffect.HealRepel(player);
                 }
