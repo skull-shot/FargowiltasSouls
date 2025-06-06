@@ -309,14 +309,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
-                case ProjectileID.SpiritHeal:
-                    if (player.HasEffect<SpectreEffect>() && !modPlayer.TerrariaSoul)
-                    {
-                        projectile.extraUpdates = 1;
-                        projectile.timeLeft = 180 * projectile.MaxUpdates;
-                    }
-                    break;
-
                 case ProjectileID.DD2ExplosiveTrapT3Explosion:
                     {
                         if (projectile.damage > 0 && source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.active
@@ -510,7 +502,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         stormTimer = 240;
                     }
                 }
-                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>())
+                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>() && (FargoSoulsUtil.CanDeleteProjectile(projectile)))
                 {
                     foreach (int orbIndex in modPlayer.ShadowOrbs)
                     {
@@ -535,9 +527,6 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 ball.originalDamage = damage;
                             }
-
-
-                            if (FargoSoulsUtil.CanDeleteProjectile(projectile))
                                 projectile.Kill();
 
                             orb.ai[0] = 300;
@@ -1354,11 +1343,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 HuntressProj = -1;
+                modPlayer.HuntressMissCD = 30;
                 //sound effect
             }
 
@@ -1659,9 +1649,10 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (HuntressProj == 1) //dying without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
+                modPlayer.HuntressMissCD = 30;
                 //Main.NewText("MISS");
                 //sound effect
             }
