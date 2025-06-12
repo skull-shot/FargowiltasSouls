@@ -812,3 +812,8 @@ BleedingOut: {
 	DisplayName: Bleeding Out
 	Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
 }
+
+SilverBuff: {
+	DisplayName: Parry Boost
+	Description: 100% increased damage
+}

@@ -557,8 +557,7 @@ SilverEnchant: {
 	DisplayName: Silver Enchantment
 	Tooltip:
 		'''
-		Guard exactly when hit to perfect parry, gaining Striking Moment
-		Guard Parry negates up to 100 damage
+		Perfectly timing a parry briefly increases your damage by 100%
 		'Reflection'
 		'''
 }

@@ -776,11 +776,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (silverEffect)
                 {
-                    if (perfectParry || ForceEffect<SilverEnchant>())
+                    if (perfectParry)
                     {
                         damageBlockCap = higherCap;
-                        Player.AddBuff(BuffID.ParryDamageBuff, 300);
-
+                        if (Player.HasEffectEnchant<SilverEffect>())
+                            Player.AddBuff(ModContent.BuffType<SilverBuff>(), ForceEffect<SilverEnchant>() ? 180 : 60);
                         SoundEngine.PlaySound(SoundID.Item4, Player.Center);
                         /*
                         for (int i = 0; i < 50; i++)
