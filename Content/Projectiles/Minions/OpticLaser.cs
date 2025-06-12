@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -46,7 +47,13 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
         }
-
+        public override bool PreAI()
+        {
+            if (Projectile.ai[1] == 0)
+                SoundEngine.PlaySound(SoundID.Item33 with { Volume = 0.5f }, Projectile.Center);
+            Projectile.ai[1] = 1;
+            return true;
+        }
         /*public override void AI()
         {
             if (Projectile.timeLeft < 60 * (Projectile.extraUpdates + 1)) //stop homing
