@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
         {
             // DisplayName.SetDefault("Jungle Mimic");
             Main.projPet[Projectile.type] = true;
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 10;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
@@ -33,8 +33,8 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
             Projectile.minionSlots = 2f;
             Projectile.penetrate = -1;
             Projectile.aiStyle = 26;
-            Projectile.width = 52;
-            Projectile.height = 56;
+            Projectile.width = 38;
+            Projectile.height = 40;
             AIType = ProjectileID.BabySlime;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
@@ -49,7 +49,8 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
         {
             return true;
         }
-
+        private float realFrameCounter;
+        private int realFrame;
         public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
@@ -75,6 +76,8 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
                         SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, shootVel * 14f + targetNPC.velocity / 2, ModContent.ProjectileType<JungleMimicSummonCoin>(), Projectile.damage / 4, Projectile.knockBack, Main.myPlayer);
                     }
+                    else
+                        counter = 0;
                 }
             }
 
@@ -88,13 +91,12 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
                     NPC targetNPC = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1000, true));
                     if (targetNPC != null)
                     {
-                        Projectile.frameCounter++;
+                        Projectile.frame++;
                         trailbehind = true;
-                        if (Projectile.frameCounter > 8)
+                        if (++Projectile.frameCounter >= 10)
                         {
-                            Projectile.frame++;
-                            if (Projectile.frame > 5)
-                                Projectile.frame = 2;
+                            Projectile.frame = 6;
+                            Projectile.frameCounter = 6;
                         }
 
                         for (int index = 0; index < 1000; ++index)
@@ -133,6 +135,23 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
             trailbehind = false;
             Projectile.tileCollide = true;
             return true;
+        }
+        public override void AI()
+        {
+            if (Projectile.velocity.X == 0)
+                realFrame = 0;
+            else if (counter < 180)
+            {
+                realFrameCounter += System.Math.Abs(Projectile.velocity.X);
+                if (++realFrameCounter > 24)
+                {
+                    realFrameCounter = 0;
+                    realFrame++;
+                }
+                if (realFrame > 5 || realFrame < 2)
+                    realFrame = 2;
+            }
+            Projectile.frame = realFrame;
         }
 
         public override bool PreDraw(ref Color lightColor)
