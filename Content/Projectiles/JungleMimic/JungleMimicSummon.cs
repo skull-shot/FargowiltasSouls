@@ -148,7 +148,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
                     realFrameCounter = 0;
                     realFrame++;
                 }
-                if (realFrame > 5 || realFrame < 2)
+                if (realFrame > 5)
                     realFrame = 2;
             }
             Projectile.frame = realFrame;
