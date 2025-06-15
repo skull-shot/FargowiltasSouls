@@ -1994,7 +1994,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	DisplayName: Истинное тело Мутанта
+	DisplayName: Вечное ядро
 	Tooltip:
 		'''
 		Увеличивает урон на 70% и шанс критического удара на 30%
@@ -2005,7 +2005,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	DisplayName: Истинная голова Мутанта
+	DisplayName: Вечный огонь
 	Tooltip:
 		'''
 		Увеличивает урон на 50% и шанс критического удара на 20%
@@ -2016,7 +2016,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	DisplayName: Истинные штаны Мутанта
+	DisplayName: Вечные поножи
 	Tooltip:
 		'''
 		Увеличивают урон на 50% и шанс критического удара на 20%
@@ -2209,8 +2209,8 @@ EternalEnergy: {
 }
 
 BrokenSpearHead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
+	DisplayName: Сломанный наконечник
+	Tooltip: ""
 }
 
 EternityAdvisor: {
