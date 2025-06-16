@@ -52,6 +52,7 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
+            On_Projectile.Damage += PhantasmArrowRainFix;
         }
         public void UnloadDetours()
         {
@@ -73,6 +74,8 @@ namespace FargowiltasSouls
             On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
 
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
+
+            On_Projectile.Damage -= PhantasmArrowRainFix;
         }
 
 
@@ -353,6 +356,26 @@ namespace FargowiltasSouls
             {
                 player.gills = hadGills;
             }
+        }
+
+        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self) // this detour makes it so Arrow Rain projectiles spawned from max stack
+        {                                                                                        // Red Riding Enchantment do not proc Phantasm's phantom arrows
+            int phantasmTime = -1;
+            var player = Main.player[self.owner];
+            bool phantasmAverted = false;
+            if (self is not null && self.owner == Main.myPlayer)
+            {
+                phantasmTime = player.phantasmTime;
+                var globalProj = self.FargoSouls();
+                if (phantasmTime > 0 && globalProj.ArrowRain)
+                {
+                    phantasmAverted = true;
+                    player.phantasmTime = 0;
+                }
+            }
+            orig(self);
+            if (phantasmAverted)
+                player.phantasmTime = phantasmTime;
         }
     }
 }
