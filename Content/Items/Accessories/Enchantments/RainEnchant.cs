@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             AddEffects(player, Item);
+            if (!hideVisual && player.HasEffect<RainInnerTubeEffect>())
+                player.hasFloatingTube = true;
         }
         public static void AddEffects(Player player, Item item)
         {
@@ -38,11 +40,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<RainUmbrellaEffect>(item);
             player.AddEffect<RainInnerTubeEffect>(item);
             player.AddEffect<RainWetEffect>(item);
+            player.AddEffect<RainFeatherfallEffect>(item);
             player.AddEffect<LightningImmunity>(item);
         }
         public override void UpdateVanity(Player player)
         {
             player.AddEffect<LightningImmunity>(Item);
+            player.hasFloatingTube = true;
         }
         public override void UpdateInventory(Player player)
         {
@@ -73,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!player.HasBuff(ModContent.BuffType<RainCDBuff>()))
             {
                 player.FargoSouls().AddMinion(EffectItem(player), true, ModContent.ProjectileType<RainUmbrella>(), 0, 0);
-                if (!player.controlDown && player.HasEffect<RainFeatherfallEffect>() && !player.HasEffect<NatureEffect>())
+                if (player.HasEffect<RainFeatherfallEffect>())
                 {
                     player.slowFall = true;
                 }
@@ -100,7 +104,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<RainEnchant>();
         public override void PostUpdateEquips(Player player)
         {
-            player.hasFloatingTube = true;
             player.canFloatInWater = true;
         }
     }

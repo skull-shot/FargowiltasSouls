@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             {
                 Projectile.frameCounter = 0;
                 if (++Projectile.frame >= Main.projFrames[Type])
-                    Projectile.frame = 1;
+                    Projectile.frame = 0;
             }
 
             const float IdleAccel = 0.05f;

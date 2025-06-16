@@ -471,9 +471,8 @@ RainEnchant: {
 	DisplayName: Rain Enchantment
 	Tooltip:
 		'''
-		Spawns an umbrella that reflects projectiles from above
+		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
-		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		[i:FloatingTube] Effects of Inner Tube
