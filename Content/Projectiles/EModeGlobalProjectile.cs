@@ -132,11 +132,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
-                    if (!WorldSavingSystem.MasochistModeReal)
-                    {
-                        EModeCanHurt = false;
-                        projectile.hide = true;
-                    }
+                    EModeCanHurt = false;
+                    projectile.hide = true;
                     break;
 
                 case ProjectileID.DD2BetsyFlameBreath:
