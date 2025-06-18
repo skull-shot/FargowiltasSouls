@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Buffs
         {
             player.onFire2 = true;
             player.ichor = true;
+            player.statDefense -= 15;
             if (player.buffTime[buffIndex] < 2)
                 player.buffTime[buffIndex] = 2;
         }

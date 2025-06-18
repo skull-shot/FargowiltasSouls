@@ -100,6 +100,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
+        public bool ArrowRain = false;
+
         public static List<int> ShroomiteBlacklist =
         [
             
