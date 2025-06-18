@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 SoundEngine.PlaySound(HumSound with { 
                     PitchVariance = 0.3f, 
                     Volume = 0.2f, 
-                    MaxInstances = 5, 
+                    MaxInstances = 1, 
                     SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest 
                 }, Projectile.position);
 
