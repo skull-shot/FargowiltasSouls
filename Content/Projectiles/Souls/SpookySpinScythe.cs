@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                                 {
                                     NPC target = Main.npc[npcIndex];
 
-                                    if (Collision.CanHit(projectile.Center, 0, 0, target.Center, 0, 0))
+                                    if (projectile.Colliding(Projectile.Hitbox, projectile.Hitbox) && Collision.CanHit(projectile.Center, 0, 0, target.Center, 0, 0))
                                     {
                                         Vector2 velocity = Vector2.Normalize(target.Center - projectile.Center) * 28;
 
