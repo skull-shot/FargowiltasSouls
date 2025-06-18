@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.width = Projectile.height = Diameter;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.SummonMeleeSpeed;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 60;
             Projectile.tileCollide = false;
