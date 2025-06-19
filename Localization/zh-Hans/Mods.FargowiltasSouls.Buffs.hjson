@@ -666,11 +666,6 @@ MoonBowBuff: {
 	// Description: Your bow is empowered by lunar magic
 }
 
-TribalCharmClickBuff: {
-	DisplayName: 部落挂坠
-	Description: 当你单击鼠标攻击时获得一瞬间的伤害加成
-}
-
 TwinsInstallBuff: {
 	DisplayName: 双子负载
 	Description: 诅咒狱火和灵液的效果

@@ -404,8 +404,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IceQueensCrown = false;
             CirnoGraze = false;
             MiniSaucer = false;
-            TribalCharm = false;
-            TribalCharmEquipped = false;
             SupremeDeathbringerFairy = false;
             GodEaterImbue = false;
             MutantSetBonusItem = null;

@@ -259,10 +259,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!IsStillHoldingInSameDirectionAsMovement)
                     Player.runSlowdown += 7f;
             }
-            if (TribalCharmEquipped)
-            {
-                Content.Items.Accessories.Masomode.TribalCharm.Effects(this);
-            }
 
             if (DarkenedHeartItem != null)
             {

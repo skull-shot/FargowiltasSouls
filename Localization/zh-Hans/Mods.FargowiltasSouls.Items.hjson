@@ -1080,11 +1080,10 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
 		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
 		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
 		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
@@ -1107,11 +1106,10 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
 		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
 		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
 		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
 		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
 		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
@@ -1660,16 +1658,6 @@ TimsConcoction: {
 		'''
 		某些敌人在死亡时会掉落药水
 		“闻起来很上头”
-		'''
-}
-
-TribalCharm: {
-	DisplayName: 部落挂坠
-	Tooltip:
-		'''
-		手动点击攻击时，增加30%非召唤伤害
-		免疫被网住和净化减益
-		“远古丛林居民的偶像”
 		'''
 }
 

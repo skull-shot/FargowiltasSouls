@@ -335,7 +335,6 @@ namespace FargowiltasSouls.Core.Globals
                             break;
                         case NPCID.BigMimicJungle:
                             FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.JungleFishingCrateHard));
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<TribalCharm>(), 4));
                             break;
                     }
                     break;

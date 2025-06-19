@@ -666,11 +666,6 @@ MoonBowBuff: {
 	Description: Ваш лук усилен лунной магией
 }
 
-TribalCharmClickBuff: {
-	DisplayName: Амулет племени
-	Description: Получите на мгновение увеличенный урон, когда вы не зажимаете кнопку для атаки
-}
-
 TwinsInstallBuff: {
 	DisplayName: Установка близнецов
 	Description: Эффекты проклятья ада и ихора
