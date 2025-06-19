@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public static void ActiveEffects(Player player, Item item, bool hasDownsides)
         {
             player.buffImmune[BuffID.Dazed] = true;
+            player.buffImmune[BuffID.Webbed] = true;
             player.GetDamage(DamageClass.Generic) += 0.15f;
             if (hasDownsides)
                 player.endurance -= 0.2f;
