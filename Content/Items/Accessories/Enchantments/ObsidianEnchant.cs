@@ -72,10 +72,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.ObsidianHelm)
             .AddIngredient(ItemID.ObsidianShirt)
             .AddIngredient(ItemID.ObsidianPants)
-            .AddIngredient(ItemID.MoltenSkullRose) //molten skull rose
-                                                   //.AddIngredient(ItemID.Cascade)
             .AddIngredient(null, "AshWoodEnchant")
-
+            .AddIngredient(ItemID.MoltenSkullRose) 
+            .AddIngredient(ItemID.Obsidifish)      //.AddIngredient(ItemID.Cascade)
             .AddTile(TileID.DemonAltar)
             .Register();
         }

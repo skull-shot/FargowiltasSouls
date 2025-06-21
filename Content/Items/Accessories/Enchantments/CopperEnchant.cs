@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CopperChainmail)
                 .AddIngredient(ItemID.CopperGreaves)
                 .AddIngredient(ItemID.CopperShortsword)
-                .AddIngredient(ItemID.WandofSparking)
+                .AddIngredient(ItemID.CopperBow)
                 .AddIngredient(ItemID.ThunderStaff)
 
             .AddTile(TileID.DemonAltar)

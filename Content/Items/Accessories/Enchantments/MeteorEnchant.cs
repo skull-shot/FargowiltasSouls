@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MeteorLeggings)
             .AddIngredient(ItemID.StarCannon)
             .AddIngredient(ItemID.Magiluminescence)
-            .AddIngredient(ItemID.PlaceAbovetheClouds)
+            .AddIngredient(ItemID.Starfury)
             .AddCondition(Condition.DownedEowOrBoc)
             .AddTile(TileID.DemonAltar)
             .Register();

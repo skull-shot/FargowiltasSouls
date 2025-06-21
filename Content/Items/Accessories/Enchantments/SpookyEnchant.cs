@@ -42,9 +42,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SpookyHelmet)
             .AddIngredient(ItemID.SpookyBreastplate)
             .AddIngredient(ItemID.SpookyLeggings)
-            .AddIngredient(ItemID.ButchersChainsaw)
-            .AddIngredient(ItemID.DeathSickle)
             .AddIngredient(ItemID.RavenStaff)
+            .AddIngredient(ItemID.DeathSickle)
+            .AddIngredient(ItemID.ButchersChainsaw)
 
             //psycho knife
             //eoc yoyo

@@ -43,8 +43,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.TinChainmail)
                 .AddIngredient(ItemID.TinGreaves)
                 .AddIngredient(ItemID.TinBow)
-                .AddIngredient(ItemID.Revolver)
                 .AddIngredient(ItemID.TopazStaff)
+                .AddIngredient(ItemID.PainterPaintballGun)
                 .AddTile(TileID.DemonAltar)
                 .Register();
         }

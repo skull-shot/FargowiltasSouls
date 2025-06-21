@@ -38,8 +38,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SpiderMask)
             .AddIngredient(ItemID.SpiderBreastplate)
             .AddIngredient(ItemID.SpiderGreaves)
-            .AddIngredient(ItemID.SpiderStaff)
             .AddIngredient(ItemID.QueenSpiderStaff)
+            .AddIngredient(ItemID.SpiderStaff)
             .AddIngredient(ItemID.WebSlinger)
             //web rope coil
             //rainbow string

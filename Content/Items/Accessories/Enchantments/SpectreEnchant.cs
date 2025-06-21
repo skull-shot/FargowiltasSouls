@@ -42,13 +42,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<FossilEnchant>()
-
-            .AddRecipeGroup("FargowiltasSouls:AnySpectreHead")
+                .AddRecipeGroup("FargowiltasSouls:AnySpectreHead")
             .AddIngredient(ItemID.SpectreRobe)
             .AddIngredient(ItemID.SpectrePants)
-
+            .AddIngredient<FossilEnchant>()
             .AddIngredient(ItemID.SpectreStaff)
+            .AddIngredient(ItemID.AbigailsFlower)
 
             .AddTile(TileID.CrystalBall)
             .Register();

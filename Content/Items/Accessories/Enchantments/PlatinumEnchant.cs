@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PlatinumGreaves)
                 .AddIngredient(ItemID.GardenGnome)
                 .AddIngredient(ItemID.GemSquirrelDiamond)
-                .AddIngredient(ItemID.LadyBug)
+                .AddIngredient(ItemID.WhitePearl)
 
             .AddTile(TileID.DemonAltar)
             .Register();

@@ -45,8 +45,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.ChlorophytePlateMail)
             .AddIngredient(ItemID.ChlorophyteGreaves)
             .AddIngredient(null, "JungleEnchant")
-            .AddIngredient(ItemID.ChlorophyteWarhammer)
             .AddIngredient(ItemID.ChlorophyteClaymore)
+            .AddIngredient(ItemID.AcornAxe) // Axe of Regrowth
             //grape juice
             //.AddIngredient(ItemID.Seedling);
             //plantero pet
