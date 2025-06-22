@@ -1,2 +1,6 @@
 NEW UPDATE - V {ModVersion}
-Fixed several Eternity item changes not working correctly
+Improved the behavior of Low Ground and Slimy Shield fallthrough using more complex code
+Saucer Control Console: Right click now takes priority when both are held instead of not firing anything
+Eternity Mode now prevents Gills Potion from causing drowning in FTW
+Added a config to disable respawn prevention in Masochist Mode, and added toggle to add it to Eternity aswell
+Updated localization and fixed some text issues

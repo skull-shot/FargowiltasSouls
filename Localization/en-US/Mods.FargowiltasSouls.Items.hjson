@@ -470,9 +470,8 @@ RainEnchant: {
 	DisplayName: Rain Enchantment
 	Tooltip:
 		'''
-		Spawns an umbrella that reflects projectiles from above
+		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
-		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		[i:FloatingTube] Effects of Inner Tube
@@ -1865,7 +1864,7 @@ WorldShaperSoul: {
 		    Tiles and walls will not be consumed
 		    Increased placement speed and range
 		Effect can be disabled in Effect Toggles menu
-		Effects of the Cell Phone, Royal Gel and Treasure Magnet
+		Effects of the Royal Gel and Treasure Magnet
 		Summons a pet Magic Lantern
 		'Living in a world of cardboard'
 		'''
@@ -1909,7 +1908,8 @@ EridanusHat: {
 		'''
 		10% increased damage
 		5% increased critical strike chance
-		Increases your max number of minions by 4
+		Increases max mana by 30
+		Increases your max number of minions by 1
 		Increases your max number of sentries by 1
 		'''
 }
@@ -1956,7 +1956,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	DisplayName: True Mutant Body
+	DisplayName: Eternal Core
 	Tooltip:
 		'''
 		70% increased damage and 30% increased critical strike chance
@@ -1967,7 +1967,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	DisplayName: True Mutant Head
+	DisplayName: Eternal Flame
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -1978,7 +1978,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	DisplayName: True Mutant Pants
+	DisplayName: Eternal Leggings
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2170,8 +2170,8 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: Broken Shaft
+BrokenSpearHead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }
 
@@ -2966,7 +2966,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
-		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
@@ -3748,5 +3748,10 @@ TrojanMask: {
 
 WillMask: {
 	DisplayName: Will Champion Mask
+	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }

@@ -102,7 +102,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                     //WorldGen.KillTile(tileX, tileY);
                     WorldGen.OpenDoor(tileX, tileY, npc.direction);
                     if (Main.netMode == NetmodeID.Server)
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, tileX, tileY);
+                        NetMessage.SendData(MessageID.ToggleDoorState, -1, -1, null, 0, tileX, tileY, npc.direction);
                 }
             }
         }

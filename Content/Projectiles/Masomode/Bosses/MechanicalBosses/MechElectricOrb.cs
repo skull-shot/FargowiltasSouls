@@ -77,13 +77,13 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
             }
             if (Projectile.localAI[1] == 0)
             {
-                SoundEngine.PlaySound(ShotSound with { Volume = 0.5f, MaxInstances = 4 }, Projectile.position);
+                SoundEngine.PlaySound(ShotSound with { Volume = 0.3f, MaxInstances = 4 }, Projectile.position);
                 Projectile.localAI[1] = 1f;
 
                 SoundEngine.PlaySound(HumSound with { 
                     PitchVariance = 0.3f, 
                     Volume = 0.2f, 
-                    MaxInstances = 5, 
+                    MaxInstances = 1, 
                     SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest 
                 }, Projectile.position);
 

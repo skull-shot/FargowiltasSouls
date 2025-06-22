@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles
@@ -61,6 +62,12 @@ namespace FargowiltasSouls.Content.Projectiles
         public override Color? GetAlpha(Color lightColor)
         {
             return base.GetAlpha(lightColor) * 0.8f * Projectile.Opacity;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            if (Main.netMode == NetmodeID.MultiplayerClient && Projectile.owner != Main.myPlayer)
+                return false;
+            return base.PreDraw(ref lightColor);
         }
     }
     public class MasoGrazeRing : AccessoryEffect

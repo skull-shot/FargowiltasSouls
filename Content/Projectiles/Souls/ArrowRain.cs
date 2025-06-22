@@ -74,7 +74,11 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
 
                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, (int)Projectile.ai[0], Projectile.damage, 0, Projectile.owner);
-                Main.projectile[p].noDropItem = true;
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    Main.projectile[p].noDropItem = true;
+                    Main.projectile[p].FargoSouls().ArrowRain = true;
+                }
 
                 launchArrow = false;
             }
