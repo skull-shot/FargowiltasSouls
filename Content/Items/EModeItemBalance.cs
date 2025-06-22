@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Items
         }
         public static EModeChange EmodeBalancePerID(int itemType, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return EModeChange.None;
             switch (itemType)
             {
                 case ItemID.RodofDiscord:
