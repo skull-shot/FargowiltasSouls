@@ -1679,8 +1679,11 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 {
                     if (WorldSavingSystem.EternityMode)
                     {
-                        Timer += 0.4f;
-                        SubTimer += 0.4f;
+                        float increment = 0.4f;
+                        if (PulseCounter < 4 && !WorldSavingSystem.MasochistModeReal)
+                            increment = 0.2f;
+                        Timer += increment;
+                        SubTimer += increment;
                     }
 
                     if (WorldSavingSystem.MasochistModeReal)
