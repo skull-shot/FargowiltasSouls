@@ -666,11 +666,6 @@ MoonBowBuff: {
 	// Description: Your bow is empowered by lunar magic
 }
 
-TribalCharmClickBuff: {
-	// DisplayName: Tribal Charm
-	// Description: Gain an instant of increased damage when you click to attack
-}
-
 TwinsInstallBuff: {
 	// DisplayName: Twins Install
 	// Description: Effects of Cursed Inferno and Ichor
@@ -811,4 +806,9 @@ TouhouHoardBuff: {
 BleedingOut: {
 	// DisplayName: Bleeding Out
 	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+}
+
+SilverBuff: {
+	// DisplayName: Parry Boost
+	// Description: 100% increased damage
 }

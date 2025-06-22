@@ -666,11 +666,6 @@ MoonBowBuff: {
 	Description: Ваш лук усилен лунной магией
 }
 
-TribalCharmClickBuff: {
-	DisplayName: Амулет племени
-	Description: Получите на мгновение увеличенный урон, когда вы не зажимаете кнопку для атаки
-}
-
 TwinsInstallBuff: {
 	DisplayName: Установка близнецов
 	Description: Эффекты проклятья ада и ихора
@@ -811,4 +806,9 @@ TouhouHoardBuff: {
 BleedingOut: {
 	// DisplayName: Bleeding Out
 	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+}
+
+SilverBuff: {
+	// DisplayName: Parry Boost
+	// Description: 100% increased damage
 }

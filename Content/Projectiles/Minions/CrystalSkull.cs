@@ -1,9 +1,6 @@
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI.Elements;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
@@ -59,9 +56,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-
-            bool litho = Projectile.owner.IsWithinBounds(Main.maxPlayers) && player.Alive() && player.HasEffect<LithosphericEffect>() && player.HasEffect<WretchedPouchEffect>();
-
             if (player.active && !player.dead && player.FargoSouls().CrystalSkullMinion)
                 Projectile.timeLeft = 2;
 
@@ -113,18 +107,17 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 {
                     SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
                     if (Projectile.owner == Main.myPlayer)
-                    {
 
-                        float dmgMult = litho ? 2f : 1f;
+                    {
                         Projectile.NewProjectile(
                             Projectile.GetSource_FromThis(), Projectile.Bottom,
                             12f * Projectile.SafeDirectionTo(Main.MouseWorld).RotatedByRandom(MathHelper.ToRadians(4)),
-                            ModContent.ProjectileType<ShadowflamesFriendly>(), (int)MathF.Round(Projectile.damage * dmgMult), Projectile.knockBack,
+                            ModContent.ProjectileType<ShadowflamesFriendly>(), Projectile.damage, Projectile.knockBack,
                             Projectile.owner);
                     }
                 }
             }
-            else if ((player.HeldItem != null && player.HeldItem.IsWeapon() && player.controlUseItem) || clickTimer > 0 && Projectile.localAI[0] <= chargeTime * 2f)
+            else if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
             {
                 clickTimer--;
 
@@ -161,29 +154,18 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             }
             else if (Projectile.owner == Main.myPlayer)
             {
-                if (litho && Projectile.localAI[0] >= 30)
+                if (Projectile.localAI[0] > chargeTime * 2f)
                 {
-                    float timeMult = Projectile.localAI[0] / (chargeTime * 2f);
-                    timeMult = LumUtils.Saturate(timeMult);
-                    Projectile.localAI[0] = (int)(-120 * timeMult);
+                    Projectile.localAI[0] = -120;
                     Projectile.netUpdate = true;
                 }
                 else
                 {
-                    if (Projectile.localAI[0] > chargeTime * 2f)
-                    {
-                        Projectile.localAI[0] = -120;
-                        Projectile.netUpdate = true;
-                    }
-                    else
-                    {
-                        Projectile.localAI[0] = 0;
-                    }
+                    Projectile.localAI[0] = 0;
                 }
-                
             }
 
-            if (player.HeldItem != null && player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
+            if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
                 clickTimer = 20;
 
             Projectile.spriteDirection = System.Math.Abs(MathHelper.WrapAngle(Projectile.rotation)) > MathHelper.PiOver2 ? -1 : 1;

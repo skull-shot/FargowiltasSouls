@@ -32,13 +32,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public static void ActiveEffects(Player player, Item item)
         {
             player.buffImmune[ModContent.BuffType<AnticoagulationBuff>()] = true;
-
-            player.noKnockback = true;
             player.AddEffect<DreadShellEffect>(item);
             player.AddEffect<ParryEffect>(item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.noKnockback = true;
             ActiveEffects(player, Item);
         }
     }

@@ -27,15 +27,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public static void ActiveEffects(Player player, Item item, bool hasDownsides)
         {
             player.buffImmune[BuffID.Dazed] = true;
-            player.GetDamage(DamageClass.Generic) += 0.15f;
-            if (hasDownsides)
-                player.endurance -= 0.2f;
+            player.buffImmune[BuffID.Webbed] = true;
             player.aggro -= 400;
             player.FargoSouls().SkullCharm = true;
             player.AddEffect<PungentMinion>(item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.GetDamage(DamageClass.Generic) += 0.15f;
+            player.endurance -= 0.2f;
             ActiveEffects(player, Item, true);
         }
     }
@@ -46,8 +46,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            if (!player.HasBuff<SouloftheMasochistBuff>())
+            if (!player.HasEffect<LithosphericEffect>())
                 player.AddBuff(ModContent.BuffType<Buffs.Minions.CrystalSkullBuff>(), 5);
+            else
+                player.AddBuff(ModContent.BuffType<Buffs.Minions.PungentEyeballBuff>(), 5);
         }
     }
 }

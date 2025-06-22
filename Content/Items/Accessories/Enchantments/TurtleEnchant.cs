@@ -81,8 +81,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
             {
-                if (modPlayer.TurtleCounter > 20)
-                    modPlayer.TurtleCounter++;
+                modPlayer.TurtleCounter++;
 
                 if (modPlayer.TurtleCounter > 40)
                 {

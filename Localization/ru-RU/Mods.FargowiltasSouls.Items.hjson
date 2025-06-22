@@ -1056,11 +1056,10 @@ LithosphericCluster: {
 	DisplayName: Литосферное скопление
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/TribalCharm] «Паутина», [i:FargowiltasSouls/SkullCharm] «Ошеломление» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/SkullCharm] «Ошеломление» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
 		[i:FargowiltasSouls/SkullCharm] Увеличивает наносимый урон на 15% и даёт прислужника-череп; враги с меньшей вероятностью будут атаковать вас
 		[i:FargowiltasSouls/WretchedPouch] Пока вы атакуете, прислужник-череп будет заряжать теневое пламя
 		[i:FargowiltasSouls/WretchedPouch] Прекратите атаковать, чтобы потратить заряд, выпуская щупальца теневого пламени
-		[i:FargowiltasSouls/TribalCharm] Когда вы атакуете не зажимая кнопку, увеличивает урон, не относящийся к призывному на 20% и сразу даёт немного заряда
 		[i:FargowiltasSouls/DreadShell] Даёт иммунитет к отбрасыванию
 		[i:FargowiltasSouls/DreadShell] Защитное парирование аннулирует до 200 урона, производя сильную контратаку при попадании
 		[i:FargowiltasSouls/DreadShell] Во время и некоторое время после поднятия щита, ваши защита и сопротивление урону значительно снижаются
@@ -1083,11 +1082,10 @@ LithosphericClusterInactive: {
 	DisplayName: Литосферное скопление (Неактивно)
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/TribalCharm] «Паутина», [i:FargowiltasSouls/SkullCharm] «Ошеломление» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/SkullCharm] «Ошеломление» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
 		[i:FargowiltasSouls/SkullCharm] Увеличивает наносимый урон на 15% и даёт прислужника-череп; враги с меньшей вероятностью будут атаковать вас
 		[i:FargowiltasSouls/WretchedPouch] Пока вы атакуете, прислужник-череп будет заряжать теневое пламя
 		[i:FargowiltasSouls/WretchedPouch] Прекратите атаковать, чтобы потратить заряд, выпуская щупальца теневого пламени
-		[i:FargowiltasSouls/TribalCharm] Когда вы атакуете не зажимая кнопку, увеличивает урон, не относящийся к призывному на 20% и сразу даёт немного заряда
 		[i:FargowiltasSouls/DreadShell] Даёт иммунитет к отбрасыванию
 		[i:FargowiltasSouls/DreadShell] Защитное парирование аннулирует до 200 урона, производя сильную контратаку при попадании
 		[i:FargowiltasSouls/DreadShell] Во время и некоторое время после поднятия щита, ваши защита и сопротивление урону значительно снижаются
@@ -1623,16 +1621,6 @@ TimsConcoction: {
 		'''
 		Некоторые враги будут оставлять после смерти зелья
 		«Странно пахнет»
-		'''
-}
-
-TribalCharm: {
-	DisplayName: Племенной амулет
-	Tooltip:
-		'''
-		Когда вы атакуете не зажимая кнопку, увеличивает урон, не относящийся к призывному, на 30%
-		Даёт иммунитет к дебаффу «Паутина»
-		«Идол древних обитателей джунглей»
 		'''
 }
 

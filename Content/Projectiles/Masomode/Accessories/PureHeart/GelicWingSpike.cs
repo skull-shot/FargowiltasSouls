@@ -1,7 +1,10 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+using FargowiltasSouls.Content.Buffs;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
 {
@@ -33,12 +36,25 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
             if (Projectile.ai[1] == 0)
                 SoundEngine.PlaySound(SoundID.Item154 with {Volume = 0.5f}, Projectile.Center);
                 Projectile.ai[1] = 1;
-            return true;
+            if (Projectile.ai[2] == 1)
+                Projectile.scale = 1f;
+                return true;
         }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.timeLeft = 0;
+            if (Projectile.ai[2] == 1)
+                target.AddBuff(ModContent.BuffType<SublimationBuff>(), 30);
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Player player = Main.player[Main.myPlayer];
+            if (Projectile.ai[2] == 1)
+            {
+                Texture2D pureSpikeTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Accessories/PureHeart/PureHeartCrystal_Spike", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, pureSpikeTexture);
+                return false;
+            }
+            return base.PreDraw(ref lightColor);
         }
     }
 }
