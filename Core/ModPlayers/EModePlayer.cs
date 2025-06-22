@@ -166,6 +166,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void UpdateBadLifeRegen()
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+
             float regenReductionTime = LumUtils.SecondsToFrames(5);
             
             if (Player.lifeRegen > 0 && Player.lifeRegenTime < regenReductionTime)
@@ -351,6 +354,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+
             if (WorldSavingSystem.MasochistModeReal && Player.whoAmI == Main.myPlayer)
             {
                 if (LumUtils.AnyBosses())
