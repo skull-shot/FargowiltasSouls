@@ -230,7 +230,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
                     Projectile.rotation, origin, Projectile.scale, spriteEffects, 0);
 
             /* OLD
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/MechElectricOrb_Glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb_Glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int rect1 = glow.Height / Main.projFrames[Projectile.type];
             int rect2 = rect1 * Projectile.frame;
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
