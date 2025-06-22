@@ -1,4 +1,5 @@
 using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
