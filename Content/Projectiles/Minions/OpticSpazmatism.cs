@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
@@ -11,10 +12,11 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 {
     public class OpticSpazmatism : ModProjectile
     {
+        public int bursts = 0;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Spazmatism");
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
@@ -24,26 +26,32 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override void SetDefaults()
         {
-            Projectile.width = 100;
-            Projectile.height = 100;
+            Projectile.width = 75;
+            Projectile.height = 75;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.minion = true;
-            Projectile.minionSlots = 1.5f;
+            Projectile.minionSlots = 1f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.netImportant = true;
-            Projectile.scale = .5f;
+            Projectile.scale = 1f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
         }
 
         private bool spawn;
+        public override bool? CanHitNPC(NPC target)
+        {
+            if (Projectile.ai[1] >= 0)
+                return base.CanHitNPC(target);
+            return false;
+        }
 
         public override void AI()
         {
@@ -58,7 +66,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Projectile.timeLeft = 2;
 
             bool collide = true;
-
             if (Projectile.ai[0] >= 0 && Projectile.ai[0] < 200) //has target
             {
                 NPC minionAttackTargetNpc = Projectile.OwnerMinionAttackTargetNPC;
@@ -77,30 +84,36 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                         {
                             Movement(targetPos, 0.5f);
                         }
-                        else if (--Projectile.ai[1] < -30) //in target range for 1 second, initiate dash
+                        else if (bursts >= 3) //dash after 3 flamethrower bursts
                         {
                             Projectile.velocity = Projectile.SafeDirectionTo(npc.Center + npc.velocity * 10) * 30f;
                             Projectile.ai[1] = 20;
                             Projectile.netUpdate = true;
                             collide = false;
+                            bursts = 0;
                         }
                         Projectile.rotation = Projectile.SafeDirectionTo(npc.Center).ToRotation() - (float)Math.PI / 2;
 
-                        if (++Projectile.localAI[0] > 7)
+                        if (++Projectile.localAI[0] > 40)
                         {
-                            Projectile.localAI[0] = 0;
-                            SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
-                            if (Projectile.owner == Main.myPlayer)
+                            if (Projectile.owner == Main.myPlayer && Projectile.localAI[0] % 2 == 0)
                             {
-                                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center - (Projectile.rotation + (float)Math.PI / 2).ToRotationVector2() * 60,
-                                    8 * Projectile.SafeDirectionTo(npc.Center).RotatedByRandom(MathHelper.ToRadians(12)), ModContent.ProjectileType<OpticFlame>(),
-                                    Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
+                                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + (Projectile.rotation + (float)Math.PI / 2).ToRotationVector2() * 60,
+                                    8 * Projectile.SafeDirectionTo(npc.Center).RotatedByRandom(MathHelper.ToRadians(12)), ModContent.ProjectileType<OpticFlamethrower>(),
+                                    (int)(Projectile.damage * 0.35), Projectile.knockBack, Projectile.owner);
                             }
+                        }
+                        if (Projectile.localAI[0] >= 46)
+                        {
+                            bursts += 1;
+                            Projectile.localAI[0] = 0;
                         }
                     }
                     else //is dashing
                     {
                         Projectile.ai[1]--;
+                        Projectile.localAI[0] = 20;
                         Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
                         collide = false;
                     }
@@ -137,11 +150,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (++Projectile.frameCounter > 4)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= 6)
-                    Projectile.frame = 3;
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
             }
-            if (Projectile.frame < 3)
-                Projectile.frame = 3;
 
             if (collide)
             {

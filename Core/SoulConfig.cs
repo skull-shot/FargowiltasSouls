@@ -37,6 +37,10 @@ namespace FargowiltasSouls.Core
         [DefaultValue(true)]
         public bool WeaponReworks;
 
+        [DrawTicks]
+        [DefaultValue(RespawnPreventionSetting.Masochist)]
+        public RespawnPreventionSetting MultiplayerRespawnPrevention;
+
         #endregion
 
         #region patreon

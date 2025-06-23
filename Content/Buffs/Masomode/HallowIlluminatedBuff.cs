@@ -22,7 +22,8 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
             base.Update(player, ref buffIndex);
 
             player.FargoSouls().Illuminated = true;
-
+            player.nightVision = true;
+            //Lighting.AddLight(player.Center, TorchID.Hallowed);
             if (player.Center.Y / 16 <= Main.worldSurface) //above ground, purge debuff immediately
             {
                 if (player.buffTime[buffIndex] > 2)

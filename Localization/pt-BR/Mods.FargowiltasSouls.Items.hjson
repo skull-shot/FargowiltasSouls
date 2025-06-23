@@ -470,9 +470,8 @@ RainEnchant: {
 	// DisplayName: Rain Enchantment
 	/* Tooltip:
 		'''
-		Spawns an umbrella that reflects projectiles from above
+		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
-		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		[i:FloatingTube] Effects of Inner Tube
@@ -1732,7 +1731,7 @@ DimensionSoul: {
 		Oferece a capacidade de habilitar o Modo do Construtor
 		Efeitos do Cérebro da Confusão, Véu das Estrelas, Colar da Amada, Manto de Abelhas, Bolsa de Esporos e Pedra Brilhante
 		Efeitos do Escudo do Paladino, Casco de Tartaruga Congelada, Equipamento de Mergulho Ártico, Perna de Rã e Tapete Mágico
-		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra, Telefone Celular e Globo da Gravidade
+		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra e Globo da Gravidade
 		Efeitos do Escudo de Cthulhu e Equipamento de Mestre Ninja
 		'As dimensões do Terraria na ponta de seus dedos'
 		'''
@@ -1902,7 +1901,7 @@ WorldShaperSoul: {
 		Qualquer coisa que crie uma peça não será consumida e pode ser usada muito mais rápido
 		Nenhum inimigo pode surgir
 		O efeito pode ser desativado no menu de Alternância de Almas
-		Efeitos do Telefone Celular e Gel Real
+		Efeitos do Gel Real
 		Invoca uma Lanterna Mágica de estimação
 		'Possibilidades ilimitadas'
 		'''
@@ -1947,8 +1946,9 @@ EridanusHat: {
 		'''
 		5% de aumento nos danos
 		5% de aumento na chance de acerto crítico
-		Aumenta o número máximo de lacaios em 4
-		Aumenta o número máximo de sentinelas em 4
+		Increases max mana by 30
+		Aumenta o número máximo de lacaios em 1
+		Aumenta o número máximo de sentinelas em 1
 		'''
 }
 
@@ -2206,8 +2206,8 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: Energia Fantasmagórica
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
 
@@ -3727,5 +3727,10 @@ TrojanMask: {
 
 WillMask: {
 	// DisplayName: Will Champion Mask
+	// Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }

@@ -109,7 +109,12 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     Projectile.netUpdate = true;
                 }
 
-                if ((player.controlUseTile) && !(player.controlUseItem))
+                int dir = 0; // 1 is left, -1 is right; right takes priority
+                if (player.controlUseTile) // right
+                    dir = -1;
+                else if (player.controlUseItem) // left
+                    dir = 1;
+                if (dir == -1)
                 {
                     if (++rayCounter > 20)
                     {
@@ -127,7 +132,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     rayCounter = 0;
                 }
 
-                if ((player.controlUseItem) && !(player.controlUseTile))
+                if (dir == 1)
                 {
                     if (++Projectile.localAI[0] > 5f) //shoot laser
                     {

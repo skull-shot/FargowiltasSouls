@@ -106,6 +106,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
+        public bool ArrowRain;
+
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),

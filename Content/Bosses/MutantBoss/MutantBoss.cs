@@ -3995,7 +3995,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (WorldSavingSystem.MasochistModeReal || (!playerInvulTriggered && WorldSavingSystem.EternityMode))
             {
-                Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<PhantasmalEnergy>());
+                Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<BrokenSpearhead>());
             }
 
             if (WorldSavingSystem.EternityMode)

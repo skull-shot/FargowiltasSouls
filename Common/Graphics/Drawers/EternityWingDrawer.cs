@@ -64,6 +64,10 @@ namespace FargowiltasSouls.Common.Graphics.Drawers
                 }
                 else
                     self.wingFrame = 0;
+
+                if (self.velocity.Y != 0 && (!wingFlap || self.jump < 0))
+                    self.wingFrame = 2;
+
                 return;
             }
             orig(self, wingFlap, isCustomWings);
@@ -96,7 +100,7 @@ namespace FargowiltasSouls.Common.Graphics.Drawers
 				return;
 
 			WingTarget.SwapToRenderTarget();
-
+            
 			// Prepare the shader.
 			var shader = ShaderManager.GetShader("FargowiltasSouls.EternitySoulWings");
 			FargoSoulsUtil.SetTexture1(FargosTextureRegistry.TurbulentNoise.Value);
@@ -125,7 +129,7 @@ namespace FargowiltasSouls.Common.Graphics.Drawers
                 foreach (DrawData wingData in drawInfo.DrawDataCache)
                     wingData.Draw(Main.spriteBatch);
             }
-
+                    
             Main.spriteBatch.End();
             Main.instance.GraphicsDevice.SetRenderTarget(null);
         }

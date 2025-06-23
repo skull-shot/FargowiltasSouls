@@ -1095,7 +1095,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                 }
 
-                if (++Timer > (Phase > 1 ? 45 : 60))
+                if (++Timer > (Phase > 1 ? 52 : 60))
                 {
                     NPC.netUpdate = true;
                     if (++SubTimer > 5)
@@ -1687,8 +1687,11 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 {
                     if (WorldSavingSystem.EternityMode)
                     {
-                        Timer += 0.4f;
-                        SubTimer += 0.4f;
+                        float increment = 0.4f;
+                        if (PulseCounter < 4 && !WorldSavingSystem.MasochistModeReal)
+                            increment = 0.2f;
+                        Timer += increment;
+                        SubTimer += increment;
                     }
 
                     if (WorldSavingSystem.MasochistModeReal)
@@ -1913,7 +1916,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     targetPos = player.Center;
                     targetPos.X -= 360 * Math.Sign(SubTimer);
                     //targetPos.Y -= 200;
-                    NPC.velocity = (targetPos - NPC.Center) / 30;
+                    NPC.velocity = (targetPos - NPC.Center) / 50;
                     NPC.netUpdate = true;
                     SoundEngine.PlaySound(FargosSoundRegistry.DeviAxeImpact with { Volume = 2f }, NPC.Center);
                     NPC.direction = NPC.spriteDirection = Math.Sign(SubTimer);

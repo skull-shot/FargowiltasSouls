@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Necro Grave");
+            Main.projFrames[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
@@ -42,6 +43,12 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void AI()
         {
+            if (++Projectile.frameCounter % 40 == 0)
+            {
+                Projectile.frame++;
+                if (Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
+            }
             Player player = Main.player[Projectile.owner];
 
             Lighting.AddLight(Projectile.Center, 0.5f, 0.5f, 0.5f);
@@ -54,29 +61,33 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.ForceEffect<NecroEnchant>())
             {
-                Projectile.scale = 2;
-                Projectile.width = 48 * (int)Projectile.scale;
-                Projectile.height = 32 * (int)Projectile.scale;
-
-
+                Projectile.width = 48 * 2;
+                Projectile.height = 32 * 2;
                 if (Projectile.Distance(player.Center) < 300)
                 {
                     float speed = 1;
                     Projectile.velocity = Projectile.SafeDirectionTo(player.Center) * speed;
                 } 
-                else
+                else //float in place ominously
                 {
                     Projectile.velocity = Vector2.Zero;
+                    Projectile.ai[1] += 1;
+                    if (Projectile.ai[1] >= 60)
+                        Projectile.ai[1] = 0;
+                    if (Projectile.ai[1] > 30)
+                        Projectile.velocity.Y -= 0.1f;
+                    else
+                        Projectile.velocity.Y += 0.1f;
                 }
                 //worst possible fucking way to do this LETS FUCKING GOOOOOOOOOOOOOOOO
 
-                for (int i = 0; i < 4; i++) //smoke to make the floating convincing
+                /*for (int i = 0; i < 4; i++) //smoke to make the floating convincing
                 {
                     int d = Dust.NewDust(Projectile.BottomLeft, Projectile.width, 0, DustID.Wraith);
                     Main.dust[d].position.Y -= 4;
                     Main.dust[d].velocity *= 0.5f;
                     Main.dust[d].noGravity = true;
-                }
+                }*/
             }
             else
             {
@@ -89,11 +100,11 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, -12), ModContent.ProjectileType<DungeonGuardianNecro>(), (int)Projectile.ai[0], 1, Projectile.owner);
 
-                SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.Center);
 
                 for (int i = 0; i < 36; i++)
                 {
-                    int d = Dust.NewDust(Projectile.Center, 0, 0, DustID.Blood, 0, -3, Scale: 2f);
+                    int d = Dust.NewDust(Projectile.Center, 0, 0, DustID.Bone, 0, -3);
                     Main.dust[d].velocity *= 2;
                     Main.dust[d].noGravity = Main.rand.NextBool();
                 }
@@ -106,7 +117,9 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            fallThrough = false;
+            Player player = Main.player[Projectile.owner];
+            if (!player.FargoSouls().ForceEffect<NecroEnchant>())
+                fallThrough = false;
             return true;
         }
 
@@ -119,20 +132,26 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            /*Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition;
+            int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Rectangle rectangle = new(0, y3, texture.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
+            Color color = Projectile.GetAlpha(lightColor);
 
-            Color color26 = lightColor;
-            color26 = Projectile.GetAlpha(color26);
-            if (Projectile.timeLeft % 10 < 5)
-                color26.A = 0;
+            Main.EntitySpriteDraw(texture, drawPosition, rectangle, color, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            return base.PreDraw(ref lightColor);*/
 
-            SpriteEffects effects = SpriteEffects.None;
+            Texture2D texture = Main.player[Projectile.owner].FargoSouls().ForceEffect<NecroEnchant>() ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Souls/NecroGraveForce", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value : Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition;
+            int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
+            Rectangle rectangle = new(0, y3, texture.Width, num156);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            Color color = Projectile.GetAlpha(lightColor);
 
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            Main.EntitySpriteDraw(texture, drawPosition, rectangle, color, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
     }

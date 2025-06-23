@@ -190,7 +190,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
                 
             }
-
             if (LowGround)
             {
                 Player.gravControl = false;
@@ -738,13 +737,19 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (HealTimer > 0)
                 HealTimer--;
 
+
             if (Player.grapCount > 0)
                 Grappled = true;
+
+            if (FallthroughTimer > 0)
+                FallthroughTimer--;
 
             if (LowGround)
             {
                 Player.waterWalk = false;
                 Player.waterWalk2 = false;
+                if (FallthroughTimer < 2)
+                    FallthroughTimer = 2;
             }
 
             if (DashCD > 0)
