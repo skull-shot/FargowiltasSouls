@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //shroomite digging
             //hammush
             .AddIngredient(ItemID.MushroomSpear)
-            .AddIngredient(ItemID.Uzi)
+            .AddIngredient(ItemID.PulseBow)
             //venus magnum
             .AddIngredient(ItemID.TacticalShotgun)
             //.AddIngredient(ItemID.StrangeGlowingMushroom);

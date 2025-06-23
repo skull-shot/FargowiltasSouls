@@ -33,9 +33,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PlatinumHelmet)
                 .AddIngredient(ItemID.PlatinumChainmail)
                 .AddIngredient(ItemID.PlatinumGreaves)
-                .AddIngredient(ItemID.GardenGnome)
-                .AddIngredient(ItemID.GemSquirrelDiamond)
+                .AddIngredient(ItemID.DiamondStaff)
                 .AddIngredient(ItemID.WhitePearl)
+                .AddIngredient(ItemID.GemSquirrelDiamond)
 
             .AddTile(TileID.DemonAltar)
             .Register();

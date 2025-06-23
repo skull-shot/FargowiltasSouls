@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.BeetleShell, ItemID.BeetleScaleMail), ItemID.BeetleShell, ItemID.BeetleScaleMail);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBeetle", group);
             //colored husk
-            group = new RecipeGroup(() => AnyItem(ItemID.VioletHusk), ItemID.RedHusk, ItemID.CyanHusk, ItemID.VioletHusk);
+            group = new RecipeGroup(() => AnyItem("ColorHusk"), ItemID.VioletHusk, ItemID.CyanHusk, ItemID.RedHusk);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyColoredHusk", group);
 
             //snow ench

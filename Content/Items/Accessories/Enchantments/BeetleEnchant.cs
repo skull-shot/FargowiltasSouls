@@ -42,8 +42,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
             .AddIngredient(ItemID.BeetleLeggings)
             .AddIngredient(ItemID.BeetleWings)
-            .AddIngredient(ItemID.Buggy)
             .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
+            .AddIngredient(ItemID.Buggy)
             //.AddIngredient(ItemID.MothronWings);
             //breaker blade
             //amarok
