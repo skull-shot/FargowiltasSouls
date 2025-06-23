@@ -43,8 +43,8 @@ ParryEffect: {
 	DisplayName: Guard Parry
 	Tooltip:
 		'''
-		Hold to guard
-		Guard shortly before being hit to parry
+		Hold to guard, increasing defense
+		Guard shortly before being hit to parry, nullifying damage
 		Defaults to Right Click if no key is bound to skill slot
 		'''
 }

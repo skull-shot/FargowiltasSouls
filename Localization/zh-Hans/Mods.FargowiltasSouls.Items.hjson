@@ -52,7 +52,6 @@ ApprenticeEnchant: {
 		辅助武器的攻击频率是正常使用情况下的1/7
 		仅适用于快捷栏武器
 		辅助攻击会消耗弹药，魔力等
-		大幅增加爆炸烈焰哨兵的索敌范围和攻击距离
 		“追求完美的漫漫长路”
 		'''
 }
@@ -177,7 +176,6 @@ DarkArtistEnchant: {
 		召唤一个爆炸烈焰召唤物，在玩家攻击时也会随之攻击
 		攻击时，发射快捷栏位中的下一把武器的射弹作为辅助攻击
 		辅助攻击武器的攻击频率为正常频率的1/5
-		大幅增加爆炸烈焰哨兵的索敌范围和攻击距离
 		“阴影蕴含之物远超其表象”
 		'''
 }
@@ -349,7 +347,6 @@ MonkEnchant: {
 		冲刺后的1/3秒内免疫伤害和减益
 		冲刺撞击敌人可对敌人造成大量近战伤害
 		冲刺冷却比普通冲刺长得多
-		闪电光环现在可以暴击且攻击速度更快
 		“返本还僧”
 		'''
 }
@@ -536,7 +533,6 @@ ShinobiEnchant: {
 		冲刺冷却比普通冲刺更长
 		冲刺距离更长且造成的伤害更高
 		朝墙壁冲刺时会直接穿过去
-		大幅强化闪电光环的效果
 		“藏匿于墙中的村庄”
 		'''
 }
@@ -626,7 +622,6 @@ SquireEnchant: {
 		增加坐骑的最大速度、加速度与跳跃高度
 		使用坐骑时会获得10点防御、一次额外的臭屁跳跃并免疫摔落伤害
 		回复生命值时，治疗量增加10%
-		弩车可以穿透更多目标，你受到伤害时会得到弩车恐慌增益
 		“侍卫，你能快点吗？”
 		'''
 }
@@ -713,7 +708,6 @@ ValhallaKnightEnchant: {
 		提升坐骑加速度、最高速度和跳跃高度
 		使用坐骑时，获得15点防御、一次额外的臭屁跳跃，免疫坠落伤害并获得冲刺能力
 		回复生命值时，治疗量增加15%
-		大幅强化弩车的效果
 		“瓦尔哈拉的呼唤”
 		'''
 }
@@ -1080,25 +1074,22 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
-		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
-		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
-		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
+		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
+		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+			[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+			[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		''' */
 	/* VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		''' */
 }
@@ -1107,18 +1098,15 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
-		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
-		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
-		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
+		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
+		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1663,16 +1651,6 @@ TimsConcoction: {
 		'''
 }
 
-TribalCharm: {
-	DisplayName: 部落挂坠
-	Tooltip:
-		'''
-		手动点击攻击时，增加30%非召唤伤害
-		免疫被网住和净化减益
-		“远古丛林居民的偶像”
-		'''
-}
-
 WretchedPouch: {
 	DisplayName: 诅咒袋子
 	Tooltip:
@@ -1785,7 +1763,7 @@ DimensionSoul: {
 		你能够开启“建筑师模式”
 		拥有混乱之脑、星星面纱、甜蜜项链、蜜蜂斗篷、孢子囊和闪亮石效果
 		拥有圣骑士护盾、冰冻海龟壳、北极潜水装备、蛙腿和飞毯效果
-		拥有熔岩靴、渔夫渔具袋、喷漆器、自动安放器、手机和重力球效果
+		拥有熔岩靴、渔夫渔具袋、喷漆器、自动安放器和重力球效果
 		拥有克苏鲁护盾和忍者大师装备效果
 		“泰拉瑞亚的维度触手可及”
 		'''
@@ -1949,7 +1927,7 @@ WorldShaperSoul: {
 		    大幅增加放置速度
 		    大幅增加放置和挖掘距离
 		可以在魂石效果设置菜单中禁用此效果
-		拥有手机，宝藏磁铁和皇家凝胶效果
+		拥有宝藏磁铁和皇家凝胶效果
 		召唤一个魔法灯笼
 		“无限的可能性”
 		'''
@@ -1993,7 +1971,8 @@ EridanusHat: {
 		'''
 		增加10%伤害
 		增加5%暴击率
-		增加4个召唤栏位
+		Increases max mana by 30
+		增加1个召唤栏位
 		增加1个哨兵栏位
 		'''
 }
@@ -2252,9 +2231,9 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: 破损的剑柄
-	Tooltip: ""
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }
 
 EternityAdvisor: {
@@ -3050,7 +3029,7 @@ Masochist: {
 			- 增强玩家基础属性并将玩家伤害减免限制在75%以下
 			- 不攻击时减益效果会更快消失，且非受虐模式下伤害性减益不会致死
 			- 调整某些物品的功能和强度
-			- 在受虐多人模式中，每个玩家在每场Boss战中只能重生一次
+			- 在受虐多人模式中，每个玩家在每场Boss战中只能重生一次（可在模组配置中关闭）
 		不能在任意Boss存活时使用
 		[i:1612][c/00ff00:推荐与Fargo突变模组的减益显示一起使用（在模组配置里打开）]
 		[c/ff0000:不推荐与其他内容型模组及其他模组难度同时开启！！！]
@@ -3833,4 +3812,9 @@ TrojanMask: {
 WillMask: {
 	DisplayName: 意志英灵面具
 	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }

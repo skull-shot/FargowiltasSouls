@@ -132,7 +132,6 @@ PungentMinion: Crystal Skull Minion
 WretchedPouchEffect: Wretched Shadowflame
 DreadShellEffect: Dread Shell Parry
 WyvernBalls: Flight Light Orbs
-TribalCharmClickBonus: Tribal Charm Click Bonus
 StabilizedGravity: Stabilized Gravity
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: Twins Install
@@ -159,7 +158,7 @@ IceQueenGraze: Graze
 UfoMinionEffect: Saucer Minion
 ChalicePotionEffect: Free Potion Buffs
 MasoTrueEyeMinion: True Eye Minions
-MutantArmorHeader: True Mutant Armor
+MutantArmorHeader: Eternal Armor
 MasoAbom: Abominationn Minion
 MasoRing: Phantasmal Ring Minion
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"

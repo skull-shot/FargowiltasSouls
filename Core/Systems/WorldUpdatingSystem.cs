@@ -386,10 +386,13 @@ namespace FargowiltasSouls.Core.Systems
 
         public override void ModifyLightingBrightness(ref float scale)
         {
+            /*
             if (Main.LocalPlayer.FargoSouls().Illuminated)
             {
-                scale += 0.08f;
+                if (scale < 1.08f)
+                    scale += 0.08f;
             }
+            */
         }
     }
 }

@@ -294,9 +294,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
-        public bool TribalCharm;
-        public bool TribalCharmEquipped;
-        public bool TribalCharmClickBonus;
         public bool SupremeDeathbringerFairy;
         public bool GodEaterImbue;
         public Item MutantSetBonusItem;
@@ -394,6 +391,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MutantFang;
         public bool Swarming;
         public bool LowGround;
+        public int FallthroughTimer;
         public bool Flipped;
         public bool Illuminated;
         public bool Mash;

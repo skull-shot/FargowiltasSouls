@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.Items.Misc
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 10;
             Item.rare = ItemRarityID.Blue;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;

@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.accessory = true;
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 6);
-            Item.defense = 6;
             //Item.useTime = 180;
             //Item.useAnimation = 180;
             //Item.useStyle = ItemUseStyleID.HoldUp;
@@ -44,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             SecurityWallet.PassiveEffects(player);
             WyvernFeather.PassiveEffects(player, item);
             MysticSkull.PassiveEffects(player);
-            TribalCharm.PassiveEffects(player);
             //WretchedPouch.PassiveEffects(player, item);
             //SkullCharm.PassiveEffects(player, item);
             //DreadShell.PassiveEffects(player, item);
@@ -56,7 +54,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //SecurityWallet.ActiveEffects(player, item);
             WyvernFeather.ActiveEffects(player, item);
             //MysticSkull.ActiveEffects(player, item);
-            TribalCharm.ActiveEffects(player, item);
             WretchedPouch.ActiveEffects(player, item);
             SkullCharm.ActiveEffects(player, item, false);
             DreadShell.ActiveEffects(player, item);
@@ -80,11 +77,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             .AddIngredient<SecurityWallet>()
             .AddIngredient<WyvernFeather>()
             .AddIngredient<MysticSkull>()
-            .AddIngredient<TribalCharm>()
             .AddIngredient<WretchedPouch>()
             .AddIngredient<SkullCharm>()
             .AddIngredient<DreadShell>()
-            .AddIngredient(ItemID.HallowedBar, 5)
+            .AddIngredient(ItemID.SpectreBar, 5)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.MythrilAnvil)

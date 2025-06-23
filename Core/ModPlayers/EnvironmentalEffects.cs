@@ -325,6 +325,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void DesertDebuffs(Tile currentTile)
         {
+            /*
             if (Player.ZoneOverworldHeight && currentTile.WallType == WallID.None)
             {
                 if (Main.dayTime)
@@ -342,6 +343,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
             }
+            */
         }
 
         private void CactusDamage(Tile currentTile, FargoSoulsPlayer fargoSoulsPlayer)

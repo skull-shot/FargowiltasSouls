@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Rarities;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -18,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             Item.width = 18;
             Item.height = 18;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.value = Item.sellPrice(0, 70);
             Item.defense = 70;
         }
@@ -37,18 +38,6 @@ namespace FargowiltasSouls.Content.Items.Armor
             player.lifeRegenCount += 7;
             player.lifeRegenTime += 7;
         }
-
-        public override void SafeModifyTooltips(List<TooltipLine> list)
-        {
-            foreach (TooltipLine line2 in list)
-            {
-                if (line2.Mod == "Terraria" && line2.Name == "ItemName")
-                {
-                    line2.OverrideColor = new Color(Main.DiscoR, 51, 255 - (int)(Main.DiscoR * 0.4));
-                }
-            }
-        }
-
         public override void AddRecipes()
         {
             CreateRecipe()

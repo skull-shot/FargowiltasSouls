@@ -239,7 +239,6 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<MasoGraze>(true);
             player.SetToggleValue<SinisterIconDropsEffect>(true);
             player.SetToggleValue<RainbowHealEffect>(true);
-            player.SetToggleValue<TribalCharmClickBonus>(true);
             player.SetToggleValue<StabilizedGravity>(true);
             player.SetToggleValue<PrecisionSealHurtbox>(true);
 

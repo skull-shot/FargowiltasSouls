@@ -21,6 +21,7 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
+using FargowiltasSouls.Content.Buffs.Souls;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -54,6 +55,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[BuffID.Poisoned] = true;
             npc.buffImmune[BuffID.Suffocation] = true;
             npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
+            npc.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
         }
 
         public override bool SafePreAI(NPC npc)

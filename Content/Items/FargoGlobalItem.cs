@@ -539,10 +539,11 @@ namespace FargowiltasSouls.Content.Items
                     {
                         Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(angle * j));
                         int max = 2;
+                        int ai2 = modPlayer.PureHeart ? 1 : 0;
                         for (int i = 0; i < max; i++)
                         {
                             Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
-                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dam), 5f, Main.myPlayer);
+                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dam), 5f, Main.myPlayer, 0, 0, ai2);
                         }
                     }
                     modPlayer.GelicCD = 22;

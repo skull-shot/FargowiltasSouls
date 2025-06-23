@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
                 {
                     Projectile.rotation = Projectile.velocity.ToRotation();
                     if (Projectile.velocity.Length() < 20)
-                        Projectile.velocity += Projectile.velocity.SafeNormalize(Vector2.Zero) * 0.5f;
+                        Projectile.velocity += Projectile.velocity.SafeNormalize(Vector2.Zero) * 1.25f;
                 }
             }
 

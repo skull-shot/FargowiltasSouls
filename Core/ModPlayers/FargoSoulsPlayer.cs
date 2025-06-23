@@ -54,6 +54,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public List<BaseEnchant> EquippedEnchants = [];
 
+        public bool HasEquippedSkill;
+
 
         public bool IsStandingStill;
         public float AttackSpeed;
@@ -125,6 +127,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
+            if (HasEquippedSkill) playerData.Add("HasEquippedSkill");
 
             tag.Add($"{Mod.Name}.{Player.name}.Data", playerData);
 
@@ -167,6 +170,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
+            HasEquippedSkill = playerData.Contains("HasEquippedSkill");
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
             disabledToggles = ToggleLoader.LoadedToggles.Keys.Where(x => disabledToggleNames.Contains(x.Name)).ToList();
@@ -404,8 +408,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IceQueensCrown = false;
             CirnoGraze = false;
             MiniSaucer = false;
-            TribalCharm = false;
-            TribalCharmEquipped = false;
             SupremeDeathbringerFairy = false;
             GodEaterImbue = false;
             MutantSetBonusItem = null;
@@ -1257,10 +1259,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(-10 * j));
                         int max = 4;
+                        int ai2 = Player.FargoSouls().PureHeart ? 1 : 0;
                         for (int i = 0; i < max; i++)
                         {
                             Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
-                            Projectile.NewProjectile(Player.GetSource_Accessory(Player.EffectItem<GelicWingSpikes>()), Player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(Player, dam), 5f, Main.myPlayer);
+                            Projectile.NewProjectile(Player.GetSource_Accessory(Player.EffectItem<GelicWingSpikes>()), Player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(Player, dam), 5f, Main.myPlayer, 0, 0, ai2);
                         }
                     }
                 }

@@ -34,6 +34,7 @@ using Terraria.GameContent.UI;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Core.Globals
@@ -428,6 +429,16 @@ namespace FargowiltasSouls.Core.Globals
                     Main.dust[d].scale = 1.5f;
                 }
             }
+            if (Sublimation)
+            {
+                if (Main.rand.NextBool(3))
+                {
+                    float ratio = (float)PureGazeTime / PungentGazeBuff.MAX_TIME;
+                    float sparkScale = MathHelper.Lerp(0.25f, 1.5f, ratio);
+                    Particle spark = new SmallSparkle(npc.position + new Vector2(Main.rand.Next(0, npc.width), Main.rand.Next(0, npc.height)), Vector2.Zero, Color.Lime, sparkScale, 15);
+                    spark.Spawn();
+                }
+            }
 
             if (HellFire)
             {
@@ -662,18 +673,6 @@ namespace FargowiltasSouls.Core.Globals
                     PureGazeTime -= 3;
                 if (PureGazeTime > PungentGazeBuff.MAX_TIME)
                     PureGazeTime = PungentGazeBuff.MAX_TIME;
-                if (PureGazeTime > 0 && Main.rand.NextBool(3))
-                {
-                    float ratio = (float)PureGazeTime / PungentGazeBuff.MAX_TIME;
-                    Vector2 sparkDir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
-                    float sparkDistance = 20 * Main.rand.NextFloat(0.6f, 1.3f);
-                    Vector2 sparkCenter = npc.Center + sparkDir * sparkDistance * 2;
-                    float sparkTime = 15;
-                    Vector2 sparkVel = (npc.Center - sparkCenter) / sparkTime;
-                    float sparkScale = MathHelper.Lerp(0.25f, 1.5f, ratio);
-                    Particle spark = new SmallSparkle(npc.Center, sparkVel, Color.Lime, sparkScale, (int)sparkTime);
-                    spark.Spawn();
-                }
             }
             else if (PureGazeTime > 0)
                 PureGazeTime -= 3;

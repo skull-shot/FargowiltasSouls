@@ -75,13 +75,5 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 Main.dust[index2].noGravity = true;
             }
         }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Projectile.owner.IsWithinBounds(Main.maxPlayers) && Main.player[Projectile.owner].Alive() && Main.player[Projectile.owner].HasEffect<LithosphericEffect>() && Main.player[Projectile.owner].HasEffect<WretchedPouchEffect>())
-            {
-                target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 4);
-            }
-            base.OnHitNPC(target, hit, damageDone);
-        }
     }
 }

@@ -67,16 +67,15 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             {
                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104") with { Volume = 0.5f }, Projectile.Center);
             }
-            float num801 = Projectile.ai[1] == 0f ? 0.4f : 1f;
             Projectile.localAI[0] += 1f;
             if (Projectile.localAI[0] >= maxTime)
             {
                 Projectile.Kill();
                 return;
             }
-            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 10f * num801;
-            if (Projectile.scale > num801)
-                Projectile.scale = num801;
+            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 10f;
+            if (Projectile.scale > 1f)
+                Projectile.scale = 1f;
             Projectile.rotation = Main.projectile[byIdentity].rotation - 1.57079637f;
             Projectile.velocity = Main.projectile[byIdentity].rotation.ToRotationVector2();
             float num805 = 3f;
@@ -123,15 +122,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Confused, 300);
-            if (!target.boss)
-                target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
-        }
-
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (Projectile.ai[1] != 0f)
-                modifiers.SetCrit();
+            target.AddBuff(BuffID.ShadowFlame, 1800);
         }
 
         public override bool PreDraw(ref Color lightColor) => false;
@@ -140,7 +131,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public static Color ColorFunction(float _)
         {
-            Color color = Color.LightSkyBlue; //new(232, 140, 240);
+            Color color = Color.DarkMagenta;
             color.A = 0;
             return color;
         }

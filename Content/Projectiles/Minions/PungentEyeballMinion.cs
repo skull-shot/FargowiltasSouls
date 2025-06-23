@@ -1,8 +1,10 @@
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,9 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Pungent Eyeball");
             Main.projFrames[Projectile.type] = 6;
-            //ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -44,8 +44,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (player.active && !player.dead && player.FargoSouls().PungentEyeballMinion)
                 Projectile.timeLeft = 2;
 
-            //if (Projectile.damage == 0) Projectile.damage = (int)(50f * player.GetDamage(DamageClass.Summon).Additive);
-
             Vector2 vector2_1 = new(0f, -85f); //movement code
             Vector2 vector2_2 = player.MountedCenter + vector2_1;
             float num1 = Vector2.Distance(Projectile.Center, vector2_2);
@@ -64,54 +62,36 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             }
 
             const float rotationModifier = 0.08f;
-            const float chargeTime = 180f;
+            const float chargeTime = 360f;
             if (Projectile.localAI[1] > 0)
             {
                 Projectile.localAI[1]--;
                 if (Projectile.owner == Main.myPlayer)
                     Projectile.netUpdate = true;
             }
-            if (player.controlUseItem)
+            if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
             {
-                if (player.ownedProjectileCounts[ModContent.ProjectileType<PhantasmalDeathrayPungent>()] < 1)
+                if (Projectile.localAI[1] == 0)
                 {
                     Projectile.localAI[0]++;
-                    if (player.FargoSouls().MasochistSoul)
-                        Projectile.localAI[0] += 2;
-
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("FleshLumpMinionCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SkullCharm").Value, Color.DarkRed, () => Projectile.localAI[0] / (chargeTime * 2f), displayAtFull: true, activeFunction: Projectile.Alive);
+                        CooldownBarManager.Activate("FleshLumpMinionCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/LithosphericCluster").Value, Color.Purple, () => Projectile.localAI[0] / chargeTime, displayAtFull: true, activeFunction: Projectile.Alive);
+                }
+                if (Projectile.localAI[0] > chargeTime / 2f)
+                {
+                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
+                    Main.dust[d].noGravity = true;
+                    Main.dust[d].velocity *= 3f; //replace with particles
                 }
                 if (Projectile.localAI[0] == chargeTime)
                 {
                     if (Projectile.owner == Main.myPlayer)
-                        Projectile.netUpdate = true;
-                    const int num226 = 36; //dusts indicate charged up
-                    for (int num227 = 0; num227 < num226; num227++)
-                    {
-                        Vector2 vector6 = Vector2.UnitX.RotatedBy(Projectile.rotation) * 6f;
-                        vector6 = vector6.RotatedBy((num227 - (num226 / 2 - 1)) * 6.28318548f / num226, default) + Projectile.Center;
-                        Vector2 vector7 = vector6 - Projectile.Center;
-                        int num228 = Dust.NewDust(vector6 + vector7, 0, 0, DustID.Shadowflame, 0f, 0f, 0, default, 3f);
-                        Main.dust[num228].noGravity = true;
-                        Main.dust[num228].velocity = vector7;
-                    }
-                }
-                if (Projectile.localAI[0] > chargeTime)
-                {
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 3f;
-                }
-                if (Projectile.localAI[0] == chargeTime * 2f)
-                {
-                    if (Projectile.owner == Main.myPlayer) //fully charged
                     {
                         Projectile.netUpdate = true;
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -1);
                     }
                 }
-                if (Projectile.localAI[0] > chargeTime * 2f)
+                if (Projectile.localAI[0] > chargeTime)
                 {
                     int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
                     Main.dust[d].noGravity = true;
@@ -124,14 +104,32 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             }
             else
             {
-                if (Projectile.localAI[0] > chargeTime)
+                if (Projectile.localAI[0] >= chargeTime) //full charge
                 {
-                    if (Projectile.owner == Main.myPlayer)
-                        Projectile.netUpdate = true;
                     Projectile.localAI[1] = 120f;
                     if (Projectile.owner == Main.myPlayer)
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation), ModContent.ProjectileType<PhantasmalDeathrayPungent>(),
-                            Projectile.damage, 4f, Projectile.owner, Projectile.identity, Projectile.localAI[0] >= chargeTime * 2f ? 1f : 0f);
+                    {
+                        Projectile.netUpdate = true;
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation), ModContent.ProjectileType<PhantasmalDeathrayPungent>(), Projectile.damage, Projectile.knockBack * 2, Projectile.owner, Projectile.identity);
+                    }
+                }
+                else if (Projectile.localAI[0] >= 30) //partial charge
+                {
+                    float timeMult = Projectile.localAI[0] / chargeTime;
+                    timeMult = LumUtils.Saturate(timeMult);
+                    Projectile.localAI[1] = (int)(120 * timeMult);
+                    if (Projectile.owner == Main.myPlayer)
+                        Projectile.netUpdate = true;
+                }
+                else if (Projectile.localAI[1] % 10 == 0 && Projectile.localAI[1] != 0 && player.ownedProjectileCounts[ModContent.ProjectileType<PhantasmalDeathrayPungent>()] < 1)
+                {
+                    SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
+                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 10f * Projectile.SafeDirectionTo(Main.MouseWorld).RotatedByRandom(MathHelper.ToRadians(4)), ProjectileID.SpectreWrath, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    if (p != Main.maxProjectiles)
+                    {
+                        Main.projectile[p].DamageType = DamageClass.Summon;
+                        Main.projectile[p].penetrate = 1;
+                    }
                 }
                 Projectile.localAI[0] = 0;
             }

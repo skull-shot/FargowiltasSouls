@@ -132,7 +132,6 @@ PungentMinion: Прислужник кусок плоти
 WretchedPouchEffect: Теневое пламя несчастья
 DreadShellEffect: Парирование панциря ужаса
 WyvernBalls: Светлые сферы полёта
-TribalCharmClickBonus: Бонус кликов амулета племени
 StabilizedGravity: Стабилизированная гравитация
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: Установка близнецов
@@ -159,7 +158,7 @@ IceQueenGraze: Грэйз
 UfoMinionEffect: Прислужник тарелка
 ChalicePotionEffect: Бесплатные баффы зелий
 MasoTrueEyeMinion: Истинные глаза-миньоны
-MutantArmorHeader: Истинная броня Мутанта
+MutantArmorHeader: Вечная броня
 MasoAbom: Прислужник Выродокк
 MasoRing: Фантазматическое кольцо
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"

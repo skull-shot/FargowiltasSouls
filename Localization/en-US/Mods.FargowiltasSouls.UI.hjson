@@ -1,4 +1,4 @@
-SoulTogglerButton: Effect Toggler
+SoulTogglerButton: Open Effect Toggler
 Standard: Standard Mode
 Eternity: Eternity Mode
 Masochist: Masochist Mode
@@ -8,6 +8,8 @@ EternityDisabled: Eternity Mode is disabled
 LeftClickEnable: Left Click to enable
 RightClickSelectDifficulty: Right Click to select difficulty
 HoldShift: Hold Shift to read more
+Close: Close
+OpenKeybinds: Open Keybinds
 ExpandedStandard:
 	'''
 	Disables Eternity or Masochist Mode.
@@ -66,4 +68,4 @@ DisabledUnequipped: Disabled: Not equipped
 ActiveSkills: Active Skills
 AvailableSkills: Available Skills
 SelectDifficulty: Select Difficulty
-NoRespawn: Respawn prevented: Only one respawn per boss in Masochist Mode multiplayer!
+NoRespawn: Respawn prevented: Only one respawn per boss in {0} multiplayer!

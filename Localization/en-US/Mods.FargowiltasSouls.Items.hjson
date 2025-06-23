@@ -470,9 +470,8 @@ RainEnchant: {
 	DisplayName: Rain Enchantment
 	Tooltip:
 		'''
-		Spawns an umbrella that reflects projectiles from above
+		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
-		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		[i:FloatingTube] Effects of Inner Tube
@@ -557,8 +556,8 @@ SilverEnchant: {
 	DisplayName: Silver Enchantment
 	Tooltip:
 		'''
-		Guard exactly when hit to perfect parry, gaining Striking Moment
-		Guard Parry negates up to 100 damage
+		Parry negates up to 100 damage
+		Perfectly timing a parry briefly increases your damage by 100%
 		'Reflection'
 		'''
 }
@@ -908,7 +907,7 @@ TerraForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
-		[i:FargowiltasSouls/SilverEnchant] Guard Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
+		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
@@ -1043,25 +1042,22 @@ LithosphericCluster: {
 	DisplayName: Lithospheric Cluster
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
-		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
-		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
-		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
+		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
+		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+			[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+			[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'''
 }
@@ -1070,18 +1066,15 @@ LithosphericClusterInactive: {
 	DisplayName: Lithospheric Cluster (Inactive)
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/TribalCharm] Webbed, [i:FargowiltasSouls/SkullCharm] Dazed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Increases damage dealt by 15% and grants you a skull minion, enemies are less likely to target you
-		[i:FargowiltasSouls/WretchedPouch] While attacking, your skull minion builds up shadowflame charge
-		[i:FargowiltasSouls/WretchedPouch] Stop attacking to consume shadowflame charge, releasing a barrage of shadowflame
-		[i:FargowiltasSouls/TribalCharm] When attacking by manually clicking, increases non-summon damage by 20% and instantly gain some shadowflame charge
-		[i:FargowiltasSouls/DreadShell] Grants immunity to knockback
-		[i:FargowiltasSouls/DreadShell] Guard Parry negates up to 200 damage, dealing a massive counterattack if it lands
-		[i:FargowiltasSouls/DreadShell] Defense and damage reduction drastically decreased while and shortly after guarding
-		[i:FargowiltasSouls/WyvernFeather] You periodically shed light orbs, touch them to refresh your flight time
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
+		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
+		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and in liquid, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		'''
@@ -1150,13 +1143,11 @@ DreadShell: {
 	DisplayName: Dread Shell
 	Tooltip:
 		'''
-		Grants immunity to Anticoagulation
-		Grants immunity to knockback
-		Defense and damage reduction drastically decreased while and shortly after guarding
-		Guard exactly when hit to parry and counterattack on a very long cooldown
-		Counterattack deals massive damage and inflicts Anticoagulation
-		Absorb Anticoagulation blood clots to gain 15% increased damage
-		Guard Parry negates up to 200 damage
+		Grants immunity to knockback and Anticoagulation
+		Defense and damage reduction are decreased shortly after guarding
+		Parry negates up to 200 damage and causes a massive counterattack
+		Counterattack inflicts Anticoagulation, causing enemies to drop blood clots when hit
+		Absorbing blood clots increases your damage by 15%
 		'It was a mistake to chum here'
 		'''
 }
@@ -1165,7 +1156,7 @@ DubiousCircuitry: {
 	DisplayName: Dubious Circuitry
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] Defenseless, Nano Injection, and knockback
+		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
 		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
 		[i:FargowiltasSouls/GroundStick] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
@@ -1266,7 +1257,8 @@ HeartoftheMasochist: {
 		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
 		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
-		[i:FargowiltasSouls/PumpkingsCape] Guard Parry negates up to 200 damage. Parries heal you based on damage. While guarding, gain an aura of Rotting
+		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
+		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
 		[i:FargowiltasSouls/BetsysHeart] FIreball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
@@ -1419,9 +1411,7 @@ PumpkingsCape: {
 		Grants immunity to Living Wasteland
 		Increases damage and critical strike chance by 5%
 		You have an aura of Rotting while guarding
-		Guard exactly when hit to parry and counter it on a very long cooldown
-		Counter an attack to gain life based on the blocked damage
-		Guard Parry negates up to 200 damage
+		Parry negates up to 200 damage and steals life based on the blocked damage
 		'Somehow, it's the right size'
 		'''
 }
@@ -1467,7 +1457,7 @@ ReinforcedPlating: {
 	DisplayName: Reinforced Plating
 	Tooltip:
 		'''
-		Grants immunity to Defenseless, Nano Injection, and knockback
+		Grants immunity to knockback, Defenseless, and Nano Injection
 		Reduces damage taken by 4%
 		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
@@ -1538,10 +1528,10 @@ SkullCharm: {
 	DisplayName: Crystal Skull
 	Tooltip:
 		'''
-		Grants immunity to Dazed
+		Grants immunity to Dazed and Webbed
 		Increases damage dealt by 15% and damage taken by 20%
 		Enemies are less likely to target you
-		The crystal skull charges energy to attack as you attack
+		Summons a crystal skull that charges energy as you attack, releasing a barrage once energy is fully charged
 		'Part of a collective consciousness'
 		'''
 }
@@ -1604,16 +1594,6 @@ TimsConcoction: {
 		'''
 }
 
-TribalCharm: {
-	DisplayName: Tribal Charm
-	Tooltip:
-		'''
-		When attacking by manually clicking, increases non-summon damage by 20%
-		Grants immunity to Webbed
-		'An idol of the ancient jungle dwellers'
-		'''
-}
-
 WretchedPouch: {
 	DisplayName: Wretched Pouch
 	Tooltip:
@@ -1631,7 +1611,7 @@ WyvernFeather: {
 		'''
 		Grants immunity to Clipped Wings and Crippled
 		You periodically shed light orbs, touch them to refresh your flight time
-		Stabilizes gravity in space and in liquids (works from inventory and vanity)
+		Stabilizes gravity in space and liquids (works from inventory and vanity)
 		'Warm to the touch'
 		'''
 	VanityTooltip: Stabilizes gravity in space and in liquids
@@ -1884,7 +1864,7 @@ WorldShaperSoul: {
 		    Tiles and walls will not be consumed
 		    Increased placement speed and range
 		Effect can be disabled in Effect Toggles menu
-		Effects of the Cell Phone, Royal Gel and Treasure Magnet
+		Effects of the Royal Gel and Treasure Magnet
 		Summons a pet Magic Lantern
 		'Living in a world of cardboard'
 		'''
@@ -1928,7 +1908,8 @@ EridanusHat: {
 		'''
 		10% increased damage
 		5% increased critical strike chance
-		Increases your max number of minions by 4
+		Increases max mana by 30
+		Increases your max number of minions by 1
 		Increases your max number of sentries by 1
 		'''
 }
@@ -1975,7 +1956,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	DisplayName: True Mutant Body
+	DisplayName: Eternal Core
 	Tooltip:
 		'''
 		70% increased damage and 30% increased critical strike chance
@@ -1986,7 +1967,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	DisplayName: True Mutant Head
+	DisplayName: Eternal Flame
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -1997,7 +1978,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	DisplayName: True Mutant Pants
+	DisplayName: Eternal Leggings
 	Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2189,8 +2170,8 @@ EternalEnergy: {
 		'''
 }
 
-PhantasmalEnergy: {
-	DisplayName: Broken Shaft
+BrokenSpearHead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }
 
@@ -2985,7 +2966,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
-		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
@@ -3767,5 +3748,10 @@ TrojanMask: {
 
 WillMask: {
 	DisplayName: Will Champion Mask
+	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	DisplayName: Broken Spearhead
 	Tooltip: ""
 }
