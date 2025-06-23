@@ -167,23 +167,26 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int Timer;
 
         public static int UndergroundLength => 400;
+        public int ExtraAI0;
 
         public enum Attacks
         {
             DefaultMovement,
             BurrowSpit,
             BurrowBelow,
-            JumpWave,
+            BurrowSide,
             FlameBomb
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write(ExtraAI0);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            ExtraAI0 = binaryReader.ReadInt32();
         }
 
         public override void SetDefaults(NPC npc)
@@ -282,7 +285,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     BurrowBelow();
                     break;
 
-                case Attacks.JumpWave:
+                case Attacks.BurrowSide:
+                    BurrowSide();
                     break;
 
                 case Attacks.FlameBomb:
@@ -332,7 +336,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Timer++;
             if (Timer > 90)
             {
-                List<Attacks> attacks = [Attacks.BurrowSpit, Attacks.BurrowBelow];
+                List<Attacks> attacks = [Attacks.BurrowSpit, Attacks.BurrowBelow, Attacks.BurrowSide];
+
+                int segments = CountSegments();
+                if (segments <= 5)
+                    attacks.Remove(Attacks.BurrowSpit);
+
                 Attack = (int)Main.rand.NextFromCollection(attacks);
                 Timer = 0;
                 return;
@@ -346,8 +355,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 Timer++;
 
-                Vector2 targetPos = LumUtils.FindGroundVertical(Target.Center.ToTileCoordinates()).ToWorldCoordinates();
-                targetPos.X += Target.HorizontalDirectionTo(NPC.Center) * 300;
+                Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * 300; 
+                targetPos = LumUtils.FindGroundVertical(targetPos.ToTileCoordinates()).ToWorldCoordinates();
 
                 targetPos.Y += UndergroundLength;
                 float xDif = targetPos.X - NPC.Center.X;
@@ -382,6 +391,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         Timer = -1000;
                     }
                     NPC.velocity *= 0.96f;
+
                     if (Timer > -1000 - 40 && Timer < -1000 - 15)
                     {
                         NPC.velocity = NPC.velocity.RotateTowards(NPC.DirectionTo(Target.Center).ToRotation(), 0.1f);
@@ -396,17 +406,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     else if (heads == 2)
                         frequency = 30;
                     else
-                        frequency = 30 + heads * 5;
+                        frequency = 20 + heads * 5;
                     if (Timer < -1000 - frequency && Timer % frequency == 0)
                     {
                         // fireball
                         Vector2 dir = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2();
 
+                        if (heads == 1)
+                            dir = dir.RotatedByRandom(MathHelper.PiOver2 * 0.22f);
+
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 16,
                             ProjectileID.CursedFlameHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+
                     }
 
-                    if (Timer < -1000 - 170)
+                    if (Timer < -1000 - 140)
                     {
                         EndAttack();
                         return;
@@ -433,7 +447,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (Timer > windup && Math.Abs(xDif) < 80)
                 {
                     Timer = -1;
-                    NPC.velocity *= 0.5f;
+                    NPC.velocity *= 0f;
                 }
             }
             if (Timer < 0) // second part
@@ -469,17 +483,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float width;
                             if (heads == 1)
                             {
-                                projCount = 7;
+                                projCount = 8;
                                 width = 0.42f;
                             }
                             else if (heads == 2)
                             {
-                                projCount = 5;
+                                projCount = 6;
                                 width = 0.32f;
                             }
                             else
                             {
-                                projCount = 3;
+                                projCount = 4;
                                 width = 0.18f;
                             }
                             for (float i = 0; i < projCount; i++)
@@ -503,6 +517,96 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
         }
+        public void BurrowSide()
+        {
+            int windup = 40;
+            if (Timer >= 0) // first part
+            {
+                if (Timer == 0)
+                {
+                    ExtraAI0 = Main.rand.Next(-100, 100);
+                }
+                Timer++;
+
+                Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * (800 + ExtraAI0);
+                targetPos = LumUtils.FindGroundVertical(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+
+                targetPos.Y += UndergroundLength;
+
+                float xDif = targetPos.X - NPC.Center.X;
+
+                Movement(targetPos, 1.7f);
+                if (Timer > windup && Math.Abs(xDif) < 80)
+                {
+                    Timer = -1;
+                    NPC.velocity *= 0f;
+                }
+            }
+            if (Timer < 0) // second part
+            {
+                Timer--;
+
+                if (NPC.Center.Y > Target.Center.Y && Timer > -28)
+                {
+                    const float accelUp = 1f;
+                    if (NPC.velocity.Y > -25)
+                    {
+                        NPC.velocity.Y -= accelUp;
+                        float side = 0.4f;
+                        if (CountSegments() < 10)
+                            side = 0.6f;
+                        NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * accelUp * side;
+                    }
+                }
+                else
+                {
+                    if (Timer > -1000)
+                    {
+                        Timer = -1000;
+                    }
+                    if (Timer == -1000 - 3)
+                    {
+                        int heads = CountHeads();
+                        if (heads < 4)
+                        {
+                            int projCount;
+                            float width;
+                            if (heads == 1)
+                            {
+                                projCount = 6;
+                                width = 0.2f;
+                            }
+                            else if (heads == 2)
+                            {
+                                projCount = 4;
+                                width = 0.16f;
+                            }
+                            else
+                            {
+                                projCount = 2;
+                                width = 0.12f;
+                            }
+                            for (float i = 0; i < projCount; i++)
+                            {
+                                float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
+                                Vector2 angle = NPC.velocity.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width);
+
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(14, 18),
+                                    ModContent.ProjectileType<KingSlimeBall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                            }
+                        }
+                    }
+                    NPC.velocity.Y += 0.5f;
+                    bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                    collision = collision || NPC.Center.Y > Target.Center.Y;
+                    if (collision && Timer < -1000 - 50)
+                    {
+                        EndAttack();
+                        return;
+                    }
+                }
+            }
+        }
         #region Help Methods
         public void EndAttack()
         {
@@ -519,6 +623,34 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int CountHeads()
         {
             return NPC.CountNPCS(NPCID.EaterofWorldsHead);
+        }
+        public int CountSegments()
+        {
+            int c = 0;
+            NPC me = NPC;
+            for (int safety = 0; safety < Main.maxNPCs; safety++)
+            {
+                int ai0 = (int)me.ai[0];
+                if (me.type == NPCID.EaterofWorldsTail || !ai0.IsWithinBounds(Main.maxNPCs))
+                    return c;
+                me = Main.npc[ai0];
+                c++;
+            }
+            return c;
+        }
+        public NPC? GetTail()
+        {
+            int c = 0;
+            NPC me = NPC;
+            for (int safety = 0; safety < Main.maxNPCs; safety++)
+            {
+                int ai0 = (int)me.ai[0];
+                if (me.type == NPCID.EaterofWorldsTail || !ai0.IsWithinBounds(Main.maxNPCs))
+                    return me;
+                me = Main.npc[ai0];
+                c++;
+            }
+            return me;
         }
         #endregion
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
