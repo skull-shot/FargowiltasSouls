@@ -208,6 +208,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.eaterBoss = npc.whoAmI;
             FargoSoulsGlobalNPC.boss = npc.whoAmI;
 
+            if (Main.LocalPlayer.active && !Main.LocalPlayer.ghost && !Main.LocalPlayer.dead && npc.Distance(Main.LocalPlayer.Center) < 2000)
+            {
+                Main.LocalPlayer.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
+            }
+
             if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 6000)
             {
                 npc.velocity.Y += 0.25f;
