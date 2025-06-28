@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: 迷你飞碟
 NekomiAxe.DisplayName: 闪闪发光的爱
 NekomiDevi.DisplayName: 戴薇安
 NekomiRitual.DisplayName: 猫猫睡衣仪式
-OpticFlame.DisplayName: 魔眼烈火
-OpticLaser.DisplayName: 死亡激光
+// OpticFlamethrower.DisplayName: Cursed Flamethrower
+// OpticElectricOrb.DisplayName: Ichor Orb
 OpticRetinazer.DisplayName: 激光眼
 OpticSpazmatism.DisplayName: 魔焰眼
 PalmTreeSentry.DisplayName: 棕榈树
@@ -806,3 +806,4 @@ EmpressRitual.DisplayName: 女皇结界
 // RemoteLightning.DisplayName: Remote Rain Lightning
 // RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
 // RemoteProbe.DisplayName: Remote Probe
+// CorruptionSludge.DisplayName: Corruption Sludge

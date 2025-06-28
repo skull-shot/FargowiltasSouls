@@ -400,8 +400,8 @@
 // NekomiAxe.DisplayName: Sparkling Love
 // NekomiDevi.DisplayName: Deviantt
 // NekomiRitual.DisplayName: Nekomi Ritual
-// OpticFlame.DisplayName: Eye Fire
-// OpticLaser.DisplayName: Death Laser
+// OpticFlamethrower.DisplayName: Cursed Flamethrower
+// OpticElectricOrb.DisplayName: Ichor Orb
 // OpticRetinazer.DisplayName: Retinazer
 // OpticSpazmatism.DisplayName: Spazmatism
 // PalmTreeSentry.DisplayName: Palm Tree
@@ -806,3 +806,4 @@
 // RemoteLightning.DisplayName: Remote Rain Lightning
 // RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
 // RemoteProbe.DisplayName: Remote Probe
+// CorruptionSludge.DisplayName: Corruption Sludge

@@ -55,12 +55,12 @@ ObsidianLavaWetBuff: {
 
 TitaniumDRBuff: {
 	DisplayName: Титановый щит
-	Description: Вы получаете дополнительное сопротивление урону и сопротивление многим дебаффам
+	Description: Дополнительное сопротивление урону и сопротивление многим дебаффам
 }
 
 KingSlimeMinionBuff: {
 	DisplayName: Миниатюрный Король слизней
-	Description: Этот маленький Король слизней защитит тебя
+	Description: Этот маленький Король слизней защищает вас
 }
 
 DukeFishronBuff: {
@@ -105,7 +105,7 @@ BerserkerInstallBuff: {
 
 BerserkerInstallCDBuff: {
 	DisplayName: Перезарядка свирепости
-	Description: Вы пока не можете впасть в неистовство
+	Description: Вы пока не можете впасть в свирепость
 }
 
 BetsyDashBuff: {
@@ -134,7 +134,7 @@ BaronsBurdenBuff: {
 }
 
 DeviPresenceBuff: {
-	DisplayName: Аномальное присутствие
+	DisplayName: Девиантное присутствие
 	Description: Дружественные НИПы получают увеличенный урон
 }
 
@@ -145,7 +145,7 @@ GrabbedBuff: {
 
 MutantFangBuff: {
 	DisplayName: Клык Мутанта
-	Description: Сила Режима Вечность подчиняет вас
+	Description: Сила режима Вечность подчиняет вас
 }
 
 MutantPresenceBuff: {
@@ -164,13 +164,13 @@ MagicalCleanseCDBuff: {
 }
 
 AbomCooldownBuff: {
-	DisplayName: Перезарядка мерзости
+	DisplayName: Мерзкая перезарядка
 	Description: Вы пока не можете выдержать ещё одну атаку
 }
 
 AbomRebirthBuff: {
 	DisplayName: Мерзкое перерождение
-	Description: Вы не можете умереть, пока не получите урон
+	Description: Вы не можете умереть не от прямых атак
 }
 
 AnticoagulationBuff: {
@@ -190,7 +190,7 @@ AtrophiedBuff: {
 
 BerserkedBuff: {
 	DisplayName: Свирепый
-	Description: Увеличен урон и скорость атаки, снижена защита, и вы не можете себя контролировать
+	Description: Урон и скорость атаки увеличены, защита снижена, вы не можете себя контролировать
 }
 
 BloodDrinkerBuff: {
@@ -219,8 +219,8 @@ CrippledBuff: {
 }
 
 CurseoftheMoonBuff: {
-	DisplayName: Проклятье луны
-	Description: Гнев луны поглощает вас
+	DisplayName: Проклятье Луны
+	Description: Гнев Луны поглощает вас
 }
 
 DefenselessBuff: {
@@ -242,8 +242,8 @@ HallowIlluminatedBuff: {
 	DisplayName: Освещение
 	Description:
 		'''
-		Увеличивает яркость и скорость появления существ
-		Увеличивает получаемый и наносимый урон в освещённых местах
+		Яркость и скорость появления существ увеличены
+		Получаемый и наносимый урон увеличены в освещённых местах
 		'''
 }
 
@@ -288,7 +288,7 @@ InfestedBuff: {
 
 IvyVenomBuff: {
 	DisplayName: Яд плюща
-	Description: Вы теряете здоровье, яд плюща станет нейротоксином на 20 секунде
+	Description: Вы теряете здоровье, яд плюща станет нейротоксином на 20-й секунде
 	Transform: Ваш яд плюща стал нейротоксином!!
 }
 
@@ -304,7 +304,7 @@ LethargicBuff: {
 
 LightningRodBuff: {
 	DisplayName: Громоотвод
-	Description: Вы притягиваете разряды молнии
+	Description: Вы притягиваете к себе молнии
 }
 
 LihzahrdBlessingBuff: {
@@ -345,7 +345,7 @@ LowGroundEridanusBuff: {
 
 MarkedforDeathBuff: {
 	DisplayName: Помеченный смертью
-	Description: Просто не получи урона
+	Description: Просто не получай урона
 }
 
 MidasBuff: {
@@ -402,7 +402,7 @@ PurgedBuff: {
 
 RefreshedBuff: {
 	DisplayName: Освежение
-	Description: Увеличена мобильность и время полёта
+	Description: '''Мобильность и время полёта	увеличены'''
 }
 
 ReverseManaFlowBuff: {
@@ -477,13 +477,13 @@ BrainMinionBuff: {
 }
 
 CrystalSkullBuff: {
-	DisplayName: Кристальный череп
-	Description: Кристальный череп защищает вас
+	DisplayName: Хрустальный череп
+	Description: Хрустальный череп защищает вас
 }
 
 EaterMinionBuff: {
 	DisplayName: Пожиратель миров
-	Description: Миниатюрный пожиратель миров сражается за вас
+	Description: Миниатюрный Пожиратель миров сражается за вас
 }
 
 LunarCultistBuff: {
@@ -538,7 +538,7 @@ TwinsEXBuff: {
 
 MutantRebirthBuff: {
 	DisplayName: Перерождение Мутанта
-	Description: Воскрешение луча смерти перезаряжается
+	Description: Воскрешение с лучом смерти перезаряжается
 }
 
 BabyLifelightBuff: {
@@ -578,12 +578,12 @@ GoldenStasisBuff: {
 
 GoldenStasisCDBuff: {
 	DisplayName: Перезарядка золотого застоя
-	Description: Вы пока не можете озолотиться
+	Description: Вы пока не можете воспользоваться золотым панцирем
 }
 
 HallowCooldownBuff: {
 	DisplayName: Перезарядка освящённого меча
-	Description: Ваш меч пока не может отразить выстрел
+	Description: Ваш меч пока не может отражать выстрелы
 }
 
 HuntressBleedBuff: {
@@ -613,7 +613,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	DisplayName: Панцирь
-	Description: Все выстрелы блокируются
+	Description: Все снаряды блокируются
 }
 
 SnowstormCDBuff: {
@@ -657,8 +657,8 @@ VortexCDBuff: {
 }
 
 SuperchargedBuff: {
-	DisplayName: Подзаряжен
-	Description: Увеличивает скорость передвижения на 20%, скорость атаки на 10%, также ваши атаки электризуют
+	DisplayName: Подзарядка
+	Description: Скорость передвижения на увеличена 20%, скорость атаки — на 10%, также ваши атаки электризуют
 }
 
 MoonBowBuff: {
@@ -677,12 +677,12 @@ WretchedHexBuff: {
 }
 
 CorruptedBuff: {
-	DisplayName: Увядающий
+	DisplayName: Увядание
 	Description: Вы увяли
 }
 
 CorruptedBuffForce: {
-	DisplayName: Увядающий (Артефакт)
+	DisplayName: Увядание (Артефакт)
 	Description: Вы увяли
 }
 
@@ -693,12 +693,12 @@ JungleMimicSummonBuff: {
 
 GladiatorBuff: {
 	DisplayName: Сила гладиатора
-	Description: Увеличивает сопротивление урону и урон, даёт иммунитет к отбрасыванию, улучшает дождь копий
+	Description: Увеличение сопротивления урону и урона, иммунитет к отбрасыванию, улучшение дождя копий
 }
 
 GladiatorSpiritBuff: {
 	DisplayName: Сила гладиатора
-	Description: +15% к сопротивлению урону, +30% к урону, даёт иммунитет к отбрасыванию, улучшает урон за попадания
+	Description: +15% к сопротивлению урону, +30% к урону, иммунитет к отбрасыванию, улучшение урона за попадания
 }
 
 ROBBuff: {
@@ -765,27 +765,27 @@ WitheredWizardBuff: {
 
 MushroomPowerBuff: {
 	DisplayName: Сила грибов
-	Description: Увеличивает урон и шанс критического удара
+	Description: Увеличение урона и шанса критического удара
 }
 
 SolarBuff: {
 	DisplayName: Усиление солнца
-	Description: Увеличивает сопротивление урону
+	Description: Увеличение сопротивления урону
 }
 
 VortexBuff: {
 	DisplayName: Усиление вихря
-	Description: Увеличивает шанс критического удара
+	Description: Увеличение шанса критического удара
 }
 
 NebulaBuff: {
 	DisplayName: Усиление туманности
-	Description: Увеличивает регенерацию здоровья
+	Description: Увеличение регенерации здоровья
 }
 
 StardustBuff: {
 	DisplayName: Усиление звёздной пыли
-	Description: Увеличивает урон
+	Description: Увеличение урона
 }
 
 AmbrosiaBuff: {
@@ -804,11 +804,11 @@ TouhouHoardBuff: {
 }
 
 BleedingOut: {
-	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	DisplayName: Кровоточит
+	Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
 }
 
 SilverBuff: {
-	// DisplayName: Parry Boost
-	// Description: 100% increased damage
+	DisplayName: Усиление парирования
+	Description: Урон увеличен на 100%
 }

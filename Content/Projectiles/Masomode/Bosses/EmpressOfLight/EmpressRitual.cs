@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight
         public override void SetDefaults()
         {
             base.SetDefaults();
+            Projectile.ignoreWater = true;
             Projectile.hide = true;
         }
         protected override void Movement(NPC npc)

@@ -17,11 +17,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
-            /* Tooltip.SetDefault("Has different attacks when using left or right click" +
-                "\nHas different attacks when used while holding up, down, or both" +
-                "\n'The reward for embracing eternity...'"); */
-
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
@@ -251,7 +246,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 .AddIngredient(ModContent.ItemType<EternalEnergy>(), 30)
                 .AddIngredient(ModContent.ItemType<AbomEnergy>(), 30)
                 .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 30)
-                .AddIngredient(ModContent.ItemType<PhantasmalEnergy>())
+                .AddIngredient(ModContent.ItemType<BrokenSpearhead>())
                 .AddIngredient(ModContent.ItemType<MutantEye>())
                 .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
                 .Register();

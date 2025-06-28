@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: Мини-тарелка
 NekomiAxe.DisplayName: Сверкающая дюбовь
 NekomiDevi.DisplayName: Девиантт
 NekomiRitual.DisplayName: Ритуал Некоми
-OpticFlame.DisplayName: Глазной огонь
-OpticLaser.DisplayName: Лазер смерти
+OpticFlamethrower.DisplayName: Проклятый огнемёт
+OpticElectricOrb.DisplayName: Ихорная сфера
 OpticRetinazer.DisplayName: Ретиназер
 OpticSpazmatism.DisplayName: Спазматизм
 PalmTreeSentry.DisplayName: Пальма
@@ -806,3 +806,4 @@ RemoteLightningExplosion.DisplayName: Взрыв молний дистанцио
 RemoteLightning.DisplayName: Молния дистанционного управления
 RemoteScanTelegraph.DisplayName: Ремоут скан телеграф
 RemoteProbe.DisplayName: Зонд дистанционного управления
+// CorruptionSludge.DisplayName: Corruption Sludge

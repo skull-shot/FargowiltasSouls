@@ -16,13 +16,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            ItemID.Sets.StaffMinionSlotsRequired[Item.type] = 3;
+            ItemID.Sets.StaffMinionSlotsRequired[Item.type] = 2;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<GeminiGlaives>();
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 160;
+            Item.damage = 250;
             Item.mana = 10;
             Item.DamageType = DamageClass.Summon;
             Item.width = 24;
@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.AddBuff(Item.buffType, 2);
-            Vector2 spawnPos = Main.MouseWorld;
             velocity = velocity.RotatedBy(Math.PI / 2);
 
             player.SpawnMinionOnCursor(source, player.whoAmI, ModContent.ProjectileType<OpticRetinazer>(), Item.damage, knockback, default, velocity);

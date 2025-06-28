@@ -137,11 +137,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
-                    if (!WorldSavingSystem.MasochistModeReal)
-                    {
-                        EModeCanHurt = false;
-                        projectile.hide = true;
-                    }
+                    EModeCanHurt = false;
+                    projectile.hide = true;
                     break;
 
                 case ProjectileID.DD2BetsyFlameBreath:
@@ -1183,6 +1180,8 @@ namespace FargowiltasSouls.Content.Projectiles
         private int FadeTimer = 0;
         public override void PostAI(Projectile projectile)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
@@ -1252,6 +1251,19 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
+                    break;
+                case ProjectileID.MoonlordTurretLaser:
+                    modifiers.FinalDamage *= 0.5f;
+                    break;
+                case ProjectileID.RainbowCrystalExplosion:
+                    modifiers.FinalDamage *= 0.6f;
+                    break;
+                case ProjectileID.Tempest:
+                case ProjectileID.MiniSharkron:
+                    modifiers.FinalDamage *= 1.2f;
+                    break;
+                case ProjectileID.HoundiusShootiusFireball:
+                    modifiers.FinalDamage *= 1.2f;
                     break;
             }
 

@@ -158,7 +158,7 @@ IceQueenGraze: Graze
 UfoMinionEffect: Saucer Minion
 ChalicePotionEffect: Free Potion Buffs
 MasoTrueEyeMinion: True Eye Minions
-MutantArmorHeader: True Mutant Armor
+MutantArmorHeader: Eternal Armor
 MasoAbom: Abominationn Minion
 MasoRing: Phantasmal Ring Minion
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"

@@ -1,6 +1,7 @@
 ﻿
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
@@ -14,6 +15,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI.Chat;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
@@ -76,7 +78,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if ((line.Mod == "Terraria" && line.Name == "ItemName") || line.Name == "FlavorText")
+            if (line.Name == "FlavorText")
             {
                 Main.spriteBatch.End(); //end and begin main.spritebatch to apply a shader
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Main.UIScaleMatrix);
@@ -96,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             base.SetDefaults();
 
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.value = 200000000;
             Item.shieldSlot = 5;
             Item.defense = 100;
