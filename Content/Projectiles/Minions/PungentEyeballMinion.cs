@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 if (Projectile.owner == Main.myPlayer)
                     Projectile.netUpdate = true;
             }
-            if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
+            if (player.HeldItem.IsWeapon() && player.controlUseItem)
             {
                 if (Projectile.localAI[1] == 0)
                 {

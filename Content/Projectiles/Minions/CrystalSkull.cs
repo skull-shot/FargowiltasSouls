@@ -117,7 +117,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                     }
                 }
             }
-            else if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
+            else if (player.HeldItem.IsWeapon() && player.controlUseItem)
             {
                 clickTimer--;
 
