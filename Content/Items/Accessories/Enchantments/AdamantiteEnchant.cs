@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<AdamantiteEnchant>();
 
         public override bool ExtraAttackEffect => true;
-        public const float SpreadCap = 17; // spread cap in DEGREES
+        public const float SpreadCap = 14; // spread cap in DEGREES
         public static bool CanBeAffected(Projectile projectile, Player player)
         {
             var modProj = projectile.FargoSouls();
