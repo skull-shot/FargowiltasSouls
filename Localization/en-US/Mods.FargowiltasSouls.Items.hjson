@@ -206,7 +206,7 @@ FossilEnchant: {
 		'''
 		If you reach zero HP you will revive with 50 HP, self-cleanse debuffs, and spawn several bones
 		You will also spawn a few bones on every hit
-		Collect the bones to heal for 12 HP each
+		Collect the bones to heal for 16 HP each
 		'Beyond a forgotten age'
 		'''
 }
@@ -592,7 +592,7 @@ SpectreEnchant: {
 		If you reach zero HP you will revive as a ghost with 100 HP, self-cleanse debuffs, and spawn several spirits
 		As a ghost you are immune, faster, have infinite wing time and can't attack, lasting for 5 seconds
 		You will also spawn a few spirits on every hit
-		Collect the spirits to heal for 12 HP each and send them towards the nearest enemy, dealing magic damage
+		Collect the spirits to heal for 16 HP each and send them towards the nearest enemy, dealing magic damage
 		'Their lifeforce will be their undoing'
 		'''
 }

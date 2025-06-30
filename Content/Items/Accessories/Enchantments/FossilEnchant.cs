@@ -141,16 +141,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<SpiritHeader>();
         public override int ToggleItemType => ModContent.ItemType<FossilEnchant>();
+        public int damageCopy;
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             //spawn bones
-            int damageCopy = info.Damage;
-            for (int i = 0; i < 5; i++)
+            damageCopy += info.Damage;
+            for (int i = 0; i < 2; i++)
             {
                 if (damageCopy < 40)
                     break;
-                damageCopy -= 40;
-
+                damageCopy -= 40 + (10*i);
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<FossilBone>(), 0, 0f, player.whoAmI);
