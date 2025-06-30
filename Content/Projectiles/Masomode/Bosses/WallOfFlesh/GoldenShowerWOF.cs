@@ -79,7 +79,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Ichor, 900);
-            target.AddBuff(BuffID.OnFire, 300);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

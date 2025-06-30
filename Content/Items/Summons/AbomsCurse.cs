@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,6 +29,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.UseSound = FargosSoundRegistry.AbomSpawnSound;
             Item.consumable = true;
             Item.value = Item.buyPrice(gold: 8);
         }

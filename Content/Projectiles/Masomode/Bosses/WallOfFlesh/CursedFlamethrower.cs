@@ -30,16 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (Main.rand.NextBool(6))
-                target.AddBuff(39, 480, true);
-            else if (Main.rand.NextBool(4))
-                target.AddBuff(39, 300, true);
-            else if (Main.rand.NextBool())
-                target.AddBuff(39, 180, true);
-
-            target.AddBuff(BuffID.OnFire, 300);
-            /*target.AddBuff(ModContent.BuffType<ClippedWings>(), 180);
-            target.AddBuff(ModContent.BuffType<Crippled>(), 60);*/
+            target.AddBuff(BuffID.CursedInferno, 300, true);
         }
     }
 }
