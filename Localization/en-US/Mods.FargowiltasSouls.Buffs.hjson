@@ -613,7 +613,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	DisplayName: Shell Hide
-	Description: Projectiles are being blocked
+	Description: Greatly reduced damage taken
 }
 
 SnowstormCDBuff: {

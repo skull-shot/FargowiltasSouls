@@ -68,9 +68,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 1000f, activeFunction: () => player.HasEffect<TurtleEffect>() || player.HasEffectEnchant<TurtleEffect>());
-                FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (!player.HasEffect<LifeForceEffect>() && !player.controlRight && !player.controlLeft && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 2000f, activeFunction: () => player.HasEffect<TurtleEffect>());
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (!player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
             {
                 modPlayer.TurtleCounter++;
 
@@ -95,44 +95,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (modPlayer.TurtleShellHP < 2000 && !modPlayer.ShellHide)
             {
-                modPlayer.TurtleShellHP++;
-                modPlayer.TurtleShellHP++;
+                modPlayer.TurtleShellHP += 2;
             }
             if (modPlayer.TurtleShellHP < 0)
                 modPlayer.TurtleShellHP = 0;
             if (modPlayer.TurtleShellHP > 2000)
                modPlayer.TurtleShellHP = 2000;
 
-            //Main.NewText($"shell HP: {TurtleShellHP}, counter: {TurtleCounter}, recovery: {turtleRecoverCD}");
+            //Main.NewText($"shell HP: {modPlayer.TurtleShellHP}, counter: {modPlayer.TurtleCounter}");
         }
 
         public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
-            return TurtleDR(player, npc);
+            return TurtleDR(player);
         }
         public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
-            return TurtleDR(player, projectile);
+            return TurtleDR(player);
         }
-        public static float TurtleDR(Player player, Entity attacker)
+        public static float TurtleDR(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (!player.HasEffect<TurtleEffect>())
-                return 0f;
-            if (!modPlayer.ShellHide)
-                return 0f;
-            NPC sourceNPC = null;
-            if (attacker is NPC attackerNPC)
-                sourceNPC = attackerNPC;
-            if (attacker is Projectile projectile && projectile.GetSourceNPC() is NPC projNPC)
-                sourceNPC = projNPC;
-            if (sourceNPC != null)
-            {
-                float hp = modPlayer.TurtleShellHP;
-                float dr = 0.4f + (hp * (1f / 5000f));
-                return dr;
-            }
-            return 0f;
+            float dr = 0;
+            if (modPlayer.ShellHide)
+                dr += 0.4f + (modPlayer.TurtleShellHP * (1f / 5000f));
+            return dr;
         }
 
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
