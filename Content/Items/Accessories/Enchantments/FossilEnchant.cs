@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
 
         public override Header ToggleHeader => null;
-        
+
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             player.immune = true;
@@ -115,25 +115,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 player.AddBuff(ModContent.BuffType<FossilReviveCDBuff>(), reviveCooldown);
             };
 
-            if (modPlayer.Eternity)
-            {
-                Revive(player.statLifeMax2 / 2 > 300 ? player.statLifeMax2 / 2 : 300, 10800);
-                //if (player.HasEffect<FossilBones>())
-                    XWay(30, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, 0, 0, player.whoAmI);
-            }
-            else if (modPlayer.TerrariaSoul)
-            {
-                Revive(300, 14400);
-                //if (player.HasEffect<FossilBones>())
-                    XWay(25, player.GetSource_Misc("FossilEnchant"), player.Center, ModContent.ProjectileType<FossilBone>(), 15, 0, 0, player.whoAmI);
-            }
-            else
-            {
-                bool forceEffect = modPlayer.ForceEffect<FossilEnchant>();
-                Revive(forceEffect ? 200 : 50, 18000);
-                if (player.HasEffect<FossilBones>())
-                    XWay(forceEffect ? 20 : 10, player.GetSource_EffectItem<FossilEffect>(), player.Center, ModContent.ProjectileType<FossilBone>(), 15, 0, 0, player.whoAmI);
-            }
+            bool forceEffect = modPlayer.ForceEffect<FossilEnchant>();
+            Revive(forceEffect ? 200 : 50, 18000);
+            if (player.HasEffect<FossilBones>())
+                XWay(forceEffect ? 20 : 10, player.GetSource_EffectItem<FossilEffect>(), player.Center, ModContent.ProjectileType<FossilBone>(), 15, 0, 0, player.whoAmI);
         }
     }
     public class FossilBones : AccessoryEffect
