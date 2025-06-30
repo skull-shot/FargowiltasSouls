@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Sounds;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -21,7 +22,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 Projectile.localAI[0] = Projectile.Center.X;
                 Projectile.localAI[1] = Projectile.Center.Y;
-                SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.AbomScytheSplit, Projectile.Center);
             }
             Projectile.rotation += 0.8f;
             /*for (int i = 0; i < 6; i++)

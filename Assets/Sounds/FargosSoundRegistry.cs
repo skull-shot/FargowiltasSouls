@@ -117,6 +117,9 @@ namespace FargowiltasSouls.Assets.Sounds
 
         // Abominationn
         public static readonly SoundStyle StyxGazer = new(SoundsPath + "Siblings/Abominationn/StyxGazer");
+        public static readonly SoundStyle AbomScytheSwing = new(SoundsPath + "Siblings/Abominationn/ScytheSwing");
+        public static readonly SoundStyle AbomScytheSplit = new(SoundsPath + "Siblings/Abominationn/ScytheSplit");
+        public static readonly SoundStyle AbomSpawnSound = new(SoundsPath + "Siblings/Abominationn/SpawnSound");
 
         // Mechs
 

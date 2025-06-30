@@ -741,8 +741,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(BuffID.Burning, 300);
         }
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -833,10 +831,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(BuffID.OnFire, 300);
-            target.AddBuff(BuffID.Bleeding, 300);
-            target.AddBuff(BuffID.Rabies, 600);
+;
+            target.AddBuff(BuffID.Bleeding, 180);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
