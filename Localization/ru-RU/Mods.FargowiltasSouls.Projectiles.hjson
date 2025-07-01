@@ -806,4 +806,4 @@ RemoteLightningExplosion.DisplayName: Взрыв молний дистанцио
 RemoteLightning.DisplayName: Молния дистанционного управления
 RemoteScanTelegraph.DisplayName: Ремоут скан телеграф
 RemoteProbe.DisplayName: Зонд дистанционного управления
-// CorruptionSludge.DisplayName: Corruption Sludge
+CorruptionSludge.DisplayName: Порченная слизь
