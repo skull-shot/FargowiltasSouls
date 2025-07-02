@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (SqueakyToy)
             {
-                modifiers.FinalDamage.Base = 1;
+                modifiers.SetMaxDamage(1);
                 Squeak(target.Center, 0.4f);
                 return;
             }

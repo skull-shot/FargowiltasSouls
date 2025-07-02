@@ -402,7 +402,7 @@ PurgedBuff: {
 
 RefreshedBuff: {
 	DisplayName: Освежение
-	Description: '''Мобильность и время полёта	увеличены'''
+	Description: Мобильность и время полёта увеличены
 }
 
 ReverseManaFlowBuff: {
