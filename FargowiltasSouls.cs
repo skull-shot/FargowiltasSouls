@@ -648,6 +648,7 @@ namespace FargowiltasSouls
             SyncSnatcherGrab,
             SyncCursedSpiritGrab,
             SyncCursedSpiritRelease,
+            SyncAntlionGrab,
             SyncTuskRip,
             DropMutantGift,
             RequestEnvironmentalProjectile,
