@@ -843,11 +843,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.GetDamage(DamageClass.Generic) -= 0.1f;
             }
 
-            if (Kneecapped)
-            {
-                Player.accRunSpeed = Player.maxRunSpeed;
-            }
-
             ManageLifeReduction();
 
             if (Eternity)

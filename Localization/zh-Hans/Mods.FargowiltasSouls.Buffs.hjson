@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	Description: 无法飞行或使用火箭靴
 }
 
-CrippledBuff: {
-	DisplayName: 跛足
-	Description: 你无法奔跑
-}
-
 CurseoftheMoonBuff: {
 	DisplayName: 月之诅咒
 	Description: 月亮的愤怒正在吞噬你

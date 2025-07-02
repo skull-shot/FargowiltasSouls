@@ -440,7 +440,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<BerserkedBuff>(),
                     ModContent.BuffType<BloodthirstyBuff>(),
                     ModContent.BuffType<ClippedWingsBuff>(),
-                    ModContent.BuffType<CrippledBuff>(),
                     ModContent.BuffType<CurseoftheMoonBuff>(),
                     ModContent.BuffType<DefenselessBuff>(),
                     ModContent.BuffType<FlamesoftheUniverseBuff>(),

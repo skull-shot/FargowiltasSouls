@@ -452,7 +452,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IvyVenom = false;
             MutantNibble = false;
             Asocial = false;
-            Kneecapped = false;
             Defenseless = false;
             Infested = false;
             Rotting = false;

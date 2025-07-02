@@ -26,7 +26,6 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
             player.buffImmune[ModContent.BuffType<BerserkedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
