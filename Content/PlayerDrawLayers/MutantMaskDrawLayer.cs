@@ -23,6 +23,10 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
             if (player.armor[0].type != ModContent.ItemType<MutantMask>() && player.armor[10].type != ModContent.ItemType<MutantMask>())
                 return false;
+
+            if (player.head != EquipLoader.GetEquipSlot(Mod, "MutantMask", EquipType.Head))
+                return false;
+
             return true;
         }
 
