@@ -135,13 +135,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu
         {
             if (WorldSavingSystem.MasochistModeReal)
             {
-                target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
-                target.AddBuff(BuffID.Bleeding, 600);
-                target.AddBuff(BuffID.Obstructed, 15);
+                target.AddBuff(BuffID.Bleeding, 180);
             }
 
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
         }
     }
 }

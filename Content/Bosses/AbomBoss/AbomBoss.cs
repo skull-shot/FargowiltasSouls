@@ -203,7 +203,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 if (NPC.Distance(Main.player[NPC.target].Center) < 1500)
                 {
                     NPC.localAI[3] = 1;
-                    SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                     NPC.localAI[0] = Main.rand.Next(3); //start on a random strong attack
                     NPC.localAI[1] = Main.rand.Next(2); //start on a random super
                 }
