@@ -2123,9 +2123,9 @@ OrdinaryCarrot: {
 	/* Tooltip:
 		'''
 		Increases night vision
-		{$CommonItemTooltip.MinorStats}
+		{$CommonItemTooltip.MajorStats}
 		Increases life regeneration
-		1 minute duration
+		3 minute duration
 		Permanent effect once consumed:
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'

@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
             Item.width = 20;
             Item.height = 20;
             Item.rare = ItemRarityID.LightRed;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useAnimation = 17;
             Item.useTime = 17;
