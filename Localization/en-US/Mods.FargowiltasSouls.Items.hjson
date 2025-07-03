@@ -2097,7 +2097,7 @@ MutantsDiscountCard: {
 
 MutantsPact: {
 	DisplayName: Mutant's Pact
-	Tooltip: 
+	Tooltip:
 		'''
 		[c/00FFFF:Permanent effect once consumed:]
 		Adds an accessory slot that only accepts an Enchantment, Force, or Soul

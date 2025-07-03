@@ -1110,8 +1110,8 @@ ConcentratedRainbowMatter: {
 	// DisplayName: Concentrated Rainbow Matter
 	/* Tooltip:
 		'''
-		Permanent effect once consumed:
-		Automatically use healing potions when needed (can be toggled)
+		[c/00FFFF:Permanent toggleable effect once consumed:]
+		Automatically use healing potions when needed
 		Grants immunity to Flames of the Universe
 		'Taste the rainbow'
 		''' */
@@ -2085,6 +2085,7 @@ DeerSinew: {
 	// DisplayName: Deer Sinew
 	/* Tooltip:
 		'''
+		[c/00FFFF:Permanent toggleable effect once consumed:]
 		Allows the ability to dash without a dash accessory
 		Double tap a direction
 		Taking damage may briefly freeze you
@@ -2098,7 +2099,8 @@ MutantsCreditCard: {
 	// DisplayName: Mutant's Credit Card
 	/* Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 30%
+		[c/00FFFF:Permanent effect once consumed:]
+		Reduces Mutant's shop prices by 30%
 		'Wait, how did you get this?'
 		''' */
 }
@@ -2107,15 +2109,20 @@ MutantsDiscountCard: {
 	// DisplayName: Mutant's Discount Card
 	/* Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 20%
 		{$CommonItemTooltip.MajorStats}
+		[c/00FFFF:Permanent effect once consumed:]
+		Reduces Mutant's shop prices by 20%
 		'It's not used how you think'
 		''' */
 }
 
 MutantsPact: {
 	// DisplayName: Mutant's Pact
-	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Adds an accessory slot that only accepts an Enchantment, Force, or Soul
+		''' */
 }
 
 OrdinaryCarrot: {
@@ -2126,7 +2133,7 @@ OrdinaryCarrot: {
 		{$CommonItemTooltip.MajorStats}
 		Increases life regeneration
 		3 minute duration
-		Permanent effect once consumed:
+		[c/00FFFF:Permanent toggleable effect once consumed:]
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		''' */
@@ -2139,7 +2146,11 @@ RabiesShot: {
 
 RabiesVaccine: {
 	// DisplayName: Rabies Vaccine
-	// Tooltip: Permanently grants immunity to Feral Bite
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Grants immunity to Feral Bite
+		''' */
 }
 
 LifeDye: {

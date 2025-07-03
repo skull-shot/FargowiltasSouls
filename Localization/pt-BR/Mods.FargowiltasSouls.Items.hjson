@@ -2132,7 +2132,11 @@ MutantsDiscountCard: {
 
 MutantsPact: {
 	DisplayName: Pacto do Mutant
-	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Adds an accessory slot that only accepts an Enchantment, Force, or Soul
+		''' */
 }
 
 OrdinaryCarrot: {
