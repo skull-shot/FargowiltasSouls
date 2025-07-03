@@ -545,8 +545,8 @@ ShroomiteEnchant: {
 	Tooltip:
 		'''
 		Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		Mushroom Power grants +20% damage and critical strike chance
-		Piercing projectiles spawn a cloud of mushrooms on their first hit, dealing ranged damage, with a short cooldown
+		Mushroom Power grants +12% damage and critical strike chance
+		Piercing projectiles spawn a cloud of mushrooms on their first hit, dealing ranged damage
 		'Made with real shrooms!'
 		'''
 	AndMushroomPower: and grants the Mushroom Power buff
@@ -867,7 +867,7 @@ NatureForce: {
 		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
 		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
 		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +20% damage and crit and increases your aura size
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +12% damage and crit and increases your aura size
 		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
 		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
 		'Tapped into every secret of the wilds'
