@@ -241,7 +241,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 							for (int i = -1; i <= 1; i += 2)
 							{
 								Vector2 vel = Vector2.UnitX * i * 3;
-								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+								Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 1f), 1f, Main.myPlayer);
 							}
 						}
 
@@ -426,7 +426,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             if (Timer >= 0)
 			{
 				NPC.velocity.X *= 0.97f;
-                float speedUp = Counter == 2 ? 0.35f : 0.2f;
+                float speedUp = Counter == 2 ? 0.3f : 0.17f;
                 if (WorldSavingSystem.EternityMode)
 					NPC.velocity.X += Math.Sign(Player.Center.X - NPC.Center.X) * speedUp;
 				if (NPC.velocity.Y >= 0 && Counter == 0)
@@ -445,7 +445,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						for (int i = -1; i <= 1; i += 2)
 						{
 							Vector2 vel = Vector2.UnitX * i * 3;
-							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+							Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 1f), 1f, Main.myPlayer);
 						}
 					}
 					if (WorldSavingSystem.EternityMode && (Counter < 2 || Enraged))
@@ -514,7 +514,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 			else if (Timer == TelegraphTime)
 			{
 				SoundEngine.PlaySound(BigShotSFX, maskCenter);
-				int shots = Main.expertMode ? WorldSavingSystem.EternityMode ? WorldSavingSystem.MasochistModeReal ? 12 : 10 : 8 : 6;
+				int shots = Main.expertMode ? WorldSavingSystem.EternityMode ? WorldSavingSystem.MasochistModeReal ? 11 : 9 : 7 : 5;
 				if (FargoSoulsUtil.HostCheck)
 				{
 					float baseRot = Main.rand.NextFloat(MathF.Tau);
@@ -552,7 +552,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                     SoundEngine.PlaySound(SlamSFX, NPC.Center);
                     Timer = -180;
 					int dir = Math.Sign(Player.Center.X - CoffinArena.Center.ToWorldCoordinates().X);
-                    int leniencyTime = WorldSavingSystem.MasochistModeReal ? -30 : WorldSavingSystem.EternityMode ? -10 : Main.expertMode ? 10 : 20;
+                    int leniencyTime = WorldSavingSystem.MasochistModeReal ? -20 : WorldSavingSystem.EternityMode ? 10 : Main.expertMode ? 20 : 30;
                     Vector2 center = CoffinArena.Center.ToWorldCoordinates();
                     const int ProjCount = 20;
 
@@ -595,7 +595,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                         for (int i = -1; i <= 1; i += 2)
                         {
                             Vector2 vel = Vector2.UnitX * i * 3;
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 0.1f), 1f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 30, vel, ModContent.ProjectileType<CoffinSlamShockwave>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.damage, 1f), 1f, Main.myPlayer);
                         }
                     }
 
@@ -757,7 +757,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 if (Phase < 2) // shoot more in phase 1
                     shotTime -= 10;
                 else
-                    shotTime += 3;
+                    shotTime += 5;
 				if (Timer % shotTime == 0)
 				{
 					RandomProj = Main.rand.Next(3) switch
