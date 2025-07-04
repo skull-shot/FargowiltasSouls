@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 return;
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
-            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden;
+            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden || Player.trident;
 
             Tile currentTile = getPlayerTile();
 

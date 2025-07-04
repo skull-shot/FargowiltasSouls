@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public class TrojanSquirrelArms : TrojanSquirrelLimb
     {
-        public LoopedSoundInstance Loop;
+        public LoopedSoundInstance? Loop;
         int looptimer;
         public override void SetDefaults()
         {
@@ -237,6 +237,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         {
             if (NPC.life <= 0)
             {
+                Loop?.Stop();
                 for (int i = 8; i <= 10; i++)
                 {
                     Vector2 pos = Main.rand.NextVector2FromRectangle(NPC.Hitbox);

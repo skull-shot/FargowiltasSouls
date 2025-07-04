@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
 
                 //spawn for first time
-                if (currentOrbs == 0)
+                if (currentOrbs == 0 && modPlayer.ShadowOrbRespawnTimer <= 0)
                 {
                     float rotation = 2f * (float)Math.PI / max;
 

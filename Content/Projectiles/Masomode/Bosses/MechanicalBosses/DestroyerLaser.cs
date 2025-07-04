@@ -91,15 +91,9 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
         {
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.destroyBoss, NPCID.TheDestroyer))
                 target.AddBuff(BuffID.Electrified, 60);
-            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.brainBoss, NPCID.BrainofCthulhu)
-                && WorldSavingSystem.MasochistModeReal)
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.brainBoss, NPCID.BrainofCthulhu))
             {
-                target.AddBuff(BuffID.Poisoned, 120);
-                target.AddBuff(BuffID.Darkness, 120);
                 target.AddBuff(BuffID.Bleeding, 120);
-                target.AddBuff(BuffID.Slow, 120);
-                target.AddBuff(BuffID.Weak, 120);
-                target.AddBuff(BuffID.BrokenArmor, 120);
             }
         }
 

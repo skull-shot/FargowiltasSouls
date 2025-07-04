@@ -91,7 +91,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if (forceEffect)
                 {
-                    dmg = 250;
+                    dmg = 150;
                     arcs = 8;
                 }
 

@@ -1564,8 +1564,9 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.EyeLaser:
                     if (sourceNPC != null && (sourceNPC.type == NPCID.WallofFlesh || sourceNPC.type == NPCID.WallofFleshEye))
                     {
-                        target.AddBuff(BuffID.OnFire, 300);
-                        if (WorldSavingSystem.MasochistModeReal)
+                        if (!WorldSavingSystem.MasochistModeReal)
+                            target.AddBuff(BuffID.OnFire, 300);
+                        else
                             target.AddBuff(BuffID.Burning, 30);
                     }
                     break;

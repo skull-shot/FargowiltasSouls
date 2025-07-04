@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Projectile.scale = 0.5f;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Generic;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.alpha = 100;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
