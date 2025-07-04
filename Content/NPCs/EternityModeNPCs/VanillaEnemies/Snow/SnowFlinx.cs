@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
         {
 
             AttackTimer++;
-            if (AttackTimer >= 240 && npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
+            if (AttackTimer >= 240 && (State == 1 || (npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))))
             {
                 State = 1;
                 if (Math.Abs(npc.velocity.X) < 15)
