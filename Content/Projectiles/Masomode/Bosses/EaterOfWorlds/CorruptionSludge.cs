@@ -11,11 +11,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds
 {
     public class CorruptionSludge : ModProjectile
     {
-        public override string Texture => FargoSoulsUtil.VanillaTextureProjectile(ProjectileID.ShadowOrb);
 
         public override void SetStaticDefaults()
         {
-            //Main.projFrames[Type] = 4;
+            Main.projFrames[Type] = 4;
         }
 
         public override void SetDefaults()
@@ -46,9 +45,19 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds
 
             Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2f;
 
-            for (int i = 0; i < 1; i++)
+
+            if (Main.rand.NextBool(5))
             {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleMoss);
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.ToxicBubble, newColor: Color.DarkOliveGreen);
+            }
+
+            if (++Projectile.frameCounter > 4)
+            {
+                if (++Projectile.frame >= Main.projFrames[Type])
+                {
+                    Projectile.frame = 0;
+                }
+                Projectile.frameCounter = 0;
             }
         }
 
