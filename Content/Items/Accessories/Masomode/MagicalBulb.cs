@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             AddEffects(player, Item);
-            player.AddEffect<PlantMinionEffect>(Item);
+            player.AddEffect<IvyVenomEffect>(Item);
         }
         public static void AddEffects(Player player, Item item)
         {
@@ -58,15 +58,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             player.AddEffect<BulbKeyEffect>(item);
         }
     }
-    public class PlantMinionEffect : AccessoryEffect
+    public class IvyVenomEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
         public override int ToggleItemType => ModContent.ItemType<MagicalBulb>();
-        public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            if (!player.HasBuff<SouloftheMasochistBuff>())
-                player.AddBuff(ModContent.BuffType<PlanterasChildBuff>(), 2);
+            //if (!player.HasBuff<SouloftheMasochistBuff>())
+                //player.AddBuff(ModContent.BuffType<PlanterasChildBuff>(), 2);
         }
     }
     public class BulbKeyEffect : AccessoryEffect

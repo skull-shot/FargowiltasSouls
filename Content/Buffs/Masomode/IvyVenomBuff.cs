@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 
         public override bool ReApply(Player player, int time, int buffIndex)
         {
-            player.buffTime[buffIndex] += time;
+            /*player.buffTime[buffIndex] += time;*/
             return false;
         }
 
@@ -35,6 +35,14 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
                     Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Buffs.IvyVenomBuff.Transform"), 175, 75, 255);
             }
             player.FargoSouls().IvyVenom = true;
+        }
+        public override void Update(NPC npc, ref int buffIndex)
+        {
+            npc.FargoSouls().IvyVenom = true;
+            if (npc.FargoSouls().IvyVenomTime < 540)
+                npc.FargoSouls().IvyVenomTime += 1;
+            if (npc.buffTime[buffIndex] == 0)
+                npc.FargoSouls().IvyVenomTime = 0;
         }
     }
 }

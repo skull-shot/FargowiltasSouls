@@ -1300,7 +1300,8 @@ MagicalBulb: {
 		'''
 		Grants immunity to Acid Venom, Ivy Venom, and Swarming
 		Increases life regeneration based on how much light you receive
-		Attracts a legendary plant's offspring which flourishes in combat
+		Attacks inflict enemies with Ivy Venom briefly
+		Ivy Venom deals significantly more damage the longer it's applied to an enemy
 		'Matricide?'
 		''' */
 }
