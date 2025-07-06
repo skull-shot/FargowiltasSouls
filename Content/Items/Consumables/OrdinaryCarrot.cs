@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 30;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.LightRed;
             Item.useStyle = ItemUseStyleID.EatFood;
             Item.useAnimation = 17;
@@ -28,13 +28,20 @@ namespace FargowiltasSouls.Content.Items.Consumables
             Item.UseSound = SoundID.Item2;
             Item.value = Item.sellPrice(0, 0, 10, 0);
         }
-
+        public override bool CanUseItem(Player player)
+        {
+            if (player.FargoSouls().OrdinaryCarrot)
+            {
+                return false;
+            }
+            else return base.CanUseItem(player);
+        }
         public override bool? UseItem(Player player)
         {
             if (player.itemAnimation > 0 && player.itemTime == 0)
             {
-                player.AddBuff(BuffID.NightOwl, 3600);
-                player.AddBuff(BuffID.WellFed, 3600);
+                player.AddBuff(BuffID.NightOwl, 10800);
+                player.AddBuff(BuffID.WellFed3, 10800);
                 player.FargoSouls().OrdinaryCarrot = true;
             }
             return true;
@@ -45,10 +52,5 @@ namespace FargowiltasSouls.Content.Items.Consumables
         public override bool DefaultToggle => false;
         public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
         public override int ToggleItemType => ModContent.ItemType<OrdinaryCarrot>();
-        
-        public override void PostUpdateEquips(Player player)
-        {
-            //player.scope = true;
-        }
     }
 }

@@ -913,8 +913,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                 if (NPC.target == localPlayer.whoAmI) // only for target
                 {
-                    EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), ModContent.BuffType<CrippledBuff>(), BuffID.Dazed, BuffID.OgreSpit);
-                    EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), ModContent.BuffType<CrippledBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                 }
 
                 float distance = localPlayer.Distance(NPC.Center);

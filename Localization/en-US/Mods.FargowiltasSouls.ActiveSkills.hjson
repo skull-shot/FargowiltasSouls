@@ -94,9 +94,9 @@ BulbKeyEffect: {
 	DisplayName: Magical Cleanse
 	Tooltip:
 		'''
-		Cure yourself of most debuffs on a long cooldown
-		Also amplifies damage over time effects for nearby enemies by 2x
-		Cooldown depletes faster while not attacking
+		Instantly cures yourself of all debuffs
+		Amplifies debuff damage on enemies by 5x for a brief period of time
+		40 second cooldown, depletes faster while not attacking
 		'''
 }
 

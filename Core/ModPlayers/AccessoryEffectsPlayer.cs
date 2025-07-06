@@ -324,9 +324,19 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
-                    if (Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5)
+                    if (Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5 && Main.npc[i].Distance(Player.Center) < 2500)
                     {
-                        Main.npc[i].AddBuff(ModContent.BuffType<MagicalCurseBuff>(), LumUtils.SecondsToFrames(cdInSec + 5));
+                        Main.npc[i].AddBuff(ModContent.BuffType<MagicalCurseBuff>(), LumUtils.SecondsToFrames(5));
+                        float speed = Main.npc[i].scale * 10;
+                        for (int p = 0; p < 10; p++)
+                        {
+                            Color color = Color.Lime;
+                            if (p % 2 == 0)
+                                color = Color.DeepPink;
+                            Particle s = new SparkParticle(Main.npc[i].Center, Main.rand.NextVector2CircularEdge(speed, speed) + Main.npc[i].velocity, color, 1f, 60, true, Color.White);
+                            if (!Main.npc[i].buffImmune[ModContent.BuffType<MagicalCurseBuff>()])
+                                s.Spawn();
+                        }
                     }
                 }    
 
@@ -334,11 +344,16 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 SoundEngine.PlaySound(SoundID.Item4, Player.Center);
 
-                for (int index1 = 0; index1 < 50; ++index1)
+                for (int i = 0; i < 8; ++i)
                 {
-                    int index2 = Dust.NewDust(Player.position, Player.width, Player.height, Main.rand.NextBool() ? 107 : 157, 0f, 0f, 0, new Color(), 3f);
-                    Main.dust[index2].noGravity = true;
-                    Main.dust[index2].velocity *= 8f;
+                    Color color = Color.Lime;
+                    if (i % 2 == 0)
+                        color = Color.DeepPink;
+                    Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.PiOver4 * i) * 5, color, 1f, 60, true, Color.White);
+                    s.Velocity.Y -= 5;
+                    if (s.Velocity.Y == 0)
+                        s.Lifetime = 0; //kills bottom particle, pattern should look like a leaf or bulb kinda
+                    s.Spawn();
                 }
             }
         }

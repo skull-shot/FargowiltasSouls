@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!player.HasEffect<PearlwoodEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            modPlayer.PearlwoodCritDuration = 60 * 5;
+            modPlayer.PearlwoodCritDuration = 60 * 3;
 
             if (player.HasEffect<PearlwoodStarEffect>())
             {

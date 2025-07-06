@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             //magical bulb
             MagicalBulb.AddEffects(player, Item);
-            player.AddEffect<PlantMinionEffect>(Item);
+            player.AddEffect<IvyVenomEffect>(Item);
 
             //lihzahrd treasure
             player.buffImmune[BuffID.Burning] = true;

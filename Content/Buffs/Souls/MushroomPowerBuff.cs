@@ -13,9 +13,9 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 
         public override void Update(Player player, ref int buffIndex)
         {
-            float stats = 0.2f;
+            float stats = 0.12f;
             if (player.FargoSouls().ForceEffect<ShroomiteEnchant>())
-                stats = 0.3f;
+                stats = 0.25f;
             player.GetDamage(DamageClass.Generic) += stats;
             player.GetCritChance(DamageClass.Generic) += stats * 100;
         }

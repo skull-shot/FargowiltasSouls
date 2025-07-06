@@ -1683,7 +1683,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.SaucerMissile:
                     target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
-                    target.AddBuff(ModContent.BuffType<CrippledBuff>(), 300);
                     break;
 
                 case ProjectileID.SaucerLaser:

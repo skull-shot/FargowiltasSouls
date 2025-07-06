@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	Description: Вы не можете использовать крылья или ракетные ботинки
 }
 
-CrippledBuff: {
-	DisplayName: Покалеченный
-	Description: Вы не можете бежать
-}
-
 CurseoftheMoonBuff: {
 	DisplayName: Проклятье Луны
 	Description: Гнев Луны поглощает вас
