@@ -54,6 +54,7 @@
     <None Remove="Content\Projectiles\BossWeapons\MechFlailEye.png" />
     <None Remove="Content\Projectiles\BossWeapons\PhantasmalEyeLeashProj.png" />
     <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
+    <None Remove="Content\Projectiles\Masomode\Bosses\EaterOfWorlds\CorruptionSludge.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot2.png" />
     <None Remove="Content\Projectiles\Souls\SpookySpinScythe.png" />

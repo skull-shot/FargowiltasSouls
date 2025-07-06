@@ -1,0 +1,103 @@
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Corruption;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.NPCMatching;
+using Luminance.Common.Utilities;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption
+{
+    public class EaterofSouls : EModeNPCBehaviour
+    {
+        //public EatersAndCrimeras() : base(420, ModContent.ProjectileType<CursedFlameHostile2>(), 8f, 0.8f, 75, 600, 45) { }
+
+        public int AttackTimer = 0;
+
+        public int JawLerp;
+
+        public int JawClose;
+
+        //Jaw Rotation breaks entirely when above 0.4f.
+        public float JawRot;
+        
+        public override NPCMatcher CreateMatcher() =>
+            new NPCMatcher().MatchTypeRange(
+                NPCID.EaterofSouls,
+                NPCID.BigEater,
+                NPCID.LittleEater,
+                NPCID.Crimera,
+                NPCID.BigCrimera,
+                NPCID.LittleCrimera
+            );
+
+        public override void OnFirstTick(NPC npc)
+        {
+            base.OnFirstTick(npc);
+
+            if (NPC.downedBoss2 && Main.rand.NextBool(5) && npc.FargoSouls().CanHordeSplit)
+                EModeGlobalNPC.Horde(npc, 5);
+
+            if (npc.type == NPCID.EaterofSouls || npc.type == NPCID.BigEater || npc.type == NPCID.LittleEater)
+                npc.buffImmune[BuffID.CursedInferno] = true;
+        }
+
+        public override void AI(NPC npc)
+        {
+            Player target = Main.player[npc.target];
+            //npc.aiStyle = -1;
+
+            JawRot = MathHelper.Lerp(JawRot, 0, ++JawClose * 0.08f);
+            if (JawRot <= 0)
+                JawRot = 0;
+
+
+            ++AttackTimer;
+
+            if (AttackTimer >= 360)
+            {
+                npc.velocity *= 0.5f;
+                JawRot = MathHelper.Lerp(0, 0.4f, ++JawLerp * 0.07f);
+                if (JawRot >= 0.4f)
+                    JawRot = 0.4f;
+            }
+
+            if (AttackTimer >= 480)
+            {   
+
+                Projectile.NewProjectile(Entity.GetSource_None(), npc.Center, Vector2.Normalize(Main.player[npc.target].Center - npc.Center) * 8, ModContent.ProjectileType<CursedFlameHostile2>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0, Main.myPlayer);
+                AttackTimer = 0;
+                JawLerp = 0;
+                JawClose = 0;
+            }
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Vector2 position = npc.Center - Main.screenPosition;
+            Texture2D Eater = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/VanillaEnemies/Corruption/EaterofSouls", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D Jaw = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/VanillaEnemies/Corruption/EaterJaw", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+
+            Vector2 Origin = Jaw.Size() / 2f;
+            Origin += Vector2.UnitX.RotatedBy((npc.rotation + JawRot));
+            Origin -= Vector2.UnitY.RotatedBy((npc.rotation + JawRot) - 2);
+
+            spriteBatch.Draw(Eater, npc.Center - Main.screenPosition, npc.frame, Color.White, npc.rotation, npc.frame.Size() / 2, npc.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Jaw, position, null, Color.White, JawRot + npc.rotation, Origin , npc.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Jaw, position, null, Color.White, -JawRot + npc.rotation, Origin, npc.scale, SpriteEffects.FlipHorizontally, 0f);
+            return false;
+        }
+
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+        {
+            base.OnHitPlayer(npc, target, hurtInfo);
+
+            target.AddBuff(BuffID.Weak, 300);
+        }
+    }
+}

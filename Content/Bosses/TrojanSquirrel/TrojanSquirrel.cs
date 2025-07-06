@@ -271,7 +271,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/TrojanSquirrel") : MusicID.OtherworldlyBoss1;
             SceneEffectPriority = SceneEffectPriority.BossLow;
 
-            NPC.BossBar = ModContent.GetInstance<CompositeBossBar>();
+            NPC.BossBar = ModContent.GetInstance<TrojanSquirrelBossBar>();
         }
         /*
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
