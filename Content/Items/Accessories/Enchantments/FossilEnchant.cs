@@ -55,12 +55,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
 
         public override Header ToggleHeader => null;
-
-        public override void OnHurt(Player player, Player.HurtInfo info)
-        {
-            player.immune = true;
-            player.immuneTime = Math.Max(player.immuneTime, 60);
-        }
         public static void FossilRevive(Player player)
         {
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
@@ -139,6 +133,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<FossilBone>(), 0, 0f, player.whoAmI);
+            }
+        }
+        public override void PostUpdateEquips(Player player)
+        {
+            if (damageCopy > 40 && !player.immune)
+            {
+                damageCopy -= damageCopy;
             }
         }
     }
