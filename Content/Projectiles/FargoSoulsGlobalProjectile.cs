@@ -65,6 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public int stormTimer;
         public float TungstenScale = 1;
         public bool TikiTagged;
+        public int TikiTimer;
         public bool electricAttack;
         public int spookyCD;
         public bool FrostFreeze;
@@ -292,6 +293,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceProj3.FargoSouls().TikiTagged)
                     {
                         TikiTagged = true;
+                        TikiTimer += 180;
                         sourceProj3.FargoSouls().TikiTagged = false;
                     }
                 }
@@ -1222,24 +1224,21 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     p.FargoSouls().TikiTagged = true;
+                    p.FargoSouls().TikiTimer = 180;
                 }
             }
 
-            if (TikiTagged)
+            if (TikiTimer > 0)
             {
+                TikiTimer--;
                 //dust
                 if (Main.rand.NextBool(10))
                 {
-                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
+                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleTorch, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100);
                     Main.dust[dust].noGravity = true;
                     Main.dust[dust].velocity *= 1.8f;
                     Dust expr_1CCF_cp_0 = Main.dust[dust];
                     expr_1CCF_cp_0.velocity.Y -= 0.5f;
-                    if (Main.rand.NextBool(4))
-                    {
-                        Main.dust[dust].noGravity = false;
-                        Main.dust[dust].scale *= 0.5f;
-                    }
                 }
             }
         }
