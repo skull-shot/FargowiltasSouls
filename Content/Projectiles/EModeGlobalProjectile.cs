@@ -793,13 +793,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.timeLeft = Math.Min(120, projectile.timeLeft);
                     break;
 
-                case ProjectileID.WireKite:
-                    if (projectile.owner == Main.myPlayer && Main.player[projectile.owner].FargoSouls().LihzahrdCurse)
-                    {
-                        projectile.Kill();
-                    }
-                    break;
-
                 case ProjectileID.Fireball:
                     {
                         NPC golem = FargoSoulsUtil.NPCExists(NPC.golemBoss, NPCID.Golem);

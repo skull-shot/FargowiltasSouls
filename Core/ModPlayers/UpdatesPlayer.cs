@@ -768,12 +768,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (StealingCooldown > 0 && !Player.dead)
                 StealingCooldown--;
 
-            if (LihzahrdCurse && Framing.GetTileSafely(Player.Center).WallType == WallID.LihzahrdBrickUnsafe)
-            {
-                Player.dangerSense = false;
-                Player.InfoAccMechShowWires = false;
-            }
-
             if (Graze) //decrease graze bonus over time
             {
                 if (++DeviGrazeCounter > 60)

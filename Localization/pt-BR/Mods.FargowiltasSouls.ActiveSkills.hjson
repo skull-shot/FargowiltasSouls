@@ -25,6 +25,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
+		Fastfalling onto ground creates a massive flaming eruption that deals melee damage
 		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }

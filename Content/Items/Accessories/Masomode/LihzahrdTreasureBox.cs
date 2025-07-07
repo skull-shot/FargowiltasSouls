@@ -33,8 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             player.buffImmune[BuffID.Burning] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.FargoSouls().LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
             player.AddEffect<DiveEffect>(Item);

@@ -308,11 +308,6 @@ LihzahrdBlessingBuff: {
 	// Message: The altar's light shines on you!
 }
 
-LihzahrdCurseBuff: {
-	// DisplayName: Lihzahrd Curse
-	// Description: Wires disabled in Jungle Temple
-}
-
 LivingWastelandBuff: {
 	// DisplayName: Living Wasteland
 	// Description: Everyone around you turns to rot
