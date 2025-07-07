@@ -1221,7 +1221,7 @@ GelicWings: {
 		While flying, crystal spikes are emitted from your wings
 		Allows the wearer to double jump, spawning more crystal spikes
 		Grants immunity to Illuminated caused by the Underground Hallow
-		'Step on me'
+		'Are you watching, Heaven!?'
 		'''
 }
 
@@ -1288,9 +1288,8 @@ LihzahrdTreasureBox: {
 	DisplayName: Lihzahrd Treasure Box
 	Tooltip:
 		'''
-		Grants immunity to Burning, Fused, Lihzahrd Curse and Low Ground
-		Fastfall will create a fiery eruption on impact after falling a certain distance
-		'Too many booby traps to open'
+		Grants immunity to knockback, Burning, and Fused
+		'Filled with various traps of pain and torment'
 		'''
 }
 
