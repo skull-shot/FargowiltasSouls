@@ -31,6 +31,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.noKnockback = true;
             player.buffImmune[BuffID.Burning] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
@@ -48,7 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     }
     public class LihzahrdGroundPound : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
     }
     public class LihzahrdBoulders : AccessoryEffect
