@@ -1217,10 +1217,38 @@ namespace FargowiltasSouls.Content.Projectiles
             firstTickAICheckDone = true;
         }
         private int FadeTimer = 0;
+        public static int[] FancySwings => [
+            ProjectileID.Excalibur,
+            ProjectileID.TrueExcalibur,
+            ProjectileID.TerraBlade2,
+            ProjectileID.TheHorsemansBlade
+        ];
         public override void PostAI(Projectile projectile)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
+            Player player = Main.player[projectile.owner];
+            if (projectile.owner == player.whoAmI)
+            {
+                if (FancySwings.Contains(projectile.type))
+                {
+                    if (player.FargoSouls().swingDirection != player.direction)
+                    {
+                        projectile.ai[0] = -player.direction;
+                    }
+
+                    float rotation = -90;
+                    if (projectile.ai[0] == -1 && player.direction == -1)
+                    {
+                        rotation = -180;
+                    }
+                    else if (projectile.ai[0] == -1 && player.direction == 1)
+                    {
+                        rotation = 0;
+                    }
+                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
+                }
+            }
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
