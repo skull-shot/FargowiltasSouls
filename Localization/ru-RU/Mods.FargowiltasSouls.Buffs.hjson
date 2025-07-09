@@ -603,7 +603,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	DisplayName: Панцирь
-	Description: Все снаряды блокируются
+	Description: Получаемый урон значительно снижен
 }
 
 SnowstormCDBuff: {

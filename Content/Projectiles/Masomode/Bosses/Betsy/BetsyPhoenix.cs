@@ -188,7 +188,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             if (WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors)
-                texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/BetsyPhoenix_Recolor").Value;
+                texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/Betsy/BetsyPhoenix_Recolor").Value;
 
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
