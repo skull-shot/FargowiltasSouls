@@ -30,10 +30,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
             new NPCMatcher().MatchTypeRange(
                 NPCID.EaterofSouls,
                 NPCID.BigEater,
-                NPCID.LittleEater,
-                NPCID.Crimera,
-                NPCID.BigCrimera,
-                NPCID.LittleCrimera
+                NPCID.LittleEater
+                //NPCID.Crimera,
+                //NPCID.BigCrimera,
+                //NPCID.LittleCrimera
             );
 
         public override void OnFirstTick(NPC npc)
