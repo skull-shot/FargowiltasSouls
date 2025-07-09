@@ -37,6 +37,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = HitCooldown;
 
+            Projectile.ContinuouslyUpdateDamageStats = true;
+
         }
         public ref float Target => ref Projectile.ai[0];
         public ref float Cooldown => ref Projectile.ai[1];
