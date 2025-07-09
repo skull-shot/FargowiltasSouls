@@ -1243,13 +1243,6 @@ namespace FargowiltasSouls.Content.Projectiles
             }
         }
 
-        public static int[] FancySwings => [
-            ProjectileID.Excalibur,
-            ProjectileID.TrueExcalibur,
-            ProjectileID.TerraBlade2,
-            ProjectileID.TheHorsemansBlade
-        ];
-
         public override void PostAI(Projectile projectile)
         {
             Player player = Main.player[projectile.owner];
@@ -1339,28 +1332,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
-            }
-
-            if (projectile.owner == player.whoAmI)
-            {
-                if (FancySwings.Contains(projectile.type))
-                {
-                    if (player.FargoSouls().swingDirection != player.direction)
-                    {
-                        projectile.ai[0] = -player.direction;
-                    }
-
-                    float rotation = -90;
-                    if (projectile.ai[0] == -1 && player.direction == -1)
-                    {
-                        rotation = -180;
-                    }
-                    else if (projectile.ai[0] == -1 && player.direction == 1)
-                    {
-                        rotation = 0;
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
-                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
