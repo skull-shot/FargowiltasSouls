@@ -1465,15 +1465,23 @@ namespace FargowiltasSouls.Content.Projectiles
                 modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.25f : 1.15f;
                 TikiTagged = false;
             }
-                
+
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.12f;
-                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
-                if (Main.rand.NextFloat() < increase)
+                int critRoll = Main.rand.Next(100);
+                int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
+                int increase = (int)(maxIncrease * Math.Clamp(projectile.extraUpdates + 1 * projectile.velocity.Length() / 40f, 0, 1));
+                int increasedCrit = projectile.CritChance + increase;
+                if (critRoll < increasedCrit) // roll with the actual crit chance
+                {
                     modifiers.SetCrit();
-
+                    if (critRoll >= projectile.CritChance && critRoll < increasedCrit)
+                    {
+                        Main.NewText($"{increase}");
+                    }
+                }
+                else modifiers.DisableCrit(); // disable crit if failed new roll
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)

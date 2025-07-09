@@ -88,7 +88,7 @@ BeetleEnchant: {
 		'''
 		Hitting enemies generates up to 6 beetles
 		Beetles grant 3% damage reduction each and attack nearby enemies
-		Getting hit loses 2 beetles (once every 3 seconds)
+		2 beetles die when taking damage, once per 3 seconds
 		'The unseen life of dung courses through your veins'
 		''' */
 }
@@ -849,7 +849,7 @@ LifeForce: {
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff also makes your summon damage able to crit
+		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack

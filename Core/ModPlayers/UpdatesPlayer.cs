@@ -610,6 +610,17 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
                 TinCrit--;
 
+            if (!Player.HasEffect<BeetleEffect>())
+            {
+                Beetles = 0;
+                BeetleCharge = 0;
+                BeetleHitCD = 0;
+            }
+            if (!Player.ForceEffect<BeetleEffect>() && Beetles > 6)
+            {
+                Beetles = 6;
+            }
+
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
 
