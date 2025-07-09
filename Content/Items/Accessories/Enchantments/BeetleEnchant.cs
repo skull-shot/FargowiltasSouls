@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 for (int i = 0; i < spawnBeetles; i++)
                 {
-                    int dmg = (int)(65 * player.ActualClassDamage(DamageClass.MeleeNoSpeed));
+                    int dmg = 35; //melee scaling handled by continuous projectile damage updating
                     Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, beetle, dmg, 1f, player.whoAmI);
                 }
 
