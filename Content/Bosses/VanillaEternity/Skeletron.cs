@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.05f);
-            npc.lifeMax = (int)(npc.lifeMax * 0.8f);
+            npc.lifeMax = (int)(npc.lifeMax * 0.75f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -533,7 +533,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.6f); 
-            npc.lifeMax = (int)(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)(npc.lifeMax * 1f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
