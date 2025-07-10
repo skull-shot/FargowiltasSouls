@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using Terraria;
@@ -6,6 +7,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 {
@@ -189,6 +191,29 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
         public override Color? GetAlpha(Color drawColor)
         {
             return Color.White * NPC.Opacity;
+        }
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D tex = Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Rectangle rect = NPC.frame;
+            Vector2 origin2 = rect.Size() / 2f;
+            SpriteEffects effects = NPC.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            if (NPC.localAI[3] != 1) // active
+            {
+
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 4f * NPC.scale;
+                    Color glowColor = Color.Purple;
+
+                    Main.EntitySpriteDraw(tex, NPC.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, NPC.gfxOffY), rect, glowColor, NPC.rotation, origin2, NPC.scale, effects);
+                }
+                Main.spriteBatch.ResetToDefault();
+            }
+
+            Main.EntitySpriteDraw(tex, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), rect, NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
+            return false;
         }
     }
 }
