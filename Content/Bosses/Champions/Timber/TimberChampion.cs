@@ -23,6 +23,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
     {
         private const float BaseWalkSpeed = 4f;
 
+        public int SpawnNoContactTimer = 60 * 4;
+
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Champion of Timber");
@@ -89,6 +91,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
+            if (SpawnNoContactTimer > 0)
+                return false;
             CooldownSlot = 1;
             return true;
         }
@@ -106,6 +110,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             }
 
             drawTrail = false;
+            if (SpawnNoContactTimer > 0)
+                SpawnNoContactTimer--;
 
             EModeGlobalNPC.championBoss = NPC.whoAmI;
 
@@ -407,7 +413,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                     goto case 0;
 
                 case 5: //spray squirrels
-                    if (++NPC.ai[2] > 6)
+                    if (++NPC.ai[2] > 20)
                     {
                         NPC.ai[2] = 0;
                         FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<LesserSquirrel>(),
