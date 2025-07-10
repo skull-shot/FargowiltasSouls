@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         {
             Player player = drawInfo.drawPlayer;
 
-            Vector2 visorPos = (player.gravDir > 0 ? player.Top + new Vector2(-20, -24) : player.Bottom + new Vector2(-20, -28)) - Main.screenPosition + player.headPosition + drawInfo.headVect + Main.OffsetsPlayerHeadgear[player.bodyFrame.Y / player.bodyFrame.Height] * player.gravDir; ;
+            Vector2 visorPos = (player.gravDir > 0 ? player.Top + new Vector2(-20, -24) : player.Bottom + new Vector2(-20, -28)) - Main.screenPosition + player.headPosition + drawInfo.headVect + Main.OffsetsPlayerHeadgear[player.bodyFrame.Y / player.bodyFrame.Height] * player.gravDir;
             visorPos.Y += player.gfxOffY;
             
             Texture2D visorTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/PlayerDrawLayers/RoseTintedVisorDrawLayer", AssetRequestMode.ImmediateLoad).Value;
@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
             SpriteEffects flip = player.direction == -player.gravDir ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             visorPos.Y += 7 * player.gravDir;
-            DrawData visor = new(visorTexture, visorPos, visorRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi : 0f, visorRectangle.Size() / 2, 1f, flip, 0);
+            DrawData visor = new(visorTexture, visorPos.Floor(), visorRectangle, Color.White, player.gravDir < 0 ? MathHelper.Pi : 0f, visorRectangle.Size() / 2, 1f, flip, 0);
             drawInfo.DrawDataCache.Add(visor);
         }
     }
