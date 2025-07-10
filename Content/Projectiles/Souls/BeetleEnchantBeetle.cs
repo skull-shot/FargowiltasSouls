@@ -146,7 +146,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         }
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath47 with {MaxInstances = 1}, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.NPCDeath47 with {MaxInstances = 1, Volume = 0.5f}, Projectile.Center);
             for (int k = 0; k < 20; k++)
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ambient_DarkBrown, 0, -1f);
