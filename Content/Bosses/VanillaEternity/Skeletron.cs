@@ -112,10 +112,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ArmDR(npc))
             {
                 npc.HitSound = SoundID.NPCHit4;
+                npc.chaseable = false;
             }
             else
             {
                 npc.HitSound = SoundID.NPCHit2;
+                npc.chaseable = true;
             }
             if (!SpawnedArms && npc.life < npc.lifeMax * .5)
             {
