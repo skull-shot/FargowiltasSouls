@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Common
 {
-    public abstract class EModeAccessorySlot : ModAccessorySlot
+    public class EModeAccessorySlot : ModAccessorySlot
     {
         int[] AllowedItemExceptions =
         //technically these are souls so should legally go in the slot that allows souls
@@ -26,7 +26,9 @@ namespace FargowiltasSouls.Common
             ItemID.SoulofSight,
             ItemID.SoulofMight,
         ];
-        public abstract int Loadout { get; }
+
+        public override bool HasEquipmentLoadoutSupport => true;      
+
         public override bool CanAcceptItem(Item checkItem, AccessorySlotType context)
         {
             if ((context == AccessorySlotType.FunctionalSlot || context == AccessorySlotType.VanitySlot) && (base.CanAcceptItem(checkItem, context) || AllowedItemExceptions.Contains(checkItem.type)))
@@ -40,20 +42,11 @@ namespace FargowiltasSouls.Common
             }
             return base.CanAcceptItem(checkItem, context);
         }
-        /*
-        public override bool ModifyDefaultSwapSlot(Item item, int accSlotToSwapTo)
-        {
-            if ((item.ModItem != null && (item.ModItem is BaseEnchant || item.ModItem is BaseForce || item.ModItem is BaseSoul)) || AllowedItemExceptions.Contains(item.type))
-            {
-                return true;
-            }
-            return false;
-        }
-        */
+        
         public override bool IsVisibleWhenNotEnabled() => false;
         public override bool IsEnabled()
         {
-            return WorldSavingSystem.EternityMode && Player.FargoSouls().MutantsPactSlot && Player.CurrentLoadoutIndex == Loadout;
+            return WorldSavingSystem.EternityMode && Player.FargoSouls().MutantsPactSlot;
         }
         public override string FunctionalTexture => "FargowiltasSouls/Assets/UI/EnchantSlotIcon";
         //public override string FunctionalBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
@@ -71,17 +64,5 @@ namespace FargowiltasSouls.Common
                     break;
             }
         }
-    }
-    public class EModeAccessorySlot0 : EModeAccessorySlot
-    {
-        public override int Loadout => 0;
-    }
-    public class EModeAccessorySlot1 : EModeAccessorySlot
-    {
-        public override int Loadout => 1;
-    }
-    public class EModeAccessorySlot2 : EModeAccessorySlot
-    {
-        public override int Loadout => 2;
     }
 }
