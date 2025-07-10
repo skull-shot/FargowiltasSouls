@@ -332,5 +332,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<SpectreSpirit>(), spiritDamage, 0f, player.whoAmI);
             }
         }
+        public override void PostUpdateEquips(Player player)
+        {
+            if (damageCopy > 40 && !player.immune)
+            {
+                damageCopy -= damageCopy;
+            }
+        }
     }
 }

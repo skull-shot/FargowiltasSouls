@@ -610,6 +610,17 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
                 TinCrit--;
 
+            if (!Player.HasEffect<BeetleEffect>())
+            {
+                Beetles = 0;
+                BeetleCharge = 0;
+                BeetleHitCD = 0;
+            }
+            if (!Player.ForceEffect<BeetleEffect>() && Beetles > 6)
+            {
+                Beetles = 6;
+            }
+
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
 
@@ -768,12 +779,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (StealingCooldown > 0 && !Player.dead)
                 StealingCooldown--;
 
-            if (LihzahrdCurse && Framing.GetTileSafely(Player.Center).WallType == WallID.LihzahrdBrickUnsafe)
-            {
-                Player.dangerSense = false;
-                Player.InfoAccMechShowWires = false;
-            }
-
             if (Graze) //decrease graze bonus over time
             {
                 if (++DeviGrazeCounter > 60)
@@ -841,11 +846,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.endurance -= 0.1f;
                 AttackSpeed -= 0.1f;
                 Player.GetDamage(DamageClass.Generic) -= 0.1f;
-            }
-
-            if (Kneecapped)
-            {
-                Player.accRunSpeed = Player.maxRunSpeed;
             }
 
             ManageLifeReduction();

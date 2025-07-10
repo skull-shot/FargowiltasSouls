@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
             Item.width = 20;
             Item.height = 20;
             Item.rare = ItemRarityID.Orange;
-            Item.maxStack = 1;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useStyle = ItemUseStyleID.EatFood;
             Item.useAnimation = 17;
             Item.useTime = 17;

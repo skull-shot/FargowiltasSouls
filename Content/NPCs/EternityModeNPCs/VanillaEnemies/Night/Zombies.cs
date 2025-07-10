@@ -30,6 +30,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             NPCID.SwampZombie,
             NPCID.SmallSwampZombie,
             NPCID.BigSwampZombie,
+            NPCID.TorchZombie,
+            NPCID.ArmedTorchZombie,
             NPCID.ZombieDoctor,
             NPCID.ZombieEskimo,
             NPCID.ArmedZombieEskimo,
@@ -45,7 +47,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
 
         private static void transformZombie(NPC npc, int armedId = -1)
         {
-            if (Main.LocalPlayer.ZoneSnow && Main.rand.NextBool())
+            if (npc.type != NPCID.ZombieEskimo && Main.LocalPlayer.ZoneSnow && Main.rand.NextBool())
             {
                 npc.Transform(NPCID.ZombieEskimo);
             }

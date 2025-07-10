@@ -5,7 +5,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 {
     public class MagicalCurseBuff : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Content/Buffs/PlaceholderDebuff";
+        public override string Texture => "FargowiltasSouls/Content/Buffs/MagicalCleanseCDBuff";
 
         public override void SetStaticDefaults()
         {

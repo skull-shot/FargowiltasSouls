@@ -793,13 +793,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.timeLeft = Math.Min(120, projectile.timeLeft);
                     break;
 
-                case ProjectileID.WireKite:
-                    if (projectile.owner == Main.myPlayer && Main.player[projectile.owner].FargoSouls().LihzahrdCurse)
-                    {
-                        projectile.Kill();
-                    }
-                    break;
-
                 case ProjectileID.Fireball:
                     {
                         NPC golem = FargoSoulsUtil.NPCExists(NPC.golemBoss, NPCID.Golem);
@@ -1178,10 +1171,38 @@ namespace FargowiltasSouls.Content.Projectiles
             firstTickAICheckDone = true;
         }
         private int FadeTimer = 0;
+        public static int[] FancySwings => [
+            ProjectileID.Excalibur,
+            ProjectileID.TrueExcalibur,
+            ProjectileID.TerraBlade2,
+            ProjectileID.TheHorsemansBlade
+        ];
         public override void PostAI(Projectile projectile)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
+            Player player = Main.player[projectile.owner];
+            if (projectile.owner == player.whoAmI)
+            {
+                if (FancySwings.Contains(projectile.type))
+                {
+                    if (player.FargoSouls().swingDirection != player.direction)
+                    {
+                        projectile.ai[0] = -player.direction;
+                    }
+
+                    float rotation = -90;
+                    if (projectile.ai[0] == -1 && player.direction == -1)
+                    {
+                        rotation = -180;
+                    }
+                    else if (projectile.ai[0] == -1 && player.direction == 1)
+                    {
+                        rotation = 0;
+                    }
+                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
+                }
+            }
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
@@ -1683,7 +1704,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.SaucerMissile:
                     target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
-                    target.AddBuff(ModContent.BuffType<CrippledBuff>(), 300);
                     break;
 
                 case ProjectileID.SaucerLaser:

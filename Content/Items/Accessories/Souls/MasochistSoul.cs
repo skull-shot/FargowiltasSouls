@@ -265,7 +265,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<BerserkedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
@@ -280,7 +279,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;

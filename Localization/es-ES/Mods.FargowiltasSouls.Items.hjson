@@ -87,8 +87,8 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 3% damage reduction each and attack nearby enemies
-		Getting hit loses 2 beetles (once every 3 seconds)
+		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		2 beetles die when taking damage, once per 3 seconds
 		'The unseen life of dung courses through your veins'
 		''' */
 }
@@ -545,8 +545,8 @@ ShroomiteEnchant: {
 	/* Tooltip:
 		'''
 		Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		Mushroom Power grants +20% damage and critical strike chance
-		Piercing projectiles spawn a cloud of mushrooms on their first hit, dealing ranged damage, with a short cooldown
+		Mushroom Power grants +12% damage and critical strike chance
+		Piercing projectiles spawn a cloud of mushrooms on their first hit, dealing ranged damage
 		'Made with real shrooms!'
 		''' */
 	// AndMushroomPower: and grants the Mushroom Power buff
@@ -849,7 +849,7 @@ LifeForce: {
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff also makes your summon damage able to crit
+		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
@@ -867,7 +867,7 @@ NatureForce: {
 		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
 		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
 		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +20% damage and crit and increases your aura size
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +12% damage and crit and increases your aura size
 		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
 		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
 		'Tapped into every secret of the wilds'
@@ -1042,7 +1042,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1066,7 +1066,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1110,8 +1110,8 @@ ConcentratedRainbowMatter: {
 	// DisplayName: Concentrated Rainbow Matter
 	/* Tooltip:
 		'''
-		Permanent effect once consumed:
-		Automatically use healing potions when needed (can be toggled)
+		[c/00FFFF:Permanent toggleable effect once consumed:]
+		Automatically use healing potions when needed
 		Grants immunity to Flames of the Universe
 		'Taste the rainbow'
 		''' */
@@ -1221,7 +1221,7 @@ GelicWings: {
 		While flying, crystal spikes are emitted from your wings
 		Allows the wearer to double jump, spawning more crystal spikes
 		Grants immunity to Illuminated caused by the Underground Hallow
-		'Step on me'
+		'Are you watching, Heaven!?'
 		''' */
 }
 
@@ -1288,9 +1288,8 @@ LihzahrdTreasureBox: {
 	// DisplayName: Lihzahrd Treasure Box
 	/* Tooltip:
 		'''
-		Grants immunity to Burning, Fused, Lihzahrd Curse and Low Ground
-		Fastfall will create a fiery eruption on impact after falling a certain distance
-		'Too many booby traps to open'
+		Grants immunity to knockback, Burning, and Fused
+		'Filled with various trinkets of pain and torment'
 		''' */
 }
 
@@ -1300,7 +1299,8 @@ MagicalBulb: {
 		'''
 		Grants immunity to Acid Venom, Ivy Venom, and Swarming
 		Increases life regeneration based on how much light you receive
-		Attracts a legendary plant's offspring which flourishes in combat
+		Attacks inflict enemies with Ivy Venom briefly
+		Ivy Venom deals significantly more damage the longer it's applied to an enemy
 		'Matricide?'
 		''' */
 }
@@ -1609,7 +1609,7 @@ WyvernFeather: {
 	// DisplayName: Wyvern Feather
 	/* Tooltip:
 		'''
-		Grants immunity to Clipped Wings and Crippled
+		Grants immunity to Clipped Wings
 		You periodically shed light orbs, touch them to refresh your flight time
 		Stabilizes gravity in space and liquids (works from inventory and vanity)
 		'Warm to the touch'
@@ -2085,6 +2085,7 @@ DeerSinew: {
 	// DisplayName: Deer Sinew
 	/* Tooltip:
 		'''
+		[c/00FFFF:Permanent toggleable effect once consumed:]
 		Allows the ability to dash without a dash accessory
 		Double tap a direction
 		Taking damage may briefly freeze you
@@ -2098,7 +2099,8 @@ MutantsCreditCard: {
 	// DisplayName: Mutant's Credit Card
 	/* Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 30%
+		[c/00FFFF:Permanent effect once consumed:]
+		Reduces Mutant's shop prices by 30%
 		'Wait, how did you get this?'
 		''' */
 }
@@ -2107,15 +2109,20 @@ MutantsDiscountCard: {
 	// DisplayName: Mutant's Discount Card
 	/* Tooltip:
 		'''
-		Permanently reduces Mutant's shop prices by 20%
 		{$CommonItemTooltip.MajorStats}
+		[c/00FFFF:Permanent effect once consumed:]
+		Reduces Mutant's shop prices by 20%
 		'It's not used how you think'
 		''' */
 }
 
 MutantsPact: {
 	// DisplayName: Mutant's Pact
-	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Adds an accessory slot that only accepts an Enchantment, Force, or Soul
+		''' */
 }
 
 OrdinaryCarrot: {
@@ -2123,10 +2130,10 @@ OrdinaryCarrot: {
 	/* Tooltip:
 		'''
 		Increases night vision
-		{$CommonItemTooltip.MinorStats}
+		{$CommonItemTooltip.MajorStats}
 		Increases life regeneration
-		1 minute duration
-		Permanent effect once consumed:
+		3 minute duration
+		[c/00FFFF:Permanent toggleable effect once consumed:]
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		''' */
@@ -2139,7 +2146,11 @@ RabiesShot: {
 
 RabiesVaccine: {
 	// DisplayName: Rabies Vaccine
-	// Tooltip: Permanently grants immunity to Feral Bite
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Grants immunity to Feral Bite
+		''' */
 }
 
 LifeDye: {

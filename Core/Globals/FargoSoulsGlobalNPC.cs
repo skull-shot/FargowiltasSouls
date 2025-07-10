@@ -102,6 +102,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool Anticoagulation;
         public bool BloodDrinker;
         public bool MagicalCurse;
+        public bool IvyVenom;
+        public int IvyVenomTime;
 
         public int NecroDamage;
 
@@ -156,6 +158,7 @@ namespace FargowiltasSouls.Core.Globals
             BloodDrinker = false;
             FlamesoftheUniverse = false;
             MagicalCurse = false;
+            IvyVenom = false;
             PungentGazeTime = 0;
         }
         public override void SetStaticDefaults()
@@ -202,6 +205,9 @@ namespace FargowiltasSouls.Core.Globals
                 npc.frameCounter = 0;
                 retval = false;
             }
+
+            if (npc.buffImmune[BuffID.Venom])
+                npc.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
 
             if (SinisterIconBoss(npc))
             {
@@ -419,19 +425,27 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (MagicalCurse)
+            if (IvyVenom)
             {
-                if (Main.rand.NextBool(4))
+                drawColor = Color.Lerp(Color.White, Color.DarkOliveGreen, 0.5f);
+                int dust = 157;
+                int frequency = 4;
+                if (IvyVenomTime >= 420)
                 {
-                    int d = Dust.NewDust(npc.position, npc.width, npc.height, Main.rand.NextBool() ? 107 : 157);
+                    dust = 107;
+                    frequency = 2;
+                }
+                if (Main.rand.NextBool(frequency))
+                {
+                    int d = Dust.NewDust(npc.position, npc.width, npc.height, dust);
                     Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 0.2f;
-                    Main.dust[d].scale = 1.5f;
+                    Main.dust[d].velocity *= 1f/frequency;
+                    Main.dust[d].scale = 4f/frequency;
                 }
             }
             if (Sublimation)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(3) && !Main.gamePaused)
                 {
                     float ratio = (float)PureGazeTime / PungentGazeBuff.MAX_TIME;
                     float sparkScale = MathHelper.Lerp(0.25f, 1.5f, ratio);
@@ -651,7 +665,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (PungentGazeTime > 0)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(3) && !Main.gamePaused)
                 {
                     float ratio = (float)PungentGazeTime / PungentGazeBuff.MAX_TIME;
                     Vector2 sparkDir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
@@ -665,7 +679,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly)
+            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
             {
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
                     PureGazeTime += 1;
@@ -813,6 +827,17 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (damage < dmg / 5)
                     damage = dmg / 5;
+            }
+
+            //120 dps (up to)
+            if (IvyVenom)
+            {
+                if (npc.lifeRegen > 0)
+                    npc.lifeRegen = 0;
+                int dmg = 60 + (IvyVenomTime/3);
+                npc.lifeRegen -= dmg;
+                if (damage < dmg / 4)
+                    damage = (dmg / 4);
             }
 
             //12 dps 
@@ -996,7 +1021,7 @@ namespace FargowiltasSouls.Core.Globals
                 multiplier += OrichalcumEffect.OriDotModifier(npc, player.FargoSouls()) - 1;
 
             if (npc.FargoSouls().MagicalCurse)
-                multiplier += 1;
+                multiplier += 5;
 
             //half as effective if daybreak applied
             if (npc.daybreak && multiplier > 1)
@@ -1251,7 +1276,8 @@ namespace FargowiltasSouls.Core.Globals
                     npcLoot.Add(ItemDropRule.OneFromOptions(1,
                         ModContent.ItemType<Vineslinger>(),
                         ModContent.ItemType<Mahoguny>(),
-                        ModContent.ItemType<OvergrownKey>()));
+                        ModContent.ItemType<OvergrownKey>(),
+                        ItemID.ThornHook));
                     break;
 
                 default:

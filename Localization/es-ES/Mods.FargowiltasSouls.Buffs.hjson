@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	// Description: You cannot fly or use rocket boots
 }
 
-CrippledBuff: {
-	// DisplayName: Crippled
-	// Description: You cannot run
-}
-
 CurseoftheMoonBuff: {
 	// DisplayName: Curse of the Moon
 	// Description: The moon's wrath consumes you
@@ -311,11 +306,6 @@ LihzahrdBlessingBuff: {
 	// DisplayName: Lihzahrd Blessing
 	// Description: Wires enabled and reduced spawn rates in Jungle Temple
 	// Message: The altar's light shines on you!
-}
-
-LihzahrdCurseBuff: {
-	// DisplayName: Lihzahrd Curse
-	// Description: Wires disabled in Jungle Temple
 }
 
 LivingWastelandBuff: {

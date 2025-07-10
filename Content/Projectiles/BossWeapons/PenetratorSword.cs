@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSword : ModProjectile
+    public class PenetratorSword : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_454";
 
@@ -155,9 +155,9 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             if (Projectile.owner == Main.myPlayer && target.lifeMax > 5)
             {
-                if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<HentaiSwordBlast>()] < 8)
+                if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<PenetratorSwordBlast>()] < 8)
                 {
-                    Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<HentaiSwordBlast>()] += 8;
+                    Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<PenetratorSwordBlast>()] += 8;
 
                     Vector2 spawnPos = target.Center;
 
@@ -173,7 +173,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         Vector2 angle = baseDirection.RotatedBy(MathHelper.TwoPi / max * i);
                         float ai1 = 30; //number of chains
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPos + Main.rand.NextVector2Circular(Projectile.width, Projectile.height), Vector2.Zero, ModContent.ProjectileType<HentaiSwordBlast>(),
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPos + Main.rand.NextVector2Circular(Projectile.width, Projectile.height), Vector2.Zero, ModContent.ProjectileType<PenetratorSwordBlast>(),
                             Projectile.damage, Projectile.knockBack * 3, Projectile.owner, MathHelper.WrapAngle(angle.ToRotation()), ai1);
                     }
                 }

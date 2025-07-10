@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
-                case ItemID.DD2SquireBetsySword:
+                /*case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
                     return EModeChange.Nerf;
@@ -168,7 +168,7 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.BeeGun:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
-                    return EModeChange.Buff;
+                    return EModeChange.Buff;*/
 
 
                 case ItemID.DemonScythe:
@@ -461,8 +461,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.MaceWhip: // Morning Star
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.7f;
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.75f;
                     return EModeChange.Nerf;
 
                 case ItemID.NettleBurst:

@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	Description: Вы не можете использовать крылья или ракетные ботинки
 }
 
-CrippledBuff: {
-	DisplayName: Покалеченный
-	Description: Вы не можете бежать
-}
-
 CurseoftheMoonBuff: {
 	DisplayName: Проклятье Луны
 	Description: Гнев Луны поглощает вас
@@ -311,11 +306,6 @@ LihzahrdBlessingBuff: {
 	DisplayName: Благословение ящщеров
 	Description: Включены провода и снижена частота появления врагов в храме джунглей
 	Message: Свет алтаря пал на вас!
-}
-
-LihzahrdCurseBuff: {
-	DisplayName: Проклятье ящщеров
-	Description: Провода в храме джунглей выключены
 }
 
 LivingWastelandBuff: {
@@ -613,7 +603,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	DisplayName: Панцирь
-	Description: Все снаряды блокируются
+	Description: Получаемый урон значительно снижен
 }
 
 SnowstormCDBuff: {

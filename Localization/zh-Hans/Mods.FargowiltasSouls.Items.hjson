@@ -542,7 +542,7 @@ ShroomiteEnchant: {
 	Tooltip:
 		'''
 		蘑菇能恢复50点生命值，食用蘑菇后获得蘑菇力量，持续20秒
-		蘑菇力量可增加20%伤害和暴击率
+		蘑菇力量可增加12%伤害和暴击率
 		穿透弹幕在第一次击中敌人时生成一团蘑菇，造成远程伤害，冷却时间很短
 		“是用真的蘑菇做的！”
 		'''
@@ -872,7 +872,7 @@ NatureForce: {
 		[i:FargowiltasSouls/ChlorophyteEnchant] 偶尔会向光环内的敌人发射叶绿水晶
 		[i:FargowiltasSouls/ShroomiteEnchant] 叶绿水晶击中后会产生一团蘑菇
 		[i:FargowiltasSouls/ShroomiteEnchant] 蘑菇可恢复50点生命值，食用蘑菇可获得蘑菇力量，持续20秒
-		[i:FargowiltasSouls/ShroomiteEnchant]蘑菇力量增加20%的伤害和暴击率，并增加光环大小
+		[i:FargowiltasSouls/ShroomiteEnchant]蘑菇力量增加12%的伤害和暴击率，并增加光环大小
 		[i:FargowiltasSouls/FrostEnchant] 你的攻击会造成短暂的霜冻和冻伤
 		[i:FargowiltasSouls/RainEnchant] 产生一把伞，可从上方抵挡最多200点伤害
 		“走遍荒野的每一个秘密角落”
@@ -1074,7 +1074,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1098,7 +1098,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged

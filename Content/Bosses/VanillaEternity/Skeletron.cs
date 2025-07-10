@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.05f);
-            npc.lifeMax = (int)(npc.lifeMax * 0.8f);
+            npc.lifeMax = (int)(npc.lifeMax * 0.75f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -112,10 +112,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ArmDR(npc))
             {
                 npc.HitSound = SoundID.NPCHit4;
+                npc.chaseable = false;
             }
             else
             {
                 npc.HitSound = SoundID.NPCHit2;
+                npc.chaseable = true;
             }
             if (!SpawnedArms && npc.life < npc.lifeMax * .5)
             {
@@ -533,7 +535,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.6f); 
-            npc.lifeMax = (int)(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)(npc.lifeMax * 1f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {

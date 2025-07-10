@@ -40,12 +40,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
             //magical bulb
             MagicalBulb.AddEffects(player, Item);
-            player.AddEffect<PlantMinionEffect>(Item);
+            player.AddEffect<IvyVenomEffect>(Item);
 
             //lihzahrd treasure
             player.buffImmune[BuffID.Burning] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);

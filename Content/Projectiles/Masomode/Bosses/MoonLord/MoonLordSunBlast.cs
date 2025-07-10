@@ -144,6 +144,10 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
             }
         }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.OnFire3, 600);
+        } 
 
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 100) * Projectile.Opacity;
     }

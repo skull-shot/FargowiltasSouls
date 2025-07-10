@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	Description: 无法飞行或使用火箭靴
 }
 
-CrippledBuff: {
-	DisplayName: 跛足
-	Description: 你无法奔跑
-}
-
 CurseoftheMoonBuff: {
 	DisplayName: 月之诅咒
 	Description: 月亮的愤怒正在吞噬你
@@ -311,11 +306,6 @@ LihzahrdBlessingBuff: {
 	DisplayName: 蜥蜴祝福
 	Description: 电线重新受你的掌控，降低丛林神庙内的刷怪速率
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
-}
-
-LihzahrdCurseBuff: {
-	DisplayName: 蜥蜴诅咒
-	Description: 丛林神庙内，你不能拆除或放置电线
 }
 
 LivingWastelandBuff: {

@@ -364,7 +364,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WasAsocial;
         public bool HidePetToggle0 = true;
         public bool HidePetToggle1 = true;
-        public bool Kneecapped;             //disables running :v
         public bool Defenseless;            //-30 defense, no damage reduction, cross necklace and knockback prevention effects disabled
         public bool Infested;               //weak DOT that grows exponentially stronger
         public int MaxInfestTime;
@@ -398,7 +397,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool[] MashPressed = new bool[4];
         public int MashCounter;
         public int StealingCooldown;
-        public bool LihzahrdCurse;
         //public bool LihzahrdBlessing;
         public bool Berserked;
         public bool CerebralMindbreak;

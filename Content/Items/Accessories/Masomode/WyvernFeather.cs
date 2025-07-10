@@ -36,7 +36,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             PassiveEffects(player, item);
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.AddEffect<WyvernBalls>(item);
         }
         public override void UpdateInventory(Player player)

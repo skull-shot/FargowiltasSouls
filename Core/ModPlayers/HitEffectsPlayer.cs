@@ -295,6 +295,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 target.AddBuff(BuffID.Electrified, 240);
                 //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
             }
+
+            if (Player.HasEffect<IvyVenomEffect>())
+            {
+                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 30);
+            }
         }
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)

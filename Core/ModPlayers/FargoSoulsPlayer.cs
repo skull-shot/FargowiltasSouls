@@ -11,6 +11,7 @@ using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
+using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
@@ -425,7 +426,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             WasHurtBySomething = false;
             PrecisionSeal = false;
             GelicWingsItem = null;
-            ConcentratedRainbowMatter = false;
 
             Ambrosia = false;
             SpecialDash = false;
@@ -452,7 +452,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             IvyVenom = false;
             MutantNibble = false;
             Asocial = false;
-            Kneecapped = false;
             Defenseless = false;
             Infested = false;
             Rotting = false;
@@ -479,7 +478,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             LowGround = false;
             Flipped = false;
             Illuminated = false;
-            LihzahrdCurse = false;
             //LihzahrdBlessing = false;
             Berserked = false;
             CerebralMindbreak = false;
