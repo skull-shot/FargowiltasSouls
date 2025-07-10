@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
 
             if (AttackTimer >= 360)
             {
-                npc.velocity *= 0.5f;
+                npc.velocity *= 0.8f;
                 JawRot = MathHelper.Lerp(0, 0.4f, ++JawLerp * 0.07f);
                 if (JawRot >= 0.4f)
                     JawRot = 0.4f;
