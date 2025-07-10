@@ -20,12 +20,6 @@ namespace FargowiltasSouls.Content.Tiles
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (type == TileID.LihzahrdBrick && Framing.GetTileSafely(i, j).WallType == WallID.LihzahrdBrickUnsafe)
-            {
-                if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost && Main.LocalPlayer.Distance(new Vector2(i * 16 + 8, j * 16 + 8)) < 3000)
-                    Main.LocalPlayer.AddBuff(ModContent.BuffType<LihzahrdCurseBuff>(), 10);
-            }
-
             if (type == TileID.LihzahrdAltar && Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost
                 && Main.LocalPlayer.Distance(new Vector2(i * 16 + 8, j * 16 + 8)) < 3000
                 && Collision.CanHit(new Vector2(i * 16 + 8, j * 16 + 8), 0, 0, Main.LocalPlayer.Center, 0, 0)
@@ -53,12 +47,12 @@ namespace FargowiltasSouls.Content.Tiles
                 int p = Player.FindClosest(new Vector2(i * 16 + 8, j * 16 + 8), 0, 0);
                 if (p != -1)
                 {
-                    //if player INSIDE TEMPLE, but not cursed, its ok to break
+                    //if player INSIDE TEMPLE, but has blessing, its ok to break
                     Tile tile = Framing.GetTileSafely(Main.player[p].Center);
-                    if (tile.WallType == WallID.LihzahrdBrickUnsafe && !Main.player[p].FargoSouls().LihzahrdCurse)
+                    if (tile.WallType == WallID.LihzahrdBrickUnsafe && Main.player[p].HasBuff<LihzahrdBlessingBuff>())
                         return true;
                 }
-                //if player outside temple, or player in temple but is cursed, dont break
+                //if player outside temple, or player in temple but blessed, dont break
                 return false;
             }
             return true;

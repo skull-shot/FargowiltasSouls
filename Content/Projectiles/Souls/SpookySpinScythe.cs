@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             //ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
         public static int Diameter => 100;
-        public static int MaxScale(Player player) => player.ForceEffect<SpookyEffect>() ? 5 : 4;
+        public static int MaxScale(Player player) => player.ForceEffect<SpookyEffect>() ? 6 : 5;
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = Diameter;
@@ -107,7 +107,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                         if (!projectile.hostile && !projectile.trap && !projectile.npcProj)
                         {
                             var modProj = projectile.FargoSouls();
-                            if (projectile.minionSlots > 0 && modProj.spookyCD == 0)
+                            if (modProj.spookyCD == 0 && (projectile.minionSlots > 0 || projectile.sentry))
                             {
                                 float minDistance = 900f;
                                 int npcIndex = -1;
@@ -130,8 +130,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                                     {
                                         Vector2 velocity = Vector2.Normalize(target.Center - projectile.Center) * 28;
 
-
-                                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), Projectile.damage / 10, 2, projectile.owner);
+                                        //basing it on minion base damage means it wont get damage increases per slot from minions like stardust dragon, but every vanilla scaling minion spawns the same amount of scythes as slots used. should mean less silliness hypothetically
+                                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, velocity, ModContent.ProjectileType<SpookyScythe>(), projectile.damage, 2, projectile.owner);
 
                                         SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.5f }, projectile.Center);
 
@@ -172,10 +172,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
             if (CanHit == 1 && damageDone > 50)
             {
-                player.FargoSouls().HealPlayer(damageDone / 20);
+                player.FargoSouls().HealPlayer(damageDone / 40);
                 CanHit = 2;
             }
-            target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 60 * 5);
+            target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 60 * 6);
         }
         public override void OnKill(int timeLeft)
         {

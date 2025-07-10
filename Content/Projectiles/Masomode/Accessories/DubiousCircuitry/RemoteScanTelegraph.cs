@@ -1,24 +1,14 @@
-﻿using Fargowiltas.Common.Configs;
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Bosses.Lifelight;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Core;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
-using Humanizer;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
 {
@@ -48,21 +38,14 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
 
         public override void SendExtraAI(BinaryWriter writer)
         {
-            writer.Write7BitEncodedInt(npc);
             writer.Write(Projectile.localAI[1]);
             writer.Write(Projectile.localAI[2]);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            npc = reader.Read7BitEncodedInt();
             Projectile.localAI[1] = reader.ReadSingle();
             Projectile.localAI[2] = reader.ReadSingle();
-        }
-        int npc;
-        public override void OnSpawn(IEntitySource source)
-        {
-            //Projectile.velocity = Main.MouseWorld;
         }
         public override void AI()
         {

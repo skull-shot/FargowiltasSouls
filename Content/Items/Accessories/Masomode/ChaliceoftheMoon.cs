@@ -45,7 +45,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //lihzahrd treasure
             player.buffImmune[BuffID.Burning] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);

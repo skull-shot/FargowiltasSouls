@@ -457,7 +457,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<JammedBuff>(),
                     ModContent.BuffType<LethargicBuff>(),
                     ModContent.BuffType<LightningRodBuff>(),
-                    ModContent.BuffType<LihzahrdCurseBuff>(),
                     ModContent.BuffType<LivingWastelandBuff>(),
                     ModContent.BuffType<LovestruckBuff>(),
                     ModContent.BuffType<LowGroundBuff>(),
