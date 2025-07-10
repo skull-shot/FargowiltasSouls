@@ -7,9 +7,11 @@ using Luminance.Common.Utilities;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption
 {
@@ -25,7 +27,19 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
 
         //Jaw Rotation breaks entirely when above 0.4f.
         public float JawRot;
-        
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(AttackTimer);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            AttackTimer = binaryReader.Read7BitEncodedInt();
+        }
+
         public override NPCMatcher CreateMatcher() =>
             new NPCMatcher().MatchTypeRange(
                 NPCID.EaterofSouls,
@@ -84,7 +98,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
                 JawLerp = 0;
                 JawClose = 0;
 
-                npc.velocity -= dir * 4f;
+                npc.velocity -= dir * 3f;
             }
         }
 
