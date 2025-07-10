@@ -207,7 +207,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 4f * NPC.scale;
                     Color glowColor = Color.Purple;
 
-                    Main.EntitySpriteDraw(tex, NPC.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, NPC.gfxOffY), rect, glowColor, NPC.rotation, origin2, NPC.scale, effects);
+                    Main.EntitySpriteDraw(tex, NPC.Center + afterimageOffset - screenPos + new Vector2(0f, NPC.gfxOffY), rect, glowColor, NPC.rotation, origin2, NPC.scale, effects);
                 }
                 Main.spriteBatch.ResetToDefault();
             }
