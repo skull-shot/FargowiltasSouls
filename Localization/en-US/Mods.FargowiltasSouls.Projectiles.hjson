@@ -58,7 +58,7 @@ HellBonez.DisplayName: Hell Bonez
 HellFlame.DisplayName: Hell Flame
 HellSkeletron.DisplayName: Hell Skeletron
 HellSkull2.DisplayName: Hell Skull
-HentaiNuke.DisplayName: Phantasmal Blast
+PenetratorNuke.DisplayName: Phantasmal Blast
 Penetrator.DisplayName: The Penetrator
 PenetratorArc.DisplayName: Lightning Arc
 PenetratorBigDeathray.DisplayName: Phantasmal Deathray
@@ -71,7 +71,7 @@ PenetratorSpinBoundary.DisplayName: The Penetrator
 PenetratorSpinThrown.DisplayName: The Penetrator
 PenetratorThrown.DisplayName: The Penetrator
 PenetratorWand.DisplayName: The Penetrator
-HentaiSphereRing.DisplayName: Phantasmal Sphere
+PenetratorSphereRing.DisplayName: Phantasmal Sphere
 Hungry.DisplayName: Hungry
 Hungry2.DisplayName: Hungry
 LeashFlail.DisplayName: Eyeleash Flail
@@ -714,9 +714,9 @@ MoonBowPortal.DisplayName: Moon Bow Portal
 FlightBall.DisplayName: Flight Ball
 AbomPhoenix.DisplayName: Phantom Phoenix
 FrostShardFriendly.DisplayName: Frost Shard Friendly
-HentaiSword.DisplayName: Mutant Sword
-HentaiSwordBlast.DisplayName: Mutant Sword Blast
-HentaiSphereOkuu.DisplayName: Mutant Sphere Okuu
+PenetratorSword.DisplayName: Mutant Sword
+PenetratorSwordBlast.DisplayName: Mutant Sword Blast
+PenetratorSphereOkuu.DisplayName: Mutant Sphere Okuu
 AbomRitualFTW.DisplayName: Abominationn Ritual
 FallingSandstone.DisplayName: Falling Sandstone
 CoffinPlayerSoul.DisplayName: Your Soul

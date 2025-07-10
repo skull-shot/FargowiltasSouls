@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     {
                         const int max = 8;
                         float rotation = 2f * (float)Math.PI / max;
-                        int type = ModContent.ProjectileType<HentaiSphereOkuu>();
+                        int type = ModContent.ProjectileType<PenetratorSphereOkuu>();
                         const float speed = 10;
                         int damage = Projectile.damage;
                         float offset = MathHelper.ToRadians(60) * Projectile.localAI[1] / 240;
