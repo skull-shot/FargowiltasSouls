@@ -245,6 +245,42 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     NPC.dontTakeDamage = true;
                     NPC.velocity *= 0.97f;
 
+                    if (NPC.ai[1] > 60 && NPC.ai[1] < 120) // pull in players
+                    {
+                        Player localPlayer = Main.LocalPlayer;
+                        int areaThreshold = 250;
+                        float distance = localPlayer.Distance(NPC.Center);
+                        if (localPlayer.active && !localPlayer.dead && !localPlayer.ghost) //pull into arena
+                        {
+                            if (distance > areaThreshold && distance < areaThreshold * 4f)
+                            {
+                                if (NPC.target == localPlayer.whoAmI)
+                                {
+                                    if (distance > areaThreshold * 2f)
+                                    {
+                                        player.Incapacitate();
+                                        localPlayer.velocity.X = 0f;
+                                        localPlayer.velocity.Y = -0.4f;
+                                    }
+
+                                    Vector2 movement = NPC.Center - localPlayer.Center;
+                                    float difference = movement.Length() - areaThreshold;
+                                    movement.Normalize();
+                                    movement *= difference < 17f ? difference : 17f;
+                                    localPlayer.position += movement;
+                                }
+
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    int DustType = Main.rand.NextFromList(DustID.Shadowflame);
+                                    int d = Dust.NewDust(localPlayer.position, localPlayer.width, localPlayer.height, DustType, 0f, 0f, 0, default, 1.25f);
+                                    Main.dust[d].noGravity = true;
+                                    Main.dust[d].velocity *= 5f;
+                                }
+                            }
+                        }
+                    }
+
                     if (NPC.ai[1] == 120)
                     {
                         SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
@@ -481,7 +517,27 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     if (NPC.Distance(targetPos) > 50)
                         Movement(targetPos, 0.3f, 24f);
 
-                    if (++NPC.ai[2] > (NPC.localAI[3] > 1 ? 90 : 120) && NPC.ai[1] < 330) //fire a little faster depending on phase
+                    int threshold = (NPC.localAI[3] > 1 ? 90 : 120);
+                    int endAttack = (NPC.localAI[3] == 3 ? 450 : 420);
+                    Vector2 shotVel = (player.Center - NPC.Center) / 30;
+
+                    if (NPC.ai[2] > threshold - 30 && NPC.ai[1] + 30 < 330)
+                    {
+                        int offset = NPC.localAI[3] == 3 ? 1 : 0;
+                        for (int j = 0; j <= offset; j++)
+                        {
+                            int a = j;
+                            if (offset > 0 && a == 0)
+                                a = -1;
+                            Vector2 dir = shotVel.SafeNormalize(Vector2.Zero).RotatedBy(a * MathHelper.PiOver2);
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Dust.NewDust(NPC.Center + dir * NPC.width / 2 - Vector2.One * 15, 30, 30, DustID.Shadowflame, shotVel.X * Main.rand.NextFloat(0.8f, 1f), shotVel.Y * Main.rand.NextFloat(0.8f, 1f), Scale: 2f);
+                            }
+                        }
+                        
+                    }
+                    if (++NPC.ai[2] > threshold && NPC.ai[1] < 330) //fire a little faster depending on phase
                     {
                         NPC.ai[2] = 0;
 
@@ -489,17 +545,17 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 
                         if (FargoSoulsUtil.HostCheck)
                         {
-                            Vector2 vel = (player.Center - NPC.Center) / 30;
+
                             if (NPC.localAI[3] == 3) //p3 fires them to both sides instead
                             {
-                                vel = vel.RotatedBy(Math.PI / 2) * 0.75f;
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -vel, ModContent.ProjectileType<ShadowOrbProjectile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                shotVel = shotVel.RotatedBy(Math.PI / 2) * 0.75f;
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -shotVel, ModContent.ProjectileType<ShadowOrbProjectile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                             }
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<ShadowOrbProjectile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, shotVel, ModContent.ProjectileType<ShadowOrbProjectile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                         }
                     }
 
-                    if (++NPC.ai[1] > (NPC.localAI[3] == 3 ? 450 : 420))
+                    if (++NPC.ai[1] > endAttack)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -523,7 +579,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     {
                         SoundEngine.PlaySound(SoundID.NPCHit6, NPC.Center);
                         NPC.velocity = (player.Center - NPC.Center) / 30f * (1f + NPC.localAI[3] / 3f * 0.75f);
+                        NPC.velocity.ClampLength(0, 50);
                         NPC.netUpdate = true;
+
+                        if (NPC.ai[1] + 37 > 330) // last dash; no explosion
+                        {
+                            NPC.velocity /= 2;
+                        }
+                        else
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -25);
                     }
                     else if (NPC.ai[2] == 31)
                     {
