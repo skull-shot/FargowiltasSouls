@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using System.Collections.Generic;
 using Terraria;
@@ -51,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             for (int i = 0; i < Player.MaxBuffs; i++)
             {
                 int type = player.buffType[i];
-                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DefenseReducingDebuffs.Contains(type))
+                if (type > 0 && Main.debuff[type] && (FargowiltasSouls.DefenseReducingDebuffs.Contains(type) || type == ModContent.BuffType<BerserkerInstallBuff>() && player.FargoSouls().BerserkedFromAgitation == true || type == 88 && EmodeItemBalance.HasEmodeChange(player, ItemID.RodofDiscord)))
                 {
                     player.FargoSouls().FusedLensIchor = true;
                     player.GetCritChance(DamageClass.Generic) += 15;
