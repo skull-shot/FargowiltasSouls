@@ -596,7 +596,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         alphaModifier = 1;
                         Projectile.scale = 2f;
 
-                        maxTime = 20 * 2;
+                        maxTime = WorldSavingSystem.MasochistModeReal ? 40 : 70;
                         if (counter < maxTime / 2) //effectively start at max brightness then fade
                             counter = maxTime / 2;
 

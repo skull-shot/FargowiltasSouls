@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSphereRing : Bosses.MutantBoss.MutantSphereRing
+    public class PenetratorSphereOkuu : Bosses.MutantBoss.MutantSphereRing
     {
         public override string Texture => "Terraria/Images/Projectile_454";
 
@@ -16,8 +16,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.FargoSouls().CanSplit = false;
             Projectile.FargoSouls().TimeFreezeImmune = true;
-            Projectile.penetrate = -1;
-            Projectile.extraUpdates = 1;
+            Projectile.penetrate = 2;
+            Projectile.timeLeft = 240;
         }
 
         public override void AI()
@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             if (Projectile.timeLeft % Projectile.MaxUpdates == 0)
                 Projectile.position += Main.player[Projectile.owner].position - Main.player[Projectile.owner].oldPosition;
 
-            if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<PenetratorWand>()] < 1)
+            if (Projectile.owner == Main.myPlayer && Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<PenetratorSpinBoundary>()] < 1)
             {
                 Projectile.Kill();
                 return;
@@ -35,8 +35,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Projectile.timeLeft = 0;
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
-            target.immune[Projectile.owner] = 1;
         }
     }
 }

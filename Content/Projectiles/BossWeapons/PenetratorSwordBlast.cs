@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
-    public class HentaiSwordBlast : Masomode.MoonLordSunBlast
+    public class PenetratorSwordBlast : Masomode.MoonLordSunBlast
     {
         public override string Texture => "Terraria/Images/Projectile_645";
 

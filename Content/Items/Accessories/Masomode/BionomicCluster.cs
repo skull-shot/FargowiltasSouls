@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             .AddIngredient(ItemID.HellstoneBar, 5)
             .AddIngredient<DeviatingEnergy>(10)
 
-            .AddTile(TileID.MythrilAnvil)
+            .AddTile(TileID.Anvils)
             .DisableDecraft()
             .Register();
         }
