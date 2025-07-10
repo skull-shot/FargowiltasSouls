@@ -505,10 +505,7 @@ namespace FargowiltasSouls
                 {
                     DefenseReducingDebuffs.Add(88);
                 }
-                if (Main.player[Main.myPlayer].FargoSouls().BerserkedFromAgitation == true)
-                {
-                    DefenseReducingDebuffs.Add(ModContent.BuffType<BerserkerInstallBuff>());
-                }
+                DefenseReducingDebuffs.Add(ModContent.BuffType<BerserkerInstallBuff>());
 
                 const int k = 1000;
                 FargoSets.NPCs.SwarmHealth[ModContent.NPCType<RoyalSubject>()] = 5100;
