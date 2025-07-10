@@ -12,6 +12,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -163,6 +164,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         // attack stuff
         public int Attack;
+        public int OldAttack;
 
         public int Timer;
 
@@ -171,6 +173,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public static int ComboTimer = 0;
         public static float ComboHP => 0.8f;
+
+        public bool Telegraph;
+        public float TelegraphRotation;
+        public Vector2 TelegraphPosition;
+        public float TelegraphOpacity;
 
         public enum Attacks
         {
@@ -184,12 +191,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
             binaryWriter.Write(ExtraAI0);
+            binaryWriter.Write(Attack);
+            binaryWriter.Write(OldAttack);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             base.ReceiveExtraAI(npc, bitReader, binaryReader);
             ExtraAI0 = binaryReader.ReadInt32();
+            Attack = binaryReader.ReadInt32();
+            OldAttack = binaryReader.ReadInt32();
         }
 
         public override void SetDefaults(NPC npc)
@@ -298,9 +309,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             
             bool ret = false;
+
             NPC = npc;
+            if (Telegraph)
+            {
+                if (TelegraphOpacity < 1)
+                    TelegraphOpacity += 0.1f;
+            }
+            else
+            {
+                if (TelegraphOpacity > 0)
+                    TelegraphOpacity -= 0.1f;
+            }
+            Telegraph = false;
+
             if (!NPC.HasPlayerTarget)
                 return true;
+
+
             switch ((Attacks)Attack)
             {
                 case Attacks.DefaultMovement:
@@ -397,12 +423,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (segments <= 5)
                     attacks.Remove(Attacks.BurrowSpit);
 
+                if (attacks.Count > 2)
+                    attacks.Remove((Attacks)OldAttack);
+
                 Attack = (int)Main.rand.NextFromCollection(attacks);
 
                 if (ComboTimer == -1)
                 {
                     Attack = (int)Attacks.Combo;
                 }
+                OldAttack = Attack;
+                NPC.netUpdate = true;
                 Timer = 0;
                 return;
             }
@@ -508,13 +539,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 float xDif = targetPos.X - NPC.Center.X;
 
-                for (int i = 0; i < 3; i++)
-                {
-                    Dust.NewDust(targetPos - Vector2.UnitX * 15, 30, 10, DustID.Clentaminator_Purple, Main.rand.NextFloat(-1, 1), -4);
-                }
+                Telegraph = true;
+                TelegraphPosition = targetPos;
+                TelegraphRotation = -Vector2.UnitY.ToRotation();
+
                 targetPos.Y += UndergroundLength;
                 Movement(targetPos, 1.7f);
-                if (Timer > windup && Math.Abs(xDif) < 80)
+                if (Timer > windup && Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
                     NPC.velocity *= 0f;
@@ -611,18 +642,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
                 float dir = -Target.HorizontalDirectionTo(targetPos);
-                Vector2 dustPos = targetPos + dir * Vector2.UnitX * 200;
-                for (int i = 0; i < 3; i++)
-                {
-                    Dust.NewDust(dustPos - Vector2.UnitX * 15, 30, 10, DustID.Clentaminator_Purple, dir * 4, -4);
-                }
+
+                Telegraph = true;
+                Vector2 telegPos = targetPos + dir * Vector2.UnitX * 200;
+                TelegraphPosition = telegPos;
+                TelegraphRotation = new Vector2(dir * 4, -6).ToRotation();
+
 
                 targetPos.Y += UndergroundLength;
 
                 float xDif = targetPos.X - NPC.Center.X;
 
                 Movement(targetPos, 1.7f);
-                if (Timer > windup && Math.Abs(xDif) < 80)
+                if (Timer > windup && Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
                     NPC.velocity *= 0f;
@@ -886,7 +918,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            int firstEater = NPC.FindFirstNPC(npc.type);
+            if (TelegraphOpacity > 0)
+            {
+                Asset<Texture2D> line = TextureAssets.Extra[178];
+
+                float opacity = TelegraphOpacity;
+                TelegraphOpacity = LumUtils.Saturate(TelegraphOpacity);
+
+                Main.EntitySpriteDraw(line.Value, TelegraphPosition - Main.screenPosition + TelegraphRotation.ToRotationVector2() * 8, null, Color.DarkOliveGreen * opacity, TelegraphRotation, line.Size() / 2, new Vector2(0.4f, NPC.scale * 20), SpriteEffects.None);
+            }
                 
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
