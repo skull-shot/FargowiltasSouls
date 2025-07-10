@@ -163,12 +163,12 @@ namespace FargowiltasSouls.Content.Items
                 /*case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
-                    return EModeChange.Nerf;*/
+                    return EModeChange.Nerf;
 
                 case ItemID.BeeGun:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
-                    return EModeChange.Buff;
+                    return EModeChange.Buff;*/
 
 
                 case ItemID.DemonScythe:
