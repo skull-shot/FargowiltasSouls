@@ -531,11 +531,9 @@ ShinobiEnchant: {
 		'''
 		Allows the ability to teleport dash
 		Double tap a direction
-		You are briefly immune to damage after dashing
-		Teleport through an enemy to deal massive melee damage
-		Dash cooldown is longer than normal dashes
-		Dash is longer and deals more damage
-		Dash into any walls to teleport through them to the next opening
+		Teleport dashing through an enemy deals massive melee damage
+		Teleport dashing grants brief invulnerability, but dash cooldown is longer than normal dashes
+		Dashing into any wall teleports you to the next opening
 		'Village Hidden in the Wall'
 		'''
 }
@@ -879,7 +877,7 @@ ShadowForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
-		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envolop you in shade, making you invincible during the dash
+		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
