@@ -204,7 +204,7 @@ FossilEnchant: {
 		'''
 		Se você chegar a zero PV, você reviverá com 50 PV e invocará vários ossos
 		Você também invocará alguns ossos em cada acerto
-		Colete os ossos para ser curado em 20 PV cada
+		Colete os ossos para ser curado em 15 PV cada
 		'Além de uma era esquecida'
 		'''
 }
@@ -733,50 +733,6 @@ WoodEnchant: {
 		Desconto atual: {0}%
 		'Shopkeepers hate this trick'
 		'Origens humildes…'
-		'''
-}
-
-ApprenticesEssence: {
-	DisplayName: Essência do Aprendiz
-	Tooltip:
-		'''
-		18% de aumento nos danos por magia
-		5% de aumento no crítico mágico
-		Aumenta a mana máxima em 50
-		'Isto é apenas o começo..'
-		'''
-}
-
-BarbariansEssence: {
-	DisplayName: Essência do Bárbaro
-	Tooltip:
-		'''
-		18% de aumento nos danos por ataques físicos
-		10% de aumento na velocidade do ataque físico
-		5% de aumento na chance de acerto físico crítico
-		'Isto é apenas o começo..'
-		'''
-}
-
-OccultistsEssence: {
-	DisplayName: Essência do Ocultista
-	Tooltip:
-		'''
-		18% de aumento nos danos por invocação
-		Aumenta o número máximo de lacaios que você pode ter em 1
-		Aumenta o número máximo de sentinelas que você pode ter em 1
-		'Isto é apenas o começo..'
-		'''
-}
-
-SharpshootersEssence: {
-	DisplayName: Essência do Atirador de Elite
-	Tooltip:
-		'''
-		18% de aumento nos danos por ataque à distância
-		10% de chance de não consumir munição
-		5% de aumento na chance de ataque à distância crítico
-		'Isto é apenas o começo..'
 		'''
 }
 

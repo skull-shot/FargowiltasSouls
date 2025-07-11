@@ -58,7 +58,7 @@ HellBonez.DisplayName: 地狱骸骨
 HellFlame.DisplayName: 地狱烈焰
 HellSkeletron.DisplayName: 地狱骷髅
 HellSkull2.DisplayName: 地狱头骨
-// PenetratorNuke.DisplayName: Phantasmal Blast
+PenetratorNuke.DisplayName: 幻象爆炸
 Penetrator.DisplayName: 洞察者
 PenetratorArc.DisplayName: 闪电弧
 PenetratorBigDeathray.DisplayName: 幻影死亡射线
@@ -71,7 +71,7 @@ PenetratorSpinBoundary.DisplayName: 洞察者
 PenetratorSpinThrown.DisplayName: 洞察者
 PenetratorThrown.DisplayName: 洞察者
 PenetratorWand.DisplayName: 洞察者
-// PenetratorSphereRing.DisplayName: Phantasmal Sphere
+PenetratorSphereRing.DisplayName: 幻影球
 Hungry.DisplayName: 饿鬼
 Hungry2.DisplayName: 饿鬼
 LeashFlail.DisplayName: 眼睑黏连连枷
@@ -714,9 +714,9 @@ MoonBowPortal.DisplayName: Moon Bow Portal
 FlightBall.DisplayName: 飞行光球
 AbomPhoenix.DisplayName: 幽灵凤凰
 FrostShardFriendly.DisplayName: 寒霜碎块
-// PenetratorSword.DisplayName: Mutant Sword
-// PenetratorSwordBlast.DisplayName: Mutant Sword Blast
-// PenetratorSphereOkuu.DisplayName: Mutant Sphere Okuu
+PenetratorSword.DisplayName: 突变剑
+PenetratorSwordBlast.DisplayName: 突变剑刃
+PenetratorSphereOkuu.DisplayName: 突变领域
 AbomRitualFTW.DisplayName: 憎恶仪式
 FallingSandstone.DisplayName: 落沙
 CoffinPlayerSoul.DisplayName: 你的灵魂
