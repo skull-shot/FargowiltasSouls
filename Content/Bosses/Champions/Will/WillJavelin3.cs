@@ -45,7 +45,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                 Projectile.hide = false;
             }
 
-            if (Projectile.ai[0] == 0)
+            int telegraphTime = 51;
+            Projectile.ai[2]++;
+
+            if (Projectile.ai[2] < telegraphTime)
             {
                 Projectile.rotation += (float)Math.PI * 5 / 51 * Projectile.localAI[0];
 
@@ -53,12 +56,22 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                 if (Projectile.alpha < 0)
                     Projectile.alpha = 0;
 
-                if (++Projectile.localAI[1] >= 51)
+                if (Projectile.ai[0] != 0) // maso evil spin
                 {
-                    Projectile.velocity = Vector2.UnitX.RotatedBy(Projectile.ai[1]) * 30f;
-                    Projectile.ai[0] = 1;
-                    Projectile.netUpdate = true;
+                    // find center
+                    int radius = 450; // from will champ ai
+                    Vector2 dirToCenter = Vector2.UnitX.RotatedBy(Projectile.ai[1]);
+                    Vector2 center = Projectile.Center + dirToCenter * radius;
+                    // update position to center -> this position, rotated by ai0
+                    Vector2 newPos = center - dirToCenter.RotatedBy(Projectile.ai[0]) * radius;
+                    Projectile.Center = newPos;
+                    Projectile.ai[1] = newPos.DirectionTo(center).ToRotation();
                 }
+            }
+            else if (Projectile.ai[2] == telegraphTime)
+            {
+                Projectile.velocity = Vector2.UnitX.RotatedBy(Projectile.ai[1]) * 30f;
+                Projectile.netUpdate = true;
             }
             else
             {
@@ -97,6 +110,16 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                 float num165 = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
             }
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 2f * Projectile.scale;
+                Color glowColor = Color.Goldenrod;
+
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, glowColor, Projectile.rotation, origin2, Projectile.scale, effects);
+            }
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;
