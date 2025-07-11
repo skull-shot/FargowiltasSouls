@@ -58,7 +58,7 @@ HellBonez.DisplayName: Ossoz do Inferno
 HellFlame.DisplayName: Chama do Inferno
 HellSkeletron.DisplayName: Esqueletron do Inferno
 HellSkull2.DisplayName: Caveira do Inferno
-// PenetratorNuke.DisplayName: Phantasmal Blast
+PenetratorNuke.DisplayName: Explosão Fantasmagórica
 Penetrator.DisplayName: O Penetrador
 PenetratorArc.DisplayName: Arco do Relâmpago
 PenetratorBigDeathray.DisplayName: Raio da Morte Fantasmagórico
@@ -71,7 +71,7 @@ PenetratorSpinBoundary.DisplayName: O Penetrador
 PenetratorSpinThrown.DisplayName: O Penetrador
 PenetratorThrown.DisplayName: O Penetrador
 PenetratorWand.DisplayName: O Penetrador
-// PenetratorSphereRing.DisplayName: Phantasmal Sphere
+PenetratorSphereRing.DisplayName: Anel Fantasmagórico
 Hungry.DisplayName: Faminto
 Hungry2.DisplayName: Faminto
 LeashFlail.DisplayName: Mangual da Coleira

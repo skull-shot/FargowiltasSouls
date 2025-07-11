@@ -206,7 +206,7 @@ FossilEnchant: {
 		'''
 		If you reach zero HP you will revive with 50 HP, self-cleanse debuffs, and spawn several bones
 		You will also spawn a few bones on every hit
-		Collect the bones to heal for 16 HP each
+		Collect the bones to heal for 15 HP each
 		'Beyond a forgotten age'
 		''' */
 }
@@ -740,50 +740,6 @@ WoodEnchant: {
 		''' */
 }
 
-ApprenticesEssence: {
-	// DisplayName: Apprentice's Essence
-	/* Tooltip:
-		'''
-		18% increased magic damage
-		8% increased magic critical strike chance
-		Increases your maximum mana by 50
-		'This is only the beginning...'
-		''' */
-}
-
-BarbariansEssence: {
-	// DisplayName: Barbarian's Essence
-	/* Tooltip:
-		'''
-		18% increased melee damage
-		10% increased melee speed
-		8% increased melee critical strike chance
-		'This is only the beginning...'
-		''' */
-}
-
-OccultistsEssence: {
-	// DisplayName: Occultist's Essence
-	/* Tooltip:
-		'''
-		18% increased summon damage
-		10% increased whip range
-		Increases your max number of minions by 1
-		'This is only the beginning...'
-		''' */
-}
-
-SharpshootersEssence: {
-	// DisplayName: Sharpshooter's Essence
-	/* Tooltip:
-		'''
-		18% increased ranged damage
-		10% increased ranged projectile velocity
-		8% increased ranged critical chance
-		'This is only the beginning...'
-		''' */
-}
-
 BoxofGizmos: {
 	// DisplayName: Box of Gizmos
 	/* Tooltip:
@@ -879,7 +835,7 @@ ShadowForce: {
 	/* Tooltip:
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
-		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envolop you in shade, making you invincible during the dash
+		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
@@ -911,8 +867,8 @@ TerraForce: {
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
 		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
-		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds, increases item grab range
-		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost (works in inventory and vanity)
+		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
+		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'The land lends its strength'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range"
@@ -1822,7 +1778,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
-		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
+		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
 		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, effects of Hive Pack

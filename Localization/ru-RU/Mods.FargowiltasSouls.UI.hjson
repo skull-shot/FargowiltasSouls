@@ -59,7 +59,7 @@ SomeEffectsPreset: Пресет с частичными эффектами
 MinimalEffectsPreset: Пресет с минимальными эффектами
 CustomPreset: Настраиваемый пресет {0} (ПКМ для сохранения)
 // Reload button is currently removed
-ReloadToggles: Перезагрузка включённых эффектов (ПКМ для сброса)
+ReloadToggles: Перезагрузить включённые эффекты (ПКМ для сброса)
 NoToggles: Переключать нечего!
 DisplayAll: Показать все
 DisplayEquipped: Показать экипированные
