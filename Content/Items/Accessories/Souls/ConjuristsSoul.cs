@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(null, "OccultistsEssence")
+            .AddIngredient(ItemID.SummonerEmblem)
             .AddIngredient(ItemID.MonkBelt)
             .AddIngredient(ItemID.SquireShield)
             .AddIngredient(ItemID.HuntressBuckler)

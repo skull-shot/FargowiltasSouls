@@ -1,5 +1,4 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
@@ -33,7 +32,7 @@ namespace FargowiltasSouls.Common
         {
             if ((context == AccessorySlotType.FunctionalSlot || context == AccessorySlotType.VanitySlot) && (base.CanAcceptItem(checkItem, context) || AllowedItemExceptions.Contains(checkItem.type)))
             {
-                if ((checkItem.ModItem != null && (checkItem.ModItem is BaseEnchant || checkItem.ModItem is BaseForce || checkItem.ModItem is BaseSoul || checkItem.ModItem is BaseEssence)) || AllowedItemExceptions.Contains(checkItem.type))
+                if ((checkItem.ModItem != null && (checkItem.ModItem is BaseEnchant || checkItem.ModItem is BaseForce || checkItem.ModItem is BaseSoul) || AllowedItemExceptions.Contains(checkItem.type)))
                 {
 
                     return true;
