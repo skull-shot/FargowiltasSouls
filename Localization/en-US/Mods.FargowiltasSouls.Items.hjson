@@ -835,7 +835,7 @@ ShadowForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
-		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envolop you in shade, making you invincible during the dash
+		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
@@ -1732,7 +1732,7 @@ SnipersSoul: {
 
 SupersonicSoul: {
 	DisplayName: Supersonic Soul
-	Tooltip:		
+	Tooltip:
 		'''
 		Allows Supersonic running, flight, and extra mobility on ice
 		Allows the holder to quintuple jump if no wings are equipped
