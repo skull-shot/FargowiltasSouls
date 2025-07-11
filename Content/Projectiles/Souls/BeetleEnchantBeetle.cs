@@ -1,8 +1,13 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using System.Threading;
+using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using rail;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +18,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         public override string Texture => "FargowiltasSouls/Content/Bosses/Champions/Life/ChampionBeetle";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Beetle");
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -25,7 +30,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.timeLeft = 600;
             Projectile.aiStyle = -1;
 
             Projectile.penetrate = -1;
@@ -33,21 +37,32 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
+            Projectile.noEnchantmentVisuals = true;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = HitCooldown;
 
+            Projectile.ContinuouslyUpdateDamageStats = true;
+
         }
         public ref float Target => ref Projectile.ai[0];
         public ref float Cooldown => ref Projectile.ai[1];
+        private float IdleTimer;
+        private Vector2 IdleLocation;
+        public override bool? CanCutTiles() => false;
         public override void AI()
         {
+            Player player = Main.player[Projectile.owner];
+            //Main.NewText($"Beetles: {player.FargoSouls().Beetles} BeetleCharge: {player.FargoSouls().BeetleCharge}");
             if (!Projectile.owner.IsWithinBounds(Main.maxPlayers) || !Main.player[Projectile.owner].Alive())
             {
                 Projectile.Kill();
                 return;
             }
-            Projectile.timeLeft = 60;
+            if (player.HasEffect<BeetleEffect>())
+                Projectile.timeLeft = 2;
+            if (Projectile.Distance(player.Center) > 3000)
+                Projectile.Center = player.Center;
 
             if (Projectile.velocity.X > 0)
                 Projectile.spriteDirection = 1;
@@ -62,7 +77,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             }
             if (Cooldown == 0)
             {
-                Target = -1;
+                Target = -2;
                 Projectile.netUpdate = true;
             }
             if (Cooldown >= 0)
@@ -71,7 +86,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             {
                 if (Target < 0) // has no target
                 {
-                    Player player = Main.player[Projectile.owner];
                     if (player.FargoSouls().BeetleAttackCD <= 0)
                     {
                         NPC npc = Projectile.FindTargetWithinRange(800, true);
@@ -97,15 +111,31 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                         }
                     }
                     else
-                        Target = -1;
+                        Target = -2;
                 }
             }
             if (Cooldown > 0 || Target < 0)
             {
-                Player player = Main.player[Projectile.owner];
-                HomingMovement(Main.rand.NextVector2FromRectangle(player.Hitbox));
-                if (Cooldown > 0 && Cooldown < 3 && !Projectile.Colliding(Projectile.Hitbox, player.Hitbox))
-                    Cooldown = 2;
+                if (Target == -2) // idle movement
+                {
+                    if (Projectile.Distance(player.Center) < 80)
+                        Projectile.spriteDirection = player.direction;
+                    if (IdleTimer > 0)
+                        IdleTimer--;
+                    if (IdleTimer == 0)
+                    {
+                        IdleLocation = player.Center + Main.rand.NextVector2Circular(48, 32);
+                        IdleTimer = Main.rand.Next(20, 40);
+                    }
+                    if (Projectile.Distance(IdleLocation) > 16)
+                        Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, IdleLocation, Projectile.velocity, Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.5f, 1f));
+                }
+                if (Target == -1) // returning to player after attacking
+                {
+                    HomingMovement(Main.rand.NextVector2FromRectangle(player.Hitbox));
+                    if (Cooldown > 0 && Cooldown < 3 && Projectile.Distance(player.Center) > 80)
+                        Cooldown = 2;
+                }
             }
         }
         public override bool? CanHitNPC(NPC target)
@@ -113,6 +143,16 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             if (Cooldown < 0 && Target >= 0)
                 return base.CanHitNPC(target);
             return false;
+        }
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.NPCDeath47 with {MaxInstances = 1, Volume = 0.5f}, Projectile.Center);
+            for (int k = 0; k < 20; k++)
+            {
+                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Ambient_DarkBrown, 0, -1f);
+                Main.dust[d].scale += 0.5f;
+                Main.dust[d].noGravity = true;
+            }
         }
         public void HomingMovement(Vector2 destination)
         {
@@ -138,7 +178,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
-                Color color27 = Color.White * Projectile.Opacity * 0.75f * 0.5f;
+                Color color27 = color26 * 0.5f;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];

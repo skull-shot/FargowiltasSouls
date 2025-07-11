@@ -65,6 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public int stormTimer;
         public float TungstenScale = 1;
         public bool TikiTagged;
+        public int TikiTimer;
         public bool electricAttack;
         public int spookyCD;
         public bool FrostFreeze;
@@ -292,6 +293,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceProj3.FargoSouls().TikiTagged)
                     {
                         TikiTagged = true;
+                        TikiTimer += 180;
                         sourceProj3.FargoSouls().TikiTagged = false;
                     }
                 }
@@ -1222,34 +1224,24 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     p.FargoSouls().TikiTagged = true;
+                    p.FargoSouls().TikiTimer = 180;
                 }
             }
 
-            if (TikiTagged)
+            if (TikiTimer > 0)
             {
+                TikiTimer--;
                 //dust
                 if (Main.rand.NextBool(10))
                 {
-                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
+                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleTorch, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100);
                     Main.dust[dust].noGravity = true;
                     Main.dust[dust].velocity *= 1.8f;
                     Dust expr_1CCF_cp_0 = Main.dust[dust];
                     expr_1CCF_cp_0.velocity.Y -= 0.5f;
-                    if (Main.rand.NextBool(4))
-                    {
-                        Main.dust[dust].noGravity = false;
-                        Main.dust[dust].scale *= 0.5f;
-                    }
                 }
             }
         }
-
-        public static int[] FancySwings => [
-            ProjectileID.Excalibur,
-            ProjectileID.TrueExcalibur,
-            ProjectileID.TerraBlade2,
-            ProjectileID.TheHorsemansBlade
-        ];
 
         public override void PostAI(Projectile projectile)
         {
@@ -1340,28 +1332,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
-            }
-
-            if (projectile.owner == player.whoAmI)
-            {
-                if (FancySwings.Contains(projectile.type))
-                {
-                    if (player.FargoSouls().swingDirection != player.direction)
-                    {
-                        projectile.ai[0] = -player.direction;
-                    }
-
-                    float rotation = -90;
-                    if (projectile.ai[0] == -1 && player.direction == -1)
-                    {
-                        rotation = -180;
-                    }
-                    else if (projectile.ai[0] == -1 && player.direction == 1)
-                    {
-                        rotation = 0;
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
-                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
@@ -1463,18 +1433,26 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (TikiTagged)
             {
-                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.35f : 1.15f;
+                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.25f : 1.15f;
                 TikiTagged = false;
             }
-                
+
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.12f;
-                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
-                if (Main.rand.NextFloat() < increase)
+                int critRoll = Main.rand.Next(100);
+                int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
+                int increase = (int)(maxIncrease * Math.Clamp(projectile.extraUpdates + 1 * projectile.velocity.Length() / 40f, 0, 1));
+                int increasedCrit = projectile.CritChance + increase;
+                if (critRoll < increasedCrit) // roll with the actual crit chance
+                {
                     modifiers.SetCrit();
-
+                    if (critRoll >= projectile.CritChance && critRoll < increasedCrit)
+                    {
+                        Main.NewText($"{increase}");
+                    }
+                }
+                else modifiers.DisableCrit(); // disable crit if failed new roll
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)

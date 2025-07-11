@@ -478,7 +478,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             LowGround = false;
             Flipped = false;
             Illuminated = false;
-            LihzahrdCurse = false;
             //LihzahrdBlessing = false;
             Berserked = false;
             CerebralMindbreak = false;

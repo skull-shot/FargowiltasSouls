@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDooms
             Projectile.timeLeft = 150;
 
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.idStaticNPCHitCooldown = 20;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);

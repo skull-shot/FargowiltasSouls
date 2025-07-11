@@ -1276,7 +1276,8 @@ namespace FargowiltasSouls.Core.Globals
                     npcLoot.Add(ItemDropRule.OneFromOptions(1,
                         ModContent.ItemType<Vineslinger>(),
                         ModContent.ItemType<Mahoguny>(),
-                        ModContent.ItemType<OvergrownKey>()));
+                        ModContent.ItemType<OvergrownKey>(),
+                        ItemID.ThornHook));
                     break;
 
                 default:

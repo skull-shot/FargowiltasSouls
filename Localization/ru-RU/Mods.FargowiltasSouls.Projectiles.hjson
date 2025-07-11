@@ -58,7 +58,7 @@ HellBonez.DisplayName: Адские козте
 HellFlame.DisplayName: Адское пламя
 HellSkeletron.DisplayName: Адский Скелетрон
 HellSkull2.DisplayName: Адский череп
-HentaiNuke.DisplayName: Фантазматический взрыв
+// PenetratorNuke.DisplayName: Phantasmal Blast
 Penetrator.DisplayName: Проникатель
 PenetratorArc.DisplayName: Молния
 PenetratorBigDeathray.DisplayName: Фантазматический луч смерти
@@ -71,7 +71,7 @@ PenetratorSpinBoundary.DisplayName: Проникатель
 PenetratorSpinThrown.DisplayName: Проникатель
 PenetratorThrown.DisplayName: Проникатель
 PenetratorWand.DisplayName: Проникатель
-HentaiSphereRing.DisplayName: Фантазматическая сфера
+// PenetratorSphereRing.DisplayName: Phantasmal Sphere
 Hungry.DisplayName: Голодный
 Hungry2.DisplayName: Голодный
 LeashFlail.DisplayName: Булава-глаз
@@ -714,9 +714,9 @@ MoonBowPortal.DisplayName: Лунный лук портал
 FlightBall.DisplayName: Шар полёта
 AbomPhoenix.DisplayName: Призрачный феникс
 FrostShardFriendly.DisplayName: Ледяной осколок друг
-HentaiSword.DisplayName: Меч Мутанта
-HentaiSwordBlast.DisplayName: Взрыв меча Мутанта
-HentaiSphereOkuu.DisplayName: Сфера Оку Мутанта
+// PenetratorSword.DisplayName: Mutant Sword
+// PenetratorSwordBlast.DisplayName: Mutant Sword Blast
+// PenetratorSphereOkuu.DisplayName: Mutant Sphere Okuu
 AbomRitualFTW.DisplayName: Ритуал Выродкка
 FallingSandstone.DisplayName: Падающий песчанник
 CoffinPlayerSoul.DisplayName: Твоя душа

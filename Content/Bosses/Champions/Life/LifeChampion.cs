@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
     [AutoloadBossHead]
     public class LifeChampion : ModNPC
     {
+        public bool ContactDamageActiveFuckYou;
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Champion of Life");
@@ -100,6 +101,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
+            if (!ContactDamageActiveFuckYou)
+                return false;
             if (NPC.localAI[3] == 0 || (NPC.ai[0] == 2 || NPC.ai[0] == 8) && NPC.ai[3] == 0)
                 return false;
 
@@ -120,6 +123,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         public override void AI()
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
+
 
             if (NPC.localAI[3] == 0) //just spawned
             {
@@ -160,6 +164,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
             NPC.dontTakeDamage = false;
             NPC.alpha = 0;
+            ContactDamageActiveFuckYou = true;
 
             Player player = Main.player[NPC.target];
             Vector2 targetPos;
@@ -303,10 +308,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
                     targetPos = player.Center;
                     targetPos.Y -= 300;
-                    if (NPC.Distance(targetPos) > 50)
-                        Movement(targetPos, 0.18f, 24f, true);
-                    if (NPC.Distance(player.Center) < 200) //try to avoid contact damage
-                        Movement(targetPos, 0.24f, 24f, true);
+                    Movement(targetPos, 0.18f, 24f, true);
 
                     if (++NPC.ai[1] > 150)
                     {
@@ -395,7 +397,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                         if (NPC.Center.Y > NPC.ai[2] + 1000) //now below arena, track player
                         {
                             targetPos = new Vector2(player.Center.X, NPC.ai[2] + 1100);
-                            Movement(targetPos, 1.2f, 24f);
+                            Movement(targetPos, 1.2f, 24f, contactDamage: true);
 
                             if (Math.Abs(player.Center.X - NPC.Center.X) < NPC.width / 2
                                 && ++NPC.ai[1] > (NPC.localAI[2] == 1 ? 30 : 60)) //in position under player
@@ -585,7 +587,47 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                 case 11: //cactus mines
                     NPC.velocity *= 0.98f;
 
-                    if (++NPC.ai[2] > (NPC.localAI[2] == 1 ? 75 : 100))
+                    float startTime = 60;
+
+                    float aoeTime = 60;
+                    float firingTime = (NPC.localAI[2] == 1 ? 75 : 100);
+                    float firingWithEndlagTime = 130;
+
+                    if (NPC.ai[1] < startTime)
+                    {
+                        targetPos = player.Center;
+                        targetPos.Y -= 300;
+                        Movement(targetPos, 0.25f, 32f, true);
+                    }
+                    else if (NPC.ai[1] < startTime + aoeTime)
+                    {
+                        if (NPC.ai[1] == startTime + 10)
+                        {
+                            SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
+                            int max = 6;
+                            for (int j = 0; j < 6; j++)
+                            {
+                                float progress = (float)j / max;
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    for (int i = -1; i <= 1; i += 2)
+                                    {
+                                        Vector2 target = Vector2.UnitY.RotatedBy(i * MathHelper.Pi * progress) * 120;
+                                        target.X += Main.rand.Next(-25, 25);
+                                        target.Y += Main.rand.Next(-25, 25);
+
+                                        Vector2 speed = 2 * target / 90;
+                                        float acceleration = -speed.Length() / 90;
+
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<CactusMine>(),
+                                            FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, acceleration);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    else if (++NPC.ai[2] > firingTime)
                     {
                         if (++NPC.ai[3] > 5) //spray mines that home down
                         {
@@ -607,14 +649,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                             }
                         }
 
-                        if (NPC.ai[2] > 130)
+                        if (NPC.ai[2] > firingWithEndlagTime)
                         {
                             NPC.netUpdate = true;
                             NPC.ai[2] = 0;
                         }
                     }
 
-                    if (++NPC.ai[1] > 480)
+                    if (++NPC.ai[1] > aoeTime + firingWithEndlagTime + firingTime - 10)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -669,8 +711,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             }
         }
 
-        private void Movement(Vector2 targetPos, float speedModifier, float cap = 12f, bool fastY = false)
+        private void Movement(Vector2 targetPos, float speedModifier, float cap = 12f, bool fastY = false, bool contactDamage = false)
         {
+            if (!contactDamage)
+                ContactDamageActiveFuckYou = false;
             if (NPC.Center.X < targetPos.X)
             {
                 NPC.velocity.X += speedModifier;

@@ -308,11 +308,6 @@ LihzahrdBlessingBuff: {
 	Message: Свет алтаря пал на вас!
 }
 
-LihzahrdCurseBuff: {
-	DisplayName: Проклятие ящщеров
-	Description: Провода в храме джунглей выключены
-}
-
 LivingWastelandBuff: {
 	DisplayName: Живая пустошь
 	Description: Все вокруг вас начинают гнить

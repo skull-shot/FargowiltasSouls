@@ -21,13 +21,13 @@ namespace FargowiltasSouls.Content.Projectiles
             Projectile.DamageType = DamageClass.Melee;
             AIType = ProjectileID.GeyserTrap;
 
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 20;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.OnFire, 600);
+            target.AddBuff(BuffID.OnFire3, 600);
         }
     }
 }

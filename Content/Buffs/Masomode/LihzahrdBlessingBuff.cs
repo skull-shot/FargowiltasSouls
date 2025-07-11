@@ -14,7 +14,6 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
             if (Framing.GetTileSafely(player.Center).WallType == WallID.LihzahrdBrickUnsafe)
             {
                 player.sunflower = true;

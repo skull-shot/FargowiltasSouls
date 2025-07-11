@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Content.Bosses.Champions.Timber;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 {
@@ -232,7 +233,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 
         public override void AI(NPC npc)
         {
-            if (DoStompAttack)
+            /*if (DoStompAttack)
             {
                 if (npc.velocity.Y == 0f) //landed from ANY jump
                 {
@@ -274,11 +275,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             else if (npc.velocity.Y > 0)
             {
                 DoStompAttack = true;
-            }
+            }*/
 
             if (CanDoAttack && npc.HasValidTarget)
             {
-                if (IndividualAttackTimer > 10)
+                if (IndividualAttackTimer > 45)
                 {
                     IndividualAttackTimer = 0;
 

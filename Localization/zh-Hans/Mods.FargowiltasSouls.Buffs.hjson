@@ -308,11 +308,6 @@ LihzahrdBlessingBuff: {
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
 }
 
-LihzahrdCurseBuff: {
-	DisplayName: 蜥蜴诅咒
-	Description: 丛林神庙内，你不能拆除或放置电线
-}
-
 LivingWastelandBuff: {
 	DisplayName: 人形废土
 	Description: 你周围的每个人都开始腐烂

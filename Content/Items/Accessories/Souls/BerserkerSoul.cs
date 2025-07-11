@@ -1,5 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Essences;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -59,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient<BarbariansEssence>()
+            .AddIngredient(ItemID.WarriorEmblem)
             .AddIngredient(ItemID.StingerNecklace)
             .AddIngredient(ItemID.YoyoBag)
             .AddIngredient(ItemID.FireGauntlet)

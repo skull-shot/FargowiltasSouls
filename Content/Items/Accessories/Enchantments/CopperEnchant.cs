@@ -95,7 +95,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     arcs = 8;
                 }
 
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
+                int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
 
                 Projectile.NewProjectile(player.GetSource_EffectItem<CopperEffect>(), player.Center, player.DirectionTo(target.Center) * 20, ModContent.ProjectileType<CopperLightning>(), 
                     damage, 0f, modPlayer.Player.whoAmI, player.DirectionTo(target.Center).ToRotation(), damage, ai2: arcs);

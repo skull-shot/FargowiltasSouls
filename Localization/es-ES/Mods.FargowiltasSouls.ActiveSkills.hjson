@@ -25,6 +25,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
+		Fastfalling onto ground creates a massive flaming eruption that deals melee damage
 		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }
@@ -124,9 +125,8 @@ SpookyEffect: {
 	// DisplayName: Deathhunt Scythe
 	/* Tooltip:
 		'''
-		Spin a large scythe around you, dealing melee and summon damage
-		The first enemy hit heals you based on the damage dealt
-		Hitting an enemy inflicts Marked for Death for 5 seconds, causing them to take 1.15x damage
+		Spin a large lifestealing scythe around you, dealing melee and summon damage
+		Hitting an enemy inflicts Marked for Death for 6 seconds, causing them to take 1.15x damage
 		Hitting your summons causes them to fire a scythe at the closest enemy
 		12 second cooldown
 		''' */

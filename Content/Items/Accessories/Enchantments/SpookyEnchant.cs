@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bool wiz = player.ForceEffect<SpookyEffect>();
             if (Main.myPlayer == player.whoAmI)
             {
-                int baseDmg = wiz ? 550 : 400;
+                int baseDmg = wiz ? 1250 : 750;
                 float melee = player.ActualClassDamage(DamageClass.Melee);
                 float summon = player.ActualClassDamage (DamageClass.Summon);
                 int dmg = (int)(baseDmg * (((melee + summon - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling

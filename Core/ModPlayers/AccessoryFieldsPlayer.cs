@@ -397,7 +397,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool[] MashPressed = new bool[4];
         public int MashCounter;
         public int StealingCooldown;
-        public bool LihzahrdCurse;
         //public bool LihzahrdBlessing;
         public bool Berserked;
         public bool CerebralMindbreak;

@@ -65,6 +65,8 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             }
             Projectile.rotation = 0;
             Projectile.spriteDirection = Projectile.direction;
+            if (Projectile.Distance(player.Center) > 3000)
+                Projectile.Center = player.Center;
             #region Targeting
 
             if (!foundTarget && Projectile.ai[0] == -1)

@@ -485,9 +485,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (fastFallCD > 0)
                 fastFallCD--;
-
-            bool canFastFall = Player.HasEffect<LihzahrdGroundPound>();
-            if (!(Player.gravDir > 0 && Player.HasEffect<DiveEffect>() && canFastFall))
+            if (!(Player.gravDir > 0 && Player.HasEffect<DiveEffect>()))
                 return;
 
             bool keying = Player.controlDown && Player.releaseDown && Player.doubleTapCardinalTimer[0] > 0 && Player.doubleTapCardinalTimer[0] != 15;
@@ -516,7 +514,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (GroundPound > 0)
             {
-                fastFallCD = 60;
+                fastFallCD = 90;
 
                 if (Player.velocity.Y == 0f && Player.controlDown)
                 {
@@ -536,7 +534,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     int x = (int)Player.Center.X / 16;
                     int y = (int)(Player.position.Y + Player.height + 8) / 16;
-                    if (/*GroundPound > 15 && */x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY
+                    if (x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY
                         && Main.tile[x, y] != null && Main.tile[x, y].HasUnactuatedTile && Main.tileSolid[Main.tile[x, y].TileType])
                     {
                         GroundPound = 0;
@@ -548,22 +546,23 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                             if (Player.whoAmI == Main.myPlayer)
                             {
-                                int baseDam = 500;
+                                int baseDam = 150;
                                 if (MasochistSoul)
                                     baseDam *= 3;
 
                                 //explosion
                                 Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<MoonLordSunBlast>(), 0, 0f, Player.whoAmI);
-                                int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), (int)(baseDam * 2 * Player.ActualClassDamage(DamageClass.Melee)), 9f, Player.whoAmI);
+                                int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), (int)(baseDam * 3 * Player.ActualClassDamage(DamageClass.Melee)), 9f, Player.whoAmI);
                                 if (p != Main.maxProjectiles)
                                     Main.projectile[p].DamageType = DamageClass.Melee;
 
                                 //boulders
-                                int dam = baseDam;
                                 for (int i = -5; i <= 5; i += 2)
                                 {
-                                    Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, -10f * Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / 6 * i),
-                                        ModContent.ProjectileType<LihzahrdBoulderFriendly>(), (int)(dam * Player.ActualClassDamage(DamageClass.Melee)), 7.5f, Player.whoAmI);
+                                    int b = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, -10f * Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / 6 * i),
+                                        ModContent.ProjectileType<LihzahrdBoulderFriendly>(), (int)(baseDam * Player.ActualClassDamage(DamageClass.Melee)), 7.5f, Player.whoAmI);
+                                    if (b != Main.maxProjectiles)
+                                        Main.projectile[b].DamageType = DamageClass.Melee;
                                 }
 
                                 //geysers
@@ -584,7 +583,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                                         {
                                             tilePosY++;
                                         }
-                                        Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), baseDamage, 8f, Player.whoAmI);
+                                        int g = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), baseDamage, 8f, Player.whoAmI);
+                                        if (g != Main.maxProjectiles)
+                                            Main.projectile[g].DamageType = DamageClass.Melee;
                                     }
                                 }
                             }
@@ -599,17 +600,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Player.velocity.Y = 15f;
                     }
 
-                    Player.maxFallSpeed = 15f;
+                    Player.maxFallSpeed = 20f;
                     GroundPound++;
-
-                    if (Player.HasEffect<LihzahrdGroundPound>())
+                    for (int i = 0; i < 5; i++)
                     {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Scale: 1.5f);
-                            Main.dust[d].noGravity = true;
-                            Main.dust[d].velocity *= 0.2f;
-                        }
+                        int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Scale: 1.5f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].velocity *= 0.2f;
                     }
                 }
             }

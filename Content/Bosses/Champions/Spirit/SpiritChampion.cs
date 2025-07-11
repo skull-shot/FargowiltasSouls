@@ -139,7 +139,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     NPC.noGravity = true;
                     NPC.alpha = 0;
 
-                    if (WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.SpiritChampion] && NPC.ai[1] < 120)
+                    if (NPC.ai[1] < 120)
                         NPC.ai[1] = 120;
 
                     if (NPC.ai[1] == 180)
@@ -680,7 +680,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             dust.noGravity = true;
                         }
 
-                        if (NPC.ai[1] > 60)
+                        if (NPC.ai[1] > 80)
                         {
                             Main.projectile.Where(x => x.active && x.friendly && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x => //reflect projectiles
                             {

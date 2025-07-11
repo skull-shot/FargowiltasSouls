@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Assets.UI;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Souls;
@@ -76,8 +75,6 @@ namespace FargowiltasSouls.Content.UI.Elements
                 {
                     if (item.ModItem is BaseEnchant enchant)
                         color = enchant.nameColor;
-                    else if (item.ModItem is BaseEssence essence)
-                        color = essence.nameColor;
                     else if (item.ModItem is BaseForce force)
                         color = Color.BlueViolet;
                 }

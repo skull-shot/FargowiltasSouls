@@ -158,7 +158,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             //successful dive
             if (Projectile.owner == Main.myPlayer && Projectile.ai[1] == 2 && Projectile.localAI[1] > 2 && timeLeft > 0)
             {
-                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center, Vector2.Zero, ModContent.ProjectileType<HentaiNuke>(), Projectile.damage, Projectile.knockBack * 10f, Projectile.owner);
+                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center, Vector2.Zero, ModContent.ProjectileType<PenetratorNuke>(), Projectile.damage, Projectile.knockBack * 10f, Projectile.owner);
             }
         }
 
