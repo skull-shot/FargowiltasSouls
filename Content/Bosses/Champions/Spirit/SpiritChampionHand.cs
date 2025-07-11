@@ -50,6 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.aiStyle = -1;
 
             NPC.dontTakeDamage = true;
+            NPC.chaseable = false;
         }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -78,6 +79,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.target = head.target;
             NPC.realLife = head.whoAmI;
             NPC.position += head.velocity * 0.75f;
+            NPC.chaseable = false;
 
             Player player = Main.player[NPC.target];
             Vector2 targetPos;
