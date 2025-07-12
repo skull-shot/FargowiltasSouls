@@ -54,6 +54,11 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
         colorMult = InverseLerp(radius * 0.985, radius, worldDistance);
     }
     
+    // make the seam less obvious
+    float xDistance = abs(worldUV.x - anchorPoint.x) / radius;
+    if (xDistance < 0.02)
+        colorMult *= pow(xDistance / 0.02, 0.007);
+    
     opacity = clamp(opacity, 0, maxOpacity);
     
     if (colorMult == 1 && (opacity == 0 || worldDistance > radius))
