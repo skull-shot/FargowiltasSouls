@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.height = 150;
             NPC.damage = 125;
             NPC.defense = 40;
-            NPC.lifeMax = 550000;
+            NPC.lifeMax = 630000;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
             NPC.noGravity = true;
@@ -139,7 +139,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     NPC.noGravity = true;
                     NPC.alpha = 0;
 
-                    if (WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.SpiritChampion] && NPC.ai[1] < 120)
+                    if (NPC.ai[1] < 120)
                         NPC.ai[1] = 120;
 
                     if (NPC.ai[1] == 180)
@@ -663,6 +663,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (NPC.Distance(targetPos) > 25)
                             Movement(targetPos, 0.8f, 24f);
 
+                        /* lol!
                         const float distance = 150;
 
                         for (int i = 0; i < 20; i++)
@@ -680,7 +681,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             dust.noGravity = true;
                         }
 
-                        if (NPC.ai[1] > 60)
+                        if (NPC.ai[1] > 80)
                         {
                             Main.projectile.Where(x => x.active && x.friendly && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x => //reflect projectiles
                             {
@@ -722,11 +723,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             });
                         }
 
+                        */
                         if (NPC.ai[1] == 0)
                         {
-                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
-                            if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -6);
+                            SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                            //if (FargoSoulsUtil.HostCheck)
+                            //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -6);
                         }
 
                         if (++NPC.ai[3] > 10) //spirits

@@ -58,7 +58,7 @@ HellBonez.DisplayName: Адские козте
 HellFlame.DisplayName: Адское пламя
 HellSkeletron.DisplayName: Адский Скелетрон
 HellSkull2.DisplayName: Адский череп
-// PenetratorNuke.DisplayName: Phantasmal Blast
+PenetratorNuke.DisplayName: Фантазматический взрыв
 Penetrator.DisplayName: Проникатель
 PenetratorArc.DisplayName: Молния
 PenetratorBigDeathray.DisplayName: Фантазматический луч смерти
@@ -71,7 +71,7 @@ PenetratorSpinBoundary.DisplayName: Проникатель
 PenetratorSpinThrown.DisplayName: Проникатель
 PenetratorThrown.DisplayName: Проникатель
 PenetratorWand.DisplayName: Проникатель
-// PenetratorSphereRing.DisplayName: Phantasmal Sphere
+PenetratorSphereRing.DisplayName: Фантазматическая сфера
 Hungry.DisplayName: Голодный
 Hungry2.DisplayName: Голодный
 LeashFlail.DisplayName: Булава-глаз
@@ -247,13 +247,13 @@ AncientVision.DisplayName: Древнее видение
 AncientVisionLunarCultist.DisplayName: Древнее видение
 Bee.DisplayName: Пчела
 Beehive.DisplayName: Пчелиный улей
-BetsyElectrosphere.DisplayName: Воздушное проклятье
-BetsyElectrosphere2.DisplayName: Воздушное проклятье
-BetsyFury.DisplayName: Воздушное проклятье
-BetsyFury2.DisplayName: Воздушное проклятье
+BetsyElectrosphere.DisplayName: Воздушное проклятие
+BetsyElectrosphere2.DisplayName: Воздушное проклятие
+BetsyFury.DisplayName: Воздушное проклятие
+BetsyFury2.DisplayName: Воздушное проклятие
 BetsyPhoenix.DisplayName: Призрачный феникс
 BigMimicExplosion.DisplayName: Взрыв
-BloodFountain.DisplayName: Кровавый фентан
+BloodFountain.DisplayName: Кровавый фонтан
 BloodScythe.DisplayName: Лунный серп
 BloodScytheFriendly.DisplayName: Кровавый серп
 BloodThornMissile.DisplayName: Кровавый шип
@@ -714,9 +714,9 @@ MoonBowPortal.DisplayName: Лунный лук портал
 FlightBall.DisplayName: Шар полёта
 AbomPhoenix.DisplayName: Призрачный феникс
 FrostShardFriendly.DisplayName: Ледяной осколок друг
-// PenetratorSword.DisplayName: Mutant Sword
-// PenetratorSwordBlast.DisplayName: Mutant Sword Blast
-// PenetratorSphereOkuu.DisplayName: Mutant Sphere Okuu
+PenetratorSword.DisplayName: Меч Мутанта
+PenetratorSwordBlast.DisplayName: Взрыв меча Мутанта
+PenetratorSphereOkuu.DisplayName: Сфера Окуу Мутанта
 AbomRitualFTW.DisplayName: Ритуал Выродкка
 FallingSandstone.DisplayName: Падающий песчанник
 CoffinPlayerSoul.DisplayName: Твоя душа
@@ -807,3 +807,4 @@ RemoteLightning.DisplayName: Молния дистанционного упра�
 RemoteScanTelegraph.DisplayName: Ремоут скан телеграф
 RemoteProbe.DisplayName: Зонд дистанционного управления
 CorruptionSludge.DisplayName: Порченная слизь
+// WillDashTrail.DisplayName: Will Dash Trail

@@ -50,6 +50,15 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch ((int)Projectile.ai[1])
             {
+                case -25: // shadow champion telegraph tentacle explosion
+                    {
+                        customScaleAlpha = true;
+                        Projectile.alpha = 80;
+                        maxTime = 37;
+                        Projectile.scale = 10f * (float)Math.Sin(Math.PI / 2 * Projectile.localAI[0] / maxTime);
+                        color = new(132, 38, 238);
+                    }
+                    break;
                 case -24: //baron debuff apply at opening
                     {
                         //customScaleAlpha = true;

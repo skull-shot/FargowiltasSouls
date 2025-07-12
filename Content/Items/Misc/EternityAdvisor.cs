@@ -1,5 +1,4 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
@@ -337,10 +336,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<FrostEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ItemID.PygmyNecklace];
             }
             else if (!NPC.downedMechBoss3)
             {
@@ -360,10 +359,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<FrostEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<AncientHallowEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
             else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.Lifelight])
             {
@@ -384,10 +383,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<PureHeart>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<AncientHallowEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
             else if (!NPC.downedPlantBoss)
             {
@@ -433,10 +432,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 other += $"[i:{ModContent.Find<ModItem>("Fargowiltas", "LihzahrdInstactuationBomb").Type}]";
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<SpookyEnchant>(), ModContent.ItemType<TikiEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<SpookyEnchant>(), ModContent.ItemType<TikiEnchant>()];
             }
             else if (!WorldSavingSystem.DownedBetsy)
             {

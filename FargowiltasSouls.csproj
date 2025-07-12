@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\AutoloadedEffects\Shaders\EmpressRitualShader.fx" />
+    <None Remove="Assets\AutoloadedEffects\Shaders\WillChampTrail.fx" />
     <None Remove="Assets\UI\OncomingMutantnt.png" />
     <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
     <None Remove="Content\Items\Accessories\Masomode\LithosphericCluster.png" />

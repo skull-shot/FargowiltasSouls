@@ -102,6 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override void OnKill(int timeLeft)
         {
+            /*
             if (timeLeft > 0)
             {
                 for (int i = 0; i < 5; i++) //drop greek fire
@@ -113,6 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                     }
                 }
             }
+            */
 
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 

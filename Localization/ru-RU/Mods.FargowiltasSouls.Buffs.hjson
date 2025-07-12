@@ -214,7 +214,7 @@ ClippedWingsBuff: {
 }
 
 CurseoftheMoonBuff: {
-	DisplayName: Проклятье Луны
+	DisplayName: Проклятие Луны
 	Description: Гнев Луны поглощает вас
 }
 
@@ -359,7 +359,7 @@ NeurotoxinBuff: {
 }
 
 NullificationCurseBuff: {
-	DisplayName: Проклятье нуллификации
+	DisplayName: Проклятие нуллификации
 	Description: Лунный лорд переключает сопротивления к видам урона!
 }
 

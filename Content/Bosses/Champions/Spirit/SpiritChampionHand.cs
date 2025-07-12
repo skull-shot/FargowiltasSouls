@@ -50,6 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.aiStyle = -1;
 
             NPC.dontTakeDamage = true;
+            NPC.chaseable = false;
         }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -78,6 +79,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.target = head.target;
             NPC.realLife = head.whoAmI;
             NPC.position += head.velocity * 0.75f;
+            NPC.chaseable = false;
 
             Player player = Main.player[NPC.target];
             Vector2 targetPos;
@@ -321,7 +323,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             if (Math.Abs(NPC.velocity.Y) > cap)
                 NPC.velocity.Y = cap * Math.Sign(NPC.velocity.Y);
         }
-
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.4f;
+        }
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (WorldSavingSystem.EternityMode)
@@ -354,6 +359,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
             SpriteEffects effects = NPC.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
+
             for (int i = 0; i < NPCID.Sets.TrailCacheLength[NPC.type]; i++)
             {
                 Color color27 = color26 * 0.5f;
@@ -361,6 +367,19 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                 Vector2 value4 = NPC.oldPos[i];
                 float num165 = NPC.rotation; //NPC.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, value4 + NPC.Size / 2f - screenPos + new Vector2(0, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, NPC.scale, effects, 0);
+            }
+
+            if (NPC.ai[0] == 1)
+            {
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 8f * NPC.scale;
+                    Color glowColor = Color.Purple;
+
+                    Main.EntitySpriteDraw(texture2D13, NPC.Center + afterimageOffset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, glowColor, NPC.rotation, origin2, NPC.scale, effects);
+                }
+                Main.spriteBatch.ResetToDefault();
             }
 
             Main.EntitySpriteDraw(texture2D13, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
