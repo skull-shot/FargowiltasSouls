@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Core.Systems
         {
             None,
             Shadow,
+            Valhalla,
             Monk,
             Jungle,
             Crystal,
@@ -45,12 +46,10 @@ namespace FargowiltasSouls.Core.Systems
             {
                 MonkDashEffect.AddDash(player);
             }
-            /*
-            if (player.HasEffect<SolarEffect>())
+            if (player.HasEffect<ValhallaDashEffect>())
             {
-                SolarEffect.AddDash(player);
+                ValhallaDashEffect.AddDash(player);
             }
-            */
             if (player.HasEffect<ShadowForceDashEffect>())
             {
                 ShadowForceDashEffect.AddDash(player);
@@ -120,6 +119,21 @@ namespace FargowiltasSouls.Core.Systems
                             CrystalAssassinDash.WhileDashing(Player);
                         }
                         break;
+                }
+            }
+            if (Player.dashDelay == 0 && Player.mount.Active)
+            {
+                HandleDash(out bool dashing, out int dir);
+                if (dashing && dir != 0)
+                {
+                    switch (modPlayer.FargoDash)
+                    {
+                        case DashType.Valhalla:
+                            {
+                                ValhallaDashEffect.ValhallaDash(Player, dir);
+                            }
+                            break;
+                    }
                 }
             }
         }

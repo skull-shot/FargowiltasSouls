@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<RedRidingHuntressEffect>(Item);
             // valhalla
             player.FargoSouls().ValhallaEnchantActive = true;
-            player.AddEffect<ValhallaDash>(Item);
+            player.AddEffect<ValhallaDashEffect>(Item);
             SquireEnchant.SquireEffect(player, Item);
 
             if (!player.HasEffect<WillEffect>())

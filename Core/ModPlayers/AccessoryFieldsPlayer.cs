@@ -196,7 +196,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int TurtleCounter;
         public int TurtleShellHP = 2000;
         public bool ShellHide;
-        public int ValhallaDashCD;
+        public int ValhallaVerticalDashing;
         public int VortexCD;
         public bool WizardEnchantActive;
         public bool WizardTooltips;

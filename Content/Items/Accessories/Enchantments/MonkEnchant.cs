@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             Vector2 pos = player.Center;
 
-            int damage = monkForce ? (shinobiForce ? 600 : 400) : 200;
+            int damage = monkForce ? (shinobiForce ? 800 : 500) : 200;
             damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
             Projectile.NewProjectile(player.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<MonkDashDamage>(), damage, 0);
 
@@ -113,7 +113,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.dashDelay = 100;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MonkEnchant").Value, Color.Red, () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
+            {
+                if (modPlayer.ShinobiEnchantActive)
+                    CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24), () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
+                else CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MonkEnchant").Value, Color.Red, () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
+            }
             if (player.FargoSouls().IsDashingTimer < 20)
                 player.FargoSouls().IsDashingTimer = 20;
 
