@@ -222,7 +222,7 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<GoldToPiggy>(true);
             player.SetToggleValue<JungleDashEffect>(true);
             player.SetToggleValue<SupersonicTabi>(true);
-            player.SetToggleValue<ValhallaDash>(true);
+            player.SetToggleValue<ValhallaDashEffect>(true);
             player.SetToggleValue<SquireMountJump>(true);
             player.SetToggleValue<SquireMountSpeed>(true);
             player.SetToggleValue<NebulaEffect>(true);

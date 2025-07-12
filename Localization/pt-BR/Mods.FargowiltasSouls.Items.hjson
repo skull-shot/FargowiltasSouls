@@ -613,8 +613,8 @@ SquireEnchant: {
 	// DisplayName: Squire Enchantment
 	/* Tooltip:
 		'''
-		Increases mount acceleration, top speed, and jump height
-		While mounted, grants 10 defense, a fart jump, and fall damage immunity
+		Increases mount acceleration, speed, and jump height by 1.25x
+		While mounted, grants a double jump and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
 		'Squire, will you hurry?'
 		''' */
@@ -695,8 +695,8 @@ ValhallaKnightEnchant: {
 	// DisplayName: Valhalla Knight Enchantment
 	/* Tooltip:
 		'''
-		Increases mount acceleration, top speed, and jump height
-		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
+		Increases mount acceleration, speed, and jump height by 1.5x
+		While mounted grants a horizontal and vertical dash, double jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 15%
 		'Valhalla calls'
 		''' */
