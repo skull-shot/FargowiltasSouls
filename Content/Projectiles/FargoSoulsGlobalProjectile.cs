@@ -1442,7 +1442,7 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 int critRoll = Main.rand.Next(100);
                 int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
-                int increase = (int)(maxIncrease * Math.Clamp(projectile.extraUpdates + 1 * projectile.velocity.Length() / 40f, 0, 1));
+                int increase = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
                 int increasedCrit = projectile.CritChance + increase;
                 if (critRoll < increasedCrit) // roll with the actual crit chance
                 {

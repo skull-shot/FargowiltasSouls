@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //grapple check needed because grapple state extends dash state forever
         public bool IsInADashState
-            => (Player.dashDelay == -1 || IsDashingTimer > 0) && Player.grapCount <= 0;
+            => (Player.dashDelay == -1 || IsDashingTimer > 0 || ValhallaVerticalDashing > 0) && Player.grapCount <= 0;
 
         public bool BossAliveLastFrame = false;
 
@@ -1476,7 +1476,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Eternity)
                     multiplier = 5f;
                 else if (forceEffect && valhalla)
-                    multiplier = 1.2f;
+                    multiplier = 1.25f;
                 else if (valhalla || (forceEffect && squire))
                     multiplier = 1.15f;
                 else if (squire)
