@@ -22,7 +22,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float2 worldUV = screenPosition + screenSize * uv;
     float2 provUV = anchorPoint / screenSize;
     float worldDistance = distance(worldUV, anchorPoint);
-    float adjustedTime = time * 0.17;
+    float adjustedTime = time * 0.07;
     
     // Polar coordinates
     float2 coords = uv;
@@ -37,11 +37,11 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
    
     
     // Textures
-    float polarMult = 2;
-    polar.y *= polarMult;
-    float noiseMesh1 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.77, 0.94)).g;
-    float noiseMesh2 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0, 0.7)).g;
-    float noiseMesh3 = tex2D(diagonalNoise, polar - adjustedTime * float2(0.93, 1.13)).g;
+    float polarMult = 3;
+    polar.y *= polarMult; 
+    float noiseMesh1 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.77, -0.2)).g;
+    float noiseMesh2 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0, -0.11)).g;
+    float noiseMesh3 = tex2D(diagonalNoise, polar - adjustedTime * float2(0.93, -0.43)).g;
     float textureMesh = noiseMesh1 * 0.3 + noiseMesh2 * 0.3 + noiseMesh3 * 0.3;
     
     float opacity = 0.33;
@@ -66,18 +66,18 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     if (colorMult == 1 && (opacity == 0 || worldDistance > radius))
         return sampleColor;
     
-    float4 darkColor = float4(0.98, 0.95, 0.53, 1);; //red
-    float4 midColor = float4(0.77, 0.7, 0.33, 1); //yellow
+    float4 darkColor = float4(0.73, 0.94, 0.93, 1);; //blue
+    float4 midColor = float4(0.86, 0.96, 1, 1); //light blue
     float4 lightColor = float4(1, 1, 1, 1); //white
     
-    float colorLerp = pow(colorMult, 3);
+    float colorLerp = pow(colorMult, 2);
     //colorLerp = lerp(colorLerp, colorLerp * textureMesh + 0.3, 0.2);
     float4 color;
     float split = 0.9;
     //if (!border)
     //    colorLerp = split + (1 - split) * colorLerp;
     
-    colorLerp = pow(colorLerp, 4);
+    colorLerp = pow(colorLerp, 2);
     color = lerp(darkColor, midColor, colorLerp);
     /*
     if (colorLerp < split)
@@ -93,7 +93,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
 */
 
     color *= pow(abs(textureMesh), 0.25);
-    color *= 1.4;
+    color *= 1.2;
 
     return color * colorMult * opacity;
 }
