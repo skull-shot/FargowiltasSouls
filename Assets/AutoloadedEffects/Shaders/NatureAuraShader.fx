@@ -22,7 +22,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float2 worldUV = screenPosition + screenSize * uv;
     float2 provUV = anchorPoint / screenSize;
     float worldDistance = distance(worldUV, anchorPoint);
-    float adjustedTime = time * 0.07;
+    float adjustedTime = time * 0.9;
     
     // Polar coordinates
     float2 coords = uv;
@@ -33,15 +33,15 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     //coords.y /= screenSize.x / screenSize.y; // compensate for 
     float2 anchorCoords = (anchorPoint - screenPosition) / screenSize;
     float distanceFromCenter = distance(coords, anchorCoords);
-    float2 polar = float2(atan2(coords.y - anchorCoords.y, coords.x - anchorCoords.x) / (3.141 * 0.25) + 0.5, distanceFromCenter * 1);
+    float2 polar = float2(atan2(coords.y - anchorCoords.y, coords.x - anchorCoords.x) / (3.141 * 0.125) + 0.5, distanceFromCenter * 1);
    
     
     // Textures
     float polarMult = 3;
     polar.y *= polarMult; 
-    float noiseMesh1 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.77, -0.2)).g;
-    float noiseMesh2 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0, -0.11)).g;
-    float noiseMesh3 = tex2D(diagonalNoise, polar - adjustedTime * float2(0.93, -0.43)).g;
+    float noiseMesh1 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.47, -0.06)).g;
+    float noiseMesh2 = tex2D(diagonalNoise, polar - adjustedTime * float2(-1.39, -0.02)).g;
+    float noiseMesh3 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.93, 0.13)).g;
     float textureMesh = noiseMesh1 * 0.3 + noiseMesh2 * 0.3 + noiseMesh3 * 0.3;
     
     float opacity = 0.33;
@@ -93,7 +93,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
 */
 
     color *= pow(abs(textureMesh), 0.25);
-    color *= 1.2;
+    color *= 1.25;
 
     return color * colorMult * opacity;
 }
