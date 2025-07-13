@@ -21,7 +21,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\AutoloadedEffects\Shaders\EmpressRitualShader.fx" />
+    <None Remove="Assets\AutoloadedEffects\Shaders\SpiritAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\WillChampTrail.fx" />
+    <None Remove="Assets\ExtraTextures\Noise\SandyNoise.png" />
     <None Remove="Assets\UI\OncomingMutantnt.png" />
     <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
     <None Remove="Content\Items\Armor\BaronMask.png" />

@@ -33,6 +33,8 @@ namespace FargowiltasSouls.Assets.ExtraTextures
         public static Asset<Texture2D> HarshNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/HarshNoise");
         public static Asset<Texture2D> HoneycombNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/HoneycombNoise");
         public static Asset<Texture2D> LessCrustyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/LessCrustyNoise");
+
+        public static Asset<Texture2D> SandyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/SandyNoise");
         public static Asset<Texture2D> SmokyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/SmokyNoise");
         public static Asset<Texture2D> TurbulentNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/TurbulentNoise");
         public static Asset<Texture2D> WavyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/WavyNoise");
