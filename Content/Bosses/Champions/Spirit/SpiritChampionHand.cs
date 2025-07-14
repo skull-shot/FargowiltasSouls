@@ -369,12 +369,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                 Main.EntitySpriteDraw(texture2D13, value4 + NPC.Size / 2f - screenPos + new Vector2(0, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, NPC.scale, effects, 0);
             }
 
-            if (NPC.ai[0] == 1)
+            if (NPC.ai[0] == 1 || NPC.ai[0] == 4 || NPC.ai[0] == 3)
             {
                 Main.spriteBatch.UseBlendState(BlendState.Additive);
                 for (int j = 0; j < 12; j++)
                 {
-                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 8f * NPC.scale;
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 12f * NPC.scale;
                     Color glowColor = Color.Purple;
 
                     Main.EntitySpriteDraw(texture2D13, NPC.Center + afterimageOffset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, glowColor, NPC.rotation, origin2, NPC.scale, effects);
