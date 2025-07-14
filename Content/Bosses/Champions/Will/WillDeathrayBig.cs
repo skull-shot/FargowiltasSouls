@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
     {
         public override string Texture => "FargowiltasSouls/Content/Bosses/Champions/Will/WillDeathray";
 
-        public WillDeathrayBig() : base(20, drawDistance: 3600, sheeting: TextureSheeting.Horizontal) { }
+        public WillDeathrayBig() : base(20, hitboxModifier: WorldSavingSystem.MasochistModeReal ? 1f : 0.5f, drawDistance: 3600, sheeting: TextureSheeting.Horizontal) { }
 
         public override void SetStaticDefaults()
         {
@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             target.AddBuff(BuffID.Bleeding, 300);
         }
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2;
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 2 : 1);
 
         public static Color ColorFunction(float _) => new(253, 254, 32, 100);
 
