@@ -76,6 +76,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             //player.AddEffect<SkeleMinionEffect>(Item);
 
             // deerclawps
+            player.buffImmune[BuffID.Slow] = true;
+            player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<DeerclawpsDashDR>(Item);
             player.AddEffect<DeerclawpsEffect>(Item);
         }
