@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
     {
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
 
-        public WillDeathraySmall() : base(60, hitboxModifier: WorldSavingSystem.MasochistModeReal ? 1f : 0.5f, drawDistance: 3600) { }
+        public WillDeathraySmall() : base(60, drawDistance: 3600) { }
 
         public override void SetStaticDefaults()
         {
@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             target.AddBuff(BuffID.Bleeding, 300);
         }
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 3f : 1.5f);
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale;
 
         public static Color ColorFunction(float _) => new(253, 254, 32, 100);
 
