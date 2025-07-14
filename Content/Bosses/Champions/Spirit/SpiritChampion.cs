@@ -186,6 +186,19 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                 if (Main.netMode == NetmodeID.Server)
                                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                             }
+
+                            if (WorldSavingSystem.MasochistModeReal) // extra hand that always grabs you
+                            {
+
+                                int n2 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
+                                if (n2 != Main.maxNPCs)
+                                {
+                                    Main.npc[n2].velocity.X = Main.rand.NextFloat(-24f, 24f);
+                                    Main.npc[n2].velocity.Y = Main.rand.NextFloat(-24f, 24f);
+                                    if (Main.netMode == NetmodeID.Server)
+                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n2);
+                                }
+                            }
                         }
                     }
 
@@ -303,7 +316,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                     if (NPC.ai[1] == 0) //respawn dead hands
                     {
-                        bool[] foundHand = new bool[4];
+                        int size = WorldSavingSystem.MasochistModeReal ? 5 : 4;
+                        bool[] foundHand = new bool[size];
 
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
@@ -317,6 +331,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                     foundHand[2] = Main.npc[i].ai[2] == 1f && Main.npc[i].ai[3] == -1f;
                                 if (!foundHand[3])
                                     foundHand[3] = Main.npc[i].ai[2] == 1f && Main.npc[i].ai[3] == 1f;
+                                if (WorldSavingSystem.MasochistModeReal && !foundHand[4])
+                                    foundHand[4] = Main.npc[i].ai[0] == 3f || Main.npc[i].ai[3] == 1f;
                             }
                         }
 
@@ -366,6 +382,17 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                         NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                                 }
                             }
+                            if (WorldSavingSystem.MasochistModeReal && !foundHand[4])
+                            {
+                                int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
+                                if (n != Main.maxNPCs)
+                                {
+                                    Main.npc[n].velocity.X = Main.rand.NextFloat(-24f, 24f);
+                                    Main.npc[n].velocity.Y = Main.rand.NextFloat(-24f, 24f);
+                                    if (Main.netMode == NetmodeID.Server)
+                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
+                                }
+                            }
                         }
                     }
                     else if (NPC.ai[1] == 120)
@@ -374,7 +401,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                         for (int i = 0; i < Main.maxNPCs; i++) //update ai
                         {
-                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI)
+                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI && Main.npc[i].ai[0] != 3f)
                             {
                                 Main.npc[i].ai[0] = 1f;
                                 Main.npc[i].netUpdate = true;
@@ -570,7 +597,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     {
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
-                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI)
+                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI && Main.npc[i].ai[0] != 3f)
                             {
                                 Main.npc[i].ai[0] = 1f;
                                 Main.npc[i].netUpdate = true;
