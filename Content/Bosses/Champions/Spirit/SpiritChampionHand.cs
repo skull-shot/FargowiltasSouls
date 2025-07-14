@@ -119,9 +119,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                 case 1: //you think you're safe?
                     {
-                        if (head.ai[0] != -3 && NPC.ai[0] == 3) // special maso hand
+                        if (head.ai[0] != -3 && NPC.ai[0] == 3 && NPC.ai[3] != 1) // special maso hand
                         {
                             NPC.ai[3] = 1; // mark it as the special maso hand
+                            NPC.netUpdate = true;
                         }
                         if (head.ai[0] != 3 && head.ai[0] != -3 && !(WorldSavingSystem.MasochistModeReal && NPC.ai[0] == 3)) //return to normal when head no longer wants to grab
                         {
