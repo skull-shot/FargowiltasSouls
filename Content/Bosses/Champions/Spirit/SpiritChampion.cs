@@ -186,24 +186,23 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                 if (Main.netMode == NetmodeID.Server)
                                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                             }
-
-                            if (WorldSavingSystem.MasochistModeReal) // extra hand that always grabs you
-                            {
-
-                                int n2 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
-                                if (n2 != Main.maxNPCs)
-                                {
-                                    Main.npc[n2].velocity.X = Main.rand.NextFloat(-24f, 24f);
-                                    Main.npc[n2].velocity.Y = Main.rand.NextFloat(-24f, 24f);
-                                    if (Main.netMode == NetmodeID.Server)
-                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n2);
-                                }
-                            }
                         }
                     }
 
                     if (++NPC.ai[1] > 300)
                     {
+                        if (FargoSoulsUtil.HostCheck && WorldSavingSystem.MasochistModeReal) // extra hand that always grabs you
+                        {
+
+                            int n2 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
+                            if (n2 != Main.maxNPCs)
+                            {
+                                Main.npc[n2].velocity.X = Main.rand.NextFloat(-24f, 24f);
+                                Main.npc[n2].velocity.Y = Main.rand.NextFloat(-24f, 24f);
+                                if (Main.netMode == NetmodeID.Server)
+                                    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n2);
+                            }
+                        }
                         NPC.ai[1] = 0;
                         NPC.ai[2] = 0;
                         NPC.ai[3] = 0;
