@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             base.SetDefaults();
 
             Projectile.MaxUpdates = 5;
-            if (WorldSavingSystem.MasochistModeReal)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 Projectile.MaxUpdates *= 2;
         }
 
