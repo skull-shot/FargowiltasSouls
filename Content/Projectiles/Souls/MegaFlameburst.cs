@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
 
         public override void SetDefaults()
         {
-            Projectile.width = 56;
+            Projectile.width = 28;
             Projectile.height = 28;
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
@@ -52,16 +52,16 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             }
 
             const int aislotHomingCooldown = 0;
-            const int homingDelay = 0;
-            const float desiredFlySpeedInPixelsPerFrame = 8;
-            const float amountOfFramesToLerpBy = 25; // minimum of 1, please keep in full numbers even though it's a float!
+            const int homingDelay = 5;
+            const float desiredFlySpeedInPixelsPerFrame = 16;
+            const float amountOfFramesToLerpBy = 20; // minimum of 1, please keep in full numbers even though it's a float!
 
             Projectile.ai[aislotHomingCooldown]++;
             if (Projectile.ai[aislotHomingCooldown] > homingDelay)
             {
                 Projectile.ai[aislotHomingCooldown] = homingDelay; //cap this value 
 
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1000));
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 480));
                 if (n.Alive())
                 {
                     Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center) * desiredFlySpeedInPixelsPerFrame;

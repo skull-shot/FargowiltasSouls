@@ -12,7 +12,7 @@ SpecialDashEffect: {
 
 BetsyDashEffect: {
 	DisplayName: Fireball Dash
-	Tooltip: 
+	Tooltip:
 		'''
 		Perform a short invincible fireball dash towards your cursor
 		Hitting enemies with Fireball Dash inflicts 10 seconds of Betsy's Curse and decreases your dash cooldown
