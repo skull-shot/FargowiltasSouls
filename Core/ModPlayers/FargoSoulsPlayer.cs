@@ -518,6 +518,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Mash && MashCounter > 0)
                 MashCounter--;
             Mash = false;
+            GrabDamage = false;
 
             if (Player.grapCount <= 0)
                 Grappled = false;
@@ -617,6 +618,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             BeetleEnchantDefenseTimer = 0;
 
             Mash = false;
+            GrabDamage = false;
             WizardEnchantActive = false;
             MashCounter = 0;
 

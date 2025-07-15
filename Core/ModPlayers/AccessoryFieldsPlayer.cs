@@ -387,6 +387,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Flipped;
         public bool Illuminated;
         public bool Mash;
+        public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
         public int MashCounter;
         public int StealingCooldown;
