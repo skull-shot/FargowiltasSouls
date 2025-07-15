@@ -459,7 +459,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.lifeRegen -= 16;
 
             if (GrabDamage)
-                Player.lifeRegen -= 20;
+                Player.lifeRegen -= WorldSavingSystem.MasochistModeReal ? 30 : 20;
 
             void DamageOverTime(int badLifeRegen, bool affectLifeRegenCount = false)
             {
