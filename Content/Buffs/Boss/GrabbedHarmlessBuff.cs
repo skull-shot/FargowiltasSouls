@@ -4,8 +4,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Boss
 {
-    public class GrabbedBuff : ModBuff
+    public class GrabbedHarmlessBuff : ModBuff
     {
+        public override string Texture => "FargowiltasSouls/Content/Buffs/Boss/GrabbedBuff";
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Grabbed");
@@ -22,10 +23,8 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
 
             fargoPlayer.Mash = true;
-            fargoPlayer.GrabDamage = true;
 
             player.Incapacitate();
         }
-
     }
 }

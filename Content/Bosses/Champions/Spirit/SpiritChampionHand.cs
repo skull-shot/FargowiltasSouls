@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -61,8 +62,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
+            if (target.HasBuff<GrabbedBuff>())
+                return false;
             CooldownSlot = 1;
             return NPC.localAI[3] == 0;
+        }
+
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.25f;
         }
 
         public override void AI()
@@ -330,10 +338,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             if (Math.Abs(NPC.velocity.Y) > cap)
                 NPC.velocity.Y = cap * Math.Sign(NPC.velocity.Y);
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-        {
-            modifiers.FinalDamage *= 0.4f;
-        }
+        
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (WorldSavingSystem.EternityMode)

@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Deerclops
                         player.frozen = true;
                         if (WorldSavingSystem.MasochistModeReal)
                             player.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 2);
-                        player.AddBuff(ModContent.BuffType<GrabbedBuff>(), 2);
+                        player.AddBuff(ModContent.BuffType<GrabbedHarmlessBuff>(), 2);
 
                         if (oldMash < player.FargoSouls().MashCounter)
                         {

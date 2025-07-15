@@ -802,3 +802,8 @@ SilverBuff: {
 	DisplayName: Усиление парирования
 	Description: Урон увеличен на 100%
 }
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed Harmless Buff
+	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+}
