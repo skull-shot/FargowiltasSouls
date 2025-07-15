@@ -40,11 +40,16 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
 
         public override bool SafePreAI(NPC npc)
         {
-
             AttackTimer++;
             if (AttackTimer >= 240 && (State == 1 || (npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))))
             {
+                if (State == 0)
+                {
+                    npc.direction = (int)npc.HorizontalDirectionTo(Main.player[npc.target].Center);
+                    AttackTimer = 240;
+                }
                 State = 1;
+
                 if (Math.Abs(npc.velocity.X) < 15)
                     npc.velocity.X = npc.direction * (float) Math.Pow(1.1, (AttackTimer - 300));
                 else if (AttackTimer % 2 == 0)
@@ -67,7 +72,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                     FargoSoulsUtil.ScreenshakeRumble(2f);
                     npc.velocity = 10 * Vector2.UnitX.RotatedBy(-(MathHelper.PiOver2 + (npc.direction * MathHelper.PiOver4)));
                     npc.rotation = npc.velocity.ToRotation() + MathHelper.PiOver2;
-                    State = 2;
+                    State = 0;
                     AttackTimer = 0;
                 }
                 return false;
