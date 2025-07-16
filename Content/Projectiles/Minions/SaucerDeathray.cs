@@ -25,7 +25,6 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = -1;
             Projectile.hostile = false;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
@@ -134,8 +133,8 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Electrified, 360);
-            target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 30);
-            target.AddBuff(ModContent.BuffType<LethargicBuff>(), 30);
+            //target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 30);
+            //target.AddBuff(ModContent.BuffType<LethargicBuff>(), 30);
         }
     }
 }
