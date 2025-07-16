@@ -85,7 +85,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 int attackRate = 90;
                 Projectile.ai[1] += 1f;
 
-                if (player.controlUseItem && Projectile.ai[1] >= attackRate)
+                if (player.HeldItem.IsWeapon() && player.controlUseItem && Projectile.ai[1] >= attackRate)
                 {
                     Vector2 velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20;
 
