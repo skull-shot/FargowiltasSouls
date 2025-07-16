@@ -1438,8 +1438,8 @@ SaucerControlConsole: {
 	/* Tooltip:
 		'''
 		Grants immunity to Distorted
-		Summons a friendly Mini Saucer
-		The saucer's tractor beam slows enemies hit by it
+		Summons a friendly Mini Saucer that attacks at your cursor
+		Mini Saucer attacks with lasers and rockets or a deathray, depending on held mouse click
 		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		''' */
