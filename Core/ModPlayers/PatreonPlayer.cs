@@ -233,7 +233,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.manaSick)
                     modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
-                for (int num468 = 0; num468 < 20; num468++)
+                /*for (int num468 = 0; num468 < 20; num468++)
                 {
                     int num469 = Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100, default, 2f);
@@ -242,7 +242,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     num469 = Dust.NewDust(new Vector2(target.Center.X, target.Center.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100);
                     Main.dust[num469].velocity *= 2f;
-                }
+                }*/
             }
         }
 
@@ -250,12 +250,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (CompOrb && proj.DamageType != DamageClass.Magic && proj.DamageType != DamageClass.Summon)
             {
-                modifiers.FinalDamage *= 1.2f;
+                modifiers.FinalDamage *= 1.17f;
 
                 if (Player.manaSick)
                     modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
-                for (int num468 = 0; num468 < 20; num468++)
+                /*for (int num468 = 0; num468 < 20; num468++)
                 {
                     int num469 = Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100, default, 2f);
@@ -264,7 +264,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     num469 = Dust.NewDust(new Vector2(target.Center.X, target.Center.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100);
                     Main.dust[num469].velocity *= 2f;
-                }
+                }*/
             }
         }
 
