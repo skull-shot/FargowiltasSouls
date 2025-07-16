@@ -510,6 +510,11 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.MedusaHead:
                     balanceTextKeys = ["MedusaHead"];
                     return EModeChange.Buff;
+
+                case ItemID.DD2BetsyBow: //aerial bane
+                    balanceTextKeys = ["AerialBane"];
+                    return EModeChange.Nerf;
+
                 default:
                     return EModeChange.None;
             }

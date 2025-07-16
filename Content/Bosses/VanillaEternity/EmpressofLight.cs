@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.15, MidpointRounding.ToEven);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.3, MidpointRounding.ToEven);
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
