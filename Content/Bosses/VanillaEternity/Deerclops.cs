@@ -288,9 +288,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (HandsCooldown <= 0)
                             {
                                 npc.velocity.X = 0;
-                                int attackDuration = 140;
+                                int attackDuration = WorldSavingSystem.MasochistModeReal ? 125 : 140;
                                 int firstVolleyTime = 10;
-                                int secondVolleyTime = 85;
+                                int secondVolleyTime = WorldSavingSystem.MasochistModeReal ? 60 : 85;
                                 float distance = 300;
                                 void SpawnHand(Vector2 dir)
                                 {

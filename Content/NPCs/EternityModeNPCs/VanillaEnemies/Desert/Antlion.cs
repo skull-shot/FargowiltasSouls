@@ -131,10 +131,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
             //never fire sand balls from vanilla
             npc.ai[0] = 10;
         }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (BittenPlayer != -1)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitPlayer(npc, target, ref modifiers);
             target.longInvince = true;
+            modifiers.FinalDamage *= 0.25f;
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
