@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
@@ -74,14 +73,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Item effectItem = player.EffectItem<RedRidingEffect>();
             Item firstAmmo = PickAmmo(player);
             int arrowType = firstAmmo.shoot;
-            int damage = firstAmmo.damage * (modPlayer.ForceEffect<RedRidingEnchant>() ? 7 : 5);
-            //int damage = FargoSoulsUtil.HighestDamageTypeScaling(player, (int)(firstAmmo.damage * 5f));
+            int damage = firstAmmo.damage * (modPlayer.ForceEffect<RedRidingEnchant>() ? 5 : 3);
             int heatray = Projectile.NewProjectile(player.GetSource_Accessory(effectItem), player.Center, new Vector2(0, -6f), ProjectileID.HeatRay, 0, 0, Main.myPlayer);
             Main.projectile[heatray].tileCollide = false;
             //proj spawns arrows all around it until it dies
 
             Projectile.NewProjectile(player.GetSource_Accessory(effectItem), target.Center.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<ArrowRain>(), (int)(damage * player.ActualClassDamage(DamageClass.Ranged)), 0f, player.whoAmI, arrowType, target.whoAmI);
-
             modPlayer.RedRidingArrowCD = modPlayer.ForceEffect<RedRidingEnchant>() ? 240 : 360;
         }
         private static Item PickAmmo(Player player)

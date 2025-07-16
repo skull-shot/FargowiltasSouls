@@ -50,8 +50,7 @@ ApprenticeEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/7 as often as they would normally
-		Only works on hotbar weapons
+		The support weapon will fire 1/5 as often as it would normally
 		Consumables are consumed, mana is spent, and ammo is selected
 		'A long way to perfection'
 		''' */
@@ -177,9 +176,8 @@ DarkArtistEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/5 as often as they would normally
-		Only works on hotbar weapons
-		Summons a Flameburst minion that will also fire while you attack
+		The support weapon will fire 1/5 as often as it would normally
+		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -259,11 +257,10 @@ HuntressEnchant: {
 	// DisplayName: Huntress Enchantment
 	/* Tooltip:
 		'''
-		Attacks deal 3 flat extra damage
-		Each successive attack deals an additional 3 flat damage
-		This stacks up to 10 times
-		Missing any attack will halve your stacks
-		Homing and minion attacks do not increase these bonuses
+		Projectiles shot by weapons deal 3 flat extra damage
+		Landing a shot grants stacks, granting an additional 3 flat damage per stack, up to 10 stacks
+		Missing a shot subtracts 5 stacks
+		Homing and minion shots do not benefit from stacks
 		'Accuracy brings power'
 		''' */
 }
@@ -484,12 +481,12 @@ RedRidingEnchant: {
 	// DisplayName: Red Riding Enchantment
 	/* Tooltip:
 		'''
-		Attacks deal 5 flat extra damage
-		Each successive attack deals an additional 5 flat damage
-		Upon reaching 10 stacks, spawn a rain of arrows, dealing ranged damage
-		The arrow type defaults to Venom or whatever is first in your inventory
-		Missing any attack will halve your stacks
-		Homing and minion attacks do not increase these bonuses
+		Projectiles shot by weapons deal 5 flat extra damage
+		Landing a shot grant a stack, granting an additional 5 flat damage per stack up to 10 stacks
+		Reaching 10 stacks creates an arrow storm to be rained from the sky onto foes, dealing ranged damage
+		Arrow type takes from your ammo slots, defaulting to Venom if none are present
+		Missing a shot subtracts 3 stacks
+		Homing and minion shots do not benefit from stacks
 		'Big Bad Red Riding Hood'
 		''' */
 }
@@ -950,7 +947,6 @@ BetsysHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Oozed, Withered Weapon, and Withered Armor
-		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
 		'Lightly roasted, medium rare'
 		''' */
 }
@@ -1442,8 +1438,8 @@ SaucerControlConsole: {
 	/* Tooltip:
 		'''
 		Grants immunity to Distorted
-		Summons a friendly Mini Saucer
-		The saucer's tractor beam slows enemies hit by it
+		Summons a friendly Mini Saucer that attacks at your cursor
+		Mini Saucer attacks with lasers and rockets or a deathray, depending on held mouse click
 		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		''' */

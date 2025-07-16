@@ -82,15 +82,15 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
 
                 //attack as sentry 
-                int attackRate = 60;
+                int attackRate = 90;
                 Projectile.ai[1] += 1f;
 
                 if (player.controlUseItem && Projectile.ai[1] >= attackRate)
                 {
-                    Vector2 velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 10;
+                    Vector2 velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20;
 
                     int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<MegaFlameburst>(), (int)(72 * player.ActualClassDamage(DamageClass.Magic)), 4, Projectile.owner, Projectile.whoAmI);
-                    SoundEngine.PlaySound(SoundID.DD2_FlameburstTowerShot, Projectile.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_FlameburstTowerShot with { Volume = 0.6f }, Projectile.Center);
 
                     Projectile.ai[1] = 0f;
                 }

@@ -683,7 +683,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
                     PureGazeTime += 1;
-                else if (PureGazeTime > 0)
+                else if (PureGazeTime >= 3)
                     PureGazeTime -= 3;
                 if (PureGazeTime > PungentGazeBuff.MAX_TIME)
                     PureGazeTime = PungentGazeBuff.MAX_TIME;
