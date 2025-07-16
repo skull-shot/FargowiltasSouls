@@ -104,7 +104,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
             if (BiteTimer > 0)
                 BiteTimer--;
         }
-
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (BittenPlayer != -1)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitPlayer(npc, target, ref modifiers);

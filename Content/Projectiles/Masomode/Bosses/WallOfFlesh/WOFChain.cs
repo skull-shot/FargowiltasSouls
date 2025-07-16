@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.extraUpdates = 2;
         }
 
-        public override bool? CanDamage() => (Projectile.timeLeft <= 30 || Projectile.ai[2] == 1) ? false : base.CanDamage();
+        public override bool? CanDamage() => (Projectile.timeLeft <= 30 || Projectile.ai[2] == 1 || BittenPlayer != -1) ? false : base.CanDamage();
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write7BitEncodedInt(BittenPlayer);
@@ -124,10 +124,19 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
                 }
             }
         }
+        public override bool CanHitPlayer(Player target)
+        {
+            if (BittenPlayer != -1)
+                return false;
+            return base.CanHitPlayer(target);
+        }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             if (WorldSavingSystem.MasochistModeReal)
+            {
                 target.longInvince = true;
+                modifiers.FinalDamage *= 0.25f;
+            }
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {

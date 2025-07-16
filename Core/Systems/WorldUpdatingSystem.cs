@@ -314,9 +314,9 @@ namespace FargowiltasSouls.Core.Systems
                 Player desertPlayer = null;
                 Player snowPlayer = null;
                 if (sandstorm)
-                    desertPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneDesert, null);
+                    desertPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneDesert && p.ZoneOverworldHeight, null);
                 if (blizzard)
-                    snowPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneSnow, null);
+                    snowPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneSnow && p.ZoneOverworldHeight, null);
                 
                 if (sandstorm && desertPlayer != null)
                 {

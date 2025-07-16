@@ -147,6 +147,8 @@ namespace FargowiltasSouls.Content.Projectiles
                             Projectile.Center = npc.Center;
 
                             maxTime = npc.localAI[2] == 1 ? 30 : 60;
+                            if (WorldSavingSystem.MasochistModeReal)
+                                maxTime = (int)(maxTime / 1.5f);
 
                             if (npc.ai[1] == 0)
                                 Projectile.localAI[0] = 0;
