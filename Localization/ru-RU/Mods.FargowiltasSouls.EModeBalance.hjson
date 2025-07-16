@@ -60,3 +60,4 @@ PiranhaGun: Урон снарядов обновляется постоянно
 ProximityMineLauncher: Урон снарядов обновляется постоянно
 PygmyStaff: Spears can now pierce once
 MedusaHead: Наносит до х2.25 больше урона, чем меньше врагов в радиусе атаки
+// AerialBane: Bonus damage to airborne enemies decreased to 25%
