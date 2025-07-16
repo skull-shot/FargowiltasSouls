@@ -908,12 +908,16 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             void RuneWizard()
             {
                 int threshold = WorldSavingSystem.MasochistModeReal ? 400 : 450;
+                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
 
                 Player localPlayer = Main.LocalPlayer;
 
                 if (NPC.target == localPlayer.whoAmI) // only for target
                 {
-                    EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    if (Timer > attackTime && SubTimer > 0)
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    else
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                     EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                 }
 
@@ -957,7 +961,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (WorldSavingSystem.MasochistModeReal && SubTimer < 1)
                     SubTimer = 1;
 
-                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
                 if (++Timer == 1)
                 {
                     //TeleportDust();
