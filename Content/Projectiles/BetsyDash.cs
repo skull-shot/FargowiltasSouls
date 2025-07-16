@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.BetsysCurse, LumUtils.SecondsToFrames(20));
+            target.AddBuff(BuffID.BetsysCurse, LumUtils.SecondsToFrames(10));
 
             if (Projectile.owner == Main.myPlayer)
             {

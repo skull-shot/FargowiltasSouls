@@ -205,6 +205,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     BossAliveLastFrame = true;
                     TinEffect.TinHurt(Player, true);
                     EbonwoodCharge = 0;
+                    HuntressStage = 0;
                     NekomiMeter = 0;
 
                     Beetles = 0;
@@ -626,6 +627,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
+            if (HuntressStage < 0)
+                HuntressStage = 0;
 
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
                 EbonwoodCharge = 0;

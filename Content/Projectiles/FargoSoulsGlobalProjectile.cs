@@ -458,6 +458,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
+                && !EModeGlobalProjectile.FancySwings.Contains(projectile.type)
                 && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
                 && !FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
@@ -1314,13 +1315,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
-            {
-                modPlayer.HuntressStage /= 2;
-                //Main.NewText("MISS");
-                HuntressProj = -1;
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1600 && projectile.Center.Distance(Main.player[projectile.owner].Center) < 1680) //gets inbetween 100 and 105 blocks of the player
+            {                                                                                                                                                      //done like this so a stream of missed projectiles with a long lifespan dont posthumously decrement bonuses
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //sound effect
+                HuntressProj = -1;
             }
 
             if (CirnoBurst > 0)
@@ -1621,10 +1623,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
-                modPlayer.HuntressStage /= 2;
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //Main.NewText("MISS");
-                //sound effect
             }
         }
 

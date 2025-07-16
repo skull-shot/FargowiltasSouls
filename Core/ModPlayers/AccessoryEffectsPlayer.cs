@@ -237,7 +237,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (player.HasEffect<BetsyDashEffect>() && heart)
                     {
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
-                        Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<Content.Projectiles.BetsyDash>(), (int)(100 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
+                        Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<BetsyDash>(), (int)(250 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
 
                         Player.immune = true;
                         Player.immuneTime = Math.Max(Player.immuneTime, 2);

@@ -51,13 +51,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             fargoPlayer.IceQueensCrown = true;
             if (player.AddEffect<IceQueenGraze>(item))
             {
-                fargoPlayer.Graze = true;
-                fargoPlayer.CirnoGraze = true;
+                for (int i = 0; i < fargoPlayer.ActiveSkills.Length; i++)
+                {
+                    if (fargoPlayer.ActiveSkills[i] is BombKeyEffect) //only grant ring if skill is selected
+                    {
+                        fargoPlayer.Graze = true;
+                        fargoPlayer.CirnoGraze = true;
+                    }
+                }
                 player.AddEffect<BombKeyEffect>(item);
             }
             player.AddEffect<MasoGrazeRing>(item);
-            if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
-                Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, Vector2.Zero, ModContent.ProjectileType<GrazeRing>(), 0, 0f, Main.myPlayer);
+                if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
+                    Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, Vector2.Zero, ModContent.ProjectileType<GrazeRing>(), 0, 0f, Main.myPlayer);
         }
 
         public const int CIRNO_GRAZE_THRESHOLD = 9999;
