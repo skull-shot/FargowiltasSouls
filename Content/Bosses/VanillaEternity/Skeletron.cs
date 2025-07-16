@@ -837,6 +837,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                     if (Timer > LungeWindup + 10 && Timer <= LungeWindup + 30)
                     {
+                        if (Timer < LungeWindup + 22)
+                            storedVel = storedVel.RotateTowards(npc.SafeDirectionTo(player.Center).ToRotation(), 0.05f);
                         storedVel *= 0.95f;
                     }
                     if (Timer > LungeWindup + 30)
