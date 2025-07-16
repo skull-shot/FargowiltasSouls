@@ -36,8 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
             if (Projectile.ai[1] == 0)
                 SoundEngine.PlaySound(SoundID.Item154 with {Volume = 0.5f}, Projectile.Center);
                 Projectile.ai[1] = 1;
-            if (Projectile.ai[2] == 1)
-                Projectile.scale = 1f;
                 return true;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
