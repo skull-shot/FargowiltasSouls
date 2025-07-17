@@ -89,6 +89,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float useRotation = 0;
         public int swingDirection = -1;
 
+        public static Item? ApprenticeSupportItem;
+        
         public Dictionary<int, bool> KnownBuffsToPurify = [];
 
         public bool Toggler_ExtraAttacksDisabled = false;
