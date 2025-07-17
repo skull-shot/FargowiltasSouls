@@ -21,6 +21,7 @@ using Terraria.Localization;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -120,9 +121,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 float ratio = Math.Min(Player.velocity.Length() / 20f, 1f);
                 modifiers.FinalDamage *= MathHelper.Lerp(1f, 0.85f, ratio);
             }
-
-            if (CerebralMindbreak)
-                modifiers.FinalDamage *= 0.7f;
 
             if (FirstStrike)
             {
@@ -337,8 +335,23 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (npc.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
-            if (npc.FargoSouls().CurseoftheMoon)
-                dr += 0.2f;
+            if (CurseoftheMoon)
+                dr -= 0.2f;
+
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
+                dr -= 0.1f;
+
+            if (Illuminated)
+            {
+                float maxDRReduction = 0.25f;
+
+                Color light = Lighting.GetColor(Player.Center.ToTileCoordinates());
+                float modifier = (light.R + light.G + light.B) / 700f;
+                modifier = MathHelper.Clamp(modifier, 0, 1);
+
+                modifier = maxDRReduction * modifier;
+                dr -= modifier;
+            }
 
             dr += Player.AccessoryEffects().ContactDamageDR(npc, ref modifiers);
 
@@ -354,6 +367,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (proj.coldDamage && Hypothermia)
                 dr -= 0.2f;
+
+            if (CurseoftheMoon)
+                dr -= 0.2f;
+
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
+                dr -= 0.1f;
 
             if (Illuminated)
             {

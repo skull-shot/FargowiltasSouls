@@ -11,13 +11,11 @@ RodofDiscord: Durante batalhas contra chefes, cada uso leva vida
 // ChaosState: Reduced damage, defense and damage reduction by 40%
 // RodofHarmony: Can only be obtained after defeating the Mutant
 Split: Frequência de divisão reduzida
-ChlorophyteBullet: Velocidade e duração reduzidos
 WaterBolt: Não pode ser usado até que Esqueletron seja derrotado
 // SpaceGun: Cannot be used until an evil boss is defeated
 // DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: A ativação da Esquiva Divina reduzirá temporariamente a sua velocidade do ataque
-FrozenTurtleShell: A barreira congelada reduz levemente o seu dano causado
-BrainOfConfusion: Reduz o seu dano ao efetuar uma esquiva
+// HolyDodge: Dodge cooldown increased to 60 seconds
+// FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
 ZenithNone: Nenhum enfraquecimento em vigor
 ZenithHitRate: "Taxa de acerto consideravelmente reduzida, melhora ao derrotar: "
 VampireKnives: Reduz a taxa de roubo de vida quando acima de 33% de vida
@@ -35,7 +33,7 @@ WhipStack: Efeitos e efeitos negativos de chicote não podem acumular
 // ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 MinionStack: O dano dos lacaios diminui ao invocar mais de 3 cópias (o limite do efeito é 12)
 SummonMulticlass: O dano por lacaios diminui quando você ataca usando outras classes (exceto no EdA)
-ShadowDodge: Modo Eternidade: Esquivar reduzirá sua velocidade de ataque
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 60 seconds
 IceBarrier: Modo Eternidade: 10% de redução nos danos
 // SwordRework: Reworked broadsword swing animation
 // SpearRework: Reworked spear swing animation
@@ -60,3 +58,4 @@ IceBarrier: Modo Eternidade: 10% de redução nos danos
 // ProximityMineLauncher: Projectile damage updates dynamically
 // PygmyStaff: Spears can now pierce once
 // MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
+// AerialBane: Bonus damage against airborne enemies decreased to 15%

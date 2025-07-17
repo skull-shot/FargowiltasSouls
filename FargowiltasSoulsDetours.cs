@@ -54,6 +54,8 @@ namespace FargowiltasSouls
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
             On_Projectile.Damage += PhantasmArrowRainFix;
+
+            On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
         }
         public void UnloadDetours()
         {
@@ -77,6 +79,8 @@ namespace FargowiltasSouls
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
 
             On_Projectile.Damage -= PhantasmArrowRainFix;
+
+            On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
         }
 
 
@@ -378,6 +382,13 @@ namespace FargowiltasSouls
             orig(self);
             if (phantasmAverted)
                 player.phantasmTime = phantasmTime;
+        }
+
+        public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
+        {
+            orig(self);
+            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
+                self.shadowDodgeTimer = 60 * 60;
         }
     }
 }

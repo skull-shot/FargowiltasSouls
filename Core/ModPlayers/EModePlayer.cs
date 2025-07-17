@@ -193,9 +193,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 CrossNecklaceTimer = 0;
             }
 
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                Player.GetDamage(DamageClass.Generic) -= 0.10f;
-
             if (Player.setSquireT2 || Player.setSquireT3 || Player.setMonkT2 || Player.setMonkT3 || Player.setHuntressT2 || Player.setHuntressT3 || Player.setApprenticeT2 || Player.setApprenticeT3 || Player.setForbidden)
                 ReduceMasomodeMinionNerf = true;
         }
@@ -278,17 +275,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             //}
         }
 
-        private void ShadowDodgeNerf()
-        {
-            if (Player.shadowDodge && EmodeItemBalance.HasEmodeChange(Player, ItemID.HallowedPlateMail)) //prehurt hook not called on titanium dodge
-                Player.AddBuff(ModContent.BuffType<HolyPriceBuff>(), 600);
-        }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            ShadowDodgeNerf();
+            //ShadowDodgeNerf();
 
             if (Player.resistCold && npc.coldDamage) //warmth potion nerf
             {
@@ -300,8 +292,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-
-            ShadowDodgeNerf();
 
             if (Player.resistCold && proj.coldDamage) //warmth potion nerf
             {
@@ -319,15 +309,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-
-            //ShadowDodgeNerf();
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            //ShadowDodgeNerf();
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
@@ -339,14 +326,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //because NO MODIFY/ONHITPLAYER HOOK WORKS
             if (modifiers.DamageSource.SourceProjectileType == ProjectileID.Explosives)
                 Player.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
-
-            if (Player.brainOfConfusionItem != null && !Player.brainOfConfusionItem.IsAir)
-            {
-                if (Main.rand.NextBool(2)) // 50% chance to not work
-                {
-                    Player.brainOfConfusionItem = null;
-                }
-            }
 
 
             base.ModifyHurt(ref modifiers);

@@ -1,10 +1,10 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles;
+﻿//using FargowiltasSouls.Content.Items.Accessories.Forces;
+//using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ID;
@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
 
         
-        public static MethodInfo ApprenticeShootMethod
+        /*public static MethodInfo ApprenticeShootMethod
         {
             get;
             set;
@@ -66,8 +66,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             object[] args = new object[] { playerWhoAmI, item, weaponDamage };
             ApprenticeShootMethod.Invoke(player, args);
-;
-        }
+        }*/
         
     }
     public class ApprenticeSupport : AccessoryEffect
@@ -142,17 +141,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
                                 continue;
 
-                            Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
-                            Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
+                            //Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
+                            //Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
                             
-                            int projToShoot = item2.shoot;
-                            float speed = item2.shootSpeed;
+                            //int projToShoot = item2.shoot;
+                            //float speed = item2.shootSpeed;
                             int damage = player.GetWeaponDamage(item2);
-                            float KnockBack = item2.knockBack;
+                            //float KnockBack = item2.knockBack;
 
                             int itemtime = player.itemTime;
                             int itemtimemax = player.itemTimeMax;
-                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]);
+                            FargoSoulsPlayer.ApprenticeSupportItem = item2; // capture the item being used as Apprentice Support
+                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]); // all the OnSpawn stuff already runs here
+                            FargoSoulsPlayer.ApprenticeSupportItem = null; // clear just in case, as the captured item should have already marked each possible projectile as Support
 
                             player.itemTime = itemtime;
                             player.itemTimeMax = itemtimemax;

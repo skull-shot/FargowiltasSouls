@@ -23,11 +23,11 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Betsy;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
 using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -144,11 +144,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.DD2BetsyFlameBreath:
                     projectile.tileCollide = false;
                     projectile.penetrate = -1;
-                    break;
-
-                case ProjectileID.ChlorophyteBullet:
-                    projectile.extraUpdates = 1;
-                    projectile.timeLeft = 150;
                     break;
 
                 case ProjectileID.CrystalBullet:
@@ -1272,6 +1267,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
+                    break;
+                case ProjectileID.DD2BetsyArrow:
+                    if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _) && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.DD2BetsyBow)) //vanilla conditions for "airborne enemy"
+                        modifiers.FinalDamage *= 9.2f/12f; //results in 1.1x after vanilla 1.5x
                     break;
                 case ProjectileID.MoonlordTurretLaser:
                     modifiers.FinalDamage *= 0.5f;

@@ -204,7 +204,7 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (!item.IsAir && ((item.IsWeapon() && !item.noMelee) || TungstenAlwaysAffects.Contains(item.type)))
+            if (!item.IsAir && ((item.IsWeapon() && !item.noMelee) || TungstenAlwaysAffects.Contains(item.type)) && item.DamageType.CountsAsClass(DamageClass.Melee))
             {
                 if (player.HasEffect<TungstenEffect>())
                 {
