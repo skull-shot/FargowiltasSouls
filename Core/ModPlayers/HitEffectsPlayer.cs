@@ -338,8 +338,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (npc.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
-            if (npc.FargoSouls().CurseoftheMoon)
-                dr += 0.2f;
+            if (CurseoftheMoon)
+                dr -= 0.2f;
 
             if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
                 dr -= 0.1f;

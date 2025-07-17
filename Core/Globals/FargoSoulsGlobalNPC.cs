@@ -1409,7 +1409,7 @@ namespace FargowiltasSouls.Core.Globals
             if (OceanicMaul)
                 modifiers.ArmorPenetration += 20;
             if (CurseoftheMoon)
-                modifiers.ArmorPenetration += 10;
+                modifiers.ArmorPenetration += 20;
             //if (Rotting)
             //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
