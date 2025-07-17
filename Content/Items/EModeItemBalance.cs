@@ -96,10 +96,6 @@ namespace FargowiltasSouls.Content.Items
                         return EModeChange.Nerf;
                     }
 
-                case ItemID.ChlorophyteBullet:
-                    balanceTextKeys = ["ChlorophyteBullet"];
-                    return EModeChange.Nerf;
-
                 case ItemID.VampireKnives:
                     balanceTextKeys = ["VampireKnives"];
                     return EModeChange.Nerf;
