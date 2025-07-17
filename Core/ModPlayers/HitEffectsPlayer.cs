@@ -344,6 +344,18 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
                 dr -= 0.1f;
 
+            if (Illuminated)
+            {
+                float maxDRReduction = 0.25f;
+
+                Color light = Lighting.GetColor(Player.Center.ToTileCoordinates());
+                float modifier = (light.R + light.G + light.B) / 700f;
+                modifier = MathHelper.Clamp(modifier, 0, 1);
+
+                modifier = maxDRReduction * modifier;
+                dr -= modifier;
+            }
+
             dr += Player.AccessoryEffects().ContactDamageDR(npc, ref modifiers);
 
             ApplyDR(Player, dr, ref modifiers);
