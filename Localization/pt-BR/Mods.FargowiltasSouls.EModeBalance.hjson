@@ -14,7 +14,7 @@ Split: Frequência de divisão reduzida
 WaterBolt: Não pode ser usado até que Esqueletron seja derrotado
 // SpaceGun: Cannot be used until an evil boss is defeated
 // DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: A ativação da Esquiva Divina reduzirá temporariamente a sua velocidade do ataque
+// HolyDodge: Dodge cooldown increased to 60 seconds
 // FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
 BrainOfConfusion: Reduz o seu dano ao efetuar uma esquiva
 ZenithNone: Nenhum enfraquecimento em vigor
@@ -34,7 +34,7 @@ WhipStack: Efeitos e efeitos negativos de chicote não podem acumular
 // ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 MinionStack: O dano dos lacaios diminui ao invocar mais de 3 cópias (o limite do efeito é 12)
 SummonMulticlass: O dano por lacaios diminui quando você ataca usando outras classes (exceto no EdA)
-ShadowDodge: Modo Eternidade: Esquivar reduzirá sua velocidade de ataque
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 60 seconds
 IceBarrier: Modo Eternidade: 10% de redução nos danos
 // SwordRework: Reworked broadsword swing animation
 // SpearRework: Reworked spear swing animation

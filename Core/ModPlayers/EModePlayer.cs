@@ -275,17 +275,17 @@ namespace FargowiltasSouls.Core.ModPlayers
             //}
         }
 
-        private void ShadowDodgeNerf()
+        /*private void ShadowDodgeNerf()
         {
             if (Player.shadowDodge && EmodeItemBalance.HasEmodeChange(Player, ItemID.HallowedPlateMail)) //prehurt hook not called on titanium dodge
                 Player.AddBuff(ModContent.BuffType<HolyPriceBuff>(), 600);
-        }
+        }*/
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            ShadowDodgeNerf();
+            //ShadowDodgeNerf();
 
             if (Player.resistCold && npc.coldDamage) //warmth potion nerf
             {
@@ -298,7 +298,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            ShadowDodgeNerf();
+            //ShadowDodgeNerf();
 
             if (Player.resistCold && proj.coldDamage) //warmth potion nerf
             {

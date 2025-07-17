@@ -14,7 +14,7 @@ Split: Reduced split frequency
 WaterBolt: Cannot be used until Skeletron is defeated
 SpaceGun: Cannot be used until an evil boss is defeated
 DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: Holy Dodge activation will temporarily reduce your attack speed
+HolyDodge: Dodge cooldown increased to 60 seconds
 FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
 BrainOfConfusion: Halved dodge chance
 ZenithNone: No nerfs in effect
@@ -34,7 +34,7 @@ ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed
 ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 MinionStack: Damage of minions diminishes when summoning over 3 copies (effect caps at 12)
 SummonMulticlass: Summon damage decreases when you attack using other classes (except in OOA)
-ShadowDodge: Eternity Mode: Dodging will reduce your attack speed
+ShadowDodge: Eternity Mode: Dodge cooldown increased to 60 seconds
 IceBarrier: Eternity Mode: 10% reduced damage
 SwordRework: Reworked broadsword swing animation
 SpearRework: Reworked spear swing animation
