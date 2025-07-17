@@ -189,7 +189,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //if (terraForce)
             //modPlayer.TungstenCD = 40; // effectively just removes the CD effect
 
-            if (TungstenNeverAffectsProj(projectile))
+            if (TungstenNeverAffectsProj(projectile) || !projectile.DamageType.CountsAsClass(DamageClass.Melee))
             {
                 return 0f;
             }
