@@ -122,9 +122,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 modifiers.FinalDamage *= MathHelper.Lerp(1f, 0.85f, ratio);
             }
 
-            if (CerebralMindbreak)
-                modifiers.FinalDamage *= 0.7f;
-
             if (FirstStrike)
             {
                 modifiers.SetCrit();

@@ -16,7 +16,6 @@ WaterBolt: Não pode ser usado até que Esqueletron seja derrotado
 // DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
 // HolyDodge: Dodge cooldown increased to 60 seconds
 // FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
-BrainOfConfusion: Reduz o seu dano ao efetuar uma esquiva
 ZenithNone: Nenhum enfraquecimento em vigor
 ZenithHitRate: "Taxa de acerto consideravelmente reduzida, melhora ao derrotar: "
 VampireKnives: Reduz a taxa de roubo de vida quando acima de 33% de vida

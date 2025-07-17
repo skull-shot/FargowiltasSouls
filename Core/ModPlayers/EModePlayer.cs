@@ -337,14 +337,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (modifiers.DamageSource.SourceProjectileType == ProjectileID.Explosives)
                 Player.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
 
-            if (Player.brainOfConfusionItem != null && !Player.brainOfConfusionItem.IsAir)
-            {
-                if (Main.rand.NextBool(2)) // 50% chance to not work
-                {
-                    Player.brainOfConfusionItem = null;
-                }
-            }
-
 
             base.ModifyHurt(ref modifiers);
         }

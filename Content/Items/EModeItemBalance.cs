@@ -70,12 +70,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["FrozenTurtleShell"];
                     return EModeChange.Nerf;
 
-                case ItemID.BrainOfConfusion:
-                    if (ModLoader.HasMod("CalamityMod"))
-                        return EModeChange.None;
-                    balanceTextKeys = ["BrainOfConfusion"];
-                    return EModeChange.Nerf;
-
                 case ItemID.Zenith:
                     if (WorldSavingSystem.DownedMutant || ModLoader.HasMod("CalamityMod"))
                     {
