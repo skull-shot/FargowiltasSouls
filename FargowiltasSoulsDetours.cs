@@ -80,7 +80,7 @@ namespace FargowiltasSouls
 
             On_Projectile.Damage -= PhantasmArrowRainFix;
 
-            On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
+            On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
         }
 
 
