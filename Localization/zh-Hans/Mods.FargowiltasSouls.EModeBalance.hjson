@@ -11,13 +11,11 @@ RodofDiscord: 混乱状态会降低你40%的伤害、防御和伤害减免
 ChaosState: 伤害、防御和伤害减免降低40%
 RodofHarmony: 在打败突变体后才能获取
 Split: 降低分裂频率
-ChlorophyteBullet: 速度减慢，存在时间降低
 WaterBolt: 在骷髅王被击败前无法使用
 SpaceGun: 在任意邪恶Boss被击败前无法使用
 DemonScythe: 任意邪恶Boss被击败前伤害和攻速会降低40%
-HolyDodge: 神圣防护激活后，一段时间内你的攻击速度会降低
-FrozenTurtleShell: 冰盾会略微降低你的攻击伤害
-BrainOfConfusion: 躲避几率减半
+// HolyDodge: Dodge cooldown increased to 60 seconds
+// FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
 ZenithNone: 无削弱
 ZenithHitRate: 造成伤害的频率大幅降低，通过击败下列Boss可提高其输出能力：
 VampireKnives: 生命值高于33%时削弱吸血能力
@@ -35,7 +33,7 @@ ViolentPrefix: 词缀效果调整：不再增加近战攻速，但增加全职�
 ManaPots: 魔力疾病期间无法使用，但是恢复速度提升50%
 MinionStack: 同时召唤超过3个相同召唤物时，它们的伤害会降低（超过12个后不再降低）
 SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降低（在撒旦军队中除外）
-ShadowDodge: 永恒模式：闪避会降低你的攻击速度
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 60 seconds
 IceBarrier: 永恒模式：你造成的伤害减少10%
 SwordRework: 重做阔剑挥舞动画
 SpearRework: 重做长矛挥舞动画

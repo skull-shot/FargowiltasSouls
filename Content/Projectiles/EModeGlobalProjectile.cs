@@ -146,11 +146,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.penetrate = -1;
                     break;
 
-                case ProjectileID.ChlorophyteBullet:
-                    projectile.extraUpdates = 1;
-                    projectile.timeLeft = 150;
-                    break;
-
                 case ProjectileID.CrystalBullet:
                 case ProjectileID.HolyArrow:
                 case ProjectileID.HallowStar:

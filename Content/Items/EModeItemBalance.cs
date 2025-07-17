@@ -70,12 +70,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["FrozenTurtleShell"];
                     return EModeChange.Nerf;
 
-                case ItemID.BrainOfConfusion:
-                    if (ModLoader.HasMod("CalamityMod"))
-                        return EModeChange.None;
-                    balanceTextKeys = ["BrainOfConfusion"];
-                    return EModeChange.Nerf;
-
                 case ItemID.Zenith:
                     if (WorldSavingSystem.DownedMutant || ModLoader.HasMod("CalamityMod"))
                     {
@@ -95,10 +89,6 @@ namespace FargowiltasSouls.Content.Items
                         extra = bossesToKill;
                         return EModeChange.Nerf;
                     }
-
-                case ItemID.ChlorophyteBullet:
-                    balanceTextKeys = ["ChlorophyteBullet"];
-                    return EModeChange.Nerf;
 
                 case ItemID.VampireKnives:
                     balanceTextKeys = ["VampireKnives"];
