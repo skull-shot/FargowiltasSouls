@@ -107,7 +107,9 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
-        public bool ArrowRain;
+        public bool ArrowRain; // whether this projectile is spawned by Red Riding Enchantment's arrow rain
+
+        public bool ApprenticeSupportProjectile;
 
         public static List<int> PureProjectile =
         [
@@ -296,6 +298,10 @@ namespace FargowiltasSouls.Content.Projectiles
                         TikiTimer += 180;
                         sourceProj3.FargoSouls().TikiTagged = false;
                     }
+                    if (sourceProj3.FargoSouls().ApprenticeSupportProjectile)
+                    {
+                        ApprenticeSupportProjectile = true; // inherit Apprentice Support tag if source is also a Support projectile
+                    }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
                 {
@@ -482,6 +488,15 @@ namespace FargowiltasSouls.Content.Projectiles
             // Fix for extended sword hitboxes having a maximum range for some reason
             if (projectile.aiStyle == ProjAIStyleID.NightsEdge)
                 projectile.ownerHitCheckDistance *= projectile.scale;
+
+            if (player.HasEffect<ApprenticeSupport>() && !(modPlayer.ApprenticeItemCD > 0)) // only run when the Apprentice Shoot method runs
+            {
+                // crosscheck the projectile's source item to see if it matches the Apprentice Support weapon that spawned it
+                if (source is EntitySource_ItemUse_WithAmmo parent4 && parent4.Item is Item sItem && FargoSoulsPlayer.ApprenticeSupportItem is not null && sItem == FargoSoulsPlayer.ApprenticeSupportItem)
+                {
+                    ApprenticeSupportProjectile = true; // tag it, meaning we now know that this projectile is from Apprentice Support effect
+                }
+            }
         }
 
         public static int[] NoSplit => [

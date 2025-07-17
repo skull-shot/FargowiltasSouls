@@ -151,7 +151,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                             int itemtime = player.itemTime;
                             int itemtimemax = player.itemTimeMax;
-                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]);
+                            FargoSoulsPlayer.ApprenticeSupportItem = item2; // capture the item being used as Apprentice Support
+                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]); // all the OnSpawn stuff already runs here
+                            FargoSoulsPlayer.ApprenticeSupportItem = null; // clear just in case, as the captured item should have already marked each possible projectile as Support
 
                             player.itemTime = itemtime;
                             player.itemTimeMax = itemtimemax;
