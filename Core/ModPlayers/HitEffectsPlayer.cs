@@ -21,6 +21,7 @@ using Terraria.Localization;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -340,6 +341,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (npc.FargoSouls().CurseoftheMoon)
                 dr += 0.2f;
 
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
+                dr -= 0.1f;
+
             dr += Player.AccessoryEffects().ContactDamageDR(npc, ref modifiers);
 
             ApplyDR(Player, dr, ref modifiers);
@@ -354,6 +358,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (proj.coldDamage && Hypothermia)
                 dr -= 0.2f;
+
+            if (CurseoftheMoon)
+                dr -= 0.2f;
+
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
+                dr -= 0.1f;
 
             if (Illuminated)
             {
