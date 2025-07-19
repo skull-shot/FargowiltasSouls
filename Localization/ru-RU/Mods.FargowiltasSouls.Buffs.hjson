@@ -804,6 +804,6 @@ SilverBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed Harmless Buff
-	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
 }

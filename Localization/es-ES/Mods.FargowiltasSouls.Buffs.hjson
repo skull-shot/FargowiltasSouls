@@ -795,7 +795,7 @@ TouhouHoardBuff: {
 
 BleedingOut: {
 	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	// Description: You're bleeding quickly!
 }
 
 SilverBuff: {
@@ -804,6 +804,6 @@ SilverBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed Harmless Buff
-	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
 }
