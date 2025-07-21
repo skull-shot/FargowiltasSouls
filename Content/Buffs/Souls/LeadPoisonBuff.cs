@@ -8,24 +8,22 @@ namespace FargowiltasSouls.Content.Buffs.Souls
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lead Poison");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "铅中毒");
         }
 
         public override void Update(NPC npc, ref int buffIndex)
         {
             npc.FargoSouls().LeadPoison = true;
-            if (npc.buffTime[buffIndex] == 2)
+            if (npc.buffTime[buffIndex] <= 45)
             {
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC spread = Main.npc[i];
 
-                    if (i != npc.whoAmI && spread != null && spread.active && !spread.townNPC && !spread.friendly && spread.lifeMax > 5 && Vector2.Distance(npc.Center, spread.Center) < 50)
+                    if (i != npc.whoAmI && !(spread.HasBuff<LeadPoisonBuff>() || spread.HasBuff<LeadPoisonSpreadBuff>()) && spread != null && spread.active && !spread.townNPC && !spread.friendly && spread.lifeMax > 5 && Vector2.Distance(npc.Center, spread.Center) < 50)
                     {
-                        spread.AddBuff(ModContent.BuffType<LeadPoisonBuff>(), 90);
+                        spread.AddBuff(ModContent.BuffType<LeadPoisonSpreadBuff>(), 90);
                     }
                 }
             }

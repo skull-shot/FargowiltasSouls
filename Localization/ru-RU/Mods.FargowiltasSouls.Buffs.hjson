@@ -591,6 +591,11 @@ LeadPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
+LeadPoisonSpreadBuff: {
+	DisplayName: Свинцовое отравление
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
+}
+
 MoltenAmplifyBuff: {
 	DisplayName: Литое усиление
 	Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff
