@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class SupremeDash : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_36";
 
         public override void SetStaticDefaults()
         {
@@ -153,7 +152,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 Color color26 = Projectile.GetAlpha(lightColor);
 
-                SpriteEffects effects = Projectile.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                SpriteEffects effects = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
                 float rotationOffset = Projectile.direction < 0 ? MathHelper.Pi : 0;
                 float scale = Projectile.scale * 1f;
                 Vector2 posOffset = Vector2.Zero;

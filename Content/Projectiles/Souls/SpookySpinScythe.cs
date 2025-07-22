@@ -146,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             }
             Projectile.rotation = Direction * rotation;
 
-            Projectile.scale = size;
+            Projectile.scale = 1;
             Projectile.width = Projectile.height = (int)(Diameter * size);
             Projectile.Center = player.MountedCenter;
         }
