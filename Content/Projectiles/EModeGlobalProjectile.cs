@@ -1270,7 +1270,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
                 case ProjectileID.DD2BetsyArrow:
                     if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _) && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.DD2BetsyBow)) //vanilla conditions for "airborne enemy"
-                        modifiers.FinalDamage *= 9.2f/12f; //results in 1.1x after vanilla 1.5x
+                        modifiers.FinalDamage *= 9.2f/12f; //results in 1.15x after vanilla 1.5x
                     break;
                 case ProjectileID.MoonlordTurretLaser:
                     modifiers.FinalDamage *= 0.5f;
