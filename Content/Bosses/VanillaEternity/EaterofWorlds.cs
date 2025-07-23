@@ -389,6 +389,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void DefaultMovement()
         {
             Vector2 targetPos = FindGround(NPC.Center.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
             int maxDistX = 400;
             targetPos.X = MathHelper.Clamp(targetPos.X, Target.Center.X - maxDistX, Target.Center.X + maxDistX);
             targetPos.X += Math.Abs(Target.Center.X - NPC.Center.X) * 0.4f; // inch slightly towards player
@@ -443,6 +444,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * 450 - Vector2.UnitY * 400;
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
 
             if (Timer >= 0) // first part
             {
@@ -464,7 +466,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Timer--;
 
                 bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
-                collision = collision || NPC.Center.Y > targetPos.Y;
+                collision = collision || NPC.Center.Y > targetPos.Y || (!Collision.CanHitLine(NPC.Center, 1, 1, Target.Center, 1, 1) && NPC.Center.Y > Target.Center.Y);
 
                 if (collision && Timer > -50)
                 {
@@ -526,6 +528,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int windup = 40;
             Vector2 targetPos = new(ExtraAI0, Target.Center.Y - 400);
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
             if (Timer >= 0) // first part
             {
                 if (Timer == 0)
@@ -571,6 +574,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         Timer = -1000;
                         NPC.position -= NPC.velocity / 2;
+                        NPC.velocity *= 0.75f;
                         Telegraph = true;
                     }
                     if (Timer <= -1000 && Timer >= -1000 - windup) // windup
@@ -620,7 +624,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                         }
 
-                        NPC.velocity.Y += 0.5f;
+                        NPC.velocity.Y += 0.3f;
                         bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
                         collision = collision || NPC.Center.Y > Target.Center.Y;
                         if (collision && Timer < -1000 - windup - 50)
@@ -638,6 +642,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int windup = 40;
             Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * (880 + ExtraAI0) - Vector2.UnitY * 400;
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
 
             if (Timer >= 0) // first part
             {
@@ -918,6 +923,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Point result = LumUtils.FindGroundVertical(p);
                 if (result.X > 0 && result.Y > 0 && WorldGen.InWorld(result.X, result.Y, 2))
                     return result;
+            }
+            return p;
+        }
+        public static Vector2 UnevenGroundFix(Vector2 p, Player target)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                if (p.Y < target.Bottom.Y || Collision.CanHitLine(p, 1, 1, target.Center, 1, 1))
+                    break;
+                p.Y -= 16;
             }
             return p;
         }
