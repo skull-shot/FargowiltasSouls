@@ -1530,7 +1530,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, you will create a trail of blood scythes
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 15% damage reduction
 		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
-		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, greatly increasing attack speed
+		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily
 		'Supremacy not necessarily guaranteed'
 		''' */
 }
