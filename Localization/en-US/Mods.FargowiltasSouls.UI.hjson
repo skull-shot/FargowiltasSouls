@@ -10,6 +10,12 @@ RightClickSelectDifficulty: Right Click to select difficulty
 HoldShift: Hold Shift to read more
 Close: Close
 OpenKeybinds: Open Keybinds
+
+TitleLinks: {
+	Patreon: Patreon
+	Github: Github
+}
+
 ExpandedStandard:
 	'''
 	Disables Eternity or Masochist Mode.
