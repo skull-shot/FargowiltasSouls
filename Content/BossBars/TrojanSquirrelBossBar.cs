@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.BossBars
 
             Rectangle bgFrame = Bars.Frame(verticalFrames: 3, frameY: 0);
             bgFrame.Width = Bars.Width();
-
+            
             Rectangle barFrame = Bars.Frame(verticalFrames: 3, frameY: 0);
             barFrame.X += topLeftOffset.X;
             barFrame.Y += topLeftOffset.Y;

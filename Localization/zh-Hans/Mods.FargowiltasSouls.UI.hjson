@@ -10,6 +10,12 @@ RightClickSelectDifficulty: 右键单击以选择难度
 HoldShift: 按住Shift阅读更多内容
 Close: 关闭
 OpenKeybinds: 打开控件页面
+
+TitleLinks: {
+	// Patreon: Patreon
+	// Github: Github
+}
+
 ExpandedStandard:
 	'''
 	禁用永恒或受虐模式
