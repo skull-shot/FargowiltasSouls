@@ -591,6 +591,11 @@ LeadPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
+LeadPoisonSpreadBuff: {
+	DisplayName: Lead Poison
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
+}
+
 MoltenAmplifyBuff: {
 	DisplayName: Molten Amplify
 	Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff

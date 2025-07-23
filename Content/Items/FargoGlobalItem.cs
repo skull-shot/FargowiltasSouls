@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.Map;
@@ -307,10 +308,10 @@ namespace FargowiltasSouls.Content.Items
             }
 
             if (item.IsWeapon() && player.HasAmmo(item) && !(item.mana > 0 && player.statMana < item.mana) //non weapons and weapons with no ammo begone
-                && item.type != ItemID.ExplosiveBunny && item.type != ItemID.Cannonball
-                && item.useTime > 0 && item.createTile == -1 && item.createWall == -1 && item.ammo == AmmoID.None)
+                && item.shoot == ProjectileID.None && !item.noMelee && item.useTime > 0 && item.createTile == -1 && item.createWall == -1)
             {
-                modPlayer.TryAdditionalAttacks(item.damage, item.DamageType);
+                int dmg = (int)(item.damage * player.ActualClassDamage(item.DamageType));
+                modPlayer.TryAdditionalAttacks(dmg, item.DamageType);
                 player.AccessoryEffects().TryAdditionalAttacks(item.damage, item.DamageType);
             }
 
@@ -396,54 +397,66 @@ namespace FargowiltasSouls.Content.Items
             }
             return base.UseItem(item, player);
         }
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+
+            if (item.IsWeapon() && player.HasAmmo(item) && !(item.mana > 0 && player.statMana < item.mana) //non weapons and weapons with no ammo begone
+            && item.useTime > 0 && item.createTile == -1 && item.createWall == -1 && item.ammo == AmmoID.None)
+            {
+                modPlayer.TryAdditionalAttacks(damage, item.DamageType);
+                player.AccessoryEffects().TryAdditionalAttacks(damage, item.DamageType);
+            }
+            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+        }
 
         //        public override bool AltFunctionUse(Item item, Player player)
         //        {
         //            FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-        //            if (modPlayer.WoodEnchant)
-        //            {
-        //                switch (item.type)
-        //                {
-        //                    case ItemID.Bunny:
-        //                    case ItemID.Bird:
-        //                    case ItemID.BlueJay:
-        //                    case ItemID.Cardinal:
-        //                        return true;
+            //            if (modPlayer.WoodEnchant)
+            //            {
+            //                switch (item.type)
+            //                {
+            //                    case ItemID.Bunny:
+            //                    case ItemID.Bird:
+            //                    case ItemID.BlueJay:
+            //                    case ItemID.Cardinal:
+            //                        return true;
 
-        //                }
-        //            }
+            //                }
+            //            }
 
 
 
-        //            return base.AltFunctionUse(item, player);
-        //        }
+            //            return base.AltFunctionUse(item, player);
+            //        }
 
-        //        public override bool NewPreReforge(Item item)
-        //        {
-        //            /*if (Main.player[item.owner].FargoSouls().SecurityWallet)
-        //            {
-        //                switch(item.prefix)
-        //                {
-        //                    case PrefixID.Warding:  if (SoulConfig.Instance.walletToggles.Warding)  return false; break;
-        //                    case PrefixID.Violent:  if (SoulConfig.Instance.walletToggles.Violent)  return false; break;
-        //                    case PrefixID.Quick:    if (SoulConfig.Instance.walletToggles.Quick)    return false; break;
-        //                    case PrefixID.Lucky:    if (SoulConfig.Instance.walletToggles.Lucky)    return false; break;
-        //                    case PrefixID.Menacing: if (SoulConfig.Instance.walletToggles.Menacing) return false; break;
-        //                    case PrefixID.Legendary:if (SoulConfig.Instance.walletToggles.Legendary)return false; break;
-        //                    case PrefixID.Unreal:   if (SoulConfig.Instance.walletToggles.Unreal)   return false; break;
-        //                    case PrefixID.Mythical: if (SoulConfig.Instance.walletToggles.Mythical) return false; break;
-        //                    case PrefixID.Godly:    if (SoulConfig.Instance.walletToggles.Godly)    return false; break;
-        //                    case PrefixID.Demonic:  if (SoulConfig.Instance.walletToggles.Demonic)  return false; break;
-        //                    case PrefixID.Ruthless: if (SoulConfig.Instance.walletToggles.Ruthless) return false; break;
-        //                    case PrefixID.Light:    if (SoulConfig.Instance.walletToggles.Light)    return false; break;
-        //                    case PrefixID.Deadly:   if (SoulConfig.Instance.walletToggles.Deadly)   return false; break;
-        //                    case PrefixID.Rapid:    if (SoulConfig.Instance.walletToggles.Rapid)    return false; break;
-        //                    default: break;
-        //                }
-        //            }*/
-        //            return true;
-        //        }
+            //        public override bool NewPreReforge(Item item)
+            //        {
+            //            /*if (Main.player[item.owner].FargoSouls().SecurityWallet)
+            //            {
+            //                switch(item.prefix)
+            //                {
+            //                    case PrefixID.Warding:  if (SoulConfig.Instance.walletToggles.Warding)  return false; break;
+            //                    case PrefixID.Violent:  if (SoulConfig.Instance.walletToggles.Violent)  return false; break;
+            //                    case PrefixID.Quick:    if (SoulConfig.Instance.walletToggles.Quick)    return false; break;
+            //                    case PrefixID.Lucky:    if (SoulConfig.Instance.walletToggles.Lucky)    return false; break;
+            //                    case PrefixID.Menacing: if (SoulConfig.Instance.walletToggles.Menacing) return false; break;
+            //                    case PrefixID.Legendary:if (SoulConfig.Instance.walletToggles.Legendary)return false; break;
+            //                    case PrefixID.Unreal:   if (SoulConfig.Instance.walletToggles.Unreal)   return false; break;
+            //                    case PrefixID.Mythical: if (SoulConfig.Instance.walletToggles.Mythical) return false; break;
+            //                    case PrefixID.Godly:    if (SoulConfig.Instance.walletToggles.Godly)    return false; break;
+            //                    case PrefixID.Demonic:  if (SoulConfig.Instance.walletToggles.Demonic)  return false; break;
+            //                    case PrefixID.Ruthless: if (SoulConfig.Instance.walletToggles.Ruthless) return false; break;
+            //                    case PrefixID.Light:    if (SoulConfig.Instance.walletToggles.Light)    return false; break;
+            //                    case PrefixID.Deadly:   if (SoulConfig.Instance.walletToggles.Deadly)   return false; break;
+            //                    case PrefixID.Rapid:    if (SoulConfig.Instance.walletToggles.Rapid)    return false; break;
+            //                    default: break;
+            //                }
+            //            }*/
+            //            return true;
+            //        }
 
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {

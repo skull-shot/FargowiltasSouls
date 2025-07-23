@@ -299,7 +299,7 @@ LeadEnchant: {
 	// DisplayName: Lead Enchantment
 	/* Tooltip:
 		'''
-		You take 40% less from damage over time
+		You take 30% less from damage over time
 		Attacks inflict enemies with Lead Poisoning
 		Lead Poisoning deals damage over time and spreads to nearby enemies
 		'Not recommended for eating'
@@ -411,7 +411,7 @@ OrichalcumEnchant: {
 	// DisplayName: Orichalcum Enchantment
 	/* Tooltip:
 		'''
-		Your damaging debuffs deal 1.75x damage
+		Your damaging debuffs deal 75% more damage
 		Your attacks inflict Orichalcum Poison for a short duration
 		'Nature blesses you'
 		''' */
@@ -785,7 +785,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 2.5x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 150% more damage from debuffs
 		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
@@ -860,7 +860,7 @@ TerraForce: {
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
 		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
-		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
+		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
 		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds
@@ -1530,7 +1530,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, you will create a trail of blood scythes
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 15% damage reduction
 		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
-		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, greatly increasing attack speed
+		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily
 		'Supremacy not necessarily guaranteed'
 		''' */
 }
@@ -1771,7 +1771,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] Debuffs deal 150% more damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched

@@ -100,7 +100,7 @@ BulbKeyEffect: {
 	/* Tooltip:
 		'''
 		Instantly cures yourself of all debuffs
-		Amplifies debuff damage on enemies by 5x for a brief period of time
+		Amplifies debuff damage on enemies by 500% for a brief period of time
 		40 second cooldown, depletes faster while not attacking
 		''' */
 }

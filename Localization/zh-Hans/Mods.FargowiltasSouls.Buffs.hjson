@@ -591,6 +591,11 @@ LeadPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
+LeadPoisonSpreadBuff: {
+	DisplayName: 铅中毒
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
+}
+
 MoltenAmplifyBuff: {
 	DisplayName: 熔岩增幅
 	Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff

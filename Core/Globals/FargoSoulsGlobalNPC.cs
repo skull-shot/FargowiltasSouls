@@ -63,6 +63,7 @@ namespace FargowiltasSouls.Core.Globals
         //        public bool Shock;
         public bool Rotting;
         public bool LeadPoison;
+        public bool LeadPoisonSpread;
         public bool Needled;
         public bool SolarFlare;
         public bool TimeFrozen;
@@ -133,6 +134,7 @@ namespace FargowiltasSouls.Core.Globals
             //            Shock = false;
             Rotting = false;
             LeadPoison = false;
+            LeadPoisonSpread = false;
             SolarFlare = false;
             HellFire = false;
             HellFireMarked = false;
