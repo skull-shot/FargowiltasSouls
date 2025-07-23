@@ -139,8 +139,8 @@ DeviPresenceBuff: {
 }
 
 GrabbedBuff: {
-	DisplayName: Схвачен
-	Description: Долби по кнопкам передвижения, чтобы выбраться!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
 
 MutantFangBuff: {
@@ -422,8 +422,8 @@ ShadowflameBuff: {
 }
 
 SmiteBuff: {
-	DisplayName: Сражённый
-	Description: Регенерация здоровья снижена и вы получаете на 20% больше урона
+	DisplayName: Поражение
+	Description: Регенерация здоровья снижена, вы получаете на 20% больше урона
 }
 
 SqueakyToyBuff: {
@@ -799,8 +799,8 @@ TouhouHoardBuff: {
 }
 
 BleedingOut: {
-	DisplayName: Кровоточит
-	Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	DisplayName: Кровотечение
+	Description: Вы быстро кровоточите!
 }
 
 SilverBuff: {
@@ -809,6 +809,6 @@ SilverBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed
-	// Description: Mash movement keys to escape!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
