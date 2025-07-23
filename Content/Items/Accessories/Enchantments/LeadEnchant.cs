@@ -53,18 +53,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void ProcessLeadEffectLifeRegen(Player player)
         {
+            float debuffresistance = 0.7f;
+            if (player.FargoSouls().ForceEffect<LeadEnchant>())
+                debuffresistance = 0.5f;
             if (player.HasEffect<LeadEffect>())
-            {
-                if (player.FargoSouls().ForceEffect<LeadEnchant>())
-                {
-                    player.lifeRegen = (int)(player.lifeRegen * 0.4f);
-                }
-                else
-                {
-                    player.lifeRegen = (int)(player.lifeRegen * 0.6f);
-                }
-            }
-
+                player.lifeRegen = (int)(player.lifeRegen * debuffresistance);
         }
     }
     public class LeadPoisonEffect : AccessoryEffect

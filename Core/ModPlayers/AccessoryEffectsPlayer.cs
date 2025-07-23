@@ -210,7 +210,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
 
 
-        public void SpecialDashKey(bool heart = false)
+        public void SpecialDashKey(int type)
         {
             Player player = Main.player[Main.myPlayer];
             if (SpecialDashCD <= 0)
@@ -234,7 +234,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.itemTime = 0;
                     Player.reuseDelay = 0;
 
-                    if (player.HasEffect<BetsyDashEffect>() && heart)
+                    if (player.HasEffect<BetsyDashEffect>() && type == 2)
                     {
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
                         Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<BetsyDash>(), (int)(250 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
@@ -244,19 +244,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Player.hurtCooldowns[0] = Math.Max(Player.hurtCooldowns[0], 2);
                         Player.hurtCooldowns[1] = Math.Max(Player.hurtCooldowns[1], 2);
 
-                        //immune to all debuffs
-                        foreach (int debuff in FargowiltasSouls.DebuffIDs)
-                        {
-                            if (!Player.HasBuff(debuff))
-                            {
-                                Player.buffImmune[debuff] = true;
-                            }
-                        }
-
                         CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/BetsysHeart").Value, Color.OrangeRed, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(5), activeFunction: () => BetsysHeartItem != null);
                     }
-                    else if (player.HasEffect<SupremeDashEffect>())
+                    else if (player.HasEffect<SupremeDashEffect>() && type == 1)
                     {
                         SpecialDashCD += LumUtils.SecondsToFrames(1);
 
@@ -266,7 +257,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SupremeDeathbringerFairy").Value, Color.LightGray,
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
                     }
-                    else if (player.HasEffect<SpecialDashEffect>())
+                    else if (player.HasEffect<SpecialDashEffect>() && type == 0)
                     {
                         SpecialDashCD += LumUtils.SecondsToFrames(1);
 

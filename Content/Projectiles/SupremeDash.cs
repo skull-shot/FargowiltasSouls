@@ -12,11 +12,9 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class SupremeDash : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_36";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Dash");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -54,17 +52,12 @@ namespace FargowiltasSouls.Content.Projectiles
             player.dashDelay = 5;
             player.FargoSouls().IsDashingTimer = 0;
 
-            player.Center = Projectile.Center;
+            player.Center = Projectile.Center - Projectile.velocity;
             if (Projectile.timeLeft > 1) //trying to avoid wallclipping
                 player.position += Projectile.velocity;
             player.velocity = Projectile.velocity * .5f;
             if (Projectile.velocity.X != 0)
                 player.direction = Projectile.velocity.X > 0 ? 1 : -1;
-
-            /*player.controlLeft = false;
-            player.controlRight = false;
-            player.controlJump = false;
-            player.controlDown = false;*/
             player.controlUseItem = false;
             player.controlUseTile = false;
             player.controlHook = false;
@@ -79,13 +72,13 @@ namespace FargowiltasSouls.Content.Projectiles
             if (Projectile.localAI[0] == 0)
             {
                 Projectile.localAI[0] = 1;
-                SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
-                for (int i = 0; i < 30; i++)
+                SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, Projectile.Center);
+                /*for (int i = 0; i < 30; i++)
                 {
                     int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Bone, 0, 0, 0, default, 2.5f);
                     Main.dust[d].noGravity = true;
                     Main.dust[d].velocity *= 4f;
-                }
+                }*/
             }
         }
 
@@ -127,12 +120,13 @@ namespace FargowiltasSouls.Content.Projectiles
         }
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCHit2, Projectile.Center);
-            for (int i = 0; i < 30; i++)
+            SoundEngine.PlaySound(SoundID.DD2_SkeletonHurt, Projectile.Center);
+            for (int i = 0; i < 10; i++)
             {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Bone, 0, 0, 0, default, 2.5f);
+                int d = Dust.NewDust(Main.player[Projectile.owner].Center, Projectile.width, Projectile.height, DustID.Bone, 0, 0, 0, default, 1f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 4f;
+                Main.dust[d].velocity += Projectile.velocity;
             }
         }
 
@@ -153,7 +147,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 Color color26 = Projectile.GetAlpha(lightColor);
 
-                SpriteEffects effects = Projectile.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                SpriteEffects effects = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
                 float rotationOffset = Projectile.direction < 0 ? MathHelper.Pi : 0;
                 float scale = Projectile.scale * 1f;
                 Vector2 posOffset = Vector2.Zero;

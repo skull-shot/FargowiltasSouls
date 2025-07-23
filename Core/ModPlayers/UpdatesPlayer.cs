@@ -1,5 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Explosives;
 using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -14,6 +15,7 @@ using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -341,15 +343,25 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
             }
 
-            if (BetsysHeartItem != null || QueenStingerItem != null)
+            if (BetsysHeartItem != null || QueenStingerItem != null || Player.HasEffect<SupremeDashEffect>())
             {
                 if (SpecialDashCD > 0)
                     SpecialDashCD--;
                 if (SpecialDashCD == 1)
                 {
                     SoundEngine.PlaySound(SoundID.Item9, Player.Center);
-
-                    for (int i = 0; i < 30; i++)
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Color color = Color.Yellow;
+                        if (Player.HasEffect<BetsyDashEffect>())
+                            color = Color.OrangeRed;
+                        else if (Player.HasEffect<SupremeDashEffect>())
+                            color = Color.Lerp(Color.GhostWhite, Color.Transparent, 0.5f);
+                        Vector2 vel = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 10).RotatedByRandom(MathHelper.Pi / 10) * Main.rand.NextFloat(3, 8);
+                        Particle p = new SparkParticle(Player.Center, vel, color, 1, 30);
+                        p.Spawn();
+                    }
+                    /*for (int i = 0; i < 30; i++)
                     {
                         int dust = DustID.GemTopaz;
                         if (Player.HasEffect<SupremeDashEffect>())
@@ -357,7 +369,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         int d = Dust.NewDust(Player.position, Player.width, Player.height, dust, 0, 0, 0, default, 2.5f);
                         Main.dust[d].noGravity = true;
                         Main.dust[d].velocity *= 4f;
-                    }
+                    }*/
                 }
             }
             else

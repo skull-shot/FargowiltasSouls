@@ -23,33 +23,92 @@ namespace FargowiltasSouls.Content.BossBars
 
         public Asset<Texture2D> Bars;
 
-        public override Asset<Texture2D> GetIconTexture(ref Rectangle? iconFrame)
-        {
-            if (bossHeadIndex != -1)
-                return TextureAssets.NpcHeadBoss[bossHeadIndex];
-
-            return base.GetIconTexture(ref iconFrame);
-        }
-
         public override bool PreDraw(SpriteBatch spriteBatch, NPC npc, ref BossBarDrawParams drawParams)
-        {   
-            //bwaaaa
-
-            float lifeRatio = drawParams.Life / drawParams.LifeMax;
-
+        {
+            (Texture2D barTexture, Vector2 barCenter, _, _, Color iconColor, float life, float lifeMax, float shield, float shieldMax, float iconScale, bool showText, Vector2 textOffset) = drawParams;
+          
             Frame = ModContent.Request<Texture2D>("FargowiltasSouls/Content/BossBars/TrojanSquirrelFrame", AssetRequestMode.ImmediateLoad);
             Bars = ModContent.Request<Texture2D>("FargowiltasSouls/Content/BossBars/TrojanSquirrelBars", AssetRequestMode.ImmediateLoad);
 
-            Rectangle fillingRect = new(0, Bars.Height() / 2, (int)(Bars.Width() * lifeRatio), Bars.Height() / 2);
-            Rectangle backingRect = new(0, (Bars.Height() / 2) * 0, Bars.Width(), Bars.Height() / 2);
-            Rectangle frameRect = new(0, 0, Frame.Width(), Frame.Height());
+            int headTextureIndex = NPCID.Sets.BossHeadTextures[npc.type];
+            if (headTextureIndex == -1)
+            {
+                NPCLoader.BossHeadSlot(npc, ref headTextureIndex);
+                if (headTextureIndex == -1)
+                    return false;
+            }
 
-            spriteBatch.Draw(Bars.Value, drawParams.BarCenter + new Vector2(-4, 4), new Rectangle?(backingRect), Color.White, 0, backingRect.Size() / 2, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(Bars.Value, drawParams.BarCenter + new Vector2(26, 15), new Rectangle?(fillingRect), Color.White, 0, frameRect.Size() / 2, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(Frame.Value, drawParams.BarCenter - new Vector2(6, 0), new Rectangle?(frameRect), Color.White, 0, frameRect.Size() / 2, 1, SpriteEffects.None, 0);
+            float lifeRatio = LumUtils.Saturate(life / lifeMax);
 
-            spriteBatch.Draw(drawParams.IconTexture, drawParams.BarCenter + new Vector2(-260, -10), drawParams.IconFrame, Color.White, 0, Vector2.One, 1, SpriteEffects.None, 0);
-            Utils.DrawBorderString(spriteBatch, drawParams.Life + " / " + drawParams.LifeMax, drawParams.BarCenter + new Vector2(-54, -6), Color.White, 1f);
+            Texture2D iconTexture = TextureAssets.NpcHeadBoss[headTextureIndex].Value;
+            Rectangle iconFrame = iconTexture.Frame();
+
+            Point barSize = new(456, 22);
+            Point topLeftOffset = new(32, 24);          
+
+            Rectangle bgFrame = Bars.Frame(verticalFrames: 3, frameY: 0);
+            bgFrame.Width = Bars.Width();
+            
+            Rectangle barFrame = Bars.Frame(verticalFrames: 3, frameY: 0);
+            barFrame.X += topLeftOffset.X;
+            barFrame.Y += topLeftOffset.Y;
+            barFrame.Width = (int)(Bars.Width() * lifeRatio);
+            barFrame.Height = barSize.Y;
+
+            Rectangle barShieldFrame = Bars.Frame(verticalFrames: 3, frameY: 1);
+            barShieldFrame.X += topLeftOffset.X;
+            barShieldFrame.Y += topLeftOffset.Y;
+            barShieldFrame.Width = 2;
+            barShieldFrame.Height = barSize.Y;
+
+            Rectangle tipShieldFrame = Bars.Frame(verticalFrames: 3, frameY: 1);
+            tipShieldFrame.X += topLeftOffset.X;
+            tipShieldFrame.Y += topLeftOffset.Y;
+            tipShieldFrame.Width = 2;
+            tipShieldFrame.Height = barSize.Y;
+
+            Rectangle barPosition = Utils.CenteredRectangle(barCenter, barSize.ToVector2());
+            Vector2 barTopLeft = barPosition.TopLeft();
+            Vector2 topLeft = barTopLeft - topLeftOffset.ToVector2();
+
+            int shieldScale = (int)(barSize.X * shield / shieldMax);
+            shieldScale -= shieldScale % 2;
+
+            int lifeScale = (int)(barSize.X * life / lifeMax);
+            lifeScale -= lifeScale % 2;
+
+            // Background.
+            spriteBatch.Draw(Bars.Value, barTopLeft, bgFrame, Color.White, 0f, Vector2.Zero, 1f, 0, 0f);
+
+            //Vector2 stretchScale = new(scale / barFrame.Width, 1f);          
+            Main.spriteBatch.Draw(Bars.Value, barTopLeft, barFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
+            Main.spriteBatch.Draw(Bars.Value, barTopLeft + new Vector2(lifeScale - 2, 0f), tipShieldFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
+
+            // Bar itself (shield).
+            if (shield > 0f)
+            {
+                spriteBatch.Draw(Bars.Value, barTopLeft, barShieldFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
+                spriteBatch.Draw(Bars.Value, barTopLeft + new Vector2(shieldScale - 2, 0f), tipShieldFrame, Color.White, 0f, Vector2.Zero, 1f, 0, 0f);
+            }
+
+            // Frame.
+            Rectangle frameFrame = Frame.Frame(verticalFrames: 1, frameY: 0);
+            spriteBatch.Draw(Frame.Value, topLeft + new Vector2(0, 8), frameFrame, Color.White, 0f, Vector2.Zero, 1f, 0, 0f);
+
+            // Icon.
+            Vector2 iconOffset = new(4f, 20f);
+            Vector2 iconSize = new(26f, 28f);
+            Vector2 iconPosition = iconOffset + iconSize * 0.5f;
+            spriteBatch.Draw(iconTexture, topLeft + iconPosition, iconFrame, iconColor, 0f, iconFrame.Size() / 2f, iconScale, 0, 0f);
+
+            // Health text.
+            if (BigProgressBarSystem.ShowText && showText)
+            {
+                if (shield > 0f)
+                    BigProgressBarHelper.DrawHealthText(spriteBatch, barPosition, textOffset, shield, shieldMax);
+                else
+                    BigProgressBarHelper.DrawHealthText(spriteBatch, barPosition, textOffset, life, lifeMax);
+            }
             return false;
         }
         public override bool? ModifyInfo(ref BigProgressBarInfo info, ref float life, ref float lifeMax, ref float shield, ref float shieldMax)/* tModPorter Note: life and shield current and max values are now separate to allow for hp/shield number text draw */

@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             if (stunned)
                 return;
-            player.FargoSouls().SpecialDashKey(true);
+            player.FargoSouls().SpecialDashKey(2);
         }
     }
 }
