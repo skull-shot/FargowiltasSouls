@@ -115,6 +115,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public static int MaxSubjects => 9;
 
+        public int HopGravityTimer = 0;
+
         public override bool SafePreAI(NPC npc)
         {
             NPC = npc;
@@ -231,12 +233,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int endlag = 6;
             if (NPC.velocity.Y == 0)
             {
+                HopGravityTimer = 0;
                 if (hopTimer < hops) // start hop
                 {
                     NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * 14;
-                    int y = -12;
+                    float y = -12;
                     if (Target.Bottom.Y < NPC.Bottom.Y)
-                        y = -12;
+                    {
+                        float bonus = MathF.Pow((Target.Bottom.Y - NPC.Bottom.Y) / 600, 2) * 11;
+                        bonus = Math.Min(bonus, 22);
+                        y -= bonus;
+                    }
+                        
                     NPC.velocity.Y = y;
                     Timer++;
                 }
@@ -254,8 +262,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else
             {
+                HopGravityTimer++;
                 if (Target.Bottom.Y > NPC.Bottom.Y)
+                {
                     NPC.velocity.Y += 0.25f;
+                }
+                float gravityMod = 1.75f * LumUtils.Saturate(HopGravityTimer / 220f);
+                NPC.velocity.Y += gravityMod;
+
                 float horDir = NPC.HorizontalDirectionTo(Target.Center);
                 if (NPC.velocity.X.NonZeroSign() != horDir)
                     NPC.velocity.X += horDir * 0.5f;
@@ -329,6 +343,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.noGravity = false;
+                    NPC.position.Y -= 16;
+                }
+                    
                 if (NPC.velocity.Y == 0) // hit ground
                 {
                     Timer = slamPrepTime + 1;
@@ -338,6 +359,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
             {
                 Timer++;
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.position.Y -= 16;
+                }
                 NPC.noGravity = false;
                 if (Timer > slamPrepTime + endTime)
                     ResetToNeutral();
@@ -392,6 +418,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.noGravity = false;
+                    NPC.position.Y -= 16;
+                }
+                    
                 if (NPC.velocity.Y == 0) // hit ground
                 {
                     Timer = slamPrepTime + 1;
@@ -431,6 +464,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 Timer++;
                 NPC.noGravity = false;
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.position.Y -= 16;
+                }
             }
             else
             {
@@ -671,7 +709,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             ref float lockonX = ref AI0;
             ref float lockonY = ref AI1;
-            float startupTime = 30;
+            float startupTime = 60;
             float backdashTime = 15;
             float minionMinTime = 60;
             int endTime = 5;
