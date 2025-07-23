@@ -177,6 +177,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static float ComboHP => 0.8f;
 
         public bool Telegraph = false;
+        public bool ContactDamage = true;
 
         public enum Attacks
         {
@@ -213,7 +214,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (Main.getGoodWorld)
                 cooldownSlot = ImmunityCooldownID.Bosses;
-            if (Telegraph)
+            if (Telegraph || !ContactDamage)
                 return false;
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
@@ -320,6 +321,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptionThorns, vel.X, vel.Y);
             }
             Telegraph = false;
+            ContactDamage = true;
 
             if (!NPC.HasPlayerTarget)
                 return true;
@@ -564,6 +566,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     if (Timer % 2 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
@@ -684,6 +687,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -24 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     const float accelUp = 0.4f;
                     if (NPC.velocity.Y > -25)
                     {
@@ -822,6 +826,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     if (Timer % 2 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
