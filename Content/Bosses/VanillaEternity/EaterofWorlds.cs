@@ -483,12 +483,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         Timer = -1000;
                     }
-                    NPC.velocity *= 0.96f;
+                    NPC.velocity *= 0.967f;
+
+                    if (Timer > -1000 - 12 && Timer < -1000 - 1)
+                    {
+                        Vector2 dir = -Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+                    }
 
                     if (Timer > -1000 - 40 && Timer < -1000 - 15)
                     {
                         Vector2 dir = Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
-                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.13f);
                     }
                     if (Timer < -1000 - 40)
                         NPC.velocity = NPC.velocity.RotateTowards(NPC.DirectionTo(Target.Center).ToRotation(), 0.014f);
