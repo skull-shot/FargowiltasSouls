@@ -794,11 +794,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                     
             }
-            // no 0 allowed
-            if (myID >= 0)
-                myID++;
             int offsetIndex = myID - (heads / 2);
+            // no 0 allowed
+            if (offsetIndex == 0)
+                offsetIndex = 1;
             int side = Math.Sign(offsetIndex);
+
 
             Vector2 targetPos = new(Target.Center.X + 450 * side + 60 * offsetIndex, Target.Center.Y);
 
@@ -818,7 +819,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 float xDif = targetPos.X - NPC.Center.X;
 
                 targetPos.Y += UndergroundLength;
-                Movement(targetPos, 2.5f);
+                Movement(targetPos, 4f);
                 if (Timer >= 5 && Math.Abs(xDif) < 120)
                 {
                     Timer = -1;
