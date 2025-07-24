@@ -634,6 +634,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
 
                         NPC.velocity.Y += 0.3f;
+                        NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * 0.1f;
                         bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
                         collision = collision || NPC.Center.Y > Target.Center.Y;
                         if (collision && Timer < -1000 - windup - 50)
@@ -720,18 +721,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (Timer == -1000 - windup - 3)
                         {
                             int heads = CountHeads();
-                            if (WorldSavingSystem.MasochistModeReal && heads >= 4)
-                                heads = 3;
-                            if (heads < 4)
+                            if (heads > 4)
+                                heads = 4;
+                            if (WorldSavingSystem.MasochistModeReal && heads > 1)
+                                heads--;
+                            if (heads <= 4)
                             {
                                 int projCount;
                                 float width;
                                 if (heads == 1)
                                 {
+                                    projCount = 8;
+                                    width = 0.4f;
+                                }
+                                else if (heads == 2)
+                                {
                                     projCount = 6;
                                     width = 0.3f;
                                 }
-                                else if (heads == 2)
+                                else if (heads == 3)
                                 {
                                     projCount = 4;
                                     width = 0.2f;
@@ -741,7 +749,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     projCount = 2;
                                     width = 0.12f;
                                 }
-                                SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+                                    SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     for (float i = 0; i < projCount; i++)
@@ -749,7 +757,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                         float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
                                         Vector2 angle = NPC.velocity.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width).SafeNormalize(-Vector2.UnitY);
 
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(18, 24),
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(16, 22),
                                             ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                                     }
                                 }
