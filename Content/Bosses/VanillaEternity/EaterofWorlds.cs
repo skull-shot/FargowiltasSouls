@@ -850,11 +850,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Timer > -1000 && NPC.velocity.Y > -5)
                     {
                         Timer = -1000;
+                        ContactDamage = false;
                     }
                     if (Timer <= -1000 && Timer >= -1000 - windup) // windup
                     {
                         NPC.position -= NPC.velocity;
                         Telegraph = true;
+                        ContactDamage = false;
                     }
                     else // post windup
                     {
@@ -863,6 +865,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         int endTime = 17;
                         if ((Timer <= -1000 && Timer >= -1000 - windupTime) || (Timer <= -1000 - windupTime - chargeTime && Timer >= -1000 - windupTime * 2 - chargeTime))
                         {
+                            if (Timer >= -1000 - windupTime)
+                                ContactDamage = false;
                             Vector2 dir = NPC.DirectionTo(Target.Center);
                             NPC.velocity = Vector2.Lerp(NPC.velocity, dir * 3, 0.2f);
                             if (Timer == -1000 - windupTime || Timer == -1000 - windupTime - chargeTime - windupTime)
