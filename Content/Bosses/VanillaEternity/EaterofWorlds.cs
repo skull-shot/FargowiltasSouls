@@ -769,7 +769,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public void ComboAttack()
         {
-            int windup = 15;
+            int windup = 0;
 
             int heads = 0;
             bool foundyou = false;
@@ -989,7 +989,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     public class EaterofWorldsSegment : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail);
-
+        public bool ContactDamage = true;
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
@@ -1018,6 +1018,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 head = Main.npc[headID];
             if (head != null && head.Alive())
             {
+                ContactDamage = head.GetGlobalNPC<EaterofWorldsHead>().ContactDamage;
                 npc.timeLeft = 60 * 60;
                 EaterofWorldsHead headEternity = head.GetGlobalNPC<EaterofWorldsHead>();
                 /*
@@ -1032,6 +1033,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 */
             }
             return base.SafePreAI(npc);
+        }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!ContactDamage)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
         public override bool CheckDead(NPC npc)
         {
