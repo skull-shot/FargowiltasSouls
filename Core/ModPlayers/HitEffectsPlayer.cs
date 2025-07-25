@@ -1,27 +1,28 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
-using FargowiltasSouls.Content.Items.Armor;
-using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using Terraria.Audio;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Terraria.Localization;
-using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using Mono.Cecil;
+using System;
+using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -309,14 +310,20 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
-            float DRCap = 0.75f;
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode)
+            if (WorldSavingSystem.EternityMode && !ModLoader.HasMod("CalamityMod"))
             {
-                if (Player.endurance > DRCap)
-                {
-                    player.endurance = DRCap;
-                }
+                //float DRCap = 0.75f;
+                //if (Player.endurance > DRCap)
+                //    player.endurance = DRCap;
+
+                //Formula that emulates multiplicative DR scaling
+                //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
+                //The value of 15 % was chosen to make the scaling more lenient than a lower value would
+                // Only takes effect if your dr is larger than 0.15% (below this value the formula would scale UP your DR, actually)
+                float r = 0.15f;
+                if (player.endurance >= r)
+                    player.endurance = 1 - MathF.Pow(1 - r, player.endurance / r);
             }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)

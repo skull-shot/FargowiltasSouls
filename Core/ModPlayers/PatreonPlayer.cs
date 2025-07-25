@@ -217,7 +217,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
 
-                if (ModLoader.TryGetMod("CalamityMod", out Mod _))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
                     target.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
                 }

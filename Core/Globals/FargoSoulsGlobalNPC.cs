@@ -166,11 +166,14 @@ namespace FargowiltasSouls.Core.Globals
         public override void SetStaticDefaults()
         {
             //blightus deletus
-            if (ModContent.TryFind("CalamityMod", "MiracleBlight", out ModBuff miracleBlight))
+            if (FargowiltasSouls.CalamityMod != null)
             {
-                foreach (ModNPC npc in Mod.GetContent<ModNPC>())
+                if (FargowiltasSouls.CalamityMod.TryFind("MiracleBlight", out ModBuff miracleBlight))
                 {
-                    NPCID.Sets.SpecificDebuffImmunity[npc.Type][miracleBlight.Type] = true;
+                    foreach (ModNPC npc in Mod.GetContent<ModNPC>())
+                    {
+                        NPCID.Sets.SpecificDebuffImmunity[npc.Type][miracleBlight.Type] = true;
+                    }
                 }
             }
 
@@ -763,9 +766,9 @@ namespace FargowiltasSouls.Core.Globals
                 int dot = npc.type == NPCID.EaterofWorldsBody ? 4 : 16;
 
                 //calamity worms mod compat
-                if (ModLoader.HasMod("CalamityMod"))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
-                    if (ModContent.TryFind("CalamityMod", "DesertScourgeBody", out ModNPC scourgeBody) && npc.type == scourgeBody.Type)
+                    if (FargowiltasSouls.CalamityMod.TryFind("DesertScourgeBody", out ModNPC scourgeBody) && npc.type == scourgeBody.Type)
                     {
                         dot = 4;
                     }
@@ -897,7 +900,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (Slimed)
             {
-                if (!ModLoader.HasMod("CalamityMod"))
+                if (FargowiltasSouls.CalamityMod == null)
                     if (npc.onFire || npc.onFire2 || npc.onFire3 || npc.onFrostBurn || npc.onFrostBurn2 || npc.shadowFlame)
                         npc.lifeRegen -= 20;
             }

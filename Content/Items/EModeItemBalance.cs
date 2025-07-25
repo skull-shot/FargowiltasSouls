@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Nerf;
 
                 case ItemID.Zenith:
-                    if (WorldSavingSystem.DownedMutant || ModLoader.HasMod("CalamityMod"))
+                    if (WorldSavingSystem.DownedMutant || FargowiltasSouls.CalamityMod != null)
                     {
                         balanceTextKeys = ["ZenithNone"];
                         return EModeChange.Neutral;
