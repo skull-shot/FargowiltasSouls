@@ -10,7 +10,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.PlayerDrawLayers;

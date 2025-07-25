@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions;
@@ -773,6 +774,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DeathMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<ShadowForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<ShadowChampionRelic>()));

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
             Item.noMelee = true;
             Item.value = Item.sellPrice(0, 15);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.DamageType = DamageClass.Ranged;
         }
 

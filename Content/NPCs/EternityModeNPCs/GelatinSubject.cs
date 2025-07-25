@@ -183,7 +183,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         {
             modifiers.FinalDamage /= 5;
         }
-
+        public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+        {
+            if ((int)AIVariant == 1) // rain
+                return false;
+            return base.CanHitPlayer(target, ref cooldownSlot);
+        }
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Slimed, 180);

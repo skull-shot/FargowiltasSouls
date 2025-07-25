@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.width = 20;
             Item.height = 20;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.value = Item.sellPrice(0, 75);
         }
 

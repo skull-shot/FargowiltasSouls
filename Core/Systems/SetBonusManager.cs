@@ -1,6 +1,9 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Eridanus;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
+using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Armor.Gaia;
 using Terraria;
 using Terraria.ModLoader;
 

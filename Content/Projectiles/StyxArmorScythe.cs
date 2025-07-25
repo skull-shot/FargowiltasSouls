@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
@@ -155,7 +156,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override Color? GetAlpha(Color lightColor)
         {
-            Color color = (Projectile.ai[0] < 0 || Main.player[Projectile.owner].ownedProjectileCounts[Projectile.type] >= Items.Armor.StyxCrown.MAX_SCYTHES ? Color.Yellow : Color.Purple) * Projectile.Opacity;
+            Color color = (Projectile.ai[0] < 0 || Main.player[Projectile.owner].ownedProjectileCounts[Projectile.type] >= StyxCrown.MAX_SCYTHES ? Color.Yellow : Color.Purple) * Projectile.Opacity;
             color.A = 0;
             return color;
         }

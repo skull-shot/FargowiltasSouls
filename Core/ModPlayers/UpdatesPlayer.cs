@@ -7,7 +7,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;

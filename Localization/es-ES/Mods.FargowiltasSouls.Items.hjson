@@ -660,7 +660,7 @@ TitaniumEnchant: {
 	/* Tooltip:
 		'''
 		Attacking generates a defensive barrier of up to 20 titanium shards that deal melee damage
-		When you reach the maximum amount, you gain resistance to most debuffs on hit and 10-30% damage reduction
+		When you reach the maximum amount, you gain resistance to most debuffs on hit and reduce damage taken by 10-30%
 		Damage reduction increases the closer to the enemy you are when hit
 		Resistance effects remain for a few seconds after initial hit
 		This has a cooldown of 15 seconds, during which you cannot gain shards
@@ -2945,7 +2945,8 @@ Masochist: {
 		-Enables Master Mode drops
 		-New Eternity-exclusive item drops
 		-Deviantt provides a starter pack and progress-based advice
-		-Improves base stats and caps player DR at 75%
+		-Improves base stats
+		-Player damage reduction is now scaled to emulate multiplicative scaling: every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
 		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)

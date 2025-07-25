@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Armor;
+﻿using FargowiltasSouls.Content.Items.Armor.Eternal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             drawPosition += offset.Floor();
 
 
-            Texture2D FlameTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Armor/MutantMask", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D FlameTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Armor/Eternal/MutantMask", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
             if (++framecounter >= 8)
             {

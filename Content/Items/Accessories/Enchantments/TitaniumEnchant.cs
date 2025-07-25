@@ -52,14 +52,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<TitaniumEnchant>();
-
-        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, npc);
+            float dr = TitaniumDR(player, npc);
+            modifiers.FinalDamage *= 1 - dr;
         }
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, projectile);
+            float dr = TitaniumDR(player, projectile);
+            modifiers.FinalDamage *= 1 - dr;
         }
         public static float TitaniumDR(Player player, Entity attacker)
         {

@@ -201,9 +201,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!ModLoader.TryGetMod("FargowiltasCrossmod", out Mod soulsDLC))
             {
                 List<string> supportedMods = [];
-                if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
-                    supportedMods.Add(calamity.DisplayName);
+                    supportedMods.Add(FargowiltasSouls.CalamityMod.DisplayName);
                 }
                 if (ModLoader.TryGetMod("NoxusBoss", out Mod WotG))
                 {

@@ -111,7 +111,7 @@ namespace FargowiltasSouls
                         }
                     );
                 }
-                bool calamity = ModLoader.HasMod("CalamityMod");
+                bool calamity = FargowiltasSouls.CalamityMod != null;
                 Add("Boss",
                     "DeviBoss",
                     [ModContent.NPCType<DeviBoss>()],
