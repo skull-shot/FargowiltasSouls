@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
@@ -846,11 +847,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<LifeForce>()));
+
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.LifeDye>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<LifeChampionRelic>()));
 
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.LifeDye>()));
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
