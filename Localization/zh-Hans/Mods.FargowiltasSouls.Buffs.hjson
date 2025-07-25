@@ -385,11 +385,6 @@ PungentGazeBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	DisplayName: 涤荡
-	Description: 闪避效果不会生效
-}
-
 RefreshedBuff: {
 	DisplayName: 焕然一新
 	Description: 机动性提升，飞行时间延长

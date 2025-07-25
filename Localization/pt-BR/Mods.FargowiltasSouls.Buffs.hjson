@@ -385,11 +385,6 @@ PungentGazeBuff: {
 	// Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	// DisplayName: Purged
-	// Description: Dodge effects don't work
-}
-
 RefreshedBuff: {
 	// DisplayName: Refreshed
 	// Description: Increased mobility and flight time
@@ -423,7 +418,7 @@ ShadowflameBuff: {
 
 SmiteBuff: {
 	// DisplayName: Smite
-	// Description: Life regen reduced and 20% more damage taken
+	// Description: Increased damage taken by 20%, dodge effects don't work
 }
 
 SqueakyToyBuff: {

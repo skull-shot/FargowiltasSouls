@@ -385,11 +385,6 @@ PungentGazeBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	DisplayName: Святочищенный
-	Description: Эффекты уворота не действуют
-}
-
 RefreshedBuff: {
 	DisplayName: Освежение
 	Description: Мобильность и время полёта увеличены
