@@ -86,11 +86,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
         }
 
-        public static string DungeonVariant => 
-            GenVars.crackedType == TileID.CrackedBlueDungeonBrick ? "B" : 
-            GenVars.crackedType == TileID.CrackedGreenDungeonBrick ? "G" : 
-            "P";
-
         public static void LoadGolemSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
         {
             if (recolor)
@@ -98,7 +93,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (!fargoBuffer.ContainsKey(type))
                 {
                     fargoBuffer[type] = vanillaTexture[type];
-                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{DungeonVariant}") ?? vanillaTexture[type];
+                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{WorldSavingSystem.DungeonBrickType}") ?? vanillaTexture[type];
                 }
             }
             else
@@ -109,6 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     fargoBuffer.Remove(type);
                 }
             }
+            Main.NewText(WorldSavingSystem.DungeonBrickType);
         }
         public override void LoadSprites(NPC npc, bool recolor)
         {
