@@ -1560,7 +1560,7 @@ WyvernFeather: {
 	/* Tooltip:
 		'''
 		Grants immunity to Clipped Wings
-		You periodically shed light orbs, touch them to refresh your flight time
+		You periodically shed light orbs that refresh your flight time on pickup
 		Stabilizes gravity in space and liquids (works from inventory and vanity)
 		'Warm to the touch'
 		''' */
