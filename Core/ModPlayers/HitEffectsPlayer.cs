@@ -3,10 +3,11 @@ using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor.Nekomi;
-using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Content.Projectiles.Minions;
@@ -15,6 +16,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Mono.Cecil;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -309,12 +311,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode && !ModLoader.HasMod("CalamityMod"))
+            if (WorldSavingSystem.EternityMode && FargowiltasSouls.CalamityMod == null)
             {
-                //float DRCap = 0.75f;
-                //if (Player.endurance > DRCap)
-                //    player.endurance = DRCap;
-
                 //Formula that emulates multiplicative DR scaling
                 //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
                 //The value of 15 % was chosen to make the scaling more lenient than a lower value would
@@ -373,6 +371,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (CurseoftheMoon)
                 dr -= 0.2f;
+
+            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
+                dr -= 0.1f;
 
             if (Illuminated)
             {
