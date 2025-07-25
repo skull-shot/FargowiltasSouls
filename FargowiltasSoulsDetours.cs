@@ -25,6 +25,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls
 {
@@ -39,6 +40,8 @@ namespace FargowiltasSouls
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
             On_Main.DrawMenu += DrawMenu;
+
+            On_WorldGen.MakeDungeon += CheckBricks;
 
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
@@ -66,6 +69,8 @@ namespace FargowiltasSouls
             On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
             On_Main.DrawMenu -= DrawMenu;
 
+            On_WorldGen.MakeDungeon -= CheckBricks;
+
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
@@ -85,6 +90,15 @@ namespace FargowiltasSouls
             On_Projectile.Damage -= PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
+        }
+
+        private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
+        {
+            orig(x, y);
+            if (GenVars.crackedType == 482)
+                WorldSavingSystem.DungeonBrickType = "G";
+            if (GenVars.crackedType == 483)
+                WorldSavingSystem.DungeonBrickType = "P";
         }
 
 
