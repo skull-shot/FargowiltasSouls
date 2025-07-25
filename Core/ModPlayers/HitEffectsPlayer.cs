@@ -311,12 +311,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode && !ModLoader.HasMod("CalamityMod"))
+            if (WorldSavingSystem.EternityMode && FargowiltasSouls.CalamityMod == null)
             {
-                //float DRCap = 0.75f;
-                //if (Player.endurance > DRCap)
-                //    player.endurance = DRCap;
-
                 //Formula that emulates multiplicative DR scaling
                 //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
                 //The value of 15 % was chosen to make the scaling more lenient than a lower value would
