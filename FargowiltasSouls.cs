@@ -58,6 +58,7 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : Mod
     {
         public static Mod MutantMod;
+        public static Mod CalamityMod;
 
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
@@ -123,6 +124,7 @@ namespace FargowiltasSouls
         {
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
+            ModLoader.TryGetMod("CalamityMod", out CalamityMod);
 
 
             List<TitleLinkButton> titleLinks = fargoTitleLinks;

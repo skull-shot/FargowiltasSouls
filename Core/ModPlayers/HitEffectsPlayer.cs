@@ -310,9 +310,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
-            float DRCap = 0.75f;
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode && !ModLoader.HasMod("CalamityMod"))
+            if (WorldSavingSystem.EternityMode && FargowiltasSouls.CalamityMod == null)
             {
                 //float DRCap = 0.75f;
                 //if (Player.endurance > DRCap)
