@@ -312,12 +312,19 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             float DRCap = 0.75f;
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode)
+            if (WorldSavingSystem.EternityMode && !ModLoader.HasMod("CalamityMod"))
             {
-                if (Player.endurance > DRCap)
-                {
-                    player.endurance = DRCap;
-                }
+                //float DRCap = 0.75f;
+                //if (Player.endurance > DRCap)
+                //    player.endurance = DRCap;
+
+                //Formula that emulates multiplicative DR scaling
+                //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
+                //The value of 15 % was chosen to make the scaling more lenient than a lower value would
+                // Only takes effect if your dr is larger than 0.15% (below this value the formula would scale UP your DR, actually)
+                float r = 0.15f;
+                if (player.endurance >= r)
+                    player.endurance = 1 - MathF.Pow(1 - r, player.endurance / r);
             }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -338,9 +345,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (CurseoftheMoon)
                 dr -= 0.2f;
-
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                dr -= 0.1f;
 
             if (Illuminated)
             {
@@ -371,9 +375,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (CurseoftheMoon)
                 dr -= 0.2f;
-
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                dr -= 0.1f;
 
             if (Illuminated)
             {
