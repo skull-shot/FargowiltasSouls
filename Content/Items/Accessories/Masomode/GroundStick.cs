@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
         public override int ToggleItemType => ModContent.ItemType<GroundStick>();
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
             bool lightningskill = projectile.type == ModContent.ProjectileType<RemoteLightning>() || projectile.type == ModContent.ProjectileType<RemoteLightningExplosion>();
@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                 SoundEngine.PlaySound(SoundID.Item92, player.Center);
                 SoundEngine.PlaySound(SoundID.Item14, player.Center);
 
-                for (int i = 0; i < duration/80; i++)
+                for (int i = 0; i < duration / 80; i++)
                 {
                     Vector2 dir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) - player.velocity / 10;
                     Vector2 spd = Main.rand.NextVector2Circular(15, 15);
@@ -80,7 +80,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
                     p.Spawn();
                 }
             }
-            return dr;
+
+            modifiers.FinalDamage *= 1 - dr;
         }
     }
     public class ProbeMinionEffect : AccessoryEffect
