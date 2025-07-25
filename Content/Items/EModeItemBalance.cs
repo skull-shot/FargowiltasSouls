@@ -65,11 +65,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["HolyDodge"];
                     return EModeChange.Nerf;
 
-                case ItemID.FrozenTurtleShell:
-                case ItemID.FrozenShield:
-                    balanceTextKeys = ["FrozenTurtleShell"];
-                    return EModeChange.Nerf;
-
                 case ItemID.Zenith:
                     if (WorldSavingSystem.DownedMutant || FargowiltasSouls.CalamityMod != null)
                     {

@@ -15,7 +15,6 @@ WaterBolt: 在骷髅王被击败前无法使用
 SpaceGun: 在任意邪恶Boss被击败前无法使用
 DemonScythe: 任意邪恶Boss被击败前伤害和攻速会降低40%
 // HolyDodge: Dodge cooldown increased to 60 seconds
-// FrozenTurtleShell: Frozen barrier only gives 15% damage reduction
 ZenithNone: 无削弱
 ZenithHitRate: 造成伤害的频率大幅降低，通过击败下列Boss可提高其输出能力：
 VampireKnives: 生命值高于33%时削弱吸血能力

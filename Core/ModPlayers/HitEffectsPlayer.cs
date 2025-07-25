@@ -345,8 +345,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                dr -= 0.1f;
 
             if (Illuminated)
             {
