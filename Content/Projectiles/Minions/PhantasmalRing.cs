@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Armor;
+﻿using FargowiltasSouls.Content.Items.Armor.Eternal;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

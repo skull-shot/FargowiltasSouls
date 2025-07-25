@@ -65,11 +65,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
-            
-            
+
+
             modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
             {
-                
+
                 if (hitInfo.Crit)
                 {
                     if (UniverseCore) // cosmic core
@@ -85,8 +85,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
                     {
                         float critDamageMult = 0.75f; // 1f
-                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                            //critDamageMult *= 0.75f;
+                                                      //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                                                      //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
                         if (!EridanusSet && !Ambrosia)
@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
-                       
+
                 }
 
                 if (Hexed)
@@ -150,8 +150,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
+            //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+            //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {
@@ -488,8 +488,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo hurtInfo) =>
                 {
-                    if(hurtInfo.Damage <= 1) return;
-                    
+                    if (hurtInfo.Damage <= 1) return;
+
                     int scythesSacrificed = 0;
                     const int maxSacrifice = 4;
                     const double maxDR = 0.20;

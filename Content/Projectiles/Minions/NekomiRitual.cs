@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Armor;
+﻿using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
