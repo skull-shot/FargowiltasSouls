@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
 
         public override void SetStaticDefaults()
         {
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 6));
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 5));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
