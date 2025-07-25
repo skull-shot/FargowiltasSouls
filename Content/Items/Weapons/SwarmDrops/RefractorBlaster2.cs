@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Rarities;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.UseSound = null;
             Item.shootSpeed = 15f;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.shoot = ModContent.ProjectileType<RefractorBlaster2Held>();
             Item.noUseGraphic = true;
             Item.mana = 18;

@@ -8,7 +8,6 @@ using System;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
@@ -22,6 +21,8 @@ using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
