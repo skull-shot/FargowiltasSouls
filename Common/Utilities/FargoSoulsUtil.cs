@@ -510,11 +510,11 @@ namespace FargowiltasSouls //lets everything access it without using
             int n = NPC.NewNPC(source, (int)spawnPos.X, (int)spawnPos.Y, type, start, ai0, ai1, ai2, ai3, target);
             if (n != Main.maxNPCs)
             {
+                Main.npc[n].FargoSouls().CanHordeSplit = false;
                 if (velocity != default)
                 {
                     Main.npc[n].velocity = velocity;
                 }
-
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
             }
