@@ -59,6 +59,7 @@ namespace FargowiltasSouls
     {
         public static Mod MutantMod;
         public static Mod CalamityMod;
+        public static Mod MusicDisplay;
 
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
@@ -125,6 +126,7 @@ namespace FargowiltasSouls
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
             ModLoader.TryGetMod("CalamityMod", out CalamityMod);
+            ModLoader.TryGetMod("MusicDisplay", out MusicDisplay);
 
             List<TitleLinkButton> titleLinks = fargoTitleLinks;
             titleLinks.Add(MakeSimpleButton("TitleLinks.Discord", "https://discord.gg/fargo", 0));
