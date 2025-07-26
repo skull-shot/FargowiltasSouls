@@ -507,12 +507,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     hurtInfo.Damage = (int)(hurtInfo.Damage * (1.0f - (float)maxDR / maxSacrifice * scythesSacrificed));
                 };
             }
-
-            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && (modifiers.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (modifiers.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[modifiers.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
-            {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
-            }
         }
 
         public override void OnHurt(Player.HurtInfo info)
@@ -529,6 +523,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && !Player.HasBuff(ModContent.BuffType<TitaniumCDBuff>()))
             {
                 Player.AddBuff(ModContent.BuffType<TitaniumCDBuff>(), LumUtils.SecondsToFrames(15));
+            }
+
+            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
+            {
+                DeerSinewFreezeCD = 120;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
             }
 
             if (NekomiSet && NekomiHitCD <= 0)
