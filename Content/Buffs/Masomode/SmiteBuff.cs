@@ -18,6 +18,7 @@ namespace FargowiltasSouls.Content.Buffs.Masomode
         public override void Update(Player player, ref int buffIndex)
         {
             player.FargoSouls().Smite = true;
+            player.FargoSouls().noDodge = true;
         }
 
         public override void Update(NPC npc, ref int buffIndex)

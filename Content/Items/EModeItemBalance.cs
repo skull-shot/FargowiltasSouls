@@ -111,10 +111,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.6f;
                     return EModeChange.Nerf;
-                case ItemID.SuperStarCannon:
+                /*case ItemID.SuperStarCannon:
                     balanceTextKeys = ["SuperStarCannon"];
                     balanceNumber = 7;
-                    return EModeChange.Nerf;
+                    return EModeChange.Nerf;*/
 
                 case ItemID.CandyCornRifle:
                     balanceTextKeys = ["Damage"];

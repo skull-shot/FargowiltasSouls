@@ -19,7 +19,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
 {
     public class UndeadViking : EModeNPCBehaviour
     {
-        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.UndeadViking);
+        public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(
+            NPCID.UndeadViking,
+            NPCID.ArmoredViking
+        );
 
         public int AttackTimer;
 
@@ -47,7 +50,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
             AttackTimer++;
 
             // spawn proj
-            if (AttackTimer == 150)
+            if (AttackTimer == 150 || (npc.type == NPCID.ArmoredViking && AttackTimer > 150 && AttackTimer % 15 == 0))
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
@@ -56,12 +59,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                 }
                 SoundEngine.PlaySound(SoundID.Unlock);
             }
-
-            // sound cue
+            // end
             if (AttackTimer == 180)
             {
                 AttackTimer = 0;
-                SoundEngine.PlaySound(SoundID.Item1);
             }
             return base.SafePreAI(npc);
         }

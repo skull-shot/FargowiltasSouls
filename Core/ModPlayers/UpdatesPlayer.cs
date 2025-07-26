@@ -528,9 +528,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (IvyVenom && !Player.venom)
                 DamageOverTime(16, true);
 
-            if (Smite)
-                DamageOverTime(0, true);
-
             if (Anticoagulation)
                 DamageOverTime(4, true);
 

@@ -79,11 +79,7 @@ RemoteLightningEffect: {
 
 FrigidGemstoneKeyEffect: {
 	// DisplayName: Frigid Spell
-	/* Tooltip:
-		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
-		''' */
+	// Tooltip: Summons an ice block to your cursor
 }
 
 BombKeyEffect: {
@@ -100,7 +96,7 @@ BulbKeyEffect: {
 	/* Tooltip:
 		'''
 		Instantly cures yourself of all debuffs
-		Amplifies debuff damage on enemies by 500% for a brief period of time
+		Curses enemies, causing them to take 500% more damage from debuffs for 5 seconds
 		40 second cooldown, depletes faster while not attacking
 		''' */
 }

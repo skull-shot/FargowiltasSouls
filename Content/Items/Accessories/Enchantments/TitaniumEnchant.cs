@@ -105,6 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
                 int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
                 Main.projectile[sh].DamageType = DamageClass.Melee;
+                Main.projectile[sh].noEnchantmentVisuals = true;
                 player.titaniumStormCooldown = 10;
             }
             else if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] > 19)
