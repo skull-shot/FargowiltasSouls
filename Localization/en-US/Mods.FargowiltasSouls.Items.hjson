@@ -3386,7 +3386,7 @@ RazorContainer: {
 	Tooltip:
 		'''
 		Spawns a razor blade that hovers around your cursor
-		Hit it with a standard broadsword to send it flying
+		Hit it with a melee weapon to send it flying
 		While flying it always critically strikes and has increased armor penetration
 		'Some yellow fur is still stuck at the bottom' 
 		'''
