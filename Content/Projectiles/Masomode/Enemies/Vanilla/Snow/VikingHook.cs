@@ -15,6 +15,7 @@ using FargowiltasSouls.Content.Projectiles.Minions;
 using System.Runtime.InteropServices;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Core.Systems;
+using Terraria.Audio;
 
 namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
 {
@@ -45,7 +46,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
             NPC owner = Main.npc[(int)Projectile.ai[0]];
             if (!owner.active)
                 Projectile.Kill();
-
+            if (owner.type == NPCID.ArmoredViking)
+                maxRange = WorldSavingSystem.MasochistModeReal ? 800 : 600;
 
             float rot = (owner.Center - Projectile.Center).ToRotation();
             float dist = Projectile.Center.Distance(owner.Center);
@@ -57,6 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
                 if (Projectile.ai[1] == 0)
                 {
                     Projectile.velocity = 10 * Vector2.UnitX.RotatedBy(rot);
+                    SoundEngine.PlaySound(SoundID.Item1);
                 }
                 else
                 {
