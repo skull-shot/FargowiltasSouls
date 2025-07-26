@@ -22,11 +22,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 4);
 
-            Item.useTime = 180;
-            Item.useAnimation = 180;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f};
         }
 
         public static void PassiveEffects(Player player)
@@ -49,6 +49,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         {
             if (player.itemTime == player.itemTimeMax / 2 && player.lastDeathPostion != Vector2.Zero)
             {
+                player.immune = true;
+                player.immuneTime = 60;
                 for (int index = 0; index < 70; ++index)
                 {
                     int d = Dust.NewDust(player.position, player.width, player.height, DustID.GemTopaz, player.velocity.X * 0.5f, player.velocity.Y * 0.5f, 150, new Color(), 1.5f);
