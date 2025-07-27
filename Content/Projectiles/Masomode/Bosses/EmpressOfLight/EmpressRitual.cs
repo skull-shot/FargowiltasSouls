@@ -172,7 +172,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight
             var target = Main.LocalPlayer;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.ColorNoiseMap;
+            var diagonalNoise = FargoAssets.ColorNoiseMap;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
@@ -185,7 +185,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight
             if (ClientConfig.Instance.PhotosensitivityMode)
             {
                 timerDiv = 300f;
-                diagonalNoise = FargosTextureRegistry.PerlinNoise;
+                diagonalNoise = FargoAssets.PerlinNoise;
             }
 
             Color darkColor = enraged ? enragedColor : Main.hslToRgb((Timer / timerDiv + 0.5f) % 1f, 1f, 0.5f); // empress color

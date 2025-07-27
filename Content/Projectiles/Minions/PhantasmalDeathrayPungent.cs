@@ -154,7 +154,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
             // Set shader parameters.
             shader.TrySetParameter("mainColor", Color.LightSkyBlue);
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
             shader.TrySetParameter("stretchAmount", 0.25f);
             shader.TrySetParameter("scrollSpeed", 1f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);

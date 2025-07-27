@@ -223,7 +223,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.StingerTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.ColorNoiseMap.Value);
             float progress = 1 - (Projectile.ai[2] / TrailFadeTime);
             int num = (int)Math.Round(Projectile.oldPos.Length * progress);
             Vector2[] trail = Projectile.oldPos.Take(num).ToArray();

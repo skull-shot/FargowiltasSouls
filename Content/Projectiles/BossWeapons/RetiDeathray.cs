@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
             // Set shader parameters.
             shader.TrySetParameter("mainColor", Color.DarkRed);
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
             shader.TrySetParameter("stretchAmount", 0.5);
             shader.TrySetParameter("scrollSpeed", 4f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);

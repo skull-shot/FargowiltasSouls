@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.UI;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.UI;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;

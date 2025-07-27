@@ -164,7 +164,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.LifelightDeathray");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
 
             Vector2 start = Projectile.Center;
             Vector2 end = Projectile.Center + Projectile.velocity * Projectile.localAI[1];
@@ -174,16 +174,16 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 points[i] = Vector2.Lerp(start, end, (float)i / points.Length);
 
             shader.TrySetParameter("mainColor", Color.Pink);
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.SmokyNoise.Value);
-            FargoSoulsUtil.SetTexture2(FargosTextureRegistry.WavyNoise.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.SmokyNoise.Value);
+            FargoSoulsUtil.SetTexture2(FargoAssets.WavyNoise.Value);
 
             PrimitiveRenderer.RenderTrail(points, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 40);
             Vector2 drawPosition = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 30f - Main.screenPosition;
             float opacity = Utils.GetLerpValue(0f, 5f, Projectile.localAI[0], true);
             float scale = MathHelper.Lerp(0.05f, 0.175f, FargoSoulsUtil.SineInOut(Projectile.scale));
             // Draw a nice bloom flare.
-            Texture2D bloomFlare = FargosTextureRegistry.BloomFlareTexture.Value;
-            Texture2D bloom = FargosTextureRegistry.BloomParticleTexture.Value;
+            Texture2D bloomFlare = FargoAssets.BloomFlareTexture.Value;
+            Texture2D bloom = FargoAssets.BloomParticleTexture.Value;
             float rotation = Main.GlobalTimeWrappedHourly * 1.1f;
 
             Color bloomFlareColor1 = Color.OrangeRed with { A = 0 } * 0.7f;

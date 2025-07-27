@@ -103,8 +103,8 @@ namespace FargowiltasSouls.Common.Graphics.Drawers
             
 			// Prepare the shader.
 			var shader = ShaderManager.GetShader("FargowiltasSouls.EternitySoulWings");
-			FargoSoulsUtil.SetTexture1(FargosTextureRegistry.TurbulentNoise.Value);
-			FargoSoulsUtil.SetTexture2(FargosTextureRegistry.ColorNoiseMap.Value);
+			FargoSoulsUtil.SetTexture1(FargoAssets.TurbulentNoise.Value);
+			FargoSoulsUtil.SetTexture2(FargoAssets.ColorNoiseMap.Value);
 
 			shader.TrySetParameter("lightning", Color.White);
             shader.TrySetParameter("resolution", WingTarget.Target.Size() / 2);

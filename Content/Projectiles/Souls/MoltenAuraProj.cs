@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Projectiles
             float radius = Projectile.ai[0];
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
@@ -108,7 +108,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Vector2 auraPos = player.Center;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;

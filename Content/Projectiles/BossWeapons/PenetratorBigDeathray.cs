@@ -309,7 +309,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             // The laser should fade to white in the middle.
             Color brightColor = new(194, 255, 242, 100);
             shader.TrySetParameter("mainColor", brightColor);
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
 
             Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;

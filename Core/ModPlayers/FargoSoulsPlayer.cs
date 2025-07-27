@@ -24,6 +24,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler;
+using Fargowiltas.Content.UI;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;

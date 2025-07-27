@@ -91,7 +91,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Vector2 nearbyPosition = auraPos.DirectionTo(Main.MouseWorld); // * (innerRadius + outerRadius) / 2;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = 0.7f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
