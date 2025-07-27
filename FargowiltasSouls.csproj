@@ -24,10 +24,10 @@
     <None Remove="Assets\AutoloadedEffects\Shaders\NatureAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\SpiritAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\WillChampTrail.fx" />
-    <None Remove="Assets\ExtraTextures\Noise\CracksNoise.png" />
-    <None Remove="Assets\ExtraTextures\Noise\DottedNoise.png" />
-    <None Remove="Assets\ExtraTextures\Noise\SandyNoise.png" />
-    <None Remove="Assets\UI\OncomingMutantnt.png" />
+    <None Remove="Assets\Textures\Noise\CracksNoise.png" />
+    <None Remove="Assets\Textures\Noise\DottedNoise.png" />
+    <None Remove="Assets\Textures\Noise\SandyNoise.png" />
+    <None Remove="Assets\Textures\UI\OncomingMutantnt.png" />
     <None Remove="Content\Bosses\CursedCoffin\CursedCoffin_FTW.png" />
     <None Remove="Content\Items\Accessories\Masomode\LithosphericCluster.png" />
     <None Remove="Content\Items\Accessories\Masomode\LithosphericClusterInactive.png" />
@@ -67,9 +67,7 @@
     <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Gores\Weapons\LeashOfCthulhu\" />
-    <Folder Include="Assets\Gores\Weapons\BigSting\" />
-    <Folder Include="Assets\Gores\Weapons\Twinrangs\" />
+    <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Content\Projectiles\Masomode\Enemies\Vanilla\Crimson\" />
