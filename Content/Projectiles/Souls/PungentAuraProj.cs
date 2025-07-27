@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles
             float radius = Projectile.ai[0];
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.HoneycombNoise;
+            var diagonalNoise = FargoAssets.HoneycombNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;

@@ -145,7 +145,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
 
@@ -171,7 +171,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             Color drawColor = Projectile.GetAlpha(lightColor);
 
             SpriteEffects effects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-            Texture2D circle = FargosTextureRegistry.BloomTexture.Value;
+            Texture2D circle = FargoAssets.BloomTexture.Value;
             float circleScale = 0.35f * Projectile.scale;
             Vector2 circleOffset = normalizedVel * 4f * Projectile.scale;
             Main.EntitySpriteDraw(circle, Projectile.Center + circleOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, OrangeColor * 0.1f * Projectile.Opacity, Projectile.rotation, circle.Size() / 2f, circleScale, effects, 0);

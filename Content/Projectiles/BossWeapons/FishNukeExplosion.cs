@@ -99,8 +99,8 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D flare2 = FargosTextureRegistry.Smoke.Value;
-            Texture2D flare = FargosTextureRegistry.Scorch.Value;
+            Texture2D flare2 = FargoAssets.Smoke.Value;
+            Texture2D flare = FargoAssets.Scorch.Value;
 
             float smokesize = MathHelper.Lerp(0, 0.7f, vfxinterpolant * 0.07f);
 

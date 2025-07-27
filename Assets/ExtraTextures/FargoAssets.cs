@@ -5,8 +5,17 @@ using Terraria.ModLoader;
 // Base namespace for convinience
 namespace FargowiltasSouls.Assets.ExtraTextures
 {
-    public static class FargosTextureRegistry
+    public static class FargoAssets
     {
+        /// <summary>
+        /// Grabs the asset string of a texture.
+        /// </summary>
+        /// <param name="path">The folder structure associated with the asset.</param>
+        /// <param name="name">The name of the asset.</param>
+        public static string GetAssetString(string path, string name) => $"FargowiltasSouls/Assets/{path}/{name}";
+
+
+
         #region Additive Textures
         public static Asset<Texture2D> BlobBloomTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/BlobGlow");
         public static Asset<Texture2D> BloomTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/AdditiveTextures/Bloom");
@@ -57,5 +66,42 @@ namespace FargowiltasSouls.Assets.ExtraTextures
         public static Asset<Texture2D> MutantStreak => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Trails/MutantStreak");
         public static Asset<Texture2D> WillStreak => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Trails/WillStreak");
         #endregion
+
+        public class UI
+        {   
+            public static Asset<Texture2D> CooldownBarTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CooldownBar", AssetRequestMode.ImmediateLoad);
+            public static Asset<Texture2D> CooldownBarFillTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CooldownBarFill", AssetRequestMode.ImmediateLoad);
+            public static Asset<Texture2D> OncomingMutantnt => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutantnt", AssetRequestMode.ImmediateLoad);
+            public static Asset<Texture2D> OncomingMutantTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutant", AssetRequestMode.ImmediateLoad);
+            public static Asset<Texture2D> OncomingMutantAura => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/OncomingMutantAura", AssetRequestMode.ImmediateLoad);
+
+            public static Asset<Texture2D> EnchantSlotIcon => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/EnchantSlotIcon", AssetRequestMode.ImmediateLoad);
+
+            public class MainMenu
+            {
+                public static Asset<Texture2D> MenuLogo => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MenuLogo", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> MenuLogoGlow => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MenuLogo_Glow", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> ForgorMenuLogo => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ForgorMenuLogo", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> ForgorMenuLogoGlow => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ForgorMenuLogo_Glow", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> TitleLinkButtons => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/TitleLinkButtons", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> MutantWorldBorder => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MutantWorldBorder", AssetRequestMode.ImmediateLoad);
+            }
+
+            public class Toggler
+            {
+                public static Asset<Texture2D> SoulTogglerButtonTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/SoulTogglerToggle", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> SoulTogglerButton_MouseOverTexture => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/SoulTogglerToggle_MouseOver", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> CheckBox => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CheckBox", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> CheckMark => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/CheckMark", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> Cross => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/Cross", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> DisplayAllButton => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/DisplayAllButton", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> PresetCustom => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/PresetCustom", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> PresetMinimal => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/PresetMinimal", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> PresetOff => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/PresetOff", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> PresetOn => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/PresetOn", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> PresetOutline => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/PresetOutline", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> ReloadButton => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ReloadButton", AssetRequestMode.ImmediateLoad);
+            }
+        }
     }
 }

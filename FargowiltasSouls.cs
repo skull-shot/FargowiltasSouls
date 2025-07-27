@@ -5,6 +5,8 @@ global using LumUtils = Luminance.Common.Utilities.Utilities;
 using Fargowiltas;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
+using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
@@ -1090,7 +1092,7 @@ namespace FargowiltasSouls
         public static TitleLinkButton MakeSimpleButton(string textKey, string linkUrl, int horizontalFrameIndex)
         {   
             //yummy vanilla code 
-            Asset<Texture2D> val = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/TitleLinkButtons", (AssetRequestMode)1);
+            Asset<Texture2D> val = FargoAssets.UI.MainMenu.TitleLinkButtons;
             Rectangle value = val.Frame(4, 2, horizontalFrameIndex);
             Rectangle value2 = val.Frame(4, 2, horizontalFrameIndex, 1);
             value.Width--;

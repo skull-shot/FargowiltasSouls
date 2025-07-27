@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
             float arcWidth = ArcAngle * timeLerp;
 
             var blackTile = TextureAssets.MagicPixel;
-            var noise = FargosTextureRegistry.Techno1Noise;
+            var noise = FargoAssets.Techno1Noise;
             if (!blackTile.IsLoaded || !noise.IsLoaded)
             {
                 return false;

@@ -1791,7 +1791,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 float radius = 2000f;
                 var target = Main.LocalPlayer;
                 var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargosTextureRegistry.WavyNoise;
+                var diagonalNoise = FargoAssets.WavyNoise;
                 if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                     return false;
                 var maxOpacity = NPC.Opacity;
