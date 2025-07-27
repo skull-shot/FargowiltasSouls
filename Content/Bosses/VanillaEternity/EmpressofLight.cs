@@ -76,8 +76,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.empressBoss = npc.whoAmI;
             Ritual = false;
 
-            if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
+            if (Main.LocalPlayer.active && Main.dayTime && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
+                Main.LocalPlayer.FargoSouls().noDodge = true;
 
             bool useP2Attacks = npc.ai[3] != 0 || WorldSavingSystem.MasochistModeReal;
             switch ((int)npc.ai[0])

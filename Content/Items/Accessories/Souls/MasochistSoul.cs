@@ -33,11 +33,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             Item.value = 5000000;
             Item.defense = 30;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
         public static readonly Color ItemColor = new(255, 51, 153, 0);
         protected override Color? nameColor => ItemColor;

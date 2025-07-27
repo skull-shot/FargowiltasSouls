@@ -51,10 +51,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Northstrider;
 
         public bool RazorContainer;
+        public int RazorCD;
 
         public bool TouhouBuff;
-
-        public static readonly SoundStyle RazorContainerTink = new("FargowiltasSouls/Assets/Sounds/Accessories/RazorTink")  { PitchVariance = 0.25f };
 
         public override void SaveData(TagCompound tag)
         {
@@ -113,6 +112,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (CompOrbDrainCooldown > 0)
                 CompOrbDrainCooldown -= 1;
+            if (RazorCD > 0)
+                RazorCD--;
 
             switch (Player.name)
             {
@@ -332,11 +333,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             //}
         }
 
-        private int razorCD = 0;
-
         public override void MeleeEffects(Item item, Rectangle hitbox)
         {
-            if (RazorContainer && --razorCD <= 0)
+            if (RazorContainer)
             {
                 for (int i = 0; i < Main.projectile.Length; i++)
                 {
@@ -346,30 +345,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         if (Player.whoAmI == projectile.owner)
                         {
-                            Vector2 velocity = Vector2.Normalize((Main.MouseWorld - Player.Center)) * 30;
-
-                            for (int j = 0; j < 3; j++)
-                            {
-                                Vector2 pos = projectile.Center + Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2);
-                                Particle p = new SparkParticle(pos, Vector2.Normalize(pos - projectile.Center) * Main.rand.NextFloat(2, 5), Color.Lerp(Color.Orange, Color.Red, Main.rand.NextFloat()), 0.2f, 20);
-                                p.Spawn();
-                            }
-                            SoundEngine.PlaySound(RazorContainerTink with { Volume = 0.25f }, projectile.Center);
-                            projectile.velocity = velocity;
-                            projectile.ai[0] = 1;
-                            projectile.ai[1] = 0;
-                            projectile.ResetLocalNPCHitImmunity();
-                            projectile.netUpdate = true;
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, projectile.whoAmI);
+                            RazorBlade.Launch(Player, projectile);
                         }
                     }
                 }
-
-                razorCD = 30;
-
             }
-
-
         }
     }
 }

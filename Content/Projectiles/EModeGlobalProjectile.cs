@@ -198,10 +198,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.PhantasmalSphere:
                     EModeCanHurt = false;
                     break;
-                case ProjectileID.SuperStar:
+                /*case ProjectileID.SuperStar:
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
                         projectile.penetrate = 7;
-                    break;
+                    break;*/
                 case ProjectileID.WeatherPainShot:
                     projectile.idStaticNPCHitCooldown = 10;
                     projectile.penetrate = 45;

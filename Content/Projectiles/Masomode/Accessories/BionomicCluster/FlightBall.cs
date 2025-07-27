@@ -57,6 +57,8 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.BionomicClus
                         if (Projectile.Colliding(Projectile.Hitbox, Main.player[p].Hitbox))
                         {
                             Main.player[p].wingTime = Main.player[p].wingTimeMax;
+                            Main.player[p].rocketTime = Main.player[p].rocketTimeMax;
+                            Main.player[p].RefreshExtraJumps();
                             FargoGlobalItem.OnRetrievePickup(Main.player[p]);
                             Projectile.Kill();
                             return;

@@ -1402,9 +1402,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void PrepareMutantSword()
         {
-            if (AttackChoice == 9 && Main.LocalPlayer.active && NPC.Distance(Main.LocalPlayer.Center) < 3000f && Main.expertMode)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
-
             //can alternate directions
             int sign = AttackChoice != 9 && NPC.localAI[2] % 2 == 1 ? -1 : 1;
 
@@ -1483,9 +1480,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void MutantSword()
         {
-            if (AttackChoice == 9 && Main.LocalPlayer.active && NPC.Distance(Main.LocalPlayer.Center) < 3000f && Main.expertMode)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
-
             NPC.ai[3] += NPC.ai[2];
             NPC.direction = NPC.spriteDirection = Math.Sign(NPC.localAI[1]);
 
