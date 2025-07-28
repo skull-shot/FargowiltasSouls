@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Tiles;
-using Terraria.ID;
+﻿using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Placables
@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Items.Placables
         {
             Item.width = 50;
             Item.height = 34;
-            Item.maxStack = 999;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;

@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.noUseGraphic = false;
         }
 
