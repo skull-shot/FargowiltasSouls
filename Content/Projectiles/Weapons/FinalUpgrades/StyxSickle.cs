@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -145,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.ShadowFlame, 300);
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.MutantNibbleBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 }

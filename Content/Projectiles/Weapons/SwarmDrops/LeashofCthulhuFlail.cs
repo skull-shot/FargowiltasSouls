@@ -17,9 +17,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class LeashofCthulhuFlail : ModProjectile
     {
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuChain";
-        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuFlail";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuEye";
+        private const string ChainTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/SwarmWeapons/LeashofCthulhuChain";
+        private const string FlailTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/SwarmWeapons/LeashofCthulhuFlail";
+        private const string EyeTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/SwarmWeapons/LeashofCthulhuEye";
 
         private static Asset<Texture2D> chainTexture;
         private static Asset<Texture2D> EyeTexture;

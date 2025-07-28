@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Terraria;
 using Terraria.ID;
@@ -25,8 +26,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
         public static void ActiveEffects(Player player, Item item)
         {
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.SqueakyToyBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.GuiltyBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<SqueakyToyBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<GuiltyBuff>()] = true;
             player.AddEffect<SqueakEffect>(item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

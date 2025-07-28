@@ -17,11 +17,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantEyeOfCthulhu_April" :
-            "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_4";
+            "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_4";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Eye of Cthulhu");
             Main.projFrames[Projectile.type] = Main.npcFrameCount[NPCID.EyeofCthulhu];
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

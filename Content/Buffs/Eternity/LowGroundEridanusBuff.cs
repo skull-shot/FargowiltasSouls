@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
     public class LowGroundEridanusBuff : ModBuff
     {
         // This exists so you can't have immunity to it, and to only disable platforms and nothing else.
-        public override string Texture => "FargowiltasSouls/Content/Buffs/Masomode/LowGroundBuff";
+        public override string Texture => "FargowiltasSouls/Content/Buffs/Eternity/LowGroundBuff";
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;

@@ -21,12 +21,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public int counter;
         public bool spawnedHandle;
 
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Styx Gazer Blade");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

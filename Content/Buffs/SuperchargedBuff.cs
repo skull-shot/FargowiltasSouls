@@ -1,7 +1,3 @@
-using FargowiltasSouls.Content.Items.Accessories.Eternity;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -11,8 +7,6 @@ namespace FargowiltasSouls.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Supercharged");
-            // Description.SetDefault("20% increased move speed, 10% increased attack speed, your attacks electrify");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
@@ -150,7 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.CurseoftheMoonBuff>(), 360);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSpearThrownFriendly : PenetratorThrown
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/Penetrator";
 
         public override void SetDefaults()
         {

@@ -3,11 +3,14 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
 namespace FargowiltasSouls.Content.Items.Summons
 {
-    public class FragilePixieLamp : SoulsItem
+    [LegacyName("FragilePixieLamp")]   
+    
+    public class CrystallineEffigy : SoulsItem
     {
         public override void SetStaticDefaults()
         {

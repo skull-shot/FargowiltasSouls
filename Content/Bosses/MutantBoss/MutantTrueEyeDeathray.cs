@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 	public class MutantTrueEyeDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => $"FargowiltasSouls/Content/Projectiles/Deathrays/{(FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML")}";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML");
         public MutantTrueEyeDeathray() : base(90) { }
 
         public override void SetStaticDefaults()

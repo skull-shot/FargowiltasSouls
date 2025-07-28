@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.statLifeMax2 += player.statLifeMax / 10;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.BloodthirstyBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
             player.AddEffect<GuttedHeartEffect>(Item);
             player.AddEffect<GuttedHeartMinions>(Item);
         }

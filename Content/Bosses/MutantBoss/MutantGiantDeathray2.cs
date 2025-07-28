@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Phantasmal Deathray");
             ProjectileID.Sets.DismountsPlayersOnHit[Projectile.type] = true;
         }
 

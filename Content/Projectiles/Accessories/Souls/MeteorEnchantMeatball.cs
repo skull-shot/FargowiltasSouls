@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             //draw projectile
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             if (large)
-                texture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "MeteorEnchantMeatballWizard").Value;
+                texture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories/Souls", "MeteorEnchantMeatballWizard").Value;
 
             int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

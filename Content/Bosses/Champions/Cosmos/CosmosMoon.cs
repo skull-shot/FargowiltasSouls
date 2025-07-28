@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -230,7 +231,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             if (WorldSavingSystem.EternityMode)
             {
                 target.AddBuff(BuffID.BrokenArmor, 300);
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.CurseoftheMoonBuff>(), 300);
+                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 300);
             }
         }
 

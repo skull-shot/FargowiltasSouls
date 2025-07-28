@@ -54,11 +54,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/Penetrator";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,7 +10,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Eternity
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class MoonLordVortexOld : CosmosVortex
     {
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
             void Suck()
             {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && p.Distance(Projectile.Center) < suckRange && p.CountsAsClass(DamageClass.Ranged) && FargoSoulsUtil.CanDeleteProjectile(p) && p.type != ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.Minions.LunarCultistLightningArc>()))
+                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && p.Distance(Projectile.Center) < suckRange && p.CountsAsClass(DamageClass.Ranged) && FargoSoulsUtil.CanDeleteProjectile(p) && p.type != ModContent.ProjectileType<LunarCultistLightningArc>()))
                 {
                     //suck in nearby friendly projs
                     p.velocity = p.SafeDirectionTo(Projectile.Center) * p.velocity.Length();

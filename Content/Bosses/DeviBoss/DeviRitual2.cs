@@ -14,7 +14,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Deviantt Seal");
             base.SetStaticDefaults();
         }
 

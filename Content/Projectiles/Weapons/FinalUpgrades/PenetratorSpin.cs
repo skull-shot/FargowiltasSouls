@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -102,7 +103,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
                     {
                         //Vector2 offset = Main.projectile[i].Center - Main.player[Projectile.owner].Center;
                         //Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<Souls.IronParry>(), 0, 0f, Main.myPlayer, offset.X, offset.Y);
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.projectile[i].Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Accessories.Souls.IronParry>(), 0, 0f, Main.myPlayer);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.projectile[i].Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer);
                     }
 
                     Main.projectile[i].hostile = false;

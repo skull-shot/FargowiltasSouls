@@ -17,9 +17,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class PhantasmalFlail : ModProjectile
     {
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalLeashFlailChain";
-        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlail";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlailEye";
+        private const string ChainTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalLeashFlailChain";
+        private const string FlailTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlail";
+        private const string EyeTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlailEye";
 
         private static Asset<Texture2D> chainTexture;
         private static Asset<Texture2D> EyeTexture;

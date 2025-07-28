@@ -170,7 +170,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         [
             ModContent.ProjectileType<FishStickProjTornado>(),
             ModContent.ProjectileType<FishStickWhirlpool>(),
-            ModContent.ProjectileType<ReleasedLeashOfCthulhu>(),
+            ModContent.ProjectileType<ReleasedLeashofCthulhu>(),
             ProjectileID.ButchersChainsaw,
         ];
         public static List<int> TungstenNeverAffectProjStyle = 

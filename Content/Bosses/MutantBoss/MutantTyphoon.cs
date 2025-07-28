@@ -19,7 +19,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Razorblade Typhoon");
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

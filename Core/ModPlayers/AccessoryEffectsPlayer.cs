@@ -18,8 +18,6 @@ using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework.Graphics;
-using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Common.Graphics.Particles;

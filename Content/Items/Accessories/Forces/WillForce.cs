@@ -1,8 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.Toggler.Content;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;

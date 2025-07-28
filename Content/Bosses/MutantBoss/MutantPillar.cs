@@ -19,13 +19,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantPillar_April" :
-            "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Eternity/Bosses/LunaticCultist/CelestialPillar";
 
         private int target = -1;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Pillar");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

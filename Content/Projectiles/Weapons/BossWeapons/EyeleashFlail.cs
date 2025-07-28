@@ -18,9 +18,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class EyeleashFlail : ModProjectile
     {
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/EyeleashChain";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/EyeleashFlail";
-        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/EyeleashMouth";
+        private const string ChainTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/EyeleashChain";
+        private const string EyeTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/EyeleashFlail";
+        private const string FlailTexturePath = "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/EyeleashMouth";
 
         private static Asset<Texture2D> chainTexture;
         public static Asset<Texture2D> FlailTexture;

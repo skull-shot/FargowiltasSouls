@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[Terraria.ModLoader.ModContent.BuffType<Buffs.Masomode.InfestedBuff>()] = true;
+            player.buffImmune[Terraria.ModLoader.ModContent.BuffType<InfestedBuff>()] = true;
 
             // Bees
             player.npcTypeNoAggro[NPCID.Bee] = true;

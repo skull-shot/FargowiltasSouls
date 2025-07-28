@@ -1,3 +1,5 @@
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,7 +24,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
         private float rotspeed = 0;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/ChallengerItems/EnchantedLifebladeProjectile";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", "EnchantedLifebladeProjectile");
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Enchanted Lightblade");
@@ -175,7 +177,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 3);
         }
 
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 100) * Projectile.Opacity;

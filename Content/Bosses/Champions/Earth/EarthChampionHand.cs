@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using FargowiltasSouls.Core.Systems;
@@ -563,7 +564,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             if (WorldSavingSystem.EternityMode)
             {
                 target.AddBuff(BuffID.Burning, 300);
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.LethargicBuff>(), 300);
+                target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }
 

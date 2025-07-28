@@ -1,16 +1,8 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.VerdantDoomsayerMask;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Luminance.Core.Graphics;
-using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -44,9 +36,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.buffImmune[BuffID.CursedInferno] = true;
             player.buffImmune[BuffID.Ichor] = true;
             player.buffImmune[BuffID.Electrified] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.DefenselessBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.NanoInjectionBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.LightningRodBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             modPlayer.FusedLens = true;

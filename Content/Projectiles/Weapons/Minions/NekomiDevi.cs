@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class NekomiDevi : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Eternals/DevianttSoul";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/DeviBoss", "DevianttSoul");
 
         public override void SetStaticDefaults()
         {

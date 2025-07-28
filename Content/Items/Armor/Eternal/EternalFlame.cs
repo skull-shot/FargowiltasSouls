@@ -1,5 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
 using Fargowiltas.Content.Items.Vanity;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.PlayerDrawLayers;
@@ -21,6 +22,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eternal
     [LegacyName("MutantMask")]
     public class EternalFlame : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Eternal", Name);
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 4));

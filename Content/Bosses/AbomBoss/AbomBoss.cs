@@ -11,6 +11,7 @@ using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
@@ -637,14 +638,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             else if (NPC.ai[1] == 210)
                             {
                                 if (FargoSoulsUtil.HostCheck)
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Accessories.Souls.IronParry>(), 0, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer);
                                 NPC.netUpdate = true;
                             }
                         }
                         else if (NPC.ai[1] == 0) //basic tell
                         {
                             if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Accessories.Souls.IronParry>(), 0, 0f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer);
                         }
                     }
                     /*else

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 {
     public class LifeDeathray2 : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public LifeDeathray2() : base(WorldSavingSystem.MasochistModeReal ? 55 : 30) { }
 
         public override void SetStaticDefaults()

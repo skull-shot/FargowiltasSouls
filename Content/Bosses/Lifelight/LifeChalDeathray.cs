@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
         public PixelationPrimitiveLayer LayerToRenderTo => PixelationPrimitiveLayer.AfterProjectiles;
 
-		public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
 
         public LifeChalDeathray() : base(3600) { }
 

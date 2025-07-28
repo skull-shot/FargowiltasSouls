@@ -10,6 +10,7 @@ using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -674,7 +675,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         if (FargoSoulsUtil.HostCheck)
                         {
                             Vector2 spawnPos = NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height));
-                            int type = ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons.PhantasmalBlast>();
+                            int type = ModContent.ProjectileType<PhantasmalBlast>();
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
                         }
                     }

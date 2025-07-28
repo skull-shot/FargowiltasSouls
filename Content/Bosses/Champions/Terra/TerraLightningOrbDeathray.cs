@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 {
     public class TerraLightningOrbDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/TerraLightningOrbDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "TerraLightningOrbDeathray");
         public TerraLightningOrbDeathray() : base(1000, 0.8f) { }
 
         public override void SetStaticDefaults()

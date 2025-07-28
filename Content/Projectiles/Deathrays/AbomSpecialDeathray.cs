@@ -5,7 +5,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public abstract class AbomSpecialDeathray : BaseDeathray
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomSpecialDeathray");
         public AbomSpecialDeathray(int maxTime) : base(maxTime, sheeting: TextureSheeting.Horizontal) { }
 
         public override void SetStaticDefaults()

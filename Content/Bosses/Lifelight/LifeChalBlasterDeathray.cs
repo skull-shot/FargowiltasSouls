@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeChalBlasterDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
         public LifeChalBlasterDeathray() : base(40) { }
 
         public override void SetStaticDefaults()

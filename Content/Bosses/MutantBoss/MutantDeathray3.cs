@@ -19,16 +19,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 	public class MutantDeathray3 : BaseDeathray, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathray");
         public MutantDeathray3() : base(270, grazeCD: 30) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Blazing Deathray");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

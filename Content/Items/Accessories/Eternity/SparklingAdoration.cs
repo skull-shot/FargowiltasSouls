@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.UI.Elements;
@@ -40,7 +41,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
 
             player.buffImmune[BuffID.Lovestruck] = true;
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.LovestruckBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
 
             if (player.AddEffect<MasoGraze>(Item))
             {

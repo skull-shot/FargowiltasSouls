@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class AbomMinion : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Eternals/AbominationnSoul";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/AbomBoss", "AbominationnSoul");
 
         public override void SetStaticDefaults()
         {

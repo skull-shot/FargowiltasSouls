@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.useTime = 25;
             Item.knockBack = 4f;
             Item.noUseGraphic = true;
-            Item.shoot = ModContent.ProjectileType<LeashFlail>();
+            Item.shoot = ModContent.ProjectileType<EyeleashFlail>();
             Item.shootSpeed = 25f;
             Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;

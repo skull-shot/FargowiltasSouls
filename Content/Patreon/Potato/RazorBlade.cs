@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             for (int i = 0; i < Main.projectile.Length; i++)
             {
                 Projectile projectile = Main.projectile[i];
-                if (projectile.active && projectile.Distance(Projectile.Center) < 100 && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.Flail || projectile.type == ModContent.ProjectileType<SlimeKingSlasherProj>() || projectile.type == ModContent.ProjectileType<LeashFlail>()))
+                if (projectile.active && projectile.Distance(Projectile.Center) < 100 && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.Flail || projectile.type == ModContent.ProjectileType<SlimeKingSlasherProj>() || projectile.type == ModContent.ProjectileType<EyeleashFlail>()))
                 {
                     Launch(player, Projectile);
                 }

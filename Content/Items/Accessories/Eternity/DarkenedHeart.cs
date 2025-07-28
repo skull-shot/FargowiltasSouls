@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.RottingBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.moveSpeed += 0.1f;
             modPlayer.DarkenedHeartItem = Item;
             player.AddEffect<DarkenedHeartEaters>(Item);

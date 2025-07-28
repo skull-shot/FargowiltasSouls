@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -51,7 +52,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 3);
         }
 
         public override void OnKill(int timeLeft)

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -148,7 +149,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LightningRodBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
 
             if (Projectile.timeLeft > 0)
                 Projectile.Kill();

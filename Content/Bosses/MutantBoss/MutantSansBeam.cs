@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Boss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSansBeam : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/GolemBeam";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "GolemBeam");
         public MutantSansBeam() : base(420) { }
 
         public override bool CanHitPlayer(Player target)

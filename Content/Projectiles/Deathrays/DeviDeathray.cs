@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
-
-
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -129,7 +128,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 1.2f;

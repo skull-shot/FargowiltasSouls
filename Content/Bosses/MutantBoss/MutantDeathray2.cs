@@ -18,14 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     public class MutantDeathray2 : MutantSpecialDeathray, IPixelatedPrimitiveRenderer
     {
         public MutantDeathray2() : base(180) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return Projectile.scale >= .7f;

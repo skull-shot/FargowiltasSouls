@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Rarities;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -8,9 +9,10 @@ using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Items.Armor.Eternal
 {
     [AutoloadEquip(EquipType.Legs)]
-    [LegacyName("MutantBody")]
+    [LegacyName("MutantPants")]
     public class EternalLeggings : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Eternal", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

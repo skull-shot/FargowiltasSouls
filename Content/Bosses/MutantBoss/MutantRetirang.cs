@@ -13,11 +13,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantRetirang_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Retirang";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/Retirang";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Retirang");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Main.projFrames[Projectile.type] = 2; //because it uses the same sprite as the retirang.

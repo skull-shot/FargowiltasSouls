@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -41,7 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
         }
 
         public override Color? GetAlpha(Color lightColor)

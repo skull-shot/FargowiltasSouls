@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSlimeBall : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeBall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", "SlimeBall");
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Slime Rain");

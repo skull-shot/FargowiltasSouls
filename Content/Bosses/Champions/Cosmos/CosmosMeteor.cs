@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
     public class CosmosMeteor : ModProjectile, IPixelatedPrimitiveRenderer
     {
         private bool spawned;
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/MeteorEnchantMeatball";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "MeteorEnchantMeatball");
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Cosmic Meteor");

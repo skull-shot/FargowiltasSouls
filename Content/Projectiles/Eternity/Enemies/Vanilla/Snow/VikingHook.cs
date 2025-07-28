@@ -1,19 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ReLogic.Content;
 using Terraria.GameContent;
-using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using System.Runtime.InteropServices;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Core.Systems;
 using Terraria.Audio;
 

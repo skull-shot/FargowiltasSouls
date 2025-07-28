@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.DataStructures;
@@ -33,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             fargoPlayer.PureHeart = true;
 
             //darkened effect
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.RottingBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.moveSpeed += 0.1f;
             fargoPlayer.DarkenedHeartItem = Item;
             player.AddEffect<DarkenedHeartEaters>(Item);
@@ -41,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 fargoPlayer.DarkenedHeartCD--;
 
             //gutted effect
-            player.buffImmune[ModContent.BuffType<Buffs.Masomode.BloodthirstyBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
             player.statLifeMax2 += player.statLifeMax / 10;
             player.AddEffect<GuttedHeartEffect>(Item);
             player.AddEffect<GuttedHeartMinions>(Item);

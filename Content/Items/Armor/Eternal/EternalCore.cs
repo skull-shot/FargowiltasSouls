@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Rarities;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eternal
     [LegacyName("MutantBody")]
     public class EternalCore : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Eternal", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
