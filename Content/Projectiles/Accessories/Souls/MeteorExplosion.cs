@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -12,9 +13,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class MeteorExplosion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Explosion");
             Main.projFrames[Type] = 7;
         }
 

@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         const int MaxLength = 3000;
         int Length = 10;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
 
         public DeviDeathray() : base(60, drawDistance: 3500) { }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class Chlorofuck : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public const float Cooldown = 120f;
         public override void SetStaticDefaults()
         {

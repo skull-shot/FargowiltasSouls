@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
     public class CrystallineCongregationProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         private int RotDirect = 1;
 
         public bool home = true;

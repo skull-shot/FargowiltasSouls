@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Content.Projectiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class BeeFlower : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 5;
@@ -69,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture = Projectile.ai[2] == 1 ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Souls/BeeFlowerForce", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value: Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D texture = Projectile.ai[2] == 1 ? FargoAssets.GetTexture2D("Content/Projectiles/Accessories/Souls", "BeeFlowerForce").Value : Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
             int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

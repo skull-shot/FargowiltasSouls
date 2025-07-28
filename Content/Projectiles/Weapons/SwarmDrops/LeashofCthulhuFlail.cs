@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Luminance.Core.Graphics;
 using Luminance.Core.Sounds;
@@ -14,11 +15,11 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class MechFlail : ModProjectile
+    public class LeashofCthulhuFlail : ModProjectile
     {
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailChain";
-        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlail";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailEye";
+        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuChain";
+        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuFlail";
+        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/LeashofCthulhuEye";
 
         private static Asset<Texture2D> chainTexture;
         private static Asset<Texture2D> EyeTexture;
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public bool HasHitEnemy = false;
         public LoopedSoundInstance Loop;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "Empty");
 
         public int EyeTimer = 0;
         public int WaitTimer = 0;
@@ -154,7 +155,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                             vector55 *= Main.rand.Next(45, 65) * 0.1f;
                             vector55 = vector55.RotatedBy((Main.rand.NextDouble() - 0.5) * 1.5707963705062866);
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center.X, player.Center.Y, vector55.X, vector55.Y,
-                                ModContent.ProjectileType<MechEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                                ModContent.ProjectileType<LeashofCthulhuEyeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                             EyeTimer = 0;
                         }
 
@@ -387,7 +388,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
-                if (projectile.type == ModContent.ProjectileType<ReleasedMechFlail>() && projectile.active)
+                if (projectile.type == ModContent.ProjectileType<ReleasedLeashofCthulhu>() && projectile.active)
                 {
                     return;
                 }        
@@ -401,7 +402,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (modPlayer.LeashHit >= 3)
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
-                ModContent.ProjectileType<ReleasedMechFlail>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, -10f);
+                ModContent.ProjectileType<ReleasedLeashofCthulhu>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, -10f);
                 Projectile.Kill();
                 modPlayer.LeashHit = 0;
             }

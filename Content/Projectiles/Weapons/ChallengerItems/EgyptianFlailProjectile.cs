@@ -11,11 +11,13 @@ using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {
     public class EgyptianFlailProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.IsAWhip[Type] = true;

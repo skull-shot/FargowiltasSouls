@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
 {
     public class SupremeDash : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/SupremeDeathbringerFairy", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
 using FargowiltasSouls.Core.Globals;
@@ -14,11 +15,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class LunarCultist : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         Vector2 target;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lunar Cultist");
             Main.projFrames[Projectile.type] = 12;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 9;
@@ -361,7 +362,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
 
-            Texture2D texture2D14 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Minions/LunarCultistTrail", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D14 = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "LunarCultistTrail").Value;
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 3)
             {
                 Color color27 = color26;

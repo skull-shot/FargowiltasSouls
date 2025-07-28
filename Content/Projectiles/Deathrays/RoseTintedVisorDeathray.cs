@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
 	public class RoseTintedVisorDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public RoseTintedVisorDeathray() : base(30, drawDistance: 1000) { }
 

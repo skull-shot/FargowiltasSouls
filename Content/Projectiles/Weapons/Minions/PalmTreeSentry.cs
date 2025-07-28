@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -13,9 +14,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class PalmTreeSentry : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Palm Tree");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 

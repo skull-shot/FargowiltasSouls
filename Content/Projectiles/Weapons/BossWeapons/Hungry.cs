@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class Hungry : ModProjectile
     {
-        //public float modifier;
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
 
         public override void SetStaticDefaults()
         {

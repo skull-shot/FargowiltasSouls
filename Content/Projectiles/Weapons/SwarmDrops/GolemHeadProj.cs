@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
@@ -16,9 +17,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     internal class GolemHeadProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Golem Head");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

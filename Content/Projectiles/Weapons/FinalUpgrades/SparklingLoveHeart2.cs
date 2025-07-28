@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 
@@ -5,7 +6,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class SparklingLoveHeart2 : SparklingLoveHeart
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", "FakeHeart");
 
         public override void SetStaticDefaults()
         {

@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using System;
@@ -8,10 +8,11 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
+namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class Dash : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", Name);
         public override void SetDefaults()
         {
             Projectile.width = Player.defaultWidth;

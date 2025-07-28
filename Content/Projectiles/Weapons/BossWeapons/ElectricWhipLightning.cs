@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
 	public class ElectricWhipLightning : BaseDeathray
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public ref float Length => ref Projectile.ai[2];
         public ElectricWhipLightning() : base(30, drawDistance: 3500) { }
 

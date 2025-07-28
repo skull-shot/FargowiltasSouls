@@ -23,11 +23,11 @@ using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
 using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Accessories;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

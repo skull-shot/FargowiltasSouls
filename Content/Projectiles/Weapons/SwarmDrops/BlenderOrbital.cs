@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
@@ -11,11 +12,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     internal class BlenderOrbital : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public int Counter = 0;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Blender");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

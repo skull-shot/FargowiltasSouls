@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,9 +13,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class GrowingPumpkin : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Pumpkin");
             Main.projFrames[Projectile.type] = 5;
         }
 

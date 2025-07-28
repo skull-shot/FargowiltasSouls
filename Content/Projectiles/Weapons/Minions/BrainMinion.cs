@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,9 +9,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class BrainMinion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Brain Proj");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

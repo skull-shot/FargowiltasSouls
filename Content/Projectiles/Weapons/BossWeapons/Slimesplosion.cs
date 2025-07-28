@@ -3,11 +3,13 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class Slimesplosion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 5;

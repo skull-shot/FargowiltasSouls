@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
@@ -12,11 +13,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class DestroyerBody : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public int attackTimer;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Destroyer Body");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
@@ -64,7 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Minions/DestroyerBody_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "DestroyerBody_Glow").Value;
             int num214 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int y6 = num214 * Projectile.frame;
             Color color25 = Projectile.GetAlpha(Lighting.GetColor((int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16)));

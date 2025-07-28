@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using System;
@@ -10,9 +11,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class HellBonez : Bonez
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Hell Bonez");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

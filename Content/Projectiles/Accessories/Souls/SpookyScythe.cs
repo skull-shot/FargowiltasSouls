@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -9,9 +10,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class SpookyScythe : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Scythe");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
 

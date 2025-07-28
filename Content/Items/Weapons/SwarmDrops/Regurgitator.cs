@@ -1,4 +1,3 @@
-using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using System;
@@ -39,7 +38,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.value = Item.sellPrice(0, 10);
             Item.rare = ItemRarityID.Purple;
             Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<Hungry2>();
+            Item.shoot = ModContent.ProjectileType<RegurgitatorHungry>();
             Item.shootSpeed = 20f;
         }
 
@@ -55,8 +54,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             }
 
             float rotation = MathHelper.ToRadians(7) * (float)Math.Sin((counter + 0.2) * Math.PI / (FACTOR / 2));
-            Projectile.NewProjectile(source, position, velocity.RotatedBy(rotation) * 0.4f, ModContent.ProjectileType<FleshLaser>(), damage, knockback, player.whoAmI, ai0: 0);
-            Projectile.NewProjectile(source, position, velocity.RotatedBy(-rotation) * 0.4f, ModContent.ProjectileType<FleshLaser>(), damage, knockback, player.whoAmI, ai0: 1);
+            Projectile.NewProjectile(source, position, velocity.RotatedBy(rotation) * 0.4f, ModContent.ProjectileType<RegurgitatorLaser>(), damage, knockback, player.whoAmI, ai0: 0);
+            Projectile.NewProjectile(source, position, velocity.RotatedBy(-rotation) * 0.4f, ModContent.ProjectileType<RegurgitatorLaser>(), damage, knockback, player.whoAmI, ai0: 1);
 
             if (counter >= FACTOR) //reset
                 counter = 0;

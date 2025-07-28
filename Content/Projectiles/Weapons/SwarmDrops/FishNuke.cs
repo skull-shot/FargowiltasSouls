@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class FishNuke : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Type] = 1;

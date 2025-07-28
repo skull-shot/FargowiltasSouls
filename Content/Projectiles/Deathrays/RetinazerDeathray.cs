@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class RetinazerDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public RetinazerDeathray() : base(240/*, sheeting: TextureSheeting.Vertical*/) { }
 
         public override void SetStaticDefaults()

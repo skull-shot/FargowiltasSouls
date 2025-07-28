@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class SpectreSpirit : ModProjectile, IPixelatedPrimitiveRenderer
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 5;
@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             if (FoundTarget && TargetNPC != -1)
             {
-                Texture2D movingTexture = ModContent.Request<Texture2D>(Texture + "Flying").Value;
+                Texture2D movingTexture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "SpectreSpiritFlying").Value;
 
                 Rectangle rectangle = new(0, 0, movingTexture.Width, movingTexture.Height);
                 Vector2 origin = rectangle.Size() / 2f;

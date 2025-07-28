@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Armor.Eridanus;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Eridanus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -298,7 +299,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 Projectile.velocity.Y = cap * Math.Sign(Projectile.velocity.Y);
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) => target.AddBuff(ModContent.BuffType<Buffs.Masomode.CurseoftheMoonBuff>(), 360);
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) => target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
 
         public override bool? CanCutTiles() => false;
 

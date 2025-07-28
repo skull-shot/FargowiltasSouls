@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class GolemGib : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/GolemGib1";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", "GolemGib1");
 
         public override void SetStaticDefaults()
         {
@@ -134,11 +135,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             Texture2D tex;
             if (Projectile.ai[1] != 0)
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/" + GetType().Name + Projectile.ai[1]).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + Projectile.ai[1]).Value;
             }
             else
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/" + GetType().Name + 1).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + 1).Value;
             }
             FargoSoulsUtil.DrawTexture(Main.spriteBatch, tex, 0, Projectile, lightColor, true);
 

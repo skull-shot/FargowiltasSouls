@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
@@ -9,16 +10,15 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class Hungry2 : Hungry
+    public class RegurgitatorHungry : Hungry
     {
-        //public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/Hungry";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
 
         int baseWidth;
         int baseHeight;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Hungry");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

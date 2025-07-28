@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class PrismaRegaliaProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Prisma Regalia");

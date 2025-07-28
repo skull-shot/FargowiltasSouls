@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class FishStickProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Fish Stick");

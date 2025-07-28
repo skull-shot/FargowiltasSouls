@@ -15,7 +15,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Top Hat Squirrel");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

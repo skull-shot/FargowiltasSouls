@@ -7,12 +7,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
     public class TopHatSquirrelLaser : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_257";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Squirrel's Judgement");
-        }
-
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.PurpleLaser);

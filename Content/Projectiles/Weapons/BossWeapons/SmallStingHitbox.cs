@@ -7,12 +7,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
     public class SmallStingHitbox : ModProjectile
     {
         public override string Texture => FargoSoulsUtil.EmptyTexture;
-
-        public override void SetStaticDefaults()
-        {
-
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 30;

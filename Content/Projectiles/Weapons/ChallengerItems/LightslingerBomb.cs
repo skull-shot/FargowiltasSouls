@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,9 +12,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
     public class LightslingerBomb : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Light Bomb");
+       
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

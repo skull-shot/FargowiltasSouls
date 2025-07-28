@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class SpazmaglaiveExplosion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetDefaults()
         {
             Projectile.width = 30;
@@ -25,12 +27,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public int timer;
         public float lerp = 0.12f;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Cursed Inferno");
-        }
-
         public override void AI()
         {
             NPC target = Main.npc[(int)Projectile.ai[1]];

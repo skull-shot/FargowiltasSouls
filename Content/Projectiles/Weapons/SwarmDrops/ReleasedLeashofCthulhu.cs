@@ -16,12 +16,13 @@ using Terraria.DataStructures;
 using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 using FargowiltasSouls.Assets.Sounds;
 using System.Threading;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class ReleasedMechFlail : ModProjectile
+    public class ReleasedLeashofCthulhu : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         private float speed;
         private int DashTimer = 0;
         private int DashAmount = 0;

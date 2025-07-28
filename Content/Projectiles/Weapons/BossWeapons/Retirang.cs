@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using Luminance.Assets;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -17,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class Retirang : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         int counter;
         int returntime;
 

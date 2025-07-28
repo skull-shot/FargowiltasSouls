@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
     {
         private bool launchArrow = true;
 
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Arrow Rain");

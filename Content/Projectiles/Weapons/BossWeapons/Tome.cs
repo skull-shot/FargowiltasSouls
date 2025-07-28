@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Weapons.BossDrops;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,6 +14,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class Tome : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
+
         #region References
         /*
          * 0 = initial deployment

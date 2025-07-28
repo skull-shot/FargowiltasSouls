@@ -5,16 +5,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
+namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class FleshLaser : ModProjectile
+    public class RegurgitatorLaser : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_100";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Red Laser");
-        }
 
         public override void SetDefaults()
         {

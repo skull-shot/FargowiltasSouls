@@ -18,14 +18,15 @@ using FargowiltasSouls.Core;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
     public class GlowLine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Glow Line");
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
 

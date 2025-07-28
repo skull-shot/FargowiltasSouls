@@ -15,9 +15,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class BigStinger : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Big Stinger");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 1;
             Main.projFrames[Projectile.type] = 2;
@@ -225,7 +225,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 num161++;
             }*/
 
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/BigStingerGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "BigStingerGlow").Value;
 
             Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0.5f, Projectile.gfxOffY - 0.1f), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.Orange, Projectile.rotation, origin2, Projectile.scale * 1.1f * Main.cursorScale, spriteEffects, 0);
 

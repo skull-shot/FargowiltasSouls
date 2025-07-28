@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Accessories;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Patreon.Catsounds

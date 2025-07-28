@@ -17,6 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class SmallStinger : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Small Stinger");
@@ -193,7 +194,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 }
             }*/
 
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SmallStingerGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/BossWeapons", "SmallStingerGlow").Value;
 
             Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0.5f, Projectile.gfxOffY - 0.1f), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.Orange, Projectile.rotation, origin2, Projectile.scale * 1.1f * Main.cursorScale, spriteEffects, 0);
             Main.EntitySpriteDraw(texture2D3, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);

@@ -9,6 +9,7 @@ using ReLogic.Content;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using System.IO;
 using Mono.Cecil;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {

@@ -10,12 +10,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
     public class FossilBone : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_21";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Fossil Bone");
-        }
-
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Bone);

@@ -8,11 +8,13 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using System.Linq;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class ElectricWhipProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.IsAWhip[Type] = true;

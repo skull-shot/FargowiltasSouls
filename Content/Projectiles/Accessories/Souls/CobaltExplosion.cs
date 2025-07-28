@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class CobaltExplosion : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Explosion");

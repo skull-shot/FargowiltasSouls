@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
@@ -11,9 +12,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class EaterTail : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Eater Tail");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
 
             EModeGlobalProjectile.IgnoreMinionNerf[Type] = true;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class PalmwoodShot : ModProjectile
     {
-
-        public override void SetStaticDefaults()
-        {
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetDefaults()
         {
             Projectile.width = 24;
@@ -61,7 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D tex = Projectile.ai[2] == 0 ? TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>(Texture + "2").Value;
+            Texture2D tex = Projectile.ai[2] == 0 ? TextureAssets.Projectile[Type].Value : FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "PalmwoodShot2").Value;
             FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, tex);
             return false;
         }

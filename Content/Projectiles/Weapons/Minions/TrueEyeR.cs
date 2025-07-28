@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("True Eye of Cthulhu");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             //ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
@@ -349,7 +349,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
 
-            Texture2D pupil = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Minions/TrueEyePupil", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D pupil = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "TrueEyePupil").Value;
             Vector2 pupilOffset = new Vector2(localAI1 / 2f, 0f).RotatedBy(localAI0);
             pupilOffset += new Vector2(0f, -6f).RotatedBy(Projectile.rotation);
             Vector2 pupilOrigin = pupil.Size() / 2f;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -7,9 +8,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class DungeonGuardian : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Dungeon Guardian");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 

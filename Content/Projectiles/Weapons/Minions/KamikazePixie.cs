@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
 using System;
@@ -13,11 +14,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public int counter;
 
-        //public override string Texture => "Terraria/Images/NPC_75";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Pixie");
             Main.projFrames[Projectile.type] = 5;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

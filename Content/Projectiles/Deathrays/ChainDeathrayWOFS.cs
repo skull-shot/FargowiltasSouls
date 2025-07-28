@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class ChainDeathrayWOFS : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayWOF";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayWOF");
         public ChainDeathrayWOFS() : base(90, 0.5f) { }
 
         public override void SetStaticDefaults()

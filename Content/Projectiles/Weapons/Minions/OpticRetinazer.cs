@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
@@ -13,9 +13,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class OpticRetinazer : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Retinazer");
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

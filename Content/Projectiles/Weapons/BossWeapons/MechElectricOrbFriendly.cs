@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using System;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class MechElectricOrbFriendly : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses", "MechElectricOrb");
 
         bool hasIframes = true;
 

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Armor.Eridanus;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Armor.Eridanus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class EridanusRitual : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         private const float PI = (float)Math.PI;
         private const float rotationPerTick = PI / 57f;
         private const float threshold = 175f / 2f;
@@ -17,7 +19,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Lunar Ritual");
             Main.projFrames[Projectile.type] = 5;
         }
 

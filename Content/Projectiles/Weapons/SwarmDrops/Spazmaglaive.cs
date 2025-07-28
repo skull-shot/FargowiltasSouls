@@ -18,13 +18,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class Spazmaglaive : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         bool empowered = false;
         bool hitSomething = false;
 
         public bool DrawTrail = false;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Spazmaglaive");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

@@ -49,7 +49,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.PureHeart
             Player player = Main.player[Main.myPlayer];
             if (Projectile.ai[2] == 1)
             {
-                Texture2D pureSpikeTexture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Accessories/Pureheart", "PureHeartCrystal_Spike").Value;
+                Texture2D pureSpikeTexture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Accessories/PureHeart", "PureHeartCrystal_Spike").Value;
                 FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, pureSpikeTexture);
                 return false;
             }

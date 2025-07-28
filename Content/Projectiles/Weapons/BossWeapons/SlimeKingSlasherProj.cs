@@ -7,6 +7,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
@@ -231,7 +232,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                     SlashOpacity = 0f;
             }
 
-            Texture2D slashTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeKingSlasherProjSlash").Value;
+            Texture2D slashTexture = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/BossWeapons", "SlimeKingSlasherProjSlash").Value;
             Vector2 slashOrigin = slashTexture.Size() / 2f;
             Rectangle rectangle2 = slashTexture.Bounds;
             Main.EntitySpriteDraw(slashTexture, pos, new Microsoft.Xna.Framework.Rectangle?(rectangle2), Projectile.GetAlpha(lightColor) * SlashOpacity, rotation, slashOrigin, Projectile.scale, effects, 0);

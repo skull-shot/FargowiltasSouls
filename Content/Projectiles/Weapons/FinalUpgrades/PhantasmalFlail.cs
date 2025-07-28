@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Luminance.Core.Graphics;
 using Luminance.Core.Sounds;
@@ -16,9 +17,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class PhantasmalFlail : ModProjectile
     {
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/PhantasmalLeashFlailChain";
-        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/PhantasmalFlail";
-        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/PhantasmalFlailEye";
+        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalLeashFlailChain";
+        private const string FlailTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlail";
+        private const string EyeTexturePath = "FargowiltasSouls/Content/Projectiles/Weapons/FinalUpgrades/PhantasmalFlailEye";
 
         private static Asset<Texture2D> chainTexture;
         private static Asset<Texture2D> EyeTexture;
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
         public bool HasHitEnemy = false;
         public LoopedSoundInstance Loop;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "Empty");
 
         public int EyeTimer = 0;
 

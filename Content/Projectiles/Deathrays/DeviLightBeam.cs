@@ -1,4 +1,5 @@
 ﻿
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class DeviLightBeam : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
 
 
         public DeviLightBeam() : base(30 * 3) { }

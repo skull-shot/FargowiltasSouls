@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
 {
     public class LightningVortexHostile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses", Name);
 
         public override void SetStaticDefaults()
         {

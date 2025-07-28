@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -11,10 +12,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
     public class EnchantedLifebladeProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         public bool PlayedSound = false;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Enchanted Lifeblade");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

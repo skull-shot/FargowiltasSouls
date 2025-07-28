@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Armor
 {
     public class StyxArmorScythe2 : StyxArmorScythe
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/StyxArmorScythe";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Armor", "StyxArmorScythe");
 
         public override void SetStaticDefaults()
         {

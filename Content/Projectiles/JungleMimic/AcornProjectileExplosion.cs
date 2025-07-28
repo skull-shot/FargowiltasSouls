@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -7,11 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class AcornProjectileExplosion : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Acorn Explosion");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public override void SetDefaults()
         {
             Projectile.width = 140;

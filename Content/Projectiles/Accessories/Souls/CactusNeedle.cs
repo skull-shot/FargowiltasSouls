@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FargowiltasSouls.Assets.Textures;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,11 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class CactusNeedle : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Cactus Needle");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.PineNeedleFriendly);

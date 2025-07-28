@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,11 +10,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class BigBrainProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public const int MaxMinionSlots = 16;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Big Brain");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

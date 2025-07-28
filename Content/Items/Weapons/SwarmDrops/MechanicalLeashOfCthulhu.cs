@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useTime = 16;
             Item.knockBack = 6f;
             Item.noUseGraphic = true;
-            Item.shoot = ModContent.ProjectileType<MechFlail>();
+            Item.shoot = ModContent.ProjectileType<LeashofCthulhuFlail>();
             Item.shootSpeed = 50f;
             Item.UseSound = null;
             Item.DamageType = DamageClass.Melee;

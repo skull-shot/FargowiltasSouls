@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,15 +10,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Ammos
 {
     public class FargoBulletProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Ammos", Name);
         private int _bounce = 6;
         private readonly int[] dusts = [130, 55, 133, 131, 132];
         private int currentDust = 0;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Fargo Bullet");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 12;

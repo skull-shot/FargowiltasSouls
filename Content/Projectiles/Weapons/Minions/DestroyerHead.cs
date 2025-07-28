@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class DestroyerHead : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public float modifier;
         private int syncTimer;
         private Vector2 mousePos;
@@ -73,7 +75,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Minions/DestroyerHead_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "DestroyerHead_Glow").Value;
             int num214 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int y6 = num214 * Projectile.frame;
             Color color25 = Projectile.GetAlpha(lightColor);

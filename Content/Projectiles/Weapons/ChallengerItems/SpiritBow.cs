@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {
     public class SpiritBow : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 5;

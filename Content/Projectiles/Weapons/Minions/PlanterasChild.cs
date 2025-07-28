@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,9 +11,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class PlanterasChild : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Plantera's Child");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             //ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }

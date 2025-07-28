@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class MeteorEnchantMeatball : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 60;
@@ -160,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             //draw projectile
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             if (large)
-                texture = ModContent.Request<Texture2D>(textureString + "Wizard").Value;
+                texture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "MeteorEnchantMeatballWizard").Value;
 
             int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

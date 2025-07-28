@@ -1,17 +1,14 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
+namespace FargowiltasSouls.Content.Projectiles.Accessories
 {
     public class SlimeBall : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Slime Ball");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", Name);
         public override void SetDefaults()
         {
             Projectile.width = 16;

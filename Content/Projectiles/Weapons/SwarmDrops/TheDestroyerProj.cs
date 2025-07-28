@@ -10,11 +10,13 @@ using System.Linq;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using System;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class TheDestroyerProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.IsAWhip[Type] = true;

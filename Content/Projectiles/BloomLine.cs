@@ -1,4 +1,5 @@
 ﻿//using FargowiltasSouls.EternityMode.Content.Boss.HM;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 using Microsoft.Xna.Framework;
@@ -15,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class BloomLine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Bloom Line");

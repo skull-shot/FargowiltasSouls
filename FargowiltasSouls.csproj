@@ -8,17 +8,21 @@
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Remove="Content\Items\Items\**" />
+    <AdditionalFiles Remove="Content\Projectiles\Eternity\Accessories\**" />
     <AdditionalFiles Remove="Content\Projectiles\Masomode\**" />
     <AdditionalFiles Remove="Content\WorldGen\**" />
     <Compile Remove="Content\Items\Items\**" />
+    <Compile Remove="Content\Projectiles\Eternity\Accessories\**" />
     <Compile Remove="Content\Projectiles\Masomode\**" />
     <Compile Remove="Content\WorldGen\**" />
     <Compile Remove="Folders to Port\**" />
     <EmbeddedResource Remove="Content\Items\Items\**" />
+    <EmbeddedResource Remove="Content\Projectiles\Eternity\Accessories\**" />
     <EmbeddedResource Remove="Content\Projectiles\Masomode\**" />
     <EmbeddedResource Remove="Content\WorldGen\**" />
     <EmbeddedResource Remove="Folders to Port\**" />
     <None Remove="Content\Items\Items\**" />
+    <None Remove="Content\Projectiles\Eternity\Accessories\**" />
     <None Remove="Content\Projectiles\Masomode\**" />
     <None Remove="Content\WorldGen\**" />
     <None Remove="Folders to Port\**" />
@@ -73,7 +77,6 @@
     <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
-    <Folder Include="Content\Projectiles\Eternity\Accessories\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
   <ItemGroup>

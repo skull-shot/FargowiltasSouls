@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -6,7 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class ShadowDash : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "Empty");
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

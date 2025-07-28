@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;

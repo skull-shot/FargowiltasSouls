@@ -10,11 +10,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class Snowstorm : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Snowstorm");
-        }
-
         public override string Texture => FargoSoulsUtil.EmptyTexture;
 
         public override void SetDefaults()

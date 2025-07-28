@@ -1,4 +1,5 @@
-﻿using Luminance.Core.Graphics;
+﻿using FargowiltasSouls.Assets.Textures;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {
     public class SandstoneBoulder : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
         private bool launched = false;
         private int bounceCount = 0;
 

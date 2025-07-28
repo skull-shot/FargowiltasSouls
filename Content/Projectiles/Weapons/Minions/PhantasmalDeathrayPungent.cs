@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class PhantasmalDeathrayPungent : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayWOF";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayWOF");
         public PhantasmalDeathrayPungent() : base(120) { }
 
         public override void SetStaticDefaults()

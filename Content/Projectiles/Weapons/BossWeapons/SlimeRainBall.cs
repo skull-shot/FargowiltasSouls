@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -7,7 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class SlimeRainBall : Bosses.MutantBoss.MutantSlimeBall
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeBall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", "SlimeBall");
 
         public override void SetDefaults()
         {

@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/PenetratorNuke/PenetratorNuke_" + Projectile.frame.ToString(), ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/PenetratorNuke/PenetratorNuke_" + Projectile.frame.ToString(), ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             Rectangle rectangle = texture2D13.Bounds;
             Vector2 origin2 = rectangle.Size() / 2f;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
@@ -6,15 +7,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
-    [LegacyName("EaterStaff")]
     public class EaterRocketJr : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Eater Rocket");
-            //ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
-            //ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public override void SetDefaults()
         {
             Projectile.width = 19;

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -14,10 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class RainUmbrella : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
 
         public override void SetDefaults()
         {

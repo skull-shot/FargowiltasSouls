@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class MechEyeProjectile : ModProjectile
+    public class LeashofCthulhuEyeProjectile : ModProjectile
     {
         private float speed;
 

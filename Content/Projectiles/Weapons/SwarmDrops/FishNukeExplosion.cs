@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class FishNukeExplosion : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Empty";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "Empty");
 
         public int vfxinterpolant;
 

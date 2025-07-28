@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,10 +13,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class CrystalSkull : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Crystal Skull");
             Main.projFrames[Projectile.type] = 2;
         }
 

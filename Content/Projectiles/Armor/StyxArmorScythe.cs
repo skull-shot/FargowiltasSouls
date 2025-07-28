@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Armor.Styx;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,9 +12,9 @@ namespace FargowiltasSouls.Content.Projectiles.Armor
 {
     public class StyxArmorScythe : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Armor", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Styx Scythe");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

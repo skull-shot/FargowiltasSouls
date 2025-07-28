@@ -1,5 +1,4 @@
 ﻿using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Luminance.Assets;
 using Luminance.Core.Graphics;
@@ -16,6 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class Retiglaive : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         bool empowered = false;
 
         public bool DrawTrail = false;

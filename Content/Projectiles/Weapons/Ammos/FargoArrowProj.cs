@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -9,16 +10,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Ammos
 {
     public class FargoArrowProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Ammos", Name);
         private readonly int[] dusts = [130, 55, 133, 131, 132];
         private int currentDust = 0;
         private int timer = 0;
         private Vector2 velocity;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Fargo Arrow");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 10;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     internal class DicerMine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public int Counter = 1;
 
         public override void SetDefaults()

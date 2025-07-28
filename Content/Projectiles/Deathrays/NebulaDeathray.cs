@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class NebulaDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public NebulaDeathray() : base(120, drawDistance: 3500) { }
 

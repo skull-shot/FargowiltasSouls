@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
 {
     public class BetsyDash : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/HeartOfTheMaster", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Dash");

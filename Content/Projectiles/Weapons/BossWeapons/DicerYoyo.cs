@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     internal class DicerYoyo : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public int Counter = 1;
 
         public override void SetStaticDefaults()

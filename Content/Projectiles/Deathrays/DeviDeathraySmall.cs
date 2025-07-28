@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class DeviDeathraySmall : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
 
         public DeviDeathraySmall() : base(60) { }

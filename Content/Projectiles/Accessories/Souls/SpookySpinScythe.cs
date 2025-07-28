@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class SpookySpinScythe : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
             //ProjectileID.Sets.MinionShot[Projectile.type] = true;

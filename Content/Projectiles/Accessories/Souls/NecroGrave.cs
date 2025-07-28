@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -13,9 +14,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class NecroGrave : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Necro Grave");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -143,7 +144,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Main.EntitySpriteDraw(texture, drawPosition, rectangle, color, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return base.PreDraw(ref lightColor);*/
 
-            Texture2D texture = Main.player[Projectile.owner].FargoSouls().ForceEffect<NecroEnchant>() ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Souls/NecroGraveForce", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value : Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D texture = Main.player[Projectile.owner].FargoSouls().ForceEffect<NecroEnchant>() ? FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "NecroGraveForce").Value : Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
             int num156 = texture.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

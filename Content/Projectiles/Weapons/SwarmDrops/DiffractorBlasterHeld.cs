@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class DiffractorBlasterHeld : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/SwarmDrops/RefractorBlaster2Held";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
 
         private int syncTimer;
         private Vector2 mousePos;
@@ -250,7 +251,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D texture2D = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/RefractorBlaster2Held_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "DiffractorBlasterHeld_Glow").Value;
             int height = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int width = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Width;
             int frame = height * Projectile.frame;

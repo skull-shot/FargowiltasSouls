@@ -1,13 +1,15 @@
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
+namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class SlimeBallHoming : SlimeBall
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeBall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", "SlimeBall");
 
         int bounce;
 

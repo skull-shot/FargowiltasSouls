@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class GladiatorSpirit : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 5;

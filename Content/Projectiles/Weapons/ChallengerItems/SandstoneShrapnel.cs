@@ -5,12 +5,13 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {
     public class SandstoneShrapnel : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/ChallengerItems/SandstoneShrapnel1";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", "SandstoneShrapnel1");
         public override void SetDefaults() 
         {
             Projectile.width = 22;
@@ -64,11 +65,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
             Texture2D tex;
             if (Projectile.ai[1] != 0)
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/ChallengerItems/" + GetType().Name + Projectile.ai[1]).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/ChallengerItems/" + GetType().Name + Projectile.ai[1]).Value;
             }
             else
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/ChallengerItems/" + GetType().Name + 1).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/ChallengerItems/" + GetType().Name + 1).Value;
             }
             FargoSoulsUtil.DrawTexture(Main.spriteBatch, tex, 0, Projectile, lightColor, true);
             return false;

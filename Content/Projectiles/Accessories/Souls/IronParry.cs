@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -10,9 +11,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class IronParry : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Iron Parry");
             Main.projFrames[Projectile.type] = 7;
         }
 

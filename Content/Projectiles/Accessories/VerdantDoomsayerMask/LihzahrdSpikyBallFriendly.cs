@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,7 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask
 {
     public class LihzahrdSpikyBallFriendly : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/VerdantDoomsayerMask", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.SpikyBallTrap);

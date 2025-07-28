@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -8,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class MechElectricOrbHomingFriendly : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses","MechElectricOrb");
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
 	public class DeviBigDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public static List<Asset<Texture2D>> RingTextures =>
         [

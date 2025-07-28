@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class GlowRingHollow : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Glow Ring");
