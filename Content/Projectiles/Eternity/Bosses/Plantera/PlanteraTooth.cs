@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,11 +9,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 {
     public class PlanteraTooth : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/Plantera", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
@@ -121,7 +122,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
                 Alts.Small => "Small",
                 _ =>  ""
             };
-            Texture2D texture = ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Projectiles/Masomode/Bosses/Plantera/PlanteraTooth{suffix}").Value;
+            Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/Plantera", $"PlanteraTooth{suffix}").Value;
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
                 Color color2 = recolor ? Color.DimGray : Color.LimeGreen * 0.75f;

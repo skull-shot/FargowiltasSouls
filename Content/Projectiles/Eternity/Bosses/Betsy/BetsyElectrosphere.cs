@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Betsy
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Betsy
 {
     public class BetsyElectrosphere : ModProjectile
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -6,13 +7,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SolarEclipse
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SolarEclipse
 {
     public class MothronZenith : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SolarEclipse", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Zenith");
             Main.projFrames[Projectile.type] = 11;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

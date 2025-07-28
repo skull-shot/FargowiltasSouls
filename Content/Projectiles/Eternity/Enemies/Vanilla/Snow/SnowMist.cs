@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using FargowiltasSouls.Content.Buffs.Masomode;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 {
     public class SnowMist : ModProjectile
     {

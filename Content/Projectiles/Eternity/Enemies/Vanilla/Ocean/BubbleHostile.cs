@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Ocean
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Ocean
 {
     public class BubbleHostile : ModProjectile
     {

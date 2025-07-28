@@ -10,7 +10,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Deerclops
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Deerclops
 {
     public class DeerclopsHand : ModProjectile
     {

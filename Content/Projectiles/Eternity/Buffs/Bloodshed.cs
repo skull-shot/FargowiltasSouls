@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,13 +9,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Buffs
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
 {
     public class Bloodshed : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Buffs", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Bloodshed");
             Main.projFrames[Projectile.type] = 4;
         }
 

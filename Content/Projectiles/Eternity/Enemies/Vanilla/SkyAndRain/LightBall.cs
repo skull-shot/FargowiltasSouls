@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,15 +8,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain
 {
     public class LightBall : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
         public virtual bool DoNotSpawnDust => false;
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Light Ball");
-        }
 
         public override void SetDefaults()
         {

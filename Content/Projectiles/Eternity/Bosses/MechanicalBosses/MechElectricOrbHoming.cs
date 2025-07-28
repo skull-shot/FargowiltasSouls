@@ -1,11 +1,12 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
     public class MechElectricOrbHoming : MechElectricOrb
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/MechanicalBosses/MechElectricOrb";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses", "MechElectricOrb");
         public override void AI()
         {
             base.AI();

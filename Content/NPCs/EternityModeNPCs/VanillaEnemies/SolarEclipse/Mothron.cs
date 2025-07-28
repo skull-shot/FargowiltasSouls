@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SolarEclipse;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SolarEclipse;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;

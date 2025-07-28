@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class BeeDash : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_222";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_222";
 
         public override void SetStaticDefaults()
         {

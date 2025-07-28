@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -11,10 +12,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class BloodPuddle : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Environment", Name);
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Type] = 2;
@@ -107,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> vein = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Environment/BloodTendril");
+            Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril");
             int frameHeight = t.Height() / Main.projFrames[Type];
             // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 

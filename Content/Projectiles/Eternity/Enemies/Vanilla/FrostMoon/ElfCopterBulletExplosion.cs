@@ -4,7 +4,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.FrostMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.FrostMoon
 {
     public class ElfCopterBulletExplosion : ModProjectile
     {

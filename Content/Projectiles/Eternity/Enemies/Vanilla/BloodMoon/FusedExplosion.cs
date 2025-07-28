@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon
 {
     public class FusedExplosion : MoonLordSunBlast
     {

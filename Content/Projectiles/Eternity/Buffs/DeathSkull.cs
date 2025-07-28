@@ -1,16 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Buffs
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
 {
     public class DeathSkull : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Buffs", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Death Skull");
             Main.projFrames[Projectile.type] = 8;
         }
 

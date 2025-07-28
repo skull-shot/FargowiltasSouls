@@ -1,17 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.LunarEvents.Solar
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.LunarEvents.Solar
 {
     public class DrakanianDaybreak : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Daybreak");
-        }
-
+        public override string Texture => "Terraria/Images/Projectile_636";
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Daybreak);

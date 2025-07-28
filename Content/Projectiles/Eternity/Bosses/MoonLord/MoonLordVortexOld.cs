@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class MoonLordVortexOld : CosmosVortex
     {

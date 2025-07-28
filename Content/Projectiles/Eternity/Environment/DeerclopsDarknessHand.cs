@@ -10,7 +10,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class DeerclopsDarknessHand : ModProjectile
     {

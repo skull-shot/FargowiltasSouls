@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.BrainOfCthulhu
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu
 {
     public class BrainIllusionProj : ModProjectile
     {

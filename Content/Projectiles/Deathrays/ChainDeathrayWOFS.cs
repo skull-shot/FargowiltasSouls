@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             if (Projectile.localAI[0] == 30 && FargoSoulsUtil.HostCheck)
             {
                 Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity * Projectile.ai[0],
-                    ModContent.ProjectileType<Masomode.WOFChain>(), Projectile.damage, 0f, Main.myPlayer);
+                    ModContent.ProjectileType<Eternity.WOFChain>(), Projectile.damage, 0f, Main.myPlayer);
             }
             if (Projectile.localAI[0] >= maxTime)
             {

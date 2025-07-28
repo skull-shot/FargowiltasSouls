@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.PumpkinMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinMoon
 {
     public class HorsemansBlade : ModProjectile
     {

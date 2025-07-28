@@ -3,7 +3,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
 {
     public class MimicTitanGlove : ModProjectile
     {

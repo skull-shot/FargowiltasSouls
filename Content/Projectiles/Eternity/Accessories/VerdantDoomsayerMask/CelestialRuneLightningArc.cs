@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.VerdantDoomsayerMask
 {
     public class CelestialRuneLightningArc : ModProjectile
     {

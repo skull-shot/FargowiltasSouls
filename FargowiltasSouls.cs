@@ -23,7 +23,7 @@ using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;

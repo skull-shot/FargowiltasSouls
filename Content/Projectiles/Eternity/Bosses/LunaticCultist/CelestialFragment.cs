@@ -1,16 +1,17 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 {
     public class CelestialFragment : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Fragment");
             Main.projFrames[Projectile.type] = 4;
         }
 

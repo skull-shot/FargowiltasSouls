@@ -17,7 +17,7 @@ using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
     public class DestroyerScanTelegraph : ModProjectile
     {

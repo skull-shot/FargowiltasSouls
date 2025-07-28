@@ -1,10 +1,10 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon
 {
     public class ClownBomb : ModProjectile
     {

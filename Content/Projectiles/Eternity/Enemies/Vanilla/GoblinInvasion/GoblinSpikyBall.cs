@@ -1,18 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.GoblinInvasion
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.GoblinInvasion
 {
     public class GoblinSpikyBall : ModProjectile
     {
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Spiky Ball");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/GoblinInvasion", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.SpikyBall);

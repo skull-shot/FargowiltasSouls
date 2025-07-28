@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -6,13 +7,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
 {
     public class TorchGodFlame : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Torch God");
             Main.projFrames[Projectile.type] = 3;
         }
 

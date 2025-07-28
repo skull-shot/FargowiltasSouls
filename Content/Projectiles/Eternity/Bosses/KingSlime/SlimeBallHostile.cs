@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
 {
     public class SlimeBallHostile : ModProjectile
     {

@@ -1,17 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds
 {
     public class CursedFireballHoming : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/EaterOfWorlds", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Cursed Flame");
             Main.projFrames[Projectile.type] = 5;
         }
 

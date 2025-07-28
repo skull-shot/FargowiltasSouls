@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.Audio;

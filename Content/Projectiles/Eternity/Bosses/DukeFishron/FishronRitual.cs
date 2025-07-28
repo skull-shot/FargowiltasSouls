@@ -1,19 +1,20 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.DukeFishron
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
 {
     public class FishronRitual : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/DukeFishron", Name);
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Oceanic Ritual");
         }
 
         public override void SetDefaults()

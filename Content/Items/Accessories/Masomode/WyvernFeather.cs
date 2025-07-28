@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.BionomicCluster;
+using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.BionomicCluster;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;

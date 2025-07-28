@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 {
     public class DicerPlantera : ModProjectile
     {

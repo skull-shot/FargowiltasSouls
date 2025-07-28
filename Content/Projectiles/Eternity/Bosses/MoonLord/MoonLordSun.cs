@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,13 +9,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class MoonLordSun : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MoonLord", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Sun");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

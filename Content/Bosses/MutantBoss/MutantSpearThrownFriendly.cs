@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {

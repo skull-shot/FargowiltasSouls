@@ -13,12 +13,12 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu
 {
     public class BloodScythe : ModProjectile, IPixelatedPrimitiveRenderer
     {
         public ref float randomize => ref Projectile.ai[0];
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/EyeOfCthulhu/BloodScytheVanilla1";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScytheVanilla1");
 
         public bool recolor => SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode && Projectile.ai[2] != 1;
         public override void SetStaticDefaults()
@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu
                 randomize += Main.rand.Next(1, 4);
                 Projectile.netUpdate = true;
             }
-            Texture2D texture = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/EyeOfCthulhu/BloodScythe" + randomize).Value : ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/EyeOfCthulhu/BloodScytheVanilla" + randomize).Value;
+            Texture2D texture = recolor ? FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScythe" + randomize).Value : FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScytheVanilla" + randomize).Value;
             Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center + Projectile.velocity / 10f;

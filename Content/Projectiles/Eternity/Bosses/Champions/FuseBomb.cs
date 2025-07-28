@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions
 {
     public class FuseBomb : ModProjectile
     {

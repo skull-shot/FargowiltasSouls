@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.VerdantDoomsayerMask
 {
     public class CelestialRuneFireball : ModProjectile
     {

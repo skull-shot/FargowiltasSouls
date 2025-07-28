@@ -1,6 +1,6 @@
 using System.IO;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -19,7 +19,7 @@ using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Terraria.DataStructures;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

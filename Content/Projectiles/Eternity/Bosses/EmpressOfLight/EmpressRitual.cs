@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EmpressOfLight
 {
     public class EmpressRitual : BaseArena
     {

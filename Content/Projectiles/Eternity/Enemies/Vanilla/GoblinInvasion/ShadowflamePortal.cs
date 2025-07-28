@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.GoblinInvasion
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.GoblinInvasion
 {
     public class ShadowflamePortal : ModProjectile
     {

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,11 +8,11 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds
 {
     public class CorruptionSludge : ModProjectile
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/EaterOfWorlds", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;

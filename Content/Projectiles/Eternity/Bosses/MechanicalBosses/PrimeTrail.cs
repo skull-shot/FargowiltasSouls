@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -6,13 +7,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
     public class PrimeTrail : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Trail");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

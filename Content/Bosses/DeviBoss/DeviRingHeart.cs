@@ -10,11 +10,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override string Texture => "FargowiltasSouls/Content/Bosses/DeviBoss/DeviEnergyHeart";
 
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Energy Heart");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 30;

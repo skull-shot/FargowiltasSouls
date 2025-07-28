@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class BetsyElectrosphere2 : ModProjectile
     {

@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
 {
     public class DungeonDebris : ModProjectile
     {

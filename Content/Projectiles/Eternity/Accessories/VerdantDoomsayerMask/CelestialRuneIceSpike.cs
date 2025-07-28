@@ -1,13 +1,15 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.VerdantDoomsayerMask
 {
     public class CelestialRuneIceSpike : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Accessories/VerdantDoomsayerMask", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Ice Spike");

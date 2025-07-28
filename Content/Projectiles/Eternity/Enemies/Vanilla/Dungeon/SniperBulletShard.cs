@@ -1,17 +1,14 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
 {
     public class SniperBulletShard : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("High Velocity Crystal Bullet");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.CrystalShard);

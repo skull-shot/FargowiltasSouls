@@ -1,14 +1,15 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
 {
     public class FakeHeart2 : FakeHeart
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", "FakeHeart");
 
         public override void SetStaticDefaults()
         {

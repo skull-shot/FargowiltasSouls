@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -10,7 +11,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron
 {
     public class SkeletronBone : ModProjectile
     {
@@ -64,7 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron
                 Projectile.ai[0] == 1 &&
                 SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
 
-            Texture2D texture = recolor ? ModContent.Request<Texture2D>(Texture + "_Recolor").Value : TextureAssets.Projectile[Type].Value;
+            Texture2D texture = recolor ? FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/Skeletron", "SkeletronBone_Recolor").Value : TextureAssets.Projectile[Type].Value;
             FargoSoulsUtil.ProjectileWithTrailDraw(Projectile, Color.White * Projectile.Opacity, texture, additiveTrail: true);
             FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, texture);
             return false;

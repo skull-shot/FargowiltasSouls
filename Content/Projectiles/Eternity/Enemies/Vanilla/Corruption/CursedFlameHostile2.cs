@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Corruption
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Corruption
 {
     public class CursedFlameHostile2 : ModProjectile
     {

@@ -8,7 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.QueenBee
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
 {
     public class Beehive : ModProjectile
     {

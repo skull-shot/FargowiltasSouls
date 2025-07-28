@@ -12,7 +12,7 @@ using Terraria.DataStructures;
 //using System.Drawing;
 using Terraria.GameContent;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.SupremeDeathbringerFairy
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.SupremeDeathbringerFairy
 {
     public class BloodScytheFriendly : ModProjectile//, IPixelatedPrimitiveRenderer
     {

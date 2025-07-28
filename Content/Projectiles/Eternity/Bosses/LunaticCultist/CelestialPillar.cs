@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -10,10 +11,11 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 {
     public class CelestialPillar : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", Name);
         private int target = -1;
 
         public override void SetStaticDefaults()

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -9,10 +10,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 {
     public class PlanteraMushroomThing : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/Plantera", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 3;
@@ -82,7 +84,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
         public override bool PreDraw(ref Color lightColor)
         {
             bool recolor = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
-            Texture2D texture = recolor ? TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>(Texture + "Vanilla").Value;
+            Texture2D texture = recolor ? TextureAssets.Projectile[Type].Value : FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/Plantera", Name + "Vanilla").Value;
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {

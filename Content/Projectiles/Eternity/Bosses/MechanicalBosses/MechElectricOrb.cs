@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core;
@@ -14,10 +15,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
     public class MechElectricOrb : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses", Name);
         public static readonly SoundStyle ShotSound = FargosSoundRegistry.ElectricOrbShot with { PitchVariance = 0.3f, Volume = 7f };
         public static readonly SoundStyle HumSound = FargosSoundRegistry.ElectricOrbHum;
         public const int Red = 0;

@@ -1,16 +1,13 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.FrostMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.FrostMoon
 {
     public class ElfArcherArrow : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Frostburn Arrow");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/FrostMoon", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.FrostArrow);

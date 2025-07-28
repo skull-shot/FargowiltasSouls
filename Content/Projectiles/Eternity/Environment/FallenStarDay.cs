@@ -12,7 +12,7 @@ using FargowiltasSouls.Content.Items.Materials;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class FallenStarDay : ModProjectile
     {

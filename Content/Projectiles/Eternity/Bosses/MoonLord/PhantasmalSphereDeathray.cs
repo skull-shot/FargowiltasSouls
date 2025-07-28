@@ -4,7 +4,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class PhantasmalSphereDeathray : BaseDeathray
     {

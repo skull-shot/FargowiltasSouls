@@ -2,7 +2,7 @@
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,7 +38,7 @@ Right click pattern becomes denser with up to 12 empty minion slots
             Item.scale = 2f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = FargosSoundRegistry.DeviSwing;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.SparklingLove>();
+            Item.shoot = ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons.SparklingLove>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true; //no melee hitbox
             Item.noUseGraphic = true; //dont draw Item
@@ -67,7 +67,7 @@ Right click pattern becomes denser with up to 12 empty minion slots
             }
             else
             {
-                Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.SparklingLove>();
+                Item.shoot = ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons.SparklingLove>();
                 Item.useStyle = ItemUseStyleID.Swing;
                 Item.DamageType = DamageClass.Melee;
                 Item.noUseGraphic = true;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -5,15 +6,11 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class TargetingReticle : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Targeting Reticle");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity", Name);
         public override void SetDefaults()
         {
             Projectile.width = 110;

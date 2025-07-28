@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
 
     public class TwinsEyeFlash : ModProjectile

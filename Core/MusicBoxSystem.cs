@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Core
     {
         public abstract class MusicBoxItem : ModItem
         {
-            public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables/MusicBoxes", this.Name);
+            public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables/MusicBoxes", Name);
             public override void SetStaticDefaults()
             {
                 ItemID.Sets.CanGetPrefixes[Type] = false;
@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Core
 
         public abstract class MusicBoxTile : ModTile
         {
-            public override string Texture => FargoAssets.GetAssetString("Content/Tiles/MusicBoxes", this.Name);
+            public override string Texture => FargoAssets.GetAssetString("Content/Tiles/MusicBoxes", Name);
             public override void SetStaticDefaults()
             {
                 TileID.Sets.DisableSmartCursor[Type] = true;

@@ -1,6 +1,6 @@
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using FargowiltasSouls.Core.Globals;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -10,7 +10,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class MoonLordMoon : CosmosMoon
     {

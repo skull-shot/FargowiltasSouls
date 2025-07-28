@@ -17,7 +17,7 @@ using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Core.Systems;
 using Terraria.Audio;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 {
     public class VikingHook : ModProjectile
     {

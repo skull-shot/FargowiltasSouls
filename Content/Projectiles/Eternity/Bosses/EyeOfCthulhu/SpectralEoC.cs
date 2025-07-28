@@ -9,12 +9,12 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu
 {
     public class SpectralEoC : ModProjectile
     {
         const string EoCName = "NPC_4";
-        public override string Texture => $"FargowiltasSouls/Assets/ExtraTextures/Resprites/{EoCName}";
+        public override string Texture => $"FargowiltasSouls/Assets/Textures/EModeResprites/{EoCName}";
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Sky Dragon's Fury");

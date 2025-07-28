@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -12,7 +12,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class PlanteraCrystalLeafRing : MutantCrystalLeaf
     {

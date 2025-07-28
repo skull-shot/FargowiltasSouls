@@ -8,11 +8,19 @@ namespace FargowiltasSouls.Assets.Textures
     public class FargoAssets
     {
         /// <summary>
-        /// Grabs the asset string of a texture.
+        /// Retrieves the asset string associated with a texture
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
         public static string GetAssetString(string path, string name) => "FargowiltasSouls/Assets/Textures/" + path + "/" + name;
+
+        /// <summary>
+        /// Shorthand for for grabbing a texture through Modcontent.Request.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Asset<Texture2D> GetTexture2D(string path, string name) => ModContent.Request<Texture2D>(GetAssetString(path, name), AssetRequestMode.ImmediateLoad);
         public static string Filepath => "FargowiltasSouls/Assets/Textures/";
         public static string TilePath => Filepath + "Tiles/";
 

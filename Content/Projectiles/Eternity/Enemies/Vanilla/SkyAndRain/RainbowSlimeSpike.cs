@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain
 {
     public class RainbowSlimeSpike : ModProjectile
     {

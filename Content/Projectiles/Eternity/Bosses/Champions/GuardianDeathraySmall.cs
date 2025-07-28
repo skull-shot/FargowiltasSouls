@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions
 {
     public class GuardianDeathraySmall : BaseDeathray
     {

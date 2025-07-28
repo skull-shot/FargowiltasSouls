@@ -15,8 +15,7 @@ using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
@@ -41,6 +40,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Core.Systems.DashManager;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

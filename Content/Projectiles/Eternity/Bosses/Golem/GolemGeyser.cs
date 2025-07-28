@@ -1,10 +1,10 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 {
     public class GolemGeyser : ModProjectile
     {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,10 +13,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 {
     public class PlanteraSpikevine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/Plantera", Name);
         const int TrailSaveLength = 1000;
         Vector2[] Trail = new Vector2[TrailSaveLength];
         public int TrailLength = 800;

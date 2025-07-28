@@ -8,7 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 {
     public class DicerPlanteraSeed : ModProjectile
     {

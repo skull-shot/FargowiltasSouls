@@ -2,7 +2,7 @@
 
 namespace FargowiltasSouls.Content.Projectiles
 {
-    public class StyxGazerArmor : BossWeapons.StyxGazer
+    public class StyxGazerArmor : FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons.StyxGazer
     {
         public override void AI()
         {

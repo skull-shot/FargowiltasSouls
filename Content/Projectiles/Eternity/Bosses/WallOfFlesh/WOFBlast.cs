@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,13 +7,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 {
     public class WOFBlast : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/WallOfFlesh", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Divine Blast");
             Main.projFrames[Projectile.type] = 12;
         }
 

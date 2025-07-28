@@ -16,7 +16,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using Fargowiltas.Content.Buffs;
 using Terraria.GameContent.Events;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

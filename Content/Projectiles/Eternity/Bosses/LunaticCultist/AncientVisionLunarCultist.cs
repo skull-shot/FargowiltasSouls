@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 {
     public class AncientVisionLunarCultist : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/AncientVision";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", "AncientVision");
 
         public override void SetStaticDefaults()
         {

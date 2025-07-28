@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class RainExplosion : CobaltExplosion
     {

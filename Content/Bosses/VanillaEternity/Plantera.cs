@@ -1,6 +1,6 @@
 using System.IO;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -21,7 +21,7 @@ using Microsoft.Xna.Framework.Graphics;
 using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Terraria.DataStructures;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

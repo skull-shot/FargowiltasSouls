@@ -1,16 +1,13 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
 {
     public class SkeletonArcherArrow : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Venom Arrow");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.VenomArrow);

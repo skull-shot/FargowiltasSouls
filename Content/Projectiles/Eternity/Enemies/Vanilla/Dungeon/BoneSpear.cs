@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -15,10 +16,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
 {
     public class BoneSpear : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", Name);
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 6;
@@ -39,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
                 Projectile.ai[0] = -1;
             }
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> head = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Dungeon/BoneSpearHead");
+            Asset<Texture2D> head = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", "BoneSpearHead");
             Vector2 origin = t.Size() - new Vector2(16, 16);
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;

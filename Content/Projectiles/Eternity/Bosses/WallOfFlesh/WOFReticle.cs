@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,15 +7,11 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 {
     public class WOFReticle : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Wall of Flesh Reticle");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/WallOfFlesh", Name);
         public override void SetDefaults()
         {
             Projectile.width = 110;

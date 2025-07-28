@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 {
     public class FrostfireballHostile : ModProjectile, IPixelatedPrimitiveRenderer
     {

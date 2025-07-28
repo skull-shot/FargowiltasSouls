@@ -1,7 +1,7 @@
 using System.IO;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -20,7 +20,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem;
 using FargowiltasSouls.Content.Buffs.Souls;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity

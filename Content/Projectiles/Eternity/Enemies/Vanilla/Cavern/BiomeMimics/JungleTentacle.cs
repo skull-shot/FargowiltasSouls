@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern.BiomeMimics
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern.BiomeMimics
 {
     public class JungleTentacle : ModProjectile
     {

@@ -4,7 +4,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 {
     public class GolemDeathraySmall : BaseDeathray
     {

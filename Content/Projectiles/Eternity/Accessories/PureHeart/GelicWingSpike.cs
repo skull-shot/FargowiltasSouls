@@ -5,8 +5,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Assets.Textures;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.PureHeart
 {
     public class GelicWingSpike : ModProjectile
     {
@@ -48,7 +49,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart
             Player player = Main.player[Main.myPlayer];
             if (Projectile.ai[2] == 1)
             {
-                Texture2D pureSpikeTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Accessories/PureHeart/PureHeartCrystal_Spike", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Texture2D pureSpikeTexture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Accessories/Pureheart", "PureHeartCrystal_Spike").Value;
                 FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, pureSpikeTexture);
                 return false;
             }

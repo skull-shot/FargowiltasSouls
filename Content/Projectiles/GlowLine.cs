@@ -1,5 +1,5 @@
 //using FargowiltasSouls.EternityMode.Content.Boss.HM;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,9 +15,9 @@ using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 
 namespace FargowiltasSouls.Content.Projectiles
 {

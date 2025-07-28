@@ -9,8 +9,9 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using FargowiltasSouls.Assets.Textures;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 {
     public class GolemBoulder : ModProjectile
     {
@@ -150,7 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
 
             if (recolor)
-                texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/Golem/GolemBoulder").Value;
+                texture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/Golem", Name).Value;
 
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

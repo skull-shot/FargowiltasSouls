@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 {
     public class GolemSpikeBallBig : ModProjectile
     {

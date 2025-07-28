@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.DeviBoss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
@@ -7,15 +8,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Jungle
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Jungle
 {
     public class MothDust : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Moth Dust");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Jungle", Name);
         public override void SetDefaults()
         {
             Projectile.width = 12;

@@ -3,13 +3,13 @@ using Terraria.ID;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Items.Materials;
 using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Rarities;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {

@@ -1,11 +1,11 @@
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class MoonLordNebulaBlaze2 : MoonLordNebulaBlaze
     {

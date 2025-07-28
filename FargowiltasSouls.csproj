@@ -61,9 +61,9 @@
     <None Remove="Content\Items\Armor\TrojanMask_Head.png" />
     <None Remove="Content\Items\Armor\WillMask.png" />
     <None Remove="Content\Items\Armor\WillMask_Head.png" />
-    <None Remove="Content\Projectiles\BossWeapons\MechFlailEye.png" />
-    <None Remove="Content\Projectiles\BossWeapons\PhantasmalEyeLeashProj.png" />
-    <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
+    <None Remove="Content\Projectiles\Weapons\BossWeapons\MechFlailEye.png" />
+    <None Remove="Content\Projectiles\Weapons\BossWeapons\PhantasmalEyeLeashProj.png" />
+    <None Remove="Content\Projectiles\Weapons\BossWeapons\PhantasmalFlailEye.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot2.png" />
     <None Remove="Content\Projectiles\Souls\SpookySpinScythe.png" />
@@ -73,6 +73,7 @@
     <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
+    <Folder Include="Content\Projectiles\Weapons\FinalUpgrades\" />
     <Folder Include="Content\Projectiles\Weapons\SwarmDrops\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>

@@ -1,17 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.FrostMoon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.FrostMoon
 {
     public class ElfCopterBullet : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Explosive Bullet");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/FrostMoon", Name);
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.ExplosiveBullet);

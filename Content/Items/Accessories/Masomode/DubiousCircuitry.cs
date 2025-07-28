@@ -2,7 +2,7 @@
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.VerdantDoomsayerMask;
+using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Graphics;

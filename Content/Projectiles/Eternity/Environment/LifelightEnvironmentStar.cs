@@ -10,7 +10,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Environment
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class LifelightEnvironmentStar : LightningArc
     {

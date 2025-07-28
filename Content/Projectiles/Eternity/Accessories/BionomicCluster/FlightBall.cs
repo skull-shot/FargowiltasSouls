@@ -1,11 +1,11 @@
 ﻿using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.BionomicCluster
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.BionomicCluster
 {
     public class FlightBall : LightBall
     {

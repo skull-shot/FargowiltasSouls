@@ -6,7 +6,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.HeartOfTheMaster
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.HeartOfTheMaster
 {
     public class FrostShardFriendly : ModProjectile
     {

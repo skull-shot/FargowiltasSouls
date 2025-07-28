@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class LunarRitual : BaseArena
     {

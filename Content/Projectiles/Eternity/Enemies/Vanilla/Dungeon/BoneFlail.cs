@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -17,7 +17,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
 {
     public class BoneFlail : ModProjectile
     {

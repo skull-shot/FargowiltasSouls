@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 {
     public class GoldenShowerWOF : ModProjectile, IPixelatedPrimitiveRenderer
     {

@@ -10,7 +10,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron
 {
     public class SkeletronGuardian2 : ModProjectile
     {

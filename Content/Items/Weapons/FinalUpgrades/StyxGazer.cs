@@ -1,7 +1,7 @@
 ﻿
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
         {
             if (player.altFunctionUse == 2)
             {
-                Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.StyxGazer>();
+                Item.shoot = ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons.StyxGazer>();
                 Item.useStyle = ItemUseStyleID.Shoot;
                 Item.DamageType = DamageClass.Magic;
                 Item.noUseGraphic = true;

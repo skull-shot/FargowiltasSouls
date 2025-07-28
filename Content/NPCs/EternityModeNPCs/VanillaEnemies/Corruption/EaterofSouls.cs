@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Corruption;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Corruption;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Luminance.Common.Utilities;

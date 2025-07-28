@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,10 +7,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class FragmentRitual : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MoonLord", Name);
         private const float PI = (float)Math.PI;
         private const float rotationPerTick = PI / 140f;
         private const float threshold = 600f;

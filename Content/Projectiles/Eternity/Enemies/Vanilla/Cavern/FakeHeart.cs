@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
 {
     public class FakeHeart : ModProjectile
     {

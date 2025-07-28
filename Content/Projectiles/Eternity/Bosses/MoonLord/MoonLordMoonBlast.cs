@@ -5,7 +5,7 @@ using FargowiltasSouls.Core.Globals;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode
+namespace FargowiltasSouls.Content.Projectiles.Eternity
 {
     public class MoonLordMoonBlast : MoonLordSunBlast
     {

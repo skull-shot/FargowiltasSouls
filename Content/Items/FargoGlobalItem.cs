@@ -5,7 +5,7 @@ using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;

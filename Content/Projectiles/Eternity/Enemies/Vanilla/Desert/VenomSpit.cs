@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Desert
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Desert
 {
     public class VenomSpit : ModProjectile
     {

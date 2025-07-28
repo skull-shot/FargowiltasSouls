@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Accessories.BionomicCluster
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Accessories.BionomicCluster
 {
     public class ShadowflameTentacle : ModProjectile
     {

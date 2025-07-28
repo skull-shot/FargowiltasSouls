@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.DukeFishron
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
 {
     public class RazorbladeTyphoon : ModProjectile
     {

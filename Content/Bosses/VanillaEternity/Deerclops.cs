@@ -15,8 +15,8 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core;
 using Terraria.Graphics.CameraModifiers;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Deerclops;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Deerclops;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {

@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 {
     public class CultistFireball : ModProjectile
     {
