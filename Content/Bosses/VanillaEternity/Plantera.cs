@@ -22,6 +22,7 @@ using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Terraria.DataStructures;
 using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -74,6 +75,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public static readonly SoundStyle VineGrowth = new("FargowiltasSouls/Assets/Sounds/VanillaEternity/Plantera/PlanteraVineGrowth");
 
+        public int DashTimer = 0;
+        public bool Dashing = false;
+
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -91,6 +95,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bitWriter.WriteBit(InPhase2);
             bitWriter.WriteBit(EnteredPhase2);
             bitWriter.WriteBit(EnteredPhase3);
+
+            binaryWriter.Write7BitEncodedInt(DashTimer);
+            binaryWriter.Write(Dashing);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -109,6 +116,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             InPhase2 = bitReader.ReadBit();
             EnteredPhase2 = bitReader.ReadBit();
             EnteredPhase3 = bitReader.ReadBit();
+
+            DashTimer = binaryReader.Read7BitEncodedInt();
+            Dashing = binaryReader.ReadBoolean();
         }
         public override void SetDefaults(NPC npc)
         {
@@ -603,6 +613,50 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                 }
             }
+
+            if (Dashing)
+            {
+                if (DashTimer == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Zombie21, npc.Center);
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int ai = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode ? -12 : -11;
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0, -1, npc.whoAmI, ai);
+                    }
+                }
+                if (DashTimer < 0)
+                {
+                    npc.rotation = npc.AngleTo(player.Center);
+
+                }
+                if (DashTimer == 30)
+                {
+                    SoundEngine.PlaySound(SoundID.Roar, npc.Center);
+                    npc.velocity = (player.Center - npc.Center).SafeNormalize(Vector2.Zero) * 15;
+                    /*
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(0, Main.rand.Next(5, 10)).RotatedBy(MathHelper.ToRadians(360 / 15f * i)), ModContent.ProjectileType<SporeGasPlantera>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage / 2), 0);
+                        }
+                    }
+                    */
+                }
+                DashTimer++;
+                if (DashTimer >= 90)
+                {
+                    Dashing = false;
+                    DashTimer = 0;
+                }
+                return false;
+            }
+            if (TentacleTimer == -390)
+            {
+                Dashing = true;
+            }
+
             if (--RingTossTimer < 0)
             {
                 RingTossTimer = delayForRingToss;
