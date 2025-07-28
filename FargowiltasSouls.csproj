@@ -8,14 +8,18 @@
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Remove="Content\Items\Items\**" />
+    <AdditionalFiles Remove="Content\Projectiles\Masomode\**" />
     <AdditionalFiles Remove="Content\WorldGen\**" />
     <Compile Remove="Content\Items\Items\**" />
+    <Compile Remove="Content\Projectiles\Masomode\**" />
     <Compile Remove="Content\WorldGen\**" />
     <Compile Remove="Folders to Port\**" />
     <EmbeddedResource Remove="Content\Items\Items\**" />
+    <EmbeddedResource Remove="Content\Projectiles\Masomode\**" />
     <EmbeddedResource Remove="Content\WorldGen\**" />
     <EmbeddedResource Remove="Folders to Port\**" />
     <None Remove="Content\Items\Items\**" />
+    <None Remove="Content\Projectiles\Masomode\**" />
     <None Remove="Content\WorldGen\**" />
     <None Remove="Folders to Port\**" />
   </ItemGroup>
@@ -60,7 +64,6 @@
     <None Remove="Content\Projectiles\BossWeapons\MechFlailEye.png" />
     <None Remove="Content\Projectiles\BossWeapons\PhantasmalEyeLeashProj.png" />
     <None Remove="Content\Projectiles\BossWeapons\PhantasmalFlailEye.png" />
-    <None Remove="Content\Projectiles\Masomode\Bosses\EaterOfWorlds\CorruptionSludge.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot.png" />
     <None Remove="Content\Projectiles\Souls\PalmwoodShot2.png" />
     <None Remove="Content\Projectiles\Souls\SpookySpinScythe.png" />
@@ -70,8 +73,7 @@
     <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
-    <Folder Include="Content\Projectiles\Masomode\Enemies\Vanilla\Crimson\" />
-    <Folder Include="Content\Projectiles\Masomode\Enemies\Vanilla\OOA\" />
+    <Folder Include="Content\Projectiles\Weapons\SwarmDrops\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
   <ItemGroup>

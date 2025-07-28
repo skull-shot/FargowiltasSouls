@@ -14,7 +14,7 @@ using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Audio;
 using Terraria.Localization;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {

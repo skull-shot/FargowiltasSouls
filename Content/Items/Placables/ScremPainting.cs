@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class ScremPainting : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "ScremPainting");
         public override void SetStaticDefaults()
         {
 

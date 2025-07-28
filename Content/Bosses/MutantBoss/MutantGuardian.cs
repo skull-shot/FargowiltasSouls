@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantGuardian_April" :
-            "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_127";
+            "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_127";
 
         public override void SetStaticDefaults()
         {

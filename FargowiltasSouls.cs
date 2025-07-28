@@ -6,7 +6,7 @@ using Fargowiltas;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
 using Fargowiltas.Content.UI;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
@@ -23,8 +23,8 @@ using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
 using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
@@ -193,11 +193,11 @@ namespace FargowiltasSouls
                 GameShaders.Armor.BindShader(ModContent.ItemType<GaiaDye>(), new ArmorShaderData(gaiaRef, "GaiaArmor").UseColor(new Color(0.44f, 1, 0.09f)).UseSecondaryColor(new Color(0.5f, 1f, 0.9f)));
 
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
-                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime"));
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/Textures/EModeResprites/QueenSlimePalettes/EternityQueenSlime"));
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage2("Images/Extra_" + 179);
                 
                 GameShaders.Misc["FargowiltasSouls:KingSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
-                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityKingSlime"));
+                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage1(Assets.Request<Texture2D>("Assets/Textures/EModeResprites/QueenSlimePalettes/EternityKingSlime"));
                 GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage2("Images/Extra_" + 179);
 
                 //GameShaders.Misc["PulseUpwards"] = new MiscShaderData(textRef, "PulseUpwards");

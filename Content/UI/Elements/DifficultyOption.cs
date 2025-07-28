@@ -14,7 +14,7 @@ using FargowiltasSouls.Content.NPCs;
 using Terraria.GameContent.Creative;
 using static Terraria.GameContent.Creative.CreativePowers;
 using Fargowiltas.Content.UI;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {

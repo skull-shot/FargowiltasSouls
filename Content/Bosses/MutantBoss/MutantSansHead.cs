@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSansHead : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_246B";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_246B";
 
         public override void SetStaticDefaults()
         {

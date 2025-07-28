@@ -3,17 +3,16 @@ using ReLogic.Content;
 using Terraria.ModLoader;
 
 // Base namespace for convinience
-namespace FargowiltasSouls.Assets.ExtraTextures
+namespace FargowiltasSouls.Assets.Textures
 {
-    public static class FargoAssets
+    public class FargoAssets
     {
         /// <summary>
         /// Grabs the asset string of a texture.
         /// </summary>
-        /// <param name="path">The folder structure associated with the asset.</param>
-        /// <param name="name">The name of the asset.</param>
-        public static string GetAssetString(string path, string name) => $"FargowiltasSouls/Assets/Textures/{path}/{name}";
-
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        public static string GetAssetString(string path, string name) => "FargowiltasSouls/Assets/Textures/" + path + "/" + name;
         public static string Filepath => "FargowiltasSouls/Assets/Textures/";
         public static string TilePath => Filepath + "Tiles/";
 
@@ -70,7 +69,7 @@ namespace FargowiltasSouls.Assets.ExtraTextures
         public static Asset<Texture2D> WillStreak => ModContent.Request<Texture2D>(Filepath + "Trails/WillStreak");
         #endregion
 
-        public class Tiles
+        /*public class Tiles
         {
             public static Asset<Texture2D> CrackedSandstoneBricks => ModContent.Request<Texture2D>(TilePath + "CrackedSandstoneBricks");
             public static Asset<Texture2D> FMMBanner => ModContent.Request<Texture2D>(TilePath + "FMMBanner");
@@ -131,7 +130,7 @@ namespace FargowiltasSouls.Assets.ExtraTextures
 
             }
 
-        }
+        }*/
 
         public class UI
         {   

@@ -3,8 +3,8 @@ using Terraria.ID;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
 using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 
 namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {

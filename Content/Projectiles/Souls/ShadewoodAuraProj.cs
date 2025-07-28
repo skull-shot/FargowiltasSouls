@@ -4,7 +4,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using Luminance.Core.Graphics;
 using Terraria.GameContent;
 using Fargowiltas.Common.Configs;

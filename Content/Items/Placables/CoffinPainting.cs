@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Tiles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Tiles;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class CoffinPainting : ModItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "CoffinPainting");
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

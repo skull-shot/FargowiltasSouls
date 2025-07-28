@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     fargoBuffer.Remove(type);
                 }
             }
-            Main.NewText(WorldSavingSystem.DungeonBrickType);
+            //Main.NewText(WorldSavingSystem.DungeonBrickType);
         }
         public override void LoadSprites(NPC npc, bool recolor)
         {

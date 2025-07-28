@@ -2,7 +2,7 @@
 using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;

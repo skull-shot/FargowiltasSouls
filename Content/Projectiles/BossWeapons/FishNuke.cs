@@ -1,4 +1,4 @@
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;

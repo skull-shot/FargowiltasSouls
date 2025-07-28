@@ -2,11 +2,13 @@
 using Terraria.ObjectData;
 using Terraria;
 using Terraria.ModLoader;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Placables
 {
     public class CoffinPaintingSheet : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "CoffinPaintingSheet");
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;

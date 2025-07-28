@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Luminance.Assets;
 using Microsoft.Xna.Framework;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class LifeRevitalizer : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "LifeRevitalizer");
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

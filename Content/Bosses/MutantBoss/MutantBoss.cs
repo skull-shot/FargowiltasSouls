@@ -1,6 +1,6 @@
 using Fargowiltas.Common.Configs;
 using Fargowiltas.Content.NPCs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;

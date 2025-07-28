@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -5,6 +6,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class TwentyTwoPainting : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "TwentyTwoPainting");
         public override void SetStaticDefaults()
         {
 

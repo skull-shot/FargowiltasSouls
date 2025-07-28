@@ -10,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
 {
     public class BigSting22 : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_222";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_222";
 
         public override void SetStaticDefaults()
         {

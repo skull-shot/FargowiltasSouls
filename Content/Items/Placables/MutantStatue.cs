@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,9 +7,9 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class MutantStatue : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "MutantStatue");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mutant Statue");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

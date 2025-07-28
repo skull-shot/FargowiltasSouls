@@ -1,10 +1,12 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Items.Placables.Trophies
 {
     public abstract class BaseTrophy : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles/Trophies", Name);
         protected abstract int TileType { get; }
 
         public override void SetStaticDefaults()

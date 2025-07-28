@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.PlayerDrawLayers;

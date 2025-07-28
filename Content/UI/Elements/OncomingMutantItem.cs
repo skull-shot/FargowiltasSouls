@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Assets.UI
