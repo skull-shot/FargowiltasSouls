@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.Lifelight;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Terraria.GameContent.ItemDropRules;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
 
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeRevitalizer>()));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<LifeChallenger>()));
             itemLoot.Add(new OneFromOptionsDropRule(1, 1,

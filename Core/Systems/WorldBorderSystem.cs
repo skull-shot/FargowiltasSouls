@@ -7,6 +7,7 @@ using Terraria.ModLoader.IO;
 using Terraria.UI;
 using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Assets.ExtraTextures;
 
 
 
@@ -23,7 +24,7 @@ namespace FargowiltasSouls.Core.Systems
                 On_UIWorldListItem.ctor += UseCustomBorder;
             });
 
-            mutantBorder = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MutantWorldBorder", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+            mutantBorder = FargoAssets.UI.MainMenu.MutantWorldBorder;
         }
 
         private static void UseCustomBorder(On_UIWorldListItem.orig_ctor orig, UIWorldListItem self, WorldFileData data, int orderInList, bool canBePlayed)

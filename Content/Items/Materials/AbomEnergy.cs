@@ -1,7 +1,9 @@
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Materials
 {
@@ -19,8 +21,8 @@ namespace FargowiltasSouls.Content.Items.Materials
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 99;
-            Item.rare = ItemRarityID.Purple;
+            Item.maxStack = Item.CommonMaxStack;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.value = Item.sellPrice(0, 4, 0, 0);
         }
 

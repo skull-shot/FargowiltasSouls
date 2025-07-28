@@ -7,7 +7,8 @@ using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
 using FargowiltasSouls.Content.Projectiles.Minions;
@@ -65,11 +66,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
-            
-            
+
+
             modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
             {
-                
+
                 if (hitInfo.Crit)
                 {
                     if (UniverseCore) // cosmic core
@@ -85,8 +86,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
                     {
                         float critDamageMult = 0.75f; // 1f
-                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                            //critDamageMult *= 0.75f;
+                                                      //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                                                      //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
                         if (!EridanusSet && !Ambrosia)
@@ -100,7 +101,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
-                       
+
                 }
 
                 if (Hexed)
@@ -150,8 +151,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
+            //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+            //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {
@@ -372,9 +373,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                dr -= 0.1f;
-
             if (Illuminated)
             {
                 float maxDRReduction = 0.25f;
@@ -488,8 +486,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo hurtInfo) =>
                 {
-                    if(hurtInfo.Damage <= 1) return;
-                    
+                    if (hurtInfo.Damage <= 1) return;
+
                     int scythesSacrificed = 0;
                     const int maxSacrifice = 4;
                     const double maxDR = 0.20;
@@ -509,12 +507,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     hurtInfo.Damage = (int)(hurtInfo.Damage * (1.0f - (float)maxDR / maxSacrifice * scythesSacrificed));
                 };
             }
-
-            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && (modifiers.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (modifiers.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[modifiers.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
-            {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
-            }
         }
 
         public override void OnHurt(Player.HurtInfo info)
@@ -531,6 +523,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && !Player.HasBuff(ModContent.BuffType<TitaniumCDBuff>()))
             {
                 Player.AddBuff(ModContent.BuffType<TitaniumCDBuff>(), LumUtils.SecondsToFrames(15));
+            }
+
+            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage <= 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
+            {
+                DeerSinewFreezeCD = 120;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
             }
 
             if (NekomiSet && NekomiHitCD <= 0)

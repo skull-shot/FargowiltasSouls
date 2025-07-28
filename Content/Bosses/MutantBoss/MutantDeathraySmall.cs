@@ -153,7 +153,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             // Set shader parameters. This one takes a fademap and a color.
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // The laser should fade to this in the middle.
             shader.TrySetParameter("mainColor", FargoSoulsUtil.AprilFools ? new Color(255, 255, 183, 100) : new Color(183, 252, 253, 100));
             shader.TrySetParameter("stretchAmount", 3);

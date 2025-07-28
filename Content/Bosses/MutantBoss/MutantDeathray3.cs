@@ -176,7 +176,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             shader.TrySetParameter("mainColor", new Color(255, 255, 183, 100));
             shader.TrySetParameter("stretchAmount", 1);
             shader.TrySetParameter("scrollSpeed", 3f);

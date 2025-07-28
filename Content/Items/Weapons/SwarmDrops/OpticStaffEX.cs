@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -34,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.knockBack = 3f;
             Item.UseSound = SoundID.Item82;
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.buffType = ModContent.BuffType<TwinsEXBuff>();
             Item.shoot = ModContent.ProjectileType<OpticRetinazer>();
             Item.shootSpeed = 10f;

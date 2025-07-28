@@ -2,6 +2,7 @@ using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
@@ -3025,7 +3026,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             if (RuneFormation != Formations.Shield)
                 return;
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(NPC.oldPos, new(WidthFunction, ColorFunction, _ => NPC.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
 
@@ -3047,19 +3048,28 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<LifelightBag>()));
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
+
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelightTrophy>(), 10));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<LifelightRelic>()));
-            npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<LifelightMasterPet>(), 4));
-
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<EnchantedLifeblade>(), ModContent.ItemType<Lightslinger>(), ModContent.ItemType<CrystallineCongregation>(), ModContent.ItemType<KamikazePixieStaff>()));
             rule.OnSuccess(ItemDropRule.Common(ItemID.HallowedFishingCrateHard, 1, 1, 5)); //divine crate
             rule.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 1, 3));
             rule.OnSuccess(ItemDropRule.Common(ItemID.PixieDust, 1, 15, 25));
 
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<LifelightBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<LifelightRelic>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<LifelightMasterPet>(), 4));
         }
         #endregion
         #region Help Methods

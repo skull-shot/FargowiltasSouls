@@ -2325,16 +2325,16 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 // Inner ring.
                 Color innerColor = Color.Red;
                 innerColor.A = 0;
-                float radius = FargosTextureRegistry.HardEdgeRing.Width() / 2;
+                float radius = FargoAssets.HardEdgeRing.Width() / 2;
                 int size = WorldSavingSystem.MasochistModeReal ? 200 : 150;
                 float scale = size / radius;
                 
-                spriteBatch.Draw(FargosTextureRegistry.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargosTextureRegistry.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargoAssets.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
                 // Outer ring.
                 Color outerColor = Color.Green;
                 outerColor.A = 0;
-                spriteBatch.Draw(FargosTextureRegistry.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargosTextureRegistry.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargoAssets.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
             }
         }
         #endregion

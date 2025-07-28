@@ -5,6 +5,8 @@ global using LumUtils = Luminance.Common.Utilities.Utilities;
 using Fargowiltas;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
+using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
@@ -59,6 +61,7 @@ namespace FargowiltasSouls
     {
         public static Mod MutantMod;
         public static Mod CalamityMod;
+        public static Mod MusicDisplay;
 
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
@@ -125,6 +128,7 @@ namespace FargowiltasSouls
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
             ModLoader.TryGetMod("CalamityMod", out CalamityMod);
+            ModLoader.TryGetMod("MusicDisplay", out MusicDisplay);
 
             List<TitleLinkButton> titleLinks = fargoTitleLinks;
             titleLinks.Add(MakeSimpleButton("TitleLinks.Discord", "https://discord.gg/fargo", 0));
@@ -480,7 +484,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<OceanicSealBuff>(),
                     ModContent.BuffType<OiledBuff>(),
-                    ModContent.BuffType<PurgedBuff>(),
                     ModContent.BuffType<RushJobBuff>(),
                     ModContent.BuffType<ReverseManaFlowBuff>(),
                     ModContent.BuffType<RottingBuff>(),
@@ -1088,7 +1091,7 @@ namespace FargowiltasSouls
         public static TitleLinkButton MakeSimpleButton(string textKey, string linkUrl, int horizontalFrameIndex)
         {   
             //yummy vanilla code 
-            Asset<Texture2D> val = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/TitleLinkButtons", (AssetRequestMode)1);
+            Asset<Texture2D> val = FargoAssets.UI.MainMenu.TitleLinkButtons;
             Rectangle value = val.Frame(4, 2, horizontalFrameIndex);
             Rectangle value2 = val.Frame(4, 2, horizontalFrameIndex, 1);
             value.Width--;

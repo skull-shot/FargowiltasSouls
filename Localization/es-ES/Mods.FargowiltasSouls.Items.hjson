@@ -1560,7 +1560,7 @@ WyvernFeather: {
 	/* Tooltip:
 		'''
 		Grants immunity to Clipped Wings
-		You periodically shed light orbs, touch them to refresh your flight time
+		While airborne, you periodically shed light orbs that refresh flight time and double jumps on pickup
 		Stabilizes gravity in space and liquids (works from inventory and vanity)
 		'Warm to the touch'
 		''' */
@@ -3407,7 +3407,7 @@ RazorContainer: {
 	/* Tooltip:
 		'''
 		Spawns a razor blade that hovers around your cursor
-		Hit it with a standard broadsword to send it flying
+		Hit it with a melee weapon to send it flying
 		While flying it always critically strikes and has increased armor penetration
 		'Some yellow fur is still stuck at the bottom' 
 		''' */

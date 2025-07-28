@@ -78,11 +78,7 @@ RemoteLightningEffect: {
 
 FrigidGemstoneKeyEffect: {
 	DisplayName: 寒霜咒语
-	Tooltip:
-		'''
-		放置冰雪魔杖之冰
-		在困难模式中，你的冰块会造成霜冻减益
-		'''
+	Tooltip: 放置冰雪魔杖之冰
 }
 
 BombKeyEffect: {

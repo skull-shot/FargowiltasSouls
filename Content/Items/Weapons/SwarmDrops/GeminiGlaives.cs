@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -32,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.shootSpeed = 20;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.UseSound = null;

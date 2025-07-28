@@ -9,6 +9,7 @@ using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
@@ -22,7 +23,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void SetDefaults()
         {
             Item.DefaultToWhip(ModContent.ProjectileType<TheDestroyerProj>(), 1110, 20, 9, 60);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.value = Item.sellPrice(0, 25);
         }
 

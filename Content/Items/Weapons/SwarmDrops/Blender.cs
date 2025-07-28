@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Rarities;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.damage = 340;
 
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
         }
 
         public override void HoldItem(Player player)

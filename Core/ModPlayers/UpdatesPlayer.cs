@@ -7,7 +7,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
@@ -527,9 +527,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (IvyVenom && !Player.venom)
                 DamageOverTime(16, true);
-
-            if (Smite)
-                DamageOverTime(0, true);
 
             if (Anticoagulation)
                 DamageOverTime(4, true);

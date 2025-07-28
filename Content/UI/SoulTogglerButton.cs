@@ -1,11 +1,16 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI
@@ -34,17 +39,17 @@ namespace FargowiltasSouls.Content.UI
             const int x = 570;
             const int y = 275;
 
-            IconFlash = new UIImage(FargoUIManager.SoulTogglerButton_MouseOverTexture);
+            IconFlash = new UIImage(FargoAssets.UI.Toggler.SoulTogglerButton_MouseOverTexture);
             IconFlash.Left.Set(x, 0);
             IconFlash.Top.Set(y, 0);
             Append(IconFlash);
 
-            Icon = new UIImage(FargoUIManager.SoulTogglerButtonTexture);
+            Icon = new UIImage(FargoAssets.UI.Toggler.SoulTogglerButtonTexture);
             Icon.Left.Set(x, 0); //26
             Icon.Top.Set(y, 0); //300
             Append(Icon);
 
-            IconHighlight = new FargoUIHoverTextImageButton(FargoUIManager.SoulTogglerButton_MouseOverTexture, Language.GetTextValue("Mods.FargowiltasSouls.UI.SoulTogglerButton"));
+            IconHighlight = new FargoUIHoverTextImageButton(FargoAssets.UI.Toggler.SoulTogglerButton_MouseOverTexture, Language.GetTextValue("Mods.FargowiltasSouls.UI.SoulTogglerButton"));
             IconHighlight.Left.Set(0, 0);
             IconHighlight.Top.Set(0, 0);
             IconHighlight.SetVisibility(1f, 0);
@@ -52,9 +57,9 @@ namespace FargowiltasSouls.Content.UI
             IconHighlight.OnLeftClick += IconHighlight_OnClick;
             Icon.Append(IconHighlight);
 
-            OncomingMutant = new UIOncomingMutant(FargoUIManager.OncomingMutantTexture.Value,
-                FargoUIManager.OncomingMutantAuraTexture.Value,
-                FargoUIManager.OncomingMutantntTexture.Value,
+            OncomingMutant = new UIOncomingMutant(FargoAssets.UI.OncomingMutantTexture.Value,
+                FargoAssets.UI.OncomingMutantAura.Value,
+                FargoAssets.UI.OncomingMutantnt.Value,
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityEnabled"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistEnabled"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityDisabled"),

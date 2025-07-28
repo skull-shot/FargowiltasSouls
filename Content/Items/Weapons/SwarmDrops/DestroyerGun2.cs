@@ -3,6 +3,7 @@ using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -32,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.knockBack = 1.5f;
             Item.UseSound = SoundID.NPCDeath13;
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<DestroyerHead2>();
             Item.shootSpeed = 18f;
