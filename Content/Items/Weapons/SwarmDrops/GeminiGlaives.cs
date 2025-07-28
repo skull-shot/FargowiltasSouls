@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OpticStaffEX>();
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OmniscienceStaff>();
         }
 
         public override void SetDefaults()

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

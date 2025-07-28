@@ -10,7 +10,7 @@ using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Content.Projectiles.Eternity.Accessories.BionomicCluster;
+using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {

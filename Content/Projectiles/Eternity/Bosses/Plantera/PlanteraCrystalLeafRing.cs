@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;

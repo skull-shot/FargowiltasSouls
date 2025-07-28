@@ -1,7 +1,7 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
 using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;

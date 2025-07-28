@@ -1,8 +1,7 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern.BiomeMimics;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -14,6 +13,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 {

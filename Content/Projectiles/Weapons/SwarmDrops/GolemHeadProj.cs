@@ -1,4 +1,5 @@
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -108,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     p.velocity.Y += IdleAccel * (p.position.Y < Projectile.position.Y ? -1 : 1);
                 }
 
-                if (Projectile.ai[1] == 0 && Projectile.owner == Main.myPlayer && (player.dead || player.ghost || !player.controlUseItem || player.HeldItem.type != ModContent.ItemType<GolemTome2>()))
+                if (Projectile.ai[1] == 0 && Projectile.owner == Main.myPlayer && (player.dead || player.ghost || !player.controlUseItem || player.HeldItem.type != ModContent.ItemType<Landslide>()))
                 {
                     Projectile.ai[1] = 1;
                     Projectile.localAI[0] = player.SafeDirectionTo(Main.MouseWorld).ToRotation();

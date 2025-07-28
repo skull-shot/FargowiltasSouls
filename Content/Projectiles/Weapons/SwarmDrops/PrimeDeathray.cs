@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            int byIdentity = FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)Projectile.ai[1], ModContent.ProjectileType<RefractorBlaster2Held>());
+            int byIdentity = FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)Projectile.ai[1], ModContent.ProjectileType<DiffractorBlasterHeld>());
             if (byIdentity != -1)
             {
                 Player player = Main.player[Projectile.owner];

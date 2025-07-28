@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Systems;
 using Terraria;

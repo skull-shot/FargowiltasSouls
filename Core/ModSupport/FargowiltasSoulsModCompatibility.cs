@@ -217,7 +217,7 @@ namespace FargowiltasSouls
                     [ModContent.NPCType<ShadowChampion>()],
                     () => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.ShadowChampion],
                     () => true,
-                    new List<int>(BaseForce.EnchantsIn<ShadowForce>()).Append(ModContent.ItemType<ChampionMusicBox>()).ToList(),
+                    new List<int>(BaseForce.EnchantsIn<DeathForce>()).Append(ModContent.ItemType<ChampionMusicBox>()).ToList(),
                     [ModContent.ItemType<SigilOfChampions>()],
                     false
                 );
@@ -285,7 +285,7 @@ namespace FargowiltasSouls
                         ModContent.ItemType<KamikazePixieStaff>(),
                         ModContent.ItemType<LifelightMasterPet>()
                     ],
-                    [ModContent.ItemType<FragilePixieLamp>()],
+                    [ModContent.ItemType<CrystallineEffigy>()],
                     false,
                     "Content/Bosses/Lifelight/LifeChallenger"
                 );

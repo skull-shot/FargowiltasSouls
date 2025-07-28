@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.Champions.Earth;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Terraria;

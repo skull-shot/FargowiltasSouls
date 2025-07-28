@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Bosses.AbomBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

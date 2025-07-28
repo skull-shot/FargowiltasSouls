@@ -12,7 +12,7 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.WorldGeneration;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Common.StateMachines;
 using FargowiltasSouls.Assets.Sounds;
 using Terraria.Chat;

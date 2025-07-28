@@ -1,6 +1,6 @@
 ﻿using Fargowiltas.Content.UI;
 using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

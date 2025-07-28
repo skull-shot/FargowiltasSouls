@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (Projectile.ai[0] == 0)
             {
                 Player player = Main.player[Projectile.owner];
-                if (player.active && !player.dead && player.channel && player.HeldItem.type == ModContent.ItemType<FleshCannon>() && player.CheckMana(player.HeldItem.mana))
+                if (player.active && !player.dead && player.channel && player.HeldItem.type == ModContent.ItemType<Regurgitator>() && player.CheckMana(player.HeldItem.mana))
                 {
                     Projectile.damage = player.GetWeaponDamage(player.HeldItem);
                     Projectile.CritChance = player.GetWeaponCrit(player.HeldItem);

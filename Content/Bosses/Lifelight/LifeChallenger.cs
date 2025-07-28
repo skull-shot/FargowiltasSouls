@@ -1,7 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Pets;
@@ -547,7 +547,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 60);
 
                 if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<FragilePixieLamp>());
+                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<CrystallineEffigy>());
 
                 SoundEngine.PlaySound(ScreechSound1, NPC.Center);
                 SoundEngine.PlaySound(SoundID.Item62, NPC.Center);

@@ -12,7 +12,7 @@ using Terraria.GameContent;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 {

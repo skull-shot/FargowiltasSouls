@@ -1,7 +1,7 @@
 using Fargowiltas.Common.Configs;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;

@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ModContent.ItemType<LeashOfCthulhu>())
+            .AddIngredient(ModContent.ItemType<Eyeleash>())
             .AddIngredient(ModContent.Find<ModItem>("Fargowiltas", "EnergizerEye"))
             .AddIngredient(ItemID.LunarBar, 10)
 

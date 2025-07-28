@@ -3,10 +3,10 @@ using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -1200,7 +1200,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.EyeofCthulhu:
-                    npcLoot.Add(BossDrop(ModContent.ItemType<LeashOfCthulhu>()));
+                    npcLoot.Add(BossDrop(ModContent.ItemType<Eyeleash>()));
                     break;
 
                 case NPCID.EaterofWorldsHead:

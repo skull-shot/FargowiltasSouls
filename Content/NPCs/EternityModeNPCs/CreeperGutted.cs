@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using System;
@@ -179,7 +179,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         {
             int heart = NPC.ai[2] > 1 ? 1 : 0; //pure heart and above (1), or not (0)
 
-            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.CreeperHitbox>(), NPC.damage, 6f, (int)NPC.ai[0], heart);
+            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Accessories.PureHeart.CreeperHitbox>(), NPC.damage, 6f, (int)NPC.ai[0], heart);
 
             if (NPC.life <= 0)
             {

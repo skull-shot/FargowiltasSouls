@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
