@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+﻿using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {

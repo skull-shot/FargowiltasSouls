@@ -73,8 +73,7 @@
     <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
-    <Folder Include="Content\Projectiles\Weapons\FinalUpgrades\" />
-    <Folder Include="Content\Projectiles\Weapons\SwarmDrops\" />
+    <Folder Include="Content\Projectiles\Accessories\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
             void Suck()
             {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && p.Distance(Projectile.Center) < suckRange && p.CountsAsClass(DamageClass.Ranged) && FargoSoulsUtil.CanDeleteProjectile(p) && p.type != ModContent.ProjectileType<Minions.LunarCultistLightningArc>()))
+                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && p.Distance(Projectile.Center) < suckRange && p.CountsAsClass(DamageClass.Ranged) && FargoSoulsUtil.CanDeleteProjectile(p) && p.type != ModContent.ProjectileType<FargowiltasSouls.Content.Projectiles.Weapons.Minions.LunarCultistLightningArc>()))
                 {
                     //suck in nearby friendly projs
                     p.velocity = p.SafeDirectionTo(Projectile.Center) * p.velocity.Length();

@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using System;

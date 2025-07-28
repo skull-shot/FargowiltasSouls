@@ -7,9 +7,9 @@ using FargowiltasSouls.Content.Items.Materials;
 using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Content.Rarities;
-using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
