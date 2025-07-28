@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Sky;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Content.Sky;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -13,10 +14,10 @@ namespace FargowiltasSouls.Content.UI
     {
         bool forgor = false;
         public override Asset<Texture2D> Logo => forgor ?
-            ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/ForgorMenuLogo") :
-            ModContent.Request<Texture2D>("FargowiltasSouls/Assets/UI/MenuLogo");
+            FargoAssets.UI.MainMenu.ForgorMenuLogo :
+            FargoAssets.UI.MainMenu.MenuLogo;
 
-        private Asset<Texture2D> LogoGlow => ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/UI/{(forgor ? "Forgor" : "")}MenuLogo_Glow");
+        private Asset<Texture2D> LogoGlow => forgor? FargoAssets.UI.MainMenu.ForgorMenuLogoGlow : FargoAssets.UI.MainMenu.MenuLogoGlow;
 
         //public override Asset<Texture2D> SunTexture => ModContent.Request<Texture2D>($"");
 

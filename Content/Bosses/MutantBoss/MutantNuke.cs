@@ -140,7 +140,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.ColorNoiseMap.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.ColorNoiseMap.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
 

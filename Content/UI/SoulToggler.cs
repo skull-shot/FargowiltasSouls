@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -121,28 +123,28 @@ namespace FargowiltasSouls.Content.UI
             PresetPanel.PaddingLeft = PresetPanel.PaddingRight = 0;
             PresetPanel.BackgroundColor = new Color(74, 95, 172);
 
-            OffButton = new FargoUIPresetButton(FargoUIManager.PresetOffButton.Value, (toggles) =>
+            OffButton = new FargoUIPresetButton(FargoAssets.UI.Toggler.PresetOff.Value, (toggles) =>
             {
                 toggles.SetAll(false);
             }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOff"));
             OffButton.Top.Set(6, 0);
             OffButton.Left.Set(8, 0);
 
-            OnButton = new FargoUIPresetButton(FargoUIManager.PresetOnButton.Value, (toggles) =>
+            OnButton = new FargoUIPresetButton(FargoAssets.UI.Toggler.PresetOn.Value, (toggles) =>
             {
                 toggles.SetAll(true);
             }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOn"));
             OnButton.Top.Set(6, 0);
             OnButton.Left.Set(30, 0);
 
-            SomeEffectsButton = new FargoUIPresetButton(FargoUIManager.PresetMinimalButton.Value, (toggles) =>
+            SomeEffectsButton = new FargoUIPresetButton(FargoAssets.UI.Toggler.PresetMinimal.Value, (toggles) =>
             {
                 toggles.SomeEffects();
             }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.SomeEffectsPreset"));
             SomeEffectsButton.Top.Set(6, 0);
             SomeEffectsButton.Left.Set(52, 0);
 
-            MinimalButton = new FargoUIPresetButton(FargoUIManager.PresetMinimalButton.Value, (toggles) =>
+            MinimalButton = new FargoUIPresetButton(FargoAssets.UI.Toggler.PresetMinimal.Value, (toggles) =>
             {
                 toggles.MinimalEffects();
             }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.MinimalEffectsPreset"));
@@ -164,7 +166,7 @@ namespace FargowiltasSouls.Content.UI
             for (int i = 0; i < ToggleBackend.CustomPresetCount; i++)
             {
                 int slot = i + 1;
-                CustomButton[i] = new FargoUIPresetButton(FargoUIManager.PresetCustomButton.Value,
+                CustomButton[i] = new FargoUIPresetButton(FargoAssets.UI.Toggler.PresetCustom.Value,
                 toggles => toggles.LoadCustomPreset(slot),
                 toggles => toggles.SaveCustomPreset(slot),
                 () => Language.GetTextValue("Mods.FargowiltasSouls.UI.CustomPreset", slot));
@@ -174,7 +176,7 @@ namespace FargowiltasSouls.Content.UI
 
                 if (slot == ToggleBackend.CustomPresetCount) //after last panel is loaded, load reload button
                 {
-                    DisplayAllButton = new FargoUIDisplayAllButton(FargoUIManager.DisplayAllButtonTexture.Value,
+                    DisplayAllButton = new FargoUIDisplayAllButton(FargoAssets.UI.Toggler.DisplayAllButton.Value,
                         () => Language.GetTextValue("Mods.FargowiltasSouls.UI.DisplayAll"),
                         () => Language.GetTextValue("Mods.FargowiltasSouls.UI.DisplayEquipped"));
                     DisplayAllButton.OnLeftClick += DisplayAllButton_OnLeftClick;

@@ -21,10 +21,10 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public static List<Asset<Texture2D>> RingTextures =>
         [
-            FargosTextureRegistry.DeviRingTexture,
-            FargosTextureRegistry.DeviRing2Texture,
-            FargosTextureRegistry.DeviRing3Texture,
-            FargosTextureRegistry.DeviRing4Texture,
+            FargoAssets.DeviRingTexture,
+            FargoAssets.DeviRing2Texture,
+            FargoAssets.DeviRing3Texture,
+            FargoAssets.DeviRing4Texture,
         ];
 
         public DeviBigDeathray() : base(180) { }
@@ -212,10 +212,10 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             // Set shader parameters. This one takes two lots of fademaps and colors for two different overlayed textures.
             laser.TrySetParameter("mainColor", new Color(255, 180, 243, 100) * 2);
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviBackStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviBackStreak.Value);
 
             // Secondary fademap
-            FargoSoulsUtil.SetTexture2(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture2(FargoAssets.DeviInnerStreak.Value);
             PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: laser), 50);
             #endregion
 

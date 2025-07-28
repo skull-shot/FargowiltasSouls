@@ -1,10 +1,11 @@
-﻿using Terraria.ModLoader;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
     // Exists to be displayed as an item icon in the Toggler UI when inflicted with Mutant's Presence.
     public class TogglerIconItem : ModItem
     {
-        public override string Texture => "FargowiltasSouls/Assets/UI/SoulTogglerToggle";
+        public override string Texture => FargoAssets.GetAssetString("UI", "SoulTogglerToggle");
     }
 }

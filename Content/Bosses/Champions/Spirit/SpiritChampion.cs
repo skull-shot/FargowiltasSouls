@@ -1048,7 +1048,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                 float radius = auraDistance;
                 var target = Main.LocalPlayer;
                 var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargosTextureRegistry.SandyNoise;
+                var diagonalNoise = FargoAssets.SandyNoise;
                 if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                     return false;
                 var maxOpacity = NPC.Opacity;

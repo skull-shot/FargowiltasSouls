@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             float radius = Projectile.width / 2;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
 
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.SolarEnchantShader");

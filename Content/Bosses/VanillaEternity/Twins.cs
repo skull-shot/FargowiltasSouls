@@ -833,7 +833,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Vector2 auraPos = position;
             float radius = AuraRadius();
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            var diagonalNoise = FargoAssets.Techno1Noise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = npc.Opacity * AuraOpacity;
