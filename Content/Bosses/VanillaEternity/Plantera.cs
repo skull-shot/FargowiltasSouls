@@ -630,7 +630,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.rotation = npc.AngleTo(player.Center);
 
                 }
-                if (DashTimer == 30)
+                int dashTelegraph = WorldSavingSystem.MasochistModeReal ? 30 : 45;
+                int dashTime = 60;
+                if (DashTimer == dashTelegraph)
                 {
                     SoundEngine.PlaySound(SoundID.Roar, npc.Center);
                     npc.velocity = (player.Center - npc.Center).SafeNormalize(Vector2.Zero) * 15;
@@ -645,7 +647,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     */
                 }
                 DashTimer++;
-                if (DashTimer >= 90)
+                if (DashTimer >= dashTelegraph + dashTime)
                 {
                     Dashing = false;
                     DashTimer = 0;
