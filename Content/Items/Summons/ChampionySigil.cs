@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.Summons
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.consumable = true;

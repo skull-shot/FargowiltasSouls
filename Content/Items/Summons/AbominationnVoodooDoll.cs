@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.value = Item.sellPrice(gold: 1);
         }
 

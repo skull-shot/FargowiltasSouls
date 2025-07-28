@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Placables.Relics
 
             Item.width = 30;
             Item.height = 40;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Master;
             Item.master = true;
             Item.value = Item.buyPrice(0, 5);
