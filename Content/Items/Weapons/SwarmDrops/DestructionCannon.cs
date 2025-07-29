@@ -12,7 +12,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
-    public class DestroyerGun2 : SoulsItem
+    [LegacyName("DestroyerGun2")]
+    public class DestructionCannon : SoulsItem
     {
         public override void SetStaticDefaults()
         {

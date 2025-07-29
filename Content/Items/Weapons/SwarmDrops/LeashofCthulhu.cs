@@ -6,7 +6,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
-    public class MechanicalLeashOfCthulhu : SoulsItem
+    [LegacyName("MechanicalLeashOfCthulhu")]
+    public class LeashofCthulhu : SoulsItem
     {
         public override void SetStaticDefaults()
         {

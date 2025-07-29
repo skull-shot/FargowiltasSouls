@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
         {
             CreateRecipe()
 
-            .AddIngredient(ModContent.ItemType<MechanicalLeashOfCthulhu>(), 1)
+            .AddIngredient(ModContent.ItemType<LeashofCthulhu>(), 1)
             .AddIngredient(ModContent.ItemType<EternalEnergy>(), 15)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))

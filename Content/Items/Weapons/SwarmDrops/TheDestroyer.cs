@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public int Swings = 0;
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DestroyerGun2>();
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DestructionCannon>();
         }
         public override void SetDefaults()
         {

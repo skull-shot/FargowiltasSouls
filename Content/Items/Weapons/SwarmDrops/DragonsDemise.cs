@@ -9,7 +9,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
-    public class DragonBreath2 : SoulsItem
+    [LegacyName("DragonBreath2")]
+    public class DragonsDemise : SoulsItem
     {
         public int skullTimer;
 

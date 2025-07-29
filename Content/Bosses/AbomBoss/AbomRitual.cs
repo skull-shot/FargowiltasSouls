@@ -21,12 +21,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public float VisualScale = 0f;
 
         public AbomRitual() : base(realRotation, 1400f, ModContent.NPCType<AbomBoss>(), 87, visualCount: 64) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Abominationn Seal");
-        }
         public override void SetDefaults()
         {
             base.SetDefaults();
