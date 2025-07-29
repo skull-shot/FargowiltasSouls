@@ -120,7 +120,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             //if (FargowiltasSouls.SmokeBombKey.JustPressed && CrystalEnchantActive && SmokeBombCD == 0)
             //    CrystalAssassinEnchant.SmokeBombKey(this);
 
-            if (Player.HasEffect<FrigidGemstoneKeyEffect>())
+            if (Player.HasEffect<FrigidGraspKeyEffect>())
             {
                 if (FrigidGemstoneCD > 0)
                     FrigidGemstoneCD--;

@@ -135,7 +135,7 @@ WyvernBalls: Светлые сферы полёта
 StabilizedGravity: Стабилизированная гравитация
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: Установка близнецов
-GroundStickDR: Подзарядка при уроне
+RemoteControlDR: Подзарядка при уроне
 ProbeMinionEffect: Прислужник дрон
 RemoteLightningEffect: Удары молний
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"

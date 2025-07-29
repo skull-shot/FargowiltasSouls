@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips => 
-            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public static void PassiveEffect(Player player, Item item)
         {
-            FrigidGemstone.PassiveEffects(player, item);
+            FrigidGrasp.PassiveEffects(player, item);
             SandsofTime.PassiveEffects(player);
             //SqueakyToy.PassiveEffects(player, item);
             NymphsPerfume.PassiveEffects(player, item);
@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void ActiveEffect(Player player, Item item)
         {
             PassiveEffect(player, item);
-            FrigidGemstone.ActiveEffects(player, item);
+            FrigidGrasp.ActiveEffects(player, item);
             //SandsofTime.ActiveEffects(player, Item);
             SqueakyToy.ActiveEffects(player, item);
             NymphsPerfume.ActiveEffects(player, item);
@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffect(player, Item);
-            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
+            player.AddEffect<FrigidGraspKeyEffect>(Item);
         }
 
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             CreateRecipe()
 
-            .AddIngredient<FrigidGemstone>()
+            .AddIngredient<FrigidGrasp>()
             .AddIngredient<SandsofTime>()
             .AddIngredient<SqueakyToy>()
             .AddIngredient<NymphsPerfume>()

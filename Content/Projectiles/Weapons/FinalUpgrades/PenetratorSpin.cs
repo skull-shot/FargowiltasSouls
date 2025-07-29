@@ -166,7 +166,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
             for (float i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i += 0.1f)
             {
                 Player player = Main.player[Projectile.owner];
-                Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/PenetratorSpinGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/FinalUpgrades", "PenetratorSpinGlow").Value;
                 Color color27 = Color.Lerp(new Color(51, 255, 191, 210), Color.Transparent, (float)Math.Cos(Projectile.ai[0]) / 3 + 0.3f);
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 float scale = Projectile.scale - (float)Math.Cos(Projectile.ai[0]) / 5;

@@ -1161,14 +1161,14 @@ EurusSock: {
 	Tooltip: 穿戴者可跑的很快
 }
 
-FrigidGemstone: {
-	DisplayName: 霜寒之握
-	Tooltip:
+FrigidGrasp: {
+	// DisplayName: Frigid Grasp
+	/* Tooltip:
 		'''
-		免疫霜冻和冷冻减益（放在背包和时装栏中也可生效）
-		“古老的冰块留下的残肢”
-		'''
-	VanityTooltip: 免疫霜冻和冷冻减益
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		'A torn off limb composed of ancient ice'
+		''' */
+	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1217,16 +1217,15 @@ GelicWings: {
 		'''
 }
 
-GroundStick: {
-	DisplayName: 遥控装置
-	Tooltip:
+RemoteControl: {
+	// DisplayName: Remote Control
+	/* Tooltip:
 		'''
-		免疫避雷针减益
-		带电攻击或激光击中你会使你超级充能，在未充能完毕时这些攻击的伤害减半
-		充能完毕后，增加移动速度和攻击速度，你的攻击会造成带电和避雷针减益
-		召唤两个友善的探测器为你而战，并和你一起充能
-		“被你击败的敌人的体节，上面还粘着天线”
-		'''
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
+		''' */
 }
 
 GuttedHeart: {

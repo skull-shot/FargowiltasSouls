@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     Main.dust[d].velocity *= 5f;
                 }
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("WretchedPouchCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/WretchedPouch").Value, Color.DarkMagenta, 
+                    CooldownBarManager.Activate("WretchedPouchCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/WretchedPouch").Value, Color.DarkMagenta, 
                         () => Main.LocalPlayer.FargoSouls().WretchedPouchCD / (float)MaxChargeTime, true, activeFunction: () => player.HasEffect<WretchedPouchEffect>());
             }
             else

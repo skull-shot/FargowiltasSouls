@@ -154,7 +154,7 @@ namespace FargowiltasSouls.Assets.Textures
             public class MainMenu
             {
                 public static Asset<Texture2D> MenuLogo => ModContent.Request<Texture2D>(Filepath + "UI/MenuLogo", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> MenuLogoGlow => ModContent.Request<Texture2D>(Filepath + "MenuLogo_Glow", AssetRequestMode.ImmediateLoad);
+                public static Asset<Texture2D> MenuLogoGlow => ModContent.Request<Texture2D>(Filepath + "UI/MenuLogo_Glow", AssetRequestMode.ImmediateLoad);
                 public static Asset<Texture2D> ForgorMenuLogo => ModContent.Request<Texture2D>(Filepath + "UI/ForgorMenuLogo", AssetRequestMode.ImmediateLoad);
                 public static Asset<Texture2D> ForgorMenuLogoGlow => ModContent.Request<Texture2D>(Filepath + "UI/ForgorMenuLogo_Glow", AssetRequestMode.ImmediateLoad);
                 public static Asset<Texture2D> TitleLinkButtons => ModContent.Request<Texture2D>(Filepath + "UI/TitleLinkButtons", AssetRequestMode.ImmediateLoad);

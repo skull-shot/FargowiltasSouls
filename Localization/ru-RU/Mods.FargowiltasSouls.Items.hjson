@@ -1134,14 +1134,14 @@ EurusSock: {
 	Tooltip: Владелец может бегать чуть быстрее обычного
 }
 
-FrigidGemstone: {
-	DisplayName: Морозная хватка
-	Tooltip:
+FrigidGrasp: {
+	// DisplayName: Frigid Grasp
+	/* Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение» (работает в инвентаре и слотах для украшений)
-		«Оторванная конечность, сделанная из древнего льда»
-		'''
-	VanityTooltip: Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение»
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		'A torn off limb composed of ancient ice'
+		''' */
+	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1191,15 +1191,15 @@ GelicWings: {
 		'''
 }
 
-GroundStick: {
-	DisplayName: Пульт дистанционного управления
-	Tooltip:
+RemoteControl: {
+	// DisplayName: Remote Control
+	/* Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Электризация» и «Громоотвод»
-		Половина урона от атак электричеством и лучами по вам превращается в заряд
-		Пока вы подзаряжены, увеличивает ваши скорость передвижения и атаки, а также призывает 3 зонда сражаться за вас
-		«Батарейки давно сели»
-		'''
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
+		''' */
 }
 
 GuttedHeart: {
