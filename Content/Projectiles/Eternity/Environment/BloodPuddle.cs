@@ -23,6 +23,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             NPCID.Sets.TrailingMode[Type] = 2;
             NPCID.Sets.TrailCacheLength[Type] = 20;
             Main.npcFrameCount[Type] = 5;
+
+            this.ExcludeFromBestiary();
+
             base.SetStaticDefaults();
         }
         public override void SetDefaults()
@@ -123,9 +126,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         }
         public override void OnKill()
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 27; i++)
             {
-                Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Blood);
+                Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Blood, Main.rand.NextFloat(0, 7), Main.rand.NextFloat(0, 7));
             }
             if (NPC.ai[0] == 1 && ((int)NPC.ai[2]).IsWithinBounds(Main.maxPlayers))
             {

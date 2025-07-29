@@ -764,11 +764,11 @@
 // DestroyerBodyWhip.DisplayName: Destroyer Body
 // DestroyerHeadWhip.DisplayName: Destroyer Head
 // DestroyerTailWhip.DisplayName: Destroyer Tail
-// DestroyerScanTelegraph.DisplayName: Destroyer Scan Telegraph
-// PungentAuraProj.DisplayName: Pungent Aura Proj
-// RockeaterAuraProj.DisplayName: Rockeater Aura Proj
+// DestroyerScanTelegraph.DisplayName: Destroyer Scan
+// PungentAuraProj.DisplayName: Pungent Aura
+// RockeaterAuraProj.DisplayName: Rockeater Aura
 // FallenStarDay.DisplayName: Fallen Star Day
-// LightningRodLightning.DisplayName: Lightning Rod Lightning
+// LightningRodLightning.DisplayName: Lightning
 // ReleasedLeashofCthulhu.DisplayName: Leash of Cthulhu
 // Tome.DisplayName: Tome
 // TomeShot.DisplayName: Tome Shot
@@ -782,7 +782,7 @@
 // CirnoIceChunk.DisplayName: Cirno Ice Chunk
 // DaiyoLeaf.DisplayName: Daiyo Leaf
 // MystiaNote.DisplayName: Mystia Note
-// MystiaNote2.DisplayName: Mystia Note2
+// MystiaNote2.DisplayName: Mystia Note
 // RumiaOrb.DisplayName: Rumia Orb
 // EmpressRitual.DisplayName: Empress Ritual
 // BoneSpear.DisplayName: Bone Spear
@@ -794,18 +794,18 @@
 // PaladinHammer.DisplayName: Paladin Hammer
 // DungeonDebris.DisplayName: Dungeon Debris
 // PalmwoodShot.DisplayName: Palmwood Shot
-// BeetleEnchantBeetle.DisplayName: Beetle Enchant Beetle
-// SpookySpinScythe.DisplayName: Spooky Spin Scythe
+// BeetleEnchantBeetle.DisplayName: Beetle
+// SpookySpinScythe.DisplayName: Deathhunt Scythe
 // SnowMist.DisplayName: Snow Mist
 // IceShard.DisplayName: Ice Shard
-// DeviSniperTelegraph.DisplayName: Devi Sniper Telegraph
+// DeviSniperTelegraph.DisplayName: Sniper Rifle
 // SmallStingHitbox.DisplayName: Small Stinger
-// DeviShadowbeam.DisplayName: Devi Shadowbeam
+// DeviShadowbeam.DisplayName: Shadowbeam
 // SupremeDash.DisplayName: Supreme Dash
-// RemoteLightningExplosion.DisplayName: Remote Rain Explosion
-// RemoteLightning.DisplayName: Remote Rain Lightning
-// RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+// RemoteLightningExplosion.DisplayName: Lightning Explosion
+// RemoteLightning.DisplayName: Lightning
+// RemoteScanTelegraph.DisplayName: Scan
 // RemoteProbe.DisplayName: Remote Probe
-// CorruptionSludge.DisplayName: Corruption Sludge
-// WillDashTrail.DisplayName: Will Dash Trail
-// MechElectricOrbTelegraphed.DisplayName: Mech Electric Orb Telegraphed
+// CorruptionSludge.DisplayName: Corrupted Sludge
+// WillDashTrail.DisplayName: Dash Trail
+// MechElectricOrbTelegraphed.DisplayName: Electric Orb

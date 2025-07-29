@@ -867,6 +867,8 @@ namespace FargowiltasSouls.Core.Globals
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
+            if (!WorldSavingSystem.EternityMode)
+                return;
 
             if (npc.type == NPCID.Painter && WorldSavingSystem.DownedMutant && NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
