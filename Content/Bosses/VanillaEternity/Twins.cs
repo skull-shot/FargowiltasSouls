@@ -27,6 +27,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
