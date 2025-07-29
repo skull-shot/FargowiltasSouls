@@ -1019,13 +1019,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {
             // share healthbar
-            NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronPrime);
+            /*NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronPrime);
             if (FargoSoulsUtil.HostCheck && head != null)
             {
                 if (npc.lifeMax < head.lifeMax)
                     npc.life = npc.lifeMax = head.lifeMax;
                 npc.life = head.life = Math.Min(npc.life, head.life);
-            }
+            }*/
         }
         public override bool ModifyCollisionData(NPC npc, Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
         {
