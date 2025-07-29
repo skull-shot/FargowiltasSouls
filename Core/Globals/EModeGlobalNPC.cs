@@ -389,7 +389,6 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (NPC.downedBoss2)
                         {
-                            pool[NPCID.SeekerHead] = .005f;
                             if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
                                 pool[NPCID.EaterofWorldsHead] = .0002f;
                         }
@@ -399,7 +398,6 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (NPC.downedBoss2)
                         {
-                            pool[NPCID.IchorSticker] = .005f;
                             if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
                                 pool[NPCID.BrainofCthulhu] = .0002f;
                         }

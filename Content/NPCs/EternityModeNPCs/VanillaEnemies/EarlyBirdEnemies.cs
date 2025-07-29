@@ -21,8 +21,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             NPCID.PigronCorruption,
             NPCID.PigronCrimson,
             NPCID.PigronHallow,
-            NPCID.IchorSticker,
-            NPCID.SeekerHead,
             NPCID.AngryNimbus,
             NPCID.MushiLadybug,
             NPCID.AnomuraFungus,
