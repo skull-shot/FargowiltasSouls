@@ -703,11 +703,6 @@ namespace FargowiltasSouls.Core.Globals
                         if (bossCanSpawn && !FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
                             pool[NPCID.TheHungryII] = .03f;
 
-                        if (NPC.downedMechBossAny)
-                        {
-                            pool[NPCID.BlazingWheel] = .05f;
-                        }
-
                         if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
                         {
                             pool[NPCID.DiabolistRed] = .001f;
