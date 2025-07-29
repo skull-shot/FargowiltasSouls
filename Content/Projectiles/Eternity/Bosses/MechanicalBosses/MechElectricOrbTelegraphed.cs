@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
