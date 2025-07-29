@@ -13,7 +13,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Dash");
             Main.projFrames[Projectile.type] = Main.npcFrameCount[NPCID.QueenBee];
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

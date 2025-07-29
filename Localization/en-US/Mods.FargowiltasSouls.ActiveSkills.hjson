@@ -77,7 +77,7 @@ RemoteLightningEffect: {
 		'''
 }
 
-FrigidGemstoneKeyEffect: {
+FrigidGraspKeyEffect: {
 	DisplayName: Frigid Spell
 	Tooltip: Summons an ice block to your cursor
 }

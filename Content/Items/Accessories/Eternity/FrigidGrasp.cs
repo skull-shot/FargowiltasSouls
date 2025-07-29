@@ -9,11 +9,12 @@ using static Fargowiltas.FargoSets;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    public class FrigidGemstone : SoulsItem
+    [LegacyName("FrigidGemstone")]
+    public class FrigidGrasp : SoulsItem
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -43,7 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffects(player, Item);
-            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
+            player.AddEffect<FrigidGraspKeyEffect>(Item);
         }
 
         public override void UpdateInventory(Player player) => PassiveEffects(player, Item);
@@ -86,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.buffImmune[BuffID.Frostburn] = true;
             player.buffImmune[BuffID.Chilled] = true;
-            player.AddEffect<FrigidGemstoneKeyEffect>(Item);
+            player.AddEffect<FrigidGraspKeyEffect>(Item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual) => Effects(player);
@@ -107,16 +108,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
     }
     */
-    public class FrigidGemstoneKeyEffect : AccessoryEffect
+    public class FrigidGraspKeyEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
-        public override int ToggleItemType => ModContent.ItemType<FrigidGemstone>();
+        public override int ToggleItemType => ModContent.ItemType<FrigidGrasp>();
         public override void ActiveSkillHeld(Player player, bool stunned)
         {
             if (stunned)
                 return;
-            player.FargoSouls().FrigidGemstoneKey();
+            player.FargoSouls().FrigidGraspKey();
         }
     }
 }

@@ -11,10 +11,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
 {
     public class BetsyDash : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/HeartOfTheMaster", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/HeartOfTheMaster", "BetsyDash");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Dash");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 

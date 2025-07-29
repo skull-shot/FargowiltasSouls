@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             player.AddEffect<ProbeMinionEffect>(Item);
-            player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteControlDR>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
 
             player.AddEffect<ReinforcedStats>(Item);
@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             CreateRecipe()
 
             .AddIngredient(ModContent.ItemType<FusedLens>())
-            .AddIngredient(ModContent.ItemType<GroundStick>())
+            .AddIngredient(ModContent.ItemType<RemoteControl>())
             .AddIngredient(ModContent.ItemType<ReinforcedPlating>())
             .AddIngredient(ItemID.HallowedBar, 10)
             .AddIngredient(ItemID.SoulofFright, 5)

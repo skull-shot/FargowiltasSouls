@@ -18,7 +18,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    public class GroundStick : SoulsItem
+    [LegacyName("GroundStick")]
+    public class RemoteControl : SoulsItem
     {
         public override bool Eternity => true;
 
@@ -41,15 +42,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
-            player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteControlDR>(Item);
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
         }
     }
-    public class GroundStickDR : AccessoryEffect
+    public class RemoteControlDR : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
-        public override int ToggleItemType => ModContent.ItemType<GroundStick>();
+        public override int ToggleItemType => ModContent.ItemType<RemoteControl>();
         public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
@@ -86,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     public class ProbeMinionEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
-        public override int ToggleItemType => ModContent.ItemType<GroundStick>();
+        public override int ToggleItemType => ModContent.ItemType<RemoteControl>();
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
@@ -113,7 +114,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     public class RemoteLightningEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
-        public override int ToggleItemType => ModContent.ItemType<GroundStick>();
+        public override int ToggleItemType => ModContent.ItemType<RemoteControl>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffect<RemoteLightningEffect>();
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
@@ -129,7 +130,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 Projectile.NewProjectile(GetSource_EffectItem(player), pos, Vector2.Zero, ModContent.ProjectileType<RemoteScanTelegraph>(), dmg, 0f, Main.myPlayer, 0, angle, 1000);
             }
             player.FargoSouls().RemoteCD = 720;
-            CooldownBarManager.Activate("RemoteCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/GroundStick").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);
+            CooldownBarManager.Activate("RemoteCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/RemoteControl").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);
         }
     }
 }

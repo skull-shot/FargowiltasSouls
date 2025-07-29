@@ -12,12 +12,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
     public class GolemGib : ModProjectile
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", "GolemGib1");
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Golem Gibs");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 30;
@@ -135,11 +129,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             Texture2D tex;
             if (Projectile.ai[1] != 0)
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + Projectile.ai[1]).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + Projectile.ai[1]).Value;
             }
             else
             {
-                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + 1).Value;
+                tex = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/" + GetType().Name + 1).Value;
             }
             FargoSoulsUtil.DrawTexture(Main.spriteBatch, tex, 0, Projectile, lightColor, true);
 

@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             if (FoundTarget && TargetNPC != -1)
             {
-                Texture2D movingTexture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "SpectreSpiritFlying").Value;
+                Texture2D movingTexture = FargoAssets.GetTexture2D("Content/Projectiles/Accessories/Souls", "SpectreSpiritFlying").Value;
 
                 Rectangle rectangle = new(0, 0, movingTexture.Width, movingTexture.Height);
                 Vector2 origin = rectangle.Size() / 2f;
