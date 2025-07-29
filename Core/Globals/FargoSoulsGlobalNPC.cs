@@ -3,18 +3,18 @@ using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Misc;
 using FargowiltasSouls.Content.NPCs.Critters;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.UI.Emotes;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules;
@@ -36,6 +36,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -720,7 +721,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (shrapnel >= 15)
             {
-                Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", AssetRequestMode.ImmediateLoad);
+                Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
                 Rectangle rectangle = texture.Bounds;
                 Vector2 origin2 = rectangle.Size() / 2f;
                 Color color = Color.Red;
@@ -1200,7 +1201,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.EyeofCthulhu:
-                    npcLoot.Add(BossDrop(ModContent.ItemType<LeashOfCthulhu>()));
+                    npcLoot.Add(BossDrop(ModContent.ItemType<Eyeleash>()));
                     break;
 
                 case NPCID.EaterofWorldsHead:

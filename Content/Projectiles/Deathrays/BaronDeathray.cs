@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class BaronDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public BaronDeathray() : base(300, drawDistance: 3500) { }
 

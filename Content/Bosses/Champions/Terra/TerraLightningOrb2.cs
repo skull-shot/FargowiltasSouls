@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;

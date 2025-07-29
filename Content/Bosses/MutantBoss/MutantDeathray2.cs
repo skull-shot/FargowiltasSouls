@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -18,14 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     public class MutantDeathray2 : MutantSpecialDeathray, IPixelatedPrimitiveRenderer
     {
         public MutantDeathray2() : base(180) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return Projectile.scale >= .7f;

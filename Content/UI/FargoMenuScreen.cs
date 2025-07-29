@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Sky;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

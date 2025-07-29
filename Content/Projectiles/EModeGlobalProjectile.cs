@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Globals;
@@ -23,11 +22,13 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
 using Terraria.WorldBuilding;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons;
 
 namespace FargowiltasSouls.Content.Projectiles
 {

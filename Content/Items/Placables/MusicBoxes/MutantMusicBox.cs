@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Placables.MusicBoxes
 {
     public class MutantMusicBox : ModItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables/MusicBoxes", Name);
         public override void SetStaticDefaults()
         {
 

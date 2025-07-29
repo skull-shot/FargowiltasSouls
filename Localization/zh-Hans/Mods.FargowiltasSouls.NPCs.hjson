@@ -335,16 +335,16 @@ DeviBoss: {
 
 ShadowOrbNPC.DisplayName: 暗影珠
 
-LifeChallenger: {
-	DisplayName: 飘渺游光
+Lifelight: {
+	// DisplayName: Lifelight
 
 	BossChecklistIntegration: {
-		EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		SpawnInfo: 白天在神圣之地使用[i:FargowiltasSouls/FragilePixieLamp]召唤。
-		DespawnMessage: 飘渺游光随辉光消逝……
+		// EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
+		// SpawnInfo: Spawn by using [i:FargowiltasSouls/FragilePixieLamp] in the Hallow at day.
+		// DespawnMessage: Lifelight fades away...
 	}
 
-	FatherOfLies: 你来到这里真是个致命错误。
+	// FatherOfLies: It was a mistake to come here.
 }
 
 BanishedBaron: {

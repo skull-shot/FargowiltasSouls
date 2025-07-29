@@ -825,7 +825,7 @@ NatureForce: {
 		''' */
 }
 
-ShadowForce: {
+DeathForce: {
 	// DisplayName: Force of Death
 	/* Tooltip:
 		'''
@@ -1926,7 +1926,7 @@ GaiaPlate: {
 		''' */
 }
 
-MutantBody: {
+EternalCore: {
 	// DisplayName: Eternal Core
 	/* Tooltip:
 		'''
@@ -1937,7 +1937,7 @@ MutantBody: {
 		''' */
 }
 
-MutantMask: {
+EternalFlame: {
 	// DisplayName: Eternal Flame
 	/* Tooltip:
 		'''
@@ -1948,7 +1948,7 @@ MutantMask: {
 		''' */
 }
 
-MutantPants: {
+EternalLeggings: {
 	// DisplayName: Eternal Leggings
 	/* Tooltip:
 		'''
@@ -2152,7 +2152,7 @@ EternalEnergy: {
 		''' */
 }
 
-BrokenSpearHead: {
+BrokenSpearhead: {
 	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
@@ -2378,7 +2378,7 @@ NatureChampionRelic: {
 	// Tooltip: ""
 }
 
-ShadowChampionRelic: {
+DeathChampionRelic: {
 	// DisplayName: Death Champion Relic
 	// Tooltip: ""
 }
@@ -2587,7 +2587,7 @@ FleshHand: {
 	// Tooltip: "'The enslaved minions of a defeated foe...'"
 }
 
-LeashOfCthulhu: {
+Eyeleash: {
 	// DisplayName: Eyeleash
 	/* Tooltip:
 		'''
@@ -2787,7 +2787,7 @@ Blender: {
 	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
-DestroyerGun2: {
+DestructionCannon: {
 	// DisplayName: Destruction Cannon
 	/* Tooltip:
 		'''
@@ -2796,7 +2796,7 @@ DestroyerGun2: {
 		''' */
 }
 
-DragonBreath2: {
+DragonsDemise: {
 	// DisplayName: Dragon's Demise
 	/* Tooltip:
 		'''
@@ -2820,7 +2820,7 @@ EaterLauncher: {
 		''' */
 }
 
-FleshCannon: {
+Regurgitator: {
 	// DisplayName: The Regurgitator
 	/* Tooltip:
 		'''
@@ -2841,7 +2841,7 @@ GeminiGlaives: {
 		''' */
 }
 
-GolemTome2: {
+Landslide: {
 	// DisplayName: The Landslide
 	/* Tooltip:
 		'''
@@ -2869,7 +2869,7 @@ HellZone: {
 		''' */
 }
 
-MechanicalLeashOfCthulhu: {
+LeashofCthulhu: {
 	// DisplayName: Leash of Cthulhu
 	/* Tooltip:
 		'''
@@ -2889,7 +2889,7 @@ NukeFishron: {
 		''' */
 }
 
-OpticStaffEX: {
+OmniscienceStaff: {
 	// DisplayName: Omniscience Staff
 	/* Tooltip:
 		'''
@@ -2899,7 +2899,7 @@ OpticStaffEX: {
 		''' */
 }
 
-RefractorBlaster2: {
+DiffractorBlaster: {
 	// DisplayName: Diffractor Blaster
 	// Tooltip: "'The reward for a mighty rematch...'"
 }
@@ -3176,7 +3176,7 @@ LifelightTrophy: {
 	// Tooltip: ""
 }
 
-FragilePixieLamp: {
+CrystallineEffigy: {
 	// DisplayName: Crystalline Effigy
 	// Tooltip: While in the Hallow during day, hold out to break, angering the pixies' master
 }
@@ -3731,10 +3731,5 @@ TrojanMask: {
 
 WillMask: {
 	// DisplayName: Will Champion Mask
-	// Tooltip: ""
-}
-
-BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }

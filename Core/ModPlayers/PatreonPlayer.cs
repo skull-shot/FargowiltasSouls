@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.Patreon.Potato;

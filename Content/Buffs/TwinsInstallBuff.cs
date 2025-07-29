@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.ModLoader;

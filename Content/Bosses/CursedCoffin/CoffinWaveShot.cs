@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;

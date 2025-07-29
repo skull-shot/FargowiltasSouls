@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

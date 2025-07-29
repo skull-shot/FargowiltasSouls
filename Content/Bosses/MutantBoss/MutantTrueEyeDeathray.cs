@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,16 +19,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 	public class MutantTrueEyeDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => $"FargowiltasSouls/Content/Projectiles/Deathrays/{(FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML")}";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML");
         public MutantTrueEyeDeathray() : base(90) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool CanHitPlayer(Player target)
         {
             return target.hurtCooldowns[1] == 0;

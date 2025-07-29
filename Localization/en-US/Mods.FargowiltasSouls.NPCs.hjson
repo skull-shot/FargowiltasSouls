@@ -296,7 +296,7 @@ DeviBoss: {
 
 ShadowOrbNPC.DisplayName: Shadow Orb
 
-LifeChallenger: {
+Lifelight: {
 	DisplayName: Lifelight
 
 	BossChecklistIntegration: {

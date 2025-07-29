@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,7 +47,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
             const float scale = 1f;
 
-            Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
             Rectangle rectangle = new(0, 0, texture.Width, texture.Height);
             Vector2 origin2 = rectangle.Size() / 2f;
 

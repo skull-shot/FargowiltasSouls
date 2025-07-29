@@ -3,21 +3,18 @@ using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -41,6 +38,10 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Core.Systems.DashManager;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Armor;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {

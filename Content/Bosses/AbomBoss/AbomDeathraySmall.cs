@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -7,16 +8,9 @@ using Terraria.ID;
 namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomDeathraySmall : BaseDeathray
-    {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+    {   
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public AbomDeathraySmall() : base(30) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Abominable Deathray");
-        }
 
         public override bool? CanDamage()
         {

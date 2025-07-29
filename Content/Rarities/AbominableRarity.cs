@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

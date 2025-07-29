@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class JungleMimicSummon : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public int counter;
         public bool trailbehind;
 

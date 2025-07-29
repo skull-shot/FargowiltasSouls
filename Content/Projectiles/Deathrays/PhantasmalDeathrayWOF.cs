@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class PhantasmalDeathrayWOF : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayWOF";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public PhantasmalDeathrayWOF() : base(WorldSavingSystem.SwarmActive ? 45 : 90) { }
 
         public override void SetStaticDefaults()

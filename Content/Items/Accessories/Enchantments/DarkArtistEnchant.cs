@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;

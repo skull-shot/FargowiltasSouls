@@ -1,6 +1,5 @@
 using System.IO;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Content.Projectiles.Masomode;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -9,7 +8,6 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
@@ -21,8 +19,10 @@ using Microsoft.Xna.Framework.Graphics;
 using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
 using Terraria.DataStructures;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -164,7 +164,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.ai[1] = 0;
                 npc.ai[2] = 0;
                 npc.ai[3] = 0;
-                
+
                 FargoSoulsUtil.ClearHostileProjectiles(2, npc.whoAmI);
                 foreach (NPC n in Main.npc.Where(n => n.TypeAlive<CrystalLeaf>() && n.ai[0] == npc.whoAmI)) // delete crystal ring
                 {
@@ -175,7 +175,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n.whoAmI);
                 }
-                
+
                 const int halfAmt = 20;
                 for (int i = -halfAmt; i <= halfAmt; i++)
                 {
@@ -193,7 +193,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             if (EnteredPhase3)
             {
-                
+
                 ref float timer = ref npc.ai[0];
                 ref float state = ref npc.ai[1];
                 ref float movementTimer = ref npc.ai[2];
@@ -282,7 +282,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     Vector2 dir = target.DirectionTo(npc.Center);
                     float distance = target.Distance(npc.Center);
                     int parts = 12;
-                    
+
                     for (int i = 0; i < parts; i++)
                     {
                         if (i > parts / 2) // too close, try a different direction, up to 5 times
@@ -425,7 +425,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     if (FargoSoulsUtil.HostCheck)
                                     {
                                         float maxSpread = MathHelper.PiOver2 * 0.73f;
-                                        float side =  (repeatCheck != 0 ? -1 : 1);
+                                        float side = (repeatCheck != 0 ? -1 : 1);
                                         float angle = npc.DirectionTo(player.Center).RotatedBy(MathF.Sin(side * timer * MathHelper.TwoPi / 57f) * maxSpread).ToRotation();
 
                                         float speed = 1;
@@ -473,7 +473,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 if (timer == 5)
                                     Vineburst();
                             }
-                            else 
+                            else
                             {
                                 npc.velocity *= 0.96f;
                                 if (timer > endTime)
@@ -492,7 +492,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                 }
                             }
-                            
+
                         }
                         break;
                     case 3: // cone shots
@@ -501,7 +501,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (timer < vineSpawnTime)
                             {
-                                
+
                                 float vineProgress = timer / vineSpawnTime;
 
                                 if (timer < vineSpawnTime * 0.7f)
@@ -522,7 +522,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 {
                                     float attackAngle = Vector2.Lerp(-Vector2.UnitY.RotatedBy(-i * MathHelper.PiOver2 * 0.1f), Vector2.UnitY.RotatedBy(i * MathHelper.PiOver2 * 0.3f), vineProgress).ToRotation();
 
-                                    
+
                                     const int freq = 5;
                                     if (timer % freq == freq - 1)
                                     {
@@ -575,7 +575,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                         }
                                     }
 
-                                    
+
                                 }
                                 if (timer > endTime)
                                 {
@@ -594,7 +594,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (npc.velocity.Y < maxClimbSpeed) // Cap climbing velocity
                         npc.velocity.Y = MathHelper.Lerp(npc.velocity.Y, maxClimbSpeed, 0.2f);
                 }
-                
+
                 timer++;
                 return false;
             }
@@ -705,7 +705,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                     }
                 }
-                
+
             }
             if (!InPhase2) // redirect attack
             {
@@ -981,7 +981,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
-        public static float DR(NPC npc) => 
+        public static float DR(NPC npc) =>
             npc.GetLifePercent() < 0.25f ? 0.55f // phase 3
             : npc.GetLifePercent() < 0.5f ? 0.3f // phase 2
             : -0.1f; // phase 1

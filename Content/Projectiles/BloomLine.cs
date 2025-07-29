@@ -1,4 +1,5 @@
 ﻿//using FargowiltasSouls.EternityMode.Content.Boss.HM;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 using Microsoft.Xna.Framework;
@@ -15,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class BloomLine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Bloom Line");
@@ -79,7 +81,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         alphaModifier = 1;
                         Projectile.scale = 0.6f;
                         maxTime = 60;
-                        NPC lifelight = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<LifeChallenger>());
+                        NPC lifelight = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<Lifelight>());
                         Player target = Main.player[lifelight.target];
                         if (lifelight != null && lifelight.active && target != null && target.active)
                         {
@@ -94,10 +96,10 @@ namespace FargowiltasSouls.Content.Projectiles
                         alphaModifier = 1;
                         Projectile.scale = 0.6f;
                         maxTime = 80;
-                        NPC lifelight = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<LifeChallenger>());
+                        NPC lifelight = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<Lifelight>());
                         if (lifelight != null && lifelight.active)
                         {
-                            Projectile.rotation = lifelight.As<LifeChallenger>().GunRotation;
+                            Projectile.rotation = lifelight.As<Lifelight>().GunRotation;
                             Projectile.Center = lifelight.Center;
                         }
                     }

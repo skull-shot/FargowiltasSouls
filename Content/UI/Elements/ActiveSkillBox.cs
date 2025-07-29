@@ -1,20 +1,13 @@
-﻿using FargowiltasSouls.Assets.UI;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using ReLogic.Graphics;
-using Terraria.GameContent;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Audio;
 using Terraria.Localization;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {

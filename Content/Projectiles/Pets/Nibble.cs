@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
 {
     public class Nibble : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Pets", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 9;

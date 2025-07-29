@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;

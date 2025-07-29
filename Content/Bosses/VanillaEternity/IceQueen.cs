@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.FrostMoon;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.FrostMoon;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;

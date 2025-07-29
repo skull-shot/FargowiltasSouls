@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -238,7 +239,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             //draw glow ring
             float modifier = (float)RingFlash / RingFlashDuration;
             Color RingColor = Color.Lerp(Color.Orange, Color.Red, modifier);
-            Texture2D ringTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D ringTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
             float RingScale = Projectile.scale * 2 * ExplosionDiameter / ringTexture.Height;
             Rectangle ringrect = new(0, 0, ringTexture.Width, ringTexture.Height);
             Vector2 ringorigin = ringrect.Size() / 2f;

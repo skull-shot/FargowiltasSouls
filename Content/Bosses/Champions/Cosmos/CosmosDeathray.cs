@@ -1,4 +1,6 @@
 ﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 {
     public class CosmosDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/ShadowDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "ShadowDeathray");
         public CosmosDeathray() : base(20, drawDistance: 3600) { }
 
         public override void SetStaticDefaults()
@@ -150,7 +152,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.CurseoftheMoonBuff>(), 360);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
             hasHit = true;
         }
     }

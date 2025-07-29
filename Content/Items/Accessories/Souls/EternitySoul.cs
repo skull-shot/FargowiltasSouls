@@ -1,6 +1,6 @@
 ﻿
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;

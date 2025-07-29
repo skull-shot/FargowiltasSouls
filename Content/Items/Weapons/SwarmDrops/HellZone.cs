@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,15 +15,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
 	public class MutantDeathrayAim : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayML";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public MutantDeathrayAim() : base(60) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
 
         public override bool? CanDamage()
         {

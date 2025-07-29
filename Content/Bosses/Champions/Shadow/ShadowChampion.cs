@@ -1,10 +1,10 @@
 ﻿using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -776,9 +776,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DeathMask>(), 7));
 
-            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<ShadowForce>()));
+            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<DeathForce>()));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<ShadowChampionRelic>()));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<DeathChampionRelic>()));
             npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PortableFogMachine>(), 4));
         }
 

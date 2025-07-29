@@ -12,11 +12,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantReticle : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Mutant Reticle");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 110;

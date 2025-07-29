@@ -1,12 +1,12 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 

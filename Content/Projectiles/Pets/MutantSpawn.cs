@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
@@ -12,6 +13,8 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
 {
     public class MutantSpawn : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Pets", Name);
+
         public bool yFlip; //used to suppress y velocity (pet fastfalls with an extra update per tick otherwise)
         public float notlocalai1 = 0f;
 

@@ -2,7 +2,7 @@
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;

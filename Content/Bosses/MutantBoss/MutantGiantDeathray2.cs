@@ -1,8 +1,8 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Phantasmal Deathray");
             ProjectileID.Sets.DismountsPlayersOnHit[Projectile.type] = true;
         }
 
@@ -343,7 +342,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
 
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
+            Texture2D glowTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center - Projectile.velocity * (BeBrighter ? 90f : 180f);
 

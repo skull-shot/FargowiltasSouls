@@ -1,6 +1,7 @@
 ﻿
 
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -15,17 +16,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
 {
     public class WillDeathraySmall : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public WillDeathraySmall() : base(60, drawDistance: 3600) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Will Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return false;
@@ -177,7 +169,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Color brightColor = new(252, 252, 192, 100);
             shader.TrySetParameter("mainColor", brightColor);
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            Texture2D fademap = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Trails/WillStreak").Value;
+            Texture2D fademap = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Trails/WillStreak").Value;
             FargoSoulsUtil.SetTexture1(fademap);
 
             PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Shader: shader), 30);

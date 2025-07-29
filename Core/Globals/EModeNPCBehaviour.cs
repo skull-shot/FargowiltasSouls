@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Core.Globals
         #region Sprite Loading
         protected static Asset<Texture2D> LoadSprite(string texture)
         {
-            if (ModContent.RequestIfExists("FargowiltasSouls/Assets/ExtraTextures/Resprites/" + texture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
+            if (ModContent.RequestIfExists("FargowiltasSouls/Assets/Textures/EModeResprites/" + texture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
             {
                 return asset;
             }

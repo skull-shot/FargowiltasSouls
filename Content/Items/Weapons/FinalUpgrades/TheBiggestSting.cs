@@ -1,7 +1,7 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

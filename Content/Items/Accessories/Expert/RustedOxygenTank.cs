@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
