@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             NPC.hide = true;
 
             NPC.HitSound = SoundID.NPCHit9;
-            NPC.DeathSound = SoundID.NPCHit9;
+            NPC.DeathSound = SoundID.NPCDeath11;
         }
         public override void DrawBehind(int index)
         {
