@@ -264,6 +264,7 @@ namespace FargowiltasSouls.Core.Globals
             //is lava on screen
             //bool nearLava = Collision.LavaCollision(spawnInfo.Player.position, spawnInfo.SpawnTileX, spawnInfo.SpawnTileY);
             bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
+            bool worldEvil = WorldGen.crimson;
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
 
             bool bossCanSpawn = WorldSavingSystem.MasochistModeReal && !spawnInfo.Player.HasEffect<SinisterIconEffect>() && !LumUtils.AnyBosses();
@@ -283,20 +284,17 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (noBiome)
                             {
-                                pool[NPCID.CorruptBunny] = NPC.downedBoss1 ? .02f : .01f;
-                                pool[NPCID.CrimsonBunny] = NPC.downedBoss1 ? .02f : .01f;
+                                pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = NPC.downedBoss1 ? .04f : .02f;
                             }
 
                             if (snow)
                             {
-                                pool[NPCID.CorruptPenguin] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonPenguin] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
                             if (ocean || Main.raining)
                             {
-                                pool[NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonGoldfish] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
                             if (NPC.downedBoss1)
@@ -486,20 +484,17 @@ namespace FargowiltasSouls.Core.Globals
                                 {
                                     if (noBiome)
                                     {
-                                        pool[NPCID.CorruptBunny] = .05f;
-                                        pool[NPCID.CrimsonBunny] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
                                     }
 
                                     if (snow)
                                     {
-                                        pool[NPCID.CorruptPenguin] = .05f;
-                                        pool[NPCID.CrimsonPenguin] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
                                     }
 
                                     if (ocean || Main.raining)
                                     {
-                                        pool[NPCID.CorruptGoldfish] = .05f;
-                                        pool[NPCID.CrimsonGoldfish] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
                                     }
                                 }
 
