@@ -697,7 +697,6 @@ namespace FargowiltasSouls.Core.Globals
                     else if (underworld)
                     {
                         pool[NPCID.LeechHead] = .025f;
-                        pool[NPCID.BoneSerpentHead] = .025f;
                         pool[NPCID.BlazingWheel] = .05f;
 
                         if (bossCanSpawn && !FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
@@ -705,12 +704,12 @@ namespace FargowiltasSouls.Core.Globals
 
                         if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
                         {
-                            pool[NPCID.DiabolistRed] = .001f;
-                            pool[NPCID.DiabolistWhite] = .001f;
-                            pool[NPCID.Necromancer] = .001f;
-                            pool[NPCID.NecromancerArmored] = .001f;
-                            pool[NPCID.RaggedCaster] = .001f;
-                            pool[NPCID.RaggedCasterOpenCoat] = .001f;
+                            pool[NPCID.DiabolistRed] = .01f;
+                            pool[NPCID.DiabolistWhite] = .01f;
+                            pool[NPCID.Necromancer] = .01f;
+                            pool[NPCID.NecromancerArmored] = .01f;
+                            pool[NPCID.RaggedCaster] = .01f;
+                            pool[NPCID.RaggedCasterOpenCoat] = .01f;
                         }
 
                         if (WorldSavingSystem.DownedBetsy && bossCanSpawn)
@@ -781,19 +780,7 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         pool[NPCID.BlazingWheel] = .1f;
                         pool[NPCID.SpikeBall] = .1f;
-
-                        if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
-                        {
-                            const float rate = .01f;
-                            pool[NPCID.BigMimicJungle] = rate;
-
-                            pool[NPCID.DiabolistRed] = rate / 2;
-                            pool[NPCID.DiabolistWhite] = rate / 2;
-                            pool[NPCID.Necromancer] = rate / 2;
-                            pool[NPCID.NecromancerArmored] = rate / 2;
-                            pool[NPCID.RaggedCaster] = rate / 2;
-                            pool[NPCID.RaggedCasterOpenCoat] = rate / 2;
-                        }
+                        pool[NPCID.BigMimicJungle] = .1f;
                     }
 
                     if (ocean && spawnInfo.Water)
