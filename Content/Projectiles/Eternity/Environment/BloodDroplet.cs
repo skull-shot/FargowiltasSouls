@@ -66,7 +66,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 Projectile.timeLeft = 30;
                 if (Projectile.ai[1] == 0)
                 {
-                    Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BloodPuddle>(), 0, 1);
+                    if (FargoSoulsUtil.HostCheck)
+                        NPC.NewNPC(Projectile.GetSource_Death(), (int)Projectile.Center.X, (int)Projectile.Center.Y, ModContent.NPCType<BloodPuddle>());
                     SoundEngine.PlaySound(SoundID.NPCDeath9, Projectile.Center);
                 }
             }

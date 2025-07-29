@@ -431,3 +431,5 @@ ReleasedMutant: {
 	TalkToHim: 你是？
 	Introduction: 你早就听说过我了。至于你呢？不是，我才不关心你的名字呢。我只关心你有多少钱能买我的东西。
 }
+
+// BloodPuddle.DisplayName: Blood Puddle

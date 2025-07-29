@@ -14,131 +14,182 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
-    public class BloodPuddle : ModProjectile
+    public class BloodPuddle : ModNPC
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Environment", Name);
+        public int Frame = 0;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailingMode[Type] = 2;
-            ProjectileID.Sets.TrailCacheLength[Type] = 20;
-            Main.projFrames[Type] = 5;
+            NPCID.Sets.TrailingMode[Type] = 2;
+            NPCID.Sets.TrailCacheLength[Type] = 20;
+            Main.npcFrameCount[Type] = 5;
             base.SetStaticDefaults();
         }
         public override void SetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 8;
-            Projectile.tileCollide = false;
-            Projectile.aiStyle = -1;
-            Projectile.timeLeft = 1600;
-            Projectile.scale = Main.rand.NextFloat(0.8f, 1.4f);
-            Projectile.hide = true;
+            NPC.lifeMax = 20;
+            NPC.damage = 0;
+
+            NPC.width = 20;
+            NPC.height = 20;
+            NPC.noTileCollide = true;
+            NPC.noGravity = true;
+            NPC.knockBackResist = 0f;
+            NPC.aiStyle = -1;
+            NPC.timeLeft = 1600;
+            NPC.scale = Main.rand.NextFloat(1f, 1.6f);
+            NPC.hide = true;
+
+            NPC.HitSound = SoundID.NPCHit9;
+            NPC.DeathSound = SoundID.NPCHit9;
         }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        public override void DrawBehind(int index)
         {
-            behindNPCsAndTiles.Add(index);
-            base.DrawBehind(index, behindNPCsAndTiles, behindNPCs, behindProjectiles, overPlayers, overWiresUI);
+            Main.instance.DrawCacheNPCProjectiles.Add(index);
+            base.DrawBehind(index);
         }
         public override void AI()
         {
-            Projectile.localAI[0]++;
-            if (Projectile.localAI[0] >= 10)
+            NPC.localAI[0]++;
+            if (NPC.localAI[0] >= 10)
             {
-                Projectile.frame++;
-                Projectile.localAI[0] = 0;
-                if (Projectile.frame > 4)
+                Frame++;
+                NPC.localAI[0] = 0;
+                if (Frame > 4)
                 {
-                    Projectile.frame = 3;
+                    Frame = 3;
                 }
             }
-            Projectile.localAI[1]++;
-            if (Projectile.localAI[1] >= 5)
+            NPC.localAI[1]++;
+            if (NPC.localAI[1] >= 5)
             {
-                Projectile.localAI[2]++;
-                Projectile.localAI[1] = 0;
-                if (Projectile.localAI[2] > 4)
+                NPC.localAI[2]++;
+                NPC.localAI[1] = 0;
+                if (NPC.localAI[2] > 4)
                 {
-                    Projectile.localAI[2] = 0;
+                    NPC.localAI[2] = 0;
                 }
             }
 
-            if (!Collision.SolidCollision(Projectile.Bottom - new Vector2(0, 5), 1, 1))
+            if (!Collision.SolidCollision(NPC.Bottom - Vector2.UnitY * 10, 1, 1))
             {
-                Projectile.position.Y += 1;
+                NPC.position.Y += 1;
             }
             Player target = null;
-            if (Projectile.ai[0] == 0)
+            if (NPC.ai[0] == 0)
             {
-                int p = Player.FindClosest(Projectile.Center, 1, 1);
+                NPC.ai[1]++;
+                int p = Player.FindClosest(NPC.Center, 1, 1);
                 if (p >= 0) target = Main.player[p];
 
-                if (target != null && target.Hitbox.Intersects(Projectile.Hitbox) && Projectile.ai[0] == 0)
+                if (target != null && target.Hitbox.Intersects(NPC.Hitbox) && NPC.ai[0] == 0)
                 {
-                    Projectile.ai[2] = target.whoAmI;
-                    Projectile.ai[0] = 1;
-                    SoundEngine.PlaySound(SoundID.NPCDeath11, Projectile.Center);
+                    NPC.ai[2] = target.whoAmI;
+                    NPC.ai[1] = 0;
+                    NPC.ai[0] = 1;
+                    SoundEngine.PlaySound(SoundID.NPCDeath11, NPC.Center);
+                    NPC.netUpdate = true;
                 }
             }
-            if (Projectile.ai[0] == 1)
+            if (NPC.ai[0] == 1)
             {
-                Projectile.ai[1] += 2;
-                Projectile.timeLeft = 20;
-                target = Main.player[(int)Projectile.ai[2]];
+                NPC.ai[1] += 2;
+                NPC.timeLeft = 20;
+                if (!((int)NPC.ai[2]).IsWithinBounds(Main.maxPlayers))
+                {
+                    NPC.StrikeInstantKill();
+                    return;
+                }
+                target = Main.player[(int)NPC.ai[2]];
+                if (target == null || !target.Alive())
+                {
+                    NPC.StrikeInstantKill();
+                    return;
+                }
                 target.AddBuff(ModContent.BuffType<BleedingOut>(), 2);
 
-                if (Projectile.ai[1] >= 160)
+                if (NPC.ai[1] % 50 == 0)
+                    SoundEngine.PlaySound(SoundID.Item3 with { Volume = 0.75f, Pitch = 1.5f }, NPC.Center);
+
+                if (NPC.ai[1] >= 160)
                 {
-                    Projectile.ai[1] = -40;
+                    NPC.ai[1] = -40;
                 }
-                if (Projectile.Distance(target.Center) > 300)
+                if (NPC.Distance(target.Center) > 200)
                 {
-                    for (int i = 0; i < Projectile.Distance(target.Center); i += 3)
-                    {
-                        Dust.NewDustDirect(target.Center + target.AngleTo(Projectile.Center).ToRotationVector2() * i, 1, 1, DustID.Blood);
-                    }
-                    Projectile.Kill();
+                    NPC.StrikeInstantKill();
                 }
             }
         }
-
-        public override void OnKill(int timeLeft)
+        public override void OnKill()
         {
-            SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
+            for (int i = 0; i < 7; i++)
+            {
+                Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Blood);
+            }
+            if (NPC.ai[0] == 1 && ((int)NPC.ai[2]).IsWithinBounds(Main.maxPlayers))
+            {
+                Player target = Main.player[(int)NPC.ai[2]];
+                if (target != null)
+                {
+                    for (int i = 0; i < NPC.Distance(target.Center); i += 3)
+                    {
+                        Dust.NewDustDirect(target.Center + target.AngleTo(NPC.Center).ToRotationVector2() * i, 1, 1, DustID.Blood);
+                    }
+                }
+                
+            }
+            
         }
-
-        public override bool PreDraw(ref Color lightColor)
+        public override void FindFrame(int frameHeight)
         {
-            Asset<Texture2D> t = TextureAssets.Projectile[Type];
+            //NPC.frame.Y = Frame * frameHeight;
+        }
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Asset<Texture2D> t = TextureAssets.Npc[Type];
             Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril");
-            int frameHeight = t.Height() / Main.projFrames[Type];
+            int frameHeight = t.Height() / Main.npcFrameCount[Type];
             // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 
-            if (Projectile.ai[0] == 1)
+            if (NPC.ai[0] == 1)
             {
-                Player target = Main.player[(int)Projectile.ai[2]];
+                Player target = Main.player[(int)NPC.ai[2]];
                 if (target != null && target.active)
                 {
                     int veinFrameHeight = vein.Height() / 5;
                     //Dust d = Dust.NewDustDirect(bigPoint, 1, 1, DustID.Terra);
                     //d.velocity *= 0;
-                    for (int i = 0; i < Projectile.Distance(target.Center); i += (int)(veinFrameHeight * Projectile.scale * 0.5f))
+                    for (int i = 0; i < NPC.Distance(target.Center); i += (int)(veinFrameHeight * NPC.scale * 0.5f))
                     {
-                        float y = Projectile.Distance(target.Center) / 300;
+                        float y = NPC.Distance(target.Center) / 300;
                         Vector2 shakeOffset = new Vector2(MathHelper.Lerp(0, 1f, y * y), 0).RotatedByRandom(MathHelper.TwoPi);
-                        Vector2 pos = Projectile.Center + Projectile.AngleTo(target.Center).ToRotationVector2() * i;
+                        Vector2 pos = NPC.Center + NPC.AngleTo(target.Center).ToRotationVector2() * i;
 
-                        int frame = (int)pos.Distance(target.Center) / (int)(veinFrameHeight * Projectile.scale * 0.5f) % 5;
-                        frame += (int)Projectile.localAI[2];
+                        int frame = (int)pos.Distance(target.Center) / (int)(veinFrameHeight * NPC.scale * 0.5f) % 5;
+                        frame += (int)NPC.localAI[2];
                         if (frame > 4) frame -= 5;
-                        frame = (int)Projectile.localAI[2];
+                        frame = (int)NPC.localAI[2];
                         //Main.NewText(frame);
-                        Main.EntitySpriteDraw(vein.Value, pos - Main.screenPosition + shakeOffset, new Rectangle(0, veinFrameHeight * frame, vein.Width(), veinFrameHeight), lightColor, Projectile.AngleTo(target.Center) + MathHelper.PiOver2, new Vector2(vein.Width(), veinFrameHeight) / 2, Projectile.scale * 0.5f, SpriteEffects.None);
+                        spriteBatch.Draw(vein.Value, pos - Main.screenPosition + shakeOffset, new Rectangle(0, veinFrameHeight * frame, vein.Width(), veinFrameHeight), drawColor, NPC.AngleTo(target.Center) + MathHelper.PiOver2, new Vector2(vein.Width(), veinFrameHeight) / 2, NPC.scale * 0.5f, SpriteEffects.None, 0);
                     }
 
                 }
             }
-            Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition - new Vector2(0, 5), new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight) / 2, Projectile.scale, SpriteEffects.None);
+            else
+            {
+                
+            }
+                
+            spriteBatch.Draw(t.Value, NPC.Center - Main.screenPosition - new Vector2(0, 5), new Rectangle(0, frameHeight * Frame, t.Width(), frameHeight), drawColor, NPC.rotation, new Vector2(t.Width(), frameHeight) / 2, NPC.scale, SpriteEffects.None, 0);
 
+            // the famous "please pay attention to me" glow
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            float lerp = MathF.Pow(MathF.Sin(NPC.ai[1] * MathF.Tau / 55), 2f);
+            Color glowColor = Color.White;
+            float glowOpacity = lerp * 0.75f;
+            spriteBatch.Draw(t.Value, NPC.Center - Main.screenPosition - new Vector2(0, 5), new Rectangle(0, frameHeight * Frame, t.Width(), frameHeight), glowColor * glowOpacity, NPC.rotation, new Vector2(t.Width(), frameHeight) / 2, NPC.scale, SpriteEffects.None, 0);
+            Main.spriteBatch.ResetToDefault();
             return false;
         }
     }
