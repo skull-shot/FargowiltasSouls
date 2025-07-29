@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Placables
         {
             Item.width = 34;
             Item.height = 34;
-            Item.maxStack = 15;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.rare = ItemRarityID.Expert;

@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.width = 30;
             Item.height = 34;
             Item.rare = ItemRarityID.Blue;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useAnimation = 30;
             Item.UseSound = FargosSoundRegistry.TrojanSummon;
             Item.useTime = 30;

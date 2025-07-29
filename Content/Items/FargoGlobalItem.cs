@@ -148,7 +148,7 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (item.healLife > 0)
+            if (item.healLife > 0 && item.potion && player.HasBuff(BuffID.PotionSickness))
             {
                 if (player.HasEffect<ShroomiteHealEffect>())
                 {

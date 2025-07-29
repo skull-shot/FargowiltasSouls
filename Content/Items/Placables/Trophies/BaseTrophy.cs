@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Placables.Trophies
 
             Item.width = 32;
             Item.height = 32;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 1);
         }

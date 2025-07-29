@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Tiles;
 using Terraria;
 using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Placables

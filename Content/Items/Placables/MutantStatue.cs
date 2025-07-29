@@ -1,6 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Placables
@@ -17,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Placables
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.rare = ItemRarityID.Blue;

@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Items.Dyes
 
         public override void SetDefaults()
         {
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Orange;
             Item.width = 20;
             Item.height = 20;
@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Dyes
 
         public override void SetDefaults()
         {
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Orange;
             Item.width = 20;
             Item.height = 20;
@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Dyes
 
         public override void SetDefaults()
         {
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Orange;
             Item.width = 20;
             Item.height = 20;

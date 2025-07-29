@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.noUseGraphic = true;
             Item.shoot = ProjectileType<MechLureProjectile>();
             Item.shootSpeed = 10f;

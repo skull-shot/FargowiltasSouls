@@ -90,6 +90,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
         {
+            if (npc.alpha > 0)
+                return false;
+            if (npc.frame.Y == 17)
+                return true;
             return false;
             /*
             if (npc.alpha > 0)
