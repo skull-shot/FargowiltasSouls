@@ -16,7 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Destroyer Tail");
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
