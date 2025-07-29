@@ -68,7 +68,6 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.IchorSticker,
             NPCID.SeekerHead,
             NPCID.AngryNimbus,
-            NPCID.RedDevil,
             NPCID.MushiLadybug,
             NPCID.AnomuraFungus,
             NPCID.ZombieMushroom,
@@ -513,11 +512,6 @@ namespace FargowiltasSouls.Core.Globals
                     case NPCID.PigronCrimson:
                         npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.condition is Conditions.DontStarveIsUp && drop.itemId == ItemID.HamBat && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
                         npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.condition is Conditions.DontStarveIsNotUp && drop.itemId == ItemID.HamBat && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        break;
-
-                    case NPCID.RedDevil:
-                        npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.UnholyTrident && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.DemonScythe, 3));
                         break;
 
                     case NPCID.IchorSticker:

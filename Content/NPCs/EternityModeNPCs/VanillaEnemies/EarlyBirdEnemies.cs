@@ -24,7 +24,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             NPCID.IchorSticker,
             NPCID.SeekerHead,
             NPCID.AngryNimbus,
-            NPCID.RedDevil,
             NPCID.MushiLadybug,
             NPCID.AnomuraFungus,
             NPCID.ZombieMushroom,
