@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -21,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hostile = true;
-            Projectile.alpha = 255;
+            Projectile.alpha = 0;
             Projectile.timeLeft = 300;
             //CooldownSlot = 1;
         }
@@ -38,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             if (Projectile.localAI[0] == 0)
                 Projectile.localAI[0] = Main.rand.NextBool() ? 1 : -1;
 
-            if (++Projectile.ai[0] < 130)
+            if (++Projectile.ai[0] < 0)
             {
                 Projectile.alpha -= 2;
                 if (Projectile.alpha < 0) //fade in
@@ -54,8 +55,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 
                 if (Projectile.ai[0] % 30 == 0)
                 {
-                    if (!Main.dedServ)
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep"), Projectile.Center);
+                    //if (!Main.dedServ)
+                    //    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/ReticleBeep"), Projectile.Center);
                 }
             }
             else //if (Projectile.ai[0] < 145)
@@ -76,22 +77,20 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 
                 //if (Projectile.ai[0] == 130 && FargoSoulsUtil.HostCheck) Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -13);
 
-                if (Projectile.ai[0] % 6 == 0 && Projectile.localAI[1]++ < 3)
+                if (Projectile.ai[0] % 2 == 0 && Projectile.localAI[1]++ < 4)
                 {
                     //Vector2 spawnPos = Projectile.Center;
                     //spawnPos.X += Main.rand.NextFloat(-250, 250);
                     //spawnPos.Y += Main.rand.NextFloat(700, 800) * Projectile.localAI[0];
-                    float angle = MathHelper.ToRadians(15);
-                    Vector2 spawnPos;
-                    spawnPos.Y = (Projectile.localAI[0] > 0 ? Main.maxTilesY * 16 - 16 : Main.maxTilesY * 16 - 200 * 16) - Projectile.Center.Y;
-                    spawnPos.X = spawnPos.Y * (float)Math.Tan(Main.rand.NextFloat(-angle, angle));
-                    spawnPos += Projectile.Center;
+                    int above = Projectile.localAI[1] % 2 == 0 ? 1 : -1;
+                    float randAngle = (above * Vector2.UnitY).RotatedByRandom(MathHelper.PiOver2 * 0.27f).ToRotation();
+                    Vector2 spawnPos = Projectile.Center - randAngle.ToRotationVector2() * 900;
 
                     Vector2 vel = Main.rand.NextFloat(0.8f, 1.2f) * (Projectile.Center - spawnPos) / 90;
                     if (vel.Length() < 10f)
                         vel = Vector2.Normalize(vel) * Main.rand.NextFloat(10f, 15f);
                     if (FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), spawnPos, vel, ModContent.ProjectileType<WOFChain>(), Projectile.damage, 0f, Main.myPlayer);
+                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), spawnPos, vel / 3, ModContent.ProjectileType<WOFChain>(), Projectile.damage, 0f, Main.myPlayer, Projectile.Center.X, Projectile.Center.Y, randAngle);
 
                     FargoSoulsUtil.ScreenshakeRumble(4);
 
@@ -109,6 +108,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 
         public override bool PreDraw(ref Color lightColor)
         {
+            return false;
+
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

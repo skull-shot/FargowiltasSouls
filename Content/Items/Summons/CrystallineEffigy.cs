@@ -9,7 +9,6 @@ using static Terraria.ModLoader.ModContent;
 namespace FargowiltasSouls.Content.Items.Summons
 {
     [LegacyName("FragilePixieLamp")]   
-    
     public class CrystallineEffigy : SoulsItem
     {
         public override void SetStaticDefaults()
@@ -26,7 +25,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.noUseGraphic = false;
             Item.value = Item.sellPrice(0, 3);
         }

@@ -58,6 +58,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
                     if (npc.GetGlobalNPC<PrimeLimb>().IsSwipeLimb || Main.npc[(int)npc.ai[1]].ai[1] == 1 || Main.npc[(int)npc.ai[1]].ai[1] == 2)
                         fade = true;
                 }
+                else if (Projectile.ai[1] == 3) // dash attack
+                {
+                    if (++Projectile.localAI[0] >= Projectile.ai[2])
+                        fade = true;
+                }
             }
             else
             {
@@ -84,7 +89,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
         public override bool PreDraw(ref Color lightColor)
         {
             float increment;
-            if (Projectile.ai[1] == 1f)
+            if (Projectile.ai[1] == 1f || Projectile.ai[1] == 3f)
                 increment = 0.1f;
             else if (Projectile.ai[1] == 2f)
                 increment = 0.5f;
@@ -100,7 +105,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
                     continue;
 
                 Color color27;
-                if (Projectile.ai[1] == 1)
+                if (Projectile.ai[1] == 1 || Projectile.ai[1] == 3)
                     color27 = Color.Red * 0.7f; // red //new Color(191, 51, 255, 210); //purple
                 else if (Projectile.ai[1] == 2)
                     color27 = new Color(51, 255, 191, 210) * 0.75f; //teal
