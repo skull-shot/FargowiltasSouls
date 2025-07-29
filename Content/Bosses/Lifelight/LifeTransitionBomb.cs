@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,7 +9,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeTransitionBomb : LifeBomb
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeBomb";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeBomb");
 
         Vector2 OriginalPosition = Vector2.Zero;
         Vector2 DesiredPosition = Vector2.Zero;

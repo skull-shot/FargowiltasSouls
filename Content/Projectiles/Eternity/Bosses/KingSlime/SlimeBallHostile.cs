@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,13 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
 {
     public class SlimeBallHostile : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeBall";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Slime Ball");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", "SlimeBall");
         public override void SetDefaults()
         {
             Projectile.width = 16;

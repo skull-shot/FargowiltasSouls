@@ -12,12 +12,11 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-
     public class LifeBomb : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Mine");
             ProjectileID.Sets.TrailingMode[Type] = 1;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
         }

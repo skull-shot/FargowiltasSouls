@@ -20,7 +20,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Pillar");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

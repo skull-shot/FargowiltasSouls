@@ -233,7 +233,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         color = Color.DeepPink;
                         maxTime = 30;
                         alphaModifier = 3;
-                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[2], ModContent.NPCType<LifeChallenger>());
+                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[2], ModContent.NPCType<Lifelight>());
                         if (npc != null)
                         {
                             Projectile.Center = npc.Center;

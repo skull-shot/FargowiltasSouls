@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -8,11 +9,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class LeashofCthulhuEyeProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         private float speed;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("MechEyeProjectile");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;

@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Summons
         public override bool CanUseItem(Player Player)
         {
             if (Player.ZoneHallow && Main.dayTime)
-                return !NPC.AnyNPCs(NPCType<LifeChallenger>()); //not (x or y)
+                return !NPC.AnyNPCs(NPCType<Lifelight>()); //not (x or y)
             return false;
         }
         public Vector2 OriginalLocation = Vector2.Zero;
@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 
         public override bool? UseItem(Player Player)
         {
-            FargoSoulsUtil.SpawnBossNetcoded(Player, NPCType<LifeChallenger>());
+            FargoSoulsUtil.SpawnBossNetcoded(Player, NPCType<Lifelight>());
             return true;
         }
     }

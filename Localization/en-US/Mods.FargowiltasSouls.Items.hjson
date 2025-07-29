@@ -3717,3 +3717,58 @@ BrokenSpearhead: {
 	DisplayName: Broken Spearhead
 	Tooltip: ""
 }
+
+DeathForce: {
+	DisplayName: Death Force
+	Tooltip: ""
+}
+
+EternalCore: {
+	DisplayName: Eternal Core
+	Tooltip: ""
+}
+
+EternalFlame: {
+	DisplayName: Eternal Flame
+	Tooltip: ""
+}
+
+EternalLeggings: {
+	DisplayName: Eternal Leggings
+	Tooltip: ""
+}
+
+DeathChampionRelic: {
+	DisplayName: Death Champion Relic
+	Tooltip: ""
+}
+
+CrystallineEffigy: {
+	DisplayName: Crystalline Effigy
+	Tooltip: ""
+}
+
+Eyeleash: {
+	DisplayName: Eyeleash
+	Tooltip: ""
+}
+
+DiffractorBlaster: {
+	DisplayName: Diffractor Blaster
+	Tooltip: ""
+}
+
+Landslide: {
+	DisplayName: Landslide
+	Tooltip: ""
+}
+
+OmniscienceStaff: {
+	DisplayName: Omniscience Staff
+	Tooltip: ""
+}
+
+Regurgitator: {
+	DisplayName: Regurgitator
+	Tooltip: ""
+}

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,12 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
     {
         private Vector2 mousePos;
         private int syncTimer;
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/ForbiddenTornado";
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Forbidden Tornado");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "ForbiddenTornado");
         public override void SetDefaults()
         {
             Projectile.width = 10;

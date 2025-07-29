@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
     public class BloodScytheFriendly : ModProjectile//, IPixelatedPrimitiveRenderer
     {
         public ref float randomize => ref Projectile.ai[1];
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/EyeOfCthulhu/BloodScytheVanilla1";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScytheVanilla1");
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Type] = 1;
@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
                 randomize += Main.rand.Next(1, 4);
                 Projectile.netUpdate = true;
             }
-            Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Bosses/EyeOfCthulhu/BloodScytheVanilla" + randomize).Value;
+            Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScytheVanilla" + randomize).Value;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, Color.DarkRed, Projectile.rotation, texture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }

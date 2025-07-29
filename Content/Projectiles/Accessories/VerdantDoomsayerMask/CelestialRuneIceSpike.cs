@@ -9,12 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask
 {
     public class CelestialRuneIceSpike : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Accessories/VerdantDoomsayerMask", Name);
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Ice Spike");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/VerdantDoomsayerMask", Name);
         public override void SetDefaults()
         {
             Projectile.width = 34;

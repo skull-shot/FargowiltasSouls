@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,17 +10,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions
 {
     public class GuardianDeathraySmall : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/GuardianDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "GuardianDeathray");
         public GuardianDeathraySmall() : base(30) { }
 
         private Vector2 offset;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Shadow Deathray");
-        }
 
         public override bool? CanDamage()
         {

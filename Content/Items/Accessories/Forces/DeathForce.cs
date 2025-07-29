@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -157,9 +158,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 g = MathHelper.Lerp(g, 0, jerp);
                 b = MathHelper.Lerp(b, 0, jerp);
             }
-
-            Asset<Texture2D> texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad);
-            //Main.EntitySpriteDraw(texture.Value, player.Center - Main.screenPosition, null, Color.Black * (1 - MathHelper.Clamp(player.velocity.Length() / 7f, 0.5f, 1f))*0.5f, 1, texture.Size() / 2, 1, SpriteEffects.None);
         }
         public static void AddDash(Player player)
         {

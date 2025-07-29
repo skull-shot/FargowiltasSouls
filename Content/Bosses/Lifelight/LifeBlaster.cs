@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -9,13 +10,12 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-
     public class LifeBlaster : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         float glowIntensity = 1f;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Blaster");
             Main.projFrames[Projectile.type] = 11;
         }
         public override void SetDefaults()
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
                         //real deathray lol
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, rot,
-                            ModContent.ProjectileType<LifeChalBlasterDeathray>(), Projectile.damage, 0f, Main.myPlayer);
+                            ModContent.ProjectileType<LifelightBlasterDeathray>(), Projectile.damage, 0f, Main.myPlayer);
                     }
                 }
                 //damage projectiles

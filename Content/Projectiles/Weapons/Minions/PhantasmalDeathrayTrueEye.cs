@@ -19,7 +19,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Phantasmal Deathray");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
 

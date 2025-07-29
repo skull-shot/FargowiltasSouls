@@ -36,6 +36,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -720,7 +721,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (shrapnel >= 15)
             {
-                Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", AssetRequestMode.ImmediateLoad);
+                Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
                 Rectangle rectangle = texture.Bounds;
                 Vector2 origin2 = rectangle.Size() / 2f;
                 Color color = Color.Red;

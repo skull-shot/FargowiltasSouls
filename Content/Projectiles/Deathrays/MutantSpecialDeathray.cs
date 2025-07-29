@@ -7,7 +7,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
     public abstract class MutantSpecialDeathray : BaseDeathray
     {
 
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "MutantSpecialDeathray");
         public MutantSpecialDeathray(int maxTime) : base(maxTime, sheeting: TextureSheeting.Horizontal) { }
         public MutantSpecialDeathray(int maxTime, float hitboxModifier) : base(maxTime, hitboxModifier: hitboxModifier, sheeting: TextureSheeting.Horizontal) { }
 

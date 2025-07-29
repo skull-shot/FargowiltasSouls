@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             {
                 Projectile.Opacity = 0;
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                SoundEngine.PlaySound(LifeChallenger.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
+                SoundEngine.PlaySound(Lifelight.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
 
                 int damage = Projectile.damage;
                 if (FargoSoulsUtil.HostCheck)
@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
             NPC parent = FargoSoulsUtil.NPCExists(ParentIndex);
             // Stick to a position set by lifelight.
-            if (parent != null && parent.ModNPC is LifeChallenger lifelight)
+            if (parent != null && parent.ModNPC is Lifelight lifelight)
             {
                 Projectile.Center = parent.Center + lifelight.LockVector1 + lifelight.LockVector2 * (LifeRunespearHitbox.Length + 30);
                 if (parent.HasPlayerTarget)

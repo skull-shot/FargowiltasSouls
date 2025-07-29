@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -14,9 +15,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeProjSmall : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Shot");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

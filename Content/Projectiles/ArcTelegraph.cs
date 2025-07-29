@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles
         int npc;
         public override void OnSpawn(IEntitySource source)
         {
-            if (source is EntitySource_Parent parent && parent.Entity is NPC parentNpc && parentNpc.type == ModContent.NPCType<LifeChallenger>())
+            if (source is EntitySource_Parent parent && parent.Entity is NPC parentNpc && parentNpc.type == ModContent.NPCType<Lifelight>())
             {
                 npc = parentNpc.whoAmI;
                 float angleToMe = Projectile.velocity.ToRotation();

@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu
                 Projectile.netUpdate = true;
             }
             Texture2D texture = recolor ? FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScythe" + randomize).Value : FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Bosses/EyeOfCthulhu", "BloodScytheVanilla" + randomize).Value;
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
+            Texture2D glowTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center + Projectile.velocity / 10f;
             glowDrawPosition += Main.rand.NextVector2Circular(5, 5);

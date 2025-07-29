@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,17 +11,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class PrimeDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathray");
         public PrimeDeathray() : base(90) { }
 
         public float Spinup { get { return Projectile.localAI[0] / 2.25f; } }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Blazing Deathray");
-        }
 
         public override void SetDefaults()
         {

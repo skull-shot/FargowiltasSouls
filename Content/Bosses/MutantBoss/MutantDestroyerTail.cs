@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             Texture2D texture2D13 = Projectile.ai[2] == 0
                 ? Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value
-                : ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_15", AssetRequestMode.ImmediateLoad).Value;
+                : ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/EModeResprites/NPC_15", AssetRequestMode.ImmediateLoad).Value;
             int num214 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int y6 = num214 * Projectile.frame;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle(0, y6, texture2D13.Width, num214),

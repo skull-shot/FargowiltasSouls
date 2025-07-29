@@ -13,7 +13,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Explosion");
             Main.projFrames[Type] = 5;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;

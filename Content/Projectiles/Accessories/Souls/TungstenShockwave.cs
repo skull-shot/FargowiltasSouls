@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -15,7 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class TungstenShockwave : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/GlowRingHollow";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "GlowRingHollow");
         public const int Duration = 20;
         public const int BaseRadius = 52;
         public override void SetDefaults()

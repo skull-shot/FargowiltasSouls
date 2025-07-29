@@ -11,15 +11,13 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
-    public class EyeProjectile : ModProjectile
+    public class EyeleashProjectile : ModProjectile
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
         public int EyeTimer = 0;
         public int RotationTimer = 0;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("EyeProjectile2");
-            //ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Main.projFrames[Projectile.type] = 4;

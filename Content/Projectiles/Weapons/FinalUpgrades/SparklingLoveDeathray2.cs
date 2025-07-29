@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class SparklingLoveDeathray2 : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
         public SparklingLoveDeathray2() : base(60) { }
 
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Love Ray");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }

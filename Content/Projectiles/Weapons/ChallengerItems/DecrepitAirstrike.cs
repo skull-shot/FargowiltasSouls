@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 {
     public class DecrepitAirstrike : TrojanAcorn
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/TargetingReticle";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity", "TargetingReticle");
 
         const int maxTime = 60 * 3;
         public override void SetDefaults()

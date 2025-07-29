@@ -141,7 +141,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             {
                 if (HeartItemType != ModContent.ItemType<DarkenedHeart>())
                 {
-                    Texture2D pureSeekerTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Misc/PureSeeker", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                    Texture2D pureSeekerTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Misc/PureSeeker", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                     FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor, pureSeekerTexture);
                     return false;
                 }

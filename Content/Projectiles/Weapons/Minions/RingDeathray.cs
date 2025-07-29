@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,14 +12,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class RingDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayML";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public RingDeathray() : base(90) { }
 
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Phantasmal Deathray");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
 

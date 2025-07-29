@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Armor.Nekomi;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -9,17 +10,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class NekomiRitual : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", "FakeHeart");
 
         private const float threshold = 150 / 2f;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Nekomi Ritual");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 8;

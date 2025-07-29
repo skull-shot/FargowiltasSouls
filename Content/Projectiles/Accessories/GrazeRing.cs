@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -10,13 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 {
     public class GrazeRing : GlowRingHollow
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/GlowRingHollow";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Glow Ring");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "GlowRingHollow");
         public override void SetDefaults()
         {
             base.SetDefaults();

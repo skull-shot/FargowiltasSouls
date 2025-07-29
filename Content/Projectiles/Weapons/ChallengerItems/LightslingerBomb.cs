@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
     public class LightslingerBomb : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeNuke");
         public override void SetStaticDefaults()
         {
        

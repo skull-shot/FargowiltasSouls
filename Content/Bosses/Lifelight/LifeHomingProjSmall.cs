@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -5,12 +6,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeHomingProjSmall : LifeProjSmall
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeProjSmall");
         public override void SetDefaults()
         {
             base.SetDefaults();
             Projectile.timeLeft = 60 * 4;
         }
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeProjSmall";
         public override void AI()
         {
             Projectile.velocity *= 1.006f;

@@ -1,13 +1,17 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace FargowiltasSouls.Content.Items.Placables
+namespace FargowiltasSouls.Content.Tiles
 {
-    public class TwentyTwoPaintingSheet : ModTile
+    public class ScremPaintingSheet : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", Name);
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
+
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
             Main.tileSpelunker[Type] = true;
@@ -17,11 +21,5 @@ namespace FargowiltasSouls.Content.Items.Placables
             TileObjectData.addTile(Type);
             DustType = 7;
         }
-        /*
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            Item.NewItem(new Terraria.DataStructures.EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<TwentyTwoPainting>());
-        }
-        */
     }
 }

@@ -16,14 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles
     public class GiantDeathray : MutantSpecialDeathray
     {
         public GiantDeathray() : base(180) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -185,7 +177,7 @@ namespace FargowiltasSouls.Content.Projectiles
             FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
 
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
+            Texture2D glowTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center;
 

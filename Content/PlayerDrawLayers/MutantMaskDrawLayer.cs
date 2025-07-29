@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             if (player.armor[0].type != ModContent.ItemType<EternalFlame>() && player.armor[10].type != ModContent.ItemType<EternalFlame>())
                 return false;
 
-            if (player.head != EquipLoader.GetEquipSlot(Mod, "MutantMask", EquipType.Head))
+            if (player.head != EquipLoader.GetEquipSlot(Mod, "EternalFlame", EquipType.Head))
                 return false;
 
             return true;

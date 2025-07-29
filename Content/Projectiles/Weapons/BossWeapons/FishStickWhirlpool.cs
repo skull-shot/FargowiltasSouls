@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,7 +8,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class FishStickWhirlpool : FishStickProj
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/BossWeapons/FishStickProj";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", "FishStickProj");
 
         public const int TornadoHeight = 12;
 

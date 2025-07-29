@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 {
     public class SpectralAbominationn : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Eternals/AbominationnSoul";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/AbomBoss", "AbominationnSoul");
 
         private const float PI = (float)Math.PI;
         private const float rotationPerTick = PI / 57f;
@@ -22,7 +23,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Spectral Abominationn");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;

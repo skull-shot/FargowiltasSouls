@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Ancient Vision");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }

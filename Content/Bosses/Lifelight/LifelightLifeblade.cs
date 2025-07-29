@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
 
-    public class JevilScar : ModProjectile
+    public class LifelightLifeblade : ModProjectile
     {
         //private bool init = false;
 
@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/ChallengerItems", "EnchantedLifebladeProjectile");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Enchanted Lightblade");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -73,7 +72,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             }
             Projectile.frameCounter++;
 
-            if (++KillTimer > 1200 || NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1) //set to 1200 at end of attack by Lifelight, then fades out
+            if (++KillTimer > 1200 || NPC.CountNPCS(ModContent.NPCType<Lifelight>()) < 1) //set to 1200 at end of attack by Lifelight, then fades out
             {
                 Projectile.alpha += 17;
                 Projectile.hostile = false;

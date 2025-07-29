@@ -21,14 +21,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML");
         public MutantTrueEyeDeathray() : base(90) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool CanHitPlayer(Player target)
         {
             return target.hurtCooldowns[1] == 0;

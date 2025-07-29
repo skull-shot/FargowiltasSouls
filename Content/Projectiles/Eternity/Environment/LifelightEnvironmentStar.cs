@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 Projectile.Center = Projectile.position;
 
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                SoundEngine.PlaySound(LifeChallenger.RuneSound1 with { PitchRange = (-0.6f, -0.4f), Volume = 0.5f }, Projectile.Center);
+                SoundEngine.PlaySound(Lifelight.RuneSound1 with { PitchRange = (-0.6f, -0.4f), Volume = 0.5f }, Projectile.Center);
 
                 for (int j = 0; j < 32; j++)
                 {

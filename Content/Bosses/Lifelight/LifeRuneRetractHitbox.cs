@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
     public class LifeRuneRetractHitbox : ModProjectile, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/Rune1";
+        public override string Texture => FargoSoulsUtil.EmptyTexture;
 
         public override void SetStaticDefaults()
         {
@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void AI()
         {
             NPC lifelight = Main.npc[(int)Projectile.ai[0]];
-            if (!lifelight.TypeAlive<LifeChallenger>())
+            if (!lifelight.TypeAlive<Lifelight>())
             {
                 Projectile.Kill();
             }
@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             float runeRot = (float)(BodyRotation + Math.PI * 2 / RuneCount * i);
             //Vector2 runePos = lifelight.Center + runeRot.ToRotationVector2() * RuneDistance;
             Projectile.rotation = runeRot + MathHelper.PiOver2;
-            Projectile.Center = lifelight.As<LifeChallenger>().CustomRunePositions[i];
+            Projectile.Center = lifelight.As<Lifelight>().CustomRunePositions[i];
 
             if (Timer > Projectile.ai[2])
                 Projectile.Kill();

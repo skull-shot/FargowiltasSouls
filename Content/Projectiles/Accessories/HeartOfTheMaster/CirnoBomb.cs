@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using Microsoft.Xna.Framework;
@@ -11,12 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
 {
     public class CirnoBomb : GlowRing
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/GlowRing";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Cirno Bomb");
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", "GlowRing");
 
         public override void SetDefaults()
         {

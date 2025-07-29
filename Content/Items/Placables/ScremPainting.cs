@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Tiles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;

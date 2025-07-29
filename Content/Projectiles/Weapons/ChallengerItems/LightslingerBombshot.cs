@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,11 +11,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
     public class LightslingerBombshot : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeProjSmall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeProjSmall");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Light Shot");
-
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
 

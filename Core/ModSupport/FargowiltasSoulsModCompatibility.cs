@@ -274,7 +274,7 @@ namespace FargowiltasSouls
                 );
                 Add("Boss",
                     "LifeChallenger",
-                    [ModContent.NPCType<LifeChallenger>()],
+                    [ModContent.NPCType<Lifelight>()],
                     () => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight],
                     () => true,
                     [

@@ -17,14 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
     public class PenetratorBigDeathray : MutantSpecialDeathray
     {
         public PenetratorBigDeathray() : base(60, 1.5f) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -310,7 +302,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
             FargoAssets.MutantStreak.Value.SetTexture1();
             // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
 
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
+            Texture2D glowTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center - Projectile.velocity * (BeBrighter ? 90f : 180f);
 

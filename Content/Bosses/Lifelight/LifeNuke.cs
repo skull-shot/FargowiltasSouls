@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -10,12 +11,11 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-
     public class LifeNuke : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Bomb");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

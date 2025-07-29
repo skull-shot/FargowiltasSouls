@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
 {
     public class FlightBall : LightBall
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/SkyAndRain/LightBall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
 
         public override void SetDefaults()
         {

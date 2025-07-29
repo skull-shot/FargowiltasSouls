@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,16 +9,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 {
     public class PhantasmalSphereDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayML";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public PhantasmalSphereDeathray() : base(30) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return false;

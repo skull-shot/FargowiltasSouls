@@ -33,9 +33,11 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
 
     [AutoloadBossHead]
-    public class LifeChallenger : ModNPC, IPixelatedPrimitiveRenderer
+    public class Lifelight : ModNPC, IPixelatedPrimitiveRenderer
     {
         #region Variables
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
+
         public static readonly SoundStyle ScreechSound1 = FargosSoundRegistry.LifelightScreech1 with { Volume = 1.5f};
         public static readonly SoundStyle DashSound1 = FargosSoundRegistry.LifelightDash with { Volume = 1.5f };
         public static readonly SoundStyle DashSound2 = FargosSoundRegistry.LifelightPixieDash with { Volume = 1.5f};
@@ -842,7 +844,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, LockVector1,
-                                    ModContent.ProjectileType<LifeChalDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 3f, Main.myPlayer, 0, NPC.whoAmI, endTime);
+                                    ModContent.ProjectileType<LifelightDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 3f, Main.myPlayer, 0, NPC.whoAmI, endTime);
                 }
                 NPC.velocity.X = 0;
                 NPC.velocity.Y = 0;
@@ -898,7 +900,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                         p.netUpdate = true;
                     }
                     //kill deathray, just to be sure
-                    if (p.type == ModContent.ProjectileType<LifeChalDeathray>())
+                    if (p.type == ModContent.ProjectileType<LifelightDeathray>())
                     {
                         p.Kill();
                     }
@@ -1381,7 +1383,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     //float extraVel = i;
                     Vector2 offset1 = (NPC.SafeDirectionTo(Player.Center) * (6f + 3f * i)).RotatedBy(MathHelper.PiOver2 * randSide + randRot);
                     if (FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -offset1, ModContent.ProjectileType<JevilScar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 3f, Main.myPlayer, 0, ai1: NPC.target);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -offset1, ModContent.ProjectileType<LifelightLifeblade>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 3f, Main.myPlayer, 0, ai1: NPC.target);
                 }
                 /*
                 if (WorldSavingSystem.EternityMode && !PhaseOne && AI_Timer >= 70 * 4) // chance to interrupt in emode
@@ -1396,7 +1398,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             {
                 foreach (Projectile p in Main.projectile)
                 {
-                    if (p.type == ModContent.ProjectileType<JevilScar>())
+                    if (p.type == ModContent.ProjectileType<LifelightLifeblade>())
                     {
                         float extra = PhaseOne || !WorldSavingSystem.EternityMode ? 0 : 50;
                         p.localAI[0] = 1200 - extra;
@@ -2624,7 +2626,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public const int ChunkCount = 10 * 5;
         public const int RuneCount = 12;
         const int ChunkSpriteCount = 12;
-        const string PartsPath = "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/";
         internal struct Rune
         {
             public Rune(Vector3 center, int index, float scale, float rotation)
@@ -2785,7 +2786,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     {
                         float rotation = (RuneFormation == Formations.Gun || OldRuneFormation == Formations.Gun) ? BodyRotation / MathHelper.Lerp(1, 3, FormationLerp) : BodyRotation;
                         float drawRot = (float)(rotation + Math.PI * 2 / AuraRuneCount * i);
-                        Texture2D RuneTexture = ModContent.Request<Texture2D>(PartsPath + $"Rune{(i % RuneCount) + 1}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                        AtlasTexture RuneTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"Rune{(i % RuneCount) + 1}");
                         Vector2 drawPos = AuraCenter + drawRot.ToRotationVector2() * (1100 + RuneDistance) - screenPos;
                         float RuneRotation = drawRot + MathHelper.PiOver2;
 
@@ -2802,9 +2803,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                             else //pink
                                 glowColor = new Color(1, 192 / 255f, 203 / 255f, 0f) * 0.7f;
 
-                            Main.spriteBatch.Draw(RuneTexture, drawPos + afterimageOffset, null, glowColor, RuneRotation, RuneTexture.Size() * 0.5f, NPC.scale, SpriteEffects.None, 0f);
-                        }
-                        spriteBatch.Draw(origin: new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), texture: RuneTexture, position: drawPos, sourceRectangle: null, color: Color.White, rotation: RuneRotation, scale: NPC.scale, effects: SpriteEffects.None, layerDepth: 0f);
+                            Utilities.Draw(spriteBatch, RuneTexture, drawPos + afterimageOffset, null, glowColor, RuneRotation, RuneTexture.Size * 0.5f, new Vector2(NPC.scale), SpriteEffects.None);
+                        }                       
+                        Utilities.Draw(spriteBatch, RuneTexture, drawPos, null, Color.White, RuneRotation, new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), new Vector2(NPC.scale), SpriteEffects.None);
                     }
                 }
 
@@ -2812,8 +2813,8 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 //draws 4 things: 2 upper wings, 2 lower wings
                 if (ChunkDistance > 3)
                 {
-                    Texture2D wingUtexture = ModContent.Request<Texture2D>(PartsPath + "Lifelight_WingUpper", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                    Texture2D wingLtexture = ModContent.Request<Texture2D>(PartsPath + "Lifelight_WingLower", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                    AtlasTexture wingUtexture = AtlasManager.GetTexture("FargowiltasSouls.Lifelight_WingUpper");
+                    AtlasTexture wingLtexture = AtlasManager.GetTexture("FargowiltasSouls.Lifelight_WingLower");
                     Vector2 wingdrawPos = NPC.Center - screenPos;
                     int currentFrame = NPC.frame.Y;
                     int wingUHeight = wingUtexture.Height / Main.npcFrameCount[NPC.type];
@@ -2832,8 +2833,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                         float wingLRotation = NPC.rotation - MathHelper.PiOver2 + MathHelper.ToRadians(110 * i);
                         float wingURotation = NPC.rotation - MathHelper.PiOver2 + MathHelper.ToRadians(70 * i);
                         SpriteEffects flip = i == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically;
-                        spriteBatch.Draw(origin: wingUOrigin, texture: wingUtexture, position: wingdrawPos + wingURotation.ToRotationVector2() * (distance + 30), sourceRectangle: wingURectangle, color: drawColor, rotation: wingURotation, scale: NPC.scale, effects: flip, layerDepth: 0f);
-                        spriteBatch.Draw(origin: wingLOrigin, texture: wingLtexture, position: wingdrawPos + wingLRotation.ToRotationVector2() * (distance + 30), sourceRectangle: wingLRectangle, color: drawColor, rotation: wingLRotation, scale: NPC.scale, effects: flip, layerDepth: 0f);
+                     
+                        Utilities.Draw(spriteBatch, wingUtexture, wingdrawPos + wingURotation.ToRotationVector2() * (distance + 30), wingURectangle, drawColor, wingURotation, wingUOrigin, new Vector2(NPC.scale), flip);
+                        Utilities.Draw(spriteBatch, wingLtexture, wingdrawPos + wingLRotation.ToRotationVector2() * (distance + 30), wingLRectangle, drawColor, wingLRotation, wingLOrigin, new Vector2(NPC.scale), flip);
                     }
                 }
 
@@ -2884,22 +2886,23 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 float pyramidRot = LockVector1.RotatedBy(rot + MathHelper.PiOver2).ToRotation();
                 if (PyramidPhase == 1 && PyramidTimer > PyramidAnimationTime)
                 {
-                    Texture2D pyramid = ModContent.Request<Texture2D>(PartsPath + "PyramidFull", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                    AtlasTexture pyramid = AtlasManager.GetTexture("FargowiltasSouls.PyramidFull");
                     Rectangle pyramidRect = new(0, 0, pyramid.Width, pyramid.Height);
                     Vector2 pyramidOrigin = pyramidRect.Size() / 2;
-                    spriteBatch.Draw(origin: pyramidOrigin, texture: pyramid, position: NPC.Center - screenPos, sourceRectangle: pyramidRect, color: drawColor, rotation: pyramidRot, scale: NPC.scale, effects: SpriteEffects.None, layerDepth: 0f);
+                    //spriteBatch.Draw(origin: pyramidOrigin, texture: pyramid.Atlas.Texture.Value, position: NPC.Center - screenPos, sourceRectangle: pyramidRect, color: drawColor, rotation: pyramidRot, scale: NPC.scale, effects: SpriteEffects.None, layerDepth: 0f);
+                    Utilities.Draw(spriteBatch, pyramid, NPC.Center - screenPos, pyramidRect, drawColor, pyramidRot, pyramidOrigin, new Vector2(NPC.scale), SpriteEffects.None);
                 }
                 else
                 {
-                    Texture2D[] pyramidp = new Texture2D[4];
+                    AtlasTexture[] pyramidp = new AtlasTexture[4];
                     Rectangle[] rects = new Rectangle[4];
                     Vector2[] origins = new Vector2[4];
                     Vector2[] offsets = new Vector2[4];
 
-                    pyramidp[0] = ModContent.Request<Texture2D>(PartsPath + "Pyramid_U", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                    pyramidp[1] = ModContent.Request<Texture2D>(PartsPath + "Pyramid_L", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                    pyramidp[2] = ModContent.Request<Texture2D>(PartsPath + "Pyramid_R", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                    pyramidp[3] = ModContent.Request<Texture2D>(PartsPath + "Pyramid_D", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                    pyramidp[0] = AtlasManager.GetTexture("FargowiltasSouls.Pyramid_U");
+                    pyramidp[1] = AtlasManager.GetTexture("FargowiltasSouls.Pyramid_L");
+                    pyramidp[2] = AtlasManager.GetTexture("FargowiltasSouls.Pyramid_R");
+                    pyramidp[3] = AtlasManager.GetTexture("FargowiltasSouls.Pyramid_D");
                     float progress = 0;
                     if (PyramidPhase > 0)
                     {
@@ -2923,11 +2926,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     for (int i = 0; i < 4; i++)
                     {
                         rects[i] = new Rectangle(0, 0, pyramidp[i].Width, pyramidp[i].Height);
-                        origins[i] = pyramidp[i].Size() / 2;
+                        origins[i] = pyramidp[i].Size / 2;
                         offsets[i] = offsets[i].RotatedBy(pyramidRot);
 
 
-                        spriteBatch.Draw(origin: origins[i], texture: pyramidp[i], position: NPC.Center + offsets[i] - screenPos, sourceRectangle: rects[i], color: color, rotation: pyramidRot, scale: NPC.scale, effects: SpriteEffects.None, layerDepth: 0f);
+                        //spriteBatch.Draw(origin: origins[i], texture: pyramidp[i].Atlas.Texture.Value, position: NPC.Center + offsets[i] - screenPos, sourceRectangle: rects[i], color: color, rotation: pyramidRot, scale: NPC.scale, effects: SpriteEffects.None, layerDepth: 0f);
+                        Utilities.Draw(spriteBatch, pyramidp[i], NPC.Center + offsets[i] - screenPos, rects[i], color, pyramidRot, origins[i], new Vector2(NPC.scale), SpriteEffects.None);
                     }
                 }
             }
@@ -2946,7 +2950,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         private void DrawRune(Rune rune, SpriteBatch spriteBatch, Color drawColor)
         {
             int i = rune.Index;
-            Texture2D RuneTexture = ModContent.Request<Texture2D>(PartsPath + $"Rune{i + 1}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            AtlasTexture RuneTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"Rune{i + 1}");
             Vector2 drawPos = new(rune.Center.X, rune.Center.Y);
             //rune glow
             for (int j = 0; j < 12; j++)
@@ -2961,20 +2965,22 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 else //pink
                     glowColor = new Color(1, 192 / 255f, 203 / 255f, 0f) * 0.7f;
 
-                Main.spriteBatch.Draw(RuneTexture, drawPos + afterimageOffset, null, glowColor, rune.Rotation, RuneTexture.Size() * 0.5f, rune.Scale, SpriteEffects.None, 0f);
+                //Main.spriteBatch.Draw(RuneTexture.Atlas.Texture.Value, drawPos + afterimageOffset, null, glowColor, rune.Rotation, RuneTexture.Size * 0.5f, rune.Scale, SpriteEffects.None, 0f);
+                Utilities.Draw(spriteBatch, RuneTexture, drawPos + afterimageOffset, null, glowColor, rune.Rotation, RuneTexture.Size * 0.5f, new Vector2(rune.Scale), SpriteEffects.None);
             }
             Color color = Color.White;
             if (RuneBlinkTimer > 0)
             {
                 float modifier = RuneBlinkTimer / 40f;
                 color *= modifier;
-
-                Texture2D ringTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                
+                Texture2D ringTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
                 Rectangle ringrect = new(0, 0, ringTexture.Width, ringTexture.Height);
                 Vector2 ringorigin = ringrect.Size() / 2f;
                 spriteBatch.Draw(origin: ringorigin, texture: ringTexture, position: drawPos, sourceRectangle: ringrect, color: color, rotation: rune.Rotation, scale: rune.Scale * 0.4f, effects: SpriteEffects.None, layerDepth: 0f);
             }
-            spriteBatch.Draw(origin: new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), texture: RuneTexture, position: drawPos, sourceRectangle: null, color: color, rotation: rune.Rotation, scale: rune.Scale, effects: SpriteEffects.None, layerDepth: 0f);
+            //spriteBatch.Draw(origin: new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), texture: RuneTexture.Atlas.Texture.Value, position: drawPos, sourceRectangle: null, color: color, rotation: rune.Rotation, scale: rune.Scale, effects: SpriteEffects.None, layerDepth: 0f);
+            Utilities.Draw(spriteBatch, RuneTexture, drawPos, null, color, rune.Rotation, new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), new Vector2(rune.Scale), SpriteEffects.None);
         }
         private void DrawChunk(Vector4 chunk, SpriteBatch spriteBatch, Color drawColor)
         {
@@ -2983,7 +2989,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 return;
             }
             Vector3 pos = chunk.X * Vector3.UnitX + chunk.Y * Vector3.UnitY + chunk.Z * Vector3.UnitZ;
-            string textureString = $"ShardGold{chunk.W}";
             float scale = 0.3f * pos.Z;
 
             byte alpha = (byte)(150 + (100f * pos.Z));
@@ -2997,8 +3002,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 distance /= MathHelper.Lerp(1, 1.5f, MathHelper.Clamp((float)RuneFormationTimer / FormationTime, 0, 1));
             Vector2 chunkOffset = pos.X * Vector2.UnitX * distance + pos.Y * Vector2.UnitY * distance;
             Vector2 drawPos = drawCenter + chunkOffset;
-            Texture2D ChunkTexture = ModContent.Request<Texture2D>(PartsPath + textureString, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-            spriteBatch.Draw(origin: new Vector2(ChunkTexture.Width / 2, ChunkTexture.Height / 2), texture: ChunkTexture, position: drawPos, sourceRectangle: null, color: color, rotation: 0, scale: NPC.scale + scale, effects: SpriteEffects.None, layerDepth: 0f);
+            AtlasTexture ChunkTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"ShardGold{chunk.W}");
+            //spriteBatch.Draw(origin: new Vector2(ChunkTexture.Width / 2, ChunkTexture.Height / 2), texture: ChunkTexture.Atlas.Texture.Value, position: drawPos, sourceRectangle: null, color: color, rotation: 0, scale: NPC.scale + scale, effects: SpriteEffects.None, layerDepth: 0f);
+            Utilities.Draw(spriteBatch, ChunkTexture, drawPos, null, color, 0, new Vector2(ChunkTexture.Width / 2, ChunkTexture.Height / 2), new Vector2(NPC.scale + scale), SpriteEffects.None);
         }
 
         public float WidthFunction(float completionRatio)

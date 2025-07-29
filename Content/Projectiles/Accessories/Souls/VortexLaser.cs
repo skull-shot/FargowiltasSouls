@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Deathrays;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class VortexLaser : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/NatureDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "NatureDeathray");
         public VortexLaser() : base(20, drawDistance: 3600) { }
 
         public override void SetStaticDefaults()

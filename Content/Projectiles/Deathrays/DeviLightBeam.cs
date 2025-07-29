@@ -16,16 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
 
-
         public DeviLightBeam() : base(30 * 3) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Light Ray");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

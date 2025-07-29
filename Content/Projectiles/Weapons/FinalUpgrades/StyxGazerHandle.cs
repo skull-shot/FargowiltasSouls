@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using Microsoft.Xna.Framework;
@@ -11,16 +12,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class StyxGazerHandle : Deathrays.BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public StyxGazerHandle() : base(120) { }
         public int counter;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Styx Gazer");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

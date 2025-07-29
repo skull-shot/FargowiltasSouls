@@ -15,7 +15,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Abominationn");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

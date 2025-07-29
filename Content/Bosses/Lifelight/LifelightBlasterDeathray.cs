@@ -11,10 +11,10 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-    public class LifeChalBlasterDeathray : BaseDeathray
+    public class LifelightBlasterDeathray : BaseDeathray
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
-        public LifeChalBlasterDeathray() : base(40) { }
+        public LifelightBlasterDeathray() : base(40) { }
 
         public override void SetStaticDefaults()
         {

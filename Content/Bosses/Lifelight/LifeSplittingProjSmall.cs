@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -7,7 +8,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeSplittingProjSmall : LifeProjSmall
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeProjSmall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeProjSmall");
         public override void AI()
         {
             if (Projectile.ai[0] == 45f)

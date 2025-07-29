@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 {
     public class RainExplosion : CobaltExplosion
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/CobaltExplosion";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "CobaltExplosion");
         public override void SetDefaults()
         {
             base.SetDefaults();

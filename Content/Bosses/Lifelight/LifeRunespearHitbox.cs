@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeRunespearHitbox : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public const int Length = 260;
 
         public override void SetDefaults()
@@ -37,11 +39,11 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void AI()
         {
             NPC lifelight = Main.npc[(int)Projectile.ai[0]];
-            if (!lifelight.TypeAlive<LifeChallenger>())
+            if (!lifelight.TypeAlive<Lifelight>())
             {
                 Projectile.Kill();
             }
-            LifeChallenger lifelightMNPC = lifelight.As<LifeChallenger>();
+            Lifelight lifelightMNPC = lifelight.As<Lifelight>();
 
             Projectile.Center = lifelight.Center + lifelightMNPC.LockVector1;
             Projectile.rotation = lifelightMNPC.LockVector2.ToRotation();

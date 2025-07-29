@@ -13,9 +13,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeBombExplosion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Bomb");
             Main.projFrames[Projectile.type] = 1;
         }
         public override void SetDefaults()
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     Projectile.alpha = 255;
             }
 
-            if (Projectile.ai[0] > MaxTime || NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1)
+            if (Projectile.ai[0] > MaxTime || NPC.CountNPCS(ModContent.NPCType<Lifelight>()) < 1)
             {
                 for (int i = 0; i < 20; i++)
                 {

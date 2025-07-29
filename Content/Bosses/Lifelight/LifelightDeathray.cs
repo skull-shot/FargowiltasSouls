@@ -16,21 +16,14 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-    public class LifeChalDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
+    public class LifelightDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
 
         public PixelationPrimitiveLayer LayerToRenderTo => PixelationPrimitiveLayer.AfterProjectiles;
 
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
 
-        public LifeChalDeathray() : base(3600) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Holy Deathray");
-        }
+        public LifelightDeathray() : base(3600) { }
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -44,8 +37,8 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<LifeChallenger>());
-            if (npc == null || !npc.active || npc.type != ModContent.NPCType<LifeChallenger>())
+            NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<Lifelight>());
+            if (npc == null || !npc.active || npc.type != ModContent.NPCType<Lifelight>())
             {
                 Projectile.Kill();
                 return;
@@ -53,7 +46,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             else
             {
                 Projectile.Center = npc.Center;
-                LifeChallenger lifelight = npc.As<LifeChallenger>();
+                Lifelight lifelight = npc.As<Lifelight>();
                 Projectile.rotation = lifelight.GunRotation;
                 Projectile.velocity = Projectile.rotation.ToRotationVector2();
                 maxTime = Projectile.ai[2];

@@ -25,16 +25,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
         private float speed;
         private int DashTimer = 0;
-        private int DashAmount = 0;
-        private int LatchTimer = 0;
-
-        private static Asset<Texture2D> chainTexture;
-
-        private const string ChainTexturePath = "FargowiltasSouls/Content/Projectiles/BossWeapons/MechFlailChain";
-
+        private int DashAmount = 0;      
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("MechEyeProjectile");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
@@ -48,12 +41,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Gore.goreTime = 5;
             base.OnSpawn(source);
         }
-
-        public override void Load()
-        {
-            chainTexture = ModContent.Request<Texture2D>(ChainTexturePath);
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 66;

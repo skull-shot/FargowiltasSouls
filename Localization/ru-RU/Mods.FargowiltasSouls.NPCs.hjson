@@ -392,3 +392,5 @@ ReleasedMutant: {
 	TalkToHim: Кто ты?
 	Introduction: Ты обо мне уже слышал. А ты кто такой? Не надо имён. Надо знать, сколько денег ты готов потратить на то, чем я торгую.
 }
+
+// Lifelight.DisplayName: Lifelight

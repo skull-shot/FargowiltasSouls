@@ -14,14 +14,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public LifeDeathraySmall() : base(60) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Holy Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return false;
