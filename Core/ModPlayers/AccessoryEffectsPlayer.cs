@@ -192,7 +192,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
 
 
-        public void FrigidGemstoneKey()
+        public void FrigidGraspKey()
         {
             if (FrigidGemstoneCD > 0)
                 return;
@@ -206,7 +206,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             SoundEngine.PlaySound(SoundID.Item28, Player.Center);
             int damage = (int)(14 * Player.ActualClassDamage(DamageClass.Magic));
 
-            Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGemstoneKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGraspKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
         }
 
 
@@ -244,7 +244,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Player.hurtCooldowns[0] = Math.Max(Player.hurtCooldowns[0], 2);
                         Player.hurtCooldowns[1] = Math.Max(Player.hurtCooldowns[1], 2);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/BetsysHeart").Value, Color.OrangeRed, 
+                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/BetsysHeart").Value, Color.OrangeRed, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(5), activeFunction: () => BetsysHeartItem != null);
                     }
                     else if (player.HasEffect<SupremeDashEffect>() && type == 1)
@@ -254,7 +254,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
                         Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<SupremeDash>(), (int)(66 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/SupremeDeathbringerFairy").Value, Color.LightGray,
+                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/SupremeDeathbringerFairy").Value, Color.LightGray,
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
                     }
                     else if (player.HasEffect<SpecialDashEffect>() && type == 0)
@@ -264,7 +264,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 20;
                         Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<BeeDash>(), (int)(44 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/QueenStinger").Value, Color.Yellow, 
+                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/QueenStinger").Value, Color.Yellow, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
                     }
                     Player.AddBuff(ModContent.BuffType<BetsyDashBuff>(), 20);

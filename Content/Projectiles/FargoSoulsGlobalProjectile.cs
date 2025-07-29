@@ -333,7 +333,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (player.HasEffect<GroundStickDR>())
+            if (player.HasEffect<RemoteControlDR>())
             {
                 if (projectile.ModProjectile == null)
                 {
@@ -1569,7 +1569,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
+            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGraspKeyEffect>())
             {
                 target.AddBuff(BuffID.Frostburn, 360);
             }

@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             }
 
             if (fargoPlayer.Player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Masomode/IceQueensCrown").Value, Color.Cyan, () => (float)fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
+                CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/IceQueensCrown").Value, Color.Cyan, () => (float)fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
 
             if (!Main.dedServ)
             {

@@ -982,7 +982,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		''' */
 }
@@ -997,7 +997,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1142,15 +1142,13 @@ EurusSock: {
 	Tooltip: Permite que o usuário corra rapidamente
 }
 
-FrigidGemstone: {
-	DisplayName: Pedra Preciosa Frígida
-	Tooltip:
+FrigidGrasp: {
+	// DisplayName: Frigid Grasp
+	/* Tooltip:
 		'''
-		Funciona em seu inventário
-		Oferece imunidade a Queimadura de gelo e Resfriado
-		Aperte a tecla Feitiço Frígido para lançar Bastão de Gelo
-		'Um fragmento de gelo mágico antigo'
-		'''
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		'A torn off limb composed of ancient ice'
+		''' */
 	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
@@ -1201,16 +1199,15 @@ GelicWings: {
 		'''
 }
 
-GroundStick: {
-	DisplayName: Controle Remoto
-	Tooltip:
+RemoteControl: {
+	// DisplayName: Remote Control
+	/* Tooltip:
 		'''
-		Oferece imunidade Para-raios
-		Ataques de eletricidade e raios sobrecarregam você e causam metade do dano se você ainda não estiver sobrecarregado
-		Enquanto sobrecarregado, você tem velocidade dos movimentos e do ataque aumentados e inflige Eletrizado
-		Duas sondas amigávels lutam ao seu lado e irão sobrecarregar com você
-		'O segmento de um inimigo derrotado com uma antena colada'
-		'''
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
+		''' */
 }
 
 GuttedHeart: {

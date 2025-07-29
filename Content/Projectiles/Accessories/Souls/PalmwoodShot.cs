@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D tex = Projectile.ai[2] == 0 ? TextureAssets.Projectile[Type].Value : FargoAssets.GetTexture2D("Content/Projectiles/Accessories", "PalmwoodShot2").Value;
+            Texture2D tex = Projectile.ai[2] == 0 ? TextureAssets.Projectile[Type].Value : FargoAssets.GetTexture2D("Content/Projectiles/Accessories/Souls", "PalmwoodShot2").Value;
             FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor, tex);
             return false;
         }

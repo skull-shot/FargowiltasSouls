@@ -135,7 +135,7 @@
 // StabilizedGravity: Stabilized Gravity
 // DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 // FusedLensInstall: Twins Install
-// GroundStickDR: Supercharge When Hit
+// RemoteControlDR: Supercharge When Hit
 // ProbeMinionEffect: Probes Minion
 // RemoteLightningEffect: Lightning Strike
 // PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
