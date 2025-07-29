@@ -876,7 +876,7 @@ namespace FargowiltasSouls.Core.Globals
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
-                    Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-10, -2)).RotatedByRandom(MathHelper.ToRadians(20)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
+                    Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-14, -4)).RotatedByRandom(MathHelper.ToRadians(35)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
                 }
             }
         }
