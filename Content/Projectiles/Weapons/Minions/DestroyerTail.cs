@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
-            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "DestroyerTail_glow").Value;
+            Texture2D glow = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "DestroyerTail_Glow").Value;
             int num214 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int y6 = num214 * Projectile.frame;
             Color color25 = Projectile.GetAlpha(Lighting.GetColor((int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16)));

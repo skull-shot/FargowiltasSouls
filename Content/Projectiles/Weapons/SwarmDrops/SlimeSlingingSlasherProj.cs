@@ -9,9 +9,10 @@ using ReLogic.Content;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using System.IO;
 using Mono.Cecil;
-using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Assets.Textures;
 
-namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
+namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
 
     public class SlimeSlingingSlasherProj : ModProjectile
@@ -241,7 +242,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                     SlashOpacity = 0f;
             }
 
-            Texture2D slashTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SlimeKingSlasherProjSlash").Value;
+            Texture2D slashTexture = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/BossWeapons", "SlimeKingSlasherProjSlash").Value;
             Vector2 slashOrigin = slashTexture.Size() / 2f;
             Rectangle rectangle2 = slashTexture.Bounds;
             Main.EntitySpriteDraw(slashTexture, pos, new Microsoft.Xna.Framework.Rectangle?(rectangle2), Projectile.GetAlpha(lightColor) * SlashOpacity, rotation, slashOrigin, Projectile.scale, effects, 0);

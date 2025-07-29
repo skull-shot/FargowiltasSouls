@@ -233,13 +233,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
-            Texture2D SpazmaSaw = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SpazmarangSaw").Value;
+            //Texture2D SpazmaSaw = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/SpazmarangSaw").Value;
             int num156 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
-            Rectangle rectangle2 = new(0, y3, SpazmaSaw.Width, num156);
-            Vector2 origin22 = rectangle2.Size() / 2f;
+            //Rectangle rectangle2 = new(0, y3, SpazmaSaw.Width, num156);
+            //Vector2 origin22 = rectangle2.Size() / 2f;
 
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);

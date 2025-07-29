@@ -6,14 +6,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles
+namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
     public class AbomScytheFriendly : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Abominable Scythe");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

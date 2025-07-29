@@ -18,7 +18,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Planty Tentacle");
             Main.projFrames[Projectile.type] = Main.npcFrameCount[NPCID.PlanterasTentacle];
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 2400;
         }
