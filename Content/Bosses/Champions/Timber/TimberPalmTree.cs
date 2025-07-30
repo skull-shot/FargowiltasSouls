@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -8,13 +9,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 {
     public class TimberPalmTree : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Minions/PalmTreeSentry";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Palm Tree");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", "PalmTreeSentry");
         public override void SetDefaults()
         {
             Projectile.width = 70;

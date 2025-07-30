@@ -10,7 +10,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantReticle2 : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/TargetingReticle";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/Content/Projectiles/Eternity/TargetingReticle";
 
         public override void SetStaticDefaults()
         {

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,12 +10,8 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class AcornProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public float bounce = 1;
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Acorn");
-
-        }
         public override void SetDefaults()
         {
             Projectile.aiStyle = 0;

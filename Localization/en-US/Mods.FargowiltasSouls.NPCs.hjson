@@ -296,7 +296,7 @@ DeviBoss: {
 
 ShadowOrbNPC.DisplayName: Shadow Orb
 
-LifeChallenger: {
+Lifelight: {
 	DisplayName: Lifelight
 
 	BossChecklistIntegration: {
@@ -392,3 +392,5 @@ ReleasedMutant: {
 	TalkToHim: Who are you?
 	Introduction: You've already heard of me. But who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
 }
+
+BloodPuddle.DisplayName: Blood Puddle

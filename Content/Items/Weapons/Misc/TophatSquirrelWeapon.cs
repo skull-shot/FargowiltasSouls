@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Misc;
-using FargowiltasSouls.Content.Projectiles.Critters;
+using FargowiltasSouls.Content.Projectiles.Weapons;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

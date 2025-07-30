@@ -1,8 +1,9 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -169,7 +170,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         [
             ModContent.ProjectileType<FishStickProjTornado>(),
             ModContent.ProjectileType<FishStickWhirlpool>(),
-            ModContent.ProjectileType<ReleasedMechFlail>(),
+            ModContent.ProjectileType<ReleasedLeashofCthulhu>(),
             ProjectileID.ButchersChainsaw,
         ];
         public static List<int> TungstenNeverAffectProjStyle = 

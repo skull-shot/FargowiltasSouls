@@ -1,5 +1,6 @@
 ﻿
 
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
@@ -13,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomSwordHandle : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public AbomSwordHandle() : base(150) { }
         public int counter;
 

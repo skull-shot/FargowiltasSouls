@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
              AccessoryEffectLoader.GetEffect<DiveEffect>(),
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
              AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
@@ -193,7 +193,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FusedLensInstall>(Item);
             player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-            player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteControlDR>(Item);
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
             player.AddEffect<ReinforcedStats>(Item);

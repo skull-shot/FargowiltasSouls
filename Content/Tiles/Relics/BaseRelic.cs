@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
@@ -21,10 +22,8 @@ namespace FargowiltasSouls.Content.Tiles.Relics
 
         protected abstract int ItemType { get; }
 
-        private const string path = "FargowiltasSouls/Content/Tiles/Relics/";
-
-        protected string RelicTextureName => path + Name;
-        public override string Texture => path + "RelicPedestal";
+        protected string RelicTextureName => FargoAssets.GetAssetString("Content/Tiles/Relics", Name);
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles/Relics", "RelicPedestal");
         public Asset<Texture2D> RelicTexture;
 
         public override void Load()

@@ -77,7 +77,7 @@ RemoteLightningEffect: {
 		'''
 }
 
-FrigidGemstoneKeyEffect: {
+FrigidGraspKeyEffect: {
 	DisplayName: Морозное заклинание
 	Tooltip: Выпускает блок льда в сторону вашего курсора
 }

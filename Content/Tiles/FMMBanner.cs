@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Placables;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.NPCs.Critters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class FMMBanner : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", "FMMBanner");
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;

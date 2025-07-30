@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,13 +10,11 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class VineslingerProjectileFriendly : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 4;
-
-            // DisplayName.SetDefault("Living Leaf Projectile");
         }
-
         public override void SetDefaults()
         {
             Projectile.width = 18;

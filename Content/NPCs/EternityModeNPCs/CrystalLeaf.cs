@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;

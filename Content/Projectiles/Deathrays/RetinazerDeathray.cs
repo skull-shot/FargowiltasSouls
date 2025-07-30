@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Systems;
@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class RetinazerDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public RetinazerDeathray() : base(240/*, sheeting: TextureSheeting.Vertical*/) { }
 
         public override void SetStaticDefaults()

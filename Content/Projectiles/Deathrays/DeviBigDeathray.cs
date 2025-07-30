@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
 	public class DeviBigDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public static List<Asset<Texture2D>> RingTextures =>
         [
@@ -221,12 +221,6 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
             // Draw the foreground rings.
             DrawRings(baseDrawPoints, false, ring);
-
-            // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
-            //Vector2 glowDrawPosition = Projectile.Center - Projectile.velocity * 320f;
-            //Main.EntitySpriteDraw(glowTexture, glowDrawPosition - Main.screenPosition, null, new Color(255, 180, 243), Projectile.rotation, glowTexture.Size() * 0.5f, Projectile.scale * 0.3f, SpriteEffects.None, 0);
-
         }
 
         public float RingWidthFunction(float trailInterpolant) => Projectile.scale * 4;

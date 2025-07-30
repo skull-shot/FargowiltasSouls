@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
     public class NatureIcicle : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/FrostIcicle";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "FrostIcicle");
 
         public override void SetStaticDefaults()
         {

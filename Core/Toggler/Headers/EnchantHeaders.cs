@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Core.Toggler.Content
     }
     public class ShadowHeader : EnchantHeader
     {
-        public override int Item => ModContent.ItemType<ShadowForce>();
+        public override int Item => ModContent.ItemType<DeathForce>();
         public override float Priority => 0.6f;
     }
     public class SpiritHeader : EnchantHeader

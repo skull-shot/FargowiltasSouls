@@ -6,7 +6,7 @@ using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;

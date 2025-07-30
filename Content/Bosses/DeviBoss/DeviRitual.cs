@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         {
             base.OnHitPlayer(target, info);
 
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
         }
 
         public override bool PreDraw(ref Color lightColor)

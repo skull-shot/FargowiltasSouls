@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantDestroyerHead_April" :
-            "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_134";
+            "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_134";
 
         public override void SetStaticDefaults()
         {
@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             Texture2D texture2D13 = Projectile.ai[2] == 0
                 ? Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value
-                : ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_13", AssetRequestMode.ImmediateLoad).Value;
+                : ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/EModeResprites/NPC_13", AssetRequestMode.ImmediateLoad).Value;
             int num214 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int y6 = num214 * Projectile.frame;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle(0, y6, texture2D13.Width, num214),

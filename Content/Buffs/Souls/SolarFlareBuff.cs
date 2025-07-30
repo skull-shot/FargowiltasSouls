@@ -1,6 +1,5 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Terraria;

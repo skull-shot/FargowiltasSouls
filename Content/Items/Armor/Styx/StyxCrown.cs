@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;

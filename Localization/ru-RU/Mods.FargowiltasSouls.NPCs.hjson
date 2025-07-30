@@ -296,16 +296,16 @@ DeviBoss: {
 
 ShadowOrbNPC.DisplayName: Теневая сфера
 
-LifeChallenger: {
-	DisplayName: Жизнесвет
+Lifelight: {
+	// DisplayName: Lifelight
 
 	BossChecklistIntegration: {
-		EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/FragilePixieLamp] в биоме освящения днём.
-		DespawnMessage: Жизнесвет угасает...
+		// EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
+		// SpawnInfo: Spawn by using [i:FargowiltasSouls/FragilePixieLamp] in the Hallow at day.
+		// DespawnMessage: Lifelight fades away...
 	}
 
-	FatherOfLies: It was a mistake to come here.
+	// FatherOfLies: It was a mistake to come here.
 }
 
 BanishedBaron: {
@@ -392,3 +392,5 @@ ReleasedMutant: {
 	TalkToHim: Кто ты?
 	Introduction: Ты обо мне уже слышал. А ты кто такой? Не надо имён. Надо знать, сколько денег ты готов потратить на то, чем я торгую.
 }
+
+// BloodPuddle.DisplayName: Blood Puddle

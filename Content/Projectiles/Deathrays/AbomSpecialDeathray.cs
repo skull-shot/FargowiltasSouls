@@ -1,10 +1,11 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 
 namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public abstract class AbomSpecialDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomSpecialDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomSpecialDeathray");
         public AbomSpecialDeathray(int maxTime) : base(maxTime, sheeting: TextureSheeting.Horizontal) { }
 
         public override void SetStaticDefaults()

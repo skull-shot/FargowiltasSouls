@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class GolemBeam : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/GolemBeam";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public GolemBeam() : base(300) { }
 
         public override void SetStaticDefaults()

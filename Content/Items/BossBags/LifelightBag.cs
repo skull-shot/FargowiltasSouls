@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeRevitalizer>()));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<LifeChallenger>()));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<Lifelight>()));
             itemLoot.Add(new OneFromOptionsDropRule(1, 1,
             [
                 ModContent.ItemType<EnchantedLifeblade>(),

@@ -1,6 +1,4 @@
-﻿
-
-using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -22,12 +20,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public int counter;
         public bool spawnedHandle;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Styx Gazer Blade");
-        }
 
         public override void SetDefaults()
         {

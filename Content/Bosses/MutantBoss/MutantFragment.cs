@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,11 +12,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantFragment_April" :
-            "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialFragment";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Eternity/Bosses/LunaticCultist/CelestialFragment";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Fragment");
             Main.projFrames[Projectile.type] = 4;
         }
 

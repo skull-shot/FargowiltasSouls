@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.ModPlayers;
 using Microsoft.Xna.Framework;
 using System.Linq;

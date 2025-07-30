@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSansHead : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_246B";
+        public override string Texture => "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_246B";
 
         public override void SetStaticDefaults()
         {

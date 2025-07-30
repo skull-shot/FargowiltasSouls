@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             ModContent.ItemType<EarthForce>(),
             ModContent.ItemType<NatureForce>(),
             ModContent.ItemType<LifeForce>(),
-            ModContent.ItemType<ShadowForce>(),
+            ModContent.ItemType<DeathForce>(),
             ModContent.ItemType<SpiritForce>(),
             ModContent.ItemType<WillForce>(),
             ModContent.ItemType<CosmoForce>()
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //SPIRIT
             ModContent.GetInstance<SpiritForce>().UpdateAccessory(player, hideVisual);
             //SHADOW
-            ModContent.GetInstance<ShadowForce>().UpdateAccessory(player, hideVisual);
+            ModContent.GetInstance<DeathForce>().UpdateAccessory(player, hideVisual);
             //WILL
             ModContent.GetInstance<WillForce>().UpdateAccessory(player, hideVisual);
             //COSMOS

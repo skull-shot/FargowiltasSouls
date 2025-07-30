@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

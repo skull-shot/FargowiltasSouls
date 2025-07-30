@@ -135,7 +135,7 @@ WyvernBalls: 飞行光球
 StabilizedGravity: 重力稳定
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: 双子负载
-GroundStickDR: 受击超级充能
+RemoteControlDR: 受击超级充能
 ProbeMinionEffect: 探测器召唤物
 // RemoteLightningEffect: Lightning Strike
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"

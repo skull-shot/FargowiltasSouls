@@ -7,7 +7,7 @@ using Terraria.ModLoader.IO;
 using Terraria.UI;
 using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework.Graphics;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 
 
 

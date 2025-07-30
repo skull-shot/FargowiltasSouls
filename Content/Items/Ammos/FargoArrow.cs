@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.Ammos;
+using FargowiltasSouls.Content.Projectiles.Weapons.Ammos;
 using Terraria.ID;
 using Terraria.ModLoader;
 

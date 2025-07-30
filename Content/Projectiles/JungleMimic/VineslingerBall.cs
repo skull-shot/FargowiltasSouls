@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,10 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class VineslingerBall : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Vineslinger Ball");
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public override void SetDefaults()
         {
             Projectile.width = 34;
@@ -35,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
         public override bool PreDraw(ref Color lightColor)
         {
             //chain texture drawing
-            Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/JungleMimic/VineslingerChain", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles/JungleMimic", "VineslingerChain").Value;
 
             Vector2 position = Projectile.Center;
             Vector2 mountedCenter = Main.player[Projectile.owner].MountedCenter + Vector2.UnitY * 6;

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;

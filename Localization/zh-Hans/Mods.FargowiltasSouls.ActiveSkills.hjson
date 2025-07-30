@@ -76,7 +76,7 @@ RemoteLightningEffect: {
 		''' */
 }
 
-FrigidGemstoneKeyEffect: {
+FrigidGraspKeyEffect: {
 	DisplayName: 寒霜咒语
 	Tooltip: 放置冰雪魔杖之冰
 }

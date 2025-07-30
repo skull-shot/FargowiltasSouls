@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Placables;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class LifeRevitalizerPlaced : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", "LifeRevitalizerPlaced");
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;
