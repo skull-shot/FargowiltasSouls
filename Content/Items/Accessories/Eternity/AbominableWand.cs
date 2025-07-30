@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Accessories;
+﻿using FargowiltasSouls.Content.Projectiles.Accessories;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;

@@ -86,7 +86,7 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
 		2 beetles die when taking damage, once per 3 seconds
 		'The unseen life of dung courses through your veins'
 		''' */
@@ -1084,7 +1084,7 @@ Deerclawps: {
 		'''
 		Grants immunity to Slow and Frozen
 		Dashing leaves a trail of ice spikes, pointed towards the closest enemy if airborne
-		Reduces damage taken by 15% while dashing
+		Reduces damage taken by 20% while dashing
 		'The trimmed nails of a defeated foe'
 		''' */
 }

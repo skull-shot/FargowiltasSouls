@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                     Vector2 vel = 10 * Vector2.UnitX.RotatedBy((target.Center - npc.Center).ToRotation());
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel, ModContent.ProjectileType<VikingHook>(), 1, 0f, ai0: npc.whoAmI, ai1: -30 , ai2: -1);
                 }
-                SoundEngine.PlaySound(SoundID.Unlock);
+                SoundEngine.PlaySound(SoundID.Unlock with { Volume = 0.5f}, npc.Center);
             }
             // end
             if (AttackTimer == 180)

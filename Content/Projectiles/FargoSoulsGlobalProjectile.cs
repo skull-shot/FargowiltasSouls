@@ -36,6 +36,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -881,7 +882,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         Player player = Main.player[projectile.owner];
                         if (player.HeldItem.type == ModContent.ItemType<Blender>())
                         {
-                            Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/PlanteraTentacle", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                            Texture2D texture2D13 = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "Blender3").Value;
                             Rectangle rectangle = new(0, 0, texture2D13.Width, texture2D13.Height);
                             Vector2 origin2 = rectangle.Size() / 2f;
 
