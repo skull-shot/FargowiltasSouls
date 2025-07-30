@@ -20,7 +20,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
                 SpitTimer--;
             if (hitcooldown > 0)
                 hitcooldown--;
-            Main.NewText($"{SpitTimer}");
             if (SpitTimer <= 0)
             {
                 npc.frameCounter++;
