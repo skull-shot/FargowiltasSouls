@@ -4075,7 +4075,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             float radius = 2000f * auraScale;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = NPC.Opacity;

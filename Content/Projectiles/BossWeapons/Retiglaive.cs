@@ -250,7 +250,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.Techno1Noise.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.Techno1Noise.Value);
             if (DrawTrail)
             {
                 PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);

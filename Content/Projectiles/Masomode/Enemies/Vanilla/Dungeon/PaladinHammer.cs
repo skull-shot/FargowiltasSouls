@@ -106,7 +106,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargosTextureRegistry.Techno1Noise.Value.SetTexture1();
+            FargoAssets.Techno1Noise.Value.SetTexture1();
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
 
         }

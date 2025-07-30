@@ -366,7 +366,7 @@ namespace FargowiltasSouls.Content.Projectiles
             float radius = texture.Width * Projectile.scale / 2;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            var diagonalNoise = FargoAssets.Techno1Noise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = 0.3f * Projectile.Opacity * (Main.mouseTextColor / 255f) * 0.9f;

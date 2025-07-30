@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             //draw bloom
             float bloomScale = Projectile.scale * 1.5f;
             float bloomOpacity = 1;
-            Texture2D bloomTexture = FargosTextureRegistry.BloomParticleTexture.Value;
+            Texture2D bloomTexture = FargoAssets.BloomParticleTexture.Value;
             Main.spriteBatch.Draw(bloomTexture, drawPos, null, Color.DarkGoldenrod with { A = 0 } * bloomOpacity, Projectile.rotation, bloomTexture.Size() * 0.5f, bloomScale, SpriteEffects.None, 0f);
             Main.spriteBatch.Draw(bloomTexture, drawPos, null, Color.Gold with { A = 0 } * 0.4f * bloomOpacity, Projectile.rotation, bloomTexture.Size() * 0.5f, bloomScale * 0.66f, SpriteEffects.None, 0f);
             //Main.spriteBatch.End();

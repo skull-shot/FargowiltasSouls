@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargosTextureRegistry.FadedStreak.Value.SetTexture1();
+            FargoAssets.FadedStreak.Value.SetTexture1();
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
 

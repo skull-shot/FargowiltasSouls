@@ -1,14 +1,17 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI.Elements

@@ -1,10 +1,15 @@
-﻿using FargowiltasSouls.Core;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Assets.ExtraTextures;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI.Elements
@@ -53,7 +58,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
             else
             {
-                UICooldownBar newBar = new(nameKey, FargoUIManager.CooldownBarTexture.Value, FargoUIManager.CooldownBarFillTexture.Value, itemTexture, fillColor, fillRatio, displayAtFull, fadeDelay, activeFunction, animationFrames);
+                UICooldownBar newBar = new(nameKey, FargoAssets.UI.CooldownBarTexture.Value, FargoAssets.UI.CooldownBarFillTexture.Value, itemTexture, fillColor, fillRatio, displayAtFull, fadeDelay, activeFunction, animationFrames);
                 //int nX = i / 3;
                 //int nY = i % 3;
                 int nY = i;

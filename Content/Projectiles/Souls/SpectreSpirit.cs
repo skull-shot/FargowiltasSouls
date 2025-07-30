@@ -187,7 +187,7 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
             if (FoundTarget && TargetNPC != -1)
             {
                 ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-                FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+                FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
                 PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
             }
         }

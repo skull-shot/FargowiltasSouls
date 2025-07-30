@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             var target = Main.LocalPlayer;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             var maxOpacity = Projectile.Opacity;
             float scale = Projectile.scale * 0.5f;

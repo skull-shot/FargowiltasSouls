@@ -870,7 +870,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 float radius = auraDistance;
                 var target = Main.LocalPlayer;
                 var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargosTextureRegistry.DottedNoise;
+                var diagonalNoise = FargoAssets.DottedNoise;
                 if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                     return false;
                 var maxOpacity = NPC.Opacity;
