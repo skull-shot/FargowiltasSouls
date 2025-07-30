@@ -40,26 +40,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
-        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
-        {
-            return DashDR(player);
-        }
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
-        {
-            return DashDR(player);
-        }
-
-
-        public static float DashDR(Player player)
+        public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            float dr = 0;
             if (modPlayer.IsInADashState || modPlayer.SpecialDash)
-            {
-                dr += 0.15f;
-            }
-
-            return dr;
+                player.endurance += 0.2f;
         }
     }
     public class DeerclawpsEffect : AccessoryEffect
