@@ -456,7 +456,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 chainDrawPosition += unitVectorFromProjectileToPlayerArms * chainSegmentLength;
                 chainCount++;
                 chainLengthRemainingToDraw -= chainSegmentLength;        
-                if (!Projectile.active)
+                if (!Projectile.active && !Main.dedServ)
                 {
                     Gore.NewGore(Projectile.GetSource_Death(), chainDrawPosition, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "ChainGore").Type, 1f);
                     Gore.goreTime = 5;
