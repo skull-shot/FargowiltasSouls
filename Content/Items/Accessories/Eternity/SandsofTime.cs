@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (player.itemTime == player.itemTimeMax / 2 && player.lastDeathPostion != Vector2.Zero)
             {
                 player.immune = true;
-                player.immuneTime = 60;
+                player.immuneTime = 20;
                 for (int index = 0; index < 70; ++index)
                 {
                     int d = Dust.NewDust(player.position, player.width, player.height, DustID.GemTopaz, player.velocity.X * 0.5f, player.velocity.Y * 0.5f, 150, new Color(), 1.5f);

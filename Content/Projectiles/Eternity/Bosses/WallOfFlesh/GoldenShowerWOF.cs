@@ -31,8 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 300;
-            Projectile.hostile = true;
-            Projectile.extraUpdates = 2;
+            Projectile.hostile = true;;
         }
 
         public override bool? CanCutTiles()
@@ -42,6 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 
         public override void AI()
         {
+            Projectile.extraUpdates = (int)Projectile.ai[1];
             if (Projectile.localAI[1] == 0)
             {
                 Projectile.localAI[1] = 1;

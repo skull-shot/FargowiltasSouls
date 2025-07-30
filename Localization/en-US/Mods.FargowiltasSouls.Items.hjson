@@ -86,7 +86,7 @@ BeetleEnchant: {
 	Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
 		2 beetles die when taking damage, once per 3 seconds
 		'The unseen life of dung courses through your veins'
 		'''
@@ -1084,7 +1084,7 @@ Deerclawps: {
 		'''
 		Grants immunity to Slow and Frozen
 		Dashing leaves a trail of ice spikes, pointed towards the closest enemy if airborne
-		Reduces damage taken by 15% while dashing
+		Reduces damage taken by 20% while dashing
 		'The trimmed nails of a defeated foe'
 		'''
 }
@@ -1528,7 +1528,7 @@ SupremeDeathbringerFairy: {
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/NecromanticBrew] Lethargic, [i:FargowiltasSouls/Deerclawps] Slow, and Frozen
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, create a trail of blood scythes
-		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 15% damage reduction
+		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
 		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
 		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily
 		'Supremacy not necessarily guaranteed'

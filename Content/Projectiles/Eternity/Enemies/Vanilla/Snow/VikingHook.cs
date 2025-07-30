@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
                 if (Projectile.ai[1] == 0)
                 {
                     Projectile.velocity = 10 * Vector2.UnitX.RotatedBy(rot);
-                    SoundEngine.PlaySound(SoundID.Item1);
+                    SoundEngine.PlaySound(SoundID.Item1, Projectile.Center);
                 }
                 else
                 {
@@ -74,6 +74,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
                     if (!target.dead && target.active)
                         target.Center = Projectile.Center;
                 }
+                Projectile.tileCollide = false;
                 Projectile.velocity = 10 * Vector2.UnitX.RotatedBy(rot);
                 if (dist < 10)
                 {

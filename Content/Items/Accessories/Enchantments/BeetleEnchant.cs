@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //modPlayer.Beetles;
             int beetle = ModContent.ProjectileType<BeetleEnchantBeetle>();
 
-            player.endurance += 0.025f * modPlayer.Beetles;
+            player.endurance += 0.03f * modPlayer.Beetles;
 
             int spawnBeetles = modPlayer.Beetles - player.ownedProjectileCounts[beetle];
             if (spawnBeetles > 0 && player.whoAmI == Main.myPlayer)

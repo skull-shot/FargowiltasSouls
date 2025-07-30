@@ -264,6 +264,7 @@ namespace FargowiltasSouls.Core.Globals
             //is lava on screen
             //bool nearLava = Collision.LavaCollision(spawnInfo.Player.position, spawnInfo.SpawnTileX, spawnInfo.SpawnTileY);
             bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
+            bool worldEvil = WorldGen.crimson;
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
 
             bool bossCanSpawn = WorldSavingSystem.MasochistModeReal && !spawnInfo.Player.HasEffect<SinisterIconEffect>() && !LumUtils.AnyBosses();
@@ -283,20 +284,17 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (noBiome)
                             {
-                                pool[NPCID.CorruptBunny] = NPC.downedBoss1 ? .02f : .01f;
-                                pool[NPCID.CrimsonBunny] = NPC.downedBoss1 ? .02f : .01f;
+                                pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = NPC.downedBoss1 ? .04f : .02f;
                             }
 
                             if (snow)
                             {
-                                pool[NPCID.CorruptPenguin] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonPenguin] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
                             if (ocean || Main.raining)
                             {
-                                pool[NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonGoldfish] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
                             if (NPC.downedBoss1)
@@ -391,7 +389,6 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (NPC.downedBoss2)
                         {
-                            pool[NPCID.SeekerHead] = .005f;
                             if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
                                 pool[NPCID.EaterofWorldsHead] = .0002f;
                         }
@@ -401,7 +398,6 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (NPC.downedBoss2)
                         {
-                            pool[NPCID.IchorSticker] = .005f;
                             if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
                                 pool[NPCID.BrainofCthulhu] = .0002f;
                         }
@@ -486,20 +482,17 @@ namespace FargowiltasSouls.Core.Globals
                                 {
                                     if (noBiome)
                                     {
-                                        pool[NPCID.CorruptBunny] = .05f;
-                                        pool[NPCID.CrimsonBunny] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
                                     }
 
                                     if (snow)
                                     {
-                                        pool[NPCID.CorruptPenguin] = .05f;
-                                        pool[NPCID.CrimsonPenguin] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
                                     }
 
                                     if (ocean || Main.raining)
                                     {
-                                        pool[NPCID.CorruptGoldfish] = .05f;
-                                        pool[NPCID.CrimsonGoldfish] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
                                     }
                                 }
 
@@ -702,25 +695,19 @@ namespace FargowiltasSouls.Core.Globals
                     else if (underworld)
                     {
                         pool[NPCID.LeechHead] = .025f;
-                        pool[NPCID.BoneSerpentHead] = .025f;
                         pool[NPCID.BlazingWheel] = .05f;
 
                         if (bossCanSpawn && !FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
                             pool[NPCID.TheHungryII] = .03f;
 
-                        if (NPC.downedMechBossAny)
-                        {
-                            pool[NPCID.BlazingWheel] = .05f;
-                        }
-
                         if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
                         {
-                            pool[NPCID.DiabolistRed] = .001f;
-                            pool[NPCID.DiabolistWhite] = .001f;
-                            pool[NPCID.Necromancer] = .001f;
-                            pool[NPCID.NecromancerArmored] = .001f;
-                            pool[NPCID.RaggedCaster] = .001f;
-                            pool[NPCID.RaggedCasterOpenCoat] = .001f;
+                            pool[NPCID.DiabolistRed] = .01f;
+                            pool[NPCID.DiabolistWhite] = .01f;
+                            pool[NPCID.Necromancer] = .01f;
+                            pool[NPCID.NecromancerArmored] = .01f;
+                            pool[NPCID.RaggedCaster] = .01f;
+                            pool[NPCID.RaggedCasterOpenCoat] = .01f;
                         }
 
                         if (WorldSavingSystem.DownedBetsy && bossCanSpawn)
@@ -791,19 +778,7 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         pool[NPCID.BlazingWheel] = .1f;
                         pool[NPCID.SpikeBall] = .1f;
-
-                        if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
-                        {
-                            const float rate = .01f;
-                            pool[NPCID.BigMimicJungle] = rate;
-
-                            pool[NPCID.DiabolistRed] = rate / 2;
-                            pool[NPCID.DiabolistWhite] = rate / 2;
-                            pool[NPCID.Necromancer] = rate / 2;
-                            pool[NPCID.NecromancerArmored] = rate / 2;
-                            pool[NPCID.RaggedCaster] = rate / 2;
-                            pool[NPCID.RaggedCasterOpenCoat] = rate / 2;
-                        }
+                        pool[NPCID.BigMimicJungle] = .1f;
                     }
 
                     if (ocean && spawnInfo.Water)
