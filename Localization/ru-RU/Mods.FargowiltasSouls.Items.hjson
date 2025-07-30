@@ -303,7 +303,7 @@ LeadEnchant: {
 	DisplayName: Зачарование свинца
 	Tooltip:
 		'''
-		Вы получаете на 40% меньше урона от дебаффов с постепенным уроном
+		Вы получаете на 30% меньше постепенного урона от дебаффов
 		Атаки накладывают на врагов дебафф «Свинцовое отравление»
 		«Свинцовое отравление» наносит постепенный урон и распространяется на ближайших врагов
 		«Не рекомендуется к употреблению»
@@ -416,7 +416,7 @@ OrichalcumEnchant: {
 	DisplayName: Зачарование орихалка
 	Tooltip:
 		'''
-		Дебаффы с постепенным уроном наносят в 1,75 раза больше урона
+		Дебаффы с постепенным уроном наносят на 75% больше урона
 		Ваши атаки ненадолго накладывают «Орихалковое отравление»
 		«Природа благословляет вас»
 		'''
@@ -669,7 +669,8 @@ TitaniumEnchant: {
 	Tooltip:
 		'''
 		Во время атаки вокруг вас генерируется защитный барьер, состоящий из вплоть до 20 титановых осколков, наносящих ближний урон
-		Когда вы достигаете максимального количества, то получаете сопротивление к большинству дебаффов и 10-30% сопротивления урону
+		Когда вы достигнете максимального количества, вы получите сопротивление к большинству дебаффов,
+		а также будете получать на 10-30% меньше урона
 		Сопротивление зависит от того, насколько близко вы находитесь к врагу при получении урона
 		Эффект действует ещё несколько секунд после получения урона
 		У этого эффекта есть время перезарядки в 15 секунд, в течение которых вы не можете получать осколки
@@ -795,7 +796,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Увеличивает регенерацию здоровья и сопротивление урону, увеличивается вместе с зарядом
 		[i:FargowiltasSouls/AdamantiteEnchant] Чем дольше вы атакуете, тем быстрее вы это делаете, но только пока у вас есть заряд
 		[i:FargowiltasSouls/OrichalcumEnchant] Пока вы заряжены, вы также накладываете дебафф «Яд Земли», который наносит процент от урона удара, наложившего дебафф
-		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают в 2,5 раза больше урона от дебаффов
+		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают на 150% больше урона от дебаффов
 		[i:FargowiltasSouls/CobaltEnchant] Увеличивает скорость и высоту прыжка; удерживайте ВНИЗ, чтобы падать быстрее
 		«Благословение Геи озаряет вас»
 		'''
@@ -836,20 +837,20 @@ NatureForce: {
 }
 
 DeathForce: {
-	// DisplayName: Force of Death
-	/* Tooltip:
+	DisplayName: Артефакт Смерти
+	Tooltip:
 		'''
-		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
-		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
-		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
-		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
-		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
-		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
-		'Dark, Darker, Yet Darker'
-		''' */
+		[i:FargowiltasSouls/CrystalAssassinEnchant] Даёт теневой рывок, который обнуляет вашу вертикальную скорость и может быть направлен по диагонали
+		[i:FargowiltasSouls/ShinobiEnchant] Каждые 4 секунды, ваш рывок укрывает вас в тени, делая вас неуязвимым во время рывка
+		[i:FargowiltasSouls/ShinobiEnchant] Такие рывки через врагов наносят им урон и накладывают на них «Помеченный смертью»
+		[i:FargowiltasSouls/AncientShadowEnchant] Рывки испускают снаряды теневого пламени вокруг вас
+		[i:FargowiltasSouls/NinjaEnchant] Увеличивает шанс крит. удара снарядов в зависимости от их скорости
+		[i:FargowiltasSouls/NinjaEnchant] Увеличивает скорость снарядов пока вы двигаетесь медленно
+		[i:FargowiltasSouls/NecroEnchant] Из павших врагов могут выпасть костяные кучи
+		[i:FargowiltasSouls/DarkArtistEnchant] Во время атаки, оружие в следующем слоте обеспечивает огневую поддержку
+		[i:FargowiltasSouls/SpookyEnchant] Все атаки призываемых существ получают дополнительную атаку косой
+		«Темнее, темнее, ещё темнее»
+		'''
 }
 
 SpiritForce: {
@@ -870,7 +871,7 @@ TerraForce: {
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Критические удары иногда выпускают молнию, которая взрывается при попадании и накладывает усиленное «Свинцовое отравление»
 		[i:FargowiltasSouls/SilverEnchant] Парирование аннулирует до 200 ед. урона, успешные парирования мгновенно выпускают молнию
 		[i:FargowiltasSouls/TinEnchant] Выставляет оловянный шанс крит. удара на 75%, увеличивающийся на 25% при каждой выпущенной молнии, до 100%
-		[i:FargowiltasSouls/LeadEnchant] Вы получаете на 60% меньше постепенного урона
+		[i:FargowiltasSouls/LeadEnchant] Вы получаете на 50% меньше постепенного урона от дебаффов
 		[i:FargowiltasSouls/TungstenEnchant] Увеличивает размер ближних оружий на 50% и дальность хлыстов на 20%
 		[i:FargowiltasSouls/IronEnchant] Перековки всегда дают наилучший префикс, но стоят на 50% дороже, увеличивает дальность подбора предметов (работает в инвентаре и слотах для украшений)
 		[i:FargowiltasSouls/IronEnchant] Подбор любого предмета увеличивает ваше сопротивление урону на 20% на 5 секунд
@@ -1138,10 +1139,10 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
-		'A torn off limb composed of ancient ice'
-		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
+		Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение» (работает в инвентаре и слотах для украшений)
+		«Оторванная конечность, сделанная из древнего льда»
+		'''
+	VanityTooltip: Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение»
 }
 
 FusedLens: {
@@ -1192,14 +1193,14 @@ GelicWings: {
 }
 
 RemoteControl: {
-	// DisplayName: Remote Control
-	/* Tooltip:
+	DisplayName: Пульт дистанционного управления
+	Tooltip:
 		'''
-		Grants immunity to Electrified and Lightning Rod
-		Taking damage from an electric or beam attack converts half of its damage into charge duration
-		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
-		'The batteries are dead'
-		''' */
+		Даёт иммунитет к дебаффам «Электризация» и «Громоотвод»
+		Половина урона от атак электричеством и лучами по вам превращается в заряд
+		Пока вы подзаряжены, увеличивает ваши скорость передвижения и атаки, а также призывает 3 зонда сражаться за вас
+		«Батарейки давно сели»
+		'''
 }
 
 GuttedHeart: {
@@ -1473,8 +1474,8 @@ SecurityWallet: {
 		'''
 		Работает в инвентаре и слотах для украшений
 		Даёт иммунитет к дебаффу «Мидас»
-		Значительно улучшает перековку
-		'Не защищает от воровства с вашего трупа'
+		Значительно улучшает перековки
+		«Не защищает от воровства с вашего трупа»
 		'''
 	VanityTooltip:
 		'''
@@ -1551,8 +1552,8 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] Во время движения за вами остаётся след из кровавых кос
 		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 15%, а также за вами остаётся след из кровавых шипов
 		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Нажмите кнопку специального рывка, чтобы сделать быстрый рывок-удар Скелетрона с огромным отбрасыванием
-		[i:FargowiltasSouls/AgitatingLens] Попадания рывком по врагам разъяряют вас, что значительно увеличивает вашу скорость атаки
-		«Верховенство не гарантировано»
+		[i:FargowiltasSouls/AgitatingLens] Попадания рывком по врагам вводят вас в свирепость, что ненадолго увеличивает вашу скорость атаки
+		«Не гарантирует верховенство»
 		'''
 }
 
@@ -1581,7 +1582,8 @@ WyvernFeather: {
 	Tooltip:
 		'''
 		Даёт иммунитет к дебаффам «Оборванные крылья» и «Покалеченный»
-		С вас периодически сходят сферы света, коснитесь их, чтобы восстановить полёт
+		Пока вы в вохдухе, с вас периодически сходят сферы света
+		Коснитесь их, чтобы восстановить полёт и двойные прыжки
 		Стабилизирует гравитацию в космосе и жидкостях (работает в инвентаре и слотах для украшений)
 		«Тёплое на ощупь»
 		'''
@@ -1776,7 +1778,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] Даёт 75% шанс критического удара, который увеличивается при выпуске молнии
 		[i:FargowiltasSouls/TerraForce] Увеличивает дальность подбора предметов, подбор увеличивает ваше сопротивление урону
 		[i:FargowiltasSouls/EarthForce] Вы получаете бонусы к защите, пока не атакуете, и бонусы к атаке, пока атакуете
-		[i:FargowiltasSouls/EarthForce] Увеличивает постепенный урон в 4 раза; вы взрываетесь при получении урона, пока не атакуете
+		[i:FargowiltasSouls/EarthForce] Увеличивает постепенный урон на 150%; вы взрываетесь при получении урона, пока не атакуете
 		[i:FargowiltasSouls/NatureForce] Даёт ауру, которая похищает здоровье, увеличивает наносимый урон и выпускает листовые лазеры в ближайших врагов
 		[i:FargowiltasSouls/NatureForce] Грибы лечат больше и усиливают вас; ваши атаки накладывают некоторые дебаффы; даёт зонт
 		[i:FargowiltasSouls/LifeForce] Вы оставляете за собой мощные цветы во время полёта, которые дают мощные усиления при касании
@@ -1932,34 +1934,34 @@ GaiaPlate: {
 }
 
 EternalCore: {
-	// DisplayName: Eternal Core
-	/* Tooltip:
+	DisplayName: Вечное ядро
+	Tooltip:
 		'''
-		70% increased damage and 30% increased critical strike chance
-		Increases max life and mana by 200
-		Increases damage reduction by 30%
-		Drastically increases life regen
-		''' */
+		Увеличивает урон на 70% и шанс критического удара на 30%
+		Увеличивает максимальный запас здоровья и маны на 200
+		Увеличивает сопротивление урону на 30%
+		Значительно увеличивает регенерацию здоровья
+		'''
 }
 
 EternalFlame: {
-	// DisplayName: Eternal Flame
-	/* Tooltip:
+	DisplayName: Вечный огонь
+	Tooltip:
 		'''
-		50% increased damage and 20% increased critical strike chance
-		Increases max number of minions and sentries by 10
-		25% reduced mana usage
-		25% chance not to consume ammo
-		''' */
+		Увеличивает урон на 50% и шанс критического удара на 20%
+		Увеличивает максимальное количество прислужников и часовых на 10
+		Уменьшает затрату маны на 25%
+		Даёт 25% шанс сохранить боеприпасы
+		'''
 }
 
 EternalLeggings: {
-	// DisplayName: Eternal Leggings
-	/* Tooltip:
+	DisplayName: Вечные поножи
+	Tooltip:
 		'''
-		50% increased damage and 20% increased critical strike chance
-		40% increased movement and melee speed
-		''' */
+		Увеличивают урон на 50% и шанс критического удара на 20%
+		Увеличивают скорость передвижения и ближней атаки на 40%
+		'''
 }
 
 NekomiHood: {
@@ -2158,7 +2160,7 @@ EternalEnergy: {
 }
 
 BrokenSpearhead: {
-	DisplayName: Сломаннйы наконечник
+	DisplayName: Сломанный наконечник
 	Tooltip: ""
 }
 
@@ -2340,7 +2342,7 @@ SpawnSack: {
 }
 
 HokeyBall: {
-	DisplayName: Хокеболл
+	DisplayName: Шмокеболл
 	Tooltip:
 		'''
 		Призывает Ниббла
@@ -2384,8 +2386,8 @@ NatureChampionRelic: {
 }
 
 DeathChampionRelic: {
-	// DisplayName: Death Champion Relic
-	// Tooltip: ""
+	DisplayName: Реликвия чемпиона Смерти
+	Tooltip: ""
 }
 
 SpiritChampionRelic: {
@@ -2593,12 +2595,12 @@ FleshHand: {
 }
 
 Eyeleash: {
-	// DisplayName: Eyeleash
-	/* Tooltip:
+	DisplayName: Глаз на привязи
+	Tooltip:
 		'''
-		Servants gather around you whilst spun, flying towards your cursor when released
-		'The mutilated carcass of a defeated foe...'
-		''' */
+		Раскручивайте, чтобы призывать помощников. Отпустите, чтобы отправить их к своему курсору
+		«Изуродованный труп побеждённого врага...»
+		'''
 }
 
 RefractorBlaster: {
@@ -2788,22 +2790,22 @@ Blender: {
 }
 
 DestructionCannon: {
-	// DisplayName: Destruction Cannon
-	/* Tooltip:
+	DisplayName: Пушка уничтожения
+	Tooltip:
 		'''
-		Becomes longer and faster with up to 5 empty minion slots
-		'The reward for a mighty rematch...'
-		''' */
+		Становится длиннее и быстрее при наличии до 5 пустых слотов для прислужников
+		«Награда за шикарный реванш...»
+		'''
 }
 
 DragonsDemise: {
-	// DisplayName: Dragon's Demise
-	/* Tooltip:
+	DisplayName: Гибель дракона
+	Tooltip:
 		'''
-		Uses gel for ammo
-		66% chance to not consume ammo
-		'The reward for a mighty rematch...'
-		''' */
+		Использует гель в качестве боеприпасов
+		Шанс 66% сохранить боеприпасы
+		«Награда за шикарный реванш...»
+		'''
 }
 
 EaterLauncher: {
@@ -2821,13 +2823,13 @@ EaterLauncher: {
 }
 
 Regurgitator: {
-	// DisplayName: The Regurgitator
-	/* Tooltip:
+	DisplayName: Изрыгатель
+	Tooltip:
 		'''
-		Grows a Hungry when firing
-		Hungry deals much more damage when fully charged
-		'The enslaved face of a defeated foe...'
-		''' */
+		Пока вы атакуете, из ствола вырастает Голодный
+		Голодные наносят больше урона при полном заряде
+		«Порабощённое лицо побеждённого врага...»
+		'''
 }
 
 GeminiGlaives: {
@@ -2842,13 +2844,13 @@ GeminiGlaives: {
 }
 
 Landslide: {
-	// DisplayName: The Landslide
-	/* Tooltip:
+	DisplayName: Оползень
+	Tooltip:
 		'''
-		Deals more damage when firing many heads at once
-		Automatically fires weak heads when fully charged
-		'The reward for a mighty rematch...'
-		''' */
+		Наносит больше урона, когда выпускается несколько голов сразу
+		Автоматически выпускает слабые головы при полном заряде
+		«Награда за шикарный реванш...»
+		'''
 }
 
 GuardianTome: {
@@ -2870,14 +2872,14 @@ HellZone: {
 }
 
 LeashofCthulhu: {
-	// DisplayName: Leash of Cthulhu
-	/* Tooltip:
+	DisplayName: Привязь Ктулху
+	Tooltip:
 		'''
-		Spawns homing servants whilst spun
-		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
-		Only one eye can be loose at a time
-		'The reward for a mighty rematch...'
-		''' */
+		Раскручивайте, чтобы призывать самонаводящихся прислужников
+		После каждого 3-го попадания привязью, глаз срывается с цепи и рвётся к врагам
+		Без цепи может быть только один глаз
+		«Награда за шикарный реванш...»
+		'''
 }
 
 NukeFishron: {
@@ -2890,18 +2892,18 @@ NukeFishron: {
 }
 
 OmniscienceStaff: {
-	// DisplayName: Omniscience Staff
-	/* Tooltip:
+	DisplayName: Посох всеведения
+	Tooltip:
 		'''
-		Summons the real twins to fight for you
-		Needs 3 minion slots
-		'The reward for a mighty rematch...''
-		''' */
+		Призывает реальных близнецов сражаться с вами
+		Требует 3 слота для прислужников
+		«Награда за шикарный реванш...»
+		'''
 }
 
 DiffractorBlaster: {
-	// DisplayName: Diffractor Blaster
-	// Tooltip: "'The reward for a mighty rematch...'"
+	DisplayName: Дифракционный бластер
+	Tooltip: «Награда за шикарный реванш...»
 }
 
 SlimeSlingingSlasher: {
@@ -2945,12 +2947,13 @@ Masochist: {
 		– Переработку боссов и врагов, делая их сильнее
 		– Выпадение предметов режима Мастера
 		– Новые эксклюзивные для режима выпадающие предметы
-		– Девиантт предоставляет стартовый набор и советы по прохождению
-		– Улучшает базовые хар-ки и ставит игроку лимит сопротивления урону в 75%
+		– Стартовый набор и советы по прохождению от Девиантт
+		– Улучшенные базовые характеристики
+		– Переработку сопротивления урону: теперь каждый источник СУ уменьшает урон после других уменьшений
 		– Дебаффы спадают быстрее, пока вы не атакуете
 		  Также вы не можете умереть от постепенного урона (не в режиме Мазохиста)
-		– Изменяет функционал и силу некоторых предметов
-		– В режиме Мазохиста в мультиплеере, игроки могут возраждаться только один раз за битву с боссом
+		– Изменённые функционал и силу некоторых предметов
+		– В режиме Мазохиста в мультиплеере, игроки могут возрождаться только один раз за битву с боссом
 
 		Не может быть использован, пока любой босс жив
 		[i:1612][c/00ff00:Рекомендуется использовать Отображение дебаффов мода Fargo's Mutant (в конфигурации)]
@@ -3018,8 +3021,8 @@ ScientificRailgun: {
 }
 
 RoombaPet: {
-	DisplayName: Румба
-	Tooltip: Призывает Румбу, что следует за вами в надежде очистить весь мир
+	DisplayName: Робот-пылесос
+	Tooltip: Призывает робот-пылесос, следующий за вами в надежде очистить весь мир
 }
 
 VortexMagnetRitual: {
@@ -3178,8 +3181,8 @@ LifelightTrophy: {
 }
 
 CrystallineEffigy: {
-	// DisplayName: Crystalline Effigy
-	// Tooltip: While in the Hallow during day, hold out to break, angering the pixies' master
+	DisplayName: Кристаллическое чучело
+	Tooltip: Находясь в освящении днём, держите его, чтобы разбить его и разгневать повелителя фей
 }
 
 CrystallineCongregation: {
@@ -3408,7 +3411,7 @@ RazorContainer: {
 	Tooltip:
 		'''
 		Вызывает перед вами острое лезвие, которое летает за вашим курсором
-		Удары мечом по лезвию заставляют его вылетать вперёд
+		Удары ближними оружиями по лезвию заставляют его вылетать вперёд
 		В полёте, лезвие всегда наносит критический урон и имеет повышенное пробивание брони
 		«Всё ещё есть немного жёлтого меха, застрявшего на дне»
 		'''
