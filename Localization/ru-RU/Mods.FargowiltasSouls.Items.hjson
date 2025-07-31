@@ -1136,8 +1136,8 @@ EurusSock: {
 }
 
 FrigidGrasp: {
-	// DisplayName: Frigid Grasp
-	/* Tooltip:
+	DisplayName: Frigid Grasp
+	Tooltip:
 		'''
 		Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение» (работает в инвентаре и слотах для украшений)
 		«Оторванная конечность, сделанная из древнего льда»
