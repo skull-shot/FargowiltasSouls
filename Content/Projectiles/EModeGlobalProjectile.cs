@@ -1224,7 +1224,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FlowerPow:
-                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.FlowerPow))
+                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
                     {
                         projectile.localAI[0] += 2f; // tripled petal firerate
                         projectile.netUpdate = true;

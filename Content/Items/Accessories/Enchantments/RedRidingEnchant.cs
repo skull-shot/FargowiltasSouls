@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Main.projectile[heatray].tileCollide = false;
             //proj spawns arrows all around it until it dies
 
-            Projectile.NewProjectile(player.GetSource_Accessory(effectItem), target.Center.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<ArrowRain>(), (int)(damage * player.ActualClassDamage(DamageClass.Ranged)), 0f, player.whoAmI, arrowType, target.whoAmI);
+            Projectile.NewProjectile(player.GetSource_Accessory(effectItem), target.Center.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<ArrowRain>(), damage, 0f, player.whoAmI, arrowType, target.whoAmI);
             modPlayer.RedRidingArrowCD = modPlayer.ForceEffect<RedRidingEnchant>() ? 240 : 360;
         }
         private static Item PickAmmo(Player player)
