@@ -44,7 +44,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                         break;
                     case NPCID.AngryNimbus:
                         npc.lifeMax /= 3;
+                        npc.damage /= 2;
                         npc.defense /= 4;
+                        npc.knockBackResist *= 2;
                         break;
                     default: break;
                 }

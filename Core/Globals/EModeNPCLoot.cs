@@ -524,7 +524,6 @@ namespace FargowiltasSouls.Core.Globals
 
                     case NPCID.AngryNimbus:
                         npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.NimbusRod && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.FloatingIslandFishingCrate));
                         break;
 
                     case NPCID.DuneSplicerHead:

@@ -28,6 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.lifeMax /= 2;
                 npc.defense /= 2;
+                npc.damage /= 2;
             }
         }
     }
