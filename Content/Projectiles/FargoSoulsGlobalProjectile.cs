@@ -102,7 +102,13 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool ArrowRain = false;
 
-        public static List<int> ShroomiteBlacklist =
+        public int postNinjaCrit; // this projectile's crit chance after Ninja Enchantment's bonus
+
+        public bool canForceCrit; // use this bool to somewhat get around _critOverride restrictions so Ninja and Pearlwood interact properly
+
+        public bool ApprenticeSupportProjectile;
+
+        public static List<int> PureProjectile =
         [
             
         ];
@@ -1493,11 +1499,23 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.2f;
-                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
-                if (Main.rand.NextFloat() < increase)
+                int critRoll = Main.rand.Next(0, 100);
+                int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 40 : 20;
+                int increase = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
+                postNinjaCrit = projectile.CritChance + increase;
+                if (critRoll < postNinjaCrit) // roll with the actual crit chance
+                {
                     modifiers.SetCrit();
-
+                    if (critRoll >= projectile.CritChance && critRoll < postNinjaCrit)
+                    {
+                        Main.NewText($"{increase}");
+                    }
+                }
+                else
+                {
+                    modifiers.DisableCrit(); // disable crit if failed new roll
+                    canForceCrit = true; // pearlwood can still reroll on crit fail
+                }
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)
