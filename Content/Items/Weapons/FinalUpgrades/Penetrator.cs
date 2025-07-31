@@ -1,6 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             //Item.scale = 1.3f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+            Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true;
             Item.noUseGraphic = true;
@@ -122,7 +122,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 }
                 else if (player.controlDown && player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+                    Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
                     Item.shootSpeed = 6f;
                 }
                 else

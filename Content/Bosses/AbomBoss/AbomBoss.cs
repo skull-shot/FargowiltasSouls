@@ -1,9 +1,9 @@
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Pets;
@@ -11,6 +11,7 @@ using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
@@ -637,14 +638,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             else if (NPC.ai[1] == 210)
                             {
                                 if (FargoSoulsUtil.HostCheck)
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Souls.IronParry>(), 0, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer);
                                 NPC.netUpdate = true;
                             }
                         }
                         else if (NPC.ai[1] == 0) //basic tell
                         {
                             if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Souls.IronParry>(), 0, 0f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer);
                         }
                     }
                     /*else
@@ -1791,7 +1792,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 float radius = 2000f;
                 var target = Main.LocalPlayer;
                 var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargosTextureRegistry.WavyNoise;
+                var diagonalNoise = FargoAssets.WavyNoise;
                 if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                     return false;
                 var maxOpacity = NPC.Opacity;

@@ -1,7 +1,7 @@
 ﻿using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.BossBags;
@@ -9,6 +9,8 @@ using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -673,7 +675,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         if (FargoSoulsUtil.HostCheck)
                         {
                             Vector2 spawnPos = NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height));
-                            int type = ModContent.ProjectileType<Projectiles.BossWeapons.PhantasmalBlast>();
+                            int type = ModContent.ProjectileType<PhantasmalBlast>();
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
                         }
                     }
@@ -948,7 +950,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                         {
                                             Vector2 offset = NPC.height / 2 * baseDirection.RotatedBy(Math.PI * 2 / max * i);
                                             float ai1 = i <= 1 || i == max - 1 ? 32 : 8;
-                                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Vector2.Zero, ModContent.ProjectileType<Projectiles.Masomode.MoonLordSunBlast>(),
+                                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Vector2.Zero, ModContent.ProjectileType<Projectiles.Eternity.MoonLordSunBlast>(),
                                                 FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, MathHelper.WrapAngle(offset.ToRotation()), ai1);
                                         }
                                     }
@@ -1828,21 +1830,26 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     int type = ModContent.ProjectileType<MutantBomb>();
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, Vector2.Zero, type, 0, 0f, Main.myPlayer);
                 }
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Masomode.MoonLordMoonBlast>(), 0, 0f, Main.myPlayer, -Vector2.UnitY.ToRotation(), 32);
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.Eternity.MoonLordMoonBlast>(), 0, 0f, Main.myPlayer, -Vector2.UnitY.ToRotation(), 32);
             }
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<CosmoForce>()));
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
 
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<CosmosBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EridanusTrophy>(), 10));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<EridanusRelic>()));
+            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<CosmoForce>()));
 
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<Eridanium>(), 1, 5, 10));
             npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.Find<ModItem>("Fargowiltas", "CrucibleCosmos").Type));
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<CosmosBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<EridanusRelic>()));
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

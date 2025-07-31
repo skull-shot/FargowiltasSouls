@@ -4,24 +4,20 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Patreon.DanielTheRobot;
-using FargowiltasSouls.Content.PlayerDrawLayers;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.HeartOfTheMaster;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -40,6 +36,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -107,7 +104,13 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
-        public bool ArrowRain;
+        public bool ArrowRain; // whether this projectile is spawned by Red Riding Enchantment's arrow rain
+
+        public int postNinjaCrit; // this projectile's crit chance after Ninja Enchantment's bonus
+
+        public bool canForceCrit; // use this bool to somewhat get around _critOverride restrictions so Ninja and Pearlwood interact properly
+
+        public bool ApprenticeSupportProjectile;
 
         public static List<int> PureProjectile =
         [
@@ -296,6 +299,10 @@ namespace FargowiltasSouls.Content.Projectiles
                         TikiTimer += 180;
                         sourceProj3.FargoSouls().TikiTagged = false;
                     }
+                    if (sourceProj3.FargoSouls().ApprenticeSupportProjectile)
+                    {
+                        ApprenticeSupportProjectile = true; // inherit Apprentice Support tag if source is also a Support projectile
+                    }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
                 {
@@ -331,7 +338,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (player.HasEffect<GroundStickDR>())
+            if (player.HasEffect<RemoteControlDR>())
             {
                 if (projectile.ModProjectile == null)
                 {
@@ -458,6 +465,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
+                && !EModeGlobalProjectile.FancySwings.Contains(projectile.type)
                 && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
                 && !FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
@@ -481,6 +489,15 @@ namespace FargowiltasSouls.Content.Projectiles
             // Fix for extended sword hitboxes having a maximum range for some reason
             if (projectile.aiStyle == ProjAIStyleID.NightsEdge)
                 projectile.ownerHitCheckDistance *= projectile.scale;
+
+            if (player.HasEffect<ApprenticeSupport>() && !(modPlayer.ApprenticeItemCD > 0)) // only run when the Apprentice Shoot method runs
+            {
+                // crosscheck the projectile's source item to see if it matches the Apprentice Support weapon that spawned it
+                if (source is EntitySource_ItemUse_WithAmmo parent4 && parent4.Item is Item sItem && FargoSoulsPlayer.ApprenticeSupportItem is not null && sItem == FargoSoulsPlayer.ApprenticeSupportItem)
+                {
+                    ApprenticeSupportProjectile = true; // tag it, meaning we now know that this projectile is from Apprentice Support effect
+                }
+            }
         }
 
         public static int[] NoSplit => [
@@ -869,7 +886,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         Player player = Main.player[projectile.owner];
                         if (player.HeldItem.type == ModContent.ItemType<Blender>())
                         {
-                            Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/PlanteraTentacle", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                            Texture2D texture2D13 = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "Blender3").Value;
                             Rectangle rectangle = new(0, 0, texture2D13.Width, texture2D13.Height);
                             Vector2 origin2 = rectangle.Size() / 2f;
 
@@ -1314,13 +1331,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
-            {
-                modPlayer.HuntressStage /= 2;
-                //Main.NewText("MISS");
-                HuntressProj = -1;
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1600 && projectile.Center.Distance(Main.player[projectile.owner].Center) < 1680) //gets inbetween 100 and 105 blocks of the player
+            {                                                                                                                                                      //done like this so a stream of missed projectiles with a long lifespan dont posthumously decrement bonuses
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //sound effect
+                HuntressProj = -1;
             }
 
             if (CirnoBurst > 0)
@@ -1440,19 +1458,23 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                int critRoll = Main.rand.Next(100);
+                int critRoll = Main.rand.Next(0, 100);
                 int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
                 int increase = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
-                int increasedCrit = projectile.CritChance + increase;
-                if (critRoll < increasedCrit) // roll with the actual crit chance
+                postNinjaCrit = projectile.CritChance + increase;
+                if (critRoll < postNinjaCrit) // roll with the actual crit chance
                 {
                     modifiers.SetCrit();
-                    if (critRoll >= projectile.CritChance && critRoll < increasedCrit)
+                    if (critRoll >= projectile.CritChance && critRoll < postNinjaCrit)
                     {
                         Main.NewText($"{increase}");
                     }
                 }
-                else modifiers.DisableCrit(); // disable crit if failed new roll
+                else
+                {
+                    modifiers.DisableCrit(); // disable crit if failed new roll
+                    canForceCrit = true; // pearlwood can still reroll on crit fail
+                }
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)
@@ -1556,7 +1578,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
+            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGraspKeyEffect>())
             {
                 target.AddBuff(BuffID.Frostburn, 360);
             }
@@ -1621,10 +1643,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
-                modPlayer.HuntressStage /= 2;
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //Main.NewText("MISS");
-                //sound effect
             }
         }
 

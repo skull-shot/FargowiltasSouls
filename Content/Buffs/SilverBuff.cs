@@ -1,7 +1,4 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
-using Luminance.Core.Graphics;
-using Microsoft.Xna.Framework;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +10,7 @@ namespace FargowiltasSouls.Content.Buffs
         {
             Main.buffNoSave[Type] = true;
         }
-
+        public override string Texture => "Terraria/Images/Buff_" + BuffID.ParryDamageBuff;
         public override void Update(Player player, ref int buffIndex)
         {
             player.GetDamage(DamageClass.Generic) += 1f;

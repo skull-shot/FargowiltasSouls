@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             float radius = threshold - leeway;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = Projectile.Opacity * (targetPlayer == Main.myPlayer ? 1f : 0.15f);

@@ -385,11 +385,6 @@ PungentGazeBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	DisplayName: 涤荡
-	Description: 闪避效果不会生效
-}
-
 RefreshedBuff: {
 	DisplayName: 焕然一新
 	Description: 机动性提升，飞行时间延长
@@ -589,6 +584,11 @@ HuntressCDBuff: {
 LeadPoisonBuff: {
 	DisplayName: 铅中毒
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
+}
+
+LeadPoisonSpreadBuff: {
+	DisplayName: 铅中毒
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
 }
 
 MoltenAmplifyBuff: {
@@ -795,7 +795,7 @@ TouhouHoardBuff: {
 
 BleedingOut: {
 	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	// Description: You're bleeding quickly!
 }
 
 SilverBuff: {
@@ -804,6 +804,6 @@ SilverBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed Harmless Buff
-	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
 }

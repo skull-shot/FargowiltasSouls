@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -9,11 +10,11 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class GalacticReformerProj : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public int countdown = 5;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Nuke");
             Main.projFrames[Projectile.type] = 5;
         }
 

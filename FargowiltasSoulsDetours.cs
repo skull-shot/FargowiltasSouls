@@ -1,9 +1,11 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.PlayerDrawLayers;
+using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Hooking;
@@ -23,6 +25,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls
 {
@@ -36,6 +39,9 @@ namespace FargowiltasSouls
         {
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+            On_Main.DrawMenu += DrawMenu;
+
+            On_WorldGen.MakeDungeon += CheckBricks;
 
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
@@ -54,11 +60,16 @@ namespace FargowiltasSouls
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
             On_Projectile.Damage += PhantasmArrowRainFix;
+
+            On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
         }
         public void UnloadDetours()
         {
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+            On_Main.DrawMenu -= DrawMenu;
+
+            On_WorldGen.MakeDungeon -= CheckBricks;
 
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
@@ -77,6 +88,17 @@ namespace FargowiltasSouls
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
 
             On_Projectile.Damage -= PhantasmArrowRainFix;
+
+            On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
+        }
+
+        private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
+        {
+            orig(x, y);
+            if (GenVars.crackedType == 482)
+                WorldSavingSystem.DungeonBrickType = "G";
+            if (GenVars.crackedType == 483)
+                WorldSavingSystem.DungeonBrickType = "P";
         }
 
 
@@ -248,6 +270,64 @@ namespace FargowiltasSouls
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
             }
         }
+
+        private static void DrawMenu(On_Main.orig_DrawMenu orig, Main self, GameTime gameTime)
+        {
+            float upBump = 0;
+            byte b = (byte)((255 + Main.tileColor.R * 2) / 3);
+            Mod mod = FargowiltasSouls.Instance;
+            Vector2 anchorPosition = new Vector2(18f, (float)(Main.screenHeight - 116 - 22) - upBump);
+            Color color = new Microsoft.Xna.Framework.Color(b, b, b, 255);
+            upBump += 32f;
+            if (MenuLoader.CurrentMenu is FargoMenuScreen)
+            {
+                if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
+                {
+                    FargowiltasSouls.DrawTitleLinks(color, upBump);
+                    upBump += 32f;
+                }
+                if (!WorldGen.drunkWorldGen)
+                {
+                    string text = mod.DisplayName + " " + mod.Version;
+                    Vector2 origin = FontAssets.MouseText.Value.MeasureString(text);
+                    origin.X *= 0.5f;
+                    origin.Y *= 0.5f;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Microsoft.Xna.Framework.Color color2 = Microsoft.Xna.Framework.Color.Black;
+                        if (i == 4)
+                        {
+                            color2 = color;
+                            color2.R = (byte)((255 + color2.R) / 2);
+                            color2.G = (byte)((255 + color2.R) / 2);
+                            color2.B = (byte)((255 + color2.R) / 2);
+                        }
+                        color2.A = (byte)((float)(int)color2.A * 0.3f);
+                        int num = 0;
+                        int num2 = 0;
+                        if (i == 0)
+                        {
+                            num = -2;
+                        }
+                        if (i == 1)
+                        {
+                            num = 2;
+                        }
+                        if (i == 2)
+                        {
+                            num2 = -2;
+                        }
+                        if (i == 3)
+                        {
+                            num2 = 2;
+                        }
+                        DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, text, new Vector2(origin.X + (float)num + 10f, (float)Main.screenHeight - origin.Y + (float)num2 - (Main.menuMode == 0 ? 85f : 25f) - upBump), color2, 0f, origin, 1f, SpriteEffects.None, 0f);
+                    }
+
+                }
+            }
+            orig(self, gameTime);
+        }
         public static void CombinedHooks_ModifyHitNPCWithProj(Orig_CombinedHooks_ModifyHitNPCWithProj orig, Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers)
         {
             // Whip tag damage nerf
@@ -378,6 +458,13 @@ namespace FargowiltasSouls
             orig(self);
             if (phantasmAverted)
                 player.phantasmTime = phantasmTime;
+        }
+
+        public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
+        {
+            orig(self);
+            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
+                self.shadowDodgeTimer = 60 * 60;
         }
     }
 }

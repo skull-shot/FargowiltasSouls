@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -119,7 +120,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             //if (FargowiltasSouls.SmokeBombKey.JustPressed && CrystalEnchantActive && SmokeBombCD == 0)
             //    CrystalAssassinEnchant.SmokeBombKey(this);
 
-            if (Player.HasEffect<FrigidGemstoneKeyEffect>())
+            if (Player.HasEffect<FrigidGraspKeyEffect>())
             {
                 if (FrigidGemstoneCD > 0)
                     FrigidGemstoneCD--;

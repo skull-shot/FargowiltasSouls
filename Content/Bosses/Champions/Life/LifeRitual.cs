@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             var target = Main.LocalPlayer;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -7,11 +8,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 {
     public class NebulaTelegraph : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", "CelestialPillar");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Pillar");
             Main.projFrames[Projectile.type] = 4;
         }
 

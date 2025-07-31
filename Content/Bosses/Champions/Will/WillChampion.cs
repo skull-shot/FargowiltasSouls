@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
@@ -793,12 +794,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WillMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<WillForce>()));
+
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.WillDye>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<WillChampionRelic>()));
             npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<EnerGear>(), 4));
 
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.WillDye>()));
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

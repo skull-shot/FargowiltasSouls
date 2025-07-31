@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.Patreon.Potato;
@@ -51,10 +51,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Northstrider;
 
         public bool RazorContainer;
+        public int RazorCD;
 
         public bool TouhouBuff;
-
-        public static readonly SoundStyle RazorContainerTink = new("FargowiltasSouls/Assets/Sounds/Accessories/RazorTink")  { PitchVariance = 0.25f };
 
         public override void SaveData(TagCompound tag)
         {
@@ -113,6 +112,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (CompOrbDrainCooldown > 0)
                 CompOrbDrainCooldown -= 1;
+            if (RazorCD > 0)
+                RazorCD--;
 
             switch (Player.name)
             {
@@ -217,7 +218,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
 
-                if (ModLoader.TryGetMod("CalamityMod", out Mod _))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
                     target.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
                 }
@@ -233,7 +234,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.manaSick)
                     modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
-                for (int num468 = 0; num468 < 20; num468++)
+                /*for (int num468 = 0; num468 < 20; num468++)
                 {
                     int num469 = Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100, default, 2f);
@@ -242,7 +243,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     num469 = Dust.NewDust(new Vector2(target.Center.X, target.Center.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100);
                     Main.dust[num469].velocity *= 2f;
-                }
+                }*/
             }
         }
 
@@ -250,12 +251,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (CompOrb && proj.DamageType != DamageClass.Magic && proj.DamageType != DamageClass.Summon)
             {
-                modifiers.FinalDamage *= 1.2f;
+                modifiers.FinalDamage *= 1.17f;
 
                 if (Player.manaSick)
                     modifiers.FinalDamage *= 1f - Player.manaSickReduction;
 
-                for (int num468 = 0; num468 < 20; num468++)
+                /*for (int num468 = 0; num468 < 20; num468++)
                 {
                     int num469 = Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100, default, 2f);
@@ -264,7 +265,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     num469 = Dust.NewDust(new Vector2(target.Center.X, target.Center.Y), target.width, target.height, DustID.MagicMirror, -target.velocity.X * 0.2f,
                         -target.velocity.Y * 0.2f, 100);
                     Main.dust[num469].velocity *= 2f;
-                }
+                }*/
             }
         }
 
@@ -332,11 +333,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             //}
         }
 
-        private int razorCD = 0;
-
         public override void MeleeEffects(Item item, Rectangle hitbox)
         {
-            if (RazorContainer && --razorCD <= 0)
+            if (RazorContainer)
             {
                 for (int i = 0; i < Main.projectile.Length; i++)
                 {
@@ -346,30 +345,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         if (Player.whoAmI == projectile.owner)
                         {
-                            Vector2 velocity = Vector2.Normalize((Main.MouseWorld - Player.Center)) * 30;
-
-                            for (int j = 0; j < 3; j++)
-                            {
-                                Vector2 pos = projectile.Center + Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2);
-                                Particle p = new SparkParticle(pos, Vector2.Normalize(pos - projectile.Center) * Main.rand.NextFloat(2, 5), Color.Lerp(Color.Orange, Color.Red, Main.rand.NextFloat()), 0.2f, 20);
-                                p.Spawn();
-                            }
-                            SoundEngine.PlaySound(RazorContainerTink with { Volume = 0.25f }, projectile.Center);
-                            projectile.velocity = velocity;
-                            projectile.ai[0] = 1;
-                            projectile.ai[1] = 0;
-                            projectile.ResetLocalNPCHitImmunity();
-                            projectile.netUpdate = true;
-                            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, projectile.whoAmI);
+                            RazorBlade.Launch(Player, projectile);
                         }
                     }
                 }
-
-                razorCD = 30;
-
             }
-
-
         }
     }
 }

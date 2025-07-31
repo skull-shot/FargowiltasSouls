@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

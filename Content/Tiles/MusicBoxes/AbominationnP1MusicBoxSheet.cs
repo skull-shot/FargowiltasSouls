@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Placables.MusicBoxes;
 using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
@@ -10,6 +11,6 @@ using Terraria.ObjectData;
 namespace FargowiltasSouls.Content.Tiles.MusicBoxes
 {
     public class AbominationnP1MusicBoxSheet : MusicBoxSystem.MusicBoxTile
-    {   
+    {
     }
 }

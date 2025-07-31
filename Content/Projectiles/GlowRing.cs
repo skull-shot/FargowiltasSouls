@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class GlowRing : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Glow Ring");

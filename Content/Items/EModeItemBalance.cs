@@ -65,19 +65,8 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["HolyDodge"];
                     return EModeChange.Nerf;
 
-                case ItemID.FrozenTurtleShell:
-                case ItemID.FrozenShield:
-                    balanceTextKeys = ["FrozenTurtleShell"];
-                    return EModeChange.Nerf;
-
-                case ItemID.BrainOfConfusion:
-                    if (ModLoader.HasMod("CalamityMod"))
-                        return EModeChange.None;
-                    balanceTextKeys = ["BrainOfConfusion"];
-                    return EModeChange.Nerf;
-
                 case ItemID.Zenith:
-                    if (WorldSavingSystem.DownedMutant || ModLoader.HasMod("CalamityMod"))
+                    if (WorldSavingSystem.DownedMutant || FargowiltasSouls.CalamityMod != null)
                     {
                         balanceTextKeys = ["ZenithNone"];
                         return EModeChange.Neutral;
@@ -95,10 +84,6 @@ namespace FargowiltasSouls.Content.Items
                         extra = bossesToKill;
                         return EModeChange.Nerf;
                     }
-
-                case ItemID.ChlorophyteBullet:
-                    balanceTextKeys = ["ChlorophyteBullet"];
-                    return EModeChange.Nerf;
 
                 case ItemID.VampireKnives:
                     balanceTextKeys = ["VampireKnives"];
@@ -126,10 +111,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.6f;
                     return EModeChange.Nerf;
-                case ItemID.SuperStarCannon:
+                /*case ItemID.SuperStarCannon:
                     balanceTextKeys = ["SuperStarCannon"];
                     balanceNumber = 7;
-                    return EModeChange.Nerf;
+                    return EModeChange.Nerf;*/
 
                 case ItemID.CandyCornRifle:
                     balanceTextKeys = ["Damage"];
@@ -510,6 +495,15 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.MedusaHead:
                     balanceTextKeys = ["MedusaHead"];
                     return EModeChange.Buff;
+
+                case ItemID.DD2BetsyBow: //aerial bane
+                    balanceTextKeys = ["AerialBane"];
+                    return EModeChange.Nerf;
+                    
+                case ItemID.ChlorophyteBullet:
+                    balanceTextKeys = ["ChlorophyteBullet"];
+                    return EModeChange.Nerf;
+
                 default:
                     return EModeChange.None;
             }

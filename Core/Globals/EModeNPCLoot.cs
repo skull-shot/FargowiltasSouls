@@ -1,6 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Explosives;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
@@ -65,10 +65,7 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.PigronCorruption,
             NPCID.PigronCrimson,
             NPCID.PigronHallow,
-            NPCID.IchorSticker,
-            NPCID.SeekerHead,
             NPCID.AngryNimbus,
-            NPCID.RedDevil,
             NPCID.MushiLadybug,
             NPCID.AnomuraFungus,
             NPCID.ZombieMushroom,
@@ -151,7 +148,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
                 case NPCID.TheDestroyer:
                     {
-                        emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<GroundStick>()));
+                        emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<RemoteControl>()));
                         emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ItemID.IronCrateHard, 5));
                     }
                     break;
@@ -457,9 +454,9 @@ namespace FargowiltasSouls.Core.Globals
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.BlizzardinaBottle, 20));
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.FrozenCrate));
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<FrigidGemstone>(), 3));
+                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<FrigidGrasp>(), 3));
 
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<FrigidGemstone>()));
+                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<FrigidGrasp>()));
                         FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.SnowGlobe));
                     }
                     break;
@@ -513,21 +510,6 @@ namespace FargowiltasSouls.Core.Globals
                     case NPCID.PigronCrimson:
                         npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.condition is Conditions.DontStarveIsUp && drop.itemId == ItemID.HamBat && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
                         npcLoot.RemoveWhere(rule => rule is ItemDropWithConditionRule drop && drop.condition is Conditions.DontStarveIsNotUp && drop.itemId == ItemID.HamBat && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        break;
-
-                    case NPCID.RedDevil:
-                        npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.UnholyTrident && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.DemonScythe, 3));
-                        break;
-
-                    case NPCID.IchorSticker:
-                        npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.Ichor && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.TheUndertaker, ItemID.TheRottedFork, ItemID.CrimsonRod, ItemID.CrimsonHeart, ItemID.PanicNecklace));
-                        break;
-
-                    case NPCID.SeekerHead:
-                        npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.CursedFlame && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.OneFromOptions(1, ItemID.BallOHurt, ItemID.BandofStarpower, ItemID.Musket, ItemID.ShadowOrb, ItemID.Vilethorn));
                         break;
 
                     case NPCID.Mimic:

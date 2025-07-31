@@ -1,4 +1,5 @@
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,9 +13,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeBombExplosion : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Bomb");
             Main.projFrames[Projectile.type] = 1;
         }
         public override void SetDefaults()
@@ -66,7 +67,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     Projectile.alpha = 255;
             }
 
-            if (Projectile.ai[0] > MaxTime || NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1)
+            if (Projectile.ai[0] > MaxTime || NPC.CountNPCS(ModContent.NPCType<Lifelight>()) < 1)
             {
                 for (int i = 0; i < 20; i++)
                 {
@@ -81,7 +82,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 3);
         }
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 610 - Main.mouseTextColor * 2) * Projectile.Opacity * 0.9f;
 
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             //draw bloom
             float bloomScale = Projectile.scale * 1.5f;
             float bloomOpacity = 1;
-            Texture2D bloomTexture = FargosTextureRegistry.BloomParticleTexture.Value;
+            Texture2D bloomTexture = FargoAssets.BloomParticleTexture.Value;
             Main.spriteBatch.Draw(bloomTexture, drawPos, null, Color.DarkGoldenrod with { A = 0 } * bloomOpacity, Projectile.rotation, bloomTexture.Size() * 0.5f, bloomScale, SpriteEffects.None, 0f);
             Main.spriteBatch.Draw(bloomTexture, drawPos, null, Color.Gold with { A = 0 } * 0.4f * bloomOpacity, Projectile.rotation, bloomTexture.Size() * 0.5f, bloomScale * 0.66f, SpriteEffects.None, 0f);
             //Main.spriteBatch.End();

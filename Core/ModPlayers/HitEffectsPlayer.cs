@@ -1,26 +1,29 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
-using FargowiltasSouls.Content.Items.Armor;
-using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using Terraria.Audio;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Terraria.Localization;
-using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using Mono.Cecil;
+using System;
+using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+using FargowiltasSouls.Content.Projectiles.Armor;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -63,11 +66,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
-            
-            
+
+
             modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
             {
-                
+
                 if (hitInfo.Crit)
                 {
                     if (UniverseCore) // cosmic core
@@ -83,8 +86,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
                     {
                         float critDamageMult = 0.75f; // 1f
-                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                            //critDamageMult *= 0.75f;
+                                                      //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
+                                                      //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
                         if (!EridanusSet && !Ambrosia)
@@ -98,7 +101,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
-                       
+
                 }
 
                 if (Hexed)
@@ -120,9 +123,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 float ratio = Math.Min(Player.velocity.Length() / 20f, 1f);
                 modifiers.FinalDamage *= MathHelper.Lerp(1f, 0.85f, ratio);
             }
-
-            if (CerebralMindbreak)
-                modifiers.FinalDamage *= 0.7f;
 
             if (FirstStrike)
             {
@@ -151,8 +151,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
+            //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+            //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {
@@ -161,6 +161,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ProjectileID.Sets.SummonTagDamageMultiplier[proj.type] /= proj.FargoSouls().TagStackMultiplier;
                 proj.FargoSouls().TagStackMultiplier = 1;
             }
+            
+            // reset these
+            proj.FargoSouls().canForceCrit = false;
+            proj.FargoSouls().postNinjaCrit = 0;
+            // reset these
 
             OnHitNPCEither(target, hit, proj.DamageType, projectile: proj);
         }
@@ -311,14 +316,16 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
-            float DRCap = 0.75f;
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode)
+            if (WorldSavingSystem.EternityMode && FargowiltasSouls.CalamityMod == null)
             {
-                if (Player.endurance > DRCap)
-                {
-                    player.endurance = DRCap;
-                }
+                //Formula that emulates multiplicative DR scaling
+                //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
+                //The value of 15 % was chosen to make the scaling more lenient than a lower value would
+                // Only takes effect if your dr is larger than 0.15% (below this value the formula would scale UP your DR, actually)
+                float r = 0.15f;
+                if (player.endurance >= r)
+                    player.endurance = 1 - MathF.Pow(1 - r, player.endurance / r);
             }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -337,8 +344,21 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (npc.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
-            if (npc.FargoSouls().CurseoftheMoon)
-                dr += 0.2f;
+            if (CurseoftheMoon)
+                dr -= 0.2f;
+
+
+            if (Illuminated)
+            {
+                float maxDRReduction = 0.25f;
+
+                Color light = Lighting.GetColor(Player.Center.ToTileCoordinates());
+                float modifier = (light.R + light.G + light.B) / 700f;
+                modifier = MathHelper.Clamp(modifier, 0, 1);
+
+                modifier = maxDRReduction * modifier;
+                dr -= modifier;
+            }
 
             dr += Player.AccessoryEffects().ContactDamageDR(npc, ref modifiers);
 
@@ -353,6 +373,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 dr -= 0.2f;
 
             if (proj.coldDamage && Hypothermia)
+                dr -= 0.2f;
+
+            if (CurseoftheMoon)
                 dr -= 0.2f;
 
             if (Illuminated)
@@ -468,8 +491,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo hurtInfo) =>
                 {
-                    if(hurtInfo.Damage <= 1) return;
-                    
+                    if (hurtInfo.Damage <= 1) return;
+
                     int scythesSacrificed = 0;
                     const int maxSacrifice = 4;
                     const double maxDR = 0.20;
@@ -489,12 +512,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     hurtInfo.Damage = (int)(hurtInfo.Damage * (1.0f - (float)maxDR / maxSacrifice * scythesSacrificed));
                 };
             }
-
-            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && (modifiers.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (modifiers.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[modifiers.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
-            {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
-            }
         }
 
         public override void OnHurt(Player.HurtInfo info)
@@ -511,6 +528,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && !Player.HasBuff(ModContent.BuffType<TitaniumCDBuff>()))
             {
                 Player.AddBuff(ModContent.BuffType<TitaniumCDBuff>(), LumUtils.SecondsToFrames(15));
+            }
+
+            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage <= 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
+            {
+                DeerSinewFreezeCD = 120;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
             }
 
             if (NekomiSet && NekomiHitCD <= 0)

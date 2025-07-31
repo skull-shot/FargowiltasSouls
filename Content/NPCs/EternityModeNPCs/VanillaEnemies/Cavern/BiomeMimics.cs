@@ -1,8 +1,7 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern.BiomeMimics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern.BiomeMimics;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -14,6 +13,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 {
@@ -145,7 +145,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                     {
                         for (int i = 0; i < 8; i++)
                         {
-                            Vector2 target = npc.Center;
+                            Vector2 target = Main.player[npc.target].Center;
                             target.X += Math.Sign(npc.direction) * 600f * (AttackCycleTimer + 60) / 360f; //gradually targets further and further
                             target.X += Main.rand.NextFloat(-100, 100);
                             target.Y += Main.rand.NextFloat(-450, 450);
@@ -153,10 +153,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                             float time = 60f;
                             Vector2 distance = target - npc.Center;
                             distance.X /= time;
-                            distance.Y = distance.Y / time - 0.5f * gravity * time;
+                            distance.Y = distance.Y / time - 1f * gravity * time;
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                int p = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, distance, ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, time);
+                                int p = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, distance, ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, time, 1f, 1);
                                 if (p != Main.maxProjectiles)
                                     Main.projectile[p].timeLeft = Main.rand.Next(60, 75) * 3;
                             }

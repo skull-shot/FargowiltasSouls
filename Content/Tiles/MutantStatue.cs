@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Localization;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class MutantStatue : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", "MutantStatue");
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;

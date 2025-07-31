@@ -1,5 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;

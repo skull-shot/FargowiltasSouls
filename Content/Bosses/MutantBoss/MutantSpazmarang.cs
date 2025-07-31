@@ -10,11 +10,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpazmarang_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Spazmarang";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/Spazmarang";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Spazmarang");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

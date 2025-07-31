@@ -1,6 +1,4 @@
-﻿
-
-using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -22,12 +20,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public int counter;
         public bool spawnedHandle;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Styx Gazer Blade");
-        }
 
         public override void SetDefaults()
         {
@@ -270,7 +262,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             shader.TrySetParameter("fadeStart", fadeStart);
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            Texture2D fademap = FargosTextureRegistry.MagmaStreak.Value;
+            Texture2D fademap = FargoAssets.MagmaStreak.Value;
             FargoSoulsUtil.SetTexture1(fademap);
             for (int j = 0; j < 2; j++)
             {

@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -21,12 +21,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public float VisualScale = 0f;
 
         public AbomRitual() : base(realRotation, 1400f, ModContent.NPCType<AbomBoss>(), 87, visualCount: 64) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Abominationn Seal");
-        }
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -118,7 +112,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             var target = Main.LocalPlayer;
              
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;

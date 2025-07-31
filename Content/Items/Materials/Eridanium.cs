@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Items.Materials
 
         public override void SetDefaults()
         {
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Purple;
             Item.width = 12;
             Item.height = 12;

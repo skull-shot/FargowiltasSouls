@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,11 +13,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 {
     public class EarthPalladOrb : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/PalladOrb";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "PalladOrb");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Palladium Life Orb");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -118,7 +119,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.LethargicBuff>(), 300);
+                target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
 
             if (Projectile.timeLeft > 0)

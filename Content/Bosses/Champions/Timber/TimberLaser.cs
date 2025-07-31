@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -60,7 +61,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.GuiltyBuff>(), 300);
+                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
         }
 
         public override Color? GetAlpha(Color lightColor)

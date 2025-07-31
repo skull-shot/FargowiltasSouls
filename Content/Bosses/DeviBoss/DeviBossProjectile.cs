@@ -15,7 +15,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Deviantt");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

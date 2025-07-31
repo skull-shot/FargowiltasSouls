@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
     public class NatureBullet : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Dungeon/SniperBullet";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", "SniperBullet");
 
         public int stopped;
 

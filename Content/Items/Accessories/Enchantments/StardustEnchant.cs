@@ -1,6 +1,6 @@
 ﻿
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

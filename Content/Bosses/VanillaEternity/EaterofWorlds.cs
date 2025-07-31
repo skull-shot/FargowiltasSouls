@@ -1,9 +1,10 @@
 using Fargowiltas.Common.Configs;
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.CursedCoffin;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -22,6 +23,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -174,10 +176,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static int ComboTimer = 0;
         public static float ComboHP => 0.8f;
 
-        public bool Telegraph;
-        public float TelegraphRotation;
-        public Vector2 TelegraphPosition;
-        public float TelegraphOpacity;
+        public bool Telegraph = false;
+        public bool ContactDamage = true;
 
         public enum Attacks
         {
@@ -214,6 +214,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (Main.getGoodWorld)
                 cooldownSlot = ImmunityCooldownID.Bosses;
+            if (Telegraph || !ContactDamage)
+                return false;
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
@@ -313,15 +315,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             NPC = npc;
             if (Telegraph)
             {
-                if (TelegraphOpacity < 1)
-                    TelegraphOpacity += 0.1f;
-            }
-            else
-            {
-                if (TelegraphOpacity > 0)
-                    TelegraphOpacity -= 0.1f;
+                if (Timer % 5 == 0)
+                    SoundEngine.PlaySound(SoundID.WormDig with { Pitch = -0.2f }, NPC.Center);
+                Vector2 vel = NPC.velocity.RotatedByRandom(MathHelper.PiOver4 * 0.27f) * Main.rand.NextFloat(0.4f, 0.6f);
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptionThorns, vel.X, vel.Y);
             }
             Telegraph = false;
+            ContactDamage = true;
 
             if (!NPC.HasPlayerTarget)
                 return true;
@@ -382,7 +382,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (!ret) // default stuff that has to happen anyway
             {
-                NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver2;
+                if (NPC.velocity != Vector2.Zero)
+                    NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver2;
             }
 
             return ret;
@@ -390,6 +391,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void DefaultMovement()
         {
             Vector2 targetPos = FindGround(NPC.Center.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
             int maxDistX = 400;
             targetPos.X = MathHelper.Clamp(targetPos.X, Target.Center.X - maxDistX, Target.Center.X + maxDistX);
             targetPos.X += Math.Abs(Target.Center.X - NPC.Center.X) * 0.4f; // inch slightly towards player
@@ -444,6 +446,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * 450 - Vector2.UnitY * 400;
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
 
             if (Timer >= 0) // first part
             {
@@ -465,7 +468,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Timer--;
 
                 bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
-                collision = collision || NPC.Center.Y > targetPos.Y;
+                collision = collision || NPC.Center.Y > targetPos.Y || (!Collision.CanHitLine(NPC.Center, 1, 1, Target.Center, 1, 1) && NPC.Center.Y > Target.Center.Y);
 
                 if (collision && Timer > -50)
                 {
@@ -482,12 +485,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         Timer = -1000;
                     }
-                    NPC.velocity *= 0.96f;
+                    NPC.velocity *= 0.967f;
+
+                    if (Timer > -1000 - 12 && Timer < -1000 - 1)
+                    {
+                        Vector2 dir = -Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+                    }
 
                     if (Timer > -1000 - 40 && Timer < -1000 - 15)
                     {
                         Vector2 dir = Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
-                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.13f);
                     }
                     if (Timer < -1000 - 40)
                         NPC.velocity = NPC.velocity.RotateTowards(NPC.DirectionTo(Target.Center).ToRotation(), 0.014f);
@@ -527,6 +536,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int windup = 40;
             Vector2 targetPos = new(ExtraAI0, Target.Center.Y - 400);
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
             if (Timer >= 0) // first part
             {
                 if (Timer == 0)
@@ -539,13 +549,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 float xDif = targetPos.X - NPC.Center.X;
 
-                Telegraph = true;
-                TelegraphPosition = targetPos;
-                TelegraphRotation = -Vector2.UnitY.ToRotation();
 
                 targetPos.Y += UndergroundLength;
                 Movement(targetPos, 1.7f);
-                if (Timer > windup && Math.Abs(xDif) < 5)
+                if (Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
                     NPC.velocity *= 0f;
@@ -559,6 +566,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     if (Timer % 2 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
@@ -574,54 +582,68 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Timer > -1000)
                     {
                         Timer = -1000;
+                        NPC.position -= NPC.velocity / 2;
+                        NPC.velocity *= 0.75f;
+                        Telegraph = true;
                     }
-                    if (Timer == -1000 - 2)
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
                     {
-                        int heads = CountHeads();
-                        if (WorldSavingSystem.MasochistModeReal && heads >= 4)
-                            heads = 3;
-                        if (heads < 4)
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                    }
+                    else // post windup
+                    {
+                        if (Timer == -1000 - windup - 2)
                         {
-                            int projCount;
-                            float width;
-                            if (heads == 1)
+                            int heads = CountHeads();
+                            if (WorldSavingSystem.MasochistModeReal && heads >= 4)
+                                heads = 3;
+                            if (heads < 4)
                             {
-                                projCount = 8;
-                                width = 0.42f;
-                            }
-                            else if (heads == 2)
-                            {
-                                projCount = 6;
-                                width = 0.32f;
-                            }
-                            else
-                            {
-                                projCount = 4;
-                                width = 0.18f;
-                            }
-                            SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
-                            if (FargoSoulsUtil.HostCheck)
-                            {
-                                for (float i = 0; i < projCount; i++)
+                                int projCount;
+                                float width;
+                                if (heads == 1)
                                 {
-                                    float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
-                                    Vector2 angle = -Vector2.UnitY.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width);
-
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(14, 18),
-                                        ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    projCount = 8;
+                                    width = 0.42f;
                                 }
+                                else if (heads == 2)
+                                {
+                                    projCount = 6;
+                                    width = 0.32f;
+                                }
+                                else
+                                {
+                                    projCount = 4;
+                                    width = 0.18f;
+                                }
+                                SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    for (float i = 0; i < projCount; i++)
+                                    {
+                                        float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
+                                        Vector2 angle = -Vector2.UnitY.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width);
+
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(14, 18),
+                                            ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
+                                }
+
                             }
-                            
+                        }
+
+                        NPC.velocity.Y += 0.3f;
+                        NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * 0.1f;
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - windup - 50)
+                        {
+                            EndAttack();
+                            return;
                         }
                     }
-                    NPC.velocity.Y += 0.5f;
-                    bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
-                    collision = collision || NPC.Center.Y > Target.Center.Y;
-                    if (collision && Timer < -1000 -50)
-                    {
-                        EndAttack();
-                        return;
-                    }
+
                 }
             }
         }
@@ -630,6 +652,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int windup = 40;
             Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * (880 + ExtraAI0) - Vector2.UnitY * 400;
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
 
             if (Timer >= 0) // first part
             {
@@ -639,14 +662,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 Timer++;
 
+                //float dir = -Target.HorizontalDirectionTo(targetPos);
 
-
-                float dir = -Target.HorizontalDirectionTo(targetPos);
-
-                Telegraph = true;
-                Vector2 telegPos = targetPos + dir * Vector2.UnitX * 200;
-                TelegraphPosition = telegPos;
-                TelegraphRotation = new Vector2(dir * 4, -6).ToRotation();
+                //Telegraph = true;
+                //Vector2 telegPos = targetPos + dir * Vector2.UnitX * 200;
+                //TelegraphPosition = telegPos;
+                //TelegraphRotation = new Vector2(dir * 4, -6).ToRotation();
 
 
                 targetPos.Y += UndergroundLength;
@@ -654,7 +675,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 float xDif = targetPos.X - NPC.Center.X;
 
                 Movement(targetPos, 1.7f);
-                if (Timer > windup && Math.Abs(xDif) < 5)
+                if (Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
                     NPC.velocity *= 0f;
@@ -667,6 +688,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -24 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     const float accelUp = 0.4f;
                     if (NPC.velocity.Y > -25)
                     {
@@ -686,59 +708,76 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Timer > -1000)
                     {
                         Timer = -1000;
+                        NPC.position -= NPC.velocity / 2;
+                        Telegraph = true;
                     }
-                    if (Timer == -1000 - 3)
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
                     {
-                        int heads = CountHeads();
-                        if (WorldSavingSystem.MasochistModeReal && heads >= 4)
-                            heads = 3;
-                        if (heads < 4)
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                    }
+                    else // post windup
+                    {
+                        if (Timer == -1000 - windup - 3)
                         {
-                            int projCount;
-                            float width;
-                            if (heads == 1)
+                            int heads = CountHeads();
+                            if (heads > 4)
+                                heads = 4;
+                            if (WorldSavingSystem.MasochistModeReal && heads > 1)
+                                heads--;
+                            if (heads <= 4)
                             {
-                                projCount = 6;
-                                width = 0.3f;
-                            }
-                            else if (heads == 2)
-                            {
-                                projCount = 4;
-                                width = 0.2f;
-                            }
-                            else
-                            {
-                                projCount = 2;
-                                width = 0.12f;
-                            }
-                            SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
-                            if (FargoSoulsUtil.HostCheck)
-                            {
-                                for (float i = 0; i < projCount; i++)
+                                int projCount;
+                                float width;
+                                if (heads == 1)
                                 {
-                                    float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
-                                    Vector2 angle = NPC.velocity.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width).SafeNormalize(-Vector2.UnitY);
+                                    projCount = 8;
+                                    width = 0.4f;
+                                }
+                                else if (heads == 2)
+                                {
+                                    projCount = 6;
+                                    width = 0.3f;
+                                }
+                                else if (heads == 3)
+                                {
+                                    projCount = 4;
+                                    width = 0.2f;
+                                }
+                                else
+                                {
+                                    projCount = 2;
+                                    width = 0.12f;
+                                }
+                                    SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    for (float i = 0; i < projCount; i++)
+                                    {
+                                        float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
+                                        Vector2 angle = NPC.velocity.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width).SafeNormalize(-Vector2.UnitY);
 
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(18, 24),
-                                        ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(16, 22),
+                                            ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
                                 }
                             }
                         }
-                    }
-                    NPC.velocity.Y += 0.5f;
-                    bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
-                    collision = collision || NPC.Center.Y > Target.Center.Y;
-                    if (collision && Timer < -1000 - 50)
-                    {
-                        EndAttack();
-                        return;
+                        NPC.velocity.Y += 0.5f;
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - 50)
+                        {
+                            EndAttack();
+                            return;
+                        }
                     }
                 }
             }
         }
         public void ComboAttack()
         {
-            int windup = 15;
+            int windup = 0;
 
             int heads = 0;
             bool foundyou = false;
@@ -755,11 +794,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                     
             }
-            // no 0 allowed
-            if (myID >= 0)
-                myID++;
             int offsetIndex = myID - (heads / 2);
+            // no 0 allowed
+            if (offsetIndex == 0)
+                offsetIndex = 1;
             int side = Math.Sign(offsetIndex);
+
 
             Vector2 targetPos = new(Target.Center.X + 450 * side + 60 * offsetIndex, Target.Center.Y);
 
@@ -779,8 +819,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 float xDif = targetPos.X - NPC.Center.X;
 
                 targetPos.Y += UndergroundLength;
-                Movement(targetPos, 2.5f);
-                if (Timer > windup && Math.Abs(xDif) < 120)
+                Movement(targetPos, 4f);
+                if (Timer >= 5 && Math.Abs(xDif) < 120)
                 {
                     Timer = -1;
                     NPC.velocity *= 0f;
@@ -795,6 +835,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
                 {
+                    ContactDamage = false;
                     if (Timer % 2 == 0)
                     {
                         SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
@@ -810,34 +851,46 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (Timer > -1000 && NPC.velocity.Y > -5)
                     {
                         Timer = -1000;
+                        ContactDamage = false;
                     }
-                    int windupTime = 25;
-                    int chargeTime = 35;
-                    int endTime = 17;
-                    if ((Timer <= -1000 && Timer >= -1000 - windupTime) || (Timer <= -1000 - windupTime - chargeTime && Timer >= -1000 - windupTime * 2 - chargeTime))
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
                     {
-                        Vector2 dir = NPC.DirectionTo(Target.Center);
-                        NPC.velocity = Vector2.Lerp(NPC.velocity, dir * 3, 0.2f);
-                        if (Timer == -1000 - windupTime || Timer == -1000 - windupTime - chargeTime - windupTime)
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                        ContactDamage = false;
+                    }
+                    else // post windup
+                    {
+                        int windupTime = 25;
+                        int chargeTime = 35;
+                        int endTime = 17;
+                        if ((Timer <= -1000 && Timer >= -1000 - windupTime) || (Timer <= -1000 - windupTime - chargeTime && Timer >= -1000 - windupTime * 2 - chargeTime))
                         {
-                            NPC.velocity = dir * 17;
-                            SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                            if (Timer >= -1000 - windupTime)
+                                ContactDamage = false;
+                            Vector2 dir = NPC.DirectionTo(Target.Center);
+                            NPC.velocity = Vector2.Lerp(NPC.velocity, dir * 3, 0.2f);
+                            if (Timer == -1000 - windupTime || Timer == -1000 - windupTime - chargeTime - windupTime)
+                            {
+                                NPC.velocity = dir * 17;
+                                SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                            }
                         }
-                    }
-                    else if ((Timer <= -1000 - windupTime && Timer >= -1000 - windupTime - chargeTime) || (Timer <= -1000 - windupTime * 2 - chargeTime && Timer >= -1000 - (windupTime + chargeTime) * 2))
-                    {
-                        NPC.velocity = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2() * 17;
-                    }
-                    else
-                        NPC.velocity.Y += 0.5f;
+                        else if ((Timer <= -1000 - windupTime && Timer >= -1000 - windupTime - chargeTime) || (Timer <= -1000 - windupTime * 2 - chargeTime && Timer >= -1000 - (windupTime + chargeTime) * 2))
+                        {
+                            NPC.velocity = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2() * 17;
+                        }
+                        else
+                            NPC.velocity.Y += 0.5f;
 
-                bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
-                    collision = collision || NPC.Center.Y > Target.Center.Y;
-                    if (collision && Timer < -1000 - windupTime * 2 - chargeTime * 2 - endTime)
-                    {
-                        ComboTimer = 60 * 18;
-                        EndAttack();
-                        return;
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - windupTime * 2 - chargeTime * 2 - endTime)
+                        {
+                            ComboTimer = 60 * 18;
+                            EndAttack();
+                            return;
+                        }
                     }
                 }
             }
@@ -897,6 +950,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             return p;
         }
+        public static Vector2 UnevenGroundFix(Vector2 p, Player target)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                if (p.Y < target.Bottom.Y || Collision.CanHitLine(p, 1, 1, target.Center, 1, 1))
+                    break;
+                p.Y -= 16;
+            }
+            return p;
+        }
         #endregion
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
@@ -918,24 +981,28 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (TelegraphOpacity > 0)
+            if (NPC == null || NPC.IsABestiaryIconDummy)
+                return true;
+            Texture2D bodytexture = Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Vector2 drawPos = NPC.Center - screenPos;
+            SpriteEffects spriteEffects = NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 origin = new(bodytexture.Width / 2, bodytexture.Height / 2 / Main.npcFrameCount[NPC.type]);
+
+            if (Telegraph)
             {
-                Asset<Texture2D> line = TextureAssets.Extra[178];
-
-                float opacity = TelegraphOpacity;
-                TelegraphOpacity = LumUtils.Saturate(TelegraphOpacity);
-
-                Main.EntitySpriteDraw(line.Value, TelegraphPosition - Main.screenPosition + TelegraphRotation.ToRotationVector2() * 8, null, Color.DarkOliveGreen * opacity, TelegraphRotation, line.Size() / 2, new Vector2(0.4f, NPC.scale * 20), SpriteEffects.None);
+                drawPos += Main.rand.NextVector2Circular(12, 6);
             }
-                
-            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+
+            spriteBatch.Draw(bodytexture, drawPos, NPC.frame, drawColor, NPC.rotation, origin, NPC.scale, spriteEffects, 0f);
+
+            return false;
         }
     }
 
     public class EaterofWorldsSegment : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail);
-
+        public bool ContactDamage = true;
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
@@ -964,6 +1031,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 head = Main.npc[headID];
             if (head != null && head.Alive())
             {
+                ContactDamage = head.GetGlobalNPC<EaterofWorldsHead>().ContactDamage;
                 npc.timeLeft = 60 * 60;
                 EaterofWorldsHead headEternity = head.GetGlobalNPC<EaterofWorldsHead>();
                 /*
@@ -978,6 +1046,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 */
             }
             return base.SafePreAI(npc);
+        }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!ContactDamage)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
         public override bool CheckDead(NPC npc)
         {

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Tiles;
 using Terraria;
 using Terraria.ID;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class TophatSquirrelBanner : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "TophatSquirrelBanner");
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -17,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Placables
         {
             Item.width = 14;
             Item.height = 36;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;

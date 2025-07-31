@@ -1,13 +1,7 @@
-﻿using FargowiltasSouls.Assets.UI;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.ModPlayers;
-using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -15,14 +9,9 @@ using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI

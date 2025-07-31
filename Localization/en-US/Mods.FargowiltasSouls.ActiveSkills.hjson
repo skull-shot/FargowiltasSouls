@@ -12,7 +12,11 @@ SpecialDashEffect: {
 
 BetsyDashEffect: {
 	DisplayName: Fireball Dash
-	Tooltip: Perform a short invincible fireball dash towards your cursor
+	Tooltip:
+		'''
+		Perform a short invincible fireball dash towards your cursor
+		Hitting enemies with Fireball Dash inflicts 10 seconds of Betsy's Curse and decreases your dash cooldown
+		'''
 }
 
 SupremeDashEffect: {
@@ -73,13 +77,9 @@ RemoteLightningEffect: {
 		'''
 }
 
-FrigidGemstoneKeyEffect: {
+FrigidGraspKeyEffect: {
 	DisplayName: Frigid Spell
-	Tooltip:
-		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
-		'''
+	Tooltip: Summons an ice block to your cursor
 }
 
 BombKeyEffect: {
@@ -96,7 +96,7 @@ BulbKeyEffect: {
 	Tooltip:
 		'''
 		Instantly cures yourself of all debuffs
-		Amplifies debuff damage on enemies by 5x for a brief period of time
+		Curses enemies, causing them to take 500% more damage from debuffs for 5 seconds
 		40 second cooldown, depletes faster while not attacking
 		'''
 }

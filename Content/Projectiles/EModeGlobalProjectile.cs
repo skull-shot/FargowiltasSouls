@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Globals;
@@ -23,11 +22,13 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Betsy;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.BloodMoon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
+using Terraria.WorldBuilding;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -146,11 +147,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.penetrate = -1;
                     break;
 
-                case ProjectileID.ChlorophyteBullet:
-                    projectile.extraUpdates = 1;
-                    projectile.timeLeft = 150;
-                    break;
-
                 case ProjectileID.CrystalBullet:
                 case ProjectileID.HolyArrow:
                 case ProjectileID.HallowStar:
@@ -203,10 +199,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.PhantasmalSphere:
                     EModeCanHurt = false;
                     break;
-                case ProjectileID.SuperStar:
+                /*case ProjectileID.SuperStar:
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
                         projectile.penetrate = 7;
-                    break;
+                    break;*/
                 case ProjectileID.WeatherPainShot:
                     projectile.idStaticNPCHitCooldown = 10;
                     projectile.penetrate = 45;
@@ -576,6 +572,106 @@ namespace FargowiltasSouls.Content.Projectiles
             }
             switch (projectile.type)
             {
+                case ProjectileID.ChlorophyteBullet:
+                    if (!EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.ChlorophyteBullet))
+                        break;
+                    // vanilla Chlorophyte Bullet AI imitation to apply more elaborate tweaks.
+                    if (projectile.alpha < 170)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            float chloroDustX = projectile.position.X - projectile.velocity.X / 10f * i;
+                            float chloroDustY = projectile.position.Y - projectile.velocity.Y / 10f * i;
+                            int chloroDust = Dust.NewDust(new Vector2(chloroDustX, chloroDustY), 1, 1, DustID.CursedTorch);
+                            Main.dust[chloroDust].alpha = projectile.alpha;
+                            Main.dust[chloroDust].position.X = chloroDustX;
+                            Main.dust[chloroDust].position.Y = chloroDustY;
+                            Main.dust[chloroDust].velocity *= 0f;
+                            Main.dust[chloroDust].noGravity = true;
+                        }
+                    }
+                    float velocityLength = projectile.velocity.Length();
+                    float localAI = projectile.localAI[0];
+                    if (localAI == 0f)
+                    {
+                        projectile.localAI[0] = velocityLength;
+                        localAI = velocityLength;
+                    }
+                    if (projectile.alpha > 0)
+                    {
+                        projectile.alpha -= 25;
+                    }
+                    if (projectile.alpha < 0)
+                    {
+                        projectile.alpha = 0;
+                    }
+                    float projCenterX = projectile.Center.X;
+                    float projCenterY = projectile.Center.Y;
+                    float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
+                    bool homingCheck = false;
+                    int target = 0;
+                    if (projectile.ai[1] == 0f)
+                    {
+                        for (int npc = 0; npc < 200; npc++)
+                        {
+                            NPC nPC = Main.npc[npc];
+                            if (nPC.CanBeChasedBy(projectile))
+                            {
+                                float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                                if (targetDistance < homingRadius && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                {
+                                    homingRadius = targetDistance;
+                                    projCenterX = nPC.Center.X;
+                                    projCenterY = nPC.Center.Y;
+                                    homingCheck = true;
+                                    target = npc;
+                                }
+                            }
+                        }
+                        if (homingCheck)
+                        {
+                            projectile.ai[1] = target + 1;
+                        }
+                        homingCheck = false;
+                    }
+                    if (projectile.ai[1] > 0f)
+                    {
+                        NPC nPC = Main.npc[(int)(projectile.ai[1] - 1f)];
+                        if (nPC.CanBeChasedBy(projectile))
+                        {
+                            float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                            float maxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
+                            if (targetDistance < maxChaseDistance)
+                            {
+                                homingCheck = true;
+                                projCenterX = nPC.Center.X;
+                                projCenterY = nPC.Center.Y;
+                            }
+                        }
+                        else
+                        {
+                            projectile.ai[1] = 0f;
+                        }
+                    }
+                    if (!projectile.friendly)
+                    {
+                        homingCheck = false;
+                    }
+                    if (homingCheck) // this section has the homing strength
+                    {
+                        float velocityLength2 = localAI;
+                        float projDistanceX = projCenterX - projectile.Center.X;
+                        float projDistanceY = projCenterY - projectile.Center.Y;
+                        float targetDistance = Vector2.Distance(projectile.Center, Main.npc[(int)(projectile.ai[1] - 1f)].Center);
+                        targetDistance = velocityLength2 / targetDistance;
+                        projDistanceX *= targetDistance;
+                        projDistanceY *= targetDistance;
+                        float multiplier = 8f; // markiplier
+                        projectile.velocity.X = (projectile.velocity.X * (multiplier - 1f) + projDistanceX) / multiplier;
+                        projectile.velocity.Y = (projectile.velocity.Y * (multiplier - 1f) + projDistanceY) / multiplier;
+                    }
+                    projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
+                    return false;
                 default:
                     break;
 
@@ -1228,7 +1324,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FlowerPow:
-                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.FlowerPow))
+                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
                     {
                         projectile.localAI[0] += 2f; // tripled petal firerate
                         projectile.netUpdate = true;
@@ -1272,6 +1368,10 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
+                    break;
+                case ProjectileID.DD2BetsyArrow:
+                    if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _) && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.DD2BetsyBow)) //vanilla conditions for "airborne enemy"
+                        modifiers.FinalDamage *= 9.2f/12f; //results in 1.15x after vanilla 1.5x
                     break;
                 case ProjectileID.MoonlordTurretLaser:
                     modifiers.FinalDamage *= 0.5f;

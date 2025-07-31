@@ -3,8 +3,8 @@ using Terraria.ID;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 
 namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {

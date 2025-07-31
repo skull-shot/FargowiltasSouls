@@ -1,4 +1,5 @@
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -11,12 +12,11 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-
     public class LifeBomb : ModProjectile, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Mine");
             ProjectileID.Sets.TrailingMode[Type] = 1;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
         }
@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 3);
         }
 
         public override void OnKill(int timeLeft)
@@ -98,7 +98,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
     }

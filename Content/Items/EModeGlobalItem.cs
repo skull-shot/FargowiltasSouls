@@ -1,6 +1,6 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;

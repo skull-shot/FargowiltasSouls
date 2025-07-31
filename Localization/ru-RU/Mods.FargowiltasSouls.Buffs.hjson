@@ -35,17 +35,17 @@ MutantSpawnBuff: {
 
 SeekerOfTreasuresBuff: {
 	DisplayName: Искатель сокровищ
-	Description: Дай ему несколько тысяч лет, чтобы вырасти
+	Description: Дайте ему несколько тысяч лет, чтобы вырасти
 }
 
 NibbleBuff: {
 	DisplayName: Ниббл
-	Description: Только один кусочек (пожалуйста)
+	Description: Всего лишь один укус (пожалуйста)
 }
 
 MonkBuff: {
 	DisplayName: Медитация
-	Description: Ваш рывок Монаха готов
+	Description: Ваш рывок монаха готов
 }
 
 ObsidianLavaWetBuff: {
@@ -55,7 +55,7 @@ ObsidianLavaWetBuff: {
 
 TitaniumDRBuff: {
 	DisplayName: Титановый щит
-	Description: Дополнительное сопротивление урону и сопротивление многим дебаффам
+	Description: Дополнительное сопротивление урону и сопротивляемость многим дебаффам
 }
 
 KingSlimeMinionBuff: {
@@ -69,8 +69,8 @@ DukeFishronBuff: {
 }
 
 RoombaPetBuff: {
-	DisplayName: Румба
-	Description: Эта румба следует за вами
+	DisplayName: Робот-пылесос
+	Description: Этот робот-пылесос следует за вами
 }
 
 DoveBuff: {
@@ -94,7 +94,7 @@ FishMinionBuff: {
 }
 
 CrimetroidBuff: {
-	DisplayName: Малыш Криметроид
+	DisplayName: Малыш-Криметроид
 	Description: Малыш следует за вами
 }
 
@@ -139,8 +139,8 @@ DeviPresenceBuff: {
 }
 
 GrabbedBuff: {
-	DisplayName: Схвачен
-	Description: Долби по кнопкам передвижения, чтобы выбраться!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
 
 MutantFangBuff: {
@@ -385,11 +385,6 @@ PungentGazeBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	DisplayName: Святочищенный
-	Description: Эффекты уворота не действуют
-}
-
 RefreshedBuff: {
 	DisplayName: Освежение
 	Description: Мобильность и время полёта увеличены
@@ -422,8 +417,8 @@ ShadowflameBuff: {
 }
 
 SmiteBuff: {
-	DisplayName: Сражённый
-	Description: Регенерация здоровья снижена и вы получаете на 20% больше урона
+	DisplayName: Поражение
+	Description: Вы получаете на 20% больше урона, увороты не действуют
 }
 
 SqueakyToyBuff: {
@@ -589,6 +584,11 @@ HuntressCDBuff: {
 LeadPoisonBuff: {
 	DisplayName: Свинцовое отравление
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
+}
+
+LeadPoisonSpreadBuff: {
+	DisplayName: Свинцовое отравление
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
 }
 
 MoltenAmplifyBuff: {
@@ -794,8 +794,8 @@ TouhouHoardBuff: {
 }
 
 BleedingOut: {
-	DisplayName: Кровоточит
-	Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	DisplayName: Кровотечение
+	Description: Вы быстро кровоточите!
 }
 
 SilverBuff: {
@@ -804,6 +804,6 @@ SilverBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed Harmless Buff
-	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }

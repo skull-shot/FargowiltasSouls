@@ -22,10 +22,10 @@
 // Gladiator: Doubled stat buffs and spear rain damage
 // Gold: Increased shell duration
 // Hallow: Increased potion heal bonus from 40 to 70%, doubled repel duration
-// Huntress: Flat damage increased to 5
+// Huntress: Flat damage increased to 5, stack reduction on misses decreased to 3
 // Iron: Increases grab range, increases damage reduction to 28%
 // Jungle: Spore damage increased, cooldown decreased
-// Lead: Lead Poisoning damage increased, DoT resistance increased to 60%
+// Lead: Lead Poisoning damage increased, DoT resistance increased to 50%
 // Meteor: Increased meteor damage, size and frequency
 // Miner: Increased mining speed
 // Molten: Inferno ring is larger and more damaging, damage bonus increased to 1.25x
@@ -35,7 +35,7 @@
 // Necro: Graves have increased size, float, and slightly home in on you when you're close
 // Ninja: Maximum crit chance increased to 40%, maximum player speed where effect activates increased
 // Obsidian: Grants explosions at all times, explosions deal more damage while under a debuff or lava wet
-// Orichalcum: Increases multiplier to 2.5x
+// Orichalcum: Debuff damage further increased to 150%
 // Palladium: Rapid Healing always lasts 5 seconds, increases orb damage
 // PalmWood: Attack speed, damage, and size increased
 // Pearlwood: Your crits reroll twice, increased star damage

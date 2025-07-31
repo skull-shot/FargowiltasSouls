@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Tiles;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Placables
 {
     public class ScremPainting : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "ScremPainting");
         public override void SetStaticDefaults()
         {
 
@@ -29,7 +32,7 @@ namespace FargowiltasSouls.Content.Items.Placables
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 999;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;

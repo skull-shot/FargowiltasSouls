@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -66,9 +66,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                 Main.dust[dust].noGravity = true;
             }
 
-            if (!Main.dedServ)
+            /*if (!Main.dedServ)
                 Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity / 3, ModContent.Find<ModGore>(Mod.Name,
-                Main.rand.NextBool() ? "Gore_54" : "Gore_55").Type, Projectile.scale);
+                Main.rand.NextBool() ? "Gore_54" : "Gore_55").Type, Projectile.scale);*/
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

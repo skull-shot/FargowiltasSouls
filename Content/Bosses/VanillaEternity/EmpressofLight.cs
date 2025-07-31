@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EmpressOfLight;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.15, MidpointRounding.ToEven);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.3, MidpointRounding.ToEven);
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
@@ -76,8 +76,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.empressBoss = npc.whoAmI;
             Ritual = false;
 
-            if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
+            if (Main.LocalPlayer.active && Main.dayTime && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
+                Main.LocalPlayer.FargoSouls().noDodge = true;
 
             bool useP2Attacks = npc.ai[3] != 0 || WorldSavingSystem.MasochistModeReal;
             switch ((int)npc.ai[0])

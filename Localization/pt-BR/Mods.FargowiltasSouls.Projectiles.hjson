@@ -49,7 +49,7 @@ FishNuke.DisplayName: Peixe Nuclear
 FishNukeExplosion.DisplayName: Peixe Nuclear
 FishStickProj.DisplayName: Palito de Peixe
 FishStickShark.DisplayName: Tubarão
-FleshLaser.DisplayName: Laser Vermelho
+// RegurgitatorLaser.DisplayName: Regurgitator Laser
 GibExplosion.DisplayName: Explosão
 GolemGib.DisplayName: Pedaço do Golem
 GolemHeadProj.DisplayName: Cabeça do Golem
@@ -73,10 +73,10 @@ PenetratorThrown.DisplayName: O Penetrador
 PenetratorWand.DisplayName: O Penetrador
 PenetratorSphereRing.DisplayName: Anel Fantasmagórico
 Hungry.DisplayName: Faminto
-Hungry2.DisplayName: Faminto
-LeashFlail.DisplayName: Mangual da Coleira
-// MechEyeProjectile.DisplayName: MechEyeProjectile
-MechFlail.DisplayName: Mangual Mecânico
+// RegurgitatorHungry.DisplayName: Hungry
+// EyeleashFlail.DisplayName: Eyeleash Flail
+// LeashofCthulhuEyeProjectile.DisplayName: Leash of Cthulhu Eye
+// LeashofCthulhuFlail.DisplayName: Leash of Cthulhu Flail
 PhantasmalBlast.DisplayName: Explosão Fantasmagórica
 PhantasmalBolt.DisplayName: Raio Fantasmagórico
 PhantasmalEyeBoundary.DisplayName: Olho Fantasmagórico
@@ -87,7 +87,7 @@ PhantasmalSphere2.DisplayName: Esfera Fantasmagórica
 PrimeDeathray.DisplayName: Raio da Morte Ardente
 PrimeLaser.DisplayName: Laser Alfa
 RazorbladeTyphoonFriendly.DisplayName: Tufão de Navalhas
-RefractorBlaster2Held.DisplayName: Detonador Difrator
+// DiffractorBlasterHeld.DisplayName: Diffractor Blaster
 RetiDeathray.DisplayName: Raio da Morte Ardente
 Retiglaive.DisplayName: Retigládio
 Retirang.DisplayName: Retirangue
@@ -580,7 +580,7 @@ PlasmaProj.DisplayName: Raio de Plasma
 // AbomFlocko2.DisplayName: Super Flocko
 // AbomFlocko3.DisplayName: Super Flocko
 // AbomLaser.DisplayName: Laser
-// EyeProjectile.DisplayName: EyeProjectile2
+// EyeleashProjectile.DisplayName: Eyeleash Servant
 // PenetratorDash.DisplayName: The Penetrator
 // CosmosFireball.DisplayName: Cosmic Fireball
 // CosmosFireball2.DisplayName: Cosmic Fireball
@@ -604,7 +604,7 @@ PlasmaProj.DisplayName: Raio de Plasma
 // ShadowOrbProjectile.DisplayName: Shadow Orb
 // WillDeathrayBig.DisplayName: Will Deathray
 // DeviBossProjectile.DisplayName: Deviantt
-// JevilScar.DisplayName: Enchanted Lightblade
+// LifelightLifeblade.DisplayName: Enchanted Lightblade
 // LifeBlaster.DisplayName: Life Blaster
 // LifeBomb.DisplayName: Life Mine
 // LifeTransitionBomb.DisplayName: Life Mine
@@ -612,8 +612,8 @@ PlasmaProj.DisplayName: Raio de Plasma
 // LifeCageExplosion.DisplayName: Cage Explosion
 // LifeCageProjectile.DisplayName: Life Cage
 // LifeCageTelegraph.DisplayName: Cage Telegraph
-// LifeChalBlasterDeathray.DisplayName: Holy Deathray
-// LifeChalDeathray.DisplayName: Holy Deathray
+// LifelightBlasterDeathray.DisplayName: Holy Deathray
+// LifelightDeathray.DisplayName: Holy Deathray
 // LifeCrosshair.DisplayName: Crosshair
 // LifeHomingProj.DisplayName: Lesser Fairy
 // LifeNeggravProj.DisplayName: Cross
@@ -764,12 +764,12 @@ PlasmaProj.DisplayName: Raio de Plasma
 // DestroyerBodyWhip.DisplayName: Destroyer Body
 // DestroyerHeadWhip.DisplayName: Destroyer Head
 // DestroyerTailWhip.DisplayName: Destroyer Tail
-// DestroyerScanTelegraph.DisplayName: Destroyer Scan Telegraph
-// PungentAuraProj.DisplayName: Pungent Aura Proj
-// RockeaterAuraProj.DisplayName: Rockeater Aura Proj
+// DestroyerScanTelegraph.DisplayName: Destroyer Scan
+// PungentAuraProj.DisplayName: Pungent Aura
+// RockeaterAuraProj.DisplayName: Rockeater Aura
 // FallenStarDay.DisplayName: Fallen Star Day
-// LightningRodLightning.DisplayName: Lightning Rod Lightning
-// ReleasedMechFlail.DisplayName: Leash of Cthulhu
+// LightningRodLightning.DisplayName: Lightning
+// ReleasedLeashofCthulhu.DisplayName: Leash of Cthulhu
 // Tome.DisplayName: Tome
 // TomeShot.DisplayName: Tome Shot
 // TungstenShockwave.DisplayName: Tungsten Shockwave
@@ -782,7 +782,7 @@ PlasmaProj.DisplayName: Raio de Plasma
 // CirnoIceChunk.DisplayName: Cirno Ice Chunk
 // DaiyoLeaf.DisplayName: Daiyo Leaf
 // MystiaNote.DisplayName: Mystia Note
-// MystiaNote2.DisplayName: Mystia Note2
+// MystiaNote2.DisplayName: Mystia Note
 // RumiaOrb.DisplayName: Rumia Orb
 // EmpressRitual.DisplayName: Empress Ritual
 // BoneSpear.DisplayName: Bone Spear
@@ -794,18 +794,18 @@ PlasmaProj.DisplayName: Raio de Plasma
 // PaladinHammer.DisplayName: Paladin Hammer
 // DungeonDebris.DisplayName: Dungeon Debris
 // PalmwoodShot.DisplayName: Palmwood Shot
-// BeetleEnchantBeetle.DisplayName: Beetle Enchant Beetle
-// SpookySpinScythe.DisplayName: Spooky Spin Scythe
+// BeetleEnchantBeetle.DisplayName: Beetle
+// SpookySpinScythe.DisplayName: Deathhunt Scythe
 // SnowMist.DisplayName: Snow Mist
 // IceShard.DisplayName: Ice Shard
-// DeviSniperTelegraph.DisplayName: Devi Sniper Telegraph
+// DeviSniperTelegraph.DisplayName: Sniper Rifle
 // SmallStingHitbox.DisplayName: Small Stinger
-// DeviShadowbeam.DisplayName: Devi Shadowbeam
+// DeviShadowbeam.DisplayName: Shadowbeam
 // SupremeDash.DisplayName: Supreme Dash
-// RemoteLightningExplosion.DisplayName: Remote Rain Explosion
-// RemoteLightning.DisplayName: Remote Rain Lightning
-// RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+// RemoteLightningExplosion.DisplayName: Lightning Explosion
+// RemoteLightning.DisplayName: Lightning
+// RemoteScanTelegraph.DisplayName: Scan
 // RemoteProbe.DisplayName: Remote Probe
-// CorruptionSludge.DisplayName: Corruption Sludge
-// WillDashTrail.DisplayName: Will Dash Trail
-// SoulVortex.DisplayName: Soul Vortex
+// CorruptionSludge.DisplayName: Corrupted Sludge
+// WillDashTrail.DisplayName: Dash Trail
+// MechElectricOrbTelegraphed.DisplayName: Electric Orb

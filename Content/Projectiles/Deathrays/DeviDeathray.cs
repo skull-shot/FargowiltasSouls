@@ -1,6 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-
-
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         const int MaxLength = 3000;
         int Length = 10;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
 
         public DeviDeathray() : base(60, drawDistance: 3500) { }
@@ -129,7 +128,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 1.2f;
@@ -161,7 +160,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
             // Set shader parameters.
             shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.GenericStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.GenericStreak.Value);
             shader.TrySetParameter("stretchAmount", 3);
             shader.TrySetParameter("scrollSpeed", 1f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);

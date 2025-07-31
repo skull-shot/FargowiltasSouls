@@ -1,7 +1,10 @@
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +17,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
         private bool rTexture = false;
 
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeProjLarge";
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeProjLarge");
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Cross");
@@ -65,12 +68,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 3);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = rTexture ? ModContent.Request<Texture2D>($"{Texture}2", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value : ModContent.Request<Texture2D>(Texture, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value; ;
+            Texture2D texture2D13 = rTexture ? FargoAssets.GetTexture2D("Content/Bosses/Lifelight", "LifeProjLarge2").Value : TextureAssets.Projectile[Projectile.type].Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);

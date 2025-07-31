@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -9,11 +10,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     public class DeviRingHeart : ModProjectile
     {
         public override string Texture => "FargowiltasSouls/Content/Bosses/DeviBoss/DeviEnergyHeart";
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Energy Heart");
-        }
 
         public override void SetDefaults()
         {
@@ -42,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
         }
 
         public override void OnKill(int timeleft)

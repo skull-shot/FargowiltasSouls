@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Materials
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 99;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 1, 0, 0);
         }

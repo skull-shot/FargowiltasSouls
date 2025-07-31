@@ -3,27 +3,25 @@ using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Souls;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler;
+using Fargowiltas.Content.UI;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
@@ -40,6 +38,10 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Core.Systems.DashManager;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Armor;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -89,6 +91,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float useRotation = 0;
         public int swingDirection = -1;
 
+        public static Item? ApprenticeSupportItem;
+        
         public Dictionary<int, bool> KnownBuffsToPurify = [];
 
         public bool Toggler_ExtraAttacksDisabled = false;
@@ -199,9 +203,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!ModLoader.TryGetMod("FargowiltasCrossmod", out Mod soulsDLC))
             {
                 List<string> supportedMods = [];
-                if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
-                    supportedMods.Add(calamity.DisplayName);
+                    supportedMods.Add(FargowiltasSouls.CalamityMod.DisplayName);
                 }
                 if (ModLoader.TryGetMod("NoxusBoss", out Mod WotG))
                 {

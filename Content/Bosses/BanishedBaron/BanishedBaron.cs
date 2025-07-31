@@ -2,7 +2,8 @@
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
@@ -460,13 +461,17 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
-        {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BanishedBaronBag>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BaronTrophy>(), 10));
+        {   
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BaronRelic>()));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BaronTrophy>(), 10));          
 
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BaronMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<RoseTintedVisor>(), ModContent.ItemType<NavalRustrifle>(), ModContent.ItemType<DecrepitAirstrikeRemote>()));
             rule.OnSuccess(ItemDropRule.Common(5003, 1, 1, 5)); //seaside crate
             rule.OnSuccess(ItemDropRule.OneFromOptions(3, ItemID.Sextant, ItemID.WeatherRadio, ItemID.FishermansGuide));
@@ -476,8 +481,12 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             rule.OnSuccess(ItemDropRule.Common(ItemID.CratePotion, 5, 2, 5));
             rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenBugNet, 50, 1, 1));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishHook, 50, 1, 1));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenFishingRod, 150, 1, 1));
+            rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenFishingRod, 150, 1, 1));         
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BanishedBaronBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BaronRelic>()));
         }
 
         #endregion

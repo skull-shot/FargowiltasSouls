@@ -10,6 +10,12 @@ MasochistEnabled: Modo Masoquista está ativado
 // HoldShift: Hold Shift to read more
 // Close: Close
 // OpenKeybinds: Open Keybinds
+
+TitleLinks: {
+	// Patreon: Patreon
+	// Github: Github
+}
+
 /* ExpandedStandard:
 	'''
 	Disables Eternity or Masochist Mode.
@@ -45,7 +51,8 @@ MasochistEnabled: Modo Masoquista está ativado
 	-Enables Master Mode drops
 	-New Eternity-exclusive item drops
 	-Deviantt provides a starter pack and progress-based advice
-	-Improves base stats and caps player DR at 75%
+	-Improves base stats
+	-Player damage reduction is now scaled to emulate multiplicative scaling: every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
 	-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 	-Changes the functionality and strength of certain items
 	''' */

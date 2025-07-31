@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 
 using FargowiltasSouls.Content.Buffs.Boss;
@@ -20,7 +20,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mutant Heal");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -240,7 +239,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }

@@ -1,11 +1,11 @@
 using Fargowiltas.Common.Configs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.Champions.Life;
 using FargowiltasSouls.Content.Bosses.Champions.Terra;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles
 {
     public class GlowRingHollow : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Glow Ring");
@@ -232,7 +233,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         color = Color.DeepPink;
                         maxTime = 30;
                         alphaModifier = 3;
-                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[2], ModContent.NPCType<LifeChallenger>());
+                        NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[2], ModContent.NPCType<Lifelight>());
                         if (npc != null)
                         {
                             Projectile.Center = npc.Center;
@@ -366,7 +367,7 @@ namespace FargowiltasSouls.Content.Projectiles
             float radius = texture.Width * Projectile.scale / 2;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            var diagonalNoise = FargoAssets.Techno1Noise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = 0.3f * Projectile.Opacity * (Main.mouseTextColor / 255f) * 0.9f;

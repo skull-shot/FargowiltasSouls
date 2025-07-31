@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
@@ -105,13 +105,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //Main.NewText($"shell HP: {modPlayer.TurtleShellHP}, counter: {modPlayer.TurtleCounter}");
         }
 
-        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
-            return TurtleDR(player);
+            float dr = TurtleDR(player);
+            modifiers.FinalDamage *= 1 - dr;
         }
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
-            return TurtleDR(player);
+            float dr = TurtleDR(player);
+            modifiers.FinalDamage *= 1 - dr;
         }
         public static float TurtleDR(Player player)
         {

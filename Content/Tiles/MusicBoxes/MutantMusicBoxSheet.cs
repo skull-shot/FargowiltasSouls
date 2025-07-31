@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Placables.MusicBoxes;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Tiles.MusicBoxes
 {
     public class MutantMusicBoxSheet : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles/MusicBoxes", Name);
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;

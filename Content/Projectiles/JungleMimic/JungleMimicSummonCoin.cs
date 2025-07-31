@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -9,11 +10,11 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class JungleMimicSummonCoin : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public int coinType = -1;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Coin");
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 4;
         }

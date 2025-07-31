@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -17,13 +18,13 @@ namespace FargowiltasSouls.Content.Items.Materials
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 30;
+            Item.maxStack = Item.CommonMaxStack;
             Item.rare = ItemRarityID.Purple;
             Item.useStyle = ItemUseStyleID.EatFood;
             Item.useAnimation = 17;
             Item.useTime = 17;
             Item.consumable = true;
-            Item.buffType = ModContent.BuffType<Buffs.Masomode.SadismBuff>();
+            Item.buffType = ModContent.BuffType<SadismBuff>();
             Item.buffTime = 25200;
             Item.UseSound = SoundID.Item3;
             Item.value = Item.sellPrice(0, 5);
