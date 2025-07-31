@@ -33,15 +33,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-
             if (!Main.hardMode)
             {
-                npc.defense /= 2;
-
-                if (npc.type == NPCID.IceGolem || npc.type == NPCID.SandElemental)
+                switch (npc.type)
                 {
-                    npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.4);
-                    npc.defense /= 2;
+                    case NPCID.IceGolem:
+                    case NPCID.SandElemental:
+                        npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.4);
+                        npc.defense /= 4;
+                        break;
+                    case NPCID.AngryNimbus:
+                        npc.lifeMax /= 3;
+                        npc.defense /= 4;
+                        break;
+                    default: break;
                 }
             }
         }

@@ -717,8 +717,8 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (normalSpawn)
                         {
-                            pool[NPCID.AngryNimbus] = .05f;
-                            pool[NPCID.MartianSaucerCore] = 0.001f;
+                            pool[NPCID.AngryNimbus] = .1f;
+                            pool[NPCID.MartianProbe] = .01f;
 
                             if (NPC.downedGolemBoss)
                             {

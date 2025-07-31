@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
+            //EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
 
             if (!npc.dontTakeDamage && npc.HasValidTarget)
             {
