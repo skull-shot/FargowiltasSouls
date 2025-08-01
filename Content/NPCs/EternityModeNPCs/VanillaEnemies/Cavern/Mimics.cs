@@ -55,13 +55,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             LockVector.Y = binaryReader.ReadSingle();
         }
 
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
-            if (!Main.hardMode)
-                npc.damage = (int)Math.Round(npc.damage * 0.5);
-        }
-
         public override void FindFrame(NPC npc, int frameHeight)
         {
             //pretending to be chest
@@ -305,7 +298,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             return returnbool;
         }
 
-        public override void AI(NPC npc)
+        /*public override void AI(NPC npc)
         {
             base.AI(npc);
 
@@ -320,7 +313,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                     npc.dontTakeDamage = true;
                 }
             }
-        }
+        }*/
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

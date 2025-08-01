@@ -44,8 +44,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
+            target.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
         }
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
