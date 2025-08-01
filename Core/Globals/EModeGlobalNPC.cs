@@ -843,7 +843,7 @@ namespace FargowiltasSouls.Core.Globals
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
 
             int closestP = Player.FindClosest(npc.Center, 1, 1);
-            if (npc.type != ModContent.NPCType<BloodPuddle>() && closestP >= 0 && Main.player[closestP].ZoneCrimson)
+            if (npc.type != ModContent.NPCType<BloodPuddle>() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
