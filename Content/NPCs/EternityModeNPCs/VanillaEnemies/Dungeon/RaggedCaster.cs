@@ -1,4 +1,3 @@
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System.IO;
@@ -24,9 +23,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
                 TeleportTimer = 0;
                 npc.GetGlobalNPC<DungeonTeleporters>().TeleportTimer = 0;
                 npc.ai[0] = 1;
-                if (AttackTimer == 2)
+                if (AttackTimer == 2 && FargoSoulsUtil.HostCheck)
                 {
-                    Projectile.NewProjectileDirect(npc.GetSource_FromAI(), npc.Center - new Microsoft.Xna.Framework.Vector2(0, 60), Vector2.Zero, ModContent.ProjectileType<SoulVortex>(), FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1, ai0: npc.whoAmI);
+                    Vector2 pos = npc.Center - new Vector2(0, 60);
+                    NPC.NewNPC(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, ModContent.NPCType<SoulVortex>(), ai0: npc.whoAmI);
                 }
                 AttackTimer++;
                 if (AttackTimer <= 120)
@@ -36,12 +36,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             }
             else
             {
-                npc.ai[1] = 0;
+                npc.ai[1] = 1;
+                if (npc.HasValidTarget && !Main.dedServ)
+                {
+                    Vector2 vel = npc.DirectionTo(Main.player[npc.target].Center) * 5;
+                    Dust d = Dust.NewDustPerfect(npc.Center + new Vector2(-14 * npc.direction, -14), DustID.SpectreStaff, vel, 100, Scale: 1.6f);
+                    Dust d2 = Dust.NewDustPerfect(npc.Center + new Vector2(12 * npc.direction, -14), DustID.SpectreStaff, vel, 100, Scale: 1.6f);
+                    d.noGravity = true;
+                    d2.noGravity = true;
+                }
             }
-                base.AI(npc);
-
+            base.AI(npc);
         }
-
-
     }
 }

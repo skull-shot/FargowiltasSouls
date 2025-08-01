@@ -659,7 +659,8 @@ namespace FargowiltasSouls
             RequestEnvironmentalProjectile,
             ToggleEternityMode,
             WakeUpDeviantt,
-            WakeUpMutant
+            WakeUpMutant,
+            SyncSoulVortexHit
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -1054,7 +1055,18 @@ namespace FargowiltasSouls
 
                         }
                         break;
-
+                    case PacketID.SyncSoulVortexHit:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            if (npc != null && npc.active && npc.ModNPC is SoulVortex && Main.netMode == NetmodeID.Server)
+                            {
+                                npc.ai[2] = reader.Read7BitEncodedInt();
+                                npc.ai[3] = reader.ReadSingle();
+                                npc.velocity = reader.ReadVector2();
+                                npc.netUpdate = true;
+                            }
+                        }
+                        break;
                     default:
                         break;
                 }
