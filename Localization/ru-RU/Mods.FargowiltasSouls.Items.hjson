@@ -1136,7 +1136,7 @@ EurusSock: {
 }
 
 FrigidGrasp: {
-	DisplayName: Frigid Grasp
+	DisplayName: Морозная хватка
 	Tooltip:
 		'''
 		Даёт иммунитет к дебаффам «Ледяной ожог» и «Охлаждение» (работает в инвентаре и слотах для украшений)
