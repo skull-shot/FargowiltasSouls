@@ -112,6 +112,7 @@ namespace FargowiltasSouls.Content.Projectiles
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.NebulaSphere] = true;
 
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.RainNimbus] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.FrostBeam] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerDeathray] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerLaser] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerMissile] = true;
@@ -522,6 +523,14 @@ namespace FargowiltasSouls.Content.Projectiles
                     //early bird vanilla projectile damage nerfs
                     case ProjectileID.RainNimbus:
                         if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.AngryNimbus)
+                            projectile.damage /= 2;
+                        break;
+                    case ProjectileID.SandnadoHostile:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.SandElemental)
+                            projectile.damage /= 2;
+                        break;
+                    case ProjectileID.FrostBeam:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.IceGolem)
                             projectile.damage /= 2;
                         break;
                     case ProjectileID.SaucerDeathray:
