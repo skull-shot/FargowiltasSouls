@@ -1267,7 +1267,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.HallowBoss:
-                    npcLoot.Add(BossDrop(ModContent.ItemType<PrismaRegalia>()));
+                    npcLoot.Add(BossDrop(ModContent.ItemType<PrismaRegalia>()));m
                     break;
 
                 case NPCID.DD2Betsy:
