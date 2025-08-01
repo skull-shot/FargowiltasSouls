@@ -111,6 +111,13 @@ namespace FargowiltasSouls.Content.Projectiles
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SandnadoHostile] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.NebulaSphere] = true;
 
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.RainNimbus] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.FrostBeam] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.RockGolemRock] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerDeathray] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerLaser] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerMissile] = true;
+            A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SaucerScrap] = true;
         }
 
         public override void SetDefaults(Projectile projectile)
@@ -512,6 +519,31 @@ namespace FargowiltasSouls.Content.Projectiles
                                 altBehaviour = true;
                             }
                         }
+                        break;
+
+                    //early bird vanilla projectile damage nerfs
+                    case ProjectileID.RainNimbus:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.AngryNimbus)
+                            projectile.damage /= 2;
+                        break;
+                    case ProjectileID.RockGolemRock:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.RockGolem)
+                            projectile.damage = (int)Math.Round(projectile.damage * 0.35);
+                        break;
+                    case ProjectileID.SandnadoHostile:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.SandElemental)
+                            projectile.damage /= 2;
+                        break;
+                    case ProjectileID.FrostBeam:
+                        if (!Main.hardMode && sourceNPC is NPC && sourceNPC.type == NPCID.IceGolem)
+                            projectile.damage /= 2;
+                        break;
+                    case ProjectileID.SaucerDeathray:
+                    case ProjectileID.SaucerScrap:
+                    case ProjectileID.SaucerLaser:
+                    case ProjectileID.SaucerMissile:
+                        if (!NPC.downedGolemBoss && sourceNPC is NPC && (sourceNPC.type == NPCID.MartianSaucer || sourceNPC.type == NPCID.MartianSaucerCannon || sourceNPC.type == NPCID.MartianSaucerCore || sourceNPC.type == NPCID.MartianSaucerTurret))
+                            projectile.damage /= 2;
                         break;
 
                     default:

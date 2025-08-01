@@ -78,14 +78,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
             NPCID.WyvernTail
         );
 
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
-
-            if (Main.hardMode)
-                npc.lifeMax = (int)System.Math.Round(npc.lifeMax * 1.5, System.MidpointRounding.ToEven);
-        }
-
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);

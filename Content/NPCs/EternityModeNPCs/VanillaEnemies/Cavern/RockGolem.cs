@@ -37,13 +37,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             base.SetDefaults(npc);
 
             JumpTimer = 300 + Main.rand.Next(60);
-
-            if (!Main.hardMode)
-            {
-                npc.lifeMax = (int)(npc.lifeMax / 3f);
-                npc.defense = 10;
-                npc.damage = (int)(npc.damage * 0.35f);
-            }
         }
 
         public override bool SafePreAI(NPC npc)
@@ -55,7 +48,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                     CombatText.NewText(npc.Hitbox, Color.Gray, "z");
                 return false;
             }
-                
+
             const float gravity = 0.4f;
 
             if (JumpTimer > 360) //initiate jump

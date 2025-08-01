@@ -259,6 +259,7 @@ namespace FargowiltasSouls.Core.Globals
             bool lunarEvents = NPC.LunarApocalypseIsUp && (nebulaTower || vortexTower || stardustTower || solarTower);
             //bool monsterMadhouse = MMWorld.MMArmy;
             bool noEvent = Main.invasionType == 0 && !oldOnesArmy && !frostMoon && !pumpkinMoon && !solarEclipse && !lunarEvents;
+            bool thunderstorm = Main.IsItStorming && surface && !snow && !spawnInfo.Player.ZoneSandstorm && noEvent;
 
             //no work?
             //is lava on screen
@@ -307,16 +308,12 @@ namespace FargowiltasSouls.Core.Globals
                             }
                         }
 
-                        /*
-                        if (normalSpawn && WorldSavingSystem.DownedAnyBoss)
+                        if (thunderstorm && normalSpawn)
                         {
-                            if (snow)
-                                pool[NPCID.IceGolem] = .005f;
-
-                            if (desert)
-                                pool[NPCID.SandElemental] = .005f;
+                            if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                                pool[NPCID.AngryNimbus] = .1f;
                         }
-                        */
+
                         if (Main.slimeRain && NPC.downedBoss2 && bossCanSpawn)
                             pool[NPCID.KingSlime] = 0.004f;
 
@@ -377,8 +374,6 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (normalSpawn)
                         {
-                            pool[NPCID.AngryNimbus] = .02f;
-
                             if (WorldSavingSystem.DownedAnyBoss)
                                 pool[NPCID.WyvernHead] = .005f;
                         }
@@ -428,8 +423,6 @@ namespace FargowiltasSouls.Core.Globals
                     if (!surface && normalSpawn)
                     {
                         pool[NPCID.Mimic] = .002f;
-                        if (desert && NPC.downedBoss2)
-                            pool[NPCID.DuneSplicerHead] = .002f;
                     }
                 }
                 else //all the hardmode
@@ -717,8 +710,9 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         if (normalSpawn)
                         {
-                            pool[NPCID.AngryNimbus] = .05f;
-                            pool[NPCID.MartianSaucerCore] = 0.001f;
+                            if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                                pool[NPCID.AngryNimbus] = .1f;
+                            pool[NPCID.MartianProbe] = .01f;
 
                             if (NPC.downedGolemBoss)
                             {
