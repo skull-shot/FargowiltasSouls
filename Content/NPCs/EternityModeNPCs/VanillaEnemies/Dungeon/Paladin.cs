@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         {
             Asset<Texture2D> armless = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/VanillaEnemies/Dungeon/PaladinAmputee");
             Asset<Texture2D> arm = ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/VanillaEnemies/Dungeon/PaladinHand");
-            Asset<Texture2D> hammer = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Dungeon/PaladinHammer");
+            Asset<Texture2D> hammer = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon/PaladinHammer");
             if (Counter > 0)
             {
                 SpriteEffects effects = SpriteEffects.None;
