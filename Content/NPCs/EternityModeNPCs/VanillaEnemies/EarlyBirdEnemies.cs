@@ -96,6 +96,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     case NPCID.PigronHallow:
                         //idk yet
                         break;
+                    case NPCID.RockGolem:
+                        npc.lifeMax /= 4;
+                        npc.defense = (int)Math.Round(npc.defense / 3.5);
+                        npc.damage /= 3;
+                        npc.value = (int)Math.Round(npc.value / 1.5);
+                        npc.knockBackResist *= 2f;
+                        break;
                     default: break;
                 }
             }
