@@ -67,7 +67,7 @@ ShroomiteHealEffect: Shroomite Consumption Buff
 ShroomiteMushroomPriority: Mushrooms Take Potion Priority
 ShroomiteShroomEffect: Shroomite Mushroom Cloud
 NatureEffect: Concise Nature Force
-ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
+ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 DarkArtistMinion: Flameburst Minion
 ApprenticeSupport: Apprentice Effect
 NecroEffect: Necro Graves

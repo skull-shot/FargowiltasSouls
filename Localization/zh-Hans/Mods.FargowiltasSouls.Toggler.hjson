@@ -67,7 +67,7 @@ ShroomiteHealEffect: 蘑菇 蘑菇消耗增益
 ShroomiteMushroomPriority: 蘑菇 使用药水优先级
 ShroomiteShroomEffect: 蘑菇 蘑菇云
 NatureEffect: 简化自然之力
-ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
+ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 DarkArtistMinion: 暗黑艺术家 爆炸烈焰召唤物
 ApprenticeSupport: 学徒 相关效果
 NecroEffect: 死灵 骨堆
