@@ -338,6 +338,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Vector2 shootPos = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
                                 float targetX = player.Center.X - shootPos.X;
                                 float targetY = player.Center.Y - shootPos.Y;
+
+                                if (targetX * targetX + targetY * targetY > 800 * 800) // don't fire if too far
+                                    break;
                                 npc.netUpdate = true;
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -1114,6 +1117,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Vector2 shootPos = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
                                 float targetX = player.Center.X - shootPos.X;
                                 float targetY = player.Center.Y - shootPos.Y;
+
+                                if (targetX * targetX + targetY * targetY > 800 * 800) // don't fire if too far
+                                    break;
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     float vel = 14f;
