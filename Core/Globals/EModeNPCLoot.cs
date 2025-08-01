@@ -350,9 +350,6 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.WalkingAntlion:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new DownedEvilBossDropCondition(), ItemID.FastClock, 50));
                     break;
-                case NPCID.DuneSplicerBody or NPCID.DuneSplicerHead or NPCID.DuneSplicerTail:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.OasisCrate));
-                    break;
                 case var _ when HardmodeDesertEnemies.Contains(npc.type):
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.DesertFossil, 3, 1, 10));
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.FlyingCarpet, 100));
@@ -524,11 +521,6 @@ namespace FargowiltasSouls.Core.Globals
 
                     case NPCID.AngryNimbus:
                         npcLoot.RemoveWhere(rule => rule is CommonDrop drop && drop.itemId == ItemID.NimbusRod && FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule));
-                        break;
-
-                    case NPCID.DuneSplicerHead:
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.SandstorminaBottle, 3));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ItemID.OasisCrate));
                         break;
 
                     default: break;

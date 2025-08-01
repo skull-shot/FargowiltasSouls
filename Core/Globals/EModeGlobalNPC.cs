@@ -423,8 +423,6 @@ namespace FargowiltasSouls.Core.Globals
                     if (!surface && normalSpawn)
                     {
                         pool[NPCID.Mimic] = .002f;
-                        if (desert && NPC.downedBoss2)
-                            pool[NPCID.DuneSplicerHead] = .002f;
                     }
                 }
                 else //all the hardmode
