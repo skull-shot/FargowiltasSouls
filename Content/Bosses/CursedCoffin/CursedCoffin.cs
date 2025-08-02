@@ -346,7 +346,6 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
 
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.OasisCrate, 1, 1, 5)); //oasis crate
             // gems
             rule.OnSuccess(ItemDropRule.Common(ItemID.Amethyst, 3, 2, 4));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Topaz, 4, 2, 4));

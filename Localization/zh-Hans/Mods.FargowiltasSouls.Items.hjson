@@ -1825,8 +1825,8 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/LifeForce] 反射接触伤害，你的召唤物和哨兵可以暴击
 		[i:FargowiltasSouls/SpiritForce] 双击下键召唤禁戒风暴，治疗药水会随着时间的推移恢复更多，强化你的鞭子
 		[i:FargowiltasSouls/SpiritForce] 生命值降低至0时以300生命值复活并净化减益
-		[i:FargowiltasSouls/ShadowForce] 每4秒获得一次无敌的暗影冲刺，根据移速增加射弹各种属性
-		[i:FargowiltasSouls/ShadowForce] 发射一把额外的武器作为辅助攻击，召唤物会进行镰刀辅助攻击，屠戮敌人可能会掉落骨堆
+		[i:FargowiltasSouls/DeathForce] 每4秒获得一次无敌的暗影冲刺，根据移速增加射弹各种属性
+		[i:FargowiltasSouls/DeathForce] 发射一把额外的武器作为辅助攻击，召唤物会进行镰刀辅助攻击，屠戮敌人可能会掉落骨堆
 		[i:FargowiltasSouls/WillForce] 召唤角斗士灵魂增加你的治疗和坐骑属性，连续攻击会获得额外伤害
 		[i:FargowiltasSouls/WillForce] 拾取时钱币自动将钱币储存到存钱罐（在背包和时装栏中也可生效），敌人可能会掉落额外的战利品
 		[i:FargowiltasSouls/CosmoForce] 攻击偶尔会向敌人发射月亮并爆炸产生月亮强化焰

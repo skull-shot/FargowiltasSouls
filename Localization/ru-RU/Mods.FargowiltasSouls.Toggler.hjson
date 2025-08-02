@@ -67,7 +67,7 @@ ShroomiteHealEffect: Бафф за поедание грибов
 ShroomiteMushroomPriority: Приоритет грибов при быстром лечении
 ShroomiteShroomEffect: Грибные облака
 NatureEffect: Сжатый артефакт Природы
-ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
+ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 DarkArtistMinion: Огнемётный миньон
 ApprenticeSupport: Эффект ученика
 NecroEffect: Могилы некро

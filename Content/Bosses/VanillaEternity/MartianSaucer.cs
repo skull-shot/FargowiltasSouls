@@ -28,6 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.lifeMax /= 2;
                 npc.defense /= 2;
+                npc.damage /= 2;
             }
         }
     }
@@ -109,7 +110,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
+            //EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
 
             if (!npc.dontTakeDamage && npc.HasValidTarget)
             {

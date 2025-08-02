@@ -211,6 +211,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             else if (NPC.localAI[3] == 1)
             {
                 EModeGlobalNPC.Aura(NPC, 2000f, true, -1, default, ModContent.BuffType<GodEaterBuff>());
+
+                if (!SkyManager.Instance["FargowiltasSouls:AbomBoss1"].IsActive())
+                    SkyManager.Instance.Activate("FargowiltasSouls:AbomBoss1");
             }
 
             if (FargoSoulsUtil.HostCheck)

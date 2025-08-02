@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         }
         public override void SetDefaults()
         {
-            NPC.lifeMax = 20;
+            NPC.lifeMax = Main.hardMode ? 150 : 20;
             NPC.damage = 0;
 
             NPC.width = 20;
