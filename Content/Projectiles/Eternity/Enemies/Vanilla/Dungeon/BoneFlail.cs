@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
         {
             Projectile.hide = false;
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> chain = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/BossWeapons/LeashFlailChain");
+            Asset<Texture2D> chain = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/BossWeapons/EyeleashChain");
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
             Color glowColorBase = AngryBones.weaponGlowColor((int)Projectile.localAI[0]);
