@@ -415,9 +415,7 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (ocean)
                     {
-                        pool[NPCID.PigronCorruption] = .002f;
-                        pool[NPCID.PigronCrimson] = .002f;
-                        pool[NPCID.PigronHallow] = .002f;
+                        pool[NPCID.PigronHallow] = .006f;
                     }
 
                     if (!surface && normalSpawn)
@@ -597,10 +595,7 @@ namespace FargowiltasSouls.Core.Globals
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
                             }
-
-                            pool[NPCID.PigronCorruption] = .01f;
-                            pool[NPCID.PigronCrimson] = .01f;
-                            pool[NPCID.PigronHallow] = .01f;
+                            pool[NPCID.PigronHallow] = .06f;
                             if (NPC.downedFishron && bossCanSpawn)
                                 pool[NPCID.DukeFishron] = .0002f;
                         }

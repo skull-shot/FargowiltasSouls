@@ -1394,17 +1394,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.active = false; //no block
                     break;
 
-                case ProjectileID.SandBallFalling:
-                    if (projectile.ai[0] == 2f) //antlion sand
-                    {
-                        int num129 = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.Sand, 0f, projectile.velocity.Y / 2f, 0, default, 1f);
-                        Dust expr_59B0_cp_0 = Main.dust[num129];
-                        expr_59B0_cp_0.velocity.X *= 0.4f;
-                        projectile.active = false;
-
-                    }
-                    break;
-
                 case ProjectileID.QueenSlimeMinionPinkBall:
                 case ProjectileID.QueenSlimeGelAttack:
                     if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
