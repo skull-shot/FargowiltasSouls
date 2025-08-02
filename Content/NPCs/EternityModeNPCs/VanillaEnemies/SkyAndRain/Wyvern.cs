@@ -50,12 +50,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
         {
             base.AI(npc);
 
-            if (++AttackTimer > 240)
+            if (++AttackTimer > 120)
             {
-                AttackTimer = 0;
-                if (FargoSoulsUtil.HostCheck && npc.velocity != Vector2.Zero)
+                if (npc.Distance(Main.player[npc.target].Center) < 160 && FargoSoulsUtil.HostCheck && npc.velocity != Vector2.Zero)
                 {
-                    const int max = 12;
+                    AttackTimer = 0;
+                    int max = Main.hardMode ? 12 : 8;
                     Vector2 vel = Vector2.Normalize(npc.velocity) * 1.5f;
                     for (int i = 0; i < max; i++)
                     {

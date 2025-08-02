@@ -44,11 +44,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     Vector2 spawn = Vector2.Normalize(npc.velocity) * (npc.width + 20) / 2f + npc.Center;
                     Vector2 vel = Vector2.Zero + Main.rand.NextVector2Circular(5, 5);
                     Projectile.NewProjectile(npc.GetSource_FromThis(), spawn, vel, ModContent.ProjectileType<PigronBubble>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.6f), 0f, Main.myPlayer, -10f, npc.target);
-                    /*int b = FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), spawn, NPCID.DetonatingBubble);
-                    Main.npc[b].target = npc.target;
-                    Main.npc[b].velocity = Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2f * npc.direction) * 6;
-                    Main.npc[b].netUpdate = true;
-                    Main.npc[b].ai[3] = Main.rand.Next(40, 61) / 100f;*/
                 }
                 return false;
             }
