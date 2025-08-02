@@ -1467,7 +1467,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     modifiers.SetCrit();
                     if (critRoll >= projectile.CritChance && critRoll < postNinjaCrit)
                     {
-                        Main.NewText($"{increase}");
+                        //Main.NewText($"{increase}");
                     }
                 }
                 else
