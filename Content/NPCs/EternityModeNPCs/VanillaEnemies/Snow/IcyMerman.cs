@@ -85,29 +85,21 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                         break;
                     }
 
-                    float attackDist = 130;
-                    bool inRange = Math.Abs(target.Center.X - npc.Center.X) < attackDist;
+                    float attackDist = 110;
+                    bool inRange = Math.Abs(target.Center.X - npc.Center.X) < attackDist && target.Center.Y < npc.Center.Y;
                     if (inRange)
                     {
-                        if (canStrike(npc, target))
-                        {
-                            destroyIce(target);
-                            targetPos = target.Center;
-                            State = 1;
-                        }
-                        else if (Collision.CanHitLine(npc.Center, 1, 1, target.Center, 1, 1))
-                        {
-                            targetPos = target.Center;
-                            State = 1;
-                        }
+                        targetPos = target.Center;
+                        npc.noTileCollide = true;
+                        State = 1;
                     }
                     break;
                 // Lunging
                 case 1:
                     FargoSoulsUtil.DustRing(npc.Center, 20, DustID.Frost, 5f);
-                    Vector2 targetPoint = targetPos - Vector2.UnitY * 100;
+                    Vector2 targetPoint = targetPos - Vector2.UnitY * 200;
                     float distanceScale = MathHelper.Clamp(npc.Distance(targetPoint) / 1000f, 0f, 1f);
-                    float vel = 7f + 20f * distanceScale;
+                    float vel = 7f + 10f * distanceScale;
                     npc.velocity = npc.DirectionTo(targetPoint) * vel;
                     SoundStyle sound = Main.rand.NextFromList(SoundID.Zombie21, SoundID.Zombie22, SoundID.Zombie23);
                     SoundEngine.PlaySound(sound, npc.Center);
@@ -115,8 +107,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                     break;
                 // Completing Lunge
                 case 2:
+                    destroyIce(npc);
+                    Lighting.AddLight(npc.Center, new Vector3(1, 1, 1));
                     if (npc.velocity.Y > 0)
+                    {
+                        npc.noTileCollide = false;
                         State = 3;
+                    }
                     break;
                 // Normal AI
                 case 3:
@@ -125,29 +122,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
             return false;
         }
 
-        public bool canStrike(NPC npc, Player player)
-        {
-            if (!player.active || player.dead)
-                return false;
-
-            Tile bottom = Framing.GetTileSafely(player.Bottom);
-            if (bottom.TileType != TileID.BreakableIce)
-                return false;
-
-            return Collision.CanHitLine(npc.Center, 1, 1, player.Bottom + (16 * Vector2.UnitY), 1, 1);
-        }
-
-        public void destroyIce(Player player)
+        public void destroyIce(NPC npc)
         {
             if (!FargoSoulsUtil.HostCheck)
                 return;
 
             // Iterate to the right
-            float xPos = player.Bottom.X - (player.Bottom.X % 16);
-            float y = player.Bottom.Y - (player.Bottom.Y % 16);
+            float xPos = npc.Top.X - (npc.Top.X % 16) - 16;
+            float y = npc.Top.Y - (npc.Top.Y % 16) - 16;
             int yPosition = (int) (y / 16f);
-            int x = 0;
-            while (true)
+            int range = 2;
+            for (int x = -range; x <= range; x++)
             {
                 int xPosition = (int)(x + (xPos / 16f));
 
@@ -172,36 +157,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
                         Dust.NewDust(blockPos, 16, 16, DustID.Ice);
                 }
 
-                x++;
-            }
-            // Iterate to the left (x = 0 was covered by right iteration)
-            x = -1;
-            while (true)
-            {
-                int xPosition = (int)(x + (xPos / 16f));
-
-                if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
-                    break;
-
-                Tile t = Main.tile[xPosition, yPosition];
-                if (t == null)
-                    break;
-
-                if (!FargoGlobalProjectile.OkayToDestroyTileAt(xPosition, yPosition) || FargoGlobalProjectile.TileIsLiterallyAir(t))
-                    break;
-
-                if (t.TileType != TileID.BreakableIce)
-                    break;
-                else
-                {
-                    WorldGen.KillTile(xPosition, yPosition, noItem: true);
-                    Vector2 blockPos = new(16 * xPosition, 16 * yPosition);
-                    SoundEngine.PlaySound(SoundID.Item27, blockPos);
-                    for (int i = 0; i < 5; i++)
-                        Dust.NewDust(blockPos, 16, 16, DustID.Ice);
-                }
-
-                x--;
             }
         }
 

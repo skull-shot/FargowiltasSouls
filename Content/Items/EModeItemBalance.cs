@@ -499,6 +499,10 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.DD2BetsyBow: //aerial bane
                     balanceTextKeys = ["AerialBane"];
                     return EModeChange.Nerf;
+                    
+                case ItemID.ChlorophyteBullet:
+                    balanceTextKeys = ["ChlorophyteBullet"];
+                    return EModeChange.Nerf;
 
                 default:
                     return EModeChange.None;

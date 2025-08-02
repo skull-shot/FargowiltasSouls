@@ -80,6 +80,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 {
                     Main.projectile[p].noDropItem = true;
                     Main.projectile[p].FargoSouls().ArrowRain = true;
+                    Main.projectile[p].ContinuouslyUpdateDamageStats = true;
                 }
 
                 launchArrow = false;

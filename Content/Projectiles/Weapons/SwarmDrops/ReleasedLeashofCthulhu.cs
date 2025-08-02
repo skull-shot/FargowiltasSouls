@@ -36,9 +36,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void OnSpawn(IEntitySource source)
         {
             SoundEngine.PlaySound(FargosSoundRegistry.LeashBreak, Main.player[Projectile.owner].Center);
-            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore1").Type, Projectile.scale * 0.8f);
-            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore2").Type, Projectile.scale * 0.8f);
-            Gore.goreTime = 5;
+            if (!Main.dedServ)
+            {
+                Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore1").Type, Projectile.scale * 0.8f);
+                Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity * 0.4f, ModContent.Find<ModGore>(Mod.Name, "CollarGore2").Type, Projectile.scale * 0.8f);
+                Gore.goreTime = 5;
+            }
             base.OnSpawn(source);
         }
         public override void SetDefaults()
@@ -75,8 +78,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.timeLeft = 120;
                 if (Projectile.Distance(n.Center) >= 2400)
                 {
-                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
-                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    if (!Main.dedServ)
+                    {
+                        Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
+                        Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    }
+                    
                     Projectile.Kill();
                 }
 
@@ -112,8 +119,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 // kill
                 if (DashAmount >= 4 && Projectile.Distance(n.Center) <= 50)
                 {
-                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
-                    Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    if (!Main.dedServ)
+                    {
+                        Gore.NewGore(Projectile.GetSource_Death(), Projectile.Left, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore1").Type, Projectile.scale);
+                        Gore.NewGore(Projectile.GetSource_Death(), Projectile.Right, Projectile.velocity * 0.3f, ModContent.Find<ModGore>(Mod.Name, "ReleasedMechFlailGore2").Type, Projectile.scale);
+                    }
+                    
                     Particle p = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(45, 45), Color.DarkRed, 2f, 25);
                     Particle p2 = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(35, 35), Color.DarkRed, 2f, 25);
                     Particle p3 = new SparkParticle(Projectile.Center, Main.rand.NextVector2Circular(25, 25), Color.DarkRed, 2f, 25);

@@ -35,17 +35,17 @@ MutantSpawnBuff: {
 
 SeekerOfTreasuresBuff: {
 	DisplayName: Искатель сокровищ
-	Description: Дай ему несколько тысяч лет, чтобы вырасти
+	Description: Дайте ему несколько тысяч лет, чтобы вырасти
 }
 
 NibbleBuff: {
 	DisplayName: Ниббл
-	Description: Только один кусочек (пожалуйста)
+	Description: Всего лишь один укус (пожалуйста)
 }
 
 MonkBuff: {
 	DisplayName: Медитация
-	Description: Ваш рывок Монаха готов
+	Description: Ваш рывок монаха готов
 }
 
 ObsidianLavaWetBuff: {
@@ -55,7 +55,7 @@ ObsidianLavaWetBuff: {
 
 TitaniumDRBuff: {
 	DisplayName: Титановый щит
-	Description: Дополнительное сопротивление урону и сопротивление многим дебаффам
+	Description: Дополнительное сопротивление урону и сопротивляемость многим дебаффам
 }
 
 KingSlimeMinionBuff: {
@@ -69,8 +69,8 @@ DukeFishronBuff: {
 }
 
 RoombaPetBuff: {
-	DisplayName: Румба
-	Description: Эта румба следует за вами
+	DisplayName: Робот-пылесос
+	Description: Этот робот-пылесос следует за вами
 }
 
 DoveBuff: {
@@ -94,7 +94,7 @@ FishMinionBuff: {
 }
 
 CrimetroidBuff: {
-	DisplayName: Малыш Криметроид
+	DisplayName: Малыш-Криметроид
 	Description: Малыш следует за вами
 }
 
@@ -418,7 +418,7 @@ ShadowflameBuff: {
 
 SmiteBuff: {
 	DisplayName: Поражение
-	Description: Регенерация здоровья снижена, вы получаете на 20% больше урона
+	Description: Вы получаете на 20% больше урона, увороты не действуют
 }
 
 SqueakyToyBuff: {

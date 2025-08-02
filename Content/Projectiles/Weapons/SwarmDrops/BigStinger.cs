@@ -180,7 +180,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Particle p = new RectangleParticle(Projectile.Center, Projectile.velocity * 0.7f + Main.rand.NextVector2Circular(15, 45), Color.Yellow, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
                 p.Spawn();
             }
-            Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity, ModContent.Find<ModGore>(Mod.Name, "BigStingerGore").Type, Projectile.scale);
+            if (!Main.dedServ)
+                Gore.NewGore(Projectile.GetSource_Death(), Projectile.Bottom, Projectile.velocity, ModContent.Find<ModGore>(Mod.Name, "BigStingerGore").Type, Projectile.scale);
             SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
         }
 
