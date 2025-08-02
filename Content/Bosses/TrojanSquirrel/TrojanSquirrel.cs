@@ -1128,8 +1128,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             //ItemID.GemSquirrelTopaz
             ));
             rule.OnSuccess(ItemDropRule.Common(ItemID.SquirrelHook));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.WoodenCrate, 1, 1, 5));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.HerbBag, 1, 1, 5));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Acorn, 1, 100, 100));
             rule.OnSuccess(ItemDropRule.Common(ModContent.Find<ModItem>("Fargowiltas", "LumberJaxe").Type, 10));
 

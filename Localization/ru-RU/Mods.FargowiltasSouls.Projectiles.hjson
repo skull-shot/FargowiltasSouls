@@ -809,4 +809,6 @@ RemoteProbe.DisplayName: Зонд дистанционного управлен�
 CorruptionSludge.DisplayName: Порченная слизь
 WillDashTrail.DisplayName: След от рывка
 MechElectricOrbTelegraphed.DisplayName: Электрическая сфера
-PigronBubble.DisplayName: Pigron Bubble
+// DiabolistExplosion.DisplayName: Diabolist Explosion
+// FireEffect.DisplayName: Fire Effect
+// PigronBubble.DisplayName: Pigron Bubble

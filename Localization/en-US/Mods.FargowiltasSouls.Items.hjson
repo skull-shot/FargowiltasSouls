@@ -785,7 +785,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 150% more damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
 		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
 		'Gaia's blessing shines upon you'
 		'''
@@ -799,7 +799,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +22% damage, melee speed, +15% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
@@ -859,7 +859,7 @@ TerraForce: {
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
+		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing to 100% whenever a lightning bolt is fired, resetting when you take damage
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
@@ -1210,7 +1210,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
-		[i:FargowiltasSouls/BetsysHeart] FIreball Dash inflicts Betsy's Curse
+		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
 		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
@@ -1757,8 +1757,8 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, effects of Hive Pack
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
 		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
-		[i:FargowiltasSouls/ShadowForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/ShadowForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
+		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
 		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters

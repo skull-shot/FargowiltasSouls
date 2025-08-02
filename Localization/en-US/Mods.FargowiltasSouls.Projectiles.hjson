@@ -809,4 +809,6 @@ RemoteProbe.DisplayName: Remote Probe
 CorruptionSludge.DisplayName: Corrupted Sludge
 WillDashTrail.DisplayName: Dash Trail
 MechElectricOrbTelegraphed.DisplayName: Electric Orb
+DiabolistExplosion.DisplayName: Diabolist Explosion
+FireEffect.DisplayName: Fire Effect
 PigronBubble.DisplayName: Pigron Bubble

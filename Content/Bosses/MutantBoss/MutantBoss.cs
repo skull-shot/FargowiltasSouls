@@ -456,6 +456,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (WorldSavingSystem.MasochistModeReal && Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<MutantPresenceBuff>(), 2);
 
+            Main.dayTime = false;
+            Main.time = 16200; //midnight
+
             if (NPC.localAI[3] == 0)
             {
                 NPC.TargetClosest();
@@ -480,6 +483,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 ShouldDrawAura = true;
                 // -1 means no dust is drawn, as it looks ugly.
                 ArenaAura(AuraCenter, 2000f * AuraScale, true, -1, default, ModContent.BuffType<GodEaterBuff>(), ModContent.BuffType<MutantFangBuff>());
+
+                if (!SkyManager.Instance["FargowiltasSouls:MutantBoss1"].IsActive())
+                    SkyManager.Instance.Activate("FargowiltasSouls:MutantBoss1");
             }
             else
             {

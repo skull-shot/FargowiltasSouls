@@ -18,7 +18,6 @@ namespace FargowiltasSouls.Content.Items.BossBags
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<CursedCoffin>()));
 
             itemLoot.Add(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
-            itemLoot.Add(ItemDropRule.Common(ItemID.OasisCrate, 1, 5, 5)); //oasis crate
 
             // gems
             itemLoot.Add(ItemDropRule.Common(ItemID.Amethyst, 3, 2, 4));

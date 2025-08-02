@@ -532,7 +532,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 DamageOverTime(4, true);
 
             if (BleedingOut)
-                DamageOverTime(20, true);
+                DamageOverTime(Main.hardMode ? 80 : 20, true);
 
             if (Player.onFire && Player.HasEffect<AshWoodEffect>())
             {

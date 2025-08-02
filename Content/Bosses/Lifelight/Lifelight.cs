@@ -3065,7 +3065,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
 
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<EnchantedLifeblade>(), ModContent.ItemType<Lightslinger>(), ModContent.ItemType<CrystallineCongregation>(), ModContent.ItemType<KamikazePixieStaff>()));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.HallowedFishingCrateHard, 1, 1, 5)); //divine crate
             rule.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 1, 3));
             rule.OnSuccess(ItemDropRule.Common(ItemID.PixieDust, 1, 15, 25));
 

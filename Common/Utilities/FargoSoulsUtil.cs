@@ -34,6 +34,7 @@ namespace FargowiltasSouls //lets everything access it without using
 
         public static bool HostCheck => Main.netMode != NetmodeID.MultiplayerClient;
 
+
         public static bool ActuallyClickingInGameplay(Player player) => !player.mouseInterface && !CaptureManager.Instance.Active;
 
         public static void AddDebuffFixedDuration(Player player, int buffID, int intendedTime, bool quiet = true)
