@@ -181,7 +181,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 player.FargoSouls().HealPlayer(heal);
                 CanHit = 2;
             }
-            target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 60 * 6);
+            target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), player.HasEffect<ShadowForceDashEffect>() ? 60 * 5 : 60 * 6);
         }
         public override void OnKill(int timeLeft)
         {
