@@ -780,7 +780,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	// DisplayName: Ambrosia Buff
-	// Description: +22% damage, +22% melee speed, +15% damage reduction, +5 life regeneration, summon damage can crit
+	// Description: +20% damage, +15% damage reduction, +5 life regeneration, summon damage can crit
 }
 
 MutantDesperationBuff: {

@@ -1,6 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using Microsoft.Xna.Framework;
@@ -50,7 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 return;
             }
             Player player = Main.player[Projectile.owner];
-            if (!player.HasEffect<SpookyEffect>() || !player.HasEffectEnchant<SpookyEffect>())
+            if (!player.HasEffect<SpookyEffect>())
             {
                 Projectile.Kill();
                 return;
@@ -148,7 +149,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             }
             Projectile.rotation = Direction * rotation;
 
-            Projectile.scale = 1;
+            Projectile.scale = size / 5;
             Projectile.width = Projectile.height = (int)(Diameter * size);
             Projectile.Center = player.MountedCenter;
         }
@@ -166,7 +167,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 return;
             }
             Player player = Main.player[Projectile.owner];
-            if (!player.HasEffect<SpookyEffect>() || !player.HasEffectEnchant<SpookyEffect>())
+            if (!player.HasEffect<SpookyEffect>())
             {
                 Projectile.Kill();
                 return;
@@ -174,7 +175,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             if (CanHit == 1 && damageDone > 50)
             {
-                player.FargoSouls().HealPlayer(damageDone / 40);
+                int heal = damageDone / 40;
+                if (player.HasEffect<ShadowForceDashEffect>())
+                    heal = 20;
+                player.FargoSouls().HealPlayer(heal);
                 CanHit = 2;
             }
             target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 60 * 6);
