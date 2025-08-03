@@ -799,7 +799,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +22% damage, melee speed, +15% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +15% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
@@ -1749,7 +1749,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] Debuffs deal 150% more damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] Debuffs deal 100% more damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
