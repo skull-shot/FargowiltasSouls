@@ -683,12 +683,12 @@ JungleMimicSummonBuff: {
 
 GladiatorBuff: {
 	DisplayName: Gladiator Strength
-	Description: Increased damage and damage reduction, knockback immunity, improved spear rain
+	Description: Increased damage reduction, knockback immunity, improved spear rain
 }
 
 GladiatorSpiritBuff: {
 	DisplayName: Gladiator Strength
-	Description: +15% damage reduction, +30% damage, knockback immunity, improved successive hit damage
+	Description: +20% damage reduction, knockback immunity, improved successive hit damage
 }
 
 ROBBuff: {

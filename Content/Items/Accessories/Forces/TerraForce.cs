@@ -118,13 +118,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 float modifier = 1f;
                 if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {
-                    modPlayer.TinCrit += 25;
+                    modPlayer.TinCrit += 5;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
                     else
-                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
+                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 5));
 
-                    if (modPlayer.TinCrit >= 100)
+                    if (modPlayer.TinCrit >= 25)
                         modifier -= 0.4f;
                 }
                 modPlayer.TerraProcCD = (int)(cdLength * modifier);

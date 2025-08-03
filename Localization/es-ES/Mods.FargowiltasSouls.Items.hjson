@@ -646,9 +646,9 @@ TinEnchant: {
 	// DisplayName: Tin Enchantment
 	/* Tooltip:
 		'''
-		Sets your critical strike chance to 5%
-		Every crit will increase it by 5% up to double your original critical strike chance or 15%
-		Getting hit reduces your crit by half, to a minimum of 5%
+		Gain 3% critical strike chance
+		Every crit increases this bonus by 3%, up to 12%
+		Getting hit reduces this bonus by half, to a minimum of 3%
 		'Return of the Crit'
 		''' */
 	// CritUp: +{0}% crit
@@ -785,7 +785,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 150% more damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
 		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
@@ -799,7 +799,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +22% damage, melee speed, +15% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
@@ -859,7 +859,7 @@ TerraForce: {
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing to 100% whenever a lightning bolt is fired, resetting when you take damage
+		[i:FargowiltasSouls/TinEnchant] Increases crit chance by 5% whenever a lightning bolt is fired, up to 25%, resetting when you take damage
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
@@ -1769,7 +1769,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
+		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
 		[i:FargowiltasSouls/EarthForce] Debuffs deal 150% more damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies

@@ -19,7 +19,7 @@ Ebonwood: Aura size increased, flat damage and damage reduction cap increased to
 Forbidden: Damage boost increased from 1.15x to 1.3x
 Fossil: Revive heal increased to 200 and revive bone count doubled
 Frost: Icicle damage doubled
-Gladiator: Doubled stat buffs and spear rain damage
+Gladiator: Doubled damage reduction and spear rain damage
 Gold: Increased shell duration
 Hallow: Increased potion heal bonus from 40 to 70%, doubled repel duration
 Huntress: Flat damage increased to 5, stack reduction on misses decreased to 3
@@ -57,7 +57,7 @@ Snow: Snowballs inflict Frostbite and freeze enemies solid
 Shadow: Number of Shadow Orbs increased
 Squire: Increased mount boosts to 1.5x and heal bonus to 15%
 Tiki: Bonus whip range increased to 40%, projectile damage bonus increased to 1.25x
-Tin: Minimum crit increased to 10%, max crit is at least 50%, reduced proc cooldown
+Tin: Max crit increased to 24%, reduced proc cooldown
 Titanium: Shard damage increased, Titanium Shield duration increased to 5 seconds and maximum damage reduction increased by 10%
 Tungsten: Shockwaves are 3x as large and frequent
 Turtle: Doubled shell health
