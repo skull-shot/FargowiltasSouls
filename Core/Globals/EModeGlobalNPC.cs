@@ -411,6 +411,7 @@ namespace FargowiltasSouls.Core.Globals
                         pool[NPCID.ZombieMushroom] = .02f;
                         pool[NPCID.ZombieMushroomHat] = .02f;
                         pool[NPCID.AnomuraFungus] = .02f;
+                        pool[NPCID.TruffleWorm] = .005f;
                     }
 
                     if (ocean)
