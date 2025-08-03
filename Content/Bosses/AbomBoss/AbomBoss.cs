@@ -196,6 +196,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             EModeGlobalNPC.abomBoss = NPC.whoAmI;
 
+            Main.dayTime = false;
+            Main.time = 16200; //midnight
+
+            Main.raining = false; //disable rain
+            Main.rainTime = 0;
+            Main.maxRaining = 0;
+
             if (NPC.localAI[3] == 0)
             {
                 NPC.TargetClosest();
@@ -303,13 +310,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
                 if (!SkyManager.Instance["FargowiltasSouls:AbomBoss"].IsActive())
                     SkyManager.Instance.Activate("FargowiltasSouls:AbomBoss");
-
-                Main.dayTime = false;
-                Main.time = 16200; //midnight
-
-                Main.raining = false; //disable rain
-                Main.rainTime = 0;
-                Main.maxRaining = 0;
             }
 
             return base.PreAI();
