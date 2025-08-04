@@ -370,14 +370,6 @@ namespace FargowiltasSouls.Core.Globals
                         //if (!FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
                         //pool[NPCID.RedDevil] = .025f;
                     }
-                    else if (sky)
-                    {
-                        if (normalSpawn)
-                        {
-                            if (WorldSavingSystem.DownedAnyBoss)
-                                pool[NPCID.WyvernHead] = .005f;
-                        }
-                    }
 
                     //height-independent biomes
                     if (corruption)
@@ -411,13 +403,12 @@ namespace FargowiltasSouls.Core.Globals
                         pool[NPCID.ZombieMushroom] = .02f;
                         pool[NPCID.ZombieMushroomHat] = .02f;
                         pool[NPCID.AnomuraFungus] = .02f;
+                        pool[NPCID.TruffleWorm] = .005f;
                     }
 
                     if (ocean)
                     {
-                        pool[NPCID.PigronCorruption] = .002f;
-                        pool[NPCID.PigronCrimson] = .002f;
-                        pool[NPCID.PigronHallow] = .002f;
+                        pool[NPCID.PigronHallow] = .006f;
                     }
 
                     if (!surface && normalSpawn)
@@ -597,10 +588,7 @@ namespace FargowiltasSouls.Core.Globals
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
                             }
-
-                            pool[NPCID.PigronCorruption] = .01f;
-                            pool[NPCID.PigronCrimson] = .01f;
-                            pool[NPCID.PigronHallow] = .01f;
+                            pool[NPCID.PigronHallow] = .06f;
                             if (NPC.downedFishron && bossCanSpawn)
                                 pool[NPCID.DukeFishron] = .0002f;
                         }
