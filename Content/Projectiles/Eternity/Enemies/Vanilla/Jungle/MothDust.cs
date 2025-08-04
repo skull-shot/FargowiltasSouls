@@ -51,13 +51,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Jungle
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    int d = Main.rand.Next(FargowiltasSouls.DebuffIDs.Count);
-                    if (FargoGlobalBuff.DebuffsToLetDecreaseNormally.Contains(d))
-                    {
-                        i--;
-                        continue;
-                    }
-                    target.AddBuff(FargowiltasSouls.DebuffIDs[d], 240);
+                    var debuffs = FargowiltasSouls.DebuffIDs.Except(FargoGlobalBuff.DebuffsToLetDecreaseNormally).ToList();
+                    int d = Main.rand.Next(debuffs.Count);
+                    target.AddBuff(debuffs[d], 240);
                 }
             }
         }
