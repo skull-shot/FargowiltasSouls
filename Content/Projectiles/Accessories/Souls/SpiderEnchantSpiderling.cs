@@ -37,8 +37,16 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.timeLeft = 60 * 4;
         }
         public override bool? CanCutTiles() => false;
+        public static int SpiderDamage(Player player)
+        {
+            bool wiz = player.ForceEffect<SpiderEffect>();
+            int baseDamage = wiz ? 27 : 18;
+            return (int)(baseDamage * player.ActualClassDamage(DamageClass.Summon));
+        }
         public override void AI()
         {
+
+            Projectile.damage = SpiderDamage(Main.player[Projectile.owner]);
             base.AI();
         }
     }

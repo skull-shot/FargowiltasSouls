@@ -5,11 +5,14 @@ using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
-using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Armor.Nekomi;
+using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -22,9 +25,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
-using FargowiltasSouls.Content.Projectiles.Armor;
-using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -90,10 +91,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                         // summon spiderlings
                         if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
                         {
-                            bool wiz = Player.ForceEffect<SpiderEffect>();
-                            int baseDamage = wiz ? 27 : 18;
                             SpiderCD = 30;
-                            FargoSoulsUtil.NewSummonProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), baseDamage, 0.5f, Main.myPlayer);
+                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer);
                         }
                     }
                     if (UniverseCore) // cosmic core
