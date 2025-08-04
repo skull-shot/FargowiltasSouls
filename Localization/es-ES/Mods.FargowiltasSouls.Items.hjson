@@ -954,7 +954,7 @@ BionomicCluster: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
+		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
@@ -975,7 +975,7 @@ BionomicClusterInactive: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
+		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
@@ -1329,7 +1329,7 @@ NymphsPerfume: {
 		'''
 		Grants immunity to Lovestruck, Stinky, and Hexed
 		You respawn with more life (works from inventory and vanity)
-		Your attacks occasionally produce hearts
+		Attacks produce lifestealing hearts occasionally
 		'The scent is somewhat overpowering'
 		''' */
 	// VanityTooltip: You respawn with more life
@@ -1717,7 +1717,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/GalacticGlobe] Increases wing time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
 		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (works from inventory and vanity), immunity to almost all Eternity Mode debuffs, and more
+		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, immunity to almost all Eternity Mode debuffs, and more
 		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
 		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
 		[i:FargowiltasSouls/NymphsPerfume] Increases respawn hp, [i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50% and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/MysticSkull] mana potions as needed

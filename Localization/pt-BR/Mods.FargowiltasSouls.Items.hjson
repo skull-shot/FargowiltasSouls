@@ -991,7 +991,7 @@ BionomicClusterInactive: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
+		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
