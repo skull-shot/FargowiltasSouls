@@ -511,6 +511,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     int frequency;
                     int heads = CountHeads();
+                    if (heads > 4)
+                        heads = 4;
                     if (heads <= 1)
                         frequency = 20;
                     else if (heads == 2)
@@ -600,9 +602,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (Timer == -1000 - windup - 2)
                         {
                             int heads = CountHeads();
-                            if (WorldSavingSystem.MasochistModeReal && heads >= 4)
-                                heads = 3;
-                            if (heads < 4)
+                            if (heads > 4)
+                                heads = 4;
+                            if (WorldSavingSystem.MasochistModeReal && heads > 1)
+                                heads--;
+                            if (heads <= 4)
                             {
                                 int projCount;
                                 float width;
@@ -616,10 +620,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     projCount = 6;
                                     width = 0.32f;
                                 }
-                                else
+                                else if (heads == 3)
                                 {
                                     projCount = 4;
                                     width = 0.18f;
+                                }
+                                else
+                                {
+                                    projCount = 2;
+                                    width = 0.13f;
                                 }
                                 SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                                 if (FargoSoulsUtil.HostCheck)
