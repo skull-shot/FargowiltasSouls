@@ -90,6 +90,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ApprenticeItemCD > 0)
             {
                 modPlayer.ApprenticeItemCD--;
+                if (modPlayer.ApprenticeItemCD > 0)
+                    return; // if cooldown still not up, return early
             }
 
             if (player.controlUseItem)
@@ -129,17 +131,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
                                 continue;
 
+                            if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
+                                continue;
+
                             weaponsUsed++;
                             if (weaponsUsed > 1)
                                 break;
-
-                            int itemCD = modPlayer.ApprenticeItemCD;
-
-                            if (itemCD > 0)
-                                continue;
-
-                            if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
-                                continue;
 
                             //Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
                             //Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
