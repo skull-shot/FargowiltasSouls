@@ -370,14 +370,6 @@ namespace FargowiltasSouls.Core.Globals
                         //if (!FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
                         //pool[NPCID.RedDevil] = .025f;
                     }
-                    else if (sky)
-                    {
-                        if (normalSpawn)
-                        {
-                            if (WorldSavingSystem.DownedAnyBoss)
-                                pool[NPCID.WyvernHead] = .005f;
-                        }
-                    }
 
                     //height-independent biomes
                     if (corruption)

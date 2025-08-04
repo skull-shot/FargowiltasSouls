@@ -214,6 +214,7 @@ namespace FargowiltasSouls.Core.Systems
             tag.Add("CoffinArenaCenterY", CoffinArenaCenter.Y);
             tag.Add("IceGolemTimer", WorldUpdatingSystem.IceGolemTimer);
             tag.Add("SandElementalTimer", WorldUpdatingSystem.SandElementalTimer);
+            tag.Add("WyvernTimer", WorldUpdatingSystem.WyvernTimer);
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -258,7 +259,9 @@ namespace FargowiltasSouls.Core.Systems
             if (tag.ContainsKey("IceGolemTimer"))
                 WorldUpdatingSystem.IceGolemTimer = tag.GetAsInt("IceGolemTimer");
             if (tag.ContainsKey("SandElementalTimer"))
-                WorldUpdatingSystem.SandElementalTimer = tag.GetAsInt("SandElementalTimer");                         
+                WorldUpdatingSystem.SandElementalTimer = tag.GetAsInt("SandElementalTimer");
+            if (tag.ContainsKey("WyvernTimer"))
+                WorldUpdatingSystem.WyvernTimer = tag.GetAsInt("WyvernTimer");
         }
 
         public override void NetReceive(BinaryReader reader)

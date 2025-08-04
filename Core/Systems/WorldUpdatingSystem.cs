@@ -1,9 +1,9 @@
-﻿using FargowiltasSouls.Content.Bosses.CursedCoffin;
+﻿using System;
+using System.Linq;
+using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.WorldGeneration;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
-using System;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Events;
@@ -18,8 +18,10 @@ namespace FargowiltasSouls.Core.Systems
         public static int rainCD;
         public static int IceGolemTimer;
         public static int SandElementalTimer;
+        public static int WyvernTimer;
         public static bool SeenIceGolemMessage;
         public static bool SeenSandElementalMessage;
+        public static bool SeenWyvernMessage;
 
         public override void PreUpdateNPCs() => SwarmActive = FargowiltasSouls.MutantMod is Mod fargo && (bool)fargo.Call("SwarmActive");
 
@@ -314,6 +316,7 @@ namespace FargowiltasSouls.Core.Systems
                 bool blizzard = Main.IsItRaining;
                 Player desertPlayer = null;
                 Player snowPlayer = null;
+                Player skyPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneSkyHeight && (p.position.X / 16f < Main.maxTilesX * 0.45 || p.position.X / 16f > Main.maxTilesX * 0.55), null);
                 if (sandstorm)
                     desertPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneDesert && p.ZoneOverworldHeight, null);
                 if (blizzard)
@@ -377,6 +380,38 @@ namespace FargowiltasSouls.Core.Systems
                     if (IceGolemTimer <= 0 && SeenIceGolemMessage)
                     {
                         SeenIceGolemMessage = false;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+                if (skyPlayer != null)
+                {
+                    WyvernTimer++;
+                    if (WyvernTimer == (baseCooldown * 5) - messageDelay && !SeenWyvernMessage)
+                    {
+                        FargoSoulsUtil.PrintLocalization($"Mods.{Mod.Name}.Message.{Name}.MightyFoe", Color.LightCyan);
+                        SeenWyvernMessage = true;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                    if (WyvernTimer >= baseCooldown * 5)
+                    {
+                        Vector2 spawnpos = new(skyPlayer.Center.X + Main.rand.Next(-800, 801), skyPlayer.Center.Y - Main.rand.Next(640, 800));
+                        FargoSoulsUtil.NewNPCEasy(NPC.GetSource_NaturalSpawn(), spawnpos, NPCID.WyvernHead);
+                        WyvernTimer = -postSpawnCooldown * 2;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+                else
+                {
+                    if (WyvernTimer > 0)
+                        WyvernTimer--;
+                    if (WyvernTimer < 0)
+                        WyvernTimer++;
+                    if (WyvernTimer <= 0 && SeenWyvernMessage)
+                    {
+                        SeenWyvernMessage = false;
                         if (Main.netMode == NetmodeID.Server)
                             NetMessage.SendData(MessageID.WorldData);
                     }
