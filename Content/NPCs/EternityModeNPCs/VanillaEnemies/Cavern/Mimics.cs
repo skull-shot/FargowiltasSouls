@@ -79,7 +79,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 npc.ai[0] = 0f;
                 npc.ai[1] = 0f;
                 npc.ai[2] = 0f;
-                npc.ai[3] = 0f;
                 npc.velocity = new Vector2(0, 10);
 
                 npc.position.X = (int)(npc.position.X / 16) * 16;
@@ -298,22 +297,22 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             return returnbool;
         }
 
-        /*public override void AI(NPC npc)
+        public override void AI(NPC npc)
         {
             base.AI(npc);
 
             if (npc.type == NPCID.Mimic || npc.type == NPCID.PresentMimic || npc.type == NPCID.IceMimic)
             {
                 npc.dontTakeDamage = false;
-                if (npc.justHit && Main.hardMode)
+                /*if (npc.justHit && Main.hardMode)
                     InvulFrameTimer = 15;
                 if (InvulFrameTimer > 0)
                 {
                     InvulFrameTimer--;
                     npc.dontTakeDamage = true;
-                }
+                }*/
             }
-        }*/
+        }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

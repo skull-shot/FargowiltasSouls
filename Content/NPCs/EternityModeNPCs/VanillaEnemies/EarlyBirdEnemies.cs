@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     case NPCID.WyvernBody3:
                     case NPCID.WyvernLegs:
                     case NPCID.WyvernTail:
-                        npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.5);
+                        npc.lifeMax /= 2;
                         npc.defense /= 2;
                         npc.damage /= 2;
                         break;
@@ -94,7 +94,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     case NPCID.PigronCorruption:
                     case NPCID.PigronCrimson:
                     case NPCID.PigronHallow:
-                        //idk yet
+                        npc.lifeMax = (int)Math.Round(npc.lifeMax / 1.5);
+                        npc.damage /= 2;
+                        npc.defense = (int)Math.Round(npc.defense / 1.5);
                         break;
                     case NPCID.RockGolem:
                         npc.lifeMax /= 4;
