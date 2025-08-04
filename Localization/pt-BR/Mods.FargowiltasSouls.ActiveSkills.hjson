@@ -137,9 +137,11 @@ ForbiddenEffect: {
 	/* Tooltip:
 		'''
 		Call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.15x damage
-		Touch it yourself to add back missing wing time
-		Storm can be resummoned after touching the ground
+		Any projectiles shot through your storm empower it
+		When at full power, the storm is unleashed on the nearest enemy
+		Recast this skill to unleash the storm early
+		Touch the storm yourself to refresh your wing time
+		18 second cooldown
 		''' */
 }
 
@@ -148,7 +150,10 @@ SpiritTornadoEffect: {
 	/* Tooltip:
 		'''
 		Call an ancient tornado which deals magic and summon damage
-		Any projectiles shot through the tornado deal 1.4x damage
 		The tornado tracks your mouse slightly
+		Any projectiles shot through your tornado empower it
+		When at full power, the tornado is unleashed on the nearest enemy
+		Recast this skill to unleash the tornado early
+		10 second cooldown
 		''' */
 }

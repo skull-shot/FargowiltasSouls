@@ -59,7 +59,6 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool CanSplit = true;
         public bool ItemSource = false;
         // private int numSplits = 1;
-        public int stormTimer;
         public float TungstenScale = 1;
         public bool TikiTagged;
         public int TikiTimer;
@@ -553,7 +552,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile storm = Main.projectile[tornadoIndex];
                     if (storm.Alive() &&  projectile.owner == storm.owner && projectile.type != storm.type && projectile.Colliding(projectile.Hitbox, storm.Hitbox))
                     {
-                        stormTimer = 240;
+                        if (storm.ModProjectile is ForbiddenTornado forbiddenTornado)
+                            forbiddenTornado.Empower();
+                        else if (storm.ModProjectile is SpiritTornado spiritTornado)
+                            spiritTornado.Empower();
                     }
                 }
                 if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>() && (FargoSoulsUtil.CanDeleteProjectile(projectile)))
@@ -1192,14 +1194,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
             }
 
-            if (stormTimer > 0)
-            {
-                stormTimer--;
-
-                int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.GoldFlame, projectile.velocity.X, projectile.velocity.Y, 100, default, 1.5f);
-                Main.dust[dustId].noGravity = true;
-            }
-
             if (ChilledProj)
             {
                 int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.Snow, projectile.velocity.X, projectile.velocity.Y, 100, default, 1f);
@@ -1442,9 +1436,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 return;
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            if (stormTimer > 0)
-                modifiers.FinalDamage *= modPlayer.ForceEffect<ForbiddenEnchant>() ? 1.4f : 1.2f;
 
             if (TungstenScale != 1 && projectile.type == ProjectileID.PiercingStarlight)
                 modifiers.FinalDamage *= 0.75f;

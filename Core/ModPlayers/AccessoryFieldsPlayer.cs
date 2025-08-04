@@ -124,7 +124,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int CrimsonRegenAmount;
         public int CrimsonRegenTime;
 
-        public bool CanSummonForbiddenStorm = false;
         public List<int> ForbiddenTornados = [];
         public List<int> ShadowOrbs = [];
         public int IcicleCount;
@@ -184,6 +183,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SnowVisual;
         public int SpectreCD;
         public int SpectreGhostTime;
+        public int ForbiddenCD;
         public bool MinionCrits;
         //public bool squireReduceIframes;
         public bool FreezeTime;
