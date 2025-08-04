@@ -401,22 +401,28 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Movement(targetPos, 1f);
 
             Timer++;
-            int waitTime = 90;
+            int waitTime;
             int heads = CountHeads();
             if (WorldSavingSystem.MasochistModeReal)
             {
-                if (heads == 3)
+                if (heads > 3)
+                    waitTime = 70 + (heads - 3) * 3;
+                else if (heads == 3)
                     waitTime = 70;
                 else if (heads == 2)
                     waitTime = 50;
-                else if (heads == 1)
+                else
                     waitTime = 35;
             }
             else
             {
-                if (heads == 2)
+                if (heads > 3)
+                    waitTime = 90 + (heads - 3) * 6;
+                else if (heads == 3)
+                    waitTime = 90;
+                else if (heads == 2)
                     waitTime = 75;
-                else if (heads == 1)
+                else
                     waitTime = 60;
             }
             if (Timer > waitTime && (heads < 3 || Main.rand.NextBool(10)))
