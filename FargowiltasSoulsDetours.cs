@@ -470,7 +470,7 @@ namespace FargowiltasSouls
         {// hallowed dodge nerf
             orig(self);
             if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
-                self.shadowDodgeTimer = 60 * 60;
+                self.shadowDodgeTimer = 60 * 45;
         }
 
         public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)

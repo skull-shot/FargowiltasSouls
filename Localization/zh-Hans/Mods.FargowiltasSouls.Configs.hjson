@@ -16,6 +16,11 @@ ClientConfig: {
 		Tooltip: 开启时，若饰品有效果被饰品效果配置禁用，会有一条物品信息提示你
 	}
 
+	ItemBalanceTooltip: {
+		// Label: Balance Change Tooltips
+		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+	}
+
 	ToggleSearchReset: {
 		Label: 饰品效果菜单关闭时重置搜索栏
 		Tooltip: ""
