@@ -1,9 +1,11 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -49,8 +51,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Jungle
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    int d = Main.rand.Next(FargowiltasSouls.DebuffIDs.Count);
-                    target.AddBuff(FargowiltasSouls.DebuffIDs[d], 240);
+                    var debuffs = FargowiltasSouls.DebuffIDs.Except(FargoGlobalBuff.DebuffsToLetDecreaseNormally).ToList();
+                    int d = Main.rand.Next(debuffs.Count);
+                    target.AddBuff(debuffs[d], 240);
                 }
             }
         }

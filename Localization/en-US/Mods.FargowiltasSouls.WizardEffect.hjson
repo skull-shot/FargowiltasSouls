@@ -16,7 +16,7 @@ Crimson: Timer doubled, but the heal triggers twice. Once in the middle, and onc
 CrystalAssassin: Reduced dash cooldown
 DarkArtist: Secondary weapon frequency increased to 1/3
 Ebonwood: Aura size increased, flat damage and damage reduction cap increased to 10 and 10% respectively
-Forbidden: Damage boost increased from 1.15x to 1.3x
+Forbidden: Cooldown decreased to 10 seconds, damage increased
 Fossil: Revive heal increased to 200 and revive bone count doubled
 Frost: Icicle damage doubled
 Gladiator: Doubled damage reduction and spear rain damage
@@ -50,7 +50,7 @@ Shroomite: Mushroom Power stats increased to 25%, mushroom damage and count incr
 Silver: Parrying blocks up to 200 damage, Parry Boost duration tripled
 Solar: Solar bursts deal increased damage in a larger radius
 Spectre: Revive heal increased to 200, revive spirit count doubled, spirit damage doubled
-Spider: 15% extra critical strike chance
+Spider: 10% extra critical strike chance, increased spiderling damage
 Spooky: Decreased Deathhunt Scythe cooldown to 8 seconds, increased scythe size and damage
 Stardust: Timestop cooldown decreased from 90 to 75
 Snow: Snowballs inflict Frostbite and freeze enemies solid

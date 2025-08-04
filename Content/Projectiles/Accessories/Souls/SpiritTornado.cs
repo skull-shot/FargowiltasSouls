@@ -1,5 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,8 +31,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
-            Projectile.timeLeft = 1200;
+            Projectile.localNPCHitCooldown = 30;
+            Projectile.timeLeft = 60 * 30;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
 
             Projectile.DamageType = DamageClass.Magic;
@@ -57,21 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Player player = Main.player[Projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            /* Collision is done in FargoSoulsGlobalProjectile:PreAI
-            if (player.HasEffect<SpiritTornadoEffect>())
-            {
-                foreach (Projectile p in Main.projectile.Where(p => p.active && p.friendly && !p.hostile && p.owner == Projectile.owner && p.type != Projectile.type && p.Colliding(p.Hitbox, Projectile.Hitbox)))
-                {
-                    p.FargoSouls().stormTimer = 240;
-                }
-            };
-            */
-
-            Projectile.damage = (int)(125f * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
-
-            // MOVEMENT CODE, HOME ON MOUSE
-            SyncMouse(player);
-            Movement(player);
+            Projectile.damage = (int)(125f * Projectile.scale * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
 
             /*
             if (Timer % 13 == 0)
@@ -96,6 +84,35 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 SoundEngine.PlaySound(SoundID.Item82, Projectile.Center);
             }
             Projectile.ai[0] += 1f;
+
+            if (Projectile.ai[0] > 60 * 10 && Projectile.ai[2] >= 0)
+            {
+                Unleash();
+            }
+            if (Projectile.ai[2] > 0)
+                Projectile.ai[2]--;
+            if (Projectile.ai[2] < 0)
+            {
+                Projectile.localNPCHitCooldown = 10;
+                Projectile.ai[2]--;
+                UnleashedMovement(player);
+                if (Projectile.ai[2] < -60 * 5)
+                    Projectile.Kill();
+            }
+            else
+            {
+                if (Projectile.scale < 2f)
+                {
+                    if (Main.myPlayer == Projectile.owner)
+                        CooldownBarManager.Activate("ForbiddenTornadoCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                            () => (Projectile.scale - 1), activeFunction: () => Projectile != null && Projectile.active && Main.LocalPlayer.FargoSouls().ForbiddenCD <= 0, displayAtFull: false);
+                }
+                Projectile.localNPCHitCooldown = 30;
+                // MOVEMENT CODE, HOME ON MOUSE
+                SyncMouse(player);
+                Movement(player);
+            }
+
             if (Projectile.ai[0] >= num1123)
             {
                 Projectile.Kill();
@@ -205,6 +222,74 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 Projectile.velocity.X = -0.15f;
                 Projectile.velocity.Y = -0.05f;
             }
+        }
+
+        public void Empower()
+        {
+            if (Projectile.ai[2] != 0) // cooldown
+                return;
+            Projectile.ai[2] = 30;
+            if (Projectile.scale < 2f)
+            {
+                Projectile.position = Projectile.Center;
+                Projectile.scale += 1f / 8;
+                //Projectile.width = Projectile.height = (int)(10 * Projectile.scale);
+                Projectile.Center = Projectile.position;
+            }
+            else
+            {
+                Unleash();
+            }
+            Projectile.netUpdate = true;
+        }
+        public void Unleash()
+        {
+            // unleash
+            if (Projectile.ai[2] < 0)
+                return;
+            Projectile.ai[2] = -1;
+            Projectile.ai[1] = -1;
+            Projectile.netUpdate = true;
+            Main.player[Projectile.owner].FargoSouls().ForbiddenCD = (60 * 10);
+        }
+        public void UnleashedMovement(Player player)
+        {
+            ref float Target = ref Projectile.ai[1];
+            if (Target < 0) // has no target
+            {
+                NPC npc = Projectile.FindTargetWithinRange(1600, true);
+                if (npc != null && npc.Alive())
+                {
+                    Target = npc.whoAmI;
+                    Projectile.netUpdate = true;
+                }
+            }
+            else // has target, seek it out
+            {
+                NPC npc = Main.npc[(int)Target];
+                if (npc != null && npc.Alive())
+                {
+                    
+                    Vector2 idlePosition = npc.Center;
+                    Vector2 toIdlePosition = idlePosition - Projectile.Center;
+                    float distance = toIdlePosition.Length();
+                    float speed = 40f;
+                    float inertia = 15f;
+                    toIdlePosition.Normalize();
+                    toIdlePosition *= speed;
+                    Projectile.velocity = (Projectile.velocity * (inertia - 1f) + toIdlePosition) / inertia;
+                    if (Projectile.velocity == Vector2.Zero)
+                    {
+
+                        Projectile.velocity.X = -0.15f;
+                        Projectile.velocity.Y = -0.05f;
+                    }
+                }
+                else
+                    Target = -2;
+            }
+
+
         }
 
         public override bool PreDraw(ref Color lightColor)

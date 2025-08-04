@@ -1,12 +1,14 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
@@ -57,8 +59,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     public class SpiritTornadoEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        public override int ToggleItemType => ModContent.ItemType<SpiritForce>();
+        public override int ToggleItemType => ModContent.ItemType<ForbiddenEnchant>();
         public override bool ActiveSkill => true;
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.ForbiddenCD > 0 && !player.HasEffectEnchant<ForbiddenEffect>())
+            {
+                modPlayer.ForbiddenCD--;
+                if (Main.myPlayer == player.whoAmI)
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                        () => (float)modPlayer.ForbiddenCD / (60 * 10), activeFunction: Main.LocalPlayer.HasEffect<SpiritTornadoEffect>, displayAtFull: false);
+            }
+        }
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (!stunned)
@@ -73,11 +86,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public static void CommandSpiritStorm(Player Player)
         {
+            if (Player.FargoSouls().ForbiddenCD > 0)
+                return;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
                 if (projectile.active && projectile.type == ModContent.ProjectileType<SpiritTornado>() && projectile.owner == Player.whoAmI)
                 {
+                    projectile.As<SpiritTornado>().Unleash();
                     return;
                 }
             }
