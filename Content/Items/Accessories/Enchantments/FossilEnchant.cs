@@ -63,6 +63,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static void FossilRevive(Player player)
         {
+            if (player.HasEffect<SpectreEffect>())
+                return;
+
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
             {
                 Projectile[] projs = new Projectile[num];
@@ -73,7 +76,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            bool spiritForce = modPlayer.ForceEffects.Contains(ModContent.ItemType<SpiritForce>());
 
             void Revive(int healAmount, int reviveCooldown)
             {
@@ -143,6 +145,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<FossilEnchant>();
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
+            if (player.HasEffect<SpectreEffect>())
+                return;
             //spawn bones
             int damageCopy = info.Damage;
             for (int i = 0; i < 5; i++)
