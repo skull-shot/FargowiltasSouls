@@ -58,22 +58,26 @@ namespace FargowiltasSouls
         /// </summary>
         public Dictionary<string, float> BossChecklistValues = new()
         {
-            {"DeviBoss", 7f - 1e-4f},
-            {"AbomBoss", 20f},
-            {"MutantBoss", 23f},
-            {"TimberChampion", 18.1f},
-            {"TerraChampion", 18.15f},
-            {"EarthChampion", 18.2f},
-            {"NatureChampion", 18.25f},
-            {"LifeChampion", 18.3f},
-            {"ShadowChampion", 18.35f},
-            {"SpiritChampion", 18.4f},
-            {"WillChampion", 18.45f},
-            {"CosmosChampion", 18.5f},
+            // pre hm
             {"TrojanSquirrel", 0.5f},
-            {"LifeChallenger", 11.49f},
+            {"CursedCoffin", 2.1f},
+            {"DeviBoss", 7f - 1e-4f},
+            // hm
             {"BanishedBaron", 8.7f},
-            {"CursedCoffin", 2.1f}
+            {"LifeChallenger", 11.49f},
+            // post ml
+            {"TimberChampion", 19.1f},
+            {"TerraChampion", 19.15f},
+            {"EarthChampion", 19.2f},
+            {"NatureChampion", 19.25f},
+            {"LifeChampion", 19.3f},
+            {"ShadowChampion", 19.35f},
+            {"SpiritChampion", 19.4f},
+            {"WillChampion", 19.45f},
+            // endgame
+            {"CosmosChampion", 21.2f},
+            {"AbomBoss", 22.6f},
+            {"MutantBoss", 25.8f}
         };
         private void BossChecklistCompatibility()
         {
