@@ -16,6 +16,12 @@ ClientConfig: {
 		Tooltip: If true, items with any effects disabled by the Effect Toggler will have a tooltip line stating this.
 	}
 
+	ItemBalanceTooltip: {
+		Label: Balance Change Tooltips
+		Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+	}
+
+
 	ToggleSearchReset: {
 		Label: Accessory Effects menu resets search bar when closed
 		Tooltip: ""

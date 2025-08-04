@@ -23,6 +23,9 @@ namespace FargowiltasSouls.Core
         public bool ItemDisabledTooltip;
 
         [DefaultValue(false)]
+        public bool ItemBalanceTooltip;
+
+        [DefaultValue(false)]
         public bool ToggleSearchReset;
 
         private const float max4kX = 3840f;
