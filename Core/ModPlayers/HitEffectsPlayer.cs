@@ -161,11 +161,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ProjectileID.Sets.SummonTagDamageMultiplier[proj.type] /= proj.FargoSouls().TagStackMultiplier;
                 proj.FargoSouls().TagStackMultiplier = 1;
             }
-            
-            // reset these
-            proj.FargoSouls().canForceCrit = false;
-            proj.FargoSouls().postNinjaCrit = 0;
-            // reset these
 
             OnHitNPCEither(target, hit, proj.DamageType, projectile: proj);
         }
