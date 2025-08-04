@@ -252,6 +252,21 @@ namespace FargowiltasSouls //lets everything access it without using
             ? 0
             : player.GetTotalCritChance(damageClass);
 
+        private static readonly FieldInfo? _critOverrideField =
+            typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags);
+        /// <summary>
+        /// Allows tweaking _critOverride directly to get around its restrictions.
+        /// True forces a crit, false forces non-crit, null disables forced crit/non-crit behaviour.
+        /// Null by default.
+        /// </summary>
+        /// <param name="modifiers"></param>
+        public static void SetCritOverride(ref this NPC.HitModifiers modifiers, bool? _critOverride = null)
+        {
+            object? unboxedModifiers = modifiers;
+            _critOverrideField?.SetValue(unboxedModifiers, _critOverride);
+            modifiers = (NPC.HitModifiers)unboxedModifiers;
+        }
+
         public static bool FeralGloveReuse(this Player player, Item item)
             => player.autoReuseGlove && (item.CountsAsClass(DamageClass.Melee) || item.CountsAsClass(DamageClass.SummonMeleeSpeed));
 

@@ -105,12 +105,12 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool ArrowRain; // whether this projectile is spawned by Red Riding Enchantment's arrow rain
 
-        public int postNinjaCrit; // this projectile's crit chance after Ninja Enchantment's bonus
+        public bool ApprenticeSupportProjectile; // whether this projectile has been spawned by Apprentice Support effect
 
-        public bool canForceCrit; // use this bool to somewhat get around _critOverride restrictions so Ninja and Pearlwood interact properly
+        public static Projectile? globalProjectileField = null; // enables modifying tagged projectile in any method
 
-        public bool ApprenticeSupportProjectile;
-
+        public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
+        
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),
@@ -1449,22 +1449,15 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                int critRoll = Main.rand.Next(0, 100);
-                int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
-                int increase = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
-                postNinjaCrit = projectile.CritChance + increase;
-                if (critRoll < postNinjaCrit) // roll with the actual crit chance
-                {
-                    modifiers.SetCrit();
-                    if (critRoll >= projectile.CritChance && critRoll < postNinjaCrit)
+                if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? != false)
+                {// no point in running if crit is disabled anyway
+                    int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
+                    ninjaCritIncrease = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
+                    if (ninjaCritIncrease > 0)
                     {
-                        //Main.NewText($"{increase}");
+                        globalProjectileField = projectile;
+                        globalProjectileField.CritChance += ninjaCritIncrease;
                     }
-                }
-                else
-                {
-                    modifiers.DisableCrit(); // disable crit if failed new roll
-                    canForceCrit = true; // pearlwood can still reroll on crit fail
                 }
             }
 
