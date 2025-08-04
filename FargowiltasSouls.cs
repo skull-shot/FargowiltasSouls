@@ -637,7 +637,6 @@ namespace FargowiltasSouls
         internal enum PacketID : byte
         {
             RequestGuttedCreeper,
-            RequestPerfumeHeart,
             RequestPearlwoodStar,
             SyncCultistDamageCounterToServer,
             RequestCreeperHeal,
@@ -685,15 +684,6 @@ namespace FargowiltasSouls
                                 Main.npc[n].velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 8;
                                 NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                             }
-                        }
-                        break;
-
-                    case PacketID.RequestPerfumeHeart: //client to server
-                        if (Main.netMode == NetmodeID.Server)
-                        {
-                            int p = reader.ReadByte();
-                            int n = reader.ReadByte();
-                            Item.NewItem(Main.player[p].GetSource_OnHit(Main.npc[n]), Main.npc[n].Hitbox, ItemID.Heart);
                         }
                         break;
 

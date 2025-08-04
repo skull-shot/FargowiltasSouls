@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -64,6 +66,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             modPlayer.NymphsPerfume = true;
             if (modPlayer.NymphsPerfumeCD > 0)
                 modPlayer.NymphsPerfumeCD -= modPlayer.MasochistSoul ? 10 : 1;
+        }
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            int healamount = 10;
+            if (modPlayer.NymphsPerfumeCD <= 0 && !target.immortal && !player.moonLeech && target.canGhostHeal)
+            {
+                Projectile.NewProjectile(player.GetSource_EffectItem<NymphPerfumeEffect>(), target.Center, Vector2.Zero, ModContent.ProjectileType<NymphHeart>(), 0, 0, player.whoAmI, player.whoAmI, healamount);
+                modPlayer.NymphsPerfumeCD = 600;
+            }
         }
     }
 }

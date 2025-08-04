@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -72,9 +73,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //player.onHitPetal = true;
         }
 
-        public override void OnHitNPCWithProj(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
-            target.AddBuff(ModContent.BuffType<Content.Buffs.Souls.OriPoisonBuff>(), 60);
+            target.AddBuff(ModContent.BuffType<OriPoisonBuff>(), 60);
         }
     }
 }

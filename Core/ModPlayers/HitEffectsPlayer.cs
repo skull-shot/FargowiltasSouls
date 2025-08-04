@@ -261,24 +261,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //                palladiumCD = 240;
             //            }*/
 
-            if (NymphsPerfume && NymphsPerfumeCD <= 0 && !target.immortal && !Player.moonLeech)
-            {
-                NymphsPerfumeCD = 600;
-
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                {
-                    Item.NewItem(Player.GetSource_OnHit(target), target.Hitbox, ItemID.Heart);
-                }
-                else if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
-                    var netMessage = Mod.GetPacket();
-                    netMessage.Write((byte)FargowiltasSouls.PacketID.RequestPerfumeHeart);
-                    netMessage.Write((byte)Player.whoAmI);
-                    netMessage.Write((byte)target.whoAmI);
-                    netMessage.Send();
-                }
-            }
-
             if (MasochistSoul)
             {
                 target.AddBuff(ModContent.BuffType<SadismBuff>(), 600);

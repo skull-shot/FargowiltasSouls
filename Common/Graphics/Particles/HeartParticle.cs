@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Common.Graphics.Particles
 		{
 			Vector2 scale = Scale;
 			spriteBatch.Draw(Texture, Position - Main.screenPosition, null, DrawColor, Rotation, null, scale, 0);
-			spriteBatch.Draw(Texture, Position - Main.screenPosition, null, DrawColor, Rotation, null, scale * new Vector2(0.45f, 1f), 0);
+			//spriteBatch.Draw(Texture, Position - Main.screenPosition, null, DrawColor, Rotation, null, scale * new Vector2(0.45f, 1f), 0);
 
 			if (UseBloom)
 				spriteBatch.Draw(Texture, Position - Main.screenPosition, null, BloomColor * 0.5f, Rotation, null, scale, 0);
