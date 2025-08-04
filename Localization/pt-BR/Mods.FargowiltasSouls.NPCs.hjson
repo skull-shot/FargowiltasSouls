@@ -301,7 +301,7 @@ Lifelight: {
 
 	BossChecklistIntegration: {
 		// EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		// SpawnInfo: Spawn by using [i:FargowiltasSouls/FragilePixieLamp] in the Hallow at day.
+		// SpawnInfo: Spawn by using [i:FargowiltasSouls/CrystallineEffigy] in the Hallow at day.
 		// DespawnMessage: Lifelight fades away...
 	}
 

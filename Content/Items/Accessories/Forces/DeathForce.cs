@@ -203,7 +203,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     boom2.Spawn();
                 }
 
-                int proj = Projectile.NewProjectile(player.GetSource_EffectItem<ShadowForceDashEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<ShadowDash>(), (int)(3600 * player.ActualClassDamage(DamageClass.Melee)), 3, player.whoAmI);
+                //int proj = Projectile.NewProjectile(player.GetSource_EffectItem<ShadowForceDashEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<ShadowDash>(), (int)(3600 * player.ActualClassDamage(DamageClass.Melee)), 3, player.whoAmI);
+                //if (Main.netMode == NetmodeID.MultiplayerClient)
+                //    NetMessage.SendData(MessageID.SyncProjectile, number: proj);
+                float melee = player.ActualClassDamage(DamageClass.Melee);
+                float summon = player.ActualClassDamage(DamageClass.Summon);
+                int scytheDmg = (int)(2800 * (((melee + summon - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling
+                int proj = Projectile.NewProjectile(player.GetSource_EffectItem<ShadowForceDashEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), scytheDmg, 3, player.whoAmI, ai2: 10);
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                     NetMessage.SendData(MessageID.SyncProjectile, number: proj);
 

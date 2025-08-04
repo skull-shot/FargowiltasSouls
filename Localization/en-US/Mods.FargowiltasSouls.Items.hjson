@@ -646,9 +646,9 @@ TinEnchant: {
 	DisplayName: Tin Enchantment
 	Tooltip:
 		'''
-		Sets your critical strike chance to 5%
-		Every crit will increase it by 5% up to double your original critical strike chance or 15%
-		Getting hit reduces your crit by half, to a minimum of 5%
+		Gain 3% critical strike chance
+		Every crit increases this bonus by 3%, up to 12%
+		Getting hit reduces this bonus by half, to a minimum of 3%
 		'Return of the Crit'
 		'''
 	CritUp: +{0}% crit
@@ -799,7 +799,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +22% damage, melee speed, +15% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +15% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
 		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
@@ -831,13 +831,12 @@ DeathForce: {
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
-		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
+		[i:FargowiltasSouls/SpookyEnchant] Shade dashes swing a scythe around you, healing you on hit and inflicting Marked for Death
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
-		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
 		'Dark, Darker, Yet Darker'
 		'''
 }
@@ -859,7 +858,7 @@ TerraForce: {
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing to 100% whenever a lightning bolt is fired, resetting when you take damage
+		[i:FargowiltasSouls/TinEnchant] +5% crit chance, increased by 5% whenever a lightning bolt is fired, up to 25%, resetting when you take damage
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
@@ -1662,8 +1661,7 @@ EternitySoul: {
 		'''
 		Crit chance is set to 50%
 		Crit to increase it by 10%
-		At 100% every attack gains 10% life steal
-		You also gain +5% damage and +5 defense
+		At 100% you also gain damage and defense
 		This stacks up to 950 times until you get hit
 		'''
 
@@ -1748,9 +1746,9 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
+		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] Debuffs deal 150% more damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] Debuffs deal 100% more damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
@@ -1758,7 +1756,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
 		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
 		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, and slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
 		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
