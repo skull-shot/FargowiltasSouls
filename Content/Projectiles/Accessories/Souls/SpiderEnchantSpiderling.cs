@@ -26,7 +26,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.CloneDefaults(ProjectileID.DangerousSpider);
             Projectile.friendly = true;
             Projectile.hostile = false;
+            Projectile.DamageType = DamageClass.Generic;
             AIType = ProjectileID.DangerousSpider;
+            Projectile.minion = false;
             Projectile.minionSlots = 0;
             Projectile.usesIDStaticNPCImmunity = false;
             Projectile.usesLocalNPCImmunity = true;

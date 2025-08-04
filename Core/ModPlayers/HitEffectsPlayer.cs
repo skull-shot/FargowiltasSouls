@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (proj.hostile)
                 return;
 
-            if (MinionCrits && proj.DamageType.CountsAsClass(DamageClass.Summon) && proj.type != ModContent.ProjectileType<SpiderEnchantSpiderling>())
+            if (MinionCrits && proj.DamageType.CountsAsClass(DamageClass.Summon))
             {
                 if (Main.rand.Next(100) < Player.ActualClassCrit(DamageClass.Summon))
                     modifiers.SetCrit();
@@ -91,7 +91,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
                         {
                             bool wiz = Player.ForceEffect<SpiderEffect>();
-                            int baseDamage = wiz ? 33 : 22;
+                            int baseDamage = wiz ? 27 : 18;
                             SpiderCD = 30;
                             FargoSoulsUtil.NewSummonProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), baseDamage, 0.5f, Main.myPlayer);
                         }
