@@ -319,6 +319,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     SoundEngine.PlaySound(SoundID.WormDig with { Pitch = -0.2f }, NPC.Center);
                 Vector2 vel = NPC.velocity.RotatedByRandom(MathHelper.PiOver4 * 0.27f) * Main.rand.NextFloat(0.4f, 0.6f);
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptionThorns, vel.X, vel.Y);
+
+                Lighting.AddLight(NPC.Center - Vector2.UnitY * 16, TorchID.Corrupt);
             }
             Telegraph = false;
             ContactDamage = true;
@@ -417,7 +419,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 else if (heads == 1)
                     waitTime = 60;
             }
-            if (Timer > waitTime)
+            if (Timer > waitTime && (heads < 3 || Main.rand.NextBool(10)))
             {
                 List<Attacks> attacks = [Attacks.BurrowSpit, Attacks.BurrowBelow, Attacks.BurrowSide];
 
@@ -456,7 +458,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 targetPos.Y += UndergroundLength;
                 float xDif = targetPos.X - NPC.Center.X;
 
-                Movement(targetPos, 1.7f);
+                Movement(targetPos, 2.5f);
                 if (Timer > windup && Math.Abs(xDif) < 80)
                 {
                     Timer = -1;
@@ -518,7 +520,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             dir = dir.RotatedByRandom(MathHelper.PiOver2 * 0.22f);
                         if (FargoSoulsUtil.HostCheck)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 16,
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 10,
                                 ProjectileID.CursedFlameHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                         }
                     }
@@ -534,15 +536,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public void BurrowBelow()
         {
             int windup = 40;
-            Vector2 targetPos = new(ExtraAI0, Target.Center.Y - 400);
+            Vector2 targetPos = new(Target.Center.X + Target.velocity.X * 80, Target.Center.Y - 400);
             targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
             targetPos = UnevenGroundFix(targetPos, Target);
             if (Timer >= 0) // first part
             {
-                if (Timer == 0)
-                {
-                    ExtraAI0 = (int)(Target.Center.X + Target.velocity.X * 80);
-                }
 
                 Timer++;
 
@@ -551,7 +549,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
                 targetPos.Y += UndergroundLength;
-                Movement(targetPos, 1.7f);
+                Movement(targetPos, 2.5f);
                 if (Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
@@ -674,7 +672,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 float xDif = targetPos.X - NPC.Center.X;
 
-                Movement(targetPos, 1.7f);
+                Movement(targetPos, 2.5f);
                 if (Math.Abs(xDif) < 5)
                 {
                     Timer = -1;
@@ -873,7 +871,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (Timer == -1000 - windupTime || Timer == -1000 - windupTime - chargeTime - windupTime)
                             {
                                 NPC.velocity = dir * 17;
-                                SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                                SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.25f }, NPC.Center);
                             }
                         }
                         else if ((Timer <= -1000 - windupTime && Timer >= -1000 - windupTime - chargeTime) || (Timer <= -1000 - windupTime * 2 - chargeTime && Timer >= -1000 - (windupTime + chargeTime) * 2))
@@ -881,13 +879,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             NPC.velocity = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2() * 17;
                         }
                         else
-                            NPC.velocity.Y += 0.5f;
+                        {
+                            if (NPC.velocity.Y < 12)
+                                NPC.velocity.Y += 0.5f;
+                        }
+                            
 
                         bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
                         collision = collision || NPC.Center.Y > Target.Center.Y;
                         if (collision && Timer < -1000 - windupTime * 2 - chargeTime * 2 - endTime)
                         {
-                            ComboTimer = 60 * 18;
+                            ComboTimer = 60 * 26;
                             EndAttack();
                             return;
                         }

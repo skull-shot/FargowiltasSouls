@@ -16,6 +16,11 @@ ClientConfig: {
 		Tooltip: Если включена, у предметов с любыми выключенными эффектами в описании будет строчка об этом.
 	}
 
+	ItemBalanceTooltip: {
+		// Label: Balance Change Tooltips
+		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+	}
+
 	ToggleSearchReset: {
 		Label: Полоска поиска меню переключателей эффектов перезапускается при закрытии
 		Tooltip: ""
