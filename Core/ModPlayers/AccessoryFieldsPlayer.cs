@@ -185,6 +185,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int SpectreGhostTime;
         public int ForbiddenCD;
         public bool MinionCrits;
+        public int SpiderCD;
         //public bool squireReduceIframes;
         public bool FreezeTime;
         public int freezeLength;

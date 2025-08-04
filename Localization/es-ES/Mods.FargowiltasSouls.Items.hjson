@@ -596,10 +596,9 @@ SpiderEnchant: {
 	// DisplayName: Spider Enchantment
 	/* Tooltip:
 		'''
-		Your summon weapons can crit for 1.5x damage
-		Summon crits deal reduced damage if you're holding a non-Summoner weapon
-		Extra base damage from summon crits is capped at 100
 		+10% critical strike chance
+		Your summon weapons can crit for 1.25x damage
+		Summon crits instead deal 1.15x damage if you're holding a non-Summoner weapon
 		'Arachnophobia is punishable by arachnid induced death'
 		''' */
 }
@@ -758,7 +757,7 @@ UniverseCore: {
 		'''
 		Your critical strikes can critically strike
 		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
-		These supercrits deal 4x damage and inflict Flames of the Cosmos
+		These supercrits deal double damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
 }
@@ -800,8 +799,8 @@ LifeForce: {
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +15% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
-		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
+		[i:FargowiltasSouls/SpiderEnchant] +10% critical strike chance
+		[i:FargowiltasSouls/SpiderEnchant] Your summoner damage can crit for 1.25x damage
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
 		'Rare is a living thing that dare disobey your will'

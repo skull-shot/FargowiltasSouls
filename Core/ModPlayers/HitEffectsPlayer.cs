@@ -24,6 +24,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Projectiles.Armor;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -34,7 +35,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (proj.hostile)
                 return;
 
-            if (MinionCrits && FargoSoulsUtil.IsSummonDamage(proj))
+            if (MinionCrits && proj.DamageType.CountsAsClass(DamageClass.Summon) && proj.type != ModContent.ProjectileType<SpiderEnchantSpiderling>())
             {
                 if (Main.rand.Next(100) < Player.ActualClassCrit(DamageClass.Summon))
                     modifiers.SetCrit();
@@ -66,13 +67,35 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
+            if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
+            {
+                float crit = 0f; // spider enchant crits don't deal extra damage, but summon spiderlings
+                if (EridanusSet || Player.HasEffect<LifeForceEffect>())
+                {
+                    crit = 0.25f; // crits deal 1.25x damage
+                    if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                        crit = 0.15f; // crits reduced to 1.15x
+                }
 
+                modifiers.CritDamage -= (modifiers.CritDamage.Additive - 1) * (1 - crit);
+            }
 
             modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
             {
 
                 if (hitInfo.Crit)
                 {
+                    if (MinionCrits && Player.HasEffectEnchant<SpiderEffect>() && damageClass.CountsAsClass(DamageClass.Summon))
+                    {
+                        // summon spiderlings
+                        if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
+                        {
+                            bool wiz = Player.ForceEffect<SpiderEffect>();
+                            int baseDamage = wiz ? 33 : 22;
+                            SpiderCD = 30;
+                            FargoSoulsUtil.NewSummonProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), baseDamage, 0.5f, Main.myPlayer);
+                        }
+                    }
                     if (UniverseCore) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 3;
@@ -83,26 +106,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
-                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
-                    {
-                        float critDamageMult = 0.75f; // 1f
-                                                      //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                                                      //critDamageMult *= 0.75f;
-                        if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
-                            critDamageMult *= 0.75f;
-                        if (!EridanusSet && !Ambrosia)
-                        {
-                            float damageCap = (hitInfo.Damage / 2) + 100;
-                            if (hitInfo.Damage * critDamageMult > damageCap)
-                            {
-                                critDamageMult = damageCap / hitInfo.Damage;
-                            }
-                        }
-                        if (critDamageMult != 1)
-                            hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
-                    }
+
 
                 }
+
 
                 if (Hexed)
                 {
