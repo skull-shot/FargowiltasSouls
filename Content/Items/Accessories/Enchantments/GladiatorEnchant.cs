@@ -80,10 +80,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.GladiatorStandardCD--;
             if (player.HasBuff<GladiatorBuff>())
             {
-                float stats = 0.05f;
+                float stats = 0.08f;
                 if (modPlayer.ForceEffect<GladiatorEnchant>())
-                    stats = 0.1f;
-                player.GetDamage(DamageClass.Generic) += stats;
+                    stats = 0.16f;
+                //player.GetDamage(DamageClass.Generic) += stats;
                 player.endurance += stats;
                 player.noKnockback = true;
             }

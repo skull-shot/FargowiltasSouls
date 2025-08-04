@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
         }
+        public override bool? CanHitNPC(NPC target) => false;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 300);

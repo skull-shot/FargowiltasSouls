@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer farg = player.FargoSouls();
             bool attacking =  farg.WeaponUseTimer > 0;
             int adamTime = 300;
-            float adamSpeed = 0.4f;
+            float adamSpeed = 0.3f;
 
             if (!attacking && farg.EarthTimer < EarthMaxCharge)
             {
@@ -110,7 +110,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             //player.GetDamage(DamageClass.Generic) *= MathHelper.Lerp(1, 0.3f, lerper);
             
             if (player.HasEffect<MythrilEffect>())
-                farg.AttackSpeed *= MathHelper.Lerp(1, 2f, lerper);
+                farg.AttackSpeed *= MathHelper.Lerp(1, 1.75f, lerper);
 
             if (player.HasEffect<PalladiumHealing>())
                 player.lifeRegen += (int)MathHelper.Lerp(3, 20, lerper);
@@ -155,7 +155,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 return;
             float lerper = GetEarthForceLerpValue(player);
             int debuffDamage = (int)(baseDamage * MathHelper.Lerp(1, 0.75f, lerper));
-            debuffDamage = (int)(debuffDamage * 0.75f);
+            debuffDamage = (int)(debuffDamage * 0.5f);
             //divide by 2.3 because want to deal that damage over the course of ~6.6 seconds, deal a bit more than the actual missing damage to compensate for constant re-application of debuff without increasing the duration
             // Change damage to average of old and new damage to make it less affected by random extreme variation in damage
             target.FargoSouls().EarthDoTValue = (int)MathHelper.Lerp(target.FargoSouls().EarthDoTValue, debuffDamage / 2.3f, 0.5f);

@@ -301,7 +301,7 @@ Lifelight: {
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/FragilePixieLamp] в освящении днём.
+		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/CrystallineEffigy] в освящении днём.
 		DespawnMessage: Жизнесвет угасает...
 	}
 
