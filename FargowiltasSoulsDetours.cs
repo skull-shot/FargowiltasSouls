@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.PlayerDrawLayers;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
@@ -33,7 +34,11 @@ namespace FargowiltasSouls
     {
         private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
 
+        private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
+
         public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
+
+        public delegate int Orig_StrikeNPC_HitInfo_bool_bool(NPC nPC, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction);
 
         public void LoadDetours()
         {
@@ -105,6 +110,7 @@ namespace FargowiltasSouls
         void ICustomDetourProvider.ModifyMethods()
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
+            HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -440,8 +446,8 @@ namespace FargowiltasSouls
             }
         }
 
-        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self) // this detour makes it so Arrow Rain projectiles spawned from max stack
-        {                                                                                        // Red Riding Enchantment do not proc Phantasm's phantom arrows
+        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
+        {// this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
             int phantasmTime = -1;
             var player = Main.player[self.owner];
             bool phantasmAverted = false;
@@ -461,10 +467,24 @@ namespace FargowiltasSouls
         }
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
-        {
+        {// hallowed dodge nerf
             orig(self);
             if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
                 self.shadowDodgeTimer = 60 * 60;
+        }
+
+        public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
+        {// sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
+            if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
+            {
+                if (FargoSoulsGlobalProjectile.globalProjectileField.CritChance - FargoSoulsGlobalProjectile.ninjaCritIncrease < 0)
+                    FargoSoulsGlobalProjectile.globalProjectileField.CritChance = 0;
+                else FargoSoulsGlobalProjectile.globalProjectileField.CritChance -= FargoSoulsGlobalProjectile.ninjaCritIncrease;
+                // reset these
+                FargoSoulsGlobalProjectile.globalProjectileField = null;
+                FargoSoulsGlobalProjectile.ninjaCritIncrease = 0;
+            }
+            return orig(self, hit, fromNet, noPlayerInteraction);
         }
     }
 }
