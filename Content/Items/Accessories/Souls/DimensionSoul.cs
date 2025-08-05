@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -77,14 +79,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(null, "ColossusSoul")
-            .AddIngredient(null, "SupersonicSoul")
-            .AddIngredient(null, "FlightMasterySoul")
-            .AddIngredient(null, "TrawlerSoul")
-            .AddIngredient(null, "WorldShaperSoul")
-            .AddIngredient(null, "AbomEnergy", 10)
+            .AddIngredient<ColossusSoul>()
+            .AddIngredient<SupersonicSoul>()
+            .AddIngredient<FlightMasterySoul>()
+            .AddIngredient<TrawlerSoul>()
+            .AddIngredient<WorldShaperSoul>()
+            .AddIngredient<AbomEnergy>(10)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
             .Register();
         }

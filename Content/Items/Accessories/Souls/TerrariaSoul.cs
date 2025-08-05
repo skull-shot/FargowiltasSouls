@@ -1,6 +1,8 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -121,8 +123,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             foreach (int force in Forces)
                 recipe.AddIngredient(force);
 
-            recipe.AddIngredient(null, "AbomEnergy", 10)
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            recipe.AddIngredient<AbomEnergy>(10)
+            .AddTile<CrucibleCosmosSheet>()
             .Register();
         }
     }
