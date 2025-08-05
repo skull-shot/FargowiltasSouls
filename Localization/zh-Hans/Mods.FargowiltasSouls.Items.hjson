@@ -3767,3 +3767,13 @@ WillMask: {
 	DisplayName: 意志英灵面具
 	Tooltip: ""
 }
+
+HallowedPendant: {
+	// DisplayName: Hallowed Pendant
+	// Tooltip: ""
+}
+
+MoltenShield: {
+	// DisplayName: Molten Shield
+	// Tooltip: ""
+}

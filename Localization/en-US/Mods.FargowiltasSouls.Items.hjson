@@ -3709,3 +3709,13 @@ WillMask: {
 	DisplayName: Will Champion Mask
 	Tooltip: ""
 }
+
+HallowedPendant: {
+	DisplayName: Hallowed Pendant
+	Tooltip: ""
+}
+
+MoltenShield: {
+	DisplayName: Molten Shield
+	Tooltip: ""
+}
