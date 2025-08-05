@@ -72,8 +72,6 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     //colorLerp = lerp(colorLerp, colorLerp * textureMesh + 0.3, 0.2);
     float4 color;
     float split = 0.9;
-    //if (!border)
-    //    colorLerp = split + (1 - split) * colorLerp;
     if (colorLerp < split)
     {
         colorLerp = pow(colorLerp / split, 4);

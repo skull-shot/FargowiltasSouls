@@ -1,37 +1,36 @@
-﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Core.Systems;
-using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
-    public class AbomDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
+    public class AbomFlamePillarMark : BaseDeathray
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
-        public AbomDeathray() : base(120, 6000) { }
-        private Vector2 spawnPos;
-        public bool fadeStart = false;
+        public AbomFlamePillarMark() : base(30) { }
+
+        public override bool? CanDamage()
+        {
+            return false;
+        }
 
         public override void AI()
         {
-            if (!Main.dedServ && Main.LocalPlayer.active)
-                FargoSoulsUtil.ScreenshakeRumble(5);
-
             Vector2? vector78 = null;
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            /*if (Main.npc[(int)Projectile.ai[1]].active && Main.npc[(int)Projectile.ai[1]].type == ModContent.\1Type<\2>\(\))
+            int npcID = (int)Projectile.ai[1];
+            if (npcID.IsWithinBounds(Main.maxNPCs) && Main.npc[npcID] is NPC npc && npc.TypeAlive<AbomBoss>())
+            {
+                //Projectile.Center += npc.velocity;
+            }
+            /*if (Main.npc[(int)Projectile.ai[1]].active && Main.npc[(int)Projectile.ai[1]].type == ModContent.NPCType<MutantBoss>())
             {
                 Projectile.Center = Main.npc[(int)Projectile.ai[1]].Center;
             }
@@ -44,47 +43,22 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            if (Projectile.localAI[0] == 0f)
+            /*if (Projectile.localAI[0] == 0f)
             {
-                if (!Main.dedServ)
-                    SoundEngine.PlaySound(FargosSoundRegistry.GenericDeathray, Projectile.Center);
-                spawnPos = Projectile.Center;
-            }
-            else //vibrate beam
-            {
-                Projectile.Center = spawnPos + Main.rand.NextVector2Circular(5, 5);
-            }
-
-            float num801 = 5f;
+                SoundEngine.PlaySound(SoundID.Zombie104, Projectile.Center);
+            }*/
+            float num801 = 0.3f;
             Projectile.localAI[0] += 1f;
             if (Projectile.localAI[0] >= maxTime)
             {
                 Projectile.Kill();
                 return;
             }
-            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * num801 * 6f;
+            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 0.6f * num801;
             if (Projectile.scale > num801)
             {
                 Projectile.scale = num801;
             }
-
-            if (Projectile.localAI[0] > maxTime / 2 && Projectile.scale < num801)
-            {
-                if (Projectile.ai[0] > 0)
-                {
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        for (int i = Main.rand.Next(150); i < 6000; i += 300)
-                        {
-                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center + Projectile.velocity * i, Vector2.Zero,
-                                ModContent.ProjectileType<AbomScytheSplit>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], -1f);
-                        }
-                    }
-
-                    Projectile.ai[0] = 0;
-                }
-            }
-
             //float num804 = Projectile.velocity.ToRotation();
             //num804 += Projectile.ai[0];
             //Projectile.rotation = num804 - 1.57079637f;
@@ -139,40 +113,17 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.position -= Projectile.velocity;
             Projectile.rotation = Projectile.velocity.ToRotation() - 1.57079637f;
         }
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+
+        public override void OnKill(int timeLeft)
         {
-            if (WorldSavingSystem.EternityMode)
+            if (FargoSoulsUtil.HostCheck)
             {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
+                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<AbomFlamePillar>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], Projectile.ai[1]);
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    Main.projectile[p].As<AbomFlamePillar>().fadeStart = true;
+                }
             }
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
-        }
-
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale;
-
-        public static Color ColorFunction(float _) => new(253, 254, 32, 100);
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            
-            return false;
-        }
-
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            Main.spriteBatch.UseBlendState(BlendState.Additive);
-            List<Vector2> laserPositions = Projectile.GetLaserControlPoints(12, drawDistance);
-
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.FlameFieldShader");
-            shader.TrySetParameter("laserDirection", Projectile.velocity);
-            shader.TrySetParameter("screenPosition", Main.screenPosition);
-            shader.SetTexture(FargoAssets.WavyNoise.Value, 1, SamplerState.LinearWrap);
-
-            PrimitiveSettings laserSettings = new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader);
-            PrimitiveRenderer.RenderTrail(laserPositions, laserSettings, 60);
-            Main.spriteBatch.ResetToDefault();
         }
     }
 }
