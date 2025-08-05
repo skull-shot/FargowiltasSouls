@@ -310,9 +310,9 @@ MeteorEnchant: {
 	DisplayName: Meteor Enchantment
 	Tooltip:
 		'''
-		Greatly increases your movement speed and acceleration, and decreases your momentum
 		Hitting an enemy occasionally drops a meteor on them, dealing magic damage
 		Meteor cooldown is decreased faster the more you move around
+		[i:Magiluminescence] Effects of Magiluminescence
 		'Drop a draco on 'em'
 		'''
 }

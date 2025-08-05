@@ -32,10 +32,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // magilumi lighting
-            DelegateMethods.v3_1 = new Vector3(0.9f, 0.8f, 0.5f);
-            Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
-            Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
             AddEffects(player, Item);
         }
         public static void AddEffects(Player player, Item item)
@@ -68,14 +64,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.whoAmI == Main.myPlayer)
             {
-                if (!player.FargoSouls().NoMomentum && !player.mount.Active) //overriden by nomomentum
+                player.hasMagiluminescence = true;
+                // magilumi lighting
+                DelegateMethods.v3_1 = new Vector3(1.2f, 0.6f, 0.4f);
+                Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
+                Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
+
+                /*if (!player.FargoSouls().NoMomentum && !player.mount.Active) //overriden by nomomentum
                 {
                     player.runAcceleration *= 1.3f;
                     player.runSlowdown *= 1.3f;
-
                 }
-                player.hasMagiluminescence = true;
-                /*
                 if (player.HasEffect<MeteorTrailEffect>())
                 {
                     const int SparkDelay = 2;
