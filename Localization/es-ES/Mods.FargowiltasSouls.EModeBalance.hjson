@@ -14,7 +14,7 @@
 // WaterBolt: Cannot be used until Skeletron is defeated
 // SpaceGun: Cannot be used until an evil boss is defeated
 // DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-// HolyDodge: Dodge cooldown increased to 60 seconds
+// HolyDodge: Dodge cooldown increased to 45 seconds
 // ZenithNone: No nerfs in effect
 // ZenithHitRate: "Vastly reduced hit rate, improves by defeating: "
 // VampireKnives: Reduced lifesteal rate when above 50% life
@@ -32,7 +32,7 @@
 // ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 // MinionStack: Damage of minions diminishes when summoning over 3 copies (effect caps at 12)
 // SummonMulticlass: Summon damage decreases when you attack using other classes (except in OOA)
-// ShadowDodge: Eternity Mode: Dodge cooldown increased to 60 seconds
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 45 seconds
 // IceBarrier: Eternity Mode: 10% reduced damage
 // SwordRework: Reworked broadsword swing animation
 // SpearRework: Reworked spear swing animation

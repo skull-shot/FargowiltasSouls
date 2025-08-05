@@ -29,6 +29,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
+
+            Projectile.light = 1;
         }
 
         public override void AI()

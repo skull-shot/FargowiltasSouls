@@ -141,7 +141,7 @@ CopperEnchant: {
 	DisplayName: Copper Enchantment
 	Tooltip:
 		'''
-		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies, dealing ranged damage
+		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies
 		Wet enemies can be shocked without a critical strike
 		5 second cooldown, reduced by critical strikes and hits on wet enemies
 		'And his music was electric'
@@ -672,7 +672,7 @@ TungstenEnchant: {
 	Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback
+		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
 		2.5 second cooldown
 		'Bigger is always better'
 		'''
@@ -705,7 +705,7 @@ VortexEnchant: {
 	DisplayName: Vortex Enchantment
 	Tooltip:
 		'''
-		Your attacks against very distant enemies fire a piercing laser that deals ranged damage
+		Your attacks against very distant enemies fire a piercing laser
 		10 second cooldown
 		'Tear into reality'
 		'''

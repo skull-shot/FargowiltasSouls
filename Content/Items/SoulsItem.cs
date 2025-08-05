@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Localization;
+using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -37,6 +39,16 @@ namespace FargowiltasSouls.Content.Items
         /// <param name="tooltips"></param>
         public virtual void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
+        }
+
+        /// <summary>
+        /// Return a number greater than 0 to make the item auto-generate a tooltip that shows its damage value. Meant for accessories.
+        /// </summary>
+        public virtual int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            return 0;
         }
 
         /// <summary>
@@ -170,6 +182,46 @@ namespace FargowiltasSouls.Content.Items
                         tooltips.Insert(firstTooltip + 2, descTooltip);
                 }
             }
+
+            int damage = DamageTooltip(out DamageClass damageClass, out Color? tooltipColor);
+            if (damage > 0)
+            {
+                int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                if (firstTooltip > 0)
+                {
+                    string tip;
+                    if (damageClass != null)
+                    {
+                        bool addLeadingSpace = damageClass is not VanillaDamageClass;
+                        tip = addLeadingSpace ? " " : "" + damageClass.DisplayName;
+                    }
+                    else
+                    {
+                        tip = Lang.tip[55].Value; // No damage class
+                    }
+                    string damageText = damage.ToString();
+                    string text = damageText + tip;
+                    var damageTooltip = new TooltipLine(Mod, $"{Mod.Name}:DamageTooltip", text);
+                    if (tooltipColor.HasValue)
+                        damageTooltip.OverrideColor = tooltipColor;
+                    else if (damageClass != null)
+                        damageTooltip.OverrideColor = DamageClassColor(damageClass);
+                    tooltips.Insert(firstTooltip, damageTooltip);
+                }
+            }
+        }
+
+        public static Color DamageClassColor(DamageClass damageClass)
+        {
+            if (damageClass.CountsAsClass(DamageClass.Melee))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Ranged))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Magic))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Summon))
+                return Color.White;
+            return Color.White;
         }
     }
 }

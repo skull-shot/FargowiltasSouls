@@ -48,7 +48,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class PearlwoodEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        private static bool pearlwoodCrit; // whether this crit should sparkle/is caused by pearlwood
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -76,7 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.PearlwoodCritDuration <= 0)
                 return;
 
-            if (hitInfo.Crit && pearlwoodCrit)
+            if (hitInfo.Crit)
             {
                 //SoundEngine.PlaySound(SoundID.Item25, target.position);
                 for (int i = 0; i < 7; i++)
@@ -94,58 +93,36 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     p.Spawn();
                 }
             }
-            pearlwoodCrit = false;
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, proj.DamageType, proj);
+            int critChance = (int)player.ActualClassCrit(proj.DamageType) + FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            PearlwoodCritReroll(player, ref modifiers, critChance);
         }
         public override void ModifyHitNPCWithItem(Player player, Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, item.DamageType);
+            PearlwoodCritReroll(player, ref modifiers, (int)player.ActualClassCrit(item.DamageType));
         }
-        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, DamageClass damageClass, Projectile? proj = null)
+        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, int critChance)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            FargoSoulsGlobalProjectile? globalProj = null;
-            if (proj is not null)
-                globalProj = proj.FargoSouls();
 
-            if (modPlayer.PearlwoodCritDuration <= 0)
+            if (modPlayer.PearlwoodCritDuration <= 0 || critChance <= 0 || critChance >= 100)
                 return;
 
             if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
                 return;
 
-            var _critOverrideField = typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags);
-            bool? _critOverrideBool = null;
-            if (_critOverrideField is not null)
-                _critOverrideBool = _critOverrideField.GetValue(modifiers) as bool?;
-            if (_critOverrideBool == true || (globalProj is not null && _critOverrideBool == false && globalProj.canForceCrit == false))
+            if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? is not null)
                 return;
 
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {
-                if (Main.rand.Next(0, 100) <= ((globalProj is not null && globalProj.postNinjaCrit > 0) ? globalProj.postNinjaCrit : player.ActualClassCrit(damageClass)))
+                if (Main.rand.Next(0, 100) <= critChance)
                 {
-                    if (globalProj is not null && globalProj.canForceCrit == true)
-                    {
-                        var CritDamage = modifiers.CritDamage;
-                        modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
-                        {
-                            if (hitInfo.Crit != true)
-                            {
-                                hitInfo.Crit = true;
-                                hitInfo.Damage = (int)CritDamage.ApplyTo(hitInfo.Damage);
-                            }
-                        };
-                    }
-                    else
-                    {
-                        modifiers.SetCrit();
-                    }
-                    pearlwoodCrit = true;
+                    modifiers.SetCrit();
+                    break; // no need for this to run twice
                 }
             }
         }

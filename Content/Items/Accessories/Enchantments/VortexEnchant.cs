@@ -53,6 +53,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.LunarCraftingStation)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor)
+        {
+            int dmg = VortexEffect.BaseDamage(Main.LocalPlayer);
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return dmg;
+        }
     }
     public class VortexProjGravity : AccessoryEffect
     {
@@ -85,18 +92,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<VortexEnchant>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player)
+        {
+            int dmg = 9750;
+            if (player.ForceEffect<VortexEffect>())
+                dmg = 18000;
+            dmg /= 2;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
+        }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.VortexCD <= 0 && player.Distance(target.Hitbox.ClosestPointInRect(player.Center)) > 450)
             {
                 bool force = modPlayer.ForceEffect<VortexEnchant>();
-                int dmg = 9750;
-                if (force)
-                    dmg = 18000;
-                dmg /= 2;
+                int damage = BaseDamage(player);
                 Vector2 velocity = player.DirectionTo(target.Center);
-                int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
                 FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), damage, 0f, modPlayer.Player.whoAmI, 1f);
                 float cd = 10;
                 modPlayer.VortexCD = LumUtils.SecondsToFrames(cd);

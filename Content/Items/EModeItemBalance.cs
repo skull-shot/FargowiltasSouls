@@ -579,6 +579,9 @@ namespace FargowiltasSouls.Content.Items
             if (!WorldSavingSystem.EternityMode)
                 return;
 
+            if (!ClientConfig.Instance.ItemBalanceTooltip)
+                return;
+
             //if (item.damage > 0 && (item.ammo == AmmoID.Arrow || item.ammo == AmmoID.Bullet || item.ammo == AmmoID.Dart))
             //{
             //    tooltips.Add(new TooltipLine(Mod, "masoAmmoNerf", "[c/ff0000:Eternity Mode:] Contributes 50% less damage to weapons"));
