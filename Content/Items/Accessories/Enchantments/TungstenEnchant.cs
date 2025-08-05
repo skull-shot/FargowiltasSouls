@@ -54,6 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddTile(TileID.DemonAltar)
                 .Register();
         }
+
     }
     public class TungstenShockwaveEffect : AccessoryEffect
     {
