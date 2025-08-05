@@ -204,9 +204,24 @@ namespace FargowiltasSouls.Content.Items
                     var damageTooltip = new TooltipLine(Mod, $"{Mod.Name}:DamageTooltip", text);
                     if (tooltipColor.HasValue)
                         damageTooltip.OverrideColor = tooltipColor;
+                    else if (damageClass != null)
+                        damageTooltip.OverrideColor = DamageClassColor(damageClass);
                     tooltips.Insert(firstTooltip, damageTooltip);
                 }
             }
+        }
+
+        public static Color DamageClassColor(DamageClass damageClass)
+        {
+            if (damageClass.CountsAsClass(DamageClass.Melee))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Ranged))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Magic))
+                return Color.White;
+            if (damageClass.CountsAsClass(DamageClass.Summon))
+                return Color.White;
+            return Color.White;
         }
     }
 }
