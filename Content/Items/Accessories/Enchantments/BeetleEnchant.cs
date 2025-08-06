@@ -124,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             var modPlayer = player.FargoSouls();
             if (modPlayer.BeetleHitCD > 0 || modPlayer.Beetles <= 0)
                 return;
-            modPlayer.Beetles -= 2;
+            modPlayer.Beetles -= 3;
             if (modPlayer.Beetles < 0)
                 modPlayer.Beetles = 0;
             modPlayer.BeetleHitCD = 60 * 3;
