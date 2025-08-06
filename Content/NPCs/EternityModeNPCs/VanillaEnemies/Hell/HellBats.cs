@@ -21,14 +21,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public static int DeathChargeTime = 80;
         public override void SetDefaults(NPC npc)
         {
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 npc.lifeMax = 300;
             }
         }
         public override bool SafePreAI(NPC npc)
         {
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 if (Death)
                 {

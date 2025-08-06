@@ -2,16 +2,20 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items.Accessories
 {
@@ -35,9 +39,8 @@ namespace FargowiltasSouls.Content.Items.Accessories
         }
         public static void ActiveEffects(Player player, Item item)
         {
-            player.AddEffect<DefenseStarEffect>(item);
-            player.AddEffect<DefenseBeeEffect>(item);
             player.longInvince = true;
+            player.AddEffect<HallowedPendantEffect>(item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -62,23 +65,33 @@ namespace FargowiltasSouls.Content.Items.Accessories
                 .Register();
         }
     }
-
-    public class DefenseBeeEffect : AccessoryEffect
+    public class HallowedPendantEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ColossusHeader>();
-        public override int ToggleItemType => ItemID.BeeCloak;
+        public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
+        public override int ToggleItemType => ModContent.ItemType<HallowedPendant>();
         public override void PostUpdateEquips(Player player)
         {
-            player.honeyCombItem = EffectItem(player);
+            // onhit dodge
         }
-    }
-    public class DefenseStarEffect : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<ColossusHeader>();
-        public override int ToggleItemType => ItemID.StarVeil;
-        public override void PostUpdateEquips(Player player)
+        public override void OnHitByEither(Player player, NPC npc, Projectile proj)
         {
-            player.starCloakItem = EffectItem(player);
+            if (EffectItem(player).type == ModContent.ItemType<HallowedPendant>())
+                PendantRays(player, 450, 500);
+        }
+        public static void PendantRays(Player player, int baseDamage, int maxDistance)
+        {
+            List<NPC> enemies = Main.npc.Where(n => n.Alive() && n.CanBeChasedBy() && n.DistanceSQ(player.Center) < maxDistance * maxDistance && Collision.CanHitLine(player.Center, 0, 0, n.Center, 0, 0)).OrderBy(n => n.Distance(player.Center)).ToList();
+            for (int i = 0; i < 4; i++)
+            {
+                if (i >= enemies.Count)
+                    break;
+                NPC npc = enemies[i];
+                if (player.whoAmI == Main.myPlayer)
+                {
+                    Vector2 vel = (npc.Center - player.Center) * maxDistance * 0.01f / 660;
+                    Projectile.NewProjectile(player.GetSource_EffectItem<HallowedPendantEffect>(), player.Center, vel, ModContent.ProjectileType<HallowRay>(), baseDamage, 1f, player.whoAmI);
+                }
+            }
         }
     }
 }

@@ -192,7 +192,7 @@ SupersonicJumps: Прыжки
 SupersonicRocketBoots: Реактивные сапоги
 SupersonicCarpet: Ковёр-самолёт
 CthulhuShield: Щит Ктулху
-BlackBelt: Чёрный пояс
+// SupersonicDodge: Supersonic Dodge
 SupersonicPanic: Паника при уроне
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: Споровый мешок

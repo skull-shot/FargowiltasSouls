@@ -193,9 +193,6 @@ namespace FargowiltasSouls.Core.Toggler
 
             player.SetToggleValue<BuilderEffect>(false);
 
-            player.SetToggleValue<DefenseStarEffect>(false);
-            player.SetToggleValue<DefenseBeeEffect>(false);
-
             player.SetToggleValue<SupersonicClimbing>(false);
 
             player.SetToggleValue<TrawlerSporeSac>(false);

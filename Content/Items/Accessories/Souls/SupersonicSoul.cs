@@ -93,39 +93,35 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //ninja gear
             if (Player.AddEffect<SupersonicTabi>(item))
                 Player.dashType = 1;
-            if (Player.AddEffect<BlackBelt>(item))
-                Player.blackBelt = true;
-            if (Player.AddEffect<BlackBelt>(item))
-                Player.spikedBoots = 2;
-
-            //sweetheart necklace
-            if (Player.HasEffect<DefenseBeeEffect>() || Player.AddEffect<DefenseBeeEffect>(item))
+            if (Player.AddEffect<SupersonicClimbing>(item))
             {
-                Player.honeyCombItem = item;
+                Player.spikedBoots = 2;
             }
+            player.AddEffect<SupersonicDodge>(item);
+
             if (Player.AddEffect<SupersonicPanic>(item))
             {
                 Player.panic = true;
             }
+
+            // hallowed pendant
+            HallowedPendant.ActiveEffects(Player, item);
+            // BoC
+            //player.AddEffect<DefenseBrainEffect>(item);
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
 
-            .AddIngredient(ModContent.ItemType<AeolusBoots>()) //add terraspark boots
-            .AddIngredient(ItemID.FlyingCarpet)
-            .AddIngredient(ItemID.SweetheartNecklace)
-            .AddIngredient(ItemID.BalloonHorseshoeHoney)
-            .AddIngredient(ItemID.HorseshoeBundle)
-            .AddIngredient(ItemID.EoCShield)
+            .AddIngredient<AeolusBoots>()
+            .AddIngredient<HallowedPendant>()
             .AddIngredient(ItemID.MasterNinjaGear)
-
-            .AddIngredient(ItemID.MinecartMech)
-            .AddIngredient(ItemID.BlessedApple)
-            .AddIngredient(ItemID.AncientHorn)
-            .AddIngredient(ItemID.ReindeerBells)
-            .AddIngredient(ItemID.BrainScrambler)
+            .AddIngredient(ItemID.EoCShield)
+            .AddIngredient(ItemID.BrainOfConfusion)
+            .AddIngredient(ItemID.FlyingCarpet)
+            .AddIngredient(ItemID.HorseshoeBundle)
+            .AddIngredient(ItemID.SweetheartNecklace) // or panic necklace
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
 
@@ -174,11 +170,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override int ToggleItemType => ItemID.Tabi;
         
     }
-    public class BlackBelt : AccessoryEffect
+    public class SupersonicDodge : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
 
         public override int ToggleItemType => ItemID.BlackBelt;
+        public override void PostUpdateEquips(Player player)
+        {
+            player.FargoSouls().SupersonicDodge = true;
+        }
     }
     public class SupersonicClimbing : AccessoryEffect
     {
@@ -192,4 +192,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override int ToggleItemType => ItemID.PanicNecklace;
     }
+    /*
+    public class DefenseBrainEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
+        public override int ToggleItemType => ItemID.BrainOfConfusion;
+
+        public override void PostUpdateEquips(Player player)
+        {
+            player.FargoSouls().DodgeItems++;
+            //player.brainOfConfusionItem = EffectItem(player);
+        }
+    }
+    */
 }

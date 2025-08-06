@@ -1610,11 +1610,10 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		+100 max health, +10% damage reduction, increases life regeneration by 5
+		+50 max life, +20% damage reduction, increases life regeneration by 10
 		Grants immunity to knockback, several debuffs, Shimmering, and fall damage
-		Enemies are more likely to target you
-		Effects of Brain of Confusion, Star Veil, Charm of Myths and Bee Cloak
-		Effects of Shiny Stone, Paladin's Shield, and Frozen Turtle Shell
+		Reduces the cooldown of healing potions by 25%
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
 		''' */
 }
@@ -1636,7 +1635,7 @@ DimensionSoul: {
 	// DisplayName: Soul of Dimensions
 	/* Tooltip:
 		'''
-		+300 max health, +20% damage reduction, increases life regeneration by 8
+		+100 max life, +20% damage reduction, increases life regeneration by 8
 		Grants immunity to knockback and several debuffs
 		Enemies are more likely to target you
 		Allows Supersonic running and infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
@@ -1747,15 +1746,12 @@ SupersonicSoul: {
 	// DisplayName: Supersonic Soul
 	/* Tooltip:
 		'''
-		Allows Supersonic running, flight, and extra mobility on ice
-		Allows the holder to quintuple jump if no wings are equipped
-		Increases jump height, jump speed, and allows auto-jump
-		Flowers grow on the grass you walk on
-		Grants the ability to swim and greatly extends underwater breathing
-		Provides the ability to walk on water and lava
-		Grants immunity to lava and fall damage
-		Effects of Flying Carpet, Shield of Cthulhu and Master Ninja Gear
-		Effects of Sweetheart Necklace and Amber Horseshoe Balloon
+		Allows Supersonic running, dashing, hovering, and extra mobility on ice
+		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
+		Increases movement speed and length of invincibility after taking damage
+		You have a chance to dodge attacks, firing rays of light at nearby enemies
+		Grants the ability to swim, climb walls, walk on water and lava, and greatly extends underwater breathing
+		Grants immunity to lava and fall damage, and flowers grow on the grass you walk on
 		'I am speed'
 		''' */
 }
@@ -3734,10 +3730,24 @@ WillMask: {
 
 HallowedPendant: {
 	// DisplayName: Hallowed Pendant
-	// Tooltip: ""
+	/* Tooltip:
+		'''
+		Increases length of invincibility after taking damage
+		After taking damage, fires a ray of light at up to 4 nearby enemies
+		''' */
 }
 
 MoltenShield: {
-	// DisplayName: Molten Shield
-	// Tooltip: ""
+	// DisplayName: Devilshield
+	/* Tooltip:
+		'''
+		Grants immunity to knockback
+		Reduces damage taken by 20% when at full life, or below 50% life
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		''' */
+}
+
+Devilstone: {
+	// DisplayName: Devilstone
+	// Tooltip: Obtained from demons after defeating Lifelight or Plantera
 }

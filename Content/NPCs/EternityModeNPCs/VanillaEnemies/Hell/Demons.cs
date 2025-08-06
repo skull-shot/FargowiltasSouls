@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public List<int> DevilDemons = [];
         public override void SetDefaults(NPC npc)
         {
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 if (npc.type == NPCID.RedDevil)
                 {
@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             base.OnFirstTick(npc);
 
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 if (npc.type == NPCID.RedDevil)
                 {
@@ -108,12 +108,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public override bool SafePreAI(NPC npc)
         {
             bool lineOfSight = npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0);
-            if (npc.HasPlayerTarget && HellBuffGlobalNPC.HellBuffActive)
+            if (npc.HasPlayerTarget && HellEnemies.HellBuffActive)
             {
                 npc.noTileCollide = !lineOfSight;
             }
 
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 if (npc.type == NPCID.Demon)
                 {

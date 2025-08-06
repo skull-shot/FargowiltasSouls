@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            AddEffects(player, Item, 50, 0.1f, 5);
+            AddEffects(player, Item, 50, 0.2f, 10);
         }
         public static void AddEffects(Player player, Item item, int maxHP, float damageResist, int lifeRegen)
         {
@@ -48,13 +48,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.buffImmune[BuffID.Darkness] = true;
             Player.AddEffect<ShimmerImmunityEffect>(item);
 
-            // hallowed pendant
-            HallowedPendant.ActiveEffects(Player, item);
-
             // molten shield
             MoltenShield.ActiveEffects(Player, item);
-
-            player.AddEffect<DefenseBrainEffect>(item);
 
             Player.noKnockback = true;
             Player.fireWalk = true;
@@ -69,13 +64,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<HallowedPendant>()
             .AddIngredient<MoltenShield>()
+            .AddIngredient(ItemID.AnkhShield)
             .AddIngredient(ItemID.WormScarf)
-            .AddIngredient(ItemID.BrainOfConfusion)
             .AddIngredient(ItemID.CharmofMyths)
             .AddIngredient(ItemID.ShinyStone)
-            .AddIngredient(ItemID.AnkhShield)
             .AddTile<CrucibleCosmosSheet>()
             .Register();
         }
@@ -89,16 +82,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void PostUpdateEquips(Player player)
         {
             player.buffImmune[BuffID.Shimmer] = true;
-        }
-    }
-    public class DefenseBrainEffect : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<ColossusHeader>();
-        public override int ToggleItemType => ItemID.BrainOfConfusion;
-
-        public override void PostUpdateEquips(Player player)
-        {
-            player.brainOfConfusionItem = EffectItem(player);
         }
     }
 }

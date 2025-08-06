@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -33,17 +34,26 @@ namespace FargowiltasSouls.Content.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(0, 12);
+            Item.defense = 10;
+        }
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            ActiveEffects(player, Item);
+            if (player.statLife <= player.statLifeMax2 * 0.5 || player.statLife >= player.statLifeMax2)
+            {
+                player.endurance += 0.20f;
+            }
         }
         public static void ActiveEffects(Player player, Item item)
         {
             player.AddEffect<FleshKnuckleEffect>(item);
-            player.AddEffect<FrozenTurtleEffect>(item);
             player.AddEffect<PaladinShieldEffect>(item);
         }
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.BeetleHusk, 5)
+                .AddIngredient<Devilstone>(5)
                 .AddIngredient(ItemID.HeroShield)
                 .AddIngredient(ItemID.FrozenTurtleShell)
                 .AddTile(TileID.TinkerersWorkbench)
@@ -51,16 +61,12 @@ namespace FargowiltasSouls.Content.Items.Accessories
 
             CreateRecipe()
                 .AddIngredient(ItemID.BeetleHusk, 5)
+                .AddIngredient<Devilstone>(5)
                 .AddIngredient(ItemID.FrozenShield)
                 .AddIngredient(ItemID.FleshKnuckles)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
-            ActiveEffects(player, Item);
-        }
-
     }
 
     public class PaladinShieldEffect : AccessoryEffect
@@ -80,17 +86,6 @@ namespace FargowiltasSouls.Content.Items.Accessories
                     if (target.active && player != target && Vector2.Distance(target.Center, player.Center) < 400) target.AddBuff(BuffID.PaladinsShield, 30);
                 }
             }
-        }
-    }
-    public class FrozenTurtleEffect : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<ColossusHeader>();
-        public override int ToggleItemType => ItemID.FrozenTurtleShell;
-
-        public override void PostUpdateEquips(Player player)
-        {
-            if (player.statLife <= player.statLifeMax2 * 0.5)
-                player.AddBuff(BuffID.IceBarrier, 5, true);
         }
     }
     public class FleshKnuckleEffect : AccessoryEffect

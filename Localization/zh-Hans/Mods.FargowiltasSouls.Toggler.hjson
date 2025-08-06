@@ -192,7 +192,7 @@ SupersonicJumps: 超音速之魂五段跳
 SupersonicRocketBoots: 超音速之魂火箭靴
 SupersonicCarpet: 超音速之魂飞毯
 CthulhuShield: 克苏鲁护盾
-BlackBelt: 黑腰带闪避
+// SupersonicDodge: Supersonic Dodge
 SupersonicPanic: 受伤获得恐慌效果
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: 孢子囊

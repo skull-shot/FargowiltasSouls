@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 
         public override void SetDefaults(NPC npc)
         {
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 npc.lifeMax = 650;
             }
@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 
         public override bool SafePreAI(NPC npc)
         {
-            if (HellBuffGlobalNPC.HellBuffActive)
+            if (HellEnemies.HellBuffActive)
             {
                 if (npc.ai[1] == 24 && npc.HasPlayerTarget) // frame before it should fire fireball
                 {
