@@ -100,6 +100,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
+            .AddIngredient(ItemID.BoneHelm)
 
             .AddIngredient(ItemID.SittingDucksFishingRod)
             .AddIngredient(ItemID.GoldenFishingRod)
