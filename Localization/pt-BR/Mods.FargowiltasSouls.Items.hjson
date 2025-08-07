@@ -3079,9 +3079,9 @@ AnglerEnchant: {
 	// DisplayName: Angler Enchantment
 	/* Tooltip:
 		'''
-		Increases fishing power
-		You catch fish almost instantly
-		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
+		Increases fishing power and you catch fish almost instantly
+		Fishing line will never break and decreases chance of bait consumption
+		Increases fishing power by 20, allows fishing in lava
 		'As long as they aren't all shoes, you can go home happily'
 		''' */
 }

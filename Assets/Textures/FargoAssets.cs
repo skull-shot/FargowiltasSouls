@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Assets.Textures
         #endregion
 
         #region Noise
-        public static Asset<Texture2D> PerlinNoise => ModContent.Request<Texture2D>(Filepath + "BlurryPerlinNoise");
+        public static Asset<Texture2D> PerlinNoise => ModContent.Request<Texture2D>(Filepath + "Noise/BlurryPerlinNoise");
         public static Asset<Texture2D> ColorNoiseMap => ModContent.Request<Texture2D>(Filepath + "Noise/ColorNoiseMap");
 
         public static Asset<Texture2D> CracksNoise => ModContent.Request<Texture2D>(Filepath + "Noise/CracksNoise");

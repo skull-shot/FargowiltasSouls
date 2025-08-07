@@ -195,7 +195,7 @@ namespace FargowiltasSouls.Core.Toggler
 
             player.SetToggleValue<SupersonicClimbing>(false);
 
-            player.SetToggleValue<TrawlerSporeSac>(false);
+            player.SetToggleValue<TrawlerFogEffect>(false);
 
 
             foreach (Toggle toggle in Toggles.Values.Where(toggle => toggle.Effect.Name.Contains("Pet")))

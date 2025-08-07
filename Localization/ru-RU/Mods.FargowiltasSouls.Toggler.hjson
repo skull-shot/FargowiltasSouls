@@ -172,9 +172,6 @@ MiningSpelunk: Бафф шахтёра
 MiningShine: Бафф света
 BuilderEffect: Режим строителя
 ColossusHeader: "{$Mods.FargowiltasSouls.Items.ColossusSoul.DisplayName}"
-DefenseStarEffect: Звёзды при уроне
-DefenseBrainEffect: Мозги запутанности
-DefenseBeeEffect: Пчёлы при уроне
 FleshKnuckleEffect: Агро кастета из плоти
 PaladinShieldEffect: Щит паладина
 FrozenTurtleEffect: Ледяной черепаший панцирь
@@ -193,10 +190,10 @@ SupersonicRocketBoots: Реактивные сапоги
 SupersonicCarpet: Ковёр-самолёт
 CthulhuShield: Щит Ктулху
 // SupersonicDodge: Supersonic Dodge
+// HallowedPendantEffect: Rays On Hit
 SupersonicPanic: Паника при уроне
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
-TrawlerSporeSac: Споровый мешок
-TrawlerGel: Нестабильный желатин
+// TrawlerFogEffect: Damaging Fog
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: Накладывающиеся криты Вечности
 PetHeader: Pets

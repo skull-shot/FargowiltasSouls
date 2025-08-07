@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -65,10 +66,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.npcTypeNoAggro[537] = true;
 
             //volatile gel
-            player.AddEffect<TrawlerGel>(item);
+            // spore sac
+            player.AddEffect<TrawlerFogEffect>(item);
 
-            //spore sac
-            player.AddEffect<TrawlerSporeSac>(item);
 
             //arctic diving gear
             Player.arcticDivingGear = true;
@@ -114,10 +114,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .Register();
         }
     }
-    public class TrawlerGel : AccessoryEffect
+    public class TrawlerFogEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
-        public override int ToggleItemType => ItemID.VolatileGelatin;
+        public override int ToggleItemType => ModContent.ItemType<TrawlerSoul>();
         
         public override void PostUpdateEquips(Player player)
         {
@@ -129,8 +129,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             if (player.volatileGelatinCounter > 50)
             {
                 player.volatileGelatinCounter = 0;
-                int damage = 65;
-                float knockBack = 7f;
+                int damage = 270;
+                float knockBack = 2f;
                 float num = 640f;
                 NPC npc = null;
                 for (int i = 0; i < 200; i++)
@@ -148,26 +148,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 }
                 if (npc != null)
                 {
-                    Vector2 vector = npc.Center - player.Center;
-                    vector = vector.SafeNormalize(Vector2.Zero) * 6f;
-                    vector.Y -= 2f;
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center.X, player.Center.Y, vector.X, vector.Y, ProjectileID.VolatileGelatinBall, damage, knockBack, player.whoAmI, 0f, 0f);
+                    Vector2 spawnPos = npc.Center + npc.DirectionTo(player.Center) * 120;
+                    spawnPos += Main.rand.NextVector2Circular(160, 160);
+
+                    Projectile.NewProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<TrawlerFog>(), damage, knockBack, player.whoAmI, 0f, -1);
                 }
-            }
-        }
-    }
-    public class TrawlerSporeSac : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
-        public override int ToggleItemType => ItemID.SporeSac;
-        public override bool ExtraAttackEffect => true;
-        
-        public override void PostUpdateEquips(Player player)
-        {
-            if (player.whoAmI == Main.myPlayer)
-            {
-                player.sporeSac = true;
-                player.SporeSac(EffectItem(player));
             }
         }
     }
