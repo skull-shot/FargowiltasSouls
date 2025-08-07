@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Core.Systems
             RecipeGroup group;
 
             //drax
-            group = new RecipeGroup(() => AnyItem(ItemID.Drax), ItemID.Drax, ItemID.PickaxeAxe);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Drax, ItemID.PickaxeAxe), ItemID.Drax, ItemID.PickaxeAxe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyDrax", group);
 
             //dungeon enemies
@@ -32,15 +32,15 @@ namespace FargowiltasSouls.Core.Systems
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBonesBanner", group);
 
             //cobalt
-            group = new RecipeGroup(() => AnyItem(ItemID.CobaltRepeater), ItemID.CobaltRepeater, ItemID.PalladiumRepeater);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.CobaltRepeater, ItemID.PalladiumRepeater), ItemID.CobaltRepeater, ItemID.PalladiumRepeater);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyCobaltRepeater", group);
 
             //mythril
-            group = new RecipeGroup(() => AnyItem(ItemID.MythrilRepeater), ItemID.MythrilRepeater, ItemID.OrichalcumRepeater);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.MythrilRepeater, ItemID.OrichalcumRepeater), ItemID.MythrilRepeater, ItemID.OrichalcumRepeater);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyMythrilRepeater", group);
 
             //adamantite
-            group = new RecipeGroup(() => AnyItem(ItemID.AdamantiteRepeater), ItemID.AdamantiteRepeater, ItemID.TitaniumRepeater);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AdamantiteRepeater, ItemID.TitaniumRepeater), ItemID.AdamantiteRepeater, ItemID.TitaniumRepeater);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyAdamantiteRepeater", group);
 
             //evil wood
@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Core.Systems
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyEvilWood", group);
 
             //any adamantite
-            group = new RecipeGroup(() => AnyItem(ItemID.AdamantiteBar), ItemID.AdamantiteBar, ItemID.TitaniumBar);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AdamantiteBar, ItemID.TitaniumBar), ItemID.AdamantiteBar, ItemID.TitaniumBar);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyAdamantite", group);
 
             //shroomite head
