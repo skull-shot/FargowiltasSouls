@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,19 +11,21 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 {
     public class LifeFireball : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_258";
+        public override string Texture => FargoSoulsUtil.VanillaTextureProjectile(ProjectileID.CultistBossFireBall);
 
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Fireball");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+
+            Main.projFrames[Type] = Main.projFrames[ProjectileID.CultistBossFireBall];
         }
 
         public override void SetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.alpha = 100;
@@ -31,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 240;
-            Projectile.scale = 2f;
+            Projectile.scale = 1f;
             CooldownSlot = 1;
         }
 
@@ -42,14 +44,23 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                 Projectile.localAI[0] = 1f;
                 SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
             }
-
-            for (int index1 = 0; index1 < 4; ++index1)
+            
+            if (Main.rand.NextBool(3))
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch,
                     Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, new Color(), 2.5f);
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].velocity.X *= 0.5f;
                 Main.dust[index2].velocity.Y *= 0.5f;
+            }
+            
+            Projectile.frameCounter++;
+            if (Projectile.frameCounter > 4)
+            {
+                Projectile.frameCounter = 0;
+                Projectile.frame++;
+                if (Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
             }
 
             if (--Projectile.ai[0] > 0)
@@ -102,6 +113,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override void OnKill(int timeLeft)
         {
+            /*
             if (timeLeft > 0)
             {
                 for (int i = 0; i < 5; i++) //drop greek fire
@@ -113,17 +125,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                     }
                 }
             }
+            */
 
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 10; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
                 Main.dust[dust].velocity *= 1.4f;
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
                     Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
@@ -135,7 +148,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             }
 
             float scaleFactor9 = 0.5f;
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < 2; j++)
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
                     default,
@@ -149,7 +162,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
-            fallThrough = false;
+            fallThrough = true;
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 
@@ -189,6 +202,16 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                 float num165 = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
             }
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 2f * Projectile.scale;
+                Color glowColor = Color.Red;
+
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, glowColor, Projectile.rotation, origin2, Projectile.scale, effects);
+            }
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;

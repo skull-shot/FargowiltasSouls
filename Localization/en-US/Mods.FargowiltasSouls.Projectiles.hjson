@@ -49,7 +49,7 @@ FishNuke.DisplayName: Fish Nuke
 FishNukeExplosion.DisplayName: Fish Nuke
 FishStickProj.DisplayName: Fish Stick
 FishStickShark.DisplayName: Shark
-FleshLaser.DisplayName: Red Laser
+RegurgitatorLaser.DisplayName: Regurgitator Laser
 GibExplosion.DisplayName: Explosion
 GolemGib.DisplayName: Golem Gibs
 GolemHeadProj.DisplayName: Golem Head
@@ -58,7 +58,7 @@ HellBonez.DisplayName: Hell Bonez
 HellFlame.DisplayName: Hell Flame
 HellSkeletron.DisplayName: Hell Skeletron
 HellSkull2.DisplayName: Hell Skull
-HentaiNuke.DisplayName: Phantasmal Blast
+PenetratorNuke.DisplayName: Phantasmal Blast
 Penetrator.DisplayName: The Penetrator
 PenetratorArc.DisplayName: Lightning Arc
 PenetratorBigDeathray.DisplayName: Phantasmal Deathray
@@ -71,12 +71,12 @@ PenetratorSpinBoundary.DisplayName: The Penetrator
 PenetratorSpinThrown.DisplayName: The Penetrator
 PenetratorThrown.DisplayName: The Penetrator
 PenetratorWand.DisplayName: The Penetrator
-HentaiSphereRing.DisplayName: Phantasmal Sphere
+PenetratorSphereRing.DisplayName: Phantasmal Sphere
 Hungry.DisplayName: Hungry
-Hungry2.DisplayName: Hungry
-LeashFlail.DisplayName: Eyeleash Flail
-MechEyeProjectile.DisplayName: MechEyeProjectile
-MechFlail.DisplayName: Leash of Cthulhu Flail
+RegurgitatorHungry.DisplayName: Hungry
+EyeleashFlail.DisplayName: Eyeleash Flail
+LeashofCthulhuEyeProjectile.DisplayName: Leash of Cthulhu Eye
+LeashofCthulhuFlail.DisplayName: Leash of Cthulhu Flail
 PhantasmalBlast.DisplayName: Phantasmal Blast
 PhantasmalBolt.DisplayName: Phantasmal Bolt
 PhantasmalEyeBoundary.DisplayName: Phantasmal Eye
@@ -87,7 +87,7 @@ PhantasmalSphere2.DisplayName: Phantasmal Sphere
 PrimeDeathray.DisplayName: Blazing Deathray
 PrimeLaser.DisplayName: Prime Laser
 RazorbladeTyphoonFriendly.DisplayName: Razorblade Typhoon
-RefractorBlaster2Held.DisplayName: Diffractor Blaster
+DiffractorBlasterHeld.DisplayName: Diffractor Blaster
 RetiDeathray.DisplayName: Blazing Deathray
 Retiglaive.DisplayName: Retiglaive
 Retirang.DisplayName: Retirang
@@ -580,7 +580,7 @@ AbomBlast.DisplayName: Phantasmal Blast
 AbomFlocko2.DisplayName: Super Flocko
 AbomFlocko3.DisplayName: Super Flocko
 AbomLaser.DisplayName: Laser
-EyeProjectile.DisplayName: EyeProjectile2
+EyeleashProjectile.DisplayName: Eyeleash Servant
 PenetratorDash.DisplayName: The Penetrator
 CosmosFireball.DisplayName: Cosmic Fireball
 CosmosFireball2.DisplayName: Cosmic Fireball
@@ -604,7 +604,7 @@ BaronShrapnel.DisplayName: Banished Baron Mine Shrapnel
 ShadowOrbProjectile.DisplayName: Shadow Orb
 WillDeathrayBig.DisplayName: Will Deathray
 DeviBossProjectile.DisplayName: Deviantt
-JevilScar.DisplayName: Enchanted Lightblade
+LifelightLifeblade.DisplayName: Enchanted Lightblade
 LifeBlaster.DisplayName: Life Blaster
 LifeBomb.DisplayName: Life Mine
 LifeTransitionBomb.DisplayName: Life Mine
@@ -612,8 +612,8 @@ LifeBombExplosion.DisplayName: Life Bomb
 LifeCageExplosion.DisplayName: Cage Explosion
 LifeCageProjectile.DisplayName: Life Cage
 LifeCageTelegraph.DisplayName: Cage Telegraph
-LifeChalBlasterDeathray.DisplayName: Holy Deathray
-LifeChalDeathray.DisplayName: Holy Deathray
+LifelightBlasterDeathray.DisplayName: Holy Deathray
+LifelightDeathray.DisplayName: Holy Deathray
 LifeCrosshair.DisplayName: Crosshair
 LifeHomingProj.DisplayName: Lesser Fairy
 LifeNeggravProj.DisplayName: Cross
@@ -714,9 +714,9 @@ MoonBowPortal.DisplayName: Moon Bow Portal
 FlightBall.DisplayName: Flight Ball
 AbomPhoenix.DisplayName: Phantom Phoenix
 FrostShardFriendly.DisplayName: Frost Shard Friendly
-HentaiSword.DisplayName: Mutant Sword
-HentaiSwordBlast.DisplayName: Mutant Sword Blast
-HentaiSphereOkuu.DisplayName: Mutant Sphere Okuu
+PenetratorSword.DisplayName: Mutant Sword
+PenetratorSwordBlast.DisplayName: Mutant Sword Blast
+PenetratorSphereOkuu.DisplayName: Mutant Sphere Okuu
 AbomRitualFTW.DisplayName: Abominationn Ritual
 FallingSandstone.DisplayName: Falling Sandstone
 CoffinPlayerSoul.DisplayName: Your Soul
@@ -764,12 +764,12 @@ TheDestroyerProj.DisplayName: The Destroyer
 DestroyerBodyWhip.DisplayName: Destroyer Body
 DestroyerHeadWhip.DisplayName: Destroyer Head
 DestroyerTailWhip.DisplayName: Destroyer Tail
-DestroyerScanTelegraph.DisplayName: Destroyer Scan Telegraph
-PungentAuraProj.DisplayName: Pungent Aura Proj
-RockeaterAuraProj.DisplayName: Rockeater Aura Proj
+DestroyerScanTelegraph.DisplayName: Destroyer Scan
+PungentAuraProj.DisplayName: Pungent Aura
+RockeaterAuraProj.DisplayName: Rockeater Aura
 FallenStarDay.DisplayName: Fallen Star Day
-LightningRodLightning.DisplayName: Lightning Rod Lightning
-ReleasedMechFlail.DisplayName: Leash of Cthulhu
+LightningRodLightning.DisplayName: Lightning
+ReleasedLeashofCthulhu.DisplayName: Leash of Cthulhu
 Tome.DisplayName: Tome
 TomeShot.DisplayName: Tome Shot
 TungstenShockwave.DisplayName: Tungsten Shockwave
@@ -782,7 +782,7 @@ WriggleMinion.DisplayName: Wriggle Minion
 CirnoIceChunk.DisplayName: Cirno Ice Chunk
 DaiyoLeaf.DisplayName: Daiyo Leaf
 MystiaNote.DisplayName: Mystia Note
-MystiaNote2.DisplayName: Mystia Note2
+MystiaNote2.DisplayName: Mystia Note
 RumiaOrb.DisplayName: Rumia Orb
 EmpressRitual.DisplayName: Empress Ritual
 BoneSpear.DisplayName: Bone Spear
@@ -794,15 +794,29 @@ VikingHook.DisplayName: Viking Hook
 PaladinHammer.DisplayName: Paladin Hammer
 DungeonDebris.DisplayName: Dungeon Debris
 PalmwoodShot.DisplayName: Palmwood Shot
-BeetleEnchantBeetle.DisplayName: Beetle Enchant Beetle
-SpookySpinScythe.DisplayName: Spooky Spin Scythe
+BeetleEnchantBeetle.DisplayName: Beetle
+SpookySpinScythe.DisplayName: Deathhunt Scythe
 SnowMist.DisplayName: Snow Mist
 IceShard.DisplayName: Ice Shard
-DeviSniperTelegraph.DisplayName: Devi Sniper Telegraph
+DeviSniperTelegraph.DisplayName: Sniper Rifle
 SmallStingHitbox.DisplayName: Small Stinger
-DeviShadowbeam.DisplayName: Devi Shadowbeam
+DeviShadowbeam.DisplayName: Shadowbeam
 SupremeDash.DisplayName: Supreme Dash
-RemoteLightningExplosion.DisplayName: Remote Rain Explosion
-RemoteLightning.DisplayName: Remote Rain Lightning
-RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+RemoteLightningExplosion.DisplayName: Lightning Explosion
+RemoteLightning.DisplayName: Lightning
+RemoteScanTelegraph.DisplayName: Scan
 RemoteProbe.DisplayName: Remote Probe
+CorruptionSludge.DisplayName: Corrupted Sludge
+WillDashTrail.DisplayName: Dash Trail
+MechElectricOrbTelegraphed.DisplayName: Electric Orb
+DiabolistExplosion.DisplayName: Diabolist Explosion
+FireEffect.DisplayName: Fire Effect
+PigronBubble.DisplayName: Pigron Bubble
+NymphHeart.DisplayName: Nymph Heart
+SpiderEnchantSpiderling.DisplayName: Spiderling
+AbomFlamePillar.DisplayName: Abom Flame Pillar
+AbomFlamePillarMark.DisplayName: Abom Flame Pillar Mark
+DemonFireball.DisplayName: Demon Fireball
+ImpFireOrb.DisplayName: Imp Fire Orb
+BatExplosion.DisplayName: Bat Explosion
+HallowRay.DisplayName: Hallow Ray

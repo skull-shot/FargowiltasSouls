@@ -25,6 +25,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int NekomiAttackReadyTimer;
         public const int SuperAttackMaxWindow = 30;
 
+        public bool SupersonicDodge;
+
         //        //minions
         public bool BrainMinion;
         public bool EaterMinion;
@@ -124,7 +126,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int CrimsonRegenAmount;
         public int CrimsonRegenTime;
 
-        public bool CanSummonForbiddenStorm = false;
         public List<int> ForbiddenTornados = [];
         public List<int> ShadowOrbs = [];
         public int IcicleCount;
@@ -184,7 +185,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SnowVisual;
         public int SpectreCD;
         public int SpectreGhostTime;
+        public int ForbiddenCD;
         public bool MinionCrits;
+        public int SpiderCD;
         //public bool squireReduceIframes;
         public bool FreezeTime;
         public int freezeLength;
@@ -196,7 +199,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int TurtleCounter;
         public int TurtleShellHP = 2000;
         public bool ShellHide;
-        public int ValhallaDashCD;
+        public int ValhallaVerticalDashing;
         public int VortexCD;
         public bool WizardEnchantActive;
         public bool WizardTooltips;
@@ -364,7 +367,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WasAsocial;
         public bool HidePetToggle0 = true;
         public bool HidePetToggle1 = true;
-        public bool Kneecapped;             //disables running :v
         public bool Defenseless;            //-30 defense, no damage reduction, cross necklace and knockback prevention effects disabled
         public bool Infested;               //weak DOT that grows exponentially stronger
         public int MaxInfestTime;
@@ -395,10 +397,10 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Flipped;
         public bool Illuminated;
         public bool Mash;
+        public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
         public int MashCounter;
         public int StealingCooldown;
-        public bool LihzahrdCurse;
         //public bool LihzahrdBlessing;
         public bool Berserked;
         public bool CerebralMindbreak;

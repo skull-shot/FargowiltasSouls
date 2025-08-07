@@ -1,6 +1,8 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -31,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             ModContent.ItemType<EarthForce>(),
             ModContent.ItemType<NatureForce>(),
             ModContent.ItemType<LifeForce>(),
-            ModContent.ItemType<ShadowForce>(),
+            ModContent.ItemType<DeathForce>(),
             ModContent.ItemType<SpiritForce>(),
             ModContent.ItemType<WillForce>(),
             ModContent.ItemType<CosmoForce>()
@@ -89,7 +91,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //SPIRIT
             ModContent.GetInstance<SpiritForce>().UpdateAccessory(player, hideVisual);
             //SHADOW
-            ModContent.GetInstance<ShadowForce>().UpdateAccessory(player, hideVisual);
+            ModContent.GetInstance<DeathForce>().UpdateAccessory(player, hideVisual);
             //WILL
             ModContent.GetInstance<WillForce>().UpdateAccessory(player, hideVisual);
             //COSMOS
@@ -121,8 +123,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             foreach (int force in Forces)
                 recipe.AddIngredient(force);
 
-            recipe.AddIngredient(null, "AbomEnergy", 10)
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            recipe.AddIngredient<AbomEnergy>(10)
+            .AddTile<CrucibleCosmosSheet>()
             .Register();
         }
     }

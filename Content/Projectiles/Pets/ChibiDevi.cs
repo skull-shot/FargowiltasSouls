@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,8 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
 {
     public class ChibiDevi : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Pets", Name);
+
         private Vector2 oldMouse;
 
         public override void SetStaticDefaults()

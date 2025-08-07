@@ -34,10 +34,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             /*
 hive pack*/
-            .AddIngredient(null, "SharpshootersEssence")
-            .AddIngredient(ItemID.MoltenQuiver)
-            .AddIngredient(ItemID.StalkersQuiver)
-            .AddIngredient(ItemID.ReconScope)
+            .AddIngredient(ItemID.RangerEmblem)
+            .AddRecipeGroup("FargowiltasSouls:AnyQuiver")
+            .AddRecipeGroup("FargowiltasSouls:AnySniperScope")
 
             .AddIngredient(ItemID.DartPistol)
             .AddIngredient(ItemID.Megashark)

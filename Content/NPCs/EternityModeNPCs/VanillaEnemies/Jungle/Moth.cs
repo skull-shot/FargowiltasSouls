@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Jungle;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Jungle;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;

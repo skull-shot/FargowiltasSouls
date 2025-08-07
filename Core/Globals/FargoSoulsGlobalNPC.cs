@@ -3,18 +3,18 @@ using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Misc;
 using FargowiltasSouls.Content.NPCs.Critters;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.UI.Emotes;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules;
@@ -36,6 +36,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -63,6 +64,7 @@ namespace FargowiltasSouls.Core.Globals
         //        public bool Shock;
         public bool Rotting;
         public bool LeadPoison;
+        public bool LeadPoisonSpread;
         public bool Needled;
         public bool SolarFlare;
         public bool TimeFrozen;
@@ -102,6 +104,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool Anticoagulation;
         public bool BloodDrinker;
         public bool MagicalCurse;
+        public bool IvyVenom;
+        public int IvyVenomTime;
 
         public int NecroDamage;
 
@@ -131,6 +135,7 @@ namespace FargowiltasSouls.Core.Globals
             //            Shock = false;
             Rotting = false;
             LeadPoison = false;
+            LeadPoisonSpread = false;
             SolarFlare = false;
             HellFire = false;
             HellFireMarked = false;
@@ -156,16 +161,20 @@ namespace FargowiltasSouls.Core.Globals
             BloodDrinker = false;
             FlamesoftheUniverse = false;
             MagicalCurse = false;
+            IvyVenom = false;
             PungentGazeTime = 0;
         }
         public override void SetStaticDefaults()
         {
             //blightus deletus
-            if (ModContent.TryFind("CalamityMod", "MiracleBlight", out ModBuff miracleBlight))
+            if (FargowiltasSouls.CalamityMod != null)
             {
-                foreach (ModNPC npc in Mod.GetContent<ModNPC>())
+                if (FargowiltasSouls.CalamityMod.TryFind("MiracleBlight", out ModBuff miracleBlight))
                 {
-                    NPCID.Sets.SpecificDebuffImmunity[npc.Type][miracleBlight.Type] = true;
+                    foreach (ModNPC npc in Mod.GetContent<ModNPC>())
+                    {
+                        NPCID.Sets.SpecificDebuffImmunity[npc.Type][miracleBlight.Type] = true;
+                    }
                 }
             }
 
@@ -202,6 +211,9 @@ namespace FargowiltasSouls.Core.Globals
                 npc.frameCounter = 0;
                 retval = false;
             }
+
+            if (npc.buffImmune[BuffID.Venom])
+                npc.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
 
             if (SinisterIconBoss(npc))
             {
@@ -419,19 +431,27 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (MagicalCurse)
+            if (IvyVenom)
             {
-                if (Main.rand.NextBool(4))
+                drawColor = Color.Lerp(Color.White, Color.DarkOliveGreen, 0.5f);
+                int dust = 157;
+                int frequency = 4;
+                if (IvyVenomTime >= 420)
                 {
-                    int d = Dust.NewDust(npc.position, npc.width, npc.height, Main.rand.NextBool() ? 107 : 157);
+                    dust = 107;
+                    frequency = 2;
+                }
+                if (Main.rand.NextBool(frequency))
+                {
+                    int d = Dust.NewDust(npc.position, npc.width, npc.height, dust);
                     Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 0.2f;
-                    Main.dust[d].scale = 1.5f;
+                    Main.dust[d].velocity *= 1f/frequency;
+                    Main.dust[d].scale = 4f/frequency;
                 }
             }
             if (Sublimation)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(3) && !Main.gamePaused)
                 {
                     float ratio = (float)PureGazeTime / PungentGazeBuff.MAX_TIME;
                     float sparkScale = MathHelper.Lerp(0.25f, 1.5f, ratio);
@@ -651,7 +671,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (PungentGazeTime > 0)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(3) && !Main.gamePaused)
                 {
                     float ratio = (float)PungentGazeTime / PungentGazeBuff.MAX_TIME;
                     Vector2 sparkDir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
@@ -665,11 +685,11 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly)
+            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
             {
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
                     PureGazeTime += 1;
-                else if (PureGazeTime > 0)
+                else if (PureGazeTime >= 3)
                     PureGazeTime -= 3;
                 if (PureGazeTime > PungentGazeBuff.MAX_TIME)
                     PureGazeTime = PungentGazeBuff.MAX_TIME;
@@ -701,7 +721,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (shrapnel >= 15)
             {
-                Texture2D texture = (Texture2D)ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", AssetRequestMode.ImmediateLoad);
+                Texture2D texture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
                 Rectangle rectangle = texture.Bounds;
                 Vector2 origin2 = rectangle.Size() / 2f;
                 Color color = Color.Red;
@@ -747,9 +767,9 @@ namespace FargowiltasSouls.Core.Globals
                 int dot = npc.type == NPCID.EaterofWorldsBody ? 4 : 16;
 
                 //calamity worms mod compat
-                if (ModLoader.HasMod("CalamityMod"))
+                if (FargowiltasSouls.CalamityMod != null)
                 {
-                    if (ModContent.TryFind("CalamityMod", "DesertScourgeBody", out ModNPC scourgeBody) && npc.type == scourgeBody.Type)
+                    if (FargowiltasSouls.CalamityMod.TryFind("DesertScourgeBody", out ModNPC scourgeBody) && npc.type == scourgeBody.Type)
                     {
                         dot = 4;
                     }
@@ -815,6 +835,17 @@ namespace FargowiltasSouls.Core.Globals
                     damage = dmg / 5;
             }
 
+            //120 dps (up to)
+            if (IvyVenom)
+            {
+                if (npc.lifeRegen > 0)
+                    npc.lifeRegen = 0;
+                int dmg = 60 + (IvyVenomTime/3);
+                npc.lifeRegen -= dmg;
+                if (damage < dmg / 4)
+                    damage = (dmg / 4);
+            }
+
             //12 dps 
             if (OriPoison)
             {
@@ -870,7 +901,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (Slimed)
             {
-                if (!ModLoader.HasMod("CalamityMod"))
+                if (FargowiltasSouls.CalamityMod == null)
                     if (npc.onFire || npc.onFire2 || npc.onFire3 || npc.onFrostBurn || npc.onFrostBurn2 || npc.shadowFlame)
                         npc.lifeRegen -= 20;
             }
@@ -996,7 +1027,7 @@ namespace FargowiltasSouls.Core.Globals
                 multiplier += OrichalcumEffect.OriDotModifier(npc, player.FargoSouls()) - 1;
 
             if (npc.FargoSouls().MagicalCurse)
-                multiplier += 1;
+                multiplier += 5;
 
             //half as effective if daybreak applied
             if (npc.daybreak && multiplier > 1)
@@ -1170,7 +1201,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.EyeofCthulhu:
-                    npcLoot.Add(BossDrop(ModContent.ItemType<LeashOfCthulhu>()));
+                    npcLoot.Add(BossDrop(ModContent.ItemType<Eyeleash>()));
                     break;
 
                 case NPCID.EaterofWorldsHead:
@@ -1251,7 +1282,8 @@ namespace FargowiltasSouls.Core.Globals
                     npcLoot.Add(ItemDropRule.OneFromOptions(1,
                         ModContent.ItemType<Vineslinger>(),
                         ModContent.ItemType<Mahoguny>(),
-                        ModContent.ItemType<OvergrownKey>()));
+                        ModContent.ItemType<OvergrownKey>(),
+                        ItemID.ThornHook));
                     break;
 
                 default:
@@ -1381,9 +1413,9 @@ namespace FargowiltasSouls.Core.Globals
             }
 
             if (OceanicMaul)
-                modifiers.ArmorPenetration += 20;
-            if (CurseoftheMoon)
                 modifiers.ArmorPenetration += 10;
+            if (CurseoftheMoon)
+                modifiers.ArmorPenetration += 20;
             //if (Rotting)
             //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
@@ -1406,7 +1438,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (!player.HasEffectEnchant<MoltenEffect>())
                     modifier = 1.15f;
                 else if (player.ForceEffect<MoltenEffect>())
-                    modifier = 1.3f;
+                    modifier = 1.25f;
                 modifiers.FinalDamage *= modifier;
             }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Tiles.Trophies
 {
     public abstract class BaseTrophy : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles/Trophies", Name);
         protected abstract int ItemType { get; }
 
         public override void SetStaticDefaults()

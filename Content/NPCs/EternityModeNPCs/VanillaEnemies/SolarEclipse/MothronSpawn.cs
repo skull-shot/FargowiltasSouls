@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -16,13 +16,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SolarEcl
             base.SetDefaults(npc);
 
             npc.knockBackResist *= 0.1f;
-        }
-
-        public override void AI(NPC npc)
-        {
-            base.AI(npc);
-
-            EModeGlobalNPC.Aura(npc, 300, ModContent.BuffType<SqueakyToyBuff>());
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

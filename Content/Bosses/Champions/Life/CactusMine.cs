@@ -1,3 +1,4 @@
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -21,7 +22,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.hostile = true;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 90;
+            Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 50 : 90;
         }
 
         public override void AI()

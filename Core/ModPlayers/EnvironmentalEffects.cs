@@ -9,14 +9,14 @@ using Terraria;
 using Terraria.ModLoader;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Localization;
 using Fargowiltas.Content.Buffs;
 using Terraria.GameContent.Events;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 return;
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
-            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden;
+            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden || Player.trident;
 
             Tile currentTile = getPlayerTile();
 

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.UI;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;

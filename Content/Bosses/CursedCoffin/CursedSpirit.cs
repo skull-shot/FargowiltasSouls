@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -117,7 +117,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             if (SlowChargeStates.Contains(State))
+            {
+                modifiers.FinalDamage *= 0.25f;
                 target.longInvince = true;
+            }
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
@@ -154,7 +157,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         {
             if (NPC.Opacity < 1)
                 return false;
-            if (target.HasBuff<GrabbedBuff>())
+            if (target.HasBuff<GrabbedBuff>() || BittenPlayer != -1)
                 return false;
             Vector2 boxPos = target.position;
             Vector2 boxDim = target.Size;

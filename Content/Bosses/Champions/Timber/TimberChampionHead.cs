@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Projectiles;
@@ -159,7 +159,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                         NPC.velocity *= 0.9f;
                     }
 
-                    if (++NPC.ai[1] < 120)
+                    int startRain = WorldSavingSystem.MasochistModeReal ? 120 : 150;
+                    int endRain = WorldSavingSystem.MasochistModeReal ? 270 : 300;
+
+                    if (++NPC.ai[1] < startRain)
                     {
                         if (NPC.ai[3] == 0)
                         {
@@ -170,7 +173,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -Vector2.UnitY, ModContent.ProjectileType<GlowLine>(), 0, 0f, Main.myPlayer, 19);
                             }
 
-                            if (NPC.ai[1] > 90 && NPC.ai[1] % 3 == 0) //glow line tells
+                            if (NPC.ai[1] > 90 && NPC.ai[1] < 120 && NPC.ai[1] % 3 == 0) //glow line tells
                             {
                                 float current = NPC.ai[1] - 90;
                                 current /= 3;
@@ -185,11 +188,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                             }
                         }
                     }
-                    else if (NPC.ai[1] == 120)
+                    else if (NPC.ai[1] == startRain)
                     {
 
                     }
-                    else if (NPC.ai[1] < 270) //spam lasers everywhere
+                    else if (NPC.ai[1] < endRain) //spam lasers everywhere
                     {
                         if (NPC.ai[3] == 0) //only if not flagged
                         {
@@ -312,6 +315,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                     goto case 0;
 
                 case 5: //trees that shoot acorns
+
+                    // removed attack
+                    NPC.ai[0] += 2;
+                    NPC.ai[1] = 0;
+                    NPC.ai[2] = 0;
+                    NPC.ai[3] = 0;
+                    /*
                     targetPos = player.Center + NPC.DirectionFrom(player.Center) * 300;
                     if (targetPos.Y > player.position.Y - 100)
                         targetPos.Y = player.position.Y - 100;
@@ -367,6 +377,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                         NPC.ai[3] = 0;
                         NPC.netUpdate = true;
                     }
+                    */
                     break;
 
                 case 6:

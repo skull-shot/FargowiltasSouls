@@ -1,19 +1,21 @@
 ﻿using Fargowiltas.Content.Items.Explosives;
 using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -205,6 +207,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     BossAliveLastFrame = true;
                     TinEffect.TinHurt(Player, true);
                     EbonwoodCharge = 0;
+                    HuntressStage = 0;
                     NekomiMeter = 0;
 
                     Beetles = 0;
@@ -340,15 +343,25 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
             }
 
-            if (BetsysHeartItem != null || QueenStingerItem != null)
+            if (BetsysHeartItem != null || QueenStingerItem != null || Player.HasEffect<SupremeDashEffect>())
             {
                 if (SpecialDashCD > 0)
                     SpecialDashCD--;
                 if (SpecialDashCD == 1)
                 {
                     SoundEngine.PlaySound(SoundID.Item9, Player.Center);
-
-                    for (int i = 0; i < 30; i++)
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Color color = Color.Yellow;
+                        if (Player.HasEffect<BetsyDashEffect>())
+                            color = Color.OrangeRed;
+                        else if (Player.HasEffect<SupremeDashEffect>())
+                            color = Color.Lerp(Color.GhostWhite, Color.Transparent, 0.5f);
+                        Vector2 vel = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 10).RotatedByRandom(MathHelper.Pi / 10) * Main.rand.NextFloat(3, 8);
+                        Particle p = new SparkParticle(Player.Center, vel, color, 1, 30);
+                        p.Spawn();
+                    }
+                    /*for (int i = 0; i < 30; i++)
                     {
                         int dust = DustID.GemTopaz;
                         if (Player.HasEffect<SupremeDashEffect>())
@@ -356,19 +369,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                         int d = Dust.NewDust(Player.position, Player.width, Player.height, dust, 0, 0, 0, default, 2.5f);
                         Main.dust[d].noGravity = true;
                         Main.dust[d].velocity *= 4f;
-                    }
+                    }*/
                 }
             }
             else
             {
                 if (SpecialDashCD > 0 && SpecialDashCD < LumUtils.SecondsToFrames(7))
                     SpecialDashCD++;
-            }
-
-
-            if (Player.velocity.Y == 0) //practically, if on the ground or hooked or similar
-            {
-                CanSummonForbiddenStorm = true;
             }
 
             if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null || GelicWingsItem != null)
@@ -458,6 +465,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.electrified && Player.wet)
                 Player.lifeRegen -= 16;
 
+            if (GrabDamage)
+                Player.lifeRegen -= WorldSavingSystem.MasochistModeReal ? 30 : 20;
+
             void DamageOverTime(int badLifeRegen, bool affectLifeRegenCount = false)
             {
                 if (Player.lifeRegen > 0)
@@ -512,14 +522,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (IvyVenom && !Player.venom)
                 DamageOverTime(16, true);
 
-            if (Smite)
-                DamageOverTime(0, true);
-
             if (Anticoagulation)
                 DamageOverTime(4, true);
 
             if (BleedingOut)
-                DamageOverTime(80, true);
+                DamageOverTime(Main.hardMode ? 80 : 20, true);
 
             if (Player.onFire && Player.HasEffect<AshWoodEffect>())
             {
@@ -610,8 +617,21 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
                 TinCrit--;
 
+            if (!Player.HasEffect<BeetleEffect>())
+            {
+                Beetles = 0;
+                BeetleCharge = 0;
+                BeetleHitCD = 0;
+            }
+            if (!Player.ForceEffect<BeetleEffect>() && Beetles > 6)
+            {
+                Beetles = 6;
+            }
+
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
+            if (HuntressStage < 0)
+                HuntressStage = 0;
 
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
                 EbonwoodCharge = 0;
@@ -768,12 +788,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (StealingCooldown > 0 && !Player.dead)
                 StealingCooldown--;
 
-            if (LihzahrdCurse && Framing.GetTileSafely(Player.Center).WallType == WallID.LihzahrdBrickUnsafe)
-            {
-                Player.dangerSense = false;
-                Player.InfoAccMechShowWires = false;
-            }
-
             if (Graze) //decrease graze bonus over time
             {
                 if (++DeviGrazeCounter > 60)
@@ -841,11 +855,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.endurance -= 0.1f;
                 AttackSpeed -= 0.1f;
                 Player.GetDamage(DamageClass.Generic) -= 0.1f;
-            }
-
-            if (Kneecapped)
-            {
-                Player.accRunSpeed = Player.maxRunSpeed;
             }
 
             ManageLifeReduction();

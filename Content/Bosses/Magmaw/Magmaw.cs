@@ -1,6 +1,6 @@
 ﻿
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -331,7 +331,6 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
 
             LeadingConditionRule rule = new LeadingConditionRule(new Conditions.NotExpert());
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<RoseTintedVisor>(), ModContent.ItemType<NavalRustrifle>(), ModContent.ItemType<DecrepitAirstrikeRemote>()));
-            rule.OnSuccess(ItemDropRule.Common(5003, 1, 1, 5)); //seaside crate
             rule.OnSuccess(ItemDropRule.OneFromOptions(3, ItemID.Sextant, ItemID.WeatherRadio, ItemID.FishermansGuide));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingBobber, 4, 1, 1));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingPotion, 3, 2, 5));

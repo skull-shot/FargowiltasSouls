@@ -1,7 +1,8 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -22,7 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
              AccessoryEffectLoader.GetEffect<DiveEffect>(),
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
              AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
@@ -33,11 +34,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             Item.value = 5000000;
             Item.defense = 30;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
         public static readonly Color ItemColor = new(255, 51, 153, 0);
         protected override Color? nameColor => ItemColor;
@@ -193,7 +194,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FusedLensInstall>(Item);
             player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-            player.AddEffect<GroundStickDR>(Item);
+            player.AddEffect<RemoteControlDR>(Item);
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
             player.AddEffect<ReinforcedStats>(Item);
@@ -265,7 +266,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<BerserkedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<CrippledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
@@ -280,7 +280,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LihzahrdCurseBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;
@@ -319,7 +318,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
 
             .Register();

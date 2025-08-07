@@ -1,5 +1,5 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Globals;
@@ -114,6 +114,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public ref float PreviousState => ref CustomAI[6];
 
         public static int MaxSubjects => 9;
+
+        public int HopGravityTimer = 0;
 
         public override bool SafePreAI(NPC npc)
         {
@@ -231,12 +233,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             int endlag = 6;
             if (NPC.velocity.Y == 0)
             {
+                HopGravityTimer = 0;
                 if (hopTimer < hops) // start hop
                 {
                     NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * 14;
-                    int y = -12;
+                    float y = -12;
                     if (Target.Bottom.Y < NPC.Bottom.Y)
-                        y = -12;
+                    {
+                        float bonus = MathF.Pow((Target.Bottom.Y - NPC.Bottom.Y) / 600, 2) * 11;
+                        bonus = Math.Min(bonus, 22);
+                        y -= bonus;
+                    }
+                        
                     NPC.velocity.Y = y;
                     Timer++;
                 }
@@ -254,8 +262,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else
             {
+                HopGravityTimer++;
                 if (Target.Bottom.Y > NPC.Bottom.Y)
+                {
                     NPC.velocity.Y += 0.25f;
+                }
+                float gravityMod = 1.75f * LumUtils.Saturate(HopGravityTimer / 220f);
+                NPC.velocity.Y += gravityMod;
+
                 float horDir = NPC.HorizontalDirectionTo(Target.Center);
                 if (NPC.velocity.X.NonZeroSign() != horDir)
                     NPC.velocity.X += horDir * 0.5f;
@@ -272,6 +286,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Timer == 0) // moving to slam
             {
                 NoContactDamage = 1;
+                NPC.noTileCollide = true;
                 Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
                 NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Bottom, destination, NPC.velocity, 3f, 3f);
 
@@ -329,6 +344,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.noGravity = false;
+                    NPC.position.Y -= 16;
+                }
+                    
                 if (NPC.velocity.Y == 0) // hit ground
                 {
                     Timer = slamPrepTime + 1;
@@ -338,6 +360,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
             {
                 Timer++;
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.position.Y -= 16;
+                }
                 NPC.noGravity = false;
                 if (Timer > slamPrepTime + endTime)
                     ResetToNeutral();
@@ -354,6 +381,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Timer == 0) // moving to slam
             {
                 NoContactDamage = 1;
+                NPC.noTileCollide = true;
                 Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
                 NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Bottom, destination, NPC.velocity, 3f, 3f);
 
@@ -392,6 +420,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     QSDust(NPC.position, NPC.width, NPC.height, 0, 0);
                 }
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.noGravity = false;
+                    NPC.position.Y -= 16;
+                }
+                    
                 if (NPC.velocity.Y == 0) // hit ground
                 {
                     Timer = slamPrepTime + 1;
@@ -431,6 +466,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 Timer++;
                 NPC.noGravity = false;
+                if (NPC.Bottom.Y >= Target.Bottom.Y && NPCInAnyTiles(NPC)) // anti-clip technology
+                {
+                    NPC.velocity.Y = 0;
+                    NPC.position.Y -= 16;
+                }
             }
             else
             {
@@ -442,7 +482,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         private void QuickHops()
         {
-            ref float minionTimer = ref AI0;
+            ref float shotTimer = ref AI0;
             ref float minionDir = ref AI1;
             int startup = 15;
             int hops = 4;
@@ -459,7 +499,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (hopTimer < hops) // start hop
                 {
-                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * 9;
+                    float targetVel = Math.Abs(Target.Center.X - NPC.Center.X) / 36f;
+                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * Math.Min(14, targetVel);
                     int y = -18;
                     if (Target.Bottom.Y < NPC.Bottom.Y)
                         y = -18;
@@ -469,8 +510,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     Timer++;
 
                     if (!WorldSavingSystem.MasochistModeReal)
-                        minionTimer *= -1;
-                    minionTimer = minionTimer.NonZeroSign();
+                        shotTimer *= -1;
+                    shotTimer = shotTimer.NonZeroSign();
                     minionDir = NPC.HorizontalDirectionTo(Target.Center);
                 }
                 else
@@ -487,25 +528,27 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else
             {
-                if (minionTimer > 0) // every other jump
+                if (shotTimer > 0) // every other jump
                 {
-                    int freq = 8;
-                    if (minionTimer % freq == 0 && minionTimer <= 1 * freq && NPC.CountNPCS(ModContent.NPCType<GelatinFlyer>()) < 2)
+                    if (shotTimer == 22)
                     {
-                        SoundEngine.PlaySound(SoundID.Item155, NPC.Center);
                         if (FargoSoulsUtil.HostCheck)
                         {
-                            int i = (int)(minionTimer / freq) - 2; // -1, 0, 1
-                            int offset = i * 240 * (int)minionDir; // offset in x-position from player when diving
-                            Vector2 dir = new(-minionDir * 700 + offset / 10, -1000);
-                            dir.Normalize();
-                            Vector2 vel = 12f * dir;
-                            FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<GelatinFlyer>(), NPC.whoAmI, target: NPC.target,
-                                velocity: vel, ai0: 0, ai2: 2);
+                            int projs = WorldSavingSystem.MasochistModeReal ? 7 : 7;
+                            for (int i = 0; i < projs; i++)
+                            {
+                                float rot = -Vector2.UnitY.RotatedBy(MathHelper.PiOver2 * (i - projs / 2) / (projs / 2)).RotatedByRandom(MathHelper.PiOver2 * 0.1f).ToRotation();
+
+                                Vector2 dir = rot.ToRotationVector2();
+                                dir.X *= 0.7f;
+                                dir.Y /= 2;
+                                float vel = 11f;
+                                Vector2 offset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + offset + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
+                            }
                         }
-                            
                     }
-                    minionTimer++;
+                    shotTimer++;
                 }
                 
                 NPC.velocity.Y += 0.4f;
@@ -671,7 +714,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             ref float lockonX = ref AI0;
             ref float lockonY = ref AI1;
-            float startupTime = 30;
+            float startupTime = 60;
             float backdashTime = 15;
             float minionMinTime = 60;
             int endTime = 5;

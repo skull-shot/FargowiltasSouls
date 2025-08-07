@@ -1,7 +1,8 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             base.SetDefaults();
 
             Item.rare = ItemRarityID.Blue;
-            Item.value = 100000;
+            Item.value = 30000;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -47,6 +48,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             .AddTile(TileID.DemonAltar)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor)
+        {
+            int dmg = CopperEffect.BaseDamage(Main.LocalPlayer);
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return dmg;
         }
     }
     public class CopperEffect : AccessoryEffect
@@ -75,6 +83,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
         }
 
+        public static int BaseDamage(Player player)
+        {
+            int dmg = 40;
+            if (player.ForceEffect<CopperEffect>())
+                dmg = 150;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
+        }
+
         public static void CopperProc(Player player, NPC target)
         {
             if (!player.HasEffectEnchant<CopperEffect>())
@@ -85,17 +101,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool forceEffect = modPlayer.ForceEffect<CopperEnchant>();
                 target.AddBuff(BuffID.Electrified, 180);
 
-                int dmg = 40;
                 int arcs = 5;
                 int cdLength = 60 * 5;
 
                 if (forceEffect)
                 {
-                    dmg = 250;
                     arcs = 8;
                 }
 
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
+                int damage = BaseDamage(player);
 
                 Projectile.NewProjectile(player.GetSource_EffectItem<CopperEffect>(), player.Center, player.DirectionTo(target.Center) * 20, ModContent.ProjectileType<CopperLightning>(), 
                     damage, 0f, modPlayer.Player.whoAmI, player.DirectionTo(target.Center).ToRotation(), damage, ai2: arcs);

@@ -1,13 +1,16 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
 {
@@ -17,27 +20,76 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
 
         public int AttackTimer;
         public int VacuumTimer;
+        public int BiteTimer;
+        public int BittenPlayer = -1;
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(BiteTimer);
+            binaryWriter.Write7BitEncodedInt(BittenPlayer);
+        }
 
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            BiteTimer = binaryReader.Read7BitEncodedInt();
+            BittenPlayer = binaryReader.Read7BitEncodedInt();
+        }
         public override void AI(NPC npc)
         {
             base.AI(npc);
-
-            VacuumTimer++;
-            if (VacuumTimer >= 30)
+            //suck in nearby players
+            foreach (Player p in Main.player.Where(x => x.active && !x.dead))
             {
-                foreach (Player p in Main.player.Where(x => x.active && !x.dead))
+                if (BittenPlayer == -1 && BiteTimer >= 0 && p.velocity.Y == 0 && npc.Distance(p.Center) < 120 && npc.Center.Y > p.Center.Y && !p.immune)
                 {
-                    if (p.HasBuff(ModContent.BuffType<StunnedBuff>()) && npc.Distance(p.Center) < 250)
-                    {
-                        Vector2 velocity = Vector2.Normalize(npc.Center - p.Center) * 5f;
-                        p.velocity += velocity;
-                    }
+                    VacuumTimer++;
+                    if (VacuumTimer > 120)
+                        VacuumTimer = 120;
+                    float dragSpeed = MathHelper.Lerp(0.35f, 0.75f, VacuumTimer/120);
+                    p.velocity.X += dragSpeed * -npc.direction;
+
+                    int dust = Dust.NewDust(p.position, p.width, p.height, DustID.Sand, 15f*-npc.direction, 1, 0, default, 1);
+                    Main.dust[dust].noGravity = true;
                 }
-                VacuumTimer = 0;
+                else
+                    VacuumTimer = 0;
             }
 
+            //bite
+            if (BittenPlayer != -1)
+            {
+                Player victim = Main.player[BittenPlayer];
+                if (BiteTimer > 0 && victim.active && !victim.ghost && !victim.dead
+                    && (npc.Distance(victim.Center) < 160 || victim.whoAmI != Main.myPlayer)
+                    && victim.FargoSouls().MashCounter < 20)
+                {
+                    victim.AddBuff(ModContent.BuffType<GrabbedBuff>(), 2);
+                    victim.velocity = Vector2.Zero;
+                    victim.Center = npc.Top;
+                }
+                else
+                {
+                    BittenPlayer = -1;
+                    BiteTimer = -90; //cooldown
+
+                    //spits you upwards
+                    victim.velocity.Y -= 15;
+                    victim.velocity.X += Main.rand.NextFloat(-5f, 5f);
+                    SoundEngine.PlaySound(SoundID.NPCDeath13, npc.Center);
+                    victim.immune = true;
+                    victim.immuneTime = Math.Max(victim.immuneTime, 60);
+                    npc.netUpdate = true;
+                    NetSync(npc);
+                }
+            }
+            if (BiteTimer < 0)
+                BiteTimer++;
+            if (BiteTimer > 0)
+                BiteTimer--;
+
             //sand balls
-            if (AttackTimer > 0)
+            /*if (AttackTimer > 0)
             {
                 if (AttackTimer == 75)
                 {
@@ -74,10 +126,44 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
 
                     AttackTimer = 75;
                 }
-            }
+            }*/
 
             //never fire sand balls from vanilla
             npc.ai[0] = 10;
+        }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (BittenPlayer != -1)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
+        {
+            base.ModifyHitPlayer(npc, target, ref modifiers);
+            target.longInvince = true;
+            modifiers.FinalDamage *= 0.25f;
+        }
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+        {
+            base.OnHitPlayer(npc, target, hurtInfo);
+            if (BittenPlayer == -1 && BiteTimer == 0)
+            {
+                target.AddBuff(BuffID.Bleeding, 300); //im keeping the bleeding here it fits
+                BittenPlayer = target.whoAmI;
+                BiteTimer = 360;
+                //NetSync(npc, false);
+
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    // remember that this is target client side; we sync to server
+                    var netMessage = Mod.GetPacket();
+                    netMessage.Write((byte)FargowiltasSouls.PacketID.SyncAntlionGrab);
+                    netMessage.Write((byte)npc.whoAmI);
+                    netMessage.Write((byte)BittenPlayer);
+                    netMessage.Write(BiteTimer);
+                    netMessage.Send();
+                }
+            }
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.Toggler.Content;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -51,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<RedRidingHuntressEffect>(Item);
             // valhalla
             player.FargoSouls().ValhallaEnchantActive = true;
-            player.AddEffect<ValhallaDash>(Item);
+            player.AddEffect<ValhallaDashEffect>(Item);
             SquireEnchant.SquireEffect(player, Item);
 
             if (!player.HasEffect<WillEffect>())

@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -308,6 +308,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<SpiritHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpectreEnchant>();
+        public int damageCopy;
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             if (player.FargoSouls().TerrariaSoul)
@@ -318,16 +319,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 spiritDamage = 320;
             }
             spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
-            int damageCopy = info.Damage;
+            damageCopy += info.Damage;
             for (int i = 0; i < 5; i++)
             {
                 if (damageCopy < 40)
                     break;
-                damageCopy -= 40;
+                damageCopy -= 40 + (10 * i);
 
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<SpectreSpirit>(), spiritDamage, 0f, player.whoAmI);
+            }
+        }
+        public override void PostUpdateEquips(Player player)
+        {
+            if (damageCopy > 40 && !player.immune)
+            {
+                damageCopy -= damageCopy;
             }
         }
     }

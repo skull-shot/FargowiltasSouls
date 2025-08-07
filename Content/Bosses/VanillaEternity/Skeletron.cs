@@ -1,6 +1,6 @@
 using System.IO;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
@@ -19,7 +19,7 @@ using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Terraria.DataStructures;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.05f);
-            npc.lifeMax = (int)(npc.lifeMax * 0.8f);
+            npc.lifeMax = (int)(npc.lifeMax * 0.75f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -112,10 +112,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ArmDR(npc))
             {
                 npc.HitSound = SoundID.NPCHit4;
+                npc.chaseable = false;
             }
             else
             {
                 npc.HitSound = SoundID.NPCHit2;
+                npc.chaseable = true;
             }
             if (!SpawnedArms && npc.life < npc.lifeMax * .5)
             {
@@ -533,7 +535,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
             npc.damage = (int)(npc.damage * 1.6f); 
-            npc.lifeMax = (int)(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)(npc.lifeMax * 1f);
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -835,6 +837,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                     if (Timer > LungeWindup + 10 && Timer <= LungeWindup + 30)
                     {
+                        if (Timer < LungeWindup + 22)
+                            storedVel = storedVel.RotateTowards(npc.SafeDirectionTo(player.Center).ToRotation(), 0.05f);
                         storedVel *= 0.95f;
                     }
                     if (Timer > LungeWindup + 30)

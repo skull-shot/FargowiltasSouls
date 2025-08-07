@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,11 +10,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mounted Acorn Gun");
-            // Tooltip.SetDefault("Uses acorns as ammo\n50% chance to not consume ammo\nShoots acorns that sprout on enemies");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "安装好的橡果枪");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "使用橡实作为弹药\n50%的几率不消耗弹药\n向敌怪射出会发芽的橡果");
-
+            ItemID.Sets.IsRangedSpecialistWeapon[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

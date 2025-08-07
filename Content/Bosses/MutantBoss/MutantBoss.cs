@@ -1,10 +1,9 @@
-using Fargowiltas.Common.Configs;
 using Fargowiltas.Content.NPCs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
@@ -12,8 +11,9 @@ using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Items.Summons;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.BrainOfCthulhu;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
@@ -36,6 +36,7 @@ using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
@@ -455,6 +456,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (WorldSavingSystem.MasochistModeReal && Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<MutantPresenceBuff>(), 2);
 
+            Main.dayTime = false;
+            Main.time = 16200; //midnight
+
             if (NPC.localAI[3] == 0)
             {
                 NPC.TargetClosest();
@@ -479,6 +483,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 ShouldDrawAura = true;
                 // -1 means no dust is drawn, as it looks ugly.
                 ArenaAura(AuraCenter, 2000f * AuraScale, true, -1, default, ModContent.BuffType<GodEaterBuff>(), ModContent.BuffType<MutantFangBuff>());
+
+                if (!SkyManager.Instance["FargowiltasSouls:MutantBoss1"].IsActive())
+                    SkyManager.Instance.Activate("FargowiltasSouls:MutantBoss1");
             }
             else
             {
@@ -1402,9 +1409,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void PrepareMutantSword()
         {
-            if (AttackChoice == 9 && Main.LocalPlayer.active && NPC.Distance(Main.LocalPlayer.Center) < 3000f && Main.expertMode)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
-
             //can alternate directions
             int sign = AttackChoice != 9 && NPC.localAI[2] % 2 == 1 ? -1 : 1;
 
@@ -1483,9 +1487,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void MutantSword()
         {
-            if (AttackChoice == 9 && Main.LocalPlayer.active && NPC.Distance(Main.LocalPlayer.Center) < 3000f && Main.expertMode)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
-
             NPC.ai[3] += NPC.ai[2];
             NPC.direction = NPC.spriteDirection = Math.Sign(NPC.localAI[1]);
 
@@ -4025,7 +4026,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<SpawnSack>(), 4));
 
             LeadingConditionRule emodeRule = new(new EModeDropCondition());
-            emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<Items.Accessories.Masomode.MutantEye>()));
+            emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<Content.Items.Accessories.Eternity.MutantEye>()));
             npcLoot.Add(emodeRule);
         }
 
@@ -4081,7 +4082,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             float radius = 2000f * auraScale;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = NPC.Opacity;

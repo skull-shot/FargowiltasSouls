@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
@@ -80,10 +80,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.GladiatorStandardCD--;
             if (player.HasBuff<GladiatorBuff>())
             {
-                float stats = 0.05f;
+                float stats = 0.08f;
                 if (modPlayer.ForceEffect<GladiatorEnchant>())
-                    stats = 0.1f;
-                player.GetDamage(DamageClass.Generic) += stats;
+                    stats = 0.16f;
+                //player.GetDamage(DamageClass.Generic) += stats;
                 player.endurance += stats;
                 player.noKnockback = true;
             }

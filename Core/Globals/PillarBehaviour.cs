@@ -141,7 +141,7 @@ namespace FargowiltasSouls.Core.Globals
 
         #region Sprite Loading
         protected static Asset<Texture2D> LoadSprite(string texture)
-            => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Resprites/" + texture, AssetRequestMode.ImmediateLoad);
+            => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/EModeResprites/" + texture, AssetRequestMode.ImmediateLoad);
 
         protected static void LoadSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
         {

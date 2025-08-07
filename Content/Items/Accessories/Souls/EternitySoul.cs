@@ -1,6 +1,8 @@
 ﻿
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -104,9 +106,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.defense = 100;
 
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
-            Item.UseSound = SoundID.Item6;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
 
         public override void UseItemFrame(Player player) => SandsofTime.Use(player);
@@ -184,14 +186,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(null, "UniverseSoul")
-            .AddIngredient(null, "DimensionSoul")
-            .AddIngredient(null, "TerrariaSoul")
-            .AddIngredient(null, "MasochistSoul")
+            .AddIngredient<UniverseSoul>()
+            .AddIngredient<DimensionSoul>()
+            .AddIngredient<TerrariaSoul>()
+            .AddIngredient<MasochistSoul>()
 
-            .AddIngredient(null, "EternalEnergy", 30)
+            .AddIngredient<EternalEnergy>(30)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
             .Register();
         }

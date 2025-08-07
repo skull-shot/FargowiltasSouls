@@ -142,7 +142,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.HandOfCreation)
             .AddIngredient(ItemID.ActuationAccessory)
             .AddIngredient(ItemID.LaserRuler)
-            .AddIngredient(ItemID.RoyalGel)
             //.AddRecipeGroup("FargowiltasSouls:AnyShellphone")
             //.AddIngredient(ItemID.Shellphone)
             //.AddIngredient(ItemID.BloodHamaxe) //haemoraxe

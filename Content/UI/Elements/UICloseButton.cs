@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -28,7 +29,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
 
             // Drawing
-            Texture2D outlineTexture = FargoUIManager.Cross.Value;
+            Texture2D outlineTexture = FargoAssets.UI.Toggler.Cross.Value;
             Vector2 position = style.Position();
             spriteBatch.Draw(outlineTexture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
         }

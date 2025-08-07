@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Common
 {
-    public abstract class EModeAccessorySlot : ModAccessorySlot
+    public class EModeAccessorySlot : ModAccessorySlot
     {
         int[] AllowedItemExceptions =
         //technically these are souls so should legally go in the slot that allows souls
@@ -26,12 +26,14 @@ namespace FargowiltasSouls.Common
             ItemID.SoulofSight,
             ItemID.SoulofMight,
         ];
-        public abstract int Loadout { get; }
+
+        public override bool HasEquipmentLoadoutSupport => true;      
+
         public override bool CanAcceptItem(Item checkItem, AccessorySlotType context)
         {
             if ((context == AccessorySlotType.FunctionalSlot || context == AccessorySlotType.VanitySlot) && (base.CanAcceptItem(checkItem, context) || AllowedItemExceptions.Contains(checkItem.type)))
             {
-                if ((checkItem.ModItem != null && (checkItem.ModItem is BaseEnchant || checkItem.ModItem is BaseForce || checkItem.ModItem is BaseSoul || checkItem.ModItem is BaseEssence)) || AllowedItemExceptions.Contains(checkItem.type))
+                if ((checkItem.ModItem != null && (checkItem.ModItem is BaseEnchant || checkItem.ModItem is BaseForce || checkItem.ModItem is BaseSoul) || AllowedItemExceptions.Contains(checkItem.type)))
                 {
 
                     return true;
@@ -40,22 +42,13 @@ namespace FargowiltasSouls.Common
             }
             return base.CanAcceptItem(checkItem, context);
         }
-        /*
-        public override bool ModifyDefaultSwapSlot(Item item, int accSlotToSwapTo)
-        {
-            if ((item.ModItem != null && (item.ModItem is BaseEnchant || item.ModItem is BaseForce || item.ModItem is BaseSoul)) || AllowedItemExceptions.Contains(item.type))
-            {
-                return true;
-            }
-            return false;
-        }
-        */
+        
         public override bool IsVisibleWhenNotEnabled() => false;
         public override bool IsEnabled()
         {
-            return WorldSavingSystem.EternityMode && Player.FargoSouls().MutantsPactSlot && Player.CurrentLoadoutIndex == Loadout;
+            return WorldSavingSystem.EternityMode && Player.FargoSouls().MutantsPactSlot;
         }
-        public override string FunctionalTexture => "FargowiltasSouls/Assets/UI/EnchantSlotIcon";
+        public override string FunctionalTexture => FargoAssets.GetAssetString("UI", "EnchantSlotIcon");
         //public override string FunctionalBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
         //public override string VanityBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
         //public override string DyeBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
@@ -71,17 +64,5 @@ namespace FargowiltasSouls.Common
                     break;
             }
         }
-    }
-    public class EModeAccessorySlot0 : EModeAccessorySlot
-    {
-        public override int Loadout => 0;
-    }
-    public class EModeAccessorySlot1 : EModeAccessorySlot
-    {
-        public override int Loadout => 1;
-    }
-    public class EModeAccessorySlot2 : EModeAccessorySlot
-    {
-        public override int Loadout => 2;
     }
 }

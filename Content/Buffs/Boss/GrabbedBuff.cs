@@ -22,8 +22,10 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
 
             fargoPlayer.Mash = true;
+            fargoPlayer.GrabDamage = true;
 
             player.Incapacitate();
         }
+
     }
 }

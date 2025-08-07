@@ -1,10 +1,10 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Gaia;
+using FargowiltasSouls.Content.Items.Armor.Eternal;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Core.Systems;
@@ -337,10 +337,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<FrostEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ItemID.PygmyNecklace];
             }
             else if (!NPC.downedMechBoss3)
             {
@@ -360,14 +360,14 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<FrostEnchant>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<AncientHallowEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
             else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.Lifelight])
             {
-                summonType = ModContent.ItemType<FragilePixieLamp>();
+                summonType = ModContent.ItemType<CrystallineEffigy>();
                 build += GetBuildText(
                     Main.rand.Next(new int[] { ModContent.ItemType<AeolusBoots>(), ModContent.ItemType<MeteorEnchant>() }),
                     Main.rand.Next(new int[] { ItemID.FlameWings, ItemID.FrozenWings, ItemID.BeeWings, ModContent.ItemType<GelicWings>() })
@@ -384,10 +384,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<PureHeart>()
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<AncientHallowEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
             else if (!NPC.downedPlantBoss)
             {
@@ -433,10 +433,10 @@ namespace FargowiltasSouls.Content.Items.Misc
                 );
                 other += GetBuildText(ModContent.ItemType<WizardEnchant>());
                 other += $"[i:{ModContent.Find<ModItem>("Fargowiltas", "LihzahrdInstactuationBomb").Type}]";
-                meleeSpecific = [ModContent.ItemType<BarbariansEssence>(), ModContent.ItemType<TungstenEnchant>()];
-                rangerSpecific = [ModContent.ItemType<SharpshootersEssence>()];
-                mageSpecific = [ModContent.ItemType<ApprenticesEssence>()];
-                summonerSpecific = [ModContent.ItemType<OccultistsEssence>(), ModContent.ItemType<SpookyEnchant>(), ModContent.ItemType<TikiEnchant>()];
+                meleeSpecific = [ItemID.WarriorEmblem, ModContent.ItemType<TungstenEnchant>()];
+                rangerSpecific = [ItemID.RangerEmblem];
+                mageSpecific = [ItemID.SorcererEmblem];
+                summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<SpookyEnchant>(), ModContent.ItemType<TikiEnchant>()];
             }
             else if (!WorldSavingSystem.DownedBetsy)
             {
@@ -556,7 +556,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
-                    ModContent.ItemType<ShadowForce>(),
+                    ModContent.ItemType<DeathForce>(),
                     ModContent.ItemType<NatureForce>(),
                     ModContent.ItemType<WillForce>(),
                     ModContent.ItemType<HeartoftheMasochist>()
@@ -577,7 +577,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
-                    ModContent.ItemType<ShadowForce>(),
+                    ModContent.ItemType<DeathForce>(),
                     ModContent.ItemType<NatureForce>(),
                     ModContent.ItemType<WillForce>(),
                     ModContent.ItemType<HeartoftheMasochist>()
@@ -604,9 +604,9 @@ namespace FargowiltasSouls.Content.Items.Misc
             {
                 summonType = ModContent.ItemType<MutantsCurse>();
                 build += GetBuildText(
-                    ModContent.ItemType<MutantMask>(),
-                    ModContent.ItemType<MutantBody>(),
-                    ModContent.ItemType<MutantPants>()
+                    ModContent.ItemType<EternalFlame>(),
+                    ModContent.ItemType<EternalCore>(),
+                    ModContent.ItemType<EternalLeggings>()
                 ) + " " + GetBuildText(
                     ModContent.ItemType<EternitySoul>(),
                     ModContent.ItemType<MasochistSoul>(),

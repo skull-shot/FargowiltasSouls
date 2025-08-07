@@ -1,5 +1,6 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -69,6 +70,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<ForbiddenEnchant>();
         public override bool ActiveSkill => true;
         public override bool MutantsPresenceAffects => true;
+        public static int Cooldown(Player player) => player.ForceEffect<ForbiddenEffect>() ? 60 * 10 : 60 * 18;
+        public static float BaseDamage(Player player) => player.ForceEffect<ForbiddenEffect>() ? 30 : 20;
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.ForbiddenCD > 0)
+            {
+                modPlayer.ForbiddenCD--;
+                if (Main.myPlayer == player.whoAmI)
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                        () => (float)modPlayer.ForbiddenCD / Cooldown(Main.LocalPlayer), activeFunction: Main.LocalPlayer.HasEffectEnchant<ForbiddenEffect>, displayAtFull: false);
+            }
+                
+        }
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (!stunned)
@@ -78,17 +93,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.HasEffect<ForbiddenEffect>() && player.HasEffectEnchant<ForbiddenEffect>())
             {
-                FargoSoulsPlayer modPlayer = player.FargoSouls();
-                if (modPlayer.CanSummonForbiddenStorm)
-                {
-                    CommandForbiddenStorm(player);
-                    modPlayer.CanSummonForbiddenStorm = false;
-                }
+                CommandForbiddenStorm(player);
             }
         }
         public static void CommandForbiddenStorm(Player Player)
         {
             if (!Player.HasEffectEnchant<ForbiddenEffect>())
+                return;
+            if (Player.FargoSouls().ForbiddenCD > 0)
                 return;
             List<int> list = [];
             for (int i = 0; i < Main.maxProjectiles; i++)
@@ -98,6 +110,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     list.Add(i);
                 }
+            }
+
+            if (list.Count > 0)
+            {
+                Main.projectile[list[0]].As<ForbiddenTornado>().Unleash();
+                return;
             }
 
             Vector2 center = Player.Center;
@@ -183,7 +201,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
             }
 
-            int damage = (int)(20f * (1f + Player.GetDamage(DamageClass.Magic).Additive + Player.GetDamage(DamageClass.Summon).Additive - 2f));
+            int damage = (int)(BaseDamage(Player) * (1f + Player.GetDamage(DamageClass.Magic).Additive + Player.GetDamage(DamageClass.Summon).Additive - 2f));
             Projectile.NewProjectile(Player.GetSource_EffectItem<ForbiddenEffect>(), mouse, Vector2.Zero, ModContent.ProjectileType<ForbiddenTornado>(), damage, 0f, Main.myPlayer, 0f, 0f);
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)

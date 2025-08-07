@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -7,10 +8,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeCageProjectile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Life Cage");
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         public override void SetDefaults()
         {
             Projectile.width = 24;
@@ -48,7 +46,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     Main.LocalPlayer.RemoveAllGrapplingHooks();
                 SoundEngine.PlaySound(SoundID.Item56, Projectile.Center);
             }
-            if (NPC.CountNPCS(ModContent.NPCType<LifeChallenger>()) < 1)
+            if (NPC.CountNPCS(ModContent.NPCType<Lifelight>()) < 1)
             {
                 Projectile.Kill();
             }

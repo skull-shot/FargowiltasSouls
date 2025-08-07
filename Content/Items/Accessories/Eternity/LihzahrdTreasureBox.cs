@@ -1,0 +1,61 @@
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Toggler.Content;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace FargowiltasSouls.Content.Items.Accessories.Eternity
+{
+    public class LihzahrdTreasureBox : SoulsItem
+    {
+        public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<DiveEffect>()];
+
+        public override void SetStaticDefaults()
+        {
+            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+        }
+
+        public override void SetDefaults()
+        {
+            Item.width = 20;
+            Item.height = 20;
+            Item.accessory = true;
+            Item.rare = ItemRarityID.Yellow;
+            Item.value = Item.sellPrice(0, 6);
+            Item.defense = 8;
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            player.noKnockback = true;
+            player.buffImmune[BuffID.Burning] = true;
+            player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
+            player.FargoSouls().LihzahrdTreasureBoxItem = Item;
+            player.AddEffect<LihzahrdGroundPound>(Item);
+            player.AddEffect<DiveEffect>(Item);
+            player.AddEffect<LihzahrdBoulders>(Item);
+        }
+    }
+    public class DiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
+        public override bool ActiveSkill => true;
+    }
+    public class LihzahrdGroundPound : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
+    }
+    public class LihzahrdBoulders : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
+        public override bool ExtraAttackEffect => true;
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -108,7 +108,7 @@ namespace FargowiltasSouls
         public override IEnumerable<string> GetCallCommands()
         {
             yield return "DownedChamp";
-            yield return "DownedAbominationn";
+            yield return "DownedChampion";
         }
         public override IEnumerable<Type> GetInputTypes()
         {
@@ -116,7 +116,7 @@ namespace FargowiltasSouls
         }
         protected override object SafeProcess(params object[] argsWithoutCommand)
         {
-            return WorldSavingSystem.DownedBoss[(int)Enum.Parse<WorldSavingSystem.Downed>(argsWithoutCommand[1] as string, true)];
+            return WorldSavingSystem.DownedBoss[(int)Enum.Parse<WorldSavingSystem.Downed>(argsWithoutCommand[0] as string, true)];
         }
     }
     internal sealed class DownedEridanusCall : ModCall

@@ -1,5 +1,5 @@
-﻿
-using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
@@ -96,38 +96,42 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, proj.DamageType);
+            int critChance = (int)player.ActualClassCrit(proj.DamageType) + FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            PearlwoodCritReroll(player, ref modifiers, critChance);
         }
         public override void ModifyHitNPCWithItem(Player player, Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, item.DamageType);
+            PearlwoodCritReroll(player, ref modifiers, (int)player.ActualClassCrit(item.DamageType));
         }
-        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, DamageClass damageClass)
+        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, int critChance)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (modPlayer.PearlwoodCritDuration <= 0)
+            if (modPlayer.PearlwoodCritDuration <= 0 || critChance <= 0 || critChance >= 100)
                 return;
 
             if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
                 return;
 
+            if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? is not null)
+                return;
+
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {
-                if (Main.rand.Next(0, 100) <= player.ActualClassCrit(damageClass))
+                if (Main.rand.Next(0, 100) <= critChance)
                 {
                     modifiers.SetCrit();
+                    break; // no need for this to run twice
                 }
             }
-
         }
         public static void OnPickup(Player player)
         {
             if (!player.HasEffect<PearlwoodEffect>())
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            modPlayer.PearlwoodCritDuration = 60 * 5;
+            modPlayer.PearlwoodCritDuration = 60 * 3;
 
             if (player.HasEffect<PearlwoodStarEffect>())
             {

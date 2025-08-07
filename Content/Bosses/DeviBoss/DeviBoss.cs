@@ -1,10 +1,10 @@
 using Fargowiltas.Content.NPCs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Pets;
@@ -14,10 +14,10 @@ using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Patreon.Phupperbat;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
@@ -908,13 +908,17 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             void RuneWizard()
             {
                 int threshold = WorldSavingSystem.MasochistModeReal ? 400 : 450;
+                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
 
                 Player localPlayer = Main.LocalPlayer;
 
                 if (NPC.target == localPlayer.whoAmI) // only for target
                 {
-                    EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), ModContent.BuffType<CrippledBuff>(), BuffID.Dazed, BuffID.OgreSpit);
-                    EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), ModContent.BuffType<CrippledBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    if (Timer > attackTime && SubTimer > 0)
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    else
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                 }
 
                 float distance = localPlayer.Distance(NPC.Center);
@@ -957,7 +961,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (WorldSavingSystem.MasochistModeReal && SubTimer < 1)
                     SubTimer = 1;
 
-                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
                 if (++Timer == 1)
                 {
                     //TeleportDust();
@@ -2322,16 +2325,16 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 // Inner ring.
                 Color innerColor = Color.Red;
                 innerColor.A = 0;
-                float radius = FargosTextureRegistry.HardEdgeRing.Width() / 2;
+                float radius = FargoAssets.HardEdgeRing.Width() / 2;
                 int size = WorldSavingSystem.MasochistModeReal ? 200 : 150;
                 float scale = size / radius;
                 
-                spriteBatch.Draw(FargosTextureRegistry.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargosTextureRegistry.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargoAssets.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
                 // Outer ring.
                 Color outerColor = Color.Green;
                 outerColor.A = 0;
-                spriteBatch.Draw(FargosTextureRegistry.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargosTextureRegistry.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargoAssets.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
             }
         }
         #endregion

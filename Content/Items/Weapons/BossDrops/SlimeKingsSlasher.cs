@@ -1,10 +1,10 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using System;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 
 namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {

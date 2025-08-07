@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -55,13 +55,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             LockVector.Y = binaryReader.ReadSingle();
         }
 
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
-            if (!Main.hardMode)
-                npc.damage = (int)Math.Round(npc.damage * 0.5);
-        }
-
         public override void FindFrame(NPC npc, int frameHeight)
         {
             //pretending to be chest
@@ -86,7 +79,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 npc.ai[0] = 0f;
                 npc.ai[1] = 0f;
                 npc.ai[2] = 0f;
-                npc.ai[3] = 0f;
                 npc.velocity = new Vector2(0, 10);
 
                 npc.position.X = (int)(npc.position.X / 16) * 16;
@@ -312,13 +304,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             if (npc.type == NPCID.Mimic || npc.type == NPCID.PresentMimic || npc.type == NPCID.IceMimic)
             {
                 npc.dontTakeDamage = false;
-                if (npc.justHit && Main.hardMode)
+                /*if (npc.justHit && Main.hardMode)
                     InvulFrameTimer = 15;
                 if (InvulFrameTimer > 0)
                 {
                     InvulFrameTimer--;
                     npc.dontTakeDamage = true;
-                }
+                }*/
             }
         }
 

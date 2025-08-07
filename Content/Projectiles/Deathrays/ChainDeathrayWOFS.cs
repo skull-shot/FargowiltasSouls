@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class ChainDeathrayWOFS : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayWOF";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayWOF");
         public ChainDeathrayWOFS() : base(90, 0.5f) { }
 
         public override void SetStaticDefaults()
@@ -57,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             if (Projectile.localAI[0] == 30 && FargoSoulsUtil.HostCheck)
             {
                 Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity * Projectile.ai[0],
-                    ModContent.ProjectileType<Masomode.WOFChain>(), Projectile.damage, 0f, Main.myPlayer);
+                    ModContent.ProjectileType<WOFChain>(), Projectile.damage, 0f, Main.myPlayer);
             }
             if (Projectile.localAI[0] >= maxTime)
             {

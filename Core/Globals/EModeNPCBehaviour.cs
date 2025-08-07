@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!WorldSavingSystem.EternityMode)
                 return;
-
+            OnHitByAnything(npc, player, hit, damageDone);
             SafeOnHitByItem(npc, player, item, hit, damageDone);
             // ModifyHitByAnything(npc, player, hit);
         }
@@ -123,7 +123,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!WorldSavingSystem.EternityMode)
                 return;
-
+            OnHitByAnything(npc, Main.player[projectile.owner], hit, damageDone);
             SafeOnHitByProjectile(npc, projectile, hit, damageDone);
             // ModifyHitByAnything(npc, Main.player[projectile.owner], ref damage, ref knockback, ref crit);
         }
@@ -160,7 +160,7 @@ namespace FargowiltasSouls.Core.Globals
         #region Sprite Loading
         protected static Asset<Texture2D> LoadSprite(string texture)
         {
-            if (ModContent.RequestIfExists("FargowiltasSouls/Assets/ExtraTextures/Resprites/" + texture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
+            if (ModContent.RequestIfExists("FargowiltasSouls/Assets/Textures/EModeResprites/" + texture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
             {
                 return asset;
             }

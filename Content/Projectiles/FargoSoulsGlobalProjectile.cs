@@ -4,24 +4,20 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Patreon.DanielTheRobot;
-using FargowiltasSouls.Content.PlayerDrawLayers;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.HeartOfTheMaster;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Plantera;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -40,6 +36,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -62,9 +59,9 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool CanSplit = true;
         public bool ItemSource = false;
         // private int numSplits = 1;
-        public int stormTimer;
         public float TungstenScale = 1;
         public bool TikiTagged;
+        public int TikiTimer;
         public bool electricAttack;
         public int spookyCD;
         public bool FrostFreeze;
@@ -106,8 +103,14 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
-        public bool ArrowRain;
+        public bool ArrowRain; // whether this projectile is spawned by Red Riding Enchantment's arrow rain
 
+        public bool ApprenticeSupportProjectile; // whether this projectile has been spawned by Apprentice Support effect
+
+        public static Projectile? globalProjectileField = null; // enables modifying tagged projectile in any method
+
+        public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
+        
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),
@@ -292,7 +295,12 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceProj3.FargoSouls().TikiTagged)
                     {
                         TikiTagged = true;
+                        TikiTimer += 180;
                         sourceProj3.FargoSouls().TikiTagged = false;
+                    }
+                    if (sourceProj3.FargoSouls().ApprenticeSupportProjectile)
+                    {
+                        ApprenticeSupportProjectile = true; // inherit Apprentice Support tag if source is also a Support projectile
                     }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
@@ -329,7 +337,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (player.HasEffect<GroundStickDR>())
+            if (player.HasEffect<RemoteControlDR>())
             {
                 if (projectile.ModProjectile == null)
                 {
@@ -456,6 +464,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
+                && !EModeGlobalProjectile.FancySwings.Contains(projectile.type)
                 && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
                 && !FargoSoulsUtil.IsSummonDamage(projectile, true, false))
             {
@@ -479,6 +488,15 @@ namespace FargowiltasSouls.Content.Projectiles
             // Fix for extended sword hitboxes having a maximum range for some reason
             if (projectile.aiStyle == ProjAIStyleID.NightsEdge)
                 projectile.ownerHitCheckDistance *= projectile.scale;
+
+            if (player.HasEffect<ApprenticeSupport>() && !(modPlayer.ApprenticeItemCD > 0)) // only run when the Apprentice Shoot method runs
+            {
+                // crosscheck the projectile's source item to see if it matches the Apprentice Support weapon that spawned it
+                if (source is EntitySource_ItemUse_WithAmmo parent4 && parent4.Item is Item sItem && FargoSoulsPlayer.ApprenticeSupportItem is not null && sItem == FargoSoulsPlayer.ApprenticeSupportItem)
+                {
+                    ApprenticeSupportProjectile = true; // tag it, meaning we now know that this projectile is from Apprentice Support effect
+                }
+            }
         }
 
         public static int[] NoSplit => [
@@ -534,7 +552,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile storm = Main.projectile[tornadoIndex];
                     if (storm.Alive() &&  projectile.owner == storm.owner && projectile.type != storm.type && projectile.Colliding(projectile.Hitbox, storm.Hitbox))
                     {
-                        stormTimer = 240;
+                        if (storm.ModProjectile is ForbiddenTornado forbiddenTornado)
+                            forbiddenTornado.Empower();
+                        else if (storm.ModProjectile is SpiritTornado spiritTornado)
+                            spiritTornado.Empower();
                     }
                 }
                 if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>() && (FargoSoulsUtil.CanDeleteProjectile(projectile)))
@@ -867,7 +888,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         Player player = Main.player[projectile.owner];
                         if (player.HeldItem.type == ModContent.ItemType<Blender>())
                         {
-                            Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/PlanteraTentacle", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                            Texture2D texture2D13 = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "BlenderProj3").Value;
                             Rectangle rectangle = new(0, 0, texture2D13.Width, texture2D13.Height);
                             Vector2 origin2 = rectangle.Size() / 2f;
 
@@ -1173,14 +1194,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
             }
 
-            if (stormTimer > 0)
-            {
-                stormTimer--;
-
-                int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.GoldFlame, projectile.velocity.X, projectile.velocity.Y, 100, default, 1.5f);
-                Main.dust[dustId].noGravity = true;
-            }
-
             if (ChilledProj)
             {
                 int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.Snow, projectile.velocity.X, projectile.velocity.Y, 100, default, 1f);
@@ -1222,34 +1235,24 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     p.FargoSouls().TikiTagged = true;
+                    p.FargoSouls().TikiTimer = 180;
                 }
             }
 
-            if (TikiTagged)
+            if (TikiTimer > 0)
             {
+                TikiTimer--;
                 //dust
                 if (Main.rand.NextBool(10))
                 {
-                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleSpore, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100, Color.LimeGreen, .8f);
+                    int dust = Dust.NewDust(new Vector2(projectile.position.X - 2f, projectile.position.Y - 2f), projectile.width + 4, projectile.height + 4, DustID.JungleTorch, projectile.velocity.X * 0.4f, projectile.velocity.Y * 0.4f, 100);
                     Main.dust[dust].noGravity = true;
                     Main.dust[dust].velocity *= 1.8f;
                     Dust expr_1CCF_cp_0 = Main.dust[dust];
                     expr_1CCF_cp_0.velocity.Y -= 0.5f;
-                    if (Main.rand.NextBool(4))
-                    {
-                        Main.dust[dust].noGravity = false;
-                        Main.dust[dust].scale *= 0.5f;
-                    }
                 }
             }
         }
-
-        public static int[] FancySwings => [
-            ProjectileID.Excalibur,
-            ProjectileID.TrueExcalibur,
-            ProjectileID.TerraBlade2,
-            ProjectileID.TheHorsemansBlade
-        ];
 
         public override void PostAI(Projectile projectile)
         {
@@ -1322,13 +1325,14 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
-            {
-                modPlayer.HuntressStage /= 2;
-                //Main.NewText("MISS");
-                HuntressProj = -1;
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1600 && projectile.Center.Distance(Main.player[projectile.owner].Center) < 1680) //gets inbetween 100 and 105 blocks of the player
+            {                                                                                                                                                      //done like this so a stream of missed projectiles with a long lifespan dont posthumously decrement bonuses
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //sound effect
+                HuntressProj = -1;
             }
 
             if (CirnoBurst > 0)
@@ -1340,28 +1344,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
-            }
-
-            if (projectile.owner == player.whoAmI)
-            {
-                if (FancySwings.Contains(projectile.type))
-                {
-                    if (player.FargoSouls().swingDirection != player.direction)
-                    {
-                        projectile.ai[0] = -player.direction;
-                    }
-
-                    float rotation = -90;
-                    if (projectile.ai[0] == -1 && player.direction == -1)
-                    {
-                        rotation = -180;
-                    }
-                    else if (projectile.ai[0] == -1 && player.direction == 1)
-                    {
-                        rotation = 0;
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
-                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
@@ -1455,26 +1437,28 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (stormTimer > 0)
-                modifiers.FinalDamage *= modPlayer.ForceEffect<ForbiddenEnchant>() ? 1.4f : 1.2f;
-
             if (TungstenScale != 1 && projectile.type == ProjectileID.PiercingStarlight)
                 modifiers.FinalDamage *= 0.75f;
 
             if (TikiTagged)
             {
-                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.35f : 1.15f;
+                modifiers.FinalDamage *= modPlayer.ForceEffect<TikiEnchant>() ? 1.25f : 1.15f;
                 TikiTagged = false;
             }
-                
+
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.12f;
-                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
-                if (Main.rand.NextFloat() < increase)
-                    modifiers.SetCrit();
-
+                if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? != false)
+                {// no point in running if crit is disabled anyway
+                    int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
+                    ninjaCritIncrease = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
+                    if (ninjaCritIncrease > 0)
+                    {
+                        globalProjectileField = projectile;
+                        globalProjectileField.CritChance += ninjaCritIncrease;
+                    }
+                }
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)
@@ -1578,7 +1562,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGemstoneKeyEffect>())
+            if (projectile.type == ProjectileID.IceBlock && Main.player[projectile.owner].HasEffect<FrigidGraspKeyEffect>())
             {
                 target.AddBuff(BuffID.Frostburn, 360);
             }
@@ -1643,10 +1627,11 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
-                modPlayer.HuntressStage /= 2;
+                int decrement = 5;
+                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                    decrement = 3;
+                modPlayer.HuntressStage -= decrement;
                 modPlayer.HuntressMissCD = 30;
-                //Main.NewText("MISS");
-                //sound effect
             }
         }
 
@@ -1688,7 +1673,7 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             if (projectile.type == ProjectileID.RuneBlast)
             {
-                Texture2D texture2D13 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/RuneBlast", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Texture2D texture2D13 = FargoAssets.GetTexture2D("Content/Projectiles", "RuneBlast").Value;
                 int num156 = texture2D13.Height / Main.projFrames[projectile.type]; //ypos of lower right corner of sprite to draw
                 int y3 = num156 * projectile.frame; //ypos of upper left corner of sprite to draw
                 Rectangle rectangle = new(0, y3, texture2D13.Width, num156);

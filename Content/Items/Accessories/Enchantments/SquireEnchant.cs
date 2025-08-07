@@ -65,26 +65,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                     modPlayer.BaseMountType = mount.Type;
                 }
-
-                int defenseBoost;
                 float accelBoost;
                 float speedBoost;
 
                 if (modPlayer.ValhallaEnchantActive && modPlayer.ForceEffect<ValhallaKnightEnchant>())
                 {
-                    defenseBoost = 20;
                     accelBoost = 2f;
                     speedBoost = 1.5f;
                 }
                 else if (modPlayer.ValhallaEnchantActive || modPlayer.ForceEffect<SquireEnchant>())
                 {
-                    defenseBoost = 15;
                     accelBoost = 1.5f;
                     speedBoost = 1.5f;
                 }
                 else
                 {
-                    defenseBoost = 10;
                     accelBoost = 1.25f;
                     speedBoost = 1.25f;
                 }
@@ -95,7 +90,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     accelBoost = 1;
                     speedBoost = 1;
                 }
-                if (player.HasEffect<ValhallaDash>())
+                /*if (player.HasEffect<ValhallaDashEffect>())
                 {
 
                     if (modPlayer.ValhallaDashCD > 0)
@@ -162,14 +157,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             }
                         }
                     }
-                }
+                }*/
 
                 if (player.HasEffect<SquireMountJump>())
                 {
-                    player.GetJumpState(ExtraJump.FartInAJar).Enable();
+                    player.GetJumpState(ExtraJump.BasiliskMount).Enable();
                 }
-
-                player.statDefense += defenseBoost;
 
                 mount._data.acceleration = modPlayer.BaseSquireMountData.acceleration * accelBoost;
                 mount._data.dashSpeed = modPlayer.BaseSquireMountData.dashSpeed * speedBoost;
@@ -191,7 +184,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void ValhallaDash(Player player, bool vertical, int direction)
         {
-            //horizontal
+            /*//horizontal
             if (!vertical)
             {
                 player.FargoSouls().MonkDashing = 10;
@@ -243,7 +236,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             num19 = Gore.NewGore(player.GetSource_FromThis(), new Vector2(player.position.X + player.width / 2 - 24f, player.position.Y + player.height / 2 - 14f), default, Main.rand.Next(61, 64), 1f);
             Main.gore[num19].velocity.X = Main.rand.Next(-50, 51) * 0.01f;
             Main.gore[num19].velocity.Y = Main.rand.Next(-50, 51) * 0.01f;
-            Main.gore[num19].velocity *= 0.4f;
+            Main.gore[num19].velocity *= 0.4f;*/
         }
 
         public static void ResetMountStats(FargoSoulsPlayer modPlayer)

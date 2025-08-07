@@ -5,15 +5,17 @@ global using LumUtils = Luminance.Common.Utilities.Utilities;
 using Fargowiltas;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
+using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Misc;
@@ -21,8 +23,8 @@ using FargowiltasSouls.Content.NPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
@@ -46,6 +48,7 @@ using Terraria.GameContent.Creative;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
+using Terraria.Initializers;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -57,6 +60,8 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : Mod
     {
         public static Mod MutantMod;
+        public static Mod CalamityMod;
+        public static Mod MusicDisplay;
 
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
@@ -75,6 +80,8 @@ namespace FargowiltasSouls
         internal static ModKeybind ActiveSkill3Key;
         internal static ModKeybind ActiveSkill4Key; // Unused
         internal static ModKeybind ActiveSkillMenuKey;
+
+        public static List<TitleLinkButton> fargoTitleLinks = new List<TitleLinkButton>();
         internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
 
 
@@ -120,8 +127,19 @@ namespace FargowiltasSouls
         {
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
+            ModLoader.TryGetMod("CalamityMod", out CalamityMod);
+            ModLoader.TryGetMod("MusicDisplay", out MusicDisplay);
 
+            List<TitleLinkButton> titleLinks = fargoTitleLinks;
+            titleLinks.Add(MakeSimpleButton("TitleLinks.Discord", "https://discord.gg/fargo", 0));
+            titleLinks.Add(MakeSimpleButton("TitleLinks.Wiki", "https://fargosmods.wiki.gg", 1));
+            titleLinks.Add(MakeSimpleButton("Mods.FargowiltasSouls.UI.TitleLinks.Patreon", "https://www.patreon.com/c/fargoteam", 2));
+            titleLinks.Add(MakeSimpleButton("Mods.FargowiltasSouls.UI.TitleLinks.Github", "https://github.com/Fargowilta", 3));
+
+            SkyManager.Instance["FargowiltasSouls:AbomBoss1"] = new AbomSkyP1();
             SkyManager.Instance["FargowiltasSouls:AbomBoss"] = new AbomSky();
+
+            SkyManager.Instance["FargowiltasSouls:MutantBoss1"] = new MutantSkyP1();
             SkyManager.Instance["FargowiltasSouls:MutantBoss"] = new MutantSky();
             SkyManager.Instance["FargowiltasSouls:MutantBoss2"] = new MutantSky2();
 
@@ -178,11 +196,11 @@ namespace FargowiltasSouls
                 GameShaders.Armor.BindShader(ModContent.ItemType<GaiaDye>(), new ArmorShaderData(gaiaRef, "GaiaArmor").UseColor(new Color(0.44f, 1, 0.09f)).UseSecondaryColor(new Color(0.5f, 1f, 0.9f)));
 
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
-                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityQueenSlime"));
+                GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage1(Assets.Request<Texture2D>("Assets/Textures/EModeResprites/QueenSlimePalettes/EternityQueenSlime"));
                 GameShaders.Misc["FargowiltasSouls:QueenSlime"].UseImage2("Images/Extra_" + 179);
                 
                 GameShaders.Misc["FargowiltasSouls:KingSlime"] = new MiscShaderData(Main.PixelShaderRef, "QueenSlime");
-                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage1(Assets.Request<Texture2D>("Assets/ExtraTextures/QueenSlimePalettes/EternityKingSlime"));
+                GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage1(Assets.Request<Texture2D>("Assets/Textures/EModeResprites/QueenSlimePalettes/EternityKingSlime"));
                 GameShaders.Misc["FargowiltasSouls:KingSlime"].UseImage2("Images/Extra_" + 179);
 
                 //GameShaders.Misc["PulseUpwards"] = new MiscShaderData(textRef, "PulseUpwards");
@@ -278,6 +296,7 @@ namespace FargowiltasSouls
             ActiveSkillMenuKey = null;
 
             DebuffIDs?.Clear();
+            DefenseReducingDebuffs?.Clear();
 
             ModProjDict.Clear();
 
@@ -440,7 +459,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<BerserkedBuff>(),
                     ModContent.BuffType<BloodthirstyBuff>(),
                     ModContent.BuffType<ClippedWingsBuff>(),
-                    ModContent.BuffType<CrippledBuff>(),
                     ModContent.BuffType<CurseoftheMoonBuff>(),
                     ModContent.BuffType<DefenselessBuff>(),
                     ModContent.BuffType<FlamesoftheUniverseBuff>(),
@@ -458,7 +476,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<JammedBuff>(),
                     ModContent.BuffType<LethargicBuff>(),
                     ModContent.BuffType<LightningRodBuff>(),
-                    ModContent.BuffType<LihzahrdCurseBuff>(),
                     ModContent.BuffType<LivingWastelandBuff>(),
                     ModContent.BuffType<LovestruckBuff>(),
                     ModContent.BuffType<LowGroundBuff>(),
@@ -470,7 +487,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<OceanicSealBuff>(),
                     ModContent.BuffType<OiledBuff>(),
-                    ModContent.BuffType<PurgedBuff>(),
                     ModContent.BuffType<RushJobBuff>(),
                     ModContent.BuffType<ReverseManaFlowBuff>(),
                     ModContent.BuffType<RottingBuff>(),
@@ -503,14 +519,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<TwinsInstallBuff>()
                 ];
-                if (EmodeItemBalance.HasEmodeChange(Main.player[Main.myPlayer], ItemID.RodofDiscord))
-                {
-                    DefenseReducingDebuffs.Add(88);
-                }
-                if (Main.player[Main.myPlayer].FargoSouls().BerserkedFromAgitation == true)
-                {
-                    DefenseReducingDebuffs.Add(ModContent.BuffType<BerserkerInstallBuff>());
-                }
 
                 const int k = 1000;
                 FargoSets.NPCs.SwarmHealth[ModContent.NPCType<RoyalSubject>()] = 5100;
@@ -561,7 +569,7 @@ namespace FargowiltasSouls
                 fargos.Call("AddSummon", 2.79f, "FargowiltasSouls", "CoffinSummon", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin]), Item.buyPrice(0, 9));
                 fargos.Call("AddSummon", 6.9f, "FargowiltasSouls", "DevisCurse", new Func<bool>(() => WorldSavingSystem.DownedDevi), Item.buyPrice(0, 17, 50));
                 fargos.Call("AddSummon", 8.7f, "FargowiltasSouls", "MechLure", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron]), Item.buyPrice(0, 22));
-                fargos.Call("AddSummon", 11.49f, "FargowiltasSouls", "FragilePixieLamp", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight]), Item.buyPrice(0, 45));
+                fargos.Call("AddSummon", 11.49f, "FargowiltasSouls", "CrystallineEffigy", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight]), Item.buyPrice(0, 45));
                 fargos.Call("AddSummon", 18.009f, "FargowiltasSouls", "ChampionySigil", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CosmosChampion]), Item.buyPrice(5));
                 fargos.Call("AddSummon", 18.01f, "FargowiltasSouls", "AbomsCurse", new Func<bool>(() => WorldSavingSystem.DownedAbom), Item.buyPrice(10));
                 //fargos.Call("AddSummon", 18.01f, "FargowiltasSouls", "TruffleWormEX", () => WorldSavingSystem.downedFishronEX, Item.buyPrice(10));
@@ -629,7 +637,6 @@ namespace FargowiltasSouls
         internal enum PacketID : byte
         {
             RequestGuttedCreeper,
-            RequestPerfumeHeart,
             RequestPearlwoodStar,
             SyncCultistDamageCounterToServer,
             RequestCreeperHeal,
@@ -648,12 +655,14 @@ namespace FargowiltasSouls
             SyncSnatcherGrab,
             SyncCursedSpiritGrab,
             SyncCursedSpiritRelease,
+            SyncAntlionGrab,
             SyncTuskRip,
             DropMutantGift,
             RequestEnvironmentalProjectile,
             ToggleEternityMode,
             WakeUpDeviantt,
-            WakeUpMutant
+            WakeUpMutant,
+            SyncSoulVortexHit
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -675,15 +684,6 @@ namespace FargowiltasSouls
                                 Main.npc[n].velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 8;
                                 NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                             }
-                        }
-                        break;
-
-                    case PacketID.RequestPerfumeHeart: //client to server
-                        if (Main.netMode == NetmodeID.Server)
-                        {
-                            int p = reader.ReadByte();
-                            int n = reader.ReadByte();
-                            Item.NewItem(Main.player[p].GetSource_OnHit(Main.npc[n]), Main.npc[n].Hitbox, ItemID.Heart);
                         }
                         break;
 
@@ -1048,7 +1048,18 @@ namespace FargowiltasSouls
 
                         }
                         break;
-
+                    case PacketID.SyncSoulVortexHit:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            if (npc != null && npc.active && npc.ModNPC is SoulVortex && Main.netMode == NetmodeID.Server)
+                            {
+                                npc.ai[2] = reader.Read7BitEncodedInt();
+                                npc.ai[3] = reader.ReadSingle();
+                                npc.velocity = reader.ReadVector2();
+                                npc.netUpdate = true;
+                            }
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -1081,6 +1092,36 @@ namespace FargowiltasSouls
         public static bool NoZoneNormalSpawnAllowWater(NPCSpawnInfo spawnInfo) => NormalSpawn(spawnInfo) && NoZoneAllowWater(spawnInfo);
 
         public static bool NoBiomeNormalSpawn(NPCSpawnInfo spawnInfo) => NormalSpawn(spawnInfo) && NoBiome(spawnInfo) && NoZone(spawnInfo);
+
+        public static TitleLinkButton MakeSimpleButton(string textKey, string linkUrl, int horizontalFrameIndex)
+        {   
+            //yummy vanilla code 
+            Asset<Texture2D> val = FargoAssets.UI.MainMenu.TitleLinkButtons;
+            Rectangle value = val.Frame(4, 2, horizontalFrameIndex);
+            Rectangle value2 = val.Frame(4, 2, horizontalFrameIndex, 1);
+            value.Width--;
+            value.Height--;
+            value2.Width--;
+            value2.Height--;
+            return new TitleLinkButton
+            {
+                TooltipTextKey = textKey,
+                LinkUrl = linkUrl,
+                FrameWehnSelected = value2,
+                FrameWhenNotSelected = value,
+                Image = val
+            };
+        }
+        public static void DrawTitleLinks(Color menuColor, float upBump)
+        {
+            List<TitleLinkButton> titleLinks = fargoTitleLinks;
+            Vector2 anchorPosition = new Vector2(18f, (float)(Main.screenHeight - 85 - 22) - upBump);
+            for (int i = 0; i < titleLinks.Count; i++)
+            {          
+                titleLinks[i].Draw(Main.spriteBatch, anchorPosition);
+                anchorPosition.X += 30f;
+            }
+        }
 
     }
 }

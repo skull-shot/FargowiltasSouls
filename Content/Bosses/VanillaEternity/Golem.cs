@@ -1,7 +1,7 @@
 using System.IO;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
@@ -20,7 +20,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem;
 using FargowiltasSouls.Content.Buffs.Souls;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.damage = (int)Math.Round(npc.damage * 1.1);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.4);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.6);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -86,11 +86,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
         }
 
-        public static string DungeonVariant => 
-            GenVars.crackedType == TileID.CrackedBlueDungeonBrick ? "B" : 
-            GenVars.crackedType == TileID.CrackedGreenDungeonBrick ? "G" : 
-            "P";
-
         public static void LoadGolemSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
         {
             if (recolor)
@@ -98,7 +93,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (!fargoBuffer.ContainsKey(type))
                 {
                     fargoBuffer[type] = vanillaTexture[type];
-                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{DungeonVariant}") ?? vanillaTexture[type];
+                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{WorldSavingSystem.DungeonBrickType}") ?? vanillaTexture[type];
                 }
             }
             else
@@ -109,6 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     fargoBuffer.Remove(type);
                 }
             }
+            //Main.NewText(WorldSavingSystem.DungeonBrickType);
         }
         public override void LoadSprites(NPC npc, bool recolor)
         {

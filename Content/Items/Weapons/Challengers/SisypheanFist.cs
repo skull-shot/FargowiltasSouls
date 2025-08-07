@@ -1,9 +1,9 @@
-﻿using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
 using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 
 namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {

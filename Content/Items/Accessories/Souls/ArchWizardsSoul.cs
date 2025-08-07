@@ -32,13 +32,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(null, "ApprenticesEssence")
-            .AddIngredient(ItemID.ManaCloak)
-            .AddIngredient(ItemID.MagnetFlower)
-            .AddIngredient(ItemID.ArcaneFlower)
-
-            .AddIngredient(ItemID.CelestialCuffs)
+            .AddIngredient(ItemID.SorcererEmblem)
             .AddIngredient(ItemID.CelestialEmblem)
+            .AddRecipeGroup("FargowiltasSouls:AnyMagicCuffs")
+            .AddRecipeGroup("FargowiltasSouls:AnyManaFlower")
             .AddIngredient(ItemID.MedusaHead)
             .AddIngredient(ItemID.SharpTears)
             .AddIngredient(ItemID.MagnetSphere)

@@ -65,19 +65,8 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["HolyDodge"];
                     return EModeChange.Nerf;
 
-                case ItemID.FrozenTurtleShell:
-                case ItemID.FrozenShield:
-                    balanceTextKeys = ["FrozenTurtleShell"];
-                    return EModeChange.Nerf;
-
-                case ItemID.BrainOfConfusion:
-                    if (ModLoader.HasMod("CalamityMod"))
-                        return EModeChange.None;
-                    balanceTextKeys = ["BrainOfConfusion"];
-                    return EModeChange.Nerf;
-
                 case ItemID.Zenith:
-                    if (WorldSavingSystem.DownedMutant || ModLoader.HasMod("CalamityMod"))
+                    if (WorldSavingSystem.DownedMutant || FargowiltasSouls.CalamityMod != null)
                     {
                         balanceTextKeys = ["ZenithNone"];
                         return EModeChange.Neutral;
@@ -95,10 +84,6 @@ namespace FargowiltasSouls.Content.Items
                         extra = bossesToKill;
                         return EModeChange.Nerf;
                     }
-
-                case ItemID.ChlorophyteBullet:
-                    balanceTextKeys = ["ChlorophyteBullet"];
-                    return EModeChange.Nerf;
 
                 case ItemID.VampireKnives:
                     balanceTextKeys = ["VampireKnives"];
@@ -126,10 +111,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.6f;
                     return EModeChange.Nerf;
-                case ItemID.SuperStarCannon:
+                /*case ItemID.SuperStarCannon:
                     balanceTextKeys = ["SuperStarCannon"];
                     balanceNumber = 7;
-                    return EModeChange.Nerf;
+                    return EModeChange.Nerf;*/
 
                 case ItemID.CandyCornRifle:
                     balanceTextKeys = ["Damage"];
@@ -160,7 +145,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
-                case ItemID.DD2SquireBetsySword:
+                /*case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
                     return EModeChange.Nerf;
@@ -168,7 +153,7 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.BeeGun:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
-                    return EModeChange.Buff;
+                    return EModeChange.Buff;*/
 
 
                 case ItemID.DemonScythe:
@@ -461,8 +446,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.MaceWhip: // Morning Star
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.7f;
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.75f;
                     return EModeChange.Nerf;
 
                 case ItemID.NettleBurst:
@@ -510,6 +495,15 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.MedusaHead:
                     balanceTextKeys = ["MedusaHead"];
                     return EModeChange.Buff;
+
+                case ItemID.DD2BetsyBow: //aerial bane
+                    balanceTextKeys = ["AerialBane"];
+                    return EModeChange.Nerf;
+                    
+                case ItemID.ChlorophyteBullet:
+                    balanceTextKeys = ["ChlorophyteBullet"];
+                    return EModeChange.Nerf;
+
                 default:
                     return EModeChange.None;
             }
@@ -583,6 +577,9 @@ namespace FargowiltasSouls.Content.Items
         {
 
             if (!WorldSavingSystem.EternityMode)
+                return;
+
+            if (!ClientConfig.Instance.ItemBalanceTooltip)
                 return;
 
             //if (item.damage > 0 && (item.ammo == AmmoID.Arrow || item.ammo == AmmoID.Bullet || item.ammo == AmmoID.Dart))

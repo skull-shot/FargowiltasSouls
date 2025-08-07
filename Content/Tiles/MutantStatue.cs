@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Localization;
@@ -8,16 +9,23 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class MutantStatue : ModTile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", "MutantStatue");
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
             Main.tileNoAttach[Type] = true;
 
+            
+
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
+            TileObjectData.newTile.StyleMultiplier = 2;
+            TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = true;
-            //TileObjectData.newTile.Origin = new Point16(0, 1);
-            //TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
+            TileObjectData.newTile.Direction = Terraria.Enums.TileObjectDirection.PlaceLeft;
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.Direction = Terraria.Enums.TileObjectDirection.PlaceRight;
+            TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
 
             LocalizedText name = CreateMapEntryName();

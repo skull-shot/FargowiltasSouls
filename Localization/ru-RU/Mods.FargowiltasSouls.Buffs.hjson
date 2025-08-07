@@ -35,17 +35,17 @@ MutantSpawnBuff: {
 
 SeekerOfTreasuresBuff: {
 	DisplayName: Искатель сокровищ
-	Description: Дай ему несколько тысяч лет, чтобы вырасти
+	Description: Дайте ему несколько тысяч лет, чтобы вырасти
 }
 
 NibbleBuff: {
 	DisplayName: Ниббл
-	Description: Только один кусочек (пожалуйста)
+	Description: Всего лишь один укус (пожалуйста)
 }
 
 MonkBuff: {
 	DisplayName: Медитация
-	Description: Ваш рывок Монаха готов
+	Description: Ваш рывок монаха готов
 }
 
 ObsidianLavaWetBuff: {
@@ -55,7 +55,7 @@ ObsidianLavaWetBuff: {
 
 TitaniumDRBuff: {
 	DisplayName: Титановый щит
-	Description: Дополнительное сопротивление урону и сопротивление многим дебаффам
+	Description: Дополнительное сопротивление урону и сопротивляемость многим дебаффам
 }
 
 KingSlimeMinionBuff: {
@@ -69,8 +69,8 @@ DukeFishronBuff: {
 }
 
 RoombaPetBuff: {
-	DisplayName: Румба
-	Description: Эта румба следует за вами
+	DisplayName: Робот-пылесос
+	Description: Этот робот-пылесос следует за вами
 }
 
 DoveBuff: {
@@ -94,7 +94,7 @@ FishMinionBuff: {
 }
 
 CrimetroidBuff: {
-	DisplayName: Малыш Криметроид
+	DisplayName: Малыш-Криметроид
 	Description: Малыш следует за вами
 }
 
@@ -139,8 +139,8 @@ DeviPresenceBuff: {
 }
 
 GrabbedBuff: {
-	DisplayName: Схвачен
-	Description: Долби по кнопкам передвижения, чтобы выбраться!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
 
 MutantFangBuff: {
@@ -213,13 +213,8 @@ ClippedWingsBuff: {
 	Description: Вы не можете использовать крылья или ракетные ботинки
 }
 
-CrippledBuff: {
-	DisplayName: Покалеченный
-	Description: Вы не можете бежать
-}
-
 CurseoftheMoonBuff: {
-	DisplayName: Проклятье Луны
+	DisplayName: Проклятие Луны
 	Description: Гнев Луны поглощает вас
 }
 
@@ -313,11 +308,6 @@ LihzahrdBlessingBuff: {
 	Message: Свет алтаря пал на вас!
 }
 
-LihzahrdCurseBuff: {
-	DisplayName: Проклятье ящщеров
-	Description: Провода в храме джунглей выключены
-}
-
 LivingWastelandBuff: {
 	DisplayName: Живая пустошь
 	Description: Все вокруг вас начинают гнить
@@ -369,7 +359,7 @@ NeurotoxinBuff: {
 }
 
 NullificationCurseBuff: {
-	DisplayName: Проклятье нуллификации
+	DisplayName: Проклятие нуллификации
 	Description: Лунный лорд переключает сопротивления к видам урона!
 }
 
@@ -395,14 +385,9 @@ PungentGazeBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	DisplayName: Святочищенный
-	Description: Эффекты уворота не действуют
-}
-
 RefreshedBuff: {
 	DisplayName: Освежение
-	Description: '''Мобильность и время полёта	увеличены'''
+	Description: Мобильность и время полёта увеличены
 }
 
 ReverseManaFlowBuff: {
@@ -432,8 +417,8 @@ ShadowflameBuff: {
 }
 
 SmiteBuff: {
-	DisplayName: Сражённый
-	Description: Регенерация здоровья снижена и вы получаете на 20% больше урона
+	DisplayName: Поражение
+	Description: Вы получаете на 20% больше урона, увороты не действуют
 }
 
 SqueakyToyBuff: {
@@ -601,6 +586,11 @@ LeadPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
+LeadPoisonSpreadBuff: {
+	DisplayName: Свинцовое отравление
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
+}
+
 MoltenAmplifyBuff: {
 	DisplayName: Литое усиление
 	Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff
@@ -613,7 +603,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	DisplayName: Панцирь
-	Description: Все снаряды блокируются
+	Description: Получаемый урон значительно снижен
 }
 
 SnowstormCDBuff: {
@@ -790,7 +780,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +30% к урону и ближней скорости атаки, +20% к сопротивлению урона, +2,5 ОЗ в секунду, миньоны могут наносить крит. урон
+	Description: +22% к урону и ближней скорости атаки, +15% к сопротивлению урона, +2,5 ОЗ/сек, миньоны могут наносить крит. урон
 }
 
 MutantDesperationBuff: {
@@ -804,11 +794,16 @@ TouhouHoardBuff: {
 }
 
 BleedingOut: {
-	DisplayName: Кровоточит
-	Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	DisplayName: Кровотечение
+	Description: Вы быстро кровоточите!
 }
 
 SilverBuff: {
 	DisplayName: Усиление парирования
 	Description: Урон увеличен на 100%
+}
+
+GrabbedHarmlessBuff: {
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }

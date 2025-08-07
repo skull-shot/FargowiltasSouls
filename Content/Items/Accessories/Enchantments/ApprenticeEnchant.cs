@@ -1,10 +1,10 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles;
+﻿//using FargowiltasSouls.Content.Items.Accessories.Forces;
+//using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ID;
@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
 
         
-        public static MethodInfo ApprenticeShootMethod
+        /*public static MethodInfo ApprenticeShootMethod
         {
             get;
             set;
@@ -66,12 +66,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             object[] args = new object[] { playerWhoAmI, item, weaponDamage };
             ApprenticeShootMethod.Invoke(player, args);
-;
-        }
+        }*/
         
     }
     public class ApprenticeSupport : AccessoryEffect
     {
+        public override bool MutantsPresenceAffects => true;
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<ApprenticeEnchant>();
         public override bool ExtraAttackEffect => true;
@@ -90,6 +90,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ApprenticeItemCD > 0)
             {
                 modPlayer.ApprenticeItemCD--;
+                if (modPlayer.ApprenticeItemCD > 0)
+                    return; // if cooldown still not up, return early
             }
 
             if (player.controlUseItem)
@@ -126,32 +128,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                         if (item2 != null && item2.damage > 0 && item2.shoot > ProjectileID.None && item2.ammo <= 0 && item.type != item2.type && !item2.channel)
                         {
-                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || item2.sentry || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
+                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
+                                continue;
+
+                            if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
                                 continue;
 
                             weaponsUsed++;
                             if (weaponsUsed > 1)
                                 break;
 
-                            int itemCD = modPlayer.ApprenticeItemCD;
-
-                            if (itemCD > 0)
-                                continue;
-
-                            if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
-                                continue;
-
-                            Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
-                            Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
+                            //Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
+                            //Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
                             
-                            int projToShoot = item2.shoot;
-                            float speed = item2.shootSpeed;
+                            //int projToShoot = item2.shoot;
+                            //float speed = item2.shootSpeed;
                             int damage = player.GetWeaponDamage(item2);
-                            float KnockBack = item2.knockBack;
+                            //float KnockBack = item2.knockBack;
 
                             int itemtime = player.itemTime;
                             int itemtimemax = player.itemTimeMax;
-                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]);
+                            FargoSoulsPlayer.ApprenticeSupportItem = item2; // capture the item being used as Apprentice Support
+                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]); // all the OnSpawn stuff already runs here
+                            FargoSoulsPlayer.ApprenticeSupportItem = null; // clear just in case, as the captured item should have already marked each possible projectile as Support
 
                             player.itemTime = itemtime;
                             player.itemTimeMax = itemtimemax;

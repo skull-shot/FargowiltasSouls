@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -9,9 +10,9 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
 {
     public class SeekerOfTreasures : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Pets", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Seeker of Treasures");
             Main.projFrames[Projectile.type] = 3;
             Main.projPet[Projectile.type] = true;
             ProjectileID.Sets.LightPet[Projectile.type] = true;

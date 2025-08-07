@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -60,11 +61,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void PostUpdateEquips(Player player)
         {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.SpiderCD > 0)
+                modPlayer.SpiderCD--;
             //minion crits
-            if (HasEffectEnchant(player))
-                player.FargoSouls().MinionCrits = true;
+            modPlayer.MinionCrits = true;
             player.GetCritChance(DamageClass.Generic) += 10;
-            if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))
+            if (player.HasEffectEnchant<SpiderEffect>() && modPlayer.ForceEffect(ModContent.ItemType<SpiderEnchant>()))
                 player.GetCritChance(DamageClass.Generic) += 15;
         }
     }

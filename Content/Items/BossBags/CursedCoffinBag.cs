@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -12,11 +13,11 @@ namespace FargowiltasSouls.Content.Items.BossBags
         protected override bool IsPreHMBag => true; //so it doesn't drop dev sets
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AccursedAnkh>()));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<CursedCoffin>()));
 
             itemLoot.Add(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
-            itemLoot.Add(ItemDropRule.Common(ItemID.OasisCrate, 1, 5, 5)); //oasis crate
 
             // gems
             itemLoot.Add(ItemDropRule.Common(ItemID.Amethyst, 3, 2, 4));

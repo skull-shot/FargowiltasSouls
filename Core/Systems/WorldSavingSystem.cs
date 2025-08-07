@@ -99,6 +99,8 @@ namespace FargowiltasSouls.Core.Systems
 
         public static bool PlacedMutantStatue;
 
+        public static string DungeonBrickType = "B";
+
         public static Point CoffinArenaCenter { get; set; }
 
         public override void Unload() => DownedBoss = null;
@@ -129,6 +131,7 @@ namespace FargowiltasSouls.Core.Systems
             for (int i = 0; i < DownedBoss.Length; i++)
                 DownedBoss[i] = false;
 
+            DungeonBrickType = "B";
             DownedAnyBoss = false;
             WOFDroppedDeviGift2 = false;
             ShiftingSandEvent = false;
@@ -204,12 +207,14 @@ namespace FargowiltasSouls.Core.Systems
                     downed.Add("downedBoss" + i.ToString());
             }
 
+            tag.Add("dungeonColor", DungeonBrickType);
             tag.Add("downed", downed);
             tag.Add("mutantP1", SkipMutantP1);
             tag.Add("CoffinArenaCenterX", CoffinArenaCenter.X);
             tag.Add("CoffinArenaCenterY", CoffinArenaCenter.Y);
             tag.Add("IceGolemTimer", WorldUpdatingSystem.IceGolemTimer);
             tag.Add("SandElementalTimer", WorldUpdatingSystem.SandElementalTimer);
+            tag.Add("WyvernTimer", WorldUpdatingSystem.WyvernTimer);
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -248,10 +253,15 @@ namespace FargowiltasSouls.Core.Systems
                 coffinY = tag.GetAsInt("CoffinArenaCenterY");
             CoffinArena.SetArenaPosition(new(coffinX, coffinY));
 
+            if (tag.ContainsKey("dungeonColor"))
+                DungeonBrickType = tag.GetString("dungeonColor");
+
             if (tag.ContainsKey("IceGolemTimer"))
                 WorldUpdatingSystem.IceGolemTimer = tag.GetAsInt("IceGolemTimer");
             if (tag.ContainsKey("SandElementalTimer"))
                 WorldUpdatingSystem.SandElementalTimer = tag.GetAsInt("SandElementalTimer");
+            if (tag.ContainsKey("WyvernTimer"))
+                WorldUpdatingSystem.WyvernTimer = tag.GetAsInt("WyvernTimer");
         }
 
         public override void NetReceive(BinaryReader reader)
@@ -290,6 +300,7 @@ namespace FargowiltasSouls.Core.Systems
 
             EternityVanillaBehaviour = reader.ReadBoolean();
 
+            DungeonBrickType = reader.ReadString();
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
             HaveForcedMutantFromKS = reader.ReadBoolean();
@@ -346,6 +357,7 @@ namespace FargowiltasSouls.Core.Systems
 
             writer.Write(EternityVanillaBehaviour);
 
+            writer.Write(DungeonBrickType);
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);
             writer.Write(HaveForcedMutantFromKS);

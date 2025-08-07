@@ -296,12 +296,12 @@ DeviBoss: {
 
 ShadowOrbNPC.DisplayName: Shadow Orb
 
-LifeChallenger: {
+Lifelight: {
 	DisplayName: Lifelight
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		SpawnInfo: Spawn by using [i:FargowiltasSouls/FragilePixieLamp] in the Hallow at day.
+		SpawnInfo: Spawn by using [i:FargowiltasSouls/CrystallineEffigy] in the Hallow at day.
 		DespawnMessage: Lifelight fades away...
 	}
 
@@ -392,3 +392,6 @@ ReleasedMutant: {
 	TalkToHim: Who are you?
 	Introduction: You've already heard of me. But who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
 }
+
+BloodPuddle.DisplayName: Blood Puddle
+SoulVortex.DisplayName: Soul Vortex

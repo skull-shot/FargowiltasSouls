@@ -1,7 +1,8 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.UseSound = FargosSoundRegistry.NukeFishronFire;
             Item.useAmmo = AmmoID.Rocket;
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<FishNuke>();
             Item.shootSpeed = 7f;

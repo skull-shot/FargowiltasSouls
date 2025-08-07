@@ -1,12 +1,12 @@
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -14,6 +14,7 @@ using Luminance.Assets;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -336,6 +338,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Vector2 shootPos = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
                                 float targetX = player.Center.X - shootPos.X;
                                 float targetY = player.Center.Y - shootPos.Y;
+
+                                if (targetX * targetX + targetY * targetY > 800 * 800) // don't fire if too far
+                                    break;
                                 npc.netUpdate = true;
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -378,7 +383,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 85 : 105;
 
                             if (ai_StateTimer == 0)
                             {
@@ -410,7 +415,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (ai_StateTimer < prepTime - 30 && (npc.Distance(desiredPos) > 300 || waitForSpaz))
                                 ai_StateTimer--;
-                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 30 : 45;
                             if (ai_StateTimer < prepTime - flashDelay && spazmatism.ai[2] < npc.ai[2])
                                 npc.ai[2] = spazmatism.ai[2];
 
@@ -424,7 +429,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                             if (++ai_StateTimer >= prepTime)
                             {
-                                npc.velocity = npc.DirectionTo(player.Center) * 30;
+                                npc.velocity = npc.DirectionTo(player.Center) * 28;
                                 ai_StateTimer = 0;
                                 LockedRotation = 0;
                                 ai_State = 2;
@@ -588,7 +593,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float auraDistance = AuraRadius();
                     if (auraDistance < 2000 - 1)
                     {
-                        EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>());
+                        if ((DeathrayState == 1 && npc.ai[0] >= 155f) || DeathrayState == 2)
+                            EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>(), BuffID.OnFire, BuffID.Burning);
+                        else
+                            EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>());
+                            
                         float threshold = auraDistance;
 
                         Player localPlayer = Main.LocalPlayer;
@@ -817,8 +826,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 
             }
-            
-            
+
+            ref float ai_State = ref npc.ai[1];
+            ref float ai_StateTimer = ref npc.ai[2];
+            ref float ai_ShotTimer = ref npc.ai[3];
+
+            float delay = 55;
+            if (!Phase2 && ai_State == 0 && ai_ShotTimer < delay && LaserSide == 1)
+            {
+                Color color = Color.DarkMagenta;
+                Asset<Texture2D> line = TextureAssets.Extra[178];
+                float opacity = 0.6f * ai_ShotTimer / delay;
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    float rot = npc.rotation + MathHelper.PiOver2;
+                    rot += MathHelper.PiOver2 * 0.15f * i;
+                    Main.EntitySpriteDraw(line.Value, npc.Center + TwinsEyeFlash.Offset(npc) - Main.screenPosition + new Vector2(0f, npc.gfxOffY), null, color * opacity, rot, new Vector2(0, line.Height() * 0.5f), new Vector2(0.22f, npc.scale * 5), SpriteEffects.None);
+                }
+                
+            }
                 
             return true;
         }
@@ -833,7 +859,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Vector2 auraPos = position;
             float radius = AuraRadius();
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.Techno1Noise;
+            var diagonalNoise = FargoAssets.Techno1Noise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = npc.Opacity * AuraOpacity;
@@ -1091,6 +1117,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Vector2 shootPos = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
                                 float targetX = player.Center.X - shootPos.X;
                                 float targetY = player.Center.Y - shootPos.Y;
+
+                                if (targetX * targetX + targetY * targetY > 800 * 800) // don't fire if too far
+                                    break;
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     float vel = 14f;
@@ -1123,7 +1152,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
                     case 1: // dash frame
                         {
-                            float prepTime = WorldSavingSystem.MasochistModeReal ? 80 : 95;
+                            float prepTime = WorldSavingSystem.MasochistModeReal ? 85 : 105;
 
                             if (ai_StateTimer == 0)
                             {
@@ -1154,7 +1183,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (retinazer.Distance(spazDesiredPos) <= 300)
                                 waitForReti = false;
 
-                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 25 : 35;
+                            int flashDelay = WorldSavingSystem.MasochistModeReal ? 30 : 45;
 
                             if (ai_StateTimer < prepTime - flashDelay && (npc.Distance(desiredPos) > 300 || waitForReti))
                             {
@@ -1179,7 +1208,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                             if (++ai_StateTimer >= prepTime)
                             {
-                                npc.velocity = npc.DirectionTo(player.Center) * 30;
+                                npc.velocity = npc.DirectionTo(player.Center) * 28;
                                 ai_StateTimer = 0;
                                 LockedRotation = 0;
                                 ai_State = 2;
@@ -1393,7 +1422,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                         for (int i = 0; i < FlameWheelCount; i++)
                                         {
                                             int p = Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed * (baseRotation + MathHelper.TwoPi / FlameWheelCount * i).ToRotationVector2(),
-                                                ModContent.ProjectileType<MechElectricOrb>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, ai2: MechElectricOrb.Green);
+                                                ModContent.ProjectileType<MechElectricOrbTelegraphed>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, ai2: MechElectricOrb.Green);
                                             if (p != Main.maxProjectiles)
                                                 Main.projectile[p].timeLeft = timeLeft;
                                         }

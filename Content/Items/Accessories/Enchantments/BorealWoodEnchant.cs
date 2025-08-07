@@ -88,13 +88,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 float snowballDamage = baseDamage / 2;
                 if (!player.HasEffect<TimberEffect>() && heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
-                    snowballDamage *= player.ActualClassDamage(DamageClass.Ranged);
+                    snowballDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(heldItem.DamageType);
                     float softcapMult = forceEffect ? (15f / 3f) : 1f;
                     if (snowballDamage > (12f * softcapMult)) // diminishing returns above 15 snowballDamage for non wiz, 100 for wiz
                         snowballDamage = (float)Math.Round(((24f * softcapMult) + snowballDamage) / 3f); // e.g. non wiz 30 -> 20, wiz 200 -> 150 etc. (https://www.desmos.com/calculator/vyaqqoegxq)
                 }
                 if (player.HasEffect<TimberEffect>())
-                    snowballDamage = 400;
+                    snowballDamage = 300;
                 int p = Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, vel, ProjectileID.SnowBallFriendly, (int)snowballDamage, 1, Main.myPlayer);
 
                 int numSnowballs = forceEffect ? 7 : 3;

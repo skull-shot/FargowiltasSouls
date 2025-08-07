@@ -1,8 +1,8 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.DukeFishron;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -438,9 +438,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         RemovedInvincibility = false;
                         if (npc.ai[2] == 120)
                         {
-                            int p2Heal = (int)MathF.Round(npc.lifeMax * 0.8f);
-                            int heal = p2Heal - npc.life;
-                            npc.life = p2Heal;
+                            int heal = npc.lifeMax - npc.life;
+                            npc.life = npc.lifeMax;
                             CombatText.NewText(npc.Hitbox, CombatText.HealLife, heal);
                         }
                         break;
@@ -548,7 +547,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                         if (npc.ai[2] == 120)
                         {
-                            int max = WorldSavingSystem.MasochistModeReal ? npc.lifeMax / 3 : npc.lifeMax / 4;
+                            int max = WorldSavingSystem.MasochistModeReal ? npc.lifeMax / 2 : npc.lifeMax / 3;
                             int heal = max - npc.life;
                             npc.life = max;
                             CombatText.NewText(npc.Hitbox, CombatText.HealLife, heal);

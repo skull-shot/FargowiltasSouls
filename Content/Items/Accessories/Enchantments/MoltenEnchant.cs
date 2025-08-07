@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -121,7 +121,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                             if (player.HasEffect<CrimsonEffect>() && !healed)
                                             {
                                                 healed = true;
-                                                player.FargoSouls().HealPlayer(damage / 80);
+                                                player.FargoSouls().HealPlayer(damage / 100);
                                             }  
                                         }
                                     }

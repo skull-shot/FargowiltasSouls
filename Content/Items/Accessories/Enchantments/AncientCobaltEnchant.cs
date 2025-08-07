@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -85,10 +85,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     damage = 300;
 
                 float scale = 1.5f;
+                int debuff = 1;
                 if (upgrade)
+                {
                     scale = 2f;
+                    debuff = 2;
+                }
 
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 0, player.whoAmI, ai0: scale);
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 0, player.whoAmI, ai0: scale, ai1: debuff);
 
                 modPlayer.JustCobaltJumped = true;
 
@@ -115,13 +119,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     player.jumpSpeedBoost += 2.5f; //+50%
                 }
             }
-        }
-        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
-        {
-            if (EffectItem(player).type != ModContent.ItemType<AncientCobaltEnchant>())
-                target.AddBuff(BuffID.Oiled, 600);
-            else
-                target.AddBuff(BuffID.Slimed, 600);
         }
     }
 

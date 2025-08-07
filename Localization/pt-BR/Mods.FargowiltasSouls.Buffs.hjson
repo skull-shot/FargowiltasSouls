@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	// Description: You cannot fly or use rocket boots
 }
 
-CrippledBuff: {
-	// DisplayName: Crippled
-	// Description: You cannot run
-}
-
 CurseoftheMoonBuff: {
 	// DisplayName: Curse of the Moon
 	// Description: The moon's wrath consumes you
@@ -313,11 +308,6 @@ LihzahrdBlessingBuff: {
 	Message: A luz do altar brilha em você!
 }
 
-LihzahrdCurseBuff: {
-	// DisplayName: Lihzahrd Curse
-	// Description: Wires disabled in Jungle Temple
-}
-
 LivingWastelandBuff: {
 	// DisplayName: Living Wasteland
 	// Description: Everyone around you turns to rot
@@ -395,11 +385,6 @@ PungentGazeBuff: {
 	// Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
 }
 
-PurgedBuff: {
-	// DisplayName: Purged
-	// Description: Dodge effects don't work
-}
-
 RefreshedBuff: {
 	// DisplayName: Refreshed
 	// Description: Increased mobility and flight time
@@ -433,7 +418,7 @@ ShadowflameBuff: {
 
 SmiteBuff: {
 	// DisplayName: Smite
-	// Description: Life regen reduced and 20% more damage taken
+	// Description: Increased damage taken by 20%, dodge effects don't work
 }
 
 SqueakyToyBuff: {
@@ -601,6 +586,11 @@ LeadPoisonBuff: {
 	// Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
 }
 
+LeadPoisonSpreadBuff: {
+	// DisplayName: Lead Poison
+	// Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
+}
+
 MoltenAmplifyBuff: {
 	// DisplayName: Molten Amplify
 	// Description: Mods.FargowiltasSouls.BuffDescription.MoltenAmplifyBuff
@@ -613,7 +603,7 @@ OriPoisonBuff: {
 
 ShellHideBuff: {
 	// DisplayName: Shell Hide
-	// Description: Projectiles are being blocked
+	// Description: Greatly reduced damage taken
 }
 
 SnowstormCDBuff: {
@@ -693,12 +683,12 @@ JungleMimicSummonBuff: {
 
 GladiatorBuff: {
 	// DisplayName: Gladiator Strength
-	// Description: Increased damage and damage reduction, knockback immunity, improved spear rain
+	// Description: Increased damage reduction, knockback immunity, improved spear rain
 }
 
 GladiatorSpiritBuff: {
 	// DisplayName: Gladiator Strength
-	// Description: +15% damage reduction, +30% damage, knockback immunity, improved successive hit damage
+	// Description: +20% damage reduction, knockback immunity, improved successive hit damage
 }
 
 ROBBuff: {
@@ -790,7 +780,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	// DisplayName: Ambrosia Buff
-	// Description: +30% damage, +30% melee speed, +20% damage reduction, +5 life regeneration, summon damage can crit
+	// Description: +20% damage, +15% damage reduction, +5 life regeneration, summon damage can crit
 }
 
 MutantDesperationBuff: {
@@ -805,10 +795,15 @@ TouhouHoardBuff: {
 
 BleedingOut: {
 	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	// Description: You're bleeding quickly!
 }
 
 SilverBuff: {
 	// DisplayName: Parry Boost
 	// Description: 100% increased damage
+}
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
 }

@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -50,13 +50,13 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                 {
                 }
 
-                if (player.AddEffect<PlantMinionEffect>(item))
+                /*if (player.AddEffect<PlantMinionEffect>(item))
                 {
                     fargoPlayer.PlanterasChild = true;
                     const int damage = 120;
                     if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<PlanterasChild>()] < 1)
                         FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, -Vector2.UnitY, ModContent.ProjectileType<PlanterasChild>(), damage, 3f, player.whoAmI);
-                }
+                }*/
 
                 if (player.AddEffect<UfoMinionEffect>(item))
                 {

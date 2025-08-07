@@ -52,14 +52,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<TitaniumEnchant>();
-
-        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, npc);
+            float dr = TitaniumDR(player, npc);
+            modifiers.FinalDamage *= 1 - dr;
         }
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, projectile);
+            float dr = TitaniumDR(player, projectile);
+            modifiers.FinalDamage *= 1 - dr;
         }
         public static float TitaniumDR(Player player, Entity attacker)
         {
@@ -104,6 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
                 int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
                 Main.projectile[sh].DamageType = DamageClass.Melee;
+                Main.projectile[sh].noEnchantmentVisuals = true;
                 player.titaniumStormCooldown = 10;
             }
             else if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] > 19)

@@ -1,20 +1,13 @@
-﻿using FargowiltasSouls.Assets.UI;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using ReLogic.Graphics;
-using Terraria.GameContent;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Audio;
 using Terraria.Localization;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
@@ -83,7 +76,7 @@ namespace FargowiltasSouls.Content.UI.Elements
                 Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, color, scale);
                 if (!Main.LocalPlayer.AccessoryEffects().Equipped(effect))
                 {
-                    Texture2D cross = FargoUIManager.Cross.Value;
+                    Texture2D cross = FargoAssets.UI.Toggler.Cross.Value;
                     Main.spriteBatch.Draw(cross, itemPos + new Vector2(-3, -12), null, Color.Red * 0.8f, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
                 }
             }

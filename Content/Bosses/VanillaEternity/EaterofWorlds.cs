@@ -1,8 +1,10 @@
 using Fargowiltas.Common.Configs;
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.CursedCoffin;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EaterOfWorlds;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -11,14 +13,17 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -57,7 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (totalCount > 12 && headCount < totalCount / 5 + 1)
                     {
                         UseMassDefense = true;
-                        npc.defense += 30;
+                        npc.defense += 5;
 
                         if (npc.life < npc.lifeMax / 2)
                             npc.life += 2;
@@ -121,8 +126,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (EaterofWorldsHead.HaveSpawnDR > 0)
                 modifiers.FinalDamage /= projectile.numHits + 1;
 
-            if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.8f;
+            //if (projectile.FargoSouls().IsAHeldProj)
+            //    modifiers.FinalDamage *= 0.8f;
         }
 
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
@@ -134,7 +139,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(BuffID.CursedInferno, 180);
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 600);
         }
 
@@ -150,80 +154,53 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.EaterofWorldsHead);
 
-        public int FlamethrowerCDOrUTurnStoredTargetX;
-
-        public int SpecialAITimer;
-        public int SpecialAITimer2;
+        // default
+        public NPC? NPC = null;
+        public Player? Target => Main.player[NPC.target];
+        public bool DroppedSummon;
+        public static int HaveSpawnDR;
+        public int NoSelfDestructTimer = 15;
         public static int SpecialCountdownTimer;
 
-        public int UTurnTotalSpacingDistance;
-        public int UTurnIndividualSpacingPosition;
+        public int SpawnTimer = 0;
 
-        public Vector2 CoilCenter;
-        public int CoilSpinDirection;
-        public float CoilDesiredRotation;
-
-        public const int CoilDiveTime = 60 * 30; // never reached naturally; set to heads that are designated to dive
-        public static int CoilRadius => WorldSavingSystem.MasochistModeReal ? 500 : 600;
-        public bool Coiling => Attack == (int)Attacks.Coil && SpecialAITimer < CoilDiveTime;
-
-        public int VileSpitLockoutDuration;
-
-        public static int CursedFlameTimer;
-        public static int HaveSpawnDR;
-
+        // attack stuff
         public int Attack;
-        public static bool DoTheWave;
+        public int OldAttack;
 
-        public bool DroppedSummon;
+        public int Timer;
 
-        public int NoSelfDestructTimer = 15;
+        public static int UndergroundLength => 400;
+        public int ExtraAI0;
 
-        public float CoilBorderOpacity = 0f;
+        public static int ComboTimer = 0;
+        public static float ComboHP => 0.8f;
+
+        public bool Telegraph = false;
+        public bool ContactDamage = true;
 
         public enum Attacks
         {
-            Normal,
-            NormalPostCoil,
-            UTurn,
-            Coil
+            DefaultMovement,
+            BurrowSpit,
+            BurrowBelow,
+            BurrowSide,
+            Combo
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
-
-            binaryWriter.Write7BitEncodedInt(FlamethrowerCDOrUTurnStoredTargetX);
-            binaryWriter.Write7BitEncodedInt(UTurnTotalSpacingDistance);
-            binaryWriter.Write7BitEncodedInt(UTurnIndividualSpacingPosition);
-            binaryWriter.Write7BitEncodedInt(SpecialAITimer);
-            binaryWriter.Write7BitEncodedInt(SpecialAITimer2);
-            binaryWriter.Write7BitEncodedInt(SpecialCountdownTimer);
-            binaryWriter.Write7BitEncodedInt(CursedFlameTimer);
-            binaryWriter.Write7BitEncodedInt(Attack);
-            binaryWriter.Write7BitEncodedInt(CoilSpinDirection);
-            binaryWriter.Write7BitEncodedInt(VileSpitLockoutDuration);
-            binaryWriter.Write(CoilDesiredRotation);
-            binaryWriter.WriteVector2(CoilCenter);
-            bitWriter.WriteBit(DoTheWave);
+            binaryWriter.Write(ExtraAI0);
+            binaryWriter.Write(Attack);
+            binaryWriter.Write(OldAttack);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             base.ReceiveExtraAI(npc, bitReader, binaryReader);
-
-            FlamethrowerCDOrUTurnStoredTargetX = binaryReader.Read7BitEncodedInt();
-            UTurnTotalSpacingDistance = binaryReader.Read7BitEncodedInt();
-            UTurnIndividualSpacingPosition = binaryReader.Read7BitEncodedInt();
-            SpecialAITimer = binaryReader.Read7BitEncodedInt();
-            SpecialAITimer2 = binaryReader.Read7BitEncodedInt();
-            SpecialCountdownTimer = binaryReader.Read7BitEncodedInt();
-            CursedFlameTimer = binaryReader.Read7BitEncodedInt();
-            Attack = binaryReader.Read7BitEncodedInt();
-            CoilSpinDirection = binaryReader.Read7BitEncodedInt();
-            VileSpitLockoutDuration = binaryReader.Read7BitEncodedInt();
-            CoilDesiredRotation = binaryReader.ReadSingle();
-            CoilCenter = binaryReader.ReadVector2();
-            DoTheWave = bitReader.ReadBit();
+            ExtraAI0 = binaryReader.ReadInt32();
+            Attack = binaryReader.ReadInt32();
+            OldAttack = binaryReader.ReadInt32();
         }
 
         public override void SetDefaults(NPC npc)
@@ -237,6 +214,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (Main.getGoodWorld)
                 cooldownSlot = ImmunityCooldownID.Bosses;
+            if (Telegraph || !ContactDamage)
+                return false;
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
@@ -244,6 +223,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             EModeGlobalNPC.eaterBoss = npc.whoAmI;
             FargoSoulsGlobalNPC.boss = npc.whoAmI;
+
+            if (Main.LocalPlayer.active && !Main.LocalPlayer.ghost && !Main.LocalPlayer.dead && npc.Distance(Main.LocalPlayer.Center) < 2000)
+            {
+                Main.LocalPlayer.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
+            }
 
             if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 6000)
             {
@@ -262,78 +246,44 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             //if (eaterResist > 0 && npc.whoAmI == NPC.FindFirstNPC(npc.type)) eaterResist--;
 
-            if (VileSpitLockoutDuration > 0)
-                VileSpitLockoutDuration--;
-
             int firstEater = NPC.FindFirstNPC(npc.type);
 
             if (npc.whoAmI == firstEater)
             {
+                // synced timer
                 SpecialCountdownTimer++;
                 if (HaveSpawnDR > 0)
                     HaveSpawnDR--;
-            }
 
-            if (FargoSoulsUtil.HostCheck && npc.whoAmI == firstEater && ++CursedFlameTimer > 300) //only let one eater increment this
-            {
-                bool shoot = true;
-                for (int i = 0; i < Main.maxNPCs; i++) //cancel if anyone is doing an attack
+                int num = 2;
+                int num2 = NPC.GetEaterOfWorldsSegmentsCount() + num;
+                int hp = 0;
+                int max = npc.lifeMax * num2;
+                for (int i = 0; i < 200; i++)
                 {
-                    if (Main.npc[i].active && Main.npc[i].type == npc.type && Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().Attack != (int)Attacks.Normal && Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().Attack != (int)Attacks.NormalPostCoil)
+                    NPC nPC2 = Main.npc[i];
+                    if (nPC2.active && nPC2.type >= NPCID.EaterofWorldsHead && nPC2.type <= NPCID.EaterofWorldsTail)
                     {
-                        if (!WorldSavingSystem.MasochistModeReal || Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().Attack == (int)Attacks.Coil)
-                        {
-                            shoot = false;
-                            CursedFlameTimer -= 30;
-                        }
+                        hp += nPC2.life;
                     }
                 }
+                float fraction = (float)hp / max;
 
-                if (shoot)
+                if (fraction < ComboHP && NPC.CountNPCS(NPCID.EaterofWorldsHead) > 3)
                 {
-                    CursedFlameTimer = 0;
-
-                    int minimumToShoot = WorldSavingSystem.MasochistModeReal ? 18 : 6;
-
-                    int counter = 0;
-                    int delay = 0;
-                    for (int i = 0; i < Main.maxNPCs; i++)
+                    if (ComboTimer == 0)
                     {
-                        if (Main.npc[i].active)
-                        {
-                            /*if (Main.npc[i].type == npc.type && !Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().masobool0)
-                            {
-                                Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().counter2 = 0; //stop others from triggering it
-                            }
-                            else */
-                            if (Main.npc[i].type == NPCID.EaterofWorldsHead || Main.npc[i].type == NPCID.EaterofWorldsBody || Main.npc[i].type == NPCID.EaterofWorldsTail)
-                            {
-                                if (++counter > (WorldSavingSystem.MasochistModeReal ? 2 : 6)) //wave of redirecting flames
-                                {
-                                    counter = 0;
-
-                                    minimumToShoot--;
-
-                                    Vector2 vel = (Main.player[npc.target].Center - Main.npc[i].Center) / 45;
-                                    Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, vel,
-                                        ModContent.ProjectileType<CursedFireballHoming>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, npc.target, delay);
-
-                                    delay += WorldSavingSystem.MasochistModeReal ? 4 : 10;
-                                }
-                            }
-                        }
+                        ComboTimer = -1;
                     }
-
-                    for (int i = 0; i < minimumToShoot; i++)
-                    {
-                        Vector2 vel = (Main.player[npc.target].Center - npc.Center) / 45;
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, vel,
-                            ModContent.ProjectileType<CursedFireballHoming>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, npc.target, delay);
-                        delay += WorldSavingSystem.MasochistModeReal ? 4 : 8;
-                    }
+                    else if (ComboTimer > 0)
+                        ComboTimer--;
+                }
+                else
+                {
+                    ComboTimer = 0;
                 }
             }
-
+            
             if (NoSelfDestructTimer <= 0)
             {
                 if (FargoSoulsUtil.HostCheck && SpecialCountdownTimer % 6 == 3) //chose this number at random to avoid edge case
@@ -359,417 +309,56 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 NoSelfDestructTimer--;
             }
+            
+            bool ret = false;
+
+            NPC = npc;
+            if (Telegraph)
+            {
+                if (Timer % 5 == 0)
+                    SoundEngine.PlaySound(SoundID.WormDig with { Pitch = -0.2f }, NPC.Center);
+                Vector2 vel = NPC.velocity.RotatedByRandom(MathHelper.PiOver4 * 0.27f) * Main.rand.NextFloat(0.4f, 0.6f);
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptionThorns, vel.X, vel.Y);
+
+                Lighting.AddLight(NPC.Center - Vector2.UnitY * 16, TorchID.Corrupt);
+            }
+            Telegraph = false;
+            ContactDamage = true;
+
+            if (!NPC.HasPlayerTarget)
+                return true;
+
+
             switch ((Attacks)Attack)
             {
-                case Attacks.UTurn:
-                    //flying u-turn ai
+                case Attacks.DefaultMovement:
+                    if (SpawnTimer < 30)
                     {
-                        if (++SpecialAITimer < 120)
-                        {
-                            Vector2 target = Main.player[npc.target].Center;
-                            if (UTurnTotalSpacingDistance != 0)
-                                target.X += 900f / UTurnTotalSpacingDistance * UTurnIndividualSpacingPosition; //space out
-                            target.Y += 600f;
-
-                            float speedModifier = 0.6f;
-                            float speedCap = 24;
-                            if (npc.Top.Y > Main.player[npc.target].Bottom.Y + npc.height)
-                            {
-                                speedModifier *= 1.5f;
-                                speedCap *= 1.5f;
-                                npc.position += (Main.player[npc.target].position - Main.player[npc.target].oldPosition) / 2;
-                            }
-
-                            if (npc.Center.X < target.X)
-                            {
-                                npc.velocity.X += speedModifier;
-                                if (npc.velocity.X < 0)
-                                    npc.velocity.X += speedModifier * 2;
-                            }
-                            else
-                            {
-                                npc.velocity.X -= speedModifier;
-                                if (npc.velocity.X > 0)
-                                    npc.velocity.X -= speedModifier * 2;
-                            }
-                            if (npc.Center.Y < target.Y)
-                            {
-                                npc.velocity.Y += speedModifier;
-                                if (npc.velocity.Y < 0)
-                                    npc.velocity.Y += speedModifier * 2;
-                            }
-                            else
-                            {
-                                npc.velocity.Y -= speedModifier;
-                                if (npc.velocity.Y > 0)
-                                    npc.velocity.Y -= speedModifier * 2;
-                            }
-
-                            if (Math.Abs(npc.velocity.X) > speedCap)
-                                npc.velocity.X = speedCap * Math.Sign(npc.velocity.X);
-                            if (Math.Abs(npc.velocity.Y) > speedCap)
-                                npc.velocity.Y = speedCap * Math.Sign(npc.velocity.Y);
-
-                            npc.localAI[0] = 1f;
-
-                            if (Main.netMode == NetmodeID.Server && --npc.netSpam < 0) //manual mp sync control
-                            {
-                                npc.netSpam = 5;
-                                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npc.whoAmI);
-                            }
-                        }
-                        else if (SpecialAITimer == 120) //fly up
-                        {
-                            SoundEngine.PlaySound(SoundID.Roar, Main.player[npc.target].Center);
-                            npc.velocity = Vector2.UnitY * -15f;
-                            FlamethrowerCDOrUTurnStoredTargetX = (int)Main.player[npc.target].Center.X; //store their initial location
-
-                            npc.netUpdate = true;
-                        }
-                        else if (SpecialAITimer < 240) //cancel early and turn once we fly past player
-                        {
-                            if (npc.Center.Y < Main.player[npc.target].Center.Y - (WorldSavingSystem.MasochistModeReal ? 200 : 450))
-                                SpecialAITimer = 239;
-                        }
-                        else if (SpecialAITimer == 240) //recalculate velocity to u-turn and dive back down in the same spacing over player
-                        {
-                            Vector2 target;
-                            target.X = Main.player[npc.target].Center.X;
-                            if (UTurnTotalSpacingDistance != 0)
-                                target.X += 900f / UTurnTotalSpacingDistance * UTurnIndividualSpacingPosition; //space out
-                            target.Y = npc.Center.Y;
-
-                            float radius = Math.Abs(target.X - npc.Center.X) / 2;
-                            float speed = MathHelper.Pi * radius / 30;
-                            if (speed < 8f)
-                                speed = 8f;
-                            npc.velocity = Vector2.Normalize(npc.velocity) * speed;
-
-                            FlamethrowerCDOrUTurnStoredTargetX = Math.Sign(Main.player[npc.target].Center.X - FlamethrowerCDOrUTurnStoredTargetX); //which side player moved to from original pos
-
-                            npc.netUpdate = true;
-                        }
-                        else if (SpecialAITimer < 270) //u-turn
-                        {
-                            npc.velocity = npc.velocity.RotatedBy(MathHelper.ToRadians(6f) * FlamethrowerCDOrUTurnStoredTargetX);
-                        }
-                        else if (SpecialAITimer == 270)
-                        {
-                            npc.velocity = Vector2.Normalize(npc.velocity) * 15f;
-                            npc.netUpdate = true;
-                        }
-                        else if (SpecialAITimer > 300)
-                        {
-                            SpecialAITimer = 0;
-                            SpecialCountdownTimer = 0;
-                            UTurnTotalSpacingDistance = 0;
-                            UTurnIndividualSpacingPosition = 0;
-                            Attack = (int)Attacks.Normal;
-
-                            //for (int i = 0; i < Main.maxNPCs; i++)
-                            //{
-                            //    if (Main.npc[i].active)
-                            //    {
-                            //        if (Main.npc[i].type == npc.type)
-                            //        {
-                            //            Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().UTurnTotalSpacingDistance = 0;
-                            //            Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().UTurnIndividualSpacingPosition = 0;
-                            //            Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().UTurn = false;
-                            //            Main.npc[i].netUpdate = true;
-                            //            if (Main.netMode == NetmodeID.Server)
-                            //                NetSync(npc);
-                            //        }
-                            //        else if (Main.npc[i].type == NPCID.EaterofWorldsBody || Main.npc[i].type == NPCID.EaterofWorldsTail)
-                            //        {
-                            //            Main.npc[i].netUpdate = true;
-                            //        }
-                            //    }
-                            //}
-
-                            npc.netUpdate = true;
-                        }
-
-                        npc.rotation = (float)Math.Atan2(npc.velocity.Y, npc.velocity.X) + 1.57f;
-
-                        if (npc.netUpdate)
-                        {
-                            if (Main.netMode == NetmodeID.Server)
-                            {
-                                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npc.whoAmI);
-                                NetSync(npc);
-                            }
-                            npc.netUpdate = false;
-                        }
-                        return false;
+                        ret = true;
+                        SpawnTimer++;
                     }
+                    else
+                        DefaultMovement();
+
                     break;
-                case Attacks.Coil:
-                    {
-
-                        int diveDelay = WorldSavingSystem.MasochistModeReal ? 60 : 80; // time between dives
-                        float spinSeconds = 3f; // seconds per full spin
-
-                        float spinFrames = spinSeconds * 60f;
-
-                        SpecialCountdownTimer = 350;
-                        if (!Main.npc.Any(n => n.TypeAlive(npc.type) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling && n.Distance(CoilCenter) > CoilRadius + 100))
-                        {
-                            SpecialAITimer++;
-                            SpecialAITimer2++;
-                        }
-                            
-                        if (firstEater == npc.whoAmI)
-                        {
-                            if (firstEater == npc.whoAmI)
-                            {
-                                for (int i = 0; i < 20; i++) //arena dust
-                                {
-                                    Vector2 offset = new();
-                                    double angle = Main.rand.NextDouble() * 2d * Math.PI;
-                                    offset.X += (float)(Math.Sin(angle) * CoilRadius);
-                                    offset.Y += (float)(Math.Cos(angle) * CoilRadius);
-                                    Dust dust = Main.dust[Dust.NewDust(CoilCenter + offset - new Vector2(4, 4), 0, 0, DustID.Corruption, 0, 0, 100, Color.White, 1f)];
-                                    dust.velocity = Vector2.Zero;
-                                    if (Main.rand.NextBool(3))
-                                        dust.velocity += Vector2.Normalize(offset) * 5f;
-                                    dust.noGravity = true;
-                                }
-
-                                Player target = Main.player[npc.target];
-                                if (target.active && !target.dead) //arena effect
-                                {
-                                    float distance = target.Distance(CoilCenter);
-                                    if (distance > CoilRadius && distance < 3000)
-                                    {
-                                        Vector2 movement = CoilCenter - target.Center;
-                                        float difference = movement.Length() - CoilRadius;
-                                        movement.Normalize();
-                                        movement *= difference < 34f ? difference : 34f;
-                                        target.position += movement;
-
-                                        for (int i = 0; i < 20; i++)
-                                        {
-                                            int d = Dust.NewDust(target.position, target.width, target.height, DustID.Corruption, 0f, 0f, 0, default, 2f);
-                                            Main.dust[d].noGravity = true;
-                                            Main.dust[d].velocity *= 5f;
-                                        }
-                                    }
-                                }
-                            }
-                            int diveTimer = SpecialAITimer2 + 65;
-                            if (diveTimer > diveDelay && diveTimer % diveDelay == 0)
-                            {
-                                List<NPC> coilingHeads = [];
-                                for (int i = 0; i < Main.maxNPCs; i++)
-                                {
-                                    if (Main.npc[i].TypeAlive(npc.type) && Main.npc[i].GetGlobalNPC<EaterofWorldsHead>().Coiling)
-                                    {
-                                        coilingHeads.Add(Main.npc[i]);
-                                    }
-                                }
-                                if (coilingHeads.Count != 0)
-                                {
-                                    NPC diveNPC = Main.rand.NextFromCollection(coilingHeads);
-                                    if (diveNPC.HasPlayerTarget)
-                                    {
-                                        diveNPC.velocity *= -1;
-                                        diveNPC.velocity += Main.player[diveNPC.target].DirectionTo(diveNPC.Center) * 22f;
-                                        diveNPC.GetGlobalNPC<EaterofWorldsHead>().SpecialAITimer = CoilDiveTime;
-                                        SoundEngine.PlaySound(SoundID.ForceRoarPitched, diveNPC.Center);
-                                        diveNPC.netUpdate = true;
-                                        NetSync(diveNPC);
-                                    }
-                                }
-                                
-                            }
-                        }
-                        if (Coiling)
-                        {
-                            Vector2 desiredPosition = CoilCenter + CoilCenter.DirectionTo(npc.Center).RotatedBy(CoilSpinDirection * MathHelper.PiOver2 / 8f) * CoilRadius;
-
-                            // calculate speed
-                            float circumference = MathHelper.TwoPi * CoilRadius;
-                            float baseSpeed = circumference / spinFrames;
-                            float speed = baseSpeed;
-
-                            float rotationDifference = FargoSoulsUtil.RotationDifference(CoilCenter.DirectionTo(npc.Center), CoilDesiredRotation.ToRotationVector2());
-                            speed += (baseSpeed * 0.9f) * rotationDifference / MathHelper.Pi;
-                            Vector2 desiredVelocity = npc.DirectionTo(desiredPosition) * speed;
-                            npc.velocity = Vector2.Lerp(npc.velocity, desiredVelocity, 0.2f);
-
-                            CoilDesiredRotation += CoilSpinDirection * MathHelper.TwoPi / spinFrames;
-
-                            VileSpitLockoutDuration = 100;
-                        }
-                        else
-                        {
-                            if (SpecialAITimer > CoilDiveTime + 80)
-                            {
-                                if (!Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.GetGlobalNPC<EaterofWorldsHead>().Coiling))
-                                {
-                                    SpecialAITimer = 0;
-                                    SpecialAITimer2 = 0;
-                                    SpecialCountdownTimer = 0;
-                                    CoilDesiredRotation = 0;
-                                    Attack = (int)Attacks.NormalPostCoil;
-                                }
-                                else
-                                    return true;
-                            }
-                            else
-                            {
-                                if (npc.HasPlayerTarget)
-                                {
-                                    Vector2 vectorToIdlePosition = Main.player[npc.target].Center - npc.Center;
-                                    float num = vectorToIdlePosition.Length();
-                                    float speed = 32f;
-                                    float inertia = 32f;
-                                    float deadzone = 150f;
-                                    if (num > deadzone)
-                                    {
-                                        vectorToIdlePosition.Normalize();
-                                        vectorToIdlePosition *= speed;
-                                        npc.velocity = (npc.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
-                                    }
-                                    else if (npc.velocity == Vector2.Zero)
-                                    {
-                                        npc.velocity.X = -0.15f;
-                                        npc.velocity.Y = -0.05f;
-                                    }
-                                    if (num < deadzone)
-                                    {
-                                        SpecialAITimer = CoilDiveTime + 80;
-                                    }
-                                }
-                            }
-                        }
-
-                        npc.rotation = (float)Math.Atan2(npc.velocity.Y, npc.velocity.X) + 1.57f;
-                        if (npc.netUpdate)
-                        {
-                            if (Main.netMode == NetmodeID.Server)
-                            {
-                                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npc.whoAmI);
-                                NetSync(npc);
-                            }
-                            npc.netUpdate = false;
-                        }
-                        return false;
-                    }
+                case Attacks.BurrowSpit:
+                    BurrowSpit();
                     break;
+
+                case Attacks.BurrowBelow:
+                    BurrowBelow();
+                    break;
+
+                case Attacks.BurrowSide:
+                    BurrowSide();
+                    break;
+
+                case Attacks.Combo:
+                    ComboAttack();
+                    break;
+
                 default:
-                    {
-                        if (++FlamethrowerCDOrUTurnStoredTargetX >= 6)
-                        {
-                            FlamethrowerCDOrUTurnStoredTargetX = 0;
-                            if (WorldSavingSystem.MasochistModeReal && FargoSoulsUtil.HostCheck) //cursed flamethrower, roughly same direction as head
-                            {
-                                Vector2 velocity = new Vector2(5f, 0f).RotatedBy(npc.rotation - Math.PI / 2.0 + MathHelper.ToRadians(Main.rand.Next(-15, 16)));
-                                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, velocity, ProjectileID.EyeFire, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer);
-                            }
-                        }
-
-                        if (npc.whoAmI == firstEater)
-                        {
-                            //faster countup in maso
-                            if (SpecialCountdownTimer < 700 - 900 - 6 && WorldSavingSystem.MasochistModeReal)
-                                SpecialCountdownTimer++;
-
-                            // coil
-                            int headCount = NPC.CountNPCS(npc.type);
-                            if (headCount > 1) // only do coil when it's split at least once
-                            {
-                                //initiate coil
-                                if (SpecialCountdownTimer > 350 && Attack == (int)Attacks.Normal)
-                                {
-                                    SoundEngine.PlaySound(SoundID.ForceRoarPitched, Main.player[npc.target].Center);
-                                    if (FargoSoulsUtil.HostCheck && npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) < 2400)
-                                    {
-                                        FargoSoulsUtil.ClearHostileProjectiles(2);
-
-                                        Attack = (int)Attacks.Coil;
-                                        int headCounter = 0; //determine position of this head in the group
-                                        int spinDirection = Main.rand.NextBool() ? 1 : -1;
-                                        Player player = Main.player[npc.target];
-                                        for (int i = 0; i < Main.maxNPCs; i++) //synchronize
-                                        {
-                                            if (Main.npc[i].active && Main.npc[i].type == npc.type)
-                                            {
-                                                EaterofWorldsHead gNPC = Main.npc[i].GetGlobalNPC<EaterofWorldsHead>();
-                                                gNPC.Attack = (int)Attacks.Coil;
-                                                gNPC.CoilDesiredRotation = headCounter * MathHelper.TwoPi / headCount;
-                                                gNPC.CoilDesiredRotation += Main.player[npc.target].DirectionTo(npc.Center).ToRotation();
-                                                gNPC.CoilSpinDirection = spinDirection;
-                                                Vector2 offset = player.velocity * 20;
-                                                gNPC.CoilCenter = player.Center + offset.ClampLength(0, CoilRadius / 2);
-
-                                                Main.npc[i].netUpdate = true;
-                                                NetSync(Main.npc[i]);
-
-                                                headCounter++;
-                                            }
-                                        }
-
-                                        npc.netUpdate = true;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Attack = (int)Attacks.NormalPostCoil;
-                            }
-
-                            // u-turn
-                            if (SpecialCountdownTimer == 700 - 90) //roar telegraph
-                                SoundEngine.PlaySound(SoundID.Roar, Main.player[npc.target].Center);
-
-                            //initiate mass u-turn
-                            if (SpecialCountdownTimer > 700 && FargoSoulsUtil.HostCheck) 
-                            {
-                                SpecialCountdownTimer = 0;
-                                if (npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) < 2400)
-                                {
-                                    Attack = (int)Attacks.UTurn;
-                                    DoTheWave = !DoTheWave;
-                                    UTurnTotalSpacingDistance = NPC.CountNPCS(npc.type) / 2;
-                                    if (WorldSavingSystem.MasochistModeReal)
-                                        UTurnTotalSpacingDistance /= 2;
-
-                                    int headCounter = 0; //determine position of this head in the group
-                                    bool actuallyDoTheThing = true;
-                                    for (int i = 0; i < Main.maxNPCs; i++) //synchronize
-                                    {
-                                        if (Main.npc[i].active && Main.npc[i].type == npc.type)
-                                        {
-                                            //in maso, only have every other head participate in group attacks
-                                            if (WorldSavingSystem.MasochistModeReal && i != npc.whoAmI)
-                                            {
-                                                actuallyDoTheThing = !actuallyDoTheThing;
-                                                if (!actuallyDoTheThing)
-                                                    continue;
-                                            }
-                                            EaterofWorldsHead gNPC = Main.npc[i].GetGlobalNPC<EaterofWorldsHead>();
-                                            gNPC.SpecialAITimer = DoTheWave && UTurnTotalSpacingDistance != 0 ? headCounter * 90 / UTurnTotalSpacingDistance / 2 - 60 : 0;
-                                            if (WorldSavingSystem.MasochistModeReal)
-                                                gNPC.SpecialAITimer += 60;
-                                            gNPC.UTurnTotalSpacingDistance = UTurnTotalSpacingDistance;
-                                            gNPC.UTurnIndividualSpacingPosition = headCounter;
-                                            gNPC.Attack = (int)Attacks.UTurn;
-
-                                            Main.npc[i].netUpdate = true;
-                                            NetSync(Main.npc[i]);
-
-                                            headCounter *= -1; //alternate 0, 1, -1, 2, -2, 3, -3, etc.
-                                            if (headCounter >= 0)
-                                                headCounter++;
-                                        }
-                                    }
-
-                                    npc.netUpdate = true;
-                                }
-                            }
-                        }
-                    }
+                    ret = true;
                     break;
             }
 
@@ -793,9 +382,602 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            return true;
-        }
+            if (!ret) // default stuff that has to happen anyway
+            {
+                if (NPC.velocity != Vector2.Zero)
+                    NPC.rotation = NPC.velocity.ToRotation() + MathHelper.PiOver2;
+            }
 
+            return ret;
+        }
+        public void DefaultMovement()
+        {
+            Vector2 targetPos = FindGround(NPC.Center.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
+            int maxDistX = 400;
+            targetPos.X = MathHelper.Clamp(targetPos.X, Target.Center.X - maxDistX, Target.Center.X + maxDistX);
+            targetPos.X += Math.Abs(Target.Center.X - NPC.Center.X) * 0.4f; // inch slightly towards player
+            targetPos.Y += UndergroundLength;
+            Movement(targetPos, 1f);
+
+            Timer++;
+            int waitTime;
+            int heads = CountHeads();
+            if (WorldSavingSystem.MasochistModeReal)
+            {
+                if (heads > 3)
+                    waitTime = 70 + (heads - 3) * 3;
+                else if (heads == 3)
+                    waitTime = 70;
+                else if (heads == 2)
+                    waitTime = 50;
+                else
+                    waitTime = 35;
+            }
+            else
+            {
+                if (heads > 3)
+                    waitTime = 90 + (heads - 3) * 6;
+                else if (heads == 3)
+                    waitTime = 90;
+                else if (heads == 2)
+                    waitTime = 75;
+                else
+                    waitTime = 60;
+            }
+            if (Timer > waitTime && (heads < 3 || Main.rand.NextBool(10)))
+            {
+                List<Attacks> attacks = [Attacks.BurrowSpit, Attacks.BurrowBelow, Attacks.BurrowSide];
+
+                int segments = CountSegments();
+                if (segments <= 5)
+                    attacks.Remove(Attacks.BurrowSpit);
+
+                if (attacks.Count > 2)
+                    attacks.Remove((Attacks)OldAttack);
+
+                Attack = (int)Main.rand.NextFromCollection(attacks);
+
+                if (ComboTimer == -1)
+                {
+                    Attack = (int)Attacks.Combo;
+                }
+                OldAttack = Attack;
+                NPC.netUpdate = true;
+                Timer = 0;
+                return;
+            }
+        }
+        public void BurrowSpit()
+        {
+            int windup = 20;
+
+            Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * 450 - Vector2.UnitY * 400;
+            targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
+
+            if (Timer >= 0) // first part
+            {
+                Timer++;
+
+
+                targetPos.Y += UndergroundLength;
+                float xDif = targetPos.X - NPC.Center.X;
+
+                Movement(targetPos, 2.5f);
+                if (Timer > windup && Math.Abs(xDif) < 80)
+                {
+                    Timer = -1;
+                    NPC.velocity *= 0.5f;
+                }
+            }
+            if (Timer < 0) // second part
+            {
+                Timer--;
+
+                bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                collision = collision || NPC.Center.Y > targetPos.Y || (!Collision.CanHitLine(NPC.Center, 1, 1, Target.Center, 1, 1) && NPC.Center.Y > Target.Center.Y);
+
+                if (collision && Timer > -50)
+                {
+                    NPC.velocity.X *= 0.96f;
+                    const float accelUp = 1f;
+                    if (NPC.velocity.Y > -13)
+                    {
+                        NPC.velocity.Y -= accelUp;
+                    }
+                }
+                else
+                {
+                    if (Timer > -1000)
+                    {
+                        Timer = -1000;
+                    }
+                    NPC.velocity *= 0.967f;
+
+                    if (Timer > -1000 - 12 && Timer < -1000 - 1)
+                    {
+                        Vector2 dir = -Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.1f);
+                    }
+
+                    if (Timer > -1000 - 40 && Timer < -1000 - 15)
+                    {
+                        Vector2 dir = Vector2.UnitX * NPC.HorizontalDirectionTo(Target.Center) + Vector2.UnitY * 0.35f;
+                        NPC.velocity = NPC.velocity.RotateTowards(dir.ToRotation(), 0.13f);
+                    }
+                    if (Timer < -1000 - 40)
+                        NPC.velocity = NPC.velocity.RotateTowards(NPC.DirectionTo(Target.Center).ToRotation(), 0.014f);
+
+                    int frequency;
+                    int heads = CountHeads();
+                    if (heads > 4)
+                        heads = 4;
+                    if (heads <= 1)
+                        frequency = 20;
+                    else if (heads == 2)
+                        frequency = 30;
+                    else
+                        frequency = 20 + heads * 5;
+                    if (Timer < -1000 - frequency && Timer % frequency == 0)
+                    {
+                        // fireball
+                        Vector2 dir = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2();
+
+                        if (heads == 1)
+                            dir = dir.RotatedByRandom(MathHelper.PiOver2 * 0.22f);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 10,
+                                ProjectileID.CursedFlameHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        }
+                    }
+
+                    if (Timer < -1000 - 140)
+                    {
+                        EndAttack();
+                        return;
+                    }
+                }
+            }
+        }
+        public void BurrowBelow()
+        {
+            int windup = 40;
+            Vector2 targetPos = new(Target.Center.X + Target.velocity.X * 80, Target.Center.Y - 400);
+            targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
+            if (Timer >= 0) // first part
+            {
+
+                Timer++;
+
+
+                float xDif = targetPos.X - NPC.Center.X;
+
+
+                targetPos.Y += UndergroundLength;
+                Movement(targetPos, 2.5f);
+                if (Math.Abs(xDif) < 5)
+                {
+                    Timer = -1;
+                    NPC.velocity *= 0f;
+                }
+            }
+            if (Timer < 0) // second part
+            {
+                Timer--;
+                NPC.velocity.X *= 0.98f;
+                NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * 0.025f;
+
+                if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
+                {
+                    ContactDamage = false;
+                    if (Timer % 2 == 0)
+                    {
+                        SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
+                    }
+                    const float accelUp = 0.8f;
+                    if (NPC.velocity.Y > -25)
+                    {
+                        NPC.velocity.Y -= accelUp;
+                    }
+                }
+                else
+                {
+                    if (Timer > -1000)
+                    {
+                        Timer = -1000;
+                        NPC.position -= NPC.velocity / 2;
+                        NPC.velocity *= 0.75f;
+                        Telegraph = true;
+                    }
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
+                    {
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                    }
+                    else // post windup
+                    {
+                        if (Timer == -1000 - windup - 2)
+                        {
+                            int heads = CountHeads();
+                            if (heads > 4)
+                                heads = 4;
+                            if (WorldSavingSystem.MasochistModeReal && heads > 1)
+                                heads--;
+                            if (heads <= 4)
+                            {
+                                int projCount;
+                                float width;
+                                if (heads == 1)
+                                {
+                                    projCount = 8;
+                                    width = 0.42f;
+                                }
+                                else if (heads == 2)
+                                {
+                                    projCount = 6;
+                                    width = 0.32f;
+                                }
+                                else if (heads == 3)
+                                {
+                                    projCount = 4;
+                                    width = 0.18f;
+                                }
+                                else
+                                {
+                                    projCount = 2;
+                                    width = 0.13f;
+                                }
+                                SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    for (float i = 0; i < projCount; i++)
+                                    {
+                                        float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
+                                        Vector2 angle = -Vector2.UnitY.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width);
+
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(14, 18),
+                                            ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
+                                }
+
+                            }
+                        }
+
+                        NPC.velocity.Y += 0.3f;
+                        NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * 0.1f;
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - windup - 50)
+                        {
+                            EndAttack();
+                            return;
+                        }
+                    }
+
+                }
+            }
+        }
+        public void BurrowSide()
+        {
+            int windup = 40;
+            Vector2 targetPos = Target.Center + Vector2.UnitX * Target.HorizontalDirectionTo(NPC.Center) * (880 + ExtraAI0) - Vector2.UnitY * 400;
+            targetPos = FindGround(targetPos.ToTileCoordinates()).ToWorldCoordinates();
+            targetPos = UnevenGroundFix(targetPos, Target);
+
+            if (Timer >= 0) // first part
+            {
+                if (Timer == 0)
+                {
+                    ExtraAI0 = Main.rand.Next(-100, 100);
+                }
+                Timer++;
+
+                //float dir = -Target.HorizontalDirectionTo(targetPos);
+
+                //Telegraph = true;
+                //Vector2 telegPos = targetPos + dir * Vector2.UnitX * 200;
+                //TelegraphPosition = telegPos;
+                //TelegraphRotation = new Vector2(dir * 4, -6).ToRotation();
+
+
+                targetPos.Y += UndergroundLength;
+
+                float xDif = targetPos.X - NPC.Center.X;
+
+                Movement(targetPos, 2.5f);
+                if (Math.Abs(xDif) < 5)
+                {
+                    Timer = -1;
+                    NPC.velocity *= 0f;
+                }
+            }
+            if (Timer < 0) // second part
+            {
+                Timer--;
+
+
+                if (Timer > -24 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
+                {
+                    ContactDamage = false;
+                    const float accelUp = 0.4f;
+                    if (NPC.velocity.Y > -25)
+                    {
+                        float side = 0.4f;
+                        float mult = 1f;
+                        if (CountSegments() < 10)
+                        {
+                            mult = 2f;
+                        }
+                            
+                        NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * accelUp * side * mult;
+                        NPC.velocity.Y -= accelUp * mult;
+                    }
+                }
+                else
+                {
+                    if (Timer > -1000)
+                    {
+                        Timer = -1000;
+                        NPC.position -= NPC.velocity / 2;
+                        Telegraph = true;
+                    }
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
+                    {
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                    }
+                    else // post windup
+                    {
+                        if (Timer == -1000 - windup - 3)
+                        {
+                            int heads = CountHeads();
+                            if (heads > 4)
+                                heads = 4;
+                            if (WorldSavingSystem.MasochistModeReal && heads > 1)
+                                heads--;
+                            if (heads <= 4)
+                            {
+                                int projCount;
+                                float width;
+                                if (heads == 1)
+                                {
+                                    projCount = 8;
+                                    width = 0.4f;
+                                }
+                                else if (heads == 2)
+                                {
+                                    projCount = 6;
+                                    width = 0.3f;
+                                }
+                                else if (heads == 3)
+                                {
+                                    projCount = 4;
+                                    width = 0.2f;
+                                }
+                                else
+                                {
+                                    projCount = 2;
+                                    width = 0.12f;
+                                }
+                                    SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    for (float i = 0; i < projCount; i++)
+                                    {
+                                        float offset = (i - (projCount / 2)) / (projCount / 2); // from -1 to 1
+                                        Vector2 angle = NPC.velocity.RotatedBy((offset + Main.rand.NextFloat(-0.12f, 0.12f)) * MathHelper.PiOver2 * width).SafeNormalize(-Vector2.UnitY);
+
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, angle * Main.rand.NextFloat(16, 22),
+                                            ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
+                                }
+                            }
+                        }
+                        NPC.velocity.Y += 0.5f;
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - 50)
+                        {
+                            EndAttack();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        public void ComboAttack()
+        {
+            int windup = 0;
+
+            int heads = 0;
+            bool foundyou = false;
+            int myID = 0;
+            for (int i = 0; i < Main.maxNPCs; i++)
+            {
+                if (i == NPC.whoAmI)
+                    foundyou = true;
+                if (Main.npc[i].type == NPCID.EaterofWorldsHead)
+                {
+                    heads++;
+                    if (!foundyou)
+                        myID++;
+                }
+                    
+            }
+            int offsetIndex = myID - (heads / 2);
+            // no 0 allowed
+            if (offsetIndex == 0)
+                offsetIndex = 1;
+            int side = Math.Sign(offsetIndex);
+
+
+            Vector2 targetPos = new(Target.Center.X + 450 * side + 60 * offsetIndex, Target.Center.Y);
+
+            if (Timer >= 0) // first part
+            {
+                Timer++;
+
+                // wait for all heads to sync
+                if (Timer > 1)
+                {
+                    if (Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.GetGlobalNPC<EaterofWorldsHead>().Attack != (int)Attacks.Combo))
+                    {
+                        Timer = 1;
+                    }
+                }
+
+                float xDif = targetPos.X - NPC.Center.X;
+
+                targetPos.Y += UndergroundLength;
+                Movement(targetPos, 4f);
+                if (Timer >= 5 && Math.Abs(xDif) < 120)
+                {
+                    Timer = -1;
+                    NPC.velocity *= 0f;
+                }
+            }
+            if (Timer < 0) // second part
+            {
+                Timer--;
+
+                NPC.velocity.X *= 0.98f;
+                NPC.velocity.X += NPC.HorizontalDirectionTo(Target.Center) * 0.025f;
+
+                if (Timer > -28 || (Timer > -50 && NPC.Center.Y > targetPos.Y))
+                {
+                    ContactDamage = false;
+                    if (Timer % 2 == 0)
+                    {
+                        SoundEngine.PlaySound(SoundID.WormDig, NPC.Center);
+                    }
+                    const float accelUp = 0.8f;
+                    if (NPC.velocity.Y > -19)
+                    {
+                        NPC.velocity.Y -= accelUp;
+                    }
+                }
+                else
+                {
+                    if (Timer > -1000 && NPC.velocity.Y > -5)
+                    {
+                        Timer = -1000;
+                        ContactDamage = false;
+                    }
+                    if (Timer <= -1000 && Timer >= -1000 - windup) // windup
+                    {
+                        NPC.position -= NPC.velocity;
+                        Telegraph = true;
+                        ContactDamage = false;
+                    }
+                    else // post windup
+                    {
+                        int windupTime = 25;
+                        int chargeTime = 35;
+                        int endTime = 17;
+                        if ((Timer <= -1000 && Timer >= -1000 - windupTime) || (Timer <= -1000 - windupTime - chargeTime && Timer >= -1000 - windupTime * 2 - chargeTime))
+                        {
+                            if (Timer >= -1000 - windupTime)
+                                ContactDamage = false;
+                            Vector2 dir = NPC.DirectionTo(Target.Center);
+                            NPC.velocity = Vector2.Lerp(NPC.velocity, dir * 3, 0.2f);
+                            if (Timer == -1000 - windupTime || Timer == -1000 - windupTime - chargeTime - windupTime)
+                            {
+                                NPC.velocity = dir * 17;
+                                SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.25f }, NPC.Center);
+                            }
+                        }
+                        else if ((Timer <= -1000 - windupTime && Timer >= -1000 - windupTime - chargeTime) || (Timer <= -1000 - windupTime * 2 - chargeTime && Timer >= -1000 - (windupTime + chargeTime) * 2))
+                        {
+                            NPC.velocity = (NPC.rotation - MathHelper.PiOver2).ToRotationVector2() * 17;
+                        }
+                        else
+                        {
+                            if (NPC.velocity.Y < 12)
+                                NPC.velocity.Y += 0.5f;
+                        }
+                            
+
+                        bool collision = Collision.SolidCollision(NPC.position, NPC.width, NPC.height);
+                        collision = collision || NPC.Center.Y > Target.Center.Y;
+                        if (collision && Timer < -1000 - windupTime * 2 - chargeTime * 2 - endTime)
+                        {
+                            ComboTimer = 60 * 26;
+                            EndAttack();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        #region Help Methods
+        public void EndAttack()
+        {
+            Timer = 0;
+            Attack = (int)Attacks.DefaultMovement;
+        }
+        void Movement(Vector2 target, float speedMultiplier = 1f)
+        {
+            float accel = 0.4f * speedMultiplier;
+            float decel = 0.7f * speedMultiplier;
+            float resistance = NPC.velocity.Length() * accel / (35f * speedMultiplier);
+            NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Center, target, NPC.velocity, accel - resistance, decel + resistance);
+        }
+        public int CountHeads()
+        {
+            return NPC.CountNPCS(NPCID.EaterofWorldsHead);
+        }
+        public int CountSegments()
+        {
+            int c = 0;
+            NPC me = NPC;
+            for (int safety = 0; safety < Main.maxNPCs; safety++)
+            {
+                int ai0 = (int)me.ai[0];
+                if (me.type == NPCID.EaterofWorldsTail || !ai0.IsWithinBounds(Main.maxNPCs))
+                    return c;
+                me = Main.npc[ai0];
+                c++;
+            }
+            return c;
+        }
+        public NPC? GetTail()
+        {
+            int c = 0;
+            NPC me = NPC;
+            for (int safety = 0; safety < Main.maxNPCs; safety++)
+            {
+                int ai0 = (int)me.ai[0];
+                if (me.type == NPCID.EaterofWorldsTail || !ai0.IsWithinBounds(Main.maxNPCs))
+                    return me;
+                me = Main.npc[ai0];
+                c++;
+            }
+            return me;
+        }
+        public static Point FindGround(Point p)
+        {
+            if (p.X > 0 && p.Y > 0 && WorldGen.InWorld(p.X, p.Y, 2))
+            {
+                Point result = LumUtils.FindGroundVertical(p);
+                if (result.X > 0 && result.Y > 0 && WorldGen.InWorld(result.X, result.Y, 2))
+                    return result;
+            }
+            return p;
+        }
+        public static Vector2 UnevenGroundFix(Vector2 p, Player target)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                if (p.Y < target.Bottom.Y || Collision.CanHitLine(p, 1, 1, target.Center, 1, 1))
+                    break;
+                p.Y -= 16;
+            }
+            return p;
+        }
+        #endregion
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
@@ -816,67 +998,28 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            int firstEater = NPC.FindFirstNPC(npc.type);
+            if (NPC == null || NPC.IsABestiaryIconDummy)
+                return true;
+            Texture2D bodytexture = Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Vector2 drawPos = NPC.Center - screenPos;
+            SpriteEffects spriteEffects = NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Vector2 origin = new(bodytexture.Width / 2, bodytexture.Height / 2 / Main.npcFrameCount[NPC.type]);
 
-            if (npc.whoAmI == firstEater && (Attacks)Attack == Attacks.Coil)
+            if (Telegraph)
             {
-                if (CoilBorderOpacity < 1)
-                    CoilBorderOpacity += 0.025f;
+                drawPos += Main.rand.NextVector2Circular(12, 6);
             }
-            else if (CoilBorderOpacity > 0)
-                CoilBorderOpacity -= 0.025f;
 
-            if (CoilBorderOpacity > 0)
-            {
-                Color darkColor = Color.Magenta;
-                Color mediumColor = Color.MediumPurple;
-                Color lightColor2 = Color.Lerp(Color.Purple, Color.White, 0.35f);
-                float greyLerp = 0.3f;
-                darkColor = Color.Lerp(darkColor, Color.SlateGray, greyLerp);
-                mediumColor = Color.Lerp(mediumColor, Color.SlateGray, greyLerp);
-                lightColor2 = Color.Lerp(lightColor2, Color.SlateGray, greyLerp);
+            spriteBatch.Draw(bodytexture, drawPos, NPC.frame, drawColor, NPC.rotation, origin, NPC.scale, spriteEffects, 0f);
 
-                Vector2 auraPos = CoilCenter;
-                float radius = CoilRadius;
-                var target = Main.LocalPlayer;
-                var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargosTextureRegistry.SmokyNoise;
-                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
-                    return false;
-                var maxOpacity = CoilBorderOpacity;
-
-                ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
-                borderShader.TrySetParameter("colorMult", 7.35f);
-                borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
-                borderShader.TrySetParameter("radius", radius);
-                borderShader.TrySetParameter("anchorPoint", auraPos);
-                borderShader.TrySetParameter("screenPosition", Main.screenPosition);
-                borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-                borderShader.TrySetParameter("playerPosition", target.Center);
-                borderShader.TrySetParameter("maxOpacity", maxOpacity);
-                borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
-                borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
-                borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
-                borderShader.TrySetParameter("opacityAmp", 1f * CoilBorderOpacity);
-
-                Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
-
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
-                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
-                Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            }
-                
-            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+            return false;
         }
     }
 
     public class EaterofWorldsSegment : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail);
-
+        public bool ContactDamage = true;
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
@@ -905,8 +1048,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 head = Main.npc[headID];
             if (head != null && head.Alive())
             {
+                ContactDamage = head.GetGlobalNPC<EaterofWorldsHead>().ContactDamage;
                 npc.timeLeft = 60 * 60;
                 EaterofWorldsHead headEternity = head.GetGlobalNPC<EaterofWorldsHead>();
+                /*
                 if (headEternity.Coiling && head.HasPlayerTarget)
                 {
                     Player player = Main.player[head.target];
@@ -915,8 +1060,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         npc.Center = Vector2.Lerp(npc.Center, headEternity.CoilCenter + headEternity.CoilCenter.DirectionTo(npc.Center) * EaterofWorldsHead.CoilRadius, 0.75f);
                     }
                 }
+                */
             }
             return base.SafePreAI(npc);
+        }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!ContactDamage)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
         public override bool CheckDead(NPC npc)
         {
@@ -953,7 +1105,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead) && eowHead.VileSpitLockoutDuration > 0))
+            if (++SuicideCounter > 600 || Main.npc.Any(n => n.TypeAlive(NPCID.EaterofWorldsHead) && n.TryGetGlobalNPC(out EaterofWorldsHead eowHead)))
                 npc.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
         }
 

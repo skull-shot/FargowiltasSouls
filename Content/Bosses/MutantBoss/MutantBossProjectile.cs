@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => $"FargowiltasSouls/Content/Bosses/MutantBoss/MutantBoss{FargoSoulsUtil.TryAprilFoolsTexture}";
 
-        public static string trailTexture => $"FargowiltasSouls/Assets/ExtraTextures/Eternals/MutantSoul{FargoSoulsUtil.TryAprilFoolsTexture}";
+        public static string trailTexture => FargoAssets.GetAssetString("Content/Bosses/MutantBoss", $"MutantSoul{FargoSoulsUtil.TryAprilFoolsTexture}");
         public static int npcType => ModContent.NPCType<MutantBoss>();
         public bool auraTrail;
 

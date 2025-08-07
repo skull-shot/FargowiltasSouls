@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -107,7 +108,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     Main.dust[d].noGravity = true;
                 }*/
 
-                SoundEngine.PlaySound(SoundID.Item71, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.AbomScytheSwing, Projectile.Center);
             }
 
             /*if (Projectile.timeLeft == maxTime - 20)

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (modPlayer.TerraProcCD == 0 && player.HasEffect<CopperEffect>())
             {
 
-                int dmg = (int)(1150 * damageMultiplier);
+                int dmg = (int)(900 * damageMultiplier);
                 int cdLength = 300;
 
                 // cooldown scaling from 2x to 1x depending on how recently you got hurt
@@ -118,13 +118,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 float modifier = 1f;
                 if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {
-                    modPlayer.TinCrit += 25;
+                    modPlayer.TinCrit += 5;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
                     else
-                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
+                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 5));
 
-                    if (modPlayer.TinCrit >= 100)
+                    if (modPlayer.TinCrit >= 25)
                         modifier -= 0.4f;
                 }
                 modPlayer.TerraProcCD = (int)(cdLength * modifier);

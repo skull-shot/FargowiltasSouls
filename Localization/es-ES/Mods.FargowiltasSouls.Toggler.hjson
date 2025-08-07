@@ -41,7 +41,7 @@
 // GoldToPiggy: Gold To Piggy Bank
 // HuntressEffect: Huntress Ability
 // RedRidingEffect: Red Riding Arrow Rain
-// ValhallaDash: Valhalla Mount Dash
+// ValhallaDashEffect: Valhalla Mount Dash
 // SquireMountJump: Squire Mount Jump
 // SquireMountSpeed: Squire Mount Speed
 // WillEffect: Concise Will Force
@@ -67,7 +67,7 @@
 // ShroomiteMushroomPriority: Mushrooms Take Potion Priority
 // ShroomiteShroomEffect: Shroomite Mushroom Cloud
 // NatureEffect: Concise Nature Force
-// ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
+// ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 // DarkArtistMinion: Flameburst Minion
 // ApprenticeSupport: Apprentice Effect
 // NecroEffect: Necro Graves
@@ -135,7 +135,7 @@
 // StabilizedGravity: Stabilized Gravity
 // DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 // FusedLensInstall: Twins Install
-// GroundStickDR: Supercharge When Hit
+// RemoteControlDR: Supercharge When Hit
 // ProbeMinionEffect: Probes Minion
 // RemoteLightningEffect: Lightning Strike
 // PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
@@ -145,7 +145,7 @@
 // GelicWingJump: Gelic Jump
 // PungentEyeballCursor: Pungent Eye Cursor
 // ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
-// PlantMinionEffect: Plantera Minion
+// IvyVenomEffect: Ivy Venom
 // LihzahrdGroundPound: Lihzahrd Fastfall
 // LihzahrdBoulders: Ground Pound Spray
 // CelestialRuneAttacks: Celestial Rune Support
@@ -192,7 +192,7 @@
 // SupersonicRocketBoots: Supersonic Rocket Boots
 // SupersonicCarpet: Supersonic Carpet
 // CthulhuShield: Shield of Cthulhu
-// BlackBelt: Black Belt
+// SupersonicDodge: Supersonic Dodge
 // SupersonicPanic: Panic On Hit
 // TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 // TrawlerSporeSac: Spore Sac

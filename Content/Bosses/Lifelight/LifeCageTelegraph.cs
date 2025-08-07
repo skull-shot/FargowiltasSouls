@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -7,11 +8,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
     public class LifeCageTelegraph : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/Lifelight/LifeCageProjectile";
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Cage Telegraph");
-        }
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", "LifeCageProjectile");
         public override void SetDefaults()
         {
             Projectile.width = 800;

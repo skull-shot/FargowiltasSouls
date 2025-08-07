@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
 
                 //spawn for first time
-                if (currentOrbs == 0)
+                if (currentOrbs == 0 && modPlayer.ShadowOrbRespawnTimer <= 0)
                 {
                     float rotation = 2f * (float)Math.PI / max;
 

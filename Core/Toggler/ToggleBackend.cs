@@ -1,7 +1,8 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Eternal;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -182,7 +183,6 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<DeerclawpsEffect>(false);
             //player.SetToggleValue<CultistMinionEffect>(false);
             player.SetToggleValue<LihzahrdBoulders>(false);
-            player.SetToggleValue<PlantMinionEffect>(false);
             player.SetToggleValue<CelestialRuneAttacks>(false);
 
             player.SetToggleValue<UfoMinionEffect>(false);
@@ -192,9 +192,6 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<MasoRing>(false);
 
             player.SetToggleValue<BuilderEffect>(false);
-
-            player.SetToggleValue<DefenseStarEffect>(false);
-            player.SetToggleValue<DefenseBeeEffect>(false);
 
             player.SetToggleValue<SupersonicClimbing>(false);
 
@@ -223,7 +220,7 @@ namespace FargowiltasSouls.Core.Toggler
             player.SetToggleValue<GoldToPiggy>(true);
             player.SetToggleValue<JungleDashEffect>(true);
             player.SetToggleValue<SupersonicTabi>(true);
-            player.SetToggleValue<ValhallaDash>(true);
+            player.SetToggleValue<ValhallaDashEffect>(true);
             player.SetToggleValue<SquireMountJump>(true);
             player.SetToggleValue<SquireMountSpeed>(true);
             player.SetToggleValue<NebulaEffect>(true);

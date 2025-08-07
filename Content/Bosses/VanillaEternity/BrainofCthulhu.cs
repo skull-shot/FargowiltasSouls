@@ -1,8 +1,8 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.BrainOfCthulhu;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -511,17 +511,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            if (WorldSavingSystem.MasochistModeReal)
-            {
-                target.AddBuff(BuffID.Poisoned, 120);
-                target.AddBuff(BuffID.Darkness, 120);
-                target.AddBuff(BuffID.Bleeding, 120);
-                target.AddBuff(BuffID.Slow, 120);
-                target.AddBuff(BuffID.Weak, 120);
-                target.AddBuff(BuffID.BrokenArmor, 120);
-            }
+            return;          
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
@@ -608,17 +598,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            if (WorldSavingSystem.MasochistModeReal)
-            {
-                target.AddBuff(BuffID.Poisoned, 120);
-                target.AddBuff(BuffID.Darkness, 120);
-                target.AddBuff(BuffID.Bleeding, 120);
-                target.AddBuff(BuffID.Slow, 120);
-                target.AddBuff(BuffID.Weak, 120);
-                target.AddBuff(BuffID.BrokenArmor, 120);
-            }
+            target.AddBuff(BuffID.Ichor, 120);     
         }
 
         public override bool CheckDead(NPC npc)

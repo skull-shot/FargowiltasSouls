@@ -47,8 +47,7 @@ ApprenticeEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/7 as often as they would normally
-		Only works on hotbar weapons
+		The support weapon will fire 1/5 as often as it would normally
 		Consumables are consumed, mana is spent, and ammo is selected
 		'A long way to perfection'
 		''' */
@@ -171,9 +170,8 @@ DarkArtistEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/5 as often as they would normally
-		Only works on hotbar weapons
-		Summons a Flameburst minion that will also fire while you attack
+		The support weapon will fire 1/5 as often as it would normally
+		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -204,7 +202,7 @@ FossilEnchant: {
 		'''
 		Se você chegar a zero PV, você reviverá com 50 PV e invocará vários ossos
 		Você também invocará alguns ossos em cada acerto
-		Colete os ossos para ser curado em 20 PV cada
+		Colete os ossos para ser curado em 15 PV cada
 		'Além de uma era esquecida'
 		'''
 }
@@ -613,8 +611,8 @@ SquireEnchant: {
 	// DisplayName: Squire Enchantment
 	/* Tooltip:
 		'''
-		Increases mount acceleration, top speed, and jump height
-		While mounted, grants 10 defense, a fart jump, and fall damage immunity
+		Increases mount acceleration, speed, and jump height by 1.25x
+		While mounted, grants a double jump and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
 		'Squire, will you hurry?'
 		''' */
@@ -671,7 +669,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback
+		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
@@ -695,8 +693,8 @@ ValhallaKnightEnchant: {
 	// DisplayName: Valhalla Knight Enchantment
 	/* Tooltip:
 		'''
-		Increases mount acceleration, top speed, and jump height
-		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
+		Increases mount acceleration, speed, and jump height by 1.5x
+		While mounted grants a horizontal and vertical dash, double jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 15%
 		'Valhalla calls'
 		''' */
@@ -736,50 +734,6 @@ WoodEnchant: {
 		'''
 }
 
-ApprenticesEssence: {
-	DisplayName: Essência do Aprendiz
-	Tooltip:
-		'''
-		18% de aumento nos danos por magia
-		5% de aumento no crítico mágico
-		Aumenta a mana máxima em 50
-		'Isto é apenas o começo..'
-		'''
-}
-
-BarbariansEssence: {
-	DisplayName: Essência do Bárbaro
-	Tooltip:
-		'''
-		18% de aumento nos danos por ataques físicos
-		10% de aumento na velocidade do ataque físico
-		5% de aumento na chance de acerto físico crítico
-		'Isto é apenas o começo..'
-		'''
-}
-
-OccultistsEssence: {
-	DisplayName: Essência do Ocultista
-	Tooltip:
-		'''
-		18% de aumento nos danos por invocação
-		Aumenta o número máximo de lacaios que você pode ter em 1
-		Aumenta o número máximo de sentinelas que você pode ter em 1
-		'Isto é apenas o começo..'
-		'''
-}
-
-SharpshootersEssence: {
-	DisplayName: Essência do Atirador de Elite
-	Tooltip:
-		'''
-		18% de aumento nos danos por ataque à distância
-		10% de chance de não consumir munição
-		5% de aumento na chance de ataque à distância crítico
-		'Isto é apenas o começo..'
-		'''
-}
-
 BoxofGizmos: {
 	DisplayName: Caixa de Aparelhos
 	Tooltip:
@@ -803,7 +757,7 @@ UniverseCore: {
 		'''
 		Your critical strikes can critically strike
 		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
-		These supercrits deal 4x damage and inflict Flames of the Cosmos
+		These supercrits deal double damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
 }
@@ -869,23 +823,20 @@ NatureForce: {
 		'''
 }
 
-ShadowForce: {
-	DisplayName: Força das Sombras
-	Tooltip:
+DeathForce: {
+	// DisplayName: Force of Death
+	/* Tooltip:
 		'''
-		[i:5527] Quatro Esferas das Sombras orbitarão ao seu redor
-		[i:5484] Seus ataques podem infligir Escuridão nos inimigos
-		[i:5514] Inimigos derrotados podem deixar cair uma pilha de ossos
-		[i:5515] Lance uma bomba de fumaça para teleportar-se a ela e ganhar o efeito Primeiro Ataque
-		[i:5495] Efeitos da Gelatina Volátil
-		[i:5535] Todos os seus lacaios ganham um ataque de foices adicional
-		[i:5511] Não ataque para ganhar uma corrida de monge de uso único
-		[i:5528] Faça uma corrida em qualquer parede para teleportar através dela até a próxima abertura
-		[i:5486] Depois de atacar por 2 segundos você será envolto em chamas
-		[i:5486] Trocar de armas aumentará o dano do próximo ataque em 150%
-		[i:5496] Invoca um lacaio de Chamas Explosivas que viajará para o seu mouse depois de carregar
-		'Escuro, Mais Escuro, Ainda Mais Escuro'
-		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
+		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
+		[i:FargowiltasSouls/SpookyEnchant] Shade dashes swing a scythe around you, healing you on hit and inflicting Marked for Death
+		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
+		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
+		'Dark, Darker, Yet Darker'
+		''' */
 }
 
 SpiritForce: {
@@ -1030,7 +981,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		''' */
 }
@@ -1040,12 +991,12 @@ BionomicClusterInactive: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
+		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1055,16 +1006,16 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-			[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-			[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		''' */
 	/* VanityTooltip:
@@ -1079,7 +1030,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, Crippled, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1190,15 +1141,13 @@ EurusSock: {
 	Tooltip: Permite que o usuário corra rapidamente
 }
 
-FrigidGemstone: {
-	DisplayName: Pedra Preciosa Frígida
-	Tooltip:
+FrigidGrasp: {
+	// DisplayName: Frigid Grasp
+	/* Tooltip:
 		'''
-		Funciona em seu inventário
-		Oferece imunidade a Queimadura de gelo e Resfriado
-		Aperte a tecla Feitiço Frígido para lançar Bastão de Gelo
-		'Um fragmento de gelo mágico antigo'
-		'''
+		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		'A torn off limb composed of ancient ice'
+		''' */
 	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
@@ -1249,16 +1198,15 @@ GelicWings: {
 		'''
 }
 
-GroundStick: {
-	DisplayName: Controle Remoto
-	Tooltip:
+RemoteControl: {
+	// DisplayName: Remote Control
+	/* Tooltip:
 		'''
-		Oferece imunidade Para-raios
-		Ataques de eletricidade e raios sobrecarregam você e causam metade do dano se você ainda não estiver sobrecarregado
-		Enquanto sobrecarregado, você tem velocidade dos movimentos e do ataque aumentados e inflige Eletrizado
-		Duas sondas amigávels lutam ao seu lado e irão sobrecarregar com você
-		'O segmento de um inimigo derrotado com uma antena colada'
-		'''
+		Grants immunity to Electrified and Lightning Rod
+		Taking damage from an electric or beam attack converts half of its damage into charge duration
+		While charged, you have increased movement and attack speed and summon 3 probes to fight for you
+		'The batteries are dead'
+		''' */
 }
 
 GuttedHeart: {
@@ -1993,35 +1941,35 @@ GaiaPlate: {
 		'''
 }
 
-MutantBody: {
-	DisplayName: Verdadeiro Corpo do Mutant
-	Tooltip:
+EternalCore: {
+	// DisplayName: Eternal Core
+	/* Tooltip:
 		'''
-		70% de aumento nos danos e 30% de aumento na chance de acerto crítico
-		Aumenta a vida e mana máxima em 200
-		Aumenta a redução de danos em 30%
-		Aumenta drasticamente a regeneração de vida
-		'''
+		70% increased damage and 30% increased critical strike chance
+		Increases max life and mana by 200
+		Increases damage reduction by 30%
+		Drastically increases life regen
+		''' */
 }
 
-MutantMask: {
-	DisplayName: Verdadeira Cabeça do Mutant
-	Tooltip:
+EternalFlame: {
+	// DisplayName: Eternal Flame
+	/* Tooltip:
 		'''
-		50% de aumento nos danos e 205 de aumento na chance de acerto crítico
-		Aumenta o número máximo de lacaios e sentinelas em 10
-		25% de redução no consumo de mana
-		25% de chance de não consumir munição
-		'''
+		50% increased damage and 20% increased critical strike chance
+		Increases max number of minions and sentries by 10
+		25% reduced mana usage
+		25% chance not to consume ammo
+		''' */
 }
 
-MutantPants: {
-	DisplayName: Verdadeiras Calças do Mutant
-	Tooltip:
+EternalLeggings: {
+	// DisplayName: Eternal Leggings
+	/* Tooltip:
 		'''
-		50% de aumento nos danos e 20% de aumento na chance de acerto crítico
-		40% de aumento na velocidade dos movimentos e do ataque físico
-		'''
+		50% increased damage and 20% increased critical strike chance
+		40% increased movement and melee speed
+		''' */
 }
 
 NekomiHood: {
@@ -2132,7 +2080,11 @@ MutantsDiscountCard: {
 
 MutantsPact: {
 	DisplayName: Pacto do Mutant
-	// Tooltip: Permanently adds an accessory slot that only accepts an Enchantment, Essence, Force or Soul
+	/* Tooltip:
+		'''
+		[c/00FFFF:Permanent effect once consumed:]
+		Adds an accessory slot that only accepts an Enchantment, Force, or Soul
+		''' */
 }
 
 OrdinaryCarrot: {
@@ -2206,7 +2158,7 @@ EternalEnergy: {
 		'''
 }
 
-BrokenSpearHead: {
+BrokenSpearhead: {
 	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
@@ -2432,8 +2384,8 @@ NatureChampionRelic: {
 	// Tooltip: ""
 }
 
-ShadowChampionRelic: {
-	DisplayName: Relíquia do Campeão das Sombras
+DeathChampionRelic: {
+	// DisplayName: Death Champion Relic
 	// Tooltip: ""
 }
 
@@ -2635,9 +2587,13 @@ FleshHand: {
 	Tooltip: "'A carcaça mutilada de um inimigo derrotado...'"
 }
 
-LeashOfCthulhu: {
-	DisplayName: Coleira de Cthulhu
-	Tooltip: "'Os lacaios escravizados de um inimigo derrotado..'"
+Eyeleash: {
+	// DisplayName: Eyeleash
+	/* Tooltip:
+		'''
+		Servants gather around you whilst spun, flying towards your cursor when released
+		'The mutilated carcass of a defeated foe...'
+		''' */
 }
 
 RefractorBlaster: {
@@ -2815,23 +2771,23 @@ Blender: {
 	Tooltip: "'A recompensa por matar muitos...'"
 }
 
-DestroyerGun2: {
-	DisplayName: Canhão da Destruição
-	Tooltip:
+DestructionCannon: {
+	// DisplayName: Destruction Cannon
+	/* Tooltip:
 		'''
-		Fica mais longo e mais rápido com até 5 espaços de lacaio vazios
-		'A recompensa por matar muitos...'
-		'''
+		Becomes longer and faster with up to 5 empty minion slots
+		'The reward for a mighty rematch...'
+		''' */
 }
 
-DragonBreath2: {
-	DisplayName: Perecimento do Dragão
-	Tooltip:
+DragonsDemise: {
+	// DisplayName: Dragon's Demise
+	/* Tooltip:
 		'''
-		Utiliza gel como munição
-		66% de chance de não consumir munição
-		'A recompensa por matar muitos...'
-		'''
+		Uses gel for ammo
+		66% chance to not consume ammo
+		'The reward for a mighty rematch...'
+		''' */
 }
 
 EaterLauncher: {
@@ -2845,9 +2801,14 @@ EaterLauncher: {
 		'''
 }
 
-FleshCannon: {
-	DisplayName: O Regurgitador
-	Tooltip: "'O rosto escravizado de um inimigo derrotado...'"
+Regurgitator: {
+	// DisplayName: The Regurgitator
+	/* Tooltip:
+		'''
+		Grows a Hungry when firing
+		Hungry deals much more damage when fully charged
+		'The enslaved face of a defeated foe...'
+		''' */
 }
 
 GeminiGlaives: {
@@ -2860,9 +2821,14 @@ GeminiGlaives: {
 		'''
 }
 
-GolemTome2: {
-	DisplayName: O Desmoronamento
-	Tooltip: "'A recompensa por matar muitos...'"
+Landslide: {
+	// DisplayName: The Landslide
+	/* Tooltip:
+		'''
+		Deals more damage when firing many heads at once
+		Automatically fires weak heads when fully charged
+		'The reward for a mighty rematch...'
+		''' */
 }
 
 GuardianTome: {
@@ -2880,9 +2846,15 @@ HellZone: {
 		'''
 }
 
-MechanicalLeashOfCthulhu: {
-	DisplayName: Coleira Mecânica de Cthulhu
-	Tooltip: "'A recompensa por matar muitos...'"
+LeashofCthulhu: {
+	// DisplayName: Leash of Cthulhu
+	/* Tooltip:
+		'''
+		Spawns homing servants whilst spun
+		Every 3rd direct hit with the leash causes the eye to break free and dash at enemies
+		Only one eye can be loose at a time
+		'The reward for a mighty rematch...'
+		''' */
 }
 
 NukeFishron: {
@@ -2894,19 +2866,19 @@ NukeFishron: {
 		'''
 }
 
-OpticStaffEX: {
-	DisplayName: Cajado da Onisciência
-	Tooltip:
+OmniscienceStaff: {
+	// DisplayName: Omniscience Staff
+	/* Tooltip:
 		'''
-		Invoca os verdadeiros Gêmeos para lutar por você
-		Precisa de 3 espaços de lacaio
-		'A recompensa por matar muitos...'
-		'''
+		Summons the real twins to fight for you
+		Needs 3 minion slots
+		'The reward for a mighty rematch...''
+		''' */
 }
 
-RefractorBlaster2: {
-	DisplayName: Detonador Difrator
-	Tooltip: "'A recompensa por matar muitos...'"
+DiffractorBlaster: {
+	// DisplayName: Diffractor Blaster
+	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
 SlimeSlingingSlasher: {
@@ -3168,7 +3140,7 @@ LifelightTrophy: {
 	// Tooltip: ""
 }
 
-FragilePixieLamp: {
+CrystallineEffigy: {
 	// DisplayName: Crystalline Effigy
 	// Tooltip: While in the Hallow during day, hold out to break, angering the pixies' master
 }
@@ -3403,7 +3375,7 @@ RazorContainer: {
 	/* Tooltip:
 		'''
 		Spawns a razor blade that hovers around your cursor
-		Hit it with a standard broadsword to send it flying
+		Hit it with a melee weapon to send it flying
 		While flying it always critically strikes and has increased armor penetration
 		'Some yellow fur is still stuck at the bottom' 
 		''' */
@@ -3730,7 +3702,26 @@ WillMask: {
 	// Tooltip: ""
 }
 
-BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
+HallowedPendant: {
+	// DisplayName: Hallowed Pendant
+	/* Tooltip:
+		'''
+		Increases length of invincibility after taking damage
+		After taking damage, fires a ray of light at up to 4 nearby enemies
+		''' */
+}
+
+MoltenShield: {
+	// DisplayName: Devilshield
+	/* Tooltip:
+		'''
+		Grants immunity to knockback
+		Reduces damage taken by 20% when at full life, or below 50% life
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		''' */
+}
+
+Devilstone: {
+	// DisplayName: Devilstone
+	// Tooltip: Obtained from demons after defeating Lifelight or Plantera
 }

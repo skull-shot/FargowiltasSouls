@@ -1,6 +1,6 @@
 ﻿using System;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -111,8 +111,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 shroomDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(hitInfo.DamageType);
                 shroomDamage = (float)Math.Round(shroomDamage);
             }
-            if (shroomDamage > 115f)
-                shroomDamage = (230f + shroomDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
+            if (shroomDamage > 75f)
+                shroomDamage = (150f + shroomDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
             Projectile[] projs = FargoSoulsUtil.XWay(num, player.GetSource_EffectItem<ShroomiteShroomEffect>(), target.Center, ModContent.ProjectileType<ShroomiteShroom>(), 16, (int)shroomDamage, 0f);
 
             foreach (Projectile p in projs)

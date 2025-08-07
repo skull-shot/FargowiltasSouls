@@ -213,11 +213,6 @@ ClippedWingsBuff: {
 	Description: 无法飞行或使用火箭靴
 }
 
-CrippledBuff: {
-	DisplayName: 跛足
-	Description: 你无法奔跑
-}
-
 CurseoftheMoonBuff: {
 	DisplayName: 月之诅咒
 	Description: 月亮的愤怒正在吞噬你
@@ -313,11 +308,6 @@ LihzahrdBlessingBuff: {
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
 }
 
-LihzahrdCurseBuff: {
-	DisplayName: 蜥蜴诅咒
-	Description: 丛林神庙内，你不能拆除或放置电线
-}
-
 LivingWastelandBuff: {
 	DisplayName: 人形废土
 	Description: 你周围的每个人都开始腐烂
@@ -393,11 +383,6 @@ OiledBuff: {
 PungentGazeBuff: {
 	DisplayName: 尖刻注视
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
-}
-
-PurgedBuff: {
-	DisplayName: 涤荡
-	Description: 闪避效果不会生效
 }
 
 RefreshedBuff: {
@@ -599,6 +584,11 @@ HuntressCDBuff: {
 LeadPoisonBuff: {
 	DisplayName: 铅中毒
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
+}
+
+LeadPoisonSpreadBuff: {
+	DisplayName: 铅中毒
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
 }
 
 MoltenAmplifyBuff: {
@@ -805,10 +795,15 @@ TouhouHoardBuff: {
 
 BleedingOut: {
 	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	// Description: You're bleeding quickly!
 }
 
 SilverBuff: {
 	// DisplayName: Parry Boost
 	// Description: 100% increased damage
+}
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
 }

@@ -1,6 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             //Item.scale = 1.3f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+            Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true;
             Item.noUseGraphic = true;
@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 
             if (forceSwordTimer > 0)
             {
-                Item.shoot = ModContent.ProjectileType<HentaiSword>();
+                Item.shoot = ModContent.ProjectileType<PenetratorSword>();
                 Item.shootSpeed = 6f;
 
                 Item.useAnimation = 16;
@@ -122,12 +122,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 }
                 else if (player.controlDown && player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+                    Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
                     Item.shootSpeed = 6f;
                 }
                 else
                 {
-                    Item.shoot = ModContent.ProjectileType<HentaiSword>();
+                    Item.shoot = ModContent.ProjectileType<PenetratorSword>();
                     Item.shootSpeed = 6f;
                     Item.useStyle = ItemUseStyleID.Swing;
                 }
@@ -146,7 +146,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             if (forceSwordTimer > 0)
                 forceSwordTimer -= 1;
 
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<HentaiSword>()] > 0)
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<PenetratorSword>()] > 0)
                 forceSwordTimer = 3;
         }
 
@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             {
                 velocity = new Vector2(velocity.X < 0 ? 1 : -1, -1);
                 velocity.Normalize();
-                velocity *= HentaiSword.MUTANT_SWORD_SPACING;
+                velocity *= PenetratorSword.MUTANT_SWORD_SPACING;
                 Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, -Math.Sign(velocity.X));
                 return false;
             }

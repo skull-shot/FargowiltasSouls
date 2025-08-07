@@ -1,5 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Essences;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -42,16 +41,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.yoyoGlove = true;
             player.yoyoString = true;
 
-            //celestial shell
-            player.wolfAcc = true;
-            player.accMerman = true;
-
-            if (hideVisual)
-            {
-                player.hideMerman = true;
-                player.hideWolf = true;
-            }
-
             player.lifeRegen += 2;
         }
 
@@ -59,12 +48,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient<BarbariansEssence>()
-            .AddIngredient(ItemID.StingerNecklace)
-            .AddIngredient(ItemID.YoyoBag)
+            .AddIngredient(ItemID.WarriorEmblem)
             .AddIngredient(ItemID.FireGauntlet)
-            .AddIngredient(ItemID.BerserkerGlove)
-            .AddIngredient(ItemID.CelestialShell)
+            .AddIngredient(ItemID.YoyoBag)
+            .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
 
             .AddIngredient(ItemID.KOCannon)
             .AddIngredient(ItemID.IceSickle)

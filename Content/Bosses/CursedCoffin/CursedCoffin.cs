@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
@@ -334,14 +335,17 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
 		public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<CursedCoffinBag>()));
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
+
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CursedCoffinTrophy>(), 10));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<CursedCoffinRelic>()));
-
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.OasisCrate, 1, 1, 5)); //oasis crate
             // gems
             rule.OnSuccess(ItemDropRule.Common(ItemID.Amethyst, 3, 2, 4));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Topaz, 4, 2, 4));
@@ -355,6 +359,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             rule.OnSuccess(ItemDropRule.Common(ItemID.PharaohsRobe, 4));
 
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<CursedCoffinBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<CursedCoffinRelic>()));
         }
 		#endregion
 	}

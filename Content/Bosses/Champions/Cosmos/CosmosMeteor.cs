@@ -1,5 +1,5 @@
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
     public class CosmosMeteor : ModProjectile, IPixelatedPrimitiveRenderer
     {
         private bool spawned;
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/MeteorEnchantMeatball";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "MeteorEnchantMeatball");
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Cosmic Meteor");
@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
 

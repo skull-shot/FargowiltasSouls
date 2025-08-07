@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.Champions.Life;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 for (int i = 0; i < spawnBeetles; i++)
                 {
-                    int dmg = (int)(65 * player.ActualClassDamage(DamageClass.MeleeNoSpeed));
+                    int dmg = 35; //melee scaling handled by continuous projectile damage updating
                     Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, beetle, dmg, 1f, player.whoAmI);
                 }
 
@@ -112,8 +112,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (wiz)
                 buildup *= 1.5f;
             modPlayer.BeetleCharge += buildup / 2000f;
-            CooldownBarManager.Activate("BeetleEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/BeetleEnchant").Value, new(109, 92, 133),
-                () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
+            CooldownBarManager.Activate("BeetleEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/BeetleEnchant").Value, new(109, 92, 133), () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
             if (modPlayer.BeetleCharge > 1)
             {
                 modPlayer.BeetleCharge = 0;
@@ -125,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             var modPlayer = player.FargoSouls();
             if (modPlayer.BeetleHitCD > 0 || modPlayer.Beetles <= 0)
                 return;
-            modPlayer.Beetles -= 2;
+            modPlayer.Beetles -= 3;
             if (modPlayer.Beetles < 0)
                 modPlayer.Beetles = 0;
             modPlayer.BeetleHitCD = 60 * 3;

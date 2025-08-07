@@ -8,15 +8,15 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core;
 using Terraria.Graphics.CameraModifiers;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Deerclops;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Deerclops;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -90,6 +90,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
         {
+            if (npc.alpha > 0)
+                return false;
+            if (npc.frame.Y == 17)
+                return true;
             return false;
             /*
             if (npc.alpha > 0)
@@ -288,9 +292,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (HandsCooldown <= 0)
                             {
                                 npc.velocity.X = 0;
-                                int attackDuration = 140;
+                                int attackDuration = WorldSavingSystem.MasochistModeReal ? 125 : 140;
                                 int firstVolleyTime = 10;
-                                int secondVolleyTime = 85;
+                                int secondVolleyTime = WorldSavingSystem.MasochistModeReal ? 60 : 85;
                                 float distance = 300;
                                 void SpawnHand(Vector2 dir)
                                 {

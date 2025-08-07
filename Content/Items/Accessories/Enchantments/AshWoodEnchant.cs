@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -107,7 +107,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 float fireballDamage = damage;
                 if (!modPlayer.TerrariaSoul && heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
-                    //fireballDamage *= player.ActualClassDamage(DamageClass.Magic);
+                    fireballDamage *= player.ActualClassDamage(DamageClass.Magic) / player.ActualClassDamage(heldItem.DamageType);
                     if (fireballDamage > 24f * softcapMult)
                         fireballDamage = (float)Math.Round(((48f * softcapMult) + fireballDamage) / 3f);
                 }
@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, (int)fireballDamage, 1, Main.myPlayer);
                     if (p != Main.maxProjectiles)
                     {
-                        Main.projectile[p].DamageType = DamageClass.Generic;
+                        Main.projectile[p].DamageType = DamageClass.Magic;
                     }
                 }
 

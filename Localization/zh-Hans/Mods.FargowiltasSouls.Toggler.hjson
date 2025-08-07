@@ -41,7 +41,7 @@ GoldEffect: 金 幸运币
 GoldToPiggy: 金 自动将钱存进储蓄罐
 HuntressEffect: 女猎人 相关效果
 RedRidingEffect: 红色骑术 箭雨
-ValhallaDash: 英灵殿骑士 坐骑冲刺
+ValhallaDashEffect: 英灵殿骑士 坐骑冲刺
 SquireMountJump: 侍卫 坐骑跳跃高度
 SquireMountSpeed: 侍卫 坐骑速度
 WillEffect: 简化意志之力
@@ -67,7 +67,7 @@ ShroomiteHealEffect: 蘑菇 蘑菇消耗增益
 ShroomiteMushroomPriority: 蘑菇 使用药水优先级
 ShroomiteShroomEffect: 蘑菇 蘑菇云
 NatureEffect: 简化自然之力
-ShadowHeader: "{$Mods.FargowiltasSouls.Items.ShadowForce.DisplayName}"
+ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 DarkArtistMinion: 暗黑艺术家 爆炸烈焰召唤物
 ApprenticeSupport: 学徒 相关效果
 NecroEffect: 死灵 骨堆
@@ -135,7 +135,7 @@ WyvernBalls: 飞行光球
 StabilizedGravity: 重力稳定
 DubiousHeader: "{$Mods.FargowiltasSouls.Items.DubiousCircuitry.DisplayName}"
 FusedLensInstall: 双子负载
-GroundStickDR: 受击超级充能
+RemoteControlDR: 受击超级充能
 ProbeMinionEffect: 探测器召唤物
 // RemoteLightningEffect: Lightning Strike
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
@@ -145,7 +145,7 @@ GelicWingSpikes: 明胶尖刺
 GelicWingJump: 明胶羽翼跳跃
 PungentEyeballCursor: 易伤区域光标
 ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
-PlantMinionEffect: 世纪之花召唤物
+IvyVenomEffect: 世纪之花召唤物
 LihzahrdGroundPound: 蜥蜴快速下落
 LihzahrdBoulders: 下落坠地火焰
 CelestialRuneAttacks: 天界符文额外攻击
@@ -192,7 +192,7 @@ SupersonicJumps: 超音速之魂五段跳
 SupersonicRocketBoots: 超音速之魂火箭靴
 SupersonicCarpet: 超音速之魂飞毯
 CthulhuShield: 克苏鲁护盾
-BlackBelt: 黑腰带闪避
+// SupersonicDodge: Supersonic Dodge
 SupersonicPanic: 受伤获得恐慌效果
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: 孢子囊

@@ -1,5 +1,4 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Essences;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Misc;
@@ -206,14 +205,36 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => AnyItem("Gem"), ItemID.Diamond, ItemID.Amber, ItemID.Ruby, ItemID.Emerald, ItemID.Sapphire, ItemID.Topaz, ItemID.Amethyst);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyGem", group);
 
+            // any panic necklace
+            group = new RecipeGroup(() => AnyItem(ItemID.PanicNecklace), ItemID.PanicNecklace, ItemID.SweetheartNecklace);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyPanicNecklace", group);
 
+            // any sharktooth necklace
+            group = new RecipeGroup(() => AnyItem(ItemID.SharkToothNecklace), ItemID.SharkToothNecklace, ItemID.StingerNecklace);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySharktoothNecklace", group);
+
+            // any quiver
+            group = new RecipeGroup(() => AnyItem(ItemID.MagicQuiver), ItemID.MagicQuiver, ItemID.MoltenQuiver, ItemID.StalkersQuiver);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyQuiver", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.SniperScope), ItemID.SniperScope, ItemID.ReconScope);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySniperScope", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.MagicCuffs), ItemID.MagicCuffs, ItemID.CelestialCuffs);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyMagicCuffs", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.ManaFlower), ItemID.ManaFlower, ItemID.ArcaneFlower, ItemID.MagnetFlower, ItemID.ManaCloak);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyManaFlower", group);
+
+            group = new RecipeGroup(() => AnyItem("SentryAccessory"), ItemID.MonkBelt, ItemID.SquireShield, ItemID.HuntressBuckler, ItemID.ApprenticeScarf);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySentryAccessory", group);
         }
         public override void PostAddRecipes()
         {
             foreach (Recipe recipe in Main.recipe)
             {
                 //disable shimmer decrafts
-                if (recipe.createItem.ModItem != null && (recipe.createItem.ModItem is BaseEnchant || recipe.createItem.ModItem is BaseForce || recipe.createItem.ModItem is BaseSoul || recipe.createItem.ModItem is BaseEssence))
+                if (recipe.createItem.ModItem != null && (recipe.createItem.ModItem is BaseEnchant || recipe.createItem.ModItem is BaseForce || recipe.createItem.ModItem is BaseSoul))
                     recipe.DisableDecraft();
 
                 // disable pre-evil meteorite recipes
@@ -221,7 +242,7 @@ namespace FargowiltasSouls.Core.Systems
                 if (recipe.HasIngredient(ItemID.MeteoriteBar))
                 {
                     LocalizedText desc = Language.GetText($"Mods.FargowiltasSouls.Conditions.PostEvilEternity");
-                    Condition c = new(desc, () => WorldSavingSystem.EternityMode && Condition.DownedEowOrBoc.IsMet());
+                    Condition c = new(desc, () => WorldSafrievingSystem.EternityMode && Condition.DownedEowOrBoc.IsMet());
                     recipe.AddCondition(c);
                 }
                 */
