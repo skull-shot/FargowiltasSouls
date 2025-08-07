@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.HuntressJerkin)
             .AddIngredient(ItemID.HuntressPants)
             .AddIngredient(ItemID.DD2ExplosiveTrapT2Popper)
-            .AddIngredient(ItemID.DaedalusStormbow)
+            .AddIngredient(ItemID.BloodRainBow)
             .AddIngredient(ItemID.DD2PhoenixBow)
 
             .AddTile(TileID.CrystalBall)

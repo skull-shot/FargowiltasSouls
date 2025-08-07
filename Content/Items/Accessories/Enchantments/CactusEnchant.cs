@@ -45,8 +45,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CactusHelmet)
                 .AddIngredient(ItemID.CactusBreastplate)
                 .AddIngredient(ItemID.CactusLeggings)
+                .AddIngredient(ItemID.CactusSword)
                 .AddIngredient(ItemID.Waterleaf)
-                .AddIngredient(ItemID.PinkPricklyPear)
                 .AddIngredient(ItemID.SecretoftheSands)
                 .AddTile(TileID.DemonAltar)
                 .Register();

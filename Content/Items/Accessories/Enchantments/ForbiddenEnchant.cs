@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //sun mask/moon mask
             .AddIngredient(ItemID.DjinnsCurse)
             .AddIngredient(ItemID.SpiritFlame)
-            .AddIngredient(ItemID.SkyFracture)
+            .AddIngredient(ItemID.PirateStaff)
             //sky fracture
             //.AddIngredient(ItemID.RainbowRod);
 

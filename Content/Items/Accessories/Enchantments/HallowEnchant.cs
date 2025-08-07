@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.HallowedPlateMail)
                 .AddIngredient(ItemID.HallowedGreaves)
                 .AddIngredient(ItemID.HallowJoustingLance)
-                .AddIngredient(ItemID.SuperStarCannon)
+                .AddIngredient(ItemID.Gungnir)
                 .AddIngredient(ItemID.HolyWater, 50)
             .AddTile(TileID.CrystalBall)
             .Register();
