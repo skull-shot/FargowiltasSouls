@@ -1764,10 +1764,10 @@ TrawlerSoul: {
 	DisplayName: Trawler Soul
 	Tooltip:
 		'''
-		Greatly increasess fishing proficiency and your rods have 10 extra lures
+		Greatly increases fishing proficiency and your rods have 10 extra lures
 		Turns the holder into a werewolf at night and into merfolk when entering water
-		Greatly increases your ice and water mobility and underwater breathing
-		Slimes become friendly and you periodically release damaging fog
+		Increases your ice and water mobility and underwater breathing
+		Slimes become friendly and you release damaging fog at nearby enemies
 		'Fish fear me'
 		'''
 }
@@ -1795,18 +1795,12 @@ WorldShaperSoul: {
 	Tooltip:
 		'''
 		Grants immunity to mining explosives
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach
-		Mining speed tripled, plus effect of Ancient Chisel
-		Shows the location of enemies, traps, and treasures
-		Auto paint and actuator effect
-		Provides light and allows gravity control
+		Greatly increased mining and placement speed and range
 		Grants toggleable Builder Mode:
 		    Tiles and walls will not be consumed
-		    Increased placement speed and range
-		Effect can be disabled in Effect Toggles menu
-		Effects of the Treasure Magnet
-		Summons a pet Magic Lantern
+		    Further increased placement speed and range
+		Provides light and reveals nearby enemies, traps and treasures
+		Automatically places actuators, paints or coats placed objects
 		'Living in a world of cardboard'
 		'''
 }
