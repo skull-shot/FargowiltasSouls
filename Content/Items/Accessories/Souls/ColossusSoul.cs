@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //charm of myths
             Player.pStone = true;
             //shiny stone
-            Player.shinyStone = true;
+            //Player.shinyStone = true;
 
         }
 

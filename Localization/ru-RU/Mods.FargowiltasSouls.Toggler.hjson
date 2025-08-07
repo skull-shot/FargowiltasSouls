@@ -196,7 +196,6 @@ CthulhuShield: Щит Ктулху
 SupersonicPanic: Паника при уроне
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: Споровый мешок
-TrawlerJump: Прыжок
 TrawlerGel: Нестабильный желатин
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: Накладывающиеся криты Вечности

@@ -196,7 +196,6 @@ SupersonicDodge: Supersonic Dodge
 SupersonicPanic: Panic On Hit
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: Spore Sac
-TrawlerJump: Trawler Jump
 TrawlerGel: Volatile Gelatin
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: Eternity Crit Effect Stacking

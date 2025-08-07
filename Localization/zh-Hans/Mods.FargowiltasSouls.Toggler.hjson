@@ -196,7 +196,6 @@ CthulhuShield: 克苏鲁护盾
 SupersonicPanic: 受伤获得恐慌效果
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerSporeSac: 孢子囊
-TrawlerJump: 捕鱼之魂跳跃
 TrawlerGel: 挥发明胶
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: 永恒之魂属性叠加

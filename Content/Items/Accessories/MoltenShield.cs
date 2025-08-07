@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffects(player, Item);
+            player.noKnockback = true;
             if (player.statLife <= player.statLifeMax2 * 0.5 || player.statLife >= player.statLifeMax2)
             {
                 player.endurance += 0.20f;

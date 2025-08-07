@@ -41,7 +41,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.yoyoGlove = true;
             player.yoyoString = true;
 
-            player.lifeRegen += 2;
         }
 
         public override void AddRecipes()
