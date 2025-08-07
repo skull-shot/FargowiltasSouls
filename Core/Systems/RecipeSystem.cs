@@ -125,6 +125,19 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.RubyRobe, ItemID.DiamondRobe), ItemID.RubyRobe, ItemID.DiamondRobe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier3Robe", group);
 
+            //flight mastery soul
+            //soul craft wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AngelWings, ItemID.DemonWings), ItemID.AngelWings, ItemID.DemonWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySoulWings", group);
+            //elemental feather wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.FlameWings, ItemID.FrozenWings), ItemID.FlameWings, ItemID.FrozenWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyElementWings", group);
+            //holiday wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.FestiveWings, ItemID.SpookyWings), ItemID.FestiveWings, ItemID.SpookyWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyHolidayWings", group);
+            //boss wings
+            group = new RecipeGroup(() => AnyItem("BossWings"), ItemID.BetsyWings, ItemID.FishronWings, ItemID.RainbowWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBossWings", group);
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
