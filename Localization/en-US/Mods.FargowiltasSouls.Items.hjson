@@ -1587,8 +1587,8 @@ ArchWizardsSoul: {
 		22% increased magic damage
 		20% reduced mana cost
 		10% increased magic critical strike chance
-		Increases your maximum mana by 200 and restores mana when damaged
-		Automatically use mana potions when needed and increases pickup range for mana stars
+		[i:1595] Increases your maximum mana by 200 and restores mana when damaged
+		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
 		'Arcane to the core'
 		'''
 }
@@ -1600,8 +1600,8 @@ BerserkerSoul: {
 		22% increased melee damage
 		20% increased melee speed
 		10% increased melee critical strike chance
-		Increases melee knockback and enables auto swing for melee weapons
-		Increases the size of melee weapons and gives the user master yoyo skills
+		[i:1343] Enables auto swing for and increases the size and knockback of melee weapons
+		[i:3366] Gives the user master yoyo skills
 		'None shall live to tell the tale'
 		'''
 }
@@ -1612,8 +1612,8 @@ ColossusSoul: {
 		'''
 		+50 max life, +20% damage reduction, increases life regeneration by 10
 		Grants immunity to knockback, several debuffs, Shimmering, and fall damage
-		Reduces the cooldown of healing potions by 25%
-		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		[i:860] Reduces the cooldown of healing potions by 25%
+		[i:FargowiltasSouls/MoltenShield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
 		'''
 }
@@ -1635,15 +1635,15 @@ DimensionSoul: {
 	DisplayName: Soul of Dimensions
 	Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 10, reduces healing cooldown by 25%
+		+100 max life, +20% damage reduction, increases life regeneration by 10, [i:CharmofMyths] reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
-		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
-		Allows Supersonic speed, dashing, climbing, swimming, waterwalking, infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
-		Increases movement speed and length of invincibility after taking damage, you have a chance to dodge attacks and retaliate
-		Greatly increases fishing proficiency, mining and placement speed and range, and your rods have 10 extra lures
-		Slimes become friendly, flowers grow on the grass you walk on, and you release damaging fog at nearby enemies
-		Grants the ability to enable Builder Mode, provides light and reveals nearby enemies, traps and treasures
-		Automatically places actuators, paints or coats placed objects
+		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, [c/BC5252:and disables all of your jumps (togglable)]
+		[i:FargowiltasSouls/MoltenShield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
+		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] you release damaging fog at nearby enemies
+		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
+		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
 		'The dimensions of Terraria at your fingertips'
 		'''
 }
@@ -1710,7 +1710,7 @@ SnipersSoul: {
 		22% increased ranged damage
 		20% increased ranged projectile velocity
 		10% increased ranged critical chance
-		Greatly increases arrow speed and 20% chance to not consume arrows
+		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		'Ready, aim, fire'
 		'''
 }
@@ -1721,10 +1721,10 @@ SupersonicSoul: {
 		'''
 		Allows Supersonic running, dashing, hovering, and extra mobility on ice
 		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
-		Increases movement speed and length of invincibility after taking damage
-		You have a chance to dodge attacks, firing rays of light at nearby enemies
-		Grants the ability to swim, climb walls, walk on water and lava, and greatly extends underwater breathing
-		Grants immunity to lava and fall damage, and flowers grow on the grass you walk on
+		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
+		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies
+		[i:FargowiltasSouls/AeolusBoots] Grants water and lava walking and [i:984] wall climbing
+		[i:FargowiltasSouls/AeolusBoots] Grants immunity to lava and fall damage, and flowers grow on the grass you walk on
 		'I am speed'
 		'''
 }
@@ -1759,10 +1759,10 @@ TrawlerSoul: {
 	DisplayName: Trawler Soul
 	Tooltip:
 		'''
-		Greatly increases fishing proficiency and your rods have 10 extra lures
-		Turns the holder into a werewolf at night and into merfolk when entering water
-		Increases your ice and water mobility and underwater breathing
-		Slimes become friendly and you release damaging fog at nearby enemies
+		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
+		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
+		[i:1861] Increases your ice and water mobility and underwater breathing
+		[i:3090] Slimes become friendly and [i:4987] [i:3336] you release damaging fog at nearby enemies
 		'Fish fear me'
 		'''
 }
@@ -1773,10 +1773,10 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Enables auto swing for and increases the size of melee weapons, and gives the user master yoyo skills
-		Greatly increases arrow speed and 20% chance to not consume arrows
-		Increases your maximum mana by 300, and restores mana when damaged 
-		Automatically use mana potions when needed and increases pickup range for mana stars
+		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
+		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
+		[i:1595] Increases your maximum mana by 300, and restores mana when damaged 
+		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
 		Increases your minion slots by 2 and sentry slots by 1
 		'The heavens themselves bow to you'
 		'''
@@ -1786,13 +1786,13 @@ WorldShaperSoul: {
 	DisplayName: World Shaper Soul
 	Tooltip:
 		'''
-		Grants immunity to mining explosives
-		Greatly increased mining and placement speed and range
+		[i:FargowiltasSouls/MinerEnchant] Grants immunity to mining explosives
+		[i:FargowiltasSouls/MinerEnchant] Greatly increased mining and [i:HandOfCreation] placement speed and range
+		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
+		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
 		    Tiles and walls will not be consumed
 		    Further increased placement speed and range
-		Provides light and reveals nearby enemies, traps and treasures
-		Automatically places actuators, paints or coats placed objects
 		'Living in a world of cardboard'
 		'''
 }
@@ -3071,9 +3071,9 @@ AnglerEnchant: {
 	DisplayName: Angler Enchantment
 	Tooltip:
 		'''
-		Increases fishing power
-		You catch fish almost instantly
-		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
+		Increases fishing power and you catch fish almost instantly
+		Fishing line will never break and decreases chance of bait consumption
+		Increases fishing power by 20, allows fishing in lava
 		'As long as they aren't all shoes, you can go home happily'
 		'''
 }
