@@ -1764,13 +1764,10 @@ TrawlerSoul: {
 	DisplayName: Trawler Soul
 	Tooltip:
 		'''
-		Increases fishing skill substantially
-		All fishing rods will have 10 extra lures
-		You catch fish almost instantly
-		Permanent Sonar and Crate Buffs
+		Greatly increasess fishing proficiency and your rods have 10 extra lures
 		Turns the holder into a werewolf at night and into merfolk when entering water
-		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Royal Gel, Volatile Gel, and Spore Sac 
-		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
+		Greatly increases your ice and water mobility and underwater breathing
+		Slimes become friendly and you periodically release damaging fog
 		'Fish fear me'
 		'''
 }

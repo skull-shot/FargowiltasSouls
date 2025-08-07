@@ -78,12 +78,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
             .AddIngredient(null, "AnglerEnchant")
-            .AddIngredient(ItemID.BalloonHorseshoeSharkron)
+            .AddIngredient(ItemID.CelestialShell)
             .AddIngredient(ItemID.ArcticDivingGear)
             .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
-            .AddIngredient(ItemID.CelestialShell)
 
             .AddIngredient(ItemID.SittingDucksFishingRod)
             .AddIngredient(ItemID.GoldenFishingRod)
