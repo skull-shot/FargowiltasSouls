@@ -178,7 +178,29 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => AnyItem("Gem"), ItemID.Diamond, ItemID.Amber, ItemID.Ruby, ItemID.Emerald, ItemID.Sapphire, ItemID.Topaz, ItemID.Amethyst);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyGem", group);
 
+            // any panic necklace
+            group = new RecipeGroup(() => AnyItem(ItemID.PanicNecklace), ItemID.PanicNecklace, ItemID.SweetheartNecklace);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyPanicNecklace", group);
 
+            // any sharktooth necklace
+            group = new RecipeGroup(() => AnyItem(ItemID.SharkToothNecklace), ItemID.SharkToothNecklace, ItemID.StingerNecklace);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySharktoothNecklace", group);
+
+            // any quiver
+            group = new RecipeGroup(() => AnyItem(ItemID.MagicQuiver), ItemID.MagicQuiver, ItemID.MoltenQuiver, ItemID.StalkersQuiver);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyQuiver", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.SniperScope), ItemID.SniperScope, ItemID.ReconScope);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySniperScope", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.MagicCuffs), ItemID.MagicCuffs, ItemID.CelestialCuffs);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyMagicCuffs", group);
+
+            group = new RecipeGroup(() => AnyItem(ItemID.ManaFlower), ItemID.ManaFlower, ItemID.ArcaneFlower, ItemID.MagnetFlower, ItemID.ManaCloak);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyManaFlower", group);
+
+            group = new RecipeGroup(() => AnyItem("SentryAccessory"), ItemID.MonkBelt, ItemID.SquireShield, ItemID.HuntressBuckler, ItemID.ApprenticeScarf);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySentryAccessory", group);
         }
         public override void PostAddRecipes()
         {

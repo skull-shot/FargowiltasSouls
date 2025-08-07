@@ -62,22 +62,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             Player.jumpBoost = true;
             Player.noFallDmg = true;
+
+            //celestial shell
+            player.wolfAcc = true;
+            player.accMerman = true;
+
+            if (hideVisual)
+            {
+                player.hideMerman = true;
+                player.hideWolf = true;
+            }
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
             .AddIngredient(null, "AnglerEnchant")
-            //inner tube
             .AddIngredient(ItemID.BalloonHorseshoeSharkron)
             .AddIngredient(ItemID.ArcticDivingGear)
-            //frog gear
+            .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
+            .AddIngredient(ItemID.CelestialShell)
 
-            //engineer rod
             .AddIngredient(ItemID.SittingDucksFishingRod)
-            //hotline fishing
             .AddIngredient(ItemID.GoldenFishingRod)
             .AddIngredient(ItemID.GoldenCarp)
             .AddIngredient(ItemID.ReaverShark)

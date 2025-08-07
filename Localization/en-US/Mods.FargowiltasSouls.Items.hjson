@@ -1587,8 +1587,8 @@ ArchWizardsSoul: {
 		22% increased magic damage
 		20% reduced mana cost
 		10% increased magic critical strike chance
-		Increases your maximum mana by 200
-		Effects of Celestial Cuffs and Mana Flower
+		Increases your maximum mana by 200 and restores mana when damaged
+		Automatically use mana potions when needed and increases pickup range for mana stars
 		'Arcane to the core'
 		'''
 }
@@ -1599,9 +1599,9 @@ BerserkerSoul: {
 		'''
 		22% increased melee damage
 		20% increased melee speed
-		10% increased melee crit chance
-		Increased melee knockback
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
+		10% increased melee critical strike chance
+		Increases melee knockback and enables auto swing for melee weapons
+		Increases the size of melee weapons and gives the user master yoyo skills
 		'None shall live to tell the tale'
 		'''
 }
@@ -1635,7 +1635,7 @@ DimensionSoul: {
 	DisplayName: Soul of Dimensions
 	Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 8
+		+100 max life, +20% damage reduction, increases life regeneration by 10
 		Grants immunity to knockback and several debuffs
 		Enemies are more likely to target you
 		Allows Supersonic running and infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
@@ -1715,7 +1715,7 @@ SnipersSoul: {
 		22% increased ranged damage
 		20% increased ranged projectile velocity
 		10% increased ranged critical chance
-		Effects of Sniper Scope and Magic Quiver
+		Greatly increases arrow speed and 20% chance to not consume arrows
 		'Ready, aim, fire'
 		'''
 }
@@ -1768,7 +1768,8 @@ TrawlerSoul: {
 		All fishing rods will have 10 extra lures
 		You catch fish almost instantly
 		Permanent Sonar and Crate Buffs
-		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Volatile Gel, and Spore Sac 
+		Turns the holder into a werewolf at night and into merfolk when entering water
+		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Royal Gel, Volatile Gel, and Spore Sac 
 		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
 		'Fish fear me'
 		'''
@@ -1807,7 +1808,7 @@ WorldShaperSoul: {
 		    Tiles and walls will not be consumed
 		    Increased placement speed and range
 		Effect can be disabled in Effect Toggles menu
-		Effects of the Royal Gel and Treasure Magnet
+		Effects of the Treasure Magnet
 		Summons a pet Magic Lantern
 		'Living in a world of cardboard'
 		'''

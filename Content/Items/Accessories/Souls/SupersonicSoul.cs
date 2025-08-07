@@ -121,7 +121,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.BrainOfConfusion)
             .AddIngredient(ItemID.FlyingCarpet)
             .AddIngredient(ItemID.HorseshoeBundle)
-            .AddIngredient(ItemID.SweetheartNecklace) // or panic necklace
+            .AddRecipeGroup("FargowiltasSouls:AnyPanicNecklace")
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
 
