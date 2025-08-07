@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.CobaltLeggings)
             .AddIngredient(null, "AncientCobaltEnchant")
             .AddIngredient(ItemID.ScarabBomb, 10)
-            .AddIngredient(ItemID.DD2ExplosiveTrapT1Popper)
+            .AddIngredient(ItemID.ExplosivePowder, 50)
 
             .AddTile(TileID.CrystalBall)
             .Register();

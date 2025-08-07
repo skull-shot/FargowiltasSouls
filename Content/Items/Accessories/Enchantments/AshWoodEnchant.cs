@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.AshWoodGreaves)
             .AddIngredient(ItemID.Fireblossom)
             .AddIngredient(ItemID.SpicyPepper)
-            .AddIngredient(ItemID.Gel, 50)
+            .AddIngredient(ItemID.WandofSparking)
             .AddTile(TileID.DemonAltar)
             .Register();
         }

@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //LeafBlower
             //bubble gun
             //chaarged blaster cannon
-            .AddIngredient(ItemID.LunarFlareBook)
+            .AddIngredient(ItemID.LastPrism)
 
             .AddTile(TileID.LunarCraftingStation)
             .Register();

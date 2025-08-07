@@ -48,9 +48,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.TungstenChainmail)
                 .AddIngredient(ItemID.TungstenGreaves)
                 .AddIngredient(ItemID.TungstenBroadsword)
-                .AddIngredient(ItemID.Ruler)
                 .AddIngredient(ItemID.Katana)
-
+                .AddIngredient(ItemID.Ruler)
+                
                 .AddTile(TileID.DemonAltar)
                 .Register();
         }
