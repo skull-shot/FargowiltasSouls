@@ -1772,7 +1772,7 @@ UniverseSoul: {
 	Tooltip:
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
-		+25% attack speed, +50% shoot velocity, +100% knockback
+		+25% attack speed, +50% projectile velocity, +100% knockback
 		Enables auto swing for and increases the size of melee weapons, and gives the user master yoyo skills
 		Greatly increases arrow speed and 20% chance to not consume arrows
 		Increases your maximum mana by 300, and restores mana when damaged 

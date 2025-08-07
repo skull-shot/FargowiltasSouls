@@ -1635,20 +1635,15 @@ DimensionSoul: {
 	// DisplayName: Soul of Dimensions
 	/* Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 10
-		Grants immunity to knockback and several debuffs
-		Enemies are more likely to target you
-		Allows Supersonic running and infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
-		Increases fishing skill substantially, All fishing rods will have 10 extra lures
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach, Mining speed tripled
-		Shine, Spelunker, Hunter, and Dangersense effects
-		Auto paint and actuator effect
-		Grants the ability to enable Builder Mode
-		Effects of the Brain of Confusion, Star Veil, Sweetheart Necklace, Bee Cloak, Spore Sac, and Shiny Stone
-		Effects of Paladin's Shield, Frozen Turtle Shell, Arctic Diving Gear, Frog Legs, and Flying Carpet
-		Effects of Lava Waders, Angler Tackle Bag, Glowing Fishing Bobber, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
-		Effects of Shield of Cthulhu and Master Ninja Gear
+		+100 max life, +20% damage reduction, increases life regeneration by 10, reduces healing cooldown by 25%
+		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		Allows Supersonic speed, dashing, climbing, swimming, waterwalking, infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
+		Increases movement speed and length of invincibility after taking damage, you have a chance to dodge attacks and retaliate
+		Greatly increases fishing proficiency, mining and placement speed and range, and your rods have 10 extra lures
+		Slimes become friendly, flowers grow on the grass you walk on, and you release damaging fog at nearby enemies
+		Grants the ability to enable Builder Mode, provides light and reveals nearby enemies, traps and treasures
+		Automatically places actuators, paints or coats placed objects
 		'The dimensions of Terraria at your fingertips'
 		''' */
 }
@@ -1786,13 +1781,10 @@ TrawlerSoul: {
 	// DisplayName: Trawler Soul
 	/* Tooltip:
 		'''
-		Increases fishing skill substantially
-		All fishing rods will have 10 extra lures
-		You catch fish almost instantly
-		Permanent Sonar and Crate Buffs
+		Greatly increases fishing proficiency and your rods have 10 extra lures
 		Turns the holder into a werewolf at night and into merfolk when entering water
-		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Royal Gel, Volatile Gel, and Spore Sac 
-		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
+		Increases your ice and water mobility and underwater breathing
+		Slimes become friendly and you release damaging fog at nearby enemies
 		'Fish fear me'
 		''' */
 }
@@ -1801,16 +1793,13 @@ UniverseSoul: {
 	// DisplayName: Soul of the Universe
 	/* Tooltip:
 		'''
-		50% increased damage for your current weapon class
-		25% increased critical chance for your current weapon class
-		25% increased attack speed
-		50% increased shoot velocity
-		All weapons have double knockback
-		Increases your maximum mana by 300
-		Increases your max number of minions by 2
-		Increases your max number of sentries by 1
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
-		Effects of Sniper Scope, Celestial Cuffs and Mana Flower
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Enables auto swing for and increases the size of melee weapons, and gives the user master yoyo skills
+		Greatly increases arrow speed and 20% chance to not consume arrows
+		Increases your maximum mana by 300, and restores mana when damaged 
+		Automatically use mana potions when needed and increases pickup range for mana stars
+		Increases your minion slots by 2 and sentry slots by 1
 		'The heavens themselves bow to you'
 		''' */
 }
@@ -1820,18 +1809,12 @@ WorldShaperSoul: {
 	/* Tooltip:
 		'''
 		Grants immunity to mining explosives
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach
-		Mining speed tripled, plus effect of Ancient Chisel
-		Shows the location of enemies, traps, and treasures
-		Auto paint and actuator effect
-		Provides light and allows gravity control
+		Greatly increased mining and placement speed and range
 		Grants toggleable Builder Mode:
 		    Tiles and walls will not be consumed
-		    Increased placement speed and range
-		Effect can be disabled in Effect Toggles menu
-		Effects of the Treasure Magnet
-		Summons a pet Magic Lantern
+		    Further increased placement speed and range
+		Provides light and reveals nearby enemies, traps and treasures
+		Automatically places actuators, paints or coats placed objects
 		'Living in a world of cardboard'
 		''' */
 }
