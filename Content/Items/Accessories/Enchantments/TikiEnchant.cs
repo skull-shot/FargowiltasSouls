@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.Blowgun)
             //toxic flask
             .AddIngredient(ItemID.PygmyStaff)
-            .AddIngredient(ItemID.PirateStaff)
+            .AddIngredient(ItemID.TikiTotem)
             //kaledoscope
             //.AddIngredient(ItemID.TikiTotem);
 

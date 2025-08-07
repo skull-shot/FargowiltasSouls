@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.LeadHelmet)
                 .AddIngredient(ItemID.LeadChainmail)
                 .AddIngredient(ItemID.LeadGreaves)
-                .AddIngredient(ItemID.LeadShortsword)
+                .AddIngredient(ItemID.LeadHammer)
                 .AddIngredient(ItemID.GrayPaint, 100)
                 .AddIngredient(ItemID.Peach)
 

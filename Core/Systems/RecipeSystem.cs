@@ -95,9 +95,36 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.SpectreHood, ItemID.SpectreMask), ItemID.SpectreHood, ItemID.SpectreMask);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySpectreHead", group);
 
+            //beetle ench
             //beetle body
             group = new RecipeGroup(() => ItemXOrY(ItemID.BeetleShell, ItemID.BeetleScaleMail), ItemID.BeetleShell, ItemID.BeetleScaleMail);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBeetle", group);
+            //colored husk
+            group = new RecipeGroup(() => AnyItem("ColorHusk"), ItemID.VioletHusk, ItemID.CyanHusk, ItemID.RedHusk);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyColoredHusk", group);
+
+            //snow ench
+            //hood
+            group = new RecipeGroup(() => ItemXOrY(ItemID.EskimoHood, ItemID.PinkEskimoHood), ItemID.EskimoHood, ItemID.PinkEskimoHood);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySnowHood", group);
+            //coat
+            group = new RecipeGroup(() => ItemXOrY(ItemID.EskimoCoat, ItemID.PinkEskimoCoat), ItemID.EskimoCoat, ItemID.PinkEskimoCoat);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySnowCoat", group);
+            //pants
+            group = new RecipeGroup(() => ItemXOrY(ItemID.EskimoPants, ItemID.PinkEskimoPants), ItemID.EskimoPants, ItemID.PinkEskimoPants);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySnowPants", group);
+
+            //wizard ench
+            //tier 1 robe
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AmethystRobe, ItemID.TopazRobe), ItemID.AmethystRobe, ItemID.TopazRobe);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier1Robe", group);
+            //tier 2 robe
+            group = new RecipeGroup(() => ItemXOrY(ItemID.SapphireRobe, ItemID.EmeraldRobe), ItemID.SapphireRobe, ItemID.EmeraldRobe);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier2Robe", group);
+            //tier 3 robe
+            group = new RecipeGroup(() => ItemXOrY(ItemID.RubyRobe, ItemID.DiamondRobe), ItemID.RubyRobe, ItemID.DiamondRobe);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier3Robe", group);
+
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
