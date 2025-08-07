@@ -3728,5 +3728,5 @@ MoltenShield: {
 
 Devilstone: {
 	DisplayName: Devilstone
-	Tooltip:
+	Tooltip: ""
 }
