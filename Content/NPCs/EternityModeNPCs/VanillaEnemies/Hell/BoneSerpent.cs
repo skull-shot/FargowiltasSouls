@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             if (HellEnemies.HellBuffActive)
             {
-                npc.lifeMax = 10000;
+                npc.lifeMax = 6000;
             }
         }
         public override void AI(NPC npc)
