@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eternal
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<EternalFlame>()
+            .AddIngredient(ModContent.Find<ModItem>("Fargowiltas", "MutantMask"))
             .AddIngredient<AbomEnergy>(10)
             .AddIngredient<EternalEnergy>(10)
             .AddTile<CrucibleCosmosSheet>()

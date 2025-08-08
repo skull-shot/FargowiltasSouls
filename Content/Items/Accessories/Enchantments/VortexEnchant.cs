@@ -92,14 +92,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<VortexEnchant>();
         public override bool ExtraAttackEffect => true;
-        public static int BaseDamage(Player player)
-        {
-            int dmg = 4875;
-            if (player.ForceEffect<VortexEffect>())
-                dmg = 9000;
-            dmg /= 2;
-            return (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
-        }
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<VortexEffect>() ? 9000 : 4875) * player.ActualClassDamage(DamageClass.Ranged));
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

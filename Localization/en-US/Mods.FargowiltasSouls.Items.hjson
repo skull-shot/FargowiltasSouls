@@ -373,7 +373,7 @@ NecroEnchant: {
 	DisplayName: Necro Enchantment
 	Tooltip:
 		'''
-		Slain enemies may drop a pile of bones
+		Slain enemies drop a pile of bones
 		Touch a bone pile to spawn a friendly Dungeon Guardian
 		Dungeon Guardian deals 25% of the slain enemies' max health, up to 10000 damage
 		Bosses will drop a bone pile every 10% of their health lost, dealing 2.5% of the bosses max health

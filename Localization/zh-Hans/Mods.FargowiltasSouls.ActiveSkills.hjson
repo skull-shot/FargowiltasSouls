@@ -81,7 +81,7 @@ RemoteLightningEffect: {
 	// DisplayName: Lightning Strike
 	/* Tooltip:
 		'''
-		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		Rain lightning on the cursor, dealing massive damage to enemies and players
 		12 second cooldown
 		''' */
 }
