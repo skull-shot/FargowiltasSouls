@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Item effectItem = player.EffectItem<RedRidingEffect>();
-            Item firstAmmo = PickAmmo(player);
+            Item firstAmmo = player.FindAmmo(AmmoID.Arrow);
             int arrowType = firstAmmo.shoot;
             int damage = firstAmmo.damage * (modPlayer.ForceEffect<RedRidingEnchant>() ? 5 : 3);
             int heatray = Projectile.NewProjectile(player.GetSource_Accessory(effectItem), player.Center, new Vector2(0, -6f), ProjectileID.HeatRay, 0, 0, Main.myPlayer);
@@ -80,38 +80,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             Projectile.NewProjectile(player.GetSource_Accessory(effectItem), target.Center.X, player.Center.Y - 500, 0f, 0f, ModContent.ProjectileType<ArrowRain>(), damage, 0f, player.whoAmI, arrowType, target.whoAmI);
             modPlayer.RedRidingArrowCD = modPlayer.ForceEffect<RedRidingEnchant>() ? 240 : 360;
-        }
-        private static Item PickAmmo(Player player)
-        {
-            Item item = new();
-            bool flag = false;
-            for (int i = 54; i < 58; i++)
-            {
-                if (player.inventory[i].ammo == AmmoID.Arrow && player.inventory[i].stack > 0)
-                {
-                    item = player.inventory[i];
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag)
-            {
-                for (int j = 0; j < 54; j++)
-                {
-                    if (player.inventory[j].ammo == AmmoID.Arrow && player.inventory[j].stack > 0)
-                    {
-                        item = player.inventory[j];
-                        break;
-                    }
-                }
-            }
-
-            if (item.ammo != AmmoID.Arrow)
-            {
-                item.SetDefaults(ItemID.VenomArrow);
-            }
-
-            return item;
         }
     }
 }

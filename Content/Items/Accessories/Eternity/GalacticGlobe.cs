@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Terraria;
@@ -51,6 +52,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             player.FargoSouls().GravityGlobeEXItem = Item;
             player.FargoSouls().WingTimeModifier += 1f;
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(MasoTrueEyeMinion.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
@@ -122,6 +130,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<GalacticGlobe>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player) => 60;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())

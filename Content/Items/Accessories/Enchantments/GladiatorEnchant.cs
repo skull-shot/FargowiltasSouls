@@ -57,6 +57,27 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            bool wiz = player.ForceEffect<GladiatorSpears>();
+            bool buff = player.HasBuff<GladiatorBuff>();
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Ranged)) / (buff ? 4 : 6);
+            if (scaling < 0)
+                scaling = 0;
+            if (wiz)
+                scaling *= 2;
+
+            int softcapMult = wiz ? 5 : 1;
+            if (scaling > (10 * softcapMult))
+                scaling = (int)((20 * softcapMult) + scaling) / 3;
+            scaling = (int)Math.Round((decimal)scaling, MidpointRounding.AwayFromZero);
+
+            int divisor = (buff ? 4 : 6) / (player.ForceEffect<GladiatorSpears>() ? 2 : 1);
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return 100 / divisor;
+        }
     }
     public class GladiatorBanner : AccessoryEffect
     {
@@ -149,12 +170,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if ((int)spearDamage > 0)
                 {
-                    if (!modPlayer.TerrariaSoul)
-                    {
-                        float softcapMult = force ? 5f : 1f;
-                        if (spearDamage > (10f * softcapMult))
-                            spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
-                    }
+                    float softcapMult = force ? 5f : 1f;
+                    if (spearDamage > (10f * softcapMult))
+                        spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
 
                     Item effectItem = EffectItem(player);
                     for (int i = 0; i < 3; i++)

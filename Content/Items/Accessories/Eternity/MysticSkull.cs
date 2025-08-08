@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void PassiveEffects(Player player)
         {
             player.buffImmune[BuffID.Suffocation] = true;
-            player.manaMagnet = true;
+            //player.manaMagnet = true;
             player.manaFlower = true;
         }
         public override void UpdateInventory(Player player) => PassiveEffects(player);
@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         static void Effects(Player player)
         {
             player.buffImmune[BuffID.Suffocation] = true;
-            player.manaMagnet = true;
+            //player.manaMagnet = true;
             player.manaFlower = true;
         }
 

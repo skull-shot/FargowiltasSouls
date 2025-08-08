@@ -55,6 +55,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return MeteorEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class MeteorMomentumEffect : AccessoryEffect
     {
@@ -114,16 +121,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer)
             {
-                if (modPlayer.WeaponUseTimer > 0)
-                {
-                    modPlayer.MeteorCD--;
-                }
+                modPlayer.MeteorCD--;
                 float denominator = 20f;
                 if (modPlayer.ForceEffect<MeteorEnchant>())
                     denominator = 12f;
                 modPlayer.MeteorCD -= player.velocity.Length() / denominator;
             }
         }
+        public static int BaseDamage(Player player) => (int)((player.FargoSouls().ForceEffect<MeteorEnchant>() ? 160 : 45) * player.ActualClassDamage(DamageClass.Magic));
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             if (player.whoAmI != Main.myPlayer)
@@ -134,7 +139,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
 
             bool forceEffect = modPlayer.ForceEffect<MeteorEnchant>();
-            int damage = forceEffect ? 160 : 45;
             modPlayer.MeteorCD = Cooldown;
 
             if (player.whoAmI == Main.myPlayer)
@@ -158,7 +162,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort, pos);
 
             int force = forceEffect ? 1 : 0;
-            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 0.5f, player.whoAmI, force);
+            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), BaseDamage(player), 0.5f, player.whoAmI, force);
         }
     }
 }

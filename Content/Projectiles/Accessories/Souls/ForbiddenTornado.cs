@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Player player = Main.player[Projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            Projectile.damage = (int)(ForbiddenEffect.BaseDamage(player) * Projectile.scale * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
+            Projectile.originalDamage = ForbiddenEffect.BaseDamage(player);
 
             // Collision is done in FargoSoulsGlobalProjectile:PreAI
 

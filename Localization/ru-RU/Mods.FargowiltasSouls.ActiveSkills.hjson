@@ -63,6 +63,16 @@ StardustEffect: {
 		'''
 }
 
+CosmosMoonEffect: {
+	// DisplayName: Stardust Stasis
+	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/StardustEnchant] Freezes time for 6 seconds
+		While time is frozen, your minions will continue to attack
+		75 second cooldown
+		''' */
+}
+
 DebuffInstallKeyEffect: {
 	DisplayName: Установка дебаффа
 	Tooltip: Наложите на себя дебаффы, которые дают различные эффекты от аксессуара к аксессуару

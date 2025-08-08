@@ -54,6 +54,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Magic)) / 2;
+            if (scaling < 0)
+                scaling = 0;
+
+            int softcapMult = (int)(player.ForceEffect<AshWoodFireballs>() ? 1.75 : 1);
+            if (scaling > 24 * softcapMult)
+                scaling = ((48 * softcapMult) + scaling) / 3;
+            scaling = (int)Math.Round((decimal)scaling, MidpointRounding.AwayFromZero);
+
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            return 100;
+        }
     }
     public class AshWoodEffect : AccessoryEffect
     {

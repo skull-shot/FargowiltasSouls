@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public override void AI()
         {
             Projectile.position = Projectile.Center;
-            float scaleModifier = Projectile.ai[1] == 1 ? 3 : 1;
+            float scaleModifier = Projectile.ai[0] == 1 ? 3 : 1;
             Projectile.scale += scaleModifier * 5f / Duration;
             Projectile.width = Projectile.height = (int)(BaseRadius * Projectile.scale);
             Projectile.Center = Projectile.position;
@@ -80,17 +80,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                     rotation, origin, Projectile.scale * scaleModifier, spriteEffects, 0);
             return false;
         }
-        public override bool? CanHitNPC(NPC target)
-        {
-            //if (target.whoAmI == Projectile.ai[0])
-            //    return false;
-            return base.CanHitNPC(target);
-        }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             modifiers.Knockback *= 3;
-            //if (target.whoAmI == Projectile.ai[0])
-            modifiers.FinalDamage *= 0.5f;
         }
         /*
         public override void OnKill(int timeLeft)

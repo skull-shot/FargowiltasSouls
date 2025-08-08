@@ -209,7 +209,33 @@ namespace FargowiltasSouls //lets everything access it without using
             }
             return -1;
         }
-
+        public static Item FindAmmo(this Player player, int ammoID)
+        {
+            Item ammo = new();
+            bool gotammo = false;
+            if (ammoID == AmmoID.None)
+                return ammo;
+            for (int i = 54; i < 58; i++)
+            {
+                if (player.inventory[i].ammo == ammoID && player.inventory[i].stack > 0)
+                {
+                    ammo = player.inventory[i];
+                    return ammo;
+                }
+            }
+            if (!gotammo)
+            {
+                for (int j = 0; j < 54; j++)
+                {
+                    if (player.inventory[j].ammo == ammoID && player.inventory[j].stack > 0)
+                    {
+                        ammo = player.inventory[j];
+                        return ammo;
+                    }
+                }
+            }
+            return ammo;
+        }
         public static NPC GetSourceNPC(this Projectile projectile)
             => projectile.GetGlobalProjectile<A_SourceNPCGlobalProjectile>().sourceNPC;
 

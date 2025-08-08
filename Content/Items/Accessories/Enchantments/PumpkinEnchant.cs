@@ -44,13 +44,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return PumpkinEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
 
     public class PumpkinEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<PumpkinEnchant>();
-
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.ForceEffect<PumpkinEffect>() ? 45 : 15);
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

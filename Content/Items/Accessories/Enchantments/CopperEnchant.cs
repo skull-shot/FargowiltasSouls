@@ -49,12 +49,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
-        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor)
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
-            int dmg = CopperEffect.BaseDamage(Main.LocalPlayer);
             damageClass = DamageClass.Ranged;
             tooltipColor = null;
-            return dmg;
+            scaling = null;
+            return CopperEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class CopperEffect : AccessoryEffect
@@ -82,15 +82,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.CopperProcCD -= 2;
             }
         }
-
-        public static int BaseDamage(Player player)
-        {
-            int dmg = 40;
-            if (player.ForceEffect<CopperEffect>())
-                dmg = 150;
-            return (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
-        }
-
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<CopperEffect>() ? 150 : 40) * player.ActualClassDamage(DamageClass.Ranged));
         public static void CopperProc(Player player, NPC target)
         {
             if (!player.HasEffectEnchant<CopperEffect>())

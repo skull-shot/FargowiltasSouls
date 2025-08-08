@@ -1,8 +1,8 @@
-﻿using FargowiltasSouls.Content.Projectiles;
+﻿using System;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -45,6 +45,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Ranged)) / 2;
+            if (scaling < 0)
+                scaling = 0;
+
+            int softcapMult = player.ForceEffect<BorealEffect>() ? (15 / 3) : 1;
+            if (scaling > (12 * softcapMult))
+                scaling = ((24 * softcapMult) + scaling) / 3;
+            scaling = (int)Math.Round((decimal)scaling, MidpointRounding.AwayFromZero);
+
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return 50;
+        }
     }
     public class BorealEffect : AccessoryEffect
     {
@@ -69,7 +85,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     return;
                 BorealSnowballs(player, baseDamage);
             }
-                
         }
         public void BorealSnowballs(Player player, int baseDamage)
         {
@@ -90,8 +105,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     snowballDamage *= player.ActualClassDamage(DamageClass.Ranged) / player.ActualClassDamage(heldItem.DamageType);
                     float softcapMult = forceEffect ? (15f / 3f) : 1f;
-                    if (snowballDamage > (12f * softcapMult)) // diminishing returns above 15 snowballDamage for non wiz, 100 for wiz
-                        snowballDamage = (float)Math.Round(((24f * softcapMult) + snowballDamage) / 3f); // e.g. non wiz 30 -> 20, wiz 200 -> 150 etc. (https://www.desmos.com/calculator/vyaqqoegxq)
+                    if (snowballDamage > (12f * softcapMult)) // diminishing returns above 12 snowballDamage for non wiz, 60 for wiz
+                        snowballDamage = (float)Math.Round(((24f * softcapMult) + snowballDamage) / 3f); // (https://www.desmos.com/calculator/vyaqqoegxq)
                 }
                 if (player.HasEffect<TimberEffect>())
                     snowballDamage = 300;
@@ -100,7 +115,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 int numSnowballs = forceEffect ? 7 : 3;
                 float angle = MathHelper.Pi / 10;
                 FargoSoulsGlobalProjectile.SplitProj(Main.projectile[p], numSnowballs, angle, 1);
-
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using System;
+using System.Runtime.InteropServices;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
 using FargowiltasSouls.Content.UI.Elements;
@@ -6,7 +8,6 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -44,13 +45,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             ActiveEffects(player, Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(280 * Main.LocalPlayer.ActualClassDamage(DamageClass.Magic)); //display max charge damage
+        }
     }
     public class WretchedPouchEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
         public override int ToggleItemType => ModContent.ItemType<WretchedPouch>();
         public override bool ExtraAttackEffect => true;
-        
+
         public override void PostUpdateEquips(Player player)
         {
             if (player.HasEffect<LithosphericEffect>() && player.HasEffect<PungentMinion>()) // combined

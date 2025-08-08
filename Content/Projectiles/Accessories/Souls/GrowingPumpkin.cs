@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 }
             }
 
-            Projectile.damage = FargoSoulsUtil.HighestDamageTypeScaling(player, modPlayer.ForceEffect<PumpkinEnchant>() ? 45 : 15);
+            Projectile.damage = PumpkinEffect.BaseDamage(player);
 
             if (Projectile.frame != 4)
             {

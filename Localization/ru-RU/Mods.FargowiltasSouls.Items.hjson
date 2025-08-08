@@ -3388,6 +3388,10 @@ Extra: {
 	CactusImmunity: Даёт иммунитет к урону от кактусов в режиме Вечность
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
+	// Scaling: scaling
+	// HighestClass: strongest class damage
+	// MagicSummonHybrid: magic and summon damage
+	// MeleeSummonHybrid: melee and summon damage
 }
 
 GravityTestItem: {

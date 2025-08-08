@@ -53,12 +53,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.LunarCraftingStation)
             .Register();
         }
-        public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor)
+        public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor, out int? scaling)
         {
-            int dmg = VortexEffect.BaseDamage(Main.LocalPlayer);
             damageClass = DamageClass.Ranged;
             tooltipColor = null;
-            return dmg;
+            scaling = null;
+            return VortexEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class VortexProjGravity : AccessoryEffect
@@ -94,9 +94,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ExtraAttackEffect => true;
         public static int BaseDamage(Player player)
         {
-            int dmg = 9750;
+            int dmg = 4875;
             if (player.ForceEffect<VortexEffect>())
-                dmg = 18000;
+                dmg = 9000;
             dmg /= 2;
             return (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
         }
@@ -106,9 +106,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.VortexCD <= 0 && player.Distance(target.Hitbox.ClosestPointInRect(player.Center)) > 450)
             {
                 bool force = modPlayer.ForceEffect<VortexEnchant>();
-                int damage = BaseDamage(player);
                 Vector2 velocity = player.DirectionTo(target.Center);
-                FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), damage, 0f, modPlayer.Player.whoAmI, 1f);
+                FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), BaseDamage(player), 0f, modPlayer.Player.whoAmI, 1f);
                 float cd = 10;
                 modPlayer.VortexCD = LumUtils.SecondsToFrames(cd);
 

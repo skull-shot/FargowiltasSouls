@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.FargoSouls().CobaltEnchantActive = true;
             player.AddEffect<CobaltEffect>(Item);
             player.AddEffect<AncientCobaltFallEffect>(Item);
             player.AddEffect<AncientCobaltEffect>(Item);
@@ -44,6 +45,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             .AddTile(TileID.CrystalBall)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return (int)((Main.LocalPlayer.ForceEffect<AncientCobaltEffect>() ? 300 : 150) * Main.LocalPlayer.ActualClassDamage(DamageClass.Melee));
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -23,7 +24,14 @@ namespace FargowiltasSouls.Content.Patreon.Catsounds
             Item.rare = ItemRarityID.Blue;
             Item.value = 50000;
         }
-
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
+        }
+        public static int BaseDamage(Player player) => 10;
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddBuff(ModContent.BuffType<KingSlimeMinionBuff>(), 2);

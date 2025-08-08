@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.extraUpdates = 2;
             Projectile.scale = 1.2f;
             Projectile.timeLeft = 600;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.tileCollide = false;
 
             Projectile.usesLocalNPCImmunity = true;

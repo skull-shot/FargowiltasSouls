@@ -145,6 +145,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
         public int CobaltCooldownTimer;
+        public bool CobaltEnchantActive = false;
         public bool ApprenticeEnchantActive;
         public bool DarkArtistEnchantActive;
         public int BeeCD;

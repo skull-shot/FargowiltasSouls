@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Shadow;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
@@ -7,8 +11,8 @@ using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
@@ -26,9 +30,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -36,7 +37,6 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
-using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -321,16 +321,17 @@ namespace FargowiltasSouls.Content.Projectiles
                 if (modPlayer.NebulaEnchCD <= 0)
                 {
                     if (FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false)
+                        && projectile != null && projectile.FargoSouls().ItemSource
                         && projectile.whoAmI != player.heldProj
                         && projectile.aiStyle != 190 // fancy sword swings like excalibur
-                        && !projectile.minion) 
+                        && !projectile.minion && !projectile.sentry) 
                     {
                         int damage = Math.Max(1200, projectile.damage);
-                        damage = (int)MathHelper.Clamp(damage, 0, 3000);
+                        damage = (int)(MathHelper.Clamp(damage, 0, 3000) * player.ActualClassDamage(DamageClass.Magic));
                         if (modPlayer.ForceEffect<NebulaEnchant>())
                             damage = (int)(damage * 1.66667f);
 
-                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 1f, player.whoAmI, 0);
+                        Projectile.NewProjectile(player.GetSource_FromThis(), projectile.Center, projectile.velocity, ModContent.ProjectileType<NebulaShot>(), damage, 1f, player.whoAmI, 0);
                         projectile.active = false;
                         modPlayer.NebulaEnchCD = 3 * 60;
                     }
@@ -339,12 +340,9 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<RemoteControlDR>())
             {
-                if (projectile.ModProjectile == null)
+                if (projectile.aiStyle == ProjAIStyleID.MartianDeathRay || projectile.aiStyle == ProjAIStyleID.ThickLaser || projectile.aiStyle == ProjAIStyleID.LightningOrb || ElectricAttacks.Contains(projectile.type))
                 {
-                    if (projectile.aiStyle == ProjAIStyleID.MartianDeathRay || projectile.aiStyle == ProjAIStyleID.ThickLaser || projectile.aiStyle == ProjAIStyleID.LightningOrb || ElectricAttacks.Contains(projectile.type))
-                    {
-                        electricAttack = true;
-                    }
+                    electricAttack = true;
                 }
                 else if (projectile.ModProjectile is BaseDeathray)
                 {
@@ -567,21 +565,11 @@ namespace FargowiltasSouls.Content.Projectiles
                         //detect being hit
                         if (orb.Alive() && orb.ai[0] == 0f && projectile.owner == orb.owner && projectile.Colliding(projectile.Hitbox, orb.Hitbox))
                         {
-                            int numBalls = 5;
-                            int dmg = 25;
-
-                            if (modPlayer.AncientShadowEnchantActive)
-                            {
-                                numBalls = 5;
-                                dmg = 40;
-                            }
-
-                            int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
-                            Projectile[] balls = FargoSoulsUtil.XWay(numBalls, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, damage, 0);
+                            Projectile[] balls = FargoSoulsUtil.XWay(5, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, ShadowBalls.BaseDamage(player), 0);
 
                             foreach (Projectile ball in balls)
                             {
-                                ball.originalDamage = damage;
+                                ball.originalDamage = ShadowBalls.BaseDamage(player);
                             }
                             projectile.Kill();
 
