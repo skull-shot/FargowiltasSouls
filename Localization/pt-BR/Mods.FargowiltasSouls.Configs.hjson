@@ -17,8 +17,8 @@ ClientConfig: {
 	}
 
 	ItemBalanceTooltip: {
-		// Label: Balance Change Tooltips
-		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+		// Label: Item Change Tooltips
+		// Tooltip: Determines which items with changed effects will have a tooltip line stating this.
 	}
 
 	ToggleSearchReset: {

@@ -92,7 +92,7 @@ TikiEffect: Миньоны тики
 SpiritTornadoEffect: Сжатый артефакт Духа
 CosmoHeader: "{$Mods.FargowiltasSouls.Items.CosmoForce.DisplayName}"
 MeteorMomentumEffect: Магосвет
-MeteorEffect: Падающий метеорит
+MeteorEffect: Падающий метеор
 MeteorTrailEffect: След из искр метеора
 NebulaEffect: Усилители туманности
 SolarEffect: Щит и рывок солнечной вспышки

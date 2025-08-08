@@ -18,7 +18,7 @@ ClientConfig: {
 
 	ItemBalanceTooltip: {
 		Label: Изменения хар-тик в описаниях предметов
-		Tooltip: Если включена, у предметов с любыми изменениями характеристик в описании будут строчки о них.
+		Tooltip: Определяет, какие строки об изменениях оставить в описаниях предметов.
 	}
 
 	ToggleSearchReset: {
@@ -209,8 +209,8 @@ RespawnPreventionSetting: {
 }
 
 BalanceTooltipSetting: {
-	// Tooltip: ""
-	// All.Label: All
-	// Reworks.Label: Reworks and Mechanical Changes
-	// None.Label: None
+	Tooltip: ""
+	All.Label: Все
+	Reworks.Label: Переработки
+	None.Label: Ничего
 }
