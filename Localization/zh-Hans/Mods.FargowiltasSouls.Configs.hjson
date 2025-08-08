@@ -207,3 +207,10 @@ RespawnPreventionSetting: {
 	Masochist.Label: 受虐模式
 	Disabled.Label: 禁用
 }
+
+BalanceTooltipSetting: {
+	// Tooltip: ""
+	// All.Label: All
+	// Reworks.Label: Reworks and Mechanical Changes
+	// None.Label: None
+}

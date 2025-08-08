@@ -1641,7 +1641,7 @@ DimensionSoul: {
 		[i:FargowiltasSouls/MoltenShield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
-		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] you release damaging fog at nearby enemies
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] [i:BoneHelm] you release damaging fog at nearby enemies
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
 		'The dimensions of Terraria at your fingertips'
@@ -1784,7 +1784,7 @@ TrawlerSoul: {
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
-		[i:3090] Slimes become friendly and [i:4987] [i:3336] you release damaging fog at nearby enemies
+		[i:3090] Slimes become friendly and [i:4987] [i:3336] [i:BoneHelm] you release damaging fog at nearby enemies
 		'Fish fear me'
 		''' */
 }
