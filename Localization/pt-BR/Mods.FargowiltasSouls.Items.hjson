@@ -668,7 +668,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback
+		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
