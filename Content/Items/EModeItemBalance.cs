@@ -92,17 +92,8 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.ZapinatorGray:
                 case ItemID.ZapinatorOrange:
                     balanceTextKeys = ["Zapinator"];
-                    if (!NPC.downedBoss2)
-                        balanceTextKeys = [.. balanceTextKeys, "SpaceGun"];
-                    return EModeChange.ReworkNerf;
+                    return EModeChange.Nerf;
 
-                case ItemID.SpaceGun:
-                    if (!NPC.downedBoss2)
-                    {
-                        balanceTextKeys = ["SpaceGun"];
-                        return EModeChange.ReworkNerf;
-                    }
-                    return EModeChange.None;
 
                 case ItemID.CoinGun:
                     balanceTextKeys = ["CoinGun"];
