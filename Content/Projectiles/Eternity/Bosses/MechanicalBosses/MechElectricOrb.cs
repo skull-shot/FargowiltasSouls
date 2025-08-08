@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
         private ref float ColorAI => ref Projectile.ai[2];
         public float ColorType
         {
-            get => (WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors) ? ColorAI : Red;
+            get => Projectile.friendly || (WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors) ? ColorAI : Red;
         }
         public override void SetStaticDefaults()
         {
@@ -146,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            switch (ColorType)
+            switch (ColorAI)
             {
                 case Blue: // destro
                     target.AddBuff(BuffID.Electrified, 60);

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -138,7 +139,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //corrupt heart
             fargoPlayer.DarkenedHeartItem = Item;
             //player.AddEffect<DarkenedHeartEaters>(Item);
-            player.hasMagiluminescence = true;
             if (fargoPlayer.DarkenedHeartCD > 0)
                 fargoPlayer.DarkenedHeartCD -= 2;
 
@@ -317,7 +317,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
 
             .Register();

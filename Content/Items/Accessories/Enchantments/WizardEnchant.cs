@@ -73,15 +73,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             CreateRecipe()
 
             .AddIngredient(ItemID.WizardHat)
+            .AddRecipeGroup("FargowiltasSouls:AnyTier1Robe") // Amethyst / Topaz
+            .AddRecipeGroup("FargowiltasSouls:AnyTier2Robe") // Sapphire / Emerald
+            .AddRecipeGroup("FargowiltasSouls:AnyTier3Robe") // Ruby / Diamond
+            .AddIngredient(ItemID.SpellTome) // Magic Tome
+            .AddIngredient(ItemID.RareEnchantment)
+
             //.AddIngredient(ItemID.AmethystRobe);
             //.AddIngredient(ItemID.TopazRobe);
-
-            .AddIngredient(ItemID.SapphireRobe)
-            .AddIngredient(ItemID.EmeraldRobe)
-            .AddIngredient(ItemID.RubyRobe)
-            .AddIngredient(ItemID.DiamondRobe)
+            //.AddIngredient(ItemID.SapphireRobe)
+            //.AddIngredient(ItemID.EmeraldRobe)
+            //.AddIngredient(ItemID.RubyRobe)
+            //.AddIngredient(ItemID.DiamondRobe)
             //amber robe
-            .AddIngredient(ItemID.RareEnchantment)
 
             .AddTile(TileID.CrystalBall)
             .Register();

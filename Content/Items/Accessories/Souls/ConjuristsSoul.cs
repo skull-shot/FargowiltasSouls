@@ -24,13 +24,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
             .AddIngredient(ItemID.SummonerEmblem)
-            .AddIngredient(ItemID.MonkBelt)
-            .AddIngredient(ItemID.SquireShield)
-            .AddIngredient(ItemID.HuntressBuckler)
-            .AddIngredient(ItemID.ApprenticeScarf)
-            .AddIngredient(ItemID.PygmyNecklace)
             .AddIngredient(ItemID.PapyrusScarab)
-
+            .AddIngredient(ItemID.PygmyNecklace)
+            .AddRecipeGroup("FargowiltasSouls:AnySentryAccessory")
 
             .AddIngredient(ItemID.Smolstar) //blade staff
             .AddIngredient(ItemID.OpticStaff)

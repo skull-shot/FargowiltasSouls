@@ -3,11 +3,12 @@
 // Apprentice: Secondary weapon frequency increased to 1/5
 // AncientHallow: Sword damage increased, projectile damage cap increased to 200
 // AncientShadow: Number of Shadow Orbs increased
-// AncientCobalt: Increased jump height and explosion damage and size
+// AncientCobalt: Increased jump height, explosion damage, and size
 // Angler: All fishing rods have 5 extra lures
+// AshWood: Reduced fireball cooldown, increased damage softcap
 // Bee: Increased wing strength and bee swarm damage
 // Beetle: Beetle cap increased to 9, increased buildup speed
-// BorealWood: Fires more snowballs more often
+// BorealWood: Increased snowball count to 7, reduced cooldown and increased damage softcap
 // Cactus: Needle damage, amount, and range increased
 // Chlorophyte: Damage of ring and spores increased, cooldown of spores reduced
 // Cobalt: Increased explosion damage
@@ -17,8 +18,8 @@
 // DarkArtist: Secondary weapon frequency increased to 1/3
 // Ebonwood: Aura size increased, flat damage and damage reduction cap increased to 10 and 10% respectively
 // Forbidden: Cooldown decreased to 10 seconds, damage increased
-// Fossil: Revive heal increased to 200 and revive bone count doubled
-// Frost: Icicle damage doubled
+// Fossil: Revive health increased to 200 and revive bone count doubled
+// Frost: Increased icicle damage
 // Gladiator: Doubled damage reduction and spear rain damage
 // Gold: Increased shell duration
 // Hallow: Increased potion heal bonus from 40 to 70%, doubled repel duration
@@ -26,7 +27,7 @@
 // Iron: Increases grab range, increases damage reduction to 28%
 // Jungle: Spore damage increased, cooldown decreased
 // Lead: Lead Poisoning damage increased, DoT resistance increased to 50%
-// Meteor: Increased meteor damage, size and frequency
+// Meteor: Increased meteor damage, size, and frequency
 // Miner: Increased mining speed
 // Molten: Inferno ring is larger and more damaging, damage bonus increased to 1.25x
 // Monk: Increased dash damage
@@ -36,35 +37,34 @@
 // Ninja: Maximum crit chance increased to 40%, maximum player speed where effect activates increased
 // Obsidian: Grants explosions at all times, explosions deal more damage while under a debuff or lava wet
 // Orichalcum: Debuff damage further increased to 150%
-// Palladium: Rapid Healing always lasts 5 seconds, increases orb damage
+// Palladium: Rapid Healing always lasts 5 seconds, increased orb damage
 // PalmWood: Attack speed, damage, and size increased
 // Pearlwood: Your crits reroll twice, increased star damage
 // Platinum: Bonus replaced with 33% chance for enemies to drop 5x loot
-// Pumpkin: Pumpkins can grow while flying, heal for twice as much, and flame damage is increased to 45
+// Pumpkin: Pumpkins can grow while flying, heal for twice as much and deal more damage
 // Rain: Umbrella can block up to 400 damage and reflected damage is tripled
-// RedRiding: Arrow rain has less cooldown and deals more damage
+// RedRiding: Decreased arrow rain cooldown and increased damage
 // RichMahogany: Hooks pull 2x as fast, damage reduction and launch damage tripled
-// Shadewood: Aura size and blood damage increased, additionally applies Ichor
+// Shadewood: Aura size and blood damage increased, blood inflicts Ichor
 // Shinobi: Increased dash damage
-// Shroomite: Mushroom Power stats increased to 25%, mushroom damage and count increased
+// Shroomite: Mushroom Power stats increased to 25%, mushroom cloud damage and count increased
 // Silver: Parrying blocks up to 200 damage, Parry Boost duration tripled
-// Solar: Solar bursts deal increased damage in a larger radius
-// Spectre: Revive heal increased to 200, revive spirit count doubled, spirit damage doubled
+// Solar: Increased solar burst damage and radius
+// Spectre: Revive health increased to 200, revive spirit count doubled, spirit damage doubled
 // Spider: 10% extra critical strike chance, increased spiderling damage
-// Spooky: Decreased Deathhunt Scythe cooldown to 8 seconds, increased scythe size and damage
-// Stardust: Timestop cooldown decreased from 90 to 75
+// Spooky: Decreased cooldown, increased scythe size and damage
+// Stardust: Timestop cooldown decreased to 75 seconds
 // Snow: Snowballs inflict Frostbite and freeze enemies solid
-// Shadow: Number of Shadow Orbs increased
+// Shadow: Increased Shadow Orb count
 // Squire: Increased mount boosts to 1.5x and heal bonus to 15%
 // Tiki: Bonus whip range increased to 40%, projectile damage bonus increased to 1.25x
 // Tin: Max crit increased to 24%, reduced proc cooldown
-// Titanium: Shard damage increased, Titanium Shield duration increased to 5 seconds and maximum damage reduction increased by 10%
+// Titanium: Titanium Shield duration increased and maximum damage reduction increased by 10%
 // Tungsten: Shockwaves are 3x as large and frequent
 // Turtle: Doubled shell health
 // ValhallaKnight: Increased acceleration boost to 2x and heal bonus to 25%
 // Vortex: Laser damage increased
 // Wood: Bestiary and banner multiplier increased to 5
-// AshWood: Reduced Fireball cooldown, increased fireball damage cap
 // NoUpgrade: No upgrade
 // Active: Active
 // Inactive: Inactive

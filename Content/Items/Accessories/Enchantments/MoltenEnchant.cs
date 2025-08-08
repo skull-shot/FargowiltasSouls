@@ -35,12 +35,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MoltenHelmet)
             .AddIngredient(ItemID.MoltenBreastplate)
             .AddIngredient(ItemID.MoltenGreaves)
-            //ashwood ench
             .AddIngredient(ItemID.MoltenFury)
-            .AddIngredient(ItemID.DemonsEye)
+            .AddIngredient(ItemID.FlarefinKoi)
+            .AddIngredient(ItemID.ShiningMoon)
 
             .AddTile(TileID.DemonAltar)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(MoltenEffect.BaseDamage(Main.LocalPlayer) * (Main.LocalPlayer.ForceEffect<MoltenEffect>() ? 1.25 : 1.15)); //yes the multiplier somehow applies to aura damage
         }
     }
     public class MoltenEffect : AccessoryEffect
@@ -58,6 +65,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             return 200;
              
         }
+        public static int BaseDamage(Player player)
+        {
+            int dmg = player.FargoSouls().ForceEffect<MoltenEnchant>() ? 40 : 20;
+            if (player.HasEffect<NatureEffect>())
+                dmg = 50;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Melee));
+        }
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
@@ -73,11 +87,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (!nature)
                     Lighting.AddLight((int)(player.Center.X / 16f), (int)(player.Center.Y / 16f), 0.65f, 0.4f, 0.1f);
 
-                int buff = BuffID.OnFire;
+                int buff = BuffID.OnFire3;
                 float distance = AuraSize(player);
-                int baseDamage = player.FargoSouls().ForceEffect<MoltenEnchant>() ? 40 : 20;
-
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(player, baseDamage);
 
                 if (player.whoAmI == Main.myPlayer)
                 {
@@ -101,27 +112,25 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                         npc.AddBuff(buff, 120);
 
                                     if (player.infernoCounter % dmgRate == 0)
-                                        player.ApplyDamageToNPC(npc, damage, 0f, 0, false);
+                                        player.ApplyDamageToNPC(npc, BaseDamage(player), 0f, 0, false);
                                 }
                                 else
                                 {
-                                    baseDamage = 50;
                                     int time = player.FargoSouls().TimeSinceHurt;
                                     float minTime = 60 * 4;
                                     if (time > minTime)
                                     {
                                         float maxBonus = 4; // at 16s
                                         float bonus = MathHelper.Clamp(time / (60 * 4), 1, maxBonus);
-                                        baseDamage = (int)(baseDamage * bonus);
-                                        damage = FargoSoulsUtil.HighestDamageTypeScaling(player, baseDamage);
+                                        int naturedmg = (int)(BaseDamage(player) * bonus);
 
                                         if (player.infernoCounter % dmgRate == 0)
                                         {
-                                            player.ApplyDamageToNPC(npc, damage, 0f, 0, false);
+                                            player.ApplyDamageToNPC(npc, naturedmg, 0f, 0, false);
                                             if (player.HasEffect<CrimsonEffect>() && !healed)
                                             {
                                                 healed = true;
-                                                player.FargoSouls().HealPlayer(damage / 100);
+                                                player.FargoSouls().HealPlayer(naturedmg / 100);
                                             }  
                                         }
                                     }

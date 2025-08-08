@@ -1,17 +1,21 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
-    public class AbomDeathrayMark : BaseDeathray
+    public class AbomDeathrayMark : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
-        public AbomDeathrayMark() : base(30) { }
+        public AbomDeathrayMark() : base(30, drawDistance: 6000) { }
 
         public override bool? CanDamage()
         {
@@ -108,7 +112,27 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.position -= Projectile.velocity;
             Projectile.rotation = Projectile.velocity.ToRotation() - 1.57079637f;
         }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale;
 
+        public static Color ColorFunction(float _) => new(253, 254, 32, 100);
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            List<Vector2> laserPositions = Projectile.GetLaserControlPoints(12, drawDistance);
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.FlameFieldShader");
+            shader.TrySetParameter("laserDirection", Projectile.velocity);
+            shader.TrySetParameter("screenPosition", Main.screenPosition);
+            shader.SetTexture(FargoAssets.WavyNoise.Value, 1, SamplerState.LinearWrap);
+
+            PrimitiveSettings laserSettings = new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader);
+            PrimitiveRenderer.RenderTrail(laserPositions, laserSettings, 60);
+            Main.spriteBatch.ResetToDefault();
+        }
         public override void OnKill(int timeLeft)
         {
             if (FargoSoulsUtil.HostCheck)

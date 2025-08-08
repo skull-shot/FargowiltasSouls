@@ -42,16 +42,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<FossilEnchant>()
-
-            .AddRecipeGroup("FargowiltasSouls:AnySpectreHead")
+                .AddRecipeGroup("FargowiltasSouls:AnySpectreHead")
             .AddIngredient(ItemID.SpectreRobe)
             .AddIngredient(ItemID.SpectrePants)
-
+            .AddIngredient<FossilEnchant>()
             .AddIngredient(ItemID.SpectreStaff)
+            .AddIngredient(ItemID.AbigailsFlower)
 
             .AddTile(TileID.CrystalBall)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return SpectreOnHitEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class SpectreEffect : AccessoryEffect
@@ -61,15 +67,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void SpectreRevive(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            bool spiritForce = modPlayer.ForceEffects.Contains(ModContent.ItemType<SpiritForce>());
-
-            int spiritDamage = 160;
-            if (modPlayer.ForceEffect<SpectreEnchant>())
-            {
-                spiritDamage = 320;
-            }
-            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
-
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
             {
                 Projectile[] projs = new Projectile[num];
@@ -139,7 +136,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool forceEffect = modPlayer.ForceEffect<SpectreEnchant>();
                 Revive(forceEffect ? 200 : 100, 18000);
                 if (player.HasEffect<SpectreOnHitEffect>())
-                    XWay(forceEffect ? 20 : 10, player.GetSource_EffectItem<SpectreEffect>(), player.Center, ModContent.ProjectileType<SpectreSpirit>(), 15, spiritDamage, 0, player.whoAmI);
+                    XWay(forceEffect ? 20 : 10, player.GetSource_EffectItem<SpectreEffect>(), player.Center, ModContent.ProjectileType<SpectreSpirit>(), 15, SpectreOnHitEffect.BaseDamage(player), 0, player.whoAmI);
             }
         }
         public static void GhostUpdate(Player player)
@@ -309,17 +306,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<SpiritHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpectreEnchant>();
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SpectreEffect>() ? 320 : 160) * player.ActualClassDamage(DamageClass.Magic));
         public int damageCopy;
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             if (player.FargoSouls().TerrariaSoul)
                 return;
-            int spiritDamage = 160;
-            if (player.FargoSouls().ForceEffect<SpectreEnchant>())
-            {
-                spiritDamage = 320;
-            }
-            spiritDamage = (int)(spiritDamage * player.ActualClassDamage(DamageClass.Magic));
             damageCopy += info.Damage;
             for (int i = 0; i < 5; i++)
             {
@@ -329,7 +321,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 float velX = Main.rand.Next(-5, 6) * 3f;
                 float velY = Main.rand.Next(-5, 6) * 3f;
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<SpectreSpirit>(), spiritDamage, 0f, player.whoAmI);
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.position.X + velX, player.position.Y + velY, velX, velY, ModContent.ProjectileType<SpectreSpirit>(), BaseDamage(player), 0f, player.whoAmI);
             }
         }
         public override void PostUpdateEquips(Player player)

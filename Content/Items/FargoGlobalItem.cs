@@ -544,7 +544,6 @@ namespace FargowiltasSouls.Content.Items
             {
                 if (modPlayer.GelicCD == 0)
                 {
-                    int dam = 25;
                     int angle = (int)player.velocity.Y * -10;
                     if (angle > 80)
                         angle = 80;
@@ -556,7 +555,7 @@ namespace FargowiltasSouls.Content.Items
                         for (int i = 0; i < max; i++)
                         {
                             Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
-                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dam), 5f, Main.myPlayer, 0, 0, ai2);
+                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), GelicWingSpikes.BaseDamage(player), 5f, Main.myPlayer, ai2: ai2);
                         }
                     }
                     modPlayer.GelicCD = 22;

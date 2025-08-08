@@ -260,6 +260,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (NoUsingItems > 0)
                 NoUsingItems--;
 
+            SupersonicDodge = false;
+
             //            Wood = false;
 
             WingTimeModifier = 1f;
@@ -319,6 +321,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
             PlatinumEffect = null;
+            CobaltEnchantActive = false;
             AncientShadowEnchantActive = false;
             SquireEnchantActive = false;
             ValhallaEnchantActive = false;

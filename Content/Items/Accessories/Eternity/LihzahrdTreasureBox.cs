@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -40,6 +41,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<DiveEffect>(Item);
             player.AddEffect<LihzahrdBoulders>(Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return LihzahrdGroundPound.BaseDamage(Main.LocalPlayer) * 3; //display highest damaging projectile
+        }
     }
     public class DiveEffect : AccessoryEffect
     {
@@ -51,6 +59,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
+        public static int BaseDamage(Player player) => (int)(150 * player.ActualClassDamage(DamageClass.Melee));
     }
     public class LihzahrdBoulders : AccessoryEffect
     {

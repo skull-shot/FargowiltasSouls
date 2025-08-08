@@ -1,8 +1,10 @@
-﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+﻿using System;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System;
+using MonoMod.Utils;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -45,8 +47,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.ChlorophytePlateMail)
             .AddIngredient(ItemID.ChlorophyteGreaves)
             .AddIngredient(null, "JungleEnchant")
-            .AddIngredient(ItemID.ChlorophyteWarhammer)
             .AddIngredient(ItemID.ChlorophyteClaymore)
+            .AddIngredient(ItemID.AcornAxe) // Axe of Regrowth
             //grape juice
             //.AddIngredient(ItemID.Seedling);
             //plantero pet
@@ -54,23 +56,36 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
            .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(ChloroMinion.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
+        }
     }
     public class ChloroMinion : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<NatureHeader>();
         public override int ToggleItemType => ModContent.ItemType<ChlorophyteEnchant>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player)
+        {
+            int dmg = player.ForceEffect<ChloroMinion>() ? 50 : 30;
+            if (player.HasEffect<NatureEffect>())
+                dmg = 150;
+            return dmg;
+        }
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<Chlorofuck>()] == 0)
             {
-                int dmg = 29;
                 const int max = 5;
                 float rotation = 2f * (float)Math.PI / max;
                 for (int i = 0; i < max; i++)
                 {
                     Vector2 spawnPos = player.Center + new Vector2(60, 0f).RotatedBy(rotation * i);
-                    FargoSoulsUtil.NewSummonProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<Chlorofuck>(), dmg, 10f, player.whoAmI, Chlorofuck.Cooldown, rotation * i);
+                    FargoSoulsUtil.NewSummonProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<Chlorofuck>(), BaseDamage(player), 10f, player.whoAmI, Chlorofuck.Cooldown, rotation * i);
                 }
             }
         }

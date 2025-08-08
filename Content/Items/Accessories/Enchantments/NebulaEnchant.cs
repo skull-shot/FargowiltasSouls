@@ -43,10 +43,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //LeafBlower
             //bubble gun
             //chaarged blaster cannon
-            .AddIngredient(ItemID.LunarFlareBook)
+            .AddIngredient(ItemID.LastPrism)
 
             .AddTile(TileID.LunarCraftingStation)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage;
+
+            scaling = (int)(MathHelper.Clamp((float)scaling, 1200, 3000) * player.ActualClassDamage(DamageClass.Magic));
+            if (player.FargoSouls().ForceEffect<NebulaEnchant>())
+                scaling = (int)(scaling * 1.66667f);
+
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            return 100;
         }
     }
 
@@ -55,7 +68,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<NebulaEnchant>();
         public override bool ExtraAttackEffect => true;
-
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

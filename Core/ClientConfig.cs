@@ -22,8 +22,8 @@ namespace FargowiltasSouls.Core
         [DefaultValue(true)]
         public bool ItemDisabledTooltip;
 
-        [DefaultValue(false)]
-        public bool ItemBalanceTooltip;
+        [DefaultValue(BalanceTooltipSetting.Reworks)]
+        public BalanceTooltipSetting ItemBalanceTooltip;
 
         [DefaultValue(false)]
         public bool ToggleSearchReset;

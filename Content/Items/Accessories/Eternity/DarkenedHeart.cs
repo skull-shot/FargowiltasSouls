@@ -44,13 +44,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (modPlayer.DarkenedHeartCD > 0)
                 modPlayer.DarkenedHeartCD--;
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Default;
+            tooltipColor = null;
+            scaling = null;
+            return DarkenedHeartEaters.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class DarkenedHeartEaters : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<PureHeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<DarkenedHeart>();
         public override bool ExtraAttackEffect => true;
-
+        public static int BaseDamage (Player player) => (int)((player.FargoSouls().PureHeart? 35 : 13) * player.ActualClassDamage(DamageClass.Generic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -101,11 +108,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 dust2.scale *= 0.8f;
                 Main.dust[index2].noGravity = true;
             }
-            int dam = player.FargoSouls().PureHeart ? 35 : 13;
-            if (player.FargoSouls().MasochistSoul)
-                dam *= 2;
             Vector2 vel = pos.DirectionTo(player.Center).RotatedByRandom(MathHelper.PiOver2 * 0.7f) * Main.rand.NextFloat(6, 10);
-            int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, (int)(dam * player.ActualClassDamage(DamageClass.Generic)), 1.75f, player.whoAmI);
+            int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, BaseDamage(player), 1.75f, player.whoAmI);
             if (p.IsWithinBounds(Main.maxProjectiles))
             {
                 Main.projectile[p].DamageType = DamageClass.Default;

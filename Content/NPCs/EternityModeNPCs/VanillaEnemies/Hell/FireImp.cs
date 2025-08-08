@@ -1,7 +1,10 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 {
@@ -9,6 +12,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.FireImp);
 
+        public override void SetDefaults(NPC npc)
+        {
+            if (HellEnemies.HellBuffActive)
+            {
+                npc.lifeMax = 650;
+            }
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
@@ -17,8 +27,36 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
             {
                 npc.TargetClosest(false);
                 if (npc.HasValidTarget && Main.player[npc.target].ZoneUnderworldHeight && npc.FargoSouls().CanHordeSplit)
-                    EModeGlobalNPC.Horde(npc, Main.rand.Next(8) + 1);
+                    EModeGlobalNPC.Horde(npc, Main.rand.Next(3) + 1);
             }
+        }
+        public int Timer = 0;
+
+        public override bool SafePreAI(NPC npc)
+        {
+            if (HellEnemies.HellBuffActive)
+            {
+                if (npc.ai[1] == 24 && npc.HasPlayerTarget) // frame before it should fire fireball
+                {
+                    npc.velocity *= 0f;
+                    if (Timer == 0)
+                    {
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Top - Vector2.UnitY * 30, Vector2.Zero, ModContent.ProjectileType<ImpFireOrb>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 3f, ai0: npc.target, ai2: npc.whoAmI);
+                        }
+                    }
+                    Timer++;
+                    if (Timer > 60 * 4)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                else
+                    Timer = 0;
+            }
+            return base.SafePreAI(npc);
         }
     }
 }

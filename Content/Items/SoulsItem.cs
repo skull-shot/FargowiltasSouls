@@ -44,10 +44,11 @@ namespace FargowiltasSouls.Content.Items
         /// <summary>
         /// Return a number greater than 0 to make the item auto-generate a tooltip that shows its damage value. Meant for accessories.
         /// </summary>
-        public virtual int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor)
+        public virtual int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
             damageClass = DamageClass.Generic;
             tooltipColor = null;
+            scaling = null;
             return 0;
         }
 
@@ -124,6 +125,52 @@ namespace FargowiltasSouls.Content.Items
                 string text = $"[i:{ModContent.ItemType<TogglerIconItem>()}] [c/BC5252:{Language.GetTextValue($"Mods.FargowiltasSouls.Items.Extra.DisabledEffects")}]";
                 tooltips.Add(new TooltipLine(Mod, $"{Mod.Name}:DisabledEffects", text));
             }
+            int damage = DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling);
+            if (damage > 0)
+            {
+                int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                if (firstTooltip > 0)
+                {
+                    string tip = "";
+                    if (scaling != null)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.Scaling");
+                    }
+                    if (damageClass == DamageClass.Generic)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.HighestClass");
+                    }
+                    else if (damageClass == DamageClass.MagicSummonHybrid)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.MagicSummonHybrid");
+                    }
+                    else if (damageClass == DamageClass.SummonMeleeSpeed)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.MeleeSummonHybrid");
+                    }
+                    else if (damageClass != null)
+                    {
+                        bool addLeadingSpace = damageClass is not VanillaDamageClass;
+                        tip += addLeadingSpace ? " " : "" + damageClass.DisplayName;
+                    }
+                    else
+                    {
+                        tip += Lang.tip[55].Value; // No damage class
+                    }
+                    string damageText = damage.ToString();
+                    if (scaling != null)
+                        damageText += "%";
+                    string text = damageText + tip;
+                    if (scaling != null && Main.LocalPlayer.HeldItem.IsWeapon())
+                        text += $" ({scaling})";
+                    var damageTooltip = new TooltipLine(Mod, $"{Mod.Name}:DamageTooltip", text);
+                    if (tooltipColor.HasValue)
+                        damageTooltip.OverrideColor = tooltipColor;
+                    else if (damageClass != null)
+                        damageTooltip.OverrideColor = DamageClassColor(damageClass);
+                    tooltips.Insert(firstTooltip, damageTooltip);
+                }
+            }
             int activeSkills = ActiveSkillTooltips.Count;
             if (activeSkills > 0)
             {
@@ -182,45 +229,22 @@ namespace FargowiltasSouls.Content.Items
                         tooltips.Insert(firstTooltip + 2, descTooltip);
                 }
             }
-
-            int damage = DamageTooltip(out DamageClass damageClass, out Color? tooltipColor);
-            if (damage > 0)
-            {
-                int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
-                if (firstTooltip > 0)
-                {
-                    string tip;
-                    if (damageClass != null)
-                    {
-                        bool addLeadingSpace = damageClass is not VanillaDamageClass;
-                        tip = addLeadingSpace ? " " : "" + damageClass.DisplayName;
-                    }
-                    else
-                    {
-                        tip = Lang.tip[55].Value; // No damage class
-                    }
-                    string damageText = damage.ToString();
-                    string text = damageText + tip;
-                    var damageTooltip = new TooltipLine(Mod, $"{Mod.Name}:DamageTooltip", text);
-                    if (tooltipColor.HasValue)
-                        damageTooltip.OverrideColor = tooltipColor;
-                    else if (damageClass != null)
-                        damageTooltip.OverrideColor = DamageClassColor(damageClass);
-                    tooltips.Insert(firstTooltip, damageTooltip);
-                }
-            }
         }
 
         public static Color DamageClassColor(DamageClass damageClass)
         {
+            Color color = Color.LightGray;
+            float lerp = 0.75f;
             if (damageClass.CountsAsClass(DamageClass.Melee))
-                return Color.White;
+                return Color.Lerp(new(225, 90, 90), color, lerp);
             if (damageClass.CountsAsClass(DamageClass.Ranged))
-                return Color.White;
+                return Color.Lerp(new(38, 168, 35), color, lerp);
             if (damageClass.CountsAsClass(DamageClass.Magic))
-                return Color.White;
+                return Color.Lerp(new(204, 45, 239), color, lerp);
             if (damageClass.CountsAsClass(DamageClass.Summon))
-                return Color.White;
+                return Color.Lerp(new(0, 80, 224), color, lerp);
+            if (damageClass.CountsAsClass(DamageClass.Default) || damageClass.CountsAsClass(DamageClass.Generic))
+                return color;
             return Color.White;
         }
     }

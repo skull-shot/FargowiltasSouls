@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.value = 5000000;
             Item.rare = -12;
             Item.expert = true;
-            Item.defense = 4;
+            //Item.defense = 0;
 
             Item.width = 5;
             Item.height = 5;
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             player.AddEffect<UniverseSpeedEffect>(Item);
 
-            player.maxMinions += 2;
+            player.maxMinions += 3;
             player.maxTurrets += 1;
 
             player.kbGlove = true;
@@ -57,18 +57,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.counterWeight = 556 + Main.rand.Next(6);
             player.yoyoGlove = true;
             player.yoyoString = true;
-
-            //celestial shell
-            player.wolfAcc = true;
-            player.accMerman = true;
-
-            if (hideVisual)
-            {
-                player.hideMerman = true;
-                player.hideWolf = true;
-            }
-
-            player.lifeRegen += 2;
 
             player.manaFlower = true;
             player.manaMagnet = true;

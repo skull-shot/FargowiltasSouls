@@ -43,9 +43,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyHallowHead")
                 .AddIngredient(ItemID.HallowedPlateMail)
                 .AddIngredient(ItemID.HallowedGreaves)
-                .AddIngredient(ItemID.FairyBell)
                 .AddIngredient(ItemID.HallowJoustingLance)
-                .AddIngredient(ItemID.BouncingShield)
+                .AddIngredient(ItemID.SuperStarCannon)
+                .AddIngredient(ItemID.HolyWater, 50)
             .AddTile(TileID.CrystalBall)
             .Register();
         }

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -37,12 +38,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.FargoSouls().BetsysHeartItem = Item;
             player.AddEffect<BetsyDashEffect>(Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return BetsyDashEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class BetsyDashEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<BetsysHeart>();
+        public static int BaseDamage(Player player) => (int)(250 * player.ActualClassDamage(DamageClass.Melee));
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

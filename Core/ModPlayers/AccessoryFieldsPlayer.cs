@@ -25,6 +25,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int NekomiAttackReadyTimer;
         public const int SuperAttackMaxWindow = 30;
 
+        public bool SupersonicDodge;
+
         //        //minions
         public bool BrainMinion;
         public bool EaterMinion;
@@ -145,6 +147,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
         public int CobaltCooldownTimer;
+        public bool CobaltEnchantActive = false;
         public bool ApprenticeEnchantActive;
         public bool DarkArtistEnchantActive;
         public int BeeCD;

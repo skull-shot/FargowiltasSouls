@@ -20,7 +20,14 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             Item.rare = ItemRarityID.Blue;
             Item.value = 10000;
         }
-
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return BaseDamage(Main.LocalPlayer);
+        }
+        public static int BaseDamage(Player player) => (int)(10 * player.ActualClassDamage(DamageClass.Melee));
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             PatreonPlayer modPlayer = player.GetModPlayer<PatreonPlayer>();
@@ -30,7 +37,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             //spawn a blade if none exist
             if (player.ownedProjectileCounts[ModContent.ProjectileType<RazorBlade>()] < 1)
             {
-                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, new Vector2(Main.rand.Next(-2, 2), -2), ModContent.ProjectileType<RazorBlade>(), (int)(10 * player.ActualClassDamage(DamageClass.Melee)), 2f, player.whoAmI);
+                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, new Vector2(Main.rand.Next(-2, 2), -2), ModContent.ProjectileType<RazorBlade>(), BaseDamage(player), 2f, player.whoAmI);
             }
         }
 

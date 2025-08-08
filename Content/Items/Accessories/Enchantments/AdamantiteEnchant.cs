@@ -48,9 +48,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyAdamHead")
                 .AddIngredient(ItemID.AdamantiteBreastplate)
                 .AddIngredient(ItemID.AdamantiteLeggings)
-                .AddIngredient(ItemID.Boomstick)
+                .AddIngredient(ItemID.Gatligator)
                 .AddIngredient(ItemID.QuadBarrelShotgun)
-                .AddIngredient(ItemID.DarkLance)
+                .AddIngredient(ItemID.Shotgun)
                 .AddTile(TileID.CrystalBall)
                 .Register();
         }

@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MythrilChainmail)
             .AddIngredient(ItemID.MythrilGreaves)
             .AddIngredient(ItemID.ClockworkAssaultRifle)
-            .AddIngredient(ItemID.Gatligator)
+            .AddIngredient(ItemID.LaserRifle)
             .AddIngredient(ItemID.OnyxBlaster)
 
             .AddTile(TileID.CrystalBall)

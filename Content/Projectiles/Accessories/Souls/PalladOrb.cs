@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.width = 40;
             Projectile.height = 40;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Magic;
+            Projectile.DamageType = DamageClass.Generic;
             Projectile.timeLeft = 600;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;

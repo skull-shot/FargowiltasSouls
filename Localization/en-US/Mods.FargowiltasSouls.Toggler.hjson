@@ -91,7 +91,7 @@ ForbiddenEffect: Forbidden Storm
 TikiEffect: Tiki Minions
 SpiritTornadoEffect: Concise Spirit Force
 CosmoHeader: "{$Mods.FargowiltasSouls.Items.CosmoForce.DisplayName}"
-MeteorMomentumEffect: Meteor Speed
+MeteorMomentumEffect: Magiluminescence
 MeteorEffect: Meteor Strike
 MeteorTrailEffect: Meteor Spark Trail
 NebulaEffect: Nebula Blazes
@@ -172,9 +172,6 @@ MiningSpelunk: Mining Spelunker Buff
 MiningShine: Mining Shine Buff
 BuilderEffect: Builder Mode
 ColossusHeader: "{$Mods.FargowiltasSouls.Items.ColossusSoul.DisplayName}"
-DefenseStarEffect: Stars On Hit
-DefenseBrainEffect: Brain of Confusion
-DefenseBeeEffect: Bees On Hit
 FleshKnuckleEffect: Flesh Knuckles Aggro
 PaladinShieldEffect: Paladin's Shield
 FrozenTurtleEffect: Frozen Turtle Shell
@@ -192,12 +189,11 @@ SupersonicJumps: Supersonic Jumps
 SupersonicRocketBoots: Supersonic Rocket Boots
 SupersonicCarpet: Supersonic Carpet
 CthulhuShield: Shield of Cthulhu
-BlackBelt: Black Belt
+SupersonicDodge: Supersonic Dodge
+HallowedPendantEffect: Rays On Hit
 SupersonicPanic: Panic On Hit
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
-TrawlerSporeSac: Spore Sac
-TrawlerJump: Trawler Jump
-TrawlerGel: Volatile Gelatin
+TrawlerFogEffect: Damaging Fog
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: Eternity Crit Effect Stacking
 PetHeader: Pets

@@ -46,6 +46,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            scaling = null;
+            return RemoteLightningEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class RemoteControlDR : AccessoryEffect
     {
@@ -95,7 +102,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (player.whoAmI == Main.myPlayer && player.HasEffect<ProbeMinionEffect>() && player.FargoSouls().Supercharged)
             {
                 player.FargoSouls().Probes = true;
-                const int damage = 30;
+                const int damage = 20;
                 const int max = 3;
                 float rotation = 2f * (float)Math.PI / max;
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<RemoteProbe>()] < 3)
@@ -116,6 +123,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
         public override int ToggleItemType => ModContent.ItemType<RemoteControl>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffect<RemoteLightningEffect>();
+        public static int BaseDamage (Player player) => (int)(800 * player.ActualClassDamage(DamageClass.Ranged));
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)
@@ -124,10 +132,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 return;
             if (Main.myPlayer == player.whoAmI)
             {
-                int dmg = (int)(800 * player.ActualClassDamage(DamageClass.Ranged));
                 Vector2 pos = new(Main.MouseWorld.ToTileCoordinates().X * 16 + 8, player.Center.Y - 575);
                 float angle = MathHelper.Pi * 0.7f;
-                Projectile.NewProjectile(GetSource_EffectItem(player), pos, Vector2.Zero, ModContent.ProjectileType<RemoteScanTelegraph>(), dmg, 0f, Main.myPlayer, 0, angle, 1000);
+                Projectile.NewProjectile(GetSource_EffectItem(player), pos, Vector2.Zero, ModContent.ProjectileType<RemoteScanTelegraph>(), BaseDamage(player), 0f, Main.myPlayer, 0, angle, 1000);
             }
             player.FargoSouls().RemoteCD = 720;
             CooldownBarManager.Activate("RemoteCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/RemoteControl").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);

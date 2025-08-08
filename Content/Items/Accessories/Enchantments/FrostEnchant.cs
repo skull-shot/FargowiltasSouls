@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.FrostLeggings)
             .AddIngredient(ModContent.ItemType<SnowEnchant>())
             .AddIngredient(ItemID.Frostbrand)
-            .AddIngredient(ItemID.FrostStaff)
+            .AddIngredient(ItemID.IceBow)
             //frost staff
             //coolwhip
             //.AddIngredient(ItemID.BlizzardStaff);
@@ -48,7 +48,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             .AddTile(TileID.CrystalBall)
             .Register();
-
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return (int)((Main.LocalPlayer.FargoSouls().ForceEffect<FrostEnchant>() ? 100 : 50) * Main.LocalPlayer.ActualClassDamage(DamageClass.Magic));
         }
     }
     public class FrostEffect : AccessoryEffect

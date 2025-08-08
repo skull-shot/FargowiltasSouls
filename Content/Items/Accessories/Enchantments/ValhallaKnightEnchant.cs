@@ -42,8 +42,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SquireAltHead)
             .AddIngredient(ItemID.SquireAltShirt)
             .AddIngredient(ItemID.SquireAltPants)
-            .AddIngredient(ItemID.VikingHelmet)
             .AddIngredient(null, "SquireEnchant")
+            .AddIngredient(ItemID.DD2BallistraTowerT3Popper)
+            //.AddIngredient(ItemID.VikingHelmet)
             .AddIngredient(ItemID.ShadowJoustingLance)
 
             .AddTile(TileID.CrystalBall)
