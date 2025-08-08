@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -45,6 +46,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             ActiveEffects(player, Item);
             player.AddEffect<FrigidGraspKeyEffect>(Item);
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return FrigidGraspKeyEffect.BaseDamage(Main.LocalPlayer);
         }
 
         public override void UpdateInventory(Player player) => PassiveEffects(player, Item);
@@ -113,6 +121,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<FrigidGrasp>();
+        public static int BaseDamage(Player player) => (int)(14 * player.ActualClassDamage(DamageClass.Magic));
         public override void ActiveSkillHeld(Player player, bool stunned)
         {
             if (stunned)

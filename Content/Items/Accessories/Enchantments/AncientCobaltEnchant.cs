@@ -47,13 +47,28 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return AncientCobaltEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
 
     public class AncientCobaltEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<AncientCobaltEnchant>();
-
+        public static int BaseDamage(Player player)
+        {
+            int dmg = 35;
+            if (player.FargoSouls().CobaltEnchantActive || player.ForceEffect<AncientCobaltEffect>())
+                dmg = 150;
+            if (player.FargoSouls().CobaltEnchantActive && player.ForceEffect<AncientCobaltEffect>())
+                dmg = 300;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Melee));
+        }
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -92,7 +107,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     debuff = 2;
                 }
 
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 0, player.whoAmI, ai0: scale, ai1: debuff);
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), BaseDamage(player), 0, player.whoAmI, ai0: scale, ai1: debuff);
 
                 modPlayer.JustCobaltJumped = true;
 

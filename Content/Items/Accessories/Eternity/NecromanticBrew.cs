@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,7 +33,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.FargoSouls().NecromanticBrewItem = Item;
             player.AddEffect<NecroBrewSpin>(Item);
             player.AddEffect<SkeleMinionEffect>(Item);
-
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(SkeleMinionEffect.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
     }
     public class NecroBrewSpin : AccessoryEffect
@@ -45,6 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<NecromanticBrew>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player) => 18;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())

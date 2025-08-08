@@ -37,6 +37,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (player.AddEffect<SlimyShieldEffect>(Item))
                 player.FargoSouls().SlimyShieldItem = Item;
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return SlimyShieldEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class SlimeFallEffect : AccessoryEffect
     {
@@ -54,6 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<SlimyShield>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.FargoSouls().SupremeDeathbringerFairy ? 16 : 8);
     }
     public class PlatformFallthroughEffect : AccessoryEffect
     {

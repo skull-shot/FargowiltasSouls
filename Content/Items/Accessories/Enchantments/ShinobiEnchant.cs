@@ -54,6 +54,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return (int)((Main.LocalPlayer.FargoSouls().ForceEffect<ShinobiEnchant>() ? 800 : 500) * Main.LocalPlayer.ActualClassDamage(DamageClass.Melee));
+        }
     }
     public class ShinobiDashEffect : AccessoryEffect
     {

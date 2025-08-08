@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -50,12 +51,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             speed = 6.75f;
             acceleration = 0.185f;
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return GelicWingSpikes.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class GelicWingSpikes : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<PureHeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<GelicWings>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 25);
     }
     public class GelicWingJump : AccessoryEffect
     {

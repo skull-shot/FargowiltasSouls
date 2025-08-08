@@ -55,16 +55,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.SummonMeleeSpeed; //using this for melee/summon as a temp solution
+            tooltipColor = Color.Lerp(Color.Lerp(new(225, 90, 90), new(0, 80, 224), 0.5f), Color.LightGray, 0.3f);
+            scaling = null;
+            return SpookyEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class SpookyEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpookyEnchant>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<SpookyEffect>();
-        public override void PostUpdateEquips(Player player)
-        {
-            
-        }
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SpookyEffect>() ? 1250 : 750) * (((player.ActualClassDamage(DamageClass.Melee) + player.ActualClassDamage(DamageClass.Summon) - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)
@@ -73,13 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
             bool wiz = player.ForceEffect<SpookyEffect>();
             if (Main.myPlayer == player.whoAmI)
-            {
-                int baseDmg = wiz ? 1250 : 750;
-                float melee = player.ActualClassDamage(DamageClass.Melee);
-                float summon = player.ActualClassDamage (DamageClass.Summon);
-                int dmg = (int)(baseDmg * (((melee + summon - 2f) / 2f) + 1f)); // melee-summon 50-50 damage scaling
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), dmg, 1f, player.whoAmI);
-            }
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), BaseDamage(player), 1f, player.whoAmI);
             int cd = wiz ? 8 : 12;
             player.FargoSouls().SpookyCD = cd * 60;
             CooldownBarManager.Activate("SpookyEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SpookyEnchant").Value, new(100, 78, 116),

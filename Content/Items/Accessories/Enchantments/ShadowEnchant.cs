@@ -45,6 +45,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.DemonAltar)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return ShadowBalls.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class ShadowBalls : AccessoryEffect
     {
@@ -52,6 +59,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<ShadowEnchant>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player)
+        {
+            int dmg = player.FargoSouls().AncientShadowEnchantActive ? 40 : 25;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Magic));
+        }
         public override void PostUpdateEquips(Player player)
         {
             if (!HasEffectEnchant(player))

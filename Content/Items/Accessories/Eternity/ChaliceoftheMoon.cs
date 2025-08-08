@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -86,6 +87,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddTile(TileID.LunarCraftingStation)
 
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            damageClass = CelestialRune.GetRuneClassDamage(player);
+
+            int damage = (int)(CelestialRuneAttacks.BaseDamage(Main.LocalPlayer) * player.ActualClassDamage(damageClass));
+            if (damageClass == DamageClass.Summon)
+                damage /= (int)player.ActualClassDamage(DamageClass.Summon);
+            if (damageClass == DamageClass.Ranged || damageClass == DamageClass.Magic)
+                damage *= 2;
+
+            tooltipColor = null;
+            scaling = null;
+            return damage;
         }
     }
     public class MinionsDeactivatedEffect : AccessoryEffect

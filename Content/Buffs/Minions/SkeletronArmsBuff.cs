@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -22,11 +23,10 @@ namespace FargowiltasSouls.Content.Buffs.Minions
             player.FargoSouls().SkeletronArms = true;
             if (player.whoAmI == Main.myPlayer)
             {
-                const int damage = 18;
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArmL>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmL>(), damage, 8f, player.whoAmI);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmL>(), SkeleMinionEffect.BaseDamage(player), 8f, player.whoAmI);
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArmR>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmR>(), damage, 8f, player.whoAmI);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmR>(), SkeleMinionEffect.BaseDamage(player), 8f, player.whoAmI);
             }
         }
     }

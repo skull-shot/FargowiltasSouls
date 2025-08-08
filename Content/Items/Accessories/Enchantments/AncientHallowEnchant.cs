@@ -29,13 +29,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             AddEffects(player, Item);
         }
-
+        public static int BaseDamage(Player player) => player.FargoSouls().ForceEffect<AncientHallowEnchant>()? 350 : 200;
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             bool minion = player.AddEffect<AncientHallowMinion>(item);
-            modPlayer.AddMinion(item, minion, ModContent.ProjectileType<HallowSword>(), 200, 2);
+            modPlayer.AddMinion(item, minion, ModContent.ProjectileType<HallowSword>(), BaseDamage(player), 2);
         }
 
         public static Color GetFairyQueenWeaponsColor(float alphaChannelMultiplier, float lerpToWhite, float rawHueOverride)
@@ -67,6 +67,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.MagicMissile)
                 .AddTile(TileID.CrystalBall)
                 .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
     }
     public class AncientHallowMinion : AccessoryEffect

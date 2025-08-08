@@ -49,6 +49,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(40 * Main.LocalPlayer.ActualClassDamage(DamageClass.Magic));
+        }
     }
     public class AncientShadowDarkness : AccessoryEffect
     {
@@ -62,11 +69,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
-            if (!player.FargoSouls().TerrariaSoul)
-            {
-                if ((projectile == null || projectile.type != ProjectileID.ShadowFlame) && Main.rand.NextBool(5))
-                    target.AddBuff(BuffID.Darkness, 600, true);
-            }
+            if ((projectile == null || projectile.type != ProjectileID.ShadowFlame) && Main.rand.NextBool(5))
+                target.AddBuff(BuffID.Darkness, 600, true);
         }
     }
 }

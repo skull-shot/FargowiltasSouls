@@ -143,12 +143,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                         {
                             SoundEngine.PlaySound(SoundID.Item21 with { Volume = 0.5f }, Player.Center);
                             Vector2 mouse = Main.MouseWorld;
-                            int damage = 8;
-                            if (SupremeDeathbringerFairy)
-                                damage = 16;
-                            if (MasochistSoul)
-                                damage = 80;
-                            damage = (int)(damage * Player.ActualClassDamage(DamageClass.Melee));
                             for (int i = 0; i < 3; i++)
                             {
                                 Vector2 spawn = new(mouse.X + Main.rand.Next(-200, 201), mouse.Y - Main.rand.Next(600, 901));
@@ -157,7 +151,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                                     Vector2 speed = mouse - spawn;
                                     speed.Normalize();
                                     speed *= 10f;
-                                    int p = Projectile.NewProjectile(Player.GetSource_Accessory(SlimyShieldItem, "SlimyShield"), spawn, speed, ModContent.ProjectileType<SlimeBall>(), damage, 1f, Main.myPlayer);
+                                    int p = Projectile.NewProjectile(Player.GetSource_Accessory(SlimyShieldItem, "SlimyShield"), spawn, speed, ModContent.ProjectileType<SlimeBall>(), SlimyShieldEffect.BaseDamage(Player), 1f, Main.myPlayer);
                                     if (p.IsWithinBounds(Main.maxProjectiles))
                                     {
                                         Main.projectile[p].DamageType = DamageClass.Generic;
@@ -204,9 +198,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Player.manaRegenDelay = Math.Max(Player.manaRegenDelay, 30);
 
             SoundEngine.PlaySound(SoundID.Item28, Player.Center);
-            int damage = (int)(14 * Player.ActualClassDamage(DamageClass.Magic));
-
-            Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGraspKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, damage, 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<FrigidGraspKeyEffect>(), Player.Center, 12f * Player.SafeDirectionTo(Main.MouseWorld), ProjectileID.IceBlock, FrigidGraspKeyEffect.BaseDamage(Player), 2f, Player.whoAmI, Player.tileTargetX, Player.tileTargetY);
         }
 
 
@@ -237,7 +229,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (player.HasEffect<BetsyDashEffect>() && type == 2)
                     {
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
-                        Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<BetsyDash>(), (int)(250 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
+                        Projectile.NewProjectile(Player.GetSource_Accessory(BetsysHeartItem), Player.Center, vel, ModContent.ProjectileType<BetsyDash>(), BetsyDashEffect.BaseDamage(player), 6f, Player.whoAmI);
 
                         Player.immune = true;
                         Player.immuneTime = Math.Max(Player.immuneTime, 2);
@@ -537,13 +529,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                             if (Player.whoAmI == Main.myPlayer)
                             {
-                                int baseDam = 150;
-                                if (MasochistSoul)
-                                    baseDam *= 3;
-
                                 //explosion
                                 Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<MoonLordSunBlast>(), 0, 0f, Player.whoAmI);
-                                int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), (int)(baseDam * 3 * Player.ActualClassDamage(DamageClass.Melee)), 9f, Player.whoAmI);
+                                int p = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), LihzahrdGroundPound.BaseDamage(Player) * 3, 9f, Player.whoAmI);
                                 if (p != Main.maxProjectiles)
                                     Main.projectile[p].DamageType = DamageClass.Melee;
 
@@ -551,15 +539,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                                 for (int i = -5; i <= 5; i += 2)
                                 {
                                     int b = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), Player.Center, -10f * Vector2.UnitY.RotatedBy(MathHelper.PiOver2 / 6 * i),
-                                        ModContent.ProjectileType<LihzahrdBoulderFriendly>(), (int)(baseDam * Player.ActualClassDamage(DamageClass.Melee)), 7.5f, Player.whoAmI);
+                                        ModContent.ProjectileType<LihzahrdBoulderFriendly>(), LihzahrdGroundPound.BaseDamage(Player), 7.5f, Player.whoAmI);
                                     if (b != Main.maxProjectiles)
                                         Main.projectile[b].DamageType = DamageClass.Melee;
                                 }
 
                                 //geysers
-                                int baseDamage = (int)(baseDam / 2 * Player.ActualClassDamage(DamageClass.Melee));
-                                if (MasochistSoul)
-                                    baseDamage *= 3;
                                 y -= 2;
                                 for (int i = -3; i <= 3; i++)
                                 {
@@ -574,7 +559,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                                         {
                                             tilePosY++;
                                         }
-                                        int g = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), baseDamage, 8f, Player.whoAmI);
+                                        int g = Projectile.NewProjectile(Player.GetSource_Accessory(LihzahrdTreasureBoxItem), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, -8f, ModContent.ProjectileType<GeyserFriendly>(), LihzahrdGroundPound.BaseDamage(Player) / 2, 8f, Player.whoAmI);
                                         if (g != Main.maxProjectiles)
                                             Main.projectile[g].DamageType = DamageClass.Melee;
                                     }
@@ -639,14 +624,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 const float speed = 12f;
                 Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), Player.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
 
-                int projDamage = (int)(300 * Player.ActualClassDamage(DamageClass.Melee));
-
                 const int max = 20;
                 for (int i = 0; i < max; i++)
                 {
                     void SharpTears(Vector2 pos, Vector2 vel)
                     {
-                        int p = Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), pos, vel, ProjectileID.SharpTears, projDamage, 12f, Player.whoAmI, 0f, Main.rand.NextFloat(0.5f, 1f));
+                        int p = Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), pos, vel, ProjectileID.SharpTears, DreadShellEffect.BaseDamage(Player), 12f, Player.whoAmI, 0f, Main.rand.NextFloat(0.5f, 1f));
                         if (p != Main.maxProjectiles)
                         {
                             Main.projectile[p].DamageType = DamageClass.Default;
