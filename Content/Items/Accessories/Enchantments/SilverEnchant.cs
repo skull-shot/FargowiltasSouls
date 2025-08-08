@@ -46,9 +46,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SilverHelmet)
             .AddIngredient(ItemID.SilverChainmail)
             .AddIngredient(ItemID.SilverGreaves)
-            .AddIngredient(ItemID.EmptyBucket)
             .AddIngredient(ItemID.SilverBroadsword)
-            .AddIngredient(ItemID.BlandWhip)
+            .AddIngredient(ItemID.Harpoon)
+            .AddIngredient(ItemID.EmptyBucket)
 
             .AddTile(TileID.DemonAltar)
             .Register();

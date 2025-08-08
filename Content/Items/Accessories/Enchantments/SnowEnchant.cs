@@ -35,31 +35,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.EskimoHood)
-            .AddIngredient(ItemID.EskimoCoat)
-            .AddIngredient(ItemID.EskimoPants)
-            //hand warmer
-            //fruitcake chakram
-            .AddIngredient(ItemID.IceBoomerang)
-            .AddIngredient(ItemID.FrostMinnow)
-            .AddIngredient(ItemID.AtlanticCod)
-
-            .AddTile(TileID.DemonAltar)
-            .Register();
-
-            CreateRecipe()
-
-            .AddIngredient(ItemID.EskimoHood)
-            .AddIngredient(ItemID.EskimoCoat)
-            .AddIngredient(ItemID.EskimoPants)
-            //hand warmer
-            //fruitcake chakram
+            .AddRecipeGroup("FargowiltasSouls:AnySnowHood")
+            .AddRecipeGroup("FargowiltasSouls:AnySnowCoat")
+            .AddRecipeGroup("FargowiltasSouls:AnySnowPants")
             .AddIngredient(ItemID.IceBlade)
             .AddIngredient(ItemID.FrostMinnow)
-            .AddIngredient(ItemID.AtlanticCod)
+            .AddIngredient(ItemID.Penguin)
 
             .AddTile(TileID.DemonAltar)
             .Register();
+
+            //CreateRecipe()
+
+            //.AddIngredient(ItemID.EskimoHood)
+            //.AddIngredient(ItemID.EskimoCoat)
+            //.AddIngredient(ItemID.EskimoPants)
+            ////hand warmer
+            ////fruitcake chakram
+            //.AddIngredient(ItemID.IceBlade)
+            //.AddIngredient(ItemID.FrostMinnow)
+            //.AddIngredient(ItemID.AtlanticCod)
+
+            //.AddTile(TileID.DemonAltar)
+            //.Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

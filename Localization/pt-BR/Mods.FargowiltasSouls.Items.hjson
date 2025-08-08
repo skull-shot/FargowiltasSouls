@@ -668,7 +668,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback
+		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
@@ -3076,9 +3076,9 @@ AnglerEnchant: {
 	// DisplayName: Angler Enchantment
 	/* Tooltip:
 		'''
-		Increases fishing power
-		You catch fish almost instantly
-		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
+		Increases fishing power and you catch fish almost instantly
+		Fishing line will never break and decreases chance of bait consumption
+		Increases fishing power by 20, allows fishing in lava
 		'As long as they aren't all shoes, you can go home happily'
 		''' */
 }
@@ -3700,5 +3700,29 @@ TrojanMask: {
 
 WillMask: {
 	// DisplayName: Will Champion Mask
+	// Tooltip: ""
+}
+
+HallowedPendant: {
+	// DisplayName: Hallowed Pendant
+	/* Tooltip:
+		'''
+		Increases length of invincibility after taking damage
+		After taking damage, fires a ray of light at up to 4 nearby enemies
+		''' */
+}
+
+MoltenShield: {
+	// DisplayName: Devilshield
+	/* Tooltip:
+		'''
+		Grants immunity to knockback
+		Reduces damage taken by 20% when at full life, or below 50% life
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		''' */
+}
+
+Devilstone: {
+	// DisplayName: Devilstone
 	// Tooltip: ""
 }

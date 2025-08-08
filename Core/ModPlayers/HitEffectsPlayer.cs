@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -496,7 +497,33 @@ namespace FargowiltasSouls.Core.ModPlayers
                 };
             }
         }
-
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            if (SupersonicDodge)
+            {
+                if (Player.brainOfConfusionItem != null)
+                {
+                    Player.brainOfConfusionItem = null;
+                }
+                if (Player.blackBelt) // no stack, instead increase chance
+                {
+                    Player.blackBelt = false;
+                }
+                int denom = 6;
+                if (Main.rand.NextBool(denom))
+                {
+                    Player.SetImmuneTimeForAllTypes(Player.longInvince ? 120 : 80);
+                    if (Player.whoAmI == Main.myPlayer)
+                    {
+                        NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
+                    }
+                    if (Player.HasEffect<HallowedPendantEffect>())
+                        HallowedPendantEffect.PendantRays(Player, 2222, 1200);
+                    return true;
+                }
+            }
+            return base.FreeDodge(info);
+        }
         public override void OnHurt(Player.HurtInfo info)
         {
             Player player = Main.player[Main.myPlayer];

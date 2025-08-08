@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.defense = 4;
+            //Item.defense = 4;
         }
         public static readonly Color ItemColor = new(255, 111, 6);
         protected override Color? nameColor => ItemColor;
@@ -41,17 +41,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.yoyoGlove = true;
             player.yoyoString = true;
 
-            //celestial shell
-            player.wolfAcc = true;
-            player.accMerman = true;
-
-            if (hideVisual)
-            {
-                player.hideMerman = true;
-                player.hideWolf = true;
-            }
-
-            player.lifeRegen += 2;
         }
 
         public override void AddRecipes()
@@ -59,11 +48,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             CreateRecipe()
 
             .AddIngredient(ItemID.WarriorEmblem)
-            .AddIngredient(ItemID.StingerNecklace)
-            .AddIngredient(ItemID.YoyoBag)
             .AddIngredient(ItemID.FireGauntlet)
-            .AddIngredient(ItemID.BerserkerGlove)
-            .AddIngredient(ItemID.CelestialShell)
+            .AddIngredient(ItemID.YoyoBag)
+            .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
 
             .AddIngredient(ItemID.KOCannon)
             .AddIngredient(ItemID.IceSickle)

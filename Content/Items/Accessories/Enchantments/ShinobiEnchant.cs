@@ -44,8 +44,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MonkAltShirt)
             .AddIngredient(ItemID.MonkAltPants)
             .AddIngredient<MonkEnchant>()
+            .AddIngredient(ItemID.DD2LightningAuraT3Popper)
             .AddIngredient(ItemID.ChainGuillotines)
-            .AddIngredient(ItemID.PsychoKnife)
+            //.AddIngredient(ItemID.PsychoKnife)
             //code 2
             //flower pow
             //stynger

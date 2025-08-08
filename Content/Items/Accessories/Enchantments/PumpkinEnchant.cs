@@ -37,9 +37,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PumpkinHelmet)
                 .AddIngredient(ItemID.PumpkinBreastplate)
                 .AddIngredient(ItemID.PumpkinLeggings)
+                .AddIngredient(ItemID.PumpkinPie)
                 .AddIngredient(ItemID.MolotovCocktail, 50)
                 .AddIngredient(ItemID.Sickle)
-                .AddIngredient(ItemID.PumpkinPie)
 
             .AddTile(TileID.DemonAltar)
             .Register();

@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             base.SetDefaults();
 
-            Item.rare = ItemRarityID.Cyan;
+            Item.rare = ItemRarityID.Yellow;
             Item.value = 250000;
         }
 
@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.HuntressAltShirt)
             .AddIngredient(ItemID.HuntressAltPants)
             .AddIngredient(null, "HuntressEnchant")
-            .AddIngredient(ItemID.Marrow)
+            .AddIngredient(ItemID.DD2ExplosiveTrapT3Popper)
             .AddIngredient(ItemID.DD2BetsyBow)
 
             .AddTile(TileID.CrystalBall)

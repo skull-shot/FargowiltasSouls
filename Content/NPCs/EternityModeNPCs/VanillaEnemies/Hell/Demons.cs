@@ -1,12 +1,20 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
+using log4net.Core;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 {
@@ -19,44 +27,264 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         );
 
         public int Counter;
-
+        public float Angle;
+        public List<int> DevilDemons = [];
+        public override void SetDefaults(NPC npc)
+        {
+            if (HellEnemies.HellBuffActive)
+            {
+                if (npc.type == NPCID.RedDevil)
+                {
+                    npc.lifeMax = 2200;
+                }
+                else
+                {
+                    npc.lifeMax = 550;
+                }
+            }
+        }
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write(Angle);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            Angle = binaryReader.ReadSingle();
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
 
-            int hordeAmt = Main.rand.Next(5) + 1;
-
-            if (npc.type == NPCID.RedDevil)
+            if (HellEnemies.HellBuffActive)
             {
-                hordeAmt = 2;
-            }
-
-            if (Main.hardMode && Main.rand.NextBool(4) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, hordeAmt);
-        }
-
-        public override void AI(NPC npc)
-        {
-            base.AI(npc);
-
-            if (npc.HasValidTarget)
-            {
-                npc.noTileCollide = !Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0);
-            }
-
-            if ((npc.type == NPCID.Demon && npc.ai[0] == 100f)
-                || (npc.type == NPCID.RedDevil && ++Counter > 300))
-            {
-                Counter = 0;
-
-                int t = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
-                if (t != -1 && npc.Distance(Main.player[t].Center) < 800 && FargoSoulsUtil.HostCheck)
+                if (npc.type == NPCID.RedDevil)
                 {
-                    int amount = npc.type == NPCID.RedDevil ? 9 : 6;
-                    int damage = FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, npc.type == NPCID.RedDevil ? 4f / 3 : 1);
-                    FargoSoulsUtil.XWay(amount, npc.GetSource_FromThis(), npc.Center, ProjectileID.DemonSickle, 1, damage, .5f);
+                    if (NPC.CountNPCS(NPCID.RedDevil) > 1)
+                    {
+                        npc.active = false;
+                        return;
+                    }
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int type = NPCID.Demon;
+                        for (int i = 0; i < 3; i++)
+                        {
+                            int j = NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X + npc.width / 2, (int)npc.Center.Y + npc.height / 2, type);
+                            if (j != Main.maxNPCs)
+                            {
+                                NPC newNPC = Main.npc[j];
+                                if (newNPC != null && newNPC.active)
+                                {
+                                    newNPC.velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 5f;
+                                    newNPC.FargoSouls().CanHordeSplit = false;
+                                    DevilDemons.Add(j);
+                                    /*
+                                    if (newNPC.TryGetGlobalNPC(out EModeNPCBehaviour globalNPC))
+                                    {
+                                        globalNPC.FirstTick = false;
+                                    }
+                                    */
+                                    if (Main.netMode == NetmodeID.Server)
+                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, j);
+                                }
+                            }
+                        }
+                    }
                 }
             }
+            else
+            {
+                int hordeAmt = Main.rand.Next(5) + 1;
+
+                if (npc.type == NPCID.RedDevil)
+                {
+                    hordeAmt = 2;
+                }
+
+                if (Main.hardMode && Main.rand.NextBool(4) && npc.FargoSouls().CanHordeSplit)
+                    EModeGlobalNPC.Horde(npc, hordeAmt);
+            }
+        }
+        public override bool SafePreAI(NPC npc)
+        {
+            bool lineOfSight = npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0);
+            if (npc.HasPlayerTarget && HellEnemies.HellBuffActive)
+            {
+                npc.noTileCollide = !lineOfSight;
+            }
+
+            if (HellEnemies.HellBuffActive)
+            {
+                if (npc.type == NPCID.Demon)
+                {
+                    NPC devil = Main.npc.FirstOrDefault(n => n.TypeAlive(NPCID.RedDevil) && n.GetGlobalNPC<Demons>().DevilDemons.Contains(npc.whoAmI));
+                    if (devil != null)
+                    {
+                        npc.target = devil.target;
+                        if (Counter < 0) // dash attack
+                        {
+                            if (!devil.HasPlayerTarget)
+                            {
+                                Counter = 0;
+                                npc.netUpdate = true;
+                            }
+                            Counter--;
+                            npc.knockBackResist = 0f;
+
+                            int timer = -Counter;
+
+                            int windupTime = 120;
+                            int chargeTime = 35 + 35;
+                            int endTime = 150;
+                            if (timer < windupTime) // windup
+                            {
+                                Vector2 angle = Main.player[devil.target].HorizontalDirectionTo(npc.Center) * Vector2.UnitX.RotatedBy(Angle);
+                                npc.spriteDirection = npc.direction = -angle.X.NonZeroSign();
+                                if (timer < windupTime - chargeTime)
+                                {
+                                    Vector2 windupPos = Main.player[devil.target].Center + angle * 250;
+                                    npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, 0.8f, 0.8f);
+                                }
+                                else if (timer == windupTime - chargeTime)
+                                {
+                                    npc.velocity *= 0;
+                                }
+                                else
+                                {
+                                    npc.velocity += npc.DirectionTo(Main.player[devil.target].Center) * 0.4f;
+                                    npc.noGravity = true;
+                                }
+                            }
+                            else if (timer < windupTime + endTime) // dash end
+                            {
+                                MoveToDevil();
+                            }
+                            else
+                            {
+                                Counter = 0;
+                                npc.netUpdate = true;
+                            }
+                        }
+                        else
+                        {
+                            npc.knockBackResist = 0.5f;
+                            MoveToDevil();
+                            
+                        }
+                        return false;
+                        void MoveToDevil()
+                        {
+                            npc.noGravity = false;
+                            Vector2 idlePosition = devil.Center;
+                            if (devil.HasPlayerTarget)
+                                idlePosition += devil.DirectionTo(Main.player[devil.target].Center) * 80;
+                            Vector2 toIdlePosition = idlePosition - npc.Center;
+                            float distance = toIdlePosition.Length();
+                            float speed = 16f;
+                            float inertia = 40f;
+                            toIdlePosition.Normalize();
+                            toIdlePosition *= speed;
+                            npc.velocity = (npc.velocity * (inertia - 1f) + toIdlePosition) / inertia;
+                            if (npc.velocity == Vector2.Zero)
+                            {
+
+                                npc.velocity.X = -0.15f;
+                                npc.velocity.Y = -0.05f;
+                            }
+                            npc.spriteDirection = npc.direction = npc.velocity.X.NonZeroSign();
+                        }
+                    }
+                }
+                else if (npc.type == NPCID.RedDevil)
+                {
+                    bool anyDemons = DevilDemons.Any(i => Main.npc[i].TypeAlive(NPCID.Demon));
+                    if (anyDemons) // phase 1: demons
+                    {
+                        npc.defense = npc.defDefense + 50;
+
+                        Counter++;
+                        int attackDelay = 60 * 3;
+                        if (Counter >= attackDelay && lineOfSight && npc.Distance(Main.player[npc.target].Center) < 900) // force a demon to do a dash attack
+                        {
+                            Counter = 0;
+                            var readyDemons = DevilDemons.Where(n => Main.npc[n].TypeAlive(NPCID.Demon) && Main.npc[n].GetGlobalNPC<Demons>().Counter == 0);
+                            if (readyDemons.Any())
+                            {
+                                int demonID = Main.rand.NextFromCollection(readyDemons.ToList());
+                                Demons demon = Main.npc[demonID].GetGlobalNPC<Demons>();
+                                demon.Counter = -1;
+                                demon.Angle = Main.rand.Next(-1, 2) * MathHelper.PiOver2 * 0.6f;
+                                Main.npc[demonID].netUpdate = true;
+                            }
+                        }
+                    }
+                    else // phase 2: no demons
+                    {
+                        npc.defense = npc.defDefense;
+
+                        int attackDelay = 60 * 4;
+                        int artilleryWindup = 70;
+                        int artilleryTelegraph = 40;
+                        npc.knockBackResist = 0.2f;
+                        Counter++;
+                        if (Counter > attackDelay && Counter < attackDelay + artilleryWindup)
+                        {
+                            npc.knockBackResist = 0f;
+                            Vector2 windupPos = Main.player[npc.target].Center + Vector2.UnitX * Main.player[npc.target].HorizontalDirectionTo(npc.Center) * 450;
+                            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, 0.8f, 0.8f);
+                            npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(Main.player[npc.target].Center).NonZeroSign();
+                            if (Counter > attackDelay + artilleryWindup - artilleryTelegraph)
+                            {
+                                // dust
+                                Vector2 vel = new Vector2(npc.direction, -1.7f) * 9;
+                                vel.X += Main.rand.NextFloat(-1, 1) * 1.4f;
+                                vel.Y -= Main.rand.NextFloat(0, 1) * 3.7f;
+                                vel *= 2;
+                                int d = Dust.NewDust(npc.Center + vel, 10, 10, DustID.Torch, vel.X, vel.Y);
+                                Main.dust[d].noGravity = true;
+                            }
+                            return false;
+                        }
+                        else if (Counter >= attackDelay + artilleryWindup)
+                        {
+                            Counter = 0;
+                            // fireballs
+                            SoundEngine.PlaySound(SoundID.Item20 with { Pitch = -0.25f }, npc.Center);
+                            npc.velocity.X = npc.direction * 3;
+                            npc.velocity.Y = 1.5f;
+                            if (FargoSoulsUtil.HostCheck)
+                            {
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    Vector2 vel = new Vector2(npc.direction, -1.7f) * 9;
+                                    vel.X += Main.rand.NextFloat(-1, 1) * 1.4f;
+                                    vel.Y -= Main.rand.NextFloat(0, 1) * 3.7f;
+                                    vel.X += (i - 1) * 5;
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center + vel * 2, vel, ModContent.ProjectileType<DemonFireball>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 1f);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if ((npc.type == NPCID.Demon && npc.ai[0] == 100f)
+                || (npc.type == NPCID.RedDevil && ++Counter > 300))
+                {
+                    Counter = 0;
+
+                    int t = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
+                    if (t != -1 && npc.Distance(Main.player[t].Center) < 800 && FargoSoulsUtil.HostCheck)
+                    {
+                        int amount = npc.type == NPCID.RedDevil ? 9 : 6;
+                        int damage = FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, npc.type == NPCID.RedDevil ? 4f / 3 : 1);
+                        FargoSoulsUtil.XWay(amount, npc.GetSource_FromThis(), npc.Center, ProjectileID.DemonSickle, 1, damage, .5f);
+                    }
+                }
+            }
+
+
 
             if (npc.type == NPCID.VoodooDemon) //can ignite itself to burn up its doll
             {
@@ -96,7 +324,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                             {
                                 for (int i = 0; i < 8; i++)
                                 {
-                                    int npcType = Main.rand.NextBool() ? NPCID.LeechHead : NPCID.TheHungryII; 
+                                    int npcType = Main.rand.NextBool() ? NPCID.LeechHead : NPCID.TheHungryII;
 
                                     FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, npcType,
                                         velocity: new Vector2(Main.rand.NextFloat(-5, 5) * 2, Main.rand.NextFloat(-5, 5) * 2));
@@ -107,12 +335,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                                     NPC.SpawnWOF(Main.player[npc.target].Center);
                                 }
                             }
-                                
+
 
                         }
                     }
                 }
             }
+            return base.SafePreAI(npc);
         }
 
         public override void UpdateLifeRegen(NPC npc, ref int damage)

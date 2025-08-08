@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Content.Items.Accessories;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Armor.Eternal;
@@ -192,12 +193,9 @@ namespace FargowiltasSouls.Core.Toggler
 
             player.SetToggleValue<BuilderEffect>(false);
 
-            player.SetToggleValue<DefenseStarEffect>(false);
-            player.SetToggleValue<DefenseBeeEffect>(false);
-
             player.SetToggleValue<SupersonicClimbing>(false);
 
-            player.SetToggleValue<TrawlerSporeSac>(false);
+            player.SetToggleValue<TrawlerFogEffect>(false);
 
 
             foreach (Toggle toggle in Toggles.Values.Where(toggle => toggle.Effect.Name.Contains("Pet")))

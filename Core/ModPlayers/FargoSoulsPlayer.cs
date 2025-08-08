@@ -260,6 +260,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (NoUsingItems > 0)
                 NoUsingItems--;
 
+            SupersonicDodge = false;
+
             //            Wood = false;
 
             WingTimeModifier = 1f;

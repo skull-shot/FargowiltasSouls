@@ -3771,3 +3771,27 @@ WillMask: {
 	DisplayName: 意志英灵面具
 	Tooltip: ""
 }
+
+HallowedPendant: {
+	// DisplayName: Hallowed Pendant
+	/* Tooltip:
+		'''
+		Increases length of invincibility after taking damage
+		After taking damage, fires a ray of light at up to 4 nearby enemies
+		''' */
+}
+
+MoltenShield: {
+	// DisplayName: Devilshield
+	/* Tooltip:
+		'''
+		Grants immunity to knockback
+		Reduces damage taken by 20% when at full life, or below 50% life
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		''' */
+}
+
+Devilstone: {
+	// DisplayName: Devilstone
+	// Tooltip: ""
+}

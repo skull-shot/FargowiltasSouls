@@ -1,6 +1,8 @@
 ﻿
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -184,14 +186,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(null, "UniverseSoul")
-            .AddIngredient(null, "DimensionSoul")
-            .AddIngredient(null, "TerrariaSoul")
-            .AddIngredient(null, "MasochistSoul")
+            .AddIngredient<UniverseSoul>()
+            .AddIngredient<DimensionSoul>()
+            .AddIngredient<TerrariaSoul>()
+            .AddIngredient<MasochistSoul>()
 
-            .AddIngredient(null, "EternalEnergy", 30)
+            .AddIngredient<EternalEnergy>(30)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
             .Register();
         }
@@ -211,7 +213,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             string[] startsWithFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.StartsWithFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
             string[] containsFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.ContainsFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is BaseSoul))
+            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is EternitySoul))
             {
                 foreach (Item item in recipe.requiredItem)
                 {
@@ -224,6 +226,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                     }
                 }
             }
+            
         }
     }
     public class EternityTin : AccessoryEffect

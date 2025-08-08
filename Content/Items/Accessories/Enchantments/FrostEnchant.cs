@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.FrostLeggings)
             .AddIngredient(ModContent.ItemType<SnowEnchant>())
             .AddIngredient(ItemID.Frostbrand)
-            .AddIngredient(ItemID.FrostStaff)
+            .AddIngredient(ItemID.IceBow)
             //frost staff
             //coolwhip
             //.AddIngredient(ItemID.BlizzardStaff);

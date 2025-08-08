@@ -10,7 +10,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.BoneSerpentHead);
 
         public int Counter;
-
+        public override void SetDefaults(NPC npc)
+        {
+            if (HellEnemies.HellBuffActive)
+            {
+                npc.lifeMax = 6000;
+            }
+        }
         public override void AI(NPC npc)
         {
             base.AI(npc);

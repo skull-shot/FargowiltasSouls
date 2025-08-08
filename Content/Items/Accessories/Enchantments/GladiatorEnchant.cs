@@ -50,9 +50,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.GladiatorHelmet)
                 .AddIngredient(ItemID.GladiatorBreastplate)
                 .AddIngredient(ItemID.GladiatorLeggings)
-                .AddIngredient(ItemID.Spear)
                 .AddIngredient(ItemID.Gladius)
-                .AddIngredient(ItemID.BoneJavelin, 300)
+                .AddIngredient(ItemID.Spear)
+                .AddIngredient(ItemID.Javelin, 300)
 
             .AddTile(TileID.DemonAltar)
             .Register();

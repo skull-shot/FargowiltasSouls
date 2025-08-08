@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -66,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            ColossusSoul.AddEffects(player, Item, 300, 0.2f, 8);
+            ColossusSoul.AddEffects(player, Item, 100, 0.2f, 10);
             SupersonicSoul.AddEffects(player, Item, hideVisual);
             FlightMasterySoul.AddEffects(player, Item);
             TrawlerSoul.AddEffects(player, Item, hideVisual);
@@ -77,14 +79,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(null, "ColossusSoul")
-            .AddIngredient(null, "SupersonicSoul")
-            .AddIngredient(null, "FlightMasterySoul")
-            .AddIngredient(null, "TrawlerSoul")
-            .AddIngredient(null, "WorldShaperSoul")
-            .AddIngredient(null, "AbomEnergy", 10)
+            .AddIngredient<ColossusSoul>()
+            .AddIngredient<SupersonicSoul>()
+            .AddIngredient<FlightMasterySoul>()
+            .AddIngredient<TrawlerSoul>()
+            .AddIngredient<WorldShaperSoul>()
+            .AddIngredient<AbomEnergy>(10)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
             .Register();
         }

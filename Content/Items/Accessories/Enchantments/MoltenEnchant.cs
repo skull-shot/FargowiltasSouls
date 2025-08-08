@@ -35,9 +35,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MoltenHelmet)
             .AddIngredient(ItemID.MoltenBreastplate)
             .AddIngredient(ItemID.MoltenGreaves)
-            //ashwood ench
             .AddIngredient(ItemID.MoltenFury)
-            .AddIngredient(ItemID.DemonsEye)
+            .AddIngredient(ItemID.FlarefinKoi)
+            .AddIngredient(ItemID.ShiningMoon)
 
             .AddTile(TileID.DemonAltar)
             .Register();

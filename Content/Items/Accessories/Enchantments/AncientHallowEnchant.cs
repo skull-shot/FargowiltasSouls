@@ -62,9 +62,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyAncientHallowHead")
                 .AddIngredient(ItemID.AncientHallowedPlateMail)
                 .AddIngredient(ItemID.AncientHallowedGreaves)
-                .AddIngredient(ItemID.RainbowRod)
                 .AddIngredient(ItemID.SwordWhip) //durendal
-                .AddIngredient(ItemID.HolyWater, 50)
+                .AddIngredient(ItemID.BouncingShield)
+                .AddIngredient(ItemID.MagicMissile)
                 .AddTile(TileID.CrystalBall)
                 .Register();
         }

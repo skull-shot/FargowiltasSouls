@@ -42,8 +42,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
             .AddIngredient(ItemID.BeetleLeggings)
             .AddIngredient(ItemID.BeetleWings)
-            .AddIngredient(ItemID.BeeWings)
-            .AddIngredient(ItemID.ButterflyWings)
+            .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
+            .AddIngredient(ItemID.Buggy)
             //.AddIngredient(ItemID.MothronWings);
             //breaker blade
             //amarok
@@ -129,7 +129,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             var modPlayer = player.FargoSouls();
             if (modPlayer.BeetleHitCD > 0 || modPlayer.Beetles <= 0)
                 return;
-            modPlayer.Beetles -= 2;
+            modPlayer.Beetles -= 3;
             if (modPlayer.Beetles < 0)
                 modPlayer.Beetles = 0;
             modPlayer.BeetleHitCD = 60 * 3;
