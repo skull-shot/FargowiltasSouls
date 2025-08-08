@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -38,12 +39,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AgitatingLensInstall>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return AgitatingLensEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class AgitatingLensEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<AgitatingLens>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => (int)(18 * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -52,13 +61,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 modPlayer.AgitatingLensCD = 0;
                 if ((Math.Abs(player.velocity.X) >= 5 || Math.Abs(player.velocity.Y) >= 5) && player.whoAmI == Main.myPlayer)
                 {
-                    if (modPlayer.SupremeDeathbringerFairy && modPlayer.IsDashingTimer > 0 || modPlayer.SpecialDash)
-                        return;
-                    int damage = 18;
-                    if (modPlayer.MasochistSoul)
-                        damage *= 2;
-                    damage = (int)(damage * player.ActualClassDamage(DamageClass.Magic));
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, player.velocity * 0.1f, ModContent.ProjectileType<BloodScytheFriendly>(), damage, 5f, player.whoAmI);
+                    if (!(modPlayer.SupremeDeathbringerFairy && (modPlayer.IsDashingTimer > 0 || modPlayer.SpecialDash)))
+                        Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, player.velocity * 0.1f, ModContent.ProjectileType<BloodScytheFriendly>(), BaseDamage(player), 5f, player.whoAmI);
                 }
             }
         }

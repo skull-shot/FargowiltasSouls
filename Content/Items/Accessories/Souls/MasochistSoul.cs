@@ -139,7 +139,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //corrupt heart
             fargoPlayer.DarkenedHeartItem = Item;
             //player.AddEffect<DarkenedHeartEaters>(Item);
-            player.hasMagiluminescence = true;
             if (fargoPlayer.DarkenedHeartCD > 0)
                 fargoPlayer.DarkenedHeartCD -= 2;
 

@@ -125,6 +125,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             }
             //ai156_blacklistedTargets.Clear();
 
+            if (Projectile.TryGetOwner(out Player owner))
+            {
+                Projectile.originalDamage = AncientHallowEnchant.BaseDamage(owner);
+            }
         }
         private void Position(Player player)
         {
@@ -247,14 +251,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             }
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (Projectile.TryGetOwner(out Player player))
-            {
-                if (player.ForceEffect<AncientHallowMinion>())
-                    modifiers.SourceDamage *= 600f / 350f;
-            }
-        }
+
         private void Reflect(Projectile sword)
         {
             Player player = Main.player[sword.owner];

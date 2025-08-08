@@ -51,6 +51,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddTile(TileID.DemonAltar)
                 .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return CactusEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
 
     public class CactusEffect : AccessoryEffect
@@ -86,16 +93,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CactusSpray(player, npc.Center);
         }
-
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.FargoSouls().ForceEffect<CactusEnchant>() ? 40 : 16);
         private static void CactusSpray(Player player, Vector2 position)
         {
-            int dmg = 16;
             int numNeedles = 8;
             int rangemult = 1;
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.ForceEffect<CactusEnchant>())
+            if (player.FargoSouls().ForceEffect<CactusEnchant>())
             {
-                dmg = 40;
                 numNeedles = 16;
                 rangemult = 2;
             }
@@ -103,7 +107,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             for (int i = 0; i < numNeedles; i++)
             {
                 int spread = (int)MathHelper.Lerp(0.9f, 4.5f, i);
-                int p = Projectile.NewProjectile(player.GetSource_EffectItem<CactusEffect>(), position, Vector2.UnitX.RotatedBy(spread + Main.rand.NextFloat(-0.2f, 0.2f)) * (4 + Main.rand.NextFloat(-0.5f, 0.5f)) * rangemult, ModContent.ProjectileType<CactusNeedle>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 5f);
+                int p = Projectile.NewProjectile(player.GetSource_EffectItem<CactusEffect>(), position, Vector2.UnitX.RotatedBy(spread + Main.rand.NextFloat(-0.2f, 0.2f)) * (4 + Main.rand.NextFloat(-0.5f, 0.5f)) * rangemult, ModContent.ProjectileType<CactusNeedle>(), BaseDamage(player), 5f);
                 if (p != Main.maxProjectiles)
                 {
                     Projectile proj = Main.projectile[p];

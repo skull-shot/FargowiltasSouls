@@ -52,12 +52,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(BeetleEffect.BaseDamage * Main.LocalPlayer.ActualClassDamage(DamageClass.Melee));
+        }
     }
 
     public class BeetleEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<BeetleEnchant>();
+        public static int BaseDamage => 35; //melee scaling handled by continuous projectile damage updating
         public override void PostUpdateEquips(Player player)
         {
             var modPlayer = player.FargoSouls();
@@ -75,10 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (spawnBeetles > 0 && player.whoAmI == Main.myPlayer)
             {
                 for (int i = 0; i < spawnBeetles; i++)
-                {
-                    int dmg = 35; //melee scaling handled by continuous projectile damage updating
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, beetle, dmg, 1f, player.whoAmI);
-                }
+                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, beetle, BaseDamage, 1f, player.whoAmI);
 
             }
             if (spawnBeetles < 0) // too many

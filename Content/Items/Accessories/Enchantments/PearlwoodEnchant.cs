@@ -44,10 +44,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return PearlwoodEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class PearlwoodEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
+        public static int BaseDamage(Player player) => (int)((player.FargoSouls().ForceEffect<PearlwoodEnchant>() ? 120 : 60) * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -135,10 +143,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.HasEffect<PearlwoodStarEffect>())
             {
-                int starDamage = 100;
-                if (modPlayer.ForceEffect<PearlwoodEnchant>())
-                    starDamage = 175;
-
                 SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, player.Center);
                 Vector2 vel = -Vector2.UnitY * 7;
                 int nearestNPCID = FargoSoulsUtil.FindClosestHostileNPC(player.Center, 1000, true, true);
@@ -148,7 +152,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     if (nearestNPC.Alive())
                         vel = player.DirectionTo(nearestNPC.Center) * 7;
                 }
-                Projectile.NewProjectile(player.GetSource_Misc("Pearlwood"), player.Center.X, player.Center.Y, vel.X, vel.Y, ProjectileID.FairyQueenMagicItemShot, starDamage, 0, player.whoAmI, 0f, 0);
+                Projectile.NewProjectile(player.GetSource_Misc("Pearlwood"), player.Center.X, player.Center.Y, vel.X, vel.Y, ProjectileID.FairyQueenMagicItemShot, BaseDamage(player), 0, player.whoAmI, 0f, 0);
             }
         }
     }

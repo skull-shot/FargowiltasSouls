@@ -321,6 +321,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
             PlatinumEffect = null;
+            CobaltEnchantActive = false;
             AncientShadowEnchantActive = false;
             SquireEnchantActive = false;
             ValhallaEnchantActive = false;
