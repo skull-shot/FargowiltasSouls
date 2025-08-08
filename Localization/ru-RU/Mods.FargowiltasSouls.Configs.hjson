@@ -207,3 +207,10 @@ RespawnPreventionSetting: {
 	Masochist.Label: Мазохист
 	Disabled.Label: Выключено
 }
+
+BalanceTooltipSetting: {
+	// Tooltip: ""
+	// All.Label: All
+	// Reworks.Label: Reworks and Mechanical Changes
+	// None.Label: None
+}
