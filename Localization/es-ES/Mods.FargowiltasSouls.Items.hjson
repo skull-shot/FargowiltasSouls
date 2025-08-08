@@ -376,7 +376,7 @@ NecroEnchant: {
 		Slain enemies may drop a pile of bones
 		Touch a bone pile to spawn a friendly Dungeon Guardian
 		Dungeon Guardian deals 25% of the slain enemies' max health, up to 10000 damage
-		Bosses will drop a bone pile every 10% of their health lost, dealing 2.5% of the bosses max HP
+		Bosses will drop a bone pile every 10% of their health lost, dealing 2.5% of the bosses max health
 		'Welcome to the bone zone'
 		''' */
 }
@@ -666,7 +666,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
+		Your attacks cause a shockwave with huge knockback
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
@@ -926,7 +926,7 @@ AgitatingLens: {
 	/* Tooltip:
 		'''
 		Grants immunity to non-self inflicted Berserked
-		While dashing or running quickly you will create a trail of demon scythes, dealing magic damage
+		While dashing or running quickly you will create a trail of demon scythes
 		Debuff Install berserks you, massively increasing movement and attack speed, massively lowering defenses, and you cannot stop attacking or moving
 		Berserk state lasts for 8 seconds and you are stunned for 2 seconds afterwards
 		'The irritable remnant of a defeated foe'
@@ -1026,7 +1026,7 @@ CelestialRune: {
 	/* Tooltip:
 		'''
 		Grants immunity to Marked for Death
-		You may periodically fire additional attacks depending on weapon type
+		Attacks are accompanied by additional projectiles, depending on current weapon class 
 		'A fallen enemy's spells, repurposed'
 		''' */
 }
@@ -1040,7 +1040,7 @@ ChaliceoftheMoon: {
 		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
-		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type
+		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
 		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side
 		'Always watching'
@@ -1063,7 +1063,7 @@ DarkenedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
-		Increased movement speed and increased turnaround traction
+		Increased movement speed and turnaround traction
 		Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Rotting
 		'Flies refuse to approach it'
 		''' */
@@ -1184,9 +1184,8 @@ GuttedHeart: {
 		Grants immunity to Bloodthirsty
 		10% increased max life
 		Creepers hover around you blocking some damage
-		A new Creeper appears every 25-15 seconds (faster the lower your health is), and 3 can exist at once
-		Creeper respawn speed increases when not moving
-		Creepers inflict Ichor on-hit
+		Creepers respawn faster the lower your health or while not moving, and 3 can exist at once
+		Creepers briefly inflict Ichor on-hit
 		'Once beating in the mind of a defeated foe'
 		''' */
 }
@@ -1250,11 +1249,10 @@ MutantAntibodies: {
 	// DisplayName: Mutant Antibodies
 	/* Tooltip:
 		'''
-		Grants immunity to Wet, Feral Bite, Mutant Nibble, and Oceanic Maul
-		Grants immunity to most debuffs caused by entering water
-		Grants effects of Wet debuff while riding Cute Fishron
+		Grants immunity to Wet, Feral Bite, Mutant Nibble, Oceanic Maul, and debuffs caused by entering water
 		Increases damage for your current weapon class by 20%, but decreases life regeneration
 		Submerging in water refreshes flight time and gives you improved speed and increased max flight time
+		Grants effects of Wet debuff while riding Cute Fishron
 		'Healthy drug recommended by 0 out of 10 doctors'
 		''' */
 }
@@ -1492,9 +1490,11 @@ SparklingAdoration: {
 	/* Tooltip:
 		'''
 		Grants immunity to Lovestruck and Fake Hearts
-		Graze attacks to gain up to x1.25 increased damage
-		Damage bonus decreases over time and is fully lost on hit
-		Your attacks periodically summon life-draining hearts, dealing magic damage
+		Creates a graze ring around the player
+		Enemy projectiles that touch the graze ring increase charge
+		Charge increases your damage by up to 1.25x
+		Charge decreases over time and is fully lost on hit
+		Your attacks periodically summon life-draining hearts
 		'With all of your emotion!'
 		''' */
 }
@@ -1518,7 +1518,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, create a trail of blood scythes
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
 		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
-		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily
+		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily but making movement uncontrollable
 		'Supremacy not necessarily guaranteed'
 		''' */
 }
@@ -1538,7 +1538,7 @@ WretchedPouch: {
 		'''
 		Grants immunity to Shadowflame
 		While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
-		Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
+		Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles
 		'The accursed incendiary powder of a defeated foe'
 		''' */
 }
@@ -1631,7 +1631,7 @@ DimensionSoul: {
 		[i:FargowiltasSouls/MoltenShield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
-		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] you release damaging fog at nearby enemies
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] [i:BoneHelm] you release damaging fog at nearby enemies
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
 		'The dimensions of Terraria at your fingertips'
@@ -1774,7 +1774,7 @@ TrawlerSoul: {
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
-		[i:3090] Slimes become friendly and [i:4987] [i:3336] you release damaging fog at nearby enemies
+		[i:3090] Slimes become friendly and [i:4987] [i:3336] [i:BoneHelm] you release damaging fog at nearby enemies
 		'Fish fear me'
 		''' */
 }
@@ -2942,7 +2942,7 @@ MasochistReal: {
 
 MedallionoftheFallenKing: {
 	// DisplayName: Medallion of the Fallen King
-	// Tooltip: Spawns a King Slime Minion that scales with summon damage
+	// Tooltip: Spawns a King Slime Minion
 }
 
 ComputationOrb: {
@@ -3015,7 +3015,7 @@ ParadoxWolfSoul: {
 	/* Tooltip:
 		'''
 		Double tap to dash through and damage enemies
-		There is a cooldown of 3 seconds between uses
+		3 second cooldown
 		''' */
 }
 

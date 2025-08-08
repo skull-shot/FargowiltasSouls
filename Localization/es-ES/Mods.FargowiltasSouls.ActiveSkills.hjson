@@ -29,7 +29,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
-		Fastfalling onto ground creates a massive flaming eruption that deals melee damage
+		Fastfalling onto ground creates a massive flaming eruption
 		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }
@@ -83,7 +83,7 @@ RemoteLightningEffect: {
 	// DisplayName: Lightning Strike
 	/* Tooltip:
 		'''
-		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		Rain lightning on the cursor, dealing massive damage to enemies and players
 		12 second cooldown
 		''' */
 }

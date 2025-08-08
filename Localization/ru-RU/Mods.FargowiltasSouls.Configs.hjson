@@ -17,8 +17,8 @@ ClientConfig: {
 	}
 
 	ItemBalanceTooltip: {
-		// Label: Balance Change Tooltips
-		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+		Label: Изменения хар-тик в описаниях предметов
+		Tooltip: Если включена, у предметов с любыми изменениями характеристик в описании будут строчки о них.
 	}
 
 	ToggleSearchReset: {

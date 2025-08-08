@@ -91,8 +91,8 @@ ForbiddenEffect: Запретный шторм
 TikiEffect: Миньоны тики
 SpiritTornadoEffect: Сжатый артефакт Духа
 CosmoHeader: "{$Mods.FargowiltasSouls.Items.CosmoForce.DisplayName}"
-MeteorMomentumEffect: Скорость метеора
-MeteorEffect: Метеоритный удар
+MeteorMomentumEffect: Магосвет
+MeteorEffect: Падающий метеорит
 MeteorTrailEffect: След из искр метеора
 NebulaEffect: Усилители туманности
 SolarEffect: Щит и рывок солнечной вспышки

@@ -668,7 +668,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
+		Your attacks cause a shockwave with huge knockback
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
@@ -1088,7 +1088,7 @@ DarkenedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
-		Increased movement speed and increased turnaround traction
+		Increased movement speed and turnaround traction
 		Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Rotting
 		'Flies refuse to approach it'
 		''' */
@@ -1215,9 +1215,8 @@ GuttedHeart: {
 		Grants immunity to Bloodthirsty
 		10% increased max life
 		Creepers hover around you blocking some damage
-		A new Creeper appears every 25-15 seconds (faster the lower your health is), and 3 can exist at once
-		Creeper respawn speed increases when not moving
-		Creepers inflict Ichor on-hit
+		Creepers respawn faster the lower your health or while not moving, and 3 can exist at once
+		Creepers briefly inflict Ichor on-hit
 		'Once beating in the mind of a defeated foe'
 		''' */
 }
