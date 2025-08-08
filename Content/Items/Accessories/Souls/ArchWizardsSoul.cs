@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.FargoSouls().MagicSoul = true;
             player.GetDamage(DamageClass.Magic) += .22f;
             player.GetCritChance(DamageClass.Magic) += 10;
-            player.statManaMax2 += 200;
+            player.statManaMax2 += 100;
             player.manaCost -= 0.2f;
             //accessorys
             player.manaFlower = true;

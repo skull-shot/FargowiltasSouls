@@ -862,7 +862,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Eternity)
                 Player.statManaMax2 = 999;
             else if (UniverseSoul)
-                Player.statManaMax2 += 300;
+                Player.statManaMax2 += 200;
 
             if (Player.HasEffect<CelestialRuneAttacks>() && AdditionalAttacksTimer > 0)
                 AdditionalAttacksTimer--;
