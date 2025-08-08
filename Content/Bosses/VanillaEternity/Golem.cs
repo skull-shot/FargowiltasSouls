@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -503,9 +504,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             //npc.scale += 0.5f;
         }
 
+        public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
+        {
+            if (SwordGlobalItem.CountsAsBroadsword(item)) // fix issue with true melee hit cooldown for Golem Fist
+                return false;
+            return base.CanBeHitByItem(npc, player, item);
+        }
+
         public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
         {
             if (ProjectileID.Sets.IsAWhip[projectile.type])
+                return false;
+            if (projectile.stopsDealingDamageAfterPenetrateHits) // fix issue with true melee hit cooldown for Golem Fist
                 return false;
 
             return base.CanBeHitByProjectile(npc, projectile);
