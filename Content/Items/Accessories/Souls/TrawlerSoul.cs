@@ -114,12 +114,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return TrawlerFogEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class TrawlerFogEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
         public override int ToggleItemType => ModContent.ItemType<TrawlerSoul>();
-        
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 136);
         public override void PostUpdateEquips(Player player)
         {
             if (Main.myPlayer != player.whoAmI)
@@ -130,7 +137,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             if (player.volatileGelatinCounter > 50)
             {
                 player.volatileGelatinCounter = 0;
-                int damage = 270;
                 float knockBack = 2f;
                 float num = 640f;
                 NPC npc = null;
@@ -152,7 +158,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                     Vector2 spawnPos = npc.Center + npc.DirectionTo(player.Center) * 120;
                     spawnPos += Main.rand.NextVector2Circular(160, 160);
 
-                    Projectile.NewProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<TrawlerFog>(), damage, knockBack, player.whoAmI, 0f, -1);
+                    Projectile.NewProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<TrawlerFog>(), BaseDamage(player), knockBack, player.whoAmI, 0f, -1);
                 }
             }
         }

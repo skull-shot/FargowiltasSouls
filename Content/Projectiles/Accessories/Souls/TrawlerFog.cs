@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public override string Texture => FargoSoulsUtil.EmptyTexture;
         public override void SetStaticDefaults()
         {
-            
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
         public static int Duration => 170;
         public override void SetDefaults()
@@ -44,6 +44,13 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public ref float Target => ref Projectile.ai[1];
         public ref float Timer => ref Projectile.ai[0];
         public override bool? CanDamage() => Projectile.Opacity > 0.2f ? null : false;
+        public override bool? CanCutTiles() => false;
+        public override bool? CanHitNPC(NPC target)
+        {
+            if (target.lifeMax <= 5 || target.CountsAsACritter || target.friendly)
+                return false;
+            else return base.CanHitNPC(target);
+        }
         public override void AI()
         {
             Timer++;
@@ -59,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             bool movement = false;
             if (Target < 0) // has no target
             {
-                NPC npc = Projectile.FindTargetWithinRange(450, true);
+                NPC npc = Projectile.FindTargetWithinRange(450, false);
                 if (npc != null && npc.Alive())
                 {
                     Target = npc.whoAmI;
@@ -80,12 +87,16 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             if (!movement)
                 Projectile.velocity *= 0.94f;
 
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Poisoned);
+            if (Main.rand.NextBool(6))
+            {
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PoisonStaff, Scale: 0.8f);
+                Main.dust[dust].noGravity = true;
+                Main.dust[dust].velocity *= 0.3f;
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-
             Vector2 auraPos = Projectile.Center;
             float radius = Projectile.width / 2;
             var target = Main.LocalPlayer;
