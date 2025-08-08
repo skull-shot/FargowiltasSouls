@@ -49,7 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.AddEffect<ShimmerImmunityEffect>(item);
 
             // molten shield
-            MoltenShield.ActiveEffects(Player, item);
+            Devilshield.ActiveEffects(Player, item);
 
             Player.noKnockback = true;
             Player.fireWalk = true;
@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient<MoltenShield>()
+            .AddIngredient<Devilshield>()
             .AddIngredient(ItemID.AnkhShield)
             .AddIngredient(ItemID.WormScarf)
             .AddIngredient(ItemID.CharmofMyths)

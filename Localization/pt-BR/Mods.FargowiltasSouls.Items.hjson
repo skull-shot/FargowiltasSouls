@@ -668,7 +668,7 @@ TungstenEnchant: {
 	/* Tooltip:
 		'''
 		Increases melee weapon size by 50% and whip range by 20%
-		Your attacks cause a shockwave with huge knockback, dealing 50% of the attack's damage
+		Your attacks cause a shockwave with huge knockback
 		2.5 second cooldown
 		'Bigger is always better'
 		''' */
@@ -3711,7 +3711,7 @@ HallowedPendant: {
 		''' */
 }
 
-MoltenShield: {
+Devilshield: {
 	// DisplayName: Devilshield
 	/* Tooltip:
 		'''

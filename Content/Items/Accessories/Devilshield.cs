@@ -18,10 +18,8 @@ using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Items.Accessories
 {
     //[AutoloadEquip(EquipType.Shield)]
-    public class MoltenShield : SoulsItem
+    public class Devilshield : SoulsItem
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
-
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
