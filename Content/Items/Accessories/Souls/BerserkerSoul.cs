@@ -52,16 +52,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.FireGauntlet)
             .AddIngredient(ItemID.YoyoBag)
             .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
-
-            .AddIngredient(ItemID.KOCannon)
-            .AddIngredient(ItemID.IceSickle)
+            //prehm weps
+            .AddIngredient(ItemID.Trimarang)
+            .AddRecipeGroup("FargowiltasSouls:BallOHurtOrTheRottedFork")
+            .AddRecipeGroup("FargowiltasSouls:AnyPhaseblade")
+            .AddIngredient(ItemID.HiveFive)
+            .AddIngredient(ItemID.DarkLance)
+            //hm weps
             .AddIngredient(ItemID.DripplerFlail)
-            .AddIngredient(ItemID.ScourgeoftheCorruptor)
-            .AddIngredient(ItemID.Kraken)
+            .AddIngredient(ItemID.LightDisc)
+            .AddRecipeGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives")
+            .AddIngredient(ItemID.Keybrand)
+            .AddIngredient(ItemID.TheEyeOfCthulhu)
             .AddIngredient(ItemID.Flairon)
-            .AddIngredient(ItemID.MonkStaffT3)
-            .AddIngredient(ItemID.NorthPole)
-            .AddIngredient(ItemID.Zenith)
+
+            //old recipe
+            //.AddIngredient(ItemID.KOCannon)
+            //.AddIngredient(ItemID.IceSickle)
+            //.AddIngredient(ItemID.DripplerFlail)
+            //.AddIngredient(ItemID.ScourgeoftheCorruptor)
+            //.AddIngredient(ItemID.Kraken)
+            //.AddIngredient(ItemID.Flairon)
+            //.AddIngredient(ItemID.MonkStaffT3)
+            //.AddIngredient(ItemID.NorthPole)
+            //.AddIngredient(ItemID.Zenith)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();

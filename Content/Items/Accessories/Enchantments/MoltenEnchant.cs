@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.MoltenGreaves)
             .AddIngredient(ItemID.MoltenFury)
             .AddIngredient(ItemID.FlarefinKoi)
-            .AddIngredient(ItemID.ShiningMoon)
+            .AddIngredient(ItemID.MagmaSnail)
 
             .AddTile(TileID.DemonAltar)
             .Register();

@@ -149,6 +149,18 @@ namespace FargowiltasSouls.Core.Systems
             //                ItemID.RedAdmiralButterfly, ItemID.SulphurButterfly, ItemID.TreeNymphButterfly, ItemID.UlyssesButterfly, ItemID.ZebraSwallowtailButterfly);
             //            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyButterfly", group);
 
+            //berserker soul
+            //Any evil orb melee
+            group = new RecipeGroup(() => ItemXOrY(ItemID.BallOHurt, ItemID.TheRottedFork), ItemID.BallOHurt, ItemID.TheRottedFork);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:BallOHurtOrTheRottedFork", group);
+            //phaseblades
+            group = new RecipeGroup(() => AnyItem("Phaseblade"), 
+                ItemID.RedPhasesaber, ItemID.BluePhaseblade, ItemID.GreenPhaseblade, ItemID.PurplePhaseblade, ItemID.WhitePhaseblade, ItemID.YellowPhaseblade);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyPhaseblade", group);
+            //dungeon biomechest melee
+            group = new RecipeGroup(() => ItemXOrY(ItemID.ScourgeoftheCorruptor, ItemID.VampireKnives), ItemID.ScourgeoftheCorruptor, ItemID.VampireKnives);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives", group);
+
             //vanilla squirrels
             group = new RecipeGroup(() => AnyItem(ItemID.Squirrel),
                 ItemID.Squirrel,
@@ -241,6 +253,11 @@ namespace FargowiltasSouls.Core.Systems
 
             group = new RecipeGroup(() => AnyItem("SentryAccessory"), ItemID.MonkBelt, ItemID.SquireShield, ItemID.HuntressBuckler, ItemID.ApprenticeScarf);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySentryAccessory", group);
+
+            group = new RecipeGroup(() => AnyItem("GemStaves"), 
+                ItemID.AmethystStaff, ItemID.TopazStaff, ItemID.SapphireStaff, ItemID.EmeraldStaff, 
+                ItemID.RubyStaff, ItemID.DiamondStaff, ItemID.AmberStaff);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyGemStaff", group);
         }
         public override void PostAddRecipes()
         {
