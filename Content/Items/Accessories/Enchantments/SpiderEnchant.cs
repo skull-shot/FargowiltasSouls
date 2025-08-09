@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -49,6 +50,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             .AddTile(TileID.CrystalBall)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return SpiderEnchantSpiderling.SpiderDamage(Main.LocalPlayer);
         }
     }
 

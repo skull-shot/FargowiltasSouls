@@ -29,7 +29,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
-		Fastfalling onto ground creates a massive flaming eruption that deals melee damage
+		Fastfalling onto ground creates a massive flaming eruption
 		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }
@@ -58,8 +58,19 @@ StardustEffect: {
 	// DisplayName: Stardust Stasis
 	/* Tooltip:
 		'''
-		Freezes time for a few seconds
+		Freezes time for 6 seconds
 		While time is frozen, your minions will continue to attack
+		90 second cooldown
+		''' */
+}
+
+CosmosMoonEffect: {
+	// DisplayName: Stardust Stasis
+	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/StardustEnchant] Freezes time for 6 seconds
+		While time is frozen, your minions will continue to attack
+		75 second cooldown
 		''' */
 }
 
@@ -72,7 +83,7 @@ RemoteLightningEffect: {
 	// DisplayName: Lightning Strike
 	/* Tooltip:
 		'''
-		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		Rain lightning on the cursor, dealing massive damage to enemies and players
 		12 second cooldown
 		''' */
 }
@@ -125,7 +136,7 @@ SpookyEffect: {
 	// DisplayName: Deathhunt Scythe
 	/* Tooltip:
 		'''
-		Spin a large lifestealing scythe around you, dealing melee and summon damage
+		Spin a large lifestealing scythe around yourself
 		Hitting an enemy inflicts Marked for Death for 6 seconds, causing them to take 1.15x damage
 		Hitting your summons causes them to fire a scythe at the closest enemy
 		12 second cooldown
@@ -136,11 +147,11 @@ ForbiddenEffect: {
 	// DisplayName: Forbidden Storm
 	/* Tooltip:
 		'''
-		Call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm empower it
+		Call an ancient storm to the cursor location
+		Projectiles shot through the storm empower it
 		When at full power, the storm is unleashed on the nearest enemy
 		Recast this skill to unleash the storm early
-		Touch the storm yourself to refresh your wing time
+		Touch the storm yourself to refresh your flight time
 		18 second cooldown
 		''' */
 }
@@ -149,8 +160,8 @@ SpiritTornadoEffect: {
 	// DisplayName: Spirit Tornado
 	/* Tooltip:
 		'''
-		Call an ancient tornado which deals magic and summon damage
-		The tornado tracks your mouse slightly
+		[i:FargowiltasSouls/ForbiddenEnchant] Call an ancient tornado to the cursor location
+		[i:FargowiltasSouls/AncientHallowEnchant] The tornado tracks your mouse slightly
 		Any projectiles shot through your tornado empower it
 		When at full power, the tornado is unleashed on the nearest enemy
 		Recast this skill to unleash the tornado early

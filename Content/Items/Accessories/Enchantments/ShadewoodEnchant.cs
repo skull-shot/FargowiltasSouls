@@ -4,7 +4,6 @@ using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -47,6 +46,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             .AddTile(TileID.DemonAltar)
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return ShadewoodEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class ShadewoodEffect : AccessoryEffect
@@ -96,23 +102,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             ShadewoodProc(player, target, projectile);
         }
+        public static int BaseDamage(Player player)
+        {
+            int dmg = 12;
+            if (player.FargoSouls().ForceEffect<ShadewoodEnchant>())
+                dmg *= 3;
+            if (player.HasEffect<TimberEffect>())
+                dmg = (int)(dmg * 2.4f);
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Melee));
+        }
         public static void ShadewoodProc(Player player, NPC target, Projectile projectile)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool forceEffect = modPlayer.ForceEffect<ShadewoodEnchant>();
-            int dmg = 12;
-
-            if (forceEffect)
-                dmg *= 3;
-            if (player.HasEffect<TimberEffect>())
-                dmg = (int)(dmg * 2.4f);
 
             if (target.HasBuff(ModContent.BuffType<SuperBleedBuff>()) && modPlayer.ShadewoodCD == 0 && (projectile == null || projectile.type != ModContent.ProjectileType<SuperBlood>()) && player.whoAmI == Main.myPlayer)
             {
                 modPlayer.ShadewoodCD = 40;
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile.NewProjectile(player.GetSource_Misc(""), target.Center.X, target.Center.Y - 20, 0f + Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5), ModContent.ProjectileType<SuperBlood>(), (int)(dmg * player.ActualClassDamage(DamageClass.Melee)), 0f, Main.myPlayer);
+                    Projectile.NewProjectile(player.GetSource_Misc(""), target.Center.X, target.Center.Y - 20, 0f + Main.rand.NextFloat(-5, 5), Main.rand.NextFloat(-5, 5), ModContent.ProjectileType<SuperBlood>(), BaseDamage(player), 0f, Main.myPlayer);
                 }
 
                 if (forceEffect)

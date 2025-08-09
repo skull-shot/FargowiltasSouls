@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -40,10 +41,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.noKnockback = true;
             ActiveEffects(player, Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return DreadShellEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class DreadShellEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<DreadShell>();
+        public static int BaseDamage(Player player) => (int)(300 * player.ActualClassDamage(DamageClass.Melee));
     }
 }

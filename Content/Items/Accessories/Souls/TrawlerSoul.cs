@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -41,11 +42,33 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.accFishFinder = true;
             Player.accLavaFishing = true;
 
-            //volatile gel
-            player.AddEffect<TrawlerGel>(item);
+            //royal gel
+            Player.npcTypeNoAggro[1] = true;
+            Player.npcTypeNoAggro[16] = true;
+            Player.npcTypeNoAggro[59] = true;
+            Player.npcTypeNoAggro[71] = true;
+            Player.npcTypeNoAggro[81] = true;
+            Player.npcTypeNoAggro[138] = true;
+            Player.npcTypeNoAggro[121] = true;
+            Player.npcTypeNoAggro[122] = true;
+            Player.npcTypeNoAggro[141] = true;
+            Player.npcTypeNoAggro[147] = true;
+            Player.npcTypeNoAggro[183] = true;
+            Player.npcTypeNoAggro[184] = true;
+            Player.npcTypeNoAggro[204] = true;
+            Player.npcTypeNoAggro[225] = true;
+            Player.npcTypeNoAggro[244] = true;
+            Player.npcTypeNoAggro[302] = true;
+            Player.npcTypeNoAggro[333] = true;
+            Player.npcTypeNoAggro[335] = true;
+            Player.npcTypeNoAggro[334] = true;
+            Player.npcTypeNoAggro[336] = true;
+            Player.npcTypeNoAggro[537] = true;
 
-            //spore sac
-            player.AddEffect<TrawlerSporeSac>(item);
+            //volatile gel
+            // spore sac
+            player.AddEffect<TrawlerFogEffect>(item);
+
 
             //arctic diving gear
             Player.arcticDivingGear = true;
@@ -56,12 +79,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             {
                 Lighting.AddLight((int)Player.Center.X / 16, (int)Player.Center.Y / 16, 0.2f, 0.8f, 0.9f);
             }
-
-            //sharkron balloon
-            player.AddEffect<TrawlerJump>(item);
-
-            Player.jumpBoost = true;
-            Player.noFallDmg = true;
 
             //celestial shell
             player.wolfAcc = true;
@@ -78,12 +95,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
             .AddIngredient(null, "AnglerEnchant")
-            .AddIngredient(ItemID.BalloonHorseshoeSharkron)
+            .AddIngredient(ItemID.CelestialShell)
             .AddIngredient(ItemID.ArcticDivingGear)
             .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
-            .AddIngredient(ItemID.CelestialShell)
+            .AddIngredient(ItemID.BoneHelm)
 
             .AddIngredient(ItemID.SittingDucksFishingRod)
             .AddIngredient(ItemID.GoldenFishingRod)
@@ -98,10 +115,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .Register();
         }
     }
-    public class TrawlerGel : AccessoryEffect
+    public class TrawlerFogEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
-        public override int ToggleItemType => ItemID.VolatileGelatin;
+        public override int ToggleItemType => ModContent.ItemType<TrawlerSoul>();
         
         public override void PostUpdateEquips(Player player)
         {
@@ -113,8 +130,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             if (player.volatileGelatinCounter > 50)
             {
                 player.volatileGelatinCounter = 0;
-                int damage = 65;
-                float knockBack = 7f;
+                int damage = 270;
+                float knockBack = 2f;
                 float num = 640f;
                 NPC npc = null;
                 for (int i = 0; i < 200; i++)
@@ -132,37 +149,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 }
                 if (npc != null)
                 {
-                    Vector2 vector = npc.Center - player.Center;
-                    vector = vector.SafeNormalize(Vector2.Zero) * 6f;
-                    vector.Y -= 2f;
-                    Projectile.NewProjectile(GetSource_EffectItem(player), player.Center.X, player.Center.Y, vector.X, vector.Y, ProjectileID.VolatileGelatinBall, damage, knockBack, player.whoAmI, 0f, 0f);
+                    Vector2 spawnPos = npc.Center + npc.DirectionTo(player.Center) * 120;
+                    spawnPos += Main.rand.NextVector2Circular(160, 160);
+
+                    Projectile.NewProjectile(GetSource_EffectItem(player), spawnPos, Vector2.Zero, ModContent.ProjectileType<TrawlerFog>(), damage, knockBack, player.whoAmI, 0f, -1);
                 }
             }
-        }
-    }
-    public class TrawlerSporeSac : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
-        public override int ToggleItemType => ItemID.SporeSac;
-        public override bool ExtraAttackEffect => true;
-        
-        public override void PostUpdateEquips(Player player)
-        {
-            if (player.whoAmI == Main.myPlayer)
-            {
-                player.sporeSac = true;
-                player.SporeSac(EffectItem(player));
-            }
-        }
-    }
-    public class TrawlerJump : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
-        public override int ToggleItemType => ModContent.ItemType<TrawlerSoul>();
-        public override void PostUpdateEquips(Player player)
-        {
-            if (player.wingTime == 0)
-                player.GetJumpState(ExtraJump.TsunamiInABottle).Enable();
         }
     }
 }

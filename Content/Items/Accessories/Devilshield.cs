@@ -18,10 +18,8 @@ using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Items.Accessories
 {
     //[AutoloadEquip(EquipType.Shield)]
-    public class MoltenShield : SoulsItem
+    public class Devilshield : SoulsItem
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
-
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -39,6 +37,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffects(player, Item);
+            player.noKnockback = true;
             if (player.statLife <= player.statLifeMax2 * 0.5 || player.statLife >= player.statLifeMax2)
             {
                 player.endurance += 0.20f;

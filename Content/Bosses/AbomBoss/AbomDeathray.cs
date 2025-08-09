@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
     public class AbomDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
-        public AbomDeathray() : base(120, 6000) { }
+        public AbomDeathray() : base(120, drawDistance: 6000) { }
         private Vector2 spawnPos;
         public bool fadeStart = false;
 

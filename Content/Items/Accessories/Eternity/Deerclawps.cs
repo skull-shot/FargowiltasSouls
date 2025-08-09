@@ -34,7 +34,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<DeerclawpsEffect>(Item);
             player.AddEffect<DeerclawpsDashDR>(Item);
         }
-
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return DeerclawpsEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class DeerclawpsDashDR : AccessoryEffect
     {
@@ -51,13 +57,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<Deerclawps>();
+        public static int BaseDamage(Player player) => (int)(24 * player.ActualClassDamage(DamageClass.Melee));
         public static void DeerclawpsAttack(Player player, Vector2 pos)
         {
             if (player.whoAmI == Main.myPlayer)
             {
                 Vector2 vel = 16f * -Vector2.UnitY.RotatedByRandom(MathHelper.ToRadians(30));
-
-                int dam = 24;
                 int type = ProjectileID.DeerclopsIceSpike;
                 float ai0 = -15f;
                 float ai1 = Main.rand.NextFloat(0.5f, 1f);
@@ -67,10 +72,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     //ai0 *= 2f;
                     //ai1 += 0.5f;
                 }
-                dam = (int)(dam * player.ActualClassDamage(DamageClass.Melee));
-
                 if (player.velocity.Y == 0 && player.timeSinceLastDashStarted % 2 == 0)
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dam, 4f, Main.myPlayer, ai0, ai1);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, BaseDamage(player), 4f, Main.myPlayer, ai0, ai1);
                 else
                 {
                     int npcID = FargoSoulsUtil.FindClosestHostileNPC(pos, 300, true, true);
@@ -81,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
                     if (player.timeSinceLastDashStarted % 2 == 0)
-                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dam, 4f, Main.myPlayer, ai0, ai1);
+                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, BaseDamage(player), 4f, Main.myPlayer, ai0, ai1);
                 }
                     
             }

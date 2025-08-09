@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -44,7 +45,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AmmoCycleEffect>(Item);
             player.buffImmune[BuffID.VortexDebuff] = true;
             player.AddEffect<UfoMinionEffect>(Item);
-
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(UfoMinionEffect.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
     }
     public class UfoMinionEffect : AccessoryEffect
@@ -52,6 +59,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<SaucerControlConsole>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player) => NPC.downedGolemBoss ? 30 : 15;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())

@@ -63,6 +63,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.MagicSummonHybrid;
+            tooltipColor = Color.Lerp(Color.Lerp(new(204, 45, 239), new(0, 80, 224), 0.5f), Color.LightGray, 0.3f);
+            scaling = null;
+            return ForbiddenEffect.BaseDamage(Main.LocalPlayer) * 2; //returns empowered storm damage
+        }
     }
     public class ForbiddenEffect : AccessoryEffect
     {
@@ -71,7 +78,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override bool ActiveSkill => true;
         public override bool MutantsPresenceAffects => true;
         public static int Cooldown(Player player) => player.ForceEffect<ForbiddenEffect>() ? 60 * 10 : 60 * 18;
-        public static float BaseDamage(Player player) => player.ForceEffect<ForbiddenEffect>() ? 30 : 20;
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<ForbiddenEffect>() ? 30 : 20) * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -200,9 +207,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     projectile2.netUpdate = true;
                 }
             }
-
-            int damage = (int)(BaseDamage(Player) * (1f + Player.GetDamage(DamageClass.Magic).Additive + Player.GetDamage(DamageClass.Summon).Additive - 2f));
-            Projectile.NewProjectile(Player.GetSource_EffectItem<ForbiddenEffect>(), mouse, Vector2.Zero, ModContent.ProjectileType<ForbiddenTornado>(), damage, 0f, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<ForbiddenEffect>(), mouse, Vector2.Zero, ModContent.ProjectileType<ForbiddenTornado>(), BaseDamage(Player), 0f, Main.myPlayer, 0f, 0f);
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {

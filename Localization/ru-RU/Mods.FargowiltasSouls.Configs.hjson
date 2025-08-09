@@ -17,8 +17,8 @@ ClientConfig: {
 	}
 
 	ItemBalanceTooltip: {
-		// Label: Balance Change Tooltips
-		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+		Label: Изменения хар-тик в описаниях предметов
+		Tooltip: Определяет, какие строки об изменениях оставить в описаниях предметов.
 	}
 
 	ToggleSearchReset: {
@@ -206,4 +206,11 @@ RespawnPreventionSetting: {
 	Eternity.Label: Вечность
 	Masochist.Label: Мазохист
 	Disabled.Label: Выключено
+}
+
+BalanceTooltipSetting: {
+	Tooltip: ""
+	All.Label: Все
+	Reworks.Label: Переработки
+	None.Label: Ничего
 }

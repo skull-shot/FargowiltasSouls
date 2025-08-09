@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -38,12 +39,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.endurance -= 0.2f;
             ActiveEffects(player, Item, true);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return PungentMinion.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class PungentMinion : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<SkullCharm>();
         public override bool MinionEffect => true;
+        public static int BaseDamage (Player player) => 20;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasEffect<LithosphericEffect>())

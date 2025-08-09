@@ -16,6 +16,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
@@ -62,6 +63,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .Register();
 
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return SolarFlareEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
 
     public class SolarFlareEffect : AccessoryEffect
@@ -69,6 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<SolarEnchant>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SolarFlareEffect>() ? 6400 : 3200) * player.ActualClassDamage(DamageClass.Melee));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

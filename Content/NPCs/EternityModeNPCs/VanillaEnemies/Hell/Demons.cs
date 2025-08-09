@@ -35,11 +35,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
             {
                 if (npc.type == NPCID.RedDevil)
                 {
-                    npc.lifeMax = 3000;
+                    npc.lifeMax = 2200;
                 }
                 else
                 {
-                    npc.lifeMax = 700;
+                    npc.lifeMax = 550;
                 }
             }
         }
@@ -250,8 +250,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                             Counter = 0;
                             // fireballs
                             SoundEngine.PlaySound(SoundID.Item20 with { Pitch = -0.25f }, npc.Center);
-                            npc.velocity.X -= npc.direction * 4;
-                            npc.velocity.Y += 3;
+                            npc.velocity.X = npc.direction * 3;
+                            npc.velocity.Y = 1.5f;
                             if (FargoSoulsUtil.HostCheck)
                             {
                                 for (int i = 0; i < 3; i++)

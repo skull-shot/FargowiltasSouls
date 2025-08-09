@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.Generic;
             Projectile.timeLeft = 180 * (Projectile.extraUpdates + 1);
             Projectile.tileCollide = true;
 
@@ -60,7 +60,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 Main.dust[index2].noGravity = true;
             }
         }
-
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DisableCrit();
+        }
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item8, Projectile.position);

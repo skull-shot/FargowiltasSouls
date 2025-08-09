@@ -93,16 +93,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //ninja gear
             if (Player.AddEffect<SupersonicTabi>(item))
                 Player.dashType = 1;
+
             if (Player.AddEffect<SupersonicClimbing>(item))
-            {
                 Player.spikedBoots = 2;
-            }
+
             player.AddEffect<SupersonicDodge>(item);
 
             if (Player.AddEffect<SupersonicPanic>(item))
-            {
                 Player.panic = true;
-            }
 
             // hallowed pendant
             HallowedPendant.ActiveEffects(Player, item);

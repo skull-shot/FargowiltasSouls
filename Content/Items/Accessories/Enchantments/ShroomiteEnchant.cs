@@ -54,6 +54,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddTile(TileID.CrystalBall)
             .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Ranged) / (player.ForceEffect<ShroomiteShroomEffect>() ? 2.5 : 4));
+            if (scaling < 0)
+                scaling = 0;
+
+            if (scaling > 75)
+                scaling = (150 + scaling) / 3;
+
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return player.ForceEffect<ShroomiteShroomEffect>() ? 40 : 25;
+        }
     }
     public class ShroomiteHealEffect : AccessoryEffect
     {

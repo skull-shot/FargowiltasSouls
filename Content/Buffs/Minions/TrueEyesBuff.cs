@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -23,16 +24,14 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 
             if (player.whoAmI == Main.myPlayer)
             {
-                const int damage = 60;
-
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<TrueEyeL>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeL>(), damage, 3f, player.whoAmI, -1f);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeL>(), MasoTrueEyeMinion.BaseDamage(player), 3f, player.whoAmI, -1f);
 
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<TrueEyeR>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeR>(), damage, 3f, player.whoAmI, -1f);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeR>(), MasoTrueEyeMinion.BaseDamage(player), 3f, player.whoAmI, -1f);
 
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<TrueEyeS>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeS>(), damage, 3f, player.whoAmI, -1f);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeS>(), MasoTrueEyeMinion.BaseDamage(player), 3f, player.whoAmI, -1f);
             }
         }
     }

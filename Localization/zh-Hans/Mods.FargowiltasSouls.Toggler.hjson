@@ -172,9 +172,6 @@ MiningSpelunk: 洞穴探险药水效果
 MiningShine: 光芒药水效果
 BuilderEffect: 建筑师模式
 ColossusHeader: "{$Mods.FargowiltasSouls.Items.ColossusSoul.DisplayName}"
-DefenseStarEffect: 受伤产生落星
-DefenseBrainEffect: 混乱之脑受伤效果
-DefenseBeeEffect: 受伤产生蜜蜂
 FleshKnuckleEffect: 血肉指虎仇恨
 PaladinShieldEffect: 圣骑士护盾
 FrozenTurtleEffect: 冰冻海龟壳
@@ -193,11 +190,10 @@ SupersonicRocketBoots: 超音速之魂火箭靴
 SupersonicCarpet: 超音速之魂飞毯
 CthulhuShield: 克苏鲁护盾
 // SupersonicDodge: Supersonic Dodge
+// HallowedPendantEffect: Rays On Hit
 SupersonicPanic: 受伤获得恐慌效果
 TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
-TrawlerSporeSac: 孢子囊
-TrawlerJump: 捕鱼之魂跳跃
-TrawlerGel: 挥发明胶
+// TrawlerFogEffect: Damaging Fog
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: 永恒之魂属性叠加
 PetHeader: 宠物

@@ -213,7 +213,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             string[] startsWithFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.StartsWithFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
             string[] containsFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.ContainsFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is BaseSoul))
+            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is EternitySoul))
             {
                 foreach (Item item in recipe.requiredItem)
                 {
@@ -226,6 +226,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                     }
                 }
             }
+            
         }
     }
     public class EternityTin : AccessoryEffect

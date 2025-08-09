@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.defense = 4;
+            //Item.defense = 4;
         }
         public static readonly Color ItemColor = new(255, 111, 6);
         protected override Color? nameColor => ItemColor;
@@ -41,7 +41,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.yoyoGlove = true;
             player.yoyoString = true;
 
-            player.lifeRegen += 2;
         }
 
         public override void AddRecipes()

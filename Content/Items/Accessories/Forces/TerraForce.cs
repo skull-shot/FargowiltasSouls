@@ -70,12 +70,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             recipe.AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"));
             recipe.Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return TerraLightningEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class TerraLightningEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        //public override int ToggleItemType => ModContent.ItemType<TerraForce>();
-        
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 900);
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -96,8 +102,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.TerraProcCD == 0 && player.HasEffect<CopperEffect>())
             {
-
-                int dmg = (int)(900 * damageMultiplier);
                 int cdLength = 300;
 
                 // cooldown scaling from 2x to 1x depending on how recently you got hurt
@@ -113,8 +117,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 Vector2 ai = target.Center - player.Center;
                 Vector2 velocity = Vector2.Normalize(ai) * 20;
 
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
+                FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), (int)(BaseDamage(player) * damageMultiplier), 0f, modPlayer.Player.whoAmI, ai.ToRotation());
                 float modifier = 1f;
                 if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {

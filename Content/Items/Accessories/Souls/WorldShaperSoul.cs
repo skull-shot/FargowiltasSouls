@@ -84,28 +84,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.autoPaint = true;
             //presserator
             Player.autoActuator = true;
-            //royal gel
-            Player.npcTypeNoAggro[1] = true;
-            Player.npcTypeNoAggro[16] = true;
-            Player.npcTypeNoAggro[59] = true;
-            Player.npcTypeNoAggro[71] = true;
-            Player.npcTypeNoAggro[81] = true;
-            Player.npcTypeNoAggro[138] = true;
-            Player.npcTypeNoAggro[121] = true;
-            Player.npcTypeNoAggro[122] = true;
-            Player.npcTypeNoAggro[141] = true;
-            Player.npcTypeNoAggro[147] = true;
-            Player.npcTypeNoAggro[183] = true;
-            Player.npcTypeNoAggro[184] = true;
-            Player.npcTypeNoAggro[204] = true;
-            Player.npcTypeNoAggro[225] = true;
-            Player.npcTypeNoAggro[244] = true;
-            Player.npcTypeNoAggro[302] = true;
-            Player.npcTypeNoAggro[333] = true;
-            Player.npcTypeNoAggro[335] = true;
-            Player.npcTypeNoAggro[334] = true;
-            Player.npcTypeNoAggro[336] = true;
-            Player.npcTypeNoAggro[537] = true;
 
             player.AddEffect<BuilderEffect>(item);
 

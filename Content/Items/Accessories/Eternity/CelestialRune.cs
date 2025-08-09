@@ -1,9 +1,9 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using System;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -36,6 +36,32 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<CelestialRuneAttacks>(Item);
           //player.AddEffect<CelestialRuneOnhit>(Item);
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            damageClass = GetRuneClassDamage(player);
+
+            int damage = (int)(CelestialRuneAttacks.BaseDamage(Main.LocalPlayer) * player.ActualClassDamage(damageClass));
+            if (damageClass == DamageClass.Summon)
+                damage /= (int)player.ActualClassDamage(DamageClass.Summon);
+            if (damageClass == DamageClass.Ranged || damageClass == DamageClass.Magic)
+                damage *= 2;
+
+            tooltipColor = null;
+            scaling = null;
+            return damage;
+        }
+        public static DamageClass GetRuneClassDamage(Player player)
+        {
+            DamageClass damageClass = DamageClass.Generic;
+            if (player.HeldItem.IsWeaponWithDamageClass() && (player.HeldItem.DamageType == DamageClass.Melee || player.HeldItem.DamageType == DamageClass.Ranged || player.HeldItem.DamageType == DamageClass.Magic || player.HeldItem.DamageType == DamageClass.Summon))
+                damageClass = player.HeldItem.DamageType;
+            if (player.HeldItem.DamageType == DamageClass.MeleeNoSpeed)
+                damageClass = DamageClass.Melee;
+            if (player.HeldItem.DamageType == DamageClass.SummonMeleeSpeed)
+                damageClass = DamageClass.Summon;
+            return damageClass;
+        }
     }
 
     public class CelestialRuneAttacks : AccessoryEffect
@@ -43,16 +69,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
         public override int ToggleItemType => ModContent.ItemType<CelestialRune>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => 50;
         public override void TryAdditionalAttacks(Player player, int damage, DamageClass damageType)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer && modPlayer.AdditionalAttacksTimer <= 0)
             {
                 modPlayer.AdditionalAttacksTimer = 100;
-
-                float projDamage = 50f;
-              //if (modPlayer.MoonChalice)
-              //    projDamage *= 1.5f;
 
                 Vector2 position = player.Center;
                 Vector2 velocity = Vector2.Normalize(Main.MouseWorld - position);
@@ -63,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     for (int i = 0; i < 3; i++)
                     {
                         Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(6f, 10f),
-                            ModContent.ProjectileType<CelestialRuneFireball>(), (int)(projDamage * player.ActualClassDamage(DamageClass.Melee)), 9f, player.whoAmI);
+                            ModContent.ProjectileType<CelestialRuneFireball>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Melee)), 9f, player.whoAmI);
                     }
                 }
                 if (damageType.CountsAsClass(DamageClass.Ranged)) //lightning
@@ -73,16 +96,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                         float ai1 = Main.rand.Next(100);
                         Vector2 vel = Vector2.Normalize(velocity.RotatedByRandom(Math.PI / 4)).RotatedBy(MathHelper.ToRadians(5) * i) * 7f;
                         Projectile.NewProjectile(GetSource_EffectItem(player), position, vel, ModContent.ProjectileType<CelestialRuneLightningArc>(),
-                            (int)(projDamage * player.ActualClassDamage(DamageClass.Ranged) * 2), 1f, player.whoAmI, velocity.ToRotation(), ai1);
+                            (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Ranged) * 2), 1f, player.whoAmI, velocity.ToRotation(), ai1);
                     }
                 }
                 if (damageType.CountsAsClass(DamageClass.Magic)) //ice mist
                 {
-                    Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(projDamage * player.ActualClassDamage(DamageClass.Magic) * 2), 4f, player.whoAmI);
+                    Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 2), 4f, player.whoAmI);
                 }
                 if (damageType.CountsAsClass(DamageClass.Summon)) //ancient vision
                 {
-                    FargoSoulsUtil.NewSummonProjectile(GetSource_EffectItem(player), position, velocity * 16f, ModContent.ProjectileType<CelestialRuneAncientVision>(), (int)projDamage, 3f, player.whoAmI);
+                    FargoSoulsUtil.NewSummonProjectile(GetSource_EffectItem(player), position, velocity * 16f, ModContent.ProjectileType<CelestialRuneAncientVision>(), (int)BaseDamage(player), 3f, player.whoAmI);
                 }
             }
         }
