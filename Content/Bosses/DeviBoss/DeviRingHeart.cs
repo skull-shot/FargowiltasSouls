@@ -11,6 +11,10 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override string Texture => "FargowiltasSouls/Content/Bosses/DeviBoss/DeviEnergyHeart";
 
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Type] = 5;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 30;
@@ -34,6 +38,14 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Projectile.alpha = 0;
             }
             Projectile.scale = 1f - Projectile.alpha / 255f;
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame++;
+                Projectile.frameCounter = 0;
+                if (Projectile.frame >= 5)
+                    Projectile.frame = 1;
+            }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
