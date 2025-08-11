@@ -132,6 +132,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         {
             target.AddBuff(BuffID.Poisoned, 240);
             target.AddBuff(BuffID.Venom, 240);
+            target.AddBuff(BuffID.Midas, 240);
         }
     }
 }

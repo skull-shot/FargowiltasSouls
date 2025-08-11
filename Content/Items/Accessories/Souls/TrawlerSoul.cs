@@ -89,6 +89,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 player.hideMerman = true;
                 player.hideWolf = true;
             }
+
+            //greedy ring
+            player.goldRing = true;
+            //player.hasLuckyCoin = true;
+            player.hasLuck_LuckyCoin = true;
+            player.discountEquipped = true;
         }
 
         public override void AddRecipes()
@@ -97,6 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(null, "AnglerEnchant")
             .AddIngredient(ItemID.CelestialShell)
             .AddIngredient(ItemID.ArcticDivingGear)
+            .AddIngredient(ItemID.GreedyRing)
             .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
