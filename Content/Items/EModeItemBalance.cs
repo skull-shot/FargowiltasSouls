@@ -705,13 +705,6 @@ namespace FargowiltasSouls.Content.Items
             {
                 ItemBalance(tooltips, EModeChange.Neutral, "ViolentPrefix");
             }
-            //else if (item.CountsAsClass(DamageClass.Summon))
-            //{
-            //    if (!(EModeGlobalProjectile.IgnoreMinionNerf.TryGetValue(item.shoot, out bool ignoreNerf) && ignoreNerf))
-            //        ItemBalance(tooltips, EModeChange.Nerf, "MinionStack");
-
-            //    ItemBalance(tooltips, EModeChange.Nerf, "SummonMulticlass");
-            //}
         }
     }
 }

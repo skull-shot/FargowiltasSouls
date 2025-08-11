@@ -19,8 +19,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-
-            EModeGlobalProjectile.IgnoreMinionNerf[Type] = true;
         }
 
         public override void SetDefaults()
