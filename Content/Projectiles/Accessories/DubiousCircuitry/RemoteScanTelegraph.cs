@@ -66,7 +66,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
 
         public override void OnKill(int timeLeft)
         {
-            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<RemoteLightning>(), Projectile.damage, 2f, Projectile.owner, Vector2.UnitY.ToRotation());
+            if (FargoSoulsUtil.HostCheck)
+                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, -Vector2.UnitY * 30, ModContent.ProjectileType<RemoteLightning>(), Projectile.damage, 2f, Projectile.owner, Vector2.UnitY.ToRotation());
         }
 
         public override bool PreDraw(ref Color lightColor)

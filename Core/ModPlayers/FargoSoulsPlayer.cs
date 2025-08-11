@@ -1015,7 +1015,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Supercharged)
             {
-                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f)
+                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f && !Main.gamePaused)
                 {
                     Vector2 dir = Main.rand.NextVector2Circular(20, 15);
                     Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, Color.Teal, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
@@ -1034,7 +1034,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (TwinsInstall)
             {
-                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f)
+                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f && !Main.gamePaused)
                 {
                     Vector2 dir = Main.rand.NextVector2Circular(20, 15);
                     Color color = Main.rand.NextFromList(Color.Green, Color.Yellow);

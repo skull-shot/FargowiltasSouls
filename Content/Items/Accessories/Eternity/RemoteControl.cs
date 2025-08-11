@@ -1,7 +1,12 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using System;
+using System.Collections.Generic;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -9,8 +14,6 @@ using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -58,27 +61,60 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => Header.GetHeader<DubiousHeader>();
         public override int ToggleItemType => ModContent.ItemType<RemoteControl>();
+        private static readonly int[] ElectricAttacks =
+        [
+            ProjectileID.DeathLaser,
+            ProjectileID.EyeLaser,
+            ProjectileID.PinkLaser,
+            ProjectileID.EyeBeam,
+            ProjectileID.MartianTurretBolt,
+            ProjectileID.BrainScramblerBolt,
+            ProjectileID.GigaZapperSpear,
+            ProjectileID.RayGunnerLaser,
+            ProjectileID.SaucerLaser,
+            ProjectileID.NebulaLaser,
+            ProjectileID.VortexVortexLightning,
+            ProjectileID.DD2LightningBugZap,
+            ProjectileID.EyeBeam,
+            ModContent.ProjectileType<RainExplosion>()
+        ];
+        public static bool ElectricAttack(Projectile projectile, Player player)
+        {
+            if (player.HasBuff<SuperchargedBuff>() || NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
+                return false;
+            if (projectile.ModProjectile == null)
+            {
+                if (projectile.aiStyle == ProjAIStyleID.MartianDeathRay || projectile.aiStyle == ProjAIStyleID.ThickLaser || projectile.aiStyle == ProjAIStyleID.LightningOrb || ElectricAttacks.Contains(projectile.type))
+                    return true;
+            }
+            else if (projectile.ModProjectile is BaseDeathray || ElectricAttacks.Contains(projectile.type))
+                return true;
+            else
+            {
+                string name = projectile.ModProjectile.Name.ToLower();
+                if (name.Contains("lightning") || name.Contains("electr") || name.Contains("thunder") || name.Contains("laser") || name.Contains("zap") || name.Contains("beam"))
+                    return true;
+            }
+            return false;
+        }
         public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
-            bool lightningskill = projectile.type == ModContent.ProjectileType<RemoteLightning>() || projectile.type == ModContent.ProjectileType<RemoteLightningExplosion>();
-            if (projectile.FargoSouls().electricAttack && player.whoAmI == Main.myPlayer && !player.HasBuff<SuperchargedBuff>() || lightningskill)
-            {
+            if (ElectricAttack(projectile, player) && player.whoAmI == Main.myPlayer)
                 dr = 0.5f;
-                int duration = projectile.originalDamage * 30;
+            modifiers.FinalDamage *= 1 - dr;
+        }
+        public override void OnHitByProjectile(Player player, Projectile proj, Player.HurtInfo hurtInfo)
+        {
+            if (ElectricAttack(proj, player) && player.whoAmI == Main.myPlayer)
+            {
+                int duration = hurtInfo.Damage * 30;
                 if (duration > 3600)
                     duration = 3600;
-                if (lightningskill)
-                {
-                    if (Main.masterMode) duration = 2700;
-                    else if (Main.expertMode) duration = 1800;
-                    else duration = 1200;
-                }
+                if (duration < 600)
+                    duration = 600;
                 player.AddBuff(ModContent.BuffType<SuperchargedBuff>(), duration);
-                SoundEngine.PlaySound(SoundID.NPCDeath6, player.Center);
-                SoundEngine.PlaySound(SoundID.Item92, player.Center);
-                SoundEngine.PlaySound(SoundID.Item14, player.Center);
-
+                SoundEngine.PlaySound(SoundID.Thunder, player.Center);
                 for (int i = 0; i < duration / 80; i++)
                 {
                     Vector2 dir = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) - player.velocity / 10;
@@ -87,8 +123,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     p.Spawn();
                 }
             }
-
-            modifiers.FinalDamage *= 1 - dr;
         }
     }
     public class ProbeMinionEffect : AccessoryEffect
@@ -98,7 +132,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override bool MinionEffect => true;
         public override void PostUpdateEquips(Player player)
         {
-            player.FargoSouls().Probes = true;
             if (player.whoAmI == Main.myPlayer && player.HasEffect<ProbeMinionEffect>() && player.FargoSouls().Supercharged)
             {
                 player.FargoSouls().Probes = true;
@@ -114,8 +147,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     }
                 }
             }
-            else
-                player.FargoSouls().Probes = false;
+            else player.FargoSouls().Probes = false;
         }
     }
     public class RemoteLightningEffect : AccessoryEffect
@@ -130,7 +162,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 return;
             if (player.FargoSouls().RemoteCD > 0)
                 return;
-            if (Main.myPlayer == player.whoAmI)
+            if (Main.myPlayer == player.whoAmI && FargoSoulsUtil.HostCheck)
             {
                 Vector2 pos = new(Main.MouseWorld.ToTileCoordinates().X * 16 + 8, player.Center.Y - 575);
                 float angle = MathHelper.Pi * 0.7f;

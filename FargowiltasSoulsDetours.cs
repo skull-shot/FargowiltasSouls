@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
@@ -56,6 +57,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot += InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
+            On_Projectile.IsDamageDodgable += IsDamageDodgable;
 
             On_Item.AffixName += AffixName;
 
@@ -84,6 +86,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot -= InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
+            On_Projectile.IsDamageDodgable -= IsDamageDodgable;
 
             On_Item.AffixName -= AffixName;
 
@@ -200,6 +203,13 @@ namespace FargowiltasSouls
                 extensionBox.Inflate(0, (int)(extensionBox.Height * 0.5f * (self.scale - 1)));
             }
             return ret;
+        }
+
+        public static bool IsDamageDodgable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
+        {
+            if (self.type == ModContent.ProjectileType<RemoteLightning>() || self.type == ModContent.ProjectileType<RemoteLightningExplosion>())
+                return false;
+            else return orig(self);
         }
 
         public static string AffixName(On_Item.orig_AffixName orig, Item self)

@@ -1,22 +1,22 @@
-﻿using FargowiltasSouls.Core.Systems;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using Fargowiltas.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.Localization;
-using Fargowiltas.Content.Buffs;
-using Terraria.GameContent.Events;
-using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -423,7 +423,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 else
                     Player.AddBuff(BuffID.Wet, 2);
 
-                LightningCounter++;
+                if (Main.IsItStorming && !Player.ZoneSnow && !Player.ZoneSandstorm)
+                    LightningCounter++;
 
                 int lighntningMinSeconds = WorldSavingSystem.MasochistModeReal ? 10 : 17;
                 if (LightningCounter >= LumUtils.SecondsToFrames(lighntningMinSeconds))

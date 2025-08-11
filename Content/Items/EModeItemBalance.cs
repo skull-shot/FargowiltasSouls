@@ -90,10 +90,16 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Nerf;
 
                 case ItemID.ZapinatorGray:
+                    balanceTextKeys = ["Zapinator", "SpaceGun"];
+                    return EModeChange.Nerf;
+
                 case ItemID.ZapinatorOrange:
                     balanceTextKeys = ["Zapinator"];
                     return EModeChange.Nerf;
 
+                case ItemID.SpaceGun:
+                    balanceTextKeys = ["SpaceGun"];
+                    return EModeChange.Nerf;
 
                 case ItemID.CoinGun:
                     balanceTextKeys = ["CoinGun"];

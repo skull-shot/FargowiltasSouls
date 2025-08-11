@@ -64,11 +64,19 @@ namespace FargowiltasSouls.Content.Items.Accessories
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return HallowedPendantEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class HallowedPendantEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
         public override int ToggleItemType => ModContent.ItemType<HallowedPendant>();
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 275);
         public override void PostUpdateEquips(Player player)
         {
             // onhit dodge
@@ -76,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
         public override void OnHitByEither(Player player, NPC npc, Projectile proj)
         {
             if (EffectItem(player).type == ModContent.ItemType<HallowedPendant>())
-                PendantRays(player, 450, 500);
+                PendantRays(player, BaseDamage(player), 500);
         }
         public static void PendantRays(Player player, int baseDamage, int maxDistance)
         {

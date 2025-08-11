@@ -50,7 +50,7 @@ ApprenticeEnchant: {
 	Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/5 as often as it would normally
+		The support weapon will fire 1/7 as often as it would normally
 		Consumables are consumed, mana is spent, and ammo is selected
 		'A long way to perfection'
 		'''
@@ -373,7 +373,7 @@ NecroEnchant: {
 	DisplayName: Necro Enchantment
 	Tooltip:
 		'''
-		Slain enemies may drop a pile of bones
+		Slain enemies drop a pile of bones
 		Touch a bone pile to spawn a friendly Dungeon Guardian
 		Dungeon Guardian deals 25% of the slain enemies' max health, up to 10000 damage
 		Bosses will drop a bone pile every 10% of their health lost, dealing 2.5% of the bosses max health
@@ -1490,7 +1490,7 @@ SparklingAdoration: {
 	Tooltip:
 		'''
 		Grants immunity to Lovestruck and Fake Hearts
-		Creates a graze ring around the player
+		Creates a graze ring around you
 		Enemy projectiles that touch the graze ring increase charge
 		Charge increases your damage by up to 1.25x
 		Charge decreases over time and is fully lost on hit
@@ -1752,7 +1752,8 @@ TrawlerSoul: {
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
-		[i:3090] Slimes become friendly and [i:4987] [i:3336] [i:BoneHelm] you release damaging fog at nearby enemies
+		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
+		[i:4987] [i:3336] [i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		'''
 }

@@ -36,8 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
             Projectile.penetrate = -1;
-
-            Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
         private Vector2 Aim = Vector2.Zero;
         private Vector2 AimDir = Vector2.Zero;
