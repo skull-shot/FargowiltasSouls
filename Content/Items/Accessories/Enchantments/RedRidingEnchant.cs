@@ -72,6 +72,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Item effectItem = player.EffectItem<RedRidingEffect>();
             Item firstAmmo = player.FindAmmo(AmmoID.Arrow);
+            if (firstAmmo.ammo != AmmoID.Arrow)
+                firstAmmo.SetDefaults(ItemID.VenomArrow);
             int arrowType = firstAmmo.shoot;
             int damage = firstAmmo.damage * (modPlayer.ForceEffect<RedRidingEnchant>() ? 5 : 3);
             int heatray = Projectile.NewProjectile(player.GetSource_Accessory(effectItem), player.Center, new Vector2(0, -6f), ProjectileID.HeatRay, 0, 0, Main.myPlayer);
