@@ -1,9 +1,6 @@
-using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -71,6 +68,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
     }
 
         public override bool? CanHitNPC(NPC target) => false;
+        public override bool? CanCutTiles() => false;
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;

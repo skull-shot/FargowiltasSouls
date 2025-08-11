@@ -27,15 +27,21 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
            => Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < projHitbox.Width * 0.9f / 2;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Electrified, 120);
+            target.AddBuff(BuffID.Electrified, 600);
+            Projectile.damage = (int)(Projectile.damage * 0.9);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Electrified, 120);
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DisableCrit();
+        }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= 0f;
+            //doing it like this bc scaled projectile damage doesnt work?
             if (Main.masterMode) modifiers.SourceDamage.Flat += 270;
             else if (Main.expertMode) modifiers.SourceDamage.Flat += 180;
             else modifiers.SourceDamage.Flat += 120;

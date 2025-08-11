@@ -62,7 +62,6 @@ namespace FargowiltasSouls.Content.Projectiles
         public float TungstenScale = 1;
         public bool TikiTagged;
         public int TikiTimer;
-        public bool electricAttack;
         public int spookyCD;
         public bool FrostFreeze;
         //        public bool SuperBee;
@@ -116,23 +115,6 @@ namespace FargowiltasSouls.Content.Projectiles
             ModContent.ProjectileType<GelicWingSpike>(),
             ModContent.ProjectileType<CreeperHitbox>(),
             ProjectileID.TinyEater
-        ];
-        private static List<int> ElectricAttacks =
-        [
-            ProjectileID.DeathLaser,
-            ProjectileID.EyeLaser,
-            ProjectileID.PinkLaser,
-            ProjectileID.EyeBeam,
-            ProjectileID.MartianTurretBolt,
-            ProjectileID.BrainScramblerBolt,
-            ProjectileID.GigaZapperSpear,
-            ProjectileID.RayGunnerLaser,
-            ProjectileID.SaucerLaser,
-            ProjectileID.NebulaLaser,
-            ProjectileID.VortexVortexLightning,
-            ProjectileID.DD2LightningBugZap,
-            ProjectileID.EyeBeam,
-            ModContent.ProjectileType<RainExplosion>()
         ];
 
         public override void SetStaticDefaults()
@@ -336,26 +318,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         modPlayer.NebulaEnchCD = 3 * 60;
                     }
                 }
-            }
-
-            if (player.HasEffect<RemoteControlDR>())
-            {
-                if (projectile.aiStyle == ProjAIStyleID.MartianDeathRay || projectile.aiStyle == ProjAIStyleID.ThickLaser || projectile.aiStyle == ProjAIStyleID.LightningOrb || ElectricAttacks.Contains(projectile.type))
-                {
-                    electricAttack = true;
-                }
-                else if (projectile.ModProjectile is BaseDeathray)
-                {
-                    electricAttack = true;
-                }
-                else
-                {
-                    string name = projectile.ModProjectile.Name.ToLower();
-                    if (name.Contains("lightning") || name.Contains("electr") || name.Contains("thunder") || name.Contains("laser") || name.Contains("zap") || name.Contains("beam"))
-                        electricAttack = true;
-                }
-                if (NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
-                    electricAttack = false;
             }
 
             switch (projectile.type)

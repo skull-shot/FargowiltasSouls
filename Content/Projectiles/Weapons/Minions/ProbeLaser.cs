@@ -1,10 +1,9 @@
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Audio;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 {
@@ -27,22 +26,23 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             AIType = ProjectileID.MiniRetinaLaser;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
-            Projectile.alpha = 255;
             Projectile.extraUpdates = 2;
-            Projectile.scale = 1.2f;
             Projectile.timeLeft = 600;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.tileCollide = false;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
         }
-
-        public override bool? CanCutTiles()
+        public override bool? CanCutTiles() => false;
+        public override bool PreAI()
         {
-            return false;
+            if (Projectile.ai[1] == 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item12 with {Volume = 0.5f}, Projectile.position);
+                Projectile.ai[1] = 1;
+            }
+            return base.PreAI();
         }
-
         public override void AI()
         {
             Lighting.AddLight(Projectile.Center, 0.56f, 0f, 0.35f);
