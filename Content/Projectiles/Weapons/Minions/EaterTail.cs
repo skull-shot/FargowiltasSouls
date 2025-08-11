@@ -16,8 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
-
-            EModeGlobalProjectile.IgnoreMinionNerf[Type] = true;
         }
 
         public override void SetDefaults()
