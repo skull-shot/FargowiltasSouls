@@ -12,10 +12,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class SparklingLoveEnergyHeart : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", Name);
+        public override string Texture => "FargowiltasSouls/Content/Bosses/DeviBoss/DeviEnergyHeart";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Energy Heart");
+            Main.projFrames[Type] = 5;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
@@ -52,6 +52,14 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
             float speed = Projectile.velocity.Length();
             speed += Projectile.ai[1];
             Projectile.velocity = Vector2.Normalize(Projectile.velocity) * speed;
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame++;
+                Projectile.frameCounter = 0;
+                if (Projectile.frame >= 5)
+                    Projectile.frame = 1;
+            }
         }
 
         public override void OnKill(int timeLeft)

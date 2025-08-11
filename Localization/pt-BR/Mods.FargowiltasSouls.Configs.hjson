@@ -17,8 +17,8 @@ ClientConfig: {
 	}
 
 	ItemBalanceTooltip: {
-		// Label: Balance Change Tooltips
-		// Tooltip: If true, items with any balance changes will have a tooltip line stating this.
+		// Label: Item Change Tooltips
+		// Tooltip: Determines which items with changed effects will have a tooltip line stating this.
 	}
 
 	ToggleSearchReset: {
@@ -206,4 +206,11 @@ RespawnPreventionSetting: {
 	// Eternity.Label: Eternity Mode
 	// Masochist.Label: Masochist Mode
 	// Disabled.Label: Disabled
+}
+
+BalanceTooltipSetting: {
+	// Tooltip: ""
+	// All.Label: All
+	// Reworks.Label: Reworks and Mechanical Changes
+	// None.Label: None
 }

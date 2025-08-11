@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Energy Heart");
+            Main.projFrames[Type] = 5;
         }
 
         public override void SetDefaults()
@@ -46,6 +46,14 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             {
                 Projectile.localAI[0] = 1;
                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1,3)), Projectile.Center);
+            }
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame++;
+                Projectile.frameCounter = 0;
+                if (Projectile.frame >= 5)
+                    Projectile.frame = 1;
             }
 
             // Fade into 50 alpha from 150

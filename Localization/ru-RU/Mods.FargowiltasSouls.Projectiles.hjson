@@ -809,15 +809,15 @@ RemoteProbe.DisplayName: Зонд дистанционного управлен�
 CorruptionSludge.DisplayName: Порченная слизь
 WillDashTrail.DisplayName: След от рывка
 MechElectricOrbTelegraphed.DisplayName: Электрическая сфера
-// DiabolistExplosion.DisplayName: Diabolist Explosion
-// FireEffect.DisplayName: Fire Effect
-// PigronBubble.DisplayName: Pigron Bubble
-// NymphHeart.DisplayName: Nymph Heart
-// SpiderEnchantSpiderling.DisplayName: Spiderling
-// AbomFlamePillar.DisplayName: Abom Flame Pillar
-// AbomFlamePillarMark.DisplayName: Abom Flame Pillar Mark
-// DemonFireball.DisplayName: Demon Fireball
-// ImpFireOrb.DisplayName: Imp Fire Orb
-// BatExplosion.DisplayName: Bat Explosion
-// HallowRay.DisplayName: Hallow Ray
-// TrawlerFog.DisplayName: Trawler Fog
+DiabolistExplosion.DisplayName: Взрыв сатаниста
+FireEffect.DisplayName: Эффект огня
+PigronBubble.DisplayName: Пузырь свинрона
+NymphHeart.DisplayName: Сердце Нимфы
+SpiderEnchantSpiderling.DisplayName: Паучок
+AbomFlamePillar.DisplayName: Огненный столп
+AbomFlamePillarMark.DisplayName: Абом Огонь Колонна Метка
+DemonFireball.DisplayName: Огненный шар демона
+ImpFireOrb.DisplayName: Большой огненный шар
+BatExplosion.DisplayName: Взрыв
+HallowRay.DisplayName: Святой луч
+TrawlerFog.DisplayName: Ядовитый туман
