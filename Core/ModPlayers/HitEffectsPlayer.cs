@@ -518,7 +518,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
                     }
                     if (Player.HasEffect<HallowedPendantEffect>())
-                        HallowedPendantEffect.PendantRays(Player, 2222, 1200);
+                        HallowedPendantEffect.PendantRays(Player, FargoSoulsUtil.HighestDamageTypeScaling(Player, 1111), 1200);
                     return true;
                 }
             }
