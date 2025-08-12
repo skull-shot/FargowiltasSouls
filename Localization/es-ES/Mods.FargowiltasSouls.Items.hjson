@@ -1774,7 +1774,8 @@ TrawlerSoul: {
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
-		[i:3090] Slimes become friendly and [i:4987] [i:3336] [i:BoneHelm] you release damaging fog at nearby enemies
+		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
+		[i:4987] [i:3336] [i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		''' */
 }
