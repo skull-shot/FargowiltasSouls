@@ -54,6 +54,12 @@ namespace FargowiltasSouls.Content.NPCs.Critters
             NPC.rarity = 1; //appears on lifeform analyzer
         }
 
+        public override void AI()
+        {
+            DrawOffsetY = -2;
+            base.AI();
+        }
+
         public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
