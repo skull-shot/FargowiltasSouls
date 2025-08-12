@@ -229,15 +229,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ItemID.PiranhaGun:
                     projectile.ContinuouslyUpdateDamageStats = true;
                     break;
-            }
 
-            /*if (FargoSoulsUtil.IsSummonDamage(projectile, true, false))
-            {
-                if (projectile.minion && !(IgnoreMinionNerf.TryGetValue(projectile.type, out bool ignoreNerf1) && ignoreNerf1))
-                    NerfDamageBasedOnProjTypeCount = projectile.type;
-                else if (sourceProj is Projectile && !(IgnoreMinionNerf.TryGetValue(sourceProj.type, out bool ignoreNerf2) && ignoreNerf2))
-                    NerfDamageBasedOnProjTypeCount = sourceProj.Eternity().NerfDamageBasedOnProjTypeCount;
-            }*/
+                default:
+                    break;
+            }
 
             switch (projectile.type)
             {
