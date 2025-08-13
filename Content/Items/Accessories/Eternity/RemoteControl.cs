@@ -89,8 +89,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     return true;
             }
             else if (projectile.ModProjectile is BaseDeathray || ElectricAttacks.Contains(projectile.type))
+            {
                 return true;
-            else
+            }
+            else if (projectile.ModProjectile != null)
             {
                 string name = projectile.ModProjectile.Name.ToLower();
                 if (name.Contains("lightning") || name.Contains("electr") || name.Contains("thunder") || name.Contains("laser") || name.Contains("zap") || name.Contains("beam"))
