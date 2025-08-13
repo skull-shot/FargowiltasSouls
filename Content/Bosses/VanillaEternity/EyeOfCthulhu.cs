@@ -11,6 +11,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -632,13 +633,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.alpha = 0;
             }
+            EModeUtils.DropSummon(npc, ItemID.SuspiciousLookingEye, NPC.downedBoss1, ref DroppedSummon);
 
-            // Drop summon
-            EModeUtils.DropSummon(npc, "SuspiciousEye", NPC.downedBoss1, ref DroppedSummon);
 
             return true;
         }
-
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

@@ -585,7 +585,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             //FargoSoulsUtil.PrintAI(npc);
 
-            EModeUtils.DropSummon(npc, "DeerThing2", NPC.downedDeerclops, ref DroppedSummon);
+            EModeUtils.DropSummon(npc, ItemID.DeerThing, NPC.downedDeerclops, ref DroppedSummon);
 
             return result;
         }

@@ -601,7 +601,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "CelestialSigil2", NPC.downedMoonlord, ref DroppedSummon, NPC.downedAncientCultist);
+            EModeUtils.DropSummon(npc, ItemID.CelestialSigil, NPC.downedMoonlord, ref DroppedSummon, NPC.downedAncientCultist);
 
             return result;
         }

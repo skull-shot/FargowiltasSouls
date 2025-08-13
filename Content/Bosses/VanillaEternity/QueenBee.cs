@@ -405,7 +405,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "Abeemination2", NPC.downedQueenBee, ref DroppedSummon);
+            EModeUtils.DropSummon(npc, ItemID.Abeemination, NPC.downedQueenBee, ref DroppedSummon);
 
             return MovementRework(npc, result);
         }

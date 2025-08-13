@@ -1,5 +1,7 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using Fargowiltas;
+using FargowiltasSouls.Core.Systems;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Common.Utilities
@@ -10,9 +12,17 @@ namespace FargowiltasSouls.Common.Utilities
         {
             if (WorldSavingSystem.EternityMode && prerequisite && !downed && FargoSoulsUtil.HostCheck && npc.HasPlayerTarget && !droppedSummonFlag)
             {
+                
                 Player player = Main.player[npc.target];
-
-                Item.NewItem(npc.GetSource_Loot(), player.Hitbox, itemType);
+                if (player.HasItem(itemType))
+                {
+                    player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[itemType] = true;
+                }
+                if (!player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[itemType])
+                {
+                    Item.NewItem(npc.GetSource_Loot(), player.Hitbox, itemType);
+                    player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[itemType] = true;
+                }
                 droppedSummonFlag = true;
             }
         }
@@ -22,9 +32,20 @@ namespace FargowiltasSouls.Common.Utilities
             if (WorldSavingSystem.EternityMode && prerequisite && !downed && FargoSoulsUtil.HostCheck && npc.HasPlayerTarget && !droppedSummonFlag)
             {
                 Player player = Main.player[npc.target];
-
-                if (ModContent.TryFind("Fargowiltas", itemName, out ModItem modItem))
-                    Item.NewItem(npc.GetSource_Loot(), player.Hitbox, modItem.Type);
+                int type = ModContent.TryFind("Fargowiltas", itemName, out ModItem modItem) ? modItem.Type : -1;
+                if (type >= 0)
+                {
+                    if (player.HasItem(type))
+                    {
+                        player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[type] = true;
+                    }
+                    if (!player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[type])
+                    {
+                        Item.NewItem(npc.GetSource_Loot(), player.Hitbox, type);
+                        player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[type] = true;
+                    }
+                    
+                }
                 droppedSummonFlag = true;
             }
         }

@@ -208,7 +208,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (StompTimer < 0)
                 StompTimer++;
 
-            EModeUtils.DropSummon(npc, "JellyCrystal", NPC.downedQueenSlime, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.QueenSlimeCrystal, NPC.downedQueenSlime, ref DroppedSummon, Main.hardMode);
             return false;
         }
         #region States

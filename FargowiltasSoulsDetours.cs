@@ -9,6 +9,7 @@ using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Hooking;
 using Microsoft.Xna.Framework;
@@ -69,7 +70,16 @@ namespace FargowiltasSouls
             On_Projectile.Damage += PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
+
+            On_NPC.SpawnOnPlayer += SetSpawnPlayer;
         }
+
+        private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
+        {
+            orig(plr, Type);
+
+        }
+
         public void UnloadDetours()
         {
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
@@ -98,6 +108,8 @@ namespace FargowiltasSouls
             On_Projectile.Damage -= PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
+
+            On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)

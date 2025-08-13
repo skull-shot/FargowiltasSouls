@@ -37,6 +37,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
@@ -418,11 +419,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (player.immune || player.hurtCooldowns[0] != 0 || player.hurtCooldowns[1] != 0)
                 playerInvulTriggered = true;
             //drop summon
-            if (WorldSavingSystem.EternityMode && WorldSavingSystem.DownedAbom && !WorldSavingSystem.DownedMutant && FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget && !droppedSummon)
+            if (WorldSavingSystem.EternityMode &&  NPC.HasPlayerTarget)
             {
-                Item.NewItem(NPC.GetSource_Loot(), player.Hitbox, ModContent.ItemType<MutantsCurse>());
-                droppedSummon = true;
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<MutantsCurse>(), WorldSavingSystem.DownedMutant, ref droppedSummon, WorldSavingSystem.downedAbom);
             }
+            
 
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && ++hyper > HyperMax + 1)
             {
