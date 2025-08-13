@@ -251,8 +251,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.active = false;
             }
 
-            EModeUtils.DropSummon(npc, "BetsyEgg", WorldSavingSystem.DownedBetsy, ref DroppedSummon, NPC.downedGolemBoss);
-
+            if (DD2Event.Ongoing)
+            {
+                EModeUtils.DropSummon(npc, "BetsyEgg", WorldSavingSystem.DownedBetsy, ref DroppedSummon, NPC.downedGolemBoss);
+            }
             return true;
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

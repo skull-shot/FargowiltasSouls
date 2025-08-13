@@ -1,5 +1,6 @@
 using Fargowiltas.Common.Configs;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corruption;
@@ -363,24 +364,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             //drop summon
-            if (npc.HasPlayerTarget && !DroppedSummon)
-            {
-                Player player = Main.player[npc.target];
+            //if (npc.HasPlayerTarget && !DroppedSummon)
+            //{
+            //    Player player = Main.player[npc.target];
 
-                //eater meme
-                if (!player.dead && player.FargoSouls().FreeEaterSummon)
-                {
-                    player.FargoSouls().FreeEaterSummon = false;
+            //    //eater meme
+            //    if (!player.dead && player.FargoSouls().FreeEaterSummon)
+            //    {
+            //        player.FargoSouls().FreeEaterSummon = false;
 
-                    if (!NPC.downedBoss2 && FargoSoulsUtil.HostCheck && ModContent.TryFind("Fargowiltas", "WormyFood", out ModItem modItem))
-                        Item.NewItem(npc.GetSource_Loot(), player.Hitbox, modItem.Type);
+            //        if (!NPC.downedBoss2 && FargoSoulsUtil.HostCheck && ModContent.TryFind("Fargowiltas", "WormyFood", out ModItem modItem))
+            //            Item.NewItem(npc.GetSource_Loot(), player.Hitbox, modItem.Type);
 
-                    DroppedSummon = true;
-                    SpecialCountdownTimer = 0;
-                    HaveSpawnDR = 180;
-                    npc.velocity.Y += 6;
-                }
-            }
+            //        DroppedSummon = true;
+            //        SpecialCountdownTimer = 0;
+            //        HaveSpawnDR = 180;
+            //        npc.velocity.Y += 6;
+            //    }
+            //}
+            EModeUtils.DropSummon(npc, ItemID.WormFood, NPC.downedBoss2, ref DroppedSummon);
 
             if (!ret) // default stuff that has to happen anyway
             {

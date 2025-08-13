@@ -1,4 +1,8 @@
+using Fargowiltas.Content.Items.Summons.Abom;
+using Fargowiltas.Content.Items.Summons.Mutant;
+using Fargowiltas.Content.Items.Summons.VanillaCopy;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Weapons;
 using FargowiltasSouls.Core.Systems;
@@ -199,6 +203,41 @@ namespace FargowiltasSouls.Content.Items
             base.GetHealMana(item, player, quickHeal, ref healValue);
         }
         */
+        public override bool ConsumeItem(Item item, Player player)
+        {
+            if ((item.type == ModContent.ItemType<SquirrelCoatofArms>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel]) ||
+                (item.type == ItemID.SuspiciousLookingEye && !NPC.downedBoss1) ||
+                (item.type == ItemID.SlimeCrown && !NPC.downedSlimeKing) ||
+                (item.type == ItemID.WormFood && !NPC.downedBoss2)||
+                (item.type == ItemID.BloodySpine && !NPC.downedBoss2)||
+                (item.type == ItemID.Abeemination && !NPC.downedQueenBee)||
+                (item.type == ModContent.ItemType<CoffinSummon>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])||
+                (item.type == ItemID.DeerThing && !NPC.downedDeerclops)||
+                (item.type == ModContent.ItemType<SuspiciousSkull>() && !NPC.downedBoss3)||
+                (item.type == ModContent.ItemType<DevisCurse>() && !WorldSavingSystem.downedDevi)||
+                (item.type == ModContent.ItemType<FleshyDoll>() && !Main.hardMode)||
+                (item.type == ItemID.QueenSlimeCrystal && !NPC.downedQueenSlime)||
+                (item.type == ModContent.ItemType<MechLure>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])||
+                (item.type == ItemID.MechanicalWorm && !NPC.downedMechBoss1)||
+                (item.type == ItemID.MechanicalEye && !NPC.downedMechBoss2)||
+                (item.type == ItemID.MechanicalSkull && !NPC.downedMechBoss3)||
+                (item.type == ModContent.ItemType<CrystallineEffigy>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight])||
+                (item.type == ModContent.ItemType<PlanterasFruit>() && !NPC.downedPlantBoss)||
+                (item.type == ModContent.ItemType<LihzahrdPowerCell2>() && !NPC.downedGolemBoss)||
+                (item.type == ModContent.ItemType<TruffleWorm2>() && !NPC.downedFishron)||
+                (item.type == ModContent.ItemType<PrismaticPrimrose>() && !NPC.downedEmpressOfLight)||
+                (item.type == ModContent.ItemType<CultistSummon>() && !NPC.downedAncientCultist)||
+                (item.type == ItemID.CelestialSigil && !NPC.downedMoonlord)||
+                (item.type == ModContent.ItemType<BetsyEgg>() && !WorldSavingSystem.downedBetsy)||
+                (item.type == ModContent.ItemType<AbomsCurse>() && !WorldSavingSystem.downedAbom)||
+                (item.type == ModContent.ItemType<MutantsCurse>() && !WorldSavingSystem.DownedMutant)||
+                (item.type == ItemID.MechdusaSummon && !NPC.downedMechBoss1 && !NPC.downedMechBoss2 && !NPC.downedMechBoss3))
+            {
+                return false;
+            }
+            
+            return base.ConsumeItem(item, player);
+        }
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
             if (!WorldSavingSystem.EternityMode)

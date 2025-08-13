@@ -792,7 +792,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "MechWorm", NPC.downedMechBoss1, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.MechanicalWorm, NPC.downedMechBoss1, ref DroppedSummon, Main.hardMode);
 
             return true;
         }

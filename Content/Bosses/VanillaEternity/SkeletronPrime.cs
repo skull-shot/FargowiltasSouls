@@ -398,7 +398,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.velocity += 0.1f * npc.SafeDirectionTo(Main.player[npc.target].Center);
             }
 
-            EModeUtils.DropSummon(npc, "MechSkull", NPC.downedMechBoss3, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.MechanicalSkull, NPC.downedMechBoss3, ref DroppedSummon, Main.hardMode);
 
             return result;
         }
