@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
         public static int CD => 60 * 15;
-        public static int BaseDamage(Player player) => (int)(400 * player.ActualClassDamage(DamageClass.Magic));
+        public static int BaseDamage(Player player) => (int)(330 * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
