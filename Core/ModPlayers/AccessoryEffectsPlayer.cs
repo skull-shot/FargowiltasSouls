@@ -395,17 +395,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 SpawnSphereRing(24, 12f, damage, -1f);
                 SpawnSphereRing(24, 12f, damage, 1f);
             }
-            else if (CirnoGraze)
-            {
-                Projectile cirnoBomb = Main.projectile.FirstOrDefault(p => p.active && p.friendly && p.owner == Player.whoAmI && p.type == ModContent.ProjectileType<CirnoBomb>());
-                if (cirnoBomb != null)
-                {
-                    cirnoBomb.ai[0] = 1;
-                    cirnoBomb.netUpdate = true;
-
-                    CirnoGrazeCounter = 0;
-                }
-            }
         }
 
         public void DebuffInstallKey()

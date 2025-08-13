@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<DiveEffect>(),
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
              AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 

@@ -371,8 +371,6 @@ namespace FargowiltasSouls.Core.Globals
 
                             if (fargoPlayer.DeviGraze)
                                 SparklingAdoration.OnGraze(fargoPlayer, npc.damage);
-                            if (fargoPlayer.CirnoGraze)
-                                IceQueensCrown.OnGraze(fargoPlayer, npc.damage);
                         }
                     }
                 }

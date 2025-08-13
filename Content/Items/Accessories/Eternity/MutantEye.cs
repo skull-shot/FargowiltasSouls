@@ -84,4 +84,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 fargoPlayer.AbomWandCD--;
         }
     }
+    public class BombKeyEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override bool ActiveSkill => true;
+        public override int ToggleItemType => ModContent.ItemType<MutantEye>();
+        public override void ActiveSkillJustPressed(Player player, bool stunned)
+        {
+            if (stunned)
+                return;
+            player.FargoSouls().BombKey();
+        }
+    }
 }

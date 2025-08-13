@@ -2,13 +2,16 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -21,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<BombKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<IceShieldEffect>()];
 
         public override void SetStaticDefaults()
         {
@@ -49,80 +52,68 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[BuffID.Frozen] = true;
-            fargoPlayer.IceQueensCrown = true;
-            if (player.AddEffect<IceQueenGraze>(item))
-            {
-                for (int i = 0; i < fargoPlayer.ActiveSkills.Length; i++)
-                {
-                    if (fargoPlayer.ActiveSkills[i] is BombKeyEffect) //only grant ring if skill is selected
-                    {
-                        fargoPlayer.Graze = true;
-                        fargoPlayer.CirnoGraze = true;
-                    }
-                }
-                player.AddEffect<BombKeyEffect>(item);
-            }
-            player.AddEffect<MasoGrazeRing>(item);
-                if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
-                    Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, Vector2.Zero, ModContent.ProjectileType<GrazeRing>(), 0, 0f, Main.myPlayer);
+            player.AddEffect<IceShieldEffect>(item);
         }
-
-        public const int CIRNO_GRAZE_THRESHOLD = 9999;
-        public const int CIRNO_GRAZE_MAX = CIRNO_GRAZE_THRESHOLD + 9 * 60;
-
-        public static void OnGraze(FargoSoulsPlayer fargoPlayer, int damage)
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
-            int damagecap = 400;
-            damage = Math.Clamp(damage, 0, damagecap);
-            fargoPlayer.CirnoGrazeCounter += damage;
-            if (fargoPlayer.CirnoGrazeCounter > CIRNO_GRAZE_MAX)
-                fargoPlayer.CirnoGrazeCounter = CIRNO_GRAZE_MAX;
-            if (fargoPlayer.CirnoGrazeCounter == CIRNO_GRAZE_MAX && fargoPlayer.Player.whoAmI == Main.myPlayer && fargoPlayer.Player.ownedProjectileCounts[ModContent.ProjectileType<CirnoBomb>()] < 1)
-            {
-                Projectile.NewProjectile(fargoPlayer.Player.GetSource_Misc(""), fargoPlayer.Player.Center, Vector2.Zero, ModContent.ProjectileType<CirnoBomb>(), 0, 0f, Main.myPlayer);
-            }
-
-            if (fargoPlayer.Player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("IceQueenCrownGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/IceQueensCrown").Value, Color.Cyan, () => (float)fargoPlayer.CirnoGrazeCounter / CIRNO_GRAZE_MAX, true, 0, () => fargoPlayer.CirnoGraze);
-
-            if (!Main.dedServ)
-            {
-                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/Graze") { Volume = 0.5f }, Main.LocalPlayer.Center);
-            }
-
-            Vector2 baseVel = Vector2.UnitX.RotatedByRandom(2 * Math.PI);
-            const int max = 64; //make some indicator dusts
-            bool capped = fargoPlayer.CirnoGrazeCounter > CIRNO_GRAZE_THRESHOLD;
-            for (int i = 0; i < max; i++)
-            {
-                Vector2 vector6 = baseVel * 3f;
-                vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + Main.LocalPlayer.Center;
-                Vector2 vector7 = vector6 - Main.LocalPlayer.Center;
-                //changes color when maxed
-                int d = Dust.NewDust(vector6 + vector7, 0, 0, capped ? DustID.IceTorch : 228, 0f, 0f, 0, default);
-                Main.dust[d].scale = capped ? 1f : 0.75f;
-                Main.dust[d].noGravity = true;
-                Main.dust[d].velocity = vector7;
-            }
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return IceShieldEffect.BaseDamage(Main.LocalPlayer);
         }
     }
-    public class IceQueenGraze : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
-        public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
-        public override bool MutantsPresenceAffects => true;
-
-    }
-    public class BombKeyEffect : AccessoryEffect
+    public class IceShieldEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
+        public static int CD => 60 * 15;
+        public static int BaseDamage(Player player) => (int)(400 * player.ActualClassDamage(DamageClass.Magic));
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.IceQueenCrownCD > 0)
+                modPlayer.IceQueenCrownCD--;
+        }
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)
                 return;
-            player.FargoSouls().BombKey();
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            // summon ice shield
+            if (player.whoAmI == Main.myPlayer && player.HasEffect<IceShieldEffect>())
+            {
+                int shield = ModContent.ProjectileType<IceShield>();
+                if (player.ownedProjectileCounts[shield] > 0)
+                    return;
+
+                if (modPlayer.IceQueenCrownCD <= 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item30, player.Center);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<IceShieldEffect>(), player.Center, Vector2.Zero, shield, BaseDamage(player), 1f, player.whoAmI);
+                    modPlayer.IceQueenCrownCD = CD;
+
+                    if (player.whoAmI == Main.myPlayer)
+                        CooldownBarManager.Activate("IceQueenCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/IceQueensCrown").Value, Color.LightBlue,
+                            () => 1f - (float)Main.LocalPlayer.FargoSouls().IceQueenCrownCD / CD, activeFunction: player.HasEffect<IceShieldEffect>);
+                }
+            }
+        }
+        public override void ActiveSkillHeld(Player player, bool stunned)
+        {
+           
+        }
+        public override void ActiveSkillJustReleased(Player player, bool stunned)
+        {
+            // shatter shield
+            foreach (Projectile proj in Main.projectile)
+            {
+                if (proj.TypeAlive<IceShield>() && proj.owner == player.whoAmI)
+                {
+                    proj.damage *= 3;
+                    proj.ai[0] = IceShield.ShatterTime - 1;
+                }
+            }
         }
     }
 }
