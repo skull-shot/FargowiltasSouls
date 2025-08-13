@@ -92,7 +92,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             {
                 return true;
             }
-            else if (projectile.ModProjectile != null)
+            else
             {
                 string name = projectile.ModProjectile.Name.ToLower();
                 if (name.Contains("lightning") || name.Contains("electr") || name.Contains("thunder") || name.Contains("laser") || name.Contains("zap") || name.Contains("beam"))
