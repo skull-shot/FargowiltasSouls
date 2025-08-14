@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddRecipeGroup("FargowiltasSouls:AnyManaFlower")
             //prehm weps
             .AddRecipeGroup("FargowiltasSouls:AnyGemStaff")
-            .AddRecipeGroup("FargowiltasSouls:VilethorneOrCrimsonRod")
+            .AddRecipeGroup("FargowiltasSouls:VilethornOrCrimsonRod")
             .AddIngredient(ItemID.WeatherPain)
             .AddIngredient(ItemID.AquaScepter)
             .AddIngredient(ItemID.DemonScythe)
