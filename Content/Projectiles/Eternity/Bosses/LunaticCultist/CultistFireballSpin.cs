@@ -6,12 +6,13 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Bosses.VanillaEternity.LunaticCultist;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 {
-    public class CultistFireball : ModProjectile
+    public class CultistFireballSpin : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_468";
+        public override string Texture => "Terraria/Images/Projectile_467";
 
         public override void SetStaticDefaults()
         {
@@ -30,7 +31,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             CooldownSlot = 1;
             Projectile.penetrate = -1;
         }
-
+        public ref float Rotation => ref Projectile.ai[0];
+        public ref float OwnerID => ref Projectile.ai[1];
+        public ref float RotationDirection => ref Projectile.ai[2];
+        public ref float Timer => ref Projectile.localAI[2];
         public override void AI()
         {
             Projectile.frameCounter++;
@@ -42,7 +46,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                     Projectile.frame = 0;
             }
 
-            if (--Projectile.ai[0] < 0)
+            int ownerID = (int)OwnerID;
+            
+            if (!ownerID.IsWithinBounds(Main.maxNPCs) || !Main.npc[ownerID].Alive() || (Main.npc[ownerID].type != NPCID.CultistBoss && Main.npc[ownerID].type != NPCID.CultistBossClone))
             {
                 Projectile.Kill();
                 return;
@@ -52,13 +58,36 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 
+            float progress = (float)Timer / AttackDuration;
+            float maxDist = 350;
+            float expandTime = 0.2f;
+            float contractStart = 1 - expandTime;
+            float dist = 300;
+            if (progress < expandTime)
+                dist = MathHelper.SmoothStep(0, maxDist, progress / expandTime);
+            if (progress > contractStart)
+                dist = MathHelper.SmoothStep(maxDist, 0, (progress - contractStart) / expandTime);
+
+            NPC npc = Main.npc[ownerID];
+            Vector2 desiredPos = npc.Center + Rotation.ToRotationVector2() * dist;
+            Projectile.velocity = (desiredPos - Projectile.Center);
+
+            float rotSpeed = MathF.Tau / 150;
+            rotSpeed *= dist / maxDist;
+            Rotation += RotationDirection * rotSpeed;
+            if (progress >= 1)
+            {
+                Projectile.Kill();
+            }
+            Timer++;
+
             if (++Projectile.localAI[0] == 12) //loads of vanilla dust :echprime:
             {
                 Projectile.localAI[0] = 0.0f;
                 for (int index1 = 0; index1 < 12; ++index1)
                 {
                     Vector2 vector2 = (Vector2.UnitX * -Projectile.width / 2f + -Vector2.UnitY.RotatedBy(index1 * 3.14159274101257 / 6.0, new Vector2()) * new Vector2(8f, 16f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
-                    int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Shadowflame, 0.0f, 0.0f, 160, new Color(), 1f);
+                    int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Torch, 0.0f, 0.0f, 160, new Color(), 1f);
                     Main.dust[index2].scale = 1.1f;
                     Main.dust[index2].noGravity = true;
                     Main.dust[index2].position = Projectile.Center + vector2;
@@ -94,7 +123,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                 for (int index1 = 0; index1 < 2; ++index1)
                 {
                     Vector2 vector2 = -Vector2.UnitX.RotatedByRandom(0.785398185253143).RotatedBy((double)Projectile.velocity.ToRotation(), new Vector2());
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0.0f, 0.0f, 0, new Color(), 1.2f);
+                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0.0f, 0.0f, 0, new Color(), 1.2f);
                     Main.dust[index2].velocity *= 0.3f;
                     Main.dust[index2].noGravity = true;
                     Main.dust[index2].position = Projectile.Center + vector2 * Projectile.width / 2f;
@@ -106,11 +135,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.ShadowFlame, 120);
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(BuffID.Burning, 120);
+            target.AddBuff(BuffID.OnFire, 300);
         }
 
         public override void OnKill(int timeLeft)
         {
+            return;
             if (Projectile.localAI[1] == 0)
             {
                 Projectile.localAI[1] = 1;
@@ -127,12 +159,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                 }
                 for (int index1 = 0; index1 < 30; ++index1)
                 {
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0.0f, 0.0f, 200, new Color(), 3.7f);
+                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0.0f, 0.0f, 200, new Color(), 3.7f);
                     Main.dust[index2].position = Projectile.Center + Vector2.UnitY.RotatedByRandom(3.14159274101257) * (float)Main.rand.NextDouble() * Projectile.width / 2f;
                     Main.dust[index2].noGravity = true;
                     Dust dust1 = Main.dust[index2];
                     dust1.velocity *= 3f;
-                    int index3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0.0f, 0.0f, 100, new Color(), 1.5f);
+                    int index3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0.0f, 0.0f, 100, new Color(), 1.5f);
                     Main.dust[index3].position = Projectile.Center + Vector2.UnitY.RotatedByRandom(3.14159274101257) * (float)Main.rand.NextDouble() * Projectile.width / 2f;
                     Dust dust2 = Main.dust[index3];
                     dust2.velocity *= 2f;
@@ -141,7 +173,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                 }
                 for (int index1 = 0; index1 < 10; ++index1)
                 {
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, 0.0f, 0.0f, 0, new Color(), 2.7f);
+                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0.0f, 0.0f, 0, new Color(), 2.7f);
                     Main.dust[index2].position = Projectile.Center + Vector2.UnitX.RotatedByRandom(3.14159274101257).RotatedBy((double)Projectile.velocity.ToRotation(), new Vector2()) * Projectile.width / 2f;
                     Main.dust[index2].noGravity = true;
                     Dust dust = Main.dust[index2];

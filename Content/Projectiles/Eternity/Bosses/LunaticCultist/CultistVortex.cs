@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void AI()
         {
-            int time = 15 * (int)Projectile.ai[1];
+            int time = 35 * (int)Projectile.ai[1];
             const int maxScale = 1;
 
             if (Projectile.ai[0] == 0)

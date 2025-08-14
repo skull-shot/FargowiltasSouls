@@ -821,3 +821,6 @@ BatExplosion.DisplayName: Взрыв
 HallowRay.DisplayName: Святой луч
 TrawlerFog.DisplayName: Ядовитый туман
 // IceShield.DisplayName: Ice Shield
+// CultistFireballSpin.DisplayName: Cultist Fireball Spin
+// CultistIceBall.DisplayName: Cultist Ice Ball
+// CultistIceShard.DisplayName: Cultist Ice Shard
