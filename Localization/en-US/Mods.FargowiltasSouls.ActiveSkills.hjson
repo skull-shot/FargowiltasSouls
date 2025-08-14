@@ -99,7 +99,7 @@ IceShieldEffect: {
 		'''
 		Hold to spawn an ice shield aimed towards your cursor
 		After the shield gets hit, it shatters, dealing massive damage in a cone
-		Release the skill button before the shield breaks to shatter it manually, dealiong increased damage
+		Release the skill button before the shield breaks to shatter it manually, dealing increased damage
 		'''
 }
 
