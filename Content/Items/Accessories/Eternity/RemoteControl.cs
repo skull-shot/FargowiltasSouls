@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
@@ -88,7 +89,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     return true;
             }
             else if (projectile.ModProjectile is BaseDeathray || ElectricAttacks.Contains(projectile.type))
+            {
                 return true;
+            }
             else
             {
                 string name = projectile.ModProjectile.Name.ToLower();

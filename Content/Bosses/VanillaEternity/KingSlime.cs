@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
@@ -113,7 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
             EModeGlobalNPC.slimeBoss = npc.whoAmI;
-
+            EModeUtils.DropSummon(npc, ItemID.SlimeCrown, NPC.downedSlimeKing, ref DroppedSummon);
             // defaults
             CanFall = true;
 
@@ -129,7 +130,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             // Drop summon
-            EModeUtils.DropSummon(npc, "SlimyCrown", NPC.downedSlimeKing, ref DroppedSummon);
+            
 
             // Scaling (from vanilla)
             float num255 = (float)npc.life / (float)npc.lifeMax;

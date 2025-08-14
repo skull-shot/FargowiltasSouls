@@ -639,7 +639,6 @@ LightslingerBombshot.DisplayName: 曙光子弹
 LightslingerShot.DisplayName: 曙光子弹
 SpiritArrow.DisplayName: 心灵之箭
 SpiritArrowFlame.DisplayName: 心灵焰火
-CirnoBomb.DisplayName: 琪露诺炸弹
 RetinazerDeathray.DisplayName: 烈焰死亡射线
 MimicDagger.DisplayName: 魔法飞刀
 MimicHallowStar.DisplayName: 神圣之星
@@ -821,3 +820,4 @@ EmpressRitual.DisplayName: 女皇结界
 // BatExplosion.DisplayName: Bat Explosion
 // HallowRay.DisplayName: Hallow Ray
 // TrawlerFog.DisplayName: Trawler Fog
+// IceShield.DisplayName: Ice Shield

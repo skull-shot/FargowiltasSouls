@@ -38,36 +38,17 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool HasKillCooldown;
         public bool EModeCanHurt = true;
-        public int NerfDamageBasedOnProjTypeCount;
         public bool altBehaviour;
         private List<Tuple<int, float>> medusaList = typeof(Projectile).GetField("_medusaHeadTargetList", LumUtils.UniversalBindingFlags).GetValue(null) as List<Tuple<int, float>>;
         private int counter;
         private bool preAICheckDone;
         private bool firstTickAICheckDone;
 
-        public static Dictionary<int, bool> IgnoreMinionNerf = [];
-
         public int SourceItemType = 0;
         public float WormPierceResist = 0f;
 
-        public override void Unload()
-        {
-            base.Unload();
-
-            IgnoreMinionNerf.Clear();
-        }
-
         public override void SetStaticDefaults()
         {
-            IgnoreMinionNerf[ProjectileID.StardustDragon1] = true;
-            IgnoreMinionNerf[ProjectileID.StardustDragon2] = true;
-            IgnoreMinionNerf[ProjectileID.StardustDragon3] = true;
-            IgnoreMinionNerf[ProjectileID.StardustDragon4] = true;
-            IgnoreMinionNerf[ProjectileID.StormTigerGem] = true;
-            IgnoreMinionNerf[ProjectileID.StormTigerTier1] = true;
-            IgnoreMinionNerf[ProjectileID.StormTigerTier2] = true;
-            IgnoreMinionNerf[ProjectileID.StormTigerTier3] = true;
-
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.SharpTears] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.JestersArrow] = true;
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.MeteorShot] = true;
@@ -248,14 +229,9 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ItemID.PiranhaGun:
                     projectile.ContinuouslyUpdateDamageStats = true;
                     break;
-            }
 
-            if (FargoSoulsUtil.IsSummonDamage(projectile, true, false))
-            {
-                if (projectile.minion && !(IgnoreMinionNerf.TryGetValue(projectile.type, out bool ignoreNerf1) && ignoreNerf1))
-                    NerfDamageBasedOnProjTypeCount = projectile.type;
-                else if (sourceProj is Projectile && !(IgnoreMinionNerf.TryGetValue(sourceProj.type, out bool ignoreNerf2) && ignoreNerf2))
-                    NerfDamageBasedOnProjTypeCount = sourceProj.Eternity().NerfDamageBasedOnProjTypeCount;
+                default:
+                    break;
             }
 
             switch (projectile.type)
@@ -1448,39 +1424,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                 }
             }
-            //if (projectile.arrow) //change archery and quiver to additive damage
-            //{
-            //    if (Main.player[projectile.owner].archery)
-            //    {
-            //        damage = (int)(damage / 1.2);
-            //        damage = (int)((double)damage * (1.0 + 0.2 / Main.player[projectile.owner].GetDamage(DamageClass.Ranged)));
-            //    }
-
-            //    if (Main.player[projectile.owner].magicQuiver)
-            //    {
-            //        damage = (int)(damage / 1.1);
-            //        damage = (int)((double)damage * (1.0 + 0.1 / Main.player[projectile.owner].GetDamage(DamageClass.Ranged)));
-            //    }
-            //}
-
-            /*if (NerfDamageBasedOnProjTypeCount != 0 && Main.player[projectile.owner].ownedProjectileCounts[NerfDamageBasedOnProjTypeCount] > 0)
-            {
-                int projTypeToCheck = NerfDamageBasedOnProjTypeCount;
-
-                //note: projs needed to reach max nerf is the sum of these values
-                const int allowedBeforeNerfBegins = 3;
-                const int maxRampup = 9;
-
-                float modifier = Utils.Clamp((float)(Main.player[projectile.owner].ownedProjectileCounts[projTypeToCheck] - allowedBeforeNerfBegins) / maxRampup, 0f, 1f);
-
-                const double maxNerfStrength = 1.0 / 3.0;
-                damage = (int)(damage * (1.0 - modifier * maxNerfStrength));
-            }*/
-
-            //if (projectile.type == ProjectileID.ChlorophyteBullet)
-            //{
-            //    damage = (int)(damage * 0.75);
-            //}
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)

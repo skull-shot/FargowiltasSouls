@@ -639,7 +639,6 @@ PlasmaProj.DisplayName: Raio de Plasma
 // LightslingerShot.DisplayName: Light Shot
 // SpiritArrow.DisplayName: Spirit Arrow
 // SpiritArrowFlame.DisplayName: Spirit Flame
-// CirnoBomb.DisplayName: Cirno Bomb
 // RetinazerDeathray.DisplayName: Blazing Deathray
 // MimicDagger.DisplayName: Magic Dagger
 // MimicHallowStar.DisplayName: Hallow Star
@@ -821,3 +820,4 @@ PlasmaProj.DisplayName: Raio de Plasma
 // BatExplosion.DisplayName: Bat Explosion
 // HallowRay.DisplayName: Hallow Ray
 // TrawlerFog.DisplayName: Trawler Fog
+// IceShield.DisplayName: Ice Shield

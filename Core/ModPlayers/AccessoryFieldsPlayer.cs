@@ -132,6 +132,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int icicleCD;
         public int GladiatorCD;
         public int GladiatorStandardCD;
+        public int IceQueenCrownCD;
         public bool GoldEnchMoveCoins;
         public bool GoldShell;
         private int goldHP;
@@ -295,7 +296,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int NymphsPerfumeCD = 30;
         public bool RainbowSlime;
         public bool SkeletronArms;
-        public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
         public bool SupremeDeathbringerFairy;

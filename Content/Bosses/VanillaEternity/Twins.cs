@@ -759,7 +759,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (DeathrayState > 0)
                 Resist = true;
 
-            EModeUtils.DropSummon(npc, "MechEye", NPC.downedMechBoss2, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.MechanicalEye, NPC.downedMechBoss2, ref DroppedSummon, Main.hardMode);
 
             return true;
         }

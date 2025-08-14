@@ -437,7 +437,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "GoreySpine", NPC.downedBoss2, ref DroppedSummon);
+            EModeUtils.DropSummon(npc, ItemID.BloodySpine, NPC.downedBoss2, ref DroppedSummon);
 
             npc.defense = 0;
             npc.defDefense = 0;

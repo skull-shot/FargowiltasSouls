@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -515,8 +516,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (ProjectileID.Sets.IsAWhip[projectile.type])
                 return false;
-            if (projectile.stopsDealingDamageAfterPenetrateHits) // fix issue with true melee hit cooldown for Golem Fist
-                return false;
+            if (projectile.stopsDealingDamageAfterPenetrateHits || EModeGlobalProjectile.FancySwings.Contains(projectile.type))
+                return false; // fix issue with true melee hit cooldown for Golem Fist
 
             return base.CanBeHitByProjectile(npc, projectile);
         }

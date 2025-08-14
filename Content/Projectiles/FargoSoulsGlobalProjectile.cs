@@ -1268,8 +1268,6 @@ namespace FargowiltasSouls.Content.Projectiles
                                 NekomiHood.OnGraze(fargoPlayer, projectile.damage * 4);
                             if (fargoPlayer.DeviGraze)
                                 SparklingAdoration.OnGraze(fargoPlayer, projectile.damage * 4);
-                            if (fargoPlayer.CirnoGraze)
-                                IceQueensCrown.OnGraze(fargoPlayer, projectile.damage * 4);
                         }
                     }
                 }

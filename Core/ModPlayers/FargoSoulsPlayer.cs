@@ -413,7 +413,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             NymphsPerfumeRespawn = false;
             RainbowSlime = false;
             SkeletronArms = false;
-            IceQueensCrown = false;
             CirnoGraze = false;
             MiniSaucer = false;
             SupremeDeathbringerFairy = false;

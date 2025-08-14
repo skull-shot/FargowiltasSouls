@@ -154,7 +154,6 @@ MinionsDeactivatedEffect: 禁用仆从效果来提高伤害
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: 缩小碰撞箱
 PumpkingsCapeEffect: 南瓜王披肩格挡
-IceQueenGraze: 擦弹
 UfoMinionEffect: 迷你飞碟召唤物
 ChalicePotionEffect: 药水增益
 MasoTrueEyeMinion: 克苏鲁真眼召唤物
