@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnyTier1Robe") // Amethyst / Topaz
             .AddRecipeGroup("FargowiltasSouls:AnyTier2Robe") // Sapphire / Emerald
             .AddRecipeGroup("FargowiltasSouls:AnyTier3Robe") // Ruby / Diamond
-            .AddIngredient(ItemID.SpellTome) // Magic Tome
+            .AddIngredient(ItemID.GypsyRobe) // Magic Robe
             .AddIngredient(ItemID.RareEnchantment)
 
             //.AddIngredient(ItemID.AmethystRobe);

@@ -48,9 +48,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.AshWoodHelmet)
             .AddIngredient(ItemID.AshWoodBreastplate)
             .AddIngredient(ItemID.AshWoodGreaves)
+            .AddIngredient(ItemID.LavaBucket)
             .AddIngredient(ItemID.Fireblossom)
             .AddIngredient(ItemID.SpicyPepper)
-            .AddIngredient(ItemID.WandofSparking)
             .AddTile(TileID.DemonAltar)
             .Register();
         }
