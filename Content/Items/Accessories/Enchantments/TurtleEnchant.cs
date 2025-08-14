@@ -1,6 +1,8 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
+﻿using System.Linq;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
@@ -8,6 +10,7 @@ using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,9 +22,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             base.SetStaticDefaults();
         }
-
         public override Color nameColor => new(248, 156, 92);
-
 
         public override void SetDefaults()
         {
@@ -34,11 +35,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             AddEffects(player, Item);
+            player.noKnockback = true;
         }
         public static void AddEffects(Player player, Item item)
         {
             player.AddEffect<TurtleEffect>(item);
-            player.noKnockback = true;
         }
 
         public override void AddRecipes()
@@ -65,44 +66,105 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class TurtleEffect : AccessoryEffect
     {
         public override bool MutantsPresenceAffects => true;
+        public const float TurtleShellMaxHP = 1000;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / 2000f, activeFunction: () => player.HasEffect<TurtleEffect>());
+                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / TurtleShellMaxHP, activeFunction: () => player.HasEffect<TurtleEffect>());
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (!player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
-            {
-                modPlayer.TurtleCounter++;
-
-                if (modPlayer.TurtleCounter > 20)
-                {
-                    player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
-                }
-            }
-            else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
-            {
-                modPlayer.TurtleCounter++;
-
-                if (modPlayer.TurtleCounter > 40)
-                {
-                    player.AddBuff(ModContent.BuffType<ShellHideBuff>(), 2);
-                }
-            }
-            else
-            {
-                modPlayer.TurtleCounter = 0;
-            }
-
-            if (modPlayer.TurtleShellHP < 2000 && !modPlayer.ShellHide)
-            {
-                modPlayer.TurtleShellHP += 2;
-            }
-            if (modPlayer.TurtleShellHP < 0)
-                modPlayer.TurtleShellHP = 0;
-            if (modPlayer.TurtleShellHP > 2000)
-               modPlayer.TurtleShellHP = 2000;
-
+            bool broken = player.HasBuff(ModContent.BuffType<BrokenShellBuff>());
             //Main.NewText($"shell HP: {modPlayer.TurtleShellHP}, counter: {modPlayer.TurtleCounter}");
+
+            if (!broken)
+            {
+                if (!player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+                {
+                    modPlayer.TurtleCounter++;
+
+                    if (modPlayer.TurtleCounter > 20)
+                    {
+                        modPlayer.ShellHide = true;
+                    }
+                }
+                else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer && !modPlayer.noDodge)
+                {
+                    modPlayer.TurtleCounter++;
+
+                    if (modPlayer.TurtleCounter > 40)
+                    {
+                        modPlayer.ShellHide = true;
+                    }
+                }
+                else
+                {
+                    modPlayer.TurtleCounter = 0;
+                    modPlayer.ShellHide = false;
+                }
+                if (modPlayer.TurtleShellHP < TurtleShellMaxHP && !broken && !modPlayer.ShellHide && !player.controlUseItem && !player.controlUseTile)
+                {
+                    modPlayer.TurtleShellHP++;
+                }
+            }
+            if (modPlayer.TurtleShellHP <= 0 && !broken)
+            {
+                modPlayer.TurtleShellHP = 0;
+                player.AddBuff(ModContent.BuffType<BrokenShellBuff>(), player.ForceEffect<TurtleEffect>() ? 30 * 60 : 20 * 60);
+                SoundEngine.PlaySound(SoundID.Shatter, player.Center);
+                if (!Main.dedServ)
+                {
+                    for (int j = 0; j < Main.rand.Next(8, 12); j++)
+                    {
+                        int i = j % 9;
+                        Vector2 pos = Main.rand.NextVector2FromRectangle(player.Hitbox);
+                        Vector2 vel = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(4, 8);
+                        int type = i + 1;
+                        Gore.NewGore(player.GetSource_Accessory(player.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
+                    }
+                }
+            }
+            if (modPlayer.TurtleShellHP > TurtleShellMaxHP)
+               modPlayer.TurtleShellHP = TurtleShellMaxHP;
+
+            if (modPlayer.ShellHide == true)
+            {
+                ShellHide(player);
+            }
+        }
+
+        public static void ShellHide(Player player)
+        {
+            if (player.thorns == 0f)
+                player.thorns = 1f;
+            player.thorns *= 5f;
+            player.noKnockback = true;
+
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<TurtleShield>()] < 1)
+            {
+                Projectile.NewProjectile(player.GetSource_EffectItem<TurtleEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<TurtleShield>(), 0, 0, player.whoAmI);
+            }
+
+            Main.projectile.Where(x => x.active && x.hostile && x.damage > 0 && x.Hitbox.Intersects(player.Hitbox) && ProjectileLoader.CanDamage(x) != false && ProjectileLoader.CanHitPlayer(x, player) && FargoSoulsUtil.CanDeleteProjectile(x)).ToList().ForEach(x =>
+            {
+                // Turn around
+                x.velocity *= -1f;
+
+                // Flip sprite
+                if (x.Center.X > player.Center.X)
+                {
+                    x.direction = 1;
+                    x.spriteDirection = 1;
+                }
+                else
+                {
+                    x.direction = -1;
+                    x.spriteDirection = -1;
+                }
+
+                x.hostile = false;
+                x.friendly = true;
+                x.damage *= 5;
+                SoundEngine.PlaySound(SoundID.Item150, player.Center);
+            });
         }
 
         public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
@@ -120,7 +182,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dr = 0;
             if (modPlayer.ShellHide)
-                dr += 0.4f + (modPlayer.TurtleShellHP * (1f / 5000f));
+                dr += (player.ForceEffect<TurtleEffect>() && !modPlayer.LifeForceActive) ? 0.8f : 0.66f;
             return dr;
         }
 

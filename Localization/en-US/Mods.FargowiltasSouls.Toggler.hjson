@@ -51,7 +51,7 @@ BeetleEffect: Beetles
 CactusEffect: Cactus Needles
 PumpkinEffect: Grow Pumpkins
 SpiderEffect: Spider Crits
-TurtleEffect: Turtle Shell Buff
+TurtleEffect: Turtle Shell
 LifeForceEffect: Concise Life Force
 NatureHeader: "{$Mods.FargowiltasSouls.Items.NatureForce.DisplayName}"
 ChloroMinion: Chlorophyte Leaf Crystal

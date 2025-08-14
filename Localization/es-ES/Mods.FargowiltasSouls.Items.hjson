@@ -677,9 +677,10 @@ TurtleEnchant: {
 	/* Tooltip:
 		'''
 		Grants immunity to knockback
-		When standing still, you will enter a shell, reducing damage taken by 80%
-		Taking damage in the shell decreases damage reduction to a minimum of 40%, slowly recovers while not shelled
-		While shelled, resist most debuffs on hit and all projectiles and contact damage are reflected for 500% damage
+		When standing still you will enter a shell, reducing all damage taken by 66%
+		While shelled, prevents debuffs on hit and all projectiles and contact damage are reflected for 500% damage
+		After taking too much damage the shell will break, granting the Shell Smash buff
+		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		'You suddenly have the urge to hide in a shell'
 		''' */
 }
@@ -1774,7 +1775,8 @@ TrawlerSoul: {
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
-		[i:3090] Slimes become friendly and [i:4987] [i:3336] [i:BoneHelm] you release damaging fog at nearby enemies
+		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
+		[i:4987] [i:3336] [i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		''' */
 }

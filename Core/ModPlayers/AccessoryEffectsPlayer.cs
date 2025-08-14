@@ -632,7 +632,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         int p = Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), pos, vel, ProjectileID.SharpTears, DreadShellEffect.BaseDamage(Player), 12f, Player.whoAmI, 0f, Main.rand.NextFloat(0.5f, 1f));
                         if (p != Main.maxProjectiles)
                         {
-                            Main.projectile[p].DamageType = DamageClass.Default;
+                            Main.projectile[p].DamageType = DamageClass.Melee;
                             Main.projectile[p].usesLocalNPCImmunity = false;
                             Main.projectile[p].usesIDStaticNPCImmunity = true;
                             Main.projectile[p].idStaticNPCHitCooldown = 60;

@@ -471,6 +471,12 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             modifiers.ModifyHurtInfo += TryParryAttack;
 
+            if ((Player.HasEffectEnchant<TurtleEffect>() || Player.FargoSouls().ShellHide) && !Player.HasBuff(ModContent.BuffType<BrokenShellBuff>()))
+            {
+                modifiers.DisableSound();
+                SoundEngine.PlaySound(SoundID.Item148 with { Volume = 2f }, Player.Center);
+            }
+
             if (StyxSet && !ImmuneToDamage && Player.ownedProjectileCounts[ModContent.ProjectileType<StyxArmorScythe>()] > 0)
             {
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo hurtInfo) =>
@@ -564,21 +570,25 @@ namespace FargowiltasSouls.Core.ModPlayers
                     NekomiMeter = 0;
             }
 
-            if (ShellHide)
+            if ((player.HasEffectEnchant<TurtleEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()))
             {
-                int shelldmg = info.SourceDamage / (int)(player.ForceEffect<TurtleEffect>() ? 2 : 1);
-                TurtleShellHP -= shelldmg;
-                //some funny dust
-                /*const int max = 30;
-                for (int i = 0; i < max; i++)
+                int shelldmg = info.SourceDamage;
+                if (player.HasEffectEnchant<TurtleEffect>())
+                    TurtleShellHP -= shelldmg;
+                if (!Main.dedServ)
                 {
-                    Vector2 vector6 = Vector2.UnitY * 5f;
-                    vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + Main.LocalPlayer.Center;
-                    Vector2 vector7 = vector6 - Main.LocalPlayer.Center;
-                    int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.GoldFlame, 0f, 0f, 0, default, 2f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity = vector7;
-                }*/
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (shelldmg < 60)
+                            break;
+                        shelldmg -= 60;
+                        int i = j % 9;
+                        Vector2 pos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                        Vector2 vel = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(4, 8);
+                        int type = i + 1;
+                        Gore.NewGore(player.GetSource_Accessory(player.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
+                    }
+                }
             }
 
             if (Defenseless)
