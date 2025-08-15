@@ -443,13 +443,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float durationDiv = 1f;
                     float lifeFraction = npc.GetLifePercent();
                     if (lifeFraction < 0.75)
-                        durationDiv += 0.25f;
+                        durationDiv += 0.15f;
                     if (lifeFraction < 0.5)
-                        durationDiv += 0.25f;
+                        durationDiv += 0.15f;
                     if (lifeFraction < 0.25)
-                        durationDiv += 0.25f;
+                        durationDiv += 0.15f;
                     if (lifeFraction < 0.1)
-                        durationDiv += 0.25f;
+                        durationDiv += 0.15f;
                     if (NPC.AnyNPCs(ModContent.NPCType<RoyalSubject>()))
                         durationDiv = 1.5f;
                     duration = (int)Math.Round(duration / durationDiv);
@@ -485,7 +485,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         float spreadProgress = (progress - straightFrac) / (1f - straightFrac);
                         float spread = MathHelper.PiOver2 * 1.4f * spreadProgress;
 
-                        float baseFrequency = 5f;
+                        float baseFrequency = 7f;
                         float frequency = (int)Math.Round(baseFrequency / durationDiv);
                         if (frequency < 3)
                             frequency = 3;
