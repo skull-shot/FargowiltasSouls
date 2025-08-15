@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bool forceEffect = modPlayer.ForceEffect<EbonwoodEnchant>();
             float chargeCap = forceEffect ? 500 : 250;
             float chargeSpeed = forceEffect ? 2f : 0.85f;
-            float decaySpeed = chargeSpeed / 2.5f;
+            float decaySpeed = chargeSpeed / 2.25f;
             if (player.HasEffect<TimberEffect>())
                 decaySpeed /= 3;
             bool hasIncreased = false; // If charge has increased this frame
