@@ -20,7 +20,7 @@ BetsyDashEffect: {
 }
 
 SupremeDashEffect: {
-	// DisplayName: Supreme Dash
+	// DisplayName: Berserk Dash
 	// Tooltip: Perform a short fist dash towards your cursor
 }
 
@@ -96,8 +96,8 @@ IceShieldEffect: {
 	/* Tooltip:
 		'''
 		Hold to spawn an ice shield aimed towards your cursor
-		After getting hit, the shield shatters, dealing massive damage in a cone
-		Release the skill button before the shield breaks to shatter it manually, for increased damage
+		After the shield gets hit, it shatters, dealing massive damage in a cone
+		Release the skill button before the shield breaks to shatter it manually, dealiong increased damage
 		''' */
 }
 

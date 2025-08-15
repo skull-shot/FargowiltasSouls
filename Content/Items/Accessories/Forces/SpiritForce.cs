@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             damageClass = DamageClass.MagicSummonHybrid;
             tooltipColor = Color.Lerp(Color.Lerp(new(204, 45, 239), new(0, 80, 224), 0.5f), Color.LightGray, 0.3f);
             scaling = null;
-            return SpiritTornadoEffect.BaseDamage(Main.LocalPlayer);
+            return SpiritTornadoEffect.BaseDamage(Main.LocalPlayer) * 2; //returns empowered storm damage
         }
     }
     public class SpiritTornadoEffect : AccessoryEffect
