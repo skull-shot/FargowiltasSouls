@@ -63,10 +63,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (totalCount > 12 && headCount < totalCount / 5 + 1)
                     {
                         UseMassDefense = true;
-                        npc.defense += 5;
+                        npc.defense += 2;
 
                         if (npc.life < npc.lifeMax / 2)
-                            npc.life += 2;
+                            npc.life += 1;
                     }
                 }
             }
@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (UseMassDefense)
                 // TODO: maybe use defense for this?
-                modifiers.FinalDamage /= 2;
+                modifiers.FinalDamage *= 0.8f;
 
             base.ModifyIncomingHit(npc, ref modifiers);
         }
@@ -107,8 +107,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             damage /= 2;
             if (UseMassDefense)
             {
-                damage /= 10;
-                npc.lifeRegen /= 10;
+                damage /= 2;
+                npc.lifeRegen /= 2;
             }
         }
 

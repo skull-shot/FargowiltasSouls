@@ -187,7 +187,7 @@ EbonwoodEnchant: {
 		'''
 		You are surrounded by an aura of corruption
 		Having enemies in the aura builds up Corruption
-		Corruption grants you up to 4 flat damage and 4% damage reduction
+		Corruption grants you up to 3 flat damage and 4% damage reduction
 		'Untapped potential'
 		''' */
 }
