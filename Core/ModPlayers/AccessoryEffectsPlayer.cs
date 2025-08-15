@@ -1,31 +1,32 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories;
+using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
+using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Buffs.Eternity;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Content.Items.Accessories.Eternity;
-using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.UI.Elements;
-using Microsoft.Xna.Framework.Graphics;
-using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
-using FargowiltasSouls.Content.Projectiles.Eternity;
-using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
-using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
-using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
-using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
-using FargowiltasSouls.Content.Projectiles.Accessories;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -126,9 +127,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void OnLandingEffects()
         {
-            
-
-            //Player.justJumped use this tbh
             if (SlimyShieldFalling) //landing
             {
                 if (Player.velocity.Y < 0f)
@@ -142,38 +140,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (SlimyShieldItem != null && Player.HasEffect<SlimyShieldEffect>())
                         {
                             SoundEngine.PlaySound(SoundID.Item21 with { Volume = 0.5f }, Player.Center);
-                            Vector2 mouse = Main.MouseWorld;
                             for (int i = 0; i < 3; i++)
                             {
-                                Vector2 spawn = new(mouse.X + Main.rand.Next(-200, 201), mouse.Y - Main.rand.Next(600, 901));
-                                if (Collision.CanHitLine(mouse, 0, 0, spawn, 0, 0))
-                                {
-                                    Vector2 speed = mouse - spawn;
-                                    speed.Normalize();
-                                    speed *= 10f;
-                                    int p = Projectile.NewProjectile(Player.GetSource_Accessory(SlimyShieldItem, "SlimyShield"), spawn, speed, ModContent.ProjectileType<SlimeBall>(), SlimyShieldEffect.BaseDamage(Player), 1f, Main.myPlayer);
-                                    if (p.IsWithinBounds(Main.maxProjectiles))
-                                    {
-                                        Main.projectile[p].DamageType = DamageClass.Generic;
-                                    }
-                                }
+                                Vector2 dir = -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2 * 0.2f);
+                                Projectile.NewProjectile(Player.GetSource_Accessory(SlimyShieldItem, "SlimyShield"), Player.Center + dir * Main.rand.NextFloat(10f, 40f), dir * Main.rand.NextFloat(10f, 14f), ModContent.ProjectileType<KingSlimeBallFriendly>(), SlimyShieldEffect.BaseDamage(Player), 1f, Main.myPlayer);
                             }
                         }
-
-                        /*if (GelicWingsItem != null && Player.HasEffect<GelicWingSpikes>())
-                        {
-                            int dam = 60; //deliberately no scaling
-                            for (int j = -1; j <= 1; j += 2)
-                            {
-                                Vector2 baseVel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(-10 * j));
-                                const int max = 8;
-                                for (int i = 0; i < max; i++)
-                                {
-                                    Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
-                                    Projectile.NewProjectile(Player.GetSource_Accessory(GelicWingsItem), Player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), dam, 5f, Main.myPlayer);
-                                }
-                            }
-                        }*/
                     }
                 }
             }
@@ -244,7 +216,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         SpecialDashCD += LumUtils.SecondsToFrames(1);
 
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
-                        Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<SupremeDash>(), (int)(66 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
+                        Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<SupremeDash>(), SupremeDashEffect.BaseDamage(player) * 3, 6f, Player.whoAmI);
 
                         CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/SupremeDeathbringerFairy").Value, Color.LightGray,
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
@@ -621,7 +593,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         int p = Projectile.NewProjectile(Player.GetSource_EffectItem<DreadShellEffect>(), pos, vel, ProjectileID.SharpTears, DreadShellEffect.BaseDamage(Player), 12f, Player.whoAmI, 0f, Main.rand.NextFloat(0.5f, 1f));
                         if (p != Main.maxProjectiles)
                         {
-                            Main.projectile[p].DamageType = DamageClass.Default;
+                            Main.projectile[p].DamageType = DamageClass.Melee;
                             Main.projectile[p].usesLocalNPCImmunity = false;
                             Main.projectile[p].usesIDStaticNPCImmunity = true;
                             Main.projectile[p].idStaticNPCHitCooldown = 60;

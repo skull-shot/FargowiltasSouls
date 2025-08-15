@@ -168,7 +168,6 @@ namespace FargowiltasSouls
                 && !BuffID.Sets.NurseCannotRemoveDebuff[type] //only affect debuffs that nurse can cleanse
                 && (modPlayer.ParryDebuffImmuneTime > 0
                     || modPlayer.ImmuneToDamage
-                    || modPlayer.ShellHide
                     || modPlayer.MonkDashing > 0
                     || modPlayer.TitaniumDRBuff)
                 && modPlayer.TurtleShellHP > 0

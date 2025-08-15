@@ -368,7 +368,9 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             projectile.hostile = false;
                             projectile.friendly = true;
-                            projectile.DamageType = DamageClass.Melee;
+                            if (parent1.Item.type == ModContent.ItemType<Deerclawps>())
+                                projectile.DamageType = DamageClass.Melee;
+                            else projectile.DamageType = DamageClass.Generic;
                             projectile.penetrate = -1;
 
                             projectile.usesLocalNPCImmunity = false;

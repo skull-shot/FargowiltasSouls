@@ -601,11 +601,6 @@ OriPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
 }
 
-ShellHideBuff: {
-	DisplayName: 缩壳
-	Description: 阻挡弹幕
-}
-
 SnowstormCDBuff: {
 	DisplayName: 暴雪冷却
 	Description: 你现在不能冻结一切

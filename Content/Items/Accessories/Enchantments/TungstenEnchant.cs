@@ -69,10 +69,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 scaling = (int)(scaling * MathF.Exp((float)(-scaling / falloffMin)));
                 scaling += falloffMin;
             }
-
+            int dmg = 50;
+            if (scaling <= 30)
+            {
+                scaling = null;
+                dmg = 30;
+            }
             damageClass = DamageClass.Default;
             tooltipColor = null;
-            return 50;
+            return dmg;
         }
     }
     public class TungstenShockwaveEffect : AccessoryEffect

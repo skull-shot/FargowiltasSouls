@@ -601,11 +601,6 @@ OriPoisonBuff: {
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
 }
 
-ShellHideBuff: {
-	DisplayName: Панцирь
-	Description: Получаемый урон значительно снижен
-}
-
 SnowstormCDBuff: {
 	DisplayName: Перезарядка снежной бури
 	Description: Вы пока не можете охладить всё вокруг

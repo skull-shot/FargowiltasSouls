@@ -66,14 +66,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 int type = ProjectileID.DeerclopsIceSpike;
                 float ai0 = -15f;
                 float ai1 = Main.rand.NextFloat(0.5f, 1f);
+                int dmg = BaseDamage(player);
                 if (player.FargoSouls().SupremeDeathbringerFairy)
                 {
                     type = ProjectileID.SharpTears;
-                    //ai0 *= 2f;
-                    //ai1 += 0.5f;
+                    dmg = SupremeDashEffect.BaseDamage(player);
                 }
                 if (player.velocity.Y == 0 && player.timeSinceLastDashStarted % 2 == 0)
-                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, BaseDamage(player), 4f, Main.myPlayer, ai0, ai1);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dmg, 4f, Main.myPlayer, ai0, ai1);
                 else
                 {
                     int npcID = FargoSoulsUtil.FindClosestHostileNPC(pos, 300, true, true);
@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
                     if (player.timeSinceLastDashStarted % 2 == 0)
-                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, BaseDamage(player), 4f, Main.myPlayer, ai0, ai1);
+                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dmg, 4f, Main.myPlayer, ai0, ai1);
                 }
                     
             }

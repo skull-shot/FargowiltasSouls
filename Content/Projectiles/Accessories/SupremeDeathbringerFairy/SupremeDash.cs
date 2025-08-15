@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
             Projectile.height = Player.defaultHeight;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.Generic;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 15;
             Projectile.penetrate = -1;

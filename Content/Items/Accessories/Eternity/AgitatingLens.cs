@@ -61,8 +61,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 modPlayer.AgitatingLensCD = 0;
                 if ((Math.Abs(player.velocity.X) >= 5 || Math.Abs(player.velocity.Y) >= 5) && player.whoAmI == Main.myPlayer)
                 {
-                    if (!(modPlayer.SupremeDeathbringerFairy && (modPlayer.IsDashingTimer > 0 || modPlayer.SpecialDash)))
+                    if (!modPlayer.SupremeDeathbringerFairy)
                         Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, player.velocity * 0.1f, ModContent.ProjectileType<BloodScytheFriendly>(), BaseDamage(player), 5f, player.whoAmI);
+                    else if (modPlayer.IsDashingTimer == 0 && !modPlayer.SpecialDash)
+                    {
+                        for (int i = 0; i < Main.rand.Next(1, 3); i++)
+                        {
+                            Vector2 vel = -player.velocity + new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-6, -4));
+                            if (vel.Y < -6)
+                                vel.Y = Main.rand.NextFloat(-6, -4);
+                            Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ModContent.ProjectileType<KingSlimeBallFriendly>(), SupremeDashEffect.BaseDamage(player), 5f, player.whoAmI, ai2: 1);
+                        }
+                    }
                 }
             }
         }

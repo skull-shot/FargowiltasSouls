@@ -37,7 +37,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
                 Projectile.alpha = 0;
             if (Projectile.alpha == 0 && Main.rand.NextBool(3) && (Projectile.tileCollide || !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height)))
             {
-                int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.t_Slime, 0f, 0f, 150, default, 1.2f);
+                Color color = Projectile.ai[2] == 1 ? Color.DarkRed : new(0, 80, 255, 100);
+                int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.TintableDust, 0f, 0f, 150, color, 1.2f);
                 Main.dust[d].velocity *= 0.3f;
                 Main.dust[d].velocity += Projectile.velocity * 0.3f;
                 Main.dust[d].noGravity = true;

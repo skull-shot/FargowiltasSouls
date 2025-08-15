@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -98,12 +99,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             .Register();
         }
+
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return SupremeDashEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class SupremeDashEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<SupremeDeathbringerFairy>();
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 22); //all sdf projectiles inherit from this damage
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (stunned)

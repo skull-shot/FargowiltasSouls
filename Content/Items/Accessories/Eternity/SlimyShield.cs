@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<SupremeFairyHeader>();
         public override int ToggleItemType => ModContent.ItemType<SlimyShield>();
         public override bool ExtraAttackEffect => true;
-        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.FargoSouls().SupremeDeathbringerFairy ? 16 : 8);
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 8);
     }
     public class PlatformFallthroughEffect : AccessoryEffect
     {

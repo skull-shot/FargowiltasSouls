@@ -20,8 +20,13 @@ BetsyDashEffect: {
 }
 
 SupremeDashEffect: {
-	DisplayName: Supreme Dash
-	Tooltip: Perform a short fist dash towards your cursor
+	DisplayName: Berserk Dash
+	Tooltip: 
+		'''
+		[i:FargowiltasSouls/QueenStinger] Perform a short skeletal punch dash towards your cursor
+		[i:FargowiltasSouls/NecromanticBrew] Punch deals high knockback and rebounds you on hit
+		[i:FargowiltasSouls/AgitatingLens] Punching an enemy berserks you, temporarily increasing attack speed but making movement uncontrollable
+		'''
 }
 
 DiveEffect: {
@@ -131,9 +136,9 @@ GladiatorBanner: {
 	DisplayName: Gladiator Banner
 	Tooltip:
 		'''
-		Place an empowering banner that lasts 15 seconds
+		Place an empowering banner on the ground
 		Being close to the banner grants knockback immunity and +8% damage reduction
-		Banner can only be resummoned after it runs out
+		Banner can only be resummoned once every 15 seconds
 		'''
 }
 

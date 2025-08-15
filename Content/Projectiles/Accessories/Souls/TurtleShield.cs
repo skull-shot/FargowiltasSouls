@@ -43,30 +43,12 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 }
             }
 
-            if (modPlayer.TurtleShellHP <= 3)
-            {
-                Projectile.localAI[0] = 1;
-            }
-
             if (!modPlayer.ShellHide)
             {
                 Projectile.Kill();
             }
         }
 
-        public override void OnKill(int timeLeft)
-        {
-            //SoundEngine.PlaySound(SoundID.Item27 with { Volume = 1.5f }, Projectile.Center);
-        }
-
-        public override Color? GetAlpha(Color lightColor)
-        {
-            if (Projectile.localAI[0] == 1)
-            {
-                return new Color(255, 132, 105);
-            }
-
-            return base.GetAlpha(lightColor);
-        }
+        public override bool? CanDamage() => false;
     }
 }
