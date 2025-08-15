@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -1522,11 +1523,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 playerInvulTriggered = true;
 
             //drop summon
-            if (WorldSavingSystem.EternityMode && NPC.downedMoonlord && !WorldSavingSystem.DownedAbom && FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget && !droppedSummon)
-            {
-                Item.NewItem(NPC.GetSource_Loot(), player.Hitbox, ModContent.ItemType<AbomsCurse>());
-                droppedSummon = true;
-            }
+            EModeUtils.DropSummon(NPC, ModContent.ItemType<AbomsCurse>(), WorldSavingSystem.downedAbom, ref droppedSummon, WorldSavingSystem.EternityMode && NPC.downedMoonlord);
         }
 
         private bool AliveCheck(Player player)

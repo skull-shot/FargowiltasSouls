@@ -36,6 +36,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
@@ -438,11 +439,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 playerInvulTriggered = true;
 
             //drop summon
-            if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedDevi && FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget && !droppedSummon)
-            {
-                Item.NewItem(NPC.GetSource_Loot(), player.Hitbox, ModContent.ItemType<DevisCurse>());
-                droppedSummon = true;
-            }
+            EModeUtils.DropSummon(NPC, ModContent.ItemType<DevisCurse>(), WorldSavingSystem.DownedDevi, ref droppedSummon, WorldSavingSystem.EternityMode);
 
             #region STATES
             void Die()
