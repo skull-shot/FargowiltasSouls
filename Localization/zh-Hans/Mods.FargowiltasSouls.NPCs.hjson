@@ -339,7 +339,7 @@ Lifelight: {
 	// DisplayName: Lifelight
 
 	BossChecklistIntegration: {
-		// EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
+		// EntryName: "{$Mods.FargowiltasSouls.NPCs.Lifelight.DisplayName}"
 		// SpawnInfo: Spawn by using [i:FargowiltasSouls/CrystallineEffigy] in the Hallow at day.
 		// DespawnMessage: Lifelight fades away...
 	}
