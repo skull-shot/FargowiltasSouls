@@ -1401,7 +1401,7 @@ namespace FargowiltasSouls.Core.Globals
             if (player.HasEffect<EbonwoodEffect>())
             {
                 float divisor = 50;
-                float mult = (4f / 5);
+                float mult = (3f / 5);
                 if (player.HasEffect<TimberEffect>())
                 {
                     divisor = 35;

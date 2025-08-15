@@ -1514,10 +1514,8 @@ SupremeDeathbringerFairy: {
 		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving quickly, create a trail of bloody slime
+		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
-		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
-		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, increasing attack speed temporarily but making movement uncontrollable
 		'Supremacy not necessarily guaranteed'
 		''' */
 }
