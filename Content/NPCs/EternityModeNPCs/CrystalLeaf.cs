@@ -213,26 +213,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 240);
         }
 
-        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            if (WorldSavingSystem.MasochistModeReal)
-            {
-                modifiers.Null();
-                NPC.life++;
-            }
-        }
-
-        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            if (WorldSavingSystem.MasochistModeReal)
-            {
-                if (FargoSoulsUtil.CanDeleteProjectile(projectile))
-                    projectile.penetrate = 0;
-                modifiers.Null();
-                NPC.life++;
-            }
-        }
-
         public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
