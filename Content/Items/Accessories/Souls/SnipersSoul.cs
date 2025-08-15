@@ -37,18 +37,32 @@ hive pack*/
             .AddIngredient(ItemID.RangerEmblem)
             .AddRecipeGroup("FargowiltasSouls:AnyQuiver")
             .AddRecipeGroup("FargowiltasSouls:AnySniperScope")
-
-            .AddIngredient(ItemID.DartPistol)
+            //prehm
+            .AddIngredient(ItemID.FlintlockPistol)
+            .AddIngredient(ItemID.Blowgun)
+            .AddIngredient(ItemID.PewMaticHorn)
+            .AddIngredient(ItemID.HellwingBow)
+            .AddIngredient(ItemID.PhoenixBlaster)
+            //hm
+            .AddIngredient(ItemID.DaedalusStormbow)
             .AddIngredient(ItemID.Megashark)
-            .AddIngredient(ItemID.PulseBow)
-            .AddIngredient(ItemID.NailGun)
             .AddIngredient(ItemID.PiranhaGun)
-            .AddIngredient(ItemID.SniperRifle)
-            .AddIngredient(ItemID.Tsunami)
-            .AddIngredient(ItemID.StakeLauncher)
             .AddIngredient(ItemID.ElfMelter)
+            .AddIngredient(ItemID.Tsunami)
             .AddIngredient(ItemID.Xenopopper)
-            .AddIngredient(ItemID.Celeb2)
+
+            //old recipe
+            //.AddIngredient(ItemID.DartPistol)
+            //.AddIngredient(ItemID.Megashark)
+            //.AddIngredient(ItemID.PulseBow)
+            //.AddIngredient(ItemID.NailGun)
+            //.AddIngredient(ItemID.PiranhaGun)
+            //.AddIngredient(ItemID.SniperRifle)
+            //.AddIngredient(ItemID.Tsunami)
+            //.AddIngredient(ItemID.StakeLauncher)
+            //.AddIngredient(ItemID.ElfMelter)
+            //.AddIngredient(ItemID.Xenopopper)
+            //.AddIngredient(ItemID.Celeb2)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();

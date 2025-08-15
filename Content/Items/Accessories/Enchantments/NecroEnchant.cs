@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.NecroHelmet)
                 .AddIngredient(ItemID.NecroBreastplate)
                 .AddIngredient(ItemID.NecroGreaves)
-                .AddIngredient(ItemID.BoneWand)
+                .AddIngredient(ItemID.BookofSkulls)
                 .AddIngredient(ItemID.BoneWhip)
                 .AddIngredient(ItemID.StillLife)
 

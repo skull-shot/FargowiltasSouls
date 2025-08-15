@@ -42,9 +42,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.TikiShirt)
             .AddIngredient(ItemID.TikiPants)
             //leaf wings
-            .AddIngredient(ItemID.Blowgun)
-            //toxic flask
+            //blowgun
             .AddIngredient(ItemID.PygmyStaff)
+            .AddIngredient(ItemID.ThornWhip) //Snapthorne, change to Plantera whip in 1.4.5
+            //toxic flask
             .AddIngredient(ItemID.TikiTotem)
             //kaledoscope
             //.AddIngredient(ItemID.TikiTotem);

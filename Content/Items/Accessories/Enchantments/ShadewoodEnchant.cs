@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.ShadewoodGreaves)
                 .AddIngredient(ItemID.ViciousMushroom)
                 .AddIngredient(ItemID.BloodOrange)
-                .AddIngredient(ItemID.DeadlandComesAlive)
+                .AddIngredient(ItemID.Deathweed)
 
             .AddTile(TileID.DemonAltar)
             .Register();

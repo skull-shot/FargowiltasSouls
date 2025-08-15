@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.EbonwoodGreaves)
             .AddIngredient(ItemID.VileMushroom)
             .AddIngredient(ItemID.BlackCurrant)
-            .AddIngredient(ItemID.LightlessChasms)
+            .AddIngredient(ItemID.Deathweed)
 
 
             .AddTile(TileID.DemonAltar)

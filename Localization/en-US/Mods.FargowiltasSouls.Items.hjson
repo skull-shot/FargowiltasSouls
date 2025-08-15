@@ -1199,7 +1199,6 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
-		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
@@ -1219,7 +1218,6 @@ IceQueensCrown: {
 		'''
 		Grants immunity to Hypothermia and Frozen
 		Increases damage reduction by 5%
-		Graze attacks to charge up Graze Bomb
 		'The royal symbol of a defeated foe'
 		'''
 }

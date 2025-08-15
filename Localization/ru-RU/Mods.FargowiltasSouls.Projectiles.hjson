@@ -639,7 +639,6 @@ LightslingerBombshot.DisplayName: Выстрел света
 LightslingerShot.DisplayName: Выстрел света
 SpiritArrow.DisplayName: Стрела духа
 SpiritArrowFlame.DisplayName: Пламя духа
-CirnoBomb.DisplayName: Чирно бомба
 RetinazerDeathray.DisplayName: Пламенный луч смерти
 MimicDagger.DisplayName: Магический кинжал
 MimicHallowStar.DisplayName: Святая звезда
@@ -821,3 +820,7 @@ ImpFireOrb.DisplayName: Большой огненный шар
 BatExplosion.DisplayName: Взрыв
 HallowRay.DisplayName: Святой луч
 TrawlerFog.DisplayName: Ядовитый туман
+// IceShield.DisplayName: Ice Shield
+// CultistFireballSpin.DisplayName: Cultist Fireball Spin
+// CultistIceBall.DisplayName: Cultist Ice Ball
+// CultistIceShard.DisplayName: Cultist Ice Shard

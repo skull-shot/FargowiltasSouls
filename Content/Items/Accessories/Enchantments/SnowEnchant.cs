@@ -38,9 +38,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnySnowHood")
             .AddRecipeGroup("FargowiltasSouls:AnySnowCoat")
             .AddRecipeGroup("FargowiltasSouls:AnySnowPants")
+            .AddIngredient(ItemID.FlinxFurCoat)
             .AddIngredient(ItemID.IceBlade)
             .AddIngredient(ItemID.FrostMinnow)
-            .AddIngredient(ItemID.Penguin)
+            
 
             .AddTile(TileID.DemonAltar)
             .Register();

@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
              AccessoryEffectLoader.GetEffect<DiveEffect>(),
-             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
         public override void SetStaticDefaults()

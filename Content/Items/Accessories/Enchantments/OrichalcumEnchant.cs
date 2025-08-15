@@ -39,9 +39,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnyOriHead")
             .AddIngredient(ItemID.OrichalcumBreastplate)
             .AddIngredient(ItemID.OrichalcumLeggings)
-            .AddIngredient(ItemID.FlowerofFire)
-            .AddIngredient(ItemID.FlowerofFrost)
             .AddIngredient(ItemID.CursedFlames)
+            .AddIngredient(ItemID.ShadowFlameBow)
+            .AddIngredient(ItemID.Toxikarp)
 
             .AddTile(TileID.CrystalBall)
             .Register();
