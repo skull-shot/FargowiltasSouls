@@ -614,22 +614,22 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 float width;
                                 if (heads == 1)
                                 {
-                                    projCount = 8;
-                                    width = 0.42f;
-                                }
-                                else if (heads == 2)
-                                {
                                     projCount = 6;
                                     width = 0.32f;
                                 }
-                                else if (heads == 3)
+                                else if (heads == 2)
                                 {
                                     projCount = 4;
                                     width = 0.18f;
                                 }
-                                else
+                                else if (heads == 3)
                                 {
                                     projCount = 2;
+                                    width = 0.13f;
+                                }
+                                else
+                                {
+                                    projCount = 0;
                                     width = 0.13f;
                                 }
                                 SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);

@@ -44,7 +44,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds
             {
                 Projectile.tileCollide = true;
             }
-            Projectile.velocity.Y += 0.3f;
+            if (Projectile.velocity.Y < 8)
+                Projectile.velocity.Y += 0.3f;
 
             Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2f;
 
