@@ -1,6 +1,7 @@
 ﻿
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Masks;
@@ -110,6 +111,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         public ref float AI2 => ref NPC.ai[2];
         public ref float AI3 => ref NPC.ai[3];
         public ref float AI4 => ref NPC.localAI[0];
+        private bool droppedSummon = false;
         #endregion
         #region Standard
         public override void SetStaticDefaults()
@@ -780,8 +782,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -24);
                 }
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<MechLure>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<MechLure>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron], ref droppedSummon, WorldSavingSystem.EternityMode);
             }
             if (Timer > 90)
             {

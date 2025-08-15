@@ -125,6 +125,19 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.RubyRobe, ItemID.DiamondRobe), ItemID.RubyRobe, ItemID.DiamondRobe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier3Robe", group);
 
+            //flight mastery soul
+            //soul craft wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AngelWings, ItemID.DemonWings), ItemID.AngelWings, ItemID.DemonWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnySoulWings", group);
+            //elemental feather wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.FlameWings, ItemID.FrozenWings), ItemID.FlameWings, ItemID.FrozenWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyElementWings", group);
+            //holiday wings
+            group = new RecipeGroup(() => ItemXOrY(ItemID.FestiveWings, ItemID.SpookyWings), ItemID.FestiveWings, ItemID.SpookyWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyHolidayWings", group);
+            //boss wings
+            group = new RecipeGroup(() => AnyItem("BossWings"), ItemID.BetsyWings, ItemID.FishronWings, ItemID.RainbowWings);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBossWings", group);
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
@@ -135,6 +148,18 @@ namespace FargowiltasSouls.Core.Systems
             //            group = new RecipeGroup(() => AnyItem("Butterfly"), ItemID.JuliaButterfly, ItemID.MonarchButterfly, ItemID.PurpleEmperorButterfly,
             //                ItemID.RedAdmiralButterfly, ItemID.SulphurButterfly, ItemID.TreeNymphButterfly, ItemID.UlyssesButterfly, ItemID.ZebraSwallowtailButterfly);
             //            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyButterfly", group);
+
+            //berserker soul
+            //Any evil orb melee
+            group = new RecipeGroup(() => ItemXOrY(ItemID.BallOHurt, ItemID.TheRottedFork), ItemID.BallOHurt, ItemID.TheRottedFork);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:BallOHurtOrTheRottedFork", group);
+            //phaseblades
+            group = new RecipeGroup(() => AnyItem("Phaseblade"), 
+                ItemID.RedPhasesaber, ItemID.BluePhaseblade, ItemID.GreenPhaseblade, ItemID.PurplePhaseblade, ItemID.WhitePhaseblade, ItemID.YellowPhaseblade);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyPhaseblade", group);
+            //dungeon biomechest melee
+            group = new RecipeGroup(() => ItemXOrY(ItemID.ScourgeoftheCorruptor, ItemID.VampireKnives), ItemID.ScourgeoftheCorruptor, ItemID.VampireKnives);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives", group);
 
             //vanilla squirrels
             group = new RecipeGroup(() => AnyItem(ItemID.Squirrel),
@@ -228,6 +253,11 @@ namespace FargowiltasSouls.Core.Systems
 
             group = new RecipeGroup(() => AnyItem("SentryAccessory"), ItemID.MonkBelt, ItemID.SquireShield, ItemID.HuntressBuckler, ItemID.ApprenticeScarf);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySentryAccessory", group);
+
+            group = new RecipeGroup(() => AnyItem("GemStaves"), 
+                ItemID.AmethystStaff, ItemID.TopazStaff, ItemID.SapphireStaff, ItemID.EmeraldStaff, 
+                ItemID.RubyStaff, ItemID.DiamondStaff, ItemID.AmberStaff);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyGemStaff", group);
         }
         public override void PostAddRecipes()
         {

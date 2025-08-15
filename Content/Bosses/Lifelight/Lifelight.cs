@@ -28,6 +28,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
@@ -68,6 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         private bool DoAura;
 
         public bool PhaseOne = true;
+        private bool droppedSummon = false;
 
         int P2Threshold => Main.expertMode ? (int)(NPC.lifeMax * (WorldSavingSystem.EternityMode ? WorldSavingSystem.MasochistModeReal ? 0.75 : 0.66 : 0.5)) : 0;
 
@@ -548,8 +550,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 if (!Main.dedServ)
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 60);
 
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<CrystallineEffigy>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<CrystallineEffigy>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight], ref droppedSummon, WorldSavingSystem.EternityMode);
 
                 SoundEngine.PlaySound(ScreechSound1, NPC.Center);
                 SoundEngine.PlaySound(SoundID.Item62, NPC.Center);

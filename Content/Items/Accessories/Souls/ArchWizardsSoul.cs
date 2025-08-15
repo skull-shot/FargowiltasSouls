@@ -36,18 +36,32 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.CelestialEmblem)
             .AddRecipeGroup("FargowiltasSouls:AnyMagicCuffs")
             .AddRecipeGroup("FargowiltasSouls:AnyManaFlower")
-            .AddIngredient(ItemID.MedusaHead)
-            .AddIngredient(ItemID.SharpTears)
-            .AddIngredient(ItemID.MagnetSphere)
+            //prehm weps
+            .AddRecipeGroup("FargowiltasSouls:AnyGemStaff")
+            .AddRecipeGroup("FargowiltasSouls:VilethornOrCrimsonRod")
+            .AddIngredient(ItemID.WeatherPain)
+            .AddIngredient(ItemID.AquaScepter)
+            .AddIngredient(ItemID.DemonScythe)
+            //hm weps
+            .AddIngredient(ItemID.SharpTears) //Blood Thorn
+            .AddIngredient(ItemID.CrystalSerpent)
+            .AddIngredient(ItemID.VenomStaff)
             .AddIngredient(ItemID.RainbowGun)
-
-            .AddIngredient(ItemID.ApprenticeStaffT3)
-            .AddIngredient(ItemID.SparkleGuitar)
-            .AddIngredient(ItemID.RazorbladeTyphoon)
-
-            //.AddIngredient(ItemID.BlizzardStaff);
+            .AddIngredient(ItemID.FairyQueenMagicItem) // Nightglow
             .AddIngredient(ItemID.LaserMachinegun)
-            .AddIngredient(ItemID.LastPrism)
+
+
+            //old recipe
+            //.AddIngredient(ItemID.MedusaHead)
+            //.AddIngredient(ItemID.SharpTears)
+            //.AddIngredient(ItemID.MagnetSphere)
+            //.AddIngredient(ItemID.RainbowGun)
+            //.AddIngredient(ItemID.ApprenticeStaffT3)
+            //.AddIngredient(ItemID.SparkleGuitar)
+            //.AddIngredient(ItemID.RazorbladeTyphoon)
+            ////.AddIngredient(ItemID.BlizzardStaff);
+            //.AddIngredient(ItemID.LaserMachinegun)
+            //.AddIngredient(ItemID.LastPrism)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();

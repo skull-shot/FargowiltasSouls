@@ -27,16 +27,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.PapyrusScarab)
             .AddIngredient(ItemID.PygmyNecklace)
             .AddRecipeGroup("FargowiltasSouls:AnySentryAccessory")
-
-            .AddIngredient(ItemID.Smolstar) //blade staff
-            .AddIngredient(ItemID.OpticStaff)
+            //prehm weps
+            .AddIngredient(ItemID.BabyBirdStaff) // Finch Staff
+            .AddIngredient(ItemID.VampireFrogStaff)
+            .AddIngredient(ItemID.BlandWhip) // Leather Whip, replace with Evil Whip in 1.4.5
+            .AddIngredient(ItemID.HoundiusShootius)
+            .AddIngredient(ItemID.ImpStaff)
+            //hm weps
+            .AddIngredient(ItemID.FireWhip) // Firecracker
+            .AddIngredient(ItemID.Smolstar) // Blade Staff
             .AddIngredient(ItemID.DeadlySphereStaff)
-            .AddIngredient(ItemID.StormTigerStaff)
-            .AddIngredient(ItemID.StaffoftheFrostHydra)
-            .AddIngredient(ItemID.TempestStaff)
-            .AddIngredient(ItemID.MaceWhip)
-            .AddIngredient(ItemID.XenoStaff)
-            .AddIngredient(ItemID.EmpressBlade) //terraprisma
+            .AddIngredient(ItemID.StormTigerStaff) // Desert Tiger
+            .AddIngredient(ItemID.MaceWhip) // Morningstar
+            .AddIngredient(ItemID.EmpressBlade) // Terraprisma
+
+            //old recipe
+            //.AddIngredient(ItemID.Smolstar) //blade staff
+            //.AddIngredient(ItemID.OpticStaff)
+            //.AddIngredient(ItemID.DeadlySphereStaff)
+            //.AddIngredient(ItemID.StormTigerStaff)
+            //.AddIngredient(ItemID.StaffoftheFrostHydra)
+            //.AddIngredient(ItemID.TempestStaff)
+            //.AddIngredient(ItemID.MaceWhip)
+            //.AddIngredient(ItemID.XenoStaff)
+            //.AddIngredient(ItemID.EmpressBlade) //terraprisma
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();

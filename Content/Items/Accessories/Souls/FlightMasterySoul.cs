@@ -49,27 +49,34 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.EmpressFlightBooster) //soaring insignia
-
-            .AddIngredient(ItemID.BatWings) //bat wings
-            .AddIngredient(ItemID.CreativeWings) //fledgling wings
-            .AddIngredient(ItemID.FairyWings)
-            .AddIngredient(ItemID.HarpyWings)
-            .AddIngredient(ItemID.BoneWings)
-            .AddIngredient(ItemID.FrozenWings)
-            .AddIngredient(ItemID.FlameWings)
-            .AddIngredient(ItemID.TatteredFairyWings)
-            .AddIngredient(ItemID.FestiveWings)
-            .AddIngredient(ItemID.BetsyWings)
-            .AddIngredient(ItemID.FishronWings)
-            .AddIngredient(ItemID.RainbowWings) //empress wings
-            .AddIngredient(ItemID.LongRainbowTrailWings) //celestial starboard
-
+            .AddIngredient(ItemID.EmpressFlightBooster) // Soaring Insignia
             .AddIngredient(ItemID.GravityGlobe)
+            .AddIngredient(ItemID.CreativeWings) // Fledgling Wings
+            .AddRecipeGroup("FargowiltasSouls:AnySoulWings") // Angel or Demon wings
+            .AddRecipeGroup("FargowiltasSouls:AnyElementWings") // Flame or Frost Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyHolidayWings") // Festive or Spooky Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyBossWings") // Betsy, Fishron or Empress Wings
+            .AddIngredient(ItemID.LongRainbowTrailWings) // Celestial Starboard
+
+            // old recipe
+
+            //.AddIngredient(ItemID.EmpressFlightBooster) //soaring insignia
+            //.AddIngredient(ItemID.BatWings) //bat wings
+            //.AddIngredient(ItemID.CreativeWings) //fledgling wings
+            //.AddIngredient(ItemID.FairyWings)
+            //.AddIngredient(ItemID.HarpyWings)
+            //.AddIngredient(ItemID.BoneWings)
+            //.AddIngredient(ItemID.FrozenWings)
+            //.AddIngredient(ItemID.FlameWings)
+            //.AddIngredient(ItemID.TatteredFairyWings)
+            //.AddIngredient(ItemID.FestiveWings)
+            //.AddIngredient(ItemID.BetsyWings)
+            //.AddIngredient(ItemID.FishronWings)
+            //.AddIngredient(ItemID.RainbowWings) //empress wings
+            //.AddIngredient(ItemID.LongRainbowTrailWings) //celestial starboard
+            //.AddIngredient(ItemID.GravityGlobe)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
-
-
             .Register();
         }
     }

@@ -813,8 +813,8 @@ EmpressRitual.DisplayName: 女皇结界
 // PigronBubble.DisplayName: Pigron Bubble
 // NymphHeart.DisplayName: Nymph Heart
 // SpiderEnchantSpiderling.DisplayName: Spiderling
-// AbomFlamePillar.DisplayName: Abom Flame Pillar
-// AbomFlamePillarMark.DisplayName: Abom Flame Pillar Mark
+// AbomFlamePillar.DisplayName: Flame Pillar
+// AbomFlamePillarMark.DisplayName: Flame Pillar Mark
 // DemonFireball.DisplayName: Demon Fireball
 // ImpFireOrb.DisplayName: Imp Fire Orb
 // BatExplosion.DisplayName: Bat Explosion
@@ -822,3 +822,6 @@ EmpressRitual.DisplayName: 女皇结界
 // TrawlerFog.DisplayName: Trawler Fog
 // IceShield.DisplayName: Ice Shield
 // KingSlimeBallFriendly.DisplayName: Slime Ball
+// CultistFireballSpin.DisplayName: Fireball
+// CultistIceBall.DisplayName: Ice Sphere
+// CultistIceShard.DisplayName: Ice Shard

@@ -17,6 +17,7 @@ using Luminance.Common.StateMachines;
 using FargowiltasSouls.Assets.Sounds;
 using Terraria.Chat;
 using Terraria.Localization;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 {
@@ -61,7 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         ];
 
         public Player Player => Main.player[NPC.target];
-
+        private bool droppedSummon = false;
         #endregion
         #region AI
         public override void OnSpawn(IEntitySource source)
@@ -217,8 +218,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 		{
             if (Timer == 2)
             {
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<CoffinSummon>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<CoffinSummon>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin], ref droppedSummon, WorldSavingSystem.EternityMode);
             }
 			if (Timer >= 0)
 			{

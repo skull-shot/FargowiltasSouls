@@ -43,9 +43,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddRecipeGroup("FargowiltasSouls:AnyMythrilHead")
             .AddIngredient(ItemID.MythrilChainmail)
             .AddIngredient(ItemID.MythrilGreaves)
-            .AddIngredient(ItemID.ClockworkAssaultRifle)
             .AddIngredient(ItemID.LaserRifle)
-            .AddIngredient(ItemID.OnyxBlaster)
+            .AddIngredient(ItemID.ClockworkAssaultRifle)
+            .AddIngredient(ItemID.FlowerofFire)
 
             .AddTile(TileID.CrystalBall)
             .Register();
