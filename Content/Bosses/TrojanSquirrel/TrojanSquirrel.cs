@@ -1,5 +1,6 @@
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Masks;
@@ -474,8 +475,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 }
 
                 //drop summon
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<SquirrelCoatofArms>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<SquirrelCoatofArms>(),  WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel], ref spawned);
 
                 //start by jumping
                 NPC.ai[0] = 1f;
