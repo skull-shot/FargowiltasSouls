@@ -64,7 +64,7 @@ namespace FargowiltasSouls
             {"DeviBoss", 7f - 1e-4f},
             // hm
             {"BanishedBaron", 8.7f},
-            {"LifeChallenger", 11.49f},
+            {"Lifelight", 11.49f},
             // post ml
             {"TimberChampion", 19.1f},
             {"TerraChampion", 19.15f},
@@ -277,7 +277,7 @@ namespace FargowiltasSouls
                     "Content/Bosses/TrojanSquirrel/TrojanSquirrel_Still"
                 );
                 Add("Boss",
-                    "LifeChallenger",
+                    "Lifelight",
                     [ModContent.NPCType<Lifelight>()],
                     () => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight],
                     () => true,
@@ -291,7 +291,7 @@ namespace FargowiltasSouls
                     ],
                     [ModContent.ItemType<CrystallineEffigy>()],
                     false,
-                    "Content/Bosses/Lifelight/LifeChallenger"
+                    "Assets/Textures/Content/Bosses/Lifelight/Lifelight"
                 );
 
                 Add("Boss",
