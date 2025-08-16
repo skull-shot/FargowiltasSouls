@@ -132,7 +132,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             modPlayer.Beetles -= 3;
             if (modPlayer.Beetles < 0)
                 modPlayer.Beetles = 0;
-            modPlayer.BeetleHitCD = 60 * 3;
+            modPlayer.BeetleHitCD = 0;
         }
 
     }

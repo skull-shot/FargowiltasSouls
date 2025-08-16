@@ -86,7 +86,7 @@ BeetleEnchant: {
 		'''
 		Hitting enemies generates up to 6 beetles
 		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
-		3 beetles die when taking damage, once per 3 seconds
+		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		'''
 }
