@@ -573,13 +573,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             modifiers.Null();
         }
-        public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
-        {
-            base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
-
-            if (WorldSavingSystem.MasochistModeReal && projectile.maxPenetrate != 1 && FargoSoulsUtil.CanDeleteProjectile(projectile))
-                projectile.timeLeft = 0;
-        }
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {
             hit.Null();
