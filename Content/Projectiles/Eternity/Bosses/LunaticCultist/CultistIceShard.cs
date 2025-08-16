@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,7 +52,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 180);
         }
 
         public override void OnKill(int timeLeft)

@@ -1,5 +1,6 @@
 using Fargowiltas.Common.Configs;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -78,7 +79,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 180);
         }
 
         public override void OnKill(int timeLeft)
