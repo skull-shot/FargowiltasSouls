@@ -42,6 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int RotationDirection = 1;
         public int LightshowSlowTimer;
 
+        public static bool Phase2HP(NPC npc) => npc.life < (int)(npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.95 : .75));
         public bool InPhase2;
         public bool IsCoiling;
         public bool PrepareToCoil;
@@ -751,7 +752,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     ProbeLasers(1);
                 }
-                if (npc.life < (int)(npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.95 : .75)))
+                if (Phase2HP(npc))
                 {
                     InPhase2 = true;
                     AttackModeTimer = P2_COIL_BEGIN_TIME;
@@ -810,16 +811,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.4f;
+                    modifiers.FinalDamage *= 0.6f;
                 }
             }
             else if (npc.life < npc.lifeMax / 10)
             {
                 modifiers.FinalDamage *= 0.1f;
             }
-            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
+            else if (Phase2HP(npc) && (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120))
             {
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.6f;
             }
         }
 
@@ -1061,12 +1062,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.1f;
+                    modifiers.FinalDamage *= 0.6f;
                 }
             }
-            else if (destroyerEmode.PrepareToCoil || destroyerEmode.AttackModeTimer >= Destroyer.P2_COIL_BEGIN_TIME - 120 || destroyer.life < destroyer.lifeMax / 10)
+            else if (destroyer.life < destroyer.lifeMax / 10)
             {
                 modifiers.FinalDamage *= 0.1f;
+            }
+            else if (Destroyer.Phase2HP(npc) && (destroyerEmode.PrepareToCoil || destroyerEmode.AttackModeTimer >= Destroyer.P2_COIL_BEGIN_TIME - 120 || destroyer.life < destroyer.lifeMax / 10))
+            {
+                modifiers.FinalDamage *= 0.6f;
             }
 
             if (Main.npc.Count(n => n.active && n.type == npc.type && n.Distance(npc.Center) < npc.width * 0.75) > 4)
