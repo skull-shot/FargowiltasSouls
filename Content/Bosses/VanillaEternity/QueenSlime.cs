@@ -499,8 +499,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (hopTimer < hops) // start hop
                 {
-                    float targetVel = Math.Abs(Target.Center.X - NPC.Center.X) / 36f;
-                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * Math.Min(14, targetVel);
+                    float targetVel = Math.Abs(Target.Center.X - NPC.Center.X) / 28f;
+                    if (Target.velocity.X.NonZeroSign() != Target.HorizontalDirectionTo(NPC.Center))
+                        targetVel += Target.velocity.X / 3;
+                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * Math.Max(8, targetVel);
                     int y = -18;
                     if (Target.Bottom.Y < NPC.Bottom.Y)
                         y = -18;
@@ -554,7 +556,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NPC.velocity.Y += 0.4f;
                 float horDir = NPC.HorizontalDirectionTo(Target.Center);
                 if (NPC.velocity.X.NonZeroSign() != horDir)
-                    NPC.velocity.X += horDir * 0.15f;
+                    NPC.velocity.X += horDir * 0.5f;
             }
 
 
@@ -1040,6 +1042,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
                 states = [States.NormalSlam];
             State = (int)Main.rand.NextFromCollection(states);
+            State = (int)States.QuickHops;
             NetSync(NPC);
 
             // debug

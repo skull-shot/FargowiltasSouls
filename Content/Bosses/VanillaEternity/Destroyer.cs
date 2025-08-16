@@ -189,10 +189,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float ratio = (float)npc.life / npc.lifeMax;
                     if (WorldSavingSystem.MasochistModeReal)
                         ratio = 0;
-
-                    int max = (int)(14f - 10f * ratio);
+                    float max = 12f;
+                    float min = 4f;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        max = 14f;
+                    max = MathHelper.Lerp(max, min, ratio);
+                    max = (int)max;
                     if (max % 2 != 0) //always shoot even number
                         max++;
+                    if (max <= 4) // minimum of 6
+                        max = 6;
 
                     for (int i = 0; i < max; i++)
                     {
@@ -840,7 +846,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Electrified, 60);
-            target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
         }
 
 
@@ -1124,7 +1130,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Electrified, 60);
-            target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
