@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CosmosTimer > 0)
             {
                 CosmosTimer--;
-            }
+            } 
             /* if (SolarTimer == 1)
                 CombatText.NewText(Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Deactivate", 15), true);
             if (VortexTimer == 1)

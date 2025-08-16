@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //heart of maso
             player.buffImmune[BuffID.MoonLeech] = true;
-            player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
         }
 
         public override void AddRecipes()

@@ -288,7 +288,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<MidasBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;
             player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ReverseManaFlowBuff>()] = true;

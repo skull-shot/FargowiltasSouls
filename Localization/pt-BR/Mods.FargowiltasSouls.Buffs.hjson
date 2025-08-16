@@ -358,9 +358,15 @@ NeurotoxinBuff: {
 	// Description: Your body is shutting down
 }
 
-NullificationCurseBuff: {
-	// DisplayName: Nullification Curse
-	// Description: Moon Lord has cycling damage type resistances!
+PoweroftheCosmosBuff: {
+	// DisplayName: Power of the Cosmos
+	// Description: Weapons matching Moon Lord's lunar phase deal 1.25x damage!
+	// CombatText: 1.25x {0} damage!
+	// Melee: melee
+	// Ranged: ranged
+	// Magic: magic
+	// Summon: summon
+	// All: all
 }
 
 OceanicMaulBuff: {

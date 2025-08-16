@@ -358,9 +358,15 @@ NeurotoxinBuff: {
 	Description: Ваше тело прекращает работу
 }
 
-NullificationCurseBuff: {
+PoweroftheCosmosBuff: {
 	DisplayName: Проклятие нуллификации
 	Description: Лунный лорд переключает сопротивления к видам урона!
+	// CombatText: 1.25x {0} damage!
+	// Melee: melee
+	// Ranged: ranged
+	// Magic: magic
+	// Summon: summon
+	// All: all
 }
 
 OceanicMaulBuff: {

@@ -358,9 +358,15 @@ NeurotoxinBuff: {
 	Description: 你的身体正在停歇关闭
 }
 
-NullificationCurseBuff: {
+PoweroftheCosmosBuff: {
 	DisplayName: 无效诅咒
 	Description: 月亮领主正在循环他的伤害免疫类型！
+	// CombatText: 1.25x {0} damage!
+	// Melee: melee
+	// Ranged: ranged
+	// Magic: magic
+	// Summon: summon
+	// All: all
 }
 
 OceanicMaulBuff: {

@@ -483,7 +483,7 @@ namespace FargowiltasSouls
                     ModContent.BuffType<MidasBuff>(),
                     ModContent.BuffType<MutantNibbleBuff>(),
                     ModContent.BuffType<NanoInjectionBuff>(),
-                    ModContent.BuffType<NullificationCurseBuff>(),
+                    ModContent.BuffType<PoweroftheCosmosBuff>(),
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<OceanicSealBuff>(),
                     ModContent.BuffType<OiledBuff>(),
