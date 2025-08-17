@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             float progress = (float)Timer / AttackDuration;
-            float maxDist = 350;
+            float maxDist = 380;
             float expandTime = 0.2f;
             float contractStart = 1 - expandTime;
             float dist = 300;
