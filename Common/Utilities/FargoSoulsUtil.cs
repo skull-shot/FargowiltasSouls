@@ -675,7 +675,7 @@ namespace FargowiltasSouls //lets everything access it without using
             if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
             {
                 sourceProjOut = sourceProj;
-                if (sourceProj.FargoSouls().SourceItemType != 0 && sourceProj.FargoSouls().ItemSource)
+                if (sourceProj.FargoSouls().SourceItemType != 0 && (sourceProj.FargoSouls().ItemSource || (!FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(projectile.type)) && !FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type)))
                     projectile.FargoSouls().SourceItemType = sourceProj.FargoSouls().SourceItemType;
             }
 
