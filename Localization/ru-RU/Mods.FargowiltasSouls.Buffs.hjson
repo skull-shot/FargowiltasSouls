@@ -361,7 +361,7 @@ NeurotoxinBuff: {
 PoweroftheCosmosBuff: {
 	DisplayName: Проклятие нуллификации
 	Description: Лунный лорд переключает сопротивления к видам урона!
-	// CombatText: 1.25x {0} damage!
+	// CombatText: 1.4x {0} damage!
 	// Melee: melee
 	// Ranged: ranged
 	// Magic: magic

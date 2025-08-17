@@ -86,7 +86,7 @@ BeetleEnchant: {
 		'''
 		Hitting enemies generates up to 6 beetles
 		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
-		3 beetles die when taking damage, once per 3 seconds
+		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
 }
@@ -1865,7 +1865,7 @@ GaiaGreaves: {
 	// DisplayName: Gaia Greaves
 	/* Tooltip:
 		'''
-		10% increased damage for your current weapon class
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
 		10% increased movement speed
 		''' */
@@ -1875,9 +1875,8 @@ GaiaHelmet: {
 	// DisplayName: Gaia Helmet
 	/* Tooltip:
 		'''
-		10% increased damage
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
-		Increases max number of minions by 1
 		''' */
 }
 
@@ -1885,7 +1884,7 @@ GaiaPlate: {
 	// DisplayName: Gaia Plate
 	/* Tooltip:
 		'''
-		10% increased damage
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
 		Reduces damage taken by 10%
 		Increases your life regeneration
