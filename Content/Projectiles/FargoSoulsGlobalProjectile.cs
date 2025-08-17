@@ -111,6 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
 
         public int SourceItemType = 0;
+        public bool? Homing = null; // used for when a dynamically homing projectile requires specific conditions
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),
@@ -289,6 +290,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     { // inherit Apprentice Support tag if source is also a Support projectile
                         ApprenticeSupportProjectile = true;
                     }
+                    projectile.FargoSouls().Homing ??= projectile.IsHoming(player, source);
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
                 {
@@ -432,8 +434,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
                 && !EModeGlobalProjectile.FancySwings.Contains(projectile.type)
-                && !ProjectileID.Sets.CultistIsResistantTo[projectile.type]
-                && !FargoSoulsUtil.IsSummonDamage(projectile, true, false))
+                && projectile.FargoSouls().Homing != true
+                && !FargoSoulsUtil.IsSummonDamage(projectile, true, false)
             {
                 HuntressProj = 1;
             }

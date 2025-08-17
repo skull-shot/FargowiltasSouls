@@ -689,7 +689,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
-            if (ProjectileID.Sets.CultistIsResistantTo[projectile.type] && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.FargoSouls().Homing == true && !FargoSoulsUtil.IsSummonDamage(projectile))
                 modifiers.FinalDamage *= 0.75f;
         }
 
