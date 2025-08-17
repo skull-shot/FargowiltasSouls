@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             if (WorldSavingSystem.MasochistModeReal)
             {
                 target.longInvince = true;
-                modifiers.FinalDamage *= 0.25f;
+                modifiers.SourceDamage *= 0.25f;
             }
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

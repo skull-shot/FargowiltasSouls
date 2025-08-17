@@ -184,7 +184,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Projectile.ai[0] == 0f) //less damage when held
-                modifiers.FinalDamage /= 2;
+                modifiers.SourceDamage /= 2;
 
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }

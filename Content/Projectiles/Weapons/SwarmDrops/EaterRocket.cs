@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (dist > closeDistance && dist < farDistance)
             {
-                modifiers.FinalDamage *= 1.5f;
+                modifiers.SourceDamage *= 1.5f;
                 sweetspot = true;
             }
         }
