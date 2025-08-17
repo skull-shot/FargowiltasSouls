@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.width = 196;
             Projectile.height = 196;
             Projectile.penetrate = -1;
@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (thrown > 0)
             {
                 ThrownAI();
-                return;
+                return false;
             }
 
             ref float timer = ref Projectile.ai[1];
@@ -137,7 +137,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 Projectile.rotation += MathHelper.ToRadians(-135f) + (float)Math.PI;
             }
-
+            return false;
         }
         public void ThrownAI()
         {

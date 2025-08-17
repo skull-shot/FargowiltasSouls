@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         {
             Projectile.width = 116;
             Projectile.height = 394;
-            //Projectile.aiStyle = 136;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.alpha = 0;
             Projectile.penetrate = -1;
             //Projectile.usesLocalNPCImmunity = true;
@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
         }
 
-        public override void AI()
+        public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
 
@@ -87,13 +87,16 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 sound.Volume = 0.6f;
             });
-            
-            
-           
-         
+
+
+
+
 
             if (player.dead || !player.active)
+            {
                 Projectile.Kill();
+                return false;
+            }
 
             if (Main.player[Projectile.owner].HeldItem.type == ModContent.ItemType<Items.Weapons.SwarmDrops.DiffractorBlaster>())
             {
@@ -115,13 +118,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 10;
             player.itemAnimation = 10;
-            
+
             Vector2 HoldOffset = new Vector2(Projectile.width / 8, 0).RotatedBy(MathHelper.WrapAngle(Projectile.velocity.ToRotation()));
 
-            Projectile.Center += HoldOffset; 
+            Projectile.Center += HoldOffset;
             Projectile.spriteDirection = Projectile.direction * (int)player.gravDir;
             Projectile.rotation -= extrarotate;
- 
+
 
             Projectile.frameCounter++;
             if (Projectile.frameCounter > 3)
@@ -150,7 +153,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             else
             {
                 Projectile.Center += Projectile.velocity * 20;
-                return;
+                return false;
             }
 
             if (player.channel)
@@ -163,7 +166,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         SoundEngine.PlaySound(player.inventory[player.selectedItem].UseSound.Value, Projectile.Center);
                     bool checkmana = player.CheckMana(player.inventory[player.selectedItem].mana, true, false);
                     if (!checkmana)
+                    {
                         Projectile.Kill();
+                        return false;
+                    }
                 }
                 if (timer > 60)
                 {
@@ -176,7 +182,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + HoldOffset * 2, 22f * Projectile.velocity.RotatedBy(spread * i),
                             type, damage, Projectile.knockBack, Projectile.owner);
                     }
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/DiffractorOrb" + Main.rand.Next(1,3)) with { Volume = 0.6f}, Projectile.Center); // not sound registeried because idk how to randomize using that.
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Weapons/DiffractorOrb" + Main.rand.Next(1, 3)) with { Volume = 0.6f }, Projectile.Center); // not sound registeried because idk how to randomize using that.
                     /*int p = Projectile.NewProjectile(Projectile.Center + HoldOffset * 2, Projectile.velocity * 22, type, Projectile.damage, Projectile.knockBack, player.whoAmI);
 					if (p < 1000)
 					{
@@ -201,6 +207,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 else if (player.ownedProjectileCounts[ModContent.ProjectileType<PrimeDeathray>()] < 12)
                 {
                     Projectile.Kill();
+                    return false;
                 }
             }
 
@@ -211,6 +218,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.Kill();
                 SoundEngine.PlaySound(FargosSoundRegistry.DiffractorEnd, player.Center);
             }
+            return false;
         }
 
         public static void SplitProj(Projectile Projectile, int number)

@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         {
             Projectile.width = 63;
             Projectile.height = 63;
-            Projectile.aiStyle = 0;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             //Projectile.light = 2f;
@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             FreezeTime = 4;
         }
-        public override void AI()
+        public override bool PreAI()
         {
             void SlimeProjs(Player player)
             {
@@ -182,7 +182,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 Projectile.Kill();
                 player.FargoSouls().SKSCancelTimer = 40;
-                return;
+                return false;
             }
 
             Vector2 playerRotatedPoint = player.RotatedRelativePoint(player.MountedCenter, true);
@@ -212,7 +212,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 2;
             player.itemAnimation = 2;
-
+            return false;
         }
         public override bool PreDraw(ref Color lightColor)
         {

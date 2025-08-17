@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         {
             Projectile.width = 30;
             Projectile.height = 30;
-            //Projectile.aiStyle = 136;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             //Projectile.alpha = 255;
             Projectile.penetrate = -1;
             Projectile.friendly = true;
@@ -42,11 +42,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
 
-        public override void AI()
+        public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
             if (Main.myPlayer != player.whoAmI)
-                return;
+                return false;
 
             if (player.dead || !player.active)
                 Projectile.Kill();
@@ -114,6 +114,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             {
                 Projectile.Kill();
             }
+            return false;
         }
 
         public override bool? Colliding(Rectangle myRect, Rectangle targetRect)

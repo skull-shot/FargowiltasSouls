@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 
         public override void SetDefaults()
         {
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.width = 244;
             Projectile.height = 244;
             Projectile.penetrate = -1;
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         int OrigAnimMax = 30;
         bool Charged;
         public int Hits = 0;
-        public override void AI()
+        public override bool PreAI()
         {
             ref float chargeLevel = ref Projectile.ai[0];
             ref float timer = ref Projectile.ai[1];
@@ -149,7 +149,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             {
                 Projectile.rotation += MathHelper.ToRadians(-135f) + (float)Math.PI;
             }
-
+            return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
