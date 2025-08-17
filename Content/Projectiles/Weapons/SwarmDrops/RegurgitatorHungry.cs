@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         {
             if (Projectile.scale >= 5)
             {
-                modifiers.FinalDamage *= 1.5f;
+                modifiers.SourceDamage *= 1.5f;
                 modifiers.SetCrit();
             }
         }

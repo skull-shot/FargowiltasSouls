@@ -1350,20 +1350,20 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.CopperCoin:
-                    modifiers.FinalDamage *= 1.6f;
+                    modifiers.SourceDamage *= 1.6f;
                     break;
                 case ProjectileID.SilverCoin:
-                    modifiers.FinalDamage *= 0.9f;
+                    modifiers.SourceDamage *= 0.9f;
                     break;
                 case ProjectileID.GoldCoin:
-                    modifiers.FinalDamage *= 0.47f;
+                    modifiers.SourceDamage *= 0.47f;
                     break;
                 case ProjectileID.PlatinumCoin:
-                    modifiers.FinalDamage *= 0.275f;
+                    modifiers.SourceDamage *= 0.275f;
                     break;
 
                 case ProjectileID.OrichalcumHalberd:
-                    modifiers.FinalDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
+                    modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                     break;
                 case ProjectileID.MedusaHeadRay:
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
@@ -1373,26 +1373,26 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             float maxBonus = 1.25f;                    // Medusa Head can target up to 3 enemies max, this EMode buff makes it so that
                             float bonus = maxBonus / medusaList.Count; // for every enemy target slot that's empty, the damage goes up by +0.625x,
-                            modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
+                            modifiers.SourceDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
                     break;
                 case ProjectileID.DD2BetsyArrow:
                     if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _) && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.DD2BetsyBow)) //vanilla conditions for "airborne enemy"
-                        modifiers.FinalDamage *= 9.2f/12f; //results in 1.15x after vanilla 1.5x
+                        modifiers.SourceDamage *= 9.2f/12f; //results in 1.15x after vanilla 1.5x
                     break;
                 case ProjectileID.MoonlordTurretLaser:
-                    modifiers.FinalDamage *= 0.5f;
+                    modifiers.SourceDamage *= 0.5f;
                     break;
                 case ProjectileID.RainbowCrystalExplosion:
-                    modifiers.FinalDamage *= 0.6f;
+                    modifiers.SourceDamage *= 0.6f;
                     break;
                 case ProjectileID.Tempest:
                 case ProjectileID.MiniSharkron:
-                    modifiers.FinalDamage *= 1.2f;
+                    modifiers.SourceDamage *= 1.2f;
                     break;
                 case ProjectileID.HoundiusShootiusFireball:
-                    modifiers.FinalDamage *= 1.2f;
+                    modifiers.SourceDamage *= 1.2f;
                     break;
             }
 
@@ -1406,7 +1406,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         float maxBonus = 1f;
                         float bonus = maxBonus * player.Distance(target.Center) / 1800f;
                         bonus = MathHelper.Clamp(bonus, 0f, maxBonus);
-                        modifiers.FinalDamage *= 1 + bonus;
+                        modifiers.SourceDamage *= 1 + bonus;
                     }
                 }
             }
@@ -1420,7 +1420,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         float maxBonus = 2f;
                         float bonus = maxBonus * player.Distance(target.Center) / 600f;
                         bonus = MathHelper.Clamp(bonus, 0f, maxBonus*2);
-                        modifiers.FinalDamage *= 1 + bonus;
+                        modifiers.SourceDamage *= 1 + bonus;
                     }
                 }
             }
@@ -1479,7 +1479,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 return;
 
             if (NPC.downedGolemBoss && projectile.type == ProjectileID.VortexLightning)
-                modifiers.FinalDamage *= 2;
+                modifiers.SourceDamage *= 2;
 
             if (projectile.type == ProjectileID.DeerclopsIceSpike)
             {

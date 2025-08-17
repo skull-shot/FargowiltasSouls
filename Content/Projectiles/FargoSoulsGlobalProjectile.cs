@@ -1388,7 +1388,7 @@ namespace FargowiltasSouls.Content.Projectiles
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             if (TungstenScale != 1 && projectile.type == ProjectileID.PiercingStarlight)
-                modifiers.FinalDamage *= 0.75f;
+                modifiers.SourceDamage *= 0.75f;
 
             if (TikiTagged)
             {
