@@ -20,6 +20,7 @@ using Terraria.ModLoader;
 using Terraria.Graphics.Capture;
 using Terraria.GameContent.Achievements;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.Projectiles;
 
 namespace FargowiltasSouls //lets everything access it without using
 {
@@ -658,6 +659,29 @@ namespace FargowiltasSouls //lets everything access it without using
                     // This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, set in NPC code
                     NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: bossType);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Useful for defining the SourceItemType of a player projectile using its source.
+        /// Additionally defines the parent source projectile when applicable.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="source"></param>
+        /// <param name="sourceProjOut"></param>
+        public static void GetOrigin(Projectile projectile, IEntitySource source, out Projectile? sourceProjOut)
+        {
+            sourceProjOut = null;
+            if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
+            {
+                sourceProjOut = sourceProj;
+                if (sourceProj.FargoSouls().SourceItemType != 0 && sourceProj.FargoSouls().ItemSource)
+                    projectile.FargoSouls().SourceItemType = sourceProj.FargoSouls().SourceItemType;
+            }
+
+            if (source is EntitySource_ItemUse itemUse && itemUse.Item != null)
+            {
+                projectile.FargoSouls().SourceItemType = itemUse.Item.type;
             }
         }
 
