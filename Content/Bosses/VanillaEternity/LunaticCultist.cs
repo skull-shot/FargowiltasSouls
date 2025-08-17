@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -160,20 +161,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             int damage = 33;
             //Targeting
-            int maxDist = 3000;
+            int maxDist = 5000;
             if (!npc.HasPlayerTarget || !Main.player[npc.target].active || Main.player[npc.target].dead || Main.player[npc.target].ghost || npc.Distance(Main.player[npc.target].Center) > maxDist)
             {
                 npc.TargetClosest(false);
                 Player newPlayer = Main.player[npc.target];
                 if (!newPlayer.active || newPlayer.dead || newPlayer.ghost || npc.Distance(newPlayer.Center) > maxDist)
                 {
-                    if (npc.timeLeft > 60)
-                        npc.timeLeft = 60;
+                    if (npc.timeLeft > 120)
+                        npc.timeLeft = 120;
                     npc.velocity.Y -= 0.4f;
                     return;
                 }
             }
-            npc.timeLeft = 60;
+            npc.timeLeft = 180;
             Player player = Main.player[npc.target];
             bool alone = Alone(npc);
 
@@ -194,7 +195,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     break;
                 case States.Reposition:
                     {
-                        int duration = (WorldSavingSystem.MasochistModeReal ? 16 : 40);
+                        int duration = WorldSavingSystem.MasochistModeReal ? 16 : 40;
+                        if (alone)
+                            duration = WorldSavingSystem.MasochistModeReal ? 8 : 30;
                         animation = (int)Animation.Float;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 420;
                         if (WorldSavingSystem.MasochistModeReal)
@@ -293,18 +296,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (timer < start)
                         {
                             npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                            if (npc.Distance(player.Center) < 400)
+                            if (npc.Distance(player.Center) < 420)
                             {
-                                npc.velocity -= npc.DirectionTo(player.Center);
+                                npc.velocity -= npc.DirectionTo(player.Center) * 1.1f;
                             }
-                            npc.velocity *= 0.94f;
+                            npc.velocity *= 0.93f;
                         }
                         else
                         {
                             npc.direction = npc.spriteDirection = npc.velocity.X.NonZeroSign();
                             float progress = (float)(timer - start) / (AttackDuration - start);
                             float speedupTime = 0.25f;
-                            float accel = alone ? 0.9f : 0.42f;
+                            float accel = alone ? 0.9f : 0.52f;
                             if (progress < speedupTime)
                                 accel = MathHelper.SmoothStep(0, accel, progress / speedupTime);
 
@@ -366,7 +369,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             SoundEngine.PlaySound(SoundID.Zombie90 with { Volume = 2 }, npc.Center);
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                for (int i = 0; i < 5; i++)
+                                int bolts = alone ? 5 : 4;
+                                for (int i = 0; i < bolts; i++)
                                 {
                                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Main.rand.NextVector2Square(-15, 15), ModContent.ProjectileType<CultistVortex>(), damage, 0, Main.myPlayer, 0f, i);
                                 }
@@ -392,7 +396,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         {
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                int max = alone ? 12 : 10;
+                                int max = alone ? 14 : 10;
                                 if (WorldSavingSystem.MasochistModeReal)
                                     max += 3;
 
@@ -405,8 +409,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 {
                                     int p = Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center + spawnOffset * baseOffset.RotatedBy(rand + 2 * Math.PI / max * i), -speed * baseOffset.RotatedBy(rand + 2 * Math.PI / max * i),
                                         ModContent.ProjectileType<CultistFireball>(), damage, 0f, Main.myPlayer, ai0);
-                                    if (alone && p.IsWithinBounds(Main.maxProjectiles))
-                                        Main.projectile[p].extraUpdates = 1;
 
                                 }
                             }
@@ -436,7 +438,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     {
                                         Vector2 spinninpoint = vec * (6f + (float)Main.rand.NextDouble() * 4f);
                                         spinninpoint = spinninpoint.RotatedByRandom(0.5235987901687622);
-                                        Projectile.NewProjectile(npc.GetSource_FromAI(), vector3.X, vector3.Y, spinninpoint.X * 0.7f, spinninpoint.Y * 0.7f, ProjectileID.CultistBossFireBall, damage, 0f, Main.myPlayer);
+                                        Projectile.NewProjectile(npc.GetSource_FromAI(), vector3.X, vector3.Y, spinninpoint.X, spinninpoint.Y, ProjectileID.CultistBossFireBallClone, damage, 0f, Main.myPlayer);
                                     }
                                 }
                             }
@@ -459,16 +461,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
 
-                        Vector2 desiredPos = player.Center + player.HorizontalDirectionTo(npc.Center) * Vector2.UnitX * 420;
+                        Vector2 desiredPos = player.Center + player.HorizontalDirectionTo(npc.Center) * Vector2.UnitX * 450;
                         if (timer < windup)
                         {
                             
                             Movement(npc, desiredPos, 1.2f, 1.2f);
+
+                            npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
+                            if (npc.Distance(player.Center) < 420)
+                            {
+                                npc.velocity -= npc.DirectionTo(player.Center) * 1.2f;
+                            }
+                            npc.velocity *= 0.97f;
                         }
                         else
                         {
-                            npc.velocity *= 0.9f;
-                            npc.velocity.X = (float)FargoSoulsUtil.SmartAccel1D(Math.Abs(desiredPos.X - npc.Center.X), npc.velocity.X, 1f, 1f);
+                            npc.velocity *= 0.89f;
+                            Movement(npc, desiredPos, 0.6f, 0.6f);
                         }
                         if (timer == windup)
                             SoundEngine.PlaySound(SoundID.Zombie88 with { Volume = 2 }, npc.Center);
@@ -528,7 +537,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static void Movement(NPC npc, Vector2 desiredPos, float accel, float decel)
         {
             RepulseOthers(npc, ref desiredPos);
-            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel, decel);
+            float resistance = npc.velocity.Length() * accel / 35f;
+            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel - resistance, decel + resistance);
         }
         public static void RepulseOthers(NPC npc, ref Vector2 desiredPos)
         {
@@ -537,7 +547,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             for (int i = 0; i < others.Length; i++)
             {
                 if (others[i] == null) continue;
-                int minDistance = 330;
+                int minDistance = 500;
                 if (desiredPos.Distance(others[i].Center) < minDistance)
                     desiredPos = others[i].Center + others[i].DirectionTo(desiredPos) * minDistance;
             }

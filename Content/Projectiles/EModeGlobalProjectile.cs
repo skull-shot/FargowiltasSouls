@@ -468,22 +468,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
-                    case ProjectileID.CultistBossFireBall: //disable proj
-                        if (NonSwarmFight(projectile, NPCID.CultistBoss) && sourceNPC.GetGlobalNPC<LunaticCultist>().EnteredPhase2)
-                        {
-                            projectile.timeLeft = 0;
-                            EModeCanHurt = false;
-                        }
-                        break;
-
-                    case ProjectileID.CultistBossFireBallClone: //disable proj
-                        if (NonSwarmFight(projectile, NPCID.CultistBoss))
-                        {
-                            projectile.timeLeft = 0;
-                            EModeCanHurt = false;
-                        }
-                        break;
-
                     case ProjectileID.PhantasmalBolt:
                         if (NonSwarmFight(projectile, NPCID.MoonLordHand, NPCID.MoonLordHead, NPCID.MoonLordFreeEye)
                             && !(WorldSavingSystem.MasochistModeReal && Main.getGoodWorld))
@@ -989,9 +973,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.CultistBossFireBall:
+                case ProjectileID.CultistBossFireBallClone:
                     {
-                        if (!WorldSavingSystem.MasochistModeReal && NonSwarmFight(projectile, NPCID.CultistBoss))
-                            projectile.position -= projectile.velocity * Math.Max(0, 1f - counter / 45f / projectile.MaxUpdates); //accel startup
+                        if (NonSwarmFight(projectile, NPCID.CultistBoss))
+                            projectile.position -= projectile.velocity * Math.Max(0, 1f - counter / 60f / projectile.MaxUpdates); //accel startup
 
                     }
                     break;
@@ -1846,7 +1831,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.CultistBossFireBall:
                     target.AddBuff(BuffID.OnFire, 300);
-                    target.AddBuff(BuffID.Burning, 120);
+                    //target.AddBuff(BuffID.Burning, 120);
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.DD2Betsy)
                     {
@@ -1854,7 +1839,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         //target.AddBuff(BuffID.Ichor, 600);
                         target.AddBuff(BuffID.WitheredArmor, 300);
                         target.AddBuff(BuffID.WitheredWeapon, 300);
-                        target.AddBuff(BuffID.Burning, 300);
+                        //target.AddBuff(BuffID.Burning, 300);
                     }
                     break;
 
