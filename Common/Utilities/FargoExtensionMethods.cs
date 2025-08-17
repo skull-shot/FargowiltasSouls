@@ -388,7 +388,7 @@ namespace FargowiltasSouls //lets everything access it without using
                     break;
 
                 case ProjectileID.FinalFractal: // Zenith // could probably use source null check here and use source first to speed things up but oh well I'll do it later
-                    if (Dynamic && player is not null)
+                    if (Dynamic && player is not null && projectile.FargoSouls().SourceItemType == ItemID.Zenith)
                     {
                         Item heldItem = player.HeldItem;
                         bool noApprentice = false;
