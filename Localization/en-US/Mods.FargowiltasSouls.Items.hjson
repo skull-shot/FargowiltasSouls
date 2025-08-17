@@ -911,6 +911,7 @@ AeolusBoots: {
 	Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		The wearer can run even faster on sand
 		8% increased movement speed
 		Increases jump speed and height, allows double jump and auto-jump, and negates fall damage
@@ -1557,6 +1558,7 @@ ZephyrBoots: {
 	Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		8% increased movement speed
 		Provides the ability to walk on water, honey and lava
 		Grants immunity to fire blocks and 7 seconds of immunity to lava
@@ -1664,7 +1666,7 @@ FlightMasterySoul: {
 		Hold DOWN and JUMP to hover
 		Hold UP to boost faster
 		Increases gravity
-		[c/BC5252:Disables all of your jumps (togglable)]
+		Disables all of your double jumps (togglable)
 		'Pierce the heavens'
 		'''
 }
@@ -1707,6 +1709,7 @@ SupersonicSoul: {
 	Tooltip:
 		'''
 		Allows Supersonic running, dashing, hovering, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
 		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
 		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies

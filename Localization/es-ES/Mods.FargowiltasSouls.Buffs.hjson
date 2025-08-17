@@ -360,8 +360,8 @@ NeurotoxinBuff: {
 
 PoweroftheCosmosBuff: {
 	// DisplayName: Power of the Cosmos
-	// Description: Weapons matching Moon Lord's lunar phase deal 1.25x damage!
-	// CombatText: 1.25x {0} damage!
+	// Description: Weapons matching Moon Lord's lunar phase deal 1.4x damage!
+	// CombatText: 1.4x {0} damage!
 	// Melee: melee
 	// Ranged: ranged
 	// Magic: magic

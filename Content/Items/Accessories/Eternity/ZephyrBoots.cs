@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -42,6 +43,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ZephyrJump>(Item);
             player.jumpBoost = true;
             player.noFallDmg = true;
+
+            player.AddEffect<JumpsDisabled>(Item);
         }
 
         public override void AddRecipes()
@@ -53,6 +56,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
+        }
+    }
+    public class JumpsDisabled : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
+        public override int ToggleItemType => ModContent.ItemType<ZephyrBoots>();
+        public override void PostUpdateEquips(Player player)
+        {
+            if (player.wingTime > 0)
+                player.ConsumeAllExtraJumps();
         }
     }
     public class ZephyrJump : AccessoryEffect
