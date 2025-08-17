@@ -298,6 +298,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
+                case ProjectileID.SporeGas:
+                case ProjectileID.SporeGas2:
+                case ProjectileID.SporeGas3:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.SporeSac && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesIDStaticNPCImmunity = true;
+                            projectile.idStaticNPCHitCooldown = 12;
+                        }
+                    }
+                    break;
+
                 case ProjectileID.FallingStar:
                     if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
                         projectile.active = false;
