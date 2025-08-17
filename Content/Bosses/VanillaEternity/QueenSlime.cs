@@ -1042,7 +1042,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
                 states = [States.NormalSlam];
             State = (int)Main.rand.NextFromCollection(states);
-            State = (int)States.QuickHops;
             NetSync(NPC);
 
             // debug
