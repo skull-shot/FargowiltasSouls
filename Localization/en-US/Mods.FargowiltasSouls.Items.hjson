@@ -1039,7 +1039,6 @@ ChaliceoftheMoon: {
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
 		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Burning, Fused, Lihzahrd Curse, Low Ground, [i:FargowiltasSouls/CelestialRune] and Marked for Death
-		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
