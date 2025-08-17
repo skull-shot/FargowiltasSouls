@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= MathF.Pow(Projectile.scale, 0.5f);
+            modifiers.SourceDamage *= MathF.Pow(Projectile.scale, 0.5f);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
