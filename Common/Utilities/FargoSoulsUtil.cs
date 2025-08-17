@@ -687,7 +687,7 @@ namespace FargowiltasSouls //lets everything access it without using
 
         public static bool IsProjSourceItemUseReal(Projectile proj, IEntitySource source)
         {
-            return source is EntitySource_ItemUse parent && parent.Item.type == Main.player[proj.owner].HeldItem.type;
+            return source is EntitySource_ItemUse_WithAmmo parent && parent.Item != null && (parent.Item.type == Main.player[proj.owner].HeldItem.type || parent.Item.type == FargoSoulsPlayer.ApprenticeSupportItem?.type);
         }
 
         public static bool AprilFools => DateTime.Today.Month == 4 && DateTime.Today.Day <= 1;
