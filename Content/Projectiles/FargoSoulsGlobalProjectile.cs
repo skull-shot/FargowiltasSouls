@@ -1620,6 +1620,13 @@ namespace FargowiltasSouls.Content.Projectiles
                     modPlayer.HuntressMissCD = 30;
                 }
                 
+                if (projectile.TypeAlive(ProjectileID.LastPrismLaser) && player == Main.LocalPlayer && projectile.owner == Main.myPlayer && timeLeft == 0)
+                { // the above check makes it just slightly less taxing to check unrelated projectiles each time something dies due to the below check, despite having dupes
+                    foreach (Projectile LastPrismHeldProj in Main.projectile.Where(p => p.TypeAlive(ProjectileID.LastPrism) && p.owner == Main.myPlayer))
+                    {
+                        LastPrismHeldProj.Kill();
+                    }
+                }
             }
         }
 
