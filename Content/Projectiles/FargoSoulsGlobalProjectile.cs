@@ -109,7 +109,8 @@ namespace FargowiltasSouls.Content.Projectiles
         public static Projectile? globalProjectileField = null; // enables modifying tagged projectile in any method
 
         public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
-        
+
+        public int SourceItemType = 0;
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),
@@ -259,30 +260,34 @@ namespace FargowiltasSouls.Content.Projectiles
                 projectile.netUpdate = true;
             }
             //not doing this causes player array index error during worldgen in some cases maybe??
-            if (projectile.owner < 0 || projectile.owner >= Main.maxPlayers)
+            if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
                 return;
 
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
+            Projectile? sourceProj = null;
 
             if (projectile.friendly)
             {
                 if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
                     ItemSource = true;
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj3)
+
+                FargoSoulsUtil.GetOrigin(projectile, source, out sourceProj); // define SourceItemType and/or sourceProj here
+
+                if (sourceProj is not null)
                 {
                     //if (sourceProj3.FargoSouls().ItemSource)
                     //    ItemSource = true;
-                    //projs shot by tiki-buffed projs will also inherit the tiki buff
-                    if (sourceProj3.FargoSouls().TikiTagged)
-                    {
+
+                    if (sourceProj.FargoSouls().TikiTagged)
+                    { //projs shot by tiki-buffed projs will also inherit the tiki buff
                         TikiTagged = true;
                         TikiTimer += 180;
-                        sourceProj3.FargoSouls().TikiTagged = false;
+                        sourceProj.FargoSouls().TikiTagged = false;
                     }
-                    if (sourceProj3.FargoSouls().ApprenticeSupportProjectile)
-                    {
-                        ApprenticeSupportProjectile = true; // inherit Apprentice Support tag if source is also a Support projectile
+                    if (sourceProj.FargoSouls().ApprenticeSupportProjectile)
+                    { // inherit Apprentice Support tag if source is also a Support projectile
+                        ApprenticeSupportProjectile = true;
                     }
                 }
                 if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
@@ -305,11 +310,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false)
                         && projectile != null && projectile.FargoSouls().ItemSource
                         && projectile.whoAmI != player.heldProj
-                        && projectile.aiStyle != 190 // fancy sword swings like excalibur
-                        && !projectile.minion && !projectile.sentry) 
+                        && projectile.aiStyle != ProjAIStyleID.NightsEdge // fancy sword swings like excalibur
+                        && !projectile.minion && !projectile.sentry)
                     {
                         int damage = Math.Max(1200, projectile.damage);
-                        damage = (int)(MathHelper.Clamp(damage, 0, 3000) * player.ActualClassDamage(DamageClass.Magic));
+                        damage = (int)(MathHelper.Clamp(damage, 0, 3000) * player.ActualClassDamage(DamageClass.Magic)); // TODO: Implement softcap
                         if (modPlayer.ForceEffect<NebulaEnchant>())
                             damage = (int)(damage * 1.66667f);
 
@@ -433,7 +438,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 HuntressProj = 1;
             }
 
-            if (source is EntitySource_Parent parent3 && parent3.Entity is Projectile sourceProj && sourceProj.FargoSouls().DamageCap > 0)
+            if (sourceProj is not null && sourceProj.FargoSouls().DamageCap > 0)
                 DamageCap = sourceProj.FargoSouls().DamageCap;
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
@@ -1572,16 +1577,20 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override void OnKill(Projectile projectile, int timeLeft)
         {
-            Player player = Main.player[projectile.owner];
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
+            if (projectile.owner.IsWithinBounds(Main.maxPlayers))
             {
-                int decrement = 5;
-                if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
-                    decrement = 3;
-                modPlayer.HuntressStage -= decrement;
-                modPlayer.HuntressMissCD = 30;
+                Player player = Main.player[projectile.owner];
+                FargoSoulsPlayer modPlayer = player.FargoSouls();
+
+                if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
+                {
+                    int decrement = 5;
+                    if (player.HasEffect<RedRidingHuntressEffect>() || modPlayer.ForceEffect<HuntressEnchant>())
+                        decrement = 3;
+                    modPlayer.HuntressStage -= decrement;
+                    modPlayer.HuntressMissCD = 30;
+                }
+                
             }
         }
 

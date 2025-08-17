@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool HasKillCooldown;
         public bool EModeCanHurt = true;
         public bool altBehaviour;
-        private List<Tuple<int, float>> medusaList = typeof(Projectile).GetField("_medusaHeadTargetList", LumUtils.UniversalBindingFlags).GetValue(null) as List<Tuple<int, float>>;
+        private readonly List<Tuple<int, float>>? medusaList = typeof(Projectile).GetField("_medusaHeadTargetList", LumUtils.UniversalBindingFlags)?.GetValue(null) as List<Tuple<int, float>>;
         private int counter;
         private bool preAICheckDone;
         private bool firstTickAICheckDone;
@@ -214,20 +214,39 @@ namespace FargowiltasSouls.Content.Projectiles
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            Projectile sourceProj = null;
-            if (source is EntitySource_Parent parent && parent.Entity is Projectile)
-                sourceProj = parent.Entity as Projectile;
+            Projectile? sourceProj = null;
 
-            if (source is EntitySource_ItemUse itemUse && itemUse.Item != null)
+            if (projectile.owner.IsWithinBounds(Main.maxPlayers) && projectile is not null && projectile.friendly)
             {
-                SourceItemType = itemUse.Item.type;
+                if (source is not null)
+                {
+                    if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
+                    {
+                        projectile.FargoSouls().ItemSource = true;
+                    }
+                    FargoSoulsUtil.GetOrigin(projectile, source, out sourceProj);
+                    SourceItemType = projectile.FargoSouls().SourceItemType;
+
+                    if (sourceProj is not null && sourceProj.FargoSouls().ItemSource && FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type))
+                    { // reuse this with the intention to make shots from held projectiles work with Huntress
+                        projectile.FargoSouls().ItemSource = true;
+                    }
+                    projectile.FargoSouls().Homing = projectile.IsHoming(Main.player[projectile.owner], source);
+                }
             }
 
             switch (SourceItemType)
             {
                 case ItemID.ProximityMineLauncher:
                 case ItemID.PiranhaGun:
-                    projectile.ContinuouslyUpdateDamageStats = true;
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.ContinuouslyUpdateDamageStats = true;
+                        }
+                    }
                     break;
 
                 default:
@@ -237,7 +256,46 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.ZapinatorLaser:
-                    projectile.originalDamage = projectile.damage;
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        switch (SourceItemType)
+                        {
+                            case ItemID.ZapinatorGray:
+                            case ItemID.ZapinatorOrange:
+                                if (EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                                    projectile.originalDamage = projectile.damage;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.PygmySpear:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers) && sourceProj is Projectile pygmy && pygmy.type >= ProjectileID.Pygmy && pygmy.type <= ProjectileID.Pygmy4)
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.PygmyStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+                            projectile.penetrate = 2;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.GladiusStab:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.Gladius && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+                        }
+                    }
                     break;
 
                 case ProjectileID.FallingStar:
@@ -246,13 +304,17 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.VampireHeal:
-                    //each lifesteal hits timer again when above 50% life (total, halved lifesteal rate)
-                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 / 3 && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.VampireKnives))
-                        Main.player[projectile.owner].lifeSteal -= projectile.ai[1];
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        //each lifesteal hits timer again when above 50% life (total, halved lifesteal rate)
+                        if (player.statLife > player.statLifeMax2 / 3 && SourceItemType == ItemID.VampireKnives && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                            player.lifeSteal -= projectile.ai[1];
 
-                    //each lifesteal hits timer again when above 75% life (stacks with above, total 1/3rd lifesteal rate)
-                    if (Main.player[projectile.owner].statLife > Main.player[projectile.owner].statLifeMax2 * 2 / 3)
-                        Main.player[projectile.owner].lifeSteal -= projectile.ai[1];
+                        //each lifesteal hits timer again when above 75% life (stacks with above, total 1/3rd lifesteal rate)
+                        if (player.statLife > player.statLifeMax2 * 2 / 3)
+                            player.lifeSteal -= projectile.ai[1];
+                    }
                     break;
 
                 case ProjectileID.Cthulunado:
@@ -358,23 +420,6 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                     }
-                    break;
-
-                case ProjectileID.PygmySpear:
-                    if (sourceProj is Projectile && EmodeItemBalance.HasEmodeChange(Main.player[sourceProj.owner], ItemID.PygmyStaff))
-                    {
-                        if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
-                        {
-                            projectile.usesLocalNPCImmunity = true;
-                            projectile.localNPCHitCooldown = -1;
-                            projectile.penetrate = 2;
-                        }
-                    }
-                    break;
-
-                case ProjectileID.GladiusStab:
-                    projectile.usesLocalNPCImmunity = true;
-                    projectile.localNPCHitCooldown = -1;
                     break;
 
                 default:
@@ -581,105 +626,111 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.ChlorophyteBullet:
-                    if (!EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.ChlorophyteBullet))
-                        break;
-                    // vanilla Chlorophyte Bullet AI imitation to apply more elaborate tweaks.
-                    if (projectile.alpha < 170)
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
-                        for (int i = 0; i < 10; i++)
+                        Player player = Main.player[projectile.owner];
+                        if (EmodeItemBalance.HasEmodeChange(player, ItemID.ChlorophyteBullet))
                         {
-                            float chloroDustX = projectile.position.X - projectile.velocity.X / 10f * i;
-                            float chloroDustY = projectile.position.Y - projectile.velocity.Y / 10f * i;
-                            int chloroDust = Dust.NewDust(new Vector2(chloroDustX, chloroDustY), 1, 1, DustID.CursedTorch);
-                            Main.dust[chloroDust].alpha = projectile.alpha;
-                            Main.dust[chloroDust].position.X = chloroDustX;
-                            Main.dust[chloroDust].position.Y = chloroDustY;
-                            Main.dust[chloroDust].velocity *= 0f;
-                            Main.dust[chloroDust].noGravity = true;
-                        }
-                    }
-                    float velocityLength = projectile.velocity.Length();
-                    float localAI = projectile.localAI[0];
-                    if (localAI == 0f)
-                    {
-                        projectile.localAI[0] = velocityLength;
-                        localAI = velocityLength;
-                    }
-                    if (projectile.alpha > 0)
-                    {
-                        projectile.alpha -= 25;
-                    }
-                    if (projectile.alpha < 0)
-                    {
-                        projectile.alpha = 0;
-                    }
-                    float projCenterX = projectile.Center.X;
-                    float projCenterY = projectile.Center.Y;
-                    float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
-                    bool homingCheck = false;
-                    int target = 0;
-                    if (projectile.ai[1] == 0f)
-                    {
-                        for (int npc = 0; npc < 200; npc++)
-                        {
-                            NPC nPC = Main.npc[npc];
-                            if (nPC.CanBeChasedBy(projectile))
+                            // vanilla Chlorophyte Bullet AI imitation to apply more elaborate tweaks.
+                            if (projectile.alpha < 170)
                             {
-                                float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                                if (targetDistance < homingRadius && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                for (int i = 0; i < 10; i++)
                                 {
-                                    homingRadius = targetDistance;
-                                    projCenterX = nPC.Center.X;
-                                    projCenterY = nPC.Center.Y;
-                                    homingCheck = true;
-                                    target = npc;
+                                    float chloroDustX = projectile.position.X - projectile.velocity.X / 10f * i;
+                                    float chloroDustY = projectile.position.Y - projectile.velocity.Y / 10f * i;
+                                    int chloroDust = Dust.NewDust(new Vector2(chloroDustX, chloroDustY), 1, 1, DustID.CursedTorch);
+                                    Main.dust[chloroDust].alpha = projectile.alpha;
+                                    Main.dust[chloroDust].position.X = chloroDustX;
+                                    Main.dust[chloroDust].position.Y = chloroDustY;
+                                    Main.dust[chloroDust].velocity *= 0f;
+                                    Main.dust[chloroDust].noGravity = true;
                                 }
                             }
-                        }
-                        if (homingCheck)
-                        {
-                            projectile.ai[1] = target + 1;
-                        }
-                        homingCheck = false;
-                    }
-                    if (projectile.ai[1] > 0f)
-                    {
-                        NPC nPC = Main.npc[(int)(projectile.ai[1] - 1f)];
-                        if (nPC.CanBeChasedBy(projectile))
-                        {
-                            float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                            float maxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
-                            if (targetDistance < maxChaseDistance)
+                            float velocityLength = projectile.velocity.Length();
+                            float localAI = projectile.localAI[0];
+                            if (localAI == 0f)
                             {
-                                homingCheck = true;
-                                projCenterX = nPC.Center.X;
-                                projCenterY = nPC.Center.Y;
+                                projectile.localAI[0] = velocityLength;
+                                localAI = velocityLength;
                             }
+                            if (projectile.alpha > 0)
+                            {
+                                projectile.alpha -= 25;
+                            }
+                            if (projectile.alpha < 0)
+                            {
+                                projectile.alpha = 0;
+                            }
+                            float projCenterX = projectile.Center.X;
+                            float projCenterY = projectile.Center.Y;
+                            float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
+                            bool homingCheck = false;
+                            int target = 0;
+                            if (projectile.ai[1] == 0f)
+                            {
+                                for (int npc = 0; npc < 200; npc++)
+                                {
+                                    NPC nPC = Main.npc[npc];
+                                    if (nPC.CanBeChasedBy(projectile))
+                                    {
+                                        float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                                        if (targetDistance < homingRadius && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                        {
+                                            homingRadius = targetDistance;
+                                            projCenterX = nPC.Center.X;
+                                            projCenterY = nPC.Center.Y;
+                                            homingCheck = true;
+                                            target = npc;
+                                        }
+                                    }
+                                }
+                                if (homingCheck)
+                                {
+                                    projectile.ai[1] = target + 1;
+                                }
+                                homingCheck = false;
+                            }
+                            if (projectile.ai[1] > 0f)
+                            {
+                                NPC nPC = Main.npc[(int)(projectile.ai[1] - 1f)];
+                                if (nPC.CanBeChasedBy(projectile))
+                                {
+                                    float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                                    float maxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
+                                    if (targetDistance < maxChaseDistance)
+                                    {
+                                        homingCheck = true;
+                                        projCenterX = nPC.Center.X;
+                                        projCenterY = nPC.Center.Y;
+                                    }
+                                }
+                                else
+                                {
+                                    projectile.ai[1] = 0f;
+                                }
+                            }
+                            if (!projectile.friendly)
+                            {
+                                homingCheck = false;
+                            }
+                            if (homingCheck) // this section has the homing strength
+                            {
+                                float velocityLength2 = localAI;
+                                float projDistanceX = projCenterX - projectile.Center.X;
+                                float projDistanceY = projCenterY - projectile.Center.Y;
+                                float targetDistance = Vector2.Distance(projectile.Center, Main.npc[(int)(projectile.ai[1] - 1f)].Center);
+                                targetDistance = velocityLength2 / targetDistance;
+                                projDistanceX *= targetDistance;
+                                projDistanceY *= targetDistance;
+                                float multiplier = 8f; // markiplier
+                                projectile.velocity.X = (projectile.velocity.X * (multiplier - 1f) + projDistanceX) / multiplier;
+                                projectile.velocity.Y = (projectile.velocity.Y * (multiplier - 1f) + projDistanceY) / multiplier;
+                            }
+                            projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
+                            return false;
                         }
-                        else
-                        {
-                            projectile.ai[1] = 0f;
-                        }
                     }
-                    if (!projectile.friendly)
-                    {
-                        homingCheck = false;
-                    }
-                    if (homingCheck) // this section has the homing strength
-                    {
-                        float velocityLength2 = localAI;
-                        float projDistanceX = projCenterX - projectile.Center.X;
-                        float projDistanceY = projCenterY - projectile.Center.Y;
-                        float targetDistance = Vector2.Distance(projectile.Center, Main.npc[(int)(projectile.ai[1] - 1f)].Center);
-                        targetDistance = velocityLength2 / targetDistance;
-                        projDistanceX *= targetDistance;
-                        projDistanceY *= targetDistance;
-                        float multiplier = 8f; // markiplier
-                        projectile.velocity.X = (projectile.velocity.X * (multiplier - 1f) + projDistanceX) / multiplier;
-                        projectile.velocity.Y = (projectile.velocity.Y * (multiplier - 1f) + projDistanceY) / multiplier;
-                    }
-                    projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
-                    return false;
+                    break;
                 default:
                     break;
 
@@ -698,8 +749,21 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.ZapinatorLaser:
-                    if (projectile.damage > projectile.originalDamage)
-                        projectile.damage = projectile.originalDamage;
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        switch (SourceItemType)
+                        {
+                            case ItemID.ZapinatorGray:
+                            case ItemID.ZapinatorOrange:
+                                if (EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.damage > projectile.originalDamage)
+                                    projectile.damage = projectile.originalDamage;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
                 case ProjectileID.InsanityShadowHostile:
@@ -1285,26 +1349,29 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            Player player = Main.player[projectile.owner];
-            if (projectile.owner == player.whoAmI)
+            if (projectile.owner.IsWithinBounds(Main.maxPlayers))
             {
-                if (FancySwings.Contains(projectile.type))
+                Player player = Main.player[projectile.owner];
+                if (projectile.owner == player.whoAmI)
                 {
-                    if (player.FargoSouls().swingDirection != player.direction)
+                    if (FancySwings.Contains(projectile.type))
                     {
-                        projectile.ai[0] = -player.direction;
-                    }
+                        if (player.FargoSouls().swingDirection != player.direction)
+                        {
+                            projectile.ai[0] = -player.direction;
+                        }
 
-                    float rotation = -90;
-                    if (projectile.ai[0] == -1 && player.direction == -1)
-                    {
-                        rotation = -180;
+                        float rotation = -90;
+                        if (projectile.ai[0] == -1 && player.direction == -1)
+                        {
+                            rotation = -180;
+                        }
+                        else if (projectile.ai[0] == -1 && player.direction == 1)
+                        {
+                            rotation = 0;
+                        }
+                        projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
                     }
-                    else if (projectile.ai[0] == -1 && player.direction == 1)
-                    {
-                        rotation = 0;
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
                 }
             }
             switch (projectile.type)
@@ -1332,10 +1399,14 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FlowerPow:
-                    if (projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
-                        projectile.localAI[0] += 2f; // tripled petal firerate
-                        projectile.netUpdate = true;
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
+                        {
+                            projectile.localAI[0] += 2f; // tripled petal firerate
+                            projectile.netUpdate = true;
+                        }
                     }
                     break;
             }
@@ -1344,84 +1415,124 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            if (SpearRework.ReworkedSpears.Contains(projectile.type))
-                modifiers.SourceDamage *= 1.5f;
 
-            switch (projectile.type)
+            if (projectile.owner.IsWithinBounds(Main.maxPlayers))
             {
-                case ProjectileID.CopperCoin:
-                    modifiers.SourceDamage *= 1.6f;
-                    break;
-                case ProjectileID.SilverCoin:
-                    modifiers.SourceDamage *= 0.9f;
-                    break;
-                case ProjectileID.GoldCoin:
-                    modifiers.SourceDamage *= 0.47f;
-                    break;
-                case ProjectileID.PlatinumCoin:
-                    modifiers.SourceDamage *= 0.275f;
-                    break;
+                Player player = Main.player[projectile.owner];
+                if (SpearRework.ReworkedSpears.Contains(projectile.type) && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                {
+                    modifiers.SourceDamage *= 1.5f;
+                }
 
-                case ProjectileID.OrichalcumHalberd:
-                    modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
-                    break;
-                case ProjectileID.MedusaHeadRay:
-                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
-                    {
-                        Player player = Main.player[projectile.owner];
-                        if (player.Alive())
+                switch (projectile.type)
+                {
+                    case ProjectileID.CopperCoin:
+                        if (SourceItemType == ItemID.CoinGun && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 1.6f;
+                        }
+                        break;
+                    case ProjectileID.SilverCoin:
+                        if (SourceItemType == ItemID.CoinGun && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.9f;
+                        }
+                        break;
+                    case ProjectileID.GoldCoin:
+                        if (SourceItemType == ItemID.CoinGun && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.47f;
+                        }
+                        break;
+                    case ProjectileID.PlatinumCoin:
+                        if (SourceItemType == ItemID.CoinGun && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.275f;
+                        }
+                        break;
+
+                    case ProjectileID.OrichalcumHalberd:
+                        if (SourceItemType == ItemID.OrichalcumHalberd && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
+                        }
+                        break;
+                        
+                    case ProjectileID.MedusaHeadRay:
+                        if (player.Alive() && SourceItemType == ItemID.MedusaHead && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && medusaList?.Count > 0)
                         {
                             float maxBonus = 1.25f;                    // Medusa Head can target up to 3 enemies max, this EMode buff makes it so that
                             float bonus = maxBonus / medusaList.Count; // for every enemy target slot that's empty, the damage goes up by +0.625x,
                             modifiers.SourceDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
-                    }
-                    break;
-                case ProjectileID.DD2BetsyArrow:
-                    if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _) && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.DD2BetsyBow)) //vanilla conditions for "airborne enemy"
-                        modifiers.SourceDamage *= 9.2f/12f; //results in 1.15x after vanilla 1.5x
-                    break;
-                case ProjectileID.MoonlordTurretLaser:
-                    modifiers.SourceDamage *= 0.5f;
-                    break;
-                case ProjectileID.RainbowCrystalExplosion:
-                    modifiers.SourceDamage *= 0.6f;
-                    break;
-                case ProjectileID.Tempest:
-                case ProjectileID.MiniSharkron:
-                    modifiers.SourceDamage *= 1.2f;
-                    break;
-                case ProjectileID.HoundiusShootiusFireball:
-                    modifiers.SourceDamage *= 1.2f;
-                    break;
-            }
+                        break;
 
-            if (SourceItemType == ItemID.SniperRifle)
-            {
-                if (projectile.owner.IsWithinBounds(Main.maxPlayers))
-                {
-                    Player player = Main.player[projectile.owner];
-                    if (player.Alive())
-                    {
-                        float maxBonus = 1f;
-                        float bonus = maxBonus * player.Distance(target.Center) / 1800f;
-                        bonus = MathHelper.Clamp(bonus, 0f, maxBonus);
-                        modifiers.SourceDamage *= 1 + bonus;
-                    }
+                    case ProjectileID.DD2BetsyArrow: // Aerial Bane arrow
+                        if (SourceItemType == ItemID.DD2BetsyBow && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _)) //vanilla conditions for "airborne enemy"
+                            {
+                                modifiers.SourceDamage *= 9.2f / 12f; //results in 1.15x after vanilla 1.5x
+                            }
+                        }
+                        break;
+
+                    case ProjectileID.MoonlordTurretLaser:
+                        if (SourceItemType == ItemID.MoonlordTurretStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.5f;
+                        }
+                        break;
+
+                    case ProjectileID.RainbowCrystalExplosion:
+                        if (SourceItemType == ItemID.RainbowCrystalStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.6f;
+                        }
+                        break;
+
+                    case ProjectileID.Tempest:
+                    case ProjectileID.MiniSharkron:
+                        if (SourceItemType == ItemID.TempestStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 1.2f;
+                        }
+                        break;
+
+                    case ProjectileID.HoundiusShootiusFireball:
+                        if (SourceItemType == ItemID.HoundiusShootius && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 1.2f;
+                        }
+                        break;
+
+                    case ProjectileID.GolemFist:
+                        if (player.Alive() && SourceItemType == ItemID.GolemFist && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            float maxBonus = 2f;
+                            float bonus = maxBonus * player.Distance(target.Center) / 600f;
+                            bonus = MathHelper.Clamp(bonus, 0f, maxBonus * 2);
+                            modifiers.SourceDamage *= 1 + bonus;
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
-            }
-            if (SourceItemType == ItemID.GolemFist)
-            {
-                if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+
+                switch (SourceItemType)
                 {
-                    Player player = Main.player[projectile.owner];
-                    if (player.Alive())
-                    {
-                        float maxBonus = 2f;
-                        float bonus = maxBonus * player.Distance(target.Center) / 600f;
-                        bonus = MathHelper.Clamp(bonus, 0f, maxBonus*2);
-                        modifiers.SourceDamage *= 1 + bonus;
-                    }
+                    case ItemID.SniperRifle:
+                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            float maxBonus = 1f;
+                            float bonus = maxBonus * player.Distance(target.Center) / 1800f;
+                            bonus = MathHelper.Clamp(bonus, 0f, maxBonus);
+                            modifiers.SourceDamage *= 1 + bonus;
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -1493,39 +1604,53 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (!WorldSavingSystem.EternityMode)
                 return;
-            Player player = Main.player[projectile.owner];
-            switch (projectile.type)
+
+            if (projectile.owner.IsWithinBounds(Main.maxPlayers))
             {
-                case ProjectileID.PalladiumPike:
-                    if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
-                    {
-                        player.AddBuff(BuffID.RapidHealing, 60 * 5);
-                        if (player.Eternity().PalladiumHealTimer <= 0)
+                Player player = Main.player[projectile.owner];
+                switch (projectile.type)
+                {
+                    case ProjectileID.PalladiumPike:
+                        if (SourceItemType == ItemID.PalladiumPike && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
-                            player.FargoSouls().HealPlayer(1);
-                            player.Eternity().PalladiumHealTimer = 30;
-                        } 
-                    }
-                    break;
-                case ProjectileID.CobaltNaginata:
-                    if (projectile.ai[2] < 2) //only twice per swing
-                    {
-                        Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_OnHit(target), target.position + Vector2.UnitX * Main.rand.Next(target.width) + Vector2.UnitY * Main.rand.Next(target.height), Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(hit.SourceDamage * 0.4f), 0f, Main.myPlayer);
-                        if (p != null)
-                            p.FargoSouls().CanSplit = false;
-                        projectile.ai[2]++;
-                    }
-                    break;
-                case ProjectileID.IceBolt: //Ice Blade projectile
-                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.IceBlade))
-                    target.AddBuff(BuffID.Frostburn, 60 * 3);
-                    break;
-                case ProjectileID.SporeCloud:
-                    if (SourceItemType == ItemID.ChlorophyteSaber)
-                        projectile.velocity *= 0.25f;
-                    break;
-                default:
-                    break;
+                            if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
+                            {
+                                player.AddBuff(BuffID.RapidHealing, 60 * 5);
+                                if (player.Eternity().PalladiumHealTimer <= 0)
+                                {
+                                    player.FargoSouls().HealPlayer(1);
+                                    player.Eternity().PalladiumHealTimer = 30;
+                                }
+                            }
+                        }
+                        break;
+                    case ProjectileID.CobaltNaginata:
+                        if (SourceItemType == ItemID.CobaltNaginata && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (projectile.ai[2] < 2) //only twice per swing
+                            {
+                                Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_OnHit(target), target.position + Vector2.UnitX * Main.rand.Next(target.width) + Vector2.UnitY * Main.rand.Next(target.height), Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), (int)(hit.SourceDamage * 0.4f), 0f, Main.myPlayer);
+                                if (p != null)
+                                    p.FargoSouls().CanSplit = false;
+                                projectile.ai[2]++;
+                            }
+                        }
+                        break;
+                    case ProjectileID.IceBolt: //Ice Blade projectile
+                        if (SourceItemType == ItemID.IceBlade && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            target.AddBuff(BuffID.Frostburn, 60 * 3);
+                        }
+                        break;
+                    case ProjectileID.SporeCloud:
+                        if (SourceItemType == ItemID.ChlorophyteSaber && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.velocity *= 0.25f;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
