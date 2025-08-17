@@ -20,8 +20,13 @@ BetsyDashEffect: {
 }
 
 SupremeDashEffect: {
-	DisplayName: Верховный рывок
-	Tooltip: Короткий рывок-кулак в сторону вашего курсора
+	DisplayName: Свирепый рывок
+	Tooltip:
+		'''
+		[i:FargowiltasSouls/QueenStinger] Короткий рывок на кулаке скелета в сторону вашего курсора
+		[i:FargowiltasSouls/NecromanticBrew] Удары кулаком отбрасывают врагов и вас
+		[i:FargowiltasSouls/AgitatingLens] Попадания кулаком вводят вас в свирепость, что ненадолго увеличивает вашу скорость атаки, но заставляет вас неконтролируемо двигаться
+		'''
 }
 
 DiveEffect: {
@@ -94,13 +99,14 @@ FrigidGraspKeyEffect: {
 }
 
 IceShieldEffect: {
-	// DisplayName: Ice Shield
-	/* Tooltip:
+	DisplayName: Ледяной щит
+	Tooltip:
 		'''
-		Hold to spawn an ice shield aimed towards your cursor
-		After the shield gets hit, it shatters, dealing massive damage in a cone
-		Release the skill button before the shield breaks to shatter it manually, dealing increased damage
-		''' */
+		Удерживайте, чтобы создать ледяной щит, направленный на ваш курсор
+		Если щит получит урон, он разобьётся и нанесёт огромный урон врагам
+		Отпустите кнопку умения прежде чем потерять щит,
+		чтобы разбить его самостоятельно и нанести больше урона
+		'''
 }
 
 BombKeyEffect: {
@@ -131,9 +137,9 @@ GladiatorBanner: {
 	DisplayName: Баннер гладиатора
 	Tooltip:
 		'''
-		Ставит усиляющее знамя на 15 секунд
+		Ставит усиляющее знамя на землю
 		Вблизи знамя даёт иммунитет к отталкиванию и увеличивает сопротивление урону на 8%
-		Знамя может быть повторно призвано только когда время его действия истечёт
+		Знамя может быть повторно призвано каждые 15 секунд
 		'''
 }
 
