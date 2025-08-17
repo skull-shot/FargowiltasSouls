@@ -178,7 +178,7 @@ ShimmerImmunityEffect: Иммунитет к симмеру
 FlightMasteryHeader: "{$Mods.FargowiltasSouls.Items.FlightMasterySoul.DisplayName}"
 FlightMasteryInsignia: Ускорение парящей эмблемы
 FlightMasteryGravity: Усиленная гравитация
-JumpsDisabled: Отключить все прыжки
+JumpsDisabled: Крылья отключают прыжки
 SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
 RunSpeed: Увеличенная базовая скорость бега
 NoMomentum: Нет инерции
