@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            AddEffects(player, Item, 50, 0.2f, 10);
+            AddEffects(player, Item, 50, 0.2f, 6);
         }
         public static void AddEffects(Player player, Item item, int maxHP, float damageResist, int lifeRegen)
         {

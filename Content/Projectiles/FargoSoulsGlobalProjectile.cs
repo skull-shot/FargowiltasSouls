@@ -512,7 +512,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 foreach (int tornadoIndex in modPlayer.ForbiddenTornados)
                 {
                     Projectile storm = Main.projectile[tornadoIndex];
-                    if (storm.Alive() &&  projectile.owner == storm.owner && projectile.type != storm.type && projectile.Colliding(projectile.Hitbox, storm.Hitbox))
+                    if (storm.Alive() && projectile.owner == storm.owner && projectile.type != storm.type && projectile.damage > 0 && ProjectileLoader.CanDamage(projectile) != false && projectile.Colliding(projectile.Hitbox, storm.Hitbox))
                     {
                         if (storm.ModProjectile is ForbiddenTornado forbiddenTornado)
                             forbiddenTornado.Empower();
@@ -527,7 +527,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         Projectile orb = Main.projectile[orbIndex];
                         //wait for CD
                         //detect being hit
-                        if (orb.Alive() && orb.ai[0] == 0f && projectile.owner == orb.owner && projectile.Colliding(projectile.Hitbox, orb.Hitbox))
+                        if (orb.Alive() && orb.ai[0] == 0f && projectile.owner == orb.owner && projectile.damage > 0 && ProjectileLoader.CanDamage(projectile) != false && projectile.Colliding(projectile.Hitbox, orb.Hitbox))
                         {
                             Projectile[] balls = FargoSoulsUtil.XWay(5, orb.GetSource_FromThis(), orb.Center, ModContent.ProjectileType<ShadowBall>(), 6, ShadowBalls.BaseDamage(player), 0);
 

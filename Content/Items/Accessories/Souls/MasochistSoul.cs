@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            ChaliceoftheMoon.DeactivateMinions(fargoPlayer, Item);
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
             BionomicCluster.PassiveEffect(player, Item);
             LithosphericCluster.PassiveEffect(player, Item);
@@ -78,13 +78,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.GetDamage(damageClass) += 0.5f;
             player.endurance += 0.1f;
             player.GetArmorPenetration(DamageClass.Generic) += 50;
-            player.statLifeMax2 += player.statLifeMax;
-            if (!fargoPlayer.MutantPresence)
-            {
-                player.lifeRegen += 7;
-                player.lifeRegenTime += 7;
-                player.lifeRegenCount += 7;
-            }
+            player.statLifeMax2 += player.statLifeMax / 5;
+            player.lifeRegen += 3;
             fargoPlayer.WingTimeModifier += 2f;
             player.moveSpeed += 0.2f;
 

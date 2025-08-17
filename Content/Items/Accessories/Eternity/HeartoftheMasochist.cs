@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Toggler.Content;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -56,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AmmoCycleEffect>(Item);
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            ChaliceoftheMoon.DeactivateMinions(fargoPlayer, Item);
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
             player.GetDamage(DamageClass.Generic) += 0.10f;
             player.GetCritChance(DamageClass.Generic) += 10;
             fargoPlayer.MasochistHeart = true;
@@ -132,5 +133,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             .Register();
         }
+    }
+    public class MinionsDeactivatedEffect : AccessoryEffect
+    {
+        public static void DeactivateMinions(FargoSoulsPlayer modPlayer, Item item)
+        {
+            if (modPlayer.Player.AddEffect<MinionsDeactivatedEffect>(item))
+                modPlayer.GalacticMinionsDeactivated = modPlayer.GalacticMinionsDeactivatedBuffer = true;
+        }
+        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
+        public override int ToggleItemType => EffectItem(Main.LocalPlayer) != null ? EffectItem(Main.LocalPlayer).type : -1;
     }
 }

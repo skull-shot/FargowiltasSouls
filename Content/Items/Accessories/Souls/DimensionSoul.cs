@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            ColossusSoul.AddEffects(player, Item, 100, 0.2f, 10);
+            ColossusSoul.AddEffects(player, Item, 100, 0.2f, 6);
             SupersonicSoul.AddEffects(player, Item, hideVisual);
             FlightMasterySoul.AddEffects(player, Item);
             TrawlerSoul.AddEffects(player, Item, hideVisual);

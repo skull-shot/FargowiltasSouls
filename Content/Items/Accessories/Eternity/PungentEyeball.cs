@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 }
 
                 int visualProj = ModContent.ProjectileType<PungentAuraProj>();
-                if (player.ownedProjectileCounts[visualProj] <= 0)
+                if (player.ownedProjectileCounts[visualProj] <= 0 && !player.FargoSouls().MasochistSoul)
                 {
                     Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, visualProj, 0, 0, Main.myPlayer);
                 }
