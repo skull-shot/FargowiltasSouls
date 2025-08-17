@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if (drawInfo.shadow == 0f)
+            if (drawInfo.shadow == 0f && !player.setForbidden)
             {
                 Color color12 = player.GetImmuneAlphaPure(Lighting.GetColor((int)(drawInfo.Position.X + player.width * 0.5) / 16, (int)(drawInfo.Position.Y + player.height * 0.5) / 16, Color.White), drawInfo.shadow);
                 Color color21 = Color.Lerp(color12, value2: Color.White, 0.7f);
