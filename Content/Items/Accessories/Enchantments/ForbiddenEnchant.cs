@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if (drawInfo.shadow == 0f)
+            if (drawInfo.shadow == 0f && !player.setForbidden)
             {
                 Color color12 = player.GetImmuneAlphaPure(Lighting.GetColor((int)(drawInfo.Position.X + player.width * 0.5) / 16, (int)(drawInfo.Position.Y + player.height * 0.5) / 16, Color.White), drawInfo.shadow);
                 Color color21 = Color.Lerp(color12, value2: Color.White, 0.7f);
@@ -231,7 +231,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
                 Vector2 vector4 = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (player.bodyFrame.Width / 2) + (player.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + player.height - player.bodyFrame.Height + 4f)) + player.bodyPosition + new Vector2(player.bodyFrame.Width / 2, player.bodyFrame.Height / 2);
                 vector4 += new Vector2((float)(-(float)player.direction * 10), (float)(-20 + num52));
-                DrawData value = new(texture2D2, vector4, null, color21, player.bodyRotation, texture2D2.Size() / 2f, 1f, drawInfo.playerEffect, 0);
+                SpriteEffects effects = player.direction != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                DrawData value = new(texture2D2, vector4, null, color21, player.bodyRotation, texture2D2.Size() / 2f, 1f, effects, 0);
 
                 int num6 = 0;
                 if (player.dye[1] != null)
@@ -242,7 +243,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 drawInfo.DrawDataCache.Add(value);
                 for (float num54 = 0f; num54 < 4f; num54 += 1f)
                 {
-                    value = new DrawData(texture, vector4 + (num54 * 1.57079637f).ToRotationVector2() * num53, null, color22, player.bodyRotation, texture2D2.Size() / 2f, 1f, drawInfo.playerEffect, 0);
+                    value = new DrawData(texture, vector4 + (num54 * 1.57079637f).ToRotationVector2() * num53, null, color22, player.bodyRotation, texture2D2.Size() / 2f, 1f, effects, 0);
                     drawInfo.DrawDataCache.Add(value);
                 }
             }

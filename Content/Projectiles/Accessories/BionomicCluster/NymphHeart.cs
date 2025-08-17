@@ -36,7 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             }
             if (Projectile.timeLeft % 20 == 0 && Projectile.timeLeft != 0)
             {
-                Color color = Color.Lerp(Color.Red, Color.DeepPink, Main.rand.NextFloat(0.1f, 0.9f));
                 Color f = Color.Lerp(Color.Lerp(Color.Red, Color.DeepPink, Main.rand.NextFloat(0.1f, 0.9f)), Color.Transparent, 0.25f);
                 Particle p = new HeartParticle(Projectile.Center + Main.rand.NextVector2Circular(10, 10), Projectile.velocity*1.5f, f, 1f, 50, false);
                 p.Rotation = p.Velocity.ToRotation();

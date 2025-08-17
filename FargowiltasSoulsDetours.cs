@@ -504,7 +504,6 @@ namespace FargowiltasSouls
                 else FargoSoulsGlobalProjectile.globalProjectileField.CritChance -= FargoSoulsGlobalProjectile.ninjaCritIncrease;
                 // reset these
                 FargoSoulsGlobalProjectile.globalProjectileField = null;
-                FargoSoulsGlobalProjectile.ninjaCritIncrease = 0;
             }
             return orig(self, hit, fromNet, noPlayerInteraction);
         }
