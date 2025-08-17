@@ -469,11 +469,11 @@ namespace FargowiltasSouls
 
         public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
         {// this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
-            int phantasmTime = -1;
-            var player = Main.player[self.owner];
-            bool phantasmAverted = false;
-            if (self is not null && self.owner == Main.myPlayer)
+            if (self is not null && self.friendly && self.owner.IsWithinBounds(Main.maxPlayers) && self.owner == Main.myPlayer)
             {
+                int phantasmTime = -1;
+                var player = Main.player[self.owner];
+                bool phantasmAverted = false;
                 phantasmTime = player.phantasmTime;
                 var globalProj = self.FargoSouls();
                 if (phantasmTime > 0 && globalProj.ArrowRain)
@@ -481,10 +481,11 @@ namespace FargowiltasSouls
                     phantasmAverted = true;
                     player.phantasmTime = 0;
                 }
+                orig(self);
+                if (phantasmAverted)
+                    player.phantasmTime = phantasmTime;
             }
-            orig(self);
-            if (phantasmAverted)
-                player.phantasmTime = phantasmTime;
+            else orig(self);
         }
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
