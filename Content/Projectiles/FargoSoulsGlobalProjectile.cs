@@ -1461,9 +1461,21 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (Main.player[projectile.owner].HasEffect<NinjaDamageEffect>())
             {
-                const float maxKnockbackMult = 2f;
-                hit.Knockback *= (maxKnockbackMult * Math.Min((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40, 1f));
-
+                if (hit.Crit)
+                {
+                    int critroll = Main.rand.Next(projectile.CritChance + ninjaCritIncrease);
+                    if (critroll <= projectile.CritChance + ninjaCritIncrease && critroll > projectile.CritChance)
+                    {
+                        for (int i = 0; i < 8; i++)
+                        {
+                            Vector2 velocity = 4 * Vector2.UnitY.RotatedBy(MathHelper.TwoPi / 8 * i);
+                            int d = Dust.NewDust(projectile.Center, 0, 0, DustID.Smoke, 0, 0, 100, Color.DarkGray, 1.5f);
+                            Main.dust[d].velocity = velocity;
+                            Main.dust[d].noGravity = true;
+                        }
+                    }
+                }
+                ninjaCritIncrease = 0;
             }
             if (projectile.type == ProjectileID.SharpTears && !projectile.usesLocalNPCImmunity && projectile.usesIDStaticNPCImmunity && projectile.idStaticNPCHitCooldown == 60 && noInteractionWithNPCImmunityFrames)
             {

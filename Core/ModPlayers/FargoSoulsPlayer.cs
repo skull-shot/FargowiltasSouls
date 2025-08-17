@@ -712,6 +712,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.HasEffect<NinjaEffect>()
                 && item.IsWeapon()
                 && !ProjectileID.Sets.IsAWhip[item.shoot]
+                && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[item.shoot]
                 && item.shoot > ProjectileID.None
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())
@@ -720,6 +721,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.velocity.Length() < maxSpeedRequired)
                 {
                     velocity *= 2f;
+                    knockback *= 2f;
                 }
             }
         }

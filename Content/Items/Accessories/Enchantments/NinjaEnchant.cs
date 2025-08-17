@@ -54,27 +54,5 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class NinjaDamageEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        public override void OnHitNPCWithProj(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPCWithProj(player, proj, target, hit, damageDone);
-
-            //crit visuals if fake "roll" was successful to visually indicate ninja crit boost
-            if (hit.Crit)
-            {
-                int ninjacrit = FargoSoulsGlobalProjectile.ninjaCritIncrease;
-                int critroll = Main.rand.Next(proj.CritChance + ninjacrit);
-                if (critroll <= proj.CritChance + ninjacrit && critroll > proj.CritChance)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        Vector2 velocity = 4 * Vector2.UnitY.RotatedBy(MathHelper.TwoPi / 8 * i);
-                        int d = Dust.NewDust(proj.Center, 0, 0, DustID.Smoke, 0, 0, 100, Color.DarkGray, 1.5f);
-                        Main.dust[d].velocity = velocity;
-                        Main.dust[d].noGravity = true;
-                    }
-                }
-            }
-            FargoSoulsGlobalProjectile.ninjaCritIncrease = 0;
-        }
     }
 }
