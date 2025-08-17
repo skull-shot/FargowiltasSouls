@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         {
             Projectile.width = 30;
             Projectile.height = 68;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.ignoreWater = true;
             Projectile.hide = true;
             Projectile.FargoSouls().CanSplit = false;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         public ref float soundTimer => ref Projectile.ai[1];
         public override bool? CanDamage() => false;
 
-        public override void AI()
+        public override bool PreAI()
         {
             Projectile.frame = (int)charge;
             Player player = Main.player[Projectile.owner];
@@ -60,14 +61,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                 Projectile.timeLeft++;
 
                 Projectile.rotation = rot + MathHelper.Pi;
-                
+
                 Projectile.direction = Main.MouseWorld.DirectionTo(player.Center).X < 0 ? 1 : -1;
                 Projectile.spriteDirection = Projectile.direction;
 
                 player.ChangeDir(Projectile.direction);
                 player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.ThreeQuarters, rot - MathHelper.PiOver2);
 
-                if (charge <= chargeMax) {
+                if (charge <= chargeMax)
+                {
                     charge += 1 / 30f;
                 }
 
@@ -83,10 +85,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                         Particle p = new SmallSparkle(Projectile.Center, player.velocity - Projectile.rotation.ToRotationVector2().RotatedByRandom(MathHelper.Pi * 0.1f) * Main.rand.NextFloat(4f, 7f), Color.Magenta, Main.rand.NextFloat(0.25f, 0.75f), 20);
                         p.Spawn();
                     }
-                    
+
                     SoundEngine.PlaySound(SoundID.MaxMana, player.Center);
                 }
-                    
+
 
                 if (soundTimer-- == 0)
                 {
@@ -104,6 +106,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                 }
                 Projectile.Kill();
             }
+            return false;
         }
         public override bool PreDraw(ref Color lightColor)
         {

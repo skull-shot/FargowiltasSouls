@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
         {
             Projectile.width = 4;
             Projectile.height = 4;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.hide = true;
             Projectile.friendly = false;
             Projectile.hostile = false;
@@ -66,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
 
         public override bool? CanDamage() => false;
 
-        public override void AI()
+        public override bool PreAI()
         {
             if (Main.player[Projectile.owner].active)
             {
@@ -172,7 +173,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                                 {
                                     owner.channel = false;
                                     AtkTimer = 180;
-                                    return;
+                                    return false;
                                 }
                                 owner.manaRegenDelay = 10;
                                 if (!NPCUtils.AnyProj(ModContent.ProjectileType<PlasmaDeathRay>(), owner.whoAmI))
@@ -235,7 +236,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                             {
                                 owner.channel = false;
                                 AtkTimer = 0;
-                                return;
+                                return false;
                             }
                             owner.manaRegenDelay = 10;
 
@@ -274,6 +275,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
             {
                 Projectile.Kill();
             }
+            return false;
         }
 
 

@@ -506,6 +506,10 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.ChlorophyteBullet:
                     balanceTextKeys = ["ChlorophyteBullet"];
                     return EModeChange.Nerf;
+                    
+                case ItemID.SporeSac:
+                    balanceTextKeys = ["SporeSac"];
+                    return EModeChange.Buff;
 
                 default:
                     return EModeChange.None;

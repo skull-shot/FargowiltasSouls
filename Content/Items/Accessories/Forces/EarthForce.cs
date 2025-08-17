@@ -113,7 +113,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 farg.AttackSpeed *= MathHelper.Lerp(1, 1.75f, lerper);
 
             if (player.HasEffect<PalladiumHealing>())
-                player.lifeRegen += (int)MathHelper.Lerp(3, 20, lerper);
+                player.lifeRegen += (int)MathHelper.Lerp(2, 8, lerper);
 
             if (player.HasEffect<TitaniumEffect>())
                 player.endurance += MathHelper.Lerp(0.05f, 0.2f, lerper);

@@ -44,11 +44,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         }
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (target.onFire || target.onFire2 || target.onFire3)
-            {
-                modifiers.FinalDamage *= 1.2f;
-            }
-                
+            
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
