@@ -516,7 +516,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             if (ProjectileID.Sets.IsAWhip[projectile.type])
                 return false;
-            if (projectile.stopsDealingDamageAfterPenetrateHits || EModeGlobalProjectile.FancySwings.Contains(projectile.type))
+            if (projectile.aiStyle == ProjAIStyleID.NightsEdge)
                 return false; // fix issue with true melee hit cooldown for Golem Fist
 
             return base.CanBeHitByProjectile(npc, projectile);

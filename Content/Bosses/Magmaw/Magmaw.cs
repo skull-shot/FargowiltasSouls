@@ -259,7 +259,7 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
         }
         public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (ProjectileID.Sets.CultistIsResistantTo[projectile.type] && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.FargoSouls().Homing == true && !FargoSoulsUtil.IsSummonDamage(projectile))
                 modifiers.FinalDamage *= 0.8f;
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

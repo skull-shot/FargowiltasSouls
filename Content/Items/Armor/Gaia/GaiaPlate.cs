@@ -23,7 +23,8 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Generic) += 0.1f;
+            DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
+            player.GetDamage(damageClass) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 5;
             player.endurance += 0.1f;
             player.lifeRegen += 2;

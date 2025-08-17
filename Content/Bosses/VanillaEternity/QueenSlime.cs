@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public enum States
         {
             // phase 1
-            Hops, // default state
+            Hops = 0, // default state
             NormalSlam,
             MinionSlam,
             QuickHops,
@@ -216,6 +216,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             int startup = 40;
             int hops = 1;
+            if (PreviousState == 0) // start of fight
+            {
+                hops = 3;
+                if (!Collision.CanHitLine(NPC.Center, 1, 1, Target.Center, 1, 1))
+                    NPC.position += NPC.DirectionTo(Target.Center) * 20f;
+            }
+                
             if (Timer < startup)
             {
                 Timer++;
@@ -502,7 +509,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float targetVel = Math.Abs(Target.Center.X - NPC.Center.X) / 28f;
                     if (Target.velocity.X.NonZeroSign() != Target.HorizontalDirectionTo(NPC.Center))
                         targetVel += Target.velocity.X / 3;
-                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * Math.Max(8, targetVel);
+                    NPC.velocity.X = NPC.HorizontalDirectionTo(Target.Center) * Math.Min(21, Math.Max(10, targetVel));
                     int y = -18;
                     if (Target.Bottom.Y < NPC.Bottom.Y)
                         y = -18;
@@ -556,7 +563,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 NPC.velocity.Y += 0.4f;
                 float horDir = NPC.HorizontalDirectionTo(Target.Center);
                 if (NPC.velocity.X.NonZeroSign() != horDir)
-                    NPC.velocity.X += horDir * 0.5f;
+                    NPC.velocity.X += horDir * 0.55f;
             }
 
 
@@ -1042,7 +1049,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
                 states = [States.NormalSlam];
             State = (int)Main.rand.NextFromCollection(states);
-            State = (int)States.QuickHops;
             NetSync(NPC);
 
             // debug

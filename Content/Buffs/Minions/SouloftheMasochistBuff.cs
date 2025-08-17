@@ -31,10 +31,19 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                 {
                     fargoPlayer.SkeletronArms = true;
                     const int damage = 64;
-                    if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArmL>()] < 1)
-                        FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmL>(), damage, 8f, player.whoAmI);
-                    if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArmR>()] < 1)
-                        FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArmR>(), damage, 8f, player.whoAmI);
+                    if(player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArm>()] == 1)
+                    {
+
+                        for (int i = 0; i < Main.maxProjectiles; i++)
+                        {
+                            if (Main.projectile[i].active && Main.projectile[i].owner == player.whoAmI && Main.projectile[i].type == ModContent.ProjectileType<SkeletronArm>())
+                            {
+                                Main.projectile[i].Kill();
+                            }
+                        }
+                    }
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, 1);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, -1);
                 }
 
                 if (player.AddEffect<PungentMinion>(item))

@@ -425,8 +425,7 @@ SaucerRocket.DisplayName: Ракета
 SeedPlanterasChild.DisplayName: Семя
 ShadowflamesFriendly.DisplayName: Теневое пламя
 SilverSword.DisplayName: СеребрМеч
-SkeletronArmL.DisplayName: Рука Скелетрона
-SkeletronArmR.DisplayName: Рука Скелетрона
+SkeletronArm.DisplayName: Рука Скелетрона
 SpikyBallPlanterasChild.DisplayName: Колючий шар
 TrueEyeL.DisplayName: Истинный глаз Ктулху
 TrueEyeR.DisplayName: Истинный глаз Ктулху
@@ -814,14 +813,14 @@ PigronBubble.DisplayName: Пузырь свинрона
 NymphHeart.DisplayName: Сердце Нимфы
 SpiderEnchantSpiderling.DisplayName: Паучок
 AbomFlamePillar.DisplayName: Огненный столп
-AbomFlamePillarMark.DisplayName: Абом Огонь Колонна Метка
+AbomFlamePillarMark.DisplayName: Метка огненного столпа
 DemonFireball.DisplayName: Огненный шар демона
 ImpFireOrb.DisplayName: Большой огненный шар
 BatExplosion.DisplayName: Взрыв
 HallowRay.DisplayName: Святой луч
 TrawlerFog.DisplayName: Ядовитый туман
-// IceShield.DisplayName: Ice Shield
-// KingSlimeBallFriendly.DisplayName: Slime Ball
-// CultistFireballSpin.DisplayName: Fireball
-// CultistIceBall.DisplayName: Ice Sphere
-// CultistIceShard.DisplayName: Ice Shard
+IceShield.DisplayName: Ледяной щит
+KingSlimeBallFriendly.DisplayName: Слизневый шар
+CultistFireballSpin.DisplayName: Огненный шар
+CultistIceBall.DisplayName: Ледяная сфера
+CultistIceShard.DisplayName: Ледяной осколок

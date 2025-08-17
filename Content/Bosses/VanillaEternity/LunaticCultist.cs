@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -131,7 +132,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Main.LocalPlayer.buffImmune[BuffID.Frozen] = true;
 
-            if (Phase == 1 && npc.GetLifePercent() < 0.7f && State == (int)States.Reposition && Timer == 20)
+            if (Phase == 1 && npc.GetLifePercent() < 0.7f && State == (int)States.Reposition && Timer == 5)
             {
                 Timer = 0;
                 State = (int)States.SpawnClones;
@@ -139,7 +140,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.netUpdate = true;
             }
 
-            if (Phase == 2 && npc.GetLifePercent() < 0.35f && State == (int)States.Reposition && Timer == 20)
+            if (Phase == 2 && npc.GetLifePercent() < 0.35f && State == (int)States.Reposition && Timer == 5)
             {
                 Timer = 0;
                 State = (int)States.SpawnClones;
@@ -148,264 +149,32 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             AttacksAI(npc, ref Timer, ref State, ref OldAttack, ref AnimationState);
-            return false;
-
-            if (npc.ai[3] == -1f)
-            {
-                //if (Fargowiltas.Instance.MasomodeEXLoaded && npc.ai[1] >= 120f && npc.ai[1] < 419f) //skip summoning ritual LMAO
-                //{
-                //    npc.ai[1] = 419f;
-                //    npc.netUpdate = true;
-                //}
-
-                if (npc.ai[0] == 5)
-                {
-                    if (npc.ai[1] == 1f)
-                    {
-                        RitualRotation = Main.rand.Next(360);
-                        npc.netUpdate = true;
-                        NetSync(npc);
-                    }
-
-                    if (npc.ai[1] > 30f && npc.ai[1] < 330f)
-                    {
-                        RitualRotation += 2f - Math.Min(1f, 2f * npc.life / npc.lifeMax); //always at least 1, begins scaling below 50% life
-                        npc.Center = Main.player[npc.target].Center + 180f * Vector2.UnitX.RotatedBy(MathHelper.ToRadians(RitualRotation));
-                    }
-
-                    /*if (npc.ai[1] > 275f && npc.ai[1] < 330f) //dust that reveals the real cultist at last second
-                    {
-                        float modifier = 0;
-                        int repeats = (int)npc.ai[1] - 275;
-                        for (int i = 0; i < repeats; i++)
-                            modifier = MathHelper.Lerp(modifier, 1f, 0.08f);
-                        float distance = npc.height * 2 * modifier;
-                        float rotation = MathHelper.TwoPi * modifier;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            int d = Dust.NewDust(npc.Center + distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / 4 * i), 0, 0, 88, newColor: Color.White);
-                            Main.dust[d].noGravity = true;
-                            Main.dust[d].velocity *= npc.ai[1] > 315 ? 18f : 0.5f;
-                            Main.dust[d].scale = 0.5f + 2.5f * modifier;
-                        }
-                    }*/
-                }
-            }
-            else
-            {
-                //if (npc.ai[3] == 0) npc.damage = 0;
-
-                //about to begin moving for ritual: 0 39 0 12
-                //begin transit for ritual: 1 34 0 12
-                //pause just before ritual: 0 0 0 13
-                //ritual: 5 0 0 -1
-
-                if (!EnteredPhase2 && npc.life < npc.lifeMax / 2) //p2 transition, force a ritual immediately
-                {
-                    EnteredPhase2 = true;
-                    npc.ai[0] = 5;
-                    npc.ai[1] = 0;
-                    npc.ai[2] = 0;
-                    npc.ai[3] = -1;
-                    SoundEngine.PlaySound(SoundID.Roar, npc.Center);
-
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        npc.netUpdate = true;
-                        NetSync(npc);
-                    }
-                }
-
-                //necessary because calameme
-                int damage = Math.Max(75, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage));
-
-                switch ((int)npc.ai[0])
-                {
-                    case -1:
-                        if (npc.ai[1] == 419f) //always start fight with a ritual
-                        {
-                            npc.ai[0] = 0f;
-                            npc.ai[1] = 0f;
-                            npc.ai[3] = 11f;
-                            npc.netUpdate = true;
-                        }
-                        break;
-
-                    case 2: //ice mist, frost wave support
-                        if (EnteredPhase2)
-                        {
-                            if (npc.ai[1] < 60 && npc.ai[1] % 4 == 3)
-                            {
-                                int spacing = 14 - (int)(npc.ai[1] - 3) / 4; //start far and get closer
-                                for (int j = -1; j <= 1; j += 2) //from above and below
-                                {
-                                    for (int i = -1; i <= 1; i += 2) //waves beside you
-                                    {
-                                        if (i == 0)
-                                            continue;
-                                        Vector2 spawnPos = Main.player[npc.target].Center;
-                                        spawnPos.X += Math.Sign(i) * 150 * 2 + i * 120 * spacing;
-                                        spawnPos.Y -= (700 + Math.Abs(i) * 50) * j;
-                                        float speed = 8 + spacing * 0.8f;
-                                        if (FargoSoulsUtil.HostCheck)
-                                            Projectile.NewProjectile(npc.GetSource_FromThis(), spawnPos, Vector2.UnitY * speed * j, ProjectileID.FrostWave, damage / 3, 0f, Main.myPlayer);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (npc.ai[1] == (WorldSavingSystem.MasochistModeReal ? 5f : 60f) && FargoSoulsUtil.HostCheck) //single wave
-                            {
-                                for (int i = 0; i < Main.maxNPCs; i++)
-                                {
-                                    if (Main.npc[i].active && Main.npc[i].type == NPCID.CultistBossClone)
-                                    {
-                                        Vector2 distance = Main.player[npc.target].Center - Main.npc[i].Center;
-                                        distance.Normalize();
-                                        distance *= Main.rand.NextFloat(8f, 9f);
-                                        distance = distance.RotatedByRandom(Math.PI / 24);
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, distance,
-                                            ProjectileID.FrostWave, damage / 3, 0f, Main.myPlayer);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-
-                    case 3: //fireballs
-                        if (FargoSoulsUtil.HostCheck)
-                        {
-                            if (EnteredPhase2) //fireball ring
-                            {
-                                if (npc.ai[1] == 3f)
-                                {
-                                    int max = NPC.CountNPCS(NPCID.CultistBossClone) * 2 + 6;
-
-                                    Vector2 baseOffset = npc.SafeDirectionTo(Main.player[npc.target].Center);
-                                    const float spawnOffset = 1200f;
-                                    const float speed = 7f;
-                                    const float ai0 = spawnOffset / speed;
-                                    for (int i = 0; i < max; i++)
-                                    {
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), Main.player[npc.target].Center + spawnOffset * baseOffset.RotatedBy(2 * Math.PI / max * i),
-                                            -speed * baseOffset.RotatedBy(2 * Math.PI / max * i), ModContent.ProjectileType<CultistFireball>(),
-                                            damage / 3, 0f, Main.myPlayer, ai0);
-                                    }
-
-                                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, npc.whoAmI, npc.type);
-                                }
-                            }
-
-                            if (npc.ai[1] % 20 == 6) //homing flare support
-                            {
-                                for (int i = 0; i < Main.maxNPCs; i++)
-                                {
-                                    if (Main.npc[i].active && Main.npc[i].type == NPCID.CultistBossClone)
-                                    {
-                                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), Main.npc[i].Center, NPCID.SolarFlare, target: npc.target);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-
-                    case 4: //lightning
-                        if (npc.ai[1] == 19f && npc.HasPlayerTarget && FargoSoulsUtil.HostCheck)
-                        {
-                            int cultistCount = 1;
-                            for (int i = 0; i < Main.maxNPCs; i++)
-                            {
-                                if (Main.npc[i].active && Main.npc[i].type == NPCID.CultistBossClone)
-                                {
-                                    if (EnteredPhase2) //vortex lightning
-                                    {
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, Main.rand.NextVector2Square(-15, 15), ModContent.ProjectileType<CultistVortex>(),
-                                          damage * 6 / 15, 0, Main.myPlayer, 0f, cultistCount);
-                                        cultistCount++;
-                                    }
-                                    else //aimed lightning
-                                    {
-                                        if (WorldSavingSystem.MasochistModeReal)
-                                        {
-                                            Vector2 dir = Main.player[npc.target].Center - Main.npc[i].Center;
-                                            float ai1New = Main.rand.Next(100);
-                                            Vector2 vel = Vector2.Normalize(dir.RotatedByRandom(Math.PI / 4)) * 24f;
-                                            Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, vel, ModContent.ProjectileType<HostileLightning>(),
-                                                damage * 6 / 15, 0, Main.myPlayer, dir.ToRotation(), ai1New);
-                                        }
-                                        else
-                                        {
-                                            Vector2 vel = Main.npc[i].SafeDirectionTo(Main.player[npc.target].Center).RotatedByRandom(MathHelper.ToRadians(5));
-                                            vel *= Main.rand.NextFloat(4f, 6f);
-                                            Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, vel, ModContent.ProjectileType<LightningVortexHostile>(), damage * 6 / 15, 0, Main.myPlayer);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-
-                    case 7:
-                        if (npc.ai[1] == 3f && FargoSoulsUtil.HostCheck) //ancient light, jellyfish support
-                        {
-                            for (int i = 0; i < Main.maxProjectiles; i++)
-                            {
-                                if (Main.projectile[i].active && Main.projectile[i].type == ModContent.ProjectileType<CultistRitual>())
-                                {
-                                    Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(Main.projectile[i].Center.X, Main.player[npc.target].Center.Y - 700),
-                                        Vector2.Zero, ModContent.ProjectileType<StardustRain>(), damage / 3, 0f, Main.myPlayer);
-                                }
-                            }
-                        }
-                        break;
-
-                    case 8:
-                        if (npc.ai[1] == 3f) //ancient doom, nebula sphere support
-                        {
-                            int t = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
-                            if (t != -1 && Main.player[t].active)
-                            {
-                                for (int i = 0; i < Main.maxNPCs; i++)
-                                {
-                                    if (Main.npc[i].active && Main.npc[i].type == NPCID.CultistBossClone)
-                                        Projectile.NewProjectile(npc.GetSource_FromThis(), Main.npc[i].Center, Vector2.Zero, ProjectileID.NebulaSphere, damage * 6 / 15, 0f, Main.myPlayer);
-                                }
-                            }
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-            }
 
             npc.defense = npc.defDefense; //prevent vanilla p2 from lowering defense!
             Lighting.AddLight(npc.Center, 1f, 1f, 1f);
 
             EModeUtils.DropSummon(npc, "CultistSummon", NPC.downedAncientCultist, ref DroppedSummon, NPC.downedGolemBoss);
-
-            return result;
+            return false;
         }
         public static int AttackDuration => 210;
         public static void AttacksAI(NPC npc, ref int timer, ref int state, ref int oldAttack, ref int animation)
         {
             int damage = 33;
             //Targeting
-            int maxDist = 3000;
+            int maxDist = 5000;
             if (!npc.HasPlayerTarget || !Main.player[npc.target].active || Main.player[npc.target].dead || Main.player[npc.target].ghost || npc.Distance(Main.player[npc.target].Center) > maxDist)
             {
                 npc.TargetClosest(false);
                 Player newPlayer = Main.player[npc.target];
                 if (!newPlayer.active || newPlayer.dead || newPlayer.ghost || npc.Distance(newPlayer.Center) > maxDist)
                 {
-                    if (npc.timeLeft > 60)
-                        npc.timeLeft = 60;
+                    if (npc.timeLeft > 120)
+                        npc.timeLeft = 120;
                     npc.velocity.Y -= 0.4f;
                     return;
                 }
             }
-            npc.timeLeft = 60;
+            npc.timeLeft = 180;
             Player player = Main.player[npc.target];
             bool alone = Alone(npc);
 
@@ -426,7 +195,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     break;
                 case States.Reposition:
                     {
-                        int duration = (WorldSavingSystem.MasochistModeReal ? 16 : 40);
+                        int duration = WorldSavingSystem.MasochistModeReal ? 16 : 40;
+                        if (alone)
+                            duration = WorldSavingSystem.MasochistModeReal ? 8 : 30;
                         animation = (int)Animation.Float;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 420;
                         if (WorldSavingSystem.MasochistModeReal)
@@ -525,18 +296,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (timer < start)
                         {
                             npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                            if (npc.Distance(player.Center) < 400)
+                            if (npc.Distance(player.Center) < 420)
                             {
-                                npc.velocity -= npc.DirectionTo(player.Center);
+                                npc.velocity -= npc.DirectionTo(player.Center) * 1.1f;
                             }
-                            npc.velocity *= 0.94f;
+                            npc.velocity *= 0.93f;
                         }
                         else
                         {
                             npc.direction = npc.spriteDirection = npc.velocity.X.NonZeroSign();
                             float progress = (float)(timer - start) / (AttackDuration - start);
                             float speedupTime = 0.25f;
-                            float accel = alone ? 0.9f : 0.42f;
+                            float accel = alone ? 0.9f : 0.52f;
                             if (progress < speedupTime)
                                 accel = MathHelper.SmoothStep(0, accel, progress / speedupTime);
 
@@ -598,7 +369,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             SoundEngine.PlaySound(SoundID.Zombie90 with { Volume = 2 }, npc.Center);
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                for (int i = 0; i < 5; i++)
+                                int bolts = alone ? 5 : 4;
+                                for (int i = 0; i < bolts; i++)
                                 {
                                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Main.rand.NextVector2Square(-15, 15), ModContent.ProjectileType<CultistVortex>(), damage, 0, Main.myPlayer, 0f, i);
                                 }
@@ -624,7 +396,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         {
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                int max = alone ? 12 : 10;
+                                int max = alone ? 14 : 10;
                                 if (WorldSavingSystem.MasochistModeReal)
                                     max += 3;
 
@@ -637,8 +409,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 {
                                     int p = Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center + spawnOffset * baseOffset.RotatedBy(rand + 2 * Math.PI / max * i), -speed * baseOffset.RotatedBy(rand + 2 * Math.PI / max * i),
                                         ModContent.ProjectileType<CultistFireball>(), damage, 0f, Main.myPlayer, ai0);
-                                    if (alone && p.IsWithinBounds(Main.maxProjectiles))
-                                        Main.projectile[p].extraUpdates = 1;
 
                                 }
                             }
@@ -668,7 +438,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     {
                                         Vector2 spinninpoint = vec * (6f + (float)Main.rand.NextDouble() * 4f);
                                         spinninpoint = spinninpoint.RotatedByRandom(0.5235987901687622);
-                                        Projectile.NewProjectile(npc.GetSource_FromAI(), vector3.X, vector3.Y, spinninpoint.X, spinninpoint.Y, ProjectileID.CultistBossFireBall, damage, 0f, Main.myPlayer);
+                                        Projectile.NewProjectile(npc.GetSource_FromAI(), vector3.X, vector3.Y, spinninpoint.X, spinninpoint.Y, ProjectileID.CultistBossFireBallClone, damage, 0f, Main.myPlayer);
                                     }
                                 }
                             }
@@ -691,23 +461,30 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
 
-                        Vector2 desiredPos = player.Center + player.HorizontalDirectionTo(npc.Center) * Vector2.UnitX * 350;
+                        Vector2 desiredPos = player.Center + player.HorizontalDirectionTo(npc.Center) * Vector2.UnitX * 450;
                         if (timer < windup)
                         {
                             
                             Movement(npc, desiredPos, 1.2f, 1.2f);
+
+                            npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
+                            if (npc.Distance(player.Center) < 420)
+                            {
+                                npc.velocity -= npc.DirectionTo(player.Center) * 1.2f;
+                            }
+                            npc.velocity *= 0.97f;
                         }
                         else
                         {
-                            npc.velocity *= 0.9f;
-                            npc.velocity.X = (float)FargoSoulsUtil.SmartAccel1D(Math.Abs(desiredPos.X - npc.Center.X), npc.velocity.X, 1f, 1f);
+                            npc.velocity *= 0.89f;
+                            Movement(npc, desiredPos, 0.6f, 0.6f);
                         }
                         if (timer == windup)
                             SoundEngine.PlaySound(SoundID.Zombie88 with { Volume = 2 }, npc.Center);
                         if (timer > windup && timer <= windup + swingTime)
                         {
                             float progress = (float)(timer - windup) / swingTime;
-                            int div = alone ? 4 : 6;
+                            int div = alone ? 4 : 5;
                             if (WorldSavingSystem.MasochistModeReal)
                                 div -= 1;
                             if (timer % div == 0)
@@ -760,7 +537,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static void Movement(NPC npc, Vector2 desiredPos, float accel, float decel)
         {
             RepulseOthers(npc, ref desiredPos);
-            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel, decel);
+            float resistance = npc.velocity.Length() * accel / 35f;
+            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, accel - resistance, decel + resistance);
         }
         public static void RepulseOthers(NPC npc, ref Vector2 desiredPos)
         {
@@ -769,7 +547,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             for (int i = 0; i < others.Length; i++)
             {
                 if (others[i] == null) continue;
-                int minDistance = 330;
+                int minDistance = 500;
                 if (desiredPos.Distance(others[i].Center) < minDistance)
                     desiredPos = others[i].Center + others[i].DirectionTo(desiredPos) * minDistance;
             }
@@ -962,10 +740,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             NPC cultist = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.CultistBoss);
 
-            if (cultist != null)
+            if (cultist != null && cultist.TypeAlive(NPCID.CultistBoss))
             {
                 npc.target = cultist.target;
                 npc.realLife = cultist.whoAmI;
+                npc.HitSound = cultist.HitSound;
                 npc.defense = 9999;
                 //npc.dontTakeDamage = true;
                 var cultistEmode = cultist.GetGlobalNPC<LunaticCultist>();
@@ -977,48 +756,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.netUpdate = true;
                 }
                 LunaticCultist.AttacksAI(npc, ref Timer, ref State, ref OldAttack, ref AnimationState);
-                return false;
-                //during ritual
-                if (cultist.ai[3] == -1 && cultist.ai[0] == 5) //&& cultist.ai[2] > -1 && cultist.ai[2] < Main.maxProjectiles)
-                {
-                    if (npc.alpha > 0)
-                    {
-                        TotalCultistCount = 1; //accounts for cultist boss
-                        for (int i = 0; i < Main.maxNPCs; i++)
-                        {
-                            if (Main.npc[i].active && Main.npc[i].type == npc.type && Main.npc[i].ai[3] == npc.ai[3])
-                            {
-                                if (i == npc.whoAmI)
-                                    MyRitualPosition = TotalCultistCount; //stores which one this is
-                                TotalCultistCount++; //stores total number of cultists
-                            }
-                        }
-                    }
-
-                    if (cultist.ai[1] > 30f && cultist.ai[1] < 330f)
-                    {
-                        Vector2 offset = cultist.Center - Main.player[cultist.target].Center;
-                        npc.Center = Main.player[cultist.target].Center + offset.RotatedBy(2 * Math.PI / TotalCultistCount * MyRitualPosition);
-                        Lighting.AddLight(npc.Center, 1f, 1f, 1f);
-                    }
-
-                    /*int ritual = (int)cultist.ai[2]; //rotate around ritual
-                    if (Main.projectile[ritual].active && Main.projectile[ritual].type == ProjectileID.CultistRitual)
-                    {
-                        Vector2 offset = cultist.Center - Main.projectile[ritual].Center;
-                        npc.Center = Main.projectile[ritual].Center + offset.RotatedBy(2 * Math.PI / Counter[0] * Counter[1]);
-                    }*/
-                }
-                else
-                {
-                    if (cultist.ai[3] == 0) //be visible always
-                        npc.alpha = 0;
-                }
-
                 Lighting.AddLight(npc.Center, 1f, 1f, 1f);
+                return false;
             }
-
-            return result;
+            npc.active = false;
+            return false;
         }
         public override void FindFrame(NPC npc, int frameHeight)
         {
@@ -1224,9 +966,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.cultBoss, NPCID.CultistBoss) && !WorldSavingSystem.MasochistModeReal)
             {
-                if (++Timer > 20 && Timer < 40)
+                if (++Timer < 40)
                 {
-                    npc.position -= npc.velocity;
+                    npc.position -= npc.velocity * (Timer / 40f);
                     return false;
                 }
 

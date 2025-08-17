@@ -106,6 +106,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             HallowedPendant.ActiveEffects(Player, item);
             // BoC
             //player.AddEffect<DefenseBrainEffect>(item);
+
+            player.AddEffect<JumpsDisabled>(item);
         }
 
         public override void AddRecipes()

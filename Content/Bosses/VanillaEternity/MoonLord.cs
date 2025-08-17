@@ -18,6 +18,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -26,7 +27,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     public abstract class MoonLord : EModeNPCBehaviour
     {
         public abstract int GetVulnerabilityState(NPC npc);
-
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 1.6f));
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
@@ -39,24 +44,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static float nerf => Main.getGoodWorld ? 0f : WorldSavingSystem.MasochistModeReal ? 0.2f : 0.4f;
         public bool IsItemValid(NPC npc, Player player, Item item)
         {
+            if (player.FargoSouls().GravityGlobeEXItem != null)
+                return true;
             int masoStateML = GetVulnerabilityState(npc);
-            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4 && !player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
+            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4)
                 return false;
             return true;
         }
         public bool IsProjectileValid(NPC npc, Projectile projectile)
         {
-            if (!Main.player[projectile.owner].buffImmune[ModContent.BuffType<NullificationCurseBuff>()])
+            if (Main.player[projectile.owner].FargoSouls().GravityGlobeEXItem != null)
+                return true;
+            switch (GetVulnerabilityState(npc))
             {
-
-                switch (GetVulnerabilityState(npc))
-                {
-                    case 0: if (!projectile.CountsAsClass(DamageClass.Melee)) return false; break;
-                    case 1: if (!projectile.CountsAsClass(DamageClass.Ranged)) return false; break;
-                    case 2: if (!projectile.CountsAsClass(DamageClass.Magic)) return false; break;
-                    case 3: if (!FargoSoulsUtil.IsSummonDamage(projectile)) return false; break;
-                    default: break;
-                }
+                case 0: if (!projectile.CountsAsClass(DamageClass.Melee)) return false; break;
+                case 1: if (!projectile.CountsAsClass(DamageClass.Ranged)) return false; break;
+                case 2: if (!projectile.CountsAsClass(DamageClass.Magic)) return false; break;
+                case 3: if (!FargoSoulsUtil.IsSummonDamage(projectile)) return false; break;
+                default: break;
             }
             return true;
         }
@@ -80,13 +85,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            if (!IsItemValid(npc, player, item))
-                modifiers.FinalDamage *= nerf;
+            bool valid = IsItemValid(npc, player, item);
+            if (Main.getGoodWorld && !valid)
+                modifiers.Null();
+            if (valid)
+                modifiers.FinalDamage *= 1.4f;
         }
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (!IsProjectileValid(npc, projectile))
-                modifiers.FinalDamage *= nerf;
+            bool valid = IsProjectileValid(npc, projectile);
+            if (Main.getGoodWorld && !valid)
+                modifiers.Null();
+            if (valid)
+                modifiers.FinalDamage *= 1.4f;
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
@@ -153,7 +164,30 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.lifeMax *= 2;
         }
-
+        public void ShowClassDamage(NPC npc)
+        {
+            string damageClass = VulnerabilityState switch {
+                0 => "Melee",
+                1 => "Ranged",
+                2 => "Magic",
+                3 => "Summon",
+                _ => "All"
+            };
+            Color color = VulnerabilityState switch
+            {
+                0 => Color.Yellow,
+                1 => Color.LightCyan,
+                2 => Color.Magenta,
+                3 => Color.Cyan,
+                _ => Color.White
+            };
+            string path = "Mods.FargowiltasSouls.Buffs.PoweroftheCosmosBuff.";
+            string classText = Language.GetTextValue(path + damageClass);
+            foreach (Player player in Main.ActivePlayers)
+            {
+                CombatText.NewText(player.Hitbox, color, text: Language.GetTextValue(path + "CombatText", classText), dramatic: true);
+            }
+    }
         public override bool SafePreAI(NPC npc)
         {
             bool result = base.SafePreAI(npc);
@@ -164,6 +198,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 SpawnedRituals = true;
                 VulnerabilityState = 0;
+                ShowClassDamage(npc);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<LunarRitual>(), 25, 0f, Main.myPlayer, 0f, npc.whoAmI);
@@ -172,7 +207,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost && VulnerabilityState >= 0 && VulnerabilityState <= 3)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<NullificationCurseBuff>(), 2);
+                Main.LocalPlayer.AddBuff(ModContent.BuffType<PoweroftheCosmosBuff>(), 2);
 
             if (!(WorldSavingSystem.MasochistModeReal && Main.getGoodWorld))
                 npc.position -= npc.velocity * 2f / 3f; //SLOW DOWN
@@ -480,6 +515,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (VulnerabilityTimer > 1800) //next vuln phase
                 {
                     VulnerabilityState = ++VulnerabilityState % 5;
+                    ShowClassDamage(npc);
 
                     VulnerabilityTimer = 0;
                     AttackTimer = 0;

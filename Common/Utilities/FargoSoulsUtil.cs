@@ -20,6 +20,7 @@ using Terraria.ModLoader;
 using Terraria.Graphics.Capture;
 using Terraria.GameContent.Achievements;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.Projectiles;
 
 namespace FargowiltasSouls //lets everything access it without using
 {
@@ -661,9 +662,32 @@ namespace FargowiltasSouls //lets everything access it without using
             }
         }
 
+        /// <summary>
+        /// Useful for defining the SourceItemType of a player projectile using its source.
+        /// Additionally defines the parent source projectile when applicable.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="source"></param>
+        /// <param name="sourceProjOut"></param>
+        public static void GetOrigin(Projectile projectile, IEntitySource source, out Projectile? sourceProjOut)
+        {
+            sourceProjOut = null;
+            if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
+            {
+                sourceProjOut = sourceProj;
+                if (sourceProj.FargoSouls().SourceItemType != 0)
+                    projectile.FargoSouls().SourceItemType = sourceProj.FargoSouls().SourceItemType;
+            }
+
+            if (source is EntitySource_ItemUse itemUse && itemUse.Item != null)
+            {
+                projectile.FargoSouls().SourceItemType = itemUse.Item.type;
+            }
+        }
+
         public static bool IsProjSourceItemUseReal(Projectile proj, IEntitySource source)
         {
-            return source is EntitySource_ItemUse parent && parent.Item.type == Main.player[proj.owner].HeldItem.type;
+            return source is EntitySource_ItemUse_WithAmmo parent && parent.Item != null && (parent.Item.type == Main.player[proj.owner].HeldItem.type || parent.Item.type == FargoSoulsPlayer.ApprenticeSupportItem?.type);
         }
 
         public static bool AprilFools => DateTime.Today.Month == 4 && DateTime.Today.Day <= 1;

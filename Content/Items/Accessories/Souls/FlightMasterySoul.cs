@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Expert;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -98,15 +99,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void PostUpdateEquips(Player player)
         {
             player.gravity = Player.defaultGravity * 1.5f;
-        }
-    }
-    public class JumpsDisabled : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<FlightMasteryHeader>();
-        public override int ToggleItemType => ModContent.ItemType<FlightMasterySoul>();
-        public override void PostUpdateEquips(Player player)
-        {
-            player.ConsumeAllExtraJumps();
         }
     }
 }

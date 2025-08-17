@@ -162,7 +162,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                 speedModifier = 0.1f;
             if (speedModifier > 1.5f)
                 speedModifier = 1.5f;
-            modifiers.FinalDamage *= (float)Math.Sqrt(Projectile.scale) * speedModifier;
+            modifiers.SourceDamage *= (float)Math.Sqrt(Projectile.scale) * speedModifier;
             modifiers.Knockback *= Math.Max(1f, Math.Abs(Projectile.velocity.X) * 1.5f);
         }
 

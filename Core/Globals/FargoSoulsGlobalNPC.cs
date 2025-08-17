@@ -686,7 +686,13 @@ namespace FargowiltasSouls.Core.Globals
             if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
             {
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
-                    PureGazeTime += 1;
+                {
+                    if (player.FargoSouls().MasochistSoul)
+                        PureGazeTime = PungentGazeBuff.MAX_TIME;
+                    else
+                        PureGazeTime += 1;
+                }
+                    
                 else if (PureGazeTime >= 3)
                     PureGazeTime -= 3;
                 if (PureGazeTime > PungentGazeBuff.MAX_TIME)

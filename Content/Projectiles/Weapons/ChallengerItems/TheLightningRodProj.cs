@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         {
             Projectile.width = 132;
             Projectile.height = 132;
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -55,19 +55,19 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
 
         private const int maxTime = 80;
 
-        public override void AI()
+        public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
             if (Projectile.owner == Main.myPlayer && !player.controlUseItem && Projectile.ai[0] == 0f)
             {
                 Projectile.Kill();
-                return;
+                return false;
             }
 
             if (player.dead || !player.active || player.ghost)
             {
                 Projectile.Kill();
-                return;
+                return false;
             }
 
             if (Projectile.localAI[0] % 20 == 0)
@@ -131,7 +131,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                 {
                     if (Projectile.owner == Main.myPlayer)
                         Projectile.Kill();
-                    return;
+                    return false;
                 }
                 else //player faces where this was thrown
                 {
@@ -179,12 +179,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
             }
 
             Projectile.Center = ownerMountedCenter;
+            return false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Projectile.ai[0] == 0f) //less damage when held
-                modifiers.FinalDamage /= 2;
+                modifiers.SourceDamage /= 2;
 
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }

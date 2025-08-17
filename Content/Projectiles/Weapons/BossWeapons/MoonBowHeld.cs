@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         {
             Projectile.width = 28;
             Projectile.height = 62;
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.FargoSouls().CanSplit = false;
@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         const int theTime = 300;
         const int window = 60;
 
-        public override void AI()
+        public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
 
@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                         Main.dust[d].position = Projectile.Center;
                     }
                 }
-                return;
+                return false;
             }
 
             Projectile.hide = false;
@@ -175,6 +175,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 Main.dust[d].position = Projectile.Center - vector;
                 Main.dust[d].velocity += player.velocity;
             }
+            return false;
         }
 
         public override Color? GetAlpha(Color lightColor)

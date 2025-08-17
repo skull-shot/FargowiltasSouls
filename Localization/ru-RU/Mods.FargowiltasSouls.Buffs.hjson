@@ -358,9 +358,15 @@ NeurotoxinBuff: {
 	Description: Ваше тело прекращает работу
 }
 
-NullificationCurseBuff: {
-	DisplayName: Проклятие нуллификации
-	Description: Лунный лорд переключает сопротивления к видам урона!
+PoweroftheCosmosBuff: {
+	DisplayName: Силы Космоса
+	Description: Оружия, совпадающие с фазой Лунного лорда, наносят в 1,4 раза больше урона!
+	CombatText: х1,4 ед. {0} урона!
+	Melee: ближнего
+	Ranged: стрелкового
+	Magic: магического
+	Summon: призывательного
+	All: всего
 }
 
 OceanicMaulBuff: {
@@ -533,7 +539,7 @@ BabyLifelightBuff: {
 
 BrokenShellBuff: {
 	DisplayName: Разбитый панцирь
-	Description: Вы пока не можете воспользоваться панцирем
+	Description: Скорость передвижения и атаки резко увеличены
 }
 
 CrimsonRegenBuff: {
@@ -547,7 +553,7 @@ FirstStrikeBuff: {
 }
 
 FossilReviveCDBuff: {
-	DisplayName: Возрождён
+	DisplayName: Возрождение
 	Description: Вы не можете возродиться снова
 }
 

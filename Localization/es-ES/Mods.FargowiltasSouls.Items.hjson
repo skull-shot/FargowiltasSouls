@@ -41,7 +41,7 @@ AncientShadowEnchant: {
 		Your attacks may inflict Darkness on enemies
 		Darkened enemies fire shadowflame tentacles at other enemies, dealing damage based on their own damage
 		Three Shadow Orbs will orbit around you
-		'Archaic, yet functional'
+		'But what if it could get darker than dark?'
 		''' */
 }
 
@@ -86,7 +86,7 @@ BeetleEnchant: {
 		'''
 		Hitting enemies generates up to 6 beetles
 		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
-		3 beetles die when taking damage, once per 3 seconds
+		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
 }
@@ -911,6 +911,7 @@ AeolusBoots: {
 	/* Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		The wearer can run even faster on sand
 		8% increased movement speed
 		Increases jump speed and height, allows double jump and auto-jump, and negates fall damage
@@ -1038,12 +1039,9 @@ ChaliceoftheMoon: {
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
 		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Burning, Fused, Lihzahrd Curse, Low Ground, [i:FargowiltasSouls/CelestialRune] and Marked for Death
-		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side
 		'Always watching'
 		''' */
 }
@@ -1138,7 +1136,7 @@ GalacticGlobe: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
+		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
 		Summons the true eyes of Cthulhu to protect you
 		Increases flight time by 100%
@@ -1196,7 +1194,7 @@ HeartoftheMasochist: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
+		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
@@ -1557,6 +1555,7 @@ ZephyrBoots: {
 	/* Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		8% increased movement speed
 		Provides the ability to walk on water, honey and lava
 		Grants immunity to fire blocks and 7 seconds of immunity to lava
@@ -1597,8 +1596,8 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		+50 max life, +20% damage reduction, increases life regeneration by 10
-		Grants immunity to knockback, several debuffs, Shimmering, and fall damage
+		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration by 6
+		[i:AnkhShield] Grants immunity to knockback and several debuffs
 		[i:860] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
@@ -1622,7 +1621,7 @@ DimensionSoul: {
 	// DisplayName: Soul of Dimensions
 	/* Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 10, [i:CharmofMyths] reduces healing cooldown by 25%
+		+100 max life, +20% damage reduction, increases life regeneration by 6, [i:CharmofMyths] reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
 		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, [c/BC5252:and disables all of your jumps (togglable)]
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1686,7 +1685,7 @@ FlightMasterySoul: {
 		Hold DOWN and JUMP to hover
 		Hold UP to boost faster
 		Increases gravity
-		[c/BC5252:Disables all of your jumps (togglable)]
+		Disables all of your double jumps (togglable)
 		'Pierce the heavens'
 		''' */
 }
@@ -1695,17 +1694,16 @@ MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, immunity to almost all Eternity Mode debuffs, and more
-		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
-		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/NymphsPerfume] Increases respawn hp, [i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50% and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
+		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
+		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
+		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
+		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
+		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/SkullCharm] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/GalacticGlobe] True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
 		''' */
@@ -1729,6 +1727,7 @@ SupersonicSoul: {
 	/* Tooltip:
 		'''
 		Allows Supersonic running, dashing, hovering, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (togglable)
 		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
 		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
 		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies
@@ -1865,7 +1864,7 @@ GaiaGreaves: {
 	// DisplayName: Gaia Greaves
 	/* Tooltip:
 		'''
-		10% increased damage for your current weapon class
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
 		10% increased movement speed
 		''' */
@@ -1875,9 +1874,8 @@ GaiaHelmet: {
 	// DisplayName: Gaia Helmet
 	/* Tooltip:
 		'''
-		10% increased damage
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
-		Increases max number of minions by 1
 		''' */
 }
 
@@ -1885,7 +1883,7 @@ GaiaPlate: {
 	// DisplayName: Gaia Plate
 	/* Tooltip:
 		'''
-		10% increased damage
+		8% increased damage for your current weapon class
 		5% increased critical strike chance
 		Reduces damage taken by 10%
 		Increases your life regeneration

@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         {
             Projectile.width = 58;
             Projectile.height = 58;
-            Projectile.aiStyle = 0;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             //Projectile.light = 2f;
@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         {
             if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().HellFire)
             {
-                modifiers.FinalDamage *= 1.2f;
+                modifiers.SourceDamage *= 1.2f;
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 
             FreezeTime = 4;
         }
-        public override void AI()
+        public override bool PreAI()
         {
             Player player = Main.player[Projectile.owner];
             const int SwingTime = 60;
@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 
             if (progress < prepEnd)
             {
-                
+
                 float lerp = 0.2f;
                 lerp *= increment;
                 SwingRotation = MathHelper.Lerp(SwingRotation, -maxAngle, 0.2f);
@@ -173,7 +173,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             {
                 Projectile.Kill();
                 player.FargoSouls().SKSCancelTimer = 40;
-                return;
+                return false;
             }
             Vector2 playerRotatedPoint = player.RotatedRelativePoint(player.MountedCenter, true);
             if (Main.myPlayer == Projectile.owner)
@@ -202,7 +202,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 2;
             player.itemAnimation = 2;
-
+            return false;
         }
         public override bool PreDraw(ref Color lightColor)
         {

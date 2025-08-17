@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Eternity
 {
-    public class NullificationCurseBuff : ModBuff
+    public class PoweroftheCosmosBuff : ModBuff
     {
         public override void SetStaticDefaults()
         {

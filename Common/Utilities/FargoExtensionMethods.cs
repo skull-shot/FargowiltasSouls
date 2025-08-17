@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -366,5 +367,59 @@ namespace FargowiltasSouls //lets everything access it without using
 
         public static Rectangle ToTileCoords(this Rectangle rectangle) => new(rectangle.X / 16, rectangle.Y / 16, rectangle.Width / 16, rectangle.Height / 16);
 
+        /// <summary>
+        /// Checks ProjectileID.Sets.CultistIsResistantTo[projectile.type] for homing.
+        /// Additionally, allows manual checking specific projectile behaviours dynamically for homing.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="player"></param>
+        /// <param name="Dynamic"></param>
+        /// <returns></returns>
+        public static bool IsHoming(this Projectile projectile, Player? player = null, IEntitySource? source = null, bool Dynamic = true)
+        {
+            switch (projectile.type)
+            {
+                case ProjectileID.Celeb2Rocket:
+                case ProjectileID.Celeb2RocketExplosive:
+                case ProjectileID.Celeb2RocketLarge:
+                case ProjectileID.Celeb2RocketExplosiveLarge:
+                    if (Dynamic && projectile.FargoSouls().SourceItemType == ItemID.Celeb2 && projectile.ai[0] == 3f)
+                        return true;
+                    break;
+
+                case ProjectileID.FinalFractal: // Zenith // could probably use source null check here and use source first to speed things up but oh well I'll do it later
+                    if (Dynamic && player is not null && projectile.FargoSouls().SourceItemType == ItemID.Zenith)
+                    {
+                        Item heldItem = player.HeldItem;
+                        bool noApprentice = false;
+                        if (FargoSoulsPlayer.ApprenticeSupportItem is null)
+                            noApprentice = true;
+
+                        if (noApprentice && heldItem is not null && player.GetSource_ItemUse_WithPotentialAmmo(heldItem, 0) is EntitySource_ItemUse_WithAmmo)
+                        {
+                            if (player.itemAnimation <= (int)((float)heldItem.useAnimation * 2f / 3f))
+                            {
+                                return true;
+                            }
+                        }
+#pragma warning disable CS8604
+                        else if (!noApprentice && heldItem is not null && player.GetSource_ItemUse_WithPotentialAmmo(FargoSoulsPlayer.ApprenticeSupportItem, 0) is EntitySource_ItemUse_WithAmmo)
+#pragma warning restore CS8604
+                        {
+                            if (player.itemAnimation <= (int)((float)FargoSoulsPlayer.ApprenticeSupportItem.useAnimation * 2f / 3f))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    break;
+
+                default:
+                    if (ProjectileID.Sets.CultistIsResistantTo[projectile.type])
+                        return true;
+                    break;
+            }
+            return false;
+        }
     }
 }

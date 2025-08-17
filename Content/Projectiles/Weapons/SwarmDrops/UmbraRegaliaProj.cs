@@ -28,9 +28,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.width = 196;
             Projectile.height = 196;
+            Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
             Projectile.tileCollide = false;
@@ -57,14 +58,22 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public float Extension = 0;
         int OrigAnimMax = 30;
         bool Charged;
-        public override void AI()
+        bool canDamage;
+        public override bool? CanDamage()
+        {
+            if (canDamage)
+                return true;
+            else return false;
+        }
+
+        public override bool PreAI()
         {
             ref float thrown = ref Projectile.ai[0];
 
             if (thrown > 0)
             {
                 ThrownAI();
-                return;
+                return false;
             }
 
             ref float timer = ref Projectile.ai[1];
@@ -80,7 +89,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             float HoldoutRangeMax = (float)Projectile.Size.Length() / 2; //since sprite is diagonal
             float HoldoutRangeMin = (float)-Projectile.Size.Length() / 6;
 
-            Projectile.friendly = true;
+            canDamage = true;
             int duration = (int)(OrigAnimMax / 1.5f);
             int WaitTime = OrigAnimMax / 5;
 
@@ -107,7 +116,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
             else
             {
-                Projectile.friendly = false; //no hit on backswing
+                canDamage = false; //no hit on backswing
                 Extension = (duration + WaitTime - timer) / (duration / 2);
                 Projectile.velocity = Projectile.velocity.RotatedBy(SwingDirection * Projectile.spriteDirection * -Math.PI / (Swing * OrigAnimMax));
             }
@@ -137,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 Projectile.rotation += MathHelper.ToRadians(-135f) + (float)Math.PI;
             }
-
+            return false;
         }
         public void ThrownAI()
         {
@@ -159,7 +168,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 player.heldProj = Projectile.whoAmI;
                 Projectile.velocity = player.SafeDirectionTo(Main.MouseWorld);
                 Projectile.Center = player.MountedCenter + Projectile.velocity * HoldoutRangeMin;
-                Projectile.friendly = false;
+                canDamage = false;
                 if (chargeLevel < maxCharge * 5) //yes, allow overcharge
                     chargeLevel++;
                 if (player.whoAmI == Main.myPlayer)
@@ -191,7 +200,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
             else
             {
-                Projectile.friendly = true;
+                canDamage = true;
                 if (chargeLevel > -1) //check once
                 {
                     Projectile.damage = (int)(Projectile.damage * 1f * (chargeLevel / maxCharge)); //modify this to change damage charge

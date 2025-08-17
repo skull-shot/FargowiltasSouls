@@ -143,12 +143,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= Math.Min(1f, 0.1f + 0.9f * Spinup);
+            modifiers.SourceDamage *= Math.Min(1f, 0.1f + 0.9f * Spinup);
         }
 
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            modifiers.FinalDamage *= Math.Min(1f, 0.1f + 0.9f * Spinup);
+            modifiers.SourceDamage *= Math.Min(1f, 0.1f + 0.9f * Spinup);
         }
 
         public override Color? GetAlpha(Color lightColor)

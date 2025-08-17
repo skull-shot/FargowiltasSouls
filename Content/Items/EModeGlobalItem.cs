@@ -297,7 +297,7 @@ namespace FargowiltasSouls.Content.Items
             switch (item.type)
             {
                 case ItemID.OrichalcumSword:
-                    modifiers.FinalDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
+                    modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                     break;
                 default:
                     break;

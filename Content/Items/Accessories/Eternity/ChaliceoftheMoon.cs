@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            DeactivateMinions(fargoPlayer, Item);
 
             //magical bulb
             MagicalBulb.AddEffects(player, Item);
@@ -65,11 +64,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             fargoPlayer.MoonChalice = true;
             //player.AddEffect<CultistMinionEffect>(Item);
 
-        }
-        public static void DeactivateMinions(FargoSoulsPlayer modPlayer, Item item)
-        {
-            if (modPlayer.Player.AddEffect<MinionsDeactivatedEffect>(item))
-                modPlayer.GalacticMinionsDeactivated = modPlayer.GalacticMinionsDeactivatedBuffer = true;
         }
         public override void AddRecipes()
         {
@@ -103,11 +97,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             scaling = null;
             return damage;
         }
-    }
-    public class MinionsDeactivatedEffect : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
-        public override int ToggleItemType => EffectItem(Main.LocalPlayer) != null ? EffectItem(Main.LocalPlayer).type : -1;
     }
     /*
      public class CultistMinionEffect : AccessoryEffect
