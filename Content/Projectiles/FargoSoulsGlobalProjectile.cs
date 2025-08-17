@@ -21,6 +21,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -119,6 +120,26 @@ namespace FargowiltasSouls.Content.Projectiles
             ProjectileID.TinyEater
         ];
 
+        internal static List<int> DoesNotAffectHuntressType =
+        [
+            ProjectileID.NightsEdge,
+            ModContent.ProjectileType<Tome>()
+        ];
+
+        private static List<int> DoesNotAffectHuntressStyle =
+        [
+            ProjAIStyleID.Vilethorn,
+            ProjAIStyleID.MagicMissile,
+            ProjAIStyleID.Spear,
+            ProjAIStyleID.Drill,
+            ProjAIStyleID.HeldProjectile,
+            ProjAIStyleID.Xenopopper,
+            ProjAIStyleID.Yoyo,
+            ProjAIStyleID.TerrarianBeam,
+            ProjAIStyleID.SleepyOctopod,
+            ProjAIStyleID.ForwardStab,
+            ProjAIStyleID.ShortSword
+        ];
         public override void SetStaticDefaults()
         {
             A_SourceNPCGlobalProjectile.SourceNPCSync[ProjectileID.DD2ExplosiveTrapT3Explosion] = true;
@@ -219,6 +240,12 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
             }
 
+            if (!DoesNotAffectHuntressType.Contains(projectile.type) &&
+            (EModeGlobalProjectile.FancySwings.Contains(projectile.type) || DoesNotAffectHuntressStyle.Contains(projectile.aiStyle)))
+            {
+                DoesNotAffectHuntressType.Add(projectile.type); // fix vanilla jank
+            }
+
             //            Fargowiltas.ModProjDict.TryGetValue(projectile.type, out ModProjID);
         }
         public void ModifyProjectileSize(Projectile projectile, Player player, IEntitySource source)
@@ -277,8 +304,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 if (sourceProj is not null)
                 {
-                    //if (sourceProj3.FargoSouls().ItemSource)
-                    //    ItemSource = true;
+                    if (sourceProj.FargoSouls().ItemSource && DoesNotAffectHuntressType.Contains(sourceProj.type))
+                        ItemSource = true; // reuse this with the intention to make shots from held projectiles work with Huntress
 
                     if (sourceProj.FargoSouls().TikiTagged)
                     { //projs shot by tiki-buffed projs will also inherit the tiki buff
@@ -433,9 +460,9 @@ namespace FargowiltasSouls.Content.Projectiles
                 && ItemSource
                 && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
                 && projectile.DamageType != DamageClass.Default
-                && !EModeGlobalProjectile.FancySwings.Contains(projectile.type)
                 && projectile.FargoSouls().Homing != true
                 && !FargoSoulsUtil.IsSummonDamage(projectile, true, false)
+                && !DoesNotAffectHuntressType.Contains(projectile.type))
             {
                 HuntressProj = 1;
             }
