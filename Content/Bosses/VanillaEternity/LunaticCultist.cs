@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -154,6 +155,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Lighting.AddLight(npc.Center, 1f, 1f, 1f);
 
             EModeUtils.DropSummon(npc, "CultistSummon", NPC.downedAncientCultist, ref DroppedSummon, NPC.downedGolemBoss);
+
+            if (!SkyManager.Instance["FargowiltasSouls:CultistSky"].IsActive())
+                SkyManager.Instance.Activate("FargowiltasSouls:CultistSky");
             return false;
         }
         public static int AttackDuration => 210;

@@ -145,6 +145,8 @@ namespace FargowiltasSouls
 
             SkyManager.Instance["FargowiltasSouls:MoonLordSky"] = new MoonLordSky();
 
+            SkyManager.Instance["FargowiltasSouls:CultistSky"] = new CultistSky();
+
             //FreezeKey = KeybindLoader.RegisterKeybind(this, "Freeze", "P");
             //GoldKey = KeybindLoader.RegisterKeybind(this, "Gold", "O");
             //SmokeBombKey = KeybindLoader.RegisterKeybind(this, "SmokeBomb", "I");
