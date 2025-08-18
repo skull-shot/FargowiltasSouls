@@ -107,10 +107,10 @@ CactusEnchant: {
 		'''
 		Во время атаки вы выпускаете заряд игл во все стороны
 		Враги при смерти разлетаются на иглы
-		Даёт иммунитет к урону от кактусов в режиме Вечность (работает в инвентаре и слотах для украшений)
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		«Самый охладительный!»
 		'''
-	VanityTooltip: Даёт иммунитет к урону от кактусов в режиме Вечность
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3357,7 +3357,7 @@ Extra: {
 	EternityItem: Вечность
 	DisabledEffects: Некоторые эффекты выключены в меню переключения эффектов
 	PatreonItem: >> Предмет Патреона <<
-	CactusImmunity: Даёт иммунитет к урону от кактусов в режиме Вечность
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
 	Scaling: увеличивающ.

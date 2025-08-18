@@ -103,9 +103,10 @@ CactusEnchant: {
 		'''
 		Você libera agulhs em várias direções enquanto ataca
 		Inimigos explodirão em agulhas na morte se eles forem atingidos com suas agulhas
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'Não tem nada igual, é!'
 		'''
-	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
+	// VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3345,7 +3346,7 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
-	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
+	// CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 	// Scaling: scaling

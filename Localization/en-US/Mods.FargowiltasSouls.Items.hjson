@@ -106,10 +106,10 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Grants immunity to cactus damage in Eternity Mode (Works from inventory and vanity)
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'It's the quenchiest!'
 		'''
-	VanityTooltip: Grants immunity to cactus damage in Eternity Mode
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3323,7 +3323,7 @@ Extra: {
 	EternityItem: Eternity
 	DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Patreon Item <<
-	CactusImmunity: Grants immunity to cactus damage in Eternity Mode
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 	Scaling: scaling

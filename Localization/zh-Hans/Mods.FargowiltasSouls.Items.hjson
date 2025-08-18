@@ -107,10 +107,10 @@ CactusEnchant: {
 		'''
 		攻击时，你会释放出一圈针刺
 		敌人死亡后会爆裂出针刺
-		使你免受永恒模式的仙人掌伤害（在背包或时装栏也可生效）
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		“多汁解渴！”
 		'''
-	VanityTooltip: 永恒模式下免疫仙人掌伤害
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3415,7 +3415,7 @@ Extra: {
 	EternityItem: 永恒
 	DisabledEffects: 有效果被饰品效果配置禁用
 	PatreonItem: >> 捐赠者物品 <<
-	CactusImmunity: 免疫永恒模式的仙人掌伤害
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: 你有东西被偷了！
 	// Scaling: scaling
