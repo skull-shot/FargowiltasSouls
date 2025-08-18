@@ -205,10 +205,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         animation = (int)Animation.Float;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 420;
 
-                        npc.velocity = Vector2.Lerp(npc.Center, desiredPos, 0.3f * timer / (float)duration) - npc.Center;
+                        npc.velocity = (Vector2.Lerp(npc.Center, desiredPos, 0.3f * timer / (float)duration) - npc.Center) * 0.25f;
 
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                        if (timer >= duration - 3)
+                        if (timer >= duration - 7)
                         {
                             npc.velocity *= 0.7f;
                         }
@@ -308,7 +308,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float speedupTime = 0.25f;
                             float accel = alone ? 0.9f : 0.52f;
                             float distance = npc.Distance(player.Center);
-                            int anticheeseStart = 350;
+                            int anticheeseStart = 400;
                             if (npc.Distance(player.Center) > anticheeseStart)
                             {
                                 accel += 4f * (distance - anticheeseStart) / 800f;
