@@ -20,6 +20,9 @@ using FargowiltasSouls.Common.Graphics.Particles;
 using Terraria.DataStructures;
 using Luminance.Core.Graphics;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron;
+using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Core;
+using System.Transactions;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -324,6 +327,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 */
             }
 
+            if (BabyGuardianTimer <= 28 && BabyGuardianTimer != 0)
+                frameCounter++;
+            else
+            {
+                currentFrame = 0;
+                frameCounter = 0;
+            }
+                
             EModeUtils.DropSummon(npc, "SuspiciousSkull", NPC.downedBoss3, ref DroppedSummon);
 
             return result;
@@ -518,6 +529,31 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadProjectile(recolor, ProjectileID.Skull);
 
             LoadSpecial(recolor, ref TextureAssets.BoneArm, ref FargowiltasSouls.TextureBuffer.BoneArm, "Arm_Bone");
+        }
+
+        public int frameCounter;
+        public int currentFrame = 0;
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture = TextureAssets.Npc[npc.type].Value;
+            if (!SoulConfig.Instance.BossRecolors)
+            {
+                return true;
+            }
+            int maxFrame = 7;
+            Rectangle rect = new(0, (texture.Height / maxFrame) * currentFrame, texture.Width, texture.Height / maxFrame);
+
+            if (frameCounter > 4)
+            {
+                frameCounter = 0;
+                currentFrame++;
+                if (currentFrame >= maxFrame)
+                    currentFrame = maxFrame - 1;
+            }
+
+            spriteBatch.Draw(texture, npc.Center - screenPos, new Rectangle?(rect), drawColor, npc.rotation, rect.Size() / 2f, npc.scale, SpriteEffects.None, 1);
+            return false;
         }
     }
 
