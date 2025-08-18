@@ -67,25 +67,28 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             recipe.AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"));
             recipe.Register();
         }
-        public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+        public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising,
+            ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
+
             player.wingsLogic = ArmorIDs.Wing.LongTrailRainbowWings;
-            ascentWhenFalling = 1.25f;
-            ascentWhenRising = 0.35f;
-            maxCanAscendMultiplier = 1.25f;
-            maxAscentMultiplier = 2f;
-            constantAscend = 0.15f;
+            ascentWhenFalling = 0.85f;
+            ascentWhenRising = 0.175f;
+            maxCanAscendMultiplier = 1f;
+            maxAscentMultiplier = 3f;
+            constantAscend = 0.135f;
             if (player.controlUp)
             {
-                ascentWhenFalling *= 6f;
-                ascentWhenRising *= 6f;
-                constantAscend *= 6f;
+                ascentWhenFalling *= 4f;
+                ascentWhenRising *= 4f;
+                constantAscend *= 4f;
             }
         }
+
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 17f;
-            acceleration = 0.72f;
+            speed = 10f;
+            acceleration = 0.7f;
         }
     }
     public class LifeForceEffect : AccessoryEffect
