@@ -165,23 +165,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             int damage = 33;
             //Targeting
-            int maxDist = 5000;
+            int maxDist = 4000;
             if (!npc.HasPlayerTarget || !Main.player[npc.target].active || Main.player[npc.target].dead || Main.player[npc.target].ghost || npc.Distance(Main.player[npc.target].Center) > maxDist)
             {
                 npc.TargetClosest(false);
                 Player newPlayer = Main.player[npc.target];
                 if (!newPlayer.active || newPlayer.dead || newPlayer.ghost || npc.Distance(newPlayer.Center) > maxDist)
                 {
-                    if (npc.timeLeft > 120)
-                        npc.timeLeft = 120;
+                    if (npc.timeLeft > 60)
+                        npc.timeLeft = 60;
                     npc.velocity.Y -= 0.4f;
+                    if (npc.position.Y < 0)
+                        npc.active = false;
                     return;
                 }
             }
             npc.timeLeft = 180;
             Player player = Main.player[npc.target];
             bool alone = Alone(npc);
-
             switch ((States)state)
             {
                 case States.Intro:
