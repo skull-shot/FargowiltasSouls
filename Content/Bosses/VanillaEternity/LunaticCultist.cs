@@ -200,16 +200,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             duration = WorldSavingSystem.MasochistModeReal ? 8 : 30;
                         animation = (int)Animation.Float;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 420;
-                        if (WorldSavingSystem.MasochistModeReal)
-                        {
-                            npc.velocity = Vector2.Lerp(npc.Center, desiredPos, 0.3f * timer / (float)duration) - npc.Center;
-                        }
-                        else
-                        {
-                            Movement(npc, desiredPos, 0.8f, 0.8f);
-                        }
+
+                        npc.velocity = Vector2.Lerp(npc.Center, desiredPos, 0.3f * timer / (float)duration) - npc.Center;
+
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                        if (timer >= duration - 5)
+                        if (timer >= duration - 3)
                         {
                             npc.velocity *= 0.7f;
                         }
@@ -308,11 +303,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float progress = (float)(timer - start) / (AttackDuration - start);
                             float speedupTime = 0.25f;
                             float accel = alone ? 0.9f : 0.52f;
+                            float distance = npc.Distance(player.Center);
+                            int anticheeseStart = 350;
+                            if (npc.Distance(player.Center) > anticheeseStart)
+                            {
+                                accel += 4f * (distance - anticheeseStart) / 800f;
+                            }
                             if (progress < speedupTime)
                                 accel = MathHelper.SmoothStep(0, accel, progress / speedupTime);
 
                             npc.velocity += npc.DirectionTo(player.Center) * accel;
-                            npc.velocity = npc.velocity.ClampLength(0, alone ? 16 : 16);
+                            npc.velocity = npc.velocity.ClampLength(0, alone ? 20 : 20);
                         }
 
                         if (timer >= AttackDuration)
@@ -331,7 +332,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (WorldSavingSystem.MasochistModeReal)
                             shatterTime -= 15;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 400;
-                        Movement(npc, desiredPos, 1.2f, 1.2f);
+                        Movement(npc, desiredPos, 1.6f, 1.6f);
                         if (timer < positionTime)
                         {
                             
@@ -347,7 +348,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                         else
                         {
-                            npc.velocity *= 0.9f;
+                            npc.velocity *= 0.97f;
                         }
                         int duration = AttackDuration;
                         if (alone)
@@ -363,7 +364,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         animation = (int)Animation.HoldUp;
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                        npc.velocity *= 0.92f;
+                        Vector2 dir = player.DirectionTo(npc.Center);
+                        dir = dir.RotateTowards(player.velocity.ToRotation(), 0.1f);
+                        Vector2 desiredPos = player.Center + dir * 400;
+
+                        Movement(npc, desiredPos, 1.6f, 1.6f);
                         if (timer == 2)
                         {
                             SoundEngine.PlaySound(SoundID.Zombie90 with { Volume = 2 }, npc.Center);
@@ -391,7 +396,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         animation = alone ? (int)Animation.HoldForward : (int)Animation.HoldUp;
                         npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
-                        npc.velocity *= 0.92f;
+                        Vector2 dir = player.DirectionTo(npc.Center);
+                        if (alone)
+                        {
+                            npc.velocity *= 0.92f;
+                        }
+                        else
+                        {
+                            dir = dir.RotateTowards(player.velocity.ToRotation(), 0.1f);
+                            Vector2 desiredPos = player.Center + dir * 400;
+                            Movement(npc, desiredPos, 1.6f, 1.6f);
+                        }
+                            
                         void Circle()
                         {
                             if (FargoSoulsUtil.HostCheck)
