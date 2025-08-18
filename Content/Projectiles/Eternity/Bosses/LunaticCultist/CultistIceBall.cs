@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
         public ref float OwnerID => ref Projectile.ai[2];
         public ref float Timer => ref Projectile.localAI[0];
 
-        public float ConeWidth = MathHelper.PiOver2 * 0.42f;
+        public float ConeWidth = MathHelper.PiOver2 * 0.4f;
         public override void AI()
         {
             int ownerID = (int)OwnerID;

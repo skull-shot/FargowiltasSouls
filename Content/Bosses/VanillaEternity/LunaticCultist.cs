@@ -309,16 +309,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             float speedupTime = 0.25f;
                             float accel = alone ? 0.9f : 0.52f;
                             float distance = npc.Distance(player.Center);
-                            int anticheeseStart = 400;
+                            int anticheeseStart = 500;
                             if (npc.Distance(player.Center) > anticheeseStart)
                             {
-                                accel += 4f * (distance - anticheeseStart) / 800f;
+                                accel += 2f * (distance - anticheeseStart) / 800f;
                             }
                             if (progress < speedupTime)
                                 accel = MathHelper.SmoothStep(0, accel, progress / speedupTime);
 
                             npc.velocity += npc.DirectionTo(player.Center) * accel;
-                            npc.velocity = npc.velocity.ClampLength(0, alone ? 20 : 20);
+                            npc.velocity = npc.velocity.ClampLength(0, alone ? 22 : 22);
                         }
 
                         if (timer >= AttackDuration)
@@ -337,7 +337,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (WorldSavingSystem.MasochistModeReal)
                             shatterTime -= 15;
                         Vector2 desiredPos = player.Center + player.DirectionTo(npc.Center) * 400;
-                        Movement(npc, desiredPos, 1.6f, 1.6f);
+                        Movement(npc, desiredPos, 1.2f, 1.2f);
                         if (timer < positionTime)
                         {
                             
