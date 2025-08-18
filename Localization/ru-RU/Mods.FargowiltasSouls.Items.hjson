@@ -1478,7 +1478,7 @@ SinisterIcon: {
 		'''
 		Даёт иммунитет к дебаффам «Невезение» и «Оглушение»
 		Увеличивает частоту появления врагов
-		С врагов и боссов падает в два раза больше предметов
+		Enemies and bosses will drop loot one more time
 		Работает на боссах только если аксессуар был надет во время всей битвы
 		«Определённо не жива»
 		'''
@@ -1714,7 +1714,7 @@ MasochistSoul: {
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
 		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении, [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50% и время [i:FargowiltasSouls/SandsofTime]	возрождения
 		Автоматически использует [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
-		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, с обычных врагов падает в два раза больше предметов
+		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, makes enemies drop loot one more time
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/SkullCharm] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/GalacticGlobe] истинные глаза Ктулху

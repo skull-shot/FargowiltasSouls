@@ -1490,7 +1490,8 @@ SinisterIcon: {
 		'''
 		Oferece imunidade a Azarado e Estonteado
 		Aumenta a taxa de criação
-		Inimigos não-chefes deixarão cair o dobro de espólios
+		Enemies and bosses will drop loot one more time
+		Only affects bosses if this was equipped for the full fight
 		'Definitivamente não está vivo'
 		'''
 }
@@ -1732,7 +1733,7 @@ MasochistSoul: {
 		Aperte a tecla Corrida Especial para fazer uma corrida de bola de fogo invencível curta, afaste a sua visão com o botão direito
 		Certos inimigos deixarão cair poções quando derrotados, melhora consideravelmente as reforjas, você renasce com mais vida
 		Você renasce duas vezes mais rápido, tem visão noturna melhorada, e sobrecarrega e irrompe em vários ataques ao ser machucado
-		Impede surgimentos de chefe, aumenta a taxa de criação, aumenta os espólios, e ataques podem fazer barulho e causar 1 de dano a você
+		Impede surgimentos de chefe, aumenta a taxa de criação, makes enemies drop loot one more time, e ataques podem fazer barulho e causar 1 de dano a você
 		Reduz o tamanho da hurtbox, segure a tecla Selo de Precisão para desativar corridas e pulos duplos
 		Clique com o botão direito para bloquear ataques, isto requer boa cronometragem
 		Use para teleportar-se para seu último ponto de morte
