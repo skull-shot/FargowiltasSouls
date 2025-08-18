@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static int AttackDuration => 210;
         public static void AttacksAI(NPC npc, ref int timer, ref int state, ref int oldAttack, ref int animation)
         {
-            int damage = 33;
+            int damage = 30;
             //Targeting
             int maxDist = 4000;
             if (!npc.HasPlayerTarget || !Main.player[npc.target].active || Main.player[npc.target].dead || Main.player[npc.target].ghost || npc.Distance(Main.player[npc.target].Center) > maxDist)
