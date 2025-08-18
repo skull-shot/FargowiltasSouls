@@ -442,7 +442,7 @@ PlatinumEnchant: {
 	// DisplayName: Platinum Enchantment
 	/* Tooltip:
 		'''
-		20% chance for enemies to drop 5x loot
+		20% chance for enemies to drop loot 4 more times
 		'Its value is immeasurable'
 		''' */
 }
@@ -885,7 +885,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 25%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
-		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop 5x loot
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		'A mind of unbreakable determination'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"

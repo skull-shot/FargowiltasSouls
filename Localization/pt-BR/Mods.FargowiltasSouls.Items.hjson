@@ -448,7 +448,7 @@ PlatinumEnchant: {
 	DisplayName: Encantamento de Platina
 	Tooltip:
 		'''
-		20% de chance de que os inimigos deixem cair 5x os espólios
+		20% chance for enemies to drop loot 4 more times
 		'Seu valor é imensurável'
 		'''
 }
@@ -893,7 +893,7 @@ WillForce: {
 		'''
 		[i:5502] Aperte a hotkey de Ouro para ser envolto em um Casco Dourado
 		[i:5502] Envia moedas ao seu porquinho automaticamente quando coletadas
-		[i:5521] 20% de chance de que os inimigos deixem cair 5x os espólios
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		[i:5501] Lanças choverão em inimigos atingidos
 		[i:5501] Oferece imunidade a recuos quando você está encarando o ataque
 		[i:5524] Ataques sucessivos ganham dano bônus

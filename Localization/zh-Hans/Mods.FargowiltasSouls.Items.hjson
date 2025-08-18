@@ -448,7 +448,7 @@ PlatinumEnchant: {
 	DisplayName: 铂金魔石
 	Tooltip:
 		'''
-		敌人死亡时有20%的几率获得五倍的战利品
+		20% chance for enemies to drop loot 4 more times
 		“无价之宝”
 		'''
 }
@@ -902,7 +902,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 增加25%的治疗效果
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 坐骑获得冲刺能力和属性提升
 		[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐（在背包和装饰栏中也会生效），你的攻击会造成迈达斯减益
-		[i:FargowiltasSouls/PlatinumEnchant] 敌人有33%概率掉落5倍战利品
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		“矢志不渝”
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐"

@@ -449,7 +449,7 @@ PlatinumEnchant: {
 	DisplayName: Зачарование платины
 	Tooltip:
 		'''
-		У врагов есть шанс 20% оставить в 5 раз больше добычи
+		20% chance for enemies to drop loot 4 more times
 		«Его ценность неизмерима»
 		'''
 }
@@ -898,7 +898,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Увеличивает эффективность источников лечения на 25%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Улучшает наездных питомцев и ваши хар-ки, пока вы верхом; наездные питомцы получают рывок
 		[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений); ваши атаки накладывают «Мидас»
-		[i:FargowiltasSouls/PlatinumEnchant] У врагов есть шанс 33% оставить в 5 раз больше добычи
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		«Разум несокрушимой решимости»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе"
