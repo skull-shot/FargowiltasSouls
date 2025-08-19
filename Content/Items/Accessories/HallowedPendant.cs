@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
     {
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
         public override int ToggleItemType => ModContent.ItemType<HallowedPendant>();
-        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 275);
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 200);
         public override void PostUpdateEquips(Player player)
         {
             // onhit dodge

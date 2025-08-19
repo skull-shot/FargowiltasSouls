@@ -24,6 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
             Projectile.hostile = false;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
+            Projectile.ignoreWater = false;
             Projectile.DamageType = DamageClass.Generic;
         }
 

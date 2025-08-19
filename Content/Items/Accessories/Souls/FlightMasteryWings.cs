@@ -17,21 +17,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             ascentWhenFalling = 0.85f;
             if (player.HasEffect<FlightMasteryGravity>())
                 ascentWhenFalling *= 1.5f;
-            ascentWhenRising = 0.25f;
+            ascentWhenRising = 0.2f;
             maxCanAscendMultiplier = 1f;
-            maxAscentMultiplier = 1.75f;
+            maxAscentMultiplier = 3f;
             constantAscend = 0.135f;
             if (player.controlUp)
             {
-                ascentWhenFalling *= 6f;
-                ascentWhenRising *= 6f;
-                constantAscend *= 6f;
+                ascentWhenFalling *= 4f;
+                ascentWhenRising *= 4f;
+                constantAscend *= 4f;
             }
         }
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 18f;
+            speed = 10f;
             acceleration = 0.75f;
         }
     }

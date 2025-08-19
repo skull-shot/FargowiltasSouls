@@ -107,10 +107,10 @@ CactusEnchant: {
 		'''
 		攻击时，你会释放出一圈针刺
 		敌人死亡后会爆裂出针刺
-		使你免受永恒模式的仙人掌伤害（在背包或时装栏也可生效）
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		“多汁解渴！”
 		'''
-	VanityTooltip: 永恒模式下免疫仙人掌伤害
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -448,7 +448,7 @@ PlatinumEnchant: {
 	DisplayName: 铂金魔石
 	Tooltip:
 		'''
-		敌人死亡时有20%的几率获得五倍的战利品
+		20% chance for enemies to drop loot 4 more times
 		“无价之宝”
 		'''
 }
@@ -902,7 +902,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 增加25%的治疗效果
 		[i:FargowiltasSouls/ValhallaKnightEnchant] 坐骑获得冲刺能力和属性提升
 		[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐（在背包和装饰栏中也会生效），你的攻击会造成迈达斯减益
-		[i:FargowiltasSouls/PlatinumEnchant] 敌人有33%概率掉落5倍战利品
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		“矢志不渝”
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐"
@@ -1525,7 +1525,7 @@ SinisterIcon: {
 		'''
 		免疫霉运和昏迷减益
 		提高刷怪速率
-		敌人掉落双倍战利品（突变体除外）
+		Enemies and bosses will drop loot one more time
 		只有在BOSS战从头到尾都装备才能影响BOSS
 		“这肯定死了”
 		'''
@@ -1763,7 +1763,7 @@ MasochistSoul: {
 		'''
 		[i:FargowiltasSouls/GalacticGlobe]增加200%飞行时间，[i:FargowiltasSouls/QueenStinger]50护甲穿透和[i:FargowiltasSouls/GalacticGlobe]20%移动速度
 		[i:FargowiltasSouls/GuttedHeart]增加100%最大生命值，[i:FargowiltasSouls/MagicalBulb]大幅增加生命回复速度，[i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape]增加50%手持武器职业的伤害，[i:FargowiltasSouls/ReinforcedPlating]获得10%伤害减免
-		[i:FargowiltasSouls/PungentEyeball]大幅增加稀有敌人的生成概率， [i:FargowiltasSouls/SinisterIcon]刷新率翻倍，非Boss敌人掉落双倍战利品，[i:FargowiltasSouls/TimsConcoction]某些敌人会掉落药水
+		[i:FargowiltasSouls/PungentEyeball]大幅增加稀有敌人的生成概率， [i:FargowiltasSouls/SinisterIcon]刷新率翻倍，makes enemies drop loot one more time，[i:FargowiltasSouls/TimsConcoction]某些敌人会掉落药水
 		获得[i:FargowiltasSouls/SlimyShield]快速下落，[i:FargowiltasSouls/ReinforcedPlating]击退免疫，[i:FargowiltasSouls/PureHeart]免疫生物群落减益，[i:FargowiltasSouls/GalacticGlobe]获得大多数一般药水和增益站效果（在背包和时装栏中也可生效），免疫几乎所有永恒模式减益
 		[i:FargowiltasSouls/PrecisionSeal]按下“精确模式”键禁用冲刺和二段跳
 		[i:FargowiltasSouls/PrecisionSeal]减少伤害判定框大小，[i:FargowiltasSouls/NecromanticBrew]增加冲刺距离，[i:FargowiltasSouls/PungentEyeball]使光标附近敌人受到最多1.15倍伤害
@@ -3415,7 +3415,7 @@ Extra: {
 	EternityItem: 永恒
 	DisabledEffects: 有效果被饰品效果配置禁用
 	PatreonItem: >> 捐赠者物品 <<
-	CactusImmunity: 免疫永恒模式的仙人掌伤害
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: 你有东西被偷了！
 	// Scaling: scaling

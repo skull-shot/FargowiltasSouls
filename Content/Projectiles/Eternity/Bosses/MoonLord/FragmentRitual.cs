@@ -114,6 +114,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                     continue;
                 Vector2 drawOffset = new(threshold * Projectile.scale / 2f, 0);//.RotatedBy(Projectile.ai[0]);
                 drawOffset = drawOffset.RotatedBy(2f * PI / max * (x + 1) - PI / 2);
+
+                Color drawColor = color26;
+                float dist = Main.LocalPlayer.Distance(Projectile.Center + drawOffset);
+                float mult = 1f;
+                if (dist < 1500)
+                    mult = MathHelper.Lerp(0.15f, 1, dist / 1500f);
+                drawColor *= mult;
                 /*const int max = 4;
                 for (int i = 0; i < max; i++)
                 {
@@ -123,7 +130,18 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                     float num165 = Projectile.rotation;
                     Main.EntitySpriteDraw(texture2D13, value4 - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
                 }*/
-                Main.EntitySpriteDraw(texture2D13, Projectile.Center + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f;
+                    Color glowColor = Color.White * mult;
+
+                    Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), glowColor, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+                }
+                Main.spriteBatch.ResetToDefault();
+
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center + drawOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), drawColor, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             }
             return false;
         }

@@ -1053,6 +1053,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 ContactDamage = head.GetGlobalNPC<EaterofWorldsHead>().ContactDamage;
                 npc.timeLeft = 60 * 60;
                 EaterofWorldsHead headEternity = head.GetGlobalNPC<EaterofWorldsHead>();
+                if (head.HasPlayerTarget)
+                {
+                    Player player = Main.player[head.target];
+                    if (Collision.SolidCollision(head.position, head.width, head.height) && !Collision.SolidCollision(npc.Top - Vector2.UnitY * 12, 1, 1))
+                        npc.position.Y += 4;
+                }
                 /*
                 if (headEternity.Coiling && head.HasPlayerTarget)
                 {

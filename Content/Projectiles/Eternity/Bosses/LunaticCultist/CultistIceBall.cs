@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
         public ref float OwnerID => ref Projectile.ai[2];
         public ref float Timer => ref Projectile.localAI[0];
 
-        public float ConeWidth = MathHelper.PiOver2 * 0.4f;
+        public float ConeWidth = MathHelper.PiOver2 * 0.375f;
         public override void AI()
         {
             int ownerID = (int)OwnerID;
@@ -86,10 +86,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item120, Projectile.Center);
-            for (int i = 0; i < 80; i++)
+            for (int i = 0; i < 90; i++)
             {
                 float rot = Rotation + Main.rand.NextFloat(-ConeWidth, ConeWidth);
-                float spd = Main.rand.NextFloat(5f, 24f);
+                float spd = Main.rand.NextFloat(16f, 38f);
                 Vector2 dir = rot.ToRotationVector2();
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + dir * Projectile.width / 3, dir * spd, ModContent.ProjectileType<CultistIceShard>(), Projectile.damage, 1f, Projectile.owner);
             }

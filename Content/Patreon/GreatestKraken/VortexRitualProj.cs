@@ -174,7 +174,7 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
                 }
             }
 
-            int dustMax = 5 + 5 * (int)Projectile.scale;
+            /*int dustMax = 5 + 5 * (int)Projectile.scale;
             for (int i = 0; i < dustMax; i++)
             {
                 Vector2 offset = new();
@@ -192,7 +192,7 @@ namespace FargowiltasSouls.Content.Patreon.GreatestKraken
                     dust.position += dust.velocity * 10f;
                 }
                 dust.noGravity = true;
-            }
+            }*/
 
             /*Projectile.velocity = (mousePos - Projectile.Center) / 20;
             const float speed = 4f;

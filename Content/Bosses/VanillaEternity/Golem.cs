@@ -85,7 +85,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 3);
         }
 
         public static void LoadGolemSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
@@ -572,13 +572,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
         {
             modifiers.Null();
-        }
-        public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
-        {
-            base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
-
-            if (WorldSavingSystem.MasochistModeReal && projectile.maxPenetrate != 1 && FargoSoulsUtil.CanDeleteProjectile(projectile))
-                projectile.timeLeft = 0;
         }
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {

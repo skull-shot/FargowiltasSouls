@@ -103,9 +103,10 @@ CactusEnchant: {
 		'''
 		Você libera agulhs em várias direções enquanto ataca
 		Inimigos explodirão em agulhas na morte se eles forem atingidos com suas agulhas
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'Não tem nada igual, é!'
 		'''
-	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
+	// VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -389,7 +390,7 @@ NinjaEnchant: {
 	/* Tooltip:
 		'''
 		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed while you're moving slowly
+		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
 }
@@ -447,7 +448,7 @@ PlatinumEnchant: {
 	DisplayName: Encantamento de Platina
 	Tooltip:
 		'''
-		20% de chance de que os inimigos deixem cair 5x os espólios
+		20% chance for enemies to drop loot 4 more times
 		'Seu valor é imensurável'
 		'''
 }
@@ -892,7 +893,7 @@ WillForce: {
 		'''
 		[i:5502] Aperte a hotkey de Ouro para ser envolto em um Casco Dourado
 		[i:5502] Envia moedas ao seu porquinho automaticamente quando coletadas
-		[i:5521] 20% de chance de que os inimigos deixem cair 5x os espólios
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		[i:5501] Lanças choverão em inimigos atingidos
 		[i:5501] Oferece imunidade a recuos quando você está encarando o ataque
 		[i:5524] Ataques sucessivos ganham dano bônus
@@ -1489,7 +1490,8 @@ SinisterIcon: {
 		'''
 		Oferece imunidade a Azarado e Estonteado
 		Aumenta a taxa de criação
-		Inimigos não-chefes deixarão cair o dobro de espólios
+		Enemies and bosses will drop loot one more time
+		Only affects bosses if this was equipped for the full fight
 		'Definitivamente não está vivo'
 		'''
 }
@@ -1731,7 +1733,7 @@ MasochistSoul: {
 		Aperte a tecla Corrida Especial para fazer uma corrida de bola de fogo invencível curta, afaste a sua visão com o botão direito
 		Certos inimigos deixarão cair poções quando derrotados, melhora consideravelmente as reforjas, você renasce com mais vida
 		Você renasce duas vezes mais rápido, tem visão noturna melhorada, e sobrecarrega e irrompe em vários ataques ao ser machucado
-		Impede surgimentos de chefe, aumenta a taxa de criação, aumenta os espólios, e ataques podem fazer barulho e causar 1 de dano a você
+		Impede surgimentos de chefe, aumenta a taxa de criação, makes enemies drop loot one more time, e ataques podem fazer barulho e causar 1 de dano a você
 		Reduz o tamanho da hurtbox, segure a tecla Selo de Precisão para desativar corridas e pulos duplos
 		Clique com o botão direito para bloquear ataques, isto requer boa cronometragem
 		Use para teleportar-se para seu último ponto de morte
@@ -3345,7 +3347,7 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
-	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
+	// CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 	// Scaling: scaling

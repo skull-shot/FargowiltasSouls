@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
             float progress = (float)Timer / AttackDuration;
             float maxDist = 380;
-            float expandTime = 0.2f;
+            float expandTime = 0.24f;
             float contractStart = 1 - expandTime;
             float dist = 300;
             if (progress < expandTime)
@@ -73,8 +73,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Vector2 desiredPos = npc.Center + Rotation.ToRotationVector2() * dist;
             Projectile.velocity = (desiredPos - Projectile.Center);
 
-            float rotSpeed = MathF.Tau / 150;
-            rotSpeed *= dist / maxDist;
+            float rotSpeed = MathF.Tau / 185;
+            //rotSpeed *= dist / maxDist;
             Rotation += RotationDirection * rotSpeed;
             if (progress >= 1)
             {
