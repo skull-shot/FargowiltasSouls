@@ -152,7 +152,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         {
             target.AddBuff(ModContent.BuffType<StunnedBuff>(), 120);
 
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
         }
 
         Rectangle Frame(Texture2D tex)
