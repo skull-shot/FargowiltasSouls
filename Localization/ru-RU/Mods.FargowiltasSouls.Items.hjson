@@ -107,10 +107,10 @@ CactusEnchant: {
 		'''
 		Во время атаки вы выпускаете заряд игл во все стороны
 		Враги при смерти разлетаются на иглы
-		Даёт иммунитет к урону от кактусов в режиме Вечность (работает в инвентаре и слотах для украшений)
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		«Самый охладительный!»
 		'''
-	VanityTooltip: Даёт иммунитет к урону от кактусов в режиме Вечность
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -449,7 +449,7 @@ PlatinumEnchant: {
 	DisplayName: Зачарование платины
 	Tooltip:
 		'''
-		У врагов есть шанс 20% оставить в 5 раз больше добычи
+		20% chance for enemies to drop loot 4 more times
 		«Его ценность неизмерима»
 		'''
 }
@@ -898,7 +898,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Увеличивает эффективность источников лечения на 25%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Улучшает наездных питомцев и ваши хар-ки, пока вы верхом; наездные питомцы получают рывок
 		[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений); ваши атаки накладывают «Мидас»
-		[i:FargowiltasSouls/PlatinumEnchant] У врагов есть шанс 33% оставить в 5 раз больше добычи
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		«Разум несокрушимой решимости»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе"
@@ -1478,7 +1478,7 @@ SinisterIcon: {
 		'''
 		Даёт иммунитет к дебаффам «Невезение» и «Оглушение»
 		Увеличивает частоту появления врагов
-		С врагов и боссов падает в два раза больше предметов
+		Enemies and bosses will drop loot one more time
 		Работает на боссах только если аксессуар был надет во время всей битвы
 		«Определённо не жива»
 		'''
@@ -1714,7 +1714,7 @@ MasochistSoul: {
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
 		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении, [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50% и время [i:FargowiltasSouls/SandsofTime]	возрождения
 		Автоматически использует [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
-		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, с обычных врагов падает в два раза больше предметов
+		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, makes enemies drop loot one more time
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/SkullCharm] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/GalacticGlobe] истинные глаза Ктулху
@@ -3357,7 +3357,7 @@ Extra: {
 	EternityItem: Вечность
 	DisabledEffects: Некоторые эффекты выключены в меню переключения эффектов
 	PatreonItem: >> Предмет Патреона <<
-	CactusImmunity: Даёт иммунитет к урону от кактусов в режиме Вечность
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
 	Scaling: увеличивающ.

@@ -106,10 +106,10 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Grants immunity to cactus damage in Eternity Mode (Works from inventory and vanity)
+		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'It's the quenchiest!'
 		'''
-	VanityTooltip: Grants immunity to cactus damage in Eternity Mode
+	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -442,7 +442,7 @@ PlatinumEnchant: {
 	DisplayName: Platinum Enchantment
 	Tooltip:
 		'''
-		20% chance for enemies to drop 5x loot
+		20% chance for enemies to drop loot 4 more times
 		'Its value is immeasurable'
 		'''
 }
@@ -885,7 +885,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 25%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
-		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop 5x loot
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		'A mind of unbreakable determination'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
@@ -1451,7 +1451,7 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Enemies and bosses will drop doubled loot
+		Enemies and bosses will drop loot one more time
 		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		'''
@@ -1679,7 +1679,7 @@ MasochistSoul: {
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
 		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
 		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/SkullCharm] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/GalacticGlobe] True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
@@ -3323,7 +3323,7 @@ Extra: {
 	EternityItem: Eternity
 	DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Patreon Item <<
-	CactusImmunity: Grants immunity to cactus damage in Eternity Mode
+	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 	Scaling: scaling
