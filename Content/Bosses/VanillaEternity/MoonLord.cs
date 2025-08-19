@@ -628,11 +628,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     case 0: HandleScene("Solar"); break;
                     case 1: HandleScene("Vortex"); break;
                     case 2: HandleScene("Nebula"); break;
-                    case 3:
-                        HandleScene("Stardust");
-                        if (VulnerabilityTimer < 120) //so that player isn't punished for using weapons during prior phase
-                            Main.LocalPlayer.Eternity().MasomodeMinionNerfTimer = 0;
-                        break;
+                    case 3: HandleScene("Stardust"); break;
                     default: break;
                 }
             }

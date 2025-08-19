@@ -114,6 +114,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             }
                         }
                     }
+                    if (modPlayer.FallthroughTimer < player.FargoSouls().IsDashingTimer)
+                        modPlayer.FallthroughTimer = player.FargoSouls().IsDashingTimer;
+                        
+                    if (modPlayer.FallthroughTimer < player.FargoSouls().ValhallaVerticalDashing)
+                        modPlayer.FallthroughTimer = player.FargoSouls().ValhallaVerticalDashing;
                 }
             }
         }

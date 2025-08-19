@@ -142,7 +142,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 3);
         }
 
         public override bool PreDraw(ref Color lightColor)

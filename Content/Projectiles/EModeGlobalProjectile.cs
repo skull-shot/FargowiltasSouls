@@ -36,7 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles
     {
         public override bool InstancePerEntity => true;
 
-        public bool HasKillCooldown;
         public bool EModeCanHurt = true;
         public bool altBehaviour;
         private readonly List<Tuple<int, float>>? medusaList = typeof(Projectile).GetField("_medusaHeadTargetList", LumUtils.UniversalBindingFlags)?.GetValue(null) as List<Tuple<int, float>>;
@@ -133,12 +132,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.DD2BetsyFlameBreath:
                     projectile.tileCollide = false;
                     projectile.penetrate = -1;
-                    break;
-
-                case ProjectileID.CrystalBullet:
-                case ProjectileID.HolyArrow:
-                case ProjectileID.HallowStar:
-                    //HasKillCooldown = true;
                     break;
 
                 case ProjectileID.SaucerLaser:
@@ -1973,7 +1966,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         if (sourceNPC.type == NPCID.Golem)
                         {
-                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 90);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
                                 target.AddBuff(BuffID.Burning, 120);
@@ -2148,15 +2141,6 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             if (!WorldSavingSystem.EternityMode)
                 return base.PreKill(projectile, timeLeft);
-
-            if (projectile.owner == Main.myPlayer && HasKillCooldown)
-            {
-                if (Main.player[projectile.owner].Eternity().MasomodeCrystalTimer > 60)
-                    return false;
-
-                Main.player[projectile.owner].Eternity().MasomodeCrystalTimer += 12;
-                return true;
-            }
 
             return base.PreKill(projectile, timeLeft);
         }

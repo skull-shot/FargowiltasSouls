@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Projectiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Armor.Eridanus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,6 +36,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void AI()
         {
+            Projectile.GetGlobalProjectile<FargoGlobalProjectile>().lowRender = false;
             if (Main.player[Projectile.owner].active && !Main.player[Projectile.owner].dead && !Main.player[Projectile.owner].ghost && Main.player[Projectile.owner].FargoSouls().EridanusSet
                 && (Projectile.owner != Main.myPlayer || Main.player[Projectile.owner].FargoSouls().EridanusEmpower))
             {

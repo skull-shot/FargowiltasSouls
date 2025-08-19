@@ -23,11 +23,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 {
     public partial class EModePlayer : ModPlayer
     {
-        public bool ReduceMasomodeMinionNerf;
-        public const int MaxMasomodeMinionNerfTimer = 300;
         public const int MaxShorterDebuffsTimer = 60;
-        public int MasomodeCrystalTimer;
-        public int MasomodeMinionNerfTimer;
         public int TorchGodTimer;
         public int ShorterDebuffsTimer;
         public int MythrilHalberdTimer;
@@ -40,7 +36,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WaterWet => Player.wet && !Player.lavaWet && !Player.honeyWet && !Player.shimmerWet && !Player.FargoSouls().MutantAntibodies;
         public override void ResetEffects()
         {
-            ReduceMasomodeMinionNerf = false;
 
             if (!LumUtils.AnyBosses())
                 Respawns = 0;
@@ -66,7 +61,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             ResetEffects();
 
-            MasomodeMinionNerfTimer = 0;
             ShorterDebuffsTimer = 0;
             if (PreventRespawn())
                 Player.respawnTimer = 60 * 5;
@@ -192,48 +186,20 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 CrossNecklaceTimer = 0;
             }
-
-            if (Player.setSquireT2 || Player.setSquireT3 || Player.setMonkT2 || Player.setMonkT3 || Player.setHuntressT2 || Player.setHuntressT3 || Player.setApprenticeT2 || Player.setApprenticeT3 || Player.setForbidden)
-                ReduceMasomodeMinionNerf = true;
         }
 
         private void HandleTimersAlways()
         {
-            if (MasomodeCrystalTimer > 0)
-                MasomodeCrystalTimer--;
-
-            //disable minion nerf during ooa
-            if (DD2Event.Ongoing && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.betsyBoss, NPCID.DD2Betsy))
-            {
-                int n = NPC.FindFirstNPC(NPCID.DD2EterniaCrystal);
-                if (n != -1 && n != Main.maxNPCs && Player.Distance(Main.npc[n].Center) < 3000)
-                {
-                    MasomodeMinionNerfTimer -= 2;
-                    if (MasomodeMinionNerfTimer < 0)
-                        MasomodeMinionNerfTimer = 0;
-                }
-            }
-
             if (WeaponUseTimer > 0)
                 ShorterDebuffsTimer += 1;
             else if (ShorterDebuffsTimer > 0)
                 ShorterDebuffsTimer -= 1;
-
-            if (WeaponUseTimer > 0 && Player.HeldItem.DamageType != DamageClass.Summon && Player.HeldItem.DamageType != DamageClass.SummonMeleeSpeed && Player.HeldItem.DamageType != DamageClass.Default)
-                MasomodeMinionNerfTimer += 1;
-            else if (MasomodeMinionNerfTimer > 0)
-                MasomodeMinionNerfTimer -= 1;
-
-            if (MasomodeMinionNerfTimer > MaxMasomodeMinionNerfTimer)
-                MasomodeMinionNerfTimer = MaxMasomodeMinionNerfTimer;
 
             if (ShorterDebuffsTimer > 60)
                 ShorterDebuffsTimer = 60;
 
             if (PalladiumHealTimer > 0)
                 PalladiumHealTimer--;
-
-            //Main.NewText($"{MasomodeWeaponUseTimer} {MasomodeMinionNerfTimer} {ReduceMasomodeMinionNerf}");
         }
 
         public override void PostUpdateMiscEffects()
@@ -264,15 +230,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-
-            //reduce minion damage in emode if using a weapon, scales as you use weapons
-            //if (FargoSoulsUtil.IsSummonDamage(proj, true, false) && MasomodeMinionNerfTimer > 0)
-            //{
-            //    double modifier = ReduceMasomodeMinionNerf ? 0.5 : 0.75;
-            //    modifier *= Math.Min((double)MasomodeMinionNerfTimer / MaxMasomodeMinionNerfTimer, 1.0);
-
-            //    damage = (int)(damage * (1.0 - modifier));
-            //}
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
