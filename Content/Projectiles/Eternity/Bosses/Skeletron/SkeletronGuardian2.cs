@@ -55,12 +55,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron
                 Projectile.rotation = Main.rand.NextFloat(0, 2 * (float)Math.PI);
                 Projectile.hide = false;
 
-                for (int i = 0; i < 50; i++)
+                /*for (int i = 0; i < 50; i++)
                 {
                     Vector2 pos = new(Projectile.Center.X + Main.rand.Next(-20, 20), Projectile.Center.Y + Main.rand.Next(-20, 20));
                     int dust = Dust.NewDust(pos, Projectile.width, Projectile.height, DustID.Blood, 0, 0, 100, default, 2f);
                     Main.dust[dust].noGravity = true;
-                }
+                }*/
             }
 
             if (++Projectile.localAI[0] > 30 && Projectile.localAI[0] < 120)
