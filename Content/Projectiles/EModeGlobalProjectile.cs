@@ -1425,7 +1425,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 switch (projectile.type)
                 {
-                    case ProjectileID.CopperCoin:
+                    /*case ProjectileID.CopperCoin:
                         if (SourceItemType == ItemID.CoinGun && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             modifiers.SourceDamage *= 1.6f;
@@ -1448,7 +1448,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             modifiers.SourceDamage *= 0.275f;
                         }
-                        break;
+                        break;*/
 
                     case ProjectileID.OrichalcumHalberd:
                         if (SourceItemType == ItemID.OrichalcumHalberd && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
