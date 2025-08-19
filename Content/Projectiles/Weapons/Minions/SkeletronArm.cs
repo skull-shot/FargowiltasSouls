@@ -207,7 +207,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Main.EntitySpriteDraw(arm.Value, wrist - Main.screenPosition, null, Projectile.GetAlpha(lightColor), wrist.AngleTo(jointPos) - MathHelper.PiOver2, new Vector2(arm.Width(), -20) / 2, new Vector2(1, armScale), SpriteEffects.None);
             Main.EntitySpriteDraw(arm.Value, jointPos - Main.screenPosition, null, Projectile.GetAlpha(lightColor), jointPos.AngleTo(player.Center) - MathHelper.PiOver2, new Vector2(arm.Width(), -10) / 2, new Vector2(1, armScale), SpriteEffects.None);
             if (Projectile.ai[2] == 0)
-                Main.EntitySpriteDraw(hand.Value, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2 * Projectile.ai[0], hand.Size() / 2, Projectile.scale, Projectile.ai[0] == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.FlipVertically | SpriteEffects.FlipHorizontally, 0);
+                Main.EntitySpriteDraw(hand.Value, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2 * Projectile.ai[0], hand.Size() / 2, Projectile.scale, Projectile.ai[0] == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically, 0);
             else
             {
                 if (Projectile.ai[1] == -1)
@@ -217,6 +217,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         Main.EntitySpriteDraw(fist.Value, Projectile.oldPos[i] + Projectile.Size/2 - Main.screenPosition, null, Projectile.GetAlpha(lightColor) * 0.5f * (1 - (float)i / Projectile.oldPos.Length), Projectile.rotation, fist.Size() / 2, Projectile.scale, Projectile.ai[0] == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.FlipVertically | SpriteEffects.FlipHorizontally, 0);
                     }
                 }
+
                 Main.EntitySpriteDraw(fist.Value, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, fist.Size() / 2, Projectile.scale, Projectile.ai[0] == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.FlipVertically | SpriteEffects.FlipHorizontally, 0);
             }
             return false;
