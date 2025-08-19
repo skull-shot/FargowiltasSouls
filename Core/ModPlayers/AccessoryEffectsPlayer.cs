@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -398,14 +400,15 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
                 else
                 {
-                    SoundEngine.PlaySound(SoundID.Item119, Player.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannonDeath with {Volume = 0.5f}, Player.Center);
 
                     Player.AddBuff(buffType, 2);
                     for (int i = 0; i < 30; i++)
                     {
-                        Vector2 dir = Main.rand.NextVector2Circular(20, 15);
-                        Color color = Main.rand.NextFromList(Color.Green, Color.Yellow);
-                        Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, color, Main.rand.NextFloat(0.5f, 0.75f), Main.rand.Next(30, 40), false);
+                        Vector2 dir = new(Main.rand.NextFloat(-18, 22), Main.rand.NextFloat(-4, -22));
+                        Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
+                        float offset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+                        Particle p = new SmokeParticle(Player.Center, Player.velocity * 0.7f + dir, color, Main.rand.Next(40, 80), Main.rand.NextFloat(0.4f, 0.8f), Main.rand.NextFloat(0.04f, 0.08f), offset, false);
                         p.Spawn();
                     }
                 }
