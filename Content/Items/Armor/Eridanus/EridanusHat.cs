@@ -89,10 +89,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
                         case 0: type = 127; break; //solar
                         case 1: type = 229; break; //vortex
                         case 2: type = 242; break; //nebula
-                        default: //stardust
-                            type = 135;
-                            player.Eternity().MasomodeMinionNerfTimer = 0; //so that player isn't punished for using weapons during prior phase
-                            break;
+                        default: type = 135; break; //stardust
                     }
 
                     const int max = 100; //make some indicator dusts
