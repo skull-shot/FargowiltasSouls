@@ -107,10 +107,10 @@ CactusEnchant: {
 		'''
 		Во время атаки вы выпускаете заряд игл во все стороны
 		Враги при смерти разлетаются на иглы
-		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
+		Даёт иммунитет к урону от живых кактусов в режиме Вечность (работает в инвентаре и слотах для украшений)
 		«Самый охладительный!»
 		'''
-	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
+	VanityTooltip: Даёт иммунитет к урону от живых кактусов в режиме Вечность
 }
 
 ChlorophyteEnchant: {
@@ -392,7 +392,7 @@ NinjaEnchant: {
 	Tooltip:
 		'''
 		Чем быстрее двигаются ваши снаряды, тем больше ваш шанс крит. урона, вплоть до увеличения на 12%
-		Значительно увеличивает скорость выстрелов, когда вы двигаетесь медленно
+		Значительно увеличивает скорость и отбрасывание снарядов, когда вы двигаетесь медленно
 		«Нужно лишь подгадать момент»
 		'''
 }
@@ -449,7 +449,7 @@ PlatinumEnchant: {
 	DisplayName: Зачарование платины
 	Tooltip:
 		'''
-		20% chance for enemies to drop loot 4 more times
+		У врагов есть шанс 20% выронить свою добычу ещё 4 раза
 		«Его ценность неизмерима»
 		'''
 }
@@ -898,7 +898,7 @@ WillForce: {
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Увеличивает эффективность источников лечения на 25%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Улучшает наездных питомцев и ваши хар-ки, пока вы верхом; наездные питомцы получают рывок
 		[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений); ваши атаки накладывают «Мидас»
-		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
+		[i:FargowiltasSouls/PlatinumEnchant] У врагов есть шанс 33% выронить свою добычу ещё 4 раза
 		«Разум несокрушимой решимости»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе"
@@ -1478,7 +1478,7 @@ SinisterIcon: {
 		'''
 		Даёт иммунитет к дебаффам «Невезение» и «Оглушение»
 		Увеличивает частоту появления врагов
-		Enemies and bosses will drop loot one more time
+		Враги и боссы роняют свою добычу ещё раз
 		Работает на боссах только если аксессуар был надет во время всей битвы
 		«Определённо не жива»
 		'''
@@ -3357,7 +3357,7 @@ Extra: {
 	EternityItem: Вечность
 	DisabledEffects: Некоторые эффекты выключены в меню переключения эффектов
 	PatreonItem: >> Предмет Патреона <<
-	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
+	CactusImmunity: Даёт иммунитет к урону от живых кактусов в режиме Вечность
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
 	Scaling: увеличивающ.

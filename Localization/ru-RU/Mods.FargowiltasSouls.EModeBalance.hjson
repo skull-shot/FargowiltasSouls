@@ -58,5 +58,5 @@ ProximityMineLauncher: Урон снарядов обновляется пост
 PygmyStaff: Spears can now pierce once
 MedusaHead: Наносит до х2,25 больше урона, чем меньше врагов в радиусе атаки
 AerialBane: Уменьшает доп. урон летающим врагам до 15%
-// ChlorophyteBullet: Homing range reduced to 0.33x
-// SporeSac: Improved projectile immunity frames
+ChlorophyteBullet: Радиус самонаводки уменьшен втрое
+SporeSac: Уменьшены кадры неуязвимости, наносимые снарядами
