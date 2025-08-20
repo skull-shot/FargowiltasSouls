@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = 0.4f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = 0.25f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
             maxOpacity *= (float)DrawTime / 15f;
 
             ManagedShader innerShader = ShaderManager.GetShader("FargowiltasSouls.RockeaterOuterAura");
