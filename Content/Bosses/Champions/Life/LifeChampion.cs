@@ -176,7 +176,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             switch ((int)NPC.ai[0])
             {
                 case -3: //final phase
-                    if (!Main.dayTime || !player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
+                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
                     {
                         NPC.TargetClosest(false);
                         if (NPC.timeLeft > 30)
@@ -294,7 +294,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                     break;
 
                 case 0: //float over player
-                    if (!Main.dayTime || !player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
+                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
                     {
                         NPC.TargetClosest(false);
                         if (NPC.timeLeft > 30)
