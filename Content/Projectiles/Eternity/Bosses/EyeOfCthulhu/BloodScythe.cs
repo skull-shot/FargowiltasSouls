@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu
             Projectile.DamageType = DamageClass.Generic;
             Projectile.timeLeft = 300;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = -1;
 
             randomize = 0;
         }

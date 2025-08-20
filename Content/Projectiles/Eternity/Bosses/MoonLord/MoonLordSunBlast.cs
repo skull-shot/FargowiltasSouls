@@ -37,7 +37,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
         {
             if (source is EntitySource_Parent parent && parent.Entity is NPC npc
                 && (npc.type == NPCID.GolemFistLeft || npc.type == NPCID.GolemFistRight))
+            {
                 Projectile.localAI[2] = 1;
+                CooldownSlot = -1;
+            }
         }
 
         public override void SendExtraAI(BinaryWriter writer)

@@ -22,6 +22,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Main.projFrames[Projectile.type] = 2;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 1;
+        }
         protected override void Movement(NPC npc)
         {
             if (npc.ai[0] == 5)

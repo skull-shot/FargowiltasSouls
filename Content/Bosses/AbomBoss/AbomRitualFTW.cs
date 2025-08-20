@@ -25,6 +25,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             // DisplayName.SetDefault("Abominationn Seal");
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 0;
+        }
         protected override void Movement(NPC npc)
         {
             Projectile.velocity = npc.Center - Projectile.Center;

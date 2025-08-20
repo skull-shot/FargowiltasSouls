@@ -17,6 +17,11 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             base.SetStaticDefaults();
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 1;
+        }
         protected override void Movement(NPC npc)
         {
             if (npc.ai[0] <= 10)

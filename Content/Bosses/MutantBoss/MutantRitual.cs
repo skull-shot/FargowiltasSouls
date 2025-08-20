@@ -34,6 +34,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.projFrames[Projectile.type] = 2;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 1;
+        }
         public override bool? CanDamage()
         {
             if (MutantDead)

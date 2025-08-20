@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
             Projectile.tileCollide = false;
         }
 
