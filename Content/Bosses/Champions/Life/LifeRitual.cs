@@ -25,6 +25,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Main.projFrames[Projectile.type] = 4;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 1;
+        }
         protected override void Movement(NPC npc)
         {
             if (npc.ai[0] != 2f && npc.ai[0] != 8f)

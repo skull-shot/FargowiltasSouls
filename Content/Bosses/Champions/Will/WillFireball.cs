@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,9 +34,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.timeLeft = 600;
             Projectile.alpha = 60;
             Projectile.ignoreWater = true;
-            //CooldownSlot = 1;
+            CooldownSlot = 1;
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            base.OnSpawn(source);
+            if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type is NPCID.DD2Betsy)
+                CooldownSlot = -1;
+        }
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
