@@ -882,7 +882,7 @@ WillForce: {
 		'''
 		[i:FargowiltasSouls/GladiatorEnchant] You are followed by a gladiator spirit with a banner that empowers you while close
 		[i:FargowiltasSouls/RedRidingEnchant] Successive attacks gain bonus damage, increased when empowered by the banner
-		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 25%
+		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 15%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
@@ -3375,8 +3375,8 @@ RazorContainer: {
 NebulaBooster: {
 	// DisplayName: Nebula Booster
 	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
+	// Activate: +{0} regen
+	// Deactivate: -{0} regen
 }
 
 SolarBooster: {
@@ -3396,71 +3396,8 @@ StardustBooster: {
 VortexBooster: {
 	// DisplayName: Vortex Booster
 	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-CosmosBooster: {
-	// DisplayName: Cosmos Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit damage
-	// Deactivate: -{0}% crit damage
-}
-
-DeathBooster: {
-	// DisplayName: Death Booster
-	// Tooltip: ""
-	// Activate: +{0} armor pen
-	// Deactivate: -{0} armor pen
-}
-
-EarthBooster: {
-	// DisplayName: Earth Booster
-	// Tooltip: ""
-	// Activate: +{0}% DR
-	// Deactivate: -{0}% DR
-}
-
-LifeBooster: {
-	// DisplayName: Life Booster
-	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
-}
-
-NatureBooster: {
-	// DisplayName: Nature Booster
-	// Tooltip: ""
-	// Activate: +{0} defense
-	// Deactivate: -{0} defense
-}
-
-SpiritBooster: {
-	// DisplayName: Spirit Booster
-	// Tooltip: ""
-	// Activate: +{0} mana regen
-	// Deactivate: -{0} mana regen
-}
-
-TerraBooster: {
-	// DisplayName: Terra Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-TimberBooster: {
-	// DisplayName: Timber Booster
-	// Tooltip: ""
-	// Activate: +{0}% damage
-	// Deactivate: -{0}% damage
-}
-
-WillBooster: {
-	// DisplayName: Will Booster
-	// Tooltip: ""
-	// Activate: +{0} flat damage
-	// Deactivate: -{0} flat damage
+	// Activate: +{0}% crit
+	// Deactivate: -{0}% crit
 }
 
 CoffinRoominator: {

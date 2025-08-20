@@ -68,6 +68,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static int BaseDamage => 35; //melee scaling handled by continuous projectile damage updating
         public override void PostUpdateEquips(Player player)
         {
+            if (!player.HasEffectEnchant<BeetleEffect>())
+                return;
             var modPlayer = player.FargoSouls();
             if (modPlayer.BeetleAttackCD > 0)
                 modPlayer.BeetleAttackCD--;
@@ -100,6 +102,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
+            if (!player.HasEffectEnchant<BeetleEffect>())
+                return;
             if (projectile != null && projectile.type == ModContent.ProjectileType<BeetleEnchantBeetle>())
                 return;
             var modPlayer = player.FargoSouls();

@@ -618,7 +618,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
                 TinCrit--;
 
-            if (!Player.HasEffect<BeetleEffect>())
+            if (!Player.HasEffectEnchant<BeetleEffect>())
             {
                 Beetles = 0;
                 BeetleCharge = 0;
