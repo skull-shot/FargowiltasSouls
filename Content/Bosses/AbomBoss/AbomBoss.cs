@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             }
             NPC.damage = 240;
             NPC.defense = 80;
-            NPC.lifeMax = 680000;
+            NPC.lifeMax = 637500;
             if (Main.expertMode) //compensate universe core
                 NPC.lifeMax *= 2;
             if (WorldSavingSystem.MasochistModeReal) //he's tanky enough
@@ -419,6 +419,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             Main.dust[d].velocity *= 4f;
                         }
                         NPC.localAI[3] = 2; //this marks p2
+                        /*
                         if (WorldSavingSystem.MasochistModeReal)
                         {
                             int heal = (int)(NPC.lifeMax / 90 * Main.rand.NextFloat(1f, 1.5f));
@@ -427,6 +428,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 NPC.life = NPC.lifeMax;
                             CombatText.NewText(NPC.Hitbox, CombatText.HealLife, heal);
                         }
+                        */
                         if (NPC.ai[1] > 210)
                         {
                             NPC.ai[0]++;
@@ -1586,7 +1588,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (NPC.localAI[3] > 1)
                 return false;
 
-            if (NPC.life < NPC.lifeMax * (WorldSavingSystem.EternityMode ? 0.66 : 0.50) && Main.expertMode)
+            if (NPC.life < NPC.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.85f : (WorldSavingSystem.EternityMode ? 0.66 : 0.50)) && Main.expertMode)
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
