@@ -75,6 +75,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             bool broken = player.HasBuff(ModContent.BuffType<BrokenShellBuff>());
             //Main.NewText($"shell HP: {modPlayer.TurtleShellHP}, counter: {modPlayer.TurtleCounter}");
 
+            if (modPlayer.TurtleCounter < 0)
+            {
+                broken = true;
+                modPlayer.TurtleCounter++;
+            }
+
             if (!broken)
             {
                 if (!player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer)
@@ -182,7 +188,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dr = 0;
             if (modPlayer.ShellHide)
-                dr += (player.ForceEffect<TurtleEffect>() && !modPlayer.LifeForceActive) ? 0.8f : 0.66f;
+                dr += (player.ForceEffect<TurtleEffect>() && player.HasEffectEnchant<TurtleEffect>()) ? 0.8f : 0.66f;
+            if (!player.HasEffectEnchant<TurtleEffect>())
+                modPlayer.TurtleCounter = -90;
             return dr;
         }
 
