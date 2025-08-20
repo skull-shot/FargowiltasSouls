@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Systems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
@@ -8,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -31,8 +34,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.hide = true;
             NPC.knockBackResist = 0.6f;
             NPC.lifeMax = 80;
-            NPC.HitSound = SoundID.Dig;
-            NPC.DeathSound = SoundID.Dig;
+            NPC.HitSound = SoundID.NPCHit1;
+            NPC.DeathSound = SoundID.NPCDeath1;
             
             //base.SetDefaults();
         }
@@ -71,7 +74,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             int[] sand = [TileID.Sand, TileID.Ebonsand, TileID.Pearlsand, TileID.Crimsand];
-            if (sand.Contains(spawnInfo.SpawnTileType))
+            if (sand.Contains(spawnInfo.SpawnTileType) && WorldSavingSystem.EternityMode)
             {
                 return 0.7f;
             }
@@ -154,6 +157,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                     NPC.width = 64;
                     NPC.height = 10;
                     NPC.Center = center;
+                    SoundEngine.PlaySound(SoundID.Zombie2 with { Volume = 0.3f}, NPC.Center);
+                    NPC.netUpdate = true;
                 }
                 float rotoffset = NPC.velocity.Y > 0 ? 20 : (NPC.velocity.Y < 0 ? -20 : 0);
                 if (NPC.ai[1] == 1)
@@ -187,6 +192,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                     NPC.localAI[0] = 0;
                 }
             }
+            else
+            {
+                NPC.velocity.X *= 0.8f;
+            }
 
                 base.AI();
         }
@@ -200,6 +209,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             if (NPC.ai[2] == 1)
             {
                 target.AddBuff(BuffID.CursedInferno, 120);
+            }
+            //hallow
+            else if (NPC.ai[2] == 2)
+            {
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 600);
             }
             //crimson
             else if (NPC.ai[2] == 3)
@@ -215,6 +229,40 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
             base.ModifyNPCLoot(npcLoot);
         }
-        
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            int dust = DustID.OasisCactus;
+            string gore = "";
+            if (NPC.ai[2] == 1)
+            {
+                dust = DustID.CorruptPlants;
+                gore = "Corrupt";
+            }
+            else if (NPC.ai[2] == 2)
+            {
+                dust = DustID.HallowedPlants;
+                gore = "Hallow";
+            }
+            else if (NPC.ai[2] == 3)
+            {
+                dust = DustID.CrimsonPlants;
+                gore = "Crimson";
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, dust);
+            }
+            if (NPC.life <= 0)
+            {
+                Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.ai[1] == 1 ? NPC.Right : NPC.Left, NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 1).Type);
+                for (int i = 0; i < 5; i++)
+                {
+                    Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.position + new Vector2(Main.rand.NextFloat(0, NPC.width), 0), NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 2).Type);
+                }
+               
+            }
+            base.HitEffect(hit);
+        }
+
     }
 }

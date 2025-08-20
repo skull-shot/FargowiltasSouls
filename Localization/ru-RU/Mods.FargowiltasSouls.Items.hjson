@@ -3419,69 +3419,6 @@ VortexBooster: {
 	Deactivate: -{0}% шанс крит. удара
 }
 
-CosmosBooster: {
-	DisplayName: Усилитель Космоса
-	Tooltip: ""
-	Activate: +{0}% крит. урон
-	Deactivate: -{0}% крит. урон
-}
-
-DeathBooster: {
-	DisplayName: Усилитель Смерти
-	Tooltip: ""
-	Activate: +{0} пробив. брони
-	Deactivate: -{0} пробив. брони
-}
-
-EarthBooster: {
-	DisplayName: Усилитель Земли
-	Tooltip: ""
-	Activate: +{0}% СУ
-	Deactivate: -{0}% СУ
-}
-
-LifeBooster: {
-	DisplayName: Усилитель Жизни
-	Tooltip: ""
-	Activate: +{0} восст. здоровья
-	Deactivate: -{0} восст. здоровья
-}
-
-NatureBooster: {
-	DisplayName: Усилитель Природы
-	Tooltip: ""
-	Activate: +{0} защита
-	Deactivate: -{0} защита
-}
-
-SpiritBooster: {
-	DisplayName: Усилитель Духа
-	Tooltip: ""
-	Activate: +{0} восст. маны
-	Deactivate: -{0} восст. маны
-}
-
-TerraBooster: {
-	DisplayName: Усилитель Терры
-	Tooltip: ""
-	Activate: +{0}% шанс крит. удара
-	Deactivate: -{0}% шанс крит. удара
-}
-
-TimberBooster: {
-	DisplayName: Усилитель Леса
-	Tooltip: ""
-	Activate: +{0}% урон
-	Deactivate: -{0}% урон
-}
-
-WillBooster: {
-	DisplayName: Усилитель Воли
-	Tooltip: ""
-	Activate: +{0} урон
-	Deactivate: -{0} урон
-}
-
 CoffinRoominator: {
 	DisplayName: Саркофаго-комнато-инатор
 	Tooltip:
