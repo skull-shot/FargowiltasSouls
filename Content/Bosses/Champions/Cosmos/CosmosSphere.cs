@@ -77,10 +77,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     Projectile.velocity = Vector2.Zero;
                     Projectile.netUpdate = true;
                 }
-
+                float telegraphTime = 26f;
+                if (Projectile.ai[1] < telegraphTime && Projectile.ai[1] > 0)
+                {
+                    float lerper = 1 - Projectile.ai[1] / telegraphTime;
+                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * MathF.Pow(lerper, 2) * Projectile.localAI[0];
+                }
                 if (--Projectile.ai[1] == 0)
                 {
-                    Projectile.velocity.Y = 60f / Projectile.MaxUpdates * Projectile.localAI[0];
+                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * Projectile.localAI[0];
                     Projectile.netUpdate = true;
                 }
 

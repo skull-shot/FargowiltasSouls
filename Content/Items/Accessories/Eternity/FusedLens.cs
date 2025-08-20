@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs;
+﻿using System.Collections.Generic;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -44,7 +44,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => null;
         public override void PostUpdateEquips(Player player)
         {
-            if (player.lifeRegen < 0)
+            bool dubious = false;
+            if (EffectItem(player).type != ModContent.ItemType<FusedLens>())
+                dubious = true;
+
+            if (player.lifeRegen < 0 && !dubious || player.FargoSouls().TwinsInstall)
             {
                 player.FargoSouls().FusedLensCursed = true;
                 player.FargoSouls().AttackSpeed += 0.15f;
@@ -54,8 +58,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 int type = player.buffType[i];
                 if (type > 0 && Main.debuff[type] && (FargowiltasSouls.DefenseReducingDebuffs.Contains(type) || type == ModContent.BuffType<BerserkerInstallBuff>() && player.FargoSouls().BerserkedFromAgitation == true || type == 88 && EmodeItemBalance.HasEmodeChange(player, ItemID.RodofDiscord)))
                 {
-                    player.FargoSouls().FusedLensIchor = true;
-                    player.GetCritChance(DamageClass.Generic) += 15;
+                    if (!dubious || player.FargoSouls().TwinsInstall)
+                    {
+                        player.FargoSouls().FusedLensIchor = true;
+                        player.GetCritChance(DamageClass.Generic) += 15;
+                    }
                 }
             }
         }

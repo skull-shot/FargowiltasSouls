@@ -383,7 +383,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -788,9 +788,9 @@ LifeForce: {
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +15% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] +10% critical strike chance
 		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
@@ -853,7 +853,7 @@ TerraForce: {
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
-		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds
+		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 10% for 5 seconds
 		'The land lends its strength'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range"
@@ -894,7 +894,7 @@ AbominableWand: {
 	/* Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -1095,10 +1095,10 @@ DubiousCircuitry: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
-		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
+		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
+		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
+		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
+		[i:FargowiltasSouls/ReinforcedPlating] Increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		''' */
 }
@@ -1692,7 +1692,7 @@ MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
@@ -1831,8 +1831,7 @@ EridanusBattleplate: {
 		'''
 		5% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Grants life regeneration
+		4% increased damage reduction
 		''' */
 }
 
@@ -1883,8 +1882,7 @@ GaiaPlate: {
 		'''
 		8% increased damage for your current weapon class
 		5% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		Reduces damage taken by 4%
 		''' */
 }
 
@@ -1930,11 +1928,7 @@ NekomiHood: {
 
 NekomiHoodie: {
 	// DisplayName: Nekomi Hoodie
-	/* Tooltip:
-		'''
-		Slightly increases your life regeneration
-		Reduces damage taken by 5%
-		''' */
+	// Tooltip: Reduces damage taken by 4%
 }
 
 StyxChestplate: {
@@ -1943,8 +1937,7 @@ StyxChestplate: {
 		'''
 		15% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		4% increased damage reduction
 		''' */
 }
 
@@ -2774,9 +2767,7 @@ EaterLauncher: {
 		'''
 		Uses rockets for ammo
 		Fires a spread of rockeaters
-		Increased damage to enemies in the given range
-		Press Right Click to increase this range
-		The range then gradually decreases to normal
+		Increased damage to enemies outside the given radius
 		50% chance to not consume ammo
 		'The reward for a mighty rematch...'
 		''' */
@@ -3304,7 +3295,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		''' */
 }

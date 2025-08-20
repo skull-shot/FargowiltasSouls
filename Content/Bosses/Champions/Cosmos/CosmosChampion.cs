@@ -11,6 +11,7 @@ using FargowiltasSouls.Content.Items.Placables.Trophies;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -24,6 +25,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -153,10 +155,16 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             NPC.localAI[3] = reader.ReadSingle();
             hitChildren = reader.ReadBoolean();
         }
-
+        public override int SpawnNPC(int tileX, int tileY)
+        {
+            return base.SpawnNPC(tileX, tileY);
+        }
         public override void AI()
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
+
+            if (!SkyManager.Instance["FargowiltasSouls:EridanusSky"].IsActive())
+                SkyManager.Instance.Activate("FargowiltasSouls:EridanusSky");
 
             if (NPC.localAI[3] == 0) //just spawned
             {
@@ -189,6 +197,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     NPC.localAI[3] = 1;
 
                     NPC.velocity = NPC.DirectionFrom(Main.player[NPC.target].Center).RotatedByRandom(MathHelper.PiOver2) * 20f;
+
                 }
                 return;
             }
@@ -786,7 +795,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     Movement(targetPos, 1.2f, 32f, useAntiWobble: false);
 
                     if (NPC.ai[1] == 1)
+                    {
                         SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
+                        }
+                    }
+                        
 
                     if (++NPC.ai[2] <= 6)
                     {
@@ -989,6 +1005,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
                         NPC.localAI[0] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
 
+                        if (NPC.ai[2] == 75 - 50 && FargoSoulsUtil.HostCheck)
+                        {
+                            //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI, ai2: 0.9f);
+                        }
+
                         if (NPC.ai[2] == 75) //falling punch
                         {
                             NPC.velocity = 42f * NPC.SafeDirectionTo(player.Center);
@@ -1025,6 +1046,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                             }
                         }
                     }
+                    BackgroundShift(NPC.ai[2], 75, 110);
 
                     if (++NPC.ai[1] > 240 || NPC.ai[2] > 60 && NPC.Center.Y > player.Center.Y + 700)
                     {
@@ -1143,6 +1165,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
                         NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
 
+                        if (NPC.ai[2] == 200 - 50 && FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
+                        }
+
                         if (NPC.ai[2] == 200) //straight ray punch
                         {
                             NPC.velocity = 42f * NPC.SafeDirectionTo(player.Center);
@@ -1160,6 +1187,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     {
                         NPC.direction = NPC.spriteDirection = Math.Sign(NPC.ai[3]); //dont turn around if crossed up
                     }
+
+                    BackgroundShift(NPC.ai[2], 200, 235);
 
                     if (++NPC.ai[1] > 400 || NPC.ai[2] > 200 &&
                         (NPC.ai[3] > 0 ? NPC.Center.X > player.Center.X + 800 : NPC.Center.X < player.Center.X - 800))
@@ -1298,7 +1327,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         Movement(targetPos, 1.2f, 32f, useAntiWobble: false);
 
                         if (NPC.ai[1] == 1)
+                        {
+                            if (FargoSoulsUtil.HostCheck)
+                            {
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
+                            }
+                        }
                             SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+
+                        if (NPC.ai[1] == 110 + 45 - 50 && FargoSoulsUtil.HostCheck)
+                        {
+                            //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI, ai2: 0.9f);
+                        }
 
                         if (++NPC.ai[2] <= 6)
                         {
@@ -1345,6 +1385,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     }
                     else //uppercut time
                     {
+                        BackgroundShift(NPC.ai[1], 110 + 45, 110 + 45 + 35);
+
                         if (NPC.ai[1] <= 110 + 45)
                         {
                             targetPos = player.Center;
@@ -1358,6 +1400,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                 NPC.rotation += (float)Math.PI;
 
                             //NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
+
 
                             if (NPC.ai[1] == 110 + 45) //rising punch
                             {
@@ -1971,6 +2014,17 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 spriteBatch.ResetToDefault();
             }
             return false;
+        }
+
+        public void BackgroundShift(float timer, float start, float end)
+        {
+            if (timer > start && timer < end)
+            {
+                float strength = LumUtils.InverseLerp(end, start, timer);
+                float easeoutTime = end - start;
+                    
+                EridanusSky.ScrollVector += strength * NPC.velocity * 0.035f / 30;
+            }
         }
     }
 }

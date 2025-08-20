@@ -26,8 +26,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
             player.GetDamage(damageClass) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 5;
-            player.endurance += 0.1f;
-            player.lifeRegen += 2;
+            player.endurance += 0.04f;
         }
 
         public override void AddRecipes()

@@ -689,7 +689,7 @@ GladiatorBuff: {
 
 GladiatorSpiritBuff: {
 	DisplayName: Gladiator Strength
-	Description: +20% damage reduction, knockback immunity, improved successive hit damage
+	Description: +10% damage reduction, knockback immunity, improved successive hit damage
 }
 
 ROBBuff: {
@@ -781,7 +781,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Ambrosia Buff
-	Description: +20% damage, +15% damage reduction, +5 life regeneration, summon damage can crit
+	Description: +20% damage, +8% damage reduction, +5 life regeneration
 }
 
 MutantDesperationBuff: {

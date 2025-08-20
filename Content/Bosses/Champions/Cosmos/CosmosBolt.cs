@@ -3,7 +3,10 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -84,6 +87,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override bool PreDraw(ref Color lightColor)
         {
+            Asset<Texture2D> line = TextureAssets.Extra[178];
+            float opacity = Projectile.Opacity * 0.75f;
+            float lerper = Projectile.timeLeft / (75f * 4);
+            float lineLength = MathHelper.SmoothStep(1f, 0f, lerper);
+            Color color = Color.Lerp(Color.White, Color.Cyan, MathF.Pow(lerper, 0.5f));
+            Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, color * opacity, Projectile.rotation - MathHelper.PiOver2, new Vector2(0, line.Height() * 0.5f), new Vector2(0.7f * lineLength, Projectile.scale * 2), SpriteEffects.None);
+
+
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

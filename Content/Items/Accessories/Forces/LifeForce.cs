@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 10f;
+            speed = 14.5f;
             acceleration = 0.7f;
         }
     }

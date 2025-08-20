@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool TitaniumDRBuff;
         public bool TitaniumCD;
-        public bool SquireEnchantActive = false;
+        public Item SquireEnchantItem;
         public bool ValhallaEnchantActive = false;
 
         public bool AncientShadowEnchantActive = false;

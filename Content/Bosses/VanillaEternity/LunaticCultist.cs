@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -923,6 +924,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public int Timer;
 
+        public int SourceNPCType;
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
@@ -1001,6 +1003,27 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             return result;
+        }
+
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                base.OnSpawn(npc, source);
+            else if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC)
+            {
+                SourceNPCType = sourceNPC.type;
+            }
+        }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return base.CanHitPlayer(npc, target, ref cooldownSlot);
+
+            if (SourceNPCType is NPCID.MoonLordCore or NPCID.MoonLordHead or NPCID.MoonLordHand)
+                cooldownSlot = 1;
+
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

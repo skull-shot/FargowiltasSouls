@@ -25,6 +25,11 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             // DisplayName.SetDefault("Blazing Deathray");
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = -1;
+        }
         public override void AI()
         {
             Projectile.alpha = 0;

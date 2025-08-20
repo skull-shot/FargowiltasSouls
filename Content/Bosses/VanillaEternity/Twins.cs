@@ -1178,10 +1178,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             Retinazer.TwinDefaultMovement(npc, desiredX, desiredY, accel, 4);
                             Retinazer.TwinManageRotation(npc);
 
-                            bool waitForReti = retinazer.ai[1] == npc.ai[1];
-                            Vector2 spazDesiredPos = player.Center + retinazer.GetGlobalNPC<Retinazer>().LockedRotation.ToRotationVector2() * distance;
-                            if (retinazer.Distance(spazDesiredPos) <= 300)
-                                waitForReti = false;
+                            bool waitForReti = false;
+                            if (retinazer != null)
+                            {
+                                waitForReti = retinazer.ai[1] == npc.ai[1];
+
+                                Vector2 spazDesiredPos = player.Center + retinazer.GetGlobalNPC<Retinazer>().LockedRotation.ToRotationVector2() * distance;
+                                if (retinazer.Distance(spazDesiredPos) <= 300)
+                                    waitForReti = false;
+                            }
 
                             int flashDelay = WorldSavingSystem.MasochistModeReal ? 30 : 45;
 
@@ -1192,7 +1197,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                                 
 
-                            if (ai_StateTimer < prepTime - flashDelay && retinazer.ai[2] < npc.ai[2])
+                            if (ai_StateTimer < prepTime - flashDelay && retinazer != null && retinazer.ai[2] < npc.ai[2])
                             {
                                 npc.ai[2] = retinazer.ai[2];
                                 npc.netUpdate = true;

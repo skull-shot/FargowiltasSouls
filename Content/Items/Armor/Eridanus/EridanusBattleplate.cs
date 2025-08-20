@@ -27,8 +27,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
         {
             player.GetDamage(DamageClass.Generic) += 0.05f;
             player.GetCritChance(DamageClass.Generic) += 10;
-            player.endurance += 0.1f;
-            player.lifeRegen += 4;
+            player.endurance += 0.04f;
         }
 
         public override void AddRecipes()

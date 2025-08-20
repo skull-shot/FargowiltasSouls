@@ -8,6 +8,9 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
+using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Content.Bosses.DeviBoss;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 {
@@ -34,6 +37,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
             Projectile.coldDamage = true;
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            base.OnSpawn(source);
+            if (source is EntitySource_Parent parent && parent.Entity is NPC nPC && nPC.type == ModContent.NPCType<DeviBoss>())
+                CooldownSlot = 1;
+        }
         public override void AI()
         {
             if (Projectile.localAI[0] == 0f)

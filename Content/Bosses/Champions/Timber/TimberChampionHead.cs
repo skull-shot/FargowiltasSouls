@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             NPC.height = 100;
             NPC.damage = 140;
             NPC.defense = 50;
-            NPC.lifeMax = 160000;
+            NPC.lifeMax = 150000;
             NPC.HitSound = SoundID.NPCHit7;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.noGravity = true;

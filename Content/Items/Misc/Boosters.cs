@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Items.Misc
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
             if (boosterPlayer.SolarTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Activate", 15), true);
+                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Activate", 5), true);
             boosterPlayer.SolarTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<SolarBuff>(), LunarDuration);
         }
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Items.Misc
             if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife3))
                 return;
             if (boosterPlayer.NebulaTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Activate", 5), true);
+                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Activate", 2), true);
             boosterPlayer.NebulaTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<NebulaBuff>(), LunarDuration);
         }
@@ -108,98 +108,4 @@ namespace FargowiltasSouls.Content.Items.Misc
     }
     #endregion
 
-    #region Terraria Soul
-    /*
-    public class TimberBooster : Booster // damage
-    {
-        public override int Frames => 6;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.TimberTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.SandyBrown, Language.GetTextValue("Mods.FargowiltasSouls.Items.TimberBooster.Activate", 30), true);
-            boosterPlayer.TimberTimer = TerrariaDuration;
-        }
-    }
-    public class TerraBooster : Booster // crit chance
-    {
-        public override int Frames => 8;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.TerraTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Gray, Language.GetTextValue("Mods.FargowiltasSouls.Items.TerraBooster.Activate", 30), true);
-            boosterPlayer.TerraTimer = TerrariaDuration;
-        }
-    }
-    public class EarthBooster : Booster
-    {
-        public override int Frames => 6;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.EarthTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.EarthBooster.Activate", 25), true);
-            boosterPlayer.EarthTimer = TerrariaDuration;
-        }
-    }
-    public class NatureBooster : Booster
-    {
-        public override int Frames => 6;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.NatureTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.LightGreen, Language.GetTextValue("Mods.FargowiltasSouls.Items.NatureBooster.Activate", 20), true);
-            boosterPlayer.NatureTimer = TerrariaDuration;
-        }
-    }
-    public class LifeBooster : Booster
-    {
-        public override int Frames => 7;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.LifeTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Pink, Language.GetTextValue("Mods.FargowiltasSouls.Items.LifeBooster.Activate", 8), true);
-            boosterPlayer.LifeTimer = TerrariaDuration;
-        }
-    }
-    public class DeathBooster : Booster
-    {
-        public override int Frames => 6;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.DeathTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Purple, Language.GetTextValue("Mods.FargowiltasSouls.Items.DeathBooster.Activate", 50), true);
-            boosterPlayer.DeathTimer = TerrariaDuration;
-        }
-    }
-    public class SpiritBooster : Booster
-    {
-        public override int Frames => 8;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.SpiritTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.LightBlue, Language.GetTextValue("Mods.FargowiltasSouls.Items.SpiritBooster.Activate", 30), true);
-            boosterPlayer.SpiritTimer = TerrariaDuration;
-        }
-    }
-    public class WillBooster : Booster
-    {
-        public override int Frames => 7;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.WillTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Gold, Language.GetTextValue("Mods.FargowiltasSouls.Items.WillBooster.Activate", 25), true);
-            boosterPlayer.WillTimer = TerrariaDuration;
-        }
-    }
-    public class CosmosBooster : Booster
-    {
-        public override int Frames => 8;
-        public override void PickupEffect(BoosterPlayer boosterPlayer)
-        {
-            if (boosterPlayer.CosmosTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Black, Language.GetTextValue("Mods.FargowiltasSouls.Items.CosmosBooster.Activate", 10), true);
-            boosterPlayer.CosmosTimer = TerrariaDuration;
-        }
-    }
-    */
-    #endregion
 }

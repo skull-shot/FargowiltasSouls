@@ -388,7 +388,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -3307,7 +3307,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		''' */
 }

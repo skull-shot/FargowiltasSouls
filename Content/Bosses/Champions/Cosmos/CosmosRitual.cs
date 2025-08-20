@@ -24,6 +24,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Main.projFrames[Projectile.type] = 2;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 1;
+        }
         protected override void Movement(NPC npc)
         {
             Projectile.Center = npc.Center;
