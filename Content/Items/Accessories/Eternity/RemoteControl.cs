@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
             float dr = 0;
-            if (ElectricAttack(projectile, player) && player.whoAmI == Main.myPlayer)
+            if (EffectItem(player).type == ModContent.ItemType<RemoteControl>() && ElectricAttack(projectile, player) && player.whoAmI == Main.myPlayer)
                 dr = 0.5f;
             modifiers.FinalDamage *= 1 - dr;
         }
@@ -116,6 +116,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     duration = 3600;
                 if (duration < 600)
                     duration = 600;
+                if (EffectItem(player).type != ModContent.ItemType<RemoteControl>())
+                    duration /= 2;
                 player.AddBuff(ModContent.BuffType<SuperchargedBuff>(), duration);
                 SoundEngine.PlaySound(SoundID.Thunder, player.Center);
                 for (int i = 0; i < duration / 80; i++)
@@ -161,9 +163,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static int BaseDamage (Player player) => (int)(800 * player.ActualClassDamage(DamageClass.Ranged));
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
-            if (stunned)
-                return;
-            if (player.FargoSouls().RemoteCD > 0)
+            if (player.FargoSouls().RemoteCD > 0 || stunned)
                 return;
             if (Main.myPlayer == player.whoAmI && FargoSoulsUtil.HostCheck)
             {

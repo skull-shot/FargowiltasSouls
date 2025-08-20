@@ -1,3 +1,5 @@
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -14,9 +16,12 @@ namespace FargowiltasSouls.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.moveSpeed += 0.20f;
-            player.FargoSouls().AttackSpeed += 0.1f;
-            player.FargoSouls().Supercharged = true;
+            if (player.HasEffect<RemoteControlDR>())
+            {
+                player.moveSpeed += 0.20f;
+                player.FargoSouls().AttackSpeed += 0.1f;
+                player.FargoSouls().Supercharged = true;
+            }
         }
     }
 }
