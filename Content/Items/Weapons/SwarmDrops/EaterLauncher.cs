@@ -47,24 +47,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public const int IncreasedDistance = 1200;
         //public int Cooldown = 0;
         public const int CooldownTime = 24 * 60;
-        public override bool AltFunctionUse(Player player) => true;
+        public override bool AltFunctionUse(Player player) => false;
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2)
-            {
-                //if (Cooldown > 0)
-                //return false;
-
-                Item.useAnimation = 24 * 2;
-                Item.useTime = 24 * 2;
-                Item.UseSound = SoundID.Item117;
-            }
-            else
-            {
-                Item.useAnimation = 24;
-                Item.useTime = 24;
-                Item.UseSound = SoundID.Item62 with { Volume = 0.4f };
-            }
+            Item.useAnimation = 24;
+            Item.useTime = 24;
+            Item.UseSound = SoundID.Item62 with { Volume = 0.4f };
             return base.CanUseItem(player);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -73,12 +61,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             if (player.ownedProjectileCounts[aura] <= 0)
                 Projectile.NewProjectile(source, player.Center, player.velocity, aura, 0, 0);
 
-            if (player.altFunctionUse == 2)
-            {
-                player.FargoSouls().RockeaterDistance = IncreasedDistance;
-                //Cooldown = CooldownTime;
-                return false;
-            }
             for (int i = 0; i < 3; i++)
             {
                 Vector2 shotgunVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(18));

@@ -57,7 +57,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                     {
                         Main.LocalPlayer.AddBuff(ModContent.BuffType<AmbrosiaBuff>(), 60 * 6);
                         Main.LocalPlayer.wingTime = Main.LocalPlayer.wingTimeMax;
-                        Main.LocalPlayer.FargoSouls().HealPlayer(10);
                     }
 
                     FargoGlobalItem.OnRetrievePickup(Main.LocalPlayer);

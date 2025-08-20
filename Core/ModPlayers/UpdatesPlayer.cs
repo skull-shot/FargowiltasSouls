@@ -172,12 +172,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //regular OnRespawn() doesnt account for lifeforce, and is lowered by dying with oceanic maul
             }
 
-            if (SquireEnchantActive && BaseMountType != -1)
+            if (SquireEnchantItem != null && BaseMountType != -1)
             {
                 SquireEnchant.ResetMountStats(this);
             }
 
             ConcentratedRainbowMatterTryAutoHeal();
+
         }
 
 

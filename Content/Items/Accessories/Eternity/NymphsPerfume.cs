@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             modPlayer.NymphsPerfume = true;
             if (modPlayer.NymphsPerfumeCD > 0)
-                modPlayer.NymphsPerfumeCD -= modPlayer.MasochistSoul ? 10 : 1;
+                modPlayer.NymphsPerfumeCD -= 1;
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {

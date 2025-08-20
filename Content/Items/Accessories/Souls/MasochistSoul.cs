@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             base.SetDefaults();
 
             Item.value = 5000000;
-            Item.defense = 30;
+            Item.defense = 12;
             Item.useTime = 90;
             Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.HoldUp;
@@ -76,10 +76,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //stat modifiers
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
             player.GetDamage(damageClass) += 0.5f;
-            player.endurance += 0.1f;
+            player.endurance += 0.05f;
             player.GetArmorPenetration(DamageClass.Generic) += 50;
             player.statLifeMax2 += player.statLifeMax / 5;
-            player.lifeRegen += 3;
+            player.lifeRegen += 2;
             fargoPlayer.WingTimeModifier += 2f;
             player.moveSpeed += 0.2f;
 

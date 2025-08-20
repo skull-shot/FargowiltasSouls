@@ -24,8 +24,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
 
         public override void UpdateEquip(Player player)
         {
-            player.lifeRegen += 1;
-            player.endurance += 0.05f;
+            player.endurance += 0.04f;
         }
 
         public override void AddRecipes()

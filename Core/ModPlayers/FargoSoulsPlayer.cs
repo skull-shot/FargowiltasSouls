@@ -323,7 +323,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             PlatinumEffect = null;
             CobaltEnchantActive = false;
             AncientShadowEnchantActive = false;
-            SquireEnchantActive = false;
+            SquireEnchantItem = null;
             ValhallaEnchantActive = false;
             TitaniumDRBuff = false;
             TitaniumCD = false;
@@ -1478,11 +1478,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int GetHealMultiplier(int heal)
         {
             float multiplier = 1f;
-            bool squire = SquireEnchantActive;
+            bool squire = SquireEnchantItem != null;
             bool valhalla = ValhallaEnchantActive;
             if ((squire || valhalla))
             {
-                bool forceEffect = ForceEffect<SquireEnchant>() || ForceEffect<ValhallaKnightEnchant>();
+                bool forceEffect = SquireEnchantItem != null && SquireEnchantItem.ModItem is BaseEnchant && (ForceEffect<SquireEnchant>() || ForceEffect<ValhallaKnightEnchant>());
                 if (Eternity)
                     multiplier = 5f;
                 else if (forceEffect && valhalla)

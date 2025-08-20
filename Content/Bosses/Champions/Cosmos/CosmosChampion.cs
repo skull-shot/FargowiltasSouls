@@ -155,7 +155,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             NPC.localAI[3] = reader.ReadSingle();
             hitChildren = reader.ReadBoolean();
         }
-
+        public override int SpawnNPC(int tileX, int tileY)
+        {
+            return base.SpawnNPC(tileX, tileY);
+        }
         public override void AI()
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
