@@ -42,6 +42,7 @@ using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Armor;
+using FargowiltasSouls.Assets.Particles;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -1021,25 +1022,22 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Vector2 dir = Main.rand.NextVector2Circular(20, 15);
                     Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, Color.Teal, Main.rand.NextFloat(0.1f, 0.25f), 50, true);
                     p.Spawn();
-                    /*int dust = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Vortex, Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f);
-                    Main.dust[dust].scale += 0.5f;
-                    Main.dust[dust].noGravity = true;
-                    Main.dust[dust].velocity *= 1.8f;
-                    if (Main.rand.NextBool(3))
-                    {
-                        Main.dust[dust].noGravity = false;
-                        Main.dust[dust].scale *= 0.5f;
-                    }*/
                 }
             }
 
             if (TwinsInstall)
             {
-                if (Main.rand.NextBool(6) && drawInfo.shadow == 0f && !Main.gamePaused)
+                if (Main.rand.NextBool(3) && drawInfo.shadow == 0f && !Main.gamePaused)
                 {
-                    Vector2 dir = Main.rand.NextVector2Circular(20, 15);
-                    Color color = Main.rand.NextFromList(Color.Green, Color.Yellow);
-                    Particle p = new RectangleParticle(Player.Center + dir, Player.velocity * 0.7f + dir, color, Main.rand.NextFloat(0.1f, 0.25f), 25, false);
+                    bool windleft = false;
+                    if (Main.windSpeedCurrent < 0)
+                        windleft = true;
+                    Vector2 spawnpos = windleft ? Player.Right + new Vector2(5, 0) : Player.Left + new Vector2(-5, 0);
+                    Vector2 dir = new(Main.rand.NextFloat(0, 2), Main.rand.NextFloat(-18, -22));
+                    Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
+                    float offset = windleft ? (-MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f) : MathHelper.Pi*2 + Main.rand.NextFloatDirection() * 0.51f;
+                    Particle p = new SmokeParticle(spawnpos, Player.velocity * 0.7f + dir, color, 50, Main.rand.NextFloat(0.4f, 0.8f), 0.05f, offset, false);
+                    p.Velocity.X += Main.windSpeedCurrent * 10;
                     p.Spawn();
                 }
             }
