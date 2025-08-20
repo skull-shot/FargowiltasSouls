@@ -59,6 +59,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
 
         public override bool PreDraw(ref Color lightColor)
         {
+
+            float leeway = Projectile.width / 2 * Projectile.scale;
+            leeway *= 0.75f;
+            float radius = threshold - leeway;
+
             Color darkColor = Color.DarkGoldenrod;
             Color mediumColor = Color.Goldenrod;
             Color lightColor2 = Color.Lerp(Color.LightGoldenrodYellow, Color.White, 0.35f);
@@ -74,7 +79,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
             borderShader.TrySetParameter("colorMult", 7.35f);
             borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
-            borderShader.TrySetParameter("radius", threshold * Projectile.scale / 2f);
+            borderShader.TrySetParameter("radius", radius * Projectile.scale / 2f);
             borderShader.TrySetParameter("anchorPoint", auraPos);
             borderShader.TrySetParameter("screenPosition", Main.screenPosition);
             borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
