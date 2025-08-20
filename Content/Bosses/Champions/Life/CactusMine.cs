@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 50 : 90;
+            CooldownSlot = 1;
         }
 
         public override void AI()

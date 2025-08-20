@@ -38,6 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.FargoSouls().DeletionImmuneRank = 2;
 
             Projectile.hide = true;
+            CooldownSlot = 1;
         }
 
         public override void AI()

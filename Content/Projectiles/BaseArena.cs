@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile.netImportant = true;
 
-            CooldownSlot = 0;
+            CooldownSlot = -1;
 
             Projectile.FargoSouls().GrazeCheck =
                 projectile =>

@@ -25,6 +25,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             base.SetDefaults();
             Projectile.hide = true;
+            CooldownSlot = 1;
         }
         protected override void Movement(NPC npc)
         {

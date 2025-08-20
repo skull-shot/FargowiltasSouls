@@ -20,6 +20,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             Main.projFrames[Projectile.type] = 3;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 0;
+        }
         protected override void Movement(NPC npc)
         {
             Projectile.velocity = npc.Center - Projectile.Center;

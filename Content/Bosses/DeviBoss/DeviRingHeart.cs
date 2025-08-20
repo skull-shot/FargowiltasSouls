@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 480;
             Projectile.alpha = 200;
-            //CooldownSlot = 1; //deliberate, so deathray will always hit
+            CooldownSlot = 1;
         }
 
         public override void AI()
