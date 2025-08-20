@@ -908,15 +908,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.shinyStone = false;
             }
 
-            if (RockeaterDistance > EaterLauncher.BaseDistance)
-            {
-                RockeaterDistance -= (int)((EaterLauncher.IncreasedDistance - EaterLauncher.BaseDistance) / (EaterLauncher.CooldownTime / 3f));
-            }
-            else
-            {
-                RockeaterDistance = EaterLauncher.BaseDistance;
-            }
-
             StatLifePrevious = Player.statLife;
         }
     }

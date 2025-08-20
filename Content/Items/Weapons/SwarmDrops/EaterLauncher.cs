@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             }
             for (int i = 0; i < 3; i++)
             {
-                Vector2 shotgunVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(15));
+                Vector2 shotgunVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(18));
                 shotgunVelocity *= Main.rand.NextFloat(0.9f, 1.1f);
                 Projectile.NewProjectile(source, position + Vector2.Normalize(velocity) * Item.width * 0.9f, shotgunVelocity, type, damage, knockback);
             }

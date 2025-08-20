@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = 0.7f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = 0.4f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
             maxOpacity *= (float)DrawTime / 15f;
 
             ManagedShader innerShader = ShaderManager.GetShader("FargowiltasSouls.RockeaterOuterAura");
@@ -109,6 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             innerShader.TrySetParameter("darkColor", darkColor.ToVector4());
             innerShader.TrySetParameter("midColor", mediumColor.ToVector4());
 
+            /*
             ManagedShader outerShader = ShaderManager.GetShader("FargowiltasSouls.RockeaterInnerAura");
             outerShader.TrySetParameter("colorMult", 7.35f);
             outerShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
@@ -120,7 +121,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             outerShader.TrySetParameter("maxOpacity", maxOpacity);
             outerShader.TrySetParameter("darkColor", darkColor.ToVector4());
             outerShader.TrySetParameter("midColor", mediumColor.ToVector4());
-
+            */
             Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
 
             Main.spriteBatch.End();
@@ -128,9 +129,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
             Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
             Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, outerShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
-            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
-            Main.spriteBatch.End();
+            //Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, outerShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            //Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            //Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
             return false;
         }
