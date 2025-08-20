@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 5);
-            Item.defense = 8;
+            //Item.defense = 8;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -47,12 +47,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
 
-            player.AddEffect<ProbeMinionEffect>(Item);
+            //player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteControlDR>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
 
             player.AddEffect<ReinforcedStats>(Item);
-            player.endurance += 0.04f;
+            //player.endurance += 0.04f;
             player.noKnockback = true;
         }
 

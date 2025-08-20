@@ -1097,10 +1097,10 @@ DubiousCircuitry: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
-		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
+		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
+		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
+		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
+		[i:FargowiltasSouls/ReinforcedPlating] Increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		''' */
 }

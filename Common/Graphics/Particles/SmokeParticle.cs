@@ -15,13 +15,15 @@ namespace FargowiltasSouls.Assets.Particles
 
         public float RotationOffset;
 
+        public bool FadeGray;
+
         public override int FrameCount => 8;
 
         public override string AtlasTextureName => "FargowiltasSouls.SmokeParticle";
 
         public override BlendState BlendState => BlendState.NonPremultiplied;
 
-        public SmokeParticle(Vector2 position, Vector2 velocity, Color color, int lifetime, float scale, float scaleGrowRate)
+        public SmokeParticle(Vector2 position, Vector2 velocity, Color color, int lifetime, float scale, float scaleGrowRate, float rotationOffset, bool fadeGray = true)
         {
             Position = position;
             Velocity = velocity;
@@ -30,7 +32,8 @@ namespace FargowiltasSouls.Assets.Particles
             Variant = Main.rand.Next(FrameCount);
             Lifetime = lifetime;
             ScaleGrowRate = scaleGrowRate;
-            RotationOffset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+            RotationOffset = rotationOffset;
+            FadeGray = fadeGray;
         }
 
         public override void Update()
@@ -45,8 +48,10 @@ namespace FargowiltasSouls.Assets.Particles
                 Time += 9;
                 Velocity *= 0.75f;
             }
-
-            DrawColor = Color.Lerp(DrawColor, Color.White, 0.055f);
+            if (FadeGray)
+            {
+                DrawColor = Color.Lerp(DrawColor, Color.White, 0.055f);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -62,7 +67,7 @@ namespace FargowiltasSouls.Assets.Particles
             float y = MathHelper.Clamp(frame.Y + Texture.Frame.Y, Texture.Frame.Y, Texture.Frame.Y + Texture.Frame.Height - height);
             Rectangle frameOnAtlas = new((int)x, (int)y, (int)width, (int)height);
 
-            spriteBatch.Draw(Texture.Atlas.Texture.Value, Position - Main.screenPosition, frameOnAtlas, DrawColor * opacity, Rotation, origin, Scale * 2f, 0, 0f);
+            spriteBatch.Draw(Texture.Atlas.Texture.Value, Position - Main.screenPosition, frameOnAtlas, Lighting.GetColor(Position.ToTileCoordinates(), DrawColor) * opacity, Rotation, origin, Scale * 2f, 0, 0f);
         }
     }
 }

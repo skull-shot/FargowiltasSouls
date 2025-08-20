@@ -34,12 +34,8 @@ namespace FargowiltasSouls.Common.Graphics.Particles
             {
                 Velocity.Y += 0.33f;
             }
-            else //reverse gravity bc nothing else uses this without gravity on rn
-            {
-                Velocity.Y -= 0.33f;
-            }
 
-                Velocity *= 0.95f;
+            Velocity *= 0.95f;
 			Scale *= 0.95f;
 			Opacity = FargoSoulsUtil.SineInOut(1f - LifetimeRatio);
 		}
