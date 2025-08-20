@@ -2776,9 +2776,7 @@ EaterLauncher: {
 		'''
 		Uses rockets for ammo
 		Fires a spread of rockeaters
-		Increased damage to enemies in the given range
-		Press Right Click to increase this range
-		The range then gradually decreases to normal
+		Increased damage to enemies outside the given radius
 		50% chance to not consume ammo
 		'The reward for a mighty rematch...'
 		''' */
@@ -3306,7 +3304,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		''' */
 }

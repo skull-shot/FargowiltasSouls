@@ -24,6 +24,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -158,6 +159,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
 
+            if (!SkyManager.Instance["FargowiltasSouls:EridanusSky"].IsActive())
+                SkyManager.Instance.Activate("FargowiltasSouls:EridanusSky");
+
             if (NPC.localAI[3] == 0) //just spawned
             {
                 if (!NPC.HasValidTarget)
@@ -189,6 +193,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     NPC.localAI[3] = 1;
 
                     NPC.velocity = NPC.DirectionFrom(Main.player[NPC.target].Center).RotatedByRandom(MathHelper.PiOver2) * 20f;
+
                 }
                 return;
             }
