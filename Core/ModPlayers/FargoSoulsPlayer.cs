@@ -329,7 +329,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             TitaniumCD = false;
             CrystalAssassinDiagonal = false;
 
-            CactusImmune = false;
 
 
             //            #endregion

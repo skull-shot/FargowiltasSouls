@@ -110,7 +110,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		«Самый охладительный!»
 		'''
-	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3357,7 +3356,6 @@ Extra: {
 	EternityItem: Вечность
 	DisabledEffects: Некоторые эффекты выключены в меню переключения эффектов
 	PatreonItem: >> Предмет Патреона <<
-	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
 	Scaling: увеличивающ.
