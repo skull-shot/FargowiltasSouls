@@ -1,6 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Core.Globals;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -18,7 +19,7 @@ namespace FargowiltasSouls.Content.Sky
     {
         private bool isActive = false;
         private float intensity = 0f;
-
+        public static Vector2 ScrollVector;
         public override void Update(GameTime gameTime)
         {
             const float increment = 0.01f;
@@ -36,6 +37,7 @@ namespace FargowiltasSouls.Content.Sky
                 if (intensity < 0f)
                 {
                     intensity = 0f;
+                    ScrollVector = Vector2.Zero;
                     Deactivate();
                 }
             }
@@ -48,9 +50,8 @@ namespace FargowiltasSouls.Content.Sky
                 NPC eridanus = FargoSoulsUtil.NPCExists(EModeGlobalNPC.championBoss, ModContent.NPCType<CosmosChampion>());
                 if (eridanus != null)
                 {
-                    float radius = MathHelper.SmoothStep(0, 4500, intensity);
+                    float radius = 4500;
                     Vector2 auraPos = eridanus.Center;
-                    var target = Main.LocalPlayer;
 
                     var blackTile = TextureAssets.MagicPixel;
                     var noise = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/deepspace");
@@ -58,10 +59,14 @@ namespace FargowiltasSouls.Content.Sky
                         return;
                     if (!noise.IsLoaded)
                         return;
+                    float timeIncrement = 1f / 60;
+                    if (Main.LocalPlayer.HasBuff<TimeFrozenBuff>())
+                        timeIncrement = 0;
+                    ScrollVector += timeIncrement * new Vector2(0.7f, 0.3f) * 0.035f;
 
                     ManagedShader blackShader = ShaderManager.GetShader("FargowiltasSouls.EridanusBackgroundShader");
                     blackShader.TrySetParameter("radius", radius);
-                    blackShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+                    blackShader.TrySetParameter("scrollVector", ScrollVector);
                     blackShader.TrySetParameter("anchorPoint", auraPos);
                     blackShader.TrySetParameter("screenPosition", Main.screenPosition);
                     blackShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
