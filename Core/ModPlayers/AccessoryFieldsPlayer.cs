@@ -89,7 +89,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float MeteorCD = 60;
 
         public int ApprenticeItemCD;
-        public bool CactusImmune = false;
         public int CactusProcCD;
         public bool ChlorophyteEnchantActive = false;
         public bool MonkEnchantActive = false;
@@ -101,7 +100,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool TitaniumDRBuff;
         public bool TitaniumCD;
-        public bool SquireEnchantActive = false;
+        public Item SquireEnchantItem;
         public bool ValhallaEnchantActive = false;
 
         public bool AncientShadowEnchantActive = false;

@@ -958,6 +958,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             Vector2 armsmokepos = NPC.Center + new Vector2(armsmokedir, -35);
 
+            float rotationOffset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+
             int smokeAmount = 1;
 
             if (head == null)
@@ -977,13 +979,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             if (Main.rand.NextBool(smokeAmount) && head == null)
             {
-                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f);
+                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f, rotationOffset);
                 p.Spawn();
             }
 
             if (Main.rand.NextBool(3) && arms == null && head != null)
             {
-                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f, rotationOffset);
                 p.Spawn();
                 //Particle p2 = new SmokeParticle(armsmokepos * -1, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
                 //p2.Spawn();

@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.width = 32;
             Item.height = 32;
             Item.accessory = true;
-            Item.defense = 15;
+            Item.defense = 12;
             Item.value = 5000000;
             Item.rare = -12;
             Item.expert = true;

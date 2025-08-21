@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -51,14 +52,14 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Player owner = Main.player[Projectile.owner];
 
             int closeDistance = 300;
-            int farDistance = owner.FargoSouls().RockeaterDistance;
+            int farDistance = EaterLauncher.BaseDistance;
             int midDistance = (closeDistance + farDistance) / 2;
 
             Vector2 middleOfSweetspot = owner.Center + owner.SafeDirectionTo(target.Center) * midDistance;
             Vector2 targetPoint = FargoSoulsUtil.ClosestPointInHitbox(target.Hitbox, middleOfSweetspot);
             float dist = Vector2.Distance(targetPoint, owner.Center);
 
-            if (dist > closeDistance && dist < farDistance)
+            if (dist > closeDistance)
             {
                 modifiers.SourceDamage *= 1.5f;
                 sweetspot = true;

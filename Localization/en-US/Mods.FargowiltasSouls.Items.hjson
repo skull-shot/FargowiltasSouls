@@ -106,10 +106,8 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'It's the quenchiest!'
 		'''
-	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -385,7 +383,7 @@ NinjaEnchant: {
 	DisplayName: Ninja Enchantment
 	Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		'''
@@ -790,12 +788,12 @@ LifeForce: {
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +15% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/SpiderEnchant] +10% critical strike chance
 		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
-		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
 		'Rare is a living thing that dare disobey your will'
 		'''
@@ -855,7 +853,7 @@ TerraForce: {
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
-		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds
+		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 10% for 5 seconds
 		'The land lends its strength'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range"
@@ -882,7 +880,7 @@ WillForce: {
 		'''
 		[i:FargowiltasSouls/GladiatorEnchant] You are followed by a gladiator spirit with a banner that empowers you while close
 		[i:FargowiltasSouls/RedRidingEnchant] Successive attacks gain bonus damage, increased when empowered by the banner
-		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 25%
+		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 15%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
 		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
@@ -896,7 +894,7 @@ AbominableWand: {
 	Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -954,13 +952,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'''
 }
@@ -975,7 +973,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
@@ -1097,10 +1095,10 @@ DubiousCircuitry: {
 	Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
-		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
+		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
+		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
+		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
+		[i:FargowiltasSouls/ReinforcedPlating] Increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		'''
 }
@@ -1403,14 +1401,14 @@ SandsofTime: {
 		'''
 		4% increased damage when equipped
 		Works from inventory and vanity slots:
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		'Whatever you do, don't drop it'
 		'''
 	VanityTooltip:
 		'''
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		'''
@@ -1672,7 +1670,7 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
@@ -1811,8 +1809,7 @@ EridanusBattleplate: {
 		'''
 		5% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Grants life regeneration
+		4% increased damage reduction
 		'''
 }
 
@@ -1863,8 +1860,7 @@ GaiaPlate: {
 		'''
 		8% increased damage for your current weapon class
 		5% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		Reduces damage taken by 4%
 		'''
 }
 
@@ -1910,11 +1906,7 @@ NekomiHood: {
 
 NekomiHoodie: {
 	DisplayName: Nekomi Hoodie
-	Tooltip:
-		'''
-		Slightly increases your life regeneration
-		Reduces damage taken by 5%
-		'''
+	Tooltip: Reduces damage taken by 4%
 }
 
 StyxChestplate: {
@@ -1923,8 +1915,7 @@ StyxChestplate: {
 		'''
 		15% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		4% increased damage reduction
 		'''
 }
 
@@ -2754,9 +2745,7 @@ EaterLauncher: {
 		'''
 		Uses rockets for ammo
 		Fires a spread of rockeaters
-		Increased damage to enemies in the given range
-		Press Right Click to increase this range
-		The range then gradually decreases to normal
+		Increased damage to enemies outside the given radius
 		50% chance to not consume ammo
 		'The reward for a mighty rematch...'
 		'''
@@ -3284,7 +3273,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		'''
 }
@@ -3323,7 +3312,6 @@ Extra: {
 	EternityItem: Eternity
 	DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Patreon Item <<
-	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 	Scaling: scaling
@@ -3362,8 +3350,8 @@ RazorContainer: {
 NebulaBooster: {
 	DisplayName: Nebula Booster
 	Tooltip: ""
-	Activate: +{0} life regen
-	Deactivate: -{0} life regen
+	Activate: +{0} regen
+	Deactivate: -{0} regen
 }
 
 SolarBooster: {
@@ -3383,71 +3371,8 @@ StardustBooster: {
 VortexBooster: {
 	DisplayName: Vortex Booster
 	Tooltip: ""
-	Activate: +{0}% crit chance
-	Deactivate: -{0}% crit chance
-}
-
-CosmosBooster: {
-	DisplayName: Cosmos Booster
-	Tooltip: ""
-	Activate: +{0}% crit damage
-	Deactivate: -{0}% crit damage
-}
-
-DeathBooster: {
-	DisplayName: Death Booster
-	Tooltip: ""
-	Activate: +{0} armor pen
-	Deactivate: -{0} armor pen
-}
-
-EarthBooster: {
-	DisplayName: Earth Booster
-	Tooltip: ""
-	Activate: +{0}% DR
-	Deactivate: -{0}% DR
-}
-
-LifeBooster: {
-	DisplayName: Life Booster
-	Tooltip: ""
-	Activate: +{0} life regen
-	Deactivate: -{0} life regen
-}
-
-NatureBooster: {
-	DisplayName: Nature Booster
-	Tooltip: ""
-	Activate: +{0} defense
-	Deactivate: -{0} defense
-}
-
-SpiritBooster: {
-	DisplayName: Spirit Booster
-	Tooltip: ""
-	Activate: +{0} mana regen
-	Deactivate: -{0} mana regen
-}
-
-TerraBooster: {
-	DisplayName: Terra Booster
-	Tooltip: ""
-	Activate: +{0}% crit chance
-	Deactivate: -{0}% crit chance
-}
-
-TimberBooster: {
-	DisplayName: Timber Booster
-	Tooltip: ""
-	Activate: +{0}% damage
-	Deactivate: -{0}% damage
-}
-
-WillBooster: {
-	DisplayName: Will Booster
-	Tooltip: ""
-	Activate: +{0} flat damage
-	Deactivate: -{0} flat damage
+	Activate: +{0}% crit
+	Deactivate: -{0}% crit
 }
 
 CoffinRoominator: {

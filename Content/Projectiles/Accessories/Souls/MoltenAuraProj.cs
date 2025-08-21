@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = Projectile.Opacity * 0.09f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
 
             if (CombinedAura(player))
             {

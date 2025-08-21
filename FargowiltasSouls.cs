@@ -136,6 +136,8 @@ namespace FargowiltasSouls
             titleLinks.Add(MakeSimpleButton("Mods.FargowiltasSouls.UI.TitleLinks.Patreon", "https://www.patreon.com/c/fargoteam", 2));
             titleLinks.Add(MakeSimpleButton("Mods.FargowiltasSouls.UI.TitleLinks.Github", "https://github.com/Fargowilta", 3));
 
+            SkyManager.Instance["FargowiltasSouls:EridanusSky"] = new EridanusSky();
+
             SkyManager.Instance["FargowiltasSouls:AbomBoss1"] = new AbomSkyP1();
             SkyManager.Instance["FargowiltasSouls:AbomBoss"] = new AbomSky();
 

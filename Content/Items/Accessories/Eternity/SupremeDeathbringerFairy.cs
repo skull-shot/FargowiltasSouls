@@ -9,7 +9,6 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Shield)]
     public class SupremeDeathbringerFairy : SoulsItem
     {
         public override bool Eternity => true;

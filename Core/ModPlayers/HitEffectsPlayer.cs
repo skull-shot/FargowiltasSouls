@@ -203,7 +203,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DevianttHeartItem != null && DevianttHeartsCD <= 0 && Player.HasEffect<DevianttHearts>()
                 && (projectile == null || (projectile.type != ModContent.ProjectileType<FriendRay>() && projectile.type != ModContent.ProjectileType<FriendHeart>())))
             {
-                DevianttHeartsCD = AbomWandItem == null ? 600 : 300;
+                DevianttHeartsCD = 600;
 
                 if (Main.myPlayer == Player.whoAmI)
                 {
@@ -524,7 +524,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
                     }
                     if (Player.HasEffect<HallowedPendantEffect>())
-                        HallowedPendantEffect.PendantRays(Player, FargoSoulsUtil.HighestDamageTypeScaling(Player, 1111), 1200);
+                        HallowedPendantEffect.PendantRays(Player, FargoSoulsUtil.HighestDamageTypeScaling(Player, 800), 1200);
                     return true;
                 }
             }

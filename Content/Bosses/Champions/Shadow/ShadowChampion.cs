@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             NPC.height = 110;
             NPC.damage = 130;
             NPC.defense = 60;
-            NPC.lifeMax = 330000;
+            NPC.lifeMax = 270000;
             NPC.HitSound = SoundID.NPCHit5;
             NPC.DeathSound = SoundID.NPCDeath7;
             NPC.noGravity = true;
@@ -149,7 +149,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             Player player = Main.player[NPC.target];
             Vector2 targetPos;
 
-            if (NPC.HasValidTarget && NPC.Distance(player.Center) < 2500 && !Main.dayTime)
+            if (NPC.HasValidTarget && NPC.Distance(player.Center) < 2500)
                 NPC.timeLeft = 600;
 
             NPC.direction = NPC.spriteDirection = NPC.Center.X < player.Center.X ? 1 : -1;
@@ -320,7 +320,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     break;
 
                 case 0: //float over player
-                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f || Main.dayTime) //despawn code
+                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
                     {
                         NPC.TargetClosest(false);
                         if (NPC.timeLeft > 30)

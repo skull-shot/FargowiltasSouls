@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.height = 150;
             NPC.damage = 125;
             NPC.defense = 40;
-            NPC.lifeMax = 630000;
+            NPC.lifeMax = 600000;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
             NPC.noGravity = true;
@@ -429,8 +429,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (FargoSoulsUtil.HostCheck)
                         {
                             SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-
-                            for (int i = 0; i < 12; i++)
+                            int crosses = WorldSavingSystem.MasochistModeReal ? 12 : 3;
+                            for (int i = 0; i < crosses; i++)
                             {
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                     Main.rand.NextFloat(-8f, 8f), Main.rand.NextFloat(-8f, 8f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -545,8 +545,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             if (NPC.ai[1] < 180) //cross bones
                             {
                                 SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-
-                                for (int i = 0; i < 12; i++)
+                                int crosses = WorldSavingSystem.MasochistModeReal ? 12 : 3;
+                                for (int i = 0; i < crosses; i++)
                                 {
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                         Main.rand.NextFloat(-8f, 8f), Main.rand.NextFloat(-8f, 8f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -825,7 +825,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (NPC.ai[1] % 30 == 0 && FargoSoulsUtil.HostCheck && NPC.life < NPC.lifeMax * 0.66)
                         {
                             SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-                            for (int i = 0; i < 3; i++)
+                            int crossbones = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                            for (int i = 0; i < crossbones; i++)
                             {
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                     Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-8f, 0f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);

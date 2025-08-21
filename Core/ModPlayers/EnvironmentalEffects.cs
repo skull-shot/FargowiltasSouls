@@ -115,10 +115,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     DesertDebuffs(currentTile);
                 }
 
-                if (currentTile.TileType == TileID.Cactus)
-                {
-                    CactusDamage(currentTile, fargoSoulsPlayer);
-                }
 
                 if (Player.ZoneSnow)
                 {
@@ -344,38 +340,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             */
-        }
-
-        private void CactusDamage(Tile currentTile, FargoSoulsPlayer fargoSoulsPlayer)
-        {
-            if (currentTile.HasUnactuatedTile && !fargoSoulsPlayer.CactusImmune && !Player.cactusThorns)
-            {
-                int damage = 10;
-                if (WorldSavingSystem.MasochistModeReal)
-                {
-                    if (Player.ZoneCorrupt)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.CursedInferno, 150);
-                    }
-                    if (Player.ZoneCrimson)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.Ichor, 150);
-                    }
-                    if (Player.ZoneHallow)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.Confused, 150);
-                    }
-                }
-
-                if (Main.hardMode)
-                    damage *= 2;
-
-                if (Player.hurtCooldowns[0] <= 0) //same i-frames as spike tiles
-                    Player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Cactus", Player.name)), damage, 0, false, false, 0, false);
-            }
         }
 
         private void HallowedIlluminated()

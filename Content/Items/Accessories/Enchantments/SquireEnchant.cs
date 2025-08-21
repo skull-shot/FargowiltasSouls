@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<SquireMountSpeed>(item);
             player.AddEffect<SquireMountJump>(item);
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            modPlayer.SquireEnchantActive = true;
+            modPlayer.SquireEnchantItem = item;
 
             //player.buffImmune[BuffID.BallistaPanic] = true;
 

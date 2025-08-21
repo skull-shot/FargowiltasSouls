@@ -106,7 +106,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'Não tem nada igual, é!'
 		'''
-	// VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -389,7 +388,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -981,7 +980,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		''' */
 }
@@ -996,7 +995,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1450,7 +1449,7 @@ SandsofTime: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		''' */
@@ -3308,7 +3307,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		''' */
 }
@@ -3347,7 +3346,6 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
-	// CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 	// Scaling: scaling
@@ -3386,8 +3384,8 @@ RazorContainer: {
 NebulaBooster: {
 	// DisplayName: Nebula Booster
 	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
+	// Activate: +{0} regen
+	// Deactivate: -{0} regen
 }
 
 SolarBooster: {
@@ -3407,71 +3405,8 @@ StardustBooster: {
 VortexBooster: {
 	// DisplayName: Vortex Booster
 	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-CosmosBooster: {
-	// DisplayName: Cosmos Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit damage
-	// Deactivate: -{0}% crit damage
-}
-
-DeathBooster: {
-	// DisplayName: Death Booster
-	// Tooltip: ""
-	// Activate: +{0} armor pen
-	// Deactivate: -{0} armor pen
-}
-
-EarthBooster: {
-	// DisplayName: Earth Booster
-	// Tooltip: ""
-	// Activate: +{0}% DR
-	// Deactivate: -{0}% DR
-}
-
-LifeBooster: {
-	// DisplayName: Life Booster
-	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
-}
-
-NatureBooster: {
-	// DisplayName: Nature Booster
-	// Tooltip: ""
-	// Activate: +{0} defense
-	// Deactivate: -{0} defense
-}
-
-SpiritBooster: {
-	// DisplayName: Spirit Booster
-	// Tooltip: ""
-	// Activate: +{0} mana regen
-	// Deactivate: -{0} mana regen
-}
-
-TerraBooster: {
-	// DisplayName: Terra Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-TimberBooster: {
-	// DisplayName: Timber Booster
-	// Tooltip: ""
-	// Activate: +{0}% damage
-	// Deactivate: -{0}% damage
-}
-
-WillBooster: {
-	// DisplayName: Will Booster
-	// Tooltip: ""
-	// Activate: +{0} flat damage
-	// Deactivate: -{0} flat damage
+	// Activate: +{0}% crit
+	// Deactivate: -{0}% crit
 }
 
 CoffinRoominator: {

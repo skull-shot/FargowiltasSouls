@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.netImportant = true;
 
             Projectile.extraUpdates = 0;
-            CooldownSlot = 0;
+            CooldownSlot = 1;
 
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;

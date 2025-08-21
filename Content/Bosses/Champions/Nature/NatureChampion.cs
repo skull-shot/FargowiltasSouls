@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             NPC.height = 120;
             NPC.damage = 110;
             NPC.defense = 100;
-            NPC.lifeMax = 900000;
+            NPC.lifeMax = 440000;
             NPC.HitSound = SoundID.NPCHit6;
             NPC.DeathSound = SoundID.NPCDeath1;
             //NPC.noGravity = true;
@@ -572,7 +572,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         }
                     }
 
-                    if (++NPC.ai[1] > 330 || !WorldSavingSystem.EternityMode) //wait
+                    int endTime = WorldSavingSystem.MasochistModeReal ? 250 : 330;
+                    if (++NPC.ai[1] > endTime || !WorldSavingSystem.EternityMode) //wait
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;

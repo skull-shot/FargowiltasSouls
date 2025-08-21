@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 Projectile.Kill();
                 return;
             }
-            if (player.HasEffect<BeetleEffect>())
+            if (player.HasEffectEnchant<BeetleEffect>())
                 Projectile.timeLeft = 2;
             if (Projectile.Distance(player.Center) > 3000)
                 Projectile.Center = player.Center;

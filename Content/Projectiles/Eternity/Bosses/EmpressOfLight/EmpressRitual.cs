@@ -33,6 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EmpressOfLight
             base.SetDefaults();
             Projectile.ignoreWater = true;
             Projectile.hide = true;
+            CooldownSlot = 1;
         }
         protected override void Movement(NPC npc)
         {

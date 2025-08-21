@@ -110,7 +110,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		“多汁解渴！”
 		'''
-	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -3415,7 +3414,6 @@ Extra: {
 	EternityItem: 永恒
 	DisabledEffects: 有效果被饰品效果配置禁用
 	PatreonItem: >> 捐赠者物品 <<
-	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: 你有东西被偷了！
 	// Scaling: scaling
@@ -3477,69 +3475,6 @@ VortexBooster: {
 	Tooltip: ""
 	Activate: +{0}% 暴击率
 	Deactivate: -{0}% 暴击率
-}
-
-CosmosBooster: {
-	DisplayName: 宇宙强化焰
-	Tooltip: ""
-	Activate: +{0}% 暴击率
-	Deactivate: -{0}% 暴击率
-}
-
-DeathBooster: {
-	DisplayName: 死亡强化焰
-	Tooltip: ""
-	Activate: +{0} 穿甲
-	Deactivate: -{0} 穿甲
-}
-
-EarthBooster: {
-	DisplayName: 大地强化焰
-	Tooltip: ""
-	Activate: +{0}% 伤害减免
-	Deactivate: -{0}% 伤害减免
-}
-
-LifeBooster: {
-	DisplayName: 生命强化焰
-	Tooltip: ""
-	Activate: +{0} 生命再生
-	Deactivate: -{0} 生命再生
-}
-
-NatureBooster: {
-	DisplayName: 自然强化焰
-	Tooltip: ""
-	Activate: +{0} 防御
-	Deactivate: -{0} 防御
-}
-
-SpiritBooster: {
-	DisplayName: 心灵强化焰
-	Tooltip: ""
-	Activate: +{0} 魔力再生
-	Deactivate: -{0} 魔力再生
-}
-
-TerraBooster: {
-	DisplayName: 泰拉强化焰
-	Tooltip: ""
-	Activate: +{0}% 暴击率
-	Deactivate: -{0}% 暴击率
-}
-
-TimberBooster: {
-	DisplayName: 森林强化焰
-	Tooltip: ""
-	Activate: +{0}% 伤害
-	Deactivate: -{0}% 伤害
-}
-
-WillBooster: {
-	DisplayName: 意志强化焰
-	Tooltip: ""
-	Activate: +{0} 最终基准伤害
-	Deactivate: -{0} 最终基准伤害
 }
 
 CoffinRoominator: {
