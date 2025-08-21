@@ -235,7 +235,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             projectile.ContinuouslyUpdateDamageStats = true;
                         }
@@ -654,7 +654,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                             float projCenterX = projectile.Center.X;
                             float projCenterY = projectile.Center.Y;
-                            float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
+                            float homingRadius = 22500f; // square of 150f, original 300f. Change this to tweak initial homing range
                             bool homingCheck = false;
                             int target = 0;
                             if (projectile.ai[1] == 0f)
@@ -1449,7 +1449,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                         }
                         break;
-                        
+
                     case ProjectileID.MedusaHeadRay:
                         if (player.Alive() && SourceItemType == ItemID.MedusaHead && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && medusaList?.Count > 0)
                         {
@@ -1508,6 +1508,13 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
+                    case ProjectileID.UFOLaser: // Xeno Staff
+                        if (SourceItemType == ItemID.XenoStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.7f;
+                        }
+                        break;
+
                     default:
                         break;
                 }
@@ -1515,7 +1522,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 switch (SourceItemType)
                 {
                     case ItemID.SniperRifle:
-                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             float maxBonus = 1f;
                             float bonus = maxBonus * player.Distance(target.Center) / 1800f;
