@@ -186,12 +186,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.6f;
                     return EModeChange.Nerf;
 
-                case ItemID.SlimeStaff:
-                //case ItemID.ImpStaff:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.1f;
-                    return EModeChange.Buff;
-
                 case ItemID.Shroomerang:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
