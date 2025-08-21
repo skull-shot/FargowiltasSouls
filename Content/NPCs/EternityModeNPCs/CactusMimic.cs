@@ -6,9 +6,6 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -36,7 +33,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             NPC.lifeMax = 80;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
-            
+
+            NPC.ShowNameOnHover = false;
             //base.SetDefaults();
         }
         public override void SetStaticDefaults()
@@ -69,7 +67,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 if (tile.TileType == TileID.Pearlsand) ai = 2;
                 if (tile.TileType == TileID.Crimsand) ai = 3;
             }
-            return NPC.NewNPC(NPC.GetSource_NaturalSpawn(), tileX * 16, tileY * 16, NPC.type, ai2: ai);
+            return NPC.NewNPC(NPC.GetSource_NaturalSpawn(), tileX * 16 + 8, tileY * 16, NPC.type, ai2: ai);
+        }
+        public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
+        {
+            if (NPC.ai[0] == 0) return false;
+            return base.DrawHealthBar(hbPosition, ref scale, ref position);
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
@@ -147,6 +150,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             {
                 if (NPC.ai[0] == 0)
                 {
+                    NPC.ShowNameOnHover = true;
                     NPC.ai[0] = 1;
                     int dir = (target.Center.X > NPC.Center.X ? 1 : -1);
                     NPC.velocity.X = dir * 6;
@@ -254,10 +258,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
             }
             if (NPC.life <= 0)
             {
-                Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.ai[1] == 1 ? NPC.Right : NPC.Left, NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 1).Type);
+                Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.ai[1] == 1 ? NPC.Right : NPC.Left - new Vector2(0, 8), NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 1).Type);
                 for (int i = 0; i < 5; i++)
                 {
-                    Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.position + new Vector2(Main.rand.NextFloat(0, NPC.width), 0), NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 2).Type);
+                    Gore.NewGoreDirect(NPC.GetSource_Death(), NPC.position + new Vector2(Main.rand.NextFloat(0, NPC.width), -8), NPC.velocity, ModContent.Find<ModGore>(Mod.Name, $"CactusGore" + gore + 2).Type);
                 }
                
             }
