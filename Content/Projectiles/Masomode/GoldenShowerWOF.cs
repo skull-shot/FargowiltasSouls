@@ -32,7 +32,6 @@ namespace FargowiltasSouls.Content.Projectiles.Masomode
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 300;
             Projectile.hostile = true;
-            Projectile.extraUpdates = 2;
         }
 
         public override bool? CanCutTiles()
