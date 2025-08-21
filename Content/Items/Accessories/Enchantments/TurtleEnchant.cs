@@ -142,35 +142,37 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (player.thorns == 0f)
                 player.thorns = 1f;
             player.thorns *= 5f;
-            player.noKnockback = true;
 
             if (player.ownedProjectileCounts[ModContent.ProjectileType<TurtleShield>()] < 1)
             {
                 Projectile.NewProjectile(player.GetSource_EffectItem<TurtleEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<TurtleShield>(), 0, 0, player.whoAmI);
             }
 
-            Main.projectile.Where(x => x.active && x.hostile && x.damage > 0 && x.Hitbox.Intersects(player.Hitbox) && ProjectileLoader.CanDamage(x) != false && ProjectileLoader.CanHitPlayer(x, player) && FargoSoulsUtil.CanDeleteProjectile(x)).ToList().ForEach(x =>
+            if (player.immune)
             {
-                // Turn around
-                x.velocity *= -1f;
-
-                // Flip sprite
-                if (x.Center.X > player.Center.X)
+                Main.projectile.Where(x => x.active && x.hostile && x.damage > 0 && x.Hitbox.Intersects(player.Hitbox) && ProjectileLoader.CanDamage(x) != false && ProjectileLoader.CanHitPlayer(x, player) && FargoSoulsUtil.CanDeleteProjectile(x)).ToList().ForEach(x =>
                 {
-                    x.direction = 1;
-                    x.spriteDirection = 1;
-                }
-                else
-                {
-                    x.direction = -1;
-                    x.spriteDirection = -1;
-                }
+                    // Turn around
+                    x.velocity *= -1f;
 
-                x.hostile = false;
-                x.friendly = true;
-                x.damage *= 5;
-                SoundEngine.PlaySound(SoundID.Item150, player.Center);
-            });
+                    // Flip sprite
+                    if (x.Center.X > player.Center.X)
+                    {
+                        x.direction = 1;
+                        x.spriteDirection = 1;
+                    }
+                    else
+                    {
+                        x.direction = -1;
+                        x.spriteDirection = -1;
+                    }
+
+                    x.hostile = false;
+                    x.friendly = true;
+                    x.damage *= 5;
+                    SoundEngine.PlaySound(SoundID.Item150, player.Center);
+                });
+            }
         }
 
         public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
@@ -188,9 +190,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float dr = 0;
             if (modPlayer.ShellHide)
+            {
                 dr += (player.ForceEffect<TurtleEffect>() && player.HasEffectEnchant<TurtleEffect>()) ? 0.8f : 0.66f;
-            if (!player.HasEffectEnchant<TurtleEffect>())
-                modPlayer.TurtleCounter = -90;
+                if (!player.HasEffectEnchant<TurtleEffect>())
+                    modPlayer.TurtleCounter = -90;
+            }
             return dr;
         }
 
