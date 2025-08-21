@@ -1,4 +1,6 @@
-﻿sampler noiseScrollTexture : register(s1);
+﻿
+
+sampler noiseScrollTexture : register(s1);
 
 float globalTime;
 float2 laserDirection;
@@ -22,35 +24,36 @@ struct VertexShaderOutput
 VertexShaderOutput VertexShaderFunction(in VertexShaderInput input)
 {
     VertexShaderOutput output = (VertexShaderOutput) 0;
-    float4 pos = mul(input.Position, uWorldViewProjection);
-    output.Position = pos;
-    
+    output.Position = mul(input.Position, uWorldViewProjection);
     output.Color = input.Color;
     output.TextureCoordinates = input.TextureCoordinates;
-
     return output;
 }
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-    float2 coords = input.TextureCoordinates;
+    float2 coords = input.TextureCoordinates.xy;
     float4 color = input.Color;
-    
+
     coords.y = (coords.y - 0.5) / input.TextureCoordinates.z + 0.5;
-    
+
     float yFromCenter = distance(coords.y, 0.5);
-    
-    float2 adjustedCoords = float2(coords.x * 33, coords.y * 1.8);
-    adjustedCoords.x += (0.5 - yFromCenter) / 3;
+
+    float2 adjustedCoords = float2(coords.x * 30, coords.y * 2.2);
+
+    adjustedCoords.x += sin(globalTime * 3 + coords.y * 10) * 0.05;
+
     float2 movement = float2(globalTime * 1.5, -globalTime * 3);
-    float4 tex1 = tex2D(noiseScrollTexture, float2(frac(adjustedCoords.x * 0.7 + movement.x), adjustedCoords.y + movement.y));
-    float4 tex2 = tex2D(noiseScrollTexture, float2(frac(adjustedCoords.x * 0.7 + movement.x * 0.93), adjustedCoords.y + movement.y * 1.72));
-    float4 tex3 = tex2D(noiseScrollTexture, float2(frac(adjustedCoords.x * 0.7 + movement.x * 1.6), adjustedCoords.y + movement.y * 0.7));
-    float4 textureMesh = tex1 * 0.33 + tex2 * 0.33 + tex3 * 0.33;
-    
-    float4 darkColor = float4(0.96, 0.34, 0.04, 1); //red
-    float4 midColor = float4(0.98, 0.95, 0.53, 1); //yellow
-    float4 lightColor = float4(1, 1, 1, 1); //white
+
+    float4 tex1 = tex2D(noiseScrollTexture, frac(float2(adjustedCoords.x * 0.8 + movement.x, adjustedCoords.y + movement.y)));
+    float4 tex2 = tex2D(noiseScrollTexture, frac(float2(adjustedCoords.x * 1.1 + movement.x * 0.9, adjustedCoords.y + movement.y * 1.6)));
+    float4 tex3 = tex2D(noiseScrollTexture, frac(float2(adjustedCoords.x * 1.3 + movement.x * 1.5, adjustedCoords.y + movement.y * 0.8)));
+
+    float textureMesh = (tex1.r + tex2.r + tex3.r) / 3.0;
+
+    float4 darkColor = float4(0.96, 0.34, 0.04, 1);
+    float4 midColor = float4(0.98, 0.95, 0.53, 1);
+    float4 lightColor = float4(1, 1, 1, 1);
     
     float split = 0.7;
     float colorLerp = textureMesh.r;

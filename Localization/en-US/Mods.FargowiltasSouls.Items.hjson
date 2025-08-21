@@ -1776,7 +1776,7 @@ WorldShaperSoul: {
 		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
+		    Tiles and walls will not be consumed at 500 stack or above
 		    Further increased placement speed and range
 		'Living in a world of cardboard'
 		'''
@@ -3152,9 +3152,10 @@ PrismaRegalia: {
 	DisplayName: Prisma Regalia
 	Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
+		Hits release homing stars
+		Deals extra damage based on how much the spear is extended on hit
+		Hold Right Click to charge for extra damage
+		While fully charged, hits release additional stars
 		'The radiant power of a foe's pure essence...'
 		'''
 }

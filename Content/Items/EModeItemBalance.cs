@@ -504,11 +504,15 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.SporeSac:
                     balanceTextKeys = ["SporeSac"];
                     return EModeChange.Buff;
-
+                    
                 case ItemID.XenoStaff:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
+                    
+                case ItemID.AvengerEmblem:
+                    balanceTextKeys = ["AvengerEmblem"];
+                    return EModeChange.Buff;
 
                 default:
                     return EModeChange.None;
