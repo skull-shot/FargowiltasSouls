@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -121,7 +122,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         if (NPC.localAI[0] > 60 && FargoSoulsUtil.HostCheck)
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2),
-                                Vector2.UnitY * Main.rand.NextFloat(-4f, 0), ProjectileID.GoldenShowerHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                Vector2.UnitY * Main.rand.NextFloat(-4f, 0), ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 60f, 1f, 0.22f);
                         }
                     }
 

@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 300;
-            Projectile.hostile = true;;
+            Projectile.hostile = true;
         }
 
         public override bool? CanCutTiles()
