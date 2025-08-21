@@ -501,7 +501,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             {
                                 SpectralFishronRandom = Main.rand.NextBool(); //fan above or to sides
                             }
-                            if (npc.ai[2] == 1)
+                            if (npc.ai[2] <= 80)
                             {
                                 foreach (Projectile p in Main.ActiveProjectiles)
                                 {
