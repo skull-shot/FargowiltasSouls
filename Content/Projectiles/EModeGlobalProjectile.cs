@@ -654,7 +654,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                             float projCenterX = projectile.Center.X;
                             float projCenterY = projectile.Center.Y;
-                            float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
+                            float homingRadius = 22500f; // square of 150f, original 300f. Change this to tweak initial homing range
                             bool homingCheck = false;
                             int target = 0;
                             if (projectile.ai[1] == 0f)
