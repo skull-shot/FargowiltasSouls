@@ -1449,7 +1449,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                         }
                         break;
-                        
+
                     case ProjectileID.MedusaHeadRay:
                         if (player.Alive() && SourceItemType == ItemID.MedusaHead && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && medusaList?.Count > 0)
                         {
@@ -1505,6 +1505,13 @@ namespace FargowiltasSouls.Content.Projectiles
                             float bonus = maxBonus * player.Distance(target.Center) / 600f;
                             bonus = MathHelper.Clamp(bonus, 0f, maxBonus * 2);
                             modifiers.SourceDamage *= 1 + bonus;
+                        }
+                        break;
+
+                    case ProjectileID.UFOLaser: // Xeno Staff
+                        if (SourceItemType == ItemID.XenoStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.7f;
                         }
                         break;
 
