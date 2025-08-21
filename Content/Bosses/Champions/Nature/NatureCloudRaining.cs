@@ -37,7 +37,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         {
             Lighting.AddLight(Projectile.Center, 0.5f, 0.75f, 1f);
 
-            if (++Projectile.ai[0] > 8)
+            float time = WorldSavingSystem.MasochistModeReal ? 12 : 20;
+            if (++Projectile.ai[0] > time)
             {
                 Projectile.ai[0] = 0;
 
@@ -49,7 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 }
             }
 
-            if (++Projectile.ai[1] > 600)
+            if (++Projectile.ai[1] > 450)
             {
                 Projectile.alpha += 5;
                 if (Projectile.alpha > 255)
