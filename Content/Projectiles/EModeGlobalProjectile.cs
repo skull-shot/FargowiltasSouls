@@ -235,7 +235,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             projectile.ContinuouslyUpdateDamageStats = true;
                         }
@@ -1515,7 +1515,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 switch (SourceItemType)
                 {
                     case ItemID.SniperRifle:
-                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             float maxBonus = 1f;
                             float bonus = maxBonus * player.Distance(target.Center) / 1800f;
