@@ -571,7 +571,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         }
                     }
 
-                    if (++NPC.ai[1] > 330 || !WorldSavingSystem.EternityMode) //wait
+                    int endTime = WorldSavingSystem.MasochistModeReal ? 250 : 330;
+                    if (++NPC.ai[1] > endTime || !WorldSavingSystem.EternityMode) //wait
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;

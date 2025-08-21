@@ -1,9 +1,12 @@
 ﻿using FargowiltasSouls.Content.Projectiles.Masomode;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -47,12 +50,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
             }
 
-            Projectile.hide = false;
+            Projectile.Opacity = 1f;
 
             if (--Projectile.ai[0] < 0 && Projectile.ai[0] > -40 * Projectile.MaxUpdates)
             {
                 Projectile.velocity = Vector2.Zero;
-                Projectile.hide = true;
+                Projectile.Opacity = 0f;
+                //Projectile.hide = true;
 
                 if (Main.rand.NextBool())
                 {
@@ -61,7 +65,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                     Main.dust[d].velocity *= 3f;
                 }
             }
-            else if (Projectile.ai[0] == -40 * Projectile.MaxUpdates)
+            else if (Projectile.ai[0] < -40 * Projectile.MaxUpdates && Projectile.velocity == Vector2.Zero)
             {
                 SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                 int p = Player.FindClosest(Projectile.Center, 0, 0);
@@ -114,6 +118,19 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         public override Color? GetAlpha(Color lightColor)
         {
             return Color.White * Projectile.Opacity;
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            int p = Player.FindClosest(Projectile.Center, 0, 0);
+            if (--Projectile.ai[0] < 0 && Projectile.ai[0] > -40 * Projectile.MaxUpdates && p != -1)
+            {
+                Asset<Texture2D> line = TextureAssets.Extra[178];
+                float opacity = LumUtils.InverseLerp(0, -40 * Projectile.MaxUpdates, Projectile.ai[0]);
+                Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.Cyan * opacity, Projectile.DirectionTo(Main.player[p].Center).ToRotation(), new Vector2(0, line.Height() * 0.5f), new Vector2(1f, 2), SpriteEffects.None);
+            }
+
+            return base.PreDraw(ref lightColor);
         }
     }
 }
