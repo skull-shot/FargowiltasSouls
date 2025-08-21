@@ -1798,7 +1798,7 @@ WorldShaperSoul: {
 		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
+		    Tiles and walls will not be consumed at 500 stack or above
 		    Further increased placement speed and range
 		'Living in a world of cardboard'
 		''' */
