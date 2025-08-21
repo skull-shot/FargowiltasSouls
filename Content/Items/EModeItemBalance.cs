@@ -224,10 +224,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.7f;
                     return EModeChange.Buff;
 
-                case ItemID.MonkStaffT3: //sky dragon fury
+                /*case ItemID.MonkStaffT3: //sky dragon fury
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.4f;
-                    return EModeChange.Buff;
+                    return EModeChange.Buff;*/
 
                 case ItemID.BookStaff: // tome of inf wisdom
                     balanceTextKeys = ["Damage"];
@@ -509,7 +509,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
-                    
+
                 case ItemID.AvengerEmblem:
                     balanceTextKeys = ["AvengerEmblem"];
                     return EModeChange.Buff;
