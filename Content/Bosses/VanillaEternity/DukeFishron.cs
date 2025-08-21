@@ -761,12 +761,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
 
                     case 12: //p3 *teleports behind you*
-                        if (!Main.player[npc.target].ZoneBeach || npc.ai[3] > 5 && npc.ai[3] < 8)
+                        Player player = Main.player[npc.target];
+                        if (!player.ZoneBeach || npc.ai[3] > 5 && npc.ai[3] < 8)
                         {
-                            if (!Main.player[npc.target].ZoneBeach)
+                            if (!player.ZoneBeach)
                                 npc.position += npc.velocity;
                             npc.ai[2]++;
                             EnrageDust();
+                        }
+
+                        int minDist = 500;
+                        if (npc.ai[2] >= 16 && npc.Distance(player.Center) < minDist)
+                        {
+                            npc.Center = Vector2.Lerp(npc.Center, player.Center + player.DirectionTo(npc.Center) * minDist, 0.15f);
                         }
 
                         GeneralTimer = 0;
