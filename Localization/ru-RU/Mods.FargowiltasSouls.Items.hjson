@@ -110,7 +110,6 @@ CactusEnchant: {
 		Даёт иммунитет к урону от живых кактусов в режиме Вечность (работает в инвентаре и слотах для украшений)
 		«Самый охладительный!»
 		'''
-	VanityTooltip: Даёт иммунитет к урону от живых кактусов в режиме Вечность
 }
 
 ChlorophyteEnchant: {
@@ -3357,7 +3356,6 @@ Extra: {
 	EternityItem: Вечность
 	DisabledEffects: Некоторые эффекты выключены в меню переключения эффектов
 	PatreonItem: >> Предмет Патреона <<
-	CactusImmunity: Даёт иммунитет к урону от живых кактусов в режиме Вечность
 	// stealing items texts are currently not displayed
 	ItemStolen: У вас украли предмет!
 	Scaling: увеличивающ.
