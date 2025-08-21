@@ -14,12 +14,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
     public class FishronFishron : MutantFishron
     {
         bool firstTick = false;
-        public override string Texture => FargoSoulsUtil.VanillaTextureNPC(NPCID.DukeFishron);
-
+        public override string Texture => FargoSoulsUtil.VanillaTextureNPC(NPCID.Sharkron);
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.projFrames[Type] = Main.npcFrameCount[NPCID.Sharkron];
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.scale *= 0.75f;
+            Projectile.width = Projectile.height = 40;
             CooldownSlot = -1;
         }
 
@@ -38,6 +42,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             }
             if (Projectile.localAI[0] > 85) //dust during dash
             {
+                /*
                 int num22 = 7;
                 for (int index1 = 0; index1 < num22; ++index1)
                 {
@@ -50,8 +55,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
                     Main.dust[index2].velocity /= 4f;
                     Main.dust[index2].velocity -= Projectile.velocity;
                 }
+                */
             }
             return true;
+        }
+        public override void AI()
+        {
+            base.AI();
+
+            if (Projectile.frame == 6)
+                Projectile.frame = 1;
+            else
+                Projectile.frame = 0;
+
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
@@ -95,7 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
 
-            SpriteEffects spriteEffects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            SpriteEffects spriteEffects = Projectile.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
             if (Projectile.localAI[0] > 85)
             {
@@ -114,6 +130,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             float drawRotation = Projectile.rotation;
             if (Projectile.spriteDirection < 0)
                 drawRotation += (float)Math.PI;
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 6f * Projectile.scale;
+                Color glowColor = Color.White * 0.6f;
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(glowColor), drawRotation, origin2, Projectile.scale, spriteEffects, 0);
+            }
+            Main.spriteBatch.ResetToDefault();
+
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), drawRotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
         }
