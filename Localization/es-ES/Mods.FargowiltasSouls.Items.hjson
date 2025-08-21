@@ -3174,9 +3174,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hold to charge for extra damage
-		While fully charged, all hits release homing stars
+		Hits release homing stars
 		Deals extra damage based on how much the spear is extended on hit
+		Hold Right Click to charge for extra damage
+		While fully charged, hits release additional stars
 		'The radiant power of a foe's pure essence...'
 		''' */
 }

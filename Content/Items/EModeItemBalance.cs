@@ -511,6 +511,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["SporeSac"];
                     return EModeChange.Buff;
 
+                case ItemID.AvengerEmblem:
+                    balanceTextKeys = ["AvengerEmblem"];
+                    return EModeChange.Buff;
+
                 default:
                     return EModeChange.None;
             }
