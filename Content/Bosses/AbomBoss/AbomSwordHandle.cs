@@ -1,11 +1,12 @@
 ﻿
 
+using System;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -143,7 +144,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (WorldSavingSystem.EternityMode)
             {
                 target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 180);
             }
             target.AddBuff(BuffID.WitheredArmor, 600);
             target.AddBuff(BuffID.WitheredWeapon, 600);

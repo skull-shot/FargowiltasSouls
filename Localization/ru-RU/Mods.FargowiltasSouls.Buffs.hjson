@@ -808,3 +808,8 @@ GrabbedHarmlessBuff: {
 	DisplayName: В захвате
 	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
+
+DaybrokenBuff: {
+	// DisplayName: Daybroken
+	// Description: Incinerated by solar rays
+}

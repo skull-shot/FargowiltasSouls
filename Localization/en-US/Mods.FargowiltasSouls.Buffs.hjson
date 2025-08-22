@@ -808,3 +808,8 @@ GrabbedHarmlessBuff: {
 	DisplayName: Grabbed
 	Description: Mash movement keys to escape!
 }
+
+DaybrokenBuff: {
+	DisplayName: Daybroken
+	Description: Incinerated by solar rays
+}

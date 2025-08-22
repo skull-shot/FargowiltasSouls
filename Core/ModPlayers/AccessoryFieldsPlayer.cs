@@ -345,6 +345,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Fused;
         public int FusedStandStillTime;
         public bool Shadowflame;
+        public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
         public bool Hypothermia;

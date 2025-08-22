@@ -1,7 +1,9 @@
 using FargowiltasSouls.Content.Bosses.Champions.Will;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
@@ -25,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
             target.AddBuff(BuffID.OnFire, 300);
         }
     }

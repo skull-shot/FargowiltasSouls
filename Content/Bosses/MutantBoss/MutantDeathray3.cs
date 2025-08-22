@@ -137,7 +137,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 target.FargoSouls().MaxLifeReduction += 100;
                 target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
             }
             target.AddBuff(BuffID.OnFire, 300);
         }

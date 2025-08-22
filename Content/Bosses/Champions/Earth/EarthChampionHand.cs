@@ -563,7 +563,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             target.AddBuff(BuffID.OnFire, 300);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }
