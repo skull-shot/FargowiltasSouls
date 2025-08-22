@@ -1,6 +1,6 @@
 ﻿using Fargowiltas.Common.Configs;
 using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

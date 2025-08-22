@@ -43,11 +43,6 @@ NibbleBuff: {
 	// Description: Just one tiny bite (please)
 }
 
-MonkBuff: {
-	// DisplayName: Meditation
-	// Description: Your Monk Dash is ready
-}
-
 ObsidianLavaWetBuff: {
 	DisplayName: Molhado de Lava
 	Description: Você está vazando lava
@@ -203,11 +198,6 @@ BloodthirstyBuff: {
 	// Description: Hugely increased enemy spawn rate
 }
 
-BrainOfConfusionBuff: {
-	// DisplayName: Cerebral Mindbreak
-	// Description: 30% decreased damage dealt
-}
-
 ClippedWingsBuff: {
 	// DisplayName: Clipped Wings
 	// Description: You cannot fly or use rocket boots
@@ -266,11 +256,6 @@ HexedBuff: {
 	// Description: Your attacks heal enemies
 }
 
-HolyPriceBuff: {
-	// DisplayName: Holy Price
-	// Description: 30% decreased attack speed
-}
-
 HypothermiaBuff: {
 	// DisplayName: Hypothermia
 	// Description: Friendly projectiles are slowed down and you take increased damage from cold attacks
@@ -311,11 +296,6 @@ LihzahrdBlessingBuff: {
 LivingWastelandBuff: {
 	// DisplayName: Living Wasteland
 	// Description: Everyone around you turns to rot
-}
-
-LoosePocketsBuff: {
-	// DisplayName: Loose Pockets
-	// Description: An item might be taken from you
 }
 
 LovestruckBuff: {
@@ -577,16 +557,6 @@ HallowCooldownBuff: {
 	// Description: Your sword cannot reflect projectiles yet
 }
 
-HuntressBleedBuff: {
-	// DisplayName: Huntress Bleed
-	// Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
-}
-
-HuntressCDBuff: {
-	// DisplayName: Arrow Rain Cooldown
-	// Description: You cannot trigger another rain of arrows yet
-}
-
 LeadPoisonBuff: {
 	// DisplayName: Lead Poison
 	// Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
@@ -605,11 +575,6 @@ MoltenAmplifyBuff: {
 OriPoisonBuff: {
 	// DisplayName: Orichalcum Poison
 	// Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
-}
-
-SnowstormCDBuff: {
-	// DisplayName: Snowstorm Cooldown
-	// Description: You cannot chill yet
 }
 
 SolarFlareBuff: {
@@ -640,11 +605,6 @@ TimeStopCDBuff: {
 TitaniumCDBuff: {
 	// DisplayName: Titanium Shield Cooldown
 	// Description: You are charging up Titanium Shield
-}
-
-VortexCDBuff: {
-	// DisplayName: Vortex Cooldown
-	// Description: You cannot spawn another vortex yet
 }
 
 SuperchargedBuff: {
@@ -724,34 +684,14 @@ MagicalCurseBuff: {
 	// Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
-MoonFangBuff: {
-	// DisplayName: Moon Fang
-	// Description: Cannot regenerate life
-}
-
 WitheredForceBuff: {
 	// DisplayName: Withered Force Buff
 	// Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
-TimberBleedBuff: {
-	// DisplayName: Timber Bleed Buff
-	// Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
-}
-
 EarthPoison: {
 	// DisplayName: Earth Poison
 	// Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
-}
-
-WitheredBuff: {
-	// DisplayName: Withered Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
-}
-
-WitheredWizardBuff: {
-	// DisplayName: Withered Wizard Buff
-	// Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
@@ -807,4 +747,9 @@ SilverBuff: {
 GrabbedHarmlessBuff: {
 	// DisplayName: Grabbed
 	// Description: Mash movement keys to escape!
+}
+
+DaybrokenBuff: {
+	// DisplayName: Daybroken
+	// Description: Incinerated by solar rays
 }

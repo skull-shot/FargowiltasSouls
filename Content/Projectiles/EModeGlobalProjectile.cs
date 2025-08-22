@@ -1773,10 +1773,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.EyeLaser:
                     if (sourceNPC != null && (sourceNPC.type == NPCID.WallofFlesh || sourceNPC.type == NPCID.WallofFleshEye))
                     {
-                        if (!WorldSavingSystem.MasochistModeReal)
-                            target.AddBuff(BuffID.OnFire, 300);
-                        else
-                            target.AddBuff(BuffID.Burning, 30);
+                        target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60);
                     }
                     break;
 
@@ -1830,16 +1827,12 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.CultistBossFireBall:
-                    target.AddBuff(BuffID.OnFire, 300);
-                    //target.AddBuff(BuffID.Burning, 120);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.DD2Betsy)
                     {
-                        //target.AddBuff(BuffID.OnFire, 600);
-                        //target.AddBuff(BuffID.Ichor, 600);
                         target.AddBuff(BuffID.WitheredArmor, 300);
                         target.AddBuff(BuffID.WitheredWeapon, 300);
-                        //target.AddBuff(BuffID.Burning, 300);
                     }
                     break;
 
@@ -1976,11 +1969,11 @@ namespace FargowiltasSouls.Content.Projectiles
                             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 90);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
-                                target.AddBuff(BuffID.Burning, 120);
+                                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
                         }
 
                         if (sourceNPC.type == ModContent.NPCType<EarthChampion>())
-                            target.AddBuff(BuffID.Burning, 300);
+                            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
 
                         if (sourceNPC.type == ModContent.NPCType<TerraChampion>())
                         {
@@ -1996,7 +1989,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     //target.AddBuff(BuffID.Ichor, 600);
                     target.AddBuff(BuffID.WitheredArmor, 300);
                     target.AddBuff(BuffID.WitheredWeapon, 300);
-                    target.AddBuff(BuffID.Burning, 300);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                     break;
 
                 case ProjectileID.DD2DrakinShot:
@@ -2087,7 +2080,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.TacticalSkeleton)
                     {
                         target.AddBuff(BuffID.OnFire, 360);
-                        target.AddBuff(BuffID.Burning, 180);
                     }
                     goto case ProjectileID.BulletDeadeye;
                 case ProjectileID.JestersArrow:

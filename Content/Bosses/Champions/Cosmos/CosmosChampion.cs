@@ -1830,7 +1830,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 120);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
                 target.AddBuff(BuffID.Electrified, 300);
                 //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
                 target.AddBuff(BuffID.Frostburn, 300);

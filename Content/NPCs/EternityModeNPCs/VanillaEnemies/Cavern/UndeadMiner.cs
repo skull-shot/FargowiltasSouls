@@ -73,26 +73,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 600);
             target.AddBuff(BuffID.Blackout, 300);
             target.AddBuff(BuffID.NoBuilding, 300);
-
-            //if (target.whoAmI == Main.myPlayer && target.HasBuff(ModContent.BuffType<LoosePockets>()))
-            //{
-            //    bool stolen = false;
-            //    for (int i = 0; i < 59; i++)
-            //    {
-            //        if (target.inventory[i].pick != 0 || target.inventory[i].hammer != 0 || target.inventory[i].axe != 0)
-            //        {
-            //            if (EModeGlobalNPC.StealFromInventory(target, ref target.inventory[i]))
-            //                stolen = true;
-            //        }
-            //    }
-            //    if (stolen)
-            //    {
-            //        string text = Language.GetTextValue($"Mods.{mod.Name}.Message.ItemStolen");
-            //        Main.NewText(text, new Color(255, 50, 50));
-            //        CombatText.NewText(target.Hitbox, new Color(255, 50, 50), text, true);
-            //    }
-            //}
-            //target.AddBuff(ModContent.BuffType<LoosePockets>(), 240);
         }
     }
 }

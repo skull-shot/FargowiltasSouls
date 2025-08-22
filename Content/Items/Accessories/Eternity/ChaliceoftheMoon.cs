@@ -43,9 +43,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<IvyVenomEffect>(Item);
 
             //lihzahrd treasure
-            player.buffImmune[BuffID.Burning] = true;
+            player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
             player.AddEffect<DiveEffect>(Item);
