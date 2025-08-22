@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Buffs
+namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class GladiatorBuff : ModBuff
     {

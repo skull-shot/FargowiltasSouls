@@ -276,7 +276,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;

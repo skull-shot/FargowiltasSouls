@@ -43,11 +43,6 @@ NibbleBuff: {
 	Description: Всего лишь один укус (пожалуйста)
 }
 
-MonkBuff: {
-	DisplayName: Медитация
-	Description: Ваш рывок монаха готов
-}
-
 ObsidianLavaWetBuff: {
 	DisplayName: Мокрая лава
 	Description: С вас капает лава
@@ -203,11 +198,6 @@ BloodthirstyBuff: {
 	Description: Значительно увеличивает частоту появления врагов
 }
 
-BrainOfConfusionBuff: {
-	DisplayName: Церебральный разлом
-	Description: Наносимый урон снижен на 30%
-}
-
 ClippedWingsBuff: {
 	DisplayName: Оборванные крылья
 	Description: Вы не можете использовать крылья или ракетные ботинки
@@ -266,11 +256,6 @@ HexedBuff: {
 	Description: Ваши атаки лечат врагов
 }
 
-HolyPriceBuff: {
-	DisplayName: Святая расплата
-	Description: Скорость атаки снижена на 30%
-}
-
 HypothermiaBuff: {
 	DisplayName: Гипотермия
 	Description: Дружественные снаряды замедлены, и вы получаете увеличенный урон от атак холодом
@@ -311,11 +296,6 @@ LihzahrdBlessingBuff: {
 LivingWastelandBuff: {
 	DisplayName: Живая пустошь
 	Description: Все вокруг вас начинают гнить
-}
-
-LoosePocketsBuff: {
-	DisplayName: Широкие карманы
-	Description: У вас могут забрать предметы
 }
 
 LovestruckBuff: {
@@ -577,16 +557,6 @@ HallowCooldownBuff: {
 	Description: Ваш меч пока не может отражать выстрелы
 }
 
-HuntressBleedBuff: {
-	DisplayName: Кровотечение охотницы
-	Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
-}
-
-HuntressCDBuff: {
-	DisplayName: Перезарядка дождя стрел
-	Description: Вы пока не можете вызвать дождь из стрел
-}
-
 LeadPoisonBuff: {
 	DisplayName: Свинцовое отравление
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
@@ -605,11 +575,6 @@ MoltenAmplifyBuff: {
 OriPoisonBuff: {
 	DisplayName: Орихалковое отравление
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
-}
-
-SnowstormCDBuff: {
-	DisplayName: Перезарядка снежной бури
-	Description: Вы пока не можете охладить всё вокруг
 }
 
 SolarFlareBuff: {
@@ -640,11 +605,6 @@ TimeStopCDBuff: {
 TitaniumCDBuff: {
 	DisplayName: Перезарядка титанового щита
 	Description: Вы заряжаете титановый щит
-}
-
-VortexCDBuff: {
-	DisplayName: Перезарядка вихря
-	Description: Вы пока не можете создать вихрь
 }
 
 SuperchargedBuff: {
@@ -724,34 +684,14 @@ MagicalCurseBuff: {
 	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
-MoonFangBuff: {
-	DisplayName: Клык луны
-	Description: Не можете восстанавливать здоровье
-}
-
 WitheredForceBuff: {
 	DisplayName: Бафф Артефакта Увядающий
 	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
-TimberBleedBuff: {
-	DisplayName: Бафф Лесного Кровотечения
-	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
-}
-
 EarthPoison: {
 	DisplayName: Яд Земли
 	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
-}
-
-WitheredBuff: {
-	DisplayName: Увядающий
-	Description: Mods.FargowiltasSouls.Buffs.WithereddBuff.Description
-}
-
-WitheredWizardBuff: {
-	DisplayName: Увядающий
-	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {

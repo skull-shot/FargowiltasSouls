@@ -405,7 +405,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;
-        public bool CerebralMindbreak;
         public bool NanoInjection;
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;

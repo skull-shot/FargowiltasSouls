@@ -317,8 +317,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             CrystalEnchantActive = false;
             ChlorophyteEnchantActive = false;
 
-            if (!MonkEnchantActive)
-                Player.ClearBuff(ModContent.BuffType<MonkBuff>());
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
             PlatinumEffect = null;
@@ -488,7 +486,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Illuminated = false;
             //LihzahrdBlessing = false;
             Berserked = false;
-            CerebralMindbreak = false;
             NanoInjection = false;
             Stunned = false;
             HasJungleRose = false;
