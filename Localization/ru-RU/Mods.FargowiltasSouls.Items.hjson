@@ -961,7 +961,7 @@ BionomicCluster: {
 	DisplayName: Биономическое скопление
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/ConcentratedRainbowMatter], [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
 		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
@@ -982,7 +982,7 @@ BionomicClusterInactive: {
 	DisplayName: Биономическое скопление (Неактивно)
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/ConcentratedRainbowMatter], [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
 		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
@@ -1711,7 +1711,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
 		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете весь урон во время рывка
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
-		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении, [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50% и время [i:FargowiltasSouls/SandsofTime]	возрождения
+		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении, [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50% и время [i:FargowiltasSouls/SandsofTime] возрождения
 		Автоматически использует [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
 		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, makes enemies drop loot one more time
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
@@ -2576,7 +2576,12 @@ Eyeleash: {
 
 RefractorBlaster: {
 	DisplayName: Преломляющий бластер
-	Tooltip: «Модифицированная рука побеждённого врага...»
+	Tooltip:
+		'''
+		Стреляет двумя потоками лазеров, направленных под углом
+		Лазеры наносят меньше урона, если они только вылетели из бластера
+		«Модифицированная рука побеждённого врага...»
+		'''
 }
 
 RockSlide: {
@@ -3014,7 +3019,7 @@ PiranhaPlantVoodooDoll: {
 
 FigBranch: {
 	DisplayName: Ветвь инжира
-	Tooltip: Призывает компаньона-Голубка
+	Tooltip: Призывает компаньона-голубка
 }
 
 ParadoxWolfSoul: {
@@ -3090,9 +3095,9 @@ AnglerEnchant: {
 	DisplayName: Зачарование рыбака
 	Tooltip:
 		'''
-		Увеличивает мастерство рыбалки
-		Вы вылавливаете рыбу почти мгновенно
-		Эффекты [i:LavaproofTackleBag] лавонепроницаемого чемоданчика рыбака и [i:FishingBobberGlowingStar] светящегося поплавка
+		Увеличивает мастерство рыбалки, вы вылавливаете рыбу почти мгновенно
+		Ваша леска никогда не порвётся, а наживка тратится с меньшим шансом
+		Увеличивает мастерство рыбалки на 10 и позволяет рыбачить в лаве
 		«Но если есть в кармане рыба да башмак, значит, всё не так уж плохо на сегодняшний день»
 		'''
 }

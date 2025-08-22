@@ -20,7 +20,7 @@ BabySilhouetteBuff: {
 
 BiteSizeBaronBuff: {
 	DisplayName: Крохотный барон
-	Description: EX форма не идёт в комплекте
+	Description: EX-форма не идёт в комплекте
 }
 
 ChibiDeviBuff: {
@@ -59,7 +59,7 @@ TitaniumDRBuff: {
 }
 
 KingSlimeMinionBuff: {
-	DisplayName: Миниатюрный Король слизней
+	DisplayName: Маленький Король слизней
 	Description: Этот маленький Король слизней защищает вас
 }
 
@@ -84,7 +84,7 @@ ChibiiRemiiBuff: {
 }
 
 PrimeMinionBuff: {
-	DisplayName: Миниатюрный Прайм
+	DisplayName: Мини-Прайм
 	Description: Скелетрон Прайм сражается за вас
 }
 
@@ -100,7 +100,7 @@ CrimetroidBuff: {
 
 BerserkerInstallBuff: {
 	DisplayName: Установка свирепости
-	Description: «Достань их! Берсерк!»
+	Description: «Порви их! Берсерк!»
 }
 
 BerserkerInstallCDBuff: {
@@ -110,7 +110,7 @@ BerserkerInstallCDBuff: {
 
 BetsyDashBuff: {
 	DisplayName: Рывок
-	Description: Вы двигаетесь на высокой скорости!
+	Description: Вы движетесь на высокой скорости!
 }
 
 AbomFangBuff: {
@@ -289,7 +289,7 @@ IvyVenomBuff: {
 
 JammedBuff: {
 	DisplayName: Заклинивший
-	Description: Ваше оружие дальнего боя неисправно
+	Description: Ваше стрелковое оружие неисправно
 }
 
 LethargicBuff: {
@@ -453,7 +453,7 @@ UnluckyBuff: {
 }
 
 UnstableBuff: {
-	DisplayName: Нестабильный
+	DisplayName: Нестабильность
 	Description: Вы не вписываетесь в эту реальность
 }
 
@@ -464,7 +464,7 @@ BigBrainMinionBuff: {
 
 BrainMinionBuff: {
 	DisplayName: Мозг Ктулху
-	Description: Миниатюрный Мозг Ктулху сражается за вас
+	Description: Маленький Мозг Ктулху сражается за вас
 }
 
 CrystalSkullBuff: {
@@ -474,7 +474,7 @@ CrystalSkullBuff: {
 
 EaterMinionBuff: {
 	DisplayName: Пожиратель миров
-	Description: Миниатюрный Пожиратель миров сражается за вас
+	Description: Маленький Пожиратель миров сражается за вас
 }
 
 LunarCultistBuff: {
@@ -553,8 +553,8 @@ FirstStrikeBuff: {
 }
 
 FossilReviveCDBuff: {
-	DisplayName: Возрождение
-	Description: Вы не можете возродиться снова
+	DisplayName: Воскрешение
+	Description: Вы не можете воскреснуть вновь
 }
 
 FrozenBuff: {
@@ -649,7 +649,7 @@ VortexCDBuff: {
 
 SuperchargedBuff: {
 	DisplayName: Подзарядка
-	Description: Скорость передвижения на увеличена 20%, скорость атаки — на 10%, также ваши атаки электризуют
+	Description: Скорость передвижения на увеличена 20%, скорость атаки — на 10%, также ваши атаки бьют током
 }
 
 MoonBowBuff: {
