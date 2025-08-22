@@ -721,7 +721,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Ambrosia Buff
-	Description: +20% damage, +8% damage reduction, +5 life regeneration
+	Description: +20% damage, +8% damage reduction, increased life regeneration
 }
 
 MutantDesperationBuff: {

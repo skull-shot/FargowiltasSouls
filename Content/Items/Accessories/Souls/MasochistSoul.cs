@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.endurance += 0.05f;
             player.GetArmorPenetration(DamageClass.Generic) += 50;
             player.statLifeMax2 += player.statLifeMax / 5;
-            player.lifeRegen += 2;
+            player.lifeRegen += 1;
             fargoPlayer.WingTimeModifier += 2f;
             player.moveSpeed += 0.2f;
 
