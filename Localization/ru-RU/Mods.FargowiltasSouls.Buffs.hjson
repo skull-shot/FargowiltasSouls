@@ -649,7 +649,7 @@ GladiatorBuff: {
 
 GladiatorSpiritBuff: {
 	DisplayName: Сила гладиатора
-	Description: +20% к сопротивлению урону, иммунитет к отбрасыванию, улучшение урона за попадания
+	Description: +10% к сопротивлению урону, иммунитет к отбрасыванию, улучшение урона за попадания
 }
 
 ROBBuff: {
@@ -721,7 +721,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +20% к урону, +15% к сопротивлению урона, +2,5 ОЗ/сек, миньоны могут наносить крит. урон
+	Description: +20% к урону, +8% к сопротивлению урона, +2,5 ОЗ/сек
 }
 
 MutantDesperationBuff: {
@@ -750,6 +750,6 @@ GrabbedHarmlessBuff: {
 }
 
 DaybrokenBuff: {
-	// DisplayName: Daybroken
-	// Description: Incinerated by solar rays
+	DisplayName: Заря
+	Description: Испепеление солнечными лучами
 }

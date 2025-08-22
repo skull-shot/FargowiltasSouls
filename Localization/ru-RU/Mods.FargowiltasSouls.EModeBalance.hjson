@@ -58,6 +58,6 @@ ProximityMineLauncher: Урон снарядов обновляется пост
 PygmyStaff: Копья прошивают врагов только единожды
 MedusaHead: Наносит до х2,25 больше урона, чем меньше врагов в радиусе атаки
 AerialBane: Уменьшает доп. урон летающим врагам до 15%
-ChlorophyteBullet: Радиус самонаводки уменьшен втрое
+ChlorophyteBullet: Радиус самонаводки уменьшен вдвое
 SporeSac: Уменьшены кадры неуязвимости, наносимые снарядами
-// AvengerEmblem: Damage bonus increased by 3%
+AvengerEmblem: Бонус к урону увеличен на 3%
