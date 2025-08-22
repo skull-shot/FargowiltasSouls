@@ -38,16 +38,5 @@ namespace FargowiltasSouls.Content.Items.Consumables
 
             return true;
         }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-
-            .AddIngredient(ModContent.ItemType<RabiesShot>(), 30)
-
-            .AddTile(TileID.Bottles)
-
-            .Register();
-        }
     }
 }

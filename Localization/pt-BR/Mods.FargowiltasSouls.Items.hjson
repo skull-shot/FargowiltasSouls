@@ -2096,11 +2096,6 @@ OrdinaryCarrot: {
 		'''
 }
 
-RabiesShot: {
-	DisplayName: Injeção de Raiva
-	Tooltip: Cura a Mordida Feroz
-}
-
 RabiesVaccine: {
 	DisplayName: Vacina de Raiva
 	Tooltip: Oferece imunidade permanente a Mordida Feroz

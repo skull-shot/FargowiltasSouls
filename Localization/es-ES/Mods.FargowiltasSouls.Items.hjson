@@ -2044,10 +2044,6 @@ OrdinaryCarrot: {
 		''' */
 }
 
-RabiesShot: {
-	// DisplayName: Rabies Shot
-	// Tooltip: Cures Feral Bite
-}
 
 RabiesVaccine: {
 	// DisplayName: Rabies Vaccine

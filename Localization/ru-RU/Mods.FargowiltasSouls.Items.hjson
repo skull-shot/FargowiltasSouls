@@ -2058,11 +2058,6 @@ OrdinaryCarrot: {
 		'''
 }
 
-RabiesShot: {
-	DisplayName: Прививка от бешенства
-	Tooltip: Излечивает дебафф «Укус зверя»
-}
-
 RabiesVaccine: {
 	DisplayName: Вакцина от бешенства
 	Tooltip:
