@@ -826,10 +826,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Defenseless)
             {
-                Player.statDefense -= 30;
-                Player.endurance = 0;
-                Player.longInvince = false;
-                //Player.noKnockback = false;
+                Player.endurance /= 2;
             }
 
             if (Asocial)

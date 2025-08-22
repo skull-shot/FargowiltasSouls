@@ -209,8 +209,8 @@ CurseoftheMoonBuff: {
 }
 
 DefenselessBuff: {
-	DisplayName: Defenseless
-	Description: Your guard is completely broken
+	DisplayName: Exposed
+	Description: Halves your damage reduction
 }
 
 FlamesoftheUniverseBuff: {

@@ -17,13 +17,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //-30 defense, no damage reduction, cross necklace and knockback prevention effects disabled
             player.FargoSouls().Defenseless = true;
-            if (player.beetleDefense)
-            {
-                player.beetleOrbs = 0;
-                player.beetleCounter = 0;
-            }
         }
     }
 }
