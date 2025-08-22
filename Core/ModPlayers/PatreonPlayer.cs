@@ -60,6 +60,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool Dartslinger;
 
+        public bool AubreyFlower;
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
@@ -104,6 +106,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             TouhouBuff = false;
             dolvan = false;
             Dartslinger = false;
+            AubreyFlower = false;
         }
 
         public override void OnEnterWorld()
@@ -203,7 +206,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 case "Dartslinger":
                     Dartslinger = true;
                     break;
-                    
+                case "Sayaka":
+                    AubreyFlower = true;
+                    Player.lifeRegen += 4;
+                    break;
             }
 
             if (CompOrb && Player.itemAnimation > 0)
@@ -219,6 +225,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 yield return new Item(ItemID.Blowpipe, prefix: PrefixID.Unreal);
                 yield return new Item(ItemID.PoisonDart, 500);
                 yield return new Item(ItemID.GlommerPetItem);
+            }
+            if (!mediumCoreDeath && Player.name.Equals("Sayaka", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.Katana, prefix: PrefixID.Legendary);
             }
         }
         public static void AddDash_Eight3One(Player player)
@@ -238,6 +248,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             if (Eight3One && Main.rand.NextBool(20))
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
+            if (AubreyFlower && item.DamageType == DamageClass.Melee)
+                target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -249,6 +261,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             if (Eight3One && Main.rand.NextBool(20))
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
+            if (AubreyFlower && proj.DamageType == DamageClass.Melee)
+                target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
