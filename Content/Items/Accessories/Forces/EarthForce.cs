@@ -110,7 +110,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             //player.GetDamage(DamageClass.Generic) *= MathHelper.Lerp(1, 0.3f, lerper);
             
             if (player.HasEffect<MythrilEffect>())
-                farg.AttackSpeed *= MathHelper.Lerp(1, 1.75f, lerper);
+                farg.AttackSpeed *= MathHelper.Lerp(1, 2f, lerper);
 
             if (player.HasEffect<PalladiumHealing>())
                 player.lifeRegen += (int)MathHelper.Lerp(2, 8, lerper);

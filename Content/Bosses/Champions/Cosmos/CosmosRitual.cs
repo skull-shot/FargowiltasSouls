@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 {
                     float mult = 0.5f;
                     mult += 0.5f * LumUtils.InverseLerp(1200, 600, threshold);
-                    float dragSpeed = mult * Projectile.Distance(player.Center) / 45;
+                    float dragSpeed = mult * Projectile.Distance(player.Center) / 55;
                     player.position += Projectile.DirectionFrom(player.Center) * dragSpeed;
                     player.AddBuff(ModContent.BuffType<LowGroundEridanusBuff>(), 2);
                     player.wingTime = 60;
