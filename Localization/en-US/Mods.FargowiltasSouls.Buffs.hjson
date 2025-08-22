@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	DisplayName: Abominable Presence
-	Description: Defense, damage reduction, and life regen reduced; Moon Leech effect
+	Description: Life regen reduced; Moon Leech effect
 }
 
 BaronsBurdenBuff: {
