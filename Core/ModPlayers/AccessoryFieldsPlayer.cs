@@ -199,6 +199,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HallowRepelTime;
         public int TurtleCounter;
         public float TurtleShellHP = 1000;
+        public bool TurtleShellBroken;
         public bool ShellHide;
         public int ValhallaVerticalDashing;
         public int VortexCD;
@@ -344,6 +345,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Fused;
         public int FusedStandStillTime;
         public bool Shadowflame;
+        public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
         public bool Hypothermia;
@@ -403,7 +405,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;
-        public bool CerebralMindbreak;
         public bool NanoInjection;
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;

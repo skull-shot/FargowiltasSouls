@@ -60,7 +60,6 @@ namespace FargowiltasSouls.Core.Globals
         public bool EarthPoison;
         public int EarthDoTValue; //value to base Earth Poison DoT on.
         public bool SBleed;
-        public bool TimberBleed;
         //        public bool Shock;
         public bool Rotting;
         public bool LeadPoison;
@@ -131,8 +130,7 @@ namespace FargowiltasSouls.Core.Globals
             BrokenArmor = false;
             TimeFrozen = false;
             SBleed = false;
-            TimberBleed = false;
-            //            Shock = false;
+            // Shock = false;
             Rotting = false;
             LeadPoison = false;
             LeadPoisonSpread = false;
@@ -153,7 +151,7 @@ namespace FargowiltasSouls.Core.Globals
             Suffocation = false;
             Sublimation = false;
             DeathMarked = false;
-            //            //SnowChilled = false;
+            // SnowChilled = false;
             Chilled = false;
             Smite = false;
             MoltenAmplify = false;
@@ -496,7 +494,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (SBleed || TimberBleed)
+            if (SBleed)
             {
                 if (Main.rand.Next(4) < 3)
                 {
@@ -990,13 +988,6 @@ namespace FargowiltasSouls.Core.Globals
                 npc.lifeRegen -= (30 + 50 + 48 + 30) / 2;
                 if (damage < 20)
                     damage = 20;
-            }
-
-            if (TimberBleed)
-            {
-                npc.lifeRegen -= 400;
-                if (damage < 40)
-                    damage = 40;
             }
 
             if (Anticoagulation)

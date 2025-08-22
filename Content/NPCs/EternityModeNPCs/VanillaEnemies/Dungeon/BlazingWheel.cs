@@ -83,8 +83,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OnFire, 300);
-            if (OutsideDungeon)
-                target.AddBuff(BuffID.Burning, 300);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System;
+using System.Collections.Generic;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -69,9 +70,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
                             //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
                         }
-                        player.buffImmune[BuffID.Burning] = false;
                         player.AddBuff(BuffID.Bleeding, 70);
-                        player.AddBuff(BuffID.Burning, 70);
+                        player.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 70);
                     }
                     else
                     {

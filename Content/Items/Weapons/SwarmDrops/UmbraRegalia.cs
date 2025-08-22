@@ -42,6 +42,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.shootSpeed = 4f;
             Item.noUseGraphic = true;
             Item.noMelee = true;
+            Item.autoReuse = true;
         }
         public override bool AltFunctionUse(Player player) => true;
         public override bool CanUseItem(Player player)

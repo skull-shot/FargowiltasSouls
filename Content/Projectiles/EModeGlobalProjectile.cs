@@ -235,7 +235,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             projectile.ContinuouslyUpdateDamageStats = true;
                         }
@@ -362,16 +362,16 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
 
-                    if (projectile.GetSourceNPC() is NPC && projectile.GetSourceNPC().type == NPCID.Deerclops && sourceProj is not Projectile)
+                    if (projectile.GetSourceNPC() is NPC npc && npc.type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
                         projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
                         altBehaviour = true;
 
 
                         //is a final spike of the attack
-                        if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
+                        if (npc.ai[0] == 1 && npc.ai[1] == 52 || npc.ai[0] == 4 && npc.ai[1] == 70 && !npc.GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
-                            bool isSingleWaveAttack = projectile.GetSourceNPC().ai[0] == 1;
+                            bool isSingleWaveAttack = npc.ai[0] == 1;
 
                             bool shouldSplit = true;
                             if (isSingleWaveAttack) //because deerclops spawns like 4 of them stacked on each other?
@@ -395,7 +395,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                 //projectile.netUpdate = true;
 
                                 float ai1 = 1.3f;
-                                if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase2)
+                                if (npc.GetGlobalNPC<Deerclops>().EnteredPhase2)
                                     ai1 = 1.35f; //triggers recursive ai
                                                  //if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase3 || WorldSavingSystem.MasochistModeReal)
                                                  //    ai1 = 1.4f;
@@ -413,7 +413,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else
                                     {
                                         Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(-projectile.velocity.X, projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
-                                        if (projectile.Center.Y < projectile.GetSourceNPC().Center.Y)
+                                        if (projectile.Center.Y < npc.Center.Y)
                                         {
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, -projectile.velocity, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(projectile.velocity.X, -projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
@@ -654,7 +654,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                             float projCenterX = projectile.Center.X;
                             float projCenterY = projectile.Center.Y;
-                            float homingRadius = 10000f; // square of 100f, original 300f. Change this to tweak initial homing range
+                            float homingRadius = 22500f; // square of 150f, original 300f. Change this to tweak initial homing range
                             bool homingCheck = false;
                             int target = 0;
                             if (projectile.ai[1] == 0f)
@@ -1449,7 +1449,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                         }
                         break;
-                        
+
                     case ProjectileID.MedusaHeadRay:
                         if (player.Alive() && SourceItemType == ItemID.MedusaHead && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && medusaList?.Count > 0)
                         {
@@ -1508,6 +1508,13 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
+                    case ProjectileID.UFOLaser: // Xeno Staff
+                        if (SourceItemType == ItemID.XenoStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.7f;
+                        }
+                        break;
+
                     default:
                         break;
                 }
@@ -1515,7 +1522,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 switch (SourceItemType)
                 {
                     case ItemID.SniperRifle:
-                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        if (player.Alive() && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.FargoSouls().ItemSource)
                         {
                             float maxBonus = 1f;
                             float bonus = maxBonus * player.Distance(target.Center) / 1800f;
@@ -1766,10 +1773,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.EyeLaser:
                     if (sourceNPC != null && (sourceNPC.type == NPCID.WallofFlesh || sourceNPC.type == NPCID.WallofFleshEye))
                     {
-                        if (!WorldSavingSystem.MasochistModeReal)
-                            target.AddBuff(BuffID.OnFire, 300);
-                        else
-                            target.AddBuff(BuffID.Burning, 30);
+                        target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60);
                     }
                     break;
 
@@ -1823,16 +1827,12 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.CultistBossFireBall:
-                    target.AddBuff(BuffID.OnFire, 300);
-                    //target.AddBuff(BuffID.Burning, 120);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.DD2Betsy)
                     {
-                        //target.AddBuff(BuffID.OnFire, 600);
-                        //target.AddBuff(BuffID.Ichor, 600);
                         target.AddBuff(BuffID.WitheredArmor, 300);
                         target.AddBuff(BuffID.WitheredWeapon, 300);
-                        //target.AddBuff(BuffID.Burning, 300);
                     }
                     break;
 
@@ -1969,11 +1969,11 @@ namespace FargowiltasSouls.Content.Projectiles
                             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 90);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
-                                target.AddBuff(BuffID.Burning, 120);
+                                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
                         }
 
                         if (sourceNPC.type == ModContent.NPCType<EarthChampion>())
-                            target.AddBuff(BuffID.Burning, 300);
+                            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
 
                         if (sourceNPC.type == ModContent.NPCType<TerraChampion>())
                         {
@@ -1989,7 +1989,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     //target.AddBuff(BuffID.Ichor, 600);
                     target.AddBuff(BuffID.WitheredArmor, 300);
                     target.AddBuff(BuffID.WitheredWeapon, 300);
-                    target.AddBuff(BuffID.Burning, 300);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                     break;
 
                 case ProjectileID.DD2DrakinShot:
@@ -2080,7 +2080,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.TacticalSkeleton)
                     {
                         target.AddBuff(BuffID.OnFire, 360);
-                        target.AddBuff(BuffID.Burning, 180);
                     }
                     goto case ProjectileID.BulletDeadeye;
                 case ProjectileID.JestersArrow:

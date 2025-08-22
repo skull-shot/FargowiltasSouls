@@ -317,8 +317,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             CrystalEnchantActive = false;
             ChlorophyteEnchantActive = false;
 
-            if (!MonkEnchantActive)
-                Player.ClearBuff(ModContent.BuffType<MonkBuff>());
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
             PlatinumEffect = null;
@@ -441,6 +439,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Unstable = false;
             Fused = false;
             Shadowflame = false;
+            Daybroken = false;
             Oiled = false;
             Slimed = false;
             noDodge = false;
@@ -486,7 +485,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Illuminated = false;
             //LihzahrdBlessing = false;
             Berserked = false;
-            CerebralMindbreak = false;
             NanoInjection = false;
             Stunned = false;
             HasJungleRose = false;
@@ -1151,6 +1149,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Shadowflame)
                     damageSource = DeathByLocalization("Shadowflame");
+
+                if (Daybroken)
+                    damageSource = PlayerDeathReason.ByOther(8);
 
                 if (NanoInjection)
                     damageSource = DeathByLocalization("NanoInjection");

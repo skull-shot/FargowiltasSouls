@@ -10,9 +10,6 @@ namespace FargowiltasSouls.Content.Buffs
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
         }
-
-        public override string Texture => "FargowiltasSouls/Content/Buffs/PlaceholderDebuff";
-
         public override void Update(NPC npc, ref int buffIndex)
         {
             npc.FargoSouls().Sublimation = true;
