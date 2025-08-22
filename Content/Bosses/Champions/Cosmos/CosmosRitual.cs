@@ -1,8 +1,13 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -28,6 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             base.SetDefaults();
             CooldownSlot = 1;
+            Projectile.hide = true;
         }
         protected override void Movement(NPC npc)
         {
@@ -53,18 +59,109 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     threshold = targetSize;
             }
         }
+        float speed = 17;
+        public override void AI()
+        {
+            NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], npcType);
+            if (npc != null)
+            {
+                Projectile.alpha -= increment;
+                if (Projectile.alpha < 0)
+                    Projectile.alpha = 0;
 
+                Movement(npc);
+
+                targetPlayer = npc.target;
+
+                Player player = Main.LocalPlayer;
+                if (player.active && !player.dead && !player.ghost && Projectile.Center != player.Center && Projectile.Distance(player.Center) < 3000)
+                {
+                    float mult = 0.5f;
+                    mult += 0.5f * LumUtils.InverseLerp(1200, 600, threshold);
+                    float dragSpeed = mult * Projectile.Distance(player.Center) / 45;
+                    player.position += Projectile.DirectionFrom(player.Center) * dragSpeed;
+                    player.AddBuff(ModContent.BuffType<LowGroundEridanusBuff>(), 2);
+                    player.wingTime = 60;
+                }
+            }
+            else
+            {
+                Projectile.velocity = Vector2.Zero;
+                Projectile.alpha += increment;
+                if (Projectile.alpha > 255)
+                {
+                    Projectile.Kill();
+                    return;
+                }
+            }
+
+            Projectile.timeLeft = 2;
+            Projectile.scale = (1f - Projectile.alpha / 255f) * 2f;
+            Projectile.ai[0] += rotationPerTick;
+            if (Projectile.ai[0] > MathHelper.Pi)
+            {
+                Projectile.ai[0] -= 2f * MathHelper.Pi;
+                Projectile.netUpdate = true;
+            }
+            else if (Projectile.ai[0] < -MathHelper.Pi)
+            {
+                Projectile.ai[0] += 2f * MathHelper.Pi;
+                Projectile.netUpdate = true;
+            }
+
+            Projectile.localAI[0] = threshold;
+        }
+        public override void PostAI()
+        {
+            base.PostAI();
+            Projectile.hide = true;
+        }
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindNPCs.Add(index);
+        }
+        public override bool CanHitPlayer(Player target) => false;
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             base.OnHitPlayer(target, info);
+            target.AddBuff(BuffID.Electrified, 360);
+        }
 
-            if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(BuffID.OnFire, 300);
-                target.AddBuff(BuffID.Electrified, 300);
-                //target.AddBuff(ModContent.BuffType<HexedBuff>(), 300);
-                target.AddBuff(BuffID.Frostburn, 300);
-            }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Vector2 auraPos = Projectile.Center + new Vector2(0f, Projectile.gfxOffY);
+            float mult = 0.25f;
+            mult += 1f * LumUtils.InverseLerp(1200, 600, threshold);
+            float radius = threshold * mult * 0.3f;
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargoAssets.WavyNoise;
+            if (!blackTile.IsLoaded) // || !diagonalNoise.IsLoaded)
+                return false;
+            var maxOpacity = Projectile.Opacity;
+
+            Vector4 shaderColor = Color.Cyan.ToVector4();
+            shaderColor.W = 1;
+            ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.BlackHoleShader");
+            borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly / 2);
+            borderShader.TrySetParameter("radius", radius);
+            borderShader.TrySetParameter("midColor", shaderColor);
+            borderShader.TrySetParameter("anchorPoint", auraPos);
+            borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+            borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+            borderShader.TrySetParameter("maxOpacity", maxOpacity);
+            borderShader.TrySetParameter("mults", new Vector2(0.125f, 14));
+
+            Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+            return false;
         }
     }
 }
