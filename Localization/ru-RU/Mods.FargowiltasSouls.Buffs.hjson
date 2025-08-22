@@ -517,7 +517,7 @@ BabyLifelightBuff: {
 	Description: Узри же ангельский свет
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	DisplayName: Разбитый панцирь
 	Description: Скорость передвижения и атаки резко увеличены
 }
