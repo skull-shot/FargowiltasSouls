@@ -29,8 +29,6 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             player.velocity = player.oldVelocity;
             player.position = player.oldPosition;
 
-            player.FargoSouls().MutantNibble = true; //no heal
-
             FargowiltasSouls.ManageMusicTimestop(player.buffTime[buffIndex] < 5);
 
             if (!Main.dedServ && player.whoAmI == Main.myPlayer)

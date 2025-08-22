@@ -58,12 +58,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-        }
-
         public override Color? GetAlpha(Color lightColor)
         {
             if (Projectile.alpha < 200)

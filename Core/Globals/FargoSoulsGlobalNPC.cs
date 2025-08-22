@@ -80,7 +80,6 @@ namespace FargowiltasSouls.Core.Globals
         public int lightningRodTimer;
         public bool Sadism;
         public bool OceanicMaul;
-        public bool MutantNibble;
         public int LifePrevious = -1;
         public bool GodEater;
         public bool Suffocation;
@@ -146,7 +145,6 @@ namespace FargowiltasSouls.Core.Globals
             CurseoftheMoon = false;
             Sadism = false;
             OceanicMaul = false;
-            MutantNibble = false;
             GodEater = false;
             Suffocation = false;
             Sublimation = false;
@@ -939,26 +937,6 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (damage < 70)
                     damage = 70;
-            }
-
-            if (MutantNibble)
-            {
-                if (npc.lifeRegen > 0)
-                    npc.lifeRegen = 0;
-                if (npc.lifeRegenCount > 0)
-                    npc.lifeRegenCount = 0;
-
-                if (npc.life > 0 && LifePrevious > 0) //trying to prevent some wack despawn stuff
-                {
-                    if (npc.life > LifePrevious)
-                        npc.life = LifePrevious;
-                    else
-                        LifePrevious = npc.life;
-                }
-            }
-            else
-            {
-                LifePrevious = npc.life;
             }
 
             if (GodEater)

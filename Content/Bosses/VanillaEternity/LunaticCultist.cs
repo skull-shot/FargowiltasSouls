@@ -1092,7 +1092,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 
@@ -1120,7 +1119,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 }

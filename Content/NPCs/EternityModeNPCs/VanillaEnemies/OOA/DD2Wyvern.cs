@@ -19,8 +19,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
             target.AddBuff(BuffID.Rabies, 3600);
         }
     }

@@ -662,12 +662,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             }
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
-        }
-
         static bool spawnPhase2 => Main.expertMode;
 
         public override void HitEffect(NPC.HitInfo hit)

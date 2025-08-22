@@ -280,8 +280,6 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
-
             if (Projectile.localAI[1] <= 0)
             {
                 Projectile.localAI[1] = 60;

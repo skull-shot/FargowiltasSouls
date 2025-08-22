@@ -481,9 +481,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.lifeRegen -= badLifeRegen;
             }
 
-            if (NanoInjection)
-                DamageOverTime(10);
-
             if (Shadowflame)
                 DamageOverTime(10);
 
@@ -496,9 +493,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 Player.lifeRegenCount -= 70;
             }
-
-            if (MutantNibble)
-                DamageOverTime(0, true);
 
             if (Infested)
                 DamageOverTime(InfestedExtraDot());
@@ -816,12 +810,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 Player.statDefense *= 0;
                 Player.endurance = 0;
-            }
-
-            if (MutantNibble) //disables lifesteal, mostly
-            {
-                if (Player.statLife > 0 && StatLifePrevious > 0 && Player.statLife > StatLifePrevious)
-                    Player.statLife = StatLifePrevious;
             }
 
             if (Defenseless)

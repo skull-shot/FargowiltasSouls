@@ -267,7 +267,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<GodEater>()] = true;
-            player.buffImmune[ModContent.BuffType<GuiltyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
@@ -275,13 +274,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MidasBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;

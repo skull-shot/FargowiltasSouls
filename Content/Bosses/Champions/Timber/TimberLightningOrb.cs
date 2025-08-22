@@ -142,12 +142,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             }
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-        }
-
         public override Color? GetAlpha(Color lightColor)
         {
             return new Color(255, 255, 255, 0) * (1f - Projectile.alpha / 255f);

@@ -1250,30 +1250,6 @@ namespace FargowiltasSouls.Core.Globals
             }
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type]) //npc.catchItem != 0 && npc.lifeMax == 5)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            Player player = Main.player[projectile.owner];
-
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type] /*npc.catchItem != 0 && npc.lifeMax == 5*/ && projectile.friendly && !projectile.hostile && projectile.type != ProjectileID.FallingStar)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (WorldSavingSystem.EternityMode)

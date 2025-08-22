@@ -423,7 +423,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 480);
-            target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 360);
         }
 
         public override bool CheckDead(NPC npc)
@@ -1135,12 +1134,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (NoContactDamageTimer > 0)
                 drawColor *= 0.5f;
             return base.GetAlpha(npc, drawColor);
-        }
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
-        {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 360);
         }
 
         public override bool CheckDead(NPC npc)

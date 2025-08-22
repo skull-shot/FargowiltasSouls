@@ -149,7 +149,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (IsEX || Main.getGoodWorld) //fishron EX
             {
-                npc.FargoSouls().MutantNibble = false;
                 npc.FargoSouls().LifePrevious = int.MaxValue; //cant stop the healing
                 while (npc.buffType[0] != 0)
                     npc.DelBuff(0);
@@ -826,7 +825,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             //target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
             target.AddBuff(BuffID.Rabies, 3600);
             target.FargoSouls().MaxLifeReduction += 30;
             target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
@@ -985,7 +983,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             //target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
             target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
             target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
         }

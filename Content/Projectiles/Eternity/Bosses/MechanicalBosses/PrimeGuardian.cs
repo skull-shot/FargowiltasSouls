@@ -54,7 +54,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 480);
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 480);
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 480);
         }

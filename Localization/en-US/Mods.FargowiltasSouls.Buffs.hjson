@@ -246,11 +246,6 @@ GodEaterBuff: {
 	Description: Your soul is cursed by divine wrath
 }
 
-GuiltyBuff: {
-	DisplayName: Guilty
-	Description: Weapons dulled by the guilt of slaying innocent critters
-}
-
 HexedBuff: {
 	DisplayName: Hexed
 	Description: Your attacks heal enemies
@@ -293,11 +288,6 @@ LihzahrdBlessingBuff: {
 	Message: The altar's light shines on you!
 }
 
-LivingWastelandBuff: {
-	DisplayName: Living Wasteland
-	Description: Everyone around you turns to rot
-}
-
 LovestruckBuff: {
 	DisplayName: Lovestruck
 	Description: You are in love!
@@ -321,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	DisplayName: Midas
 	Description: Drop money on hit
-}
-
-MutantNibbleBuff: {
-	DisplayName: Mutant Nibble
-	Description: You cannot heal at all
-}
-
-NanoInjectionBuff: {
-	DisplayName: Nano Injection
-	Description: Life regeneration and stats reduced
 }
 
 NeurotoxinBuff: {
