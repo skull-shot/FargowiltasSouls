@@ -35,12 +35,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (SolarTimer > 0)
             {
                 SolarTimer--;
-                Player.endurance += 0.5f;
+                Player.endurance += 0.05f;
             }
             if (VortexTimer > 0)
             {
                 VortexTimer--;
-                Player.GetCritChance(DamageClass.Generic) += 25;
+                Player.GetCritChance(DamageClass.Generic) += 20;
             }
                 
             if (NebulaTimer > 0)
@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (StardustTimer > 0)
             {
                 StardustTimer--;
-                Player.GetDamage(DamageClass.Generic) += 0.25f;
+                Player.GetDamage(DamageClass.Generic) += 0.20f;
             }
         }
         public override void UpdateLifeRegen()
