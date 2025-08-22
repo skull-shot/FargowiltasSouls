@@ -57,7 +57,7 @@ RainInnerTubeEffect: Воздушная камера
 RainFeatherfallEffect: Мягкое падение
 SnowEffect: Замораживающие снежки
 JungleJump: Споровый прыжок
-JungleDashEffect: Рывок
+JungleDashEffect: Рывок джунглей
 MoltenEffect: Инферно
 ShroomiteHealEffect: Улучшенные грибы
 ShroomiteMushroomPriority: Грибы в приоритете
@@ -68,8 +68,8 @@ ApprenticeSupport: Оружие поддержки
 NecroEffect: Могилы
 ShadowBalls: Теневые сферы
 AncientShadowDarkness: Тьма
-MonkDashEffect: Рывок
-ShinobiDashEffect: Улучшенный рывок
+MonkDashEffect: Рывок монаха
+ShinobiDashEffect: Улучшенный рывок синоби
 ShinobiThroughWalls: Рывок через стены
 SpookyEffect: Коса смертельной охоты
 NinjaEffect: Скорость и криты
