@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.timeLeft = 360;
             Projectile.penetrate = -1;
             Projectile.scale = 0.1f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }

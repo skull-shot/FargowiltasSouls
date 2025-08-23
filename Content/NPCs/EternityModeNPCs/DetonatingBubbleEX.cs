@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 

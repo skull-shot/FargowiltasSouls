@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
         {
             if (SpawnNoContactTimer > 0)
                 return false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 

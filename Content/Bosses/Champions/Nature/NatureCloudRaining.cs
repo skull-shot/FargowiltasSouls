@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             Projectile.tileCollide = false;
 
             Projectile.scale = 1.5f * 1.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

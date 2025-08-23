@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             Projectile.timeLeft = 360;
             Projectile.penetrate = -1;
             Projectile.scale = 0.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

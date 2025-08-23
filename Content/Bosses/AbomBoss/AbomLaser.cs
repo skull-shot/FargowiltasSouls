@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.scale = 0.3f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (WorldSavingSystem.MasochistModeReal)
                 Projectile.FargoSouls().GrazeCheck = Projectile => false;

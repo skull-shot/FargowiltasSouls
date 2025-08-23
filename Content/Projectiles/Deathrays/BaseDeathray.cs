@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             Projectile.tileCollide = false;
             Projectile.timeLeft = 3600;
 
-            CooldownSlot = 1; //not in warning line, test?
+            CooldownSlot = ImmunityCooldownID.Bosses; //not in warning line, test?
 
             Projectile.FargoSouls().GrazeCheck =
                 Projectile =>

@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
             Projectile.alpha = 255;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             if (WorldSavingSystem.MasochistModeReal) //Fargowiltas.Instance.MasomodeEXLoaded)
                 Projectile.extraUpdates = 1;
         }
@@ -145,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
 
         public override bool? CanDamage()
         {
-            return false;
+            return true;
         }
 
         public override Color? GetAlpha(Color lightColor)

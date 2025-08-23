@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.CloneDefaults(ProjectileID.LostSoulHostile);
             AIType = ProjectileID.LostSoulHostile;
             Projectile.timeLeft = 300;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

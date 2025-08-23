@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.timeLeft = 600;
             Projectile.scale = 2;
             Projectile.tileCollide = false;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override Color? GetAlpha(Color lightColor)

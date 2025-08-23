@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
             Projectile.tileCollide = false;
 
             Projectile.extraUpdates = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             //Projectile.FargoSouls().GrazeCheck = projectile => CanDamage() && Projectile.Distance(Main.LocalPlayer.Center) < Math.Min(Projectile.width, Projectile.height) / 2 + Player.defaultHeight + Main.LocalPlayer.FargoSouls().GrazeRadius && Collision.CanHit(Projectile.Center, 0, 0, Main.LocalPlayer.Center, 0, 0);
             Projectile.FargoSouls().DeletionImmuneRank = 2;

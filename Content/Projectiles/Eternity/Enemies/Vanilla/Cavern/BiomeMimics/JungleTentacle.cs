@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern.B
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.hostile = true;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 240 * (Projectile.extraUpdates + 1);

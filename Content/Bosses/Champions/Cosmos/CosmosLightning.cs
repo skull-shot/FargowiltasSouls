@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.tileCollide = true;
             Projectile.timeLeft = 120;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

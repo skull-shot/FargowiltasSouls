@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.hostile = true;
             Projectile.alpha = 255;
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 120 : 150;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

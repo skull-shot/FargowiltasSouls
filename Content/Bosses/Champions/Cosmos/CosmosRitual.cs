@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.hide = true;
         }
         protected override void Movement(NPC npc)
