@@ -6,10 +6,15 @@ using FargowiltasSouls.Content.Patreon.Potato;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Graphics;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -60,6 +65,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool Dartslinger;
 
+        public bool Exertype;
+
         public bool AubreyFlower;
 
         public override void SaveData(TagCompound tag)
@@ -106,12 +113,17 @@ namespace FargowiltasSouls.Core.ModPlayers
             TouhouBuff = false;
             dolvan = false;
             Dartslinger = false;
+            Exertype = false;
+
+            lastNeedsAfterimage = needsAfterimage;
+            needsAfterimage = false;
+
             AubreyFlower = false;
         }
 
         public override void OnEnterWorld()
         {
-            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan)
+            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan || Exertype)
             {
                 string text = Language.GetTextValue($"Mods.{Mod.Name}.Message.PatreonNameEffect");
                 Main.NewText($"{text}, {Player.name}!");
@@ -206,6 +218,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 case "Dartslinger":
                     Dartslinger = true;
                     break;
+                case "Exertype":
+                    Exertype = true;
+                    break;
                 case "Sayaka":
                     AubreyFlower = true;
                     Player.lifeRegen += 4;
@@ -215,6 +230,51 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CompOrb && Player.itemAnimation > 0)
             {
                 Player.manaRegenDelay = Player.maxRegenDelay;
+            }
+
+            if (Exertype)
+            {
+                needsAfterimage = true;
+                numAfterImages = 5;
+                afterimageColor1 = Color.HotPink;
+                afterimageColor2 = Color.Orange;
+
+                Player.RemoveAllGrapplingHooks();
+
+                if (Player.controlHook && Player.releaseHook)
+                {
+                    Vector2 pointPoisition = default(Vector2);
+                    pointPoisition.X = (float)Main.mouseX + Main.screenPosition.X;
+                    if (Player.gravDir == 1f)
+                    {
+                        pointPoisition.Y = (float)Main.mouseY + Main.screenPosition.Y - (float)Player.height;
+                    }
+                    else
+                    {
+                        pointPoisition.Y = Main.screenPosition.Y + (float)Main.screenHeight - (float)Main.mouseY;
+                    }
+                    pointPoisition.X -= Player.width / 2;
+                    Player.LimitPointToPlayerReachableArea(ref pointPoisition);
+                    if (!(pointPoisition.X > 50f) || !(pointPoisition.X < (float)(Main.maxTilesX * 16 - 50)) || !(pointPoisition.Y > 50f) || !(pointPoisition.Y < (float)(Main.maxTilesY * 16 - 50)))
+                    {
+                        return;
+                    }
+                    int num = (int)(pointPoisition.X / 16f);
+                    int num2 = (int)(pointPoisition.Y / 16f);
+                    if ((Main.tile[num, num2].WallType == 87 && !NPC.downedPlantBoss && (Main.remixWorld || (double)num2 > Main.worldSurface)) || Collision.SolidCollision(pointPoisition, Player.width, Player.height))
+                    {
+                        return;
+                    }
+                    Player.Teleport(pointPoisition, 1);
+                    NetMessage.SendData(65, -1, -1, null, 0, Player.whoAmI, pointPoisition.X, pointPoisition.Y, 1);
+
+                    //draw dust from start to end pos
+
+
+
+                    int index = Main.rand.Next(FargowiltasSouls.DebuffIDs.Count);
+                    Player.AddBuff(FargowiltasSouls.DebuffIDs[index], 600);
+                }
             }
         }
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
@@ -349,6 +409,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                 int index = Main.rand.Next(FargowiltasSouls.DebuffIDs.Count);
                 Player.AddBuff(FargowiltasSouls.DebuffIDs[index], 180);
             }
+
+            if (Exertype && Main.rand.NextBool(10))
+            {
+                Player.AddBuff(ModContent.BuffType<UnstableBuff>(), 2);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    int index = Main.rand.Next(FargowiltasSouls.DebuffIDs.Count);
+                    Player.AddBuff(FargowiltasSouls.DebuffIDs[index], 600);
+                }
+            }
         }
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
@@ -426,5 +497,142 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             base.ModifyWeaponDamage(item, ref damage);
         }
+
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            Player drawPlayer = drawInfo.drawPlayer;
+
+            if (Exertype)
+            {
+                //for (int num9 = 0; num9 < 3; num9++)
+                //{
+                //    Main.PlayerRenderer.DrawPlayer(Main.Camera, drawPlayer, drawPlayer.shadowPos[num9], drawPlayer.shadowRotation[num9], drawPlayer.shadowOrigin[num9], 0.5f + 0.2f * (float)num9);
+                //}
+            }
+
+        }
+
+        
+
+        //AFTER IMAGE HELL
+        private static bool drawingAfterimage = false;
+        private static Color afterimageColor = default; //what is being drawn actively
+        private static Color afterimageColor1 = default; //saved color 1
+        private static Color afterimageColor2 = default; //saved color 2
+        private List<float> afterimageRotations;
+        private List<Vector2> afterimagePositions;
+        private List<Vector2> afterimageOrigins;
+        private const int MaxAfterimageLength = 20; //Total maximum length, no individual effect can go above it
+        private int numAfterImages;
+
+        public bool needsAfterimage = false;
+        private bool lastNeedsAfterimage = false; //needed bacause checked too early compared to when it's set
+
+        public override void Initialize()
+        {
+            afterimageRotations = new List<float>();
+            afterimagePositions = new List<Vector2>();
+            afterimageOrigins = new List<Vector2>();
+        }
+
+        public override void PreUpdateBuffs()
+        {
+            if (!Main.dedServ)
+            {
+                if (!lastNeedsAfterimage)
+                {
+                    afterimagePositions.Clear();
+                    afterimageRotations.Clear();
+                    afterimageOrigins.Clear();
+                    return;
+                }
+
+                Vector2 pos = Player.position;
+                pos.Y += Player.gfxOffY;
+                afterimagePositions.Add(pos);
+                afterimageRotations.Add(Player.fullRotation);
+                afterimageOrigins.Add(Player.fullRotationOrigin);
+
+                if (afterimagePositions.Count > MaxAfterimageLength || afterimagePositions.Count > numAfterImages)
+                {
+                    afterimagePositions.RemoveAt(0);
+                    afterimageRotations.RemoveAt(0);
+                    afterimageOrigins.RemoveAt(0);
+                }
+            }
+        }
+
+        private static void On_LegacyPlayerRenderer_DrawPlayerFull(On_LegacyPlayerRenderer.orig_DrawPlayerFull orig, LegacyPlayerRenderer self, Camera camera, Player drawPlayer)
+        {
+            SpriteBatch spriteBatch = camera.SpriteBatch;
+
+            try
+            {
+                //exertype trail
+                if (drawPlayer.TryGetModPlayer<PatreonPlayer>(out PatreonPlayer modPlayer) &&
+                    modPlayer.needsAfterimage)
+                {
+                    SamplerState samplerState = camera.Sampler;
+                    if (drawPlayer.mount.Active && drawPlayer.fullRotation != 0f)
+                    {
+                        samplerState = LegacyPlayerRenderer.MountedSamplerState;
+                    }
+
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, samplerState, DepthStencilState.None, camera.Rasterizer, null, camera.GameViewMatrix.TransformationMatrix);
+
+                    drawingAfterimage = true;
+                    var count = modPlayer.afterimagePositions.Count;
+                    //Only draw every second position
+                    for (var i = 0; i < count; i += 1)
+                    {
+                        //Assign a color to afterimageColor here
+                        if (afterimageColor2 == default || i % 2 == 0) //switch off colors if set
+                        {
+                            afterimageColor = afterimageColor1;
+                        }
+                        else
+                        {
+                            afterimageColor = afterimageColor2;
+                        }
+
+                        self.DrawPlayer(camera, drawPlayer, modPlayer.afterimagePositions[i], modPlayer.afterimageRotations[i], modPlayer.afterimageOrigins[i]);
+                    }
+                }
+            }
+            finally
+            {
+                if (drawingAfterimage)
+                {
+                    spriteBatch.End();
+                }
+                drawingAfterimage = false;
+            }
+
+            orig(self, camera, drawPlayer);
+        }
+
+        private static void On_PlayerDrawLayers_DrawPlayer_RenderAllLayers(On_PlayerDrawLayers.orig_DrawPlayer_RenderAllLayers orig, ref PlayerDrawSet drawinfo)
+        {
+            //Runs within LegacyPlayerRenderer.DrawPlayer
+            if (drawingAfterimage)
+            {
+                for (int i = 0; i < drawinfo.DrawDataCache.Count; i++)
+                {
+                    var data = drawinfo.DrawDataCache[i];
+                    data.color = afterimageColor;
+                    drawinfo.DrawDataCache[i] = data;
+                }
+            }
+
+            orig(ref drawinfo);
+        }
+
+        public override void Load()
+        {
+            On_LegacyPlayerRenderer.DrawPlayerFull += On_LegacyPlayerRenderer_DrawPlayerFull;
+            On_PlayerDrawLayers.DrawPlayer_RenderAllLayers += On_PlayerDrawLayers_DrawPlayer_RenderAllLayers;
+        }
+
+
     }
 }
