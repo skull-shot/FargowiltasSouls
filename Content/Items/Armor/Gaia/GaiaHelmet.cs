@@ -105,16 +105,14 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
                 Lighting.AddLight(player.Center, new Vector3(1, 1, 1));
                 if (Main.rand.NextBool(3)) //visual dust
                 {
-                    float scale = 2f;
                     int type = Main.rand.NextBool() ? 107 : 110;
-                    int dust = Dust.NewDust(player.position, player.width, player.height, type, player.velocity.X * 0.4f, player.velocity.Y * 0.4f, 87, default, scale);
+                    int dust = Dust.NewDust(player.position, player.width, player.height, type, player.velocity.X * 0.4f, player.velocity.Y * 0.4f, 87, default, 1);
                     Main.dust[dust].noGravity = true;
                     Main.dust[dust].velocity.Y -= 1f;
                     Main.dust[dust].velocity *= 1.8f;
                     if (Main.rand.NextBool(4))
                     {
                         Main.dust[dust].noGravity = false;
-                        Main.dust[dust].scale *= 0.5f;
                     }
                 }
             }

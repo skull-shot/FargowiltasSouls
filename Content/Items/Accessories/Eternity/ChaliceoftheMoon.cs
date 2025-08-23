@@ -99,7 +99,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
     }
     /*
-     public class CultistMinionEffect : AccessoryEffect
+    public class CultistMinionEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
         public override int ToggleItemType => ModContent.ItemType<ChaliceoftheMoon>();
