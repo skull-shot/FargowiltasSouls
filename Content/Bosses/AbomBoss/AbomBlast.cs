@@ -13,7 +13,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.ShadowFlame, 300);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
             //target.immune[projectile.owner] = Main.player[projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<BossWeapons.StyxGazer>()] > 0 ? 1 : 3;
         }
     }

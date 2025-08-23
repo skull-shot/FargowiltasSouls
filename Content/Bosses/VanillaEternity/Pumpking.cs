@@ -86,7 +86,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 900);
-            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 900);
         }
     }
 }

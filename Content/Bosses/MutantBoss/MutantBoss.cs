@@ -89,7 +89,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 BuffID.Suffocation,
                 ModContent.BuffType<LethargicBuff>(),
                 ModContent.BuffType<ClippedWingsBuff>(),
-                ModContent.BuffType<MutantNibbleBuff>(),
                 ModContent.BuffType<OceanicMaulBuff>(),
                 ModContent.BuffType<LightningRodBuff>(),
                 ModContent.BuffType<SadismBuff>(),

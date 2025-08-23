@@ -133,7 +133,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 }

@@ -38,7 +38,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinM
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
-            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
         }
     }
 }

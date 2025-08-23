@@ -64,7 +64,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.endurance += 0.05f;
 
             //pumpking's cape
-            player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
             player.AddEffect<PumpkingsCapeEffect>(Item);
             player.AddEffect<ParryEffect>(Item);
 
@@ -88,7 +87,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             //mutant antibodies
             player.buffImmune[BuffID.Wet] = true;
             player.buffImmune[BuffID.Rabies] = true;
-            player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             fargoPlayer.MutantAntibodies = true;
             if (player.mount.Active && player.mount.Type == MountID.CuteFishron)

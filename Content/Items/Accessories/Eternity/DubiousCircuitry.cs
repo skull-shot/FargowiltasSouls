@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.buffImmune[BuffID.Ichor] = true;
             player.buffImmune[BuffID.Electrified] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
