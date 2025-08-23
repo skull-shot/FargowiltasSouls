@@ -1250,30 +1250,6 @@ namespace FargowiltasSouls.Core.Globals
             }
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type]) //npc.catchItem != 0 && npc.lifeMax == 5)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            Player player = Main.player[projectile.owner];
-
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type] /*npc.catchItem != 0 && npc.lifeMax == 5*/ && projectile.friendly && !projectile.hostile && projectile.type != ProjectileID.FallingStar)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (WorldSavingSystem.EternityMode)
@@ -1306,42 +1282,6 @@ namespace FargowiltasSouls.Core.Globals
                 Main.EntitySpriteDraw(buffIcon, drawPos - Main.screenPosition + new Vector2(0f, npc.gfxOffY), buffIcon.Bounds, buffColor, 0, buffIcon.Bounds.Size() / 2, 1f, SpriteEffects.None, 0);
             }
         }*/
-
-        public static bool StealFromInventory(Player target, ref Item item)
-        {
-            if (target.FargoSouls().StealingCooldown <= 0 && !item.IsAir)
-            {
-                target.FargoSouls().StealingCooldown = 900; //trust me, keep these separate
-                target.AddBuff(ModContent.BuffType<ThiefCDBuff>(), 900);
-
-
-                //int i = Item.NewItem(target.GetSource_DropAsItem("Stolen"), (int)target.position.X, (int)target.position.Y, target.width, target.height, item.type, item.stack, false, -1, false, false);
-                //Vector2 position = Main.item[i].position;
-
-                //Main.item[i] = item.Clone();
-                //Main.item[i].whoAmI = i;
-                //Main.item[i].position = position;
-                //Main.item[i].stack = item.stack;
-
-                //Main.item[i].velocity.X = Main.rand.Next(-20, 21) * 0.2f;
-                //Main.item[i].velocity.Y = Main.rand.Next(-20, 1) * 0.2f;
-                //Main.item[i].noGrabDelay = 100;
-                //Main.item[i].newAndShiny = false;
-
-                //if (Main.netMode == NetmodeID.MultiplayerClient)
-                //    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i, 1f);
-
-                //item.TurnToAir();
-
-                target.DropItem(target.GetSource_DropAsItem("Stolen"), target.Center, ref item);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         public static void Horde(NPC npc, int size)
         {

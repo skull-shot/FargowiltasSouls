@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateIn
 
             target.AddBuff(ModContent.BuffType<SqueakyToyBuff>(), 120);
             target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
-            //target.AddBuff(ModContent.BuffType<LivingWasteland>(), 600);
 
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && npc.type == NPCID.Parrot && !target.Male)
             {

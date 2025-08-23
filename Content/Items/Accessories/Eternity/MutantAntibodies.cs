@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.buffImmune[BuffID.Wet] = true;
             player.buffImmune[BuffID.Rabies] = true;
-            player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             player.FargoSouls().MutantAntibodies = true;
 

@@ -23,7 +23,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SolarEcl
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Rabies, 1800);
-            target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
         }
     }
 }

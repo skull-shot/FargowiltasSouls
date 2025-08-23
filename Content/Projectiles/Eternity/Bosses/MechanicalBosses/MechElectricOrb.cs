@@ -158,7 +158,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
                     target.AddBuff(BuffID.Ichor, 300);
                     break;
                 default: // prime
-                    target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 360);
                     break;
             }
         }

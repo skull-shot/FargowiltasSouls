@@ -5,7 +5,7 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class EarthPoison : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Content/Buffs/Souls/LeadPoisonBuff";
+        public override string Texture => "FargowiltasSouls/Content/Buffs/Souls/OriPoisonBuff";
         public override void SetStaticDefaults()
         {
             Main.buffNoSave[Type] = true;

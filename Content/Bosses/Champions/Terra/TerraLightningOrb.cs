@@ -104,7 +104,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

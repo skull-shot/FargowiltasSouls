@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             return target.hurtCooldowns[1] == 0;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             //dust!
@@ -53,18 +53,28 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.velocity.Y * 0.2f, 100, default(Color), .5f);
             Main.dust[dustId3].noGravity = true;*/
 
-            if (Projectile.ai[0] > -1 && Projectile.ai[0] < Main.maxPlayers)
+            if (Variant == 0)
             {
-                const int aislotHomingCooldown = 1;
-                const int homingDelay = 20;
-                const float desiredFlySpeedInPixelsPerFrame = 5;
-                const float amountOfFramesToLerpBy = 20; // minimum of 1, please keep in full numbers even though it's a float!
-                if (++Projectile.ai[aislotHomingCooldown] > homingDelay)
+                if (Projectile.ai[0] > -1 && Projectile.ai[0] < Main.maxPlayers)
                 {
-                    int foundTarget = (int)Projectile.ai[0];
-                    Player p = Main.player[foundTarget];
-                    Vector2 desiredVelocity = Projectile.SafeDirectionTo(p.Center) * desiredFlySpeedInPixelsPerFrame;
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                    const int aislotHomingCooldown = 1;
+                    const int homingDelay = 20;
+                    const float desiredFlySpeedInPixelsPerFrame = 5;
+                    const float amountOfFramesToLerpBy = 20; // minimum of 1, please keep in full numbers even though it's a float!
+                    if (++Projectile.ai[aislotHomingCooldown] > homingDelay)
+                    {
+                        int foundTarget = (int)Projectile.ai[0];
+                        Player p = Main.player[foundTarget];
+                        Vector2 desiredVelocity = Projectile.SafeDirectionTo(p.Center) * desiredFlySpeedInPixelsPerFrame;
+                        Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                    }
+                }
+            }
+            else
+            {
+                if (Projectile.velocity.LengthSquared() < 24 * 24)
+                {
+                    Projectile.velocity *= 1.06f;
                 }
             }
 

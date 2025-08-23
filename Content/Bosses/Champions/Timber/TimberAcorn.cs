@@ -43,12 +43,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI * 1.25f;
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
-        }
-
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);

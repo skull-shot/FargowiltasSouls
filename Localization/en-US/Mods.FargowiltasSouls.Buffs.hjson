@@ -43,11 +43,6 @@ NibbleBuff: {
 	Description: Just one tiny bite (please)
 }
 
-MonkBuff: {
-	DisplayName: Meditation
-	Description: Your Monk Dash is ready
-}
-
 ObsidianLavaWetBuff: {
 	DisplayName: Lava Wet
 	Description: You are dripping lava
@@ -120,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	DisplayName: Abominable Presence
-	Description: Defense, damage reduction, and life regen reduced; Moon Leech effect
+	Description: Life regen reduced; Moon Leech effect
 }
 
 BaronsBurdenBuff: {
@@ -203,11 +198,6 @@ BloodthirstyBuff: {
 	Description: Hugely increased enemy spawn rate
 }
 
-BrainOfConfusionBuff: {
-	DisplayName: Cerebral Mindbreak
-	Description: 30% decreased damage dealt
-}
-
 ClippedWingsBuff: {
 	DisplayName: Clipped Wings
 	Description: You cannot fly or use rocket boots
@@ -219,8 +209,8 @@ CurseoftheMoonBuff: {
 }
 
 DefenselessBuff: {
-	DisplayName: Defenseless
-	Description: Your guard is completely broken
+	DisplayName: Exposed
+	Description: Halves your damage reduction
 }
 
 FlamesoftheUniverseBuff: {
@@ -256,19 +246,9 @@ GodEaterBuff: {
 	Description: Your soul is cursed by divine wrath
 }
 
-GuiltyBuff: {
-	DisplayName: Guilty
-	Description: Weapons dulled by the guilt of slaying innocent critters
-}
-
 HexedBuff: {
 	DisplayName: Hexed
 	Description: Your attacks heal enemies
-}
-
-HolyPriceBuff: {
-	DisplayName: Holy Price
-	Description: 30% decreased attack speed
 }
 
 HypothermiaBuff: {
@@ -308,16 +288,6 @@ LihzahrdBlessingBuff: {
 	Message: The altar's light shines on you!
 }
 
-LivingWastelandBuff: {
-	DisplayName: Living Wasteland
-	Description: Everyone around you turns to rot
-}
-
-LoosePocketsBuff: {
-	DisplayName: Loose Pockets
-	Description: An item might be taken from you
-}
-
 LovestruckBuff: {
 	DisplayName: Lovestruck
 	Description: You are in love!
@@ -341,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	DisplayName: Midas
 	Description: Drop money on hit
-}
-
-MutantNibbleBuff: {
-	DisplayName: Mutant Nibble
-	Description: You cannot heal at all
-}
-
-NanoInjectionBuff: {
-	DisplayName: Nano Injection
-	Description: Life regeneration and stats reduced
 }
 
 NeurotoxinBuff: {
@@ -537,7 +497,7 @@ BabyLifelightBuff: {
 	Description: Behold, the light of an angel
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	DisplayName: Shell Smash
 	Description: Sharply raised movement and attack speed
 }
@@ -577,16 +537,6 @@ HallowCooldownBuff: {
 	Description: Your sword cannot reflect projectiles yet
 }
 
-HuntressBleedBuff: {
-	DisplayName: Huntress Bleed
-	Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
-}
-
-HuntressCDBuff: {
-	DisplayName: Arrow Rain Cooldown
-	Description: You cannot trigger another rain of arrows yet
-}
-
 LeadPoisonBuff: {
 	DisplayName: Lead Poison
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
@@ -605,11 +555,6 @@ MoltenAmplifyBuff: {
 OriPoisonBuff: {
 	DisplayName: Orichalcum Poison
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
-}
-
-SnowstormCDBuff: {
-	DisplayName: Snowstorm Cooldown
-	Description: You cannot chill yet
 }
 
 SolarFlareBuff: {
@@ -640,11 +585,6 @@ TimeStopCDBuff: {
 TitaniumCDBuff: {
 	DisplayName: Titanium Shield Cooldown
 	Description: You are charging up Titanium Shield
-}
-
-VortexCDBuff: {
-	DisplayName: Vortex Cooldown
-	Description: You cannot spawn another vortex yet
 }
 
 SuperchargedBuff: {
@@ -724,34 +664,14 @@ MagicalCurseBuff: {
 	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
-MoonFangBuff: {
-	DisplayName: Moon Fang
-	Description: Cannot regenerate life
-}
-
 WitheredForceBuff: {
 	DisplayName: Withered Force Buff
 	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
-TimberBleedBuff: {
-	DisplayName: Timber Bleed Buff
-	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
-}
-
 EarthPoison: {
 	DisplayName: Earth Poison
 	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
-}
-
-WitheredBuff: {
-	DisplayName: Withered Buff
-	Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
-}
-
-WitheredWizardBuff: {
-	DisplayName: Withered Wizard Buff
-	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
@@ -781,7 +701,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Ambrosia Buff
-	Description: +20% damage, +8% damage reduction, +5 life regeneration
+	Description: +20% damage, +8% damage reduction, increased life regeneration
 }
 
 MutantDesperationBuff: {
@@ -807,4 +727,9 @@ SilverBuff: {
 GrabbedHarmlessBuff: {
 	DisplayName: Grabbed
 	Description: Mash movement keys to escape!
+}
+
+DaybrokenBuff: {
+	DisplayName: Daybroken
+	Description: Incinerated by solar rays
 }

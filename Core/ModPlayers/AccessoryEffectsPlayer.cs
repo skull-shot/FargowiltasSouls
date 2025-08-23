@@ -654,23 +654,19 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.whoAmI == Main.myPlayer)
             {
-                int heal = GetHealMultiplier(damage);
+                int heal = GetHealMultiplier(damage) / 2;
                 Player.statLife += heal;
                 if (Player.statLife > Player.statLifeMax2)
                     Player.statLife = Player.statLifeMax2;
                 Player.HealEffect(heal);
 
-                int counterDamage = damage;
-
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 16; i++)
                 {
-                    Vector2 vel = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
-                    vel *= Main.rand.NextFloat(12f, 24f);
-                    int p = FargoSoulsUtil.NewSummonProjectile(Player.GetSource_EffectItem<PumpkingsCapeEffect>(), Player.Center, vel, ModContent.ProjectileType<SpookyScythe>(), counterDamage, 6f, Player.whoAmI);
-                    if (p.IsWithinBounds(Main.maxProjectiles))
-                    {
-                        Main.projectile[p].DamageType = DamageClass.Generic;
-                    }
+                    Color color = Color.OrangeRed;
+                    if (i % 2 == 0)
+                        color = new Color(30, 0, 60);
+                    Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
+                    s.Spawn();
                 }
             }
         }
@@ -732,14 +728,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.HasEffectEnchant<SilverEffect>())
                             Player.AddBuff(ModContent.BuffType<SilverBuff>(), ForceEffect<SilverEnchant>() ? 180 : 60);
                         SoundEngine.PlaySound(SoundID.Item4, Player.Center);
-                        /*
-                        for (int i = 0; i < 50; i++)
-                        {
-                            int d = Dust.NewDust(Player.Center, 0, 0, DustID.GemDiamond, 0f, 0f, 0, default, 3f);
-                            Main.dust[d].noGravity = true;
-                            Main.dust[d].velocity *= 9f;
-                        }
-                        */
 
                         if (Player.HasEffect<TerraLightningEffect>())
                         {
@@ -813,25 +801,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                     DreadShellVulnerabilityTimer = 60;
             }
 
-            if (pumpkingEffect) //strong aura effect
+            if (pumpkingEffect)
             {
-                const float distance = 300f;
-                for (int i = 0; i < Main.maxNPCs; i++)
-                    if (Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].Distance(Player.Center) < distance)
-                        Main.npc[i].AddBuff(ModContent.BuffType<RottingBuff>(), 600);
-
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 offset = new();
-                    double angle = Main.rand.NextDouble() * 2d * Math.PI;
-                    offset.X += (float)(Math.Sin(angle) * distance);
-                    offset.Y += (float)(Math.Cos(angle) * distance);
-                    Dust dust = Main.dust[Dust.NewDust(Player.Center + offset - new Vector2(4, 4), 0, 0, DustID.Ice_Pink, 0, 0, 100, Color.White, 1f)];
-                    dust.velocity = Player.velocity;
-                    if (Main.rand.NextBool(3))
-                        dust.velocity += Vector2.Normalize(offset) * -5f;
-                    dust.noGravity = true;
-                }
+                Player.lifeRegen += 10;
             }
 
             if ((dreadEffect || pumpkingEffect) && !silverEffect)
@@ -907,8 +879,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (shieldTimer == 1) //parry window over
                 {
-                    SoundEngine.PlaySound(SoundID.Item27, Player.Center);
-
+                    //theoretically none of this is necessary when the dye effect indicates the parry window already
+                    /*SoundEngine.PlaySound(SoundID.Item27, Player.Center);
                     List<int> dusts = [];
                     if (dreadEffect)
                         dusts.Add(DustID.LifeDrain);
@@ -925,7 +897,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                             Main.dust[d].noGravity = true;
                             Main.dust[d].velocity *= 3f;
                         }
-                    }
+                    }*/
                 }
             }
             else
@@ -942,23 +914,27 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (shieldCD == 1) //cooldown over
                 {
-                    SoundEngine.PlaySound(SoundID.Item28, Player.Center); //make a sound for refresh
+                    SoundEngine.PlaySound(SoundID.MaxMana, Player.Center); //make a sound for refresh
 
-                    List<int> dusts = [];
+                    List<Color> colors = [];
                     if (dreadEffect)
-                        dusts.Add(DustID.LifeDrain);
+                        colors.Add(Color.DarkRed);
                     if (pumpkingEffect)
-                        dusts.Add(87);
-                    if (silverEffect)
-                        dusts.Add(66);
-                    
-                    if (dusts.Count > 0)
                     {
-                        for (int i = 0; i < 30; i++)
+                        colors.Add(Color.OrangeRed);
+                        colors.Add(new Color(30, 0, 60));
+                    }
+                    if (silverEffect)
+                        colors.Add(Color.Silver);
+
+                    if (colors.Count > 0)
+                    {
+                        for (int i = 0; i < 5; i++)
                         {
-                            int d = Dust.NewDust(Player.position, Player.width, Player.height, Main.rand.Next(dusts), 0, 0, 0, default, 2.5f);
-                            Main.dust[d].noGravity = true;
-                            Main.dust[d].velocity *= 6f;
+                            Vector2 spawnpos = Player.Center + Main.rand.NextVector2Circular(48, 48);
+                            Vector2 vel = new(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-2, -3));
+                            Particle sparkle = new SmallSparkle(spawnpos, vel, Main.rand.Next(colors), Main.rand.NextFloat(1f, 1.5f), Main.rand.Next(20, 40));
+                            sparkle.Spawn();
                         }
                     }
                 }
@@ -966,10 +942,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (shieldCD > 0)
                     shieldCD--;
             }
-
-            //Main.NewText($"{ironShieldCD}, {ironShieldTimer}");
         }
-
-        
     }
 }

@@ -34,7 +34,6 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             }
             fargoPlayer.Infested = true;
             fargoPlayer.Rotting = true;
-            fargoPlayer.MutantNibble = true;
             fargoPlayer.noDodge = true;
             fargoPlayer.noSupersonic = true;
             fargoPlayer.MutantPresence = true;

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -221,7 +222,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                     //target.AddBuff(BuffID.Ichor, 600);
                     target.AddBuff(BuffID.WitheredArmor, Main.rand.Next(60, 300));
                     target.AddBuff(BuffID.WitheredWeapon, Main.rand.Next(60, 300));
-                    target.AddBuff(BuffID.Burning, 300);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 }
             }
             Projectile.timeLeft = 0;

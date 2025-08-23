@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -154,7 +155,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             //target.AddBuff(BuffID.Ichor, 600);
             target.AddBuff(BuffID.WitheredArmor, 300);
             target.AddBuff(BuffID.WitheredWeapon, 300);
-            target.AddBuff(BuffID.Burning, 300);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
         }
 
         public override void OnKill(int timeLeft)

@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.Creative;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,9 +8,9 @@ namespace FargowiltasSouls.Content.Items.Armor.Masks
     [AutoloadEquip(EquipType.Head)]
     public class WillMask : ModItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Masks", Name);
         public override void SetStaticDefaults()
         {
-            
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

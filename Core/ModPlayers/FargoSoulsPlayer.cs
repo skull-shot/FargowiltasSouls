@@ -317,8 +317,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             CrystalEnchantActive = false;
             ChlorophyteEnchantActive = false;
 
-            if (!MonkEnchantActive)
-                Player.ClearBuff(ModContent.BuffType<MonkBuff>());
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
             PlatinumEffect = null;
@@ -441,6 +439,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Unstable = false;
             Fused = false;
             Shadowflame = false;
+            Daybroken = false;
             Oiled = false;
             Slimed = false;
             noDodge = false;
@@ -456,7 +455,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             GodEater = false;
             FlamesoftheUniverse = false;
             IvyVenom = false;
-            MutantNibble = false;
             Asocial = false;
             Defenseless = false;
             Infested = false;
@@ -486,8 +484,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Illuminated = false;
             //LihzahrdBlessing = false;
             Berserked = false;
-            CerebralMindbreak = false;
-            NanoInjection = false;
             Stunned = false;
             HasJungleRose = false;
             HaveCheckedAttackSpeed = false;
@@ -1046,8 +1042,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (ConcentratedRainbowMatter
                 && Player.statLife < Player.statLifeMax2
                 && Player.potionDelay <= 0
-                && Player.HasEffect<RainbowHealEffect>()
-                && !MutantNibble)
+                && Player.HasEffect<RainbowHealEffect>())
             {
                 Item potion = Player.QuickHeal_GetItemToUse();
                 if (potion != null)
@@ -1152,8 +1147,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Shadowflame)
                     damageSource = DeathByLocalization("Shadowflame");
 
-                if (NanoInjection)
-                    damageSource = DeathByLocalization("NanoInjection");
+                if (Daybroken)
+                    damageSource = PlayerDeathReason.ByOther(8);
 
                 if (GodEater || FlamesoftheUniverse || CurseoftheMoon || MutantFang)
                     damageSource = DeathByLocalization("DivineWrath");
@@ -1491,7 +1486,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             if (MutantPresence)
-                multiplier *= 0.5f;
+                multiplier *= 0.8f;
 
             heal = (int)(heal * multiplier);
 

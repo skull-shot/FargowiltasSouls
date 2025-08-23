@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
         {
             NPC.width = 80;
             NPC.height = 80;
-            NPC.damage = 140;
+            NPC.damage = 135;
             NPC.defense = 80;
             NPC.lifeMax = 155000;
             NPC.HitSound = SoundID.NPCHit41;
@@ -746,7 +746,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             target.AddBuff(BuffID.OnFire, 600);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

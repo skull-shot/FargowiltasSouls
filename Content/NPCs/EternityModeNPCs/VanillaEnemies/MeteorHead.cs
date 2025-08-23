@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                 }
             }
 
-            EModeGlobalNPC.Aura(npc, 100, BuffID.Burning, false, DustID.Torch);
+            EModeGlobalNPC.Aura(npc, 100, BuffID.OnFire, false, DustID.Torch);
         }
     }
 }

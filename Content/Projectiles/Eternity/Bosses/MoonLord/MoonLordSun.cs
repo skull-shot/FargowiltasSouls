@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -183,7 +184,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Burning, 120);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
             target.AddBuff(BuffID.OnFire, 300);
         }
 
