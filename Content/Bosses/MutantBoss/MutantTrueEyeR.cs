@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.hostile = true;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.penetrate = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

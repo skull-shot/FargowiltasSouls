@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.DeviBoss
@@ -20,7 +21,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         protected override void Movement(NPC npc)
         {

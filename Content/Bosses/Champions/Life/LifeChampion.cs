@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         {
             NPC.width = 130;
             NPC.height = 130;
-            NPC.damage = 160;
+            NPC.damage = 142;
             NPC.defense = 0;
             NPC.lifeMax = 55000;
             NPC.HitSound = SoundID.NPCHit5;
@@ -107,7 +107,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             if (NPC.localAI[3] == 0 || (NPC.ai[0] == 2 || NPC.ai[0] == 8) && NPC.ai[3] == 0)
                 return false;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 

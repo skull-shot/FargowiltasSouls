@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	// DisplayName: Abominable Presence
-	// Description: Defense, damage reduction, and life regen reduced; Moon Leech effect
+	// Description: Life regen reduced; Moon Leech effect
 }
 
 BaronsBurdenBuff: {
@@ -209,8 +209,8 @@ CurseoftheMoonBuff: {
 }
 
 DefenselessBuff: {
-	// DisplayName: Defenseless
-	// Description: Your guard is completely broken
+	// DisplayName: Exposed
+	// Description: Halves your damage reduction
 }
 
 FlamesoftheUniverseBuff: {
@@ -244,11 +244,6 @@ FusedBuff: {
 GodEaterBuff: {
 	// DisplayName: God Eater
 	// Description: Your soul is cursed by divine wrath
-}
-
-GuiltyBuff: {
-	// DisplayName: Guilty
-	// Description: Weapons dulled by the guilt of slaying innocent critters
 }
 
 HexedBuff: {
@@ -293,11 +288,6 @@ LihzahrdBlessingBuff: {
 	// Message: The altar's light shines on you!
 }
 
-LivingWastelandBuff: {
-	// DisplayName: Living Wasteland
-	// Description: Everyone around you turns to rot
-}
-
 LovestruckBuff: {
 	// DisplayName: Lovestruck
 	// Description: You are in love!
@@ -321,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	// DisplayName: Midas
 	// Description: Drop money on hit
-}
-
-MutantNibbleBuff: {
-	// DisplayName: Mutant Nibble
-	// Description: You cannot heal at all
-}
-
-NanoInjectionBuff: {
-	// DisplayName: Nano Injection
-	// Description: Life regeneration and stats reduced
 }
 
 NeurotoxinBuff: {
@@ -721,7 +701,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	// DisplayName: Ambrosia Buff
-	// Description: +20% damage, +8% damage reduction, +5 life regeneration
+	// Description: +20% damage, +8% damage reduction, increased life regeneration
 }
 
 MutantDesperationBuff: {

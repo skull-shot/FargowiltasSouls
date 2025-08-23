@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.hostile = true;
             Projectile.alpha = 255;
             Projectile.timeLeft = 70;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

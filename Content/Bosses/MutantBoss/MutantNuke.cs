@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 120 : 180;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
@@ -122,7 +122,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
             }
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 900);
         }
 

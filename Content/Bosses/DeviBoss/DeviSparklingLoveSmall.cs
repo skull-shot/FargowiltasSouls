@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.FargoSouls().DeletionImmuneRank = 2;
 
             Projectile.hide = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -94,8 +94,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-            //target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 240);
-            target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 240);
             target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 240);
         }

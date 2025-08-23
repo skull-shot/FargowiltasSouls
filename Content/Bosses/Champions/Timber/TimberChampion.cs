@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
         {
             if (SpawnNoContactTimer > 0)
                 return false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 
@@ -660,12 +660,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                     }
                     break;
             }
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
         }
 
         static bool spawnPhase2 => Main.expertMode;

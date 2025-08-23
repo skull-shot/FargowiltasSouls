@@ -1,4 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -27,9 +29,15 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             bool slowdown = true;
             if (++Projectile.localAI[2] > 90f)
             {
+
                 int p = player.whoAmI;
                 if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)
                 {
+                    if (Main.player[p].HasEffect<IronEquippedEffect>() && Projectile.Distance(Main.player[p].Center) < 300)
+                    {
+                        Projectile.position += Projectile.DirectionTo(Main.player[p].Center) * 2f;
+                    }
+
                     if (Main.player[p].Distance(Projectile.Center) < 16 * 5)
                     {
                         slowdown = false;

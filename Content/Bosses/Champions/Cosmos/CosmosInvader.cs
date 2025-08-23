@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool CanHitPlayer(Player target)

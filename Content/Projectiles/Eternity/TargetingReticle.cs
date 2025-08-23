@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             Projectile.hostile = true;
             Projectile.alpha = 255;
             Projectile.timeLeft = 90;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

@@ -22,10 +22,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateIn
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-            //target.AddBuff(ModContent.BuffType<LoosePockets>(), 240);
             target.AddBuff(ModContent.BuffType<UnluckyBuff>(), 60 * 30);
             target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
-            //target.AddBuff(ModContent.BuffType<LivingWasteland>(), 600);
         }
     }
 }

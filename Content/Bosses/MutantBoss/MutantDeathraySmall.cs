@@ -14,12 +14,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
 	public class MutantDeathraySmall : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public MutantDeathraySmall() : base(30) { }
         public override bool? CanDamage()
         {
             return false;
+        }
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
         }
 
         public override void AI()

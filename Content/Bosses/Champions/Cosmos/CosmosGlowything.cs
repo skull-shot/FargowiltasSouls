@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
@@ -21,7 +22,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.tileCollide = false;
             Projectile.aiStyle = -1;
             Projectile.scale = 0.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         float scalefactor;

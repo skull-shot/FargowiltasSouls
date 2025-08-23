@@ -14,7 +14,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //player.FargoSouls().MutantNibble = true;
             player.FargoSouls().AbomRebirth = true;
         }
     }

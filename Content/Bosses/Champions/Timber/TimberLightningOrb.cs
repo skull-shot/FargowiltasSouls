@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.timeLeft = 360;
             Projectile.penetrate = -1;
             Projectile.scale = 0.1f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
@@ -140,12 +140,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                 Vector2 target = Projectile.Center + Projectile.SafeDirectionTo(npc.Center) * distance;
                 npc.Center = Vector2.Lerp(npc.Center, target, 0.1f);
             }
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
         }
 
         public override Color? GetAlpha(Color lightColor)
