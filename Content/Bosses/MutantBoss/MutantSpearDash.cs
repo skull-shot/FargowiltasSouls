@@ -118,19 +118,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 if (Projectile.timeLeft > Variant)
                     Projectile.timeLeft = (int)Variant;
-                if (Projectile.scale < 2)
-                {
-                    Projectile.position = Projectile.Center;
-                    Projectile.scale = 2;
-                    Projectile.width = Projectile.height = 32;
-                    Projectile.Center = Projectile.position;
-                    Projectile.netUpdate = true;
-                }
             }
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
-                if (!WorldSavingSystem.masochistModeReal)
+                if (!WorldSavingSystem.masochistModeReal || Variant > 0)
                 {   
                     //bullshit to make it play the maso sound on the final throw of predictives
                     if (Projectile.ai[1] != -2)
@@ -156,46 +148,55 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.position -= Projectile.velocity;
                 Projectile.rotation = mutant.velocity.ToRotation() + MathHelper.ToRadians(135f);
                 Projectile.Center = mutant.Center + mutant.velocity;
-                if ((Projectile.ai[1] <= 0f || WorldSavingSystem.MasochistModeReal) && --Projectile.localAI[0] < 0)
+                if (Variant != 0)
                 {
-                    if (Projectile.ai[1] == -2)
+                    if (Projectile.timeLeft > 15 && mutant.HasPlayerTarget)
+                        Projectile.rotation = mutant.DirectionTo(Main.player[mutant.target].Center).ToRotation() + MathHelper.ToRadians(135f);
+                }
+                else
+                {
+                    if ((Projectile.ai[1] <= 0f || WorldSavingSystem.MasochistModeReal) && --Projectile.localAI[0] < 0)
                     {
-                        Projectile.localAI[0] = 1;
-
-                        for (int i = -1; i <= 1; i += 2)
+                        if (Projectile.ai[1] == -2)
                         {
-                            if (FargoSoulsUtil.HostCheck)
+                            Projectile.localAI[0] = 1;
+
+                            for (int i = -1; i <= 1; i += 2)
                             {
-                                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f * Vector2.Normalize(mutant.velocity).RotatedBy(MathHelper.PiOver2 * i),
-                                ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
-                                if (p != Main.maxProjectiles)
-                                    Main.projectile[p].timeLeft = 15;
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f * Vector2.Normalize(mutant.velocity).RotatedBy(MathHelper.PiOver2 * i),
+                                    ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
+                                    if (p != Main.maxProjectiles)
+                                        Main.projectile[p].timeLeft = 15;
+                                }
                             }
                         }
-                    }
-                    else if (WorldSavingSystem.MasochistModeReal)
-                    {
-                        Projectile.localAI[0] = 2;
-
-                        for (int i = -1; i <= 1; i += 2)
+                        else if (WorldSavingSystem.MasochistModeReal)
                         {
-                            if (FargoSoulsUtil.HostCheck)
+                            Projectile.localAI[0] = 2;
+
+                            for (int i = -1; i <= 1; i += 2)
                             {
-                                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(mutant.velocity).RotatedBy(MathHelper.PiOver2 * i),
-                                ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
-                                if (p != Main.maxProjectiles)
-                                    Main.projectile[p].timeLeft = 15;
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(mutant.velocity).RotatedBy(MathHelper.PiOver2 * i),
+                                    ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
+                                    if (p != Main.maxProjectiles)
+                                        Main.projectile[p].timeLeft = 15;
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        Projectile.localAI[0] = 2;
+                        else
+                        {
+                            Projectile.localAI[0] = 2;
 
-                        if (FargoSoulsUtil.HostCheck)
-                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, mutant.target);
+                            if (FargoSoulsUtil.HostCheck)
+                                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, mutant.target);
+                        }
                     }
                 }
+
             }
             else
             {
