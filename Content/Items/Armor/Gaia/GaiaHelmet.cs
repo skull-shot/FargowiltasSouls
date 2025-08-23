@@ -32,6 +32,9 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
             player.GetDamage(damageClass) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 5;
+            player.statManaMax2 += 50;
+            player.manaCost -= 0.1f;
+            player.huntressAmmoCost90 = true;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -88,12 +91,6 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.GaiaSet = true;
-
-            player.GetAttackSpeed(DamageClass.Melee) += 0.1f;
-            player.statManaMax2 += 30;
-            player.manaCost -= 0.1f;
-            player.maxMinions += 3;
-
 
             if (fargoPlayer.GaiaOffense)
             {
