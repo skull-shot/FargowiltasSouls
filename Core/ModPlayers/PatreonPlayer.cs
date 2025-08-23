@@ -7,6 +7,7 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -60,6 +61,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool Dartslinger;
 
+        public bool Ariyah;
+        public Vector2[] PatreonOldPos;
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
@@ -104,11 +108,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             TouhouBuff = false;
             dolvan = false;
             Dartslinger = false;
+            Ariyah = false;
         }
 
         public override void OnEnterWorld()
         {
-            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan)
+            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan || Dartslinger || Ariyah)
             {
                 string text = Language.GetTextValue($"Mods.{Mod.Name}.Message.PatreonNameEffect");
                 Main.NewText($"{text}, {Player.name}!");
@@ -203,6 +208,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                 case "Dartslinger":
                     Dartslinger = true;
                     break;
+                case "Ariyah":
+                    Ariyah = true;
+                    PatreonOldPos ??= new Vector2[10];
+                    List<Vector2> l = [.. PatreonOldPos];
+                    l.Insert(0, Player.Center);
+                    l.RemoveAt(10);
+                    PatreonOldPos = [.. l];
+                    break;
                     
             }
 
@@ -219,6 +232,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 yield return new Item(ItemID.Blowpipe, prefix: PrefixID.Unreal);
                 yield return new Item(ItemID.PoisonDart, 500);
                 yield return new Item(ItemID.GlommerPetItem);
+            }
+            if (!mediumCoreDeath && Player.name.Equals("Ariyah", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.CapricornMask);
+                yield return new Item(ItemID.CapricornChestplate);
+                yield return new Item(ItemID.CapricornLegs);
+                yield return new Item(ItemID.CapricornTail);
+                yield return new Item(ItemID.PartyHairDye);
+                yield return new Item(ItemID.HandOfCreation);
+                yield return new Item(ItemID.PumpkingPetItem);
             }
         }
         public static void AddDash_Eight3One(Player player)
@@ -271,6 +294,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     target.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
                 }
+            }
+            if (Ariyah)
+            {
+                target.AddBuff(BuffID.GelBalloonBuff, 300);
             }
         }
 
@@ -358,7 +385,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (WolfDashing) //dont draw player during dash
                 drawInfo.DrawDataCache.Clear();
-
             //HashSet<int> layersToRemove = new HashSet<int>();
             //for (int i = 0; i < drawInfo.DrawDataCache.Count; i++)
             //{
@@ -411,6 +437,45 @@ namespace FargowiltasSouls.Core.ModPlayers
                 damage *= 1.15f;
             }
             base.ModifyWeaponDamage(item, ref damage);
+        }
+    }
+    public class PatreonDrawLayer : PlayerDrawLayer
+    {
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+        {
+            PatreonPlayer patreon = drawInfo.drawPlayer.GetModPlayer<PatreonPlayer>();
+            return (patreon.Ariyah);
+                
+            return base.GetDefaultVisibility(drawInfo);
+        }
+        public override Position GetDefaultPosition()
+        {
+            return PlayerDrawLayers.BeforeFirstVanillaLayer;
+        }
+
+        protected override void Draw(ref PlayerDrawSet drawInfo)
+        {
+            PatreonPlayer patreon = drawInfo.drawPlayer.GetModPlayer<PatreonPlayer>();
+            if (patreon.Ariyah)
+            {
+                if (drawInfo.shadow == 0)
+                {
+                    for (int i = 0; i < patreon.PatreonOldPos.Length; i++)
+                    {
+                        Vector2 pos = patreon.PatreonOldPos[i];
+                        Main.NewText(pos);
+                        Main.PlayerRenderer.DrawPlayer(Main.Camera, drawInfo.drawPlayer, pos, drawInfo.rotation, drawInfo.rotationOrigin, i + 1, 1);
+                    }
+                }
+                if (drawInfo.shadow != 0)
+                {
+                    Color color = Color.Lerp(Color.Purple, Color.Pink, drawInfo.shadow / 10f);
+                    //drawInfo.colorArmorBody = color;
+                    //drawInfo.colorArmorHead = color;
+                    //drawInfo.colorArmorLegs = color;
+                    
+                }
+            }
         }
     }
 }
