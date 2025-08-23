@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < 30 * NPC.scale;
         }
 

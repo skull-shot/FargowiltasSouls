@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             Projectile.timeLeft = 900;
             Projectile.tileCollide = false;
             Projectile.hostile = true;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.extraUpdates = 2;
             Projectile.hide = true;

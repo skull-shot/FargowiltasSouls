@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         protected override void Movement(NPC npc)
         {

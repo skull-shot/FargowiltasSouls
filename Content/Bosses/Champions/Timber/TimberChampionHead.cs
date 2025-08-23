@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (noHurt)
                 return false;

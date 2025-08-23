@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.hostile = true;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         float originalSpeed;

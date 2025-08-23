@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             Projectile.timeLeft = 300;
             Projectile.aiStyle = -1;
             Projectile.extraUpdates = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

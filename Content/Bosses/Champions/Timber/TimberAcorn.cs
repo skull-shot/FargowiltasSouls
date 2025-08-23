@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.tileCollide = false;
         }
 

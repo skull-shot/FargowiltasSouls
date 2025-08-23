@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.extraUpdates = 2;
             Projectile.ignoreWater = true;
             Projectile.alpha = 255;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.scale = 2f;
         }

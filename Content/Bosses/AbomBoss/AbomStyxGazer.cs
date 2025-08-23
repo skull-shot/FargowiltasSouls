@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             Projectile.hide = true;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         public ref float TelegraphTimer => ref Projectile.ai[2];
         public ref float RotationTimer => ref Projectile.localAI[2];

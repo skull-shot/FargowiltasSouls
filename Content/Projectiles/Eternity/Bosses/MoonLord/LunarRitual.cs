@@ -23,6 +23,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
             Main.projFrames[Projectile.type] = 2;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = ImmunityCooldownID.Bosses;
+        }
         protected override void Movement(NPC npc)
         {
             Vector2 target = npc.Center;

@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

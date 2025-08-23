@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             Projectile.ignoreWater = true;
             Projectile.hide = true;
             Projectile.extraUpdates = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

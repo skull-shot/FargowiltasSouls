@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         {
             Projectile.CloneDefaults(ProjectileID.RainNimbus);
             AIType = ProjectileID.RainNimbus;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

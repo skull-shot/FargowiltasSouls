@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             Projectile.hostile = true;
             Projectile.timeLeft = 300;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.tileCollide = false;
         }
 

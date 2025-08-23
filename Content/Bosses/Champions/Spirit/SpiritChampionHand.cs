@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
         {
             if (target.HasBuff<GrabbedBuff>())
                 return false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.localAI[3] == 0;
         }
 

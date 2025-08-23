@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.hostile = true;
             Projectile.timeLeft = 325;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.penetrate = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

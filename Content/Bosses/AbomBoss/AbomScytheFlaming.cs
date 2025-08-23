@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.timeLeft = 720;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

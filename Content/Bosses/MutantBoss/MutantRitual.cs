@@ -12,6 +12,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
@@ -37,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         public override bool? CanDamage()
         {
