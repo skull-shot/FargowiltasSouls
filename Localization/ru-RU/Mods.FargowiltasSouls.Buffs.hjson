@@ -246,11 +246,6 @@ GodEaterBuff: {
 	Description: Ваша душа проклята божественным гневом
 }
 
-GuiltyBuff: {
-	DisplayName: Чувство вины
-	Description: Ваше оружие затуплено виной от убийства невинных
-}
-
 HexedBuff: {
 	DisplayName: Сглаз
 	Description: Ваши атаки лечат врагов
@@ -293,11 +288,6 @@ LihzahrdBlessingBuff: {
 	Message: Свет алтаря пал на вас!
 }
 
-LivingWastelandBuff: {
-	DisplayName: Живая пустошь
-	Description: Все вокруг вас начинают гнить
-}
-
 LovestruckBuff: {
 	DisplayName: Влюблённость
 	Description: Вы влюблены!
@@ -321,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	DisplayName: Мидас
 	Description: Вы роняете деньги при получении урона
-}
-
-MutantNibbleBuff: {
-	DisplayName: Укус Мутанта
-	Description: Вы не можете восстанавливать здоровье
-}
-
-NanoInjectionBuff: {
-	DisplayName: Нано-инъекция
-	Description: Регенерация здоровья и остальные характеристики снижены
 }
 
 NeurotoxinBuff: {

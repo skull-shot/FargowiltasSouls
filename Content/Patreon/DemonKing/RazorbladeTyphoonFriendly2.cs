@@ -29,10 +29,5 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
         {
             //if (target.defense > 0) damage += target.defense / 4;
         }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
-        }
     }
 }

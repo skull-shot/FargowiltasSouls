@@ -70,13 +70,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hallow
             }
         }
 
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
-        {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
-        }
-
         public override bool CheckDead(NPC npc)
         {
             if (IsFakeBat)

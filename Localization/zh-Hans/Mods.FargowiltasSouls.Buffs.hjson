@@ -246,11 +246,6 @@ GodEaterBuff: {
 	Description: 你的灵魂被神明的忿怒所诅咒
 }
 
-GuiltyBuff: {
-	DisplayName: 内疚
-	Description: 杀害无辜动物产生的内疚使你的武器变得迟钝
-}
-
 HexedBuff: {
 	DisplayName: 着魔
 	Description: 你的攻击会治愈敌人
@@ -293,11 +288,6 @@ LihzahrdBlessingBuff: {
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
 }
 
-LivingWastelandBuff: {
-	DisplayName: 人形废土
-	Description: 你周围的每个人都开始腐烂
-}
-
 LovestruckBuff: {
 	DisplayName: 热恋
 	Description: 坠入爱河！
@@ -321,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	DisplayName: 迈达斯
 	Description: 受击时掉落钱币
-}
-
-MutantNibbleBuff: {
-	DisplayName: 突变啃啄
-	Description: 无法恢复生命
-}
-
-NanoInjectionBuff: {
-	DisplayName: 纳米灌注
-	Description: 降低生命恢复速度和综合属性
 }
 
 NeurotoxinBuff: {

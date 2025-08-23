@@ -38,7 +38,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
             target.AddBuff(BuffID.ShadowFlame, 600);
         }
     }

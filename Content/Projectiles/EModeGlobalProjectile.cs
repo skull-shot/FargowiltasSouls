@@ -1793,7 +1793,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             target.AddBuff(BuffID.OgreSpit, 300);
                             break;
                         case 4:
-                            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
+                            target.AddBuff(ModContent.BuffType<RottingBuff>(), 600);
                             break;
                         case 5:
                             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
@@ -1903,7 +1903,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (Main.hardMode)
                         target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 180);
                     else
-                        target.AddBuff(BuffID.OnFire3, 180);
+                        target.AddBuff(BuffID.OnFire, 300);
                     break;
 
                 case ProjectileID.VortexAcid:
@@ -1978,7 +1978,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (sourceNPC.type == ModContent.NPCType<TerraChampion>())
                         {
                             target.AddBuff(BuffID.OnFire, 600);
-                            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                         }
                     }
                     break;
@@ -2019,7 +2018,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.FlamingScythe:
                     target.AddBuff(BuffID.OnFire, 900);
-                    target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 900);
                     break;
 
                 case ProjectileID.FrostWave:
@@ -2072,7 +2070,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.DeathSickle:
-                    target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                     target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 300);
                     break;
 

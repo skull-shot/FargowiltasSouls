@@ -37,7 +37,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.GetCritChance(DamageClass.Generic) += 5;
             player.AddEffect<PumpkingsCapeEffect>(Item);
             player.AddEffect<ParryEffect>(Item);
-            player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
         }
     }
     public class PumpkingsCapeEffect : AccessoryEffect

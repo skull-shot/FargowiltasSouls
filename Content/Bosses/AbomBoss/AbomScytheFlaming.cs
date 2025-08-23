@@ -134,8 +134,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (WorldSavingSystem.EternityMode)
             {
                 target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //target.AddBuff(ModContent.BuffType<Rotting>(), 900);
-                //target.AddBuff(ModContent.BuffType<LivingWasteland>(), 900);
             }
             target.AddBuff(BuffID.OnFire, 900);
             target.AddBuff(BuffID.Weak, 900);

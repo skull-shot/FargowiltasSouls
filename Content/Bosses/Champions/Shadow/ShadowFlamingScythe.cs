@@ -103,7 +103,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                 target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
                 target.AddBuff(BuffID.Blackout, 300);
                 target.AddBuff(BuffID.OnFire, 900);
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 900);
             }
         }
 

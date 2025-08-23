@@ -97,7 +97,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinM
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.OnFire, 600);
-            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor)
