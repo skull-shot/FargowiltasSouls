@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
         {
             base.OnSpawn(source);
             if (source is EntitySource_Parent parent && parent.Entity is NPC nPC && nPC.type == ModContent.NPCType<DeviBoss>())
-                CooldownSlot = 1;
+                CooldownSlot = ImmunityCooldownID.Bosses;
         }
         public override void AI()
         {

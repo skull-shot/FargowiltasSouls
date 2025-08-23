@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.alpha = 255;
             Projectile.netImportant = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void SendExtraAI(BinaryWriter writer)

@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 120 : 180;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }

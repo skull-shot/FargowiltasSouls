@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Desert
             Projectile.friendly = false;
             Projectile.timeLeft = 600;
             Projectile.tileCollide = true;
-            CooldownSlot = 1; // do we need this?
+            CooldownSlot = ImmunityCooldownID.Bosses; // do we need this?
         }
 
         public override void OnKill(int timeLeft)

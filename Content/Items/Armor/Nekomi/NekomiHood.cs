@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
@@ -18,6 +19,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
     [AutoloadEquip(EquipType.Head)]
     public class NekomiHood : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Nekomi", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -132,7 +134,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
 
             if (player.whoAmI == Main.myPlayer)
             {
-                CooldownBarManager.Activate("NekomiHoodGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Armor/Nekomi/NekomiHood").Value, Color.DeepPink, () => (float)fargoPlayer.NekomiMeter / MAX_METER, true, 0, () => fargoPlayer.NekomiSet);
+                CooldownBarManager.Activate("NekomiHoodGraze", FargoAssets.GetTexture2D("Content/Items/Armor/Nekomi", "NekomiHood").Value, Color.DeepPink, () => (float)fargoPlayer.NekomiMeter / MAX_METER, true, 0, () => fargoPlayer.NekomiSet);
 
                 if (fargoPlayer.NekomiMeter >= MAX_METER)
                     fargoPlayer.NekomiAttackReadyTimer = FargoSoulsPlayer.SuperAttackMaxWindow;

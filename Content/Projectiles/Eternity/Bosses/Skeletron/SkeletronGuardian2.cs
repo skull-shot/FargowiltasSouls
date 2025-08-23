@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.timeLeft = 360;
             Projectile.hide = true;

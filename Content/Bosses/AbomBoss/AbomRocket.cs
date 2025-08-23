@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.alpha = 0;
             Projectile.timeLeft = 600;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             base.SetDefaults();
             Projectile.width = 70;
             Projectile.height = 70;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnSpawn(IEntitySource source)

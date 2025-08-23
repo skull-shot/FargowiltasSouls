@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
@@ -23,7 +24,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.aiStyle = -1;
             Projectile.scale = 0.5f;
             Projectile.alpha = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         Vector2 spawnPoint;

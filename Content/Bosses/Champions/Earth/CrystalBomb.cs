@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
             Projectile.alpha = 255;
             Projectile.hide = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.scale = 2.5f;
             Projectile.tileCollide = false;

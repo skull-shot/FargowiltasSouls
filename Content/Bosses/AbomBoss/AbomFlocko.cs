@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.hostile = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

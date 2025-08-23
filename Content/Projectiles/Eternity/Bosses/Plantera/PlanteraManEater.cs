@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.hostile = true;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 60 * 60 * 60;

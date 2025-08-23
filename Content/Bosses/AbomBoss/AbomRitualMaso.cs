@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         public int Timer = 0;
         public static int StartTime = 90;

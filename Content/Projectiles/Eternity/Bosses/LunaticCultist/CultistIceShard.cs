@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Projectile.tileCollide = false;
             Projectile.hostile = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.penetrate = -1;
 
             Projectile.Opacity = 1f;

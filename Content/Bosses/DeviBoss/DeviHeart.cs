@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

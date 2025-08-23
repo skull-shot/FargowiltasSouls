@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             Projectile.scale = 2f;
             Projectile.extraUpdates = 3;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

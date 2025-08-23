@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
             Projectile.DamageType = DamageClass.Generic;
             Projectile.timeLeft = 300;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

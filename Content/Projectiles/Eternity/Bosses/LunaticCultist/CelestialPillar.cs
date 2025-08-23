@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.penetrate = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

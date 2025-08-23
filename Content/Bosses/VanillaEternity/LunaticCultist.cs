@@ -1021,7 +1021,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return base.CanHitPlayer(npc, target, ref cooldownSlot);
 
             if (SourceNPCType is NPCID.MoonLordCore or NPCID.MoonLordHead or NPCID.MoonLordHand)
-                cooldownSlot = 1;
+                cooldownSlot = ImmunityCooldownID.Bosses;
 
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }

@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.timeLeft = 180;
             Projectile.extraUpdates = 1;
             Projectile.alpha = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
         }
 
