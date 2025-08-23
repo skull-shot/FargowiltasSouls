@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
     [AutoloadEquip(EquipType.Body)]
     public class GaiaPlate : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Gaia", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

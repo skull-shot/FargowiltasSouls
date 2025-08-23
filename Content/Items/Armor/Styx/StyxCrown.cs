@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Rarities;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Styx
     [AutoloadEquip(EquipType.Head)]
     public class StyxCrown : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Styx", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -45,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Styx
 
         public override void ArmorSetShadows(Player player)
         {
-            player.armorEffectDrawOutlinesForbidden = true;
+            //player.armorEffectDrawOutlinesForbidden = true;
         }
 
         public const int MINIMUM_CHARGE_TIME = 40 * 60;

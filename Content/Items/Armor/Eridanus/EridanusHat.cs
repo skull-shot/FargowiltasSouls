@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
     [AutoloadEquip(EquipType.Head)]
     public class EridanusHat : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Eridanus", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

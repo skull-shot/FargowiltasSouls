@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,9 +9,9 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
     [AutoloadEquip(EquipType.Body)]
     public class EridanusBattleplate : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Eridanus", Name);
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
