@@ -689,6 +689,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     attacks.Remove(P1Attacks.SpearTossDiagonal);
                 if (sourceAI == (int)P1Attacks.SpearTossDiagonalEnd)
                     attacks.Remove(P1Attacks.SpearTossDirect);
+                if (WorldSavingSystem.MasochistModeReal && (sourceAI == (int)P1Attacks.SpearTossDirect || sourceAI == (int)P1Attacks.SpearTossDiagonalEnd))
+                    attacks.Remove(P1Attacks.Sword);
 
                 if (attacks.Count == 0)
                 {
@@ -1061,6 +1063,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     // fuck off to the top of the screen
                     Vector2 targetPos = player.Center - Vector2.UnitY * 1200;
+                    if (NPC.Top.Y > player.Bottom.Y)
+                        targetPos.X += 400f * Math.Sign(NPC.Center.X - player.Center.X);
                     Movement(targetPos, 1f, true, true);
                 }
                 else
@@ -1392,7 +1396,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         float coneWidth = MathHelper.Pi * 0.8f;
                         Vector2 dir = (lockAngle - lockDirection * MathHelper.Lerp(-coneWidth, coneWidth, progress + increment)).ToRotationVector2();
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 2, ModContent.ProjectileType<MutantMark1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * 2, ModContent.ProjectileType<MutantMark1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai2: 1);
                     }
                 }
             }

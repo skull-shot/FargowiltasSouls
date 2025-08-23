@@ -18,7 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
 	public class MutantDeathray1 : MutantSpecialDeathray, IPixelatedPrimitiveRenderer
     {
-        public ref float Variant => ref Projectile.ai[2];
         public MutantDeathray1() : base(60) { }
 
         public override void SetStaticDefaults()
@@ -41,8 +40,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void AI()
         {
-            if (Variant != 0)
-                maxTime = 10;
             base.AI();
 
             Vector2? vector78 = null;
