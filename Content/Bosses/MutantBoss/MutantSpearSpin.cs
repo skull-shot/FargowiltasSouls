@@ -41,6 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         private bool predictive;
         private int direction = 1;
 
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[1] == 0)
@@ -59,7 +60,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     Projectile.rotation += (float)Math.PI / 6.85f * Projectile.localAI[1];
 
-                    if (++Projectile.localAI[0] > 8)
+                    if (Variant != 1 && ++Projectile.localAI[0] > 8)
                     {
                         Projectile.localAI[0] = 0;
                         if (FargoSoulsUtil.HostCheck && Projectile.Distance(Main.player[mutant.target].Center) > 360)

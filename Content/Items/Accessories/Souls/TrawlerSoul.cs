@@ -133,6 +133,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     {
         public override Header ToggleHeader => Header.GetHeader<TrawlerHeader>();
         public override int ToggleItemType => ModContent.ItemType<TrawlerSoul>();
+        public override bool ExtraAttackEffect => true;
         public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 136);
         public override void PostUpdateEquips(Player player)
         {

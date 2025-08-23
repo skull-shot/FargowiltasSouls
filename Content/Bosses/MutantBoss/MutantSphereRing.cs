@@ -70,8 +70,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 spawned = true;
                 originalSpeed = Projectile.velocity.Length();
             }
-
-            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(Projectile.ai[1] / (2 * Math.PI * Projectile.ai[0] * ++Projectile.localAI[0]));
+            float mult = Projectile.ai[2] == 1 ? 0.8f : 1f;
+            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(mult * Projectile.ai[1] / (2 * Math.PI * Projectile.ai[0] * ++Projectile.localAI[0]));
 
             if (Projectile.alpha > 0)
             {

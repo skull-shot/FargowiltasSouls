@@ -109,11 +109,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
             else // phase 1
             {
-                if (++Projectile.localAI[0] % 4 == 0)
+                if (Projectile.localAI[0] == 0)
+                    Projectile.localAI[0] = Main.rand.Next(7);
+
+                int freq = WorldSavingSystem.MasochistModeReal ? 3 : 4;
+                if (++Projectile.localAI[0] % freq == 0)
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {
-                        int side = Projectile.localAI[0] % 8 == 0 ? -1 : 1;
+                        int side = Projectile.localAI[0] % (2 * freq) == 0 ? -1 : 1;
                         Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(MathHelper.PiOver2 * side), ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0], ai2: Variant);
                     }
                 }
