@@ -8,7 +8,7 @@ SpeedPositive: Increased speed by {0}%
 Scale: Reduced size by {0}%
 ScalePositive: Increased size by {0}%
 RodofDiscord: Chaos State reduces your damage, defense and damage reduction by 40%
-ChaosState: Reduced damage, defense and damage reduction by 40%
+ChaosState: Eternity Mode: Reduced damage, defense and damage reduction by 40%
 RodofHarmony: Can only be obtained after defeating the Mutant
 Split: Reduced split frequency
 WaterBolt: Cannot be used until Skeletron is defeated
@@ -58,5 +58,6 @@ ProximityMineLauncher: Projectile damage updates dynamically
 PygmyStaff: Spears can now pierce once
 MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
 AerialBane: Bonus damage against airborne enemies decreased to 15%
-ChlorophyteBullet: Homing range reduced to 0.33x
+ChlorophyteBullet: Homing range reduced to 0.5x
 SporeSac: Improved projectile immunity frames
+AvengerEmblem: Damage bonus increased by 3%

@@ -675,10 +675,11 @@ TurtleEnchant: {
 	/* Tooltip:
 		'''
 		Grants immunity to knockback
+		Taking enough damage grants the Shell Smash buff
+		Damage that is blocked, defended, dodged or absorbed also counts towards Smell Smash
+		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		When standing still you will enter a shell, reducing all damage taken by 66% and preventing debuffs on hit
 		While shelled, projectiles and contact damage are reflected for 500% damage
-		After taking too much damage the shell will break, granting the Shell Smash buff
-		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		'You suddenly have the urge to hide in a shell'
 		''' */
 }
@@ -1036,7 +1037,7 @@ ChaliceoftheMoon: {
 	/* Tooltip:
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Burning, Fused, Lihzahrd Curse, Low Ground, [i:FargowiltasSouls/CelestialRune] and Marked for Death
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, Lihzahrd Curse, [i:FargowiltasSouls/CelestialRune] and Marked for Death
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
@@ -1195,7 +1196,6 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
-		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
@@ -1223,7 +1223,7 @@ LihzahrdTreasureBox: {
 	// DisplayName: Lihzahrd Treasure Box
 	/* Tooltip:
 		'''
-		Grants immunity to knockback, Burning, and Fused
+		Grants immunity to knockback, Daybroken, and Fused
 		'Filled with various trinkets of pain and torment'
 		''' */
 }
@@ -1341,7 +1341,7 @@ PumpkingsCape: {
 		'''
 		Grants immunity to Living Wasteland
 		Increases damage and critical strike chance by 5%
-		You have an aura of Rotting while guarding
+		Massively increases life regeneration while guarding
 		Parry negates up to 200 damage and steals life based on the blocked damage
 		'Somehow, it's the right size'
 		''' */
@@ -1798,7 +1798,7 @@ WorldShaperSoul: {
 		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
+		    Tiles and walls will not be consumed at 500 stack or above
 		    Further increased placement speed and range
 		'Living in a world of cardboard'
 		''' */
@@ -2042,11 +2042,6 @@ OrdinaryCarrot: {
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		''' */
-}
-
-RabiesShot: {
-	// DisplayName: Rabies Shot
-	// Tooltip: Cures Feral Bite
 }
 
 RabiesVaccine: {
@@ -3174,9 +3169,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
+		Hits release homing stars
+		Deals extra damage based on how much the spear is extended on hit
+		Hold Right Click to charge for extra damage
+		While fully charged, hits release additional stars
 		'The radiant power of a foe's pure essence...'
 		''' */
 }

@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Buffs
+namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class SilverBuff : ModBuff
     {

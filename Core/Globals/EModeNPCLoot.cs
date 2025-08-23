@@ -286,7 +286,7 @@ namespace FargowiltasSouls.Core.Globals
                 #region Normal Enemies
                 case NPCID.CaveBat:
                 case NPCID.GiantBat:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<RabiesShot>(), 5));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new RabiesVaccineDropCondition(), ModContent.ItemType<RabiesVaccine>(), 20));
                     break;
                 case NPCID.BloodNautilus:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<DreadShell>()));

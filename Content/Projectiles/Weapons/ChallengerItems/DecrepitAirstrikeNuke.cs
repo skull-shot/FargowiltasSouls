@@ -1,6 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
-using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,7 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
             Projectile.DamageType = DamageClass.Summon;
             Projectile.timeLeft = 60 * 60;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60; //only hits once
+            Projectile.localNPCHitCooldown = -1; //only hits once
         }
 
         public ref float TargetX => ref Projectile.ai[0];
@@ -46,14 +45,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         private Vector2 origPos = Vector2.Zero;
         private bool firstTick = true;
 
-        private int HitCount = 0;
         public override bool? CanHitNPC(NPC target)
         {
-            return HitCount <= 4;
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            HitCount++;
+            if (Projectile.numHits > 4) return false;
+            else return true;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) //circular hitbox
         {
@@ -105,61 +100,29 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         public override void OnKill(int timeLeft)
         {
             ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
-            void EchsplodeMinion(Projectile p, ref int hitsLeft)
+
+            foreach (Projectile p in Main.projectile.Where(p => p.active && !p.hostile && p.owner == Main.myPlayer && p.minion && p.minionSlots > 0 && FargoSoulsUtil.IsSummonDamage(p, false, false) && Projectile.Colliding(Projectile.Hitbox, p.Hitbox)))
             {
-                if (hitsLeft <= 0)
-                {
-                    return;
-                }
-                hitsLeft--;
                 for (int i = 0; i < 5; i++)
                 {
                     Vector2 vel = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 15f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), p.Center, p.velocity + vel, ModContent.ProjectileType<DecrepitAirstrikeNukeSplinter>(), Projectile.damage / 6, Projectile.knockBack / 10, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), p.Center, p.velocity + vel, ModContent.ProjectileType<DecrepitAirstrikeNukeSplinter>(), (int)(Projectile.damage / 6 * p.minionSlots), Projectile.knockBack / 10, Projectile.owner);
                 }
                 p.Kill();
 
                 SoundEngine.PlaySound(SoundID.Item67, p.Center);
             }
 
-            int hitsLeft = Main.player[Projectile.owner].maxMinions;
-
-            //prioritize squirrels first because funny
-            foreach (Projectile p in Main.projectile.Where(p =>
-            p.type == ModContent.ProjectileType<KamikazeSquirrel>() &&
-            p.active &&
-            !p.hostile &&
-            p.owner == Main.myPlayer &&
-            p.minion && FargoSoulsUtil.IsSummonDamage(p, false, false) &&
-            Projectile.Colliding(Projectile.Hitbox, p.Hitbox)))
-            {
-                EchsplodeMinion(p, ref hitsLeft);
-            }
-            //rest of minions
-            foreach (Projectile p in Main.projectile.Where(p =>
-            p.type != ModContent.ProjectileType<KamikazeSquirrel>() &&
-            p.active &&
-            !p.hostile &&
-            p.owner == Main.myPlayer &&
-            p.minion &&
-            FargoSoulsUtil.IsSummonDamage(p, false, false) &&
-            Projectile.Colliding(Projectile.Hitbox, p.Hitbox)))
-            {
-                EchsplodeMinion(p, ref hitsLeft);
-            }
-
-
             for (int i = 0; i < 100; i++)
             {
                 Vector2 pos = Projectile.Center + new Vector2(0, Main.rand.NextFloat(ExplosionDiameter * 0.8f)).RotatedBy(Main.rand.NextFloat(MathHelper.TwoPi)); //circle with highest density in middle
-                int d = Dust.NewDust(pos, 0, 0, DustID.Fireworks, 0f, 0f, 0, default, 1.5f);
+                int d = Dust.NewDust(pos, 0, 0, DustID.Fireworks, 0f, 0f, 0, default, 1f);
                 Main.dust[d].noGravity = true;
             }
 
-            float scaleFactor9 = 2;
             for (int j = 0; j < 20; j++)
             {
-                int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
+                int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), 2);
             }
             SoundEngine.PlaySound(SoundID.Item62 with { Pitch = -0.2f }, Projectile.Center);
         }

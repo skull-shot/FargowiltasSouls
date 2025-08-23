@@ -459,7 +459,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (UsingAnkh)
                 Player.lifeRegen += 3;
             if (Ambrosia)
-                Player.lifeRegen += 5;
+                Player.lifeRegen += 4;
         }
         public override void UpdateBadLifeRegen()
         {
@@ -487,6 +487,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Shadowflame)
                 DamageOverTime(10);
 
+            if (Daybroken)
+                DamageOverTime(30);
+
             if (GodEater)
             {
                 DamageOverTime(170, true);
@@ -513,8 +516,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (MutantPresence)
             {
-                if (Player.lifeRegen > 5)
-                    Player.lifeRegen = 5;
+                //if (Player.lifeRegen > 5)
+                //    Player.lifeRegen = 5;
             }
 
             if (FlamesoftheUniverse)
@@ -823,10 +826,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Defenseless)
             {
-                Player.statDefense -= 30;
-                Player.endurance = 0;
-                Player.longInvince = false;
-                //Player.noKnockback = false;
+                Player.endurance /= 2;
             }
 
             if (Asocial)
@@ -873,41 +873,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<RemoteLightningEffect>() && RemoteCD > 0)
                 RemoteCD--;
-
-            /* TODO: Mutant's Presence toggle visual
-            if (PresenceTogglerTimer == 5)
-            {
-                Main.playerInventory = false;
-                FargoUIManager.CloseSoulToggler();
-                SoundEngine.PlaySound(SoundID.MenuClose);
-                PresenceTogglerTimer = 0;
-            }
-            if (PresenceTogglerTimer > 5)
-            {
-                Main.playerInventory = true;
-                FargoUIManager.OpenToggler();
-            }
-            if (PresenceTogglerTimer > 0)
-            {
-                PresenceTogglerTimer--;
-            }
-                
-            
-            if (MutantPresence && !HadMutantPresence && !MutantFang)
-            {
-                PresenceTogglerTimer = 100;
-                Main.playerInventory = true;
-                FargoUIManager.OpenToggler();
-                SoundEngine.PlaySound(SoundID.MenuOpen);
-            }
-            */
-
-            if (MutantPresence)
-            {
-                Player.statDefense /= 2;
-                Player.endurance /= 2;
-                Player.shinyStone = false;
-            }
 
             StatLifePrevious = Player.statLife;
         }

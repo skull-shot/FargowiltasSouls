@@ -253,12 +253,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30%
                 modifiers.FinalDamage *= 0.85f;
             }
-            /*
-            if (NPC.AnyNPCs(ModContent.NPCType<CosmosChampion>()))
-            {
-                Player.AddBuff(ModContent.BuffType<MoonFangBuff>(), LumUtils.SecondsToFrames(5));
-            }
-            */
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {

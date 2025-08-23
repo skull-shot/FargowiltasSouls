@@ -412,6 +412,18 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     case 2: //p1 bubbles
                         if (npc.ai[2] == 0f && FargoSoulsUtil.HostCheck)
                         {
+                            int max = WorldSavingSystem.MasochistModeReal ? 5 : 3;
+                            for (int i = 0; i < max; i++)
+                            {
+                                if (FargoSoulsUtil.HostCheck)
+                                {
+                                    Vector2 offset = 450 * -Vector2.UnitY.RotatedBy(MathHelper.TwoPi / max * (i + Main.rand.NextFloat(0.6f)));
+                                    if (FargoSoulsUtil.HostCheck)
+                                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<FishronFishron>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
+                                }
+                            }
+
+                            /*
                             bool random = Main.rand.NextBool(); //fan above or to sides
                             for (int j = -1; j <= 1; j++) //to both sides of player
                             {
@@ -421,6 +433,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 Vector2 offset = random ? Vector2.UnitY * -450f * j : Vector2.UnitX * 600f * j;
                                 Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<FishronFishron>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
                             }
+                            */
                         }
                         break;
 
@@ -482,12 +495,37 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     case 8: //p2 cthulhunado
                         {
-                            const int delayForTornadoSpawn = 60;
+                            const int delayForTornadoSpawn = 0;
 
                             if (npc.ai[2] == 0f)
                             {
                                 SpectralFishronRandom = Main.rand.NextBool(); //fan above or to sides
                             }
+                            if (npc.ai[2] <= 80)
+                            {
+                                foreach (Projectile p in Main.ActiveProjectiles)
+                                {
+                                    if (p.TypeAlive(ProjectileID.SharknadoBolt))
+                                    {
+                                        p.Kill();
+                                    }
+                                }
+                            }
+                            if (npc.ai[2] == delayForTornadoSpawn)
+                            {
+                                int max = WorldSavingSystem.MasochistModeReal ? 7 : 5;
+                                for (int i = 0; i < max; i++)
+                                {
+                                    if (FargoSoulsUtil.HostCheck)
+                                    {
+                                        Vector2 offset = 450 * -Vector2.UnitY.RotatedBy(MathHelper.TwoPi / max * (i + Main.rand.NextFloat(0.7f)));
+                                        if (FargoSoulsUtil.HostCheck)
+                                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<FishronFishron>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
+                                    }
+                                }
+                            }
+
+                            /*
                             if (npc.ai[2] >= delayForTornadoSpawn && npc.ai[2] % spectralFishronDelay == 0 && npc.ai[2] <= spectralFishronDelay * 2 + delayForTornadoSpawn)
                             {
                                 for (int j = -1; j <= 1; j += 2) //to both sides of player
@@ -503,6 +541,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     }
                                 }
                             }
+                            */
 
                             if (npc.ai[2] == delayForTornadoSpawn && FargoSoulsUtil.HostCheck)
                             {
@@ -595,6 +634,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 //    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ProjectileID.SharknadoBolt, 0, 0f, Main.myPlayer, 1f, npc.target + 1);
                             }
 
+
                             if (++P3Timer < 150)
                             {
                                 void Checks(int delay)
@@ -672,7 +712,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         P3Timer = 0;
                         if (--GeneralTimer < 0)
                         {
-                            GeneralTimer = 2;
+                            GeneralTimer = 8;
                             if (FargoSoulsUtil.HostCheck)
                             {
                                 if (npc.ai[3] == 2 || npc.ai[3] == 3) //spawn destructible bubbles on 2-dash
@@ -721,12 +761,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         break;
 
                     case 12: //p3 *teleports behind you*
-                        if (!Main.player[npc.target].ZoneBeach || npc.ai[3] > 5 && npc.ai[3] < 8)
+                        Player player = Main.player[npc.target];
+                        if (!player.ZoneBeach || npc.ai[3] > 5 && npc.ai[3] < 8)
                         {
-                            if (!Main.player[npc.target].ZoneBeach)
+                            if (!player.ZoneBeach)
                                 npc.position += npc.velocity;
                             npc.ai[2]++;
                             EnrageDust();
+                        }
+
+                        int minDist = 500;
+                        if (npc.ai[2] >= 16 && npc.Distance(player.Center) < minDist)
+                        {
+                            npc.Center = Vector2.Lerp(npc.Center, player.Center + player.DirectionTo(npc.Center) * minDist, 0.15f);
                         }
 
                         GeneralTimer = 0;
@@ -736,7 +783,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                         else if (npc.ai[2] == 16f)
                         {
-                            const int max = 5;
+                            int max = WorldSavingSystem.MasochistModeReal ? 3 : 2;
                             for (int j = -max; j <= max; j++)
                             {
                                 Vector2 vel = npc.DirectionFrom(Main.player[npc.target].Center).RotatedBy(MathHelper.PiOver2 / max * j);
@@ -758,7 +805,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (EXTornadoTimer < 0)
             {
-                EXTornadoTimer = 10 * 60;
+                EXTornadoTimer = 15 * 60;
 
                 SoundEngine.PlaySound(SoundID.ForceRoarPitched, npc.Center);
 

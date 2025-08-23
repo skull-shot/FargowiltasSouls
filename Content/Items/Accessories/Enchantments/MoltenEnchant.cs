@@ -127,10 +127,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                                         if (player.infernoCounter % dmgRate == 0)
                                         {
                                             player.ApplyDamageToNPC(npc, naturedmg, 0f, 0, false);
-                                            if (player.HasEffect<CrimsonEffect>() && !healed)
+                                            int heal = naturedmg / 100;
+                                            if (player.HasEffect<CrimsonEffect>() && !healed && heal > 0)
                                             {
                                                 healed = true;
-                                                player.FargoSouls().HealPlayer(naturedmg / 100);
+                                                player.FargoSouls().HealPlayer(heal);
                                             }  
                                         }
                                     }

@@ -58,5 +58,6 @@ ProximityMineLauncher: 弹幕伤害会动态更新
 PygmyStaff: 长矛可以穿透一次
 MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // AerialBane: Bonus damage against airborne enemies decreased to 15%
-// ChlorophyteBullet: Homing range reduced to 0.33x
+// ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
+// AvengerEmblem: Damage bonus increased by 3%

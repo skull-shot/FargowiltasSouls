@@ -76,31 +76,46 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         }
 
         protected float scaletimer;
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
-            if (--Projectile.localAI[0] < 0)
+            if (Variant == 0) // phase 2
             {
-                if (WorldSavingSystem.MasochistModeReal)
+                if (--Projectile.localAI[0] < 0)
                 {
-                    Projectile.localAI[0] = 3;
-
-                    for (int i = -1; i <= 1; i += 2)
+                    if (WorldSavingSystem.MasochistModeReal)
                     {
-                        if (FargoSoulsUtil.HostCheck)
+                        Projectile.localAI[0] = 3;
+
+                        for (int i = -1; i <= 1; i += 2)
                         {
-                            int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(Projectile.velocity).RotatedBy(MathHelper.PiOver2 * i),
-                              ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
-                            if (p != Main.maxProjectiles)
-                                Main.projectile[p].timeLeft = 15;
+                            if (FargoSoulsUtil.HostCheck)
+                            {
+                                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(Projectile.velocity).RotatedBy(MathHelper.PiOver2 * i),
+                                  ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
+                                if (p != Main.maxProjectiles)
+                                    Main.projectile[p].timeLeft = 15;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Projectile.localAI[0] = 4;
+                    else
+                    {
+                        Projectile.localAI[0] = 4;
 
-                    if (Projectile.ai[1] == 0 && FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0]);
+                        if (Projectile.ai[1] == 0 && FargoSoulsUtil.HostCheck)
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0]);
+                    }
+                }
+            }
+            else // phase 1
+            {
+                if (++Projectile.localAI[0] % 4 == 0)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int side = Projectile.localAI[0] % 8 == 0 ? -1 : 1;
+                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(MathHelper.PiOver2 * side), ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0], ai2: Variant);
+                    }
                 }
             }
 

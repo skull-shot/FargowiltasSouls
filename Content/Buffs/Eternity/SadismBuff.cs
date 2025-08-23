@@ -11,11 +11,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Eternity");
-            // Description.SetDefault("The power of Eternity Mode is with you");
             BuffID.Sets.IsATagBuff[Type] = true; //ignore most debuff immunity
-                                                 //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "施虐狂");
-                                                 //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "受虐模式的力量与你同在");
         }
 
         public override void Update(Player player, ref int buffIndex)
@@ -42,7 +38,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;

@@ -138,7 +138,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Burning, 120);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
             target.AddBuff(BuffID.OnFire, 300);
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
             {

@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.endurance += 0.05f;
             player.GetArmorPenetration(DamageClass.Generic) += 50;
             player.statLifeMax2 += player.statLifeMax / 5;
-            player.lifeRegen += 2;
+            player.lifeRegen += 1;
             fargoPlayer.WingTimeModifier += 2f;
             player.moveSpeed += 0.2f;
 
@@ -203,7 +203,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             IceQueensCrown.AddEffects(player, Item);
 
             //lihzahrd treasure
-            player.buffImmune[BuffID.Burning] = true;
+            player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
             player.AddEffect<DiveEffect>(Item);
@@ -276,9 +276,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MidasBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;

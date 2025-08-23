@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                     break;
 
                 case NPCID.Lavabat:
-                    target.AddBuff(BuffID.Burning, 240);
+                    target.AddBuff(BuffID.Burning, 120); //this one can live
                     break;
 
                 case NPCID.GiantBat:

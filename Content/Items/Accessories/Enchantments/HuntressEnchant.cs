@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs;
+﻿using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;

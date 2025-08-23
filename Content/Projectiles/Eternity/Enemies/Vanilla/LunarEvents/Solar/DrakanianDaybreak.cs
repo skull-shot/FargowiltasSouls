@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -32,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.LunarEve
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.OnFire, 900);
-            target.AddBuff(BuffID.Burning, 180);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 180);
         }
     }
 }

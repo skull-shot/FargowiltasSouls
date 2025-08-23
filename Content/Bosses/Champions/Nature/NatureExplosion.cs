@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using System;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -54,7 +55,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
             target.AddBuff(BuffID.OnFire, 300);
             target.velocity.X = target.Center.X < Main.npc[(int)Projectile.ai[0]].Center.X ? -15f : 15f;
             target.velocity.Y = -10f;

@@ -408,7 +408,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(BuffID.Burning, 300);
+            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

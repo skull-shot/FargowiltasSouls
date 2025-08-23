@@ -25,7 +25,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void PassiveEffects(Player player)
         {
             player.buffImmune[Terraria.ModLoader.ModContent.BuffType<MidasBuff>()] = true;
-            player.buffImmune[Terraria.ModLoader.ModContent.BuffType<LoosePocketsBuff>()] = true;
             player.FargoSouls().SecurityWallet = true;
         }
 
