@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	// DisplayName: Abominable Presence
-	// Description: Defense, damage reduction, and life regen reduced; Moon Leech effect
+	// Description: Life regen reduced; Moon Leech effect
 }
 
 BaronsBurdenBuff: {
@@ -209,8 +209,8 @@ CurseoftheMoonBuff: {
 }
 
 DefenselessBuff: {
-	// DisplayName: Defenseless
-	// Description: Your guard is completely broken
+	// DisplayName: Exposed
+	// Description: Halves your damage reduction
 }
 
 FlamesoftheUniverseBuff: {
@@ -721,7 +721,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	// DisplayName: Ambrosia Buff
-	// Description: +20% damage, +8% damage reduction, +5 life regeneration
+	// Description: +20% damage, +8% damage reduction, increased life regeneration
 }
 
 MutantDesperationBuff: {
