@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.alpha = 60;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (noHurt)
                 return false;
@@ -652,12 +652,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                 if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
                     NPC.frame.Y = 0;
             }
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

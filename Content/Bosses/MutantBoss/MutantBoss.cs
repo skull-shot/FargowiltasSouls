@@ -108,7 +108,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 BuffID.Suffocation,
                 ModContent.BuffType<LethargicBuff>(),
                 ModContent.BuffType<ClippedWingsBuff>(),
-                ModContent.BuffType<MutantNibbleBuff>(),
                 ModContent.BuffType<OceanicMaulBuff>(),
                 ModContent.BuffType<LightningRodBuff>(),
                 ModContent.BuffType<SadismBuff>(),
@@ -193,7 +192,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         }
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             if (!WorldSavingSystem.MasochistModeReal)
                 return false;
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && AttackChoice > -1;

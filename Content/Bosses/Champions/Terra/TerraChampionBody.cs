@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.Distance(target.Center) < 30 * NPC.scale;
         }
 
@@ -155,7 +155,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             target.AddBuff(BuffID.OnFire, 600);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

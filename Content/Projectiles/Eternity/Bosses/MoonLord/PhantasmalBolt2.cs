@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
             Projectile.extraUpdates = 3;
 
             Projectile.timeLeft = 1200;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

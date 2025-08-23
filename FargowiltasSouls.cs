@@ -470,7 +470,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<HallowIlluminatedBuff>(),
                     ModContent.BuffType<FusedBuff>(),
                     ModContent.BuffType<GodEaterBuff>(),
-                    ModContent.BuffType<GuiltyBuff>(),
                     ModContent.BuffType<HexedBuff>(),
                     ModContent.BuffType<HypothermiaBuff>(),
                     ModContent.BuffType<InfestedBuff>(),
@@ -479,13 +478,10 @@ namespace FargowiltasSouls
                     ModContent.BuffType<JammedBuff>(),
                     ModContent.BuffType<LethargicBuff>(),
                     ModContent.BuffType<LightningRodBuff>(),
-                    ModContent.BuffType<LivingWastelandBuff>(),
                     ModContent.BuffType<LovestruckBuff>(),
                     ModContent.BuffType<LowGroundBuff>(),
                     ModContent.BuffType<MarkedforDeathBuff>(),
                     ModContent.BuffType<MidasBuff>(),
-                    ModContent.BuffType<MutantNibbleBuff>(),
-                    ModContent.BuffType<NanoInjectionBuff>(),
                     //ModContent.BuffType<PoweroftheCosmosBuff>(),
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<OceanicSealBuff>(),
@@ -518,7 +514,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<BerserkedBuff>(), //technically only reduces dr but eh
                     ModContent.BuffType<DefenselessBuff>(),
                     ModContent.BuffType<FlamesoftheUniverseBuff>(),
-                    ModContent.BuffType<NanoInjectionBuff>(),
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<TwinsInstallBuff>()
                 ];

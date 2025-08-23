@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.hostile = true;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 360 * (Projectile.extraUpdates + 1);

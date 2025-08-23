@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.friendly = false;
             Projectile.hostile = true;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.timeLeft = 120 * Projectile.MaxUpdates;
             Projectile.tileCollide = false;

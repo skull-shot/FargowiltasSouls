@@ -127,7 +127,6 @@ namespace FargowiltasSouls.Content.Projectiles.Armor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.ShadowFlame, 300);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
 
         public override bool PreDraw(ref Color lightColor)

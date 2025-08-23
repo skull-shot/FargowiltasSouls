@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.hostile = true;
             Projectile.alpha = 255;
             Projectile.timeLeft = 60;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.extraUpdates = 1;
         }

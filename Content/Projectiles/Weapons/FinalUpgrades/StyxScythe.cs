@@ -137,7 +137,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.ShadowFlame, 300);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
             target.immune[Projectile.owner] = 6;
         }
 

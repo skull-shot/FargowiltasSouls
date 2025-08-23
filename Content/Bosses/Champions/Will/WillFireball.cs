@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.timeLeft = 600;
             Projectile.alpha = 60;
             Projectile.ignoreWater = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnSpawn(IEntitySource source)

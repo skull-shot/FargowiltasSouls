@@ -28,7 +28,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
             player.endurance += 0.04f;
             player.noKnockback = true;
             player.AddEffect<ReinforcedStats>(Item);

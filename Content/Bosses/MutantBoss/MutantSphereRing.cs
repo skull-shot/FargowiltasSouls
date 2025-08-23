@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 480;
             Projectile.alpha = 200;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             //dont let others inherit this behaviour
             if (Projectile.type == ModContent.ProjectileType<MutantSphereRing>())

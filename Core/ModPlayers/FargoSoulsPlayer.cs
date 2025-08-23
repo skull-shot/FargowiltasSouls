@@ -455,7 +455,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             GodEater = false;
             FlamesoftheUniverse = false;
             IvyVenom = false;
-            MutantNibble = false;
             Asocial = false;
             Defenseless = false;
             Infested = false;
@@ -485,7 +484,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Illuminated = false;
             //LihzahrdBlessing = false;
             Berserked = false;
-            NanoInjection = false;
             Stunned = false;
             HasJungleRose = false;
             HaveCheckedAttackSpeed = false;
@@ -1044,8 +1042,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (ConcentratedRainbowMatter
                 && Player.statLife < Player.statLifeMax2
                 && Player.potionDelay <= 0
-                && Player.HasEffect<RainbowHealEffect>()
-                && !MutantNibble)
+                && Player.HasEffect<RainbowHealEffect>())
             {
                 Item potion = Player.QuickHeal_GetItemToUse();
                 if (potion != null)
@@ -1152,9 +1149,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Daybroken)
                     damageSource = PlayerDeathReason.ByOther(8);
-
-                if (NanoInjection)
-                    damageSource = DeathByLocalization("NanoInjection");
 
                 if (GodEater || FlamesoftheUniverse || CurseoftheMoon || MutantFang)
                     damageSource = DeathByLocalization("DivineWrath");

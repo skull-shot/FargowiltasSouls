@@ -2163,7 +2163,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             if (State != 8)
                 return false;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
         }
 

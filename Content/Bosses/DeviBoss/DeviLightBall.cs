@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
             Projectile.penetrate = -1;
             Projectile.timeLeft = 270;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnSpawn(IEntitySource source)

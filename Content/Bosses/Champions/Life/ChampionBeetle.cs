@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.hostile = true;
             Projectile.timeLeft = 600;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.penetrate = -1;
             Projectile.scale = 1.5f;

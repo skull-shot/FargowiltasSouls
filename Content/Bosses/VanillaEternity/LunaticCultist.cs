@@ -1021,7 +1021,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return base.CanHitPlayer(npc, target, ref cooldownSlot);
 
             if (SourceNPCType is NPCID.MoonLordCore or NPCID.MoonLordHead or NPCID.MoonLordHand)
-                cooldownSlot = 1;
+                cooldownSlot = ImmunityCooldownID.Bosses;
 
             return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
@@ -1092,7 +1092,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 
@@ -1120,7 +1119,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
     }
 }

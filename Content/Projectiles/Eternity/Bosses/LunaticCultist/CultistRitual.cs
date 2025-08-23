@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         protected override void Movement(NPC npc)
         {

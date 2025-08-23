@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void ActiveEffects(Player player, Item item)
         {
             player.buffImmune[ModContent.BuffType<SqueakyToyBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<GuiltyBuff>()] = true;
             player.AddEffect<SqueakEffect>(item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

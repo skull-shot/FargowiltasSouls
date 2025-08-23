@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies
             Projectile.CloneDefaults(ProjectileID.WoodenArrowHostile);
             AIType = ProjectileID.WoodenArrowHostile;
             Projectile.extraUpdates = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

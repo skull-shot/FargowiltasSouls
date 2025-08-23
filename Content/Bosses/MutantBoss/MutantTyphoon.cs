@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.alpha = 100;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool CanHitPlayer(Player target)

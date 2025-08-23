@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.penetrate = -1;
             Projectile.hostile = true;
 
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

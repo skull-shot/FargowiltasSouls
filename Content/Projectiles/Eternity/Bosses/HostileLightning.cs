@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
             Projectile.tileCollide = true;
             Projectile.timeLeft = 120;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         Color DrawColor = Color.Cyan;
