@@ -328,7 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             TitaniumCD = false;
             CrystalAssassinDiagonal = false;
 
-            CactusImmune = false;
 
 
             //            #endregion
@@ -1487,7 +1486,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             if (MutantPresence)
-                multiplier *= 0.5f;
+                multiplier *= 0.8f;
 
             heal = (int)(heal * multiplier);
 

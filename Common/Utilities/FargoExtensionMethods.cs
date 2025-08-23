@@ -4,12 +4,14 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -155,6 +157,18 @@ namespace FargowiltasSouls //lets everything access it without using
         public static bool TypeAlive<T>(this Projectile projectile) where T : ModProjectile => projectile.Alive() && projectile.type == ModContent.ProjectileType<T>();
         public static bool TypeAlive(this NPC npc, int type) => npc.Alive() && npc.type == type;
         public static bool TypeAlive<T>(this NPC npc) where T : ModNPC => npc.Alive() && npc.type == ModContent.NPCType<T>();
+
+        public static Texture2D GetTexture(this NPC npc) => TextureAssets.Npc[npc.type].Value;
+        public static Texture2D GetTexture(this Projectile projectile) => TextureAssets.Projectile[projectile.type].Value;
+        public static Vector2 GetDrawPosition(this NPC npc) => npc.Center - Main.screenPosition + Vector2.UnitY * npc.gfxOffY;
+        public static Vector2 GetDrawPosition(this Projectile projectile) => projectile.Center - Main.screenPosition + Vector2.UnitY * projectile.gfxOffY;
+        public static Rectangle GetDefaultFrame(this Projectile projectile)
+        {
+            Texture2D texture = projectile.GetTexture();
+            int sizeY = texture.Height / Main.projFrames[projectile.type]; //ypos of lower right corner of sprite to draw
+            int frameY = projectile.frame * sizeY;
+            return new(0, frameY, texture.Width, sizeY);
+        }
 
         /// <summary>
         /// Spawns a projectie from this source NPC. <br></br>

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -78,6 +79,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             if (NPC.ai[0] == -3) //crimson head does no contact damage
                 return false;
 
+            if (NPC.ai[0] == 4 && NPC.ai[2] < 90) // no contact while winding up deathrays
+                return false;
+
             CooldownSlot = 1;
             return true;
         }
@@ -110,25 +114,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             {
                 case -3: //crimson
                     targetPos = player.Center - Vector2.UnitY * 250f;
-                    Movement(targetPos, 0.3f, 24f);
+                    Movement(targetPos, 0.2f, 24f);
 
-                    if (++NPC.ai[2] > 75) //ichor periodically
+                    float freq = WorldSavingSystem.MasochistModeReal ? 10 : 17;
+                    if (++NPC.ai[2] % freq == 0) //ichor periodically
                     {
-                        if (NPC.ai[2] > 105)
+                        if (NPC.localAI[0] > 60 && FargoSoulsUtil.HostCheck)
                         {
-                            NPC.ai[2] = 0;
-                        }
-
-                        NPC.velocity *= 0.99f;
-
-                        if (++NPC.localAI[1] > 2) //rain piss
-                        {
-                            NPC.localAI[1] = 0;
-                            if (NPC.localAI[0] > 60 && FargoSoulsUtil.HostCheck)
-                            {
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2),
-                                    Vector2.UnitY * Main.rand.NextFloat(-4f, 0), ProjectileID.GoldenShowerHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                            }
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2),
+                                Vector2.UnitY * Main.rand.NextFloat(-4f, 0), ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 60f, 1f, 0.22f);
                         }
                     }
 
@@ -159,12 +153,20 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                             }
                         }
                     }*/
-
+                    if (NPC.localAI[0] == 0)
+                    {
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<NatureExplosionTelegraph>(), 0, 0f, Main.myPlayer, NPC.whoAmI, 400, 240);
+                            
+                        }
+                    }
                     if (++NPC.localAI[0] < 240) //stay near
                     {
                         targetPos = player.Center;
                         Movement(targetPos, 0.10f, 24f);
 
+                        /*
                         for (int i = 0; i < 20; i++) //warning ring
                         {
                             Vector2 offset = new();
@@ -177,6 +179,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                                 dust.velocity += Vector2.Normalize(offset) * -5f;
                             dust.noGravity = true;
                         }
+                        */
                     }
                     else if (NPC.localAI[0] == 240) //explode into attacks
                     {
@@ -189,10 +192,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<NatureExplosion>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
 
-                            const int max = 12;
+                            int max = WorldSavingSystem.MasochistModeReal ? 16 : 12;
                             for (int i = 0; i < max; i++)
                             {
-                                Vector2 speed = 24f * NPC.SafeDirectionTo(player.Center).RotatedBy(2 * Math.PI / max * i);
+                                Vector2 speed = 1f * NPC.SafeDirectionTo(player.Center).RotatedBy(2 * Math.PI / max * i);
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<NatureFireball>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                             }
                         }
@@ -261,18 +264,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         if (NPC.Distance(targetPos) > 50)
                             Movement(targetPos, 0.8f, 24f);
 
-                        if (++NPC.ai[2] > 60)
+                        if (++NPC.ai[2] > 6)
                         {
                             NPC.ai[2] = 0;
                             //NPC.localAI[1] = NPC.localAI[1] == 1 ? -1 : 1;
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                const int max = 25;
+                                const int max = 6;
                                 for (int i = 0; i < max; i++)
                                 {
                                     Vector2 speed = Main.rand.NextFloat(1f, 3f) * Vector2.UnitX.RotatedBy(2 * Math.PI / max * (i + Main.rand.NextDouble()));
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<NatureIcicle>(),
-                                        FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 60 + Main.rand.Next(20), 1f);// NPC.localAI[1]);
+                                        FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 60 + Main.rand.Next(20));// NPC.localAI[1]);
                                 }
                             }
                         }
@@ -290,7 +293,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
                 case 2: //chlorophyte
                     targetPos = player.Center;
-                    Movement(targetPos, 0.12f, 24f);
+                    float accel = WorldSavingSystem.MasochistModeReal ? 0.14f : 0.12f;
+                    Movement(targetPos, accel, 24f);
 
                     if (NPC.ai[2] == 0)
                     {
@@ -346,8 +350,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                                 }
                             }
                         }
-
-                        if (NPC.ai[2] > 60)
+                        int endTime = WorldSavingSystem.MasochistModeReal ? 48 : 60;
+                        if (NPC.ai[2] > endTime)
                             NPC.ai[2] = 0;
 
                         if (++NPC.localAI[0] > 300)
@@ -369,6 +373,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
                         NPC.direction = NPC.spriteDirection = NPC.Center.X < body.Center.X ? 1 : -1;
 
+                        if (WorldSavingSystem.MasochistModeReal && NPC.ai[2] < 15)
+                            NPC.ai[2] = 15;
+
                         if (++NPC.ai[2] == 90)
                         {
                             NPC.netUpdate = true;
@@ -389,8 +396,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                                     ModContent.ProjectileType<NatureDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3), 0f, Main.myPlayer, ai0, NPC.whoAmI);
                             }
                         }
-
-                        if (++NPC.localAI[0] > 330)
+                        int endTime = WorldSavingSystem.MasochistModeReal ? 250 : 330;
+                        if (++NPC.localAI[0] > endTime)
                         {
                             NPC.ai[0] = 0;
                             NPC.localAI[0] = 0;

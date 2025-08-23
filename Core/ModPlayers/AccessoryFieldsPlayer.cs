@@ -89,7 +89,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float MeteorCD = 60;
 
         public int ApprenticeItemCD;
-        public bool CactusImmune = false;
         public int CactusProcCD;
         public bool ChlorophyteEnchantActive = false;
         public bool MonkEnchantActive = false;
@@ -200,6 +199,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HallowRepelTime;
         public int TurtleCounter;
         public float TurtleShellHP = 1000;
+        public bool TurtleShellBroken;
         public bool ShellHide;
         public int ValhallaVerticalDashing;
         public int VortexCD;

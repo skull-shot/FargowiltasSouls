@@ -92,14 +92,12 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
-            if (item.type == ItemID.CactusHelmet || item.type == ItemID.CactusBreastplate || item.type == ItemID.CactusLeggings)
+            if (item.type == ItemID.AvengerEmblem)
             {
-                foreach (var tooltip in tooltips)
+                foreach (TooltipLine tooltip in tooltips)
                 {
-                    if (tooltip.Name == "SetBonus")
-                    {
-                        tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.CactusImmunity");
-                    }
+                    if (tooltip.Name == "Tooltip0" && tooltip.Text.Contains("12%"))
+                        tooltip.Text = tooltip.Text.Replace("12%", "15%");
                 }
             }
         }
@@ -123,6 +121,10 @@ namespace FargowiltasSouls.Content.Items
             if (item.type == ItemID.JungleRose)
             {
                 player.FargoSouls().HasJungleRose = true;
+            }
+            if (item.type == ItemID.AvengerEmblem)
+            {
+                player.GetDamage(DamageClass.Generic) += 0.03f;
             }
         }
         public override void HoldItem(Item item, Player player)

@@ -113,8 +113,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             BuffID.AmmoBox,
             BuffID.Clairvoyance,
             BuffID.Bewitched,
-            BuffID.WarTable,
-            BuffID.Honey
+            BuffID.WarTable
+           // BuffID.Honey
         ];
         public override void PostUpdateEquips(Player player)
         {

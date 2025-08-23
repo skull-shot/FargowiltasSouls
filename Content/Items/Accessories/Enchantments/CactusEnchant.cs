@@ -27,16 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.FargoSouls().CactusImmune = true;
             player.AddEffect<CactusEffect>(Item);
-        }
-        public override void UpdateInventory(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
         }
 
         public override void AddRecipes()

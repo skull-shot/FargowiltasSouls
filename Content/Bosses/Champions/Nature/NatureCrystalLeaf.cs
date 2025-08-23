@@ -1,10 +1,13 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
@@ -59,6 +62,26 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             target.AddBuff(BuffID.Poisoned, 300);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = Projectile.GetTexture();
+            Vector2 drawPos = Projectile.GetDrawPosition();
+            Rectangle frame = Projectile.GetDefaultFrame();
+            SpriteEffects spriteEffects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 2f * Projectile.scale;
+                Color glowColor = Color.White;
+
+                Main.EntitySpriteDraw(texture, drawPos + afterimageOffset, frame, Projectile.GetAlpha(glowColor), Projectile.rotation, frame.Size() / 2, Projectile.scale, spriteEffects);
+            }
+            Main.spriteBatch.ResetToDefault();
+            Main.EntitySpriteDraw(texture, drawPos, frame, Projectile.GetAlpha(lightColor), Projectile.rotation, frame.Size() / 2, Projectile.scale, spriteEffects);
+            return false;
         }
     }
 }

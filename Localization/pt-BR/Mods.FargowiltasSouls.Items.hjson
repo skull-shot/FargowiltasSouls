@@ -106,7 +106,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'Não tem nada igual, é!'
 		'''
-	// VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -1450,7 +1449,7 @@ SandsofTime: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		''' */
@@ -2095,11 +2094,6 @@ OrdinaryCarrot: {
 		Clique com o botão direito para aumentar o alcance de visualização enquanto estiver no inventário
 		'Arrancado do rosto de um inimigo derrotado'
 		'''
-}
-
-RabiesShot: {
-	DisplayName: Injeção de Raiva
-	Tooltip: Cura a Mordida Feroz
 }
 
 RabiesVaccine: {
@@ -3187,9 +3181,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
+		Hits release homing stars
+		Deals extra damage based on how much the spear is extended on hit
+		Hold Right Click to charge for extra damage
+		While fully charged, hits release additional stars
 		'The radiant power of a foe's pure essence...'
 		''' */
 }
@@ -3347,7 +3342,6 @@ Extra: {
 	EternityItem: Eternidade
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Item do Patreon <<
-	// CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: Um item foi roubado de você!
 	// Scaling: scaling

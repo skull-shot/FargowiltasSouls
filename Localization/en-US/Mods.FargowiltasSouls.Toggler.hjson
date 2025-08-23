@@ -10,7 +10,6 @@ PalmwoodEffect: Palmwood Sentry
 PearlwoodStarEffect: Pearlwood Stars
 PearlwoodManaEffect: Pearlwood Mana Pickups
 PearlwoodRainbowEffect: Pearlwood Rainbow Trail
-TimberEffect: Concise Timber Force
 EarthHeader: "{$Mods.FargowiltasSouls.Items.EarthForce.DisplayName}"
 AdamantiteEffect: Adamantite Speed and Spread
 CobaltEffect: Cobalt Boosted Jumps
@@ -21,7 +20,6 @@ OrichalcumEffect: Orichalcum Poison
 PalladiumHealing: Palladium Healing
 PalladiumEffect: Palladium Orbs
 TitaniumEffect: Titanium Shards
-EarthForceEffect: Concise Earth Force
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
 CopperEffect: Copper Lightning
 IronPassiveEffect: Iron Reforges
@@ -33,7 +31,6 @@ TungstenEffect: Tungsten Size
 TungstenShockwaveEffect: Tungsten Shockwave
 ObsidianProcEffect: Obsidian Explosions
 AshWoodFireballs: Ash Fireballs
-TerraLightningEffect: Concise Terra Force
 WillHeader: "{$Mods.FargowiltasSouls.Items.WillForce.DisplayName}"
 GladiatorSpears: Gladiator Spears
 GladiatorBanner: Gladiator Zone
@@ -44,7 +41,6 @@ RedRidingEffect: Red Riding Arrow Rain
 ValhallaDashEffect: Valhalla Mount Dash
 SquireMountJump: Squire Mount Jump
 SquireMountSpeed: Squire Mount Speed
-WillEffect: Concise Will Force
 LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: Bee Flowers
 BeetleEffect: Beetles
@@ -52,7 +48,7 @@ CactusEffect: Cactus Needles
 PumpkinEffect: Grow Pumpkins
 SpiderEffect: Spider Crits
 TurtleEffect: Turtle Shell
-LifeForceEffect: Concise Life Force
+TurtleSmashEffect: Shell Smash
 NatureHeader: "{$Mods.FargowiltasSouls.Items.NatureForce.DisplayName}"
 ChloroMinion: Chlorophyte Leaf Crystal
 CrimsonEffect: Crimson Healing
@@ -66,7 +62,6 @@ MoltenEffect: Molten Inferno
 ShroomiteHealEffect: Shroomite Consumption Buff
 ShroomiteMushroomPriority: Mushrooms Take Potion Priority
 ShroomiteShroomEffect: Shroomite Mushroom Cloud
-NatureEffect: Concise Nature Force
 ShadowHeader: "{$Mods.FargowiltasSouls.Items.DeathForce.DisplayName}"
 DarkArtistMinion: Flameburst Minion
 ApprenticeSupport: Apprentice Effect
@@ -81,26 +76,22 @@ NinjaEffect: Ninja Speed
 CrystalAssassinDash: Crystal Assassin Dash
 CrystalDiagonalDash: Diagonal Dash
 ShadowForceDashEffect: Shadow Dash
-ShadowForceEffect: Concise Death Force
 SpiritHeader: "{$Mods.FargowiltasSouls.Items.SpiritForce.DisplayName}"
 FossilBones: Fossil Bones On Hit
 HallowEffect: Hallowed Healing Potions
 AncientHallowMinion: Ancient Hallowed Blade
 SpectreOnHitEffect: Spirits On Hit
 ForbiddenEffect: Forbidden Storm
-TikiEffect: Tiki Minions
-SpiritTornadoEffect: Concise Spirit Force
+TikiEffect: Tiki Whips
 CosmoHeader: "{$Mods.FargowiltasSouls.Items.CosmoForce.DisplayName}"
 MeteorMomentumEffect: Magiluminescence
 MeteorEffect: Meteor Strike
-MeteorTrailEffect: Meteor Spark Trail
 NebulaEffect: Nebula Blazes
 SolarEffect: Solar Shield & Dash
 SolarFlareEffect: Solar Flare
 StardustMinionEffect: Stardust Guardian
 VortexEffect: Vortex Laser
 CosmosMoonEffect: Cosmic Moons
-CosmoForceEffect: Concise Cosmo Force
 DeviEnergyHeader: Eternity Mode Items
 MasoCarrotEffect: Carrot Zoom
 RainbowHealEffect: Auto-Use Healing Potions
@@ -146,10 +137,8 @@ GelicWingJump: Gelic Jump
 PungentEyeballCursor: Pungent Eye Cursor
 ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
 IvyVenomEffect: Ivy Venom
-LihzahrdGroundPound: Lihzahrd Fastfall
 LihzahrdBoulders: Ground Pound Spray
 CelestialRuneAttacks: Celestial Rune Support
-// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: Disabled Minion Effects for Damage
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: Reduced Hurtbox Size
@@ -162,7 +151,6 @@ MasoAbom: Abominationn Minion
 MasoRing: Phantasmal Ring Minion
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"
 MeleeSpeedEffect: Melee Speed
-SniperScopeEffect: Sniper Scope
 UniverseSpeedEffect: Universe Attack Speed
 WorldShaperHeader: "{$Mods.FargowiltasSouls.Items.WorldShaperSoul.DisplayName}"
 MiningHunt: Mining Hunter Buff
@@ -173,7 +161,6 @@ BuilderEffect: Builder Mode
 ColossusHeader: "{$Mods.FargowiltasSouls.Items.ColossusSoul.DisplayName}"
 FleshKnuckleEffect: Flesh Knuckles Aggro
 PaladinShieldEffect: Paladin's Shield
-FrozenTurtleEffect: Frozen Turtle Shell
 ShimmerImmunityEffect: Shimmer Immunity
 FlightMasteryHeader: "{$Mods.FargowiltasSouls.Items.FlightMasterySoul.DisplayName}"
 FlightMasteryInsignia: Soaring Insignia Acceleration
@@ -195,77 +182,3 @@ TrawlerHeader: "{$Mods.FargowiltasSouls.Items.TrawlerSoul.DisplayName}"
 TrawlerFogEffect: Damaging Fog
 EternityHeader: "{$Mods.FargowiltasSouls.Items.EternitySoul.DisplayName}"
 EternityTin: Eternity Crit Effect Stacking
-PetHeader: Pets
-// the pets are no longer existing in game
-PetDinoConfig: Dino Pet
-PetEaterConfig: Eater Pet
-PetFaceMonsterConfig: Face Monster Pet
-PetGrinchConfig: Grinch Pet
-PetHornetConfig: Hornet Pet
-PetImpConfig: Imp Pet
-PetPenguinConfig: Penguin Pet
-PetPandaConfig: Pet Red Panda
-PetDGConfig: Dungeon Guardian Pet
-PetSnowmanConfig: Snowman Pet
-PetShroomConfig: Truffle Pet
-PetWerewolfConfig: Pet Werewolf
-PetBernieConfig: Pet Bernie
-PetBlackCatConfig: Black Cat Pet
-PetChesterConfig: Chester Pet
-PetCompanionCubeConfig: Companion Cube Pet
-PetCursedSaplingConfig: Cursed Sapling Pet
-PetKittenConfig: Kitten Pet
-PetEsteeConfig: Estee Pet
-PetEyeSpringConfig: Eye Spring Pet
-PetFoxConfig: Fennec Fox Pet
-PetButterflyConfig: Butterfly Pet
-PetGlommerConfig: Glommer Pet
-PetDragonConfig: Dragon Pet
-PetHarpyConfig: Harpy Pet
-PetLizardConfig: Lizard Pet
-PetMinitaurConfig: Mini Minotaur Pet
-PetParrotConfig: Parrot Pet
-PetPigmanConfig: Pigman Pet
-PetPlanteroConfig: Plantero Pet
-PetGatoConfig: Gato Pet
-PetPupConfig: Puppy Pet
-PetSeedConfig: Seedling Pet
-PetSpiderConfig: Spider Pet
-PetMimicConfig: Mimic Pet
-PetSharkConfig: Shark Pet
-PetSquashConfig: Squashling Pet
-PetGliderConfig: Sugar Glider Pet
-PetTikiConfig: Tiki Pet
-PetTurtleConfig: Turtle Pet
-PetVoltConfig: Volt Bunny Pet
-PetZephyrConfig: Zephyr Fish Pet
-PetHeartConfig: Crimson Heart Pet
-PetNaviConfig: Fairy Pet
-PetFlickerConfig: Flickerwick Pet
-PetLanternConfig: Magic Lantern Pet
-PetOrbConfig: Shadow Orb Pet
-PetSuspEyeConfig: Suspicious Eye Pet
-PetWispConfig: Wisp Pet
-PetKSConfig: King Slime Pet
-PetEoCConfig: Eye of Cthulhu Pet
-PetEoWConfig: Eater of World Pet
-PetBoCConfig: Brain of Cthulhu Pet
-PetDeerConfig: Deerclops Pet
-PetQBConfig: Queen Bee Pet
-PetSkeleConfig: Skeletron Pet
-PetQSConfig: Queen Slime Pet
-PetDestroyerConfig: Destroyer Pet
-PetTwinsConfig: Twins Pet
-PetSkelePrimeConfig: Skeletron Prime Pet
-PetOgreConfig: Ogre Pet
-PetPlanteraConfig: Plantera Pet
-PetPumpkingConfig: Pumpking Pet
-PetEverscreamConfig: Everscream Pet
-PetIceQueenConfig: Ice Queen Pet
-PetDukeConfig: Duke Fishron Pet
-PetGolemConfig: Golem Pet
-PetEoLConfig: Empress of Light Pet
-PetBetsyConfig: Besty Pet
-PetMartianConfig: Martian Pet
-PetLCConfig: Phantasmal Dragon Pet
-PetMLConfig: Moonling Pet

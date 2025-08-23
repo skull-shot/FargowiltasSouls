@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -49,6 +51,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
                 int p = Player.FindClosest(Projectile.Center, 0, 0);
                 if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)
                 {
+                    if (Main.player[p].HasEffect<IronEquippedEffect>() && Projectile.Distance(Main.player[p].Center) < 300)
+                    {
+                        Projectile.position += Projectile.DirectionTo(Main.player[p].Center) * 2f;
+                    }
+
                     if (Main.player[p].Distance(Projectile.Center) < 16 * 5)
                     {
                         slowdown = false;

@@ -57,6 +57,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     Projectile.localAI[2] = distance;
                     Projectile.velocity.Normalize();
                     Projectile.netUpdate = true;
+
+
+                    if (WorldSavingSystem.EternityMode)
+                    {
+                        Projectile.timeLeft = 200 + 80 * (5 - (int)Main.npc[EModeGlobalNPC.abomBoss].ai[2]);
+                        if (WorldSavingSystem.MasochistModeReal)
+                            Projectile.timeLeft += 30;
+                    }
                 }
             }
             if (Projectile.ai[0] > 0 && StartTime != 0)
@@ -94,24 +102,31 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             float rotation = Projectile.ai[0] < 0 && Projectile.ai[1] > 0 ? 1f - Projectile.ai[1] / Projectile.localAI[1] : 0.8f;
             Projectile.rotation += rotation * Projectile.localAI[0];
+
+            if (Projectile.timeLeft < 20)
+            {
+                Projectile.Opacity -= 1f / 20;
+            }
         }
 
         public override void OnKill(int timeLeft)
         {
-            int dustMax = 20;
-            float speed = 12;
+            
+            int dustMax = 4;
+            float speed = 3;
             for (int i = 0; i < dustMax; i++)
             {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, Scale: 3.5f);
+                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, Scale: 1f);
                 Main.dust[d].velocity *= speed;
                 Main.dust[d].noGravity = true;
             }
             for (int i = 0; i < dustMax; i++)
             {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Scale: 3.5f);
+                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Scale: 1f);
                 Main.dust[d].velocity *= speed;
                 Main.dust[d].noGravity = true;
             }
+            
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

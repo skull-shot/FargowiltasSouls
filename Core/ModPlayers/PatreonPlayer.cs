@@ -55,6 +55,13 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool TouhouBuff;
 
+        public bool dolvan;
+        public int dolvanDeathTimer;
+
+        public bool Dartslinger;
+
+        public bool AubreyFlower;
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
@@ -97,11 +104,14 @@ namespace FargowiltasSouls.Core.ModPlayers
             Northstrider = false;
             RazorContainer = false;
             TouhouBuff = false;
+            dolvan = false;
+            Dartslinger = false;
+            AubreyFlower = false;
         }
 
         public override void OnEnterWorld()
         {
-            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One)
+            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan)
             {
                 string text = Language.GetTextValue($"Mods.{Mod.Name}.Message.PatreonNameEffect");
                 Main.NewText($"{text}, {Player.name}!");
@@ -165,11 +175,60 @@ namespace FargowiltasSouls.Core.ModPlayers
                 case "Eight3One":
                     Eight3One = true;
                     break;
+                case "dolvan":
+                    dolvan = true;
+                    Player.statDefense.FinalMultiplier *= 0;
+                    if (Player.active && !Player.dead)
+                    {
+                        dolvanDeathTimer++;
+                    }
+                    if (dolvanDeathTimer >= 60 * 60 * 5)//5 minutes
+                    {
+                        dolvanDeathTimer = 0;
+                        Projectile p = Projectile.NewProjectileDirect(Player.GetSource_Death(), Player.Center, Vector2.Zero, ProjectileID.Bomb, 80, 5, Player.whoAmI);
+                        p.timeLeft = 3;
+                        Player.KillMe(PlayerDeathReason.ByProjectile(Player.whoAmI, p.whoAmI), 10000, Player.direction);
+                    }
+                    
+                    Player.AddBuff(BuffID.Poisoned, 2);
+                    Player.AddBuff(BuffID.Darkness, 2);
+                    Player.AddBuff(BuffID.Cursed, 2);
+                    Player.AddBuff(BuffID.OnFire, 2);
+                    Player.AddBuff(BuffID.Bleeding, 2);
+                    Player.AddBuff(BuffID.Confused, 2);
+                    Player.AddBuff(BuffID.Slow, 2);
+                    Player.AddBuff(BuffID.Weak, 2);
+                    Player.AddBuff(BuffID.Silenced, 2);
+                    Player.AddBuff(BuffID.BrokenArmor, 2);
+                    Player.AddBuff(BuffID.Suffocation, 2);
+                    Player.AddBuff(ModContent.BuffType<OceanicSealBuff>(), 2);
+                    break;
+                case "Dartslinger":
+                    Dartslinger = true;
+                    break;
+                case "Sayaka":
+                    AubreyFlower = true;
+                    Player.lifeRegen += 4;
+                    break;
             }
 
             if (CompOrb && Player.itemAnimation > 0)
             {
                 Player.manaRegenDelay = Player.maxRegenDelay;
+            }
+        }
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+            //post update does not run before this, do not check patreon bools it wont work
+            if (!mediumCoreDeath && Player.name.Equals("Dartslinger", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.Blowpipe, prefix: PrefixID.Unreal);
+                yield return new Item(ItemID.PoisonDart, 500);
+                yield return new Item(ItemID.GlommerPetItem);
+            }
+            if (!mediumCoreDeath && Player.name.Equals("Sayaka", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.Katana, prefix: PrefixID.Legendary);
             }
         }
         public static void AddDash_Eight3One(Player player)
@@ -189,6 +248,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             if (Eight3One && Main.rand.NextBool(20))
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
+            if (AubreyFlower && item.DamageType == DamageClass.Melee)
+                target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -200,6 +261,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             if (Eight3One && Main.rand.NextBool(20))
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
+            if (AubreyFlower && proj.DamageType == DamageClass.Melee)
+                target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -297,6 +360,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Item.NewItem(Player.GetSource_Death(), Player.Hitbox, ModContent.ItemType<ParadoxWolfSoul>());
                 }
             }
+            if ((Player.numberOfDeathsPVP + Player.numberOfDeathsPVE) % 5 == 0 && (Player.numberOfDeathsPVP + Player.numberOfDeathsPVE) > 0 && dolvan)
+            {
+                Main.NewText("[c/a80000:" + Language.GetTextValue("Mods.FargowiltasSouls.Message.DolvanSorry") + "]");
+            }
         }
 
         public override void HideDrawLayers(PlayerDrawSet drawInfo)
@@ -350,6 +417,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
             }
+        }
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        {
+            if (Dartslinger && (item.ammo == AmmoID.Dart || item.useAmmo == AmmoID.Dart))
+            {
+                damage *= 1.15f;
+            }
+            base.ModifyWeaponDamage(item, ref damage);
         }
     }
 }

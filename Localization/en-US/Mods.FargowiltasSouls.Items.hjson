@@ -106,10 +106,8 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'It's the quenchiest!'
 		'''
-	VanityTooltip: Grants immunity to ambient cactus damage in Eternity Mode
 }
 
 ChlorophyteEnchant: {
@@ -677,10 +675,11 @@ TurtleEnchant: {
 	Tooltip:
 		'''
 		Grants immunity to knockback
+		Taking enough damage grants the Shell Smash buff
+		Damage that is blocked, defended, dodged or absorbed also counts towards Smell Smash
+		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		When standing still you will enter a shell, reducing all damage taken by 66% and preventing debuffs on hit
 		While shelled, projectiles and contact damage are reflected for 500% damage
-		After taking too much damage the shell will break, granting the Shell Smash buff
-		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		'You suddenly have the urge to hide in a shell'
 		'''
 }
@@ -1095,7 +1094,7 @@ DubiousCircuitry: {
 	DisplayName: Dubious Circuitry
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Defenseless
+		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
 		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
 		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
@@ -1148,7 +1147,7 @@ GalacticGlobe: {
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Honey]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
 		'''
 }
 
@@ -1387,7 +1386,7 @@ ReinforcedPlating: {
 	DisplayName: Reinforced Plating
 	Tooltip:
 		'''
-		Grants immunity to knockback and Defenseless
+		Grants immunity to knockback and Exposed
 		Reduces damage taken by 4%
 		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
@@ -1400,14 +1399,14 @@ SandsofTime: {
 		'''
 		4% increased damage when equipped
 		Works from inventory and vanity slots:
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		'Whatever you do, don't drop it'
 		'''
 	VanityTooltip:
 		'''
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
 		Use to teleport to your last death point
 		'''
@@ -1593,7 +1592,7 @@ ColossusSoul: {
 	DisplayName: Colossus Soul
 	Tooltip:
 		'''
-		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration by 6
+		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
 		[i:860] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1618,7 +1617,7 @@ DimensionSoul: {
 	DisplayName: Soul of Dimensions
 	Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 6, [i:CharmofMyths] reduces healing cooldown by 25%
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
 		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, [c/BC5252:and disables all of your jumps (togglable)]
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1669,7 +1668,7 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
@@ -1775,7 +1774,7 @@ WorldShaperSoul: {
 		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
+		    Tiles and walls will not be consumed at 500 stack or above
 		    Further increased placement speed and range
 		'Living in a world of cardboard'
 		'''
@@ -2019,11 +2018,6 @@ OrdinaryCarrot: {
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		'''
-}
-
-RabiesShot: {
-	DisplayName: Rabies Shot
-	Tooltip: Cures Feral Bite
 }
 
 RabiesVaccine: {
@@ -3151,9 +3145,10 @@ PrismaRegalia: {
 	DisplayName: Prisma Regalia
 	Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
+		Hits release homing stars
+		Deals extra damage based on how much the spear is extended on hit
+		Hold Right Click to charge for extra damage
+		While fully charged, hits release additional stars
 		'The radiant power of a foe's pure essence...'
 		'''
 }
@@ -3311,7 +3306,6 @@ Extra: {
 	EternityItem: Eternity
 	DisabledEffects: Has effects disabled by the Effect Toggles menu
 	PatreonItem: >> Patreon Item <<
-	CactusImmunity: Grants immunity to ambient cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	ItemStolen: An item was stolen from you!
 	Scaling: scaling

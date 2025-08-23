@@ -22,6 +22,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             base.AI();
             if (!Projectile.tileCollide && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
                 Projectile.tileCollide = true;
+
+            if (Projectile.velocity.Length() < 24)
+                Projectile.velocity *= 1.06f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

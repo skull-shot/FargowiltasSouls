@@ -18,12 +18,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override void SetDefaults()
         {
             Item.mana = 0;
-            Item.damage = 185;
+            Item.damage = 140;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 18;
+            Item.useAnimation = 18;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 5);
@@ -35,10 +35,21 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.shootSpeed = 4f;
             Item.noUseGraphic = true;
             Item.noMelee = true;
+
         }
+        public override bool AltFunctionUse(Player player) => true;
         public override bool CanUseItem(Player player)
         {
             return player.ownedProjectileCounts[Item.shoot] < 1;
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            float ai0 = 0;
+            if (player.altFunctionUse == 2)
+                ai0 = 1;
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai0);
+            return false;
         }
     }
 }

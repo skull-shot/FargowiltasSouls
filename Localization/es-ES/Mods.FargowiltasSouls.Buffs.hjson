@@ -497,7 +497,7 @@ BabyLifelightBuff: {
 	// Description: Behold, the light of an angel
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	// DisplayName: Shell Smash
 	// Description: Sharply raised movement and attack speed
 }

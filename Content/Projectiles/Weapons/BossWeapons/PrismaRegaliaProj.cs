@@ -49,7 +49,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         public int Hits = 0;
         public override bool PreAI()
         {
-            ref float chargeLevel = ref Projectile.ai[0];
+            ref float chargable = ref Projectile.ai[0];
+            ref float chargeLevel = ref Projectile.ai[2];
             ref float timer = ref Projectile.ai[1];
 
             Player player = Main.player[Projectile.owner];
@@ -62,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             float HoldoutRangeMax = (float)Projectile.Size.Length() / 2; //since sprite is diagonal
             float HoldoutRangeMin = (float)-Projectile.Size.Length() / 6;
 
-            if (player.channel)
+            if (chargable == 1 && Main.mouseRight && chargeLevel >= 0)
             {
                 Projectile.velocity = player.SafeDirectionTo(Main.MouseWorld);
                 Projectile.Center = player.MountedCenter + Projectile.velocity * HoldoutRangeMin;
@@ -72,7 +73,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 
                 if (player.whoAmI == Main.myPlayer)
                     CooldownBarManager.Activate("PrismaRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/BossDrops/PrismaRegalia").Value, Color.DeepPink,
-                        () => Projectile.ai[0] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<PrismaRegalia>());
+                        () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<PrismaRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {
                     SoundEngine.PlaySound(FargosSoundRegistry.ChargeSound, Projectile.Center + Projectile.velocity * Projectile.Size.Length() / 2);
@@ -80,8 +81,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 Projectile.localAI[1] = chargeLevel; //store the charge amount
                                                      //int d = Dust.NewDust(player.MountedCenter + Projectile.velocity * Projectile.Size.Length() * 0.95f, 0, 0, DustID.CrystalPulse);
                                                      //Main.dust[d].noGravity = true;
-                bool charged = chargeLevel >= maxCharge - 1;
-                FargoSoulsUtil.AuraParticles(player, Projectile.Size.Length() * 0.95f, color: charged ? Color.HotPink : Color.DeepPink, particleType: charged ? 1 : 0);
+                //bool charged = chargeLevel >= maxCharge - 1;
+                //FargoSoulsUtil.AuraParticles(player, Projectile.Size.Length() * 0.95f, color: charged ? Color.HotPink : Color.DeepPink, particleType: charged ? 1 : 0);
             }
             else
             {
@@ -151,18 +152,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             }
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.SourceDamage *= MathHelper.Lerp(1f, 1.2f, Extension);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Vector2 pos = Projectile.Center + Projectile.velocity * (Projectile.Size.Length() / 2f);
-            int count = 0;
+            int count = 1;
             if (Charged)
             {
-                count = 4;
-            }
-            if (Extension > 0.675f)
-            {
-                SoundEngine.PlaySound(SoundID.Item68, pos);
-                count += 3;
+                count = 7;
             }
             if (count == 0)
             {

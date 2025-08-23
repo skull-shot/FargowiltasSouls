@@ -497,7 +497,7 @@ BabyLifelightBuff: {
 	Description: 看哪，那天使的圣光
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	DisplayName: 破损龟壳
 	Description: 暂时无法缩壳
 }

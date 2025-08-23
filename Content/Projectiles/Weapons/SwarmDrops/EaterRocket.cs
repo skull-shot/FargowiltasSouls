@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void OnKill(int timeLeft)
         {
             //dust
-            for (int num468 = 0; num468 < 20; num468++)
+            /*for (int num468 = 0; num468 < 20; num468++)
             {
                 int num469 = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.PurpleCrystalShard, -Projectile.velocity.X * 0.2f,
                     -Projectile.velocity.Y * 0.2f, 100, default, 1.5f);
@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 num469 = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.PurpleCrystalShard, -Projectile.velocity.X * 0.2f,
                     -Projectile.velocity.Y * 0.2f, 100);
                 Main.dust[num469].velocity *= 1.5f;
-            }
+            }*/
 
             if (sweetspot)
             {
@@ -125,7 +125,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Main.gore[gore].velocity += new Vector2(1, 1).RotatedBy(MathHelper.TwoPi / 4 * j);
             }
 
-            if (Projectile.owner == Main.myPlayer)
+            /*if (Projectile.owner == Main.myPlayer)
             {
                 int max = 2;
                 for (int i = 0; i < max; i++)
@@ -134,7 +134,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     if (p != Main.maxProjectiles)
                         Main.projectile[p].DamageType = DamageClass.Ranged;
                 }
-            }
+            }*/
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -152,11 +152,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
-                Color color27 = Color.White * Projectile.Opacity * 0.75f;
+                Color color27 = Color.Purple * Projectile.Opacity * 0.55f;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin();
             }
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
