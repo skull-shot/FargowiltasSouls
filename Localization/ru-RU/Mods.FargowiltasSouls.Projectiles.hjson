@@ -824,7 +824,7 @@ KingSlimeBallFriendly.DisplayName: Слизневый шар
 CultistFireballSpin.DisplayName: Огненный шар
 CultistIceBall.DisplayName: Ледяная сфера
 CultistIceShard.DisplayName: Ледяной осколок
-// CosmosTelegraph.DisplayName: Cosmos Telegraph
-// NatureExplosionTelegraph.DisplayName: Nature Explosion Telegraph
-// RockeaterLauncherHeld.DisplayName: Rockeater Launcher Held
-// MutantPenetratorNuke.DisplayName: Mutant Penetrator Nuke
+// CosmosTelegraph.DisplayName: Punch Telegraph
+// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
+// RockeaterLauncherHeld.DisplayName: Rockeater Launcher
+// MutantPenetratorNuke.DisplayName: Penetrator Nuke

@@ -111,8 +111,22 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         }
 
         float scaletimer;
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
+            if (Variant != 0)
+            {
+                if (Projectile.timeLeft > Variant)
+                    Projectile.timeLeft = (int)Variant;
+                if (Projectile.scale < 2)
+                {
+                    Projectile.position = Projectile.Center;
+                    Projectile.scale = 2;
+                    Projectile.width = Projectile.height = 32;
+                    Projectile.Center = Projectile.position;
+                    Projectile.netUpdate = true;
+                }
+            }
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
@@ -136,7 +150,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             NPC mutant = Main.npc[(int)Projectile.ai[0]];
-            if (mutant.active && mutant.type == ModContent.NPCType<MutantBoss>() && (mutant.ai[0] == 6 || mutant.ai[0] == 15 || mutant.ai[0] == 23))
+            if (mutant.active && mutant.type == ModContent.NPCType<MutantBoss>() && (Variant != 0 || mutant.ai[0] == 6 || mutant.ai[0] == 15 || mutant.ai[0] == 23))
             {
                 Projectile.velocity = Vector2.Normalize(mutant.velocity);
                 Projectile.position -= Projectile.velocity;
