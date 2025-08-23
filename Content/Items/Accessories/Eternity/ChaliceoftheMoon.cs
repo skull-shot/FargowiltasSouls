@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Red;
             Item.value = Item.sellPrice(0, 7);
-            Item.defense = 8;
+            //Item.defense = 8;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //magical bulb
             MagicalBulb.AddEffects(player, Item);
-            player.AddEffect<IvyVenomEffect>(Item);
+            //player.AddEffect<IvyVenomEffect>(Item);
 
             //lihzahrd treasure
             player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             //celestial rune
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.AddEffect<CelestialRuneAttacks>(Item);
-          //player.AddEffect<CelestialRuneOnhit>(Item);
+            //player.AddEffect<CelestialRuneOnhit>(Item);
 
             //chalice
             player.buffImmune[ModContent.BuffType<AtrophiedBuff>()] = true;
