@@ -29,3 +29,5 @@ dragons demise now has inherent armor pen and benefits from attack speed (to com
 eri bg is a bit brighter
 eri p3 sucks you in harder as life decreases (sorry low%-ers)
 eri p3 black hole has contact damage
+fixed a texture error with lifelight blasters
+ftw lifelight is biblically accurate

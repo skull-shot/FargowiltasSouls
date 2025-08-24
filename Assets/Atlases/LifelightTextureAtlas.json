@@ -935,6 +935,30 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "Lifelight_Full": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 244,
+        "h": 888
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 244,
+        "h": 888
+      },
+      "sourceSize": {
+        "w": 244,
+        "h": 888
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   },
   "meta": {
