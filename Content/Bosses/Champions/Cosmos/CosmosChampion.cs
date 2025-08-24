@@ -360,6 +360,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                             {
                                 max = 3;
                                 startRotation = NPC.DirectionFrom(player.Center).ToRotation();
+                                if (Main.getGoodWorld)
+                                {
+                                    max = 4;
+                                    startRotation = NPC.DirectionFrom(player.Center).ToRotation() + MathHelper.PiOver4;
+                                }
                             }
                             for (int i = 0; i < max; i++)
                             {
@@ -802,7 +807,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
                         }
                     }
-                        
+
 
                     if (++NPC.ai[2] <= 6)
                     {
@@ -1206,6 +1211,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     break;
 
                 case 10: //dust telegraph for nebula punches
+                    if (!NPC.HasValidTarget)
+                        goto case 2;
+
                     void NebulaDust()
                     {
                         Vector2 dustPos = NPC.Center + new Vector2(-26 * NPC.direction, 22) * NPC.scale;
@@ -1333,7 +1341,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
                             }
                         }
-                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+                        SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
 
                         if (NPC.ai[1] == 110 + 45 - 50 && FargoSoulsUtil.HostCheck)
                         {
@@ -1474,7 +1482,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     break;
 
                 case 14:
-                    NPC.velocity *= 0.9f;
+                    if (NPC.HasValidTarget)
+                    {
+                        NPC.velocity *= 0.9f;
+                    }
                     goto case 2;
 
                 case 15: //ZA WARUDO

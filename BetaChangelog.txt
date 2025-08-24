@@ -1,1 +1,20 @@
-﻿
+﻿eri
+	fix not despawning if you die during shen balls (the p2 attack after vortex)
+	fix doesn't despawn after rapid punches after timestop
+	has 4 moons in ftw p3
+empress ftw wheel has 7 streams instead of 3
+bbb spins slower when you're out of combat. speeds up again when in combat
+maso will champ p3 fireball trail lasts longer
+emode mutant giving mutants curse now only requires ml, previously abom (low%-ers rejoice)
+shimmering mutant trophy gets you Oncoming Mutant (yes the debug item)
+did some jank to try and make eow always despawn together? needs testing
+paladin's dungeon spirits on death have brief iframes so they dont get spawncamped instantly
+unconscious devi wakes up on her own if left alone, instead of despawning
+fixed ftw fishron not having arena damage.
+maso qb subject rain can have every individual bee hurt you exactly once (previously used random iframe timers)
+fixed royal subject gores being too big
+tried fixing mutant sometimes nicking you with his arena debuffs for 0.5sec while hes spawning in
+improved nuke fishron visuals and fixed it just disappearing when hitting surfaces
+you can now cancel your attack cooldown with a parry, but only when parry is actually available
+	(read: cant mash M1/M2 for infinity attack speed, also you still need to let go of m1 to parry)
+parrying freezes your momentum (big nerf - can't fall into an attack for an effortless parry, actually need good timing)

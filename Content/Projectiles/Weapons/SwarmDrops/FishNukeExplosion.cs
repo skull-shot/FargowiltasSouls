@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Luminance.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -39,6 +40,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.Opacity = 1;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 20;
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
 
         public override void AI()
@@ -102,13 +108,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Texture2D flare2 = FargoAssets.Smoke.Value;
             Texture2D flare = FargoAssets.Scorch.Value;
 
-            float smokesize = MathHelper.Lerp(0, 0.7f, vfxinterpolant * 0.07f);
-
-
+            float smokesize = MathHelper.Lerp(0, 1.5f, vfxinterpolant * 0.07f);
 
             Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Gray with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
-            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
-            //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
+            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity * 0.75f, Projectile.rotation, flare.Size() * 0.5f, smokesize, 0, 0f);
+            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare.Size() * 0.5f, smokesize * 0.5f, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * 4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             return false;
         }

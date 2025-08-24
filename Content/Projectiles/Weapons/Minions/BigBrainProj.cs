@@ -55,7 +55,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
             float slotsModifier = MaxMinionSlots / 7f * Math.Min(Projectile.minionSlots / MaxMinionSlots, 1f);
 
-            Projectile.ai[0] += 0.1f + 0.3f * slotsModifier;
+            NPC targetnpc = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000, center: Main.player[Projectile.owner].MountedCenter));
+            bool targetting = targetnpc != null; //targetting code, prioritize targetted npcs, then look for closest if none is found
+
+            float spinModifier = 0.1f + 0.3f * slotsModifier;
+            if (!targetting)
+                spinModifier /= 2;
+            Projectile.ai[0] += spinModifier;
             Projectile.alpha = (int)(Math.Cos(Projectile.ai[0] / 0.4f * MathHelper.TwoPi / 180) * 60) + 60;
 
             float oldScale = Projectile.scale;
@@ -65,9 +71,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.width = (int)(Projectile.width * Projectile.scale / oldScale);
             Projectile.height = (int)(Projectile.height * Projectile.scale / oldScale);
             Projectile.Center = Projectile.position;
-
-            NPC targetnpc = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 1000, center: Main.player[Projectile.owner].MountedCenter));
-            bool targetting = targetnpc != null; //targetting code, prioritize targetted npcs, then look for closest if none is found
 
             if (targetting)
             {

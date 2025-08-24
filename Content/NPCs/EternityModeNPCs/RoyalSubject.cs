@@ -139,8 +139,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
                 for (int i = 303; i <= 308; i++)
                     if (!Main.dedServ)
-                        if (!Main.dedServ)
-                            Gore.NewGore(NPC.GetSource_FromThis(), NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)), NPC.velocity / 2, i, NPC.scale);
+                        Gore.NewGore(NPC.GetSource_FromThis(), NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)), NPC.velocity / 2, i, NPC.scale / 2);
             }
         }
 

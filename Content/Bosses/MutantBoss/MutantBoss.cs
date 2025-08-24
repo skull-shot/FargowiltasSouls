@@ -434,7 +434,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             //drop summon
             if (WorldSavingSystem.EternityMode &&  NPC.HasPlayerTarget)
             {
-                EModeUtils.DropSummon(NPC, ModContent.ItemType<MutantsCurse>(), WorldSavingSystem.DownedMutant, ref droppedSummon, WorldSavingSystem.downedAbom);
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<MutantsCurse>(), WorldSavingSystem.DownedMutant, ref droppedSummon, NPC.downedMoonlord);
             }
             
 
@@ -478,6 +478,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.TargetClosest();
                 if (NPC.timeLeft < 30)
                     NPC.timeLeft = 30;
+
+                AuraCenter = NPC.Center;
+
                 if (NPC.Distance(Main.player[NPC.target].Center) < 1500)
                 {
                     NPC.localAI[3] = 1;
