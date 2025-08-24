@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -32,6 +33,16 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
                 // TODO: 1.4.4 porting: I have no idea what previous falses were
                 player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Fused", player.name)), damage, 0, dodgeable: false);
                 Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<FusedExplosion>(), damage, 12f, Main.myPlayer);
+            }
+        }
+
+        public override void Update(NPC npc, ref int buffIndex)
+        {
+            npc.FargoSouls().Fused = true;
+
+            if (npc.buffTime[buffIndex] == 2 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<FusedExplosion>(), 400, 12f, Main.myPlayer);
             }
         }
 

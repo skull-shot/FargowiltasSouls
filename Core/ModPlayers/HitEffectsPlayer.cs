@@ -26,6 +26,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static FargowiltasSouls.FargowiltasSouls;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Core.ModPlayers
@@ -331,6 +332,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
+            if (Fused)
+                dr += 0.5f;
 
             if (Illuminated)
             {
@@ -382,6 +385,32 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             OnHitByEither(npc, null);
+
+            if (Fused)
+            {
+                int fusedType = ModContent.BuffType<FusedBuff>();
+                npc.AddBuff(fusedType, Player.buffTime[Player.FindBuffIndex(fusedType)]);
+                Player.ClearBuff(fusedType);
+                Player.buffImmune[fusedType] = true; //avoid being debuffed by it again if you run into a fused inflicting enemy
+            }
+            else if (npc.FargoSouls().Fused)
+            {
+                int fusedType = ModContent.BuffType<FusedBuff>();
+                int fusedIndex = npc.FindBuffIndex(fusedType);
+                Player.AddBuff(fusedType, npc.buffTime[fusedIndex]);
+                if (Main.netMode == NetmodeID.MultiplayerClient)
+                {
+                    var netMessage = Instance.GetPacket(); // Broadcast item request to server
+                    netMessage.Write((byte)PacketID.ClearNPCBuffFromClient);
+                    netMessage.Write((byte)npc.whoAmI);
+                    netMessage.Write((byte)fusedType);
+                    netMessage.Send();
+                }
+                else
+                {
+                    npc.DelBuff(fusedIndex);
+                }
+            }
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)

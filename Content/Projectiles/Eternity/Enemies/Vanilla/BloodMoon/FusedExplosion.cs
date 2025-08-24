@@ -15,7 +15,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoo
             base.SetDefaults();
             Projectile.scale = 5f;
             Projectile.friendly = true;
+            Projectile.hostile = true;
+            Projectile.trap = true;
             CooldownSlot = -1;
+        }
+
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            modifiers.SourceDamage /= 4;
         }
 
         public override void AI()

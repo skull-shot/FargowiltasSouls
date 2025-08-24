@@ -52,7 +52,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 Projectile.velocity = -Vector2.UnitY;
             }
 
+            Player player = Main.player[Projectile.owner];
             Projectile.Center = Main.player[Projectile.owner].Center;
+            player.immune = true;
+            player.immuneTime = Math.Max(player.immuneTime, 2);
+            for (int i = 0; i < player.hurtCooldowns.Length; i++)
+                player.hurtCooldowns[i] = Math.Max(player.hurtCooldowns[i], 2);
 
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {

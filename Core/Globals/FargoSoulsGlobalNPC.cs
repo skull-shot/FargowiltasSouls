@@ -85,6 +85,7 @@ namespace FargowiltasSouls.Core.Globals
         public bool Suffocation;
         public int SuffocationTimer;
         public bool DeathMarked;
+        public bool Fused;
         //        public bool Villain;
         public bool FlamesoftheUniverse;
         public bool Lethargic;
@@ -149,6 +150,7 @@ namespace FargowiltasSouls.Core.Globals
             Suffocation = false;
             Sublimation = false;
             DeathMarked = false;
+            Fused = false;
             // SnowChilled = false;
             Chilled = false;
             Smite = false;
@@ -676,6 +678,21 @@ namespace FargowiltasSouls.Core.Globals
                     float sparkScale = MathHelper.Lerp(0.25f, 1.5f,ratio);
                     Particle spark = new SmallSparkle(npc.Center, sparkVel, Color.Red, sparkScale, (int)sparkTime);
                     spark.Spawn();
+                }
+            }
+
+            if (Fused)
+            {
+                if (Main.rand.NextBool())
+                {
+                    int dust = Dust.NewDust(npc.position + new Vector2(npc.width / 2, npc.height / 5), 0, 0, DustID.Torch, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 0, default, 2f);
+                    Main.dust[dust].velocity.Y -= 2f;
+                    Main.dust[dust].velocity *= 2f;
+                    if (Main.rand.NextBool(4))
+                    {
+                        Main.dust[dust].scale += 0.5f;
+                        Main.dust[dust].noGravity = true;
+                    }
                 }
             }
 
