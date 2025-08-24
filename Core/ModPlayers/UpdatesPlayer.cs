@@ -487,6 +487,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Daybroken)
                 DamageOverTime(30);
 
+            if (Hellfire)
+                DamageOverTime(10);
+
             if (GodEater)
             {
                 DamageOverTime(170, true);

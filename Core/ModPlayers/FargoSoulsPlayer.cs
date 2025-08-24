@@ -440,6 +440,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Unstable = false;
             Fused = false;
             Shadowflame = false;
+            Hellfire = false;
             Daybroken = false;
             Oiled = false;
             Slimed = false;
@@ -1147,6 +1148,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Shadowflame)
                     damageSource = DeathByLocalization("Shadowflame");
+
+                if (Hellfire)
+                    damageSource = PlayerDeathReason.ByOther(8);
 
                 if (Daybroken)
                     damageSource = PlayerDeathReason.ByOther(8);

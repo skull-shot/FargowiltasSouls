@@ -18,3 +18,6 @@ improved nuke fishron visuals and fixed it just disappearing when hitting surfac
 you can now cancel your attack cooldown with a parry, but only when parry is actually available
 	(read: cant mash M1/M2 for infinity attack speed, also you still need to let go of m1 to parry)
 parrying freezes your momentum (big nerf - can't fall into an attack for an effortless parry, actually need good timing)
+
+retinazer aura inflicts hellfire during ray spin
+renamed our hellfire to black inferno

@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Core.Globals
         public bool Needled;
         public bool SolarFlare;
         public bool TimeFrozen;
-        public bool HellFire;
+        public bool BlackInferno;
         public bool HellFireMarked;
         // public bool Corrupted;
         // public bool CorruptedForce;
@@ -134,7 +134,7 @@ namespace FargowiltasSouls.Core.Globals
             LeadPoison = false;
             LeadPoisonSpread = false;
             SolarFlare = false;
-            HellFire = false;
+            BlackInferno = false;
             HellFireMarked = false;
             // Corrupted = false;
             // CorruptedForce = false;
@@ -454,7 +454,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (HellFire)
+            if (BlackInferno)
             {
                 if (Main.rand.Next(4) < 3)
                 {
@@ -807,7 +807,7 @@ namespace FargowiltasSouls.Core.Globals
             }
 
             //100 dps
-            if (HellFire)
+            if (BlackInferno)
             {
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;

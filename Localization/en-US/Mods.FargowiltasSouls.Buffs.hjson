@@ -148,9 +148,14 @@ MutantPresenceBuff: {
 	Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
 }
 
-HellFireBuff: {
-	DisplayName: Hell Fire
-	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+HellfireBuff: {
+	DisplayName: Hellfire
+	Description: Slowly losing life
+}
+
+BlackInfernoBuff: {
+	DisplayName: Black Inferno
+	Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {
