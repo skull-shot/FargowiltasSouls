@@ -111,9 +111,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 ModContent.BuffType<LightningRodBuff>(),
                 ModContent.BuffType<SadismBuff>(),
                 ModContent.BuffType<GodEaterBuff>(),
-                ModContent.BuffType<TimeFrozenBuff>(),
                 ModContent.BuffType<LeadPoisonBuff>(),
-
             ]);
 
         }
@@ -3564,6 +3562,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             //NPC.damage = 0;
             if (NPC.buffType[0] != 0)
                 NPC.DelBuff(0);
+
+            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
 
             if (NPC.ai[1] == 0) //entering final phase, give healing
             {

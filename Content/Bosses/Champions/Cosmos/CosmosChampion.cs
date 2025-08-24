@@ -59,7 +59,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 BuffID.Lovestruck,
                 ModContent.BuffType<LethargicBuff>(),
                 ModContent.BuffType<ClippedWingsBuff>(),
-                ModContent.BuffType<TimeFrozenBuff>(),
                 ModContent.BuffType<LightningRodBuff>()
             ]);
 
@@ -158,6 +157,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override int SpawnNPC(int tileX, int tileY)
         {
             return base.SpawnNPC(tileX, tileY);
+        }
+        public override bool PreAI()
+        {
+            //immune to timestop during own timestop
+            if (Animation == 15 && NPC.ai[1] < 210 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int timestop = NPC.FindBuffIndex(ModContent.BuffType<TimeFrozenBuff>());
+                if (timestop > -1)
+                    NPC.DelBuff(timestop);
+            }
+
+            return base.PreAI();
         }
         public override void AI()
         {
