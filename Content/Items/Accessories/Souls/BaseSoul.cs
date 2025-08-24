@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
     public abstract class BaseSoul : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Souls", Name);
         protected virtual Color? nameColor => null;
 
         public override void SetStaticDefaults()
