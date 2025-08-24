@@ -4,9 +4,13 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.Map;
 using Terraria.ModLoader;
@@ -55,7 +59,7 @@ namespace FargowiltasSouls.Content.Items
         /// <summary>
         /// The location of the item's glowmask texture, defaults to the item's internal texture name with _glow
         /// </summary>
-        public virtual string Glowmaskstring => Texture + "_glow";
+        public virtual string GlowmaskTexture => Texture + "_glow";
 
         /// <summary>
         /// The amount of frames in the item's animation. <br />
@@ -72,21 +76,20 @@ namespace FargowiltasSouls.Content.Items
         /// Allows you to draw things in front of this item. This method is called even if PreDrawInWorld returns false. <br />
         /// Runs directly after the code for PostDrawInWorld in SoulsItem.
         /// </summary>
-        public virtual void SafePostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) { }
+        public virtual void SafePostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) 
+        { 
+        }
 
         public sealed override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        {
-            if (Mod.RequestAssetIfExists(Glowmaskstring, out Asset<Texture2D> _))
+        {   
+            if (ModContent.RequestIfExists(GlowmaskTexture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
             {
-                Item item = Main.item[whoAmI];
-                Texture2D texture = ModContent.Request<Texture2D>(Glowmaskstring, AssetRequestMode.ImmediateLoad).Value;
-                int height = texture.Height / NumFrames;
-                int width = texture.Width;
-                int frame = NumFrames > 1 ? height * Main.itemFrame[whoAmI] : 0;
-                SpriteEffects flipdirection = item.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-                Rectangle Origin = new(0, frame, width, height);
-                Vector2 DrawCenter = new(item.Center.X, item.position.Y + item.height - height / 2);
-                Main.EntitySpriteDraw(texture, DrawCenter - Main.screenPosition, Origin, Color.White, rotation, Origin.Size() / 2, scale, flipdirection, 0);
+                Texture2D texture = asset.Value;
+                Rectangle frame = NumFrames > 1 ? Main.itemAnimations[Item.type].GetFrame(texture, Main.itemFrameCounter[whoAmI]) : texture.Frame();
+                Vector2 origin = frame.Size() / 2f;
+                Vector2 DrawCenter = Item.Bottom - Main.screenPosition - new Vector2(0, origin.Y);
+
+                Main.EntitySpriteDraw(texture, DrawCenter, frame, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
             }
             SafePostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
         }

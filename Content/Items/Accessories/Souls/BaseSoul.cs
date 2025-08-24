@@ -37,6 +37,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.rare = ItemRarityID.Purple;
         }
 
-        public override Color? GetAlpha(Color lightColor) => Color.White;
+        //public override Color? GetAlpha(Color lightColor) => Color.White;
     }
 }
