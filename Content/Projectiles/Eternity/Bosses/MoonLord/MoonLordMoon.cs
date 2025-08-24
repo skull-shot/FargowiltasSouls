@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
                 if (!Main.dedServ && Main.LocalPlayer.active)
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
 
-                for (int num615 = 0; num615 < 20; num615++)
+                /*for (int num615 = 0; num615 < 20; num615++)
                 {
                     int num616 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 1.5f);
                     Main.dust[num616].velocity *= 1.4f;
@@ -134,7 +134,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
                     int num228 = Dust.NewDust(vector6 + vector7, 0, 0, DustID.Torch, 0f, 0f, 0, default, 3f);
                     Main.dust[num228].noGravity = true;
                     Main.dust[num228].velocity = vector7;
-                }
+                }*/
             }
 
             NPC moonLord = FargoSoulsUtil.NPCExists(EModeGlobalNPC.moonBoss, NPCID.MoonLordCore);
