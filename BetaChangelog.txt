@@ -24,3 +24,5 @@ renamed our hellfire to black inferno
 made mutant p1 spear toss a little easier
 updated mutant nuke to use new nuke fishron visual
 bloodshed from dread parry lasts longer (doesnt disappear and deny you the buff uber fast)
+rockeater launcher now benefits from attack speed
+dragons demise now has inherent armor pen and benefits from attack speed (to compensate, has lower damage and fire rate)
