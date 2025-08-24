@@ -295,7 +295,7 @@ namespace FargowiltasSouls
                 // draw our maso you can't respawn text
                 num += 60;
                 num2 = 0.5f;
-                string mode = WorldSavingSystem.MasochistModeReal ? Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMode") : Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityMode");
+                string mode = WorldSavingSystem.MasochistModeReal ? Language.GetTextValue("Mods.FargowiltasSouls.UI.Masochist") : Language.GetTextValue("Mods.FargowiltasSouls.UI.Eternity");
                 string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn", mode);
                 DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text,
                     new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num),

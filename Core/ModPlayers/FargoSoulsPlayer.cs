@@ -43,6 +43,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -1224,6 +1225,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                         drawInfo.cFront = shader;
                     }
                 }
+            }
+
+            if (StyxSet)
+            {
+                drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
+                drawInfo.bodyGlowColor = Color.White;
+                drawInfo.armGlowColor = Color.White;
+                /*drawInfo.headGlowMask = ModContent.ItemType<StyxCrown>();
+                drawInfo.headGlowColor = Color.White;
+                drawInfo.legsGlowMask = ModContent.ItemType<StyxLeggings>();
+                drawInfo.legsGlowColor = Color.White;*/
             }
         }
 

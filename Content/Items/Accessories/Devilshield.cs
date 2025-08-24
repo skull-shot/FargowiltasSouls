@@ -17,7 +17,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories
 {
-    //[AutoloadEquip(EquipType.Shield)]
+    [AutoloadEquip(EquipType.Shield)]
     public class Devilshield : SoulsItem
     {
         public override void SetStaticDefaults()
