@@ -7,7 +7,6 @@ using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
-using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Pets;
@@ -1006,7 +1005,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.netUpdate = true;
                 //NPC.TargetClosest();
-                NPC.ai[1] = 60;
+                NPC.ai[1] = WorldSavingSystem.MasochistModeReal ? 60 : 30;
                 if (++NPC.ai[2] > NPC.ai[3])
                 {
                     P1NextAttackOrMasoOptions(AttackChoice);
@@ -1189,7 +1188,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.netUpdate = true;
                 //NPC.TargetClosest();
-                NPC.ai[1] = 60;
+                NPC.ai[1] = WorldSavingSystem.MasochistModeReal ? 60 : 30;
                 if (++NPC.ai[2] > NPC.ai[3])
                 {
                     P1NextAttackOrMasoOptions(AttackChoice);
