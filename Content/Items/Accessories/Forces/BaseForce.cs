@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
     public abstract class BaseForce : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Forces", Name);
         public static int[] EnchantsIn<T>() where T : BaseForce => Enchants[ModContent.ItemType<T>()];
         public void SetActive(Player player) => player.FargoSouls().ForceEffects.Add(Type);
         /// <summary>
