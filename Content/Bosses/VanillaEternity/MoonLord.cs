@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 1.6f));
+            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 1.8f));
         }
         public override void OnFirstTick(NPC npc)
         {
@@ -98,6 +98,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 modifiers.Null();
             if (valid)
                 modifiers.FinalDamage *= 1.4f;
+
+            //TODO: make this not affect summon projectiles from accessories or armor
+            if (FargoSoulsUtil.IsSummonDamage(projectile) && (GetVulnerabilityState(npc) != 3))
+            {
+                if (Main.player[projectile.owner].HeldItem.DamageType != DamageClass.Summon && Main.player[projectile.owner].HeldItem.DamageType != DamageClass.SummonMeleeSpeed)
+                    modifiers.FinalDamage *= 0.5f;
+            }
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
@@ -206,7 +213,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost && VulnerabilityState >= 0 && VulnerabilityState <= 3)
+            if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<PoweroftheCosmosBuff>(), 2);
 
             if (!(WorldSavingSystem.MasochistModeReal && Main.getGoodWorld))
@@ -508,6 +515,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (WorldSavingSystem.MasochistModeReal)
                     lerp = MathF.Pow(lerp, 1.5f);
                 float increment = (int)Math.Round(MathHelper.Lerp(maxRampup, 1, lerp));
+                if (increment < 2)
+                    increment += 0.25f;
 
                 VulnerabilityTimer += increment;
                 AttackTimer += increment;
@@ -791,7 +800,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-           if (npc.type == NPCID.MoonLordHead || npc.type == NPCID.MoonLordHand) npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.75f);
+           //if (npc.type == NPCID.MoonLordHead || npc.type == NPCID.MoonLordHand) npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.75f);
         }
     }
 }
