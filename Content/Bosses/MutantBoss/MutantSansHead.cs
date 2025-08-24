@@ -4,6 +4,7 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -18,14 +19,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 6;
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Projectile.width = 70;
             Projectile.height = 70;
             Projectile.penetrate = -1;
@@ -126,14 +125,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             SpriteEffects effects = SpriteEffects.None;
 
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
-                Color trailColor = Projectile.GetAlpha(Color.LightSkyBlue) * 0.75f * 0.5f;
+                Color trailColor = Projectile.GetAlpha(Color.LightSkyBlue) * 1f;
                 trailColor *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 oldPos = Projectile.oldPos[i];
                 float oldRot = Projectile.oldRot[i];
                 Main.EntitySpriteDraw(texture2D13, oldPos + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), rectangle, trailColor, oldRot, origin2, Projectile.scale, effects, 0);
             }
+            Main.spriteBatch.ResetToDefault();
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
 
