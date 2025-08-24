@@ -2833,6 +2833,7 @@ DragonsDemise: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
+		Ignores a large amount of enemy defense
 		'The reward for a mighty rematch...'
 		''' */
 }
