@@ -140,11 +140,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
 
             //idk why these arent working boohoo
+            /*
             Texture2D eyes = TextureAssets.Golem[1].Value;
             Rectangle eyeRectangle = new(0, eyes.Height / 2, eyes.Width, eyes.Height / 2);
             Vector2 eyeOrigin = eyeRectangle.Size() / 2f;
             eyeOrigin.Y -= 4;
             Main.EntitySpriteDraw(eyes, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(eyeRectangle), Color.White * Projectile.Opacity, Projectile.rotation, eyeOrigin, Projectile.scale, effects, 0);
+            */
             return false;
         }
     }

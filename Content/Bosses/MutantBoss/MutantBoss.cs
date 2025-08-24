@@ -2973,7 +2973,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Vector2 basePos = NPC.Center;
                     float lerper = LumUtils.InverseLerp(masoMovingRainAttackTime + 30, endTime, NPC.ai[1]);
                     lerper = LumUtils.Saturate(lerper);
-                    float angle = MathHelper.TwoPi * lerper * 1.25f;
+                    float angle = MathHelper.TwoPi * lerper * 1.12f;
                     Vector2 xDir = Vector2.UnitX.RotatedBy(angle);
                     Vector2 yDir = Vector2.UnitY.RotatedBy(angle);
                     for (float i = -1540; i <= 1540; i += spacing)
