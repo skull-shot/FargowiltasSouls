@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 if (Projectile.velocity.LengthSquared() < 24 * 24)
                 {
-                    Projectile.velocity *= 1.06f;
+                    Projectile.velocity *= WorldSavingSystem.MasochistModeReal ? 1.06f : 1.04f;
                 }
             }
 

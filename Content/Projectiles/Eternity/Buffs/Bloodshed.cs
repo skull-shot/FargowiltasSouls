@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
             }
             else //shed by enemy, buff player
             {
-                Projectile.timeLeft -= 3;
+                Projectile.timeLeft -= 1;
 
                 int p = Player.FindClosest(Projectile.Center, 0, 0);
                 if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)

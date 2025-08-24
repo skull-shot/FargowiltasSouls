@@ -78,6 +78,43 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                     Main.dust[dust].velocity *= 3f;
                 }*/
+
+                Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+                for (int i = 0; i < 2; i++)
+                {
+                    int dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
+                    Main.dust[dust].velocity *= 1.4f;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IceTorch, 0f, 0f, 0, default, 3.5f);
+                    Main.dust[d].noGravity = true;
+                    Main.dust[d].noLight = true;
+                    Main.dust[d].velocity *= 4f;
+                }
+                for (int i = 0; i < 2; i++)
+                {
+                    int dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
+                    Main.dust[dust].noGravity = true;
+                    Main.dust[dust].velocity *= 7f;
+                    dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
+                    Main.dust[dust].velocity *= 3f;
+                }
+
+                float scaleFactor9 = 0.5f;
+
+                int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
+                    default,
+                    Main.rand.Next(61, 64));
+
+                Main.gore[gore].velocity *= scaleFactor9;
+                Main.gore[gore].velocity.X += 1f;
+                Main.gore[gore].velocity.Y += 1f;
             }
         }
 

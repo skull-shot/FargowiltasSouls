@@ -22,3 +22,5 @@ parrying freezes your momentum (big nerf - can't fall into an attack for an effo
 retinazer aura inflicts hellfire during ray spin
 renamed our hellfire to black inferno
 made mutant p1 spear toss a little easier
+updated mutant nuke to use new nuke fishron visual
+bloodshed from dread parry lasts longer (doesnt disappear and deny you the buff uber fast)
