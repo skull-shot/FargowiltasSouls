@@ -1,4 +1,5 @@
 ﻿using System;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -123,11 +124,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.whoAmI == Main.myPlayer)
             {
-                Texture2D sprite = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MonkEnchant").Value;
+                Texture2D sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "MonkEnchant").Value;
                 Color color = new(146, 5, 32);
                 if (modPlayer.ShinobiEnchantActive)
                 {
-                    sprite = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value;
+                    sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ShinobiEnchant").Value;
                     color = new(147, 91, 24);
                 }
                 CooldownBarManager.Activate("MonkDash", sprite, color, () => modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());

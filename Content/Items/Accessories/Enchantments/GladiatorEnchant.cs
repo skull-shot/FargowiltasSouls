@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
@@ -134,7 +135,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.GladiatorStandardCD = LumUtils.SecondsToFrames(15);
 
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
+                        CooldownBarManager.Activate("GladiatorStandardCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "GladiatorEnchant").Value, new(156, 146, 78), 
                             () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
                 }
             }
