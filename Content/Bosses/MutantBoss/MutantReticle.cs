@@ -45,6 +45,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 int modifier = Math.Min(60, 90 - Projectile.timeLeft);
 
                 Projectile.scale = 1.5f - 0.5f / 60f * modifier; //start big, shrink down
+                if (Projectile.ai[2] == 1)
+                    Projectile.scale *= 0.9f;
 
                 Projectile.velocity = Vector2.Zero;
                 Projectile.rotation += MathHelper.ToRadians(6) * Projectile.localAI[0];

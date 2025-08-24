@@ -2948,11 +2948,11 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 }
             }
         }
-        AtlasTexture GetTexture(string name) => AtlasManager.GetTexture(
-            Main.zenithWorld || (Main.getGoodWorld && ((States)State == States.FTWDesperation
-            || (States)State == States.P1Transition
-            || (States)State == States.Opening))
-            ? "FargowiltasSouls.Lifelight_Full" : name);
+        AtlasTexture GetTexture(string name) => AtlasManager.GetTexture(name);
+            //Main.zenithWorld || (Main.getGoodWorld && ((States)State == States.FTWDesperation
+            //|| (States)State == States.P1Transition
+            //|| (States)State == States.Opening))
+            //? "FargowiltasSouls.Lifelight_Full" : name);
         private void DrawRune(Rune rune, SpriteBatch spriteBatch, Color drawColor)
         {
             int i = rune.Index;

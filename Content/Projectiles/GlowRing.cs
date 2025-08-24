@@ -53,6 +53,12 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch ((int)Projectile.ai[1])
             {
+                case -26: // mutant golem
+                    {
+                        color = Color.LightSkyBlue with { A = 0 };
+                        scale = 18f;
+                    }
+                    break;
                 case -25: // shadow champion telegraph tentacle explosion
                     {
                         customScaleAlpha = true;

@@ -1427,20 +1427,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 GuttedHeartMinions.NurseHeal(Player);
         }
 
-        public override bool CanConsumeAmmo(Item weapon, Item ammo)
-        {
-            //if (weapon.CountsAsClass(DamageClass.Ranged))
-            //{
-            //    if (RangedEssence && Main.rand.NextBool(10))
-            //        return false;
-            //    if (RangedSoul && Main.rand.NextBool(5))
-            //        return false;
-            //}
-            if (GaiaSet && Main.rand.NextBool(10))
-                return false;
-            return true;
-        }
-
         public int frameCounter = 0;
         public int frameSnow = 1;
         public int frameMutantAura = 0;

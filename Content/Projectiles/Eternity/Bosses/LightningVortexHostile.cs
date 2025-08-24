@@ -38,14 +38,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
         }
         Color DrawColor = Color.Cyan;
 
-        bool useVanillaLightning;
+        bool moonlordvortex;
         public override void OnSpawn(IEntitySource source)
         {
             base.OnSpawn(source);
 
             if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type == NPCID.MoonLordCore)
             {
-                useVanillaLightning = true;
+                moonlordvortex = true;
             }
         }
 
@@ -138,12 +138,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
                 {
                     Vector2 vector2_3 = 24f * (player != null && Projectile.ai[0] == 0 ? Projectile.SafeDirectionTo(player.Center) : Projectile.ai[1].ToRotationVector2());
                     float ai1New = Main.rand.NextBool() ? 1 : -1; //randomize starting direction
-                    int type = useVanillaLightning ? ProjectileID.VortexLightning : ModContent.ProjectileType<HostileLightning>();
+                    int type = ModContent.ProjectileType<HostileLightning>();
                     int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vector2_3,
                         type, Projectile.damage, Projectile.knockBack, Projectile.owner,
                         vector2_3.ToRotation(), ai1New * 0.75f);
-                    if (p != Main.maxProjectiles && !useVanillaLightning)
+                    if (p != Main.maxProjectiles)
+                    {
                         Main.projectile[p].localAI[1] = shadertype; //change projectile's ai if the recolored vortex portal is being used, so that purple ones always fire purple lightning
+                        Main.projectile[p].extraUpdates += 1;
+                    }
                 }
             }
             else if (Projectile.localAI[0] <= 120)

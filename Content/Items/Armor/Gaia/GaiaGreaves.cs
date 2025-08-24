@@ -1,4 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,7 +30,10 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
             player.GetDamage(damageClass) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 5;
-            player.moveSpeed += 0.1f;
+            player.moveSpeed += 0.15f;
+            player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
+            if (!player.HasEffect<TikiEffect>()) //no double dipping on whip speed!!! very scary.
+                player.GetAttackSpeed(DamageClass.SummonMeleeSpeed) += 0.15f;
         }
 
         public override void AddRecipes()
