@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Luminance.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -41,6 +42,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.idStaticNPCHitCooldown = 20;
         }
 
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
+        }
+
         public override void AI()
         {
 
@@ -72,6 +78,43 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                     Main.dust[dust].velocity *= 3f;
                 }*/
+
+                Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+                for (int i = 0; i < 2; i++)
+                {
+                    int dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
+                    Main.dust[dust].velocity *= 1.4f;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IceTorch, 0f, 0f, 0, default, 3.5f);
+                    Main.dust[d].noGravity = true;
+                    Main.dust[d].noLight = true;
+                    Main.dust[d].velocity *= 4f;
+                }
+                for (int i = 0; i < 2; i++)
+                {
+                    int dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
+                    Main.dust[dust].noGravity = true;
+                    Main.dust[dust].velocity *= 7f;
+                    dust = Dust.NewDust(Projectile.position, Projectile.width,
+                        Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
+                    Main.dust[dust].velocity *= 3f;
+                }
+
+                float scaleFactor9 = 0.5f;
+
+                int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
+                    default,
+                    Main.rand.Next(61, 64));
+
+                Main.gore[gore].velocity *= scaleFactor9;
+                Main.gore[gore].velocity.X += 1f;
+                Main.gore[gore].velocity.Y += 1f;
             }
         }
 
@@ -102,13 +145,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Texture2D flare2 = FargoAssets.Smoke.Value;
             Texture2D flare = FargoAssets.Scorch.Value;
 
-            float smokesize = MathHelper.Lerp(0, 0.7f, vfxinterpolant * 0.07f);
-
-
+            float smokesize = MathHelper.Lerp(0, 1.5f, vfxinterpolant * 0.07f);
 
             Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Gray with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
-            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
-            //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * -4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
+            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity * 0.75f, Projectile.rotation, flare.Size() * 0.5f, smokesize, 0, 0f);
+            Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare.Size() * 0.5f, smokesize * 0.5f, 0, 0f);
             //Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Teal with { A = 0 }, Main.GlobalTimeWrappedHourly * 4f, flare.Size() * 0.5f, Projectile.scale, 0, 0f);
             return false;
         }

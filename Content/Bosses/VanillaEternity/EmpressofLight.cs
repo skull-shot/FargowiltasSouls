@@ -304,7 +304,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             Ritual = true;
             int spinTime = WorldSavingSystem.MasochistModeReal ? 210 : 160;
-            float spins = /*WorldSavingSystem.MasochistModeReal ? 2 :*/ 1.5f;
+            float spins = 1.5f;
             int startDelay = 60;
             if (AttackTimer == 0)
             {
@@ -341,7 +341,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (AttackTimer > startDelay && AttackTimer <= spinTime * spins + startDelay && AttackTimer % 2 == 0)
             {
-                int max = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                int max = 2;
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    max = 3;
+                    if (Main.getGoodWorld)
+                        max = 7;
+                }
                 for (int i = 0; i < max; i++)
                 {
                     int direction = WorldSavingSystem.MasochistModeReal ? -1 : 1;

@@ -107,7 +107,14 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
         }*/
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width /= 2;
+            height /= 2;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
+        private void Explode()
         {
             if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400)
             {
@@ -122,13 +129,16 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
         }
 
-        /*public override bool OnTileCollide(Vector2 oldVelocity)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.owner == Main.myPlayer)
-                Projectile.NewProjectile(Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(),
-                    Projectile.damage, Projectile.knockBack * 2f, Projectile.owner);
-            return true;
-        }*/
+            Explode();
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Explode();
+            return false;
+        }
 
         public override void OnKill(int timeLeft)
         {
@@ -145,17 +155,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
                         ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
                 }
-            }
+            }*/
             int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
-                Vector2 vector2_1 = (Vector2.Normalize(Projectile.velocity) * new Vector2(Projectile.width / 2f, Projectile.height) * 0.75f).RotatedBy((index1 - (num1 / 2 - 1)) * 6.28318548202515 / num1, new Vector2()) + Projectile.Center;
+                Vector2 vector2_1 = (Projectile.velocity.SafeNormalize(Vector2.UnitY) * new Vector2(50, 50) * 0.75f).RotatedBy((index1 - (num1 / 2 - 1)) * 6.28318548202515 / num1, new Vector2()) + Projectile.Center;
                 Vector2 vector2_2 = vector2_1 - Projectile.Center;
                 int index2 = Dust.NewDust(vector2_1 + vector2_2, 0, 0, DustID.DungeonWater, vector2_2.X * 2f, vector2_2.Y * 2f, 100, new Color(), 1.4f);
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].noLight = true;
                 Main.dust[index2].velocity = vector2_2;
-            }*/
+            }
         }
 
         /*private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)

@@ -19,6 +19,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
+        bool canHitLocalPlayer = true;
+
         public override void SetDefaults()
         {
             Projectile.width = 40;
@@ -30,6 +32,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
             Projectile.ignoreWater = true;
         }
 
+        public override bool CanHitPlayer(Player target) => canHitLocalPlayer;
+
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -38,7 +42,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
                 Projectile.localAI[1] = Main.rand.Next(-1, 5);
                 Projectile.frame = Main.rand.Next(3);
             }
-            CooldownSlot = (int)Projectile.localAI[1];
 
             Projectile.direction = Projectile.spriteDirection = Projectile.velocity.X < 0 ? -1 : 1;
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -50,6 +53,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
                 Projectile.frameCounter = 0;
                 if (++Projectile.frame >= 3)
                     Projectile.frame = 0;
+            }
+
+            if (canHitLocalPlayer && !Main.dedServ && Projectile.Colliding(Projectile.Hitbox, Main.LocalPlayer.Hitbox))
+            {
+                Main.LocalPlayer.immune = false;
+                Main.LocalPlayer.immuneTime = 0;
             }
         }
 
@@ -65,6 +74,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            canHitLocalPlayer = false;
+
             target.AddBuff(BuffID.Poisoned, 300);
             target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
             target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);

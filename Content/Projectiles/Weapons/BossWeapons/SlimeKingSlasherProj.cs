@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().HellFire)
+            if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().BlackInferno)
             {
                 modifiers.SourceDamage *= 1.2f;
             }

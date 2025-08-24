@@ -21,14 +21,14 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 240;
+            Item.damage = 190;
             Item.knockBack = 1f;
             Item.shootSpeed = 12f;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.autoReuse = true;
             Item.useAnimation = 30;
-            Item.useTime = 3;
+            Item.useTime = 6;
             Item.width = 122;
             Item.height = 62;
             Item.shoot = ModContent.ProjectileType<HellFlame>();

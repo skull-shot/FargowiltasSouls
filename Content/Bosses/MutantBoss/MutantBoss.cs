@@ -7,7 +7,6 @@ using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
-using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Pets;
@@ -112,9 +111,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 ModContent.BuffType<LightningRodBuff>(),
                 ModContent.BuffType<SadismBuff>(),
                 ModContent.BuffType<GodEaterBuff>(),
-                ModContent.BuffType<TimeFrozenBuff>(),
                 ModContent.BuffType<LeadPoisonBuff>(),
-
             ]);
 
         }
@@ -242,9 +239,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override bool PreAI()
         {
-            if (WorldSavingSystem.MasochistModeReal && !Main.dedServ)
+            if (WorldSavingSystem.MasochistModeReal)
             {
-                if (!Main.LocalPlayer.ItemTimeIsZero && (Main.LocalPlayer.HeldItem.type == ItemID.RodofDiscord || Main.LocalPlayer.HeldItem.type == ItemID.RodOfHarmony))
+                NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
+
+                if (!Main.dedServ && !Main.LocalPlayer.ItemTimeIsZero && (Main.LocalPlayer.HeldItem.type == ItemID.RodofDiscord || Main.LocalPlayer.HeldItem.type == ItemID.RodOfHarmony))
                     Main.LocalPlayer.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 600);
             }
             return base.PreAI();
@@ -439,7 +438,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             //drop summon
             if (WorldSavingSystem.EternityMode &&  NPC.HasPlayerTarget)
             {
-                EModeUtils.DropSummon(NPC, ModContent.ItemType<MutantsCurse>(), WorldSavingSystem.DownedMutant, ref droppedSummon, WorldSavingSystem.downedAbom);
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<MutantsCurse>(), WorldSavingSystem.DownedMutant, ref droppedSummon, NPC.downedMoonlord);
             }
             
 
@@ -483,6 +482,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.TargetClosest();
                 if (NPC.timeLeft < 30)
                     NPC.timeLeft = 30;
+
+                AuraCenter = NPC.Center;
+
                 if (NPC.Distance(Main.player[NPC.target].Center) < 1500)
                 {
                     NPC.localAI[3] = 1;
@@ -1008,7 +1010,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.netUpdate = true;
                 //NPC.TargetClosest();
-                NPC.ai[1] = 60;
+                NPC.ai[1] = WorldSavingSystem.MasochistModeReal ? 60 : 30;
                 if (++NPC.ai[2] > NPC.ai[3])
                 {
                     P1NextAttackOrMasoOptions(AttackChoice);
@@ -1191,7 +1193,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.netUpdate = true;
                 //NPC.TargetClosest();
-                NPC.ai[1] = 60;
+                NPC.ai[1] = WorldSavingSystem.MasochistModeReal ? 60 : 30;
                 if (++NPC.ai[2] > NPC.ai[3])
                 {
                     P1NextAttackOrMasoOptions(AttackChoice);
@@ -2335,7 +2337,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Vector2 vel = NPC.SafeDirectionTo(player.Center + player.velocity * 30f) * 30f;
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Normalize(vel), ModContent.ProjectileType<MutantDeathray2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 0.8f), 0f, Main.myPlayer);
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -Vector2.Normalize(vel), ModContent.ProjectileType<MutantDeathray2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 0.8f), 0f, Main.myPlayer);
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantSpearThrown>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 1f);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantSpearThrown>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target);
                 }
             }
             else if (NPC.ai[1] == 1 && (NPC.ai[2] < NPC.localAI[1] || WorldSavingSystem.MasochistModeReal) && FargoSoulsUtil.HostCheck)
@@ -2721,7 +2723,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                             directionOut.Normalize();
                             spawnPos = safeZone + directionOut * Main.rand.NextFloat(safeRange, 1200);
                         }
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<MutantBomb>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0f, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<MutantNukeBomb>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0f, Main.myPlayer);
                     }
                 }
             }
@@ -3545,6 +3547,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             //NPC.damage = 0;
             if (NPC.buffType[0] != 0)
                 NPC.DelBuff(0);
+
+            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
 
             if (NPC.ai[1] == 0) //entering final phase, give healing
             {

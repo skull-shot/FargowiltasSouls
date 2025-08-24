@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             npc.defense = 0;
             npc.defDefense = 0;
             npc.FargoSouls().GodEater = true;
-            npc.FargoSouls().HellFire = true;
+            npc.FargoSouls().BlackInferno = true;
         }
     }
 }

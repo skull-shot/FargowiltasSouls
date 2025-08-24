@@ -43,6 +43,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -439,6 +440,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Unstable = false;
             Fused = false;
             Shadowflame = false;
+            Hellfire = false;
             Daybroken = false;
             Oiled = false;
             Slimed = false;
@@ -1147,6 +1149,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Shadowflame)
                     damageSource = DeathByLocalization("Shadowflame");
 
+                if (Hellfire)
+                    damageSource = PlayerDeathReason.ByOther(8);
+
                 if (Daybroken)
                     damageSource = PlayerDeathReason.ByOther(8);
 
@@ -1224,6 +1229,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                         drawInfo.cFront = shader;
                     }
                 }
+            }
+
+            if (StyxSet)
+            {
+                drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
+                drawInfo.bodyGlowColor = Color.White;
+                drawInfo.armGlowColor = Color.White;
+                /*drawInfo.headGlowMask = ModContent.ItemType<StyxCrown>();
+                drawInfo.headGlowColor = Color.White;
+                drawInfo.legsGlowMask = ModContent.ItemType<StyxLeggings>();
+                drawInfo.legsGlowColor = Color.White;*/
             }
         }
 

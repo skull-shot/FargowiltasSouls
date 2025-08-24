@@ -148,9 +148,14 @@ MutantPresenceBuff: {
 	Description: 减少防御力、伤害减免和生命恢复速度，减小擦弹范围，关闭部分饰品效果
 }
 
-HellFireBuff: {
-	DisplayName: 地狱烈焰
-	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+HellfireBuff: {
+	// DisplayName: Hellfire
+	// Description: Slowly losing life
+}
+
+BlackInfernoBuff: {
+	// DisplayName: Black Inferno
+	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {

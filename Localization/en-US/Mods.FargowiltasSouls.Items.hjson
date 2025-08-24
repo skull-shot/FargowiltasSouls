@@ -2728,6 +2728,7 @@ DragonsDemise: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
+		Ignores a large amount of enemy defense
 		'The reward for a mighty rematch...'
 		'''
 }
@@ -2786,9 +2787,9 @@ HellZone: {
 		'''
 		Uses bones for ammo
 		80% chance to not consume ammo
-		Left click attack inflicts Hellfire
+		Left click attack inflicts Black Inferno
 		Right click to fire a skull that marks enemies
-		Marked enemies take 5x damage over time from Hellfire
+		Marked enemies take 5x damage over time from Black Inferno
 		'The reward for a mighty rematch...'
 		'''
 }

@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Inertia = 20f;
             ShootSpeed = 20f;
             ShootCool = 45;
-            ViewDist = 600;
+            ViewDist = 900;
         }
 
         public override void CheckActive()

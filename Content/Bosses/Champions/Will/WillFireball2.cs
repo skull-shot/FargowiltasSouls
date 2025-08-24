@@ -26,13 +26,22 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.height = 30;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
-            Projectile.timeLeft = 40;
+            Projectile.timeLeft = 80;
             Projectile.ignoreWater = true;
             CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
+        bool spawned;
+
         public override void AI()
         {
+            if (!spawned)
+            {
+                spawned = true;
+                if (!WorldSavingSystem.MasochistModeReal)
+                    Projectile.timeLeft /= 2;
+            }
+
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
             Projectile.alpha -= 40;
             if (Projectile.alpha < 0)

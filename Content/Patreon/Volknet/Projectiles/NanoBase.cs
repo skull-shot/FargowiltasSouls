@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                                         damage = (int)(damage * 2f);
                                         speed = 3;
                                     }
-                                    damage = (int)(damage / 1.75);
+                                    damage = (int)(damage / 1.5);
                                     //damage = (int)(damage * RangedDamageModifier);
                                     if (cs)
                                     {

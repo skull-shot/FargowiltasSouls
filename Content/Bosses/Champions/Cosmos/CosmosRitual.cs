@@ -78,7 +78,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 {
                     float mult = 0.5f;
                     mult += 0.5f * LumUtils.InverseLerp(1200, 600, threshold);
-                    float dragSpeed = mult * Projectile.Distance(player.Center) / 55;
+
+                    // scales 0 to 1 as life goes down
+                    float phaseHealthRatioRemaining = 1f - MathHelper.Min(npc.life, npc.lifeMax / 5f) / (npc.lifeMax / 5f);
+                    float dragMultiplier = 1f + 0.5f * phaseHealthRatioRemaining;
+
+                    float dragSpeed = mult * dragMultiplier * Projectile.Distance(player.Center) / 55;
                     player.position += Projectile.DirectionFrom(player.Center) * dragSpeed;
                     player.AddBuff(ModContent.BuffType<LowGroundEridanusBuff>(), 2);
                     player.wingTime = 60;
@@ -121,7 +126,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             if (Projectile.hide)
                 behindNPCs.Add(index);
         }
-        public override bool CanHitPlayer(Player target) => false;
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < 220;
+        }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             base.OnHitPlayer(target, info);

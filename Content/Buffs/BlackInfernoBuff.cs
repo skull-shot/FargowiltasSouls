@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs
 {
-    public class HellFireBuff : ModBuff
+    public class BlackInfernoBuff : ModBuff
     {
         public override void SetStaticDefaults()
         {
@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.FargoSouls().HellFire = true;
+            npc.FargoSouls().BlackInferno = true;
         }
     }
 }

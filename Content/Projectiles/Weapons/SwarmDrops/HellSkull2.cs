@@ -143,7 +143,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
           //target.immune[Projectile.owner] = 8;
-            target.AddBuff(ModContent.BuffType<HellFireBuff>(), 30);
+            target.AddBuff(ModContent.BuffType<BlackInfernoBuff>(), 30);
         }
 
         public override void OnKill(int timeLeft)
