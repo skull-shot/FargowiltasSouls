@@ -3449,7 +3449,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         void SANSGOLEM()
         {
             if (NPC.ai[3] == 0)
+            {
                 NPC.ai[3] = Main.rand.NextBool() ? 1 : -1;
+
+                SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                if (FargoSoulsUtil.HostCheck)
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -26);
+            }
+                
 
             int attackDelay = WorldSavingSystem.MasochistModeReal ? 35 : 35;
             attackDelay /= 2;
