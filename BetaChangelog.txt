@@ -33,3 +33,4 @@ fixed a texture error with lifelight blasters
 ftw lifelight is biblically accurate
 raised drakovi minion enemy detection range
 eri and mutant are now vulnerable to timestop (eri immune while doing his own timestop, mutant immune in p3)
+nano core bow isnt flaccid (fires faster arrows with less arc)

@@ -239,9 +239,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override bool PreAI()
         {
-            if (WorldSavingSystem.MasochistModeReal && !Main.dedServ)
+            if (WorldSavingSystem.MasochistModeReal)
             {
-                if (!Main.LocalPlayer.ItemTimeIsZero && (Main.LocalPlayer.HeldItem.type == ItemID.RodofDiscord || Main.LocalPlayer.HeldItem.type == ItemID.RodOfHarmony))
+                NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
+
+                if (!Main.dedServ && !Main.LocalPlayer.ItemTimeIsZero && (Main.LocalPlayer.HeldItem.type == ItemID.RodofDiscord || Main.LocalPlayer.HeldItem.type == ItemID.RodOfHarmony))
                     Main.LocalPlayer.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 600);
             }
             return base.PreAI();
