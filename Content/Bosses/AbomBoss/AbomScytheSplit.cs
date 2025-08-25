@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.hostile = true;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 3600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             CooldownSlot = ImmunityCooldownID.Bosses;

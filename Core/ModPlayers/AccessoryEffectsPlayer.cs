@@ -849,7 +849,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 preventRightClick = false;
             bool canCancelAttackWithParry = shieldTimer > 0;
             Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
-                && !preventRightClick && holdingKey
+                && !preventRightClick && holdingKey && Player.altFunctionUse != 2
                 && (canCancelAttackWithParry || (Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0));
 
             if (Player.shieldRaised)

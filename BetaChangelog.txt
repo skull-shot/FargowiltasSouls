@@ -41,3 +41,8 @@ nano core scales with aspd in all forms except melee
 fixed nano core counting as always "attacking" because you always have a "held weapon projectile" even when not attacking
 fish ex arena is on its own iframe timer
 fish ex becomes unplayable in gfb
+
+mutant swoops out further when he's below you and trying to position for diagonal spears
+maso abom desperation never moves arena, starts 1st laevateinn in middle of arena instead
+maso ftw abom deathray run trail lasts extremely long, mainly for desp
+minor fix for silver ench forcing itself to parry for 1 tick while attacking with right click weapons
