@@ -176,7 +176,6 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 return;
             }
-            target.AddBuff(BuffID.OnFire3, 60 * 10);
 
             if (Timer >= Duration - 2)
             {

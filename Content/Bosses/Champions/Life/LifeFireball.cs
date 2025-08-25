@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Projectile.tileCollide = false;
             Projectile.timeLeft = 240;
             Projectile.scale = 1f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()

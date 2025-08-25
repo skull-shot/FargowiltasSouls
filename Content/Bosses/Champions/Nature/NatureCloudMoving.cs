@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             Projectile.timeLeft = 40;
             Projectile.tileCollide = false;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.scale = 1.5f;
         }

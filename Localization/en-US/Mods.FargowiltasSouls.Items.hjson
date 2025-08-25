@@ -675,10 +675,11 @@ TurtleEnchant: {
 	Tooltip:
 		'''
 		Grants immunity to knockback
+		Taking enough damage grants the Shell Smash buff
+		Damage that is blocked, defended, dodged or absorbed also counts towards Smell Smash
+		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		When standing still you will enter a shell, reducing all damage taken by 66% and preventing debuffs on hit
 		While shelled, projectiles and contact damage are reflected for 500% damage
-		After taking too much damage the shell will break, granting the Shell Smash buff
-		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
 		'You suddenly have the urge to hide in a shell'
 		'''
 }
@@ -952,13 +953,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'''
 }
@@ -973,7 +974,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, [i:FargowiltasSouls/SqueakyToy] and Guilty
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
@@ -1036,10 +1037,9 @@ ChaliceoftheMoon: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/ChaliceoftheMoon] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Burning, Fused, Lihzahrd Curse, Low Ground, [i:FargowiltasSouls/CelestialRune] and Marked for Death
-		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
-		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
+		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
 		'''
 }
@@ -1094,7 +1094,7 @@ DubiousCircuitry: {
 	DisplayName: Dubious Circuitry
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
+		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
 		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
 		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
@@ -1147,7 +1147,7 @@ GalacticGlobe: {
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Honey]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
 		'''
 }
 
@@ -1191,11 +1191,10 @@ HeartoftheMasochist: {
 	DisplayName: Heart of the Master
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Flipped, Illuminated, Unstable, and Curse of the Moon
+		Grants immunity to [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
-		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
@@ -1223,7 +1222,7 @@ LihzahrdTreasureBox: {
 	DisplayName: Lihzahrd Treasure Box
 	Tooltip:
 		'''
-		Grants immunity to knockback, Burning, and Fused
+		Grants immunity to knockback, Daybroken, and Fused
 		'Filled with various trinkets of pain and torment'
 		'''
 }
@@ -1244,7 +1243,7 @@ MutantAntibodies: {
 	DisplayName: Mutant Antibodies
 	Tooltip:
 		'''
-		Grants immunity to Wet, Feral Bite, Mutant Nibble, Oceanic Maul, and debuffs caused by entering water
+		Grants immunity to Wet, Feral Bite, Oceanic Maul, and debuffs caused by entering water
 		Increases damage for your current weapon class by 20%, but decreases life regeneration
 		Submerging in water refreshes flight time and gives you improved speed and increased max flight time
 		Grants effects of Wet debuff while riding Cute Fishron
@@ -1339,9 +1338,8 @@ PumpkingsCape: {
 	DisplayName: Pumpking's Cape
 	Tooltip:
 		'''
-		Grants immunity to Living Wasteland
 		Increases damage and critical strike chance by 5%
-		You have an aura of Rotting while guarding
+		Massively increases life regeneration while guarding
 		Parry negates up to 200 damage and steals life based on the blocked damage
 		'Somehow, it's the right size'
 		'''
@@ -1388,7 +1386,7 @@ ReinforcedPlating: {
 	DisplayName: Reinforced Plating
 	Tooltip:
 		'''
-		Grants immunity to knockback, Defenseless, and Nano Injection
+		Grants immunity to knockback and Exposed
 		Reduces damage taken by 4%
 		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
@@ -1498,7 +1496,7 @@ SqueakyToy: {
 	DisplayName: Squeaky Toy
 	Tooltip:
 		'''
-		Grants immunity to Squeaky Toy and Guilty
+		Grants immunity to Squeaky Toy
 		Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		'The beloved toy of a defeated foe...?'
 		'''
@@ -1594,7 +1592,7 @@ ColossusSoul: {
 	DisplayName: Colossus Soul
 	Tooltip:
 		'''
-		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration by 6
+		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
 		[i:860] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1619,7 +1617,7 @@ DimensionSoul: {
 	DisplayName: Soul of Dimensions
 	Tooltip:
 		'''
-		+100 max life, +20% damage reduction, increases life regeneration by 6, [i:CharmofMyths] reduces healing cooldown by 25%
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
 		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, [c/BC5252:and disables all of your jumps (togglable)]
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1670,7 +1668,7 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regen by 3, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/GalacticGlobe] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
@@ -2020,11 +2018,6 @@ OrdinaryCarrot: {
 		Right click to increase view range (toggled off by default)
 		'Plucked from the face of a defeated foe'
 		'''
-}
-
-RabiesShot: {
-	DisplayName: Rabies Shot
-	Tooltip: Cures Feral Bite
 }
 
 RabiesVaccine: {

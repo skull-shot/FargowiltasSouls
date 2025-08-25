@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.noKnockback = true;
-            player.buffImmune[BuffID.Burning] = true;
+            player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.FargoSouls().LihzahrdTreasureBoxItem = Item;

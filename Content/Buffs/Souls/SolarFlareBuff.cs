@@ -11,15 +11,10 @@ namespace FargowiltasSouls.Content.Buffs.Souls
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Solar Flare");
             Main.buffNoSave[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
             Main.debuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "太阳耀斑");
         }
-
-        public override string Texture => "FargowiltasSouls/Content/Buffs/PlaceholderDebuff";
-
 
         public override void Update(NPC npc, ref int buffIndex)
         {

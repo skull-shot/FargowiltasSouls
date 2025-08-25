@@ -171,7 +171,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //DIMENSIONS
             player.statLifeMax2 *= 5;
             player.buffImmune[BuffID.ChaosState] = true;
-            ColossusSoul.AddEffects(player, Item, 0, 0.4f, 15);
+            ColossusSoul.AddEffects(player, Item, 0, 0.4f, 8);
             SupersonicSoul.AddEffects(player, Item, hideVisual);
             FlightMasterySoul.AddEffects(player, Item);
             TrawlerSoul.AddEffects(player, Item, hideVisual);

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Life
@@ -28,7 +29,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
         public override void SetDefaults()
         {
             base.SetDefaults();
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         protected override void Movement(NPC npc)
         {

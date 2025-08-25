@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.hide = true;
             Projectile.penetrate = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

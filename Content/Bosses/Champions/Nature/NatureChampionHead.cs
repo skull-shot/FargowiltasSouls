@@ -82,7 +82,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             if (NPC.ai[0] == 4 && NPC.ai[2] < 90) // no contact while winding up deathrays
                 return false;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 

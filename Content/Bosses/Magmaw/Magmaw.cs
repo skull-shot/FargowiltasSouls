@@ -250,12 +250,7 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
         public override bool? CanFallThroughPlatforms() => true;
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.OnFire3, 60 * 10);
-            if (!WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(BuffID.Oiled, 60 * 5);
-                return;
-            }
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 60 * 4);
         }
         public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {

@@ -33,13 +33,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
                 if (Main.tile[(int)npc.Center.X / 16, (int)npc.Center.Y / 16] == null || //outside temple
                     Main.tile[(int)npc.Center.X / 16, (int)npc.Center.Y / 16].WallType != WallID.LihzahrdBrickUnsafe)
                 {
-                    target.AddBuff(BuffID.Burning, 120);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
                 }
             }
 
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.championBoss, ModContent.NPCType<EarthChampion>()))
             {
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
             }
         }
 

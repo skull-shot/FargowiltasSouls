@@ -1,14 +1,15 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Common.Utilities;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -161,7 +162,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (WorldSavingSystem.EternityMode)
             {
                 target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 180);
             }
             target.AddBuff(BuffID.WitheredArmor, 600);
             target.AddBuff(BuffID.WitheredWeapon, 600);

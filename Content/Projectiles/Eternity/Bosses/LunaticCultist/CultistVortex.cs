@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             Projectile.alpha = 255;
             Projectile.penetrate = -1;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

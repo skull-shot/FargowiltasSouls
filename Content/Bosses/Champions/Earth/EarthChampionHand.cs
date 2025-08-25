@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.localAI[3] == 1;
         }
 
@@ -364,10 +364,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                                     else
                                     {
                                         Vector2 spawnPos = NPC.Center;
-                                        int geysers = WorldSavingSystem.MasochistModeReal ? 15 : 6;
+                                        int geysers = WorldSavingSystem.MasochistModeReal ? 7 : 4;
                                         for (int i = 0; i <= geysers; i++)
                                         {
-                                            int tilePosX = (int)spawnPos.X / 16 + 250 * i / 16 * (int)-NPC.ai[3];
+                                            int tilePosX = (int)spawnPos.X / 16 + 420 * i / 16 * (int)-NPC.ai[3];
                                             int tilePosY = (int)spawnPos.Y / 16;// + 1;
 
                                             Projectile.NewProjectile(NPC.GetSource_FromThis(), tilePosX * 16 + 8, tilePosY * 16 + 8, 0f, 0f, ModContent.ProjectileType<EarthGeyser>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
@@ -577,7 +577,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             target.AddBuff(BuffID.OnFire, 300);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }

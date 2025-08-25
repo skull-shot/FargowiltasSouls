@@ -471,7 +471,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             modifiers.ModifyHurtInfo += TryParryAttack;
 
-            if ((Player.HasEffectEnchant<TurtleEffect>() || Player.FargoSouls().ShellHide) && !Player.HasBuff(ModContent.BuffType<BrokenShellBuff>()))
+            if (Player.FargoSouls().ShellHide && !Player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
             {
                 modifiers.DisableSound();
                 SoundEngine.PlaySound(SoundID.Item148 with { Volume = 2f }, Player.Center);
@@ -570,12 +570,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                     NekomiMeter = 0;
             }
 
-            if ((player.HasEffectEnchant<TurtleEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<BrokenShellBuff>()))
+            if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
             {
                 int shelldmg = info.SourceDamage;
                 if (player.HasEffectEnchant<TurtleEffect>())
                     TurtleShellHP -= shelldmg;
-                if (!Main.dedServ)
+                if (!Main.dedServ && player.FargoSouls().ShellHide)
                 {
                     for (int j = 0; j < 6; j++)
                     {

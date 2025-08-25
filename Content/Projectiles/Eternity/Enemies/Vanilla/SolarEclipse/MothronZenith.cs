@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SolarEcl
 
             Projectile.hide = true;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

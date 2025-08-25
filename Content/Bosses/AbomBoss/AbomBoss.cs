@@ -63,7 +63,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     BuffID.Suffocation,
                     ModContent.BuffType<LethargicBuff>(),
                     ModContent.BuffType<ClippedWingsBuff>(),
-                    ModContent.BuffType<MutantNibbleBuff>(),
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<LightningRodBuff>()
             ]);
@@ -92,7 +91,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 NPC.width = Player.defaultWidth;
                 NPC.height = Player.defaultHeight;
             }
-            NPC.damage = 240;
+            NPC.damage = 228;
             NPC.defense = 80;
             NPC.lifeMax = 637500;
             if (Main.expertMode) //compensate universe core
@@ -137,7 +136,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && NPC.ai[0] != 0 && NPC.ai[0] != 10 && NPC.ai[0] != 18;
         }
 
@@ -1661,10 +1660,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             if (WorldSavingSystem.EternityMode)
             {
-                //target.AddBuff(ModContent.BuffType<MutantNibble>(), 300);
                 target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 300);
-                //target.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
             }
             target.AddBuff(BuffID.Bleeding, 600);
         }

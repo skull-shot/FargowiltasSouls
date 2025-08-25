@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.alpha = 60;
             Projectile.ignoreWater = true;
             Projectile.penetrate = 1;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         Vector2 initialvel;

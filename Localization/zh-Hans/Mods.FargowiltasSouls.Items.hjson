@@ -2125,11 +2125,6 @@ OrdinaryCarrot: {
 		'''
 }
 
-RabiesShot: {
-	DisplayName: 狂犬疫苗
-	Tooltip: 治愈野性咬噬
-}
-
 RabiesVaccine: {
 	DisplayName: 狂犬病疫苗
 	Tooltip: 永久免疫野性咬噬

@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             NPC.width = 80;
             NPC.height = 100;
-            NPC.damage = 150;
+            NPC.damage = 142;
             NPC.defense = 70;
             NPC.lifeMax = 600000;
             NPC.HitSound = SoundID.NPCHit4;
@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 
@@ -1830,7 +1830,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 120);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
                 target.AddBuff(BuffID.Electrified, 300);
                 //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 300);
                 target.AddBuff(BuffID.Frostburn, 300);

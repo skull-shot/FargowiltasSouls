@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.scale = 0.5f;
             Projectile.alpha = 0;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             return target.hurtCooldowns[1] == 0;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.Center = Projectile.position;
 
             if (FargoSoulsUtil.HostCheck)
-                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<MutantDeathray1>(), Projectile.damage, 0f, Projectile.owner);
+                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<MutantDeathray1>(), Projectile.damage, 0f, Projectile.owner, ai2: Variant);
         }
 
         public override Color? GetAlpha(Color lightColor)

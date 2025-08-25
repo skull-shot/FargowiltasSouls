@@ -109,17 +109,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            /*if (damage < target.lifeMax / 25)
-                damage = target.lifeMax / 25;
-            if (Projectile.owner == Main.myPlayer)
-                Projectile.NewProjectile(Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(),
-                    damage, Projectile.knockBack * 2f, Projectile.owner);
-
-            target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
-            target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
-            target.AddBuff(BuffID.Frostburn, 300);*/
-            
             if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400)
             {
                 SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);

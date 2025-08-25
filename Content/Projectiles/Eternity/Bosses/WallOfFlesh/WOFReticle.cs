@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
             Projectile.hostile = true;
             Projectile.alpha = 0;
             Projectile.timeLeft = 300;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

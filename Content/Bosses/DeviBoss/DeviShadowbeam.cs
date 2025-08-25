@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             AIType = ProjectileID.ShadowBeamHostile;
 
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 1200 : 420;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

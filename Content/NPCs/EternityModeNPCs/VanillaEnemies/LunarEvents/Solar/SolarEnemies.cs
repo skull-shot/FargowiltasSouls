@@ -1,9 +1,10 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.LunarEvents.Solar;
+﻿using System;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.LunarEvents.Solar;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -46,7 +47,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.OnFire, 600);
-            target.AddBuff(BuffID.Burning, 300);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
         }
         public override bool PreKill(NPC npc)
         {
@@ -64,7 +65,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         {
             base.AI(npc);
 
-            EModeGlobalNPC.Aura(npc, 250, BuffID.Burning, false, DustID.Torch);
+            EModeGlobalNPC.Aura(npc, 250, ModContent.BuffType<DaybrokenBuff>(), false, DustID.Torch);
         }
     }
 

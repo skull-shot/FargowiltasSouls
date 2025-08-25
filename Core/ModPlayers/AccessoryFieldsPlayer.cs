@@ -199,6 +199,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HallowRepelTime;
         public int TurtleCounter;
         public float TurtleShellHP = 1000;
+        public bool TurtleShellBroken;
         public bool ShellHide;
         public int ValhallaVerticalDashing;
         public int VortexCD;
@@ -344,6 +345,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Fused;
         public int FusedStandStillTime;
         public bool Shadowflame;
+        public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
         public bool Hypothermia;
@@ -361,7 +363,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IvyVenom;
         public bool GodEater;               //defense removed, endurance removed, colossal DOT
         public bool FlamesoftheUniverse;    //activates various vanilla debuffs
-        public bool MutantNibble;           //moon bite effect, feral bite effect, disables lifesteal
         public int StatLifePrevious = -1;   //used for mutantNibble
         public bool Asocial;                //disables minions, disables pets
         public bool WasAsocial;
@@ -403,8 +404,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;
-        public bool CerebralMindbreak;
-        public bool NanoInjection;
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;
         public bool HasJungleRose;

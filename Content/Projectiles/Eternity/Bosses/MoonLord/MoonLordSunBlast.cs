@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             base.SetDefaults();
             Projectile.width = 70;
             Projectile.height = 70;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -138,7 +138,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Burning, 120);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
             target.AddBuff(BuffID.OnFire, 300);
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
             {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Rarities;
 using Terraria;
 using Terraria.ID;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Styx
     [AutoloadEquip(EquipType.Legs)]
     public class StyxLeggings : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Armor/Styx", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

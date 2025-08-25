@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
             Projectile.tileCollide = false;
 
             Projectile.extraUpdates = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             //Projectile.FargoSouls().GrazeCheck = projectile => CanDamage() && Projectile.Distance(Main.LocalPlayer.Center) < Math.Min(Projectile.width, Projectile.height) / 2 + Player.defaultHeight + Main.LocalPlayer.FargoSouls().GrazeRadius && Collision.CanHit(Projectile.Center, 0, 0, Main.LocalPlayer.Center, 0, 0);
             Projectile.FargoSouls().DeletionImmuneRank = 2;
@@ -183,7 +184,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Burning, 120);
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
             target.AddBuff(BuffID.OnFire, 300);
         }
 

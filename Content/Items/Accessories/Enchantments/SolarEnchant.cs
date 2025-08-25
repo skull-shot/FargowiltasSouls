@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<SolarEnchant>();
         public override bool ExtraAttackEffect => true;
-        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SolarFlareEffect>() ? 6400 : 3200) * player.ActualClassDamage(DamageClass.Melee));
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SolarFlareEffect>() ? 5800 : 2900) * player.ActualClassDamage(DamageClass.Melee));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
         {
             NPC.width = 100;
             NPC.height = 100;
-            NPC.damage = 140;
+            NPC.damage = 130;
             NPC.defense = 50;
             NPC.lifeMax = 150000;
             NPC.HitSound = SoundID.NPCHit7;
@@ -71,7 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (noHurt)
                 return false;
@@ -652,12 +652,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                 if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
                     NPC.frame.Y = 0;
             }
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

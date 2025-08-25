@@ -208,9 +208,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 0;
-            //target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
-            //target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
         }
 
         public override void OnKill(int timeleft)

@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.alpha = 255;
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 240 * 2;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()

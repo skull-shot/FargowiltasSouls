@@ -20,7 +20,7 @@ BabySilhouetteBuff: {
 
 BiteSizeBaronBuff: {
 	DisplayName: Крохотный барон
-	Description: EX форма не идёт в комплекте
+	Description: EX-форма не идёт в комплекте
 }
 
 ChibiDeviBuff: {
@@ -43,11 +43,6 @@ NibbleBuff: {
 	Description: Всего лишь один укус (пожалуйста)
 }
 
-MonkBuff: {
-	DisplayName: Медитация
-	Description: Ваш рывок монаха готов
-}
-
 ObsidianLavaWetBuff: {
 	DisplayName: Мокрая лава
 	Description: С вас капает лава
@@ -59,7 +54,7 @@ TitaniumDRBuff: {
 }
 
 KingSlimeMinionBuff: {
-	DisplayName: Миниатюрный Король слизней
+	DisplayName: Маленький Король слизней
 	Description: Этот маленький Король слизней защищает вас
 }
 
@@ -84,7 +79,7 @@ ChibiiRemiiBuff: {
 }
 
 PrimeMinionBuff: {
-	DisplayName: Миниатюрный Прайм
+	DisplayName: Мини-Прайм
 	Description: Скелетрон Прайм сражается за вас
 }
 
@@ -100,7 +95,7 @@ CrimetroidBuff: {
 
 BerserkerInstallBuff: {
 	DisplayName: Установка свирепости
-	Description: «Достань их! Берсерк!»
+	Description: «Порви их! Берсерк!»
 }
 
 BerserkerInstallCDBuff: {
@@ -110,7 +105,7 @@ BerserkerInstallCDBuff: {
 
 BetsyDashBuff: {
 	DisplayName: Рывок
-	Description: Вы двигаетесь на высокой скорости!
+	Description: Вы движетесь на высокой скорости!
 }
 
 AbomFangBuff: {
@@ -203,11 +198,6 @@ BloodthirstyBuff: {
 	Description: Значительно увеличивает частоту появления врагов
 }
 
-BrainOfConfusionBuff: {
-	DisplayName: Церебральный разлом
-	Description: Наносимый урон снижен на 30%
-}
-
 ClippedWingsBuff: {
 	DisplayName: Оборванные крылья
 	Description: Вы не можете использовать крылья или ракетные ботинки
@@ -256,19 +246,9 @@ GodEaterBuff: {
 	Description: Ваша душа проклята божественным гневом
 }
 
-GuiltyBuff: {
-	DisplayName: Чувство вины
-	Description: Ваше оружие затуплено виной от убийства невинных
-}
-
 HexedBuff: {
 	DisplayName: Сглаз
 	Description: Ваши атаки лечат врагов
-}
-
-HolyPriceBuff: {
-	DisplayName: Святая расплата
-	Description: Скорость атаки снижена на 30%
 }
 
 HypothermiaBuff: {
@@ -289,7 +269,7 @@ IvyVenomBuff: {
 
 JammedBuff: {
 	DisplayName: Заклинивший
-	Description: Ваше оружие дальнего боя неисправно
+	Description: Ваше стрелковое оружие неисправно
 }
 
 LethargicBuff: {
@@ -306,16 +286,6 @@ LihzahrdBlessingBuff: {
 	DisplayName: Благословение ящщеров
 	Description: Включены провода и снижена частота появления врагов в храме джунглей
 	Message: Свет алтаря пал на вас!
-}
-
-LivingWastelandBuff: {
-	DisplayName: Живая пустошь
-	Description: Все вокруг вас начинают гнить
-}
-
-LoosePocketsBuff: {
-	DisplayName: Широкие карманы
-	Description: У вас могут забрать предметы
 }
 
 LovestruckBuff: {
@@ -341,16 +311,6 @@ MarkedforDeathBuff: {
 MidasBuff: {
 	DisplayName: Мидас
 	Description: Вы роняете деньги при получении урона
-}
-
-MutantNibbleBuff: {
-	DisplayName: Укус Мутанта
-	Description: Вы не можете восстанавливать здоровье
-}
-
-NanoInjectionBuff: {
-	DisplayName: Нано-инъекция
-	Description: Регенерация здоровья и остальные характеристики снижены
 }
 
 NeurotoxinBuff: {
@@ -453,7 +413,7 @@ UnluckyBuff: {
 }
 
 UnstableBuff: {
-	DisplayName: Нестабильный
+	DisplayName: Нестабильность
 	Description: Вы не вписываетесь в эту реальность
 }
 
@@ -464,7 +424,7 @@ BigBrainMinionBuff: {
 
 BrainMinionBuff: {
 	DisplayName: Мозг Ктулху
-	Description: Миниатюрный Мозг Ктулху сражается за вас
+	Description: Маленький Мозг Ктулху сражается за вас
 }
 
 CrystalSkullBuff: {
@@ -474,7 +434,7 @@ CrystalSkullBuff: {
 
 EaterMinionBuff: {
 	DisplayName: Пожиратель миров
-	Description: Миниатюрный Пожиратель миров сражается за вас
+	Description: Маленький Пожиратель миров сражается за вас
 }
 
 LunarCultistBuff: {
@@ -537,7 +497,7 @@ BabyLifelightBuff: {
 	Description: Узри же ангельский свет
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	DisplayName: Разбитый панцирь
 	Description: Скорость передвижения и атаки резко увеличены
 }
@@ -553,8 +513,8 @@ FirstStrikeBuff: {
 }
 
 FossilReviveCDBuff: {
-	DisplayName: Возрождение
-	Description: Вы не можете возродиться снова
+	DisplayName: Воскрешение
+	Description: Вы не можете воскреснуть вновь
 }
 
 FrozenBuff: {
@@ -577,16 +537,6 @@ HallowCooldownBuff: {
 	Description: Ваш меч пока не может отражать выстрелы
 }
 
-HuntressBleedBuff: {
-	DisplayName: Кровотечение охотницы
-	Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
-}
-
-HuntressCDBuff: {
-	DisplayName: Перезарядка дождя стрел
-	Description: Вы пока не можете вызвать дождь из стрел
-}
-
 LeadPoisonBuff: {
 	DisplayName: Свинцовое отравление
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
@@ -605,11 +555,6 @@ MoltenAmplifyBuff: {
 OriPoisonBuff: {
 	DisplayName: Орихалковое отравление
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
-}
-
-SnowstormCDBuff: {
-	DisplayName: Перезарядка снежной бури
-	Description: Вы пока не можете охладить всё вокруг
 }
 
 SolarFlareBuff: {
@@ -642,14 +587,9 @@ TitaniumCDBuff: {
 	Description: Вы заряжаете титановый щит
 }
 
-VortexCDBuff: {
-	DisplayName: Перезарядка вихря
-	Description: Вы пока не можете создать вихрь
-}
-
 SuperchargedBuff: {
 	DisplayName: Подзарядка
-	Description: Скорость передвижения на увеличена 20%, скорость атаки — на 10%, также ваши атаки электризуют
+	Description: Скорость передвижения на увеличена 20%, скорость атаки — на 10%, также ваши атаки бьют током
 }
 
 MoonBowBuff: {
@@ -689,7 +629,7 @@ GladiatorBuff: {
 
 GladiatorSpiritBuff: {
 	DisplayName: Сила гладиатора
-	Description: +20% к сопротивлению урону, иммунитет к отбрасыванию, улучшение урона за попадания
+	Description: +10% к сопротивлению урону, иммунитет к отбрасыванию, улучшение урона за попадания
 }
 
 ROBBuff: {
@@ -724,34 +664,14 @@ MagicalCurseBuff: {
 	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
-MoonFangBuff: {
-	DisplayName: Клык луны
-	Description: Не можете восстанавливать здоровье
-}
-
 WitheredForceBuff: {
 	DisplayName: Бафф Артефакта Увядающий
 	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
-TimberBleedBuff: {
-	DisplayName: Бафф Лесного Кровотечения
-	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
-}
-
 EarthPoison: {
 	DisplayName: Яд Земли
 	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
-}
-
-WitheredBuff: {
-	DisplayName: Увядающий
-	Description: Mods.FargowiltasSouls.Buffs.WithereddBuff.Description
-}
-
-WitheredWizardBuff: {
-	DisplayName: Увядающий
-	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
@@ -781,7 +701,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +20% к урону, +15% к сопротивлению урона, +2,5 ОЗ/сек, миньоны могут наносить крит. урон
+	Description: +20% к урону, +8% к сопротивлению урона, +2,5 ОЗ/сек
 }
 
 MutantDesperationBuff: {
@@ -807,4 +727,9 @@ SilverBuff: {
 GrabbedHarmlessBuff: {
 	DisplayName: В захвате
 	Description: Долбите по кнопкам передвижения, чтобы выбраться!
+}
+
+DaybrokenBuff: {
+	DisplayName: Заря
+	Description: Испепеление солнечными лучами
 }

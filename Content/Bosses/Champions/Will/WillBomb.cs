@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

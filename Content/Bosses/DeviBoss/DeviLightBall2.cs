@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             base.SetDefaults();
 
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnKill(int timeLeft)
