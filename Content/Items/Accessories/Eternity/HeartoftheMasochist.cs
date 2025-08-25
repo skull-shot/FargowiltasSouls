@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient(ModContent.ItemType<BetsysHeart>())
             .AddIngredient(ModContent.ItemType<MutantAntibodies>())
             .AddIngredient(ModContent.ItemType<PrecisionSeal>())
-            .AddIngredient(ModContent.ItemType<GalacticGlobe>())
+            .AddIngredient(ModContent.ItemType<ChaliceofTheMoon>())
             .AddIngredient(ItemID.LunarBar, 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
 

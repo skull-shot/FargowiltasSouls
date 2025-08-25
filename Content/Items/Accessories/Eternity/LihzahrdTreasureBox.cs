@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class LihzahrdBoulders : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => Header.GetHeader<VerdantHeader>();
         public override int ToggleItemType => ModContent.ItemType<LihzahrdTreasureBox>();
         public override bool ExtraAttackEffect => true;
     }

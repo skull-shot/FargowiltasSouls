@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
                 Charges = 0;
             }
             if (Charges > 0 && player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("RoseTintedVisorCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/RoseTintedVisor").Value, Color.Pink, () => (float)Charges / 6f, true, 60, () => Main.LocalPlayer.HeldItem == Item);
+                CooldownBarManager.Activate("RoseTintedVisorCharge", FargoAssets.GetTexture2D("Content/Items/Weapons/Challengers", "RoseTintedVisor").Value, Color.Pink, () => (float)Charges / 6f, true, 60, () => Main.LocalPlayer.HeldItem == Item);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

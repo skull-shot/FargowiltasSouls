@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
     public class CelestialRuneAttacks : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => Header.GetHeader<VerdantHeader>();
         public override int ToggleItemType => ModContent.ItemType<CelestialRune>();
         public override bool ExtraAttackEffect => true;
         public static int BaseDamage(Player player) => 50;

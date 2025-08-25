@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                     chargeLevel++;
 
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("PrismaRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/BossDrops/PrismaRegalia").Value, Color.DeepPink,
+                    CooldownBarManager.Activate("PrismaRegaliaCharge", FargoAssets.GetTexture2D("Content/Items/Weapons/BossDrops", "PrismaRegalia").Value, Color.DeepPink,
                         () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<PrismaRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {

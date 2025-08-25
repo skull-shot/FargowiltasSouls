@@ -200,7 +200,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ItemID.BundleofBalloons, ItemID.HorseshoeBundle, ModContent.ItemType<BeeEnchant>() })
                     ) + GetBuildTextRandom(
                     2,
-                    ModContent.ItemType<SkullCharm>(),
+                    ModContent.ItemType<CrystalSkull>(),
                     ModContent.ItemType<ShadowEnchant>(),
                     ModContent.ItemType<TinEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
@@ -246,7 +246,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ModContent.ItemType<SupremeDeathbringerFairy>(), ModContent.ItemType<SparklingAdoration>() })
                 ) + GetBuildTextRandom(3,
                     ModContent.ItemType<TinEnchant>(),
-                    ModContent.ItemType<SkullCharm>(),
+                    ModContent.ItemType<CrystalSkull>(),
                     ModContent.ItemType<CopperEnchant>(),
                     ModContent.ItemType<FossilEnchant>(),
                     ModContent.ItemType<NinjaEnchant>());
@@ -532,7 +532,7 @@ namespace FargowiltasSouls.Content.Items.Misc
 
                     Main.rand.NextBool() ? ItemID.BetsyWings : ItemID.FishronWings,
                     ItemID.EmpressFlightBooster,
-                    ModContent.ItemType<ChaliceoftheMoon>()
+                    ModContent.ItemType<VerdantDoomsayerMask>()
                 ) + GetBuildTextRandom(
                     4,
                     Main.rand.NextBool() ? ModContent.ItemType<AeolusBoots>() : ModContent.ItemType<ValhallaKnightEnchant>(),
