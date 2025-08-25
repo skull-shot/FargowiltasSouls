@@ -47,3 +47,6 @@ maso abom desperation never moves arena, starts 1st laevateinn in middle of aren
 maso ftw abom deathray run trail lasts extremely long, mainly for desp
 minor fix for silver ench forcing itself to parry for 1 tick while attacking with right click weapons
 made abom arena edge brighter at distance because it feels weird to see the eclipse dim like that
+implemented attack speed scaling on yoyos! (note: it is ATTACK speed, not melee speed) also on:
+	penetrator final spark
+	nano core blade

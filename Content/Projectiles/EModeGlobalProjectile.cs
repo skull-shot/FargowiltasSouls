@@ -194,6 +194,11 @@ namespace FargowiltasSouls.Content.Projectiles
                 default:
                     break;
             }
+
+            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
+            {
+                projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
+            }
         }
 
         private static bool NonSwarmFight(Projectile projectile, params int[] types)
