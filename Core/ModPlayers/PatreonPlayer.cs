@@ -310,7 +310,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 yield return new Item(ItemID.CapricornChestplate);
                 yield return new Item(ItemID.CapricornLegs);
                 yield return new Item(ItemID.PartyHairDye);
-                yield return new Item(ItemID.PumpkinCandle);
+                yield return new Item(ItemID.PumpkingPetItem);
                 yield return new Item(ItemID.HandOfCreation);
             }
         }
