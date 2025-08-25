@@ -224,13 +224,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             return false;
         }
 
-        // todo, actually add legendary to the prefix pool properly so things like autoreforge work...
-        public override void PostReforge()
-        {
-            if (Main.rand.NextBool(50))
-                Item.prefix = PrefixID.Legendary;
-        }
-
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Mod == "Terraria" && line.Name == "ItemName")

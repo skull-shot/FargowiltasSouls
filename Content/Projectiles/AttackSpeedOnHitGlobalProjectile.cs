@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles
     {
         public override bool InstancePerEntity => true;
 
-        public float[] AttackSpeedDebt = new float[ProjectileID.Count];
+        public Dictionary<int, float> AttackSpeedDebt = new Dictionary<int, float>();
 
         public bool UseAttackSpeedToDoubleHit;
         bool AllowAttackSpeedCountingThisTick;
@@ -31,9 +32,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 return;
 
             float attackSpeedIncrement = Math.Max(0f, Main.LocalPlayer.FargoSouls().AttackSpeed - 1f);
+            if (!AttackSpeedDebt.ContainsKey(projectile.type))
+                AttackSpeedDebt.Add(projectile.type, 0);
             AttackSpeedDebt[projectile.type] += attackSpeedIncrement;
             if (AttackSpeedDebt[projectile.type] > 1f)
             {
+                //Main.NewText("double hit!");
                 AllowAttackSpeedCountingThisTick = false; //make sure we dont somehow get in an infinite loop of stacking endless hits in one tick
                 AttackSpeedDebt[projectile.type] -= 1f;
                 if (projectile.usesIDStaticNPCImmunity)
