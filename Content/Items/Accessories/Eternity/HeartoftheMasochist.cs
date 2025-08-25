@@ -17,6 +17,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
+        public override int NumFrames => 7;
+
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
              AccessoryEffectLoader.GetEffect<ParryEffect>(),

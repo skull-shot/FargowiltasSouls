@@ -14,6 +14,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
+        public override int NumFrames => 7;
+
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 7));
