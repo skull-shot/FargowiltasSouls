@@ -658,7 +658,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT3 = true;*/
 
 
-            if (Player.channel && WeaponUseTimer < 2)
+            if (Player.channel && WeaponUseTimer < 2 && (Player.controlUseItem || Player.controlUseTile))
                 WeaponUseTimer = 2;
             if (--WeaponUseTimer < 0)
                 WeaponUseTimer = 0;

@@ -30,9 +30,14 @@ eri bg is a bit brighter
 eri p3 sucks you in harder as life decreases (sorry low%-ers)
 eri p3 black hole has contact damage
 fixed a texture error with lifelight blasters
-ftw lifelight is biblically accurate
 raised drakovi minion enemy detection range
 eri and mutant are now vulnerable to timestop (eri immune while doing his own timestop, mutant immune in p3)
 nano core bow isnt flaccid (fires faster arrows with less arc)
 eternal armor deathray revives extend your iframes for as long as the ray lasts
 you can now hot potato Fused debuff onto enemies and vice versa (also gives big contact damage resistance so you can do this)
+
+penetrator can be Legendary... at abysmally low chances
+nano core scales with aspd in all forms except melee
+fixed nano core counting as always "attacking" because you always have a "held weapon projectile" even when not attacking
+fish ex arena is on its own iframe timer
+fish ex becomes unplayable in gfb
