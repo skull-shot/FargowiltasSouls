@@ -12,13 +12,6 @@ namespace FargowiltasSouls.Content.Items.Summons
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Abominationn Voodoo Doll");
-            /* Tooltip.SetDefault("Summons Abominationn to your town" +
-                "\n'You are a terrible person'"); */
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "憎恶巫毒娃娃");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "你可真是个坏东西");
-
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }

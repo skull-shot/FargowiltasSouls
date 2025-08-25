@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 
@@ -5,6 +6,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
 {
     public class MutantsCreditCard : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Consumables", Name);
         public override bool Eternity => true;
 
         public override void SetDefaults()

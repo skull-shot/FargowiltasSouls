@@ -1,15 +1,12 @@
-﻿using Terraria.ID;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Mounts
 {
     public class AcornConstruct : SoulsItem
     {
-        public override void SetStaticDefaults()
-        {
-            // Tooltip.SetDefault("Ride the Squirrel");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Mounts", Name);
         public override void SetDefaults()
         {
             Item.width = 20;

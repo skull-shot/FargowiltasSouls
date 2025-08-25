@@ -16,11 +16,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Misc
 {
     public class EternityAdvisor : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

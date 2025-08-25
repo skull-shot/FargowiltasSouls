@@ -1,4 +1,5 @@
 ﻿using Fargowiltas;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
 {
     public class ConcentratedRainbowMatter : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Consumables", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

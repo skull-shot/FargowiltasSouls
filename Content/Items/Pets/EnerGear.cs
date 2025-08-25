@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Pets;
 using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Pets
 {
     public class EnerGear : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Pets", Name);
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 11));
