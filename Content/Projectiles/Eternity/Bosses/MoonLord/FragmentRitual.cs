@@ -2,8 +2,10 @@
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,14 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
         private const float rotationPerTick = PI / 140f;
         private const float threshold = 600f;
 
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Lunar Ritual");
-            Main.projFrames[Projectile.type] = 5;
-        }
-
+        public int RitualTexture = 0;
         public override void SetDefaults()
         {
             Projectile.width = 8;
@@ -49,13 +44,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                 Projectile.localAI[0] = (int)npc.GetGlobalNPC<MoonLordCore>().VulnerabilityTimer / 56.25f; //number to hide
                 Projectile.localAI[0]--;
 
-                Projectile.frame = npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState switch //match ML vulnerability to fragment
+                //The numbers may seem random but they correspond to each Lunar Fragment's final ItemID number.
+                RitualTexture = npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState switch //match ML vulnerability to fragment
                 {
-                    0 => 1,
-                    1 => 2,
-                    2 => 0,
-                    3 => 3,
-                    _ => 4,
+                    0 => 8, // Solar
+                    1 => 6, // Vortex
+                    2 => 7, // Nebula
+                    3 => 9, // Stardust
+                    _ => 0, // All Class
                 };
             }
             else
@@ -99,7 +95,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D texture2D13 = TextureAssets.Projectile[Type].Value;
+            if (RitualTexture != 0)
+            {
+                texture2D13 = Main.Assets.Request<Texture2D>($"Images/Item_345{RitualTexture}", AssetRequestMode.ImmediateLoad).Value;
+            }
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
     {
         public int Counter;
 
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/Misc/TophatSquirrelWeapon";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", "TophatSquirrelWeapon");
 
         public override void SetStaticDefaults()
         {

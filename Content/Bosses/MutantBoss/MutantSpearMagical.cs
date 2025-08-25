@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/Penetrator";
+            FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "Penetrator");
 
         public override void SetDefaults()
         {

@@ -17,9 +17,9 @@ using static System.Net.Mime.MediaTypeNames;
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class RockeaterLauncherHeld : ModProjectile
-    {   
+    {
 
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/SwarmDrops/EaterLauncher";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", "EaterLauncher");
         public override void SetDefaults()
         {
             Projectile.width = 102;
