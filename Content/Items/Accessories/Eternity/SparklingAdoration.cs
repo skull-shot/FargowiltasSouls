@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Projectiles.Accessories;
@@ -17,6 +18,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class SparklingAdoration : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -75,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             fargoPlayer.DeviGrazeCounter = -1; //reset counter whenever successful graze
 
             if (fargoPlayer.Player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("SparklingAdorationGraze", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/SparklingAdoration").Value, Color.Pink, () => (float)(fargoPlayer.DeviGrazeBonus / GrazeCap(fargoPlayer)), true, 0, () => fargoPlayer.DeviGraze, 11);
+                CooldownBarManager.Activate("SparklingAdorationGraze", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "SparklingAdoration").Value, Color.Pink, () => (float)(fargoPlayer.DeviGrazeBonus / GrazeCap(fargoPlayer)), true, 0, () => fargoPlayer.DeviGraze, 11);
 
             if (!Main.dedServ)
             {

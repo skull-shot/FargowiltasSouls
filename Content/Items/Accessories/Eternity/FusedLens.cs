@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class FusedLens : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];

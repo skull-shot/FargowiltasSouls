@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -210,7 +211,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Player.hurtCooldowns[0] = Math.Max(Player.hurtCooldowns[0], 2);
                         Player.hurtCooldowns[1] = Math.Max(Player.hurtCooldowns[1], 2);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/BetsysHeart").Value, Color.OrangeRed, 
+                        CooldownBarManager.Activate("SpecialDashCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity","").Value, Color.OrangeRed, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(5), activeFunction: () => BetsysHeartItem != null);
                     }
                     else if (player.HasEffect<SupremeDashEffect>() && type == 1)
@@ -220,7 +221,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 25;
                         Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<SupremeDash>(), SupremeDashEffect.BaseDamage(player) * 3, 6f, Player.whoAmI);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/SupremeDeathbringerFairy").Value, Color.LightGray,
+                        CooldownBarManager.Activate("SpecialDashCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "SupremeDeathbringerFairy").Value, Color.LightGray,
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
                     }
                     else if (player.HasEffect<SpecialDashEffect>() && type == 0)
@@ -230,7 +231,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 vel = Player.SafeDirectionTo(Main.MouseWorld) * 20;
                         Projectile.NewProjectile(Player.GetSource_Accessory(QueenStingerItem), Player.Center, vel, ModContent.ProjectileType<BeeDash>(), (int)(44 * Player.ActualClassDamage(DamageClass.Melee)), 6f, Player.whoAmI);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/QueenStinger").Value, Color.Yellow, 
+                        CooldownBarManager.Activate("SpecialDashCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "QueenStinger").Value, Color.Yellow, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(6), activeFunction: () => QueenStingerItem != null);
                     }
                     Player.AddBuff(ModContent.BuffType<BetsyDashBuff>(), 20);
@@ -771,7 +772,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ParryDebuffImmuneTime = invul;
                 shieldCD = invul + extrashieldCD;
 
-                CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, 
+                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, 
                     () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => Player.HasEffect<SilverEffect>() || Player.HasEffect<DreadShellEffect>() || Player.HasEffect<PumpkingsCapeEffect>());
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs

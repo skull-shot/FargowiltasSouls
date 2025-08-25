@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Accessories;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class AbominableWand : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
