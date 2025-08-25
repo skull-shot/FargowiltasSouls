@@ -1411,9 +1411,9 @@ namespace FargowiltasSouls.Core.Globals
             if (Sublimation)
             {
                 float def = npc.defense / 3 * PureGazeTime / PungentGazeBuff.MAX_TIME;
-                if (def > 40)
-                    def = 40;
-                modifiers.ArmorPenetration += 10 + def;
+                if (def > 50)
+                    def = 50;
+                modifiers.ArmorPenetration += Math.Max(def, 10);
             }
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;

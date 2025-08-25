@@ -145,7 +145,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
                     if (p != Main.maxProjectiles)
                     {
                         Main.projectile[p].localAI[1] = shadertype; //change projectile's ai if the recolored vortex portal is being used, so that purple ones always fire purple lightning
-                        Main.projectile[p].extraUpdates += 1;
+                        if (moonlordvortex)
+                            Main.projectile[p].extraUpdates += 1;
                     }
                 }
             }

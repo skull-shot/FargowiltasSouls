@@ -282,7 +282,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
-                    if (Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5 && Main.npc[i].Distance(Player.Center) < 2500)
+                    if (Main.npc[i].Distance(Player.Center) < 2500 && Main.npc[i].active && !Main.npc[i].friendly && !Main.npc[i].CountsAsACritter && !Main.npc[i].dontTakeDamage)
                     {
                         Main.npc[i].AddBuff(ModContent.BuffType<MagicalCurseBuff>(), LumUtils.SecondsToFrames(5));
                         float speed = Main.npc[i].scale * 10;
