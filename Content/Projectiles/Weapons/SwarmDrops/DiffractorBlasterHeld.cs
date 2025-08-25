@@ -259,7 +259,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D texture2D = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "DiffractorBlasterHeld_Glow").Value;
+            Texture2D texture2D = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/SwarmWeapons", "DiffractorBlasterHeld_glow").Value;
             int height = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
             int width = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Width;
             int frame = height * Projectile.frame;
