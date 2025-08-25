@@ -204,7 +204,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         p.timeLeft = 3;
                         Player.KillMe(PlayerDeathReason.ByProjectile(Player.whoAmI, p.whoAmI), 10000, Player.direction);
                     }
-                    
+
                     Player.AddBuff(BuffID.Poisoned, 2);
                     Player.AddBuff(BuffID.Darkness, 2);
                     Player.AddBuff(BuffID.Cursed, 2);
@@ -304,6 +304,15 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!mediumCoreDeath && Player.name.Equals("Sayaka", System.StringComparison.OrdinalIgnoreCase))
             {
                 yield return new Item(ItemID.Katana, prefix: PrefixID.Legendary);
+            }
+            if (!mediumCoreDeath && Player.name.Equals("Ariyah", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.CapricornMask);
+                yield return new Item(ItemID.CapricornChestplate);
+                yield return new Item(ItemID.CapricornLegs);
+                yield return new Item(ItemID.PartyHairDye);
+                yield return new Item(ItemID.PumpkingPetItem);
+                yield return new Item(ItemID.HandOfCreation);
             }
         }
         public static void AddDash_Eight3One(Player player)
@@ -535,7 +544,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         }
 
-        
+
 
         //AFTER IMAGE HELL
         private static bool drawingAfterimage = false;
@@ -656,45 +665,5 @@ namespace FargowiltasSouls.Core.ModPlayers
             On_PlayerDrawLayers.DrawPlayer_RenderAllLayers += On_PlayerDrawLayers_DrawPlayer_RenderAllLayers;
         }
 
-
-    }
-    public class PatreonDrawLayer : PlayerDrawLayer
-    {
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
-        {
-            PatreonPlayer patreon = drawInfo.drawPlayer.GetModPlayer<PatreonPlayer>();
-            return (patreon.Ariyah);
-                
-            return base.GetDefaultVisibility(drawInfo);
-        }
-        public override Position GetDefaultPosition()
-        {
-            return PlayerDrawLayers.BeforeFirstVanillaLayer;
-        }
-
-        protected override void Draw(ref PlayerDrawSet drawInfo)
-        {
-            PatreonPlayer patreon = drawInfo.drawPlayer.GetModPlayer<PatreonPlayer>();
-            if (patreon.Ariyah)
-            {
-                if (drawInfo.shadow == 0)
-                {
-                    for (int i = 0; i < patreon.PatreonOldPos.Length; i++)
-                    {
-                        Vector2 pos = patreon.PatreonOldPos[i];
-                        Main.NewText(pos);
-                        Main.PlayerRenderer.DrawPlayer(Main.Camera, drawInfo.drawPlayer, pos, drawInfo.rotation, drawInfo.rotationOrigin, i + 1, 1);
-                    }
-                }
-                if (drawInfo.shadow != 0)
-                {
-                    Color color = Color.Lerp(Color.Purple, Color.Pink, drawInfo.shadow / 10f);
-                    //drawInfo.colorArmorBody = color;
-                    //drawInfo.colorArmorHead = color;
-                    //drawInfo.colorArmorLegs = color;
-                    
-                }
-            }
-        }
     }
 }
