@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -15,10 +16,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class RoseTintedVisor : SoulsItem
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

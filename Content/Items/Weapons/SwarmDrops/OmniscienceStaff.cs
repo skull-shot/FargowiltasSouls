@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Rarities;
@@ -15,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
     
     public class OmniscienceStaff : SoulsItem
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

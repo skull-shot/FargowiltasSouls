@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Terraria;
 using Terraria.ID;
 
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class SecurityWallet : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

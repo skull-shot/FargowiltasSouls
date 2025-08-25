@@ -1,14 +1,15 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Items.Dyes
 {
     public class LifeDye : SoulsItem
     {
-        //public override string Texture => "FargowiltasSouls/Content/Items/Dyes/LifeDye";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Dyes", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Heavenly Dye");
+
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
@@ -24,10 +25,9 @@ namespace FargowiltasSouls.Content.Items.Dyes
 
     public class WillDye : SoulsItem
     {
-        //public override string Texture => "FargowiltasSouls/Content/Items/Dyes/LifeDye";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Dyes", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Willpower Dye");
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
@@ -43,10 +43,9 @@ namespace FargowiltasSouls.Content.Items.Dyes
 
     public class GaiaDye : SoulsItem
     {
-        //public override string Texture => "FargowiltasSouls/Content/Items/Dyes/LifeDye";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Dyes", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Gaia Dye");
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 

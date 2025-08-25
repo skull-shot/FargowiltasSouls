@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -142,7 +143,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             modPlayer.MeteorCD = Cooldown;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
+                CooldownBarManager.Activate("MeteorEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
                 
                     () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
 

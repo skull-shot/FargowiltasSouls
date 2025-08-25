@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Projectiles.JungleMimic;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,11 +11,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 {
     public class OvergrownKey : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Overgrown Key");
-            // Tooltip.SetDefault("Summons a Jungle Mimic to fight for you\nNeeds 2 minion slots");
             ItemID.Sets.StaffMinionSlotsRequired[Item.type] = 2;
         }
 

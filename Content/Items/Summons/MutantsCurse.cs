@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,13 +10,9 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class MutantsCurse : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mutant's Curse");
-            /* Tooltip.SetDefault(@"Must be used on the surface
-'At least this way, you don't need that doll'"); */
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "突变体的诅咒");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'至少不需要用娃娃了'");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 11));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemNoGravity[Item.type] = true;

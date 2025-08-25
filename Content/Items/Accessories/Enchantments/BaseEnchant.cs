@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public abstract class BaseEnchant : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Enchantments", Name);
         public abstract Color nameColor { get; }
         public bool IsAccessory = false;
         public string wizardEffect()

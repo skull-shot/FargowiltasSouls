@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
@@ -94,7 +95,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             modPlayer.AttackSpeed += maxSpeed * ratio;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("AdamantiteEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/AdamantiteEnchant").Value, new(221, 85, 125),
+                CooldownBarManager.Activate("AdamantiteEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "AdamantiteEnchant").Value, new(221, 85, 125),
                 () => (float)Main.LocalPlayer.FargoSouls().AdamantiteSpread / SpreadCap, activeFunction: player.HasEffectEnchant<AdamantiteEffect>, displayAtFull: true);
 
         }

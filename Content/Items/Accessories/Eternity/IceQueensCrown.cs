@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
@@ -22,6 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Face)]
     public class IceQueensCrown : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<IceShieldEffect>()];
@@ -94,7 +96,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     modPlayer.IceQueenCrownCD = CD;
 
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("IceQueenCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/IceQueensCrown").Value, Color.LightBlue,
+                        CooldownBarManager.Activate("IceQueenCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "IceQueensCrown").Value, Color.LightBlue,
                             () => 1f - (float)Main.LocalPlayer.FargoSouls().IceQueenCrownCD / CD, activeFunction: player.HasEffect<IceShieldEffect>);
                 }
             }

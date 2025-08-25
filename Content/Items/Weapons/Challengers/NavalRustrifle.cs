@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class NavalRustrifle : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public static readonly SoundStyle PowerShotSound = new("FargowiltasSouls/Assets/Sounds/Weapons/Rustrifle_Powershot");
         public override void SetStaticDefaults()
         {

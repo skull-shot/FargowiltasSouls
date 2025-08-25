@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class SaucerControlConsole : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips => 
             [AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];

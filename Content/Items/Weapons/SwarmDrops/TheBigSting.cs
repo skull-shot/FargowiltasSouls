@@ -1,5 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class TheBigSting : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

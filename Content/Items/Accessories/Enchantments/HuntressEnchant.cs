@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -98,11 +99,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                     if (player.whoAmI == Main.myPlayer)
                     {
-                        Texture2D sprite = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/HuntressEnchant").Value;
+                        Texture2D sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "HuntressEnchant").Value;
                         Color color = new(122, 192, 76);
                         if (player.HasEffect<RedRidingHuntressEffect>())
                         {
-                            sprite = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/RedRidingEnchant").Value;
+                            sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "RedRidingEnchant").Value;
                             color = new(192, 27, 60);
                         }
                         CooldownBarManager.Activate("HuntressBuildup", sprite, color, () => modPlayer.HuntressStage / 10f, true, activeFunction: () => player.HasEffect<HuntressEffect>());

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Shield)]
     public class LithosphericCluster : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override bool Eternity => true;
@@ -102,6 +104,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Shield)]
     public class LithosphericClusterInactive : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override bool Eternity => true;

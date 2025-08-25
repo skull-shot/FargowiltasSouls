@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 {
     public class UniverseCore : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Expert", Name);
         public override int NumFrames => 5;
 
         public override void SetStaticDefaults()

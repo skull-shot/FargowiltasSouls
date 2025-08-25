@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Weapons.BossDrops;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Terraria;
 using Terraria.ID;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
     [LegacyName("MechanicalLeashOfCthulhu")]
     public class LeashofCthulhu : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

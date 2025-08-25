@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.endurance += 0.01f * endMult * modPlayer.EbonwoodCharge / 50;
 
             
-            CooldownBarManager.Activate("EbonwoodEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/EbonwoodEnchant").Value, EbonwoodEnchant.NameColor,
+            CooldownBarManager.Activate("EbonwoodEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "EbonwoodEnchant").Value, EbonwoodEnchant.NameColor,
                 () => Main.LocalPlayer.FargoSouls().EbonwoodCharge / chargeCap, true, activeFunction: () => player.HasEffect<EbonwoodEffect>());
             
             // charge visual/sound effects

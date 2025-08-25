@@ -43,12 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Wood Enchantment");
-            /* Tooltip.SetDefault(
-@"Bestiary and banner entries complete twice as fast
-You gain a shop discount based on bestiary completion
-Discount effect works in vanity slots"); */
         }
 
         public override void SetDefaults()

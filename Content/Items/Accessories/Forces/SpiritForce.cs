@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -76,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 modPlayer.ForbiddenCD--;
                 if (Main.myPlayer == player.whoAmI)
-                    CooldownBarManager.Activate("ForbiddenTornadoCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ForbiddenEnchant").Value, new(231, 178, 28),
                         () => (float)modPlayer.ForbiddenCD / (60 * 10), activeFunction: Main.LocalPlayer.HasEffect<SpiritTornadoEffect>, displayAtFull: false);
             }
         }

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class MoonBowHeld : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/BossDrops/MoonBow";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
 
         private int syncTimer;
         private Vector2 mousePos;

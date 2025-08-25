@@ -1,6 +1,9 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Rarities;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,7 +34,6 @@ namespace FargowiltasSouls.Content.Items.Armor.Styx
             player.GetCritChance(DamageClass.Generic) += 10;
             player.moveSpeed += 0.2f;
         }
-
         public override void AddRecipes()
         {
             CreateRecipe()

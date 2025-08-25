@@ -15,7 +15,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Phantasmal Blast");
             Main.projFrames[Projectile.type] = 16;
         }
 
