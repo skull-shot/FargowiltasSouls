@@ -110,7 +110,7 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
                 BuffID.Suffocation,
                 BuffID.OnFire,
                 BuffID.OnFire3,
-                ModContent.BuffType<HellFireBuff>(),
+                ModContent.BuffType<BlackInfernoBuff>(),
                 ModContent.BuffType<LethargicBuff>(),
                 ModContent.BuffType<ClippedWingsBuff>()
             ]);

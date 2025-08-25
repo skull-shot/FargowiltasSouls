@@ -77,8 +77,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     {
                         for (int i = Main.rand.Next(150); i < 6000; i += 300)
                         {
+                            float ai0 = Projectile.ai[0];
+                            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                                ai0 += 3000;
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center + Projectile.velocity * i, Vector2.Zero,
-                                ModContent.ProjectileType<AbomScytheSplit>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], -1f);
+                                ModContent.ProjectileType<AbomScytheSplit>(), Projectile.damage, Projectile.knockBack, Projectile.owner, ai0, -1f);
                         }
                     }
 

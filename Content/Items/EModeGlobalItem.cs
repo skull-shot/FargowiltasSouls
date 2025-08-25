@@ -336,22 +336,49 @@ namespace FargowiltasSouls.Content.Items
                     }
             }
         }
+        public override float UseSpeedMultiplier(Item item, Player player)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return base.UseSpeedMultiplier(item, player);
+            if (item.type == ItemID.SapphireStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
+            {
+                return 1.5f;
+            }
+            return base.UseSpeedMultiplier(item, player);
+        }
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            if (!NPC.downedBoss3 && item.type == ItemID.WaterBolt)
+            switch (item.type)
             {
-                type = ProjectileID.WaterGun;
-                damage = 0;
-            }
-            if (item.type == ItemID.ChlorophyteSaber)
-            {
-                velocity *= 2f;
-            }
-            if (item.type == ItemID.JackOLanternLauncher)
-            {
-                velocity *= 1.5f;
+                case ItemID.WaterBolt:
+                    if (!NPC.downedBoss3 && EmodeItemBalance.HasEmodeChange(player, item.type))
+                    {
+                        type = ProjectileID.WaterGun;
+                        damage = 0;
+                    }
+                    break;
+                    
+                case ItemID.ChlorophyteSaber:
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    {
+                        velocity *= 2f;
+                    }
+                    break;
+
+                case ItemID.JackOLanternLauncher:
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    {
+                        velocity *= 1.5f;
+                    }
+                    break;
+                case ItemID.SapphireStaff:
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    {
+                        velocity = velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f);
+                    }
+                    break;
             }
         }
     }

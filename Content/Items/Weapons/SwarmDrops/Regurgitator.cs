@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using System;
@@ -12,13 +13,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
     [LegacyName("FleshCannon")]
     public class Regurgitator : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public int counter;
 
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Regurgitator");
-            // Tooltip.SetDefault("'The enslaved face of a defeated foe...'");
         }
 
         public override void SetDefaults()

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.NPCs.Critters;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.NPCs.Critters;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,7 +7,7 @@ namespace FargowiltasSouls.Content.Items.Misc
 {
     public class TopHatSquirrelCaught : SoulsItem
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/Misc/TophatSquirrelWeapon";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", "TophatSquirrelWeapon");
 
         public override void SetStaticDefaults()
         {

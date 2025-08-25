@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -34,19 +36,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.NebulaHelmet)
-            .AddIngredient(ItemID.NebulaBreastplate)
-            .AddIngredient(ItemID.NebulaLeggings)
-            //.AddIngredient(ItemID.WingsNebula);
-            .AddIngredient(ItemID.NebulaArcanum)
-            .AddIngredient(ItemID.NebulaBlaze)
-            //LeafBlower
-            //bubble gun
-            //chaarged blaster cannon
-            .AddIngredient(ItemID.LastPrism)
+                .AddIngredient(ItemID.NebulaHelmet)
+                .AddIngredient(ItemID.NebulaBreastplate)
+                .AddIngredient(ItemID.NebulaLeggings)
+                //.AddIngredient(ItemID.WingsNebula);
+                .AddIngredient(ItemID.NebulaArcanum)
+                .AddIngredient(ItemID.NebulaBlaze)
+                //LeafBlower
+                //bubble gun
+                //chaarged blaster cannon
+                .AddIngredient(ItemID.LastPrism)
 
-            .AddTile(TileID.LunarCraftingStation)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
@@ -78,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             
             int max = 3 * 60;
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("NebulaEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/NebulaEnchant").Value, NebulaEnchant.NameColor, 
+                CooldownBarManager.Activate("NebulaEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "NebulaEnchant").Value, NebulaEnchant.NameColor, 
                     () => (float)(max - Main.LocalPlayer.FargoSouls().NebulaEnchCD) / max, activeFunction: () => player.HasEffect<NebulaEffect>());
 
             if (player.setNebula)

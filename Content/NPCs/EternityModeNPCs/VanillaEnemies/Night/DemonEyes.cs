@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
         }
     }
 
@@ -153,7 +153,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

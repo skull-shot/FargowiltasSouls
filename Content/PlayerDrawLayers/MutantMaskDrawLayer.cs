@@ -37,11 +37,18 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         {        
             Player drawPlayer = drawInfo.drawPlayer;
 
-            //yes, all of that is really neccessary to emulate head bobbing.
-            Vector2 offset = (drawPlayer.gravDir > 0 ? (drawInfo.drawPlayer.direction == 1 ? new Vector2(-12, -16) : new Vector2(-8, -16)) : (drawInfo.drawPlayer.direction == 1 ? new Vector2(-12, 8) : new Vector2(-8, 8))) + drawPlayer.headPosition + drawInfo.headVect + Main.OffsetsPlayerHeadgear[drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height] * drawPlayer.gravDir;
-            Vector2 drawPosition = drawInfo.Position - Main.screenPosition;
-            drawPosition += offset.Floor();
+            Rectangle bodyFrame = drawInfo.drawPlayer.bodyFrame;
 
+            Vector2 Position = drawInfo.helmetOffset +
+                new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) +
+                (float)(drawInfo.drawPlayer.width / 2)),
+                (int)(drawInfo.Position.Y - Main.screenPosition.Y +
+                (float)drawInfo.drawPlayer.height -
+                (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) +
+                drawInfo.drawPlayer.headPosition +
+                drawInfo.headVect +
+                new Vector2(drawPlayer.direction == -1 ? 2 : -2, drawPlayer.gravDir == 1? - 6 : 16) +
+                Main.OffsetsPlayerHeadgear[drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height] * drawPlayer.gravDir;
 
             Texture2D FlameTexture = FargoAssets.GetTexture2D("Content/Items/Armor/Eternal", "EternalFlame").Value;
 
@@ -53,10 +60,11 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
                     frame = 0;
             }
             Rectangle flameframe = new(0, (FlameTexture.Height / maxFrames) * frame, FlameTexture.Width, FlameTexture.Height / maxFrames);
-            DrawData data = new(FlameTexture, drawPosition.Floor(), flameframe, drawInfo.colorArmorBody, drawInfo.drawPlayer.bodyRotation, flameframe.Size() * 0.5f, 1.2f, drawInfo.playerEffect, 0f);
-            data.shader = drawInfo.cHead;
-            drawInfo.DrawDataCache.Add(data);
 
+            DrawData item = new DrawData(FlameTexture, Position, flameframe, Color.White, drawInfo.drawPlayer.headRotation, flameframe.Size() / 2f, 1.2f, drawInfo.playerEffect);
+            item.shader = drawInfo.cHead;
+            drawInfo.DrawDataCache.Add(item);
+            return;
         }
     }
 }

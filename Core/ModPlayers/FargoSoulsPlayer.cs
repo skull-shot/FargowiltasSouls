@@ -43,6 +43,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -1225,6 +1226,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
             }
+
+            if (StyxSet || !(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
+            {
+                drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
+                drawInfo.bodyGlowColor = Color.White;
+                drawInfo.armGlowColor = Color.White;
+                /*drawInfo.headGlowMask = ModContent.ItemType<StyxCrown>();
+                drawInfo.headGlowColor = Color.White;
+                drawInfo.legsGlowMask = ModContent.ItemType<StyxLeggings>();
+                drawInfo.legsGlowColor = Color.White;*/
+            }
         }
 
         public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound)
@@ -1413,20 +1425,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (Player.HasEffect<GuttedHeartMinions>())
                 GuttedHeartMinions.NurseHeal(Player);
-        }
-
-        public override bool CanConsumeAmmo(Item weapon, Item ammo)
-        {
-            //if (weapon.CountsAsClass(DamageClass.Ranged))
-            //{
-            //    if (RangedEssence && Main.rand.NextBool(10))
-            //        return false;
-            //    if (RangedSoul && Main.rand.NextBool(5))
-            //        return false;
-            //}
-            if (GaiaSet && Main.rand.NextBool(10))
-                return false;
-            return true;
         }
 
         public int frameCounter = 0;

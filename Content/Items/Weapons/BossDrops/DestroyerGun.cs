@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,13 +11,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class DestroyerGun : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Destroyer Gun");
-            // Tooltip.SetDefault("Becomes longer and faster with up to 3 empty minion slots\n'An old foe beaten into submission..'");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "毁灭者之枪");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'一个被迫屈服的老对手..'");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ElectricWhip>();
         }

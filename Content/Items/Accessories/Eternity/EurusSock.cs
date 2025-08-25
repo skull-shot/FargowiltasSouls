@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Shoes)]
     public class EurusSock : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

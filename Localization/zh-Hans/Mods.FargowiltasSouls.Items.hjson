@@ -1028,7 +1028,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1076,20 +1076,16 @@ CelestialRune: {
 		'''
 }
 
-ChaliceoftheMoon: {
-	DisplayName: 苍翠恶兆面具
-	Tooltip:
+VerdantDoomsayerMask: {
+	// DisplayName: Verdant Doomsayer Mask
+	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/ChaliceoftheMoon]免疫蜂群、萎缩、卡壳、魔力逆流和社恐减益
-		免疫[i:FargowiltasSouls/MagicalBulb]毒液、常春藤毒素、[i:FargowiltasSouls/LihzahrdTreasureBox]燃烧、导火索、下陷、蜥蜴诅咒和[i:FargowiltasSouls/CelestialRune]死亡标记减益
-		[i:FargowiltasSouls/MagicalBulb]按下“魔法净化”键治愈你受到的减益，并在一定时间内使附近敌人受到的持续伤害增加100%
-		[i:FargowiltasSouls/MagicalBulb]根据你受到的光照增加生命恢复速度
-		[i:FargowiltasSouls/LihzahrdTreasureBox]在一定高度使用快速下落，撞击地面时会产生猛烈的火焰喷发，并生成一连串巨石
-		[i:FargowiltasSouls/CelestialRune]你根据武器类型发动额外攻击
-		[c/BC5252:将你所有附属仆从效果和空召唤栏位转换为+1%伤害（可切换）]
-		否则，[i:FargowiltasSouls/MagicalBulb]召唤一株植物来为你而战
-		“时刻凝视”
-		'''
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
+		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
+		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
+		'Always watching'
+		''' */
 }
 
 ConcentratedRainbowMatter: {
@@ -1182,25 +1178,25 @@ FusedLens: {
 		'''
 }
 
-GalacticGlobe: {
-	DisplayName: 月之圣杯
-	Tooltip:
+ChaliceofTheMoon: {
+	// DisplayName: Chalice of the Moon
+	/* Tooltip:
 		'''
-		免疫无效诅咒、翻转、灯火通明、不稳定和月之诅咒减益
-		提供大多数一般药水和增益站的效果（在背包和时装栏也可生效）
-		召唤克苏鲁真眼保护你
-		增加100%飞行时间
-		“消耗它”
+		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Summons the true eyes of Cthulhu to protect you
+		Increases flight time by 100%
+		'Consume it'
+		''' */
+	// VanityTooltip: Grants most standard potion and station buffs
+	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
+	/* ExpandedTooltip:
 		'''
-	VanityTooltip: 提供大多数一般药水和增益站的效果
-	HoldShift: "[c/ADD8E6:按住左Shift以查看全部增益效果]"
-	ExpandedTooltip:
-		'''
-		[c/ADD8E6:铁皮、再生、敏捷、魔力再生、魔能、弹药储备、箭术、]
-		[c/ADD8E6:建筑工、宝匣、耐力、钓鱼、鱼鳃、幸运、拾心、生命力、挖矿、黑曜石皮、]
-		[c/ADD8E6:愤怒、怒气、声呐、召唤、荆棘、泰坦、温暖、水上飘、酒足饭饱、]
-		[c/ADD8E6:锋利、弹药箱、灵视、着魔、战略家、蜂蜜]
-		'''
+		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
+		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
+		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
+		''' */
 }
 
 GelicWings: {
@@ -1530,16 +1526,16 @@ SinisterIcon: {
 		'''
 }
 
-SkullCharm: {
-	DisplayName: 水晶头骨
-	Tooltip:
+CrystalSkull: {
+	// DisplayName: Crystal Skull
+	/* Tooltip:
 		'''
-		免疫眩晕减益
-		攻击力增加15%，但受到的伤害增加20%
-		降低敌人以你为目标的可能性
-		水晶头骨会在你攻击时蓄能，蓄能完毕时会发射暗灵弹
-		“成为集体意识的一部分”
-		'''
+		Grants immunity to Dazed and Webbed
+		Increases damage dealt by 15% and damage taken by 20%
+		Enemies are less likely to target you
+		Summons a crystal skull that charges energy as you attack, releasing a barrage once energy is fully charged
+		'Part of a collective consciousness'
+		''' */
 }
 
 SlimyShield: {
@@ -2833,6 +2829,7 @@ DragonsDemise: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
+		Ignores a large amount of enemy defense
 		'The reward for a mighty rematch...'
 		''' */
 }

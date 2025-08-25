@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -46,15 +47,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.GoldHelmet)
-            .AddIngredient(ItemID.GoldChainmail)
-            .AddIngredient(ItemID.GoldGreaves)
-            .AddIngredient(ItemID.RubyStaff)
-            .AddIngredient(ItemID.GoldenDelight)
-            .AddIngredient(ItemID.Goldfish)
+                .AddIngredient(ItemID.GoldHelmet)
+                .AddIngredient(ItemID.GoldChainmail)
+                .AddIngredient(ItemID.GoldGreaves)
+                .AddIngredient(ItemID.RubyStaff)
+                .AddIngredient(ItemID.GoldenDelight)
+                .AddIngredient(ItemID.Goldfish)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class GoldEffect : AccessoryEffect

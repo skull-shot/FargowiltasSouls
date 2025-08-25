@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class GuttedHeart : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

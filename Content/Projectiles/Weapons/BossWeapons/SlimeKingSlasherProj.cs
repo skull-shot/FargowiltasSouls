@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         public bool Swinging = false;
         public bool FirstSwing = true;
         public float SlashOpacity = 0f;
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/BossDrops/SlimeKingsSlasher";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", "SlimeKingsSlasher");
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().HellFire)
+            if (target.onFire || target.onFire2 || target.onFire3 || target.FargoSouls().BlackInferno)
             {
                 modifiers.SourceDamage *= 1.2f;
             }

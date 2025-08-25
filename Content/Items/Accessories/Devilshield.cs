@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -17,9 +18,10 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories
 {
-    //[AutoloadEquip(EquipType.Shield)]
+    [AutoloadEquip(EquipType.Shield)]
     public class Devilshield : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

@@ -3,6 +3,7 @@ global using FargowiltasSouls.Core.Toggler;
 global using Luminance.Common.Utilities;
 global using LumUtils = Luminance.Common.Utilities.Utilities;
 using Fargowiltas;
+using Fargowiltas.Content.Items.Tiles;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
 using Fargowiltas.Content.UI;
@@ -327,6 +328,7 @@ namespace FargowiltasSouls
 
             //Item.NewItem(null, player.Center, ModContent.ItemType<DevianttsSundial>());
             Item.NewItem(null, player.Center, ModContent.ItemType<EternityAdvisor>());
+            Item.NewItem(null, player.Center, ModContent.ItemType<EnchantedTree>());
 
             void GiveItem(string modName, string itemName, int amount = 1)
             {
@@ -660,7 +662,8 @@ namespace FargowiltasSouls
             ToggleEternityMode,
             WakeUpDeviantt,
             WakeUpMutant,
-            SyncSoulVortexHit
+            SyncSoulVortexHit,
+            ClearNPCBuffFromClient
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -1043,18 +1046,32 @@ namespace FargowiltasSouls
                                 WorldSavingSystem.HaveForcedMutantFromKS = true;
                                 NetMessage.SendData(MessageID.WorldData);
                             }
-
                         }
                         break;
                     case PacketID.SyncSoulVortexHit:
                         {
                             NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            int ai2 = reader.Read7BitEncodedInt();
+                            float ai3 = reader.ReadSingle();
+                            Vector2 velocity = reader.ReadVector2();
                             if (npc != null && npc.active && npc.ModNPC is SoulVortex && Main.netMode == NetmodeID.Server)
                             {
-                                npc.ai[2] = reader.Read7BitEncodedInt();
-                                npc.ai[3] = reader.ReadSingle();
-                                npc.velocity = reader.ReadVector2();
+                                npc.ai[2] = ai2;
+                                npc.ai[3] = ai3;
+                                npc.velocity = velocity;
                                 npc.netUpdate = true;
+                            }
+                        }
+                        break;
+                    case PacketID.ClearNPCBuffFromClient:
+                        {
+                            NPC npc = FargoSoulsUtil.NPCExists(reader.ReadByte());
+                            int buffType = reader.ReadByte();
+                            if (npc != null)
+                            {
+                                int index = npc.FindBuffIndex(buffType);
+                                if (index > -1)
+                                    npc.DelBuff(index);
                             }
                         }
                         break;

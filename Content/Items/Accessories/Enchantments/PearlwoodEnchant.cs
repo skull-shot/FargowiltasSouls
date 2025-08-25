@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -34,15 +35,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.PearlwoodHelmet)
-            .AddIngredient(ItemID.PearlwoodBreastplate)
-            .AddIngredient(ItemID.PearlwoodGreaves)
-            .AddIngredient(ItemID.PearlwoodSword)
-            .AddIngredient(ItemID.LightningBug)
-            .AddIngredient(ItemID.Starfruit)
+                .AddIngredient(ItemID.PearlwoodHelmet)
+                .AddIngredient(ItemID.PearlwoodBreastplate)
+                .AddIngredient(ItemID.PearlwoodGreaves)
+                .AddIngredient(ItemID.PearlwoodSword)
+                .AddIngredient(ItemID.LightningBug)
+                .AddIngredient(ItemID.Starfruit)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

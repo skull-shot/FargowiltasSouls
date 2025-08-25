@@ -28,6 +28,9 @@
     <None Remove="Folders to Port\**" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="Content\Sky\deepspace.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\AutoloadedEffects\Shaders\EmpressRitualShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\NatureAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\SpiritAuraShader.fx" />

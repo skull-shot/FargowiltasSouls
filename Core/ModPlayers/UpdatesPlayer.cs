@@ -487,6 +487,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Daybroken)
                 DamageOverTime(30);
 
+            if (Hellfire)
+                DamageOverTime(10);
+
             if (GodEater)
             {
                 DamageOverTime(170, true);
@@ -569,7 +572,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
             }
 
-            if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
+            /*if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
             {
                 FusedStandStillTime++;
                 if (FusedStandStillTime >= 60)
@@ -578,7 +581,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             else
-                FusedStandStillTime = 0;
+                FusedStandStillTime = 0;*/
 
             if (ToggleRebuildCooldown > 0)
                 ToggleRebuildCooldown--;
@@ -655,7 +658,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT3 = true;*/
 
 
-            if (Player.channel && WeaponUseTimer < 2)
+            if (Player.channel && WeaponUseTimer < 2 && (Player.controlUseItem || Player.controlUseTile))
                 WeaponUseTimer = 2;
             if (--WeaponUseTimer < 0)
                 WeaponUseTimer = 0;

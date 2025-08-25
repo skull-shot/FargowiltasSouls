@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
@@ -25,6 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [LegacyName("GroundStick")]
     public class RemoteControl : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -172,7 +174,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 Projectile.NewProjectile(GetSource_EffectItem(player), pos, Vector2.Zero, ModContent.ProjectileType<RemoteScanTelegraph>(), BaseDamage(player), 0f, Main.myPlayer, 0, angle, 1000);
             }
             player.FargoSouls().RemoteCD = 720;
-            CooldownBarManager.Activate("RemoteCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/RemoteControl").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);
+            CooldownBarManager.Activate("RemoteCD", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "RemoteControl").Value, Color.Lerp(Color.Gray, Color.DarkOliveGreen, 0.25f), () => Main.LocalPlayer.FargoSouls().RemoteCD / 720f, activeFunction: null);
         }
     }
 }

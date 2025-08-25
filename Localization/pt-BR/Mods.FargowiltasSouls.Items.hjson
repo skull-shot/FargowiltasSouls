@@ -1005,7 +1005,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
 		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
 		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1054,22 +1054,16 @@ CelestialRune: {
 		'''
 }
 
-ChaliceoftheMoon: {
-	DisplayName: Cálice da Lua
-	Tooltip:
+VerdantDoomsayerMask: {
+	// DisplayName: Verdant Doomsayer Mask
+	/* Tooltip:
 		'''
-		Oferece imunidade a Peçonha, Peçonha de Hera, Queimando, Pavio, Terra Baixa e Marcado para a Morte
-		Oferece imunidade a Enxameando, Atrofiado, Emperrado, Fluxo de Mana Inverso e Antisocial
-		Aumenta a regeneração de vida
-		Aperte a tecla Limpeza Mágica para se curar da maioria dos efeitos negativos
-		Aumenta a regeneração de vida com base na quantidade de luz que você recebe
-		Aperte duas vezes PARA BAIXO no ar para cair rapidamente
-		A caída rápida criará uma erupção de fogo no impacto depois de cair uma certa distância
-		Quando você pousa após um salto, você cria uma explosão de rochedos
-		Você dispara ataques adicionais dependendo do tipo da arma e explode em Visões Antigas quando ferido
-		Invoca um Cultista amigável e uma planta amigável para lutar ao seu lado
-		'Consuma-o'
-		'''
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
+		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
+		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
+		'Always watching'
+		''' */
 }
 
 ConcentratedRainbowMatter: {
@@ -1163,17 +1157,16 @@ FusedLens: {
 		'''
 }
 
-GalacticGlobe: {
-	DisplayName: Globo Galáctico
-	Tooltip:
+ChaliceofTheMoon: {
+	// DisplayName: Chalice of the Moon
+	/* Tooltip:
 		'''
-		Oferece imunidade a Maldição da Anulação, Invertido, Instável e Maldição da Lua
-		Permite que o usuário controle a gravidade
-		Estabiliza a gravidade no espaço e em líquidos
-		Invoca os verdadeiros olhos de Cthulhu para te proteger
-		Aumenta o tempo de voo em 100%
-		'Sempre observando'
-		'''
+		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Summons the true eyes of Cthulhu to protect you
+		Increases flight time by 100%
+		'Consume it'
+		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
 	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
 	/* ExpandedTooltip:
@@ -1495,16 +1488,16 @@ SinisterIcon: {
 		'''
 }
 
-SkullCharm: {
-	DisplayName: Amuleto da Caveira
-	Tooltip:
+CrystalSkull: {
+	// DisplayName: Crystal Skull
+	/* Tooltip:
 		'''
-		Oferece imunidade a Atordoado
-		Aumenta o dano causado em 15% e o dano sofrido em 10%
-		A chance dos inimigos mirarem em você é menor
-		A caveira de cristal carrega energia para atacar conforme você ataca
-		'Você não está mais na zona'
-		'''
+		Grants immunity to Dazed and Webbed
+		Increases damage dealt by 15% and damage taken by 20%
+		Enemies are less likely to target you
+		Summons a crystal skull that charges energy as you attack, releasing a barrage once energy is fully charged
+		'Part of a collective consciousness'
+		''' */
 }
 
 SlimyShield: {
@@ -1739,7 +1732,7 @@ MasochistSoul: {
 		Invoca a ajuda de todos os chefes do Modo Eternidade para o seu lado
 		'Aceite a maestria, aceite a eternidade'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	// VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion and station buffs"
 }
 
 SnipersSoul: {
@@ -2778,6 +2771,7 @@ DragonsDemise: {
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
+		Ignores a large amount of enemy defense
 		'The reward for a mighty rematch...'
 		''' */
 }

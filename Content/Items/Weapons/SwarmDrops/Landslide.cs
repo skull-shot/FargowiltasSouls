@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
     [LegacyName("GolemTome2")]
     public class Landslide : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -17,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 358;
+            Item.damage = 420;
             Item.DamageType = DamageClass.Magic;
             Item.width = 38;
             Item.height = 46;

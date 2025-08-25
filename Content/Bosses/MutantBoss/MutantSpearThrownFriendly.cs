@@ -1,10 +1,11 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantSpearThrownFriendly : PenetratorThrown
     {
-        public override string Texture => "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/Penetrator";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "Penetrator");
 
         public override void SetDefaults()
         {

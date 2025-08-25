@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -35,15 +36,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.ShadowHelmet)
-            .AddIngredient(ItemID.ShadowScalemail)
-            .AddIngredient(ItemID.ShadowGreaves)
-            .AddIngredient(ItemID.Musket)
-            .AddIngredient(ItemID.TheBreaker)
-            .AddIngredient(ItemID.ShadowOrb)
+                .AddIngredient(ItemID.ShadowHelmet)
+                .AddIngredient(ItemID.ShadowScalemail)
+                .AddIngredient(ItemID.ShadowGreaves)
+                .AddIngredient(ItemID.Musket)
+                .AddIngredient(ItemID.TheBreaker)
+                .AddIngredient(ItemID.ShadowOrb)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

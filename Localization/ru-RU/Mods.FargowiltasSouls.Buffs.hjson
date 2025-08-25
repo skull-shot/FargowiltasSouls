@@ -148,9 +148,14 @@ MutantPresenceBuff: {
 	Description: Защита, сопротивление урону и регенерация здоровья снижены; снижен радиус грэйза; выключены некоторые переключаемые эффекты
 }
 
-HellFireBuff: {
-	DisplayName: Адский огонь
-	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+HellfireBuff: {
+	// DisplayName: Hellfire
+	// Description: Slowly losing life
+}
+
+BlackInfernoBuff: {
+	// DisplayName: Black Inferno
+	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class BionomicCluster : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips => 
             [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>()];
@@ -98,6 +100,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class BionomicClusterInactive : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

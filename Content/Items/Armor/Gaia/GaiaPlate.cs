@@ -29,6 +29,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
             player.GetDamage(damageClass) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 5;
             player.endurance += 0.04f;
+            player.maxMinions += 2;
         }
 
         public override void AddRecipes()

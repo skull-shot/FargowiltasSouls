@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
     [LegacyName("DragonBreath2")]
     public class DragonsDemise : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public int skullTimer;
 
         public override void SetStaticDefaults()
@@ -21,14 +23,14 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 240;
+            Item.damage = 190;
             Item.knockBack = 1f;
             Item.shootSpeed = 12f;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.autoReuse = true;
             Item.useAnimation = 30;
-            Item.useTime = 3;
+            Item.useTime = 6;
             Item.width = 122;
             Item.height = 62;
             Item.shoot = ModContent.ProjectileType<HellFlame>();

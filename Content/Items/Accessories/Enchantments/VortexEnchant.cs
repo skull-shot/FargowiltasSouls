@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -50,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //electrosphere launcher
             .AddIngredient(ItemID.SDMG)
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor, out int? scaling)
@@ -105,7 +107,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.VortexCD = LumUtils.SecondsToFrames(cd);
 
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("VortexEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/VortexEnchant").Value, new(0, 242, 170), 
+                    CooldownBarManager.Activate("VortexEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "VortexEnchant").Value, new(0, 242, 170), 
                         () => 1f - Main.LocalPlayer.FargoSouls().VortexCD / (float)LumUtils.SecondsToFrames(cd), activeFunction: player.HasEffect<VortexEffect>);
             }
         }

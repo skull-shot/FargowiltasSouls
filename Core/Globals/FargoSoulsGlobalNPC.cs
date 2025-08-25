@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Core.Globals
         public bool Needled;
         public bool SolarFlare;
         public bool TimeFrozen;
-        public bool HellFire;
+        public bool BlackInferno;
         public bool HellFireMarked;
         // public bool Corrupted;
         // public bool CorruptedForce;
@@ -85,6 +85,7 @@ namespace FargowiltasSouls.Core.Globals
         public bool Suffocation;
         public int SuffocationTimer;
         public bool DeathMarked;
+        public bool Fused;
         //        public bool Villain;
         public bool FlamesoftheUniverse;
         public bool Lethargic;
@@ -134,7 +135,7 @@ namespace FargowiltasSouls.Core.Globals
             LeadPoison = false;
             LeadPoisonSpread = false;
             SolarFlare = false;
-            HellFire = false;
+            BlackInferno = false;
             HellFireMarked = false;
             // Corrupted = false;
             // CorruptedForce = false;
@@ -149,6 +150,7 @@ namespace FargowiltasSouls.Core.Globals
             Suffocation = false;
             Sublimation = false;
             DeathMarked = false;
+            Fused = false;
             // SnowChilled = false;
             Chilled = false;
             Smite = false;
@@ -454,7 +456,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (HellFire)
+            if (BlackInferno)
             {
                 if (Main.rand.Next(4) < 3)
                 {
@@ -679,6 +681,21 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
+            if (Fused)
+            {
+                if (Main.rand.NextBool())
+                {
+                    int dust = Dust.NewDust(npc.position + new Vector2(npc.width / 2, npc.height / 5), 0, 0, DustID.Torch, npc.velocity.X * 0.4f, npc.velocity.Y * 0.4f, 0, default, 2f);
+                    Main.dust[dust].velocity.Y -= 2f;
+                    Main.dust[dust].velocity *= 2f;
+                    if (Main.rand.NextBool(4))
+                    {
+                        Main.dust[dust].scale += 0.5f;
+                        Main.dust[dust].noGravity = true;
+                    }
+                }
+            }
+
             if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
             {
                 if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
@@ -807,7 +824,7 @@ namespace FargowiltasSouls.Core.Globals
             }
 
             //100 dps
-            if (HellFire)
+            if (BlackInferno)
             {
                 if (npc.lifeRegen > 0)
                     npc.lifeRegen = 0;
@@ -1394,9 +1411,9 @@ namespace FargowiltasSouls.Core.Globals
             if (Sublimation)
             {
                 float def = npc.defense / 3 * PureGazeTime / PungentGazeBuff.MAX_TIME;
-                if (def > 40)
-                    def = 40;
-                modifiers.ArmorPenetration += 10 + def;
+                if (def > 50)
+                    def = 50;
+                modifiers.ArmorPenetration += Math.Max(def, 10);
             }
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;

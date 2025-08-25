@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Summons
     [LegacyName("FragilePixieLamp")]   
     public class CrystallineEffigy : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;

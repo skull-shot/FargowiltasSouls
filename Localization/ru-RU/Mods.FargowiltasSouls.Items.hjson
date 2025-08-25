@@ -1046,17 +1046,16 @@ CelestialRune: {
 		'''
 }
 
-ChaliceoftheMoon: {
-	DisplayName: Зеленеющая маска провидца рока
-	Tooltip:
+VerdantDoomsayerMask: {
+	// DisplayName: Verdant Doomsayer Mask
+	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/ChaliceoftheMoon] Даёт иммунитет к дебаффам «Рой», «Атрофированный», «Заклинивший», «Обратный поток маны» и «Необщительный»
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотый яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль», «Проклятие ящщеров» [i:FargowiltasSouls/CelestialRune] и «Помеченный смертью»
-		[i:FargowiltasSouls/MagicalBulb] Увеличивает регенерацию здоровья в зависимости от получаемого света
-		[i:FargowiltasSouls/LihzahrdTreasureBox] Быстрое падение создаёт взрыв при приземлении после пролёта определённого расстояния
-		[i:FargowiltasSouls/CelestialRune] Вы периодически выпускаете дополнительные снаряды в зависимости от класса используемого оружия
-		«Всегда наблюдает»
-		'''
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
+		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
+		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
+		'Always watching'
+		''' */
 }
 
 ConcentratedRainbowMatter: {
@@ -1149,26 +1148,25 @@ FusedLens: {
 		'''
 }
 
-GalacticGlobe: {
-	DisplayName: Лунная чаша
-	Tooltip:
+ChaliceofTheMoon: {
+	// DisplayName: Chalice of the Moon
+	/* Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Перевёрнутый», «Нестабильный» и «Проклятие луны»
-		Бафф «Силы Космоса» работает независимо от класса оружия
-		Даёт базовые баффы зелий и классовых станций (работает в инвентаре и слотах для украшений)
-		Призывает истинные глаза Ктулху, сражающиеся за вас
-		Увеличивает время полёта на 100%
-		«Испей же из неё»
+		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Summons the true eyes of Cthulhu to protect you
+		Increases flight time by 100%
+		'Consume it'
+		''' */
+	// VanityTooltip: Grants most standard potion and station buffs
+	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
+	/* ExpandedTooltip:
 		'''
-	VanityTooltip: Даёт базовые баффы зелий и классовых станций
-	HoldShift: "[c/ADD8E6:Удерживайте Левый Shift чтобы увидеть списов баффов]"
-	ExpandedTooltip:
-		'''
-		[c/ADD8E6:«Железная кожа», «Регенерация», «Скорость», «Регенерация маны», «Магическая сила», «Экономия патронов», «Лучник»,] 
-		[c/ADD8E6:«Строитель», «Ящики», «Выносливость», «Рыбалка», «Жабры», «Счастливый», «Сердечный магнит», «Жизненная сила», «Добыча», «Обсидиановая кожа»,] 
-		[c/ADD8E6:«Месть», «Ярость», «Сонар», «Призыватель», «Шипы», «Титан», «Согревание», «Хождение по воде», «Изысканное удовлетворение»,]
-		[c/ADD8E6:«Заточено», «Ящик с боеприпасами», «Ясновидение», «Колдовство», «Стратег», «Мёд»]
-		'''
+		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
+		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
+		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
+		''' */
 }
 
 GelicWings: {
@@ -1481,16 +1479,16 @@ SinisterIcon: {
 		'''
 }
 
-SkullCharm: {
-	DisplayName: Хрустальный череп
-	Tooltip:
+CrystalSkull: {
+	// DisplayName: Crystal Skull
+	/* Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Ошеломление» и «Паутина»
-		Увеличивает наносимый урон на 15% и получаемый урон на 10%
-		Враги с меньшей вероятностью атакуют вас
-		Призывает хрустальный череп, который заряжется энергией, пока вы атакуете, и выпускает её при полном заряде
-		«Часть коллективного сознания»
-		'''
+		Grants immunity to Dazed and Webbed
+		Increases damage dealt by 15% and damage taken by 20%
+		Enemies are less likely to target you
+		Summons a crystal skull that charges energy as you attack, releasing a barrage once energy is fully charged
+		'Part of a collective consciousness'
+		''' */
 }
 
 SlimyShield: {

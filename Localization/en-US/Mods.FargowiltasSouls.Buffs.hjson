@@ -148,9 +148,14 @@ MutantPresenceBuff: {
 	Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
 }
 
-HellFireBuff: {
-	DisplayName: Hell Fire
-	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+HellfireBuff: {
+	DisplayName: Hellfire
+	Description: Slowly losing life
+}
+
+BlackInfernoBuff: {
+	DisplayName: Black Inferno
+	Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {
@@ -237,7 +242,7 @@ FusedBuff: {
 	Description:
 		'''
 		You're going out with a bang
-		Stand still for a second to defuse yourself
+		Run into an enemy to pass it on!
 		'''
 }
 
@@ -320,8 +325,12 @@ NeurotoxinBuff: {
 
 PoweroftheCosmosBuff: {
 	DisplayName: Power of the Cosmos
-	Description: Weapons matching Moon Lord's lunar phase deal 1.4x damage!
-	CombatText: 1.4x {0} damage!
+	Description:
+		'''
+		Weapons matching Moon Lord's lunar phase deal 1.5x damage!
+		Summons deal 0.5x damage while not holding a summon weapon
+		'''
+	CombatText: 1.5x {0} damage!
 	Melee: melee
 	Ranged: ranged
 	Magic: magic

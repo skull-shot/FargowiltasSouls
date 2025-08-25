@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -35,19 +36,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.AncientShadowHelmet)
-            .AddIngredient(ItemID.AncientShadowScalemail)
-            .AddIngredient(ItemID.AncientShadowGreaves)
-            //.AddIngredient(ItemID.AncientNecroHelmet);
-            //.AddIngredient(ItemID.AncientGoldHelmet);
-            .AddIngredient<ShadowEnchant>()
-            .AddIngredient(ItemID.ShadowFlameKnife)
-            .AddIngredient(ItemID.ShadowFlameHexDoll)
-            //dart rifle
-            //toxicarp
+                .AddIngredient(ItemID.AncientShadowHelmet)
+                .AddIngredient(ItemID.AncientShadowScalemail)
+                .AddIngredient(ItemID.AncientShadowGreaves)
+                //.AddIngredient(ItemID.AncientNecroHelmet);
+                //.AddIngredient(ItemID.AncientGoldHelmet);
+                .AddIngredient<ShadowEnchant>()
+                .AddIngredient(ItemID.ShadowFlameKnife)
+                .AddIngredient(ItemID.ShadowFlameHexDoll)
+                //dart rifle
+                //toxicarp
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

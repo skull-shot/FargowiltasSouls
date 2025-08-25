@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
@@ -18,6 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Waist)]
     public class WretchedPouch : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -84,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     Main.dust[d].velocity *= 5f;
                 }
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("WretchedPouchCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Eternity/WretchedPouch").Value, Color.DarkMagenta, 
+                    CooldownBarManager.Activate("WretchedPouchCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "WretchedPouch").Value, Color.DarkMagenta, 
                         () => Main.LocalPlayer.FargoSouls().WretchedPouchCD / (float)MaxChargeTime, true, activeFunction: () => player.HasEffect<WretchedPouchEffect>());
             }
             else

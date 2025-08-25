@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Misc
 {
     public class UniversalCollapse : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;

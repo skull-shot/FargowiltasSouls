@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.JungleMimic;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 {
     public class Mahoguny : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", Name);
         public override void SetStaticDefaults()
         {
             ItemID.Sets.IsRangedSpecialistWeapon[Item.type] = true;

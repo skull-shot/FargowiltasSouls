@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,11 +13,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 {
     public class SparklingLoveBig : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SparklingLove";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "SparklingLove");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Sparkling Love");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
@@ -266,7 +266,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation + rotationOffset, origin2, Projectile.scale, effects, 0);
-            Texture2D texture2D14 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SparklingLove_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D14 = FargoAssets.GetTexture2D("Content/Items/Weapons/FinalUpgrades", "SparklingLove_glow").Value;
             Main.EntitySpriteDraw(texture2D14, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White * Projectile.Opacity, Projectile.rotation + rotationOffset, origin2, Projectile.scale, effects, 0);
             return false;
         }

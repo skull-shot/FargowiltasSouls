@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Items.Materials
 {
     public class DeviatingEnergy : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Materials", Name);
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Type, new DrawAnimationVertical(6, 4));

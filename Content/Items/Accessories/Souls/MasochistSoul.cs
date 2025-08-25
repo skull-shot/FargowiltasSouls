@@ -302,7 +302,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<LithosphericCluster>())
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
-            .AddIngredient(ModContent.ItemType<ChaliceoftheMoon>())
+            .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
             .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)

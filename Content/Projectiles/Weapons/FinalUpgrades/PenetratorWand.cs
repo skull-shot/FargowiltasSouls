@@ -17,12 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
         private int syncTimer;
         private Vector2 mousePos;
 
-        public override void SetStaticDefaults()
-        {
-            /*ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;*/
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 16;

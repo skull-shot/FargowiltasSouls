@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -42,8 +43,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.GrayPaint, 100)
                 .AddIngredient(ItemID.Peach)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class LeadEffect : AccessoryEffect

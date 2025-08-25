@@ -220,8 +220,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
+            //target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
         }
 
         public override Color? GetAlpha(Color lightColor)

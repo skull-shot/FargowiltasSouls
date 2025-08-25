@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -46,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.TinBow)
                 .AddIngredient(ItemID.TopazStaff)
                 .AddIngredient(ItemID.PainterPaintballGun)
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
@@ -90,7 +92,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.TinCrit = floor;
 
             if (Main.myPlayer == player.whoAmI)
-                CooldownBarManager.Activate("TinCritCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TinEnchant").Value, new(162, 139, 78), 
+                CooldownBarManager.Activate("TinCritCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "TinEnchant").Value, new(162, 139, 78), 
                     () => (float)Main.LocalPlayer.FargoSouls().TinCrit / Main.LocalPlayer.FargoSouls().TinCritMax, true, activeFunction: () => player.HasEffect<TinEffect>());
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)

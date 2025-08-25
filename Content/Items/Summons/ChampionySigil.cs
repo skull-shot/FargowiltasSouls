@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 
@@ -5,7 +6,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class ChampionySigil : SigilOfChampions
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Summons/SigilOfChampions";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", "SigilOfChampions");
 
         public override void SetStaticDefaults()
         {

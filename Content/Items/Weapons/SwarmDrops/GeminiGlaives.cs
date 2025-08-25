@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class GeminiGlaives : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         private int lastThrown = 0;
 
         public override void SetStaticDefaults()

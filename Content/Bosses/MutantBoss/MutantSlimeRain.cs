@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -13,11 +14,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeRain_April" :
-            "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SlimeRain";
+            FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "SlimeRain");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Slime Rain");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Textures;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -74,18 +75,23 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y);
                 Main.dust[d].noGravity = true;
 
-                int d2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, Projectile.velocity.X, Projectile.velocity.Y);
-                Main.dust[d2].noGravity = true;
+                //int d2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, Projectile.velocity.X, Projectile.velocity.Y);
+                //Main.dust[d2].noGravity = true;
             }
 
             if (Main.rand.NextBool(2))
             {
+                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity, Color.Gray, 72, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                p.Spawn();
+
+                /*
                 float scaleFactor9 = 0.4f;
                 int i = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + Main.rand.NextVector2FromRectangle(new(0, 0, Projectile.width, Projectile.height)) * 0.75f, default, Main.rand.Next(61, 64));
                 Gore gore = Main.gore[i];
                 gore.position -= Projectile.velocity * 4;
                 gore.velocity *= scaleFactor9;
                 gore.velocity = -Projectile.velocity * Main.rand.NextFloat(0.5f, 0.9f);
+                */
             }
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

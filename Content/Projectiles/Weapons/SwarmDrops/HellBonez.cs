@@ -33,6 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 8;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            Projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
         }
 
         public override void AI()
@@ -43,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
           //target.immune[Projectile.owner] = 8;
-            target.AddBuff(ModContent.BuffType<HellFireBuff>(), 60);
+            target.AddBuff(ModContent.BuffType<BlackInfernoBuff>(), 60);
         }
 
         public override void OnKill(int timeLeft)

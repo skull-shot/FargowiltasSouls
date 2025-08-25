@@ -1,1 +1,53 @@
-﻿
+﻿eri
+	fix not despawning if you die during shen balls (the p2 attack after vortex)
+	fix doesn't despawn after rapid punches after timestop
+	has 4 moons in ftw p3
+empress ftw wheel has 7 streams instead of 3
+bbb spins slower when you're out of combat. speeds up again when in combat
+maso will champ p3 fireball trail lasts longer
+emode mutant giving mutants curse now only requires ml, previously abom (low%-ers rejoice)
+shimmering mutant trophy gets you Oncoming Mutant (yes the debug item)
+did some jank to try and make eow always despawn together? needs testing
+paladin's dungeon spirits on death have brief iframes so they dont get spawncamped instantly
+unconscious devi wakes up on her own if left alone, instead of despawning
+fixed ftw fishron not having arena damage.
+maso qb subject rain can have every individual bee hurt you exactly once (previously used random iframe timers)
+fixed royal subject gores being too big
+tried fixing mutant sometimes nicking you with his arena debuffs for 0.5sec while hes spawning in
+improved nuke fishron visuals and fixed it just disappearing when hitting surfaces
+you can now cancel your attack cooldown with a parry, but only when parry is actually available
+	(read: cant mash M1/M2 for infinity attack speed, also you still need to let go of m1 to parry)
+parrying freezes your momentum (big nerf - can't fall into an attack for an effortless parry, actually need good timing)
+
+retinazer aura inflicts hellfire during ray spin
+renamed our hellfire to black inferno
+made mutant p1 spear toss a little easier
+updated mutant nuke to use new nuke fishron visual
+bloodshed from dread parry lasts longer (doesnt disappear and deny you the buff uber fast)
+rockeater launcher now benefits from attack speed
+dragons demise now has inherent armor pen and benefits from attack speed (to compensate, has lower damage and fire rate)
+eri bg is a bit brighter
+eri p3 sucks you in harder as life decreases (sorry low%-ers)
+eri p3 black hole has contact damage
+fixed a texture error with lifelight blasters
+raised drakovi minion enemy detection range
+eri and mutant are now vulnerable to timestop (eri immune while doing his own timestop, mutant immune in p3)
+nano core bow isnt flaccid (fires faster arrows with less arc)
+eternal armor deathray revives extend your iframes for as long as the ray lasts
+you can now hot potato Fused debuff onto enemies and vice versa (also gives big contact damage resistance so you can do this)
+
+nano core scales with aspd in all forms except melee
+fixed nano core counting as always "attacking" because you always have a "held weapon projectile" even when not attacking
+fish ex arena is on its own iframe timer
+fish ex becomes unplayable in gfb
+
+mutant swoops out further when he's below you and trying to position for diagonal spears
+maso abom desperation never moves arena, starts 1st laevateinn in middle of arena instead
+maso ftw abom deathray run trail lasts extremely long, mainly for desp
+minor fix for silver ench forcing itself to parry for 1 tick while attacking with right click weapons
+made abom arena edge brighter at distance because it feels weird to see the eclipse dim like that
+implemented attack speed scaling on yoyos! (note: it is ATTACK speed, not melee speed) also on:
+	penetrator final spark
+	nano core blade
+	hell zone
+nvm penetrator cant be legendary, the game wipes the reforge on world reload

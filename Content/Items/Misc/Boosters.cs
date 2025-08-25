@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using Microsoft.Xna.Framework;
 using System.Reflection;
 using Terraria;
@@ -62,6 +63,7 @@ namespace FargowiltasSouls.Content.Items.Misc
     #region Cosmos
     public class SolarBooster : Booster
     {
+        public override string Texture => "Terraria/Images/Item_3458";
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
             if (boosterPlayer.SolarTimer <= 0)
@@ -72,6 +74,7 @@ namespace FargowiltasSouls.Content.Items.Misc
     }
     public class VortexBooster : Booster
     {
+        public override string Texture => "Terraria/Images/Item_3456";
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
             //if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg3))
@@ -84,6 +87,7 @@ namespace FargowiltasSouls.Content.Items.Misc
     }
     public class NebulaBooster : Booster
     {
+        public override string Texture => "Terraria/Images/Item_3457";
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
             if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife3))
@@ -96,6 +100,7 @@ namespace FargowiltasSouls.Content.Items.Misc
     }
     public class StardustBooster : Booster
     {
+        public override string Texture => "Terraria/Images/Item_3459";
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
             if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg3))

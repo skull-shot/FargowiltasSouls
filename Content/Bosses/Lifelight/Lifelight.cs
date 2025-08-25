@@ -2787,7 +2787,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     {
                         float rotation = (RuneFormation == Formations.Gun || OldRuneFormation == Formations.Gun) ? BodyRotation / MathHelper.Lerp(1, 3, FormationLerp) : BodyRotation;
                         float drawRot = (float)(rotation + Math.PI * 2 / AuraRuneCount * i);
-                        AtlasTexture RuneTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"Rune{(i % RuneCount) + 1}");
+                        AtlasTexture RuneTexture = GetTexture("FargowiltasSouls." + $"Rune{(i % RuneCount) + 1}");
                         Vector2 drawPos = AuraCenter + drawRot.ToRotationVector2() * (1100 + RuneDistance) - screenPos;
                         float RuneRotation = drawRot + MathHelper.PiOver2;
 
@@ -2948,10 +2948,15 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 }
             }
         }
+        AtlasTexture GetTexture(string name) => AtlasManager.GetTexture(name);
+            //Main.zenithWorld || (Main.getGoodWorld && ((States)State == States.FTWDesperation
+            //|| (States)State == States.P1Transition
+            //|| (States)State == States.Opening))
+            //? "FargowiltasSouls.Lifelight_Full" : name);
         private void DrawRune(Rune rune, SpriteBatch spriteBatch, Color drawColor)
         {
             int i = rune.Index;
-            AtlasTexture RuneTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"Rune{i + 1}");
+            AtlasTexture RuneTexture = GetTexture("FargowiltasSouls." + $"Rune{i + 1}");
             Vector2 drawPos = new(rune.Center.X, rune.Center.Y);
             //rune glow
             for (int j = 0; j < 12; j++)
@@ -3003,7 +3008,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 distance /= MathHelper.Lerp(1, 1.5f, MathHelper.Clamp((float)RuneFormationTimer / FormationTime, 0, 1));
             Vector2 chunkOffset = pos.X * Vector2.UnitX * distance + pos.Y * Vector2.UnitY * distance;
             Vector2 drawPos = drawCenter + chunkOffset;
-            AtlasTexture ChunkTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"ShardGold{chunk.W}");
+            AtlasTexture ChunkTexture = GetTexture("FargowiltasSouls." + $"ShardGold{chunk.W}");
             //spriteBatch.Draw(origin: new Vector2(ChunkTexture.Width / 2, ChunkTexture.Height / 2), texture: ChunkTexture.Atlas.Texture.Value, position: drawPos, sourceRectangle: null, color: color, rotation: 0, scale: NPC.scale + scale, effects: SpriteEffects.None, layerDepth: 0f);
             Utilities.Draw(spriteBatch, ChunkTexture, drawPos, null, color, 0, new Vector2(ChunkTexture.Width / 2, ChunkTexture.Height / 2), new Vector2(NPC.scale + scale), SpriteEffects.None);
         }

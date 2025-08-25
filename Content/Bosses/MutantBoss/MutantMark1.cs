@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.Center = Projectile.position;
 
             if (FargoSoulsUtil.HostCheck)
-                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<MutantDeathray1>(), Projectile.damage, 0f, Projectile.owner, ai2: Variant);
+                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(Projectile.velocity), ModContent.ProjectileType<MutantDeathray1>(), Projectile.damage, 0f, Projectile.owner);
         }
 
         public override Color? GetAlpha(Color lightColor)
@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
             Color glowcolor = Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(255, 255, 255, 0), Color.Transparent, 0.85f);
 
-            if (WorldSavingSystem.MasochistModeReal && !Main.getGoodWorld)
+            if (WorldSavingSystem.MasochistModeReal && (Variant != 0 || !Main.getGoodWorld))
             {
                 Asset<Texture2D> line = TextureAssets.Extra[178];
                 float opacity = 1f;

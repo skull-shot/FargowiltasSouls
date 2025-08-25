@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
                     && player.ownedProjectileCounts[ModContent.ProjectileType<FishronRitual2>()] < 1)
                 {
                     Projectile.NewProjectile(Main.npc[EModeGlobalNPC.fishBoss].GetSource_FromThis(), Main.npc[EModeGlobalNPC.fishBoss].Center, Vector2.Zero,
-                        ModContent.ProjectileType<FishronRitual2>(), 0, 0f, player.whoAmI, 0f, EModeGlobalNPC.fishBoss);
+                        ModContent.ProjectileType<FishronRitual2>(), FargoSoulsUtil.ScaledProjectileDamage(Main.npc[EModeGlobalNPC.fishBoss].damage, 0.5f), 0f, player.whoAmI, 0f, EModeGlobalNPC.fishBoss);
                 }
             }
             else

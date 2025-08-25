@@ -1,11 +1,12 @@
-﻿using System;
-using Fargowiltas.Common.Configs;
+﻿using Fargowiltas.Common.Configs;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -47,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //.AddIngredient(ItemID.VikingHelmet)
             .AddIngredient(ItemID.ShadowJoustingLance)
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -49,7 +50,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SpectreStaff)
             .AddIngredient(ItemID.AbigailsFlower)
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)

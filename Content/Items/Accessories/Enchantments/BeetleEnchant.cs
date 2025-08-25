@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -38,19 +40,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.BeetleHelmet)
-            .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
-            .AddIngredient(ItemID.BeetleLeggings)
-            .AddIngredient(ItemID.BeetleWings)
-            .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
-            .AddIngredient(ItemID.Buggy)
-            //.AddIngredient(ItemID.MothronWings);
-            //breaker blade
-            //amarok
-            //beetle minecart
+                .AddIngredient(ItemID.BeetleHelmet)
+                .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
+                .AddIngredient(ItemID.BeetleLeggings)
+                .AddIngredient(ItemID.BeetleWings)
+                .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
+                .AddIngredient(ItemID.Buggy)
+                //.AddIngredient(ItemID.MothronWings);
+                //breaker blade
+                //amarok
+                //beetle minecart
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
@@ -121,7 +123,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (wiz)
                 buildup *= 1.5f;
             modPlayer.BeetleCharge += buildup / 2000f;
-            CooldownBarManager.Activate("BeetleEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/BeetleEnchant").Value, new(109, 92, 133), () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
+            CooldownBarManager.Activate("BeetleEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "BeetleEnchant").Value, new(109, 92, 133), () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
             if (modPlayer.BeetleCharge > 1)
             {
                 modPlayer.BeetleCharge = 0;

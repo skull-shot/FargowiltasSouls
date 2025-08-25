@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -39,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CactusSword)
                 .AddIngredient(ItemID.PinkPricklyPear)
                 .AddIngredient(ItemID.Waterleaf)
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)

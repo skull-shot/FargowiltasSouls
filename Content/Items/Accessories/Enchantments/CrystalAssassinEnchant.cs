@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -59,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.UnicornonaStick)
                 .AddIngredient(ItemID.SmokeBomb, 50)
 
-                .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
