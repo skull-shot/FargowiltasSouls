@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
             target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
         }
     }
