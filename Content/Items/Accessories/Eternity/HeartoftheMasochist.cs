@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -14,7 +15,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Face, EquipType.Front, EquipType.Back)]
     public class HeartoftheMasochist : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
+        public override int NumFrames => 7;
+
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
@@ -123,7 +127,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient(ModContent.ItemType<BetsysHeart>())
             .AddIngredient(ModContent.ItemType<MutantAntibodies>())
             .AddIngredient(ModContent.ItemType<PrecisionSeal>())
-            .AddIngredient(ModContent.ItemType<GalacticGlobe>())
+            .AddIngredient(ModContent.ItemType<ChaliceofTheMoon>())
             .AddIngredient(ItemID.LunarBar, 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
 

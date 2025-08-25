@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class StyxGazer : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public bool flip;
 
         public override void SetStaticDefaults()
@@ -88,8 +90,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             }
             return true;
         }
-
-        public override string Texture => base.Texture;
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

@@ -1,5 +1,6 @@
 ﻿
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
@@ -15,14 +16,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class SparklingLove : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-            // DisplayName.SetDefault("Sparkling Love");
-            /* Tooltip.SetDefault(@"Right click to summon the soul of Deviantt
-Right click pattern becomes denser with up to 12 empty minion slots
-'The soul-consuming demon axe of love and justice from a defeated foe...'"); */
         }
 
         public override void SetDefaults()

@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         public bool Swinging = false;
         public bool FirstSwing = true;
         public float SlashOpacity = 0f;
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/BossDrops/SlimeKingsSlasher";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", "SlimeKingsSlasher");
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;

@@ -1,114 +1,143 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
-using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Face)]
-    public class ChaliceoftheMoon : SoulsItem
+    [LegacyName("GalacticGlobe")]
+    public class ChaliceofTheMoon : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
-        public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<DiveEffect>(),
-             AccessoryEffectLoader.GetEffect<BulbKeyEffect>()];
 
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.width = 32;
-            Item.height = 54;
+            Item.width = 20;
+            Item.height = 20;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Red;
-            Item.value = Item.sellPrice(0, 7);
-            //Item.defense = 8;
+            Item.defense = 10;
+            Item.rare = ItemRarityID.Purple;
+            Item.value = Item.sellPrice(0, 8);
+        }
+        public override void UpdateInventory(Player player)
+        {
+            player.AddEffect<ChalicePotionEffect>(Item);
+        }
+        public override void UpdateVanity(Player player)
+        {
+            player.AddEffect<ChalicePotionEffect>(Item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            FargoSoulsPlayer fargoPlayer = player.FargoSouls();
+            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
+            //player.buffImmune[BuffID.ChaosState] = true;
 
-            //magical bulb
-            MagicalBulb.AddEffects(player, Item);
-            //player.AddEffect<IvyVenomEffect>(Item);
+            player.AddEffect<ChalicePotionEffect>(Item);
+            player.AddEffect<MasoTrueEyeMinion>(Item);
 
-            //lihzahrd treasure
-            player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
-            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
-            fargoPlayer.LihzahrdTreasureBoxItem = Item;
-            player.AddEffect<LihzahrdGroundPound>(Item);
-            player.AddEffect<DiveEffect>(Item);
-            player.AddEffect<LihzahrdBoulders>(Item);
-
-            //celestial rune
-            player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
-            player.AddEffect<CelestialRuneAttacks>(Item);
-            //player.AddEffect<CelestialRuneOnhit>(Item);
-
-            //chalice
-            player.buffImmune[ModContent.BuffType<AtrophiedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<ReverseManaFlowBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<AntisocialBuff>()] = true;
-            fargoPlayer.MoonChalice = true;
-            //player.AddEffect<CultistMinionEffect>(Item);
-
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-
-            .AddIngredient(ModContent.ItemType<MagicalBulb>())
-            .AddIngredient(ModContent.ItemType<LihzahrdTreasureBox>())
-            .AddIngredient(ModContent.ItemType<CelestialRune>())
-            .AddIngredient(ItemID.FragmentSolar, 1)
-            .AddIngredient(ItemID.FragmentVortex, 1)
-            .AddIngredient(ItemID.FragmentNebula, 1)
-            .AddIngredient(ItemID.FragmentStardust, 1)
-            .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
-
-            .AddTile(TileID.LunarCraftingStation)
-
-            .Register();
+            player.FargoSouls().GravityGlobeEXItem = Item;
+            player.FargoSouls().WingTimeModifier += 1f;
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
-            Player player = Main.LocalPlayer;
-            damageClass = CelestialRune.GetRuneClassDamage(player);
-
-            int damage = (int)(CelestialRuneAttacks.BaseDamage(Main.LocalPlayer) * player.ActualClassDamage(damageClass));
-            if (damageClass == DamageClass.Summon)
-                damage /= (int)player.ActualClassDamage(DamageClass.Summon);
-            if (damageClass == DamageClass.Ranged || damageClass == DamageClass.Magic)
-                damage *= 2;
-
+            damageClass = DamageClass.Summon;
             tooltipColor = null;
             scaling = null;
-            return damage;
+            return (int)(MasoTrueEyeMinion.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
+        }
+        public override void SafeModifyTooltips(List<TooltipLine> tooltips)
+        {
+            if (Main.keyState.IsKeyDown(Keys.LeftShift))
+            {
+                TooltipLine line = new(Mod, "tooltip", Language.GetTextValue($"Mods.{Mod.Name}.Items.{Name}.ExpandedTooltip"));
+                tooltips.Add(line);
+            }
+
+            else
+            {
+                TooltipLine line = new(Mod, "tooltip", Language.GetTextValue($"Mods.{Mod.Name}.Items.{Name}.HoldShift"));
+                tooltips.Add(line);
+            }
         }
     }
-    /*
-    public class CultistMinionEffect : AccessoryEffect
+    public class ChalicePotionEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
-        public override int ToggleItemType => ModContent.ItemType<ChaliceoftheMoon>();
+        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
+        public override int ToggleItemType => ModContent.ItemType<ChaliceofTheMoon>();
+        public static List<int> ChaliceBuffs =
+        [
+            // potions
+            BuffID.Ironskin,
+            BuffID.Regeneration,
+            BuffID.Swiftness,
+            BuffID.ManaRegeneration,
+            BuffID.MagicPower,
+            BuffID.AmmoReservation,
+            BuffID.Archery,
+            BuffID.Builder,
+            BuffID.Crate,
+            BuffID.Endurance,
+            BuffID.Fishing,
+            BuffID.Gills,
+            BuffID.Lucky,
+            BuffID.Heartreach,
+            BuffID.Lifeforce,
+            BuffID.Mining,
+            BuffID.ObsidianSkin,
+            BuffID.Rage,
+            BuffID.Wrath,
+            BuffID.Sonar,
+            BuffID.Summoning,
+            BuffID.Thorns,
+            BuffID.Titan,
+            BuffID.Warmth,
+            BuffID.WaterWalking,
+            BuffID.WellFed3,
+            // buff stations
+            BuffID.Sharpened,
+            BuffID.AmmoBox,
+            BuffID.Clairvoyance,
+            BuffID.Bewitched,
+            BuffID.WarTable
+           // BuffID.Honey
+        ];
+        public override void PostUpdateEquips(Player player)
+        {
+            foreach (int buff in ChaliceBuffs)
+            {
+                int duration = buff == BuffID.Lucky ? 60 * 60 * 15 : 2;
+                player.AddBuff(buff, duration);
+            }
+        }
+    }
+    public class MasoTrueEyeMinion : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
+        public override int ToggleItemType => ModContent.ItemType<ChaliceofTheMoon>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player) => 60;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())
-                player.AddBuff(ModContent.BuffType<LunarCultistBuff>(), 2);
+                player.AddBuff(ModContent.BuffType<TrueEyesBuff>(), 2);
         }
-    } 
-    */
+    }
 }

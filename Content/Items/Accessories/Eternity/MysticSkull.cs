@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.Audio;
@@ -10,7 +11,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class MysticSkull : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
+
+        public override int NumFrames => 7;
 
         public override void SetStaticDefaults()
         {
@@ -56,6 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class MysticSkullInactive : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

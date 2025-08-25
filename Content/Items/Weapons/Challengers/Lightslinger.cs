@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class Lightslinger : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         const int ReqShots = 40;
         int ShotType = ModContent.ProjectileType<LightslingerShot>();
 

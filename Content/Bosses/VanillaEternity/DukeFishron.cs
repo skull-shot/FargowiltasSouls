@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (IsEX)
                     EModeGlobalNPC.fishBossEX = npc.whoAmI;
                 else
-                    useBaseEmodeAi = false;
+                    useBaseEmodeAi = Main.zenithWorld;
                 npc.position += npc.velocity * 0.5f;
                 switch ((int)npc.ai[0])
                 {

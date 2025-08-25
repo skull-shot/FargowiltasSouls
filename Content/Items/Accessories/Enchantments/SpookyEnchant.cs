@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -80,7 +81,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 Projectile.NewProjectile(GetSource_EffectItem(player), player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<SpookySpinScythe>(), BaseDamage(player), 1f, player.whoAmI);
             int cd = wiz ? 8 : 12;
             player.FargoSouls().SpookyCD = cd * 60;
-            CooldownBarManager.Activate("SpookyEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SpookyEnchant").Value, new(100, 78, 116),
+            CooldownBarManager.Activate("SpookyEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SpookyEnchant").Value, new(100, 78, 116),
                 () => Main.LocalPlayer.FargoSouls().SpookyCD / (cd * 60f), true, activeFunction: player.HasEffect<SpookyEffect>);
         }
     }

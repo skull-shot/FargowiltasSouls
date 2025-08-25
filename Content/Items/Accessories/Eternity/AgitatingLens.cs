@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class AgitatingLens : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>()];

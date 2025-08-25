@@ -1179,6 +1179,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             targetPos = player.Center + player.DirectionTo(targetPos) * 500;
+            if (NPC.Center.Y > player.Top.Y)
+                targetPos.X += 200 * Math.Sign(NPC.Center.X - player.Center.X);
             if (NPC.Distance(targetPos) > 50)
             {
                 Movement(targetPos, NPC.localAI[3] > 0 ? 0.5f : 2f, true, NPC.localAI[3] > 0);

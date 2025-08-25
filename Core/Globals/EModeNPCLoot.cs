@@ -230,7 +230,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
                 case NPCID.MoonLordCore:
                     {
-                        emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<GalacticGlobe>()));
+                        emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<ChaliceofTheMoon>()));
                         emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ItemID.LunarOre, 150));
                     }
                     break;
@@ -363,7 +363,7 @@ namespace FargowiltasSouls.Core.Globals
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.TrifoldMap, 50));
                     break;
                 case NPCID.DoctorBones:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<SkullCharm>(), 2));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<CrystalSkull>(), 2));
                     break;
                 case var _ when Hornets.Contains(npc.type):
                     if (npc.type == NPCID.MossHornet)

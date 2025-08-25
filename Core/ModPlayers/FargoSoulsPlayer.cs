@@ -440,7 +440,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Unstable = false;
             Fused = false;
             Shadowflame = false;
-            Hellfire = false;
             Daybroken = false;
             Oiled = false;
             Slimed = false;
@@ -1149,9 +1148,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Shadowflame)
                     damageSource = DeathByLocalization("Shadowflame");
 
-                if (Hellfire)
-                    damageSource = PlayerDeathReason.ByOther(8);
-
                 if (Daybroken)
                     damageSource = PlayerDeathReason.ByOther(8);
 
@@ -1231,7 +1227,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            if (StyxSet)
+            if (StyxSet || !(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
             {
                 drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
                 drawInfo.bodyGlowColor = Color.White;

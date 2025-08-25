@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Materials
     [LegacyName("PhantasmalEnergy")]
     public class BrokenSpearhead : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Materials", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

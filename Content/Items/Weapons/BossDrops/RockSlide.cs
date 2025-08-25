@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -10,14 +11,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class RockSlide : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Rockslide");
-            // Tooltip.SetDefault("'The crumbling remains of a defeated foe..'");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "山崩");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'被击败的敌人的破碎残骸'");
         }
 
         public override void SetDefaults()

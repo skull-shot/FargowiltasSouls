@@ -1262,7 +1262,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     TungstenEffect.TungstenIncreaseProjSize(projectile, modPlayer, null);
                 */
 
-                if (player.HeldItem.IsWeapon())
+                if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.controlUseTile))
                 {
                     modPlayer.WeaponUseTimer = Math.Max(modPlayer.WeaponUseTimer, 2);
 

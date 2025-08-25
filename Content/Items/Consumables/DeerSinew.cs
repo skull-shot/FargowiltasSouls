@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
 {
     public class DeerSinew : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Consumables", Name);
 
         public override bool Eternity => true;
 

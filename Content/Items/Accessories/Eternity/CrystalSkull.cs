@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -8,8 +9,10 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    public class SkullCharm : SoulsItem
+    [LegacyName("SkullCharm")]
+    public class CrystalSkull : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -50,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     public class PungentMinion : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
-        public override int ToggleItemType => ModContent.ItemType<SkullCharm>();
+        public override int ToggleItemType => ModContent.ItemType<CrystalSkull>();
         public override bool MinionEffect => true;
         public static int BaseDamage (Player player) => 20;
         public override void PostUpdateEquips(Player player)

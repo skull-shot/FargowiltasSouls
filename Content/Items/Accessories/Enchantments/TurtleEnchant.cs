@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -85,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("TurtleHP", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / TurtleShellMaxHP, activeFunction: () => player.HasEffect<TurtleEffect>());
+                CooldownBarManager.Activate("TurtleHP", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "TurtleEnchant").Value, Color.SandyBrown, () => Main.LocalPlayer.FargoSouls().TurtleShellHP / TurtleShellMaxHP, activeFunction: () => player.HasEffect<TurtleEffect>());
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             bool broken = player.FargoSouls().TurtleShellBroken;
             //Main.NewText($"shell HP: {modPlayer.TurtleShellHP}, counter: {modPlayer.TurtleCounter}");

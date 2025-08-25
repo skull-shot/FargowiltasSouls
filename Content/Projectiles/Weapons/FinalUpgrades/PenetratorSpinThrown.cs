@@ -18,7 +18,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

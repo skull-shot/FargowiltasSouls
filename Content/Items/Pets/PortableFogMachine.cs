@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Pets;
 using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,7 +10,7 @@ namespace FargowiltasSouls.Content.Items.Pets
 {
     public class PortableFogMachine : SoulsItem
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Pets", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
