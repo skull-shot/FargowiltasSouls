@@ -241,9 +241,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Ariyah)
             {
                 needsAfterimage = true;
-                numAfterImages = 5;
+                numAfterImages = 6;
                 afterimageColor1 = Color.Purple;
-                afterimageColor2 = Color.Pink;
+                afterimageColor2 = Color.HotPink;
+                afterImageInterval = 2;
             }
 
             if (Exertype)
@@ -334,7 +335,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (AubreyFlower && item.DamageType == DamageClass.Melee)
                 target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
             if (Ariyah)
-                target.AddBuff(BuffID.ParryDamageBuff, 120);
+                target.AddBuff(BuffID.GelBalloonBuff, 120);
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -350,7 +351,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
 
             if (Ariyah)
-                target.AddBuff(BuffID.ParryDamageBuff, 120);
+                target.AddBuff(BuffID.GelBalloonBuff, 120);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -552,6 +553,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         private List<Vector2> afterimageOrigins;
         private const int MaxAfterimageLength = 20; //Total maximum length, no individual effect can go above it
         private int numAfterImages;
+        private static int afterImageInterval = 1;
 
         public bool needsAfterimage = false;
         private bool lastNeedsAfterimage = false; //needed bacause checked too early compared to when it's set
@@ -596,7 +598,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             try
             {
-                //exertype trail
                 if (drawPlayer.TryGetModPlayer<PatreonPlayer>(out PatreonPlayer modPlayer) &&
                     modPlayer.needsAfterimage)
                 {
@@ -611,10 +612,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     drawingAfterimage = true;
                     var count = modPlayer.afterimagePositions.Count;
                     //Only draw every second position
-                    for (var i = 0; i < count; i += 1)
+                    for (var i = 0; i < count; i += afterImageInterval)
                     {
                         //Assign a color to afterimageColor here
-                        if (afterimageColor2 == default || i % 2 == 0) //switch off colors if set
+                        if (afterimageColor2 == default || i % (afterImageInterval * 2) == 0) //switch off colors if set
                         {
                             afterimageColor = afterimageColor1;
                         }
