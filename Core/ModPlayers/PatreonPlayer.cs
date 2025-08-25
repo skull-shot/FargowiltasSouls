@@ -69,6 +69,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool AubreyFlower;
 
+        public bool Ariyah;
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
@@ -119,6 +121,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             needsAfterimage = false;
 
             AubreyFlower = false;
+            Ariyah = false;
         }
 
         public override void OnEnterWorld()
@@ -225,11 +228,23 @@ namespace FargowiltasSouls.Core.ModPlayers
                     AubreyFlower = true;
                     Player.lifeRegen += 4;
                     break;
+                case "Ariyah":
+                    Ariyah = true;
+                    break;
             }
 
             if (CompOrb && Player.itemAnimation > 0)
             {
                 Player.manaRegenDelay = Player.maxRegenDelay;
+            }
+
+            if (Ariyah)
+            {
+                needsAfterimage = true;
+                numAfterImages = 6;
+                afterimageColor1 = Color.Purple;
+                afterimageColor2 = Color.HotPink;
+                afterImageInterval = 2;
             }
 
             if (Exertype)
@@ -290,6 +305,15 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 yield return new Item(ItemID.Katana, prefix: PrefixID.Legendary);
             }
+            if (!mediumCoreDeath && Player.name.Equals("Ariyah", System.StringComparison.OrdinalIgnoreCase))
+            {
+                yield return new Item(ItemID.CapricornMask);
+                yield return new Item(ItemID.CapricornChestplate);
+                yield return new Item(ItemID.CapricornLegs);
+                yield return new Item(ItemID.PartyHairDye);
+                yield return new Item(ItemID.PumpkingPetItem);
+                yield return new Item(ItemID.HandOfCreation);
+            }
         }
         public static void AddDash_Eight3One(Player player)
         {
@@ -310,6 +334,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
             if (AubreyFlower && item.DamageType == DamageClass.Melee)
                 target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
+            if (Ariyah)
+                target.AddBuff(BuffID.GelBalloonBuff, 120);
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -323,6 +349,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 60);
             if (AubreyFlower && proj.DamageType == DamageClass.Melee)
                 target.AddBuff(BuffID.Wet, 60 * Main.rand.Next(5, 11));
+
+            if (Ariyah)
+                target.AddBuff(BuffID.GelBalloonBuff, 120);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -524,6 +553,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         private List<Vector2> afterimageOrigins;
         private const int MaxAfterimageLength = 20; //Total maximum length, no individual effect can go above it
         private int numAfterImages;
+        private static int afterImageInterval = 1;
 
         public bool needsAfterimage = false;
         private bool lastNeedsAfterimage = false; //needed bacause checked too early compared to when it's set
@@ -568,7 +598,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             try
             {
-                //exertype trail
                 if (drawPlayer.TryGetModPlayer<PatreonPlayer>(out PatreonPlayer modPlayer) &&
                     modPlayer.needsAfterimage)
                 {
@@ -583,10 +612,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     drawingAfterimage = true;
                     var count = modPlayer.afterimagePositions.Count;
                     //Only draw every second position
-                    for (var i = 0; i < count; i += 1)
+                    for (var i = 0; i < count; i += afterImageInterval)
                     {
                         //Assign a color to afterimageColor here
-                        if (afterimageColor2 == default || i % 2 == 0) //switch off colors if set
+                        if (afterimageColor2 == default || i % (afterImageInterval * 2) == 0) //switch off colors if set
                         {
                             afterimageColor = afterimageColor1;
                         }
