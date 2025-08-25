@@ -123,7 +123,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (wiz)
                 buildup *= 1.5f;
             modPlayer.BeetleCharge += buildup / 2000f;
-            CooldownBarManager.Activate("BeetleEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantment", "BeetleEnchant").Value, new(109, 92, 133), () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
+            CooldownBarManager.Activate("BeetleEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "BeetleEnchant").Value, new(109, 92, 133), () => (modPlayer.Beetles + modPlayer.BeetleCharge) / beetleCap, true, activeFunction: player.HasEffect<BeetleEffect>);
             if (modPlayer.BeetleCharge > 1)
             {
                 modPlayer.BeetleCharge = 0;
