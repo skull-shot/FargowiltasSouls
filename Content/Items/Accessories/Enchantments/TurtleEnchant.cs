@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -10,6 +10,7 @@ using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -71,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //.AddIngredient(ItemID.Seaweed);
             //.AddIngredient(ItemID.LizardEgg);
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

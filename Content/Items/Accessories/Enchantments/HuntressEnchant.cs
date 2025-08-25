@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
@@ -43,15 +44,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.HuntressWig)
-            .AddIngredient(ItemID.HuntressJerkin)
-            .AddIngredient(ItemID.HuntressPants)
-            .AddIngredient(ItemID.DD2ExplosiveTrapT2Popper)
-            .AddIngredient(ItemID.BloodRainBow)
-            .AddIngredient(ItemID.DD2PhoenixBow)
+                .AddIngredient(ItemID.HuntressWig)
+                .AddIngredient(ItemID.HuntressJerkin)
+                .AddIngredient(ItemID.HuntressPants)
+                .AddIngredient(ItemID.DD2ExplosiveTrapT2Popper)
+                .AddIngredient(ItemID.BloodRainBow)
+                .AddIngredient(ItemID.DD2PhoenixBow)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class HuntressEffect : AccessoryEffect

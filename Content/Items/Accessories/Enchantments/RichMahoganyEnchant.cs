@@ -1,4 +1,5 @@
 ﻿
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -35,15 +36,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.RichMahoganyHelmet)
-            .AddIngredient(ItemID.RichMahoganyBreastplate)
-            .AddIngredient(ItemID.RichMahoganyGreaves)
-            .AddIngredient(ItemID.Moonglow)
-            .AddIngredient(ItemID.Pineapple)
-            .AddIngredient(ItemID.GrapplingHook)
+                .AddIngredient(ItemID.RichMahoganyHelmet)
+                .AddIngredient(ItemID.RichMahoganyBreastplate)
+                .AddIngredient(ItemID.RichMahoganyGreaves)
+                .AddIngredient(ItemID.Moonglow)
+                .AddIngredient(ItemID.Pineapple)
+                .AddIngredient(ItemID.GrapplingHook)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class MahoganyEffect : AccessoryEffect

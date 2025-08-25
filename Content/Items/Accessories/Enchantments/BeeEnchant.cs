@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -37,20 +38,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.BeeHeadgear)
-            .AddIngredient(ItemID.BeeBreastplate)
-            .AddIngredient(ItemID.BeeGreaves)
-            .AddIngredient(ItemID.HiveBackpack)
-            //stinger necklace
-            .AddIngredient(ItemID.BeeGun)
-            //.AddIngredient(ItemID.WaspGun);
-            //.AddIngredient(ItemID.Beenade, 50);
-            //honey bomb
-            .AddIngredient(ItemID.Honeyfin)
-            //.AddIngredient(ItemID.Nectar);
+                .AddIngredient(ItemID.BeeHeadgear)
+                .AddIngredient(ItemID.BeeBreastplate)
+                .AddIngredient(ItemID.BeeGreaves)
+                .AddIngredient(ItemID.HiveBackpack)
+                //stinger necklace
+                .AddIngredient(ItemID.BeeGun)
+                //.AddIngredient(ItemID.WaspGun);
+                //.AddIngredient(ItemID.Beenade, 50);
+                //honey bomb
+                .AddIngredient(ItemID.Honeyfin)
+                //.AddIngredient(ItemID.Nectar);
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 

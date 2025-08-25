@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System;
@@ -98,7 +99,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.Apple)
             .AddRecipeGroup("FargowiltasSouls:AnySquirrel")
 
-            .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
 
         }

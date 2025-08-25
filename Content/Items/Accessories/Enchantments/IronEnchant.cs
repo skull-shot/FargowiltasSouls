@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -44,15 +45,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.IronHelmet)
-            .AddIngredient(ItemID.IronChainmail)
-            .AddIngredient(ItemID.IronGreaves)
-            .AddIngredient(ItemID.IronHammer)
-            .AddIngredient(ItemID.IronAnvil)
-            .AddIngredient(ItemID.Apricot) //(high in iron pog)
+                .AddIngredient(ItemID.IronHelmet)
+                .AddIngredient(ItemID.IronChainmail)
+                .AddIngredient(ItemID.IronGreaves)
+                .AddIngredient(ItemID.IronHammer)
+                .AddIngredient(ItemID.IronAnvil)
+                .AddIngredient(ItemID.Apricot) //(high in iron pog)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class IronPassiveEffect : AccessoryEffect

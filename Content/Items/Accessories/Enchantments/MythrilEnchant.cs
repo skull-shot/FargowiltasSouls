@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -41,15 +42,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyMythrilHead")
-            .AddIngredient(ItemID.MythrilChainmail)
-            .AddIngredient(ItemID.MythrilGreaves)
-            .AddIngredient(ItemID.LaserRifle)
-            .AddIngredient(ItemID.ClockworkAssaultRifle)
-            .AddIngredient(ItemID.FlowerofFire)
+                .AddRecipeGroup("FargowiltasSouls:AnyMythrilHead")
+                .AddIngredient(ItemID.MythrilChainmail)
+                .AddIngredient(ItemID.MythrilGreaves)
+                .AddIngredient(ItemID.LaserRifle)
+                .AddIngredient(ItemID.ClockworkAssaultRifle)
+                .AddIngredient(ItemID.FlowerofFire)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 

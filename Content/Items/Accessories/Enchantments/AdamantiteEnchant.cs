@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -52,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.Gatligator)
                 .AddIngredient(ItemID.QuadBarrelShotgun)
                 .AddIngredient(ItemID.Shotgun)
-                .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }

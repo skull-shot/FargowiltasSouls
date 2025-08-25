@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
@@ -46,16 +47,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.EbonwoodHelmet)
-            .AddIngredient(ItemID.EbonwoodBreastplate)
-            .AddIngredient(ItemID.EbonwoodGreaves)
-            .AddIngredient(ItemID.VileMushroom)
-            .AddIngredient(ItemID.BlackCurrant)
-            .AddIngredient(ItemID.Deathweed)
+                .AddIngredient(ItemID.EbonwoodHelmet)
+                .AddIngredient(ItemID.EbonwoodBreastplate)
+                .AddIngredient(ItemID.EbonwoodGreaves)
+                .AddIngredient(ItemID.VileMushroom)
+                .AddIngredient(ItemID.BlackCurrant)
+                .AddIngredient(ItemID.Deathweed)
 
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class EbonwoodEffect : AccessoryEffect

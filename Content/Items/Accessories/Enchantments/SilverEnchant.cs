@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
@@ -51,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.Harpoon)
             .AddIngredient(ItemID.SilverWatch)
 
-            .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
@@ -68,14 +69,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.ObsidianHelm)
-            .AddIngredient(ItemID.ObsidianShirt)
-            .AddIngredient(ItemID.ObsidianPants)
-            .AddIngredient(null, "AshWoodEnchant")
-            .AddIngredient(ItemID.MoltenSkullRose) 
-            .AddIngredient(ItemID.Obsidifish)      //.AddIngredient(ItemID.Cascade)
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddIngredient(ItemID.ObsidianHelm)
+                .AddIngredient(ItemID.ObsidianShirt)
+                .AddIngredient(ItemID.ObsidianPants)
+                .AddIngredient(null, "AshWoodEnchant")
+                .AddIngredient(ItemID.MoltenSkullRose) 
+                .AddIngredient(ItemID.Obsidifish)      //.AddIngredient(ItemID.Cascade)
+
+                .AddTile<EnchantedTreeSheet>()
+
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

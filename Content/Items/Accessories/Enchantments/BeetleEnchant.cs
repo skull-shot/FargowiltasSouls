@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -39,19 +40,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.BeetleHelmet)
-            .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
-            .AddIngredient(ItemID.BeetleLeggings)
-            .AddIngredient(ItemID.BeetleWings)
-            .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
-            .AddIngredient(ItemID.Buggy)
-            //.AddIngredient(ItemID.MothronWings);
-            //breaker blade
-            //amarok
-            //beetle minecart
+                .AddIngredient(ItemID.BeetleHelmet)
+                .AddRecipeGroup("FargowiltasSouls:AnyBeetle")
+                .AddIngredient(ItemID.BeetleLeggings)
+                .AddIngredient(ItemID.BeetleWings)
+                .AddRecipeGroup("FargowiltasSouls:AnyColoredHusk") // Red / Cyan / Violet Husk
+                .AddIngredient(ItemID.Buggy)
+                //.AddIngredient(ItemID.MothronWings);
+                //breaker blade
+                //amarok
+                //beetle minecart
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -36,15 +37,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyCobaltHead")
-            .AddIngredient(ItemID.CobaltBreastplate)
-            .AddIngredient(ItemID.CobaltLeggings)
-            .AddIngredient(null, "AncientCobaltEnchant")
-            .AddIngredient(ItemID.ScarabBomb, 10)
-            .AddIngredient(ItemID.ExplosivePowder, 50)
+                .AddRecipeGroup("FargowiltasSouls:AnyCobaltHead")
+                .AddIngredient(ItemID.CobaltBreastplate)
+                .AddIngredient(ItemID.CobaltLeggings)
+                .AddIngredient(null, "AncientCobaltEnchant")
+                .AddIngredient(ItemID.ScarabBomb, 10)
+                .AddIngredient(ItemID.ExplosivePowder, 50)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

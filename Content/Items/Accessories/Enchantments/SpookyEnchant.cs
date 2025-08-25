@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -53,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //.AddIngredient(ItemID.CursedSapling);
             //.AddIngredient(ItemID.EyeSpring);
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)

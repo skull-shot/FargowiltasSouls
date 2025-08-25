@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -8,6 +8,7 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -43,19 +44,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.MonkBrows)
-            .AddIngredient(ItemID.MonkShirt)
-            .AddIngredient(ItemID.MonkPants)
-            //.AddIngredient(ItemID.MonkBelt);
-            .AddIngredient(ItemID.DD2LightningAuraT2Popper)
-            //meatball
-            //blue moon
-            //valor
-            .AddIngredient(ItemID.DaoofPow)
-            .AddIngredient(ItemID.MonkStaffT2)
+                .AddIngredient(ItemID.MonkBrows)
+                .AddIngredient(ItemID.MonkShirt)
+                .AddIngredient(ItemID.MonkPants)
+                //.AddIngredient(ItemID.MonkBelt);
+                .AddIngredient(ItemID.DD2LightningAuraT2Popper)
+                //meatball
+                //blue moon
+                //valor
+                .AddIngredient(ItemID.DaoofPow)
+                .AddIngredient(ItemID.MonkStaffT2)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -51,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //electrosphere launcher
             .AddIngredient(ItemID.SDMG)
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor, out int? scaling)

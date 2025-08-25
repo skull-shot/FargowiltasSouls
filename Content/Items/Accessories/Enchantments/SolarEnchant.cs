@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
@@ -60,7 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SolarEruption)
             .AddIngredient(ItemID.StarWrath) //terrarian
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
 
         }

@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
@@ -46,15 +47,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.MeteorHelmet)
-            .AddIngredient(ItemID.MeteorSuit)
-            .AddIngredient(ItemID.MeteorLeggings)
-            .AddIngredient(ItemID.StarCannon)
-            .AddIngredient(ItemID.Magiluminescence)
-            .AddIngredient(ItemID.Starfury)
-            .AddCondition(Condition.DownedEowOrBoc)
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddIngredient(ItemID.MeteorHelmet)
+                .AddIngredient(ItemID.MeteorSuit)
+                .AddIngredient(ItemID.MeteorLeggings)
+                .AddIngredient(ItemID.StarCannon)
+                .AddIngredient(ItemID.Magiluminescence)
+                .AddIngredient(ItemID.Starfury)
+                .AddCondition(Condition.DownedEowOrBoc)
+
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

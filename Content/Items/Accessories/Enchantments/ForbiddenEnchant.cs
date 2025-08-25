@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
@@ -48,21 +49,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.AncientBattleArmorHat)
-            .AddIngredient(ItemID.AncientBattleArmorShirt)
-            .AddIngredient(ItemID.AncientBattleArmorPants)
-            //sun mask/moon mask
-            .AddIngredient(ItemID.DjinnsCurse)
-            .AddIngredient(ItemID.SpiritFlame)
-            .AddIngredient(ItemID.PirateStaff)
-            //sky fracture
-            //.AddIngredient(ItemID.RainbowRod);
+                .AddIngredient(ItemID.AncientBattleArmorHat)
+                .AddIngredient(ItemID.AncientBattleArmorShirt)
+                .AddIngredient(ItemID.AncientBattleArmorPants)
+                //sun mask/moon mask
+                .AddIngredient(ItemID.DjinnsCurse)
+                .AddIngredient(ItemID.SpiritFlame)
+                .AddIngredient(ItemID.PirateStaff)
+                //sky fracture
+                //.AddIngredient(ItemID.RainbowRod);
 
-            //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
-            //fennec fox pet
+                //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
+                //fennec fox pet
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

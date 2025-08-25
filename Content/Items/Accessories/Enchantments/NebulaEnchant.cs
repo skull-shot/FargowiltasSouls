@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -35,19 +36,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.NebulaHelmet)
-            .AddIngredient(ItemID.NebulaBreastplate)
-            .AddIngredient(ItemID.NebulaLeggings)
-            //.AddIngredient(ItemID.WingsNebula);
-            .AddIngredient(ItemID.NebulaArcanum)
-            .AddIngredient(ItemID.NebulaBlaze)
-            //LeafBlower
-            //bubble gun
-            //chaarged blaster cannon
-            .AddIngredient(ItemID.LastPrism)
+                .AddIngredient(ItemID.NebulaHelmet)
+                .AddIngredient(ItemID.NebulaBreastplate)
+                .AddIngredient(ItemID.NebulaLeggings)
+                //.AddIngredient(ItemID.WingsNebula);
+                .AddIngredient(ItemID.NebulaArcanum)
+                .AddIngredient(ItemID.NebulaBlaze)
+                //LeafBlower
+                //bubble gun
+                //chaarged blaster cannon
+                .AddIngredient(ItemID.LastPrism)
 
-            .AddTile(TileID.LunarCraftingStation)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

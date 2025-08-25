@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -50,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //kaledoscope
             //.AddIngredient(ItemID.TikiTotem);
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

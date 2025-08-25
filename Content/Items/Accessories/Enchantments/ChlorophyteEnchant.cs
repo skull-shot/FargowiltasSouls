@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using MonoMod.Utils;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -43,18 +44,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyChloroHead")
-            .AddIngredient(ItemID.ChlorophytePlateMail)
-            .AddIngredient(ItemID.ChlorophyteGreaves)
-            .AddIngredient(null, "JungleEnchant")
-            .AddIngredient(ItemID.ChlorophyteClaymore)
-            .AddIngredient(ItemID.AcornAxe) // Axe of Regrowth
-            //grape juice
-            //.AddIngredient(ItemID.Seedling);
-            //plantero pet
+                .AddRecipeGroup("FargowiltasSouls:AnyChloroHead")
+                .AddIngredient(ItemID.ChlorophytePlateMail)
+                .AddIngredient(ItemID.ChlorophyteGreaves)
+                .AddIngredient(null, "JungleEnchant")
+                .AddIngredient(ItemID.ChlorophyteClaymore)
+                .AddIngredient(ItemID.AcornAxe) // Axe of Regrowth
+                                                //grape juice
+                                                //.AddIngredient(ItemID.Seedling);
+                                                //plantero pet
 
-            .AddTile(TileID.CrystalBall)
-           .Register();
+                .AddTile<EnchantedTreeSheet>()
+               .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
