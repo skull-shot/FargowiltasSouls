@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -11,14 +12,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class GuardianTome : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Guardian");
-            // Tooltip.SetDefault("'It's their turn to run'");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "守卫者");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "现在轮到他们跑了");
         }
 
         public override void SetDefaults()
