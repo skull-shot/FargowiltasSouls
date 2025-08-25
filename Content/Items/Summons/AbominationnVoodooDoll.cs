@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Items.Materials;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class AbominationnVoodooDoll : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;

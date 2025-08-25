@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,14 +8,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class Dicer : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Dicer");
-            // Tooltip.SetDefault("'A defeated foe's attack now on a string'");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "切肉器");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'一个被击败的敌人的攻击,用线拴着'");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
             ItemID.Sets.Yoyo[Item.type] = true;
