@@ -132,7 +132,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
-
             .Register();
         }
     }
