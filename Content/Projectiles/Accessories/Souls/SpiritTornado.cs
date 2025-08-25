@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 if (Projectile.scale < 2f)
                 {
                     if (Main.myPlayer == Projectile.owner)
-                        CooldownBarManager.Activate("ForbiddenTornadoCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                        CooldownBarManager.Activate("ForbiddenTornadoCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ForbiddenEnchant").Value, new(231, 178, 28),
                             () => (Projectile.scale - 1), activeFunction: () => Projectile != null && Projectile.active && Main.LocalPlayer.FargoSouls().ForbiddenCD <= 0, displayAtFull: false);
                 }
                 Projectile.localNPCHitCooldown = 30;

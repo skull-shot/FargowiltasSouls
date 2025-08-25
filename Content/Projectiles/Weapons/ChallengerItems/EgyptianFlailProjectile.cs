@@ -66,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
                 {
                     modPlayer.EgyptianFlailCD = EgyptianFlail.maxCooldown;
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("NekhakhaCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/EgyptianFlail").Value, Color.DarkMagenta, 
+                        CooldownBarManager.Activate("NekhakhaCooldown", FargoAssets.GetTexture2D("Content/Items/Weapons/Challengers", "EgyptianFlail").Value, Color.DarkMagenta, 
                             () => 1 - (float)modPlayer.EgyptianFlailCD / EgyptianFlail.maxCooldown, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<EgyptianFlail>());
                 }
             }

@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Player.hurtCooldowns[0] = Math.Max(Player.hurtCooldowns[0], 2);
                         Player.hurtCooldowns[1] = Math.Max(Player.hurtCooldowns[1], 2);
 
-                        CooldownBarManager.Activate("SpecialDashCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity","").Value, Color.OrangeRed, 
+                        CooldownBarManager.Activate("SpecialDashCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity","BetsysHeart").Value, Color.OrangeRed, 
                             () => 1 - (float)SpecialDashCD / LumUtils.SecondsToFrames(5), activeFunction: () => BetsysHeartItem != null);
                     }
                     else if (player.HasEffect<SupremeDashEffect>() && type == 1)

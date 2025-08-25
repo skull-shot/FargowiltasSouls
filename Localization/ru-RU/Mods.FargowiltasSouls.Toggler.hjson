@@ -135,7 +135,7 @@ GuttedHeartMinions: Щит из ползунов
 GelicWingSpikes: Гелеподобные шипы
 GelicWingJump: Гелеподобный прыжок
 PungentEyeballCursor: Едкий курсор
-ChaliceHeader: "{$Mods.FargowiltasSouls.Items.ChaliceoftheMoon.DisplayName}"
+// VerdantHeader: "{$Mods.FargowiltasSouls.Items.VerdantDoomsayerMask.DisplayName}"
 IvyVenomEffect: Яд плюща
 LihzahrdBoulders: Валуны и гейзеры топота
 CelestialRuneAttacks: Поддержка небесной руны

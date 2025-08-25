@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class IvyVenomEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => Header.GetHeader<VerdantHeader>();
         public override int ToggleItemType => ModContent.ItemType<MagicalBulb>();
         public override void PostUpdateEquips(Player player)
         {

@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             WyvernFeather.ActiveEffects(player, item);
             //MysticSkull.ActiveEffects(player, item);
             WretchedPouch.ActiveEffects(player, item);
-            SkullCharm.ActiveEffects(player, item, false);
+            CrystalSkull.ActiveEffects(player, item, false);
             DreadShell.ActiveEffects(player, item);
         }
 
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient<WyvernFeather>()
             .AddIngredient<MysticSkull>()
             .AddIngredient<WretchedPouch>()
-            .AddIngredient<SkullCharm>()
+            .AddIngredient<CrystalSkull>()
             .AddIngredient<DreadShell>()
             .AddIngredient(ItemID.SpectreBar, 5)
             .AddIngredient<DeviatingEnergy>(10)
