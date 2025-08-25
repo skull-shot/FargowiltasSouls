@@ -1,10 +1,12 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Expert
 {
     public class BoxofGizmos : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Expert", Name);
         public override void SetStaticDefaults()
         {
 
