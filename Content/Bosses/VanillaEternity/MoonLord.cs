@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 1.8f));
+            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 2f));
         }
         public override void OnFirstTick(NPC npc)
         {
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.getGoodWorld && !valid)
                 modifiers.Null();
             if (valid)
-                modifiers.FinalDamage *= 1.4f;
+                modifiers.FinalDamage *= 1.5f;
         }
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
