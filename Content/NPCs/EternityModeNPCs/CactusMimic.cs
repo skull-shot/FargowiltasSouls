@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             int[] sand = [TileID.Sand, TileID.Ebonsand, TileID.Pearlsand, TileID.Crimsand];
-            if (sand.Contains(spawnInfo.SpawnTileType) && WorldSavingSystem.EternityMode)
+            if (sand.Contains(spawnInfo.SpawnTileType) && WorldSavingSystem.EternityMode && !spawnInfo.Player.ZoneBeach && !spawnInfo.Water)
             {
                 return 0.7f;
             }

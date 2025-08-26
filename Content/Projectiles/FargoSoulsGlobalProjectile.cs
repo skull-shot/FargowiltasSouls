@@ -1238,6 +1238,13 @@ namespace FargowiltasSouls.Content.Projectiles
                     expr_1CCF_cp_0.velocity.Y -= 0.5f;
                 }
             }
+
+            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo && player.HasEffect<NinjaEffect>() && NinjaEffect.PlayerCanHaveBuff(player))
+            {
+                Vector2 nextPos = projectile.position + projectile.velocity;
+                if (!Collision.SolidCollision(nextPos, projectile.width, projectile.height))
+                    projectile.position = nextPos;
+            }
         }
 
         public override void PostAI(Projectile projectile)

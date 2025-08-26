@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Assets.Textures;
+using System;
+using System.Linq;
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -69,7 +71,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
                 if (player.whoAmI == Main.myPlayer)
                 {
-                    player.Teleport(player.lastDeathPostion, 1);
+                    Vector2 teleport = player.lastDeathPostion;
+                    if (DungeonWalls.Contains(Framing.GetTileSafely(player.lastDeathPostion).WallType) && !NPC.downedBoss3)
+                        teleport = new Vector2(Main.dungeonX*16+8, Main.dungeonY*16 - 16*3); //dungeon entrance
+
+                    player.Teleport(teleport, 1);
                     player.velocity = Vector2.Zero;
                     if (Main.netMode == NetmodeID.MultiplayerClient)
                         NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, player.lastDeathPostion.X, player.lastDeathPostion.Y, 1);
@@ -83,7 +89,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 }
             }
         }
-
+        private static readonly int[] DungeonWalls =
+        [
+            WallID.BlueDungeon, WallID.BlueDungeonSlab, WallID.BlueDungeonSlabUnsafe, WallID.BlueDungeonTile, WallID.BlueDungeonTileUnsafe, WallID.BlueDungeonUnsafe, WallID.GreenDungeon, WallID.GreenDungeonSlab, WallID.GreenDungeonSlabUnsafe,
+            WallID.GreenDungeonTile, WallID.GreenDungeonTileUnsafe, WallID.GreenDungeonUnsafe, WallID.PinkDungeon, WallID.PinkDungeonSlab, WallID.PinkDungeonSlabUnsafe, WallID.PinkDungeonTile, WallID.PinkDungeonTileUnsafe, WallID.PinkDungeonUnsafe
+        ];
         public override void UseItemFrame(Player player) => Use(player);
         public override bool? UseItem(Player player) => true;
     }

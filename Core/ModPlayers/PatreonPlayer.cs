@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -126,7 +126,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void OnEnterWorld()
         {
-            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan || Exertype)
+            if (Gittle || Sasha || ManliestDove || Cat || JojoTheGamer || Northstrider || Eight3One || dolvan || Dartslinger || Ariyah || Exertype)
             {
                 string text = Language.GetTextValue($"Mods.{Mod.Name}.Message.PatreonNameEffect");
                 Main.NewText($"{text}, {Player.name}!");
@@ -204,7 +204,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         p.timeLeft = 3;
                         Player.KillMe(PlayerDeathReason.ByProjectile(Player.whoAmI, p.whoAmI), 10000, Player.direction);
                     }
-                    
+
                     Player.AddBuff(BuffID.Poisoned, 2);
                     Player.AddBuff(BuffID.Darkness, 2);
                     Player.AddBuff(BuffID.Cursed, 2);
@@ -375,6 +375,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     target.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
                 }
             }
+            if (Ariyah)
+            {
+                target.AddBuff(BuffID.GelBalloonBuff, 300);
+            }
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
@@ -472,7 +476,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (WolfDashing) //dont draw player during dash
                 drawInfo.DrawDataCache.Clear();
-
             //HashSet<int> layersToRemove = new HashSet<int>();
             //for (int i = 0; i < drawInfo.DrawDataCache.Count; i++)
             //{
@@ -541,7 +544,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         }
 
-        
+
 
         //AFTER IMAGE HELL
         private static bool drawingAfterimage = false;
@@ -661,7 +664,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             On_LegacyPlayerRenderer.DrawPlayerFull += On_LegacyPlayerRenderer_DrawPlayerFull;
             On_PlayerDrawLayers.DrawPlayer_RenderAllLayers += On_PlayerDrawLayers_DrawPlayer_RenderAllLayers;
         }
-
 
     }
 }

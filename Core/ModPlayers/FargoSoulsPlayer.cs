@@ -714,8 +714,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())
             {
-                float maxSpeedRequired = Player.ForceEffect<NinjaEffect>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
-                if (Player.velocity.Length() < maxSpeedRequired)
+                if (NinjaEffect.PlayerCanHaveBuff(Player))
                 {
                     velocity *= 2f;
                     knockback *= 2f;
@@ -1227,7 +1226,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            if (StyxSet || !(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
+            if (!(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
             {
                 drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
                 drawInfo.bodyGlowColor = Color.White;
