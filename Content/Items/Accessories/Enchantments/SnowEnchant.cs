@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -41,9 +42,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.FlinxFurCoat)
             .AddIngredient(ItemID.IceBlade)
             .AddIngredient(ItemID.FrostMinnow)
-            
 
-            .AddTile(TileID.DemonAltar)
+
+                .AddTile<EnchantedTreeSheet>()
             .Register();
 
             //CreateRecipe()

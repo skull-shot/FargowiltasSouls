@@ -3,6 +3,7 @@ global using FargowiltasSouls.Core.Toggler;
 global using Luminance.Common.Utilities;
 global using LumUtils = Luminance.Common.Utilities.Utilities;
 using Fargowiltas;
+using Fargowiltas.Content.Items.Tiles;
 using Fargowiltas.Content.NPCs;
 using Fargowiltas.Content.Projectiles;
 using Fargowiltas.Content.UI;
@@ -327,6 +328,7 @@ namespace FargowiltasSouls
 
             //Item.NewItem(null, player.Center, ModContent.ItemType<DevianttsSundial>());
             Item.NewItem(null, player.Center, ModContent.ItemType<EternityAdvisor>());
+            Item.NewItem(null, player.Center, ModContent.ItemType<EnchantedTree>());
 
             void GiveItem(string modName, string itemName, int amount = 1)
             {

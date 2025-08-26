@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,10 +13,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 {
     public class MoonBowHeld : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/BossDrops/MoonBow";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/BossWeapons", Name);
 
         private int syncTimer;
         private Vector2 mousePos;
+
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Projectile.type] = 2;
+        }
 
         public override void SetDefaults()
         {
@@ -195,6 +201,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             if (Projectile.localAI[0] >= theTime && Projectile.localAI[0] <= theTime + window)
             {
                 Color color = new(51, 255, 191);
+                Projectile.frame = 1;
 
                 const int maxTime = window;
                 float effectiveTime = Projectile.localAI[0] - theTime;

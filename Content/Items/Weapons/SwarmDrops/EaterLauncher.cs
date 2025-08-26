@@ -1,5 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class EaterLauncher : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         private int delay;
         private bool lastLMouse = false;
         public override void SetStaticDefaults()

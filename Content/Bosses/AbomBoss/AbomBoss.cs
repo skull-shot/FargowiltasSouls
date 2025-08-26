@@ -371,10 +371,17 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     }
                     break;
 
-                case -3: //pause to let arena recenter, then proceed
+                case -3: //reposition to arena center, then proceed
                     if (!AliveCheck(player))
                         break;
-                    NPC.velocity *= 0.9f;
+                    if (FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<AbomRitual>()) != null)
+                    {
+                        Movement(Main.projectile[ritualProj].Center, 1.4f);
+                    }
+                    else
+                    {
+                        NPC.velocity *= 0.9f;
+                    }
                     NPC.dontTakeDamage = true;
                     if (++NPC.ai[1] > 120)
                     {

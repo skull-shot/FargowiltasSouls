@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
@@ -47,21 +49,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.AncientBattleArmorHat)
-            .AddIngredient(ItemID.AncientBattleArmorShirt)
-            .AddIngredient(ItemID.AncientBattleArmorPants)
-            //sun mask/moon mask
-            .AddIngredient(ItemID.DjinnsCurse)
-            .AddIngredient(ItemID.SpiritFlame)
-            .AddIngredient(ItemID.PirateStaff)
-            //sky fracture
-            //.AddIngredient(ItemID.RainbowRod);
+                .AddIngredient(ItemID.AncientBattleArmorHat)
+                .AddIngredient(ItemID.AncientBattleArmorShirt)
+                .AddIngredient(ItemID.AncientBattleArmorPants)
+                //sun mask/moon mask
+                .AddIngredient(ItemID.DjinnsCurse)
+                .AddIngredient(ItemID.SpiritFlame)
+                .AddIngredient(ItemID.PirateStaff)
+                //sky fracture
+                //.AddIngredient(ItemID.RainbowRod);
 
-            //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
-            //fennec fox pet
+                //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
+                //fennec fox pet
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
@@ -86,7 +88,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.ForbiddenCD--;
                 if (Main.myPlayer == player.whoAmI)
-                    CooldownBarManager.Activate("ForbiddenTornadoCD", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ForbiddenEnchant").Value, new(231, 178, 28),
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ForbiddenEnchant").Value, new(231, 178, 28),
                         () => (float)modPlayer.ForbiddenCD / Cooldown(Main.LocalPlayer), activeFunction: Main.LocalPlayer.HasEffectEnchant<ForbiddenEffect>, displayAtFull: false);
             }
                 

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.BossBags;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Terraria;
 using Terraria.ID;
@@ -8,13 +9,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class TreeSword : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Tree Sword");
-            // Tooltip.SetDefault("Shoots an acorn");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "树剑");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "射出橡实");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

@@ -74,7 +74,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
         }
-
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+            if (npc.damage < 28)
+                npc.damage = 28;
+        }
         public override bool SafePreAI(NPC npc)
         {
             ref float ai_Phase = ref npc.ai[0];

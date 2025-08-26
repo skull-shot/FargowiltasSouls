@@ -18,6 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
 
             // DisplayName.SetDefault("Oceanic Ritual");
             Main.projFrames[Projectile.type] = 3;
+            CooldownSlot = 0;
         }
 
         public override void SetDefaults()

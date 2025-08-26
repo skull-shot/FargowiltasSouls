@@ -43,8 +43,8 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     worldDistance += subtleDistortion;
 
     float distToPlayer = distance(playerPosition, worldUV);
-    float opacity = 0.4f;
-    opacity += InverseLerp(800, 500, distToPlayer) * 0.6;
+    float opacity = 0.9f;
+    opacity += InverseLerp(800, 500, distToPlayer) * 0.1;
 
     bool border = worldDistance < radius && opacity > 0;
     float colorMult = 1;

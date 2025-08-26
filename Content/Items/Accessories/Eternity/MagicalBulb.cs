@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     [AutoloadEquip(EquipType.Face)]
     public class MagicalBulb : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<BulbKeyEffect>()];
@@ -60,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class IvyVenomEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => Header.GetHeader<VerdantHeader>();
         public override int ToggleItemType => ModContent.ItemType<MagicalBulb>();
         public override void PostUpdateEquips(Player player)
         {

@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
@@ -14,13 +15,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class CrystallineCongregation : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         private int delay = 0;
         private bool lastLMouse = false;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Crystalline Congregation");
-            // Tooltip.SetDefault("Summon up to 20 crystal balls near your mouse cursor that home towards you \n Release the button to send them towards your cursor");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

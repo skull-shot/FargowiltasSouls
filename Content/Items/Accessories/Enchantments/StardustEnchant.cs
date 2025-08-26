@@ -1,4 +1,5 @@
 ﻿
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -54,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //MoonlordTurretStaff
 
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

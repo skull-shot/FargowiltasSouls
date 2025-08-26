@@ -26,10 +26,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
             Projectile.hostile = false;
             Projectile.friendly = true;
             AIType = 14;
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 3;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.DamageType = DamageClass.Ranged;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 60;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) //circular hitbox
         {
@@ -68,8 +71,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (target.life > Projectile.damage && Projectile.penetrate > 1)
-                Projectile.penetrate = 1;
+            //if (target.life > Projectile.damage && Projectile.penetrate > 1)
+            //    Projectile.penetrate = 1;
         }
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 610 - Main.mouseTextColor * 2) * Projectile.Opacity;
 

@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -50,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.Harpoon)
             .AddIngredient(ItemID.SilverWatch)
 
-            .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }
@@ -70,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             int cooldown = FargoSoulsPlayer.ShieldCooldown(player);
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("ParryCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SilverEnchant").Value, Color.Gray, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown);
+                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown);
         }
     }
 }

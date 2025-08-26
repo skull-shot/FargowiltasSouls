@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,11 +10,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class TheLightningRod : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Lightning Rod");
-            // Tooltip.SetDefault("Charges power as it is spun\nDamage decreases per hit when thrown");
         }
 
         public override void SetDefaults()

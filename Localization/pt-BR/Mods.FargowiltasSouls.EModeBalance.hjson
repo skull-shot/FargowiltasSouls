@@ -61,3 +61,9 @@ IceBarrier: Modo Eternidade: 10% de redução nos danos
 // ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
 // AvengerEmblem: Damage bonus increased by 3%
+// AmethystStaff: Bolt is faster and bounces once
+// TopazStaff: Critical strikes cause an explosion
+// SapphireStaff: Rapidly fires bolts in a spread
+// EmeraldStaff: Fires a large bolt with strong knockback and pierce
+// AmberStaff: Bolt boomerangs back
+// RubyStaff: Bolt splits in half after a duration

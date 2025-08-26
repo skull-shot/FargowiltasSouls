@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Items.Materials
 {
     public class AbomEnergy : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Materials", Name);
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 6));

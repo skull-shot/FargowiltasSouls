@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Mounts;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Mounts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -62,6 +63,8 @@ namespace FargowiltasSouls.Content.Items.Mounts
                 return;
             }
 
+            MountData.backTexture = FargoAssets.GetTexture2D("Content/Items/Mounts", "TrojanSquirrelMount_Back");
+            MountData.frontTexture = FargoAssets.GetTexture2D("Content/Items/Mounts", "TrojanSquirrelMount_Front");
             MountData.textureWidth = MountData.backTexture.Width();
             MountData.textureHeight = MountData.backTexture.Height();
         }

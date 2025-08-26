@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -17,6 +18,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class DarkenedHeart : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

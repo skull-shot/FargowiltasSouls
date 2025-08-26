@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -43,8 +44,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.BoneWhip)
                 .AddIngredient(ItemID.StillLife)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class NecroEffect : AccessoryEffect

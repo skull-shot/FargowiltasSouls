@@ -1,4 +1,3 @@
-
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
@@ -7,18 +6,17 @@ using Terraria.Audio;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.WorldGeneration;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Items.Consumables;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Summons
 {
 
     public class CoffinSummon : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
-            //DisplayName.SetDefault("Coffin Summon");
-            //Tooltip.SetDefault("While in the underground Desert, summon the Cursed Coffin");
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
 
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<CoffinRoominator>();

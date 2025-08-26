@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
@@ -9,12 +10,16 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     [LegacyName("HentaiSword")]
     public class Penetrator : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
+
+        public override int NumFrames => 10;
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 10));
@@ -44,8 +49,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
         }
-
-        public override Color? GetAlpha(Color lightColor) => Color.White;
 
         public override bool AltFunctionUse(Player player) => true;
 

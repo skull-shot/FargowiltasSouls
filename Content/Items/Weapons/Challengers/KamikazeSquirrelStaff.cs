@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.BossBags;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using System.Linq;
@@ -11,14 +12,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class KamikazeSquirrelStaff : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Kamikaze Squirrel Staff");
-            // Tooltip.SetDefault("Summons friendly squirrels to cuddle your foes\nRight click to make them explode");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "神风松鼠杖");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "召唤出友善的松鼠，拥抱你的敌人\n右键点击让松鼠爆炸");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

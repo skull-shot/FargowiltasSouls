@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class MechLureProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
 
         public override void SetStaticDefaults()
         {

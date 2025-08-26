@@ -514,6 +514,25 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["AvengerEmblem"];
                     return EModeChange.Buff;
 
+                case ItemID.AmethystStaff:
+                    balanceTextKeys = ["AmethystStaff"];
+                    return EModeChange.ReworkBuff;
+                case ItemID.TopazStaff:
+                    balanceTextKeys = ["TopazStaff"];
+                    return EModeChange.ReworkBuff;
+                case ItemID.SapphireStaff:
+                    balanceTextKeys = ["SapphireStaff"];
+                    return EModeChange.ReworkBuff;
+                case ItemID.EmeraldStaff:
+                    balanceTextKeys = ["EmeraldStaff"];
+                    return EModeChange.ReworkBuff;
+                case ItemID.AmberStaff:
+                    balanceTextKeys = ["AmberStaff"];
+                    return EModeChange.ReworkBuff;
+                case ItemID.RubyStaff:
+                    balanceTextKeys = ["RubyStaff"];
+                    return EModeChange.ReworkBuff;
+
                 default:
                     return EModeChange.None;
             }

@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades
 
             Projectile.hide = true;
             Projectile.penetrate = -1;
+
+            Projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
         }
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)

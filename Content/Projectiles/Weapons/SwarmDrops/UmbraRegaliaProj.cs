@@ -172,7 +172,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 if (chargeLevel < maxCharge * 5) //yes, allow overcharge
                     chargeLevel++;
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("UmbraRegaliaCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/SwarmDrops/UmbraRegalia").Value, Color.DarkRed, 
+                    CooldownBarManager.Activate("UmbraRegaliaCharge", FargoAssets.GetTexture2D("Content/Items/Weapons/SwarmDrops", "UmbraRegalia").Value, Color.DarkRed, 
                         () => Projectile.ai[2] / maxCharge, true, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<UmbraRegalia>());
                 if (chargeLevel == (int)maxCharge - 1 && player.whoAmI == Main.myPlayer)
                 {

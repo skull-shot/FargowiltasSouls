@@ -1,5 +1,6 @@
 ﻿//using FargowiltasSouls.Content.Items.Accessories.Forces;
 //using FargowiltasSouls.Content.Projectiles;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -38,18 +39,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.ApprenticeHat)
-            .AddIngredient(ItemID.ApprenticeRobe)
-            .AddIngredient(ItemID.ApprenticeTrousers)
-            .AddIngredient(ItemID.DD2FlameburstTowerT2Popper)
-            //magic missile
-            //ice rod
-            //golden shower
-            .AddIngredient(ItemID.BookStaff)
-            .AddIngredient(ItemID.ClingerStaff)
+                .AddIngredient(ItemID.ApprenticeHat)
+                .AddIngredient(ItemID.ApprenticeRobe)
+                .AddIngredient(ItemID.ApprenticeTrousers)
+                .AddIngredient(ItemID.DD2FlameburstTowerT2Popper)
+                //magic missile
+                //ice rod
+                //golden shower
+                .AddIngredient(ItemID.BookStaff)
+                .AddIngredient(ItemID.ClingerStaff)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
 
         

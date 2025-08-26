@@ -1,4 +1,5 @@
 ﻿using System;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
     public class CelestialRune : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()
@@ -66,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
     public class CelestialRuneAttacks : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<ChaliceHeader>();
+        public override Header ToggleHeader => Header.GetHeader<VerdantHeader>();
         public override int ToggleItemType => ModContent.ItemType<CelestialRune>();
         public override bool ExtraAttackEffect => true;
         public static int BaseDamage(Player player) => 50;

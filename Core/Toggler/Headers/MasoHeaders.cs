@@ -40,9 +40,9 @@ namespace FargowiltasSouls.Core.Toggler.Content
         public override int Item => ModContent.ItemType<PureHeart>();
         public override float Priority => 1.6f;
     }
-    public class ChaliceHeader : MasoHeader
+    public class VerdantHeader : MasoHeader
     {
-        public override int Item => ModContent.ItemType<ChaliceoftheMoon>();
+        public override int Item => ModContent.ItemType<VerdantDoomsayerMask>();
         public override float Priority => 1.7f;
     }
     public class HeartHeader : MasoHeader

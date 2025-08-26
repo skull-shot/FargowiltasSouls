@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
 {
     public class MutantsPact : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Consumables", Name);
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

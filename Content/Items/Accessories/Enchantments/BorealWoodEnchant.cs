@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,15 +36,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.BorealWoodHelmet)
-            .AddIngredient(ItemID.BorealWoodBreastplate)
-            .AddIngredient(ItemID.BorealWoodGreaves)
-            .AddIngredient(ItemID.Shiverthorn)
-            .AddIngredient(ItemID.Plum)
-            .AddIngredient(ItemID.Snowball, 300)
+                .AddIngredient(ItemID.BorealWoodHelmet)
+                .AddIngredient(ItemID.BorealWoodBreastplate)
+                .AddIngredient(ItemID.BorealWoodGreaves)
+                .AddIngredient(ItemID.Shiverthorn)
+                .AddIngredient(ItemID.Plum)
+                .AddIngredient(ItemID.Snowball, 300)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {

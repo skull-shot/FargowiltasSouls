@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.UI.Elements;
@@ -40,15 +42,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyMythrilHead")
-            .AddIngredient(ItemID.MythrilChainmail)
-            .AddIngredient(ItemID.MythrilGreaves)
-            .AddIngredient(ItemID.LaserRifle)
-            .AddIngredient(ItemID.ClockworkAssaultRifle)
-            .AddIngredient(ItemID.FlowerofFire)
+                .AddRecipeGroup("FargowiltasSouls:AnyMythrilHead")
+                .AddIngredient(ItemID.MythrilChainmail)
+                .AddIngredient(ItemID.MythrilGreaves)
+                .AddIngredient(ItemID.LaserRifle)
+                .AddIngredient(ItemID.ClockworkAssaultRifle)
+                .AddIngredient(ItemID.FlowerofFire)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 
@@ -107,7 +109,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.MythrilTimer = mythrilEndTime;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("MythrilEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MythrilEnchant").Value, MythrilEnchant.NameColor, 
+                CooldownBarManager.Activate("MythrilEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "MythrilEnchant").Value, MythrilEnchant.NameColor, 
                     () => (float)Main.LocalPlayer.FargoSouls().MythrilTimer / Main.LocalPlayer.FargoSouls().MythrilMaxTime, true, 60 * 10, activeFunction: () => player.HasEffect<MythrilEffect>() && player.HasEffectEnchant<MythrilEffect>());
         }
     }

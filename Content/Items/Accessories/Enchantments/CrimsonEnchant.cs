@@ -36,15 +36,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.CrimsonHelmet)
-            .AddIngredient(ItemID.CrimsonScalemail)
-            .AddIngredient(ItemID.CrimsonGreaves)
-            .AddIngredient(ItemID.TheUndertaker)
-            .AddIngredient(ItemID.TheMeatball)
-            .AddIngredient(ItemID.CrimsonHeart)
+                .AddIngredient(ItemID.CrimsonHelmet)
+                .AddIngredient(ItemID.CrimsonScalemail)
+                .AddIngredient(ItemID.CrimsonGreaves)
+                .AddIngredient(ItemID.TheUndertaker)
+                .AddIngredient(ItemID.TheMeatball)
+                .AddIngredient(ItemID.CrimsonHeart)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile(TileID.DemonAltar)
+                .Register();
         }
     }
     public class CrimsonEffect : AccessoryEffect

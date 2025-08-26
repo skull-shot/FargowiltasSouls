@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -36,15 +37,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.HuntressAltHead)
-            .AddIngredient(ItemID.HuntressAltShirt)
-            .AddIngredient(ItemID.HuntressAltPants)
-            .AddIngredient(null, "HuntressEnchant")
-            .AddIngredient(ItemID.DD2ExplosiveTrapT3Popper)
-            .AddIngredient(ItemID.DD2BetsyBow)
+                .AddIngredient(ItemID.HuntressAltHead)
+                .AddIngredient(ItemID.HuntressAltShirt)
+                .AddIngredient(ItemID.HuntressAltPants)
+                .AddIngredient(null, "HuntressEnchant")
+                .AddIngredient(ItemID.DD2ExplosiveTrapT3Popper)
+                .AddIngredient(ItemID.DD2BetsyBow)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class RedRidingHuntressEffect : AccessoryEffect

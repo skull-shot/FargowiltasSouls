@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -36,15 +37,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyOriHead")
-            .AddIngredient(ItemID.OrichalcumBreastplate)
-            .AddIngredient(ItemID.OrichalcumLeggings)
-            .AddIngredient(ItemID.CursedFlames)
-            .AddIngredient(ItemID.ShadowFlameBow)
-            .AddIngredient(ItemID.Toxikarp)
+                .AddRecipeGroup("FargowiltasSouls:AnyOriHead")
+                .AddIngredient(ItemID.OrichalcumBreastplate)
+                .AddIngredient(ItemID.OrichalcumLeggings)
+                .AddIngredient(ItemID.CursedFlames)
+                .AddIngredient(ItemID.ShadowFlameBow)
+                .AddIngredient(ItemID.Toxikarp)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 

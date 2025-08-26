@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class AbomsCurse : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 10));

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -38,6 +39,8 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
             Projectile.FargoSouls().DeletionImmuneRank = 1;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().CanSplit = false;
+
+            Projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
         }
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)

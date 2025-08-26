@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class TheSmallSting : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<HiveStaff>();
-            // DisplayName.SetDefault("The Small Sting");
-            /* Tooltip.SetDefault("Uses darts for ammo" +
-                "\n50% chance to not consume ammo" +
-                "\nStingers will stick to enemies, hitting the same spot again will deal extra damage" +
-                "\n'Repurposed from the abdomen of a defeated foe..'"); */
         }
 
         public override void SetDefaults()

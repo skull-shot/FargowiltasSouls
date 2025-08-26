@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -46,8 +47,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.HallowJoustingLance)
                 .AddIngredient(ItemID.Gungnir)
                 .AddIngredient(ItemID.HolyWater, 50)
-            .AddTile(TileID.CrystalBall)
-            .Register();
+
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class HallowEffect : AccessoryEffect

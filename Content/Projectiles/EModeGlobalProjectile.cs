@@ -1,34 +1,35 @@
+using FargowiltasSouls.Content.Bosses.Champions.Earth;
+using FargowiltasSouls.Content.Bosses.Champions.Spirit;
+using FargowiltasSouls.Content.Bosses.Champions.Terra;
+using FargowiltasSouls.Content.Bosses.Champions.Timber;
+using FargowiltasSouls.Content.Bosses.Champions.Will;
+using FargowiltasSouls.Content.Bosses.DeviBoss;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
+using FargowiltasSouls.Content.Projectiles.Weapons;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
-using FargowiltasSouls.Content.Buffs.Eternity;
-using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Content.Bosses.VanillaEternity;
-using FargowiltasSouls.Core.Globals;
-using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Bosses.Champions.Earth;
-using FargowiltasSouls.Content.Bosses.Champions.Terra;
-using FargowiltasSouls.Content.Bosses.Champions.Timber;
-using FargowiltasSouls.Content.Bosses.Champions.Will;
-using FargowiltasSouls.Content.Bosses.Champions.Spirit;
-using FargowiltasSouls.Content.Items;
-using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
-using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
-using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
-using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
 using Terraria.WorldBuilding;
-using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
-using FargowiltasSouls.Content.Projectiles.Weapons;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -287,6 +288,53 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             projectile.usesLocalNPCImmunity = true;
                             projectile.localNPCHitCooldown = -1;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.AmethystBolt:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.AmethystStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+                            projectile.penetrate = 2;
+                            projectile.velocity *= 1.5f;
+
+                        }
+                    }
+                    break;
+
+                case ProjectileID.EmeraldBolt:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.EmeraldStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.position = projectile.Center;
+                            int mult = 4;
+                            projectile.scale = mult;
+                            projectile.width = (int)(projectile.width * mult);
+                            projectile.height = (int)(projectile.height * mult);
+                            projectile.Center = projectile.position;
+                            projectile.knockBack *= 2;
+                            projectile.penetrate = 4;
+
+                        }
+                    }
+                    break;
+
+                case ProjectileID.RubyBolt:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.RubyStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = -1;
+
                         }
                     }
                     break;
@@ -719,6 +767,35 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                             projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
                             return false;
+                        }
+                    }
+                    break;
+                case ProjectileID.AmberBolt:
+                    if (SourceItemType == ItemID.AmberStaff && projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (EmodeItemBalance.HasEmodeChange(player, ItemID.AmberStaff))
+                        {
+                            if (counter > 30 && counter < 50)
+                            {
+                                projectile.velocity += projectile.DirectionTo(player.Center) * 0.9f;
+                            }
+                        }
+                    }
+                    break;
+                case ProjectileID.RubyBolt:
+                    if (SourceItemType == ItemID.RubyStaff && projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (EmodeItemBalance.HasEmodeChange(player, ItemID.RubyStaff))
+                        {
+                            if (counter == 20)
+                            {
+                                var ps = FargoSoulsGlobalProjectile.SplitProj(projectile, 2, MathHelper.PiOver2 * 0.12f, 0.8f);
+                                foreach (Projectile p in ps)
+                                    p.Eternity().counter = counter + 1;
+                                projectile.active = false;
+                            }
                         }
                     }
                     break;
@@ -1329,6 +1406,14 @@ namespace FargowiltasSouls.Content.Projectiles
             }
 
             firstTickAICheckDone = true;
+
+            // buff yoyos to move faster with melee speed
+            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
+            {
+                Vector2 nextPos = projectile.position + projectile.velocity * Math.Max(0, Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee));
+                if (!Collision.SolidCollision(nextPos, projectile.width, projectile.height))
+                    projectile.position = nextPos;
+            }
         }
         private int FadeTimer = 0;
         public static int[] FancySwings => [
@@ -1645,6 +1730,23 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (SourceItemType == ItemID.ChlorophyteSaber && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             projectile.velocity *= 0.25f;
+                        }
+                        break;
+                    case ProjectileID.AmethystBolt:
+                        if (SourceItemType == ItemID.AmethystStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            NPC npc = projectile.FindTargetWithinRange(450, true);
+                            if (npc != null)
+                                projectile.velocity = projectile.velocity.RotateTowards(projectile.DirectionTo(npc.Center).ToRotation(), 1);
+                        }
+                        break;
+                    case ProjectileID.TopazBolt:
+                        if (SourceItemType == ItemID.TopazStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (hit.Crit)
+                            {
+                                Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_OnHit(target), projectile.Center, Vector2.Zero, ModContent.ProjectileType<TopazBoltExplosion>(), hit.SourceDamage, 0f, Main.myPlayer);
+                            }
                         }
                         break;
                     default:
