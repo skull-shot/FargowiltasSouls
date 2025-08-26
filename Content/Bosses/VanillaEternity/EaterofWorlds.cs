@@ -486,7 +486,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (Timer == prepTime + upTime)
             {
-                int projCount = WorldSavingSystem.MasochistModeReal ? 24 : 20;
+                int projCount = WorldSavingSystem.MasochistModeReal ? 20 : 16;
                 projCount /= HeadCount;
                 SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
@@ -611,7 +611,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (Timer == 0)
                 {
-                    SoundEngine.PlaySound(SoundID.ForceRoar, NPC.Center);
+                    //SoundEngine.PlaySound(SoundID.ForceRoar, NPC.Center);
                     UTurnTotalSpacingDistance = HeadCount / 2;
                     if (WorldSavingSystem.MasochistModeReal)
                         UTurnTotalSpacingDistance /= 2;
@@ -696,7 +696,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
             else if (AttackTimer == 120) //fly up
             {
-                SoundEngine.PlaySound(SoundID.Roar, Target.Center);
+                if (firstEater)
+                    SoundEngine.PlaySound(SoundID.Roar, Target.Center);
                 NPC.velocity = Vector2.UnitY * -15f;
                 UTurnStoredTargetX = (int)Target.Center.X; //store their initial location
 
@@ -841,47 +842,72 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         */
         public void Fireballs()
         {
-            float attackDuration = 60 * 8;
+            float attackDuration = 60 * 9;
 
 
 
             if (Timer > attackDuration - 60)
             {
-                NPC.velocity.X -= NPC.HorizontalDirectionTo(Target.Center) * 0.25f;
-                NPC.velocity.Y += 0.15f;
+                NPC.velocity.X -= NPC.HorizontalDirectionTo(Target.Center) * 0.4f;
+                NPC.velocity.Y += 0.12f;
                 
             }
             else
             {
-                Vector2 target = Target.Center;
-                Vector2 dir = NPC.DirectionTo(Target.Center);
-                float targetOffset = MyIndex - (HeadCount / 2f);
-                targetOffset *= 35;
-                target += dir.RotatedBy(MathHelper.PiOver2) * targetOffset;
-                float speed = 0.5f + (0.02f * (MyIndex - (HeadCount / 2f)));
-                if (NPC.Distance(target) > 250)
-                    Movement(target, speed, 0.4f, 1f, 0.5f);
-
-                //AttackTimer++;
-                int x = WorldSavingSystem.MasochistModeReal ? 12 : 16;
-                int freq = x + HeadCount * x;
-                int offset = MyIndex * freq / HeadCount;
-                float telegraph = 25;
-                dir = NPC.velocity.SafeNormalize(dir);
-                float shotSpeed = 10;
-                if (WorldSavingSystem.MasochistModeReal)
-                    shotSpeed = 13;
-                if (Timer % freq < offset && Timer % freq > ((offset - telegraph) % freq))
+                float dashStart = attackDuration / 2 + 40;
+                float dashWindup = dashStart - 30;
+                float dashEnd = dashStart + 30;
+                float dashEndlag = dashEnd + 20;
+                if (Timer >= dashWindup && Timer < dashStart)
                 {
-                    int d = Dust.NewDust(NPC.Center, 1, 1, DustID.CursedTorch);
-                    Main.dust[d].velocity = dir.RotatedByRandom(MathHelper.PiOver2 * 0.1f) * Main.rand.NextFloat(shotSpeed - 2, shotSpeed + 2);
+                    if (Timer == dashWindup && firstEater)
+                        SoundEngine.PlaySound(SoundID.ForceRoar, NPC.Center);
+                    NPC.velocity *= 0.94f;
                 }
-                if (Timer % freq == offset && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
+                else if (Timer >= dashStart && Timer < dashEnd)
                 {
-                    if (FargoSoulsUtil.HostCheck)
+                    NPC.velocity += NPC.DirectionTo(Target.Center) * 0.8f;
+                }
+                else if (Timer >= dashEnd && Timer < dashEndlag)
+                {
+                    NPC.velocity *= 0.97f;
+                }
+                else
+                {
+                    Vector2 target = Target.Center;
+                    Vector2 dir = NPC.DirectionTo(Target.Center);
+                    float targetOffset = MyIndex - (HeadCount / 2f);
+                    float sineTime = Timer + targetOffset * 30;
+                    targetOffset = 240 * MathF.Sin(sineTime * MathF.Tau / 150f);
+                    target += dir.RotatedBy(MathHelper.PiOver2) * targetOffset;
+                    float speed = 0.5f + (0.02f * (MyIndex - (HeadCount / 2f)));
+                    float turn = Timer >= dashEndlag ? 1.2f : 0.53f;
+                    if (NPC.Distance(target) > 250)
+                        Movement(target, speed, 0.4f, 1f, turn);
+
+                    //AttackTimer++;
+                    int x = WorldSavingSystem.MasochistModeReal ? 12 : 16;
+                    if (Timer >= dashEndlag)
+                        x -= 6;
+                    int freq = x + HeadCount * x;
+                    int offset = MyIndex * freq / HeadCount;
+                    float telegraph = 25;
+                    dir = NPC.velocity.SafeNormalize(dir);
+                    float shotSpeed = 10;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        shotSpeed = 13;
+                    if (Timer % freq < offset && Timer % freq > ((offset - telegraph) % freq))
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * shotSpeed,
-                            ProjectileID.CursedFlameHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        int d = Dust.NewDust(NPC.Center, 1, 1, DustID.CursedTorch);
+                        Main.dust[d].velocity = dir.RotatedByRandom(MathHelper.PiOver2 * 0.1f) * Main.rand.NextFloat(shotSpeed - 2, shotSpeed + 2);
+                    }
+                    if (Timer % freq == offset && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
+                    {
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, dir * shotSpeed,
+                                ProjectileID.CursedFlameHostile, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        }
                     }
                 }
             }
