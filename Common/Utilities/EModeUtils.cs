@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Common.Utilities
             {
                 
                 Player player = Main.player[npc.target];
-                if (player.HasItem(itemType))
+                if (player.HasItem(itemType) || player.inventory[58].type == itemType)
                 {
                     player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[itemType] = true;
                 }
@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Common.Utilities
                 int type = ModContent.TryFind("Fargowiltas", itemName, out ModItem modItem) ? modItem.Type : -1;
                 if (type >= 0)
                 {
-                    if (player.HasItem(type))
+                    if (player.HasItem(type) || player.inventory[58].type == type)
                     {
                         player.GetModPlayer<FargoPlayer>().ItemHasBeenOwned[type] = true;
                     }
