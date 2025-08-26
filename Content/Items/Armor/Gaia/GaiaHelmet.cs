@@ -30,8 +30,8 @@ namespace FargowiltasSouls.Content.Items.Armor.Gaia
         public override void UpdateEquip(Player player)
         {
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
-            player.GetDamage(damageClass) += 0.08f;
-            player.GetCritChance(DamageClass.Generic) += 5;
+            player.GetDamage(damageClass) += 0.1f;
+            player.GetCritChance(DamageClass.Generic) += 6;
             player.statManaMax2 += 50;
             player.manaCost -= 0.1f;
             player.huntressAmmoCost90 = true;
