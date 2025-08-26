@@ -1580,7 +1580,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
-                            if (Main.npc[i].active)
+                            if (Main.npc[i].active && i != NPC.whoAmI && Main.npc[i].type != NPC.type)
                                 Main.npc[i].AddBuff(ModContent.BuffType<TimeFrozenBuff>(), duration, true);
                         }
 

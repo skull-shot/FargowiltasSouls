@@ -55,3 +55,4 @@ nvm penetrator cant be legendary, the game wipes the reforge on world reload
 removed yoyo hit rate aspd scaling
 yoyos move faster with melee speed
 ninja ench speedup works on yoyos
+fixed eri timestopping himself (he forgot not to do that)
