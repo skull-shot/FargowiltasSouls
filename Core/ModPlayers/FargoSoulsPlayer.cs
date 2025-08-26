@@ -1227,7 +1227,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            if (StyxSet || !(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
+            if (!(Player.armor[1].type != ModContent.ItemType<StyxChestplate>() && Player.armor[11].type != ModContent.ItemType<StyxChestplate>()))
             {
                 drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
                 drawInfo.bodyGlowColor = Color.White;
