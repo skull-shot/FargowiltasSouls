@@ -714,8 +714,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())
             {
-                float maxSpeedRequired = Player.ForceEffect<NinjaEffect>() ? 7 : 4; //the highest velocity at which your projectile speed is increased
-                if (Player.velocity.Length() < maxSpeedRequired)
+                if (NinjaEffect.PlayerCanHaveBuff(Player))
                 {
                     velocity *= 2f;
                     knockback *= 2f;

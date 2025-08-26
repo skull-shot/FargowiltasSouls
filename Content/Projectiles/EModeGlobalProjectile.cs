@@ -195,11 +195,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 default:
                     break;
             }
-
-            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
-            {
-                projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
-            }
         }
 
         private static bool NonSwarmFight(Projectile projectile, params int[] types)
@@ -1411,6 +1406,14 @@ namespace FargowiltasSouls.Content.Projectiles
             }
 
             firstTickAICheckDone = true;
+
+            // buff yoyos to move faster with melee speed
+            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
+            {
+                Vector2 nextPos = projectile.position + projectile.velocity * Math.Max(0, Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee));
+                if (!Collision.SolidCollision(nextPos, projectile.width, projectile.height))
+                    projectile.position = nextPos;
+            }
         }
         private int FadeTimer = 0;
         public static int[] FancySwings => [
