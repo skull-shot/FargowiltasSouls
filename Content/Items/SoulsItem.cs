@@ -204,7 +204,7 @@ namespace FargowiltasSouls.Content.Items
                     string boundText = "";
                     if (activeSkills == 1)
                     {
-                        boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound");
+                        boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound") + " ";
                         var boundSkills = Main.LocalPlayer.FargoSouls().ActiveSkills;
                         for (int i = 0; i < boundSkills.Length; i++)
                         {
@@ -212,13 +212,13 @@ namespace FargowiltasSouls.Content.Items
                             {
                                 var skillKeys = FargowiltasSouls.ActiveSkillKeys[i].GetAssignedKeys();
                                 if (skillKeys.Count > 0)
-                                    boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.BoundTo", skillKeys[0]);
+                                    boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.BoundTo", skillKeys[0]) + " ";
                             }
                         }
                     }
 
                     var namesTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkills", nameText + " " + names);
-                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + " " + keybindMenuText);
+                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + keybindMenuText);
                     var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
 
                     Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.7f);
