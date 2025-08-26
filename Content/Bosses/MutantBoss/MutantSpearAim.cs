@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "Penetrator");
+            FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", "Penetrator");
 
         public override void SetStaticDefaults()
         {

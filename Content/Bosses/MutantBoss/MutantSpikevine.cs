@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -44,7 +45,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
             Projectile.hide = true;
         }
         ref float Timer => ref Projectile.ai[0];
-        ref float Target => ref Projectile.ai[1];
+        ref float MutantID => ref Projectile.ai[1];
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 position = Projectile.position;
@@ -94,27 +95,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
         {
             if (Timer == 0)
             {
-                Target = Player.FindClosest(Projectile.Center, 0, 0);
+                //Target = Player.FindClosest(Projectile.Center, 0, 0);
                 Projectile.Opacity = 1;
-            }
-            int playerID = (int)Target;
-            if (!playerID.IsWithinBounds(Main.maxProjectiles))
-            {
-                Projectile.Kill();
-                return;
-            }
-            Player target = Main.player[playerID];
-            if (!target.Alive())
-            {
-                Projectile.Kill();
-                return;
             }
             if (Timer == 60)
                 SoundEngine.PlaySound(SoundID.Item63 with { Pitch = -1f, Volume = 10 }, Projectile.Center);
             if (Timer < 60)
             {
                 Projectile.velocity *= 0.97f;
-                Projectile.velocity = Projectile.velocity.RotateTowards(Projectile.DirectionTo(target.Center).ToRotation(), 0.1f);
+                //Projectile.velocity = Projectile.velocity.RotateTowards(Projectile.DirectionTo(target.Center).ToRotation(), 0.1f);
             }
             else if (Timer < 110)
             {
@@ -124,8 +113,24 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 if (Projectile.velocity.Length() > 40)
                     Projectile.velocity = dir * 40;
             }
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 * 0.004f);
+            int mutantID = (int)MutantID;
+            if (Timer >= 60 && mutantID.IsWithinBounds(Main.maxNPCs) && Projectile.velocity != Vector2.Zero)
+            {
+                NPC mutant = Main.npc[(int)mutantID];
+                var p = FargoSoulsUtil.ProjectileExists(mutant.As<MutantBoss>().ritualProj, ModContent.ProjectileType<MutantRitual>());
+                if (p != null)
+                {
+                    if (Projectile.Distance(p.Center) >= p.As<MutantRitual>().threshold - 60)
+                    {
+                        //Projectile.position = Projectile.velocity;
+                        Projectile.velocity *= 0;
+                        SoundEngine.PlaySound(SoundID.Item49, Projectile.Center);
+                    }
+                }
+            }
 
-            if (Timer > 30)
+            if (Timer > 300)
             {
                 TrailLength -= 4;
                 if (TrailLength <= 0)
@@ -144,12 +149,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 }
             }
             Timer++;
-            if (WorldSavingSystem.SwarmActive && Main.GameUpdateCount % 2 == 0)
-            {
-                Timer++;
-                if (Timer == 61)
-                    SoundEngine.PlaySound(SoundID.Item63 with { Pitch = -1f, Volume = 10 }, Projectile.Center);
-            }
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
