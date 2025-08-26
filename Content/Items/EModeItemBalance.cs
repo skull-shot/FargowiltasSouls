@@ -497,10 +497,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["AerialBane"];
                     return EModeChange.Nerf;
                     
-                case ItemID.ChlorophyteBullet:
-                    balanceTextKeys = ["ChlorophyteBullet"];
-                    return EModeChange.Nerf;
-                    
                 case ItemID.SporeSac:
                     balanceTextKeys = ["SporeSac"];
                     return EModeChange.Buff;
@@ -534,6 +530,11 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.ReworkBuff;
 
                 default:
+                    if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
+                    {
+                        balanceTextKeys = ["ChlorophyteBullet"];
+                        return EModeChange.Nerf;
+                    }
                     return EModeChange.None;
             }
         }
