@@ -26,6 +26,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -43,6 +44,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     DevianttIntroduction = false;
                 }
             }
+
+            EaterofWorlds.CheckReset();
 
             if (Player.CCed)
             {
