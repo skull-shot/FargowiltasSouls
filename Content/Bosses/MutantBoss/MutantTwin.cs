@@ -47,6 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         bool spawned;
         public ref float Angle => ref Projectile.ai[1];
         public ref float Timer => ref Projectile.localAI[0];
+        Vector2 targetPos = Vector2.Zero;
         public override void AI()
         {
             Player player = FargoSoulsUtil.PlayerExists(Projectile.ai[0]);
@@ -66,22 +67,26 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             float prepTime = 40;
             float reelback = 15;
-            Vector2 dir = Angle.ToRotationVector2();
+            float angle = Angle;
+            if (Timer >= prepTime)
+                angle = Projectile.DirectionFrom(targetPos).ToRotation();
+            Vector2 dir = angle.ToRotationVector2();
             if (Timer < prepTime)
             {
                 Vector2 desiredPos = player.Center + dir * 400;
                 Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, desiredPos, Projectile.velocity, 2f, 2f);
                 Projectile.rotation = Projectile.DirectionTo(player.Center).ToRotation() - MathHelper.PiOver2;
+                targetPos = player.Center;
             }
             else if (Timer < prepTime + reelback)
             {
                 Projectile.velocity *= 0.7f;
                 Projectile.velocity += dir * 3f;
-                Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(Angle + MathHelper.PiOver2, 0.1f).ToRotation();
+                Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(angle + MathHelper.PiOver2, 0.1f).ToRotation();
             }
             else
             {
-                Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(Angle + MathHelper.PiOver2, 0.1f).ToRotation();
+                Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(angle + MathHelper.PiOver2, 0.1f).ToRotation();
                 if (Timer == prepTime + reelback)
                     SoundEngine.PlaySound(SoundID.ForceRoarPitched with { Volume = 0.3f }, Projectile.Center);
                 Projectile.velocity -= dir * 2f;
@@ -99,7 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                                 {
                                     float o = (i - (projs / 2f)) / projs;
                                     float offset = MathHelper.Pi * o + Main.rand.NextFloat(0.15f);
-                                    Vector2 projDir = (Angle + j * MathHelper.PiOver2 + offset).ToRotationVector2();
+                                    Vector2 projDir = (Projectile.rotation - MathHelper.PiOver2 + j * MathHelper.PiOver2 + offset).ToRotationVector2();
                                     Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 1.1f, ModContent.ProjectileType<MechElectricOrbSpaz>(),
                                             Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: j == 1 ? MechElectricOrb.Green : MechElectricOrb.Yellow);
                                 }
@@ -113,7 +118,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                                 1 => Color.Green,
                                 _ => Color.Yellow,
                             };
-                            Vector2 sparkDir = (Angle + j * MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(MathHelper.PiOver2 * 0.28f);
+                            Vector2 sparkDir = (Projectile.rotation - MathHelper.PiOver2 + j * MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(MathHelper.PiOver2 * 0.28f);
                             float spd = Main.rand.NextFloat(14f, 20f);
                             Particle spark = new ElectricSpark(center, sparkDir * spd, color, Main.rand.NextFloat(0.7f, 1f), 40);
                             spark.Spawn();
@@ -121,6 +126,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Projectile.Kill();
                         p.Kill();
                     }
+                }
+
+                if (Timer > prepTime + reelback + 60)
+                {
+                    Projectile.active = false;
+                    return;
                 }
             }
             Timer++;
