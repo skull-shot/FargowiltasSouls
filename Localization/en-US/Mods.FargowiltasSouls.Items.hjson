@@ -910,7 +910,7 @@ AeolusBoots: {
 	Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
-		Having wings equipped disables all of your double jumps (togglable)
+		Having wings equipped disables all of your double jumps (toggleable)
 		The wearer can run even faster on sand
 		8% increased movement speed
 		Increases jump speed and height, allows double jump and auto-jump, and negates fall damage
@@ -1201,7 +1201,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
 		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/GalacticGlobe] grants increased flight time
 		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/ChaliceofTheMoon] mini True Eyes of Cthulhu and [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer which slows enemies it hits
 		'Warm, beating, and no body needed'
 		'''
@@ -1551,7 +1551,7 @@ ZephyrBoots: {
 	Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
-		Having wings equipped disables all of your double jumps (togglable)
+		Having wings equipped disables all of your double jumps (toggleable)
 		8% increased movement speed
 		Provides the ability to walk on water, honey and lava
 		Grants immunity to fire blocks and 7 seconds of immunity to lava
@@ -1619,7 +1619,7 @@ DimensionSoul: {
 		'''
 		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
-		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, [c/BC5252:and disables all of your jumps (togglable)]
+		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, and disables all of your jumps (toggleable)
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
@@ -1646,7 +1646,7 @@ EternitySoul: {
 		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		StartsWithFilter: "'"
 		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
-		ContainsFilter: Following effects|Grants togglable
+		ContainsFilter: Following effects|Grants toggleable
 		Flavor: "'Mortal or Immortal, all things acknowledge your claim to divinity.'"
 	}
 }
@@ -1659,7 +1659,7 @@ FlightMasterySoul: {
 		Hold DOWN and JUMP to hover
 		Hold UP to boost faster
 		Increases gravity
-		Disables all of your double jumps (togglable)
+		Disables all of your double jumps (toggleable)
 		'Pierce the heavens'
 		'''
 }
@@ -1676,7 +1676,7 @@ MasochistSoul: {
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
 		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/GalacticGlobe] True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
@@ -1701,7 +1701,7 @@ SupersonicSoul: {
 	Tooltip:
 		'''
 		Allows Supersonic running, dashing, hovering, and extra mobility on ice
-		Having wings equipped disables all of your double jumps (togglable)
+		Having wings equipped disables all of your double jumps (toggleable)
 		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
 		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
 		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies
