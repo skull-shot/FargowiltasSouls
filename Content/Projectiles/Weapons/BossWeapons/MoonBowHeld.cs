@@ -18,6 +18,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         private int syncTimer;
         private Vector2 mousePos;
 
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Projectile.type] = 2;
+        }
+
         public override void SetDefaults()
         {
             Projectile.width = 28;
@@ -196,6 +201,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             if (Projectile.localAI[0] >= theTime && Projectile.localAI[0] <= theTime + window)
             {
                 Color color = new(51, 255, 191);
+                Projectile.frame = 1;
 
                 const int maxTime = window;
                 float effectiveTime = Projectile.localAI[0] - theTime;
