@@ -113,7 +113,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 if (Projectile.velocity.Length() > 40)
                     Projectile.velocity = dir * 40;
             }
-            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 * 0.004f);
+            float rotationModifier = (WorldSavingSystem.MasochistModeReal ? 0.03f : 0.0005f) * Projectile.ai[2];
+            Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 * rotationModifier);
             int mutantID = (int)MutantID;
             if (Timer >= 60 && mutantID.IsWithinBounds(Main.maxNPCs) && Projectile.velocity != Vector2.Zero)
             {
@@ -128,6 +129,23 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                         SoundEngine.PlaySound(SoundID.Item49, Projectile.Center);
                     }
                 }
+            }
+
+            if (Projectile.velocity != Vector2.Zero)
+            {
+                const float maxExpectedDistance = 1140;
+                const float numberOfUndulations = 5;
+
+                Vector2 waveAmplitude = 32f * Projectile.ai[2] * Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver2);
+
+                // need to undo the previous tick's undulation so that we're back along the original "line" of the real velocity
+                float oldUndulation = (float)System.Math.Sin(MathHelper.TwoPi * Projectile.localAI[0] / maxExpectedDistance * numberOfUndulations);
+                Projectile.position -= waveAmplitude * oldUndulation;
+
+                Projectile.localAI[0] += Projectile.velocity.Length();
+
+                float undulation = (float)System.Math.Sin(MathHelper.TwoPi * Projectile.localAI[0] / maxExpectedDistance * numberOfUndulations);
+                Projectile.position += waveAmplitude * undulation;
             }
 
             if (Timer > 300)

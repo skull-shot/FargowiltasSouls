@@ -97,18 +97,25 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Vector2 center = (p.Center + Projectile.Center) / 2;
                         if (FargoSoulsUtil.HostCheck)
                         {
-                            int projs = 7;
-                            for (int i = 0; i < projs; i++)
+                            for (int i = -2; i <= 2; i++)
                             {
                                 for (int j = -1; j <= 1; j += 2)
                                 {
-                                    float o = (i - (projs / 2f)) / projs;
-                                    float offset = MathHelper.Pi * o + Main.rand.NextFloat(0.15f);
-                                    Vector2 projDir = (Projectile.rotation - MathHelper.PiOver2 + j * MathHelper.PiOver2 + offset).ToRotationVector2();
-                                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 1.1f, ModContent.ProjectileType<MechElectricOrbSpaz>(),
-                                            Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: j == 1 ? MechElectricOrb.Green : MechElectricOrb.Yellow);
+                                    float offset = Main.rand.NextFloat(0.15f);
+
+                                    float speedModifier = j * (WorldSavingSystem.MasochistModeReal ? 1.1f : 1f);
+
+                                    Vector2 projDir = (MathHelper.PiOver4 / 2 * i + Projectile.rotation + offset).ToRotationVector2();
+                                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 1f * speedModifier, ModContent.ProjectileType<MechElectricOrbSpaz>(),
+                                        Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: MechElectricOrb.Yellow);
+
+                                    projDir = projDir.RotatedBy(MathHelper.PiOver2);
+                                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 0.8f * speedModifier, ModContent.ProjectileType<MechElectricOrbSpaz>(),
+                                        Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: MechElectricOrb.Green);
                                 }
                             }
+
+                            Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, Vector2.Zero, ModContent.ProjectileType<MutantNukeBomb>(), 0, 0f, Projectile.owner);
                         }
                         for (int i = 0; i < 30; i++)
                         {

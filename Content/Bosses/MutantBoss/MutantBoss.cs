@@ -3216,9 +3216,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (!AliveCheck(player))
                 return;
             Vector2 targetPos = player.Center;
-            targetPos.X += 500 * (NPC.Center.X < targetPos.X ? -1 : 1);
-            if (NPC.Distance(targetPos) > 50)
-                Movement(targetPos, 0.8f);
+            targetPos.X += 600 * (NPC.Center.X < targetPos.X ? -1 : 1);
+            if (NPC.Distance(targetPos) > 20)
+                Movement(targetPos, 1.0f);
             if (++NPC.ai[1] > 45)
             {
                 NPC.netUpdate = true;
@@ -3242,15 +3242,18 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                 SoundEngine.PlaySound(Plantera.VineGrowth with { Volume = 3 }, NPC.Center);
-                int areas = WorldSavingSystem.MasochistModeReal ? 9 : 6;
+                int areas = 6;
                 if (FargoSoulsUtil.HostCheck)
                 {
                     for (int i = 0; i <= areas; i++)
                     {
-                        Vector2 dir = NPC.DirectionTo(player.Center).RotatedBy(MathF.Tau * i / (float)areas);
+                        Vector2 dir = NPC.DirectionTo(player.Center).RotatedBy(MathF.Tau * i / areas);
 
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir, dir * 6,
-                            ModContent.ProjectileType<MutantSpikevine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai1: NPC.whoAmI);
+                        for (int j = -1; j <= 1; j += 2)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + dir, dir * 12,
+                                ModContent.ProjectileType<MutantSpikevine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai1: NPC.whoAmI, ai2: j);
+                        }
                     }
                 }
             }
@@ -3461,14 +3464,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 EdgyBossText(GFBQuote(35));
 
                 float oldOffset = NPC.ai[2];
-                while (NPC.ai[2] == oldOffset || Math.Abs(NPC.ai[2] - oldOffset) > 1)
-                    NPC.ai[2] = Main.rand.Next(-1, 2); //roll -1, 0, 1
+                const int maxRangeOfVariance = 3;
+                while (NPC.ai[2] == oldOffset || Math.Abs(NPC.ai[2] - oldOffset) > maxRangeOfVariance)
+                    NPC.ai[2] += Main.rand.NextBool() ? -1 : 1;
 
                 Vector2 auraPos = FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<MutantRitual>()) == null ? NPC.Center : Main.projectile[ritualProj].Center;
                 Vector2 centerPoint = new(auraPos.X, auraPos.Y);
                 float maxVariance = 100;
                 float maxOffsetWithinStep = maxVariance / 3 * .75f; //x.75 so player always has to move a noticeable amount
-                centerPoint.Y += maxVariance * NPC.ai[2]; //choose one of 3 base heights
+                centerPoint.Y += maxVariance * NPC.ai[2]; //choose one of 5 base heights
                 centerPoint.Y += Main.rand.NextFloat(-maxOffsetWithinStep, maxOffsetWithinStep);
 
                 float xSpeedWhenAttacking = 16f;

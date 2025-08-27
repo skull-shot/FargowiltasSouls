@@ -82,8 +82,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             else
             {
                 Projectile.velocity = npc.Center - Projectile.Center;
-                if (npc.ai[0] == 36)
-                    Projectile.velocity /= 20f; //much faster for slime rain
+                if (npc.ai[0] == 36 || npc.ai[0] == 43)
+                    Projectile.velocity /= 20f; //much faster for slime rain and twinplanteras
                 else if (npc.ai[0] == 22 || npc.ai[0] == 23 || npc.ai[0] == 25)
                     Projectile.velocity /= 40f; //move faster for direct dash, predictive throw
                 else

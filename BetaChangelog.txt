@@ -65,3 +65,6 @@ the following now scale with attack speed
 	vortex beater
 	phantasm
 dragons breath has hit rate aspd scaling
+
+mutant tentacle twins attack has been Terry Designed
+mutant SANS GOLEM feels more like ROARING KNIGHT
