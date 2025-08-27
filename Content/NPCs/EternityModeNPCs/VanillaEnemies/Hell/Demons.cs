@@ -34,6 +34,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
             if (npc.type == NPCID.RedDevil)
             {
                 npc.npcSlots = 3;
+                if (npc.knockBackResist > 0.2f)
+                    npc.knockBackResist = 0.2f;
                 if (Main.hardMode)
                 {
                     if (npc.lifeMax < 2200)
@@ -179,7 +181,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                     }
                     else
                     {
-                        npc.knockBackResist = 0.5f;
+                        npc.knockBackResist = npc.FargoSouls().defKnockBackResist;
                         MoveToDevil();
 
                     }
@@ -265,7 +267,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                     }
                     else
                     {
-                        npc.knockBackResist = 0.5f;
+                        npc.knockBackResist = npc.FargoSouls().defKnockBackResist;
                     }
                 }
             }
@@ -299,7 +301,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                     int attackDelay = 60 * 4;
                     int artilleryWindup = 70;
                     int artilleryTelegraph = 40;
-                    npc.knockBackResist = 0.2f;
+                    npc.knockBackResist = npc.FargoSouls().defKnockBackResist;
                     Counter++;
                     if (Counter > attackDelay && Counter < attackDelay + artilleryWindup)
                     {

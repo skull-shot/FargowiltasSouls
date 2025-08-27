@@ -114,6 +114,8 @@ namespace FargowiltasSouls.Core.Globals
 
         public int GrazeCD;
 
+        public float defKnockBackResist;
+
         //        public static bool Revengeance => CalamityMod.World.CalamityWorld.revenge;
 
         static HashSet<int> RareNPCs = [];
@@ -220,57 +222,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!FirstTick)
             {
-
-                //                switch (npc.type)
-                //                {
-                //                    case NPCID.TheDestroyer:
-                //                    case NPCID.TheDestroyerBody:
-                //                    case NPCID.TheDestroyerTail:
-                //                        npc.buffImmune[ModContent.BuffType<TimeFrozen>()] = false;
-                //                        npc.buffImmune[ModContent.BuffType<Frozen>()] = false;
-                //                        //npc.buffImmune[BuffID.Darkness] = false;
-                //                        break;
-
-                //                    /*case NPCID.WallofFlesh:
-                //                    case NPCID.WallofFleshEye:
-                //                    case NPCID.MoonLordCore:
-                //                    case NPCID.MoonLordHand:
-                //                    case NPCID.MoonLordHead:
-                //                    case NPCID.MoonLordLeechBlob:
-                //                    case NPCID.TargetDummy:
-                //                    case NPCID.GolemFistLeft:
-                //                    case NPCID.GolemFistRight:
-                //                    case NPCID.GolemHead:
-                //                    case NPCID.DungeonGuardian:
-                //                    case NPCID.DukeFishron:
-                //                        SpecialEnchantImmune = true;
-                //                        break;*/
-
-                //                    default:
-                //                        break;
-                //                }
-
-                //                //critters
-                //                if (npc.damage == 0 && !npc.townNPC && npc.lifeMax == 5)
-                //                {
-                //                    Player player = Main.player[Main.myPlayer];
-
-                //                    /*if ( npc.releaseOwner == player.whoAmI && player.FargoSouls().WoodEnchant)
-                //                    {
-                //                        switch (npc.type)
-                //                        {
-                //                            case NPCID.Bunny:
-
-
-                //                                npc.active = false;
-                //                                break;
-                //                        }
-
-
-
-                //                        ExplosiveCritter = true;
-                //                    }*/
-                //                }
+                defKnockBackResist = npc.knockBackResist;
 
                 FirstTick = true;
             }
