@@ -19,7 +19,6 @@ namespace FargowiltasSouls.Content.Buffs.Boss
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            //also halves defense, DR, and cripples life regen
             player.FargoSouls().noDodge = true;
             player.FargoSouls().noSupersonic = true;
             player.FargoSouls().MutantPresence = true;
