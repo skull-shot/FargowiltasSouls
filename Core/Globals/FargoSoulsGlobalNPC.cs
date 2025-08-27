@@ -48,7 +48,6 @@ namespace FargowiltasSouls.Core.Globals
         public static int boss = -1;
 #pragma warning restore CA2211
 
-        public int originalDefense;
         public bool BrokenArmor;
 
         public bool CanHordeSplit = true;
@@ -209,8 +208,6 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!FirstTick)
             {
-                originalDefense = npc.defense;
-
 
                 //                switch (npc.type)
                 //                {
@@ -312,12 +309,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void PostAI(NPC npc)
         {
-            if (BrokenArmor)
-            {
-                npc.defense = originalDefense - 10;
-                if (npc.defense < 0)
-                    npc.defense = 0;
-            }
 
             if (Sublimation)
             {
@@ -1328,6 +1319,9 @@ namespace FargowiltasSouls.Core.Globals
 
             if (target.type == ModContent.NPCType<CreeperGutted>())
                 modifiers.FinalDamage /= 20;
+
+            if (BrokenArmor)
+                modifiers.ArmorPenetration += 10;
         }
 
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
