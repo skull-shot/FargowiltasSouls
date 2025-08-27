@@ -482,7 +482,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             if (Shadowflame)
-                DamageOverTime(10);
+                DamageOverTime(16);
 
             if (Daybroken)
                 DamageOverTime(30);
@@ -540,7 +540,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.burned) regen += 60;
 
                 if (Hellfire) regen += 10;
-                if (Shadowflame) regen += 10;
+                if (Shadowflame) regen += 16;
                 if (Daybroken) regen += 30;
                 if (FlamesoftheUniverse) regen += 79;
 
