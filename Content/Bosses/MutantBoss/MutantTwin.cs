@@ -97,11 +97,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Vector2 center = (p.Center + Projectile.Center) / 2;
                         if (FargoSoulsUtil.HostCheck)
                         {
+                            float wholeAttackOffset = Main.rand.NextBool() ? 0 : MathHelper.PiOver2;
+
                             for (int i = -2; i <= 2; i++)
                             {
                                 for (int j = -1; j <= 1; j += 2)
                                 {
-                                    float offset = Main.rand.NextFloat(0.15f);
+                                    float offset = wholeAttackOffset + Main.rand.NextFloat(0.15f);
 
                                     float speedModifier = j * (WorldSavingSystem.MasochistModeReal ? 1.1f : 1f);
 
