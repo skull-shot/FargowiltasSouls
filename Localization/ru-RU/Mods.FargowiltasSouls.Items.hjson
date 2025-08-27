@@ -26,9 +26,9 @@ AncientHallowEnchant: {
 	Tooltip:
 		'''
 		Призывает помощника-Террапризму, которому нужен свободный слот призыва
-		Меч преследует ваш курсор
-		Нажмите ПКМ, чтобы взамхнуть мечом 
-		Попадания мечом по вражеским выстрелам отразят их обратно во врага
+		Террапризма преследует ваш курсор
+		Нажмите ПКМ, чтобы взамхнуть ею
+		Попадания Террапризмой по вражеским выстрелам отразят их обратно во врага
 		Отражения перезаряжаются 15 секунд и могут влиять лишь на выстрелы, наносящие меньше 150 урона
 		«Есть ли достаточно мощи в тебе, чтобы меня удержать?»
 		'''
@@ -62,7 +62,7 @@ AshWoodEnchant: {
 	Tooltip:
 		'''
 		Даёт иммунитет к дебаффу «В масле», огненные дебаффы не наносят вам урона
-		Пока на вас наложен дебафф, атаки сопровождаются шарами огня
+		Пока на вас наложен дебафф, атаки сопровождаются огненными шарами
 		Снижает урон, наносимый при контакте с лавой
 		«Хочешь мне сказать, что это не дерево?»
 		'''
@@ -150,7 +150,7 @@ CrimsonEnchant: {
 	DisplayName: Зачарование багрянца
 	Tooltip:
 		'''
-		После получения урона, если вы избежите ещё одного повреждения в течение 7 секунд,
+		После получения урона, если вы избежите повторного урона в течение 7 секунд,
 		вы вернёте 50% потерянного здоровья
 		Если вы получите в это время урон, исцеление отменится
 		Не реагирует на удары, наносящие менее 10 урона
@@ -188,7 +188,7 @@ EbonwoodEnchant: {
 		'''
 		Вы окружены аурой порчи
 		Враги внутри этой ауры наращивают в вас «Порчу»
-		«Порча» даёт вам 3 ед. фиксированного урона и 4% сопротивления урону
+		«Порча» даёт вам до 3 ед. фиксированного урона и 4% сопротивления урону
 		«Нераскрытый потенциал»
 		'''
 }
@@ -435,7 +435,7 @@ PearlwoodEnchant: {
 	DisplayName: Зачарование жемчужной древесины
 	Tooltip:
 		'''
-		Подбор любого подбираемого предмета (напр. лечащие сердца)
+		Подбор любого подбираемого предмета (напр. лечащего сердца)
 		запускает звезду в ближайшего врага и усиливает вас на 5 секунд
 		Под эффектом усиления, ваши критические удары выпадают в вашу пользу
 		Ваши атаки периодически создают звёзды маны при попадании
@@ -967,13 +967,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ чтобы выключить):]
-		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье», [i:FargowiltasSouls/FrigidGemstone] «Охлаждение», [i:FargowiltasSouls/SqueakyToy] и «Чувство вины»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья [i:FargowiltasSouls/SandsofTime] и, пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье», [i:FargowiltasSouls/FrigidGemstone] «Охлаждение», [i:FargowiltasSouls/SqueakyToy] и «Чувство вины»
+		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья [i:FargowiltasSouls/SandsofTime] и, пока поблизости нет боссов, делаете это быстрее
 		'''
 }
@@ -988,7 +988,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ чтобы включить):]
-		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье», [i:FargowiltasSouls/FrigidGemstone] «Охлаждение», [i:FargowiltasSouls/SqueakyToy] и «Чувство вины»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья [i:FargowiltasSouls/SandsofTime] и, пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -998,9 +998,9 @@ LithosphericCluster: {
 	DisplayName: Литосферное скопление
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/SkullCharm] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
-		[i:FargowiltasSouls/SkullCharm] Враги с меньшей вероятностью атакуют вас
-		[i:FargowiltasSouls/SkullCharm] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
+		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
 		[i:FargowiltasSouls/DreadShell] Парирование аннулирует до 200 урона и накладывает на врагов проклятие
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
@@ -1022,9 +1022,9 @@ LithosphericClusterInactive: {
 	DisplayName: Литосферное скопление (Неактивно)
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/SkullCharm] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
-		[i:FargowiltasSouls/SkullCharm] Враги с меньшей вероятностью атакуют вас
-		[i:FargowiltasSouls/SkullCharm] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
+		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
 		[i:FargowiltasSouls/DreadShell] Парирование аннулирует до 200 урона и накладывает на врагов проклятие
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
@@ -1047,15 +1047,15 @@ CelestialRune: {
 }
 
 VerdantDoomsayerMask: {
-	// DisplayName: Verdant Doomsayer Mask
-	/* Tooltip:
+	DisplayName: Зеленеющая маска провидца рока
+	Tooltip:
 		'''
-		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
-		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
-		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
-		'Always watching'
-		''' */
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Даёт иммунитет к дебаффам «Рой», «Атрофированный», «Заклинивший», «Обратный поток маны» и «Необщительный»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотый яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль» и [i:FargowiltasSouls/CelestialRune] «Помеченный смертью»
+		[i:FargowiltasSouls/MagicalBulb] Увеличивает регенерацию здоровья в зависимости от окружающего света
+		[i:FargowiltasSouls/CelestialRune] Вы периодически выпускаете дополнительные снаряды в зависимости от класса используемого оружия
+		«Всегда наблюдает»
+		'''
 }
 
 ConcentratedRainbowMatter: {
@@ -1109,7 +1109,7 @@ DubiousCircuitry: {
 	DisplayName: Сомнительная схема
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/GroundStick] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Беззащитен», «Нано-инъекция» и к отбрасыванию
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/GroundStick] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и отбрасыванию
 		[i:FargowiltasSouls/FusedLens] Установка дебаффа накладывает на вас «Проклятие ада» и «Ихор»
 		[i:FargowiltasSouls/FusedLens] Она увеличивает ваши скорость атаки и шанс критического удара,
 		     а также даёт возможность накладывать «Проклятие ада» и «Ихор»
@@ -1149,24 +1149,25 @@ FusedLens: {
 }
 
 ChaliceofTheMoon: {
-	// DisplayName: Chalice of the Moon
-	/* Tooltip:
+	DisplayName: Лунная чаша
+	Tooltip:
 		'''
-		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
-		'Consume it'
-		''' */
-	// VanityTooltip: Grants most standard potion and station buffs
-	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
-	/* ExpandedTooltip:
+		Даёт иммунитет к дебаффам «Перевёрнутый», «Нестабильный» и «Проклятие луны»
+		Бафф «Силы Космоса» работает независимо от класса оружия
+		Даёт базовые баффы зелий и классовых станций (работает в инвентаре и слотах для украшений)
+		Призывает истинные глаза Ктулху сражаться за вас
+		Увеличивает время полёта на 100%
+		«Испей же из неё»
 		'''
-		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
-		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
-		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
-		''' */
+	VanityTooltip: Даёт базовые баффы зелий и классовых станций
+	HoldShift: "[c/ADD8E6:Удерживайте Левый Shift чтобы увидеть списов баффов]"
+	ExpandedTooltip:
+		'''
+		[c/ADD8E6:«Железная кожа», «Регенерация», «Скорость», «Регенерация маны», «Магическая сила», «Экономия патронов», «Лучник»,]
+		[c/ADD8E6:«Строитель», «Ящики», «Выносливость», «Рыбалка», «Жабры», «Счастливый», «Сердечный магнит», «Жизненная сила», «Добыча», «Обсидиановая кожа»,]
+		[c/ADD8E6:«Месть», «Ярость», «Сонар», «Призыватель», «Шипы», «Титан», «Согревание», «Хождение по воде», «Изысканное удовлетворение»,]
+		[c/ADD8E6:«Заточено», «Ящик с боеприпасами», «Ясновидение», «Колдовство», «Стратег»]
+		'''
 }
 
 GelicWings: {
@@ -1210,22 +1211,22 @@ HeartoftheMasochist: {
 	DisplayName: Сердце Властителя
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/PumpkingsCape] «Живая пустошь», [i:FargowiltasSouls/IceQueensCrown] «Гипотермия», «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
-		[i:FargowiltasSouls/BetsysHeart] «Тормоз», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Влага», «Укус зверя», «Укус Мутанта», «Океаническое терзание», дебаффам воды,
-		[i:FargowiltasSouls/PrecisionSeal] «Сражённый», [i:FargowiltasSouls/GalacticGlobe] «Перевёрнутый», «Нестабильный» и «Проклятие луны»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensCrown] «Гипотермия», «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
+		[i:FargowiltasSouls/BetsysHeart] «Тормоз», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Влага», «Укус зверя», «Океаническое терзание», дебаффам воды,
+		[i:FargowiltasSouls/PrecisionSeal] «Поражение», [i:FargowiltasSouls/ChaliceofTheMoon] «Перевёрнутый», «Нестабильный» и «Проклятие луны»
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Увеличивает урон и шанс крит. удара на 10% и сопротивление урону на 5%
 		[i:FargowiltasSouls/PumpkingsCape] Парирование аннулирует до 200 единиц урона. Парирования исцеляют вас в зависимости от заблокированного урона
 		[i:FargowiltasSouls/BetsysHeart] Огненный рывок накладывает «Проклятие Бетси»
 		[i:FargowiltasSouls/MutantAntibodies] При погружении в воду восстанавливает время полёта и увеличивает скорость и максимальное время полёта
 		[i:FargowiltasSouls/MutantAntibodies] Катание верхом на милом Рыброне даёт дебафф «Влага»
 		[i:FargowiltasSouls/PrecisionSeal] Зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки и показать ваш хёртбокс
-		[i:FargowiltasSouls/PrecisionSeal] Уменьшает ваш хёртбокс для выстрелов, даже когда не показан, [i:FargowiltasSouls/GalacticGlobe] и увеличивает время полёта
-		[i:FargowiltasSouls/GalacticGlobe] Даёт базовые баффы зелий (работает в инвентаре и слотах для украшений)
+		[i:FargowiltasSouls/PrecisionSeal] Уменьшает ваш хёртбокс для выстрелов, даже когда не показан, [i:FargowiltasSouls/ChaliceofTheMoon] и увеличивает время полёта
+		[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий (работает в инвентаре и слотах для украшений)
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
-		При выключенном эффекте, призывает [i:FargowiltasSouls/GalacticGlobe] маленькие истинные глаза Ктулху и [i:FargowiltasSouls/SaucerControlConsole] дружественную мини-тарелку, замедляющую поражённых врагов
+		При выключенном эффекте, призывает [i:FargowiltasSouls/ChaliceofTheMoon] маленькие истинные глаза Ктулху и [i:FargowiltasSouls/SaucerControlConsole] дружественную мини-тарелку, замедляющую поражённых врагов
 		«Тёплое, бьётся и не нуждается в теле»
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Нажмите клавишу смены боеприпасов, чтобы переключить используемые боеприпасы и [i:FargowiltasSouls/GalacticGlobe] даёт базовые баффы зелий"
+	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Нажмите клавишу смены боеприпасов, чтобы переключить используемые боеприпасы и [i:FargowiltasSouls/ChaliceofTheMoon] даёт базовые баффы зелий"
 }
 
 IceQueensCrown: {
@@ -1263,7 +1264,7 @@ MutantAntibodies: {
 	DisplayName: Антитела Мутанта
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Влага», «Укус зверя», «Укус Мутанта» и «Океаническое терзание»,
+		Даёт иммунитет к дебаффам «Влага», «Укус зверя» и «Океаническое терзание»,
 		а также к большинству дебаффов, вызванных погружением в воду
 		Даёт эффекты дебаффа «Влага», пока вы верхом на милом Рыброне
 		Увеличивает урон для класса взятого оружия на 20%, но понижает регенерацию здоровья
@@ -1342,7 +1343,7 @@ PrecisionSeal: {
 	DisplayName: Печать точности
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Сражённый»
+		Даёт иммунитет к дебаффу «Поражение»
 		Уменьшает ваш хёртбокс для выстрелов
 		Зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
 		Размер вашего хёртбокса уменьшен, даже если он скрыт
@@ -1359,7 +1360,6 @@ PumpkingsCape: {
 	DisplayName: Плащ тыквенного короля
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Живая пустошь»
 		Увеличивает урон и шанс крит. удара на 5%
 		Пока вы защищаетесь, значительно ускоряет регенерацию здоровья
 		Парирование аннулирует до 200 единиц урона
@@ -1412,7 +1412,7 @@ ReinforcedPlating: {
 	DisplayName: Укреплённая пластина
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Беззащитен», «Нано-инъекция» и к отбрасыванию
+		Даёт иммунитет к дебаффу «Пробитие» и отбрасыванию
 		Снижает получаемый урон на 4%
 		Дополнительно увеличивает защиту и сопротивление урону, пока вы под действием дебаффа
 		«Самая крепкая часть побеждённого врага»
@@ -1480,15 +1480,15 @@ SinisterIcon: {
 }
 
 CrystalSkull: {
-	// DisplayName: Crystal Skull
-	/* Tooltip:
+	DisplayName: Хрустальный череп
+	Tooltip:
 		'''
-		Grants immunity to Dazed and Webbed
-		Increases damage dealt by 15% and damage taken by 20%
-		Enemies are less likely to target you
-		Summons a crystal skull that charges energy as you attack, releasing a barrage once energy is fully charged
-		'Part of a collective consciousness'
-		''' */
+		Даёт иммунитет к дебаффам «Ошеломление» и «Паутина»
+		Увеличивает наносимый урон на 15% и получаемый урон на 20%
+		Враги с меньшей вероятностью нацеливаются на вас
+		Призывает хрустальный череп, который заряжется энергией, пока вы атакуете, и выпускает её при полном заряде
+		«Часть коллективного сознания»
+		'''
 }
 
 SlimyShield: {
@@ -1522,7 +1522,7 @@ SqueakyToy: {
 	DisplayName: Игрушка-пищалка
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Игрушка-пищалка» и «Чувство вины»
+		Даёт иммунитет к дебаффу «Игрушка-пищалка»
 		У атак врагов есть шанс 10% пискнуть и нанести вам всего 1 единицу урона
 		«Любимая игрушка побеждённого врага...?»
 		'''
@@ -1619,7 +1619,7 @@ ColossusSoul: {
 	DisplayName: Душа Колосса
 	Tooltip:
 		'''
-		Увеличивает максимальный запас здоровья на 50 единиц, [i:WormScarf][i:FargowiltasSouls/Devilshield] сопротивление урону на 20% и [i:860][i:ShinyStone] регенерацию здоровья на 3 ОЗ/сек
+		Увеличивает максимальный запас здоровья на 50 единиц, [i:WormScarf][i:FargowiltasSouls/Devilshield] сопротивление урону на 20% и [i:860][i:ShinyStone] регенерацию здоровья
 		[i:AnkhShield] Даёт иммунитет к отбрасыванию и некоторым дебаффам
 		[i:860] Уменьшает длительность послезельевой болезни на 25%
 		[i:FargowiltasSouls/Devilshield] Поглощает 25% урона, полученного игроками вашей команды, если ваше здоровье выше 25%
@@ -1645,8 +1645,8 @@ DimensionSoul: {
 	DisplayName: Душа Измерений
 	Tooltip:
 		'''
-		Увеличивает максимальный запас здоровья на 100, сопротивление урону на 20% и регенерацию здоровья на 6 единицы в секунду
-		[i:860] Уменьшает длительность послезельевой болезни на 25%
+		Увеличивает максимальный запас здоровья на 100, сопротивление урону на 20% и регенерацию здоровья
+		[i:CharmofMyths] Уменьшает длительность послезельевой болезни на 25%
 		Даёт иммунитет к отбрасыванию, некоторым дебаффам, включая «Мерцание», лаве, урону от падения и уничтожающей блоки взрывчатке
 		Даёт сверхзвуковые бег, полёт, рывки, цепление за стены, плавание, хождение по воде [c/BC5252:и выключает все ваши прыжки (можно переключить)]
 		[i:FargowiltasSouls/Devilshield] Поглощает 25% урона, полученного игрока вашей команды, если ваше здоровье выше 25%
@@ -1700,9 +1700,9 @@ MasochistSoul: {
 	DisplayName: Душа Властителя
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Увеличивает максимальный запас здоровья на 20%, [i:FargowiltasSouls/MagicalBulb] регенерацию здоровья на 1,5 ОЗ/сек, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] урон класса взятого оружия на 50% и [i:FargowiltasSouls/ReinforcedPlating] сопротивление урону на 5%
-		[i:FargowiltasSouls/GalacticGlobe] Увеличивает время полёта на 200%, скорость передвижения на 20% [i:FargowiltasSouls/QueenStinger] и пробивание брони на 50 единиц
-		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к большинству дебаффов, [i:FargowiltasSouls/GalacticGlobe] базовые баффы зелий и классовых станций и др.
+		[i:FargowiltasSouls/GuttedHeart] Увеличивает максимальный запас здоровья на 20%, [i:FargowiltasSouls/MagicalBulb] регенерацию здоровья, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] урон класса взятого оружия на 50% и [i:FargowiltasSouls/ReinforcedPlating] сопротивление урону на 5%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Увеличивает время полёта на 200%, скорость передвижения на 20% [i:FargowiltasSouls/QueenStinger] и пробивание брони на 50 единиц
+		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к большинству дебаффов, [i:FargowiltasSouls/ChaliceofTheMoon] базовые баффы зелий и классовых станций и др.
 		[i:FargowiltasSouls/NecromanticBrew] Увеличивает дистанцию рывков, [i:FargowiltasSouls/PungentEyeball] ваш курсор накладывает «Сублимацию»
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
 		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете весь урон во время рывка
@@ -1712,11 +1712,11 @@ MasochistSoul: {
 		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, makes enemies drop loot one more time
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
-		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/SkullCharm] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/GalacticGlobe] истинные глаза Ктулху
+		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/CrystalSkull] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/ChaliceofTheMoon] истинные глаза Ктулху
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту вашей последней смерти
 		«Прими власть, прими вечность»
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Даёт базовые баффы зелий и классовых станций"
+	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий и классовых станций"
 }
 
 SnipersSoul: {
@@ -1873,9 +1873,9 @@ GaiaGreaves: {
 	DisplayName: Поножи Геи
 	Tooltip:
 		'''
-		Увеличивают урон класса взятого оружия на 8%
-		Увеличивают шанс критического удара на 5%
-		Увеличивают скорость передвижения на 10%
+		Увеличивают урон класса взятого оружия на 10%
+		Увеличивают шанс критического удара на 6%
+		Увеличивают скорость передвижения, ближней атаки и атаки хлыстами на 15%
 		'''
 }
 
@@ -1883,8 +1883,10 @@ GaiaHelmet: {
 	DisplayName: Шлем Геи
 	Tooltip:
 		'''
-		Увеличивает урон класса взятого оружия на 8%
-		Увеличивает шанс критического удара на 5%
+		Увеличивает урон класса взятого оружия на 10%
+		Увеличивает шанс критического удара на 6%
+		Уменьшает затрату маны и боеприпасов на 10%
+		Увеличивает максимальный запас маны на 50
 		'''
 }
 
@@ -1892,8 +1894,9 @@ GaiaPlate: {
 	DisplayName: Латы Геи
 	Tooltip:
 		'''
-		Увеличивает урон класса взятого оружия на 8%
-		Увеличивают шанс критического удара на 5%
+		Увеличивает урон класса взятого оружия на 10%
+		Увеличивают шанс критического удара на 6%
+		Увеличивает максимальное число миньонов на 2
 		Уменьшают получаемый урон на 4%
 		'''
 }
@@ -2764,6 +2767,7 @@ DragonsDemise: {
 		'''
 		Использует гель в качестве боеприпасов
 		Шанс 66% сохранить боеприпасы
+		Игнорирует очень много защиты врагов
 		«Награда за шикарный реванш...»
 		'''
 }
@@ -2822,9 +2826,9 @@ HellZone: {
 		'''
 		Использует кости в качестве боеприпасов
 		Шанс 80% сохранить боеприпасы
-		Атаки на ЛКМ накладывают дебафф «Адский огонь»
+		Атаки на ЛКМ накладывают дебафф «Тёмное инферно»
 		ПКМ выпускает череп, который помечает врагов смертью
-		Помеченные враги получают в 5 раз больше постепенного урона от «Адского огня»
+		Помеченные враги получают в 5 раз больше постепенного урона от «Тёмного инферно»
 		«Награда за шикарный реванш...»
 		'''
 }
@@ -2885,7 +2889,7 @@ ForgorGift: {
 	Tooltip:
 		'''
 		[c/ff0000:Предмет отладки]
-		Сбрасывает прогресс по боссам/нашествиям из ваниллы и Соулс мода, ВКЛЮЧАЯ хардмод (флаг 'Стена Плоти повержена')
+		Сбрасывает прогресс по боссам/нашествиям из ваниллы и Соулс мода, ВКЛЮЧАЯ хардмод (флаг «Стена Плоти повержена»)
 		ПКМ позволяет получить новый подарок от Девиантта, откатывает использование кредитной/скидочной карты,
 		сбрасывает слот режима вечности, вакцину от бешенства, сухожилие оленя и т.д.
 		Нажмите ПКМ по предмету в инвентаре, чтобы сбросить пропуск первой фазы Мутанта

@@ -824,11 +824,11 @@ KingSlimeBallFriendly.DisplayName: Слизневый шар
 CultistFireballSpin.DisplayName: Огненный шар
 CultistIceBall.DisplayName: Ледяная сфера
 CultistIceShard.DisplayName: Ледяной осколок
-// CosmosTelegraph.DisplayName: Punch Telegraph
-// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
-// RockeaterLauncherHeld.DisplayName: Rockeater Launcher
-// MutantPenetratorNuke.DisplayName: Penetrator Nuke
-// MutantNukeBomb.DisplayName: Mutant Nuke Bomb
-// MutantSpikevine.DisplayName: Mutant Spikevine
-// TopazBoltExplosion.DisplayName: Topaz Bolt Explosion
-// MutantTwin.DisplayName: Mutant Twin
+CosmosTelegraph.DisplayName: Телеграф удара
+NatureExplosionTelegraph.DisplayName: Телеграф взрыва
+RockeaterLauncherHeld.DisplayName: Пожиракетомёт
+MutantPenetratorNuke.DisplayName: Взрыв проникателя
+MutantNukeBomb.DisplayName: ХАЙДРОДЖЕН БОМБ
+MutantSpikevine.DisplayName: Шипастая лоза
+TopazBoltExplosion.DisplayName: Топазовый взрыв
+MutantTwin.DisplayName: Близнец
