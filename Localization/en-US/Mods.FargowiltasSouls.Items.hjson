@@ -60,7 +60,7 @@ AshWoodEnchant: {
 	DisplayName: Ash Wood Enchantment
 	Tooltip:
 		'''
-		Grants immunity to Oiled and fire debuffs deal no damage
+		Fire debuffs deal no damage
 		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
 		Reduces damage from touching lava
 		'You're telling me this isn't wood?'
@@ -393,7 +393,7 @@ ObsidianEnchant: {
 	DisplayName: Obsidian Enchantment
 	Tooltip:
 		'''
-		Grants immunity to Oiled, lava, and fire debuffs deal no damage
+		Lava and fire debuffs deal no damage
 		You have normal movement and can swim in lava, granting the lava wet buff
 		While afflicted with a debuff or lava wet, your attacks spawn fire explosions
 		'The earth calls'
