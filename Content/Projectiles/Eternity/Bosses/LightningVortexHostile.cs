@@ -3,9 +3,11 @@ using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -59,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
             Player player = FargoSoulsUtil.PlayerExists(Projectile.localAI[1]);
             if (player == null && Projectile.ai[0] == 0)
                 TargetEnemies();
-
+            /*
             if (Projectile.localAI[0] < 90)
             {
                 if (Projectile.ai[0] != 0)
@@ -76,6 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
                     d.scale = 1.5f;
                 }
             }
+            */
 
             Projectile.localAI[0]++;
             if (Projectile.localAI[0] <= 50)
@@ -241,6 +244,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Projectile.localAI[0] <= 90)
+            {
+                Asset<Texture2D> line = TextureAssets.Extra[178];
+                float opacity = 1f; MathF.Pow(Projectile.localAI[0] / 90f, 0.5f);
+                Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, DrawColor * opacity, Projectile.ai[1], new Vector2(0, line.Height() * 0.5f), new Vector2(0.66f, 6), SpriteEffects.None);
+            }
+
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw

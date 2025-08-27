@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	DisplayName: Мерзкое присутствие
-	Description: Защита, сопротивление урону и скорость восстановления здоровья снижены; эффекты дебаффа «Лунный укус»
+	Description: Регенерация здоровья замедлена; эффекты дебаффа «Лунный укус»
 }
 
 BaronsBurdenBuff: {
@@ -145,12 +145,12 @@ MutantFangBuff: {
 
 MutantPresenceBuff: {
 	DisplayName: Присутствие Мутанта
-	Description: Защита, сопротивление урону и регенерация здоровья снижены; снижен радиус грэйза; выключены некоторые переключаемые эффекты
+	Description: Получаемое здоровье и радиус грэйза снижены, некоторые переключаемые эффекты выключены
 }
 
 BlackInfernoBuff: {
-	// DisplayName: Black Inferno
-	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
+	DisplayName: Тёмное инферно
+	Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {
@@ -209,8 +209,8 @@ CurseoftheMoonBuff: {
 }
 
 DefenselessBuff: {
-	DisplayName: Беззащитный
-	Description: Ваша защита полностью сломлена
+	DisplayName: Пробитие
+	Description: Ваше сопротивление урону снижено вдвое
 }
 
 FlamesoftheUniverseBuff: {
@@ -237,7 +237,7 @@ FusedBuff: {
 	Description:
 		'''
 		Сейчас вылетит бомба!
-		Стойте на месте 1 секунду, чтобы потушить фитиль
+		Коснитесь врага, чтобы передать ему дебафф!
 		'''
 }
 
@@ -320,8 +320,12 @@ NeurotoxinBuff: {
 
 PoweroftheCosmosBuff: {
 	DisplayName: Силы Космоса
-	Description: Оружия, совпадающие с фазой Лунного лорда, наносят в 1,4 раза больше урона!
-	CombatText: х1,4 ед. {0} урона!
+	Description:
+		'''
+		Оружия, совпадающие с фазой Лунного лорда, наносят в 1,5 раза больше урона!
+		Призываемые существа наносят половину урона, пока вы не держите призывательное оружие
+		'''
+	CombatText: x1,5 ед. {0} урона!
 	Melee: ближнего
 	Ranged: стрелкового
 	Magic: магического
@@ -701,7 +705,7 @@ StardustBuff: {
 
 AmbrosiaBuff: {
 	DisplayName: Амброзия
-	Description: +20% к урону, +8% к сопротивлению урона, +2,5 ОЗ/сек
+	Description: +20% к урону, +8% к сопротивлению урона, регенерация здоровья ускорена
 }
 
 MutantDesperationBuff: {

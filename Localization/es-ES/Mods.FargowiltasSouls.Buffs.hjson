@@ -145,7 +145,7 @@ MutantFangBuff: {
 
 MutantPresenceBuff: {
 	// DisplayName: Mutant Presence
-	// Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
+	// Description: Reduces healing received and graze radius, disables certain accessory effects
 }
 
 BlackInfernoBuff: {

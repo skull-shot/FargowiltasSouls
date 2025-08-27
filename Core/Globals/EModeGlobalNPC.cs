@@ -198,12 +198,22 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
+        public static bool DemonCondition(Player player) =>  !Main.remixWorld || MathF.Abs(player.Center.X / 16f - Main.spawnTileX) > Main.maxTilesX / 3;
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
             if (WorldSavingSystem.EternityMode)
             {
                 spawnRate = (int)(spawnRate * 0.9);
                 maxSpawns = (int)(maxSpawns * 1.2f);
+
+                if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
+                {
+                    if (DemonCondition(player))
+                    {
+                        spawnRate /= 2;
+                        maxSpawns *= 2;
+                    }
+                }
 
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
                     || (player.ZoneTowerVortex && NPC.ShieldStrengthTowerVortex == 0)
@@ -455,7 +465,7 @@ namespace FargowiltasSouls.Core.Globals
                             if (noInvasion && !oldOnesArmy && bossCanSpawn)
                             {
                                 pool[NPCID.Clown] = 0.01f;
-                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.005f)
+                                if (!pool.TryGetValue(NPCID.Werewolf, out float value) || value < 0.005f)
                                     pool[NPCID.Werewolf] = 0.005f;
                             }
                                 

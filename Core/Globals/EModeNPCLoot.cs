@@ -6,13 +6,17 @@ using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Pets;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateInvasion;
+using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.Events;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -77,7 +81,8 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.ZombieMushroom,
             NPCID.ZombieMushroomHat,
             NPCID.IceGolem,
-            NPCID.SandElemental
+            NPCID.SandElemental,
+            NPCID.RedDevil
         ];
         static List<int> Hornets =
         [
@@ -304,14 +309,6 @@ namespace FargowiltasSouls.Core.Globals
                 case var _ when Mimics.Contains(npc.type):
                     switch (npc.type)
                     {
-                        case NPCID.Mimic:
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.GoldenCrate));
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
-                            break;
-                        case NPCID.IceMimic:
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
-                            break;
                         case NPCID.BigMimicCorruption:
                             FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.CorruptFishingCrateHard));
                             break;
@@ -341,13 +338,6 @@ namespace FargowiltasSouls.Core.Globals
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new DownedEvilBossDropCondition(), ItemID.FastClock, 50));
                     break;
                 #endregion
-                case NPCID.SandElemental:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.OasisCrate));
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.OasisCrateHard));
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<SandsofTime>(), 3));
-
-                    FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ModContent.ItemType<SandsofTime>()));
-                    break;
                 case NPCID.Everscream:
                 case NPCID.SantaNK1:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Present, 1, 1, 5));
@@ -397,23 +387,6 @@ namespace FargowiltasSouls.Core.Globals
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.GoodieBag, 1, 1, 5));
                     }
                     break;
-                case NPCID.WyvernHead:
-                    {
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FloatingIslandFishingCrate));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FloatingIslandFishingCrateHard));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<WyvernFeather>(), 3));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<WyvernFeather>()));
-                    }
-                    break;
-                case NPCID.IceGolem:
-                    {
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<FrigidGrasp>(), 3));
-                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.SnowGlobe));
-                        FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<FrigidGrasp>()));
-                    }
-                    break;
                 case NPCID.GraniteGolem:
                 case NPCID.GraniteFlyer:
                     {
@@ -445,7 +418,35 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.SporeBat:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Shroomerang, 10));
                     break;
+
+                case NPCID.RedDevil:
+                    // evil evil evil
+                    foreach (var rule in npcLoot.Get(includeGlobalDrops: false))
+                    {
+                        if (rule is CommonDrop commonDrop)
+                        {
+                            if (commonDrop.itemId == ItemID.FireFeather)
+                            {
+                                npcLoot.Remove(rule);
+                                FargoSoulsUtil.DropBasedOnEmode(npcLoot, ItemDropRule.Common(ItemID.FireFeather, 5), rule);
+                            }
+                        }
+                        if (rule is LeadingConditionRule leadingRule)
+                        {
+                            var enumerator = new List<IItemDropRuleChainAttempt>(leadingRule.ChainedRules);
+                            foreach (var chainedRule in enumerator)
+                            {
+                                if (chainedRule.RuleToChain is CommonDrop chainedCommonDrop && (chainedCommonDrop.itemId == ItemID.UnholyTrident || chainedCommonDrop.itemId == ItemID.FlowerofFire))
+                                {
+                                    leadingRule.ChainedRules.Remove(chainedRule);
+                                    leadingRule.OnSuccess(new DropBasedOnEMode(ItemDropRule.Common(chainedCommonDrop.itemId, 3), chainedCommonDrop));
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
+            /*
             #region early bird
             if (EarlyBirdEnemies.Contains(npc.type))
             {
@@ -485,8 +486,81 @@ namespace FargowiltasSouls.Core.Globals
 
             }
             #endregion
+            */
             npcLoot.Add(emodeRule);
         }
+
+        #region Early Bird Loot
+        public override void Load()
+        {
+            MonoModHooks.Add(ModifyNPCLoot_Method, ModifyNPCLoot_Detour);
+        }
+        private static readonly MethodInfo ModifyNPCLoot_Method = typeof(NPCLoader).GetMethod("ModifyNPCLoot", LumUtils.UniversalBindingFlags);
+        public delegate void Orig_ModifyNPCLoot(NPC npc, NPCLoot npcLoot);
+        internal static void ModifyNPCLoot_Detour(Orig_ModifyNPCLoot orig, NPC npc, NPCLoot npcLoot)
+        {
+            orig(npc, npcLoot);
+            if (EarlyBirdEnemies.Contains(npc.type))
+            {
+                foreach (var rule in npcLoot.Get(includeGlobalDrops: false))
+                {
+                    if (AllowEarlyBirdDrop(npc, npcLoot, rule))
+                    {
+                        continue;
+                    }
+                    npcLoot.Remove(rule);
+                    FargoSoulsUtil.LockEarlyBirdDrop(npcLoot, rule);
+                }
+            }
+
+            // add loot exempt from hardmode lock
+            switch (npc.type)
+            {
+                case NPCID.WyvernHead:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FloatingIslandFishingCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FloatingIslandFishingCrateHard));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<WyvernFeather>(), 3));
+                    FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<WyvernFeather>()));
+                    break;
+
+                case NPCID.Mimic:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.GoldenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
+                    break;
+
+                case NPCID.IceMimic:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
+                    break;
+
+                case NPCID.IceGolem:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<FrigidGrasp>(), 3));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.SnowGlobe));
+                    FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.Common(ModContent.ItemType<FrigidGrasp>()));
+                    break;
+
+                case NPCID.SandElemental:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.OasisCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.OasisCrateHard));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<SandsofTime>(), 3));
+
+                    FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ModContent.ItemType<SandsofTime>()));
+                    break;
+
+                case NPCID.RedDevil:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.LavaCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.LavaCrateHard));
+                    break;
+            }
+
+        }
+        public static bool AllowEarlyBirdDrop(NPC npc, NPCLoot npcLoot, IItemDropRule? rule) // for mod support
+        {
+            return false;
+        }
+        #endregion
     }
     public class EModeFirstKillDrop : GlobalNPC
     {

@@ -49,7 +49,6 @@ namespace FargowiltasSouls.Core.Globals
         public static int boss = -1;
 #pragma warning restore CA2211
 
-        public int originalDefense;
         public bool BrokenArmor;
 
         public bool CanHordeSplit = true;
@@ -114,6 +113,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool SinisterIconFullFight;
 
         public int GrazeCD;
+
+        public float defKnockBackResist;
 
         //        public static bool Revengeance => CalamityMod.World.CalamityWorld.revenge;
 
@@ -215,68 +216,13 @@ namespace FargowiltasSouls.Core.Globals
 
             if (SinisterIconBoss(npc))
             {
-                foreach (var player in Main.ActivePlayers)
-                {
-                    if (!(player.Alive() && player.HasEffect<SinisterIconDropsEffect>()))
-                        SinisterIconFullFight = false;
-                }
+                if (!Main.player.Any(p => p.Alive() && p.HasEffect<SinisterIconDropsEffect>()))
+                    SinisterIconFullFight = false;
             }
 
             if (!FirstTick)
             {
-                originalDefense = npc.defense;
-
-
-                //                switch (npc.type)
-                //                {
-                //                    case NPCID.TheDestroyer:
-                //                    case NPCID.TheDestroyerBody:
-                //                    case NPCID.TheDestroyerTail:
-                //                        npc.buffImmune[ModContent.BuffType<TimeFrozen>()] = false;
-                //                        npc.buffImmune[ModContent.BuffType<Frozen>()] = false;
-                //                        //npc.buffImmune[BuffID.Darkness] = false;
-                //                        break;
-
-                //                    /*case NPCID.WallofFlesh:
-                //                    case NPCID.WallofFleshEye:
-                //                    case NPCID.MoonLordCore:
-                //                    case NPCID.MoonLordHand:
-                //                    case NPCID.MoonLordHead:
-                //                    case NPCID.MoonLordLeechBlob:
-                //                    case NPCID.TargetDummy:
-                //                    case NPCID.GolemFistLeft:
-                //                    case NPCID.GolemFistRight:
-                //                    case NPCID.GolemHead:
-                //                    case NPCID.DungeonGuardian:
-                //                    case NPCID.DukeFishron:
-                //                        SpecialEnchantImmune = true;
-                //                        break;*/
-
-                //                    default:
-                //                        break;
-                //                }
-
-                //                //critters
-                //                if (npc.damage == 0 && !npc.townNPC && npc.lifeMax == 5)
-                //                {
-                //                    Player player = Main.player[Main.myPlayer];
-
-                //                    /*if ( npc.releaseOwner == player.whoAmI && player.FargoSouls().WoodEnchant)
-                //                    {
-                //                        switch (npc.type)
-                //                        {
-                //                            case NPCID.Bunny:
-
-
-                //                                npc.active = false;
-                //                                break;
-                //                        }
-
-
-
-                //                        ExplosiveCritter = true;
-                //                    }*/
-                //                }
+                defKnockBackResist = npc.knockBackResist;
 
                 FirstTick = true;
             }
@@ -327,12 +273,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void PostAI(NPC npc)
         {
-            if (BrokenArmor)
-            {
-                npc.defense = originalDefense - 10;
-                if (npc.defense < 0)
-                    npc.defense = 0;
-            }
 
             if (SnowChilled)
             {
@@ -1369,6 +1309,9 @@ namespace FargowiltasSouls.Core.Globals
 
             if (target.type == ModContent.NPCType<CreeperGutted>())
                 modifiers.FinalDamage /= 20;
+
+            if (BrokenArmor)
+                modifiers.ArmorPenetration += 10;
         }
 
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item)

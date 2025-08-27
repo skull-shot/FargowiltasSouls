@@ -80,6 +80,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             ++Projectile.localAI[0];
             if (Projectile.localAI[0] == 48.0)
                 Projectile.localAI[0] = 0.0f;
+
+            float accelTime = 60 * Projectile.MaxUpdates;
+            if (++Projectile.localAI[2] < accelTime)
+            {
+                Projectile.position -= Projectile.velocity * (1 - Projectile.localAI[2] / accelTime);
+            }
+
             else if (Projectile.alpha == 0)
             {
                 for (int index1 = 0; index1 < 2; ++index1)
