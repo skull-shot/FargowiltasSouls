@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
         {
             Projectile.rotation += MathHelper.TwoPi / 7f;
             Timer++;
-            float chargeTime = 60 * 4;
+            float chargeTime = 60 * 5;
             float homeTime = Main.hardMode ? 60 : 120;
             float maxScale = 3f;
 
@@ -72,10 +72,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
                 {
                     dir = Projectile.DirectionTo(player.Center);
                 }
-                float spd = MathHelper.Lerp(8f, 16f, Projectile.scale / maxScale);
+                float spd = MathHelper.Lerp(7f, 15f, Projectile.scale / maxScale);
                 if (!Main.hardMode)
                     spd /= 2;
-                Projectile.velocity = dir * spd;
                 SoundEngine.PlaySound(SoundID.Item45, Projectile.Center);
             }
             else

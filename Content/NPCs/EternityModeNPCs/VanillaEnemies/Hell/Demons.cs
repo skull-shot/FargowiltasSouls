@@ -33,6 +33,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             if (npc.type == NPCID.RedDevil)
             {
+                npc.npcSlots = 3;
                 if (Main.hardMode)
                 {
                     if (npc.lifeMax < 2200)
@@ -75,11 +76,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 
             if (npc.type == NPCID.RedDevil)
             {
-                if (NPC.CountNPCS(NPCID.RedDevil) > 1)
-                {
-                    npc.active = false;
-                    return;
-                }
                 if (FargoSoulsUtil.HostCheck)
                 {
                     int type = NPCID.Demon;
