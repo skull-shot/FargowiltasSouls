@@ -585,6 +585,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
             }
 
+            if (Player.miscCounter % 150 == 0)
+            {
+                for (int i = OldPositionBig.Length - 1; i > 0; i--)
+                {
+                    OldPositionBig[i] = OldPositionBig[i - 1];
+                }
+                OldPositionBig[0] = Player.position;
+            }
+
+
             /*if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
             {
                 FusedStandStillTime++;
