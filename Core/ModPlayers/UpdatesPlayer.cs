@@ -487,9 +487,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Daybroken)
                 DamageOverTime(30);
 
-            if (Hellfire)
-                DamageOverTime(10);
-
             if (GodEater)
             {
                 DamageOverTime(170, true);
@@ -539,7 +536,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.onFire2) regen += 24;
                 if (Player.burned) regen += 60;
 
-                if (Hellfire) regen += 10;
                 if (Shadowflame) regen += 16;
                 if (Daybroken) regen += 30;
                 if (FlamesoftheUniverse) regen += 79;

@@ -148,11 +148,6 @@ MutantPresenceBuff: {
 	Description: 减少防御力、伤害减免和生命恢复速度，减小擦弹范围，关闭部分饰品效果
 }
 
-HellfireBuff: {
-	// DisplayName: Hellfire
-	// Description: Slowly losing life
-}
-
 BlackInfernoBuff: {
 	// DisplayName: Black Inferno
 	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff

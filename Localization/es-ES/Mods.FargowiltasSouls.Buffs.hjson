@@ -148,11 +148,6 @@ MutantPresenceBuff: {
 	// Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
 }
 
-HellfireBuff: {
-	// DisplayName: Hellfire
-	// Description: Slowly losing life
-}
-
 BlackInfernoBuff: {
 	// DisplayName: Black Inferno
 	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
