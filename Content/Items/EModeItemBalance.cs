@@ -413,11 +413,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
-                case ItemID.TempestStaff:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.2f;
-                    return EModeChange.Buff;
-
                 case ItemID.BouncingShield: //sergeant united shield
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
