@@ -1693,7 +1693,7 @@ EternitySoul: {
 		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		// StartsWithFilter: "'"
 		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
-		// ContainsFilter: Following effects|Grants togglable
+		// ContainsFilter: Following effects|Grants toggleable
 		// Flavor: "'Mortal or Immortal, all things acknowledge your claim to divinity.'"
 	}
 }

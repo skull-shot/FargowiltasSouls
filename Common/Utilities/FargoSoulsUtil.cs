@@ -838,6 +838,15 @@ namespace FargowiltasSouls //lets everything access it without using
             return true;
         }
 
+        public static bool LockJungleMimicDrops(NPCLoot npcLoot, IItemDropRule rule)
+        {
+            LockOutsideofCelebSeed lockCondition = new();
+            IItemDropRule conditionalRule = new LeadingConditionRule(lockCondition);
+            conditionalRule.OnSuccess(rule);
+            npcLoot.Add(conditionalRule);
+            return true;
+        }
+
         public static void AddEarlyBirdDrop(NPCLoot npcLoot, IItemDropRule rule)
         {
             EModeEarlyBirdRewardDropCondition dropCondition = new();

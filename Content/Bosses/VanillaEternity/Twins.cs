@@ -594,9 +594,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (auraDistance < 2000 - 1)
                     {
                         if ((DeathrayState == 1 && npc.ai[0] >= 155f) || DeathrayState == 2)
-                            EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>(), ModContent.BuffType<HellfireBuff>());
-                        else
-                            EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<OiledBuff>());
+                            EModeGlobalNPC.Aura(npc, auraDistance, true, -1, default, ModContent.BuffType<DaybrokenBuff>());
                             
                         float threshold = auraDistance;
 

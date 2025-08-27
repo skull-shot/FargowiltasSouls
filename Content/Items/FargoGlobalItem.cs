@@ -181,7 +181,7 @@ namespace FargowiltasSouls.Content.Items
             //    return false;
             //}
 
-            if (modPlayer.BuilderMode && (item.createTile > TileID.Dirt || item.createWall > 0) && item.stack >= 500)
+            if (modPlayer.BuilderMode && (item.createTile >= TileID.Dirt || item.createWall > 0) && item.stack >= 500)
                 return false;
 
             return base.ConsumeItem(item, player);

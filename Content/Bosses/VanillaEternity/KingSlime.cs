@@ -638,7 +638,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (FargoSoulsUtil.HostCheck
                 && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
-                && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type))
+                && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type) && !NPC.AnyNPCs(ModContent.NPCType<ReleasedMutant>()))
             {   
                 
                 // manual gore spawn

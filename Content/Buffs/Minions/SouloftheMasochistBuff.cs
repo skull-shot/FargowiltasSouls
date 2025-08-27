@@ -11,12 +11,8 @@ namespace FargowiltasSouls.Content.Buffs.Minions
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Soul of the Master");
-            // Description.SetDefault("The power of Eternity Mode is with you");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "受虐之魂");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "受虐模式的力量与你同在");
         }
 
         public override void Update(Player player, ref int buffIndex)
@@ -27,7 +23,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                 Item item = null;
 
                 
-                if (player.AddEffect<SkeleMinionEffect>(item))
+                /*if (player.AddEffect<SkeleMinionEffect>(item))
                 {
                     fargoPlayer.SkeletronArms = true;
                     const int damage = 64;
@@ -44,33 +40,20 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                     }
                     FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, 1);
                     FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, -1);
-                }
+                }*/
 
                 if (player.AddEffect<PungentMinion>(item))
                 {
                     fargoPlayer.PungentEyeballMinion = true;
-                    const int damage = 150;
+                    int damage = PungentMinion.BaseDamage(player);
                     if (player.ownedProjectileCounts[ModContent.ProjectileType<PungentEyeballMinion>()] < 1)
                         FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<PungentEyeballMinion>(), damage, 0f, player.whoAmI);
                 }
 
-
-                if (player.AddEffect<ProbeMinionEffect>(item))
-                {
-                }
-
-                /*if (player.AddEffect<PlantMinionEffect>(item))
-                {
-                    fargoPlayer.PlanterasChild = true;
-                    const int damage = 120;
-                    if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<PlanterasChild>()] < 1)
-                        FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, -Vector2.UnitY, ModContent.ProjectileType<PlanterasChild>(), damage, 3f, player.whoAmI);
-                }*/
-
                 if (player.AddEffect<UfoMinionEffect>(item))
                 {
                     fargoPlayer.MiniSaucer = true;
-                    const int damage = 100;
+                    int damage = UfoMinionEffect.BaseDamage(player);
                     if (player.ownedProjectileCounts[ModContent.ProjectileType<MiniSaucer>()] < 1)
                         FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), damage, 3f, player.whoAmI);
                 }
@@ -88,7 +71,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                 {
                     fargoPlayer.TrueEyes = true;
 
-                    const int damage = 180;
+                    int damage = MasoTrueEyeMinion.BaseDamage(player);
 
                     if (player.ownedProjectileCounts[ModContent.ProjectileType<TrueEyeL>()] < 1)
                         FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<TrueEyeL>(), damage, 3f, player.whoAmI, -1f);

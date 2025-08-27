@@ -309,8 +309,8 @@ namespace FargowiltasSouls.Core.Globals
                             FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
                             break;
                         case NPCID.IceMimic:
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.LavaCrate));
-                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.LavaCrateHard));
+                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
+                            FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
                             break;
                         case NPCID.BigMimicCorruption:
                             FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.CorruptFishingCrateHard));
@@ -323,6 +323,8 @@ namespace FargowiltasSouls.Core.Globals
                             break;
                         case NPCID.BigMimicJungle:
                             FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.JungleFishingCrateHard));
+                            int[] items = [ItemID.AngelStatue, ItemID.FartinaJar, ItemID.StinkPotion, ItemID.Coal, ItemID.RedPotion, ItemID.GoldenShower, ItemID.MasterBait, ItemID.WaterGun, ItemID.PoopBlock, ItemID.GelBalloon];
+                            npcLoot.RemoveWhere(rule => rule is CommonDrop drop && items.Contains(drop.itemId) && FargoSoulsUtil.LockJungleMimicDrops(npcLoot, rule));
                             break;
                     }
                     break;

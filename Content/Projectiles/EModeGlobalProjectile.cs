@@ -1418,7 +1418,7 @@ namespace FargowiltasSouls.Content.Projectiles
             // buff yoyos to move faster with melee speed
             if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
             {
-                Vector2 nextPos = projectile.position + projectile.velocity * Math.Max(0, Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee));
+                Vector2 nextPos = projectile.position + projectile.velocity * Math.Max(0, Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee) - 1);
                 if (!Collision.SolidCollision(nextPos, projectile.width, projectile.height))
                     projectile.position = nextPos;
             }
