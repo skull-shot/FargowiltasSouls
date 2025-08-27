@@ -518,7 +518,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             if (FlamesoftheUniverse)
-                DamageOverTime((30 + 50 + 48 + 30) / 2, true);
+                DamageOverTime(79, true);
 
             if (IvyVenom && !Player.venom)
                 DamageOverTime(16, true);
@@ -529,18 +529,32 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (BleedingOut)
                 DamageOverTime(Main.hardMode ? 80 : 20, true);
 
-            if (Player.onFire && Player.HasEffect<AshWoodEffect>())
+            if (Player.HasEffect<AshWoodEffect>() || Oiled) //i dont think theres a better way to do this
             {
-                Player.lifeRegen += 8;
-                if (Player.lifeRegen > 0)
-                    Player.lifeRegen = 0;
-            }
+                int regen = 0;
+                if (Player.onFire) regen += 8;
+                if (Player.onFire3) regen += 8;
+                if (Player.onFrostBurn) regen += 16;
+                if (Player.onFrostBurn2) regen += 16;
+                if (Player.onFire2) regen += 24;
+                if (Player.burned) regen += 60;
 
-            if (Player.burned && Player.HasEffect<AshWoodEffect>())
-            {
-                Player.lifeRegen += 60;
-                if (Player.lifeRegen > 0)
-                    Player.lifeRegen = 0;
+                if (Hellfire) regen += 10;
+                if (Shadowflame) regen += 10;
+                if (Daybroken) regen += 30;
+                if (FlamesoftheUniverse) regen += 79;
+
+                if (regen > 0)
+                {
+                    if (Player.HasEffect<AshWoodEffect>())
+                    {
+                        Player.lifeRegen += regen;
+                        if (Player.lifeRegen > 0)
+                            Player.lifeRegen = 0;
+                    }
+                    if (Oiled)
+                        Player.lifeRegen -= regen;
+                }
             }
 
             if (Player.lifeRegen < 0)

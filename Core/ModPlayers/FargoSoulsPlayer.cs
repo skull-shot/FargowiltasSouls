@@ -441,6 +441,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Fused = false;
             Shadowflame = false;
             Daybroken = false;
+            Hellfire = false;
             Oiled = false;
             Slimed = false;
             noDodge = false;
