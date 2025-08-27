@@ -28,17 +28,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override bool Eternity => true;
         public override int NumFrames => 10;
 
-        public static int WingSlotID
-        {
-            get;
-            private set;
-        }
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            WingSlotID = Item.wingSlot;
 
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;

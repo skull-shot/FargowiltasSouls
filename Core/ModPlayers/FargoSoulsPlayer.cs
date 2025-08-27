@@ -1238,6 +1238,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
+        
+        
+
         public override void OnExtraJumpStarted(ExtraJump jump, ref bool playSound)
         {
             if (Player.HasEffect<CobaltEffect>())
@@ -1441,6 +1444,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                     //{
                     layer.Hide();
                     //}
+                }
+            }
+
+            if (drawInfo.drawPlayer.wings == EquipLoader.GetEquipSlot(Mod, "FlightMasterySoul", EquipType.Wings))
+            {
+                foreach (var layer in PlayerDrawLayerLoader.Layers)
+                {
+                    if (layer == Terraria.DataStructures.PlayerDrawLayers.Wings)
+                    {
+                        //layer.Hide();
+                    }
                 }
             }
 
