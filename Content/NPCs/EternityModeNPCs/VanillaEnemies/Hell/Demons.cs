@@ -31,16 +31,23 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public List<int> DevilDemons = [];
         public override void SetDefaults(NPC npc)
         {
-            if (HellEnemies.HellBuffActive)
+            if (Main.hardMode)
             {
                 if (npc.type == NPCID.RedDevil)
                 {
-                    npc.lifeMax = 2200;
+                    if (npc.lifeMax < 2200)
+                        npc.lifeMax = 2200;
                 }
                 else
                 {
-                    npc.lifeMax = 550;
+                    if (npc.lifeMax < 550)
+                        npc.lifeMax = 550;
                 }
+            }
+            else
+            {
+                if (npc.lifeMax < 200)
+                    npc.lifeMax = 200;
             }
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
@@ -55,7 +62,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             base.OnFirstTick(npc);
 
-            if (HellEnemies.HellBuffActive)
+            if (Main.hardMode)
             {
                 if (npc.type == NPCID.RedDevil)
                 {
@@ -92,28 +99,26 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                     }
                 }
             }
-            else
+
+            if (npc.type == NPCID.Demon)
             {
                 int hordeAmt = Main.rand.Next(5) + 1;
-
-                if (npc.type == NPCID.RedDevil)
-                {
+                if (!Main.hardMode)
                     hordeAmt = 2;
-                }
 
-                if (Main.hardMode && Main.rand.NextBool(4) && npc.FargoSouls().CanHordeSplit)
+                if (Main.rand.NextBool(4) && npc.FargoSouls().CanHordeSplit)
                     EModeGlobalNPC.Horde(npc, hordeAmt);
             }
         }
         public override bool SafePreAI(NPC npc)
         {
             bool lineOfSight = npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0);
-            if (npc.HasPlayerTarget && HellEnemies.HellBuffActive)
+            if (npc.HasPlayerTarget && Main.hardMode)
             {
                 npc.noTileCollide = !lineOfSight;
             }
 
-            if (HellEnemies.HellBuffActive)
+            if (Main.hardMode)
             {
                 if (npc.type == NPCID.Demon)
                 {
@@ -123,7 +128,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                         npc.target = devil.target;
                         if (Counter < 0) // dash attack
                         {
-                            if (!devil.HasPlayerTarget)
+                            if (!npc.HasPlayerTarget)
                             {
                                 Counter = 0;
                                 npc.netUpdate = true;
@@ -138,11 +143,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                             int endTime = 150;
                             if (timer < windupTime) // windup
                             {
-                                Vector2 angle = Main.player[devil.target].HorizontalDirectionTo(npc.Center) * Vector2.UnitX.RotatedBy(Angle);
+                                Vector2 angle = Main.player[npc.target].HorizontalDirectionTo(npc.Center) * Vector2.UnitX.RotatedBy(Angle);
                                 npc.spriteDirection = npc.direction = -angle.X.NonZeroSign();
                                 if (timer < windupTime - chargeTime)
                                 {
-                                    Vector2 windupPos = Main.player[devil.target].Center + angle * 250;
+                                    Vector2 windupPos = Main.player[npc.target].Center + angle * 250;
                                     npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, 0.8f, 0.8f);
                                 }
                                 else if (timer == windupTime - chargeTime)
@@ -151,7 +156,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                                 }
                                 else
                                 {
-                                    npc.velocity += npc.DirectionTo(Main.player[devil.target].Center) * 0.4f;
+                                    npc.velocity += npc.DirectionTo(Main.player[npc.target].Center) * 0.4f;
                                     npc.noGravity = true;
                                 }
                             }
@@ -269,6 +274,66 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
             }
             else
             {
+                if (npc.ai[0] == 295f && Counter == 0 && npc.HasPlayerTarget && Main.player[npc.target].Distance(npc.Center) < 800 && lineOfSight)
+                {
+                    Counter = -1;
+                    npc.netUpdate = true;
+                }
+                if (Counter < 0) // dash attack
+                {
+                    if (!npc.HasPlayerTarget)
+                    {
+                        Counter = 0;
+                        npc.netUpdate = true;
+                    }
+                    Counter--;
+                    npc.knockBackResist = 0f;
+
+                    int timer = -Counter;
+
+                    int windupTime = 120;
+                    int chargeTime = 35 + 35;
+                    int endTime = 10;
+                    if (timer < windupTime) // windup
+                    {
+                        Vector2 angle = Main.player[npc.target].HorizontalDirectionTo(npc.Center) * Vector2.UnitX.RotatedBy(Angle);
+                        npc.spriteDirection = npc.direction = -angle.X.NonZeroSign();
+                        if (timer < windupTime - chargeTime)
+                        {
+                            Vector2 windupPos = Main.player[npc.target].Center + angle * 250;
+                            float maxSpeed = 18f;
+                            float accel = 0.3f;
+                            float decel = 0.5f;
+                            float resistance = npc.velocity.Length() * accel / maxSpeed;
+                            npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, accel - resistance, decel + resistance);
+                        }
+                        else if (timer == windupTime - chargeTime)
+                        {
+                            npc.velocity *= 0;
+                        }
+                        else
+                        {
+                            npc.velocity += npc.DirectionTo(Main.player[npc.target].Center) * 0.4f;
+                            npc.noGravity = true;
+                        }
+                    }
+                    else if (timer < windupTime + endTime) // dash end
+                    {
+                        npc.velocity *= 0.85f;
+                    }
+                    else
+                    {
+                        Counter = 0;
+                        npc.ai[0] = 296f;
+                        npc.netUpdate = true;
+                    }
+                    return false;
+                }
+                else
+                {
+                    npc.knockBackResist = 0.5f;
+                }
+                /*
                 if ((npc.type == NPCID.Demon && npc.ai[0] == 100f)
                 || (npc.type == NPCID.RedDevil && ++Counter > 300))
                 {
@@ -282,6 +347,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                         FargoSoulsUtil.XWay(amount, npc.GetSource_FromThis(), npc.Center, ProjectileID.DemonSickle, 1, damage, .5f);
                     }
                 }
+                */
             }
 
 

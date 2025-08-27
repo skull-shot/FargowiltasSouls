@@ -205,6 +205,12 @@ namespace FargowiltasSouls.Core.Globals
                 spawnRate = (int)(spawnRate * 0.9);
                 maxSpawns = (int)(maxSpawns * 1.2f);
 
+                if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
+                {
+                    spawnRate /= 4;
+                    maxSpawns *= 4;
+                }
+
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
                     || (player.ZoneTowerVortex && NPC.ShieldStrengthTowerVortex == 0)
                     || (player.ZoneTowerNebula && NPC.ShieldStrengthTowerNebula == 0)

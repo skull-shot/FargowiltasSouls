@@ -25,6 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             Projectile.penetrate = -1;
             Projectile.hostile = true;
             Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 60 * 8;
             Projectile.Opacity = 1f;
             Projectile.alpha = 0;
@@ -38,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             Projectile.rotation += MathHelper.TwoPi / 7f;
             Timer++;
             float chargeTime = 60 * 4;
-            float homeTime = 60;
+            float homeTime = Main.hardMode ? 60 : 120;
             float maxScale = 3f;
             if (Timer < chargeTime)
             {
@@ -59,7 +60,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
                 Player player = Main.player[(int)TargetID];
                 if (player != null && player.Alive())
                 {
-                    Projectile.velocity = Projectile.DirectionTo(player.Center) * MathHelper.Lerp(8f, 16f, Projectile.scale / maxScale);
+                    float spd = MathHelper.Lerp(8f, 16f, Projectile.scale / maxScale);
+                    if (!Main.hardMode)
+                        spd /= 2;
+                    Projectile.velocity = Projectile.DirectionTo(player.Center) * spd;
                 }
             }
             else

@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 {
     public class HellEnemies : EModeNPCBehaviour
     {
-        public static bool HellBuffActive => Main.hardMode;
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(
             NPCID.Hellbat,
             NPCID.LavaSlime,

@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public int Counter;
         public override void SetDefaults(NPC npc)
         {
-            if (HellEnemies.HellBuffActive)
+            if (Main.hardMode && npc.lifeMax < 6000)
             {
                 npc.lifeMax = 6000;
             }
