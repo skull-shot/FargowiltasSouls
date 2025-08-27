@@ -207,8 +207,8 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
                 {
-                    spawnRate /= 4;
-                    maxSpawns *= 4;
+                    spawnRate /= 2;
+                    maxSpawns *= 2;
                 }
 
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
@@ -461,7 +461,7 @@ namespace FargowiltasSouls.Core.Globals
                             if (noInvasion && !oldOnesArmy && bossCanSpawn)
                             {
                                 pool[NPCID.Clown] = 0.01f;
-                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.005f)
+                                if (!pool.TryGetValue(NPCID.Werewolf, out float value) || value < 0.005f)
                                     pool[NPCID.Werewolf] = 0.005f;
                             }
                                 
