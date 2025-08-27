@@ -203,11 +203,8 @@ namespace FargowiltasSouls.Core.Globals
 
             if (SinisterIconBoss(npc))
             {
-                foreach (var player in Main.ActivePlayers)
-                {
-                    if (!(player.Alive() && player.HasEffect<SinisterIconDropsEffect>()))
-                        SinisterIconFullFight = false;
-                }
+                if (!Main.player.Any(p => p.Alive() && p.HasEffect<SinisterIconDropsEffect>()))
+                    SinisterIconFullFight = false;
             }
 
             if (!FirstTick)
