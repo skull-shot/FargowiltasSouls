@@ -75,6 +75,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
                 float spd = MathHelper.Lerp(7f, 15f, Projectile.scale / maxScale);
                 if (!Main.hardMode)
                     spd /= 2;
+                Projectile.velocity = dir * spd;
                 SoundEngine.PlaySound(SoundID.Item45, Projectile.Center);
             }
             else
