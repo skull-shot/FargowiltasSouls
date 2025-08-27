@@ -40,6 +40,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
 
             Projectile.FargoSouls().CanSplit = false;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
+
+            Projectile.GetGlobalProjectile<AttackSpeedScalingGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
         }
 
         public override bool PreAI()

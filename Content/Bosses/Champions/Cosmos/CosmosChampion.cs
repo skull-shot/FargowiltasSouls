@@ -158,18 +158,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             return base.SpawnNPC(tileX, tileY);
         }
-        public override bool PreAI()
-        {
-            //immune to timestop during own timestop
-            if (Animation == 15 && NPC.ai[1] < 210 && Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                int timestop = NPC.FindBuffIndex(ModContent.BuffType<TimeFrozenBuff>());
-                if (timestop > -1)
-                    NPC.DelBuff(timestop);
-            }
-
-            return base.PreAI();
-        }
         public override void AI()
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
@@ -1670,7 +1658,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             if (epicMe < 0)
                 epicMe = 0;
         }
-
+        public override void PostAI()
+        {
+            //immune to timestop during own timestop
+            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = Animation == 15 && NPC.ai[1] < 210;
+        }
         private void Movement(Vector2 targetPos, float speedModifier, float cap = 12f, bool fastY = false, bool useAntiWobble = true)
         {
             if (useAntiWobble)

@@ -243,8 +243,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             if (WorldSavingSystem.MasochistModeReal)
             {
-                NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
-
                 if (!Main.dedServ && !Main.LocalPlayer.ItemTimeIsZero && (Main.LocalPlayer.HeldItem.type == ItemID.RodofDiscord || Main.LocalPlayer.HeldItem.type == ItemID.RodOfHarmony))
                     Main.LocalPlayer.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 600);
             }
@@ -449,6 +447,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 hyper = 0;
                 NPC.AI();
             }
+        }
+
+        public override void PostAI()
+        {
+            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = WorldSavingSystem.MasochistModeReal || NPC.ai[0] < 0;
         }
 
         #region helper functions

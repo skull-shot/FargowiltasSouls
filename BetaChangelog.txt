@@ -56,3 +56,12 @@ removed yoyo hit rate aspd scaling
 yoyos move faster with melee speed
 ninja ench speedup works on yoyos
 fixed eri timestopping himself (he forgot not to do that)
+
+actually made mutant and eri immune to timestop when they should be (mutant phase transitions & desp, eris own timestop)
+the following now scale with attack speed
+	phoenix bow
+	charged blaster cannon
+	laser machinegun
+	vortex beater
+	phantasm
+dragons breath has hit rate aspd scaling

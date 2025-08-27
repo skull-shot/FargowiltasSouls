@@ -108,6 +108,14 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
+                case ProjectileID.DD2PhoenixBow:
+                case ProjectileID.LaserMachinegun:
+                case ProjectileID.ChargedBlasterCannon:
+                case ProjectileID.VortexBeater:
+                case ProjectileID.Phantasm:
+                    projectile.GetGlobalProjectile<AttackSpeedScalingGlobalProjectile>().UseAttackSpeedForAdditionalUpdates = true;
+                    break;
+
                 case ProjectileID.FinalFractal: //zenith
                     if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith))
                     {

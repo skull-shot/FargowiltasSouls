@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().CanSplit = false;
 
-            Projectile.GetGlobalProjectile<AttackSpeedOnHitGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
+            Projectile.GetGlobalProjectile<AttackSpeedScalingGlobalProjectile>().UseAttackSpeedToDoubleHit = true;
         }
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
