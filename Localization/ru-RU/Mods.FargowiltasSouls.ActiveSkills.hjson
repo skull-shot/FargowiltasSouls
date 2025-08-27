@@ -70,7 +70,7 @@ StardustEffect: {
 }
 
 CosmosMoonEffect: {
-	DisplayName: Stardust Stasis
+	DisplayName: Стазис звёздной пыли
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/StardustEnchant] Останавливает время на 6 секунд

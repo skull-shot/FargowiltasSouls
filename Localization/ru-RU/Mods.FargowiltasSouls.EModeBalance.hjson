@@ -61,9 +61,9 @@ AerialBane: Уменьшает доп. урон летающим врагам д
 ChlorophyteBullet: Радиус самонаводки уменьшен вдвое
 SporeSac: Уменьшены кадры неуязвимости, наносимые снарядами
 AvengerEmblem: Бонус к урону увеличен на 3%
-// AmethystStaff: Bolt is faster and bounces once
-// TopazStaff: Critical strikes cause an explosion
-// SapphireStaff: Rapidly fires bolts in a spread
-// EmeraldStaff: Fires a large bolt with strong knockback and pierce
-// AmberStaff: Bolt boomerangs back
-// RubyStaff: Bolt splits in half after a duration
+AmethystStaff: Снаряд движется быстрее и может отскочить от врага
+TopazStaff: Критические удары вызывают взрыв
+SapphireStaff: Быстро выпускает снаряды с разбросом
+EmeraldStaff: Выпускает большой снаряд с большим отбрасыванием и прошиванием
+AmberStaff: Снаряд через какое-то время разворачивается
+RubyStaff: Снаряд через какое-то время делится надвое
