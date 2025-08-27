@@ -23,8 +23,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
         public int baseWidth = 0;
         public override void SetDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Projectile.CloneDefaults(ProjectileID.Fireball);
             Projectile.aiStyle = -1;
             AIType = 0;
