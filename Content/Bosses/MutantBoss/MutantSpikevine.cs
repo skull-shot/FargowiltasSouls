@@ -46,6 +46,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
         }
         ref float Timer => ref Projectile.ai[0];
         ref float MutantID => ref Projectile.ai[1];
+        ref float Flip => ref Projectile.ai[2];
+        ref float Distance => ref Projectile.localAI[0];
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 position = Projectile.position;
@@ -113,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 if (Projectile.velocity.Length() > 40)
                     Projectile.velocity = dir * 40;
             }
-            float rotationModifier = (WorldSavingSystem.MasochistModeReal ? 0.03f : 0.0005f) * Projectile.ai[2];
+            float rotationModifier = (WorldSavingSystem.MasochistModeReal ? 0.03f : 0.0005f) * Flip;
             Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 * rotationModifier);
             int mutantID = (int)MutantID;
             if (Timer >= 60 && mutantID.IsWithinBounds(Main.maxNPCs) && Projectile.velocity != Vector2.Zero)
@@ -136,15 +138,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 const float maxExpectedDistance = 1140;
                 const float numberOfUndulations = 5;
 
-                Vector2 waveAmplitude = 32f * Projectile.ai[2] * Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver2);
+                Vector2 waveAmplitude = 32f * Flip * Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver2);
 
                 // need to undo the previous tick's undulation so that we're back along the original "line" of the real velocity
-                float oldUndulation = (float)System.Math.Sin(MathHelper.TwoPi * Projectile.localAI[0] / maxExpectedDistance * numberOfUndulations);
+                float oldUndulation = (float)System.Math.Sin(MathHelper.TwoPi * Distance / maxExpectedDistance * numberOfUndulations);
                 Projectile.position -= waveAmplitude * oldUndulation;
 
-                Projectile.localAI[0] += Projectile.velocity.Length();
+                Distance += Projectile.velocity.Length();
 
-                float undulation = (float)System.Math.Sin(MathHelper.TwoPi * Projectile.localAI[0] / maxExpectedDistance * numberOfUndulations);
+                float undulation = (float)System.Math.Sin(MathHelper.TwoPi * Distance / maxExpectedDistance * numberOfUndulations);
                 Projectile.position += waveAmplitude * undulation;
             }
 
