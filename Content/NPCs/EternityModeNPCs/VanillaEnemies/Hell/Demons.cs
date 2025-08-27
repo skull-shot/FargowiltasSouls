@@ -314,12 +314,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                         if (Counter > attackDelay + artilleryWindup - artilleryTelegraph)
                         {
                             // dust
-                            Vector2 vel = new Vector2(npc.direction, -1.7f) * 9;
-                            vel.X += Main.rand.NextFloat(-1, 1) * 1.4f;
-                            vel.Y -= Main.rand.NextFloat(0, 1) * 3.7f;
-                            vel *= 2;
-                            int d = Dust.NewDust(npc.Center + vel, 10, 10, DustID.Torch, vel.X, vel.Y);
-                            Main.dust[d].noGravity = true;
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector2 vel = new Vector2(npc.direction, -1.7f) * 9;
+                                vel.X += Main.rand.NextFloat(-1, 1) * 4f;
+                                vel.Y -= Main.rand.NextFloat(0, 1) * 6f;
+                                vel *= 2;
+                                int d = Dust.NewDust(npc.Center + vel, 10, 10, DustID.Torch, vel.X, vel.Y, Scale: 2f);
+                                Main.dust[d].noGravity = true;
+                            }
                         }
                         return false;
                     }

@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             if (true)
             {
-                if (npc.ai[1] == 24 && npc.HasPlayerTarget) // frame before it should fire fireball
+                if (npc.ai[1] == 24 && npc.HasPlayerTarget && npc.Distance(Main.player[npc.target].Center) < 800) // frame before it should fire fireball
                 {
                     npc.velocity *= 0f;
                     if (Timer == 0)

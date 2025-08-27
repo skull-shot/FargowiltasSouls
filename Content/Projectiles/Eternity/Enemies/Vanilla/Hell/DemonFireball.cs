@@ -11,6 +11,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 {
@@ -20,11 +21,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 
         public override void SetStaticDefaults()
         {
-            
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             Projectile.CloneDefaults(ProjectileID.DD2BetsyFireball);
             Projectile.width = Projectile.height = 70;
             Projectile.aiStyle = -1;
@@ -47,6 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             if (Projectile.velocity.Y > 0 && Projectile.Center.Y > StartingY)
                 Projectile.tileCollide = true;
             // dust
+            /*
             if (Main.rand.NextBool(3))
             {
                 int num686 = Utils.SelectRandom(Main.rand, 226, 229);
@@ -62,6 +67,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
                 dust2.velocity *= 0.1f;
                 Main.dust[num689].noGravity = true;
             }
+            */
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -71,7 +77,53 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 
         public override bool PreDraw(ref Color lightColor)
         {
-            return true;
+            float radius = Projectile.width * Projectile.scale / 2;
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargoAssets.WavyNoise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return false;
+
+            Vector2 auraPos = Projectile.Center;
+            var maxOpacity = Projectile.Opacity * 0.7f;
+
+            ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.HellFireballShader");
+            borderShader.TrySetParameter("colorMult", 7.35f);
+            borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            borderShader.TrySetParameter("radius", radius);
+            borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+            borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+
+
+            Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+
+            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
+            {
+                var oldOpacity = maxOpacity * (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                Vector2 oldCenter = Projectile.oldPos[i] + Projectile.Size / 2;
+
+                borderShader.TrySetParameter("anchorPoint", oldCenter);
+                borderShader.TrySetParameter("maxOpacity", oldOpacity);
+
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            }
+
+
+
+            borderShader.TrySetParameter("anchorPoint", auraPos);
+            borderShader.TrySetParameter("maxOpacity", maxOpacity);
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            return false;
+            //return true;
             /*
             Vector2 auraPos = Projectile.Center;
             float radius = Projectile.width * Projectile.scale / 2;
