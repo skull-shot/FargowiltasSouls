@@ -6,6 +6,8 @@ using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Pets;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateInvasion;
+using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
 using System;
@@ -79,7 +81,8 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.ZombieMushroom,
             NPCID.ZombieMushroomHat,
             NPCID.IceGolem,
-            NPCID.SandElemental
+            NPCID.SandElemental,
+            NPCID.RedDevil
         ];
         static List<int> Hornets =
         [
@@ -415,6 +418,33 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.SporeBat:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Shroomerang, 10));
                     break;
+
+                case NPCID.RedDevil:
+                    // evil evil evil
+                    foreach (var rule in npcLoot.Get(includeGlobalDrops: false))
+                    {
+                        if (rule is CommonDrop commonDrop)
+                        {
+                            if (commonDrop.itemId == ItemID.FireFeather)
+                            {
+                                npcLoot.Remove(rule);
+                                FargoSoulsUtil.DropBasedOnEmode(npcLoot, ItemDropRule.Common(ItemID.FireFeather, 5), rule);
+                            }
+                        }
+                        if (rule is LeadingConditionRule leadingRule)
+                        {
+                            var enumerator = new List<IItemDropRuleChainAttempt>(leadingRule.ChainedRules);
+                            foreach (var chainedRule in enumerator)
+                            {
+                                if (chainedRule.RuleToChain is CommonDrop chainedCommonDrop && (chainedCommonDrop.itemId == ItemID.UnholyTrident || chainedCommonDrop.itemId == ItemID.FlowerofFire))
+                                {
+                                    leadingRule.ChainedRules.Remove(chainedRule);
+                                    leadingRule.OnSuccess(new DropBasedOnEMode(ItemDropRule.Common(chainedCommonDrop.itemId, 3), chainedCommonDrop));
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
             /*
             #region early bird
@@ -517,6 +547,11 @@ namespace FargowiltasSouls.Core.Globals
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<SandsofTime>(), 3));
 
                     FargoSoulsUtil.AddEarlyBirdDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ModContent.ItemType<SandsofTime>()));
+                    break;
+
+                case NPCID.RedDevil:
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.LavaCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.LavaCrateHard));
                     break;
             }
 

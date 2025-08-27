@@ -1338,6 +1338,11 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.damage = 40;
                     break;
 
+                case ProjectileID.UnholyTridentHostile:
+                    if (sourceNPC is NPC && sourceNPC.type == NPCID.RedDevil && !Main.hardMode)
+                        projectile.damage = 26;
+                    break;
+
                 case ProjectileID.DD2BetsyFireball: //when spawned, also spawn a phoenix
                     if (!firstTickAICheckDone && NonSwarmFight(projectile, NPCID.DD2Betsy))
                     {

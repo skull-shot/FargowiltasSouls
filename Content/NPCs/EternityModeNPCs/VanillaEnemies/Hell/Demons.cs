@@ -31,23 +31,34 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public List<int> DevilDemons = [];
         public override void SetDefaults(NPC npc)
         {
-            if (Main.hardMode)
+            if (npc.type == NPCID.RedDevil)
             {
-                if (npc.type == NPCID.RedDevil)
+                if (Main.hardMode)
                 {
                     if (npc.lifeMax < 2200)
                         npc.lifeMax = 2200;
                 }
                 else
                 {
-                    if (npc.lifeMax < 550)
-                        npc.lifeMax = 550;
+                    if (npc.lifeMax > 600)
+                        npc.lifeMax = 600;
+                    npc.defense = 10;
+                    npc.damage = 40;
                 }
+                npc.value = 100 * 100 * 5; // 5 gold
             }
             else
             {
-                if (npc.lifeMax < 200)
-                    npc.lifeMax = 200;
+                if (Main.hardMode)
+                {
+                    if (npc.lifeMax < 550)
+                        npc.lifeMax = 550;
+                }
+                else
+                {
+                    if (npc.lifeMax < 200)
+                        npc.lifeMax = 200;
+                }
             }
         }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
@@ -62,38 +73,36 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             base.OnFirstTick(npc);
 
-            if (Main.hardMode)
+            if (npc.type == NPCID.RedDevil)
             {
-                if (npc.type == NPCID.RedDevil)
+                if (NPC.CountNPCS(NPCID.RedDevil) > 1)
                 {
-                    if (NPC.CountNPCS(NPCID.RedDevil) > 1)
+                    npc.active = false;
+                    return;
+                }
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    int type = NPCID.Demon;
+                    int count = Main.hardMode ? 3 : 2;
+                    for (int i = 0; i < count; i++)
                     {
-                        npc.active = false;
-                        return;
-                    }
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        int type = NPCID.Demon;
-                        for (int i = 0; i < 3; i++)
+                        int j = NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X + npc.width / 2, (int)npc.Center.Y + npc.height / 2, type);
+                        if (j != Main.maxNPCs)
                         {
-                            int j = NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X + npc.width / 2, (int)npc.Center.Y + npc.height / 2, type);
-                            if (j != Main.maxNPCs)
+                            NPC newNPC = Main.npc[j];
+                            if (newNPC != null && newNPC.active)
                             {
-                                NPC newNPC = Main.npc[j];
-                                if (newNPC != null && newNPC.active)
+                                newNPC.velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 5f;
+                                newNPC.FargoSouls().CanHordeSplit = false;
+                                DevilDemons.Add(j);
+                                /*
+                                if (newNPC.TryGetGlobalNPC(out EModeNPCBehaviour globalNPC))
                                 {
-                                    newNPC.velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 5f;
-                                    newNPC.FargoSouls().CanHordeSplit = false;
-                                    DevilDemons.Add(j);
-                                    /*
-                                    if (newNPC.TryGetGlobalNPC(out EModeNPCBehaviour globalNPC))
-                                    {
-                                        globalNPC.FirstTick = false;
-                                    }
-                                    */
-                                    if (Main.netMode == NetmodeID.Server)
-                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, j);
+                                    globalNPC.FirstTick = false;
                                 }
+                                */
+                                if (Main.netMode == NetmodeID.Server)
+                                    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, j);
                             }
                         }
                     }
@@ -146,7 +155,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                             if (timer < windupTime - chargeTime)
                             {
                                 Vector2 windupPos = Main.player[npc.target].Center + angle * 250;
-                                npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, 0.8f, 0.8f);
+                                float maxSpeed = 18f;
+                                float accel = 0.3f;
+                                float decel = 0.5f;
+                                float resistance = npc.velocity.Length() * accel / maxSpeed;
+                                npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, accel - resistance, decel + resistance);
                             }
                             else if (timer == windupTime - chargeTime)
                             {
@@ -269,7 +282,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
 
                     Counter++;
                     int attackDelay = 60 * 3;
-                    if (Counter >= attackDelay && lineOfSight && npc.Distance(Main.player[npc.target].Center) < 900) // force a demon to do a dash attack
+                    if (Counter >= attackDelay && lineOfSight && npc.Distance(Main.player[npc.target].Center) < 800) // force a demon to do a dash attack
                     {
                         Counter = 0;
                         var readyDemons = DevilDemons.Where(n => Main.npc[n].TypeAlive(NPCID.Demon) && Main.npc[n].GetGlobalNPC<Demons>().Counter == 0);
@@ -396,8 +409,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                                     NPC.SpawnWOF(Main.player[npc.target].Center);
                                 }
                             }
-
-
                         }
                     }
                 }

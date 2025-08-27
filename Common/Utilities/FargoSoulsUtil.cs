@@ -1,26 +1,28 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
+using Terraria.GameContent.Achievements;
 using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Capture;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.Graphics.Capture;
-using Terraria.GameContent.Achievements;
-using FargowiltasSouls.Content.Items.Misc;
-using FargowiltasSouls.Content.Projectiles;
 
 namespace FargowiltasSouls //lets everything access it without using
 {
@@ -860,6 +862,11 @@ namespace FargowiltasSouls //lets everything access it without using
             EModeDropCondition dropCondition = new();
             IItemDropRule conditionalRule = new LeadingConditionRule(dropCondition);
             conditionalRule.OnSuccess(rule);
+            npcLoot.Add(conditionalRule);
+        }
+        public static void DropBasedOnEmode(NPCLoot npcLoot, IItemDropRule ruleForEMode, IItemDropRule ruleForDefault)
+        {
+            var conditionalRule = new DropBasedOnEMode(ruleForEMode, ruleForDefault);
             npcLoot.Add(conditionalRule);
         }
 

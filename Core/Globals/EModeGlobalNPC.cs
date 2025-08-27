@@ -198,6 +198,7 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
+        public static bool DemonCondition(Player player) =>  !Main.remixWorld || MathF.Abs(player.Center.X / 16f - Main.spawnTileX) > Main.maxTilesX / 3;
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
             if (WorldSavingSystem.EternityMode)
@@ -207,8 +208,11 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
                 {
-                    spawnRate /= 2;
-                    maxSpawns *= 2;
+                    if (DemonCondition(player))
+                    {
+                        spawnRate /= 2;
+                        maxSpawns *= 2;
+                    }
                 }
 
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
