@@ -50,8 +50,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public static void Use(Player player)
         {
-            if (player.itemTime == player.itemTimeMax / 2 && player.lastDeathPostion != Vector2.Zero)
+            if (player.itemTime == player.itemTimeMax / 2 && player.lastDeathPostion != Vector2.Zero && player.FargoSouls().SandsOfTimePosition != Vector2.Zero)
             {
+                Vector2 tpPos = player.FargoSouls().SandsOfTimePosition;
+
                 player.immune = true;
                 player.immuneTime = 20;
                 for (int index = 0; index < 70; ++index)
@@ -71,14 +73,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
                 if (player.whoAmI == Main.myPlayer)
                 {
-                    Vector2 teleport = player.lastDeathPostion;
-                    if (DungeonWalls.Contains(Framing.GetTileSafely(player.lastDeathPostion).WallType) && !NPC.downedBoss3)
+                    Vector2 teleport = tpPos;
+                    if (DungeonWalls.Contains(Framing.GetTileSafely(tpPos).WallType) && !NPC.downedBoss3)
                         teleport = new Vector2(Main.dungeonX*16+8, Main.dungeonY*16 - 16*3); //dungeon entrance
 
                     player.Teleport(teleport, 1);
                     player.velocity = Vector2.Zero;
                     if (Main.netMode == NetmodeID.MultiplayerClient)
-                        NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, player.lastDeathPostion.X, player.lastDeathPostion.Y, 1);
+                        NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, player.whoAmI, tpPos.X, tpPos.Y, 1);
                 }
 
                 for (int index = 0; index < 70; ++index)

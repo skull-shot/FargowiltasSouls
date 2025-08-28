@@ -1401,14 +1401,14 @@ SandsofTime: {
 		Works from inventory and vanity slots:
 		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
+		Use to teleport to where you were 1 minute before you last died
 		'Whatever you do, don't drop it'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
+		Use to teleport to where you were 1 minute before you last died
 		'''
 }
 
