@@ -24,7 +24,6 @@ float4 GetColor(float radius, float baseOpacity, float4 sampleColor, float textu
     
     float noiseRadius = radius * (1.0 + (textureMesh - 0.5) * 0.35);
     float fogFalloff = InverseLerp(noiseRadius * 2.8, noiseRadius * 0.2, worldDistance);
-    fogFalloff = pow(fogFalloff, 2.2);
 
     float opacity = fogFalloff * (0.5 + (textureMesh * 2.2));
     opacity *= baseOpacity;
