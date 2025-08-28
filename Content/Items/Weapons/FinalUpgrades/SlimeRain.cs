@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Item.shootSpeed = 16f;
 
             Item.useTime = 4;
-            Item.useAnimation = 12;
+            Item.useAnimation = 40;
             Item.reuseDelay = 0;
         }
 
