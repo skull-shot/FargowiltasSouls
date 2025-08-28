@@ -834,7 +834,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj)
                 modifiers.FinalDamage *= 2.0f / 3.0f + 1.0f / 3.0f * 1f / projectile.numHits;
             if (projectile.type == ProjectileID.RainFriendly)
                 modifiers.FinalDamage /= 2;

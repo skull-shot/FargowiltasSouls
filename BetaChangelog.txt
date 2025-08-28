@@ -78,3 +78,4 @@ earth champ
 	replaced cringe dinky little fireballs also with cool javyz fireballs
 	hand slam can stop on the surface of lava instead of sinking under
 	generally added more explosions
+destroyer no longer pierce resists held projectiles (read: yoyos)
