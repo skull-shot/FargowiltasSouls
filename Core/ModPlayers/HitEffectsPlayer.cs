@@ -647,7 +647,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Rectangle rect = new Rectangle((int)Player.Center.X - 111, (int)Player.Center.Y, 222, 222);
                         for (int i = 0; i < The22Incident; i++)
                             CombatText.NewText(rect, Color.DarkOrange, The22Incident, true);
-                        if (The22Incident >= 22)
+                        //doing it this way to ensure we dont accidentally skip over the checks
+                        //but also so that it doesnt harass godmode testing forever
+                        if (The22Incident == 22 || The22Incident == 23 || The22Incident == 24)
                         {
                             Player.KillMe(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.TwentyTwo", Player.name)), 22222222, 0);
                             Projectile.NewProjectile(Player.GetSource_Death(), Player.Center, Vector2.Zero, ModContent.ProjectileType<TwentyTwo>(), 0, 0f, Main.myPlayer);

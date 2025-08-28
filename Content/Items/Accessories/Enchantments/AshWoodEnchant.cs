@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             AshWoodEnchant.PassiveEffect(player);
-            player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.ashWoodBonus = true;
         }
         public static bool TriggerFromDebuffs(Player player)

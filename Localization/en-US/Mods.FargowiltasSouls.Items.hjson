@@ -60,7 +60,7 @@ AshWoodEnchant: {
 	DisplayName: Ash Wood Enchantment
 	Tooltip:
 		'''
-		Grants immunity to Oiled and fire debuffs deal no damage
+		Fire debuffs deal no damage
 		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
 		Reduces damage from touching lava
 		'You're telling me this isn't wood?'
@@ -393,7 +393,7 @@ ObsidianEnchant: {
 	DisplayName: Obsidian Enchantment
 	Tooltip:
 		'''
-		Grants immunity to Oiled, lava, and fire debuffs deal no damage
+		Lava and fire debuffs deal no damage
 		You have normal movement and can swim in lava, granting the lava wet buff
 		While afflicted with a debuff or lava wet, your attacks spawn fire explosions
 		'The earth calls'
@@ -954,13 +954,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
 		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
-		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'''
 }
 
@@ -975,7 +975,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		'''
 }
@@ -992,14 +992,14 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'''
 }
@@ -1016,7 +1016,7 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		'''
@@ -1037,7 +1037,7 @@ VerdantDoomsayerMask: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, [i:FargowiltasSouls/CelestialRune] and Marked for Death
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
@@ -1155,10 +1155,10 @@ GelicWings: {
 	DisplayName: Gelic Wings
 	Tooltip:
 		'''
+		Grants immunity to Illuminated
 		Allows flight and slow fall
 		While flying, crystal spikes are emitted from your wings
 		Allows the wearer to double jump, spawning more crystal spikes
-		Grants immunity to Illuminated caused by the Underground Hallow
 		'Are you watching, Heaven!?'
 		'''
 }

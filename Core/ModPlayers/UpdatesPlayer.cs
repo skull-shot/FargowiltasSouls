@@ -506,11 +506,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 DamageOverTime(20);
 
-            if (Oiled && Player.lifeRegen < 0)
-            {
-                Player.lifeRegen *= 2;
-            }
-
             if (MutantPresence)
             {
                 //if (Player.lifeRegen > 5)
@@ -551,7 +546,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.lifeRegen > 0)
                             Player.lifeRegen = 0;
                     }
-                    if (Oiled)
+                    else if (Oiled)
                         Player.lifeRegen -= regen;
                 }
             }
