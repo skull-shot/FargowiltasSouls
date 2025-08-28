@@ -40,11 +40,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void AI()
         {
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[0], ModContent.NPCType<MutantBoss>());
-            if (npc != null && (npc.ai[0] == 36 || npc.ai[0] == 48))
+            if (npc != null && (npc.ai[0] == 36 || npc.ai[0] == 12))
             {
                 Projectile.timeLeft = 2;
-                Projectile.Center = npc.Center;
-                Projectile.position.X += Projectile.width / 2 * npc.spriteDirection;
+                Projectile.Center = npc.Center; 
+                Projectile.position.X += 1.2f * Projectile.width / 2 * npc.spriteDirection;
+                Projectile.position.Y -= Projectile.height / 10;
                 Projectile.spriteDirection = npc.spriteDirection;
                 Projectile.rotation = (float)Math.PI / 4 * Projectile.spriteDirection;
             }
