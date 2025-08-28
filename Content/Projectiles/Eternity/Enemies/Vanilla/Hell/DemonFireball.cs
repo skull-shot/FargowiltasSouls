@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.DD2BetsyFireball);
-            Projectile.width = Projectile.height = 70;
+            Projectile.width = Projectile.height = 62;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hostile = true;

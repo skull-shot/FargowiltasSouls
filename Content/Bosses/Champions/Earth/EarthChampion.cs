@@ -308,12 +308,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                             NPC.position += (targetPos - NPC.Center) / 30;
                         }
 
-                        if (--NPC.ai[2] < 0)
+                        if (++NPC.ai[2] > 75 && NPC.ai[1] > 100)
                         {
-                            NPC.ai[2] = 75;
+                            NPC.ai[2] = 0;
                             SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
-                            if (NPC.ai[1] > 10 && FargoSoulsUtil.HostCheck) //shoot spread of fireballs, but not the first time
+                            if (FargoSoulsUtil.HostCheck)
                             {
+                                Main.NewText(NPC.ai[1]);
                                 int max = 1;
                                 if (WorldSavingSystem.MasochistModeReal)
                                     max = 2;
