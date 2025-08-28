@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.ZoneJungle)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 2);
+                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 120);
                 }
 
                 if (Player.ZoneCrimson)
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.ZoneCorrupt)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 2);
+                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 120);
                 }
 
                 if (Player.ZoneHallow)
