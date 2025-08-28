@@ -419,6 +419,12 @@ namespace FargowiltasSouls.Core.Globals
                     if (ocean)
                     {
                         pool[NPCID.PigronHallow] = .006f;
+
+                        if (Main.bloodMoon && spawnInfo.Water)
+                        {
+                            pool[NPCID.EyeballFlyingFish] = .02f;
+                            pool[NPCID.ZombieMerman] = .02f;
+                        }
                     }
 
                     if (!surface && normalSpawn)
@@ -597,6 +603,11 @@ namespace FargowiltasSouls.Core.Globals
                             if (night)
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
+                            }
+                            if (Main.bloodMoon && spawnInfo.Water)
+                            {
+                                pool[NPCID.BloodEelHead] = .02f;
+                                pool[NPCID.GoblinShark] = .02f;
                             }
                             pool[NPCID.PigronHallow] = .06f;
                             if (NPC.downedFishron && bossCanSpawn)
