@@ -120,6 +120,10 @@ namespace FargowiltasSouls.Core.Globals
 
         static HashSet<int> RareNPCs = [];
 
+        public override void Load()
+        {
+            On_NPC.SetDefaults += PostSetDefaults;
+        }
         public override void Unload()
         {
             base.Unload();
@@ -184,6 +188,12 @@ namespace FargowiltasSouls.Core.Globals
             if (npc.rarity > 0 && !RareNPCs.Contains(npc.type))
                 RareNPCs.Add(npc.type);
         }
+        public static void PostSetDefaults(On_NPC.orig_SetDefaults orig, NPC self, int Type, NPCSpawnParams spawnparams = default)
+        {
+            orig(self, Type, spawnparams);
+            if (self.TryGetGlobalNPC<FargoSoulsGlobalNPC>(out var gnc))
+                gnc.defKnockBackResist = self.knockBackResist;
+        }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
             base.OnSpawn(npc, source);
@@ -222,8 +232,6 @@ namespace FargowiltasSouls.Core.Globals
 
             if (!FirstTick)
             {
-                defKnockBackResist = npc.knockBackResist;
-
                 FirstTick = true;
             }
 
