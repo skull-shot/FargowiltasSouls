@@ -200,7 +200,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<BulbKeyEffect>(Item);
 
             //ice queen's crown
-            IceQueensCrown.AddEffects(player, Item);
+            IceQueensShield.AddEffects(player, Item);
 
             //lihzahrd treasure
             player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
