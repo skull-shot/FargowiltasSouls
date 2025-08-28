@@ -87,17 +87,19 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.ZoneJungle)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 120);
+                    //FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 120);
                 }
 
+                //make ichor proj do this?
                 if (Player.ZoneCrimson)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Ichor, 300);
                 }
 
+                //make eater fireballs do this
                 if (Player.ZoneCorrupt)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 120);
+                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 60);
                 }
 
                 if (Player.ZoneHallow)
