@@ -1,9 +1,11 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +13,7 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,6 +24,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public override string Texture => FargoSoulsUtil.VanillaTextureNPC(NPCID.Flocko);
         private Vector2 mousePos;
         private int syncTimer;
+
+        public Vector2 VisualCenter;
 
         public override void SetStaticDefaults()
         {
@@ -40,8 +45,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.width = 50;
             Projectile.height = 50;
             Projectile.scale = 2;
+
+            VisualCenter = Projectile.Center;
         }
-        public const int ShatterTime = 30;
+        public const int ShatterTime = 45;
         public bool Shattered => ShatterTimer >= ShatterTime;
         public ref float ShatterTimer => ref Projectile.ai[0];
         public override void SendExtraAI(BinaryWriter writer)
@@ -97,6 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                         int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.Ice, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100);
                         Main.dust[dustId].noGravity = true;
                     }
+                    SoundEngine.PlaySound(SoundID.Item50, x.Center);
 
                     x.Kill();
 
@@ -104,6 +112,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                         ShatterTimer = 1;
                 });
             }
+            if (ShatterTimer < ShatterTime)
+                VisualCenter = Projectile.Center;
 
             if (ShatterTimer > 0)
             {
@@ -125,7 +135,12 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                     }
                         
                 }
-                if (ShatterTimer > ShatterTime + 5)
+                float shatterEnd = 6;
+                if (ShatterTimer >= ShatterTime)
+                {
+                    Projectile.Opacity = 1 - (ShatterTimer - ShatterTime) / shatterEnd;
+                }
+                if (ShatterTimer > ShatterTime + shatterEnd)
                 {
                     Projectile.Kill();
                     return;
@@ -160,7 +175,64 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor);
+            if (!Projectile.owner.IsWithinBounds(Main.maxPlayers))
+            {
+                Projectile.Kill();
+                return false;
+            }
+            Player player = Main.player[Projectile.owner];
+            if (!player.Alive())
+            {
+                Projectile.Kill();
+                return false;
+            }
+            if (player.whoAmI != Main.myPlayer)
+                return false;
+
+            Vector2 auraPos = player.Center;
+
+            Color darkColor = Color.Blue;
+            Color mediumColor = Color.LightBlue;
+
+            float radius = player.Distance(VisualCenter);
+            float visualWidth = MathF.Sqrt(2 * 50 * 50);
+            float circumference = radius * MathF.Tau;
+            float fraction = visualWidth / circumference;
+            float arcWidth = fraction * MathF.Tau;
+            arcWidth *= 1.4f;
+
+            Vector2 nearbyPosition = player.DirectionTo(VisualCenter);
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargoAssets.CracksNoise;
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return false;
+            var maxOpacity = Projectile.Opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+
+            ManagedShader innerShader = ShaderManager.GetShader("FargowiltasSouls.IceQueenShield");
+            innerShader.TrySetParameter("colorMult", 7.35f);
+            innerShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            innerShader.TrySetParameter("radius", radius);
+            innerShader.TrySetParameter("anchorPoint", auraPos);
+            innerShader.TrySetParameter("screenPosition", Main.screenPosition);
+            innerShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+            innerShader.TrySetParameter("nearbyPosition", nearbyPosition);
+            innerShader.TrySetParameter("maxOpacity", maxOpacity);
+            innerShader.TrySetParameter("darkColor", darkColor.ToVector4());
+            innerShader.TrySetParameter("midColor", mediumColor.ToVector4());
+            innerShader.TrySetParameter("arcWidth", arcWidth);
+
+
+            Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, innerShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            Main.spriteBatch.End();
+            //Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, outerShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            //Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            //Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
             return false;
         }
     }
