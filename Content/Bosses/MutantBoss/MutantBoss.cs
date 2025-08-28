@@ -299,9 +299,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 case 10: Phase2Transition(); break;
 
-                //case 11: ApproachForNextAttackP2(); break;
-                //case 12: VoidRaysP2(); break;
-
                 case 11: goto case 35;
                 case 12: QueenSlimeRain(); break;
 
@@ -309,13 +306,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 case 14: SpearDashPredictiveP2(); break;
                 case 15: WhileDashingP2(); break;
 
-                //case 16: goto case 11; //approach for bullet hell
-                //case 17: BoundaryBulletHellP2(); break;
-
                 case 16: SANSGOLEM(); break;
 
                 case 17: AttackChoice++; break;
-
                 case 18: AttackChoice++; break; //new attack can be put here
 
                 case 19: PillarDunk(); break;
@@ -342,9 +335,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 case 31: AttackChoice++; break; //free slot for new attack
                 case 32: AttackChoice++; break; //free slot for new attack
-
-                //case 31: PrepareTrueEyeDiveP2(); break;
-                //case 32: TrueEyeDive(); break; //spawn eyes
 
                 case 33: PrepareNuke(); break;
                 case 34: Nuke(); break;
@@ -1613,7 +1603,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 }
                 else
                 {
-                    ChooseNextAttack(13, 21, 24, 29, 31, 33, 37, 41, 42, 44, 11, 16);
+                    ChooseNextAttack(13, 21, 24, 29, 33, 37, 41, 42, 44, 11, 16);
                 }
             }
         }
@@ -1774,7 +1764,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 }
                 else if (NPC.localAI[0] >= 60)
                 {
-                    ChooseNextAttack(13, 19, 21, 24, 31, 39, 41, 42, 16);
+                    ChooseNextAttack(13, 19, 21, 24, 39, 41, 42, 16);
                 }
             }
         }
@@ -1876,7 +1866,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[3] = 0;
                 if (++NPC.ai[2] > NPC.localAI[1])
                 {
-                    ChooseNextAttack(/*16,*/ 19, 20, 26, 29, 31, 33, 39, 42, 44, 45);
+                    ChooseNextAttack(/*16,*/ 19, 20, 26, 29, 33, 39, 42, 44, 45);
                 }
                 else
                 {
@@ -2119,7 +2109,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > 450)
             {
-                ChooseNextAttack(/*11, */13, /*16,*/21, 26, 29, 31, 33, 35, 37, 41, 44, 45, 11, 16);
+                ChooseNextAttack(/*11, */13, /*16,*/21, 26, 29, 33, 35, 37, 41, 44, 45, 11, 16);
             }
 
             /*if (Math.Abs(targetPos.X - player.Center.X) < 150) //avoid crossing up player
@@ -2137,7 +2127,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[1] = 60;
                 if (++NPC.ai[2] > (WorldSavingSystem.MasochistMode ? 3 : 1))
                 {
-                    //float[] options = { 13, 19, 21, 24, 26, 31, 33, 40 }; AttackChoice = options[Main.rand.Next(options.Length)];
+                    //float[] options = { 13, 19, 21, 24, 26, 33, 40 }; AttackChoice = options[Main.rand.Next(options.Length)];
                     AttackChoice++;
                     NPC.ai[2] = 0;
                     NPC.TargetClosest();
@@ -2209,9 +2199,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (++NPC.ai[2] > NPC.localAI[1])
                 {
                     if (WorldSavingSystem.MasochistModeReal)
-                        ChooseNextAttack(/*11, */13, /*16,*/ 19, 20, 31, 33, 35, 39, 42, 44, 11);
+                        ChooseNextAttack(/*11, */13, /*16,*/ 19, 20, 33, 35, 39, 42, 44, 11);
                     else
-                        ChooseNextAttack(/*11, *//*16,*/ 26, 29, 31, 35, 37, 39, 42, 44, 11);
+                        ChooseNextAttack(/*11, *//*16,*/ 26, 29, 35, 37, 39, 42, 44, 11);
                 }
                 else
                 {
@@ -2336,9 +2326,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     shouldAttack = false;
                     if (WorldSavingSystem.MasochistModeReal)
-                        ChooseNextAttack(/*11, */19, 20, 29, 31, 33, 35, 37, 39, 42, 44, 45, 11);
+                        ChooseNextAttack(/*11, */19, 20, 29, 33, 35, 37, 39, 42, 44, 45, 11);
                     else
-                        ChooseNextAttack(/*11, */19, 20, 26, 26, 26, 29, 31, 33, 35, 37, 39, 42, 44, 11);
+                        ChooseNextAttack(/*11, */19, 20, 26, 26, 26, 29, 33, 35, 37, 39, 42, 44, 11);
                 }
 
                 if ((shouldAttack || WorldSavingSystem.MasochistModeReal) && FargoSoulsUtil.HostCheck)
@@ -2501,7 +2491,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 if (WorldSavingSystem.EternityMode) //use full moveset
                 {
-                    ChooseNextAttack(/*11, */13, /*16,*/ 19, 21, 24, 29, 31, 33, 35, 37, 39, 41, 42, 45, 11, 16);
+                    ChooseNextAttack(/*11, */13, /*16,*/ 19, 21, 24, 29, 33, 35, 37, 39, 41, 42, 45, 11, 16);
                 }
                 else
                 {
@@ -2574,7 +2564,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > (WorldSavingSystem.MasochistModeReal ? 60 : 120))
             {
-                ChooseNextAttack(13, 19, 20, 21, WorldSavingSystem.MasochistModeReal ? 44 : 26, 31, 31, 31, 33, 35, 39, 41, 42, 44, 11, 16);
+                ChooseNextAttack(13, 19, 20, 21, WorldSavingSystem.MasochistModeReal ? 44 : 26, 33, 35, 39, 41, 42, 44, 11, 16);
             }
         }
 
@@ -2739,7 +2729,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > 360 + 210 * endTimeVariance)
             {
-                ChooseNextAttack(/*11, */13, /*16,*/ 19, 24, WorldSavingSystem.MasochistModeReal ? 26 : 29, 31, 35, 37, 39, 41, 42, 11, 16);
+                ChooseNextAttack(/*11, */13, /*16,*/ 19, 24, WorldSavingSystem.MasochistModeReal ? 26 : 29, 35, 37, 39, 41, 42, 11, 16);
             }
 
             if (NPC.ai[1] > 45)
@@ -2918,7 +2908,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 endTime += timeToMove + (int)(300 * endTimeVariance) - 30;
             if (++NPC.ai[2] > endTime)
             {
-                ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 26 : 29, 31, 33, 37, 39, 41, 42, 45);
+                ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 26 : 29, 33, 37, 39, 41, 42, 45);
             }
         }
 
@@ -3041,7 +3031,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > endTime)
             {
-                ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 26 : 29, 31, 33, 37, 39, 41, 42, 45);
+                ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 26 : 29, 33, 37, 39, 41, 42, 45);
             }
         }
 
@@ -3184,9 +3174,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (++NPC.ai[2] > NPC.localAI[1])
                 {
                     if (Main.getGoodWorld) // Can't combo into slime rain in ftw
-                        ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 44 : 26, 31, 33, /*35,*/ 42, 44, 45, 11);
+                        ChooseNextAttack(/*11, */ /*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 44 : 26, 33, /*35,*/ 42, 44, 45, 11);
                     else
-                        ChooseNextAttack(/*11, *//*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 44 : 26, 31, 33, 35, 42, 44, 45, 11);
+                        ChooseNextAttack(/*11, *//*16,*/ 19, 20, WorldSavingSystem.MasochistModeReal ? 44 : 26, 33, 35, 42, 44, 45, 11);
                     shouldAttack = false;
                 }
 
@@ -3277,7 +3267,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++timer > 450)
             {
-                ChooseNextAttack(/*11, */13, /*16,*/ 21, 24, 26, 29, 31, 33, 35, 39, 41, 44, 45, 11, 16);
+                ChooseNextAttack(/*11, */13, /*16,*/ 21, 24, 26, 29, 33, 35, 39, 41, 44, 45, 11, 16);
             }
         }
 
@@ -3425,7 +3415,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > swordSwarmTime + (WorldSavingSystem.MasochistModeReal ? 60 : 30))
             {
-                ChooseNextAttack(/*11, */13, /*16,*/ 21, WorldSavingSystem.MasochistModeReal ? 26 : 24, 29, 31, 35, 37, 39, 41, 45, 11, 16);
+                ChooseNextAttack(/*11, */13, /*16,*/ 21, WorldSavingSystem.MasochistModeReal ? 26 : 24, 29, 35, 37, 39, 41, 45, 11, 16);
             }
         }
 
@@ -3508,7 +3498,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > endTime)
             {
-                ChooseNextAttack(13, 19, 20, 21, 24, 31, 33, 35, 41, 44);
+                ChooseNextAttack(13, 19, 20, 21, 24, 33, 35, 41, 44);
             }
         }
 

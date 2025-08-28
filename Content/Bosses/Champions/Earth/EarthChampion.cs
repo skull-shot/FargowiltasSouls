@@ -323,7 +323,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                                         continue;
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitY * 60,
                                         (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(8 * i)),
-                                        ProjectileID.Fireball, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                        ModContent.ProjectileType<EarthFireball>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, 1f);
                                 }
                             }
                         }
