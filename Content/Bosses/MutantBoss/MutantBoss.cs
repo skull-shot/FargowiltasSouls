@@ -713,18 +713,21 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
             else
             {
-                var attacks = GetAttacks();
+                if (FargoSoulsUtil.HostCheck) //only run for host in mp, will sync to others
+                {
+                    var attacks = GetAttacks();
 
-                /*
-                string text = "";
-                foreach (var attack in attacks)
-                    text += attack + " ";
-                Main.NewText(text);
-                */
+                    /*
+                    string text = "";
+                    foreach (var attack in attacks)
+                        text += attack + " ";
+                    Main.NewText(text);
+                    */
 
-                AttackChoice = (int)Main.rand.NextFromCollection(attacks);
-                P1AvailableAttacks.Remove((P1Attacks)AttackChoice);
-                NPC.localAI[2] = 0f;
+                    AttackChoice = (int)Main.rand.NextFromCollection(attacks);
+                    P1AvailableAttacks.Remove((P1Attacks)AttackChoice);
+                    NPC.localAI[2] = 0f;
+                }
             }
 
             NPC.ai[1] = 0;

@@ -30,6 +30,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using static FargowiltasSouls.Content.Bosses.MutantBoss.MutantBoss;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -61,6 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 EaterofWorldsHead.Attack = 0;
                 EaterofWorldsHead.OldAttack = 0;
                 EaterofWorldsHead.Timer = 0;
+                EaterofWorldsHead.AvailableAttacks = [];
             }
         }
 
@@ -206,6 +208,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public static int Attack;
         public static int OldAttack;
         public static int Timer;
+        public static List<Attacks> AvailableAttacks = [];
         public int AttackTimer;
 
         public int UTurnTotalSpacingDistance;
@@ -419,27 +422,40 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 int heads = HeadCount;
                 if (WorldSavingSystem.MasochistModeReal)
                 {
-                    waitTime = 45;
+                    waitTime = 25;
                 }
                 else
                 {
-                    waitTime = 45;
+                    waitTime = 25;
                 }
 
                 Timer++;
                 if (Timer > waitTime)
                 {
-                    List<Attacks> attacks = [Attacks.Spit, Attacks.JumpCrash, Attacks.Sailing, Attacks.Fireballs];
+                    List<Attacks> GetAttacks()
+                    {
+                        var attacks = new List<Attacks>(AvailableAttacks);
+                        // remove bad combos
+                        if (HeadCount < 4)
+                            attacks.Remove(Attacks.Sailing);
 
-                    if (HeadCount < 4)
-                        attacks.Remove(Attacks.Sailing);
-                    //int segments = CountSegments();
+                        if (attacks.Count == 0)
+                        {
+                            AvailableAttacks = [Attacks.Spit, Attacks.JumpCrash, Attacks.Sailing, Attacks.Fireballs];
+                            AvailableAttacks.Remove((Attacks)OldAttack);
+                            attacks = GetAttacks();
+                        }
+                        return attacks;
+                    }
 
-                    if (attacks.Count > 2)
-                        attacks.Remove((Attacks)OldAttack);
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        List<Attacks> attacks = GetAttacks();
+                        Attack = (int)Main.rand.NextFromCollection(attacks);
+                        AvailableAttacks.Remove((Attacks)Attack);
+                        OldAttack = Attack;
+                    }
 
-                    Attack = (int)Main.rand.NextFromCollection(attacks);
-                    OldAttack = Attack;
                     NPC.netUpdate = true;
                     Timer = 0;
                     return;
@@ -459,6 +475,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 else
                 {
                     int side = MyIndex % 2 == 0 ? 1 : -1;
+                    NPC mainEater = Main.npc[NPC.FindFirstNPC(NPCID.EaterofWorldsHead)];
+                    side *= Target.HorizontalDirectionTo(mainEater.Center).NonZeroSign();
                     Vector2 desiredPos = Target.Center + Vector2.UnitY * UndergroundLength + Vector2.UnitX * side * 800;
                     if (NPC.Distance(desiredPos) > 120)
                         Movement(desiredPos, 3f, 3f, 3f, 5f);
@@ -531,7 +549,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 else
                 {
                     int side = MyIndex % 2 == 0 ? 1 : -1;
-                    Vector2 desiredPos = Target.Center + Vector2.UnitY * UndergroundLength + Vector2.UnitX * side * 800;
+                    Vector2 desiredPos = Target.Center + Vector2.UnitY * UndergroundLength + Vector2.UnitX * side * 1000;
                     Movement(desiredPos, 1.5f, 1.5f, 1.5f, 1.5f);
                 }
 
@@ -573,10 +591,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         if (FargoSoulsUtil.HostCheck)
                         {
                             int amt = WorldSavingSystem.MasochistModeReal ? 2 : 1;
+                            if (HeadCount < 4)
+                                amt += 4 - HeadCount;
                             for (int i = -amt; i <= amt; i++)
                             {
                                 Vector2 vel = -Vector2.UnitY.RotatedBy(MathHelper.PiOver2 * i * 0.08f).RotatedByRandom(MathHelper.PiOver2 * 0.04f);
-                                vel *= Main.rand.NextFloat(14f, 20f);
+                                vel *= Main.rand.NextFloat(12f, 17f);
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel,
                                     ModContent.ProjectileType<CorruptionSludge>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                             }
@@ -886,16 +906,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         Movement(target, speed, 0.4f, 1f, turn);
 
                     //AttackTimer++;
-                    int x = WorldSavingSystem.MasochistModeReal ? 12 : 16;
+                    int x = WorldSavingSystem.MasochistModeReal ? 9 : 12;
                     if (Timer >= dashEndlag)
-                        x -= 6;
+                        x -= 4;
                     int freq = x + HeadCount * x;
                     int offset = MyIndex * freq / HeadCount;
                     float telegraph = 25;
                     dir = NPC.velocity.SafeNormalize(dir);
-                    float shotSpeed = 10;
+                    float shotSpeed = 12;
                     if (WorldSavingSystem.MasochistModeReal)
-                        shotSpeed = 13;
+                        shotSpeed = 15;
                     if (Timer % freq < offset && Timer % freq > ((offset - telegraph) % freq))
                     {
                         int d = Dust.NewDust(NPC.Center, 1, 1, DustID.CursedTorch);
