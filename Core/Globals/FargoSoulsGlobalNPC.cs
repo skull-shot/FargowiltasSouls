@@ -37,6 +37,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 using FargowiltasSouls.Assets.Textures;
+using System.IO;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -122,7 +123,7 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void Load()
         {
-            On_NPC.SetDefaults += PostSetDefaults;
+            //On_NPC.SetDefaults += PostSetDefaults;
         }
         public override void Unload()
         {
@@ -180,19 +181,20 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
             }
-
-
         }
         public override void SetDefaults(NPC npc)
         {
             if (npc.rarity > 0 && !RareNPCs.Contains(npc.type))
                 RareNPCs.Add(npc.type);
         }
-        public static void PostSetDefaults(On_NPC.orig_SetDefaults orig, NPC self, int Type, NPCSpawnParams spawnparams = default)
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
-            orig(self, Type, spawnparams);
-            if (self.TryGetGlobalNPC<FargoSoulsGlobalNPC>(out var gnc))
-                gnc.defKnockBackResist = self.knockBackResist;
+            binaryWriter.Write(defKnockBackResist);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            defKnockBackResist = binaryReader.ReadSingle();
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
@@ -205,6 +207,7 @@ namespace FargowiltasSouls.Core.Globals
                         SinisterIconFullFight = true;
                 }
             }
+            defKnockBackResist = npc.knockBackResist;
         }
         public override bool PreAI(NPC npc)
         {
