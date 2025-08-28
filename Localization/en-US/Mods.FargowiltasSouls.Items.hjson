@@ -763,8 +763,8 @@ CosmoForce: {
 		[i:FargowiltasSouls/SolarEnchant] Attacking generates up to 4 moons that orbit around you 
 		[i:FargowiltasSouls/VortexEnchant] Stop attacking to launch them towards your cursor, exploding into Lunar Boosters
 		[i:FargowiltasSouls/NebulaEnchant] Picking up Lunar Boosters increases your damage, crit, life regen or damage reduction
-		[i:FargowiltasSouls/MeteorEnchant] Increases your movement speed and acceleration, and decreases your momentum
 		[i:FargowiltasSouls/WizardEnchant] Upgrades the effects of all your Enchantments
+		[i:FargowiltasSouls/MeteorEnchant] Effects of Magiluminescence
 		'Been around since the Big Bang'
 		'''
 }
