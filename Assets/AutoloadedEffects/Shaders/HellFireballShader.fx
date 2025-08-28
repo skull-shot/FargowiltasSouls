@@ -2,26 +2,54 @@
 
 float colorMult;
 float time;
-float maxOpacity;
-float radius;
 
 float2 screenPosition;
 float2 screenSize;
-float2 anchorPoint;
+
+float2 anchorPoints[10];
+float opacities[10];
+float radius;
+
+float4 darkRed = float4(0.5, 0.05, 0.0, 1.0);
+float4 orange = float4(1.0, 0.35, 0.0, 1.0);
+float4 yellow = float4(1.2, 1.0, 0.25, 1.0);
 
 float InverseLerp(float a, float b, float t)
 {
     return saturate((t - a) / (b - a));
 }
 
+float4 GetColor(float radius, float baseOpacity, float4 sampleColor, float textureMesh, float worldDistance)
+{
+    
+    float noiseRadius = radius * (1.0 + (textureMesh - 0.5) * 0.35);
+    float fogFalloff = InverseLerp(noiseRadius * 2.8, noiseRadius * 0.2, worldDistance);
+    fogFalloff = pow(fogFalloff, 2.2);
+
+    float opacity = fogFalloff * (0.5 + (textureMesh * 2.2));
+    opacity *= baseOpacity;
+
+    if (opacity <= 0.01)
+        return sampleColor;
+
+    float colorLerp = saturate(fogFalloff * 1.1);
+    colorLerp *= opacity;
+    float4 color;
+
+    if (colorLerp < 0.5)
+        color = lerp(darkRed, orange, colorLerp * 2);
+    else
+        color = lerp(orange, yellow, (colorLerp - 0.5) * 2);
+
+    color *= 1.0 - pow(abs(textureMesh - 0.4), 2.2);
+    color *= pow(abs(textureMesh), 0.25);
+
+    return lerp(sampleColor, color, opacity);
+}
+
 float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) : COLOR0
 {
     float2 worldUV = screenPosition + screenSize * uv;
-    float worldDistance = distance(worldUV, anchorPoint);
-
-    float pulse = 1;
-    float pulseOpacity = lerp(0.77, 1.0, pulse);
-    float pulseRadius = radius * lerp(0.95, 1.05, pulse);
 
     float adjustedTime = time * 0.7;
 
@@ -39,37 +67,15 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float noise2 = tex2D(diagonalNoise, frac(noiseUV * 1.83 + vec2 * adjustedTime)).g;
     float noise3 = tex2D(diagonalNoise, frac(noiseUV * 2.44 + vec3 * adjustedTime)).g;
     float textureMesh = (noise1 + noise2 + noise3) / 3.0;
-
-    // --- Sharper edge falloff ---
-    float noisyRadius = pulseRadius * (1.0 + (textureMesh - 0.5) * 0.35); // modulate radius by noise
-    float fogFalloff = InverseLerp(noisyRadius * 2.5, noisyRadius * 0.2, worldDistance);
-    fogFalloff = pow(fogFalloff, 2.2); // stronger shaping curve
-
-    // --- Opacity boost ---
-    float opacity = fogFalloff * pulseOpacity * (0.5 + (textureMesh * 2.2));
-    opacity *= maxOpacity;
-
-    if (opacity <= 0.01)
-        return sampleColor;
-
-    // --- Stronger fire gradient ---
-    float4 darkRed = float4(0.5, 0.05, 0.0, 1.0);
-    float4 orange = float4(1.0, 0.35, 0.0, 1.0);
-    float4 yellow = float4(1.2, 1.0, 0.25, 1.0);
-
-    float colorLerp = saturate(fogFalloff * 1.1); // bias toward hotter colors
+    
+    
     float4 color;
-
-    if (colorLerp < 0.5)
-        color = lerp(darkRed, orange, colorLerp * 2);
-    else
-        color = lerp(orange, yellow, (colorLerp - 0.5) * 2);
-
-    // --- Emphasize texture shaping ---
-    color *= 1.0 - pow(abs(textureMesh - 0.4), 2.2);
-    color *= pow(abs(textureMesh), 0.25); // punchier breakup
-
-    return lerp(sampleColor, color, opacity);
+    for (int i = 0; i < 10; i++)
+    {
+        float worldDistance = distance(worldUV, anchorPoints[i]);
+        color += GetColor(radius, opacities[i], sampleColor, textureMesh, worldDistance);
+    }
+    return color;
 }
 
 technique Technique1

@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = DemonFireball.TrailLength;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
         public int baseWidth = 0;
@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 
         public override bool PreDraw(ref Color lightColor)
         {
-            float radius = Projectile.width * Projectile.scale / 3;
+            float radius = Projectile.width / 2;
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
@@ -124,25 +124,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
             Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
 
-            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
+            Vector2[] anchorPoints = new Vector2[ProjectileID.Sets.TrailCacheLength[Type]];
+            float[] opacities = new float[ProjectileID.Sets.TrailCacheLength[Type]];
+
+            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
             {
-                var oldOpacity = maxOpacity * (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                var oldOpacity = maxOpacity * (ProjectileID.Sets.TrailCacheLength[Type] - (float)i) / (float)ProjectileID.Sets.TrailCacheLength[Type];
                 Vector2 oldCenter = Projectile.oldPos[i] + Projectile.Size / 2;
-
-                borderShader.TrySetParameter("anchorPoint", oldCenter);
-                borderShader.TrySetParameter("maxOpacity", oldOpacity);
-
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
-                Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                anchorPoints[i] = oldCenter;
+                opacities[i] = oldOpacity;
             }
 
-
-
-            borderShader.TrySetParameter("anchorPoint", auraPos);
-            borderShader.TrySetParameter("maxOpacity", maxOpacity);
+            borderShader.TrySetParameter("anchorPoints", anchorPoints);
+            borderShader.TrySetParameter("opacities", opacities);
 
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
@@ -150,16 +144,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
             return false;
-            /*
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
-            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
-            Vector2 origin2 = rectangle.Size() / 2f;
-            SpriteEffects effects = Projectile.localAI[0] == 2 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
-            return false;
-            */
         }
     }
 }
