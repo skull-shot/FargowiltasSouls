@@ -291,7 +291,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     else
                     {
                         targetPos = player.Center;
-                        for (int i = 0; i < 22; i++) //collision check above player's head
+                        for (int i = 0; i < 26; i++) //collision check above player's head
                         {
                             targetPos.Y -= 16;
                             Tile tile = Framing.GetTileSafely(targetPos); //if solid, stay below it
@@ -316,13 +316,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                             {
                                 int max = 1;
                                 if (WorldSavingSystem.MasochistModeReal)
-                                    max = 4;
+                                    max = 2;
                                 for (int i = -max; i <= max; i++)
                                 {
-                                    if (Math.Abs(i) == 2 ||Math.Abs(i) == 3)
-                                        continue;
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitY * 60,
-                                        (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(8 * i)),
+                                        (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(20 * i)),
                                         ModContent.ProjectileType<EarthFireball>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, 1f);
                                 }
                             }

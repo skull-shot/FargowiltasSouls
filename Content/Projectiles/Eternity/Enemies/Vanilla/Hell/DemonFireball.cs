@@ -11,7 +11,6 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 {
