@@ -1421,12 +1421,12 @@ namespace FargowiltasSouls.Content.Projectiles
             firstTickAICheckDone = true;
 
             // buff yoyos to move faster with melee speed
-            if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
+            /*if (projectile.friendly && projectile.aiStyle == ProjAIStyleID.Yoyo)
             {
                 Vector2 nextPos = projectile.position + projectile.velocity * Math.Max(0, Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee) - 1);
                 if (!Collision.SolidCollision(nextPos, projectile.width, projectile.height))
                     projectile.position = nextPos;
-            }
+            }*/
         }
         private int FadeTimer = 0;
         public static int[] FancySwings => [
