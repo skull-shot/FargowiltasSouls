@@ -38,6 +38,7 @@ using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 using FargowiltasSouls.Assets.Textures;
 using System.IO;
+using Terraria.UI;
 
 namespace FargowiltasSouls.Core.Globals
 {

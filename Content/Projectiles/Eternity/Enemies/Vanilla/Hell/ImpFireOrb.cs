@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             Timer++;
             float chargeTime = 60 * 5;
             float homeTime = Main.hardMode ? 60 : 120;
-            float maxScale = 3f;
+            float maxScale = 2f;
 
             if (Timer <= chargeTime)
             {
