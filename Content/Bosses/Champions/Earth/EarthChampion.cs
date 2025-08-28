@@ -314,7 +314,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                             SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                Main.NewText(NPC.ai[1]);
                                 int max = 1;
                                 if (WorldSavingSystem.MasochistModeReal)
                                     max = 2;
