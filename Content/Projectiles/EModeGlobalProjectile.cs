@@ -309,8 +309,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             projectile.usesLocalNPCImmunity = true;
                             projectile.localNPCHitCooldown = -1;
                             projectile.penetrate = 2;
-                            projectile.velocity *= 1.5f;
-
+                            projectile.velocity *= 2f;
                         }
                     }
                     break;
@@ -340,9 +339,19 @@ namespace FargowiltasSouls.Content.Projectiles
                         Player player = Main.player[projectile.owner];
                         if (SourceItemType == ItemID.RubyStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
-                            projectile.usesLocalNPCImmunity = true;
-                            projectile.localNPCHitCooldown = -1;
+                            projectile.penetrate = 1;
+                        }
+                    }
+                    break;
 
+                case ProjectileID.AmberBolt:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.AmberStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = 30;
                         }
                     }
                     break;
@@ -799,7 +808,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             if (counter == 20)
                             {
-                                var ps = FargoSoulsGlobalProjectile.SplitProj(projectile, 2, MathHelper.PiOver2 * 0.12f, 0.8f);
+                                var ps = FargoSoulsGlobalProjectile.SplitProj(projectile, 2, MathHelper.PiOver2 * 0.12f, 0.66f);
                                 foreach (Projectile p in ps)
                                     p.Eternity().counter = counter + 1;
                                 projectile.active = false;
@@ -1674,6 +1683,28 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
+                case ProjectileID.AmethystBolt:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.AmethystStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType) && projectile.penetrate > 1)
+                        {
+                            projectile.penetrate -= 1;
+                            NPC npc = projectile.FindTargetWithinRange(450, true);
+                            if (npc != null)
+                                projectile.velocity = projectile.velocity.RotateTowards(projectile.DirectionTo(npc.Center).ToRotation(), 4);
+                            else
+                            {
+                                if (projectile.velocity.X != projectile.oldVelocity.X)
+                                    projectile.velocity.X = -projectile.oldVelocity.X;
+                                if (projectile.velocity.Y != projectile.oldVelocity.Y)
+                                    projectile.velocity.Y = -projectile.oldVelocity.Y;
+                            }
+                            return false;
+                        }
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -1750,7 +1781,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             NPC npc = projectile.FindTargetWithinRange(450, true);
                             if (npc != null)
-                                projectile.velocity = projectile.velocity.RotateTowards(projectile.DirectionTo(npc.Center).ToRotation(), 1);
+                                projectile.velocity = projectile.velocity.RotateTowards(projectile.DirectionTo(npc.Center).ToRotation(), 4);
                         }
                         break;
                     case ProjectileID.TopazBolt:
@@ -2015,7 +2046,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.GreekFire1:
                 case ProjectileID.GreekFire2:
                 case ProjectileID.GreekFire3:
-                    target.AddBuff(BuffID.OnFire, 300);
+                    if (Main.hardMode)
+                        target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 180);
+                    else
+                        target.AddBuff(BuffID.OnFire, 300);
                     break;
 
                 case ProjectileID.VortexAcid:
