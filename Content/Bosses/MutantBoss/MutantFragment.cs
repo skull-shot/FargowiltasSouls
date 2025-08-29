@@ -96,17 +96,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            switch ((int)Projectile.ai[0])
-            {
-                case 0: target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 180); break; //nebula
-                case 1: target.AddBuff(ModContent.BuffType<AtrophiedBuff>(), 180); break; //solar
-                case 2: target.AddBuff(ModContent.BuffType<JammedBuff>(), 180); break; //vortex
-                default: target.AddBuff(ModContent.BuffType<AntisocialBuff>(), 180); break; //stardust
-            }
         }
 
         public override Color? GetAlpha(Color lightColor)

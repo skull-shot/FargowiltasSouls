@@ -160,12 +160,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(Spazmatism ? BuffID.CursedInferno : BuffID.Ichor, 120);
-                if (WorldSavingSystem.EternityMode)
-                    target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
+                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }
 
         public override void OnKill(int timeLeft)

@@ -152,20 +152,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 target.mount.Dismount(target);
             target.velocity.X = Projectile.velocity.X < 0 ? -15f : 15f;
             target.velocity.Y = -10f;
-            target.AddBuff(ModContent.BuffType<StunnedBuff>(), 60);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 240);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            switch ((int)Projectile.ai[0])
-            {
-                case 0: target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 360); break; //nebula
-                case 1: target.AddBuff(ModContent.BuffType<AtrophiedBuff>(), 360); break; //solar
-                case 2: target.AddBuff(ModContent.BuffType<JammedBuff>(), 360); break; //vortex
-                default: target.AddBuff(ModContent.BuffType<AntisocialBuff>(), 360); break; //stardust
-            }
             Projectile.timeLeft = 0;
         }
 

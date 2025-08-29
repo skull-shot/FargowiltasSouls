@@ -4127,13 +4127,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

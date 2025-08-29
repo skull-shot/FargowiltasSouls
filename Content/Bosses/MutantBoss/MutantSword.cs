@@ -114,13 +114,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             target.velocity.X = target.Center.X < Main.npc[(int)Projectile.ai[0]].Center.X ? -15f : 15f;
             target.velocity.Y = -10f;
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
 
         public override void OnKill(int timeleft)

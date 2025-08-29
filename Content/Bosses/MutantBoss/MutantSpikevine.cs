@@ -1,5 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -92,6 +94,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
         public override void OnSpawn(IEntitySource source)
         {
             Trail[0] = Projectile.Center;
+        }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }
         public override void AI()
         {
