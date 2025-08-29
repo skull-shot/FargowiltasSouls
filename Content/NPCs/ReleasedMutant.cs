@@ -113,7 +113,7 @@ namespace FargowiltasSouls.Content.NPCs
 
         public override void AI()
         {
-            Main.NewText(NPC.timeLeft);
+            //Main.NewText(NPC.timeLeft);
 
             DrawOffsetY = -2;
             
