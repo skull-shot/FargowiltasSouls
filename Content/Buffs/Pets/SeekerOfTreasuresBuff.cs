@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs.Pets
 {
     public class SeekerOfTreasuresBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Pets", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Seeker of Treasures");
-            // Description.SetDefault("Give it a few thousand years to grow up");
             Main.buffNoTimeDisplay[Type] = true;
             Main.lightPet[Type] = true;
         }

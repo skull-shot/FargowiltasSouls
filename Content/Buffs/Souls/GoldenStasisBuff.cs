@@ -1,18 +1,15 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class GoldenStasisBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Golden Stasis");
-            // Description.SetDefault("You are immune to all damage, but cannot move");
             Main.buffNoSave[Type] = true;
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "不动金身");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "免疫所有伤害,但无法移动");
         }
 
         public override void Update(Player player, ref int buffIndex)

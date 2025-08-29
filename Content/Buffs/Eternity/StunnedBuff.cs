@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader;
 
@@ -6,14 +7,11 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class StunnedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Stunned");
-            // Description.SetDefault("You're too dizzy to move");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "昏迷");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你头晕目眩,动弹不得");
         }
 
         public override void Update(Player player, ref int buffIndex)

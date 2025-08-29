@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -9,6 +10,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class SouloftheMasochistBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;
@@ -21,26 +23,6 @@ namespace FargowiltasSouls.Content.Buffs.Minions
             if (player.whoAmI == Main.myPlayer)
             {
                 Item item = null;
-
-                
-                /*if (player.AddEffect<SkeleMinionEffect>(item))
-                {
-                    fargoPlayer.SkeletronArms = true;
-                    const int damage = 64;
-                    if(player.ownedProjectileCounts[ModContent.ProjectileType<SkeletronArm>()] == 1)
-                    {
-
-                        for (int i = 0; i < Main.maxProjectiles; i++)
-                        {
-                            if (Main.projectile[i].active && Main.projectile[i].owner == player.whoAmI && Main.projectile[i].type == ModContent.ProjectileType<SkeletronArm>())
-                            {
-                                Main.projectile[i].Kill();
-                            }
-                        }
-                    }
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, 1);
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<SkeletronArm>(), damage, 8f, player.whoAmI, -1);
-                }*/
 
                 if (player.AddEffect<PungentMinion>(item))
                 {
@@ -57,15 +39,6 @@ namespace FargowiltasSouls.Content.Buffs.Minions
                     if (player.ownedProjectileCounts[ModContent.ProjectileType<MiniSaucer>()] < 1)
                         FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), damage, 3f, player.whoAmI);
                 }
-                /*
-                if (player.AddEffect<CultistMinionEffect>(item))
-                {
-                    fargoPlayer.LunarCultist = true;
-                    const int damage = 160;
-                    if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<LunarCultist>()] < 1)
-                        FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<LunarCultist>(), damage, 2f, player.whoAmI, -1f);
-                }
-                */
                 
                 if (player.AddEffect<MasoTrueEyeMinion>(item))
                 {

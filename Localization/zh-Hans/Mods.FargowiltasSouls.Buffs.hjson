@@ -482,9 +482,9 @@ TrueEyesBuff: {
 	Description: 克苏鲁的几只眼睛将会保护你
 }
 
-TwinsEXBuff: {
-	DisplayName: 双子EX
-	Description: 真正的双子魔眼将为你而战
+OmniscienceBuff: {
+	// DisplayName: Omniscience
+	// Description: The real Twins will fight for you
 }
 
 MutantRebirthBuff: {

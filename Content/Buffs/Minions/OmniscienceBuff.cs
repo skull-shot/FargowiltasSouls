@@ -1,15 +1,15 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Minions
 {
-    public class TwinsEXBuff : ModBuff
+    public class OmniscienceBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Twins EX");
-            // Description.SetDefault("The real Twins will fight for you");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
         }
