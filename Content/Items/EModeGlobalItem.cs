@@ -367,15 +367,7 @@ namespace FargowiltasSouls.Content.Items
             if (!WorldSavingSystem.EternityMode)
                 return;
             switch (item.type)
-            {
-                case ItemID.WaterBolt:
-                    if (!NPC.downedBoss3 && EmodeItemBalance.HasEmodeChange(player, item.type))
-                    {
-                        type = ProjectileID.WaterGun;
-                        damage = 0;
-                    }
-                    break;
-                    
+            {                    
                 case ItemID.ChlorophyteSaber:
                     if (EmodeItemBalance.HasEmodeChange(player, item.type))
                     {
