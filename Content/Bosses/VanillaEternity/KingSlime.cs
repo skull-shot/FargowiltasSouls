@@ -129,9 +129,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            // Drop summon
-            
 
+            
             // Scaling (from vanilla)
             float num255 = (float)npc.life / (float)npc.lifeMax;
             num255 = num255 * 0.5f + 0.75f;
@@ -155,6 +154,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.position.X -= npc.width / 2;
                 npc.position.Y -= npc.height;
             }
+
+            // Anti cheese
+            npc.noTileCollide = false;
+            if (Math.Abs(Target.Center.X - NPC.Center.X) < npc.width / 2 && Target.Center.Y > NPC.Center.Y && !Collision.CanHitLine(NPC.position, npc.width, npc.height, Target.position, Target.width, Target.height))
+                npc.noTileCollide = true;
+
 
             int state = (int)State;
             switch ((States)state)
@@ -195,6 +200,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     Explosion();
                     break;
             }
+            if (npc.velocity.Y < 0)
+                npc.noTileCollide = true;
             return false;
         }
         public bool JumpWindup()
