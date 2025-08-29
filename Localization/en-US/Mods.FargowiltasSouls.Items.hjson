@@ -440,7 +440,7 @@ PlatinumEnchant: {
 	DisplayName: Platinum Enchantment
 	Tooltip:
 		'''
-		20% chance for enemies to drop loot 4 more times
+		20% chance for enemies to drop loot 4 more times when defeated by you
 		'Its value is immeasurable'
 		'''
 }
@@ -1447,7 +1447,7 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Enemies and bosses will drop loot one more time
+		Enemies and bosses will drop loot one more time when defeated by you
 		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		'''

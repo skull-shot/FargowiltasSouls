@@ -83,3 +83,4 @@ destroyer no longer pierce resists held projectiles (read: yoyos)
 mutant sans golem is now dodgeable, probably
 removed debug text i forgot was left on released mutant
 added mainframe painting
+plat ench and sinister icon tooltips specify enemies "must be defeated by you" to work
