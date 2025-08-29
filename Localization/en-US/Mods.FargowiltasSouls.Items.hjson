@@ -162,7 +162,7 @@ CrystalAssassinEnchant: {
 		'''
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
-		Jump while dashing into ground to get a speed boost and gain the First Strike buff
+		Jump while dashing on the ground to get a speed boost and gain the First Strike buff
 		First Strike causes your next attack to guarantee a critical strike
 		'Reach for the summit'
 		'''
@@ -440,7 +440,7 @@ PlatinumEnchant: {
 	DisplayName: Platinum Enchantment
 	Tooltip:
 		'''
-		20% chance for enemies to drop loot 4 more times
+		20% chance for enemies to drop loot 4 more times when defeated by you
 		'Its value is immeasurable'
 		'''
 }
@@ -763,8 +763,8 @@ CosmoForce: {
 		[i:FargowiltasSouls/SolarEnchant] Attacking generates up to 4 moons that orbit around you 
 		[i:FargowiltasSouls/VortexEnchant] Stop attacking to launch them towards your cursor, exploding into Lunar Boosters
 		[i:FargowiltasSouls/NebulaEnchant] Picking up Lunar Boosters increases your damage, crit, life regen or damage reduction
-		[i:FargowiltasSouls/MeteorEnchant] Increases your movement speed and acceleration, and decreases your momentum
 		[i:FargowiltasSouls/WizardEnchant] Upgrades the effects of all your Enchantments
+		[i:FargowiltasSouls/MeteorEnchant] Effects of Magiluminescence
 		'Been around since the Big Bang'
 		'''
 }
@@ -985,8 +985,8 @@ LithosphericCluster: {
 	Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1009,8 +1009,8 @@ LithosphericClusterInactive: {
 	Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1192,20 +1192,20 @@ HeartoftheMasochist: {
 	Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Flipped, Illuminated, Unstable, and Curse of the Moon
+		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
 		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
-		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/GalacticGlobe] grants increased flight time
+		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/ChaliceofTheMoon] grants increased flight time
 		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/ChaliceofTheMoon] mini True Eyes of Cthulhu and [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer which slows enemies it hits
 		'Warm, beating, and no body needed'
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion buffs"
+	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/ChaliceofTheMoon] grants most standard potion buffs"
 }
 
 IceQueensShield: {
@@ -1447,7 +1447,7 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Enemies and bosses will drop loot one more time
+		Enemies and bosses will drop loot one more time when defeated by you
 		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		'''
@@ -1668,16 +1668,16 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs, and more
+		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
 		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/GalacticGlobe] True Eyes of Cthulhu by your side
+		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
 		'''
@@ -3624,4 +3624,9 @@ Devilshield: {
 Devilstone: {
 	DisplayName: Devilstone
 	Tooltip: ""
+}
+
+MainframePainting: {
+	DisplayName: Mainframe Painting
+	Tooltip: "'Gonk'"
 }

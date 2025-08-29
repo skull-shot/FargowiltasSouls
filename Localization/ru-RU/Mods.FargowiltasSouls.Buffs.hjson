@@ -486,9 +486,9 @@ TrueEyesBuff: {
 	Description: Истинные глаза Ктулху защищают вас
 }
 
-TwinsEXBuff: {
-	DisplayName: Близнецы EX
-	Description: Настоящие Близнецы сражаются за вас
+OmniscienceBuff: {
+	// DisplayName: Omniscience
+	// Description: The real Twins will fight for you
 }
 
 MutantRebirthBuff: {

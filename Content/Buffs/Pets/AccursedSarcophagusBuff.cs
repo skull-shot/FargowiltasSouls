@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs.Pets
 {
     public class AccursedSarcophagusBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Pets", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Accursed Sarcophagus");
-            // Description.SetDefault("It'll keep its hands off");
             Main.buffNoTimeDisplay[Type] = true;
             Main.vanityPet[Type] = true;
         }

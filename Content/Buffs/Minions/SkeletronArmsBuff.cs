@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -8,14 +9,11 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class SkeletronArmsBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Skeletron Arms");
-            // Description.SetDefault("The Skeletron arms will protect you");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "骷髅王之手");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "骷髅王之手将会保护你");
         }
 
         public override void Update(Player player, ref int buffIndex)

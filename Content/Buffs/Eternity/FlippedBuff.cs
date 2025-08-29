@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -5,10 +6,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class FlippedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Flipped");
-            // Description.SetDefault("Your gravity is reversed");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;

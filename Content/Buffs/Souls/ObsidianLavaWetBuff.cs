@@ -1,14 +1,14 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class ObsidianLavaWetBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lava Wet");
-            // Description.SetDefault("You are dripping lava");
             Main.buffNoSave[Type] = true;
         }
 

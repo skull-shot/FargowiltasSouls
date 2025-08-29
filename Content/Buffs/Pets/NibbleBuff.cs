@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,6 +8,7 @@ namespace FargowiltasSouls.Content.Buffs.Pets
 {
     public class NibbleBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Pets", Name);
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;

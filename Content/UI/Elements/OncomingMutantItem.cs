@@ -3,7 +3,7 @@ using FargowiltasSouls.Content.Items.Placables.Trophies;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Assets.UI
+namespace FargowiltasSouls.Content.UI.Elements
 {
     // Exists to be displayed as an item icon in the Toggler UI when inflicted with Mutant's Presence.
     public class OncomingMutantItem : ModItem

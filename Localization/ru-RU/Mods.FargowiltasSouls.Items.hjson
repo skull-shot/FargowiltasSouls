@@ -3665,3 +3665,8 @@ Devilstone: {
 	DisplayName: Демонокамень
 	Tooltip: ""
 }
+
+MainframePainting: {
+	// DisplayName: Mainframe Painting
+	// Tooltip: "'Gonk'"
+}
