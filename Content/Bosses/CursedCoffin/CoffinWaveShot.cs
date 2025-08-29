@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 4);
+            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 2);
         }
         private static readonly Color GlowColor = new(224, 196, 252, 0);
         public override bool PreDraw(ref Color lightColor)

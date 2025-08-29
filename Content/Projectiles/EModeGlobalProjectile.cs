@@ -403,7 +403,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             projectile.light = 1f;
                     }
                     break;
-
+                    
                 case ProjectileID.DeerclopsIceSpike: //note to future self: these are all mp compatible apparently?
                     if (sourceProj is Projectile && sourceProj.type == projectile.type == sourceProj.Eternity().altBehaviour)
                     {
@@ -427,16 +427,15 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
 
-                    if (projectile.GetSourceNPC() is NPC npc && npc.type == NPCID.Deerclops && sourceProj is not Projectile)
+                    if (projectile.GetSourceNPC() != null && projectile.GetSourceNPC() is NPC npc && npc.type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
                         projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
                         altBehaviour = true;
 
-
                         //is a final spike of the attack
-                        if (npc.ai[0] == 1 && npc.ai[1] == 52 || npc.ai[0] == 4 && npc.ai[1] == 70 && !npc.GetGlobalNPC<Deerclops>().DoLaserAttack)
+                        if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
-                            bool isSingleWaveAttack = npc.ai[0] == 1;
+                            bool isSingleWaveAttack = projectile.GetSourceNPC().ai[0] == 1;
 
                             bool shouldSplit = true;
                             if (isSingleWaveAttack) //because deerclops spawns like 4 of them stacked on each other?
@@ -447,29 +446,28 @@ namespace FargowiltasSouls.Content.Projectiles
                                         && Main.projectile[i].scale == projectile.scale
                                         && Math.Sign(Main.projectile[i].velocity.X) == Math.Sign(projectile.velocity.X))
                                     {
-                                        if (i != projectile.whoAmI)
+                                        if (i != projectile.identity)
                                             shouldSplit = false;
                                         break;
                                     }
                                 }
                             }
-
                             if (shouldSplit)
                             {
                                 //projectile.ai[0] -= 60;
                                 //projectile.netUpdate = true;
 
                                 float ai1 = 1.3f;
-                                if (npc.GetGlobalNPC<Deerclops>().EnteredPhase2)
+                                if (projectile.GetSourceNPC().TryGetGlobalNPC<Deerclops>(out var dcgnc) && dcgnc.EnteredPhase2)
                                     ai1 = 1.35f; //triggers recursive ai
                                                  //if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase3 || WorldSavingSystem.MasochistModeReal)
                                                  //    ai1 = 1.4f;
                                 Vector2 spawnPos = projectile.Center + 200 * Vector2.Normalize(projectile.velocity);
-
+                                
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     Projectile.NewProjectile(projectile.GetSource_FromThis(), spawnPos, projectile.velocity, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
-
+                                    
                                     if (isSingleWaveAttack)
                                     {
                                         Projectile.NewProjectile(projectile.GetSource_FromThis(), spawnPos, Vector2.UnitX * Math.Sign(projectile.velocity.X) * projectile.velocity.Length(), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
@@ -478,7 +476,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else
                                     {
                                         Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(-projectile.velocity.X, projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
-                                        if (projectile.Center.Y < npc.Center.Y)
+                                        if (projectile.Center.Y < projectile.GetSourceNPC().Center.Y)
                                         {
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, -projectile.velocity, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(projectile.velocity.X, -projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
@@ -489,11 +487,13 @@ namespace FargowiltasSouls.Content.Projectiles
                                         }
                                     }
                                 }
+                                
                             }
+                            
                         }
                     }
                     break;
-
+                    
                 default:
                     break;
             }
@@ -1656,20 +1656,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.QueenSlimeMinionPinkBall:
                 case ProjectileID.QueenSlimeGelAttack:
-                    if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
-                    {
-                        if (FargoSoulsUtil.HostCheck)
-                        {
-                            for (int i = 0; i < 8; i++)
-                                Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Vector2.UnitY.RotatedBy(2 * Math.PI / 8 * i) * 2f, ProjectileID.HallowSpray, 0, 0f, Main.myPlayer, 8f);
-                        }
-                    }
-                    else
-                    {
-                        //if (projectile.localAI[1] == 1)
-                        projectile.timeLeft = 0;
-                        //projectile.localAI[1] = 1;
-                    }
+                    projectile.timeLeft = 0;
                     break;
 
                 case ProjectileID.ThornBall:

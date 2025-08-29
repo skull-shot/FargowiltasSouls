@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Deerclops
         }
 
         bool spawned;
-        int oldMash;
+        float oldMash;
 
         public override void AI()
         {
