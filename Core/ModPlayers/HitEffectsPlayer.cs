@@ -94,7 +94,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
                         {
                             SpiderCD = 30;
-                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer);
+                            Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                            Vector2 vel = spawnPos.DirectionTo(target.Center) * 5f;
+                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), spawnPos, vel, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer, ai2: target.whoAmI);
                         }
                     }
                     if (UniverseCore) // cosmic core

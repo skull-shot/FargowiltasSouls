@@ -1,28 +1,29 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
+using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Common.Utilities;
 using Microsoft.Xna.Framework;
-using System;
-using System.IO;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Core;
-using System.Collections.Generic;
-using Luminance.Common.Utilities;
 using static tModPorter.ProgressUpdate;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using FargowiltasSouls.Content.Items.Armor;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -817,12 +818,19 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         private void Artillery()
         {
             NPC.noTileCollide = true;
-            int windup = 45;
+            int windup = 60;
             int attackLength = 60;
             int endlag = 30;
             float horDir = NPC.HorizontalDirectionTo(Target.Center);
-            Vector2 desiredPos = Target.Center + Vector2.UnitX * -horDir * 490;
-            Movement(desiredPos, 1f);
+            if (Timer < windup - 3)
+            {
+                Vector2 desiredPos = Target.Center + Vector2.UnitX * -horDir * 490;
+                Movement(desiredPos, 1f);
+            }
+            else
+            {
+                NPC.velocity *= 0.93f;
+            }
 
             Timer++;
             if (Timer < windup)
@@ -833,13 +841,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 float attackTimer = Timer - windup;
                 float progress = attackTimer / attackLength;
-                if (attackTimer % 5 == 0)
+                int freq = WorldSavingSystem.MasochistModeReal ? 5 : 6;
+                if (attackTimer % freq == 0)
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {
                         float vel = 10f + 20f * MathF.Pow(progress, 0.8f);
                         float sqrt2 = MathF.Sqrt(2);
-                        float verticalDir = MathHelper.Lerp(-0.6f, -0.9f, MathF.Pow(progress, 0.8f));
+                        float verticalDir = MathHelper.Lerp(-0.6f, -0.8f, MathF.Pow(progress, 0.8f));
                         Vector2 dir = new(horDir / sqrt2, verticalDir / sqrt2);
                         Vector2 offset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + offset + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
@@ -894,20 +903,32 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
-                    int projs = WorldSavingSystem.MasochistModeReal ? 14 : 14;
-                    float rotOffset = NPC.DirectionTo(Target.Center).ToRotation();
-                    rotOffset = rotOffset.ToRotationVector2().RotateTowards(-Vector2.UnitY.ToRotation(), 0.1f).ToRotation();
-                    rotOffset += Main.rand.NextFloat(MathHelper.PiOver2 * 0.07f);
+
+                    // extra projectiles aimed at player
+                    Vector2 baseOffset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
+                    Vector2 spawnPos = NPC.Center + baseOffset;
+                    Vector2 baseDir = spawnPos.DirectionTo(Target.Center);
+                    baseDir = Vector2.Lerp(baseDir, -Vector2.UnitY, 0.1f).SafeNormalize(baseDir);
+                    for (int i = -1; i <= 1; i++)
+                    {
+
+                        Vector2 dir = baseDir.RotatedBy(i * MathHelper.PiOver2 * 0.09f).RotatedByRandom(MathHelper.PiOver2 * 0.04f);
+                        float vel = 11f;
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
+                    }
+                    float projs = 10;
+                    float baseInterval = MathHelper.TwoPi / (projs + 1);
+                    float baseRot = baseDir.ToRotation() + baseInterval;
                     for (int i = 0; i < projs; i++)
                     {
-                        float rot = ((float)i / projs) * MathHelper.TwoPi;
-                        rot += rotOffset;
+                        float rot = baseRot + i * baseInterval;
 
                         Vector2 dir = rot.ToRotationVector2();
                         float vel = 11f;
                         Vector2 offset = Main.rand.NextVector2Circular(NPC.width / 8, NPC.height / 8);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + offset + dir * 24, dir * vel, ProjectileID.QueenSlimeGelAttack, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, Main.myPlayer);
                     }
+
                 }
             }
             else
@@ -935,7 +956,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             float desiredX = Target.Center.X;
-            float desiredY = Target.Center.Y - 200;
+            float desiredY = Target.Center.Y - 280 + 120 * MathF.Sin(Timer / (cycleTime * 0.3f));
             float xAccel = 0.4f;
             int xMax = 18;
             NPC.velocity.X += Math.Sign(desiredX - NPC.Center.X) * xAccel;

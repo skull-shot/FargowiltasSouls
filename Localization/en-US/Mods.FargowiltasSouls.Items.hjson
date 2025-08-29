@@ -589,7 +589,7 @@ SpiderEnchant: {
 	DisplayName: Spider Enchantment
 	Tooltip:
 		'''
-		+10% critical strike chance
+		+7% critical strike chance
 		Your summon weapons can critically strike
 		Instead of dealing extra damage, summon weapon crits spawn spiderlings, which can crit
 		'Arachnophobia is punishable by arachnid induced death'
@@ -792,7 +792,6 @@ LifeForce: {
 		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] +10% critical strike chance
 		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
@@ -1724,7 +1723,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
-		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, effects of Hive Pack
+		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, your minions can crit for 1.25x damage, effects of Hive Pack
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
 		[i:FargowiltasSouls/SpiritForce] Upon reaching zero health, you will revive with 300 health
 		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
