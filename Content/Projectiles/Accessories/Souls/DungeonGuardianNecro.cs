@@ -54,7 +54,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.SetMaxDamage(Math.Min(Projectile.originalDamage, 10 * 1000));
+            float softcap = 5000;
+            float maxDamage = Projectile.originalDamage;
+            if (maxDamage > softcap)
+                maxDamage = ((2 * softcap) + maxDamage) / 3;
+            modifiers.SetMaxDamage((int)maxDamage);
             modifiers.FinalDamage = new();
             modifiers.SourceDamage = new();
             modifiers.DisableCrit();
