@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = -1;
-            Projectile.timeLeft = 30;
+            Projectile.timeLeft = 1;
             Projectile.tileCollide = false;
             Projectile.light = 0.75f;
             Projectile.ignoreWater = true;

@@ -280,6 +280,18 @@ namespace FargowiltasSouls.Content.Items
                 damage *= 8 * attackSpeedContrib;
             }
         }
+        public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
+        {
+            switch (item.type)
+            {
+                case ItemID.TopazStaff:
+                    if (EmodeItemBalance.HasEmodeChange(player, ItemID.TopazStaff))
+                        crit += 6;
+                    break;
+                default:
+                    break;
+            }
+        }
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (!WorldSavingSystem.EternityMode)
@@ -343,6 +355,10 @@ namespace FargowiltasSouls.Content.Items
             if (item.type == ItemID.SapphireStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
             {
                 return 1.5f;
+            }
+            if (item.type == ItemID.EmeraldStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
+            {
+                return 0.75f;
             }
             return base.UseSpeedMultiplier(item, player);
         }

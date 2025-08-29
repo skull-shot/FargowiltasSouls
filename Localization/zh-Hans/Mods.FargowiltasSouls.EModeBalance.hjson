@@ -61,8 +61,8 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
 // AvengerEmblem: Damage bonus increased by 3%
-// AmethystStaff: Bolt is faster and bounces once
-// TopazStaff: Critical strikes cause an explosion
+// AmethystStaff: Bolt is faster and bounces towards enemies
+// TopazStaff: Critical strikes cause an explosion, increased base critical strike chance
 // SapphireStaff: Rapidly fires bolts in a spread
 // EmeraldStaff: Fires a large bolt with strong knockback and pierce
 // AmberStaff: Bolt boomerangs back
