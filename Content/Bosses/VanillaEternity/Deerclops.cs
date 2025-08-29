@@ -631,7 +631,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(BuffID.BrokenArmor, 90);
             if (WorldSavingSystem.MasochistModeReal)
                 target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

@@ -473,7 +473,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<FusedBuff>(),
                     ModContent.BuffType<GodEaterBuff>(),
                     ModContent.BuffType<HexedBuff>(),
-                    ModContent.BuffType<HypothermiaBuff>(),
                     ModContent.BuffType<InfestedBuff>(),
                     ModContent.BuffType<NeurotoxinBuff>(),
                     ModContent.BuffType<IvyVenomBuff>(),

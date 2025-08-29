@@ -53,7 +53,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
         {
             // Immune to water physics
             npc.waterMovementSpeed = 1f;
-            npc.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
  
             if (!npc.wet)
             {

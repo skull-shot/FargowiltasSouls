@@ -251,11 +251,6 @@ HexedBuff: {
 	Description: 你的攻击会治愈敌人
 }
 
-HypothermiaBuff: {
-	DisplayName: 恐寒症
-	Description: 友方弹幕速度会减慢，你会承受更多来自冷系攻击的伤害
-}
-
 InfestedBuff: {
 	DisplayName: 感染
 	Description: 这只会变得更糟

@@ -251,11 +251,6 @@ HexedBuff: {
 	// Description: Your attacks heal enemies
 }
 
-HypothermiaBuff: {
-	// DisplayName: Hypothermia
-	// Description: Friendly projectiles are slowed down and you take increased damage from cold attacks
-}
-
 InfestedBuff: {
 	// DisplayName: Infested
 	// Description: This can only get worse

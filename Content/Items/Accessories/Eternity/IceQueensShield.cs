@@ -52,7 +52,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.AddEffect<IceShieldEffect>(item);
         }

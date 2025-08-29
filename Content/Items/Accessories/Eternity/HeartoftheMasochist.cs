@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ParryEffect>(Item);
 
             //ice queen's crown
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
+            player.buffImmune[BuffID.Frozen] = true;
             IceQueensShield.AddEffects(player, Item);
 
             //saucer control console

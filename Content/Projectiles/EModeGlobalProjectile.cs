@@ -658,16 +658,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 WormPierceResist *= 0.99f;
             if (WormPierceResist < 0.01f)
                 WormPierceResist = 0;
-
-            //Slower friendly projectiles in Snow biome
-            if (projectile.friendly && !ProjectileID.Sets.IsAWhip[projectile.type])
-            {
-                Player player = Main.player[projectile.owner];
-                if (player.HasBuff(ModContent.BuffType<HypothermiaBuff>()) && projectile.velocity.Length() > 3f)
-                {
-                    projectile.velocity *= 0.975f;
-                }
-            }
             
             counter++;
 
@@ -1826,7 +1816,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     //target.AddBuff(BuffID.BrokenArmor, 90);
                     if (WorldSavingSystem.MasochistModeReal)
                         target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 900);
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
                     break;
 
                 case ProjectileID.BloodShot:
@@ -1954,8 +1943,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.CultistBossIceMist:
-                    target.FargoSouls().AddBuffNoStack(BuffID.Frozen, 45);
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
+                    //target.FargoSouls().AddBuffNoStack(BuffID.Frozen, 45);
                     break;
 
                 case ProjectileID.CultistBossFireBall:
@@ -2150,17 +2138,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     target.AddBuff(BuffID.OnFire, 900);
                     break;
 
-                case ProjectileID.FrostWave:
-                case ProjectileID.FrostShard:
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 600);
-                    break;
-
                 case ProjectileID.SnowBallHostile:
                     target.FargoSouls().AddBuffNoStack(BuffID.Frozen, 45);
-                    break;
-
-                case ProjectileID.BulletSnowman:
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 600);
                     break;
 
                 case ProjectileID.UnholyTridentHostile:
@@ -2251,7 +2230,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.IceSpike:
                     //target.AddBuff(BuffID.Slimed, 120);
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 300);
                     break;
 
                 case ProjectileID.JungleSpike:
