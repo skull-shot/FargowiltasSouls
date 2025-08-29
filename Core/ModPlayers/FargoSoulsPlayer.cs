@@ -473,7 +473,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             CurseoftheMoon = false;
             OceanicMaul = false;
             DeathMarked = false;
-            Hypothermia = false;
             Midas = false;
             if (!MutantPresenceBuffer)
             {
