@@ -1,14 +1,14 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Boss
 {
     public class BaronsBurdenBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Boss", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Baron's Burden");
-            // Description.SetDefault("Gravity heavily increased outside water\nBreathe water instead of air\nGet back in!");
             Main.debuff[Type] = true;
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;

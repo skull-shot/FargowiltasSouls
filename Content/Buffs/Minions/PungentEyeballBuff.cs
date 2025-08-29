@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,14 +8,11 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class PungentEyeballBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Pungent Eyeball");
-            // Description.SetDefault("The pungent eyeball will protect you");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "尖刻眼球");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "尖刻眼球将会保护你");
         }
 
         public override void Update(Player player, ref int buffIndex)

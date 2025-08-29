@@ -486,8 +486,8 @@ TrueEyesBuff: {
 	// Description: The eyes of Cthulhu will protect you
 }
 
-TwinsEXBuff: {
-	// DisplayName: Twins EX
+OmniscienceBuff: {
+	// DisplayName: Omniscience
 	// Description: The real Twins will fight for you
 }
 

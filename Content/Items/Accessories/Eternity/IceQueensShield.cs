@@ -20,8 +20,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Face)]
-    public class IceQueensCrown : SoulsItem
+    //[AutoloadEquip(EquipType.Face)]
+    public class IceQueensShield : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
-        public override int ToggleItemType => ModContent.ItemType<IceQueensCrown>();
+        public override int ToggleItemType => ModContent.ItemType<IceQueensShield>();
         public static int CD => 60 * 15;
         public static int BaseDamage(Player player) => (int)(330 * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
@@ -96,7 +96,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     modPlayer.IceQueenCrownCD = CD;
 
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("IceQueenCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "IceQueensCrown").Value, Color.LightBlue,
+                        CooldownBarManager.Activate("IceQueenCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "IceQueensShield").Value, Color.LightBlue,
                             () => 1f - (float)Main.LocalPlayer.FargoSouls().IceQueenCrownCD / CD, activeFunction: player.HasEffect<IceShieldEffect>);
                 }
             }

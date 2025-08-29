@@ -1211,10 +1211,10 @@ HeartoftheMasochist: {
 	DisplayName: Сердце Властителя
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensCrown] «Гипотермия», «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Гипотермия», «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
 		[i:FargowiltasSouls/BetsysHeart] «Тормоз», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Влага», «Укус зверя», «Океаническое терзание», дебаффам воды,
 		[i:FargowiltasSouls/PrecisionSeal] «Поражение», [i:FargowiltasSouls/ChaliceofTheMoon] «Перевёрнутый», «Нестабильный» и «Проклятие луны»
-		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Увеличивает урон и шанс крит. удара на 10% и сопротивление урону на 5%
+		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Увеличивает урон и шанс крит. удара на 10% и сопротивление урону на 5%
 		[i:FargowiltasSouls/PumpkingsCape] Парирование аннулирует до 200 единиц урона. Парирования исцеляют вас в зависимости от заблокированного урона
 		[i:FargowiltasSouls/BetsysHeart] Огненный рывок накладывает «Проклятие Бетси»
 		[i:FargowiltasSouls/MutantAntibodies] При погружении в воду восстанавливает время полёта и увеличивает скорость и максимальное время полёта
@@ -1229,7 +1229,7 @@ HeartoftheMasochist: {
 	VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Нажмите клавишу смены боеприпасов, чтобы переключить используемые боеприпасы и [i:FargowiltasSouls/ChaliceofTheMoon] даёт базовые баффы зелий"
 }
 
-IceQueensCrown: {
+IceQueensShield: {
 	DisplayName: Корона ледяной королевы
 	Tooltip:
 		'''
@@ -3664,4 +3664,9 @@ Devilshield: {
 Devilstone: {
 	DisplayName: Демонокамень
 	Tooltip: ""
+}
+
+MainframePainting: {
+	// DisplayName: Mainframe Painting
+	// Tooltip: "'Gonk'"
 }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 {
     public class CoffinTossBuff : ModBuff
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Boss", Name);
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;

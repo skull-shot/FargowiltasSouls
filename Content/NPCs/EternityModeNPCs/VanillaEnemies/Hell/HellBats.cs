@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                 }
                 if (npc.HasPlayerTarget)
                 {
-                    float spd = Main.hardMode ? 0.3f : 0.05f;
+                    float spd = Main.hardMode ? 0.1f : 0.05f;
                     npc.velocity += npc.DirectionTo(Main.player[npc.target].Center) * spd;
                 }
                 int dAmount = (int)(6 * (float)Timer / DeathChargeTime);

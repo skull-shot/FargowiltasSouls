@@ -1,13 +1,14 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class OriPoisonBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Orichalcum Poison");
             Main.buffNoSave[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
             Main.debuff[Type] = true;

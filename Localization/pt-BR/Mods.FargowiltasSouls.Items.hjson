@@ -1006,8 +1006,8 @@ LithosphericCluster: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1030,8 +1030,8 @@ LithosphericClusterInactive: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1236,7 +1236,7 @@ HeartoftheMasochist: {
 	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion buffs"
 }
 
-IceQueensCrown: {
+IceQueensShield: {
 	DisplayName: Coroa da Rainha de Gelo
 	Tooltip:
 		'''
@@ -3651,4 +3651,9 @@ Devilshield: {
 Devilstone: {
 	// DisplayName: Devilstone
 	// Tooltip: ""
+}
+
+MainframePainting: {
+	// DisplayName: Mainframe Painting
+	// Tooltip: "'Gonk'"
 }

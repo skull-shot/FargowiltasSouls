@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -7,14 +8,11 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class BrainMinionBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Brain of Cthulhu");
-            // Description.SetDefault("The mini Brain of Cthulhu will fight for you");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "克苏鲁之脑");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "迷你克苏鲁之脑将会为你而战");
         }
 
         public override void Update(Player player, ref int buffIndex)

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -5,10 +6,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class RefreshedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Refreshed");
-            // Description.SetDefault("Increased mobility and flight time");
             Main.buffNoSave[Type] = true;
         }
 

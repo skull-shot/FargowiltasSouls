@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
@@ -11,14 +12,11 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class LightningRodBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lightning Rod");
-            // Description.SetDefault("You attract thunderbolts");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "避雷针");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你将会吸引雷电");
         }
 
         private static void SpawnLightning(Entity obj, int type, int damage, IEntitySource source)
@@ -60,9 +58,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
                 int damage = (Main.hardMode ? 120 : 60) / 4;
                 SpawnLightning(player, ModContent.ProjectileType<LightningVortexHostile>(), damage, player.GetSource_Buff(buffIndex));
             }
-
-            //if (Main.rand.Next(60) == 1)
-            // SpawnLightning(player, ModContent.ProjectileType<LightningVortexHostile>(), 0);
         }
 
         public override void Update(NPC npc, ref int buffIndex)

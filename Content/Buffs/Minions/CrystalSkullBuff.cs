@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class CrystalSkullBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;
