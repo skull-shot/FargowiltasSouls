@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class HallowIlluminatedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

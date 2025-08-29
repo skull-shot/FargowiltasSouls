@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -5,10 +6,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class HypothermiaBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Hypothermia");
-            // Description.SetDefault("Increased damage taken from cold attacks");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
         }

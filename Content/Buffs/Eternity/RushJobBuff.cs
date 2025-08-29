@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,10 +7,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class RushJobBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Rush Job");
-            // Description.SetDefault("The Nurse cannot heal you again yet");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;

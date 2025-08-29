@@ -1,11 +1,12 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class GladiatorSpiritBuff : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Content/Buffs/Souls/GladiatorBuff";
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", "GladiatorBuff");
         public override void SetStaticDefaults()
         {
             Main.buffNoSave[Type] = true;

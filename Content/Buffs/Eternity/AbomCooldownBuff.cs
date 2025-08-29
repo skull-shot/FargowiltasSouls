@@ -1,4 +1,5 @@
 
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -6,10 +7,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class AbomCooldownBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Abominable Cooldown");
-            // Description.SetDefault("Cannot endure another attack yet");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

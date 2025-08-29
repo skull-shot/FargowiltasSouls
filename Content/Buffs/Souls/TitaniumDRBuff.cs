@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,10 +7,9 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class TitaniumDRBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Titanium Shield");
-            // Description.SetDefault("You have extra damage resistance in close range and resist most debuffs");
             Main.buffNoSave[Type] = true;
         }
 

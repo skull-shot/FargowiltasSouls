@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -5,10 +6,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class NeurotoxinBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Neurotoxin");
-            // Description.SetDefault("Your body is shutting down");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;

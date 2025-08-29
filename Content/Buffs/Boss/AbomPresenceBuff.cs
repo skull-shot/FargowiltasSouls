@@ -1,10 +1,12 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Boss
 {
     public class AbomPresenceBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Boss", Name);
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
@@ -20,9 +22,6 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             player.FargoSouls().noSupersonic = true;
             player.moonLeech = true;
             player.bleed = true;
-
-            //player.statDefense -= 30;
-            //player.endurance -= 0.25f;
         }
     }
 }

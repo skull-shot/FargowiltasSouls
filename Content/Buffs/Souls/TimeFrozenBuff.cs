@@ -1,4 +1,5 @@
 ﻿
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
@@ -14,6 +15,7 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class TimeFrozenBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
             Main.buffNoSave[Type] = true;
