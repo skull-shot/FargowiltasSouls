@@ -348,7 +348,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
-        public bool Hypothermia;
         public bool noDodge;
         public bool noSupersonic;
         public bool NoMomentum;

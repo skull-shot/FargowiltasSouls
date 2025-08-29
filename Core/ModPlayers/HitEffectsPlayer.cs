@@ -328,9 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Smite)
                 dr -= 0.2f;
 
-            if (npc.coldDamage && Hypothermia)
-                dr -= 0.2f;
-
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
@@ -359,9 +356,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
 
             if (Smite)
-                dr -= 0.2f;
-
-            if (proj.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
             if (CurseoftheMoon)
