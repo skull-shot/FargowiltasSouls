@@ -2532,38 +2532,77 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         void SpawnFishrons()
         {
             NPC.velocity *= 0.97f;
-            if (NPC.ai[1] == 0)
+            if (NPC.ai[0] == 30) // fishron variant
             {
-                NPC.ai[2] = Main.rand.NextBool() ? 1 : 0;
-            }
-            const int fishronDelay = 3;
-            int maxFishronSets = WorldSavingSystem.MasochistModeReal ? 3 : 2;
-            if (NPC.ai[1] % fishronDelay == 0 && NPC.ai[1] <= fishronDelay * maxFishronSets)
-            {
-                if (FargoSoulsUtil.HostCheck)
+                if (NPC.ai[1] == 0)
                 {
-                    int projType = NPC.ai[0] == 30 ? ModContent.ProjectileType<MutantFishron>() : ModContent.ProjectileType<MutantShadowHand>();
-                    for (int j = -1; j <= 1; j += 2) //to both sides of player
+                    NPC.ai[2] = Main.rand.NextBool() ? 1 : 0;
+                }
+                const int fishronDelay = 3;
+                int maxFishronSets = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                if (NPC.ai[1] % fishronDelay == 0 && NPC.ai[1] <= fishronDelay * maxFishronSets)
+                {
+                    if (FargoSoulsUtil.HostCheck)
                     {
-                        int max = (int)NPC.ai[1] / fishronDelay;
-                        for (int i = -max; i <= max; i++) //fan of fishron
+                        int projType = ModContent.ProjectileType<MutantFishron>();
+                        for (int j = -1; j <= 1; j += 2) //to both sides of player
                         {
-                            if (Math.Abs(i) != max) //only spawn the outmost ones
-                                continue;
-                            float spread = MathHelper.Pi / 3 / (maxFishronSets + 1);
-                            Vector2 offset = NPC.ai[2] == 0 ? Vector2.UnitY.RotatedBy(spread * i) * -450f * j : Vector2.UnitX.RotatedBy(spread * i) * 475f * j;
+                            int max = (int)NPC.ai[1] / fishronDelay;
+                            for (int i = -max; i <= max; i++) //fan of fishron
+                            {
+                                if (Math.Abs(i) != max) //only spawn the outmost ones
+                                    continue;
+                                float spread = MathHelper.Pi / 3 / (maxFishronSets + 1);
+                                Vector2 offset = NPC.ai[2] == 0 ? Vector2.UnitY.RotatedBy(spread * i) * -450f * j : Vector2.UnitX.RotatedBy(spread * i) * 475f * j;
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, projType, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 30; i++)
+                    {
+                        int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].noLight = true;
+                        Main.dust[d].velocity *= 12f;
+                    }
+                }
+            }
+            else // shadow hand variant
+            {
+                if (NPC.ai[1] == 0)
+                {
+                    NPC.ai[2] = Main.rand.NextFromList(0, 1, 2, 3);
+                    SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost, player.Center);
+                }
+                const int handDelay = 1;
+                float hands = WorldSavingSystem.MasochistModeReal ? 8 : 8;
+                if (NPC.ai[1] <= hands)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int projType = ModContent.ProjectileType<MutantShadowHand>();
+                        for (int j = -1; j <= 1; j += 2)
+                        {
+                            float gap = MathHelper.TwoPi * 0.25f;
+                            float baseAngle = MathHelper.PiOver4 + j * gap / 2;
+                            baseAngle += j * MathHelper.PiOver2 * NPC.ai[2];
+                            float coverage = MathHelper.Pi - gap;
+                            float angle = baseAngle + j * coverage * NPC.ai[1] / hands;
+                            Vector2 offset = angle.ToRotationVector2() * 550f;
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, projType, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
                         }
                     }
+                    for (int i = 0; i < 30; i++)
+                    {
+                        int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].noLight = true;
+                        Main.dust[d].velocity *= 12f;
+                    }
                 }
-                for (int i = 0; i < 30; i++)
-                {
-                    int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].noLight = true;
-                    Main.dust[d].velocity *= 12f;
-                }
+
             }
+
 
             if (++NPC.ai[1] > (WorldSavingSystem.MasochistModeReal ? 60 : 120))
             {
