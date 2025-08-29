@@ -1233,7 +1233,7 @@ HeartoftheMasochist: {
 		Invoca um Mini Disco Voador e verdadeiros olhos de Cthulhu amigáveis
 		'Quente, batendo e sem necessidade de um corpo'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion buffs"
+	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/ChaliceofTheMoon] grants most standard potion buffs"
 }
 
 IceQueensShield: {
