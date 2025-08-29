@@ -1850,10 +1850,9 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FairyQueenLance:
+                    target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
                     if (WorldSavingSystem.EternityMode && sourceNPC is NPC && sourceNPC.type == ModContent.NPCType<MutantBoss>())
                     {
-                        target.FargoSouls().MaxLifeReduction += 100;
-                        target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                         target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
                     }
                     goto case ProjectileID.FairyQueenSunDance;
@@ -2087,11 +2086,9 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.PhantasmalBolt:
                 case ProjectileID.PhantasmalEye:
                 case ProjectileID.PhantasmalSphere:
-                    target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
+                    target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
                     if (WorldSavingSystem.EternityMode && sourceNPC is NPC && sourceNPC.type == ModContent.NPCType<MutantBoss>())
                     {
-                        target.FargoSouls().MaxLifeReduction += 100;
-                        target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                         target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
                     }
                     break;

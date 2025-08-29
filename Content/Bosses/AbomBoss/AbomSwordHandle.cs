@@ -141,13 +141,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             //Projectile.NewProjectile(target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<AbomBlast>(), 0, 0f, Projectile.owner);
 
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 300);
-                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 180);
-            }
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2;
