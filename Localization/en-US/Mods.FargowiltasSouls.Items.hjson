@@ -3625,3 +3625,8 @@ Devilstone: {
 	DisplayName: Devilstone
 	Tooltip: ""
 }
+
+MainframePainting: {
+	DisplayName: Mainframe Painting
+	Tooltip: "'Gonk'"
+}
