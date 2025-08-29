@@ -65,9 +65,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     float distance = player.Distance(Projectile.Center);
                     if (distance > threshold && distance < threshold * 1.4f)
                     {
-                        target.AddBuff(BuffID.Bleeding, 240);
+                        player.AddBuff(BuffID.Bleeding, 240);
                         if (WorldSavingSystem.EternityMode)
-                            target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
+                            player.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
                     }
                     else
                     {

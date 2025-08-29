@@ -297,7 +297,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
                 NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Bottom, destination, NPC.velocity, 3f, 3f);
 
-                if (NPC.Bottom.Distance(destination) < 25f)
+                if (NPC.Bottom.Distance(destination) < 80f)
                 {
                     Timer = 1;
                     NPC.netUpdate = true;
@@ -392,7 +392,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Vector2 destination = new(Target.Center.X, Target.Center.Y - abovePlayer);
                 NPC.velocity = FargoSoulsUtil.SmartAccel(NPC.Bottom, destination, NPC.velocity, 3f, 3f);
 
-                if (NPC.Bottom.Distance(destination) < 25f)
+                if (NPC.Bottom.Distance(destination) < 80f)
                 {
                     Timer = 1;
                     NPC.netUpdate = true;
