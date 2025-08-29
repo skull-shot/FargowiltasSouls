@@ -779,9 +779,9 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick)
                     {
-                        pool[NPCID.BlazingWheel] = .1f;
-                        pool[NPCID.SpikeBall] = .1f;
-                        pool[NPCID.BigMimicJungle] = .1f;
+                        //pool[NPCID.BlazingWheel] = .1f;
+                        //pool[NPCID.SpikeBall] = .1f;
+                        //pool[NPCID.BigMimicJungle] = .1f;
                     }
 
                     if (ocean && spawnInfo.Water)
