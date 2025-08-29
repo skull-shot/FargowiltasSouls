@@ -673,28 +673,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (FargoSoulsUtil.HostCheck)
                 {
                     speed += 7f * enrageFactor;
-                    int num681 = (int)(80f - 39f * enrageFactor);
-                    int num682 = (int)(40f - 19f * enrageFactor);
-                    if (num681 < 1)
-                    {
-                        num681 = 1;
-                    }
-                    if (num682 < 1)
-                    {
-                        num682 = 1;
-                    }
-                    Vector2 vector86 = new Vector2(npc.position.X + (float)(npc.width / 2) + (float)(Main.rand.Next(20) * npc.direction), npc.position.Y + (float)npc.height * 0.8f);
-                    float num683 = Main.player[npc.target].position.X + (float)Main.player[npc.target].width * 0.5f - vector86.X + (float)Main.rand.Next(-num681, num681 + 1);
-                    float num684 = Main.player[npc.target].position.Y + (float)Main.player[npc.target].height * 0.5f - vector86.Y + (float)Main.rand.Next(-num682, num682 + 1);
-                    float num685 = (float)Math.Sqrt(num683 * num683 + num684 * num684);
-                    num685 = speed / num685;
-                    num683 *= num685;
-                    num684 *= num685;
-                    int num686 = 11;
-                    int num687 = 719;
-                    Vector2 vel = new(num683, num684);
+                    Vector2 pos = new Vector2(npc.Center.X, npc.position.Y + npc.height * 0.8f);
+                    int dmg = 11;
+                    int type = 719;
+                    Vector2 vel = npc.DirectionTo(Main.player[npc.target].Center) * speed;
                     vel = vel.RotatedBy(angle);
-                    int num688 = Projectile.NewProjectile(npc.GetSource_FromAI(), vector86.X, vector86.Y, vel.X, vel.Y, num687, num686, 0f, Main.myPlayer);
+                    int num688 = Projectile.NewProjectile(npc.GetSource_FromAI(), pos, vel, type, dmg, 0f, Main.myPlayer);
                     Main.projectile[num688].timeLeft = 300;
                 }
             }

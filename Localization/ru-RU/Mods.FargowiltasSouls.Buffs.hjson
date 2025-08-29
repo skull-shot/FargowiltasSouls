@@ -251,11 +251,6 @@ HexedBuff: {
 	Description: Ваши атаки лечат врагов
 }
 
-HypothermiaBuff: {
-	DisplayName: Гипотермия
-	Description: Дружественные снаряды замедлены, и вы получаете увеличенный урон от атак холодом
-}
-
 InfestedBuff: {
 	DisplayName: Заражённый
 	Description: Дальше только хуже

@@ -47,7 +47,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.StupidSn
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 300);
             target.AddBuff(BuffID.Frostburn, 300);
         }
     }

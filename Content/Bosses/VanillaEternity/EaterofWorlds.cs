@@ -174,7 +174,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<RottingBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<RottingBuff>(), 60 * 3);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
@@ -898,7 +898,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     Vector2 dir = NPC.DirectionTo(Target.Center);
                     float targetOffset = MyIndex - (HeadCount / 2f);
                     float sineTime = Timer + targetOffset * 30;
-                    targetOffset = 240 * MathF.Sin(sineTime * MathF.Tau / 150f);
+                    targetOffset = 160 * MathF.Sin(sineTime * MathF.Tau / 150f);
                     target += dir.RotatedBy(MathHelper.PiOver2) * targetOffset;
                     float speed = 0.5f + (0.02f * (MyIndex - (HeadCount / 2f)));
                     float turn = Timer >= dashEndlag ? 1.2f : 0.53f;
@@ -1155,12 +1155,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
-
+            /*
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && FargoSoulsUtil.HostCheck)
             {
                 for (int i = 0; i < 8; i++)
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.UnitY.RotatedBy(2 * Math.PI / 8 * i) * 2f, ProjectileID.CorruptSpray, 0, 0f, Main.myPlayer, 8f);
             }
+            */
         }
     }
 }

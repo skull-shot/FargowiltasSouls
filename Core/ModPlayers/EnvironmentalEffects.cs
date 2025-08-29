@@ -68,8 +68,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     if (Player.chilled)
                     {
-                        Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-
                         /*
                         MasomodeFreezeTimer++;
                         if (MasomodeFreezeTimer >= 600)
@@ -384,10 +382,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.ZoneOverworldHeight
                 && !hasUmbrella() && currentTile.WallType == WallID.None)
             {
-                if (Player.ZoneSnow)
-                    Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-                else
-                    Player.AddBuff(BuffID.Wet, 2);
+                //if (Player.ZoneSnow)
+                //    Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
+                //else
+                Player.AddBuff(BuffID.Wet, 2);
 
                 if (Main.IsItStorming && !Player.ZoneSnow && !Player.ZoneSandstorm)
                     LightningCounter++;

@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<GodEaterBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;

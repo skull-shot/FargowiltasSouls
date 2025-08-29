@@ -15,8 +15,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //all item speed reduced to 75%
-            player.FargoSouls().AttackSpeed -= .25f;
+            player.FargoSouls().AttackSpeed -= .15f;
         }
 
         public override void Update(NPC npc, ref int buffIndex)

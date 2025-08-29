@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
 
             target.AddBuff(BuffID.Poisoned, 300);
             target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
-            target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);
         }
 
         public override bool PreDraw(ref Color lightColor)

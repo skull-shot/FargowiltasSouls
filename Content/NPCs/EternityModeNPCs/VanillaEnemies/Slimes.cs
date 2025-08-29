@@ -132,63 +132,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Slimed, 60);
-
-            switch (npc.type)
-            {
-                case NPCID.BlueSlime:
-                    if (npc.type == NPCID.BlackSlime)
-                    {
-                        target.AddBuff(BuffID.Darkness, 300);
-                    }
-
-                    if (npc.netID == NPCID.Pinky)
-                    {
-                        target.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
-                        target.velocity = Vector2.Normalize(target.Center - npc.Center) * 30;
-                    }
-                    break;
-
-                case NPCID.UmbrellaSlime:
-                    target.AddBuff(BuffID.Wet, 600);
-                    break;
-
-                case NPCID.IceSlime:
-                case NPCID.SpikedIceSlime:
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 300);
-                    break;
-
-                case NPCID.JungleSlime:
-                case NPCID.SpikedJungleSlime:
-                    target.AddBuff(BuffID.Poisoned, 180);
-                    break;
-
-                case NPCID.MotherSlime:
-                    target.AddBuff(ModContent.BuffType<AntisocialBuff>(), 1200);
-                    break;
-
-                case NPCID.ToxicSludge:
-                    target.AddBuff(ModContent.BuffType<InfestedBuff>(), 360);
-                    break;
-
-                case NPCID.CorruptSlime:
-                    target.AddBuff(ModContent.BuffType<RottingBuff>(), 1200);
-                    break;
-
-                case NPCID.Crimslime:
-                    target.AddBuff(ModContent.BuffType<BloodthirstyBuff>(), 300);
-                    break;
-
-                case NPCID.IlluminantSlime:
-                    target.AddBuff(ModContent.BuffType<SmiteBuff>(), 300);
-                    break;
-
-                case NPCID.GoldenSlime:
-                    target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         public override void OnKill(NPC npc)
