@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask
             Projectile.alpha = 100;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.extraUpdates = 6;
+            Projectile.extraUpdates = 4;
             Projectile.timeLeft = 120 * (Projectile.extraUpdates + 1);
             Projectile.penetrate = -1;
 
