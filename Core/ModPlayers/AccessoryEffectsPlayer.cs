@@ -801,7 +801,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (dreadEffect)
             {
                 if (!MasochistSoul)
-                    DreadShellVulnerabilityTimer = 60;
+                    DreadShellVulnerabilityTimer = 120;
             }
 
             if (pumpkingEffect)

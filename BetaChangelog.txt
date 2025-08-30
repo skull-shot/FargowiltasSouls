@@ -90,3 +90,4 @@ made nekomi take 2x more graze to charge, but deal 1.5x more damage (net nerf)
 ftw mutant throws one more pillar because funny
 added glow to devi moths for visibility
 made devi moths quieter
+dread shell blood drinker buff 15 -> 25, but vulrenability after parry 1sec -> 2sec
