@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
             return Language.GetTextValue($"Mods.FargowiltasSouls.SetBonus.Nekomi", key);
         }
 
-        public const int MAX_METER = 2000;
+        public const int MAX_METER = 4000;
         public const int MAX_HEARTS = 9;
 
         public static void NekomiSetBonusKey(Player player)
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
                 bool superAttack = modPlayer.NekomiAttackReadyTimer > 0;
                 if (superAttack)
                 {
-                    int baseDamage = 300;
+                    int baseDamage = 450;
                     if (!Main.hardMode)
                         baseDamage /= 2;
                     FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), player.Center, Vector2.Zero, ModContent.ProjectileType<NekomiDevi>(), baseDamage, 16f, player.whoAmI);

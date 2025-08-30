@@ -2060,6 +2060,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         ModContent.ProjectileType<MutantPillar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0, Main.myPlayer, 1, NPC.whoAmI);
                 }
             }
+            else if (Main.getGoodWorld && WorldSavingSystem.MasochistModeReal && NPC.ai[1] == pillarAttackDelay * 6)
+            {
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.UnitY * -5,
+                        ModContent.ProjectileType<MutantPillar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0, Main.myPlayer, 2, NPC.whoAmI);
+                }
+            }
         }
 
         void EOCStarSickles()
