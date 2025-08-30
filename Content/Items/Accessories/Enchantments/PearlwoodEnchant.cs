@@ -100,16 +100,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.PearlwoodCritDuration <= 0 || critChance <= 0 || critChance >= 100)
                 return;
 
-            if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
-                return;
-
             if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? is not null)
                 return;
 
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {
-                if (Main.rand.Next(0, 100) <= critChance)
+                if (Main.rand.Next(0, 100) < critChance)
                 {
                     modifiers.SetCrit();
                     for (int j = 0; j < 7; j++)

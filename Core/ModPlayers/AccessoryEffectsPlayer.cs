@@ -725,7 +725,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     if (perfectParry)
                     {
-                        damageBlockCap = higherCap;
+                        damageBlockCap = 150;
                         if (Player.HasEffectEnchant<SilverEffect>())
                             Player.AddBuff(ModContent.BuffType<SilverBuff>(), ForceEffect<SilverEnchant>() ? 180 : 60);
                         SoundEngine.PlaySound(SoundID.Item4, Player.Center);
@@ -738,9 +738,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                             {
                                 TerraLightningEffect.LightningProc(Player, target, 7f);
                             }
-                            
+
                         }
                     }
+                    if (ForceEffect<SilverEnchant>())
+                        damageBlockCap = higherCap;
                     int sheet = perfectParry ? 1 : 0; // which parry vfx sprite sheet to use
                     Projectile.NewProjectile(Player.GetSource_Misc(""), Player.Center, Vector2.Zero, ModContent.ProjectileType<IronParry>(), 0, 0f, Main.myPlayer, sheet);
                 }
@@ -772,7 +774,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ParryDebuffImmuneTime = invul;
                 shieldCD = invul + extrashieldCD;
 
-                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, 
+                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray,
                     () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => Player.HasEffect<SilverEffect>() || Player.HasEffect<DreadShellEffect>() || Player.HasEffect<PumpkingsCapeEffect>());
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs

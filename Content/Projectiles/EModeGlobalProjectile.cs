@@ -1578,14 +1578,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
-                    case ProjectileID.Tempest:
-                    case ProjectileID.MiniSharkron:
-                        if (SourceItemType == ItemID.TempestStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
-                        {
-                            modifiers.SourceDamage *= 1.2f;
-                        }
-                        break;
-
                     case ProjectileID.HoundiusShootiusFireball:
                         if (SourceItemType == ItemID.HoundiusShootius && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
