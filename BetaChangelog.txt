@@ -92,3 +92,4 @@ added glow to devi moths for visibility
 made devi moths quieter
 dread shell blood drinker buff 15 -> 25, but vulrenability after parry 1sec -> 2sec
 pumpkings cape parry gives rapid healing buff, scales with damage
+nekomi wont lose hearts when hurt if you take 10 or less damage
