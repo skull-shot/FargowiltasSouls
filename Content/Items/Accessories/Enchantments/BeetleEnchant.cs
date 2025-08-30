@@ -132,15 +132,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
-            var modPlayer = player.FargoSouls();
-            if (modPlayer.BeetleHitCD > 0 || modPlayer.Beetles <= 0)
-                return;
-            modPlayer.Beetles -= 3;
-            if (modPlayer.Beetles < 0)
-                modPlayer.Beetles = 0;
-            modPlayer.BeetleHitCD = 0;
+            if (info.Damage >= 10)
+            {
+                var modPlayer = player.FargoSouls();
+                if (modPlayer.BeetleHitCD > 0 || modPlayer.Beetles <= 0)
+                    return;
+                modPlayer.Beetles -= 3;
+                if (modPlayer.Beetles < 0)
+                    modPlayer.Beetles = 0;
+                modPlayer.BeetleHitCD = 0;
+            }
         }
-
     }
-
 }

@@ -804,6 +804,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+                case ProjectileID.SolarWhipSwordExplosion:
+                    if (SourceItemType == ItemID.SolarEruption)
+                        projectile.DamageType = DamageClass.Melee;
+                    break;
+                case ProjectileID.DaybreakExplosion:
+                    if (SourceItemType == ItemID.DayBreak)
+                        projectile.DamageType = DamageClass.Melee;
+                    break;
                 default:
                     break;
 
