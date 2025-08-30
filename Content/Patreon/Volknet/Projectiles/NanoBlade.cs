@@ -76,7 +76,6 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            target.AddBuff(BuffID.WitheredArmor, 600);
             target.AddBuff(BuffID.BrokenArmor, 600);
         }
 

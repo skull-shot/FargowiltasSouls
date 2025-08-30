@@ -104,9 +104,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 if (damageType.CountsAsClass(DamageClass.Magic)) //ice mist
                 {
                     SoundEngine.PlaySound(SoundID.Item34, position);
-                    for (int i = -7; i < 7; i++)
+                    for (int i = -5; i < 5; i++)
                     {
-                        Vector2 vel = velocity.RotatedBy(MathHelper.PiOver2 * 0.17f * i / 7f).RotatedByRandom(MathHelper.PiOver2 * 0.05f);
+                        Vector2 vel = velocity.RotatedBy(MathHelper.PiOver2 * 0.17f * i / 10f).RotatedByRandom(MathHelper.PiOver2 * 0.05f);
                         Projectile.NewProjectile(GetSource_EffectItem(player), position, vel * Main.rand.NextFloat(8f, 12f), ModContent.ProjectileType<CelestialRuneIceSpike>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 2), 1f, player.whoAmI);
                     }
                     //Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 2), 4f, player.whoAmI);

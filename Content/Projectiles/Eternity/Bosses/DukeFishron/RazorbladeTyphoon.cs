@@ -71,8 +71,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            //player.AddBuff(ModContent.BuffType<Defenseless>(), 600);
-            //player.AddBuff(BuffID.WitheredWeapon, 600);
             target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
             target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 10);
         }
