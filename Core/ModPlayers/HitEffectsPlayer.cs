@@ -530,7 +530,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override bool FreeDodge(Player.HurtInfo info)
         {
-            if (SupersonicDodge)
+            if (SupersonicDodge && !noDodge)
             {
                 if (Player.brainOfConfusionItem != null)
                 {

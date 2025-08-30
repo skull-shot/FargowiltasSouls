@@ -1230,6 +1230,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     if (NPC.ai[1] == 0)
                         SoundEngine.PlaySound(SoundID.Item117, NPC.Center);
 
+
                     targetPos = player.Center;
                     targetPos.X += 550 * (NPC.Center.X < targetPos.X ? -1 : 1);
                     if (NPC.Distance(targetPos) > 50)
@@ -1263,6 +1264,21 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
                     if (NPC.direction < 0)
                         NPC.rotation += (float)Math.PI;
+
+                    int meatballFreq = 2;
+                    int meatballTime = WorldSavingSystem.MasochistModeReal ? meatballFreq * 16 : meatballFreq * 8;
+                    if (NPC.ai[1] % 90 <= meatballTime + 10 && NPC.ai[1] % 90 >= 10 && NPC.ai[1] + 90 < 390)
+                    {
+                        if (NPC.ai[1] % meatballFreq == 0) // cosmetic meatballs
+                        {
+                            if (FargoSoulsUtil.HostCheck) //rain meteors
+                            {
+                                Vector2 spawnPos = NPC.Center;
+                                Vector2 vel = Main.rand.NextFloat(12f, 16f) * -Vector2.UnitY.RotatedByRandom(MathHelper.PiOver2 * 0.3f);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, vel, ModContent.ProjectileType<CosmosMeteor>(), 0, 0f, Main.myPlayer, 0f, Main.rand.NextFloat(1f, 1.5f));
+                            }
+                        }
+                    }
 
                     if (NPC.ai[1] == 30 && FargoSoulsUtil.HostCheck)
                     {

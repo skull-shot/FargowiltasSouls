@@ -24,7 +24,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
             {
                 npc.frameCounter++;
                 npc.velocity *= 0.9f;
-                RotateTowards(npc, Main.player[npc.target].Center, 5);
+                RotateTowards(npc, Main.player[npc.target].Center, 3);
             }
             else realrotation = npc.rotation + MathHelper.PiOver2;
             if (SpitTimer <= -60 && SpitTimer % -30 == 0)
@@ -62,10 +62,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (FargoSoulsUtil.HostCheck)
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Top, new Vector2(Main.rand.NextFloat(-3, 4), Main.rand.NextFloat(-4, -6)), ProjectileID.GoldenShowerHostile, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Top, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-5, -7)), ProjectileID.GoldenShowerHostile, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
             }
             //FargoSoulsUtil.XWay(5, npc.GetSource_FromThis(), npc.Center, ProjectileID.GoldenShowerHostile, 4, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 2);
         }

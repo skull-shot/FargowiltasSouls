@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool UseAttackSpeedToDoubleHit;
         public bool UseAttackSpeedForAdditionalUpdates;
 
-        Dictionary<int, float> AttackSpeedOnHitDebt = new Dictionary<int, float>();
+        Dictionary<int, float> AttackSpeedOnHitDebt = new();
         bool AllowAttackSpeedOnHitThisTick;
 
         float AttackSpeedUpdateDebt;

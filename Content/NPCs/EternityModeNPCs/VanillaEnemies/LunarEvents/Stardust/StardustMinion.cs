@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             NPC.CloneDefaults(NPCID.StardustCellBig);
 
             NPC.lifeMax = 2000;
-            NPC.damage = 75;
+            NPC.damage = 100;
 
             NPC.aiStyle = -1;
             NPC.knockBackResist = 0;
