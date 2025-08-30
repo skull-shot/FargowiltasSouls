@@ -58,7 +58,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
             return Language.GetTextValue($"Mods.FargowiltasSouls.SetBonus.Nekomi", key);
         }
 
-        public const int MAX_METER = 4000;
+        public const int MAX_METER = 3000;
         public const int MAX_HEARTS = 9;
 
         public static void NekomiSetBonusKey(Player player)
