@@ -1826,10 +1826,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FairyQueenLance:
-                    target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
-                    if (WorldSavingSystem.EternityMode && sourceNPC is NPC && sourceNPC.type == ModContent.NPCType<MutantBoss>())
+                    if (sourceNPC is NPC && sourceNPC.type == ModContent.NPCType<MutantBoss>())
                     {
-                        target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+                        target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
+                        if (WorldSavingSystem.EternityMode)
+                            target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
                     }
                     goto case ProjectileID.FairyQueenSunDance;
 
