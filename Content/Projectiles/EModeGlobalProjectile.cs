@@ -429,16 +429,15 @@ namespace FargowiltasSouls.Content.Projectiles
 
                     if (projectile.GetSourceNPC() != null && projectile.GetSourceNPC() is NPC npc && npc.type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
-                        projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
+                        //projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
                         altBehaviour = true;
 
                         //is a final spike of the attack
-                        if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
+                        if (npc.ai[0] == 1 && npc.ai[1] == 52 || npc.ai[0] == 4 && npc.ai[1] == 70 && !npc.GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
-                            bool isSingleWaveAttack = projectile.GetSourceNPC().ai[0] == 1;
-
-                            bool shouldSplit = true;
-                            if (isSingleWaveAttack) //because deerclops spawns like 4 of them stacked on each other?
+                            bool isSingleWaveAttack = npc.ai[0] == 1;
+                            bool shouldSplit = projectile.ai[1] < 1.3f;
+                            if (shouldSplit && isSingleWaveAttack) //because deerclops spawns like 4 of them stacked on each other?
                             {
                                 for (int i = 0; i < Main.maxProjectiles; i++)
                                 {
@@ -458,11 +457,9 @@ namespace FargowiltasSouls.Content.Projectiles
                                 //projectile.netUpdate = true;
 
                                 float ai1 = 1.3f;
-                                if (projectile.GetSourceNPC().TryGetGlobalNPC<Deerclops>(out var dcgnc) && dcgnc.EnteredPhase2)
+                                if (npc.TryGetGlobalNPC<Deerclops>(out var dcgnc) && dcgnc.EnteredPhase2)
                                     ai1 = 1.35f; //triggers recursive ai
-                                                 //if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase3 || WorldSavingSystem.MasochistModeReal)
-                                                 //    ai1 = 1.4f;
-                                Vector2 spawnPos = projectile.Center + 200 * Vector2.Normalize(projectile.velocity);
+                                Vector2 spawnPos = projectile.Center + 200 * projectile.velocity.SafeNormalize(Vector2.Zero);
                                 
                                 if (FargoSoulsUtil.HostCheck)
                                 {
@@ -476,7 +473,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else
                                     {
                                         Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(-projectile.velocity.X, projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
-                                        if (projectile.Center.Y < projectile.GetSourceNPC().Center.Y)
+                                        if (projectile.Center.Y < npc.Center.Y)
                                         {
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, -projectile.velocity, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(projectile.velocity.X, -projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
@@ -489,7 +486,8 @@ namespace FargowiltasSouls.Content.Projectiles
                                 }
                                 
                             }
-                            
+
+
                         }
                     }
                     break;
