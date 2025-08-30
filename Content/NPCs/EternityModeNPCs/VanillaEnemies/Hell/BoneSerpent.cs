@@ -12,7 +12,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public int Counter;
         public override void SetDefaults(NPC npc)
         {
-            if (HellEnemies.HellBuffActive)
+            if (Main.hardMode && npc.lifeMax < 6000)
             {
                 npc.lifeMax = 6000;
             }
@@ -21,15 +21,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         {
             base.AI(npc);
 
-            if (++Counter >= 300 && Counter % 20 == 0)
+            //lava wet doesnt work because ??
+            if (Collision.LavaCollision(npc.position, npc.width, npc.height))
             {
-                int t = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
-                if (t != -1 && npc.Distance(Main.player[t].Center) < 800 && FargoSoulsUtil.HostCheck)
-                    FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.BurningSphere);
+                if (++Counter < 150 && Counter % 30 == 0)
+                {
+                    int t = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
+                    if (t != -1 && npc.Distance(Main.player[t].Center) < 800 && FargoSoulsUtil.HostCheck)
+                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.BurningSphere);
+                }
             }
-
-            if (Counter > 420)
+            else
+            {
                 Counter = 0;
+            }
         }
     }
 }

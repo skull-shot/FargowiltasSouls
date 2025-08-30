@@ -79,7 +79,7 @@ ShadowForceDashEffect: Теневой рывок
 SpiritHeader: "{$Mods.FargowiltasSouls.Items.SpiritForce.DisplayName}"
 FossilBones: Кости при ударе
 HallowEffect: Лечебные зелья
-AncientHallowMinion: Отражающий клинок
+AncientHallowMinion: Отражающая Террапризма
 SpectreOnHitEffect: Духи при ударе
 ForbiddenEffect: Запретный шторм
 TikiEffect: Хлысты

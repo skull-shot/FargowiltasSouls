@@ -24,8 +24,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         private int fpf = 4;
         public override void SetDefaults()
         {
-            Projectile.width = 300;
-            Projectile.height = 300;
+            Projectile.width = 160;
+            Projectile.height = 160;
             Projectile.aiStyle = 0;
             Projectile.friendly = false;
             Projectile.hostile = true;

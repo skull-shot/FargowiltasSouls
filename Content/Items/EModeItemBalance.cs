@@ -42,13 +42,13 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["RodofHarmony"];
                     return EModeChange.ReworkNeutral;
 
-                case ItemID.WaterBolt:
+                /*case ItemID.WaterBolt:
                     if (!NPC.downedBoss3)
                     {
                         balanceTextKeys = ["WaterBolt"];
                         return EModeChange.ReworkNerf;
                     }
-                    return EModeChange.None;
+                    return EModeChange.None;*/
 
                 case ItemID.HallowedGreaves:
                 case ItemID.HallowedHeadgear:
@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;*/
 
 
-                case ItemID.DemonScythe:
+                /*case ItemID.DemonScythe:
                     {
                         if (!NPC.downedBoss2)
                         {
@@ -168,7 +168,7 @@ namespace FargowiltasSouls.Content.Items
                             return EModeChange.Nerf;
                         }
                         return EModeChange.None;
-                    }
+                    }*/
 
                     /*
                 case ItemID.FetidBaghnakhs:

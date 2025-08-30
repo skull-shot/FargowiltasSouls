@@ -61,6 +61,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool HasEquippedSkill;
 
+        /// <summary>
+        /// Old player positions up to 1 minute ago. Updated once every 2.5 seconds.
+        /// </summary>
+        public Vector2[] OldPositionBig = new Vector2[24];
+        public Vector2 SandsOfTimePosition;
 
         public bool IsStandingStill;
         public float AttackSpeed;
@@ -196,6 +201,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Toggler.LoadPlayerToggles(this);
             disabledToggles.Clear();
             CooldownBarManager.Instance.RemoveAllChildren();
+            ResetOldPosition();
 
             if (!ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
@@ -467,7 +473,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             CurseoftheMoon = false;
             OceanicMaul = false;
             DeathMarked = false;
-            Hypothermia = false;
             Midas = false;
             if (!MutantPresenceBuffer)
             {
@@ -540,6 +545,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (NymphsPerfumeRespawn)
                 NymphsPerfumeRestoreLife = 6;
+            ResetOldPosition();
         }
         public override void ModifyScreenPosition()
         {
@@ -1173,7 +1179,17 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             return retVal;
         }
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        {
+            base.Kill(damage, hitDirection, pvp, damageSource);
+            SandsOfTimePosition = OldPositionBig[^1];
 
+        }
+        public void ResetOldPosition()
+        {
+            for (int i = 0; i < OldPositionBig.Length; i++)
+                OldPositionBig[i] = Player.Center;
+        }
         public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
         {
             if (GaiaOffense) //set armor and accessory shaders to gaia shader if set bonus is triggered

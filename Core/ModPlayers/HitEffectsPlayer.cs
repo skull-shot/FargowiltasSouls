@@ -94,7 +94,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
                         {
                             SpiderCD = 30;
-                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer);
+                            Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                            Vector2 vel = spawnPos.DirectionTo(target.Center) * 5f;
+                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), spawnPos, vel, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer, ai2: target.whoAmI);
                         }
                     }
                     if (UniverseCore) // cosmic core
@@ -326,9 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Smite)
                 dr -= 0.2f;
 
-            if (npc.coldDamage && Hypothermia)
-                dr -= 0.2f;
-
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
@@ -357,9 +356,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
 
             if (Smite)
-                dr -= 0.2f;
-
-            if (proj.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
             if (CurseoftheMoon)
@@ -647,7 +643,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Rectangle rect = new Rectangle((int)Player.Center.X - 111, (int)Player.Center.Y, 222, 222);
                         for (int i = 0; i < The22Incident; i++)
                             CombatText.NewText(rect, Color.DarkOrange, The22Incident, true);
-                        if (The22Incident >= 22)
+                        //doing it this way to ensure we dont accidentally skip over the checks
+                        //but also so that it doesnt harass godmode testing forever
+                        if (The22Incident == 22 || The22Incident == 23 || The22Incident == 24)
                         {
                             Player.KillMe(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.TwentyTwo", Player.name)), 22222222, 0);
                             Projectile.NewProjectile(Player.GetSource_Death(), Player.Center, Vector2.Zero, ModContent.ProjectileType<TwentyTwo>(), 0, 0f, Main.myPlayer);

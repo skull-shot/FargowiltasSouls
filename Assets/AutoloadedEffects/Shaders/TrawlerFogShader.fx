@@ -20,9 +20,9 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float2 worldUV = screenPosition + screenSize * uv;
     float worldDistance = distance(worldUV, anchorPoint);
 
-    float pulse = sin(time * 6) * 0.5 + 0.5; // 0 to 1
-    float pulseOpacity = lerp(0.77, 1.0, pulse); // breathing opacity
-    float pulseRadius = radius * lerp(0.95, 1.05, pulse); // slight radius shift
+    float pulse = sin(time * 6) * 0.5 + 0.5;
+    float pulseOpacity = lerp(0.77, 1.0, pulse);
+    float pulseRadius = radius * lerp(0.95, 1.05, pulse);
 
     float adjustedTime = time * 0.05;
 
@@ -66,7 +66,6 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     
     color *= pow(abs(textureMesh), 0.25);
 
-    // Blend with background
     return lerp(sampleColor, color, opacity);
 }
 

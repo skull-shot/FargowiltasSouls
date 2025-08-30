@@ -145,7 +145,7 @@ MutantFangBuff: {
 
 MutantPresenceBuff: {
 	DisplayName: Mutant Presence
-	Description: Defense, damage reduction, and healing reduced; reduced graze radius; some accessory effects disabled
+	Description: Reduces healing received and graze radius, disables certain accessory effects
 }
 
 BlackInfernoBuff: {
@@ -249,11 +249,6 @@ GodEaterBuff: {
 HexedBuff: {
 	DisplayName: Hexed
 	Description: Your attacks heal enemies
-}
-
-HypothermiaBuff: {
-	DisplayName: Hypothermia
-	Description: Friendly projectiles are slowed down and you take increased damage from cold attacks
 }
 
 InfestedBuff: {
@@ -486,8 +481,8 @@ TrueEyesBuff: {
 	Description: The eyes of Cthulhu will protect you
 }
 
-TwinsEXBuff: {
-	DisplayName: Twins EX
+OmniscienceBuff: {
+	DisplayName: Omniscience
 	Description: The real Twins will fight for you
 }
 

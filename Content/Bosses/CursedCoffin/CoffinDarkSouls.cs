@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
         {
 
-            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 4);
+            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 2);
 
         }
 

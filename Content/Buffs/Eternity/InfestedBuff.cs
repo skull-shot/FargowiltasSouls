@@ -1,18 +1,16 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class InfestedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Infested");
-            // Description.SetDefault("This can only get worse");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "感染");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "这只会变得更糟");
         }
 
         public override void Update(Player player, ref int buffIndex)

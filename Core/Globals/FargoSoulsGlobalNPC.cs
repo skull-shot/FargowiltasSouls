@@ -37,6 +37,8 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 using FargowiltasSouls.Assets.Textures;
+using System.IO;
+using Terraria.UI;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -49,7 +51,6 @@ namespace FargowiltasSouls.Core.Globals
         public static int boss = -1;
 #pragma warning restore CA2211
 
-        public int originalDefense;
         public bool BrokenArmor;
 
         public bool CanHordeSplit = true;
@@ -115,10 +116,16 @@ namespace FargowiltasSouls.Core.Globals
 
         public int GrazeCD;
 
+        public float defKnockBackResist;
+
         //        public static bool Revengeance => CalamityMod.World.CalamityWorld.revenge;
 
         static HashSet<int> RareNPCs = [];
 
+        public override void Load()
+        {
+            //On_NPC.SetDefaults += PostSetDefaults;
+        }
         public override void Unload()
         {
             base.Unload();
@@ -175,13 +182,20 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
             }
-
-
         }
         public override void SetDefaults(NPC npc)
         {
             if (npc.rarity > 0 && !RareNPCs.Contains(npc.type))
                 RareNPCs.Add(npc.type);
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write(defKnockBackResist);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            defKnockBackResist = binaryReader.ReadSingle();
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
@@ -194,6 +208,7 @@ namespace FargowiltasSouls.Core.Globals
                         SinisterIconFullFight = true;
                 }
             }
+            defKnockBackResist = npc.knockBackResist;
         }
         public override bool PreAI(NPC npc)
         {
@@ -215,69 +230,12 @@ namespace FargowiltasSouls.Core.Globals
 
             if (SinisterIconBoss(npc))
             {
-                foreach (var player in Main.ActivePlayers)
-                {
-                    if (!(player.Alive() && player.HasEffect<SinisterIconDropsEffect>()))
-                        SinisterIconFullFight = false;
-                }
+                if (!Main.player.Any(p => p.Alive() && p.HasEffect<SinisterIconDropsEffect>()))
+                    SinisterIconFullFight = false;
             }
 
             if (!FirstTick)
             {
-                originalDefense = npc.defense;
-
-
-                //                switch (npc.type)
-                //                {
-                //                    case NPCID.TheDestroyer:
-                //                    case NPCID.TheDestroyerBody:
-                //                    case NPCID.TheDestroyerTail:
-                //                        npc.buffImmune[ModContent.BuffType<TimeFrozen>()] = false;
-                //                        npc.buffImmune[ModContent.BuffType<Frozen>()] = false;
-                //                        //npc.buffImmune[BuffID.Darkness] = false;
-                //                        break;
-
-                //                    /*case NPCID.WallofFlesh:
-                //                    case NPCID.WallofFleshEye:
-                //                    case NPCID.MoonLordCore:
-                //                    case NPCID.MoonLordHand:
-                //                    case NPCID.MoonLordHead:
-                //                    case NPCID.MoonLordLeechBlob:
-                //                    case NPCID.TargetDummy:
-                //                    case NPCID.GolemFistLeft:
-                //                    case NPCID.GolemFistRight:
-                //                    case NPCID.GolemHead:
-                //                    case NPCID.DungeonGuardian:
-                //                    case NPCID.DukeFishron:
-                //                        SpecialEnchantImmune = true;
-                //                        break;*/
-
-                //                    default:
-                //                        break;
-                //                }
-
-                //                //critters
-                //                if (npc.damage == 0 && !npc.townNPC && npc.lifeMax == 5)
-                //                {
-                //                    Player player = Main.player[Main.myPlayer];
-
-                //                    /*if ( npc.releaseOwner == player.whoAmI && player.FargoSouls().WoodEnchant)
-                //                    {
-                //                        switch (npc.type)
-                //                        {
-                //                            case NPCID.Bunny:
-
-
-                //                                npc.active = false;
-                //                                break;
-                //                        }
-
-
-
-                //                        ExplosiveCritter = true;
-                //                    }*/
-                //                }
-
                 FirstTick = true;
             }
 
@@ -327,12 +285,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void PostAI(NPC npc)
         {
-            if (BrokenArmor)
-            {
-                npc.defense = originalDefense - 10;
-                if (npc.defense < 0)
-                    npc.defense = 0;
-            }
 
             if (SnowChilled)
             {
@@ -1369,6 +1321,9 @@ namespace FargowiltasSouls.Core.Globals
 
             if (target.type == ModContent.NPCType<CreeperGutted>())
                 modifiers.FinalDamage /= 20;
+
+            if (BrokenArmor)
+                modifiers.ArmorPenetration += 10;
         }
 
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item)

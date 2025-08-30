@@ -68,8 +68,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     if (Player.chilled)
                     {
-                        Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-
                         /*
                         MasomodeFreezeTimer++;
                         if (MasomodeFreezeTimer >= 600)
@@ -87,17 +85,19 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.ZoneJungle)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 2);
+                    //FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 120);
                 }
 
+                //make ichor proj do this?
                 if (Player.ZoneCrimson)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Ichor, 300);
                 }
 
+                //make eater fireballs do this
                 if (Player.ZoneCorrupt)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 2);
+                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 60);
                 }
 
                 if (Player.ZoneHallow)
@@ -382,10 +382,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.ZoneOverworldHeight
                 && !hasUmbrella() && currentTile.WallType == WallID.None)
             {
-                if (Player.ZoneSnow)
-                    Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-                else
-                    Player.AddBuff(BuffID.Wet, 2);
+                Player.AddBuff(BuffID.Wet, 2);
 
                 if (Main.IsItStorming && !Player.ZoneSnow && !Player.ZoneSandstorm)
                     LightningCounter++;

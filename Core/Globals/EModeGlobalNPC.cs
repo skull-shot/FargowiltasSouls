@@ -198,12 +198,22 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
+        public static bool DemonCondition(Player player) =>  !Main.remixWorld || MathF.Abs(player.Center.X / 16f - Main.spawnTileX) > Main.maxTilesX / 3;
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
             if (WorldSavingSystem.EternityMode)
             {
                 spawnRate = (int)(spawnRate * 0.9);
                 maxSpawns = (int)(maxSpawns * 1.2f);
+
+                if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
+                {
+                    if (DemonCondition(player))
+                    {
+                        spawnRate /= 2;
+                        maxSpawns *= 2;
+                    }
+                }
 
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
                     || (player.ZoneTowerVortex && NPC.ShieldStrengthTowerVortex == 0)
@@ -409,6 +419,12 @@ namespace FargowiltasSouls.Core.Globals
                     if (ocean)
                     {
                         pool[NPCID.PigronHallow] = .006f;
+
+                        if (Main.bloodMoon && spawnInfo.Water)
+                        {
+                            pool[NPCID.EyeballFlyingFish] = .02f;
+                            pool[NPCID.ZombieMerman] = .02f;
+                        }
                     }
 
                     if (!surface && normalSpawn)
@@ -455,7 +471,7 @@ namespace FargowiltasSouls.Core.Globals
                             if (noInvasion && !oldOnesArmy && bossCanSpawn)
                             {
                                 pool[NPCID.Clown] = 0.01f;
-                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.005f)
+                                if (!pool.TryGetValue(NPCID.Werewolf, out float value) || value < 0.005f)
                                     pool[NPCID.Werewolf] = 0.005f;
                             }
                                 
@@ -587,6 +603,11 @@ namespace FargowiltasSouls.Core.Globals
                             if (night)
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
+                            }
+                            if (Main.bloodMoon && spawnInfo.Water)
+                            {
+                                pool[NPCID.BloodEelHead] = .02f;
+                                pool[NPCID.GoblinShark] = .02f;
                             }
                             pool[NPCID.PigronHallow] = .06f;
                             if (NPC.downedFishron && bossCanSpawn)
@@ -758,9 +779,9 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick)
                     {
-                        pool[NPCID.BlazingWheel] = .1f;
-                        pool[NPCID.SpikeBall] = .1f;
-                        pool[NPCID.BigMimicJungle] = .1f;
+                        //pool[NPCID.BlazingWheel] = .1f;
+                        //pool[NPCID.SpikeBall] = .1f;
+                        //pool[NPCID.BigMimicJungle] = .1f;
                     }
 
                     if (ocean && spawnInfo.Water)

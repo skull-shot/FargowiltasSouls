@@ -68,3 +68,25 @@ dragons breath has hit rate aspd scaling
 
 mutant tentacle twins attack has been Terry Designed
 mutant SANS GOLEM feels more like ROARING KNIGHT
+fixed mutant being able to double nuke
+22 incident doesnt harass maso mutant testers forever
+nerfed maso plantwins anyway
+earth champ
+	fists glow brighter when punching
+	fists return to position better between punches, "feel" less slippery
+	replaced pallad balls with cool javyz fireballs
+	replaced cringe dinky little fireballs also with cool javyz fireballs
+	hand slam can stop on the surface of lava instead of sinking under
+	generally added more explosions
+destroyer no longer pierce resists held projectiles (read: yoyos)
+
+mutant sans golem is now dodgeable, probably
+removed debug text i forgot was left on released mutant
+added mainframe painting
+plat ench and sinister icon tooltips specify enemies "must be defeated by you" to work
+
+fixed the deerclops crash
+made nekomi take 2x more graze to charge, but deal 1.5x more damage (net nerf)
+ftw mutant throws one more pillar because funny
+added glow to devi moths for visibility
+made devi moths quieter

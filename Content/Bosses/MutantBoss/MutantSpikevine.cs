@@ -1,5 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -93,6 +95,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
         {
             Trail[0] = Projectile.Center;
         }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+        }
         public override void AI()
         {
             if (Timer == 0)
@@ -115,7 +123,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
                 if (Projectile.velocity.Length() > 40)
                     Projectile.velocity = dir * 40;
             }
-            float rotationModifier = (WorldSavingSystem.MasochistModeReal ? 0.03f : 0.0005f) * Flip;
+            float rotationModifier = (WorldSavingSystem.MasochistModeReal ? 0.026f : 0.0005f) * Flip;
             Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.PiOver2 * rotationModifier);
             int mutantID = (int)MutantID;
             if (Timer >= 60 && mutantID.IsWithinBounds(Main.maxNPCs) && Projectile.velocity != Vector2.Zero)

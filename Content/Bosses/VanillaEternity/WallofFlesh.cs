@@ -623,7 +623,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ai_State >= 0f)
             {
                 //npc.alpha = (int)MathHelper.Lerp(npc.alpha, 175, 0.1f);
-                npc.dontTakeDamage = true;
+                //npc.dontTakeDamage = true;
 
                 if (ai_Timer <= 90) //still firing laser rn
                 {
@@ -645,7 +645,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
             {
                 //npc.alpha = (int)MathHelper.Lerp(npc.alpha, 0, 0.1f);
-                npc.dontTakeDamage = false;
+                //npc.dontTakeDamage = false;
 
                 if (ai_Timer == maxTime - 3 * 5 && FargoSoulsUtil.HostCheck)
                 {
@@ -745,6 +745,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            /*
             if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
             {
                 spriteBatch.End();
@@ -752,17 +753,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 ArmorShaderData shader = GameShaders.Armor.GetShaderFromItemId(ItemID.PhaseDye);
                 shader.Apply(npc, new Terraria.DataStructures.DrawData?());
-            }           
+            }    
+            */
             return true;
         }
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            /*
             if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
             {
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             }
+            */
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

@@ -86,6 +86,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[BuffID.Frostburn2] = true;
             npc.buffImmune[BuffID.Chilled] = true;
             npc.buffImmune[BuffID.Frozen] = true;
+
+            if (npc.HasPlayerTarget && npc.Bottom.Y > Main.player[npc.target].Bottom.Y)
+                npc.position.Y = Main.player[npc.target].Bottom.Y - 100 - npc.height;
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
@@ -631,7 +634,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(BuffID.BrokenArmor, 90);
             if (WorldSavingSystem.MasochistModeReal)
                 target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

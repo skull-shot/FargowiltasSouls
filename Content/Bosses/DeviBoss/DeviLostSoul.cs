@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
-            target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor)

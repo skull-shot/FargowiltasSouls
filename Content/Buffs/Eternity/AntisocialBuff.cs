@@ -1,19 +1,16 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class AntisocialBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Antisocial");
-            // Description.SetDefault("You have no friends and no summon damage");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "反社交");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你没有朋友");
-
         }
 
         public override void Update(Player player, ref int buffIndex)

@@ -36,7 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 150);
             target.AddBuff(BuffID.Frostburn, 30);
         }
     }

@@ -101,7 +101,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         {
             target.AddBuff(BuffID.Poisoned, Main.rand.Next(60, 180));
             target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
-            target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 600);
         }
 
         public override bool CheckDead()

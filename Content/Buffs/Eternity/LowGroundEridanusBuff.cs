@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
     public class LowGroundEridanusBuff : ModBuff
     {
         // This exists so you can't have immunity to it, and to only disable platforms and nothing else.
-        public override string Texture => "FargowiltasSouls/Content/Buffs/Eternity/LowGroundBuff";
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", "LowGroundBuff");
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;

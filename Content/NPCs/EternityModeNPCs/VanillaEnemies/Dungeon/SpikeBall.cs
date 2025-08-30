@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         {
             base.OnFirstTick(npc);
 
-            if (Framing.GetTileSafely(npc.Center).WallType == WallID.LihzahrdBrickUnsafe)
+            /*if (Framing.GetTileSafely(npc.Center).WallType == WallID.LihzahrdBrickUnsafe)
             {
                 npc.damage *= 3;
                 npc.defDamage *= 3;
@@ -28,14 +28,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
 
             int p = npc.FindClosestPlayer();
             if (p != -1 && !Main.player[p].ZoneDungeon)
-                OutsideDungeon = true;
+                OutsideDungeon = true;*/
         }
 
         public override void AI(NPC npc)
         {
             base.AI(npc);
 
-            if (OutsideDungeon)
+            /*if (OutsideDungeon)
             {
                 if (++Counter > 1800)
                 {
@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
                         Main.dust[dust].noGravity = true;
                     }
                 }
-            }
+            }*/
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
@@ -63,8 +63,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.BrokenArmor, 600);
-            if (OutsideDungeon)
-                target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+            //if (OutsideDungeon)
+                //target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
         }
     }
 }

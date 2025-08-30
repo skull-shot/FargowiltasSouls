@@ -348,7 +348,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
-        public bool Hypothermia;
         public bool noDodge;
         public bool noSupersonic;
         public bool NoMomentum;
@@ -400,7 +399,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Mash;
         public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
-        public int MashCounter;
+        public float MashCounter;
+        public float FramesSinceLastMash;
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;

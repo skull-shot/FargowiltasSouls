@@ -1,6 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron;
 using FargowiltasSouls.Core.Globals;
@@ -865,6 +866,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
 
             npc.defense = Math.Max(npc.defense, npc.defDefense);
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            base.OnKill(npc);
+
+            if (IsEX || Main.getGoodWorld)
+            {
+                Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<MainframePainting>(), 9);
+            }
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

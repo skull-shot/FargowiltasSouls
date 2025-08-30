@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -7,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs
 {
     public class TwinsInstallBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Twins Install");
-            // Description.SetDefault("Effects of Cursed Inferno and Ichor");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;

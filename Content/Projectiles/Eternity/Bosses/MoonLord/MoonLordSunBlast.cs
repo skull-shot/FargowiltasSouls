@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
@@ -138,13 +139,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
-            target.AddBuff(BuffID.OnFire, 300);
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
             {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
-                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
+                if (WorldSavingSystem.EternityMode)
+                    target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+            }
+            else
+            {
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
+                target.AddBuff(BuffID.OnFire, 300);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

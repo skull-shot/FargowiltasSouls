@@ -144,7 +144,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             //target.AddBuff(BuffID.Frostburn, 90);
             //if (WorldSavingSystem.MasochistModeReal)
             //    target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 900);
-            //target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
         }
 
         //public override Color? GetAlpha(Color lightColor)

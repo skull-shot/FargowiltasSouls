@@ -506,11 +506,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 DamageOverTime(20);
 
-            if (Oiled && Player.lifeRegen < 0)
-            {
-                Player.lifeRegen *= 2;
-            }
-
             if (MutantPresence)
             {
                 //if (Player.lifeRegen > 5)
@@ -551,7 +546,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.lifeRegen > 0)
                             Player.lifeRegen = 0;
                     }
-                    if (Oiled)
+                    else if (Oiled)
                         Player.lifeRegen -= regen;
                 }
             }
@@ -584,6 +579,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (DeactivatedMinionEffectCount > 0)
                     Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
             }
+
+            if (Player.miscCounter % 150 == 0)
+            {
+                for (int i = OldPositionBig.Length - 1; i > 0; i--)
+                {
+                    OldPositionBig[i] = OldPositionBig[i - 1];
+                }
+                OldPositionBig[0] = Player.position;
+            }
+
 
             /*if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
             {

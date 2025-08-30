@@ -1,5 +1,7 @@
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,8 +14,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.ShadowFlame, 300);
-            //target.immune[projectile.owner] = Main.player[projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<BossWeapons.StyxGazer>()] > 0 ? 1 : 3;
+            target.AddBuff(BuffID.Bleeding, 240);
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
     }
 }

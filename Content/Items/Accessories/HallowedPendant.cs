@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster;
@@ -22,7 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
     //[AutoloadEquip(EquipType.Neck)]
     public class HallowedPendant : SoulsItem
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories", Name);
 
         public override void SetStaticDefaults()
         {

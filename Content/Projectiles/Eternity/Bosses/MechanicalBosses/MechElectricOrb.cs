@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/MechanicalBosses", Name);
         public static readonly SoundStyle ShotSound = FargosSoundRegistry.ElectricOrbShot with { PitchVariance = 0.3f, Volume = 7f };
-        public static readonly SoundStyle HumSound = FargosSoundRegistry.ElectricOrbHum;
+        //public static readonly SoundStyle HumSound = FargosSoundRegistry.ElectricOrbHum;
         public const int Red = 0;
         public const int Blue = 1;
         public const int Yellow = 2;
@@ -82,12 +82,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
                 SoundEngine.PlaySound(ShotSound with { Volume = 0.3f, MaxInstances = 4 }, Projectile.position);
                 Projectile.localAI[1] = 1f;
 
+                /*
                 SoundEngine.PlaySound(HumSound with { 
                     PitchVariance = 0.3f, 
                     Volume = 0.2f, 
                     MaxInstances = 1, 
                     SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest 
                 }, Projectile.position);
+                */
 
                 //doing it this way so projs that inherit from Electric Orb dont inherit the accel
                 lastSecondAccel = Projectile.type == ModContent.ProjectileType<MechElectricOrb>();

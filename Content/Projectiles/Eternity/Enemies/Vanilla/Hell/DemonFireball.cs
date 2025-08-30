@@ -16,17 +16,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 {
     public class DemonFireball : ModProjectile
     {
+        public const int TrailLength = 10;
         public override string Texture => FargoSoulsUtil.VanillaTextureProjectile(ProjectileID.DD2BetsyFireball);
 
         public override void SetStaticDefaults()
         {
-            
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = TrailLength;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.DD2BetsyFireball);
-            Projectile.width = Projectile.height = 70;
+            Projectile.width = Projectile.height = 32;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hostile = true;
@@ -47,6 +49,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
             if (Projectile.velocity.Y > 0 && Projectile.Center.Y > StartingY)
                 Projectile.tileCollide = true;
             // dust
+            /*
             if (Main.rand.NextBool(3))
             {
                 int num686 = Utils.SelectRandom(Main.rand, 226, 229);
@@ -62,6 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
                 dust2.velocity *= 0.1f;
                 Main.dust[num689].noGravity = true;
             }
+            */
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -71,36 +75,46 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Hell
 
         public override bool PreDraw(ref Color lightColor)
         {
-            return true;
-            /*
-            Vector2 auraPos = Projectile.Center;
             float radius = Projectile.width * Projectile.scale / 2;
             var blackTile = TextureAssets.MagicPixel;
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = Projectile.Opacity;
 
-            ManagedShader fireballShader = ShaderManager.GetShader("FargowiltasSouls.HellFireballShader");
-            fireballShader.TrySetParameter("colorMult", 7.35f);
-            fireballShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
-            fireballShader.TrySetParameter("radius", radius);
-            fireballShader.TrySetParameter("anchorPoint", auraPos);
-            fireballShader.TrySetParameter("screenPosition", Main.screenPosition);
-            fireballShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-            fireballShader.TrySetParameter("maxOpacity", maxOpacity);
-            fireballShader.TrySetParameter("velocity", Projectile.velocity.SafeNormalize(Vector2.Zero));
+            Vector2 auraPos = Projectile.Center;
+            var maxOpacity = Projectile.Opacity * 0.7f;
+
+            ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.HellFireballShader");
+            borderShader.TrySetParameter("colorMult", 7.35f);
+            borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            borderShader.TrySetParameter("radius", radius);
+            borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+            borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+
+            Vector2[] anchorPoints = new Vector2[ProjectileID.Sets.TrailCacheLength[Type]];
+            float[] opacities = new float[ProjectileID.Sets.TrailCacheLength[Type]];
+
+            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
+            {
+                var oldOpacity = maxOpacity * (ProjectileID.Sets.TrailCacheLength[Type] - (float)i) / (float)ProjectileID.Sets.TrailCacheLength[Type];
+                Vector2 oldCenter = Projectile.oldPos[i] + Projectile.Size / 2;
+                anchorPoints[i] = oldCenter;
+                opacities[i] = oldOpacity;
+            }
+
+            borderShader.TrySetParameter("anchorPoints", anchorPoints);
+            borderShader.TrySetParameter("opacities", opacities);
 
             Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, fireballShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
-            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
             Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
             return false;
-            */
         }
     }
 }

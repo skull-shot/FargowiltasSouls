@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -64,14 +65,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     float distance = player.Distance(Projectile.Center);
                     if (distance > threshold && distance < threshold * 1.4f)
                     {
+                        player.AddBuff(BuffID.Bleeding, 240);
                         if (WorldSavingSystem.EternityMode)
-                        {
-                            player.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 70);
-                            //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                            //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-                        }
-                        player.AddBuff(BuffID.Bleeding, 70);
-                        player.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 70);
+                            player.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
                     }
                     else
                     {
@@ -88,13 +84,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             base.OnHitPlayer(target, info);
 
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-            }
-            target.AddBuff(BuffID.Bleeding, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {

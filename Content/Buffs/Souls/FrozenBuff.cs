@@ -1,14 +1,14 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class FrozenBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", "PlaceholderDebuff");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Frozen");
-            // Description.SetDefault("You cannot move");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = false;
@@ -16,8 +16,6 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
-
-        public override string Texture => "FargowiltasSouls/Content/Buffs/PlaceholderDebuff";
 
         public override void Update(NPC npc, ref int buffIndex)
         {

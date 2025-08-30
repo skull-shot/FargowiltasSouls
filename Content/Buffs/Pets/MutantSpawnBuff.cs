@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Pets;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Pets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs.Pets
 {
     public class MutantSpawnBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Pets", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mutant Spawn");
-            // Description.SetDefault("Mutant Spawn");
             Main.buffNoTimeDisplay[Type] = true;
             Main.vanityPet[Type] = true;
         }
