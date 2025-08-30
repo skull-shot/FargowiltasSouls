@@ -290,7 +290,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<IvyVenomEffect>())
             {
-                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 30);
+                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 45);
             }
         }
 
