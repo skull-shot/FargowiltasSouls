@@ -573,8 +573,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage > 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
             {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
+                DeerSinewFreezeCD = 240;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 10);
             }
 
             if (NekomiSet && NekomiHitCD <= 0 && info.Damage > 10)
