@@ -244,7 +244,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
 
         public override bool PreDraw(ref Color lightColor)
         {
-            if (Projectile.localAI[0] <= 90)
+            if (Projectile.localAI[0] <= 90 && Projectile.ai[0] != 0)
             {
                 Asset<Texture2D> line = TextureAssets.Extra[178];
                 float opacity = 1f; MathF.Pow(Projectile.localAI[0] / 90f, 0.5f);
