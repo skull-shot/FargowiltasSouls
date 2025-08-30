@@ -69,6 +69,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.WormScarf)
             .AddIngredient(ItemID.CharmofMyths)
             .AddIngredient(ItemID.ShinyStone)
+            .AddIngredient(ItemID.HandWarmer)
             .AddTile<CrucibleCosmosSheet>()
             .Register();
         }
