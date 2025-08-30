@@ -1948,12 +1948,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.CultistBossFireBall:
                     target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
-
-                    if (sourceNPC is NPC && sourceNPC.type == NPCID.DD2Betsy)
-                    {
-                        target.AddBuff(BuffID.WitheredArmor, 300);
-                        target.AddBuff(BuffID.WitheredWeapon, 300);
-                    }
                     break;
 
                 case ProjectileID.CultistBossFireBallClone:
@@ -2102,10 +2096,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.DD2BetsyFireball:
                 case ProjectileID.DD2BetsyFlameBreath:
-                    //target.AddBuff(BuffID.OnFire, 600);
-                    //target.AddBuff(BuffID.Ichor, 600);
-                    target.AddBuff(BuffID.WitheredArmor, 300);
-                    target.AddBuff(BuffID.WitheredWeapon, 300);
                     target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                     break;
 

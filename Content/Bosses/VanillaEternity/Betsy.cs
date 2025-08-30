@@ -259,8 +259,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
+
         }
 
         public override bool SpecialOnKill(NPC npc)
