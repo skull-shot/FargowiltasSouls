@@ -46,6 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                 return;
             }
 
+            // Shielding
             if (State == 0)
             {
                 Rotation += 0.1f;
@@ -61,6 +62,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                     State = 1;
                 }
             }
+            // Firing
             else if (State == 1)
             {
                 if (npc.ai[2] / 8 >= Index)
@@ -74,20 +76,21 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                     Projectile.netUpdate = true;
                 }
             }
+            // Traveling
             else
             {
                 Projectile.rotation += 0.15f;
             }
         }
 
-        public override bool OnTileCollide(Vector2 oldVelocity)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             for (int i = 0; i < 4; i++)
             {
                 Dust.NewDust(Projectile.Center, 2, 2, DustID.Granite);
             }
-            return base.OnTileCollide(oldVelocity);
+            base.OnKill(timeLeft);
         }
 
         public override bool PreDraw(ref Color lightColor)
