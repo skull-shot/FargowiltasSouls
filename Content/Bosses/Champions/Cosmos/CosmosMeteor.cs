@@ -41,8 +41,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.width = 80;
             Projectile.height = 80;
             Projectile.scale = (24f / 80);
-        }
 
+            Projectile.aiStyle = 0;
+        }
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (!spawned)
