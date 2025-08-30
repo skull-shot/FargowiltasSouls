@@ -1365,10 +1365,12 @@ namespace FargowiltasSouls.Core.Globals
             //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
             {
-                float def = npc.defense / 3 * PureGazeTime / PungentGazeBuff.MAX_TIME;
+                float ratio = PureGazeTime / PungentGazeBuff.MAX_TIME;
+                float def = npc.defense / 3 * ratio;
+                int minDef = (int)Math.Clamp(15f * ratio, 8f, 15f);
                 if (def > 50)
                     def = 50;
-                modifiers.ArmorPenetration += Math.Max(def, 10);
+                modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;
