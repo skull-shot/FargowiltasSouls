@@ -1055,9 +1055,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (WorldSavingSystem.MasochistModeReal && FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.cultBoss, NPCID.CultistBoss))
                     npc.Center = Main.npc[EModeGlobalNPC.cultBoss].Center;
-
-                if (NPC.CountNPCS(NPCID.AncientCultistSquidhead) < 4 && FargoSoulsUtil.HostCheck)
-                    FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.AncientCultistSquidhead);
             }
         }
 

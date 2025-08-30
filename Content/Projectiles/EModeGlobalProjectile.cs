@@ -2019,7 +2019,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.VortexAcid:
                 case ProjectileID.VortexLaser:
                     target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
-                    target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
+                    //target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
                     break;
 
                 case ProjectileID.VortexLightning:
@@ -2150,7 +2150,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.VortexRifleman)
                     {
                         target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 300);
-                        target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 120);
+                        //target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 120);
                     }
                     break;
 

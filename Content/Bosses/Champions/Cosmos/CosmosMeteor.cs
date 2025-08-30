@@ -28,8 +28,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Meteor1);
-            AIType = 0; // ProjectileID.Meteor1;
-
             Projectile.DamageType = DamageClass.Default;
             Projectile.friendly = false;
             Projectile.hostile = true;
@@ -38,6 +36,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
             Projectile.timeLeft = 120 * Projectile.MaxUpdates;
             Projectile.tileCollide = false;
+            Projectile.ignoreWater = true;
 
             Projectile.width = 80;
             Projectile.height = 80;
@@ -51,7 +50,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 spawned = true;
                 //Projectile.frame = Main.rand.Next(3);
             }
-            Projectile.tileCollide = false;
 
             if (Projectile.localAI[1] == 0)
                 Projectile.localAI[1] = Main.rand.NextBool() ? 1 : -1;
