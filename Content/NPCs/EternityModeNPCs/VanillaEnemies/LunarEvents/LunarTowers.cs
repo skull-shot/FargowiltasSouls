@@ -128,9 +128,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     return;
                 npc.lifeMax = npc.life = MaxHP;
                 npc.damage = Damage;
-                int extra = npc.type == NPCID.LunarTowerVortex ? 20 : 150;
-                npc.damage += 150;
-                npc.defDamage += 150;
                 npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
                 npc.netUpdate = true;
             }
@@ -270,6 +267,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     }
                 }
             }
+        }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!npc.dontTakeDamage) return false; //disable contact damage while shield is up
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

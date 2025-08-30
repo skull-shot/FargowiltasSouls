@@ -24,8 +24,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 
         public LunarTowerSolar() : base(ModContent.BuffType<AtrophiedBuff>(), DustID.SolarFlare) { }
 
-        public override int MaxHP => 70000;
-        public override int Damage => 80;
+        public override int MaxHP => 45000;
+        public override int Damage => 60;
         public enum Attacks
         {
             Idle,
@@ -112,7 +112,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                             float random = Main.rand.Next(-distance / 5, distance / 4);
                             Vector2 pos = OriginalLocation + Vector2.UnitX * (distance * x + random);
                             Vector2 vel = Vector2.UnitY * 16;
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), pos, vel, ModContent.ProjectileType<PillarSpawner>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 3f, Main.myPlayer, ai0: 1);
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), pos, vel, ModContent.ProjectileType<PillarSpawner>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 3f, Main.myPlayer, ai0: 1); //deals less damage on higher difficulties, cannot figure out why
                         }
 
                     }
@@ -186,7 +186,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         int n = FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), pos, NPCID.SolarGoop, velocity: aim);
                         if (Main.npc[n].active)
                         {
-                            Main.npc[n].damage = npc.damage;
+                            Main.npc[n].damage = npc.defDamage;
                         }
                     }
                 }
@@ -266,7 +266,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     speed.Normalize();
                     speed *= 5f;
                     for (int i = -2; i <= 2; i++)
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed.RotatedBy(i * rotate), ProjectileID.CultistBossFireBall, 40, 0f, Main.myPlayer);
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, speed.RotatedBy(i * rotate), ProjectileID.CultistBossFireBall, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.5f), 0f, Main.myPlayer);
 
                     if (NPC.CountNPCS(NPCID.SolarCrawltipedeHead) <= 0 && WorldSavingSystem.MasochistModeReal) //spawn john
                     {
