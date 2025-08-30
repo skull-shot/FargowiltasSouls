@@ -27,7 +27,7 @@ ClientConfig: {
 	}
 
 	RainbowHealThreshold: {
-		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold"
+		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold (%)"
 		// Tooltip: ""
 	}
 
