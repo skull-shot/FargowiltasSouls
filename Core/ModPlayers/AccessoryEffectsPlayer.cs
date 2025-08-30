@@ -661,6 +661,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.statLife = Player.statLifeMax2;
                 Player.HealEffect(heal);
 
+                int buffDuration = heal * 60 / 8;
+                Player.AddBuff(BuffID.RapidHealing, buffDuration);
+
                 for (int i = 0; i < 16; i++)
                 {
                     Color color = Color.OrangeRed;
@@ -801,7 +804,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (dreadEffect)
             {
                 if (!MasochistSoul)
-                    DreadShellVulnerabilityTimer = 60;
+                    DreadShellVulnerabilityTimer = 120;
             }
 
             if (pumpkingEffect)
