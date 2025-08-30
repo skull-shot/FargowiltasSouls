@@ -224,7 +224,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             void Meteor()
             {
                 //spew fireballs
-                const int MaxSpeed = 8;
+                const int MaxSpeed = 4;
                 const int SpewFrames = 8;
 
                 if (AttackTimer % SpewFrames == 0)
