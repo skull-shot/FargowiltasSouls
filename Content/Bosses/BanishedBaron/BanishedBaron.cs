@@ -943,10 +943,13 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                     p.Spawn();
                 }
 
-                float scaleFactor9 = 2;
-                for (int j = 0; j < 20; j++)
+                if (!Main.dedServ)
                 {
-                    Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
+                    float scaleFactor9 = 2;
+                    for (int j = 0; j < 20; j++)
+                    {
+                        Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
+                    }
                 }
 
                 SoundEngine.PlaySound(SoundID.Item62, NPC.Center);

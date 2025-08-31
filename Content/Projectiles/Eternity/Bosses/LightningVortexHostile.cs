@@ -247,7 +247,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses
             if (Projectile.localAI[0] <= 90 && Projectile.ai[0] != 0)
             {
                 Asset<Texture2D> line = TextureAssets.Extra[178];
-                float opacity = 1f; MathF.Pow(Projectile.localAI[0] / 90f, 0.5f);
+                float opacity = Projectile.localAI[0] / 90f;
                 Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, DrawColor * opacity, Projectile.ai[1], new Vector2(0, line.Height() * 0.5f), new Vector2(0.66f, 6), SpriteEffects.None);
             }
 
