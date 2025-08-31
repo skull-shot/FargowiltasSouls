@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 2f));
+            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 2.5f));
         }
         public override void OnFirstTick(NPC npc)
         {
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.getGoodWorld && !valid)
                 modifiers.Null();
             if (valid)
-                modifiers.FinalDamage *= 1.5f;
+                modifiers.FinalDamage *= 1.75f;
         }
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.getGoodWorld && !valid)
                 modifiers.Null();
             if (valid)
-                modifiers.FinalDamage *= 1.4f;
+                modifiers.FinalDamage *= 1.75f;
 
             //TODO: make this not affect summon projectiles from accessories or armor
             if (FargoSoulsUtil.IsSummonDamage(projectile) && (GetVulnerabilityState(npc) != 3))
