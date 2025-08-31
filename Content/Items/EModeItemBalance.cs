@@ -460,11 +460,20 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["DynamicUpdating"];
                     return EModeChange.Neutral;
 
-                case ItemID.SolarEruption:
                 case ItemID.DayBreak:
                 //case ItemID.InfluxWaver TODO: make this actually work
                     balanceTextKeys = ["MeleeDamageBugFix"];
                     return EModeChange.Neutral;
+
+                case ItemID.SolarEruption:
+                    balanceTextKeys = ["Damage", "MeleeDamageBugFix"];
+                    balanceNumber = 1.25f;
+                    return EModeChange.Neutral;
+
+                case ItemID.Phantasm:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
 
                 case ItemID.PygmyStaff:
                     balanceTextKeys = ["PygmyStaff"];
