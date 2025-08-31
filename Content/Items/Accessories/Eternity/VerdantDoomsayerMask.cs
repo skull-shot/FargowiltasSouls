@@ -93,8 +93,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             int damage = (int)(CelestialRuneAttacks.BaseDamage(Main.LocalPlayer) * player.ActualClassDamage(damageClass));
             if (damageClass == DamageClass.Summon)
                 damage /= (int)player.ActualClassDamage(DamageClass.Summon);
-            if (damageClass == DamageClass.Ranged || damageClass == DamageClass.Magic)
+            if (damageClass == DamageClass.Ranged)
                 damage *= 2;
+            if (damageClass == DamageClass.Magic)
+                damage = (int)(damage * 0.66f);
 
             tooltipColor = null;
             scaling = null;

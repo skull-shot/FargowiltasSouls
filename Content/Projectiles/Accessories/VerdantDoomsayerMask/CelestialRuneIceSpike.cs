@@ -20,14 +20,13 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.ignoreWater = true;
-            //Projectile.tileCollide = false;
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 90;
-            Projectile.penetrate = -1;
 
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 8;
-            Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            //Projectile.penetrate = -1;
+            //Projectile.usesIDStaticNPCImmunity = true;
+            //Projectile.idStaticNPCHitCooldown = 8;
+            //Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
 
             FargowiltasSouls.MutantMod.Call("LowRenderProj", Projectile);
         }
