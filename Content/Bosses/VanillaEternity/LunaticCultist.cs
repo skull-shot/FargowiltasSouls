@@ -669,7 +669,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
             if (ProjectileID.Sets.CultistIsResistantTo[projectile.type])
-                modifiers.FinalDamage *= 1 / 1.2f;
+                modifiers.FinalDamage *= 1 / 1.3f;
         }
 
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)

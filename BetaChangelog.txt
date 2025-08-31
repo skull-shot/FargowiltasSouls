@@ -101,4 +101,4 @@ baron does a bigger explode on death
 fixed destroyer instantly despawning any custom ai projectile on hit
 
 cultist ice tell is more obvious, marginally reduced emode rotational aim
-cultist has another stacking 20% DR against homing
+cultist has another stacking 30% DR against homing
