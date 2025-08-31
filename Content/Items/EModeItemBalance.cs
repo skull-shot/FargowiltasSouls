@@ -471,6 +471,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Neutral;
 
                 case ItemID.Phantasm:
+                case ItemID.NebulaArcanum:
+                case ItemID.NebulaBlaze:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.8f;
                     return EModeChange.Nerf;
