@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
         {
             return false;
         }
-
+        public ref float Direction => ref Projectile.ai[2];
         public override void AI()
         {
             int time = 35 * (int)Projectile.ai[1];
@@ -49,14 +49,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
             if (p != -1)
             {
-                Projectile.position += Main.player[p].velocity * 0.8f;
+                //Projectile.position += Main.player[p].velocity * 0.8f;
 
                 Vector2 target = Main.player[p].Center;
-                target.Y -= 400;
+                if (Direction == 0)
+                    Direction = Projectile.HorizontalDirectionTo(target);
 
-                Vector2 distance = target - Projectile.Center;
-                distance /= 6f;
-                Projectile.velocity = (Projectile.velocity * 19f + distance) / 20f;
+                target.Y -= 400;
+                target.X += Direction * (Projectile.ai[0] - 110) * 7f;
+
+                Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, target, Projectile.velocity, 3f, 3f);
             }
 
             Projectile.ai[0]++;
@@ -148,7 +150,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                         Vector2 dir = Vector2.UnitY;
                         float ai1New = Main.rand.Next(100);
                         Vector2 vel = Vector2.Normalize(dir.RotatedByRandom(Math.PI / 4)) * 5f;
-                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel, ProjectileID.CultistBossLightningOrbArc,
+                        int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel, ProjectileID.CultistBossLightningOrbArc,
                             Projectile.damage, 0, Main.myPlayer, dir.ToRotation(), ai1New);
                     }
                 }
