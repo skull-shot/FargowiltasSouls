@@ -3031,11 +3031,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Vector2 vel = yDir * 20;
                         Slime(pos, 0f, yDir * 20f);
                     }
-                    for (float i = -spacing / 2; i <= spacing / 2; i += spacing)
+                    if (WorldSavingSystem.MasochistModeReal)
                     {
-                        Vector2 pos = basePos - yDir * 1300 + xDir * i;
-                        Vector2 vel = yDir * 20;
-                        Slime(pos, 0f, yDir * 20f);
+                        for (float i = -spacing / 2; i <= spacing / 2; i += spacing)
+                        {
+                            Vector2 pos = basePos - yDir * 1300 + xDir * i;
+                            Vector2 vel = yDir * 20;
+                            Slime(pos, 0f, yDir * 20f);
+                        }
                     }
 
                     /*

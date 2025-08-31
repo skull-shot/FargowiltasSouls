@@ -104,3 +104,6 @@ cultist ice tell is more obvious, marginally reduced emode rotational aim
 cultist has another stacking 30% DR against homing
 fixed fishron's spectral sharks exploding into full size fishron gores
 lightning portal new telegraph now fades in
+
+fixed mutant sword double hitting
+fixed mutant doing maso qs in emode oops!
