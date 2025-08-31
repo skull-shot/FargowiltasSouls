@@ -453,11 +453,17 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.PiranhaGun:
-                    balanceTextKeys = ["PiranhaGun"];
+                    balanceTextKeys = ["DynamicUpdating"];
                     return EModeChange.Neutral;
                     
                 case ItemID.ProximityMineLauncher:
-                    balanceTextKeys = ["ProximityMineLauncher"];
+                    balanceTextKeys = ["DynamicUpdating"];
+                    return EModeChange.Neutral;
+
+                case ItemID.SolarEruption:
+                case ItemID.DayBreak:
+                //case ItemID.InfluxWaver TODO: make this actually work
+                    balanceTextKeys = ["MeleeDamageBugFix"];
                     return EModeChange.Neutral;
 
                 case ItemID.PygmyStaff:

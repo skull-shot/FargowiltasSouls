@@ -805,11 +805,11 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
-                    if (SourceItemType == ItemID.SolarEruption)
+                    if (SourceItemType == ItemID.SolarEruption && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
                         projectile.DamageType = DamageClass.Melee;
                     break;
                 case ProjectileID.DaybreakExplosion:
-                    if (SourceItemType == ItemID.DayBreak)
+                    if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
                         projectile.DamageType = DamageClass.Melee;
                     break;
                 default:
