@@ -763,17 +763,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
         }
 
-        public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
-
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 2.0f / 3.0f + 1.0f / 3.0f * 1f / projectile.numHits;
-            if (projectile.type == ProjectileID.RainFriendly)
-                modifiers.FinalDamage /= 2;
-            if (projectile.type == ProjectileID.SoulDrain)
-                modifiers.FinalDamage *= 0.75f;
-        }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
@@ -1052,16 +1041,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (projectile.type == ProjectileID.RainFriendly)
                 modifiers.FinalDamage /= 2;
-            if (projectile.type == ProjectileID.SoulDrain)
-                modifiers.FinalDamage *= 0.75f;
-            if (projectile.type == ModContent.ProjectileType<DecrepitAirstrikeNuke>() || projectile.type == ModContent.ProjectileType<DecrepitAirstrikeNukeSplinter>())
-                modifiers.FinalDamage *= 0.7f;
 
             if (projectile.type == ProjectileID.MonkStaffT1 || projectile.type == ProjectileID.MonkStaffT1Explosion) // sleepy
                 modifiers.FinalDamage *= 0.3f;
-
-            if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.7f;
 
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
@@ -1075,8 +1057,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type])
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle])
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
+
+            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && (FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle] || projectile.FargoSouls().IsAHeldProj))
+            { //only affects projs of the type that are effectively infinite pierce
+                modifiers.FinalDamage *= 0.7f;
+            }
         }
         public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
