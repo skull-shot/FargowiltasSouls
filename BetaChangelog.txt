@@ -107,3 +107,4 @@ lightning portal new telegraph now fades in
 
 fixed mutant sword double hitting
 fixed mutant doing maso qs in emode oops!
+fixed rain ench cd sometimes being applied on world load
