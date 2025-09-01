@@ -99,3 +99,12 @@ buffed sinew freeze downside from 20t freeze 2sec cd to 10t freeze 4sec cd, trus
 mutant qs maso has same spacing as emode... but you have to dodge on the outer layer instead
 baron does a bigger explode on death
 fixed destroyer instantly despawning any custom ai projectile on hit
+
+cultist ice tell is more obvious, marginally reduced emode rotational aim
+cultist has another stacking 30% DR against homing
+fixed fishron's spectral sharks exploding into full size fishron gores
+lightning portal new telegraph now fades in
+
+fixed mutant sword double hitting
+fixed mutant doing maso qs in emode oops!
+fixed rain ench cd sometimes being applied on world load

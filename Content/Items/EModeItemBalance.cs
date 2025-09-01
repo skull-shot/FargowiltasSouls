@@ -477,6 +477,11 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.8f;
                     return EModeChange.Nerf;
 
+                case ItemID.StardustDragonStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.67f;
+                    return EModeChange.Nerf;
+
                 case ItemID.PygmyStaff:
                     balanceTextKeys = ["PygmyStaff"];
                     return EModeChange.Buff;
