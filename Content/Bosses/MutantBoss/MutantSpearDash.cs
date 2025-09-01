@@ -123,7 +123,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
-                if (!WorldSavingSystem.masochistModeReal || Variant > 0)
+                if (!WorldSavingSystem.MasochistModeReal || Variant > 0)
                 {   
                     //bullshit to make it play the maso sound on the final throw of predictives
                     if (Projectile.ai[1] != -2)

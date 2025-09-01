@@ -271,15 +271,11 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         public override bool? CanFallThroughPlatforms() => true;
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.Bleeding, 60 * 10);
             if (!WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Rabies, 60 * 5);
                 return;
             }
-            target.AddBuff(BuffID.Rabies, 60 * 10);
-            target.FargoSouls().MaxLifeReduction += 30;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 12);
+            target.AddBuff(BuffID.Bleeding, 60 * 4);
         }
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {

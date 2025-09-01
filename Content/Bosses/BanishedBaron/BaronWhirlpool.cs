@@ -37,12 +37,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (!WorldSavingSystem.EternityMode)
-            {
                 return;
-            }
-            //target.FargoSouls().MaxLifeReduction += 30;
-            //target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 12);
-            target.AddBuff(BuffID.Rabies, 60 * 10);
+            target.AddBuff(BuffID.Bleeding, 60 * 4);
         }
         public override void SendExtraAI(BinaryWriter writer)
         {

@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Core.Systems
             orig(i, j, fail);
         }
         // Tile protection with this is done in FargoGlobalTile.
-        public static bool CoffinProtectionActive(int x, int y) => !WorldGen.generatingWorld && !WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.CursedCoffin] && CoffinArena.PaddedRectangle.Contains(x, y);
+        public static bool CoffinProtectionActive(int x, int y) => !WorldGen.generatingWorld && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin] && CoffinArena.PaddedRectangle.Contains(x, y);
         public static bool ArenaItemPrevention(Item item, Player player)
         {
             bool illegalItem = false;

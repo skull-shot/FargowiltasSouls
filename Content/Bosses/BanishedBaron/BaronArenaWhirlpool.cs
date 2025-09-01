@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             float modifier = 1f - ((float)baron.life / p2MaxLife);
             float distanceDecrease = 400 * modifier;
             float MaxDistance = (float)BaseMaxDistance - distanceDecrease;
-            if (WorldSavingSystem.masochistModeReal)
+            if (WorldSavingSystem.MasochistModeReal)
             {
                 MaxDistance -= 300;
             }

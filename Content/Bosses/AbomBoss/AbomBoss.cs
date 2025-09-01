@@ -1531,7 +1531,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 playerInvulTriggered = true;
 
             //drop summon
-            EModeUtils.DropSummon(NPC, ModContent.ItemType<AbomsCurse>(), WorldSavingSystem.downedAbom, ref droppedSummon, WorldSavingSystem.EternityMode && NPC.downedMoonlord);
+            EModeUtils.DropSummon(NPC, ModContent.ItemType<AbomsCurse>(), WorldSavingSystem.DownedAbom, ref droppedSummon, WorldSavingSystem.EternityMode && NPC.downedMoonlord);
         }
 
         private bool AliveCheck(Player player)
@@ -1726,7 +1726,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<BrokenHilt>());
             }
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedAbom, -1);
+            WorldSavingSystem.SetAbomDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

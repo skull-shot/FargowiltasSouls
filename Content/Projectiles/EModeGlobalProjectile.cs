@@ -1847,7 +1847,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.HallowBossRainbowStreak:
                 case ProjectileID.HallowBossLastingRainbow:
                 case ProjectileID.HallowBossSplitShotCore:
-                    target.AddBuff(ModContent.BuffType<SmiteBuff>(), 900);
+                    target.AddBuff(ModContent.BuffType<SmiteBuff>(), 600);
                     break;
 
                 case ProjectileID.RollingCactus:
@@ -2084,7 +2084,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         if (sourceNPC.type == NPCID.Golem)
                         {
-                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 90);
+                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
                                 target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);

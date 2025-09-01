@@ -85,7 +85,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 3);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
         }
 
         public static void LoadGolemSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
