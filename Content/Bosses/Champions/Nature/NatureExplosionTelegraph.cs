@@ -1,7 +1,5 @@
 ﻿using Fargowiltas.Common.Configs;
-using Fargowiltas.Content.NPCs;
-using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -72,7 +70,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             Vector2 auraPos = Projectile.Center;
             float radius = Radius;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargoAssets.WavyNoise;
+            var diagonalNoise = FargosTextureRegistry.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = Projectile.Opacity;

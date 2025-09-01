@@ -312,7 +312,7 @@ namespace FargowiltasSouls.Core.Globals
 
             if (Sublimation)
             {
-                npc.defense = originalDefense - 15; //ichor 2
+                npc.defense = npc.defDefense - 15; //ichor 2
                 if (npc.defense < 0)
                     npc.defense = 0;
             }

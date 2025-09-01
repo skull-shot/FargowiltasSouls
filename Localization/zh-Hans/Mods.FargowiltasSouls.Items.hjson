@@ -3744,87 +3744,22 @@ MainMenuMusicBox: {
 }
 
 BaronMask: {
-	DisplayName: 放逐遗爵面具
-	Tooltip: ""
-}
-
-CoffinMask: {
-	DisplayName: 咒缚灵棺面具
-	Tooltip: ""
-}
-
-DeathMask: {
-	DisplayName: 死亡英灵面具
-	Tooltip: ""
-}
-
-EarthMask: {
-	DisplayName: 大地英灵面具
-	Tooltip: ""
-}
-
-LifelightMask: {
-	DisplayName: 飘渺游光面具
-	Tooltip: ""
-}
-
-LifeMask: {
-	DisplayName: 生命英灵面具
-	Tooltip: ""
-}
-
-NatureMask: {
-	DisplayName: 自然英灵面具
-	Tooltip: ""
-}
-
-SpiritMask: {
-	DisplayName: 心灵英灵面具
-	Tooltip: ""
-}
-
-TerraMask: {
-	DisplayName: 泰拉英灵面具
-	Tooltip: ""
-}
-
-TimberMask: {
-	DisplayName: 森林英灵面具
-	Tooltip: ""
-}
-
-TrojanMask: {
-	DisplayName: 特洛伊松鼠面具
-	Tooltip: ""
-}
-
-WillMask: {
-	DisplayName: 意志英灵面具
-	Tooltip: ""
-}
-
-BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
-}
-
-BaronMask: {
-	// DisplayName: Baron Mask
+	// DisplayName: Banished Baron Mask
 	// Tooltip: ""
 }
 
 CoffinMask: {
-	// DisplayName: Coffin Mask
+	// DisplayName: Cursed Coffin Mask
 	// Tooltip: ""
 }
 
 DeathMask: {
-	// DisplayName: Death Mask
+	// DisplayName: Death Champion Mask
 	// Tooltip: ""
 }
 
 EarthMask: {
-	// DisplayName: Earth Mask
+	// DisplayName: Earth Champion Mask
 	// Tooltip: ""
 }
 
@@ -3834,36 +3769,41 @@ LifelightMask: {
 }
 
 LifeMask: {
-	// DisplayName: Life Mask
+	// DisplayName: Life Champion Mask
 	// Tooltip: ""
 }
 
 NatureMask: {
-	// DisplayName: Nature Mask
+	// DisplayName: Nature Champion Mask
 	// Tooltip: ""
 }
 
 SpiritMask: {
-	// DisplayName: Spirit Mask
+	// DisplayName: Spirit Champion Mask
 	// Tooltip: ""
 }
 
 TerraMask: {
-	// DisplayName: Terra Mask
+	// DisplayName: Terra Champion Mask
 	// Tooltip: ""
 }
 
 TimberMask: {
-	// DisplayName: Timber Mask
+	// DisplayName: Timber Champion Mask
 	// Tooltip: ""
 }
 
 TrojanMask: {
-	// DisplayName: Trojan Mask
+	// DisplayName: Trojan Squirrel Mask
 	// Tooltip: ""
 }
 
 WillMask: {
-	// DisplayName: Will Mask
+	// DisplayName: Will Champion Mask
+	// Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }

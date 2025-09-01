@@ -817,3 +817,8 @@ TouhouHoardBuff: {
 	DisplayName: Мистическая орда
 	Description: Мифические существа сражаются за вас
 }
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed Harmless Buff
+	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+}

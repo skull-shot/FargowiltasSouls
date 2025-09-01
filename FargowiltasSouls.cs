@@ -498,11 +498,6 @@ namespace FargowiltasSouls
 
                     ModContent.BuffType<TimeFrozenBuff>()
                 ];
-                if (EmodeItemBalance.HasEmodeChange(Main.player[Main.myPlayer], ItemID.RodofDiscord))
-                {
-                    DefenseReducingDebuffs.Add(88);
-                }
-                DefenseReducingDebuffs.Add(ModContent.BuffType<BerserkerInstallBuff>());
 
                 const int k = 1000;
                 FargoSets.NPCs.SwarmHealth[ModContent.NPCType<RoyalSubject>()] = 5100;

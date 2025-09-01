@@ -1,4 +1,4 @@
-using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoAssets.FadedStreak.Value.SetTexture1();
+            FargosTextureRegistry.FadedStreak.Value.SetTexture1();
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
     }

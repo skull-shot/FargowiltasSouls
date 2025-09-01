@@ -817,6 +817,7 @@ TouhouHoardBuff: {
 	DisplayName: Mystical Horde
 	Description: The mythical beings will fight for you
 }
+
 GrabbedHarmlessBuff: {
 	DisplayName: Grabbed Harmless Buff
 	Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
