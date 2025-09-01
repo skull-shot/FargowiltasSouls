@@ -190,7 +190,7 @@ BerserkedBuff: {
 
 BloodDrinkerBuff: {
 	DisplayName: Кровопийца
-	Description: Урон увеличен на 15%
+	Description: Урон увеличен на 25%
 }
 
 BloodthirstyBuff: {
@@ -320,7 +320,7 @@ PoweroftheCosmosBuff: {
 		Оружия, совпадающие с фазой Лунного лорда, наносят в 1,5 раза больше урона!
 		Призываемые существа наносят половину урона, пока вы не держите призывательное оружие
 		'''
-	CombatText: x1,5 ед. {0} урона!
+	CombatText: x1,75 ед. {0} урона!
 	Melee: ближнего
 	Ranged: стрелкового
 	Magic: магического
@@ -482,8 +482,8 @@ TrueEyesBuff: {
 }
 
 OmniscienceBuff: {
-	// DisplayName: Omniscience
-	// Description: The real Twins will fight for you
+	DisplayName: Всеведение
+	Description: Настоящие Близнецы сражаются за вас
 }
 
 MutantRebirthBuff: {

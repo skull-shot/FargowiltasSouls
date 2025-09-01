@@ -832,6 +832,6 @@ MutantNukeBomb.DisplayName: ХАЙДРОДЖЕН БОМБ
 MutantSpikevine.DisplayName: Шипастая лоза
 TopazBoltExplosion.DisplayName: Топазовый взрыв
 MutantTwin.DisplayName: Близнец
-// EarthFireball.DisplayName: Earth Fireball
-// GraniteBolt.DisplayName: Granite Bolt
-// GranitePebble.DisplayName: Granite Pebble
+EarthFireball.DisplayName: Огненный шар Земли
+GraniteBolt.DisplayName: Гранитный выстрел
+GranitePebble.DisplayName: Гранитный камушек
