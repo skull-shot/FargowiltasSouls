@@ -1572,6 +1572,16 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
+                    case ProjectileID.StardustDragon1:
+                    case ProjectileID.StardustDragon2:
+                    case ProjectileID.StardustDragon3:
+                    case ProjectileID.StardustDragon4:
+                        if (SourceItemType == ItemID.StardustDragonStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.67f;
+                        }
+                        break;
+
                     case ProjectileID.MoonlordTurretLaser:
                         if (SourceItemType == ItemID.MoonlordTurretStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
