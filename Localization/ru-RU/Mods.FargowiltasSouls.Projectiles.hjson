@@ -835,3 +835,7 @@ MutantTwin.DisplayName: Близнец
 EarthFireball.DisplayName: Огненный шар Земли
 GraniteBolt.DisplayName: Гранитный выстрел
 GranitePebble.DisplayName: Гранитный камушек
+// DarkRune.DisplayName: Dark Rune
+// DarkTomeHostile.DisplayName: Dark Tome
+// DarkBolt.DisplayName: Dark Bolt
+// TomeShotHostile.DisplayName: Tome Shot

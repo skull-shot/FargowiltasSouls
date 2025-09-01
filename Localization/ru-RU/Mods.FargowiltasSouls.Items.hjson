@@ -966,13 +966,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ чтобы выключить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		'''
 }
@@ -987,7 +987,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ чтобы включить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -3293,11 +3293,11 @@ RustedOxygenTankInactive: {
 	Tooltip:
 		'''
 		Работает из инвентаря
-		В данный момент неактивен, нажмите ПКМ чтобы включить
+		В данный момент неактивен, нажмите ПКМ, чтобы включить
 		Вы считаетесь мокрыми вне воды
 		Делает ваши движения плавучими вне жидкостей
 		Увеличивает скорость передвижения, пока находитесь в любой жидкости
-		«Никто не знает, как оно работает»
+		«Никто не знает, как он работает»
 		'''
 }
 
