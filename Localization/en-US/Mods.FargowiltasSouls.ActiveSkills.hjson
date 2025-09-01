@@ -99,7 +99,7 @@ GladiatorBanner: {
 	DisplayName: Gladiator Banner
 	Tooltip:
 		'''
-		Place an empowering banner that lasts 15 seconds
+		Place an empowering banner
 		Being close to the banner grants knockback immunity, +8% damage reduction and +8% damage
 		Banner can only be resummoned after it runs out
 		'''
