@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             float maxDist = 380;
             float expandTime = 0.24f;
             float contractStart = 1 - expandTime;
-            float dist = 300;
+            float dist = 380;
             if (progress < expandTime)
                 dist = MathHelper.SmoothStep(0, maxDist, progress / expandTime);
             if (progress > contractStart)

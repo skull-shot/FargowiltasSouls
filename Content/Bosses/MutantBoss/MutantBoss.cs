@@ -2973,7 +2973,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSlimeRain>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
             }
 
-            float safeRange = WorldSavingSystem.MasochistModeReal ? 192.5f : 220;
+            float safeRange = /*WorldSavingSystem.MasochistModeReal ? 192.5f :*/ 220;
             float spacing = safeRange;
 
             if (NPC.ai[1] == 0) //telegraphs for where slime will fall
@@ -2989,7 +2989,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 for (float i = -1540; i <= 1540; i += spacing / 2) //spawn telegraphs
                 {
                     j++;
-                    if (Math.Abs(i) < spacing * 1.5f && j % 2 == 0)
+                    if (WorldSavingSystem.MasochistModeReal
+                        ? Math.Abs(i) > spacing * 1f && Math.Abs(i) < spacing * 2f
+                        : Math.Abs(i) < spacing * 1.5f && j % 2 == 0)
                         continue;
                     if (FargoSoulsUtil.HostCheck)
                     {
@@ -3028,6 +3030,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Vector2 pos = basePos - yDir * 1300 + xDir * i;
                         Vector2 vel = yDir * 20;
                         Slime(pos, 0f, yDir * 20f);
+                    }
+                    if (WorldSavingSystem.MasochistModeReal)
+                    {
+                        for (float i = -spacing / 2; i <= spacing / 2; i += spacing)
+                        {
+                            Vector2 pos = basePos - yDir * 1300 + xDir * i;
+                            Vector2 vel = yDir * 20;
+                            Slime(pos, 0f, yDir * 20f);
+                        }
                     }
 
                     /*
@@ -3479,7 +3490,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -26);
             }
-                
+
 
             int attackDelay = 35;
             attackDelay /= 2;
@@ -3524,7 +3535,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     //if (WorldSavingSystem.MasochistModeReal) i *= -1;
                     for (int j = -1; j <= 1; j += 2) //flappy bird tubes
                     {
-                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 100 : 150;
+                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 120 : 150;
                         Vector2 sansTargetPos = centerPoint;
                         const int timeToReachMiddle = 60;
                         sansTargetPos.X += xSpeedWhenAttacking * timeToReachMiddle * i;

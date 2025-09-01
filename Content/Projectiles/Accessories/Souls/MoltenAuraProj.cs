@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
     {
         public override string Texture => FargoSoulsUtil.EmptyTexture;
 
-        public override Color? GetAlpha(Color lightColor) => lightColor * Projectile.Opacity; // Color.White * Projectile.Opacity;
+        public override Color? GetAlpha(Color lightColor) => lightColor * Projectile.Opacity;
 
         public override void SetDefaults()
         {
@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = Projectile.Opacity * 0.09f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = Projectile.Opacity * (target.HasEffectEnchant<MoltenEffect>() ? 1f : 0.12f) * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
 
             if (CombinedAura(player))
             {
@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
-            var maxOpacity = opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = opacity * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles; 
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
             borderShader.TrySetParameter("colorMult", 7.35f);

@@ -1098,10 +1098,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle])
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && projectile.aiStyle > -1 && !FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle])
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
 
-            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && (FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle] || projectile.FargoSouls().IsAHeldProj))
+            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && ((projectile.aiStyle > -1 && FargoSoulsSets.Projectiles.AiStylePierceResistImmune[projectile.aiStyle]) || projectile.FargoSouls().IsAHeldProj))
             { //only affects projs of the type that are effectively infinite pierce
                 modifiers.FinalDamage *= 0.7f;
             }

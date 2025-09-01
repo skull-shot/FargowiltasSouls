@@ -931,6 +931,27 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Collision.SolidCollision(NPC.position + NPC.velocity, NPC.width, NPC.height) || Timer > AnimTime)
             {
+                ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
+
+                int ExplosionDiameter = 500;
+                for (int i = 0; i < 200; i++)
+                {
+                    Vector2 pos = NPC.Center + new Vector2(0, Main.rand.NextFloat(ExplosionDiameter * 0.8f)).RotatedBy(Main.rand.NextFloat(MathHelper.TwoPi)); //circle with highest density in middle
+                    Vector2 vel = (pos - NPC.Center) / 500;
+                    Particle p = new ExpandingBloomParticle(pos, vel, Color.Lerp(Color.Yellow, Color.Red, pos.Distance(NPC.Center) / (ExplosionDiameter / 2f)), startScale: Vector2.One * 3, endScale: Vector2.One * 0, lifetime: 60);
+                    p.Velocity *= 2f;
+                    p.Spawn();
+                }
+
+                if (!Main.dedServ)
+                {
+                    float scaleFactor9 = 2;
+                    for (int j = 0; j < 20; j++)
+                    {
+                        Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
+                    }
+                }
+
                 SoundEngine.PlaySound(SoundID.Item62, NPC.Center);
                 NPC.StrikeInstantKill();
             }

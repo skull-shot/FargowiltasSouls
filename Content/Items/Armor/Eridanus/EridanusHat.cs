@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
 
         public override void ArmorSetShadows(Player player)
         {
-            player.armorEffectDrawOutlines = true;
+            //player.armorEffectDrawOutlines = true;
         }
 
         public override void UpdateArmorSet(Player player)

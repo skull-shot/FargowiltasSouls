@@ -44,6 +44,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Items.Armor.Eridanus;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -1247,10 +1248,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 drawInfo.bodyGlowMask = ModContent.ItemType<StyxChestplate>();
                 drawInfo.bodyGlowColor = Color.White;
                 drawInfo.armGlowColor = Color.White;
-                /*drawInfo.headGlowMask = ModContent.ItemType<StyxCrown>();
-                drawInfo.headGlowColor = Color.White;
-                drawInfo.legsGlowMask = ModContent.ItemType<StyxLeggings>();
-                drawInfo.legsGlowColor = Color.White;*/
+            }
+            if (!(Player.armor[1].type != ModContent.ItemType<EridanusBattleplate>() && Player.armor[11].type != ModContent.ItemType<EridanusBattleplate>()))
+            {
+                drawInfo.bodyGlowMask = ModContent.ItemType<EridanusBattleplate>();
+                drawInfo.bodyGlowColor = Color.White;
+                drawInfo.armGlowColor = Color.White;
             }
         }
 

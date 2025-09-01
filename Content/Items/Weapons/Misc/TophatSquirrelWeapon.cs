@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 
             Item.width = 20;
             Item.height = 20;
-            Item.rare = ItemRarityID.Yellow;
+            Item.rare = ItemRarityID.Lime;
             Item.useAnimation = 45;
             Item.useTime = 45;
 

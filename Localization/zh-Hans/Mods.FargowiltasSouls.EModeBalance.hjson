@@ -53,8 +53,7 @@ JackOLanternLauncher: 增加50%弹幕速度
 GolemFist: 根据拳头伸长距离造成至多三倍伤害
 Gladius: 提高命中频率以和挥舞速度一致
 FlowerPow: 花瓣发射频率增加200%
-PiranhaGun: 弹幕伤害会动态更新
-ProximityMineLauncher: 弹幕伤害会动态更新
+// DynamicUpdating: Projectile damage updates dynamically
 PygmyStaff: 长矛可以穿透一次
 MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // AerialBane: Bonus damage against airborne enemies decreased to 15%
@@ -67,3 +66,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // EmeraldStaff: Fires a large bolt with strong knockback and pierce
 // AmberStaff: Bolt boomerangs back
 // RubyStaff: Bolt splits in half after a duration
+// MeleeDamageBugFix: Fixed projectiles not dealing melee damage

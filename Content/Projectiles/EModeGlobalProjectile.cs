@@ -804,6 +804,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+                case ProjectileID.SolarWhipSwordExplosion:
+                    if (SourceItemType == ItemID.SolarEruption && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
+                        projectile.DamageType = DamageClass.Melee;
+                    break;
+                case ProjectileID.DaybreakExplosion:
+                    if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
+                        projectile.DamageType = DamageClass.Melee;
+                    break;
                 default:
                     break;
 
@@ -1561,6 +1569,16 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 modifiers.SourceDamage *= 9.2f / 12f; //results in 1.15x after vanilla 1.5x
                             }
+                        }
+                        break;
+
+                    case ProjectileID.StardustDragon1:
+                    case ProjectileID.StardustDragon2:
+                    case ProjectileID.StardustDragon3:
+                    case ProjectileID.StardustDragon4:
+                        if (SourceItemType == ItemID.StardustDragonStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            modifiers.SourceDamage *= 0.67f;
                         }
                         break;
 

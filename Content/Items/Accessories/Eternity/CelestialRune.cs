@@ -46,8 +46,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             int damage = (int)(CelestialRuneAttacks.BaseDamage(Main.LocalPlayer) * player.ActualClassDamage(damageClass));
             if (damageClass == DamageClass.Summon)
                 damage /= (int)player.ActualClassDamage(DamageClass.Summon);
-            if (damageClass == DamageClass.Ranged || damageClass == DamageClass.Magic)
+            if (damageClass == DamageClass.Ranged)
                 damage *= 2;
+            if (damageClass == DamageClass.Magic)
+                damage = (int)(damage * 0.66f);
 
             tooltipColor = null;
             scaling = null;
@@ -101,13 +103,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                             (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Ranged) * 2), 1f, player.whoAmI, velocity.ToRotation(), ai1);
                     }
                 }
-                if (damageType.CountsAsClass(DamageClass.Magic)) //ice mist
+                if (damageType.CountsAsClass(DamageClass.Magic)) //ice spikes
                 {
                     SoundEngine.PlaySound(SoundID.Item34, position);
                     for (int i = -5; i < 5; i++)
                     {
                         Vector2 vel = velocity.RotatedBy(MathHelper.PiOver2 * 0.17f * i / 10f).RotatedByRandom(MathHelper.PiOver2 * 0.05f);
-                        Projectile.NewProjectile(GetSource_EffectItem(player), position, vel * Main.rand.NextFloat(8f, 12f), ModContent.ProjectileType<CelestialRuneIceSpike>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 2), 1f, player.whoAmI);
+                        Projectile.NewProjectile(GetSource_EffectItem(player), position, vel * Main.rand.NextFloat(8f, 12f), ModContent.ProjectileType<CelestialRuneIceSpike>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 0.66f), 1f, player.whoAmI);
                     }
                     //Projectile.NewProjectile(GetSource_EffectItem(player), position, velocity * 4.25f, ModContent.ProjectileType<CelestialRuneIceMist>(), (int)(BaseDamage(player) * player.ActualClassDamage(DamageClass.Magic) * 2), 4f, player.whoAmI);
                 }

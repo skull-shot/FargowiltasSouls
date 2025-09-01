@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 2f));
+            npc.lifeMax = (int)(MathF.Round(npc.lifeMax * 2.5f));
         }
         public override void OnFirstTick(NPC npc)
         {
@@ -89,7 +89,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.getGoodWorld && !valid)
                 modifiers.Null();
             if (valid)
-                modifiers.FinalDamage *= 1.5f;
+                modifiers.FinalDamage *= 1.75f;
         }
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.getGoodWorld && !valid)
                 modifiers.Null();
             if (valid)
-                modifiers.FinalDamage *= 1.4f;
+                modifiers.FinalDamage *= 1.75f;
 
             //TODO: make this not affect summon projectiles from accessories or armor
             if (FargoSoulsUtil.IsSummonDamage(projectile) && (GetVulnerabilityState(npc) != 3))
@@ -807,6 +807,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.HitEffect();
                 npc.active = false;
             }
+
             float num1281 = 0f;
             float num1282 = 0f;
             float num1283 = npc.ai[0];
@@ -1212,14 +1213,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         npc.TargetClosest(faceTarget: false);
                         Vector2 spinningpoint11 = Main.player[npc.target].Center - npc.Center;
                         spinningpoint11.Normalize();
-                        float num1305 = -1f;
+
+                        float deathrayDir = -1f;
                         if (spinningpoint11.X < 0f)
                         {
-                            num1305 = 1f;
+                            deathrayDir = 1f;
                         }
-                        spinningpoint11 = spinningpoint11.RotatedBy((0f - num1305) * ((float)Math.PI * 2f) / 6f);
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center.X, npc.Center.Y, spinningpoint11.X, spinningpoint11.Y, 455, 50, 0f, Main.myPlayer, num1305 * ((float)Math.PI * 2f) / 540f, npc.whoAmI);
-                        npc.ai[2] = (spinningpoint11.ToRotation() + (float)Math.PI * 3f) * num1305;
+
+                        // sync deathray directions
+                        NPC? eye = Main.npc.FirstOrDefault(n => n.TypeAlive(npc.type) && n.whoAmI != npc.whoAmI && n.ai[0] == npc.ai[0] && n.ai[1] >= npc.ai[1]); // any other eye currently deathraying
+                        if (eye != null)
+                        {
+                            deathrayDir = eye.ai[2].NonZeroSign();
+                        }
+                            
+
+                        spinningpoint11 = spinningpoint11.RotatedBy((0f - deathrayDir) * ((float)Math.PI * 2f) / 6f);
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center.X, npc.Center.Y, spinningpoint11.X, spinningpoint11.Y, 455, 50, 0f, Main.myPlayer, deathrayDir * ((float)Math.PI * 2f) / 540f, npc.whoAmI);
+                        npc.ai[2] = (spinningpoint11.ToRotation() + (float)Math.PI * 3f) * deathrayDir;
                         npc.netUpdate = true;
                     }
                     npc.localAI[1] += 0.05f;
