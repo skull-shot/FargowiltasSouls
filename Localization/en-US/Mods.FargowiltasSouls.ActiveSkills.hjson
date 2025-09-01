@@ -85,7 +85,7 @@ BulbKeyEffect: {
 	Tooltip:
 		'''
 		Cure yourself of most debuffs on a long cooldown
-		Also amplifies damage over time effects for nearby enemies by 2x
+		Curses enemies, causing them to take 100% more damage from debuffs
 		Cooldown depletes faster while not attacking
 		'''
 }
