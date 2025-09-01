@@ -88,7 +88,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
 
-                        float damageCap = (hitInfo.Damage / 2) + 100;
+                        float damageCap = (hitInfo.Damage / 2) + 80;
                         if (hitInfo.Damage * critDamageMult > damageCap)
                         {
                             critDamageMult = damageCap / hitInfo.Damage;
