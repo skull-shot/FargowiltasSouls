@@ -878,7 +878,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 AdditionalAttacksTimer--;
 
             if (Player.HasEffect<SpookyEffect>() && SpookyCD > 0)
+            {
                 SpookyCD--;
+                if (SpookyCD == 1)
+                    SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath with {Volume = 2f}, Player.Center);
+            }
 
             if (Player.HasEffect<RemoteLightningEffect>() && RemoteCD > 0)
                 RemoteCD--;
