@@ -1084,7 +1084,7 @@ DreadShell: {
 		Defense and damage reduction are decreased shortly after guarding
 		Parry negates up to 200 damage and causes a massive counterattack
 		Counterattack inflicts Anticoagulation, causing enemies to drop blood clots when hit
-		Absorbing blood clots increases your damage by 15%
+		Absorbing blood clots increases your damage by 25%
 		'It was a mistake to chum here'
 		'''
 }
