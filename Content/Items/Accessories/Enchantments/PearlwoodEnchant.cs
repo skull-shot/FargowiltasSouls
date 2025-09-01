@@ -48,7 +48,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     public class PearlwoodEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        private static bool pearlwoodCrit; // whether this crit should sparkle/is caused by pearlwood
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -75,26 +74,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (modPlayer.PearlwoodCritDuration <= 0)
                 return;
-
-            if (hitInfo.Crit && pearlwoodCrit)
-            {
-                //SoundEngine.PlaySound(SoundID.Item25, target.position);
-                for (int i = 0; i < 7; i++)
-                { //idk how to make dust look good (3)
-                    Color color = Main.rand.NextFromList(Color.Goldenrod, Color.Pink, Color.Cyan);
-                    Particle p = new SmallSparkle(
-                        worldPosition: Main.rand.NextVector2FromRectangle(target.Hitbox),
-                        velocity: (Main.rand.NextFloat(10, 25) * Vector2.UnitX).RotatedByRandom(MathHelper.TwoPi),
-                        drawColor: color,
-                        scale: 1f,
-                        lifetime: Main.rand.Next(10, 15),
-                        rotation: 0,
-                        rotationSpeed: Main.rand.NextFloat(-MathHelper.Pi / 8, MathHelper.Pi / 8)
-                        );
-                    p.Spawn();
-                }
-            }
-            pearlwoodCrit = false;
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -112,13 +91,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.PearlwoodCritDuration <= 0 || critChance <= 0 || critChance >= 100)
                 return;
 
+            if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
+                return;
+
             if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? is not null)
                 return;
 
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {
-                if (Main.rand.Next(0, 100) < critChance)
+                if (Main.rand.Next(0, 100) <= critChance)
                 {
                     modifiers.SetCrit();
                     for (int j = 0; j < 7; j++)
@@ -148,9 +130,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.HasEffect<PearlwoodStarEffect>())
             {
-                int starDamage = 100;
+                int starDamage = 60;
                 if (modPlayer.ForceEffect<PearlwoodEnchant>())
-                    starDamage = 175;
+                    starDamage = 120;
+                starDamage *= (int)player.ActualClassDamage(DamageClass.Magic);
 
                 SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, player.Center);
                 Vector2 vel = -Vector2.UnitY * 7;
