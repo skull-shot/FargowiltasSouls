@@ -1,5 +1,10 @@
-﻿using Terraria.ID;
+﻿using Fargowiltas;
+using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using System.Collections.Generic;
+using System.Linq;
+using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace FargowiltasSouls
 {
@@ -24,6 +29,38 @@ namespace FargowiltasSouls
             #region Items
             SetFactory itemFactory = ItemID.Sets.Factory;
 
+            List<int> sacrificePreHM = [
+                // squrl
+                ItemType<TreeSword>(), 1,
+                ItemType<MountedAcornGun>(), 1,
+                ItemType<SnowballStaff>(), 1,
+                ItemType<KamikazeSquirrelStaff>(), 1,
+
+                // coffin
+                ItemType<SisypheanFist>(), 1,
+                ItemType<SpiritLongbow>(), 1,
+                ItemType<GildedSceptre>(), 1,
+                ItemType<EgyptianFlail>(), 1,
+
+                // brn
+                ItemType<TheBaronsTusk>(), 1,
+                ItemType<NavalRustrifle>(), 1,
+                ItemType<RoseTintedVisor>(), 1,
+                ItemType<DecrepitAirstrikeRemote>(), 1,
+
+                // lifelight
+                ItemType<EnchantedLifeblade>(), 1,
+                ItemType<Lightslinger>(), 1, 
+                ItemType<CrystallineCongregation>(), 1,
+                ItemType<KamikazePixieStaff>(), 1,
+                ];
+            List<int> sacrificeHM = [];
+            var sacrifice = sacrificePreHM.Concat(sacrificeHM).ToList();
+
+            for (int i = 0; i < sacrificeHM.Count; i += 2)
+                FargoSets.Items.HardmodeSacrifice[sacrificeHM[i]] = true;
+            for (int i = 0; i < sacrifice.Count; i += 2)
+                FargoSets.Items.SacrificeCountDefault[sacrifice[i]] = sacrifice[i + 1];
 
             #endregion
             #region Projectiles
