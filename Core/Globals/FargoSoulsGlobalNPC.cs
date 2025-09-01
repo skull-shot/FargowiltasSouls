@@ -1,12 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Fargowiltas.Content.Items.Ammos;
 using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -23,10 +29,6 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
@@ -35,10 +37,9 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
-using FargowiltasSouls.Assets.Textures;
-using System.IO;
 using Terraria.UI;
+using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
+using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -971,8 +972,18 @@ namespace FargowiltasSouls.Core.Globals
             if (npc.FargoSouls().MagicalCurse)
                 multiplier += 5;
 
-            //half as effective if daybreak applied
-            if (npc.daybreak && multiplier > 1)
+            //half as effective if daybroken or celled are currently being applied from a stacking source
+            bool nerf = false;
+            if ((npc.daybreak || npc.celled) && multiplier > 1)
+            {
+                for (int i = 0; i < Main.maxProjectiles; i++)
+                {
+                    Projectile proj = Main.projectile[i];
+                    if (proj.active && (proj.type == ProjectileID.Daybreak || proj.type == ProjectileID.StardustCellMinionShot) && proj.ai[0] == 1f && proj.ai[1] == npc.whoAmI)
+                        nerf = true;
+                }
+            }
+            if (nerf)
                 multiplier -= (multiplier - 1) / 2;
 
             return multiplier;
