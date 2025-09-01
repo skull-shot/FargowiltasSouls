@@ -87,14 +87,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                             //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
-                        if (!EridanusSet && !Ambrosia)
+
+                        float damageCap = (hitInfo.Damage / 2) + 100;
+                        if (hitInfo.Damage * critDamageMult > damageCap)
                         {
-                            float damageCap = (hitInfo.Damage / 2) + 100;
-                            if (hitInfo.Damage * critDamageMult > damageCap)
-                            {
-                                critDamageMult = damageCap / hitInfo.Damage;
-                            }
+                            critDamageMult = damageCap / hitInfo.Damage;
                         }
+
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
