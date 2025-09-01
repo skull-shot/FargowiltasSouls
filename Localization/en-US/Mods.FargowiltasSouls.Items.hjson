@@ -416,7 +416,7 @@ OrichalcumEnchant: {
 	Tooltip:
 		'''
 		Flower petals will cause extra damage to your target and inflict Orichalcum Poison
-		Damaging debuffs deal 2.5x damage
+		Damaging debuffs deal 150% more damage
 		'Nature blesses you'
 		'''
 }
@@ -843,7 +843,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 250% more damage from debuffs
 		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
 		'''
@@ -1826,7 +1826,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] 250% increased debuff damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
