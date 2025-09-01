@@ -41,7 +41,8 @@ namespace FargowiltasSouls
                 ItemType<SpiritLongbow>(), 1,
                 ItemType<GildedSceptre>(), 1,
                 ItemType<EgyptianFlail>(), 1,
-
+                ];
+            List<int> sacrificeHM = [
                 // brn
                 ItemType<TheBaronsTusk>(), 1,
                 ItemType<NavalRustrifle>(), 1,
@@ -50,11 +51,10 @@ namespace FargowiltasSouls
 
                 // lifelight
                 ItemType<EnchantedLifeblade>(), 1,
-                ItemType<Lightslinger>(), 1, 
+                ItemType<Lightslinger>(), 1,
                 ItemType<CrystallineCongregation>(), 1,
                 ItemType<KamikazePixieStaff>(), 1,
                 ];
-            List<int> sacrificeHM = [];
             var sacrifice = sacrificePreHM.Concat(sacrificeHM).ToList();
 
             for (int i = 0; i < sacrificeHM.Count; i += 2)

@@ -263,7 +263,7 @@ namespace FargowiltasSouls
         private void InterruptShoot(On_Player.orig_ItemCheck_Shoot orig, Player self, int i, Item sItem, int weaponDamage)
         {
 
-            if (SwordGlobalItem.BroadswordRework(sItem) && sItem.TryGetGlobalItem<SwordGlobalItem>(out SwordGlobalItem sword) && !sword.VanillaShoot)
+            if (SwordGlobalItem.BroadswordRework(sItem) && sItem.TryGetGlobalItem(out SwordGlobalItem sword) && !sword.VanillaShoot)
             {
                 FargoSoulsPlayer mplayer = self.FargoSouls();
 
