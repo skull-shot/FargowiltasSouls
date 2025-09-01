@@ -25,6 +25,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 3);
+
+            Item.useTime = 10;
+            Item.useAnimation = 10;
+            Item.useStyle = ItemUseStyleID.HoldUp;
         }
         public static void ActiveEffects(Player player, Item item)
         {
@@ -35,7 +39,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             ActiveEffects(player, Item);
         }
-        private bool lastLMouse = false;
+        public override bool? UseItem(Player player)
+        {
+            if (player.ItemTimeIsZero && player.ItemAnimationJustStarted)
+            {
+                FargoSoulsPlayer.Squeak(player.Center, 1f);
+            }
+            return base.UseItem(player);
+        }
+        /*private bool lastLMouse = false;
         public override void HoldItem(Player player) //doing this instead of making an item use animation lo
         {
             if (!lastLMouse && Main.mouseLeft)
@@ -43,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 FargoSoulsPlayer.Squeak(player.Center, 0.25f);
             }
             lastLMouse = Main.mouseLeft;
-        }
+        }*/
     }
     public class SqueakEffect : AccessoryEffect
     {
