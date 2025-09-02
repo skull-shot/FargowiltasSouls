@@ -438,8 +438,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.MaceWhip: // Morning Star
-                    balanceTextKeys = ["Speed"];
-                    balanceNumber = 0.75f;
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
                 case ItemID.NettleBurst:
