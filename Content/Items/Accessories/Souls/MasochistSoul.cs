@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Blackout] = true;
             player.buffImmune[BuffID.Obstructed] = true;
             player.buffImmune[BuffID.Dazed] = true;
-            fargoPlayer.SkullCharm = true;
+            fargoPlayer.CrystalSkull = true;
             fargoPlayer.PungentEyeball = true;
             player.AddEffect<PungentEyeballCursor>(Item);
             player.buffImmune[ModContent.BuffType<CrystalSkullBuff>()] = true;

@@ -399,7 +399,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Probes = false;
             MagicalBulb = false;
             PlanterasChild = false;
-            SkullCharm = false;
+            CrystalSkull = false;
             PungentEyeball = false;
             LihzahrdTreasureBoxItem = null;
             BetsysHeartItem = null;
