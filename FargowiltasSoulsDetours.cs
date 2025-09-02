@@ -440,14 +440,6 @@ namespace FargowiltasSouls
             if (phantasmAverted)
                 player.phantasmTime = phantasmTime;
         }
-
-        public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
-        {// hallowed dodge nerf
-            orig(self);
-            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
-                self.shadowDodgeTimer = 60 * 60;
-        }
-
         public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
         {// sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
             if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
