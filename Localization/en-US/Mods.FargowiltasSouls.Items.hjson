@@ -392,7 +392,7 @@ NinjaEnchant: {
 	Tooltip:
 		'''
 		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed while you're moving slowly
+		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		'''
 }
@@ -891,7 +891,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed and knockback while moving slowly
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack

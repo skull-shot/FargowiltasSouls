@@ -24,8 +24,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 
         public LunarTowerSolar() : base(ModContent.BuffType<AtrophiedBuff>(), DustID.SolarFlare) { }
 
-        public override int MaxHP => 45000;
-        public override int Damage => 60;
+        public override int MaxHP => 70000;
+        public override int Damage => 80;
         public enum Attacks
         {
             Idle,
