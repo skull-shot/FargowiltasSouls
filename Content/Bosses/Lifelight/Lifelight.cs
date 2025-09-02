@@ -2539,7 +2539,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 6);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
             }
         }
         public override bool CanHitNPC(NPC target)

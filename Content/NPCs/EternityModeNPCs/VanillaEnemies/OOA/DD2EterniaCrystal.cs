@@ -2,6 +2,7 @@
 using FargowiltasSouls.Core.NPCMatching;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
@@ -24,6 +25,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 {
                     InvulTimer = 15; //wait before becoming fully vulnerable
                     if (npc.life < npc.lifeMax && npc.life < 500)
+                        npc.life++;
+                }
+            }
+            else if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mageBoss, NPCID.DD2DarkMageT1) && EModeGlobalNPC.mageBoss >= 0 && EModeGlobalNPC.mageBoss != Main.maxNPCs)
+            {
+                if (Main.player.Any(p => p.active && !p.dead)) //if any alive players
+                {
+                    InvulTimer = 15; //wait before becoming fully vulnerable
+                    if (npc.life < npc.lifeMax && npc.life < 100)
                         npc.life++;
                 }
             }

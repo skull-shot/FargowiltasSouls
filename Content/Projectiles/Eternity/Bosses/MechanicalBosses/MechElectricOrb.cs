@@ -154,10 +154,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
                     target.AddBuff(BuffID.Electrified, 60);
                     break;
                 case Green: // spaz
-                    target.AddBuff(BuffID.CursedInferno, 180);
+                    target.AddBuff(BuffID.CursedInferno, 120);
                     break;
                 case Yellow: // reti
-                    target.AddBuff(BuffID.Ichor, 300);
+                    target.AddBuff(BuffID.Ichor, 180);
                     break;
                 default: // prime
                     break;

@@ -4214,7 +4214,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             WorldSavingSystem.SkipMutantP1 = 0;
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedMutant, -1);
+            WorldSavingSystem.SetMutantDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

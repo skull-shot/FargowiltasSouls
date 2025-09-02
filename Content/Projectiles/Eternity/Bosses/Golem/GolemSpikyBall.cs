@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 90);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

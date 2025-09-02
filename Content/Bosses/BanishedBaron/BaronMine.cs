@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Core.Systems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -39,7 +40,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Bleeding, 60 * 6);
+            if (!WorldSavingSystem.EternityMode)
+                return;
+            target.AddBuff(BuffID.Bleeding, 60 * 4);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

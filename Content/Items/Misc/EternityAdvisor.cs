@@ -134,7 +134,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<TungstenEnchant>()
                 );
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])
             {
                 summonType = ModContent.ItemType<CoffinSummon>();
                 build += GetBuildText(
@@ -274,7 +274,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                 mageSpecific = [ItemID.SorcererEmblem];
                 summonerSpecific = [ItemID.SummonerEmblem, ItemID.PygmyNecklace];
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])
             {
                 summonType = ModContent.ItemType<MechLure>();
                 build += GetBuildText(
@@ -367,7 +367,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                 mageSpecific = [ItemID.SorcererEmblem];
                 summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.Lifelight])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight])
             {
                 summonType = ModContent.ItemType<CrystallineEffigy>();
                 build += GetBuildText(

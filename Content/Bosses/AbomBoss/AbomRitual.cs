@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         }
         protected override void Movement(NPC npc)
         {
-            if (npc.ai[0] < 9 && npc.ai[0] != -3)
+            if (npc.ai[0] < 9 && npc.ai[0] != -3 && npc.ai[0] != 5)
             {
                 Projectile.velocity = npc.Center - Projectile.Center;
                 if (npc.ai[0] != 8) //snaps directly to abom when preparing for p2 attack

@@ -754,53 +754,70 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         NPC.localAI[0] = 0;
                     break;
 
-                case 5: //modified mutant scythe 8way
-                    if (!AliveCheck(player) || Phase2Check())
-                        break;
-
-                    NPC.velocity = NPC.SafeDirectionTo(player.Center) * 3f;
-
-                    if (++NPC.ai[1] > (NPC.localAI[3] > 1 ? 75 : 90))
+                case 5: //lor starcutter flying dutchman
                     {
-                        NPC.ai[1] = 0;
-                        if (++NPC.ai[2] > 3)
+                        if (Phase2Check())
+                            break;
+
+                        const int shotsWait = 330;
+                        const int ramAndBallsWait = 180;
+
+                        //will sit this far away from center of arena in p2, or be this far away from player if they get too close/go on abom's side
+                        const float spacing = 200;
+
+                        if (NPC.ai[1] == 0)
                         {
-                            NPC.ai[0] = 8;
-                            NPC.ai[2] = 0;
-                            //NPC.TargetClosest();
+                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+
+                            //find arena, decide which side to stay on for shots
+                            NPC.netUpdate = true;
+                            NPC.ai[2] = player.Center.X;
+                            NPC.localAI[2] = Math.Sign(NPC.Center.X - player.Center.X);
+                            NPC.ai[2] += spacing * NPC.localAI[2];
+                            if (FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<AbomRitual>()) != null)
+                            {
+                                NPC.ai[2] = Main.projectile[ritualProj].Center.X;
+                                NPC.localAI[2] = Math.Sign(NPC.ai[2] - player.Center.X);
+                                NPC.ai[2] += spacing * NPC.localAI[2];
+                            }
+
+                            if (FargoSoulsUtil.HostCheck)
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<AbomShip>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, -NPC.localAI[2], -shotsWait, NPC.whoAmI);
+                        }
+
+                        if (++NPC.ai[1] < shotsWait) //wait while ship attacks with backshots
+                        {
+                            // i dont really like this currently, the arena is too big and i want to cut off half of it.
+                            // rn it jumpscares the player and forces them onto the back half in a clunky way.
+                            // 1) i want the ship to always be on screen
+                            // 2) only let the player have half the arena to dodge in
+                            // 3) also design isnt not really accounting for phase 1 at all yet
+                            // doing something more elegant about these 3 requirements would be appreciated.
+                            
+                            //lerp to position on side of arena
+                            //y offset to help look like he's standing on the pirate ship while keeping ship hitbox centered on player
+                            targetPos = new Vector2(NPC.ai[2], player.Center.Y - 85);
+                            if (NPC.localAI[2] == Math.Sign(player.Center.X - NPC.ai[2])) //if player is on abom's side, just sit in front of them
+                                targetPos.X = player.Center.X + NPC.localAI[2] * spacing;
+                            NPC.Center = Vector2.Lerp(NPC.Center, targetPos, 0.09f);
+                            NPC.velocity = Vector2.Zero;
+                        }
+                        else if (NPC.ai[1] < shotsWait + ramAndBallsWait)
+                        {
+                            targetPos = player.Center + NPC.DirectionFrom(player.Center) * 400;
+                            Movement(targetPos, 0.2f);
+                            if (NPC.Distance(targetPos) > 200)
+                                Movement(targetPos, 0.2f);
                         }
                         else
                         {
-                            if (FargoSoulsUtil.HostCheck) //aim at player in p2
-                            {
-                                float baseRot = NPC.localAI[3] > 1 ? NPC.SafeDirectionTo(player.Center).ToRotation() : 0;
-                                float baseSpeed = 1000f;
-                                if (NPC.localAI[3] > 1 && NPC.Distance(player.Center) > baseSpeed / 2)
-                                    baseSpeed = NPC.Distance(player.Center);
-                                baseSpeed /= 90f;
-
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    Vector2 straightSpeed = new Vector2(baseSpeed, 0).RotatedBy(baseRot + Math.PI / 2 * i);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<AbomSickleSplit1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver2);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() - MathHelper.PiOver2);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, straightSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, straightSpeed.ToRotation() + MathHelper.PiOver4 + MathHelper.Pi);
-
-                                    Vector2 diagonalSpeed = new Vector2(baseSpeed, baseSpeed).RotatedBy(baseRot + Math.PI / 2 * i);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<AbomSickleSplit1>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
-
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() + MathHelper.PiOver2);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, diagonalSpeed, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, diagonalSpeed.ToRotation() - MathHelper.PiOver2);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * i);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowLine>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, baseRot + MathHelper.TwoPi / 4 * (i + 0.5f));
-                                }
-                            }
-                            SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                            NPC.netUpdate = true;
+                            NPC.ai[0] = 8;
+                            NPC.ai[1] = 0;
+                            NPC.ai[2] = 0;
+                            NPC.ai[3] = 0;
+                            NPC.localAI[2] = 0;
                         }
-                        NPC.netUpdate = true;
-                        break;
                     }
                     break;
 
@@ -1531,7 +1548,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 playerInvulTriggered = true;
 
             //drop summon
-            EModeUtils.DropSummon(NPC, ModContent.ItemType<AbomsCurse>(), WorldSavingSystem.downedAbom, ref droppedSummon, WorldSavingSystem.EternityMode && NPC.downedMoonlord);
+            EModeUtils.DropSummon(NPC, ModContent.ItemType<AbomsCurse>(), WorldSavingSystem.DownedAbom, ref droppedSummon, WorldSavingSystem.EternityMode && NPC.downedMoonlord);
         }
 
         private bool AliveCheck(Player player)
@@ -1726,7 +1743,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<BrokenHilt>());
             }
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedAbom, -1);
+            WorldSavingSystem.SetAbomDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

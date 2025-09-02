@@ -41,6 +41,7 @@ namespace FargowiltasSouls.Core.Globals
         public static int eyeBoss = -1;
         public static int eaterBoss = -1;
         public static int brainBoss = -1;
+        public static int mageBoss = -1;
         public static int beeBoss = -1;
         public static int skeleBoss = -1;
         public static int deerBoss = -1;

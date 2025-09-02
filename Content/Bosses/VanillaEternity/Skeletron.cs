@@ -482,7 +482,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f)
+            if (npc.ai[1] != 2f && WorldSavingSystem.MasochistModeReal)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 

@@ -19,13 +19,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 Projectile.FargoSouls().GrazeCheck = Projectile => false;
         }
 
+        bool hurts;
+
+        public override bool? CanDamage() => hurts;
+
         public override bool PreAI()
         {
             if (!spawned)
             {
-                Projectile.localAI[1] = Projectile.velocity.Length();
-                Projectile.velocity = Vector2.Zero;
-
                 SoundEngine.PlaySound(SoundID.Item25 with { Volume = 0.5f, Pitch = 0 }, Projectile.Center);
 
                 for (int index1 = 0; index1 < 4; ++index1)
@@ -65,12 +66,21 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             const int startup = 60;
             float multiplier = WorldSavingSystem.MasochistModeReal ? 1.15f : 1f;
-            if (Projectile.localAI[0] == 0)
+            if (Projectile.localAI[0]++ == 0)
                 Projectile.timeLeft = (int)(Projectile.timeLeft / multiplier);
-            if (Projectile.localAI[0] < startup)
-                Projectile.velocity += multiplier * Projectile.ai[1].ToRotationVector2() * Projectile.localAI[1] / startup;
+            
+            if (Projectile.localAI[0] == 10)
+                Projectile.velocity = Vector2.Zero;
 
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+            if (Projectile.localAI[0] > 10 && Projectile.localAI[0] - 10 < startup)
+                Projectile.velocity += multiplier * Projectile.ai[1].ToRotationVector2() * Projectile.ai[2] / startup;
+
+            hurts = Projectile.localAI[0] > 10;
+
+            if (Projectile.velocity == Vector2.Zero)
+                Projectile.rotation = Projectile.ai[1] + MathHelper.PiOver2;
+            else
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             if (++Projectile.frameCounter >= 4)
             {
@@ -78,8 +88,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 if (++Projectile.frame >= Main.projFrames[Projectile.type])
                     Projectile.frame = 0;
             }
-
-            Projectile.localAI[0]++;
         }
     }
 }

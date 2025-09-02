@@ -447,7 +447,7 @@ PlatinumEnchant: {
 	DisplayName: Зачарование платины
 	Tooltip:
 		'''
-		У врагов есть шанс 20% выронить свою добычу ещё 4 раза
+		У убитых вами врагов есть шанс 20% выронить свою добычу ещё 4 раза
 		«Его ценность неизмерима»
 		'''
 }
@@ -599,7 +599,7 @@ SpiderEnchant: {
 	DisplayName: Зачарование паука
 	Tooltip:
 		'''
-		Увеличивает шанс критического удара на 10%
+		Увеличивает шанс критического удара на 7%
 		Ваши призываемые существа могут наносить критические удары
 		Вместо увеличенного урона, крит. удары призываемых существ вызывают паучков,
 		способных наносить критический урон
@@ -776,8 +776,8 @@ CosmoForce: {
 		[i:FargowiltasSouls/SolarEnchant] Атаки создают до 4 лун, кружащихся вокруг вас
 		[i:FargowiltasSouls/VortexEnchant] Прекратите атаковать, чтобы запустить их в сторону курсора и взорвать их в лунные усилители
 		[i:FargowiltasSouls/NebulaEnchant] Подберите лунные усилители, чтобы увеличить ваши урон, шанс крит. удара, регенерацию здоровья или сопротивление урону
-		[i:FargowiltasSouls/MeteorEnchant] Увеличивает ваши максимальную скорость и ускорение, уменьшает инерцию
 		[i:FargowiltasSouls/WizardEnchant] Улучшает эффекты всех ваших зачарований
+		[i:FargowiltasSouls/MeteorEnchant] Эффекты магосвета
 		«Был здесь ещё с Большого взрыва»
 		'''
 }
@@ -805,7 +805,6 @@ LifeForce: {
 		[i:FargowiltasSouls/PumpkinEnchant] Цветы при прикосновении выпускают рой пчёл, дают бафф «Амброзия» и восстанавливают время полёта
 		[i:FargowiltasSouls/CactusEnchant] Если же цветов касаются враги, они выпускают иглы
 		[i:FargowiltasSouls/BeetleEnchant] «Амброзия» увеличивает урон на 20%, сопротивление урону на 15% и регенерацию здоровья на 2,5 ОЗ/сек
-		[i:FargowiltasSouls/SpiderEnchant] Увеличивает шанс критического удара на 15%
 		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
 		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
 		[i:FargowiltasSouls/BeeEnchant] Эффекты рюкзака-улья
@@ -964,16 +963,16 @@ BionomicCluster: {
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
 		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
-		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
+		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ чтобы выключить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		'''
 }
@@ -985,10 +984,10 @@ BionomicClusterInactive: {
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
 		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
-		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к последнему месту смерти
+		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ чтобы включить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGemstone] «Охлаждение»
+		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -1100,7 +1099,7 @@ DreadShell: {
 		Некоторое время после поднятия щита, ваши защита и сопротивление урону значительно снижаются
 		Поставьте защиту прямо перед тем, как атака вас коснётся, чтобы парировать и контратаковать
 		Контратака накладывает дебафф «Несвёртываемость», который заставляет врагов выпускать сгустки крови при получении урона
-		Увеличивает урон на 15% при поглощении сгустков крови
+		Увеличивает урон на 25% при поглощении сгустков крови
 		«Не гарантирует защиту от водяных»
 		'''
 }
@@ -1211,7 +1210,7 @@ HeartoftheMasochist: {
 	DisplayName: Сердце Властителя
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Гипотермия», «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение»,
 		[i:FargowiltasSouls/BetsysHeart] «Тормоз», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Влага», «Укус зверя», «Океаническое терзание», дебаффам воды,
 		[i:FargowiltasSouls/PrecisionSeal] «Поражение», [i:FargowiltasSouls/ChaliceofTheMoon] «Перевёрнутый», «Нестабильный» и «Проклятие луны»
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Увеличивает урон и шанс крит. удара на 10% и сопротивление урону на 5%
@@ -1230,10 +1229,10 @@ HeartoftheMasochist: {
 }
 
 IceQueensShield: {
-	DisplayName: Корона ледяной королевы
+	DisplayName: Щит ледяной королевы
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Гипотермия» и «Заморозка»
+		Даёт иммунитет к дебаффу «Заморозка»
 		Увеличивает сопротивление урону на 5%
 		«Королевский символ побеждённого врага»
 		'''
@@ -1473,7 +1472,7 @@ SinisterIcon: {
 		'''
 		Даёт иммунитет к дебаффам «Невезение» и «Оглушение»
 		Увеличивает частоту появления врагов
-		Враги и боссы роняют свою добычу ещё раз
+		Убитые вами враги и боссы роняют свою добычу ещё раз
 		Работает на боссах только если аксессуар был надет во время всей битвы
 		«Определённо не жива»
 		'''
@@ -1713,7 +1712,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/CrystalSkull] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/ChaliceofTheMoon] истинные глаза Ктулху
-		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту вашей последней смерти
+		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		«Прими власть, прими вечность»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий и классовых станций"
@@ -1760,6 +1759,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/NatureForce] Даёт ауру, которая похищает здоровье, увеличивает наносимый урон и выпускает листовые лазеры в ближайших врагов
 		[i:FargowiltasSouls/NatureForce] Грибы лечат больше и усиливают вас; ваши атаки накладывают некоторые дебаффы; даёт зонт
 		[i:FargowiltasSouls/LifeForce] Вы оставляете за собой мощные цветы во время полёта, которые дают мощные усиления при касании
+		[i:FargowiltasSouls/LifeForce] Миньоны могут наносить крит. урон в размере 1,25 от изначального урона
 		[i:FargowiltasSouls/LifeForce] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон; эффекты рюкзака-улья
 		[i:FargowiltasSouls/SpiritForce] Дважды нажмите ВНИЗ, чтобы вызвать древний шторм; лечебные зелья лечат больше, но постепенно; ваши кнуты улучшены
 		[i:FargowiltasSouls/SpiritForce] Если ваше здоровье достигнет 0, вы воскреснете с 300 ОЗ
@@ -3293,11 +3293,11 @@ RustedOxygenTankInactive: {
 	Tooltip:
 		'''
 		Работает из инвентаря
-		В данный момент неактивен, нажмите ПКМ чтобы включить
+		В данный момент неактивен, нажмите ПКМ, чтобы включить
 		Вы считаетесь мокрыми вне воды
 		Делает ваши движения плавучими вне жидкостей
 		Увеличивает скорость передвижения, пока находитесь в любой жидкости
-		«Никто не знает, как оно работает»
+		«Никто не знает, как он работает»
 		'''
 }
 
@@ -3667,6 +3667,6 @@ Devilstone: {
 }
 
 MainframePainting: {
-	// DisplayName: Mainframe Painting
-	// Tooltip: "'Gonk'"
+	DisplayName: Мэйнфрейм
+	Tooltip: «Gonk»
 }

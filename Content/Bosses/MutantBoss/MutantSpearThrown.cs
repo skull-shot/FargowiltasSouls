@@ -126,7 +126,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
-                SoundEngine.PlaySound(WorldSavingSystem.masochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
+                SoundEngine.PlaySound(WorldSavingSystem.MasochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(135f);

@@ -1538,7 +1538,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             if (npc.ai[0] >= 4f)
-                target.AddBuff(BuffID.CursedInferno, 300);
+                target.AddBuff(BuffID.CursedInferno, 240);
         }
 
         public override Color? GetAlpha(NPC npc, Color drawColor)

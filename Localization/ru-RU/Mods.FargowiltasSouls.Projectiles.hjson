@@ -832,6 +832,14 @@ MutantNukeBomb.DisplayName: ХАЙДРОДЖЕН БОМБ
 MutantSpikevine.DisplayName: Шипастая лоза
 TopazBoltExplosion.DisplayName: Топазовый взрыв
 MutantTwin.DisplayName: Близнец
-// EarthFireball.DisplayName: Earth Fireball
-// GraniteBolt.DisplayName: Granite Bolt
-// GranitePebble.DisplayName: Granite Pebble
+EarthFireball.DisplayName: Огненный шар Земли
+GraniteBolt.DisplayName: Гранитный выстрел
+GranitePebble.DisplayName: Гранитный камушек
+// DarkRune.DisplayName: Dark Rune
+// DarkTomeHostile.DisplayName: Dark Tome
+// DarkBolt.DisplayName: Dark Bolt
+// TomeShotHostile.DisplayName: Tome Shot
+// AbomShip.DisplayName: Abom Ship
+// AbomCannonball.DisplayName: Abom Cannonball
+// AbomReticle2.DisplayName: Abom Reticle2
+// AbomBullet.DisplayName: Abom Bullet

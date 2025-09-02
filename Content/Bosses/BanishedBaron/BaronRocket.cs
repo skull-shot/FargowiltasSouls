@@ -150,7 +150,9 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.OnFire, 600);
+            if (!WorldSavingSystem.EternityMode)
+                return;
+            target.AddBuff(BuffID.OnFire, 60 * 4);
         }
         public override void OnKill(int timeLeft)
         {

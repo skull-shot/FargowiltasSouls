@@ -427,7 +427,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f)
+            if (npc.ai[1] != 2f && WorldSavingSystem.MasochistModeReal)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
                 npc.life = npc.lifeMax / 630;
@@ -623,6 +623,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         npc.velocity += toPlayer * 2f;
                     else
                         npc.velocity *= 0.95f;
+                    NoContactDamageTimer = 0;
                 }
 
                 return false;

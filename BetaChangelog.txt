@@ -108,3 +108,7 @@ lightning portal new telegraph now fades in
 fixed mutant sword double hitting
 fixed mutant doing maso qs in emode oops!
 fixed rain ench cd sometimes being applied on world load
+
+replaced abom's sickle strong attack with flying dutchman bombardment (WIP)
+eri manually punches invaders into place during timestop
+adjusted eri glow trail
