@@ -22,7 +22,7 @@ ClientConfig: {
 	}
 
 	RainbowHealThreshold: {
-		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Максимум здоровья для автоматического лечения"
+		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Максимум здоровья для автоматического лечения (%)"
 		Tooltip: ""
 	}
 

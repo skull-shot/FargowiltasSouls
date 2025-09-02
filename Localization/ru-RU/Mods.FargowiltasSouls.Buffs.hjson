@@ -139,8 +139,8 @@ DeviPresenceBuff: {
 }
 
 GrabbedBuff: {
-	DisplayName: Схвачен
-	Description: Долби по кнопкам передвижения, чтобы выбраться!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
 
 MutantFangBuff: {
@@ -819,6 +819,6 @@ TouhouHoardBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed Harmless Buff
-	// Description: Mods.FargowiltasSouls.Buffs.GrabbedHarmlessBuff.Description
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
