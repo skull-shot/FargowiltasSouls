@@ -1,7 +1,7 @@
 ﻿using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using FargowiltasSouls.Content.Bosses.Lifelight;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
-using FargowiltasSouls.Content.Items.Armor.Masks;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;

@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Armor.Masks;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Projectiles;

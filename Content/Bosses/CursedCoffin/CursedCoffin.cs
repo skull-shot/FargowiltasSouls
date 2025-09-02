@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Armor.Masks;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;

@@ -1,6 +1,77 @@
 NEW UPDATE - V {ModVersion}
-Improved the behavior of Low Ground and Slimy Shield fallthrough using more complex code
-Saucer Control Console: Right click now takes priority when both are held instead of not firing anything
-Eternity Mode now prevents Gills Potion from causing drowning in FTW
-Added a config to disable respawn prevention in Masochist Mode, and added toggle to add it to Eternity aswell
-Updated localization and fixed some text issues
+- Large changes to Champion behavior, improved telegraphs and visuals
+- Most Champions now have Masochist changes
+- Decreased and fixed issuses with health and damage of Lunar Pillars, fixed some visual and contact damage issues
+- Golem is now immune to Timestop
+- Sharknado/Cthulunado anti telefrag no longer removed in maso
+- Slowed down Deviantt petrification telegraph in Eternity Mode specifically, Baby guardians and Mimics emit light,
+- Abominationn p2 lingering sickles fade away right before dash attack (later on Maso)
+- Destroyer no longer pierce resists held projectiles (read: yoyos), other pierce resist tweaks
+- Moon Lord: Changed vortex lightning projectile to not have hitbox issues
+- Eternity+ Deerclops now has contact damage during offensive attacks (specifically when doing the "slam" sprite animation)
+- Phantasm Dragon: Is no longer always accompanied by an Ancient Vision
+- Fixed Eternity Mode Frozen Zombies spawning in significantly larger hordes than intended
+- Grabber enemies can no longer hit you while you're already grabbed. Initial grabs deal less damage, but you take 10 damage per second while grabbed (except for Deerclops)
+- All grabs require less mashing to escape, but more mashing has decreased gain
+Cursed Coffin:
+- Shockwaves no longer stun and prompt a grab, but deal normal damage; still stun in FTW+
+- Slightly increased time before falling sand
+- Slightly decreased horizontal velocity
+- Slightly decreased wavy circle shot amount
+- Slightly decreased shot frequency during phase 2 gemstone attack
+
+- Mini-rework to Omniscience Staff
+- Added Masks for all Champions and non-Sibling bosses
+- Spirit Longbow arrows now have 3 pierce, and 60 local iframes
+- Tweaked and moved around stats of Eridanus set
+- Fixed banners not interacting with platforms
+- Eridanus set and Ambrosia minion crits also have Spider Enchant damage cap, lowered minion crit damage cap
+- Fixed some issues with Eternity item changes
+- Minor MDFP ranger useTime nerf
+- Fixed Twinstall not reducing defense
+- Necro Enchant: Prevented graves from spawning from enemies with less than 15 max health
+Rain Enchantment:
+- Fixed Umbrella not granting featherfall effect
+- Inner tube now hides if item visibility is disabled
+- Fixed issues on world load
+Ninja Enchantment:
+- Added subtle visual effect when a critical strike only occurs due to it's boost
+- Fixed some melee weapons that should not be able to receive the boost receiving it
+- Fixed tooltip not mentioning projectile knockback increase
+Pearlwood Enchantment:
+- Critical strike visuals now only occur on successful crit rerolls
+- Fixed star projectiles not scaling with magic damage, but decreased damage from 100/175 to 60/120
+- Fixed rerolls rarely applying to summon damage when not intended
+
+- Added links to Fargo related socials to the bottom left of the main menu, identical to how Terraria and tModLoader does it
+- Remade glow rings to have smoother visuals
+- Resprited and renamed Mutant Armor
+- Reworked Ninja Enchant's crit chance to more accurately reflect its listed effect
+- Fixed fancy sword swings being offset when eternity mode melee weapon reworks are disabled
+- Fixed several issues with pickup classification for Iron and Pearlwood Enchantments
+- Fossil Enchant now doesn't stack with Spectre Enchant in any way
+- Ranged weapons that use Bones, Acorns, or Rotten Chunks as ammunition now count as specialist for the purposes of Shroomite Armor
+- Rainbow Heal Threshold config clarifies that it's listed in percentages
+- Fixed Soul of Eternity wings not properly using it's falling frame
+- Resprited Omniscience Staff and minions, Trojan Squirrel trophy, Broken Shaft (now Broken Spearhead), Penetrator, Overgrown Key item, minion and buff
+- Added a Soul of Eternity Mod Rarity, Mutant Armor now uses this
+- Rose Tinted Glasses now bob up and down while moving, mimicing player head movement
+- Prevented Rustrifle reload bar from jittering while moving
+- Tweaked visuals of Trojan Squirrel boss healthbar
+- Removed electric orb hum sound effect
+- Graze rings now only render for the owner player
+- Sinister Icon now only requires any player to be alive with the sinister icon effect active for count to bosses, not every player
+- Broken Armor debuff on enemies now provides 10 armor penetration against them, instead of setting their defense to 10 less than their default value
+- Fixed bug where Trojan Squirrel's hook sounds would continue looping after death
+- Fixed issue with Empress of Light's ritual attack while underwater
+- Fixed regeneration changes possibly applying outside of Eternity Mode
+- Prefixed "Open" to "Effect Toggler" for consistancy with the Bestiary and Emote Window
+- Fixed Top Hat Squirrel having a max stack size of 10
+- Fixed multiplayer desync issue regarding zombies
+- Fixed Red Riding Enchantment's Arrow Rain triggering Phantasm's phantom arrows
+- Ancient Cobalt Enchantment: Fixed explosions not dealing melee damage
+- Ice Queen's Crown: Graze ring no longer displays when the active skill is not bound to a key
+- Fixed Hallowed Enchantment effect being able to activate from healing items that do not give Potion Sickness
+- Fixed Copper Enchant value being too high
+- Fixed Ice Golem and Sand Elemental earlybird being able to occur underground 
+- Text changes
