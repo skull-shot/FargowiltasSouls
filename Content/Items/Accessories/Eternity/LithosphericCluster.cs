@@ -7,6 +7,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,9 +21,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override bool Eternity => true;
 
+        public override int NumFrames => 5;
+
         public override void SetStaticDefaults()
         {
-
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(7, 5));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
