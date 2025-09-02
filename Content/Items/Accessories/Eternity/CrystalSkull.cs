@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.buffImmune[BuffID.Dazed] = true;
             player.buffImmune[BuffID.Webbed] = true;
             player.aggro -= 400;
-            player.FargoSouls().SkullCharm = true;
+            player.FargoSouls().CrystalSkull = true;
             player.AddEffect<PungentMinion>(item);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
