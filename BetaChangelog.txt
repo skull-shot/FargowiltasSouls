@@ -119,3 +119,4 @@ pungent eyeball ray makes more dust and laser doesnt stretch past impact point w
 paladins actually give brief iframes to the spirits they spawn so you dont insta spawncamp
 abom ship tip hitbox only activates when actually moving forward during ram
 abom side flockos now spawn in p1 too, p2 side flockos alternate a 3-4-3-4 pattern
+raised golem all parts damage multiplier 1.1 -> 1.25

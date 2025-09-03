@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.trapImmune = true;
 
-            npc.damage = (int)Math.Round(npc.damage * 1.1);
+            npc.damage = (int)Math.Round(npc.damage * 1.25);
 
             npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.75);
         }
