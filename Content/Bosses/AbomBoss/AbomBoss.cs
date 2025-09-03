@@ -760,7 +760,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             break;
 
                         const int shotsWait = 330;
-                        const int ramAndBallsWait = 180;
+                        const int ramAndBallsWait = 240;
 
                         if (NPC.ai[1] == 0)
                         {
