@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.NPCs.Critters;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -26,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Misc
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.UseSound = SoundID.Item44;
+            Item.maxStack = Item.CommonMaxStack;
             Item.makeNPC = (short)ModContent.NPCType<TophatSquirrelCritter>();
         }
 
