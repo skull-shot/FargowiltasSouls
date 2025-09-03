@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             if (++Projectile.localAI[0] > 90)
             {
-                float waveSpeed = WorldSavingSystem.MasochistModeReal ? 7f : 5.5f;
+                float waveSpeed = WorldSavingSystem.MasochistModeReal ? 7f : 5f;
 
                 //in abom p2, after firing first 3 wave spread, fire 4 frost wave in between 3s
                 if (Projectile.ai[2] > 1 && Projectile.localAI[0] > 90 + 60 && Projectile.localAI[1] == 30)
