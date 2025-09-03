@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ShroomiteCD > 0)
                 return;
 
-            if (projectile != null && (projectile.penetrate > 1 || projectile.penetrate < 0) && projectile.maxPenetrate == projectile.penetrate && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
+            if (projectile != null && ((projectile.penetrate > 1 || projectile.penetrate < 0) && (projectile.maxPenetrate == projectile.penetrate) || projectile.type == ProjectileID.JackOLantern) && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
             {
                 SpawnShrooms(player, target, hitInfo, baseDamage);
             }
