@@ -37,9 +37,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void AI()
         {
             //dust!
-            int dustId = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y + 2f), Projectile.width, Projectile.height + 5, DustID.PurpleCrystalShard, Projectile.velocity.X * 0.2f,
-                Projectile.velocity.Y * 0.2f, 100, default, 1f);
+            int width = 3;   
+            Vector2 dustCenter = Projectile.Center - Vector2.UnitX * width;
+            Vector2 dustSpinny = Projectile.velocity;
+            dustSpinny.Normalize();
+            dustCenter -= dustSpinny * Projectile.width / 2;
+            dustSpinny *= Projectile.width / 2;
+            dustSpinny = dustSpinny.RotatedBy(Projectile.timeLeft * MathF.Tau / 23f);
+            dustCenter += dustSpinny;
+            int dustId = Dust.NewDust(dustCenter, width * 2, width * 2, DustID.PurpleCrystalShard, 0f, 0f, 100, default, 1f);
             Main.dust[dustId].noGravity = true;
+            Main.dust[dustId].velocity *= 0;
 
             //if (Projectile.penetrate < 99 && Projectile.ai[1] != 1)
             //{
