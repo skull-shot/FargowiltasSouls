@@ -13,6 +13,7 @@ using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -1237,6 +1238,11 @@ namespace FargowiltasSouls.Core.Globals
                         ModContent.ItemType<Mahoguny>(),
                         ModContent.ItemType<OvergrownKey>(),
                         ItemID.ThornHook));
+                    break;
+
+                case NPCID.Demon:
+                case NPCID.RedDevil:
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Devilstone>(), 2));
                     break;
 
                 default:
