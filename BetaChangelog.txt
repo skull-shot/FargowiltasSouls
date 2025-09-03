@@ -115,3 +115,7 @@ adjusted eri glow trail
 
 shell smash is louder
 dungeon slime only spawns paladin on kill in dungeon
+pungent eyeball ray makes more dust and laser doesnt stretch past impact point when hitting blocks
+paladins actually give brief iframes to the spirits they spawn so you dont insta spawncamp
+abom ship tip hitbox only activates when actually moving forward during ram
+abom side flockos now spawn in p1 too, p2 side flockos alternate a 3-4-3-4 pattern

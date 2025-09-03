@@ -835,16 +835,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             {
                                 if (i == 0) //dont shoot one straight up
                                     continue;
-                                Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 360 / 3 * i);
+                                Vector2 overheadSpeed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, overheadSpeed, ModContent.ProjectileType<AbomFlocko>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 360 / 3 * i);
                             }
 
-                            if (NPC.localAI[3] > 1) //prepare ice waves
-                            {
-                                Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, -1);
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 1);
-                            }
+                            //prepare ice waves
+                            Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, -1, NPC.localAI[3]);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 1, NPC.localAI[3]);
 
                             float offset = 420;
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2CircularEdge(20, 20), ModContent.ProjectileType<AbomFlocko3>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, offset);
