@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             }
 
                 Timer++;
-            Projectile.Opacity = Timer / Duration;
+            Projectile.Opacity = Timer / Duration * Main.rand.NextFloat(0.5f, 1f);
             if (Timer >= Duration)
             {
                 Projectile.Kill();
