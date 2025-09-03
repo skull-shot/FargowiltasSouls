@@ -128,6 +128,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
+            if (NPC.localAI[3] == 0) //just spawned
+                return false;
             return true;
         }
 
@@ -175,7 +177,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 {
                     NPC.Center = Main.player[NPC.target].Center - 250 * Vector2.UnitY;
                     if (FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<CosmosVortex>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<CosmosVortex>(), 0, 0f, Main.myPlayer);
                 }
                 if (NPC.ai[1] == 117) // 1 frame before so can music fade up next frame
                 {
