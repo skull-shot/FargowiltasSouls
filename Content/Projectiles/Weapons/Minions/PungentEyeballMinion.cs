@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 {
                     Projectile.localAI[0]++;
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("FleshLumpMinionCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "LithosphericCluster").Value, Color.Purple, () => Projectile.localAI[0] / chargeTime, displayAtFull: true, activeFunction: Projectile.Alive);
+                        CooldownBarManager.Activate("FleshLumpMinionCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "LithosphericCluster").Value, Color.Purple, () => Projectile.localAI[0] / chargeTime, displayAtFull: true, activeFunction: Projectile.Alive, animationFrames: 5);
                 }
                 if (Projectile.localAI[0] > chargeTime / 2f)
                 {

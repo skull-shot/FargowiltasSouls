@@ -112,3 +112,21 @@ fixed rain ench cd sometimes being applied on world load
 replaced abom's sickle strong attack with flying dutchman bombardment (WIP)
 eri manually punches invaders into place during timestop
 adjusted eri glow trail
+
+shell smash is louder
+dungeon slime only spawns paladin on kill in dungeon
+pungent eyeball ray makes more dust and laser doesnt stretch past impact point when hitting blocks
+paladins actually give brief iframes to the spirits they spawn so you dont insta spawncamp
+abom ship tip hitbox only activates when actually moving forward during ram
+abom side flockos now spawn in p1 too, p2 side flockos alternate a 3-4-3-4 pattern
+raised golem all parts damage multiplier 1.1 -> 1.25
+reduced space suffocation rate
+tiny silly range check in gutted heart so it hopefully doesnt tile array OOB again
+removed devilstone drop & requirement for devilshield
+fishron contact damage disabled while spectral sharks are attacking (pls test in case i botched the check lol)
+
+adjusted numbers on abom ship
+maso terra champ coil lightning ball shoots lightning on every growing pulse
+maso terra champ spends less time doing the "watch out! here i come XD" coil
+terra champ S wave also makes extra lightning portals
+put accel startup on terra fireballs

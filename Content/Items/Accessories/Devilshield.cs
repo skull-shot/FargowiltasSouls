@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
         {
             CreateRecipe()
                 .AddIngredient(ItemID.BeetleHusk, 5)
-                .AddIngredient<Devilstone>(5)
+                //.AddIngredient<Devilstone>(5)
                 .AddIngredient(ItemID.HeroShield)
                 .AddIngredient(ItemID.FrozenTurtleShell)
                 .AddTile(TileID.TinkerersWorkbench)
@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
 
             CreateRecipe()
                 .AddIngredient(ItemID.BeetleHusk, 5)
-                .AddIngredient<Devilstone>(5)
+                //.AddIngredient<Devilstone>(5)
                 .AddIngredient(ItemID.FrozenShield)
                 .AddIngredient(ItemID.FleshKnuckles)
                 .AddTile(TileID.TinkerersWorkbench)

@@ -134,7 +134,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.TurtleShellHP = 0;
                 if (player.HasEffect<TurtleSmashEffect>())
+                {
                     player.AddBuff(ModContent.BuffType<ShellSmashBuff>(), player.ForceEffect<TurtleSmashEffect>() ? 30 * 60 : 20 * 60);
+                    SoundEngine.PlaySound(SoundID.Item119, player.Center);
+                }
                 player.FargoSouls().TurtleShellBroken = true;
                 SoundEngine.PlaySound(SoundID.Shatter, player.Center);
                 if (!Main.dedServ && player.HasEffect<TurtleEffect>())

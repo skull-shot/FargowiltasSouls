@@ -760,10 +760,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             break;
 
                         const int shotsWait = 330;
-                        const int ramAndBallsWait = 180;
-
-                        //will sit this far away from center of arena in p2, or be this far away from player if they get too close/go on abom's side
-                        const float spacing = 200;
+                        const int ramAndBallsWait = 240;
 
                         if (NPC.ai[1] == 0)
                         {
@@ -773,12 +770,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             NPC.netUpdate = true;
                             NPC.ai[2] = player.Center.X;
                             NPC.localAI[2] = Math.Sign(NPC.Center.X - player.Center.X);
-                            NPC.ai[2] += spacing * NPC.localAI[2];
                             if (FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<AbomRitual>()) != null)
                             {
                                 NPC.ai[2] = Main.projectile[ritualProj].Center.X;
                                 NPC.localAI[2] = Math.Sign(NPC.ai[2] - player.Center.X);
-                                NPC.ai[2] += spacing * NPC.localAI[2];
                             }
 
                             if (FargoSoulsUtil.HostCheck)
@@ -787,18 +782,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
                         if (++NPC.ai[1] < shotsWait) //wait while ship attacks with backshots
                         {
-                            // i dont really like this currently, the arena is too big and i want to cut off half of it.
-                            // rn it jumpscares the player and forces them onto the back half in a clunky way.
-                            // 1) i want the ship to always be on screen
-                            // 2) only let the player have half the arena to dodge in
-                            // 3) also design isnt not really accounting for phase 1 at all yet
-                            // doing something more elegant about these 3 requirements would be appreciated.
-                            
                             //lerp to position on side of arena
                             //y offset to help look like he's standing on the pirate ship while keeping ship hitbox centered on player
                             targetPos = new Vector2(NPC.ai[2], player.Center.Y - 85);
+
+                            // TODO: if someone can make abom cleanly transition between this 400 spacing and sitting directly on the border, that'd be appreciated
                             if (NPC.localAI[2] == Math.Sign(player.Center.X - NPC.ai[2])) //if player is on abom's side, just sit in front of them
-                                targetPos.X = player.Center.X + NPC.localAI[2] * spacing;
+                                targetPos.X = player.Center.X + NPC.localAI[2] * 400;
                             NPC.Center = Vector2.Lerp(NPC.Center, targetPos, 0.09f);
                             NPC.velocity = Vector2.Zero;
                         }
@@ -835,16 +825,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             {
                                 if (i == 0) //dont shoot one straight up
                                     continue;
-                                Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 360 / 3 * i);
+                                Vector2 overheadSpeed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, overheadSpeed, ModContent.ProjectileType<AbomFlocko>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 360 / 3 * i);
                             }
 
-                            if (NPC.localAI[3] > 1) //prepare ice waves
-                            {
-                                Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, -1);
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 1);
-                            }
+                            //prepare ice waves
+                            Vector2 speed = new(Main.rand.NextFloat(40f), Main.rand.NextFloat(-20f, 20f));
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, -1, NPC.localAI[3]);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, -speed, ModContent.ProjectileType<AbomFlocko2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 1, NPC.localAI[3]);
 
                             float offset = 420;
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2CircularEdge(20, 20), ModContent.ProjectileType<AbomFlocko3>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, offset);
