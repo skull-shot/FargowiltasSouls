@@ -126,3 +126,7 @@ removed devilstone drop & requirement for devilshield
 fishron contact damage disabled while spectral sharks are attacking (pls test in case i botched the check lol)
 
 adjusted numbers on abom ship
+maso terra champ coil lightning ball shoots lightning on every growing pulse
+maso terra champ spends less time doing the "watch out! here i come XD" coil
+terra champ S wave also makes extra lightning portals
+put accel startup on terra fireballs

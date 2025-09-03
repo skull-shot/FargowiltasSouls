@@ -245,7 +245,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case 12: //terra champ tell
                     {
                         color = Color.OrangeRed;
-                        maxTime = 300 - 90;
+                        maxTime = 60;
                         alphaModifier = Projectile.localAI[0] > maxTime / 2 ? 10 : 1;
 
                         NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<TerraChampion>());
