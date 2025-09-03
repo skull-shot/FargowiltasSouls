@@ -203,6 +203,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 }
             }
 
+            if (++Projectile.frameCounter > 10)
+            {
+                Projectile.frameCounter = 0;
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
+            }
+
             //debug dust to verify hitboxes
             /*Vector2 center = Projectile.Center;
             Rectangle shipBack = GetRectangleFromCenterPoint(center + GetOffsetFromCenterToSpriteCoords(106, 413), 210, 240);
