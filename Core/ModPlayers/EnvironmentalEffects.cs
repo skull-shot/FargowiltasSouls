@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Fargowiltas.Content.Buffs;
+using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
@@ -117,16 +118,18 @@ namespace FargowiltasSouls.Core.ModPlayers
                     DesertDebuffs(currentTile);
                 }
 
-
-                if (Player.ZoneSnow)
+                if (Player.ZoneSnow && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight))
                 {
-                    //if (!Main.dayTime && Framing.GetTileSafely(Player.Center).WallType == WallID.None)
-                    //    Player.AddBuff(BuffID.Chilled, Main.expertMode && Main.expertDebuffTime > 1 ? 1 : 2);
+                    SpawnIcicles();
                 }
 
                 if (Player.ZoneJungle)
                 {
                     JungleStorming(); 
+
+                    //reduce max storm
+                    //while storming ... spawn rates up
+                    //certain enemies go crazy
                 }
 
                 if (Player.ZoneCorrupt)
@@ -143,16 +146,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (currentTile.WallType == WallID.SpiderUnsafe)
                 {
                     SpiderWebbed();
-                }
-
-                if (Player.ZoneMarble)
-                {
-                    //Main.NewText("ech");
-                }
-
-                if (Player.ZoneGranite)
-                {
-                    //Main.NewText("ech");
                 }
 
                 if (Player.ZoneUnderworldHeight)
@@ -175,7 +168,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.AddBuff(BuffID.WaterCandle, 2);
                 }
                     
-                //boss environs??
+                //boss environs
                 //deerclops
                 if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses())
                 {
@@ -196,6 +189,72 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
 
+        }
+
+        private void SpawnIcicles()
+        {
+            int maxIcicles = 25;
+            int spawningRange = 60;
+            int airNeeded = 5;
+            int icicleDamage = 50;
+
+            //icicle spawning 
+            if (Main.rand.NextBool(30) && Player.ownedProjectileCounts[ModContent.ProjectileType<FallingIcicle>()] < maxIcicles)
+            {
+                Vector2 playerPos = Player.Center;
+                bool icicleSpawned = false;
+
+                while (!icicleSpawned)
+                {
+                    int x = Main.rand.Next(-spawningRange, spawningRange);
+                    int y = Main.rand.Next(-spawningRange, spawningRange);
+
+                    int xPosition = (int)(x + playerPos.X / 16.0f);
+                    int yPosition = (int)(y + playerPos.Y / 16.0f);
+
+                    if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
+                        continue;
+
+                    Tile tile = Main.tile[xPosition, yPosition];
+
+                    if (tile == null)
+                        continue;
+
+                    if ((tile.TileType == TileID.IceBlock || tile.TileType == TileID.BreakableIce || tile.TileType == TileID.SnowBlock) && tile.BlockType == BlockType.Solid)
+                    {
+                        //check if tile has open air beneath it 
+                        bool fail = false;
+
+                        for (int i = 1; i <= airNeeded; i++)
+                        {
+                            int yPosition2 = (int)(y + i + playerPos.Y / 16.0f);
+                            Tile tile2 = Main.tile[xPosition, yPosition2];
+
+                            if (tile2.TileType != 0)
+                            {
+                                fail = true;
+                                break;
+                            }
+                        }
+
+                        if (fail)
+                        {
+                            continue; ;
+                        }
+
+                        //spawn the icicle
+                        yPosition = (int)(y + 1 + playerPos.Y / 16.0f);
+                        Vector2 spawnPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
+                        //fiddle to line up to tile
+                        spawnPos.X -= 6f;
+                        spawnPos.Y -= 9.5f;
+
+                        Projectile icicle = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_NaturalSpawn(), spawnPos, Vector2.Zero, ModContent.ProjectileType<FallingIcicle>(), icicleDamage, 1, Player.whoAmI);
+
+                        icicleSpawned = true;
+                    }
+                }
+            }
         }
 
         private void FallDamageDebuff()
