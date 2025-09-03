@@ -74,6 +74,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.GivenName = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.DukeFishronEX.DisplayName");
         }
 
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            //if in p3, did 1 dash, waiting while spectral sharks attack
+            if (!WorldSavingSystem.MasochistModeReal && !IsEX && npc.ai[0] == 10 && npc.ai[3] == 1 && npc.ai[2] == 0)
+                return false;
+
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
+
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);

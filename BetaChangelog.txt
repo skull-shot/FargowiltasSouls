@@ -123,3 +123,4 @@ raised golem all parts damage multiplier 1.1 -> 1.25
 reduced space suffocation rate
 tiny silly range check in gutted heart so it hopefully doesnt tile array OOB again
 removed devilstone drop & requirement for devilshield
+fishron contact damage disabled while spectral sharks are attacking (pls test in case i botched the check lol)
