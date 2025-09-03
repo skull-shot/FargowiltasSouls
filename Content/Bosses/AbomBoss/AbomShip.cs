@@ -123,7 +123,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             BehaviorTimer++;
             SpawnInTimer++;
 
-            const int ramTime = 75;
+            const int ramStartupTime = 60;
+            const int ramTime = ramStartupTime + 75;
             const int shrinkTime = 30;
             const int ballsTime = 120;
 
@@ -160,6 +161,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 Projectile.netUpdate = true;
                 Projectile.velocity = 24f * Vector2.UnitX * -Direction;
+            }
+            else if (BehaviorTimer < ramStartupTime) //temp pause so cannon fire happens closer to player
+            {
+
             }
             else if (BehaviorTimer < ramTime) //ram
             {
