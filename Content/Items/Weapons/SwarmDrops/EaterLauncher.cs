@@ -25,12 +25,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 190;
+            Item.damage = 135;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 24;
             Item.height = 24;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 6f;
@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             if (lastLMouse && !Main.mouseLeft && CanUseItem(player) && FargoSoulsUtil.ActuallyClickingInGameplay(player))
             {
-                delay = (int)MathF.Ceiling(25f / player.FargoSouls().AttackSpeed);
+                delay = (int)MathF.Ceiling(20f / player.FargoSouls().AttackSpeed);
             }
             if (delay-- < 0)
             {

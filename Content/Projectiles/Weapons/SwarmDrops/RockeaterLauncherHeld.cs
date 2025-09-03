@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (player.channel && !player.noItems && !player.CCed)
             {
                 Projectile.timeLeft = 60;
-                player.SetDummyItemTime(25);
+                player.SetDummyItemTime(20);
                 player.heldProj = Projectile.whoAmI;
 
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi;
@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), position, velocity.RotatedByRandom(MathHelper.ToRadians(18)) * Main.rand.NextFloat(0.9f, 1.1f), ModContent.ProjectileType<EaterRocket>(), Projectile.damage, 6f);
                     }
 
-                    if (ShootTimer >= 25)
+                    if (ShootTimer >= 20)
                     {
                         canShoot = true;
                         ShootTimer = 0;
