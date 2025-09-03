@@ -1240,11 +1240,6 @@ namespace FargowiltasSouls.Core.Globals
                         ItemID.ThornHook));
                     break;
 
-                case NPCID.Demon:
-                case NPCID.RedDevil:
-                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Devilstone>(), 2));
-                    break;
-
                 default:
                     break;
             }

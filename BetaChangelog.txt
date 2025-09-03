@@ -122,4 +122,4 @@ abom side flockos now spawn in p1 too, p2 side flockos alternate a 3-4-3-4 patte
 raised golem all parts damage multiplier 1.1 -> 1.25
 reduced space suffocation rate
 tiny silly range check in gutted heart so it hopefully doesnt tile array OOB again
-demons and red devils can drop devilstones
+removed devilstone drop & requirement for devilshield
