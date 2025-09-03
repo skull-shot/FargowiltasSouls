@@ -128,8 +128,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     return true; // run vanilla despawn code
                 }
             }
-
-
             
             // Scaling (from vanilla)
             float num255 = (float)npc.life / (float)npc.lifeMax;
@@ -148,9 +146,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.position.X += npc.width / 2;
                 npc.position.Y += npc.height;
+                var minScale =  33 / 92f;
+                if (num255 < minScale)
+                    num255 = minScale;
                 npc.scale = num255;
-                npc.width = (int)(98f * npc.scale);
-                npc.height = (int)(92f * npc.scale);
+                npc.width = (int)MathF.Round(98f * npc.scale);
+                npc.height = (int)MathF.Round(92f * npc.scale);
                 npc.position.X -= npc.width / 2;
                 npc.position.Y -= npc.height;
             }

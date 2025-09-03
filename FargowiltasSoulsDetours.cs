@@ -510,6 +510,7 @@ namespace FargowiltasSouls
                 // reset these
                 FargoSoulsGlobalProjectile.globalProjectileField = null;
             }
+            NPC.
             return orig(self, hit, fromNet, noPlayerInteraction);
         }
 
