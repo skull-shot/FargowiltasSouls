@@ -17,7 +17,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
         {
             base.OnSpawn(npc, source);
 
-            if (source is NPC sourceNPC && sourceNPC.type == NPCID.Paladin)
+            if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type == NPCID.Paladin)
                 npc.dontTakeDamage = true;
         }
 
