@@ -389,7 +389,7 @@ NinjaEnchant: {
 	Tooltip:
 		'''
 		弹幕会根据其速度增加暴击率，最高可达20%
-		当玩家缓慢移动时弹幕速度大幅增加
+		当玩家缓慢移动时弹幕速度和击退大幅增加
 		“等待正确的时机……”
 		'''
 }
@@ -468,9 +468,8 @@ RainEnchant: {
 	DisplayName: 雨云魔石
 	Tooltip:
 		'''
-		召唤一把可反射上方射弹的雨伞
+		召唤一把可反射上方射弹的雨伞，且会减缓坠落速度
 		雨伞反射射弹的伤害合计超过200点后会破裂
-		获得羽落药水的效果
 		永恒模式下免疫雷击（在背包和时装栏也可生效）
 		拥有[i:FloatingTube]浮游圈的效果
 		“改日再来”
@@ -600,7 +599,7 @@ SpiderEnchant: {
 		'''
 		你的召唤武器可以造成暴击，召唤暴击只造成1.5倍伤害
 		手持非召唤武器时减少召唤暴击伤害
-		通过召唤暴击增加的伤害上限为100点
+		通过召唤暴击增加的伤害上限为80点
 		增加10%暴击率
 		“蜘蛛恐惧者？作为惩罚，让他被蜘蛛干掉吧！”
 		'''
@@ -889,7 +888,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShinobiEnchant] 使用阴影冲刺冲过敌人会对其造成伤害并造成死亡标记
 		[i:FargowiltasSouls/AncientShadowEnchant] 冲刺会向玩家周围发射一连串暗影焰弹幕
 		[i:FargowiltasSouls/NinjaEnchant] 根据弹幕速度增加弹幕暴击率
-		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时增加弹幕速度
+		[i:FargowiltasSouls/NinjaEnchant] 缓慢移动时增加弹幕速度和击退
 		[i:FargowiltasSouls/NecroEnchant] 击杀敌人有概率掉落骨堆
 		[i:FargowiltasSouls/DarkArtistEnchant] 攻击时发射快捷栏中最近的武器的射弹作为辅助攻击
 		[i:FargowiltasSouls/SpookyEnchant] 你的所有召唤物都会获得额外的镰刀攻击
@@ -1959,7 +1958,7 @@ EridanusHat: {
 		'''
 		增加10%伤害
 		增加5%暴击率
-		Increases max mana by 30
+		增加30最大魔力值
 		增加1个召唤栏位
 		增加1个哨兵栏位
 		'''
@@ -2007,7 +2006,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	DisplayName: 真·突变之躯
+	DisplayName: 永恒核心
 	Tooltip:
 		'''
 		增加70%伤害和30%暴击率
@@ -2018,7 +2017,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	DisplayName: 真·突变之颅
+	DisplayName: 永恒怒焰
 	Tooltip:
 		'''
 		增加50%伤害和20%暴击率
@@ -2029,7 +2028,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	DisplayName: 真·突变之靴
+	DisplayName: 永恒护腿
 	Tooltip:
 		'''
 		增加50%伤害和20%暴击率
@@ -2221,8 +2220,8 @@ EternalEnergy: {
 }
 
 BrokenSpearHead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
+	DisplayName: 破损的矛尖
+	Tooltip: ""
 }
 
 EternityAdvisor: {
@@ -3744,66 +3743,66 @@ MainMenuMusicBox: {
 }
 
 BaronMask: {
-	// DisplayName: Banished Baron Mask
-	// Tooltip: ""
+	DisplayName: 放逐遗爵面具
+	Tooltip: ""
 }
 
 CoffinMask: {
-	// DisplayName: Cursed Coffin Mask
-	// Tooltip: ""
+	DisplayName: 咒缚灵棺面具
+	Tooltip: ""
 }
 
 DeathMask: {
-	// DisplayName: Death Champion Mask
-	// Tooltip: ""
+	DisplayName: 死亡英灵面具
+	Tooltip: ""
 }
 
 EarthMask: {
-	// DisplayName: Earth Champion Mask
-	// Tooltip: ""
+	DisplayName: 大地英灵面具
+	Tooltip: ""
 }
 
 LifelightMask: {
-	// DisplayName: Lifelight Mask
-	// Tooltip: ""
+	DisplayName: 飘渺游光面具
+	Tooltip: ""
 }
 
 LifeMask: {
-	// DisplayName: Life Champion Mask
-	// Tooltip: ""
+	DisplayName: 生命英灵面具
+	Tooltip: ""
 }
 
 NatureMask: {
-	// DisplayName: Nature Champion Mask
-	// Tooltip: ""
+	DisplayName: 自然英灵面具
+	Tooltip: ""
 }
 
 SpiritMask: {
-	// DisplayName: Spirit Champion Mask
-	// Tooltip: ""
+	DisplayName: 心灵英灵面具
+	Tooltip: ""
 }
 
 TerraMask: {
-	// DisplayName: Terra Champion Mask
-	// Tooltip: ""
+	DisplayName: 泰拉英灵面具
+	Tooltip: ""
 }
 
 TimberMask: {
-	// DisplayName: Timber Champion Mask
-	// Tooltip: ""
+	DisplayName: 森林英灵面具
+	Tooltip: ""
 }
 
 TrojanMask: {
-	// DisplayName: Trojan Squirrel Mask
-	// Tooltip: ""
+	DisplayName: 特洛伊松鼠面具
+	Tooltip: ""
 }
 
 WillMask: {
-	// DisplayName: Will Champion Mask
-	// Tooltip: ""
+	DisplayName: 意志英灵面具
+	Tooltip: ""
 }
 
 BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
+	DisplayName: 破损的矛尖
+	Tooltip: ""
 }

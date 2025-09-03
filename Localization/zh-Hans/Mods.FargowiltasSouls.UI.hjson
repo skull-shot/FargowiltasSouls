@@ -1,4 +1,4 @@
-SoulTogglerButton: 饰品效果配置
+SoulTogglerButton: 打开饰品效果配置
 Standard: 标准模式
 Eternity: 永恒模式
 Masochist: 受虐模式
@@ -12,8 +12,8 @@ Close: 关闭
 OpenKeybinds: 打开控件页面
 
 TitleLinks: {
-	// Patreon: Patreon
-	// Github: Github
+	Patreon: Patreon
+	Github: Github
 }
 
 ExpandedStandard:

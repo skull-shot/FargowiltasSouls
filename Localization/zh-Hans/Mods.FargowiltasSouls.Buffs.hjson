@@ -819,6 +819,6 @@ TouhouHoardBuff: {
 }
 
 GrabbedHarmlessBuff: {
-	// DisplayName: Grabbed
-	// Description: Mash movement keys to escape!
+	DisplayName: 抓住你了！
+	Description: 狂敲你的移动键来逃离！
 }
