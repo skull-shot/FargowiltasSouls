@@ -125,4 +125,3 @@ tiny silly range check in gutted heart so it hopefully doesnt tile array OOB aga
 removed devilstone drop & requirement for devilshield
 fishron contact damage disabled while spectral sharks are attacking (pls test in case i botched the check lol)
 
-nature explosion telegraph flickers to be more obvious
