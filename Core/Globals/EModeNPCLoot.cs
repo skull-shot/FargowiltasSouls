@@ -723,7 +723,7 @@ namespace FargowiltasSouls.Core.Globals
         }
     }
 
-    internal class FirstKillCondition : IItemDropRuleCondition
+    public class FirstKillCondition : IItemDropRuleCondition
     {
         public bool CanDrop(DropAttemptInfo info) =>
             !info.IsInSimulation &&
