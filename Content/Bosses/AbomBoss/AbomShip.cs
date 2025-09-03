@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 {
                     int flip = i % 2 == 0 ? -1 : 1;
                     gunRotations[i] = flip * MathHelper.ToRadians(60);
-                    gunRotations[i] += flip * i * MathHelper.ToRadians(90) / gunRotations.Length;
+                    gunRotations[i] += flip * i * MathHelper.ToRadians(120) / gunRotations.Length;
                     gunRotations[i] += Main.rand.NextFloat(MathHelper.ToRadians(10));
                 }
             }
@@ -123,7 +123,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             BehaviorTimer++;
             SpawnInTimer++;
 
-            const int downtime = -60;
             const int ramTime = 75;
             const int shrinkTime = 30;
             const int ballsTime = 120;
@@ -146,15 +145,15 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 {
                     int flip = i % 2 == 0 ? -1 : 1;
                     flip *= Projectile.direction;
-                    gunRotations[i] += flip * MathHelper.Pi * 1.5f / 180 * Main.rand.NextFloat(0.95f, 1.05f);
+                    gunRotations[i] += flip * MathHelper.Pi * 1.75f / 240 * Main.rand.NextFloat(0.95f, 1.05f);
                 }
 
-                if (BehaviorTimer < downtime && ratio >= 1f && FargoSoulsUtil.HostCheck && abom.HasValidTarget)
+                if (ratio >= 1f && FargoSoulsUtil.HostCheck && abom.HasValidTarget)
                 {
                     int gun = (int)System.Math.Abs(BehaviorTimer) % 4;
                     Vector2 gunPos = GetGunPositions()[gun];
-                    Vector2 vel = 7f * gunRotations[gun].ToRotationVector2();
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ProjectileID.BulletDeadeye, Projectile.damage, 0f, Main.myPlayer);
+                    Vector2 vel = 6f * gunRotations[gun].ToRotationVector2();
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomBullet>(), Projectile.damage, 0f, Main.myPlayer);
                 }
             }
             else if (BehaviorTimer == 0) //detach from abom, rear back
@@ -189,14 +188,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     float newCenterY = MathHelper.Lerp(Projectile.Center.Y, (abom.Center.Y + Main.player[abom.target].Center.Y) / 2, 0.04f);
                     Projectile.Center = new Vector2(Projectile.Center.X, newCenterY);
 
-                    if (BehaviorTimer < ramTime + ballsTime)
-                    {
-                        if (BehaviorTimer % 20 == 5) //directly target player, force movement
-                            ShootCannonball(Main.player[abom.target].Center, false);
+                    //random bombardment
+                    if (BehaviorTimer < ramTime + ballsTime && BehaviorTimer % (WorldSavingSystem.MasochistModeReal ? 1 : 2) == 0)
+                        ShootCannonball(Main.player[abom.target].Center, true);
 
-                        if (BehaviorTimer % (WorldSavingSystem.MasochistModeReal ? 1 : 2) == 0) //random bombardment
-                            ShootCannonball(Main.player[abom.target].Center, true);
-                    }
+                    //directly target player, force movement
+                    if (BehaviorTimer < ramTime + ballsTime + 30 && BehaviorTimer % 30 == 1)
+                        ShootCannonball(Main.player[abom.target].Center, false);
                 }
             }
 

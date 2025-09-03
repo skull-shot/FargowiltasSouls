@@ -22,7 +22,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.CloneDefaults(ProjectileID.BulletDeadeye);
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = ProjAIStyleID.Arrow;
+            AIType = ProjectileID.BulletDeadeye;
             Projectile.penetrate = -1;
             Projectile.scale = 2f;
             CooldownSlot = ImmunityCooldownID.Bosses;
