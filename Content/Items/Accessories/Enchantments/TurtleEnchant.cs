@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     player.runAcceleration *= 1.8f;
                     player.runSlowdown *= 1.6f;
-                    player.maxRunSpeed *= 1.4f; // all of these affect aerial speed
+                    player.maxRunSpeed *= 1.3f; // all of these affect aerial speed
                 }
             }
         }
@@ -136,8 +136,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (player.HasEffect<TurtleSmashEffect>())
                     player.AddBuff(ModContent.BuffType<ShellSmashBuff>(), player.ForceEffect<TurtleSmashEffect>() ? 30 * 60 : 20 * 60);
                 player.FargoSouls().TurtleShellBroken = true;
+                player.immune = true;
+                player.immuneTime = 120;
                 SoundEngine.PlaySound(SoundID.Shatter, player.Center);
-                if (!Main.dedServ && player.HasEffect<TurtleEffect>())
+
+                if (!Main.dedServ)
                 {
                     for (int j = 0; j < Main.rand.Next(8, 12); j++)
                     {

@@ -42,9 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override bool? UseItem(Player player)
         {
             if (player.ItemTimeIsZero && player.ItemAnimationJustStarted)
-            {
                 FargoSoulsPlayer.Squeak(player.Center, 1f);
-            }
             return base.UseItem(player);
         }
         /*private bool lastLMouse = false;
