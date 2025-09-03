@@ -64,7 +64,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Rectangle tipBase = GetRectangleFromCenterPoint(center + GetOffsetFromCenterToSpriteCoords(462, 412), 78, 24);
             Rectangle tipTip = GetRectangleFromCenterPoint(center + GetOffsetFromCenterToSpriteCoords(544, 400), 90, 16);
             //only enable tip hitbox once ramming begins
-            if (BehaviorTimer > 0 && (targetHitbox.Intersects(tipBase) || targetHitbox.Intersects(tipTip)))
+            if (BehaviorTimer > 0 && System.Math.Sign(Projectile.velocity.X) == Direction
+                && (targetHitbox.Intersects(tipBase) || targetHitbox.Intersects(tipTip)))
                 return true;
 
             return targetHitbox.Intersects(shipBack) || targetHitbox.Intersects(shipHull);
