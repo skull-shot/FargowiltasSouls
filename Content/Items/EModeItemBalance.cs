@@ -461,7 +461,6 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Neutral;
 
                 case ItemID.DayBreak:
-                //case ItemID.InfluxWaver TODO: make this actually work
                     balanceTextKeys = ["MeleeDamageBugFix"];
                     return EModeChange.Neutral;
 
