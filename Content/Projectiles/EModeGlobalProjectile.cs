@@ -1567,7 +1567,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _)) //vanilla conditions for "airborne enemy"
                             {
-                                modifiers.SourceDamage *= 9.2f / 12f; //results in 1.15x after vanilla 1.5x
+                                modifiers.FinalDamage *= 9.2f / 12f; //results in 1.15x after vanilla 1.5x
                             }
                         }
                         break;
