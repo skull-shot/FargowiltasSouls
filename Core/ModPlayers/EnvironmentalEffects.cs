@@ -153,7 +153,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     UnderworldFire();
                 }
 
-                if (Player.Center.ToTileCoordinates().Y <= Main.worldSurface * 0.25)
+                if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25))
                 {
                     SpaceBreathMeter();
                 }
