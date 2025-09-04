@@ -78,14 +78,29 @@ namespace FargowiltasSouls.Content.Items.Accessories
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
         public override int ToggleItemType => ModContent.ItemType<HallowedPendant>();
         public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 200);
+        private static int DamageTaken;
+        public static float ScaleDamage
+        {
+            get { return Math.Clamp(DamageTaken * DamageTaken / 40000f, 0.625f, 1f); } // 50-200 hyperbolic scaling
+        }
         public override void PostUpdateEquips(Player player)
         {
             // onhit dodge
         }
+        public override void OnHitByNPC(Player player, NPC npc, Player.HurtInfo hurtInfo)
+        {
+            if (EffectItem(player).type == ModContent.ItemType<HallowedPendant>())
+                DamageTaken = hurtInfo.Damage;
+        }
+        public override void OnHitByProjectile(Player player, Projectile proj, Player.HurtInfo hurtInfo)
+        {
+            if (EffectItem(player).type == ModContent.ItemType<HallowedPendant>())
+                DamageTaken = hurtInfo.Damage;
+        }
         public override void OnHitByEither(Player player, NPC npc, Projectile proj)
         {
             if (EffectItem(player).type == ModContent.ItemType<HallowedPendant>())
-                PendantRays(player, BaseDamage(player), 500);
+                PendantRays(player, (int)(BaseDamage(player) * ScaleDamage), 500);
         }
         public static void PendantRays(Player player, int baseDamage, int maxDistance)
         {

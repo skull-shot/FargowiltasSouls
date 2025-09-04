@@ -2084,7 +2084,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         if (sourceNPC.type == NPCID.Golem)
                         {
-                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
+                            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 3);
 
                             if (Framing.GetTileSafely(sourceNPC.Center).WallType != WallID.LihzahrdBrickUnsafe)
                                 target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
@@ -2125,7 +2125,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
-                    target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+                    target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
                     target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
                     target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
                     break;

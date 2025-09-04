@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             float HoldoutRangeMax = (float)Projectile.Size.Length() / 2; //since sprite is diagonal
             float HoldoutRangeMin = (float)-Projectile.Size.Length() / 6;
 
-            if ((Main.mouseRight || chargeLevel < 60) && thrown < 2)
+            if ((Main.mouseLeft || chargeLevel < 60) && thrown < 2)
             {
                 player.heldProj = Projectile.whoAmI;
                 Projectile.velocity = player.SafeDirectionTo(Main.MouseWorld);

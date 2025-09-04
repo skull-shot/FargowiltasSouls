@@ -57,9 +57,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float ai0 = 0;
+            float ai0 = 1;
             if (player.altFunctionUse == 2)
-                ai0 = 1;
+                ai0 = 0;
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai0);
             return false;
         }
