@@ -195,12 +195,12 @@ namespace FargowiltasSouls.Content.UI
                     }, InterfaceScaleType.UI));
                 }
             }
-
+            /*
             layers.Insert(0, new LegacyGameInterfaceLayer("Fargo: Title Links", delegate
             {
                 if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
                 {
-                    Console.WriteLine("Hi");
+                    //Console.WriteLine("Hi");
                     float upBump = 0;
                     byte b = (byte)((255 + Main.tileColor.R * 2) / 3);
                     Microsoft.Xna.Framework.Color color = new Microsoft.Xna.Framework.Color(b, b, b, 255);
@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Content.UI
                 return true;
                   
             }, InterfaceScaleType.None));
-               
+             */
            
         }
     }

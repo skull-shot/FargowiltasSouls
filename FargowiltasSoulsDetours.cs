@@ -24,6 +24,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls
 {
@@ -41,7 +42,7 @@ namespace FargowiltasSouls
         {
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
-            On_Main.DrawMenu += DrawMenu;
+            //On_Main.DrawMenu += DrawMenu;
 
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
@@ -65,7 +66,7 @@ namespace FargowiltasSouls
         {
             On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
             On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
-            On_Main.DrawMenu -= DrawMenu;
+            //On_Main.DrawMenu -= DrawMenu;
 
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
@@ -268,7 +269,7 @@ namespace FargowiltasSouls
             {                
                 FargowiltasSouls.DrawTitleLinks(color, upBump);
                 upBump += 32f;
-            }
+            }  
             if (!WorldGen.drunkWorldGen)
             {
                 string text = mod.DisplayName + " " + mod.Version;

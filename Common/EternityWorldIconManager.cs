@@ -6,6 +6,7 @@ using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Common
 {
+    /*
     public class EternityWorldIconManager : ModSystem
     {
         public override void SaveWorldHeader(TagCompound tag)
@@ -48,5 +49,5 @@ namespace FargowiltasSouls.Common
         internal static string MasochistIconPath => "FargowiltasSouls/Assets/UI/OncomingMutantWithAura";
         
     }
-
+    */
 }
