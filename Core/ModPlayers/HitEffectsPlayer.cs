@@ -595,7 +595,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     NekomiMeter = 0;
             }
 
-            if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
+            /*if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
             {
                 int shelldmg = info.SourceDamage;
                 if (player.HasEffectEnchant<TurtleEffect>())
@@ -614,7 +614,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Gore.NewGore(player.GetSource_Accessory(player.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
                     }
                 }
-            }
+            }*/
 
             if (Defenseless)
             {
