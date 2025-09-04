@@ -1860,7 +1860,7 @@ FargoBullet: {
 	DisplayName: Bolsa de Projétil Amalgamada
 	/* Tooltip:
 		'''
-		      Chases after your enemy
+		Chases after your enemy
 		Bounces several times
 		Each impact causes an explosion of crystal shards
 		Inflicts several debuffs

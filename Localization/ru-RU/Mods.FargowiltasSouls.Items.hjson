@@ -994,7 +994,7 @@ BionomicClusterInactive: {
 }
 
 LithosphericCluster: {
-	DisplayName: Литосферное скопление
+	DisplayName: Литосферный фонарь
 	Tooltip:
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
@@ -1018,7 +1018,7 @@ LithosphericCluster: {
 }
 
 LithosphericClusterInactive: {
-	DisplayName: Литосферное скопление (Неактивно)
+	DisplayName: Литосферный фонарь (Неактивно)
 	Tooltip:
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»

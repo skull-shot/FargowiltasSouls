@@ -1793,7 +1793,7 @@ FargoBullet: {
 	DisplayName: Amalgamated Bullet Pouch
 	Tooltip:
 		'''
-		      Chases after your enemy
+		Chases after your enemy
 		Bounces several times
 		Each impact causes an explosion of crystal shards
 		Inflicts several debuffs
