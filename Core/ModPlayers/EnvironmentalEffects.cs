@@ -155,8 +155,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.Center.ToTileCoordinates().Y <= Main.worldSurface * 0.25)
                 {
-                    Main.NewText("hi");
-
                     SpaceBreathMeter();
                 }
 
