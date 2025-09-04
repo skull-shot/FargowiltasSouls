@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<TurtleEnchant>();
         public override bool MutantsPresenceAffects => true;
 
-        public const float TurtleShellMaxHP = 1000;
+        public const float TurtleShellMaxHP = 500;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
