@@ -68,19 +68,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
-                if (WorldSavingSystem.MasochistModeReal)
-                {
-                    target.AddBuff(ModContent.BuffType<GodEaterBuff>(), 420);
-                }
-                //target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
-                target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 420);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 480);
         }
 
         public override void OnKill(int timeLeft)

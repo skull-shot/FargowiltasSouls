@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -11,14 +12,11 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class FusedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Fused");
-            // Description.SetDefault("You're going out with a bang");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "导火线");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你和爆炸有个约会");
         }
 
         public override void Update(Player player, ref int buffIndex)

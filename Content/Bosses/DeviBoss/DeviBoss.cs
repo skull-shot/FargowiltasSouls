@@ -2249,7 +2249,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<VermillionTopHat>());
             }
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedDevi, -1);
+            WorldSavingSystem.SetDeviDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

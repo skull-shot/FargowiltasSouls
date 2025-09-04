@@ -158,7 +158,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 30);
+            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 10);
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 target.AddBuff(ModContent.BuffType<UnstableBuff>(), 300);
         }
@@ -172,7 +172,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.masochistModeReal? 0.7f : 2.2f);
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.7f : 2.2f);
 
         public static Color ColorFunction(float _)
         {
@@ -206,7 +206,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             shader.TrySetParameter("useFadeIn", true);
             shader.TrySetParameter("realopacity", 1); // do not change this.
 
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.masochistModeReal? 15 : 15);
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 15 : 15);
         }
         
     }

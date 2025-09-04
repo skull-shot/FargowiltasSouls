@@ -212,7 +212,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
                 case NPCID.IceQueen:
                     {
-                        emodeRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IceQueensCrown>(), 5));
+                        emodeRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IceQueensShield>(), 5));
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Present, 1, 1, 5));
                     }
                     break;
@@ -723,7 +723,7 @@ namespace FargowiltasSouls.Core.Globals
         }
     }
 
-    internal class FirstKillCondition : IItemDropRuleCondition
+    public class FirstKillCondition : IItemDropRuleCondition
     {
         public bool CanDrop(DropAttemptInfo info) =>
             !info.IsInSimulation &&

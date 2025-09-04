@@ -216,7 +216,7 @@ namespace FargowiltasSouls.Content.Items
                 (item.type == ModContent.ItemType<CoffinSummon>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])||
                 (item.type == ItemID.DeerThing && !NPC.downedDeerclops)||
                 (item.type == ModContent.ItemType<SuspiciousSkull>() && !NPC.downedBoss3)||
-                (item.type == ModContent.ItemType<DevisCurse>() && !WorldSavingSystem.downedDevi)||
+                (item.type == ModContent.ItemType<DevisCurse>() && !WorldSavingSystem.DownedDevi)||
                 (item.type == ModContent.ItemType<FleshyDoll>() && !Main.hardMode)||
                 (item.type == ItemID.QueenSlimeCrystal && !NPC.downedQueenSlime)||
                 (item.type == ModContent.ItemType<MechLure>() && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])||
@@ -230,8 +230,8 @@ namespace FargowiltasSouls.Content.Items
                 (item.type == ModContent.ItemType<PrismaticPrimrose>() && !NPC.downedEmpressOfLight)||
                 (item.type == ModContent.ItemType<CultistSummon>() && !NPC.downedAncientCultist)||
                 (item.type == ItemID.CelestialSigil && !NPC.downedMoonlord)||
-                (item.type == ModContent.ItemType<BetsyEgg>() && !WorldSavingSystem.downedBetsy)||
-                (item.type == ModContent.ItemType<AbomsCurse>() && !WorldSavingSystem.downedAbom)||
+                (item.type == ModContent.ItemType<BetsyEgg>() && !WorldSavingSystem.DownedBetsy)||
+                (item.type == ModContent.ItemType<AbomsCurse>() && !WorldSavingSystem.DownedAbom)||
                 (item.type == ModContent.ItemType<MutantsCurse>() && !WorldSavingSystem.DownedMutant)||
                 (item.type == ItemID.MechdusaSummon && !NPC.downedMechBoss1 && !NPC.downedMechBoss2 && !NPC.downedMechBoss3))
             {
@@ -278,6 +278,18 @@ namespace FargowiltasSouls.Content.Items
                 attackSpeedContrib /= 3;
                 attackSpeedContrib += 1;
                 damage *= 8 * attackSpeedContrib;
+            }
+        }
+        public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
+        {
+            switch (item.type)
+            {
+                case ItemID.TopazStaff:
+                    if (EmodeItemBalance.HasEmodeChange(player, ItemID.TopazStaff))
+                        crit += 6;
+                    break;
+                default:
+                    break;
             }
         }
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -344,6 +356,10 @@ namespace FargowiltasSouls.Content.Items
             {
                 return 1.5f;
             }
+            if (item.type == ItemID.EmeraldStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
+            {
+                return 0.75f;
+            }
             return base.UseSpeedMultiplier(item, player);
         }
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -351,15 +367,7 @@ namespace FargowiltasSouls.Content.Items
             if (!WorldSavingSystem.EternityMode)
                 return;
             switch (item.type)
-            {
-                case ItemID.WaterBolt:
-                    if (!NPC.downedBoss3 && EmodeItemBalance.HasEmodeChange(player, item.type))
-                    {
-                        type = ProjectileID.WaterGun;
-                        damage = 0;
-                    }
-                    break;
-                    
+            {                    
                 case ItemID.ChlorophyteSaber:
                     if (EmodeItemBalance.HasEmodeChange(player, item.type))
                     {

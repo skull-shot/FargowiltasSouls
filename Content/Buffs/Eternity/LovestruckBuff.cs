@@ -1,19 +1,16 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class LovestruckBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lovestruck");
-            // Description.SetDefault("You are in love!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "热恋");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "坠入爱河!");
         }
 
         public override void Update(Player player, ref int buffIndex)

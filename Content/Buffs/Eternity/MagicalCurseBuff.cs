@@ -1,11 +1,12 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class MagicalCurseBuff : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Content/Buffs/MagicalCleanseCDBuff";
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", "MagicalCleanseCDBuff");
 
         public override void SetStaticDefaults()
         {

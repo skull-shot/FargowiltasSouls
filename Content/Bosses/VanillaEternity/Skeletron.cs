@@ -482,7 +482,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f)
+            if (npc.ai[1] != 2f && WorldSavingSystem.MasochistModeReal)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 
@@ -975,10 +975,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             
             //not while spinning outside maso
-            if (!HeadSpinning(npc) || WorldSavingSystem.MasochistModeReal)
-            {
-                target.AddBuff(BuffID.Dazed, 60);
-            }
+            //if (!HeadSpinning(npc) || WorldSavingSystem.MasochistModeReal)
+            //{
+            //    target.AddBuff(BuffID.Dazed, 60);
+            //}
             
         }
         public static bool HeadSpinning(NPC npc)

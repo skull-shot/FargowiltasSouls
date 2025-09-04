@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             float HoldoutRangeMax = (float)Projectile.Size.Length() / 2; //since sprite is diagonal
             float HoldoutRangeMin = (float)-Projectile.Size.Length() / 6;
 
-            if (chargable == 1 && Main.mouseRight && chargeLevel >= 0)
+            if (chargable == 1 && Main.mouseLeft && chargeLevel >= 0)
             {
                 Projectile.velocity = player.SafeDirectionTo(Main.MouseWorld);
                 Projectile.Center = player.MountedCenter + Projectile.velocity * HoldoutRangeMin;

@@ -67,10 +67,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write(Angle);
+            binaryWriter.Write(Counter);
+            binaryWriter.Write(DevilDemons.Count);
+            for (int i = 0; i < DevilDemons.Count; i++)
+                binaryWriter.Write(DevilDemons[i]);
         }
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             Angle = binaryReader.ReadSingle();
+            Counter = binaryReader.ReadInt32();
+            int demonCount = binaryReader.ReadInt32();
+            for (int i = 0; i < demonCount; i++)
+                DevilDemons[i] = binaryReader.ReadInt32();
         }
         public override void OnFirstTick(NPC npc)
         {
@@ -104,6 +112,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                             }
                         }
                     }
+                    npc.netUpdate = true;
                 }
             }
 
@@ -158,6 +167,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                                 float decel = 0.5f;
                                 float resistance = npc.velocity.Length() * accel / maxSpeed;
                                 npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, accel - resistance, decel + resistance);
+
+                                if (timer == windupTime - chargeTime - 15)
+                                {
+                                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Shadowflame, 10f);
+                                }
                             }
                             else if (timer == windupTime - chargeTime)
                             {
@@ -242,6 +256,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                                 float decel = 0.5f;
                                 float resistance = npc.velocity.Length() * accel / maxSpeed;
                                 npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, windupPos, npc.velocity, accel - resistance, decel + resistance);
+
+                                if (timer == windupTime - chargeTime - 15)
+                                {
+                                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Shadowflame, 10f);
+                                }
                             }
                             else if (timer == windupTime - chargeTime)
                             {
@@ -284,13 +303,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                     {
                         Counter = 0;
                         var readyDemons = DevilDemons.Where(n => Main.npc[n].TypeAlive(NPCID.Demon) && Main.npc[n].GetGlobalNPC<Demons>().Counter == 0);
-                        if (readyDemons.Any())
+                        if (readyDemons.Any() && FargoSoulsUtil.HostCheck)
                         {
                             int demonID = Main.rand.NextFromCollection(readyDemons.ToList());
                             Demons demon = Main.npc[demonID].GetGlobalNPC<Demons>();
                             demon.Counter = -1;
                             demon.Angle = Main.rand.Next(-1, 2) * MathHelper.PiOver2 * 0.6f;
                             Main.npc[demonID].netUpdate = true;
+                            npc.netUpdate = true;
                         }
                     }
                 }

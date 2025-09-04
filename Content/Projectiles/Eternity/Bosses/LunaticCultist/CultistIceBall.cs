@@ -57,14 +57,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
             NPC npc = Main.npc[ownerID];
             if (npc.HasPlayerTarget)
             {
-                Rotation = Vector2.Lerp(Rotation.ToRotationVector2(), npc.DirectionTo(Main.player[npc.target].Center), 0.04f).ToRotation();
+                float lerpStrength = WorldSavingSystem.MasochistModeReal ? 0.04f : 0.035f;
+                Rotation = Vector2.Lerp(Rotation.ToRotationVector2(), npc.DirectionTo(Main.player[npc.target].Center), lerpStrength).ToRotation();
             }
             Projectile.velocity = (npc.Center + Rotation.ToRotationVector2() * 80) - Projectile.Center;
 
             Projectile.Opacity = 1f;
 
             Projectile.position = Projectile.Center;
-            Projectile.scale = (float)(Timer / Duration);
+            Projectile.scale = (float)Math.Min(Timer / Duration * 1.5f, 1f);
             Projectile.width = Projectile.height = (int)(Width * Projectile.scale);
             Projectile.Center = Projectile.position;
 

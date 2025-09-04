@@ -297,7 +297,7 @@ namespace FargowiltasSouls
                 Add("Boss",
                     "BanishedBaron",
                     [ModContent.NPCType<BanishedBaron>()],
-                    () => WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.BanishedBaron],
+                    () => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron],
                     () => true,
                     [
                         ModContent.ItemType<BaronTrophy>(),
@@ -315,7 +315,7 @@ namespace FargowiltasSouls
                     "CursedCoffin",
                     //TODO: ADD LOOT
                     [ModContent.NPCType<CursedCoffin>()],
-                    () => WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.CursedCoffin],
+                    () => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin],
                     () => true,
                     [],
                     [ModContent.ItemType<CoffinSummon>()],

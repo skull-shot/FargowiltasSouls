@@ -112,7 +112,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.aiStyle = -1;
             NPC.lifeMax = BaseHP;
             NPC.defense = 10;
-            NPC.damage = 35;
+            NPC.damage = 31;
             NPC.knockBackResist = 0f;
             NPC.width = 90;
             NPC.height = 150;

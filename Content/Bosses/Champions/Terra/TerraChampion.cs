@@ -271,7 +271,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                         float rotationDifference = MathHelper.WrapAngle(NPC.velocity.ToRotation() - NPC.SafeDirectionTo(player.Center).ToRotation());
                         bool inFrontOfMe = Math.Abs(rotationDifference) < MathHelper.ToRadians(90 / 2);
 
-                        bool proceed = NPC.localAI[0] > 300 && (NPC.localAI[0] > 360 || inFrontOfMe);
+                        int timeToProceed = WorldSavingSystem.MasochistModeReal ? 180 : 270;
+                        bool proceed = NPC.localAI[0] > timeToProceed && (NPC.localAI[0] > timeToProceed + 60 || inFrontOfMe);
 
                         if (proceed)
                         {
@@ -368,14 +369,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
                         const int end = 360;
 
-                        /*Vector2 offset;
-                        offset.X = 10f * NPC.localAI[0];
-                        offset.Y = 600 * (float)Math.Sin(2f * Math.PI / end * 4 * NPC.localAI[0]);
-
-                        NPC.Center = new Vector2(NPC.localAI[2], NPC.localAI[3]) + offset.RotatedBy(NPC.localAI[1]);
-                        NPC.velocity = Vector2.Zero;
-                        NPC.rotation = (NPC.position - NPC.oldPosition).ToRotation();*/
-
                         float sinModifier = (float)Math.Sin(2 * (float)Math.PI * (NPC.localAI[0] / end * 3 + 0.25f));
                         NPC.rotation = NPC.localAI[1] + (float)Math.PI / 2 * sinModifier;
                         NPC.velocity = 36f * NPC.rotation.ToRotationVector2();
@@ -383,6 +376,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                         if (Math.Abs(sinModifier) < 0.001f) //account for rounding issues
                         {
                             SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
+
+                            NPC.localAI[2] = WorldSavingSystem.MasochistModeReal ? 20 : 10;
 
                             if (FargoSoulsUtil.HostCheck)
                             {
@@ -405,6 +400,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                                         FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, NPC.localAI[1] + rotationOffset, ai1New);
                                 }
                             }
+                        }
+
+                        if (--NPC.localAI[2] > 0 && FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<LightningVortexHostile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, Main.player[NPC.target].DirectionFrom(NPC.Center).ToRotation());
                         }
 
                         if (++NPC.localAI[0] > end * 0.8f)

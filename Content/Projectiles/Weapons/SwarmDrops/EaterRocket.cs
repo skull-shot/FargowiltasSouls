@@ -1,7 +1,10 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -34,9 +37,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void AI()
         {
             //dust!
-            int dustId = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y + 2f), Projectile.width, Projectile.height + 5, DustID.PurpleCrystalShard, Projectile.velocity.X * 0.2f,
-                Projectile.velocity.Y * 0.2f, 100, default, 1f);
+            int width = 3;   
+            Vector2 dustCenter = Projectile.Center - Vector2.UnitX * width;
+            Vector2 dustSpinny = Projectile.velocity;
+            dustSpinny.Normalize();
+            dustCenter -= dustSpinny * Projectile.width / 2;
+            dustSpinny *= Projectile.width / 2;
+            dustSpinny = dustSpinny.RotatedBy(Projectile.timeLeft * MathF.Tau / 23f);
+            dustCenter += dustSpinny;
+            int dustId = Dust.NewDust(dustCenter, width * 2, width * 2, DustID.PurpleCrystalShard, 0f, 0f, 100, default, 1f);
             Main.dust[dustId].noGravity = true;
+            Main.dust[dustId].velocity *= 0;
 
             //if (Projectile.penetrate < 99 && Projectile.ai[1] != 1)
             //{
@@ -82,47 +93,43 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (sweetspot)
             {
-                for (int i = 0; i < 40; i++)
+                for (int i = 0; i < 30; i++)
                 {
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptTorch, 0f, 0f, 100, new Color(), 2f);
+                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptTorch, 0f, 0f, 100, new Color(), 1f);
                     Main.dust[index2].noGravity = true;
                     Main.dust[index2].noLight = true;
-                    Main.dust[index2].velocity = Vector2.Normalize(Projectile.velocity) * 9f + Main.rand.NextVector2Circular(12f, 12f);
-                    Main.dust[index2].velocity *= 2.5f;
+                    Main.dust[index2].velocity = Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f);
+                    Main.dust[index2].velocity *= Main.rand.NextFloat(1f, 2f);
                     Main.dust[index2].scale *= Main.rand.NextFloat(1.5f, 3f);
                 }
             }
 
             Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
-            for (int i = 0; i < 10; i++)
-            {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width,
-                    Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
-                Main.dust[dust].velocity *= 1.4f;
-                Main.dust[dust].noGravity = true;
-            }
 
             for (int i = 0; i < 5; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width,
-                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 3.5f);
+                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 2f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 7f;
                 dust = Dust.NewDust(Projectile.position, Projectile.width,
-                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
+                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 2f);
                 Main.dust[dust].velocity *= 3f;
             }
 
-            float scaleFactor9 = 0.5f;
             for (int j = 0; j < 4; j++)
             {
+                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f) / 4, Color.Gray, 25, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                p.Spawn();
+                /*
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
                     default,
                     Main.rand.Next(61, 64));
 
                 Main.gore[gore].velocity *= scaleFactor9;
                 Main.gore[gore].velocity += new Vector2(1, 1).RotatedBy(MathHelper.TwoPi / 4 * j);
+                */
             }
 
             /*if (Projectile.owner == Main.myPlayer)

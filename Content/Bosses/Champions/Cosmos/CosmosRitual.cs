@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     float phaseHealthRatioRemaining = 1f - MathHelper.Min(npc.life, npc.lifeMax / 5f) / (npc.lifeMax / 5f);
                     float dragMultiplier = 1f + 0.5f * phaseHealthRatioRemaining;
 
-                    float dragSpeed = mult * dragMultiplier * Projectile.Distance(player.Center) / 55;
+                    float dragSpeed = mult * dragMultiplier * Projectile.Distance(player.Center) / 62;
                     player.position += Projectile.DirectionFrom(player.Center) * dragSpeed;
                     player.AddBuff(ModContent.BuffType<LowGroundEridanusBuff>(), 2);
                     player.wingTime = 60;

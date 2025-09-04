@@ -26,9 +26,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 10;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 240;
+            Projectile.timeLeft = 180;
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.idStaticNPCHitCooldown = 20;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
         }
 

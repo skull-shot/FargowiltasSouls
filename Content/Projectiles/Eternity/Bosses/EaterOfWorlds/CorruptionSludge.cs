@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EaterOfWorlds
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<RottingBuff>(), 180);
+            target.AddBuff(ModContent.BuffType<RottingBuff>(), 60 * 3);
         }
 
         public override bool PreDraw(ref Color lightColor)

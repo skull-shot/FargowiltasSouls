@@ -42,13 +42,13 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["RodofHarmony"];
                     return EModeChange.ReworkNeutral;
 
-                case ItemID.WaterBolt:
+                /*case ItemID.WaterBolt:
                     if (!NPC.downedBoss3)
                     {
                         balanceTextKeys = ["WaterBolt"];
                         return EModeChange.ReworkNerf;
                     }
-                    return EModeChange.None;
+                    return EModeChange.None;*/
 
                 case ItemID.HallowedGreaves:
                 case ItemID.HallowedHeadgear:
@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;*/
 
 
-                case ItemID.DemonScythe:
+                /*case ItemID.DemonScythe:
                     {
                         if (!NPC.downedBoss2)
                         {
@@ -168,7 +168,7 @@ namespace FargowiltasSouls.Content.Items
                             return EModeChange.Nerf;
                         }
                         return EModeChange.None;
-                    }
+                    }*/
 
                     /*
                 case ItemID.FetidBaghnakhs:
@@ -413,11 +413,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
-                case ItemID.TempestStaff:
-                    balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.2f;
-                    return EModeChange.Buff;
-
                 case ItemID.BouncingShield: //sergeant united shield
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
@@ -443,8 +438,8 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.MaceWhip: // Morning Star
-                    balanceTextKeys = ["Speed"];
-                    balanceNumber = 0.75f;
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
                 case ItemID.NettleBurst:
@@ -458,12 +453,33 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.PiranhaGun:
-                    balanceTextKeys = ["PiranhaGun"];
+                    balanceTextKeys = ["DynamicUpdating"];
                     return EModeChange.Neutral;
                     
                 case ItemID.ProximityMineLauncher:
-                    balanceTextKeys = ["ProximityMineLauncher"];
+                    balanceTextKeys = ["DynamicUpdating"];
                     return EModeChange.Neutral;
+
+                case ItemID.DayBreak:
+                    balanceTextKeys = ["MeleeDamageBugFix"];
+                    return EModeChange.Neutral;
+
+                case ItemID.SolarEruption:
+                    balanceTextKeys = ["Damage", "MeleeDamageBugFix"];
+                    balanceNumber = 1.25f;
+                    return EModeChange.Neutral;
+
+                case ItemID.Phantasm:
+                case ItemID.NebulaArcanum:
+                case ItemID.NebulaBlaze:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
+                case ItemID.StardustDragonStaff:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.67f;
+                    return EModeChange.Nerf;
 
                 case ItemID.PygmyStaff:
                     balanceTextKeys = ["PygmyStaff"];

@@ -70,7 +70,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.aiStyle = -1;
             NPC.lifeMax = CursedCoffin.BaseHP;
             NPC.defense = 10;
-            NPC.damage = 35;
+            NPC.damage = 31;
             NPC.knockBackResist = 0f;
             NPC.width = 110;
             NPC.height = 110;
@@ -242,11 +242,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
 
             // share healthbar
-            if (FargoSoulsUtil.HostCheck)
-            {
-                NPC.lifeMax = owner.lifeMax = Math.Min(NPC.lifeMax, owner.lifeMax);
-                NPC.life = owner.life = Math.Min(NPC.life, owner.life);
-            }
+            NPC.realLife = owner.whoAmI;
 
             RotateToVelocity = true;
             NPC.dontTakeDamage = NPC.scale < 0.5f;

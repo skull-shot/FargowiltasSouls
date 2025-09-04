@@ -94,7 +94,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
                         {
                             SpiderCD = 30;
-                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer);
+                            Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                            Vector2 vel = spawnPos.DirectionTo(target.Center) * 5f;
+                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), spawnPos, vel, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer, ai2: target.whoAmI);
                         }
                     }
                     if (UniverseCore) // cosmic core
@@ -288,7 +290,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<IvyVenomEffect>())
             {
-                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 30);
+                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 60);
             }
         }
 
@@ -326,9 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Smite)
                 dr -= 0.2f;
 
-            if (npc.coldDamage && Hypothermia)
-                dr -= 0.2f;
-
             if (CurseoftheMoon)
                 dr -= 0.2f;
 
@@ -357,9 +356,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             float dr = 0;
 
             if (Smite)
-                dr -= 0.2f;
-
-            if (proj.coldDamage && Hypothermia)
                 dr -= 0.2f;
 
             if (CurseoftheMoon)
@@ -534,7 +530,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override bool FreeDodge(Player.HurtInfo info)
         {
-            if (SupersonicDodge)
+            if (SupersonicDodge && !noDodge)
             {
                 if (Player.brainOfConfusionItem != null)
                 {
@@ -575,13 +571,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<TitaniumCDBuff>(), LumUtils.SecondsToFrames(15));
             }
 
-            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage <= 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
+            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage > 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
             {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
+                DeerSinewFreezeCD = 240;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 10);
             }
 
-            if (NekomiSet && NekomiHitCD <= 0)
+            if (NekomiSet && NekomiHitCD <= 0 && info.Damage > 10)
             {
                 NekomiHitCD = 60;
 
@@ -599,7 +595,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     NekomiMeter = 0;
             }
 
-            if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
+            /*if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
             {
                 int shelldmg = info.SourceDamage;
                 if (player.HasEffectEnchant<TurtleEffect>())
@@ -618,7 +614,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Gore.NewGore(player.GetSource_Accessory(player.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
                     }
                 }
-            }
+            }*/
 
             if (Defenseless)
             {

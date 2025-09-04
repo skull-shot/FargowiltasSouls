@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Core.Systems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
@@ -32,6 +33,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
             target.AddBuff(BuffID.Bleeding, 60 * 4);
         }
         public override void AI()

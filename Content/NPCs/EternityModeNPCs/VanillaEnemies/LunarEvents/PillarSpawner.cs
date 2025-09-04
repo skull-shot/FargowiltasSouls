@@ -12,7 +12,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Cosmic Meteor");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

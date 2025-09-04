@@ -126,7 +126,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
-                SoundEngine.PlaySound(WorldSavingSystem.masochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
+                SoundEngine.PlaySound(WorldSavingSystem.MasochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(135f);
@@ -137,13 +137,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<MutantBombSmall>(), 0, 0f, Projectile.owner);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
 
             TryLifeSteal(target.Center, target.whoAmI);
         }

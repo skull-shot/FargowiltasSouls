@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -33,6 +34,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<SpiderEffect>(Item);
+            player.GetCritChance(DamageClass.Generic) += 7;
+            if (player.FargoSouls().ForceEffect<SpiderEnchant>())
+                player.GetCritChance(DamageClass.Generic) += 7;
         }
 
         public override void AddRecipes()
@@ -75,9 +79,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.SpiderCD--;
             //minion crits
             modPlayer.MinionCrits = true;
-            player.GetCritChance(DamageClass.Generic) += 10;
-            if (player.HasEffectEnchant<SpiderEffect>() && modPlayer.ForceEffect(ModContent.ItemType<SpiderEnchant>()))
-                player.GetCritChance(DamageClass.Generic) += 15;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
             for (int index1 = 0; index1 < 10; ++index1)
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, -Projectile.velocity.X * 0.2f, -Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);

@@ -251,11 +251,6 @@ HexedBuff: {
 	Description: 你的攻击会治愈敌人
 }
 
-HypothermiaBuff: {
-	DisplayName: 恐寒症
-	Description: 友方弹幕速度会减慢，你会承受更多来自冷系攻击的伤害
-}
-
 InfestedBuff: {
 	DisplayName: 感染
 	Description: 这只会变得更糟
@@ -321,7 +316,7 @@ NeurotoxinBuff: {
 PoweroftheCosmosBuff: {
 	DisplayName: 无效诅咒
 	Description: 月亮领主正在循环他的伤害免疫类型！
-	// CombatText: 1.5x {0} damage!
+	// CombatText: 1.75x {0} damage!
 	// Melee: melee
 	// Ranged: ranged
 	// Magic: magic
@@ -482,9 +477,9 @@ TrueEyesBuff: {
 	Description: 克苏鲁的几只眼睛将会保护你
 }
 
-TwinsEXBuff: {
-	DisplayName: 双子EX
-	Description: 真正的双子魔眼将为你而战
+OmniscienceBuff: {
+	// DisplayName: Omniscience
+	// Description: The real Twins will fight for you
 }
 
 MutantRebirthBuff: {

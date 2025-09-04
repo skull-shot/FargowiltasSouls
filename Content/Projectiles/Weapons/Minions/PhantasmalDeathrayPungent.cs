@@ -98,23 +98,16 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             float amount = 0.5f;
             Projectile.localAI[1] = MathHelper.Lerp(Projectile.localAI[1], num807, amount);
             Vector2 vector79 = Projectile.Center + Projectile.velocity * (Projectile.localAI[1] - 14f);
-            for (int num809 = 0; num809 < 2; num809 = num3 + 1)
+            for (int i = 0; i < 10; i++)
             {
                 float num810 = Projectile.velocity.ToRotation() + (Main.rand.NextBool(2) ? -1f : 1f) * 1.57079637f;
                 float num811 = (float)Main.rand.NextDouble() * 2f + 2f;
                 Vector2 vector80 = new((float)Math.Cos((double)num810) * num811, (float)Math.Sin((double)num810) * num811);
-                int num812 = Dust.NewDust(vector79, 0, 0, DustID.CopperCoin, vector80.X, vector80.Y, 0, default, 1f);
+                int num812 = Dust.NewDust(vector79, 0, 0, DustID.CorruptSpray, vector80.X, vector80.Y, 0, default, 1f);
                 Main.dust[num812].noGravity = true;
-                Main.dust[num812].scale = 1.7f;
-                num3 = num809;
-            }
-            if (Main.rand.NextBool(5))
-            {
-                Vector2 value29 = Projectile.velocity.RotatedBy(1.5707963705062866, default) * ((float)Main.rand.NextDouble() - 0.5f) * Projectile.width;
-                int num813 = Dust.NewDust(vector79 + value29 - Vector2.One * 4f, 8, 8, DustID.CopperCoin, 0f, 0f, 100, default, 1.5f);
-                Dust dust = Main.dust[num813];
-                dust.velocity *= 0.5f;
-                Main.dust[num813].velocity.Y = -Math.Abs(Main.dust[num813].velocity.Y);
+                Main.dust[num812].scale = 2f;
+                Main.dust[num812].velocity *= 2f;
+                num3 = i;
             }
             DelegateMethods.v3_1 = new Vector3(0.3f, 0.65f, 0.7f);
             Utils.PlotTileLine(Projectile.Center, Projectile.Center + Projectile.velocity * Projectile.localAI[1], Projectile.width * Projectile.scale, DelegateMethods.CastLight);
@@ -143,7 +136,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.WoFDeathray");
 
             // Get the laser end position.
-            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.5f;
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1];
 
             // Create 8 points that span across the draw distance from the projectile center.
             Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity * 5f;

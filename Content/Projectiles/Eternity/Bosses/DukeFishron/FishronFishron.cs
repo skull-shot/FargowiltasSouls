@@ -71,8 +71,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
-            //target.AddBuff(BuffID.WitheredWeapon, 600);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
             target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 10 * 60);
             target.FargoSouls().MaxLifeReduction += FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBossEX, NPCID.DukeFishron) ? 100 : 15;
         }
@@ -87,17 +86,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             SoundEngine.PlaySound((Main.rand.NextBool() ? SoundID.NPCDeath17 : SoundID.NPCDeath30) with { Volume = 0.75f, Pitch = 0.2f }, Projectile.Center);
 
             if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitX * 20f * Projectile.direction, Projectile.velocity, 576, Projectile.scale);
-            if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitY * 30f, Projectile.velocity, 574, Projectile.scale);
-            if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, 575, Projectile.scale);
-            if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center + Vector2.UnitX * 20f * Projectile.direction, Projectile.velocity, 573, Projectile.scale);
-            if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitY * 30f, Projectile.velocity, 574, Projectile.scale);
-            if (!Main.dedServ)
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, 575, Projectile.scale);
+            {
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center + Vector2.UnitX * 20f * Projectile.direction, Projectile.velocity, 89, Projectile.scale);
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, 90, Projectile.scale);
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitY * 8f, Projectile.velocity, 91, Projectile.scale);
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitX * 20f, Projectile.velocity, 92, Projectile.scale);
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)

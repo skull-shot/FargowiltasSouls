@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(Projectile.ai[2] == 0 ? ModContent.BuffType<LightningRodBuff>() : BuffID.Weak, Main.rand.Next(300, 1200));
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }

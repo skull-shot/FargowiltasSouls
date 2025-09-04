@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.masochistModeReal ? 0.5f : 1.5f);
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.5f : 1.5f);
 
         public static Color ColorFunction(float _)
         {
@@ -180,7 +180,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             shader.TrySetParameter("useFadeIn", true);
             //shader.SetTexture(FargosTextureRegistry.Techno1Noise.Value, 1, SamplerState.LinearWrap);
 
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.masochistModeReal ? 40 : 20);
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 40 : 20);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     player.runAcceleration *= 1.8f;
                     player.runSlowdown *= 1.6f;
-                    player.maxRunSpeed *= 1.4f; // all of these affect aerial speed
+                    player.maxRunSpeed *= 1.3f; // all of these affect aerial speed
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<TurtleEnchant>();
         public override bool MutantsPresenceAffects => true;
 
-        public const float TurtleShellMaxHP = 1000;
+        public const float TurtleShellMaxHP = 500;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)
@@ -134,10 +134,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 modPlayer.TurtleShellHP = 0;
                 if (player.HasEffect<TurtleSmashEffect>())
+                {
                     player.AddBuff(ModContent.BuffType<ShellSmashBuff>(), player.ForceEffect<TurtleSmashEffect>() ? 30 * 60 : 20 * 60);
+                    SoundEngine.PlaySound(SoundID.Item119, player.Center);
+                }
                 player.FargoSouls().TurtleShellBroken = true;
+                player.immune = true;
+                player.immuneTime = 120;
                 SoundEngine.PlaySound(SoundID.Shatter, player.Center);
-                if (!Main.dedServ && player.HasEffect<TurtleEffect>())
+
+                if (!Main.dedServ)
                 {
                     for (int j = 0; j < Main.rand.Next(8, 12); j++)
                     {
@@ -216,6 +222,37 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             float dr = TurtleDR(player);
             modifiers.FinalDamage *= 1 - dr;
         }
+
+        public override void ModifyHurt(Player player, ref Player.HurtModifiers modifiers)
+        {
+            if (player == Main.LocalPlayer && (player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
+            {
+                if (player.HasEffectEnchant<TurtleEffect>())
+                {
+                    modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
+                    {
+                        Player p = Main.LocalPlayer;
+                        int shelldmg = info.SourceDamage;
+                        p.FargoSouls().TurtleShellHP -= shelldmg;
+                        if (!Main.dedServ && p.FargoSouls().ShellHide)
+                        {
+                            for (int j = 0; j < 6; j++)
+                            {
+                                if (shelldmg < 60)
+                                    break;
+                                shelldmg -= 60;
+                                int i = j % 9;
+                                Vector2 pos = Main.rand.NextVector2FromRectangle(p.Hitbox);
+                                Vector2 vel = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(4, 8);
+                                int type = i + 1;
+                                Gore.NewGore(p.GetSource_Accessory(p.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
+                            }
+                        }
+                    };
+                }
+            }
+        }
+        
         public static float TurtleDR(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();

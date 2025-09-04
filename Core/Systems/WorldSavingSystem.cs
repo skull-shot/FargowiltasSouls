@@ -35,25 +35,25 @@ namespace FargowiltasSouls.Core.Systems
         public const int MaxCountPreHM = 560;
         public const int MaxCountHM = 240;
 
-        internal static bool swarmActive;
-        internal static bool downedBetsy;
-        internal static bool shouldBeEternityMode;
-        internal static bool masochistModeReal;
-        internal static bool canPlayMaso = true;
-        internal static bool downedFishronEX;
+        private static bool swarmActive;
+        private static bool downedBetsy;
+        private static bool shouldBeEternityMode;
+        private static bool masochistModeReal;
+        private static bool canPlayMaso = true;
+        private static bool downedFishronEX;
         internal static bool downedDevi;
         internal static bool downedAbom;
         internal static bool downedMutant;
-        internal static bool angryMutant;
-        internal static bool haveForcedAbomFromGoblins;
-        internal static int skipMutantP1;
-        internal static bool receivedTerraStorage;
-        internal static bool spawnedDevi;
-        internal static bool downedAnyBoss;
-        internal static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
-        internal static bool wOFDroppedDeviGift2;
-        internal static bool shiftingSandEvent;
-        internal static bool haveForcedMutantFromKS;
+        private static bool angryMutant;
+        private static bool haveForcedAbomFromGoblins;
+        private static int skipMutantP1;
+        private static bool receivedTerraStorage;
+        private static bool spawnedDevi;
+        private static bool downedAnyBoss;
+        private static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
+        private static bool wOFDroppedDeviGift2;
+        private static bool shiftingSandEvent;
+        private static bool haveForcedMutantFromKS;
 
         public static bool EternityMode { get; set; }
 
@@ -365,6 +365,21 @@ namespace FargowiltasSouls.Core.Systems
             writer.Write(CoffinArena.Rectangle.Y);
             writer.Write(CoffinArena.Rectangle.Width);
             writer.Write(CoffinArena.Rectangle.Height);
+        }
+
+        public static void SetDeviDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedDevi, -1);
+        }
+
+        public static void SetAbomDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedAbom, -1);
+        }
+        
+        public static void SetMutantDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedMutant, -1);
         }
     }
 }

@@ -126,20 +126,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             base.OnHitPlayer(target, info);
 
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
 
-                if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[0] == -5)
-                {
-                    if (!target.HasBuff(ModContent.BuffType<TimeFrozenBuff>()))
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), target.Center);
-                    target.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 300);
-                }
+            if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[0] == -5)
+            {
+                if (!target.HasBuff(ModContent.BuffType<TimeFrozenBuff>()))
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), target.Center);
+                target.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 300);
             }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor)

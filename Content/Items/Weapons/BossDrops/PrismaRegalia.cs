@@ -14,17 +14,18 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
         }
 
         public override void SetDefaults()
         {
             Item.mana = 0;
             Item.damage = 140;
-            Item.DamageType = DamageClass.MeleeNoSpeed;
+            Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 18;
-            Item.useAnimation = 18;
+            Item.useTime = 27;
+            Item.useAnimation = 27;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 5);
@@ -46,9 +47,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float ai0 = 0;
+            float ai0 = 1;
             if (player.altFunctionUse == 2)
-                ai0 = 1;
+                ai0 = 0;
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, ai0);
             return false;
         }

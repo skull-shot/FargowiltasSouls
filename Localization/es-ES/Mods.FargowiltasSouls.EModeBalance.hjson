@@ -53,17 +53,17 @@
 // GolemFist: Deals up to triple damage to enemies the further out the fist is extended
 // Gladius: Hit rate increased to match swing speed
 // FlowerPow: Tripled petal firerate
-// PiranhaGun: Projectile damage updates dynamically
-// ProximityMineLauncher: Projectile damage updates dynamically
+// DynamicUpdating: Projectile damage updates dynamically
 // PygmyStaff: Spears can now pierce once
 // MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
 // AerialBane: Bonus damage against airborne enemies decreased to 15%
 // ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
 // AvengerEmblem: Damage bonus increased by 3%
-// AmethystStaff: Bolt is faster and bounces once
-// TopazStaff: Critical strikes cause an explosion
+// AmethystStaff: Bolt is faster and bounces towards enemies
+// TopazStaff: Critical strikes cause an explosion, increased base critical strike chance
 // SapphireStaff: Rapidly fires bolts in a spread
 // EmeraldStaff: Fires a large bolt with strong knockback and pierce
 // AmberStaff: Bolt boomerangs back
 // RubyStaff: Bolt splits in half after a duration
+// MeleeDamageBugFix: Fixed projectiles not dealing melee damage

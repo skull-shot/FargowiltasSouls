@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
 using Terraria.ID;
@@ -8,12 +9,10 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class CrimsonRegenBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Crimson Regen");
-            // Description.SetDefault("You are regenning your last wound");
             Main.buffNoSave[Type] = true;
-            //Main.buffNoTimeDisplay[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex)

@@ -74,10 +74,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Betsy
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            //target.AddBuff(BuffID.OnFire, 600);
-            //target.AddBuff(BuffID.Ichor, 600);
-            target.AddBuff(BuffID.WitheredArmor, Main.rand.Next(60, 300));
-            target.AddBuff(BuffID.WitheredWeapon, Main.rand.Next(60, 300));
             target.AddBuff(BuffID.Electrified, 300);
         }
 

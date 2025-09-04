@@ -95,7 +95,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 6);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
         }
         const string PartsPath = "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/";
         public override bool PreDraw(ref Color lightColor)

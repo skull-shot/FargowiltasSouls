@@ -190,7 +190,7 @@ BerserkedBuff: {
 
 BloodDrinkerBuff: {
 	// DisplayName: Blood Drinker
-	// Description: 15% increased damage
+	// Description: 25% increased damage
 }
 
 BloodthirstyBuff: {
@@ -249,11 +249,6 @@ GodEaterBuff: {
 HexedBuff: {
 	// DisplayName: Hexed
 	// Description: Your attacks heal enemies
-}
-
-HypothermiaBuff: {
-	// DisplayName: Hypothermia
-	// Description: Friendly projectiles are slowed down and you take increased damage from cold attacks
 }
 
 InfestedBuff: {
@@ -322,10 +317,10 @@ PoweroftheCosmosBuff: {
 	// DisplayName: Power of the Cosmos
 	/* Description:
 		'''
-		Weapons matching Moon Lord's lunar phase deal 1.5x damage!
+		Weapons matching Moon Lord's lunar phase deal 1.75x damage!
 		Summons deal 0.5x damage while not holding a summon weapon
 		''' */
-	// CombatText: 1.5x {0} damage!
+	// CombatText: 1.75x {0} damage!
 	// Melee: melee
 	// Ranged: ranged
 	// Magic: magic
@@ -486,8 +481,8 @@ TrueEyesBuff: {
 	// Description: The eyes of Cthulhu will protect you
 }
 
-TwinsEXBuff: {
-	// DisplayName: Twins EX
+OmniscienceBuff: {
+	// DisplayName: Omniscience
 	// Description: The real Twins will fight for you
 }
 

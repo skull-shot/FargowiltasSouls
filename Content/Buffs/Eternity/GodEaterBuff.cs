@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,15 +7,12 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class GodEaterBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("God Eater");
-            // Description.SetDefault("Your soul is cursed by divine wrath");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             BuffID.Sets.IsATagBuff[Type] = true; //ignore most debuff immunity
-                                                 //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "噬神者");
-                                                 //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你的灵魂被神明的忿怒所诅咒");
         }
 
         public override void Update(Player player, ref int buffIndex)

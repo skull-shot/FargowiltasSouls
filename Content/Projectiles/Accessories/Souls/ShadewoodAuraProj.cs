@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
-            var maxOpacity = Projectile.Opacity * 0.09f * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
+            var maxOpacity = Projectile.Opacity * (target.HasEffectEnchant<ShadewoodEffect>() ? 1f : 0.12f) * ModContent.GetInstance<FargoClientConfig>().TransparentFriendlyProjectiles;
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.GenericInnerAura");
             borderShader.TrySetParameter("colorMult", 7.35f);

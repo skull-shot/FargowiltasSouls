@@ -79,6 +79,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu
                     Projectile.velocity = new Vector2(Projectile.velocity.Length(), 0f).RotatedBy(rotation.AngleLerp(targetAngle, 0.025f));
                 }
 
+                /*
                 if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && !hitATile && Collision.SolidTiles(Projectile.Center, 0, 0))
                 {
                     hitATile = true;
@@ -88,6 +89,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.RotatedBy(2 * Math.PI / 8 * i) * 2f, ProjectileID.CrimsonSpray, 0, 0f, Main.myPlayer, 8f);
                     }
                 }
+                */
             }
             else //ai1 below 0 rn
             {
@@ -116,7 +118,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Ichor, 900);
+            target.AddBuff(BuffID.Ichor, 60 * 4);
         }
 
         public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;

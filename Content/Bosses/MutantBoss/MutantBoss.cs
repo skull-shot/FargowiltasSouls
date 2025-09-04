@@ -2060,6 +2060,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         ModContent.ProjectileType<MutantPillar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0, Main.myPlayer, 1, NPC.whoAmI);
                 }
             }
+            else if (Main.getGoodWorld && WorldSavingSystem.MasochistModeReal && NPC.ai[1] == pillarAttackDelay * 6)
+            {
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.UnitY * -5,
+                        ModContent.ProjectileType<MutantPillar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0, Main.myPlayer, 2, NPC.whoAmI);
+                }
+            }
         }
 
         void EOCStarSickles()
@@ -2532,38 +2540,77 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         void SpawnFishrons()
         {
             NPC.velocity *= 0.97f;
-            if (NPC.ai[1] == 0)
+            if (NPC.ai[0] == 30) // fishron variant
             {
-                NPC.ai[2] = Main.rand.NextBool() ? 1 : 0;
-            }
-            const int fishronDelay = 3;
-            int maxFishronSets = WorldSavingSystem.MasochistModeReal ? 3 : 2;
-            if (NPC.ai[1] % fishronDelay == 0 && NPC.ai[1] <= fishronDelay * maxFishronSets)
-            {
-                if (FargoSoulsUtil.HostCheck)
+                if (NPC.ai[1] == 0)
                 {
-                    int projType = NPC.ai[0] == 30 ? ModContent.ProjectileType<MutantFishron>() : ModContent.ProjectileType<MutantShadowHand>();
-                    for (int j = -1; j <= 1; j += 2) //to both sides of player
+                    NPC.ai[2] = Main.rand.NextBool() ? 1 : 0;
+                }
+                const int fishronDelay = 3;
+                int maxFishronSets = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                if (NPC.ai[1] % fishronDelay == 0 && NPC.ai[1] <= fishronDelay * maxFishronSets)
+                {
+                    if (FargoSoulsUtil.HostCheck)
                     {
-                        int max = (int)NPC.ai[1] / fishronDelay;
-                        for (int i = -max; i <= max; i++) //fan of fishron
+                        int projType = ModContent.ProjectileType<MutantFishron>();
+                        for (int j = -1; j <= 1; j += 2) //to both sides of player
                         {
-                            if (Math.Abs(i) != max) //only spawn the outmost ones
-                                continue;
-                            float spread = MathHelper.Pi / 3 / (maxFishronSets + 1);
-                            Vector2 offset = NPC.ai[2] == 0 ? Vector2.UnitY.RotatedBy(spread * i) * -450f * j : Vector2.UnitX.RotatedBy(spread * i) * 475f * j;
+                            int max = (int)NPC.ai[1] / fishronDelay;
+                            for (int i = -max; i <= max; i++) //fan of fishron
+                            {
+                                if (Math.Abs(i) != max) //only spawn the outmost ones
+                                    continue;
+                                float spread = MathHelper.Pi / 3 / (maxFishronSets + 1);
+                                Vector2 offset = NPC.ai[2] == 0 ? Vector2.UnitY.RotatedBy(spread * i) * -450f * j : Vector2.UnitX.RotatedBy(spread * i) * 475f * j;
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, projType, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 30; i++)
+                    {
+                        int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].noLight = true;
+                        Main.dust[d].velocity *= 12f;
+                    }
+                }
+            }
+            else // shadow hand variant
+            {
+                if (NPC.ai[1] == 0)
+                {
+                    NPC.ai[2] = Main.rand.NextFromList(0, 1, 2, 3);
+                    SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost, player.Center);
+                }
+                const int handDelay = 1;
+                float hands = WorldSavingSystem.MasochistModeReal ? 8 : 8;
+                if (NPC.ai[1] <= hands)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int projType = ModContent.ProjectileType<MutantShadowHand>();
+                        for (int j = -1; j <= 1; j += 2)
+                        {
+                            float gap = MathHelper.TwoPi * 0.25f;
+                            float baseAngle = MathHelper.PiOver4 + j * gap / 2;
+                            baseAngle += j * MathHelper.PiOver2 * NPC.ai[2];
+                            float coverage = MathHelper.Pi - gap;
+                            float angle = baseAngle + j * coverage * NPC.ai[1] / hands;
+                            Vector2 offset = angle.ToRotationVector2() * 550f;
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, projType, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
                         }
                     }
+                    for (int i = 0; i < 30; i++)
+                    {
+                        int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
+                        Main.dust[d].noGravity = true;
+                        Main.dust[d].noLight = true;
+                        Main.dust[d].velocity *= 12f;
+                    }
                 }
-                for (int i = 0; i < 30; i++)
-                {
-                    int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.IceTorch, 0f, 0f, 0, default, 3f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].noLight = true;
-                    Main.dust[d].velocity *= 12f;
-                }
+
             }
+
 
             if (++NPC.ai[1] > (WorldSavingSystem.MasochistModeReal ? 60 : 120))
             {
@@ -2926,7 +2973,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSlimeRain>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
             }
 
-            float safeRange = WorldSavingSystem.MasochistModeReal ? 192.5f : 220;
+            float safeRange = /*WorldSavingSystem.MasochistModeReal ? 192.5f :*/ 220;
             float spacing = safeRange;
 
             if (NPC.ai[1] == 0) //telegraphs for where slime will fall
@@ -2942,7 +2989,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 for (float i = -1540; i <= 1540; i += spacing / 2) //spawn telegraphs
                 {
                     j++;
-                    if (Math.Abs(i) < spacing * 1.5f && j % 2 == 0)
+                    if (WorldSavingSystem.MasochistModeReal
+                        ? Math.Abs(i) > spacing * 1f && Math.Abs(i) < spacing * 2f
+                        : Math.Abs(i) < spacing * 1.5f && j % 2 == 0)
                         continue;
                     if (FargoSoulsUtil.HostCheck)
                     {
@@ -2981,6 +3030,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         Vector2 pos = basePos - yDir * 1300 + xDir * i;
                         Vector2 vel = yDir * 20;
                         Slime(pos, 0f, yDir * 20f);
+                    }
+                    if (WorldSavingSystem.MasochistModeReal)
+                    {
+                        for (float i = -spacing / 2; i <= spacing / 2; i += spacing)
+                        {
+                            Vector2 pos = basePos - yDir * 1300 + xDir * i;
+                            Vector2 vel = yDir * 20;
+                            Slime(pos, 0f, yDir * 20f);
+                        }
                     }
 
                     /*
@@ -3432,9 +3490,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -26);
             }
-                
 
-            int attackDelay = WorldSavingSystem.MasochistModeReal ? 35 : 35;
+
+            int attackDelay = 35;
             attackDelay /= 2;
 
             if (NPC.ai[1] < attackDelay - 10)
@@ -3471,14 +3529,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 float xSpeedWhenAttacking = 16f;
 
                 float i = NPC.ai[3];
-                int sides = WorldSavingSystem.MasochistModeReal ? 2 : 1;
+                int sides = /*WorldSavingSystem.MasochistModeReal ? 2 :*/ 1;
                 for (int side = 0; side < sides; side++)
                 {
-                    if (WorldSavingSystem.MasochistModeReal)
-                        i *= -1;
+                    //if (WorldSavingSystem.MasochistModeReal) i *= -1;
                     for (int j = -1; j <= 1; j += 2) //flappy bird tubes
                     {
-                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 130 : 150;
+                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 120 : 150;
                         Vector2 sansTargetPos = centerPoint;
                         const int timeToReachMiddle = 60;
                         sansTargetPos.X += xSpeedWhenAttacking * timeToReachMiddle * i;
@@ -4089,13 +4146,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override void HitEffect(NPC.HitInfo hit)
@@ -4161,7 +4214,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             WorldSavingSystem.SkipMutantP1 = 0;
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedMutant, -1);
+            WorldSavingSystem.SetMutantDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

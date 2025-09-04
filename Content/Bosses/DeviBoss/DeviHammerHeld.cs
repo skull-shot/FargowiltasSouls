@@ -83,8 +83,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override bool CanHitPlayer(Player target) => false;
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (!target.HasBuff(ModContent.BuffType<StunnedBuff>()))
-                target.AddBuff(ModContent.BuffType<StunnedBuff>(), 60);
+            //if (!target.HasBuff(ModContent.BuffType<StunnedBuff>()))
+            //    target.AddBuff(ModContent.BuffType<StunnedBuff>(), 60);
         }
 
         public override bool PreDraw(ref Color lightColor)

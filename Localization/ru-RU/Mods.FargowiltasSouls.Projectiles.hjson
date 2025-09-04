@@ -6,7 +6,7 @@ AbomDeathraySmall2.DisplayName: Луч смерти
 AbomFlocko.DisplayName: Супер-флоко
 AbomFrostShard.DisplayName: Морозный осколок
 AbomFrostWave.DisplayName: Морозная волна
-AbomReticle.DisplayName: Сетка Выродкка
+AbomReticle.DisplayName: Прицел Выродкка
 AbomRitual.DisplayName: Печать Выродкка
 AbomRitual2.DisplayName: Печать Выродкка
 AbomRitualMaso.DisplayName: Печать Выродкка
@@ -832,5 +832,14 @@ MutantNukeBomb.DisplayName: ХАЙДРОДЖЕН БОМБ
 MutantSpikevine.DisplayName: Шипастая лоза
 TopazBoltExplosion.DisplayName: Топазовый взрыв
 MutantTwin.DisplayName: Близнец
-// EarthFireball.DisplayName: Earth Fireball
-// FallingIcicle.DisplayName: Falling Icicle
+EarthFireball.DisplayName: Огненный шар Земли
+GraniteBolt.DisplayName: Гранитный выстрел
+GranitePebble.DisplayName: Гранитный камушек
+DarkRune.DisplayName: Тёмная руна
+DarkTomeHostile.DisplayName: Тёмная книга
+DarkBolt.DisplayName: Тёмный снаряд
+TomeShotHostile.DisplayName: Выстрел из книги
+AbomShip.DisplayName: Корабль
+AbomCannonball.DisplayName: Ядро из пушки
+AbomReticle2.DisplayName: Прицел
+AbomBullet.DisplayName: Пуля

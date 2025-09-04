@@ -79,3 +79,54 @@ earth champ
 	hand slam can stop on the surface of lava instead of sinking under
 	generally added more explosions
 destroyer no longer pierce resists held projectiles (read: yoyos)
+
+mutant sans golem is now dodgeable, probably
+removed debug text i forgot was left on released mutant
+added mainframe painting
+plat ench and sinister icon tooltips specify enemies "must be defeated by you" to work
+
+fixed the deerclops crash
+made nekomi take 2x more graze to charge, but deal 1.5x more damage (net nerf)
+ftw mutant throws one more pillar because funny
+added glow to devi moths for visibility
+made devi moths quieter
+dread shell blood drinker buff 15 -> 25, but vulrenability after parry 1sec -> 2sec
+pumpkings cape parry gives rapid healing buff, scales with damage
+nekomi wont lose hearts when hurt if you take 10 or less damage
+fixed deerclops only freezing you if you take LESS THAN 10 damage?? seems like it should freeze if you take OVER 10 damage
+buffed sinew freeze downside from 20t freeze 2sec cd to 10t freeze 4sec cd, trust me
+
+mutant qs maso has same spacing as emode... but you have to dodge on the outer layer instead
+baron does a bigger explode on death
+fixed destroyer instantly despawning any custom ai projectile on hit
+
+cultist ice tell is more obvious, marginally reduced emode rotational aim
+cultist has another stacking 30% DR against homing
+fixed fishron's spectral sharks exploding into full size fishron gores
+lightning portal new telegraph now fades in
+
+fixed mutant sword double hitting
+fixed mutant doing maso qs in emode oops!
+fixed rain ench cd sometimes being applied on world load
+
+replaced abom's sickle strong attack with flying dutchman bombardment (WIP)
+eri manually punches invaders into place during timestop
+adjusted eri glow trail
+
+shell smash is louder
+dungeon slime only spawns paladin on kill in dungeon
+pungent eyeball ray makes more dust and laser doesnt stretch past impact point when hitting blocks
+paladins actually give brief iframes to the spirits they spawn so you dont insta spawncamp
+abom ship tip hitbox only activates when actually moving forward during ram
+abom side flockos now spawn in p1 too, p2 side flockos alternate a 3-4-3-4 pattern
+raised golem all parts damage multiplier 1.1 -> 1.25
+reduced space suffocation rate
+tiny silly range check in gutted heart so it hopefully doesnt tile array OOB again
+removed devilstone drop & requirement for devilshield
+fishron contact damage disabled while spectral sharks are attacking (pls test in case i botched the check lol)
+
+adjusted numbers on abom ship
+maso terra champ coil lightning ball shoots lightning on every growing pulse
+maso terra champ spends less time doing the "watch out! here i come XD" coil
+terra champ S wave also makes extra lightning portals
+put accel startup on terra fireballs

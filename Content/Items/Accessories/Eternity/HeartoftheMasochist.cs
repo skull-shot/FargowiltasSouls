@@ -72,8 +72,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ParryEffect>(Item);
 
             //ice queen's crown
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
-            IceQueensCrown.AddEffects(player, Item);
+            player.buffImmune[BuffID.Frozen] = true;
+            IceQueensShield.AddEffects(player, Item);
 
             //saucer control console
             player.buffImmune[BuffID.VortexDebuff] = true;
@@ -122,7 +122,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             CreateRecipe()
 
             .AddIngredient(ModContent.ItemType<PumpkingsCape>())
-            .AddIngredient(ModContent.ItemType<IceQueensCrown>())
+            .AddIngredient(ModContent.ItemType<IceQueensShield>())
             .AddIngredient(ModContent.ItemType<SaucerControlConsole>())
             .AddIngredient(ModContent.ItemType<BetsysHeart>())
             .AddIngredient(ModContent.ItemType<MutantAntibodies>())

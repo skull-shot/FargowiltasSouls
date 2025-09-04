@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class TimeStopCDBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Time Stop Cooldown");
-            // Description.SetDefault("You cannot stop time yet");
             Main.debuff[Type] = true;
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }

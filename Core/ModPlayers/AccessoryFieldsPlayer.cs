@@ -198,7 +198,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public int HallowRepelTime;
         public int TurtleCounter;
-        public float TurtleShellHP = 1000;
+        public float TurtleShellHP = TurtleEffect.TurtleShellMaxHP;
         public bool TurtleShellBroken;
         public bool ShellHide;
         public int ValhallaVerticalDashing;
@@ -267,7 +267,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Probes;
         public bool MagicalBulb;
         public bool PlanterasChild;
-        public bool SkullCharm;
+        public bool CrystalSkull;
         public bool PungentEyeball;
         public Item LihzahrdTreasureBoxItem;
         public int GroundPound;
@@ -348,7 +348,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
-        public bool Hypothermia;
         public bool noDodge;
         public bool noSupersonic;
         public bool NoMomentum;
@@ -400,7 +399,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Mash;
         public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
-        public int MashCounter;
+        public float MashCounter;
+        public float FramesSinceLastMash;
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;

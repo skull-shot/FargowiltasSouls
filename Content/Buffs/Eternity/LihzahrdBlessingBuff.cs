@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,12 +7,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class LihzahrdBlessingBuff : ModBuff
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Lihzahrd Blessing");
-            // Description.SetDefault("Wires enabled and reduced spawn rates in Jungle Temple");
-        }
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
         public override void Update(Player player, ref int buffIndex)
         {
             if (Framing.GetTileSafely(player.Center).WallType == WallID.LihzahrdBrickUnsafe)

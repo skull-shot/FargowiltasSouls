@@ -89,10 +89,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             void SpawnServants()
             {
-                if (npc.life <= npc.lifeMax * 0.65 && NPC.CountNPCS(NPCID.ServantofCthulhu) < 9 && FargoSoulsUtil.HostCheck)
+                if (npc.life <= npc.lifeMax * 0.65 && NPC.CountNPCS(NPCID.ServantofCthulhu) < 7 && FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = new(3, 3);
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         int n = NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu);
                         if (n != Main.maxNPCs)

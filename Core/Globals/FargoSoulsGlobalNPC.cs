@@ -1,12 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Fargowiltas.Content.Items.Ammos;
 using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -23,10 +30,6 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
@@ -35,8 +38,9 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.UI;
 using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
-using FargowiltasSouls.Assets.Textures;
+using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace FargowiltasSouls.Core.Globals
 {
@@ -122,7 +126,7 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void Load()
         {
-            On_NPC.SetDefaults += PostSetDefaults;
+            //On_NPC.SetDefaults += PostSetDefaults;
         }
         public override void Unload()
         {
@@ -180,19 +184,20 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
             }
-
-
         }
         public override void SetDefaults(NPC npc)
         {
             if (npc.rarity > 0 && !RareNPCs.Contains(npc.type))
                 RareNPCs.Add(npc.type);
         }
-        public static void PostSetDefaults(On_NPC.orig_SetDefaults orig, NPC self, int Type, NPCSpawnParams spawnparams = default)
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
-            orig(self, Type, spawnparams);
-            if (self.TryGetGlobalNPC<FargoSoulsGlobalNPC>(out var gnc))
-                gnc.defKnockBackResist = self.knockBackResist;
+            binaryWriter.Write(defKnockBackResist);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            defKnockBackResist = binaryReader.ReadSingle();
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
@@ -205,6 +210,7 @@ namespace FargowiltasSouls.Core.Globals
                         SinisterIconFullFight = true;
                 }
             }
+            defKnockBackResist = npc.knockBackResist;
         }
         public override bool PreAI(NPC npc)
         {
@@ -967,8 +973,18 @@ namespace FargowiltasSouls.Core.Globals
             if (npc.FargoSouls().MagicalCurse)
                 multiplier += 5;
 
-            //half as effective if daybreak applied
-            if (npc.daybreak && multiplier > 1)
+            //half as effective if daybroken or celled are currently being applied from a stacking source
+            bool nerf = false;
+            if ((npc.daybreak || npc.celled) && multiplier > 1)
+            {
+                for (int i = 0; i < Main.maxProjectiles; i++)
+                {
+                    Projectile proj = Main.projectile[i];
+                    if (proj.active && (proj.type == ProjectileID.Daybreak || proj.type == ProjectileID.StardustCellMinionShot) && proj.ai[0] == 1f && proj.ai[1] == npc.whoAmI)
+                        nerf = true;
+                }
+            }
+            if (nerf)
                 multiplier -= (multiplier - 1) / 2;
 
             return multiplier;
@@ -1361,10 +1377,12 @@ namespace FargowiltasSouls.Core.Globals
             //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
             {
-                float def = npc.defense / 3 * PureGazeTime / PungentGazeBuff.MAX_TIME;
+                float ratio = PureGazeTime / PungentGazeBuff.MAX_TIME;
+                float def = npc.defense / 3 * ratio;
+                int minDef = (int)Math.Clamp(15f * ratio, 8f, 15f);
                 if (def > 50)
                     def = 50;
-                modifiers.ArmorPenetration += Math.Max(def, 10);
+                modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;

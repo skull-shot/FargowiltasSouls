@@ -1025,12 +1025,12 @@ BionomicClusterInactive: {
 }
 
 LithosphericCluster: {
-	// DisplayName: Lithospheric Cluster
+	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1049,12 +1049,12 @@ LithosphericCluster: {
 }
 
 LithosphericClusterInactive: {
-	// DisplayName: Lithospheric Cluster (Inactive)
+	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1241,12 +1241,12 @@ HeartoftheMasochist: {
 	Tooltip:
 		'''
 		免疫[i:FargowiltasSouls/PumpkingsCape]人形废土、[i:FargowiltasSouls/SaucerControlConsole]带电、冰冻、扭曲、[i:FargowiltasSouls/BetsysHeart]分泌物、枯萎武器、枯萎盔甲减益
-		免疫[i:FargowiltasSouls/IceQueensCrown]恐寒症、[i:FargowiltasSouls/GalacticGlobe]无效诅咒、翻转、灯火通明、不稳定、月之诅咒减益
+		免疫[i:FargowiltasSouls/IceQueensShield]恐寒症、[i:FargowiltasSouls/GalacticGlobe]无效诅咒、翻转、灯火通明、不稳定、月之诅咒减益
 		免疫[i:FargowiltasSouls/PrecisionSeal]惩戒、[i:FargowiltasSouls/MutantAntibodies]潮湿、野性咬噬、突变啃啄、海洋重击和由水造成的减益
-		[i:FargowiltasSouls/PumpkingsCape][i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/IceQueensCrown]伤害和暴击率增加10%，伤害减免增加5%
+		[i:FargowiltasSouls/PumpkingsCape][i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/IceQueensShield]伤害和暴击率增加10%，伤害减免增加5%
 		[i:FargowiltasSouls/PumpkingsCape]格挡会抵消最多200点伤害，完美格挡会根据被格挡的伤害治疗你
 		[i:FargowiltasSouls/PumpkingsCape]格挡时你周边会生成一个腐败区域
-		[i:FargowiltasSouls/IceQueensCrown]擦弹可以积攒一颗能冻住几乎所有敌怪和射弹的炸弹
+		[i:FargowiltasSouls/IceQueensShield]擦弹可以积攒一颗能冻住几乎所有敌怪和射弹的炸弹
 		[i:FargowiltasSouls/BetsysHeart]火球冲刺会造成双足翼龙诅咒
 		[i:FargowiltasSouls/SaucerControlConsole]按下“弹药切换”键循环切换弹药（这个效果放在背包和时装栏中也可生效）
 		[i:FargowiltasSouls/MutantAntibodies]骑乘猪龙鱼坐骑时获得潮湿状态效果
@@ -1265,7 +1265,7 @@ HeartoftheMasochist: {
 		'''
 }
 
-IceQueensCrown: {
+IceQueensShield: {
 	DisplayName: 冰雪女王的皇冠
 	Tooltip:
 		'''
@@ -3721,4 +3721,9 @@ Devilshield: {
 Devilstone: {
 	// DisplayName: Devilstone
 	// Tooltip: ""
+}
+
+MainframePainting: {
+	// DisplayName: Mainframe Painting
+	// Tooltip: "'Gonk'"
 }

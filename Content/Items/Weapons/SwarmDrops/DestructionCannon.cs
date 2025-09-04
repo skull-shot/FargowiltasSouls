@@ -20,6 +20,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<TheDestroyer>();
         }
 
         public override void SetDefaults()

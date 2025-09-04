@@ -157,7 +157,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Blackout] = true;
             player.buffImmune[BuffID.Obstructed] = true;
             player.buffImmune[BuffID.Dazed] = true;
-            fargoPlayer.SkullCharm = true;
+            fargoPlayer.CrystalSkull = true;
             fargoPlayer.PungentEyeball = true;
             player.AddEffect<PungentEyeballCursor>(Item);
             player.buffImmune[ModContent.BuffType<CrystalSkullBuff>()] = true;
@@ -200,7 +200,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<BulbKeyEffect>(Item);
 
             //ice queen's crown
-            IceQueensCrown.AddEffects(player, Item);
+            IceQueensShield.AddEffects(player, Item);
 
             //lihzahrd treasure
             player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
@@ -268,7 +268,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<GodEater>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;

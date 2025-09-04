@@ -12,7 +12,6 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
@@ -39,34 +38,39 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            Vector2 center = player.RotatedRelativePoint(player.MountedCenter, true);
 
             if (player.dead || !player.active || !player.channel)
                 Projectile.Kill();
 
+            Vector2 center = player.RotatedRelativePoint(player.MountedCenter, true);
+
             if (Main.myPlayer == Projectile.owner)
             {
-                Projectile.velocity = player.DirectionTo(Main.MouseWorld);
+                Projectile.direction = player.HorizontalDirectionTo(Main.MouseWorld).NonZeroSign();
+                Projectile.velocity = center.DirectionTo(Main.MouseWorld);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi;
+                    Vector2 position = Projectile.Center + new Vector2(12, Projectile.direction > 0 ? 22 : -22).RotatedBy(Projectile.rotation);
+                    Projectile.velocity = position.DirectionTo(Main.MouseWorld);
+                }
             }
 
-            Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
+            //Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
+            //Vector2 centerPos = new Vector2(Projectile.direction == 1 ? 4 : -5, 0) + Projectile.rotation.ToRotationVector2();
+            //Projectile.velocity = Vector2.Lerp(Vector2.Normalize(Projectile.velocity), Vector2.Normalize(Projectile.DirectionTo(centerPos)), 0.12f);
 
-            Vector2 centerPos = new Vector2(Projectile.direction == 1 ? 4 : -5, 0) + Projectile.rotation.ToRotationVector2();
-
-            Projectile.velocity = Vector2.Lerp(Vector2.Normalize(Projectile.velocity), Vector2.Normalize(Projectile.DirectionTo(centerPos)), 0.12f);
 
             if (player.channel && !player.noItems && !player.CCed)
             {
-                Projectile.timeLeft++;
-                player.SetDummyItemTime(25);
-                player.itemTime = 60;
-                player.itemAnimation = 60;
+                Projectile.timeLeft = 60;
+                player.SetDummyItemTime(20);
                 player.heldProj = Projectile.whoAmI;
 
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi;
 
-                Projectile.direction = Main.MouseWorld.DirectionTo(player.Center).X < 0 ? 1 : -1;
-                Projectile.spriteDirection = Projectile.direction;
+                //Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
 
                 player.ChangeDir(Projectile.direction);
                 player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.velocity.ToRotation() - MathHelper.PiOver2);
@@ -76,7 +80,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center, player.velocity, aura, 0, 0);
 
                 Vector2 velocity = Projectile.velocity * 24f;
-                
                 Vector2 position = Projectile.Center + new Vector2(12, player.direction > 0 ? 22 : -22).RotatedBy(Projectile.rotation) + Vector2.Normalize(velocity) * Projectile.width * 0.9f;
 
                 if (FargoSoulsUtil.HostCheck)
@@ -91,7 +94,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), position, velocity.RotatedByRandom(MathHelper.ToRadians(18)) * Main.rand.NextFloat(0.9f, 1.1f), ModContent.ProjectileType<EaterRocket>(), Projectile.damage, 6f);
                     }
 
-                    if (ShootTimer >= 25)
+                    if (ShootTimer >= 20)
                     {
                         canShoot = true;
                         ShootTimer = 0;
@@ -108,7 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         {
             Player player = Main.player[Projectile.owner];
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            Vector2 drawPos = Projectile.Center - Main.screenPosition;
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + Vector2.UnitY * player.gfxOffY;
             float rot = Projectile.rotation + MathHelper.Pi;
             int direction = Main.player[Projectile.owner].direction;
             Rectangle frame = new(0, 0, texture.Width, texture.Height);

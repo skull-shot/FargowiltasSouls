@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core.Globals;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,7 +8,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class SadismBuff : ModBuff
     {
-        public override string Texture => "FargowiltasSouls/Content/Buffs/PlaceholderBuff";
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", "PlaceholderBuff");
 
         public override void SetStaticDefaults()
         {
@@ -30,7 +31,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<GodEaterBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;

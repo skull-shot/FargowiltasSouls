@@ -69,13 +69,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Poisoned, Main.rand.Next(60, 300));
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<InfestedBuff>(), Main.rand.Next(60, 300));
-                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), Main.rand.Next(60, 300));
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
         }
 
         public override Color? GetAlpha(Color drawColor)
