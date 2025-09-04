@@ -22,7 +22,7 @@ ClientConfig: {
 	}
 
 	RainbowHealThreshold: {
-		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] 自动使用治疗药水阈值"
+		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] 自动使用治疗药水阈值（%）"
 		Tooltip: ""
 	}
 

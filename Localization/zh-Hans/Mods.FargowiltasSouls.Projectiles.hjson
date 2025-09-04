@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: 迷你飞碟
 NekomiAxe.DisplayName: 闪闪发光的爱
 NekomiDevi.DisplayName: 戴薇安
 NekomiRitual.DisplayName: 猫猫睡衣仪式
-// OpticFlamethrower.DisplayName: Cursed Flamethrower
-// OpticElectricOrb.DisplayName: Ichor Orb
+OpticFlamethrower.DisplayName: 咒焰喷火器
+OpticElectricOrb.DisplayName: 灵液闪电球
 OpticRetinazer.DisplayName: 激光眼
 OpticSpazmatism.DisplayName: 魔焰眼
 PalmTreeSentry.DisplayName: 棕榈树
@@ -784,5 +784,5 @@ MystiaNote.DisplayName: 米斯蒂娅音符
 MystiaNote2.DisplayName: 米斯蒂娅音符2
 RumiaOrb.DisplayName: 露米娅球
 EmpressRitual.DisplayName: 女皇结界
-// WillDashTrail.DisplayName: Dash Trail
-// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
+WillDashTrail.DisplayName: 意志冲刺轨迹
+NatureExplosionTelegraph.DisplayName: 自然爆炸预警
