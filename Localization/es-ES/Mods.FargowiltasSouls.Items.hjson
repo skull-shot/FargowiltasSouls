@@ -1722,7 +1722,7 @@ SupersonicSoul: {
 	/* Tooltip:
 		'''
 		Allows Supersonic running, dashing, hovering, and extra mobility on ice
-		Having wings equipped disables all of your double jumps (toggleable)
+		Resets horizontal momentum while not moving, and having wings equipped disables all of your double jumps (toggleable)
 		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
 		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
 		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies
