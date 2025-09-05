@@ -150,6 +150,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.netUpdate = true;
             }
 
+            npc.dontTakeDamage = false;
+
             AttacksAI(npc, ref Timer, ref State, ref OldAttack, ref AnimationState);
 
             npc.defense = npc.defDefense; //prevent vanilla p2 from lowering defense!
@@ -189,11 +191,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case States.Intro:
                     {
                         animation = (int)Animation.Laugh;
+                        npc.dontTakeDamage = true;
                         if (timer == 1)
                         {
                             SoundEngine.PlaySound(SoundID.Zombie105, npc.Center);
                         }
-                        if (timer == 120)
+                        //do 2sec spawn anim normally, or wait until tablet breaks if it's there. have a longer timer failsafe
+                        if (timer >= 120 && (timer > 480 || !Main.npc.Any(otherNpc => otherNpc.active && otherNpc.type == NPCID.CultistTablet && npc.Distance(otherNpc.Center) < 600)))
                         {
                             EndAttack(npc, ref timer, ref state, ref oldAttack);
                         }

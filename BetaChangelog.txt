@@ -138,3 +138,4 @@ blood drops dont spawn during boss fights including eow
 some abom flockos are now ice queens (visual change only)
 
 cultist pillar moves faster, explodes into more fragments (even more in maso)
+cultist spawn anim is invul, longer when spawned near tablet
