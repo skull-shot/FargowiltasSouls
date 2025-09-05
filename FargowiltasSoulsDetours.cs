@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Sky;
@@ -410,13 +411,13 @@ namespace FargowiltasSouls
         private static void PreventGillsDrowning(On_Player.orig_CheckDrowning orig, Player player)
         {
             bool hadGills = false;
-            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld && player.HasEffect<ChalicePotionEffect>())
             {
                 hadGills = player.gills;
                 player.gills = false;
             }
             orig(player);
-            if (WorldSavingSystem.EternityMode && Main.getGoodWorld)
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld && player.HasEffect<ChalicePotionEffect>())
             {
                 player.gills = hadGills;
             }
