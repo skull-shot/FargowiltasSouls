@@ -256,7 +256,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (weight[max] > 0)
                                 ai0 = max;
                             Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.UnitY * -10f, ModContent.ProjectileType<CelestialPillar>(),
-                                        Math.Max(75, FargoSoulsUtil.ScaledProjectileDamage(npc.damage, 4)), 0f, Main.myPlayer, ai0);
+                                Math.Max(75, FargoSoulsUtil.ScaledProjectileDamage(npc.damage, 4)), 0f, Main.myPlayer, ai0);
                         }
                         if (timer == 70 * 2 && npc.type == NPCID.CultistBoss)
                         {
