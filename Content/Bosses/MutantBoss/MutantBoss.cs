@@ -662,7 +662,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 int maxMemory = WorldSavingSystem.MasochistModeReal ? 12 : 18;
 
-                if (attackCount++ > maxMemory * 1.25) //after doing this many attacks, shorten queue so i can be more random again
+                //after doing this many attacks, shorten queue so i can be more random again
+                //dont clear entire queue, keep the most recent attacks. this way i dont immediately reuse an attack when i refresh
+                if (attackCount++ > maxMemory * 1.25)
                 {
                     attackCount = 0;
                     maxMemory /= 4;
