@@ -145,3 +145,4 @@ regurgitator no longer has x1.5 damage guaranteed crit on full charge, instead p
 fixed devi big ray hitbox, fixed her drifting around during maso bribe
 mutant spins his spear to do okuu and boundary
 mutant now visibly starts spinning his spear whenever he spins it
+sparkling ado graze is kept if you get hit for 1 damage
