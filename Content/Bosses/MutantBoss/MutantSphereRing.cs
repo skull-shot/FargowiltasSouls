@@ -6,6 +6,7 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -39,6 +40,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 480;
             Projectile.alpha = 200;
+            Projectile.hide = true;
             CooldownSlot = ImmunityCooldownID.Bosses;
 
             //dont let others inherit this behaviour
@@ -51,6 +53,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     && FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>())
                     && Main.npc[EModeGlobalNPC.mutantBoss].ai[0] == -5;
             }
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
 
         public override bool CanHitPlayer(Player target)

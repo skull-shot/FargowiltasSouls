@@ -3164,7 +3164,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[3] = Main.rand.NextFloat((float)Math.PI * 2);
                 SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
+                {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, endTime, 2);
+                }
 
                 EdgyBossText(GFBQuote(22));
             }
@@ -3735,19 +3738,23 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void OkuuSpheresP3()
         {
+            int endTime = 360 + 120;
+            if (WorldSavingSystem.MasochistModeReal)
+                endTime += 360;
+
+            int projectileEndtime = endTime - 120;
+
             if (NPC.ai[2] == 0)
             {
                 if (!AliveCheck(player))
                     return;
                 NPC.ai[2] = Main.rand.NextBool() ? -1 : 1;
                 NPC.ai[3] = Main.rand.NextFloat((float)Math.PI * 2);
+                if (FargoSoulsUtil.HostCheck)
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, projectileEndtime, 2);
             }
 
-            int endTime = 360 + 120;
-            if (WorldSavingSystem.MasochistModeReal)
-                endTime += 360;
-
-            if (++NPC.ai[1] > 10 && NPC.ai[3] > 60 && NPC.ai[3] < endTime - 120)
+            if (++NPC.ai[1] > 10 && NPC.ai[3] > 60 && NPC.ai[3] < projectileEndtime)
             {
                 NPC.ai[1] = 0;
                 float rotation = MathHelper.ToRadians(45) * (NPC.ai[3] - 60) / 240 * NPC.ai[2];
@@ -3789,11 +3796,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void BoundaryBulletHellP3()
         {
+            int endTime = 360;
+            if (WorldSavingSystem.MasochistModeReal)
+                endTime += 360;
+
             if (NPC.localAI[0] == 0)
             {
                 if (!AliveCheck(player))
                     return;
                 NPC.localAI[0] = Math.Sign(NPC.Center.X - player.Center.X);
+                if (FargoSoulsUtil.HostCheck)
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, endTime, 2);
             }
 
             if (++NPC.ai[1] > 3)
@@ -3820,9 +3833,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 TryMasoP3Theme();
             }
 
-            int endTime = 360;
-            if (WorldSavingSystem.MasochistModeReal)
-                endTime += 360;
             if (NPC.ai[3] == (int)endTime / 2)
             {
                 EdgyBossText(GFBQuote(30));

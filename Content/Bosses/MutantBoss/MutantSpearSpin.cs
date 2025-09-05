@@ -5,6 +5,7 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -49,6 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[1] = Main.rand.NextBool() ? -1 : 1;
                 Projectile.timeLeft = (int)Projectile.ai[1];
+                Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
             }
 
             NPC mutant = Main.npc[(int)Projectile.ai[0]];
@@ -57,11 +59,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.Center = mutant.Center;
                 direction = mutant.direction;
 
-                if (mutant.ai[0] == 4 || mutant.ai[0] == 13 || mutant.ai[0] == 21)
+                float[] allowedStates = {
+                    4,
+                    13,
+                    21,
+                    40,
+                    -3,
+                    -4,
+                };
+                if (allowedStates.Contains(mutant.ai[0]))
                 {
-                    Projectile.rotation += (float)Math.PI / 6.85f * Projectile.localAI[1];
+                    Projectile.rotation += (float)Math.PI / 6.85f * Projectile.localAI[1] * Math.Min(1f, ++Projectile.localAI[2] / 90);
 
-                    if (Variant != 1 && ++Projectile.localAI[0] > 8)
+                    if (Variant == 0 && ++Projectile.localAI[0] > 8)
                     {
                         Projectile.localAI[0] = 0;
                         if (FargoSoulsUtil.HostCheck && Projectile.Distance(Main.player[mutant.target].Center) > 360)
@@ -205,7 +215,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
 
-            if (Projectile.ai[1] > 0)
+            if (Variant < 2 && Projectile.ai[1] > 0)
             {
                 Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpearAimGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                 float modifier = Projectile.timeLeft / Projectile.ai[1];

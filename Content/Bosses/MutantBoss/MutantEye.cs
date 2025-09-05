@@ -5,6 +5,7 @@ using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -39,11 +40,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.timeLeft = 300;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.hide = true;
             Projectile.alpha = 0;
             CooldownSlot = ImmunityCooldownID.Bosses;
 
             //dont let others inherit this behaviour
             DieOutsideArena = Projectile.type == ModContent.ProjectileType<MutantEye>();
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
         }
 
         private int ritualID = -1;
