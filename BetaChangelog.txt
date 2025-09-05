@@ -140,3 +140,4 @@ some abom flockos are now ice queens (visual change only)
 cultist pillar moves faster, explodes into more fragments (even more in maso)
 cultist spawn anim is invul, longer when spawned near tablet
 fixed cultist having ...9999 hp
+fishron spectral sharks have uncanny good hitboxes (reused mothron zenith/mutant spear hitbox, much more sprite-accurate)
