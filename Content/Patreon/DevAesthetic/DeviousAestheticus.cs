@@ -15,18 +15,18 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
 
         public override void SetDefaults()
         {
-            Item.damage = 270;
+            Item.damage = 90;
             Item.DamageType = DamageClass.Summon;
             Item.mana = 10;
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
+            Item.useTime = 16;
+            Item.useAnimation = 16;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 1;
             Item.value = Item.sellPrice(gold: 20);
-            Item.rare = ItemRarityID.Green;
-            Item.UseSound = SoundID.Item1;
+            Item.rare = ItemRarityID.Red;
+            Item.UseSound = SoundID.Item156;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<DevRocket>();
             Item.shootSpeed = 12f;
@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            damage = (int)(damage / 4.0 * 1.3);
+            //damage = (int)(damage / 4.0 * 1.3);
 
             float minionSlotsUsed = 0;
             for (int i = 0; i < Main.maxProjectiles; i++)
