@@ -2,9 +2,12 @@ using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -45,6 +48,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override bool? CanDamage()
         {
             return Projectile.ai[0] != 0;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            if (Projectile.ai[0] != 0)
+            {
+                Projectile.penetrate = 1;
+                Projectile.maxPenetrate = 1;
+            }
         }
 
         public override void AI()
@@ -111,6 +123,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
             else
             {
+                Projectile.penetrate = 1;
+                Projectile.maxPenetrate = 1;
+
                 if (!Projectile.tileCollide && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
                     Projectile.tileCollide = true;
                 Projectile.ignoreWater = false;
@@ -152,18 +167,19 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             Projectile.rotation += (float)Math.PI / 2;
 
-            Projectile.damage = (int)(Projectile.ai[1] * Projectile.scale * 3);
+            if (Projectile.ai[2] == 0)
+                Projectile.damage = (int)(Projectile.ai[1] * Projectile.scale * 3);
             if (Projectile.scale < 5f / 2f)
                 Projectile.damage /= 2;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Projectile.scale >= 5)
+            /* if (Projectile.scale >= 5)
             {
                 modifiers.SourceDamage *= 1.5f;
                 modifiers.SetCrit();
-            }
+            } */
         }
 
         public override void OnKill(int timeleft)
@@ -177,6 +193,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         Main.dust[d].noGravity = true;
                     Main.dust[d].velocity *= Main.rand.NextFloat(12f, 24f);
                     Main.dust[d].position = Projectile.Center;
+                }
+
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    int totalDamageToDo = (int)(Projectile.damage * 1.5);
+                    int max = 16;
+                    int damagePerHungry = totalDamageToDo / max;
+                    for (int i = 0; i < max; i++)
+                    {
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 20f * Vector2.UnitX.RotatedBy(MathHelper.TwoPi / max * i), Projectile.type, damagePerHungry, Projectile.knockBack / max, Projectile.owner, 1, 0, 1);
+                    }
                 }
             }
 
@@ -220,6 +247,37 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (Projectile.velocity.Y != oldVelocity.Y)
                 Projectile.velocity.Y = -oldVelocity.Y;
 
+            return false;
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
+            int num156 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
+            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Vector2 origin2 = rectangle.Size() / 2f;
+
+            Color color = Projectile.GetAlpha(lightColor);
+
+            SpriteEffects effects = SpriteEffects.None;
+
+            if (Projectile.scale >= 5f)
+            {
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 8f;
+                    Color glowColor = Color.OrangeRed;
+                    float opacity = 1f;
+                    glowColor *= opacity;
+                    float scale = Projectile.scale * Main.rand.NextFloat(1f, 1.05f);
+                    Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, glowColor, Projectile.rotation, origin2, scale, effects, 0);
+                }
+                Main.spriteBatch.ResetToDefault();
+            }
+
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, color, Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;
         }
     }
