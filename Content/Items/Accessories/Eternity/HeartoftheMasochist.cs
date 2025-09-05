@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Face, EquipType.Front, EquipType.Back)]
+    [AutoloadEquip(EquipType.Front, EquipType.Back)]
     public class HeartoftheMasochist : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
