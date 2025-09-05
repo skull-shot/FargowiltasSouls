@@ -150,7 +150,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
-            if (Player.chaosState)
+            if (Player.chaosState && EmodeItemBalance.HasEmodeChange(Player, ItemID.RodofDiscord))
             {
                 Player.statDefense *= 0.6f;
                 Player.endurance -= 0.4f;
