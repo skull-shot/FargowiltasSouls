@@ -2130,13 +2130,13 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 int endTime = 1050;
                 if (WorldSavingSystem.MasochistModeReal)
                 {
-                    endTime += 180;
-
                     if (Timer >= 960 && Timer <= endTime && Timer % 10 == 0 && FargoSoulsUtil.HostCheck)
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(player.Center).RotatedByRandom(MathHelper.ToRadians(45)), ModContent.ProjectileType<DeviBigDeathray>(),
                             FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, NPC.whoAmI);
                     }
+
+                    endTime += 180;
                 }
 
                 if (++Timer > endTime)

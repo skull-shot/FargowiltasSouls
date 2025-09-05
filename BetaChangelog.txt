@@ -142,3 +142,4 @@ cultist spawn anim is invul, longer when spawned near tablet
 fixed cultist having ...9999 hp
 fishron spectral sharks have uncanny good hitboxes (reused mothron zenith/mutant spear hitbox, much more sprite-accurate)
 regurgitator no longer has x1.5 damage guaranteed crit on full charge, instead produces a bunch of small homing hungries
+fixed devi big ray hitbox, fixed her drifting around during maso bribe

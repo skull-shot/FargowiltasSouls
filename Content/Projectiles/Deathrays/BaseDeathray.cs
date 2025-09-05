@@ -15,6 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         protected readonly float hitboxModifier;
         protected readonly int grazeCD;
         protected readonly TextureSheeting sheeting;
+        protected readonly int rootHitboxRadius;
 
         //by default, real hitbox is slightly more than the "white" of a vanilla ray
         //remember that the value passed into function is total width, i.e. on each side the distance is only half the width
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             Vertical
         }
 
-        protected BaseDeathray(float maxTime, float transparency = 0f, float hitboxModifier = 1f, int drawDistance = 3000, int grazeCD = 15, TextureSheeting sheeting = TextureSheeting.Horizontal)
+        protected BaseDeathray(float maxTime, float transparency = 0f, float hitboxModifier = 1f, int drawDistance = 3000, int grazeCD = 15, TextureSheeting sheeting = TextureSheeting.Horizontal, int rootHitboxRadius = 0)
         {
             this.maxTime = maxTime;
             this.transparency = transparency;
@@ -34,6 +35,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             this.drawDistance = drawDistance;
             this.grazeCD = grazeCD;
             this.sheeting = sheeting;
+            this.rootHitboxRadius = rootHitboxRadius;
         }
 
         public override void SetStaticDefaults()
@@ -151,6 +153,10 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             if (projHitbox.Intersects(targetHitbox))
+            {
+                return true;
+            }
+            if (Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < rootHitboxRadius)
             {
                 return true;
             }
