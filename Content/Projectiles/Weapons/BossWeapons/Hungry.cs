@@ -43,6 +43,25 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             modifier = reader.ReadSingle();
         }*/
 
+        bool spawned;
+
+        public override bool PreAI()
+        {
+            if (!spawned)
+            {
+                spawned = true;
+                if (Projectile.ai[2] == 1)
+                {
+                    Projectile.usesIDStaticNPCImmunity = false;
+                    Projectile.idStaticNPCHitCooldown = 0;
+                    Projectile.penetrate = 1;
+                    Projectile.maxPenetrate = 1;
+                }
+            }
+
+            return base.PreAI();
+        }
+
         public override void AI()
         {
             /*if (Projectile.localAI[0] == 0)
@@ -85,11 +104,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 Projectile.velocity.Y * 0.2f, 100, default, 2f);
             Main.dust[dustId3].noGravity = true;
 
-            const int aislotHomingCooldown = 0;
-            const int homingDelay = 15;
+            const int aislotHomingCooldown = 1;
+            int homingDelay = Projectile.ai[2] == 0 ? 15 : 30;
             const float desiredFlySpeedInPixelsPerFrame = 60;
 
-            float amountOfFramesToLerpBy = 40; //120 - 33 * modifier; // minimum of 1, please keep in full numbers even though it's a float!
+            float amountOfFramesToLerpBy = Projectile.ai[2] == 0 ? 20 : 40; // minimum of 1, please keep in full numbers even though it's a float!
 
             Projectile.ai[aislotHomingCooldown]++;
             if (Projectile.ai[aislotHomingCooldown] > homingDelay)

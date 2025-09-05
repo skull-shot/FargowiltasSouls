@@ -47,9 +47,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override bool? CanDamage()
         {
-            if (Projectile.ai[2] > 0 && Projectile.ai[0] < splitDelay)
-                return false;
-
             return Projectile.ai[0] != 0;
         }
 
@@ -61,8 +58,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.maxPenetrate = 1;
             }
         }
-
-        const int splitDelay = 30;
 
         public override void AI()
         {
@@ -136,7 +131,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.ignoreWater = false;
 
                 const int aislotHomingCooldown = 0;
-                int homingDelay = Projectile.ai[2] == 0 ? 5 : splitDelay;
+                int homingDelay = 5;
                 const float desiredFlySpeedInPixelsPerFrame = 60;
                 const float amountOfFramesToLerpBy = 10; // minimum of 1, please keep in full numbers even though it's a float!
 
@@ -172,8 +167,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             Projectile.rotation += (float)Math.PI / 2;
 
-            if (Projectile.ai[2] == 0)
-                Projectile.damage = (int)(Projectile.ai[1] * Projectile.scale * 3);
             if (Projectile.scale < 5f / 2f)
                 Projectile.damage /= 2;
         }
@@ -207,7 +200,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     int damagePerHungry = totalDamageToDo / max;
                     for (int i = 0; i < max; i++)
                     {
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 20f * Vector2.UnitX.RotatedBy(MathHelper.TwoPi / max * i), Projectile.type, damagePerHungry, Projectile.knockBack / max, Projectile.owner, 1, 0, 1);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 20f * Vector2.UnitX.RotatedBy(MathHelper.TwoPi / max * i), ModContent.ProjectileType<Hungry>(), damagePerHungry, Projectile.knockBack / max, Projectile.owner, 0, 0, 1);
                     }
                 }
             }
