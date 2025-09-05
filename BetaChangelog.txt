@@ -135,3 +135,4 @@ fixed breathing in space
 adjusted how mutant spawns deer hands
 adjusted deer hand visuals
 blood drops dont spawn during boss fights including eow
+some abom flockos are now ice queens (visual change only)
