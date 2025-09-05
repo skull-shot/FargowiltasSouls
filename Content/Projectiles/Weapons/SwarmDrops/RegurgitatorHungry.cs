@@ -47,6 +47,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override bool? CanDamage()
         {
+            if (Projectile.ai[2] > 0 && Projectile.ai[0] < splitDelay)
+                return false;
+
             return Projectile.ai[0] != 0;
         }
 
@@ -58,6 +61,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.maxPenetrate = 1;
             }
         }
+
+        const int splitDelay = 30;
 
         public override void AI()
         {
@@ -131,7 +136,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.ignoreWater = false;
 
                 const int aislotHomingCooldown = 0;
-                const int homingDelay = 5;
+                int homingDelay = Projectile.ai[2] == 0 ? 5 : splitDelay;
                 const float desiredFlySpeedInPixelsPerFrame = 60;
                 const float amountOfFramesToLerpBy = 10; // minimum of 1, please keep in full numbers even though it's a float!
 
