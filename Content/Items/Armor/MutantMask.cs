@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Items.Armor
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 4));
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = false;
         }
 
         public override void SetDefaults()

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,7 +16,7 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 24;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
-            ProjectileID.Sets.MinionShot[Projectile.type] = true;
+            //ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -81,17 +82,29 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         }
 
+        public override bool? CanDamage()
+        {
+            if (Projectile.localAI[1] == 2 && Projectile.timeLeft >= (60 * (Projectile.extraUpdates + 1)))
+                return false;
+            return base.CanDamage();
+        }
+
         public override void OnKill(int timeLeft)
         {
-            /*if (Projectile.owner == Main.myPlayer && Projectile.localAI[1] == 1)
+            SoundEngine.PlaySound(SoundID.DD2_KoboldExplosion with {MaxInstances = 2, Volume = 0.5f}, Projectile.Center);
+            if (Projectile.owner == Main.myPlayer && Projectile.localAI[1] == 1)
             {
-                Projectile[] projs = FargoSoulsUtil.XWay(Main.rand.Next(3, 7), Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.type, 6, Projectile.damage, Projectile.knockBack);
+                Projectile[] projs = FargoSoulsUtil.XWay(Main.rand.Next(1, 3), Projectile.GetSource_FromThis(), Projectile.Center, Projectile.type, 6, Projectile.damage, Projectile.knockBack);
                 foreach (Projectile proj in projs)
                 {
                     if (proj != null)
+                    {
+                        proj.velocity = proj.velocity.RotatedByRandom(MathHelper.Pi);
                         proj.localAI[1] = 2;
+                        proj.damage /= 2;
+                    }
                 }
-            }*/
+            }
 
             Color dustColor = color;
             dustColor.A = 100;
@@ -114,8 +127,7 @@ namespace FargowiltasSouls.Content.Patreon.DevAesthetic
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.timeLeft = 0;
-            if (Projectile.localAI[1] == 0)
+            if (Projectile.localAI[1] == 0 && Main.rand.NextBool(2))
                 Projectile.localAI[1] = 1;
             //target.immune[Projectile.owner] = 3;
         }

@@ -23,6 +23,7 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Core;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -1230,7 +1231,7 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             if (projectile.owner == player.whoAmI)
             {
-                if (FancySwings.Contains(projectile.type))
+                if (FancySwings.Contains(projectile.type) && SoulConfig.Instance.WeaponReworks)
                 {
                     if (player.FargoSouls().swingDirection != player.direction)
                     {

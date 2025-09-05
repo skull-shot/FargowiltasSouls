@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.Patreon
                     AddPatreonDrop(
                         () => SoulConfig.Instance.PatreonDevious && WorldSavingSystem.EternityMode,
                         ModContent.ItemType<DeviousAestheticus>(),
-                        20,
+                        10,
                         "PatreonEMode");
                     break;
 
