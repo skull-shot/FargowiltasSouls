@@ -814,7 +814,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 case 6: //flocko swarm (p2 shoots ice waves horizontally after)
                     if (Phase2Check())
                         break;
-                    NPC.velocity *= 0.99f;
+                    NPC.velocity *= 0.9f;
                     if (NPC.ai[2] == 0)
                     {
 
