@@ -132,3 +132,5 @@ terra champ S wave also makes extra lightning portals
 put accel startup on terra fireballs
 maso devi mega rays you for bribing her
 fixed breathing in space
+adjusted how mutant spawns deer hands
+adjusted deer hand visuals
