@@ -343,7 +343,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 case 36: SlimeRain(); break;
 
                 case 37: PrepareFishron2(); break;
-                case 38: goto case 30; //spawn fishrons
+                case 38: goto case 30; //spawn shadow hands
 
                 case 39: PrepareOkuuSpheresP2(); break;
                 case 40: OkuuSpheresP2(); break;
@@ -2584,9 +2584,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     NPC.ai[2] = Main.rand.NextFromList(0, 1, 2, 3);
                     SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost, player.Center);
                 }
-                const int handDelay = 1;
+                const int handDelay = 4;
                 float hands = WorldSavingSystem.MasochistModeReal ? 8 : 8;
-                if (NPC.ai[1] <= hands)
+                if (NPC.ai[1] <= hands * handDelay && NPC.ai[1] % handDelay == 0)
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {
@@ -2595,9 +2595,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         {
                             float gap = MathHelper.TwoPi * 0.25f;
                             float baseAngle = MathHelper.PiOver4 + j * gap / 2;
-                            baseAngle += j * MathHelper.PiOver2 * NPC.ai[2];
+                            baseAngle += MathHelper.PiOver2 * NPC.ai[2];
                             float coverage = MathHelper.Pi - gap;
-                            float angle = baseAngle + j * coverage * NPC.ai[1] / hands;
+                            float angle = baseAngle + j * coverage * NPC.ai[1] / (hands * handDelay);
                             Vector2 offset = angle.ToRotationVector2() * 550f;
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, projType, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, offset.X, offset.Y);
                         }
