@@ -107,8 +107,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 return;
             }
 
-            Projectile.hide = false;
-
             if (SpawnInTimer == 0)
             {
                 for (int i = 0; i < gunRotations.Length; i++)
