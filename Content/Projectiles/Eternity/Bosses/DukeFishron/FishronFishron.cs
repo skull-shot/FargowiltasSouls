@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float dummy = 0f;
-            float hitboxTotalLength = 110;
+            float hitboxTotalLength = 100;
             Vector2 offset = hitboxTotalLength / 2 * Projectile.scale * Projectile.rotation.ToRotationVector2();
             Vector2 end = Projectile.Center - offset;
             Vector2 tip = Projectile.Center + offset;
