@@ -29,6 +29,7 @@ using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
@@ -70,6 +71,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public float AuraScale = 1f;
 
         public ref float AttackChoice => ref NPC.ai[0];
+        public ref float PhaseState => ref NPC.localAI[3];
+
         public Vector2 AuraCenter = Vector2.Zero;
         public bool ShouldMoveArena = true;
 
@@ -345,8 +348,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 case 37: PrepareFishron2(); break;
                 case 38: goto case 30; //spawn shadow hands
 
-                case 39: PrepareOkuuSpheresP2(); break;
-                case 40: OkuuSpheresP2(); break;
+                case 39: PrepareHelixSpheresP2(); break;
+                case 40: HelixSpheresP2(); break;
 
                 case 41: SpearTossDirectP2(); break;
 
@@ -373,7 +376,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 case -2: VoidRaysP3(); break;
 
-                case -3: OkuuSpheresP3(); break;
+                case -3: HelixSpheresP3(); break;
 
                 case -4: BoundaryBulletHellP3(); break;
 
@@ -441,7 +444,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void PostAI()
         {
-            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = WorldSavingSystem.MasochistModeReal || NPC.ai[0] < 0;
+            NPC.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = WorldSavingSystem.MasochistModeReal || AttackChoice < 0;
         }
 
         #region helper functions
@@ -472,7 +475,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.dayTime = false;
             Main.time = 16200; //midnight
 
-            if (NPC.localAI[3] == 0)
+            if (PhaseState == 0)
             {
                 NPC.TargetClosest();
                 if (NPC.timeLeft < 30)
@@ -482,7 +485,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 if (NPC.Distance(Main.player[NPC.target].Center) < 1500)
                 {
-                    NPC.localAI[3] = 1;
+                    PhaseState = 1;
                     SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                     EdgyBossText(GFBQuote(2));
                     if (FargoSoulsUtil.HostCheck)
@@ -494,7 +497,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     }
                 }
             }
-            else if (NPC.localAI[3] == 1)
+            else if (PhaseState == 1)
             {
                 ShouldDrawAura = true;
                 // -1 means no dust is drawn, as it looks ugly.
@@ -616,7 +619,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (WorldSavingSystem.EternityMode)
             {
                 //become more likely to use randoms as life decreases
-                bool useRandomizer = NPC.localAI[3] >= 3 && (WorldSavingSystem.MasochistModeReal || Main.rand.NextFloat(0.8f) + 0.2f > (float)Math.Pow((float)NPC.life / NPC.lifeMax, 2));
+                bool useRandomizer = PhaseState >= 3 && (WorldSavingSystem.MasochistModeReal || Main.rand.NextFloat(0.8f) + 0.2f > (float)Math.Pow((float)NPC.life / NPC.lifeMax, 2));
 
                 if (FargoSoulsUtil.HostCheck)
                 {
@@ -758,7 +761,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         bool AliveCheck(Player p, bool forceDespawn = false)
         {
-            if (WorldSavingSystem.SwarmActive || forceDespawn || (!p.active || p.dead || Vector2.Distance(NPC.Center, p.Center) > 3000f) && NPC.localAI[3] > 0)
+            if (WorldSavingSystem.SwarmActive || forceDespawn || (!p.active || p.dead || Vector2.Distance(NPC.Center, p.Center) > 3000f) && PhaseState > 0)
             {
                 NPC.TargetClosest();
                 p = Main.player[NPC.target];
@@ -991,7 +994,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             targetPos.X += 500 * (NPC.Center.X < targetPos.X ? -1 : 1);
             if (NPC.Distance(targetPos) > 50)
             {
-                Movement(targetPos, NPC.localAI[3] > 0 ? 0.5f : 2f, true, NPC.localAI[3] > 0);
+                Movement(targetPos, PhaseState > 0 ? 0.5f : 2f, true, PhaseState > 0);
             }
 
             if (NPC.ai[3] == 0)
@@ -1000,7 +1003,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.netUpdate = true;
             }
 
-            if (NPC.localAI[3] > 0) //dont begin proper ai timer until in range to begin fight
+            if (PhaseState > 0) //dont begin proper ai timer until in range to begin fight
                 NPC.ai[1]++;
 
             if (NPC.ai[1] < 145) //track player up until just before attack
@@ -1183,7 +1186,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 targetPos.X += 200 * Math.Sign(NPC.Center.X - player.Center.X);
             if (NPC.Distance(targetPos) > 50)
             {
-                Movement(targetPos, NPC.localAI[3] > 0 ? 0.5f : 2f, true, NPC.localAI[3] > 0);
+                Movement(targetPos, PhaseState > 0 ? 0.5f : 2f, true, PhaseState > 0);
             }
 
             NPC.ai[1]++;
@@ -1698,7 +1701,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
             else if (NPC.ai[1] > 150)
             {
-                NPC.localAI[3] = 3;
+                PhaseState = 3;
             }
 
             if (++NPC.ai[1] > 270)
@@ -2548,7 +2551,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         void SpawnFishrons()
         {
             NPC.velocity *= 0.97f;
-            if (NPC.ai[0] == 30) // fishron variant
+            if (AttackChoice == 30) // fishron variant
             {
                 if (NPC.ai[1] == 0)
                 {
@@ -3127,7 +3130,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
         }
 
-        void PrepareOkuuSpheresP2()
+        void PrepareHelixSpheresP2()
         {
             if (!AliveCheck(player))
                 return;
@@ -3146,36 +3149,50 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
         }
 
-        void OkuuSpheresP2()
+        void HelixSpheresP2()
         {
             NPC.velocity = Vector2.Zero;
 
             int endTime = 420 + (int)(300 * endTimeVariance);
-
-            if (++NPC.ai[1] > 10 && NPC.ai[3] > 60 && NPC.ai[3] < endTime - 60)
-            {
-                NPC.ai[1] = 0;
-                float rotation = MathHelper.ToRadians(60) * (NPC.ai[3] - 45) / 240 * NPC.ai[2];
-                int max = WorldSavingSystem.MasochistModeReal ? 10 : 9;
-                float speed = WorldSavingSystem.MasochistModeReal ? 11f : 10f;
-                SpawnSphereRing(max, speed, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), -1f, rotation);
-                SpawnSphereRing(max, speed, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 1f, rotation);
-
-
-            }
+            int attackEndTime = endTime - 60;
 
             if (NPC.ai[2] == 0)
             {
                 NPC.ai[2] = Main.rand.NextBool() ? -1 : 1;
-                NPC.ai[3] = Main.rand.NextFloat((float)Math.PI * 2);
+                //NPC.ai[3] = Main.rand.NextFloat((float)Math.PI * 2);
                 SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -2);
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, endTime, 2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, attackEndTime, 2);
                 }
 
                 EdgyBossText(GFBQuote(22));
+            }
+
+            const int startupDelay = 60;
+            if (++NPC.ai[1] > 6 && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
+            {
+                NPC.ai[1] = 0;
+                const int max = 12;
+                const float speed = 7f;
+
+                SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    for (int j = -1; j <= 1; j += 2)
+                    {
+                        for (int i = 0; i < max; i++)
+                        {
+                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 150 : 90;
+                            float rotation = MathHelper.ToRadians(totalDegreesToRotate) / 300 * NPC.ai[2];
+                            float spawnRotation = rotation * NPC.ai[3];
+                            Vector2 vel = speed * spawnRotation.ToRotationVector2().RotatedBy(MathHelper.TwoPi / max * i);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantSphereHelix>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, j, rotation);
+                        }
+                    }
+                }
             }
 
             if (++NPC.ai[3] > endTime)
@@ -3585,7 +3602,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.Distance(targetPos) > 200) //faster if offscreen
                 Movement(targetPos, 0.3f);
 
-            if (++NPC.ai[1] > 60 || NPC.Distance(targetPos) < 200 && NPC.ai[1] > (NPC.localAI[3] >= 3 ? 15 : 30))
+            if (++NPC.ai[1] > 60 || NPC.Distance(targetPos) < 200 && NPC.ai[1] > (PhaseState >= 3 ? 15 : 30))
             {
                 /*EModeGlobalNPC.PrintAI(npc);
                 string output = "";
@@ -3613,7 +3630,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             bool retval = true;
 
-            NPC.localAI[3] = 3;
+            PhaseState = 3;
 
             EModeSpecialEffects();
 
@@ -3742,7 +3759,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC.velocity = Vector2.Zero;
         }
 
-        void OkuuSpheresP3()
+        void HelixSpheresP3()
         {
             int endTime = 360 + 120;
             if (WorldSavingSystem.MasochistModeReal)
@@ -3760,14 +3777,41 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, projectileEndtime, 2);
             }
 
-            if (++NPC.ai[1] > 10 && NPC.ai[3] > 60 && NPC.ai[3] < projectileEndtime)
+            if (NPC.ai[2] == 0)
+            {
+                NPC.ai[2] = Main.rand.NextBool() ? -1 : 1;
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, projectileEndtime, 2);
+                }
+
+                EdgyBossText(GFBQuote(22));
+            }
+
+            const int startupDelay = 60;
+            if (++NPC.ai[1] > 6 && NPC.ai[3] > startupDelay && NPC.ai[3] < projectileEndtime)
             {
                 NPC.ai[1] = 0;
-                float rotation = MathHelper.ToRadians(45) * (NPC.ai[3] - 60) / 240 * NPC.ai[2];
-                int max = WorldSavingSystem.MasochistModeReal ? 11 : 10;
-                float speed = WorldSavingSystem.MasochistModeReal ? 11f : 10f;
-                SpawnSphereRing(max, speed, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), -0.75f, rotation);
-                SpawnSphereRing(max, speed, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0.75f, rotation);
+                const int max = 12;
+                const float speed = 7f;
+
+                SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
+
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    for (int j = -1; j <= 1; j += 2)
+                    {
+                        for (int i = 0; i < max; i++)
+                        {
+                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 180 : 90;
+                            float rotation = MathHelper.ToRadians(totalDegreesToRotate) / 300 * NPC.ai[2];
+                            float spawnRotation = rotation * NPC.ai[3];
+                            Vector2 vel = speed * spawnRotation.ToRotationVector2().RotatedBy(MathHelper.TwoPi / max * i);
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantSphereHelix>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, j, rotation);
+                        }
+                    }
+                }
             }
 
             if (NPC.ai[3] < 30)

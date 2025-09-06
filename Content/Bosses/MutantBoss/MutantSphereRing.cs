@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             return target.hurtCooldowns[1] == 0 || WorldSavingSystem.MasochistModeReal;
         }
 
-        private int ritualID = -1;
+        protected int ritualID = -1;
 
         float originalSpeed;
         bool spawned;
