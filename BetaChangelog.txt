@@ -146,3 +146,4 @@ fixed devi big ray hitbox, fixed her drifting around during maso bribe
 mutant spins his spear to do okuu and boundary
 mutant now visibly starts spinning his spear whenever he spins it
 sparkling ado graze is kept if you get hit for 1 damage
+vortex set nerf, stealth has cooldown

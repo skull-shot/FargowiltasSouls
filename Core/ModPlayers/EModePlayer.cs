@@ -186,6 +186,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 CrossNecklaceTimer = 0;
             }
+
+            if (Player.vortexStealthActive && !Player.HasBuff(ModContent.BuffType<VortexStealthCDBuff>()))
+            {
+                Player.AddBuff(ModContent.BuffType<VortexStealthCDBuff>(), VortexStealthCDBuff.STEALTH_UPTIME + VortexStealthCDBuff.STEALTH_DOWNTIME);
+            }
         }
 
         private void HandleTimersAlways()

@@ -732,3 +732,8 @@ DaybrokenBuff: {
 	DisplayName: Заря
 	Description: Испепеление солнечными лучами
 }
+
+VortexStealthCDBuff: {
+	// DisplayName: Vortex Stealth Cooldown
+	// Description: Cannot be stealthy again yet
+}
