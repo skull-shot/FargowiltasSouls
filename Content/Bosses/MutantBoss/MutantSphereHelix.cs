@@ -20,11 +20,21 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSphere_April" :
             "Terraria/Images/Projectile_454";
 
+        protected override float GlowLerpToClear => 0.9f;
+
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+        }
+
         public override void SetDefaults()
         {
             base.SetDefaults();
 
             DieOutsideArena = true;
+            Projectile.width = Projectile.height = 30;
         }
 
         ref float MutantID => ref Projectile.ai[0];
@@ -49,9 +59,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (Projectile.velocity != Vector2.Zero)
             {
                 const float maxExpectedDistance = 1200;
-                const float numberOfUndulations = 2;
-                const float baseAmp = 80f;
-                const float ampBonus = 1.75f;
+                float numberOfUndulations = WorldSavingSystem.MasochistModeReal ? 1.6f : 2f;
+                float baseAmp = WorldSavingSystem.MasochistModeReal ? 120f : 80f;
+                float ampBonus = WorldSavingSystem.MasochistModeReal ? 4f : 1.75f;
 
                 // need to undo the previous tick's undulation so that we're back along the original "line" of the real velocity
                 float oldWaveAmp = baseAmp * (1f + ampBonus * Distance / maxExpectedDistance);

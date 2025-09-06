@@ -3175,7 +3175,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.ai[1] = 0;
                 const int max = 12;
-                const float speed = 7f;
+                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 6f;
 
                 SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
 
