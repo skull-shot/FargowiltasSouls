@@ -21,14 +21,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 ModContent.ItemType<ValhallaKnightEnchant>()
             ];
         }
-        public override void UpdateInventory(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             SetActive(player);
@@ -38,7 +30,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // gladi
             player.AddEffect<GladiatorBanner>(Item);
             // gold
-            player.AddEffect<GoldToPiggy>(Item);
             player.AddEffect<GoldEffect>(Item);
             player.AddEffect<GoldKeyEffect>(Item);
             // platinum
