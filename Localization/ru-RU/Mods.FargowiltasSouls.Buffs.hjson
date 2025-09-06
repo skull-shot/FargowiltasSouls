@@ -734,6 +734,6 @@ DaybrokenBuff: {
 }
 
 VortexStealthCDBuff: {
-	// DisplayName: Vortex Stealth Cooldown
-	// Description: Cannot be stealthy again yet
+	DisplayName: Перезарядка скрытности вихря
+	Description: Вы пока не можете войти в режим скрытности
 }
