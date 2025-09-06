@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Prefixes;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
@@ -25,6 +26,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+
+            PrefixLegacy.ItemSets.ItemsThatCanHaveLegendary2[Type] = true;
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
