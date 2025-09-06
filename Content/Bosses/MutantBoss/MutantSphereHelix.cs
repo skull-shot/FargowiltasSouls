@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         ref float Flip => ref Projectile.ai[1];
         ref float FullRotationIncrement => ref Projectile.ai[2];
         ref float Distance => ref Projectile.localAI[0];
+        ref float OriginX => ref Projectile.localAI[1];
+        ref float OriginY => ref Projectile.localAI[2];
 
         public override void AI()
         {
@@ -59,8 +61,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 if (Distance == 0) //store because mutant can move before attack ends
                 {
-                    Projectile.localAI[1] = Projectile.Center.X;
-                    Projectile.localAI[2] = Projectile.Center.Y;
+                    OriginX = Projectile.Center.X;
+                    OriginY = Projectile.Center.Y;
                 }
                 else
                 {
@@ -74,7 +76,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     }*/
 
                     //make the entire pattern rotate around mutant
-                    Vector2 mutantOriginalPos = new Vector2(Projectile.localAI[1], Projectile.localAI[2]);
+                    Vector2 mutantOriginalPos = new Vector2(OriginX, OriginY);
                     Vector2 mutantToMe = Projectile.Center - mutantOriginalPos;
                     Projectile.Center = mutantOriginalPos + mutantToMe.RotatedBy(FullRotationIncrement);
                     Projectile.velocity = mutantToMe.SafeNormalize(Vector2.Zero) * Projectile.velocity.Length();
