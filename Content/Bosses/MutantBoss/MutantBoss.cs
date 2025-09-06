@@ -3171,7 +3171,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             const int startupDelay = 60;
-            if (++NPC.ai[1] > 6 && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
+            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 8;
+            if (++NPC.ai[1] > maxTime && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
             {
                 NPC.ai[1] = 0;
                 const int max = 12;
@@ -3194,6 +3195,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     }
                 }
             }
+
+            //Main.NewText(Main.projectile.Count(p => p.active));
 
             if (++NPC.ai[3] > endTime)
             {
@@ -3765,7 +3768,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (WorldSavingSystem.MasochistModeReal)
                 endTime += 360;
 
-            int projectileEndtime = endTime - 120;
+            int attackEndTime = endTime - 120;
 
             if (NPC.ai[2] == 0)
             {
@@ -3774,7 +3777,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[2] = Main.rand.NextBool() ? -1 : 1;
                 NPC.ai[3] = Main.rand.NextFloat((float)Math.PI * 2);
                 if (FargoSoulsUtil.HostCheck)
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, projectileEndtime, 2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, attackEndTime, 2);
             }
 
             if (NPC.ai[2] == 0)
@@ -3783,18 +3786,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -2);
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, projectileEndtime, 2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, attackEndTime, 2);
                 }
 
                 EdgyBossText(GFBQuote(22));
             }
 
             const int startupDelay = 60;
-            if (++NPC.ai[1] > 6 && NPC.ai[3] > startupDelay && NPC.ai[3] < projectileEndtime)
+            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 8;
+            if (++NPC.ai[1] > maxTime && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
             {
                 NPC.ai[1] = 0;
                 const int max = 12;
-                const float speed = 7f;
+                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 6f;
 
                 SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
 
@@ -3804,7 +3808,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         for (int i = 0; i < max; i++)
                         {
-                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 180 : 90;
+                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 150 : 90;
                             float rotation = MathHelper.ToRadians(totalDegreesToRotate) / 300 * NPC.ai[2];
                             float spawnRotation = rotation * NPC.ai[3];
                             Vector2 vel = speed * spawnRotation.ToRotationVector2().RotatedBy(MathHelper.TwoPi / max * i);
