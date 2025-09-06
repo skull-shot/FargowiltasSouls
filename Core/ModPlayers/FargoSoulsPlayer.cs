@@ -494,7 +494,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Stunned = false;
             HasJungleRose = false;
             HaveCheckedAttackSpeed = false;
-            BoxofGizmos = false;
+            BoxofGizmos = null;
             OxygenTank = false;
             //IronEnchantShield = false;
             WizardedItem = null;

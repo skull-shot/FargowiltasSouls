@@ -759,6 +759,8 @@ BoxofGizmos: {
 		敌怪在夜晚会发光
 		使非武器物品获得自动使用的效果
 		'''
+	// Contains: "[c/00FFFF:Contains:]"
+	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
 }
 
 UniverseCore: {
@@ -904,7 +906,6 @@ WillForce: {
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		“矢志不渝”
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] 拾取钱币时自动将钱币存储进猪猪存钱罐"
 }
 
 AbominableWand: {

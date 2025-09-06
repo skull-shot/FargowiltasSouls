@@ -164,3 +164,5 @@ mutant eyes have one (1) aura in performance mode (visibility is hurting without
 performance mode applies to mutant spheres
 mutant spear telegraphs have power sucky in animation to be more obvious
 gold to piggy moved from gold ench to security wallet
+penetrator can ACTUALLY get legendary for real this time
+box of gizmos can now store any item with a passive effect and will give those passive effects

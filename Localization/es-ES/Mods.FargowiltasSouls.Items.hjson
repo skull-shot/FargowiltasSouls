@@ -735,6 +735,9 @@ BoxofGizmos: {
 		Stand still to expose nearby treasure and enemies
 		Enemies emit light at night
 		Grants autofire to non-weapon items
+		Use with right click to box up accessories with passive effects in your inventory
+		Boxed accessories continue to grant their passive effects
+		Boxed accessories can be unboxed with left click
 		''' */
 	/* VanityTooltip:
 		'''
@@ -742,6 +745,8 @@ BoxofGizmos: {
 		Enemies emit light at night
 		Grants autofire to non-weapon items
 		''' */
+	// Contains: "[c/00FFFF:Contains:]"
+	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
 }
 
 UniverseCore: {
@@ -885,7 +890,6 @@ WillForce: {
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		'A mind of unbreakable determination'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }
 
 AbominableWand: {
