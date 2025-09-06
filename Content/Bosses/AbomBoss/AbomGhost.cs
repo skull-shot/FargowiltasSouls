@@ -71,6 +71,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 Projectile.localAI[1] = Main.rand.Next(60);
             }
 
+            Projectile.localAI[2] = 0;
+
             Projectile.direction = Projectile.spriteDirection = (int)pirateShip.ai[0];
             const int maxPirates = 8;
             Projectile.Center = pirateShip.Center + GetOffsetFromCenterToShipSpriteCoords(136 + 220 / maxPirates * Order, 370, pirateShip.scale);
@@ -82,11 +84,16 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             flip *= Projectile.direction;
             GunRotation += flip * MathHelper.Pi * 1.75f / 240 * Main.rand.NextFloat(0.9f, 1.1f);
 
-            if (pirateShip.localAI[1] == 1 && Timer % 10 == 0 && FargoSoulsUtil.HostCheck) //time to shoot
+            if (pirateShip.localAI[1] == 1) //time to shoot
             {
-                Vector2 gunPos = Projectile.Center;
-                Vector2 vel = 6f * GunRotation.ToRotationVector2();
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomBullet>(), Projectile.damage, 0f, Main.myPlayer);
+                Projectile.localAI[2] = 1;
+
+                if (Timer % 10 == 0 && FargoSoulsUtil.HostCheck)
+                {
+                    Vector2 gunPos = Projectile.Center;
+                    Vector2 vel = 6f * GunRotation.ToRotationVector2();
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomBullet>(), Projectile.damage, 0f, Main.myPlayer);
+                }
             }
 
             if (++Projectile.frameCounter > 6)
@@ -136,6 +143,19 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+
+            if (Projectile.localAI[2] == 1)
+            {
+                Texture2D gun = Terraria.GameContent.TextureAssets.Item[ItemID.Musket].Value;
+                Rectangle gunRect = gun.Bounds;
+                Vector2 gunOrigin = gunRect.Size() / 2f;
+                float gunRotation = GunRotation;
+                Vector2 gunPos = Projectile.Center + GunRotation.ToRotationVector2() * gunOrigin.X * 1.5f;
+                SpriteEffects gunSpriteEffects = gunRotation.ToRotationVector2().X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                if (gunRotation.ToRotationVector2().X < 0)
+                    gunRotation += MathHelper.Pi;
+                Main.EntitySpriteDraw(gun, gunPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), gunRect, Projectile.GetAlpha(lightColor), gunRotation, gunOrigin, Projectile.scale, gunSpriteEffects, 0);
+            }
             return false;
         }
     }

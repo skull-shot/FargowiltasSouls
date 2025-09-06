@@ -155,3 +155,4 @@ abom ship
 	bobs while firing
 	fixed abom not showing his balls
 	added ghosts
+	smoothed abom movement
