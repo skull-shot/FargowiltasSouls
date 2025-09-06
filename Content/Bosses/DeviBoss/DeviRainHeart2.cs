@@ -20,6 +20,13 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
+                    if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                    {
+                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, -Vector2.UnitY, ModContent.ProjectileType<DeviDeathray>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        if (Main.player[npc.target].Center.Y > Projectile.Center.Y)
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.UnitY, ModContent.ProjectileType<DeviDeathray>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    }
+                    else
                     SoundEngine.PlaySound(SoundID.Item21, Projectile.Center);
 
                     for (int i = 0; i < 5; i++)
