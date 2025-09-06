@@ -148,3 +148,4 @@ mutant now visibly starts spinning his spear whenever he spins it
 sparkling ado graze is kept if you get hit for 1 damage
 vortex set nerf, stealth has cooldown
 cosmo force moons dont explode immediately if released while in tiles
+corruption clingers now have snatcher ai (can grab you)
