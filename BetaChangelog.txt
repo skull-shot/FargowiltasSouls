@@ -160,3 +160,6 @@ abom ship
 
 
 replaced mutant okuu with helix
+mutant eyes have one (1) aura in performance mode (visibility is hurting without at least one)
+performance mode applies to mutant spheres
+mutant spear telegraphs have power sucky in animation to be more obvious
