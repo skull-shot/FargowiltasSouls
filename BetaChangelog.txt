@@ -154,3 +154,4 @@ abom ship
 	shoots cannonballs instead of bullets
 	bobs while firing
 	fixed abom not showing his balls
+	added ghosts

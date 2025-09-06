@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -83,6 +84,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         ref float BehaviorTimer => ref Projectile.ai[1]; //is set negative by abom
         ref float Abom => ref Projectile.ai[2];
         ref float SpawnInTimer => ref Projectile.localAI[0];
+        ref float AmIShooting => ref Projectile.localAI[1];
+        ref float PirateSuicide => ref Projectile.localAI[2];
 
         bool inBackground;
         float[] gunRotations = new float[4];
@@ -114,7 +117,23 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     int flip = i % 2 == 0 ? -1 : 1;
                     gunRotations[i] = flip * MathHelper.ToRadians(60);
                     gunRotations[i] += flip * i * MathHelper.ToRadians(120) / gunRotations.Length;
-                    gunRotations[i] += Main.rand.NextFloat(MathHelper.ToRadians(10));
+                    gunRotations[i] += Main.rand.NextFloat(MathHelper.ToRadians(30));
+                }
+
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    const int maxGhosts = 8;
+                    for (int i = 0; i < maxGhosts; i++)
+                    {
+                        int flip = i % 2 == 0 ? -1 : 1;
+                        float gunRotation = flip * MathHelper.ToRadians(60);
+                        gunRotation += flip * i * MathHelper.ToRadians(120) / maxGhosts;
+                        gunRotation += Main.rand.NextFloat(MathHelper.ToRadians(30));
+
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero,
+                            ModContent.ProjectileType<AbomGhost>(), Projectile.damage, Projectile.knockBack, Projectile.owner,
+                            Projectile.identity, i, gunRotation);
+                    }
                 }
             }
 
@@ -127,6 +146,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             Projectile.direction = Projectile.spriteDirection = (int)Direction;
 
+            AmIShooting = 0;
+            PirateSuicide = 0;
+
             if (BehaviorTimer < 0) //spawn in, spray shots
             {
                 Projectile.velocity = Vector2.Zero;
@@ -135,7 +157,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 float ratio = System.Math.Min(1f, SpawnInTimer / timeToFinishSpawnAnim);
                 Projectile.Center = abom.Center;
                 Projectile.position.X += 145f * Projectile.direction;
-                Projectile.position.X -= 1000f * (float)System.Math.Cos(MathHelper.PiOver2 * ratio);
+                Projectile.position.X -= 1000f * Projectile.direction * (float)System.Math.Cos(MathHelper.PiOver2 * ratio);
 
                 Projectile.scale = ratio;
 
@@ -143,16 +165,22 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 {
                     int flip = i % 2 == 0 ? -1 : 1;
                     flip *= Projectile.direction;
-                    gunRotations[i] += flip * MathHelper.Pi * 1.75f / 240 * Main.rand.NextFloat(0.95f, 1.05f);
+                    gunRotations[i] += flip * MathHelper.Pi * 1.75f / 240 * Main.rand.NextFloat(0.9f, 1.1f);
                 }
 
-                if (ratio >= 1f && BehaviorTimer % 15 == 0 && FargoSoulsUtil.HostCheck && abom.HasValidTarget)
+                bool shouldKeepFiring = BehaviorTimer < -60 || WorldSavingSystem.MasochistModeReal;
+                if (ratio >= 1f && shouldKeepFiring)
                 {
-                    for (int i = 0; i < 4; i++)
+                    AmIShooting = 1;
+
+                    if (BehaviorTimer % 15 == 0 && FargoSoulsUtil.HostCheck)
                     {
-                        Vector2 gunPos = GetGunPositions()[i];
-                        Vector2 vel = 9f * gunRotations[i].ToRotationVector2();
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomCannonball>(), Projectile.damage, 0f, Main.myPlayer, 0, 9000, 1);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Vector2 gunPos = GetGunPositions()[i];
+                            Vector2 vel = 9f * gunRotations[i].ToRotationVector2();
+                            Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomCannonball>(), Projectile.damage, 0f, Main.myPlayer, 0, 9000, 1);
+                        }
                     }
                 }
             }
@@ -164,6 +192,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             else if (BehaviorTimer < ramTime) //ram
             {
                 Projectile.velocity.X += 1.3f * Direction;
+
+                if (BehaviorTimer % 10 == 1)
+                    SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
             }
             else if (BehaviorTimer < ramTime + shrinkTime) //turn around, go into background
             {
@@ -182,6 +213,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 Projectile.velocity.X = 24f * Direction;
                 Projectile.scale = 0.3f;
+
+                PirateSuicide = 1;
 
                 if (abom.HasValidTarget) //keep ship y pos near abom & player so its always visible as it passes
                 {
@@ -202,7 +235,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 }
             }
 
-            if (++Projectile.frameCounter > 10)
+            if (++Projectile.frameCounter > 6)
             {
                 Projectile.frameCounter = 0;
                 if (++Projectile.frame >= Main.projFrames[Type])
