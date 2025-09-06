@@ -63,6 +63,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     4,
                     13,
                     21,
+                    32,
                     40,
                     -3,
                     -4,

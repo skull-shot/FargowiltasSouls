@@ -333,8 +333,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 case 29: PrepareFishron1(); break;
                 case 30: SpawnFishrons(); break;
 
-                case 31: AttackChoice++; break; //free slot for new attack
-                case 32: AttackChoice++; break; //free slot for new attack
+                case 31: goto case 39;
+                case 32: BoundaryBulletHellP2(); break;
 
                 case 33: PrepareNuke(); break;
                 case 34: Nuke(); break;
@@ -1909,22 +1909,30 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     NPC.velocity = NPC.SafeDirectionTo(player.Center) * 16f;
             }
         }
-        /*
+        
         void BoundaryBulletHellP2()
         {
+            int endTime = 300 + 60 + (int)(360 * endTimeVariance);
+
             NPC.velocity = Vector2.Zero;
             if (NPC.localAI[0] == 0)
             {
+                SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+
                 NPC.localAI[0] = Math.Sign(NPC.Center.X - player.Center.X);
                 //if (WorldSavingSystem.MasochistMode) NPC.ai[2] = NPC.SafeDirectionTo(player.Center).ToRotation(); //starting rotation offset to avoid hitting at close range
                 if (FargoSoulsUtil.HostCheck)
+                {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -2);
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, endTime, 2);
+                }
 
                 EdgyBossText(GFBQuote(11));
 
                 if (WorldSavingSystem.MasochistModeReal)
                     NPC.ai[2] = Main.rand.NextFloat(MathHelper.Pi);
             }
+
             if (NPC.ai[3] > 60 && ++NPC.ai[1] > 2)
             {
                 SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
@@ -1947,13 +1955,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 }
             }
 
-            int endTime = 360 + 60 + (int)(300 * endTimeVariance);
             if (++NPC.ai[3] > endTime)
             {
-                ChooseNextAttack(11, 13, 19, 20, 21, 24, WorldSavingSystem.MasochistModeReal ? 31 : 26, 33, 41, 44);
+                ChooseNextAttack(13, 19, 20, 21, 24, WorldSavingSystem.MasochistModeReal ? 31 : 26, 33, 41, 44);
             }
         }
-        */
 
         void PillarDunk()
         {
