@@ -121,10 +121,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             BehaviorTimer++;
             SpawnInTimer++;
 
-            const int ramStartupTime = 60;
-            const int ramTime = ramStartupTime + 75;
+            const int ramTime = 75;
             const int shrinkTime = 30;
-            const int ballsTime = 120;
+            const int ballsTime = 180;
 
             Projectile.direction = Projectile.spriteDirection = (int)Direction;
 
@@ -132,11 +131,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 Projectile.velocity = Vector2.Zero;
 
-                const int timeToFinishSpawnAnim = 90;
+                const int timeToFinishSpawnAnim = 60;
                 float ratio = System.Math.Min(1f, SpawnInTimer / timeToFinishSpawnAnim);
                 Projectile.Center = abom.Center;
                 Projectile.position.X += 145f * Projectile.direction;
-                Projectile.position.Y -= 200f * (float)System.Math.Sin(MathHelper.Pi * ratio);
+                Projectile.position.X -= 1000f * (float)System.Math.Cos(MathHelper.PiOver2 * ratio);
 
                 Projectile.scale = ratio;
 
@@ -147,22 +146,20 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     gunRotations[i] += flip * MathHelper.Pi * 1.75f / 240 * Main.rand.NextFloat(0.95f, 1.05f);
                 }
 
-                if (ratio >= 1f && FargoSoulsUtil.HostCheck && abom.HasValidTarget)
+                if (ratio >= 1f && BehaviorTimer % 15 == 0 && FargoSoulsUtil.HostCheck && abom.HasValidTarget)
                 {
-                    int gun = (int)System.Math.Abs(BehaviorTimer) % 4;
-                    Vector2 gunPos = GetGunPositions()[gun];
-                    Vector2 vel = 6f * gunRotations[gun].ToRotationVector2();
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomBullet>(), Projectile.damage, 0f, Main.myPlayer);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Vector2 gunPos = GetGunPositions()[i];
+                        Vector2 vel = 9f * gunRotations[i].ToRotationVector2();
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), gunPos, vel, ModContent.ProjectileType<AbomCannonball>(), Projectile.damage, 0f, Main.myPlayer, 0, 9000, 1);
+                    }
                 }
             }
             else if (BehaviorTimer == 0) //detach from abom, rear back
             {
                 Projectile.netUpdate = true;
                 Projectile.velocity = 24f * Vector2.UnitX * -Direction;
-            }
-            else if (BehaviorTimer < ramStartupTime) //temp pause so cannon fire happens closer to player
-            {
-
             }
             else if (BehaviorTimer < ramTime) //ram
             {
@@ -191,13 +188,17 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     float newCenterY = MathHelper.Lerp(Projectile.Center.Y, (abom.Center.Y + Main.player[abom.target].Center.Y) / 2, 0.04f);
                     Projectile.Center = new Vector2(Projectile.Center.X, newCenterY);
 
-                    //random bombardment
-                    if (BehaviorTimer < ramTime + ballsTime && BehaviorTimer % (WorldSavingSystem.MasochistModeReal ? 1 : 2) == 0)
-                        ShootCannonball(Main.player[abom.target].Center, true);
+                    //wait so im on screen closer to player while attacking
+                    if (BehaviorTimer > ramTime + 60)
+                    {
+                        //random bombardment
+                        if (BehaviorTimer < ramTime + ballsTime && BehaviorTimer % (WorldSavingSystem.MasochistModeReal ? 1 : 2) == 0)
+                            ShootCannonball(Main.player[abom.target].Center, true);
 
-                    //directly target player, force movement
-                    if (BehaviorTimer < ramTime + ballsTime + 30 && BehaviorTimer % 30 == 1)
-                        ShootCannonball(Main.player[abom.target].Center, false);
+                        //directly target player, force movement
+                        if (BehaviorTimer < ramTime + ballsTime + 30 && BehaviorTimer % 30 == 1)
+                            ShootCannonball(Main.player[abom.target].Center, false);
+                    }
                 }
             }
 

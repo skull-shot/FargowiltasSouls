@@ -786,6 +786,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             //y offset to help look like he's standing on the pirate ship while keeping ship hitbox centered on player
                             targetPos = new Vector2(NPC.ai[2], player.Center.Y - 85);
 
+                            targetPos.Y += 160f * (float)Math.Sin(MathHelper.TwoPi / shotsWait * 3 * NPC.ai[1]);
+
                             // TODO: if someone can make abom cleanly transition between this 400 spacing and sitting directly on the border, that'd be appreciated
                             if (NPC.localAI[2] == Math.Sign(player.Center.X - NPC.ai[2])) //if player is on abom's side, just sit in front of them
                                 targetPos.X = player.Center.X + NPC.localAI[2] * 400;

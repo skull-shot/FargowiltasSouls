@@ -149,3 +149,8 @@ sparkling ado graze is kept if you get hit for 1 damage
 vortex set nerf, stealth has cooldown
 cosmo force moons dont explode immediately if released while in tiles
 corruption clingers now have snatcher ai (can grab you)
+abom ship
+	spawns in differently
+	shoots cannonballs instead of bullets
+	bobs while firing
+	fixed abom not showing his balls
