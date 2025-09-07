@@ -3793,7 +3793,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             const int startupDelay = 60;
-            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 8;
+            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 10;
             if (++NPC.ai[1] > maxTime && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
             {
                 NPC.ai[1] = 0;
