@@ -172,3 +172,4 @@ moved box of gizmos old effects to new squirrel charm, normal mode drop from ts 
 marginal nerf to mutant plantwins orb accel in emode
 tiny adjustments to helix numbers, net mini nerf
 mutant spear tell spiral visual aim adjust
+fixed our maso call pointing to emode???????????
