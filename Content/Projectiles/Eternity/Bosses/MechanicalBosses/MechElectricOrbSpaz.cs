@@ -1,6 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
             base.AI();
 
             if (++Projectile.ai[1] < 75) //straight accel
-                Projectile.velocity *= 1.06f;
+                Projectile.velocity *= WorldSavingSystem.MasochistModeReal ? 1.06f : 1.05f;
 
             Player target = FargoSoulsUtil.PlayerExists(Projectile.ai[0]);
             if (target != null)
