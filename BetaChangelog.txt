@@ -167,3 +167,4 @@ gold to piggy moved from gold ench to security wallet
 penetrator can ACTUALLY get legendary for real this time
 box of gizmos can now store any item with a passive effect and will give those passive effects
 fixed mutant twins double hitting
+slight mutant SANSGOLEM nerf

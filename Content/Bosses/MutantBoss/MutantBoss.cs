@@ -3552,9 +3552,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 Vector2 auraPos = FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<MutantRitual>()) == null ? NPC.Center : Main.projectile[ritualProj].Center;
                 Vector2 centerPoint = new(auraPos.X, auraPos.Y);
-                float maxVariance = 100;
+                float maxVariance = 90;
                 float maxOffsetWithinStep = maxVariance / 3 * .75f; //x.75 so player always has to move a noticeable amount
-                centerPoint.Y += maxVariance * NPC.ai[2]; //choose one of 5 base heights
+                centerPoint.Y += maxVariance * NPC.ai[2]; //choose one of 7 base heights
                 centerPoint.Y += Main.rand.NextFloat(-maxOffsetWithinStep, maxOffsetWithinStep);
 
                 float xSpeedWhenAttacking = 16f;
