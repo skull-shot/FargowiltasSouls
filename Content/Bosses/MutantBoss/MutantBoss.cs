@@ -3590,7 +3590,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > endTime)
             {
-                ChooseNextAttack(13, 19, 20, 21, 24, 31, 33, 35, 41, 44);
+                ChooseNextAttack(13, 19, 20, 21, 24, 31, 35, 41, 44);
             }
         }
 
