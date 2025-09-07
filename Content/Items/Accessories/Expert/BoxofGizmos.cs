@@ -45,6 +45,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 GetItemTuple(ModContent.ItemType<SecurityWallet>()),
                 GetItemTuple(ModContent.ItemType<WyvernFeather>()),
                 GetItemTuple(ModContent.ItemType<MasochistSoul>()),
+                GetItemTuple(ModContent.ItemType<SquirrelCharm>()),
             };
         }
 
@@ -94,8 +95,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 
             Item.expert = true;
         }
-
-        int counter;
+        
 
         public override bool AltFunctionUse(Player player) => true;
 
@@ -129,34 +129,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 
             return true;
         }
-
-        void PassiveEffect(Player player)
-        {
-            player.FargoSouls().BoxofGizmos = Item;
-            if (player.whoAmI == Main.myPlayer && player.FargoSouls().IsStandingStill && player.itemAnimation == 0 && player.HeldItem != null)
-            {
-                if (++counter > 60)
-                {
-                    player.detectCreature = true;
-
-                    if (counter % 10 == 0)
-                        Main.instance.SpelunkerProjectileHelper.AddSpotToCheck(player.Center);
-                }
-            }
-            else
-            {
-                counter = 0;
-            }
-
-            foreach (Item storedItem in storedItems)
-            {
-                storedItem.ModItem.UpdateInventory(player);
-            }
-        }
-
-        public override void UpdateInventory(Player player) => PassiveEffect(player);
-        public override void UpdateVanity(Player player) => PassiveEffect(player);
-        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffect(player);
 
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {

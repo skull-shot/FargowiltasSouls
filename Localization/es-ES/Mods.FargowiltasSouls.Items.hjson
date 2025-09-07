@@ -727,14 +727,27 @@ WoodEnchant: {
 		''' */
 }
 
-BoxofGizmos: {
-	// DisplayName: Box of Gizmos
+SquirrelCharm: {
+	// DisplayName: Squirrel Charm
 	/* Tooltip:
 		'''
 		Works from inventory and vanity slots
 		Stand still to expose nearby treasure and enemies
 		Enemies emit light at night
 		Grants autofire to non-weapon items
+		''' */
+	/* VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+}
+
+BoxofGizmos: {
+	// DisplayName: Box of Gizmos
+	/* Tooltip:
+		'''
 		Use with right click to box up accessories with passive effects in your inventory
 		Boxed accessories continue to grant their passive effects
 		Boxed accessories can be unboxed with left click

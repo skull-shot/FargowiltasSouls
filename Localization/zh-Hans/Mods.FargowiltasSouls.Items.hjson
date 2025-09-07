@@ -744,6 +744,23 @@ WoodEnchant: {
 		'''
 }
 
+SquirrelCharm: {
+	// DisplayName: Squirrel Charm
+	/* Tooltip:
+		'''
+		Works from inventory and vanity slots
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+	/* VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+}
+
 BoxofGizmos: {
 	DisplayName: 小零件箱
 	Tooltip:

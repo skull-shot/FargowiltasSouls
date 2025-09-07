@@ -3,6 +3,7 @@ using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
@@ -1131,6 +1132,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             ));
             rule.OnSuccess(ItemDropRule.Common(ItemID.SquirrelHook));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Acorn, 1, 100, 100));
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SquirrelCharm>()));
             rule.OnSuccess(ItemDropRule.Common(ModContent.Find<ModItem>("Fargowiltas", "LumberJaxe").Type, 10));
 
             npcLoot.Add(rule);
