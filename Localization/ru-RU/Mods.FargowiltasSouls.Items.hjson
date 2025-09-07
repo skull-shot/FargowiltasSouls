@@ -235,7 +235,6 @@ GoldEnchant: {
 	Tooltip:
 		'''
 		Ваши атаки накладывают дебафф «Мидас»
-		Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений)
 		«Золото заставляет мир вращаться»
 		'''
 }
@@ -742,24 +741,7 @@ WoodEnchant: {
 }
 
 SquirrelCharm: {
-	// DisplayName: Squirrel Charm
-	/* Tooltip:
-		'''
-		Works from inventory and vanity slots
-		Stand still to expose nearby treasure and enemies
-		Enemies emit light at night
-		Grants autofire to non-weapon items
-		''' */
-	/* VanityTooltip:
-		'''
-		Stand still to expose nearby treasure and enemies
-		Enemies emit light at night
-		Grants autofire to non-weapon items
-		''' */
-}
-
-BoxofGizmos: {
-	DisplayName: Коробка вещиц
+	DisplayName: Squirrel Charm
 	Tooltip:
 		'''
 		Работает в инвентаре и слотах для украшений
@@ -773,8 +755,24 @@ BoxofGizmos: {
 		Враги испускают свет ночью
 		Даёт авто-атаку предметам, не являющимся оружием
 		'''
-	// Contains: "[c/00FFFF:Contains:]"
-	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
+}
+
+BoxofGizmos: {
+	DisplayName: Коробка для вещиц
+	Tooltip:
+		'''
+		Нажмите ПКМ из панели быстрого доступа, чтобы сложить аксессуары с пассивными эффектами из инвентаря
+		Лежащие в коробке предметы продолжают давать свои бонусы
+		Чтобы извлечь предметы из коробки, нажмите ЛКМ
+		'''
+	VanityTooltip:
+		'''
+		Стойте неподвижно, чтобы подсветить ближайшие сокровища и врагов
+		Враги испускают свет ночью
+		Даёт авто-атаку предметам, не являющимся оружием
+		'''
+	Contains: "[c/00FFFF:Содержит:]"
+	Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Можно сложить в коробку для вещиц]"
 }
 
 UniverseCore: {
@@ -914,7 +912,7 @@ WillForce: {
 		[i:FargowiltasSouls/RedRidingEnchant] Успешные попадания дают бонус к урону, бонус увеличивается при усилении знамени
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Увеличивает эффективность источников лечения на 15%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Улучшает наездных питомцев и ваши хар-ки, пока вы верхом; наездные питомцы получают рывок
-		[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений); ваши атаки накладывают «Мидас»
+		[i:FargowiltasSouls/GoldEnchant] Ваши атаки накладывают дебафф «Мидас»
 		[i:FargowiltasSouls/PlatinumEnchant] У врагов есть шанс 33% выронить свою добычу ещё 4 раза
 		«Разум несокрушимой решимости»
 		'''
@@ -1023,14 +1021,16 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ, чтобы выключить):]
 		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
-		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях и [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
-		[i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях и [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		[i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		'''
 }
@@ -1047,7 +1047,8 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре или слотах для украшений (ПКМ, чтобы включить):]
 		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
-		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях и [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -1474,13 +1475,15 @@ SecurityWallet: {
 		'''
 		Работает в инвентаре и слотах для украшений
 		Даёт иммунитет к дебаффу «Мидас»
-		Значительно улучшает перековки
+		Уменьшает стоимость перековок на 50%
+		Автоматически складывает деньги в свинью-копилку при подборе
 		«Не защищает от воровства с вашего трупа»
 		'''
 	VanityTooltip:
 		'''
 		Даёт иммунитет к дебаффу «Мидас»
-		Значительно улучшает перековку
+		Уменьшает стоимость перековок на 50%
+		Автоматически складывает деньги в свинью-копилку при подборе
 		'''
 }
 
@@ -1724,9 +1727,10 @@ MasochistSoul: {
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
 		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете весь урон во время рывка
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
-		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении, [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок на 50% и время [i:FargowiltasSouls/SandsofTime] возрождения
+		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении и [i:FargowiltasSouls/SandsofTime] уменьшает время возрождения
+		[i:FargowiltasSouls/SecurityWallet] Автоматически отправляет деньги в свинью-копилкууменьшает стоимость перековок на 50%
 		Автоматически использует [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
-		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, makes enemies drop loot one more time
+		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, убитые враги роняют добычу ещё раз
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/RemoteControl] два дружелюбных дрона, [i:FargowiltasSouls/CrystalSkull] череп, [i:FargowiltasSouls/SaucerControlConsole] мини-тарелку, и [i:FargowiltasSouls/ChaliceofTheMoon] истинные глаза Ктулху
@@ -1785,7 +1789,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/DeathForce] Даёт теневой рывок, а также неуязвимый рывок тени каждые 4 секунды; увеличивает скорость снарядов в зависимости от вашей скорости
 		[i:FargowiltasSouls/DeathForce] Вы используете дополнительные оружия как огневую поддержку; из убитых врагов могут выпадать костяные кучи
 		[i:FargowiltasSouls/WillForce] Призывает дух гладиатора; улучшает регенерацию здоровья, увеличивает хар-ки на ездовых питомцах; успешные попадания дают доп. урон
-		[i:FargowiltasSouls/WillForce] Автоматически складывает деньги в свинью-копилку при подборе (работает в инвентаре и слотах для украшений); у врагов есть шанс оставить больше добычи
+		[i:FargowiltasSouls/WillForce] У врагов есть шанс оставить больше добычи
 		[i:FargowiltasSouls/CosmoForce] Атаки периодически запускают во врагов луны, которые взрываются в лунные усилители
 		[i:FargowiltasSouls/CosmoForce] Увеличивает ваши максимальную скорость и ускорение, уменьшает инерцию; Стазис звёздной пыли перезаряжается 60 секунд
 		«Истинный повелитель Террарии»
