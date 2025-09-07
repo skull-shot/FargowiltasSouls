@@ -17,7 +17,6 @@ namespace FargowiltasSouls
         public class Projectiles
         {
             public static bool[] PierceResistImmune;
-            public static bool[] AiStylePierceResistImmune;
         }
         public class NPCs
         {
@@ -69,19 +68,6 @@ namespace FargowiltasSouls
             Projectiles.PierceResistImmune = projectileFactory.CreateBoolSet(false,
                 ProjectileID.FlyingKnife,
                 ProjectileID.WeatherPainShot
-                );
-
-            Projectiles.AiStylePierceResistImmune = projectileFactory.CreateBoolSet(false,
-                ProjAIStyleID.Yoyo,
-                ProjAIStyleID.Spear,
-                ProjAIStyleID.ShortSword,
-                ProjAIStyleID.Drill,
-                ProjAIStyleID.HeldProjectile,
-                ProjAIStyleID.NightsEdge, // all fancy sword swings
-                ProjAIStyleID.CursedFlameWall, // clinger staff
-                ProjAIStyleID.Rainbow, // rainbow gun
-                ProjAIStyleID.MechanicalPiranha,
-                ProjAIStyleID.SleepyOctopod
                 );
 
             #endregion
