@@ -1,8 +1,10 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
@@ -14,6 +16,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
             base.SetDefaults();
 
             Projectile.timeLeft = 180;
+
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
+                CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
