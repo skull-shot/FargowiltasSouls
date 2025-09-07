@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,7 +7,7 @@ namespace FargowiltasSouls.Content.Items.Accessories
 {
     public class SquirrelCharm : SoulsItem
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Placeholder";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories", Name);
 
         public override void SetStaticDefaults()
         {

@@ -3547,9 +3547,23 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 EdgyBossText(GFBQuote(35));
 
                 float oldOffset = NPC.ai[2];
+                //basically, whenever deciding whether to go up or down, may use that decision for 2 steps
+                bool reusedPreviousStep = false;
+                if (Main.rand.NextBool() && NPC.localAI[0] != 0)
+                {
+                    reusedPreviousStep = true;
+                    NPC.ai[2] += NPC.localAI[0];
+                    NPC.localAI[0] = 0;
+                }
                 const int maxRangeOfVariance = 3;
+                int increment = 0;
                 while (NPC.ai[2] == oldOffset || Math.Abs(NPC.ai[2] - oldOffset) > maxRangeOfVariance)
-                    NPC.ai[2] += Main.rand.NextBool() ? -1 : 1;
+                {
+                    increment = Main.rand.NextBool() ? -1 : 1;
+                    NPC.ai[2] += increment;
+                }
+                if (!reusedPreviousStep)
+                    NPC.localAI[0] = increment;
 
                 Vector2 auraPos = FargoSoulsUtil.ProjectileExists(ritualProj, ModContent.ProjectileType<MutantRitual>()) == null ? NPC.Center : Main.projectile[ritualProj].Center;
                 Vector2 centerPoint = new(auraPos.X, auraPos.Y);
@@ -3590,7 +3604,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (++NPC.ai[1] > endTime)
             {
-                ChooseNextAttack(13, 19, 20, 21, 24, 31, 33, 35, 41, 44);
+                ChooseNextAttack(13, 19, 20, 21, 24, 31, 35, 41, 44);
             }
         }
 
