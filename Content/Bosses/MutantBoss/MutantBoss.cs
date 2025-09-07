@@ -3171,12 +3171,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             const int startupDelay = 60;
-            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 8;
+            int maxTime = WorldSavingSystem.MasochistModeReal ? 6 : 10;
             if (++NPC.ai[1] > maxTime && NPC.ai[3] > startupDelay && NPC.ai[3] < attackEndTime)
             {
                 NPC.ai[1] = 0;
                 const int max = 12;
-                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 6f;
+                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 5f;
 
                 SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
 
@@ -3186,7 +3186,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         for (int i = 0; i < max; i++)
                         {
-                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 150 : 90;
+                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 120 : 90;
                             float rotation = MathHelper.ToRadians(totalDegreesToRotate) / 300 * NPC.ai[2];
                             float spawnRotation = rotation * NPC.ai[3];
                             Vector2 vel = speed * spawnRotation.ToRotationVector2().RotatedBy(MathHelper.TwoPi / max * i);
@@ -3798,7 +3798,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 NPC.ai[1] = 0;
                 const int max = 12;
-                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 6f;
+                float speed = WorldSavingSystem.MasochistModeReal ? 7f : 5f;
 
                 SoundEngine.PlaySound(SoundID.Item84, NPC.Center);
 
@@ -3808,7 +3808,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         for (int i = 0; i < max; i++)
                         {
-                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 150 : 90;
+                            float totalDegreesToRotate = WorldSavingSystem.MasochistModeReal ? 120 : 90;
                             float rotation = MathHelper.ToRadians(totalDegreesToRotate) / 300 * NPC.ai[2];
                             float spawnRotation = rotation * NPC.ai[3];
                             Vector2 vel = speed * spawnRotation.ToRotationVector2().RotatedBy(MathHelper.TwoPi / max * i);
