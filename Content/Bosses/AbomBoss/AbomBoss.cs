@@ -91,13 +91,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 NPC.width = Player.defaultWidth;
                 NPC.height = Player.defaultHeight;
             }
-            NPC.damage = 228;
+            NPC.damage = 200;
             NPC.defense = 80;
-            NPC.lifeMax = 637500;
-            if (Main.expertMode) //compensate universe core
-                NPC.lifeMax *= 2;
-            if (WorldSavingSystem.MasochistModeReal) //he's tanky enough
-                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+            // more expert hp to compensate universe core
+            NPC.lifeMax = Main.expertMode ? 1000000 : 640000;
             NPC.value = Item.buyPrice(12);
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
@@ -786,9 +783,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             //y offset to help look like he's standing on the pirate ship while keeping ship hitbox centered on player
                             targetPos = new Vector2(NPC.ai[2], player.Center.Y - 85);
                             targetPos.X = player.Center.X + NPC.localAI[2] * 400;
-                            targetPos.Y += 160f * (float)Math.Sin(MathHelper.TwoPi / shotsWait * 3 * NPC.ai[1]);
+                            targetPos.Y += 200f * (float)Math.Sin(MathHelper.TwoPi / shotsWait * 3 * NPC.ai[1]);
 
-                            if (NPC.localAI[2] < 0)
+                            if (NPC.localAI[2] < 0) //dont cross over middle of arena
                             {
                                 if (targetPos.X > NPC.ai[2])
                                     targetPos.X = NPC.ai[2];
@@ -799,7 +796,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                     targetPos.X = NPC.ai[2];
                             }
 
-                                NPC.Center = Vector2.Lerp(NPC.Center, targetPos, 0.09f);
+                            NPC.Center = Vector2.Lerp(NPC.Center, targetPos, 0.09f);
                             NPC.velocity = Vector2.Zero;
                         }
                         else if (NPC.ai[1] < shotsWait + ramAndBallsWait)

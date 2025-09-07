@@ -177,3 +177,5 @@ fixed mutant p1 dive dematerializing from existence if you stand still
 raised pfruit chance from snatchers when you wear jungle rose
 SANSGOLEM cant combo to nuke
 adjusted how SANSGOLEM thinks (less likely to give basically a long straight free corridor)
+adjusted abom spacing from you while standing on ship
+preliminary abom hp and attack reduction
