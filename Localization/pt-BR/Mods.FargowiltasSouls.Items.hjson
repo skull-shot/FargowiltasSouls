@@ -1795,7 +1795,11 @@ MasochistSoul: {
 		Invoca a ajuda de todos os chefes do Modo Eternidade para o seu lado
 		'Aceite a maestria, aceite a eternidade'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	/* VanityTooltip:
+		'''
+		[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs
+		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/WyvernFeather] gravity, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		''' */
 }
 
 SnipersSoul: {

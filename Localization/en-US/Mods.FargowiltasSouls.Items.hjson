@@ -1771,21 +1771,25 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Increases wing time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (works from inventory and vanity), immunity to almost all Eternity Mode debuffs, and more
-		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
-		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
+		Grants immunity to almost all Eternity Mode debuffs, [i:FargowiltasSouls/ReinforcedPlating] knockback, [i:FargowiltasSouls/PureHeart] biome debuffs, and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion and station buffs
+		Increases [i:FargowiltasSouls/GalacticGlobe][i:FargowiltasSouls/GelicWings] wing time by 200%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 20%, [i:FargowiltasSouls/GuttedHeart] max life by 100%, and [i:FargowiltasSouls/MagicalBulb] life regeneration by 7
+		Increases [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
+		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash and [i:FargowiltasSouls/SlimyShield] fall speed, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
+		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump and [i:FargowiltasSouls/Deerclawps] dashes leave a trail of blood spikes, [i:FargowiltasSouls/PrecisionSeal] press the Precision Seal key to prevent dashes and double jumps
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates and loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
+		Passively [i:FargowiltasSouls/SecurityWallet] reduces reforge cost, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/WyvernFeather] gravity, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		When hit [i:FargowiltasSouls/SqueakyToy] you have a chance to only take 1 damage and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
+		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict several debuffs
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
+		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	VanityTooltip:
+		'''
+		[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs
+		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/WyvernFeather] gravity, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		'''
 }
 
 SnipersSoul: {
