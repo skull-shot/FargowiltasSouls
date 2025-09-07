@@ -169,3 +169,6 @@ box of gizmos can now store any item with a passive effect and will give those p
 fixed mutant twins double hitting
 slight mutant SANSGOLEM nerf
 moved box of gizmos old effects to new squirrel charm, normal mode drop from ts (its like a tutorial to use your new box)
+marginal nerf to mutant plantwins orb accel in emode
+tiny adjustments to helix numbers, net mini nerf
+mutant spear tell spiral visual aim adjust
