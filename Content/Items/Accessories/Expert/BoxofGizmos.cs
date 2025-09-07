@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -146,6 +147,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 }
             }
         }
+
+        void PassiveEffect(Player player)
+        {
+            foreach (Item storedItem in storedItems)
+            {
+                if (storedItem.ModItem != null)
+                    storedItem.ModItem.UpdateInventory(player);
+            }
+        }
+
+        public override void UpdateInventory(Player player) => PassiveEffect(player);
+        public override void UpdateVanity(Player player) => PassiveEffect(player);
+        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffect(player);
     }
 
     public class GizmoGlobalItem : GlobalItem
