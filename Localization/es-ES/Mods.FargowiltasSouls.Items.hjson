@@ -2959,7 +2959,7 @@ OpticStaffEX: {
 	/* Tooltip:
 		'''
 		Summons the real twins to fight for you
-		Needs 3 minion slots
+		Needs 2 minion slots
 		'The reward for a mighty rematch...''
 		''' */
 }

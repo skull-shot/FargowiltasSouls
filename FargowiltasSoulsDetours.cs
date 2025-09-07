@@ -35,9 +35,13 @@ namespace FargowiltasSouls
 
         private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
 
+        private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
+
         public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
 
         public delegate int Orig_StrikeNPC_HitInfo_bool_bool(NPC nPC, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction);
+
+        public delegate void Orig_PickAmmo(Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume);
 
         public void LoadDetours()
         {
@@ -93,6 +97,7 @@ namespace FargowiltasSouls
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
             HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
+            HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -210,7 +215,7 @@ namespace FargowiltasSouls
         public static void HorsemansBlade_SpawnPumpkin(On_Player.orig_HorsemansBlade_SpawnPumpkin orig, Player self, int npcIndex, int dmg, float kb)
         {
             NPC npc = Main.npc[npcIndex];
-            if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode  && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
+            if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
                 return;
             orig(self, npcIndex, dmg, kb);
         }
@@ -252,8 +257,8 @@ namespace FargowiltasSouls
                 num2 = 0.5f;
                 string mode = WorldSavingSystem.MasochistModeReal ? Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMode") : Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityMode");
                 string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn", mode);
-                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text, 
-                    new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
+                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text,
+                    new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num),
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
             }
         }
@@ -424,7 +429,7 @@ namespace FargowiltasSouls
         }
 
         public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
-        {// this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
+        { // this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
             int phantasmTime = -1;
             var player = Main.player[self.owner];
             bool phantasmAverted = false;
@@ -443,7 +448,7 @@ namespace FargowiltasSouls
                 player.phantasmTime = phantasmTime;
         }
         public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        {// sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
+        { // sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
             if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
             {
                 if (FargoSoulsGlobalProjectile.globalProjectileField.CritChance - FargoSoulsGlobalProjectile.ninjaCritIncrease < 0)
@@ -453,6 +458,24 @@ namespace FargowiltasSouls
                 FargoSoulsGlobalProjectile.globalProjectileField = null;
             }
             return orig(self, hit, fromNet, noPlayerInteraction);
+        }
+        internal void NerfCoinGun(Orig_PickAmmo orig, Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume)
+        {
+            orig(self, sItem, ref projToShoot, ref speed, ref canShoot, ref totalDamage, ref KnockBack, out usedAmmoItemId, dontConsume);
+            if (self is not null)
+            {
+                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
+                {
+                    if (projToShoot == ProjectileID.CopperCoin)
+                        totalDamage = (int)(totalDamage * 1.6f);
+                    else if (projToShoot == ProjectileID.SilverCoin)
+                        totalDamage = (int)(totalDamage * 0.9f);
+                    else if (projToShoot == ProjectileID.GoldCoin)
+                        totalDamage = (int)(totalDamage * 0.47f);
+                    else if (projToShoot == ProjectileID.PlatinumCoin)
+                        totalDamage = (int)(totalDamage * 0.275f);
+                }
+            }
         }
     }
 }

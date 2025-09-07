@@ -1292,7 +1292,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
-                case ProjectileID.CopperCoin:
+                /*case ProjectileID.CopperCoin:
                     modifiers.FinalDamage *= 1.6f;
                     break;
                 case ProjectileID.SilverCoin:
@@ -1303,7 +1303,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
                 case ProjectileID.PlatinumCoin:
                     modifiers.FinalDamage *= 0.275f;
-                    break;
+                    break;*/
 
                 case ProjectileID.StarCloakStar:
                 case ProjectileID.StarVeilStar:
