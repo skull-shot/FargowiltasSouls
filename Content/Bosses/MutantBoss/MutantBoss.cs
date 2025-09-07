@@ -282,7 +282,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 case 0: SpearTossDirectP1AndChecks(); break;
 
-                case 1: OkuuSpheresP1(); break;
+                case 1: SpheresAndDiveP1(); break;
 
                 case 2: PrepareDiagonalSpearThrow(); break;
                 case 3: DiagonalSpearThrow(); break;
@@ -1040,7 +1040,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
         }
 
-        void OkuuSpheresP1()
+        void SpheresAndDiveP1()
         {
             if (Phase2Check())
                 return;
@@ -1090,7 +1090,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         // fuck off to the top of the screen
                         Vector2 targetPos = player.Center - Vector2.UnitY * 1200;
-                        NPC.velocity = NPC.DirectionTo(targetPos) * MathF.Min(1700 / diveDuration, NPC.Distance(targetPos));
+                        if (NPC.Center != targetPos) //check to prevent edge case NaN
+                            NPC.velocity = NPC.DirectionTo(targetPos) * MathF.Min(1700 / diveDuration, NPC.Distance(targetPos));
                     }
                     else
                     {

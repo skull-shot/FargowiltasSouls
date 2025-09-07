@@ -173,3 +173,4 @@ marginal nerf to mutant plantwins orb accel in emode
 tiny adjustments to helix numbers, net mini nerf
 mutant spear tell spiral visual aim adjust
 fixed our maso call pointing to emode???????????
+fixed mutant p1 dive dematerializing from existence if you stand still
