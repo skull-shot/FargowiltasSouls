@@ -30,19 +30,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Item.value = 150000;
         }
 
-        public override void UpdateInventory(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<GoldEffect>(Item);
             player.AddEffect<GoldKeyEffect>(Item);
-            player.AddEffect<GoldToPiggy>(Item);
         }
         public override void AddRecipes()
         {
@@ -77,21 +68,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             player.FargoSouls().GoldKey(stunned);
-        }
-    }
-    public class GoldToPiggy : AccessoryEffect
-    {
-
-        public override Header ToggleHeader => Header.GetHeader<WillHeader>();
-        public override int ToggleItemType => ModContent.ItemType<GoldEnchant>();
-        
-        public override void PostUpdateEquips(Player player)
-        {
-            for (int i = 50; i <= 53; i++) //detect coins in coin slots
-            {
-                if (!player.inventory[i].IsAir && player.inventory[i].IsACoin)
-                    player.FargoSouls().GoldEnchMoveCoins = true;
-            }
         }
     }
 }

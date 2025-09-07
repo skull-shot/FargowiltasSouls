@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -65,7 +66,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             return target.hurtCooldowns[1] == 0 || WorldSavingSystem.MasochistModeReal;
         }
 
-        private int ritualID = -1;
+        protected int ritualID = -1;
 
         float originalSpeed;
         bool spawned;
@@ -184,18 +185,23 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             return Color.White * Projectile.Opacity;
         }
 
+        protected virtual float GlowLerpToClear => 0.9f;
+        protected Color GlowColor => Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(196, 247, 255, 0), Color.Transparent, GlowLerpToClear);
+
         public override bool PreDraw(ref Color lightColor)
         {
+            if (SoulConfig.Instance.PerformanceMode)
+                return false;
+
             Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantSphereGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int rect1 = glow.Height;
             int rect2 = 0;
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
-            Color glowcolor = Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(196, 247, 255, 0), Color.Transparent, 0.9f);
+            Color glowcolor = GlowColor;
             glowcolor *= Projectile.Opacity;
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++) //reused betsy fireball scaling trail thing
             {
-
                 Color color27 = glowcolor;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 float scale = Projectile.scale * (ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];

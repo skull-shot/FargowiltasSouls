@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public static void PassiveEffect(Player player, Item item)
         {
-            SecurityWallet.PassiveEffects(player);
+            SecurityWallet.PassiveEffects(player, item);
             WyvernFeather.PassiveEffects(player, item);
             MysticSkull.PassiveEffects(player);
             //WretchedPouch.PassiveEffects(player, item);

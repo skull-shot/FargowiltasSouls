@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
@@ -21,6 +22,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
             itemLoot.Add(ItemDropRule.Common(ModContent.Find<ModItem>("Fargowiltas", "LumberJaxe").Type, 5));
             itemLoot.Add(ItemDropRule.Common(ItemID.SquirrelHook));
             itemLoot.Add(ItemDropRule.Common(ItemID.Acorn, 1, 100, 100));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SquirrelCharm>()));
             itemLoot.Add(ItemDropRule.OneFromOptions(1,
             [
                 ItemID.Squirrel,

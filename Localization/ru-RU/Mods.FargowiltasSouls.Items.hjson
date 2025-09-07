@@ -741,6 +741,23 @@ WoodEnchant: {
 		'''
 }
 
+SquirrelCharm: {
+	// DisplayName: Squirrel Charm
+	/* Tooltip:
+		'''
+		Works from inventory and vanity slots
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+	/* VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+}
+
 BoxofGizmos: {
 	DisplayName: Коробка вещиц
 	Tooltip:
@@ -756,6 +773,8 @@ BoxofGizmos: {
 		Враги испускают свет ночью
 		Даёт авто-атаку предметам, не являющимся оружием
 		'''
+	// Contains: "[c/00FFFF:Contains:]"
+	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
 }
 
 UniverseCore: {
@@ -899,7 +918,6 @@ WillForce: {
 		[i:FargowiltasSouls/PlatinumEnchant] У врагов есть шанс 33% выронить свою добычу ещё 4 раза
 		«Разум несокрушимой решимости»
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Автоматически складывает деньги в свинью-копилку при подборе"
 }
 
 AbominableWand: {
@@ -1735,6 +1753,7 @@ SupersonicSoul: {
 	Tooltip:
 		'''
 		Даёт сверхзвуковой бег, рывок, парение и улучшенное передвижение на льду
+		Когда вы отпускаете клавишу движения, вы останавливаетесь сразу же
 		Крылья отключают все ваши двойные прыжки (можно переключить)
 		Позволяет владельцу совершать четверной прыжок, если не экипированы крылья
 		[i:1290] Увеличивает скорость передвижения и [i:FargowiltasSouls/HallowedPendant] длительность неуязвимости при получении урона

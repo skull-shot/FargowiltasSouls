@@ -75,7 +75,7 @@ namespace FargowiltasSouls
         public override IEnumerable<Type> GetInputTypes() => null;
         protected override object SafeProcess(params object[] argsWithoutCommand)
         {
-            return WorldSavingSystem.EternityMode;
+            return WorldSavingSystem.MasochistModeReal;
         }
     }
     internal sealed class DownedMutantCall : ModCall

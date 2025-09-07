@@ -232,7 +232,6 @@ GoldEnchant: {
 	Tooltip:
 		'''
 		Your attacks inflict Midas
-		Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		'Gold makes the world go round'
 		'''
 }
@@ -728,8 +727,8 @@ WoodEnchant: {
 		'''
 }
 
-BoxofGizmos: {
-	DisplayName: Box of Gizmos
+SquirrelCharm: {
+	DisplayName: Squirrel Charm
 	Tooltip:
 		'''
 		Works from inventory and vanity slots
@@ -743,6 +742,24 @@ BoxofGizmos: {
 		Enemies emit light at night
 		Grants autofire to non-weapon items
 		'''
+}
+
+BoxofGizmos: {
+	DisplayName: Box of Gizmos
+	Tooltip:
+		'''
+		Use with right click to box up accessories with passive effects in your inventory
+		Boxed accessories continue to grant their passive effects
+		Boxed accessories can be unboxed with left click
+		'''
+	VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		'''
+	Contains: "[c/00FFFF:Contains:]"
+	Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
 }
 
 UniverseCore: {
@@ -882,11 +899,10 @@ WillForce: {
 		[i:FargowiltasSouls/RedRidingEnchant] Successive attacks gain bonus damage, increased when empowered by the banner
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 15%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
-		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
+		[i:FargowiltasSouls/GoldEnchant] Your attacks inflict Midas
 		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		'A mind of unbreakable determination'
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }
 
 AbominableWand: {
@@ -991,14 +1007,16 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+			[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		'''
 	VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+		[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'''
 }
@@ -1015,7 +1033,8 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, and [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+			[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
 		'The amalgamate born of a thousand common enemies'
 		'''
@@ -1431,6 +1450,7 @@ SecurityWallet: {
 		Works from inventory and vanity slots
 		Grants immunity to Midas
 		Reduces reforge cost by 50%
+		Automatically sends coins to your piggy bank when picked up
 		'Not secure against being looted off of one's corpse'
 		'''
 	VanityTooltip:
@@ -1673,7 +1693,7 @@ MasochistSoul: {
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
-		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
+		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
@@ -1729,7 +1749,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
 		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, and slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
-		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
+		[i:FargowiltasSouls/WillForce] Enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
 		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
 		'A true master of Terraria'

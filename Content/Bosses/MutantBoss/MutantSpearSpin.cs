@@ -42,6 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         private bool predictive;
         private int direction = 1;
+        private float spinRender;
 
         public ref float Variant => ref Projectile.ai[2];
         public override void AI()
@@ -63,6 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     4,
                     13,
                     21,
+                    32,
                     40,
                     -3,
                     -4,
@@ -222,11 +224,44 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Color glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 191, 51, 210) : new(51, 255, 191, 210);
                 if (predictive)
                     glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, 210) : new Color(0, 0, 255, 210);
+
+                const int fireballAnimTime = 30;
+                float repeats = (float)(Projectile.localAI[2] * Math.Min(1f, Projectile.localAI[2] / 90f) % fireballAnimTime) / fireballAnimTime;
+                FancyFireballs(repeats, glowColor);
+
                 glowColor *= 1f - modifier;
                 float glowScale = Projectile.scale * 8f * modifier;
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glow.Bounds), glowColor, 0, glow.Bounds.Size() / 2, glowScale, SpriteEffects.None, 0);
             }
             return false;
+        }
+
+        void FancyFireballs(float repeats, Color glowColor)
+        {
+            float modifier = repeats;
+
+            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
+            int rect1 = glow.Height;
+            int rect2 = rect1 * Projectile.frame;
+            Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
+            Vector2 gloworigin2 = glowrectangle.Size() / 2f;
+
+            float distance = 300 * (1f - modifier);
+            float rotation = MathHelper.TwoPi * modifier * Projectile.localAI[1];
+            const int max = 6;
+            Color finalColor = glowColor * (float)Math.Sqrt(modifier);
+            for (int i = 0; i < max; i++)
+            {
+                Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
+                Vector2 drawPos = Projectile.Center + offset;
+                float scale = 2f * (1f - 0.9f * modifier);
+                float drawRotation = offset.ToRotation();
+                if (Projectile.localAI[1] > 0)
+                    drawRotation += MathHelper.Pi;
+                float endRotation = drawRotation + MathHelper.PiOver2 * Projectile.localAI[1];
+                drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
+                Main.EntitySpriteDraw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None);
+            }
         }
     }
 }

@@ -26,16 +26,22 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.hide = true;
+            Projectile.timeLeft = 600;
+            Projectile.scale = 2;
+            Projectile.width /= 3;
+            Projectile.height /= 3;
+            Projectile.Opacity = 1f;
             CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         ref float Gravity => ref Projectile.ai[0];
         ref float CountdownTimer => ref Projectile.ai[1];
+        ref float Behavior => ref Projectile.ai[2];
         ref float TimerStart => ref Projectile.localAI[0];
 
         public override bool? CanDamage()
         {
-            return Projectile.timeLeft <= 0;
+            return Behavior == 1 || Projectile.timeLeft <= 0;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) //circular hitbox
@@ -69,25 +75,28 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 return;
             }
 
-            Projectile.velocity.Y += Gravity;
-
             Projectile.hide = false;
 
             Projectile.rotation += 0.8f;
 
-            const float maxScale = 5f;
-            Projectile.scale = maxScale * (1f - CountdownTimer / TimerStart);
-            if (Projectile.scale < 0.1f)
-                Projectile.scale = 0.1f;
-            if (Projectile.scale > maxScale)
-                Projectile.scale = maxScale;
+            if (Behavior == 0)
+            {
+                Projectile.velocity.Y += Gravity;
+
+                const float maxScale = 5f;
+                Projectile.scale = maxScale * (1f - CountdownTimer / TimerStart);
+                if (Projectile.scale < 0.1f)
+                    Projectile.scale = 0.1f;
+                if (Projectile.scale > maxScale)
+                    Projectile.scale = maxScale;
+            }
         }
 
         public override void OnKill(int timeLeft)
         {
             if (timeLeft > 0)
             {
-                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeExplosion, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
                 ScreenShakeSystem.StartShake(5, shakeStrengthDissipationIncrement: 10f / 30);
 
                 Projectile.FargoSouls().GrazeCD = 0;
@@ -122,6 +131,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            Projectile.Kill();
+
             target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
@@ -136,7 +147,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Vector2 origin2 = rectangle.Size() / 2f;
 
             Vector2 drawPos = Projectile.Center;
-            drawPos += Projectile.rotation.ToRotationVector2() * Projectile.scale * 8f; //offset axis of rotation so spin is more obvious
+            drawPos += Projectile.rotation.ToRotationVector2() * Projectile.scale * 4f; //offset axis of rotation so spin is more obvious
 
             Main.spriteBatch.UseBlendState(BlendState.Additive);
             for (int j = 0; j < 12; j++)
@@ -146,12 +157,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 float opacity = 1f;
                 glowColor *= opacity;
                 float scale = Projectile.scale;
-                Main.EntitySpriteDraw(texture2D13, drawPos + afterimageOffset - Main.screenLastPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, glowColor, Projectile.rotation, origin2, scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture2D13, drawPos + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, glowColor, Projectile.rotation, origin2, scale, SpriteEffects.None, 0);
             }
             Main.spriteBatch.ResetToDefault();
 
-            // TODO: fix cannonball not actually rendering
-            Main.EntitySpriteDraw(texture2D13, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture2D13, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), rectangle, Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
     }

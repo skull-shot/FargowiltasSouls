@@ -96,7 +96,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             if (State == 0)
             {
-                Projectile.tileCollide = false;
+                if (Projectile.tileCollide && !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
+                    Projectile.tileCollide = false;
+
                 if (player.HeldItem != null && player.HeldItem.damage > 0 && (player.controlUseItem || Main.mouseRight)) //it's being held
                 {
                     int distance = 160;
