@@ -411,7 +411,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public int ReallyAwfulDebuffCooldown;
 
-        public bool BoxofGizmos;
+        public Item BoxofGizmos;
         public bool OxygenTank;
 
         public int DreadShellVulnerabilityTimer;

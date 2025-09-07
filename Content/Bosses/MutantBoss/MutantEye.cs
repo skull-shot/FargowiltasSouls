@@ -140,19 +140,27 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override bool PreDraw(ref Color lightColor)
         {
-            if (SoulConfig.Instance.PerformanceMode)
-                return false;
-
             Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
             int rect1 = glow.Height / Main.projFrames[Projectile.type];
             int rect2 = rect1 * Projectile.frame;
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
-            Color glowcolor = Color.Lerp(
-                FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, TrailAdditive) : new Color(31, 187, 192, TrailAdditive),
+            Color glowcolor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, TrailAdditive) : new Color(31, 187, 192, TrailAdditive);
+            Vector2 drawCenter = Projectile.Center - Projectile.velocity.SafeNormalize(Vector2.UnitX) * 14;
+
+            if (SoulConfig.Instance.PerformanceMode)
+            {
+                glowcolor *= 0.5f;
+                Main.EntitySpriteDraw(glow, drawCenter - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glowrectangle),
+                    glowcolor, Projectile.velocity.ToRotation() + MathHelper.PiOver2, gloworigin2, Projectile.scale, SpriteEffects.None, 0);
+                return false;
+            }
+
+            glowcolor = Color.Lerp(
+                glowcolor,
                 Color.Transparent,
                 0.74f);
-            Vector2 drawCenter = Projectile.Center - Projectile.velocity.SafeNormalize(Vector2.UnitX) * 14;
+
             for (int i = 0; i < 3; i++) //create multiple transparent trail textures ahead of the projectile
             {
                 Vector2 drawCenter2 = drawCenter + (Projectile.velocity.SafeNormalize(Vector2.UnitX) * 8).RotatedBy(MathHelper.Pi / 5 - i * MathHelper.Pi / 5); //use a normalized version of the projectile's velocity to offset it at different angles
