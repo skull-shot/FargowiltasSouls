@@ -47,6 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 GetItemTuple(ModContent.ItemType<WyvernFeather>()),
                 GetItemTuple(ModContent.ItemType<MasochistSoul>()),
                 GetItemTuple(ModContent.ItemType<SquirrelCharm>()),
+                GetItemTuple(ModContent.Find<ModItem>("Fargowiltas", "AutoSummoner").Type),
             };
         }
 
