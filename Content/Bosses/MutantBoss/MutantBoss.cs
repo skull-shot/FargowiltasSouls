@@ -3524,8 +3524,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
 
-            int attackDelay = 35;
-            attackDelay /= 2;
+            int attackDelay = WorldSavingSystem.MasochistModeReal ? 17 : 23;
 
             if (NPC.ai[1] < attackDelay - 10)
             {
@@ -3540,7 +3539,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.velocity *= 0f;
             }
             const int attacksToDo = 12;
-            int endTime = attackDelay * attacksToDo + 50 + attackDelay * (int)Math.Round(4 * endTimeVariance);
+            int attackEndTime = attackDelay * attacksToDo + 50 + attackDelay * (int)Math.Round(4 * endTimeVariance);
+            int endTime = attackEndTime + 60;
 
             if (NPC.ai[1] > 0 && NPC.ai[1] % attackDelay == 0 && NPC.ai[1] < attackDelay * attacksToDo)
             {
@@ -3581,7 +3581,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     //if (WorldSavingSystem.MasochistModeReal) i *= -1;
                     for (int j = -1; j <= 1; j += 2) //flappy bird tubes
                     {
-                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 125 : 150;
+                        float gapRadiusHeight = 150;
                         Vector2 sansTargetPos = centerPoint;
                         const int timeToReachMiddle = 60;
                         sansTargetPos.X += xSpeedWhenAttacking * timeToReachMiddle * i;

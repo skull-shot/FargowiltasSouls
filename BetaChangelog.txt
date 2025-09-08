@@ -181,3 +181,4 @@ preliminary abom hp and attack reduction
 mutant waits between attacks in true kirby boss fashion (not that much rn, delay goes down with life, no delay in maso)
 fixed SANSGOLEM beams desyncing from their heads slightly
 changed eri punch tells to purple
+made SANSGOLEM slower, maso changes speed instead of adjusting gap size
