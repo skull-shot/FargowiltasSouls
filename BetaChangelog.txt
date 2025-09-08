@@ -157,8 +157,6 @@ abom ship
 	added ghosts
 	smoothed abom movement
 
-
-
 replaced mutant okuu with helix
 mutant eyes have one (1) aura in performance mode (visibility is hurting without at least one)
 performance mode applies to mutant spheres
@@ -179,3 +177,7 @@ SANSGOLEM cant combo to nuke
 adjusted how SANSGOLEM thinks (less likely to give basically a long straight free corridor)
 adjusted abom spacing from you while standing on ship
 preliminary abom hp and attack reduction
+
+mutant waits between attacks in true kirby boss fashion (not that much rn, delay goes down with life, no delay in maso)
+fixed SANSGOLEM beams desyncing from their heads slightly
+changed eri punch tells to purple

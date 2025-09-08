@@ -3620,7 +3620,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.Distance(targetPos) > 200) //faster if offscreen
                 Movement(targetPos, 0.3f);
 
-            if (++NPC.ai[1] > 60 || NPC.Distance(targetPos) < 200 && NPC.ai[1] > (PhaseState >= 3 ? 15 : 30))
+            float minWaitTime = 15;
+            float maxFailSafeWaitTime = 90;
+            float timeToWait = MathHelper.Lerp(minWaitTime, maxFailSafeWaitTime, (float)NPC.life / NPC.lifeMax);
+
+            if (WorldSavingSystem.MasochistModeReal)
+            {
+                minWaitTime = timeToWait = 15;
+                maxFailSafeWaitTime = 60;
+            }
+
+            if (++NPC.ai[1] > maxFailSafeWaitTime || (NPC.Distance(targetPos) < 200 && NPC.ai[1] > timeToWait))
             {
                 /*EModeGlobalNPC.PrintAI(npc);
                 string output = "";
