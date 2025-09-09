@@ -70,6 +70,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         float originalSpeed;
         bool spawned;
+        Vector2 origin;
+
+        ref float Flip => ref Projectile.ai[0];
+        ref float RotationSpeed => ref Projectile.ai[1];
+        ref float AltAiAndFullPatternRotation => ref Projectile.ai[2];
 
         public override void AI()
         {
@@ -77,9 +82,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 spawned = true;
                 originalSpeed = Projectile.velocity.Length();
+                origin = Projectile.Center;
             }
-            float mult = Projectile.ai[2] == 1 ? 0.8f : 1f;
-            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(mult * Projectile.ai[1] / (2 * Math.PI * Projectile.ai[0] * ++Projectile.localAI[0]));
+
+            //jank check for backwards compat, lets not talk about it
+            if (AltAiAndFullPatternRotation != 0 && AltAiAndFullPatternRotation != 1)
+            {
+                Vector2 mutantToMe = Projectile.Center - origin;
+                Projectile.Center = origin + mutantToMe.RotatedBy(AltAiAndFullPatternRotation);
+                Projectile.velocity = Projectile.velocity.RotatedBy(AltAiAndFullPatternRotation);
+            }
+
+            float mult = AltAiAndFullPatternRotation == 1 ? 0.8f : 1f;
+            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(mult * RotationSpeed / (2 * Math.PI * Flip * ++Projectile.localAI[0]));
 
             if (Projectile.alpha > 0)
             {

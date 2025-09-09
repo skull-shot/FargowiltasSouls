@@ -182,3 +182,4 @@ mutant waits between attacks in true kirby boss fashion (not that much rn, delay
 fixed SANSGOLEM beams desyncing from their heads slightly
 changed eri punch tells to purple
 made SANSGOLEM slower, maso changes speed instead of adjusting gap size
+restored okuu, adjusted how it spins to be the way it was always intended
