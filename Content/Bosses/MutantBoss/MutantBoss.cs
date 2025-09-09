@@ -2174,7 +2174,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (!AliveCheck(player))
                     return;
                 NPC.ai[3] = 1;
-                //NPC.velocity = NPC.DirectionFrom(player.Center) * NPC.velocity.Length();
+                if (WorldSavingSystem.MasochistModeReal)
+                    NPC.localAI[0] = Main.rand.Next(2);
+                
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearSpin>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, 180);// + (WorldSavingSystem.MasochistMode ? 10 : 20));
@@ -2192,11 +2194,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 AttackChoice++;
                 NPC.ai[1] = 0;
                 NPC.ai[3] = 0;
+                NPC.localAI[0] = 0;
                 //NPC.TargetClosest();
             }
 
             Vector2 targetPos = player.Center;
-            targetPos.Y += 450f * Math.Sign(NPC.Center.Y - player.Center.Y); //can be above or below
+            if (NPC.localAI[0] == 0)
+                targetPos.Y += 450f * Math.Sign(NPC.Center.Y - player.Center.Y); //can be above or below
+            else
+                targetPos.Y += 450f * Math.Sign(NPC.Center.X - player.Center.X); //can be left or right
             Movement(targetPos, 0.7f, false);
             if (NPC.Distance(player.Center) < 200)
                 Movement(NPC.Center + NPC.DirectionFrom(player.Center), 1.4f);

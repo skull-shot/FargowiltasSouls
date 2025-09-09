@@ -189,3 +189,4 @@ made mutant spear spin sucky tells even more obnoxiously bigger
 disabled abom contact damage during ship
 
 eri spams more punches after stardust a lot harder and more random to look a bit better
+maso mutant p2 direct spear dash can now start beside you sometimes instead of always above/below
