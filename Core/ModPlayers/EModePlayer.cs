@@ -150,7 +150,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
-            if (Player.chaosState)
+            if (Player.chaosState && EmodeItemBalance.HasEmodeChange(Player, ItemID.RodofDiscord))
             {
                 Player.statDefense *= 0.6f;
                 Player.endurance -= 0.4f;
@@ -185,6 +185,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             else
             {
                 CrossNecklaceTimer = 0;
+            }
+
+            if (Player.vortexStealthActive && !Player.HasBuff(ModContent.BuffType<VortexStealthCDBuff>()))
+            {
+                Player.AddBuff(ModContent.BuffType<VortexStealthCDBuff>(), VortexStealthCDBuff.STEALTH_UPTIME + VortexStealthCDBuff.STEALTH_DOWNTIME);
             }
         }
 

@@ -1,7 +1,9 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using Fargowiltas.Content.Projectiles;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Patreon.Tiger;
 using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
+using Mono.Cecil;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -38,6 +40,42 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
             Item.buffType = ModContent.BuffType<TouhouHoardBuff>();
             Item.autoReuse = true;
             Item.value = Item.sellPrice(0, 8);
+        }
+
+        public override bool CanUseItem(Player player)
+        {
+            float usedminionslots = 0;
+            var minions = Main.projectile.Where(x => x.minionSlots > 0 && x.owner == player.whoAmI && x.active);
+            foreach (Projectile minion in minions)
+                usedminionslots += minion.minionSlots;
+
+            if (usedminionslots < player.maxMinions)
+            {
+                List<int> minionList = new List<int>();
+                minionList.Add(ModContent.ProjectileType<CirnoMinion>());
+                minionList.Add(ModContent.ProjectileType<DaiyouseiMinion>());
+                minionList.Add(ModContent.ProjectileType<MystiaMinion>());
+                minionList.Add(ModContent.ProjectileType<RumiaMinion>());
+                minionList.Add(ModContent.ProjectileType<WriggleMinion>());
+
+                int minionType = -1;
+
+                foreach (int checkMinion in minionList)
+                {
+                    if (!hasMinion(player, checkMinion))
+                    {
+                        minionType = checkMinion;
+                        break;
+                    }
+                }
+
+                if (minionType == -1)
+                {
+                    return false;
+                }
+            }
+
+            return base.CanUseItem(player);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

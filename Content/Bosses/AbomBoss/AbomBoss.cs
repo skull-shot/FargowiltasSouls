@@ -91,13 +91,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 NPC.width = Player.defaultWidth;
                 NPC.height = Player.defaultHeight;
             }
-            NPC.damage = 228;
+            NPC.damage = 200;
             NPC.defense = 80;
-            NPC.lifeMax = 637500;
-            if (Main.expertMode) //compensate universe core
-                NPC.lifeMax *= 2;
-            if (WorldSavingSystem.MasochistModeReal) //he's tanky enough
-                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
+            // more expert hp to compensate universe core
+            NPC.lifeMax = Main.expertMode ? 1000000 : 640000;
             NPC.value = Item.buyPrice(12);
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
@@ -137,7 +134,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
-            return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && NPC.ai[0] != 0 && NPC.ai[0] != 10 && NPC.ai[0] != 18;
+            return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight 
+                && NPC.ai[0] != 0 && NPC.ai[0] != 5 && NPC.ai[0] != 10 && NPC.ai[0] != 18;
         }
 
         public override bool CanHitNPC(NPC target)
@@ -785,10 +783,20 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                             //lerp to position on side of arena
                             //y offset to help look like he's standing on the pirate ship while keeping ship hitbox centered on player
                             targetPos = new Vector2(NPC.ai[2], player.Center.Y - 85);
+                            targetPos.X = player.Center.X + NPC.localAI[2] * 400;
+                            targetPos.Y += 200f * (float)Math.Sin(MathHelper.TwoPi / shotsWait * 3 * NPC.ai[1]);
 
-                            // TODO: if someone can make abom cleanly transition between this 400 spacing and sitting directly on the border, that'd be appreciated
-                            if (NPC.localAI[2] == Math.Sign(player.Center.X - NPC.ai[2])) //if player is on abom's side, just sit in front of them
-                                targetPos.X = player.Center.X + NPC.localAI[2] * 400;
+                            if (NPC.localAI[2] < 0) //dont cross over middle of arena
+                            {
+                                if (targetPos.X > NPC.ai[2])
+                                    targetPos.X = NPC.ai[2];
+                            }
+                            else
+                            {
+                                if (targetPos.X < NPC.ai[2])
+                                    targetPos.X = NPC.ai[2];
+                            }
+
                             NPC.Center = Vector2.Lerp(NPC.Center, targetPos, 0.09f);
                             NPC.velocity = Vector2.Zero;
                         }
@@ -814,7 +822,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 case 6: //flocko swarm (p2 shoots ice waves horizontally after)
                     if (Phase2Check())
                         break;
-                    NPC.velocity *= 0.99f;
+                    NPC.velocity *= 0.9f;
                     if (NPC.ai[2] == 0)
                     {
 
@@ -1165,7 +1173,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel3 * 1200, vel3, ModContent.ProjectileType<AbomFlamePillarMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft, NPC.whoAmI);
                             }
                             */
-                            Vector2 vel1 = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
+                            Vector2 vel1 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             //Vector2 vel2 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel1 * 2000, vel1, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
                             //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel2, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
@@ -1227,6 +1235,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
 
                         float timeLeft = 2400 / Math.Abs(NPC.velocity.X) * 2 - NPC.ai[1] + 120;
+                        if (NPC.dontTakeDamage) //desp, make rays leave scythes for laevateinn
+                            timeLeft += 3600;
+
                         if (NPC.ai[1] <= 15)
                         {
                             timeLeft = 0;
@@ -1248,7 +1259,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel3 * 1200, vel3, ModContent.ProjectileType<AbomFlamePillarMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft, NPC.whoAmI);
                             }
                             */
-                            Vector2 vel1 = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
+                            Vector2 vel1 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             //Vector2 vel2 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel1 * 2000, vel1, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
                             //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel2, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);

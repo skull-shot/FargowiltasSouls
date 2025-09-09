@@ -102,7 +102,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateVanity(Player player)
         {
             player.FargoSouls().WoodEnchantDiscount = true;
-            player.AddEffect<GoldToPiggy>(Item);
             player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);
@@ -111,7 +110,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateInventory(Player player)
         {
             player.FargoSouls().WoodEnchantDiscount = true;
-            player.AddEffect<GoldToPiggy>(Item);
             player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);

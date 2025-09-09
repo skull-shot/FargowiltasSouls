@@ -52,6 +52,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (head != null)
             {
                 Projectile.Center = head.Center + Projectile.velocity * 16 * 3;
+                if (Projectile.whoAmI < head.whoAmI)
+                    Projectile.position += head.velocity;
             }
             else
             {

@@ -56,7 +56,7 @@
 // DynamicUpdating: Projectile damage updates dynamically
 // PygmyStaff: Spears can now pierce once
 // MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
-// AerialBane: Bonus damage against airborne enemies decreased to 15%
+// AerialBane: Damage against airborne enemies decreased to 1.15x
 // ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
 // AvengerEmblem: Damage bonus increased by 3%
@@ -67,3 +67,4 @@
 // AmberStaff: Bolt boomerangs back
 // RubyStaff: Bolt splits in half after a duration
 // MeleeDamageBugFix: Fixed projectiles not dealing melee damage
+// VortexSet: Stealth lasts up to 10 seconds before going on cooldown

@@ -732,3 +732,8 @@ DaybrokenBuff: {
 	DisplayName: Daybroken
 	Description: Incinerated by solar rays
 }
+
+VortexStealthCDBuff: {
+	DisplayName: Vortex Stealth Cooldown
+	Description: Cannot be stealthy again yet
+}

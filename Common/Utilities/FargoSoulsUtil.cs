@@ -216,6 +216,11 @@ namespace FargowiltasSouls //lets everything access it without using
             return false;
         }
 
+        public static bool AnyBossAlive()
+        {
+            return Main.npc.Any(npc => npc.active && (npc.boss || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.DD2Betsy));
+        }
+
         public static bool BossIsAlive(ref int bossID, int bossType)
         {
             if (bossID != -1)

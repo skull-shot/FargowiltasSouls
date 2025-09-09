@@ -545,6 +545,12 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["RubyStaff"];
                     return EModeChange.ReworkBuff;
 
+                case ItemID.VortexHelmet:
+                case ItemID.VortexBreastplate:
+                case ItemID.VortexLeggings:
+                    balanceTextKeys = ["VortexSet"];
+                    return EModeChange.Nerf;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {

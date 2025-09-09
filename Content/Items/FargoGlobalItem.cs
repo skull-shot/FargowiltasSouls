@@ -1,6 +1,7 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
@@ -240,7 +241,7 @@ namespace FargowiltasSouls.Content.Items
             {
                 return true;
             }
-            if (modPlayer.BoxofGizmos)
+            if (modPlayer.SquirrelCharm != null)
             {
                 if (item.DamageType == DamageClass.Default && item.damage <= 0 && item.fishingPole <= 0)
                 {

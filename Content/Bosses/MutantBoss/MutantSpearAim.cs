@@ -66,6 +66,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
          */
         public ref float VisualRotation => ref Projectile.ai[2];
         public ref float MaxTime => ref Projectile.localAI[2];
+        float spinTimer;
+        float spinFlip;
         public override void AI()
         {
             //basically: ai1 > 1 means predictive and blue glow, otherwise direct aim and green glow
@@ -73,6 +75,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC mutant = Main.npc[(int)Projectile.ai[0]];
             if (mutant.active && mutant.type == ModContent.NPCType<MutantBoss>())
             {
+                if (spinFlip == 0)
+                    spinFlip = Main.rand.NextBool() ? -1 : 1;
+
                 Projectile.Center = mutant.Center;
 
                 if (Projectile.localAI[0] == 0) //ensure it faces the right way on tick 1
@@ -199,12 +204,45 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Color glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 191, 51, 210) : new(51, 255, 191, 210);
                 if (Projectile.ai[1] > 1)
                     glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, 210) : new Color(0, 0, 255, 210);
-                //if (Projectile.ai[1] == 4) glowColor = new Color(255, 0, 0, 210);
+
+                float repeats = 1f - Projectile.timeLeft / MaxTime;
+                if (Projectile.ai[1] == -1) //extremely long startup, give it custom anim to stay fast and not look weird
+                    repeats = 1f - Projectile.timeLeft % 60 / 60f;
+                FancyFireballs(repeats, glowColor);
+
                 glowColor *= 1f - modifier;
                 float glowScale = Projectile.scale * 8f * modifier;
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glow.Bounds), glowColor, 0, glow.Bounds.Size() / 2, glowScale, SpriteEffects.None, 0);
             }
             return false;
+        }
+
+        void FancyFireballs(float repeats, Color glowColor)
+        {
+            float modifier = repeats;
+
+            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
+            int rect1 = glow.Height;
+            int rect2 = rect1 * Projectile.frame;
+            Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
+            Vector2 gloworigin2 = glowrectangle.Size() / 2f;
+
+            float distance = 360 * (1f - modifier);
+            float rotation = MathHelper.TwoPi * modifier * spinFlip;
+            const int max = 6;
+            Color finalColor = glowColor * (float)Math.Sqrt(modifier);
+            for (int i = 0; i < max; i++)
+            {
+                Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
+                Vector2 drawPos = Projectile.Center + offset;
+                float scale = 2f * (1f - 0.9f * modifier);
+                float drawRotation = offset.ToRotation();
+                if (spinFlip > 0)
+                    drawRotation += MathHelper.Pi;
+                float endRotation = drawRotation + MathHelper.PiOver2 * spinFlip;
+                drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
+                Main.EntitySpriteDraw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None);
+            }
         }
     }
 }

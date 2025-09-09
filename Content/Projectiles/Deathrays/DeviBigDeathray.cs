@@ -12,6 +12,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities.Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
@@ -42,11 +43,27 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
 
+        float offsetFromDevi = 300;
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            //the laser is offset really far out in front of devi
+            //add another thinner hitbox to fix that
+            float num6 = 0f;
+            Vector2 startPoint = Projectile.Center - Projectile.velocity * offsetFromDevi;
+            float closeRangeHitboxWidthModifier = 0.5f;
+            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), startPoint, startPoint + Projectile.velocity * Projectile.localAI[1], closeRangeHitboxWidthModifier * 22f * Projectile.scale * hitboxModifier, ref num6))
+            {
+                return true;
+            }
+
+            return base.Colliding(projHitbox, targetHitbox);
+        }
+
         public override void AI()
         {
             if (!Main.dedServ && Main.LocalPlayer.active)
                 FargoSoulsUtil.ScreenshakeRumble(6);
-
             Vector2? vector78 = null;
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
@@ -55,7 +72,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<DeviBoss>());
             if (npc != null)
             {
-                Projectile.Center = npc.Center + Projectile.velocity * 300 + Main.rand.NextVector2Circular(20, 20);
+                Projectile.Center = npc.Center + Projectile.velocity * offsetFromDevi + Main.rand.NextVector2Circular(20, 20);
             }
             else
             {

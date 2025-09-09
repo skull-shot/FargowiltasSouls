@@ -630,8 +630,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Midas && Main.myPlayer == Player.whoAmI)
                 Player.DropCoins();
 
-            DeviGrazeBonus = 0;
-            DeviGrazeCounter = 0;
+            if (info.Damage > 1)
+            {
+                DeviGrazeBonus = 0;
+                DeviGrazeCounter = 0;
+            }
 
             if (Main.myPlayer == Player.whoAmI)
             {

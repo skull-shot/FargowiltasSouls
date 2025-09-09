@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -24,13 +25,16 @@ namespace FargowiltasSouls.Content.Buffs
                 switch (type)
                 {
                     case BuffID.ShadowDodge:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
-                        break;
-                    case BuffID.IceBarrier:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.HallowedPlateMail))
+                        {
+                            tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
+                        }
                         break;
                     case BuffID.ChaosState:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.RodofDiscord))
+                        {
+                            tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        }
                         break;
                 }
             }

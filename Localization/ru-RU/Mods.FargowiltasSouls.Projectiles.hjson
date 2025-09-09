@@ -843,4 +843,6 @@ AbomShip.DisplayName: Корабль
 AbomCannonball.DisplayName: Ядро из пушки
 AbomReticle2.DisplayName: Прицел
 AbomBullet.DisplayName: Пуля
-// FallingIcicle.DisplayName: Falling Icicle
+FallingIcicle.DisplayName: Падающая сосулька
+AbomGhost.DisplayName: Призрак Выродкка
+MutantSphereHelix.DisplayName: Спиральная сфера Мутанта

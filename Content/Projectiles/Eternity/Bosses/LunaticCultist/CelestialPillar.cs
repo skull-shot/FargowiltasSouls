@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                         Projectile.velocity = Main.player[target].Center - Projectile.Center;
                         float distance = Projectile.velocity.Length();
                         Projectile.velocity.Normalize();
-                        const float speed = 22f;
+                        const float speed = 36f;
                         Projectile.velocity *= speed;
                         Projectile.timeLeft = (int)(distance / speed);
                         Projectile.netUpdate = true;
@@ -197,7 +197,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
                 for (int i = 0; i < max; i++)
                 {
                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Normalize(Projectile.velocity).RotatedBy(rotationInterval * i),
-                          ModContent.ProjectileType<GlowLine>(), Projectile.damage / 3, 0f, Main.myPlayer, 7, Projectile.ai[0]);
+                        ModContent.ProjectileType<GlowLine>(), Projectile.damage / 3, 0f, Main.myPlayer, 7, Projectile.ai[0]);
                 }
 
                 if (Main.getGoodWorld)

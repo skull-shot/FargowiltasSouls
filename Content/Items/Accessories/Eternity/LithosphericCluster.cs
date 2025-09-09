@@ -27,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(7, 5));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+            ItemID.Sets.ItemNoGravity[Item.type] = true; //intentionally not set for inactive version
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,16 +38,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 6);
-            //Item.useTime = 180;
-            //Item.useAnimation = 180;
-            //Item.useStyle = ItemUseStyleID.HoldUp;
-            //Item.useTurn = true;
-            //Item.UseSound = SoundID.Item6;
         }
 
         public static void PassiveEffect(Player player, Item item)
         {
-            SecurityWallet.PassiveEffects(player);
+            SecurityWallet.PassiveEffects(player, item);
             WyvernFeather.PassiveEffects(player, item);
             MysticSkull.PassiveEffects(player);
             //WretchedPouch.PassiveEffects(player, item);
@@ -72,9 +68,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             ActiveEffect(player, Item);
         }
-        //public override bool? UseItem(Player player) => true;
-
-
 
         public override void AddRecipes()
         {
@@ -125,12 +118,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 6);
-            Item.defense = 6;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
-            Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
         }
 
         public override void UpdateInventory(Player player) { return; }//PassiveEffect(player, Item);

@@ -34,8 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             if (npc.ai[0] < 9 && npc.ai[0] != -3 && npc.ai[0] != 5)
             {
                 Projectile.velocity = npc.Center - Projectile.Center;
-                if (npc.ai[0] != 8) //snaps directly to abom when preparing for p2 attack
-                    Projectile.velocity /= 40f;
+                Projectile.velocity /= npc.ai[0] == 8 ? 10f : 40f; //snaps to abom faster when preparing for p2 attack
 
                 rotationPerTick = realRotation;
             }

@@ -27,6 +27,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron
             CooldownSlot = -1;
         }
 
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            float dummy = 0f;
+            float hitboxTotalLength = 100;
+            Vector2 offset = hitboxTotalLength / 2 * Projectile.scale * Projectile.rotation.ToRotationVector2();
+            Vector2 end = Projectile.Center - offset;
+            Vector2 tip = Projectile.Center + offset;
+
+            float hitboxTotalWidth = 20;
+
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), end, tip, hitboxTotalWidth / 2 * Projectile.scale, ref dummy);
+        }
+
         public override bool CanHitPlayer(Player target)
         {
             return true;

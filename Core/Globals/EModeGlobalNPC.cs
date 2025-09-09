@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Core.Globals
                 return base.PreAI(npc);
 
             //in pre-hm, enemies glow slightly at night
-            if (!Main.dayTime && !Main.hardMode && Main.player.Any(p => p.Alive() && p.FargoSouls().BoxofGizmos))
+            if (!Main.dayTime && !Main.hardMode && Main.player.Any(p => p.Alive() && p.FargoSouls().SquirrelCharm != null))
             {
                 int x = (int)npc.Center.X / 16;
                 int y = (int)npc.Center.Y / 16;
@@ -853,7 +853,7 @@ namespace FargowiltasSouls.Core.Globals
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
 
             int closestP = Player.FindClosest(npc.Center, 1, 1);
-            if (npc.type != ModContent.NPCType<BloodPuddle>() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
+            if (npc.type != ModContent.NPCType<BloodPuddle>() && !FargoSoulsUtil.AnyBossAlive() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {

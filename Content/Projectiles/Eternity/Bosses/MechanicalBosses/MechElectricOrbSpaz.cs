@@ -1,8 +1,11 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
 {
@@ -14,6 +17,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
             base.SetDefaults();
 
             Projectile.timeLeft = 180;
+
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
+                CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -21,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
             base.AI();
 
             if (++Projectile.ai[1] < 75) //straight accel
-                Projectile.velocity *= 1.06f;
+                Projectile.velocity *= WorldSavingSystem.MasochistModeReal ? 1.06f : 1.05f;
 
             Player target = FargoSoulsUtil.PlayerExists(Projectile.ai[0]);
             if (target != null)

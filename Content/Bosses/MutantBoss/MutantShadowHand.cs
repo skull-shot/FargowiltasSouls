@@ -111,14 +111,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (Projectile.spriteDirection < 0)
                 drawRotation += (float)Math.PI;
 
-            float opacityMod = Projectile.localAI[0] > 85 ? 0.6f : 0.3f;
+            float opacityMod = 0.3f + 0.3f * Math.Min(1f, Projectile.localAI[0] / 85f);
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
                 Color color27 = Color.LightBlue * Projectile.Opacity * opacityMod;
-                color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                float ratio = (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                color27 *= ratio * ratio;
+                float scale = Projectile.scale * 1.1f * ratio;
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i] + drawRotation;
-                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale * 1.2f, effects, 0);
+                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, scale, effects, 0);
             }
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation + drawRotation, origin2, Projectile.scale, effects, 0);

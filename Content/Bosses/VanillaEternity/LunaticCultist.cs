@@ -98,8 +98,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)(npc.lifeMax * 5f / 3f);
-
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 5f / 3f + 1);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -150,6 +149,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.netUpdate = true;
             }
 
+            npc.dontTakeDamage = false;
+
             AttacksAI(npc, ref Timer, ref State, ref OldAttack, ref AnimationState);
 
             npc.defense = npc.defDefense; //prevent vanilla p2 from lowering defense!
@@ -189,11 +190,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 case States.Intro:
                     {
                         animation = (int)Animation.Laugh;
+                        npc.dontTakeDamage = true;
                         if (timer == 1)
                         {
                             SoundEngine.PlaySound(SoundID.Zombie105, npc.Center);
                         }
-                        if (timer == 120)
+                        //do 2sec spawn anim normally, or wait until tablet breaks if it's there. have a longer timer failsafe
+                        if (timer >= 120 && (timer > 480 || !Main.npc.Any(otherNpc => otherNpc.active && otherNpc.type == NPCID.CultistTablet && npc.Distance(otherNpc.Center) < 600)))
                         {
                             EndAttack(npc, ref timer, ref state, ref oldAttack);
                         }
@@ -256,7 +259,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             if (weight[max] > 0)
                                 ai0 = max;
                             Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.UnitY * -10f, ModContent.ProjectileType<CelestialPillar>(),
-                                        Math.Max(75, FargoSoulsUtil.ScaledProjectileDamage(npc.damage, 4)), 0f, Main.myPlayer, ai0);
+                                Math.Max(75, FargoSoulsUtil.ScaledProjectileDamage(npc.damage, 4)), 0f, Main.myPlayer, ai0);
                         }
                         if (timer == 70 * 2 && npc.type == NPCID.CultistBoss)
                         {

@@ -732,3 +732,8 @@ DaybrokenBuff: {
 	DisplayName: Заря
 	Description: Испепеление солнечными лучами
 }
+
+VortexStealthCDBuff: {
+	DisplayName: Перезарядка скрытности вихря
+	Description: Вы пока не можете войти в режим скрытности
+}

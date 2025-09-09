@@ -1,11 +1,13 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -39,6 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 480;
             Projectile.alpha = 200;
+            Projectile.hide = true;
             CooldownSlot = ImmunityCooldownID.Bosses;
 
             //dont let others inherit this behaviour
@@ -53,15 +56,25 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
         }
 
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            behindProjectiles.Add(index);
+        }
+
         public override bool CanHitPlayer(Player target)
         {
             return target.hurtCooldowns[1] == 0 || WorldSavingSystem.MasochistModeReal;
         }
 
-        private int ritualID = -1;
+        protected int ritualID = -1;
 
         float originalSpeed;
         bool spawned;
+        Vector2 origin;
+
+        ref float Flip => ref Projectile.ai[0];
+        ref float RotationSpeed => ref Projectile.ai[1];
+        ref float AltAiAndFullPatternRotation => ref Projectile.ai[2];
 
         public override void AI()
         {
@@ -69,9 +82,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 spawned = true;
                 originalSpeed = Projectile.velocity.Length();
+                origin = Projectile.Center;
             }
-            float mult = Projectile.ai[2] == 1 ? 0.8f : 1f;
-            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(mult * Projectile.ai[1] / (2 * Math.PI * Projectile.ai[0] * ++Projectile.localAI[0]));
+
+            //jank check for backwards compat, lets not talk about it
+            if (AltAiAndFullPatternRotation != 0 && AltAiAndFullPatternRotation != 1)
+            {
+                Vector2 mutantToMe = Projectile.Center - origin;
+                Projectile.Center = origin + mutantToMe.RotatedBy(AltAiAndFullPatternRotation);
+                Projectile.velocity = Projectile.velocity.RotatedBy(AltAiAndFullPatternRotation);
+            }
+
+            float mult = AltAiAndFullPatternRotation == 1 ? 0.8f : 1f;
+            Projectile.velocity = originalSpeed * Vector2.Normalize(Projectile.velocity).RotatedBy(mult * RotationSpeed / (2 * Math.PI * Flip * ++Projectile.localAI[0]));
 
             if (Projectile.alpha > 0)
             {
@@ -177,18 +200,23 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             return Color.White * Projectile.Opacity;
         }
 
+        protected virtual float GlowLerpToClear => 0.9f;
+        protected Color GlowColor => Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(196, 247, 255, 0), Color.Transparent, GlowLerpToClear);
+
         public override bool PreDraw(ref Color lightColor)
         {
+            if (SoulConfig.Instance.PerformanceMode)
+                return false;
+
             Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantSphereGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int rect1 = glow.Height;
             int rect2 = 0;
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
-            Color glowcolor = Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(196, 247, 255, 0), Color.Transparent, 0.9f);
+            Color glowcolor = GlowColor;
             glowcolor *= Projectile.Opacity;
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++) //reused betsy fireball scaling trail thing
             {
-
                 Color color27 = glowcolor;
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 float scale = Projectile.scale * (ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
