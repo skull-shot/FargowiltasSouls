@@ -227,7 +227,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
 
-            float distance = 300 * (1f - modifier);
+            float distance = 360 * (1f - modifier);
             float rotation = MathHelper.TwoPi * modifier * spinFlip;
             const int max = 6;
             Color finalColor = glowColor * (float)Math.Sqrt(modifier);
