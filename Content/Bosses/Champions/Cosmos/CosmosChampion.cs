@@ -810,8 +810,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         }
                     }
 
-
-                    if (++NPC.ai[2] <= 6)
+                    const int attackTime = 3;
+                    if (++NPC.ai[2] <= attackTime)
                     {
                         NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
                         if (NPC.direction < 0)
@@ -819,7 +819,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
                         NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
 
-                        if (NPC.ai[2] == 6)
+                        if (NPC.ai[2] == attackTime)
                         {
                             NPC.netUpdate = true;
                             if (NPC.ai[1] > 50)
@@ -830,6 +830,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                     if (NPC.direction < 0)
                                         offset.X *= -1f;
                                     offset = offset.RotatedBy(NPC.SafeDirectionTo(player.Center).ToRotation());
+
+                                    offset += Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2);
 
                                     int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * NPC.DirectionFrom(player.Center) * modifier,
