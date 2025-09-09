@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Core.Systems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -23,6 +24,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Corrupti
             AIType = ProjectileID.CursedFlameHostile;
         }
 
+        public override bool PreAI()
+        {
+            if (Projectile.wet)
+            {
+                WorldUpdatingSystem.CorruptWaterTimer = 900;
+            }
+
+            return base.PreAI();
+        }
+
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             Projectile.timeLeft = 0;
@@ -31,6 +42,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Corrupti
 
         public override void OnKill(int timeLeft)
         {
+            if (Projectile.wet)
+            {
+                //Main.NewText("hi - on kill");
+                //FargoSoulsUtil.DustRing(Projectile.Center, 2, DustID.CorruptTorch, 1f);
+               // WorldUpdatingSystem.CorruptWaterTimer = 900;
+            }
+
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             for (int index1 = 0; index1 < 20; ++index1)
             {

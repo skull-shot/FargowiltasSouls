@@ -854,6 +854,12 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         return false; //don't run vanilla code
                     }
+                case ProjectileID.GoldenShowerHostile:
+                    WorldUpdatingSystem.CrimsonWaterTimer = 1200;
+                    break;
+                case ProjectileID.CursedFlameHostile:
+                    WorldUpdatingSystem.CorruptWaterTimer = 600;
+                    break;
             }
 
             return retVal;
