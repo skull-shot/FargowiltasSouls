@@ -183,3 +183,5 @@ fixed SANSGOLEM beams desyncing from their heads slightly
 changed eri punch tells to purple
 made SANSGOLEM slower, maso changes speed instead of adjusting gap size
 restored okuu, adjusted how it spins to be the way it was always intended
+fixed abom ray run breaking if done at top of world
+maso has really long preserved scythes after ray run for specifically the last run of desp

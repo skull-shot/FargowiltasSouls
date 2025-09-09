@@ -1172,7 +1172,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel3 * 1200, vel3, ModContent.ProjectileType<AbomFlamePillarMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft, NPC.whoAmI);
                             }
                             */
-                            Vector2 vel1 = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
+                            Vector2 vel1 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             //Vector2 vel2 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel1 * 2000, vel1, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
                             //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel2, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
@@ -1234,6 +1234,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
 
                         float timeLeft = 2400 / Math.Abs(NPC.velocity.X) * 2 - NPC.ai[1] + 120;
+                        if (NPC.dontTakeDamage) //desp, make rays leave scythes for laevateinn
+                            timeLeft += 3600;
+
                         if (NPC.ai[1] <= 15)
                         {
                             timeLeft = 0;
@@ -1255,7 +1258,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel3 * 1200, vel3, ModContent.ProjectileType<AbomFlamePillarMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft, NPC.whoAmI);
                             }
                             */
-                            Vector2 vel1 = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
+                            Vector2 vel1 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             //Vector2 vel2 = -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(20) * (Main.rand.NextDouble() - 0.5));
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center - vel1 * 2000, vel1, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
                             //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel2, ModContent.ProjectileType<AbomDeathrayMark>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f * 3 / 8), 0f, Main.myPlayer, timeLeft);
