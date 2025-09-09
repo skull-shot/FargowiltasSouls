@@ -138,7 +138,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
 
-            if (Projectile.localAI[0] <= 360 && Projectile.localAI[1] == 0)
+            if (Projectile.localAI[0] <= chargeTime && Projectile.localAI[1] == 0)
             {
                 if (Projectile.frameCounter++ > 4)
                 {
