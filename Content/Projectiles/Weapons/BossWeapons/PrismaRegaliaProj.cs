@@ -31,22 +31,24 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             Projectile.timeLeft = 3600;
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 150;
-            Projectile.DamageType = DamageClass.MeleeNoSpeed;
+            Projectile.localNPCHitCooldown = -1;
+            Projectile.DamageType = DamageClass.Melee;
             Projectile.friendly = true;
+            Projectile.noEnchantmentVisuals = true;
+            Projectile.ignoreWater = true;
         }
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
             Vector2 HitboxSize = new(88 * Projectile.scale, 88 * Projectile.scale);
             Vector2 HitboxCenter = Projectile.Center + Projectile.velocity * (Projectile.Size.Length() / 2f - HitboxSize.Length() / 2f);
             hitbox = new Rectangle((int)(HitboxCenter.X - HitboxSize.X / 2f), (int)(HitboxCenter.Y - HitboxSize.Y / 2f), (int)HitboxSize.X, (int)HitboxSize.Y);
+            Projectile.EmitEnchantmentVisualsAt(HitboxCenter - (HitboxSize / 2f), hitbox.Width, hitbox.Height);
         }
         public float maxCharge = 60 * 2.5f;
         public int SwingDirection = 1;
         public float Extension = 0;
         int OrigAnimMax = 30;
         bool Charged;
-        public int Hits = 0;
         public override bool PreAI()
         {
             ref float chargable = ref Projectile.ai[0];
@@ -154,23 +156,16 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.SourceDamage *= MathHelper.Lerp(1f, 1.2f, Extension);
+            modifiers.SourceDamage *= MathHelper.Lerp(1f, 1.5f, Extension);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Vector2 pos = Projectile.Center + Projectile.velocity * (Projectile.Size.Length() / 2f);
-            int count = 1;
-            if (Charged)
-            {
-                count = 7;
-            }
-            if (count == 0)
-            {
+            int count = (int)Math.Round(MathHelper.Lerp(1, 7, Projectile.localAI[1] / 150f));
+
+            if (Projectile.numHits > 1)
                 return;
-            }
-            if (Hits > 1)
-                return;
-            
+
             for (int i = 0; i < count; i++)
             {
                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * 10,
@@ -178,10 +173,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 if (Main.projectile[p] != null && p != Main.maxProjectiles)
                 {
                     Main.projectile[p].DamageType = DamageClass.MeleeNoSpeed;
-                    //Main.projectile[p].
+                    Main.projectile[p].noEnchantmentVisuals = true;
                 }
             }
-            Hits++;
         }
         public override bool PreDraw(ref Color lightColor)
         {

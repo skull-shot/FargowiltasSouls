@@ -3196,10 +3196,9 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hits release homing stars
+		Hold to charge
 		Deals extra damage based on how much the spear is extended on hit
-		Hold Right Click to charge for extra damage
-		While fully charged, hits release additional stars
+		Right Click to rapidly stab with the spear
 		'The radiant power of a foe's pure essence...'
 		''' */
 }
@@ -3493,9 +3492,8 @@ UmbraRegalia: {
 	// DisplayName: Umbra Regalia
 	/* Tooltip:
 		'''
-		Left Click to rapidly stab with the spear
-		Hold Right Click to charge a spear toss
-		Becomes stronger when fully charged
+		Hold Left Click to charge a spear toss
+		Right Click to rapidly stab with the spear and steal life
 		Can continue to gain damage for a while after full charge
 		'The reward for a mighty rematch...'
 		''' */
