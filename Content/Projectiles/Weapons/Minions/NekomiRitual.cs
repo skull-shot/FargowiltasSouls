@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Armor.Nekomi;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -65,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 if (Projectile.localAI[0] >= NekomiHood.MAX_HEARTS)
                 {
                     if (!Main.dedServ)
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/FullMeter"), Projectile.Center);
+                        SoundEngine.PlaySound(FargosSoundRegistry.NekomiCharge, Projectile.Center);
                 }
             }
 

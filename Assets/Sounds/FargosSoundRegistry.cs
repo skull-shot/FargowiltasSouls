@@ -21,7 +21,12 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle Thunder = new(SoundsPath + "Thunder");
         public static readonly SoundStyle Zombie104 = new(SoundsPath + "Zombie_104");
         public static readonly SoundStyle GenericDeathray = new(SoundsPath + "GenericDeathray");
+        public static readonly SoundStyle NekomiCharge = new(SoundsPath + "NekomiCharge");
         public static readonly SoundStyle StyxCharge = new(SoundsPath + "StyxCharge");
+
+        // revives
+        public static readonly SoundStyle SpectreRevive = new(AccessoriesPath + "SpectreRevive");
+        public static readonly SoundStyle StyxRevive = new(AccessoriesPath + "StyxRevive");
 
         // accessories
         public static readonly SoundStyle ZaWarudo = new(AccessoriesPath + "ZaWarudo");

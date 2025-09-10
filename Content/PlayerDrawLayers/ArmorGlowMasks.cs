@@ -27,9 +27,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             if (drawInfo.shadow != 0)
                 return false;
 
-            if (player.armor[0].type != ModContent.ItemType<StyxCrown>() && player.armor[10].type != ModContent.ItemType<StyxCrown>())
-                return false;
-
             if (player.head != EquipLoader.GetEquipSlot(Mod, "StyxCrown", EquipType.Head))
                 return false;
 
@@ -56,9 +53,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         {
             Player player = drawInfo.drawPlayer;
             if (drawInfo.shadow != 0)
-                return false;
-
-            if (player.armor[2].type != ModContent.ItemType<StyxLeggings>() && player.armor[12].type != ModContent.ItemType<StyxLeggings>())
                 return false;
 
             if (player.legs != EquipLoader.GetEquipSlot(Mod, "StyxLeggings", EquipType.Legs))
@@ -88,9 +82,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             if (drawInfo.shadow != 0)
                 return false;
 
-            if (player.armor[0].type != ModContent.ItemType<EridanusHat>() && player.armor[10].type != ModContent.ItemType<EridanusHat>())
-                return false;
-
             if (player.head != EquipLoader.GetEquipSlot(Mod, "EridanusHat", EquipType.Head))
                 return false;
 
@@ -113,15 +104,12 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
     public class EridanusShoulderBack : PlayerDrawLayer
     {
         public override bool IsHeadLayer => false;
-        public override Position GetDefaultPosition() => new BeforeParent(Terraria.DataStructures.PlayerDrawLayers.Head);
+        public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.Head, Terraria.DataStructures.PlayerDrawLayers.Shield);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             Player player = drawInfo.drawPlayer;
             if (drawInfo.shadow != 0)
-                return false;
-            
-            if (player.armor[1].type != ModContent.ItemType<EridanusBattleplate>() && player.armor[11].type != ModContent.ItemType<EridanusBattleplate>())
                 return false;
 
             if (player.body != EquipLoader.GetEquipSlot(Mod, "EridanusBattleplate", EquipType.Body))
@@ -143,7 +131,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
     public class EridanusShoulderFront : PlayerDrawLayer
     {
         public override bool IsHeadLayer => false;
-        public override Position GetDefaultPosition() => new AfterParent(Terraria.DataStructures.PlayerDrawLayers.Head);
+        public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.Head, Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
