@@ -195,3 +195,4 @@ abom
 	does two scythe swings in p1 and p2 always, mostly for flavor
 	shotguns phoenixes after every dash
 	fires a lot more rockets during p1 laser spray (also in p2 maso)
+box of gizmos is now inventory only, not an acc
