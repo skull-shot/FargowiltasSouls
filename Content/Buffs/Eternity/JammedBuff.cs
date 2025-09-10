@@ -15,10 +15,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //all ranged weapons shoot confetti 
             player.FargoSouls().Jammed = true;
 
-            player.GetDamage(DamageClass.Ranged) *= 0.6f;
+            player.GetDamage(DamageClass.Ranged) /= 1.5f;
         }
     }
 }

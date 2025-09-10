@@ -707,7 +707,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (LockedMana > 0)
             {
                 float previousLockedMana = LockedMana;
-                LockedMana -= 0.3f;
+                if (Player.manaRegenDelay <= 0)
+                    LockedMana -= 1;
                 Player.statManaMax2 -= (int)Player.FargoSouls().LockedMana;
                 if ((int)LockedMana != (int)previousLockedMana)
                 {
@@ -841,8 +842,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Asocial)
             {
                 KillPets();
-                Player.maxMinions /= 2;
-                Player.maxTurrets /= 2;
+                Player.maxMinions = (int)(Player.maxMinions / 1.5);
+                Player.maxTurrets = (int)(Player.maxTurrets / 1.5);
             }
             else if (WasAsocial) //should only occur when above debuffs end
             {
