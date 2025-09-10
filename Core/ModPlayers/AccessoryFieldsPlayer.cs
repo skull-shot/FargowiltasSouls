@@ -224,7 +224,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SupersonicSoul;
         public bool WorldShaperSoul;
         public bool FlightMasterySoul;
-        public bool RangedEssence;
         public bool BuilderMode;
         public bool UniverseSoul;
         public bool UniverseSoulBuffer;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything

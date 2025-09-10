@@ -351,7 +351,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             SupersonicSoul = false;
             WorldShaperSoul = false;
             FlightMasterySoul = false;
-            RangedEssence = false;
             BuilderMode = false;
             if (!UniverseSoulBuffer)
             {

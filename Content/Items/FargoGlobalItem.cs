@@ -470,8 +470,6 @@ namespace FargowiltasSouls.Content.Items
                 velocityMult += 0.5f;
             if (modPlayer.RangedSoul && item.CountsAsClass(DamageClass.Ranged))
                 velocityMult += 0.2f;
-            if (modPlayer.RangedEssence  && item.CountsAsClass(DamageClass.Ranged))
-                velocityMult += 0.1f;
             velocity *= velocityMult;
 
         }

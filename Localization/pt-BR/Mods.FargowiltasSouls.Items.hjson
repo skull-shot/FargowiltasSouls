@@ -998,7 +998,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		''' */
 }
@@ -1013,7 +1013,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
