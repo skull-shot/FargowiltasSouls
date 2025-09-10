@@ -1,4 +1,4 @@
 AccessorySlot: {
-	EModeSlotFunctional: Зачарование, эссенция, артефакт или душа
-	EModeSlotVanity: Зачарование-, эссенция-, артефакт- или душа-украшение
+	EModeSlotFunctional: Зачарование, артефакт или душа
+	EModeSlotVanity: Зачарование-, артефакт- или душа-украшение
 }

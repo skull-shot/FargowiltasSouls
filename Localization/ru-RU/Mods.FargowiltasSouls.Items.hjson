@@ -1,4 +1,4 @@
-AdamantiteEnchant: {
+﻿AdamantiteEnchant: {
 	DisplayName: Зачарование адамантита
 	Tooltip:
 		'''
@@ -982,13 +982,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ чтобы выключить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		'''
 }
@@ -1003,7 +1003,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ чтобы включить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -3210,10 +3210,10 @@ PrismaRegalia: {
 	DisplayName: Призма Регалия
 	Tooltip:
 		'''
-		Попадании выпускают самонаводящиеся звёзды
+		Удерживайте ЛКМ, чтобы зарядить
 		Наносит тем больше урона, чем ближе к кончику прошёл удар копья
-		Зажмите ПКМ, чтобы зарядить копьё и нанести ещё больше урона
-		При полной зарядке, удары выпускают дополнительные звёзды
+		Нажмитее ПКМ, чтобы наносить быстрые удары копьём
+		Увеличение от зачарования вольфрама менее эффективно
 		«Сияющая сила чистейшей эссенции врага...»
 		'''
 }
@@ -3507,9 +3507,8 @@ UmbraRegalia: {
 	DisplayName: Умбра Регалия
 	Tooltip:
 		'''
-		ЛКМ, чтобы наносить быстрые удары копьём
-		Удерживайте ПКМ, чтобы заряжать бросок копьём
-		Становится сильнее при полном заряде
+		Удерживайте ЛКМ, чтобы зарядить бросок копья
+		Удерживайте ЛКМ, чтобы наносить быстрые удары копьём, похищающие здоровья
 		Может недолго получать доп. урон при полном заряде
 		«Награда за шикарный реванш...»
 		'''
