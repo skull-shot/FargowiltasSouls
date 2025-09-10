@@ -2200,9 +2200,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             Vector2 targetPos = player.Center;
             if (NPC.localAI[0] == 0)
+            {
                 targetPos.Y += 450f * Math.Sign(NPC.Center.Y - player.Center.Y); //can be above or below
+            }
             else
-                targetPos.Y += 450f * Math.Sign(NPC.Center.X - player.Center.X); //can be left or right
+            {
+                targetPos.X += 600 * Math.Sign(NPC.Center.X - player.Center.X); //can be left or right
+                targetPos.Y += 100f * Math.Sign(NPC.Center.Y - player.Center.Y); //always do it starting from a bit diagonal to make fall dodge easier
+            }
             Movement(targetPos, 0.7f, false);
             if (NPC.Distance(player.Center) < 200)
                 Movement(NPC.Center + NPC.DirectionFrom(player.Center), 1.4f);
@@ -3217,7 +3222,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 }
             }
 
-            Main.NewText(Main.projectile.Count(p => p.active));
+            //Main.NewText(Main.projectile.Count(p => p.active));
 
             if (++NPC.ai[3] > endTime)
             {
