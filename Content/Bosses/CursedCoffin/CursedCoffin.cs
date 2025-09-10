@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using FargowiltasSouls.Content.BossBars;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
@@ -127,6 +128,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 ? MusicLoader.GetMusicSlot(Mod, "Assets/Sounds/Silent") : MusicID.OtherworldlyBoss1;
 
             SceneEffectPriority = SceneEffectPriority.BossLow;
+
+            NPC.BossBar = ModContent.GetInstance<CursedCoffinBossBar>();
 
 			NPC.value = Item.buyPrice(0, 2);
 

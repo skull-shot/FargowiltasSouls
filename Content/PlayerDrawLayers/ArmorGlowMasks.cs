@@ -27,9 +27,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             if (drawInfo.shadow != 0)
                 return false;
 
-            if (player.armor[0].type != ModContent.ItemType<StyxCrown>() && player.armor[10].type != ModContent.ItemType<StyxCrown>())
-                return false;
-
             if (player.head != EquipLoader.GetEquipSlot(Mod, "StyxCrown", EquipType.Head))
                 return false;
 
@@ -56,9 +53,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         {
             Player player = drawInfo.drawPlayer;
             if (drawInfo.shadow != 0)
-                return false;
-
-            if (player.armor[2].type != ModContent.ItemType<StyxLeggings>() && player.armor[12].type != ModContent.ItemType<StyxLeggings>())
                 return false;
 
             if (player.legs != EquipLoader.GetEquipSlot(Mod, "StyxLeggings", EquipType.Legs))
@@ -88,9 +82,6 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             if (drawInfo.shadow != 0)
                 return false;
 
-            if (player.armor[0].type != ModContent.ItemType<EridanusHat>() && player.armor[10].type != ModContent.ItemType<EridanusHat>())
-                return false;
-
             if (player.head != EquipLoader.GetEquipSlot(Mod, "EridanusHat", EquipType.Head))
                 return false;
 
@@ -112,15 +103,13 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
     public class EridanusShoulderBack : PlayerDrawLayer
     {
-        public override Position GetDefaultPosition() => new BeforeParent(Terraria.DataStructures.PlayerDrawLayers.Head);
+        public override bool IsHeadLayer => false;
+        public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.Head, Terraria.DataStructures.PlayerDrawLayers.Shield);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             Player player = drawInfo.drawPlayer;
             if (drawInfo.shadow != 0)
-                return false;
-            
-            if (player.armor[1].type != ModContent.ItemType<EridanusBattleplate>() && player.armor[11].type != ModContent.ItemType<EridanusBattleplate>())
                 return false;
 
             if (player.body != EquipLoader.GetEquipSlot(Mod, "EridanusBattleplate", EquipType.Body))
@@ -141,7 +130,8 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
     }
     public class EridanusShoulderFront : PlayerDrawLayer
     {
-        public override Position GetDefaultPosition() => new AfterParent(Terraria.DataStructures.PlayerDrawLayers.Head);
+        public override bool IsHeadLayer => false;
+        public override Position GetDefaultPosition() => new Between(Terraria.DataStructures.PlayerDrawLayers.Head, Terraria.DataStructures.PlayerDrawLayers.ArmOverItem);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
@@ -163,6 +153,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             Player player = drawInfo.drawPlayer;
             Vector2 shoulderPosition = new Vector2(player.direction == 1 ? -6 : 8, player.gravDir == -1 ? 22 : 6) + Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
             Texture2D texture = FargoAssets.GetTexture2D("Content/Items/Armor/Eridanus", "EridanusBattleplateShouldersFront").Value;
+
             DrawData shoulderitem = new DrawData(texture, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + shoulderPosition, null, Color.White, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect);
             shoulderitem.shader = drawInfo.cBody;
             drawInfo.DrawDataCache.Add(shoulderitem);

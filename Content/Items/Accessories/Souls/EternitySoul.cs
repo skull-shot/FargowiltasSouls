@@ -180,8 +180,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             CreateRecipe()
             .AddIngredient<UniverseSoul>()
             .AddIngredient<DimensionSoul>()
-            .AddIngredient<TerrariaSoul>()
             .AddIngredient<MasochistSoul>()
+            .AddIngredient<TerrariaSoul>()
 
             .AddIngredient<EternalEnergy>(30)
 
