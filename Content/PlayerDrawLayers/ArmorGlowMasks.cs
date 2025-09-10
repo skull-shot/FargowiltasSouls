@@ -112,6 +112,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
 
     public class EridanusShoulderBack : PlayerDrawLayer
     {
+        public override bool IsHeadLayer => false;
         public override Position GetDefaultPosition() => new BeforeParent(Terraria.DataStructures.PlayerDrawLayers.Head);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
@@ -141,6 +142,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
     }
     public class EridanusShoulderFront : PlayerDrawLayer
     {
+        public override bool IsHeadLayer => false;
         public override Position GetDefaultPosition() => new AfterParent(Terraria.DataStructures.PlayerDrawLayers.Head);
 
         public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
@@ -163,6 +165,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             Player player = drawInfo.drawPlayer;
             Vector2 shoulderPosition = new Vector2(player.direction == 1 ? -6 : 8, player.gravDir == -1 ? 22 : 6) + Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
             Texture2D texture = FargoAssets.GetTexture2D("Content/Items/Armor/Eridanus", "EridanusBattleplateShouldersFront").Value;
+
             DrawData shoulderitem = new DrawData(texture, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + shoulderPosition, null, Color.White, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect);
             shoulderitem.shader = drawInfo.cBody;
             drawInfo.DrawDataCache.Add(shoulderitem);

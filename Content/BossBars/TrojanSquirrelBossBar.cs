@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.BossBars
             Rectangle tipShieldFrame = Bars.Frame(verticalFrames: 3, frameY: 1);
             tipShieldFrame.X += topLeftOffset.X;
             tipShieldFrame.Y += topLeftOffset.Y;
-            tipShieldFrame.Width = 2;
+            tipShieldFrame.Width = (int)(Bars.Width() * lifeRatio);
             tipShieldFrame.Height = barSize.Y;
 
             Rectangle barPosition = Utils.CenteredRectangle(barCenter, barSize.ToVector2());
@@ -81,8 +81,8 @@ namespace FargowiltasSouls.Content.BossBars
             spriteBatch.Draw(Bars.Value, barTopLeft, bgFrame, Color.White, 0f, Vector2.Zero, 1f, 0, 0f);
 
             //Vector2 stretchScale = new(scale / barFrame.Width, 1f);          
+            Main.spriteBatch.Draw(Bars.Value, barTopLeft + new Vector2(2, 0), tipShieldFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
             Main.spriteBatch.Draw(Bars.Value, barTopLeft, barFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
-            Main.spriteBatch.Draw(Bars.Value, barTopLeft + new Vector2(lifeScale - 2, 0f), tipShieldFrame, Color.White, 0f, Vector2.Zero, 1, 0, 0f);
 
             // Bar itself (shield).
             if (shield > 0f)
