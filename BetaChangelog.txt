@@ -190,3 +190,8 @@ disabled abom contact damage during ship
 
 eri spams more punches after stardust a lot harder and more random to look a bit better
 maso mutant p2 direct spear dash can now start beside you sometimes instead of always above/below
+abom
+	now uses pumpking soft homing spread for p1 flaming scythes
+	does two scythe swings in p1 and p2 always, mostly for flavor
+	shotguns phoenixes after every dash
+	fires a lot more rockets during p1 laser spray (also in p2 maso)

@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public override void AI()
         {
             if (++Projectile.localAI[2] < 90)
-                Projectile.velocity *= 1.045f;
+                Projectile.velocity *= Projectile.ai[2] == 0 ? 1.045f : 1.01f;
 
 
             int dustID = DustID.Torch;
