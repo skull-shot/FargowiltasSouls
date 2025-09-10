@@ -16,12 +16,12 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //melee silence hopefully plus damage reduced 99%, -all crit just in case
             player.FargoSouls().Atrophied = true;
-            if (player.HeldItem.DamageType.CountsAsClass(DamageClass.Melee) || player.HeldItem.DamageType.CountsAsClass(DamageClass.Throwing))
-                player.FargoSouls().AttackSpeed /= 2;
+            player.GetAttackSpeed(DamageClass.Melee) /= 1.5f;
+            if (player.HeldItem.DamageType.CountsAsClass(DamageClass.MeleeNoSpeed) || player.HeldItem.DamageType.CountsAsClass(DamageClass.Throwing))
+                player.FargoSouls().AttackSpeed /= 1.5f;
 
-            player.GetDamage(DamageClass.Melee) *= 0.6f;
+            player.GetDamage(DamageClass.Melee) /= 1.5f;
         }
     }
 }

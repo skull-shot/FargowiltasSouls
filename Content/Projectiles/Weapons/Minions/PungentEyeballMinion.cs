@@ -135,7 +135,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     else rotmod2 = rotationModifier; //ideally itll smoothly rotate back into place after finishing firing, but rotate instantly if idle otherwise
                     Projectile.rotation = Projectile.rotation.AngleLerp(player.direction == 1 ? 0 : MathHelper.Pi, rotmod2);
                 }
-                Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
+                //Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
 
             if (Projectile.localAI[0] <= chargeTime && Projectile.localAI[1] == 0)
