@@ -195,10 +195,10 @@ namespace FargowiltasSouls.Content.UI
                     }, InterfaceScaleType.UI));
                 }
             }
-            /*
+            
             layers.Insert(0, new LegacyGameInterfaceLayer("Fargo: Title Links", delegate
             {
-                if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
+                if (!WorldGen.generatingWorld && !WorldGen.drunkWorldGen && Main.menuMode == 0)
                 {
                     //Console.WriteLine("Hi");
                     float upBump = 0;
@@ -211,7 +211,7 @@ namespace FargowiltasSouls.Content.UI
                 return true;
                   
             }, InterfaceScaleType.None));
-             */
+             
            
         }
     }
