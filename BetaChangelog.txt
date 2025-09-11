@@ -196,3 +196,5 @@ abom
 	shotguns phoenixes after every dash
 	fires a lot more rockets during p1 laser spray (also in p2 maso)
 box of gizmos is now inventory only, not an acc
+
+added a glow on mutant dive spear aim
