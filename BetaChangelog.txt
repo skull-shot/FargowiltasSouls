@@ -202,3 +202,5 @@ plantwins twins do a double layer spray
 fixed sansgolem arena actually moving with you and altering the entire pattern echgun
 fixed sansgolem not actually having a limit to how far up/down it can go
 adjusted sansgolem numbers overall
+
+maso mutant spear heals are 2.5% p1, 5% p2
