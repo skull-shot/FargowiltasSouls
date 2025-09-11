@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 targetRotation = -realRotation / 2; //denote arena isn't moving
             }
-            else if (npc.ai[0] == 49) //golem
+            else if (npc.ai[0] == 16) //golem
             {
                 if (npc.HasValidTarget && npc.ai[1] < 30) //snap it to player at start
                 {
