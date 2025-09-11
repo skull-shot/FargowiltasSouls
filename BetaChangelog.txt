@@ -198,3 +198,7 @@ abom
 box of gizmos is now inventory only, not an acc
 
 added a glow on mutant dive spear aim
+plantwins twins do a double layer spray
+fixed sansgolem arena actually moving with you and altering the entire pattern echgun
+fixed sansgolem not actually having a limit to how far up/down it can go
+adjusted sansgolem numbers overall

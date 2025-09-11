@@ -1074,7 +1074,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearAim>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, -1);
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSpearAim>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI, -2);
                     }
                 }
                 if (timer < sphereTime + divePrepTime - 35)
@@ -3549,7 +3549,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
 
-            int attackDelay = WorldSavingSystem.MasochistModeReal ? 17 : 23;
+            int attackDelay = 16;
+            if (WorldSavingSystem.MasochistModeReal)
+                attackDelay = 14;
 
             if (NPC.ai[1] < attackDelay - 10)
             {
@@ -3563,7 +3565,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[1] = (int)NPC.ai[1];
                 NPC.velocity *= 0f;
             }
-            const int attacksToDo = 12;
+
+            int attacksToDo = 12;
+            if (WorldSavingSystem.MasochistModeReal)
+                attacksToDo += 4;
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                attacksToDo += 8;
             int attackEndTime = attackDelay * attacksToDo + 50 + attackDelay * (int)Math.Round(4 * endTimeVariance);
             int endTime = attackEndTime + 60;
 
@@ -3582,10 +3589,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 }
                 const int maxRangeOfVariance = 3;
                 int increment = 0;
-                while (NPC.ai[2] == oldOffset || Math.Abs(NPC.ai[2] - oldOffset) > maxRangeOfVariance)
+                while (NPC.ai[2] == oldOffset)
                 {
                     increment = Main.rand.NextBool() ? -1 : 1;
                     NPC.ai[2] += increment;
+                    if (Math.Abs(NPC.ai[2]) > maxRangeOfVariance) //if went out of bounds, forcibly turn around
+                    {
+                        if (NPC.ai[2] > 0)
+                            increment = -1;
+                        else
+                            increment = 1;
+                        NPC.ai[2] += increment;
+                        break;
+                    }
                 }
                 if (!reusedPreviousStep)
                     NPC.localAI[0] = increment;
@@ -3606,7 +3622,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     //if (WorldSavingSystem.MasochistModeReal) i *= -1;
                     for (int j = -1; j <= 1; j += 2) //flappy bird tubes
                     {
-                        float gapRadiusHeight = 150;
+                        float gapRadiusHeight = 130;
                         Vector2 sansTargetPos = centerPoint;
                         const int timeToReachMiddle = 60;
                         sansTargetPos.X += xSpeedWhenAttacking * timeToReachMiddle * i;

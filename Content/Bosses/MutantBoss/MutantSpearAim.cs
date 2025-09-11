@@ -103,7 +103,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[0] = 1;
 
-                if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
+                if (Projectile.ai[1] == -2) //dive tell
+                {
+                    Projectile.timeLeft += 30;
+                    Projectile.localAI[1] = -30;
+                }
+                else if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
                 {
                     Projectile.timeLeft += 120;
                     Projectile.localAI[1] = -120;
