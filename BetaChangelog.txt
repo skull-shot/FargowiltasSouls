@@ -204,3 +204,4 @@ fixed sansgolem not actually having a limit to how far up/down it can go
 adjusted sansgolem numbers overall
 
 maso mutant spear heals are 2.5% p1, 5% p2
+pumpking cape parry makes a pumpscare
