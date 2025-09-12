@@ -168,6 +168,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             if (!SkyManager.Instance["FargowiltasSouls:EridanusSky"].IsActive())
                 SkyManager.Instance.Activate("FargowiltasSouls:EridanusSky");
 
+            Main.dayTime = false;
+            Main.time = 16200; //midnight, for empress visuals
+
+            Main.raining = false; //disable rain
+            Main.rainTime = 0;
+            Main.maxRaining = 0;
+
+            Main.bloodMoon = false; //disable blood moon
+
             if (NPC.localAI[3] == 0) //just spawned
             {
                 if (!NPC.HasValidTarget)
@@ -834,12 +843,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                             if (NPC.ai[1] > 50 + 60)
                                             {
                                                 max += Main.rand.Next(3);
-                                                aimVarianceDegrees += 5;
+                                                aimVarianceDegrees += 3;
                                             }
                                             if (NPC.ai[1] > 50 + 120)
                                             {
                                                 max += Main.rand.Next(4);
-                                                aimVarianceDegrees += 10;
+                                                aimVarianceDegrees += 6;
                                             }
 
                                             for (int i = 0; i < max; i++)
@@ -849,7 +858,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                                     offset.X *= -1f;
                                                 offset = offset.RotatedBy(NPC.SafeDirectionTo(player.Center).ToRotation());
 
-                                                offset += Main.rand.NextVector2Circular(NPC.width / 4, NPC.width / 4);
+                                                offset += Main.rand.NextVector2Circular(NPC.width / 12, NPC.width / 12);
 
                                                 Vector2 vel = NPC.SafeDirectionTo(player.Center).RotatedByRandom(MathHelper.ToRadians(aimVarianceDegrees));
                                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * -vel,
@@ -1191,7 +1200,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                         //y pos is above and below player, adapt to always outspeed player, with additional V shapes
                                         Vector2 speed = (target - NPC.Center) / travelTime;
                                         int individualTiming = 60 + Math.Abs(i * 2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed / 2, ModContent.ProjectileType<CosmosSphere>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, travelTime, individualTiming);
+                                        float direction = Math.Sign(player.Center.Y - target.Y);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed / 2, ModContent.ProjectileType<CosmosSphere>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, travelTime, individualTiming, ai2: direction);
                                     }
                                 }
                             }

@@ -43,39 +43,39 @@ namespace FargowiltasSouls.Content.Sky
 
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
-            if (maxDepth >= 0 && minDepth < 0)
-            {
-                Vector2 auraPos = Main.screenPosition + new Vector2(Main.screenWidth / 2, Main.screenHeight * 1.6f);
-                float radius = Main.screenWidth * 3f / 2;
-                var target = Main.LocalPlayer;
-                var blackTile = TextureAssets.MagicPixel;
-                var diagonalNoise = FargoAssets.PerlinNoise;
-                var maxOpacity = intensity * 1f;
-
-                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
-                    return;
-
-                ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.CultistSkyShader");
-                shader.TrySetParameter("colorMult", 7.35f);
-                shader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
-                shader.TrySetParameter("radius", radius);
-                shader.TrySetParameter("anchorPoint", auraPos);
-                shader.TrySetParameter("screenPosition", Main.screenPosition);
-                shader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-                shader.TrySetParameter("playerPosition", target.Center);
-                shader.TrySetParameter("maxOpacity", maxOpacity);
-
-
-                Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
-
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, shader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
-                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
-                Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            if (maxDepth < float.MaxValue || minDepth >= float.MaxValue)
                 return;
-            }
+
+            Vector2 auraPos = Main.screenPosition + new Vector2(Main.screenWidth / 2, Main.screenHeight * 1.6f);
+            float radius = Main.screenWidth * 3f / 2;
+            var target = Main.LocalPlayer;
+            var blackTile = TextureAssets.MagicPixel;
+            var diagonalNoise = FargoAssets.PerlinNoise;
+            var maxOpacity = intensity * 1f;
+
+            if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                return;
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.CultistSkyShader");
+            shader.TrySetParameter("colorMult", 7.35f);
+            shader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+            shader.TrySetParameter("radius", radius);
+            shader.TrySetParameter("anchorPoint", auraPos);
+            shader.TrySetParameter("screenPosition", Main.screenPosition);
+            shader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+            shader.TrySetParameter("playerPosition", target.Center);
+            shader.TrySetParameter("maxOpacity", maxOpacity);
+
+
+            Main.spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, shader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+            Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+            Main.spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            return;
         }
 
         public override float GetCloudAlpha()
