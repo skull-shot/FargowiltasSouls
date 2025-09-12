@@ -29,7 +29,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             if (WorldSavingSystem.MasochistModeReal && npc is NPC)
             {
-                int totalHealPerHit = npc.lifeMax / 100 * 5;
+                float healPercent = npc.localAI[3] <= 1 ? 2.5f : 5f;
+                int totalHealPerHit = (int)(npc.lifeMax * healPercent / 100);
 
                 const int max = 20;
                 for (int i = 0; i < max; i++)
