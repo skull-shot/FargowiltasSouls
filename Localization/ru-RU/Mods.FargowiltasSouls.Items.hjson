@@ -1,4 +1,4 @@
-AdamantiteEnchant: {
+﻿AdamantiteEnchant: {
 	DisplayName: Зачарование адамантита
 	Tooltip:
 		'''
@@ -674,7 +674,7 @@ TitaniumEnchant: {
 	Tooltip:
 		'''
 		Во время атаки вокруг вас генерируется защитный барьер, состоящий из вплоть до 20 титановых осколков, наносящих ближний урон
-		Когда вы достигаете максимального количества, то получаете сопротивление к большинству дебаффов и 10-30% сопротивления урону
+		Когда вы достигаете максимального количества, вы получаете сопротивление к большинству дебаффов и 10-30% сопротивления урону
 		Сопротивление зависит от того, насколько близко вы находитесь к врагу при получении урона
 		Эффект действует ещё несколько секунд после получения урона
 		У этого эффекта есть время перезарядки в 15 секунд, в течение которых вы не можете получать осколки
@@ -819,7 +819,7 @@ UniverseCore: {
 	Tooltip:
 		'''
 		Ваши критические удары могут совершать критические удары
-		Шанс такого удара равен трети вашего шанса критического удара (учитывает до 100%)
+		Шанс такого удара равен половине вашего шанса критического удара (учитывает до 100%)
 		Такие суперкриты наносят в 4 раза больше урона и накладывают дебафф «Пламя Космоса»
 		«Искрится ультра-мега-энергетическими космическими лучами»
 		'''
@@ -1778,17 +1778,15 @@ MasochistSoul: {
 	DisplayName: Душа Властителя
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Увеличивает время полёта на 200%, скорость передвижения на 20% [i:FargowiltasSouls/QueenStinger] и пробивание брони на 50 единиц
-		[i:FargowiltasSouls/GuttedHeart] Увеличивает максимальный запас здоровья на 100%, [i:FargowiltasSouls/MagicalBulb] регенерацию здоровья, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] урон для класса взятого оружия на 50% [i:FargowiltasSouls/ReinforcedPlating] и сопротивление урону на 10%
-		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, с обычных врагов падает в два раза больше предметов
-		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
-		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к дебаффам биомов
-		[i:FargowiltasSouls/GalacticGlobe] Даёт иммунитет почти ко всем дебаффам режима Вечность, базовые баффы зелий и классовых станций (работает в инвентаре и слотах для украшений) и др.
-		[i:FargowiltasSouls/PrecisionSeal] Зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки.
-		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, [i:FargowiltasSouls/NecromanticBrew] увеличивает дистанцию рывка и [i:FargowiltasSouls/PungentEyeball] заставляет врагов рядом с вашим курсором получать в 1,15 раза больше урона
-		Улучшает [i:FargowiltasSouls/SecurityWallet] перековки, [i:FargowiltasSouls/OrdinaryCarrot] видимость ночью, [i:FargowiltasSouls/NymphsPerfume] здоровье при возрождении [i:FargowiltasSouls/SandsofTime] и время возрождения
-		Автоматически использует [i:FargowiltasSouls/ConcentratedRainbowMatter] лечебные зелья и [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости.
-		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, [i:FargowiltasSouls/NecromanticBrew] и вы отражаете весь урон во время рывка
+		Даёт иммунитет почти ко всем дебаффам режима Вечность, [i:FargowiltasSouls/PureHeart] дебаффам биомов, [i:FargowiltasSouls/ReinforcedPlating] отбрасыванию и [i:FargowiltasSouls/GalacticGlobe] даёт базовые баффы зелий и классовых станций
+		Увеличивает [i:FargowiltasSouls/GalacticGlobe][i:FargowiltasSouls/GelicWings] время полёта на 200%, [i:FargowiltasSouls/DarkenedHeart] скорость передвижения на 20%, [i:FargowiltasSouls/GuttedHeart] максимальный запас здоровья на 100% и [i:FargowiltasSouls/MagicalBulb] регенерацию здоровья на 3,5 ОЗ/сек
+		Увеличивает [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] урон для класса взятого оружия на 50%, [i:FargowiltasSouls/QueenStinger] пробивание брони на 50 единиц и [i:FargowiltasSouls/ReinforcedPlating] сопротивление урону на 10%
+		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, [i:FargowiltasSouls/NecromanticBrew] увеличивает дистанцию рывка, [i:FargowiltasSouls/SlimyShield] скорость падения и [i:FargowiltasSouls/PungentEyeball] заставляет врагов рядом с вашим курсором получать в 1,15 раза больше урона
+		[i:FargowiltasSouls/GelicWings] Позволяет совершать двойной прыжок, [i:FargowiltasSouls/Deerclawps] рывки оставляют след из кровавых шипов, [i:FargowiltasSouls/PrecisionSeal] зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
+		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] удваивает скорость появления врагов и выпадаемые предметы и [i:FargowiltasSouls/TimsConcoction] с некоторых врагов выпадают зелья
+		Пассивно [i:FargowiltasSouls/SecurityWallet] уменьшает стоимость перековок, улучшает [i:FargowiltasSouls/OrdinaryCarrot] видимость ночью, [i:FargowiltasSouls/WyvernFeather] гравитацию, [i:FargowiltasSouls/NymphsPerfume] здоровье при возрождении [i:FargowiltasSouls/SandsofTime] и время возрождения, а также
+		автоматически использует [i:FargowiltasSouls/ConcentratedRainbowMatter] лечебные зелья и [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
+		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть шанс получить только 1 ед. урона, [i:FargowiltasSouls/NecromanticBrew] и вы отражаете урон во время рывка
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
 		[c/BC5252:Превращает все эффекты аксессуаров с миньонами и пустые слоты призыва в +1% к урону за каждый (можно переключить)]
 		При выключенном эффекте, призывает на вашу сторону [i:FargowiltasSouls/NecromanticBrew] руки Скелетрона, [i:FargowiltasSouls/GuttedHeart] ползунов, [i:FargowiltasSouls/ConcentratedRainbowMatter] радужного слизня,
@@ -1796,7 +1794,12 @@ MasochistSoul: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту вашей последней смерти
 		«Прими власть, прими вечность»
 		'''
-	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Даёт базовые баффы зелий и классовых станций"
+	VanityTooltip:
+		'''
+		[i:FargowiltasSouls/GalacticGlobe] Даёт базовые баффы зелий и классовых станций
+		[i:FargowiltasSouls/SecurityWallet] Уменьшает стоимость перековок, улучшает [i:FargowiltasSouls/OrdinaryCarrot] видимость ночью, [i:FargowiltasSouls/WyvernFeather] гравитацию, [i:FargowiltasSouls/NymphsPerfume] здоровье при возрождении [i:FargowiltasSouls/SandsofTime] и время возрождения, а также
+		автоматически использует [i:FargowiltasSouls/ConcentratedRainbowMatter] лечебные зелья и [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
+		'''
 }
 
 SnipersSoul: {
@@ -3787,6 +3790,6 @@ WillMask: {
 }
 
 BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
-	// Tooltip: ""
+	DisplayName: Сломанный наконечник
+	Tooltip: ""
 }
