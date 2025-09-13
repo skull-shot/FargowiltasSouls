@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,6 +12,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 12));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
 
 
