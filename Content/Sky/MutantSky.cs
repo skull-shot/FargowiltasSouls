@@ -1,9 +1,11 @@
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
 
@@ -14,11 +16,13 @@ namespace FargowiltasSouls.Content.Sky
         private bool isActive = false;
         private float intensity = 0f;
         private float lifeIntensity = 0f;
+        private float shaderIntensity = 0f;
         private float specialColorLerp = 0f;
         private Color? specialColor = null;
         private int delay = 0;
-        private readonly int[] xPos = new int[50];
-        private readonly int[] yPos = new int[50];
+        const int amountOfStatic = 200;
+        private readonly int[] xPos = new int[amountOfStatic];
+        private readonly int[] yPos = new int[amountOfStatic];
 
         public override void Update(GameTime gameTime)
         {
@@ -40,6 +44,8 @@ namespace FargowiltasSouls.Content.Sky
                         useSpecialColor = true;
                 }
 
+                bool raiseShader = true;
+
                 switch ((int)Main.npc[EModeGlobalNPC.mutantBoss].ai[0])
                 {
                     case -5:
@@ -51,9 +57,10 @@ namespace FargowiltasSouls.Content.Sky
                         useSpecialColor = true;
                         specialColor = Color.Black;
                         specialColorLerp = 1f;
+                        raiseShader = false;
                         break;
 
-                    case 27: //twins
+                    case 27: //ray fan
                         ChangeColorIfDefault(Color.Red);
                         break;
 
@@ -74,6 +81,13 @@ namespace FargowiltasSouls.Content.Sky
                         break;
                 }
 
+                if (raiseShader)
+                {
+                    shaderIntensity += increment;
+                    if (shaderIntensity > 1f)
+                        shaderIntensity = 1f;
+                }
+
                 if (intensity > 1f)
                     intensity = 1f;
             }
@@ -83,6 +97,10 @@ namespace FargowiltasSouls.Content.Sky
                 if (lifeIntensity < 0f)
                     lifeIntensity = 0f;
 
+                shaderIntensity -= increment;
+                if (shaderIntensity < 0f)
+                    shaderIntensity = 0f;
+
                 specialColorLerp -= increment * 2;
                 if (specialColorLerp < 0)
                     specialColorLerp = 0;
@@ -91,6 +109,7 @@ namespace FargowiltasSouls.Content.Sky
                 if (intensity < 0f)
                 {
                     intensity = 0f;
+                    shaderIntensity = 0f;
                     lifeIntensity = 0f;
                     specialColorLerp = 0f;
                     specialColor = null;
@@ -145,20 +164,47 @@ namespace FargowiltasSouls.Content.Sky
                 if (--delay < 0)
                 {
                     delay = Main.rand.Next(5 + (int)(85f * (1f - lifeIntensity)));
-                    for (int i = 0; i < 50; i++) //update positions
+                    for (int i = 0; i < amountOfStatic; i++) //update positions
                     {
                         xPos[i] = Main.rand.Next(Main.screenWidth);
                         yPos[i] = Main.rand.Next(Main.screenHeight);
                     }
                 }
 
-                for (int i = 0; i < 50; i++) //static on screen
+                Texture2D staticTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/MutantStatic", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                for (int i = 0; i < amountOfStatic; i++) //static on screen
                 {
                     int width = Main.rand.Next(3, 251);
-                    spriteBatch.Draw(ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/MutantStatic", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
-                    new Rectangle(xPos[i] - width / 2, yPos[i], width, 3),
+                    spriteBatch.Draw(staticTexture, new Rectangle(xPos[i] - width / 2, yPos[i], width, 3),
                     color * lifeIntensity * 0.75f);
                 }
+
+                Color vignetteColor = Color.Blue * shaderIntensity * 0.2f;
+                spriteBatch.Draw(ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Sky/MutantVignette", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                    new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), vignetteColor);
+
+                var blackTile = TextureAssets.MagicPixel;
+                var risingFlame = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/MutantFlame");
+                if (!blackTile.IsLoaded || !risingFlame.IsLoaded)
+                    return;
+
+                ManagedShader wavyTvShader = ShaderManager.GetShader("FargowiltasSouls.MutantBackgroundShader");
+                wavyTvShader.TrySetParameter("globalTime", Main.GlobalTimeWrappedHourly);
+                wavyTvShader.TrySetParameter("screenPosition", Main.screenPosition);
+                wavyTvShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+                wavyTvShader.TrySetParameter("scrollSpeed", opacity);
+                wavyTvShader.TrySetParameter("opacity", shaderIntensity);
+
+                Main.spriteBatch.GraphicsDevice.Textures[1] = risingFlame.Value;
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, wavyTvShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+                
+                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+                spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+                
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
             }
         }
 

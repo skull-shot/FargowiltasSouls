@@ -205,3 +205,4 @@ adjusted sansgolem numbers overall
 
 maso mutant spear heals are 2.5% p1, 5% p2
 pumpking cape parry makes a pumpscare
+spent way too much time and effort on a very small mutant p2 bg change
