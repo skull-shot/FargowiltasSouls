@@ -135,8 +135,14 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
-            return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight 
-                && NPC.ai[0] != 0 && NPC.ai[0] != 5 && NPC.ai[0] != 10 && NPC.ai[0] != 18;
+
+            if (NPC.ai[0] == 0 || NPC.ai[0] == 5 || NPC.ai[0] == 10 || NPC.ai[0] == 18)
+                return false;
+
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                return base.CanHitPlayer(target, ref CooldownSlot);
+
+            return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
         }
 
         public override bool CanHitNPC(NPC target)

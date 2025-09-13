@@ -195,9 +195,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
-            if (!WorldSavingSystem.MasochistModeReal)
-                return false;
-            return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && AttackChoice > -1;
+
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                return base.CanHitPlayer(target, ref CooldownSlot);
+
+            if (WorldSavingSystem.MasochistModeReal)
+                return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && AttackChoice > -1;
+
+            return false;
         }
 
         public override bool CanHitNPC(NPC target)
