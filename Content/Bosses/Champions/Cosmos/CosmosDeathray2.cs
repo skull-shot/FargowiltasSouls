@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -49,7 +50,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             }
             if (Projectile.localAI[0] == 0f)
             {
-                SoundEngine.PlaySound(SoundID.Zombie104, Projectile.Center + 3000 * Projectile.velocity);
+                SoundEngine.PlaySound(FargosSoundRegistry.Zombie104, Projectile.Center + 3000 * Projectile.velocity);
             }
             float num801 = 3f;
             Projectile.localAI[0] += 1f;
