@@ -7,6 +7,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -52,7 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             int byIdentity = FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, (int)Projectile.ai[0], ModContent.ProjectileType<PungentEyeballMinion>());
             if (byIdentity != -1)
             {
-                Projectile.Center = Main.projectile[byIdentity].Center + Vector2.UnitX.RotatedBy(Main.projectile[byIdentity].rotation) * 20f;
+                Projectile.Center = Main.projectile[byIdentity].Center + Vector2.UnitX.RotatedBy(Main.projectile[byIdentity].rotation) * 10f;
             }
             else if (Projectile.owner == Main.myPlayer && Projectile.localAI[0] > 5f)
             {
@@ -73,9 +74,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 Projectile.Kill();
                 return;
             }
-            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 10f;
-            if (Projectile.scale > 1f)
-                Projectile.scale = 1f;
+            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 2f;
+            if (Projectile.scale > 0.5f)
+                Projectile.scale = 0.5f;
             Projectile.rotation = Main.projectile[byIdentity].rotation - 1.57079637f;
             Projectile.velocity = Main.projectile[byIdentity].rotation.ToRotationVector2();
             float num805 = 3f;
@@ -119,8 +120,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         }
 
         public override bool PreDraw(ref Color lightColor) => false;
-
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2f /* FargoClientConfig.Instance.TransparentFriendlyProjectiles*/;
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindProjectiles.Add(index);
+        }
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 1f /* FargoClientConfig.Instance.TransparentFriendlyProjectiles*/;
 
         public static Color ColorFunction(float _)
         {
@@ -133,7 +138,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             if (Projectile.hide)
                 return;
 
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.WoFDeathray");
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.LithoDeathray");
 
             // Get the laser end position.
             Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1];
@@ -146,8 +151,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
 
             // Set shader parameters.
-            shader.TrySetParameter("mainColor", Color.LightSkyBlue);
-            FargoAssets.DeviInnerStreak.Value.SetTexture1();
+            shader.TrySetParameter("mainColor", Color.DarkMagenta.ToVector4());
+            shader.TrySetParameter("secondColor", Color.White.ToVector4());
+            FargoAssets.FadedStreak.Value.SetTexture1();
             shader.TrySetParameter("stretchAmount", 0.25f);
             shader.TrySetParameter("scrollSpeed", 1f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);
