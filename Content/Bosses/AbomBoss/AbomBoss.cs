@@ -864,7 +864,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     }
                     break;
 
-                case 6: //flocko swarm (p2 shoots ice waves horizontally after)
+                case 6: //cirno icicle fall flocko swarm (p2 shoots ice waves horizontally after)
                     if (Phase2Check())
                         break;
                     NPC.velocity *= 0.9f;
