@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
@@ -39,7 +40,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 
         public override void AI()
         {
-            Timer++;
+            if (Timer++ == 0)
+                SoundEngine.PlaySound(FargosSoundRegistry.AbomSpawnSound, Projectile.Center);
             Projectile.scale = 0f;
             for (int i = 0; i < Timer; i++)
                 Projectile.scale = MathHelper.Lerp(Projectile.scale, 3f, 0.05f);
