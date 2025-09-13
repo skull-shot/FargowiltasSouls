@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
     public class CosmosDeathray2 : BaseDeathray
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "ShadowDeathray");
-        public CosmosDeathray2() : base(180, drawDistance: 3600) { }
+        public CosmosDeathray2(int time = 180, int drawDist = 3600) : base(time, drawDistance: drawDist) { }
 
         public override void SetStaticDefaults()
         {
