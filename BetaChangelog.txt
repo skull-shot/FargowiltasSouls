@@ -208,3 +208,5 @@ pumpking cape parry makes a pumpscare
 spent way too much time and effort on a very small mutant p2 bg change
 eri punches devi way harder
 siblings have full size contact hitboxes in ftw
+moved eri spam punch from after timestop to before uppercut
+eri punch after timestop is different
