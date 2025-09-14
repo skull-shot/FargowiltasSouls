@@ -183,6 +183,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 5f;
             }
+
+            if (!Main.dedServ)
+            {
+                const float spd = 8f;
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + new Vector2(Main.rand.NextFloat(Projectile.width), Main.rand.NextFloat(Projectile.height)), Main.rand.NextVector2Circular(-spd, spd), ModContent.Find<ModGore>(Mod.Name, $"Gore_{(Spazmatism ? 144 : 143)}").Type);
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + new Vector2(Main.rand.NextFloat(Projectile.width), Main.rand.NextFloat(Projectile.height)), Main.rand.NextVector2Circular(-spd, spd), ModContent.Find<ModGore>(Mod.Name, $"Gore_{(Spazmatism ? 145 : 146)}").Type);
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)
