@@ -64,10 +64,6 @@ namespace FargowiltasSouls.Content.Sky
                         ChangeColorIfDefault(Color.Red);
                         break;
 
-                    case 28: //room of flesh
-                        ChangeColorIfDefault(new Color(100, 0, 50));
-                        break;
-
                     case 36: //slime rain
                         if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[2] > 180 * 3 - 60)
                             ChangeColorIfDefault(Color.Blue);
@@ -183,7 +179,7 @@ namespace FargowiltasSouls.Content.Sky
                     color * lifeIntensity * 0.75f);
                 }
 
-                Color vignetteColor = Color.Blue * shaderIntensity * 0.2f;
+                Color vignetteColor = (FargoSoulsUtil.AprilFools ? Color.Red : Color.Blue) * shaderIntensity * 0.2f;
                 spriteBatch.Draw(ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Sky/MutantVignette", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                     new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), vignetteColor);
 

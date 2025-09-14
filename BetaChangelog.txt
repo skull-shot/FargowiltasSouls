@@ -215,3 +215,4 @@ mutant twins gore on impact
 
 mutant twins double ring isolated to maso
 made mutant bg filter marginally slower and less visible
+adjusted numbers on rof

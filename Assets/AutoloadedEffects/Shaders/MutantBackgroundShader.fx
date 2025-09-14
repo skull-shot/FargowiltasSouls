@@ -23,7 +23,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float noise = 0;
     float3 noisePixel = float3(1,1,1);
     float waveScrollSpeed = 1.2 * scrollSpeed;
-    float riseSpeed = 0.3 * scrollSpeed;
+    float riseSpeed = 0.25 * scrollSpeed;
     for (int i = 0; i < 3; i++)
     {
         float waveAngle = i * 1.57 + globalTime * waveScrollSpeed;
@@ -39,7 +39,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float noiseLuminance = (noiseColor.r + noiseColor.g + noiseColor.b) / 3.0;
 
     float3 finalColor = lerp(sampleColor.rgb, noiseColor, noiseLuminance);
-    float finalModifier = 0.045 * opacity;
+    float finalModifier = 0.04 * opacity;
     finalColor = lerp(sampleColor.rgb, finalColor, finalModifier);
     float finalA = lerp(sampleColor.a, noiseLuminance, finalModifier);
     return float4(finalColor, finalA);

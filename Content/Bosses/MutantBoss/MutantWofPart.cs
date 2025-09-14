@@ -114,11 +114,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                                 Projectile.rotation = Projectile.DirectionTo(Main.player[mutant.target].Center).ToRotation();
                                 MouthDust();
 
-                                int timeInterval = /*WorldSavingSystem.MasochistModeReal ? 20 :*/ 30;
+                                int timeInterval = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 24 : 30;
                                 int attacksToDo = 4;
                                 if (Timer % timeInterval == 1 && FargoSoulsUtil.HostCheck)
                                 {
-                                    float spacing = /*WorldSavingSystem.MasochistModeReal ? 250 :*/ 300;
+                                    float spacing = WorldSavingSystem.MasochistModeReal ? 250 : 300;
                                     int step = (int)Timer / timeInterval % attacksToDo;
                                     float halfOffset = (int)Timer / timeInterval % (attacksToDo * 2) >= attacksToDo ? spacing / 2 : 0;
                                     for (int j = -1; j <= 1; j += 2)
@@ -153,7 +153,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                                 const int waveTime = 120;
                                 float sineTimer = Timer;
                                 if (useAltBehavior) sineTimer += waveTime / 2;
-                                float offset = WorldSavingSystem.MasochistModeReal ? 0.5f : 1.5f;
+                                float offset = WorldSavingSystem.MasochistModeReal ? 0.2f : 1.5f;
                                 float oscillation = -maxRotationToDo * Projectile.direction * (offset + (float)Math.Sin(MathHelper.TwoPi / waveTime * sineTimer));
                                 Projectile.rotation += oscillation;
                             }
@@ -171,12 +171,18 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                                 MouthDust();
 
-                                if (Timer % 10 == 0 && FargoSoulsUtil.HostCheck)
+                                int attackThreshold = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 8 : 10;
+                                if (Timer % attackThreshold == 0 && FargoSoulsUtil.HostCheck)
                                 {
                                     const int max = 1;
                                     Vector2 baseTarget = mutant.Center;
-                                    baseTarget.Y -= 16 * 32;
+                                    baseTarget.Y -= 16 * (WorldSavingSystem.MasochistModeReal ? 30 : 40);
                                     float xVariance = mutant.ai[3];
+                                    if (Main.rand.NextBool(6))
+                                    {
+                                        baseTarget.X = Main.player[mutant.target].Center.X;
+                                        xVariance = 16 * 3;
+                                    }
                                     for (int i = 0; i < max; i++)
                                     {
                                         const int timeToFinishArc = 60;

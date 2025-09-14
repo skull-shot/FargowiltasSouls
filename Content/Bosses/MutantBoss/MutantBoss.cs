@@ -2075,7 +2075,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         ModContent.ProjectileType<MutantPillar>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 4f / 3f), 0, Main.myPlayer, 1, NPC.whoAmI);
                 }
             }
-            else if (Main.getGoodWorld && WorldSavingSystem.MasochistModeReal && NPC.ai[1] == pillarAttackDelay * 6)
+            else if (Main.getGoodWorld && WorldSavingSystem.MasochistModeReal && NPC.ai[1] == pillarAttackDelay * 9)
             {
                 if (FargoSoulsUtil.HostCheck)
                 {
@@ -2618,9 +2618,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
             }
 
+            float trueWaitTime = waitTime;
             //to reduce the overlap when in maso ftw. doesnt fully negate it, leaves a bit of overlap
-            float waitMultiplier = WorldSavingSystem.MasochistModeReal && Main.getGoodWorld ? 1.1f : 1f;
-            if (++NPC.ai[1] > waitTime * waitMultiplier)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+            {
+                trueWaitTime *= 1.25f;
+                trueWaitTime -= 60 * 1.25f;
+            }
+            if (++NPC.ai[1] > trueWaitTime)
             {
                 if (!Main.dedServ && Main.LocalPlayer.active)
                 {
@@ -2628,7 +2633,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
                 }
 
-                ChooseNextAttack(11, 13, 19, 21, 24, 26, 33, 41, 42, 44, 45);
+                ChooseNextAttack(11, 13, 19, 21, 24, 33, 41, 42, 44, 45);
             }
         }
 
