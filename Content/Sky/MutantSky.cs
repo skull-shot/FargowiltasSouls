@@ -64,6 +64,10 @@ namespace FargowiltasSouls.Content.Sky
                         ChangeColorIfDefault(Color.Red);
                         break;
 
+                    case 28: //room of flesh
+                        ChangeColorIfDefault(new Color(100, 0, 50));
+                        break;
+
                     case 36: //slime rain
                         if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[2] > 180 * 3 - 60)
                             ChangeColorIfDefault(Color.Blue);

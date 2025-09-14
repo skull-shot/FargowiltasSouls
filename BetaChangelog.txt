@@ -214,3 +214,4 @@ betrayed mutant and locked him in the hyperbolic flesh chamber (added wof attack
 mutant twins gore on impact
 
 mutant twins double ring isolated to maso
+made mutant bg filter marginally slower and less visible
