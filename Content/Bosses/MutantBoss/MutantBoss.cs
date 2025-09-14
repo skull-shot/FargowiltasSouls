@@ -2549,7 +2549,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             const int chainTimeToTravel = 45;
             const int wofTimeToTravel = 75;
 
-            int waitTime = chainTimeToTravel + wofTimeToTravel + 480;
+            float waitTime = chainTimeToTravel + wofTimeToTravel + 360;
+            if (WorldSavingSystem.MasochistModeReal)
+                waitTime += 300 * endTimeVariance;
 
             float xWallStopOffset = WorldSavingSystem.MasochistModeReal ? 400 : 500;
 
