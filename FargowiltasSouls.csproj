@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\AutoloadedEffects\Shaders\EmpressRitualShader.fx" />
+    <None Remove="Assets\AutoloadedEffects\Shaders\IchorDropletShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\NatureAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\SpiritAuraShader.fx" />
     <None Remove="Assets\AutoloadedEffects\Shaders\WillChampTrail.fx" />
