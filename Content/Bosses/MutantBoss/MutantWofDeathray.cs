@@ -1,51 +1,56 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Deathrays
+namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
-    public class PhantasmalDeathrayWOF : BaseDeathray, IPixelatedPrimitiveRenderer
+	public class MutantWofDeathray : PhantasmalDeathrayWOF, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
-        public PhantasmalDeathrayWOF(int time = -1) : base(time == -1 ? (WorldSavingSystem.SwarmActive ? 45 : 90) : time) { }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayWOF");
+        public MutantWofDeathray() : base(1200) { }
 
-        public override void SetStaticDefaults()
+        public override bool? CanDamage()
         {
-            base.SetStaticDefaults();
+            return Projectile.scale >= 1;
+        }
 
-            // DisplayName.SetDefault("Divine Deathray");
-        }
-        public override void SetDefaults()
+        public override bool CanHitPlayer(Player target)
         {
-            Projectile.hide = false;
-            base.SetDefaults();
+            return target.hurtCooldowns[1] == 0;
         }
+
+        bool spawn;
 
         public override void AI()
         {
+            if (!spawn)
+            {
+                spawn = true;
+                maxTime = Projectile.ai[2];
+                Projectile.timeLeft = (int)Projectile.ai[2];
+            }
+
+
             Vector2? vector78 = null;
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
                 Projectile.velocity = -Vector2.UnitY;
             }
-            NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], NPCID.WallofFleshEye);
-            if (npc == null)
+            Projectile parent = FargoSoulsUtil.ProjectileExists(FargoSoulsUtil.GetProjectileByIdentity(Projectile.owner, Projectile.ai[1]), ModContent.ProjectileType<MutantWofPart>());
+            if (parent != null)
             {
-                Projectile.Kill();
-                return;
-            }
-            else
-            {
-                Projectile.Center = npc.Center + (npc.width - 36) * Vector2.UnitX.RotatedBy(npc.rotation + (npc.direction > 0 ? 0 : MathHelper.Pi));
+                Projectile.Center = parent.Center + (parent.width - 36 * parent.scale) * Vector2.UnitX.RotatedBy(parent.rotation);
             }
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
@@ -53,16 +58,11 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             }
             if (Projectile.localAI[0] == 0f)
             {
-                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104"), Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.Zombie104, Projectile.Center);
             }
-            float maxScale = 1f;
+            float maxScale = 2f;
             if (WorldSavingSystem.MasochistModeReal)
-            {
-                maxScale = 5f;
-                FargoSoulsUtil.ScreenshakeRumble(6);
-            }
-            else
-                FargoSoulsUtil.ScreenshakeRumble(3);
+                maxScale = 10f;
             Projectile.localAI[0] += 1f;
             if (Projectile.localAI[0] >= maxTime)
             {
@@ -78,7 +78,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             //num804 += Projectile.ai[0];
             //Projectile.rotation = num804 - 1.57079637f;
 
-            Projectile.velocity = (npc.rotation + (npc.direction > 0 ? 0 : MathHelper.Pi)).ToRotationVector2();
+            Projectile.velocity = parent.rotation.ToRotationVector2();
             Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.PiOver2;
 
             float num805 = 3f;
@@ -146,68 +146,18 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 3f;
             }
-            if (WorldSavingSystem.MasochistModeReal && Projectile.Colliding(Projectile.Hitbox, Main.LocalPlayer.Hitbox))
-            {
-                Main.LocalPlayer.velocity += Projectile.velocity.SafeNormalize(Vector2.Zero) * 1.2f;
-            }
         }
+
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            if (WorldSavingSystem.MasochistModeReal)
-                modifiers.Knockback *= 0;
+            //empty, disables inherited function
         }
+
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 10);
-            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
-                target.AddBuff(ModContent.BuffType<UnstableBuff>(), 300);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }
-
-
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            if (Projectile.hide)
-                behindNPCs.Add(index);
-        }
-        
-        public override bool PreDraw(ref Color lightColor) => false;
-
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.7f : 2.2f);
-
-        public static Color ColorFunction(float _)
-        {
-            Color color = Color.LightSkyBlue; //new(232, 140, 240);
-            color.A = 0;
-            return color;
-        }
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            if (Projectile.hide)
-                return;
-
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.WoFDeathray");
-
-            // Get the laser end position.
-            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.5f;
-
-            // Create 8 points that span across the draw distance from the projectile center.
-            Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity * 15f;
-            Vector2[] baseDrawPoints = new Vector2[8];
-            for (int i = 0; i < baseDrawPoints.Length; i++)
-                baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
-
-            
-            // Set shader parameters.
-            shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
-            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
-            shader.TrySetParameter("stretchAmount", 0.25);
-            shader.TrySetParameter("scrollSpeed", 2f);
-            shader.TrySetParameter("uColorFadeScaler", 0.8f);
-            shader.TrySetParameter("useFadeIn", true);
-            shader.TrySetParameter("realopacity", 1); // do not change this.
-
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 15 : 15);
-        }
-        
     }
 }
