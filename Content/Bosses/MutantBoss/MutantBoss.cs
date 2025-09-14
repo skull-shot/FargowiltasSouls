@@ -2593,6 +2593,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             
             if (NPC.ai[1] == chainTimeToTravel)
             {
+                if (!Main.dedServ)
+                    SoundEngine.PlaySound(SoundID.NPCDeath10, NPC.Center);
+
                 if (FargoSoulsUtil.HostCheck)
                 {
                     for (int j = -1; j <= 1; j += 2)
@@ -2620,7 +2623,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (++NPC.ai[1] > waitTime * waitMultiplier)
             {
                 if (!Main.dedServ && Main.LocalPlayer.active)
+                {
+                    SoundEngine.PlaySound(SoundID.NPCDeath10, NPC.Center);
                     ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
+                }
 
                 ChooseNextAttack(11, 13, 19, 21, 24, 26, 33, 41, 42, 44, 45);
             }
