@@ -1,17 +1,24 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 {
-    public class CosmosDeathray3 : CosmosDeathray2
+    public class CosmosDeathray3 : BaseDeathray
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "ShadowDeathray");
         public CosmosDeathray3() : base(30) { }
+
+        public override bool? CanDamage() => Projectile.scale >= 3f;
 
         public override void AI()
         {
@@ -44,7 +51,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 Projectile.Kill();
                 return;
             }
-            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 1.1f * num801;
+            Projectile.scale = (float)Math.Sin(Projectile.localAI[0] * 3.14159274f / maxTime) * 1.2f * num801;
             if (Projectile.scale > num801)
             {
                 Projectile.scale = num801;
@@ -108,6 +115,23 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 6f;
             }
+        }
+
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (target.type == ModContent.NPCType<Deviantt>())
+                modifiers.FinalDamage *= 4;
+            if (target.type == ModContent.NPCType<DeviBoss.DeviBoss>())
+                modifiers.FinalDamage *= 12;
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            if (WorldSavingSystem.EternityMode)
+                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
+            target.velocity.X = target.Center.X < Projectile.Center.X ? -15f : 15f;
+            target.velocity.Y = -10f;
         }
     }
 }
