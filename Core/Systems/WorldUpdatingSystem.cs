@@ -25,6 +25,8 @@ namespace FargowiltasSouls.Core.Systems
         public static bool SeenSandElementalMessage;
         public static bool SeenWyvernMessage;
         public static bool SeenRedDevilMessage;
+        public static int CorruptWaterTimer;
+        public static int CrimsonWaterTimer;
 
         public override void PreUpdateNPCs() => SwarmActive = FargowiltasSouls.MutantMod is Mod fargo && (bool)fargo.Call("SwarmActive");
 
@@ -179,11 +181,6 @@ namespace FargowiltasSouls.Core.Systems
                     NetMessage.SendData(MessageID.WorldData);
                 if (!Main.dedServ)
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyDeactivate"), Main.LocalPlayer.Center);
-            }
-
-            if (rainCD > 0)
-            {
-                rainCD--;
             }
 
             if (EternityMode)
@@ -453,6 +450,27 @@ namespace FargowiltasSouls.Core.Systems
                             NetMessage.SendData(MessageID.WorldData);
                     }
                 }
+            }
+
+            if (rainCD > 0)
+            {
+                rainCD--;
+            }
+
+            if (CorruptWaterTimer > 0)
+            {
+                CorruptWaterTimer--;
+
+                //make water do stuff
+                Main.SceneMetrics.ActiveFountainColor = 6;
+            }
+
+            if (CrimsonWaterTimer > 0)
+            {
+                CrimsonWaterTimer--;
+
+                //make water do stuff
+                Main.SceneMetrics.ActiveFountainColor = 12;
             }
         }
         public static bool CanActuallyPlayMaso => (FargoSoulsUtil.WorldIsMaster() && CanPlayMaso) || Main.zenithWorld;

@@ -672,6 +672,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
                     s.Spawn();
                 }
+
+                Projectile.NewProjectile(Player.GetSource_EffectItem<PumpkingsCapeEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<Pumpscare>(), 0, 0f, Main.myPlayer);
             }
         }
 

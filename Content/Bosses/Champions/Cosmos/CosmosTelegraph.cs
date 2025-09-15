@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             Asset<Texture2D> line = TextureAssets.Extra[178];
             float opacity = Projectile.Opacity;
-            Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.Cyan * opacity, Projectile.rotation, new Vector2(0, line.Height() * 0.5f), new Vector2(0.6f + LengthExtra, Projectile.scale * 24), SpriteEffects.None);
+            Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, new Color(200, 0, 200) * opacity, Projectile.rotation, new Vector2(0, line.Height() * 0.5f), new Vector2(0.6f + LengthExtra, Projectile.scale * 24), SpriteEffects.None);
             return false;
         }
 

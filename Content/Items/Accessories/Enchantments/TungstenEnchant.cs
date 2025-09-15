@@ -167,8 +167,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         ];
         public static List<int> TungstenNerfedProjType = 
         [
+            //ProjectileID.PiercingStarlight,
             ModContent.ProjectileType<SlimeKingSlasherProj>(),
-            ModContent.ProjectileType<SlimeSlingingSlasherProj>()
+            ModContent.ProjectileType<SlimeSlingingSlasherProj>(),
+            ModContent.ProjectileType<PrismaRegaliaProj>()
         ];
         public static bool TungstenAlwaysAffectProj(Projectile projectile)
         {

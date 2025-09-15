@@ -95,9 +95,6 @@ namespace FargowiltasSouls.Content.Items
 
         public override void PickAmmo(Item weapon, Item ammo, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback)
         {
-            //if (weapon.CountsAsClass(DamageClass.Ranged) && player.FargoSouls().Jammed)
-                //type = ProjectileID.ConfettiGun;
-
             switch (ammo.type)
             {
                 case ItemID.GemTreeAmethystSeed:
@@ -215,7 +212,7 @@ namespace FargowiltasSouls.Content.Items
                         scale *= 2.5f;
                 }
                 if (modPlayer.Atrophied)
-                    scale *= 0.5f;
+                    scale *= 0.66f;
             }
         }
 
@@ -241,7 +238,7 @@ namespace FargowiltasSouls.Content.Items
             {
                 return true;
             }
-            if (modPlayer.BoxofGizmos != null)
+            if (modPlayer.SquirrelCharm != null)
             {
                 if (item.DamageType == DamageClass.Default && item.damage <= 0 && item.fishingPole <= 0)
                 {
@@ -470,8 +467,6 @@ namespace FargowiltasSouls.Content.Items
                 velocityMult += 0.5f;
             if (modPlayer.RangedSoul && item.CountsAsClass(DamageClass.Ranged))
                 velocityMult += 0.2f;
-            if (modPlayer.RangedEssence  && item.CountsAsClass(DamageClass.Ranged))
-                velocityMult += 0.1f;
             velocity *= velocityMult;
 
         }

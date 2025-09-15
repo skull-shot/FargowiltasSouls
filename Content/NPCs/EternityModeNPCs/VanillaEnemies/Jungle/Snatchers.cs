@@ -150,7 +150,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
         public override void OnKill(NPC npc)
         {
             Player player = FargoSoulsUtil.PlayerExists(npc.lastInteraction);
-            int chance = player != null && player.FargoSouls().HasJungleRose ? 20 : 200;
+            int chance = player != null && player.FargoSouls().HasJungleRose ? 5 : 200;
             if (Main.rand.NextBool(chance))
             {
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.Find<ModItem>("Fargowiltas", "PlanterasFruit").Type);

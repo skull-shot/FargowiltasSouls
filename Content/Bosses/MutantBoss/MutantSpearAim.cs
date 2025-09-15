@@ -103,7 +103,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[0] = 1;
 
-                if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
+                if (Projectile.ai[1] == -2) //dive tell
+                {
+                    Projectile.timeLeft += 30;
+                    Projectile.localAI[1] = -30;
+                }
+                else if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
                 {
                     Projectile.timeLeft += 120;
                     Projectile.localAI[1] = -120;
@@ -227,7 +232,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
 
-            float distance = 220 * (1f - modifier);
+            float distance = 360 * (1f - modifier);
             float rotation = MathHelper.TwoPi * modifier * spinFlip;
             const int max = 6;
             Color finalColor = glowColor * (float)Math.Sqrt(modifier);

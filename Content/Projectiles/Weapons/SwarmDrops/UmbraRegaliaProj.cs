@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.localNPCHitCooldown = 150;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.hide = true;
+            Projectile.noEnchantmentVisuals = true;
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
@@ -52,6 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Vector2 HitboxSize = new(88 * Projectile.scale, 88 * Projectile.scale);
             Vector2 HitboxCenter = Projectile.Center + Vector2.Normalize(Projectile.velocity) * (Projectile.Size.Length() / 2f - HitboxSize.Length() / 2f);
             hitbox = new Rectangle((int)(HitboxCenter.X - HitboxSize.X / 2f), (int)(HitboxCenter.Y - HitboxSize.Y / 2f), (int)HitboxSize.X, (int)HitboxSize.Y);
+            Projectile.EmitEnchantmentVisualsAt(HitboxCenter - (HitboxSize / 2f), hitbox.Width, hitbox.Height);
         }
         public float maxCharge = 90f; // in frames
         public int SwingDirection = 1;
@@ -221,7 +223,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     if (Main.projectile[p] != null && p != Main.maxProjectiles)
                     {
                         Main.projectile[p].DamageType = DamageClass.MeleeNoSpeed;
-                        //Main.projectile[p].
+                        Main.projectile[p].noEnchantmentVisuals = true;
                     }
                 }
                 Projectile.localNPCHitCooldown = OrigAnimMax;   //only hit once per throw
@@ -231,7 +233,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         {
             ref float thrown = ref Projectile.ai[0];
 
-            if (thrown <= 0)
+            if (thrown <= 0 && Projectile.numHits < 1)
             {
                 Player player = Main.player[Projectile.owner];
                 int amount = 2;
@@ -255,7 +257,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 if (Main.projectile[p] != null && p != Main.maxProjectiles)
                 {
                     Main.projectile[p].DamageType = DamageClass.MeleeNoSpeed;
-                    //Main.projectile[p].
+                    Main.projectile[p].noEnchantmentVisuals = true;
                 }
             }
         }

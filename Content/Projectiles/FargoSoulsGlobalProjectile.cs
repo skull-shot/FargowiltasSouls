@@ -257,6 +257,9 @@ namespace FargowiltasSouls.Content.Projectiles
             if (WorldSavingSystem.EternityMode && projectile.type == ProjectileID.PalladiumPike)
                 scale += 0.4f;
 
+            if (player.FargoSouls().Atrophied)
+                scale -= 0.33f;
+
             if (scale == 1f)
                 return;
 
@@ -319,7 +322,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     projectile.FargoSouls().Homing ??= projectile.IsHoming(player, source);
                 }
-                if (Main.rand.NextBool(2) && !projectile.hostile && !projectile.trap && !projectile.npcProj && modPlayer.Jammed && projectile.CountsAsClass(DamageClass.Ranged) && projectile.type != ProjectileID.ConfettiGun)
+                if (modPlayer.Jammed && Main.rand.NextBool(3) && ItemSource && !projectile.hostile && projectile.damage > 0 && !projectile.trap && !projectile.npcProj && projectile.CountsAsClass(DamageClass.Ranged))
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -854,6 +857,12 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         return false; //don't run vanilla code
                     }
+                case ProjectileID.GoldenShowerHostile:
+                    WorldUpdatingSystem.CrimsonWaterTimer = 1200;
+                    break;
+                case ProjectileID.CursedFlameHostile:
+                    WorldUpdatingSystem.CorruptWaterTimer = 600;
+                    break;
             }
 
             return retVal;

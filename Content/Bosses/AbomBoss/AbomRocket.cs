@@ -56,7 +56,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 if (Projectile.ai[0] >= 0 && Projectile.ai[0] < Main.maxPlayers) //have target
                 {
-                    if (--Projectile.ai[1] > -45) //only home for a bit
+                    float whenToStop = Projectile.ai[2] == 0 ? 45 : 20;
+                    if (--Projectile.ai[1] > -whenToStop) //only home for a bit
                     {
                         double num4 = (Main.player[(int)Projectile.ai[0]].Center - Projectile.Center).ToRotation() - (double)Projectile.velocity.ToRotation();
                         if (num4 > Math.PI)

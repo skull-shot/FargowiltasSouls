@@ -200,6 +200,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.HoundiusShootiusFireball:
                     projectile.extraUpdates += 1;
                     break;
+                case ProjectileID.PossessedHatchet:
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = 30;
+                    break;
                 default:
                     break;
             }
@@ -1775,6 +1779,31 @@ namespace FargowiltasSouls.Content.Projectiles
                             if (hit.Crit)
                             {
                                 Projectile p = FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_OnHit(target), projectile.Center, Vector2.Zero, ModContent.ProjectileType<TopazBoltExplosion>(), hit.SourceDamage, 0f, Main.myPlayer);
+                            }
+                        }
+                        break;
+                    case ProjectileID.PossessedHatchet:
+                        if (SourceItemType == ItemID.PossessedHatchet && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            NPC ricotarget = projectile.FindTargetWithinRange(640, true);
+                            if (projectile.ai[2] < 4)
+                            {
+                                projectile.ai[2]++;
+                                if (target != null)
+                                {
+                                    projectile.ai[0] = 0; //reset vanilla bounceback state 
+                                    projectile.ai[1] = 0;
+                                    projectile.damage = (int)(projectile.damage * 0.8);
+
+                                    if (ricotarget != null && ricotarget.CanBeChasedBy()) //ricochet to other npc
+                                        projectile.velocity = 12 * Vector2.UnitX.RotateTowards(projectile.DirectionTo(ricotarget.Center).ToRotation(), 4);
+                                    else if (target.CanBeChasedBy()) //if no other npcs, home on original target, deteriorates bounce count and dmg further
+                                    {
+                                        projectile.ai[2] += 3;
+                                        projectile.damage = (int)(projectile.damage * 0.625); // 0.5x after original mult
+                                        projectile.velocity = 12 * Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 10);
+                                    }
+                                }
                             }
                         }
                         break;

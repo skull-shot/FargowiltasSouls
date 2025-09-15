@@ -2181,6 +2181,10 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 return false;
 
             CooldownSlot = ImmunityCooldownID.Bosses;
+
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                return base.CanHitPlayer(target, ref CooldownSlot);
+
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
         }
 

@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -45,6 +46,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 GetItemTuple(ModContent.ItemType<SecurityWallet>()),
                 GetItemTuple(ModContent.ItemType<WyvernFeather>()),
                 GetItemTuple(ModContent.ItemType<MasochistSoul>()),
+                GetItemTuple(ModContent.ItemType<SquirrelCharm>()),
+                GetItemTuple(ModContent.Find<ModItem>("Fargowiltas", "AutoSummoner").Type),
             };
         }
 
@@ -82,7 +85,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
         {
             Item.width = 20;
             Item.height = 20;
-            Item.accessory = true;
+            //Item.accessory = true;
             Item.rare = ItemRarityID.Expert;
             Item.value = Item.sellPrice(0, 1);
 
@@ -94,8 +97,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 
             Item.expert = true;
         }
-
-        int counter;
+        
 
         public override bool AltFunctionUse(Player player) => true;
 
@@ -130,34 +132,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
             return true;
         }
 
-        void PassiveEffect(Player player)
-        {
-            player.FargoSouls().BoxofGizmos = Item;
-            if (player.whoAmI == Main.myPlayer && player.FargoSouls().IsStandingStill && player.itemAnimation == 0 && player.HeldItem != null)
-            {
-                if (++counter > 60)
-                {
-                    player.detectCreature = true;
-
-                    if (counter % 10 == 0)
-                        Main.instance.SpelunkerProjectileHelper.AddSpotToCheck(player.Center);
-                }
-            }
-            else
-            {
-                counter = 0;
-            }
-
-            foreach (Item storedItem in storedItems)
-            {
-                storedItem.ModItem.UpdateInventory(player);
-            }
-        }
-
-        public override void UpdateInventory(Player player) => PassiveEffect(player);
-        public override void UpdateVanity(Player player) => PassiveEffect(player);
-        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffect(player);
-
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
             base.SafeModifyTooltips(tooltips);
@@ -174,6 +148,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 }
             }
         }
+
+        void PassiveEffect(Player player)
+        {
+            foreach (Item storedItem in storedItems)
+            {
+                if (storedItem.ModItem != null)
+                    storedItem.ModItem.UpdateInventory(player);
+            }
+        }
+
+        public override void UpdateInventory(Player player) => PassiveEffect(player);
+        public override void UpdateVanity(Player player) => PassiveEffect(player);
+        public override void UpdateAccessory(Player player, bool hideVisual) => PassiveEffect(player);
     }
 
     public class GizmoGlobalItem : GlobalItem

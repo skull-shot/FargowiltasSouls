@@ -51,8 +51,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 NPC.SpawnOnPlayer(Player.whoAmI, NPCID.DungeonGuardian);
             }
 
+            if (WorldUpdatingSystem.CorruptWaterTimer > 0 && WorldUpdatingSystem.CorruptWaterTimer % 5 == 0) //dust interval
+            {
+                EvilWaterDust(DustID.CursedTorch);
+            }
 
-            
+            if (WorldUpdatingSystem.CrimsonWaterTimer > 0 && WorldUpdatingSystem.CrimsonWaterTimer % 5 == 0) //dust interval
+            {
+                EvilWaterDust(DustID.IchorTorch);
+            }
+
             //water biome effects
             if (WaterWet && !waterEffectImmune)
             {
@@ -60,10 +68,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.AddBuff(ModContent.BuffType<LethargicBuff>(), 2);
 
                 //quicksand alpha, theres literally no water in ug... unless?
-                //if (Player.ZoneUndergroundDesert)
-                //{
+                if (Player.ZoneUndergroundDesert)
+                {
                 //    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Shimmer, 2);
-                //}
+                }
 
                 if (Player.ZoneSnow)
                 {
@@ -84,19 +92,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
                 }
 
-                if (Player.ZoneJungle)
-                {
-                    //FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 120);
-                }
-
                 //make ichor proj do this?
-                if (Player.ZoneCrimson)
+                if (Player.ZoneCrimson && WorldUpdatingSystem.CrimsonWaterTimer > 0)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Ichor, 300);
                 }
 
                 //make eater fireballs do this
-                if (Player.ZoneCorrupt)
+                if (Player.ZoneCorrupt && WorldUpdatingSystem.CorruptWaterTimer > 0)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 60);
                 }
@@ -187,6 +190,38 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
 
+        }
+
+        private void EvilWaterDust(int dustId)
+        {
+            //search around player for water, add dust
+            Vector2 playerPos = Player.Center;
+            int radius = 500;
+
+            for (int x = -radius; x <= radius; x++)
+            {
+                for (int y = -radius; y <= radius; y++)
+                {
+                    int xPosition = (int)(x + playerPos.X / 16.0f);
+                    int yPosition = (int)(y + playerPos.Y / 16.0f);
+
+                    if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
+                        continue;
+
+                    Tile tile = Main.tile[xPosition, yPosition];
+
+                    // Circle
+                    if (x * x + y * y <= radius)
+                    {
+                        if (tile.LiquidAmount > 0 && tile.LiquidType == LiquidID.Water)
+                        {
+                            Vector2 dustPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
+
+                            Dust.NewDust(dustPos, 22, 22, dustId, 0.0f, 0.0f, 120);
+                        }
+                    }
+                }
+            }
         }
 
         private void SpawnIcicles()
@@ -332,6 +367,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                         WorldUpdatingSystem.rainCD = 43200;// 1/2 day cooldown
                     }
+                }
+
+                if (Main.maxRaining == 0.9f)
+                {
+                    //rain full power
                 }
             }
         }

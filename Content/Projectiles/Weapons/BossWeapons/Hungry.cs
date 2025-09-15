@@ -108,14 +108,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             int homingDelay = Projectile.ai[2] == 0 ? 15 : 30;
             const float desiredFlySpeedInPixelsPerFrame = 60;
 
-            float amountOfFramesToLerpBy = Projectile.ai[2] == 0 ? 20 : 40; // minimum of 1, please keep in full numbers even though it's a float!
+            float amountOfFramesToLerpBy = Projectile.ai[2] == 0 ? 40 : 30; // minimum of 1, please keep in full numbers even though it's a float!
 
             Projectile.ai[aislotHomingCooldown]++;
             if (Projectile.ai[aislotHomingCooldown] > homingDelay)
             {
                 Projectile.ai[aislotHomingCooldown] = homingDelay; //cap this value 
 
-                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 600, true));
+                float homingRange = Projectile.ai[2] == 0 ? 600 : 1200;
+                NPC n = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, homingRange, true));
                 if (n.Alive())
                 {
                     Vector2 desiredVelocity = Projectile.SafeDirectionTo(n.Center) * desiredFlySpeedInPixelsPerFrame;

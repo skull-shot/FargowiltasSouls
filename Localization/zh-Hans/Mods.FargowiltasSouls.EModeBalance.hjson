@@ -56,7 +56,7 @@ FlowerPow: 花瓣发射频率增加200%
 // DynamicUpdating: Projectile damage updates dynamically
 PygmyStaff: 长矛可以穿透一次
 MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
-// AerialBane: Bonus damage against airborne enemies decreased to 15%
+// AerialBane: Damage against airborne enemies decreased to 1.15x
 // ChlorophyteBullet: Homing range reduced to 0.5x
 // SporeSac: Improved projectile immunity frames
 // AvengerEmblem: Damage bonus increased by 3%
@@ -68,3 +68,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // RubyStaff: Bolt splits in half after a duration
 // MeleeDamageBugFix: Fixed projectiles not dealing melee damage
 // VortexSet: Stealth lasts up to 10 seconds before going on cooldown
+// PossessedHatchet: Projectiles bounce off and between enemies

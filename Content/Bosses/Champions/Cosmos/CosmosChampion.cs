@@ -130,6 +130,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             CooldownSlot = ImmunityCooldownID.Bosses;
             if (NPC.localAI[3] == 0) //just spawned
                 return false;
+            if (NPC.ai[0] == 1 && NPC.ai[2] < 60) //doing punches with a lot of reposition
+                return false;
             return true;
         }
 
@@ -161,12 +163,42 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             return base.SpawnNPC(tileX, tileY);
         }
+
+        void SprayPunch(Vector2 target, int max, float aimVarianceDegrees)
+        {
+            if (FargoSoulsUtil.HostCheck)
+            {
+                for (int i = 0; i < max; i++)
+                {
+                    Vector2 offset = Vector2.UnitX;
+                    if (NPC.direction < 0)
+                        offset.X *= -1f;
+                    offset = offset.RotatedBy(NPC.SafeDirectionTo(target).ToRotation());
+
+                    offset += Main.rand.NextVector2Circular(NPC.width / 12, NPC.width / 12);
+
+                    Vector2 vel = NPC.SafeDirectionTo(target).RotatedByRandom(MathHelper.ToRadians(aimVarianceDegrees));
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * -vel,
+                        vel,
+                        ModContent.ProjectileType<CosmosDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
+                }
+            }
+        }
         public override void AI()
         {
             EModeGlobalNPC.championBoss = NPC.whoAmI;
 
             if (!SkyManager.Instance["FargowiltasSouls:EridanusSky"].IsActive())
                 SkyManager.Instance.Activate("FargowiltasSouls:EridanusSky");
+
+            Main.dayTime = false;
+            Main.time = 16200; //midnight, for empress visuals
+
+            Main.raining = false; //disable rain
+            Main.rainTime = 0;
+            Main.maxRaining = 0;
+
+            Main.bloodMoon = false; //disable blood moon
 
             if (NPC.localAI[3] == 0) //just spawned
             {
@@ -278,32 +310,21 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                 SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                             }
 
-                            if (++NPC.localAI[0] <= 5)
+                            if (++NPC.localAI[0] <= 3)
                             {
                                 NPC.rotation = NPC.SafeDirectionTo(Main.npc[ai2].Center).ToRotation();
                                 if (NPC.direction < 0)
                                     NPC.rotation += (float)Math.PI;
 
-                                if (NPC.localAI[0] == 5)
+                                if (NPC.localAI[0] == 3)
                                 {
                                     NPC.netUpdate = true;
-                                    if (FargoSoulsUtil.HostCheck)
-                                    {
-                                        Vector2 offset = Vector2.UnitX;
-                                        if (NPC.direction < 0)
-                                            offset.X *= -1f;
-                                        offset = offset.RotatedBy(NPC.SafeDirectionTo(Main.npc[ai2].Center).ToRotation());
-
-                                        int modifier = Math.Sign(NPC.Center.Y - Main.npc[ai2].Center.Y);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * NPC.DirectionFrom(Main.npc[ai2].Center) * modifier,
-                                            NPC.SafeDirectionTo(Main.npc[ai2].Center) * modifier,
-                                            ModContent.ProjectileType<CosmosDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                                    }
+                                    SprayPunch(Main.npc[ai2].Center, Main.rand.Next(1, 8), 9);
                                 }
                             }
                             else
                             {
-                                if (NPC.localAI[0] > 10)
+                                if (NPC.localAI[0] > 6)
                                 {
                                     NPC.localAI[0] = 0;
                                     NPC.netUpdate = true;
@@ -714,6 +735,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         NPC.ai[1] = 0;
                         NPC.ai[2] = 0;
                         NPC.ai[3] = 0;
+                        NPC.localAI[0] = 0;
                         NPC.netUpdate = true;
                     }
                     break;
@@ -740,6 +762,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                         NPC.ai[1] = 0;
                         NPC.ai[2] = 0;
                         NPC.ai[3] = 0;
+                        NPC.localAI[0] = 0;
                         NPC.netUpdate = true;
                     }
                     break;
@@ -797,72 +820,84 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     break;
 
                 case 1: //deathray punches, p2 only
-                    targetPos = player.Center;
-                    targetPos.X += 300 * (NPC.Center.X < targetPos.X ? -1 : 1);
-                    Movement(targetPos, 1.2f, 32f, useAntiWobble: false);
-
-                    if (NPC.ai[1] == 1)
                     {
-                        SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
-                        if (FargoSoulsUtil.HostCheck)
+                        if (NPC.ai[1] == 1)
+                        {
+                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+                            NPC.ai[3] = NPC.Center.X < player.Center.X ? MathHelper.Pi : 0;
+                            NPC.localAI[0] = 0;
+                            NPC.netUpdate = true;
+                        }
+
+                        bool move = true;
+
+                        int punchTime = WorldSavingSystem.MasochistModeReal ? 45 : 80;
+                        int endlag = WorldSavingSystem.MasochistModeReal ? 15 : 15;
+
+                        if (NPC.ai[2] == Math.Max(punchTime - 40, 0) && FargoSoulsUtil.HostCheck)
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
                         }
-                    }
 
-
-                    if (++NPC.ai[2] <= 6)
-                    {
-                        NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
-                        if (NPC.direction < 0)
-                            NPC.rotation += (float)Math.PI;
-
-                        NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
-
-                        if (NPC.ai[2] == 6)
+                        if (++NPC.ai[2] == punchTime)
                         {
                             NPC.netUpdate = true;
-                            if (NPC.ai[1] > 50)
-                            {
-                                if (FargoSoulsUtil.HostCheck)
-                                {
-                                    Vector2 offset = Vector2.UnitX;
-                                    if (NPC.direction < 0)
-                                        offset.X *= -1f;
-                                    offset = offset.RotatedBy(NPC.SafeDirectionTo(player.Center).ToRotation());
+                            NPC.localAI[0] = endlag;
 
-                                    int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * NPC.DirectionFrom(player.Center) * modifier,
-                                        NPC.SafeDirectionTo(player.Center) * modifier,
-                                        ModContent.ProjectileType<CosmosDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
-                                }
-                            }
-                            else
+                            NPC.ai[3] = player.velocity.ToRotation();
+
+                            NPC.velocity = 47f * NPC.DirectionTo(player.Center);
+                            if (FargoSoulsUtil.HostCheck)
                             {
+                                int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + 3000 * NPC.DirectionFrom(player.Center) * modifier, NPC.SafeDirectionTo(player.Center) * modifier,
+                                    ModContent.ProjectileType<CosmosDeathray3>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
+                            }
+
+                            NPC.rotation = NPC.velocity.ToRotation();
+                        }
+
+                        if (NPC.ai[2] >= punchTime)
+                        {
+                            move = false;
+                            NPC.velocity *= 0.98f;
+                            NPC.rotation = NPC.velocity.ToRotation();
+
+                            NPC.ai[3] = Vector2.Lerp(NPC.ai[3].ToRotationVector2(), player.velocity.SafeNormalize(Vector2.Zero), 0.1f).ToRotation();
+
+                            if (NPC.ai[2] > punchTime + endlag)
+                            {
+                                NPC.netUpdate = true;
                                 NPC.ai[2] = 0;
                             }
                         }
-                    }
-                    else
-                    {
-                        NPC.direction = NPC.spriteDirection = Math.Sign(NPC.ai[3]); //dont turn around if crossed up
 
-                        if (NPC.ai[2] > 12)
+                        if (move)
                         {
+                            targetPos = player.Center + 360 * NPC.ai[3].ToRotationVector2();
+                            float accel = WorldSavingSystem.MasochistModeReal ? 3.5f : 2f;
+                            float maxSpeed = WorldSavingSystem.MasochistModeReal ? 51f : 33f;
+                            Movement(targetPos, accel, maxSpeed, useAntiWobble: true);
+                            NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
+                        }
+
+                        if (NPC.direction < 0)
+                            NPC.rotation += (float)Math.PI;
+
+                        if (NPC.localAI[0] > 0) //control punch anim
+                            NPC.localAI[0]--;
+
+                        int punchesToDo = WorldSavingSystem.MasochistModeReal ? 8 : 5;
+                        if (++NPC.ai[1] > (punchTime + endlag) * punchesToDo)
+                        {
+                            NPC.TargetClosest();
+                            Animation++;
+                            NPC.ai[1] = 0;
                             NPC.ai[2] = 0;
                             NPC.ai[3] = 0;
+                            NPC.localAI[0] = 0;
                             NPC.netUpdate = true;
                         }
-                    }
-
-                    if (++NPC.ai[1] > 240)
-                    {
-                        NPC.TargetClosest();
-                        Animation++;
-                        NPC.ai[1] = 0;
-                        NPC.ai[2] = 0;
-                        NPC.ai[3] = 0;
-                        NPC.netUpdate = true;
                     }
                     break;
 
@@ -1160,7 +1195,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                                         //y pos is above and below player, adapt to always outspeed player, with additional V shapes
                                         Vector2 speed = (target - NPC.Center) / travelTime;
                                         int individualTiming = 60 + Math.Abs(i * 2);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed / 2, ModContent.ProjectileType<CosmosSphere>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, travelTime, individualTiming);
+                                        float direction = Math.Sign(player.Center.Y - target.Y);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, speed / 2, ModContent.ProjectileType<CosmosSphere>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, travelTime, individualTiming, ai2: direction);
                                     }
                                 }
                             }
@@ -1346,154 +1382,169 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     goto case 0;
 
                 case 13: //multi-punch to uppercut
-                    if (++NPC.ai[1] < 110)
                     {
-                        targetPos = player.Center;
-                        targetPos.X += 300 * (NPC.Center.X < targetPos.X ? -1 : 1);
-                        Movement(targetPos, 1.2f, 32f, useAntiWobble: false);
-
-                        if (NPC.ai[1] == 1)
+                        int firstAttackTime = 220;
+                        if (++NPC.ai[1] < firstAttackTime)
                         {
-                            if (FargoSoulsUtil.HostCheck)
+                            targetPos = player.Center;
+                            targetPos.X += 300 * (NPC.Center.X < targetPos.X ? -1 : 1);
+                            Movement(targetPos, 1.2f, 32f, useAntiWobble: false);
+
+                            if (NPC.ai[1] == 1)
                             {
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
-                            }
-                        }
-                        SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
-
-                        if (NPC.ai[1] == 110 + 45 - 50 && FargoSoulsUtil.HostCheck)
-                        {
-                            //Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI, ai2: 0.9f);
-                        }
-
-                        if (++NPC.ai[2] <= 6)
-                        {
-                            NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
-                            if (NPC.direction < 0)
-                                NPC.rotation += (float)Math.PI;
-
-                            NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
-
-                            if (NPC.ai[2] == 6)
-                            {
-                                NPC.netUpdate = true;
-                                if (NPC.ai[1] > 50)
+                                if (FargoSoulsUtil.HostCheck)
                                 {
-                                    if (FargoSoulsUtil.HostCheck)
-                                    {
-                                        Vector2 offset = Vector2.UnitX;
-                                        if (NPC.direction < 0)
-                                            offset.X *= -1f;
-                                        offset = offset.RotatedBy(NPC.SafeDirectionTo(player.Center).ToRotation());
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.SafeDirectionTo(player.Center), ModContent.ProjectileType<CosmosTelegraph>(), 0, 0f, Main.myPlayer, ai0: player.whoAmI, ai1: NPC.whoAmI);
+                                }
+                            }
+                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
 
-                                        int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
-                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + offset + 3000 * NPC.DirectionFrom(player.Center) * modifier, NPC.SafeDirectionTo(player.Center) * modifier,
-                                            ModContent.ProjectileType<CosmosDeathray>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
+                            int startup = 30;
+
+                            void DoPunchLogic()
+                            {
+                                int attackTime = 12; //must be divisible by 2
+                                if (++NPC.ai[2] <= attackTime / 2)
+                                {
+                                    NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
+                                    if (NPC.direction < 0)
+                                        NPC.rotation += (float)Math.PI;
+
+                                    NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
+
+                                    if (NPC.ai[2] == attackTime / 2)
+                                    {
+                                        NPC.netUpdate = true;
+                                        if (NPC.ai[1] > startup)
+                                        {
+                                            int max = 1;
+                                            float aimVarianceDegrees = 0;
+                                            if (NPC.ai[1] > startup + 60)
+                                            {
+                                                max += Main.rand.Next(3);
+                                                aimVarianceDegrees += 3;
+                                            }
+                                            if (NPC.ai[1] > startup + 120)
+                                            {
+                                                max += Main.rand.Next(4);
+                                                aimVarianceDegrees += 6;
+                                            }
+
+                                            SprayPunch(player.Center, max, aimVarianceDegrees);
+                                        }
+                                        else
+                                        {
+                                            NPC.ai[2] = 0;
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    NPC.ai[2] = 0;
+                                    NPC.direction = NPC.spriteDirection = Math.Sign(NPC.ai[3]); //dont turn around if crossed up
+
+                                    if (NPC.ai[2] > attackTime)
+                                    {
+                                        NPC.ai[2] = 0;
+                                        NPC.ai[3] = 0;
+                                        NPC.netUpdate = true;
+                                    }
                                 }
                             }
+
+                            int punchCountMax = 1;
+                            if (NPC.ai[1] > startup + 60)
+                                punchCountMax++;
+                            if (NPC.ai[1] > startup + 120)
+                                punchCountMax++;
+                            for (int punchCounts = 0; punchCounts < punchCountMax; punchCounts++)
+                                DoPunchLogic();
                         }
-                        else
+                        else //uppercut time
                         {
-                            NPC.direction = NPC.spriteDirection = Math.Sign(NPC.ai[3]); //dont turn around if crossed up
+                            BackgroundShift(NPC.ai[1], firstAttackTime + 45, firstAttackTime + 45 + 35);
 
-                            if (NPC.ai[2] > 12)
+                            if (NPC.ai[1] <= firstAttackTime + 45)
                             {
-                                NPC.ai[2] = 0;
-                                NPC.ai[3] = 0;
-                                NPC.netUpdate = true;
-                            }
-                        }
-                    }
-                    else //uppercut time
-                    {
-                        BackgroundShift(NPC.ai[1], 110 + 45, 110 + 45 + 35);
+                                targetPos = player.Center;
+                                targetPos.X += 350 * (NPC.Center.X < targetPos.X ? -1 : 1);
+                                targetPos.Y += 700;
+                                NPC.position += player.velocity / 3f; //really good tracking movement here
+                                Movement(targetPos, 2.4f, 32f);
 
-                        if (NPC.ai[1] <= 110 + 45)
-                        {
-                            targetPos = player.Center;
-                            targetPos.X += 350 * (NPC.Center.X < targetPos.X ? -1 : 1);
-                            targetPos.Y += 700;
-                            NPC.position += player.velocity / 3f; //really good tracking movement here
-                            Movement(targetPos, 2.4f, 32f);
+                                NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
+                                if (NPC.direction < 0)
+                                    NPC.rotation += (float)Math.PI;
 
-                            NPC.rotation = NPC.SafeDirectionTo(player.Center).ToRotation();
-                            if (NPC.direction < 0)
-                                NPC.rotation += (float)Math.PI;
-
-                            //NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
+                                //NPC.ai[3] = NPC.Center.X < player.Center.X ? 1 : -1; //store direction im facing
 
 
-                            if (NPC.ai[1] == 110 + 45) //rising punch
-                            {
-                                const float speed = 42f;
-                                NPC.velocity = speed * NPC.SafeDirectionTo(player.Center);
-                                NPC.netUpdate = true;
-
-                                NPC.ai[3] = Math.Abs(player.Center.Y - NPC.Center.Y) / speed; //time to travel to player's Y coord
-                                NPC.ai[3] *= 2f; //travel twice that to go above
-
-                                NPC.localAI[0] = player.Center.X;
-                                NPC.localAI[1] = player.Center.Y;
-
-                                NPC.localAI[0] += NPC.Center.X < player.Center.X ? -50 : 50; //horiz offset the centerpoint to one side closer to eri
-
-                                if (FargoSoulsUtil.HostCheck)
+                                if (NPC.ai[1] == firstAttackTime + 45) //rising punch
                                 {
-                                    int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + 3000 * NPC.DirectionFrom(player.Center) * modifier, NPC.SafeDirectionTo(player.Center) * modifier,
-                                        ModContent.ProjectileType<CosmosDeathray2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
+                                    const float speed = 42f;
+                                    NPC.velocity = speed * NPC.SafeDirectionTo(player.Center);
+                                    NPC.netUpdate = true;
+
+                                    NPC.ai[3] = Math.Abs(player.Center.Y - NPC.Center.Y) / speed; //time to travel to player's Y coord
+                                    NPC.ai[3] *= 2f; //travel twice that to go above
+
+                                    NPC.localAI[0] = player.Center.X;
+                                    NPC.localAI[1] = player.Center.Y;
+
+                                    NPC.localAI[0] += NPC.Center.X < player.Center.X ? -50 : 50; //horiz offset the centerpoint to one side closer to eri
+
+                                    if (FargoSoulsUtil.HostCheck)
+                                    {
+                                        int modifier = Math.Sign(NPC.Center.Y - player.Center.Y);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + 3000 * NPC.DirectionFrom(player.Center) * modifier, NPC.SafeDirectionTo(player.Center) * modifier,
+                                            ModContent.ProjectileType<CosmosDeathray2>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage, 1.25f), 0f, Main.myPlayer);
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            NPC.direction = NPC.spriteDirection = Math.Sign(NPC.velocity.X); //dont turn around if crossed up
-                            NPC.rotation = NPC.velocity.ToRotation();
-                            if (NPC.direction < 0)
-                                NPC.rotation += (float)Math.PI;
-
-                            if (Math.Abs(NPC.Center.Y - NPC.localAI[1]) < 300) //make the midpoint better at hitting people
+                            else
                             {
-                                //for finer grain, since eri moves too much in one tick (too much angular rotation change per tick when close)
-                                Vector2 midPos = NPC.Center - NPC.velocity / 2;
-                                Vector2 target = new(NPC.localAI[0], NPC.localAI[1]);
-                                Vector2 vel = Vector2.Normalize(midPos - target);
-                                if (FargoSoulsUtil.HostCheck)
-                                {
-                                    int modifier = Math.Sign(player.Center.X - target.X) == NPC.direction ? 1 : -1;
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, modifier * 0.5f * vel, ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, modifier * 0.5f * NPC.DirectionFrom(target), ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
-                                }
-                            }
-                            else if (++NPC.ai[2] > 1)
-                            {
-                                NPC.ai[2] = 0;
+                                NPC.direction = NPC.spriteDirection = Math.Sign(NPC.velocity.X); //dont turn around if crossed up
+                                NPC.rotation = NPC.velocity.ToRotation();
+                                if (NPC.direction < 0)
+                                    NPC.rotation += (float)Math.PI;
 
-                                if (FargoSoulsUtil.HostCheck)
+                                if (Math.Abs(NPC.Center.Y - NPC.localAI[1]) < 300) //make the midpoint better at hitting people
                                 {
+                                    //for finer grain, since eri moves too much in one tick (too much angular rotation change per tick when close)
+                                    Vector2 midPos = NPC.Center - NPC.velocity / 2;
                                     Vector2 target = new(NPC.localAI[0], NPC.localAI[1]);
-                                    int modifier = Math.Sign(player.Center.X - target.X) == NPC.direction ? 1 : -1;
-                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, 0.5f * NPC.DirectionFrom(target), ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    Vector2 vel = Vector2.Normalize(midPos - target);
+                                    if (FargoSoulsUtil.HostCheck)
+                                    {
+                                        int modifier = Math.Sign(player.Center.X - target.X) == NPC.direction ? 1 : -1;
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, modifier * 0.5f * vel, ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, modifier * 0.5f * NPC.DirectionFrom(target), ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
                                 }
-                            }
+                                else if (++NPC.ai[2] > 1)
+                                {
+                                    NPC.ai[2] = 0;
 
-                            if (NPC.ai[1] > 110 + 45 + NPC.ai[3])// || (NPC.ai[1] > 110 + 45 && NPC.Center.Y < player.Center.Y - 700))
-                            {
-                                NPC.velocity.Y = 0f;
+                                    if (FargoSoulsUtil.HostCheck)
+                                    {
+                                        Vector2 target = new(NPC.localAI[0], NPC.localAI[1]);
+                                        int modifier = Math.Sign(player.Center.X - target.X) == NPC.direction ? 1 : -1;
+                                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, 0.5f * NPC.DirectionFrom(target), ModContent.ProjectileType<CosmosBolt>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                    }
+                                }
 
-                                NPC.TargetClosest();
-                                Animation++;
-                                NPC.ai[1] = WorldSavingSystem.EternityMode && NPC.localAI[2] != 0 ? 0 : -120;
-                                NPC.ai[2] = 0;
-                                NPC.ai[3] = 0;
-                                NPC.localAI[0] = 0;
-                                NPC.localAI[1] = 0;
-                                NPC.netUpdate = true;
+                                if (NPC.ai[1] > firstAttackTime + 45 + NPC.ai[3])
+                                {
+                                    NPC.velocity.Y = 0f;
+
+                                    NPC.TargetClosest();
+                                    Animation++;
+                                    NPC.ai[1] = WorldSavingSystem.EternityMode && NPC.localAI[2] != 0 ? 0 : -120;
+                                    NPC.ai[2] = 0;
+                                    NPC.ai[3] = 0;
+                                    NPC.localAI[0] = 0;
+                                    NPC.localAI[1] = 0;
+                                    NPC.netUpdate = true;
+                                }
                             }
                         }
                     }
@@ -1726,7 +1777,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             {
                 case -4:
                     NPC.frame.Y = frameHeight * HandsBackFrame;
-                    if (NPC.localAI[0] >= 5)
+                    if (NPC.localAI[0] >= 3)
                         NPC.frame.Y = frameHeight * PunchFrame;
                     break;
 
@@ -1749,10 +1800,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     break;
 
                 case 1:
-                    if (NPC.ai[2] <= 6)
-                        NPC.frame.Y = frameHeight * HandsBackFrame;
-                    else
+                    if (NPC.localAI[0] > 0)
                         NPC.frame.Y = frameHeight * PunchFrame;
+                    else
+                        NPC.frame.Y = frameHeight * HandsBackFrame;
                     break;
 
                 case 3:
@@ -1798,7 +1849,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     break;
 
                 case 13:
-                    if (NPC.ai[1] < 110)
+                    if (NPC.ai[1] < 220)
                     {
                         if (NPC.ai[2] <= 6)
                             NPC.frame.Y = frameHeight * HandsBackFrame;
@@ -1807,7 +1858,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     }
                     else //uppercut time
                     {
-                        if (NPC.ai[1] <= 110 + 45)
+                        if (NPC.ai[1] <= 220 + 45)
                             NPC.frame.Y = frameHeight * HandsBackFrame;
                         else
                             NPC.frame.Y = frameHeight * PunchFrame;

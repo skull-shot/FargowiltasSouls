@@ -19,19 +19,17 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetDefaults()
         {
-            Item.mana = 0;
-            Item.damage = 140;
+            Item.damage = 150;
             Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 27;
-            Item.useAnimation = 27;
+            Item.useTime = 36;
+            Item.useAnimation = 36;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 5);
             Item.rare = ItemRarityID.Yellow;
-            Item.UseSound = null;
-            Item.autoReuse = false;
+            Item.autoReuse = true;
             Item.channel = true;
             Item.shoot = ModContent.ProjectileType<PrismaRegaliaProj>();
             Item.shootSpeed = 4f;

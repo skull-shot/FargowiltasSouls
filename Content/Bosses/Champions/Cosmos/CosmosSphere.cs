@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             return Projectile.ai[0] <= 0;
         }
-
+        public ref float Direction => ref Projectile.ai[2];
         public override void AI()
         {
             for (int i = 0; i < 2; i++)
@@ -52,9 +52,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 Main.dust[index2].position = Projectile.Center + vector2;
                 Main.dust[index2].noGravity = true;
             }
-
-            if (Projectile.localAI[0] == 0)
-                Projectile.localAI[0] = -Math.Sign(Projectile.velocity.Y);
 
             if (Projectile.timeLeft % Projectile.MaxUpdates == 0) //once per tick
             {
@@ -81,11 +78,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 if (Projectile.ai[1] < telegraphTime && Projectile.ai[1] > 0)
                 {
                     float lerper = 1 - Projectile.ai[1] / telegraphTime;
-                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * MathF.Pow(lerper, 2) * Projectile.localAI[0];
+                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * MathF.Pow(lerper, 2) * Direction;
                 }
                 if (--Projectile.ai[1] == 0)
                 {
-                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * Projectile.localAI[0];
+                    Projectile.velocity.Y = 30f / Projectile.MaxUpdates * Direction;
                     Projectile.netUpdate = true;
                 }
 

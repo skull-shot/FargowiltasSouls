@@ -114,6 +114,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                                     projDir = projDir.RotatedBy(MathHelper.PiOver2);
                                     Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 0.8f * speedModifier, ModContent.ProjectileType<MechElectricOrbSpaz>(),
                                         Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: MechElectricOrb.Green);
+
+                                    if (WorldSavingSystem.MasochistModeReal)
+                                    {
+                                        speedModifier *= /*WorldSavingSystem.MasochistModeReal ? 0.65f :*/ 0.4f;
+
+                                        projDir = projDir.RotatedBy(MathHelper.PiOver2);
+                                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 0.8f * speedModifier, ModContent.ProjectileType<MechElectricOrbSpaz>(),
+                                            Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: MechElectricOrb.Green);
+
+                                        projDir = projDir.RotatedBy(MathHelper.PiOver2);
+                                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), center, projDir * 1f * speedModifier, ModContent.ProjectileType<MechElectricOrbSpaz>(),
+                                            Projectile.damage, 0f, Main.myPlayer, ai0: player.whoAmI, ai2: MechElectricOrb.Yellow);
+                                    }
                                 }
                             }
 
@@ -172,6 +185,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, Spazmatism ? DustID.CursedTorch : DustID.IchorTorch, 0, 0, 0, default, 2f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 5f;
+            }
+
+            if (!Main.dedServ)
+            {
+                const float spd = 8f;
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + new Vector2(Main.rand.NextFloat(Projectile.width), Main.rand.NextFloat(Projectile.height)), Main.rand.NextVector2Circular(-spd, spd), ModContent.Find<ModGore>(Mod.Name, $"Gore_{(Spazmatism ? 144 : 143)}").Type);
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + new Vector2(Main.rand.NextFloat(Projectile.width), Main.rand.NextFloat(Projectile.height)), Main.rand.NextVector2Circular(-spd, spd), ModContent.Find<ModGore>(Mod.Name, $"Gore_{(Spazmatism ? 145 : 146)}").Type);
             }
         }
 

@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CrystalNinjaChestplate)
                 .AddIngredient(ItemID.CrystalNinjaLeggings)
                 .AddIngredient(ItemID.FlyingKnife)
-                .AddIngredient(ItemID.UnicornonaStick)
+                .AddIngredient(ItemID.BlessedApple)
                 .AddIngredient(ItemID.SmokeBomb, 50)
 
                 .AddTile<EnchantedTreeSheet>()

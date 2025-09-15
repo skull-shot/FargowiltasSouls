@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
         public override void SetStaticDefaults()
         {
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 10;
         }
 
         public override void SetDefaults()
@@ -24,7 +24,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.netImportant = true;
             Projectile.width = 30;
             Projectile.height = 32;
-            Projectile.timeLeft *= 5;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.minion = true;
@@ -32,12 +31,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.hide = true;
-        }
-
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
         }
 
         public override void AI()
@@ -79,12 +72,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     if (player.whoAmI == Main.myPlayer)
                         CooldownBarManager.Activate("FleshLumpMinionCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "LithosphericCluster").Value, Color.Purple, () => Projectile.localAI[0] / chargeTime, displayAtFull: true, activeFunction: Projectile.Alive, animationFrames: 5);
                 }
-                if (Projectile.localAI[0] > chargeTime / 2f)
-                {
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 3f; //replace with particles
-                }
                 if (Projectile.localAI[0] == chargeTime)
                 {
                     if (Projectile.owner == Main.myPlayer)
@@ -92,16 +79,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         Projectile.netUpdate = true;
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -1);
                     }
-                }
-                if (Projectile.localAI[0] > chargeTime)
-                {
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 4f;
-                    Main.dust[d].scale += 0.5f;
-                    d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Shadowflame, Projectile.velocity.X * 0.4f, Projectile.velocity.Y * 0.4f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity *= 1.5f;
                 }
             }
             else
@@ -136,19 +113,44 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 Projectile.localAI[0] = 0;
             }
 
-            if (Projectile.owner == Main.myPlayer)
+            if (Projectile.owner == Main.myPlayer) //rotation
             {
-                Projectile.ai[0] = Main.MouseWorld.X;
-                Projectile.ai[1] = Main.MouseWorld.Y;
+                if (Projectile.localAI[0] != 0 || Projectile.localAI[1] != 0)
+                {
+                    Projectile.spriteDirection = Math.Abs(MathHelper.WrapAngle(Projectile.rotation)) > MathHelper.PiOver2 ? -1 : 1;
+                    Projectile.rotation = Projectile.rotation.AngleLerp((Main.MouseWorld - Projectile.Center).ToRotation(), rotationModifier);
+                }
+                else
+                {
+                    Projectile.spriteDirection = player.direction;
+                    float rotmod2;
+                    if ((Projectile.rotation < 0.1 && Projectile.rotation > -0.1) || Projectile.rotation > 3 || Projectile.rotation < -3)
+                        rotmod2 = 1;
+                    else rotmod2 = rotationModifier; //ideally itll smoothly rotate back into place after finishing firing, but rotate instantly if idle otherwise
+                    Projectile.rotation = Projectile.rotation.AngleLerp(player.direction == 1 ? 0 : MathHelper.Pi, rotmod2);
+                }
+                //Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
-            Projectile.rotation = Projectile.rotation.AngleLerp(
-                (new Vector2(Projectile.ai[0], Projectile.ai[1]) - Projectile.Center).ToRotation(), rotationModifier);
 
-            if (Projectile.frameCounter++ > 4)
+            if (Projectile.localAI[0] <= chargeTime && Projectile.localAI[1] == 0)
             {
-                Projectile.frameCounter = 0;
-                if (++Projectile.frame >= Main.projFrames[Projectile.type])
-                    Projectile.frame = 0;
+                if (Projectile.frameCounter++ > 4)
+                {
+                    Projectile.frameCounter = 0;
+                    if (++Projectile.frame >= 5)
+                        Projectile.frame = 0;
+                }
+            }
+            else
+            {
+                if (Projectile.frame <= 5)
+                    Projectile.frame += 5;
+                if (Projectile.frameCounter++ > 4)
+                {
+                    Projectile.frameCounter = 0;
+                    if (++Projectile.frame >= 10)
+                        Projectile.frame = 6;
+                }
             }
         }
 
@@ -164,7 +166,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            float rotation = Projectile.rotation;
+            if (Projectile.spriteDirection < 0)
+                rotation += MathHelper.Pi;
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), rotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
         }
     }
