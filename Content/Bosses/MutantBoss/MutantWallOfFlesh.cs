@@ -25,13 +25,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 8000;
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 2000;
         }
 
         public override void SetDefaults()
         {
             Projectile.width = 110;
-            Projectile.height = 1960;
+            Projectile.height = 420;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.penetrate = -1;
@@ -148,12 +148,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             SpriteEffects effects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Color color = Projectile.GetAlpha(lightColor);
 
-            for (int i = -2; i <= 2; i++)
-            {
-                Vector2 drawPos = Projectile.Center + Vector2.UnitY.RotatedBy(Projectile.rotation) * 420 * Projectile.scale * i;
-                Color newColor = Lighting.GetColor(drawPos.ToTileCoordinates());
-                Main.EntitySpriteDraw(texture2D13, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(newColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
-            }
+            Vector2 drawPos = Projectile.Center;
+            Color newColor = color;
+            Main.EntitySpriteDraw(texture2D13, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(newColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
 
             return false;
         }

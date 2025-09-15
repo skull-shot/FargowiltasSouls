@@ -2604,11 +2604,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     {
                         for (int i = 0; i < 3; i++)
                         {
-                            Vector2 spawnPos = NPC.Center;
-                            spawnPos.X += xWallSpawnOffset * j;
-                            spawnPos.X += j * i * 140 * 2; //account for width & scale
-                            float wofVelX = (xWallStopOffset - xWallSpawnOffset) / wofTimeToTravel * j;
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, wofVelX * Vector2.UnitX, ModContent.ProjectileType<MutantWallOfFlesh>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, i, wofTimeToTravel, waitTime - chainTimeToTravel);
+                            for (int k = -3; k <= 3; k++)
+                            {
+                                Vector2 spawnPos = NPC.Center;
+                                spawnPos.X += xWallSpawnOffset * j;
+                                spawnPos.X += j * i * 140 * 2; //account for width & scale
+                                spawnPos.Y += 420 * k * 2;
+                                float wofVelX = (xWallStopOffset - xWallSpawnOffset) / wofTimeToTravel * j;
+                                int wallValue = i + Math.Abs(k); //only 0s will have eyes and mouth
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, wofVelX * Vector2.UnitX, ModContent.ProjectileType<MutantWallOfFlesh>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, wallValue, wofTimeToTravel, waitTime - chainTimeToTravel);
+                            }
                         }
                     }
                 }
