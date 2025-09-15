@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Terraria.GameContent;
 using Terraria.ID;
 using FargowiltasSouls.Content.Items.Armor.Eridanus;
+using Fargowiltas.Common.Systems;
 
 namespace FargowiltasSouls.Content.PlayerDrawLayers
 {
@@ -199,7 +200,7 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
             DrawData shoulderitem = new DrawData(texture,
                 new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + shoulderPosition,
                 new Rectangle?(rect), 
-                Color.White, 
+                drawInfo.colorArmorBody, 
                 drawInfo.drawPlayer.bodyRotation, 
                 (rect.Size() / 2), 
                 1f, 
