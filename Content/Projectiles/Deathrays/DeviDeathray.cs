@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,7 +53,10 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             }
             if (Length < MaxLength)
             {
-                Length += 50;
+                if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                    Length += 100;
+                else
+                    Length += 50;
             }
             float num801 = 0.5f;
             Projectile.localAI[0] += 1f;
