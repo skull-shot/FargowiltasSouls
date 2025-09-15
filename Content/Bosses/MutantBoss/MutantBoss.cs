@@ -2581,7 +2581,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                             float wofVelX = (xWallStopOffset - xWallSpawnOffset) / wofTimeToTravel * j;
                             int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantChain>(), 0, 0f, Main.myPlayer, chainTimeToTravel, wofVelX, wofTimeToTravel);
                             if (p != Main.maxProjectiles)
-                                Main.projectile[p].timeLeft = waitTime;
+                                Main.projectile[p].timeLeft = (int)waitTime;
                         }
                     }
                 }

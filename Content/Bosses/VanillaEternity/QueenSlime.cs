@@ -1236,7 +1236,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         WingFrame = 0;
                     }
                 }
-                Main.NewText(WingFrame);
 
                 if ((States)State == States.TripleSuperslam)
                 {
