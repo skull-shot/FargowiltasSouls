@@ -1946,7 +1946,7 @@ NekomiHood: {
 }
 
 NekomiHoodie: {
-	// DisplayName: Nekomi Hoodie
+	// DisplayName: Nekomi Dress
 	// Tooltip: Reduces damage taken by 4%
 }
 
@@ -3071,7 +3071,7 @@ NanoCore: {
 }
 
 NekomiLeggings: {
-	// DisplayName: Nekomi Leggings
+	// DisplayName: Nekomi Skirt
 	/* Tooltip:
 		'''
 		7% increased critical strike chance
