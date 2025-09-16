@@ -2320,11 +2320,11 @@ EnerGear: {
 
 MostlyOrdinaryRock: {
 	DisplayName: Rocha Majoritamente Comum
-	/* Tooltip:
+	Tooltip:
 		'''
-		Summons a seeker of treasures
-		'Freshly hatched from a... rock?'
-		''' */
+		Invoca um caçador de tesouros
+		'Recém-nascido de uma... rocha?'
+		'''
 }
 
 PortableFogMachine: {
@@ -3180,12 +3180,6 @@ Lightslinger: {
 		25% chance to not consume ammo
 		''' */
 }
-
-MostlyOrdinaryrock.Tooltip:
-	'''
-	Invoca um caçador de tesouros
-	'Recém-nascido de uma... rocha?'
-	'''
 
 WiresPainting: {
 	// DisplayName: Wires Painting

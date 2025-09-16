@@ -3255,8 +3255,6 @@ Lightslinger: {
 		'''
 }
 
-MostlyOrdinaryrock.Tooltip: Mods.FargowiltasSouls.ItemTooltip.MostlyOrdinaryrock
-
 WiresPainting: {
 	DisplayName: Wires猫绘画
 	Tooltip: “向内看……”
