@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -9,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Color = Microsoft.Xna.Framework.Color;
@@ -114,39 +116,45 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 Projectile.tileCollide = true;
             }
-            if (++Timer >= Duration - 2)
+            Timer++;
+            if (Timer >= Duration)
             {
-                SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeExplosion, Projectile.Center);
+                if (Timer == Duration)
+                    SoundEngine.PlaySound(FargosSoundRegistry.BaronNukeExplosion, Projectile.Center);
                 Projectile.tileCollide = false;
                 Projectile.alpha = 0;
                 Projectile.position = Projectile.Center;
                 Projectile.width = ExplosionDiameter;
                 Projectile.height = ExplosionDiameter;
                 Projectile.Center = Projectile.position;
+                Projectile.velocity = Vector2.Zero;
             }
 
             if (Timer > Duration)
             {
                 Projectile.Kill();
             }
-            Player player = FargoSoulsUtil.PlayerExists(Projectile.ai[1]);
-            if (Timer < 60)
+            if (Timer < Duration)
             {
-                Projectile.velocity *= 0.965f;
-
-            }
-            else if (player != null && player.active && !player.ghost) //homing
-            {
-                Vector2 vectorToIdlePosition = player.Center - Projectile.Center;
-                float speed = WorldSavingSystem.MasochistModeReal ? 24f : 20f;
-                float inertia = 48f;
-                vectorToIdlePosition.Normalize();
-                vectorToIdlePosition *= speed;
-                Projectile.velocity = (Projectile.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
-                if (Projectile.velocity == Vector2.Zero)
+                Player player = FargoSoulsUtil.PlayerExists(Projectile.ai[1]);
+                if (Timer < 60)
                 {
-                    Projectile.velocity.X = -0.15f;
-                    Projectile.velocity.Y = -0.05f;
+                    Projectile.velocity *= 0.965f;
+
+                }
+                else if (player != null && player.active && !player.ghost) //homing
+                {
+                    Vector2 vectorToIdlePosition = player.Center - Projectile.Center;
+                    float speed = WorldSavingSystem.MasochistModeReal ? 24f : 20f;
+                    float inertia = 48f;
+                    vectorToIdlePosition.Normalize();
+                    vectorToIdlePosition *= speed;
+                    Projectile.velocity = (Projectile.velocity * (inertia - 1f) + vectorToIdlePosition) / inertia;
+                    if (Projectile.velocity == Vector2.Zero)
+                    {
+                        Projectile.velocity.X = -0.15f;
+                        Projectile.velocity.Y = -0.05f;
+                    }
                 }
             }
             //}
@@ -186,6 +194,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         {
             ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
 
+            ExplosionVisual(Projectile.Center, ExplosionDiameter, Projectile.GetSource_FromThis());
+            /*
             for (int i = 0; i < 200; i++)
             {
                 Vector2 pos = Projectile.Center + new Vector2(0, Main.rand.NextFloat(ExplosionDiameter * 0.8f)).RotatedBy(Main.rand.NextFloat(MathHelper.TwoPi)); //circle with highest density in middle
@@ -202,6 +212,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             {
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
             }
+            */
             
 
             if (WorldSavingSystem.MasochistModeReal)
@@ -222,6 +233,44 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 }
             }
         }
+
+        public static void ExplosionVisual(Vector2 center, float radius, IEntitySource source)
+        {
+            // fire
+            if (FargoSoulsUtil.HostCheck)
+            {
+                Projectile.NewProjectile(source, center, Vector2.Zero, ModContent.ProjectileType<Projectiles.ExplosionVisual>(), 0, 0, Main.myPlayer, ai0: radius, ai1: 40);
+            }
+            //Particle p = new ExpandingBloomParticle(center, Vector2.Zero, Color.OrangeRed, Vector2.One * radius / 18, Vector2.One * radius / 8, 40, true, Color.Red);
+            //p.Spawn();
+
+            // sparks
+            int sparkDuration = 20;
+            float sparkVel = radius / sparkDuration;
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 vel = Main.rand.NextVector2Circular(sparkVel, sparkVel);
+                vel *= 2f;
+                vel = vel * 0.6f + 0.4f * sparkVel * vel.SafeNormalize(Vector2.UnitX);
+                Vector2 offset = Main.rand.NextVector2Circular(radius, radius);
+                offset /= 30;
+                Particle p = new SparkParticle(center + offset, vel, Color.OrangeRed, 1f, sparkDuration, true, Color.Red);
+                p.Spawn();
+            }
+
+            // smoke
+            int smokeDuration = 50;
+            float smokeVel = radius / smokeDuration;
+            for (int i = 0; i < 50; i++)
+            {
+                Vector2 vel = Main.rand.NextVector2Circular(smokeVel, smokeVel);
+                vel *= 4f;
+                Vector2 offset = Main.rand.NextVector2Circular(radius, radius);
+                offset /= 10;
+                Particle p = new SmokeParticle(center + offset, vel, Color.Gray, smokeDuration, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                p.Spawn();
+            }
+        }
         /*public override Color? GetAlpha(Color lightColor)
         {
             return Color.Pink * Projectile.Opacity * (Main.mouseTextColor / 255f) * 0.9f;
@@ -229,7 +278,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         //(public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 610 - Main.mouseTextColor * 2) * Projectile.Opacity * 0.9f;
         public override bool PreDraw(ref Color lightColor)
         {
-            if (Timer >= Duration - 2) //if exploding
+            if (Timer >= Duration) //if exploding
             {
                 return false;
             }
