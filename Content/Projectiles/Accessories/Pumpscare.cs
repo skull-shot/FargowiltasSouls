@@ -40,13 +40,14 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 
         public override void AI()
         {
-            if (Timer++ == 0)
-                SoundEngine.PlaySound(FargosSoundRegistry.AbomSpawnSound, Projectile.Center);
+            //if (Timer == 0)
+                //SoundEngine.PlaySound(FargosSoundRegistry.AbomSpawnSound, Projectile.Center);
+            Timer += 2;
             Projectile.scale = 0f;
             for (int i = 0; i < Timer; i++)
                 Projectile.scale = MathHelper.Lerp(Projectile.scale, 3f, 0.05f);
             Projectile.Opacity = Math.Min(1f, 1.25f * (float)Math.Sin(MathHelper.Pi / maxtime * Timer));
-            Projectile.Opacity *= 0.6f;
+            Projectile.Opacity *= 0.5f;
             Projectile.frame = 4;
         }
 

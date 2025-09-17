@@ -661,15 +661,15 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.statLife = Player.statLifeMax2;
                 Player.HealEffect(heal);
 
-                int buffDuration = heal * 60 / 8;
-                Player.AddBuff(BuffID.RapidHealing, buffDuration);
+                //int buffDuration = heal * 60 / 8;
+                //Player.AddBuff(BuffID.RapidHealing, buffDuration);
 
                 for (int i = 0; i < 16; i++)
                 {
                     Color color = Color.OrangeRed;
                     if (i % 2 == 0)
                         color = new Color(30, 0, 60);
-                    Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
+                    Particle s = new SparkParticle(Player.Center, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
                     s.Spawn();
                 }
 
