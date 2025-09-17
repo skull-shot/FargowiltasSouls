@@ -24,6 +24,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
+            if (player.HasBuff<NeurotoxinBuff>())
+                player.buffTime[buffIndex] = 0;
+
             if (player.buffTime[buffIndex] > 1200)
             {
                 player.AddBuff(ModContent.BuffType<NeurotoxinBuff>(), player.buffTime[buffIndex]);
@@ -34,6 +37,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             }
             player.FargoSouls().IvyVenom = true;
         }
+
         public override void Update(NPC npc, ref int buffIndex)
         {
             npc.FargoSouls().IvyVenom = true;
