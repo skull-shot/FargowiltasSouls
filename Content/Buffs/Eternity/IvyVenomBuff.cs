@@ -18,6 +18,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override bool ReApply(Player player, int time, int buffIndex)
         {
+            player.buffTime[buffIndex] += time;
             return false;
         }
 
