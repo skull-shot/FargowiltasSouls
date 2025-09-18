@@ -3,7 +3,7 @@ AbomDeathray.DisplayName: Raio da Morte Abominável
 AbomDeathrayMark.DisplayName: Raio da Morte
 AbomDeathraySmall.DisplayName: Raio da Morte Abominável
 AbomDeathraySmall2.DisplayName: Raio da Morte
-// AbomFlocko.DisplayName: Super Flocko
+AbomFlocko.DisplayName: Super Flocko
 AbomFrostShard.DisplayName: Estilhaço Congelado
 AbomFrostWave.DisplayName: Onda de Gelo
 AbomReticle.DisplayName: Retículo do Abominationn
@@ -24,7 +24,7 @@ AbomSword.DisplayName: Lâmina do Contemplador de Styx
 AbomSwordHandle.DisplayName: Lâmina do Contemplador de Styx
 FargoArrowProj.DisplayName: Flecha do Fargo
 FargoBulletProj.DisplayName: Projétil do Fargo
-// BigSting22.DisplayName: "22"
+BigSting22.DisplayName: "22"
 BigStinger.DisplayName: Ferroadona
 BeeDash.DisplayName: Corrida
 BlenderOrbital.DisplayName: O Liquidificador
@@ -75,7 +75,7 @@ HentaiSphereRing.DisplayName: Anel Fantasmagórico
 Hungry.DisplayName: Faminto
 Hungry2.DisplayName: Faminto
 LeashFlail.DisplayName: Mangual da Coleira
-// MechEyeProjectile.DisplayName: MechEyeProjectile
+MechEyeProjectile.DisplayName: Projétil de Olho mecânico
 MechFlail.DisplayName: Mangual Mecânico
 PhantasmalBlast.DisplayName: Explosão Fantasmagórica
 PhantasmalBolt.DisplayName: Raio Fantasmagórico
@@ -96,7 +96,7 @@ SlimeBallHoming.DisplayName: Bola de Geleia
 SlimeRainBall.DisplayName: Chuva de Geleias
 SlimeSpikeFriendly.DisplayName: Espinho da Geleia
 SmallStinger.DisplayName: Ferroadinha
-// SparklingDevi.DisplayName: Deviantt
+SparklingDevi.DisplayName: Deviantt
 SparklingLove.DisplayName: Amor Cintilante
 SparklingLoveBig.DisplayName: Amor Cintilante
 SparklingLoveDeathray.DisplayName: Raio do Amor
@@ -178,12 +178,12 @@ TerraFireball.DisplayName: Bola de Fogo
 TerraLightningOrb.DisplayName: Esfera Relâmpago
 TerraLightningOrb2.DisplayName: Esfera Relâmpago
 TerraLightningOrbDeathray.DisplayName: Relâmpago da Morte
-// TerraLightning.DisplayName: Terra Lightning
+TerraLightning.DisplayName: Relâmpago do solo
 TimberAcorn.DisplayName: Bolota
 TimberHook.DisplayName: Gancho do Esquilo
 TimberHook2.DisplayName: Gancho do Esquilo
 TimberJumpMark.DisplayName: Explosão de Madeira
-// TimberLaser.DisplayName: Laser
+imberLaser.DisplayName: Laser
 TimberLightningOrb.DisplayName: Esfera Relâmpago
 TimberPalmTree.DisplayName: Palmeira
 TimberSnowball.DisplayName: Bola de Neve
@@ -341,7 +341,7 @@ PlanteraTentacle.DisplayName: Tentáculo Plantoso
 PrimeGuardian.DisplayName: Guardião do Calabouço Alfa
 PrimeTrail.DisplayName: Rastro
 PumpkingFlamingScythe.DisplayName: Gadanha Flamejante
-// QueenFlocko.DisplayName: Super Flocko
+QueenFlocko.DisplayName: Super Flocko
 RainbowSlimeSpike.DisplayName: Espinho da Geleia Arco-íris
 RazorbladeTyphoon.DisplayName: Tufão de Navalhas
 ShadowflamePortal.DisplayName: Portal de Chamas das Sombras
@@ -362,7 +362,7 @@ VultureFeather.DisplayName: Pena de Abutre
 WOFBlast.DisplayName: Explosão Divina
 WOFChain.DisplayName: O Faminto
 WOFReticle.DisplayName: Retículo da Parede de Carne
-// AbomMinion.DisplayName: Abominationn
+AbomMinion.DisplayName: Abominationn
 AbomMinionScythe.DisplayName: Gadanha do Abominationn
 AbomMinionSickle.DisplayName: Foice do Abominationn
 BigBrainIllusion.DisplayName: Grande Cérebro
@@ -383,7 +383,7 @@ EaterTail.DisplayName: Cauda do Devorador
 EridanusBullet.DisplayName: Projétil do Eridanus
 EridanusDeathray.DisplayName: Raio da Morte Cósmico
 EridanusFist.DisplayName: Punho de Eridanus
-// EridanusMinion.DisplayName: Eridanus
+EridanusMinion.DisplayName: Eridanus
 EridanusRitual.DisplayName: Ritual Lunar
 FlameburstMinion.DisplayName: Lacaio de Chamas Explosivas
 FriendRay.DisplayName: Raio do Amor
@@ -398,7 +398,7 @@ LunarCultistLightningArc.DisplayName: Arco do Relâmpago
 LunarCultistLightningOrb.DisplayName: Esfera Relâmpago
 MiniSaucer.DisplayName: Mini Disco Voador
 NekomiAxe.DisplayName: Amor Cintilante
-// NekomiDevi.DisplayName: Deviantt
+NekomiDevi.DisplayName: Deviantt
 NekomiRitual.DisplayName: Ritual da Nekomi
 // OpticFlamethrower.DisplayName: Cursed Flamethrower
 // OpticElectricOrb.DisplayName: Ichor Orb
@@ -420,7 +420,7 @@ PungentEyeball.DisplayName: Olho Pungente
 RainbowSlime.DisplayName: Geleia Arco-íris
 RingDeathray.DisplayName: Raio da Morte Fantasmagórico
 SaucerDeathray.DisplayName: Feixe do Disco Voador
-// SaucerLaser.DisplayName: Laser
+SaucerLaser.DisplayName: Laser
 SaucerRocket.DisplayName: Foguete
 SeedPlanterasChild.DisplayName: Semente
 ShadowflamesFriendly.DisplayName: Chamas das Sombras
@@ -524,7 +524,7 @@ TurtleShield.DisplayName: Escudo da Tartaruga
 Void.DisplayName: Vazio
 AbomScytheFriendly.DisplayName: Gadanha Abominável
 BetsyDash.DisplayName: Corrida
-// CreeperHitbox.DisplayName: Creeper
+CreeperHitbox.DisplayName: Creeper
 Explosion.DisplayName: Explosão
 ExplosionSmall.DisplayName: Explosão
 GalacticReformerProj.DisplayName: Bomba Nuclear
@@ -569,220 +569,218 @@ PufferRang.DisplayName: BaiaRangue
 PufferSpray.DisplayName: BaiaBorrifo
 SpikyLure.DisplayName: Isca com Espinhos
 WaterStream.DisplayName: Fluxo de Água
-// Crimetroid.DisplayName: Crimetroid
+Crimetroid.DisplayName: Crimetroid
 NanoBase.DisplayName: Nanonúcleo
 NanoBlade.DisplayName: Lâmina de Plasma
 NanoProbe.DisplayName: Nanosonda
 PlasmaArrow.DisplayName: Flecha de Plasma
 PlasmaProj.DisplayName: Raio de Plasma
-// AbomBlast.DisplayName: Phantasmal Blast
-// AbomFlocko2.DisplayName: Super Flocko
-// AbomFlocko3.DisplayName: Super Flocko
-// AbomLaser.DisplayName: Laser
-// EyeProjectile.DisplayName: EyeProjectile2
-// PenetratorDash.DisplayName: The Penetrator
-// CosmosFireball.DisplayName: Cosmic Fireball
-// CosmosFireball2.DisplayName: Cosmic Fireball
-// ShadowFlameburst.DisplayName: Flameburst
-// ShadowFlamingScythe.DisplayName: Flaming Scythe
-// DeviRitual2.DisplayName: Deviantt Seal
-// CursedFireballHoming.DisplayName: Cursed Flame
-// CursedFlameHostile2.DisplayName: Cursed Flame
-// ElfCopterBulletExplosion.DisplayName: Explosive Bullet
-// MoonLordVortexOld.DisplayName: Vortex
-// RazorbladeTyphoon2.DisplayName: Razorblade Typhoon
-// VenomSpit.DisplayName: Venom Spit
-// RainbowSlimeSpikeFriendly.DisplayName: Rainbow Slime Spike
-// PlasmaDeathRay.DisplayName: Plasma Deathray
-// AbomBossProjectile.DisplayName: Abominationn
-// BaronMine.DisplayName: Banished Baron's Mine
-// BaronNuke.DisplayName: Banished Baron's Spicy Beeping Nuclear Torpedo of Death and Destruction
-// BaronRocket.DisplayName: Banished Baron's Rocket
-// BaronScrap.DisplayName: Banished Baron Scrap
-// BaronShrapnel.DisplayName: Banished Baron Mine Shrapnel
-// ShadowOrbProjectile.DisplayName: Shadow Orb
-// WillDeathrayBig.DisplayName: Will Deathray
-// DeviBossProjectile.DisplayName: Deviantt
-// JevilScar.DisplayName: Enchanted Lightblade
-// LifeBlaster.DisplayName: Life Blaster
-// LifeBomb.DisplayName: Life Mine
-// LifeTransitionBomb.DisplayName: Life Mine
-// LifeBombExplosion.DisplayName: Life Bomb
-// LifeCageExplosion.DisplayName: Cage Explosion
-// LifeCageProjectile.DisplayName: Life Cage
-// LifeCageTelegraph.DisplayName: Cage Telegraph
-// LifeChalBlasterDeathray.DisplayName: Holy Deathray
-// LifeChalDeathray.DisplayName: Holy Deathray
-// LifeCrosshair.DisplayName: Crosshair
-// LifeHomingProj.DisplayName: Lesser Fairy
-// LifeNeggravProj.DisplayName: Cross
-// LifeNuke.DisplayName: Life Bomb
-// LifeProjLarge.DisplayName: Cross
-// LifeProjSmall.DisplayName: Lifeshot
-// LifeRuneHitbox.DisplayName: Life Rune
-// LifeScar.DisplayName: Life Mine
-// LifeSlurp.DisplayName: Gem
-// LifeSplittingProjSmall.DisplayName: Life Shot
-// LifeTpTelegraph.DisplayName: Teleport Telegraph
-// LifeWave.DisplayName: Life Wave
-// MutantBossProjectile.DisplayName: Mutant
-// ArcTelegraph.DisplayName: Arc Telegraph
-// BloomLine.DisplayName: Bloom Line
-// FishStickProjTornado.DisplayName: Fish Stick
-// PrismaRegaliaProj.DisplayName: Prisma Regalia
-// PrismaRegaliaStar.DisplayName: Star
-// CrystallineCongregationProj.DisplayName: Crystal Ball
-// EnchantedLifebladeProjectile.DisplayName: Enchanted Lifeblade
-// LightslingerBomb.DisplayName: Light Bomb
-// LightslingerBombshot.DisplayName: Light Shot
-// LightslingerShot.DisplayName: Light Shot
-// SpiritArrow.DisplayName: Spirit Arrow
-// SpiritArrowFlame.DisplayName: Spirit Flame
-// CirnoBomb.DisplayName: Cirno Bomb
-// RetinazerDeathray.DisplayName: Blazing Deathray
-// MimicDagger.DisplayName: Magic Dagger
-// MimicHallowStar.DisplayName: Hallow Star
-// MimicTitanGlove.DisplayName: Titan Glove
-// KamikazePixie.DisplayName: Pixie
-// BabyLifelight.DisplayName: Petlight
-// Nibble.DisplayName: Nibble
-// SolarMeteor.DisplayName: Solar Meteor
-// SolarFlamePillarSpawner.DisplayName: Solar Flame Pillar Spawner
-// SolarFlamePillar.DisplayName: Solar Flame Pillar
-// LightningTelegraph.DisplayName: Lightning Telegraph
-// PillarSpawner.DisplayName: Pillar Spawner
-// VortexVortex.DisplayName: Vortex Vortex
-// VortexVortexProjectile.DisplayName: Vortex Vortex Projectile
-// PillarNebulaBlaze.DisplayName: Pillar Nebula Blaze
-// NebulaDeathray.DisplayName: Nebula Deathray
-// NebulaPillarProj.DisplayName: Nebula Pillar Proj
-// NebulaTelegraph.DisplayName: Nebula Telegraph
-// PillarArcanum.DisplayName: Pillar Arcanum
-// BaronWhirlpool.DisplayName: Baron Whirlpool
-// BaronWhirlpoolBolt.DisplayName: Baron Whirlpool Bolt
-// BaronArenaWhirlpool.DisplayName: Baron Arena Whirlpool
-// BaronDeathray.DisplayName: Baron's Laser
-// BaronEyeFlash.DisplayName: Baron Eye Flash
-// BaronTuskShrapnel.DisplayName: Baron's Tusk Shrapnel
-// DecrepitAirstrike.DisplayName: Decrepit Airstrike
-// DecrepitAirstrikeNuke.DisplayName: Decrepit Airstrike Nuke
-// DecrepitAirstrikeNukeSplinter.DisplayName: Decrepit Airstrike Nuke Splinter
-// MechLureProjectile.DisplayName: Mechanical Lure
-// RoseTintedVisorDeathray.DisplayName: Rose-Tinted Visor Laser
-// GladiatorStandard.DisplayName: Gladiator Standard
-// HiveSentry.DisplayName: Hive
-// ROB.DisplayName: R.O.B
-// MeteorEnchantMeatball.DisplayName: Massive Meteor
-// RainUmbrella.DisplayName: Rain Umbrella
-// BeeFlower.DisplayName: Bee Flower
-// MonkDashDamage.DisplayName: Monk Dash
-// EaterRocketJr.DisplayName: Rotten Chunk
-// VortexLightningDeathray.DisplayName: Vortex Lightning Deathray
-// SpectralEoC.DisplayName: Spectral Eye of Cthulhu
-// MonkDashSlash.DisplayName: Monk Dash Slash
-// ObsidianExplosion.DisplayName: Obsidian Explosion
-// DeviGuardianHarmless.DisplayName: Devi Guardian Harmless
-// MagmawJaw.DisplayName: Magmaw Jaw
-// MagmawHand.DisplayName: Magmaw Hand
-// PungentEyeballMinion.DisplayName: Pungent Eyeball Minion
-// MinosPrime.DisplayName: Minos Prime
-// RainLightning.DisplayName: Rain Lightning
-// PlanteraTooth.DisplayName: Plantera Tooth
-// PlanteraRitual.DisplayName: Plantera Ritual
-// PlanteraManEater.DisplayName: Plantera Man Eater
-// PlanteraSnatcher.DisplayName: Plantera Snatcher
-// PlanteraTrapper.DisplayName: Plantera Trapper
-// PlanteraMushroomThing.DisplayName: Plantera Mushroom Thing
-// RainExplosion.DisplayName: Rain Explosion
-// CoffinSlamShockwave.DisplayName: Slam Shockwave
-// CoffinWaveShot.DisplayName: Shadowflame Waveshot
-// CoffinDarkSouls.DisplayName: Dark Soul
-// CoffinHand.DisplayName: Cursed Coffin's Hand
-// CoffinRandomStuff.DisplayName: Cursed Artillery
-// FishStickWhirlpool.DisplayName: Fish Stick Whirlpool
-// BetsyHomingFireball.DisplayName: Betsy Homing Fireball
-// HellGuardian.DisplayName: Hell Guardian
-// RazorBlade.DisplayName: Razor Blade
-// MutantShadowHand.DisplayName: Mutant Shadow Hand
-// TwentyTwo.DisplayName: Twenty Two
-// MutantSlimeSpike.DisplayName: Mutant Slime Spike
-// MutantSansBeam.DisplayName: Mutant Sans Beam
-// MutantSansHead.DisplayName: Mutant Sans Head
-// MoonBowHeld.DisplayName: Moon Bow Held
-// MoonBowPortal.DisplayName: Moon Bow Portal
-// FlightBall.DisplayName: Flight Ball
-// AbomPhoenix.DisplayName: Phantom Phoenix
-// FrostShardFriendly.DisplayName: Frost Shard Friendly
-// HentaiSword.DisplayName: Mutant Sword
-// HentaiSwordBlast.DisplayName: Mutant Sword Blast
-// HentaiSphereOkuu.DisplayName: Mutant Sphere Okuu
-// AbomRitualFTW.DisplayName: Abominationn Ritual
-// FallingSandstone.DisplayName: Falling Sandstone
-// CoffinPlayerSoul.DisplayName: Your Soul
-// GildedSceptreProj.DisplayName: Shadowflame Sceptre Shot
-// RoyalSubjectProjectile.DisplayName: Royal Subject
-// SandstoneBoulder.DisplayName: Sandstone Boulder
-// SandstoneShrapnel.DisplayName: Sandstone Shrapnel
-// EgyptianFlailProjectile.DisplayName: Nekhakha
-// SpiritBow.DisplayName: Spirit Bow
-// TimberBranch.DisplayName: Timber Branch
-// CosmosForceMoon.DisplayName: Cosmos Force Moon
-// GladiatorSpirit.DisplayName: Gladiator Spirit
-// ShadowDash.DisplayName: Shadow Dash
-// SpiritTornado.DisplayName: Spirit Tornado
-// TerrariaSoulMoon.DisplayName: Moon of Terraria
-// DeviDevilScythe.DisplayName: Devil Scythe
-// LifeHomingProjSmall.DisplayName: Lifeshot
-// LifeRuneExplosion.DisplayName: Life Rune Explosion
-// LifeRunespearHitbox.DisplayName: Life Runespear
-// LifeRunespearExplosion.DisplayName: Life Runespear Explosion
-// LifeRuneRetractHitbox.DisplayName: Life Rune
-// Slimesplosion.DisplayName: Slimesplosion
-// TwinsEyeFlash.DisplayName: Twins Eye Flash
-// UmbraRegaliaProj.DisplayName: Umbra Regalia
-// EffectVisual.DisplayName: Effect Visual
-// SpectreGhostProj.DisplayName: Spectre Ghost
-// SpectreSpirit.DisplayName: Spectre Spirit
-// VortexLaser.DisplayName: Vortex Laser
-// DicerPlanteraSeed.DisplayName: Dicer Bomb Seed
-// MoltenAuraProj.DisplayName: Molten Aura
-// LifelightEnvironmentStar.DisplayName: Star of Light
-// NebulaShot.DisplayName: Nebula Shot
-// SolarEnchFlare.DisplayName: Solar Flare
-// DeerclopsDarknessHand.DisplayName: Hand of Shadow
-// SlimeKingSlasherProj.DisplayName: Slime King's Slasher
-// AbomStyxGazerDash.DisplayName: Styx Gazer
-// EbonwoodAuraProj.DisplayName: Ebonwood Aura
-// ShadewoodAuraProj.DisplayName: Shadewood Aura
-// MeteorExplosion.DisplayName: Meteor Explosion
-// SlimeSlingingSlasherProj.DisplayName: Slime Slinging Slasher
-// PlanteraSpikevine.DisplayName: Plantera Spikevine
-// ElectricWhipProj.DisplayName: Voltaic Lasher
-// ElectricWhipLightning.DisplayName: Voltaic Lasher Lightning
-// TheDestroyerProj.DisplayName: The Destroyer
-// DestroyerBodyWhip.DisplayName: Destroyer Body
-// DestroyerHeadWhip.DisplayName: Destroyer Head
-// DestroyerTailWhip.DisplayName: Destroyer Tail
-// DestroyerScanTelegraph.DisplayName: Destroyer Scan Telegraph
-// PungentAuraProj.DisplayName: Pungent Aura Proj
-// RockeaterAuraProj.DisplayName: Rockeater Aura Proj
-// FallenStarDay.DisplayName: Fallen Star Day
-// LightningRodLightning.DisplayName: Lightning Rod Lightning
-// ReleasedMechFlail.DisplayName: Leash of Cthulhu
-// Tome.DisplayName: Tome
-// TomeShot.DisplayName: Tome Shot
-// TungstenShockwave.DisplayName: Tungsten Shockwave
-// CirnoIceCube.DisplayName: Cirno Ice Cube
-// CirnoMinion.DisplayName: Cirno Minion
-// DaiyouseiMinion.DisplayName: Daiyousei Minion
-// MystiaMinion.DisplayName: Mystia Minion
-// RumiaMinion.DisplayName: Rumia Minion
-// WriggleMinion.DisplayName: Wriggle Minion
-// CirnoIceChunk.DisplayName: Cirno Ice Chunk
-// DaiyoLeaf.DisplayName: Daiyo Leaf
-// MystiaNote.DisplayName: Mystia Note
-// MystiaNote2.DisplayName: Mystia Note2
-// RumiaOrb.DisplayName: Rumia Orb
-// EmpressRitual.DisplayName: Empress Ritual
-// WillDashTrail.DisplayName: Dash Trail
-// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
+AbomBlast.DisplayName: Explosão fantasmagórica
+AbomFlocko2.DisplayName: Super Flocko
+AbomFlocko3.DisplayName: Super Flocko
+AbomLaser.DisplayName: Laser
+EyeProjectile.DisplayName: Projétil de olho 2
+PenetratorDash.DisplayName: O Penetrador
+CosmosFireball.DisplayName: Bola de Fogo Cósmica
+CosmosFireball2.DisplayName: Bola de Fogo Cósmica
+ShadowFlameburst.DisplayName: Explosão de Chamas
+ShadowFlamingScythe.DisplayName: Foice Flamejante
+DeviRitual2.DisplayName: Selo da Deviantt
+CursedFireballHoming.DisplayName: Chama amaldiçoada
+CursedFlameHostile2.DisplayName: Chama amaldiçoada
+ElfCopterBulletExplosion.DisplayName: Bala explosiva
+MoonLordVortexOld.DisplayName: Vórtice
+RazorbladeTyphoon2.DisplayName: Tufão de Navalhas
+VenomSpit.DisplayName: Cuspida Venenosa
+RainbowSlimeSpikeFriendly.DisplayName: Espinho da geleia arco-íris
+PlasmaDeathRay.DisplayName: Raio da morte de Plasma
+AbomBossProjectile.DisplayName: Abominationn
+BaronMine.DisplayName: Mina do Banished Baron
+BaronNuke.DisplayName: Torpedo Nuclear da Morte e Destruição do Banished Baron
+BaronRocket.DisplayName: Foguete do Banished Baron
+BaronScrap.DisplayName: Sucata do Banished Baron 
+BaronShrapnel.DisplayName: lâminas de mina do Banished Baron
+ShadowOrbProjectile.DisplayName: Orbe sombrio
+WillDeathrayBig.DisplayName: Raio da morte da Vontade
+DeviBossProjectile.DisplayName: Deviantt
+JevilScar.DisplayName: Lâmina Viva encantada
+LifeBlaster.DisplayName: Explosão da Vida
+LifeBomb.DisplayName: Mina da Vida
+LifeTransitionBomb.DisplayName: Mina da Vida
+LifeBombExplosion.DisplayName: Bomba da Vida
+LifeCageExplosion.DisplayName: Explosão de jaula
+LifeCageProjectile.DisplayName: Jaula da vida
+LifeCageTelegraph.DisplayName: Telégrafo da jaula
+LifeChalBlasterDeathray.DisplayName: Raio da morte sagrado
+LifeChalDeathray.DisplayName: Raio da morte sagrado
+LifeCrosshair.DisplayName: Mira da vida
+LifeHomingProj.DisplayName: Fada menor
+LifeNeggravProj.DisplayName: Cruz
+LifeNuke.DisplayName: Bomba da vida
+LifeProjLarge.DisplayName: Cruz
+LifeProjSmall.DisplayName: Tiro da Vida
+LifeRuneHitbox.DisplayName: Runa da Vida
+LifeScar.DisplayName: Mina da vida
+LifeSlurp.DisplayName: Gema
+LifeSplittingProjSmall.DisplayName: Tiro da Vida
+LifeTpTelegraph.DisplayName: Telégrafo do teletransporte
+LifeWave.DisplayName: Onda da vida
+MutantBossProjectile.DisplayName: Mutant
+ArcTelegraph.DisplayName: Telégrafo do Arco
+BloomLine.DisplayName: Linha do florescimento
+FishStickProjTornado.DisplayName: Palito de Peixe
+PrismaRegaliaProj.DisplayName: Regalia prismática
+PrismaRegaliaStar.DisplayName: Estrela
+CrystallineCongregationProj.DisplayName: Bola de Cristal
+EnchantedLifebladeProjectile.DisplayName: Lâmina da vida encantada
+LightslingerBomb.DisplayName: Bomba de luz
+LightslingerBombshot.DisplayName: Tiro de luz
+LightslingerShot.DisplayName: Tiro de luz
+SpiritArrow.DisplayName: Flecha espiritual
+SpiritArrowFlame.DisplayName: Chama espiritual
+CirnoBomb.DisplayName: Bomba da Cirno
+RetinazerDeathray.DisplayName: Raio da morte flamejante
+MimicDagger.DisplayName: Adaga mágica
+MimicHallowStar.DisplayName: Estrela consagrada
+MimicTitanGlove.DisplayName: Luva do titã
+KamikazePixie.DisplayName: Fada
+BabyLifelight.DisplayName: Pet de luz
+Nibble.DisplayName: Nibble
+SolarMeteor.DisplayName: Meteoro Solar
+SolarFlamePillarSpawner.DisplayName: Invocador de Pilar de chamas solar
+SolarFlamePillar.DisplayName: Pilar de chamas solar
+LightningTelegraph.DisplayName: Telégrafo de relâmpago
+PillarSpawner.DisplayName: Invocador de pilar
+VortexVortex.DisplayName: Vórtice do Vórtice
+VortexVortexProjectile.DisplayName: Projétil do Vórtice do Vórtice
+PillarNebulaBlaze.DisplayName: Chama do Pilar nebuloso
+NebulaDeathray.DisplayName: Raio da morte nebuloso
+NebulaPillarProj.DisplayName: Projétil do pilar nebuloso
+NebulaTelegraph.DisplayName: Telégrafo nebuloso
+PillarArcanum.DisplayName: Arcanum do pilar
+BaronWhirlpool.DisplayName: Redemoinho do Barão
+BaronWhirlpoolBolt.DisplayName: Raio do Redemoinho do Barão
+BaronArenaWhirlpool.DisplayName: Redemoinho da Arena do Barão
+BaronDeathray.DisplayName: Laser do Barão
+BaronEyeFlash.DisplayName: Lampejo do olho do Barão
+BaronTuskShrapnel.DisplayName: Lâmina da Presa do Barão
+DecrepitAirstrike.DisplayName: Ataque aéreo Decrépito
+DecrepitAirstrikeNuke.DisplayName: Bomba nuclear do Ataque aéreo Decrépito
+DecrepitAirstrikeNukeSplinter.DisplayName: Lasca do Ataque aéreo Decrépito
+MechLureProjectile.DisplayName: Isca mecânica
+RoseTintedVisorDeathray.DisplayName: Laser do Visor pintado de rosa
+GladiatorStandard.DisplayName: Bandeira do gladiador
+HiveSentry.DisplayName: Colmeia
+ROB.DisplayName: R.O.B
+MeteorEnchantMeatball.DisplayName: Meteoro massivo
+RainUmbrella.DisplayName: Guarda-chuva
+BeeFlower.DisplayName: Flor de abelha
+MonkDashDamage.DisplayName: Corrida de monge
+EaterRocketJr.DisplayName: Pedaço podre
+VortexLightningDeathray.DisplayName: Raio da morte do Vórtice
+SpectralEoC.DisplayName: Olho de Cthulhu Espectral
+MonkDashSlash.DisplayName: Corte da corrida do monge
+ObsidianExplosion.DisplayName: Explosão de obsidiana
+DeviGuardianHarmless.DisplayName: Guardiã Devi
+MagmawJaw.DisplayName: Jaula do Magmaw
+MagmawHand.DisplayName: Mão do Magmaw
+PungentEyeballMinion.DisplayName: Lacaio do olho pungente
+MinosPrime.DisplayName: Minos Prime
+RainLightning.DisplayName: Relâmpago
+PlanteraTooth.DisplayName: Dente da Plantera 
+PlanteraRitual.DisplayName: Ritual da Plantera
+PlanteraManEater.DisplayName: Comedor de Homens Plantera 
+PlanteraSnatcher.DisplayName: Pegador da Plantera 
+PlanteraTrapper.DisplayName: Caçador da Plantera 
+PlanteraMushroomThing.DisplayName: Coisa de Cogumelo da Plantera 
+RainExplosion.DisplayName: Explosão de chuva
+CoffinSlamShockwave.DisplayName: Onde de choque
+CoffinWaveShot.DisplayName: Tiro de Chama das sombras
+CoffinDarkSouls.DisplayName: Alma Sombria
+CoffinHand.DisplayName: Mão do Cursed Coffin
+CoffinRandomStuff.DisplayName: Artilharia Almadiçoada
+FishStickWhirlpool.DisplayName: Redemoinho de Palito de peixe
+BetsyHomingFireball.DisplayName: Bola de fogo teleguiada da Betsy
+HellGuardian.DisplayName: Guardião do Inferno
+RazorBlade.DisplayName: Serra
+MutantShadowHand.DisplayName: Mão Sombria do Mutant
+TwentyTwo.DisplayName: VINTE E DOIS
+MutantSlimeSpike.DisplayName: Espinho de Geleia do Mutant
+MutantSansBeam.DisplayName: Raio do SANS do Mutant 
+MutantSansHead.DisplayName: Cabeça do SANS do Mutant 
+MoonBowHeld.DisplayName: Arco Lunar Carregado
+MoonBowPortal.DisplayName: Portal do Arco Lunar
+FlightBall.DisplayName: Bola de Voo
+AbomPhoenix.DisplayName: Fênix Fantasma
+FrostShardFriendly.DisplayName: Fragmento de gelo amigável
+HentaiSword.DisplayName: Espada do Mutant 
+HentaiSwordBlast.DisplayName: Explosão da Espada do Mutant 
+HentaiSphereOkuu.DisplayName: Esfera de Okku do Mutant
+AbomRitualFTW.DisplayName: Ritual do Abominationn 
+FallingSandstone.DisplayName: Pedra de Areia Caindo
+CoffinPlayerSoul.DisplayName: Sua Alma
+GildedSceptreProj.DisplayName: Tiro do Cetro de Chama das Sombras
+RoyalSubjectProjectile.DisplayName: Sujeito Real
+SandstoneBoulder.DisplayName: Pedra de Areia
+SandstoneShrapnel.DisplayName: Lâmina de Pedra de Areia
+EgyptianFlailProjectile.DisplayName: Nekhakha
+SpiritBow.DisplayName: Arco Espiritual
+TimberBranch.DisplayName: Galho de Madeira
+CosmosForceMoon.DisplayName: Lua da força dos cosmos
+GladiatorSpirit.DisplayName: Espírito Gladiador
+ShadowDash.DisplayName: Corrida Sombria
+SpiritTornado.DisplayName: Tornado Espiritual
+TerrariaSoulMoon.DisplayName: Lua do Terraria
+DeviDevilScythe.DisplayName: Gadanha Demoníaca
+LifeHomingProjSmall.DisplayName: Tiro da vida
+LifeRuneExplosion.DisplayName: Explosão de Runa
+LifeRunespearHitbox.DisplayName: Lança de Runas da Vida
+LifeRunespearExplosion.DisplayName: Explosão da lança de runas
+LifeRuneRetractHitbox.DisplayName: Runa da vida
+Slimesplosion.DisplayName: Slimexplosão
+TwinsEyeFlash.DisplayName: Lampejo dos Olhos dos Gêmeos
+UmbraRegaliaProj.DisplayName: Regalia Sombria
+EffectVisual.DisplayName: Efeito Visual
+SpectreGhostProj.DisplayName: Fantasma Espectral
+SpectreSpirit.DisplayName: Espirito Espectral
+VortexLaser.DisplayName: Laser do Vórtice
+DicerPlanteraSeed.DisplayName: Semente explosiva do triturador
+MoltenAuraProj.DisplayName: Aura Derretida
+LifelightEnvironmentStar.DisplayName: Estrela da Luz
+NebulaShot.DisplayName: Tiro Nebuloso
+SolarEnchFlare.DisplayName: Explosão Solar
+DeerclopsDarknessHand.DisplayName: Mão da Sombra
+SlimeKingSlasherProj.DisplayName: Cortador esmagador de geleia
+AbomStyxGazerDash.DisplayName: Contemplador de Styx
+EbonwoodAuraProj.DisplayName: Aura de madeira do Ébano
+ShadewoodAuraProj.DisplayName: Aura da madeira sombria
+MeteorExplosion.DisplayName: Explosão de meteoro
+SlimeSlingingSlasherProj.DisplayName: Cortador lançador de geleia
+PlanteraSpikevine.DisplayName: Vinha Espinho da Plantera 
+ElectricWhipProj.DisplayName: Laço Voltaíco
+ElectricWhipLightning.DisplayName: Relâmpago do laço voltaíco
+TheDestroyerProj.DisplayName: O destruidor
+DestroyerBodyWhip.DisplayName: Corpo do destruidor
+DestroyerHeadWhip.DisplayName: Cabeça do destruidor
+DestroyerTailWhip.DisplayName: Cauda do destruidor
+DestroyerScanTelegraph.DisplayName: Telégrafo da investida do destruidor
+PungentAuraProj.DisplayName: Aura pungente
+RockeaterAuraProj.DisplayName: Aura do devorafoguetes
+FallenStarDay.DisplayName: Dia da Estrela cadente
+LightningRodLightning.DisplayName: Relâmpago do Pára-raios
+ReleasedMechFlail.DisplayName: Coleira de Cthulhu
+Tome.DisplayName: Tomo
+TomeShot.DisplayName: Tiro de Tomo
+TungstenShockwave.DisplayName: Onda de choque de tungstênio
+CirnoIceCube.DisplayName: Cubo de Gelo da Cirno
+CirnoMinion.DisplayName: Lacaio da Cirno
+DaiyouseiMinion.DisplayName: Lacaio Daiyousei
+MystiaMinion.DisplayName: Lacaio Mystia 
+RumiaMinion.DisplayName: Lacaio Rumia 
+WriggleMinion.DisplayName: Lacaio Wriggle 
+CirnoIceChunk.DisplayName: Pedaço de gelo da Cirno 
+DaiyoLeaf.DisplayName: Folha da Daiyo
+MystiaNote.DisplayName: Nota da Mystia
+MystiaNote2.DisplayName: Nota da Mystia 2
+RumiaOrb.DisplayName: Orbe da Rumia 
+EmpressRitual.DisplayName: Ritual da Imperatriz

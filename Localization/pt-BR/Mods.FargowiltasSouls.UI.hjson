@@ -1,77 +1,71 @@
-SoulTogglerButton: Configurar Efeitos de Acessórios
-// Standard: Standard Mode
-// Eternity: Eternity Mode
-// Masochist: Masochist Mode
+SoulTogglerButton: Habilitador de Efeitos
+Standard: Modo Normal
+Eternity: Modo Eternidade
+Masochist: Modo Masoquista
 EternityEnabled: Modo Eternidade está ativado
 MasochistEnabled: Modo Masoquista está ativado
-// EternityDisabled: Eternity Mode is disabled
-// LeftClickEnable: Left Click to enable
-// RightClickSelectDifficulty: Right Click to select difficulty
-// HoldShift: Hold Shift to read more
-// Close: Close
-// OpenKeybinds: Open Keybinds
+EternityDisabled: Modo Eternidade está desativado
+LeftClickEnable: Botão esquerdo para ativar
+RightClickSelectDifficulty: Botão direito para selecionar a dificuldade
+HoldShift: Segure Shift para ler sobre
+ExpandedStandard:
+	'''
+	Desabilita os modos Masoquista e Eternidade.
+	Dificuldade do mundo (perito, mestre) não muda.
+	'''
+ExpandedEternity:
+	'''
+	[c/00FFFF:Um novo modo acima do perito para veteranos do Terraria. A experiência pretendida do Fargo's]
+	Mundo deve estar no Modo perito
+	Habilita o Modo Masoquista caso o mundo esteja na dificuldade mestre ou superior 
+	'''
+ExpandedMasochist:
+	'''
+	[c/33ffbe:Um desafio bônus extremamente intenso. É altamente recomendado que jogue o Modo Eternidade primeiro!]
+	Mundo deve estar na dificuldade mestre ou superior
+	Habilita o Modo Eternidade caso o mundo esteja na dificuldade perito
+	'''
+EternityOption:
+	'''
+	[c/00FFFF:Um novo modo acima do perito para veteranos do Terraria. A experiência pretendida do Fargo's.]
+	Coloca a dificuldade do mundo no Modo Perito
+	'''
+MasochistOption:
+	'''
+	[c/33ffbe:Um desafio bônus extremamente intenso. É altamente recomendado que jogue o Modo Eternidade primeiro!]
+	Coloca a dificuldade do mundo no Modo Mestre
+	'''
+ExpandedFeatures:
+	'''
+	Características do Modo Eternidade incluem:
 
-TitleLinks: {
-	// Patreon: Patreon
-	// Github: Github
-}
-
-/* ExpandedStandard:
+	-Retrabalha chefes e inimigos, os tornando mais poderosos
+	-Habilita itens do Modo Mestre
+	-Novos itens exclusivos ao Modo Eternidade
+	-Deviantt providencia um kit de iniciante e dicas baseadas em sua progressão
+	-Melhora as estatistícas básicas e limita a redução de danos do jogador para 75%
+	-Efeitos negativos acabam mais rapidamente quando você não ataca, efeitos negativos não podem te matar exceto no Modo Masoquista 
+	-Muda a funcionalidade e a força de certos itens
 	'''
-	Disables Eternity or Masochist Mode.
-	World difficulty (Expert, Master) remains unchanged.
-	''' */
-/* ExpandedEternity:
-	'''
-	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
-	World must be in Expert Mode
-	Enables Masochist Mode if world is in Master Mode or above
-	''' */
-/* ExpandedMasochist:
-	'''
-	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
-	World must be in Master Mode or above
-	Enables Eternity Mode if world is in Expert Mode
-	''' */
-/* EternityOption:
-	'''
-	[c/00FFFF:A new mode above Expert for Terraria veterans. The intended Fargo experience.]
-	Sets world difficulty to Expert Mode
-	''' */
-/* MasochistOption:
-	'''
-	[c/33ffbe:An extremely intense bonus challenge mode. It is highly recommended to play Eternity Mode first!]
-	Sets world difficulty to Master Mode
-	''' */
-/* ExpandedFeatures:
-	'''
-	Eternity features include:
-
-	-Reworks bosses and enemies, making them stronger
-	-Enables Master Mode drops
-	-New Eternity-exclusive item drops
-	-Deviantt provides a starter pack and progress-based advice
-	-Improves base stats and caps player DR at 75%
-	-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
-	-Changes the functionality and strength of certain items
-	''' */
-// MasochistMultiplayer: -In Masochist multiplayer, each player can only respawn once per bossfight
-// SavedToSlot: Toggles saved to custom set {0}!
-// NoTogglesFound: No toggles found in custom set {0}.
-// TurnAllTogglesOff: Turn all toggles off
-// TurnAllTogglesOn: Turn all toggles on
-// SomeEffectsPreset: Some effects preset
-// MinimalEffectsPreset: Minimal effects preset
-// CustomPreset: Custom preset {0} (right click to save)
+MasochistMultiplayer: -No Masoquista multiplayer, cada jogador pode reviver apenas uma vez por luta
+SavedToSlot: Habilitações salvas para o conjunto personalizado {0}!
+NoTogglesFound: Nenhuma habilitação encontrada no conjunto {0}.
+TurnAllTogglesOff: Desligar todas as habilitações
+TurnAllTogglesOn: Ligar todas as habilitações
+SomeEffectsPreset: Conjunto de alguns efeitos
+MinimalEffectsPreset: Conjunto de efeitos mínimos
+CustomPreset: Conjunto personalizado {0} (botão direito para salvar)
 // Reload button is currently removed
-// ReloadToggles: Reload Toggles (right click to reset)
-// NoToggles: No togglable effects equipped!
-// DisplayAll: Display All
-// DisplayEquipped: Display Equipped
-// SearchText: Search...
-// MainMenu: Fargo's
-// DisabledUnequipped: Disabled: Not equipped
-// ActiveSkills: Active Skills
-// AvailableSkills: Available Skills
-// SelectDifficulty: Select Difficulty
-// NoRespawn: Respawn prevented: Only one respawn per boss in {0} multiplayer!
+ReloadToggles: Recarregar habilitações (Botão direito para resetar)
+NoToggles: Nenhum efeito equipado para habilitar!
+DisplayAll: Mostrar todos
+DisplayEquipped: Mostrar equipados
+SearchText: Procurar...
+MainMenu: Fargo's
+DisabledUnequipped: Desabilitado: Não equipado
+ActiveSkills: Habilidades ativas
+AvailableSkills: Habilidades disponíveis
+SelectDifficulty: Selecionar dificuldade
+NoRespawn: Renascimento impedido: Apenas um renascimento permitido no Modo Masoquista Multiplayer!
+Close: Fechar
+OpenKeybinds: Abrir botões vínculados

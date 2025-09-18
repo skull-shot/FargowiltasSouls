@@ -1,132 +1,132 @@
-// GrantsSkill: Grants Active Skill:
-// GrantsSkillsPlural: Grants Active Skills:
-// KeybindMenu: Press {0} to bind skills
-// Unequipped: Unequipped! Cannot be used!
-// Unbound: Unbound!
-// BoundTo: Bound to {0}!
+GrantsSkill: Concede a habilidade:
+GrantsSkillsPlural: Concede as habilidades:
+KeybindMenu: Pressione {0} para vincular habilidades
+Unequipped: Desequipado! Não pode ser usado!
+Unbound: Desvinculado!
+BoundTo: Vinculado para {0}!
 
 SpecialDashEffect: {
-	// DisplayName: Bee Dash
-	// Tooltip: Perform a short quick bee dash towards your cursor
+	DisplayName: Corrida de Abelha
+	Tooltip: Realize uma pequena corrida de abelha em direção ao cursor
 }
 
 BetsyDashEffect: {
-	// DisplayName: Fireball Dash
-	/* Tooltip:
+	DisplayName: Corrida de Bola de Fogo
+	Tooltip:
 		'''
-		Perform a short invincible fireball dash towards your cursor
-		Shares cooldown slot with Bee Dash
-		''' */
+		Realize uma pequena corrida invencível de bola de fogo em direção ao cursor
+		Compartilha seu tempo de recarga com a Corrida de Abelha
+		'''
 }
 
 DiveEffect: {
-	// DisplayName: Fastfall Dive
-	/* Tooltip:
+	DisplayName: Mergulho de Queda Rápida
+	Tooltip:
 		'''
-		Activate in the air to fastfall
-		Defaults to Double Tap DOWN if no key is bound to skill slot
-		''' */
+		Ative no ar para cair rapidamente
+		Ative apertando duas vezes PARA BAIXO caso não tenha um botão salvo em um slot de habilidade
+		'''
 }
 
 GoldKeyEffect: {
-	// DisplayName: Golden Shell
-	/* Tooltip:
+	DisplayName: Casco Dourado
+	Tooltip:
 		'''
-		Encase yourself in a golden shell
-		You will not be able to move or attack, but will be immune to all damage
-		Press again to exit early
-		''' */
+		Se envolte em um casco dourado
+		Você não poderá se mover ou atacar, mas será imune a todos os danos
+		Pressione novamente para se soltar cedo
+		'''
 }
 
 ParryEffect: {
-	// DisplayName: Guard Parry
-	/* Tooltip:
+	DisplayName: Defesa de Guarda
+	Tooltip:
 		'''
-		Hold to guard
-		Guard shortly before being hit to parry
-		Defaults to Right Click if no key is bound to skill slot
-		''' */
+		Segure para defender
+		Defenda pouco antes de ser atingido para aparar o golpe, diminuindo os danos
+		Aperte o botão direito caso não tenha um botão salvo em um slot de habilidade
+		'''
 }
 
 StardustEffect: {
-	// DisplayName: Stardust Stasis
-	/* Tooltip:
+	DisplayName: Congelamento de Pó das Estrelas
+	Tooltip:
 		'''
-		Freezes time for a few seconds
-		While time is frozen, your minions will continue to attack
-		''' */
+		Congela o tempo por alguns segundos
+		Enquanto o tempo está congelado, seus lacaios continurão atacando
+		'''
 }
 
 DebuffInstallKeyEffect: {
-	// DisplayName: Debuff Install
-	// Tooltip: Install yourself with debuffs, granting different effects depending on accessory
+	DisplayName: Instalar Efeitos Negativos
+	Tooltip: Se inflinja com efeitos negativos, causando efeitos diferentes dependendo do acessório
 }
 
 FrigidGemstoneKeyEffect: {
-	// DisplayName: Frigid Spell
-	/* Tooltip:
+	DisplayName: Feitiço Frígido
+	Tooltip:
 		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
-		''' */
+		Invoca um bloco de gelo em seu cursor
+		Inflige queimadura de gelo no modo díficil
+		'''
 }
 
 BombKeyEffect: {
-	// DisplayName: Graze Bomb
-	/* Tooltip:
+	DisplayName: Bomba de Raspão
+	Tooltip:
 		'''
-		Requires being charged by grazing attacks
-		Freezes almost all enemies and projectiles
-		''' */
+		Precisa ser carregado aproximando-se de ataques
+		Congela quase todos os projéteis e inimigos
+		'''
 }
 
 BulbKeyEffect: {
-	// DisplayName: Magical Cleanse
-	/* Tooltip:
+	DisplayName: Limpeza Mágica
+	Tooltip:
 		'''
-		Cure yourself of most debuffs on a long cooldown
-		Curses enemies, causing them to take 100% more damage from debuffs
-		Cooldown depletes faster while not attacking
-		''' */
+		Se cure de todos os efeitos negativos com tempo de recarga longo
+		Também dobra o dano dos efeitos negativos em inimigos próximos
+		O tempo de recarga passa mais rápido ao não atacar
+		'''
 }
 
 AmmoCycleEffect: {
-	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	DisplayName: Ciclar munição
+	Tooltip: Cicla suas munições (Funciona passivamente do inventário e visual)
 }
 
 GladiatorBanner: {
-	// DisplayName: Gladiator Banner
-	/* Tooltip:
+	DisplayName: Bandeira do Gladiador
+	Tooltip:
 		'''
-		Place an empowering banner
-		Being close to the banner grants knockback immunity, +8% damage reduction and +8% damage
-		Banner can only be resummoned after it runs out
-		''' */
+		Posiciona uma bandeira fortalecedora que dura 15 segundos
+		Ficar próximo à bandeira concede imunidade a recuos, 8% de redução de danos e 8% de aumento de dano
+		A bandeira só pode ser reposicionada após ela acabar
+		'''
 }
 
 PalmwoodEffect: {
-	// DisplayName: Palm Tree Sentry
-	// Tooltip: Place a palm tree sentry that throws nuts at enemies
+	DisplayName: Sentinela de Palmeira
+	Tooltip: Posicione uma sentinela de palmeira que lança nozes nos inimigos
 }
 
 ForbiddenEffect: {
-	// DisplayName: Forbidden Storm
-	/* Tooltip:
+	DisplayName: Tempestade Proíbida
+	Tooltip:
 		'''
-		Call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.2x damage
-		Touch it yourself to add back missing wing time
-		Storm can be resummoned after touching the ground
-		''' */
+		Chama uma tempestade anciã para a localizaçaõ do seu cursor, que causa danos de magia e invocação
+		Quaisquer projéteis atirados pela sua tempestade causarão 1.2x dano
+		Encoste nela para recarregar seu tempo de voo
+		A tempestade pode ser reinvocada após encostar no chão
+		'''
 }
 
 SpiritTornadoEffect: {
-	// DisplayName: Spirit Tornado
-	/* Tooltip:
+	DisplayName: Tornado Espiritual
+	Tooltip:
 		'''
-		Call an ancient tornado which deals magic and summon damage
-		Any projectiles shot through the tornado deal 1.4x damage
-		The tornado tracks your mouse slightly
-		''' */
+		Chama um tornado ancião que causa dano de magia e invocação
+		Quaisquer projéteis atirados pelo tornado causam 1.4x dano
+		O tornado segue seu cursor levemente
+		'''
 }

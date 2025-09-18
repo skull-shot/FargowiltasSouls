@@ -1,9 +1,9 @@
-FMMBanner.MapEntry: Bandeira
-MutantStatue.MapEntry: Estátua do Mutante
-MutantStatueGift.MapEntry: Estátua do Mutante
+FMMBanner.MapEntry: Banner
+MutantStatue.MapEntry: Estátua do Mutant
+MutantStatueGift.MapEntry: Estátua do Mutant
 SquidwardDoorClosed.MapEntry: Porta do Lula Molusco
 SquidwardDoorOpen.MapEntry: Porta do Lula Molusco
-// LifeRevitalizerPlaced.MapEntry: Life Revitalizer
-// ChampionMusicBoxSheet.MapEntry: Music Box
-// MutantMusicBoxSheet.MapEntry: Music Box
-// CrackedSandstoneBricks.MapEntry: Cracked Sandstone Bricks
+LifeRevitalizerPlaced.MapEntry: Revigorador de Vida
+ChampionMusicBoxSheet.MapEntry: Caixa de Música
+MutantMusicBoxSheet.MapEntry: Caixa de Música
+CrackedSandstoneBricks.MapEntry: Tijolos de areia quebrados
