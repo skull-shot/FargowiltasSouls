@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
 {
     public class Pumpscare : ModProjectile
     {
-        public override string Texture => FargoSoulsUtil.VanillaTextureNPC(NPCID.Pumpking);
+        public override string Texture => $"Terraria/Images/PumpkingFace";
 
         public override void SetStaticDefaults()
         {
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
             for (int i = 0; i < Timer; i++)
                 Projectile.scale = MathHelper.Lerp(Projectile.scale, 3f, 0.05f);
             Projectile.Opacity = Math.Min(1f, 1.25f * (float)Math.Sin(MathHelper.Pi / maxtime * Timer));
-            Projectile.Opacity *= 0.5f;
+            //Projectile.Opacity *= 0.8f;
             Projectile.frame = 4;
         }
 
