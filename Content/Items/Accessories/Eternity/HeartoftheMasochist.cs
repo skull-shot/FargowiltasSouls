@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(0, 9);
-            Item.defense = 10;
+            //Item.defense = 10;
         }
 
         public override void UpdateInventory(Player player)

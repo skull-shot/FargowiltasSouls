@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.width = 20;
             Item.height = 20;
             Item.accessory = true;
-            Item.defense = 10;
+            //Item.defense = 10;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(0, 8);
         }
