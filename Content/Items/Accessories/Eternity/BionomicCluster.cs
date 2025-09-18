@@ -115,7 +115,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(0, 6);
-            Item.defense = 6;
+            Item.defense = 3;
             Item.useTime = 180;
             Item.useAnimation = 180;
             Item.useStyle = ItemUseStyleID.HoldUp;
