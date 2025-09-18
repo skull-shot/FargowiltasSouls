@@ -62,6 +62,8 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 Projectile.timeLeft = 2;
             }
 
+            Projectile.ai[0]++;
+
             if (firstTick)
             {
                 const int num226 = 12;
@@ -209,7 +211,10 @@ namespace FargowiltasSouls.Content.Projectiles.Souls
                 Main.dust[num228].velocity = vector7;
             }
 
-            Main.player[Projectile.owner].AddBuff(ModContent.BuffType<RainCDBuff>(), 900);
+            //umbrella seems to be spawned for 1 tick when loading in, then toggles applied, despawning umbrella, forcing cd on load in
+            //do this timer to stop that
+            if (Projectile.ai[0] > 1)
+                Main.player[Projectile.owner].AddBuff(ModContent.BuffType<RainCDBuff>(), 900);
         }
     }
 }

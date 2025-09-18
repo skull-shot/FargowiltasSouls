@@ -51,8 +51,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
             fargoPlayer.IceQueensCrown = true;
             if (player.AddEffect<IceQueenGraze>(item))
             {
-                fargoPlayer.Graze = true;
-                fargoPlayer.CirnoGraze = true;
+                for (int i = 0; i < fargoPlayer.ActiveSkills.Length; i++)
+                {
+                    if (fargoPlayer.ActiveSkills[i] is BombKeyEffect) //only grant ring if skill is selected
+                    {
+                        fargoPlayer.Graze = true;
+                        fargoPlayer.CirnoGraze = true;
+                    }
+                }
                 player.AddEffect<BombKeyEffect>(item);
             }
             player.AddEffect<MasoGrazeRing>(item);

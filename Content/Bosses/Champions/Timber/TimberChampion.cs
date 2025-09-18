@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
@@ -22,6 +23,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
     public class TimberChampion : ModNPC
     {
         private const float BaseWalkSpeed = 4f;
+
+        public int SpawnNoContactTimer = 60 * 4;
 
         public override void SetStaticDefaults()
         {
@@ -89,6 +92,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
+            if (SpawnNoContactTimer > 0)
+                return false;
             CooldownSlot = 1;
             return true;
         }
@@ -106,6 +111,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             }
 
             drawTrail = false;
+            if (SpawnNoContactTimer > 0)
+                SpawnNoContactTimer--;
 
             EModeGlobalNPC.championBoss = NPC.whoAmI;
 
@@ -407,7 +414,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                     goto case 0;
 
                 case 5: //spray squirrels
-                    if (++NPC.ai[2] > 6)
+                    if (++NPC.ai[2] > 20)
                     {
                         NPC.ai[2] = 0;
                         FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromAI(), NPC.Center, ModContent.NPCType<LesserSquirrel>(),
@@ -740,6 +747,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TimberMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<TimberForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<TimberChampionRelic>()));

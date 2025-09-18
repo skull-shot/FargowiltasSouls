@@ -139,8 +139,8 @@ DeviPresenceBuff: {
 }
 
 GrabbedBuff: {
-	DisplayName: Схвачен
-	Description: Долби по кнопкам передвижения, чтобы выбраться!
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }
 
 MutantFangBuff: {
@@ -369,8 +369,8 @@ NeurotoxinBuff: {
 }
 
 NullificationCurseBuff: {
-	DisplayName: Проклятие нуллификации
-	Description: Лунный лорд переключает иммунитеты к видам урона!
+	DisplayName: Проклятье нуллификации
+	Description: Лунный лорд переключает сопротивления к видам урона!
 }
 
 OceanicMaulBuff: {
@@ -683,7 +683,7 @@ TribalCharmClickBuff: {
 
 TwinsInstallBuff: {
 	DisplayName: Установка близнецов
-	Description: Эффекты проклятия ада и ихора
+	Description: Эффекты проклятья ада и ихора
 }
 
 WretchedHexBuff: {
@@ -744,7 +744,7 @@ HellFireMarkedBuff: {
 }
 
 MagicalCurseBuff: {
-	DisplayName: Бафф магического проклятия
+	DisplayName: Бафф магического проклятья
 	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
@@ -814,6 +814,11 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	DisplayName: Бафф Орда на восток
-	Description: Мифические существа сражаются с вами
+	DisplayName: Мистическая орда
+	Description: Мифические существа сражаются за вас
+}
+
+GrabbedHarmlessBuff: {
+	DisplayName: В захвате
+	Description: Долбите по кнопкам передвижения, чтобы выбраться!
 }

@@ -87,14 +87,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                             //critDamageMult *= 0.75f;
                         if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                             critDamageMult *= 0.75f;
-                        if (!EridanusSet && !Ambrosia)
+
+                        float damageCap = (hitInfo.Damage / 2) + 80;
+                        if (hitInfo.Damage * critDamageMult > damageCap)
                         {
-                            float damageCap = (hitInfo.Damage / 2) + 100;
-                            if (hitInfo.Damage * critDamageMult > damageCap)
-                            {
-                                critDamageMult = damageCap / hitInfo.Damage;
-                            }
+                            critDamageMult = damageCap / hitInfo.Damage;
                         }
+
                         if (critDamageMult != 1)
                             hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
                     }
@@ -329,9 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (npc.FargoSouls().BloodDrinker)
                 dr -= 0.3f;
-
-            if (Player.HasBuff(ModContent.BuffType<ShellHideBuff>()))
-                dr -= 1;
 
             if (Smite)
                 dr -= 0.2f;

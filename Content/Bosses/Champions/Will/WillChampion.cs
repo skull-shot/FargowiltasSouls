@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
@@ -176,11 +177,14 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                         if (++NPC.ai[2] >= 60)
                         {
                             NPC.ai[2] = 0;
-
                             NPC.localAI[0] = NPC.localAI[0] > 0 ? -1 : 1;
 
                             if (NPC.ai[1] <= 420)
                             {
+                                int delay = NPC.ai[1] < 70 ? 30 : 0; // extra half second on first volley
+                                if (delay > 0)
+                                    NPC.ai[2] = -delay;
+
                                 SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
 
                                 if (FargoSoulsUtil.HostCheck)
@@ -188,11 +192,19 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                                     int max = NPC.life < NPC.lifeMax / 2 && WorldSavingSystem.EternityMode ? 10 : 8;
                                     float offset = NPC.localAI[0] > 0 && player.velocity != Vector2.Zero //aim to intercept
                                         ? Main.rand.NextFloat((float)Math.PI * 2) : player.velocity.ToRotation();
+
+                                    float spin = 0f;
+                                    if (WorldSavingSystem.MasochistModeReal) // evil spin
+                                    {
+                                        spin = Main.rand.NextBool() ? 1 : -1;
+                                        spin *= MathF.Tau / 280;
+                                    }
+
                                     for (int i = 0; i < max; i++)
                                     {
                                         float rotation = offset + (float)Math.PI * 2 / max * i;
                                         Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center + 450 * Vector2.UnitX.RotatedBy(rotation), Vector2.Zero,
-                                            ModContent.ProjectileType<WillJavelin3>(), NPC.defDamage / 4, 0f, Main.myPlayer, 0f, rotation + (float)Math.PI);
+                                            ModContent.ProjectileType<WillJavelin3>(), NPC.defDamage / 4, 0f, Main.myPlayer, spin, rotation + (float)Math.PI, ai2: -delay);
                                     }
                                 }
                             }
@@ -354,7 +366,29 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                             {
                                 NPC.velocity = NPC.SafeDirectionTo(player.Center) * 33f;
 
+                                int duration = 38;
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + WillDashTrail.Offset(NPC), Vector2.Zero, ModContent.ProjectileType<WillDashTrail>(), 0, 0, Main.myPlayer, NPC.whoAmI, duration);
+
                                 SoundEngine.PlaySound(SoundID.NPCHit14, NPC.Center);
+
+                                if (WorldSavingSystem.MasochistModeReal && !LumUtils.AnyProjectiles(ModContent.ProjectileType<WillTyphoon>())) // evil
+                                {
+                                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+
+                                    if (FargoSoulsUtil.HostCheck)
+                                    {
+                                        int max = 3;
+                                        float offset = NPC.localAI[0] > 0 && player.velocity != Vector2.Zero //aim to intercept
+                                            ? Main.rand.NextFloat((float)Math.PI * 2) : player.velocity.ToRotation();
+
+                                        for (int i = 0; i < max; i++)
+                                        {
+                                            float rotation = offset + (float)Math.PI * 2 / max * i;
+                                            Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center + 450 * Vector2.UnitX.RotatedBy(rotation), Vector2.Zero,
+                                                ModContent.ProjectileType<WillJavelin3>(), NPC.defDamage / 4, 0f, Main.myPlayer, 0f, rotation + (float)Math.PI, ai2: 0);
+                                        }
+                                    }
+                                }
                             }
                         }
                         else //regular movement
@@ -409,6 +443,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                     NPC.rotation = NPC.velocity.ToRotation();
                     NPC.direction = NPC.spriteDirection = NPC.velocity.X > 0 ? 1 : -1;
 
+                    /*
                     int num22 = 7;
                     for (int index1 = 0; index1 < num22; ++index1)
                     {
@@ -420,6 +455,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                         Main.dust[index2].velocity /= 4f;
                         Main.dust[index2].velocity -= NPC.velocity;
                     }
+                    */
 
                     if (--NPC.localAI[0] < 0)
                     {
@@ -442,6 +478,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                         NPC.localAI[0] = 2;
                         NPC.netUpdate = true;
                     }
+                    
                     break;
 
                 case 2: //arena bomb
@@ -545,6 +582,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
 
                 case 4: //fireballs
                     {
+                        int telegraphTime = WorldSavingSystem.MasochistModeReal ? 25 : 45;
                         Vector2 vel = player.Center - NPC.Center;
                         NPC.rotation = vel.ToRotation();
 
@@ -588,12 +626,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                                 NPC.velocity.Y -= moveSpeed;
                         }
 
-                        if (++NPC.localAI[0] > 3)
+                        if (NPC.ai[1] <= telegraphTime)
                         {
-                            NPC.localAI[0] = 0;
-                            if (FargoSoulsUtil.HostCheck && NPC.ai[1] < 90) //shoot fireball
+                            for (int i = 0; i < 1; i++)
                             {
-                                SoundEngine.PlaySound(SoundID.Item34, NPC.Center);
                                 Vector2 spawn = new(40, 50);
                                 if (NPC.direction < 0)
                                 {
@@ -605,13 +641,37 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                                 Vector2 projVel = NPC.SafeDirectionTo(player.Center).RotatedBy((Main.rand.NextDouble() - 0.5) * Math.PI / 10);
                                 projVel.Normalize();
                                 projVel *= Main.rand.NextFloat(8f, 12f);
-                                int type = ProjectileID.CultistBossFireBall;
-                                if (Main.rand.NextBool())
+                                int d = Dust.NewDust(spawn - Vector2.One * 15, 30, 30, DustID.GemTopaz, projVel.X * 2, projVel.Y * 2, 100, new Color(), 2f);
+                                Main.dust[d].noGravity = true;
+                            }
+                        }
+                        else
+                        {
+                            if (++NPC.localAI[0] > 3)
+                            {
+                                NPC.localAI[0] = 0;
+                                if (FargoSoulsUtil.HostCheck && NPC.ai[1] < 90) //shoot fireball
                                 {
-                                    type = ModContent.ProjectileType<WillFireball>();
-                                    projVel *= 2.5f;
+                                    SoundEngine.PlaySound(SoundID.Item34, NPC.Center);
+                                    Vector2 spawn = new(40, 50);
+                                    if (NPC.direction < 0)
+                                    {
+                                        spawn.X *= -1;
+                                        spawn = spawn.RotatedBy(Math.PI);
+                                    }
+                                    spawn = spawn.RotatedBy(NPC.rotation);
+                                    spawn += NPC.Center;
+                                    Vector2 projVel = NPC.SafeDirectionTo(player.Center).RotatedBy((Main.rand.NextDouble() - 0.5) * Math.PI / 10);
+                                    projVel.Normalize();
+                                    projVel *= Main.rand.NextFloat(8f, 12f);
+                                    int type = ProjectileID.CultistBossFireBall;
+                                    if (Main.rand.NextBool())
+                                    {
+                                        type = ModContent.ProjectileType<WillFireball>();
+                                        projVel *= 2.5f;
+                                    }
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), spawn, projVel, type, NPC.defDamage / 4, 0f, Main.myPlayer);
                                 }
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), spawn, projVel, type, NPC.defDamage / 4, 0f, Main.myPlayer);
                             }
                         }
 
@@ -629,7 +689,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
                         {
                             SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
                         }
-                        else if (NPC.ai[1] > 120)
+                        else if (NPC.ai[1] > telegraphTime + 120)
                         {
                             NPC.ai[0] = 0;
                             NPC.ai[1] = 0;
@@ -734,12 +794,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WillMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<WillForce>()));
+
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.WillDye>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<WillChampionRelic>()));
             npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<EnerGear>(), 4));
 
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Dyes.WillDye>()));
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

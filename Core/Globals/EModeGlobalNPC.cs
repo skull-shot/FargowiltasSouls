@@ -8,8 +8,10 @@ using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.GameContent.ItemDropRules;
@@ -213,9 +215,12 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
-
+        public FieldInfo modBiomeFlags = typeof(Player).GetField("modBiomeFlags", LumUtils.UniversalBindingFlags);
         public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
         {
+            var playerModBiomeFlags = modBiomeFlags.GetValue(spawnInfo.Player) as BitArray;
+            if (playerModBiomeFlags.Cast<bool>().Contains(true))
+                return;
             //layers
             int x = spawnInfo.SpawnTileX;
             int y = spawnInfo.SpawnTileY;
@@ -266,8 +271,6 @@ namespace FargowiltasSouls.Core.Globals
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
 
             bool bossCanSpawn = WorldSavingSystem.MasochistModeReal && !spawnInfo.Player.HasEffect<SinisterIconEffect>() && !LumUtils.AnyBosses();
-
-
 
             //MASOCHIST MODE
             if (WorldSavingSystem.EternityMode)

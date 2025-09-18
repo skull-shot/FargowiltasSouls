@@ -22,8 +22,8 @@ ClientConfig: {
 	}
 
 	RainbowHealThreshold: {
-		 Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Limite para cura automática"
-		 Tooltip: ""
+		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold (%)"
+		// Tooltip: ""
 	}
 
 	PrecisionSealIsHold: {
@@ -189,4 +189,16 @@ SoulConfig: {
 		 Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
 		 Tooltip: ""
 	}
+
+	MultiplayerRespawnPrevention: {
+		// Label: Multiplayer Respawn Prevention
+		// Tooltip: Selects in what mode respawning multiple times during a bossfight should be prevented in multiplayer.
+	}
+}
+
+RespawnPreventionSetting: {
+	// Tooltip: ""
+	// Eternity.Label: Eternity Mode
+	// Masochist.Label: Masochist Mode
+	// Disabled.Label: Disabled
 }

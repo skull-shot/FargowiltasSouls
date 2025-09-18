@@ -20,8 +20,8 @@ AbomSickle3.DisplayName: Серп Выродкка
 AbomSickleSplit1.DisplayName: Серп Выродкка
 AbomSickleSplit2.DisplayName: Серп Выродкка
 AbomStyxGazer.DisplayName: Созерцатель Стикс
-AbomSword.DisplayName: Клинок Стикс
-AbomSwordHandle.DisplayName: Клинок Стикс
+AbomSword.DisplayName: Лэватейнн
+AbomSwordHandle.DisplayName: Лэватейнн
 FargoArrowProj.DisplayName: Фарго стрела
 FargoBulletProj.DisplayName: Фарго пуля
 BigSting22.DisplayName: "22"
@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: Мини-тарелка
 NekomiAxe.DisplayName: Сверкающая дюбовь
 NekomiDevi.DisplayName: Девиантт
 NekomiRitual.DisplayName: Ритуал Некоми
-OpticFlame.DisplayName: Глазной огонь
-OpticLaser.DisplayName: Лазер смерти
+OpticFlamethrower.DisplayName: Проклятый огнемёт
+OpticElectricOrb.DisplayName: Ихорная сфера
 OpticRetinazer.DisplayName: Ретиназер
 OpticSpazmatism.DisplayName: Спазматизм
 PalmTreeSentry.DisplayName: Пальма
@@ -784,3 +784,5 @@ MystiaNote.DisplayName: Нота Мистии
 MystiaNote2.DisplayName: Нота Мистии 2
 RumiaOrb.DisplayName: Сфера Румии
 EmpressRitual.DisplayName: Ритуал Императрицы
+WillDashTrail.DisplayName: След от рывка
+NatureExplosionTelegraph.DisplayName: Телеграф взрыва

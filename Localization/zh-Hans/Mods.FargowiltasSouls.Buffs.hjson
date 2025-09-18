@@ -814,6 +814,11 @@ MutantDesperationBuff: {
 }
 
 TouhouHoardBuff: {
-	DisplayName: 东方秘藏
+	DisplayName: 幻想天团
 	Description: 幻想之物会为你而战
+}
+
+GrabbedHarmlessBuff: {
+	DisplayName: 抓住你了！
+	Description: 狂敲你的移动键来逃离！
 }

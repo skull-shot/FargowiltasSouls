@@ -190,7 +190,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
                 
             }
-
             if (LowGround)
             {
                 Player.gravControl = false;
@@ -311,7 +310,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.ClearBuff(ModContent.BuffType<TwinsInstallBuff>());
 
             if (Player.HasBuff<BerserkerInstallBuff>() && !Player.HasEffect<AgitatingLensInstall>())
+            {
                 Player.ClearBuff(ModContent.BuffType<BerserkerInstallBuff>());
+                int stunDuration = 120; //2sec
+                Player.AddBuff(ModContent.BuffType<BerserkerInstallCDBuff>(), 60 * 10);
+                Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
+            }
 
             if ((BetsysHeartItem != null || QueenStingerItem != null))
             {
@@ -428,6 +432,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (Player.electrified && Player.wet)
                 Player.lifeRegen -= 16;
+
+            if (GrabDamage)
+                Player.lifeRegen -= WorldSavingSystem.MasochistModeReal ? 30 : 20;
 
             void DamageOverTime(int badLifeRegen, bool affectLifeRegenCount = false)
             {
@@ -590,7 +597,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HallowRepelTime = 0;
 
             //these are here so that emode minion nerf can properly detect the real set bonuses over in EModePlayer postupdateequips
-            if (SquireEnchantActive)
+            /*if (SquireEnchantActive)
                 Player.setSquireT2 = true;
             if (ValhallaEnchantActive)
                 Player.setSquireT3 = true;
@@ -604,7 +611,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT2 = true;
 
             if (ShinobiEnchantActive)
-                Player.setMonkT3 = true;
+                Player.setMonkT3 = true;*/
 
 
             if (Player.channel && WeaponUseTimer < 2)
@@ -696,7 +703,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 const int healDelay = 60;
                 if (Player.HasEffect<HallowEffect>() && HallowHealTime % healDelay == 0)
                 {
-                    int heal = Player.ForceEffect<HallowEffect>() ? 17 : 14;
+                    int heal = (int)Math.Round(HallowHealTotal / 10);
                     Player.Heal(heal);
                 }
                 HallowHealTime--;
@@ -707,13 +714,19 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (HealTimer > 0)
                 HealTimer--;
 
+
             if (Player.grapCount > 0)
                 Grappled = true;
+
+            if (FallthroughTimer > 0)
+                FallthroughTimer--;
 
             if (LowGround)
             {
                 Player.waterWalk = false;
                 Player.waterWalk2 = false;
+                if (FallthroughTimer < 2)
+                    FallthroughTimer = 2;
             }
 
             if (DashCD > 0)

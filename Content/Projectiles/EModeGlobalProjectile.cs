@@ -23,6 +23,7 @@ using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.Champions.Will;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Core;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -132,11 +133,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
-                    if (!WorldSavingSystem.MasochistModeReal)
-                    {
-                        EModeCanHurt = false;
-                        projectile.hide = true;
-                    }
+                    EModeCanHurt = false;
+                    projectile.hide = true;
                     break;
 
                 case ProjectileID.DD2BetsyFlameBreath:
@@ -312,16 +310,16 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
 
-                    if (projectile.GetSourceNPC() is NPC && projectile.GetSourceNPC().type == NPCID.Deerclops && sourceProj is not Projectile)
+                    if (projectile.GetSourceNPC() is NPC npc && npc.type == NPCID.Deerclops && sourceProj is not Projectile)
                     {
                         projectile.Bottom = LumUtils.FindGroundVertical(projectile.Bottom.ToTileCoordinates()).ToWorldCoordinates() + Vector2.UnitY * 10 * projectile.scale;
                         altBehaviour = true;
 
 
                         //is a final spike of the attack
-                        if (projectile.GetSourceNPC().ai[0] == 1 && projectile.GetSourceNPC().ai[1] == 52 || projectile.GetSourceNPC().ai[0] == 4 && projectile.GetSourceNPC().ai[1] == 70 && !projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().DoLaserAttack)
+                        if (npc.ai[0] == 1 && npc.ai[1] == 52 || npc.ai[0] == 4 && npc.ai[1] == 70 && !npc.GetGlobalNPC<Deerclops>().DoLaserAttack)
                         {
-                            bool isSingleWaveAttack = projectile.GetSourceNPC().ai[0] == 1;
+                            bool isSingleWaveAttack = npc.ai[0] == 1;
 
                             bool shouldSplit = true;
                             if (isSingleWaveAttack) //because deerclops spawns like 4 of them stacked on each other?
@@ -345,7 +343,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                 //projectile.netUpdate = true;
 
                                 float ai1 = 1.3f;
-                                if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase2)
+                                if (npc.GetGlobalNPC<Deerclops>().EnteredPhase2)
                                     ai1 = 1.35f; //triggers recursive ai
                                                  //if (projectile.GetSourceNPC().GetGlobalNPC<Deerclops>().EnteredPhase3 || WorldSavingSystem.MasochistModeReal)
                                                  //    ai1 = 1.4f;
@@ -363,7 +361,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else
                                     {
                                         Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(-projectile.velocity.X, projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
-                                        if (projectile.Center.Y < projectile.GetSourceNPC().Center.Y)
+                                        if (projectile.Center.Y < npc.Center.Y)
                                         {
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, -projectile.velocity, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
                                             Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, new Vector2(projectile.velocity.X, -projectile.velocity.Y), projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, ai1);
@@ -380,7 +378,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.PygmySpear:
-                    if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.PygmyStaff))
+                    if (sourceProj is Projectile && EmodeItemBalance.HasEmodeChange(Main.player[sourceProj.owner], ItemID.PygmyStaff))
                     {
                         if (sourceProj.type >= 191 && sourceProj.type <= 194) // the 4 pygmy variations
                         {
@@ -1220,8 +1218,38 @@ namespace FargowiltasSouls.Content.Projectiles
             firstTickAICheckDone = true;
         }
         private int FadeTimer = 0;
+        public static int[] FancySwings => [
+            ProjectileID.Excalibur,
+            ProjectileID.TrueExcalibur,
+            ProjectileID.TerraBlade2,
+            ProjectileID.TheHorsemansBlade
+        ];
         public override void PostAI(Projectile projectile)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+            Player player = Main.player[projectile.owner];
+            if (projectile.owner == player.whoAmI)
+            {
+                if (FancySwings.Contains(projectile.type) && SoulConfig.Instance.WeaponReworks)
+                {
+                    if (player.FargoSouls().swingDirection != player.direction)
+                    {
+                        projectile.ai[0] = -player.direction;
+                    }
+
+                    float rotation = -90;
+                    if (projectile.ai[0] == -1 && player.direction == -1)
+                    {
+                        rotation = -180;
+                    }
+                    else if (projectile.ai[0] == -1 && player.direction == 1)
+                    {
+                        rotation = 0;
+                    }
+                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
+                }
+            }
             switch (projectile.type)
             {
                 case ProjectileID.HallowBossLastingRainbow:
@@ -1264,7 +1292,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
-                case ProjectileID.CopperCoin:
+                /*case ProjectileID.CopperCoin:
                     modifiers.FinalDamage *= 1.6f;
                     break;
                 case ProjectileID.SilverCoin:
@@ -1275,7 +1303,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
                 case ProjectileID.PlatinumCoin:
                     modifiers.FinalDamage *= 0.275f;
-                    break;
+                    break;*/
 
                 case ProjectileID.StarCloakStar:
                 case ProjectileID.StarVeilStar:
@@ -1299,6 +1327,19 @@ namespace FargowiltasSouls.Content.Projectiles
                             modifiers.FinalDamage *= 1 + bonus;       // up to +1.25x, resulting in a 2.25x max bonus
                         }
                     }
+                    break;
+                case ProjectileID.MoonlordTurretLaser:
+                    modifiers.FinalDamage *= 0.5f;
+                    break;
+                case ProjectileID.RainbowCrystalExplosion:
+                    modifiers.FinalDamage *= 0.6f;
+                    break;
+                case ProjectileID.Tempest:
+                case ProjectileID.MiniSharkron:
+                    modifiers.FinalDamage *= 1.2f;
+                    break;
+                case ProjectileID.HoundiusShootiusFireball:
+                    modifiers.FinalDamage *= 1.2f;
                     break;
             }
 

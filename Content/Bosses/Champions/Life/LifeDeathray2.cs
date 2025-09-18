@@ -13,7 +13,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
     public class LifeDeathray2 : BaseDeathray
     {
         public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
-        public LifeDeathray2() : base(30) { }
+        public LifeDeathray2() : base(WorldSavingSystem.MasochistModeReal ? 55 : 30) { }
 
         public override void SetStaticDefaults()
         {

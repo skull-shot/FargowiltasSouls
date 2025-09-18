@@ -1715,19 +1715,21 @@ DimensionSoul: {
 	DisplayName: Alma das Dimensões
 	Tooltip:
 		'''
-		+300 de vida máxima, +20% de redução de dano, Aumenta a regeneração de vida em 8
-		Oferece imunidade a recuo e diversos efeitos negativos
-		A chance dos inimigos mirarem em você é maior
-		Permite a movimentação Supersônica e voo infinito, [c/BC5252:Desabilita todos os pulos (ativável)]
-		Aumenta muito a habilidade de pesca, todas as varas de pescar lançam 10 iscas extras
-		Aumenta a velocidade de posicionamento dos blocos e paredes em 50%
-		Alcance do posicionamento e mineração quase infinitos, velocidade de mineração triplicada
-		Efeitos do Brilho, Espeleólogo, Caçador e Sentido-perigo
-		Efeitos da pintura e atuadores automáticos
-		Oferece a habilidade de ativar o Modo de Construção
-		Efeitos do Cérebro da Confusão, Manto das Estrelas, Colar da Amada, Manto de Abelhas, Bolso de Esporos, e Pedra Brilhante
-		Efeitos do Escudo de Paladino, Casco de Tartaruga Congelada, Equipamento de Mergulho Ártico, Pernas de Sapo, e Tapete Voador
-		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra, Telefone Celular, e Globo da Gravidade
+		Aumenta o PV em 300
+		20% de redução de danos
+		Aumenta a regeneração de vida em 8
+		Oferece imunidade a recuos e vários efeitos negativos
+		Maior recuo por ataques físicos
+		Permite a corrida supersônica e o voo infinito
+		Aumenta a habilidade de pescaria substancialmente, todas as varas de pesca terão 10 iscas extras
+		Velocidade de posicionamento de blocos e paredes aumentada em 50%
+		Alcance de posicionamento de blocos e de mineração quase infinito, velocidade de mineração triplicada
+		Efeitos de Brilho, Espeleólogo, Caçador, e Instinto-perigo
+		Efeitos de pintura e atuador automáticos
+		Oferece a capacidade de habilitar o Modo do Construtor
+		Efeitos do Cérebro da Confusão, Véu das Estrelas, Colar da Amada, Manto de Abelhas, Bolsa de Esporos e Pedra Brilhante
+		Efeitos do Escudo do Paladino, Casco de Tartaruga Congelada, Equipamento de Mergulho Ártico, Perna de Rã e Tapete Mágico
+		Efeitos das Botas de Lava, Bolsa do Pescador, Arma de Tinta, Pré-serra e Globo da Gravidade
 		Efeitos do Escudo de Cthulhu e Equipamento de Mestre Ninja
 		'As dimensões do Terraria na ponta dos seus dedos'
 		'''
@@ -2195,7 +2197,7 @@ EternalEnergy: {
 		'A prova de ter aceitado a Eternidade'
 		'''
 }
-
+  
 PhantasmalEnergy: {
 	DisplayName: Eixo Quebrado
 	Tooltip: ""
@@ -3775,4 +3777,9 @@ TrojanMask: {
 WillMask: {
 	DisplayName: Máscara do Campeão da Vontade
 	Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }

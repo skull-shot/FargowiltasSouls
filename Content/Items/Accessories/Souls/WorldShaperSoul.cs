@@ -17,14 +17,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             Item.value = 750000;
 
+            /*
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.UseSound = SoundID.Item6;
             Item.useTime = Item.useAnimation = 90;
+            */
         }
         public static readonly Color ItemColor = new(255, 239, 2);
         protected override Color? nameColor => ItemColor;
-
-        public override bool? UseItem(Player player) => true;
+        /*
+        public override bool? UseItem(Player player) => false;
 
         public override void UseItemFrame(Player player)
         {
@@ -36,10 +38,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                     Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, 0f, 0f, 150, default, 1.5f);
             }
         }
+        */
 
         public override void UpdateInventory(Player player)
         {
             //cell phone
+            /*
             player.accWatch = 3;
             player.accDepthMeter = 1;
             player.accCompass = 1;
@@ -52,6 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.accThirdEye = true;
             player.accCalendar = true;
             player.accWeatherRadio = true;
+            */
             player.chiselSpeed = true;
             player.treasureMagnet = true;
         }
@@ -105,6 +110,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<BuilderEffect>(item);
 
             //cell phone
+            /*
             Player.accWatch = 3;
             Player.accDepthMeter = 1;
             Player.accCompass = 1;
@@ -117,8 +123,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.accThirdEye = true;
             Player.accCalendar = true;
             Player.accWeatherRadio = true;
+            */
             Player.chiselSpeed = true;
             Player.treasureMagnet = true;
+            
         }
 
         public override void AddRecipes()
@@ -135,7 +143,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.ActuationAccessory)
             .AddIngredient(ItemID.LaserRuler)
             .AddIngredient(ItemID.RoyalGel)
-            .AddRecipeGroup("FargowiltasSouls:AnyShellphone")
+            //.AddRecipeGroup("FargowiltasSouls:AnyShellphone")
             //.AddIngredient(ItemID.Shellphone)
             //.AddIngredient(ItemID.BloodHamaxe) //haemoraxe
             .AddRecipeGroup("FargowiltasSouls:AnyDrax")

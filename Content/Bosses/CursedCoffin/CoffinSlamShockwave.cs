@@ -97,12 +97,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            modifiers.Null();
-            modifiers.Knockback *= 0;
+            //modifiers.Null();
+            if (Main.getGoodWorld)
+                modifiers.Knockback *= 0;
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Dazed, 60 * 2);
+            if (Main.getGoodWorld)
+                target.AddBuff(BuffID.Dazed, 60 * 2);
         }
         public override bool PreDraw(ref Color lightColor)
         {

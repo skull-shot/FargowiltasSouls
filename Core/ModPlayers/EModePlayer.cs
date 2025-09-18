@@ -46,7 +46,22 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Respawns = 0;
         }
 
-        public bool PreventRespawn() => WorldSavingSystem.MasochistModeReal && LumUtils.AnyBosses() && Respawns >= 2;
+        public bool PreventRespawn()
+        {
+            if (Main.netMode == NetmodeID.SinglePlayer)
+                return false;
+            bool diff;
+            var mode = SoulConfig.Instance.MultiplayerRespawnPrevention;
+
+            if (mode == RespawnPreventionSetting.Masochist)
+                diff = WorldSavingSystem.MasochistModeReal;
+            else if (mode == RespawnPreventionSetting.Eternity)
+                diff = WorldSavingSystem.EternityMode;
+            else
+                diff = false;
+
+            return diff && LumUtils.AnyBosses() && Respawns >= 2;
+        }
         public override void UpdateDead()
         {
             ResetEffects();
@@ -151,6 +166,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void UpdateBadLifeRegen()
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+
             float regenReductionTime = LumUtils.SecondsToFrames(5);
             
             if (Player.lifeRegen > 0 && Player.lifeRegenTime < regenReductionTime)
@@ -336,6 +354,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return;
+
             if (WorldSavingSystem.MasochistModeReal && Player.whoAmI == Main.myPlayer)
             {
                 if (LumUtils.AnyBosses())

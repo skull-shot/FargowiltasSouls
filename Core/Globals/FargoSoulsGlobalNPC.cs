@@ -26,6 +26,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using Terraria;
 using Terraria.DataStructures;
@@ -47,7 +48,6 @@ namespace FargowiltasSouls.Core.Globals
         public static int boss = -1;
 #pragma warning restore CA2211
 
-        public int originalDefense;
         public bool BrokenArmor;
 
         public bool CanHordeSplit = true;
@@ -202,17 +202,12 @@ namespace FargowiltasSouls.Core.Globals
 
             if (SinisterIconBoss(npc))
             {
-                foreach (var player in Main.ActivePlayers)
-                {
-                    if (!(player.Alive() && player.HasEffect<SinisterIconDropsEffect>()))
-                        SinisterIconFullFight = false;
-                }
+                if (!Main.player.Any(p => p.Alive() && p.HasEffect<SinisterIconDropsEffect>()))
+                    SinisterIconFullFight = false;
             }
 
             if (!FirstTick)
             {
-                originalDefense = npc.defense;
-
 
                 //                switch (npc.type)
                 //                {
@@ -314,16 +309,10 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void PostAI(NPC npc)
         {
-            if (BrokenArmor)
-            {
-                npc.defense = originalDefense - 10;
-                if (npc.defense < 0)
-                    npc.defense = 0;
-            }
 
             if (Sublimation)
             {
-                npc.defense = originalDefense - 15; //ichor 2
+                npc.defense = npc.defDefense - 15; //ichor 2
                 if (npc.defense < 0)
                     npc.defense = 0;
             }
@@ -1074,7 +1063,22 @@ namespace FargowiltasSouls.Core.Globals
             NPCID.EaterofWorldsHead,
             NPCID.EaterofWorldsTail
         ];
+        public static MethodInfo NPCLoot_DropItems = typeof(NPC).GetMethod("NPCLoot_DropItems", LumUtils.UniversalBindingFlags);
+        public static MethodInfo NPCLoot_DropMoney = typeof(NPC).GetMethod("NPCLoot_DropMoney", LumUtils.UniversalBindingFlags);
+        public static MethodInfo NPCLoot_DropHeals = typeof(NPC).GetMethod("NPCLoot_DropHeals", LumUtils.UniversalBindingFlags);
+        public static void DropLoot(NPC npc) // actual NPCLoot without running other on kill methods
+        {
+            // copied from NPCLoot
+            // unnecessary from OnKill but still
+            if (Main.netMode == NetmodeID.MultiplayerClient || (Main.getGoodWorld && !NPC.downedBoss3 && 
+                (npc.type == NPCID.AngryBones || npc.type == NPCID.AngryBonesBig || npc.type == NPCID.AngryBonesBigHelmet || npc.type == NPCID.AngryBonesBigMuscle || npc.type == NPCID.DarkCaster || npc.type == NPCID.CursedSkull || npc.type == NPCID.DungeonSlime)))
+                return;
 
+            Player closestPlayer = Main.player[Player.FindClosest(npc.position, npc.width, npc.height)];
+            NPCLoot_DropItems.Invoke(npc, [closestPlayer]);
+            NPCLoot_DropMoney.Invoke(npc, [closestPlayer]);
+            NPCLoot_DropHeals.Invoke(npc, [closestPlayer]);
+        }
         public override void OnKill(NPC npc)
         {
             Player player = Main.player[npc.lastInteraction];
@@ -1094,10 +1098,10 @@ namespace FargowiltasSouls.Core.Globals
                     if (SinisterIconBoss(npc))
                     {
                         if (npc.FargoSouls().SinisterIconFullFight)
-                            npc.NPCLoot();
+                            DropLoot(npc);
                     }
                     else
-                        npc.NPCLoot();
+                        DropLoot(npc);
                 }
 
                 if (player.FargoSouls().PlatinumEffect != null && !npc.boss)
@@ -1111,7 +1115,7 @@ namespace FargowiltasSouls.Core.Globals
                         npc.extraValue /= repeats;
 
                         for (int i = 0; i < repeats - 1; i++)
-                            npc.NPCLoot();
+                            DropLoot(npc);
                     }
                 }
             }
@@ -1315,6 +1319,9 @@ namespace FargowiltasSouls.Core.Globals
 
             if (target.type == ModContent.NPCType<CreeperGutted>())
                 modifiers.FinalDamage /= 20;
+
+            if (BrokenArmor)
+                modifiers.ArmorPenetration += 10;
         }
 
         public override bool? CanBeHitByItem(NPC npc, Player player, Item item)

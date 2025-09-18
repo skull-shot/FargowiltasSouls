@@ -102,9 +102,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             }
             if (!attacking || farg.EarthTimer == 0)
                 farg.EarthAdamantiteCharge = 0;
-            if (player.whoAmI == Main.myPlayer)
+            if (player.whoAmI == Main.myPlayer && player.HasEffect<MythrilEffect>())
                 CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Forces/EarthForce").Value, MythrilEnchant.NameColor, 
-                    () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
+                    () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<MythrilEffect>());
 
             float lerper = GetEarthForceLerpValue(player);
             //player.GetDamage(DamageClass.Generic) *= MathHelper.Lerp(1, 0.3f, lerper);
@@ -124,12 +124,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             //Main.NewText(player.GetAttackSpeed(DamageClass.Generic));
 
             //one below or two below because it increments by 2 so it could skip this if it was just one number
-            if (farg.EarthTimer >= EarthMaxCharge -2 && farg.EarthTimer < EarthMaxCharge && !player.controlUseItem && Main.myPlayer == player.whoAmI)
+            if (farg.EarthTimer >= EarthMaxCharge -2 && farg.EarthTimer < EarthMaxCharge && !player.controlUseItem && Main.myPlayer == player.whoAmI && player.HasEffect<MythrilEffect>())
             {
                 if (farg.MythrilSoundCooldown <= 0)
                 {
-                    float pitch = 0;
-                    if (player.HasEffect<MythrilEffect>()) pitch = -0.2f;
+                    float pitch = -0.2f;
                     farg.MythrilSoundCooldown = 90;
                     SoundEngine.PlaySound(new SoundStyle($"{nameof(FargowiltasSouls)}/Assets/Sounds/Accessories/MythrilCharged") with { Pitch = pitch }, player.Center);
                 }

@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: Mini Saucer
 NekomiAxe.DisplayName: Sparkling Love
 NekomiDevi.DisplayName: Deviantt
 NekomiRitual.DisplayName: Nekomi Ritual
-OpticFlame.DisplayName: Eye Fire
-OpticLaser.DisplayName: Death Laser
+OpticFlamethrower.DisplayName: Cursed Flamethrower
+OpticElectricOrb.DisplayName: Ichor Orb
 OpticRetinazer.DisplayName: Retinazer
 OpticSpazmatism.DisplayName: Spazmatism
 PalmTreeSentry.DisplayName: Palm Tree
@@ -784,3 +784,5 @@ MystiaNote.DisplayName: Mystia Note
 MystiaNote2.DisplayName: Mystia Note2
 RumiaOrb.DisplayName: Rumia Orb
 EmpressRitual.DisplayName: Empress Ritual
+WillDashTrail.DisplayName: Dash Trail
+NatureExplosionTelegraph.DisplayName: Explosion Telegraph

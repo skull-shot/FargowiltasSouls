@@ -34,7 +34,6 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -100,7 +99,15 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public float TagStackMultiplier = 1;
 
-        public static List<int> ShroomiteBlacklist =
+        public bool ArrowRain = false;
+
+        public bool ApprenticeSupportProjectile; // whether this projectile has been spawned by Apprentice Support effect
+
+        public static Projectile? globalProjectileField = null; // enables modifying tagged projectile in any method
+
+        public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
+        
+        public static List<int> PureProjectile =
         [
             
         ];
@@ -309,14 +316,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
             switch (projectile.type)
             {
-                case ProjectileID.SpiritHeal:
-                    if (player.HasEffect<SpectreEffect>() && !modPlayer.TerrariaSoul)
-                    {
-                        projectile.extraUpdates = 1;
-                        projectile.timeLeft = 180 * projectile.MaxUpdates;
-                    }
-                    break;
-
                 case ProjectileID.DD2ExplosiveTrapT3Explosion:
                     {
                         if (projectile.damage > 0 && source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.active
@@ -510,7 +509,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         stormTimer = 240;
                     }
                 }
-                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>())
+                if (projectile.damage > 0 && !FargoSoulsUtil.IsSummonDamage(projectile, false) && projectile.type != ModContent.ProjectileType<ShadowBall>() && (FargoSoulsUtil.CanDeleteProjectile(projectile)))
                 {
                     foreach (int orbIndex in modPlayer.ShadowOrbs)
                     {
@@ -535,9 +534,6 @@ namespace FargowiltasSouls.Content.Projectiles
                             {
                                 ball.originalDamage = damage;
                             }
-
-
-                            if (FargoSoulsUtil.CanDeleteProjectile(projectile))
                                 projectile.Kill();
 
                             orb.ai[0] = 300;
@@ -1276,13 +1272,6 @@ namespace FargowiltasSouls.Content.Projectiles
             }
         }
 
-        public static int[] FancySwings => [
-            ProjectileID.Excalibur,
-            ProjectileID.TrueExcalibur,
-            ProjectileID.TerraBlade2,
-            ProjectileID.TheHorsemansBlade
-        ];
-
         public override void PostAI(Projectile projectile)
         {
             Player player = Main.player[projectile.owner];
@@ -1354,11 +1343,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 }
             }
 
-            if (HuntressProj == 1 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0 && projectile.Center.Distance(Main.player[projectile.owner].Center) > 1500) //goes off screen without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
                 //Main.NewText("MISS");
                 HuntressProj = -1;
+                modPlayer.HuntressMissCD = 30;
                 //sound effect
             }
 
@@ -1371,28 +1361,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vel, ModContent.ProjectileType<FrostShardFriendly>(), projectile.damage, 2f, projectile.owner);
                 }
                 projectile.Kill();
-            }
-
-            if (projectile.owner == player.whoAmI)
-            {
-                if (FancySwings.Contains(projectile.type))
-                {
-                    if (player.FargoSouls().swingDirection != player.direction)
-                    {
-                        projectile.ai[0] = -player.direction;
-                    }
-
-                    float rotation = -90;
-                    if (projectile.ai[0] == -1 && player.direction == -1)
-                    {
-                        rotation = -180;
-                    }
-                    else if (projectile.ai[0] == -1 && player.direction == 1)
-                    {
-                        rotation = 0;
-                    }
-                    projectile.rotation = player.itemRotation + MathHelper.ToRadians(rotation);
-                }
             }
         }
         public override bool? Colliding(Projectile projectile, Rectangle projHitbox, Rectangle targetHitbox)
@@ -1501,11 +1469,16 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
             {
-                float maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 0.4f : 0.2f;
-                float increase = maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1);
-                if (Main.rand.NextFloat() < increase)
-                    modifiers.SetCrit();
-
+                if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? != false)
+                {// no point in running if crit is disabled anyway
+                    int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 40 : 20;
+                    ninjaCritIncrease = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
+                    if (ninjaCritIncrease > 0)
+                    {
+                        globalProjectileField = projectile;
+                        globalProjectileField.CritChance += ninjaCritIncrease;
+                    }
+                }
             }
 
             if (projectile.type == ProjectileID.MythrilHalberd)
@@ -1554,9 +1527,21 @@ namespace FargowiltasSouls.Content.Projectiles
 
             if (Main.player[projectile.owner].HasEffect<NinjaDamageEffect>())
             {
-                const float maxKnockbackMult = 2f;
-                hit.Knockback *= (maxKnockbackMult * Math.Min((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40, 1f));
-
+                if (hit.Crit)
+                {
+                    int critroll = Main.rand.Next(projectile.CritChance + ninjaCritIncrease);
+                    if (critroll <= projectile.CritChance + ninjaCritIncrease && critroll > projectile.CritChance)
+                    {
+                        for (int i = 0; i < 8; i++)
+                        {
+                            Vector2 velocity = 4 * Vector2.UnitY.RotatedBy(MathHelper.TwoPi / 8 * i);
+                            int d = Dust.NewDust(projectile.Center, 0, 0, DustID.Smoke, 0, 0, 100, Color.Black, 1.5f);
+                            Main.dust[d].velocity = velocity;
+                            Main.dust[d].noGravity = true;
+                        }
+                    }
+                }
+                ninjaCritIncrease = 0;
             }
             if (projectile.type == ProjectileID.SharpTears && !projectile.usesLocalNPCImmunity && projectile.usesIDStaticNPCImmunity && projectile.idStaticNPCHitCooldown == 60 && noInteractionWithNPCImmunityFrames)
             {
@@ -1659,9 +1644,10 @@ namespace FargowiltasSouls.Content.Projectiles
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (HuntressProj == 1) //dying without hitting anything
+            if (HuntressProj == 1 && modPlayer.HuntressMissCD == 0) //dying without hitting anything
             {
                 modPlayer.HuntressStage /= 2;
+                modPlayer.HuntressMissCD = 30;
                 //Main.NewText("MISS");
                 //sound effect
             }

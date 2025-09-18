@@ -52,7 +52,6 @@ ApprenticeEnchant: {
 		The support weapon will fire 1/7 as often as they would normally
 		Only works on hotbar weapons
 		Consumables are consumed, mana is spent, and ammo is selected
-		Flameburst field of view and range are dramatically increased
 		'A long way to perfection'
 		''' */
 }
@@ -180,7 +179,6 @@ DarkArtistEnchant: {
 		The support weapon will fire 1/5 as often as they would normally
 		Only works on hotbar weapons
 		Summons a Flameburst minion that will also fire while you attack
-		Greatly enhances Flameburst effectiveness
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -352,7 +350,6 @@ MonkEnchant: {
 		You are briefly immune to damage and debuffs after dashing
 		Dash through an enemy to deal massive melee damage
 		Dash cooldown is much longer than normal dashes
-		Lightning Aura can now crit and strikes faster
 		'Return to Monk'
 		''' */
 }
@@ -395,7 +392,7 @@ NinjaEnchant: {
 	/* Tooltip:
 		'''
 		Your projectiles have up to 20% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed while you're moving slowly
+		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
 }
@@ -419,7 +416,7 @@ OrichalcumEnchant: {
 	/* Tooltip:
 		'''
 		Flower petals will cause extra damage to your target and inflict Orichalcum Poison
-		Damaging debuffs deal 2.5x damage
+		Damaging debuffs deal 150% more damage
 		'Nature blesses you'
 		''' */
 }
@@ -474,9 +471,8 @@ RainEnchant: {
 	// DisplayName: Rain Enchantment
 	/* Tooltip:
 		'''
-		Spawns an umbrella that reflects projectiles from above
+		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
-		While active you have featherfall
 		Grants immunity to Wet and all attacks inflict Wet
 		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
 		[i:FloatingTube] Effects of Inner Tube
@@ -541,7 +537,6 @@ ShinobiEnchant: {
 		Dash cooldown is longer than normal dashes
 		Dash is longer and deals more damage
 		Dash into any walls to teleport through them to the next opening
-		Greatly enhances Lightning Aura effectiveness
 		'Village Hidden in the Wall'
 		''' */
 }
@@ -609,7 +604,7 @@ SpiderEnchant: {
 		'''
 		Your summon weapons can crit for 1.5x damage
 		Summon crits deal reduced damage if you're holding a non-Summoner weapon
-		Extra base damage from summon crits is capped at 100
+		Extra base damage from summon crits is capped at 80
 		+10% critical strike chance
 		'Arachnophobia is punishable by arachnid induced death'
 		''' */
@@ -631,7 +626,6 @@ SquireEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 10 defense, a fart jump, and fall damage immunity
 		Increases the effectiveness of healing sources by 10%
-		Ballista pierces more targets and panics when you take damage
 		'Squire, will you hurry?'
 		''' */
 }
@@ -718,7 +712,6 @@ ValhallaKnightEnchant: {
 		Increases mount acceleration, top speed, and jump height
 		While mounted, grants 15 defense, a fart jump, fall damage immunity, and dash
 		Increases the effectiveness of healing sources by 15%
-		Greatly enhances Ballista effectiveness
 		'Valhalla calls'
 		''' */
 }
@@ -822,7 +815,7 @@ UniverseCore: {
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
+		The chance of this is equal to half of your critical strike chance (only counts up to 100%)
 		These supercrits deal 4x damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
@@ -850,7 +843,7 @@ EarthForce: {
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 3.5x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 250% more damage from debuffs
 		[i:FargowiltasSouls/CobaltEnchant] Hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
@@ -898,7 +891,7 @@ ShadowForce: {
 		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed and knockback while moving slowly
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
 		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
@@ -968,7 +961,7 @@ AbominableWand: {
 	/* Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Increased damage gained per Sparkling Adoration graze and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -1260,7 +1253,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Guard Parry negates up to 200 damage. Parries heal you based on damage. While guarding, gain an aura of Rotting
 		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
-		[i:FargowiltasSouls/BetsysHeart] FIreball Dash inflicts Betsy's Curse
+		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
 		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
 		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
@@ -1602,7 +1595,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/AgitatingLens] Debuff Install makes you go berserk, reducing control and defense for massive offensive bonuses
 		[i:FargowiltasSouls/QueenStinger] Honey buff increases your armor penetration by 5, and bees and weak hornets become friendlier
 		[i:FargowiltasSouls/QueenStinger] Press the Special Dash key to perform a short quick bee dash
-		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less contact damage while dashing, and reflect all damage back to attacker while dashing
+		[i:FargowiltasSouls/NecromanticBrew] Massively increases dash speed, take less damage while dashing, and reflect all damage back to attacker while dashing
 		[i:FargowiltasSouls/NecromanticBrew] Summons 2 Skeletron arms to whack enemies
 		'Supremacy not necessarily guaranteed'
 		''' */
@@ -1733,7 +1726,7 @@ DimensionSoul: {
 		Grants the ability to enable Builder Mode
 		Effects of the Brain of Confusion, Star Veil, Sweetheart Necklace, Bee Cloak, Spore Sac, and Shiny Stone
 		Effects of Paladin's Shield, Frozen Turtle Shell, Arctic Diving Gear, Frog Legs, and Flying Carpet
-		Effects of Lava Waders, Angler Tackle Bag, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
+		Effects of Lava Waders, Angler Tackle Bag, Paint Sprayer, Presserator, and Gravity Globe
 		Effects of Shield of Cthulhu and Master Ninja Gear
 		'The dimensions of Terraria at your fingertips'
 		''' */
@@ -1799,21 +1792,25 @@ MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Increases wing time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (works from inventory and vanity), immunity to almost all Eternity Mode debuffs, and more
-		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
-		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
+		Grants immunity to almost all Eternity Mode debuffs, [i:FargowiltasSouls/ReinforcedPlating] knockback, [i:FargowiltasSouls/PureHeart] biome debuffs, and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion and station buffs
+		Increases [i:FargowiltasSouls/GalacticGlobe][i:FargowiltasSouls/GelicWings] wing time by 200%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 20%, [i:FargowiltasSouls/GuttedHeart] max life by 100%, and [i:FargowiltasSouls/MagicalBulb] life regeneration by 7
+		Increases [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
+		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash and [i:FargowiltasSouls/SlimyShield] fall speed, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
+		[i:FargowiltasSouls/GelicWings] Allows the wearer to double jump and [i:FargowiltasSouls/Deerclawps] dashes leave a trail of blood spikes, [i:FargowiltasSouls/PrecisionSeal] press the Precision Seal key to prevent dashes and double jumps
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates and loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
+		Passively [i:FargowiltasSouls/SecurityWallet] reduces reforge cost, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/WyvernFeather] gravity, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		When hit [i:FargowiltasSouls/SqueakyToy] you have a chance to only take 1 damage and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
+		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict several debuffs
 		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
+		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/ConcentratedRainbowMatter] a rainbow slime, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
 		'Embrace mastery, embrace eternity'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	/* VanityTooltip:
+		'''
+		[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs
+		[i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50%, improves your [i:FargowiltasSouls/OrdinaryCarrot] night vision, [i:FargowiltasSouls/WyvernFeather] gravity, [i:FargowiltasSouls/NymphsPerfume] respawn hp, and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/ConcentratedRainbowMatter] healing and [i:FargowiltasSouls/MysticSkull] mana potions as needed
+		''' */
 }
 
 SnipersSoul: {
@@ -1854,7 +1851,7 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
 		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] 250% increased debuff damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage taken, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
@@ -1918,7 +1915,7 @@ WorldShaperSoul: {
 		    Tiles and walls will not be consumed
 		    Increased placement speed and range
 		Effect can be disabled in Effect Toggles menu
-		Effects of the Cell Phone, Royal Gel and Treasure Magnet
+		Effects of the Royal Gel and Treasure Magnet
 		Summons a pet Magic Lantern
 		'Living in a world of cardboard'
 		''' */
@@ -1962,7 +1959,8 @@ EridanusHat: {
 		'''
 		10% increased damage
 		5% increased critical strike chance
-		Increases your max number of minions by 4
+		Increases max mana by 30
+		Increases your max number of minions by 1
 		Increases your max number of sentries by 1
 		''' */
 }
@@ -2009,7 +2007,7 @@ GaiaPlate: {
 }
 
 MutantBody: {
-	// DisplayName: True Mutant Body
+	// DisplayName: Eternal Core
 	/* Tooltip:
 		'''
 		70% increased damage and 30% increased critical strike chance
@@ -2020,7 +2018,7 @@ MutantBody: {
 }
 
 MutantMask: {
-	// DisplayName: True Mutant Head
+	// DisplayName: Eternal Flame
 	/* Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2031,7 +2029,7 @@ MutantMask: {
 }
 
 MutantPants: {
-	// DisplayName: True Mutant Pants
+	// DisplayName: Eternal Leggings
 	/* Tooltip:
 		'''
 		50% increased damage and 20% increased critical strike chance
@@ -2044,7 +2042,7 @@ NekomiHood: {
 	/* Tooltip:
 		'''
 		7% increased damage
-		Increases max number of minions by 2
+		Increases max number of minions by 1
 		''' */
 }
 
@@ -2223,8 +2221,8 @@ EternalEnergy: {
 		''' */
 }
 
-PhantasmalEnergy: {
-	// DisplayName: Broken Shaft
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
 
@@ -2965,7 +2963,7 @@ OpticStaffEX: {
 	/* Tooltip:
 		'''
 		Summons the real twins to fight for you
-		Needs 3 minion slots
+		Needs 2 minion slots
 		'The reward for a mighty rematch...''
 		''' */
 }
@@ -3019,7 +3017,7 @@ Masochist: {
 		-Improves base stats and caps player DR at 75%
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
-		-In Masochist Mode multiplayer, each player can only respawn once per bossfight
+		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
 
 		Cannot be used while a boss is alive
 		[i:1612][c/00ff00:Recommended to use Fargo's Mutant Mod Debuff Display (in config)]
@@ -3801,5 +3799,10 @@ TrojanMask: {
 
 WillMask: {
 	// DisplayName: Will Champion Mask
+	// Tooltip: ""
+}
+
+BrokenSpearhead: {
+	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }

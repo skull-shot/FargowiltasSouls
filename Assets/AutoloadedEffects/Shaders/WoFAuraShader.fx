@@ -19,27 +19,32 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
 {
     //float textureScale = radius / 1400; // 1400 is abom's ritual size
     
+    //uv *= 3;
+    //uv.y -= 1.5;
+    //uv.x -= 0.8;
+    
     float2 worldUV = screenPosition + screenSize * uv;
     float2 provUV = anchorPoint / screenSize;
     float worldDistance = distance(worldUV, anchorPoint);
     float adjustedTime = time * 0.17;
     
-    // Pixelate the uvs
-    float2 pixelatedUV = worldUV / screenSize;
-
-    pixelatedUV.x -= worldUV.x % (1 / screenSize.x);
-    pixelatedUV.y -= worldUV.y % (1 / (screenSize.y / 2) * 2);
-    
-    float2 noiseUV = pixelatedUV - (anchorPoint / screenSize);
-    float xDir = -sign(worldUV.x - anchorPoint.x);
-    float2 vec1 = float2(0.56 * xDir, 0.5);
-    float2 vec2 = float2(0.3 * xDir, -0.55);
-    float2 vec3 = float2(0.8 * xDir, 0);
-    
+    // Polar coordinates
+    float2 coords = uv;
+    // pixelate
+    float pixelationLevel = screenSize * 0.5;
+    coords = floor(coords * pixelationLevel) / pixelationLevel;
+    // transform to polar, relative to anchor point
+    //coords.y /= screenSize.x / screenSize.y; // compensate for 
+    float2 anchorCoords = (anchorPoint - screenPosition) / screenSize;
+    float distanceFromCenter = distance(coords, anchorCoords);
+    float2 polar = float2(atan2(coords.y - anchorCoords.y, coords.x - anchorCoords.x) / (3.141 * 0.25) + 0.5, distanceFromCenter * 1);
+   
     // Textures
-    float noiseMesh1 = tex2D(diagonalNoise, frac(noiseUV * 1.46  + vec1 * adjustedTime)).g;
-    float noiseMesh2 = tex2D(diagonalNoise, frac(noiseUV * 1.57 + vec2 * adjustedTime)).g;
-    float noiseMesh3 = tex2D(diagonalNoise, frac(noiseUV * 1.57 + vec3 * adjustedTime)).g;
+    float polarMult = 2;
+    polar.y *= polarMult;
+    float noiseMesh1 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0.37, 0.94)).g;
+    float noiseMesh2 = tex2D(diagonalNoise, polar - adjustedTime * float2(-0, 0.7)).g;
+    float noiseMesh3 = tex2D(diagonalNoise, polar - adjustedTime * float2(0.43, 1.13)).g;
     float textureMesh = noiseMesh1 * 0.3 + noiseMesh2 * 0.3 + noiseMesh3 * 0.3;
     
     float opacity = 0.88;
@@ -48,7 +53,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     bool border = worldDistance > radius && opacity > 0;
     float colorMult = 1;
     if (border) 
-        colorMult = InverseLerp(radius * 1.3, radius, worldDistance);
+        colorMult = InverseLerp(radius * 1.4, radius, worldDistance);
     else
     {
         colorMult = InverseLerp(radius * 0.985, radius, worldDistance);

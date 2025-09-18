@@ -1,10 +1,13 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,6 +15,7 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -30,6 +34,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPCID.Sets.TrailCacheLength[NPC.type] = 6;
             NPCID.Sets.TrailingMode[NPC.type] = 1;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
+            NPCID.Sets.MustAlwaysDraw[Type] = true;
             NPCID.Sets.BossBestiaryPriority.Add(NPC.type);
 
             NPC.AddDebuffImmunities(
@@ -70,6 +76,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
         }
 
         private bool doPredictiveSandnado;
+        public const float auraDistance = 1200;
 
         public override void SetDefaults()
         {
@@ -77,7 +84,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.height = 150;
             NPC.damage = 125;
             NPC.defense = 40;
-            NPC.lifeMax = 550000;
+            NPC.lifeMax = 630000;
             NPC.HitSound = SoundID.NPCHit54;
             NPC.DeathSound = SoundID.NPCDeath52;
             NPC.noGravity = true;
@@ -139,7 +146,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     NPC.noGravity = true;
                     NPC.alpha = 0;
 
-                    if (WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.SpiritChampion] && NPC.ai[1] < 120)
+                    if (NPC.ai[1] < 120)
                         NPC.ai[1] = 120;
 
                     if (NPC.ai[1] == 180)
@@ -185,6 +192,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                     if (++NPC.ai[1] > 300)
                     {
+                        if (FargoSoulsUtil.HostCheck && WorldSavingSystem.MasochistModeReal) // extra hand that always grabs you
+                        {
+
+                            int n2 = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
+                            if (n2 != Main.maxNPCs)
+                            {
+                                Main.npc[n2].velocity.X = Main.rand.NextFloat(-24f, 24f);
+                                Main.npc[n2].velocity.Y = Main.rand.NextFloat(-24f, 24f);
+                                if (Main.netMode == NetmodeID.Server)
+                                    NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n2);
+                            }
+                        }
                         NPC.ai[1] = 0;
                         NPC.ai[2] = 0;
                         NPC.ai[3] = 0;
@@ -297,7 +316,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                     if (NPC.ai[1] == 0) //respawn dead hands
                     {
-                        bool[] foundHand = new bool[4];
+                        int size = WorldSavingSystem.MasochistModeReal ? 5 : 4;
+                        bool[] foundHand = new bool[size];
 
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
@@ -311,6 +331,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                     foundHand[2] = Main.npc[i].ai[2] == 1f && Main.npc[i].ai[3] == -1f;
                                 if (!foundHand[3])
                                     foundHand[3] = Main.npc[i].ai[2] == 1f && Main.npc[i].ai[3] == 1f;
+                                if (WorldSavingSystem.MasochistModeReal && !foundHand[4])
+                                    foundHand[4] = Main.npc[i].ai[0] == 3f || Main.npc[i].ai[3] == 1f;
                             }
                         }
 
@@ -360,6 +382,17 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                                         NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                                 }
                             }
+                            if (WorldSavingSystem.MasochistModeReal && !foundHand[4])
+                            {
+                                int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SpiritChampionHand>(), NPC.whoAmI, 3f, NPC.whoAmI, 1f, 1f, NPC.target);
+                                if (n != Main.maxNPCs)
+                                {
+                                    Main.npc[n].velocity.X = Main.rand.NextFloat(-24f, 24f);
+                                    Main.npc[n].velocity.Y = Main.rand.NextFloat(-24f, 24f);
+                                    if (Main.netMode == NetmodeID.Server)
+                                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
+                                }
+                            }
                         }
                     }
                     else if (NPC.ai[1] == 120)
@@ -368,7 +401,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                         for (int i = 0; i < Main.maxNPCs; i++) //update ai
                         {
-                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI)
+                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI && Main.npc[i].ai[0] != 3f)
                             {
                                 Main.npc[i].ai[0] = 1f;
                                 Main.npc[i].netUpdate = true;
@@ -396,8 +429,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (FargoSoulsUtil.HostCheck)
                         {
                             SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-
-                            for (int i = 0; i < 12; i++)
+                            int crosses = WorldSavingSystem.MasochistModeReal ? 12 : 3;
+                            for (int i = 0; i < crosses; i++)
                             {
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                     Main.rand.NextFloat(-8f, 8f), Main.rand.NextFloat(-8f, 8f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -512,8 +545,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             if (NPC.ai[1] < 180) //cross bones
                             {
                                 SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-
-                                for (int i = 0; i < 12; i++)
+                                int crosses = WorldSavingSystem.MasochistModeReal ? 12 : 3;
+                                for (int i = 0; i < crosses; i++)
                                 {
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                         Main.rand.NextFloat(-8f, 8f), Main.rand.NextFloat(-8f, 8f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -564,7 +597,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     {
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
-                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI)
+                            if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<SpiritChampionHand>() && Main.npc[i].ai[1] == NPC.whoAmI && Main.npc[i].ai[0] != 3f)
                             {
                                 Main.npc[i].ai[0] = 1f;
                                 Main.npc[i].netUpdate = true;
@@ -663,6 +696,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (NPC.Distance(targetPos) > 25)
                             Movement(targetPos, 0.8f, 24f);
 
+                        /* lol!
                         const float distance = 150;
 
                         for (int i = 0; i < 20; i++)
@@ -680,7 +714,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             dust.noGravity = true;
                         }
 
-                        if (NPC.ai[1] > 60)
+                        if (NPC.ai[1] > 80)
                         {
                             Main.projectile.Where(x => x.active && x.friendly && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x => //reflect projectiles
                             {
@@ -722,11 +756,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                             });
                         }
 
+                        */
                         if (NPC.ai[1] == 0)
                         {
-                            SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
-                            if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -6);
+                            SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.Center);
+                            //if (FargoSoulsUtil.HostCheck)
+                            //    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Projectiles.GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -6);
                         }
 
                         if (++NPC.ai[3] > 10) //spirits
@@ -790,7 +825,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         if (NPC.ai[1] % 30 == 0 && FargoSoulsUtil.HostCheck && NPC.life < NPC.lifeMax * 0.66)
                         {
                             SoundEngine.PlaySound(SoundID.Item2, NPC.Center);
-                            for (int i = 0; i < 3; i++)
+                            int crossbones = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                            for (int i = 0; i < crossbones; i++)
                             {
                                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.position.X + Main.rand.Next(NPC.width), NPC.position.Y + Main.rand.Next(NPC.height),
                                     Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-8f, 0f), ModContent.ProjectileType<SpiritCrossBone>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -825,7 +861,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
             if (NPC.localAI[2] != 0 && WorldSavingSystem.EternityMode) //aura
             {
-                const float auraDistance = 1200;
                 float range = NPC.Distance(player.Center);
                 if (range > auraDistance && range < 3000)
                 {
@@ -850,7 +885,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         }
                     }
                 }
-
+                /*
                 for (int i = 0; i < 20; i++) //dust
                 {
                     int d = Dust.NewDust(NPC.Center + auraDistance * Vector2.UnitX.RotatedBy(Math.PI * 2 * Main.rand.NextDouble()), 0, 0, DustID.GemTopaz);
@@ -858,6 +893,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     Main.dust[d].noGravity = true;
                     Main.dust[d].scale++;
                 }
+                */
             }
         }
 
@@ -968,6 +1004,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SpiritMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<SpiritForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<SpiritChampionRelic>()));
@@ -997,6 +1035,48 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             }
 
             Main.EntitySpriteDraw(texture2D13, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
+
+            if (NPC.localAI[2] != 0 && WorldSavingSystem.EternityMode) //aura
+            {
+                Color outerColor = Color.LightYellow;
+                outerColor.A = 0;
+
+                Color darkColor = outerColor;
+                Color mediumColor = Color.Lerp(outerColor, Color.White, 0.75f);
+                Color lightColor2 = Color.Lerp(outerColor, Color.White, 0.5f);
+
+                Vector2 auraPos = NPC.Center;
+                float radius = auraDistance;
+                var target = Main.LocalPlayer;
+                var blackTile = TextureAssets.MagicPixel;
+                var diagonalNoise = FargosTextureRegistry.SandyNoise;
+                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                    return false;
+                var maxOpacity = NPC.Opacity;
+
+                ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.SpiritAuraShader");
+                borderShader.TrySetParameter("colorMult", 7.35f);
+                borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+                borderShader.TrySetParameter("radius", radius);
+                borderShader.TrySetParameter("anchorPoint", auraPos);
+                borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+                borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+                borderShader.TrySetParameter("playerPosition", target.Center);
+                borderShader.TrySetParameter("maxOpacity", maxOpacity);
+                borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
+                borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
+                borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
+
+                spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+                spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            }
+
             return false;
         }
     }

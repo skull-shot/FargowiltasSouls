@@ -31,6 +31,8 @@ namespace FargowiltasSouls.Content.Items
         }
         public static EModeChange EmodeBalancePerID(int itemType, ref float balanceNumber, ref string[] balanceTextKeys, ref string extra)
         {
+            if (!WorldSavingSystem.EternityMode)
+                return EModeChange.None;
             switch (itemType)
             {
                 case ItemID.RodofDiscord:
@@ -540,7 +542,7 @@ namespace FargowiltasSouls.Content.Items
             float balanceNumber = -1;
             string[] balanceTextKeys = null;
             EModeChange balance = EmodeBalancePerID(itemID, ref balanceNumber, ref balanceTextKeys, ref extra);
-            return balance == EModeChange.None;
+            return balance != EModeChange.None;
         }
 
         public static void BalanceWeaponStats(Player player, Item item, ref StatModifier damage)

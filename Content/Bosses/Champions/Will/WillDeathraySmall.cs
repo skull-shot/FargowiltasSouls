@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             target.AddBuff(BuffID.Bleeding, 300);
         }
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 3;
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale;
 
         public static Color ColorFunction(float _) => new(253, 254, 32, 100);
 

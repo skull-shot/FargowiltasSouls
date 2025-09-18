@@ -24,10 +24,12 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
 
         public override bool PreAI()
@@ -106,24 +108,16 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             }
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 6;
-        }
+        }*/
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             width = 16;
             height = 16;
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            if (Projectile.owner == Main.myPlayer)
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GibExplosion>(),
-                    Projectile.damage, Projectile.knockBack * 2f, Projectile.owner);
-            return true;
         }
 
         public override void OnKill(int timeLeft)
@@ -149,6 +143,15 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             FargoSoulsUtil.DrawTexture(Main.spriteBatch, tex, 0, Projectile, lightColor, true);
 
             return false;
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.timeLeft = 1;
+            Projectile.hide = true;
+            Projectile.ai[0] = 0f;
+            Projectile.velocity *= 0;
+            Projectile.knockBack *= 2f;
+            Projectile.Resize(80, 80);;
         }
     }
 }

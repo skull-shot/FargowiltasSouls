@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.width = 80;
             Projectile.height = 80;
             Projectile.aiStyle = 0;
-            Projectile.friendly = true;
+            Projectile.friendly = false; // temporarily disabled explosion damage for now
             Projectile.penetrate = -1;
             Projectile.timeLeft = 1;
             Projectile.tileCollide = false;

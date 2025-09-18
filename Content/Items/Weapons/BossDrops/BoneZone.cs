@@ -14,14 +14,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Bone Zone");
-            /* Tooltip.SetDefault("Uses bones for ammo" +
-                "\n33% chance to not consume ammo" +
-                "\n'The shattered remains of a defeated foe..'"); */
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "骸骨领域");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'被击败的敌人的残骸..'");
-
+            ItemID.Sets.IsRangedSpecialistWeapon[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         private static readonly int[] RiffVariants = [1, 2, 3, 4];

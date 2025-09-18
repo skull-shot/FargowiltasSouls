@@ -702,7 +702,7 @@ CorruptedBuffForce: {
 }
 
 JungleMimicSummonBuff: {
-	DisplayName: Jungle Mimic Summon Buff
+	DisplayName: Jungle Mimic
 	Description: The Jungle Mimic will fight for you
 }
 
@@ -816,4 +816,9 @@ MutantDesperationBuff: {
 TouhouHoardBuff: {
 	DisplayName: Mystical Horde
 	Description: The mythical beings will fight for you
+}
+
+GrabbedHarmlessBuff: {
+	DisplayName: Grabbed
+	Description: Mash movement keys to escape!
 }

@@ -4,10 +4,13 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -153,6 +156,100 @@ namespace FargowiltasSouls //lets everything access it without using
         public static bool TypeAlive<T>(this Projectile projectile) where T : ModProjectile => projectile.Alive() && projectile.type == ModContent.ProjectileType<T>();
         public static bool TypeAlive(this NPC npc, int type) => npc.Alive() && npc.type == type;
         public static bool TypeAlive<T>(this NPC npc) where T : ModNPC => npc.Alive() && npc.type == ModContent.NPCType<T>();
+
+        public static Texture2D GetTexture(this NPC npc) => TextureAssets.Npc[npc.type].Value;
+        public static Texture2D GetTexture(this Projectile projectile) => TextureAssets.Projectile[projectile.type].Value;
+        public static Vector2 GetDrawPosition(this NPC npc) => npc.Center - Main.screenPosition + Vector2.UnitY * npc.gfxOffY;
+        public static Vector2 GetDrawPosition(this Projectile projectile) => projectile.Center - Main.screenPosition + Vector2.UnitY * projectile.gfxOffY;
+        public static Rectangle GetDefaultFrame(this Projectile projectile)
+        {
+            Texture2D texture = projectile.GetTexture();
+            int sizeY = texture.Height / Main.projFrames[projectile.type]; //ypos of lower right corner of sprite to draw
+            int frameY = projectile.frame * sizeY;
+            return new(0, frameY, texture.Width, sizeY);
+        }
+
+        /// <summary>
+        /// Spawns a projectie from this source NPC. <br></br>
+        /// This assumes that the projectile is spawned in AI code, and should be spawned on the server. <br></br>
+        /// Use this for spawning enemy/boss projectiles.
+        /// </summary>
+        public static int SpawnProjectile(this NPC npc, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = -1, float ai0 = 0, float ai1 = 0, float ai2 = 0, float localAI0 = 0, float localAI1 = 0, float localAI2 = 0, SoundStyle? spawnSoundEffect = null)
+        {
+            if (spawnSoundEffect.HasValue)
+                SoundEngine.PlaySound(spawnSoundEffect, position);
+            if (FargoSoulsUtil.HostCheck)
+            {
+                int p = Projectile.NewProjectile(npc.GetSource_FromAI(), position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1, ai2);
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    if (localAI0 != 0)
+                        Main.projectile[p].localAI[0] = localAI0;
+                    if (localAI1 != 0)
+                        Main.projectile[p].localAI[0] = localAI1;
+                    if (localAI2 != 0)
+                        Main.projectile[p].localAI[0] = localAI2;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.SyncProjectile, number: p);
+                }
+                return p;
+            }
+            return -1;
+        }
+        /// <summary>
+        /// Spawns a projectie from this source projectile. <br></br>
+        /// This assumes that the projectile is spawned in AI code, and should be spawned on the server. <br></br>
+        /// Use this for enemy/boss projectiles spawning other projectiles.
+        /// </summary>
+        public static int SpawnProjectile(this Projectile projectile, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = -1, float ai0 = 0, float ai1 = 0, float ai2 = 0, float localAI0 = 0, float localAI1 = 0, float localAI2 = 0, SoundStyle? spawnSoundEffect = null)
+        {
+            if (spawnSoundEffect.HasValue)
+                SoundEngine.PlaySound(spawnSoundEffect, position);
+            if (FargoSoulsUtil.HostCheck)
+            {
+                int p = Projectile.NewProjectile(projectile.GetSource_FromAI(), position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1, ai2);
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    if (localAI0 != 0)
+                        Main.projectile[p].localAI[0] = localAI0;
+                    if (localAI1 != 0)
+                        Main.projectile[p].localAI[0] = localAI1;
+                    if (localAI2 != 0)
+                        Main.projectile[p].localAI[0] = localAI2;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.SyncProjectile, number: p);
+                }
+                return p;
+            }
+            return -1;
+        }
+        public static Item FindAmmo(this Player player, int ammoID)
+        {
+            Item ammo = new();
+            bool gotammo = false;
+            if (ammoID == AmmoID.None)
+                return ammo;
+            for (int i = 54; i < 58; i++)
+            {
+                if (player.inventory[i].ammo == ammoID && player.inventory[i].stack > 0)
+                {
+                    ammo = player.inventory[i];
+                    return ammo;
+                }
+            }
+            if (!gotammo)
+            {
+                for (int j = 0; j < 54; j++)
+                {
+                    if (player.inventory[j].ammo == ammoID && player.inventory[j].stack > 0)
+                    {
+                        ammo = player.inventory[j];
+                        return ammo;
+                    }
+                }
+            }
+            return ammo;
+        }
         public static NPC GetSourceNPC(this Projectile projectile)
             => projectile.GetGlobalProjectile<A_SourceNPCGlobalProjectile>().sourceNPC;
 
@@ -191,8 +288,7 @@ namespace FargowiltasSouls //lets everything access it without using
         /// <param name="damageClass"></param>
         /// <returns></returns>
         public static float ActualClassCrit(this Player player, DamageClass damageClass)
-            => damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed
-            && !(player.FargoSouls().MinionCrits)
+            => (damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed) && !(player.FargoSouls().MinionCrits)
             ? 0
             : player.GetTotalCritChance(damageClass);
 

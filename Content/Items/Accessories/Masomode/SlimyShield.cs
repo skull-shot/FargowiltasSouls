@@ -62,23 +62,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Masomode
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.holdDownCardinalTimer[0] > 0 && !modPlayer.LowGround && modPlayer.FallthroughCD <= 0 ||modPlayer.FallthroughCD > 8)
+            if (player.holdDownCardinalTimer[0] > 0 && modPlayer.FallthroughCD <= 0 || modPlayer.FallthroughCD > 8)
             {
+                if (modPlayer.FallthroughTimer < 2)
+                    modPlayer.FallthroughTimer = 2;
+
+
                 Tile thisTile = Framing.GetTileSafely(player.Bottom);
                 Tile bottomTile = Framing.GetTileSafely(player.Bottom + Vector2.UnitY * 8);
+
 
                 if (!Collision.SolidCollision(player.BottomLeft, player.width, 16))
                 {
                     if (player.velocity.Y >= 0 && (IsPlatform(thisTile.TileType) || IsPlatform(bottomTile.TileType)))
                     {
-                        player.position.Y += 2;
-                        modPlayer.FallthroughCD = 10;
+                        //player.position.Y += 2;
+                        modPlayer.FallthroughCD = 8;
                     }
-                    if (player.velocity.Y == 0)
-                    {
-                        player.position.Y += 16;
-                    }
-
                 }
 
                 static bool IsPlatform(int tileType)

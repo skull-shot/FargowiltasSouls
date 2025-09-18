@@ -135,8 +135,10 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool GoldShell;
         private int goldHP;
         public int HallowHealTime;
+        public float HallowHealTotal;
         public int HuntressStage;
         public int HuntressCD;
+        public int HuntressMissCD;
         public double AdamantiteSpread;
         public bool HeldItemAdamantiteValid;
         public Item AdamantiteItem;
@@ -381,11 +383,14 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MutantFang;
         public bool Swarming;
         public bool LowGround;
+        public int FallthroughTimer;
         public bool Flipped;
         public bool Illuminated;
         public bool Mash;
+        public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
-        public int MashCounter;
+        public float MashCounter;
+        public int FramesSinceLastMash;
         public int StealingCooldown;
         public bool LihzahrdCurse;
         //public bool LihzahrdBlessing;

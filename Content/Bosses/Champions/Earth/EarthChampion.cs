@@ -14,6 +14,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Items.Armor;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 {
@@ -313,8 +314,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                             SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                             if (NPC.ai[1] > 10 && FargoSoulsUtil.HostCheck) //shoot spread of fireballs, but not the first time
                             {
-                                for (int i = -1; i <= 1; i++)
+                                int max = 1;
+                                if (WorldSavingSystem.MasochistModeReal)
+                                    max = 4;
+                                for (int i = -max; i <= max; i++)
                                 {
+                                    if (Math.Abs(i) == 2 ||Math.Abs(i) == 3)
+                                        continue;
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitY * 60,
                                         (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(8 * i)),
                                         ProjectileID.Fireball, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
@@ -444,6 +450,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EarthMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<EarthForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<EarthChampionRelic>()));

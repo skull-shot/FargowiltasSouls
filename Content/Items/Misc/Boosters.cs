@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.Items.Misc
         }
         public override void GrabRange(Player player, ref int grabRange)
         {
-            grabRange += 100;
+            grabRange += 260;
         }
         public static MethodInfo PullItem_PickupMethod
         {

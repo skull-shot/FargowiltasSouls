@@ -7,7 +7,7 @@ namespace FargowiltasSouls
     {
         public class Items
         {
-           
+
         }
         public class Projectiles
         {
@@ -28,8 +28,9 @@ namespace FargowiltasSouls
             #region Projectiles
             SetFactory projectileFactory = ProjectileID.Sets.Factory;
 
-            Projectiles.PierceResistImmune = projectileFactory.CreateBoolSet(false, 
-                ProjectileID.FlyingKnife
+            Projectiles.PierceResistImmune = projectileFactory.CreateBoolSet(false,
+                ProjectileID.FlyingKnife,
+                ProjectileID.WeatherPainShot
                 );
 
             #endregion

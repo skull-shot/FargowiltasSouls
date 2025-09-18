@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.Items
             if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 if (player.HasEffect<IronEquippedEffect>() || (item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
-                    item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart))
+                    item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart && item.type != ItemID.ManaCloakStar))
                 {
                     int rangeBonus = 160;
                     if (p.ForceEffect<IronEnchant>())
@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Items
             if (player.whoAmI == Main.myPlayer && player.HasEffect<GoldToPiggy>())
                 modPlayer.GoldEnchMoveCoins = true;
             
-            if (ItemID.Sets.IsAPickup[item.type])
+            if (ItemID.Sets.IsAPickup[item.type] || item.type == ItemID.ManaCloakStar) //only vanilla pickup that doesnt set IsAPickup
             {
                 OnRetrievePickup(player);
             }
@@ -145,7 +145,7 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (item.healLife > 0)
+            if (item.healLife > 0 && item.potion && player.HasBuff(BuffID.PotionSickness))
             {
                 if (player.HasEffect<ShroomiteHealEffect>())
                 {
@@ -159,7 +159,9 @@ namespace FargowiltasSouls.Content.Items
                     int hallowIndex = ModContent.GetInstance<HallowEffect>().Index;
                     // Hallow needs to disabled so it doesn't set GetHealLife to 0
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = false;
-                    modPlayer.HallowHealTime = 6 * player.GetHealLife(item);
+                    float mult = modPlayer.ForceEffect<HallowEnchant>() ? 1.7f : 1.4f;
+                    modPlayer.HallowHealTotal = player.GetHealLife(item) * mult;
+                    modPlayer.HallowHealTime = 600;
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = true;
                     HallowEffect.HealRepel(player);
                 }

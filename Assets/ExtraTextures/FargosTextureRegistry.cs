@@ -29,10 +29,16 @@ namespace FargowiltasSouls.Assets.ExtraTextures
         #region Noise
         public static Asset<Texture2D> PerlinNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/BlurryPerlinNoise");
         public static Asset<Texture2D> ColorNoiseMap => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/ColorNoiseMap");
+
+        public static Asset<Texture2D> CracksNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/CracksNoise");
         public static Asset<Texture2D> CrustyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/CrustyNoise");
+
+        public static Asset<Texture2D> DottedNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/DottedNoise");
         public static Asset<Texture2D> HarshNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/HarshNoise");
         public static Asset<Texture2D> HoneycombNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/HoneycombNoise");
         public static Asset<Texture2D> LessCrustyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/LessCrustyNoise");
+
+        public static Asset<Texture2D> SandyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/SandyNoise");
         public static Asset<Texture2D> SmokyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/SmokyNoise");
         public static Asset<Texture2D> TurbulentNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/TurbulentNoise");
         public static Asset<Texture2D> WavyNoise => ModContent.Request<Texture2D>("FargowiltasSouls/Assets/ExtraTextures/Noise/WavyNoise");

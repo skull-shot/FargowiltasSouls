@@ -817,3 +817,8 @@ TouhouHoardBuff: {
 	DisplayName: Horda Mística
 	Description: As críaturas místicas irão lutar por você
 }
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
+}

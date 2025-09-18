@@ -168,6 +168,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     {
                         NPC.rotation = NPC.velocity.ToRotation() - (float)Math.PI / 2;
                         NPC.localAI[3] = 1;
+
+                        if (WorldSavingSystem.MasochistModeReal && NPC.ai[1] > 0 && NPC.ai[1] < 70)
+                            NPC.ai[1] = 70;
                     }
                     else if (NPC.ai[1] < 75) //hover near a side
                     {
@@ -187,6 +190,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     }
                     else if (NPC.ai[1] < 120) //prepare to dash, enable hitbox
                     {
+                        if (WorldSavingSystem.MasochistModeReal && NPC.ai[1] < 90)
+                            NPC.ai[1] = 90;
+
                         if (head.localAI[2] == 1)
                             NPC.position += player.velocity / 10f;
 
@@ -265,8 +271,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
                         Movement(targetPos, 0.8f, 32f);
                     }
-
-                    if (++NPC.localAI[0] > (head.localAI[2] == 1 ? 18 : 24))
+                    float freq = head.localAI[2] == 1 ? 18 : 24;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        freq -= 5;
+                    if (++NPC.localAI[0] > freq)
                     {
                         NPC.localAI[0] = 0;
                         if (FargoSoulsUtil.HostCheck)
@@ -343,16 +351,18 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
                                     if (head.localAI[2] == 1 && WorldSavingSystem.EternityMode)
                                     {
-                                        for (int i = 0; i < 4; i++)
+                                        int max = WorldSavingSystem.MasochistModeReal ? 6 : 4;
+                                        for (int i = 0; i < max; i++)
                                         {
-                                            Vector2 vel = Vector2.Normalize(NPC.oldVelocity).RotatedBy(Math.PI * 2 / 4 * (NPC.ai[3] < 0 ? i : i + 0.5));
+                                            Vector2 vel = Vector2.Normalize(NPC.oldVelocity).RotatedBy(Math.PI * 2 / max * (NPC.ai[3] < 0 ? i : i + 0.5));
                                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, 1.5f * vel, ModContent.ProjectileType<EarthPalladOrb>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                                         }
                                     }
                                     else
                                     {
                                         Vector2 spawnPos = NPC.Center;
-                                        for (int i = 0; i <= 3; i++)
+                                        int geysers = WorldSavingSystem.MasochistModeReal ? 15 : 6;
+                                        for (int i = 0; i <= geysers; i++)
                                         {
                                             int tilePosX = (int)spawnPos.X / 16 + 250 * i / 16 * (int)-NPC.ai[3];
                                             int tilePosY = (int)spawnPos.Y / 16;// + 1;
@@ -478,6 +488,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                         NPC.localAI[0] += 0.5f;
                     }
 
+
                     if (++NPC.localAI[0] > 60 && NPC.ai[1] > 120)
                     {
                         NPC.localAI[0] = 0;
@@ -487,6 +498,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                                 FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, player.position.Y);
                         }
                     }
+
+                    if (WorldSavingSystem.MasochistModeReal)
+                        NPC.localAI[0]++;
 
                     if (++NPC.ai[1] > 600)
                     {
@@ -577,22 +591,21 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Texture2D texture = NPC.GetTexture();
             Rectangle rectangle = NPC.frame;//new Rectangle(0, y3, texture2D13.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
-            Color color26 = drawColor;
-            color26 = NPC.GetAlpha(color26);
+            Color color = NPC.GetAlpha(drawColor);
 
             SpriteEffects effects = NPC.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
             for (int i = 0; i < NPCID.Sets.TrailCacheLength[NPC.type]; i++)
             {
-                Color color27 = color26 * 0.5f;
+                Color color27 = color * 0.5f;
                 color27 *= (float)(NPCID.Sets.TrailCacheLength[NPC.type] - i) / NPCID.Sets.TrailCacheLength[NPC.type];
                 Vector2 value4 = NPC.oldPos[i];
                 float num165 = NPC.rotation; //NPC.oldRot[i];
-                Main.EntitySpriteDraw(texture2D13, value4 + NPC.Size / 2f - screenPos + new Vector2(0, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(texture, value4 + NPC.Size / 2f - screenPos + new Vector2(0, NPC.gfxOffY), rectangle, color27, num165, origin2, NPC.scale, effects, 0);
             }
 
             Texture2D glowmask = ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Bosses/Champions/Earth/{Name}_Glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
@@ -600,12 +613,33 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             if (NPC.dontTakeDamage)
             {
                 Vector2 offset = Vector2.UnitX * Main.rand.NextFloat(-180, 180);
-                Main.EntitySpriteDraw(texture2D13, NPC.Center + offset - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor) * 0.5f, NPC.rotation, origin2, NPC.scale, effects, 0);
-                Main.EntitySpriteDraw(glowmask, NPC.Center + offset - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor) * 0.5f, NPC.rotation, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(texture, NPC.Center + offset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, NPC.GetAlpha(drawColor) * 0.5f, NPC.rotation, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(glowmask, NPC.Center + offset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, NPC.GetAlpha(drawColor) * 0.5f, NPC.rotation, origin2, NPC.scale, effects, 0);
             }
 
-            Main.EntitySpriteDraw(texture2D13, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
-            Main.EntitySpriteDraw(glowmask, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White, NPC.rotation, origin2, NPC.scale, effects, 0);
+            if (NPC.ai[0] == 1)
+            {
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 8f * NPC.scale;
+                    Color glowColor = Color.OrangeRed;
+                    float opacity = 0f;
+                    if (NPC.ai[1] < 75f)
+                        opacity = 0f;
+                    else if (NPC.ai[1] < 120f)
+                        opacity = LumUtils.InverseLerp(75f, 120f, NPC.ai[1]);
+                    else if (NPC.ai[1] < 140f)
+                        opacity = LumUtils.InverseLerp(140f, 120f, NPC.ai[1]);
+                    glowColor *= opacity;
+
+                    Main.EntitySpriteDraw(texture, NPC.Center + afterimageOffset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, glowColor, NPC.rotation, origin2, NPC.scale, effects, 0);
+                }
+                Main.spriteBatch.ResetToDefault();
+            }
+
+            Main.EntitySpriteDraw(texture, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, NPC.GetAlpha(drawColor), NPC.rotation, origin2, NPC.scale, effects, 0);
+            Main.EntitySpriteDraw(glowmask, NPC.Center - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, Color.White, NPC.rotation, origin2, NPC.scale, effects, 0);
             return false;
         }
     }

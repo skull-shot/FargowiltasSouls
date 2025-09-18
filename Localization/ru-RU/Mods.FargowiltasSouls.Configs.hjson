@@ -22,7 +22,7 @@ ClientConfig: {
 	}
 
 	RainbowHealThreshold: {
-		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Максимум здоровья для автоматического лечения"
+		Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Максимум здоровья для автоматического лечения (%)"
 		Tooltip: ""
 	}
 
@@ -189,4 +189,16 @@ SoulConfig: {
 		Label: "[i:FargowiltasSouls/TouhouStaff] [c/ffffff:{$Mods.FargowiltasSouls.Items.TouhouStaff.DisplayName}]"
 		Tooltip: ""
 	}
+
+	MultiplayerRespawnPrevention: {
+		Label: Возрождения в мультиплеере
+		Tooltip: Позволяет выбрать режим, в котором многократное возрождение при битвах с боссами в мультиплеере будет отключено.
+	}
+}
+
+RespawnPreventionSetting: {
+	Tooltip: ""
+	Eternity.Label: Вечность
+	Masochist.Label: Мазохист
+	Disabled.Label: Выключено
 }

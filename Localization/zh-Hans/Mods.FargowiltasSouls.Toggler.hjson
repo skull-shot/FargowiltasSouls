@@ -24,7 +24,7 @@ TitaniumEffect: 钛金 碎片
 EarthForceEffect: 简化大地之力
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
 CopperEffect: 铜 闪电
-// IronPassiveEffect: Iron Reforges
+IronPassiveEffect: 铁 改善重铸
 IronEffect: 铁 吸引掉落物
 LeadPoisonEffect: 铅 中毒
 SilverEffect: 银 护盾
@@ -160,7 +160,7 @@ IceQueenGraze: 擦弹
 UfoMinionEffect: 迷你飞碟召唤物
 ChalicePotionEffect: 药水增益
 MasoTrueEyeMinion: 克苏鲁真眼召唤物
-MutantArmorHeader: 真·突变体套装
+MutantArmorHeader: 永恒套装
 MasoAbom: 幽灵憎恶
 MasoRing: 幻影球召唤物
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"

@@ -50,6 +50,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public List<BaseEnchant> EquippedEnchants = [];
 
+        public bool HasEquippedSkill;
+
 
         public bool IsStandingStill;
         public float AttackSpeed;
@@ -119,6 +121,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
+            if (HasEquippedSkill) playerData.Add("HasEquippedSkill");
 
             tag.Add($"{Mod.Name}.{Player.name}.Data", playerData);
 
@@ -159,6 +162,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
+            HasEquippedSkill = playerData.Contains("HasEquippedSkill");
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
             disabledToggles = ToggleLoader.LoadedToggles.Keys.Where(x => disabledToggleNames.Contains(x.Name)).ToList();
@@ -514,6 +518,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Mash && MashCounter > 0)
                 MashCounter--;
             Mash = false;
+            GrabDamage = false;
 
             if (Player.grapCount <= 0)
                 Grappled = false;
@@ -613,6 +618,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             BeetleEnchantDefenseTimer = 0;
 
             Mash = false;
+            GrabDamage = false;
             WizardEnchantActive = false;
             MashCounter = 0;
 
@@ -692,6 +698,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Player.HasEffect<NinjaEffect>()
                 && item.IsWeapon()
                 && !ProjectileID.Sets.IsAWhip[item.shoot]
+                && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[item.shoot]
                 && item.shoot > ProjectileID.None
                 && item.shoot != ProjectileID.WireKite
                 && item.shoot != ModContent.ProjectileType<Retiglaive>())
@@ -700,6 +707,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (Player.velocity.Length() < maxSpeedRequired)
                 {
                     velocity *= 2f;
+                    knockback *= 2f;
                 }
             }
         }

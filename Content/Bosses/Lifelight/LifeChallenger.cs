@@ -2,6 +2,7 @@ using FargowiltasSouls.Assets.ExtraTextures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
@@ -1364,50 +1365,6 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 RuneFormation = Formations.Circle;
                 RuneFormationTimer = 0;
             }
-
-            /*
-            Vector2 RouletteTpPos = Player.Center + 500 * RandomAngle.ToRotationVector2();
-            TeleportX = RouletteTpPos.X; //exposing so proj can access
-            TeleportY = RouletteTpPos.Y;
-
-            if (AI_Timer == 1 && FargoSoulsUtil.HostCheck)
-            {
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), RouletteTpPos, Vector2.Zero, ModContent.ProjectileType<LifeTpTelegraph>(), 0, 0f, Main.myPlayer, -40, NPC.whoAmI);
-            }
-
-            if (AI_Timer == 40)
-            {
-                NPC.Center = RouletteTpPos;
-                SoundEngine.PlaySound(SoundID.Item8, NPC.Center); //PLACEHOLDER
-                LockVector1 = NPC.SafeDirectionTo(Player.Center);
-                TeleportY = 0;
-                NPC.netUpdate = true;
-            }
-            */
-
-            /*
-            if (AI_Timer > 40)
-            {
-                float angleDiff = MathHelper.WrapAngle(NPC.SafeDirectionTo(Player.Center).ToRotation() - LockVector1.ToRotation());
-                if (Math.Abs(angleDiff) > MathHelper.Pi / 3f)
-                {
-                    LockVector1 = NPC.SafeDirectionTo(Player.Center);
-                    NPC.netUpdate = true;
-                }
-            }
-
-            if (AI_Timer < 420 + 120 && AI_Timer % 9 == 0 && AI_Timer > 60 && FargoSoulsUtil.HostCheck)
-            {
-                const float speed = 20f;
-                Vector2 offset1 = LockVector1.RotatedBy(MathHelper.Pi / 3f) * speed;
-                Vector2 offset2 = LockVector1.RotatedBy(-MathHelper.Pi / 3f) * speed;
-
-                TeleportY++;
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, offset1, ModContent.ProjectileType<LifeProjSmall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, 0, 3);
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, offset2, ModContent.ProjectileType<LifeProjSmall>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, 0, 4);
-            }
-            */
-
             Vector2 desiredPos = Player.Center + Player.DirectionTo(NPC.Center) * 320;
             FlyingState(0.55f, false, desiredPos);
 
@@ -3091,19 +3048,28 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<LifelightBag>()));
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
+
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelightTrophy>(), 10));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<LifelightRelic>()));
-            npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<LifelightMasterPet>(), 4));
-
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<EnchantedLifeblade>(), ModContent.ItemType<Lightslinger>(), ModContent.ItemType<CrystallineCongregation>(), ModContent.ItemType<KamikazePixieStaff>()));
             rule.OnSuccess(ItemDropRule.Common(ItemID.HallowedFishingCrateHard, 1, 1, 5)); //divine crate
             rule.OnSuccess(ItemDropRule.Common(ItemID.SoulofLight, 1, 1, 3));
             rule.OnSuccess(ItemDropRule.Common(ItemID.PixieDust, 1, 15, 25));
 
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<LifelightBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<LifelightRelic>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<LifelightMasterPet>(), 4));
         }
         #endregion
         #region Help Methods

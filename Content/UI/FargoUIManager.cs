@@ -3,6 +3,7 @@ using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -194,6 +195,24 @@ namespace FargowiltasSouls.Content.UI
                     }, InterfaceScaleType.UI));
                 }
             }
+            
+            layers.Insert(0, new LegacyGameInterfaceLayer("Fargo: Title Links", delegate
+            {
+                if (!WorldGen.generatingWorld && !WorldGen.drunkWorldGen && Main.menuMode == 0)
+                {
+                    //Console.WriteLine("Hi");
+                    float upBump = 0;
+                    byte b = (byte)((255 + Main.tileColor.R * 2) / 3);
+                    Microsoft.Xna.Framework.Color color = new Microsoft.Xna.Framework.Color(b, b, b, 255);
+                    FargowiltasSouls.DrawTitleLinks(color, upBump);
+                    upBump += 32f;
+                    
+                }
+                return true;
+                  
+            }, InterfaceScaleType.None));
+             
+           
         }
     }
 }

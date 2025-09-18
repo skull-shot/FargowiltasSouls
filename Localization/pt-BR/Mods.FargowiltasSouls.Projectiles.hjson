@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: Mini Disco Voador
 NekomiAxe.DisplayName: Amor Cintilante
 NekomiDevi.DisplayName: Deviantt
 NekomiRitual.DisplayName: Ritual da Nekomi
-OpticFlame.DisplayName: Fogo dos Olhos
-OpticLaser.DisplayName: Laser da Morte
+// OpticFlamethrower.DisplayName: Cursed Flamethrower
+// OpticElectricOrb.DisplayName: Ichor Orb
 OpticRetinazer.DisplayName: Retinaser
 OpticSpazmatism.DisplayName: Spazmatismo
 PalmTreeSentry.DisplayName: Palmeira

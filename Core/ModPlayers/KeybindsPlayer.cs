@@ -46,12 +46,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[2] = 0;
                 Player.doubleTapCardinalTimer[3] = 0;
 
-                const int increment = 1;
+                float increment = 1;
+                increment += FramesSinceLastMash / 7f;
 
                 if (triggersSet.Up)
                 {
                     if (!MashPressed[0])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[0] = true;
                 }
                 else
@@ -60,7 +64,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Left)
                 {
                     if (!MashPressed[1])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[1] = true;
                 }
                 else
@@ -69,7 +76,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Right)
                 {
                     if (!MashPressed[2])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[2] = true;
                 }
                 else
@@ -78,11 +88,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Down)
                 {
                     if (!MashPressed[3])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[3] = true;
                 }
                 else
                     MashPressed[3] = false;
+                if (FramesSinceLastMash < 30)
+                    FramesSinceLastMash++;
             }
 
             if (PrecisionSeal)

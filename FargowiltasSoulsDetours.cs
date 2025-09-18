@@ -1,7 +1,10 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Masomode;
 using FargowiltasSouls.Content.PlayerDrawLayers;
+using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -22,6 +25,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls
 {
@@ -29,41 +33,71 @@ namespace FargowiltasSouls
     {
         private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
 
+        private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
+
+        private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
+
         public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
+
+        public delegate int Orig_StrikeNPC_HitInfo_bool_bool(NPC nPC, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction);
+
+        public delegate void Orig_PickAmmo(Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume);
 
         public void LoadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
+            On_Main.DrawMenu += DrawMenu;
+
             On_Player.CheckSpawn_Internal += LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff += AddBuff;
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName += AffixName;
-            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo += MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning += PreventGillsDrowning;
             On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot += InterruptShoot;
-            On_Main.DrawInterface_35_YouDied += DrawInterface_35_YouDied;
-            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
-            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
 
+            On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName += AffixName;
+
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY += AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy += TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
+
+            On_Projectile.Damage += PhantasmArrowRainFix;
         }
         public void UnloadDetours()
         {
+            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+            On_Main.DrawMenu -= DrawMenu;
+
             On_Player.CheckSpawn_Internal -= LifeRevitalizer_CheckSpawn_Internal;
             On_Player.AddBuff -= AddBuff;
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
-            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
-            On_Item.AffixName -= AffixName;
-            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
-            On_Main.MouseText_DrawItemTooltip_GetLinesInfo -= MouseText_DrawItemTooltip_GetLinesInfo;
+            On_Player.CheckDrowning -= PreventGillsDrowning;
+            On_Player.HorsemansBlade_SpawnPumpkin -= HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot -= InterruptShoot;
-            On_Main.DrawInterface_35_YouDied -= DrawInterface_35_YouDied;
+
+            On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
+
+            On_Item.AffixName -= AffixName;
+
+            On_NPC.AI_123_Deerclops_TryMakingSpike_FindBestY -= AI_123_Deerclops_TryMakingSpike_FindBestY;
+            On_NPCUtils.TargetClosestBetsy -= TargetClosestBetsy;
+
+            On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
+
+            On_Projectile.Damage -= PhantasmArrowRainFix;
         }
 
 
         void ICustomDetourProvider.ModifyMethods()
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
+            HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
+            HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -181,7 +215,7 @@ namespace FargowiltasSouls
         public static void HorsemansBlade_SpawnPumpkin(On_Player.orig_HorsemansBlade_SpawnPumpkin orig, Player self, int npcIndex, int dmg, float kb)
         {
             NPC npc = Main.npc[npcIndex];
-            if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode  && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
+            if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
                 return;
             orig(self, npcIndex, dmg, kb);
         }
@@ -221,11 +255,69 @@ namespace FargowiltasSouls
                 // draw our maso you can't respawn text
                 num += 60;
                 num2 = 0.5f;
-                string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn");
-                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text, 
-                    new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num), 
+                string mode = WorldSavingSystem.MasochistModeReal ? Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMode") : Language.GetTextValue("Mods.FargowiltasSouls.UI.EternityMode");
+                string text = Language.GetTextValue("Mods.FargowiltasSouls.UI.NoRespawn", mode);
+                DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.DeathText.Value, text,
+                    new Vector2((float)(Main.screenWidth / 2) - FontAssets.DeathText.Value.MeasureString(text).X * num2 / 2, (float)(Main.screenHeight / 2) + num),
                     Main.LocalPlayer.GetDeathAlpha(Microsoft.Xna.Framework.Color.Transparent), 0f, default, num2, SpriteEffects.None, 0f);
             }
+        }
+
+        private static void DrawMenu(On_Main.orig_DrawMenu orig, Main self, GameTime gameTime)
+        {
+            if (!WorldGen.generatingWorld)
+            {
+                float upBump = 0;
+                byte b = (byte)((255 + Main.tileColor.R * 2) / 3);
+                Mod mod = FargowiltasSouls.Instance;
+                Vector2 anchorPosition = new Vector2(18f, (float)(Main.screenHeight - 116 - 22) - upBump);
+                Microsoft.Xna.Framework.Color color = new Microsoft.Xna.Framework.Color(b, b, b, 255);
+                upBump += 32f;
+                if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
+                {
+                    FargowiltasSouls.DrawTitleLinks(color, upBump);
+                    upBump += 32f;
+                }
+                if (!WorldGen.drunkWorldGen)
+                {
+                    string text = mod.DisplayName + " " + mod.Version;
+                    Vector2 origin = FontAssets.MouseText.Value.MeasureString(text);
+                    origin.X *= 0.5f;
+                    origin.Y *= 0.5f;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Microsoft.Xna.Framework.Color color2 = Microsoft.Xna.Framework.Color.Black;
+                        if (i == 4)
+                        {
+                            color2 = color;
+                            color2.R = (byte)((255 + color2.R) / 2);
+                            color2.G = (byte)((255 + color2.R) / 2);
+                            color2.B = (byte)((255 + color2.R) / 2);
+                        }
+                        color2.A = (byte)((float)(int)color2.A * 0.3f);
+                        int num = 0;
+                        int num2 = 0;
+                        if (i == 0)
+                        {
+                            num = -2;
+                        }
+                        if (i == 1)
+                        {
+                            num = 2;
+                        }
+                        if (i == 2)
+                        {
+                            num2 = -2;
+                        }
+                        if (i == 3)
+                        {
+                            num2 = 2;
+                        }
+                        DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, text, new Vector2(origin.X + (float)num + 10f, (float)Main.screenHeight - origin.Y + (float)num2 - (Main.menuMode == 0 ? 85f : 25f) - upBump), color2, 0f, origin, 1f, SpriteEffects.None, 0f);
+                    }
+                }
+            }
+            orig(self, gameTime);
         }
         public static void CombinedHooks_ModifyHitNPCWithProj(Orig_CombinedHooks_ModifyHitNPCWithProj orig, Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers)
         {
@@ -322,6 +414,71 @@ namespace FargowiltasSouls
                 num++;
             }
             return num;
+        }
+
+        private static void PreventGillsDrowning(On_Player.orig_CheckDrowning orig, Player player)
+        {
+            bool hadGills = false;
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld && player.HasEffect<ChalicePotionEffect>())
+            {
+                hadGills = player.gills;
+                player.gills = false;
+            }
+            orig(player);
+            if (WorldSavingSystem.EternityMode && Main.getGoodWorld && player.HasEffect<ChalicePotionEffect>())
+            {
+                player.gills = hadGills;
+            }
+        }
+
+        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
+        { // this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
+            int phantasmTime = -1;
+            var player = Main.player[self.owner];
+            bool phantasmAverted = false;
+            if (self is not null && self.owner == Main.myPlayer)
+            {
+                phantasmTime = player.phantasmTime;
+                var globalProj = self.FargoSouls();
+                if (phantasmTime > 0 && globalProj.ArrowRain)
+                {
+                    phantasmAverted = true;
+                    player.phantasmTime = 0;
+                }
+            }
+            orig(self);
+            if (phantasmAverted)
+                player.phantasmTime = phantasmTime;
+        }
+        public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
+        { // sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
+            if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
+            {
+                if (FargoSoulsGlobalProjectile.globalProjectileField.CritChance - FargoSoulsGlobalProjectile.ninjaCritIncrease < 0)
+                    FargoSoulsGlobalProjectile.globalProjectileField.CritChance = 0;
+                else FargoSoulsGlobalProjectile.globalProjectileField.CritChance -= FargoSoulsGlobalProjectile.ninjaCritIncrease;
+                // reset these
+                FargoSoulsGlobalProjectile.globalProjectileField = null;
+            }
+            return orig(self, hit, fromNet, noPlayerInteraction);
+        }
+        internal void NerfCoinGun(Orig_PickAmmo orig, Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume)
+        {
+            orig(self, sItem, ref projToShoot, ref speed, ref canShoot, ref totalDamage, ref KnockBack, out usedAmmoItemId, dontConsume);
+            if (self is not null)
+            {
+                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
+                {
+                    if (projToShoot == ProjectileID.CopperCoin)
+                        totalDamage = (int)(totalDamage * 1.6f);
+                    else if (projToShoot == ProjectileID.SilverCoin)
+                        totalDamage = (int)(totalDamage * 0.9f);
+                    else if (projToShoot == ProjectileID.GoldCoin)
+                        totalDamage = (int)(totalDamage * 0.47f);
+                    else if (projToShoot == ProjectileID.PlatinumCoin)
+                        totalDamage = (int)(totalDamage * 0.275f);
+                }
+            }
         }
     }
 }

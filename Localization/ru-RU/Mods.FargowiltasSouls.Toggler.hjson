@@ -23,9 +23,9 @@ PalladiumEffect: Палладиевые сферы
 TitaniumEffect: Титановые осколки
 EarthForceEffect: Сжатый артефакт Земли
 TerraHeader: "{$Mods.FargowiltasSouls.Items.TerraForce.DisplayName}"
-CopperEffect: Медная молния
-// IronPassiveEffect: Iron Reforges
-IronEffect: Железный магнит
+CopperEffect: Молния меди
+IronPassiveEffect: Перековки железа
+IronEffect: Магнит железа
 LeadPoisonEffect: Свинцовое отравление
 SilverEffect: Парирование серебра
 TinEffect: Криты олова
@@ -160,7 +160,7 @@ IceQueenGraze: Грэйз
 UfoMinionEffect: Прислужник тарелка
 ChalicePotionEffect: Бесплатные баффы зелий
 MasoTrueEyeMinion: Истинные глаза-миньоны
-MutantArmorHeader: Истинная броня Мутанта
+MutantArmorHeader: Вечная броня
 MasoAbom: Прислужник Выродокк
 MasoRing: Фантазматическое кольцо
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"

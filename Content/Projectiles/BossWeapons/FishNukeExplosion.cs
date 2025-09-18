@@ -28,15 +28,17 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
             Projectile.width = 400;
             Projectile.height = 400;
             Projectile.aiStyle = -1;
-            Projectile.friendly = true;
+            Projectile.friendly = false; // explosion damage is temporarily disabled until I figure out what to do with this -Habble
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 20;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
-            Projectile.scale = 0;
+            Projectile.scale = 1f;
             Projectile.Opacity = 1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 20;
         }
 
         public override void AI()
@@ -54,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 Projectile.localAI[0] = 1;
 
                 //SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                for (int i = 0; i < 10; i++)
+                /*for (int i = 0; i < 10; i++)
                 {
                     int dust = Dust.NewDust(Projectile.position, Projectile.width,
                         Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 3f);
@@ -69,7 +71,7 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                     dust = Dust.NewDust(Projectile.position, Projectile.width,
                         Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
                     Main.dust[dust].velocity *= 3f;
-                }
+                }*/
             }
         }
 
@@ -84,16 +86,16 @@ namespace FargowiltasSouls.Content.Projectiles.BossWeapons
                 damage = 0;
                 modifiers.DisableCrit();
             }
-        }*/
+        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            //target.immune[Projectile.owner] = 0;
-            /*target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
+            target.immune[Projectile.owner] = 0;
+            target.AddBuff(ModContent.BuffType<OceanicMaul>(), 900);
             target.AddBuff(ModContent.BuffType<MutantNibble>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);*/
+            target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 900);
             target.AddBuff(BuffID.Frostburn, 300);
-        }
+        }*/
 
         public override bool PreDraw(ref Color lightColor)
         {

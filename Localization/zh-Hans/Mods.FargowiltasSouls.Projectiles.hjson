@@ -20,8 +20,8 @@ AbomSickle3.DisplayName: 憎恶镰刀
 AbomSickleSplit1.DisplayName: 憎恶镰刀
 AbomSickleSplit2.DisplayName: 憎恶镰刀
 AbomStyxGazer.DisplayName: 冥河凝视
-AbomSword.DisplayName: 冥河凝视之刃
-AbomSwordHandle.DisplayName: 冥河凝视之刃
+AbomSword.DisplayName: 莱瓦汀
+AbomSwordHandle.DisplayName: 莱瓦汀
 FargoArrowProj.DisplayName: 混合之箭
 FargoBulletProj.DisplayName: 混合子弹
 BigSting22.DisplayName: 大螯刺工蜂
@@ -400,8 +400,8 @@ MiniSaucer.DisplayName: 迷你飞碟
 NekomiAxe.DisplayName: 闪闪发光的爱
 NekomiDevi.DisplayName: 戴薇安
 NekomiRitual.DisplayName: 猫猫睡衣仪式
-OpticFlame.DisplayName: 魔眼烈火
-OpticLaser.DisplayName: 死亡激光
+OpticFlamethrower.DisplayName: 咒焰喷火器
+OpticElectricOrb.DisplayName: 灵液闪电球
 OpticRetinazer.DisplayName: 激光眼
 OpticSpazmatism.DisplayName: 魔焰眼
 PalmTreeSentry.DisplayName: 棕榈树
@@ -784,3 +784,5 @@ MystiaNote.DisplayName: 米斯蒂娅音符
 MystiaNote2.DisplayName: 米斯蒂娅音符2
 RumiaOrb.DisplayName: 露米娅球
 EmpressRitual.DisplayName: 女皇结界
+WillDashTrail.DisplayName: 意志冲刺轨迹
+NatureExplosionTelegraph.DisplayName: 自然爆炸预警

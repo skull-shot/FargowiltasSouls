@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Masomode;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Retinazer");
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
@@ -23,26 +25,27 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
 
         public override void SetDefaults()
         {
-            Projectile.width = 100;
-            Projectile.height = 100;
+            Projectile.width = 75;
+            Projectile.height = 75;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.minion = true;
-            Projectile.minionSlots = 1.5f;
+            Projectile.minionSlots = 1f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.netImportant = true;
-            Projectile.scale = .5f;
+            Projectile.scale = 1f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
         }
 
         private bool spawn;
+        public override bool? CanHitNPC(NPC target) => false;
 
         public override void AI()
         {
@@ -67,20 +70,21 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
                 {
                     Projectile.position += npc.velocity / 4f;
 
-                    Vector2 target = npc.Center + npc.velocity * Projectile.ai[1];
+                    Vector2 target = npc.Center + npc.velocity;
                     Vector2 targetPos = target + Projectile.DirectionFrom(target) * 300;
                     if (Projectile.Distance(targetPos) > 50)
                         Movement(targetPos, 0.5f);
                     Projectile.rotation = Projectile.SafeDirectionTo(target).ToRotation() - (float)Math.PI / 2;
 
-                    if (++Projectile.localAI[0] > 15)
+                    if (++Projectile.localAI[0] > 60)
                     {
                         Projectile.localAI[0] = 0;
                         if (Projectile.owner == Main.myPlayer)
                         {
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center,
-                                Projectile.SafeDirectionTo(target) * 12, ModContent.ProjectileType<OpticLaser>(),
-                                Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.SafeDirectionTo(target) * 12, ModContent.ProjectileType<OpticElectricOrb>(),
+                                (int)(Projectile.damage * 1.5), Projectile.knockBack, Projectile.owner, ai2: MechElectricOrb.Yellow);
+                            Projectile.velocity -= Projectile.SafeDirectionTo(npc.Center) * 8f;
                             Projectile.ai[1] = Main.rand.NextFloat(10, 30);
                             Projectile.netUpdate = true;
                         }
@@ -118,11 +122,9 @@ namespace FargowiltasSouls.Content.Projectiles.Minions
             if (++Projectile.frameCounter > 4)
             {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= 6)
-                    Projectile.frame = 3;
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
             }
-            if (Projectile.frame < 3)
-                Projectile.frame = 3;
 
             const float IdleAccel = 0.05f;
             int otherMinion = ModContent.ProjectileType<OpticSpazmatism>();
