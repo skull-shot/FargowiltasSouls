@@ -6,6 +6,7 @@ using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.Rarities;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -26,6 +27,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Eternal
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 4));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

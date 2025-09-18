@@ -11,6 +11,8 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
     public class EnchantedLifeblade : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
+
+        public override int NumFrames => 5;
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
