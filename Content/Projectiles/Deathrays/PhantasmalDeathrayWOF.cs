@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
     public class PhantasmalDeathrayWOF : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
-        public PhantasmalDeathrayWOF(int time = -1) : base(time == -1 ? (WorldSavingSystem.SwarmActive ? 45 : 90) : time) { }
+        public PhantasmalDeathrayWOF() : base(WorldSavingSystem.SwarmActive ? 45 : 90) { }
 
         public override void SetStaticDefaults()
         {
