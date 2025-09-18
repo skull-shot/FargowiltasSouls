@@ -218,3 +218,6 @@ made mutant bg filter marginally slower and less visible
 adjusted numbers on rof
 fixed stuff with rof near world ceiling
 fixed eri rays disappearing
+
+fixed wof rays being broken
+fixed mutant not having a swirly tell on spear spins
