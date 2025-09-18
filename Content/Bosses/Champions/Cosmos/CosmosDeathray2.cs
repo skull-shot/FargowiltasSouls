@@ -4,7 +4,9 @@ using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -13,7 +15,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 {
-    public class CosmosDeathray2 : BaseDeathray
+    public class CosmosDeathray2 : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "ShadowDeathray");
         public CosmosDeathray2() : base(180, drawDistance: 3600) { }
@@ -94,6 +96,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             float amount = 0.5f;
             Projectile.localAI[1] = MathHelper.Lerp(Projectile.localAI[1], num807, amount);
             Vector2 vector79 = Projectile.Center + Projectile.velocity * (Projectile.localAI[1] - 14f);
+
+            /*
             for (int num809 = 0; num809 < 2; num809 = num3 + 1)
             {
                 float num810 = Projectile.velocity.ToRotation() + (Main.rand.NextBool(2) ? -1f : 1f) * 1.57079637f;
@@ -112,17 +116,20 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 dust.velocity *= 0.5f;
                 Main.dust[num813].velocity.Y = -Math.Abs(Main.dust[num813].velocity.Y);
             }
+            */
             //DelegateMethods.v3_1 = new Vector3(0.3f, 0.65f, 0.7f);
             //Utils.PlotTileLine(Projectile.Center, Projectile.Center + Projectile.velocity * Projectile.localAI[1], (float)Projectile.width * Projectile.scale, new Utils.PerLinePoint(DelegateMethods.CastLight));
 
             Projectile.position -= Projectile.velocity;
 
+            /*
             for (int i = 0; i < 40; i++)
             {
                 int d = Dust.NewDust(Projectile.position + Projectile.velocity * Main.rand.NextFloat(6000), Projectile.width, Projectile.height, DustID.Vortex, 0f, 0f, 0, default, 1.5f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 6f;
             }
+            */
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -139,6 +146,41 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
             target.velocity.X = target.Center.X < Projectile.Center.X ? -15f : 15f;
             target.velocity.Y = -10f;
+        }
+
+        public override bool PreDraw(ref Color lightColor) => false;
+
+        public float WidthFunction(float trailInterpolant) => Projectile.width * Projectile.scale / 2;
+
+        public static Color ColorFunction(float trailInterpolant)
+        {
+            Color color = Color.DarkMagenta;
+            color.A = 100;
+            return color;
+        }
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            if (Projectile.hide)
+                return;
+
+            Main.spriteBatch.UseBlendState(BlendState.AlphaBlend);
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.EridanusDeathray");
+
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.1f;
+
+            Vector2 initialDrawPoint = Projectile.Center;
+            Vector2[] baseDrawPoints = new Vector2[8];
+            for (int i = 0; i < baseDrawPoints.Length; i++)
+                baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
+
+            FargoSoulsUtil.SetTexture1(FargoAssets.CracksNoise.Value);
+
+            shader.TrySetParameter("laserDirection", Projectile.velocity.SafeNormalize(Vector2.UnitY));
+
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 25);
+
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }

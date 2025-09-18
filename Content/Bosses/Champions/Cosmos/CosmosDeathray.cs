@@ -2,7 +2,9 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 {
-    public class CosmosDeathray : BaseDeathray
+    public class CosmosDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "ShadowDeathray");
         public CosmosDeathray() : base(20, drawDistance: 3600) { }
@@ -154,6 +156,46 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
             hasHit = true;
+        }
+
+        public override bool PreDraw(ref Color lightColor) => false;
+
+        public float WidthFunction(float trailInterpolant)
+        {
+            float scale = 1f;
+            return scale * Projectile.width * Projectile.scale / 2;
+        }
+        
+
+        public static Color ColorFunction(float trailInterpolant)
+        {
+            Color color = Color.DarkMagenta;
+            color.A = 100;
+            return color;
+        }
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            if (Projectile.hide)
+                return;
+
+            Main.spriteBatch.UseBlendState(BlendState.AlphaBlend);
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.EridanusDeathray");
+
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.1f;
+
+            Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity.SafeNormalize(Vector2.UnitY) * 100;
+            Vector2[] baseDrawPoints = new Vector2[8];
+            for (int i = 0; i < baseDrawPoints.Length; i++)
+                baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
+
+            FargoSoulsUtil.SetTexture1(FargoAssets.CracksNoise.Value);
+
+            shader.TrySetParameter("laserDirection", Projectile.velocity.SafeNormalize(Vector2.UnitY));
+
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 25);
+
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }
