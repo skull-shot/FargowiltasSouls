@@ -72,7 +72,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             int cooldown = FargoSoulsPlayer.ShieldCooldown(player);
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown);
+            {
+                if (player.HasEffect<PumpkingsCapeEffect>())
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "PumpkingsCape").Value, Color.Lerp(Color.LightGoldenrodYellow, Color.OrangeRed, 0.5f), () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown, activeFunction: () => player.HasEffect<PumpkingsCapeEffect>());
+                else if (player.HasEffect<DreadShellEffect>())
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "DreadShell").Value, Color.DarkRed, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown, activeFunction: () => player.HasEffect<DreadShellEffect>());
+                else CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => (float)Main.LocalPlayer.FargoSouls().shieldCD / cooldown, activeFunction: () => player.HasEffect<SilverEffect>());
+            }
         }
     }
 }
