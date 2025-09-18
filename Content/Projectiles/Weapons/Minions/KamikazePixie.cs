@@ -1,7 +1,8 @@
+using System;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Core.ModPlayers;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -106,7 +107,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 }
                 else
                 {
-                    FlyToward(player.position);
+                    FlyToward(player.position + new Vector2(0, -16));
                 }
                 #endregion
             }
@@ -147,7 +148,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 #endregion
             }
 
-            Projectile.timeLeft = 2;
+            if (player.dead) player.FargoSouls().PixieMinion = false;
+            if (player.FargoSouls().PixieMinion) Projectile.timeLeft = 2;
 
             if (player.whoAmI == Main.myPlayer && (!player.active || player.dead || player.ghost))
             {

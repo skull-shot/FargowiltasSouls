@@ -299,6 +299,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             BrainMinion = false;
             EaterMinion = false;
+            PixieMinion = false;
             BigBrainMinion = false;
             DukeFishron = false;
 

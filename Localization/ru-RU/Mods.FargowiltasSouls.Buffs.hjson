@@ -737,3 +737,8 @@ VortexStealthCDBuff: {
 	DisplayName: Перезарядка скрытности вихря
 	Description: Вы пока не можете войти в режим скрытности
 }
+
+ExpixiveBuff: {
+	// DisplayName: Expixive Buff
+	// Description: Mods.FargowiltasSouls.Buffs.ExpixiveBuff.Description
+}

@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories
                 SoundEngine.PlaySound(FargosSoundRegistry.DeviWyvernOrbImpact, Projectile.Center);
             Projectile.scale = 0f;
             for (int i = 0; i < Timer; i++)
-                Projectile.scale = MathHelper.Lerp(Projectile.scale, 3f, 0.05f);
+                Projectile.scale = MathHelper.Lerp(Projectile.scale, 3f, (float)Math.Pow(0.05f, 0.66f));
             Projectile.Opacity = Math.Min(1f, 1.25f * (float)Math.Sin(MathHelper.Pi / maxtime * Timer));
             //Projectile.Opacity *= 0.8f;
         }
