@@ -29,7 +29,6 @@ using Terraria.Audio;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -661,15 +660,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.statLife = Player.statLifeMax2;
                 Player.HealEffect(heal);
 
-                int buffDuration = heal * 60 / 8;
-                Player.AddBuff(BuffID.RapidHealing, buffDuration);
-
                 for (int i = 0; i < 16; i++)
                 {
                     Color color = Color.OrangeRed;
                     if (i % 2 == 0)
                         color = new Color(30, 0, 60);
-                    Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
+                    Particle s = new SparkParticle(Player.Center, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
                     s.Spawn();
                 }
 
@@ -779,8 +775,18 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ParryDebuffImmuneTime = invul;
                 shieldCD = invul + extrashieldCD;
 
-                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray,
-                    () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => Player.HasEffect<SilverEffect>() || Player.HasEffect<DreadShellEffect>() || Player.HasEffect<PumpkingsCapeEffect>());
+                if (pumpkingEffect)
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "PumpkingsCape").Value, new Color(30, 0, 60), () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => pumpkingEffect);
+                }
+                else if (dreadEffect)
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "DreadShell").Value, Color.DarkRed, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => dreadEffect);
+                }
+                else
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => silverEffect);
+                }
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs
                 {

@@ -32,7 +32,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 50));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
