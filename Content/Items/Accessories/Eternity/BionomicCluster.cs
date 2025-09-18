@@ -116,11 +116,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(0, 6);
             Item.defense = 3;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
 
         public override void UpdateInventory(Player player) { return; }//PassiveEffect(player, Item);

@@ -48,6 +48,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
             return base.GetAlpha(lightColor);
         }
 
+        public override bool? CanCutTiles() => false;
+
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             if (BounceCount < 1 || oldVelocity.Y > 10)
