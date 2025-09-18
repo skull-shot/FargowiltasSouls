@@ -1,6 +1,6 @@
-Conditions (used in recipes, NPC shop, etc)
+// Conditions (used in recipes, NPC shop, etc)
 RoombaPetSold: Quando a configuração da Roomba está ligada
-ItemDropRuleConditions (used in NPC loot, etc)
+// ItemDropRuleConditions (used in NPC loot, etc)
 DownedEvilBoss: Após um chefe maligno ser derrotado
 EMode: "[i:FargowiltasSouls/Masochist] Taxa de queda no Modo Eternidade"
 EModeEarlyBirdHM: "[i:FargowiltasSouls/Masochist] Taxa de queda no Modo Eternidade no Modo díficil"

@@ -183,7 +183,7 @@ TimberAcorn.DisplayName: Bolota
 TimberHook.DisplayName: Gancho do Esquilo
 TimberHook2.DisplayName: Gancho do Esquilo
 TimberJumpMark.DisplayName: Explosão de Madeira
-imberLaser.DisplayName: Laser
+// TimberLaser.DisplayName: Laser
 TimberLightningOrb.DisplayName: Esfera Relâmpago
 TimberPalmTree.DisplayName: Palmeira
 TimberSnowball.DisplayName: Bola de Neve
@@ -598,7 +598,7 @@ AbomBossProjectile.DisplayName: Abominationn
 BaronMine.DisplayName: Mina do Banished Baron
 BaronNuke.DisplayName: Torpedo Nuclear da Morte e Destruição do Banished Baron
 BaronRocket.DisplayName: Foguete do Banished Baron
-BaronScrap.DisplayName: Sucata do Banished Baron 
+BaronScrap.DisplayName: Sucata do Banished Baron
 BaronShrapnel.DisplayName: lâminas de mina do Banished Baron
 ShadowOrbProjectile.DisplayName: Orbe sombrio
 WillDeathrayBig.DisplayName: Raio da morte da Vontade
@@ -687,12 +687,12 @@ MagmawHand.DisplayName: Mão do Magmaw
 PungentEyeballMinion.DisplayName: Lacaio do olho pungente
 MinosPrime.DisplayName: Minos Prime
 RainLightning.DisplayName: Relâmpago
-PlanteraTooth.DisplayName: Dente da Plantera 
+PlanteraTooth.DisplayName: Dente da Plantera
 PlanteraRitual.DisplayName: Ritual da Plantera
-PlanteraManEater.DisplayName: Comedor de Homens Plantera 
-PlanteraSnatcher.DisplayName: Pegador da Plantera 
-PlanteraTrapper.DisplayName: Caçador da Plantera 
-PlanteraMushroomThing.DisplayName: Coisa de Cogumelo da Plantera 
+PlanteraManEater.DisplayName: Comedor de Homens Plantera
+PlanteraSnatcher.DisplayName: Pegador da Plantera
+PlanteraTrapper.DisplayName: Caçador da Plantera
+PlanteraMushroomThing.DisplayName: Coisa de Cogumelo da Plantera
 RainExplosion.DisplayName: Explosão de chuva
 CoffinSlamShockwave.DisplayName: Onde de choque
 CoffinWaveShot.DisplayName: Tiro de Chama das sombras
@@ -706,17 +706,17 @@ RazorBlade.DisplayName: Serra
 MutantShadowHand.DisplayName: Mão Sombria do Mutant
 TwentyTwo.DisplayName: VINTE E DOIS
 MutantSlimeSpike.DisplayName: Espinho de Geleia do Mutant
-MutantSansBeam.DisplayName: Raio do SANS do Mutant 
-MutantSansHead.DisplayName: Cabeça do SANS do Mutant 
+MutantSansBeam.DisplayName: Raio do SANS do Mutant
+MutantSansHead.DisplayName: Cabeça do SANS do Mutant
 MoonBowHeld.DisplayName: Arco Lunar Carregado
 MoonBowPortal.DisplayName: Portal do Arco Lunar
 FlightBall.DisplayName: Bola de Voo
 AbomPhoenix.DisplayName: Fênix Fantasma
 FrostShardFriendly.DisplayName: Fragmento de gelo amigável
-HentaiSword.DisplayName: Espada do Mutant 
-HentaiSwordBlast.DisplayName: Explosão da Espada do Mutant 
+HentaiSword.DisplayName: Espada do Mutant
+HentaiSwordBlast.DisplayName: Explosão da Espada do Mutant
 HentaiSphereOkuu.DisplayName: Esfera de Okku do Mutant
-AbomRitualFTW.DisplayName: Ritual do Abominationn 
+AbomRitualFTW.DisplayName: Ritual do Abominationn
 FallingSandstone.DisplayName: Pedra de Areia Caindo
 CoffinPlayerSoul.DisplayName: Sua Alma
 GildedSceptreProj.DisplayName: Tiro do Cetro de Chama das Sombras
@@ -756,7 +756,7 @@ EbonwoodAuraProj.DisplayName: Aura de madeira do Ébano
 ShadewoodAuraProj.DisplayName: Aura da madeira sombria
 MeteorExplosion.DisplayName: Explosão de meteoro
 SlimeSlingingSlasherProj.DisplayName: Cortador lançador de geleia
-PlanteraSpikevine.DisplayName: Vinha Espinho da Plantera 
+PlanteraSpikevine.DisplayName: Vinha Espinho da Plantera
 ElectricWhipProj.DisplayName: Laço Voltaíco
 ElectricWhipLightning.DisplayName: Relâmpago do laço voltaíco
 TheDestroyerProj.DisplayName: O destruidor
@@ -775,12 +775,14 @@ TungstenShockwave.DisplayName: Onda de choque de tungstênio
 CirnoIceCube.DisplayName: Cubo de Gelo da Cirno
 CirnoMinion.DisplayName: Lacaio da Cirno
 DaiyouseiMinion.DisplayName: Lacaio Daiyousei
-MystiaMinion.DisplayName: Lacaio Mystia 
-RumiaMinion.DisplayName: Lacaio Rumia 
-WriggleMinion.DisplayName: Lacaio Wriggle 
-CirnoIceChunk.DisplayName: Pedaço de gelo da Cirno 
+MystiaMinion.DisplayName: Lacaio Mystia
+RumiaMinion.DisplayName: Lacaio Rumia
+WriggleMinion.DisplayName: Lacaio Wriggle
+CirnoIceChunk.DisplayName: Pedaço de gelo da Cirno
 DaiyoLeaf.DisplayName: Folha da Daiyo
 MystiaNote.DisplayName: Nota da Mystia
 MystiaNote2.DisplayName: Nota da Mystia 2
-RumiaOrb.DisplayName: Orbe da Rumia 
+RumiaOrb.DisplayName: Orbe da Rumia
 EmpressRitual.DisplayName: Ritual da Imperatriz
+// WillDashTrail.DisplayName: Dash Trail
+// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
