@@ -1210,7 +1210,7 @@ HeartoftheMasochist: {
 	Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
@@ -1261,7 +1261,7 @@ MutantAntibodies: {
 	DisplayName: Mutant Antibodies
 	Tooltip:
 		'''
-		Grants immunity to Wet, Feral Bite, Oceanic Maul, and debuffs caused by entering water
+		Grants immunity to Oceanic Maul and debuffs caused by entering water
 		Increases damage for your current weapon class by 20%, but decreases life regeneration
 		Submerging in water refreshes flight time and gives you improved speed and increased max flight time
 		Grants effects of Wet debuff while riding Cute Fishron

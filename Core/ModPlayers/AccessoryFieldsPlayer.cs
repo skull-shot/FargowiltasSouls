@@ -30,6 +30,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         //        //minions
         public bool BrainMinion;
         public bool EaterMinion;
+        public bool PixieMinion;
         public bool BigBrainMinion;
         public bool DukeFishron;
 

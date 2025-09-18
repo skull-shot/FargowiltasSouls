@@ -27,15 +27,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[BuffID.Wet] = true;
-            player.buffImmune[BuffID.Rabies] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             player.FargoSouls().MutantAntibodies = true;
 
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
             player.GetDamage(damageClass) += 0.2f;
 
-            player.rabid = true;
+            player.rabid = true; // ~0.75x life regen
             if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
                 player.dripping = true;
         }

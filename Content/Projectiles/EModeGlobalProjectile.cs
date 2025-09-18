@@ -809,8 +809,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
-                    if (SourceItemType == ItemID.SolarEruption && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
-                        projectile.DamageType = DamageClass.Melee;
+                    if (SourceItemType == ItemID.SolarEruption /*&& EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType)*/)
+                        projectile.DamageType = DamageClass.Melee; // removing check here so buff can be disabled in dlc while keeping fix, unsure how else to work with current hasemodechange implementation
                     break;
                 case ProjectileID.DaybreakExplosion:
                     if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))

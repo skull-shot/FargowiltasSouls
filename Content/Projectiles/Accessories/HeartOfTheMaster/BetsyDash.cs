@@ -55,9 +55,12 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
                 return;
             }
 
-            if (++Projectile.frameCounter > 4)
+            if (++Projectile.frameCounter > 2)
+            {
+                Projectile.frameCounter = 0;
                 if (++Projectile.frame >= Main.projFrames[Type])
                     Projectile.frame = 0;
+            }
 
             player.FargoSouls().BetsyDashing = true;
 
