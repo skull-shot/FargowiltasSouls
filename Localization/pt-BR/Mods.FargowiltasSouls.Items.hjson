@@ -1748,10 +1748,10 @@ EternitySoul: {
 
 	Extra: {
 		Additional: Também Oferece:
-		Additional effects are automatically pulled from material tooltips
-		Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
+		// Additional effects are automatically pulled from material tooltips
+		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		StartsWithFilter: "'"
-		Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
+		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		ContainsFilter: Following effects|Grants togglable
 		Flavor: "'Mortal ou Imortal, Todas as coisas reconhecem a sua reivindicação à Divindade.'"
 	}
@@ -2197,10 +2197,10 @@ EternalEnergy: {
 		'A prova de ter aceitado a Eternidade'
 		'''
 }
-  
-PhantasmalEnergy: {
-	DisplayName: Eixo Quebrado
-	Tooltip: ""
+
+BrokenSpearHead: {
+	// DisplayName: Broken Spearhead
+	// Tooltip: ""
 }
 
 EternityAdvisor: {
@@ -2238,7 +2238,7 @@ UniversalCollapse: {
 	Tooltip: DESTRÓI O UNIVERSO
 }
 
-AcornConstruct: { 
+AcornConstruct: {
 	DisplayName: Construção de Bolota
 	Tooltip: Passeie no Esquilo
 }
@@ -2390,12 +2390,12 @@ HokeyBall: {
 }
 
 AbomRelic: {
-	DisplayName: Relíquia do Abominationn 
+	DisplayName: Relíquia do Abominationn
 	Tooltip: ""
 }
 
 DeviRelic: {
-	DisplayName: Relíquia da Deviantt 
+	DisplayName: Relíquia da Deviantt
 	Tooltip: ""
 }
 
@@ -2405,7 +2405,7 @@ EarthChampionRelic: {
 }
 
 EridanusRelic: {
-	DisplayName: Relíquia do Eridanus 
+	DisplayName: Relíquia do Eridanus
 	Tooltip: ""
 }
 
@@ -2430,7 +2430,7 @@ ShadowChampionRelic: {
 }
 
 SpiritChampionRelic: {
-	DisplayName: Relíquia do Campeão do Espírito 
+	DisplayName: Relíquia do Campeão do Espírito
 	Tooltip: ""
 }
 
@@ -2511,7 +2511,7 @@ AbominationnVoodooDoll: {
 		Invoca o Abominationn para sua cidade
 		'Você é uma pessoa terrível'
 		'''
-	the custom spawn message is unused
+	// the custom spawn message is unused
 	Summon: Mutant has been enraged by the death of his brother!
 	Fail: O boneco volta para suas mãos, talvez ele não deva ser usado no subterrâneo...
 }
@@ -2987,14 +2987,14 @@ Masochist: {
 		Habilita o Modo Masoquista se o mundo estiver nas dificuldades Mestre ou acima
 		Características do Modo Eternidade incluem:
 
-	        -Retrabalha chefes e inimigos, os tornando mais poderosos
-	        -Habilita itens do Modo Mestre
-	        -Novos itens exclusivos ao Modo Eternidade
-	        -Deviantt providencia um kit de iniciante e dicas baseadas em sua progressão
-	        -Melhora as estatistícas básicas e limita a redução de danos do jogador para 75%
-	        -Efeitos negativos acabam mais rapidamente quando você não ataca, efeitos negativos não podem te matar exceto no Modo Masoquista 
-	        -Muda a funcionalidade e a força de certos itens
-                -No Masoquista multiplayer, cada jogador pode reviver apenas uma vez por luta
+		       -Retrabalha chefes e inimigos, os tornando mais poderosos
+		       -Habilita itens do Modo Mestre
+		       -Novos itens exclusivos ao Modo Eternidade
+		       -Deviantt providencia um kit de iniciante e dicas baseadas em sua progressão
+		       -Melhora as estatistícas básicas e limita a redução de danos do jogador para 75%
+		       -Efeitos negativos acabam mais rapidamente quando você não ataca, efeitos negativos não podem te matar exceto no Modo Masoquista 
+		       -Muda a funcionalidade e a força de certos itens
+		              -No Masoquista multiplayer, cada jogador pode reviver apenas uma vez por luta
 
 		Não pode ser usado enquanto um chefe está vivo
 		[i:1612][c/00ff00:Recomendado usar a exibição de efeitos negativos do Fargo's Mutant Mod (nas configurações)]
@@ -3609,12 +3609,12 @@ CursedCoffinBag: {
 }
 
 CursedCoffinRelic: {
-	DisplayName: Relíquia do Cursed Coffin 
+	DisplayName: Relíquia do Cursed Coffin
 	Tooltip: ""
 }
 
 CursedCoffinTrophy: {
-	DisplayName: Troféu do Cursed Coffin 
+	DisplayName: Troféu do Cursed Coffin
 	Tooltip: ""
 }
 
@@ -3720,12 +3720,12 @@ MainMenuMusicBox: {
 }
 
 BaronMask: {
-	DisplayName: Máscara do Banished Baron 
+	DisplayName: Máscara do Banished Baron
 	Tooltip: ""
 }
 
 CoffinMask: {
-	DisplayName: Máscara do Cursed Coffin 
+	DisplayName: Máscara do Cursed Coffin
 	Tooltip: ""
 }
 
@@ -3735,12 +3735,12 @@ DeathMask: {
 }
 
 EarthMask: {
-	DisplayName: Máscara do Campeão da Terra 
+	DisplayName: Máscara do Campeão da Terra
 	Tooltip: ""
 }
 
 LifelightMask: {
-	DisplayName: Máscara da Lifelight 
+	DisplayName: Máscara da Lifelight
 	Tooltip: ""
 }
 
@@ -3760,7 +3760,7 @@ SpiritMask: {
 }
 
 TerraMask: {
-	DisplayName: Máscara do Campeão do Solo 
+	DisplayName: Máscara do Campeão do Solo
 	Tooltip: ""
 }
 

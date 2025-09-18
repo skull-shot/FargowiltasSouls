@@ -8,6 +8,14 @@ EternityDisabled: Modo Eternidade está desativado
 LeftClickEnable: Botão esquerdo para ativar
 RightClickSelectDifficulty: Botão direito para selecionar a dificuldade
 HoldShift: Segure Shift para ler sobre
+Close: Fechar
+OpenKeybinds: Abrir botões vínculados
+
+TitleLinks: {
+	// Patreon: Patreon
+	// Github: Github
+}
+
 ExpandedStandard:
 	'''
 	Desabilita os modos Masoquista e Eternidade.
@@ -67,5 +75,3 @@ ActiveSkills: Habilidades ativas
 AvailableSkills: Habilidades disponíveis
 SelectDifficulty: Selecionar dificuldade
 NoRespawn: Renascimento impedido: Apenas um renascimento permitido no Modo Masoquista Multiplayer!
-Close: Fechar
-OpenKeybinds: Abrir botões vínculados

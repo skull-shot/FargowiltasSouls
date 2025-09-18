@@ -151,7 +151,7 @@ PlantMinionEffect: Lacaio Plantera
 LihzahrdGroundPound: Queda Rápida Lagharta
 LihzahrdBoulders: Spray de Batida no Chão
 CelestialRuneAttacks: Suporte de Runa Celestial
-CelestialRuneOnhit: Visões anciãs ao ser atingido
+// CelestialRuneOnhit: Ancient Visions On Hit
 MinionsDeactivatedEffect: Efeitos de lacaio trocados por dano
 HeartHeader: "{$Mods.FargowiltasSouls.Items.HeartoftheMasochist.DisplayName}"
 PrecisionSealHurtbox: Tamanho da Hurtbox reduzido
