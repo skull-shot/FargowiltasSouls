@@ -1,6 +1,7 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Tiles;
 using Terraria;
+using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,19 +18,10 @@ namespace FargowiltasSouls.Content.Items.Placables
 
         public override void SetDefaults()
         {
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TophatSquirrelBannerSheet>());
             Item.width = 14;
             Item.height = 36;
-            Item.maxStack = Item.CommonMaxStack;
-            Item.useTurn = true;
-            Item.autoReuse = true;
-            Item.useAnimation = 15;
-            Item.useTime = 10;
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.consumable = true;
-            Item.rare = ItemRarityID.Blue;
-            Item.value = Item.buyPrice(0, 0, 10, 0);
-            Item.createTile = ModContent.TileType<FMMBanner>();
-            Item.placeStyle = 0;
+            Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 10));
         }
     }
 }

@@ -31,12 +31,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.hide = true;
-        }
-
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
         }
 
         public override void AI()
@@ -135,7 +129,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     else rotmod2 = rotationModifier; //ideally itll smoothly rotate back into place after finishing firing, but rotate instantly if idle otherwise
                     Projectile.rotation = Projectile.rotation.AngleLerp(player.direction == 1 ? 0 : MathHelper.Pi, rotmod2);
                 }
-                Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
+                //Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
 
             if (Projectile.localAI[0] <= chargeTime && Projectile.localAI[1] == 0)

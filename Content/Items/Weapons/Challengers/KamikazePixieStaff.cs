@@ -1,5 +1,6 @@
 ﻿using System;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<KamikazePixie>();
@@ -41,6 +42,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<ExpixiveBuff>(), 2);
             velocity = velocity.RotatedBy(Math.PI / 2) * 10;
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, velocity);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, -velocity);

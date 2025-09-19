@@ -1,4 +1,8 @@
+using FargowiltasSouls.Content.Bosses.AbomBoss;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -18,7 +22,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinM
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Flaming Scythe");
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
+
+        bool renderTrail;
 
         public override void SetDefaults()
         {
@@ -31,6 +39,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinM
             Projectile.light = 0.25f;
             Projectile.tileCollide = false;
             Projectile.hide = true;
+
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>()))
+            {
+                CooldownSlot = 1;
+                renderTrail = true;
+            }
         }
 
         public override void AI()
@@ -87,7 +101,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinM
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.OnFire, 900);
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>()))
+            {
+                target.AddBuff(BuffID.Bleeding, 240);
+                if (WorldSavingSystem.EternityMode)
+                    target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
+            }
+            else
+            {
+                target.AddBuff(BuffID.OnFire, 900);
+            }
         }
 
         public override Color? GetAlpha(Color lightColor)
@@ -106,18 +129,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinM
             Color color26 = lightColor;
             color26 = Projectile.GetAlpha(color26);
 
-            SpriteEffects effects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-
-            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
+            if (renderTrail)
             {
-                Color color27 = Color.White * Projectile.Opacity * 0.75f * 0.5f;
-                color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                Vector2 value4 = Projectile.oldPos[i];
-                float num165 = Projectile.oldRot[i];
-                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
+                for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
+                {
+                    Color color27 = color26;
+                    color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                    Vector2 value4 = Projectile.oldPos[i];
+                    float num165 = Projectile.oldRot[i];
+                    Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, SpriteEffects.None, 0);
+                }
             }
 
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
     }

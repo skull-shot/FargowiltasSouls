@@ -242,7 +242,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (Player.resistCold && npc.coldDamage) //warmth potion nerf
+            if (Player.resistCold && npc.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30% 
                 modifiers.FinalDamage *= 0.85f;
@@ -253,7 +253,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (Player.resistCold && proj.coldDamage) //warmth potion nerf
+            if (Player.resistCold && proj.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30%
                 modifiers.FinalDamage *= 0.85f;

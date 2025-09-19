@@ -22,7 +22,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override List<AccessoryEffect> ActiveSkillTooltips =>
             [AccessoryEffectLoader.GetEffect<BetsyDashEffect>(),
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
-             AccessoryEffectLoader.GetEffect<DiveEffect>(),
              AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
@@ -30,7 +29,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 7));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
-
+            ItemID.Sets.ItemNoGravity[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -41,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.accessory = true;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(0, 9);
-            Item.defense = 10;
+            //Item.defense = 10;
         }
 
         public override void UpdateInventory(Player player)
@@ -85,12 +84,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.buffImmune[BuffID.WitheredWeapon] = true;
             player.buffImmune[BuffID.WitheredArmor] = true;
             fargoPlayer.BetsysHeartItem = Item;
-            player.AddEffect<SpecialDashEffect>(Item);
             player.AddEffect<BetsyDashEffect>(Item);
 
             //mutant antibodies
-            player.buffImmune[BuffID.Wet] = true;
-            player.buffImmune[BuffID.Rabies] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             fargoPlayer.MutantAntibodies = true;
             if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
@@ -98,7 +94,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //galactic globe
             player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             //player.buffImmune[BuffID.ChaosState] = true;

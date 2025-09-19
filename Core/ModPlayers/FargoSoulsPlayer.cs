@@ -45,6 +45,7 @@ using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Armor.Eridanus;
+using FargowiltasSouls.Assets.Sounds;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -78,6 +79,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool RustRifleReloading = false;
         public float RustRifleReloadZonePos = 0;
         public float RustRifleTimer = 0;
+
+        public int NekomiFrameCounter;
+        public int NekomiFrame;
+
+        public int EternalFrameCounter;
+        public int EternalFrame;
 
         public int LeashHit;
 
@@ -292,6 +299,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             BrainMinion = false;
             EaterMinion = false;
+            PixieMinion = false;
             BigBrainMinion = false;
             DukeFishron = false;
 
@@ -351,7 +359,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             SupersonicSoul = false;
             WorldShaperSoul = false;
             FlightMasterySoul = false;
-            RangedEssence = false;
             BuilderMode = false;
             if (!UniverseSoulBuffer)
             {
@@ -1077,7 +1084,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             bool retVal = true;
 
-            if (Player.statLife <= 0) //revives
+            bool dodgable = true;
+            if ((damageSource.SourceProjectileLocalIndex != -1 && !Main.projectile[damageSource.SourceProjectileLocalIndex].IsDamageDodgable()) || (damageSource.SourceNPCIndex != -1 && !Main.npc[damageSource.SourceNPCIndex].IsDamageDodgeable()))
+                dodgable = false;
+
+            if (Player.statLife <= 0 && dodgable) //revives
             {
                 if (Player.whoAmI == Main.myPlayer && retVal && AbomRebirth)
                 {
@@ -1115,6 +1126,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.whoAmI == Main.myPlayer && retVal && AbomWandItem != null && !AbominableWandRevived)
                 {
+                    SoundEngine.PlaySound(FargosSoundRegistry.StyxRevive, Player.Center);
                     AbominableWandRevived = true;
                     int heal = 1;
                     Player.statLife = heal;
@@ -1171,8 +1183,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (!retVal)
             {
-                if (!Main.dedServ)
-                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/Revive"), Player.Center);
+                //if (!Main.dedServ)
+                    //SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/Revive"), Player.Center);
 
                 if (Player.whoAmI == Main.myPlayer && MutantSetBonusItem != null)
                     Projectile.NewProjectile(Player.GetSource_Accessory(MutantSetBonusItem), Player.Center, -Vector2.UnitY, ModContent.ProjectileType<GiantDeathray>(), (int)(7000 * Player.ActualClassDamage(DamageClass.Magic)), 10f, Player.whoAmI);

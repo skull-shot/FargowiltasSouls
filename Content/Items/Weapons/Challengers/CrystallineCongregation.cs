@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1f;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item101;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<CrystallineCongregationProj>();

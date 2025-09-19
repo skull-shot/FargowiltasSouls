@@ -200,6 +200,10 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.HoundiusShootiusFireball:
                     projectile.extraUpdates += 1;
                     break;
+                case ProjectileID.PossessedHatchet:
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = 30;
+                    break;
                 default:
                     break;
             }
@@ -805,8 +809,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
-                    if (SourceItemType == ItemID.SolarEruption && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
-                        projectile.DamageType = DamageClass.Melee;
+                    if (SourceItemType == ItemID.SolarEruption /*&& EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType)*/)
+                        projectile.DamageType = DamageClass.Melee; // removing check here so buff can be disabled in dlc while keeping fix, unsure how else to work with current hasemodechange implementation
                     break;
                 case ProjectileID.DaybreakExplosion:
                     if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
@@ -1778,6 +1782,45 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
+                    case ProjectileID.PossessedHatchet:
+                        if (SourceItemType == ItemID.PossessedHatchet && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            NPC ricotarget = projectile.FindTargetWithinRange(640, true);
+                            if (projectile.ai[2] < 4)
+                            {
+                                projectile.ai[2]++;
+                                if (target != null)
+                                {
+                                    projectile.ai[0] = 0; //reset vanilla bounceback state 
+                                    projectile.ai[1] = 0;
+                                    projectile.damage = (int)(projectile.damage * 0.8);
+
+                                    if (ricotarget != null && ricotarget.CanBeChasedBy()) //ricochet to other npc
+                                        projectile.velocity = 12 * Vector2.UnitX.RotateTowards(projectile.DirectionTo(ricotarget.Center).ToRotation(), 4);
+                                    else if (target.CanBeChasedBy()) //if no other npcs, home on original target, deteriorates bounce count and dmg further
+                                    {
+                                        projectile.ai[2] += 3;
+                                        projectile.damage = (int)(projectile.damage * 0.625); // 0.5x after original mult
+                                        projectile.velocity = 12 * Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 10);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case ProjectileID.ApprenticeStaffT3Shot: //betsys wrath
+                        if (SourceItemType == ItemID.ApprenticeStaffT3 && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            // resets curse duration to 1s after vanilla onhit sets it to 10s
+                            for (int i = 0; i < NPC.maxBuffs; i++)
+                            {
+                                if (target.buffType[i] == BuffID.BetsysCurse && target.buffTime[i] == 600)
+                                {
+                                    target.buffTime[i] = 60;
+                                }
+                            }
+                        }
+                        break;
+
                     default:
                         break;
                 }

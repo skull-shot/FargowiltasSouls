@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             NPC.knockBackResist = 0f;
             NPC.lavaImmune = true;
             NPC.aiStyle = -1;
-
+            NPC.chaseable = false;
             NPC.trapImmune = true;
         }
 
@@ -574,11 +574,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            if (FargoSoulsUtil.CanDeleteProjectile(projectile))
+            /*if (FargoSoulsUtil.CanDeleteProjectile(projectile))
             {
                 projectile.penetrate = 0;
                 projectile.timeLeft = 0;
-            }
+            }*/
         }
 
         private void Movement(Vector2 targetPos, float speedModifier, float cap = 12f)

@@ -187,3 +187,34 @@ fixed abom ray run breaking if done at top of world
 maso has really long preserved scythes after ray run for specifically the last run of desp
 made mutant spear spin sucky tells even more obnoxiously bigger
 disabled abom contact damage during ship
+
+eri spams more punches after stardust a lot harder and more random to look a bit better
+maso mutant p2 direct spear dash can now start beside you sometimes instead of always above/below
+abom
+	now uses pumpking soft homing spread for p1 flaming scythes
+	does two scythe swings in p1 and p2 always, mostly for flavor
+	shotguns phoenixes after every dash
+	fires a lot more rockets during p1 laser spray (also in p2 maso)
+box of gizmos is now inventory only, not an acc
+
+added a glow on mutant dive spear aim
+plantwins twins do a double layer spray
+fixed sansgolem arena actually moving with you and altering the entire pattern echgun
+fixed sansgolem not actually having a limit to how far up/down it can go
+adjusted sansgolem numbers overall
+
+maso mutant spear heals are 2.5% p1, 5% p2
+pumpking cape parry makes a pumpscare
+spent way too much time and effort on a very small mutant p2 bg change
+eri punches devi way harder
+siblings have full size contact hitboxes in ftw
+moved eri spam punch from after timestop to before uppercut
+eri punch after timestop is different
+betrayed mutant and locked him in the hyperbolic flesh chamber (added wof attack)
+mutant twins gore on impact
+
+mutant twins double ring isolated to maso
+made mutant bg filter marginally slower and less visible
+adjusted numbers on rof
+fixed stuff with rof near world ceiling
+fixed eri rays disappearing

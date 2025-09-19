@@ -9,6 +9,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,6 +28,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
+
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 50));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
 
         public override void SetDefaults()
         {

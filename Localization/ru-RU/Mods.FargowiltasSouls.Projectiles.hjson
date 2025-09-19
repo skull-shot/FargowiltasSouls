@@ -268,7 +268,7 @@ CelestialRuneFireball.DisplayName: Огненный шар
 CelestialRuneIceMist.DisplayName: Ледяной туман
 CelestialRuneIceSpike.DisplayName: Ледяной шип
 CelestialRuneLightningArc.DisplayName: Молния
-ClingerFlame.DisplayName: Проклятое пламя
+ClingerFlame.DisplayName: Проклятые огни
 ClownBomb.DisplayName: Бомба клоуна
 CrystalLeafShot.DisplayName: Кристальный лист
 CultistArrow.DisplayName: Стрела культиста
@@ -586,7 +586,7 @@ CosmosFireball2.DisplayName: Космический огненный шар
 ShadowFlameburst.DisplayName: Огнемёт
 ShadowFlamingScythe.DisplayName: Горящая коса
 DeviRitual2.DisplayName: Печать Девиантт
-CursedFireballHoming.DisplayName: Проклятое Ппамя
+CursedFireballHoming.DisplayName: Проклятое пламя
 CursedFlameHostile2.DisplayName: Проклятое пламя
 ElfCopterBulletExplosion.DisplayName: Разрывная пуля
 MoonLordVortexOld.DisplayName: Вихрь
@@ -846,3 +846,14 @@ AbomBullet.DisplayName: Пуля
 FallingIcicle.DisplayName: Падающая сосулька
 AbomGhost.DisplayName: Призрак Выродкка
 MutantSphereHelix.DisplayName: Спиральная сфера Мутанта
+Pumpscare.DisplayName: Тыквоскример
+CosmosDeathray3.DisplayName: Космический луч смерти
+MutantChain.DisplayName: Вена-цепь
+MutantWallOfFlesh.DisplayName: Стена плоти
+MutantWofDeathray.DisplayName: Святой луч смерти
+MutantWofPart.DisplayName: Стена плоти
+MutantCursedFlame.DisplayName: Проклятые огни
+MutantIchor.DisplayName: Золотой дождь
+ExplosionVisual.DisplayName: Взрыв
+// OOAForcefield.DisplayName: O O A Forcefield
+// OOAForceFieldProj.DisplayName: O O A Force Field Proj

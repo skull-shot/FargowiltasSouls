@@ -27,11 +27,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         {
             Item.mana = 0;
             Item.damage = 480;
-            Item.DamageType = DamageClass.MeleeNoSpeed;
+            Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 18;
-            Item.useAnimation = 18;
+            Item.useTime = 27;
+            Item.useAnimation = 27;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 25);

@@ -1,5 +1,5 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;

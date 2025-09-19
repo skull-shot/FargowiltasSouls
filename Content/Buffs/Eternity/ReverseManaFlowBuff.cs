@@ -15,10 +15,8 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //mana cost also damages
             player.FargoSouls().ReverseManaFlow = true;
-
-            player.GetDamage(DamageClass.Summon) *= 0.6f;
+            player.GetDamage(DamageClass.Magic) /= 1.5f;
         }
     }
 }

@@ -551,6 +551,14 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["VortexSet"];
                     return EModeChange.Nerf;
 
+                case ItemID.PossessedHatchet:
+                    balanceTextKeys = ["PossessedHatchet"];
+                    return EModeChange.ReworkBuff;
+
+                case ItemID.ApprenticeStaffT3: //betsys wrath
+                    balanceTextKeys = ["BetsysCurse"];
+                    return EModeChange.Nerf;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {

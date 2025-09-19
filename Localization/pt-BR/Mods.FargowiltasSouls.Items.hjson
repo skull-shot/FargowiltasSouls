@@ -998,7 +998,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		''' */
 }
@@ -1013,7 +1013,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -2320,11 +2320,11 @@ EnerGear: {
 
 MostlyOrdinaryRock: {
 	DisplayName: Rocha Majoritamente Comum
-	/* Tooltip:
+	Tooltip:
 		'''
-		Summons a seeker of treasures
-		'Freshly hatched from a... rock?'
-		''' */
+		Invoca um caçador de tesouros
+		'Recém-nascido de uma... rocha?'
+		'''
 }
 
 PortableFogMachine: {
@@ -3078,7 +3078,7 @@ NanoCore: {
 }
 
 NekomiLeggings: {
-	// DisplayName: Nekomi Leggings
+	// DisplayName: Nekomi Skirt
 	Tooltip: 10% de aumento na velocidade dos movimentos
 }
 
@@ -3181,12 +3181,6 @@ Lightslinger: {
 		''' */
 }
 
-MostlyOrdinaryrock.Tooltip:
-	'''
-	Invoca um caçador de tesouros
-	'Recém-nascido de uma... rocha?'
-	'''
-
 WiresPainting: {
 	// DisplayName: Wires Painting
 	// Tooltip: Look inside
@@ -3196,10 +3190,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hits release homing stars
+		Hold to charge
 		Deals extra damage based on how much the spear is extended on hit
-		Hold Right Click to charge for extra damage
-		While fully charged, hits release additional stars
+		Right Click to rapidly stab with the spear
+		Reduced size benefit from Tungsten Enchantment
 		'The radiant power of a foe's pure essence...'
 		''' */
 }
@@ -3493,9 +3487,8 @@ UmbraRegalia: {
 	// DisplayName: Umbra Regalia
 	/* Tooltip:
 		'''
-		Left Click to rapidly stab with the spear
-		Hold Right Click to charge a spear toss
-		Becomes stronger when fully charged
+		Hold Left Click to charge a spear toss
+		Right Click to rapidly stab with the spear and steal life
 		Can continue to gain damage for a while after full charge
 		'The reward for a mighty rematch...'
 		''' */
@@ -3677,4 +3670,9 @@ Devilstone: {
 MainframePainting: {
 	// DisplayName: Mainframe Painting
 	// Tooltip: "'Gonk'"
+}
+
+CactusMimicBanner: {
+	// DisplayName: Cactus Mimic Banner
+	// Tooltip: ""
 }

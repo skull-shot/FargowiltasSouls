@@ -19,6 +19,15 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             base.SetDefaults();
             Projectile.timeLeft = maxTime;
         }
+        public override bool PreAI()
+        {
+            if (Projectile.ai[2] != 0)
+            {
+                Projectile.timeLeft = maxTime = (int)Projectile.ai[2];
+                Projectile.ai[2] = 0;
+            }
+            return base.PreAI();
+        }
         public override void AI()
         {
             Projectile.hide = false; //to avoid edge case tick 1 wackiness

@@ -607,10 +607,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 {
                     if (j == 0)
                         continue;
+                    const int sag = 50;
                     Vector2 distBetween = new(X(j, neckOrigin.X, (neckOrigin.X + connector.X) / 2, connector.X) -
                     X(j - chainsPerUse, neckOrigin.X, (neckOrigin.X + connector.X) / 2, connector.X),
-                    Y(j, neckOrigin.Y, neckOrigin.Y + 50, connector.Y) -
-                    Y(j - chainsPerUse, neckOrigin.Y, neckOrigin.Y + 50, connector.Y));
+                    Y(j, neckOrigin.Y, neckOrigin.Y + sag, connector.Y) -
+                    Y(j - chainsPerUse, neckOrigin.Y, neckOrigin.Y + sag, connector.Y));
                     if (distBetween.Length() > 36 && chainsPerUse > 0.01f)
                     {
                         chainsPerUse -= 0.01f;

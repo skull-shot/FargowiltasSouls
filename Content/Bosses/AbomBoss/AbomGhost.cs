@@ -144,7 +144,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
 
-            if (Projectile.localAI[2] == 1)
+            // this doesnt actually work unless you load the musket into memory yourself by physically seeing a real musket
+            // idk how textures work man pls fix it boohoo 
+            /*if (Projectile.localAI[2] == 1)
             {
                 Texture2D gun = Terraria.GameContent.TextureAssets.Item[ItemID.Musket].Value;
                 Rectangle gunRect = gun.Bounds;
@@ -155,7 +157,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 if (gunRotation.ToRotationVector2().X < 0)
                     gunRotation += MathHelper.Pi;
                 Main.EntitySpriteDraw(gun, gunPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), gunRect, Projectile.GetAlpha(lightColor), gunRotation, gunOrigin, Projectile.scale, gunSpriteEffects, 0);
-            }
+            }*/
             return false;
         }
     }

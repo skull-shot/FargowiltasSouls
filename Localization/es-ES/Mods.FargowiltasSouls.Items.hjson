@@ -85,7 +85,7 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 3% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
 		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
@@ -968,13 +968,13 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		''' */
 }
@@ -989,7 +989,7 @@ BionomicClusterInactive: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, and cactus damage
+		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1210,7 +1210,7 @@ HeartoftheMasochist: {
 	/* Tooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
 		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Increases damage and crit chance by 10%, and damage reduction by 5%
 		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
 		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
@@ -1261,7 +1261,7 @@ MutantAntibodies: {
 	// DisplayName: Mutant Antibodies
 	/* Tooltip:
 		'''
-		Grants immunity to Wet, Feral Bite, Oceanic Maul, and debuffs caused by entering water
+		Grants immunity to Oceanic Maul and debuffs caused by entering water
 		Increases damage for your current weapon class by 20%, but decreases life regeneration
 		Submerging in water refreshes flight time and gives you improved speed and increased max flight time
 		Grants effects of Wet debuff while riding Cute Fishron
@@ -1946,7 +1946,7 @@ NekomiHood: {
 }
 
 NekomiHoodie: {
-	// DisplayName: Nekomi Hoodie
+	// DisplayName: Nekomi Dress
 	// Tooltip: Reduces damage taken by 4%
 }
 
@@ -3071,7 +3071,7 @@ NanoCore: {
 }
 
 NekomiLeggings: {
-	// DisplayName: Nekomi Leggings
+	// DisplayName: Nekomi Skirt
 	/* Tooltip:
 		'''
 		7% increased critical strike chance
@@ -3178,8 +3178,6 @@ Lightslinger: {
 		''' */
 }
 
-// MostlyOrdinaryrock.Tooltip: Mods.FargowiltasSouls.ItemTooltip.MostlyOrdinaryrock
-
 WiresPainting: {
 	// DisplayName: Wires Painting
 	// Tooltip: Look inside
@@ -3189,10 +3187,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hits release homing stars
+		Hold to charge
 		Deals extra damage based on how much the spear is extended on hit
-		Hold Right Click to charge for extra damage
-		While fully charged, hits release additional stars
+		Right Click to rapidly stab with the spear
+		Reduced size benefit from Tungsten Enchantment
 		'The radiant power of a foe's pure essence...'
 		''' */
 }
@@ -3486,9 +3484,8 @@ UmbraRegalia: {
 	// DisplayName: Umbra Regalia
 	/* Tooltip:
 		'''
-		Left Click to rapidly stab with the spear
-		Hold Right Click to charge a spear toss
-		Becomes stronger when fully charged
+		Hold Left Click to charge a spear toss
+		Right Click to rapidly stab with the spear and steal life
 		Can continue to gain damage for a while after full charge
 		'The reward for a mighty rematch...'
 		''' */
@@ -3670,4 +3667,9 @@ Devilstone: {
 MainframePainting: {
 	// DisplayName: Mainframe Painting
 	// Tooltip: "'Gonk'"
+}
+
+CactusMimicBanner: {
+	// DisplayName: Cactus Mimic Banner
+	// Tooltip: ""
 }

@@ -29,7 +29,6 @@ using Terraria.Audio;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -661,17 +660,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.statLife = Player.statLifeMax2;
                 Player.HealEffect(heal);
 
-                int buffDuration = heal * 60 / 8;
-                Player.AddBuff(BuffID.RapidHealing, buffDuration);
-
                 for (int i = 0; i < 16; i++)
                 {
                     Color color = Color.OrangeRed;
                     if (i % 2 == 0)
                         color = new Color(30, 0, 60);
-                    Particle s = new SparkParticle(Player.Bottom, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
+                    Particle s = new SparkParticle(Player.Center, Vector2.UnitX.RotatedBy(MathHelper.Pi/8 * i) * 15, color, 2f, 60);
                     s.Spawn();
                 }
+
+                Projectile.NewProjectile(Player.GetSource_EffectItem<PumpkingsCapeEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<Pumpscare>(), 0, 0f, Main.myPlayer);
             }
         }
 
@@ -777,8 +775,18 @@ namespace FargowiltasSouls.Core.ModPlayers
                 ParryDebuffImmuneTime = invul;
                 shieldCD = invul + extrashieldCD;
 
-                CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray,
-                    () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => Player.HasEffect<SilverEffect>() || Player.HasEffect<DreadShellEffect>() || Player.HasEffect<PumpkingsCapeEffect>());
+                if (pumpkingEffect)
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "PumpkingsCape").Value, new Color(30, 0, 60), () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => pumpkingEffect);
+                }
+                else if (dreadEffect)
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "DreadShell").Value, Color.DarkRed, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => dreadEffect);
+                }
+                else
+                {
+                    CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => silverEffect);
+                }
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs
                 {
@@ -852,19 +860,14 @@ namespace FargowiltasSouls.Core.ModPlayers
             bool preventRightClick = Main.HoveringOverAnNPC || Main.SmartInteractShowingGenuine;
             if (key != null)
                 preventRightClick = false;
-            bool canCancelAttackWithParry = shieldTimer > 0;
             Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
                 && !preventRightClick && holdingKey && Player.altFunctionUse != 2
-                && (canCancelAttackWithParry || (Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0));
+                && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0;
 
             if (Player.shieldRaised)
             {
                 GuardRaised = true;
                 shieldHeldTime++;
-
-                Player.itemAnimation = 0;
-                Player.itemTime = 0;
-                Player.reuseDelay = 0;
 
                 for (int i = 3; i < 8 + Player.extraAccessorySlots; i++)
                 {
@@ -878,7 +881,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!wasHoldingShield)
                 {
                     wasHoldingShield = true;
-
+                    if (shieldCD == 0)
+                        shieldTimer = silverEffect ? BASE_PARRY_WINDOW : HARD_PARRY_WINDOW;
                     Player.itemAnimation = 0;
                     Player.itemTime = 0;
                     Player.reuseDelay = 0;
@@ -913,12 +917,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             else
             {
+                shieldTimer = 0;
                 shieldHeldTime = 0;
 
                 if (wasHoldingShield)
                 {
                     wasHoldingShield = false;
-                    shieldTimer = 0;
 
                     Player.shield_parry_cooldown = 0; //prevent that annoying tick noise
                 }
@@ -952,9 +956,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (shieldCD > 0)
                     shieldCD--;
-
-                if (shieldCD == 0)
-                    shieldTimer = silverEffect ? BASE_PARRY_WINDOW : HARD_PARRY_WINDOW;
             }
         }
     }

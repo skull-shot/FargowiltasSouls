@@ -2,7 +2,7 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Placables;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.DukeFishron;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;

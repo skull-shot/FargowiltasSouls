@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.Accessories;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;

@@ -85,7 +85,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
         {
             Item.width = 20;
             Item.height = 20;
-            Item.accessory = true;
+            //Item.accessory = true;
             Item.rare = ItemRarityID.Expert;
             Item.value = Item.sellPrice(0, 1);
 

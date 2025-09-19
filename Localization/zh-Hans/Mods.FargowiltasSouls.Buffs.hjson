@@ -733,3 +733,8 @@ VortexStealthCDBuff: {
 	// DisplayName: Vortex Stealth Cooldown
 	// Description: Cannot be stealthy again yet
 }
+
+ExpixiveBuff: {
+	// DisplayName: Expixive Buff
+	// Description: The lesser fairies will fight to the end for you
+}

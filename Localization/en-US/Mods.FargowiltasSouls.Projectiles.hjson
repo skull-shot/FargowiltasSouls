@@ -128,8 +128,8 @@ CactusMine.DisplayName: Cactus Mine
 ChampionBee.DisplayName: Bee
 ChampionBeetle.DisplayName: Beetle
 CosmosBolt.DisplayName: Cosmic Bolt
-CosmosDeathray.DisplayName: Cosmic Deathray
-CosmosDeathray2.DisplayName: Cosmic Deathray
+CosmosDeathray.DisplayName: Cosmic Rift
+CosmosDeathray2.DisplayName: Cosmic Rift
 CosmosGlowything.DisplayName: Cosmic Invader
 CosmosInvader.DisplayName: Cosmic Invader
 CosmosInvaderTime.DisplayName: Cosmic Invader
@@ -381,7 +381,7 @@ EaterBody.DisplayName: Eater Body
 EaterHead.DisplayName: Eater Head
 EaterTail.DisplayName: Eater Tail
 EridanusBullet.DisplayName: Eridanus Bullet
-EridanusDeathray.DisplayName: Cosmic Deathray
+EridanusDeathray.DisplayName: Cosmic Rift
 EridanusFist.DisplayName: Eridanus Fist
 EridanusMinion.DisplayName: Eridanus
 EridanusRitual.DisplayName: Lunar Ritual
@@ -846,3 +846,14 @@ AbomBullet.DisplayName: Abom Bullet
 FallingIcicle.DisplayName: Falling Icicle
 AbomGhost.DisplayName: Abom Ghost
 MutantSphereHelix.DisplayName: Mutant Sphere Helix
+Pumpscare.DisplayName: Pumpscare
+CosmosDeathray3.DisplayName: Cosmic Rift
+MutantChain.DisplayName: Vein Chain
+MutantWallOfFlesh.DisplayName: Wall Of Flesh
+MutantWofDeathray.DisplayName: Divine Deathray
+MutantWofPart.DisplayName: Wall of Flesh
+MutantCursedFlame.DisplayName: Cursed Flames
+MutantIchor.DisplayName: Golden Shower
+ExplosionVisual.DisplayName: Explosion
+OOAForcefield.DisplayName: O O A Forcefield
+OOAForceFieldProj.DisplayName: O O A Force Field Proj

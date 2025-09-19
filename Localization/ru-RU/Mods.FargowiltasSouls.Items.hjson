@@ -86,7 +86,7 @@ BeetleEnchant: {
 	Tooltip:
 		'''
 		Удары по врагам дают до 6 жуков
-		Жуки дают 3% сопротивления урону и атакуют ближайших врагов
+		Жуки дают 2,5% сопротивления урону и атакуют ближайших врагов
 		При получении урона вы теряете 3 жука
 		«Невиданная жизнь навоза течёт по вашим венам»
 		'''
@@ -345,7 +345,6 @@ MonkEnchant: {
 		Для этого дважды нажмите в сторону
 		Сделайте рывок во врага, чтобы получить короткую неуязвимость и нанести огромный урон
 		Время перезарядки больше, чем у обычного рывка
-		Часовые ауры молний теперь могут наносить критические удары и бьют чаще
 		«Вернись к монаху»
 		'''
 }
@@ -481,7 +480,7 @@ RedRidingEnchant: {
 	Tooltip:
 		'''
 		Снаряды из оружий наносят 5 дополнительных единицы урона
-		Попадания дают бонус, увеличивающий урон ещё на 3 ед. урона, макс. 10 бонусов
+		Попадания дают бонус, увеличивающий урон ещё на 5 ед. урона, макс. 10 бонусов
 		По достижении лимита, попадания будут вызывать дождь из стрел
 		По умолчанию эти стрелы будут отравленными, либо будут использованы первые в инвентаре
 		Урон дождя из стрел также зависит от типа стрел
@@ -527,12 +526,10 @@ ShinobiEnchant: {
 	DisplayName: Зачарование лазутчика синоби
 	Tooltip:
 		'''
-		Позволяет совершать рывок
+		Позволяет совершать телепортирующий рывок
 		Для этого дважды нажмите в сторону
-		После рывка вы на полсекунды становитесь невосприимчивы к урону
-		Сделайте рывок во врага, чтобы нанести огромный урон
-		Время перезарядки гораздо больше, чем у обычного рывка
-		Рывок длиннее и наносит больше урона
+		Телепортирующие рывки наносят врагам огромный урон и ненадолго дают невосприимчивость к урону
+		В сравнении с другими рывками, телепортирующий рывок перезаряжается дольше
 		Сделайте рывок в любую стену, чтобы телепортироваться в свободное место за ней
 		«Деревня, скрытая в стене»
 		'''
@@ -741,7 +738,7 @@ WoodEnchant: {
 }
 
 SquirrelCharm: {
-	DisplayName: Squirrel Charm
+	DisplayName: Беличий тотем
 	Tooltip:
 		'''
 		Работает в инвентаре и слотах для украшений
@@ -821,7 +818,7 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] Вы оставляете за собой цветы во время полёта
 		[i:FargowiltasSouls/PumpkinEnchant] Цветы при прикосновении выпускают рой пчёл, дают бафф «Амброзия» и восстанавливают время полёта
 		[i:FargowiltasSouls/CactusEnchant] Если же цветов касаются враги, они выпускают иглы
-		[i:FargowiltasSouls/BeetleEnchant] «Амброзия» увеличивает урон на 20%, сопротивление урону на 15% и регенерацию здоровья на 2,5 ОЗ/сек
+		[i:FargowiltasSouls/BeetleEnchant] «Амброзия» увеличивает урон на 20%, сопротивление урону на 8% и регенерацию здоровья на 2,5 ОЗ/сек
 		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
 		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
 		[i:FargowiltasSouls/BeeEnchant] Эффекты рюкзака-улья
@@ -879,7 +876,7 @@ TerraForce: {
 		'''
 		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Критические удары иногда выпускают молнию, которая взрывается при попадании и накладывает усиленное «Свинцовое отравление»
 		[i:FargowiltasSouls/SilverEnchant] Парирование аннулирует до 200 ед. урона, успешные парирования мгновенно выпускают молнию
-		[i:FargowiltasSouls/TinEnchant] Выставляет оловянный шанс крит. удара на 75%, увеличивающийся до 100% при каждой выпущенной молнии и сбрасывающийся при получении урона
+		[i:FargowiltasSouls/TinEnchant] Увеличивает шанс крит. удара на 5%, увеличивает ещё на 5% при каждой выпущенной молнии, до 25%, сбрасывается при получении урона
 		[i:FargowiltasSouls/LeadEnchant] Вы получаете на 50% меньше постепенного урона от дебаффов
 		[i:FargowiltasSouls/TungstenEnchant] Увеличивает размер ближних оружий на 50% и дальность хлыстов на 20%
 		[i:FargowiltasSouls/IronEnchant] Перековки всегда дают наилучший префикс, но стоят на 50% дороже, увеличивает дальность подбора предметов (работает в инвентаре и слотах для украшений)
@@ -978,17 +975,17 @@ BionomicCluster: {
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
-		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
+		[i:FargowiltasSouls/SqueakyToy] У вражеских атак есть 10% шанс пискнуть и нанести вам 1 единицу урона
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ чтобы выключить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусом, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог», «Охлаждение» и [i:FargowiltasSouls/SandsofTime] «Сильный ветер»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		'''
 }
@@ -999,11 +996,11 @@ BionomicClusterInactive: {
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Влюблённость», «Вонь» и «Сглаз»
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
-		[i:FargowiltasSouls/SqueakyToy] У атак есть 5% шанс пискнуть и нанести вам 1 единицу урона
+		[i:FargowiltasSouls/SqueakyToy] У вражеских атак есть 10% шанс пискнуть и нанести вам 1 единицу урона
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ чтобы включить):]
-		    Даёт иммунитет к [i:FargowiltasSouls/SandsofTime] урону от кактусов, дебаффам «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер», [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/FrigidGrasp] «Охлаждение»
 		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -1127,11 +1124,11 @@ DubiousCircuitry: {
 	DisplayName: Сомнительная схема
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/GroundStick] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и отбрасыванию
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/RemoteControl] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и отбрасыванию
 		[i:FargowiltasSouls/FusedLens] Установка дебаффа накладывает на вас «Проклятие ада» и «Ихор»
 		[i:FargowiltasSouls/FusedLens] Она увеличивает ваши скорость атаки и шанс критического удара,
 		     а также даёт возможность накладывать «Проклятие ада» и «Ихор»
-		[i:FargowiltasSouls/GroundStick] Электрические атаки по вам заряжают вас, что увеличивает ваши скорость передвижения и атаки
+		[i:FargowiltasSouls/RemoteControl] Электрические атаки по вам заряжают вас, что увеличивает ваши скорость передвижения и атаки
 		[i:FargowiltasSouls/ReinforcedPlating] Увеличивает защиту и сопротивление урону, пока вы под воздействием дебаффа
 		«Скорее всего не включает в себя вредоносные программы»
 		'''
@@ -1555,7 +1552,7 @@ SupremeDeathbringerFairy: {
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепый», [i:FargowiltasSouls/QueenStinger] «Заражённый», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялый»
 		Значительно увеличивает скорость [i:FargowiltasSouls/NecromanticBrew] рывков и [i:FargowiltasSouls/SlimyShield] падения, удерживайте вниз, чтобы падать через платформы
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] Во время движения за вами остаётся след из кровавой слизи
-		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 15%, а также за вами остаётся след из кровавых шипов
+		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 20%, а также за вами остаётся след из кровавых шипов
 		«Не гарантирует верховенство»
 		'''
 }
@@ -1725,7 +1722,7 @@ MasochistSoul: {
 		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к большинству дебаффов, [i:FargowiltasSouls/ChaliceofTheMoon] базовые баффы зелий и классовых станций и др.
 		[i:FargowiltasSouls/NecromanticBrew] Увеличивает дистанцию рывков, [i:FargowiltasSouls/PungentEyeball] ваш курсор накладывает «Сублимацию»
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
-		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете весь урон во время рывка
+		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете урон во время рывка
 		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
 		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении и [i:FargowiltasSouls/SandsofTime] уменьшает время возрождения
 		[i:FargowiltasSouls/SecurityWallet] Автоматически отправляет деньги в свинью-копилкууменьшает стоимость перековок на 50%
@@ -1965,7 +1962,7 @@ NekomiHood: {
 }
 
 NekomiHoodie: {
-	DisplayName: Толстовка Некоми
+	DisplayName: Платье Некоми
 	Tooltip: Уменьшает получаемый урон на 4%
 }
 
@@ -2604,7 +2601,7 @@ SlimeKingsSlasher: {
 	Tooltip:
 		'''
 		Наносит на 20% больше урона горящим врагам
-		Получает уменьшенный бонус от зачарования вольфрама
+		Увеличение от зачарования вольфрама менее эффективно
 		«Вырвана из внутренностей побеждённого врага...»
 		'''
 }
@@ -3092,7 +3089,7 @@ NanoCore: {
 }
 
 NekomiLeggings: {
-	DisplayName: Поножи Некоми
+	DisplayName: Юбка Некоми
 	Tooltip:
 		'''
 		Увеличивают шанс критического удара на 7%
@@ -3199,8 +3196,6 @@ Lightslinger: {
 		'''
 }
 
-MostlyOrdinaryrock.Tooltip: Mods.FargowiltasSouls.ItemTooltip.MostlyOrdinaryrock
-
 WiresPainting: {
 	DisplayName: Картина «Wires»
 	Tooltip: Посмотрел внутрь
@@ -3210,10 +3205,10 @@ PrismaRegalia: {
 	DisplayName: Призма Регалия
 	Tooltip:
 		'''
-		Попадании выпускают самонаводящиеся звёзды
+		Удерживайте ЛКМ, чтобы зарядить
 		Наносит тем больше урона, чем ближе к кончику прошёл удар копья
-		Зажмите ПКМ, чтобы зарядить копьё и нанести ещё больше урона
-		При полной зарядке, удары выпускают дополнительные звёзды
+		Нажмитее ПКМ, чтобы наносить быстрые удары копьём
+		Увеличение от зачарования вольфрама менее эффективно
 		«Сияющая сила чистейшей эссенции врага...»
 		'''
 }
@@ -3507,9 +3502,8 @@ UmbraRegalia: {
 	DisplayName: Умбра Регалия
 	Tooltip:
 		'''
-		ЛКМ, чтобы наносить быстрые удары копьём
-		Удерживайте ПКМ, чтобы заряжать бросок копьём
-		Становится сильнее при полном заряде
+		Удерживайте ЛКМ, чтобы зарядить бросок копья
+		Удерживайте ЛКМ, чтобы наносить быстрые удары копьём, похищающие здоровья
 		Может недолго получать доп. урон при полном заряде
 		«Награда за шикарный реванш...»
 		'''
@@ -3692,4 +3686,9 @@ Devilstone: {
 MainframePainting: {
 	DisplayName: Мэйнфрейм
 	Tooltip: «Gonk»
+}
+
+CactusMimicBanner: {
+	// DisplayName: Cactus Mimic Banner
+	// Tooltip: ""
 }

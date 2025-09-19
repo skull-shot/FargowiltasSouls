@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.Projectiles;
@@ -41,6 +41,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public bool DroppedSummon;
 
+        public int WingFrameTimer;
+        public int WingFrame;
+
         private const float StompTravelTime = 60;
         private const float StompGravity = 1.6f;
 
@@ -75,6 +78,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             binaryWriter.Write7BitEncodedInt(StompCounter);
             binaryWriter.Write(StompVelocityX);
             binaryWriter.Write(StompVelocityY);
+            binaryWriter.Write(WingFrameTimer);
+            binaryWriter.Write(WingFrame);
             for (int i = 0; i < CustomAI.Length; i++)
                 binaryWriter.Write(CustomAI[i]);
         }
@@ -87,6 +92,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             StompCounter = binaryReader.Read7BitEncodedInt();
             StompVelocityX = binaryReader.ReadSingle();
             StompVelocityY = binaryReader.ReadSingle();
+            WingFrameTimer = binaryReader.Read7BitEncodedInt();
+            WingFrame = binaryReader.Read7BitEncodedInt();
             for (int i = 0; i < CustomAI.Length; i++)
                 CustomAI[i] = binaryReader.ReadSingle();
         }
@@ -1220,8 +1227,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 // wings !!
 
+                if (++WingFrameTimer >= 6)
+                {
+                    WingFrame++;
+                    WingFrameTimer = 0;
+                    if (WingFrame >= 4)
+                    {
+                        WingFrame = 0;
+                    }
+                }
+
+                if ((States)State == States.TripleSuperslam)
+                {
+                    WingFrame = 0;
+                }
+
                 Texture2D value = TextureAssets.Extra[185].Value;
-                Microsoft.Xna.Framework.Rectangle rectangle = value.Frame(1, 4, 0, (int)npc.localAI[3] / 6);
+                Rectangle rectangle = value.Frame(1, 4, 0, WingFrame);
                 float scale = 0.8f * npc.scale;
                 for (int i = 0; i < 2; i++)
                 {
@@ -1241,7 +1263,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         vector = vector.RotatedBy(npc.rotation, npc.Bottom);
                     }
                     vector -= screenPos;
-                    float num2 = MathHelper.Clamp(npc.velocity.Y, -6f, 6f) * -0.1f;
+                    float num2 = MathHelper.Clamp(npc.velocity.Y, -6f, 6f) * -0.07f;
                     if (i == 0)
                     {
                         num2 *= -1f;

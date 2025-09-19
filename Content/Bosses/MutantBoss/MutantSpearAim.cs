@@ -2,6 +2,8 @@
 using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Common.Utilities;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -103,7 +105,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[0] = 1;
 
-                if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
+                if (Projectile.ai[1] == -2) //dive tell
+                {
+                    Projectile.timeLeft += 30;
+                    Projectile.localAI[1] = -30;
+                }
+                else if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
                 {
                     Projectile.timeLeft += 120;
                     Projectile.localAI[1] = -120;
@@ -219,30 +226,47 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         void FancyFireballs(float repeats, Color glowColor)
         {
-            float modifier = repeats;
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
 
-            Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
+            AtlasTexture glow = AtlasManager.GetTexture("FargowiltasSouls.Bloom"); //ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
             int rect1 = glow.Height;
             int rect2 = rect1 * Projectile.frame;
-            Rectangle glowrectangle = new(0, rect2, glow.Width, rect1);
-            Vector2 gloworigin2 = glowrectangle.Size() / 2f;
+            Rectangle? glowrectangle = new(0, rect2, glow.Width, rect1);
+            Vector2 gloworigin2 = glowrectangle.Value.Size() / 2f;
 
-            float distance = 360 * (1f - modifier);
-            float rotation = MathHelper.TwoPi * modifier * spinFlip;
             const int max = 6;
-            Color finalColor = glowColor * (float)Math.Sqrt(modifier);
+            const int trail = 12;
             for (int i = 0; i < max; i++)
             {
-                Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
-                Vector2 drawPos = Projectile.Center + offset;
-                float scale = 2f * (1f - 0.9f * modifier);
-                float drawRotation = offset.ToRotation();
-                if (spinFlip > 0)
-                    drawRotation += MathHelper.Pi;
-                float endRotation = drawRotation + MathHelper.PiOver2 * spinFlip;
-                drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
-                Main.EntitySpriteDraw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None);
+                for (int j = 0; j < trail; j++)
+                {
+                    float modifier = repeats - j * 0.01f;
+
+                    float distance = 360 * (1f - modifier);
+                    float rotation = MathHelper.TwoPi * modifier * spinFlip;
+                    float lerp = MathF.Pow((float)j / trail, 0.5f);
+
+                    float frac = MathHelper.SmoothStep(1f, 0.7f, repeats);
+                    Color baseColor = Color.Lerp(Color.White, glowColor, frac + (1 - frac) * lerp);
+                    Color finalColor = baseColor * (float)Math.Sqrt(modifier);
+
+                    finalColor *= 1f - (float)j / trail;
+
+                    Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
+                    Vector2 drawPos = Projectile.Center + offset;
+                    float scale = 1f * (1f - 0.9f * modifier);
+                    float drawRotation = offset.ToRotation();
+                    if (spinFlip > 0)
+                        drawRotation += MathHelper.Pi;
+                    float endRotation = drawRotation + MathHelper.PiOver2 * spinFlip;
+                    drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
+
+                    Utilities.Draw(Main.spriteBatch, glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor with { A = 255 }, drawRotation, null, Vector2.One * scale, SpriteEffects.None);
+                    //SpriteBatch.Draw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None, 0);
+                }
             }
+
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }

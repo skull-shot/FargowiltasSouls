@@ -15,13 +15,12 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
         public override void Update(Player player, ref int buffIndex)
         {
-            //disables minions, disables pets
             player.FargoSouls().Asocial = true;
 
-            player.GetDamage(DamageClass.Summon) *= 0.6f;
+            player.GetDamage(DamageClass.Summon) /= 1.5f;
 
             if (player.HeldItem.DamageType.CountsAsClass(DamageClass.SummonMeleeSpeed))
-                player.FargoSouls().AttackSpeed /= 2;
+                player.FargoSouls().AttackSpeed /= 1.5f;
         }
     }
 }
