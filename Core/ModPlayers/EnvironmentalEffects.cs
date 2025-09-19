@@ -223,7 +223,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             int maxIcicles = 25;
             int spawningRange = 60;
             int airNeeded = 5;
-            int icicleDamage = 50;
+            int icicleDamage = 20;
 
             //icicle spawning 
             if (Main.rand.NextBool(30) && Player.ownedProjectileCounts[ModContent.ProjectileType<FallingIcicle>()] < maxIcicles)
