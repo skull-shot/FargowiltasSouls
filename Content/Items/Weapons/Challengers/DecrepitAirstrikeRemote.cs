@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 15;
             Item.value = Item.sellPrice(0, 5);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item66;
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<DecrepitAirstrike>();

@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<KamikazePixie>();

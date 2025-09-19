@@ -1,4 +1,7 @@
-﻿using Fargowiltas.Common.Configs;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Fargowiltas.Common.Configs;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
@@ -8,9 +11,6 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.IO;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -165,6 +165,14 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             Vector2 desiredPos = mousePos;
             Projectile.velocity = (desiredPos - Projectile.Center) / 5;
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            Player player = Main.player[Projectile.owner];
+            player.FargoSouls().IceQueenCrownCD = IceShieldEffect.CD;
+            if (player.whoAmI == Main.myPlayer)
+                CooldownBarManager.Activate("IceQueenCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "IceQueensShield").Value, Color.LightBlue, () => 1f - (float)Main.LocalPlayer.FargoSouls().IceQueenCrownCD / IceShieldEffect.CD, activeFunction: player.HasEffect<IceShieldEffect>);
         }
 
         public override bool? CanDamage()

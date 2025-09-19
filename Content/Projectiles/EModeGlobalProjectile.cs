@@ -1807,6 +1807,20 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
+                    case ProjectileID.ApprenticeStaffT3Shot: //betsys wrath
+                        if (SourceItemType == ItemID.ApprenticeStaffT3 && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            // resets curse duration to 1s after vanilla onhit sets it to 10s
+                            for (int i = 0; i < NPC.maxBuffs; i++)
+                            {
+                                if (target.buffType[i] == BuffID.BetsysCurse && target.buffTime[i] == 600)
+                                {
+                                    target.buffTime[i] = 60;
+                                }
+                            }
+                        }
+                        break;
+
                     default:
                         break;
                 }
