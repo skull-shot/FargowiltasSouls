@@ -9,7 +9,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.Accessories
 {
     public class CreeperGutted : ModNPC
     {

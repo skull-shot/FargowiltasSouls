@@ -14,7 +14,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
 {
     public class SoulVortex : ModNPC
     {

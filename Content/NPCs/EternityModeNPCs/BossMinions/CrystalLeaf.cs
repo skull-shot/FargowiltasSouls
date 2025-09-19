@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions
 {
     public class CrystalLeaf : ModNPC
     {
@@ -258,7 +258,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             bool recolor = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
-            Texture2D texture2D13 = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/CrystalLeaf").Value : Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Texture2D texture2D13 = recolor ? ModContent.Request<Texture2D>("FargowiltasSouls/Content/NPCs/EternityModeNPCs/BossMinions/CrystalLeaf").Value : Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
 
             Rectangle rectangle = NPC.frame;
             Vector2 origin2 = rectangle.Size() / 2f;

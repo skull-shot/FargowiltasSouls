@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System.IO;

@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Armor;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using FargowiltasSouls.Content.Projectiles;

@@ -10,7 +10,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.QueenBee
 {
     public class RoyalSubjectProjectile : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/NPCs/EternityModeNPCs/RoyalSubject22";
+        public override string Texture => "FargowiltasSouls/Content/NPCs/EternityModeNPCs/BossMinions/RoyalSubject22";
 
         public override void SetStaticDefaults()
         {

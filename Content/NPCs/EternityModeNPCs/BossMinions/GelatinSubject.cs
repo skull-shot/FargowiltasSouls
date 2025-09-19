@@ -13,7 +13,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions
 {
     public class GelatinSubject : ModNPC
     {
