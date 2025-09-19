@@ -143,12 +143,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     HallowedIlluminated();
                 }
 
-                // spider biome
-                if (currentTile.WallType == WallID.SpiderUnsafe)
-                {
-                    SpiderWebbed();
-                }
-
                 if (Player.ZoneUnderworldHeight)
                 {
                     UnderworldFire();
@@ -593,26 +587,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     {
                         Player.breath = -10;
                     }
-                }
-            }
-        }
-
-        private void SpiderWebbed()
-        {
-            if (!Player.buffImmune[BuffID.Webbed] && Player.stickyBreak > 0)
-            {
-                Player.AddBuff(BuffID.Webbed, 30);
-                Player.AddBuff(BuffID.Slow, 90);
-                Player.stickyBreak = 0;
-
-                Vector2 vector = Collision.StickyTiles(Player.position, Player.velocity, Player.width, Player.height);
-                if (vector.X != -1 && vector.Y != -1)
-                {
-                    int num3 = (int)vector.X;
-                    int num4 = (int)vector.Y;
-                    WorldGen.KillTile(num3, num4, false, false, false);
-                    if (Main.netMode == NetmodeID.MultiplayerClient && !Main.tile[num3, num4].HasTile)
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, num3, num4, 0f, 0, 0, 0);
                 }
             }
         }
