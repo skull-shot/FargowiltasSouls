@@ -53,12 +53,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
+
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return DarkArtistMinion.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class DarkArtistMinion : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<DarkArtistEnchant>();
         public override bool MinionEffect => true;
+        public static int BaseDamage(Player player) => (int)(72 * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             if (player.ownedProjectileCounts[ModContent.ProjectileType<FlameburstMinion>()] == 0)
