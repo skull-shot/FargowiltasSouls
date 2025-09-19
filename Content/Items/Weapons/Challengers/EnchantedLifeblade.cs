@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.noMelee = true;
             //Item.channel = true;
 
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.shoot = ModContent.ProjectileType<EnchantedLifebladeProjectile>();
             Item.shootSpeed = 30f;

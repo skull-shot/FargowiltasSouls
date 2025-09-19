@@ -3668,3 +3668,8 @@ MainframePainting: {
 	// DisplayName: Mainframe Painting
 	// Tooltip: "'Gonk'"
 }
+
+CactusMimicBanner: {
+	// DisplayName: Cactus Mimic Banner
+	// Tooltip: ""
+}

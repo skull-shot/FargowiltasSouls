@@ -1084,7 +1084,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             bool retVal = true;
 
-            if (Player.statLife <= 0) //revives
+            bool dodgable = true;
+            if ((damageSource.SourceProjectileLocalIndex != -1 && !Main.projectile[damageSource.SourceProjectileLocalIndex].IsDamageDodgable()) || (damageSource.SourceNPCIndex != -1 && !Main.npc[damageSource.SourceNPCIndex].IsDamageDodgeable()))
+                dodgable = false;
+
+            if (Player.statLife <= 0 && dodgable) //revives
             {
                 if (Player.whoAmI == Main.myPlayer && retVal && AbomRebirth)
                 {

@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.HiddenAnimation;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 5);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             //Item.UseSound = SoundID.Item40;
             Item.shoot = ModContent.ProjectileType<RoseTintedVisorDeathray>(); //guns just have this, don't ask
             Item.shootSpeed = 3f;

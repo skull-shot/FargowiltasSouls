@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,6 +36,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
             NPC.DeathSound = SoundID.NPCDeath1;
 
             NPC.ShowNameOnHover = false;
+
+            Banner = Type;
+            BannerItem = ModContent.ItemType<CactusMimicBanner>();
+            ItemID.Sets.KillsToBanner[BannerItem] = 50;
             //base.SetDefaults();
         }
         public override void SetStaticDefaults()
