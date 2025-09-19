@@ -14,7 +14,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
+namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
 {
     public class CactusMimic : ModNPC
     {
@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
         {
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
-                CustomTexturePath = "FargowiltasSouls/Content/NPCs/EternityModeNPCs/CactusMimic_Bestiary",
+                CustomTexturePath = "FargowiltasSouls/Content/NPCs/EternityModeNPCs/CustomEnemies/Desert/CactusMimic_Bestiary",
                 PortraitScale = 0f,
                 Scale = 0.2f,
                 PortraitPositionYOverride = 0f,
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 if (tile.TileType == TileID.Pearlsand) ai = 2;
                 if (tile.TileType == TileID.Crimsand) ai = 3;
             }
-            return NPC.NewNPC(NPC.GetSource_NaturalSpawn(), tileX * 16 + 8, tileY * 16, NPC.type, ai2: ai);
+            return NPC.NewNPC(Terraria.Entity.GetSource_NaturalSpawn(), tileX * 16 + 8, tileY * 16, NPC.type, ai2: ai);
         }
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
         {
@@ -123,13 +123,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                 float rotation = 0;
                 if (NPC.localAI[0] < 20)
                 {
-                    float x = 1 - MathF.Pow(1 - (NPC.localAI[0] / 20), 4);
+                    float x = 1 - MathF.Pow(1 - NPC.localAI[0] / 20, 4);
                     rotation = Utils.AngleLerp(0, MathHelper.ToRadians(30), x);
                 }
                 else
                 {
-                    float x = 1 - MathF.Cos((((NPC.localAI[0] - 20) / 10) * MathF.PI) / 2);
-                    rotation = Utils.AngleLerp(MathHelper.ToRadians(30), 0, x);
+                    float x = 1 - MathF.Cos((NPC.localAI[0] - 20) / 10 * MathF.PI / 2);
+                    rotation = MathHelper.ToRadians(30).AngleLerp(0, x);
                 }
                 spriteBatch.Draw(t.Value, NPC.Center - Main.screenPosition + new Vector2( -5, -8).RotatedBy(NPC.rotation), jaw1, drawColor, NPC.rotation - rotation, new Vector2(3, 21), NPC.scale, SpriteEffects.None, 0);
                 spriteBatch.Draw(t.Value, NPC.Center - Main.screenPosition + new Vector2(5, -8).RotatedBy(NPC.rotation), jaw2, drawColor, NPC.rotation + rotation, new Vector2(9, 21), NPC.scale, SpriteEffects.None, 0);
@@ -146,13 +146,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
 
             }
             Player target = Main.player[NPC.target];
-            if (NPC.GetLifePercent() < 0.9f || (NPC.Distance(target.Center) < 200 && !target.invis) || NPC.ai[0] == 1)
+            if (NPC.GetLifePercent() < 0.9f || NPC.Distance(target.Center) < 200 && !target.invis || NPC.ai[0] == 1)
             {
                 if (NPC.ai[0] == 0)
                 {
                     NPC.ShowNameOnHover = true;
                     NPC.ai[0] = 1;
-                    int dir = (target.Center.X > NPC.Center.X ? 1 : -1);
+                    int dir = target.Center.X > NPC.Center.X ? 1 : -1;
                     NPC.velocity.X = dir * 6;
                     NPC.velocity.Y = -4;
                     NPC.rotation += MathHelper.ToRadians(dir);
@@ -164,21 +164,21 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs
                     SoundEngine.PlaySound(SoundID.Zombie2 with { Volume = 0.3f}, NPC.Center);
                     NPC.netUpdate = true;
                 }
-                float rotoffset = NPC.velocity.Y > 0 ? 20 : (NPC.velocity.Y < 0 ? -20 : 0);
+                float rotoffset = NPC.velocity.Y > 0 ? 20 : NPC.velocity.Y < 0 ? -20 : 0;
                 if (NPC.ai[1] == 1)
                 {
-                    NPC.rotation = Utils.AngleLerp(NPC.rotation, MathHelper.ToRadians(90 + rotoffset * NPC.ai[1]), 0.06f);
+                    NPC.rotation = NPC.rotation.AngleLerp(MathHelper.ToRadians(90 + rotoffset * NPC.ai[1]), 0.06f);
                 }
                 else
                 {
-                    NPC.rotation = Utils.AngleLerp(NPC.rotation, MathHelper.ToRadians(-90 + rotoffset * NPC.ai[1]), 0.06f);
+                    NPC.rotation = NPC.rotation.AngleLerp(MathHelper.ToRadians(-90 + rotoffset * NPC.ai[1]), 0.06f);
                 }
                 if(Collision.SolidCollision(NPC.BottomLeft, NPC.width, 6, true))
                 {
                     NPC.velocity.X *= 0.8f;
                     if (NPC.localAI[0] == 20)
                     {
-                        int dir = (target.Center.X > NPC.Center.X ? 1 : -1);
+                        int dir = target.Center.X > NPC.Center.X ? 1 : -1;
                         NPC.velocity.Y = -4;
                         NPC.velocity.X = dir * 3;
                         if (NPC.ai[1] != dir)

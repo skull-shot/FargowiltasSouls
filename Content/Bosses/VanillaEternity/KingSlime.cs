@@ -5,7 +5,7 @@ using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.NPCs;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using FargowiltasSouls.Core;

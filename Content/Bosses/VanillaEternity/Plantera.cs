@@ -12,7 +12,6 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Core.NPCMatching;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +22,7 @@ using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera;
 using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
