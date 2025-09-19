@@ -29,11 +29,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             Projectile.tileCollide = true;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 600;
-            Projectile.scale = 0.1f;
+            Projectile.scale = 1f;
         }
+
+        private bool firstTick = true;
 
         public override void AI()
         {
+            if (firstTick)
+            {
+                firstTick = false;
+                Projectile.scale = 0.1f;
+            }
+
             Projectile.timeLeft = 2;
             Player target = Main.player[Projectile.owner];
 
