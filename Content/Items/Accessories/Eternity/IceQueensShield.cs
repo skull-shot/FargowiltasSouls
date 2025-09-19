@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => null;
         public override bool ActiveSkill => true;
         public override int ToggleItemType => ModContent.ItemType<IceQueensShield>();
-        public static int CD => 60 * 15;
+        public static int CD => 60 * 10;
         public static int BaseDamage(Player player) => (int)(330 * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
@@ -92,11 +92,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 {
                     SoundEngine.PlaySound(SoundID.Item30, player.Center);
                     Projectile.NewProjectile(player.GetSource_EffectItem<IceShieldEffect>(), player.Center, Vector2.Zero, shield, BaseDamage(player), 1f, player.whoAmI);
-                    modPlayer.IceQueenCrownCD = CD;
-
-                    if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("IceQueenCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "IceQueensShield").Value, Color.LightBlue,
-                            () => 1f - (float)Main.LocalPlayer.FargoSouls().IceQueenCrownCD / CD, activeFunction: player.HasEffect<IceShieldEffect>);
                 }
             }
         }
