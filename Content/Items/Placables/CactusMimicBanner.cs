@@ -1,4 +1,4 @@
-using FargowiltasSouls.Assets.Textures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Tiles;
 using Terraria;
 using Terraria.Enums;
@@ -7,9 +7,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Placables
 {
-    public class TophatSquirrelBanner : SoulsItem
+    public class CactusMimicBanner : SoulsItem
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "TophatSquirrelBanner");
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables", "CactusMimicBanner");
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -18,10 +18,10 @@ namespace FargowiltasSouls.Content.Items.Placables
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TophatSquirrelBannerSheet>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.CactusMimicBannerSheet>());
             Item.width = 14;
             Item.height = 36;
-            Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 10));
+            Item.SetShopValues(ItemRarityColor.Blue1, Terraria.Item.buyPrice(silver: 10));
         }
     }
 }

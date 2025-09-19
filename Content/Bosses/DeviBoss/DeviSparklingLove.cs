@@ -171,8 +171,9 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         }
 
         public override void OnSpawn(IEntitySource source)
-        {
-            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), Projectile.Center);
+        {   
+            if (FargoSoulsUtil.HostCheck)
+                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviAxeSizeup" + Main.rand.Next(1, 3)), Projectile.Center);
             base.OnSpawn(source);
         }
 
