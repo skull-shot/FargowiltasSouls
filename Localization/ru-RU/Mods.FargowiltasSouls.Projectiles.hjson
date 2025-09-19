@@ -855,3 +855,5 @@ MutantWofPart.DisplayName: Стена плоти
 MutantCursedFlame.DisplayName: Проклятые огни
 MutantIchor.DisplayName: Золотой дождь
 ExplosionVisual.DisplayName: Взрыв
+// OOAForcefield.DisplayName: O O A Forcefield
+// OOAForceFieldProj.DisplayName: O O A Force Field Proj
