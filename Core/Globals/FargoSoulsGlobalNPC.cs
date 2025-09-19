@@ -10,6 +10,7 @@ using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -1373,8 +1374,6 @@ namespace FargowiltasSouls.Core.Globals
                 modifiers.ArmorPenetration += 10;
             if (CurseoftheMoon)
                 modifiers.ArmorPenetration += 20;
-            //if (Rotting)
-            //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
             {
                 float ratio = PureGazeTime / PungentGazeBuff.MAX_TIME;
@@ -1384,6 +1383,11 @@ namespace FargowiltasSouls.Core.Globals
                     def = 50;
                 modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
+            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
+            {
+
+            }
+
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;
             if (Smite)
@@ -1410,22 +1414,10 @@ namespace FargowiltasSouls.Core.Globals
                 //modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
             }
 
-            //            //if (modPlayer.KnightEnchant && Villain && !npc.boss)
-            //            //{
-            //            //    damage *= 1.5;
-            //            //}
-
-            //            if (crit && modPlayer.ShroomEnchant && !modPlayer.TerrariaSoul && player.stealth == 0)
-            //            {
-            //                damage *= 1.5;
-            //            }
-
             if (modPlayer.DeviGraze)
             {
                 modifiers.FinalDamage *= 1.0f + (float)modPlayer.DeviGrazeBonus;
             }
-
-            //            //normal damage calc
         }
 
         public override void ModifyShop(NPCShop shop)
