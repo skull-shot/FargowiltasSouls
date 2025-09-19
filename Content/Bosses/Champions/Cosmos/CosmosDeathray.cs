@@ -162,8 +162,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public float WidthFunction(float trailInterpolant)
         {
-            float scale = 1f;
-            return scale * Projectile.width * Projectile.scale / 2;
+            return 1.1f * Projectile.width * Projectile.scale / 2;
         }
         
 

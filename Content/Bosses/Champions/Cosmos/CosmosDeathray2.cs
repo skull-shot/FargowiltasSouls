@@ -150,7 +150,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float trailInterpolant) => Projectile.width * Projectile.scale / 2;
+        public float WidthFunction(float trailInterpolant) => 1.1f * Projectile.width * Projectile.scale / 2;
 
         public static Color ColorFunction(float trailInterpolant)
         {
