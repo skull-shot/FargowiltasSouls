@@ -1,24 +1,15 @@
-﻿using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Common.Utilities;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA;
-using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Events;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
 {
@@ -26,18 +17,30 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
     {
         public override string Texture => "Terraria/Images/NPC_" + NPCID.DD2WitherBeastT2;
 
+        public override int AssignPointValue() => 1;
+
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
             Main.npcFrameCount[Type] = 17;
         }
 
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
+            {
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Invasions.OldOnesArmy,
+                new FlavorTextBestiaryInfoElement("Mods.FargowiltasSouls.Bestiary.DD2Shielder")
+            });
+            base.SetBestiary(database, bestiaryEntry);
+        }
+
         public override void SetDefaults()
         {
             NPC.width = 40;
             NPC.height = 40;
-            NPC.lifeMax = 210;
-            NPC.defense = 5;
+            NPC.lifeMax = DD2Event.OngoingDifficulty == 1 ? 210 : DD2Event.OngoingDifficulty == 2 ? 640 : 960;
+            NPC.defense = DD2Event.OngoingDifficulty == 1 ? 5 : DD2Event.OngoingDifficulty == 2 ? 15 : 30;
             NPC.damage = 30;
             NPC.knockBackResist = 0f;
             NPC.DeathSound = SoundID.NPCDeath1;
@@ -55,16 +58,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
             }
             Timer++;
 
-            int n = NPC.FindFirstNPC(NPCID.DD2EterniaCrystal);
-            if (n == -1)
+            NPC crystal = DD2Utils.GetEterniaCrystal();
+            if (crystal == null)
             {
                 NPC.life = 0;
                 NPC.checkDead();
                 return;
             }
 
-            NPC crystal = Main.npc[n];
-            float dir = NPC.Center.X < crystal.Center.X ? 1 : -1;
+            float dir = NPC.HorizontalDirectionTo(crystal.Center);
             NPC.direction = (int)dir;
             NPC.spriteDirection = -NPC.direction;
 
