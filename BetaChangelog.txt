@@ -221,3 +221,7 @@ fixed eri rays disappearing
 
 fixed wof rays being broken
 fixed mutant not having a swirly tell on spear spins
+parries
+	did some jank fuckery to make parries not interact at all with usetime
+	this almost definitely broke something, test vigorously
+	nerfed frame data, 10/20 parry windows -> 8/16
