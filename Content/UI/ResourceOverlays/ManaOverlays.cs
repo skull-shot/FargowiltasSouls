@@ -45,7 +45,6 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
                 if (asset == TextureAssets.Mana)
                 {
                     context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Mana");
-                    context.source = new(0, 0, 0, 0);
                     context.Draw();
                 }
                 else if (CompareAssets(asset, fancyFolder + "Star_Fill"))
