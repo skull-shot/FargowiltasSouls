@@ -58,7 +58,7 @@ namespace FargowiltasSouls
             On_Player.AddBuff += AddBuff;
             On_Player.QuickHeal_GetItemToUse += QuickHeal_GetItemToUse;
             On_Player.CheckDrowning += PreventGillsDrowning;
-            On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
+            //On_Player.HorsemansBlade_SpawnPumpkin += HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot += InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
@@ -96,7 +96,7 @@ namespace FargowiltasSouls
             On_Player.AddBuff -= AddBuff;
             On_Player.QuickHeal_GetItemToUse -= QuickHeal_GetItemToUse;
             On_Player.CheckDrowning -= PreventGillsDrowning;
-            On_Player.HorsemansBlade_SpawnPumpkin -= HorsemansBlade_SpawnPumpkin;
+            //On_Player.HorsemansBlade_SpawnPumpkin -= HorsemansBlade_SpawnPumpkin;
             On_Player.ItemCheck_Shoot -= InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
@@ -252,13 +252,13 @@ namespace FargowiltasSouls
             orig(item, ref yoyoLogo, ref researchLine, oldKB, ref numLines, toolTipLine, preFixLine, badPreFixLine, toolTipNames, out prefixlineIndex);
             DrawingTooltips = false;
         }
-        public static void HorsemansBlade_SpawnPumpkin(On_Player.orig_HorsemansBlade_SpawnPumpkin orig, Player self, int npcIndex, int dmg, float kb)
+        /*public static void HorsemansBlade_SpawnPumpkin(On_Player.orig_HorsemansBlade_SpawnPumpkin orig, Player self, int npcIndex, int dmg, float kb)
         {
             NPC npc = Main.npc[npcIndex];
             if (npc.type is NPCID.GolemFistLeft or NPCID.GolemFistRight && WorldSavingSystem.EternityMode && npc.TryGetGlobalNPC(out GolemFist golemFist) && golemFist.RunEmodeAI)
                 return;
             orig(self, npcIndex, dmg, kb);
-        }
+        }*/
 
         private void InterruptShoot(On_Player.orig_ItemCheck_Shoot orig, Player self, int i, Item sItem, int weaponDamage)
         {
