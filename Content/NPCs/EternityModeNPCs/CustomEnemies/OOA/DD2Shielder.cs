@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
         {
             NPC.width = 40;
             NPC.height = 40;
-            NPC.lifeMax = 110;
+            NPC.lifeMax = 210;
             NPC.defense = 5;
             NPC.damage = 30;
             NPC.knockBackResist = 0f;

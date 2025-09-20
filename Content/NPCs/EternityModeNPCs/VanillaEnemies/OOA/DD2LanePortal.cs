@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             Timer++;
 
             float percent = GetWaveProgressPercent();
-            if (!IsFinalWave() && ShieldersSpawned * 0.2f <= percent && FargoSoulsUtil.HostCheck)
+            if (!IsFinalWave() && ShieldersSpawned * 0.4f <= percent && FargoSoulsUtil.HostCheck)
             {
                 SpawnFromDD2Portal(npc, ModContent.NPCType<DD2Shielder>());
                 ShieldersSpawned++;
