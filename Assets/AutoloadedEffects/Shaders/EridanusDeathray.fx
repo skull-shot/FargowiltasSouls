@@ -49,7 +49,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     float distanceFromEdge = distance(distanceFromCenter, 0.4);
     
     //float4 outerGlow = float4(0.12, 0.0, 0.25, 0) * 0; //saturate(pow(0.1 / distanceFromEdge, 3));
-    float4 innerGlow = float4(0.0, 0, 0, 0);
+    float4 innerGlow = float4(0.1, 0.1, 0.1, 0);
     
     float4 tex1 = tex2D(noiseScrollTexture, input.Position.xy / 77);
     float4 tex2 = tex2D(noiseScrollTexture, input.Position.xy / 88);

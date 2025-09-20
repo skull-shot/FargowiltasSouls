@@ -225,3 +225,5 @@ parries
 	did some jank fuckery to make parries not interact at all with usetime
 	this almost definitely broke something, test vigorously
 	nerfed frame data, 10/20 parry windows -> 8/16
+
+made eri rays brighter for visibility
