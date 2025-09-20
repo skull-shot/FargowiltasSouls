@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,6 +10,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     {
         public static readonly Color ItemColor = new(0, 255, 255);
         protected override Color? nameColor => ItemColor;
+
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 17));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
