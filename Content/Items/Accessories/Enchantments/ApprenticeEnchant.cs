@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             //ApprenticeEnchant.ApprenticeShoot(player, player.whoAmI, item2, damage);
                             //FargoSoulsGlobalProjectile.ApprenticeDamageCap = 0;
 
-                            int divisor = forceEffect ? 3 : 6;
+                            int divisor = forceEffect ? 4 : 7;
                             if (!HasEffectEnchant(player))
                                 divisor = 10;
 
