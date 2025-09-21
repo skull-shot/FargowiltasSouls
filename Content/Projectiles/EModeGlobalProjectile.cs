@@ -1807,6 +1807,20 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
+                    case ProjectileID.ApprenticeStaffT3Shot:
+                        if (SourceItemType == ItemID.ApprenticeStaffT3 && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            for (int i = 0; i < NPC.maxBuffs; i++)
+                            {
+                                if (target.buffType[i] == BuffID.BetsysCurse && target.buffTime[i] == 600)
+                                {
+                                    if (projectile.FargoSouls().ApprenticeSupportProjectile)
+                                        target.buffTime[i] = 30;
+                                    else target.buffTime[i] = 300;
+                                }
+                            }
+                        }
+                        break;
 
                     default:
                         break;

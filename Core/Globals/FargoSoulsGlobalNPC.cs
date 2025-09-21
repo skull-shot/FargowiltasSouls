@@ -1385,7 +1385,7 @@ namespace FargowiltasSouls.Core.Globals
             }
             if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
             {
-
+                modifiers.Defense.Flat += 15; //25 total ap
             }
 
             if (DeathMarked)
