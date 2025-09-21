@@ -144,7 +144,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float trailInterpolant) => Projectile.width * Projectile.scale / 2;
+        public float WidthFunction(float trailInterpolant) => 1.1f * Projectile.width * Projectile.scale / 2;
 
         public static Color ColorFunction(float trailInterpolant)
         {
@@ -152,6 +152,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             color.A = 100;
             return color;
         }
+        public Vector2[] offsets = new Vector2[80];
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             if (Projectile.hide)
@@ -164,15 +165,23 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.1f;
 
             Vector2 initialDrawPoint = Projectile.Center;
-            Vector2[] baseDrawPoints = new Vector2[8];
+            Vector2[] baseDrawPoints = new Vector2[80];
             for (int i = 0; i < baseDrawPoints.Length; i++)
+            {
                 baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
+                if (offsets[i] == Vector2.Zero)
+                {
+                    float dif = Projectile.localAI[1] * 1.1f / baseDrawPoints.Length;
+                    offsets[i] = Main.rand.NextVector2Circular(dif * 0.5f, dif * 0.5f);
+                }
+                baseDrawPoints[i] += offsets[i];
+            }
 
             FargoSoulsUtil.SetTexture1(FargoAssets.CracksNoise.Value);
 
             shader.TrySetParameter("laserDirection", Projectile.velocity.SafeNormalize(Vector2.UnitY));
 
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 25);
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), 80);
 
             Main.spriteBatch.ResetToDefault();
         }

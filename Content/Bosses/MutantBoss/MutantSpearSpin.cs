@@ -223,10 +223,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Color glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 191, 51, 210) : new(51, 255, 191, 210);
                 if (predictive)
                     glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, 210) : new Color(0, 0, 255, 210);
-
+                
                 const int fireballAnimTime = 30;
                 float repeats = (float)(Projectile.localAI[2] * Math.Min(1f, Projectile.localAI[2] / 90f) % fireballAnimTime) / fireballAnimTime;
-                //FancyFireballs(repeats, glowColor);
+                FancyFireballs(repeats, glowColor);
 
                 glowColor *= 1f - modifier;
                 float glowScale = Projectile.scale * 8f * modifier;

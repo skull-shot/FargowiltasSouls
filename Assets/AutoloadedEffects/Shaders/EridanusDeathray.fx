@@ -11,26 +11,21 @@ struct VertexShaderInput
     float4 Color : COLOR0;
     float3 TextureCoordinates : TEXCOORD0;
 };
-
 struct VertexShaderOutput
 {
     float4 Position : SV_POSITION;
     float4 Color : COLOR0;
     float3 TextureCoordinates : TEXCOORD0;
 };
-
 VertexShaderOutput VertexShaderFunction(in VertexShaderInput input)
 {
     VertexShaderOutput output = (VertexShaderOutput) 0;
     float4 pos = mul(input.Position, uWorldViewProjection);
     output.Position = pos;
-    
     output.Color = input.Color;
     output.TextureCoordinates = input.TextureCoordinates;
-
     return output;
 }
-
 float QuadraticBump(float x)
 {
     return x * (4 - x * 4);
@@ -43,23 +38,24 @@ float InverseLerp(float a, float b, float t)
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
+    input.Position.y += input.Position.x * 2;
     float2 coords = input.TextureCoordinates;
     float4 color = input.Color;
     
-    // Account for texture distortion artifacts in accordance with the primitive distortion fixes.
     coords.y = (coords.y - 0.5) / input.TextureCoordinates.z + 0.5;
+    
     
     float distanceFromCenter = distance(coords.y, 0.5);
     float distanceFromEdge = distance(distanceFromCenter, 0.4);
     
-    float4 outerGlow = float4(0.12, 0.0, 0.25, 0) * 0; //saturate(pow(0.1 / distanceFromEdge, 3));
-    float4 innerGlow = float4(0.0, 0, 0.16, 0);
+    //float4 outerGlow = float4(0.12, 0.0, 0.25, 0) * 0; //saturate(pow(0.1 / distanceFromEdge, 3));
+    float4 innerGlow = float4(0.1, 0.1, 0.1, 0);
     
     float4 tex1 = tex2D(noiseScrollTexture, input.Position.xy / 77);
     float4 tex2 = tex2D(noiseScrollTexture, input.Position.xy / 88);
     float4 tex = (tex1 + tex2) / 2;
-    innerGlow = lerp(innerGlow, float4(0, 0, 0, 1), 0) - tex / 3;
-    float4 glow = outerGlow + innerGlow * 3;
+    innerGlow = lerp(innerGlow, float4(0, 0, 0, 1), 0) - tex / 2.8;
+    float4 glow = innerGlow * 3.1;
     
     float lerper = smoothstep(1, 0, distanceFromCenter) * color.a;
     

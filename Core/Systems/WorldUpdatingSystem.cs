@@ -462,7 +462,7 @@ namespace FargowiltasSouls.Core.Systems
                 CorruptWaterTimer--;
 
                 //make water do stuff
-                Main.SceneMetrics.ActiveFountainColor = 6;
+                //Main.SceneMetrics.ActiveFountainColor = 6;
             }
 
             if (CrimsonWaterTimer > 0)
@@ -470,7 +470,7 @@ namespace FargowiltasSouls.Core.Systems
                 CrimsonWaterTimer--;
 
                 //make water do stuff
-                Main.SceneMetrics.ActiveFountainColor = 12;
+                //Main.SceneMetrics.ActiveFountainColor = 12;
             }
         }
         public static bool CanActuallyPlayMaso => (FargoSoulsUtil.WorldIsMaster() && CanPlayMaso) || Main.zenithWorld;

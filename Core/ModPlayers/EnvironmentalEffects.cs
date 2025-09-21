@@ -190,11 +190,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             //search around player for water, add dust
             Vector2 playerPos = Player.Center;
-            int radius = 500;
+            int radius = 1000;
 
-            for (int x = -radius; x <= radius; x++)
+            for (int x = -radius; x <= radius; x += 2)
             {
-                for (int y = -radius; y <= radius; y++)
+                for (int y = -radius; y <= radius; y += 2)
                 {
                     int xPosition = (int)(x + playerPos.X / 16.0f);
                     int yPosition = (int)(y + playerPos.Y / 16.0f);
@@ -223,7 +223,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             int maxIcicles = 25;
             int spawningRange = 60;
             int airNeeded = 5;
-            int icicleDamage = 50;
+            int icicleDamage = 20;
 
             //icicle spawning 
             if (Main.rand.NextBool(30) && Player.ownedProjectileCounts[ModContent.ProjectileType<FallingIcicle>()] < maxIcicles)

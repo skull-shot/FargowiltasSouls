@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GranitePebble>(), npc.damage / 3, 1f, ai0: npc.whoAmI, ai2: projCount);
+                                Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GranitePebble>(), npc.damage / 6, 1f, ai0: npc.whoAmI, ai2: projCount);
                             }
                             projCount++;
                             List<Projectile> pebbles = Main.projectile.Where(y => y.active && y.type == ModContent.ProjectileType<GranitePebble>() && y.ai[0] == npc.whoAmI).ToList();
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.FargoSouls().AddBuffNoStack(BuffID.Stoned, 60);
+            //target.FargoSouls().AddBuffNoStack(BuffID.Stoned, 60);
         }
     }
 }

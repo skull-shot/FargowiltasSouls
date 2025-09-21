@@ -8,6 +8,7 @@ using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -15,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
-	public class MutantWofDeathray : PhantasmalDeathrayWOF, IPixelatedPrimitiveRenderer
+	public class MutantWofDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayWOF");
         public MutantWofDeathray() : base(1200) { }
@@ -158,6 +159,51 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindNPCs.Add(index);
+        }
+
+        public override bool PreDraw(ref Color lightColor) => false;
+
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.7f : 2.2f);
+
+        public static Color ColorFunction(float _)
+        {
+            Color color = Color.LightSkyBlue; //new(232, 140, 240);
+            color.A = 0;
+            return color;
+        }
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            if (Projectile.hide)
+                return;
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.WoFDeathray");
+
+            // Get the laser end position.
+            Vector2 laserEnd = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitY) * Projectile.localAI[1] * 1.5f;
+
+            // Create 8 points that span across the draw distance from the projectile center.
+            Vector2 initialDrawPoint = Projectile.Center - Projectile.velocity * 15f;
+            Vector2[] baseDrawPoints = new Vector2[8];
+            for (int i = 0; i < baseDrawPoints.Length; i++)
+                baseDrawPoints[i] = Vector2.Lerp(initialDrawPoint, laserEnd, i / (float)(baseDrawPoints.Length - 1f));
+
+
+            // Set shader parameters.
+            shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
+            shader.TrySetParameter("stretchAmount", 0.25);
+            shader.TrySetParameter("scrollSpeed", 2f);
+            shader.TrySetParameter("uColorFadeScaler", 0.8f);
+            shader.TrySetParameter("useFadeIn", true);
+            shader.TrySetParameter("realopacity", 1); // do not change this.
+
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 15 : 15);
         }
     }
 }
