@@ -744,8 +744,8 @@ namespace FargowiltasSouls.Content.Projectiles
                                 if (nPC.CanBeChasedBy(projectile))
                                 {
                                     float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                                    float maxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
-                                    if (targetDistance < maxChaseDistance)
+                                    const float MaxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
+                                    if (targetDistance < MaxChaseDistance)
                                     {
                                         homingCheck = true;
                                         projCenterX = nPC.Center.X;
@@ -1505,6 +1505,31 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             projectile.localAI[0] += 2f; // tripled petal firerate
                             projectile.netUpdate = true;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.EatersBite:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.ScourgeoftheCorruptor))
+                        {
+                            const int TimeUntilSplit = 40; // 0.66 seconds
+                            const float GrazeDistanceSquared = 3600f; // 60f squared
+                            for (int npc = 0; npc < Main.maxNPCs; npc++)
+                            {
+                                NPC nPC = Main.npc[npc];
+                                if (nPC.CanBeChasedBy(projectile))
+                                {
+                                    float targetDistanceSquared = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                                    if (targetDistanceSquared < GrazeDistanceSquared && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                    {
+                                        projectile.timeLeft = TimeUntilSplit;
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                     break;

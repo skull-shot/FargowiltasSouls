@@ -70,3 +70,4 @@ MeleeDamageBugFix: Снаряды теперь наносят ближний у�
 VortexSet: Режим скрытности длится 10 секунд, после чего потребует перезарядки
 PossessedHatchet: Топор отскакивает от врага ко врагу
 // BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
+// ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
