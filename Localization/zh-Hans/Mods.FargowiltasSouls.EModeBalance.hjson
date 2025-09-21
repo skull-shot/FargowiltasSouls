@@ -69,4 +69,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // MeleeDamageBugFix: Fixed projectiles not dealing melee damage
 // VortexSet: Stealth lasts up to 10 seconds before going on cooldown
 // PossessedHatchet: Projectiles bounce off and between enemies
-// BetsysCurse: Decreased effectiveness of Betsy's Curse
+// BetsysCurse: Decreased effectiveness and duration of Betsy's Curse

@@ -15,7 +15,7 @@ BetsyDashEffect: {
 	/* Tooltip:
 		'''
 		Perform a short invincible fireball dash towards your cursor
-		Hitting enemies with Fireball Dash inflicts 10 seconds of Betsy's Curse and decreases your dash cooldown
+		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
 		''' */
 }
 
