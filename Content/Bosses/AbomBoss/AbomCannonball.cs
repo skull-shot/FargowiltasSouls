@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -41,6 +42,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override bool? CanDamage()
         {
+            //basically, it cant hurt you when destroyed by abom's p2 transition or death anim
+            if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.abomBoss, ModContent.NPCType<AbomBoss>())
+                && Main.npc[EModeGlobalNPC.abomBoss].dontTakeDamage)
+                return false;
+
             return Behavior == 1 || Projectile.timeLeft <= 0;
         }
 

@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 {
                     Vector2 velocity = Vector2.Normalize(Main.MouseWorld - Projectile.Center) * 20;
 
-                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<MegaFlameburst>(), (int)(72 * player.ActualClassDamage(DamageClass.Magic)), 4, Projectile.owner, Projectile.whoAmI);
+                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<MegaFlameburst>(), DarkArtistMinion.BaseDamage(player), 4, Projectile.owner, Projectile.whoAmI);
                     SoundEngine.PlaySound(SoundID.DD2_FlameburstTowerShot with { Volume = 0.6f }, Projectile.Center);
 
                     Projectile.ai[1] = 0f;

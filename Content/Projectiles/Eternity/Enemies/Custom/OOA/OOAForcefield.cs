@@ -66,16 +66,17 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
             {
                 npc = parentNpc.whoAmI;
                 Projectile.velocity = parentNpc.velocity;
+                Projectile.direction = parentNpc.direction;
             }
         }
+
         public override void AI()
         {
             NPC parent = FargoSoulsUtil.NPCExists(npc);
             if (parent != null)
             {
                 Projectile.timeLeft++;
-                Projectile.Center = parent.Center;
-                Projectile.velocity = parent.velocity;
+                Projectile.Center = parent.Center - 10 * Vector2.UnitY;
                 Projectile.direction = parent.direction;
 
                 float n = Timer > 60 ? 60 : Timer;
@@ -92,16 +93,16 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
             }
             Timer++;
         }
-
+        
         public override bool PreDraw(ref Color lightColor)
         {
             Color color = Color.Purple;
-
             Vector2 pos = Projectile.Center;
             float n = Timer > 60 ? 60 : Timer;
             float timeLerp = MathF.Pow(n, 0.5f);
             float radius = 0 + 20 * timeLerp;
             float arcAngle = MathHelper.PiOver2 - Projectile.direction * MathHelper.PiOver2;
+
             float arcWidth = Timer > 60 ? 0.3f : Timer / 200f;
 
             var blackTile = TextureAssets.MagicPixel;
@@ -154,6 +155,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
             Projectile.timeLeft = 2;
             Projectile.width = 25;
             Projectile.height = 50;
+            Projectile.hostile = true;
         }
 
         public override void AI()

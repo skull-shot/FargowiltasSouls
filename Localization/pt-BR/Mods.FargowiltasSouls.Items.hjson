@@ -169,7 +169,7 @@ DarkArtistEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/5 as often as it would normally
+		The support weapon will fire 1/7 as often as it would normally
 		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
 		'The shadows hold more than they seem'
 		''' */
