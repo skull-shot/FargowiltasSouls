@@ -3693,7 +3693,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     NPC.ai[2] += NPC.localAI[0];
                     NPC.localAI[0] = 0;
                 }
-                const int maxRangeOfVariance = 3;
+                const int maxRangeOfVariance = 2;
                 int increment = 0;
                 while (NPC.ai[2] == oldOffset)
                 {
