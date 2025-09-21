@@ -1537,7 +1537,8 @@ TimsConcoction: {
 	DisplayName: Tim's Concoction
 	Tooltip:
 		'''
-		Certain enemies will drop potions when defeated
+		Most enemies have a chance to drop potions when defeated
+		Potion type depends on enemy type
 		'Smells funny'
 		'''
 }
