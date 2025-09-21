@@ -501,6 +501,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.lifeMax *= 2;
             npc.damage = (int)(npc.damage * 1.3);
+            NPCID.Sets.ImmuneToAllBuffs[npc.type] = true;
 
             //npc.scale += 0.5f;
         }
