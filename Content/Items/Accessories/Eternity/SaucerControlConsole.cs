@@ -1,10 +1,11 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System.Collections.Generic;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -46,6 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.AddEffect<AmmoCycleEffect>(Item);
             player.buffImmune[BuffID.VortexDebuff] = true;
+            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
             player.AddEffect<UfoMinionEffect>(Item);
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)

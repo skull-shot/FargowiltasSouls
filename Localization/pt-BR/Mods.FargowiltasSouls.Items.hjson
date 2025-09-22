@@ -1182,10 +1182,11 @@ ChaliceofTheMoon: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
@@ -1254,7 +1255,7 @@ HeartoftheMasochist: {
 		Invoca um Mini Disco Voador e verdadeiros olhos de Cthulhu amigáveis
 		'Quente, batendo e sem necessidade de um corpo'
 		'''
-	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/ChaliceofTheMoon] grants most standard potion buffs"
+	// VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs"
 }
 
 IceQueensShield: {

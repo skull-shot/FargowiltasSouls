@@ -394,7 +394,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Swarming;
         public bool LowGround;
         public int FallthroughTimer;
-        public bool Flipped;
         public bool Illuminated;
         public bool Mash;
         public bool GrabDamage;

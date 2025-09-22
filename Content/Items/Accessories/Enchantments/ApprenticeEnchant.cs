@@ -42,11 +42,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.ApprenticeHat)
                 .AddIngredient(ItemID.ApprenticeRobe)
                 .AddIngredient(ItemID.ApprenticeTrousers)
-                .AddIngredient(ItemID.DD2FlameburstTowerT2Popper)
                 //magic missile
                 //ice rod
                 //golden shower
                 .AddIngredient(ItemID.BookStaff)
+                .AddIngredient(ItemID.GoldenShower)
                 .AddIngredient(ItemID.ClingerStaff)
 
                 .AddTile<EnchantedTreeSheet>()
