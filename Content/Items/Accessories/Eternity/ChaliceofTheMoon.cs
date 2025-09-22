@@ -136,4 +136,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 player.AddBuff(ModContent.BuffType<TrueEyesBuff>(), 2);
         }
     }
+    public class MinionsDeactivatedEffect : AccessoryEffect
+    {
+        public static void DeactivateMinions(FargoSoulsPlayer modPlayer, Item item)
+        {
+            if (modPlayer.Player.AddEffect<MinionsDeactivatedEffect>(item))
+                modPlayer.GalacticMinionsDeactivated = modPlayer.GalacticMinionsDeactivatedBuffer = true;
+        }
+        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
+        public override int ToggleItemType => EffectItem(Main.LocalPlayer) != null ? EffectItem(Main.LocalPlayer).type : -1;
+    }
 }
