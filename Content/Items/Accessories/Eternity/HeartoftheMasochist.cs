@@ -60,7 +60,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AmmoCycleEffect>(Item);
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
             player.GetDamage(DamageClass.Generic) += 0.8f;
             player.GetCritChance(DamageClass.Generic) += 8;
             fargoPlayer.MasochistHeart = true;
@@ -99,6 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ChalicePotionEffect>(Item);
             player.AddEffect<MasoTrueEyeMinion>(Item);
             fargoPlayer.GravityGlobeEXItem = Item;
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
             //precision seal
             player.buffImmune[ModContent.BuffType<SmiteBuff>()] = true;

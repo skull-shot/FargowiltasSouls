@@ -1186,6 +1186,7 @@ ChaliceofTheMoon: {
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs

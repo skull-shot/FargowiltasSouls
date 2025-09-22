@@ -1156,6 +1156,7 @@ ChaliceofTheMoon: {
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
@@ -1211,10 +1212,10 @@ HeartoftheMasochist: {
 		'''
 		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
 		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
-		Increases [i:FargowiltasSouls/MutantAntibodies] damage, [i:FargowiltasSouls/PumpkingsCape] critical strike chance, and [i:FargowiltasSouls/IceQueensShield] damage reduction by 8%
+		Increases [i:FargowiltasSouls/MutantAntibodies] damage and [i:FargowiltasSouls/PumpkingsCape] critical strike chance by 8% and [i:FargowiltasSouls/IceQueensShield] damage reduction by 4%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
 		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size for projectiles, hold the Precision Seal key to disable dashes and double jumps
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
-		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
 		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer
 		'Warm, beating, and no body needed'
@@ -1714,7 +1715,7 @@ MasochistSoul: {
 		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
 		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		'Embrace mastery, embrace eternity'
