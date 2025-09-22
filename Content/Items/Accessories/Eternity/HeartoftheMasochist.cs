@@ -61,8 +61,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
-            player.GetDamage(DamageClass.Generic) += 0.10f;
-            player.GetCritChance(DamageClass.Generic) += 10;
+            player.GetDamage(DamageClass.Generic) += 0.8f;
+            player.GetCritChance(DamageClass.Generic) += 8;
             fargoPlayer.MasochistHeart = true;
             player.endurance += 0.04f;
 
