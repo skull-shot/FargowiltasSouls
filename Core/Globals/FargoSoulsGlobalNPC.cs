@@ -950,10 +950,18 @@ namespace FargowiltasSouls.Core.Globals
             }
 
             float dotMultiplier = DoTMultiplier(npc, modPlayer.Player);
-            if (dotMultiplier != 1 && npc.lifeRegen < 0)
+            if (npc.lifeRegen < 0)
             {
-                npc.lifeRegen = (int)(npc.lifeRegen * dotMultiplier);
-                damage = (int)(damage * dotMultiplier);
+                if (dotMultiplier != 1)
+                {
+                    npc.lifeRegen = (int)(npc.lifeRegen * dotMultiplier);
+                    damage = (int)(damage * dotMultiplier);
+                }
+                if (WorldSavingSystem.EternityMode && npc.type is NPCID.PrimeCannon or NPCID.PrimeLaser or NPCID.PrimeSaw or NPCID.PrimeVice)
+                {
+                    npc.lifeRegen = (int)Math.Floor(npc.lifeRegen * 0.1);
+                    damage = (int)Math.Ceiling(damage * 0.1);
+                }
             }
 
             if (TimeFrozen && npc.life == 1)
