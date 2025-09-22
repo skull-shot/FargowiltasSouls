@@ -321,15 +321,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (AbomWandItem != null)
                 AbomWandUpdate();
 
-            if (Flipped && !Player.gravControl)
-            {
-                Player.gravControl = true;
-                Player.controlUp = false;
-                Player.gravDir = -1f;
-                //Player.fallStart = (int)(Player.position.Y / 16f);
-                //Player.jump = 0;
-            }
-
             if (DevianttHeartItem != null)
             {
                 if (DevianttHeartsCD > 0)

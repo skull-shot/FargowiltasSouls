@@ -76,6 +76,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //saucer control console
             player.buffImmune[BuffID.VortexDebuff] = true;
+            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
             player.AddEffect<UfoMinionEffect>(Item);
             player.AddEffect<AmmoCycleEffect>(Item);
 
@@ -92,9 +93,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
                 player.dripping = true;
 
-            //galactic globe
-            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
+            //chalice of the moon
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             //player.buffImmune[BuffID.ChaosState] = true;
             player.AddEffect<ChalicePotionEffect>(Item);

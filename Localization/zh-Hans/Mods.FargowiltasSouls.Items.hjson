@@ -1203,10 +1203,10 @@ ChaliceofTheMoon: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs

@@ -1152,10 +1152,10 @@ ChaliceofTheMoon: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
@@ -1209,21 +1209,17 @@ HeartoftheMasochist: {
 	// DisplayName: Heart of the Master
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/ChaliceofTheMoon] Flipped, Illuminated, Unstable, and Curse of the Moon
-		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensShield] Increases damage and crit chance by 10%, and damage reduction by 5%
-		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
-		[i:FargowiltasSouls/BetsysHeart] Fireball Dash inflicts Betsy's Curse
-		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
-		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
-		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
-		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/ChaliceofTheMoon] grants increased flight time
+		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
+		Increases [i:FargowiltasSouls/MutantAntibodies] damage, [i:FargowiltasSouls/PumpkingsCape] critical strike chance, and [i:FargowiltasSouls/IceQueensShield] damage reduction by 8%
+		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size for projectiles, hold the Precision Seal key to disable dashes and double jumps
+		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
 		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons [i:FargowiltasSouls/ChaliceofTheMoon] mini True Eyes of Cthulhu and [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer which slows enemies it hits
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer
 		'Warm, beating, and no body needed'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/ChaliceofTheMoon] grants most standard potion buffs"
+	// VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs"
 }
 
 IceQueensShield: {
@@ -1434,7 +1430,7 @@ SaucerControlConsole: {
 	// DisplayName: Saucer Control Console
 	/* Tooltip:
 		'''
-		Grants immunity to Distorted
+		Grants immunity to Distorted and Unstable
 		Summons a friendly Mini Saucer that attacks at your cursor
 		Mini Saucer attacks with lasers and rockets or a deathray, depending on held mouse click
 		Reduced damage before Golem is defeated
@@ -1537,7 +1533,8 @@ TimsConcoction: {
 	// DisplayName: Tim's Concoction
 	/* Tooltip:
 		'''
-		Certain enemies will drop potions when defeated
+		Most enemies have a chance to drop potions when defeated
+		Potion type depends on enemy type
 		'Smells funny'
 		''' */
 }

@@ -2037,7 +2037,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.BrainScramblerBolt:
-                    target.AddBuff(ModContent.BuffType<FlippedBuff>(), 60);
                     target.AddBuff(ModContent.BuffType<UnstableBuff>(), 60);
                     break;
 

@@ -470,7 +470,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<CurseoftheMoonBuff>(),
                     ModContent.BuffType<DefenselessBuff>(),
                     ModContent.BuffType<FlamesoftheUniverseBuff>(),
-                    ModContent.BuffType<FlippedBuff>(),
                     ModContent.BuffType<HallowIlluminatedBuff>(),
                     ModContent.BuffType<FusedBuff>(),
                     ModContent.BuffType<GodEaterBuff>(),

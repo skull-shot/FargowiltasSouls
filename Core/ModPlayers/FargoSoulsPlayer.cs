@@ -494,7 +494,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             MutantFang = false;
             Swarming = false;
             LowGround = false;
-            Flipped = false;
             Illuminated = false;
             //LihzahrdBlessing = false;
             Berserked = false;

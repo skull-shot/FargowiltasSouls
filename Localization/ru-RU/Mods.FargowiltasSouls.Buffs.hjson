@@ -218,11 +218,6 @@ FlamesoftheUniverseBuff: {
 	Description: Сами небеса судят вас
 }
 
-FlippedBuff: {
-	DisplayName: Перевёрнутый
-	Description: Силы гравитации изменили своё направление
-}
-
 HallowIlluminatedBuff: {
 	DisplayName: Освещение
 	Description:
