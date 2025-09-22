@@ -274,11 +274,23 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 spawnPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
                         //fiddle to line up to tile
                         spawnPos.X -= 6f;
-                        spawnPos.Y -= 9.5f;
+                        spawnPos.Y += 6.5f;
 
-                        Projectile icicle = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_NaturalSpawn(), spawnPos, Vector2.Zero, ModContent.ProjectileType<FallingIcicle>(), icicleDamage, 1, Player.whoAmI);
+                        bool icicleNearby = false;
+                        foreach (Projectile p in Main.ActiveProjectiles)
+                        {
+                            if (p.type == ModContent.ProjectileType<FallingIcicle>() && p.position.Distance(spawnPos) < 16 * 3)
+                            {
+                                icicleNearby = true;
+                                break;
+                            }
+                        }
 
-                        icicleSpawned = true;
+                        if (!icicleNearby)
+                        {
+                            Projectile icicle = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_NaturalSpawn(), spawnPos, Vector2.Zero, ModContent.ProjectileType<FallingIcicle>(), icicleDamage, 1, Player.whoAmI);
+                            icicleSpawned = true;
+                        }
                     }
                 }
             }
