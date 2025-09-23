@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
         {
             Main.projFrames[Projectile.type] = 4;
             Main.projPet[Projectile.type] = true;
+            ProjectileID.Sets.LightPet[Projectile.type] = true;
         }
 
         public override void SetDefaults()

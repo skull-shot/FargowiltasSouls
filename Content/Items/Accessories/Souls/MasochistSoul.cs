@@ -310,8 +310,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<PureHeart>())
             .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
-            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
 
             .AddTile<CrucibleCosmosSheet>()
 
