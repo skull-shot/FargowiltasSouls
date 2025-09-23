@@ -43,11 +43,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
-            //player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
-            //player.buffImmune[BuffID.ChaosState] = true;
+            //player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
 
             player.AddEffect<ChalicePotionEffect>(Item);
             player.AddEffect<MasoTrueEyeMinion>(Item);
@@ -138,5 +135,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (!player.HasBuff<SouloftheMasochistBuff>())
                 player.AddBuff(ModContent.BuffType<TrueEyesBuff>(), 2);
         }
+    }
+    public class MinionsDeactivatedEffect : AccessoryEffect
+    {
+        public static void DeactivateMinions(FargoSoulsPlayer modPlayer, Item item)
+        {
+            if (modPlayer.Player.AddEffect<MinionsDeactivatedEffect>(item))
+                modPlayer.GalacticMinionsDeactivated = modPlayer.GalacticMinionsDeactivatedBuffer = true;
+        }
+        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
+        public override int ToggleItemType => EffectItem(Main.LocalPlayer) != null ? EffectItem(Main.LocalPlayer).type : -1;
     }
 }

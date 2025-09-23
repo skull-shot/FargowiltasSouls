@@ -218,11 +218,6 @@ FlamesoftheUniverseBuff: {
 	// Description: The heavens themselves have judged you
 }
 
-FlippedBuff: {
-	// DisplayName: Flipped
-	// Description: Your gravity is reversed
-}
-
 HallowIlluminatedBuff: {
 	// DisplayName: Illuminated
 	/* Description:

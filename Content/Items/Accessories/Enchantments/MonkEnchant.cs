@@ -48,12 +48,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.MonkShirt)
                 .AddIngredient(ItemID.MonkPants)
                 //.AddIngredient(ItemID.MonkBelt);
-                .AddIngredient(ItemID.DD2LightningAuraT2Popper)
+                .AddIngredient(ItemID.MonkStaffT2)
                 //meatball
                 //blue moon
                 //valor
                 .AddIngredient(ItemID.DaoofPow)
-                .AddIngredient(ItemID.MonkStaffT2)
+                .AddIngredient(ItemID.ChainGuillotines)
 
                 .AddTile<EnchantedTreeSheet>()
                 .Register();

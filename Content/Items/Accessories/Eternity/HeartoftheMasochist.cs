@@ -60,11 +60,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AmmoCycleEffect>(Item);
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
-            player.GetDamage(DamageClass.Generic) += 0.10f;
-            player.GetCritChance(DamageClass.Generic) += 10;
+            player.GetDamage(DamageClass.Generic) += 0.8f;
+            player.GetCritChance(DamageClass.Generic) += 8;
             fargoPlayer.MasochistHeart = true;
-            player.endurance += 0.05f;
+            player.endurance += 0.04f;
 
             //pumpking's cape
             player.AddEffect<PumpkingsCapeEffect>(Item);
@@ -76,6 +75,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //saucer control console
             player.buffImmune[BuffID.VortexDebuff] = true;
+            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
             player.AddEffect<UfoMinionEffect>(Item);
             player.AddEffect<AmmoCycleEffect>(Item);
 
@@ -89,18 +89,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             //mutant antibodies
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             fargoPlayer.MutantAntibodies = true;
-            if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
-                player.dripping = true;
+            //if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
+                //player.dripping = true;
 
-            //galactic globe
-            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
+            //chalice of the moon
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             //player.buffImmune[BuffID.ChaosState] = true;
             player.AddEffect<ChalicePotionEffect>(Item);
             player.AddEffect<MasoTrueEyeMinion>(Item);
             fargoPlayer.GravityGlobeEXItem = Item;
-            fargoPlayer.WingTimeModifier += 0.5f;
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
             //precision seal
             player.buffImmune[ModContent.BuffType<SmiteBuff>()] = true;
@@ -129,15 +127,5 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();
         }
-    }
-    public class MinionsDeactivatedEffect : AccessoryEffect
-    {
-        public static void DeactivateMinions(FargoSoulsPlayer modPlayer, Item item)
-        {
-            if (modPlayer.Player.AddEffect<MinionsDeactivatedEffect>(item))
-                modPlayer.GalacticMinionsDeactivated = modPlayer.GalacticMinionsDeactivatedBuffer = true;
-        }
-        public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
-        public override int ToggleItemType => EffectItem(Main.LocalPlayer) != null ? EffectItem(Main.LocalPlayer).type : -1;
     }
 }

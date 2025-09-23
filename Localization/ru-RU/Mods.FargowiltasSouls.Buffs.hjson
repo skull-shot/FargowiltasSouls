@@ -218,11 +218,6 @@ FlamesoftheUniverseBuff: {
 	Description: Сами небеса судят вас
 }
 
-FlippedBuff: {
-	DisplayName: Перевёрнутый
-	Description: Силы гравитации изменили своё направление
-}
-
 HallowIlluminatedBuff: {
 	DisplayName: Освещение
 	Description:
@@ -739,6 +734,6 @@ VortexStealthCDBuff: {
 }
 
 ExpixiveBuff: {
-	// DisplayName: Expixive Buff
-	// Description: The lesser fairies will fight to the end for you
+	DisplayName: Взрывофея
+	Description: Малые феи сражаются за вас до последнего
 }

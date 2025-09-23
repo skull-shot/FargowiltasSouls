@@ -262,11 +262,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SquireGreatHelm)
             .AddIngredient(ItemID.SquirePlating)
             .AddIngredient(ItemID.SquireGreaves)
-            .AddIngredient(ItemID.DD2BallistraTowerT2Popper)
             .AddIngredient(ItemID.JoustingLance)
+            .AddIngredient(ItemID.HamBat)
             .AddIngredient(ItemID.MajesticHorseSaddle)
 
-                .AddTile<EnchantedTreeSheet>()
+            .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }
