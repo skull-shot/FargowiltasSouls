@@ -29,11 +29,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             Timer++;
 
             float percent = DD2Utils.GetWaveProgressPercent();
-            if (!DD2Utils.IsFinalWave() && ShieldersSpawned * 0.4f <= percent && FargoSoulsUtil.HostCheck)
+            // shielders
+            if (DD2Utils.WaveContainsType(ModContent.NPCType<DD2Shielder>()) && ShieldersSpawned * 0.4f <= percent && FargoSoulsUtil.HostCheck)
             {
                 SpawnFromDD2Portal(npc, ModContent.NPCType<DD2Shielder>());
                 ShieldersSpawned++;
             }
+            // jammers
+            if (DD2Utils.WaveContainsType(ModContent.NPCType<DD2Jammer>()) && Timer % (60 * 5) == 0 && FargoSoulsUtil.HostCheck)
+                SpawnFromDD2Portal(npc, ModContent.NPCType<DD2Jammer>());
 
             return base.SafePreAI(npc);
         }
