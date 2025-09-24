@@ -15,6 +15,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using FargowiltasSouls.Content.Items.Armor.Eridanus;
 using Fargowiltas.Common.Systems;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FargowiltasSouls.Content.PlayerDrawLayers
 {
@@ -181,21 +182,27 @@ namespace FargowiltasSouls.Content.PlayerDrawLayers
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             Player player = drawInfo.drawPlayer;
+
             FargoSoulsPlayer fargoplayer = drawInfo.drawPlayer.FargoSouls();
 
             Vector2 shoulderPosition = new Vector2(player.direction == 1 ? -12 : 12, player.gravDir == -1 ? 0 : -4) + Main.OffsetsPlayerHeadgear[drawInfo.drawPlayer.bodyFrame.Y / drawInfo.drawPlayer.bodyFrame.Height];
             Texture2D texture = FargoAssets.GetTexture2D("Content/Items/Armor/Nekomi", "NekomiTail").Value;
-            Rectangle rect = new((texture.Width / 4) * fargoplayer.NekomiFrame, (texture.Height / 2) * (player.velocity.X != 0? 0 : 1), texture.Width / 4, texture.Height / 2);
+            Rectangle rect = new((texture.Width / 4) * fargoplayer.NekomiFrame, (texture.Height / 2) * (player.velocity.X != 0 ? 0 : 1), texture.Width / 4, texture.Height / 2);
 
-            if (++fargoplayer.NekomiFrameCounter >= 5)
+            if (!player.isDisplayDollOrInanimate)
             {
-                fargoplayer.NekomiFrame++;
-                fargoplayer.NekomiFrameCounter = 0;
-                if (fargoplayer.NekomiFrame >= 4)
+                if (++fargoplayer.NekomiFrameCounter >= 5)
                 {
-                    fargoplayer.NekomiFrame = 0;
+                    fargoplayer.NekomiFrame++;
+                    fargoplayer.NekomiFrameCounter = 0;
+                    if (fargoplayer.NekomiFrame >= 4)
+                    {
+                        fargoplayer.NekomiFrame = 0;
+                    }
                 }
             }
+            else
+                fargoplayer.NekomiFrame = 0;
 
             DrawData shoulderitem = new DrawData(texture,
                 new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2) + shoulderPosition,

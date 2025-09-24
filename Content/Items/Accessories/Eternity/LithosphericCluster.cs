@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -97,6 +98,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.ReplaceItem(Item, ModContent.ItemType<LithosphericClusterInactive>());
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return LithosphericEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     [AutoloadEquip(EquipType.Shield)]
     public class LithosphericClusterInactive : SoulsItem
@@ -141,10 +149,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.ReplaceItem(Item, ModContent.ItemType<LithosphericCluster>());
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return LithosphericEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class LithosphericEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<LithosphericCluster>();
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 50);
     }
 }

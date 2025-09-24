@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
         {
             player.FargoSouls().PungentEyeballMinion = true;
             if (player.whoAmI == Main.myPlayer && player.ownedProjectileCounts[ModContent.ProjectileType<PungentEyeballMinion>()] < 1)
-                FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<PungentEyeballMinion>(), 50, 0f, player.whoAmI);
+                Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<PungentEyeballMinion>(), 0, 0f, player.whoAmI);
         }
     }
 }

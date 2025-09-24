@@ -87,8 +87,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             NPC.value = Item.buyPrice(5, 50);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
-                ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+                ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;*/
 
             NPC.dontTakeDamage = true;
             NPC.alpha = 255;

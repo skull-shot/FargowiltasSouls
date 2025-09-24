@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             if (Main.projectile.Any(p => p.TypeAlive(Type) && p.owner == Projectile.owner && p.whoAmI < Projectile.whoAmI)) // if this is a duplicate
                 Projectile.Kill();
 
-            Projectile.timeLeft++;
+            Projectile.timeLeft = 2;
             Projectile.rotation += 0.3f;
 
             if (Projectile.ai[0] != 1)

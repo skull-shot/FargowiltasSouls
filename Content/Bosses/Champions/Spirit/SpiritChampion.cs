@@ -95,9 +95,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             NPC.value = Item.buyPrice(6, 50);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.dontTakeDamage = true;
             NPC.alpha = 255;

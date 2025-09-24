@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,7 +29,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.minion = true;
-            Projectile.DamageType = DamageClass.Generic;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
@@ -58,9 +58,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Player player = Main.player[Projectile.owner];
             if (player.active && !player.dead && player.FargoSouls().CrystalSkullMinion)
                 Projectile.timeLeft = 2;
-
-            if (Projectile.originalDamage == 0)
-                Projectile.originalDamage = 20;
 
             Vector2 vector2_1 = new(0f, -60f); //movement code
             Vector2 vector2_2 = player.MountedCenter + vector2_1;
@@ -112,7 +109,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         Projectile.NewProjectile(
                             Projectile.GetSource_FromThis(), Projectile.Bottom,
                             12f * Projectile.SafeDirectionTo(Main.MouseWorld).RotatedByRandom(MathHelper.ToRadians(4)),
-                            ModContent.ProjectileType<ShadowflamesFriendly>(), Projectile.damage, Projectile.knockBack,
+                            ModContent.ProjectileType<ShadowflamesFriendly>(), PungentMinion.BaseDamage(player), Projectile.knockBack,
                             Projectile.owner);
                     }
                 }

@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.defense *= 10;
             }
 
-            if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod))
+            /*if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod))
             {
                 Music = MusicLoader.GetMusicSlot(musicMod,
                     WorldSavingSystem.MasochistModeReal ? "Assets/Music/rePrologue" : "Assets/Music/SteelRed");
@@ -168,7 +168,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Music = MusicID.OtherworldlyTowers;
             }
-            SceneEffectPriority = SceneEffectPriority.BossHigh;
+            SceneEffectPriority = SceneEffectPriority.BossHigh;*/
 
             if (FargoSoulsUtil.AprilFools)
                 NPC.GivenName = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.MutantBoss_April.DisplayName");
@@ -925,17 +925,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (!SkyManager.Instance["FargowiltasSouls:MutantBoss"].IsActive())
                     SkyManager.Instance.Activate("FargowiltasSouls:MutantBoss");
 
-                if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod))
+                /*if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod))
                 {
                     if (WorldSavingSystem.MasochistModeReal && musicMod.Version >= Version.Parse("0.1.1"))
                         Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Storia");
                     else
                         Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/rePrologue");
-                }
+                }*/
             }
         }
 
-        void TryMasoP3Theme()
+        /*void TryMasoP3Theme()
         {
             if (WorldSavingSystem.MasochistModeReal
                 && ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
@@ -943,7 +943,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/StoriaShort");
             }
-        }
+        }*/
 
         void FancyFireballs(int repeats)
         {
@@ -3904,7 +3904,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (NPC.localAI[0] < 30)
                 {
                     EModeSpecialEffects();
-                    TryMasoP3Theme();
+                    //TryMasoP3Theme();
                 }
 
                 if (NPC.localAI[0]++ == 40 || NPC.localAI[0] == 80 || NPC.localAI[0] == 120)
@@ -4009,7 +4009,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.ai[3] < 30)
             {
                 EModeSpecialEffects();
-                TryMasoP3Theme();
+                //TryMasoP3Theme();
             }
             if (NPC.ai[3] == (int)(endTime / 2))
             {
@@ -4072,7 +4072,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.ai[3] < 30)
             {
                 EModeSpecialEffects();
-                TryMasoP3Theme();
+                //TryMasoP3Theme();
             }
 
             if (NPC.ai[3] == (int)endTime / 2)
@@ -4153,7 +4153,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.ai[1] = 0;
 
                 EModeSpecialEffects();
-                TryMasoP3Theme();
+                //TryMasoP3Theme();
 
                 if (FargoSoulsUtil.HostCheck)
                 {
