@@ -146,9 +146,9 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             NPC.timeLeft = NPC.activeTime * 30;
             NPC.BossBar = ModContent.GetInstance<DevianttBossBar>();
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, (musicMod.Version >= Version.Parse("0.1.4")) ? "Assets/Music/Strawberry_Sparkly_Sunrise" : "Assets/Music/LexusCyanixs") : MusicID.OtherworldlyHallow;
-            SceneEffectPriority = SceneEffectPriority.BossMedium;
+            SceneEffectPriority = SceneEffectPriority.BossMedium;*/
 
             NPC.value = Item.buyPrice(0, 5);
         }

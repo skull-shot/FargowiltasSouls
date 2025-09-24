@@ -260,9 +260,9 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath7;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/LieflightNoCum") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.value = Item.buyPrice(0, 15);
 
