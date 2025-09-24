@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.DamageType = DamageClass.Generic;
             //Projectile.Opacity = FargoClientConfig.Instance.TransparentFriendlyProjectiles;
 
             Projectile.usesIDStaticNPCImmunity = true;
@@ -101,10 +101,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Vector2 vector79 = Projectile.Center + Projectile.velocity * (Projectile.localAI[1] - 14f);
             for (int i = 0; i < 10; i++)
             {
-                float num810 = Projectile.velocity.ToRotation() + (Main.rand.NextBool(2) ? -1f : 1f) * 1.57079637f;
+                float num810 = Projectile.velocity.ToRotation() + (Main.rand.NextBool(2) ? -1f : 1f) * MathHelper.PiOver2;
                 float num811 = (float)Main.rand.NextDouble() * 2f + 2f;
                 Vector2 vector80 = new((float)Math.Cos((double)num810) * num811, (float)Math.Sin((double)num810) * num811);
-                int num812 = Dust.NewDust(vector79, 0, 0, DustID.CorruptSpray, vector80.X, vector80.Y, 0, default, 1f);
+                int num812 = Dust.NewDust(vector79, 0, 0, DustID.ShadowbeamStaff, vector80.X, vector80.Y, 0, default, 1f);
                 Main.dust[num812].noGravity = true;
                 Main.dust[num812].scale = 2f;
                 Main.dust[num812].velocity *= 2f;
@@ -116,7 +116,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.ShadowFlame, 1800);
+            target.AddBuff(BuffID.ShadowFlame, 600);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DisableCrit();
         }
 
         public override bool PreDraw(ref Color lightColor) => false;

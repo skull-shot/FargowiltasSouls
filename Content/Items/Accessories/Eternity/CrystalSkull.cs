@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<CrystalSkull>();
         public override bool MinionEffect => true;
-        public static int BaseDamage (Player player) => 20;
+        public static int BaseDamage (Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 20);
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasEffect<LithosphericEffect>())

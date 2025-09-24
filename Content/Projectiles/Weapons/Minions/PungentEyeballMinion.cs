@@ -1,9 +1,9 @@
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.minion = true;
-            Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
@@ -89,26 +88,23 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     if (Projectile.owner == Main.myPlayer)
                     {
                         Projectile.netUpdate = true;
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation), ModContent.ProjectileType<PhantasmalDeathrayPungent>(), Projectile.damage, Projectile.knockBack * 2, Projectile.owner, Projectile.identity);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation), ModContent.ProjectileType<PhantasmalDeathrayPungent>(), LithosphericEffect.BaseDamage(player), Projectile.knockBack * 2, Projectile.owner, Projectile.identity);
                     }
                 }
-                else if (Projectile.localAI[0] >= 30) //partial charge
+                else if (Projectile.localAI[1] >= 0 && Projectile.localAI[0] >= 60 && player.ownedProjectileCounts[ModContent.ProjectileType<PhantasmalDeathrayPungent>()] < 1)
                 {
                     float timeMult = Projectile.localAI[0] / chargeTime;
-                    timeMult = LumUtils.Saturate(timeMult);
-                    Projectile.localAI[1] = (int)(120 * timeMult);
+                    timeMult = (int)(120 * LumUtils.Saturate(timeMult));
                     if (Projectile.owner == Main.myPlayer)
-                        Projectile.netUpdate = true;
-                }
-                else if (Projectile.localAI[1] % 10 == 0 && Projectile.localAI[1] != 0 && player.ownedProjectileCounts[ModContent.ProjectileType<PhantasmalDeathrayPungent>()] < 1)
-                {
-                    SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
-                    int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, 10f * Projectile.SafeDirectionTo(Main.MouseWorld).RotatedByRandom(MathHelper.ToRadians(4)), ProjectileID.SpectreWrath, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                    if (p != Main.maxProjectiles)
                     {
-                        Main.projectile[p].DamageType = DamageClass.Summon;
-                        Main.projectile[p].penetrate = 1;
+                        Projectile.netUpdate = true;
+                        for (int s = 0; s < timeMult / 10; s++)
+                        {
+                            Vector2 vel = Main.rand.NextFloat(7, 15) * Projectile.SafeDirectionTo(Main.MouseWorld).RotatedByRandom(MathHelper.ToRadians(timeMult / 5));
+                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, ModContent.ProjectileType<LithoFlame>(), LithosphericEffect.BaseDamage(player) / 2, Projectile.knockBack, Projectile.owner);
+                        }
                     }
+                    SoundEngine.PlaySound(SoundID.Item117, Projectile.Center);
                 }
                 Projectile.localAI[0] = 0;
             }
@@ -132,7 +128,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 //Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
 
-            if (Projectile.localAI[0] <= chargeTime && Projectile.localAI[1] == 0)
+            if (Projectile.localAI[1] == 0)
             {
                 if (Projectile.frameCounter++ > 4)
                 {
@@ -172,6 +168,20 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 rotation += MathHelper.Pi;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), rotation, origin2, Projectile.scale, spriteEffects, 0);
             return false;
+        }
+
+        public override void PostDraw(Color lightColor)
+        {
+            Texture2D texture2D13 = FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "PungentEyeballMinion_glow").Value;
+            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
+            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            float rotation = Projectile.rotation;
+            if (Projectile.spriteDirection < 0)
+                rotation += MathHelper.Pi;
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(Color.White), rotation, origin2, Projectile.scale, spriteEffects, 0);
         }
     }
 }
