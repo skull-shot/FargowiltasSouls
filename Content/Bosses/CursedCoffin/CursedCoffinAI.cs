@@ -235,6 +235,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						//dust explosion
 						ExtraTrail = false;
 						Timer = -60;
+						Phase = 1;
 						//shockwaves
 						if (FargoSoulsUtil.HostCheck)
 						{

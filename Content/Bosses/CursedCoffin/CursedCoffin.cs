@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         #region Variables
         float DrawcodeOpacity = 0f;
 
-        private int Phase = 1;
+        private int Phase = 0;
 		private bool Attacking = true;
 		private bool ExtraTrail = false;
 
