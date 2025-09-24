@@ -129,7 +129,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                         if (item2 != null && item2.damage > 0 && item2.shoot > ProjectileID.None && item2.ammo <= 0 && item.type != item2.type && !item2.channel)
                         {
-                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
+                            if (!player.HasAmmo(item2) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
                                 continue;
 
                             if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
@@ -138,10 +138,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             weaponsUsed++;
                             if (weaponsUsed > 1)
                                 break;
+                            else if (item2.mana > 0 ? !player.CheckMana(item2.mana / 2) : false)
+                                continue;
 
                             //Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
                             //Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
-                            
+
                             //int projToShoot = item2.shoot;
                             //float speed = item2.shootSpeed;
                             int damage = player.GetWeaponDamage(item2);

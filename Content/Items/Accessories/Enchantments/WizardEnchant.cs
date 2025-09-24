@@ -76,8 +76,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.WizardHat)
             //.AddIngredient(ItemID.WizardsHat) // NOT funny
             .AddRecipeGroup("FargowiltasSouls:AnyTier1Robe") // Amethyst / Topaz
-            .AddRecipeGroup("FargowiltasSouls:AnyTier2Robe") // Sapphire / Emerald
-            .AddRecipeGroup("FargowiltasSouls:AnyTier3Robe") // Ruby / Diamond
+            .AddRecipeGroup("FargowiltasSouls:AnyTier2Robe") // Sapphire / Emerald / Ruby
+            .AddRecipeGroup("FargowiltasSouls:AnyTier3Robe") // Amber / Diamond
             .AddIngredient(ItemID.GypsyRobe) // Magic Robe
             .AddIngredient(ItemID.CrystalBall)
 

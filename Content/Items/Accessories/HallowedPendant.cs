@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -77,11 +78,15 @@ namespace FargowiltasSouls.Content.Items.Accessories
     {
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
         public override int ToggleItemType => ModContent.ItemType<HallowedPendant>();
-        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 200);
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 125);
         private static int DamageTaken;
         public static float ScaleDamage
         {
-            get { return Math.Clamp(DamageTaken * DamageTaken / 40000f, 0.625f, 1f); } // 50-200 hyperbolic scaling
+            get
+            {
+                float scaling = 125f / MathHelper.Lerp(100, 200, Math.Clamp(DamageTaken / 200f, 0.25f, 1f)); // 1x-1.6x linear scaling around 50-200 damage taken
+                return scaling;
+            }
         }
         public override void PostUpdateEquips(Player player)
         {
