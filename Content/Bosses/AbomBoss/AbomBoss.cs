@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             NPC.timeLeft = NPC.activeTime * 30;
             NPC.BossBar = ModContent.GetInstance<AbominationnBossBar>();
 
-            Music = MusicID.OtherworldlyPlantera;
+            /*Music = MusicID.OtherworldlyPlantera;
             bool foundMod = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod);
             if (foundMod)
             {
@@ -120,7 +120,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 else
                     Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Stigma");
             }
-            SceneEffectPriority = SceneEffectPriority.BossMedium;
+            SceneEffectPriority = SceneEffectPriority.BossMedium;*/
 
             if (FargoSoulsUtil.AprilFools)
                 NPC.GivenName = Language.GetTextValue("Mods.FargowiltasSouls.NPCs.AbomBoss_April.DisplayName");
@@ -297,7 +297,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             if (NPC.localAI[3] == 2) //in phase 2
             {
-                Music = MusicID.OtherworldlyPlantera;
+                /*Music = MusicID.OtherworldlyPlantera;
                 bool foundMod = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod);
                 if (foundMod)
                 {
@@ -307,7 +307,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                         Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Laevateinn_P2");
                     else
                         Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Stigma");
-                }
+                }*/
 
                 //because this breaks the background???
                 if (Main.GameModeInfo.IsJourneyMode && CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)

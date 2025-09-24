@@ -161,8 +161,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             NPC.DeathSound = new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronDeath");
             NPC.alpha = 255;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.DukeFishron;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.DukeFishron;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.value = Item.buyPrice(0, 2);
 
@@ -814,7 +814,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
                 HitPlayer = false;
                 LockVector1 = Vector2.UnitX * Math.Sign(player.Center.X - NPC.Center.X); //register for rotation animation
-                Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;
+                /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;*/
             }
             if (Timer == 45)
             {
