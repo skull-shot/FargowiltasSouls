@@ -3644,6 +3644,7 @@ HallowedPendant: {
 		'''
 		Increases length of invincibility after taking damage
 		After taking damage, fires a ray of light at up to 4 nearby enemies
+		Ray damage scales with damage taken, up to 1.6x
 		''' */
 }
 
