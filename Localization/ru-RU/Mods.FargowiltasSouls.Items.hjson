@@ -922,7 +922,7 @@ AbominableWand: {
 		Даёт иммунитет к дебаффам «Ужасный клык» и «Мерзкое присутствие»
 		Грэйз Сверкающей влюблённости заряжается в два раза быстрее
 		Повышает ограничение бонусного урона от грэйза на 20%
-		Призрачный Выродокк периодически появляется при нанесении критического удара, чтобы оказать вам поддержку
+		Призрачный Отвратт периодически появляется при нанесении критического удара, чтобы оказать вам поддержку
 		В броне Стикс, заряжаетесь энергией при грэйзе снарядов
 		Вы можете выдержать любую атаку и остаться с 1 ОЗ
 		Выдержка восстанавливается при восстановлении всего здоровья
@@ -1291,7 +1291,7 @@ MutantEye: {
 		Повышает ограничение бонусного урона от грэйза на 25%
 		Улучшает сердца Сверкающей влюблённости до лучей любви
 		Увеличивает урон, получаемый за каждый грэйз
-		Увеличивает урон и частоту появления призрачного Выродкка
+		Увеличивает урон и частоту появления призрачного Отвратта
 		Бомба грэйза высвобождает волну сфер, уничтожающую большинство вражеских выстрелов
 		Бомба грэйза имеет время перезарядки в 60 секунд
 		«Не такой уж подозрительно выглядящий»
@@ -1993,7 +1993,7 @@ StyxLeggings: {
 }
 
 AbomBag: {
-	DisplayName: Мешок с сокровищами (Выродокк)
+	DisplayName: Мешок с сокровищами (Отвратт)
 	Tooltip: Нажмите ПКМ, чтобы открыть
 }
 
@@ -2100,7 +2100,7 @@ GaiaDye: {
 }
 
 AbomEnergy: {
-	DisplayName: Энергия мерзости
+	DisplayName: Отвратительная энергия
 	Tooltip: ""
 }
 
@@ -2191,7 +2191,7 @@ BabyScythe: {
 	DisplayName: Детская коса
 	Tooltip:
 		'''
-		Призывает малыша Вырода
+		Призывает малыша Отвратикка
 		«Не бойся, она затупилась»
 		'''
 }
@@ -2325,7 +2325,7 @@ HokeyBall: {
 }
 
 AbomRelic: {
-	DisplayName: Реликвия Выродкка
+	DisplayName: Реликвия Отвратта
 	Tooltip: ""
 }
 
@@ -2390,7 +2390,7 @@ WillChampionRelic: {
 }
 
 AbomTrophy: {
-	DisplayName: Трофей Выродкка
+	DisplayName: Трофей Отвратта
 	Tooltip: ""
 }
 
@@ -2440,10 +2440,10 @@ TwentyTwoPainting: {
 }
 
 AbominationnVoodooDoll: {
-	DisplayName: Кукла вуду Выродкка
+	DisplayName: Кукла вуду Отвратта
 	Tooltip:
 		'''
-		Вызывает Выродкка в ваш город
+		Вызывает Отвратта в ваш город
 		«Ты ужасный человек»
 		'''
 	// the custom spawn message is unused
@@ -2452,7 +2452,7 @@ AbominationnVoodooDoll: {
 }
 
 AbomsCurse: {
-	DisplayName: Проклятие Выродкка
+	DisplayName: Проклятие Отвратта
 	Tooltip: Должно быть использовано на поверхности
 }
 
@@ -3125,27 +3125,27 @@ LifeRevitalizer: {
 
 ChampionMusicBox: {
 	DisplayName: Музыкальная шкатулка (Чемпионы)
-	Tooltip: Проигрывает «Ordeal», авт. Sakuzyo
+	Tooltip: Проигрывает «Ordeal» от Sakuzyo
 }
 
 DeviMusicBox: {
 	DisplayName: Музыкальная шкатулка (Девиантт)
-	Tooltip: Проигрывает «Sparkly Strawberry Sunrise», авт. Yuri O
+	Tooltip: Проигрывает «Sparkly Strawberry Sunrise» от Yuri O
 }
 
 MutantMusicBox: {
 	DisplayName: Музыкальная шкатулка (Мутант)
-	Tooltip: Проигрывает «Steel Red», авт. Sakuzyo
+	Tooltip: Проигрывает «Steel Red» от Sakuzyo
 }
 
 RePrologueMusicBox: {
 	DisplayName: Музыкальная шкатулка (???)
-	Tooltip: Проигрывает «rePrologue», авт. Sakuzyo
+	Tooltip: Проигрывает «rePrologue» от Sakuzyo
 }
 
 StoriaMusicBox: {
 	DisplayName: Музыкальная шкатулка (???)
-	Tooltip: Проигрывает «Storia», авт. Xi vs Sakuzyo
+	Tooltip: Проигрывает «Storia» от Xi vs Sakuzyo
 }
 
 LifelightRelic: {
@@ -3551,47 +3551,47 @@ TouhouStaff: {
 
 BaronP1MusicBox: {
 	DisplayName: Музыкальная шкатулка (Бранный Барон — 1-я фаза)
-	Tooltip: Проигрывает «Will of the Waves», авт. zentaque & Azathoth
+	Tooltip: Проигрывает «Will of the Waves» от zentaque & Azathoth
 }
 
 BaronP2MusicBox: {
 	DisplayName: Музыкальная шкатулка (Бранный Барон — 2-я фаза)
-	Tooltip: Проигрывает «Will of the Waves», авт. zentaque & Azathoth
+	Tooltip: Проигрывает «Will of the Waves» от zentaque & Azathoth
 }
 
 TrojanMusicBox: {
 	DisplayName: Музыкальная шкатулка (Троянская белка)
-	Tooltip: Проигрывает «Nuts And Bolts», авт. ProduceVGM
+	Tooltip: Проигрывает «Nuts And Bolts» от ProduceVGM
 }
 
 AbominationnP1MusicBox: {
-	DisplayName: Музыкальная шкатулка (Выродокк — 1-я фаза)
-	Tooltip: Проигрывает «Laevateinn», авт. Yuri O
+	DisplayName: Музыкальная шкатулка (Отвратта — 1-я фаза)
+	Tooltip: Проигрывает «Laevateinn» от Yuri O
 }
 
 AbominationnP2MusicBox: {
-	DisplayName: Музыкальная шкатулка (Выродокк — 2-я фаза)
-	Tooltip: Проигрывает «Laevateinn», авт. Yuri O
+	DisplayName: Музыкальная шкатулка (Отвратта — 2-я фаза)
+	Tooltip: Проигрывает «Laevateinn» от Yuri O
 }
 
 CoffinMusicBox: {
 	DisplayName: Музыкальная шкатулка (Скверный Саркофаг)
-	Tooltip: Проигрывает «Shifting Sands», авт. zentaque & Azathoth
+	Tooltip: Проигрывает «Shifting Sands» от zentaque & Azathoth
 }
 
 EridanusMusicBox: {
 	DisplayName: Музыкальная шкатулка (Эриданус)
-	Tooltip: Проигрывает «Platinum Star», авт. Yuri O
+	Tooltip: Проигрывает «Platinum Star» от Yuri O
 }
 
 LifelightMusicBox: {
 	DisplayName: Музыкальная шкатулка (Жизнесвет)
-	Tooltip: Проигрывает «Illustrious Illuminescence», авт. ProduceVGM
+	Tooltip: Проигрывает «Illustrious Illuminescence» от ProduceVGM
 }
 
 MainMenuMusicBox: {
 	DisplayName: Музыкальная шкатулка (Главное меню)
-	Tooltip: Проигрывает «Nein», авт. Sakuzyo
+	Tooltip: Проигрывает «Nein» от Sakuzyo
 }
 
 BaronMask: {

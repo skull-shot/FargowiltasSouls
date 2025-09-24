@@ -1,24 +1,24 @@
-AbomDeathScythe.DisplayName: Коса Выродкка
-AbomDeathray.DisplayName: Луч смерти Выродкка
+AbomDeathScythe.DisplayName: Коса Отвратта
+AbomDeathray.DisplayName: Луч смерти Отвратта
 AbomDeathrayMark.DisplayName: Луч смерти
-AbomDeathraySmall.DisplayName: Луч смерти Выродкка
+AbomDeathraySmall.DisplayName: Луч смерти Отвратта
 AbomDeathraySmall2.DisplayName: Луч смерти
 AbomFlocko.DisplayName: Супер-флоко
 AbomFrostShard.DisplayName: Морозный осколок
 AbomFrostWave.DisplayName: Морозная волна
-AbomReticle.DisplayName: Прицел Выродкка
-AbomRitual.DisplayName: Печать Выродкка
-AbomRitual2.DisplayName: Печать Выродкка
-AbomRitualMaso.DisplayName: Печать Выродкка
+AbomReticle.DisplayName: Прицел Отвратта
+AbomRitual.DisplayName: Печать Отвратта
+AbomRitual2.DisplayName: Печать Отвратта
+AbomRitualMaso.DisplayName: Печать Отвратта
 AbomRocket.DisplayName: Ракета
-AbomScytheFlaming.DisplayName: Коса Выродкка
-AbomScytheSpin.DisplayName: Коса Выродкка
-AbomScytheSplit.DisplayName: Коса Выродкка
-AbomSickle.DisplayName: Серп Выродкка
-AbomSickle2.DisplayName: Серп Выродкка
-AbomSickle3.DisplayName: Серп Выродкка
-AbomSickleSplit1.DisplayName: Серп Выродкка
-AbomSickleSplit2.DisplayName: Серп Выродкка
+AbomScytheFlaming.DisplayName: Коса Отвратта
+AbomScytheSpin.DisplayName: Коса Отвратта
+AbomScytheSplit.DisplayName: Коса Отвратта
+AbomSickle.DisplayName: Серп Отвратта
+AbomSickle2.DisplayName: Серп Отвратта
+AbomSickle3.DisplayName: Серп Отвратта
+AbomSickleSplit1.DisplayName: Серп Отвратта
+AbomSickleSplit2.DisplayName: Серп Отвратта
 AbomStyxGazer.DisplayName: Созерцатель Стикс
 AbomSword.DisplayName: Лэватейнн
 AbomSwordHandle.DisplayName: Лэватейнн
@@ -362,9 +362,9 @@ VultureFeather.DisplayName: Перо стервятника
 WOFBlast.DisplayName: Святой взрыв
 WOFChain.DisplayName: Голодный
 WOFReticle.DisplayName: Прицел Стены плоти
-AbomMinion.DisplayName: Выродокк
-AbomMinionScythe.DisplayName: Коса Выродкка
-AbomMinionSickle.DisplayName: Серп Выродкка
+AbomMinion.DisplayName: Отвратт
+AbomMinionScythe.DisplayName: Коса Отвратта
+AbomMinionSickle.DisplayName: Серп Отвратта
 BigBrainIllusion.DisplayName: Большой мозг
 BigBrainProj.DisplayName: Большой мозг
 BrainMinion.DisplayName: Мозг Снар
@@ -487,7 +487,7 @@ MutantTrueEyeS.DisplayName: Истинный глаз Мутанта
 MutantTrueEyeSphere.DisplayName: Призрачная сфера
 MutantTyphoon.DisplayName: Бритвенный тайфун
 AccursedSarcophagus.DisplayName: Проклятый Саркофаг
-BabyAbom.DisplayName: Малыш Вырод
+BabyAbom.DisplayName: Малыш Отвратикк
 BabySilhouette.DisplayName: Малыш силуэт
 BiteSizeBaron.DisplayName: Барон на зубок
 ChibiDevi.DisplayName: Чиби Деби
@@ -521,7 +521,7 @@ SuperBlood.DisplayName: Супер кровь
 TitaniumShard.DisplayName: Титановый осколок
 TurtleShield.DisplayName: Черепаший щит
 Void.DisplayName: Пустота
-AbomScytheFriendly.DisplayName: Уродливая коса
+AbomScytheFriendly.DisplayName: Отвратительная коса
 BetsyDash.DisplayName: Рывок
 CreeperHitbox.DisplayName: Ползун
 Explosion.DisplayName: Взрыв
@@ -539,7 +539,7 @@ LightningVortex.DisplayName: Вихрь
 LightningVortexHostile.DisplayName: Вихрь
 LihzahrdSpikyBallFriendly.DisplayName: Колючий шар
 PhantasmalSphere.DisplayName: Призрачная сфера
-SpectralAbominationn.DisplayName: Призрачный выродокк
+SpectralAbominationn.DisplayName: Призрачный Отвратт
 StyxArmorScythe.DisplayName: Коса Стикс
 StyxArmorScythe2.DisplayName: Коса Стикс
 StyxGazerArmor.DisplayName: Созерцатель Стикс
@@ -594,7 +594,7 @@ RazorbladeTyphoon2.DisplayName: Бритвенный тайфун
 VenomSpit.DisplayName: Ядовитый плевок
 RainbowSlimeSpikeFriendly.DisplayName: Радужный слизневый шип
 PlasmaDeathRay.DisplayName: Плазменный луч смерти
-AbomBossProjectile.DisplayName: Выродокк
+AbomBossProjectile.DisplayName: Отвратт
 BaronMine.DisplayName: Мина Бранного Барона
 BaronNuke.DisplayName: Острая пищащая атомная торпеда смерти и разрушения Бранного Барона
 BaronRocket.DisplayName: Ракета Бранного Барона
@@ -715,7 +715,7 @@ FrostShardFriendly.DisplayName: Ледяной осколок друг
 PenetratorSword.DisplayName: Меч Мутанта
 PenetratorSwordBlast.DisplayName: Взрыв меча Мутанта
 PenetratorSphereOkuu.DisplayName: Сфера Окуу Мутанта
-AbomRitualFTW.DisplayName: Ритуал Выродкка
+AbomRitualFTW.DisplayName: Ритуал Отвратта
 FallingSandstone.DisplayName: Падающий песчанник
 CoffinPlayerSoul.DisplayName: Твоя душа
 GildedSceptreProj.DisplayName: Тенепламенный выстрел скипетра
@@ -844,7 +844,7 @@ AbomCannonball.DisplayName: Ядро из пушки
 AbomReticle2.DisplayName: Прицел
 AbomBullet.DisplayName: Пуля
 FallingIcicle.DisplayName: Падающая сосулька
-AbomGhost.DisplayName: Призрак Выродкка
+AbomGhost.DisplayName: Призрак Отвратта
 MutantSphereHelix.DisplayName: Спиральная сфера Мутанта
 Pumpscare.DisplayName: Тыквоскример
 CosmosDeathray3.DisplayName: Космический разлом
@@ -855,6 +855,6 @@ MutantWofPart.DisplayName: Стена плоти
 MutantCursedFlame.DisplayName: Проклятые огни
 MutantIchor.DisplayName: Золотой дождь
 ExplosionVisual.DisplayName: Взрыв
-OOAForcefield.DisplayName: O O A Forcefield
-OOAForceFieldProj.DisplayName: O O A Force Field Proj
-// LithoFlame.DisplayName: Litho Flame
+OOAForcefield.DisplayName: Силовое поле
+OOAForceFieldProj.DisplayName: Силовое поле
+LithoFlame.DisplayName: Литосферное пламя
