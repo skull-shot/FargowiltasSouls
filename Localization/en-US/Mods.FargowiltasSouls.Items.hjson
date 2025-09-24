@@ -588,7 +588,7 @@ SpiderEnchant: {
 	DisplayName: Spider Enchantment
 	Tooltip:
 		'''
-		+7% critical strike chance
+		8% increased critical strike chance
 		Your summon weapons can critically strike
 		Instead of dealing extra damage, summon weapon crits spawn spiderlings, which can crit
 		'Arachnophobia is punishable by arachnid induced death'
