@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
+            [AccessoryEffectLoader.GetEffect<DreadShellEffect>()];
         public override bool Eternity => true;
 
         public override int NumFrames => 5;
@@ -111,7 +111,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<ParryEffect>()];
+            [AccessoryEffectLoader.GetEffect<DreadShellEffect>()];
         public override bool Eternity => true;
 
         public override void SetStaticDefaults()

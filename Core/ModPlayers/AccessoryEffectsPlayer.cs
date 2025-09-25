@@ -811,7 +811,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (dreadEffect)
             {
                 if (!MasochistSoul)
+                {
                     DreadShellVulnerabilityTimer = 120;
+                    if (!silverEffect && !pumpkingEffect)
+                        Player.statDefense -= 20; // counteract vanilla raised shield defense
+                }
             }
 
             if (pumpkingEffect)
