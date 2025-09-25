@@ -53,20 +53,20 @@ ParryEffect: {
 	DisplayName: Защитное парирование
 	Tooltip:
 		'''
-		Удерживайте, чтобы защититься и увеличить свою защиту
+		Удерживайте, чтобы защититься и увеличить свою защиту на 20
 		Поставьте защиту прямо перед тем, как получить урон, чтобы парировать и аннулировать удар
 		Если к слоту для умений не привязана клавиша, активацией по умолчанию будет правая кнопка мыши
 		'''
 }
 
 DreadShellEffect: {
-	// DisplayName: Counter Parry
-	/* Tooltip:
+	DisplayName: Counter Parry
+	Tooltip:
 		'''
-		Hold to guard, defense and damage reduction are decreased while and shortly after guarding
-		Guard shortly before being hit to cause a massive counterattack, nullifying damage taken
-		Defaults to Right Click if no key is bound to skill slot
-		''' */
+		Удерживайте, чтобы защититься. В защите и немного после ваши защита и сопротивление урону снижаются
+		Поставьте защиту прямо перед тем, как получить урон, чтобы парировать и аннулировать удар
+		Если к слоту для умений не привязана клавиша, активацией по умолчанию будет правая кнопка мыши
+		'''
 }
 
 StardustEffect: {
