@@ -588,7 +588,7 @@ SpiderEnchant: {
 	DisplayName: Spider Enchantment
 	Tooltip:
 		'''
-		+7% critical strike chance
+		8% increased critical strike chance
 		Your summon weapons can critically strike
 		Instead of dealing extra damage, summon weapon crits spawn spiderlings, which can crit
 		'Arachnophobia is punishable by arachnid induced death'
@@ -1100,10 +1100,8 @@ DreadShell: {
 	Tooltip:
 		'''
 		Grants immunity to knockback and Anticoagulation
-		Defense and damage reduction are decreased shortly after guarding
-		Parry negates up to 200 damage and causes a massive counterattack
-		Counterattack inflicts Anticoagulation, causing enemies to drop blood clots when hit
-		Absorbing blood clots increases your damage by 25%
+		Counterattack negates up to 200 damage and inflicts Anticoagulation, causing enemies to drop blood clots when hit
+		Absorbing blood clots temporarily increases your damage by 25%
 		'It was a mistake to chum here'
 		'''
 }

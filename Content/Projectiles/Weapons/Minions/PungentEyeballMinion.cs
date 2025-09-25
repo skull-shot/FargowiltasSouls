@@ -76,7 +76,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     if (Projectile.owner == Main.myPlayer)
                     {
                         Projectile.netUpdate = true;
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -1);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -1, Projectile.whoAmI);
                     }
                 }
             }
@@ -148,6 +148,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         Projectile.frame = 6;
                 }
             }
+            float lightFade = (255f - Projectile.alpha) / 255f;
+            Color color = Color.Purple;
+            Lighting.AddLight(Projectile.Center, lightFade * 2f * color.R / 255f, lightFade * 2f * color.G / 255f, lightFade * 2f * color.B / 255f);
         }
 
         public override bool? CanDamage()
@@ -166,7 +169,19 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             float rotation = Projectile.rotation;
             if (Projectile.spriteDirection < 0)
                 rotation += MathHelper.Pi;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), rotation, origin2, Projectile.scale, spriteEffects, 0);
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                float chargescale = MathHelper.Clamp(Projectile.localAI[0] / 360f * 3.5f, 0f, 3.5f);
+
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * chargescale * Projectile.scale;
+                Color glowColor = Color.DarkMagenta;
+                Main.EntitySpriteDraw(FargoAssets.GetTexture2D("Content/Projectiles/Weapons/Minions", "PungentEyeballMinion_mono").Value, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) + afterimageOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(glowColor), rotation, origin2, Projectile.scale, spriteEffects);
+            }
+            Main.spriteBatch.ResetToDefault();
+
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), rotation, origin2, Projectile.scale, spriteEffects);
             return false;
         }
 
@@ -181,7 +196,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             float rotation = Projectile.rotation;
             if (Projectile.spriteDirection < 0)
                 rotation += MathHelper.Pi;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(Color.White), rotation, origin2, Projectile.scale, spriteEffects, 0);
+            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(Color.White), rotation, origin2, Projectile.scale, spriteEffects);
         }
     }
 }

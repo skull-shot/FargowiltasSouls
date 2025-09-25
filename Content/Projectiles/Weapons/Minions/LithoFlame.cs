@@ -57,7 +57,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 }
             }
             float lightFade = (255f - Projectile.alpha) / 255f;
-            Lighting.AddLight(Projectile.Center, lightFade * 0.7f * Color.Plum.R / 255f, lightFade * 0.7f * Color.Plum.G / 255f, lightFade * 0.7f * Color.Plum.B / 255f);
+            Color color = Color.Plum;
+            Lighting.AddLight(Projectile.Center, lightFade * 0.7f * color.R / 255f, lightFade * 0.7f * color.G / 255f, lightFade * 0.7f * color.B / 255f);
             if (++Projectile.frameCounter > 4)
             {
                 Projectile.frameCounter = 0;
@@ -83,7 +84,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 else
                 {
                     fadein = 0.5f;
-                    s.position = Projectile.Center + Vector2.UnitY.RotatedByRandom(Math.PI) * Main.rand.NextFloat() * 80 / 3f;
+                    s.position = Projectile.Center + Vector2.UnitY.RotatedByRandom(Math.PI) * Main.rand.NextFloat() * (Projectile.width*10) / 3f;
                     s.velocity *= 2f;
                 }
                 s.noGravity = true;
@@ -97,13 +98,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 smoke.noGravity = true;
                 smoke.velocity *= 1.5f;
             }
-
-            /*for (int i = 0; i < Main.rand.Next(4, 7); i++)
-            {
-                Vector2 velocity = Main.rand.NextFloat(1f, 4f) * Vector2.UnitY.RotatedByRandom(MathHelper.TwoPi);
-                int d = Dust.NewDust(Projectile.Center, 0, 0, DustID.Shadowflame);
-                Main.dust[d].velocity = velocity;
-            }*/
             Projectile.Kill();
         }
         public override bool? CanDamage() => Projectile.ai[0] >= 60;

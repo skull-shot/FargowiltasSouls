@@ -53,8 +53,18 @@ ParryEffect: {
 	DisplayName: Guard Parry
 	Tooltip:
 		'''
-		Hold to guard, increasing defense
-		Guard shortly before being hit to parry, nullifying damage
+		Hold to guard, increasing defense by 20
+		Guard shortly before being hit to parry, nullifying damage taken
+		Defaults to Right Click if no key is bound to skill slot
+		'''
+}
+
+DreadShellEffect: {
+	DisplayName: Counter Parry
+	Tooltip:
+		'''
+		Hold to guard, defense and damage reduction are decreased while and shortly after guarding
+		Guard shortly before being hit to cause a massive counterattack, nullifying damage taken
 		Defaults to Right Click if no key is bound to skill slot
 		'''
 }
