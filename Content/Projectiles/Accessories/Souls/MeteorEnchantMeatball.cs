@@ -161,7 +161,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             DrawMeteor(Projectile, Texture, Force != 0, ref lightColor);
             return false;
         }
-        public static void DrawMeteor(Projectile Projectile, string textureString, bool large, ref Color lightColor)
+        public static void DrawMeteor(Projectile Projectile, string textureString, bool large, ref Color lightColor, float GlowScale = 1)
         {
             Vector2 normalizedVel = Projectile.velocity.SafeNormalize(Vector2.Zero);
             //draw projectile
@@ -179,7 +179,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             SpriteEffects effects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Texture2D circle = FargoAssets.BloomTexture.Value;
-            float circleScale = 0.35f * Projectile.scale;
+            float circleScale = (0.35f * Projectile.scale) * GlowScale;
             Vector2 circleOffset = normalizedVel * 4f * Projectile.scale;
             Main.EntitySpriteDraw(circle, Projectile.Center + circleOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, OrangeColor * 0.1f * Projectile.Opacity, Projectile.rotation, circle.Size() / 2f, circleScale, effects, 0);
             //glow
