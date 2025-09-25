@@ -3688,3 +3688,8 @@ CactusMimicBanner: {
 	DisplayName: Знамя мимика-кактуса
 	Tooltip: ""
 }
+
+CactusStaff: {
+	// DisplayName: Cactus Staff
+	// Tooltip: Launches a bouncing cactus ball
+}
