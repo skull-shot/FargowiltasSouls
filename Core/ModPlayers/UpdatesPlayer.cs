@@ -256,9 +256,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (NoMomentum && !Player.mount.Active)
             {
-                if (Player.vortexStealthActive && Math.Abs(Player.velocity.X) > 6)
-                    Player.vortexStealthActive = false;
-
                 Player.runAcceleration *= 5f;
                 Player.runSlowdown *= 5f;
 
@@ -320,15 +317,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (AbomWandItem != null)
                 AbomWandUpdate();
-
-            if (Flipped && !Player.gravControl)
-            {
-                Player.gravControl = true;
-                Player.controlUp = false;
-                Player.gravDir = -1f;
-                //Player.fallStart = (int)(Player.position.Y / 16f);
-                //Player.jump = 0;
-            }
 
             if (DevianttHeartItem != null)
             {

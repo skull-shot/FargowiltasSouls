@@ -104,7 +104,7 @@ SinisterIconDropsEffect: Выпадение предметов
 MasoGraze: Грэйз
 MasoGrazeRing: Визуал радиуса грэйза
 DevianttHearts: Сердца при атаке
-AbomWandCrit: Призрачный Выродокк
+AbomWandCrit: Призрачный Отвратт
 SupremeFairyHeader: "{$Mods.FargowiltasSouls.Items.SupremeDeathbringerFairy.DisplayName}"
 SlimyShieldEffect: Слизневые шары
 PlatformFallthroughEffect: Падение через платформы
@@ -147,7 +147,7 @@ UfoMinionEffect: Прислужник тарелка
 ChalicePotionEffect: Бесплатные баффы зелий
 MasoTrueEyeMinion: Истинные глаза-миньоны
 MutantArmorHeader: Вечная броня
-MasoAbom: Прислужник Выродокк
+MasoAbom: Прислужник-Отвратт
 MasoRing: Фантазматическое кольцо
 UniverseHeader: "{$Mods.FargowiltasSouls.Items.UniverseSoul.DisplayName}"
 MeleeSpeedEffect: Ближняя скорость

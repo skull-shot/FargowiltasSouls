@@ -75,9 +75,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileID.InfernoFriendlyBlast, Projectile.damage, 0, Projectile.owner);
             if (p != Main.maxProjectiles)
             {
-                Main.projectile[p].timeLeft = 15;
-                Main.projectile[p].usesIDStaticNPCImmunity = true;
-                Main.projectile[p].idStaticNPCHitCooldown = 10;
+                Main.projectile[p].timeLeft = 5;
+                Main.projectile[p].usesLocalNPCImmunity = true;
+                Main.projectile[p].localNPCHitCooldown = -1;
                 Main.projectile[p].FargoSouls().noInteractionWithNPCImmunityFrames = true;
             }
         }

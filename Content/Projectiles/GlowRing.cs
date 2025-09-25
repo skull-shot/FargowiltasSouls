@@ -46,6 +46,9 @@ namespace FargowiltasSouls.Content.Projectiles
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[0]);
             if (npc != null)
                 Projectile.Center = npc.Center;
+            Projectile proj = FargoSoulsUtil.ProjectileExists(Projectile.ai[2]);
+            if (proj != null)
+                Projectile.Center = proj.Center;
 
             float scale = 12f;
             int maxTime = 30;
@@ -261,7 +264,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case -1: //purple shadowbeam
                     color = new Color(200, 0, 200, 0);
-                    maxTime = 60;
+                    scale = 5f;
+                    maxTime = 40;
                     break;
 
                 case NPCID.EyeofCthulhu:

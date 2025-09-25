@@ -218,11 +218,6 @@ FlamesoftheUniverseBuff: {
 	Description: 来自诸天的亲自审判
 }
 
-FlippedBuff: {
-	DisplayName: 翻转
-	Description: 你的重力被颠倒了
-}
-
 HallowIlluminatedBuff: {
 	DisplayName: 灯火通明
 	Description:

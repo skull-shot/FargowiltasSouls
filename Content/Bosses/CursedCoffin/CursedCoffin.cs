@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         #region Variables
         float DrawcodeOpacity = 0f;
 
-        private int Phase = 1;
+        private int Phase = 0;
 		private bool Attacking = true;
 		private bool ExtraTrail = false;
 
@@ -124,10 +124,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.HitSound = SoundID.NPCHit54; 
             NPC.DeathSound = SoundID.NPCDeath6;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod _)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod _)
                 ? MusicLoader.GetMusicSlot(Mod, "Assets/Sounds/Silent") : MusicID.OtherworldlyBoss1;
 
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.BossBar = ModContent.GetInstance<CursedCoffinBossBar>();
 

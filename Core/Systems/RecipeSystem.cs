@@ -119,10 +119,10 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.AmethystRobe, ItemID.TopazRobe), ItemID.AmethystRobe, ItemID.TopazRobe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier1Robe", group);
             //tier 2 robe
-            group = new RecipeGroup(() => ItemXOrY(ItemID.SapphireRobe, ItemID.EmeraldRobe), ItemID.SapphireRobe, ItemID.EmeraldRobe);
+            group = new RecipeGroup(() => AnyItem(ItemID.SapphireRobe), ItemID.SapphireRobe, ItemID.EmeraldRobe, ItemID.RubyRobe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier2Robe", group);
             //tier 3 robe
-            group = new RecipeGroup(() => ItemXOrY(ItemID.RubyRobe, ItemID.DiamondRobe), ItemID.RubyRobe, ItemID.DiamondRobe);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.AmberRobe, ItemID.DiamondRobe), ItemID.AmberRobe, ItemID.DiamondRobe);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyTier3Robe", group);
 
             //flight mastery soul

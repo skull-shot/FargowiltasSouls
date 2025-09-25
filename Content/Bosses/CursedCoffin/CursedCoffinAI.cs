@@ -235,6 +235,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						//dust explosion
 						ExtraTrail = false;
 						Timer = -60;
+						Phase = 1;
 						//shockwaves
 						if (FargoSoulsUtil.HostCheck)
 						{
@@ -245,14 +246,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 							}
 						}
 
-                        if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) && musicMod.Version >= Version.Parse("0.1.6"))
+                        /*if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) && musicMod.Version >= Version.Parse("0.1.6"))
                         {
                             Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/ShiftingSands");
                             if (Main.musicFade[Music] < 0.5f)
                                 Main.musicFade[Music] = 0.5f;
                         }
                         else
-                            Music = MusicID.OtherworldlyBoss1;
+                            Music = MusicID.OtherworldlyBoss1;*/
                     }
 				}
 				if (NPC.Center.Y >= LockVector1.Y + 800) //only go so far

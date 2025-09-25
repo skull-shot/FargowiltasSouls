@@ -1078,11 +1078,8 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
-		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
-		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		[c/00FFFF:Passively:] grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
+		[c/00FFFF:Passively:] [i:FargowiltasSouls/WyvernFeather] stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] sends money to piggy bank, reduces reforge cost by 50%, and [i:FargowiltasSouls/MysticSkull] uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		''' */
 }
@@ -1203,10 +1200,11 @@ ChaliceofTheMoon: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Flipped, Illuminated, Unstable, and Curse of the Moon, and Power of the Cosmos benefits you regardless of class
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
@@ -3724,6 +3722,7 @@ HallowedPendant: {
 		'''
 		Increases length of invincibility after taking damage
 		After taking damage, fires a ray of light at up to 4 nearby enemies
+		Ray damage scales with damage taken, up to 1.6x
 		''' */
 }
 
@@ -3750,4 +3749,9 @@ MainframePainting: {
 CactusMimicBanner: {
 	// DisplayName: Cactus Mimic Banner
 	// Tooltip: ""
+}
+
+CactusStaff: {
+	// DisplayName: Cactus Staff
+	// Tooltip: Launches a bouncing cactus ball
 }

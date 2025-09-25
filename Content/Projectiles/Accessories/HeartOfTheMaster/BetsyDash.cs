@@ -108,7 +108,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.BetsysCurse, LumUtils.SecondsToFrames(10));
+            target.AddBuff(BuffID.BetsysCurse, LumUtils.SecondsToFrames(20));
 
             if (Projectile.owner == Main.myPlayer)
             {

@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -8,7 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 {
     public class CactusNeedle : ModProjectile
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", Name);
+        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.RollingCactusSpike;
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.PineNeedleFriendly);
@@ -21,6 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 10;
             Projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
+            Projectile.width = Projectile.height = 5;
         }
 
         public override void AI()
@@ -53,7 +55,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 target.FargoSouls().Needled = true;
             }
         }
-
+        public override bool PreDraw(ref Color lightColor)
+        {
+            FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor);
+            return false;
+        }
         public override void OnKill(int timeLeft)
         {
             int num11;

@@ -16,11 +16,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
     public class CosmosMeteor : ModProjectile, IPixelatedPrimitiveRenderer
     {
         private bool spawned;
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "MeteorEnchantMeatball");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Cosmic Meteor");
-            //Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -38,9 +35,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
 
-            Projectile.width = 80;
-            Projectile.height = 80;
-            Projectile.scale = (24f / 80);
+            Projectile.width = 24;
+            Projectile.height = 24;
 
             Projectile.aiStyle = 0;
         }
@@ -79,7 +75,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
             if (Main.rand.NextBool(6))
             {
-                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity, Color.Gray, 50, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity, Color.Gray, 50, 0.3f, 0.05f, Main.rand.NextFloat(MathF.Tau));
                 p.Spawn();
                 /*
                 float scaleFactor9 = 0.4f;
@@ -118,7 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 }
             }
 
-            if (!Main.dedServ)
+            /*if (!Main.dedServ)
             {
                 int gores = 5;
                 for (int j = 0; j < gores; j++)
@@ -130,7 +126,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     if (!Main.dedServ)
                         Gore.NewGore(Projectile.GetSource_FromThis(), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"MeteorGore{type}").Type, Projectile.scale);
                 }
-            }
+            }*/
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
@@ -154,9 +150,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public float WidthFunction(float completionRatio)
         {
-            float baseWidth = Projectile.scale * Projectile.width * 5f;
+            float baseWidth = (Projectile.scale - 0.6f) * Projectile.width * 5f;
             float ratio = MathF.Pow(completionRatio, 1.5f);
-            return MathHelper.SmoothStep(baseWidth, 25f * Projectile.scale, ratio);
+            return MathHelper.SmoothStep(baseWidth, 7.7f, ratio);
         }
 
         public static Color ColorFunction(float completionRatio)
@@ -175,7 +171,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public override bool PreDraw(ref Color lightColor)
         {
-            MeteorEnchantMeatball.DrawMeteor(Projectile, Texture, false, ref lightColor);
+            MeteorEnchantMeatball.DrawMeteor(Projectile, Texture, false, ref lightColor, 0.5f);
             return false;
         }
     }

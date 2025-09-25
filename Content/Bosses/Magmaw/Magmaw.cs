@@ -20,7 +20,8 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
     [AutoloadBossHead]
     public partial class Magmaw : ModNPC
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
+        public const bool LoadThis = false; // here to sync ModSceneEffect until manual fix
+        public override bool IsLoadingEnabled(Mod mod) => LoadThis;
         #region Variables
 
         //Visuals
@@ -146,8 +147,8 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
             NPC.HitSound = SoundID.NPCHit2;
             NPC.DeathSound = SoundID.NPCDeath44;
 
-            Music = MusicID.Boss2; //ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.Boss2;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            /*Music = MusicID.Boss2; //ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.Boss2;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.value = Item.buyPrice(0, 15);
 

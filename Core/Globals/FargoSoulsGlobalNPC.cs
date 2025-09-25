@@ -10,6 +10,7 @@ using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -949,10 +950,18 @@ namespace FargowiltasSouls.Core.Globals
             }
 
             float dotMultiplier = DoTMultiplier(npc, modPlayer.Player);
-            if (dotMultiplier != 1 && npc.lifeRegen < 0)
+            if (npc.lifeRegen < 0)
             {
-                npc.lifeRegen = (int)(npc.lifeRegen * dotMultiplier);
-                damage = (int)(damage * dotMultiplier);
+                if (dotMultiplier != 1)
+                {
+                    npc.lifeRegen = (int)(npc.lifeRegen * dotMultiplier);
+                    damage = (int)(damage * dotMultiplier);
+                }
+                if (WorldSavingSystem.EternityMode && npc.type is NPCID.PrimeCannon or NPCID.PrimeLaser or NPCID.PrimeSaw or NPCID.PrimeVice)
+                {
+                    npc.lifeRegen = (int)Math.Floor(npc.lifeRegen * 0.1);
+                    damage = (int)Math.Ceiling(damage * 0.1);
+                }
             }
 
             if (TimeFrozen && npc.life == 1)
@@ -1373,8 +1382,6 @@ namespace FargowiltasSouls.Core.Globals
                 modifiers.ArmorPenetration += 10;
             if (CurseoftheMoon)
                 modifiers.ArmorPenetration += 20;
-            //if (Rotting)
-            //    modifiers.ArmorPenetration += 10;
             if (Sublimation)
             {
                 float ratio = PureGazeTime / PungentGazeBuff.MAX_TIME;
@@ -1384,6 +1391,11 @@ namespace FargowiltasSouls.Core.Globals
                     def = 50;
                 modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
+            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
+            {
+                modifiers.Defense.Flat += 15; //25 total ap
+            }
+
             if (DeathMarked)
                 modifiers.FinalDamage *= 1.15f;
             if (Smite)
@@ -1410,22 +1422,10 @@ namespace FargowiltasSouls.Core.Globals
                 //modifiers.FinalDamage *= 1.0f + 0.15f * PungentGazeTime / PungentGazeBuff.MAX_TIME;
             }
 
-            //            //if (modPlayer.KnightEnchant && Villain && !npc.boss)
-            //            //{
-            //            //    damage *= 1.5;
-            //            //}
-
-            //            if (crit && modPlayer.ShroomEnchant && !modPlayer.TerrariaSoul && player.stealth == 0)
-            //            {
-            //                damage *= 1.5;
-            //            }
-
             if (modPlayer.DeviGraze)
             {
                 modifiers.FinalDamage *= 1.0f + (float)modPlayer.DeviGrazeBonus;
             }
-
-            //            //normal damage calc
         }
 
         public override void ModifyShop(NPCShop shop)

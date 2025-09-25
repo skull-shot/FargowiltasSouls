@@ -744,8 +744,8 @@ namespace FargowiltasSouls.Content.Projectiles
                                 if (nPC.CanBeChasedBy(projectile))
                                 {
                                     float targetDistance = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                                    float maxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
-                                    if (targetDistance < maxChaseDistance)
+                                    const float MaxChaseDistance = 1000000f; // square of 1000f. Change this to tweak how far it can chase a found target
+                                    if (targetDistance < MaxChaseDistance)
                                     {
                                         homingCheck = true;
                                         projCenterX = nPC.Center.X;
@@ -1508,6 +1508,31 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+
+                case ProjectileID.EatersBite:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.ScourgeoftheCorruptor))
+                        {
+                            const int TimeUntilSplit = 40; // 0.66 seconds
+                            const float GrazeDistanceSquared = 3600f; // 60f squared
+                            for (int npc = 0; npc < Main.maxNPCs; npc++)
+                            {
+                                NPC nPC = Main.npc[npc];
+                                if (nPC.CanBeChasedBy(projectile))
+                                {
+                                    float targetDistanceSquared = Vector2.DistanceSquared(projectile.Center, nPC.Center);
+                                    if (targetDistanceSquared < GrazeDistanceSquared && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                    {
+                                        projectile.timeLeft = TimeUntilSplit;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
         }
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -1807,15 +1832,16 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                         }
                         break;
-                    case ProjectileID.ApprenticeStaffT3Shot: //betsys wrath
+                    case ProjectileID.ApprenticeStaffT3Shot:
                         if (SourceItemType == ItemID.ApprenticeStaffT3 && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
-                            // resets curse duration to 1s after vanilla onhit sets it to 10s
                             for (int i = 0; i < NPC.maxBuffs; i++)
                             {
                                 if (target.buffType[i] == BuffID.BetsysCurse && target.buffTime[i] == 600)
                                 {
-                                    target.buffTime[i] = 60;
+                                    if (projectile.FargoSouls().ApprenticeSupportProjectile)
+                                        target.buffTime[i] = 30;
+                                    else target.buffTime[i] = 300;
                                 }
                             }
                         }
@@ -2036,7 +2062,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.BrainScramblerBolt:
-                    target.AddBuff(ModContent.BuffType<FlippedBuff>(), 60);
                     target.AddBuff(ModContent.BuffType<UnstableBuff>(), 60);
                     break;
 

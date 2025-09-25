@@ -1,13 +1,13 @@
 AbomBoss_April.DisplayName: Босс Джавиз
 
 AbomBoss: {
-	DisplayName: Выродокк
+	DisplayName: Отвратт
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.AbomBoss.DisplayName}"
 		SpawnInfo: Призывается с помощью [i:FargowiltasSouls/AbomsCurse]
-		DespawnMessage: Выродокк не смог найти достойного соперника...
-		KilledAllMessage: Выродокк уничтожил всех до единого.
+		DespawnMessage: Отвратт не смог найти достойного соперника...
+		KilledAllMessage: Отвратт уничтожил всех до единого.
 	}
 }
 
@@ -151,7 +151,7 @@ MutantBoss: {
 
 	BossChecklistIntegration: {
 		EntryName: "{$Mods.FargowiltasSouls.NPCs.MutantBoss.DisplayName}"
-		SpawnInfo: Киньте [i:FargowiltasSouls/AbominationnVoodooDoll] в лаву, когда Выродокк и Мутант присутствуют в мире.
+		SpawnInfo: Киньте [i:FargowiltasSouls/AbominationnVoodooDoll] в лаву, когда Отвратт и Мутант присутствуют в мире.
 		DespawnMessage: Мутант вновь запечатывает свою мощь...
 		KilledAllMessage: Мутант истребил всех, кто попался под руку.
 	}
@@ -397,3 +397,5 @@ ReleasedMutant: {
 BloodPuddle.DisplayName: Кровавая лужица
 SoulVortex.DisplayName: Вихрь душ
 CactusMimic.DisplayName: Мимик-кактус
+DD2Shielder.DisplayName: Этерианский щитовик
+DD2Jammer.DisplayName: Виверна-глушилка

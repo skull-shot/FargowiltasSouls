@@ -9,7 +9,7 @@ AccursedSarcophagusBuff: {
 }
 
 BabyAbomBuff: {
-	DisplayName: Малыш Вырод
+	DisplayName: Малыш Отвратикк
 	Description: Кикфлип на косе
 }
 
@@ -109,12 +109,12 @@ BetsyDashBuff: {
 }
 
 AbomFangBuff: {
-	DisplayName: Клык мерзости
+	DisplayName: Отвратительный укус
 	Description: Сила режима Вечность подчиняет вас
 }
 
 AbomPresenceBuff: {
-	DisplayName: Мерзкое присутствие
+	DisplayName: Отвратительное присутствие
 	Description: Регенерация здоровья замедлена; эффекты дебаффа «Лунный укус»
 }
 
@@ -159,12 +159,12 @@ MagicalCleanseCDBuff: {
 }
 
 AbomCooldownBuff: {
-	DisplayName: Мерзкая перезарядка
+	DisplayName: Отвратительная перезарядка
 	Description: Вы пока не можете выдержать ещё одну атаку
 }
 
 AbomRebirthBuff: {
-	DisplayName: Мерзкое перерождение
+	DisplayName: Отвратительное перерождение
 	Description: Вы не можете умереть не от прямых атак
 }
 
@@ -216,11 +216,6 @@ DefenselessBuff: {
 FlamesoftheUniverseBuff: {
 	DisplayName: Пламя Космоса
 	Description: Сами небеса судят вас
-}
-
-FlippedBuff: {
-	DisplayName: Перевёрнутый
-	Description: Силы гравитации изменили своё направление
 }
 
 HallowIlluminatedBuff: {
@@ -739,6 +734,6 @@ VortexStealthCDBuff: {
 }
 
 ExpixiveBuff: {
-	// DisplayName: Expixive Buff
-	// Description: The lesser fairies will fight to the end for you
+	DisplayName: Взрывофея
+	Description: Малые феи сражаются за вас до последнего
 }

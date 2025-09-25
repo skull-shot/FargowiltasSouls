@@ -122,7 +122,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
                 if (FargoSoulsUtil.HostCheck)
                 {
-                    const int maxGhosts = 8;
+                    int maxGhosts = WorldSavingSystem.MasochistModeReal ? 8 : 6;
                     for (int i = 0; i < maxGhosts; i++)
                     {
                         int flip = i % 2 == 0 ? -1 : 1;

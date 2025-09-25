@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<SpiderEffect>(Item);
-            player.GetCritChance(DamageClass.Generic) += 7;
+            player.GetCritChance(DamageClass.Generic) += 8;
             if (player.FargoSouls().ForceEffect<SpiderEnchant>())
                 player.GetCritChance(DamageClass.Generic) += 7;
         }

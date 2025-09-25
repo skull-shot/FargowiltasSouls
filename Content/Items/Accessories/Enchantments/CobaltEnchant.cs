@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 
             }
             else
-                player.jumpSpeedBoost += 3.75f; //+75%
+                player.jumpSpeedBoost += !player.controlDown ? 3.75f : 1f; //+75% / +20% when holding down
         }
         public override void PostUpdate(Player player)
         {

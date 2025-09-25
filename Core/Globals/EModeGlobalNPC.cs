@@ -876,14 +876,14 @@ namespace FargowiltasSouls.Core.Globals
             switch (npc.type)
             {
                 case NPCID.BlueSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion, 3));
                     break;
 
                 case NPCID.DemonEye:
                 case NPCID.DemonEye2:
                 case NPCID.DemonEyeOwl:
                 case NPCID.DemonEyeSpaceship:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.NightOwlPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.NightOwlPotion, 2));
                     break;
 
                 case NPCID.MossHornet:
@@ -893,13 +893,13 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.HornetLeafy:
                 case NPCID.HornetSpikey:
                 case NPCID.HornetStingy:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SwiftnessPotion, 1, 1, 2));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.SwiftnessPotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.GoblinPeon:
                 case NPCID.GoblinThief:
                 case NPCID.GoblinWarrior:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BattlePotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BattlePotion, 4));
                     break;
 
                 case NPCID.JungleBat:
@@ -911,25 +911,25 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.CaveBat:
                 case NPCID.GiantBat:
                 case NPCID.SporeBat:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SonarPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SonarPotion, 2));
                     break;
 
                 case NPCID.Demon:
                 case NPCID.VoodooDemon:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WrathPotion, 1, 2, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WrathPotion, 1, 1, 2));
                     break;
 
                 case NPCID.Hellbat:
                 case NPCID.Lavabat:
                 case NPCID.LavaSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RagePotion));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.RagePotion, 3, chanceNumerator: 2));
                     break;
 
                 case NPCID.SnowFlinx:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion, 1, 2, 3));
                     break;
                 case NPCID.UndeadViking:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion));
                     break;
 
                 case NPCID.AngryBones:
@@ -948,18 +948,18 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BlueArmoredBonesMace:
                 case NPCID.BlueArmoredBonesNoPants:
                 case NPCID.BlueArmoredBonesSword:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TitanPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TitanPotion, 2));
                     break;
 
                 case NPCID.DarkCaster:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 2, 3));
                     break;
 
                 case NPCID.GiantShelly:
                 case NPCID.GiantShelly2:
                 case NPCID.GiantTortoise:
                 case NPCID.IceTortoise:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 2));
                     break;
 
                 case NPCID.Zombie:
@@ -975,13 +975,21 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.SwampZombie:
                 case NPCID.SmallSwampZombie:
                 case NPCID.BigSwampZombie:
+                case NPCID.TorchZombie:
+                case NPCID.ArmedZombie:
+                case NPCID.ArmedZombieCenx:
+                case NPCID.ArmedTorchZombie:
+                case NPCID.ArmedZombiePincussion:
+                case NPCID.ArmedZombieSlimed:
+                case NPCID.ArmedZombieSwamp:
+                case NPCID.ArmedZombieTwiggy:
                 case NPCID.ZombieDoctor:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion, 5));
                     break;
 
                 case NPCID.Antlion:
                 case NPCID.WalkingAntlion:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion));
                     break;
 
                 case NPCID.WallCreeper:
@@ -990,46 +998,55 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BlackRecluseWall:
                 case NPCID.JungleCreeper:
                 case NPCID.JungleCreeperWall:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TrapsightPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TrapsightPotion));
                     break;
 
                 case NPCID.FireImp:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InfernoPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InfernoPotion));
                     break;
 
                 case NPCID.Harpy:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CalmingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CalmingPotion));
                     break;
 
                 case NPCID.Crab:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CratePotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CratePotion));
                     break;
 
                 case NPCID.FlyingFish:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.FishingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.FishingPotion));
                     break;
 
                 case NPCID.IceSlime:
                 case NPCID.SpikedIceSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WaterWalkingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WaterWalkingPotion));
                     break;
 
                 case NPCID.Piranha:
                 case NPCID.Arapaima:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GillsPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GillsPotion));
                     break;
 
                 case NPCID.BloodZombie:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1, 1, 3));
+                case NPCID.ZombieMerman:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1));
                     break;
 
+                case NPCID.GoblinShark:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1, 3, 5));
+                    break;
 
                 case NPCID.UmbrellaSlime:
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.FeatherfallPotion, 1, 1, 3));
                     break;
 
                 case NPCID.Drippler:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1, 1, 3));
+                case NPCID.EyeballFlyingFish:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1));
+                    break;
+
+                case NPCID.BloodEelHead:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1, 3, 5));
                     break;
 
                 case NPCID.GiantWormHead:
@@ -1046,7 +1063,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GraniteGolem:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.EndurancePotion, 1, 3, 5));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.EndurancePotion, 1, 2, 3));
                     break;
 
                 case NPCID.Shark:
@@ -1054,17 +1071,17 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GoblinArcher:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ArcheryPotion, 1, 1, 3));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ArcheryPotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.GoblinSorcerer:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 1, 3));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.PinkJellyfish:
                 case NPCID.BlueJellyfish:
                 case NPCID.GreenJellyfish:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ShinePotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ShinePotion));
                     break;
 
                 case NPCID.Salamander:
@@ -1076,64 +1093,61 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.Salamander7:
                 case NPCID.Salamander8:
                 case NPCID.Salamander9:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InvisibilityPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InvisibilityPotion, 1, 1, 2));
                     break;
 
                 case NPCID.MotherSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 1, 6));
+                case NPCID.BabySlime:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 2));
                     break;
 
                 case NPCID.Nymph:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LovePotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LovePotion, 1, 1, 3));
                     break;
 
                 case NPCID.Tumbleweed:
                 case NPCID.DesertBeast:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SwiftnessPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SwiftnessPotion));
                     break;
 
                 case NPCID.TombCrawlerHead:
                 case NPCID.DuneSplicerHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 2));
                     break;
 
                 case NPCID.DoctorBones:
                 case NPCID.Mimic:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SpelunkerPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SpelunkerPotion, 1, 2, 3));
                     break;
 
                 case NPCID.UndeadMiner:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MiningPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MiningPotion, 1, 2, 3));
                     break;
 
                 case NPCID.Tim:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 2, 3));
                     break;
 
                 case NPCID.BoneSerpentHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ObsidianSkinPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ObsidianSkinPotion, 1, 3, 8));
                     break;
 
 
                 case NPCID.Gnome:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionLesser, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionLesser, 1, 2, 3));
                     break;
                 case NPCID.DungeonSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotion, 1, 2, 3));
                     break;
                 case NPCID.Clown:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionGreater, 1, 1, 6));
-                    break;
-
                 case NPCID.EnchantedSword:
                 case NPCID.CrimsonAxe:
                 case NPCID.CursedHammer:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionGreater, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionGreater, 1, 2, 3));
                     break;
 
                 case NPCID.ChaosElemental:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TeleportationPotion, 1, 1, 3));
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TeleportationPotion, 1, 2, 3));
                     break;
 
                 case NPCID.RainbowSlime:
@@ -1141,20 +1155,20 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.RuneWizard:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 1, 6));
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 2, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 2, 3));
                     break;
 
                 case NPCID.GoblinSummoner:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 3, 8));
                     break;
 
                 case NPCID.PirateCaptain:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.AmmoReservationPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.AmmoReservationPotion, 1, 3, 8));
                     break;
 
                 case NPCID.WyvernHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GravitationPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GravitationPotion, 1, 3, 8));
                     break;
 
                 case NPCID.BigMimicJungle:
@@ -1163,13 +1177,13 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BigMimicCorruption:
                 case NPCID.BigMimicCrimson:
                 case NPCID.BigMimicHallow:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LifeforcePotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LifeforcePotion, 1, 3, 8));
                     break;
 
                 case NPCID.ManEater:
                 case NPCID.Nutcracker:
                 case NPCID.Parrot:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GenderChangePotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GenderChangePotion));
                     break;
                 case NPCID.CorruptBunny:
                 case NPCID.CrimsonBunny:
@@ -1177,7 +1191,7 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.CrimsonGoldfish:
                 case NPCID.CorruptPenguin:
                 case NPCID.CrimsonPenguin:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BiomeSightPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BiomeSightPotion, 1));
                     break;
                 default: break;
             }

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Placables;
+using FargowiltasSouls.Content.Items.Weapons.Misc;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,6 +43,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
             ItemID.Sets.KillsToBanner[BannerItem] = 50;
             //base.SetDefaults();
         }
+        
         public override void SetStaticDefaults()
         {
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -52,6 +54,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
                 PortraitPositionYOverride = 0f,
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
+            //gets set to vulnerable to all buffs when aggrod
+            NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -168,6 +172,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
                     NPC.Center = center;
                     SoundEngine.PlaySound(SoundID.Zombie2 with { Volume = 0.3f}, NPC.Center);
                     NPC.netUpdate = true;
+                    for (int i = 0; i < NPC.buffImmune.Length; i++)
+                    {
+                        NPC.buffImmune[i] = false;
+                    }
+                    NPC.hide = false;
                 }
                 float rotoffset = NPC.velocity.Y > 0 ? 20 : NPC.velocity.Y < 0 ? -20 : 0;
                 if (NPC.ai[1] == 1)
@@ -235,7 +244,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
         {
             npcLoot.Add(ItemDropRule.Common(ItemID.Cactus, 1, 2, 7));
             npcLoot.Add(ItemDropRule.Common(ItemID.PinkPricklyPear, 5));
-
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CactusStaff>(), 20));
             base.ModifyNPCLoot(npcLoot);
         }
         public override void HitEffect(NPC.HitInfo hit)

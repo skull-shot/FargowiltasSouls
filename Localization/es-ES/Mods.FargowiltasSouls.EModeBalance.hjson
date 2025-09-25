@@ -69,4 +69,5 @@
 // MeleeDamageBugFix: Fixed projectiles not dealing melee damage
 // VortexSet: Stealth lasts up to 10 seconds before going on cooldown
 // PossessedHatchet: Projectiles bounce off and between enemies
-// BetsysCurse: Decreased debuff duration to 1 second
+// BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
+// ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely

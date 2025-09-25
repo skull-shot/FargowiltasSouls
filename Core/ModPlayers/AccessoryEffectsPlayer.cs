@@ -720,7 +720,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     extrashieldCD = BASE_SHIELD_COOLDOWN;
                 }
 
-                bool perfectParry = shieldHeldTime <= PERFECT_PARRY_WINDOW;
+                bool perfectParry = shieldHeldTime <= HARD_PARRY_WINDOW;
 
                 if (silverEffect)
                 {
@@ -796,11 +796,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        public const int BASE_PARRY_WINDOW = 20;
+        public const int BASE_PARRY_WINDOW = 16;
+        public const int HARD_PARRY_WINDOW = 8;
         public const int BASE_SHIELD_COOLDOWN = 100;
-        public const int HARD_PARRY_WINDOW = 10;
         public const int LONG_SHIELD_COOLDOWN = 360;
-        public const int PERFECT_PARRY_WINDOW = 10;
 
         public static int ShieldCooldown(Player player) => player.HasEffect<DreadShellEffect>() || player.HasEffect<PumpkingsCapeEffect>() ? LONG_SHIELD_COOLDOWN : BASE_SHIELD_COOLDOWN;
 
@@ -812,7 +811,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (dreadEffect)
             {
                 if (!MasochistSoul)
+                {
                     DreadShellVulnerabilityTimer = 120;
+                    if (!silverEffect && !pumpkingEffect)
+                        Player.statDefense -= 20; // counteract vanilla raised shield defense
+                }
             }
 
             if (pumpkingEffect)
@@ -854,15 +857,15 @@ namespace FargowiltasSouls.Core.ModPlayers
                 wasHoldingShield = false;
                 return;
             }
-            bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened && !Player.controlUseItem;
+            bool holdingKey = PlayerInput.Triggers.Current.MouseRight && Player.controlUseTile && Player.releaseUseItem && !Player.tileInteractionHappened;
             if (key.GetAssignedKeys().Any())
                 holdingKey = key.Current;
             bool preventRightClick = Main.HoveringOverAnNPC || Main.SmartInteractShowingGenuine;
             if (key != null)
                 preventRightClick = false;
-            Player.shieldRaised = Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
-                && !preventRightClick && holdingKey && Player.altFunctionUse != 2
-                && Player.itemAnimation == 0 && Player.itemTime == 0 && Player.reuseDelay == 0;
+            Player.shieldRaised = (Player.selectedItem != 58 && FargoSoulsUtil.ActuallyClickingInGameplay(Player)
+                && !preventRightClick && holdingKey && Player.altFunctionUse != 2)
+                || (GuardRaised && shieldTimer > 0);
 
             if (Player.shieldRaised)
             {
@@ -883,9 +886,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                     wasHoldingShield = true;
                     if (shieldCD == 0)
                         shieldTimer = silverEffect ? BASE_PARRY_WINDOW : HARD_PARRY_WINDOW;
-                    Player.itemAnimation = 0;
-                    Player.itemTime = 0;
-                    Player.reuseDelay = 0;
                 }
                 else //doing this so that on the first tick, these things DO NOT run
                 {

@@ -271,7 +271,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<GodEater>()] = true;
@@ -311,8 +310,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<PureHeart>())
             .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
-            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
 
             .AddTile<CrucibleCosmosSheet>()
 
