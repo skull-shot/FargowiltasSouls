@@ -14,7 +14,6 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Shield)]
     public class LithosphericCluster : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
@@ -106,7 +105,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             return LithosphericEffect.BaseDamage(Main.LocalPlayer);
         }
     }
-    [AutoloadEquip(EquipType.Shield)]
     public class LithosphericClusterInactive : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);

@@ -44,7 +44,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
                             Projectile.ai[1] = 1;
                             Projectile.netUpdate = true;
                             Projectile.Kill();
-                            FargoGlobalItem.OnRetrievePickup(Main.LocalPlayer);
                             return;
                         }
                     }
@@ -68,6 +67,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
                             Projectile.ai[1] = 1;
                             Projectile.netUpdate = true;
                             Projectile.Kill();
+                            FargoGlobalItem.OnRetrievePickup(Main.player[p]);
                             return;
                         }
                     }

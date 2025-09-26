@@ -408,6 +408,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             PlanterasChild = false;
             CrystalSkull = false;
             PungentEyeball = false;
+            LanternGuarding = false;
             LihzahrdTreasureBoxItem = null;
             BetsysHeartItem = null;
             BetsyDashing = false;

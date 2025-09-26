@@ -1,9 +1,10 @@
+using System;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI.Elements;
+using Luminance.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -38,21 +39,26 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             if (player.active && !player.dead && player.FargoSouls().PungentEyeballMinion)
                 Projectile.timeLeft = 2;
 
-            Vector2 vector2_1 = new(0f, -85f); //movement code
-            Vector2 vector2_2 = player.MountedCenter + vector2_1;
-            float num1 = Vector2.Distance(Projectile.Center, vector2_2);
-            if (num1 > 1000) //teleport when out of range
-                Projectile.Center = player.Center + vector2_1;
-            Vector2 vector2_3 = vector2_2 - Projectile.Center;
-            float num2 = 4f;
-            if (num1 < num2)
+            Vector2 idlepos = player.MountedCenter + new Vector2(0f, -85f);
+            bool guarding = player.FargoSouls().LanternGuarding;
+
+            if (guarding)
+                idlepos = player.MountedCenter + new Vector2(40f * player.direction, 0f);
+            float distance = Vector2.Distance(Projectile.Center, idlepos);
+            if (distance > 1000) //teleport when out of range
+                Projectile.Center = idlepos;
+            Vector2 vector2_3 = idlepos - Projectile.Center;
+            if (distance < 4f)
                 Projectile.velocity *= 0.25f;
             if (vector2_3 != Vector2.Zero)
             {
-                if (vector2_3.Length() < num2)
+                if (vector2_3.Length() < 4f)
                     Projectile.velocity = vector2_3;
                 else
                     Projectile.velocity = vector2_3 * 0.1f;
+
+                if (guarding && vector2_3.Length() >= 4f)
+                    Projectile.velocity *= 6f;
             }
 
             const float rotationModifier = 0.08f;
@@ -128,6 +134,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 //Main.NewText($"{Projectile.localAI[0]}, {Projectile.localAI[1]}, {Projectile.rotation}, {Projectile.frame}, {Projectile.frameCounter}");
             }
 
+            if (Projectile.localAI[2] > 0)
+                Projectile.localAI[2]--;
+
             if (Projectile.localAI[1] == 0)
             {
                 if (Projectile.frameCounter++ > 4)
@@ -197,6 +206,21 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             if (Projectile.spriteDirection < 0)
                 rotation += MathHelper.Pi;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(Color.White), rotation, origin2, Projectile.scale, spriteEffects);
+
+            Player player = Main.player[Projectile.owner];
+            if (Projectile.localAI[2] > 0)
+            {
+                Vector2 position = Projectile.Center + new Vector2(0, 6);
+                Texture2D shine = MiscTexturesRegistry.ShineFlareTexture.Value;
+                float flarescale = Projectile.localAI[2] / 60;
+                for (int i = 0; i < 4; i++)
+                {
+                    Main.spriteBatch.Draw(shine, position - Main.screenPosition, null, Color.Purple with { A = 0 }, Main.GlobalTimeWrappedHourly * 2f, shine.Size() * 0.5f, flarescale + 0.05f, 0, 0f);
+                    Main.spriteBatch.Draw(shine, position - Main.screenPosition, null, Color.MediumPurple with { A = 0 }, Main.GlobalTimeWrappedHourly * -2f, shine.Size() * 0.5f, flarescale + 0.05f, 0, 0f);
+                }
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            }
         }
     }
 }

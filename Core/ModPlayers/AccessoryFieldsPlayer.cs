@@ -414,6 +414,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool OxygenTank;
 
         public int DreadShellVulnerabilityTimer;
+        public bool LanternGuarding;
         public int shieldTimer;
         public int shieldCD;
         public int shieldHeldTime;
