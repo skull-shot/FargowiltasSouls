@@ -209,11 +209,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["WeatherPain"];
                     return EModeChange.Buff;
 
-                case ItemID.HoundiusShootius:
-                    balanceTextKeys = ["Damage", "HoundiusShootius"];
-                    balanceNumber = 1.2f;
-                    return EModeChange.Buff;
-
                 case ItemID.MonkStaffT2: //ghastly glaive
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.55f;
