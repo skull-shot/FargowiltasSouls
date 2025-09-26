@@ -128,7 +128,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 player.jumpBoost = true; //balloon effect
                 if (notAncient || player.ForceEffect<AncientCobaltEffect>())
                 {
-                    player.jumpSpeedBoost += !player.controlDown ? 5f : 2.5f; //+100% / +50% when holding down
+                    player.jumpSpeedBoost += !player.controlDown ? 5f : 1f; //+100% / +20% when holding down
                 }
                 else
                 {

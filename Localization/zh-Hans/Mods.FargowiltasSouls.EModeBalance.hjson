@@ -46,7 +46,6 @@ CrossNecklaceNerf: 连续受击不会触发延长无敌时间的效果
 IceBladeFrostburn: 射弹击中敌人造成霜冻减益
 JungleRose: 增加抓人草类敌怪掉落世纪之果的几率
 WeatherPain: 伤害频率和最大穿透次数增加
-HoundiusShootius: 提高火球速度
 SniperRifle: 距离敌怪越远伤害越高，最高可翻倍
 ChlorophyteSaber: 弹幕速度更快，但命中后会减速
 JackOLanternLauncher: 增加50%弹幕速度
@@ -71,3 +70,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // PossessedHatchet: Projectiles bounce off and between enemies
 // BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
 // ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+// BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
