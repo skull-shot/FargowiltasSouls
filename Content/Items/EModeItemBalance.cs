@@ -563,6 +563,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["ScourgeoftheCorruptor"];
                     return EModeChange.ReworkBuff;
 
+                case ItemID.BookofSkulls:
+                    balanceTextKeys = ["BookofSkulls"];
+                    return EModeChange.Buff;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {

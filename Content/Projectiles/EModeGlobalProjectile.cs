@@ -813,6 +813,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
                         projectile.DamageType = DamageClass.Melee;
                     break;
+
+                case ProjectileID.BookOfSkullsSkull:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.BookofSkulls && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            bool Tracking = projectile.ai[1] > 0;
+                            projectile.tileCollide = !Tracking;
+                            projectile.netUpdate = true;
+                        }
+                    }
+                    break;
+
                 default:
                     break;
 

@@ -71,3 +71,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // PossessedHatchet: Projectiles bounce off and between enemies
 // BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
 // ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+// BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
