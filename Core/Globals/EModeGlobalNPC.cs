@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Content.Achievements;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -858,6 +859,17 @@ namespace FargowiltasSouls.Core.Globals
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
                     Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-14, -4)).RotatedByRandom(MathHelper.ToRadians(35)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
+                }
+            }
+
+            if (npc.boss && (npc.ModNPC == null || npc.ModNPC.Mod == Mod))
+            {
+                for (int i = 0; i < Main.maxPlayers; i++)
+                {
+                    if (npc.playerInteraction[i])
+                    {
+                        ModContent.GetInstance<FirstEternityBossAchievement>().Condition.Complete();
+                    }
                 }
             }
         }
