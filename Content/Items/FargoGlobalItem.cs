@@ -650,7 +650,7 @@ namespace FargowiltasSouls.Content.Items
                     }
                     else
                     {
-                        string key = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound");
+                        string key = $"({Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")})";
                         var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
                         if (keys.Count > 0)
                             key = keys[0];
