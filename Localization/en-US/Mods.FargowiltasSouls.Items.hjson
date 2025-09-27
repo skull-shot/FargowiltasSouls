@@ -1683,6 +1683,13 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
+		Increases all stats drastically
+		Your attacks inflict a cocktail of Eternity Mode debuffs
+		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
+		'Embrace mastery, embrace eternity'
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
@@ -3653,3 +3660,5 @@ CactusStaff: {
 	DisplayName: Cactus Staff
 	Tooltip: Launches a bouncing cactus ball
 }
+
+Ruminate: Hold {0} to Ruminate

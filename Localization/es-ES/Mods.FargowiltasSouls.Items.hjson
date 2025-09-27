@@ -820,6 +820,15 @@ NatureForce: {
 	// DisplayName: Force of Nature
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that weakens and siphons life from nearby enemies
+		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
+		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
+		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
+		'Tapped into every secret of the wilds'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
 		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
 		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
@@ -1207,6 +1216,16 @@ GuttedHeart: {
 HeartoftheMasochist: {
 	// DisplayName: Heart of the Master
 	/* Tooltip:
+		'''
+		Grants immunity to various debuffs
+		Increases [i:FargowiltasSouls/MutantAntibodies] damage and [i:FargowiltasSouls/PumpkingsCape] critical strike chance by 8% and [i:FargowiltasSouls/IceQueensShield] damage reduction by 4%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory and vanity)
+		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size and grants Precision Seal
+		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
+		[i:FargowiltasSouls/ChaliceofTheMoon] Convert accessory minions to +1% damage each (toggleable) or summons [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer
+		'Warm, beating, and no body needed'
+		''' */
+	/* RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
 		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
@@ -1704,6 +1723,20 @@ FlightMasterySoul: {
 MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
+		'''
+		Increases all stats drastically
+		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
+		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
+		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
+		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
+		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
+		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
+		'Embrace mastery, embrace eternity'
+		''' */
+	/* RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
 		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
@@ -3675,3 +3708,5 @@ CactusStaff: {
 	// DisplayName: Cactus Staff
 	// Tooltip: Launches a bouncing cactus ball
 }
+
+// Ruminate: Hold {0} to Ruminate
