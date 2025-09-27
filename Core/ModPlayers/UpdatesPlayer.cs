@@ -389,12 +389,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (PrecisionSealNoDashNoJump)
             {
                 Player.dashType = 0;
-                Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
+                /*Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
                 Player.GetJumpState(ExtraJump.SandstormInABottle).Disable();
                 Player.GetJumpState(ExtraJump.BlizzardInABottle).Disable();
                 Player.GetJumpState(ExtraJump.FartInAJar).Disable();
                 Player.GetJumpState(ExtraJump.TsunamiInABottle).Disable();
-                Player.GetJumpState(ExtraJump.UnicornMount).Disable();
+                Player.GetJumpState(ExtraJump.UnicornMount).Disable();*/
+                Player.ConsumeAllExtraJumps();
                 JungleJumping = false;
                 CanJungleJump = false;
                 DashCD = 2;
@@ -444,6 +445,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.fullRotation = 0f;
                 NecromanticBrewRotation = 0f;
             }
+            if (Player.FargoSouls().Toggler_ExtraJumpsDisabled && Player.wingTime > 0)
+                Player.ConsumeAllExtraJumps();
         }
         public override void UpdateLifeRegen()
         {

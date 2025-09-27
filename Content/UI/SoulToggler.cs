@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -229,6 +230,16 @@ namespace FargowiltasSouls.Content.UI
 
             bool hasMinions = false;
             bool hasExtraAttacks = false;
+            bool hasExtraJumps = false;
+            foreach (ExtraJump jump in ExtraJumpLoader.OrderedJumps)
+            {
+                ExtraJumpState state = player.GetJumpState(jump);
+                if (state.Enabled)
+                {
+                    hasExtraJumps = true;
+                    break;
+                }
+            }
 
             var deactivatedMinions = AccessoryEffectLoader.GetEffect<MinionsDeactivatedEffect>();
 
@@ -238,6 +249,8 @@ namespace FargowiltasSouls.Content.UI
                     hasMinions = true;
                 if (effectPlayer.EquippedEffects[i] && AccessoryEffectLoader.AccessoryEffects[i].ExtraAttackEffect)
                     hasExtraAttacks = true;
+                if (effectPlayer.EquippedEffects[i] && AccessoryEffectLoader.AccessoryEffects[i].ExtraJumpEffect)
+                    hasExtraJumps = true;
             }
             if (effectPlayer.EquippedEffects[deactivatedMinions.Index])
                 ToggleList.Add(new UIToggle(deactivatedMinions, deactivatedMinions.Mod.Name));
@@ -245,6 +258,8 @@ namespace FargowiltasSouls.Content.UI
                 ToggleList.Add(new MinionsToggle());
             if (hasExtraAttacks)
                 ToggleList.Add(new ExtraAttacksToggle());
+            if (hasExtraJumps)
+                ToggleList.Add(new ExtraJumpsDisabledToggle());
 
             DisplayToggles(LoadedHeaders.OrderBy(h => h.Priority));
 

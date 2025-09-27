@@ -51,8 +51,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             player.jumpBoost = true;
             player.noFallDmg = true;
-
-            player.AddEffect<JumpsDisabled>(Item);
         }
 
         public override void AddRecipes()
