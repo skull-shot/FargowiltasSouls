@@ -1520,6 +1520,13 @@ SupremeDeathbringerFairy: {
 	DisplayName: Supreme Deathbringer Fairy
 	Tooltip:
 		'''
+		Grants immunity to various debuffs
+		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/NecromanticBrew] Greatly improves dashing and falling capabilities
+		[i:FargowiltasSouls/AgitatingLens][i:FargowiltasSouls/Deerclawps] While moving, create a damaging trail
+		'Supremacy not necessarily guaranteed'
+		'''
+	RuminateTooltip:
+		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
