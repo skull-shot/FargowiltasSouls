@@ -1,5 +1,6 @@
 DisableAllAttackEffects: Disable All Extra Attack Effects
 DisableAllMinionEffects: Disable All Minion Effects
+DisableAllExtraJumpEffects: Wings Disable All Extra Jumps
 TimberHeader: "{$Mods.FargowiltasSouls.Items.TimberForce.DisplayName}"
 WoodCompletionEffect: Wood Completion Speedup
 BorealEffect: Boreal Snowballs
@@ -165,7 +166,6 @@ ShimmerImmunityEffect: Shimmer Immunity
 FlightMasteryHeader: "{$Mods.FargowiltasSouls.Items.FlightMasterySoul.DisplayName}"
 FlightMasteryInsignia: Soaring Insignia Acceleration
 FlightMasteryGravity: Amplified Gravity
-JumpsDisabled: Wings Disable All Jumps
 SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
 RunSpeed: Higher Base Run Speed
 NoMomentum: No Momentum

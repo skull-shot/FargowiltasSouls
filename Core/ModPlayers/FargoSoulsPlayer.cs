@@ -112,6 +112,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool Toggler_ExtraAttacksDisabled = false;
         public bool Toggler_MinionsDisabled = false;
+        public bool Toggler_ExtraJumpsDisabled = false;
         public int ToggleRebuildCooldown = 0;
         public int EmodeToggleCooldown = 0;
         public bool UsingAnkh => Player.HeldItem.type == ModContent.ItemType<AccursedAnkh>() && Player.ItemAnimationActive;
@@ -147,6 +148,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
+            if (Toggler_ExtraJumpsDisabled) playerData.Add("Toggler_ExtraJumpsDisabled");
             if (HasEquippedSkill) playerData.Add("HasEquippedSkill");
 
             tag.Add($"{Mod.Name}.{Player.name}.Data", playerData);
@@ -190,6 +192,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
+            Toggler_ExtraJumpsDisabled = playerData.Contains("Toggler_ExtraJumpsDisabled");
             HasEquippedSkill = playerData.Contains("HasEquippedSkill");
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
@@ -335,6 +338,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
+            CactusEffectItem = null;
             PlatinumEffect = null;
             CobaltEnchantActive = false;
             AncientShadowEnchantActive = false;
@@ -378,14 +382,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 GalacticMinionsDeactivated = false;
             }
             GalacticMinionsDeactivatedBuffer = false;
-
-            /*
-            if (!JumpsDisabledBuffer)
-            {
-                JumpsDisabled = false;
-            }
-            JumpsDisabledBuffer = false;
-            */
 
             ForceEffects?.Clear();
 
@@ -1588,6 +1584,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             defaultPacket.Write((byte)Player.whoAmI);
             defaultPacket.Write(Toggler_ExtraAttacksDisabled);
             defaultPacket.Write(Toggler_MinionsDisabled);
+            defaultPacket.Write(Toggler_ExtraJumpsDisabled);
             defaultPacket.Send(toWho, fromWho);
 
             foreach (KeyValuePair<AccessoryEffect, bool> toggle in TogglesToSync)

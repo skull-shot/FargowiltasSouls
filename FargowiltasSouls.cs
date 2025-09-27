@@ -814,6 +814,7 @@ namespace FargowiltasSouls
                             FargoSoulsPlayer modPlayer = player.FargoSouls();
                             modPlayer.Toggler_ExtraAttacksDisabled = reader.ReadBoolean();
                             modPlayer.Toggler_MinionsDisabled = reader.ReadBoolean();
+                            modPlayer.Toggler_ExtraJumpsDisabled = reader.ReadBoolean();
                         }
                         break;
 
