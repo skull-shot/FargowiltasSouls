@@ -1737,6 +1737,11 @@ TerrariaSoul: {
 	DisplayName: Soul of Terraria
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce]Grants effects of all Forces
+		'A true master of Terraria'
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
