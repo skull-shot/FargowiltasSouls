@@ -34,7 +34,7 @@ namespace FargowiltasSouls
 {
     public partial class FargowiltasSouls : ICustomDetourProvider
     {
-        private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
+        private static readonly MethodInfo? CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
 
         private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
 
@@ -76,6 +76,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
+            On_Player.ApplyTouchDamage += HarmlessRollingCactus;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -114,6 +115,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
+            On_Player.ApplyTouchDamage -= HarmlessRollingCactus;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -530,6 +532,12 @@ namespace FargowiltasSouls
                         totalDamage = (int)(totalDamage * 0.275f);
                 }
             }
+        }
+        private void HarmlessRollingCactus(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
+        {
+            if (((tileId == TileID.Cactus && Main.dontStarveWorld) || tileId == TileID.RollingCactus) && self.HasEffect<CactusPassiveEffect>())
+                return;
+            orig(self, tileId, x, y);
         }
     }
 }

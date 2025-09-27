@@ -105,6 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);
+            player.AddEffect<CactusPassiveEffect>(Item);
         }
 
         public override void UpdateInventory(Player player)
@@ -113,6 +114,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<LightningImmunity>(Item);
             AshWoodEnchant.PassiveEffect(player);
             IronEnchant.PassiveEffects(player, Item);
+            player.AddEffect<CactusPassiveEffect>(Item);
         }
 
         public override void AddRecipes()

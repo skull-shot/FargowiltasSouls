@@ -46,6 +46,7 @@ LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: 蜜蜂 花朵
 BeetleEffect: 甲虫 相关效果
 CactusEffect: 仙人掌 针刺
+// CactusPassiveEffect: Passive Cactuses
 PumpkinEffect: 南瓜 种植南瓜
 SpiderEffect: 蜘蛛 召唤物暴击
 TurtleEffect: 乌龟 缩壳减伤

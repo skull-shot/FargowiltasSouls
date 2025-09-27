@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.Misc;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -155,7 +157,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
 
             }
             Player target = Main.player[NPC.target];
-            if (NPC.GetLifePercent() < 0.9f || NPC.Distance(target.Center) < 200 && !target.invis || NPC.ai[0] == 1)
+            if (NPC.GetLifePercent() < 0.9f || NPC.Distance(target.Center) < 200 && !target.invis && !target.HasEffect<CactusPassiveEffect>() || NPC.ai[0] == 1)
             {
                 if (NPC.ai[0] == 0)
                 {
@@ -187,7 +189,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
                 {
                     NPC.rotation = NPC.rotation.AngleLerp(MathHelper.ToRadians(-90 + rotoffset * NPC.ai[1]), 0.06f);
                 }
-                if(Collision.SolidCollision(NPC.BottomLeft, NPC.width, 6, true))
+                if (Collision.SolidCollision(NPC.BottomLeft, NPC.width, 6, true))
                 {
                     NPC.velocity.X *= 0.8f;
                     if (NPC.localAI[0] == 20)
@@ -201,8 +203,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
                             NPC.ai[1] = dir;
                         }
                     }
-
-                    
                 }
                 NPC.localAI[0]++;
                 if (NPC.localAI[0] >= 30)

@@ -338,7 +338,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             MonkEnchantActive = false;
             ShinobiEnchantActive = false;
-            CactusEffectItem = null;
             PlatinumEffect = null;
             CobaltEnchantActive = false;
             AncientShadowEnchantActive = false;

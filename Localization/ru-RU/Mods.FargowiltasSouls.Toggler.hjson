@@ -46,6 +46,7 @@ LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: Цветы
 BeetleEffect: Жуки
 CactusEffect: Кактусовые иглы
+// CactusPassiveEffect: Passive Cactuses
 PumpkinEffect: Растущие тыквы
 SpiderEffect: Криты призывателя
 TurtleEffect: Черепаший панцирь
