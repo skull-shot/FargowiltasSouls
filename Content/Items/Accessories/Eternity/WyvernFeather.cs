@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class StabilizedGravity : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<WyvernFeather>();
 
         public override void PostUpdateMiscEffects(Player player)
@@ -74,12 +74,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class WyvernBalls : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<WyvernFeather>();
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.velocity.Y != 0 && ++modPlayer.WyvernBallsCD > 180)
+            if (player.velocity.Y != 0 && ++modPlayer.WyvernBallsCD > 180 && EffectItem(player).type == ModContent.ItemType<WyvernFeather>())
             {
                 modPlayer.WyvernBallsCD = 0;
                 if (player.whoAmI == Main.myPlayer)

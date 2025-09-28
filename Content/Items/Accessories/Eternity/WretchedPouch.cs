@@ -57,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class WretchedPouchEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override Header ToggleHeader => Header.GetHeader<LithosphericHeader>();
         public override int ToggleItemType => ModContent.ItemType<WretchedPouch>();
         public override bool ExtraAttackEffect => true;
 
