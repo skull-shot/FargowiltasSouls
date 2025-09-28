@@ -118,8 +118,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool GalacticMinionsDeactivated = false;
         public bool GalacticMinionsDeactivatedBuffer = false; // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
-        //public bool JumpsDisabled = false;
-        //public bool JumpsDisabledBuffer = false;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
 
         public int DeactivatedMinionEffectCount = 0;
 

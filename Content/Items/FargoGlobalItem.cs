@@ -598,6 +598,60 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
+
+            if (item.ModItem != null && item.ModItem.Mod == FargowiltasSouls.Instance)
+            {
+                string ruminateKey = $"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip";
+                string rumination = Language.GetTextValue(ruminateKey);
+                if (rumination != ruminateKey)
+                {
+                    if (FargowiltasSouls.RuminateKey.Current)
+                    {
+                        string unmodifiedTooltip = Language.GetTextValue($"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.Tooltip");
+                        foreach (var tooltip in tooltips)
+                        {
+                            if (tooltip.Name.StartsWith("Tooltip"))
+                            {
+                                //basically all of this is to account for things that modify TooltipX
+                                //e.g. "can be duped at enchanted tree"
+                                //and remove the original tooltip without removing externally added text
+
+                                List<string> lines = tooltip.Text.Split('\n').ToList();
+
+                                string reconstructedTooltip = "";
+                                if (tooltip.Name == "Tooltip0")
+                                    reconstructedTooltip = rumination; //stuff the entire new text into Tooltip0
+
+                                bool needToPrefixWithNewline = false;
+
+                                foreach (string line in lines)
+                                {
+                                    if (!unmodifiedTooltip.Contains(line))
+                                    {
+                                        if (needToPrefixWithNewline)
+                                            reconstructedTooltip += '\n';
+
+                                        reconstructedTooltip += line;
+
+                                        needToPrefixWithNewline = true;
+                                    }
+                                }
+
+                                tooltip.Text = reconstructedTooltip;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string key = $"({Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")})";
+                        var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
+                        if (keys.Count > 0)
+                            key = keys[0];
+                        tooltips.Add(new TooltipLine(Mod, "Ruminate", $"[c/AAAAAA:{Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)}]"));
+                    }
+                }
+            }
+
             /*if (Array.IndexOf(Summon, item.type) > -1)
             {
                 TooltipLine helperLine = new TooltipLine(mod, "help", "Right click to convert");

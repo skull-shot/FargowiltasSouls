@@ -24,9 +24,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            player.AddEffect<JumpsDisabled>(item);
-            //if (player.AddEffect<JumpsDisabled>(item))
-                //modPlayer.JumpsDisabled = modPlayer.JumpsDisabledBuffer = true;
 
             modPlayer.FlightMasterySoul = true;
             player.wingTimeMax = 999999;

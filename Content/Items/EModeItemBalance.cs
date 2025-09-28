@@ -209,11 +209,6 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["WeatherPain"];
                     return EModeChange.Buff;
 
-                case ItemID.HoundiusShootius:
-                    balanceTextKeys = ["Damage", "HoundiusShootius"];
-                    balanceNumber = 1.2f;
-                    return EModeChange.Buff;
-
                 case ItemID.MonkStaffT2: //ghastly glaive
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.55f;
@@ -562,6 +557,10 @@ namespace FargowiltasSouls.Content.Items
                 case ItemID.ScourgeoftheCorruptor:
                     balanceTextKeys = ["ScourgeoftheCorruptor"];
                     return EModeChange.ReworkBuff;
+
+                case ItemID.BookofSkulls:
+                    balanceTextKeys = ["BookofSkulls"];
+                    return EModeChange.Buff;
 
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)

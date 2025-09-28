@@ -197,9 +197,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.idStaticNPCHitCooldown = 10;
                     projectile.penetrate = 45;
                     break;
-                case ProjectileID.HoundiusShootiusFireball:
-                    projectile.extraUpdates += 1;
-                    break;
                 case ProjectileID.PossessedHatchet:
                     projectile.usesLocalNPCImmunity = true;
                     projectile.localNPCHitCooldown = 30;
@@ -816,6 +813,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
                         projectile.DamageType = DamageClass.Melee;
                     break;
+
+                case ProjectileID.BookOfSkullsSkull:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.BookofSkulls && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            bool Tracking = projectile.ai[1] > 0;
+                            projectile.tileCollide = !Tracking;
+                            projectile.netUpdate = true;
+                        }
+                    }
+                    break;
+
                 default:
                     break;
 
@@ -1501,7 +1512,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (projectile.owner == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
+                        if (projectile.owner == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && SourceItemType == ItemID.FlowerPow && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             projectile.localAI[0] += 2f; // tripled petal firerate
                             projectile.netUpdate = true;
@@ -1513,7 +1524,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (projectile.owner == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.ScourgeoftheCorruptor))
+                        if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.ScourgeoftheCorruptor && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             const int TimeUntilSplit = 40; // 0.66 seconds
                             const float GrazeDistanceSquared = 3600f; // 60f squared
@@ -1622,13 +1633,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (SourceItemType == ItemID.RainbowCrystalStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             modifiers.SourceDamage *= 0.6f;
-                        }
-                        break;
-
-                    case ProjectileID.HoundiusShootiusFireball:
-                        if (SourceItemType == ItemID.HoundiusShootius && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
-                        {
-                            modifiers.SourceDamage *= 1.2f;
                         }
                         break;
 

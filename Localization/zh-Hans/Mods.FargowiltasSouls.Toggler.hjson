@@ -1,5 +1,6 @@
 DisableAllAttackEffects: 禁用所有额外攻击效果
 DisableAllMinionEffects: 禁用所有召唤物效果
+// DisableAllExtraJumpEffects: Wings Disable All Extra Jumps
 TimberHeader: "{$Mods.FargowiltasSouls.Items.TimberForce.DisplayName}"
 WoodCompletionEffect: 木 图鉴解锁加快
 BorealEffect: 针叶木 雪球
@@ -45,6 +46,7 @@ LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: 蜜蜂 花朵
 BeetleEffect: 甲虫 相关效果
 CactusEffect: 仙人掌 针刺
+// CactusPassiveEffect: Passive Cactuses
 PumpkinEffect: 南瓜 种植南瓜
 SpiderEffect: 蜘蛛 召唤物暴击
 TurtleEffect: 乌龟 缩壳减伤
@@ -165,7 +167,6 @@ ShimmerImmunityEffect: 免疫微光闪烁
 FlightMasteryHeader: "{$Mods.FargowiltasSouls.Items.FlightMasterySoul.DisplayName}"
 FlightMasteryInsignia: 翱翔徽章加速
 FlightMasteryGravity: 增加重力
-JumpsDisabled: 禁用一切跳跃
 SupersonicHeader: "{$Mods.FargowiltasSouls.Items.SupersonicSoul.DisplayName}"
 RunSpeed: 提高基础奔跑速度
 NoMomentum: 不计算动量
