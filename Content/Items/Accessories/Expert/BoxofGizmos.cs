@@ -36,6 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
                 GetItemTuple(ModContent.ItemType<TerraForce>()),
                 GetItemTuple(ModContent.ItemType<TimberForce>()),
                 GetItemTuple(ModContent.ItemType<LifeForce>()),
+                GetItemTuple(ModContent.ItemType<NatureForce>()),
                 GetItemTuple(ModContent.ItemType<BionomicCluster>()),
                 GetItemTuple(ModContent.ItemType<LithosphericCluster>()),
                 GetItemTuple(ModContent.ItemType<FrigidGrasp>()),
