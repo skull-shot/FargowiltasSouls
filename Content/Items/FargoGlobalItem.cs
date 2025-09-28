@@ -54,19 +54,12 @@ namespace FargowiltasSouls.Content.Items
 
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
-            FargoSoulsPlayer p = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 if (player.HasEffect<IronEquippedEffect>() || (item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
                     item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart && item.type != ItemID.ManaCloakStar))
                 {
-                    int rangeBonus = 160;
-                    if (p.ForceEffect<IronEnchant>())
-                        rangeBonus = 320;
-                    if (p.TerrariaSoul)
-                        rangeBonus = 640;
-
-                    grabRange += rangeBonus;
+                    grabRange += IronEquippedEffect.GrabRangeBonus(player);
                 }
             }
         }

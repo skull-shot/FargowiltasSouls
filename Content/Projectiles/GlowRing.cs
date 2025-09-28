@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public override void AI()
         {
             Projectile proj = FargoSoulsUtil.ProjectileExists(Projectile.ai[2]);
-            if (proj != null)
+            if (proj != null && Projectile.ai[1] == -1)
                 Projectile.Center = proj.Center;
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[0]);
             if (npc != null)

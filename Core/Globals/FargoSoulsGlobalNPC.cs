@@ -22,6 +22,7 @@ using FargowiltasSouls.Content.Items.Weapons.Misc;
 using FargowiltasSouls.Content.NPCs.Critters;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.Accessories;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.UI.Emotes;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -80,6 +81,7 @@ namespace FargowiltasSouls.Core.Globals
         public float InfestedDust;
         public bool Electrified;
         public bool Slimed;
+        public bool Cursed;
         public bool CurseoftheMoon;
         public int lightningRodTimer;
         public bool Sadism;
@@ -153,6 +155,7 @@ namespace FargowiltasSouls.Core.Globals
             EarthPoison = false;
             Infested = false;
             Electrified = false;
+            Cursed = false;
             CurseoftheMoon = false;
             Sadism = false;
             OceanicMaul = false;
@@ -523,6 +526,13 @@ namespace FargowiltasSouls.Core.Globals
                 }
 
                 Lighting.AddLight((int)npc.Center.X / 16, (int)npc.Center.Y / 16, 0.3f, 0.8f, 1.1f);
+            }
+
+            if (Cursed)
+            {
+                drawColor.R = (byte)(drawColor.R * 0.7f);
+                drawColor.G = (byte)(drawColor.G * 0.6f);
+                drawColor.B = (byte)(drawColor.B * 0.7f);
             }
 
             if (CurseoftheMoon)
@@ -1320,7 +1330,16 @@ namespace FargowiltasSouls.Core.Globals
                     Projectile.NewProjectile(npc.GetSource_OnHurt(player), npc.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
                 }
             }
-            
+
+            if (Cursed && player.whoAmI == Main.myPlayer)
+            {
+                int type = ModContent.ProjectileType<DarkBall>();
+                if (Main.rand.NextBool(player.ownedProjectileCounts[type] + 2))
+                {
+                    const float speed = 12f;
+                    Projectile.NewProjectile(npc.GetSource_OnHurt(player), npc.Center, Main.rand.NextVector2Circular(speed, speed), type, 0, 0f, Main.myPlayer, 1f);
+                }
+            }
 
             if (damageDone > 0 && player.HasEffect<NecroEffect>() && npc.boss)
             {

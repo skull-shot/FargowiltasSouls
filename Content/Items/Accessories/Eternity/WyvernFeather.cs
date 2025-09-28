@@ -79,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (player.velocity.Y != 0 && ++modPlayer.WyvernBallsCD > 180)
+            if (player.velocity.Y != 0 && ++modPlayer.WyvernBallsCD > 180 && EffectItem(player).type == ModContent.ItemType<WyvernFeather>())
             {
                 modPlayer.WyvernBallsCD = 0;
                 if (player.whoAmI == Main.myPlayer)

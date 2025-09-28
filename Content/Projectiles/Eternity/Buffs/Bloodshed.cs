@@ -1,9 +1,11 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System.Linq;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -53,21 +55,23 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
             {
                 Projectile.timeLeft -= 1;
 
-                int p = Player.FindClosest(Projectile.Center, 0, 0);
-                if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)
+                Player p = Main.player[Player.FindClosest(Projectile.Center, 0, 0)];
+                if (p.active && !p.dead && !p.ghost)
                 {
-                    if (Main.player[p].Distance(Projectile.Center) < 360)
+                    int distance = p.HasEffect<IronEquippedEffect>() ? 80 + (IronEquippedEffect.GrabRangeBonus(p) / 2) : 80;
+
+                    if (p.Distance(Projectile.Center) < distance)
                     {
-                        Projectile.velocity = Projectile.SafeDirectionTo(Main.player[p].Center) * 9f;
+                        Projectile.velocity = Projectile.SafeDirectionTo(p.Center) * 9f;
                         Projectile.timeLeft++;
 
-                        if (Projectile.Colliding(Projectile.Hitbox, Main.player[p].Hitbox))
+                        if (Projectile.Colliding(Projectile.Hitbox, p.Hitbox))
                         {
-                            Main.player[p].AddBuff(ModContent.BuffType<BloodDrinkerBuff>(), 360);
+                            p.AddBuff(ModContent.BuffType<BloodDrinkerBuff>(), 360);
                             Projectile.ai[1] = 1;
                             Projectile.netUpdate = true;
                             Projectile.Kill();
-                            FargoGlobalItem.OnRetrievePickup(Main.player[p]);
+                            FargoGlobalItem.OnRetrievePickup(p);
                             return;
                         }
                     }

@@ -1222,17 +1222,18 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.bodyFrame.Y = Player.bodyFrame.Height * 10;
                 if (shieldTimer > 0)
                 {
-                    List<int> shaders = [];
-                    if (Player.HasEffect<SilverEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.ReflectiveSilverDye));
-                    if (Player.HasEffect<DreadShellEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.BloodbathDye));
+                    int shader = 0;
                     if (Player.HasEffect<PumpkingsCapeEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.PixieDye));
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.PixieDye);
+                    else if (Player.HasEffect<LithosphericEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.PurpleOozeDye);
+                    else if (Player.HasEffect<DreadShellEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.BloodbathDye);
+                    else if (Player.HasEffect<SilverEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.ReflectiveSilverDye);
 
-                    if (shaders.Count > 0)
+                    if (shader != 0)
                     {
-                        int shader = shaders[(int)(Main.GameUpdateCount / 4 % shaders.Count)];
                         drawInfo.cBody = shader;
                         drawInfo.cHead = shader;
                         drawInfo.cLegs = shader;
