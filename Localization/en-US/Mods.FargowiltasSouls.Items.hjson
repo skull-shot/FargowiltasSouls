@@ -1662,9 +1662,9 @@ ColossusSoul: {
 	DisplayName: Colossus Soul
 	Tooltip:
 		'''
-		Increases max life by 50, [i:860][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] and reduces damage taken by 20%
+		Increases max life by 50, [i:CharmofMyths][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] reduces damage taken by 20%
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
-		[i:860] Reduces the cooldown of healing potions by 25%
+		[i:CharmofMyths] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
 		'''
