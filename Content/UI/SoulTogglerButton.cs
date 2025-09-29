@@ -29,7 +29,7 @@ namespace FargowiltasSouls.Content.UI
         }
         public override void UpdateUI()
         {
-            if (!Main.playerInventory)
+            if (!Main.playerInventory || Main.LocalPlayer.chest != -1)
                 FargoUIManager.Close<SoulTogglerButton>();
             else
                 FargoUIManager.Open<SoulTogglerButton>();
@@ -82,10 +82,9 @@ namespace FargowiltasSouls.Content.UI
         }
         private void IconHighlight_OnClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            if (!Main.playerInventory)
+            if (!Main.playerInventory || Main.LocalPlayer.chest != -1)
             {
                 return;
-
             }
 
             FargoUIManager.Toggle<SoulToggler>();
@@ -95,7 +94,7 @@ namespace FargowiltasSouls.Content.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Main.playerInventory)
+            if (Main.playerInventory && Main.LocalPlayer.chest == -1)
             {
                 //base.Draw(spriteBatch);
 

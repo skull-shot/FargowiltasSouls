@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Luminance.Assets;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
@@ -23,7 +24,7 @@ namespace FargowiltasSouls.Assets.Textures
         /// <param name="path"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Asset<Texture2D> GetTexture2D(string path, string name) => ModContent.Request<Texture2D>(GetAssetString(path, name), AssetRequestMode.ImmediateLoad);
+        public static LazyAsset<Texture2D> GetTexture2D(string path, string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad) => LazyAsset<Texture2D>.Request(GetAssetString(path, name), mode);
 
 
 
@@ -150,6 +151,12 @@ namespace FargowiltasSouls.Assets.Textures
             public static Asset<Texture2D> OncomingMutantAura => ModContent.Request<Texture2D>(Filepath + "UI/OncomingMutantAura", AssetRequestMode.ImmediateLoad);
 
             public static Asset<Texture2D> EnchantSlotIcon => ModContent.Request<Texture2D>(Filepath + "UI/EnchantSlotIcon", AssetRequestMode.ImmediateLoad);
+
+            public class ActiveSkillMenu
+            {
+                public static LazyAsset<Texture2D> ActiveSkillMenuButton => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButton");
+                public static LazyAsset<Texture2D> ActiveSkillMenuButtonHover => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButtonHover");
+            }
 
             public class MainMenu
             {
