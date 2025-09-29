@@ -61,7 +61,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     Projectile.velocity *= 6f;
             }
 
-            const float rotationModifier = 0.08f;
+            const float rotationModifier = 0.12f;
             const float chargeTime = 360f;
             if (Projectile.localAI[1] > 0)
             {

@@ -261,20 +261,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //                palladiumCD = 240;
             //            }*/
 
-            if (MasochistSoul)
-            {
-                target.AddBuff(ModContent.BuffType<SadismBuff>(), 600);
-                //if (target.FindBuffIndex(ModContent.BuffType<Sadism>()) < 0 && target.aiStyle != 37)
-                //{
-                //    if (target.type != ModContent.NPCType<MutantBoss>())
-                //    {
-                //        target.DelBuff(4);
-                //        target.buffImmune[ModContent.BuffType<Sadism>()] = false;
-                //    }
-                //    target.AddBuff(ModContent.BuffType<Sadism>(), 600);
-                //}
-            }
-
             if (FusedLens)
             {
                 if (FusedLensCursed)

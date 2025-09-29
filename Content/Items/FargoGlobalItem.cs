@@ -647,7 +647,7 @@ namespace FargowiltasSouls.Content.Items
                         var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
                         if (keys.Count > 0)
                             key = keys[0];
-                        tooltips.Add(new TooltipLine(Mod, "Ruminate", $"[c/AAAAAA:{Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)}]"));
+                        tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
                     }
                 }
             }
