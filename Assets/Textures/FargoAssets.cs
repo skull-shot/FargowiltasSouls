@@ -19,14 +19,16 @@ namespace FargowiltasSouls.Assets.Textures
         public static string GetAssetString(string path, string name) => Filepath + path + "/" + name;
 
         /// <summary>
-        /// Shorthand for for grabbing a texture through Modcontent.Request.
+        /// Shorthand for for grabbing a <see cref="Texture2D"></see>, utilizing Luminance's <see cref="LazyAsset{AssetType}"></see> loading system.
+        /// When attempting to grab an <see cref="Asset{T}"></see>, use .Asset instead of .Value
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
         public static LazyAsset<Texture2D> GetTexture2D(string path, string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad) => LazyAsset<Texture2D>.Request(GetAssetString(path, name), mode);
 
-
+        //TODO: Change these to use Luminance's LazyAsset loading system.
 
         #region Additive Textures
         public static Asset<Texture2D> BlobBloomTexture => ModContent.Request<Texture2D>(Filepath + "AdditiveTextures/BlobGlow");
@@ -141,7 +143,8 @@ namespace FargowiltasSouls.Assets.Textures
             }
 
         }*/
-
+        
+        //TODO: Change this to use Luminance's LazyAsset loading system.
         public class UI
         {   
             public static Asset<Texture2D> CooldownBarTexture => ModContent.Request<Texture2D>(Filepath + "UI/CooldownBar", AssetRequestMode.ImmediateLoad);
