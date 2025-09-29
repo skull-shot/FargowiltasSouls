@@ -824,6 +824,14 @@ NatureForce: {
 	DisplayName: Force of Nature
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/CrimsonEnchant][i:FargowiltasSouls/MoltenEnchant][i:FargowiltasSouls/ChlorophyteEnchant][i:FargowiltasSouls/ShroomiteEnchant] You have an aura that siphons life from nearby enemies, increases damage taken, and auto-attacks them
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and buff your offenses for 20 seconds
+		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
+		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
+		'Tapped into every secret of the wilds'
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
 		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
 		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
