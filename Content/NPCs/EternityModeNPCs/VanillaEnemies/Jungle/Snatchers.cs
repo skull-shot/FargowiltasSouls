@@ -1,11 +1,16 @@
 using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Jungle;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
@@ -25,6 +30,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
         public int DashTimer;
         public int BiteTimer;
         public int BittenPlayer = -1;
+        public int ItemHeld = -1;
+        public EatingStates EatingState = EatingStates.None;
+        public int EatTimer = 0;
+
+        public enum EatingStates
+        {
+            None = 0,
+            Grabbing,
+            Eating,
+            Digesting,
+            Vomiting
+        }
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -33,6 +50,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
             binaryWriter.Write7BitEncodedInt(DashTimer);
             binaryWriter.Write7BitEncodedInt(BiteTimer);
             binaryWriter.Write7BitEncodedInt(BittenPlayer);
+            binaryWriter.Write7BitEncodedInt(ItemHeld);
+            binaryWriter.Write7BitEncodedInt((int)EatingState);
+            binaryWriter.Write7BitEncodedInt(EatTimer);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -42,6 +62,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
             DashTimer = binaryReader.Read7BitEncodedInt();
             BiteTimer = binaryReader.Read7BitEncodedInt();
             BittenPlayer = binaryReader.Read7BitEncodedInt();
+            ItemHeld = binaryReader.Read7BitEncodedInt();
+            EatingState = (EatingStates)binaryReader.Read7BitEncodedInt();
+            EatTimer = binaryReader.Read7BitEncodedInt();
         }
 
         public override void SetDefaults(NPC npc)
@@ -57,6 +80,180 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
 
             npc.buffImmune[BuffID.Poisoned] = true;
             npc.buffImmune[BuffID.Venom] = true;
+        }
+
+        public override bool SafePreAI(NPC npc)
+        {
+            switch (EatingState)
+            {
+                case EatingStates.None:
+                    if (BittenPlayer == -1)
+                        SearchForFood(npc);
+                    return base.SafePreAI(npc);
+                case EatingStates.Grabbing:
+                    ApproachFood(npc);
+                    break;
+                case EatingStates.Eating:
+                    EatFood(npc);
+                    break;
+                case EatingStates.Digesting:
+                case EatingStates.Vomiting:
+                    SpitOutFruit(npc);
+                    break;
+            }
+            npc.spriteDirection = 1;
+            return false;
+        }
+
+        #region Eat State Methods
+        private void ResetEating(NPC npc)
+        {
+            EatingState = EatingStates.None;
+            EatTimer = 0;
+            ItemHeld = -1;
+        }
+
+        private void SearchForFood(NPC npc)
+        {
+            const float range = 200f;
+            for (int i = 0; i < Main.maxItems; i++)
+            {
+                Item item = Main.item[i];
+                if (!item.active || item.type != ItemID.JungleRose || npc.Center.Distance(item.Center) > range)
+                    continue;
+                ItemHeld = i;
+                EatingState = EatingStates.Grabbing;
+                break;
+            }
+        }
+
+        private void ApproachFood(NPC npc)
+        {
+            Item rose = Main.item[ItemHeld];
+
+            if (!rose.active || rose.beingGrabbed)
+            {
+                ResetEating(npc);
+                return;
+            }
+
+            Vector2 posDiff = rose.Center - npc.Center;
+            float dist = posDiff.Length();
+            float rot = posDiff.ToRotation();
+            npc.rotation = rot;
+            if (npc.velocity.Length() > 1f)
+            {
+                npc.velocity *= 0.9f;
+            }
+            npc.velocity += 0.03f * (dist * dist * dist / 500000f) * Vector2.UnitX.RotatedBy(rot);
+            if (dist < 35f) // time to eat! :yummy:
+            {
+                rose.active = false;
+                if (FargoSoulsUtil.HostCheck)
+                    ItemHeld = Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<RoseFruitTransform>(), 0, 0f, ai0: npc.whoAmI);
+                npc.netUpdate = true;
+                EatingState = EatingStates.Eating;
+                DashTimer = 0; // disallow immediate dash out of eating
+            }
+            return;
+        }
+
+        private void EatFood(NPC npc)
+        {
+            const int chompCount = 3;
+
+            Projectile rose = Main.projectile[ItemHeld];
+            if (!rose.active)
+            {
+                ResetEating(npc);
+            }
+
+            Vector2 basePos = new Vector2(16 * npc.ai[0], 16 * npc.ai[1]); // position of the root
+            Vector2 posToRoot = basePos - npc.position;
+            float dist = posToRoot.Length();
+            npc.velocity = ((dist * dist / 50000f)) * Vector2.UnitX.RotatedBy(posToRoot.ToRotation());
+            npc.rotation = posToRoot.ToRotation() + MathHelper.Pi;
+
+            EatTimer++;
+            if (EatTimer % 60 == 0)
+            {
+                SpawnDustFromMouthItem(npc, rose, DustID.Grass, 10);
+                rose.scale -= 0.5f/(chompCount);
+                SoundEngine.PlaySound(SoundID.Item2, npc.Center);
+                SoundEngine.PlaySound(SoundID.NPCHit1, npc.Center);
+            }
+            if (EatTimer > chompCount * 60f)
+            {
+                // finished eating
+                EatTimer = 0;
+                rose.ai[1] = 1;
+                EatingState = EatingStates.Digesting;
+            }
+        }
+
+        private void SpitOutFruit(NPC npc)
+        {
+            const int gagCount = 2;
+            if (EatingState == EatingStates.Digesting)
+            {
+                if (EatTimer++ <= 30f)
+                {
+                    npc.velocity *= 0.9f;
+                    return;
+                }
+                EatTimer = 0;
+                EatingState = EatingStates.Vomiting;
+            }
+
+            Projectile fruit = Main.projectile[ItemHeld];
+            fruit.ai[1] = 2;
+            if (fruit.scale < 0.5f) // fruit appears
+            {
+                FargoSoulsUtil.DustRing(fruit.Center, 10, DustID.GemAmethyst, 1.5f);
+                fruit.scale = 0.5f;
+            }
+
+            float x = EatTimer % 60;
+            npc.velocity = 2 * (x/30 - 1) * Vector2.UnitX.RotatedBy(npc.rotation);
+            if (EatTimer % 60 == 0) // gag
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath1, npc.Center);
+                SoundEngine.PlaySound(SoundID.NPCDeath13 with { Pitch = 0.3f, Volume = 0.5f }, npc.Center);
+                fruit.scale += 0.5f/(gagCount);
+                SpawnDustFromMouthItem(npc, fruit, DustID.Plantera_Pink, 10);
+            }
+            if (EatTimer >= 60 * gagCount) // throw up fruit
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath1, npc.Center);
+                SoundEngine.PlaySound(SoundID.ChesterOpen with { Pitch = -0.8f }, npc.Center);
+                SpawnDustFromMouthItem(npc, fruit, DustID.Plantera_Pink, 20);
+                fruit.ai[1] = 3;
+                ResetEating(npc);
+            }
+            EatTimer++;
+        }
+
+        private void SpawnDustFromMouthItem(NPC npc, Projectile item, int type, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Dust d = Dust.NewDustDirect(item.position, item.width, item.height, type);
+                d.velocity += 3 * Vector2.UnitX.RotatedBy(npc.rotation);
+            }
+        }
+        #endregion
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (EatingState == EatingStates.Digesting || EatingState == EatingStates.Vomiting)
+            {
+                int frame = 1;
+                int window = 5;
+                if (EatingState == EatingStates.Vomiting && (EatTimer % 60 < window || EatTimer % 60 > 60 - window))
+                    frame = 2;
+                npc.frame.Y = npc.frame.Height * frame;
+            }
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
 
         public override void AI(NPC npc)
@@ -149,12 +346,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
 
         public override void OnKill(NPC npc)
         {
-            Player player = FargoSoulsUtil.PlayerExists(npc.lastInteraction);
-            int chance = player != null && player.FargoSouls().HasJungleRose ? 5 : 200;
-            if (Main.rand.NextBool(chance))
-            {
-                Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.Find<ModItem>("Fargowiltas", "PlanterasFruit").Type);
-            }
+            //Player player = FargoSoulsUtil.PlayerExists(npc.lastInteraction);
+            //int chance = player != null && player.FargoSouls().HasJungleRose ? 5 : 200;
+            //if (Main.rand.NextBool(chance))
+            //{
+            //    Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.Find<ModItem>("Fargowiltas", "PlanterasFruit").Type);
+            //}
         }
     }
 }

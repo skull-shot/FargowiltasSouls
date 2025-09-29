@@ -159,6 +159,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<LithosphericCluster>();
-        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 50);
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 70);
     }
 }
