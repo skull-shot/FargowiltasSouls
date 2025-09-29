@@ -792,8 +792,15 @@ EarthForce: {
 	// DisplayName: Force of Earth
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/MythrilEnchant][i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant][i:FargowiltasSouls/AdamantiteEnchant][i:FargowiltasSouls/OrichalcumEnchant] Not attacking builds up charge, granting large ramping offensive and defensive buffs; attacking consumes charge
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
+		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
+		'Gaia's blessing shines upon you'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
-		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
+		[i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
 		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
@@ -805,6 +812,14 @@ EarthForce: {
 LifeForce: {
 	// DisplayName: Force of Life
 	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings and effects of Hive Pack
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
+		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
+		'Rare is a living thing that dare disobey your will'
+		''' */
+	/* RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
@@ -824,6 +839,14 @@ NatureForce: {
 	// DisplayName: Force of Nature
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/CrimsonEnchant][i:FargowiltasSouls/MoltenEnchant][i:FargowiltasSouls/ChlorophyteEnchant][i:FargowiltasSouls/ShroomiteEnchant] You have an aura that siphons life from nearby enemies, increases damage taken, and auto-attacks them
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and buff your offenses for 20 seconds
+		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
+		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
+		'Tapped into every secret of the wilds'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
 		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
 		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
@@ -840,6 +863,15 @@ NatureForce: {
 DeathForce: {
 	// DisplayName: Force of Death
 	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/SpookyEnchant] Dashing into enemies heals you and inflicts them with Marked for Death
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed, stronger when not moving
+		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
+		'Dark, Darker, Yet Darker'
+		''' */
+	/* RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
@@ -868,7 +900,7 @@ TerraForce: {
 	// DisplayName: Force of Terra
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
+		[i:FargowiltasSouls/CopperEnchant][i:FargowiltasSouls/ObsidianEnchant][i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
 		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
 		[i:FargowiltasSouls/TinEnchant] +5% crit chance, increased by 5% whenever a lightning bolt is fired, up to 25%, resetting when you take damage
 		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
@@ -884,11 +916,19 @@ TimberForce: {
 	// DisplayName: Force of Timber
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
-		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
-		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
-		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant][i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] You have an aura that debuffs and auto-attacks nearby enemies
 		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
+		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
+		[i:FargowiltasSouls/RichMahoganyEnchant][i:FargowiltasSouls/WoodEnchant] Grants grappling hook, bestiary, banner, and shop buffs
+		'Extremely rigid'
+		''' */
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
+		[i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
+		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
+		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
+		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
 		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
 		[i:FargowiltasSouls/WoodEnchant] You gain a shop discount based on bestiary completion (works in inventory and vanity)
 		'Extremely rigid'
@@ -1162,9 +1202,14 @@ ChaliceofTheMoon: {
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
-	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
-	/* ExpandedTooltip:
+	/* RuminateTooltip:
 		'''
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
+		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
@@ -1200,7 +1245,7 @@ GuttedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Bloodthirsty
-		10% increased max life
+		Increases max life by 10%
 		Creepers hover around you blocking some damage
 		Creepers respawn faster the lower your health or while not moving, and 3 can exist at once
 		Creepers briefly inflict Ichor on-hit
@@ -1381,7 +1426,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
-		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/DarkenedHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
+		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/DarkenedHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
 		[i:FargowiltasSouls/GelicWings] Flying emits crystal spikes
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
@@ -1533,7 +1578,7 @@ SupremeDeathbringerFairy: {
 		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
+		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
 		'Supremacy not necessarily guaranteed'
 		''' */
@@ -1618,7 +1663,7 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration
+		Increases max life by 50, [i:860][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] and reduces damage taken by 20%
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
 		[i:860] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -1644,12 +1689,21 @@ DimensionSoul: {
 	/* Tooltip:
 		'''
 		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
+		Allows Supersonic mobility
+		Drastically enhances mining, building, and fishing capabilities
+		Grants the ability to enable Builder Mode
+		[i:FargowiltasSouls/ColossusSoul][i:FargowiltasSouls/SupersonicSoul][i:FargowiltasSouls/FlightMasterySoul][i:FargowiltasSouls/TrawlerSoul][i:FargowiltasSouls/WorldShaperSoul] Grants effects of all components
+		'The dimensions of Terraria at your fingertips'
+		''' */
+	/* RuminateTooltip:
+		'''
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
 		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, and disables all of your jumps (toggleable)
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
-		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin] [i:SporeSac] [i:BoneHelm] you release damaging fog at nearby enemies
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin][i:SporeSac][i:BoneHelm] you release damaging fog at nearby enemies
 		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
 		'The dimensions of Terraria at your fingertips'
@@ -1716,7 +1770,8 @@ MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
 		'''
-		Increases most stats drastically
+		Increases max life by 20%, life regeneration, damage for your current weapon class by 50%, and damage reduction by 5%
+		Increases flight time by 200%, movement speed by 20%, and armor penetration by 50
 		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
 		'Embrace mastery, embrace eternity'
 		''' */
@@ -1769,7 +1824,7 @@ TerrariaSoul: {
 	// DisplayName: Soul of Terraria
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce]Grants effects of all Forces
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Grants effects of all Forces
 		'A true master of Terraria'
 		''' */
 	/* RuminateTooltip:
@@ -1804,7 +1859,7 @@ TrawlerSoul: {
 		[i:3110] Turns the holder into a werewolf at night and into a merfolk when entering water
 		[i:1861] Increases your ice and water mobility and underwater breathing
 		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
-		[i:4987] [i:3336] [i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
+		[i:4987][i:3336][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		''' */
 }
@@ -1815,11 +1870,19 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1
+		[i:1343][i:3366][i:1321][i:1595][i:4000] Grants all additional effects of components
+		'The heavens themselves bow to you'
+		''' */
+	/* RuminateTooltip:
+		'''
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
 		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
-		Increases your minion slots by 3 and sentry slots by 1
 		'The heavens themselves bow to you'
 		''' */
 }
@@ -3695,11 +3758,10 @@ CactusMimicBanner: {
 
 CactusStaff: {
 	// DisplayName: Rolling Cactus Staff
-	/* Tooltip:
 		'''
 		Launches a bouncing cactus ball
 		'They see me rollin'...'
 		''' */
 }
 
-// Ruminate: Hold {0} for more details
+// Ruminate: "[c/FF3399:Hold {0} for more details]"

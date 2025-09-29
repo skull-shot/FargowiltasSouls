@@ -26,15 +26,15 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
             Item.rare = ItemRarityID.Blue;
             Item.noMelee = true;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useTime = 30;
-            Item.useAnimation = 30;
+            Item.useTime = 40;
+            Item.useAnimation = 40;
             Item.UseSound = SoundID.Item8;
             Item.knockBack = 3;
-            Item.damage = 15;
+            Item.damage = 16;
             Item.shootSpeed = 10;
             Item.DamageType = DamageClass.Magic;
             Item.shoot = ModContent.ProjectileType<CactusBall>();
-            Item.mana = 20;
+            Item.mana = 14;
             Item.autoReuse = true;
             base.SetDefaults();
         }
