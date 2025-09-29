@@ -1072,7 +1072,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private PlayerDeathReason DeathByLocalization(string key)
         {
-            return PlayerDeathReason.ByCustomReason(Language.GetTextValue($"Mods.FargowiltasSouls.DeathMessage.{key}", Player.name));
+            LocalizedText DeathText = Language.GetText($"Mods.FargowiltasSouls.DeathMessage.{key}");
+            return PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(Player.name));
         }
 
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
