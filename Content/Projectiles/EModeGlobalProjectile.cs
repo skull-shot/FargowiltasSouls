@@ -1526,17 +1526,20 @@ namespace FargowiltasSouls.Content.Projectiles
                         Player player = Main.player[projectile.owner];
                         if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.ScourgeoftheCorruptor && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
-                            const int TimeUntilSplit = 40; // 0.66 seconds
-                            const float GrazeDistanceSquared = 3600f; // 60f squared
-                            for (int npc = 0; npc < Main.maxNPCs; npc++)
+                            const float GrazeDistanceSQ = 2500f; // 50f squared
+                            double velSquared = (double)projectile.velocity.LengthSquared();
+                            for (int npc = 0; npc < Main.maxNPCs && velSquared != 0; npc++)
                             {
                                 NPC nPC = Main.npc[npc];
                                 if (nPC.CanBeChasedBy(projectile))
                                 {
-                                    float targetDistanceSquared = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                                    if (targetDistanceSquared < GrazeDistanceSquared && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                    float targetDistanceSQ = FargoSoulsUtil.Distance(projectile.Hitbox, nPC.Hitbox, false); // Accounts for distance between HITBOXES, NOT Entity.Center
+                                    if (targetDistanceSQ < GrazeDistanceSQ && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
                                     {
-                                        projectile.timeLeft = TimeUntilSplit;
+                                        const double LifeTimeFactor = 9000;
+                                        int TimeUntilSplit = (int)Math.Round(LifeTimeFactor / (velSquared * projectile.MaxUpdates));
+                                        projectile.timeLeft = TimeUntilSplit; // Account for velocity and extra updates so it splits around the same range even with variable speed
+                                        projectile.netUpdate = true;
                                         break;
                                     }
                                 }
