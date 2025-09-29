@@ -841,6 +841,14 @@ DeathForce: {
 	DisplayName: Force of Death
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/SpookyEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed, stronger when not moving
+		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
+		'Dark, Darker, Yet Darker'
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
 		[i:FargowiltasSouls/SpookyEnchant] Shade dashes swing a scythe around you, healing you on hit and inflicting Marked for Death
@@ -1642,6 +1650,15 @@ ConjuristsSoul: {
 DimensionSoul: {
 	DisplayName: Soul of Dimensions
 	Tooltip:
+		'''
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
+		Allows Supersonic mobility
+		Drastically enhances mining, building, and fishing capabilities
+		Grants the ability to enable Builder Mode
+		[i:FargowiltasSouls/ColossusSoul][i:FargowiltasSouls/SupersonicSoul][i:FargowiltasSouls/FlightMasterySoul][i:FargowiltasSouls/TrawlerSoul][i:FargowiltasSouls/WorldShaperSoul] Grants effects of all components
+		'The dimensions of Terraria at your fingertips'
+		'''
+	RuminateTooltip:
 		'''
 		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
