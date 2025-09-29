@@ -1662,9 +1662,9 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		Increases max life by 50, [i:860][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] and reduces damage taken by 20%
+		Increases max life by 50, [i:CharmofMyths][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] reduces damage taken by 20%
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
-		[i:860] Reduces the cooldown of healing potions by 25%
+		[i:CharmofMyths] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
 		''' */
@@ -1698,7 +1698,7 @@ DimensionSoul: {
 		'''
 		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
 		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
-		Allows Supersonic running, flying, dashing, climbing, swimming, and waterwalking.
+		Allows Supersonic running, flying, dashing, climbing, swimming, and waterwalking
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures

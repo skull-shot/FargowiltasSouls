@@ -829,7 +829,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
 
         public const int BASE_PARRY_WINDOW = 16;
-        public const int HARD_PARRY_WINDOW = 8;
+        public const int HARD_PARRY_WINDOW = 9;
         public const int BASE_SHIELD_COOLDOWN = 100;
         public const int LONG_SHIELD_COOLDOWN = 360;
 

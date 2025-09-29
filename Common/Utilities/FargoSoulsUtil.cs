@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
@@ -469,6 +470,133 @@ namespace FargowiltasSouls //lets everything access it without using
             return ClosestPointInHitbox(entity.Hitbox, desiredLocation);
         }
 
+        /// <summary>
+        /// Returns the closest distance between two rectangles.<br></br>
+        /// Returns 0f if they are intersecting.<br></br>
+        /// :HmsXEgqUogkQOnL5LP_FdPit9Z909R:
+        /// </summary>
+        /// <param name="Hitbox1"></param>
+        /// <param name="Hitbox2"></param>
+        /// <returns></returns>
+        public static float Distance(Rectangle Hitbox1, Rectangle Hitbox2, bool SquareRoot)
+        {
+            if (Hitbox1.Intersects(Hitbox2))
+                return 0f;
+            var TL1 = Hitbox1.TopLeft();
+            var TR1 = Hitbox1.TopRight();
+            var BL1 = Hitbox1.BottomLeft();
+            var BR1 = Hitbox1.BottomRight();
+
+            var TL2 = Hitbox2.TopLeft();
+            var TR2 = Hitbox2.TopRight();
+            var BL2 = Hitbox2.BottomLeft();
+            var BR2 = Hitbox2.BottomRight();
+
+            List<float> List1 =
+            [
+                TL1.DistanceSQ(TL2),
+                TL1.DistanceSQ(TR2),
+                TL1.DistanceSQ(BL2),
+                TL1.DistanceSQ(BR2)
+            ];
+            List<float> List2 =
+            [
+                TR1.DistanceSQ(TL2),
+                TR1.DistanceSQ(TR2),
+                TR1.DistanceSQ(BL2),
+                TR1.DistanceSQ(BR2)
+            ];
+            List<float> List3 =
+            [
+                BL1.DistanceSQ(TL2),
+                BL1.DistanceSQ(TR2),
+                BL1.DistanceSQ(BL2),
+                BL1.DistanceSQ(BR2)
+            ];
+            List<float> List4 =
+            [
+                BR1.DistanceSQ(TL2),
+                BR1.DistanceSQ(TR2),
+                BR1.DistanceSQ(BL2),
+                BR1.DistanceSQ(BR2)
+            ];
+            var min1 = List1.Min();
+            var min2 = List2.Min();
+            var min3 = List3.Min();
+            var min4 = List4.Min();
+            List<float> List9 = [min1, min2, min3, min4];
+            var result1 = List9.Min();
+
+            if (result1 == min1)
+                result1 = Hitbox2.ClosestPointInRect(TL1).DistanceSQ(TL1);
+            else if (result1 == min2)
+                result1 = Hitbox2.ClosestPointInRect(TR1).DistanceSQ(TR1);
+            else if (result1 == min3)
+                result1 = Hitbox2.ClosestPointInRect(BL1).DistanceSQ(BL1);
+            else if (result1 == min4)
+                result1 = Hitbox2.ClosestPointInRect(TR1).DistanceSQ(TR1);
+
+            List<float> List5 =
+            [
+                TL2.DistanceSQ(TL1),
+                TL2.DistanceSQ(TR1),
+                TL2.DistanceSQ(BL1),
+                TL2.DistanceSQ(BR1)
+            ];
+            List<float> List6 =
+            [
+                TR2.DistanceSQ(TL1),
+                TR2.DistanceSQ(TR1),
+                TR2.DistanceSQ(BL1),
+                TR2.DistanceSQ(BR1)
+            ];
+            List<float> List7 =
+            [
+                BL2.DistanceSQ(TL1),
+                BL2.DistanceSQ(TR1),
+                BL2.DistanceSQ(BL1),
+                BL2.DistanceSQ(BR1)
+            ];
+            List<float> List8 =
+            [
+                BR2.DistanceSQ(TL1),
+                BR2.DistanceSQ(TR1),
+                BR2.DistanceSQ(BL1),
+                BR2.DistanceSQ(BR1)
+            ];
+            var min5 = List5.Min();
+            var min6 = List6.Min();
+            var min7 = List7.Min();
+            var min8 = List8.Min();
+            List<float> List10 = [min5, min6, min7, min8];
+            var result2 = List10.Min();
+
+            if (result2 == min5)
+                result2 = Hitbox1.ClosestPointInRect(TL2).DistanceSQ(TL2);
+            else if (result2 == min6)
+                result2 = Hitbox1.ClosestPointInRect(TR2).DistanceSQ(TR2);
+            else if (result2 == min7)
+                result2 = Hitbox1.ClosestPointInRect(BL2).DistanceSQ(BL2);
+            else if (result2 == min8)
+                result2 = Hitbox1.ClosestPointInRect(TR2).DistanceSQ(TR2);
+
+            var result = Math.Min(result1, result2);
+            if (SquareRoot)
+                result = (float)Math.Sqrt(result);
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the closest distance between two entity hitboxes.
+        /// Returns 0f if they are intersecting.<br></br>
+        /// </summary>
+        /// <param name="Entity1"></param>
+        /// <param name="Entity2"></param>
+        /// <returns></returns>
+        public static float Distance(Entity Entity1, Entity Entity2, bool SquareRoot)
+        {
+            return Distance(Entity1.Hitbox, Entity2.Hitbox, SquareRoot);
+        }
         public static float RotationDifference(Vector2 from, Vector2 to) => (float)Math.Atan2(to.Y * from.X - to.X * from.Y, from.X * to.X + from.Y * to.Y);
         public static Vector2 PredictiveAim(Vector2 startingPosition, Vector2 targetPosition, Vector2 targetVelocity, float shootSpeed, int iterations = 4)
         {
