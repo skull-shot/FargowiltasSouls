@@ -1202,9 +1202,14 @@ ChaliceofTheMoon: {
 		'Consume it'
 		'''
 	VanityTooltip: Grants most standard potion and station buffs
-	HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
-	ExpandedTooltip:
+	RuminateTooltip:
 		'''
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
+		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
@@ -3733,4 +3738,4 @@ CactusStaff: {
 	Tooltip: Launches a bouncing cactus ball
 }
 
-Ruminate: Hold {0} for more details
+Ruminate: "[c/FF3399:Hold {0} for more details]"
