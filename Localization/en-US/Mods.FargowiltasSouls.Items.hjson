@@ -1748,7 +1748,8 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		Increases most stats drastically
+		Increases max life by 20%, life regeneration, damage for your current weapon class by 50%, and damage reduction by 5%
+		Increases flight time by 200%, movement speed by 20%, and armor penetration by 50
 		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
 		'Embrace mastery, embrace eternity'
 		'''
