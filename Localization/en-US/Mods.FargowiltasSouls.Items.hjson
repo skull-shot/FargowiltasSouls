@@ -3735,7 +3735,7 @@ CactusMimicBanner: {
 }
 
 CactusStaff: {
-	DisplayName: Cactus Staff
+	DisplayName: Rolling Cactus Staff
 	Tooltip: Launches a bouncing cactus ball
 }
 

@@ -1245,7 +1245,7 @@ GuttedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Bloodthirsty
-		10% increased max life
+		Increases max life by 10%
 		Creepers hover around you blocking some damage
 		Creepers respawn faster the lower your health or while not moving, and 3 can exist at once
 		Creepers briefly inflict Ichor on-hit
@@ -1663,7 +1663,7 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		+50 max life, [i:WormScarf][i:FargowiltasSouls/Devilshield] +20% damage reduction, [i:860][i:ShinyStone] increases life regeneration
+		Increases max life by 50, [i:860][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] and reduces damage taken by 20%
 		[i:AnkhShield] Grants immunity to knockback and several debuffs
 		[i:860] Reduces the cooldown of healing potions by 25%
 		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
@@ -3757,7 +3757,7 @@ CactusMimicBanner: {
 }
 
 CactusStaff: {
-	// DisplayName: Cactus Staff
+	// DisplayName: Rolling Cactus Staff
 	// Tooltip: Launches a bouncing cactus ball
 }
 
