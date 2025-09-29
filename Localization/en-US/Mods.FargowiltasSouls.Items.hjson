@@ -1843,11 +1843,19 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1
+		[i:1343][i:3366][i:1321][i:1595][i:4000] Grants all additional effects of components
+		'The heavens themselves bow to you'
+		'''
+	RuminateTooltip:
+		'''
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
 		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
-		Increases your minion slots by 3 and sentry slots by 1
 		'The heavens themselves bow to you'
 		'''
 }
