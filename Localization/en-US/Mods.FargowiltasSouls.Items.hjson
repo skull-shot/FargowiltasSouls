@@ -1694,8 +1694,7 @@ MasochistSoul: {
 	DisplayName: Soul of the Master
 	Tooltip:
 		'''
-		Increases all stats drastically
-		Your attacks inflict a cocktail of Eternity Mode debuffs
+		Increases most stats drastically
 		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
 		'Embrace mastery, embrace eternity'
 		'''
@@ -1706,7 +1705,7 @@ MasochistSoul: {
 		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
 		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
 		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
+		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts
 		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
 		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
 		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
