@@ -107,9 +107,10 @@ CactusEnchant: {
 		'''
 		Во время атаки вы выпускаете заряд игл во все стороны
 		Враги при смерти разлетаются на иглы
+		Пассивные кактусы не наносят урона (работает в инвентаре и слотах для украшений)
 		«Самый охладительный!»
 		'''
-	// VanityTooltip: Passive cactuses become harmless
+	VanityTooltip: Пассивные кактусы не наносят урона
 }
 
 ChlorophyteEnchant: {
@@ -801,6 +802,13 @@ EarthForce: {
 	DisplayName: Артефакт Земли
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/MythrilEnchant][i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant][i:FargowiltasSouls/AdamantiteEnchant][i:FargowiltasSouls/OrichalcumEnchant] Пока вы не атакуете, вы накапливаете заряд, дающий увеличивающиеся бонусы защиты и атаки; атаки тратят заряд
+		[i:FargowiltasSouls/OrichalcumEnchant] Враги получают на 100% больше урона от дебаффов
+		[i:FargowiltasSouls/CobaltEnchant] Увеличивает скорость и высоту прыжка; удерживайте ВНИЗ, чтобы падать быстрее
+		«Благословение Геи озаряет вас»
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/MythrilEnchant] Пока вы не атакуете, вы накапливаете заряд. Атаки тратят заряд, а заряд увеличивает скорость вашей атаки
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Увеличивает регенерацию здоровья и сопротивление урону, увеличивается вместе с зарядом
 		[i:FargowiltasSouls/AdamantiteEnchant] Чем дольше вы атакуете, тем быстрее вы это делаете, но только пока у вас есть заряд
@@ -809,21 +817,19 @@ EarthForce: {
 		[i:FargowiltasSouls/CobaltEnchant] Увеличивает скорость и высоту прыжка; удерживайте ВНИЗ, чтобы падать быстрее
 		«Благословение Геи озаряет вас»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
-		[i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
-		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
-		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
-		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
-		'Gaia's blessing shines upon you'
-		''' */
 }
 
 LifeForce: {
 	DisplayName: Артефакт Жизни
 	Tooltip:
+		'''
+		[i:FargowiltasSouls/BeeEnchant] Даёт сильные крылья и эффекты рюкзака-улья
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] В полёте вы оставляете за собой цветы, которые могут ранить врагов или восстанавливать ваше время полёта и усилять вас по касании
+		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
+		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
+		«Живое существо, неподвластное вашей воле — это редкость»
+		'''
+	RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Даёт сильные крылья
 		[i:FargowiltasSouls/BeeEnchant] Вы оставляете за собой цветы во время полёта
@@ -833,59 +839,51 @@ LifeForce: {
 		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
 		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
 		[i:FargowiltasSouls/BeeEnchant] Эффекты рюкзака-улья
+		[i:FargowiltasSouls/CactusEnchant] Пассивные кактусы не наносят урона (работает в инвентаре и слотах для украшений)
 		«Живое существо, неподвластное вашей воле — это редкость»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
-		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
-		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
-		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
-		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (Works from inventory and vanity)
-		'Rare is a living thing that dare disobey your will'
-		''' */
-	// VanityTooltip: Passive cactuses become harmless
+	VanityTooltip: Пассивные кактусы не наносят урона
 }
 
 NatureForce: {
 	DisplayName: Артефакт Природы
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/CrimsonEnchant][i:FargowiltasSouls/MoltenEnchant][i:FargowiltasSouls/ChlorophyteEnchant][i:FargowiltasSouls/ShroomiteEnchant] Даёт вокруг вас ауру, которая похищает здоровье из врагов, увеличивает получаемый ими урон и атакует их
+		[i:FargowiltasSouls/ShroomiteEnchant] Грибы восстанавливают 50 ОЗ и усиляют вас на на 20 секунд
+		[i:FargowiltasSouls/FrostEnchant] Ваши атаки ненадолго накладывают «Ледяной ожог» и «Обморожение»
+		[i:FargowiltasSouls/RainEnchant] Создаёт над вами зонт, способный отразить до 200 урона
+		«Познал все секреты дикой природы»
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrimsonEnchant] Даёт вокруг вас ауру, которая похищает здоровье из врагов
 		[i:FargowiltasSouls/CrimsonEnchant] Аура похищает больше здоровья, если вы не получали урона недавно
 		[i:FargowiltasSouls/MoltenEnchant] Вы наносите в 1,15 раза больше урона врагам в ауре
 		[i:FargowiltasSouls/ChlorophyteEnchant] Периодически выпускает лазер кристального листа во врагов внутри ауры
 		[i:FargowiltasSouls/ShroomiteEnchant] Лазер кристального листа создаёт облако из грибов при попадании
-		[i:FargowiltasSouls/ShroomiteEnchant] Грибы восстанавливают 50 ОЗ. Использование грибов даёт бафф «Сила грибов» на 20 секунд
+		[i:FargowiltasSouls/ShroomiteEnchant] Грибы восстанавливают 50 ОЗ и дают бафф «Сила грибов» на 20 секунд
 		[i:FargowiltasSouls/ShroomiteEnchant] «Сила грибов» увеличивает урон, шанс критического удара и размер ауры на 12%
 		[i:FargowiltasSouls/FrostEnchant] Ваши атаки ненадолго накладывают «Ледяной ожог» и «Обморожение»
 		[i:FargowiltasSouls/RainEnchant] Создаёт над вами зонт, способный отразить до 200 урона
 		«Познал все секреты дикой природы»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
-		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
-		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
-		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
-		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
-		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
-		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +12% damage and crit and increases your aura size
-		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
-		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
-		'Tapped into every secret of the wilds'
-		''' */
 }
 
 DeathForce: {
 	DisplayName: Артефакт Смерти
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/CrystalAssassinEnchant] Даёт теневой рывок, который обнуляет вашу вертикальную скорость и может быть направлен по диагонали
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/AncientShadowEnchant] Даёт усиленный неуязвимый теневой рывок, который можно направить по диагонали, с длинной перезарядкой
+		[i:FargowiltasSouls/SpookyEnchant] Рывки во врагов лечат вас и накладывают на них «Помеченный смертью»
+		[i:FargowiltasSouls/NinjaEnchant] Увеличивает шанс крит. удара снарядов в зависимости от их скорости, ещё больше пока не двигаетесь
+		[i:FargowiltasSouls/NecroEnchant] Из павших врагов могут выпадать костяные кучи
+		[i:FargowiltasSouls/DarkArtistEnchant] Во время атаки, оружие в следующем слоте обеспечивает огневую поддержку
+		«Темнее, темнее, ещё темнее»
+		'''
+	RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant] Даёт теневой рывок, который обнуляет вашу вертикальную скорость и можно направить по диагонали
 		[i:FargowiltasSouls/ShinobiEnchant] Каждые 4 секунды, ваш рывок укрывает вас во тьму, делая вас неуязвимым во время рывка
 		[i:FargowiltasSouls/SpookyEnchant] Тёмные рывки вызывают круговой взмах косы, который похищает здоровье и накладывает на врагов «Помеченный смертью»
 		[i:FargowiltasSouls/AncientShadowEnchant] Рывки испускают снаряды теневого пламени вокруг вас
@@ -895,18 +893,6 @@ DeathForce: {
 		[i:FargowiltasSouls/DarkArtistEnchant] Во время атаки, оружие в следующем слоте обеспечивает огневую поддержку
 		«Темнее, темнее, ещё темнее»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
-		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
-		[i:FargowiltasSouls/SpookyEnchant] Shade dashes swing a scythe around you, healing you on hit and inflicting Marked for Death
-		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
-		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
-		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
-		'Dark, Darker, Yet Darker'
-		''' */
 }
 
 SpiritForce: {
@@ -940,26 +926,23 @@ TimberForce: {
 	DisplayName: Артефакт Леса
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant][i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] Даёт вокруг вас ауру, накладывающую дебаффы на врагов и атакующую их
+		[i:FargowiltasSouls/PearlwoodEnchant] Ваши атаки периодически создают звёзды маны при попадании
+		[i:FargowiltasSouls/PearlwoodEnchant] Подбор любого пикапа усиливает вас, заставляя шанс крит. удара выпадать в вашу пользу на 5 секунд
+		[i:FargowiltasSouls/RichMahoganyEnchant][i:FargowiltasSouls/WoodEnchant] Даёт баффы для крюков-кошек, бестиария, баннеров и магазинов
+		«Чрезвычайно суровый»
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] Даёт вокруг вас ауру «Порчи» и «Кровотечения»
 		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Запускает снежки и жёлуди во врагов внутри ауры при попадании
 		[i:FargowiltasSouls/RichMahoganyEnchant] Все крюки вылетают, притягивают и возвращаются в 2 раза быстрее
-		[i:FargowiltasSouls/PearlwoodEnchant] Подбор любого пикапа усиливает вас, заставляя шанс крит. удара выпадать в вашу пользу на 5 секунд
 		[i:FargowiltasSouls/PearlwoodEnchant] Ваши атаки периодически создают звёзды маны при попадании
+		[i:FargowiltasSouls/PearlwoodEnchant] Подбор любого пикапа усиливает вас, заставляя шанс крит. удара выпадать в вашу пользу на 5 секунд
 		[i:FargowiltasSouls/WoodEnchant] Записи в бестиарии и счётчик для знамений заполняются быстрее
 		[i:FargowiltasSouls/WoodEnchant] Вы получаете скидку в магазине, размер которой зависит от заполнения бестиария (работает в инвентаре и слотах для украшений)
 		«Чрезвычайно суровый»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
-		[i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
-		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
-		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
-		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
-		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
-		[i:FargowiltasSouls/WoodEnchant] You gain a shop discount based on bestiary completion (works in inventory and vanity)
-		'Extremely rigid'
-		''' */
 }
 
 WillForce: {
@@ -1075,21 +1058,21 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
 		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
-		[i:FargowiltasSouls/DreadShell] Парирование аннулирует до 200 урона и накладывает на врагов проклятие
+		[i:FargowiltasSouls/DreadShell] Контратака аннулирует до 200 урона и накладывает на врагов проклятие
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
 		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ, чтобы выключить):]
 		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
 		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
-			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
 	VanityTooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
 		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
-			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
-		[i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
+		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		'''
 }
 
@@ -1101,12 +1084,12 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
 		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
-		[i:FargowiltasSouls/DreadShell] Парирование аннулирует до 200 урона и накладывает на врагов проклятие
+		[i:FargowiltasSouls/DreadShell] Контратака аннулирует до 200 урона и накладывает на врагов проклятие
 		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
 		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре или слотах для украшений (ПКМ, чтобы включить):]
 		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
 		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
-			[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
@@ -1235,19 +1218,19 @@ ChaliceofTheMoon: {
 		«Испей же из неё»
 		'''
 	VanityTooltip: Даёт базовые баффы зелий и классовых станций
-	/* RuminateTooltip:
+	RuminateTooltip:
 		'''
-		Grants immunity to Curse of the Moon
-		Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons the True Eyes of Cthulhu to protect you
-		'Consume it'
-		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
-		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
-		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
-		''' */
+		Даёт иммунитет к дебаффу «Проклятие луны»
+		Бафф «Силы Космоса» работает независимо от класса оружия
+		Даёт базовые баффы зелий и классовых станций (работает в инвентаре и слотах для украшений)
+		Превращает все эффекты аксессуаров с миньонами и пустые слоты миньонов в +1% к урону за каждый (можно переключить)
+		При выключенном эффекте призывает истинные глаза Ктулху сражаться за вас
+		«Испей же из неё»
+		[c/ADD8E6:«Железная кожа», «Регенерация», «Скорость», «Регенерация маны», «Магическая сила», «Экономия патронов», «Лучник»,]
+		[c/ADD8E6:«Строитель», «Ящики», «Выносливость», «Рыбалка», «Жабры», «Счастливый», «Сердечный магнит», «Жизненная сила», «Добыча», «Обсидиановая кожа»,]
+		[c/ADD8E6:«Месть», «Ярость», «Сонар», «Призыватель», «Шипы», «Титан», «Согревание», «Хождение по воде», «Изысканное удовлетворение»,]
+		[c/ADD8E6:«Заточено», «Ящик с боеприпасами», «Ясновидение», «Колдовство», «Стратег»]
+		'''
 }
 
 GelicWings: {
@@ -1609,20 +1592,19 @@ SupremeDeathbringerFairy: {
 	DisplayName: Верховная смертоносная фея
 	Tooltip:
 		'''
+		Даёт иммунитет к различным дебаффам
+		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/NecromanticBrew] Значительно улучшает рывки и падение
+		[i:FargowiltasSouls/AgitatingLens][i:FargowiltasSouls/Deerclawps] Во время движения за вами остаётся наносящий урон след
+		'Supremacy not necessarily guaranteed'
+		'''
+	RuminateTooltip:
+		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепый», [i:FargowiltasSouls/QueenStinger] «Заражённый», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялый»
 		Значительно увеличивает скорость [i:FargowiltasSouls/NecromanticBrew] рывков и [i:FargowiltasSouls/SlimyShield] падения, удерживайте вниз, чтобы падать через платформы
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] Во время движения за вами остаётся след из кровавой слизи
 		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 20%, а также за вами остаётся след из кровавых шипов
 		«Не гарантирует верховенство»
 		'''
-	/* RuminateTooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
-		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
-		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
-		'Supremacy not necessarily guaranteed'
-		''' */
 }
 
 TimsConcoction: {
@@ -1731,10 +1713,18 @@ DimensionSoul: {
 	DisplayName: Душа Измерений
 	Tooltip:
 		'''
-		Увеличивает максимальный запас здоровья на 100, сопротивление урону на 20% и регенерацию здоровья
-		[i:CharmofMyths] Уменьшает длительность послезельевой болезни на 25%
+		Увеличивает максимальный запас здоровья на 100, сопротивление урону на 20% и регенерацию здоровья и уменьшает длительность послезельевой болезни на 25%
+		Даёт сверхзвуковое передвижение
+		Значительно улучшает способности добычи, строительства и рыбалки
+		Даёт переключаемый режим строителя
+		[i:FargowiltasSouls/ColossusSoul][i:FargowiltasSouls/SupersonicSoul][i:FargowiltasSouls/FlightMasterySoul][i:FargowiltasSouls/TrawlerSoul][i:FargowiltasSouls/WorldShaperSoul] Даёт эффекты всех компонентов
+		«Измерения Террарии на кончиках ваших пальцев»
+		'''
+	RuminateTooltip:
+		'''
+		Увеличивает максимальный запас здоровья на 100, сопротивление урону на 20% и регенерацию здоровья и уменьшает длительность послезельевой болезни на 25%
 		Даёт иммунитет к отбрасыванию, некоторым дебаффам, включая «Мерцание», лаве, урону от падения и уничтожающей блоки взрывчатке
-		Даёт сверхзвуковые бег, полёт, рывки, цепление за стены, плавание, хождение по воде [c/BC5252:и выключает все ваши прыжки (можно переключить)]
+		Даёт сверхзвуковые бег, полёт, рывки, цепление за стены, плавание и хождение по воде
 		[i:FargowiltasSouls/Devilshield] Поглощает 25% урона, полученного игрока вашей команды, если ваше здоровье выше 25%
 		[i:FargowiltasSouls/Devilshield] Враги с большей вероятность нацеливаются на вас
 		[i:PanicNecklace] Значительно увеличивает скорость передвижения и [i:FargowiltasSouls/HallowedPendant] длительность неуязвимости при получении урона
@@ -1746,19 +1736,6 @@ DimensionSoul: {
 		Даёт переключаемый режим строителя, [i:FargowiltasSouls/MinerEnchant] даёт свет и подсвечивает врагов, ловушки и сокровища вблизи
 		«Измерения Террарии на кончиках ваших пальцев»
 		'''
-	/* RuminateTooltip:
-		'''
-		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
-		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
-		Allows Supersonic running, flying, dashing, climbing, swimming, waterwalking, and disables all of your jumps (toggleable)
-		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
-		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
-		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
-		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin][i:SporeSac][i:BoneHelm] you release damaging fog at nearby enemies
-		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
-		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
-		'The dimensions of Terraria at your fingertips'
-		''' */
 }
 
 EternitySoul: {
@@ -1799,15 +1776,22 @@ MasochistSoul: {
 	DisplayName: Душа Властителя
 	Tooltip:
 		'''
+		Увеличивает максимальный запас здоровья на 20%, регенерацию здоровья, урон для класса взятого оружия на 50% и сопротивление урону на 5%
+		Увеличивает время полёта на 200%, скорость передвижения на 20% и пробивание брони на 50
+		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Даёт улучшенные эффекты всех компонентов
+		«Прими власть, прими вечность»
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/GuttedHeart] Увеличивает максимальный запас здоровья на 20%, [i:FargowiltasSouls/MagicalBulb] регенерацию здоровья, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] урон класса взятого оружия на 50% и [i:FargowiltasSouls/ReinforcedPlating] сопротивление урону на 5%
 		[i:FargowiltasSouls/ChaliceofTheMoon] Увеличивает время полёта на 200%, скорость передвижения на 20% [i:FargowiltasSouls/QueenStinger] и пробивание брони на 50 единиц
 		Даёт [i:FargowiltasSouls/SlimyShield] ускоренное падение, [i:FargowiltasSouls/ReinforcedPlating] иммунитет к отбрасыванию, [i:FargowiltasSouls/PureHeart] иммунитет к большинству дебаффов, [i:FargowiltasSouls/ChaliceofTheMoon] базовые баффы зелий и классовых станций и др.
 		[i:FargowiltasSouls/NecromanticBrew] Увеличивает дистанцию рывков, [i:FargowiltasSouls/PungentEyeball] ваш курсор накладывает «Сублимацию»
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает размер вашего хёртбокса, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
 		При получении урона, [i:FargowiltasSouls/SqueakyToy] есть 5% шанс получить только 1 ед. урона, и [i:FargowiltasSouls/NecromanticBrew] вы отражаете урон во время рывка
-		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца и накладывают солянку из дебаффов режима Вечность
+		Ваши атаки [i:FargowiltasSouls/NymphsPerfume] создают сердца
 		[i:FargowiltasSouls/NymphsPerfume] Увеличивает здоровье при возрождении и [i:FargowiltasSouls/SandsofTime] уменьшает время возрождения
-		[i:FargowiltasSouls/SecurityWallet] Автоматически отправляет деньги в свинью-копилкууменьшает стоимость перековок на 50%
+		[i:FargowiltasSouls/SecurityWallet] Автоматически отправляет деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		Автоматически использует [i:FargowiltasSouls/MysticSkull] зелья маны по необходимости
 		[i:FargowiltasSouls/PungentEyeball] Значительно увеличивает шанс появления редких врагов, [i:FargowiltasSouls/SinisterIcon] увеличивает скорость появления врагов, убитые враги роняют добычу ещё раз
 		[i:FargowiltasSouls/TimsConcoction] С некоторых врагов могут выпасть зелья
@@ -1816,21 +1800,6 @@ MasochistSoul: {
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
 		«Прими власть, прими вечность»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
-		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
-		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts
-		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
-		'Embrace mastery, embrace eternity'
-		''' */
 	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий и классовых станций"
 }
 
@@ -1866,6 +1835,11 @@ TerrariaSoul: {
 	DisplayName: Душа Террарии
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Даёт эффекты всех артефактов
+		«Истинный повелитель Террарии»
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/TimberForce] Даёт ауру, которая выпускает снаряды, улучшенные крюки и периодические звёзды маны при попадании
 		[i:FargowiltasSouls/TimberForce] Даёт перекрутку крит. ударов при подборе подбираемых предметов; ускоряет заполнение записей в бестиарий и даёт скидку за них
 		[i:FargowiltasSouls/TerraForce] Вы получаете меньше постепенного урона; увеличивает ваши ближние оружия
@@ -1888,28 +1862,6 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/CosmoForce] Увеличивает ваши максимальную скорость и ускорение, уменьшает инерцию; Стазис звёздной пыли перезаряжается 60 секунд
 		«Истинный повелитель Террарии»
 		'''
-	/* RuminateTooltip:
-		'''
-		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
-		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
-		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
-		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] Debuffs deal 100% more damage and you explode on hit while not attacking
-		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
-		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
-		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
-		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, your minions can crit for 1.25x damage, effects of Hive Pack
-		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
-		[i:FargowiltasSouls/SpiritForce] Upon reaching zero health, you will revive with 300 health
-		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, and slain enemies may drop a pile of bones
-		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
-		[i:FargowiltasSouls/WillForce] Enemies may drop extra loot
-		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
-		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
-		'A true master of Terraria'
-		''' */
 }
 
 TrawlerSoul: {
@@ -1929,8 +1881,16 @@ UniverseSoul: {
 	DisplayName: Душа Вселенной
 	Tooltip:
 		'''
-		Увеличивает урон и шанс крит. удара для класса взятого оружия на 50% и 25% соответственно
-		Увеличивает скорость использования всех оружий на 25%, скорость снарядов на 50% и отбрасывание на 100%
+		Увеличивает урон и шанс критического удара для класса взятого оружия на 50% и 25% соответственно
+		Увеличивает скорость атаки всех оружий на 25%, скорость снарядов на 50% и отбрасывание на 100%
+		Увеличивает максимальное количество0 миньонов на 3 и стражников на 1
+		[i:1343][i:3366][i:1321][i:1595][i:4000] Даёт дополнительные эффекты всех компонентов
+		«Сами небеса склоняются перед вами»
+		'''
+	RuminateTooltip:
+		'''
+		Увеличивает урон и шанс критического удара для класса взятого оружия на 50% и 25% соответственно
+		Увеличивает скорость атаки всех оружий на 25%, скорость снарядов на 50% и отбрасывание на 100%
 		[i:1343] Даёт автоатаку для и увеличивает размер ближних оружия, а также [i:3366] даёт вам мастерство в пользовании йо-йо
 		[i:1321] Значительно увеличивает скорость стрел и даёт шанс 20% не потратить стрелы
 		[i:1595] Увеличивает максимальный запас маны на 200 и восстанавливает её при получении урона
@@ -1938,17 +1898,6 @@ UniverseSoul: {
 		Увеличивает максимальное количество прислужников на 3 и стражников на 1
 		«Сами небеса склоняются перед вами»
 		'''
-	/* RuminateTooltip:
-		'''
-		+50% damage and +25% critical strike chance for your current weapon class
-		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1
-		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
-		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
-		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
-		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
-		'The heavens themselves bow to you'
-		''' */
 }
 
 WorldShaperSoul: {
@@ -3826,7 +3775,11 @@ CactusMimicBanner: {
 
 CactusStaff: {
 	DisplayName: Посох кактусов
-	Tooltip: Запускает прыгучий кактус
+	Tooltip:
+		'''
+		Запускает прыгучий кактус
+		«Они смотрят, куда я качу...»
+		'''
 }
 
-// Ruminate: "[c/FF3399:Hold {0} for more details]"
+Ruminate: "[c/FF3399:Удерживайте {0} для подробной информации]"

@@ -1,6 +1,6 @@
 DisableAllAttackEffects: Отключить все эффекты с доп. атаками
 DisableAllMinionEffects: Отключить все эффекты с прислужниками
-// DisableAllExtraJumpEffects: Wings Disable All Extra Jumps
+DisableAllExtraJumpEffects: Крылья отключают прыжки
 TimberHeader: "{$Mods.FargowiltasSouls.Items.TimberForce.DisplayName}"
 WoodCompletionEffect: Заполнение бестиария
 BorealEffect: Снежки
@@ -46,7 +46,7 @@ LifeHeader: "{$Mods.FargowiltasSouls.Items.LifeForce.DisplayName}"
 BeeEffect: Цветы
 BeetleEffect: Жуки
 CactusEffect: Кактусовые иглы
-// CactusPassiveEffect: Passive Cactuses
+CactusPassiveEffect: Пассивные кактусы
 PumpkinEffect: Растущие тыквы
 SpiderEffect: Криты призывателя
 TurtleEffect: Черепаший панцирь
