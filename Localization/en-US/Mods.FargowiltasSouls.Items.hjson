@@ -841,7 +841,8 @@ DeathForce: {
 	DisplayName: Force of Death
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/SpookyEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/SpookyEnchant] Dashing into enemies heals you and inflicts them with Marked for Death
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed, stronger when not moving
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
