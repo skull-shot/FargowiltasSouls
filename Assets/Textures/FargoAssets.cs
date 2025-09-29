@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Luminance.Assets;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
@@ -18,14 +19,16 @@ namespace FargowiltasSouls.Assets.Textures
         public static string GetAssetString(string path, string name) => Filepath + path + "/" + name;
 
         /// <summary>
-        /// Shorthand for for grabbing a texture through Modcontent.Request.
+        /// Shorthand for for grabbing a <see cref="Texture2D"></see>, utilizing Luminance's <see cref="LazyAsset{AssetType}"></see> loading system.
+        /// When attempting to grab an <see cref="Asset{T}"></see>, use .Asset instead of .Value
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static Asset<Texture2D> GetTexture2D(string path, string name) => ModContent.Request<Texture2D>(GetAssetString(path, name), AssetRequestMode.ImmediateLoad);
+        public static LazyAsset<Texture2D> GetTexture2D(string path, string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad) => LazyAsset<Texture2D>.Request(GetAssetString(path, name), mode);
 
-
+        //TODO: Change these to use Luminance's LazyAsset loading system.
 
         #region Additive Textures
         public static Asset<Texture2D> BlobBloomTexture => ModContent.Request<Texture2D>(Filepath + "AdditiveTextures/BlobGlow");
@@ -140,7 +143,8 @@ namespace FargowiltasSouls.Assets.Textures
             }
 
         }*/
-
+        
+        //TODO: Change this to use Luminance's LazyAsset loading system.
         public class UI
         {   
             public static Asset<Texture2D> CooldownBarTexture => ModContent.Request<Texture2D>(Filepath + "UI/CooldownBar", AssetRequestMode.ImmediateLoad);
@@ -150,6 +154,12 @@ namespace FargowiltasSouls.Assets.Textures
             public static Asset<Texture2D> OncomingMutantAura => ModContent.Request<Texture2D>(Filepath + "UI/OncomingMutantAura", AssetRequestMode.ImmediateLoad);
 
             public static Asset<Texture2D> EnchantSlotIcon => ModContent.Request<Texture2D>(Filepath + "UI/EnchantSlotIcon", AssetRequestMode.ImmediateLoad);
+
+            public class ActiveSkillMenu
+            {
+                public static LazyAsset<Texture2D> ActiveSkillMenuButton => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButton");
+                public static LazyAsset<Texture2D> ActiveSkillMenuButtonHover => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButtonHover");
+            }
 
             public class MainMenu
             {
