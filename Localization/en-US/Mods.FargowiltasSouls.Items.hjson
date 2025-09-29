@@ -792,6 +792,13 @@ EarthForce: {
 	DisplayName: Force of Earth
 	Tooltip:
 		'''
+		[i:FargowiltasSouls/MythrilEnchant][i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant][i:FargowiltasSouls/AdamantiteEnchant][i:FargowiltasSouls/OrichalcumEnchant] Not attacking builds up charge, granting large ramping offensive and defensive buffs; attacking consumes charge
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
+		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
+		'Gaia's blessing shines upon you'
+		'''
+	RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
 		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
@@ -805,6 +812,14 @@ EarthForce: {
 LifeForce: {
 	DisplayName: Force of Life
 	Tooltip:
+		'''
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings and effects of Hive Pack
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
+		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
+		'Rare is a living thing that dare disobey your will'
+		'''
+	RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
 		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
