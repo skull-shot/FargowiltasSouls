@@ -52,22 +52,5 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.buffImmune[ModContent.BuffType<UnluckyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<UnstableBuff>()] = true;
         }
-
-        public override void Update(NPC npc, ref int buffIndex)
-        {
-            FargoSoulsGlobalNPC fargoNPC = npc.FargoSouls();
-            //npc.poisoned = true;
-            //npc.venom = true;
-            npc.ichor = true;
-            //npc.onFire2 = true;
-            npc.betsysCurse = true;
-            npc.midas = true;
-            //fargoNPC.Electrified = true;
-            fargoNPC.OceanicMaul = true;
-            fargoNPC.CurseoftheMoon = true;
-            //fargoNPC.Infested = true;
-            fargoNPC.Rotting = true;
-            fargoNPC.Sadism = true;
-        }
     }
 }
