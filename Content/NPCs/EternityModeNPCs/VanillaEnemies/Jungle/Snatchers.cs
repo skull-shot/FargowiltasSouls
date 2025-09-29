@@ -338,9 +338,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
                 }
             }
 
+            LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.Snatchers");
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && npc.type == NPCID.ManEater && target.Male)
             {
-                target.KillMe(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Snatchers", target.name)), 999999, 0);
+                target.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(target.name)), 999999, 0);
             }
         }
 

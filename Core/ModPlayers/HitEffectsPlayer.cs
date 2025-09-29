@@ -23,6 +23,7 @@ using Mono.Cecil;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -634,9 +635,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                             CombatText.NewText(rect, Color.DarkOrange, The22Incident, true);
                         //doing it this way to ensure we dont accidentally skip over the checks
                         //but also so that it doesnt harass godmode testing forever
+                        LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.TwentyTwo");
                         if (The22Incident == 22 || The22Incident == 23 || The22Incident == 24)
                         {
-                            Player.KillMe(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.TwentyTwo", Player.name)), 22222222, 0);
+                            Player.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(Player.name)), 22222222, 0);
                             Projectile.NewProjectile(Player.GetSource_Death(), Player.Center, Vector2.Zero, ModContent.ProjectileType<TwentyTwo>(), 0, 0f, Main.myPlayer);
                             ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
                         }

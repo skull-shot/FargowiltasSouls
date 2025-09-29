@@ -68,7 +68,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                     float endurance = target.endurance;
                     target.statDefense.FinalMultiplier *= 0;
                     target.endurance = 0;
-                    target.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.FakeHeart", target.name)), Projectile.damage, 0, false, false, 0, false);
+                    LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.FakeHeart");
+                    target.Hurt(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(target.name)), Projectile.damage, 0, false, false, 0, false);
                     target.statDefense = defense;
                     target.endurance = endurance;
 

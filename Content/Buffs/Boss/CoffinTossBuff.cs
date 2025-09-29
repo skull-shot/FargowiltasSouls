@@ -39,7 +39,8 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             if (Collision.SolidCollision(player.position + player.velocity, player.width, player.height))
             {
                 int damage = 35;
-                player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.CoffinToss", player.name)), damage, 0, false, false, 0, false);
+                LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.CoffinToss");
+                player.Hurt(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(player.name)), damage, 0, false, false, 0, false);
                 player.DelBuff(buffIndex);
                 player.ClearBuff(ModContent.BuffType<StunnedBuff>());
                 SoundEngine.PlaySound(SoundID.NPCHit18, player.Center);
