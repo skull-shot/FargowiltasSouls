@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.UI
         }
         private void IconHighlight_OnClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            if (!Main.playerInventory || Main.LocalPlayer.chest == -1)
+            if (!Main.playerInventory || Main.LocalPlayer.chest != -1)
             {
                 return;
             }
@@ -71,7 +71,6 @@ namespace FargowiltasSouls.Content.UI
                 Icon.Draw(spriteBatch);
                 IconHighlight.Draw(spriteBatch);
             }
-
         }
     }
 }
