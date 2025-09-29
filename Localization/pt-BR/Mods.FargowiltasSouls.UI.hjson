@@ -10,6 +10,7 @@ MasochistEnabled: Modo Masoquista está ativado
 // HoldShift: Hold Shift to read more
 // Close: Close
 // OpenKeybinds: Open Keybinds
+// ActiveSkillMenuButton: Open Active Skills
 
 TitleLinks: {
 	// Patreon: Patreon

@@ -1214,7 +1214,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (GuardRaised)
             {
-                Player.bodyFrame.Y = Player.bodyFrame.Height * 10;
+                drawInfo.drawPlayer.shieldRaised = true;
                 if (shieldTimer > 0)
                 {
                     int shader = 0;

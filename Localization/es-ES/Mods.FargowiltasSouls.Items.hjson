@@ -3758,7 +3758,10 @@ CactusMimicBanner: {
 
 CactusStaff: {
 	// DisplayName: Rolling Cactus Staff
-	// Tooltip: Launches a bouncing cactus ball
+		'''
+		Launches a bouncing cactus ball
+		'They see me rollin'...'
+		''' */
 }
 
 // Ruminate: "[c/FF3399:Hold {0} for more details]"

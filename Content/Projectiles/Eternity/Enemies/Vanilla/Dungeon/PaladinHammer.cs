@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
         public override bool PreDraw(ref Color lightColor)
         {
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> glow = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRingHollow"); 
+            Asset<Texture2D> glow = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRingHollow").Asset; 
             if (Projectile.timeLeft < 30)
             {
                 float x = 1 - Projectile.timeLeft / 30f;
