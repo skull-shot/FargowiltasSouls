@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public static void PassiveEffect(Player player, Item item)
         {
-            FrigidGrasp.PassiveEffects(player, item);
+            //FrigidGrasp.PassiveEffects(player, item);
             SandsofTime.PassiveEffects(player);
             //SqueakyToy.PassiveEffects(player, item);
             NymphsPerfume.PassiveEffects(player, item);

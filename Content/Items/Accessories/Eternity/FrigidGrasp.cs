@@ -34,20 +34,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             Item.defense = 3;
         }
 
-        public static void PassiveEffects(Player player, Item item)
+        /*public static void PassiveEffects(Player player, Item item)
         {
-            player.buffImmune[BuffID.Frostburn] = true;
-            player.buffImmune[BuffID.Chilled] = true;
-        }
+        }*/
         public static void ActiveEffects(Player player, Item item)
         {
-            PassiveEffects(player, item);
+            player.AddEffect<FrigidGraspKeyEffect>(item);
+            player.buffImmune[BuffID.Frostburn] = true;
+            player.buffImmune[BuffID.Chilled] = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ActiveEffects(player, Item);
-            player.AddEffect<FrigidGraspKeyEffect>(Item);
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
@@ -57,7 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             return FrigidGraspKeyEffect.BaseDamage(Main.LocalPlayer);
         }
 
-        public override void UpdateInventory(Player player) => PassiveEffects(player, Item);
+        //public override void UpdateInventory(Player player) => PassiveEffects(player, Item);
         /*
         public override bool AltFunctionUse(Player player)
         {
@@ -67,7 +66,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
         */
 
-        public override void UpdateVanity(Player player) => PassiveEffects(player, Item);
+        //public override void UpdateVanity(Player player) => PassiveEffects(player, Item);
         //public override bool CanRightClick() => true;
         //public override void RightClick(Player player)
         //{
