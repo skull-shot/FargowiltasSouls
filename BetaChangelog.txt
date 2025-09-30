@@ -233,3 +233,4 @@ fixed abom cannonballs being able to kaizo you if you exploded them by making ab
 
 implemented framework for rumination tooltips
 fixed soe not being able to read full tooltips from ponderable materials
+fish ex p3 spawns invul bubble rings
