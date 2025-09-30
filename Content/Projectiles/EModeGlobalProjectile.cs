@@ -219,7 +219,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile.owner.IsWithinBounds(Main.maxPlayers) && projectile is not null && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
             {
                 if (source is not null)
                 {
