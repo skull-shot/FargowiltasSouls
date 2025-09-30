@@ -209,7 +209,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player, true);
+                    TinCrit = TinEffect.TinFloor(Player);
                     EbonwoodCharge = 0;
                     HuntressStage = 0;
                     NekomiMeter = 0;
@@ -625,7 +625,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 MythrilSoundCooldown--;
 
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
-                TinCrit--;
+                TinCrit = 0;
 
             if (!Player.HasEffectEnchant<BeetleEffect>())
             {
