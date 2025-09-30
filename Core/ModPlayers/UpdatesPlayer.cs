@@ -816,7 +816,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 //slowed effect
                 Player.moveSpeed *= .75f;
-                Player.jump /= 2;
+                Player.jump = (int)Math.Round(Player.jump * 0.75);
             }
 
             if (GodEater)
