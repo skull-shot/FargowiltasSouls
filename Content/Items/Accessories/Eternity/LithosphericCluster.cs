@@ -73,13 +73,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             CreateRecipe()
 
-            .AddIngredient<SecurityWallet>()
-            .AddIngredient<WyvernFeather>()
-            .AddIngredient<MysticSkull>()
-            .AddIngredient<WretchedPouch>()
             .AddIngredient<CrystalSkull>()
             .AddIngredient<DreadShell>()
-            .AddIngredient(ItemID.SpectreBar, 5)
+            .AddIngredient<WretchedPouch>()
+            .AddIngredient<WyvernFeather>()
+            .AddIngredient<MysticSkull>()
+            .AddIngredient<SecurityWallet>()
+            .AddIngredient(ItemID.SpectreBar, 10)
+            .AddIngredient(ItemID.SoulofNight, 15)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.MythrilAnvil)
