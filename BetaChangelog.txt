@@ -232,3 +232,4 @@ abomship nerf, 2 less ghosts in emode
 fixed abom cannonballs being able to kaizo you if you exploded them by making abom die
 
 implemented framework for rumination tooltips
+fixed soe not being able to read full tooltips from ponderable materials
