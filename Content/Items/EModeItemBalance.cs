@@ -405,7 +405,7 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.SnowmanCannon:
                     balanceTextKeys = ["Speed"];
-                    balanceNumber = 0.7f;
+                    balanceNumber = 0.85f;
                     return EModeChange.Nerf;
 
                 case ItemID.BouncingShield: //sergeant united shield
