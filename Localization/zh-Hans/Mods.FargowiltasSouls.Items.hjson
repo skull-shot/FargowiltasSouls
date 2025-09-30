@@ -1238,10 +1238,9 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
