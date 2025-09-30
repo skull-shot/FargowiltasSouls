@@ -85,7 +85,7 @@ BeetleEnchant: {
 	Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 2.5% damage reduction each and attack nearby enemies
 		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		'''
@@ -176,7 +176,7 @@ DarkArtistEnchant: {
 		'''
 		While attacking, fire your next closest weapon's projectile as support
 		The support weapon will fire 1/7 as often as it would normally
-		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
+		Summons a Flameburst that will also fire homing flamebursts while you attack
 		'The shadows hold more than they seem'
 		'''
 }

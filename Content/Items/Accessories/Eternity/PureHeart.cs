@@ -70,9 +70,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient(ModContent.ItemType<GuttedHeart>())
             .AddIngredient(ModContent.ItemType<GelicWings>())
             .AddIngredient(ModContent.ItemType<PungentEyeball>())
-            .AddIngredient(ItemID.PurificationPowder, 30)
+            .AddIngredient(ItemID.ChlorophyteBar, 12)
             .AddIngredient(ItemID.GreenSolution, 50)
-            .AddIngredient(ItemID.ChlorophyteBar, 5)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
 
             .AddTile(TileID.MythrilAnvil)

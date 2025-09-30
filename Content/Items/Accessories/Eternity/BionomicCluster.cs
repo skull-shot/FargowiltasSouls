@@ -85,7 +85,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient<SqueakyToy>()
             .AddIngredient<NymphsPerfume>()
             .AddIngredient<TimsConcoction>()
-            .AddIngredient(ItemID.HellstoneBar, 5)
+            .AddIngredient(ItemID.FallenStar, 5)
+            .AddIngredient(ItemID.Glass, 10)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.Anvils)
