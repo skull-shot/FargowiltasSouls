@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FlightMasteryGravity>(item);
 
             //hover
-            if (player.controlDown && player.controlJump && !player.mount.Active)
+            if (player.wingTime > 0 && player.controlDown && player.controlJump && !player.mount.Active)
             {
                 player.position.Y -= player.velocity.Y;
                 if (player.velocity.Y > 0.1f)

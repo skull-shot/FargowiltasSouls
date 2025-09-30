@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.6f);
             if (Main.masterMode) //master mode is already long enough
                 npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.9f);
             npc.defense = 0;
@@ -513,7 +513,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.buffImmune[BuffID.OnFire] = true;
             npc.buffImmune[BuffID.OnFire3] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
         }
 

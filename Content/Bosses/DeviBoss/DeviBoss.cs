@@ -102,8 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     BuffID.OnFire,
                     BuffID.Suffocation,
                     BuffID.Lovestruck,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
         }
 

@@ -40,7 +40,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                 BuffID.Chilled,
                     BuffID.Suffocation,
                     ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>(),
                     ModContent.BuffType<HellFireMarkedBuff>(),
             ]);
 

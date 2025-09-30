@@ -77,6 +77,7 @@ namespace FargowiltasSouls
 
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
             On_Player.ApplyTouchDamage += HarmlessRollingCactus;
+            On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -116,6 +117,7 @@ namespace FargowiltasSouls
 
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
             On_Player.ApplyTouchDamage -= HarmlessRollingCactus;
+            On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -538,6 +540,12 @@ namespace FargowiltasSouls
             if (((tileId == TileID.Cactus && Main.dontStarveWorld) || tileId == TileID.RollingCactus) && self.HasEffect<CactusPassiveEffect>())
                 return;
             orig(self, tileId, x, y);
+        }
+        public void RemoveAnnoyingNPCDebuffs(On_Player.orig_StatusFromNPC orig, Player self, NPC nPC)
+        {
+            if (WorldSavingSystem.EternityMode && nPC.type is NPCID.SkeletronHead or NPCID.SkeletronHand)
+                return;
+            orig(self, nPC);
         }
     }
 }

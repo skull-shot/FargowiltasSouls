@@ -232,8 +232,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 BuffID.Confused,
                     BuffID.Chilled,
                     BuffID.Suffocation,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)

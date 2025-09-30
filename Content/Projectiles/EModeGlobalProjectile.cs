@@ -219,7 +219,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile.owner.IsWithinBounds(Main.maxPlayers) && projectile is not null && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
             {
                 if (source is not null)
                 {
@@ -1971,7 +1971,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Skull:
-                    target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
+                    if (sourceNPC != null && sourceNPC.type == NPCID.SkeletronHead)
+                        target.AddBuff(ModContent.BuffType<LethargicBuff>(), 120);
                     if (sourceNPC != null && sourceNPC.type == NPCID.DungeonGuardian)
                         target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
                     break;

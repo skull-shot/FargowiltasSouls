@@ -1,3 +1,4 @@
+using System;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -74,8 +75,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 if (info.Damage < 10)
                     return; //ignore hits under 10 damage
                 modPlayer.CrimsonRegenTime = 0; //reset timer
-                float returnHeal = 0.5f; //% of damage given back
-                modPlayer.CrimsonRegenAmount = (int)(info.Damage * returnHeal); //50% return heal
+                const float HealPercentage = 50f / 100f; //% of damage given back
+                float heal = (int)Math.Round(info.Damage * HealPercentage);
+                const int Softcap = 200;
+                if (heal > Softcap)
+                    heal *= (Softcap * 2 + heal) / (3f * heal); // calculate post-softcap value
+                modPlayer.CrimsonRegenAmount = (int)heal; //50% return heal, softcapped past 200
 
                 player.AddBuff(ModContent.BuffType<CrimsonRegenBuff>(),
                     modPlayer.ForceEffect<CrimsonEnchant>() ? 900 : 430); //should never reach that time lol. buff gets removed in buff itself after its done. sets to actual time so that it shows in buff properly

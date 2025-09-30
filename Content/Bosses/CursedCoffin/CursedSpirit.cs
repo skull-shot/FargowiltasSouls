@@ -61,8 +61,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 BuffID.Confused,
                 BuffID.Chilled,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
         }
         public override void SetDefaults()

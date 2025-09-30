@@ -94,7 +94,6 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 				BuffID.Chilled,
 				BuffID.Suffocation,
 				ModContent.BuffType<LethargicBuff>(),
-				ModContent.BuffType<ClippedWingsBuff>(),
 				ModContent.BuffType<TimeFrozenBuff>()
 			]);
 		}
