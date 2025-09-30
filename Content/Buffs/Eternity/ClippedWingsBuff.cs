@@ -19,19 +19,5 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.wingTimeMax = 0;
             player.rocketTime = 0;
         }
-
-        public override void Update(NPC npc, ref int buffIndex)
-        {
-            if (npc.boss)
-            {
-                if (npc.buffTime[buffIndex] > 1)
-                    npc.buffTime[buffIndex] = 1;
-                return;
-            }
-
-            npc.position -= npc.velocity / 2;
-            if (npc.velocity.Y < 0)
-                npc.velocity.Y = 0;
-        }
     }
 }
