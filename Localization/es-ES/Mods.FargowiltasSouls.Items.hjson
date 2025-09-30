@@ -638,9 +638,9 @@ TinEnchant: {
 	// DisplayName: Tin Enchantment
 	/* Tooltip:
 		'''
-		Gain 3% critical strike chance
-		Every crit increases this bonus by 3%, up to 12%
-		Getting hit reduces this bonus by half, to a minimum of 3%
+		Increased critical strike chance by 5%
+		Critical strikes increase this bonus by 5%, up to 25%
+		Getting hit resets this bonus back to 5%
 		'Return of the Crit'
 		''' */
 	// CritUp: +{0}% crit
