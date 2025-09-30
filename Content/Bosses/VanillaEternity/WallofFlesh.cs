@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 AuraCenter = Vector2.Zero;
 
-
+        internal const float HealthMultiplier = 1.56f;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.6f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * HealthMultiplier);
             if (Main.masterMode) //master mode is already long enough
                 npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.9f);
             npc.defense = 0;
@@ -504,7 +504,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 2.2);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * WallofFlesh.HealthMultiplier);
         }
 
         public override void OnFirstTick(NPC npc)
