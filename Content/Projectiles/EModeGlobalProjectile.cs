@@ -1971,7 +1971,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Skull:
-                    //target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
+                    if (sourceNPC != null && sourceNPC.type == NPCID.SkeletronHead)
+                        target.AddBuff(ModContent.BuffType<LethargicBuff>(), 120);
                     if (sourceNPC != null && sourceNPC.type == NPCID.DungeonGuardian)
                         target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
                     break;
