@@ -128,8 +128,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 BuffID.Confused,
                 BuffID.Chilled,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
             {

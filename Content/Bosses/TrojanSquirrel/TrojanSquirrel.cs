@@ -47,8 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.AddDebuffImmunities(
             [
                 BuffID.Confused,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
         }
 
