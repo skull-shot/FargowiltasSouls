@@ -17,6 +17,7 @@ using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -214,7 +215,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
 
-            if (!ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
+            if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic1"), Color.LimeGreen);
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic2"), Color.LimeGreen);
@@ -250,7 +251,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
+            if (ClientConfig.Instance.WikiNotification)
+                Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
 
             if (Toggler.CanPlayMaso)
             {
