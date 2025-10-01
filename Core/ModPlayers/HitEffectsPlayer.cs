@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
+﻿using System;
+using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -13,6 +14,7 @@ using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -20,15 +22,14 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static FargowiltasSouls.FargowiltasSouls;
 using static System.Net.Mime.MediaTypeNames;
+using static FargowiltasSouls.FargowiltasSouls;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -114,18 +115,13 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 }
 
-
-                if (Hexed)
+                if (Hexed && HexedInflictor == target.whoAmI)
                 {
-                    target.life += hitInfo.Damage;
-                    target.HealEffect(hitInfo.Damage);
-                    if (target.life > target.lifeMax)
-                    {
-                        target.life = target.lifeMax;
-                    }
+                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
+                    float ai1 = 30 + Main.rand.Next(30);
+                    Projectile.NewProjectile(target.GetSource_FromThis(), Player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage / 5, 0f, Main.myPlayer, target.whoAmI, ai1);
                     hitInfo.Null();
                     return;
-
                 }
             };
 

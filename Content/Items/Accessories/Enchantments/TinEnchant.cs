@@ -151,7 +151,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             else
             {
-                modPlayer.TinCritMax = (modPlayer.ForceEffect<TinEnchant>() && player.HasEffectEnchant<TinEffect>()) ? 33 : 25;
+                modPlayer.TinCritMax = (modPlayer.ForceEffect<TinEnchant>() && player.HasEffectEnchant<TinEffect>()) ? 35 : 25;
                 player.GetCritChance(DamageClass.Generic) += modPlayer.TinCrit;
             }
         }

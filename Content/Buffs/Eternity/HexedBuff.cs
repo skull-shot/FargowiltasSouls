@@ -16,6 +16,9 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
         public override void Update(Player player, ref int buffIndex)
         {
             player.FargoSouls().Hexed = true;
+
+            if (player.buffTime[buffIndex] < 2) // reset
+                player.FargoSouls().HexedInflictor = 0;
         }
 
         public override bool ReApply(Player player, int time, int buffIndex)

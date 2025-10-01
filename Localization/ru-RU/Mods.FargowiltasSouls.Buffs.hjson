@@ -278,11 +278,6 @@ LihzahrdBlessingBuff: {
 	Message: Свет алтаря пал на вас!
 }
 
-LovestruckBuff: {
-	DisplayName: Влюблённость
-	Description: Вы влюблены!
-}
-
 LowGroundBuff: {
 	DisplayName: Заземлённый
 	Description: Нет крюка, не можете стоять на платформах или жидкостях

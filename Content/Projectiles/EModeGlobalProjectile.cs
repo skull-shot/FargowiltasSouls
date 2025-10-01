@@ -2046,6 +2046,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.RuneBlast:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.RuneWizard)
                     {
@@ -2114,6 +2115,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.LostSoulHostile:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.InfernoHostileBlast:
@@ -2298,6 +2300,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.DD2DarkMageBolt:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.IceSpike:

@@ -34,6 +34,8 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
         {
             CreateRecipe()
             .AddIngredient(ItemID.Silk, 10)
+            .AddRecipeGroup("FargowiltasSouls:AnyDemoniteBar", 8)
+            .AddIngredient(ItemID.PinkGel, 5)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 5)
             .AddTile(TileID.Loom)
 

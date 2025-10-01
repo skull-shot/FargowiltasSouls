@@ -20,7 +20,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -85,7 +84,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             .AddIngredient<SqueakyToy>()
             .AddIngredient<NymphsPerfume>()
             .AddIngredient<TimsConcoction>()
-            .AddIngredient(ItemID.HellstoneBar, 5)
+            .AddIngredient(ItemID.FallenStar, 5)
+            .AddIngredient(ItemID.Glass, 10)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.Anvils)
@@ -102,6 +102,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
+        public override List<AccessoryEffect> ActiveSkillTooltips =>
+            [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>()];
 
         public override void SetStaticDefaults()
         {

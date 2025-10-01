@@ -74,7 +74,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                     target.endurance = endurance;
 
                     if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.deviBoss, ModContent.NPCType<DeviBoss>()))
-                        target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 240);
+                    {
+                        target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                        target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
+                    }
                 }
                 else
                 {

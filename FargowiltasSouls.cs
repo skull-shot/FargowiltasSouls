@@ -482,7 +482,6 @@ namespace FargowiltasSouls
                     ModContent.BuffType<JammedBuff>(),
                     ModContent.BuffType<LethargicBuff>(),
                     ModContent.BuffType<LightningRodBuff>(),
-                    ModContent.BuffType<LovestruckBuff>(),
                     ModContent.BuffType<LowGroundBuff>(),
                     ModContent.BuffType<MarkedforDeathBuff>(),
                     ModContent.BuffType<MidasBuff>(),
