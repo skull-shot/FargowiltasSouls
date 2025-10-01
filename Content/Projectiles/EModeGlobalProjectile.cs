@@ -1854,6 +1854,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         break;
 
+                    case ProjectileID.Flamelash:
+                        if (SourceItemType == ItemID.Flamelash && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
+                                projectile.ResetLocalNPCHitImmunity();
+                        }
+                        break;
+
                     default:
                         break;
                 }
