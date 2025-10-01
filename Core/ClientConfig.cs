@@ -20,6 +20,9 @@ namespace FargowiltasSouls.Core
         public bool WikiNotification;
 
         [DefaultValue(true)]
+        public bool MusicModNotification;
+
+        [DefaultValue(true)]
         public bool HideTogglerWhenInventoryIsClosed;
 
         [DefaultValue(true)]

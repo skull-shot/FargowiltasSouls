@@ -215,7 +215,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
 
-            if (!ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
+            if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic1"), Color.LimeGreen);
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic2"), Color.LimeGreen);

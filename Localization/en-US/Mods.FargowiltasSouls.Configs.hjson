@@ -80,6 +80,11 @@ ClientConfig: {
 		Label: Wiki Notification
 		Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
 	}
+
+	MusicModNotification: {
+		Label: Music Mod Notification
+		Tooltip: When enabled, a chat notification for the music mod is sent on entering the world
+	}
 }
 
 SoulConfig: {
