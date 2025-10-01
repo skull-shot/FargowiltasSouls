@@ -578,7 +578,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Player.buffImmune[BuffID.Suffocation] && Player.whoAmI == Main.myPlayer)
             {
                 bool immunity = !Player.armor[0].IsAir && (Player.armor[0].type == ItemID.FishBowl || Player.armor[0].type == ItemID.GoldGoldfishBowl);
-                if (Player.accDivingHelm)
+                if (Player.accDivingHelm || Player.spaceGun)
                     immunity = true;
 
                 bool inLiquid = Collision.DrownCollision(Player.position, Player.width, Player.height, Player.gravDir);

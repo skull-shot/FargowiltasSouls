@@ -61,6 +61,16 @@ namespace FargowiltasSouls.Content.Items
             {
                 return;
             }
+            if (item.type is ItemID.MeteorHelmet or ItemID.MeteorSuit or ItemID.MeteorLeggings)
+            {
+                foreach (var tooltip in tooltips)
+                {
+                    if (tooltip.Name == "SetBonus")
+                    {
+                        tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.SpaceBreathImmunity");
+                    }
+                }
+            }
             EmodeItemBalance.BalanceTooltips(item, ref tooltips);
             if (item.prefix >= PrefixID.Hard && item.prefix <= PrefixID.Warding)
             {

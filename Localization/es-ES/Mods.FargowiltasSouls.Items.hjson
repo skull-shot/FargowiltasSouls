@@ -1543,7 +1543,7 @@ SparklingAdoration: {
 	// DisplayName: Sparkling Adoration
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck and Fake Hearts
+		Grants immunity to Fake Hearts
 		Creates a graze ring around you
 		Enemy projectiles that touch the graze ring increase charge
 		Charge increases your damage by up to 1.25x
@@ -3433,6 +3433,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
