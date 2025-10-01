@@ -17,6 +17,9 @@ namespace FargowiltasSouls.Core
         private const string ModName = "FargowiltasSouls";
 
         [DefaultValue(true)]
+        public bool WikiNotification;
+
+        [DefaultValue(true)]
         public bool HideTogglerWhenInventoryIsClosed;
 
         [DefaultValue(true)]

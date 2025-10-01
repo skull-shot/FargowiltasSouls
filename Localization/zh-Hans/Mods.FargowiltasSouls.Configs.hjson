@@ -75,6 +75,11 @@ ClientConfig: {
 		Label: 光敏模式
 		Tooltip: ""
 	}
+
+	WikiNotification: {
+		// Label: Wiki Notification
+		// Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
+	}
 }
 
 SoulConfig: {

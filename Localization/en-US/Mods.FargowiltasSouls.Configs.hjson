@@ -75,6 +75,11 @@ ClientConfig: {
 		Label: Photosensitivity Mode
 		Tooltip: ""
 	}
+
+	WikiNotification: {
+		Label: Wiki Notification
+		Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
+	}
 }
 
 SoulConfig: {
