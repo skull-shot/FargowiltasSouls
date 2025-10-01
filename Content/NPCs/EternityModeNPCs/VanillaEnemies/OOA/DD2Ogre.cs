@@ -38,8 +38,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             {
                 npc.active = false;
             }
-
-            EModeGlobalNPC.Aura(npc, 500, BuffID.Stinky, false, 188);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

@@ -30,6 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
             //target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 600);
         }
 

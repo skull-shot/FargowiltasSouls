@@ -85,7 +85,7 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 2.5% damage reduction each and attack nearby enemies
 		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
@@ -176,7 +176,7 @@ DarkArtistEnchant: {
 		'''
 		While attacking, fire your next closest weapon's projectile as support
 		The support weapon will fire 1/7 as often as it would normally
-		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
+		Summons a Flameburst that will also fire homing flamebursts while you attack
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -1005,7 +1005,7 @@ BionomicCluster: {
 	// DisplayName: Bionomic Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
@@ -1026,7 +1026,7 @@ BionomicClusterInactive: {
 	// DisplayName: Bionomic Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
@@ -1369,7 +1369,7 @@ NymphsPerfume: {
 	// DisplayName: Nymph's Perfume
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck, Stinky, and Hexed
+		Grants immunity to Hexed
 		You respawn with more life (works from inventory and vanity)
 		Attacks produce lifestealing hearts occasionally
 		'The scent is somewhat overpowering'

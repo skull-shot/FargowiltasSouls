@@ -2162,7 +2162,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = NPC.whoAmI;
         }
 
         public override void HitEffect(NPC.HitInfo hit)
@@ -2195,40 +2196,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 return false;
 
             return base.CanHitNPC(target);
-        }
-
-        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            //if (Item.melee && !ContentModLoaded) damage = (int)(damage * 1.25);
-
-            ModifyHitByAnything(player, ref modifiers);
-        }
-
-        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            //if ((projectile.melee || projectile.minion) && !ContentModLoaded) damage = (int)(damage * 1.25);
-
-            ModifyHitByAnything(Main.player[projectile.owner], ref modifiers);
-        }
-
-        public void ModifyHitByAnything(Player player, ref NPC.HitModifiers hitModifiers)
-        {
-            if (player.loveStruck)
-            {
-                hitModifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
-                {
-                    /*npc.life += damage;
-                    if (npc.life > npc.lifeMax)
-                        npc.life = npc.lifeMax;
-                    CombatText.NewText(npc.Hitbox, CombatText.HealLife, damage);*/
-
-                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
-                    float ai1 = 30 + Main.rand.Next(30);
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage / 5, 0f, Main.myPlayer, NPC.whoAmI, ai1);
-
-                    hitInfo.Null();
-                };
-            }
         }
 
         public override bool CheckDead()

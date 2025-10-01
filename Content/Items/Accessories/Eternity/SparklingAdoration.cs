@@ -42,9 +42,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
 
-            player.buffImmune[BuffID.Lovestruck] = true;
-            player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
-
             if (player.AddEffect<MasoGraze>(Item))
             {
                 fargoPlayer.Graze = true;

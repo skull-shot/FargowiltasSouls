@@ -338,6 +338,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //debuffs
         public bool Hexed;
+        public int HexedInflictor = -1;
         public bool Unstable;
         private int unstableCD;
         public bool Fused;

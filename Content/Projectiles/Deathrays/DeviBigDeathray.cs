@@ -168,7 +168,8 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             target.AddBuff(BuffID.Ichor, 2); //lots of defense down stack to make damage calc consistent
             target.AddBuff(BuffID.WitheredArmor, 2);
             target.AddBuff(BuffID.BrokenArmor, 2);
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 1800);
 
             target.velocity.X = 0;

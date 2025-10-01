@@ -1005,7 +1005,7 @@ BionomicCluster: {
 	DisplayName: Bionomic Cluster
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
@@ -1026,7 +1026,7 @@ BionomicClusterInactive: {
 	DisplayName: Bionomic Cluster (Inactive)
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
@@ -1369,7 +1369,7 @@ NymphsPerfume: {
 	DisplayName: Nymph's Perfume
 	Tooltip:
 		'''
-		Grants immunity to Lovestruck, Stinky, and Hexed
+		Grants immunity to Hexed
 		You respawn with more life (works from inventory and vanity)
 		Attacks produce lifestealing hearts occasionally
 		'The scent is somewhat overpowering'
