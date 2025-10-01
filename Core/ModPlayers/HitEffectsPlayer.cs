@@ -115,7 +115,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 }
 
-                Main.NewText($"{HexedInflictor}, {target.whoAmI}");
                 if (Hexed && HexedInflictor == target.whoAmI)
                 {
                     Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
