@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.Items
             EmodeItemBalance.BalanceTooltips(item, ref tooltips);
             if (item.prefix >= PrefixID.Hard && item.prefix <= PrefixID.Warding)
             {
-                int life = 5;
+                const int life = 5;
                 foreach (TooltipLine tooltip in tooltips)
                 {
                     if (tooltip.Name == "PrefixAccDefense")
