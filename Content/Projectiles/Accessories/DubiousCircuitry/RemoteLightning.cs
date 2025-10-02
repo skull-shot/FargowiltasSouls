@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+﻿using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -29,7 +30,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
         {
             Player player = Main.player[Main.myPlayer];
             int distance = (int)Projectile.Distance(player.Center);
-            if (distance < 60 && !player.immune && player.HasEffect<RemoteControlDR>())
+            if (distance < 60 && player.HasEffect<RemoteControlDR>() && !player.HasBuff<SuperchargedBuff>())
                 Projectile.velocity = Projectile.SafeDirectionTo(player.Center) * 20f;
             return base.PreAI();
         }
