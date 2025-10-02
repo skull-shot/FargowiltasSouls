@@ -67,6 +67,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= 0f;
+            if (target.HasEffect<RemoteControlDR>() && !target.HasBuff<SuperchargedBuff>())
+                modifiers.Knockback *= 0f;
             //doing it like this bc scaled projectile damage doesnt work?
             if (Main.masterMode) modifiers.SourceDamage.Flat += 270;
             else if (Main.expertMode) modifiers.SourceDamage.Flat += 180;
