@@ -25,8 +25,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)

@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon
                 Projectile.ai[0] = -1;
             }
             Asset<Texture2D> t = TextureAssets.Projectile[Type];
-            Asset<Texture2D> head = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", "BoneSpearHead");
+            Asset<Texture2D> head = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Enemies/Vanilla/Dungeon", "BoneSpearHead").Asset;
             Vector2 origin = t.Size() - new Vector2(16, 16);
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;

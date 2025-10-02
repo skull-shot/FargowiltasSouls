@@ -24,9 +24,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            player.AddEffect<JumpsDisabled>(item);
-            //if (player.AddEffect<JumpsDisabled>(item))
-                //modPlayer.JumpsDisabled = modPlayer.JumpsDisabledBuffer = true;
 
             modPlayer.FlightMasterySoul = true;
             player.wingTimeMax = 999999;
@@ -37,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FlightMasteryGravity>(item);
 
             //hover
-            if (player.controlDown && player.controlJump && !player.mount.Active)
+            if (player.wingTime > 0 && player.controlDown && player.controlJump && !player.mount.Active)
             {
                 player.position.Y -= player.velocity.Y;
                 if (player.velocity.Y > 0.1f)

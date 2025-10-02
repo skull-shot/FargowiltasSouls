@@ -27,25 +27,18 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
         public override void AI()
         {
-            //Projectile.ai[0] += 1f;
-
-            //if (Projectile.ai[0] >= 50f)
-            //{
-            //	Projectile.ai[0] = 50f;
-            //	Projectile.velocity.Y += 0.5f;
-            //}
-            //if (Projectile.ai[0] >= 15f)
-            //{
-            //	Projectile.ai[0] = 15f;
-            //	Projectile.velocity.Y += 0.1f;
-            //}
+            if (Projectile.ai[1] == 1) // from cactus staff
+            {
+                Projectile.ai[1] = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    Dust c = Dust.NewDustDirect(Projectile.Center - Projectile.velocity, Projectile.width, Projectile.height, DustID.JunglePlants, Scale: 1.1f);
+                    c.noGravity = true;
+                    c.velocity *= 3f;
+                }
+            }
 
             Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + 1.57f;
-
-            //if (Projectile.velocity.Y > 16f)
-            //{
-            //	Projectile.velocity.Y = 16f;
-            //}
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -53,6 +46,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             if (Projectile.ai[0] == 1)
             {
                 target.FargoSouls().Needled = true;
+            }
+            else if (Projectile.ai[1] == 1)
+            {
+                if (Main.rand.NextBool(3))
+                    target.AddBuff(BuffID.Poisoned, Main.rand.Next(60, 120));
             }
         }
         public override bool PreDraw(ref Color lightColor)
@@ -62,13 +60,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         }
         public override void OnKill(int timeLeft)
         {
-            int num11;
-            for (int num420 = 0; num420 < 6; num420 = num11 + 1)
+            for (int i = 0; i < 4; i++)
             {
-                int num421 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Everscream, 0f, 0f, 0, default, 1f);
-                Main.dust[num421].noGravity = true;
-                Main.dust[num421].scale = Projectile.scale;
-                num11 = num420;
+                Dust c = Main.dust[Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.JunglePlants, Scale: Main.rand.NextBool(2) ? 0.8f : 1f)];
+                c.noGravity = true;
             }
         }
     }

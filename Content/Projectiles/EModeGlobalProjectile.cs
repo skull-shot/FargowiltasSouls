@@ -197,9 +197,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.idStaticNPCHitCooldown = 10;
                     projectile.penetrate = 45;
                     break;
-                case ProjectileID.HoundiusShootiusFireball:
-                    projectile.extraUpdates += 1;
-                    break;
                 case ProjectileID.PossessedHatchet:
                     projectile.usesLocalNPCImmunity = true;
                     projectile.localNPCHitCooldown = 30;
@@ -222,7 +219,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile.owner.IsWithinBounds(Main.maxPlayers) && projectile is not null && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
             {
                 if (source is not null)
                 {
@@ -816,6 +813,20 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (SourceItemType == ItemID.DayBreak && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType))
                         projectile.DamageType = DamageClass.Melee;
                     break;
+
+                case ProjectileID.BookOfSkullsSkull:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.BookofSkulls && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            bool Tracking = projectile.ai[1] > 0;
+                            projectile.tileCollide = !Tracking;
+                            projectile.netUpdate = true;
+                        }
+                    }
+                    break;
+
                 default:
                     break;
 
@@ -1501,7 +1512,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (projectile.owner == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && EmodeItemBalance.HasEmodeChange(player, ItemID.FlowerPow))
+                        if (projectile.owner == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f && SourceItemType == ItemID.FlowerPow && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             projectile.localAI[0] += 2f; // tripled petal firerate
                             projectile.netUpdate = true;
@@ -1513,19 +1524,22 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (projectile.owner.IsWithinBounds(Main.maxPlayers))
                     {
                         Player player = Main.player[projectile.owner];
-                        if (projectile.owner == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.ScourgeoftheCorruptor))
+                        if (projectile.owner == Main.myPlayer && SourceItemType == ItemID.ScourgeoftheCorruptor && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
-                            const int TimeUntilSplit = 40; // 0.66 seconds
-                            const float GrazeDistanceSquared = 3600f; // 60f squared
-                            for (int npc = 0; npc < Main.maxNPCs; npc++)
+                            const float GrazeDistanceSQ = 2500f; // 50f squared
+                            double velSquared = (double)projectile.velocity.LengthSquared();
+                            for (int npc = 0; npc < Main.maxNPCs && velSquared != 0; npc++)
                             {
                                 NPC nPC = Main.npc[npc];
                                 if (nPC.CanBeChasedBy(projectile))
                                 {
-                                    float targetDistanceSquared = Vector2.DistanceSquared(projectile.Center, nPC.Center);
-                                    if (targetDistanceSquared < GrazeDistanceSquared && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
+                                    float targetDistanceSQ = FargoSoulsUtil.Distance(projectile.Hitbox, nPC.Hitbox, false); // Accounts for distance between HITBOXES, NOT Entity.Center
+                                    if (targetDistanceSQ < GrazeDistanceSQ && Collision.CanHit(projectile.Center, 1, 1, nPC.position, nPC.width, nPC.height))
                                     {
-                                        projectile.timeLeft = TimeUntilSplit;
+                                        const double LifeTimeFactor = 9000;
+                                        int TimeUntilSplit = (int)Math.Round(LifeTimeFactor / (velSquared * projectile.MaxUpdates));
+                                        projectile.timeLeft = TimeUntilSplit; // Account for velocity and extra updates so it splits around the same range even with variable speed
+                                        projectile.netUpdate = true;
                                         break;
                                     }
                                 }
@@ -1622,13 +1636,6 @@ namespace FargowiltasSouls.Content.Projectiles
                         if (SourceItemType == ItemID.RainbowCrystalStaff && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             modifiers.SourceDamage *= 0.6f;
-                        }
-                        break;
-
-                    case ProjectileID.HoundiusShootiusFireball:
-                        if (SourceItemType == ItemID.HoundiusShootius && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
-                        {
-                            modifiers.SourceDamage *= 1.2f;
                         }
                         break;
 
@@ -1818,14 +1825,14 @@ namespace FargowiltasSouls.Content.Projectiles
                                 {
                                     projectile.ai[0] = 0; //reset vanilla bounceback state 
                                     projectile.ai[1] = 0;
-                                    projectile.damage = (int)(projectile.damage * 0.8);
+                                    projectile.damage = (int)Math.Ceiling(projectile.damage * 0.8);
 
                                     if (ricotarget != null && ricotarget.CanBeChasedBy()) //ricochet to other npc
                                         projectile.velocity = 12 * Vector2.UnitX.RotateTowards(projectile.DirectionTo(ricotarget.Center).ToRotation(), 4);
                                     else if (target.CanBeChasedBy()) //if no other npcs, home on original target, deteriorates bounce count and dmg further
                                     {
                                         projectile.ai[2] += 3;
-                                        projectile.damage = (int)(projectile.damage * 0.625); // 0.5x after original mult
+                                        projectile.damage = (int)Math.Ceiling(projectile.damage * 0.625); // 0.5x after original mult
                                         projectile.velocity = 12 * Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 10);
                                     }
                                 }
@@ -1844,6 +1851,15 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else target.buffTime[i] = 300;
                                 }
                             }
+                        }
+                        break;
+
+                    case ProjectileID.Flamelash:
+                    case ProjectileID.RainbowRodBullet:
+                        if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
+                                projectile.ResetLocalNPCHitImmunity();
                         }
                         break;
 
@@ -1964,7 +1980,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Skull:
-                    target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
+                    if (sourceNPC != null && sourceNPC.type == NPCID.SkeletronHead)
+                        target.AddBuff(ModContent.BuffType<LethargicBuff>(), 120);
                     if (sourceNPC != null && sourceNPC.type == NPCID.DungeonGuardian)
                         target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
                     break;
@@ -2038,6 +2055,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.RuneBlast:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.RuneWizard)
                     {
@@ -2106,6 +2124,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.LostSoulHostile:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.InfernoHostileBlast:
@@ -2290,6 +2309,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.DD2DarkMageBolt:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.IceSpike:

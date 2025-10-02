@@ -110,6 +110,7 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		“多汁解渴！”
 		'''
+	// VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -818,6 +819,16 @@ EarthForce: {
 		[i:FargowiltasSouls/CobaltEnchant] 按住下键快速下落
 		“盖亚的祝福照耀着你”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
+		[i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
+		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
+		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
+		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
+		'Gaia's blessing shines upon you'
+		''' */
 }
 
 LifeForce: {
@@ -834,6 +845,20 @@ LifeForce: {
 		[i:FargowiltasSouls/BeeEnchant] 获得蜜蜂背包效果
 		“罕有生灵敢违背你的意愿”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
+		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
+		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
+		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
+		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (Works from inventory and vanity)
+		'Rare is a living thing that dare disobey your will'
+		''' */
+	// VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
@@ -851,11 +876,33 @@ NatureForce: {
 		[i:FargowiltasSouls/RainEnchant] 产生一把伞，可从上方抵挡最多200点伤害
 		“走遍荒野的每一个秘密角落”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
+		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
+		[i:FargowiltasSouls/MoltenEnchant] Deal 1.15x damage to enemies in the aura
+		[i:FargowiltasSouls/ChlorophyteEnchant] Occasionally fire leaf crystal shots at enemies in the aura
+		[i:FargowiltasSouls/ShroomiteEnchant] Leaf crystal shots spawn a cloud of mushrooms on hit
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushroom Power grants +12% damage and crit and increases your aura size
+		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
+		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
+		'Tapped into every secret of the wilds'
+		''' */
 }
 
 DeathForce: {
 	// DisplayName: Force of Death
 	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/SpookyEnchant] Dashing into enemies heals you and inflicts them with Marked for Death
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed, stronger when not moving
+		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
+		'Dark, Darker, Yet Darker'
+		''' */
+	/* RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
@@ -909,6 +956,17 @@ TimberForce: {
 		[i:FargowiltasSouls/WoodEnchant] 根据图鉴完成情况获得商店折扣（在背包和装饰栏中也会生效）
 		“很硬”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
+		[i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
+		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
+		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
+		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
+		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
+		[i:FargowiltasSouls/WoodEnchant] You gain a shop discount based on bestiary completion (works in inventory and vanity)
+		'Extremely rigid'
+		''' */
 }
 
 WillForce: {
@@ -1050,7 +1108,7 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
-		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
@@ -1076,7 +1134,7 @@ LithosphericClusterInactive: {
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
-		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
@@ -1120,7 +1178,7 @@ ConcentratedRainbowMatter: {
 		'''
 }
 
-DarkenedHeart: {
+RottingHeart: {
 	DisplayName: 暗黑之心
 	Tooltip:
 		'''
@@ -1180,10 +1238,9 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1211,9 +1268,14 @@ ChaliceofTheMoon: {
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
-	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
-	/* ExpandedTooltip:
+	/* RuminateTooltip:
 		'''
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory and vanity)
+		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
+		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
@@ -1454,10 +1516,10 @@ PureHeart: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/PureHeart]免疫生物群落带来的减益
-		免疫[i:FargowiltasSouls/DarkenedHeart]腐败和[i:FargowiltasSouls/GuttedHeart]嗜血减益
-		[i:FargowiltasSouls/DarkenedHeart]增加转向速度和10%移动速度
-		[i:FargowiltasSouls/DarkenedHeart]每攻击几次，你就会产生几个追踪敌人的迷你噬魂者
-		[i:FargowiltasSouls/DarkenedHeart]迷你噬魂者会造成升华减益，持续造成伤害并降低敌人防御
+		免疫[i:FargowiltasSouls/RottingHeart]腐败和[i:FargowiltasSouls/GuttedHeart]嗜血减益
+		[i:FargowiltasSouls/RottingHeart]增加转向速度和10%移动速度
+		[i:FargowiltasSouls/RottingHeart]每攻击几次，你就会产生几个追踪敌人的迷你噬魂者
+		[i:FargowiltasSouls/RottingHeart]迷你噬魂者会造成升华减益，持续造成伤害并降低敌人防御
 		[i:FargowiltasSouls/GuttedHeart]召唤阻挡伤害的飞眼怪，不移动时飞眼怪生成速度加快
 		[i:FargowiltasSouls/GuttedHeart]每10-15秒生成一个新的飞眼怪，最多同时存在5个
 		[i:FargowiltasSouls/GuttedHeart]增加10%最大生命值
@@ -1611,6 +1673,14 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/NecromanticBrew]召唤两个骷髅王手臂重击敌人
 		“霸权难保”
 		'''
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
+		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
+		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
+		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
+		'Supremacy not necessarily guaranteed'
+		''' */
 }
 
 TimsConcoction: {
@@ -1738,6 +1808,19 @@ DimensionSoul: {
 		拥有克苏鲁护盾和忍者大师装备效果
 		“泰拉瑞亚的维度触手可及”
 		'''
+	/* RuminateTooltip:
+		'''
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
+		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
+		Allows Supersonic running, flying, dashing, climbing, swimming, and waterwalking
+		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
+		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin][i:SporeSac][i:BoneHelm] you release damaging fog at nearby enemies
+		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
+		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
+		'The dimensions of Terraria at your fingertips'
+		''' */
 }
 
 EternitySoul: {
@@ -1793,6 +1876,21 @@ MasochistSoul: {
 		[i:FargowiltasSouls/SandsofTime]使用时传送到最后的死亡地点
 		“拥抱精通，拥抱永恒”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
+		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
+		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
+		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
+		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts
+		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
+		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
+		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
+		'Embrace mastery, embrace eternity'
+		''' */
 	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe]获得大部分一般药水和增益站效果"
 }
 
@@ -1849,6 +1947,28 @@ TerrariaSoul: {
 		[i:FargowiltasSouls/CosmoForce] 增加你的移动速度和加速度并降低你的动量，星尘静滞冷却时间为60秒		
 		“泰拉之主，天地共证”
 		'''
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
+		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
+		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
+		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
+		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
+		[i:FargowiltasSouls/EarthForce] Debuffs deal 100% more damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
+		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
+		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
+		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, your minions can crit for 1.25x damage, effects of Hive Pack
+		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
+		[i:FargowiltasSouls/SpiritForce] Upon reaching zero health, you will revive with 300 health
+		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
+		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, and slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
+		[i:FargowiltasSouls/WillForce] Enemies may drop extra loot
+		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
+		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
+		'A true master of Terraria'
+		''' */
 }
 
 TrawlerSoul: {
@@ -1879,6 +1999,17 @@ UniverseSoul: {
 		拥有狙击镜、 天界手铐、和魔力花效果
 		“诸天也向你俯首”
 		'''
+	/* RuminateTooltip:
+		'''
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1
+		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
+		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
+		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
+		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
+		'The heavens themselves bow to you'
+		''' */
 }
 
 WorldShaperSoul: {
@@ -3432,6 +3563,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
@@ -3755,6 +3887,12 @@ CactusMimicBanner: {
 }
 
 CactusStaff: {
-	// DisplayName: Cactus Staff
-	// Tooltip: Launches a bouncing cactus ball
+	// DisplayName: Rolling Cactus Staff
+	/* Tooltip:
+		'''
+		Launches a bouncing cactus ball
+		'They see me rollin'...'
+		''' */
 }
+
+// Ruminate: "[c/FF3399:Hold {0} for more details]"

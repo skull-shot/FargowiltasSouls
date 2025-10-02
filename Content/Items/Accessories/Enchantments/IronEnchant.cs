@@ -66,7 +66,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<IronEnchant>();
-
+        public static int GrabRangeBonus(Player player)
+        {
+            int rangeBonus = 160;
+            if (player.ForceEffect<IronEquippedEffect>())
+                rangeBonus = 320;
+            if (player.FargoSouls().TerrariaSoul)
+                rangeBonus = 640;
+            return rangeBonus;
+        }
     }
     public class IronEffect : AccessoryEffect
     {

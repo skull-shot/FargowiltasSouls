@@ -118,8 +118,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool GalacticMinionsDeactivated = false;
         public bool GalacticMinionsDeactivatedBuffer = false; // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
-        //public bool JumpsDisabled = false;
-        //public bool JumpsDisabledBuffer = false;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
 
         public int DeactivatedMinionEffectCount = 0;
 
@@ -244,8 +242,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int FallthroughCD;
         public int AgitatingLensCD;
         public bool BerserkedFromAgitation = false;
-        public Item DarkenedHeartItem;
-        public int DarkenedHeartCD;
+        public Item RottingHeartItem;
+        public int RottingHeartCD;
         public int GuttedHeartCD = 60; //should prevent spawning despite disabled toggle when loading into world
         public Item NecromanticBrewItem;
         public float NecromanticBrewRotation;
@@ -339,6 +337,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //debuffs
         public bool Hexed;
+        public int HexedInflictor = -1;
         public bool Unstable;
         private int unstableCD;
         public bool Fused;
@@ -413,6 +412,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool OxygenTank;
 
         public int DreadShellVulnerabilityTimer;
+        public bool LanternGuarding;
         public int shieldTimer;
         public int shieldCD;
         public int shieldHeldTime;

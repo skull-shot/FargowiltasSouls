@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.UI.Elements
 
             bool disabledByMinos = Effect.MinionEffect && modPlayer.GalacticMinionsDeactivated;
             bool disabledByPresence = modPlayer.MutantPresence && (Effect.MutantsPresenceAffects || Effect.MinionEffect);
-            bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled);
+            bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled) || (Effect.ExtraJumpEffect && modPlayer.Toggler_ExtraJumpsDisabled);
             bool toggled = Main.LocalPlayer.GetToggleValue(Effect, true);
 
             spriteBatch.Draw(FargoAssets.UI.Toggler.CheckBox.Value, position, Color.White);
@@ -209,6 +209,44 @@ namespace FargowiltasSouls.Content.UI.Elements
                 spriteBatch.Draw(FargoAssets.UI.Toggler.CheckMark.Value, position, Color.White);
 
             string text = Language.GetTextValue($"Mods.FargowiltasSouls.Toggler.DisableAllMinionEffects");
+            position += new Vector2(Width.Pixels * Main.UIScale, 0);
+            position += new Vector2(CheckboxTextSpace, 0);
+            position += new Vector2(0, Font.MeasureString(text).Y * 0.175f);
+            Color color = Color.White;
+            Utils.DrawBorderString(spriteBatch, text, position, color);
+        }
+    }
+    public class ExtraJumpsDisabledToggle : UIElement
+    {
+        public const int CheckboxTextSpace = UIToggle.CheckboxTextSpace;
+
+        public static DynamicSpriteFont Font => UIToggle.Font;
+
+        public ExtraJumpsDisabledToggle()
+        {
+
+            Width.Set(19, 0);
+            Height.Set(21, 0);
+        }
+
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            base.DrawSelf(spriteBatch);
+            Vector2 position = GetDimensions().Position();
+            Player player = Main.LocalPlayer;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+
+            if (IsMouseHovering && Main.mouseLeft && Main.mouseLeftRelease)
+            {
+                modPlayer.Toggler_ExtraJumpsDisabled = !modPlayer.Toggler_ExtraJumpsDisabled;
+            }
+
+            spriteBatch.Draw(FargoAssets.UI.Toggler.CheckBox.Value, position, Color.White);
+
+            if (modPlayer.Toggler_ExtraJumpsDisabled)
+                spriteBatch.Draw(FargoAssets.UI.Toggler.CheckMark.Value, position, Color.White);
+
+            string text = Language.GetTextValue($"Mods.FargowiltasSouls.Toggler.DisableAllExtraJumpEffects");
             position += new Vector2(Width.Pixels * Main.UIScale, 0);
             position += new Vector2(CheckboxTextSpace, 0);
             position += new Vector2(0, Font.MeasureString(text).Y * 0.175f);

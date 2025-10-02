@@ -15,6 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Bone);
+            Projectile.DamageType = DamageClass.Default;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 900;
             Projectile.tileCollide = true;
@@ -29,22 +30,16 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             bool slowdown = true;
             if (++Projectile.localAI[2] > 90f)
             {
-
-                int p = player.whoAmI;
-                if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)
+                if (player.active && !player.dead && !player.ghost)
                 {
-                    if (Main.player[p].HasEffect<IronEquippedEffect>() && Projectile.Distance(Main.player[p].Center) < 300)
-                    {
-                        Projectile.position += Projectile.DirectionTo(Main.player[p].Center) * 2f;
-                    }
-
-                    if (Main.player[p].Distance(Projectile.Center) < 16 * 5)
+                    int distance = player.HasEffect<IronEquippedEffect>() ? 80 + (IronEquippedEffect.GrabRangeBonus(player) / 2) : 80;
+                    if (player.Distance(Projectile.Center) < distance)
                     {
                         slowdown = false;
-                        Projectile.velocity = Projectile.SafeDirectionTo(Main.player[p].Center) * 9f;
+                        Projectile.velocity = Projectile.SafeDirectionTo(player.Center) * 9f;
                         Projectile.timeLeft++;
 
-                        if (Projectile.Colliding(Projectile.Hitbox, Main.player[p].Hitbox))
+                        if (Projectile.Colliding(Projectile.Hitbox, player.Hitbox))
                         {
                             player.FargoSouls().HealPlayer(15);
                             Projectile.Kill();

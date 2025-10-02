@@ -85,7 +85,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 npc.ai[1] = 1000; //disable first tick vanilla constellation spawn
             }
             npc.buffImmune[BuffID.Suffocation] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
         }
         public bool AnyPlayerWithin(NPC npc, int range)
         {
@@ -128,7 +127,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     return;
                 npc.lifeMax = npc.life = MaxHP;
                 npc.damage = Damage;
-                npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
                 npc.netUpdate = true;
             }
             //fix the funny where solar pillar rockets down when killed mid-dive attack

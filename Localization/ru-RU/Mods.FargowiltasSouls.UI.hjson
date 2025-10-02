@@ -11,6 +11,7 @@ RightClickSelectDifficulty: ПКМ, чтобы выбрать сложность
 HoldShift: Удерживайте Shift, чтобы узнать больше
 Close: Закрыть
 OpenKeybinds: Открыть настройки клавиш
+ActiveSkillMenuButton: Открыть активные умения
 
 TitleLinks: {
 	// Patreon: Patreon

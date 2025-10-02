@@ -1035,9 +1035,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
+            LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.EOW");
             if (Main.getGoodWorld)
             {
-                target.KillMe(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.EOW", target.name)), 999999, 0);
+                target.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(target.name)), 999999, 0);
             }
         }
 

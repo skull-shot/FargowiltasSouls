@@ -61,17 +61,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
         public override void SafeModifyTooltips(List<TooltipLine> tooltips)
         {
-            if (Main.keyState.IsKeyDown(Keys.LeftShift))
-            {
-                TooltipLine line = new(Mod, "tooltip", Language.GetTextValue($"Mods.{Mod.Name}.Items.{Name}.ExpandedTooltip"));
-                tooltips.Add(line);
-            }
-
-            else
-            {
-                TooltipLine line = new(Mod, "tooltip", Language.GetTextValue($"Mods.{Mod.Name}.Items.{Name}.HoldShift"));
-                tooltips.Add(line);
-            }
+            
         }
     }
     public class ChalicePotionEffect : AccessoryEffect

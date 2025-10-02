@@ -23,6 +23,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             ];
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new Terraria.DataStructures.WingStats(1000);
         }
+        public override void UpdateInventory(Player player) => player.AddEffect<CactusPassiveEffect>(Item);
+        public override void UpdateVanity(Player player) => player.AddEffect<CactusPassiveEffect>(Item);
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -31,6 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             modPlayer.LifeForceActive = true;
             // Cactus Enchant
             player.AddEffect<CactusEffect>(Item);
+            player.AddEffect<CactusPassiveEffect>(Item);
             // Pumpkin Enchant
             if (!player.HasEffect<LifeForceEffect>())
                 player.AddEffect<PumpkinEffect>(Item);
@@ -49,7 +52,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 BeetleEnchant.AddEffects(player, Item);
 
             //hover
-            if (player.controlDown && player.controlJump && !player.mount.Active)
+            if (player.wingTime > 0 && player.controlDown && player.controlJump && !player.mount.Active)
             {
                 player.position.Y -= player.velocity.Y;
                 if (player.velocity.Y > 0.1f)

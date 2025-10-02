@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
                 {
                     Player target = Main.player[(int)Projectile.ai[2]];
                     // remove grab if immune to damage
-                    if (target.immune)
+                    if (target.immune || target.creativeGodMode || PlayerLoader.CanBeHitByProjectile(target, Projectile) == false || PlayerLoader.ImmuneTo(target, Terraria.DataStructures.PlayerDeathReason.ByProjectile(target.whoAmI, Projectile.identity), ImmunityCooldownID.General, true) == true)
                         Projectile.ai[2] = -1;
 
                     if (!target.dead && target.active)

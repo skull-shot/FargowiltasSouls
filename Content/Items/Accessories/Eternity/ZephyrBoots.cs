@@ -45,8 +45,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<ZephyrJump>(Item);
             player.jumpBoost = true;
             player.noFallDmg = true;
-
-            player.AddEffect<JumpsDisabled>(Item);
         }
 
         public override void AddRecipes()
@@ -60,21 +58,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 .Register();
         }
     }
-    public class JumpsDisabled : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
-        public override int ToggleItemType => ModContent.ItemType<ZephyrBoots>();
-        public override void PostUpdateEquips(Player player)
-        {
-            if (player.wingTime > 0)
-                player.ConsumeAllExtraJumps();
-        }
-    }
     public class ZephyrJump : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<DeviEnergyHeader>();
         public override int ToggleItemType => ModContent.ItemType<ZephyrBoots>();
-        
+        public override bool ExtraJumpEffect => true;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)

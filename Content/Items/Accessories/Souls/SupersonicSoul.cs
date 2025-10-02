@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.noFallDmg = true;
 
             //bundle
-            if (Player.AddEffect<SupersonicJumps>(item) && Player.wingTime == 0)
+            if (Player.AddEffect<SupersonicJumps>(item))
             {
                 Player.GetJumpState(ExtraJump.CloudInABottle).Enable();
                 Player.GetJumpState(ExtraJump.SandstormInABottle).Enable();
@@ -106,8 +106,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             HallowedPendant.ActiveEffects(Player, item);
             // BoC
             //player.AddEffect<DefenseBrainEffect>(item);
-
-            player.AddEffect<JumpsDisabled>(item);
         }
 
         public override void AddRecipes()
@@ -152,6 +150,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     {
         public override Header ToggleHeader => Header.GetHeader<SupersonicHeader>();
         public override int ToggleItemType => ModContent.ItemType<SupersonicSoul>();
+        public override bool ExtraJumpEffect => true;
     }
     public class SupersonicCarpet : AccessoryEffect
     {

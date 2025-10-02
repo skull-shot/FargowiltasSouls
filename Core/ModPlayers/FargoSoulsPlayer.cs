@@ -17,6 +17,7 @@ using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -112,6 +113,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool Toggler_ExtraAttacksDisabled = false;
         public bool Toggler_MinionsDisabled = false;
+        public bool Toggler_ExtraJumpsDisabled = false;
         public int ToggleRebuildCooldown = 0;
         public int EmodeToggleCooldown = 0;
         public bool UsingAnkh => Player.HeldItem.type == ModContent.ItemType<AccursedAnkh>() && Player.ItemAnimationActive;
@@ -146,6 +148,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (ConcentratedRainbowMatter) playerData.Add("ConcentratedRainbowMatter");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
+            if (Toggler_ExtraJumpsDisabled) playerData.Add("Toggler_ExtraJumpsDisabled");
             if (HasEquippedSkill) playerData.Add("HasEquippedSkill");
 
             tag.Add($"{Mod.Name}.{Player.name}.Data", playerData);
@@ -188,6 +191,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             ConcentratedRainbowMatter = playerData.Contains("ConcentratedRainbowMatter");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
+            Toggler_ExtraJumpsDisabled = playerData.Contains("Toggler_ExtraJumpsDisabled");
             HasEquippedSkill = playerData.Contains("HasEquippedSkill");
 
             List<string> disabledToggleNames = tag.GetList<string>($"{Mod.Name}.{Player.name}.TogglesOff").ToList();
@@ -209,7 +213,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
 
-            if (!ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
+            if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic1"), Color.LimeGreen);
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic2"), Color.LimeGreen);
@@ -245,7 +249,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
+            if (ClientConfig.Instance.WikiNotification)
+                Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
 
             if (Toggler.CanPlayMaso)
             {
@@ -377,19 +382,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
             GalacticMinionsDeactivatedBuffer = false;
 
-            /*
-            if (!JumpsDisabledBuffer)
-            {
-                JumpsDisabled = false;
-            }
-            JumpsDisabledBuffer = false;
-            */
-
             ForceEffects?.Clear();
 
             //maso
             SlimyShieldItem = null;
-            DarkenedHeartItem = null;
+            RottingHeartItem = null;
             NecromanticBrewItem = null;
             DeerSinewNerf = false;
             PureHeart = false;
@@ -406,6 +403,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             PlanterasChild = false;
             CrystalSkull = false;
             PungentEyeball = false;
+            LanternGuarding = false;
             LihzahrdTreasureBoxItem = null;
             BetsysHeartItem = null;
             BetsyDashing = false;
@@ -622,7 +620,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             chillLength = 0;
 
             SlimyShieldFalling = false;
-            DarkenedHeartCD = 60;
+            RottingHeartCD = 60;
             GuttedHeartCD = 60;
             IsDashingTimer = 0;
             GroundPound = 0;
@@ -1074,7 +1072,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private PlayerDeathReason DeathByLocalization(string key)
         {
-            return PlayerDeathReason.ByCustomReason(Language.GetTextValue($"Mods.FargowiltasSouls.DeathMessage.{key}", Player.name));
+            LocalizedText DeathText = Language.GetText($"Mods.FargowiltasSouls.DeathMessage.{key}");
+            return PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(Player.name));
         }
 
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
@@ -1216,20 +1215,21 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (GuardRaised)
             {
-                Player.bodyFrame.Y = Player.bodyFrame.Height * 10;
+                drawInfo.drawPlayer.shieldRaised = true;
                 if (shieldTimer > 0)
                 {
-                    List<int> shaders = [];
-                    if (Player.HasEffect<SilverEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.ReflectiveSilverDye));
-                    if (Player.HasEffect<DreadShellEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.BloodbathDye));
+                    int shader = 0;
                     if (Player.HasEffect<PumpkingsCapeEffect>())
-                        shaders.Add(GameShaders.Armor.GetShaderIdFromItemId(ItemID.PixieDye));
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.PixieDye);
+                    else if (Player.HasEffect<LithosphericEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.PurpleOozeDye);
+                    else if (Player.HasEffect<DreadShellEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.BloodbathDye);
+                    else if (Player.HasEffect<SilverEffect>())
+                        shader = GameShaders.Armor.GetShaderIdFromItemId(ItemID.ReflectiveSilverDye);
 
-                    if (shaders.Count > 0)
+                    if (shader != 0)
                     {
-                        int shader = shaders[(int)(Main.GameUpdateCount / 4 % shaders.Count)];
                         drawInfo.cBody = shader;
                         drawInfo.cHead = shader;
                         drawInfo.cLegs = shader;
@@ -1586,6 +1586,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             defaultPacket.Write((byte)Player.whoAmI);
             defaultPacket.Write(Toggler_ExtraAttacksDisabled);
             defaultPacket.Write(Toggler_MinionsDisabled);
+            defaultPacket.Write(Toggler_ExtraJumpsDisabled);
             defaultPacket.Send(toWho, fromWho);
 
             foreach (KeyValuePair<AccessoryEffect, bool> toggle in TogglesToSync)

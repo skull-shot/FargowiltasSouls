@@ -193,7 +193,7 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         LeadingConditionRule lastEater = new(new Conditions.LegacyHack_IsABoss());
                         emodeRule.OnSuccess(lastEater);
-                        lastEater.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<DarkenedHeart>()));
+                        lastEater.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<RottingHeart>()));
 
                         //to make up for no loot until dead
                         lastEater.OnSuccess(ItemDropRule.Common(ItemID.ShadowScale, 1, 60, 60));
@@ -219,6 +219,7 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.KingSlime:
                     {
                         emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<SlimyShield>()));
+                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Gel, 1, 50, 100));
                     }
                     break;
                 case NPCID.CultistBoss:

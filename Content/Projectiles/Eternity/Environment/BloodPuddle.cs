@@ -151,7 +151,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Asset<Texture2D> t = TextureAssets.Npc[Type];
-            Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril");
+            Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril").Asset;
             int frameHeight = t.Height() / Main.npcFrameCount[Type];
             // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 

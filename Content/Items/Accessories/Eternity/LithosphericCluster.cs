@@ -14,7 +14,6 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    [AutoloadEquip(EquipType.Shield)]
     public class LithosphericCluster : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
@@ -74,13 +73,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             CreateRecipe()
 
-            .AddIngredient<SecurityWallet>()
-            .AddIngredient<WyvernFeather>()
-            .AddIngredient<MysticSkull>()
-            .AddIngredient<WretchedPouch>()
             .AddIngredient<CrystalSkull>()
             .AddIngredient<DreadShell>()
-            .AddIngredient(ItemID.SpectreBar, 5)
+            .AddIngredient<WretchedPouch>()
+            .AddIngredient<WyvernFeather>()
+            .AddIngredient<MysticSkull>()
+            .AddIngredient<SecurityWallet>()
+            .AddIngredient(ItemID.SpectreBar, 10)
+            .AddIngredient(ItemID.SoulofNight, 15)
             .AddIngredient<DeviatingEnergy>(10)
 
             .AddTile(TileID.MythrilAnvil)
@@ -106,7 +106,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             return LithosphericEffect.BaseDamage(Main.LocalPlayer);
         }
     }
-    [AutoloadEquip(EquipType.Shield)]
     public class LithosphericClusterInactive : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
@@ -161,6 +160,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<LithosphericCluster>();
-        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 50);
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 70);
     }
 }
