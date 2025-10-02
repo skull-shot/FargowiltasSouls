@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.UI
         public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex - 1;
         public override string InterfaceLayerName => "Fargos: Active Skill Menu Button";
         public UIImage Icon;
-        public FargoUIHoverTextImageButton IconHighlight;
+        public UIHoverTextImageButton IconHighlight;
         //public const int x = 495;
         //public const int y = -112;
         public override void UpdateUI()
@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.UI
             Icon.Top.Set(y, 0);
             Append(Icon);
 
-            IconHighlight = new FargoUIHoverTextImageButton(FargoAssets.UI.ActiveSkillMenu.ActiveSkillMenuButtonHover.Asset, Language.GetTextValue("Mods.FargowiltasSouls.UI.ActiveSkillMenuButton"));
+            IconHighlight = new UIHoverTextImageButton(FargoAssets.UI.ActiveSkillMenu.ActiveSkillMenuButtonHover.Asset, Language.GetTextValue("Mods.FargowiltasSouls.UI.ActiveSkillMenuButton"));
             IconHighlight.Left.Set(0, 0);
             IconHighlight.Top.Set(0, 0);
             IconHighlight.SetVisibility(1f, 0);
