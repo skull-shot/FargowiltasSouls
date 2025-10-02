@@ -242,8 +242,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int FallthroughCD;
         public int AgitatingLensCD;
         public bool BerserkedFromAgitation = false;
-        public Item DarkenedHeartItem;
-        public int DarkenedHeartCD;
+        public Item RottingHeartItem;
+        public int RottingHeartCD;
         public int GuttedHeartCD = 60; //should prevent spawning despite disabled toggle when loading into world
         public Item NecromanticBrewItem;
         public float NecromanticBrewRotation;

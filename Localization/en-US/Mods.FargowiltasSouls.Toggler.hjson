@@ -132,7 +132,7 @@ RemoteControlDR: Supercharge When Hit
 ProbeMinionEffect: Probes Minion
 RemoteLightningEffect: Lightning Strike
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
-DarkenedHeartEaters: Tiny Eaters
+RottingHeartEaters: Tiny Eaters
 GuttedHeartMinions: Creeper Shield
 GelicWingSpikes: Gelic Spikes
 GelicWingJump: Gelic Jump

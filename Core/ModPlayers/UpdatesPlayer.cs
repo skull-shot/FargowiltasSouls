@@ -263,7 +263,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.runSlowdown += 7f;
             }
 
-            if (DarkenedHeartItem != null)
+            if (RottingHeartItem != null)
             {
                 if (!IsStillHoldingInSameDirectionAsMovement)
                     Player.runSlowdown += 0.2f;

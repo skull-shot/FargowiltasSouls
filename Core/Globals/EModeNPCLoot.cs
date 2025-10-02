@@ -193,7 +193,7 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         LeadingConditionRule lastEater = new(new Conditions.LegacyHack_IsABoss());
                         emodeRule.OnSuccess(lastEater);
-                        lastEater.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<DarkenedHeart>()));
+                        lastEater.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<RottingHeart>()));
 
                         //to make up for no loot until dead
                         lastEater.OnSuccess(ItemDropRule.Common(ItemID.ShadowScale, 1, 60, 60));

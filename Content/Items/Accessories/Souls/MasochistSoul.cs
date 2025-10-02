@@ -141,10 +141,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.PureHeart = true;
 
             //corrupt heart
-            fargoPlayer.DarkenedHeartItem = Item;
-            //player.AddEffect<DarkenedHeartEaters>(Item);
-            if (fargoPlayer.DarkenedHeartCD > 0)
-                fargoPlayer.DarkenedHeartCD -= 2;
+            fargoPlayer.RottingHeartItem = Item;
+            //player.AddEffect<RottingHeartEaters>(Item);
+            if (fargoPlayer.RottingHeartCD > 0)
+                fargoPlayer.RottingHeartCD -= 2;
 
             //gutted heart
             player.AddEffect<GuttedHeartEffect>(Item);

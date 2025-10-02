@@ -386,7 +386,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             //maso
             SlimyShieldItem = null;
-            DarkenedHeartItem = null;
+            RottingHeartItem = null;
             NecromanticBrewItem = null;
             DeerSinewNerf = false;
             PureHeart = false;
@@ -620,7 +620,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             chillLength = 0;
 
             SlimyShieldFalling = false;
-            DarkenedHeartCD = 60;
+            RottingHeartCD = 60;
             GuttedHeartCD = 60;
             IsDashingTimer = 0;
             GroundPound = 0;

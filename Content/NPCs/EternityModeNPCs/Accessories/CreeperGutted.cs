@@ -185,11 +185,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.Accessories
             if (NPC.life <= 0)
             {
                 Player player = Main.player[Main.myPlayer];
-                if (player.HasEffect<DarkenedHeartEaters>())
+                if (player.HasEffect<RottingHeartEaters>())
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), NPC.Center, -NPC.velocity.RotatedByRandom(MathHelper.PiOver2 * 2f), ProjectileID.TinyEater, (int)(35 * player.ActualClassDamage(DamageClass.Generic)), 1.75f, player.whoAmI);
+                        int p = Projectile.NewProjectile(player.GetSource_EffectItem<RottingHeartEaters>(), NPC.Center, -NPC.velocity.RotatedByRandom(MathHelper.PiOver2 * 2f), ProjectileID.TinyEater, (int)(35 * player.ActualClassDamage(DamageClass.Generic)), 1.75f, player.whoAmI);
                         if (p.IsWithinBounds(Main.maxProjectiles))
                         {
                             Main.projectile[p].DamageType = DamageClass.Default;
