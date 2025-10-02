@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -551,22 +552,25 @@ namespace FargowiltasSouls
         }
         public double IgnorePlayerImmunityCooldowns(On_Player.orig_Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float orig, Player self, PlayerDeathReason damageSource, int Damage, int hitDirection, out Player.HurtInfo info, bool pvp, bool quiet, int cooldownCounter, bool dodgeable, float armorPenetration, float scalingArmorPenetration, float knockback)
         {
-            bool check = false;
-            if ((damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightning>() || damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet)
+            var value = orig(self, damageSource, Damage, hitDirection, out info, pvp, quiet, cooldownCounter, dodgeable, armorPenetration, scalingArmorPenetration, knockback);
+            if ((damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightning>() || damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet && self.HasEffect<RemoteControlDR>() && !self.HasBuff<SuperchargedBuff>())
             {// Below is checking for when every immunity cooldown time is equal and above 0 meaning the hit is directly AFTER a dodge
                 bool dodging = self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] > 0 && self.hurtCooldowns[0 /*ImmunityCooldownID.General*/ ] == self.hurtCooldowns[ImmunityCooldownID.Bosses] && self.hurtCooldowns[ImmunityCooldownID.Bosses] == self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] && self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] == self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] && self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] == self.hurtCooldowns[ImmunityCooldownID.Lava];
                 if (dodging)
                 {
                     self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] = 0;
-                    check = self.immune;
+                    bool immuneCheck = false;
+                    immuneCheck = self.immune;
                     self.immune = false;
                     dodgeable = false;
                     quiet = true;
+                    value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
+                    if (!self.immune)
+                        self.immune = immuneCheck;
                 }
+                else
+                    value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
             }
-            var value = orig(self, damageSource, Damage, hitDirection, out info, pvp, quiet, cooldownCounter, dodgeable, armorPenetration, scalingArmorPenetration, knockback);
-            if (!self.immune)
-                self.immune = check;
             return value;
         }
     }
