@@ -3450,6 +3450,7 @@ Extra: {
 	HighestClass: ед. урона сильнейшего класса
 	MagicSummonHybrid: ед. магического и призывательного урона
 	MeleeSummonHybrid: ед. ближнего и призывательного урона
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {

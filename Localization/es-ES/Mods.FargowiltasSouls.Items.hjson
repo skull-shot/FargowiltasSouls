@@ -3433,6 +3433,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
