@@ -61,12 +61,12 @@ ClientConfig: {
 		Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		Label: Skill Menu X
 		Tooltip: Measured from the right side of the screen.
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		Label: Skill Menu Y
 		Tooltip: ""
 	}

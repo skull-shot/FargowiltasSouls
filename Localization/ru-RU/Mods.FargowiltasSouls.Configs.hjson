@@ -61,12 +61,12 @@ ClientConfig: {
 		Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		Label: Положение меню умений по X
 		Tooltip: Отсчёт идёт от правой границы экрана.
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		Label: Положение меню умений по Y
 		Tooltip: ""
 	}

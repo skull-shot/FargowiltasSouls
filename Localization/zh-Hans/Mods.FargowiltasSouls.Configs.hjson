@@ -61,12 +61,12 @@ ClientConfig: {
 		Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		Label: 技能菜单水平位置
 		Tooltip: 离屏幕右侧的距离
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		Label: 技能菜单竖直位置
 		Tooltip: ""
 	}

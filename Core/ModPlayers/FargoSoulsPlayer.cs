@@ -144,7 +144,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DeerSinew) playerData.Add("DeerSinew");
             if (OrdinaryCarrot) playerData.Add("OrdinaryCarrot");
             if (ConcentratedRainbowMatter) playerData.Add("ConcentratedRainbowMatter");
-            if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
             if (HasEquippedSkill) playerData.Add("HasEquippedSkill");
@@ -187,7 +186,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             DeerSinew = playerData.Contains("DeerSinew");
             OrdinaryCarrot = playerData.Contains("OrdinaryCarrot");
             ConcentratedRainbowMatter = playerData.Contains("ConcentratedRainbowMatter");
-            HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
             HasEquippedSkill = playerData.Contains("HasEquippedSkill");

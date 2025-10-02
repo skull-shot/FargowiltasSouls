@@ -1,4 +1,5 @@
-SoulTogglerButton: 饰品效果配置
+// SoulToggler: "[i:Wrench] Effect Toggles"
+// ActiveSkillMenu: "[i:LivingFireBlock] Active Skills"
 Standard: 标准模式
 Eternity: 永恒模式
 Masochist: 受虐模式

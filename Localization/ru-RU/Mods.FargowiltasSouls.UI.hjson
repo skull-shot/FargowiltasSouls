@@ -1,4 +1,5 @@
-SoulTogglerButton: Открыть переключатель эффектов
+// SoulToggler: "[i:Wrench] Effect Toggles"
+// ActiveSkillMenu: "[i:LivingFireBlock] Active Skills"
 Standard: Обычный режим
 Eternity: Режим Вечность
 Masochist: Режим Мазохиста

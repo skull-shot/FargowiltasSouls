@@ -49,12 +49,20 @@ namespace FargowiltasSouls.Content.UI
         public FargoUIPresetButton[] CustomButton = new FargoUIPresetButton[3];
         public FargoUIDisplayAllButton DisplayAllButton;
         //public FargoUIReloadButton ReloadButton;
+
+        public override void OnLoad()
+        {
+            CombinedUI.AddUI<SoulToggler>(Language.GetText("Mods.FargowiltasSouls.UI.SoulToggler"), 3); // TODO: localize this
+        }
         public override void UpdateUI()
         {
             if (!Main.playerInventory && ClientConfig.Instance.HideTogglerWhenInventoryIsClosed)
                 FargoUIManager.Close<SoulToggler>();
         }
-
+        public override void OnOpen()
+        {
+            NeedsToggleListBuilding = true;
+        }
         public override void OnClose()
         {
             if (ClientConfig.Instance.ToggleSearchReset)
@@ -67,7 +75,8 @@ namespace FargowiltasSouls.Content.UI
 
         public override void OnInitialize()
         {
-            Vector2 offset = new(Main.screenWidth / 2f - BackWidth / 2f, Main.screenHeight / 2f - BackHeight / 2f);
+            Vector2 baseOffset = CombinedUI.CenterRight;
+            Vector2 offset = new(baseOffset.X, baseOffset.Y - BackHeight / 2f);
 
             NeedsToggleListBuilding = true;
             DisplayMod = "";
