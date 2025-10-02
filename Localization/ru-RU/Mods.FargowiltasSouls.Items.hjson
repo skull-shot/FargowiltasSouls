@@ -1128,7 +1128,7 @@ ConcentratedRainbowMatter: {
 		'''
 }
 
-DarkenedHeart: {
+RottingHeart: {
 	DisplayName: Омрачённое сердце
 	Tooltip:
 		'''
@@ -1442,12 +1442,12 @@ PureHeart: {
 	DisplayName: Чистейшее сердце
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Даёт иммунитет к дебаффам биомов, [i:FargowiltasSouls/DarkenedHeart] «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадный», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
-		Увеличивает [i:FargowiltasSouls/GelicWings] время полёта на 30% [i:FargowiltasSouls/DarkenedHeart] скорость передвижения на 10%,
+		[i:FargowiltasSouls/PureHeart] Даёт иммунитет к дебаффам биомов, [i:FargowiltasSouls/RottingHeart] «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадный», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
+		Увеличивает [i:FargowiltasSouls/GelicWings] время полёта на 30% [i:FargowiltasSouls/RottingHeart] скорость передвижения на 10%,
 		[i:FargowiltasSouls/GuttedHeart] максимальный запас здоровья на 10% и [i:FargowiltasSouls/PungentEyeball] частоту появления редких врагов
 		[i:FargowiltasSouls/PungentEyeball] Ваш курсор накладывает на врагов дебафф «Сублимация», наносящий постепенный урон и уменьшающий защиту.
 		     Чем дольше вы держите курсор на враге, тем сильнее становится эффект
-		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/DarkenedHeart] До 3 ползунов кружат вокруг вас, появляясь быстрее, пока вы на земле, и выпуская мини-пожирателей при смерти
+		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/RottingHeart] До 3 ползунов кружат вокруг вас, появляясь быстрее, пока вы на земле, и выпуская мини-пожирателей при смерти
 		[i:FargowiltasSouls/GelicWings] Во время полёта, из ваших крыльев вылетают шипы
 		[i:FargowiltasSouls/PureHeart] Сила «Сублимации» увеличивается быстрее, если мини-пожиратели, ползуны или шипы наносят урон
 		«Оно пульсирует жизненной энергией»

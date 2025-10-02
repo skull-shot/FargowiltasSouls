@@ -132,7 +132,7 @@ RemoteControlDR: Подзарядка при уроне
 ProbeMinionEffect: Прислужник дрон
 RemoteLightningEffect: Удары молний
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
-DarkenedHeartEaters: Маленькие пожиратели
+RottingHeartEaters: Маленькие пожиратели
 GuttedHeartMinions: Щит из ползунов
 GelicWingSpikes: Гелеподобные шипы
 GelicWingJump: Гелеподобный прыжок

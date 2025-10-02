@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Misc;
@@ -231,6 +231,14 @@ namespace FargowiltasSouls.Core.Systems
             //any shellphone because they made it 5 fucking different items
             group = new RecipeGroup(() => AnyItem(ItemID.Shellphone), ItemID.Shellphone, ItemID.ShellphoneDummy, ItemID.ShellphoneHell, ItemID.ShellphoneOcean, ItemID.ShellphoneSpawn);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyShellphone", group);
+
+            //any bio cluster for the same reason as above
+            group = new RecipeGroup(() => AnyItem("BionomicCluster"), ModContent.ItemType<BionomicCluster>(), ModContent.ItemType<BionomicClusterInactive>());
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBionomicCluster", group);
+
+            //any litho lantern for the same reason as above
+            group = new RecipeGroup(() => AnyItem("LithosphericCluster"), ModContent.ItemType<LithosphericCluster>(), ModContent.ItemType<LithosphericClusterInactive>());
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLithosphericLantern", group);
 
             // any gem
             group = new RecipeGroup(() => AnyItem("Gem"), ItemID.Diamond, ItemID.Amber, ItemID.Ruby, ItemID.Emerald, ItemID.Sapphire, ItemID.Topaz, ItemID.Amethyst);

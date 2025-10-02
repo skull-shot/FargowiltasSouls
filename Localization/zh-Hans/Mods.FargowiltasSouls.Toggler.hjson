@@ -132,7 +132,7 @@ RemoteControlDR: 受击超级充能
 ProbeMinionEffect: 探测器召唤物
 // RemoteLightningEffect: Lightning Strike
 PureHeartHeader: "{$Mods.FargowiltasSouls.Items.PureHeart.DisplayName}"
-DarkenedHeartEaters: 迷你噬魂者
+RottingHeartEaters: 迷你噬魂者
 GuttedHeartMinions: 飞眼怪
 GelicWingSpikes: 明胶尖刺
 GelicWingJump: 明胶羽翼跳跃

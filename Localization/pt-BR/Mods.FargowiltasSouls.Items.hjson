@@ -1156,8 +1156,8 @@ ConcentratedRainbowMatter: {
 		'''
 }
 
-DarkenedHeart: {
-	// DisplayName: Darkened Heart
+RottingHeart: {
+	// DisplayName: Rotting Heart
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
