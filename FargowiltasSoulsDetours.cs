@@ -525,13 +525,13 @@ namespace FargowiltasSouls
                 if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
                 {
                     if (projToShoot == ProjectileID.CopperCoin)
-                        totalDamage = (int)(totalDamage * 1.6f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 1.6f);
                     else if (projToShoot == ProjectileID.SilverCoin)
-                        totalDamage = (int)(totalDamage * 0.9f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.9f);
                     else if (projToShoot == ProjectileID.GoldCoin)
-                        totalDamage = (int)(totalDamage * 0.47f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.47f);
                     else if (projToShoot == ProjectileID.PlatinumCoin)
-                        totalDamage = (int)(totalDamage * 0.275f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.275f);
                 }
             }
         }
