@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
              AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
              AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
+             AccessoryEffectLoader.GetEffect<RemoteLightningEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
@@ -303,8 +304,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             .AddIngredient(ModContent.ItemType<SinisterIcon>())
             .AddIngredient(ModContent.ItemType<SupremeDeathbringerFairy>())
-            .AddIngredient(ModContent.ItemType<BionomicCluster>())
-            .AddIngredient(ModContent.ItemType<LithosphericCluster>())
+            .AddRecipeGroup("FargowiltasSouls:AnyBionomicCluster")
+            .AddRecipeGroup("FargowiltasSouls:AnyLithosphericLantern")
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
             .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
