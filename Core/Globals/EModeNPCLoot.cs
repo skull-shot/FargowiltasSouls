@@ -219,6 +219,7 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.KingSlime:
                     {
                         emodeRule.OnSuccess(FargoSoulsUtil.BossBagDropCustom(ModContent.ItemType<SlimyShield>()));
+                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Gel, 1, 50, 100));
                     }
                     break;
                 case NPCID.CultistBoss:

@@ -1825,14 +1825,14 @@ namespace FargowiltasSouls.Content.Projectiles
                                 {
                                     projectile.ai[0] = 0; //reset vanilla bounceback state 
                                     projectile.ai[1] = 0;
-                                    projectile.damage = (int)(projectile.damage * 0.8);
+                                    projectile.damage = (int)Math.Ceiling(projectile.damage * 0.8);
 
                                     if (ricotarget != null && ricotarget.CanBeChasedBy()) //ricochet to other npc
                                         projectile.velocity = 12 * Vector2.UnitX.RotateTowards(projectile.DirectionTo(ricotarget.Center).ToRotation(), 4);
                                     else if (target.CanBeChasedBy()) //if no other npcs, home on original target, deteriorates bounce count and dmg further
                                     {
                                         projectile.ai[2] += 3;
-                                        projectile.damage = (int)(projectile.damage * 0.625); // 0.5x after original mult
+                                        projectile.damage = (int)Math.Ceiling(projectile.damage * 0.625); // 0.5x after original mult
                                         projectile.velocity = 12 * Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 10);
                                     }
                                 }
@@ -1851,6 +1851,15 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else target.buffTime[i] = 300;
                                 }
                             }
+                        }
+                        break;
+
+                    case ProjectileID.Flamelash:
+                    case ProjectileID.RainbowRodBullet:
+                        if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
+                                projectile.ResetLocalNPCHitImmunity();
                         }
                         break;
 
