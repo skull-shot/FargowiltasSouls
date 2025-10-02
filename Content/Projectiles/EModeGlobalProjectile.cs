@@ -1855,7 +1855,8 @@ namespace FargowiltasSouls.Content.Projectiles
                         break;
 
                     case ProjectileID.Flamelash:
-                        if (SourceItemType == ItemID.Flamelash && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                    case ProjectileID.RainbowRodBullet:
+                        if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
                         {
                             if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
                                 projectile.ResetLocalNPCHitImmunity();

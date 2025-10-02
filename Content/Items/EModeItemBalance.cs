@@ -566,6 +566,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["AntiSpam"];
                     return EModeChange.Buff;
 
+                case ItemID.RainbowRod:
+                    balanceTextKeys = ["AntiSpam"];
+                    return EModeChange.Buff;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {
