@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
             Projectile.localNPCHitCooldown = -1;
             Projectile.scale = 3;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
+            CooldownSlot = ImmunityCooldownID.WrongBugNet;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
            => Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < projHitbox.Width * 0.9f / 2;

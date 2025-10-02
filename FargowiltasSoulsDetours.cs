@@ -62,7 +62,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot += InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
-            On_Projectile.IsDamageDodgable += IsDamageDodgable;
+            //On_Projectile.IsDamageDodgable += IsDamageDodgable;
 
             On_Item.AffixName += AffixName;
 
@@ -78,6 +78,7 @@ namespace FargowiltasSouls
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
             On_Player.ApplyTouchDamage += HarmlessRollingCactus;
             On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
+            On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -102,7 +103,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot -= InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
-            On_Projectile.IsDamageDodgable -= IsDamageDodgable;
+            //On_Projectile.IsDamageDodgable -= IsDamageDodgable;
 
             On_Item.AffixName -= AffixName;
 
@@ -118,6 +119,7 @@ namespace FargowiltasSouls
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
             On_Player.ApplyTouchDamage -= HarmlessRollingCactus;
             On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
+            On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -225,12 +227,12 @@ namespace FargowiltasSouls
             return ret;
         }
 
-        public static bool IsDamageDodgable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
+        /*public static bool IsDamageDodgable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
         {
             if (self.type == ModContent.ProjectileType<RemoteLightning>() || self.type == ModContent.ProjectileType<RemoteLightningExplosion>())
                 return false;
             else return orig(self);
-        }
+        }*/
 
         public static string AffixName(On_Item.orig_AffixName orig, Item self)
         {
@@ -546,6 +548,26 @@ namespace FargowiltasSouls
             if (WorldSavingSystem.EternityMode && nPC.type is NPCID.SkeletronHead or NPCID.SkeletronHand)
                 return;
             orig(self, nPC);
+        }
+        public double IgnorePlayerImmunityCooldowns(On_Player.orig_Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float orig, Player self, PlayerDeathReason damageSource, int Damage, int hitDirection, out Player.HurtInfo info, bool pvp, bool quiet, int cooldownCounter, bool dodgeable, float armorPenetration, float scalingArmorPenetration, float knockback)
+        {
+            bool check = false;
+            if ((damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightning>() || damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet)
+            {// Below is checking for when every immunity cooldown time is equal and above 0 meaning the hit is directly AFTER a dodge
+                bool dodging = self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] > 0 && self.hurtCooldowns[0 /*ImmunityCooldownID.General*/ ] == self.hurtCooldowns[ImmunityCooldownID.Bosses] && self.hurtCooldowns[ImmunityCooldownID.Bosses] == self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] && self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] == self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] && self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] == self.hurtCooldowns[ImmunityCooldownID.Lava];
+                if (dodging)
+                {
+                    self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] = 0;
+                    check = self.immune;
+                    self.immune = false;
+                    dodgeable = false;
+                    quiet = true;
+                }
+            }
+            var value = orig(self, damageSource, Damage, hitDirection, out info, pvp, quiet, cooldownCounter, dodgeable, armorPenetration, scalingArmorPenetration, knockback);
+            if (!self.immune)
+                self.immune = check;
+            return value;
         }
     }
 }

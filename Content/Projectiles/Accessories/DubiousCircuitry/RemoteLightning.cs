@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
             Projectile.penetrate = 10;
             Projectile.extraUpdates += 1;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
+            CooldownSlot = ImmunityCooldownID.WrongBugNet;
         }
         public override bool PreAI()
         {
