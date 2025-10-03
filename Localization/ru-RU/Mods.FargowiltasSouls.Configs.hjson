@@ -77,13 +77,13 @@ ClientConfig: {
 	}
 
 	WikiNotification: {
-		// Label: Wiki Notification
-		// Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
+		Label: Сообщение о вики
+		Tooltip: Если включена, при заходе в мир в чате будет появляться сообщение о вики
 	}
 
 	MusicModNotification: {
-		// Label: Music Mod Notification
-		// Tooltip: When enabled, a chat notification for the music mod is sent on entering the world
+		Label: Сообщение о моде с музыкой
+		Tooltip: Если включена, при заходе в мир в чате будет появляться сообщение о модификации с музыкой для Fargo's Souls
 	}
 }
 
