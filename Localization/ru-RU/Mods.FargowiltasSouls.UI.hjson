@@ -1,5 +1,5 @@
-// SoulToggler: "[i:Wrench] Effect Toggles"
-// ActiveSkillMenu: "[i:LivingFireBlock] Active Skills"
+SoulToggler: "[i:Wrench] Переключатель эффектов"
+ActiveSkillMenu: "[i:LivingFireBlock] Активные умения"
 Standard: Обычный режим
 Eternity: Режим Вечность
 Masochist: Режим Мазохиста
