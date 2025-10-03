@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 AuraCenter = Vector2.Zero;
 
-        internal const float HealthMultiplier = 1.56f;
+        internal const float HealthMultiplier = 1.8f;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
