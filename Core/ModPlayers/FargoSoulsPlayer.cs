@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 {
     public partial class FargoSoulsPlayer : ModPlayer
     {
-        public ToggleBackend Toggler = new();
+        public SoulToggleBackend Toggler = new();
 
         public Dictionary<AccessoryEffect, bool> TogglesToSync = [];
 
@@ -208,7 +208,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void OnEnterWorld()
         {
             Toggler.TryLoad();
-            Toggler.LoadPlayerToggles(this);
+            Toggler.LoadPlayerToggles(Player);
             disabledToggles.Clear();
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();

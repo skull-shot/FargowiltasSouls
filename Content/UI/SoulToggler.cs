@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Assets.Textures;
+using Fargowiltas.Common.Configs;
 using Fargowiltas.Content.UI;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -19,6 +20,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Header = FargowiltasSouls.Core.Toggler.Header;
+using UISearchBar = Fargowiltas.Content.UI.UISearchBar;
 
 namespace FargowiltasSouls.Content.UI
 {
@@ -37,12 +39,12 @@ namespace FargowiltasSouls.Content.UI
         public const int BackWidth = 400;
         public const int BackHeight = 658;
 
-        public FargoUIDragablePanel BackPanel;
+        public UIDragablePanel BackPanel;
         public UIPanel InnerPanel;
         public UIPanel PresetPanel;
         public UIScrollbar Scrollbar;
         public UIToggleList ToggleList;
-        public FargoUISearchBar SearchBar;
+        public UISearchBar SearchBar;
         public UICloseButton CloseButton;
 
         public FargoUIPresetButton OffButton;
@@ -55,11 +57,11 @@ namespace FargowiltasSouls.Content.UI
 
         public override void OnLoad()
         {
-            CombinedUI.AddUI<SoulToggler>(Language.GetText("Mods.FargowiltasSouls.UI.SoulToggler"), 3); // TODO: localize this
+            CombinedUI.AddUI<SoulToggler>(Language.GetText("Mods.FargowiltasSouls.UI.SoulToggler"), 3);
         }
         public override void UpdateUI()
         {
-            if (!Main.playerInventory && ClientConfig.Instance.HideTogglerWhenInventoryIsClosed)
+            if (!Main.playerInventory && FargoClientConfig.Instance.HideTogglerWhenInventoryIsClosed)
                 FargoUIManager.Close<SoulToggler>();
         }
         public override void OnOpen()
@@ -68,7 +70,7 @@ namespace FargowiltasSouls.Content.UI
         }
         public override void OnClose()
         {
-            if (ClientConfig.Instance.ToggleSearchReset)
+            if (FargoClientConfig.Instance.ToggleSearchReset)
             {
                 SearchBar.Input = "";
 
@@ -100,7 +102,7 @@ namespace FargowiltasSouls.Content.UI
             ToggleList.SetScrollbar(Scrollbar);
             ToggleList.OnScrollWheel += HotbarScrollFix;
 
-            BackPanel = new FargoUIDragablePanel(Scrollbar, ToggleList);
+            BackPanel = new UIDragablePanel(Scrollbar, ToggleList);
             BackPanel.Left.Set(offset.X, 0);
             BackPanel.Top.Set(offset.Y, 0);
             BackPanel.Width.Set(BackWidth, 0);
@@ -115,7 +117,7 @@ namespace FargowiltasSouls.Content.UI
             InnerPanel.Top.Set(32, 0);
             InnerPanel.BackgroundColor = new Color(73, 94, 171) * 0.9f;
 
-            SearchBar = new FargoUISearchBar(BackWidth - 8, 26);
+            SearchBar = new UISearchBar(BackWidth - 8, 26);
             SearchBar.Left.Set(4, 0);
             SearchBar.Top.Set(4, 0);
             SearchBar.OnTextChange += SearchBar_OnTextChange;
@@ -138,28 +140,28 @@ namespace FargowiltasSouls.Content.UI
             OffButton = new FargoUIPresetButton(FargoMutantAssets.UI.Toggler.PresetOff.Value, (toggles) =>
             {
                 toggles.SetAll(false);
-            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOff"));
+            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOff"), () => Main.LocalPlayer.FargoSouls().Toggler);
             OffButton.Top.Set(6, 0);
             OffButton.Left.Set(8, 0);
 
             OnButton = new FargoUIPresetButton(FargoMutantAssets.UI.Toggler.PresetOn.Value, (toggles) =>
             {
                 toggles.SetAll(true);
-            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOn"));
+            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.TurnAllTogglesOn"), () => Main.LocalPlayer.FargoSouls().Toggler);
             OnButton.Top.Set(6, 0);
             OnButton.Left.Set(30, 0);
 
             SomeEffectsButton = new FargoUIPresetButton(FargoMutantAssets.UI.Toggler.PresetMinimal.Value, (toggles) =>
             {
                 toggles.SomeEffects();
-            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.SomeEffectsPreset"));
+            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.SomeEffectsPreset"), () => Main.LocalPlayer.FargoSouls().Toggler);
             SomeEffectsButton.Top.Set(6, 0);
             SomeEffectsButton.Left.Set(52, 0);
 
             MinimalButton = new FargoUIPresetButton(FargoMutantAssets.UI.Toggler.PresetMinimal.Value, (toggles) =>
             {
                 toggles.MinimalEffects();
-            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.MinimalEffectsPreset"));
+            }, () => Language.GetTextValue("Mods.FargowiltasSouls.UI.MinimalEffectsPreset"), () => Main.LocalPlayer.FargoSouls().Toggler);
             MinimalButton.Top.Set(6, 0);
             MinimalButton.Left.Set(74, 0);
 
@@ -181,18 +183,18 @@ namespace FargowiltasSouls.Content.UI
             BackPanel.Append(CloseButton);
 
             const int xOffset = 74; //ensure this matches the Left.Set of preceding button
-            for (int i = 0; i < ToggleBackend.CustomPresetCount; i++)
+            for (int i = 0; i < SoulToggleBackend.CustomPresetCount; i++)
             {
                 int slot = i + 1;
                 CustomButton[i] = new FargoUIPresetButton(FargoMutantAssets.UI.Toggler.PresetCustom.Value,
                 toggles => toggles.LoadCustomPreset(slot),
                 toggles => toggles.SaveCustomPreset(slot),
-                () => Language.GetTextValue("Mods.FargowiltasSouls.UI.CustomPreset", slot));
+                () => Language.GetTextValue("Mods.FargowiltasSouls.UI.CustomPreset", slot), () => Main.LocalPlayer.FargoSouls().Toggler);
                 CustomButton[i].Top.Set(6, 0);
                 CustomButton[i].Left.Set(xOffset + 22 * slot, 0);
                 PresetPanel.Append(CustomButton[i]);
 
-                if (slot == ToggleBackend.CustomPresetCount) //after last panel is loaded, load reload button
+                if (slot == SoulToggleBackend.CustomPresetCount) //after last panel is loaded, load reload button
                 {
                     DisplayAllButton = new FargoUIDisplayAllButton(FargoMutantAssets.UI.Toggler.DisplayAllButton.Value,
                         () => Language.GetTextValue("Mods.FargowiltasSouls.UI.DisplayAll"),
@@ -239,7 +241,7 @@ namespace FargowiltasSouls.Content.UI
         {
             ToggleList.Clear();
             Player player = Main.LocalPlayer;
-            ToggleBackend toggler = player.FargoSouls().Toggler;
+            SoulToggleBackend toggler = player.FargoSouls().Toggler;
             AccessoryEffectPlayer effectPlayer = player.AccessoryEffects();
 
 

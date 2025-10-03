@@ -23,16 +23,10 @@ namespace FargowiltasSouls.Core
         public bool MusicModNotification;
 
         [DefaultValue(true)]
-        public bool HideTogglerWhenInventoryIsClosed;
-
-        [DefaultValue(true)]
         public bool ItemDisabledTooltip;
 
         [DefaultValue(BalanceTooltipSetting.Reworks)]
         public BalanceTooltipSetting ItemBalanceTooltip;
-
-        [DefaultValue(false)]
-        public bool ToggleSearchReset;
 
         private const float max4kX = 3840f;
 

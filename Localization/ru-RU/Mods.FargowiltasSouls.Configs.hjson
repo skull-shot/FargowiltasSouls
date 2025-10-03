@@ -6,11 +6,6 @@ ClientConfig: {
 		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
 	}
 
-	HideTogglerWhenInventoryIsClosed: {
-		Label: Показывать переключатель эффектов только при открытом инвентаре
-		Tooltip: Если включена, переключатель эффектов автоматически выключается когда инвентарь закрыт.
-	}
-
 	ItemDisabledTooltip: {
 		Label: Описание о выключенном эффекте
 		Tooltip: Если включена, у предметов с любыми выключенными эффектами в описании будет строчка об этом.
@@ -19,11 +14,6 @@ ClientConfig: {
 	ItemBalanceTooltip: {
 		Label: Изменения хар-тик в описаниях предметов
 		Tooltip: Определяет, какие строки об изменениях оставить в описаниях предметов.
-	}
-
-	ToggleSearchReset: {
-		Label: Строка поиска меню переключателей эффектов сбрасывается при закрытии
-		Tooltip: ""
 	}
 
 	RainbowHealThreshold: {

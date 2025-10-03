@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.UI
         public static bool ShouldRefresh;
         public override void OnLoad()
         {
-            CombinedUI.AddUI<ActiveSkillMenu>(Language.GetText("Mods.FargowiltasSouls.UI.ActiveSkillMenu"), 4); // TODO: localize this
+            CombinedUI.AddUI<ActiveSkillMenu>(Language.GetText("Mods.FargowiltasSouls.UI.ActiveSkillMenu"), 4);
         }
         public override void UpdateUI()
         {
