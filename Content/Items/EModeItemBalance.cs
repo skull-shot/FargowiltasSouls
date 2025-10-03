@@ -563,12 +563,15 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.Buff;
 
                 case ItemID.Flamelash:
-                    balanceTextKeys = ["AntiSpam"];
-                    return EModeChange.Buff;
-
                 case ItemID.RainbowRod:
                     balanceTextKeys = ["AntiSpam"];
-                    return EModeChange.Buff;
+                    return EModeChange.ReworkBuff;
+
+                case ItemID.Handgun:
+                case ItemID.PhoenixBlaster:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
 
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
