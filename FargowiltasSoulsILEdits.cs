@@ -3,8 +3,6 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Hooking;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using MonoMod.RuntimeDetour;
-using System.Reflection;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
