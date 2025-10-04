@@ -42,6 +42,10 @@ namespace FargowiltasSouls
             }
             return YoyoRangeMult;
         }
+        public static bool ProjectileIsFromArrowRain(Projectile projectile)
+        {
+            return !projectile.FargoSouls().ArrowRain;
+        }
     }
     public sealed class Player_Update_ILEdit : ILEditProvider
     {
@@ -164,6 +168,25 @@ namespace FargowiltasSouls
             cursor.Emit(OpCodes.Mul); // Multiply cursor range with yoyo range mod
             cursor.Emit(OpCodes.Stloc_S, (byte)16); // Set cursor range to the value
             cursor.Emit(OpCodes.Ldloc_S, (byte)15); // Compensate for using this earlier by pushing it again
+        }
+    }
+    public sealed class Projectile_Damage_ILEdit : ILEditProvider
+    {
+        public override void Subscribe(ManagedILEdit edit) => IL_Projectile.Damage += edit.SubscriptionWrapper;
+        public override void Unsubscribe(ManagedILEdit edit) => IL_Projectile.Damage -= edit.SubscriptionWrapper;
+        public override void PerformEdit(ILContext context, ManagedILEdit edit)
+        {
+            ILCursor cursor = new(context);
+            cursor.Index = 3880; // Get as close as possible to the phantasmTime check
+            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdfld<Projectile>("arrow"))) // Go directly after the Projectile.arrow check
+            {
+                FargowiltasSouls.Instance.Logger.Warn("Phantasm Arrow Rain fix failure on MatchLdfld<Projectile>('arrow')");
+                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
+                return;
+            }
+            cursor.Emit(OpCodes.Ldarg_0); // Get Projectile instance
+            cursor.EmitDelegate(ILEditUtils.ProjectileIsFromArrowRain); // Check whether the arrow is spawned from Red Riding Enchantment's Arrow Rain. If so, fail Phantasm's Phantom Arrow spawn.
+            cursor.EmitAnd(); // Push the two bools together
         }
     }
 }
