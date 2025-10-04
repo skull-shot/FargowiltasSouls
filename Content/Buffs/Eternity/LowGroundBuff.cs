@@ -30,6 +30,8 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 
             if (player.mount.Active)
                 player.mount.Dismount(player);
+
+            player.slowFall = false;
         }
     }
 }

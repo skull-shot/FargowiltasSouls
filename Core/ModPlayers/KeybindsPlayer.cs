@@ -40,6 +40,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
                 CombinedUI.ToggleUI<ActiveSkillMenu>();
 
+            if (FargowiltasSouls.SoulToggleKey.JustPressed && Player.whoAmI == Main.myPlayer)
+                CombinedUI.ToggleUI<SoulToggler>();
+
             if (Mash)
             {
                 Player.doubleTapCardinalTimer[0] = 0;
@@ -119,9 +122,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[2] = 0;
                 Player.doubleTapCardinalTimer[3] = 0;
             }
-
-            if (FargowiltasSouls.SoulToggleKey.JustPressed)
-                FargoUIManager.Toggle<SoulToggler>();
 
             #endregion
 
