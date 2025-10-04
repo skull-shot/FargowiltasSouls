@@ -72,7 +72,7 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
-            On_Projectile.Damage += PhantasmArrowRainFix;
+            //On_Projectile.Damage += PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
@@ -113,7 +113,7 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
 
-            On_Projectile.Damage -= PhantasmArrowRainFix;
+            //On_Projectile.Damage -= PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
@@ -479,7 +479,7 @@ namespace FargowiltasSouls
             }
         }
 
-        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
+        /*public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
         { // this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
             if (self is not null && self.friendly && self.owner.IsWithinBounds(Main.maxPlayers) && self.owner == Main.myPlayer)
             {
@@ -498,7 +498,7 @@ namespace FargowiltasSouls
                     player.phantasmTime = phantasmTime;
             }
             else orig(self);
-        }
+        }*/
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
         { // hallowed dodge nerf
