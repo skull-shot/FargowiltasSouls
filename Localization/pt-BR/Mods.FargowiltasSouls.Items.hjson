@@ -3821,3 +3821,13 @@ CactusStaff: {
 }
 
 // Ruminate: "[c/FF3399:Hold {0} for more details]"
+
+ActiveSkillMenuItem: {
+	// DisplayName: Active Skill Menu Item
+	// Tooltip: ""
+}
+
+EffectTogglerItem: {
+	// DisplayName: Effect Toggler Item
+	// Tooltip: ""
+}
