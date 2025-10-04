@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -16,6 +16,7 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
+    [LegacyName("DarkenedHeart")]
     public class RottingHeart : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
