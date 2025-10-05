@@ -20,7 +20,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 48;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "MeteorEnchantMeatball");
+        public override string Texture => "FargowiltasSouls/Content/Bosses/Champions/Cosmos/CosmosMeteor";
         public override void SetDefaults()
         {
             base.SetDefaults();
