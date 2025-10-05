@@ -652,26 +652,25 @@ namespace FargowiltasSouls.Core.ModPlayers
         public void ShadowParryCounter()
         {
             SoundEngine.PlaySound(FargosSoundRegistry.CoffinBigShot, Player.Center);
+            Vector2 spawnpos = Player.Center;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 if (Main.projectile[i].type == ModContent.ProjectileType<PungentEyeballMinion>() && Main.projectile[i].owner == Player.whoAmI && Main.projectile[i].active)
                 {
+                    spawnpos = Main.projectile[i].Center;
                     Main.projectile[i].localAI[2] = 30;
-                    for (int s = 0; s < 12; s++)
-                    {
-                        Vector2 vel = Main.rand.NextFloat(7, 15) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
-                        int p = Projectile.NewProjectile(Player.GetSource_EffectItem<LithosphericEffect>(), Main.projectile[i].Center, vel, ModContent.ProjectileType<LithoFlame>(), LithosphericEffect.BaseDamage(Player) / 2, 0, Player.whoAmI);
-                    }
                     break;
                 }
             }
-
+            for (int s = 0; s < 12; s++)
+            {
+                Vector2 vel = Main.rand.NextFloat(7, 15) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+                int p = Projectile.NewProjectile(Player.GetSource_EffectItem<LithosphericEffect>(), spawnpos, vel, ModContent.ProjectileType<LithoFlame>(), LithosphericEffect.BaseDamage(Player) / 2, 0, Player.whoAmI);
+            }
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 if (Main.npc[i].Distance(Player.Center) < 2500 && Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5 && !Main.npc[i].dontTakeDamage)
-                {
                     Main.npc[i].AddBuff(BuffID.Cursed, 360);
-                }
             }
         }
 
