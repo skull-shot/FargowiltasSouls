@@ -119,7 +119,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 case AttackStates.Spawning:
                 {
                     AnimState = (int)AnimationStates.Idle;
-                    if (Timer < 60)
+                    if (Timer < 60 || npc.velocity.Y != 0)
                         return base.SafePreAI(npc);
                     State = (int)AttackStates.Bowling;
                     Timer = -1;
