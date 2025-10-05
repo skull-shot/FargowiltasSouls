@@ -8,6 +8,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace FargowiltasSouls.Core.Globals
         public bool BeetleUtilAura;
         public int BeetleTimer;
 
+        public bool DrakinBuff;
+        public int SpitBall = -1;
         public bool PaladinsShield;
         public bool isWaterEnemy;
 
@@ -71,6 +74,13 @@ namespace FargowiltasSouls.Core.Globals
         public override void ResetEffects(NPC npc)
         {
             PaladinsShield = false;
+            DrakinBuff = false;
+            if (SpitBall != -1 && !Main.npc[SpitBall].active)
+            {
+                SpitBall = -1;
+                npc.dontTakeDamage = false;
+                npc.ShowNameOnHover = true;
+            }
 
             if (BeetleTimer > 0 && --BeetleTimer <= 0)
             {
@@ -115,6 +125,15 @@ namespace FargowiltasSouls.Core.Globals
                         Lighting.AddLight(npc.Center, 0.5f, 0.5f, 0.5f);
                     }
                 }
+            }
+
+            if (SpitBall != -1)
+            {
+                NPC spit = Main.npc[SpitBall];
+                npc.Center = spit.Center;
+                npc.dontTakeDamage = true;
+                npc.ShowNameOnHover = false;
+                return false;
             }
 
             /*if (Stop > 0)
@@ -1331,6 +1350,13 @@ namespace FargowiltasSouls.Core.Globals
                 Main.EntitySpriteDraw(buffIcon, drawPos - Main.screenPosition + new Vector2(0f, npc.gfxOffY), buffIcon.Bounds, buffColor, 0, buffIcon.Bounds.Size() / 2, 1f, SpriteEffects.None, 0);
             }
         }*/
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (SpitBall != -1)
+                return false;
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
 
         public static void Horde(NPC npc, int size)
         {

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -19,7 +19,7 @@ using Terraria.ID;
 using Terraria.Map;
 using Terraria.ModLoader;
 
-namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
+namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 {
     public class OOAForcefield : ModProjectile
     {
@@ -62,29 +62,28 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
         int npc;
         public override void OnSpawn(IEntitySource source)
         {
-            if (source is EntitySource_Parent parent && parent.Entity is NPC parentNpc && parentNpc.type == ModContent.NPCType<DD2Shielder>())
+            if (source is EntitySource_Parent parent && parent.Entity is NPC parentNpc && (parentNpc.type == NPCID.DD2WitherBeastT2 || parentNpc.type == NPCID.DD2WitherBeastT3))
             {
                 npc = parentNpc.whoAmI;
-                Projectile.velocity = parentNpc.velocity;
-                Projectile.direction = parentNpc.direction;
             }
         }
 
         public override void AI()
         {
-            NPC parent = FargoSoulsUtil.NPCExists(npc);
-            if (parent != null)
+            NPC parent = Main.npc[npc];
+            if (parent.active)
             {
                 Projectile.timeLeft++;
                 Projectile.Center = parent.Center - 10 * Vector2.UnitY;
-                Projectile.direction = parent.direction;
+                Projectile.velocity *= 0;
+                Projectile.direction = (int)Projectile.HorizontalDirectionTo(EModeDD2Event.GetEterniaCrystal().Center);
 
                 float n = Timer > 60 ? 60 : Timer;
                 float radius = 20 * MathF.Pow(n, 0.5f);
 
                 if (Timer >= 10 && FargoSoulsUtil.HostCheck)
                 {
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + 0.7f * radius * Projectile.direction * Vector2.UnitX, Vector2.Zero, ModContent.ProjectileType<OOAForceFieldProj>(), 0, 0f, ai0: radius);
+                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center + 0.7f * radius * Projectile.direction * Vector2.UnitX, Vector2.Zero, ModContent.ProjectileType<OOAForceFieldProj>(), 0, 0f, ai0: radius);
                 }
             }
             else
@@ -101,7 +100,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Custom.OOA
             float n = Timer > 60 ? 60 : Timer;
             float timeLerp = MathF.Pow(n, 0.5f);
             float radius = 0 + 20 * timeLerp;
-            float arcAngle = MathHelper.PiOver2 - Projectile.direction * MathHelper.PiOver2;
+            float arcAngle = MathHelper.PiOver2 - ArcAngle * MathHelper.PiOver2;
 
             float arcWidth = Timer > 60 ? 0.3f : Timer / 200f;
 

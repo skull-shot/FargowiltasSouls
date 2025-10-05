@@ -1,11 +1,9 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
-using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern.BiomeMimics;
-using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
-using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -16,14 +14,47 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             NPCID.DD2KoboldWalkerT3
         );
 
-        public override void OnKill(NPC npc)
-        {
-            base.OnKill(npc);
+        public int Counter = 0;
 
-            if (FargoSoulsUtil.HostCheck)
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(Counter);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            Counter = binaryReader.Read7BitEncodedInt();
+        }
+
+        public override void AI(NPC npc)
+        {
+            if (npc.dontTakeDamage)
             {
-                Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero,
-                    ModContent.ProjectileType<BigMimicExplosion>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
+                npc.TargetClosest();
+                Counter++;
+                npc.position.X += 1.5f * npc.velocity.X;
+                if (Counter > 40)
+                    Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, Scale: 4f);
+                if (Counter > 120)
+                {
+                    npc.ai[1] = 2;
+                    npc.HitEffect();
+                }
+            }
+
+            base.AI(npc);
+        }
+
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {
+            if (Counter == 0 && npc.life - hit.Damage < 0 && !npc.dontTakeDamage)
+            {
+                hit.Null();
+                npc.life = 10;
+                npc.dontTakeDamage = true;
+                npc.ai[0] = 39;
             }
         }
 
@@ -31,7 +62,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<FusedBuff>(), 1800);
+            target.AddBuff(BuffID.OnFire, 180);
+            //target.AddBuff(ModContent.BuffType<FusedBuff>(), 1800);
         }
     }
 }

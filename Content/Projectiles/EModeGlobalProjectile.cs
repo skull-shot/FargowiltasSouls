@@ -1,3 +1,4 @@
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Earth;
 using FargowiltasSouls.Content.Bosses.Champions.Spirit;
 using FargowiltasSouls.Content.Bosses.Champions.Terra;
@@ -46,6 +47,10 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public int SourceItemType = 0;
         public float WormPierceResist = 0f;
+
+        public bool isADD2Proj = false;
+        public bool Jammed = false;
+        public int JammedRecoverTime = 0;
 
         public override void SetStaticDefaults()
         {
@@ -255,6 +260,9 @@ namespace FargowiltasSouls.Content.Projectiles
                 default:
                     break;
             }
+
+            if (source is EntitySource_Parent parent && parent.Entity is Projectile p && ProjectileID.Sets.IsADD2Turret[p.type])
+                projectile.Eternity().isADD2Proj = true;
 
             switch (projectile.type)
             {
@@ -830,6 +838,27 @@ namespace FargowiltasSouls.Content.Projectiles
                 default:
                     break;
 
+            }
+
+            // OOA Sentry Jamming
+            if (Jammed)
+            {
+                JammedRecoverTime = 90;
+                if (Main.rand.NextBool(4))
+                {
+                    float rot = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                    new ElectricSpark(projectile.Center, 5 * Vector2.UnitX.RotatedBy(rot), Color.Purple, 1f, 25).Spawn();
+                }
+            }
+            if (JammedRecoverTime > 0)
+            {
+                JammedRecoverTime--;
+                if (JammedRecoverTime % 10 == 0)
+                {
+                    float rot = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                    new ElectricSpark(projectile.Center, 5 * Vector2.UnitX.RotatedBy(rot), Color.Purple, 1f, 25).Spawn();
+                }
+                return false;
             }
 
             return base.PreAI(projectile);
@@ -2359,6 +2388,8 @@ namespace FargowiltasSouls.Content.Projectiles
                 projectile.Opacity = 1f;
                 FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor);
             }
+            else if (JammedRecoverTime > 0)
+                lightColor = Color.Lerp(lightColor, Color.Purple, JammedRecoverTime / 90f);
             return base.PreDraw(projectile, ref lightColor);
         }
     }

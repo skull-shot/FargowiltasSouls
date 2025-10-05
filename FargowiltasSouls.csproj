@@ -79,6 +79,7 @@
     <Folder Include="Assets\Sounds\Challengers\Trojan\" />
     <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
     <Folder Include="Common\Graphics\Drawers\" />
+    <Folder Include="Content\Projectiles\Eternity\Enemies\Custom\" />
     <Folder Include="Content\WorldGen\" />
   </ItemGroup>
   <ItemGroup>
