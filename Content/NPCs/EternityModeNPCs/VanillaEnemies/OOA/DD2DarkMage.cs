@@ -213,9 +213,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 }
             }
             State = (int) Main.rand.NextFromCollection(states);
-            State = Math.Max(PreviousState + 1, 1);
-            if (State > 4)
-                State = 1;
             NetSync(npc);
         }
         public void Movement(NPC npc)

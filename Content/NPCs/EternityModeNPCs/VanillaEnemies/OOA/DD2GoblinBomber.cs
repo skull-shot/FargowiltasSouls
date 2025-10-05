@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.TargetClosest();
 
             Timer++;
-            if (Timer >= 180 && npc.HasPlayerTarget && npc.Distance(Main.player[npc.target].Center) < 1000)
+            if (Timer >= 180 && npc.HasPlayerTarget && npc.Distance(Main.player[npc.target].Center) < 700)
             {
                 Vector2 targetPos = Main.player[npc.target].Center - npc.Center;
                 if (FargoSoulsUtil.HostCheck)

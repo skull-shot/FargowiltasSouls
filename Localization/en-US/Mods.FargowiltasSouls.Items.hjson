@@ -3746,10 +3746,10 @@ Ruminate: "[c/FF3399:Hold {0} for more details]"
 
 ActiveSkillMenuItem: {
 	DisplayName: Active Skills
-	Tooltip: "Use to open the Active Skill menu"
+	Tooltip: Use to open the Active Skill menu
 }
 
 EffectTogglerItem: {
 	DisplayName: Effect Toggler
-	Tooltip: "Use to open the Effect Toggles menu"
+	Tooltip: Use to open the Effect Toggles menu
 }
