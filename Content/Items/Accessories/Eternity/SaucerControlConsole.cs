@@ -36,12 +36,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateInventory(Player player)
         {
-            player.AddEffect<AmmoCycleEffect>(Item);
+            //player.AddEffect<AmmoCycleEffect>(Item);
         }
 
         public override void UpdateVanity(Player player)
         {
-            player.AddEffect<AmmoCycleEffect>(Item);
+            //player.AddEffect<AmmoCycleEffect>(Item);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
