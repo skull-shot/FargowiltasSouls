@@ -64,7 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Player player = Main.LocalPlayer;
             bool wiz = player.ForceEffect<GladiatorSpears>();
             bool buff = player.HasBuff<GladiatorBuff>();
-            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Ranged)) / (buff ? 4 : 6);
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(DamageClass.Ranged)) / (buff ? 4 : 6);
             if (scaling < 0)
                 scaling = 0;
             if (wiz)

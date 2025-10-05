@@ -2,11 +2,12 @@
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -52,10 +53,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
-            damageClass = DamageClass.Summon;
+            Player player = Main.LocalPlayer;
+            damageClass = DamageClass.Ranged;
             tooltipColor = null;
             scaling = null;
-            return (int)(UfoMinionEffect.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
+            return (int)((UfoMinionEffect.BaseDamage(player) + player.FindAmmo([AmmoID.Arrow, AmmoID.Bullet, AmmoID.Rocket]).damage) * player.ActualClassDamage(DamageClass.Ranged));
         }
     }
     public class UfoMinionEffect : AccessoryEffect
@@ -63,11 +65,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override Header ToggleHeader => Header.GetHeader<HeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<SaucerControlConsole>();
         public override bool MinionEffect => true;
-        public static int BaseDamage(Player player) => NPC.downedGolemBoss ? 30 : 15;
+        public static int BaseDamage(Player player) => NPC.downedGolemBoss ? 30 : 0;
         public override void PostUpdateEquips(Player player)
         {
             if (!player.HasBuff<SouloftheMasochistBuff>())
                 player.AddBuff(ModContent.BuffType<SaucerMinionBuff>(), 2);
+        }
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
+        {
+            if (item != null || (projectile != null && projectile.FargoSouls().ItemSource)) // TODO: mark projectiles created by saucer so i dont need to use itemsource
+            {
+                for (int i = 0; i < Main.maxProjectiles; i++) //make minion attack when you attack a given enemy
+                {
+                    if (Main.projectile[i].ai[0] == 0 && Main.projectile[i].type == ModContent.ProjectileType<MiniSaucer>() && Main.projectile[i].owner == player.whoAmI && Main.projectile[i].active)
+                    {
+                        Main.projectile[i].localAI[1] = target.whoAmI;
+                        Main.projectile[i].ai[0] = 20;
+                        if (Main.projectile[i].localAI[0] == 0 && !Main.dedServ)
+                            SoundEngine.PlaySound(SoundID.Zombie68, Main.projectile[i].Center);
+                        if (Main.projectile[i].localAI[0] < 120)
+                            Main.projectile[i].localAI[0] += 60;
+                        else Main.projectile[i].localAI[0] = 120;
+                        break;
+                    }
+                }
+            }
         }
 
     }

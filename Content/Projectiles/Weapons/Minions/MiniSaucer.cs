@@ -1,8 +1,7 @@
-using FargowiltasSouls.Assets.Textures;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.IO;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -13,13 +12,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
     public class MiniSaucer : ModProjectile
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/Minions", Name);
-        private int rotation = 0;
-        private int syncTimer;
-        private Vector2 mousePos;
 
         public override void SetStaticDefaults()
         {
-            //ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -30,211 +25,217 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.netImportant = true;
             Projectile.width = 25;
             Projectile.height = 25;
-            Projectile.scale = 1f;
-            Projectile.timeLeft *= 5;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.minion = true;
-            Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
-            Projectile.scale = 1.5f;
         }
 
-        public override void SendExtraAI(BinaryWriter writer)
-        {
-            writer.Write(mousePos.X);
-            writer.Write(mousePos.Y);
-        }
+        ref float PlayerHitTimer => ref Projectile.localAI[0];
+        ref float PlayerHitCooldown => ref Projectile.ai[0];
+        ref float FunnyHoverMovement => ref Projectile.ai[1];
+        ref float HitTarget => ref Projectile.localAI[1];
+        ref float AttackTimer => ref Projectile.localAI[2];
+        private bool hoverleft;
+        private bool reposition;
+        private Vector2 hoverrng;
+        public static Item FakeItem = null; // fake item exclusively used so that the accessory consumes ammo using vanilla method
 
-        public override void ReceiveExtraAI(BinaryReader reader)
+        public void ConsumeAmmo(int ammoid)
         {
-            Vector2 buffer;
-            buffer.X = reader.ReadSingle();
-            buffer.Y = reader.ReadSingle();
-            if (Projectile.owner != Main.myPlayer)
+            if (FakeItem == null || FakeItem.useAmmo != ammoid)
             {
-                mousePos = buffer;
+                FakeItem = new Item();
+                FakeItem.useAmmo = Main.LocalPlayer.FindAmmo([AmmoID.Arrow, AmmoID.Bullet, AmmoID.Rocket, AmmoID.CandyCorn, AmmoID.Stake]).ammo;
             }
+            if (Main.rand.NextBool(3)) //66% chance to not consume
+                Main.player[Projectile.owner].PickAmmo(FakeItem, out int _, out float _, out int _, out float _, out int _);
         }
 
-        int rayCounter;
+        public static int RocketTypeAi(int ammoitem)
+        {
+            return ammoitem switch
+            {
+                ItemID.RocketI => 1,
+                ItemID.RocketII => 2,
+                ItemID.RocketIII => 3,
+                ItemID.RocketIV => 4,
+                ItemID.MiniNukeI => 5,
+                ItemID.MiniNukeII => 6,
+                ItemID.ClusterRocketI => 7,
+                ItemID.ClusterRocketII => 8,
+                ItemID.DryRocket => 9,
+                ItemID.WetRocket => 10,
+                ItemID.LavaRocket => 11,
+                ItemID.HoneyRocket => 12,
+                _ => 1,
+            };
+        }
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
+            NPC target = null;
+            Item ammo = player.FindAmmo([AmmoID.Arrow, AmmoID.Bullet, AmmoID.Rocket, AmmoID.CandyCorn, AmmoID.Stake]);
+            int damage = (int)((UfoMinionEffect.BaseDamage(player) + ammo.damage) * player.ActualClassDamage(DamageClass.Ranged));
+            float shotspeed = ammo.shootSpeed + 14;
+
+            int switcher = (ammo.ammo == AmmoID.Bullet || ammo.ammo == AmmoID.CandyCorn) ? 1 : (ammo.ammo == AmmoID.Arrow || ammo.ammo == AmmoID.Stake) ? 2 : ammo.ammo == AmmoID.Rocket ? 3 : 4;
             if (player.active && !player.dead && player.FargoSouls().MiniSaucer)
                 Projectile.timeLeft = 2;
 
-            /*NPC minionAttackTargetNpc = Projectile.OwnerMinionAttackTargetNPC;
-            if (minionAttackTargetNpc != null && Projectile.ai[0] != minionAttackTargetNpc.whoAmI && minionAttackTargetNpc.CanBeChasedBy(projectile))
+            for (int i = 0; i < Main.maxNPCs; i++)
             {
-                Projectile.ai[0] = minionAttackTargetNpc.whoAmI;
-                Projectile.netUpdate = true;
-            }*/
-
-            if (player.whoAmI == Main.myPlayer)
-            {
-                mousePos = Main.MouseWorld;
-                mousePos.Y -= 250f;
-            }
-
-            if (Projectile.Distance(Main.player[Projectile.owner].Center) > 2000)
-            {
-                Projectile.Center = player.Center;
-                Projectile.velocity = Vector2.UnitX.RotatedByRandom(2 * Math.PI) * 12f;
-            }
-
-            Vector2 distance = mousePos - Projectile.Center;
-            float length = distance.Length();
-            if (length > 10f)
-            {
-                distance /= 18f;
-                Projectile.velocity = (Projectile.velocity * 23f + distance) / 24f;
-            }
-            else
-            {
-                if (Projectile.velocity.Length() < 12f)
-                    Projectile.velocity *= 1.05f;
-            }
-
-            if (player.whoAmI == Main.myPlayer)
-            {
-                if (++syncTimer > 20)
+                if (Main.npc[i].whoAmI == HitTarget && HitTarget != 0 && Main.npc[i].CanBeChasedBy())
                 {
-                    syncTimer = 0;
-                    Projectile.netUpdate = true;
+                    target = Main.npc[i];
                 }
+            }
 
-                int dir = 0; // 1 is left, -1 is right; right takes priority
-                if (player.controlUseTile) // right
-                    dir = -1;
-                else if (player.controlUseItem) // left
-                    dir = 1;
-                if (dir == -1)
+            if (target != null && PlayerHitTimer > 0 && switcher != 4)
+            {
+                PlayerHitTimer--;
+                AttackTimer++;
+                switch (switcher) //attacks
                 {
-                    if (++rayCounter > 20)
-                    {
-                        rayCounter = 0;
-
-                        if (player.whoAmI == Main.myPlayer)
+                    case 1: //bullets
+                        HoveringMovement(target.Top, target.Center);
+                        if (AttackTimer >= 12 && Projectile.owner == Main.myPlayer)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY, ModContent.ProjectileType<SaucerDeathray>(),
-                                Projectile.damage / 2, Projectile.knockBack / 2f, Main.myPlayer, 0f, Projectile.identity);
-                        }
-                    }
-                }
-                else
-                {
-                    rayCounter = 0;
-                }
-
-                if (dir == 1)
-                {
-                    if (++Projectile.localAI[0] > 5f) //shoot laser
-                    {
-                        Projectile.localAI[0] = 0f;
-                        if (player.whoAmI == Main.myPlayer)
-                        {
-                            Vector2 vel = Projectile.SafeDirectionTo(Main.MouseWorld) * 16f;
-                            SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
-
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity * 2.5f,
-                                vel.RotatedBy((Main.rand.NextDouble() - 0.5) * 0.785398185253143 / 3.0),
-                                ModContent.ProjectileType<SaucerLaser>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
-                        }
-                    }
-
-                    if (++Projectile.localAI[1] > 20f) //try to find target for rocket
-                    {
-                        Projectile.localAI[1] = 0f;
-
-                        float maxDistance = 500f;
-                        int possibleTarget = -1;
-                        for (int i = 0; i < Main.maxNPCs; i++)
-                        {
-                            NPC npc = Main.npc[i];
-                            if (npc.CanBeChasedBy(Projectile) && Collision.CanHitLine(Projectile.Center, 0, 0, npc.Center, 0, 0))
+                            AttackTimer = 0;
+                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation + MathHelper.PiOver2) * shotspeed, ammo.shoot, damage, ammo.knockBack / 2, player.whoAmI);
+                            if (p != Main.maxProjectiles)
                             {
-                                float npcDistance = Projectile.Distance(npc.Center);
-                                if (npcDistance < maxDistance)
+                                if ((Main.projectile[p].penetrate > 1 || Main.projectile[p].penetrate <= -1) && !Main.projectile[p].usesIDStaticNPCImmunity && !Main.projectile[p].usesLocalNPCImmunity)
                                 {
-                                    maxDistance = npcDistance;
-                                    possibleTarget = i;
+                                    Main.projectile[p].usesIDStaticNPCImmunity = true;
+                                    Main.projectile[p].idStaticNPCHitCooldown = 10; //todo: shared static iframes between different proj types
                                 }
                             }
+                            SoundEngine.PlaySound(SoundID.Item11 with { Volume = 0.5f }, Projectile.Center);
+                            ConsumeAmmo(ammo.ammo);
                         }
+                        break;
 
-                        if (possibleTarget >= 0) //shoot rocket
+                    case 2: //arrows
+                        if (reposition)
                         {
-                            Vector2 vel = new Vector2(0f, -10f).RotatedBy((Main.rand.NextDouble() - 0.5) * Math.PI);
-                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, ModContent.ProjectileType<SaucerRocket>(),
-                                Projectile.damage, Projectile.knockBack * 4f, Projectile.owner, possibleTarget, 20f);
+                            float reporng = 64;
+                            hoverrng = new Vector2(Main.rand.NextFloat(-reporng, reporng), Main.rand.NextFloat(-reporng, reporng));
+                            reposition = false;
                         }
-                    }
+                        Vector2 pos = target.Top + new Vector2(0, -160);
+                        Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, pos + hoverrng, Projectile.velocity, 1.5f, 1.5f);
+                        Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.DirectionTo(target.Center).ToRotation() - MathHelper.PiOver2, 0.2f);
+
+                        if (Projectile.Distance(pos + hoverrng) < 64f)
+                        {
+                            if (AttackTimer >= 30 && AttackTimer % 6 == 0 && Projectile.owner == Main.myPlayer)
+                            {
+                                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation + MathHelper.PiOver2) * shotspeed, ammo.shoot, damage, ammo.knockBack / 2, player.whoAmI);
+                                if (p != Main.maxProjectiles)
+                                {
+                                    if ((Main.projectile[p].penetrate > 1 || Main.projectile[p].penetrate <= -1) && !Main.projectile[p].usesIDStaticNPCImmunity && !Main.projectile[p].usesLocalNPCImmunity)
+                                    {
+                                        Main.projectile[p].usesIDStaticNPCImmunity = true;
+                                        Main.projectile[p].idStaticNPCHitCooldown = 10; //todo: shared static iframes between different proj types
+                                    }
+                                }
+                                SoundEngine.PlaySound(SoundID.Item5 with { Volume = 0.5f }, Projectile.Center);
+                                ConsumeAmmo(ammo.ammo);
+                            }
+                        }
+                        if (AttackTimer >= 60)
+                        {
+                            AttackTimer = 0;
+                            reposition = true;
+                        }
+                        break;
+
+                    case 3: //rockets
+                        if (reposition)
+                        {
+                            if (hoverleft) hoverleft = false;
+                            else hoverleft = true;
+                            reposition = false;
+                        }
+                        int direction = hoverleft ? 1 : -1;
+                        Vector2 corner = hoverleft ? target.TopLeft : target.TopRight;
+                        Vector2 dest = new(corner.X + target.width * 3 * direction, corner.Y - target.height * 1.5f);
+                        if (Projectile.Center.Distance(dest) > 4f)
+                            Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, dest, Projectile.velocity, 1f, 1.5f);
+                        else //snap to position
+                        {
+                            Projectile.velocity = Vector2.Zero;
+                            Projectile.Center = dest;
+                        }
+                        Projectile.rotation = Projectile.rotation.AngleLerp(0, 0.2f);
+
+                        if (AttackTimer >= 60 && AttackTimer % 12 == 0 && Projectile.owner == Main.myPlayer)
+                        {
+                            int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation).RotatedByRandom(MathHelper.TwoPi) * shotspeed, ModContent.ProjectileType<SaucerRocket>(), damage, ammo.knockBack / 2, player.whoAmI, target.whoAmI, 20f, RocketTypeAi(ammo.type));
+                            if (p != Main.maxProjectiles)
+                            {
+                                if ((Main.projectile[p].penetrate > 1 || Main.projectile[p].penetrate <= -1) && !Main.projectile[p].usesIDStaticNPCImmunity && !Main.projectile[p].usesLocalNPCImmunity)
+                                {
+                                    Main.projectile[p].usesIDStaticNPCImmunity = true;
+                                    Main.projectile[p].idStaticNPCHitCooldown = 10; //todo: shared static iframes between different proj types
+                                }
+                            }
+                            SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
+                            ConsumeAmmo(ammo.ammo);
+                        }
+                        if (AttackTimer >= 120)
+                        {
+                            AttackTimer = 0;
+                            reposition = true;
+                        }
+                        break;
+
+                    default:
+                        Main.NewText("you shouldnt be seeing this text, show schmoovi");
+                        break;
                 }
             }
-
-            const float cap = 32f;
-            if (Projectile.velocity.X > cap)
-                Projectile.velocity.X = cap;
-            if (Projectile.velocity.X < -cap)
-                Projectile.velocity.X = -cap;
-            if (Projectile.velocity.Y > cap)
-                Projectile.velocity.Y = cap;
-            if (Projectile.velocity.Y < -cap)
-                Projectile.velocity.Y = -cap;
-
-            if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<SaucerDeathray>()] > 0)
+            else //idle
             {
-                Projectile.rotation = 0;
-                rotation = 0;
+                HitTarget = -1;
+                AttackTimer = 0;
+                HoveringMovement(player.Top, player.Center);
             }
-            else
+
+            if (Projectile.Distance(player.Center) > 3200)
             {
-                Projectile.rotation = (float)Math.Sin(2 * Math.PI * rotation++ / 90) * (float)Math.PI / 8f;
-                if (rotation > 180)
-                    rotation = 0;
+                AttackTimer = 0;
+                Projectile.Center = player.Center;
             }
+            if (PlayerHitCooldown > 0)
+                PlayerHitCooldown--;
+            float lightFade = (255f - Projectile.alpha) / 255f;
+            Color color = Color.Cyan;
+            Lighting.AddLight(Projectile.Center + Projectile.velocity, lightFade * color.R / 255f, lightFade * color.G / 255f, lightFade * color.B / 255f);
+        }
+        public void HoveringMovement(Vector2 pos, Vector2 rotateat)
+        { //only used by idle and bullet behavior
+            if (FunnyHoverMovement >= 64) hoverleft = false;
+            if (FunnyHoverMovement <= -64) hoverleft = true;
+            if (hoverleft) FunnyHoverMovement += 2;
+            else FunnyHoverMovement -= 2;
+
+            float resistance = Projectile.velocity.Length() * 1 / 50f;
+            Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, pos + new Vector2(FunnyHoverMovement, -128 + Math.Abs(FunnyHoverMovement / 2)), Projectile.velocity, 1 - resistance, 1 + resistance);
+            Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.DirectionTo(rotateat).ToRotation() - MathHelper.PiOver2, 0.2f);
         }
 
-        public override bool? CanCutTiles()
+        public override bool? CanDamage()
         {
             return false;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(BuffID.Electrified, 360);
-        }
-
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
-            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
-            Vector2 origin2 = rectangle.Size() / 2f;
-
-            Color color26 = lightColor;
-            color26 = Projectile.GetAlpha(color26);
-
-            SpriteEffects effects = SpriteEffects.None;
-
-            for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
-            {
-                Color color27 = color26 * 0.5f;
-                color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                Vector2 value4 = Projectile.oldPos[i];
-                float num165 = Projectile.oldRot[i];
-                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
-            }
-
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor);
             return false;
         }
     }

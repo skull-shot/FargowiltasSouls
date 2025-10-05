@@ -1,5 +1,5 @@
-using Microsoft.Xna.Framework;
 using System;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -25,9 +25,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.height = 14;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.alpha = 0;
-            Projectile.timeLeft = 600;
-            Projectile.DamageType = DamageClass.Summon;
+            Projectile.timeLeft = 300;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
@@ -43,15 +42,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 {
                     Projectile.velocity = Vector2.Normalize(Projectile.velocity) * (Projectile.velocity.Length() + 6f);
                     Projectile.netUpdate = true;
-                    for (int index1 = 0; index1 < 8; ++index1)
-                    {
-                        Vector2 vector2 = (Vector2.UnitX * -8f + -Vector2.UnitY.RotatedBy(index1 * 3.14159274101257 / 4.0, new Vector2()) * new Vector2(2f, 8f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
-                        int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.GoldFlame, 0.0f, 0.0f, 0, new Color(), 1f);
-                        Main.dust[index2].scale = 1.5f;
-                        Main.dust[index2].noGravity = true;
-                        Main.dust[index2].position = Projectile.Center + vector2;
-                        Main.dust[index2].velocity = Projectile.velocity * 0.0f;
-                    }
                 }
             }
             else //start homing
@@ -74,27 +64,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 }
 
                 Projectile.tileCollide = true;
-                if (++Projectile.localAI[0] > 5)
-                {
-                    Projectile.localAI[0] = 0f;
-                    for (int index1 = 0; index1 < 4; ++index1)
-                    {
-                        Vector2 vector2 = (Vector2.UnitX * -8f + -Vector2.UnitY.RotatedBy(index1 * 3.14159274101257 / 4.0, new Vector2()) * new Vector2(2f, 4f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
-                        int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.GoldFlame, 0.0f, 0.0f, 0, new Color(), 1f);
-                        Main.dust[index2].scale = 1.5f;
-                        Main.dust[index2].noGravity = true;
-                        Main.dust[index2].position = Projectile.Center + vector2;
-                        Main.dust[index2].velocity = Projectile.velocity * 0.0f;
-                    }
-                }
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
-
             Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
             int index21 = Dust.NewDust(Projectile.Center, 0, 0, DustID.GoldFlame, 0.0f, 0.0f, 0, new Color(), 1f);
             Main.dust[index21].position = Projectile.Center + vector21;
-            Main.dust[index21].scale = 1f;
             Main.dust[index21].noGravity = true;
 
             if (++Projectile.frameCounter >= 3)
@@ -103,47 +78,97 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 if (++Projectile.frame >= 3)
                     Projectile.frame = 0;
             }
-        }
 
-        /*public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Projectile.penetrate < 0)
-                target.immune[Projectile.owner] = 0;
-        }*/
+            if (Projectile.ai[2] >= 9 && Projectile.wet) //liquid rockets
+                Projectile.Kill();
+        }
 
         public override void OnKill(int timeLeft)
         {
+            int explosionsize = 64;
+            Point point = Projectile.Center.ToTileCoordinates();
+            explosionsize = Projectile.ai[2] switch
+            {
+                1 or 2 or 7 or 8 => 64,
+                3 or 4 => 100,
+                5 or 6 => 125,
+                >= 9 => 24,
+                _ => 64,
+            };
+            switch (Projectile.ai[2])
+            {
+                case 2:
+                case 4:
+                case 6:
+                case 8: //nightmare vanilla tile breaking explosion code
+                    int explrad = Projectile.ai[2] == 6 ? 7 : Projectile.ai[2] == 4 ? 5 : 3;
+                    int minI = (int)(Projectile.position.X / 16f - explrad);
+                    int maxI = (int)(Projectile.position.X / 16f + explrad);
+                    int minJ = (int)(Projectile.position.Y / 16f - explrad);
+                    int maxJ = (int)(Projectile.position.Y / 16f + explrad);
+                    if (minI < 0) minI = 0; if (maxI > Main.maxTilesX) maxI = Main.maxTilesX; if (minJ < 0) minJ = 0; if (maxJ > Main.maxTilesY) maxJ = Main.maxTilesY;
+                    Projectile.ExplodeTiles(Projectile.position, explrad, minI, maxI, minJ, maxJ, Projectile.ShouldWallExplode(Projectile.position, explrad, minI, maxI, minJ, maxJ));
+                    break;
+
+                case 9: FuckUpWorld(point, 3.5f, DelegateMethods.SpreadDry); break;
+                case 10: FuckUpWorld(point, 3f, DelegateMethods.SpreadWater); break;
+                case 11: FuckUpWorld(point, 3f, DelegateMethods.SpreadLava); break;
+                case 12: FuckUpWorld(point, 3f, DelegateMethods.SpreadHoney); break;
+            }
+
             if (Projectile.penetrate > -1)
             {
                 Projectile.penetrate = -1;
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
                 Projectile.position = Projectile.Center;
-                Projectile.width = Projectile.height = 112;
+                Projectile.width = Projectile.height = explosionsize;
                 Projectile.position.X -= Projectile.width / 2;
                 Projectile.position.Y -= Projectile.height / 2;
-                for (int index = 0; index < 4; ++index)
+                for (int i = 0; i < 2; ++i)
                     Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0.0f, 0.0f, 100, new Color(), 1.5f);
-                for (int index1 = 0; index1 < 40; ++index1)
+                for (int i = 0; i < 10; ++i)
                 {
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldFlame, 0.0f, 0.0f, 0, new Color(), 2.5f);
-                    Main.dust[index2].noGravity = true;
-                    Dust dust1 = Main.dust[index2];
-                    dust1.velocity *= 3f;
-                    int index3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldFlame, 0.0f, 0.0f, 100, new Color(), 1.5f);
-                    Dust dust2 = Main.dust[index3];
-                    dust2.velocity *= 2f;
-                    Main.dust[index3].noGravity = true;
-                }
-                for (int index1 = 0; index1 < 1; ++index1)
-                {
-                    int index2 = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + new Vector2(Projectile.width * Main.rand.Next(100) / 100f, Projectile.height * Main.rand.Next(100) / 100f) - Vector2.One * 10f, new Vector2(), Main.rand.Next(61, 64), 1f);
-                    Gore gore = Main.gore[index2];
-                    gore.velocity *= 0.3f;
-                    Main.gore[index2].velocity.X += Main.rand.Next(-10, 11) * 0.05f;
-                    Main.gore[index2].velocity.Y += Main.rand.Next(-10, 11) * 0.05f;
+                    int i2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldFlame, 2.5f);
+                    Main.dust[i2].noGravity = true;
+                    Main.dust[i2].velocity *= 3f;
+                    int i3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldFlame, Alpha: 100, Scale: 1.5f);
+                    Main.dust[i3].velocity *= 2f;
+                    Main.dust[i3].noGravity = true;
                 }
                 Projectile.Damage();
+
+                if (Projectile.ai[2] == 7 || Projectile.ai[2] == 8) //cluster
+                {
+                    for (float i = 0f; i < 0.25f; i += 1f / 6f)
+                    {
+                        Vector2 vel = (Main.rand.NextFloat() * ((float)Math.PI * 2f) + i * ((float)Math.PI * 2f)).ToRotationVector2() * (4f + Main.rand.NextFloat() * 2f);
+                        int c = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel + Vector2.UnitY * -1f, Projectile.ai[2] == 8 ? ProjectileID.ClusterFragmentsII : ProjectileID.ClusterFragmentsI, Projectile.damage / 2, 0f, Projectile.owner);
+                        Main.projectile[c].timeLeft -= Main.rand.Next(30);
+                        Main.projectile[c].usesIDStaticNPCImmunity = true;
+                        Main.projectile[c].idStaticNPCHitCooldown = 10; //todo: shared static
+                    }
+                }
             }
+        }
+
+        private static void FuckUpWorld(Point pt, float size, Utils.TileActionAttempt plot)
+        {
+            Tile tile = Main.tile[pt.X, pt.Y];
+            if (tile != null && !tile.IsActuated && tile.IsHalfBlock)
+            {
+                int num = pt.Y - 1;
+                if (num >= 0)
+                {
+                    tile = Main.tile[pt.X, num];
+                    if (!WorldGen.SolidOrSlopedTile(tile))
+                    {
+                        pt.Y--;
+                    }
+                }
+            }
+            DelegateMethods.v2_1 = pt.ToVector2();
+            DelegateMethods.f_1 = size;
+            Utils.PlotTileArea(pt.X, pt.Y, plot);
         }
 
         public override Color? GetAlpha(Color lightColor)

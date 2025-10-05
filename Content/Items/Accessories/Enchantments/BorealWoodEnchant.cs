@@ -49,7 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
             Player player = Main.LocalPlayer;
-            scaling = (int)((player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage) * player.ActualClassDamage(DamageClass.Ranged)) / 2;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(DamageClass.Ranged)) / 2;
             if (scaling < 0)
                 scaling = 0;
 
