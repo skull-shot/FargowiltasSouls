@@ -1,5 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -22,6 +24,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
             Projectile.localNPCHitCooldown = -1;
             Projectile.scale = 3;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
+            CooldownSlot = ImmunityCooldownID.WrongBugNet;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
            => Projectile.Distance(FargoSoulsUtil.ClosestPointInHitbox(targetHitbox, Projectile.Center)) < projHitbox.Width * 0.9f / 2;
@@ -41,6 +44,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= 0f;
+            if (target.HasEffect<RemoteControlDR>() && !target.HasBuff<SuperchargedBuff>())
+            {
+                modifiers.Knockback *= 0f;
+                modifiers.DisableSound();
+            }
             //doing it like this bc scaled projectile damage doesnt work?
             if (Main.masterMode) modifiers.SourceDamage.Flat += 270;
             else if (Main.expertMode) modifiers.SourceDamage.Flat += 180;

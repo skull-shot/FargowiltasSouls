@@ -23,6 +23,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             // DisplayName.SetDefault("Holy Deathray");
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = ImmunityCooldownID.General;
+        }
+
         public override bool? CanDamage() => Projectile.scale >= 1f;
 
         public override void AI()
