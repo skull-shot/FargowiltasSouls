@@ -142,7 +142,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     for (float i = 0f; i < 0.25f; i += 1f / 6f)
                     {
                         Vector2 vel = (Main.rand.NextFloat() * ((float)Math.PI * 2f) + i * ((float)Math.PI * 2f)).ToRotationVector2() * (4f + Main.rand.NextFloat() * 2f);
-                        int c = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel + Vector2.UnitY * -1f, Projectile.ai[2] == 8 ? ProjectileID.ClusterFragmentsII : ProjectileID.ClusterFragmentsI, Projectile.damage / 2, 0f, Projectile.owner);
+                        int c = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel + Vector2.UnitY * -1f, Projectile.ai[2] == 8 ? ProjectileID.ClusterSnowmanFragmentsII : ProjectileID.ClusterSnowmanFragmentsI, Projectile.damage / 2, 0f, Projectile.owner);
                         Main.projectile[c].timeLeft -= Main.rand.Next(30);
                         Main.projectile[c].usesIDStaticNPCImmunity = true;
                         Main.projectile[c].idStaticNPCHitCooldown = 10; //todo: shared static

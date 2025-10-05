@@ -1262,7 +1262,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size for projectiles, hold the Precision Seal key to disable dashes and double jumps
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
 		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer
+		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a Mini Saucer that attacks with ammo and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu
 		'Warm, beating, and no body needed'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs"
@@ -1479,7 +1479,7 @@ SaucerControlConsole: {
 		Grants immunity to Distorted and Unstable
 		Summons a friendly Mini Saucer that shoots enemies struck by you
 		Mini Saucer fires bullets, arrows, or rockets from your inventory
-		80% chance to not consume ammo
+		66% chance to not consume ammo
 		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		'''

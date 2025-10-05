@@ -83,6 +83,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     {
                         Projectile.netUpdate = true;
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, -1, -1, Projectile.whoAmI);
+                        SoundEngine.PlaySound(SoundID.DD2_WitherBeastHurt with {Pitch = 0.5f}, Projectile.Center);
+                        SoundEngine.PlaySound(SoundID.Item131, Projectile.Center);
                     }
                 }
             }

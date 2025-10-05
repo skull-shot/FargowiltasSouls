@@ -160,17 +160,21 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                             else hoverleft = true;
                             reposition = false;
                         }
-                        int direction = hoverleft ? 1 : -1;
+                        float rotation;
                         Vector2 corner = hoverleft ? target.TopLeft : target.TopRight;
-                        Vector2 dest = new(corner.X + target.width * 3 * direction, corner.Y - target.height * 1.5f);
+                        Vector2 dest = new(corner.X + target.width * 3 * (hoverleft ? 1 : -1), corner.Y - target.height * 1.5f);
                         if (Projectile.Center.Distance(dest) > 4f)
+                        {
                             Projectile.velocity = FargoSoulsUtil.SmartAccel(Projectile.Center, dest, Projectile.velocity, 1f, 1.5f);
+                            rotation = dest.X > Projectile.Center.X ? 0.5f : -0.5f;
+                        }
                         else //snap to position
                         {
                             Projectile.velocity = Vector2.Zero;
                             Projectile.Center = dest;
+                            rotation = 0;
                         }
-                        Projectile.rotation = Projectile.rotation.AngleLerp(0, 0.2f);
+                        Projectile.rotation = Projectile.rotation.AngleLerp(rotation, 0.2f);
 
                         if (AttackTimer >= 60 && AttackTimer % 12 == 0 && Projectile.owner == Main.myPlayer)
                         {
