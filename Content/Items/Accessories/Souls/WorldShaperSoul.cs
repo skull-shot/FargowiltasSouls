@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,6 +12,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     //[AutoloadEquip(EquipType.Back)]
     public class WorldShaperSoul : BaseSoul
     {
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 36));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
