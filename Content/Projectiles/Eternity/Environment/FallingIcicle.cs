@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             Projectile.netImportant = true;
             Projectile.coldDamage = true;
 
-            Projectile.hide = true;
+            //Projectile.hide = true;
         }
 
         private bool firstTick = true;
@@ -150,6 +150,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 Projectile.netUpdate = true;
                 return;
             }
+            Projectile.hide = false;
 
         }
 

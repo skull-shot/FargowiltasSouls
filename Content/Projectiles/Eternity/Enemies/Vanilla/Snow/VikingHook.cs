@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
             Projectile.width = 12;
             Projectile.height = 12;
             Projectile.hostile = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.penetrate = -1;
         }
 
@@ -51,6 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
                 {
                     Projectile.velocity = 10 * Vector2.UnitX.RotatedBy(rot);
                     SoundEngine.PlaySound(SoundID.Item1, Projectile.Center);
+                    Projectile.tileCollide = true;
                 }
                 else
                 {
@@ -155,10 +156,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow
             Rectangle frame = new(0, 0, texture.Width, texture.Height);
             lightColor = Lighting.GetColor(Projectile.Center.ToTileCoordinates());
             float lightLevel = (lightColor.R + lightColor.G + lightColor.B) / 3f / 200f;
-            Color glowColor = Color.White with { A = 0 } * 0.7f * lightLevel;
+            Color glowColor = Color.White with { A = 0 } * 0.4f * lightLevel;
             for (int i = 0; i < 12; i++)
             {
-                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, frame, glowColor, Projectile.rotation, new Vector2(frame.Width / 2, frame.Height / 2), 1.2f * Projectile.scale, SpriteEffects.None);
+                Vector2 afterimageOffset = (MathHelper.TwoPi * i / 12).ToRotationVector2() * 2f * Projectile.scale;
+                Main.EntitySpriteDraw(texture, Projectile.Center + afterimageOffset - Main.screenPosition, frame, glowColor, Projectile.rotation, new Vector2(frame.Width / 2, frame.Height / 2), 1.2f * Projectile.scale, SpriteEffects.None);
             }
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation, new Vector2(frame.Width / 2, frame.Height / 2), Projectile.scale, SpriteEffects.None);
             return false;
