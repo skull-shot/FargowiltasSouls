@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
                 Player player = Main.player[npc.target];
                 float startupEnd = swoopStart + 40;
                 float telegraphEnd = startupEnd + 15;
-                float swoopEnd = telegraphEnd + 60;
+                float swoopEnd = telegraphEnd + 80;
                 float endlagEnd = swoopEnd + 40;
 
                 float xOffset = 300;
@@ -101,8 +101,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
                     // if facing left, rotate clockwise. otherwise, anti-clockwise
                     angleDown *= npc.direction;
                     dir = dir.RotatedBy(angleDown - 2 * angleDown * progress);
-                    dir *= 16f;
-                    npc.velocity = Vector2.Lerp(npc.velocity, dir, 0.1f);
+                    dir *= 11f;
+                    npc.velocity = Vector2.Lerp(npc.velocity, dir, 0.08f);
 
                     // feathers
                     float diff = swoopEnd - telegraphEnd;
