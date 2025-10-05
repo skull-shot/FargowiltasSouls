@@ -247,7 +247,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         num7 = OOANPC(x, y, DD2DrakinT2);
                     else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2WyvernT2) < num3)
                         num7 = OOANPC(x, y, DD2WyvernT2);
-                    else if (Main.rand.NextBool(6) && NPC.CountNPCS(DD2KoboldFlyerT2) < num2)
+                    else if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2KoboldFlyerT2) < num2)
                         num7 = OOANPC(x, y, DD2KoboldFlyerT2);
                     else if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2KoboldWalkerT2) < num5)
                         num7 = OOANPC(x, y, DD2KoboldWalkerT2);
@@ -260,7 +260,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2JavelinstT2) < num3)
                         num7 = OOANPC(x, y, DD2JavelinstT2);
                     else if (Main.rand.NextBool(4) && NPC.CountNPCS(DD2KoboldWalkerT2) + NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
-                        num7 = OOAChanceNPC(x, y, DD2KoboldWalkerT2, DD2KoboldFlyerT2, 3);
+                        num7 = OOAChanceNPC(x, y, DD2KoboldWalkerT2, DD2KoboldFlyerT2, 4);
                     else if (NPC.CountNPCS(DD2GoblinBomberT2) + NPC.CountNPCS(DD2GoblinT2) < num)
                     {
                         if (Main.rand.NextBool(3))
@@ -274,7 +274,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         num7 = OOANPC(x, y, DD2DrakinT2);
                     else if (Main.rand.Next(15) == 0 && NPC.CountNPCS(DD2WitherBeastT2) < num4)
                         num7 = OOANPC(x, y, DD2WitherBeastT2);
-                    else if (Main.rand.Next(7) == 0 && NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
+                    else if (Main.rand.Next(9) == 0 && NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
                         num7 = OOANPC(x, y, DD2KoboldFlyerT2);
                     else if (Main.rand.Next(9) == 0 && NPC.CountNPCS(DD2WyvernT2) < num3)
                         num7 = OOANPC(x, y, DD2WyvernT2);
@@ -293,7 +293,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         else if (Main.rand.Next(10) == 0 && NPC.CountNPCS(DD2WitherBeastT2) + NPC.CountNPCS(DD2JavelinstT2) < num4)
                             num7 = OOAChanceNPC(x, y, DD2JavelinstT2, DD2WitherBeastT2, 3);
                         else if (Main.rand.Next(7) == 0 && NPC.CountNPCS(DD2KoboldWalkerT2) + NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
-                            num7 = OOAChanceNPC(x, y, DD2KoboldWalkerT2, DD2KoboldFlyerT2, 3);
+                            num7 = OOAChanceNPC(x, y, DD2KoboldWalkerT2, DD2KoboldFlyerT2, 4);
                         else if (Main.rand.Next(11) == 0 && NPC.CountNPCS(DD2WyvernT2) < num3)
                             num7 = OOANPC(x, y, DD2WyvernT2);
                         if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2GoblinBomberT2) < num)

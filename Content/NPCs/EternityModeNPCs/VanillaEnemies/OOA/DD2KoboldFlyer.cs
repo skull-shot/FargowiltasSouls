@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.TargetClosest();
                 Counter++;
                 Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, Scale: 4f);
-                if (Counter > 120)
+                if (Counter > 90)
                 {
                     npc.dontTakeDamage = false;
                     npc.ai[0] = 3;

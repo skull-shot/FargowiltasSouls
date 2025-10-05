@@ -44,7 +44,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             if (!DD2Event.Ongoing)
                 return base.SafePreAI(npc);
 
-            FargoSoulsUtil.PrintAI(npc);
 
             Timer++;
             if (Shield == -1)
