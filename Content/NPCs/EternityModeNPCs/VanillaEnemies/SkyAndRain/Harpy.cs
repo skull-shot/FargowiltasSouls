@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
                 {
                     if (SwoopTimer == startupEnd + 1)
                     {
-                        FargoSoulsUtil.DustRing(npc.Center, 32, DustID.BlueMoss, 10f);
+                        FargoSoulsUtil.DustRing(npc.Center, 32, DustID.BlueFlare, 10f);
                     }
                     npc.velocity *= 0.85f;
                     npc.direction = npc.spriteDirection = npc.HorizontalDirectionTo(player.Center).NonZeroSign();
