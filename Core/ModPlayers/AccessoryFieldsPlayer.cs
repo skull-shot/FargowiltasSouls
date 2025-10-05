@@ -242,8 +242,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int FallthroughCD;
         public int AgitatingLensCD;
         public bool BerserkedFromAgitation = false;
-        public Item DarkenedHeartItem;
-        public int DarkenedHeartCD;
+        public Item RottingHeartItem;
+        public int RottingHeartCD;
         public int GuttedHeartCD = 60; //should prevent spawning despite disabled toggle when loading into world
         public Item NecromanticBrewItem;
         public float NecromanticBrewRotation;
@@ -283,7 +283,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MasochistSoul;
         public Item MasochistSoulItem;
         public bool MasochistHeart;
-        public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
         public int FrigidGemstoneCD;
@@ -338,6 +337,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //debuffs
         public bool Hexed;
+        public int HexedInflictor = -1;
         public bool Unstable;
         private int unstableCD;
         public bool Fused;

@@ -1,4 +1,5 @@
-// SoulTogglerButton: Open Effect Toggler
+// SoulToggler: "[i:FargowiltasSouls/EffectTogglerItem] Effect Toggles"
+// ActiveSkillMenu: "[i:FargowiltasSouls/ActiveSkillMenuItem] Active Skills"
 // Standard: Standard Mode
 // Eternity: Eternity Mode
 // Masochist: Masochist Mode
@@ -65,8 +66,6 @@ TitleLinks: {
 // SomeEffectsPreset: Some effects preset
 // MinimalEffectsPreset: Minimal effects preset
 // CustomPreset: Custom preset {0} (right click to save)
-// Reload button is currently removed
-// ReloadToggles: Reload Toggles (right click to reset)
 // NoToggles: No toggleable effects equipped!
 // DisplayAll: Display All
 // DisplayEquipped: Display Equipped

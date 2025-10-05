@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -16,7 +16,8 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 {
-    public class DarkenedHeart : SoulsItem
+    [LegacyName("DarkenedHeart")]
+    public class RottingHeart : SoulsItem
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
@@ -41,31 +42,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.moveSpeed += 0.1f;
-            modPlayer.DarkenedHeartItem = Item;
-            player.AddEffect<DarkenedHeartEaters>(Item);
-            if (modPlayer.DarkenedHeartCD > 0)
-                modPlayer.DarkenedHeartCD--;
+            modPlayer.RottingHeartItem = Item;
+            player.AddEffect<RottingHeartEaters>(Item);
+            if (modPlayer.RottingHeartCD > 0)
+                modPlayer.RottingHeartCD--;
         }
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
             damageClass = DamageClass.Default;
             tooltipColor = null;
             scaling = null;
-            return DarkenedHeartEaters.BaseDamage(Main.LocalPlayer);
+            return RottingHeartEaters.BaseDamage(Main.LocalPlayer);
         }
     }
-    public class DarkenedHeartEaters : AccessoryEffect
+    public class RottingHeartEaters : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<PureHeartHeader>();
-        public override int ToggleItemType => ModContent.ItemType<DarkenedHeart>();
+        public override int ToggleItemType => ModContent.ItemType<RottingHeart>();
         public override bool ExtraAttackEffect => true;
         public static int BaseDamage (Player player) => (int)((player.FargoSouls().PureHeart? 35 : 13) * player.ActualClassDamage(DamageClass.Generic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.WeaponUseTimer > 0 && modPlayer.DarkenedHeartCD <= 0 && !player.FargoSouls().PureHeart)
+            if (modPlayer.WeaponUseTimer > 0 && modPlayer.RottingHeartCD <= 0 && !player.FargoSouls().PureHeart)
             {
-                modPlayer.DarkenedHeartCD = 25;
+                modPlayer.RottingHeartCD = 25;
 
                 for (int i = 0; i < 300; i++) // 300 attempts
                 {
@@ -111,7 +112,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 Main.dust[index2].noGravity = true;
             }
             Vector2 vel = pos.DirectionTo(player.Center).RotatedByRandom(MathHelper.PiOver2 * 0.7f) * Main.rand.NextFloat(6, 10);
-            int p = Projectile.NewProjectile(player.GetSource_EffectItem<DarkenedHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, BaseDamage(player), 1.75f, player.whoAmI);
+            int p = Projectile.NewProjectile(player.GetSource_EffectItem<RottingHeartEaters>(), pos.X, pos.Y, vel.X, vel.Y, ProjectileID.TinyEater, BaseDamage(player), 1.75f, player.whoAmI);
             if (p.IsWithinBounds(Main.maxProjectiles))
             {
                 Main.projectile[p].DamageType = DamageClass.Default;
@@ -135,7 +136,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             if (!projectile.owner.IsWithinBounds(Main.maxPlayers))
                 return;
             Player player = Main.player[projectile.owner];
-            Item heartItem = player.FargoSouls().DarkenedHeartItem;
+            Item heartItem = player.FargoSouls().RottingHeartItem;
             if (player != null && heartItem != null && player.active && source is EntitySource_ItemUse itemSource && itemSource.Item.type == heartItem.type)
             {
                 HeartItemType = heartItem.type;
@@ -145,7 +146,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             if (fromEnch)
             {
-                if (HeartItemType != ModContent.ItemType<DarkenedHeart>())
+                if (HeartItemType != ModContent.ItemType<RottingHeart>())
                 {
                     Texture2D pureSeekerTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Misc/PureSeeker", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                     FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor, pureSeekerTexture);
@@ -158,7 +159,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             if (fromEnch)
             {
-                if (HeartItemType != ModContent.ItemType<DarkenedHeart>())
+                if (HeartItemType != ModContent.ItemType<RottingHeart>())
                 {
                     target.AddBuff(ModContent.BuffType<SublimationBuff>(), 30);
                 }

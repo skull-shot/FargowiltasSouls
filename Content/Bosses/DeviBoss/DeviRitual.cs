@@ -33,7 +33,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         {
             base.OnHitPlayer(target, info);
 
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
         }
 
         public override bool PreDraw(ref Color lightColor)

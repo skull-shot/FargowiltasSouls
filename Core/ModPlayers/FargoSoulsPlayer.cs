@@ -17,6 +17,7 @@ using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -51,7 +52,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 {
     public partial class FargoSoulsPlayer : ModPlayer
     {
-        public ToggleBackend Toggler = new();
+        public SoulToggleBackend Toggler = new();
 
         public Dictionary<AccessoryEffect, bool> TogglesToSync = [];
 
@@ -145,7 +146,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DeerSinew) playerData.Add("DeerSinew");
             if (OrdinaryCarrot) playerData.Add("OrdinaryCarrot");
             if (ConcentratedRainbowMatter) playerData.Add("ConcentratedRainbowMatter");
-            if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
             if (Toggler_ExtraJumpsDisabled) playerData.Add("Toggler_ExtraJumpsDisabled");
@@ -189,7 +189,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             DeerSinew = playerData.Contains("DeerSinew");
             OrdinaryCarrot = playerData.Contains("OrdinaryCarrot");
             ConcentratedRainbowMatter = playerData.Contains("ConcentratedRainbowMatter");
-            HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
             Toggler_ExtraJumpsDisabled = playerData.Contains("Toggler_ExtraJumpsDisabled");
@@ -209,12 +208,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void OnEnterWorld()
         {
             Toggler.TryLoad();
-            Toggler.LoadPlayerToggles(this);
+            Toggler.LoadPlayerToggles(Player);
             disabledToggles.Clear();
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
 
-            if (!ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
+            if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic1"), Color.LimeGreen);
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic2"), Color.LimeGreen);
@@ -250,7 +249,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
 
-            Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
+            if (ClientConfig.Instance.WikiNotification)
+                Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.Wiki"), Color.Lime);
 
             if (Toggler.CanPlayMaso)
             {
@@ -386,7 +386,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             //maso
             SlimyShieldItem = null;
-            DarkenedHeartItem = null;
+            RottingHeartItem = null;
             NecromanticBrewItem = null;
             DeerSinewNerf = false;
             PureHeart = false;
@@ -620,7 +620,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             chillLength = 0;
 
             SlimyShieldFalling = false;
-            DarkenedHeartCD = 60;
+            RottingHeartCD = 60;
             GuttedHeartCD = 60;
             IsDashingTimer = 0;
             GroundPound = 0;

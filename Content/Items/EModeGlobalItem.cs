@@ -61,10 +61,39 @@ namespace FargowiltasSouls.Content.Items
             {
                 return;
             }
+            if (item.type is ItemID.DivingHelmet or ItemID.DivingGear or ItemID.JellyfishDivingGear or ItemID.ArcticDivingGear)
+            {
+                string text = "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.SpaceBreathImmunity");
+                foreach (var tooltip in tooltips)
+                {
+                    if (item.type == ItemID.DivingHelmet && tooltip.Name == $"Tooltip0")
+                    {
+                        tooltip.Text += text;
+                    }
+                    if (item.type is ItemID.DivingGear or ItemID.JellyfishDivingGear && tooltip.Name == $"Tooltip1")
+                    {
+                        tooltip.Text += text;
+                    }
+                    if (item.type == ItemID.ArcticDivingGear && tooltip.Name == $"Tooltip2")
+                    {
+                        tooltip.Text += text;
+                    }
+                }
+            }
+            if (item.type is ItemID.MeteorHelmet or ItemID.MeteorSuit or ItemID.MeteorLeggings)
+            {
+                foreach (var tooltip in tooltips)
+                {
+                    if (tooltip.Name == "SetBonus")
+                    {
+                        tooltip.Text += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.SpaceBreathImmunity");
+                    }
+                }
+            }
             EmodeItemBalance.BalanceTooltips(item, ref tooltips);
             if (item.prefix >= PrefixID.Hard && item.prefix <= PrefixID.Warding)
             {
-                int life = 5;
+                const int life = 5;
                 foreach (TooltipLine tooltip in tooltips)
                 {
                     if (tooltip.Name == "PrefixAccDefense")

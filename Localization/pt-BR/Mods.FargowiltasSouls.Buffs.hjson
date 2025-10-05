@@ -278,11 +278,6 @@ LihzahrdBlessingBuff: {
 	Message: A luz do altar brilha em você!
 }
 
-LovestruckBuff: {
-	// DisplayName: Lovestruck
-	// Description: You are in love!
-}
-
 LowGroundBuff: {
 	// DisplayName: Low Ground
 	// Description: No hooks, cannot stand on platforms or liquids

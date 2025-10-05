@@ -85,7 +85,7 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
+		Beetles grant 2.5% damage reduction each and attack nearby enemies
 		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
@@ -176,7 +176,7 @@ DarkArtistEnchant: {
 		'''
 		While attacking, fire your next closest weapon's projectile as support
 		The support weapon will fire 1/7 as often as it would normally
-		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
+		Summons a Flameburst that will also fire homing flamebursts while you attack
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -384,7 +384,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -638,9 +638,9 @@ TinEnchant: {
 	// DisplayName: Tin Enchantment
 	/* Tooltip:
 		'''
-		Gain 3% critical strike chance
-		Every crit increases this bonus by 3%, up to 12%
-		Getting hit reduces this bonus by half, to a minimum of 3%
+		Increased critical strike chance by 5%
+		Critical strikes increase this bonus by 5%, up to 25%
+		Getting hit resets this bonus back to 5%
 		'Return of the Crit'
 		''' */
 	// CritUp: +{0}% crit
@@ -1005,19 +1005,19 @@ BionomicCluster: {
 	// DisplayName: Bionomic Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
+		    [i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
+		[i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		''' */
 }
@@ -1026,13 +1026,13 @@ BionomicClusterInactive: {
 	// DisplayName: Bionomic Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
+		    [i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1116,8 +1116,8 @@ ConcentratedRainbowMatter: {
 		''' */
 }
 
-DarkenedHeart: {
-	// DisplayName: Darkened Heart
+RottingHeart: {
+	// DisplayName: Rotting Heart
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
@@ -1171,10 +1171,9 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1370,7 +1369,7 @@ NymphsPerfume: {
 	// DisplayName: Nymph's Perfume
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck, Stinky, and Hexed
+		Grants immunity to Hexed
 		You respawn with more life (works from inventory and vanity)
 		Attacks produce lifestealing hearts occasionally
 		'The scent is somewhat overpowering'
@@ -1422,10 +1421,10 @@ PureHeart: {
 	// DisplayName: Pure Heart
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
-		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
+		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
-		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/DarkenedHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
+		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
 		[i:FargowiltasSouls/GelicWings] Flying emits crystal spikes
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
@@ -1544,7 +1543,7 @@ SparklingAdoration: {
 	// DisplayName: Sparkling Adoration
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck and Fake Hearts
+		Grants immunity to Fake Hearts
 		Creates a graze ring around you
 		Enemy projectiles that touch the graze ring increase charge
 		Charge increases your damage by up to 1.25x
@@ -3434,6 +3433,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
@@ -3765,3 +3765,13 @@ CactusStaff: {
 }
 
 // Ruminate: "[c/FF3399:Hold {0} for more details]"
+
+ActiveSkillMenuItem: {
+	// DisplayName: Active Skill Menu Item
+	// Tooltip: ""
+}
+
+EffectTogglerItem: {
+	// DisplayName: Effect Toggler Item
+	// Tooltip: ""
+}

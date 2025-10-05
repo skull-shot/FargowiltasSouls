@@ -1178,7 +1178,7 @@ ConcentratedRainbowMatter: {
 		'''
 }
 
-DarkenedHeart: {
+RottingHeart: {
 	DisplayName: 暗黑之心
 	Tooltip:
 		'''
@@ -1238,10 +1238,9 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1517,10 +1516,10 @@ PureHeart: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/PureHeart]免疫生物群落带来的减益
-		免疫[i:FargowiltasSouls/DarkenedHeart]腐败和[i:FargowiltasSouls/GuttedHeart]嗜血减益
-		[i:FargowiltasSouls/DarkenedHeart]增加转向速度和10%移动速度
-		[i:FargowiltasSouls/DarkenedHeart]每攻击几次，你就会产生几个追踪敌人的迷你噬魂者
-		[i:FargowiltasSouls/DarkenedHeart]迷你噬魂者会造成升华减益，持续造成伤害并降低敌人防御
+		免疫[i:FargowiltasSouls/RottingHeart]腐败和[i:FargowiltasSouls/GuttedHeart]嗜血减益
+		[i:FargowiltasSouls/RottingHeart]增加转向速度和10%移动速度
+		[i:FargowiltasSouls/RottingHeart]每攻击几次，你就会产生几个追踪敌人的迷你噬魂者
+		[i:FargowiltasSouls/RottingHeart]迷你噬魂者会造成升华减益，持续造成伤害并降低敌人防御
 		[i:FargowiltasSouls/GuttedHeart]召唤阻挡伤害的飞眼怪，不移动时飞眼怪生成速度加快
 		[i:FargowiltasSouls/GuttedHeart]每10-15秒生成一个新的飞眼怪，最多同时存在5个
 		[i:FargowiltasSouls/GuttedHeart]增加10%最大生命值
@@ -3564,6 +3563,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
@@ -3896,3 +3896,13 @@ CactusStaff: {
 }
 
 // Ruminate: "[c/FF3399:Hold {0} for more details]"
+
+ActiveSkillMenuItem: {
+	// DisplayName: Active Skill Menu Item
+	// Tooltip: ""
+}
+
+EffectTogglerItem: {
+	// DisplayName: Effect Toggler Item
+	// Tooltip: ""
+}

@@ -224,7 +224,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile.owner.IsWithinBounds(Main.maxPlayers) && projectile is not null && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
             {
                 if (source is not null)
                 {
@@ -1854,14 +1854,14 @@ namespace FargowiltasSouls.Content.Projectiles
                                 {
                                     projectile.ai[0] = 0; //reset vanilla bounceback state 
                                     projectile.ai[1] = 0;
-                                    projectile.damage = (int)(projectile.damage * 0.8);
+                                    projectile.damage = (int)Math.Ceiling(projectile.damage * 0.8);
 
                                     if (ricotarget != null && ricotarget.CanBeChasedBy()) //ricochet to other npc
                                         projectile.velocity = 12 * Vector2.UnitX.RotateTowards(projectile.DirectionTo(ricotarget.Center).ToRotation(), 4);
                                     else if (target.CanBeChasedBy()) //if no other npcs, home on original target, deteriorates bounce count and dmg further
                                     {
                                         projectile.ai[2] += 3;
-                                        projectile.damage = (int)(projectile.damage * 0.625); // 0.5x after original mult
+                                        projectile.damage = (int)Math.Ceiling(projectile.damage * 0.625); // 0.5x after original mult
                                         projectile.velocity = 12 * Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 10);
                                     }
                                 }
@@ -1880,6 +1880,15 @@ namespace FargowiltasSouls.Content.Projectiles
                                     else target.buffTime[i] = 300;
                                 }
                             }
+                        }
+                        break;
+
+                    case ProjectileID.Flamelash:
+                    case ProjectileID.RainbowRodBullet:
+                        if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
+                                projectile.ResetLocalNPCHitImmunity();
                         }
                         break;
 
@@ -2000,7 +2009,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Skull:
-                    target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
+                    if (sourceNPC != null && sourceNPC.type == NPCID.SkeletronHead)
+                        target.AddBuff(ModContent.BuffType<LethargicBuff>(), 120);
                     if (sourceNPC != null && sourceNPC.type == NPCID.DungeonGuardian)
                         target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
                     break;
@@ -2074,6 +2084,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.RuneBlast:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
 
                     if (sourceNPC is NPC && sourceNPC.type == NPCID.RuneWizard)
                     {
@@ -2142,6 +2153,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.LostSoulHostile:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.InfernoHostileBlast:
@@ -2326,6 +2338,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.DD2DarkMageBolt:
                     target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+                    target.FargoSouls().HexedInflictor = sourceNPC.whoAmI;
                     break;
 
                 case ProjectileID.IceSpike:

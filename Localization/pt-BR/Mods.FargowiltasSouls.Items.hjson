@@ -171,7 +171,7 @@ DarkArtistEnchant: {
 		'''
 		While attacking, fire your next closest weapon's projectile as support
 		The support weapon will fire 1/7 as often as it would normally
-		Summons a Flameburst that will also fire homing flamebursts while you attack, dealing magic damage
+		Summons a Flameburst that will also fire homing flamebursts while you attack
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -389,7 +389,7 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how slowly you're moving
+		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
 		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
@@ -1056,7 +1056,7 @@ BionomicCluster: {
 		'''
 	/* VanityTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
+		[i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		''' */
 }
@@ -1065,13 +1065,13 @@ BionomicClusterInactive: {
 	// DisplayName: Bionomic Cluster (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
+		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGrasp] Frostburn, Chilled, and [i:FargowiltasSouls/SandsofTime] Mighty Wind
+		    [i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
 		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
 		'The amalgamate born of a thousand common enemies'
 		''' */
@@ -1156,8 +1156,8 @@ ConcentratedRainbowMatter: {
 		'''
 }
 
-DarkenedHeart: {
-	// DisplayName: Darkened Heart
+RottingHeart: {
+	// DisplayName: Rotting Heart
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
@@ -1217,10 +1217,9 @@ FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -3490,6 +3489,7 @@ Extra: {
 	// HighestClass: strongest class damage
 	// MagicSummonHybrid: magic and summon damage
 	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
@@ -3821,3 +3821,13 @@ CactusStaff: {
 }
 
 // Ruminate: "[c/FF3399:Hold {0} for more details]"
+
+ActiveSkillMenuItem: {
+	// DisplayName: Active Skill Menu Item
+	// Tooltip: ""
+}
+
+EffectTogglerItem: {
+	// DisplayName: Effect Toggler Item
+	// Tooltip: ""
+}

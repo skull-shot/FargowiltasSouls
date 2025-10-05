@@ -1430,6 +1430,11 @@ namespace FargowiltasSouls.Core.Globals
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(p, buff, 2);
                 }
+
+                if (buffs.Contains(ModContent.BuffType<HexedBuff>()))
+                {
+                    p.FargoSouls().HexedInflictor = npc.whoAmI;
+                }
             }
         }
 

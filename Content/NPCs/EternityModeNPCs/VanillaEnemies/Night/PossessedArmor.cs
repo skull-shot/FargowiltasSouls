@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             if (npc.GetLifePercent() < 0.5f && Timer == 0f)
             {
                 Timer = 1; // activate shade dash
-                npc.dontTakeDamage = true; // immaterial until shade dash ends
+                //npc.dontTakeDamage = true; // immaterial until shade dash ends
             }
             if (Timer > 0 && npc.HasPlayerTarget)
             {
@@ -68,7 +68,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                         UsedDashPositions = 0;
                         ConsumedDashPositions = 0;
                         Timer = -1;
-                        npc.dontTakeDamage = false;
+                        //npc.dontTakeDamage = false;
                     }
                 }
             }

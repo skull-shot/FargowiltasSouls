@@ -1,4 +1,5 @@
-SoulTogglerButton: Открыть переключатель эффектов
+SoulToggler: "[i:Wrench] Переключатель эффектов"
+ActiveSkillMenu: "[i:LivingFireBlock] Активные умения"
 Standard: Обычный режим
 Eternity: Режим Вечность
 Masochist: Режим Мазохиста
@@ -66,8 +67,6 @@ TurnAllTogglesOn: Включить все эффекты
 SomeEffectsPreset: Пресет с некоторыми эффектами
 MinimalEffectsPreset: Пресет с минимальными эффектами
 CustomPreset: Настраиваемый пресет {0} (ПКМ для сохранения)
-// Reload button is currently removed
-ReloadToggles: Перезагрузить включённые эффекты (ПКМ для сброса)
 NoToggles: Переключать нечего!
 DisplayAll: Показать все
 DisplayEquipped: Показать экипированные

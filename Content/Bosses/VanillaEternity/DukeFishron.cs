@@ -363,9 +363,17 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 float rotation = 2f * (float)Math.PI / max;
                                 for (int i = 0; i < max; i++)
                                 {
-                                    FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), npc.Center,
+                                    if (IsEX)
+                                    {
+                                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), npc.Center,
                                         ModContent.NPCType<DetonatingBubbleEX>(),
                                         velocity: Vector2.Normalize(npc.velocity.RotatedBy(rotation * i)));
+                                    }
+
+                                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center,
+                                        Vector2.Normalize(npc.velocity.RotatedBy(rotation * i)),
+                                        ModContent.ProjectileType<FishronBubble>(),
+                                        FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer);
                                 }
                             }
                         }

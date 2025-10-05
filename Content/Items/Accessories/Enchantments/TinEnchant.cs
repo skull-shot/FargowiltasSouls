@@ -64,9 +64,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return 50;
             if (player.HasEffect<TerraLightningEffect>())
                 return 5;
-            //if (player.FargoSouls().ForceEffect<TinEnchant>())
-            //    return 6;
-            return 3;
+            return 5;
         }
 
         public override void PostUpdateEquips(Player player)
@@ -87,20 +85,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.TinProcCD > 0)
                 modPlayer.TinProcCD--;
 
-            int floor = TinFloor(player);
-            if (modPlayer.TinCrit < floor)
-                modPlayer.TinCrit = floor;
+            if (modPlayer.TinCrit < TinFloor(player))
+                modPlayer.TinCrit = TinFloor(player);
 
             if (Main.myPlayer == player.whoAmI)
                 CooldownBarManager.Activate("TinCritCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "TinEnchant").Value, new(162, 139, 78), 
-                    () => (float)Main.LocalPlayer.FargoSouls().TinCrit / Main.LocalPlayer.FargoSouls().TinCritMax, true, activeFunction: () => player.HasEffect<TinEffect>());
+                    () => (Main.LocalPlayer.FargoSouls().TinCrit - TinFloor(player)) / (Main.LocalPlayer.FargoSouls().TinCritMax - TinFloor(player)), true, activeFunction: () => player.HasEffect<TinEffect>());
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
-        {
-            TinOnHitEnemy(player, hitInfo);
-        }
-        // increase crit
-        public static void TinOnHitEnemy(Player player, NPC.HitInfo hitInfo)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (hitInfo.Crit)
@@ -111,7 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.TinCritBuffered = false;
                 if (player.HasEffectEnchant<TinEffect>() || modPlayer.Eternity)
                 {
-                    int gain = modPlayer.Eternity ? 10 : 3;
+                    int gain = modPlayer.Eternity ? 10 : 5;
                     modPlayer.TinCrit += gain;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
@@ -120,58 +112,29 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
                 else
                     return;
-                /*
-                void TryHeal(int healDenominator, int healCooldown)
-                {
-                    int amountToHeal = hitInfo.Damage / healDenominator;
-                    if (modPlayer.TinCrit >= 100 && modPlayer.HealTimer <= 0 && !modPlayer.Player.moonLeech && !modPlayer.MutantNibble && amountToHeal > 0)
-                    {
-                        modPlayer.HealTimer = healCooldown;
-                        modPlayer.Player.statLife = Math.Min(modPlayer.Player.statLife + amountToHeal, modPlayer.Player.statLifeMax2);
-                        modPlayer.Player.HealEffect(amountToHeal);
-                    }
-                }
-                */
 
                 if (modPlayer.Eternity)
                 {
                     modPlayer.TinProcCD = 1;
-                    //TryHeal(10, 1);
                     modPlayer.TinEternityDamage += .05f;
-                }
-                //else if (modPlayer.TerrariaSoul)
-                //{
-                //    modPlayer.TinProcCD = 15;
-                    //TryHeal(25, 10);
-                //}
-                else if (modPlayer.ForceEffect<TinEnchant>())
-                {
-                    modPlayer.TinProcCD = 30;
                 }
                 else
                 {
-                    modPlayer.TinProcCD = 90;
+                    modPlayer.TinProcCD = modPlayer.ForceEffect<TinEnchant>() ? 30 : 120;
                 }
             }
         }
+
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
+            //reset crit
             if (info.Damage < 5)
                 return;
-            TinHurt(player);
-        }
-        //reset crit
-        public static void TinHurt(Player player, bool forceReset = false)
-        {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float oldCrit = modPlayer.TinCrit;
             if (modPlayer.Eternity)
                 modPlayer.TinEternityDamage = 0;
-
-            if (forceReset)
-                modPlayer.TinCrit = TinFloor(player);
-            else
-                modPlayer.TinCrit = Math.Max(modPlayer.TinCrit / 2, TinFloor(player));
+            modPlayer.TinCrit = TinFloor(player);
 
             double diff = Math.Round(oldCrit - modPlayer.TinCrit, 1);
             if (diff > 0)
@@ -179,11 +142,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void PostUpdateMiscEffects(Player player)
         {
-            TinPostUpdate(player);
-        }
-        //set max crit and current crit with no interference from accessory order
-        public static void TinPostUpdate(Player player)
-        {
+            //set max crit and current crit with no interference from accessory order
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.Eternity)
             {
@@ -192,7 +151,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
             else
             {
-                modPlayer.TinCritMax = player.HasEffect<TerraLightningEffect>() ? 25 : modPlayer.ForceEffect<TinEnchant>() ? 24 : 12;
+                modPlayer.TinCritMax = (modPlayer.ForceEffect<TinEnchant>() && player.HasEffectEnchant<TinEffect>()) ? 35 : 25;
                 player.GetCritChance(DamageClass.Generic) += modPlayer.TinCrit;
             }
         }

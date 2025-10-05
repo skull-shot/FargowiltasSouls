@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
             Item.useAnimation = 40;
             Item.UseSound = SoundID.Item8;
             Item.knockBack = 3;
-            Item.damage = 16;
+            Item.damage = 20;
             Item.shootSpeed = 10;
             Item.DamageType = DamageClass.Magic;
             Item.shoot = ModContent.ProjectileType<CactusBall>();

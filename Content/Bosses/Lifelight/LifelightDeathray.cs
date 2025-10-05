@@ -28,6 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         {
             base.SetDefaults();
             Projectile.timeLeft *= 10;
+            CooldownSlot = ImmunityCooldownID.General;
         }
 
         public override void AI()
