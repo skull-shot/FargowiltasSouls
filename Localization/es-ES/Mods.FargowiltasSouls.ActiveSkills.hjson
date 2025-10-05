@@ -140,7 +140,7 @@ BulbKeyEffect: {
 
 AmmoCycleEffect: {
 	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	// Tooltip: Cycle between ammo slots
 }
 
 GladiatorBanner: {
