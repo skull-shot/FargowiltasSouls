@@ -198,10 +198,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
                         projectile.penetrate = 7;
                     break;*/
-                case ProjectileID.WeatherPainShot:
-                    projectile.idStaticNPCHitCooldown = 10;
-                    projectile.penetrate = 45;
-                    break;
                 case ProjectileID.PossessedHatchet:
                     projectile.usesLocalNPCImmunity = true;
                     projectile.localNPCHitCooldown = 30;
@@ -375,6 +371,18 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             projectile.usesIDStaticNPCImmunity = true;
                             projectile.idStaticNPCHitCooldown = 12;
+                        }
+                    }
+                    break;
+
+                case ProjectileID.WeatherPainShot:
+                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    {
+                        Player player = Main.player[projectile.owner];
+                        if (SourceItemType == ItemID.WeatherPain && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
+                        {
+                            projectile.idStaticNPCHitCooldown = 10;
+                            projectile.penetrate = 45;
                         }
                     }
                     break;
