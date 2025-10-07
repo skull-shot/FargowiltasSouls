@@ -78,7 +78,7 @@ ClientConfig: {
 }
 
 SoulConfig: {
-	DisplayName: Soul Config
+	DisplayName: Server Config
 
 	Headers: {
 		Maso: Eternity Mode
