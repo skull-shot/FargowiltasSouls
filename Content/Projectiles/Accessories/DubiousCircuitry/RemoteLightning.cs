@@ -28,6 +28,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
         }
         public override bool PreAI()
         {
+            if (Projectile.tileCollide == false && Projectile.timeLeft < 295 * (Projectile.MaxUpdates - 1)) // account for base timeLeft
+                Projectile.tileCollide = true;
             Player player = Main.player[Main.myPlayer];
             int distance = (int)Projectile.Distance(player.Center);
             if (distance < 60 && player.HasEffect<RemoteControlDR>() && !player.HasBuff<SuperchargedBuff>())

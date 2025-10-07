@@ -15,47 +15,27 @@ using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI
 {
-    public class SoulTogglerButton : FargoUI
+    public class OncomingMutantManager : FargoUI
     {
         public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex;
-        public override string InterfaceLayerName => "Fargos: Soul Toggler Toggler";
-        public UIImage Icon;
-        public FargoUIHoverTextImageButton IconHighlight;
-        public UIImage IconFlash;
+        public override string InterfaceLayerName => "Fargos: Oncoming Mutant Manager";
+
         public UIOncomingMutant OncomingMutant;
         public override void OnLoad()
         {
-            FargoUIManager.Open<SoulTogglerButton>();
+            FargoUIManager.Open<OncomingMutantManager>();
         }
         public override void UpdateUI()
         {
             if (!Main.playerInventory || Main.LocalPlayer.chest != -1)
-                FargoUIManager.Close<SoulTogglerButton>();
+                FargoUIManager.Close<OncomingMutantManager>();
             else
-                FargoUIManager.Open<SoulTogglerButton>();
+                FargoUIManager.Open<OncomingMutantManager>();
         }
         public override void OnActivate()
         {
             const int x = 570;
-            const int y = 275;
-
-            IconFlash = new UIImage(FargoAssets.UI.Toggler.SoulTogglerButton_MouseOverTexture);
-            IconFlash.Left.Set(x, 0);
-            IconFlash.Top.Set(y, 0);
-            Append(IconFlash);
-
-            Icon = new UIImage(FargoAssets.UI.Toggler.SoulTogglerButtonTexture);
-            Icon.Left.Set(x, 0); //26
-            Icon.Top.Set(y, 0); //300
-            Append(Icon);
-
-            IconHighlight = new FargoUIHoverTextImageButton(FargoAssets.UI.Toggler.SoulTogglerButton_MouseOverTexture, Language.GetTextValue("Mods.FargowiltasSouls.UI.SoulTogglerButton"));
-            IconHighlight.Left.Set(0, 0);
-            IconHighlight.Top.Set(0, 0);
-            IconHighlight.SetVisibility(1f, 0);
-            IconHighlight.OnMouseOver += IconHighlight_MouseOver;
-            IconHighlight.OnLeftClick += IconHighlight_OnClick;
-            Icon.Append(IconHighlight);
+            const int y = 250;
 
             OncomingMutant = new UIOncomingMutant(FargoAssets.UI.OncomingMutantTexture.Value,
                 FargoAssets.UI.OncomingMutantAura.Value,
@@ -70,8 +50,8 @@ namespace FargowiltasSouls.Content.UI
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.ExpandedFeatures"),
                 Language.GetTextValue("Mods.FargowiltasSouls.UI.MasochistMultiplayer")
                 );
-            OncomingMutant.Left.Set(610, 0);
-            OncomingMutant.Top.Set(250, 0);
+            OncomingMutant.Left.Set(x, 0);
+            OncomingMutant.Top.Set(y, 0);
             Append(OncomingMutant);
 
             base.OnActivate();
@@ -87,8 +67,7 @@ namespace FargowiltasSouls.Content.UI
                 return;
             }
 
-            FargoUIManager.Toggle<SoulToggler>();
-            Main.LocalPlayer.FargoSouls().HasClickedWrench = true;
+            //FargoUIManager.Toggle<SoulToggler>();
         }
 
 
@@ -97,17 +76,8 @@ namespace FargowiltasSouls.Content.UI
             if (Main.playerInventory && Main.LocalPlayer.chest == -1)
             {
                 //base.Draw(spriteBatch);
-
-                Icon.Draw(spriteBatch);
-                IconHighlight.Draw(spriteBatch);
                 OncomingMutant.Draw(spriteBatch);
-                if (!Main.LocalPlayer.FargoSouls().HasClickedWrench && Main.GlobalTimeWrappedHourly % 1f < 0.5f)
-                {
-                    if (Main.LocalPlayer.AccessoryEffects().EquippedEffects.Any(p => p))
-                        IconFlash.Draw(spriteBatch);
-                }
             }
-
         }
     }
 }

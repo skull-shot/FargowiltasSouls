@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using Fargowiltas.Assets.Textures;
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
 
             // Drawing
-            Texture2D outlineTexture = FargoAssets.UI.Toggler.PresetOutline.Value;
+            Texture2D outlineTexture = FargoMutantAssets.UI.Toggler.PresetOutline.Value;
             Vector2 position = style.Position();
             spriteBatch.Draw(outlineTexture, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
 

@@ -71,7 +71,6 @@ namespace FargowiltasSouls
         //internal static ModKeybind SmokeBombKey;
         //internal static ModKeybind SpecialDashKey;
         //internal static ModKeybind BombKey;
-        internal static ModKeybind SoulToggleKey;
         internal static ModKeybind PrecisionSealKey;
         internal static ModKeybind RuminateKey;
         //internal static ModKeybind MagicalBulbKey;
@@ -84,6 +83,7 @@ namespace FargowiltasSouls
         internal static ModKeybind ActiveSkill3Key;
         internal static ModKeybind ActiveSkill4Key; // Unused
         internal static ModKeybind ActiveSkillMenuKey;
+        internal static ModKeybind SoulToggleKey;
 
         public static List<TitleLinkButton> fargoTitleLinks = new List<TitleLinkButton>();
         internal static ModKeybind[] ActiveSkillKeys { get => [ActiveSkill1Key, ActiveSkill2Key, ActiveSkill3Key, ActiveSkill4Key]; }
@@ -158,7 +158,6 @@ namespace FargowiltasSouls
             //SmokeBombKey = KeybindLoader.RegisterKeybind(this, "SmokeBomb", "I");
             //SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
             //BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
-            SoulToggleKey = KeybindLoader.RegisterKeybind(this, "EffectToggle", ".");
             PrecisionSealKey = KeybindLoader.RegisterKeybind(this, "PrecisionSeal", "LeftShift");
             RuminateKey = KeybindLoader.RegisterKeybind(this, "Ruminate", "LeftShift");
             //MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
@@ -171,6 +170,7 @@ namespace FargowiltasSouls
             ActiveSkill3Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill3", "C");
             //ActiveSkill4Key = KeybindLoader.RegisterKeybind(this, "ActiveSkill4", "V");
             ActiveSkillMenuKey = KeybindLoader.RegisterKeybind(this, "ActiveSkillMenu", "N");
+            SoulToggleKey = KeybindLoader.RegisterKeybind(this, "EffectToggle", ".");
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();

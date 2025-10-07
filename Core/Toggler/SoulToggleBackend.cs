@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories;
+﻿using Fargowiltas.Common.Systems;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
@@ -12,16 +13,16 @@ using System.Linq;
 using Terraria;
 using Terraria.IO;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.Toggler
 {
-    public class ToggleBackend
+    public class SoulToggleBackend : ToggleBackend
     {
         public readonly static string ConfigPath = Path.Combine(Main.SavePath, "ModConfigs", "FargowiltasSouls_Toggles.json");
         public Preferences Config;
 
         public Dictionary<AccessoryEffect, Toggle> Toggles = [];
-        //public Point TogglerPosition;
         public bool CanPlayMaso = true;
 
         public const int CustomPresetCount = 3;
@@ -30,7 +31,7 @@ namespace FargowiltasSouls.Core.Toggler
         public bool Initialized;
 
         //not doing it in player.initialize because multiplayer clones players which makes new togglers which tries config load which has high overhead (lag)
-        public void TryLoad()
+        public override void TryLoad()
         {
             if (Initialized)
                 return;
@@ -74,7 +75,7 @@ namespace FargowiltasSouls.Core.Toggler
             }
         }
 
-        public void Save()
+        public override void Save()
         {
             if (!Initialized)
                 return;
@@ -103,8 +104,9 @@ namespace FargowiltasSouls.Core.Toggler
             }
         }
 
-        public void LoadPlayerToggles(FargoSoulsPlayer modPlayer)
+        public override void LoadPlayerToggles(Player player)
         {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (!Initialized)
                 return;
 
@@ -123,7 +125,7 @@ namespace FargowiltasSouls.Core.Toggler
             { "Y", TogglerPosition.Y }
         };*/
 
-        public void SetAll(bool value)
+        public override void SetAll(bool value)
         {
             foreach (Toggle toggle in Toggles.Values)
             {
@@ -131,7 +133,7 @@ namespace FargowiltasSouls.Core.Toggler
             }
         }
 
-        public void SomeEffects()
+        public override void SomeEffects()
         {
             Player player = Main.LocalPlayer;
 
@@ -204,7 +206,7 @@ namespace FargowiltasSouls.Core.Toggler
             }
         }
 
-        public void MinimalEffects()
+        public override void MinimalEffects()
         {
             Player player = Main.LocalPlayer;
 
@@ -259,7 +261,7 @@ namespace FargowiltasSouls.Core.Toggler
 
         }
 
-        public void SaveCustomPreset(int slot)
+        public override void SaveCustomPreset(int slot)
         {
             var togglesOff = new List<AccessoryEffect>();
             foreach (KeyValuePair<AccessoryEffect, Toggle> entry in Toggles)
@@ -272,23 +274,23 @@ namespace FargowiltasSouls.Core.Toggler
             {
                 CustomPresets[slot - 1] = togglesOff;
                 //Save(); 
-                Main.NewText(Language.GetTextValue("Mods.FargowiltasSouls.UI.SavedToSlot", slot), Color.Yellow);
+                Main.NewText(Language.GetTextValue("Mods.Fargowiltas.UI.SavedToSlot", slot), Color.Yellow);
             }
         }
 
-        public void LoadCustomPreset(int slot)
+        public override void LoadCustomPreset(int slot)
         {
             List<AccessoryEffect> togglesOff = CustomPresets[slot - 1];
             if (togglesOff == null)
             {
-                Main.NewText(Language.GetTextValue("Mods.FargowiltasSouls.UI.NoTogglesFound", slot), Color.Yellow);
+                Main.NewText(Language.GetTextValue("Mods.Fargowiltas.UI.NoTogglesFound", slot), Color.Yellow);
                 return;
             }
 
             FargoSoulsPlayer modPlayer = Main.LocalPlayer.FargoSouls();
             modPlayer.disabledToggles = new List<AccessoryEffect>(togglesOff);
 
-            LoadPlayerToggles(modPlayer);
+            LoadPlayerToggles(Main.LocalPlayer);
             modPlayer.disabledToggles.Clear();
         }
     }

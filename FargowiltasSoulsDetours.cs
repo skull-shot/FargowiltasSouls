@@ -72,7 +72,7 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
-            On_Projectile.Damage += PhantasmArrowRainFix;
+            //On_Projectile.Damage += PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
@@ -113,7 +113,7 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
 
-            On_Projectile.Damage -= PhantasmArrowRainFix;
+            //On_Projectile.Damage -= PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
@@ -479,7 +479,7 @@ namespace FargowiltasSouls
             }
         }
 
-        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
+        /*public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
         { // this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
             if (self is not null && self.friendly && self.owner.IsWithinBounds(Main.maxPlayers) && self.owner == Main.myPlayer)
             {
@@ -498,7 +498,7 @@ namespace FargowiltasSouls
                     player.phantasmTime = phantasmTime;
             }
             else orig(self);
-        }
+        }*/
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
         { // hallowed dodge nerf
@@ -508,13 +508,13 @@ namespace FargowiltasSouls
         }
 
         public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        { // sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
-            if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
+        {
+            ref var proj = ref FargoSoulsGlobalProjectile.globalProjectileField;
+            ref var ninjaCrit = ref FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            if (proj is not null && ninjaCrit > 0)
             {
-                if (FargoSoulsGlobalProjectile.globalProjectileField.CritChance - FargoSoulsGlobalProjectile.ninjaCritIncrease < 0)
-                    FargoSoulsGlobalProjectile.globalProjectileField.CritChance = 0;
-                else FargoSoulsGlobalProjectile.globalProjectileField.CritChance -= FargoSoulsGlobalProjectile.ninjaCritIncrease;
-                // reset these
+                proj.CritChance = Math.Max(proj.CritChance - ninjaCrit, 0);
+                // reset this
                 FargoSoulsGlobalProjectile.globalProjectileField = null;
             }
             return orig(self, hit, fromNet, noPlayerInteraction);

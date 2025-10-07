@@ -273,8 +273,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                         yPosition = (int)(y + 1 + playerPos.Y / 16.0f);
                         Vector2 spawnPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
                         //fiddle to line up to tile
-                        spawnPos.X -= 6f;
-                        spawnPos.Y += 6.5f;
+                        spawnPos.X -= 0f;
+                        spawnPos.Y += 5f;
 
                         bool icicleNearby = false;
                         foreach (Projectile p in Main.ActiveProjectiles)

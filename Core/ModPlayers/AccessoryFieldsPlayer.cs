@@ -283,7 +283,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MasochistSoul;
         public Item MasochistSoulItem;
         public bool MasochistHeart;
-        public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
         public int FrigidGemstoneCD;

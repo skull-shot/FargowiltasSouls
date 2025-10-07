@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 AuraCenter = Vector2.Zero;
 
-        internal const float HealthMultiplier = 1.56f;
+        internal const float HealthMultiplier = 1.8f;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -801,6 +801,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.TheHungry, NPCID.TheHungryII);
 
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+
+            npc.lifeMax = (int)Math.Round(npc.lifeMax / WallofFlesh.HealthMultiplier);
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);

@@ -115,6 +115,7 @@ IceShieldEffect: {
 		Hold to spawn an ice shield aimed towards your cursor
 		After the shield gets hit, it shatters, dealing massive damage in a cone
 		Release the skill button before the shield breaks to shatter it manually, dealing increased damage
+		10 second cooldown
 		''' */
 }
 
@@ -139,7 +140,7 @@ BulbKeyEffect: {
 
 AmmoCycleEffect: {
 	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	// Tooltip: Cycle between ammo slots
 }
 
 GladiatorBanner: {

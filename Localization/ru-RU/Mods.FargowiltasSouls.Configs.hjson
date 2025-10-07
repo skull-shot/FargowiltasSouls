@@ -6,11 +6,6 @@ ClientConfig: {
 		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Предметы Патреона]"
 	}
 
-	HideTogglerWhenInventoryIsClosed: {
-		Label: Показывать переключатель эффектов только при открытом инвентаре
-		Tooltip: Если включена, переключатель эффектов автоматически выключается когда инвентарь закрыт.
-	}
-
 	ItemDisabledTooltip: {
 		Label: Описание о выключенном эффекте
 		Tooltip: Если включена, у предметов с любыми выключенными эффектами в описании будет строчка об этом.
@@ -19,11 +14,6 @@ ClientConfig: {
 	ItemBalanceTooltip: {
 		Label: Изменения хар-тик в описаниях предметов
 		Tooltip: Определяет, какие строки об изменениях оставить в описаниях предметов.
-	}
-
-	ToggleSearchReset: {
-		Label: Строка поиска меню переключателей эффектов сбрасывается при закрытии
-		Tooltip: ""
 	}
 
 	RainbowHealThreshold: {
@@ -61,12 +51,12 @@ ClientConfig: {
 		Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		Label: Положение меню умений по X
 		Tooltip: Отсчёт идёт от правой границы экрана.
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		Label: Положение меню умений по Y
 		Tooltip: ""
 	}
@@ -77,13 +67,13 @@ ClientConfig: {
 	}
 
 	WikiNotification: {
-		// Label: Wiki Notification
-		// Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
+		Label: Сообщение о вики
+		Tooltip: Если включена, при заходе в мир в чате будет появляться сообщение о вики
 	}
 
 	MusicModNotification: {
-		// Label: Music Mod Notification
-		// Tooltip: When enabled, a chat notification for the music mod is sent on entering the world
+		Label: Сообщение о моде с музыкой
+		Tooltip: Если включена, при заходе в мир в чате будет появляться сообщение о модификации с музыкой для Fargo's Souls
 	}
 }
 

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,6 +20,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
 
         public ref float Width => ref Projectile.ai[2];
         public ref float maxTime => ref Projectile.localAI[2];
+
+        private IEntitySource sauce;
 
         // Can be anything.
         public override string Texture => "Terraria/Images/Extra_" + ExtrasID.MartianProbeScanWave;
@@ -46,6 +49,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
             Projectile.localAI[1] = reader.ReadSingle();
             Projectile.localAI[2] = reader.ReadSingle();
         }
+        public override void OnSpawn(IEntitySource source)
+        {
+            sauce = source;
+        }
         public override void AI()
         {
             Player player = Main.player[Main.myPlayer];
@@ -67,7 +74,13 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
         public override void OnKill(int timeLeft)
         {
             if (FargoSoulsUtil.HostCheck)
-                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, -Vector2.UnitY * 30, ModContent.ProjectileType<RemoteLightning>(), Projectile.damage, 2f, Projectile.owner, Vector2.UnitY.ToRotation());
+            {
+                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, -Vector2.UnitY * 30, ModContent.ProjectileType<RemoteLightning>(), Projectile.damage, 2f, Projectile.owner, Vector2.UnitY.ToRotation());
+                if (p.IsWithinBounds(Main.maxProjectiles) && sauce is EntitySource_ItemUse parent && parent.Item.type == ModContent.ItemType<Items.Accessories.Eternity.DubiousCircuitry>())
+                {
+                    Main.projectile[p].tileCollide = false;
+                }
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)

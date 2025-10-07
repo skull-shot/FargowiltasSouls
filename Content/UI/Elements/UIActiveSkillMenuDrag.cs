@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,14 +21,12 @@ namespace FargowiltasSouls.Content.UI.Elements
         {
 
         }
-        private Vector2 TranslatePosition(Vector2 pos, bool flip = true)
+        private Vector2 TranslatePosition(Vector2 pos)
         {
             pos -= offset;
             pos.X = MathHelper.Clamp(pos.X, 0, Main.screenWidth - Parent.Width.Pixels);
             pos.Y = MathHelper.Clamp(pos.Y, 0, Main.screenHeight - Parent.Height.Pixels);
             pos += offset;
-            if (flip)
-                pos.X -= Main.screenWidth;
             return pos;
         }
         private void DragStart(Vector2 pos)
@@ -42,14 +41,14 @@ namespace FargowiltasSouls.Content.UI.Elements
             pos = TranslatePosition(pos);
             Vector2 end = pos - offset;
             dragging = false;
-            Parent.Left.Set(end.X, 1f);
+            Parent.Left.Set(end.X, 0f);
             Parent.Top.Set(end.Y, 0);
             Parent.Recalculate();
 
             StayInBounds();
 
-            ClientConfig.Instance.SkillMenuX = end.X;
-            ClientConfig.Instance.SkillMenuY = end.Y;
+            ClientConfig.Instance.ActiveSkillMenuX = end.X;
+            ClientConfig.Instance.ActiveSkillMenuY = end.Y;
             ClientConfig.Instance.OnChanged();
         }
         public override void Update(GameTime gameTime)
@@ -76,20 +75,22 @@ namespace FargowiltasSouls.Content.UI.Elements
             else if (dragging && (!Main.mouseLeft || !conditions))
             {
                 DragEnd(Main.MouseScreen);
+
             }
 
             if (dragging)
             {
-                Vector2 pos = TranslatePosition(Main.MouseScreen, false);
-                Parent.Left.Set(pos.X - offset.X, 0); // Main.MouseScreen.X and Main.mouseX are the same.
+                Vector2 pos = TranslatePosition(Main.MouseScreen);
+                Parent.Left.Set(pos.X - offset.X, 0);
                 Parent.Top.Set(pos.Y - offset.Y, 0);
                 Parent.Recalculate();
             }
             else
             {
-                Parent.Left.Set(ClientConfig.Instance.SkillMenuX, 1f);
-                Parent.Top.Set(ClientConfig.Instance.SkillMenuY, 0);
+                Parent.Left.Set(ClientConfig.Instance.ActiveSkillMenuX, 0f);
+                Parent.Top.Set(ClientConfig.Instance.ActiveSkillMenuY, 0);
                 Parent.Recalculate();
+
             }
 
             StayInBounds();
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             var parentSpace = Parent.GetDimensions().ToRectangle();
             if (!GetDimensions().ToRectangle().Intersects(parentSpace))
             {
-                Parent.Left.Pixels = Utils.Clamp(Parent.Left.Pixels, -Main.screenWidth, 0);
+                Parent.Left.Pixels = Utils.Clamp(Parent.Left.Pixels, 0, Main.screenWidth);
                 Parent.Top.Pixels = Utils.Clamp(Parent.Top.Pixels, 0, Main.screenHeight);
                 // Recalculate forces the UI system to do the positioning math again.
                 Parent.Recalculate();

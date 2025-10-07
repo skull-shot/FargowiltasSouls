@@ -6,11 +6,6 @@ ClientConfig: {
 		Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:捐赠者物品]"
 	}
 
-	HideTogglerWhenInventoryIsClosed: {
-		Label: 只在开启物品栏时，才会显示饰品效果菜单
-		Tooltip: 如果开启，饰品效果菜单会在你关闭物品栏时自动隐藏
-	}
-
 	ItemDisabledTooltip: {
 		Label: 在物品信息中显示效果被禁用
 		Tooltip: 开启时，若饰品有效果被饰品效果配置禁用，会有一条物品信息提示你
@@ -19,11 +14,6 @@ ClientConfig: {
 	ItemBalanceTooltip: {
 		// Label: Item Change Tooltips
 		// Tooltip: Determines which items with changed effects will have a tooltip line stating this.
-	}
-
-	ToggleSearchReset: {
-		Label: 饰品效果菜单关闭时重置搜索栏
-		Tooltip: ""
 	}
 
 	RainbowHealThreshold: {
@@ -61,12 +51,12 @@ ClientConfig: {
 		Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		Label: 技能菜单水平位置
 		Tooltip: 离屏幕右侧的距离
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		Label: 技能菜单竖直位置
 		Tooltip: ""
 	}

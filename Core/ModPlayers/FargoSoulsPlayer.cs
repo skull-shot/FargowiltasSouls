@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 {
     public partial class FargoSoulsPlayer : ModPlayer
     {
-        public ToggleBackend Toggler = new();
+        public SoulToggleBackend Toggler = new();
 
         public Dictionary<AccessoryEffect, bool> TogglesToSync = [];
 
@@ -146,7 +146,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DeerSinew) playerData.Add("DeerSinew");
             if (OrdinaryCarrot) playerData.Add("OrdinaryCarrot");
             if (ConcentratedRainbowMatter) playerData.Add("ConcentratedRainbowMatter");
-            if (HasClickedWrench) playerData.Add("HasClickedWrench");
             if (Toggler_ExtraAttacksDisabled) playerData.Add("Toggler_ExtraAttacksDisabled");
             if (Toggler_MinionsDisabled) playerData.Add("Toggler_MinionsDisabled");
             if (Toggler_ExtraJumpsDisabled) playerData.Add("Toggler_ExtraJumpsDisabled");
@@ -190,7 +189,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             DeerSinew = playerData.Contains("DeerSinew");
             OrdinaryCarrot = playerData.Contains("OrdinaryCarrot");
             ConcentratedRainbowMatter = playerData.Contains("ConcentratedRainbowMatter");
-            HasClickedWrench = playerData.Contains("HasClickedWrench");
             Toggler_ExtraAttacksDisabled = playerData.Contains("Toggler_ExtraAttacksDisabled");
             Toggler_MinionsDisabled = playerData.Contains("Toggler_MinionsDisabled");
             Toggler_ExtraJumpsDisabled = playerData.Contains("Toggler_ExtraJumpsDisabled");
@@ -210,7 +208,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void OnEnterWorld()
         {
             Toggler.TryLoad();
-            Toggler.LoadPlayerToggles(this);
+            Toggler.LoadPlayerToggles(Player);
             disabledToggles.Clear();
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();

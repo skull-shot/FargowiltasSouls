@@ -8,6 +8,10 @@ float2 screenPosition;
 float2 screenSize;
 float2 anchorPoint;
 
+float4 darkColor;
+float4 midColor;
+float4 lightColor;
+
 float InverseLerp(float a, float b, float t)
 {
     return saturate((t - a) / (b - a));
@@ -48,11 +52,6 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     
     if (colorMult == 1 && (opacity == 0 || worldDistance > radius))
         return sampleColor;
-    
-    // Red color
-    float4 darkColor = float4(0.65, 0.05, 0, 1);
-    float4 midColor = float4(1, 0.275, 0.027, 1);
-    float4 lightColor = float4(1, 0.9, 0, 1);
     
     float colorLerp = pow(colorMult, 4);
     float4 color;

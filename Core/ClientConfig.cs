@@ -23,16 +23,10 @@ namespace FargowiltasSouls.Core
         public bool MusicModNotification;
 
         [DefaultValue(true)]
-        public bool HideTogglerWhenInventoryIsClosed;
-
-        [DefaultValue(true)]
         public bool ItemDisabledTooltip;
 
         [DefaultValue(BalanceTooltipSetting.Reworks)]
         public BalanceTooltipSetting ItemBalanceTooltip;
-
-        [DefaultValue(false)]
-        public bool ToggleSearchReset;
 
         private const float max4kX = 3840f;
 
@@ -52,15 +46,15 @@ namespace FargowiltasSouls.Core
         public float CooldownBarsY;
 
         [Increment(1f)]
-        [Range(-max4kX, 0)]
+        [Range(0, max4kX)]
         [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
-        public float SkillMenuX; // From the right of the screen
+        public float ActiveSkillMenuX; // From the right of the screen
 
 
         [Increment(1f)]
         [Range(0f, max4kY)]
         [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
-        public float SkillMenuY;
+        public float ActiveSkillMenuY;
 
         #region maso
 

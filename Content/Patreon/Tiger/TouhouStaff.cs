@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Patreon.Tiger
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 3f;
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ModContent.ProjectileType<CirnoMinion>();
             Item.shootSpeed = 10f;
