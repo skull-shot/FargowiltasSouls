@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
     public abstract class BaseForce : SoulsItem
     {
-        public override string Texture => $"{Mod.Name}/Assets/Textures/Accessories/Content/Items/Accessories/Forces/{Name}";
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Content/Items/Accessories//Forces/{Name}";
         public static int[] EnchantsIn<T>() where T : BaseForce => Enchants[ModContent.ItemType<T>()];
         public void SetActive(Player player) => player.FargoSouls().ForceEffects.Add(Type);
         /// <summary>
