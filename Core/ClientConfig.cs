@@ -71,13 +71,13 @@ namespace FargowiltasSouls.Core
 
         [Increment(1f)]
         [Range(0f, max4kX)]
-        [DefaultValue(610f)]
+        [DefaultValue(572f)]
         public float OncomingMutantX;
 
 
         [Increment(1f)]
         [Range(0f, max4kY)]
-        [DefaultValue(250f)]
+        [DefaultValue(244f)]
         public float OncomingMutantY;
 
         [DefaultValue(false)]
