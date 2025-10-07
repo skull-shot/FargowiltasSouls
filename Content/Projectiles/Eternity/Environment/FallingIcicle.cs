@@ -31,11 +31,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             Projectile.timeLeft = 600;
             Projectile.scale = 1f;
             Projectile.netImportant = true;
+            Projectile.coldDamage = true;
+
+            //Projectile.hide = true;
         }
 
         private bool firstTick = true;
         private readonly bool CanBeDangerSensed = !Main.gamePaused && Main.instance.IsActive && Main.netMode != NetmodeID.Server && Main.LocalPlayer.dangerSense;
 
+        public const int telegraphTime = 20;
         public override void AI()
         {
             if (firstTick)
@@ -100,23 +104,54 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 }
             }
 
-            //falling
-            if (Projectile.ai[0] == 1)
+            //waits for target to walk below
+            if (Projectile.ai[0] == 0 && target?.Center.Y > Projectile.Center.Y && (Math.Abs(target.Center.X - Projectile.Center.X) < 10))
             {
-                Projectile.velocity.Y = Projectile.velocity.Y * 1.1f;
-                Projectile.velocity.Y = Math.Clamp(Projectile.velocity.Y, 4, 12);
+                bool lineCol = false;
+                Point p = Projectile.Bottom.ToTileCoordinates();
+                int maxTiles = (int)(600f / 16);
+                maxTiles = int.Clamp(maxTiles, 0, (int)((target.Top.Y - Projectile.Bottom.Y) / 16f));
+                for (int i = 0; i < maxTiles; i++)
+                {
+                    if (Main.tile[p.X, p.Y].HasUnactuatedTile)
+                    {
+                        lineCol = true;
+                        break;
+                    }
+                    p.Y += 1;
+                }
+                if (!lineCol)
+                {
+                    // telegraph fall
+                    Projectile.ai[0] = 1;
+                    Projectile.netUpdate = true;
+                    FargoSoulsUtil.DustRing(Projectile.Bottom, 12, DustID.SnowflakeIce, 3);
+                }
+            }
+
+            if (Projectile.ai[0] > 0 && Projectile.ai[0] < telegraphTime)
+            {
+                Projectile.ai[0]++;
+                Projectile.rotation = MathHelper.PiOver2 * 0.08f * MathF.Sin(MathF.Tau * Projectile.ai[0] / 7f);
+
+                // start falling
+                if (Projectile.ai[0] == telegraphTime)
+                {
+                    Projectile.velocity.Y = 1.5f;
+                    SoundEngine.PlaySound(SoundID.Item50, Projectile.Bottom);
+                }
+            }
+            // falling
+            if (Projectile.ai[0] >= telegraphTime)
+            {
+                Projectile.rotation = 0;
+                Projectile.velocity.Y = Projectile.velocity.Y * 1.15f;
+                Projectile.velocity.Y = Math.Clamp(Projectile.velocity.Y, 1, 16);
                 Projectile.netUpdate = true;
                 return;
             }
+            Projectile.hide = false;
 
-            //waits for target to walk below
-            if (target?.Center.Y > Projectile.Center.Y && (Math.Abs(target.Center.X - Projectile.Center.X) < 10) && Projectile.Center.Distance(target.Center) < 500)
-            {
-                //start falling
-                Projectile.velocity.Y = 4f;
-                Projectile.ai[0] = 1;
-                Projectile.netUpdate = true;
-            }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -133,7 +168,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 
         public override void OnKill(int timeLeft)
         {
-            if (Projectile.ai[0] == 1)
+            if (Projectile.ai[0] > 0)
             {
                 SoundEngine.PlaySound(SoundID.Item27, Projectile.Center);
 
@@ -142,5 +177,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             
         }
 
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindNPCsAndTiles.Add(index);
+        }
     }
 }

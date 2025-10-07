@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
         {
             Player player = Main.LocalPlayer;
-            scaling = player.HeldItem.damage + player.FindAmmo(player.HeldItem.useAmmo).damage;
+            scaling = player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage;
 
             scaling = (int)(MathHelper.Clamp((float)scaling, 1200, 3000) * player.ActualClassDamage(DamageClass.Magic));
             if (player.FargoSouls().ForceEffect<NebulaEnchant>())

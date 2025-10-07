@@ -47,7 +47,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Snow
             if (npc.Center.Distance(target.Center) > 1500 || !target.active || target.dead)
                 return base.SafePreAI(npc);
 
-            AttackTimer++;
+            if (AttackTimer >= 150 || Collision.CanHitLine(npc.Center, 1, 1, target.Center, 1, 1))
+                AttackTimer++;
 
             // spawn proj
             if (AttackTimer == 150 || (npc.type == NPCID.ArmoredViking && AttackTimer > 150 && AttackTimer % 15 == 0))
