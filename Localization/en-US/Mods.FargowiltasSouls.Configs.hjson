@@ -26,12 +26,12 @@ ClientConfig: {
 		Tooltip: If false, precision mode is instead toggled with the key.
 	}
 
-	OncomingMutantX: {
+	EternityMutantX: {
 		Label: Eternity Mode inventory icon X position
 		Tooltip: ""
 	}
 
-	OncomingMutantY: {
+	EternityMutantY: {
 		Label: Eternity Mode inventory icon Y position
 		Tooltip: ""
 	}
@@ -78,7 +78,7 @@ ClientConfig: {
 }
 
 SoulConfig: {
-	DisplayName: Soul Config
+	DisplayName: Server Config
 
 	Headers: {
 		Maso: Eternity Mode

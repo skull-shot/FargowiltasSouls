@@ -9,7 +9,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
     public abstract class BaseSoul : SoulsItem
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Souls", Name);
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Content/Items/Accessories/Souls/{Name}";
         protected virtual Color? nameColor => null;
 
         public override void SetStaticDefaults()

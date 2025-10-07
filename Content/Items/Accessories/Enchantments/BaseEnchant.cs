@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public abstract class BaseEnchant : SoulsItem
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Enchantments", Name);
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Content/Items/Accessories/Enchantments/{Name}";
         public abstract Color nameColor { get; }
         public bool IsAccessory = false;
         public string wizardEffect()
