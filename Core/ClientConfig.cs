@@ -72,13 +72,13 @@ namespace FargowiltasSouls.Core
         [Increment(1f)]
         [Range(0f, max4kX)]
         [DefaultValue(572f)]
-        public float OncomingMutantX;
+        public float EternityMutantX;
 
 
         [Increment(1f)]
         [Range(0f, max4kY)]
         [DefaultValue(244f)]
-        public float OncomingMutantY;
+        public float EternityMutantY;
 
         [DefaultValue(false)]
         public bool PhotosensitivityMode;
@@ -87,8 +87,8 @@ namespace FargowiltasSouls.Core
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context)
         {
-            OncomingMutantX = Utils.Clamp(OncomingMutantX, 0, max4kX);
-            OncomingMutantY = Utils.Clamp(OncomingMutantY, 0, max4kY);
+            EternityMutantX = Utils.Clamp(EternityMutantX, 0, max4kX);
+            EternityMutantY = Utils.Clamp(EternityMutantY, 0, max4kY);
         }
     }
 }
