@@ -9,13 +9,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 namespace FargowiltasSouls
 {
-    internal static class ILEditUtils
+    public static class ILEditUtils
     {
         public static bool CanFallthrough(Player player)
         {
             return player.FargoSouls().FallthroughTimer > 0;
         }
-        public static float GetYoyoRangeFromProjectile(Projectile projectile)
+        public static float GetYoyoRangeMultFromProjectile(Projectile projectile)
         {
             float YoyoRangeMult = 1f;
             if (projectile.owner.IsWithinBounds(Main.maxPlayers))
@@ -28,7 +28,7 @@ namespace FargowiltasSouls
             }
             return YoyoRangeMult;
         }
-        public static float GetYoyoRangeFromPlayerItem(Player player, Item item)
+        public static float GetYoyoRangeMultFromPlayerItem(Player player, Item item)
         {
             float YoyoRangeMult = 1f;
             if (player.whoAmI.IsWithinBounds(Main.maxPlayers) && ItemID.Sets.Yoyo[item.type])
@@ -40,9 +40,13 @@ namespace FargowiltasSouls
             }
             return YoyoRangeMult;
         }
-        public static bool ProjectileIsFromArrowRain(Projectile projectile)
+        public static bool ProjectileIsNotFromArrowRain(Projectile projectile)
         {
             return !projectile.FargoSouls().ArrowRain;
+        }
+        public static bool NotSafeFromCactusDamage(Player player)
+        {
+            return !player.HasEffect<CactusPassiveEffect>();
         }
     }
     public sealed class Player_Update_ILEdit : ILEditProvider
@@ -84,7 +88,7 @@ namespace FargowiltasSouls
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
-            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeFromProjectile); // Calc yoyo range mult to be used
+            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromProjectile); // Calc yoyo range mult to be used
             cursor.Emit(OpCodes.Ldloc_1); // Get and prep the yoyo range num to be multiplied
             cursor.Emit(OpCodes.Mul); // Multiply
             cursor.Emit(OpCodes.Stloc_1); // Set yoyo range num to the multiplied value
@@ -117,7 +121,7 @@ namespace FargowiltasSouls
                 return;
             }
             cursor.Emit(OpCodes.Ldarg_0); // Get the projectile instance to be used on the delegate
-            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeFromProjectile); // Calc yoyo range mult to be used
+            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromProjectile); // Calc yoyo range mult to be used
             cursor.Emit(OpCodes.Mul); // Multiply
             cursor.Emit(OpCodes.Stloc_S, (byte)5); // Set yoyo range num to the multiplied value
             cursor.Emit(OpCodes.Ldloc_S, (byte)5); // Compensate for using the original one by filling in the rest for next instruction
@@ -130,17 +134,16 @@ namespace FargowiltasSouls
         public override void PerformEdit(ILContext context, ManagedILEdit edit)
         {
             ILCursor cursor = new(context);
-            cursor.Index = 684; // Go as close as possible to the desired index before searching
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdfld<Player>("controlTorch"))) // Go after controlTorch bool
+            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdfld<Player>("yoyoString"))) // Go after Player.yoyoString bool
             {
-                FargowiltasSouls.Instance.Logger.Warn("GamePad Input IL edit failure on MatchLdfld<Player>('controlTorch')");
+                FargowiltasSouls.Instance.Logger.Warn("GamePad Input IL edit failure on MatchLdfld<Player>('yoyoString')");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
 
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchStloc(16))) // Then go after the num3++ under controlTorch check
+            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdfld<Player>("controlTorch"))) // Go after controlTorch bool
             {
-                FargowiltasSouls.Instance.Logger.Warn("GamePad Input IL edit failure on MatchStloc(16)");
+                FargowiltasSouls.Instance.Logger.Warn("GamePad Input IL edit failure on MatchLdfld<Player>('controlTorch')");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
@@ -153,19 +156,11 @@ namespace FargowiltasSouls
             }
 
             cursor.Emit(OpCodes.Ldloc_3); // Push player field onto the stack
-
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdloc(15))) // Then after the Item stack
-            {
-                FargowiltasSouls.Instance.Logger.Warn("GamePad Input IL edit failure on MatchLdloc(15)");
-                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
-                return;
-            }
-
-            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeFromPlayerItem); // Get the yoyo range mod
+            cursor.Emit(OpCodes.Ldloc_S, (byte)15); // Push item field onto the stack
+            cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromPlayerItem); // Get the yoyo range mod
             cursor.Emit(OpCodes.Ldloc_S, (byte)16); // Push num3, the cursor range AKA yoyo range in this case, onto the stack
             cursor.Emit(OpCodes.Mul); // Multiply cursor range with yoyo range mod
             cursor.Emit(OpCodes.Stloc_S, (byte)16); // Set cursor range to the value
-            cursor.Emit(OpCodes.Ldloc_S, (byte)15); // Compensate for using this earlier by pushing it again
         }
     }
     public sealed class Projectile_Damage_ILEdit : ILEditProvider
@@ -183,7 +178,25 @@ namespace FargowiltasSouls
                 return;
             }
             cursor.Emit(OpCodes.Ldarg_0); // Get Projectile instance
-            cursor.EmitDelegate(ILEditUtils.ProjectileIsFromArrowRain); // Check whether the arrow is spawned from Red Riding Enchantment's Arrow Rain. If so, fail Phantasm's Phantom Arrow spawn.
+            cursor.EmitDelegate(ILEditUtils.ProjectileIsNotFromArrowRain); // Check whether the arrow is spawned from Red Riding Enchantment's Arrow Rain. If so, fail Phantasm's Phantom Arrow spawn.
+            cursor.EmitAnd(); // Push the two bools together
+        }
+    }
+    public sealed class Player_ItemCheck_UseMiningTools_ActuallyUseMiningTool_ILEdit : ILEditProvider
+    {
+        public override void Subscribe(ManagedILEdit edit) => IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += edit.SubscriptionWrapper;
+        public override void Unsubscribe(ManagedILEdit edit) => IL_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool -= edit.SubscriptionWrapper;
+        public override void PerformEdit(ILContext context, ManagedILEdit edit)
+        {
+            ILCursor cursor = new(context);
+            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdsfld<Main>("dontStarveWorld"))) // Go directly after the second Main.dontStarveWorld check
+            {
+                FargowiltasSouls.Instance.Logger.Warn("dontStarveWorld cactus damage immunity failure on MatchLdfld<Main>('dontStarveWorld')");
+                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
+                return;
+            }
+            cursor.Emit(OpCodes.Ldarg_0); // Get Player instance
+            cursor.EmitDelegate(ILEditUtils.NotSafeFromCactusDamage); // Check if the player has Cactus Passive Effect
             cursor.EmitAnd(); // Push the two bools together
         }
     }
