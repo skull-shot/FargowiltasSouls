@@ -6,7 +6,7 @@ namespace FargowiltasSouls.Content.Items.Placables.Relics
 {
     public abstract class BaseRelic : SoulsItem
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Items/Placables/Relics", Name);
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Accessories/Content/Items/Placables/Relics/{Name}";
         protected abstract int TileType { get; }
 
         public override void SetStaticDefaults()
