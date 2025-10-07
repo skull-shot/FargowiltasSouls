@@ -3831,3 +3831,8 @@ EffectTogglerItem: {
 	// DisplayName: Effect Toggler
 	// Tooltip: Use to open the Effect Toggles menu
 }
+
+RunicBook: {
+	// DisplayName: Runic Book
+	// Tooltip: ""
+}
