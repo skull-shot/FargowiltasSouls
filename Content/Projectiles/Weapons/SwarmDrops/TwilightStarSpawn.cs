@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Graphics;
@@ -10,9 +11,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
-    public class RunicBlast : ModProjectile
+    public class TwilightStarSpawn : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_675";
+        public override string Texture => "Terraria/Images/Projectile_79";
 
         public override void SetStaticDefaults()
         {
@@ -24,14 +25,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.width = 18;
-            Projectile.height = 18;
+            Projectile.width = 54;
+            Projectile.height = 54;
             Projectile.scale = 1f;
+            Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
+            Projectile.light = 0.5f;
+            Projectile.scale = 0.8f;
         }
 
         public override void AI()
@@ -40,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (Projectile.ai[0] == 0)
             {
                 Projectile.velocity *= 0.97f;
-                if (Projectile.ai[1] > 30)
+                if (Projectile.ai[1] > 15)
                 {
                     Projectile.ai[0] = 1;
                     Projectile.ai[1] = -1;
@@ -48,9 +52,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
             else if (Projectile.ai[0] == 1)
             {
-                Projectile.velocity = 25 * Vector2.UnitX.RotatedBy((Main.MouseWorld - Projectile.Center).ToRotation());
-                SoundEngine.PlaySound(SoundID.Item158 with { Pitch = -0.8f }, Projectile.Center);
-                FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.PinkTorch, 2f, scale: 1.5f);
+                Projectile.velocity = 45 * Vector2.UnitX.RotatedBy((Main.MouseWorld - Projectile.Center).ToRotation());
+                SoundEngine.PlaySound(SoundID.Item9 with { Pitch = -0.7f }, Projectile.Center);
+                FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.GoldFlame, 2f, scale: 1.5f);
                 Projectile.ai[0] = 2;
             }
             Projectile.rotation = MathHelper.Pi + Projectile.velocity.ToRotation();
@@ -59,14 +63,14 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 40; i++)
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PinkTorch);
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Gold);
             SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
             base.OnKill(timeLeft);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            FargoSoulsUtil.DustRing(target.Center, 20, DustID.PinkTorch, 3, scale: 1.5f);
+            FargoSoulsUtil.DustRing(target.Center, 20, DustID.GoldFlame, 3, scale: 1.5f);
             SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
             base.OnHitNPC(target, hit, damageDone);
         }
@@ -93,24 +97,32 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 
                 Rectangle rectangle = new(0, 0, texture2D13.Width, texture2D13.Height);
-                Vector2 origin2 = texture2D13.Size() / 2f;
+                Vector2 origin2 = rectangle.Size() / 2f;
                 SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                Color origColor = Color.Gold;
 
                 for (int k = 5; k >= 0; k--)
                 {
                     Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + origin2;
-                    Color color = Projectile.GetAlpha(lightColor) * ((5 - k) / ((float)5 * 2));
-                    Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, color, Projectile.rotation, origin2, Projectile.scale, spriteEffects, 0);
+                    Color color = Projectile.GetAlpha(origColor) * ((5 - k) / ((float)5 * 2));
+                    Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, 
+                        color, 0, origin2 / 0.8f, Projectile.scale, spriteEffects, 0);
                 }
 
-                FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor);
+                int count = 6;
+                for (int i = 0; i < count; i++)
+                {
+                    float opac = (i + 1) / count;
+                    Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, rectangle, 
+                        origColor * opac, 0, origin2, opac * Projectile.scale, spriteEffects, 0);
+                }
             }
             return false;
         }
 
         private Color StripColors(float progressOnStrip)
         {
-            Color result = Color.Lerp(Color.Purple, Color.White, Utils.GetLerpValue(0f, 0.7f, progressOnStrip, clamped: true)) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
+            Color result = Color.Lerp(Color.White, Color.Gold, Utils.GetLerpValue(0f, 0.7f, progressOnStrip, clamped: true)) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
             result.A /= 2;
             return result;
         }

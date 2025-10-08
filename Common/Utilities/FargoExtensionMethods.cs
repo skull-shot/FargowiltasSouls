@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -132,6 +133,8 @@ namespace FargowiltasSouls //lets everything access it without using
             => npc.GetGlobalNPC<FargoSoulsGlobalNPC>();
         public static EModeGlobalNPC Eternity(this NPC npc)
             => npc.GetGlobalNPC<EModeGlobalNPC>();
+        public static EModeDD2GlobalNPC EModeDD2(this NPC npc)
+            => npc.GetGlobalNPC<EModeDD2GlobalNPC>();
         public static FargoSoulsGlobalProjectile FargoSouls(this Projectile projectile)
             => projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
         public static EModeGlobalProjectile Eternity(this Projectile projectile)

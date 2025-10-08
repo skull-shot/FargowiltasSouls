@@ -80,10 +80,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
             player.controlUseItem = false;
             player.controlUseTile = false;
             player.controlHook = false;
-            player.controlMount = false;
+            //player.controlMount = false;
 
-            if (player.mount.Active)
-                player.mount.Dismount(player);
+            //if (player.mount.Active)
+                //player.mount.Dismount(player);
 
             player.immune = true;
             player.immuneTime = Math.Max(player.immuneTime, 2);
@@ -97,9 +97,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
             {
                 Projectile.localAI[0] = 1;
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, 0, 0, 0, default, 2.5f);
+                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Pixie, -player.velocity.X * 0.2f, -player.velocity.Y * 0.2f, 0, default, 1.5f);
                     Main.dust[d].noGravity = true;
                     Main.dust[d].velocity *= 4f;
                 }
@@ -124,9 +124,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 20; i++)
             {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, 0, 0, 0, default, 2.5f);
+                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Pixie, 0, 0, 0, default, 1.5f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 4f;
             }

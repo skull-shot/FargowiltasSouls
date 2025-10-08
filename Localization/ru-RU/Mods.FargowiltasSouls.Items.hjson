@@ -3784,18 +3784,24 @@ CactusStaff: {
 Ruminate: "[c/FF3399:Удерживайте {0} для подробной информации]"
 
 ActiveSkillMenuItem: {
-	// DisplayName: Active Skills
-	// Tooltip: Use to open the Active Skill menu
+	DisplayName: Активные умения
+	Tooltip: Используйте, чтобы открыть меню активных умений
 }
 
 EffectTogglerItem: {
-	// DisplayName: Effect Toggler
-	// Tooltip: Use to open the Effect Toggles menu
+	DisplayName: Переключатель эффектов
+	Tooltip: Используйте, чтобы открыть переключатель эффектов
 }
 
-RunicBook: {
-	// DisplayName: Runic Book
-	// Tooltip: ""
+TwilightTome: {
+	DisplayName: Сумеречный компендиум
+	Tooltip:
+		'''
+		Удерживайте <left>, чтобы призвать до трёх сумеречных звёзд на месте вашего курсора
+		Отпустив кнопку, вы заставите звёзды выпустить звёздный шторм
+		Шторм будет направлен в сторону вашего курсора
+		«Награда за шикарный реванш...»
+		'''
 }
 
 SoulLantern: {

@@ -137,7 +137,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            Player.pickSpeed -= 0.25f;
+            //Player.pickSpeed -= 0.25f;
 
             Player.tileSpeed += 0.25f;
             Player.wallSpeed += 0.25f;

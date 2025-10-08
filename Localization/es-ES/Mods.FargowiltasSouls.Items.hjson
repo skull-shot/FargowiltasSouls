@@ -3777,9 +3777,15 @@ EffectTogglerItem: {
 	// Tooltip: Use to open the Effect Toggles menu
 }
 
-RunicBook: {
-	// DisplayName: Runic Book
-	// Tooltip: ""
+TwilightTome: {
+	// DisplayName: Twilight Compendium
+	/* Tooltip:
+		'''
+		Hold button to summon up to 3 twilight stars at your cursor
+		Releasing button causes the stars to conjure a starstorm
+		The storm of stars will launch towards your cursor
+		'The reward for a mighty rematch...'
+		''' */
 }
 
 SoulLantern: {

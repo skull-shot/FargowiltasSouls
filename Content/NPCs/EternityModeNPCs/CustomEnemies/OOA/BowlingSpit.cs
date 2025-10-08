@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
             NPC.width = 20;
             NPC.height = 20;
             NPC.scale *= 2;
-            NPC.lifeMax = 250;
+            NPC.lifeMax = 750;
             NPC.defense = 10;
             NPC.damage = 100;
             NPC.knockBackResist = 0f;
@@ -82,9 +82,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
                 NPC.velocity.X += NPC.direction * 0.002f;
 
                 // eat people!
-                foreach (NPC n in Main.npc.Where(x => x.active && x.Eternity().SpitBall == -1 && !x.noGravity && NPCID.Sets.BelongsToInvasionOldOnesArmy[x.type] && !EModeDD2Event.IsDD2Boss(x.type) && x.type != NPCID.DD2EterniaCrystal))
+                foreach (NPC n in Main.npc.Where(x => x.active && EModeDD2GlobalNPC.IsInstance(x)))
                 {
-                    if (Collision.CheckAABBvAABBCollision(n.position, new(n.width, n.height), NPC.position, new(NPC.width, NPC.height)))
+                    if (n.EModeDD2().SpitBall == -1 && !n.noGravity && !EModeDD2Event.IsDD2Boss(n.type) && Collision.CheckAABBvAABBCollision(n.position, new(n.width, n.height), NPC.position, new(NPC.width, NPC.height)))
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
                         NPC.scale += 0.2f;
@@ -92,14 +92,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
                         NPC.height = (int)(20 * NPC.scale);
                         NPC.Center = NPC.Center - 2 * NPC.scale * Vector2.UnitY;
                         NPC.velocity.X *= 0.85f;
-                        NPC.lifeMax += 100;
+                        int healVal = (int)(NPC.lifeMax * 0.1f);
+                        NPC.lifeMax += healVal;
 
                         if (FargoSoulsUtil.HostCheck)
                         {
-                            NPC.HealEffect(100);
-                            NPC.life += 100;
+                            NPC.HealEffect(healVal);
+                            NPC.life += healVal;
                         }
-                        n.Eternity().SpitBall = NPC.whoAmI;
+                        n.EModeDD2().SpitBall = NPC.whoAmI;
 
                         FargoSoulsUtil.DustRing(NPC.Center, 20, DustID.JungleTorch, NPC.scale);
                         NPC.netUpdate = true;
@@ -141,7 +142,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
                 Gore.NewGoreDirect(NPC.GetSource_FromThis(), NPC.Center, 3 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), type);
             }
 
-            foreach (NPC n in Main.npc.Where(x => x.active && x.Eternity().SpitBall == NPC.whoAmI))
+            foreach (NPC n in Main.npc.Where(x => x.active && EModeDD2GlobalNPC.IsInstance(x) && x.EModeDD2().SpitBall == NPC.whoAmI))
             {
                 n.velocity.Y = -3f;
                 n.velocity.X = Main.rand.NextFloat(-3, 3);
