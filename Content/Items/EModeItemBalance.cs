@@ -258,6 +258,9 @@ namespace FargowiltasSouls.Content.Items
                         balanceTextKeys = ["MoonsDrops"];
                         return EModeChange.ReworkNerf;
                     }
+                case ItemID.DD2ElderCrystal:
+                    balanceTextKeys = ["OOAWaves"];
+                    return EModeChange.ReworkNerf;
 
                 case ItemID.CrossNecklace:
                     balanceTextKeys = ["CrossNecklaceNerf"];
