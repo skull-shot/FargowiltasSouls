@@ -80,10 +80,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster
             player.controlUseItem = false;
             player.controlUseTile = false;
             player.controlHook = false;
-            player.controlMount = false;
+            //player.controlMount = false;
 
-            if (player.mount.Active)
-                player.mount.Dismount(player);
+            //if (player.mount.Active)
+                //player.mount.Dismount(player);
 
             player.immune = true;
             player.immuneTime = Math.Max(player.immuneTime, 2);
