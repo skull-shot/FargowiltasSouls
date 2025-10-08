@@ -1474,6 +1474,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                     //}
                 }
             }
+            else if (SpecialDash)
+            {
+                foreach (var layer in PlayerDrawLayerLoader.Layers)
+                {
+                    if (layer == PlayerDrawLayers.MountBack || layer == PlayerDrawLayers.MountFront)
+                    {
+                        layer.Hide();
+                    }
+                }
+            }
 
             if (drawInfo.drawPlayer.wings == EquipLoader.GetEquipSlot(Mod, "FlightMasterySoul", EquipType.Wings))
             {

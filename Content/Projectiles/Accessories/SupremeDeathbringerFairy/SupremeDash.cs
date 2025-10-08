@@ -62,10 +62,10 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
             player.controlUseItem = false;
             player.controlUseTile = false;
             player.controlHook = false;
-            player.controlMount = false;
+            //player.controlMount = false;
 
-            if (player.mount.Active)
-                player.mount.Dismount(player);
+            //if (player.mount.Active)
+                //player.mount.Dismount(player);
 
             if (Projectile.velocity != Vector2.Zero)
                 Projectile.rotation = Projectile.velocity.ToRotation();

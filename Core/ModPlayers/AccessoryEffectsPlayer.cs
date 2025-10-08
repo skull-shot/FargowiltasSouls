@@ -195,7 +195,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.controlUseItem = false;
                     Player.controlUseTile = false;
                     Player.controlHook = false; 
-                    Player.controlMount = false;
+                    //Player.controlMount = false;
 
                     Player.itemAnimation = 0;
                     Player.itemTime = 0;
