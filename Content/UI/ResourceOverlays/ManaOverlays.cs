@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
         {
             if (Main.LocalPlayer.FargoSouls().MagicSoul)
             {
-                return "Archmage";
+                return "ArchMage";
             }
             /*if (Main.LocalPlayer.FargoSouls().UniverseSoul)
             {

@@ -26,12 +26,12 @@ ClientConfig: {
 		Tooltip: Если выключена, кнопка печати точности будет переключать режим точности.
 	}
 
-	OncomingMutantX: {
+	EternityMutantX: {
 		Label: Позиция иконки режима Вечность в инвентаре по X
 		Tooltip: ""
 	}
 
-	OncomingMutantY: {
+	EternityMutantY: {
 		Label: Позиция иконки режима Вечность в инвентаре по Y
 		Tooltip: ""
 	}

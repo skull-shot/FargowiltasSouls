@@ -8,9 +8,9 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
-    public class RunicBook : SoulsItem
+    public class TwilightTome : SoulsItem
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", "DarkTome");
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public int timer;
         public bool lastItemUse;
         public override void SetDefaults()
@@ -22,11 +22,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.rare = ItemRarityID.Orange;
             Item.width = 36;
             Item.height = 40;
-            Item.useTime = 55;
-            Item.useAnimation = 55;
+            Item.useTime = 45;
+            Item.useAnimation = 45;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = SoundID.DD2_DarkMageAttack;
-            Item.shoot = ModContent.ProjectileType<RunicSigil>();
+            Item.shoot = ModContent.ProjectileType<TwilightStar>();
             Item.shootSpeed = 10f;
             Item.knockBack = 2f;
             Item.autoReuse = true;

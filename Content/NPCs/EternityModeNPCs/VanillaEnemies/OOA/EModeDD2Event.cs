@@ -8,6 +8,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ID;
 using static Terraria.ID.NPCID;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -445,5 +446,61 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         #endregion
 
         private static IEntitySource GetSpawnSource_OldOnesArmy() => new EntitySource_OldOnesArmy();
+    }
+
+    public class EModeDD2GlobalNPC : GlobalNPC
+    {
+        public override bool InstancePerEntity => true;
+
+        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+            => Sets.BelongsToInvasionOldOnesArmy[entity.type] && entity.type != NPCID.DD2EterniaCrystal;
+
+        public static bool IsInstance(NPC npc) => Sets.BelongsToInvasionOldOnesArmy[npc.type] && npc.type != NPCID.DD2EterniaCrystal;
+
+        public bool DrakinBuff;
+        public int SpitBall = -1;
+        public int InvulTimer = 0;
+
+        public override bool PreAI(NPC npc)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return base.PreAI(npc);
+
+            if (SpitBall != -1)
+            {
+                NPC spit = Main.npc[SpitBall];
+                npc.Center = spit.Center;
+                npc.dontTakeDamage = true;
+                npc.ShowNameOnHover = false;
+                return false;
+            }
+
+            int invulTime = 90;
+            InvulTimer++;
+            if (InvulTimer < invulTime)
+                npc.dontTakeDamage = true;
+            else if (InvulTimer == invulTime)
+                npc.dontTakeDamage = false;
+
+            return base.PreAI(npc);
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (SpitBall != -1)
+                return false;
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+        }
+
+        public override void ResetEffects(NPC npc)
+        {
+            DrakinBuff = false;
+            if (SpitBall != -1 && !Main.npc[SpitBall].active)
+            {
+                SpitBall = -1;
+                npc.dontTakeDamage = false;
+                npc.ShowNameOnHover = true;
+            }
+        }
     }
 }

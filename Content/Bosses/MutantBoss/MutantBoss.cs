@@ -117,7 +117,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 ModContent.BuffType<GodEaterBuff>(),
                 ModContent.BuffType<LeadPoisonBuff>(),
             ]);
-
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -140,7 +139,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC.damage = 444+44;
             NPC.defense = 255;
             NPC.value = Item.buyPrice(15);
-            NPC.lifeMax = Main.expertMode ? 9700000 : 5100000;
+            NPC.lifeMax = Main.expertMode ? 5700000 : 3700000;
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
             NPC.noTileCollide = true;

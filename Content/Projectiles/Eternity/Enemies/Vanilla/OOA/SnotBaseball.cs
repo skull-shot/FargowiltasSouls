@@ -63,8 +63,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
                 {
                     Projectile.ai[0] = 0;
                     Projectile.ai[1] = 1;
-                    Vector2 posDiff = Main.player[(int)Projectile.ai[2]].Center - Projectile.Center;
-                    Projectile.velocity = 20 * Vector2.UnitX.RotatedBy(posDiff.ToRotation());
+                    Player player = Main.player[(int)Projectile.ai[2]];
+                    Vector2 posDiff = player.Center - Projectile.Center;
+                    Vector2 vel = 20 * Vector2.UnitX.RotatedBy(posDiff.ToRotation()) - posDiff.Length() / 500f * Vector2.UnitY;
+                    Projectile.velocity = vel;
                     FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.Torch, 4f, scale: 2);
                     SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Variants = [2], Pitch = 1f }, Projectile.Center);
                 }
@@ -72,12 +74,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
             }
             else
             {
-                if (Projectile.ai[0] >= 20)
+                if (Projectile.ai[0] >= 10)
                 {
                     SoundEngine.PlaySound(SoundID.NPCDeath19, Projectile.Center);
+                    float spread = 0.3f;
                     if (FargoSoulsUtil.HostCheck)
                         for (int i = 0; i < 7; i++)
-                            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f)), ModContent.ProjectileType<SnotBaseballSplit>(), Projectile.damage / 2, 1f);
+                            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, 0.7f * Projectile.velocity.RotatedBy(Main.rand.NextFloat(-spread, spread)), ModContent.ProjectileType<SnotBaseballSplit>(), Projectile.damage / 2, 1f);
                     Projectile.Kill();
                 }   
             }
@@ -119,12 +122,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
             Projectile.width = 14;
             Projectile.height = 20;
             Projectile.hostile = true;
-            Projectile.extraUpdates = 0;
+            Projectile.extraUpdates = 1;
         }
 
         public override void AI()
         {
-            Projectile.velocity.Y += 0.02f;
+            Projectile.velocity.Y += 0.06f;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             for (int i = 0; i < 2; i++)
             {
@@ -146,7 +149,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
         {
             base.OnHitPlayer(target, info);
 
-            target.AddBuff(BuffID.OgreSpit, 120);
+            target.AddBuff(BuffID.OgreSpit, 180);
         }
 
         public override void OnKill(int timeLeft)

@@ -45,14 +45,16 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             {
                 return base.SafePreAI(npc);
             }
+            if (Timer == 0)
+                Timer = 90;
 
             if (npc.noGravity) // is phasing through something
                 Timer--;
 
-            if (Timer <= 180)
+            if (Timer <= 150)
                 npc.TargetClosest();
 
-            if (npc.HasValidTarget && Timer <= 180)
+            if (npc.HasValidTarget && Timer <= 150)
             {
                 if (npc.HasPlayerTarget)
                     npc.direction = (int)npc.HorizontalDirectionTo(Main.player[npc.target].Center);
@@ -61,7 +63,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.spriteDirection = npc.direction;
             }
 
-            if (Timer >= 180)
+            if (Timer >= 150)
             {
                 if (Javelin == -1 && FargoSoulsUtil.HostCheck)
                 {

@@ -41,7 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void SetDefaults(NPC entity)
         {
             base.SetDefaults(entity);
-
+            entity.lifeMax *= 2;
             //entity.scale *= 2;
         }
 
@@ -78,7 +78,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
             base.OnSpawn(npc, source);
-
             //FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, NPCID.DD2DarkMageT1, target: npc.target);
         }
 
@@ -109,10 +108,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             if (!HasAttackTarget(npc))
                 npc.TargetClosest();
 
-            //return base.SafePreAI(npc);
-            //Main.NewText((AttackStates)State);
-            //Main.NewText((AnimationStates)AnimState);
-            //Main.NewText(Timer);
             Timer++;
             switch ((AttackStates)State)
             {
@@ -155,23 +150,25 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         #region AI States
         private void SnotBaseball(NPC npc)
         {
-            if (Timer < 90)
-                Timer = 90;
             npc.velocity *= 0;
-            int delay = 150;
+            int delay = 120;
+            int shotCount = 3;
+            if (Timer < delay - 70)
+                Timer = delay - 70;
+
             if (Timer % delay == delay - 32)
             {
                 BeginAnimation(npc, (int)AnimationStates.Spit);
                 SoundEngine.PlaySound(SoundID.DD2_OgreSpit, npc.Center);
             }
-            else if (Timer % delay == 0)
+            else if (Timer % delay == delay - 1)
             {
                 SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort with { Volume = 0.5f }, npc.Center);
                 Vector2 pos = npc.Center + ((npc.direction * npc.width / 2) - 15) * Vector2.UnitX - 4 * Vector2.UnitY;
                 if (FargoSoulsUtil.HostCheck)
                 {
                     FargoSoulsUtil.DustRing(pos, 20, DustID.GemEmerald, 2f, scale: 2);
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), pos, new Vector2(npc.direction * 0.3f, -8), ModContent.ProjectileType<SnotBaseball>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 2f, ai2: npc.target);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), pos, new Vector2(npc.direction * 0.3f, -8), ModContent.ProjectileType<SnotBaseball>(), (int)(npc.damage / 1.5), 2f, ai2: npc.target);
                 }
             }
             else if (Timer % delay == 42 && Timer > delay)
@@ -182,15 +179,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             else if (Timer % delay == 56)
                 npc.direction = (int)npc.HorizontalDirectionTo(Main.player[npc.target].Center);
 
-            if (Timer > 550)
+            if (Timer >= ((shotCount * delay) + 78))
                 ResetToIdle(npc);
         }
 
         private void Bowling(NPC npc)
         {
             NPC crystal = EModeDD2Event.GetEterniaCrystal();
-            if (crystal == null)
-                ResetToIdle(npc);
+            if (crystal == null || npc.Distance(crystal.Center) < 500)
+            {
+                ChooseAttack(npc);
+                return;
+            }
 
             if (Timer == 1)
             {
@@ -210,10 +210,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 Vector2 pos = npc.Center + ((npc.direction * npc.width / 2) - 15) * Vector2.UnitX - 4 * Vector2.UnitY;
                 FargoSoulsUtil.DustRing(pos, 30, DustID.JungleTorch, 4);
                 if (FargoSoulsUtil.HostCheck)
-                    FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), pos, ModContent.NPCType<BowlingSpit>(), velocity: new (npc.direction * 2.5f, -8));
+                    FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), pos, ModContent.NPCType<BowlingSpit>(), velocity: new (npc.direction * 3.5f, -8));
             }
-            if (Timer > 100)
+
+            if (Timer > 75)
+            {
+                ResetAnimation(npc);
                 ResetToIdle(npc);
+            }
         }
 
         private void ChargeSlam(NPC npc)
@@ -248,7 +252,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     BeginAnimation(npc, (int)AnimationStates.Jump);
                 }
                 else if (npc.velocity.Y != 0)
+                {
                     npc.velocity.Y -= -0.1f;
+                    if (Timer % 10 == 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            int snotType = Main.rand.NextFromList(GoreID.OgreSpit1, GoreID.OgreSpit2, GoreID.OgreSpit3);
+                            Gore.NewGore(npc.GetSource_FromThis(), npc.Bottom, 1 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), snotType);
+                        }
+                    }
+                }
 
                 if (npc.velocity.Y >= 10)
                 {
@@ -266,6 +280,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     if (FargoSoulsUtil.HostCheck)
                         Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, Vector2.Zero, ProjectileID.DD2OgreSmash, FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 0f);
                     BeginAnimation(npc, (int)AnimationStates.Rest);
+
+                    SoundEngine.PlaySound(SoundID.NPCDeath19, npc.Center);
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        for (int i = 0; i < 12; i++)
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, 15 * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 + Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
+                        for (int i = 0; i < 12; i++)
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, 15 * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 - Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
+                    }
+                    for (int i = 0; i < 40; i++)
+                    {
+                        int snotType = Main.rand.NextFromList(GoreID.OgreSpit1, GoreID.OgreSpit2, GoreID.OgreSpit3);
+                        Gore.NewGore(npc.GetSource_FromThis(), npc.Bottom, 5 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), snotType);
+                    }
                 }
             }
             else
@@ -301,9 +329,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 {
                     npc.velocity.X += 0.02f * npc.direction;
                 }
-                if (npc.velocity.Y > -5 && Timer > 40)
+                if (Timer > 50)
                 {
-                    if (Math.Abs(p.Center.Y - npc.Center.Y) < npc.height / 4 && Math.Abs(p.Center.X - npc.Center.X) < 250)
+                    if (Math.Abs(p.Center.Y - npc.Center.Y) < npc.height / 4 && Math.Abs(p.Center.X - npc.Center.X) < 350)
                     {
                         AnimState = (int)AnimationStates.Hold;
                         AnimStartTime = 13;
@@ -345,7 +373,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 }
                 if (Timer < 15)
                 {
-                    npc.velocity.X = 12 * npc.direction;
+                    npc.velocity.X = 20 * npc.direction;
                     for (int i = 0; i < 2; i++)
                         new SparkParticle(npc.Top - npc.direction * npc.width / 2 * Vector2.UnitX + Main.rand.NextFloat(0, npc.height) * Vector2.UnitY, -npc.direction * Main.rand.NextFloat(1,3) * Vector2.UnitX, Color.White, 0.7f, 13).Spawn();
                 }
@@ -353,7 +381,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 {
                     BeginAnimation(npc, (int)AnimationStates.Jump);
                     npc.noGravity = false;
-                    npc.velocity.X *= 0.9f;
+                    npc.velocity.X *= 0.8f;
                 }
                 if (npc.velocity.Y >= 10)
                 {
@@ -388,6 +416,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             if (State != (int)AttackStates.Idle)
                 PreviousState = State;
+            if (PreviousState == (int)AttackStates.JumpSlash2)
+                PreviousState--;
             State = (int)AttackStates.Idle;
             ResetState(npc);
             //ResetAnimation(npc);
@@ -405,7 +435,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     states.Add((AttackStates)i);
                 }
             }
-            State = (int) Main.rand.NextFromCollection(states);
+            State = (int)Main.rand.NextFromCollection(states);
             NetSync(npc);
         }
 
