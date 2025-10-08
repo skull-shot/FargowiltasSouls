@@ -188,3 +188,8 @@ SpiritTornadoEffect: {
 		飓风会轻微地跟踪鼠标
 		'''
 }
+
+SoulLanternEffect: {
+	// DisplayName: Soul Lantern
+	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
+}

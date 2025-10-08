@@ -3781,3 +3781,12 @@ RunicBook: {
 	// DisplayName: Runic Book
 	// Tooltip: ""
 }
+
+SoulLantern: {
+	// DisplayName: Soul Lantern
+	/* Tooltip:
+		'''
+		Increases spawn rate for the enemy type in the lantern by 3x
+		Current enemy: {0}
+		''' */
+}

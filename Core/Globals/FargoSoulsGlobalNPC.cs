@@ -11,6 +11,7 @@ using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
@@ -1060,6 +1061,13 @@ namespace FargowiltasSouls.Core.Globals
             {
                 spawnRate /= 2;
                 maxSpawns *= 2;
+            }
+            if (player.HasEffect<SoulLanternEffect>() && player.EffectItem<SoulLanternEffect>().ModItem is SoulLantern lantern && lantern.SoulLanternID > 0)
+            {
+                spawnRate /= 4;
+                //maxSpawns *= 4;
+                SoulLanternEffect.CurrentPlayerLanternID = lantern.SoulLanternID;
+                SoulLanternEffect.InSpawnNPC = true;
             }
 
             //if (modPlayer.BuilderMode) maxSpawns = 0;

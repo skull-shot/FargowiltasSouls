@@ -194,3 +194,8 @@ SpiritTornadoEffect: {
 		10 second cooldown
 		''' */
 }
+
+SoulLanternEffect: {
+	// DisplayName: Soul Lantern
+	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
+}
