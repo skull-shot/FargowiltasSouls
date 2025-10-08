@@ -78,7 +78,7 @@ ClientConfig: {
 }
 
 SoulConfig: {
-	DisplayName: Конфигурация: Souls
+	DisplayName: Конфигурация: сторона сервера
 
 	Headers: {
 		Maso: Режим Вечность
