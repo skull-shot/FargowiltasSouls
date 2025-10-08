@@ -41,11 +41,15 @@ namespace FargowiltasSouls
 
         private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
 
+        private static readonly MethodInfo? On_TileLoader_PickPowerCheck_Method = typeof(TileLoader).GetMethod("PickPowerCheck", LumUtils.UniversalBindingFlags);
+
         public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
 
         public delegate int Orig_StrikeNPC_HitInfo_bool_bool(NPC nPC, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction);
 
         public delegate void Orig_PickAmmo(Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume);
+
+        public delegate void Orig_PickPowerCheck(Tile target, int pickPower, ref int damage);
 
         public void LoadDetours()
         {
@@ -138,6 +142,7 @@ namespace FargowiltasSouls
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
             HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
             HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
+            HookHelper.ModifyMethodWithDetour(On_TileLoader_PickPowerCheck_Method, MakeCommonTilesEasierToBreak);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -572,6 +577,14 @@ namespace FargowiltasSouls
                     value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
             }
             return value;
+        }
+        public static void MakeCommonTilesEasierToBreak(Orig_PickPowerCheck orig, Tile target, int pickPower, ref int damage)
+        {
+            if (WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles.Contains(target.TileType))
+            {
+                damage *= 2;
+            }
+            orig(target, pickPower, ref damage);
         }
     }
 }
