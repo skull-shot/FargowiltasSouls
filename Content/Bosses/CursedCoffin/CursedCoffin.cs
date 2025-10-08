@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.BossBars;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
@@ -346,6 +347,8 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             LeadingConditionRule rule = new(new Conditions.NotExpert());
 
             rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
 
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
             // gems

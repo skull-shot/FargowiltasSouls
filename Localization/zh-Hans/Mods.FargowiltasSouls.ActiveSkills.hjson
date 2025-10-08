@@ -190,6 +190,6 @@ SpiritTornadoEffect: {
 }
 
 SoulLanternEffect: {
-	// DisplayName: Soul Lantern
+	// DisplayName: Soul Prison
 	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
 }

@@ -1,7 +1,9 @@
 ﻿using FargowiltasSouls.Content.Bosses.CursedCoffin;
+using FargowiltasSouls.Content.Items.Accessories;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using System.Data;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,6 +16,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AccursedAnkh>()));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<CursedCoffin>()));
 

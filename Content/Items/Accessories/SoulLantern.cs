@@ -104,14 +104,6 @@ namespace FargowiltasSouls.Content.Items.Accessories
                     tooltips[i].Text = string.Format(tooltips[i].Text, ContentSamples.NpcsByNetId[SoulLanternID].TypeName);
             }
         }
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddRecipeGroup("FargowiltasSouls:AnyGoldBar", 10)
-                .AddIngredient(ItemID.FossilOre, 5)
-                .AddTile(TileID.Anvils)
-                .Register();
-        }
     }
 
     public class SoulLanternEffect : AccessoryEffect
