@@ -232,10 +232,6 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => AnyItem(ItemID.Shellphone), ItemID.Shellphone, ItemID.ShellphoneDummy, ItemID.ShellphoneHell, ItemID.ShellphoneOcean, ItemID.ShellphoneSpawn);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyShellphone", group);
 
-            //any bio cluster for the same reason as above
-            group = new RecipeGroup(() => AnyItem("BionomicCluster"), ModContent.ItemType<BionomicCluster>(), ModContent.ItemType<BionomicClusterInactive>());
-            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBionomicCluster", group);
-
             //any litho lantern for the same reason as above
             group = new RecipeGroup(() => AnyItem("LithosphericCluster"), ModContent.ItemType<LithosphericCluster>(), ModContent.ItemType<LithosphericClusterInactive>());
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLithosphericLantern", group);

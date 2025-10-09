@@ -304,7 +304,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             .AddIngredient(ModContent.ItemType<SinisterIcon>())
             .AddIngredient(ModContent.ItemType<SupremeDeathbringerFairy>())
-            .AddRecipeGroup("FargowiltasSouls:AnyBionomicCluster")
+            .AddIngredient(ModContent.ItemType<BionomicCluster>())
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
             .AddRecipeGroup("FargowiltasSouls:AnyLithosphericLantern")
