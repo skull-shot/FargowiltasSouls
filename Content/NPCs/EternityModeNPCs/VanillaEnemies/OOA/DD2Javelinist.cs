@@ -46,15 +46,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 return base.SafePreAI(npc);
             }
             if (Timer == 0)
-                Timer = 90;
+                Timer = 100;
 
             if (npc.noGravity) // is phasing through something
                 Timer--;
 
-            if (Timer <= 150)
+            if (Timer <= 180)
                 npc.TargetClosest();
 
-            if (npc.HasValidTarget && Timer <= 150)
+            if (npc.HasValidTarget && Timer <= 180)
             {
                 if (npc.HasPlayerTarget)
                     npc.direction = (int)npc.HorizontalDirectionTo(Main.player[npc.target].Center);
@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.spriteDirection = npc.direction;
             }
 
-            if (Timer >= 150)
+            if (Timer >= 180)
             {
                 if (Javelin == -1 && FargoSoulsUtil.HostCheck)
                 {
@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 }
                 float jTimer = Main.projectile[Javelin].ai[1];
 
-                npc.velocity.X = npc.direction * MathHelper.Lerp(0, 2.5f, jTimer / 80);
+                npc.velocity.X = npc.direction * MathHelper.Lerp(0, 1.5f, jTimer / 80);
 
                 if (jTimer > 85)
                     new SparkParticle(npc.Top - npc.spriteDirection * npc.width * Vector2.UnitX + Main.rand.NextFloat(0, npc.height) * Vector2.UnitY, -npc.velocity * 0.5f, Color.Green, 0.3f, 8).Spawn();

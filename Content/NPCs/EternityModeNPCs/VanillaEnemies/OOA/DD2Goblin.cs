@@ -48,10 +48,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
-            int chance = Math.Max(15 - (int)(Timer / 60), 1);
+            int chance = Math.Max(15 - (int)(Timer / 60), 8);
             if (State == 0 && Main.rand.NextBool(chance) && SpawnTimer < 0)
             {
                 npc.dontTakeDamage = true;
+                npc.HideStrikeDamage = true;
                 State = 1;
                 Timer = 0;
                 modifiers.Null();
@@ -65,6 +66,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 }
                 return;
             }
+            else
+                npc.HideStrikeDamage = false;
         }
 
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
