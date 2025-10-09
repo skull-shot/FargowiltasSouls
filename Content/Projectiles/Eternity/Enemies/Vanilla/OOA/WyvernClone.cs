@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -42,15 +44,26 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 
         public override void AI()
         {
-            Player player = Main.player[(int)target];
-            if (!player.active)
-                Projectile.Kill();
+            Entity entity;
+            if (target > 255)
+            {
+                entity = EModeDD2Event.GetEterniaCrystal();
+                if (entity == null)
+                    Projectile.Kill();
+            }
+            else
+            {
+                entity = Main.player[(int)target];
+                if (!entity.active)
+                    Projectile.Kill();
+            }
+            Vector2 targetPos = entity.Center;
 
             float initVel = 7;
             float accel = 0.3f;
             if (timer == 0)
             {
-                Projectile.rotation = (Projectile.Center - player.Center).ToRotation();
+                Projectile.rotation = (Projectile.Center - targetPos).ToRotation();
                 Projectile.velocity = initVel * Vector2.UnitX.RotatedBy(Projectile.rotation);
                 Projectile.spriteDirection = Projectile.velocity.X < 0 ? 1 : -1;
                 for (int i = 0; i < 20; i++)

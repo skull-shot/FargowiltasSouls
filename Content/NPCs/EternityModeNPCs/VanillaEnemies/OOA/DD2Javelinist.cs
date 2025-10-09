@@ -75,8 +75,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 if (Timer > 390)
                 {
                     Timer = 0;
-                    Main.projectile[Javelin].Kill();
-                    Javelin = -1;
+                    if (Javelin != 1)
+                    {
+                        Main.projectile[Javelin].Kill();
+                        Javelin = -1;
+                    }
                     return false;
                 }
                 float jTimer = Main.projectile[Javelin].ai[1];

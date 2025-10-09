@@ -11,9 +11,11 @@ using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.Utilities.Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -28,6 +30,24 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public int State = 0;
         public int Timer = 0;
+
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.TrailCacheLength[NPCID.DD2WyvernT1] = 6;
+            NPCID.Sets.TrailingMode[NPCID.DD2WyvernT1] = 1;
+
+            NPCID.Sets.TrailCacheLength[NPCID.DD2WyvernT2] = 6;
+            NPCID.Sets.TrailingMode[NPCID.DD2WyvernT2] = 1;
+
+            NPCID.Sets.TrailCacheLength[NPCID.DD2WyvernT3] = 6;
+            NPCID.Sets.TrailingMode[NPCID.DD2WyvernT3] = 1;
+        }
+
+        public override void SetDefaults(NPC entity)
+        {
+            base.SetDefaults(entity);
+            entity.noTileCollide = false;
+        }
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -50,7 +70,45 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 return base.SafePreAI(npc);
 
             //FargoSoulsUtil.PrintAI(npc);
-            if (Timer >= 240 && npc.ai[0] == 2 && npc.ai[1] == 0 && npc.HasPlayerTarget && npc.HasValidTarget)
+
+            if (DD2Event.Ongoing && npc.HasNPCTarget)
+            {
+                Vector2 crystalCenter = EModeDD2Event.GetEterniaCrystal().Center;
+                float crystalDist = npc.Distance(crystalCenter);
+                if (crystalDist <= 250)
+                {
+                    if (State == 0)
+                        State = 1;
+                    npc.ai[0] = 0;
+                    npc.direction = (int)npc.HorizontalDirectionTo(crystalCenter);
+                    npc.spriteDirection = npc.direction;
+                    npc.velocity *= 0.8f;
+                    if (npc.Center.Y - crystalCenter.Y < 50 && crystalDist < 100)
+                        npc.velocity.Y = -1;
+
+                    if (Timer >= 240 - (15 * 3) && Timer % 15 == 0)
+                    {
+                        float spread = 0.15f;
+                        SoundEngine.PlaySound(SoundID.DD2_WyvernHurt, npc.Center);
+                        SoundEngine.PlaySound(SoundID.Item20, npc.Center);
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile p = Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center + npc.direction * 10 * Vector2.UnitX, (crystalCenter.X - 10 - npc.Center.X) / 50 * Vector2.UnitX.RotatedBy(Main.rand.NextFloat(-spread, spread)), ProjectileID.BallofFire, npc.damage / 6, 1f);
+                            p.timeLeft = 60;
+                            p.hostile = true;
+                            p.friendly = false;
+                        }
+                    }
+                    if (Timer > 240)
+                    {
+                        Timer = 60;
+                    }
+                    return false;
+                }
+            }
+
+
+            if (Timer >= 240 && npc.HasPlayerTarget && npc.HasValidTarget)
             {
                 Player p = Main.player[npc.target];
                 if (npc.Center.Distance(p.Center) < 100)
@@ -60,7 +118,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 {
                     Vector2 pos2 = pos.RotatedBy(MathHelper.Pi * i, npc.Center);
                     if (FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(npc.GetSource_FromThis(), pos2, Vector2.Zero, ModContent.ProjectileType<WyvernClone>(), npc.damage / 9, 2, ai0: npc.type, ai1: npc.target);
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center, 8 * Vector2.UnitY + Vector2.UnitX * npc.direction, ProjectileID.BallofFire, npc.damage / 6, 2);
+                        proj.friendly = false;
+                        proj.hostile = true;
+                        proj.timeLeft = 30;
+                    }
                     SoundEngine.PlaySound(SoundID.Item43, pos2);
                 }
                 Timer = 60;
@@ -77,7 +140,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-            target.AddBuff(BuffID.Rabies, 3600);
+            //target.AddBuff(BuffID.Rabies, 3600);
         }
     }
 }
