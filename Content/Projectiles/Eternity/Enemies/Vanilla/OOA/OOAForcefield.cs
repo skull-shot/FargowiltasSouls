@@ -161,15 +161,15 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
         {
             Projectile.height = 50;
 
-            float distance = 2f * 24;
+            float distance = 3f * 24;
 
-            Main.projectile.Where(x => x.active && x.friendly && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
+            Main.projectile.Where(x => x.active && x.friendly && !x.Eternity().isADD2Proj && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
             {
                 if (Vector2.Distance(x.Center, Projectile.Center) <= distance)
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.BlueTorch, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100, default, 1.5f);
+                        int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.PinkTorch, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100, default, 1.5f);
                         Main.dust[dustId].noGravity = true;
                     }
 

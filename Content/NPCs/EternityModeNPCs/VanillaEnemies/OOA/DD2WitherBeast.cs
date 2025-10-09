@@ -88,6 +88,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             return base.SafePreAI(npc);
         }
 
+        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        {
+            if (projectile.Eternity().isADD2Proj)
+                return false;
+            return base.CanBeHitByProjectile(npc, projectile);
+        }
+
         public override void AI(NPC npc)
         {
             base.AI(npc);
