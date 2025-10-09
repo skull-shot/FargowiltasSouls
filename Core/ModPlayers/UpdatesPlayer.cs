@@ -274,6 +274,11 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             UpdateShield();
 
+            if (!Player.HasEffect<TimsInspectEffect>())
+                Player.FargoSouls().TimsInspect = false;
+            if (Player.FargoSouls().TimsInspectCD > 0)
+                Player.FargoSouls().TimsInspectCD--;
+
             Player.wingTimeMax = (int)(Player.wingTimeMax * WingTimeModifier);
 
             if (MutantAntibodies && Player.wet)

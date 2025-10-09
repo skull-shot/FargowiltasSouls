@@ -303,6 +303,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool RabiesVaccine;
         public bool TwinsEX;
         public bool TimsConcoction;
+        public bool TimsInspect;
+        public int TimsInspectCD;
         public bool ReceivedMasoGift;
         public bool DeviGraze;
         public bool Graze;

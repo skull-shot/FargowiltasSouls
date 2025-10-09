@@ -20,7 +20,7 @@
 // VampireKnives: Reduced lifesteal rate when above 50% life
 // Zapinator: Cannot receive random damage multipliers
 // CoinGun: Damage of Platinum and Gold Coins heavily reduced, damage of Silver Coins slightly reduced, and damage of Copper Coins increased
-// OOAWaves: Old One's Army waves altered
+// OOAWaves: Reworked event wave progression
 // OOASet: Set bonus increases minimum summon damage when you attack using other classes
 // MiningHelmet: Increases Undead Miner spawn rates
 // MoonsDrops: Bosses and minibosses drop no items until wave {0}
