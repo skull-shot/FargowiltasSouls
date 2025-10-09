@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         private bool firstTick = true;
         private readonly bool CanBeDangerSensed = !Main.gamePaused && Main.instance.IsActive && Main.netMode != NetmodeID.Server && Main.LocalPlayer.dangerSense;
 
-        public const int telegraphTime = 20;
+        public const int telegraphTime = 40;
         public override void AI()
         {
             if (firstTick)
