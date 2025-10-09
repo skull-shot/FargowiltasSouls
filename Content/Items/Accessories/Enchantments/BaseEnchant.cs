@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     Color glowColor = Color.Lerp(Color.Blue with { A = 0 }, Color.Silver with { A = 0 }, modifier) * 0.5f;
 
                     Texture2D texture = Terraria.GameContent.TextureAssets.Item[Item.type].Value;
-                    spriteBatch.Draw(texture, position + afterimageOffset, null, glowColor, 0, origin, scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, position + afterimageOffset, null, glowColor, 0, origin, Item.scale, SpriteEffects.None, 0f);
                 }
             }
             drawTimer++;
