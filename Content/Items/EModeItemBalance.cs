@@ -581,6 +581,11 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
+                case ItemID.Sunfury:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.3f;
+                    return EModeChange.Buff;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {
