@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override void AI(NPC npc)
         {
-            if (npc.dontTakeDamage)
+            if (npc.dontTakeDamage && npc.life < npc.lifeMax)
             {
                 npc.TargetClosest();
                 Counter++;
@@ -56,6 +56,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.dontTakeDamage = true;
                 npc.ai[0] = 39;
             }
+            base.HitEffect(npc, hit);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

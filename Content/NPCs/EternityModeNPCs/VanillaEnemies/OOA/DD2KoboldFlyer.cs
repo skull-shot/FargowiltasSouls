@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override void AI(NPC npc)
         {
-            if (npc.dontTakeDamage)
+            if (npc.dontTakeDamage && npc.life < npc.lifeMax)
             {
                 npc.TargetClosest();
                 Counter++;

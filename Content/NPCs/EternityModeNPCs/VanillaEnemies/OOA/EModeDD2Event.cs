@@ -56,12 +56,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             On_DD2Event.SpawnMonsterFromGate += EMode_SpawnMonsterFromGate;
             On_Lang.GetInvasionWaveText += EMode_GetWaveText;
+            On_DD2Event.SetEnemySpawningOnHold += EMode_SetEnemySpawningOnHold;
         }
 
         public override void Unload()
         {
             On_DD2Event.SpawnMonsterFromGate -= EMode_SpawnMonsterFromGate;
             On_Lang.GetInvasionWaveText -= EMode_GetWaveText;
+            On_DD2Event.SetEnemySpawningOnHold -= EMode_SetEnemySpawningOnHold;
         }
 
         public static void EMode_SpawnMonsterFromGate(On_DD2Event.orig_SpawnMonsterFromGate orig, Vector2 gateBottom)
@@ -106,6 +108,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             // TODO: Add Correct Text
 
             return orig(wave, npcIds);
+        }
+
+        private static void EMode_SetEnemySpawningOnHold(On_DD2Event.orig_SetEnemySpawningOnHold orig, int forhowLong)
+        {
+            if (!WorldSavingSystem.EternityMode || !IsFinalWave())
+                orig(forhowLong);
+            else
+                orig(2 * forhowLong);
         }
         #endregion
 

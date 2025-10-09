@@ -41,6 +41,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void SetDefaults(NPC entity)
         {
             base.SetDefaults(entity);
+            entity.damage /= 2;
             entity.lifeMax *= 2;
             //entity.scale *= 2;
         }
@@ -152,7 +153,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             npc.velocity *= 0;
             int delay = 120;
-            int shotCount = 3;
+            int shotCount = DD2Event.Ongoing ? 1 : 3;
             if (Timer < delay - 70)
                 Timer = delay - 70;
 
@@ -168,7 +169,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 if (FargoSoulsUtil.HostCheck)
                 {
                     FargoSoulsUtil.DustRing(pos, 20, DustID.GemEmerald, 2f, scale: 2);
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), pos, new Vector2(npc.direction * 0.3f, -8), ModContent.ProjectileType<SnotBaseball>(), (int)(npc.damage / 1.5), 2f, ai2: npc.target);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), pos, new Vector2(npc.direction * 0.3f, -8), ModContent.ProjectileType<SnotBaseball>(), (int)(npc.damage / 3), 2f, ai2: npc.target);
                 }
             }
             else if (Timer % delay == 42 && Timer > delay)

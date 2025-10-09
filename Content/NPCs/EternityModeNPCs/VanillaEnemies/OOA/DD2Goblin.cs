@@ -9,7 +9,9 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -48,31 +50,48 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
-            int chance = Math.Max(15 - (int)(Timer / 60), 8);
-            if (State == 0 && Main.rand.NextBool(chance) && SpawnTimer < 0)
+            if (TryDodgeRoll(npc))
             {
-                npc.dontTakeDamage = true;
-                npc.HideStrikeDamage = true;
-                State = 1;
-                Timer = 0;
+                DodgeRoll(npc);
                 modifiers.Null();
-                SoundEngine.PlaySound(SoundID.Item1 with { Pitch = -1 }, npc.Center);
-                SoundEngine.PlaySound(SoundID.DD2_GoblinScream, npc.Center);
-                for (int i = 0; i < 20; i++)
-                {
-                    Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Smoke, Scale: 2f);
-                    d.noGravity = true;
-                    d.velocity *= 0.7f;
-                }
-                return;
             }
             else
+            {
                 npc.HideStrikeDamage = false;
+            }
+            base.ModifyIncomingHit(npc, ref modifiers);
         }
 
-        public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
+        private bool TryDodgeRoll(NPC npc)
         {
-            base.OnHitByAnything(npc, player, hit, damageDone);
+            if (npc.dontTakeDamage)
+                return false;
+
+            int chance = Math.Max(15 - (int)(Timer / 60), 8);
+            return State == 0 && Main.rand.NextBool(chance) && SpawnTimer < 0;
+        }
+
+        public void DodgeRoll(NPC npc)
+        {
+            npc.dontTakeDamage = true;
+            npc.HideStrikeDamage = true;
+            State = 1;
+            Timer = 0;
+            SoundEngine.PlaySound(SoundID.Item1 with { Pitch = -1 }, npc.Center);
+            SoundEngine.PlaySound(SoundID.DD2_GoblinScream, npc.Center);
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Smoke, Scale: 2f);
+                d.noGravity = true;
+                d.velocity *= 0.7f;
+            }
+        }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (State == 1)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
         public override bool SafePreAI(NPC npc)

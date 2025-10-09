@@ -152,6 +152,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
             target.AddBuff(BuffID.OgreSpit, 180);
         }
 
+        public override bool? CanHitNPC(NPC target)
+        {
+            return false;
+        }
+
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 20; i++)

@@ -65,6 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
                         x.friendly = false;
                         x.owner = Main.myPlayer;
                         x.damage = Projectile.damage;
+                        x.FargoSouls().Reflected = true;
 
                         // Turn around
                         x.velocity *= -1f;

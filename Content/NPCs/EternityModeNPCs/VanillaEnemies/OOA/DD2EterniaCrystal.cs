@@ -13,6 +13,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public int InvulTimer;
 
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.ImmuneToAllBuffs[NPCID.DD2EterniaCrystal] = true;
+        }
+
         public override void AI(NPC npc)
         {
             base.AI(npc);
@@ -40,6 +45,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             }
 
         }
+
+        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        {
+            if (projectile.FargoSouls().Reflected)
+                return false;
+            return base.CanBeHitByProjectile(npc, projectile);
+        }
+
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (InvulTimer > 0)
