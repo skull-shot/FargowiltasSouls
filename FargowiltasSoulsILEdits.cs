@@ -1,3 +1,4 @@
+using System;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Hooking;
@@ -23,7 +24,7 @@ namespace FargowiltasSouls
                 Player player = Main.player[projectile.owner];
                 if (player.HasEffect<TungstenEffect>())
                     YoyoRangeMult += 0.25f;
-                if (player.FargoSouls().AttackSpeed > 1f)
+                if (player.FargoSouls().AttackSpeed > 0f)
                     YoyoRangeMult += player.FargoSouls().AttackSpeed - 1f;
             }
             return YoyoRangeMult;
@@ -35,10 +36,14 @@ namespace FargowiltasSouls
             {
                 if (player.HasEffect<TungstenEffect>())
                     YoyoRangeMult += 0.25f;
-                if (player.FargoSouls().AttackSpeed > 1f)
+                if (player.FargoSouls().AttackSpeed > 0f)
                     YoyoRangeMult += player.FargoSouls().AttackSpeed - 1f;
             }
             return YoyoRangeMult;
+        }
+        public static double NormalizeMult(float value)
+        {
+            return Math.Ceiling(value);
         }
         public static bool ProjectileIsNotFromArrowRain(Projectile projectile)
         {
@@ -91,6 +96,7 @@ namespace FargowiltasSouls
             cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromProjectile); // Calc yoyo range mult to be used
             cursor.Emit(OpCodes.Ldloc_1); // Get and prep the yoyo range num to be multiplied
             cursor.Emit(OpCodes.Mul); // Multiply
+            cursor.EmitDelegate(ILEditUtils.NormalizeMult); // Make sure this uses Ceiling
             cursor.Emit(OpCodes.Stloc_1); // Set yoyo range num to the multiplied value
             cursor.Emit(OpCodes.Ldarg_0); // Compensate for its usage from earlier by filling in the rest for next instruction}
         }
@@ -123,6 +129,7 @@ namespace FargowiltasSouls
             cursor.Emit(OpCodes.Ldarg_0); // Get the projectile instance to be used on the delegate
             cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromProjectile); // Calc yoyo range mult to be used
             cursor.Emit(OpCodes.Mul); // Multiply
+            cursor.EmitDelegate(ILEditUtils.NormalizeMult); // Make sure this uses Ceiling
             cursor.Emit(OpCodes.Stloc_S, (byte)5); // Set yoyo range num to the multiplied value
             cursor.Emit(OpCodes.Ldloc_S, (byte)5); // Compensate for using the original one by filling in the rest for next instruction
         }
@@ -160,6 +167,7 @@ namespace FargowiltasSouls
             cursor.EmitDelegate(ILEditUtils.GetYoyoRangeMultFromPlayerItem); // Get the yoyo range mod
             cursor.Emit(OpCodes.Ldloc_S, (byte)16); // Push num3, the cursor range AKA yoyo range in this case, onto the stack
             cursor.Emit(OpCodes.Mul); // Multiply cursor range with yoyo range mod
+            cursor.EmitDelegate(ILEditUtils.NormalizeMult); // Make sure this uses Ceiling
             cursor.Emit(OpCodes.Stloc_S, (byte)16); // Set cursor range to the value
         }
     }

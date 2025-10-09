@@ -578,7 +578,7 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.DarkLance:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 1.3f;
+                    balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
                 default:
