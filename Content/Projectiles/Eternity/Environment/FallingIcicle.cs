@@ -104,6 +104,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 }
             }
 
+            foreach (Projectile projectile in Main.projectile.Where(p => p.active && p.friendly && p.type != Type && p.Hitbox.Intersects(Projectile.Hitbox) && Projectile.ai[0] == 0))
+            {
+                Projectile.ai[0]++;
+            }
+
             //waits for target to walk below
             if (Projectile.ai[0] == 0 && target?.Center.Y > Projectile.Center.Y && (Math.Abs(target.Center.X - Projectile.Center.X) < 10))
             {
