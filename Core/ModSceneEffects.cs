@@ -96,15 +96,11 @@ namespace FargowiltasSouls.Core
                     {
                         music = MusicLoader.GetMusicSlot(Mod, "Assets/Sounds/Silent");
                     }
-                    else if (Phase == 1)
+                    else if (Phase >= 1)
                     {
                         music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/ShiftingSands");
                         if (Main.musicFade[music] < 0.5f)
                             Main.musicFade[music] = 0.5f;
-                    }
-                    else if (Phase >= 2)
-                    {
-                        music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/ShiftingSandsP2");
                     }
                 }
                 return music;
