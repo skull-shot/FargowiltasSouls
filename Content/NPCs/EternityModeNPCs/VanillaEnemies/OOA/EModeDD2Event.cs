@@ -294,7 +294,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2GoblinT2) < num)
                         num8 = OOANPC(x, y, DD2GoblinT2);
                     break;
-                case 7: // Goblins Bombers, Wyverns, Javelinsts, Wither Beasts, Drakins, Kobold Walkers, Kobold Flyers, and Ogre
+                case 7: // Goblins, Goblins Bombers, Wyverns, Javelinsts, Wither Beasts, Drakins, Kobold Walkers, Kobold Flyers, and Ogre
                     {
 
                         if (GetWaveProgressPercent() > 0.5f && !NPC.AnyNPCs(DD2OgreT2))
@@ -308,7 +308,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         else if (Main.rand.Next(13) == 0 && NPC.CountNPCS(DD2WyvernT2) < num3)
                             num7 = OOANPC(x, y, DD2WyvernT2);
                         if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2GoblinBomberT2) < num)
-                            num8 = OOANPC(x, y, DD2GoblinBomberT2);
+                            num8 = OOAChanceNPC(x, y, DD2GoblinT2, DD2GoblinBomberT2, 3);
 
                         break;
                     }
@@ -436,6 +436,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     ];
                 case 7:
                     return [ 
+                        DD2GoblinT2,
                         DD2GoblinBomberT2,
                         DD2WyvernT2,
                         DD2JavelinstT2,
