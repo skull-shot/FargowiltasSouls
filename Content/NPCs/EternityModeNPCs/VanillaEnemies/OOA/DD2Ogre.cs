@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using Terraria;
@@ -105,6 +106,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 npc.active = false;
                 return false;
             }
+
+            if (!Main.player.Any(p => p.active && !p.dead && !p.ghost))
+                return base.SafePreAI(npc);
 
             if (!HasAttackTarget(npc))
                 npc.TargetClosest();
@@ -285,10 +289,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     SoundEngine.PlaySound(SoundID.NPCDeath19, npc.Center);
                     if (FargoSoulsUtil.HostCheck)
                     {
+                        float speed = 9f;
                         for (int i = 0; i < 12; i++)
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, 15 * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 + Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, speed * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 + Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
                         for (int i = 0; i < 12; i++)
-                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, 15 * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 - Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
+                            Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Bottom, speed * Vector2.UnitX.RotatedBy(3 * MathHelper.PiOver2 - Main.rand.NextFloat(MathHelper.PiOver4 / 2, 1.5f * MathHelper.PiOver4)), ModContent.ProjectileType<SnotBaseballSplit>(), (int)(npc.damage / 4f), 2f);
                     }
                     for (int i = 0; i < 40; i++)
                     {
