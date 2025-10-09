@@ -270,7 +270,7 @@ IronEnchant: {
 	// DisplayName: Iron Enchantment
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots:
+		Works from inventory or vanity slots:
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range
 		Works when equipped:
@@ -471,7 +471,7 @@ RainEnchant: {
 		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
 		Grants immunity to Wet and all attacks inflict Wet
-		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
+		Grants immunity to lightning strikes in Eternity Mode (works from inventory or vanity slots)
 		[i:FloatingTube] Effects of Inner Tube
 		'Come again some other day'
 		''' */
@@ -738,7 +738,7 @@ SquirrelCharm: {
 	// DisplayName: Squirrel Charm
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		Works from inventory or vanity slots
 		Stand still to expose nearby treasure and enemies
 		Enemies emit light at night
 		Grants autofire to non-weapon items
@@ -842,7 +842,7 @@ LifeForce: {
 		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (Works from inventory and vanity)
+		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		''' */
 	// VanityTooltip: Passive cactuses become harmless
@@ -1054,34 +1054,15 @@ BionomicCluster: {
 		    Clique com o botão direito para afastar e melhora consideravelmente as reforjas
 		'O amálgama nascido de mil inimigos comuns'
 		'''
-	/* VanityTooltip:
-		'''
-		[i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
-		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
-		''' */
-}
-
-BionomicClusterInactive: {
-	// DisplayName: Bionomic Cluster (Inactive)
-	/* Tooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Hexed, [i:FargowiltasSouls/FrigidGrasp] Frostburn and Chilled
-		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
-		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
-		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
-		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    [i:FargowiltasSouls/SandsofTime] Grants immunity to Mighty Wind
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster
-		'The amalgamate born of a thousand common enemies'
-		''' */
+	// VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster"
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
 }
 
 LithosphericCluster: {
 	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1101,13 +1082,14 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1120,6 +1102,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 CelestialRune: {
@@ -1137,11 +1120,15 @@ VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
+		Grants immunity to Celestial Pillar and arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
+		''' */
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/VerdantDoomsayerMask] Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
 		''' */
 }
 
@@ -1206,6 +1193,7 @@ DubiousCircuitry: {
 		Reduz os danos sofridos em 5%
 		'Não inclúi malware, provavelmente'
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 }
 
 EurusSock: {
@@ -1241,7 +1229,7 @@ ChaliceofTheMoon: {
 		'''
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
@@ -1251,7 +1239,7 @@ ChaliceofTheMoon: {
 		'''
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
@@ -1318,6 +1306,11 @@ HeartoftheMasochist: {
 		'Quente, batendo e sem necessidade de um corpo'
 		'''
 	// VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs"
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
+		''' */
 }
 
 IceQueensShield: {
@@ -1636,14 +1629,7 @@ SupremeDeathbringerFairy: {
 		Invoca 2 braços do Esqueletron para bater nos inimigos
 		'Supremacia não necessariamente garantida'
 		'''
-	/* RuminateTooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
-		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
-		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
-		'Supremacy not necessarily guaranteed'
-		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 }
 
 TimsConcoction: {

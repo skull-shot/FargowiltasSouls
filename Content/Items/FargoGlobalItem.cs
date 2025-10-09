@@ -192,6 +192,17 @@ namespace FargowiltasSouls.Content.Items
             ModContent.ItemType<SlimeKingsSlasher>(),
             ItemID.TheAxe
         ];
+        public static List<int> NoRuminateText =
+        [
+            ModContent.ItemType<SupremeDeathbringerFairy>(),
+            ModContent.ItemType<BionomicCluster>(),
+            ModContent.ItemType<DubiousCircuitry>(),
+            ModContent.ItemType<LithosphericCluster>(),
+            ModContent.ItemType<LithosphericClusterInactive>(),
+            ModContent.ItemType<VerdantDoomsayerMask>(),
+            ModContent.ItemType<HeartoftheMasochist>()
+        ];
+
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -647,7 +658,14 @@ namespace FargowiltasSouls.Content.Items
                         var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
                         if (keys.Count > 0)
                             key = keys[0];
-                        tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
+                        if (!NoRuminateText.Contains(item.type))
+                            tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
+                        else
+                        {
+                            int i = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                            if (i != -1)
+                                tooltips[i].Text = string.Format(tooltips[i].Text, key);
+                        }
                     }
                 }
             }

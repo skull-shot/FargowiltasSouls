@@ -749,7 +749,7 @@ SquirrelCharm: {
 	// DisplayName: Squirrel Charm
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		Works from inventory or vanity slots
 		Stand still to expose nearby treasure and enemies
 		Enemies emit light at night
 		Grants autofire to non-weapon items
@@ -855,7 +855,7 @@ LifeForce: {
 		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (Works from inventory and vanity)
+		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		''' */
 	// VanityTooltip: Passive cactuses become harmless
@@ -1070,41 +1070,14 @@ BionomicCluster: {
 		[i:FargowiltasSouls/NymphsPerfume]你会以满生命值重生，[i:FargowiltasSouls/SandsofTime]没有Boss在场时加快重生速度
 		[i:FargowiltasSouls/OrdinaryCarrot]右键可改变视野范围
 		'''
-}
-
-BionomicClusterInactive: {
-	DisplayName: 生态球（未启用）
-	Tooltip:
-		'''
-		免疫[i:FargowiltasSouls/FrigidGemstone]霜冻、[i:FargowiltasSouls/WretchedPouch]暗影焰、[i:FargowiltasSouls/SqueakyToy]吱吱响的玩具、[i:FargowiltasSouls/ConcentratedRainbowMatter]宇宙之焰减益
-		免疫[i:FargowiltasSouls/WyvernFeather]折翼、跛足、[i:FargowiltasSouls/TribalCharm]被网住和净化减益
-		免疫[i:FargowiltasSouls/NymphsPerfume]热恋、恶臭、[i:FargowiltasSouls/SecurityWallet]迈达斯和着魔减益
-		[i:FargowiltasSouls/SandsofTime]使用以传送到你上一次死亡的地点
-		[i:FargowiltasSouls/WyvernFeather]攻击会造成折翼减益，[i:FargowiltasSouls/NymphsPerfume]并生成红心
-		[i:FargowiltasSouls/WyvernFeather]你会定期释放光球，触碰光球可以恢复你的飞行时间
-		[i:FargowiltasSouls/SqueakyToy]你受到伤害时有5%概率发出吱吱声，并使这次受到的伤害降至1点
-		[i:FargowiltasSouls/WretchedPouch]攻击时进行暗影焰充能并降低至多10%伤害减免
-		[i:FargowiltasSouls/WretchedPouch]停止攻击时释放暗影焰能量，爆发出一阵暗影触手，造成魔法伤害
-		[i:FargowiltasSouls/ConcentratedRainbowMatter]召唤一只友好的彩虹史莱姆
-		[i:FargowiltasSouls/TimsConcoction]某些敌人在死亡时会掉落药水
-		[i:FargowiltasSouls/TribalCharm]手动点击攻击时，增加30%非召唤伤害
-		[c/00FFFF:当该饰品放在背包中或时装栏时，下列效果也会生效（右键点击以启用）：]
-		    免疫[i:FargowiltasSouls/SandsofTime]强风与仙人掌伤害、[i:FargowiltasSouls/MysticSkull]窒息、[i:FargowiltasSouls/FrigidGemstone]冷冻、[i:FargowiltasSouls/SqueakyToy]内疚减益
-		    [i:FargowiltasSouls/OrdinaryCarrot]获得夜视效果，[i:FargowiltasSouls/SecurityWallet]并降低50%重铸价格
-		    [i:FargowiltasSouls/ConcentratedRainbowMatter][i:FargowiltasSouls/MysticSkull]需要时自动使用治疗和魔力药水，并增大自动拾取魔力星的范围
-		    [i:FargowiltasSouls/NymphsPerfume]你会以满生命值重生，[i:FargowiltasSouls/SandsofTime]没有Boss在场时加快重生速度
-		    [i:FargowiltasSouls/FrigidGemstone]按下“寒霜咒语”键放置冰雪魔杖之冰
-		    [i:FargowiltasSouls/OrdinaryCarrot]右键可改变视野范围
-		    [i:FargowiltasSouls/WyvernFeather]在太空和液体中恢复正常重力作用
-		“由上千普通敌人融合而成”
-		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
 }
 
 LithosphericCluster: {
 	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1124,13 +1097,14 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
+		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1143,6 +1117,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 CelestialRune: {
@@ -1159,11 +1134,15 @@ VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/VerdantDoomsayerMask] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
+		Grants immunity to Celestial Pillar and arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
+		''' */
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/VerdantDoomsayerMask] Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
 		''' */
 }
 
@@ -1227,6 +1206,7 @@ DubiousCircuitry: {
 		[i:FargowiltasSouls/ReinforcedPlating] 所受伤害减少5%
 		“里面也许没有恶意软件”
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 }
 
 EurusSock: {
@@ -1262,7 +1242,7 @@ ChaliceofTheMoon: {
 		'''
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
@@ -1272,7 +1252,7 @@ ChaliceofTheMoon: {
 		'''
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
-		Grants most standard potion and station buffs (works from inventory and vanity)
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
 		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
@@ -1347,6 +1327,11 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/SaucerControlConsole]按下“弹药切换”键循环切换弹药
 		[i:FargowiltasSouls/GalacticGlobe]获得大多数一般药水和增益站效果
 		'''
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
+		''' */
 }
 
 IceQueensShield: {
@@ -1673,14 +1658,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/NecromanticBrew]召唤两个骷髅王手臂重击敌人
 		“霸权难保”
 		'''
-	/* RuminateTooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
-		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
-		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
-		'Supremacy not necessarily guaranteed'
-		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 }
 
 TimsConcoction: {

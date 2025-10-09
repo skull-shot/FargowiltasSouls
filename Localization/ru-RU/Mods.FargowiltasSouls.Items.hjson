@@ -1031,22 +1031,7 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Даёт иммунитет к дебаффу «Сильный ветер»
 		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
 		'''
-}
-
-BionomicClusterInactive: {
-	DisplayName: Биономическое скопление (Неактивно)
-	Tooltip:
-		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Сглаз», [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог» и «Охлаждение»
-		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
-		[i:FargowiltasSouls/SqueakyToy] У вражеских атак есть 10% шанс пискнуть и нанести вам 1 единицу урона
-		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
-		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
-		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре (ПКМ, чтобы включить):]
-		    [i:FargowiltasSouls/SandsofTime] Даёт иммунитет к дебаффу «Сильный ветер»
-		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
-		«Амальгама, в которую слились тысяча обыкновенных врагов»
-		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
 }
 
 LithosphericCluster: {
@@ -1073,6 +1058,7 @@ LithosphericCluster: {
 		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 LithosphericClusterInactive: {
@@ -1092,6 +1078,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 CelestialRune: {
@@ -1114,6 +1101,11 @@ VerdantDoomsayerMask: {
 		[i:FargowiltasSouls/CelestialRune] Вы периодически выпускаете дополнительные снаряды в зависимости от класса используемого оружия
 		«Всегда наблюдает»
 		'''
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/VerdantDoomsayerMask] Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
+		''' */
 }
 
 ConcentratedRainbowMatter: {
@@ -1174,6 +1166,7 @@ DubiousCircuitry: {
 		[i:FargowiltasSouls/ReinforcedPlating] Увеличивает защиту и сопротивление урону, пока вы под воздействием дебаффа
 		«Скорее всего не включает в себя вредоносные программы»
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 }
 
 EurusSock: {
@@ -1284,6 +1277,11 @@ HeartoftheMasochist: {
 		«Тёплое, бьётся и не нуждается в теле»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий"
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
+		''' */
 }
 
 IceQueensShield: {

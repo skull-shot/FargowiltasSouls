@@ -19,7 +19,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
