@@ -270,13 +270,9 @@ namespace FargowiltasSouls.Core.Globals
             bool pumpkinMoon = surface && night && Main.pumpkinMoon;
             bool solarEclipse = surface && day && Main.eclipse;
             bool lunarEvents = NPC.LunarApocalypseIsUp && (nebulaTower || vortexTower || stardustTower || solarTower);
-            //bool monsterMadhouse = MMWorld.MMArmy;
             bool noEvent = Main.invasionType == 0 && !oldOnesArmy && !frostMoon && !pumpkinMoon && !solarEclipse && !lunarEvents;
             bool thunderstorm = Main.IsItStorming && surface && !snow && !spawnInfo.Player.ZoneSandstorm && noEvent;
 
-            //no work?
-            //is lava on screen
-            //bool nearLava = Collision.LavaCollision(spawnInfo.Player.position, spawnInfo.SpawnTileX, spawnInfo.SpawnTileY);
             bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
             bool worldEvil = WorldGen.crimson;
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
@@ -394,7 +390,7 @@ namespace FargowiltasSouls.Core.Globals
                         }
                     }
 
-                    if (!surface && normalSpawn)
+                    if (normalSpawn && (!surface || Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == WallID.DirtUnsafe))
                     {
                         pool[NPCID.Mimic] = .002f;
                     }
@@ -414,16 +410,9 @@ namespace FargowiltasSouls.Core.Globals
                         }
                         else //night
                         {
-                            if (Main.bloodMoon)
+                            if (Main.bloodMoon && normalSpawn)
                             {
                                 pool[NPCID.ChatteringTeethBomb] = .1f;
-                            }
-
-                            if (noInvasion && !oldOnesArmy)
-                            {
-                                pool[NPCID.Clown] = 0.01f;
-                                if (!pool.TryGetValue(NPCID.Werewolf, out float value) || value < 0.005f)
-                                    pool[NPCID.Werewolf] = 0.005f;
                             }
                                 
                             if (normalSpawn)
@@ -449,16 +438,15 @@ namespace FargowiltasSouls.Core.Globals
                                 if (NPC.downedMechBossAny)
                                     pool[NPCID.Probe] = 0.01f;
 
-                                if (NPC.downedPlantBoss) //GODLUL
+                                if (NPC.downedPlantBoss)
                                 {
-                                    //if (!spawnInfo.player.FargoSouls().SkullCharm)
                                     pool[NPCID.SkeletonSniper] = .005f;
                                     pool[NPCID.SkeletonCommando] = .005f;
                                     pool[NPCID.TacticalSkeleton] = .005f;
                                 }
                             }
 
-                            if (NPC.downedMechBossAny && noInvasion)
+                            if (noInvasion && normalSpawn)
                             {
                                 #region night pumpkin moon, frost moon
                                 if (noBiome)
@@ -490,7 +478,6 @@ namespace FargowiltasSouls.Core.Globals
                                         pool[NPCID.ZombieElf] = .02f;
                                         pool[NPCID.ZombieElfBeard] = .02f;
                                         pool[NPCID.ZombieElfGirl] = .02f;
-                                        pool[NPCID.Yeti] = .01f;
 
                                         pool[NPCID.ElfArcher] = .05f;
                                         pool[NPCID.ElfCopter] = .01f;
@@ -500,23 +487,12 @@ namespace FargowiltasSouls.Core.Globals
                             }
                         }
 
-                        if (hallow)
+                        if (hallow && normalSpawn)
                         {
-                            if (!Main.raining)
-                                pool[NPCID.RainbowSlime] = .001f;
                             pool[NPCID.GingerbreadMan] = .05f;
                         }
 
-                        if (snow && noInvasion)
-                        {
-                            if (!Main.raining && !spawnInfo.PlayerInTown)
-                                pool[NPCID.IceGolem] = .01f;
-                            /*pool[NPCID.SnowBalla] = .04f;
-                            pool[NPCID.MisterStabby] = .04f;
-                            pool[NPCID.SnowmanGangsta] = .04f;*/
-                        }
-
-                        if (ocean)
+                        if (ocean && normalSpawn)
                         {
                             if (night)
                             {
@@ -529,33 +505,13 @@ namespace FargowiltasSouls.Core.Globals
                             }
                             pool[NPCID.PigronHallow] = .06f;
                         }
-                        else if (desert)
+                        else if (desert && normalSpawn)
                         {
-                            pool[NPCID.DesertBeast] = .05f;
-                        }
-
-                        if (NPC.downedMechBossAny && Main.raining)
-                        {
-                            pool[NPCID.LightningBug] = .1f;
-                        }
-
-                        if (corruption)
-                        {
-                            pool[NPCID.SeekerHead] = .1f;
-                        }
-
-                        if (crimson)
-                        {
-                            pool[NPCID.IchorSticker] = .1f;
+                            pool[NPCID.DesertBeast] = .1f;
                         }
                     }
                     else if (wideUnderground)
                     {
-                        if (desert && !corruption && !crimson)
-                        {
-                            pool[NPCID.DesertDjinn] = .05f;
-                        }
-
                         if (cavern)
                         {
                             if (noBiome && NPC.downedBoss3)
@@ -564,44 +520,13 @@ namespace FargowiltasSouls.Core.Globals
 
                         if (!NPC.savedWizard && !NPC.AnyNPCs(NPCID.BoundWizard))
                             pool[NPCID.BoundWizard] = .5f;
-
-                        if (NPC.downedMechBossAny)
-                        {
-                            if (snow && !Main.dayTime) //frost moon underground
-                            {
-                                if (underground)
-                                    pool[NPCID.Nutcracker] = .05f;
-
-                                if (cavern)
-                                {
-                                    pool[NPCID.Krampus] = .025f;
-                                }
-                            }
-                        }
-
-                        if (spawnInfo.Player.ZoneUndergroundDesert)
-                        {
-                            if (!hallow && !corruption && !crimson)
-                            {
-                                pool[NPCID.SandShark] = .1f;
-                            }
-                            else
-                            {
-                                if (hallow)
-                                    pool[NPCID.SandsharkHallow] = .1f;
-                                if (corruption)
-                                    pool[NPCID.SandsharkCorrupt] = .1f;
-                                if (crimson)
-                                    pool[NPCID.SandsharkCrimson] = .1f;
-                            }
-                        }
                     }
                     else if (underworld)
                     {
                         pool[NPCID.LeechHead] = .025f;
                         pool[NPCID.BlazingWheel] = .05f;
 
-                        if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
+                        if (NPC.downedPlantBoss)
                         {
                             pool[NPCID.DiabolistRed] = .01f;
                             pool[NPCID.DiabolistWhite] = .01f;
@@ -611,38 +536,27 @@ namespace FargowiltasSouls.Core.Globals
                             pool[NPCID.RaggedCasterOpenCoat] = .01f;
                         }
                     }
-                    else if (sky)
+                    else if (sky && normalSpawn)
                     {
-                        if (normalSpawn)
-                        {
-                            if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
-                                pool[NPCID.AngryNimbus] = .1f;
-                            pool[NPCID.MartianProbe] = .01f;
+                       if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                           pool[NPCID.AngryNimbus] = .1f;
+                       pool[NPCID.MartianProbe] = .01f;
 
-                            if (NPC.downedGolemBoss)
-                            {
-                                pool[NPCID.SolarCrawltipedeHead] = .03f;
-                                pool[NPCID.VortexHornetQueen] = .03f;
-                                pool[NPCID.NebulaBrain] = .03f;
-                                pool[NPCID.StardustJellyfishBig] = .03f;
-                                pool[NPCID.AncientCultistSquidhead] = .03f;
-                                pool[NPCID.CultistDragonHead] = .03f;
-                            }
-                            else if (NPC.downedMechBossAny)
-                            {
-                                pool[NPCID.SolarCrawltipedeHead] = .001f;
-                                pool[NPCID.VortexHornetQueen] = .001f;
-                                pool[NPCID.NebulaBrain] = .001f;
-                                pool[NPCID.StardustJellyfishBig] = .001f;
-                            }
+                        if (NPC.downedGolemBoss)
+                        {
+                            pool[NPCID.SolarCrawltipedeHead] = .03f;
+                            pool[NPCID.VortexHornetQueen] = .03f;
+                            pool[NPCID.NebulaBrain] = .03f;
+                            pool[NPCID.StardustJellyfishBig] = .03f;
+                            pool[NPCID.AncientCultistSquidhead] = .03f;
+                            pool[NPCID.CultistDragonHead] = .03f;
                         }
                     }
 
                     //height-independent biomes
-                    if (jungle)
+                    if (jungle && normalSpawn)
                     {
-                        if (normalSpawn)
-                            pool[NPCID.Parrot] = .01f;
+                        pool[NPCID.Parrot] = .01f;
 
                         if (!surface)
                         {
@@ -650,20 +564,20 @@ namespace FargowiltasSouls.Core.Globals
                         }
                     }
 
-                    if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick)
+                    if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick && normalSpawn)
                     {
                         //pool[NPCID.BlazingWheel] = .1f;
                         //pool[NPCID.SpikeBall] = .1f;
                         //pool[NPCID.BigMimicJungle] = .1f;
                     }
 
-                    if (ocean && spawnInfo.Water)
+                    if (ocean && spawnInfo.Water && normalSpawn)
                     {
                         pool[NPCID.AnglerFish] = .1f;
                     }
                 }
                 // irrespective of hardmode
-                if (snow && !surface)
+                if (snow && normalSpawn)
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }
