@@ -1633,7 +1633,7 @@ BerserkerSoul: {
 	Tooltip:
 		'''
 		22% increased melee damage and 10% increased melee critical strike chance
-		20% increased melee speed and +5 armor penetration
+		20% increased melee speed
 		[i:1343] Enables auto swing for and increases the size and knockback of melee weapons
 		[i:3366] Gives the user master yoyo skills
 		'None shall live to tell the tale'
@@ -1757,7 +1757,7 @@ SnipersSoul: {
 	Tooltip:
 		'''
 		22% increased ranged damage and 10% increased ranged critical chance
-		20% increased ranged projectile velocity
+		20% increased ranged projectile velocity and increases armor penetration by 5
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		'Ready, aim, fire'
 		'''
