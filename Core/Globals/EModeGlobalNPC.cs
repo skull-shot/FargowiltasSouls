@@ -584,6 +584,13 @@ namespace FargowiltasSouls.Core.Globals
             }
         }
 
+        public static List<int> CrimsonEnemies =
+        [
+            NPCID.FaceMonster, NPCID.Crimera, NPCID.BigCrimera, NPCID.LittleCrimera, NPCID.BloodCrawler, NPCID.BloodCrawlerWall, NPCID.CrimsonGoldfish, NPCID.CrimsonBunny, NPCID.CrimsonPenguin,
+            NPCID.Herpling, NPCID.Crimslime, NPCID.BigCrimslime, NPCID.LittleCrimslime, NPCID.BloodJelly, NPCID.BloodFeeder, NPCID.BloodMummy, NPCID.DesertLamiaDark, NPCID.DesertGhoulCrimson, 
+            NPCID.DesertDjinn, NPCID.SandsharkCrimson, NPCID.IchorSticker, NPCID.FloatyGross, NPCID.CrimsonAxe, NPCID.PigronCrimson, NPCID.BigMimicCrimson
+        ];
+
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
@@ -594,7 +601,7 @@ namespace FargowiltasSouls.Core.Globals
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
 
             int closestP = Player.FindClosest(npc.Center, 1, 1);
-            if (npc.type != ModContent.NPCType<BloodPuddle>() && !FargoSoulsUtil.AnyBossAlive() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
+            if (CrimsonEnemies.Contains(npc.type) && !FargoSoulsUtil.AnyBossAlive() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
