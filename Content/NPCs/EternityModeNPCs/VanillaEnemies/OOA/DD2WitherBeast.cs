@@ -54,7 +54,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             if (Timer > 60 && npc.ai[0] == 0)
                 npc.ai[0] = 109;
 
-            FargoSoulsUtil.PrintAI(npc);
             if (npc.ai[0] == 1)
             {
                 if (Shield == -1)
