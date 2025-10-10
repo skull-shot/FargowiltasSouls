@@ -52,8 +52,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.CreativeWings) // Fledgling Wings
             .AddRecipeGroup("FargowiltasSouls:AnySoulWings") // Angel or Demon wings
             .AddRecipeGroup("FargowiltasSouls:AnyElementWings") // Flame or Frost Wings
-            .AddRecipeGroup("FargowiltasSouls:AnyHolidayWings") // Festive or Spooky Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyHolidayWings") // Festive, Spooky Wings or Tattered Fairy Wings
             .AddRecipeGroup("FargowiltasSouls:AnyBossWings") // Betsy, Fishron or Empress Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyLunarWings") // Solar, Vortex, Nebula, or Stardust Wings
             .AddIngredient(ItemID.LongRainbowTrailWings) // Celestial Starboard
 
             // old recipe

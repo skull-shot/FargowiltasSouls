@@ -139,11 +139,14 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.FlameWings, ItemID.FrozenWings), ItemID.FlameWings, ItemID.FrozenWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyElementWings", group);
             //holiday wings
-            group = new RecipeGroup(() => ItemXOrY(ItemID.FestiveWings, ItemID.SpookyWings), ItemID.FestiveWings, ItemID.SpookyWings);
+            group = new RecipeGroup(() => AnyItem("HolidayWings"), ItemID.FestiveWings, ItemID.SpookyWings, ItemID.TatteredFairyWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyHolidayWings", group);
             //boss wings
             group = new RecipeGroup(() => AnyItem("BossWings"), ItemID.BetsyWings, ItemID.FishronWings, ItemID.RainbowWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBossWings", group);
+            //lunar wings
+            group = new RecipeGroup(() => AnyItem("LunarWings"), ItemID.WingsSolar, ItemID.WingsVortex, ItemID.WingsNebula, ItemID.WingsStardust);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLunarWings", group);
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
