@@ -1410,7 +1410,7 @@ PureHeart: {
 	// DisplayName: Pure Heart
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects and impure debuffs (hold [c/FF3399:{0}] to view debuffs)
 		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
 		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
@@ -1418,6 +1418,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {

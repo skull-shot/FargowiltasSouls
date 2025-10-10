@@ -1418,7 +1418,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
 		'''
-		RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+	RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {

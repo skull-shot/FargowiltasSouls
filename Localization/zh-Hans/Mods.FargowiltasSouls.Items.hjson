@@ -1512,6 +1512,7 @@ PureHeart: {
 		[i:FargowiltasSouls/GelicWings] 增加30%飞行时间
 		“它充满活力地跳动着”
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {

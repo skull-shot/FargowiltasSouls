@@ -1483,6 +1483,7 @@ PureHeart: {
 		A velocidade de resurgimento dos Creepers aumenta quando parado
 		'Ele pulsa com vitalidade'
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {

@@ -2202,6 +2202,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.BombSkeletronPrime:
                     target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+                    if (sourceNPC is NPC && sourceNPC.type == NPCID.UndeadMiner)
+                        projectile.timeLeft = 0;
                     break;
 
                 case ProjectileID.DeathLaser:
