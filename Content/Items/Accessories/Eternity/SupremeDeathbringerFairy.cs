@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -57,6 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
             //queen stinger
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<SwarmingBuff>()] = true;
             player.npcTypeNoAggro[210] = true;
             player.npcTypeNoAggro[211] = true;
             player.npcTypeNoAggro[42] = true;

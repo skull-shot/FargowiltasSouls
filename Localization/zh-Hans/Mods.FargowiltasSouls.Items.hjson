@@ -1658,7 +1658,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/NecromanticBrew]召唤两个骷髅王手臂重击敌人
 		“霸权难保”
 		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, Swarming, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 }
 
 TimsConcoction: {

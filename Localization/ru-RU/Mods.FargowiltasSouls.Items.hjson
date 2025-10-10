@@ -994,7 +994,7 @@ AgitatingLens: {
 	DisplayName: Возбуждающиеся линзы
 	Tooltip:
 		'''
-		Дают иммунитет к дебаффу «Свирепый» от врагов
+		Дают иммунитет к дебаффу «Свирепость» от врагов
 		Во время рывков или бега, вы создаёте след из демонических кос
 		Установка дебаффа значительно увеличивает скорость передвижения и атаки
 		Взамен она ослабляет защиту, а также вы не можете перестать атаковать и двигаться 
@@ -1016,29 +1016,23 @@ BionomicCluster: {
 	DisplayName: Биономическое скопление
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка», [i:FargowiltasSouls/NymphsPerfume] «Сглаз», [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог» и «Охлаждение»
+		Даёт иммунитет к различным природным дебаффам (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
 		[i:FargowiltasSouls/SqueakyToy] У вражеских атак есть 10% шанс пискнуть и нанести вам 1 единицу урона
 		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
-		[i:FargowiltasSouls/TimsConcoction] Некоторые враги будут оставлять после смерти зелья
-		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ, чтобы выключить):]
-		    [i:FargowiltasSouls/SandsofTime] Даёт иммунитет к дебаффу «Сильный ветер»
-		    [i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
+		[i:FargowiltasSouls/TimsConcoction] С большинства врагов будут выпадать зелья после убийства
+		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее (работает в инвентаре или слотах для украшений)
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
-	VanityTooltip:
-		'''
-		[i:FargowiltasSouls/SandsofTime] Даёт иммунитет к дебаффу «Сильный ветер»
-		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее
-		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
+	VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее"
+	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер» (работает в инвентаре или слотах для украшений), [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог», «Охлаждение», [i:FargowiltasSouls/NymphsPerfume] «Сглаз» и [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка»
 }
 
 LithosphericCluster: {
 	DisplayName: Литосферный фонарь
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		Даёт иммунитет к дебаффам, затрудняющим передвижение или портящим здоровье (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
 		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
@@ -1053,19 +1047,19 @@ LithosphericCluster: {
 		'''
 	VanityTooltip:
 		'''
-		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
-		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
-		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
-		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
+		[i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+		[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		[i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
+	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
 }
 
 LithosphericClusterInactive: {
 	DisplayName: Литосферный фонарь (Неактивно)
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», «Покалеченный», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		Даёт иммунитет к дебаффам, затрудняющим передвижение или портящим здоровье (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
 		[i:FargowiltasSouls/CrystalSkull] Даёт миньон-череп, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
 		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
@@ -1078,7 +1072,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Амальгама, в которую слились тысяча обыкновенных врагов»
 		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
+	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
 }
 
 CelestialRune: {
@@ -1095,17 +1089,16 @@ VerdantDoomsayerMask: {
 	DisplayName: Зеленеющая маска провидца рока
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/VerdantDoomsayerMask] Даёт иммунитет к дебаффам «Рой», «Атрофированный», «Заклинивший», «Обратный поток маны» и «Необщительный»
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотый яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль» и [i:FargowiltasSouls/CelestialRune] «Помеченный смертью»
+		Даёт иммунитет к дебаффам небесных башен и других магических дебаффов (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/MagicalBulb] Увеличивает регенерацию здоровья в зависимости от окружающего света
 		[i:FargowiltasSouls/CelestialRune] Вы периодически выпускаете дополнительные снаряды в зависимости от класса используемого оружия
 		«Всегда наблюдает»
 		'''
-	/* RuminateTooltip:
+	RuminateTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/VerdantDoomsayerMask] Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
-		''' */
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/VerdantDoomsayerMask] «Атрофия», «Заклинило», «Обратный поток маны» и «Необщительность»
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотный яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль» и [i:FargowiltasSouls/CelestialRune] «Помеченный смертью»
+		''
 }
 
 ConcentratedRainbowMatter: {
@@ -1158,7 +1151,7 @@ DubiousCircuitry: {
 	DisplayName: Сомнительная схема
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/RemoteControl] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и невосприимчивость к отбрасыванию
+		Даёт иммунитет к дебаффам механических боссов и невосприимчивость к отбрасыванию (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/FusedLens] Установка дебаффа накладывает на вас «Проклятие ада» и «Ихор»
 		[i:FargowiltasSouls/FusedLens] Она увеличивает ваши скорость атаки и шанс критического удара,
 		     а также даёт возможность накладывать «Проклятие ада» и «Ихор»
@@ -1166,7 +1159,7 @@ DubiousCircuitry: {
 		[i:FargowiltasSouls/ReinforcedPlating] Увеличивает защиту и сопротивление урону, пока вы под воздействием дебаффа
 		«Скорее всего не включает в себя вредоносные программы»
 		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
+	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/RemoteControl] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и невосприимчивость к отбрасыванию
 }
 
 EurusSock: {
@@ -1251,7 +1244,7 @@ GuttedHeart: {
 	DisplayName: Выпотрошенное сердце
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Кровожадный»
+		Даёт иммунитет к дебаффу «Кровожадность»
 		Увеличивает максимальный запас здоровья на 10%
 		Ползуны кружат вокруг вас, блокируя некоторый урон
 		Новый ползун появляется тем быстрее, чем ниже ваше здоровье, или же если вы не двигаетесь
@@ -1265,9 +1258,7 @@ HeartoftheMasochist: {
 	DisplayName: Сердце Властителя
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение», «Нестабильность»,
-		[i:FargowiltasSouls/BetsysHeart] «В слюнях», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Океаническое терзание», дебаффам воды,
-		[i:FargowiltasSouls/PrecisionSeal] «Поражение» и [i:FargowiltasSouls/ChaliceofTheMoon] «Проклятие луны»
+		Даёт иммунитет к различным дебаффам (удерживайте [c/FF3399:{0}] для полного списка)
 		[i:FargowiltasSouls/MutantAntibodies] Увеличивает урон и [i:FargowiltasSouls/PumpkingsCape] шанс крит. удара на 8% и [i:FargowiltasSouls/IceQueensShield] сопротивление урону на 4%
 		[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий (работает в инвентаре и слотах для украшений)
 		[i:FargowiltasSouls/PrecisionSeal] Уменьшает ваш хёртбокс для снарядов, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
@@ -1277,11 +1268,12 @@ HeartoftheMasochist: {
 		«Тёплое, бьётся и не нуждается в теле»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий"
-	/* RuminateTooltip:
+	RuminateTooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
-		''' */
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение», «Нестабильность»,
+		[i:FargowiltasSouls/BetsysHeart] «В слюнях», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Океаническое терзание», дебаффам воды,
+		[i:FargowiltasSouls/PrecisionSeal] «Поражение» и [i:FargowiltasSouls/ChaliceofTheMoon] «Проклятие луны»
+		'''
 }
 
 IceQueensShield: {
@@ -1307,7 +1299,7 @@ MagicalBulb: {
 	DisplayName: Магический бутон
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффам «Кислотный яд», «Яд плюща» и «Рой»
+		Даёт иммунитет к дебаффам «Кислотный яд» и «Яд плюща»
 		Увеличивает регенерацию здоровья в зависимости от получаемого света
 		Попадания ненадолго накладывают на врагов «Яд плюща»
 		Чем дольше враг получает урон от «Яда плюща», тем больше урона он получает
@@ -1374,7 +1366,7 @@ NecromanticBrew: {
 	DisplayName: Колдовское варево
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Вялый»
+		Даёт иммунитет к дебаффу «Вялость»
 		Увеличивает скорость рывков на 30%
 		Призывает 2 руки Скелетрона, колотящие врагов
 		«Средство для роста костей побеждённого врага»
@@ -1439,7 +1431,7 @@ PureHeart: {
 	DisplayName: Чистейшее сердце
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Даёт иммунитет к дебаффам биомов, [i:FargowiltasSouls/RottingHeart] «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадный», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
+		[i:FargowiltasSouls/PureHeart] Даёт иммунитет к дебаффам биомов, [i:FargowiltasSouls/RottingHeart] «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадность», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
 		Увеличивает [i:FargowiltasSouls/GelicWings] время полёта на 30% [i:FargowiltasSouls/RottingHeart] скорость передвижения на 10%,
 		[i:FargowiltasSouls/GuttedHeart] максимальный запас здоровья на 10% и [i:FargowiltasSouls/PungentEyeball] частоту появления редких врагов
 		[i:FargowiltasSouls/PungentEyeball] Ваш курсор накладывает на врагов дебафф «Сублимация», наносящий постепенный урон и уменьшающий защиту.
@@ -1455,7 +1447,7 @@ QueenStinger: {
 	DisplayName: Жало королевы
 	Tooltip:
 		'''
-		Даёт иммунитет к дебаффу «Заражённый»
+		Даёт иммунитет к дебаффам «Заражение» и «Рой»
 		Бафф «Мёд» увеличивает ваше пробивание брони на 7
 		Пчёлы и слабые враги типа «шершень» становятся дружелюбными
 		«Вырвано прямо из побеждённого врага»
@@ -1588,19 +1580,13 @@ SupremeDeathbringerFairy: {
 	DisplayName: Верховная смертоносная фея
 	Tooltip:
 		'''
-		Даёт иммунитет к различным дебаффам
-		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/NecromanticBrew] Значительно улучшает рывки и падение
-		[i:FargowiltasSouls/AgitatingLens][i:FargowiltasSouls/Deerclawps] Во время движения за вами остаётся наносящий урон след
-		'Supremacy not necessarily guaranteed'
-		'''
-	RuminateTooltip:
-		'''
-		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепый», [i:FargowiltasSouls/QueenStinger] «Заражённый», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялый»
+		Даёт иммунитет к различным дебаффам, накладываемым врагами ранней игры (удерживайте [c/FF3399:{0}] для полного списка)
 		Значительно увеличивает скорость [i:FargowiltasSouls/NecromanticBrew] рывков и [i:FargowiltasSouls/SlimyShield] падения, удерживайте вниз, чтобы падать через платформы
 		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] Во время движения за вами остаётся след из кровавой слизи
 		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 20%, а также за вами остаётся след из кровавых шипов
 		«Не гарантирует верховенство»
 		'''
+	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепость», [i:FargowiltasSouls/QueenStinger] «Заражение», «Рой», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялость»
 }
 
 TimsConcoction: {
