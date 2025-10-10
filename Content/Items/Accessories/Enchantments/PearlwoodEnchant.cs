@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PearlwoodGreaves)
                 .AddIngredient(ItemID.PearlwoodSword)
                 .AddIngredient(ItemID.LightningBug)
-                .AddIngredient(ItemID.Starfruit)
+                .AddRecipeGroup("FargowiltasSouls:StarfruitOrDragonfruit")
 
                 .AddTile<EnchantedTreeSheet>()
                 .Register();

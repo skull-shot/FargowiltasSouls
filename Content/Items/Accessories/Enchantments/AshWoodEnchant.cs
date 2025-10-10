@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.AshWoodGreaves)
                 .AddIngredient(ItemID.LavaBucket)
                 .AddIngredient(ItemID.Fireblossom)
-                .AddIngredient(ItemID.SpicyPepper)
+                .AddRecipeGroup("FargowiltasSouls:SpicyPepperOrPomegranate")
                 .AddTile<EnchantedTreeSheet>()
                 .Register();
         }

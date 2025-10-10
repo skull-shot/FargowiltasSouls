@@ -187,6 +187,24 @@ namespace FargowiltasSouls.Core.Systems
             );
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySquirrel", group);
 
+            //vanilla fruits
+            group = new RecipeGroup(() => AnyItem("ForestFruit"), ItemID.Apple, ItemID.Grapefruit, ItemID.Lemon);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyForestFruit", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Plum, ItemID.Cherry), ItemID.Plum, ItemID.Cherry);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:PlumOrCherry", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Mango, ItemID.Pineapple), ItemID.Mango, ItemID.Pineapple);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:MangoOrPineapple", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Elderberry, ItemID.BlackCurrant), ItemID.Elderberry, ItemID.BlackCurrant);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:ElderberryOrBlackcurrant", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Rambutan, ItemID.BloodOrange), ItemID.Rambutan, ItemID.BloodOrange);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:RambutanOrBloodOrange", group);
+            //group = new RecipeGroup(() => ItemXOrY(ItemID.Coconut, ItemID.Banana), ItemID.Coconut, ItemID.Banana);
+            //RecipeGroup.RegisterGroup("FargowiltasSouls:CoconutOrBanana", group); //uses both rn
+            group = new RecipeGroup(() => ItemXOrY(ItemID.SpicyPepper, ItemID.Pomegranate), ItemID.SpicyPepper, ItemID.Pomegranate);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:SpicyPepperOrPomegranate", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Starfruit, ItemID.Dragonfruit), ItemID.Starfruit, ItemID.Dragonfruit);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:StarfruitOrDragonfruit", group);
+
             //            //vanilla fish
             //            group = new RecipeGroup(() => AnyItem("CommonFish"), ItemID.AtlanticCod, ItemID.Bass, ItemID.Trout, ItemID.RedSnapper, ItemID.Salmon, ItemID.Tuna);
             //            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyCommonFish", group);

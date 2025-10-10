@@ -96,7 +96,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.WoodBreastplate)
             .AddIngredient(ItemID.WoodGreaves)
             .AddIngredient(ItemID.Daybloom)
-            .AddIngredient(ItemID.Apple)
+            .AddRecipeGroup("FargowiltasSouls:AnyForestFruit")
             .AddRecipeGroup("FargowiltasSouls:AnySquirrel")
 
                 .AddTile<EnchantedTreeSheet>()

@@ -1077,7 +1077,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1104,7 +1104,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1134,7 +1134,7 @@ VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		Grants immunity to Celestial Pillar and arcane debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to Celestial Pillar and various arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'

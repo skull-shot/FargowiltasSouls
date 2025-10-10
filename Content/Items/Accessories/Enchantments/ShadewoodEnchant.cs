@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.ShadewoodBreastplate)
                 .AddIngredient(ItemID.ShadewoodGreaves)
                 .AddIngredient(ItemID.ViciousMushroom)
-                .AddIngredient(ItemID.BloodOrange)
+                .AddRecipeGroup("FargowiltasSouls:RambutanOrBloodOrange")
                 .AddIngredient(ItemID.Deathweed)
 
                 .AddTile<EnchantedTreeSheet>()
