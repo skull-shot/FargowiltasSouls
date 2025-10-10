@@ -163,6 +163,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
 
         }
 
+        public override bool CanHitPlayer(Player target) => !target.FargoSouls().PureHeart;
+
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Frostburn, 120);

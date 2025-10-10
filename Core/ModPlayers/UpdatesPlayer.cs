@@ -375,7 +375,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SpecialDashCD++;
             }
 
-            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null || GelicWingsItem != null)
+            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null)
                 OnLandingEffects();
 
             if (noDodge)

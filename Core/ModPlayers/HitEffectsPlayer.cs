@@ -317,7 +317,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Fused)
                 dr += 0.5f;
 
-            if (Illuminated)
+            if (Illuminated && GelicWingsItem == null)
             {
                 float maxDRReduction = 0.25f;
 
