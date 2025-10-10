@@ -24,6 +24,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             npc.value = 450;
             npc.HitSound = SoundID.LiquidsWaterLava;
             npc.DeathSound = SoundID.NPCDeath55;
+            npc.lavaImmune = true;
         }
 
         private int directionCounter = 600;
