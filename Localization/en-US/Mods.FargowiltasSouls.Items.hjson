@@ -1020,7 +1020,7 @@ LithosphericCluster: {
 	DisplayName: Lithospheric Lantern
 	Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1047,7 +1047,7 @@ LithosphericClusterInactive: {
 	DisplayName: Lithospheric Lantern (Inactive)
 	Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1077,7 +1077,7 @@ VerdantDoomsayerMask: {
 	DisplayName: Verdant Doomsayer Mask
 	Tooltip:
 		'''
-		Grants immunity to Celestial Pillar and arcane debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to Celestial Pillar and various arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
@@ -1137,7 +1137,7 @@ DubiousCircuitry: {
 	DisplayName: Dubious Circuitry
 	Tooltip:
 		'''
-		Grants immunity to knockback and mechanical debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to knockback and various mechanical debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
 		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
 		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
@@ -1410,7 +1410,7 @@ PureHeart: {
 	DisplayName: Pure Heart
 	Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects and impure debuffs (hold [c/FF3399:{0}] to view debuffs)
+		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects and various impure debuffs (hold [c/FF3399:{0}] to view debuffs)
 		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
 		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
