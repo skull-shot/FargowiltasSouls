@@ -1098,7 +1098,7 @@ VerdantDoomsayerMask: {
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/VerdantDoomsayerMask] «Атрофия», «Заклинило», «Обратный поток маны» и «Необщительность»
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотный яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль» и [i:FargowiltasSouls/CelestialRune] «Помеченный смертью»
-		''
+		'''
 }
 
 ConcentratedRainbowMatter: {
