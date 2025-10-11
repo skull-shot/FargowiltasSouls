@@ -40,5 +40,12 @@ namespace FargowiltasSouls.Content.Achievements
                 ModContent.ItemType<UmbraRegalia>(),
                 ]);
         }
+
+        public override IEnumerable<Position> GetModdedConstraints()
+        {
+            yield return new Before(ModContent.GetInstance<ChampionsAchievement>());
+        }
+
+        public override Position GetDefaultPosition() => new After("CHAMPION_OF_TERRARIA");
     }
 }

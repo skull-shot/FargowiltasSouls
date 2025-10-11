@@ -5,6 +5,7 @@ using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Achievements;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -776,7 +777,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 shieldCD = invul + extrashieldCD;
 
                 if (pumpkingEffect)
-                {
+                {   
+                    
                     CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "PumpkingsCape").Value, new Color(30, 0, 60), () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => pumpkingEffect);
                 }
                 else if (dreadEffect)
@@ -786,6 +788,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 else
                 {
                     CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => silverEffect);
+                }
+
+                if (perfectParry)
+                {
+                    if (Main.myPlayer != Player.whoAmI)
+                        return;
+                    ModContent.GetInstance<PerfectParryAchievement>().Condition.Complete();
                 }
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs

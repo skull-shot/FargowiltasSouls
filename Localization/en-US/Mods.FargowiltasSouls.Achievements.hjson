@@ -57,3 +57,18 @@ SwarmWeaponAchievement: {
 	FriendlyName: Test Your Might..
 	Description: Using one of the potent energizers, craft yourself a most powerful weapon to add to your arsenal.
 }
+
+PerfectParryAchievement: {
+	FriendlyName: Dodging Is Optional
+	Description: Perfectly time your parry and reap the benefits!
+}
+
+SuperAttackAchievement: {
+	FriendlyName: 632146P
+	Description: Unleash a powerful attack while wearing Nekomi or Styx armor.
+}
+
+FiftyDeathToEternityBossAchievement: {
+	FriendlyName: Capability Conundrum
+	Description: Die fifty times to Eternity Mode bosses.
+}
