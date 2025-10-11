@@ -1441,6 +1441,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Сила «Сублимации» увеличивается быстрее, если мини-пожиратели, ползуны или шипы наносят урон
 		«Оно пульсирует жизненной энергией»
 		'''
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {

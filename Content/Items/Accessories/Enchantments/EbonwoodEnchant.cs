@@ -51,7 +51,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.EbonwoodBreastplate)
                 .AddIngredient(ItemID.EbonwoodGreaves)
                 .AddIngredient(ItemID.VileMushroom)
-                .AddIngredient(ItemID.BlackCurrant)
+                .AddRecipeGroup("FargowiltasSouls:ElderberryOrBlackcurrant")
                 .AddIngredient(ItemID.Deathweed)
 
 

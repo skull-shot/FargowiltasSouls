@@ -197,6 +197,7 @@ namespace FargowiltasSouls.Content.Items
             ModContent.ItemType<SupremeDeathbringerFairy>(),
             ModContent.ItemType<BionomicCluster>(),
             ModContent.ItemType<DubiousCircuitry>(),
+            ModContent.ItemType<PureHeart>(),
             ModContent.ItemType<LithosphericCluster>(),
             ModContent.ItemType<LithosphericClusterInactive>(),
             ModContent.ItemType<VerdantDoomsayerMask>(),

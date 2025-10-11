@@ -1020,7 +1020,7 @@ LithosphericCluster: {
 	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1047,7 +1047,7 @@ LithosphericClusterInactive: {
 	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
 		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
@@ -1077,7 +1077,7 @@ VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		Grants immunity to Celestial Pillar and arcane debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to Celestial Pillar and various arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
@@ -1137,7 +1137,7 @@ DubiousCircuitry: {
 	// DisplayName: Dubious Circuitry
 	/* Tooltip:
 		'''
-		Grants immunity to knockback and mechanical debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to knockback and various mechanical debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
 		[i:FargowiltasSouls/FusedLens] Debuff Install increases attack speed, critical strike chance, and causes attacks to inflict Ichor and Cursed Inferno
 		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
@@ -1410,7 +1410,7 @@ PureHeart: {
 	// DisplayName: Pure Heart
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects and various impure debuffs (hold [c/FF3399:{0}] to view debuffs)
 		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
 		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
@@ -1418,6 +1418,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {
@@ -1619,9 +1620,8 @@ ArchWizardsSoul: {
 	// DisplayName: Arch Wizard's Soul
 	/* Tooltip:
 		'''
-		22% increased magic damage
+		22% increased magic damage and 10% increased magic critical strike chance
 		20% reduced mana cost
-		10% increased magic critical strike chance
 		[i:1595] Increases your maximum mana by 100 and restores mana when damaged
 		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
 		'Arcane to the core'
@@ -1632,9 +1632,8 @@ BerserkerSoul: {
 	// DisplayName: Berserker's Soul
 	/* Tooltip:
 		'''
-		22% increased melee damage
-		20% increased melee speed
-		10% increased melee critical strike chance
+		22% increased melee damage and 10% increased melee critical strike chance
+		20% increased melee speed and +5 armor penetration
 		[i:1343] Enables auto swing for and increases the size and knockback of melee weapons
 		[i:3366] Gives the user master yoyo skills
 		'None shall live to tell the tale'
@@ -1779,9 +1778,8 @@ SnipersSoul: {
 	// DisplayName: Sniper's Soul
 	/* Tooltip:
 		'''
-		22% increased ranged damage
+		22% increased ranged damage and 10% increased ranged critical chance
 		20% increased ranged projectile velocity
-		10% increased ranged critical chance
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		'Ready, aim, fire'
 		''' */

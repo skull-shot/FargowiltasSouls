@@ -81,7 +81,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
-            On_Player.ApplyTouchDamage += HarmlessRollingCactus;
+            On_Player.ApplyTouchDamage += ApplyTouchDamage;
             On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
         }
@@ -122,7 +122,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
-            On_Player.ApplyTouchDamage -= HarmlessRollingCactus;
+            On_Player.ApplyTouchDamage -= ApplyTouchDamage;
             On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
         }
@@ -543,9 +543,11 @@ namespace FargowiltasSouls
                 }
             }
         }
-        private void HarmlessRollingCactus(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
+        private void ApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
         {
             if (((tileId == TileID.Cactus && Main.dontStarveWorld) || tileId == TileID.RollingCactus) && self.HasEffect<CactusPassiveEffect>())
+                return;
+            if (self.FargoSouls().PureHeart && (tileId == TileID.CorruptThorns || tileId == TileID.CrimsonThorns || tileId == TileID.JungleThorns)) //leave out plantera thorns
                 return;
             orig(self, tileId, x, y);
         }
