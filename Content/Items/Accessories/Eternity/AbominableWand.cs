@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.buffImmune[ModContent.BuffType<Buffs.Boss.AbomPresenceBuff>()] = true;
 
             player.FargoSouls().AbomWandItem = Item;
-            //player.AddEffect<AbomWandCrit>(Item);
+            player.AddEffect<AbomWandCrit>(Item);
             if (player.FargoSouls().AbomWandCD > 0)
                 player.FargoSouls().AbomWandCD--;
             /*if (player.mount.Active && player.mount.Type == MountID.CuteFishron)
