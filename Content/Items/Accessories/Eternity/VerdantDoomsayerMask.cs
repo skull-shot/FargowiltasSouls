@@ -48,6 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             //lihzahrd treasure
             player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
+            player.noKnockback = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);

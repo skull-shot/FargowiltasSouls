@@ -65,7 +65,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<FrigidGraspKeyEffect>(Item);
         }
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
+        public override void UseItemFrame(Player player) => SandsofTime.Use(player, Item);
         public override bool? UseItem(Player player) => true;
 
         public override void AddRecipes()

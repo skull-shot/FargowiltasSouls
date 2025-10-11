@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
              AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
              AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
+             AccessoryEffectLoader.GetEffect<TimsInspectEffect>(),
              AccessoryEffectLoader.GetEffect<RemoteLightningEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
@@ -42,9 +43,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             base.SetDefaults();
 
             Item.value = 5000000;
-            Item.defense = 12;
-            Item.useTime = 90;
-            Item.useAnimation = 90;
+            //Item.defense = 12;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
             Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
@@ -52,7 +53,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public static readonly Color ItemColor = new(255, 51, 153, 0);
         protected override Color? nameColor => ItemColor;
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
+        public override void UseItemFrame(Player player) => SandsofTime.Use(player, Item);
         public override bool? UseItem(Player player) => true;
 
         public static void PassiveEffect(Player player, Item item)
@@ -69,7 +70,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
             BionomicCluster.PassiveEffect(player, Item);
             LithosphericCluster.PassiveEffect(player, Item);
@@ -84,13 +84,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //stat modifiers
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
-            player.GetDamage(damageClass) += 0.5f;
+            player.GetDamage(damageClass) += 0.12f;
+            player.GetCritChance(damageClass) += 12f;
             player.endurance += 0.05f;
-            player.GetArmorPenetration(DamageClass.Generic) += 50;
-            player.statLifeMax2 += player.statLifeMax / 5;
-            player.lifeRegen += 1;
-            fargoPlayer.WingTimeModifier += 2f;
-            player.moveSpeed += 0.2f;
+            //player.GetArmorPenetration(DamageClass.Generic) += 50;
+            player.statLifeMax2 += player.statLifeMax / 10;
+            //player.lifeRegen += 4;
+            fargoPlayer.WingTimeModifier += 0.5f;
+            player.moveSpeed += 0.1f;
 
             //slimy shield
             player.buffImmune[BuffID.Slimed] = true;
@@ -98,12 +99,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<SlimeFallEffect>(Item);
             player.AddEffect<PlatformFallthroughEffect>(Item);
 
-            /*
-            if (player.AddEffect<SlimyShieldEffect>(Item))
-            {
-                player.FargoSouls().SlimyShieldItem = Item;
-            }
-            */
+            //if (player.AddEffect<SlimyShieldEffect>(Item))
+                //player.FargoSouls().SlimyShieldItem = Item;
 
             //agitating lens
             //player.AddEffect<AgitatingLensEffect>(Item);
@@ -140,7 +137,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //pure heart
             fargoPlayer.PureHeart = true;
 
-            //corrupt heart
+            //rotting heart
             fargoPlayer.RottingHeartItem = Item;
             //player.AddEffect<RottingHeartEaters>(Item);
             if (fargoPlayer.RottingHeartCD > 0)
@@ -149,11 +146,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //gutted heart
             player.AddEffect<GuttedHeartEffect>(Item);
             player.AddEffect<GuttedHeartMinions>(Item);
-            fargoPlayer.GuttedHeartCD -= 2; //faster spawns
+            //fargoPlayer.GuttedHeartCD -= 2; //faster spawns
 
             //gelic wings
             player.FargoSouls().GelicWingsItem = Item;
-            player.AddEffect<GelicWingJump>(Item);
+            //player.AddEffect<GelicWingJump>(Item);
 
             //mutant antibodies
             player.buffImmune[BuffID.Wet] = true;
@@ -207,6 +204,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Venom] = true;
             fargoPlayer.MagicalBulb = true;
             player.AddEffect<BulbKeyEffect>(Item);
+            player.AddEffect<BulbRegenEffect>(Item);
 
             //ice queen's crown
             IceQueensShield.AddEffects(player, Item);
@@ -234,23 +232,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<ParryEffect>(Item);
 
             //celestial rune
-            /*
-            player.AddEffect<CelestialRuneAttacks>(Item);
-            if (fargoPlayer.AdditionalAttacksTimer > 0)
-                fargoPlayer.AdditionalAttacksTimer -= 2;
-            */
-          //player.AddEffect<CelestialRuneOnhit>(Item);
+            //player.AddEffect<CelestialRuneAttacks>(Item);
 
-            //chalice
+            //verdant doomsayer
             fargoPlayer.MoonChalice = true;
 
-            //galactic globe
+            //chalice of the moon
             player.buffImmune[BuffID.VortexDebuff] = true;
             //player.buffImmune[BuffID.ChaosState] = true;
             fargoPlayer.GravityGlobeEXItem = Item;
             player.AddEffect<ChalicePotionEffect>(Item);
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
-            //heart of maso
+            //heart of master
             fargoPlayer.MasochistHeart = true;
             player.buffImmune[BuffID.MoonLeech] = true;
 
