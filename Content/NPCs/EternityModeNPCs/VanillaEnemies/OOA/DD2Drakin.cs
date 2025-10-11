@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 const float speedMult = 2f;
                 foreach (NPC n in Main.ActiveNPCs)
                 {
-                    if (n.Distance(npc.Center) < range + 100 && EModeDD2GlobalNPC.IsInstance(n) && !n.EModeDD2().DrakinBuff && n.whoAmI != npc.whoAmI)
+                    if (n.Distance(npc.Center) < range + 100 && EModeDD2GlobalNPC.IsInstance(n) && !EModeDD2Event.IsDD2Boss(n.type) && !n.EModeDD2().DrakinBuff && n.whoAmI != npc.whoAmI)
                     {
                         n.EModeDD2().DrakinBuff = true;
                         if (n.velocity.Length() == 0)
@@ -105,7 +105,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             foreach (var n in Main.ActiveNPCs)
             {
-                if (n.Distance(npc.Center) < range && EModeDD2GlobalNPC.IsInstance(n) && n.whoAmI != npc.whoAmI)
+                if (n.Distance(npc.Center) < range && EModeDD2GlobalNPC.IsInstance(n) && !EModeDD2Event.IsDD2Boss(n.type) && n.whoAmI != npc.whoAmI)
                     return true;
             }
             return false;
