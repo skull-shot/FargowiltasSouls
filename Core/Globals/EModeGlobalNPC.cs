@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
+﻿using FargowiltasSouls.Content.Achievements;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -158,7 +159,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (Main.player[npc.target].ZoneCorrupt)
                         npc.AddBuff(BuffID.CursedInferno, 2, true);
                     if (Main.player[npc.target].ZoneCrimson)
-                        npc.AddBuff(BuffID.Ichor, 2, true);
+                        npc.AddBuff(BuffID.Ichor, 2, true); 
                     if (Main.player[npc.target].ZoneHallow)
                         npc.AddBuff(ModContent.BuffType<SmiteBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneJungle)
@@ -596,7 +597,6 @@ namespace FargowiltasSouls.Core.Globals
             base.OnKill(npc);
             if (!WorldSavingSystem.EternityMode)
                 return;
-
             if (npc.type == NPCID.Painter && WorldSavingSystem.DownedMutant && NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
 
@@ -607,8 +607,24 @@ namespace FargowiltasSouls.Core.Globals
                 {
                     Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-14, -4)).RotatedByRandom(MathHelper.ToRadians(35)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
                 }
-            }
+            }         
         }
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {          
+            if (npc.boss && npc.life <= 0 && WorldSavingSystem.EternityMode)
+            {
+                if (npc.ModNPC == null || npc.ModNPC.Mod == Mod)
+                {
+                    for (int i = 0; i < Main.maxPlayers; i++)
+                    {
+                        if (Main.myPlayer == Main.player[i].whoAmI)
+                            ModContent.GetInstance<FirstEternityBossAchievement>().Condition.Complete();                        
+                    }
+                }
+            }
+            base.HitEffect(npc, hit);
+        }
+        
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             #region tim's concoction drops

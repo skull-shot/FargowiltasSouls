@@ -83,8 +83,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     Difficulty_2_EMode_SpawnMonsterFromGate(gateBottom);
                     break;
                 case 3:
-                    //Difficulty_3_EMode_SpawnMonsterFromGate(gateBottom);
-                    orig(gateBottom);
+                    Difficulty_3_EMode_SpawnMonsterFromGate(gateBottom);
                     break;
             }
         }
@@ -103,7 +102,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 case 2:
                     return orig(wave, Difficulty_2_EMode_GetWaveText(wave));
                 case 3:
-                    break;
+                    return orig(wave, Difficulty_3_EMode_GetWaveText(wave));
             }
             // TODO: Add Correct Text
 
@@ -112,10 +111,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         private static void EMode_SetEnemySpawningOnHold(On_DD2Event.orig_SetEnemySpawningOnHold orig, int forhowLong)
         {
-            if (!WorldSavingSystem.EternityMode || !IsFinalWave())
+            if (!WorldSavingSystem.EternityMode)
                 orig(forhowLong);
-            else
+            else if (IsFinalWave())
                 orig(2 * forhowLong);
+            else if (DD2Event.OngoingDifficulty == 3)
+                orig((int)(forhowLong * 1.5f));
+            else
+                orig(forhowLong);
         }
         #endregion
 
@@ -281,31 +284,31 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     }
                     break;
                 case 6: // Goblins, Wyverns, Javelinsts, Wither Beasts, Drakins, and Kobold Flyers
-                    if (Main.rand.Next(7) == 0 && NPC.CountNPCS(DD2DrakinT2) < num6)
+                    if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2DrakinT2) < num6)
                         num7 = OOANPC(x, y, DD2DrakinT2);
-                    else if (Main.rand.Next(15) == 0 && NPC.CountNPCS(DD2WitherBeastT2) < num4)
+                    else if (Main.rand.NextBool(15) && NPC.CountNPCS(DD2WitherBeastT2) < num4)
                         num7 = OOANPC(x, y, DD2WitherBeastT2);
-                    else if (Main.rand.Next(9) == 0 && NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
+                    else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
                         num7 = OOANPC(x, y, DD2KoboldFlyerT2);
-                    else if (Main.rand.Next(9) == 0 && NPC.CountNPCS(DD2WyvernT2) < num3)
+                    else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2WyvernT2) < num3)
                         num7 = OOANPC(x, y, DD2WyvernT2);
-                    else if (Main.rand.Next(3) == 0 && NPC.CountNPCS(DD2JavelinstT2) < num2)
+                    else if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2JavelinstT2) < num2)
                         num7 = OOANPC(x, y, DD2JavelinstT2);
                     if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2GoblinT2) < num)
                         num8 = OOANPC(x, y, DD2GoblinT2);
                     break;
-                case 7: // Goblins, Goblins Bombers, Wyverns, Javelinsts, Wither Beasts, Drakins, Kobold Walkers, Kobold Flyers, and Ogre
+                case 7: // Goblins, Goblins Bombers, Wyverns, Javelinsts, Wither Beasts, Drakins, Kobold Walkers, and Ogre
                     {
 
                         if (GetWaveProgressPercent() > 0.5f && !NPC.AnyNPCs(DD2OgreT2))
                             num7 = OOANPC(x, y, DD2OgreT2);
-                        else if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2DrakinT2) < num6)
+                        else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2DrakinT2) < num6)
                             num7 = OOANPC(x, y, DD2DrakinT2);
-                        else if (Main.rand.Next(15) == 0 && NPC.CountNPCS(DD2WitherBeastT2) + NPC.CountNPCS(DD2JavelinstT2) < num4)
+                        else if (Main.rand.NextBool(15) && NPC.CountNPCS(DD2WitherBeastT2) + NPC.CountNPCS(DD2JavelinstT2) < num4)
                             num7 = OOAChanceNPC(x, y, DD2JavelinstT2, DD2WitherBeastT2, 4);
-                        else if (Main.rand.Next(8) == 0 && NPC.CountNPCS(DD2KoboldWalkerT2) + NPC.CountNPCS(DD2KoboldFlyerT2) < num5)
-                            num7 = OOAChanceNPC(x, y, DD2KoboldWalkerT2, DD2KoboldFlyerT2, 5);
-                        else if (Main.rand.Next(13) == 0 && NPC.CountNPCS(DD2WyvernT2) < num3)
+                        else if (Main.rand.NextBool(11) && NPC.CountNPCS(DD2KoboldWalkerT2) < num5)
+                            num7 = OOANPC(x, y, DD2KoboldWalkerT2);
+                        else if (Main.rand.NextBool(15) && NPC.CountNPCS(DD2WyvernT2) < num3)
                             num7 = OOANPC(x, y, DD2WyvernT2);
                         if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2GoblinBomberT2) < num)
                             num8 = OOAChanceNPC(x, y, DD2GoblinT2, DD2GoblinBomberT2, 3);
@@ -326,7 +329,160 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         private static void Difficulty_3_EMode_SpawnMonsterFromGate(Vector2 gateBottom)
         {
+            int x = (int)gateBottom.X;
+            int y = (int)gateBottom.Y;
+            int num = 60;
+            int num2 = 7;
+            if (NPC.waveNumber > 1)
+                num2 = 9;
 
+            if (NPC.waveNumber > 3)
+                num2 = 12;
+
+            if (NPC.waveNumber > 5)
+                num2 = 15;
+
+            int num3 = 7;
+            if (NPC.waveNumber > 4)
+                num3 = 10;
+
+            int num4 = 2;
+            if (NPC.waveNumber > 5)
+                num4 = 3;
+
+            int num5 = 12;
+            if (NPC.waveNumber > 3)
+                num5 = 18;
+
+            int num6 = 4;
+            if (NPC.waveNumber > 5)
+                num6 = 6;
+
+            int num7 = 4;
+            for (int i = 1; i < Main.CurrentFrameFlags.ActivePlayersCount; i++)
+            {
+                num = (int)((double)num * 1.3);
+                num2 = (int)((double)num2 * 1.3);
+                num5 = (int)((double)num * 1.3);
+                num6 = (int)((double)num * 1.35);
+                num7 = (int)((double)num7 * 1.3);
+            }
+
+            int num8 = 200;
+            int num9 = 200;
+            switch (NPC.waveNumber)
+            {
+                case 1: // Goblin Bombers, Kobold Walkers, Kobold Flyers
+                    if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2KoboldFlyerT3) < num2)
+                        num8 = OOANPC(x, y, DD2KoboldFlyerT3);
+                    else if (Main.rand.NextBool(4) && NPC.CountNPCS(DD2KoboldWalkerT3) < num5)
+                        num8 = OOANPC(x, y, DD2KoboldWalkerT3);
+                    if (NPC.CountNPCS(DD2GoblinBomberT3) < num)
+                        num9 = OOANPC(x, y, DD2GoblinBomberT3);
+                    break;
+                case 2: // Wyverns, Wither Beasts, Kobold Flyers, and Lightning Bugs
+                    if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2LightningBugT3) < num7)
+                        num8 = OOANPC(x, y, DD2LightningBugT3);
+                    else if (NPC.CountNPCS(DD2WyvernT3) < num2)
+                        num8 = OOANPC(x, y, DD2WyvernT3);
+                    if (Main.rand.NextBool(5) && NPC.CountNPCS(DD2KoboldFlyerT3) < num5)
+                        num9 = OOANPC(x, y, DD2KoboldFlyerT3);
+                    else if (Main.rand.NextBool(5) && NPC.CountNPCS(DD2WitherBeastT3) < num6)
+                        num9 = OOANPC(x, y, DD2WitherBeastT3);
+                    break;
+                case 3: // Goblins, Wyverns, Javelinsts, Wither Beasts, Drakins, and Kobold Walkers
+                    if (Main.rand.NextBool(11) && NPC.CountNPCS(DD2DrakinT3) < num6)
+                        num8 = OOANPC(x, y, DD2DrakinT3);
+                    else if (Main.rand.NextBool(6) && NPC.CountNPCS(DD2KoboldWalkerT3) < num5)
+                        num8 = OOANPC(x, y, DD2KoboldWalkerT3);
+                    else if (Main.rand.NextBool(8) && NPC.CountNPCS(DD2WitherBeastT3) < num3)
+                        num8 = OOANPC(x, y, DD2WitherBeastT3);
+                    else if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2WyvernT3) < num2)
+                        num8 = OOANPC(x, y, DD2WyvernT3);
+                    if (NPC.CountNPCS(DD2GoblinT3) + NPC.CountNPCS(DD2JavelinstT3) < num)
+                        num9 = OOAChanceNPC(x, y, DD2GoblinT3, DD2JavelinstT3, 8);
+                    break;
+                case 4: // Goblin Bombers, Javelinsts, Drakins, Kobold Flyers, Lightning Bugs, and Dark Mage
+                    if (Main.rand.NextBool(12) && !NPC.AnyNPCs(DD2DarkMageT3))
+                        num8 = OOANPC(x, y, DD2DarkMageT3);
+                    else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2DrakinT3) < num6)
+                        num8 = OOANPC(x, y, DD2DrakinT3);
+                    else if (Main.rand.NextBool(11) && NPC.CountNPCS(DD2LightningBugT3) < num3)
+                        num8 = OOANPC(x, y, DD2LightningBugT3);
+                    else if (Main.rand.NextBool(5) && NPC.CountNPCS(DD2JavelinstT3) < num2)
+                        num8 = OOANPC(x, y, DD2JavelinstT3);
+                    if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2KoboldFlyerT3) < num5)
+                        num9 = OOANPC(x, y, DD2KoboldFlyerT3);
+                    else if (Main.rand.NextBool(4) && NPC.CountNPCS(DD2GoblinBomberT3) < num)
+                        num9 = OOANPC(x, y, DD2GoblinBomberT3);
+                    break;
+                case 5: // Goblins, Javelinsts, Wither Beasts, Drakins, Kobold Walkers, Kobold Flyers, Lightning Bugs, and Ogre
+                    if (Main.rand.NextBool(20) && !NPC.AnyNPCs(DD2OgreT3))
+                        num8 = OOANPC(x, y, DD2OgreT3);
+                    else if (Main.rand.NextBool(5) && NPC.CountNPCS(DD2LightningBugT3) < num7)
+                        num8 = OOANPC(x, y, DD2LightningBugT3);
+                    else if (Main.rand.NextBool(17) && NPC.CountNPCS(DD2WitherBeastT3) < num4)
+                        num8 = OOANPC(x, y, DD2WitherBeastT3);
+                    else if (Main.rand.NextBool(12) && NPC.CountNPCS(DD2DrakinT3) < num6)
+                        num8 = OOANPC(x, y, DD2DrakinT3);
+                    else if (Main.rand.NextBool(9) && NPC.CountNPCS(DD2WitherBeastT3) + NPC.CountNPCS(DD2JavelinstT3) < num4)
+                        num8 = OOAChanceNPC(x, y, DD2JavelinstT3, DD2WitherBeastT3, 6);
+                    if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2KoboldWalkerT3) + NPC.CountNPCS(DD2KoboldFlyerT3) < num5)
+                        num9 = OOAChanceNPC(x, y, DD2KoboldWalkerT3, DD2KoboldFlyerT3, 4);
+                    else if (Main.rand.NextBool(5) && NPC.CountNPCS(DD2GoblinT3) < num)
+                        num9 = OOANPC(x, y, DD2GoblinT3);
+                    break;
+                case 6: // Goblin Bombers, Wyverns, Wither Beasts, Drakins, Kobold Flyers, Lightning Bugs, Dark Mage, and Ogre
+                    if (Main.rand.NextBool(16) && !NPC.AnyNPCs(DD2OgreT3))
+                        num8 = OOANPC(x, y, DD2OgreT3);
+                    else if (Main.rand.NextBool(16) && !NPC.AnyNPCs(DD2DarkMageT3))
+                        num8 = OOANPC(x, y, DD2DarkMageT3);
+                    else if (Main.rand.NextBool(11) && NPC.CountNPCS(DD2DrakinT3) < num6)
+                        num8 = OOANPC(x, y, DD2DrakinT3);
+                    else if (Main.rand.NextBool(13) && NPC.CountNPCS(DD2WitherBeastT3) < num4)
+                        num8 = OOANPC(x, y, DD2WitherBeastT3);
+                    else if (Main.rand.NextBool(8) && NPC.CountNPCS(DD2LightningBugT3) < num7)
+                        num8 = OOANPC(x, y, DD2LightningBugT3);
+                    else if (Main.rand.NextBool(7) && NPC.CountNPCS(DD2KoboldFlyerT3) < num5)
+                        num8 = OOANPC(x, y, DD2KoboldFlyerT3);
+                    if (Main.rand.NextBool(11) && NPC.CountNPCS(DD2WyvernT3) < num2)
+                        num9 = OOANPC(x, y, DD2WyvernT3);
+                    else if (Main.rand.NextBool(3) && NPC.CountNPCS(DD2GoblinBomberT3) < num)
+                        num9 = OOANPC(x, y, DD2GoblinBomberT3);
+                    break;
+                case 7: // Goblins, Goblin Bombers, Javelinsts, Drakins, Wither Beasts, and Betsy
+                    // Note: Betsy is spawned elsewhere in vanilla code do not spawn it here
+                    // Note 2: Not changing this until betsy rework
+                    if (Main.rand.NextBool(20) && NPC.CountNPCS(DD2DrakinT3) < num6)
+                    {
+                        num8 = OOANPC(x, y, DD2DrakinT3);
+                    }
+                    else if (Main.rand.NextBool(17) && NPC.CountNPCS(DD2WitherBeastT3) < num4)
+                    {
+                        num8 =  OOANPC(x, y, DD2WitherBeastT3);
+                    }
+                    else if (Main.rand.NextBool(10) && NPC.CountNPCS(DD2JavelinstT3) < num2)
+                    {
+                        num8 = OOANPC(x, y, DD2JavelinstT3);
+                    }
+                    else if (NPC.CountNPCS(DD2GoblinT3) + NPC.CountNPCS(DD2GoblinBomberT3) < num)
+                    {
+                        if (Main.rand.Next(5) == 0)
+                            num8 = OOANPC(x, y, DD2GoblinBomberT3);
+
+                        num9 = OOANPC(x, y, DD2GoblinT3);
+                    }
+                    break;
+                default:
+                    num8 = OOANPC(x, y, DD2GoblinT3);
+                    break;
+            }
+
+            if (Main.dedServ && num8 < 200)
+                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, num8);
+
+            if (Main.dedServ && num9 < 200)
+                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, num9);
         }
 
         private static int OOANPC(int x, int y, int type)
@@ -442,7 +598,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         DD2JavelinstT2,
                         DD2DrakinT2,
                         DD2KoboldWalkerT2,
-                        DD2KoboldFlyerT2,
                         DD2OgreT2    
                     ];
             }
@@ -451,6 +606,74 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         private static short[] Difficulty_3_EMode_GetWaveText(int wave)
         {
+            switch (wave)
+            {
+                case 1:
+                    return [
+                        DD2GoblinBomberT3,
+                        DD2KoboldWalkerT3,
+                        DD2KoboldFlyerT3
+                    ];
+                case 2:
+                    return [
+                        DD2WyvernT3,
+                        DD2WitherBeastT3,
+                        DD2KoboldFlyerT3,
+                        DD2LightningBugT3
+                    ];
+                case 3:
+                    return [
+                        DD2GoblinT3,
+                        DD2WyvernT3,
+                        DD2JavelinstT3,
+                        DD2WitherBeastT3,
+                        DD2DrakinT3,
+                        DD2KoboldWalkerT3
+                    ];
+                case 4:
+                    return [
+                        DD2GoblinBomberT3,
+                        DD2JavelinstT3,
+                        DD2DrakinT3,
+                        DD2KoboldFlyerT3,
+                        DD2LightningBugT3,
+                        DD2DarkMageT3
+
+                    ];
+                case 5:
+                    return [
+                        DD2GoblinT3,
+                        DD2JavelinstT3,
+                        DD2WitherBeastT3,
+                        DD2DrakinT3,
+                        DD2KoboldWalkerT3,
+                        DD2KoboldFlyerT3,
+                        DD2LightningBugT3,
+                        DD2OgreT3
+
+                    ];
+                case 6:
+                    return [
+                        DD2GoblinT3,
+                        DD2GoblinBomberT3,
+                        DD2WyvernT3,
+                        DD2WitherBeastT3,
+                        DD2DrakinT3,
+                        DD2KoboldFlyerT3,
+                        DD2LightningBugT3,
+                        DD2DarkMageT3,
+                        DD2OgreT3
+                    ];
+                case 7:
+                    return [
+                        DD2GoblinT3,
+                        DD2GoblinBomberT3,
+                        DD2JavelinstT3,
+                        DD2WitherBeastT3,
+                        DD2DrakinT3,
+                        DD2Betsy
+                    ];
+            }
             return [];
         }
         #endregion
