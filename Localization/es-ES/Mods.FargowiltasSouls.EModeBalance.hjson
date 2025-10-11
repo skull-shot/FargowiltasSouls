@@ -20,6 +20,7 @@
 // VampireKnives: Reduced lifesteal rate when above 50% life
 // Zapinator: Cannot receive random damage multipliers
 // CoinGun: Damage of Platinum and Gold Coins heavily reduced, damage of Silver Coins slightly reduced, and damage of Copper Coins increased
+// OOAWaves: Reworked event wave progression
 // OOASet: Set bonus increases minimum summon damage when you attack using other classes
 // MiningHelmet: Increases Undead Miner spawn rates
 // MoonsDrops: Bosses and minibosses drop no items until wave {0}
@@ -44,9 +45,8 @@
 // WarmthPotionNerf: Halved damage reduction effect and now applies post-mitigation
 // CrossNecklaceNerf: Longer invincibility doesn't trigger on rapid successive hits
 // IceBladeFrostburn: Projectile inflicts Frostburn on-hit
-// JungleRose: Increases Plantera's Fruit drop rate from Snatcher-type enemies
+// JungleRose: The favorite food of all Snatcher-type enemies
 // WeatherPain: Increased hit frequency and pierce
-// HoundiusShootius: Increased fireball velocity
 // SniperRifle: Deals up to double damage to enemies the further away they are
 // ChlorophyteSaber: Faster projectiles that slow down on hit
 // JackOLanternLauncher: Increased projectile speed by 50%
@@ -71,3 +71,5 @@
 // PossessedHatchet: Projectiles bounce off and between enemies
 // BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
 // ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+// BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
+// AntiSpam: Held projectiles have increased hitrate

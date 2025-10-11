@@ -36,10 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static void ActiveEffects(Player player, Item item)
         {
             PassiveEffects(player, item);
-            player.buffImmune[BuffID.Lovestruck] = true;
-            player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
-            player.buffImmune[BuffID.Stinky] = true;
             player.AddEffect<NymphPerfumeEffect>(item);
         }
         public override void UpdateInventory(Player player)

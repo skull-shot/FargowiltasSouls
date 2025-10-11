@@ -48,33 +48,27 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
             bool slowdown = true;
             if (Projectile.localAI[0] > 90f)
             {
-                int p = Player.FindClosest(Projectile.Center, 0, 0);
-                if (p != -1 && p != Main.maxPlayers && Main.player[p].active && !Main.player[p].dead && !Main.player[p].ghost)
+                Player p = Main.player[Player.FindClosest(Projectile.Center, 0, 0)];
+                if (p.active && !p.dead && !p.ghost)
                 {
-                    if (Main.player[p].HasEffect<IronEquippedEffect>() && Projectile.Distance(Main.player[p].Center) < 300)
-                    {
-                        Projectile.position += Projectile.DirectionTo(Main.player[p].Center) * 2f;
-                    }
-
-                    if (Main.player[p].Distance(Projectile.Center) < 16 * 5)
+                    int distance = p.HasEffect<IronEquippedEffect>() ? 80 + (IronEquippedEffect.GrabRangeBonus(p) / 2) : 80;
+                    if (p.Distance(Projectile.Center) < distance)
                     {
                         slowdown = false;
-                        Projectile.velocity = Projectile.SafeDirectionTo(Main.player[p].Center) * 9f;
+                        Projectile.velocity = Projectile.SafeDirectionTo(p.Center) * 9f;
                         Projectile.timeLeft++;
-
-                        if (Projectile.Colliding(Projectile.Hitbox, Main.player[p].Hitbox))
+                        if (Projectile.Colliding(Projectile.Hitbox, p.Hitbox))
                         {
-                            Main.player[p].wingTime = Main.player[p].wingTimeMax;
-                            Main.player[p].rocketTime = Main.player[p].rocketTimeMax;
-                            Main.player[p].RefreshExtraJumps();
-                            FargoGlobalItem.OnRetrievePickup(Main.player[p]);
+                            p.wingTime = p.wingTimeMax;
+                            p.rocketTime = p.rocketTimeMax;
+                            p.RefreshExtraJumps();
+                            FargoGlobalItem.OnRetrievePickup(p);
                             Projectile.Kill();
                             return;
                         }
                     }
                 }
             }
-
             if (slowdown)
                 Projectile.velocity *= 0.95f;
         }

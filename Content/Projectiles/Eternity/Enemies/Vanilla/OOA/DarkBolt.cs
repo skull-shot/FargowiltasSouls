@@ -58,6 +58,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
             base.OnHitPlayer(target, info);
 
             target.AddBuff(ModContent.BuffType<HexedBuff>(), 60);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
         }
 
         public override bool PreDraw(ref Color lightColor)

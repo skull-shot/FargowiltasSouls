@@ -112,8 +112,7 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
                 BuffID.OnFire,
                 BuffID.OnFire3,
                 ModContent.BuffType<BlackInfernoBuff>(),
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
             /*
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()

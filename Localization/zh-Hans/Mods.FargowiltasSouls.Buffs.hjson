@@ -278,11 +278,6 @@ LihzahrdBlessingBuff: {
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
 }
 
-LovestruckBuff: {
-	DisplayName: 热恋
-	Description: 坠入爱河！
-}
-
 LowGroundBuff: {
 	DisplayName: 下陷
 	Description: 钩爪被禁止，不能站在平台或液体上

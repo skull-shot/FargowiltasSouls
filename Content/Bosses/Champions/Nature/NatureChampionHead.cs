@@ -31,7 +31,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 BuffID.OnFire,
                 BuffID.Suffocation,
                 ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>(),
                 ModContent.BuffType<LightningRodBuff>()
             ]);
 

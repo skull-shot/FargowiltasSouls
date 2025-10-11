@@ -54,19 +54,12 @@ namespace FargowiltasSouls.Content.Items
 
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
-            FargoSoulsPlayer p = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 if (player.HasEffect<IronEquippedEffect>() || (item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
                     item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart && item.type != ItemID.ManaCloakStar))
                 {
-                    int rangeBonus = 160;
-                    if (p.ForceEffect<IronEnchant>())
-                        rangeBonus = 320;
-                    if (p.TerrariaSoul)
-                        rangeBonus = 640;
-
-                    grabRange += rangeBonus;
+                    grabRange += IronEquippedEffect.GrabRangeBonus(player);
                 }
             }
         }
@@ -199,6 +192,18 @@ namespace FargowiltasSouls.Content.Items
             ModContent.ItemType<SlimeKingsSlasher>(),
             ItemID.TheAxe
         ];
+        public static List<int> NoRuminateText =
+        [
+            ModContent.ItemType<SupremeDeathbringerFairy>(),
+            ModContent.ItemType<BionomicCluster>(),
+            ModContent.ItemType<DubiousCircuitry>(),
+            ModContent.ItemType<PureHeart>(),
+            ModContent.ItemType<LithosphericCluster>(),
+            ModContent.ItemType<LithosphericClusterInactive>(),
+            ModContent.ItemType<VerdantDoomsayerMask>(),
+            ModContent.ItemType<HeartoftheMasochist>()
+        ];
+
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -605,6 +610,67 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
+
+            if (item.ModItem != null && item.ModItem.Mod == FargowiltasSouls.Instance)
+            {
+                string ruminateKey = $"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip";
+                string rumination = Language.GetTextValue(ruminateKey);
+                if (rumination != ruminateKey)
+                {
+                    if (FargowiltasSouls.RuminateKey.Current)
+                    {
+                        string unmodifiedTooltip = Language.GetTextValue($"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.Tooltip");
+                        foreach (var tooltip in tooltips)
+                        {
+                            if (tooltip.Name.StartsWith("Tooltip"))
+                            {
+                                //basically all of this is to account for things that modify TooltipX
+                                //e.g. "can be duped at enchanted tree"
+                                //and remove the original tooltip without removing externally added text
+
+                                List<string> lines = tooltip.Text.Split('\n').ToList();
+
+                                string reconstructedTooltip = "";
+                                if (tooltip.Name == "Tooltip0")
+                                    reconstructedTooltip = rumination; //stuff the entire new text into Tooltip0
+
+                                bool needToPrefixWithNewline = false;
+
+                                foreach (string line in lines)
+                                {
+                                    if (!unmodifiedTooltip.Contains(line))
+                                    {
+                                        if (needToPrefixWithNewline)
+                                            reconstructedTooltip += '\n';
+
+                                        reconstructedTooltip += line;
+
+                                        needToPrefixWithNewline = true;
+                                    }
+                                }
+
+                                tooltip.Text = reconstructedTooltip;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string key = $"({Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")})";
+                        var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
+                        if (keys.Count > 0)
+                            key = keys[0];
+                        if (!NoRuminateText.Contains(item.type))
+                            tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
+                        else
+                        {
+                            int i = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                            if (i != -1)
+                                tooltips[i].Text = string.Format(tooltips[i].Text, key);
+                        }
+                    }
+                }
+            }
+
             /*if (Array.IndexOf(Summon, item.type) > -1)
             {
                 TooltipLine helperLine = new TooltipLine(mod, "help", "Right click to convert");

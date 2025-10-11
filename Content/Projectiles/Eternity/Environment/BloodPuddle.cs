@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             NPC.noGravity = true;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
-            NPC.timeLeft = 1600;
+            NPC.timeLeft = 900;
             NPC.scale = Main.rand.NextFloat(1f, 1.6f);
             NPC.hide = true;
 
@@ -51,8 +51,22 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             Main.instance.DrawCacheNPCProjectiles.Add(index);
             base.DrawBehind(index);
         }
+        public int Timer;
         public override void AI()
         {
+            if (Timer == 0)
+            {
+                foreach (NPC n in Main.ActiveNPCs)
+                {
+                    if (n.whoAmI != NPC.whoAmI && n.type == NPC.type && n.DistanceSQ(NPC.Center) < NPC.width * NPC.width * 2)
+                        n.StrikeInstantKill();
+                }
+            }
+            if (++Timer > 60 * 10)
+            {
+                NPC.StrikeInstantKill();
+                return;
+            }
             NPC.localAI[0]++;
             if (NPC.localAI[0] >= 10)
             {
@@ -151,7 +165,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Asset<Texture2D> t = TextureAssets.Npc[Type];
-            Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril");
+            Asset<Texture2D> vein = FargoAssets.GetTexture2D("Content/Projectiles/Eternity/Environment", "BloodTendril").Asset;
             int frameHeight = t.Height() / Main.npcFrameCount[Type];
             // Main.EntitySpriteDraw(t.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, frameHeight * Projectile.frame, t.Width(), frameHeight), lightColor, Projectile.rotation, new Vector2(t.Width(), frameHeight)/2, Projectile.scale, SpriteEffects.None);
 

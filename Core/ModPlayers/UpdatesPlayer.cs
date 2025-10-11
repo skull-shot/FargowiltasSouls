@@ -209,7 +209,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player, true);
+                    TinCrit = TinEffect.TinFloor(Player);
                     EbonwoodCharge = 0;
                     HuntressStage = 0;
                     NekomiMeter = 0;
@@ -263,7 +263,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.runSlowdown += 7f;
             }
 
-            if (DarkenedHeartItem != null)
+            if (RottingHeartItem != null)
             {
                 if (!IsStillHoldingInSameDirectionAsMovement)
                     Player.runSlowdown += 0.2f;
@@ -273,6 +273,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 FreezeTime = false;
 
             UpdateShield();
+
+            if (!Player.HasEffect<TimsInspectEffect>())
+                Player.FargoSouls().TimsInspect = false;
+            if (Player.FargoSouls().TimsInspectCD > 0)
+                Player.FargoSouls().TimsInspectCD--;
 
             Player.wingTimeMax = (int)(Player.wingTimeMax * WingTimeModifier);
 
@@ -370,7 +375,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SpecialDashCD++;
             }
 
-            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null || GelicWingsItem != null)
+            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null)
                 OnLandingEffects();
 
             if (noDodge)
@@ -389,12 +394,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (PrecisionSealNoDashNoJump)
             {
                 Player.dashType = 0;
-                Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
+                /*Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
                 Player.GetJumpState(ExtraJump.SandstormInABottle).Disable();
                 Player.GetJumpState(ExtraJump.BlizzardInABottle).Disable();
                 Player.GetJumpState(ExtraJump.FartInAJar).Disable();
                 Player.GetJumpState(ExtraJump.TsunamiInABottle).Disable();
-                Player.GetJumpState(ExtraJump.UnicornMount).Disable();
+                Player.GetJumpState(ExtraJump.UnicornMount).Disable();*/
+                Player.ConsumeAllExtraJumps();
                 JungleJumping = false;
                 CanJungleJump = false;
                 DashCD = 2;
@@ -444,6 +450,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.fullRotation = 0f;
                 NecromanticBrewRotation = 0f;
             }
+            if (Player.FargoSouls().Toggler_ExtraJumpsDisabled && Player.wingTime > 0)
+                Player.ConsumeAllExtraJumps();
         }
         public override void UpdateLifeRegen()
         {
@@ -622,7 +630,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 MythrilSoundCooldown--;
 
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
-                TinCrit--;
+                TinCrit = 0;
 
             if (!Player.HasEffectEnchant<BeetleEffect>())
             {
@@ -813,7 +821,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 //slowed effect
                 Player.moveSpeed *= .75f;
-                Player.jump /= 2;
+                Player.jump = (int)Math.Round(Player.jump * 0.75);
             }
 
             if (GodEater)

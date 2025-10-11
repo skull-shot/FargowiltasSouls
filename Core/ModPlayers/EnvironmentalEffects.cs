@@ -42,11 +42,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 return;
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
-            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden || Player.trident;
 
             Tile currentTile = getPlayerTile();
 
-            if (!NPC.downedBoss3 && Player.ZoneDungeon && !NPC.AnyNPCs(NPCID.DungeonGuardian) && !Main.drunkWorld && !Main.zenithWorld)
+            if (!NPC.downedBoss3 && Player.ZoneDungeon && !NPC.AnyNPCs(NPCID.DungeonGuardian) && !Main.drunkWorld)
             {
                 NPC.SpawnOnPlayer(Player.whoAmI, NPCID.DungeonGuardian);
             }
@@ -62,34 +61,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
 
             //water biome effects
-            if (WaterWet && !waterEffectImmune)
+            if (WaterWet)
             {
-                if (!(Player.GetJumpState(ExtraJump.Flipper).Enabled || Player.gills || fargoSoulsPlayer.MutantAntibodies))
-                    Player.AddBuff(ModContent.BuffType<LethargicBuff>(), 2);
-
                 //quicksand alpha, theres literally no water in ug... unless?
                 if (Player.ZoneUndergroundDesert)
                 {
                 //    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Shimmer, 2);
-                }
-
-                if (Player.ZoneSnow)
-                {
-                    if (Player.chilled)
-                    {
-                        /*
-                        MasomodeFreezeTimer++;
-                        if (MasomodeFreezeTimer >= 600)
-                        {
-                            FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 120);
-                            MasomodeFreezeTimer = -300;
-                        }
-                        */
-                    }
-                    else
-                    {
-                        MasomodeFreezeTimer = 0;
-                    }
                 }
 
                 //make ichor proj do this?
@@ -103,87 +80,77 @@ namespace FargowiltasSouls.Core.ModPlayers
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 60);
                 }
-
-                if (Player.ZoneHallow)
-                {
-                    Player.AddBuff(ModContent.BuffType<SmiteBuff>(), 120);
-                }
             }
 
 
             // Pure Heart-affected biome debuffs
-            if (!fargoSoulsPlayer.PureHeart) 
+            if (Player.ZoneDesert && !fargoSoulsPlayer.PureHeart)
             {
-                if (Player.ZoneDesert)
-                {
-                    DesertDebuffs(currentTile);
-                }
-
-                if (Player.ZoneSnow && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight))
-                {
-                    SpawnIcicles();
-                }
-
-                if (Player.ZoneJungle)
-                {
-                    JungleStorming(); 
-
-                    //reduce max storm
-                    //while storming ... spawn rates up
-                    //certain enemies go crazy
-                }
-
-                if (Player.ZoneCorrupt)
-                {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Darkness, 2);
-                }
-
-                if (Player.ZoneHallow)
-                {
-                    HallowedIlluminated();
-                }
-
-                if (Player.ZoneUnderworldHeight)
-                {
-                    UnderworldFire();
-                }
-
-                if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25))
-                {
-                    SpaceBreathMeter();
-                }
-
-                if (Main.raining)
-                {
-                    RainLightning(currentTile);
-                }
-
-                if (Main.bloodMoon)
-                {
-                    Player.AddBuff(BuffID.WaterCandle, 2);
-                }
-                    
-                //boss environs
-                //deerclops
-                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses())
-                {
-                    DeerclopsHands();
-                }
-
-                // hallow lifelight sparks
-                if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && Player.ZoneHallow && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses())
-                {
-                    LifelightSparkles();
-                }
+                //DesertDebuffs(currentTile);
             }
 
-            //other stuff that does not get disabled by pure heart
+            if (Player.ZoneSnow && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight))
+            {
+                SpawnIcicles(); //pheart makes deal no dmg
+            }
+
+            if (Player.ZoneJungle && !fargoSoulsPlayer.PureHeart)
+            {
+                JungleStorming(); 
+
+                //reduce max storm
+                //while storming ... spawn rates up
+                //certain enemies go crazy
+            }
+
+            if (Player.ZoneCorrupt && !fargoSoulsPlayer.PureHeart)
+            {
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Darkness, 2);
+            }
+
+            if (Player.ZoneHallow)
+            {
+                HallowedIlluminated(); //pheart prevents dr reduction
+            }
+
+            if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
+            {
+                UnderworldFire();
+            }
+
+            if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25) && !fargoSoulsPlayer.PureHeart)
+            {
+                SpaceBreathMeter();
+            }
+
+            if (Main.raining)
+            {
+                RainLightning(currentTile); //pheart makes deal no dmg
+            }
+
+            if (Main.bloodMoon && !fargoSoulsPlayer.PureHeart)
+            {
+                Player.AddBuff(BuffID.WaterCandle, 2);
+            }
+                    
+            //boss environs
+            //deerclops
+            if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses() && !fargoSoulsPlayer.PureHeart)
+            {
+                //DeerclopsHands();
+            }
+
+            // hallow lifelight sparks
+            if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && Player.ZoneHallow && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses() && !fargoSoulsPlayer.PureHeart)
+            {
+                LifelightSparkles();
+            }
+
+            //other stuff not prevent by pure heart
             if (Player.ZoneMeteor)
             {
                 MeteorFallenStars();
             }
-
-
         }
 
         private void EvilWaterDust(int dustId)
@@ -273,8 +240,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                         yPosition = (int)(y + 1 + playerPos.Y / 16.0f);
                         Vector2 spawnPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
                         //fiddle to line up to tile
-                        spawnPos.X -= 6f;
-                        spawnPos.Y += 6.5f;
+                        spawnPos.X -= 0f;
+                        spawnPos.Y += 5f;
 
                         bool icicleNearby = false;
                         foreach (Projectile p in Main.ActiveProjectiles)
@@ -578,7 +545,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Player.buffImmune[BuffID.Suffocation] && Player.whoAmI == Main.myPlayer)
             {
                 bool immunity = !Player.armor[0].IsAir && (Player.armor[0].type == ItemID.FishBowl || Player.armor[0].type == ItemID.GoldGoldfishBowl);
-                if (Player.accDivingHelm)
+                if (Player.accDivingHelm || Player.spaceGun)
                     immunity = true;
 
                 bool inLiquid = Collision.DrownCollision(Player.position, Player.width, Player.height, Player.gravDir);

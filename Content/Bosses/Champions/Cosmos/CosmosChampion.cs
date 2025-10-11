@@ -59,7 +59,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 BuffID.Suffocation,
                 BuffID.Lovestruck,
                 ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>(),
                 ModContent.BuffType<LightningRodBuff>()
             ]);
 

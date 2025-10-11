@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.AbomBoss;
+﻿using System;
+using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
@@ -13,6 +14,7 @@ using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -20,14 +22,14 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
-using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static FargowiltasSouls.FargowiltasSouls;
 using static System.Net.Mime.MediaTypeNames;
+using static FargowiltasSouls.FargowiltasSouls;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -113,18 +115,13 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 }
 
-
-                if (Hexed)
+                if (Hexed && HexedInflictor == target.whoAmI)
                 {
-                    target.life += hitInfo.Damage;
-                    target.HealEffect(hitInfo.Damage);
-                    if (target.life > target.lifeMax)
-                    {
-                        target.life = target.lifeMax;
-                    }
+                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
+                    float ai1 = 30 + Main.rand.Next(30);
+                    Projectile.NewProjectile(target.GetSource_FromThis(), Player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage / 5, 0f, Main.myPlayer, target.whoAmI, ai1);
                     hitInfo.Null();
                     return;
-
                 }
             };
 
@@ -260,20 +257,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //                palladiumCD = 240;
             //            }*/
 
-            if (MasochistSoul)
-            {
-                target.AddBuff(ModContent.BuffType<SadismBuff>(), 600);
-                //if (target.FindBuffIndex(ModContent.BuffType<Sadism>()) < 0 && target.aiStyle != 37)
-                //{
-                //    if (target.type != ModContent.NPCType<MutantBoss>())
-                //    {
-                //        target.DelBuff(4);
-                //        target.buffImmune[ModContent.BuffType<Sadism>()] = false;
-                //    }
-                //    target.AddBuff(ModContent.BuffType<Sadism>(), 600);
-                //}
-            }
-
             if (FusedLens)
             {
                 if (FusedLensCursed)
@@ -334,7 +317,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Fused)
                 dr += 0.5f;
 
-            if (Illuminated)
+            if (Illuminated && GelicWingsItem == null)
             {
                 float maxDRReduction = 0.25f;
 
@@ -648,9 +631,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                             CombatText.NewText(rect, Color.DarkOrange, The22Incident, true);
                         //doing it this way to ensure we dont accidentally skip over the checks
                         //but also so that it doesnt harass godmode testing forever
+                        LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.TwentyTwo");
                         if (The22Incident == 22 || The22Incident == 23 || The22Incident == 24)
                         {
-                            Player.KillMe(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.TwentyTwo", Player.name)), 22222222, 0);
+                            Player.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(Player.name)), 22222222, 0);
                             Projectile.NewProjectile(Player.GetSource_Death(), Player.Center, Vector2.Zero, ModContent.ProjectileType<TwentyTwo>(), 0, 0f, Main.myPlayer);
                             ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
                         }

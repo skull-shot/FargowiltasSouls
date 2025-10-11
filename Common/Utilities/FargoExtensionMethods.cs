@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -132,6 +133,8 @@ namespace FargowiltasSouls //lets everything access it without using
             => npc.GetGlobalNPC<FargoSoulsGlobalNPC>();
         public static EModeGlobalNPC Eternity(this NPC npc)
             => npc.GetGlobalNPC<EModeGlobalNPC>();
+        public static EModeDD2GlobalNPC EModeDD2(this NPC npc)
+            => npc.GetGlobalNPC<EModeDD2GlobalNPC>();
         public static FargoSoulsGlobalProjectile FargoSouls(this Projectile projectile)
             => projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
         public static EModeGlobalProjectile Eternity(this Projectile projectile)
@@ -224,15 +227,15 @@ namespace FargowiltasSouls //lets everything access it without using
             }
             return -1;
         }
-        public static Item FindAmmo(this Player player, int ammoID)
+        public static Item FindAmmo(this Player player, List <int> ammoID)
         {
             Item ammo = new();
             bool gotammo = false;
-            if (ammoID == AmmoID.None)
+            if (ammoID.Contains(AmmoID.None))
                 return ammo;
             for (int i = 54; i < 58; i++)
             {
-                if (player.inventory[i].ammo == ammoID && player.inventory[i].stack > 0)
+                if (ammoID.Contains(player.inventory[i].ammo) && player.inventory[i].stack > 0)
                 {
                     ammo = player.inventory[i];
                     return ammo;
@@ -242,7 +245,7 @@ namespace FargowiltasSouls //lets everything access it without using
             {
                 for (int j = 0; j < 54; j++)
                 {
-                    if (player.inventory[j].ammo == ammoID && player.inventory[j].stack > 0)
+                    if (ammoID.Contains(player.inventory[j].ammo) && player.inventory[j].stack > 0)
                     {
                         ammo = player.inventory[j];
                         return ammo;

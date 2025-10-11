@@ -94,7 +94,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 240);
         }
 

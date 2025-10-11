@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             damageClass = DamageClass.Melee;
             tooltipColor = null;
             scaling = null;
-            return DreadShellEffect.BaseDamage(Main.LocalPlayer);
+            return DreadShellEffect.BaseDamage(Main.LocalPlayer) * 2; //guaranteed crit so displays dmg as double
         }
     }
     public class DreadShellEffect : AccessoryEffect

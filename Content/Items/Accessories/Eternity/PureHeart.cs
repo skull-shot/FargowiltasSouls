@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -34,14 +35,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.PureHeart = true;
+            player.AddEffect<LightningImmunity>(Item);
 
-            //darkened effect
+            //rotting effect
             player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;
             player.moveSpeed += 0.1f;
-            fargoPlayer.DarkenedHeartItem = Item;
-            player.AddEffect<DarkenedHeartEaters>(Item);
-            if (fargoPlayer.DarkenedHeartCD > 0)
-                fargoPlayer.DarkenedHeartCD--;
+            fargoPlayer.RottingHeartItem = Item;
+            player.AddEffect<RottingHeartEaters>(Item);
+            if (fargoPlayer.RottingHeartCD > 0)
+                fargoPlayer.RottingHeartCD--;
 
             //gutted effect
             player.buffImmune[ModContent.BuffType<BloodthirstyBuff>()] = true;
@@ -66,13 +68,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             CreateRecipe()
 
-            .AddIngredient(ModContent.ItemType<DarkenedHeart>())
+            .AddIngredient(ModContent.ItemType<RottingHeart>())
             .AddIngredient(ModContent.ItemType<GuttedHeart>())
             .AddIngredient(ModContent.ItemType<GelicWings>())
             .AddIngredient(ModContent.ItemType<PungentEyeball>())
-            .AddIngredient(ItemID.PurificationPowder, 30)
+            .AddIngredient(ItemID.ChlorophyteBar, 12)
             .AddIngredient(ItemID.GreenSolution, 50)
-            .AddIngredient(ItemID.ChlorophyteBar, 5)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 10)
 
             .AddTile(TileID.MythrilAnvil)

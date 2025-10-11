@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
              AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
              AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
+             AccessoryEffectLoader.GetEffect<RemoteLightningEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
 
@@ -140,10 +141,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             fargoPlayer.PureHeart = true;
 
             //corrupt heart
-            fargoPlayer.DarkenedHeartItem = Item;
-            //player.AddEffect<DarkenedHeartEaters>(Item);
-            if (fargoPlayer.DarkenedHeartCD > 0)
-                fargoPlayer.DarkenedHeartCD -= 2;
+            fargoPlayer.RottingHeartItem = Item;
+            //player.AddEffect<RottingHeartEaters>(Item);
+            if (fargoPlayer.RottingHeartCD > 0)
+                fargoPlayer.RottingHeartCD -= 2;
 
             //gutted heart
             player.AddEffect<GuttedHeartEffect>(Item);
@@ -271,7 +272,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<GodEater>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
@@ -280,7 +281,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MidasBuff>()] = true;
@@ -305,9 +305,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<SinisterIcon>())
             .AddIngredient(ModContent.ItemType<SupremeDeathbringerFairy>())
             .AddIngredient(ModContent.ItemType<BionomicCluster>())
-            .AddIngredient(ModContent.ItemType<LithosphericCluster>())
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
+            .AddRecipeGroup("FargowiltasSouls:AnyLithosphericLantern")
             .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)

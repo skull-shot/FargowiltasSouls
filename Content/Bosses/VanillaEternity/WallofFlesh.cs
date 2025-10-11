@@ -48,7 +48,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 AuraCenter = Vector2.Zero;
 
-
+        internal const float HealthMultiplier = 1.8f;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -80,11 +80,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * HealthMultiplier);
             if (Main.masterMode) //master mode is already long enough
                 npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.9f);
             npc.defense = 0;
             npc.HitSound = SoundID.NPCHit41;
+
+            npc.dontTakeDamage = true;
         }
 
         public override void OnFirstTick(NPC npc)
@@ -167,6 +169,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else if (WorldEvilAttackCycleTimer < 240) //special attacks
                 {
+                    npc.dontTakeDamage = false;
                     if (UseCorruptAttack) //cursed inferno attack
                     {
                         if (WorldEvilAttackCycleTimer == 10 && FargoSoulsUtil.HostCheck)
@@ -223,6 +226,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                     }
                 }
+                else
+                    npc.dontTakeDamage = true;
             }
             else if (npc.life < npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.9 : .75)) //enter phase 2
             {
@@ -432,7 +437,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             Vector2 auraPosition = npc.Center;
             DrawAura(npc, spriteBatch, auraPosition);
+            if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+
+                ArmorShaderData shader = GameShaders.Armor.GetShaderFromItemId(ItemID.PhaseDye);
+                shader.Apply(npc, new Terraria.DataStructures.DrawData?());
+            }
             return true;
+        }
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            }
         }
         public void DrawAura(NPC npc, SpriteBatch spriteBatch, Vector2 position)
         {
@@ -504,7 +525,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 2.2);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * WallofFlesh.HealthMultiplier);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -513,7 +534,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.buffImmune[BuffID.OnFire] = true;
             npc.buffImmune[BuffID.OnFire3] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
         }
 
@@ -781,6 +801,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.TheHungry, NPCID.TheHungryII);
 
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+
+            npc.lifeMax = (int)Math.Round(npc.lifeMax / WallofFlesh.HealthMultiplier);
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);

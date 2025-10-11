@@ -1,8 +1,10 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -13,6 +15,10 @@ namespace FargowiltasSouls.Core.Systems
 {
     public class RecipeSystem : ModSystem
     {
+        /*internal static List<int> DivingAccessoryList =
+        [
+            ItemID.DivingHelmet
+        ];*/
         public static string AnyItem(int id) => $"{Lang.misc[37]} {Lang.GetItemName(id)}";
 
         public static string AnyItem(string fargoSoulsLocalizationKey) => $"{Lang.misc[37]} {Language.GetTextValue($"Mods.FargowiltasSouls.RecipeGroups.{fargoSoulsLocalizationKey}")}";
@@ -133,11 +139,14 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.FlameWings, ItemID.FrozenWings), ItemID.FlameWings, ItemID.FrozenWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyElementWings", group);
             //holiday wings
-            group = new RecipeGroup(() => ItemXOrY(ItemID.FestiveWings, ItemID.SpookyWings), ItemID.FestiveWings, ItemID.SpookyWings);
+            group = new RecipeGroup(() => AnyItem("HolidayWings"), ItemID.FestiveWings, ItemID.SpookyWings, ItemID.TatteredFairyWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyHolidayWings", group);
             //boss wings
             group = new RecipeGroup(() => AnyItem("BossWings"), ItemID.BetsyWings, ItemID.FishronWings, ItemID.RainbowWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBossWings", group);
+            //lunar wings
+            group = new RecipeGroup(() => AnyItem("LunarWings"), ItemID.WingsSolar, ItemID.WingsVortex, ItemID.WingsNebula, ItemID.WingsStardust);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLunarWings", group);
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
@@ -177,6 +186,24 @@ namespace FargowiltasSouls.Core.Systems
                 ModContent.Find<ModItem>("Fargowiltas", "Squirrel").Type
             );
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySquirrel", group);
+
+            //vanilla fruits
+            group = new RecipeGroup(() => AnyItem("ForestFruit"), ItemID.Apple, ItemID.Grapefruit, ItemID.Lemon);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyForestFruit", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Plum, ItemID.Cherry), ItemID.Plum, ItemID.Cherry);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:PlumOrCherry", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Mango, ItemID.Pineapple), ItemID.Mango, ItemID.Pineapple);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:MangoOrPineapple", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Elderberry, ItemID.BlackCurrant), ItemID.Elderberry, ItemID.BlackCurrant);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:ElderberryOrBlackcurrant", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Rambutan, ItemID.BloodOrange), ItemID.Rambutan, ItemID.BloodOrange);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:RambutanOrBloodOrange", group);
+            //group = new RecipeGroup(() => ItemXOrY(ItemID.Coconut, ItemID.Banana), ItemID.Coconut, ItemID.Banana);
+            //RecipeGroup.RegisterGroup("FargowiltasSouls:CoconutOrBanana", group); //uses both rn
+            group = new RecipeGroup(() => ItemXOrY(ItemID.SpicyPepper, ItemID.Pomegranate), ItemID.SpicyPepper, ItemID.Pomegranate);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:SpicyPepperOrPomegranate", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Starfruit, ItemID.Dragonfruit), ItemID.Starfruit, ItemID.Dragonfruit);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:StarfruitOrDragonfruit", group);
 
             //            //vanilla fish
             //            group = new RecipeGroup(() => AnyItem("CommonFish"), ItemID.AtlanticCod, ItemID.Bass, ItemID.Trout, ItemID.RedSnapper, ItemID.Salmon, ItemID.Tuna);
@@ -226,6 +253,10 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => AnyItem(ItemID.Shellphone), ItemID.Shellphone, ItemID.ShellphoneDummy, ItemID.ShellphoneHell, ItemID.ShellphoneOcean, ItemID.ShellphoneSpawn);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyShellphone", group);
 
+            //any litho lantern for the same reason as above
+            group = new RecipeGroup(() => AnyItem("LithosphericCluster"), ModContent.ItemType<LithosphericCluster>(), ModContent.ItemType<LithosphericClusterInactive>());
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLithosphericLantern", group);
+
             // any gem
             group = new RecipeGroup(() => AnyItem("Gem"), ItemID.Diamond, ItemID.Amber, ItemID.Ruby, ItemID.Emerald, ItemID.Sapphire, ItemID.Topaz, ItemID.Amethyst);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyGem", group);
@@ -261,7 +292,7 @@ namespace FargowiltasSouls.Core.Systems
         }
         public override void PostAddRecipes()
         {
-            foreach (Recipe recipe in Main.recipe)
+            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null))
             {
                 //disable shimmer decrafts
                 if (recipe.createItem.ModItem != null && (recipe.createItem.ModItem is BaseEnchant || recipe.createItem.ModItem is BaseForce || recipe.createItem.ModItem is BaseSoul))
@@ -276,6 +307,13 @@ namespace FargowiltasSouls.Core.Systems
                     recipe.AddCondition(c);
                 }
                 */
+                /*if (recipe.createItem.accessory && !DivingAccessoryList.Contains(recipe.createItem.type))
+                {
+                    foreach (Item item in recipe.requiredItem.Where(i => DivingAccessoryList.Contains(i.type)))
+                    {
+                        DivingAccessoryList.Add(recipe.createItem.type);
+                    }
+                }*/
             }
         }
     }

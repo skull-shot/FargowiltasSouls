@@ -8,6 +8,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.Audio;
 using Terraria.Localization;
 using FargowiltasSouls.Assets.Textures;
+using Fargowiltas.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
@@ -76,7 +77,7 @@ namespace FargowiltasSouls.Content.UI.Elements
                 Utils.DrawBorderString(spriteBatch, $"[i:{item}]", itemPos + scaleOffset, color, scale);
                 if (!Main.LocalPlayer.AccessoryEffects().Equipped(effect))
                 {
-                    Texture2D cross = FargoAssets.UI.Toggler.Cross.Value;
+                    Texture2D cross = FargoMutantAssets.UI.Toggler.Cross.Value;
                     Main.spriteBatch.Draw(cross, itemPos + new Vector2(-3, -12), null, Color.Red * 0.8f, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
                 }
             }

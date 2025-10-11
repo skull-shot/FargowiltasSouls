@@ -53,7 +53,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.WarriorEmblem)
             .AddIngredient(ItemID.FireGauntlet)
             .AddIngredient(ItemID.YoyoBag)
-            .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
             //prehm weps
             .AddIngredient(ItemID.Trimarang)
             .AddRecipeGroup("FargowiltasSouls:BallOHurtOrTheRottedFork")

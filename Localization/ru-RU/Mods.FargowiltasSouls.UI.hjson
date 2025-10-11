@@ -1,4 +1,5 @@
-SoulTogglerButton: Открыть переключатель эффектов
+SoulToggler: "[i:FargowiltasSouls/EffectTogglerItem] Переключатель эффектов"
+ActiveSkillMenu: "[i:FargowiltasSouls/ActiveSkillMenuItem] Активные умения"
 Standard: Обычный режим
 Eternity: Режим Вечность
 Masochist: Режим Мазохиста
@@ -10,6 +11,7 @@ RightClickSelectDifficulty: ПКМ, чтобы выбрать сложность
 HoldShift: Удерживайте Shift, чтобы узнать больше
 Close: Закрыть
 OpenKeybinds: Открыть настройки клавиш
+ActiveSkillMenuButton: Открыть активные умения
 
 TitleLinks: {
 	// Patreon: Patreon
@@ -65,8 +67,6 @@ TurnAllTogglesOn: Включить все эффекты
 SomeEffectsPreset: Пресет с некоторыми эффектами
 MinimalEffectsPreset: Пресет с минимальными эффектами
 CustomPreset: Настраиваемый пресет {0} (ПКМ для сохранения)
-// Reload button is currently removed
-ReloadToggles: Перезагрузить включённые эффекты (ПКМ для сброса)
 NoToggles: Переключать нечего!
 DisplayAll: Показать все
 DisplayEquipped: Показать экипированные

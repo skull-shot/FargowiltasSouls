@@ -72,7 +72,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Item effectItem = player.EffectItem<RedRidingEffect>();
-            Item firstAmmo = player.FindAmmo(AmmoID.Arrow);
+            Item firstAmmo = player.FindAmmo([AmmoID.Arrow]);
             if (firstAmmo.ammo != AmmoID.Arrow)
                 firstAmmo.SetDefaults(ItemID.VenomArrow);
             int arrowType = firstAmmo.shoot;

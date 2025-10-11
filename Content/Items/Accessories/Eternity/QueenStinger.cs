@@ -30,7 +30,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[Terraria.ModLoader.ModContent.BuffType<InfestedBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
+            player.buffImmune[ModContent.BuffType<SwarmingBuff>()] = true;
 
             // Bees
             player.npcTypeNoAggro[NPCID.Bee] = true;

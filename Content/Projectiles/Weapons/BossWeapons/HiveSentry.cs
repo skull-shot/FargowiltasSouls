@@ -19,7 +19,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
             Projectile.sentry = true;
             Projectile.penetrate = -1;
             Projectile.timeLeft = Projectile.SentryLifeTime;
-            Projectile.sentry = true;
             Projectile.DamageType = DamageClass.Summon;
         }
 
@@ -54,13 +53,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 {
                     NPC target = Main.npc[npcIndex];
 
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), owner.beeType(), owner.beeDamage(Projectile.damage), owner.beeKB(0f), Projectile.owner);
                         if (p.IsWithinBounds(Main.maxProjectiles))
                         {
                             Main.projectile[p].DamageType = DamageClass.Summon;
-                            Main.projectile[p].extraUpdates += 1;
                         }
                     }
                     for (int i = 0; i < 20; i++)
@@ -84,7 +82,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons
                 }
                 else if (distance < 20)
                 {
-                    Main.player[Projectile.owner].AddBuff(BuffID.Honey, 300);
+                    Main.player[Projectile.owner].AddBuff(BuffID.Honey, 60 * 2);
                 }
             }
         }

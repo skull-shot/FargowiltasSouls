@@ -857,5 +857,17 @@ MutantIchor.DisplayName: Золотой дождь
 ExplosionVisual.DisplayName: Взрыв
 OOAForcefield.DisplayName: Силовое поле
 OOAForceFieldProj.DisplayName: Силовое поле
-LithoFlame.DisplayName: Литосферное пламя
-// CactusBall.DisplayName: Cactus Ball
+LithoFlame.DisplayName: Мрачные духи
+CactusBall.DisplayName: Кактус
+DarkBall.DisplayName: Шар тьмы
+RoseFruitTransform.DisplayName: Трансформация
+// JavelinSpin.DisplayName: Spinning Javelin
+// WyvernClone.DisplayName: Wyvern Clone
+// StinkBomb.DisplayName: Stink Bomb
+// StinkBombProj.DisplayName: Lingering Stink Cloud
+// SnotBaseball.DisplayName: Spit Ball
+// SnotBaseballSplit.DisplayName: Spit Chunk
+// TwilightStar.DisplayName: Twilight Star
+// TwilightStarSpawn.DisplayName: Twilight Star Spawn
+// TimInspectProjectile.DisplayName: Tim Inspect Projectile
+// TimsInspectProjectile.DisplayName: Tims Inspect Projectile

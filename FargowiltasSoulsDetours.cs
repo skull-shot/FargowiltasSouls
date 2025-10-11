@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
@@ -34,17 +35,21 @@ namespace FargowiltasSouls
 {
     public partial class FargowiltasSouls : ICustomDetourProvider
     {
-        private static readonly MethodInfo CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
+        private static readonly MethodInfo? CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
 
         private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
 
         private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        private static readonly MethodInfo? On_TileLoader_PickPowerCheck_Method = typeof(TileLoader).GetMethod("PickPowerCheck", LumUtils.UniversalBindingFlags);
 
         public delegate void Orig_CombinedHooks_ModifyHitNPCWithProj(Projectile projectile, NPC nPC, ref NPC.HitModifiers modifiers);
 
         public delegate int Orig_StrikeNPC_HitInfo_bool_bool(NPC nPC, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction);
 
         public delegate void Orig_PickAmmo(Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume);
+
+        public delegate void Orig_PickPowerCheck(Tile target, int pickPower, ref int damage);
 
         public void LoadDetours()
         {
@@ -62,7 +67,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot += InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox += AI_019_Spears_GetExtensionHitbox;
-            On_Projectile.IsDamageDodgable += IsDamageDodgable;
+            //On_Projectile.IsDamageDodgable += IsDamageDodgable;
 
             On_Item.AffixName += AffixName;
 
@@ -71,11 +76,14 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked += IsItemTransformLocked;
 
-            On_Projectile.Damage += PhantasmArrowRainFix;
+            //On_Projectile.Damage += PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
+            On_Player.ApplyTouchDamage += ApplyTouchDamage;
+            On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
+            On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -100,7 +108,7 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_Shoot -= InterruptShoot;
 
             On_Projectile.AI_019_Spears_GetExtensionHitbox -= AI_019_Spears_GetExtensionHitbox;
-            On_Projectile.IsDamageDodgable -= IsDamageDodgable;
+            //On_Projectile.IsDamageDodgable -= IsDamageDodgable;
 
             On_Item.AffixName -= AffixName;
 
@@ -109,11 +117,14 @@ namespace FargowiltasSouls
 
             On_ShimmerTransforms.IsItemTransformLocked -= IsItemTransformLocked;
 
-            On_Projectile.Damage -= PhantasmArrowRainFix;
+            //On_Projectile.Damage -= PhantasmArrowRainFix;
 
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
+            On_Player.ApplyTouchDamage -= ApplyTouchDamage;
+            On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
+            On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -131,6 +142,7 @@ namespace FargowiltasSouls
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
             HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
             HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
+            HookHelper.ModifyMethodWithDetour(On_TileLoader_PickPowerCheck_Method, MakeCommonTilesEasierToBreak);
         }
 
         private static bool LifeRevitalizer_CheckSpawn_Internal(
@@ -221,12 +233,12 @@ namespace FargowiltasSouls
             return ret;
         }
 
-        public static bool IsDamageDodgable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
+        /*public static bool IsDamageDodgable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
         {
             if (self.type == ModContent.ProjectileType<RemoteLightning>() || self.type == ModContent.ProjectileType<RemoteLightningExplosion>())
                 return false;
             else return orig(self);
-        }
+        }*/
 
         public static string AffixName(On_Item.orig_AffixName orig, Item self)
         {
@@ -472,7 +484,7 @@ namespace FargowiltasSouls
             }
         }
 
-        public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
+        /*public static void PhantasmArrowRainFix(On_Projectile.orig_Damage orig, Projectile self)
         { // this detour makes it so Arrow Rain projectiles spawned from max stack Red Riding Enchantment do not proc Phantasm's phantom arrows
             if (self is not null && self.friendly && self.owner.IsWithinBounds(Main.maxPlayers) && self.owner == Main.myPlayer)
             {
@@ -491,7 +503,7 @@ namespace FargowiltasSouls
                     player.phantasmTime = phantasmTime;
             }
             else orig(self);
-        }
+        }*/
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
         { // hallowed dodge nerf
@@ -501,13 +513,13 @@ namespace FargowiltasSouls
         }
 
         public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        { // sorry I don't wanna risk using (using static ...FargoSoulsGlobalProjectile) and make the file annoying to work with in case of ambiguous fields.
-            if (FargoSoulsGlobalProjectile.globalProjectileField is not null && FargoSoulsGlobalProjectile.ninjaCritIncrease > 0)
+        {
+            ref var proj = ref FargoSoulsGlobalProjectile.globalProjectileField;
+            ref var ninjaCrit = ref FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            if (proj is not null && ninjaCrit > 0)
             {
-                if (FargoSoulsGlobalProjectile.globalProjectileField.CritChance - FargoSoulsGlobalProjectile.ninjaCritIncrease < 0)
-                    FargoSoulsGlobalProjectile.globalProjectileField.CritChance = 0;
-                else FargoSoulsGlobalProjectile.globalProjectileField.CritChance -= FargoSoulsGlobalProjectile.ninjaCritIncrease;
-                // reset these
+                proj.CritChance = Math.Max(proj.CritChance - ninjaCrit, 0);
+                // reset this
                 FargoSoulsGlobalProjectile.globalProjectileField = null;
             }
             return orig(self, hit, fromNet, noPlayerInteraction);
@@ -521,15 +533,60 @@ namespace FargowiltasSouls
                 if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
                 {
                     if (projToShoot == ProjectileID.CopperCoin)
-                        totalDamage = (int)(totalDamage * 1.6f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 1.6f);
                     else if (projToShoot == ProjectileID.SilverCoin)
-                        totalDamage = (int)(totalDamage * 0.9f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.9f);
                     else if (projToShoot == ProjectileID.GoldCoin)
-                        totalDamage = (int)(totalDamage * 0.47f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.47f);
                     else if (projToShoot == ProjectileID.PlatinumCoin)
-                        totalDamage = (int)(totalDamage * 0.275f);
+                        totalDamage = (int)Math.Ceiling(totalDamage * 0.275f);
                 }
             }
+        }
+        private void ApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
+        {
+            if (((tileId == TileID.Cactus && Main.dontStarveWorld) || tileId == TileID.RollingCactus) && self.HasEffect<CactusPassiveEffect>())
+                return;
+            if (self.FargoSouls().PureHeart && (tileId == TileID.CorruptThorns || tileId == TileID.CrimsonThorns || tileId == TileID.JungleThorns)) //leave out plantera thorns
+                return;
+            orig(self, tileId, x, y);
+        }
+        public void RemoveAnnoyingNPCDebuffs(On_Player.orig_StatusFromNPC orig, Player self, NPC nPC)
+        {
+            if (WorldSavingSystem.EternityMode && nPC.type is NPCID.SkeletronHead or NPCID.SkeletronHand)
+                return;
+            orig(self, nPC);
+        }
+        public double IgnorePlayerImmunityCooldowns(On_Player.orig_Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float orig, Player self, PlayerDeathReason damageSource, int Damage, int hitDirection, out Player.HurtInfo info, bool pvp, bool quiet, int cooldownCounter, bool dodgeable, float armorPenetration, float scalingArmorPenetration, float knockback)
+        {
+            var value = orig(self, damageSource, Damage, hitDirection, out info, pvp, quiet, cooldownCounter, dodgeable, armorPenetration, scalingArmorPenetration, knockback);
+            if ((damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightning>() || damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet && self.HasEffect<RemoteControlDR>() && !self.HasBuff<SuperchargedBuff>())
+            {// Below is checking for when every immunity cooldown time is equal and above 0 meaning the hit is directly AFTER a dodge
+                bool dodging = self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] > 0 && self.hurtCooldowns[0 /*ImmunityCooldownID.General*/ ] == self.hurtCooldowns[ImmunityCooldownID.Bosses] && self.hurtCooldowns[ImmunityCooldownID.Bosses] == self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] && self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] == self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] && self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] == self.hurtCooldowns[ImmunityCooldownID.Lava];
+                if (dodging)
+                {
+                    self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] = 0;
+                    bool immuneCheck = false;
+                    immuneCheck = self.immune;
+                    self.immune = false;
+                    dodgeable = false;
+                    quiet = true;
+                    value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
+                    if (!self.immune)
+                        self.immune = immuneCheck;
+                }
+                else
+                    value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
+            }
+            return value;
+        }
+        public static void MakeCommonTilesEasierToBreak(Orig_PickPowerCheck orig, Tile target, int pickPower, ref int damage)
+        {
+            if (WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles.Contains(target.TileType))
+            {
+                damage *= 2;
+            }
+            orig(target, pickPower, ref damage);
         }
     }
 }

@@ -38,7 +38,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             #region ignores stuns
 
             if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
-                FargoUIManager.Toggle<ActiveSkillMenu>();
+                CombinedUI.ToggleUI<ActiveSkillMenu>();
+
+            if (FargowiltasSouls.SoulToggleKey.JustPressed && Player.whoAmI == Main.myPlayer)
+                CombinedUI.ToggleUI<SoulToggler>();
 
             if (Mash)
             {
@@ -119,9 +122,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[2] = 0;
                 Player.doubleTapCardinalTimer[3] = 0;
             }
-
-            if (FargowiltasSouls.SoulToggleKey.JustPressed)
-                FargoUIManager.Toggle<SoulToggler>();
 
             #endregion
 

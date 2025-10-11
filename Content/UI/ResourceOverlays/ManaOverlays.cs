@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
         {
             if (Main.LocalPlayer.FargoSouls().MagicSoul)
             {
-                return "Archmage";
+                return "ArchMage";
             }
             /*if (Main.LocalPlayer.FargoSouls().UniverseSoul)
             {
@@ -44,17 +44,17 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
             {
                 if (asset == TextureAssets.Mana)
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Mana");
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Mana").Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, fancyFolder + "Star_Fill"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyMana");
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyMana").Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, barsFolder + "MP_Fill"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarMana");
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarMana").Asset;
                     context.Draw();
                 }
             }

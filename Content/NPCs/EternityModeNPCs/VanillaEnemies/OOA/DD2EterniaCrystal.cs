@@ -13,6 +13,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public int InvulTimer;
 
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.ImmuneToAllBuffs[NPCID.DD2EterniaCrystal] = true;
+        }
+
         public override void AI(NPC npc)
         {
             base.AI(npc);
@@ -28,15 +33,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         npc.life++;
                 }
             }
-            else if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mageBoss, NPCID.DD2DarkMageT1) && EModeGlobalNPC.mageBoss >= 0 && EModeGlobalNPC.mageBoss != Main.maxNPCs)
-            {
-                if (Main.player.Any(p => p.active && !p.dead)) //if any alive players
-                {
-                    InvulTimer = 15; //wait before becoming fully vulnerable
-                    if (npc.life < npc.lifeMax && npc.life < 100)
-                        npc.life++;
-                }
-            }
 
             if (InvulTimer > 0)
             {
@@ -49,6 +45,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             }
 
         }
+
+        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        {
+            if (projectile.FargoSouls().Reflected)
+                return false;
+            return base.CanBeHitByProjectile(npc, projectile);
+        }
+
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (InvulTimer > 0)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Luminance.Assets;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.ModLoader;
 
@@ -18,14 +19,16 @@ namespace FargowiltasSouls.Assets.Textures
         public static string GetAssetString(string path, string name) => Filepath + path + "/" + name;
 
         /// <summary>
-        /// Shorthand for for grabbing a texture through Modcontent.Request.
+        /// Shorthand for for grabbing a <see cref="Texture2D"></see>, utilizing Luminance's <see cref="LazyAsset{AssetType}"></see> loading system.
+        /// When attempting to grab an <see cref="Asset{T}"></see>, use .Asset instead of .Value
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static Asset<Texture2D> GetTexture2D(string path, string name) => ModContent.Request<Texture2D>(GetAssetString(path, name), AssetRequestMode.ImmediateLoad);
+        public static LazyAsset<Texture2D> GetTexture2D(string path, string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad) => LazyAsset<Texture2D>.Request(GetAssetString(path, name), mode);
 
-
+        //TODO: Change these to use Luminance's LazyAsset loading system.
 
         #region Additive Textures
         public static Asset<Texture2D> BlobBloomTexture => ModContent.Request<Texture2D>(Filepath + "AdditiveTextures/BlobGlow");
@@ -140,7 +143,8 @@ namespace FargowiltasSouls.Assets.Textures
             }
 
         }*/
-
+        
+        //TODO: Change this to use Luminance's LazyAsset loading system.
         public class UI
         {   
             public static Asset<Texture2D> CooldownBarTexture => ModContent.Request<Texture2D>(Filepath + "UI/CooldownBar", AssetRequestMode.ImmediateLoad);
@@ -151,6 +155,12 @@ namespace FargowiltasSouls.Assets.Textures
 
             public static Asset<Texture2D> EnchantSlotIcon => ModContent.Request<Texture2D>(Filepath + "UI/EnchantSlotIcon", AssetRequestMode.ImmediateLoad);
 
+            public class ActiveSkillMenu
+            {
+                public static LazyAsset<Texture2D> ActiveSkillMenuButton => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButton");
+                public static LazyAsset<Texture2D> ActiveSkillMenuButtonHover => LazyAsset<Texture2D>.Request(Filepath + "UI/ActiveSkillMenuButtonHover");
+            }
+
             public class MainMenu
             {
                 public static Asset<Texture2D> MenuLogo => ModContent.Request<Texture2D>(Filepath + "UI/MenuLogo", AssetRequestMode.ImmediateLoad);
@@ -159,22 +169,6 @@ namespace FargowiltasSouls.Assets.Textures
                 public static Asset<Texture2D> ForgorMenuLogoGlow => ModContent.Request<Texture2D>(Filepath + "UI/ForgorMenuLogo_Glow", AssetRequestMode.ImmediateLoad);
                 public static Asset<Texture2D> TitleLinkButtons => ModContent.Request<Texture2D>(Filepath + "UI/TitleLinkButtons", AssetRequestMode.ImmediateLoad);
                 public static Asset<Texture2D> MutantWorldBorder => ModContent.Request<Texture2D>(Filepath + "UI/MutantWorldBorder", AssetRequestMode.ImmediateLoad);
-            }
-
-            public class Toggler
-            {
-                public static Asset<Texture2D> SoulTogglerButtonTexture => ModContent.Request<Texture2D>(Filepath + "UI/SoulTogglerToggle", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> SoulTogglerButton_MouseOverTexture => ModContent.Request<Texture2D>(Filepath + "UI/SoulTogglerToggle_MouseOver", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> CheckBox => ModContent.Request<Texture2D>(Filepath + "UI/CheckBox", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> CheckMark => ModContent.Request<Texture2D>(Filepath + "UI/CheckMark", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> Cross => ModContent.Request<Texture2D>(Filepath + "UI/Cross", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> DisplayAllButton => ModContent.Request<Texture2D>(Filepath + "UI/DisplayAllButton", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> PresetCustom => ModContent.Request<Texture2D>(Filepath + "UI/PresetCustom", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> PresetMinimal => ModContent.Request<Texture2D>(Filepath + "UI/PresetMinimal", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> PresetOff => ModContent.Request<Texture2D>(Filepath + "UI/PresetOff", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> PresetOn => ModContent.Request<Texture2D>(Filepath + "UI/PresetOn", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> PresetOutline => ModContent.Request<Texture2D>(Filepath + "UI/PresetOutline", AssetRequestMode.ImmediateLoad);
-                public static Asset<Texture2D> ReloadButton => ModContent.Request<Texture2D>(Filepath + "UI/ReloadButton", AssetRequestMode.ImmediateLoad);
             }
         }
     }

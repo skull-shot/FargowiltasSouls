@@ -146,6 +146,10 @@ namespace FargowiltasSouls.Content.Buffs
                     }
                     break;
 
+                case BuffID.Cursed:
+                    npc.FargoSouls().Cursed = true;
+                    break;
+
                 case BuffID.Electrified:
                     npc.FargoSouls().Electrified = true;
                     break;

@@ -211,7 +211,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
                 {
                     if (item.ModItem is ModItem modItem)
                     {
-                        var tooltips = modItem.Tooltip.Value.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) // trim lines start with whitespace
+                        string tooltipToSplit = modItem.Tooltip.Value;
+
+                        string ruminateKey = $"Mods.FargowiltasSouls.Items.{modItem.Name}.RuminateTooltip";
+                        string rumination = Language.GetTextValue(ruminateKey);
+                        if (rumination != ruminateKey)
+                            tooltipToSplit = rumination;
+
+                        var tooltips = tooltipToSplit.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) // trim lines start with whitespace
                             .Where(line => !startsWithFilter.Any(line.StartsWith) && !containsFilter.Any(line.Contains)); // filter flavor text or undesired lines
 
                         Tooltips.AddRange(tooltips);

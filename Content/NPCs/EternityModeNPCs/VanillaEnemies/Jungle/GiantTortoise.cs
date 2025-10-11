@@ -36,8 +36,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
         {
             base.SafeOnHitByItem(npc, player, item, hit, damageDone);
 
+            LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.GiantTortoise");
             if (npc.type == NPCID.GiantTortoise)
-                player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.GiantTortoise", player.name)), hit.Damage / 2, 0);
+                player.Hurt(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(player.name)), hit.Damage / 2, 0);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

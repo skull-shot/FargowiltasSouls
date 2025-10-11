@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -129,7 +130,7 @@ namespace FargowiltasSouls.Content.Items
                 tooltips.Add(new TooltipLine(Mod, $"{Mod.Name}:DisabledEffects", text));
             }
             int damage = DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling);
-            if (damage > 0)
+            if (damage > 0 && IsNotRuminating(Item))
             {
                 int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
                 if (firstTooltip > 0)
@@ -175,7 +176,8 @@ namespace FargowiltasSouls.Content.Items
                 }
             }
             int activeSkills = ActiveSkillTooltips.Count;
-            if (activeSkills > 0)
+
+            if (activeSkills > 0 && IsNotRuminating(Item))
             {
                 int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
                 if (firstTooltip >= 0)
@@ -233,6 +235,8 @@ namespace FargowiltasSouls.Content.Items
                 }
             }
         }
+
+        public static bool IsNotRuminating(Item item) => !(Language.GetTextValue($"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip" && FargowiltasSouls.RuminateKey.Current);
 
         public static Color DamageClassColor(DamageClass damageClass)
         {

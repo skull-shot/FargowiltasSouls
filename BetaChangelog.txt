@@ -230,3 +230,7 @@ made eri rays brighter for visibility
 reduced the SANSGOLEM max up/down, basically trying to make him not give you The Staircase anymore
 abomship nerf, 2 less ghosts in emode
 fixed abom cannonballs being able to kaizo you if you exploded them by making abom die
+
+implemented framework for rumination tooltips
+fixed soe not being able to read full tooltips from ponderable materials
+fish ex p3 spawns invul bubble rings

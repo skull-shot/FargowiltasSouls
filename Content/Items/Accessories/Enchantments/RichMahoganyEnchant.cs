@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.RichMahoganyBreastplate)
                 .AddIngredient(ItemID.RichMahoganyGreaves)
                 .AddIngredient(ItemID.Moonglow)
-                .AddIngredient(ItemID.Pineapple)
+                .AddRecipeGroup("FargowiltasSouls:MangoOrPineapple")
                 .AddIngredient(ItemID.GrapplingHook)
 
                 .AddTile<EnchantedTreeSheet>()

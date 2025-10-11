@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Common.Configs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -66,7 +67,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             }
             if (Projectile.localAI[0] == 0f)
             {
-                SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Zombie_104") with { Volume = 0.5f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath with { Pitch = 0.5f }, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.GenericDeathray with {Volume = 1.5f}, Projectile.Center);
             }
             Projectile.localAI[0] += 1f;
             if (Projectile.localAI[0] >= maxTime)

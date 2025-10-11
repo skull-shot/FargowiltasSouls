@@ -113,6 +113,7 @@ IceShieldEffect: {
 		Hold to spawn an ice shield aimed towards your cursor
 		After the shield gets hit, it shatters, dealing massive damage in a cone
 		Release the skill button before the shield breaks to shatter it manually, dealing increased damage
+		10 second cooldown
 		''' */
 }
 
@@ -186,4 +187,14 @@ SpiritTornadoEffect: {
 		穿过飓风的弹幕会造成1.4倍伤害
 		飓风会轻微地跟踪鼠标
 		'''
+}
+
+SoulLanternEffect: {
+	// DisplayName: Soul Prison
+	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
+}
+
+TimsInspectEffect: {
+	// DisplayName: Potion Sense
+	// Tooltip: Grants an aura that reveals potions dropped by nearby enemies
 }

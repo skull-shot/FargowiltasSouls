@@ -35,8 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                     BuffID.Chilled,
                     BuffID.OnFire,
                     BuffID.Suffocation,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
 
             this.ExcludeFromBestiary();

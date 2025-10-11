@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.buffImmune[BuffID.Venom] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<SwarmingBuff>()] = true;
 
             Point pos = player.Center.ToTileCoordinates();
             if (pos.X > 0 && pos.Y > 0 && pos.X < Main.maxTilesX && pos.Y < Main.maxTilesY

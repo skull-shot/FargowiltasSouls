@@ -40,9 +40,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle
                     target.statLife -= damage;
                     CombatText.NewText(target.Hitbox, Color.Red, damage, false, true);
 
+                    LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.Derpling");
                     if (target.statLife < 0)
                     {
-                        target.KillMe(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Derpling", target.name)), 999, 0);
+                        target.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(target.name)), 999, 0);
                     }
 
                     npc.life += damage;

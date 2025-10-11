@@ -3,11 +3,6 @@ using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -21,14 +16,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons", Name);
         public override void SetDefaults()
         {
+            base.SetDefaults();
             Projectile.width = Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.timeLeft = 90;
             Projectile.penetrate = 2;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 2;
-            base.SetDefaults();
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -53,6 +51,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
                 {
                     Projectile p = Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, new Vector2(Main.rand.NextFloat(2, 5), 0).RotatedByRandom(MathHelper.TwoPi), ModContent.ProjectileType<CactusNeedle>(), Projectile.damage / 2, Projectile.knockBack / 3, Projectile.owner);
                     p.DamageType = DamageClass.Magic;
+                    p.ai[1] = 1;
                 }
             }
         }
@@ -69,8 +68,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Poisoned, Main.rand.Next(100, 300));
-            base.OnHitNPC(target, hit, damageDone);
+            if (Main.rand.NextBool(2))
+                target.AddBuff(BuffID.Poisoned, Main.rand.Next(180, 300));
         }
         public override void AI()
         {

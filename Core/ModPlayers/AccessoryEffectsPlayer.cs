@@ -20,6 +20,7 @@ using FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFairy;
 using FargowiltasSouls.Content.Projectiles.Accessories.VerdantDoomsayerMask;
 using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Graphics;
@@ -195,7 +196,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.controlUseItem = false;
                     Player.controlUseTile = false;
                     Player.controlHook = false; 
-                    Player.controlMount = false;
+                    //Player.controlMount = false;
 
                     Player.itemAnimation = 0;
                     Player.itemTime = 0;
@@ -282,7 +283,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
-                    if (Main.npc[i].Distance(Player.Center) < 2500 && Main.npc[i].active && !Main.npc[i].friendly && !Main.npc[i].CountsAsACritter && !Main.npc[i].dontTakeDamage)
+                    if (Main.npc[i].Distance(Player.Center) < 2500 && Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5 && !Main.npc[i].dontTakeDamage)
                     {
                         Main.npc[i].AddBuff(ModContent.BuffType<MagicalCurseBuff>(), LumUtils.SecondsToFrames(5));
                         float speed = Main.npc[i].scale * 10;
@@ -649,6 +650,31 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
+        public void ShadowParryCounter()
+        {
+            SoundEngine.PlaySound(FargosSoundRegistry.CoffinBigShot, Player.Center);
+            Vector2 spawnpos = Player.Center;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (Main.projectile[i].type == ModContent.ProjectileType<PungentEyeballMinion>() && Main.projectile[i].owner == Player.whoAmI && Main.projectile[i].active)
+                {
+                    spawnpos = Main.projectile[i].Center;
+                    Main.projectile[i].localAI[2] = 30;
+                    break;
+                }
+            }
+            for (int s = 0; s < 12; s++)
+            {
+                Vector2 vel = Main.rand.NextFloat(7, 15) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi);
+                int p = Projectile.NewProjectile(Player.GetSource_EffectItem<LithosphericEffect>(), spawnpos, vel, ModContent.ProjectileType<LithoFlame>(), LithosphericEffect.BaseDamage(Player) / 2, 0, Player.whoAmI);
+            }
+            for (int i = 0; i < Main.maxNPCs; i++)
+            {
+                if (Main.npc[i].Distance(Player.Center) < 2500 && Main.npc[i].active && !Main.npc[i].friendly && Main.npc[i].lifeMax > 5 && !Main.npc[i].dontTakeDamage)
+                    Main.npc[i].AddBuff(BuffID.Cursed, 360);
+            }
+        }
+
         public void PumpkingsCapeCounter(int damage)
         {
             SoundEngine.PlaySound(SoundID.Item62, Player.Center);
@@ -698,6 +724,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             bool silverEffect = Player.HasEffect<SilverEffect>();
             bool dreadEffect = Player.HasEffect<DreadShellEffect>();
+            bool lithoEffect = Player.HasEffect<LithosphericEffect>();
             bool pumpkingEffect = Player.HasEffect<PumpkingsCapeEffect>();
             if (GuardRaised && shieldTimer > 0 && !Player.immune)
             {
@@ -760,9 +787,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                     hurtInfo.Damage = newDamage;
                 }
 
-                if (dreadEffect && perfectParry)
+                if (dreadEffect && !lithoEffect && perfectParry)
                 {
                     DreadParryCounter();
+                }
+                else if (lithoEffect && perfectParry)
+                {
+                    ShadowParryCounter();
                 }
 
                 if (pumpkingEffect && perfectParry)
@@ -806,7 +837,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
 
         public const int BASE_PARRY_WINDOW = 16;
-        public const int HARD_PARRY_WINDOW = 8;
+        public const int HARD_PARRY_WINDOW = 9;
         public const int BASE_SHIELD_COOLDOWN = 100;
         public const int LONG_SHIELD_COOLDOWN = 360;
 
@@ -816,8 +847,10 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             bool silverEffect = Player.HasEffect<SilverEffect>();
             bool dreadEffect = Player.HasEffect<DreadShellEffect>();
+            bool lithoEffect = Player.HasEffect<LithosphericEffect>();
             bool pumpkingEffect = Player.HasEffect<PumpkingsCapeEffect>();
-            if (dreadEffect)
+
+            if (dreadEffect) // should still apply in litho
             {
                 if (!MasochistSoul)
                 {
@@ -825,6 +858,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                     if (!silverEffect && !pumpkingEffect)
                         Player.statDefense -= 20; // counteract vanilla raised shield defense
                 }
+            }
+
+            if (lithoEffect)
+            {
+                Player.FargoSouls().LanternGuarding = true;
             }
 
             if (pumpkingEffect)
@@ -853,6 +891,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             bool silverEffect = Player.HasEffect<SilverEffect>();
             bool dreadEffect = Player.HasEffect<DreadShellEffect>();
+            bool lithoEffect = Player.HasEffect<LithosphericEffect>();
             bool pumpkingEffect = Player.HasEffect<PumpkingsCapeEffect>();
             GuardRaised = false;
             ModKeybind key = AccessoryEffectLoader.GetKeybind<ParryEffect>(this);
@@ -941,7 +980,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SoundEngine.PlaySound(SoundID.MaxMana, Player.Center); //make a sound for refresh
 
                     List<Color> colors = [];
-                    if (dreadEffect)
+                    if (lithoEffect)
+                        colors.Add(Color.DarkMagenta);
+                    else if (dreadEffect)
                         colors.Add(Color.DarkRed);
                     if (pumpkingEffect)
                     {

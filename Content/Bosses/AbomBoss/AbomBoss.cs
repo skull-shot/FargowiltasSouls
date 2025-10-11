@@ -63,7 +63,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     BuffID.OnFire,
                     BuffID.Suffocation,
                     ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>(),
                     ModContent.BuffType<OceanicMaulBuff>(),
                     ModContent.BuffType<LightningRodBuff>()
             ]);
@@ -793,6 +792,10 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     NPC.netUpdate = true;
                     //NPC.TargetClosest();
                     NPC.ai[0] += ++NPC.localAI[0];
+
+                    if (NPC.ai[0] == 5) // remove ship attack
+                        NPC.ai[0] = 6;
+
                     if (NPC.localAI[0] >= 3) //reset p1 hard option counter
                         NPC.localAI[0] = 0;
                     break;

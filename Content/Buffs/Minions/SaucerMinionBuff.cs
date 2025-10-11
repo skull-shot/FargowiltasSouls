@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Buffs.Minions
             if (player.whoAmI == Main.myPlayer)
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<MiniSaucer>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), UfoMinionEffect.BaseDamage(player), 3f, player.whoAmI);
+                    Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), 0, 3f, player.whoAmI);
             }
         }
     }

@@ -51,8 +51,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.localAI[0] = reader.ReadSingle();
         }
 
-        int clickTimer;
-
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
@@ -116,8 +114,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             }
             else if (player.HeldItem.IsWeapon() && player.controlUseItem)
             {
-                clickTimer--;
-
                 Projectile.localAI[0]++;
                 if (Projectile.owner == Main.myPlayer)
                     CooldownBarManager.Activate("CrystalSkullMinionCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "CrystalSkull").Value, Color.WhiteSmoke, () => Projectile.localAI[0] / (chargeTime * 2f), displayAtFull: true, activeFunction: Projectile.Alive);
@@ -161,9 +157,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                     Projectile.localAI[0] = 0;
                 }
             }
-
-            if (player.HeldItem.IsWeapon() && (player.controlUseItem || player.itemTime > 0 || player.itemAnimation > 0 || player.reuseDelay > 0))
-                clickTimer = 20;
 
             Projectile.spriteDirection = System.Math.Abs(MathHelper.WrapAngle(Projectile.rotation)) > MathHelper.PiOver2 ? -1 : 1;
         }

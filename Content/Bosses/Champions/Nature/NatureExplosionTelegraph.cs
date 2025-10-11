@@ -77,8 +77,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 return false;
             var maxOpacity = Projectile.Opacity;
 
+            Vector4 darkColor = new(0.65f, 0.05f, 0, 1);
+            Vector4 midColor = new(1, 0.275f, 0.027f, 1);
+            Vector4 lColor = new(1, 0.9f, 0, 1);
+
 
             ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.NatureExplosionTelegraphShader");
+            borderShader.TrySetParameter("darkColor", darkColor);
+            borderShader.TrySetParameter("midColor", midColor);
+            borderShader.TrySetParameter("lightColor", lColor);
             borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
             borderShader.TrySetParameter("radius", radius);
             borderShader.TrySetParameter("anchorPoint", auraPos);
