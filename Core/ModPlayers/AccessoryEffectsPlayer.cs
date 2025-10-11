@@ -374,6 +374,29 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void DebuffInstallKey()
         {
+            if (Player.HasEffect<FusedLensInstall>())
+            {
+                int buffType = ModContent.BuffType<TwinsInstallBuff>();
+                if (Player.HasBuff(buffType))
+                {
+                    Player.ClearBuff(buffType);
+                }
+                else
+                {
+                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannonDeath with { Volume = 0.5f }, Player.Center);
+
+                    Player.AddBuff(buffType, 2);
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Vector2 dir = new(Main.rand.NextFloat(-18, 22), Main.rand.NextFloat(-4, -22));
+                        Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
+                        float offset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+                        Particle p = new SmokeParticle(Player.Center, Player.velocity * 0.7f + dir, color, Main.rand.Next(40, 80), Main.rand.NextFloat(0.4f, 0.8f), Main.rand.NextFloat(0.04f, 0.08f), offset, false);
+                        p.Spawn();
+                    }
+                }
+            }
+
             if (Player.HasEffect<AgitatingLensInstall>())
             {
 				if (!Player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>())
@@ -389,30 +412,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 						Main.dust[index2].velocity *= 9;
 					}
 				}
-                return;
-            }
-
-			if (Player.HasEffect<FusedLensInstall>())
-            {
-                int buffType = ModContent.BuffType<TwinsInstallBuff>();
-                if (Player.HasBuff(buffType))
-                {
-                    Player.ClearBuff(buffType);
-                }
-                else
-                {
-                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannonDeath with {Volume = 0.5f}, Player.Center);
-
-                    Player.AddBuff(buffType, 2);
-                    for (int i = 0; i < 30; i++)
-                    {
-                        Vector2 dir = new(Main.rand.NextFloat(-18, 22), Main.rand.NextFloat(-4, -22));
-                        Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
-                        float offset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
-                        Particle p = new SmokeParticle(Player.Center, Player.velocity * 0.7f + dir, color, Main.rand.Next(40, 80), Main.rand.NextFloat(0.4f, 0.8f), Main.rand.NextFloat(0.04f, 0.08f), offset, false);
-                        p.Spawn();
-                    }
-                }
             }
         }
 

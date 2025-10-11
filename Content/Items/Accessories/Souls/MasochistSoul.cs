@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //agitating lens
             //player.AddEffect<AgitatingLensEffect>(Item);
-            player.AddEffect<AgitatingLensInstall>(Item);
+            //player.AddEffect<AgitatingLensInstall>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
@@ -195,7 +195,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
             player.AddEffect<RemoteControlDR>(Item);
-            player.AddEffect<ProbeMinionEffect>(Item);
+            //player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
             player.AddEffect<ReinforcedStats>(Item);
             player.noKnockback = true;

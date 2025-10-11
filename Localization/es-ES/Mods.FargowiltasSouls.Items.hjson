@@ -1752,8 +1752,6 @@ MasochistSoul: {
 	/* Tooltip:
 		'''
 		Grants immunity to almost all debuffs
-		Increases [i:FargowiltasSouls/GuttedHeart] max life by 10%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 20%, and [i:FargowiltasSouls/ReinforcedPlating][i:FargowiltasSouls/IceQueensShield] damage reduction by 5%
-		Increases [i:FargowiltasSouls/GelicWings] flight time by 50%, and [i:FargowiltasSouls/RottingHeart] movement speed by 20%
 		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
 		'Embrace mastery, embrace eternity'
 		''' */
