@@ -1829,8 +1829,9 @@ UniverseSoul: {
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
 		Increases your minion slots by 3 and sentry slots by 1
-		[i:1343][i:3366][i:1321][i:1595][i:4000] Grants all additional effects of components
+		[i:FargowiltasSouls/BerserkerSoul][i:FargowiltasSouls/SnipersSoul][i:FargowiltasSouls/ArchWizardsSoul][i:FargowiltasSouls/ConjuristsSoul] Grants all additional effects of components
 		'The heavens themselves bow to you'
+
 		'''
 	RuminateTooltip:
 		'''
