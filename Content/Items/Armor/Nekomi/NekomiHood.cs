@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Achievements;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Accessories;
 using FargowiltasSouls.Content.Projectiles.Armor;
@@ -76,6 +77,11 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
                     SoundEngine.PlaySound(SoundID.Item43, player.Center);
                     modPlayer.NekomiMeter = 0;
                     modPlayer.NekomiAttackReadyTimer = 0;
+
+                    if (Main.myPlayer == player.whoAmI)
+                    {
+                        ModContent.GetInstance<SuperAttackAchievement>().Condition.Complete();
+                    }
                 }
                 else
                 {
