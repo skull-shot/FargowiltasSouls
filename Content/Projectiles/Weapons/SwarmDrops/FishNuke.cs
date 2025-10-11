@@ -1,9 +1,9 @@
-using FargowiltasSouls.Assets.Textures;
+using System;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -71,54 +71,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
 
             if (++Projectile.localAI[0] >= 24f)
-            {
                 Projectile.localAI[0] = 0f;
-                /*const int max = 18;
-                for (int index1 = 0; index1 < max; ++index1)
-                {
-                    Vector2 vector2 = (Vector2.UnitX * -Projectile.width / 2f + -Vector2.UnitY.RotatedBy((double)index1 * 2 * 3.14159274101257 / max, new Vector2()) * new Vector2(8f, 16f)).RotatedBy(Projectile.rotation - (float)Math.PI / 2, new Vector2());
-                    int index2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.IceTorch, 0.0f, 0.0f, 160, new Color(), 1f);
-                    Main.dust[index2].scale = 2f;
-                    Main.dust[index2].noGravity = true;
-                    Main.dust[index2].position = Projectile.Center + vector2 * 2f;
-                    Main.dust[index2].velocity = Vector2.Normalize(Projectile.Center - Projectile.velocity * 3f - Main.dust[index2].position) * 1.25f;
-                    //Main.dust[index2].velocity *= 2f;
-                }*/
-            }
-            /*Vector2 vector21 = Vector2.UnitY.RotatedBy(Projectile.rotation, new Vector2()) * 8f * 2;
-            int index21 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Torch, 0.0f, 0.0f, 0, new Color(), 1f);
-            Main.dust[index21].position = Projectile.Center + vector21;
-            Main.dust[index21].scale = 1.25f;
-            Main.dust[index21].noGravity = true;*/
-
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
         }
 
-        /*public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.whoAmI == NPCs.FargoSoulsGlobalNPC.fishBossEX)
+            if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400 && Projectile.ai[0] != -2f)
             {
-                target.life += damage;
-                if (target.life > target.lifeMax)
-                    target.life = target.lifeMax;
-                CombatText.NewText(target.Hitbox, CombatText.HealLife, damage);
-                damage = 0;
-                modifiers.DisableCrit();
-            }
-        }*/
-
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
-        {
-            width /= 2;
-            height /= 2;
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
-        private void Explode()
-        {
-            if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400)
-            {
-                SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion, Projectile.Center);
+                SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion with { Volume = 0.5f, MaxInstances = 1 }, Projectile.Center);
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
                 Projectile.timeLeft = 20;
                 Projectile.hide = true;
@@ -129,33 +90,24 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             }
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            Explode();
-        }
-
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Explode();
+            if (Projectile.owner == Main.myPlayer && Projectile.width < 400 && Projectile.height < 400 && Projectile.ai[0] != -2f)
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.NukeFishronExplosion with { Volume = 0.5f, MaxInstances = 1 }, Projectile.Center);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FishNukeExplosion>(), Projectile.damage, Projectile.knockBack * 2f, Projectile.owner, 0, 0, Main.rand.Next(0, 365));
+                Projectile.timeLeft = 20;
+                Projectile.hide = true;
+                Projectile.ai[0] = -2f;
+                Projectile.velocity *= 0;
+                Projectile.knockBack *= 2f;
+                Projectile.Resize(200, 200);
+            }
             return false;
         }
 
         public override void OnKill(int timeLeft)
         {
-            /*if (Projectile.owner == Main.myPlayer)
-            {
-                int modifier = Main.rand.NextBool() ? 1 : -1;
-                SpawnRazorbladeRing(6, 17f, 1f * -modifier);
-                SpawnRazorbladeRing(6, 17f, 0.5f * modifier);
-                const int max = 16;
-                Vector2 baseVel = Vector2.UnitX.RotatedByRandom(2 * Math.PI);
-                for (int i = 0; i < max; i++)
-                {
-                    float speed = i % 2 == 0 ? 16f : 14f;
-                    Projectile.NewProjectile(Projectile.Center, speed * baseVel.RotatedBy(2 * Math.PI / max * i),
-                        ModContent.ProjectileType<RazorbladeTyphoonFriendly>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
-                }
-            }*/
             int num1 = 36;
             for (int index1 = 0; index1 < num1; ++index1)
             {
@@ -167,20 +119,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Main.dust[index2].velocity = vector2_2;
             }
         }
-
-        /*private void SpawnRazorbladeRing(int max, float speed, float rotationModifier)
-        {
-            float rotation = 2f * (float)Math.PI / max;
-            Vector2 vel = Vector2.UnitX.RotatedByRandom(2 * Math.PI); //Projectile.velocity; vel.Normalize();
-            vel *= speed;
-            int type = ModContent.ProjectileType<RazorbladeTyphoonFriendly>();
-            for (int i = 0; i < max; i++)
-            {
-                vel = vel.RotatedBy(rotation);
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, type, Projectile.damage / 2,
-                    Projectile.knockBack, Projectile.owner, rotationModifier, 6f);
-            }
-        }*/
 
         public float WidthFunction(float completionRatio)
         {

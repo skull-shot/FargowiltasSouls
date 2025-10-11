@@ -1079,7 +1079,7 @@ LithosphericCluster: {
 		'''
 		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
-		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Summons a glooming lantern that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1106,7 +1106,7 @@ LithosphericClusterInactive: {
 		'''
 		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
-		[i:FargowiltasSouls/CrystalSkull] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		[i:FargowiltasSouls/CrystalSkull] Summons a glooming lantern that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
 		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
@@ -1134,7 +1134,7 @@ VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		Grants immunity to Celestial Pillar and various arcane debuffs (hold [c/FF3399:{0}] to view all)
+		Grants immunity to knockback, Celestial Pillar debuffs and various arcane debuffs (hold [c/FF3399:{0}] to view all)
 		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
 		'Always watching'
@@ -1857,17 +1857,18 @@ MasochistSoul: {
 		'''
 	/* RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 20%, [i:FargowiltasSouls/MagicalBulb] life regeneration, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/CrystalSkull][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 5%
-		[i:FargowiltasSouls/ChaliceofTheMoon] Increases flight time by 200%, movement speed by 20%, and [i:FargowiltasSouls/QueenStinger] armor penetration by 50
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to most Eternity debuffs, [i:FargowiltasSouls/ChaliceofTheMoon] most standard potion and station buffs, and more
-		[i:FargowiltasSouls/NecromanticBrew] Increases dash distance, [i:FargowiltasSouls/PungentEyeball] your cursor inflicts Sublimation, [i:FargowiltasSouls/PrecisionSeal] reduces hurtbox size, press the Precision Seal key to prevent dashes and double jumps
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts
-		[i:FargowiltasSouls/NymphsPerfume][i:FargowiltasSouls/SandsofTime] Increases respawn life and reduces respawn time, [i:FargowiltasSouls/SecurityWallet] send money to piggy and reduces reforge cost by 50%, [i:FargowiltasSouls/MysticSkull] you use mana potions as needed
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes enemies drop loot one more time, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
-		Otherwise, summons [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/RemoteControl] two friendly probes, [i:FargowiltasSouls/CrystalSkull] a skull minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu by your side
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
+		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot
+		[i:FargowiltasSouls/SupremeDeathbringerFairy] Greatly increases dashing and falling speed, reduces damage taken while dashing and quick movement creates trails of blood
+		[i:FargowiltasSouls/BionomicCluster] Attacks occasionally produce lifestealing hearts, enemy attacks have a chance to squeak and enemies drop potions
+		[i:FargowiltasSouls/BionomicCluster] Use to teleport to where you last died, you respawn faster and with more life
+		[i:FargowiltasSouls/DubiousCircuitry] While debuffed, increases attack speed, critical strike chance, defense, and damage reduction
+		[i:FargowiltasSouls/PureHeart] Enemies near your cursor have reduced defense and take damage over time, increases flight time by 50% and movement speed and max life by 10%
+		[i:FargowiltasSouls/LithosphericCluster] Stabilizes gravity, reduces reforge cost, automatically sends money to piggy bank and uses mana potions when needed
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Increases life regeneration based on how much light you receive, immunity to knockback
+		[i:FargowiltasSouls/HeartoftheMasochist] Increases damage and critical strike chance for your current weapon class by 12% and damage reduction by 5%
+		[i:FargowiltasSouls/HeartoftheMasochist] Reduces hurtbox size for projectiles, grants most standard potion and station buffs, touching water greatly improves mobility
+		[i:FargowiltasSouls/HeartoftheMasochist] Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
+		Otherwise, summons a [i:FargowiltasSouls/LithosphericCluster] Glooming Lantern that empowers itself on parries, [i:FargowiltasSouls/PureHeart] creepers to block damage, [i:FargowiltasSouls/HeartoftheMasochist] an ammo-shooting saucer and the True Eyes of Cthulhu
 		'Embrace mastery, embrace eternity'
 		''' */
 	VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe]获得大部分一般药水和增益站效果"

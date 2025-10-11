@@ -43,20 +43,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             player.buffImmune[BuffID.Venom] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
-
-            Point pos = player.Center.ToTileCoordinates();
-            if (pos.X > 0 && pos.Y > 0 && pos.X < Main.maxTilesX && pos.Y < Main.maxTilesY
-                && player.whoAmI == Main.myPlayer) //check for multiplayer hopefully
-            {
-                float lightStrength = Lighting.GetColor(pos).ToVector3().Length();
-                float ratio = lightStrength / 1.732f; //this value is 1,1,1 lighting
-                if (ratio < 1)
-                    ratio /= 2;
-                player.lifeRegen += (int)(6 * ratio);
-            }
-
             player.FargoSouls().MagicalBulb = true;
             player.AddEffect<BulbKeyEffect>(item);
+            player.AddEffect<BulbRegenEffect>(item);
         }
     }
     public class IvyVenomEffect : AccessoryEffect
@@ -67,6 +56,24 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             //if (!player.HasBuff<SouloftheMasochistBuff>())
                 //player.AddBuff(ModContent.BuffType<PlanterasChildBuff>(), 2);
+        }
+    }
+    public class BulbRegenEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
+        public override int ToggleItemType => ModContent.ItemType<MagicalBulb>();
+        public override void PostUpdateEquips(Player player)
+        {
+            Point pos = player.Center.ToTileCoordinates();
+            if (pos.X > 0 && pos.Y > 0 && pos.X < Main.maxTilesX && pos.Y < Main.maxTilesY && player.whoAmI == Main.myPlayer) //check for multiplayer hopefully
+            {
+                int power = player.FargoSouls().MasochistSoul ? 12 : 6;
+                float lightStrength = Lighting.GetColor(pos).ToVector3().Length();
+                float ratio = lightStrength / 1.732f; //this value is 1,1,1 lighting
+                if (ratio < 1)
+                    ratio /= 2;
+                player.lifeRegen += (int)(6 * ratio);
+            }
         }
     }
     public class BulbKeyEffect : AccessoryEffect

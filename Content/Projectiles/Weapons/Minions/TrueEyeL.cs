@@ -136,7 +136,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                                 Vector2 speed = -Vector2.UnitX.RotatedBy(localAI0);
                                 if (Projectile.owner == Main.myPlayer)
                                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center - Vector2.UnitY * 6f, speed, ModContent.ProjectileType<PhantasmalDeathrayTrueEye>(),
-                                        Projectile.damage / 3 * 10, 6f, Projectile.owner, rotationDirection, Projectile.identity);
+                                        Projectile.damage / 3 * 20, 6f, Projectile.owner, rotationDirection, Projectile.identity);
                                 Projectile.localAI[1] = rotationDirection;
                             }
                             else if (Projectile.localAI[0] > 90f)
@@ -275,10 +275,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             localAI1 = num19 + num18;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-        }
+        public override bool? CanDamage() => false;
 
         public override bool? CanCutTiles()
         {

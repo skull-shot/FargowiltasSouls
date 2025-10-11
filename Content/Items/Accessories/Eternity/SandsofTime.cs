@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Souls;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -48,11 +50,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             ActiveEffects(player);
         }
 
-        public static void Use(Player player)
+        public static void Use(Player player, Item item)
         {
             if (player.itemTime == player.itemTimeMax / 2 && player.lastDeathPostion != Vector2.Zero && player.FargoSouls().SandsOfTimePosition != Vector2.Zero)
             {
-                Vector2 tpPos = player.FargoSouls().SandsOfTimePosition;
+                Vector2 tpPos = (item.type == ModContent.ItemType<MasochistSoul>() || item.type == ModContent.ItemType<EternitySoul>() || player.FargoSouls().MasochistSoul) ? player.lastDeathPostion : player.FargoSouls().SandsOfTimePosition;
 
                 player.immune = true;
                 player.immuneTime = 20;
@@ -96,7 +98,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             WallID.BlueDungeon, WallID.BlueDungeonSlab, WallID.BlueDungeonSlabUnsafe, WallID.BlueDungeonTile, WallID.BlueDungeonTileUnsafe, WallID.BlueDungeonUnsafe, WallID.GreenDungeon, WallID.GreenDungeonSlab, WallID.GreenDungeonSlabUnsafe,
             WallID.GreenDungeonTile, WallID.GreenDungeonTileUnsafe, WallID.GreenDungeonUnsafe, WallID.PinkDungeon, WallID.PinkDungeonSlab, WallID.PinkDungeonSlabUnsafe, WallID.PinkDungeonTile, WallID.PinkDungeonTileUnsafe, WallID.PinkDungeonUnsafe
         ];
-        public override void UseItemFrame(Player player) => Use(player);
+        public override void UseItemFrame(Player player) => Use(player, Item);
         public override bool? UseItem(Player player) => true;
     }
 }
