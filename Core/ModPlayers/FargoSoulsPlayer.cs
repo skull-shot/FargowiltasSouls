@@ -1,4 +1,8 @@
+using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Achievements;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs;
@@ -7,14 +11,20 @@ using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
+using FargowiltasSouls.Content.Items.Armor.Eridanus;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Dyes;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Armor;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core;
@@ -22,7 +32,6 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler;
-using Fargowiltas.Content.UI;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
@@ -39,14 +48,6 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 using static FargowiltasSouls.Core.Systems.DashManager;
-using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
-using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Armor;
-using FargowiltasSouls.Assets.Particles;
-using FargowiltasSouls.Content.Items.Armor.Styx;
-using FargowiltasSouls.Content.Items.Armor.Eridanus;
-using FargowiltasSouls.Assets.Sounds;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -375,7 +376,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             VoidSoul = false;
             Eternity = false;
 
-            DeactivatedMinionEffectCount= 0;
+            MinionSlotsNonstack = 0;
+            SentrySlotsNonstack = 0;
+
+            DeactivatedMinionEffectCount = 0;
             if (!GalacticMinionsDeactivatedBuffer)
             {
                 GalacticMinionsDeactivated = false;
@@ -1184,6 +1188,18 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 if (Player.whoAmI == Main.myPlayer && MutantSetBonusItem != null)
                     Projectile.NewProjectile(Player.GetSource_Accessory(MutantSetBonusItem), Player.Center, -Vector2.UnitY, ModContent.ProjectileType<GiantDeathray>(), (int)(7000 * Player.ActualClassDamage(DamageClass.Magic)), 10f, Player.whoAmI);
+            }
+
+            
+            if (Main.myPlayer == Player.whoAmI && WorldSavingSystem.EternityMode && retVal)
+            {
+                if (Player.statLife <= 0)
+                {      
+                    if (LumUtils.AnyBosses())
+                    {
+                        ModContent.GetInstance<FiftyDeathToEternityBossAchievement>().IntCondition.Value++;
+                    }
+                }
             }
 
             return retVal;

@@ -93,7 +93,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         {
             NPC.width = 80;
             NPC.height = 100;
-            NPC.damage = 142;
+            NPC.damage = 115;
             NPC.defense = 70;
             NPC.lifeMax = 500000;
             NPC.HitSound = SoundID.NPCHit4;

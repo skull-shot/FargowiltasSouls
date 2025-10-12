@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.FargoSouls().RangedSoul = true;
             player.GetDamage(DamageClass.Ranged) += 0.22f;
             player.GetCritChance(DamageClass.Ranged) += 10;
+            player.GetArmorPenetration(DamageClass.Generic) += 5;
 
             //add new effects
             player.magicQuiver = true;
@@ -40,6 +41,7 @@ hive pack*/
             .AddIngredient(ItemID.RangerEmblem)
             .AddRecipeGroup("FargowiltasSouls:AnyQuiver")
             .AddRecipeGroup("FargowiltasSouls:AnySniperScope")
+            .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
             //prehm
             .AddIngredient(ItemID.FlintlockPistol)
             .AddIngredient(ItemID.Blowgun)

@@ -47,6 +47,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<ShadowBalls>(Item);
             // CrystalAssassin-Shinobi
             player.AddEffect<CrystalDiagonalDash>(Item);
+            player.AddEffect<MonkDashEffect>(Item);
             if (player.HasEffect<ShadowForceEffect>())
                 player.AddEffect<ShadowForceDashEffect>(Item);
             // Spooky
@@ -95,19 +96,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<DeathForce>();
-        public override bool MutantsPresenceAffects => true;
-
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer farg = player.FargoSouls();
             if (farg.IFrameDashTimer > 0)
-            {
                 farg.IFrameDashTimer--;
-            }
             if (player.whoAmI == Main.myPlayer)
                 CooldownBarManager.Activate("DeathForceIframeCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ShinobiEnchant").Value, new(147, 91, 24),
                     () => 1 - farg.IFrameDashTimer / 250f, activeFunction: () => player.HasEffect<ShadowForceDashEffect>());
-            if (farg.IFrameDashTimer == 1)
+            if (farg.IFrameDashTimer == 1 && player.HasEffect<MonkDashEffect>())
             {
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f });
                 Particle boom = new AlphaBloomParticle(player.Center, Vector2.Zero, Color.Black, Vector2.One * 8, Vector2.One * 1, 40, false);
@@ -120,9 +117,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 }
             }
             if (farg.IsDashingTimer <= 0)
-            {
                 farg.IFrameDash = false;
-            }
             if (farg.ShadowDashTimer > 0)
             {
                 Color color = Color.Purple;
@@ -141,11 +136,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 
                 Particle bub = new AlphaSparkParticle(player.position + new Vector2(Main.rand.Next(0, player.width), Main.rand.Next(0, player.height)), -(player.velocity * 0.1f) , color, 0.5f, 10, false);
                 bub.Spawn();
-
-                
-
             }
-            
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
@@ -189,7 +180,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 NetMessage.SendData(MessageID.PlayerControls, number: player.whoAmI);
 
-            if (player.FargoSouls().IFrameDashTimer <= 0)
+            if (player.FargoSouls().IFrameDashTimer <= 0 && player.HasEffect<MonkDashEffect>())
             {
                 player.FargoSouls().IFrameDash = true;
                 player.FargoSouls().IFrameDashTimer = 250;

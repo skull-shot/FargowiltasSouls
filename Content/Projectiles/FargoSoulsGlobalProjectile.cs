@@ -1498,7 +1498,7 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 modifiers.SetCrit();
             }
-            if ((projectile.type == ProjectileID.TitaniumStormShard && projectile.DamageType == DamageClass.Melee) || projectile.type == ModContent.ProjectileType<SpookySpinScythe>())
+            if ((projectile.type == ProjectileID.TitaniumStormShard && projectile.DamageType == DamageClass.Melee))
             {
                 modifiers.DisableCrit();
             }

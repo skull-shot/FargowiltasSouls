@@ -88,7 +88,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     if (ShootTimer > 5 && canShoot)
                     {
                         canShoot = false;
-                        SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.4f }, Projectile.Center); 
+                        SoundEngine.PlaySound(SoundID.Item156 with { Volume = 0.4f }, Projectile.Center); 
                         Projectile.velocity += new Vector2(6, 0).RotatedBy(Projectile.rotation);
                         for (int i = 0; i < 3; i++)
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), position, velocity.RotatedByRandom(MathHelper.ToRadians(18)) * Main.rand.NextFloat(0.9f, 1.1f), ModContent.ProjectileType<EaterRocket>(), Projectile.damage, 6f);

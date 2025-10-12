@@ -43,13 +43,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         {
             base.SetDefaults(entity);
             entity.damage /= 2;
-            entity.lifeMax *= 2;
+            float mult = entity.type == NPCID.DD2OgreT2 ? 2 : 1.5f;
+            entity.lifeMax = (int)(entity.lifeMax * mult);
             //entity.scale *= 2;
         }
 
         public int AnimState = -1;
         public int AnimStartTime = -1;
         public int LastFrame = -1;
+        public bool NormalAI = false;
 
         public int Timer = 0;
         public int State = -1;
@@ -64,6 +66,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             binaryWriter.Write7BitEncodedInt(Timer);
             binaryWriter.Write7BitEncodedInt(State);
             binaryWriter.Write7BitEncodedInt(PreviousState);
+            binaryWriter.Write(NormalAI);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -75,6 +78,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             Timer = binaryReader.Read7BitEncodedInt();
             State = binaryReader.Read7BitEncodedInt();
             PreviousState = binaryReader.Read7BitEncodedInt();
+            NormalAI = binaryReader.ReadBoolean();
         }
 
         public override void OnSpawn(NPC npc, IEntitySource source)
@@ -101,6 +105,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override bool SafePreAI(NPC npc)
         {
+            NormalAI = false;
             if (npc.Distance(Main.LocalPlayer.Center) > 3000 && !DD2Event.Ongoing)
             {
                 npc.active = false;
@@ -150,6 +155,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             }
 
             return false;
+        }
+
+        public override void AI(NPC npc)
+        {
+            NormalAI = true;
+            base.AI(npc);
         }
 
         #region AI States
@@ -601,7 +612,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Animate(npc);
+            if (!NormalAI)
+                Animate(npc);
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
 

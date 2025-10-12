@@ -34,9 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            player.GetDamage(DamageClass.Generic) += 0.05f;
-            player.GetCritChance(DamageClass.Generic) += 5;
+            player.GetCritChance(DamageClass.Generic) += 10;
             player.AddEffect<PumpkingsCapeEffect>(Item);
             player.AddEffect<ParryEffect>(Item);
         }

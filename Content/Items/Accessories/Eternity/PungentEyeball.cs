@@ -43,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     {
         public override Header ToggleHeader => Header.GetHeader<PureHeartHeader>();
         public override int ToggleItemType => ModContent.ItemType<PungentEyeball>();
-        public override bool MutantsPresenceAffects => true;
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)

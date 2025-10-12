@@ -60,7 +60,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             player.AddEffect<AmmoCycleEffect>(Item);
 
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            player.GetDamage(DamageClass.Generic) += 0.8f;
+            player.GetDamage(DamageClass.Generic) += 0.08f;
             player.GetCritChance(DamageClass.Generic) += 8;
             fargoPlayer.MasochistHeart = true;
             player.endurance += 0.04f;

@@ -565,15 +565,22 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             TimeSinceHurt++;
 
+            if (MinionSlotsNonstack > 0)
+                Player.maxMinions += MinionSlotsNonstack;
+            if (SentrySlotsNonstack > 0)
+                Player.maxTurrets += SentrySlotsNonstack;
+
             if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
                 Toggler_MinionsDisabled = false;
 
             if (GalacticMinionsDeactivated)
             {
-                int minioncount = DeactivatedMinionEffectCount;
-                minioncount += Player.maxMinions - (int)Player.slotsMinions;
+                int accessoryminioncount = DeactivatedMinionEffectCount;
+                int minioncount = Player.maxMinions - (int)Player.slotsMinions;
                 if (DeactivatedMinionEffectCount > 0)
-                    Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
+                    Player.GetDamage(DamageClass.Generic) += accessoryminioncount * 0.04f; // 4% each
+                if (minioncount > 0)
+                    Player.GetDamage(DamageClass.Generic) += minioncount * 0.02f; // 2% each
             }
 
             if (Player.miscCounter % 150 == 0)

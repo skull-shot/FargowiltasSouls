@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using Luminance.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -81,7 +82,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
                 Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
 
-                SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+                /*SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
                 for (int i = 0; i < 2; i++)
                 {
                     int dust = Dust.NewDust(Projectile.position, Projectile.width,
@@ -114,7 +115,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
                 Main.gore[gore].velocity *= scaleFactor9;
                 Main.gore[gore].velocity.X += 1f;
-                Main.gore[gore].velocity.Y += 1f;
+                Main.gore[gore].velocity.Y += 1f;*/
             }
         }
 
@@ -145,7 +146,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Texture2D flare2 = FargoAssets.Smoke.Value;
             Texture2D flare = FargoAssets.Scorch.Value;
 
-            float smokesize = MathHelper.Lerp(0, 1.5f, vfxinterpolant * 0.07f);
+            float smokesize = MathHelper.Lerp(0, 1f, vfxinterpolant * 0.07f);
 
             Main.spriteBatch.Draw(flare2, Projectile.Center - Main.screenPosition, null, Color.Gray with { A = 0 } * Projectile.Opacity, Projectile.rotation, flare2.Size() * 0.5f, smokesize, 0, 0f);
             Main.spriteBatch.Draw(flare, Projectile.Center - Main.screenPosition, null, Color.Yellow with { A = 0 } * Projectile.Opacity * 0.75f, Projectile.rotation, flare.Size() * 0.5f, smokesize, 0, 0f);

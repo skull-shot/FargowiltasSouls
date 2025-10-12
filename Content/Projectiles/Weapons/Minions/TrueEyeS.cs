@@ -123,7 +123,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         case 2: //shoot
                             if (Projectile.localAI[0] == 7f)
                             {
-                                SoundEngine.PlaySound(SoundID.NPCDeath6 with { Volume = 0.75f, Pitch = 0 }, Projectile.Center);
+                                SoundEngine.PlaySound(SoundID.NPCDeath6 with { Volume = 0.3f, Pitch = 0 }, Projectile.Center);
                                 ShootBolts(npc);
                             }
                             else if (Projectile.localAI[0] == 14f)
@@ -229,11 +229,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             {
                 vel.Normalize();
                 vel *= 8f;
-                for (int i = -1; i <= 1; i++)
-                {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawn, vel.RotatedBy(Math.PI / 24 * i), ModContent.ProjectileType<PhantasmalBoltTrueEye>(),
-                        Projectile.damage / 3 * 7, 6f, Projectile.owner);
-                }
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawn, vel, ModContent.ProjectileType<PhantasmalBoltTrueEye>(), Projectile.damage / 3 * 7, 6f, Projectile.owner);
             }
         }
 
@@ -277,15 +273,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             localAI1 = num19 + num18;
         }
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-        }
-
-        public override bool? CanCutTiles()
-        {
-            return false;
-        }
+        public override bool? CanDamage() => false;
 
         public override Color? GetAlpha(Color lightColor)
         {

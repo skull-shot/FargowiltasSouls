@@ -5,6 +5,7 @@ using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Achievements;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -29,6 +30,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.ModPlayers
@@ -374,6 +376,29 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void DebuffInstallKey()
         {
+            if (Player.HasEffect<FusedLensInstall>())
+            {
+                int buffType = ModContent.BuffType<TwinsInstallBuff>();
+                if (Player.HasBuff(buffType))
+                {
+                    Player.ClearBuff(buffType);
+                }
+                else
+                {
+                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannonDeath with { Volume = 0.5f }, Player.Center);
+
+                    Player.AddBuff(buffType, 2);
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Vector2 dir = new(Main.rand.NextFloat(-18, 22), Main.rand.NextFloat(-4, -22));
+                        Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
+                        float offset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+                        Particle p = new SmokeParticle(Player.Center, Player.velocity * 0.7f + dir, color, Main.rand.Next(40, 80), Main.rand.NextFloat(0.4f, 0.8f), Main.rand.NextFloat(0.04f, 0.08f), offset, false);
+                        p.Spawn();
+                    }
+                }
+            }
+
             if (Player.HasEffect<AgitatingLensInstall>())
             {
 				if (!Player.HasBuff(ModContent.BuffType<BerserkerInstallBuff>())
@@ -389,30 +414,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 						Main.dust[index2].velocity *= 9;
 					}
 				}
-                return;
-            }
-
-			if (Player.HasEffect<FusedLensInstall>())
-            {
-                int buffType = ModContent.BuffType<TwinsInstallBuff>();
-                if (Player.HasBuff(buffType))
-                {
-                    Player.ClearBuff(buffType);
-                }
-                else
-                {
-                    SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannonDeath with {Volume = 0.5f}, Player.Center);
-
-                    Player.AddBuff(buffType, 2);
-                    for (int i = 0; i < 30; i++)
-                    {
-                        Vector2 dir = new(Main.rand.NextFloat(-18, 22), Main.rand.NextFloat(-4, -22));
-                        Color color = Color.Lerp(Color.Green, Color.Yellow, Main.rand.NextFloat(0, 1));
-                        float offset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
-                        Particle p = new SmokeParticle(Player.Center, Player.velocity * 0.7f + dir, color, Main.rand.Next(40, 80), Main.rand.NextFloat(0.4f, 0.8f), Main.rand.NextFloat(0.04f, 0.08f), offset, false);
-                        p.Spawn();
-                    }
-                }
             }
         }
 
@@ -758,14 +759,22 @@ namespace FargowiltasSouls.Core.ModPlayers
                             Player.AddBuff(ModContent.BuffType<SilverBuff>(), ForceEffect<SilverEnchant>() ? 180 : 60);
                         SoundEngine.PlaySound(SoundID.Item4, Player.Center);
 
-                        if (Player.HasEffect<TerraLightningEffect>())
+                        if (Player.HasEffect<TerraEffect>())
                         {
                             TerraProcCD = 0;
                             int targetID = FargoSoulsUtil.FindClosestHostileNPC(Player.Center, 1000, true, true);
-                            if (targetID.IsWithinBounds(Main.maxNPCs) && Main.npc[targetID] is NPC target && target.Alive())
+                            if (Player.HasEffect<TinEffect>())
+                            {
+                                TinCrit += 25;
+                                if (TinCrit > TinCritMax)
+                                    TinCrit = TinCritMax;
+                                else
+                                    CombatText.NewText(Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
+                            }
+                            /*if (targetID.IsWithinBounds(Main.maxNPCs) && Main.npc[targetID] is NPC target && target.Alive())
                             {
                                 TerraLightningEffect.LightningProc(Player, target, 7f);
-                            }
+                            }*/
 
                         }
                     }
@@ -807,7 +816,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 shieldCD = invul + extrashieldCD;
 
                 if (pumpkingEffect)
-                {
+                {   
+                    
                     CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "PumpkingsCape").Value, new Color(30, 0, 60), () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => pumpkingEffect);
                 }
                 else if (dreadEffect)
@@ -817,6 +827,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 else
                 {
                     CooldownBarManager.Activate("ParryCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SilverEnchant").Value, Color.Gray, () => 1 - shieldCD / (float)(invul + extrashieldCD), activeFunction: () => silverEffect);
+                }
+
+                if (perfectParry)
+                {
+                    if (Main.myPlayer != Player.whoAmI)
+                        return;
+                    ModContent.GetInstance<PerfectParryAchievement>().Condition.Complete();
                 }
 
                 foreach (int debuff in FargowiltasSouls.DebuffIDs) //immune to all debuffs
