@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpiderEnchant>();
-        public override bool MutantsPresenceAffects => true;
+        public override bool MutantsPresenceAffects => false;
         //public override bool MinionEffect => true;
 
         public override void PostUpdateEquips(Player player)

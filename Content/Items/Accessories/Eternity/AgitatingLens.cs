@@ -58,7 +58,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            Main.NewText($"{modPlayer.AgitatingLensCD}");
             if (modPlayer.AgitatingLensCD++ >= 60)
             {
                 modPlayer.AgitatingLensCD = 60;
