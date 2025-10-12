@@ -44,7 +44,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             base.SetDefaults(entity);
             entity.damage /= 2;
             float mult = entity.type == NPCID.DD2OgreT2 ? 2 : 1.5f;
-            Main.NewText(mult);
             entity.lifeMax = (int)(entity.lifeMax * mult);
             //entity.scale *= 2;
         }
