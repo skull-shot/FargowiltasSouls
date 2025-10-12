@@ -20,10 +20,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.FargoSouls().SummonSoul = true;
+            var modPlayer = player.FargoSouls();
+            modPlayer.SummonSoul = true;
             player.GetDamage(DamageClass.Summon) += 0.22f;
-            player.maxMinions += 3;
-            player.maxTurrets += 1;
+            if (modPlayer.MinionSlotsNonstack < 3)
+                modPlayer.MinionSlotsNonstack = 3;
+            if (modPlayer.SentrySlotsNonstack < 1)
+                modPlayer.SentrySlotsNonstack = 1;
             player.whipRangeMultiplier += 0.15f;
             player.GetKnockback(DamageClass.Summon) += 3f;
         }

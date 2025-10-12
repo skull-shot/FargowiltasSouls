@@ -376,7 +376,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             VoidSoul = false;
             Eternity = false;
 
-            DeactivatedMinionEffectCount= 0;
+            MinionSlotsNonstack = 0;
+            SentrySlotsNonstack = 0;
+
+            DeactivatedMinionEffectCount = 0;
             if (!GalacticMinionsDeactivatedBuffer)
             {
                 GalacticMinionsDeactivated = false;

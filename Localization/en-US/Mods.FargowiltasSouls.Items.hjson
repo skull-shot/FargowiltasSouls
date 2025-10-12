@@ -1657,8 +1657,8 @@ ConjuristsSoul: {
 		'''
 		22% increased summon damage
 		15% increased whip range
-		Increases your max number of minions by 3
-		Increases your max number of sentries by 1
+		Increases your max number of minions by 3, doesn't stack
+		Increases your max number of sentries by 1, doesn't stack
 		Increased minion knockback
 		'An army at your disposal'
 		'''
@@ -1832,7 +1832,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1
+		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
 		[i:FargowiltasSouls/BerserkerSoul][i:FargowiltasSouls/SnipersSoul][i:FargowiltasSouls/ArchWizardsSoul][i:FargowiltasSouls/ConjuristsSoul] Grants all additional effects of components
 		'The heavens themselves bow to you'
 

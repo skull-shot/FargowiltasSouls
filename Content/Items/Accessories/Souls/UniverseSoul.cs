@@ -47,8 +47,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             player.AddEffect<UniverseSpeedEffect>(Item);
 
-            player.maxMinions += 3;
-            player.maxTurrets += 1;
+            if (modPlayer.MinionSlotsNonstack < 3)
+                modPlayer.MinionSlotsNonstack = 3;
+            if (modPlayer.SentrySlotsNonstack < 1)
+                modPlayer.SentrySlotsNonstack = 1;
 
             player.kbGlove = true;
             player.autoReuseGlove = true;
