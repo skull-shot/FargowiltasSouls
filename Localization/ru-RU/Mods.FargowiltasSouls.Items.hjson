@@ -1431,7 +1431,7 @@ PureHeart: {
 	DisplayName: Чистейшее сердце
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Даёт иммунитет к дебаффам биомов, [i:FargowiltasSouls/RottingHeart] «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадность», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
+
 		Увеличивает [i:FargowiltasSouls/GelicWings] время полёта на 30% [i:FargowiltasSouls/RottingHeart] скорость передвижения на 10%,
 		[i:FargowiltasSouls/GuttedHeart] максимальный запас здоровья на 10% и [i:FargowiltasSouls/PungentEyeball] частоту появления редких врагов
 		[i:FargowiltasSouls/PungentEyeball] Ваш курсор накладывает на врагов дебафф «Сублимация», наносящий постепенный урон и уменьшающий защиту.
@@ -1441,7 +1441,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Сила «Сублимации» увеличивается быстрее, если мини-пожиратели, ползуны или шипы наносят урон
 		«Оно пульсирует жизненной энергией»
 		'''
-	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
+	RuminateTooltip: Даёт [i:FargowiltasSouls/PureHeart] невосприимчивость к негативным эффектам биомов, [i:FargowiltasSouls/RottingHeart] дебаффам «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадность», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
 }
 
 QueenStinger: {
@@ -3790,10 +3790,10 @@ TwilightTome: {
 }
 
 SoulLantern: {
-	// DisplayName: Soul Lantern
-	/* Tooltip:
+	DisplayName: Soul Lantern
+	Tooltip:
 		'''
-		Increases spawn rate for the enemy type in the lantern by 3x
-		Current enemy: {0}
-		''' */
+		Увеличивает скорость появления конкретного вида врагов в 3 раза
+		Сейчас действует на врага: {0}
+		'''
 }
