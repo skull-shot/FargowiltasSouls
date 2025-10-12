@@ -44,6 +44,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             SetActive(player);
 
+            player.AddEffect<TerraEffect>(Item);
             player.AddEffect<TerraLightningEffect>(Item);
             // tin
             player.AddEffect<TinEffect>(Item);
@@ -77,6 +78,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             scaling = null;
             return TerraLightningEffect.BaseDamage(Main.LocalPlayer);
         }
+    }
+    public class TerraEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
     }
     public class TerraLightningEffect : AccessoryEffect
     {
@@ -119,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
                 FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), (int)(BaseDamage(player) * damageMultiplier), 0f, modPlayer.Player.whoAmI, ai.ToRotation());
                 float modifier = 1f;
-                if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
+                /*if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {
                     modPlayer.TinCrit += 5;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
@@ -129,7 +134,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
                     if (modPlayer.TinCrit >= 25)
                         modifier -= 0.4f;
-                }
+                }*/
                 modPlayer.TerraProcCD = (int)(cdLength * modifier);
             }
         }

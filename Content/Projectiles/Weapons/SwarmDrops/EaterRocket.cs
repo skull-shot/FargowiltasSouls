@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
@@ -93,34 +94,36 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (sweetspot)
             {
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptTorch, 0f, 0f, 100, new Color(), 1f);
-                    Main.dust[index2].noGravity = true;
-                    Main.dust[index2].noLight = true;
-                    Main.dust[index2].velocity = Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f);
-                    Main.dust[index2].velocity *= Main.rand.NextFloat(1f, 2f);
-                    Main.dust[index2].scale *= Main.rand.NextFloat(1.5f, 3f);
+                    int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.WitherLightning, 0f, 0f, 100, new Color(), 1f);
+                    Main.dust[index2].noGravity = false;
+                    Main.dust[index2].velocity = Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.5f);
+                    Main.dust[index2].velocity *= Main.rand.NextFloat(0.5f, 1.3f);
+                    Main.dust[index2].scale *= Main.rand.NextFloat(0.8f, 1.2f);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptTorch, 0f, 0f, 100, default, 1.5f);
+                    Main.dust[dust].noGravity = true;
+                    Main.dust[dust].velocity *= 7f;
+                    dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptTorch, 0f, 0f, 100, default, 1.5f);
+                    Main.dust[dust].velocity *= 3f;
                 }
             }
 
-            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+            if (!sweetspot)
+                SoundEngine.PlaySound(SoundID.DD2_LightningBugZap with { Volume = 0.5f }, Projectile.Center);
+            else SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode with { MaxInstances = 2}, Projectile.Center);
 
-
-            for (int i = 0; i < 5; i++)
+            for (int j = 0; j < (sweetspot ? 4 : 2); j++)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width,
-                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 2f);
-                Main.dust[dust].noGravity = true;
-                Main.dust[dust].velocity *= 7f;
-                dust = Dust.NewDust(Projectile.position, Projectile.width,
-                    Projectile.height, DustID.Torch, 0f, 0f, 100, default, 2f);
-                Main.dust[dust].velocity *= 3f;
-            }
-
-            for (int j = 0; j < 4; j++)
-            {
-                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f) / 4, Color.Gray, 25, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                Color color = Color.Lerp(Color.DarkViolet, Color.Black, Main.rand.NextFloat(0.3f, 0.7f));
+                int lifetime = Main.rand.Next(18, 32);
+                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f) / 4, color, lifetime, 1f, 0.05f, Main.rand.NextFloat(MathF.Tau));
                 p.Spawn();
                 /*
                 int gore = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.Center,
