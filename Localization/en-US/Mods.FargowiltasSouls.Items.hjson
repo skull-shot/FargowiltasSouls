@@ -1387,7 +1387,7 @@ PumpkingsCape: {
 	DisplayName: Pumpking's Cape
 	Tooltip:
 		'''
-		Increases damage and critical strike chance by 5%
+		Increases critical strike chance by 10%
 		Massively increases life regeneration while guarding
 		Parry negates up to 200 damage and steals life based on the blocked damage
 		'Somehow, it's the right size'
