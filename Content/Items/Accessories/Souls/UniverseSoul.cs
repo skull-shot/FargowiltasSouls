@@ -47,9 +47,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             player.AddEffect<UniverseSpeedEffect>(Item);
 
-            if (modPlayer.MinionSlotsNonstack < 3)
+            if (modPlayer.MinionSlotsNonstack < 3 && modPlayer.MinionSlotsNonstack >= 0)
                 modPlayer.MinionSlotsNonstack = 3;
-            if (modPlayer.SentrySlotsNonstack < 1)
+            if (modPlayer.SentrySlotsNonstack < 1 && modPlayer.SentrySlotsNonstack >= 0)
                 modPlayer.SentrySlotsNonstack = 1;
 
             player.kbGlove = true;

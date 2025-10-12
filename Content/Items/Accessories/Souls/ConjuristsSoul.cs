@@ -23,7 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             var modPlayer = player.FargoSouls();
             modPlayer.SummonSoul = true;
             player.GetDamage(DamageClass.Summon) += 0.22f;
-            if (modPlayer.MinionSlotsNonstack < 3)
+            if (modPlayer.MinionSlotsNonstack < 3 && modPlayer.MinionSlotsNonstack >= 0)
                 modPlayer.MinionSlotsNonstack = 3;
             if (modPlayer.SentrySlotsNonstack < 1)
                 modPlayer.SentrySlotsNonstack = 1;

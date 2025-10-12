@@ -565,8 +565,10 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             TimeSinceHurt++;
 
-            Player.maxMinions += MinionSlotsNonstack;
-            Player.maxTurrets += SentrySlotsNonstack;
+            if (MinionSlotsNonstack > 0)
+                Player.maxMinions += MinionSlotsNonstack;
+            if (SentrySlotsNonstack > 0)
+                Player.maxTurrets += SentrySlotsNonstack;
 
             if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
                 Toggler_MinionsDisabled = false;
