@@ -60,12 +60,12 @@ SwarmWeaponAchievement: {
 
 PerfectParryAchievement: {
 	FriendlyName: Dodging Is Optional
-	Description: Perfectly time your parry and reap the benefits!
+	Description: Perfectly time your parry using Silver Enchant or similar and reap the benefits!
 }
 
 SuperAttackAchievement: {
 	FriendlyName: 632146P
-	Description: Unleash a powerful attack while wearing Nekomi or Styx armor.
+	Description: Unleash a powerful attack whilst wearing the Nekomi or Styx armor sets.
 }
 
 FiftyDeathToEternityBossAchievement: {

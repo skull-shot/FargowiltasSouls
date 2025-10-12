@@ -1230,7 +1230,7 @@ ChaliceofTheMoon: {
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory or vanity slots)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
@@ -1240,7 +1240,7 @@ ChaliceofTheMoon: {
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory or vanity slots)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
@@ -1826,7 +1826,7 @@ MasochistSoul: {
 		'''
 	/* RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot
+		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot, increases spawn rate
 		[i:FargowiltasSouls/SupremeDeathbringerFairy] Greatly increases dashing and falling speed, reduces damage taken while dashing and quick movement creates trails of blood
 		[i:FargowiltasSouls/BionomicCluster] Attacks occasionally produce lifestealing hearts, enemy attacks have a chance to squeak and enemies drop potions
 		[i:FargowiltasSouls/BionomicCluster] Use to teleport to where you last died, you respawn faster and with more life
