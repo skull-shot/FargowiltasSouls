@@ -1180,7 +1180,7 @@ ChaliceofTheMoon: {
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory or vanity slots)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
@@ -1190,7 +1190,7 @@ ChaliceofTheMoon: {
 		Grants immunity to Curse of the Moon
 		Power of the Cosmos benefits you regardless of class
 		Grants most standard potion and station buffs (works from inventory or vanity slots)
-		Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
 		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
@@ -1245,7 +1245,7 @@ HeartoftheMasochist: {
 		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory or vanity slots)
 		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size for projectiles, hold the Precision Seal key to disable dashes and double jumps
 		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
-		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
 		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a Mini Saucer that attacks with ammo and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu
 		'Warm, beating, and no body needed'
 		''' */
@@ -1757,7 +1757,7 @@ MasochistSoul: {
 		''' */
 	/* RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot
+		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot, increases spawn rate
 		[i:FargowiltasSouls/SupremeDeathbringerFairy] Greatly increases dashing and falling speed, reduces damage taken while dashing and quick movement creates trails of blood
 		[i:FargowiltasSouls/BionomicCluster] Attacks occasionally produce lifestealing hearts, enemy attacks have a chance to squeak and enemies drop potions
 		[i:FargowiltasSouls/BionomicCluster] Use to teleport to where you last died, you respawn faster and with more life
@@ -1856,8 +1856,9 @@ UniverseSoul: {
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
 		Increases your minion slots by 3 and sentry slots by 1
-		[i:1343][i:3366][i:1321][i:1595][i:4000] Grants all additional effects of components
+		[i:FargowiltasSouls/BerserkerSoul][i:FargowiltasSouls/SnipersSoul][i:FargowiltasSouls/ArchWizardsSoul][i:FargowiltasSouls/ConjuristsSoul] Grants all additional effects of components
 		'The heavens themselves bow to you'
+
 		''' */
 	/* RuminateTooltip:
 		'''
