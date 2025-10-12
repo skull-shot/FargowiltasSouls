@@ -58,11 +58,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.AgitatingLensCD++ > 60)
+            Main.NewText($"{modPlayer.AgitatingLensCD}");
+            if (modPlayer.AgitatingLensCD++ >= 60)
             {
-                modPlayer.AgitatingLensCD = 0;
+                modPlayer.AgitatingLensCD = 60;
                 if ((Math.Abs(player.velocity.X) >= 5 || Math.Abs(player.velocity.Y) >= 5) && player.whoAmI == Main.myPlayer)
                 {
+                    modPlayer.AgitatingLensCD = 0;
                     if (!modPlayer.SupremeDeathbringerFairy)
                         Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, player.velocity * 0.1f, ModContent.ProjectileType<BloodScytheFriendly>(), BaseDamage(player), 5f, player.whoAmI);
                     else if (modPlayer.IsDashingTimer == 0 && !modPlayer.SpecialDash)
@@ -70,8 +72,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                         for (int i = 0; i < Main.rand.Next(1, 3); i++)
                         {
                             Vector2 vel = -player.velocity + new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-6, -4));
-                            if (vel.Y < -6)
-                                vel.Y = Main.rand.NextFloat(-6, -4);
                             Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ModContent.ProjectileType<KingSlimeBallFriendly>(), SupremeDashEffect.BaseDamage(player), 5f, player.whoAmI, ai2: 1);
                         }
                     }

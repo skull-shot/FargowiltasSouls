@@ -142,7 +142,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         case 2: //ramming
                             if (Projectile.localAI[0] == 1f)
                             {
-                                SoundEngine.PlaySound(SoundID.Zombie102 with { Volume = 0.75f, Pitch = 0 }, Projectile.Center);
+                                SoundEngine.PlaySound(SoundID.Zombie102 with { Volume = 0.3f, Pitch = 0.5f }, Projectile.Center);
                                 Projectile.velocity = npc.Center - Projectile.Center;
                                 if (Projectile.velocity != Vector2.Zero)
                                 {
@@ -150,9 +150,9 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                                     Projectile.velocity *= 24f;
                                 }
                             }
-                            else if (Projectile.localAI[0] > 10f)
+                            else if (Projectile.localAI[0] > 15f)
                             {
-                                Projectile.localAI[0] = 0f;
+                                Projectile.localAI[0] = -60f;
                                 Projectile.ai[1]++;
                             }
 
@@ -320,10 +320,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
 
-        public override bool? CanCutTiles()
-        {
-            return false;
-        }
+        public override bool? CanDamage() => Projectile.ai[1] == 1;
 
         public override Color? GetAlpha(Color lightColor)
         {

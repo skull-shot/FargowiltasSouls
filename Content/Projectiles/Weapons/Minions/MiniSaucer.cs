@@ -80,6 +80,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Item ammo = player.FindAmmo([AmmoID.Arrow, AmmoID.Bullet, AmmoID.Rocket, AmmoID.CandyCorn, AmmoID.Stake]);
             int damage = (int)((UfoMinionEffect.BaseDamage(player) + ammo.damage) * player.ActualClassDamage(DamageClass.Ranged));
             float shotspeed = ammo.shootSpeed + 14;
+            bool sotm = player.FargoSouls().MasochistSoul;
 
             int switcher = (ammo.ammo == AmmoID.Bullet || ammo.ammo == AmmoID.CandyCorn) ? 1 : (ammo.ammo == AmmoID.Arrow || ammo.ammo == AmmoID.Stake) ? 2 : ammo.ammo == AmmoID.Rocket ? 3 : 4;
             if (player.active && !player.dead && player.FargoSouls().MiniSaucer)
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 {
                     case 1: //bullets
                         HoveringMovement(target.Top, target.Center);
-                        if (AttackTimer >= 12 && Projectile.owner == Main.myPlayer)
+                        if (AttackTimer >= (sotm ? 16 : 12) && Projectile.owner == Main.myPlayer)
                         {
                             AttackTimer = 0;
                             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation + MathHelper.PiOver2) * shotspeed, ammo.shoot, damage, ammo.knockBack / 2, player.whoAmI);
@@ -131,7 +132,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
                         if (Projectile.Distance(pos + hoverrng) < 64f)
                         {
-                            if (AttackTimer >= 30 && AttackTimer % 6 == 0 && Projectile.owner == Main.myPlayer)
+                            if (AttackTimer >= (sotm ? 40 : 30) && AttackTimer % 6 == 0 && Projectile.owner == Main.myPlayer)
                             {
                                 int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation + MathHelper.PiOver2) * shotspeed, ammo.shoot, damage, ammo.knockBack / 2, player.whoAmI);
                                 if (p != Main.maxProjectiles)
@@ -176,7 +177,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         }
                         Projectile.rotation = Projectile.rotation.AngleLerp(rotation, 0.2f);
 
-                        if (AttackTimer >= 60 && AttackTimer % 12 == 0 && Projectile.owner == Main.myPlayer)
+                        if (AttackTimer >= (sotm ? 80 : 60) && AttackTimer % 12 == 0 && Projectile.owner == Main.myPlayer)
                         {
                             int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity, Vector2.UnitX.RotatedBy(Projectile.rotation).RotatedByRandom(MathHelper.TwoPi) * shotspeed, ModContent.ProjectileType<SaucerRocket>(), damage, ammo.knockBack / 2, player.whoAmI, target.whoAmI, 20f, RocketTypeAi(ammo.type));
                             if (p != Main.maxProjectiles)

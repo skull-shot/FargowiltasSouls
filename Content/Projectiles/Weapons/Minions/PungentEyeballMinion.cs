@@ -63,6 +63,18 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
             const float rotationModifier = 0.12f;
             const float chargeTime = 360f;
+
+            if (player.FargoSouls().MasochistSoul && Projectile.localAI[0] >= chargeTime - 1) //release ray instantly in sotm
+            {
+                Projectile.localAI[1] = 120f;
+                Projectile.localAI[0] = 0;
+                if (Projectile.owner == Main.myPlayer)
+                {
+                    Projectile.netUpdate = true;
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation), ModContent.ProjectileType<PhantasmalDeathrayPungent>(), LithosphericEffect.BaseDamage(player), Projectile.knockBack * 2, Projectile.owner, Projectile.identity);
+                }
+            }
+
             if (Projectile.localAI[1] > 0)
             {
                 Projectile.localAI[1]--;
@@ -74,7 +86,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                 if (Projectile.localAI[1] == 0)
                 {
                     Projectile.localAI[0]++;
-                    if (player.whoAmI == Main.myPlayer)
+                    if (player.whoAmI == Main.myPlayer && !player.FargoSouls().MasochistSoul)
                         CooldownBarManager.Activate("FleshLumpMinionCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Eternity", "LithosphericCluster").Value, Color.Purple, () => Projectile.localAI[0] / chargeTime, displayAtFull: true, activeFunction: Projectile.Alive, animationFrames: 5);
                 }
                 if (Projectile.localAI[0] == chargeTime)

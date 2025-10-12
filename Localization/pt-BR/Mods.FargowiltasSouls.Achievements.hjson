@@ -1,0 +1,74 @@
+AeolusBootsAchievement: {
+	// FriendlyName: Boots of Terraria
+	// Description: Obtain the Aeolus Boots, the zenith of all footwear.
+}
+
+LifelightAchievement: {
+	// FriendlyName: Heaven Piercer
+	// Description: Defeat Lifelight, the Hallow's shiniest treasure hoarder.
+}
+
+CursedCoffinAchievement: {
+	// FriendlyName: Tomb Raider
+	// Description: Defeat the Cursed Coffin, the restless collection of countless souls.
+}
+
+EnchantmentAchievement: {
+	// FriendlyName: Enchanted
+	// Description: Obtain an Enchantment, a powerful embodiment of an armor set's true potential.
+}
+
+ForceAchievement: {
+	// FriendlyName: Forceful
+	// Description: Obtain a Force, an enhanced conglomeration of Enchantments.
+}
+
+SoulAchievement: {
+	// FriendlyName: Spiritual
+	// Description: Obtain a Soul, the culmination of a skill set for those most adept.
+}
+
+ChampionsAchievement: {
+	// FriendlyName: Underdog Upset
+	// Description: Defeat Eridanus, and the mighty champions who stand beneath him.
+}
+
+FirstEternityBossAchievement: {
+	// FriendlyName: Long Road Ahead
+	// Description: Defeat your first boss on Eternity Mode.
+}
+
+PenetratorAchievement: {
+	// FriendlyName: New Boss In Town
+	// Description: Obtain the Penetrator, a weapon forged of creation and destruction.
+}
+
+SparklingLoveAchievement: {
+	// FriendlyName: With All Your Love
+	// Description: Obtain the Sparkling Love, a weapon forged of adoration and heartbreak.
+}
+
+StyxGazerAchievement: {
+	// FriendlyName: Laevateinn
+	// Description: Obtain the Styx Gazer, a weapon forged of fear and trickery.
+}
+
+SwarmWeaponAchievement: {
+	// FriendlyName: Test Your Might..
+	// Description: Using one of the potent energizers, craft yourself a most powerful weapon to add to your arsenal.
+}
+
+PerfectParryAchievement: {
+	// FriendlyName: Dodging Is Optional
+	// Description: Perfectly time your parry and reap the benefits!
+}
+
+SuperAttackAchievement: {
+	// FriendlyName: 632146P
+	// Description: Unleash a powerful attack while wearing Nekomi or Styx armor.
+}
+
+FiftyDeathToEternityBossAchievement: {
+	// FriendlyName: Capability Conundrum
+	// Description: Die fifty times to Eternity Mode bosses.
+}

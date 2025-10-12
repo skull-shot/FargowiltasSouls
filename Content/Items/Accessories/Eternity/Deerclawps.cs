@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public static int BaseDamage(Player player) => (int)(24 * player.ActualClassDamage(DamageClass.Melee));
         public static void DeerclawpsAttack(Player player, Vector2 pos)
         {
-            if (player.whoAmI == Main.myPlayer)
+            if (player.whoAmI == Main.myPlayer && player.timeSinceLastDashStarted % (player.FargoSouls().MasochistSoul ? 3 : 2) == 0)
             {
                 Vector2 vel = 16f * -Vector2.UnitY.RotatedByRandom(MathHelper.ToRadians(30));
                 int type = ProjectileID.DeerclopsIceSpike;
@@ -72,9 +72,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 if (player.FargoSouls().SupremeDeathbringerFairy)
                 {
                     type = ProjectileID.SharpTears;
-                    dmg = SupremeDashEffect.BaseDamage(player);
+                    dmg = SupremeDashEffect.BaseDamage(player) * (player.FargoSouls().MasochistSoul ? 10 : 1);
                 }
-                if (player.velocity.Y == 0 && player.timeSinceLastDashStarted % 2 == 0)
+                if (player.FargoSouls().MasochistSoul)
+                    ai1 += 0.5f;
+                if (player.velocity.Y == 0)
                     Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel, type, dmg, 4f, Main.myPlayer, ai0, ai1);
                 else
                 {
@@ -85,10 +87,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                     if (!npc.Alive())
                         return;
                     vel = pos.DirectionTo(npc.Center) * vel.Length();
-                    if (player.timeSinceLastDashStarted % 2 == 0)
-                        Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dmg, 4f, Main.myPlayer, ai0, ai1);
+                    Projectile.NewProjectile(player.GetSource_EffectItem<DeerclawpsEffect>(), pos, vel.RotatedByRandom(MathHelper.PiOver2 * 0.3f), type, dmg, 4f, Main.myPlayer, ai0, ai1);
                 }
-                    
             }
         }
     }
