@@ -30,6 +30,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Core.ModPlayers
@@ -758,14 +759,22 @@ namespace FargowiltasSouls.Core.ModPlayers
                             Player.AddBuff(ModContent.BuffType<SilverBuff>(), ForceEffect<SilverEnchant>() ? 180 : 60);
                         SoundEngine.PlaySound(SoundID.Item4, Player.Center);
 
-                        if (Player.HasEffect<TerraLightningEffect>())
+                        if (Player.HasEffect<TerraEffect>())
                         {
                             TerraProcCD = 0;
                             int targetID = FargoSoulsUtil.FindClosestHostileNPC(Player.Center, 1000, true, true);
-                            if (targetID.IsWithinBounds(Main.maxNPCs) && Main.npc[targetID] is NPC target && target.Alive())
+                            if (Player.HasEffect<TinEffect>())
+                            {
+                                TinCrit += 25;
+                                if (TinCrit > TinCritMax)
+                                    TinCrit = TinCritMax;
+                                else
+                                    CombatText.NewText(Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
+                            }
+                            /*if (targetID.IsWithinBounds(Main.maxNPCs) && Main.npc[targetID] is NPC target && target.Alive())
                             {
                                 TerraLightningEffect.LightningProc(Player, target, 7f);
-                            }
+                            }*/
 
                         }
                     }
