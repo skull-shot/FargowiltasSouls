@@ -94,7 +94,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (sweetspot)
             {
-                SoundEngine.PlaySound(SoundID.Item89, Projectile.Center);
                 for (int i = 0; i < 3; i++)
                 {
                     int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.WitherLightning, 0f, 0f, 100, new Color(), 1f);
@@ -118,6 +117,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (!sweetspot)
                 SoundEngine.PlaySound(SoundID.DD2_LightningBugZap with { Volume = 0.5f }, Projectile.Center);
+            else SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode with { MaxInstances = 2}, Projectile.Center);
 
             for (int j = 0; j < (sweetspot ? 4 : 2); j++)
             {
