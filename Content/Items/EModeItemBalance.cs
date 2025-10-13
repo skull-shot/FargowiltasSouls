@@ -127,17 +127,17 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
-                /*
-            case ItemID.NorthPole:
-                balanceTextKeys = ["Damage"];
-                balanceNumber = 1.12f;
-                return EModeChange.Buff;
 
-            case ItemID.ElfMelter:
-                balanceTextKeys = ["Damage"];
-                balanceNumber = 1.1f;
-                return EModeChange.Buff;
-                */
+                /*case ItemID.NorthPole:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.12f;
+                    return EModeChange.Buff;
+
+                case ItemID.ElfMelter:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.1f;
+                    return EModeChange.Buff;*/
+
                 case ItemID.Razorpine:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.7f;
@@ -170,12 +170,12 @@ namespace FargowiltasSouls.Content.Items
                         return EModeChange.None;
                     }*/
 
-                /*
-            case ItemID.FetidBaghnakhs:
-                balanceTextKeys = ["Speed"];
-                balanceNumber = 0.75f;
-                return EModeChange.Nerf;
-                */
+
+                /*case ItemID.FetidBaghnakhs:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;*/
+
 
                 case ItemID.MoonlordTurretStaff:
                     balanceTextKeys = ["Damage"];
