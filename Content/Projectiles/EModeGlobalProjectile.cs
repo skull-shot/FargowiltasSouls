@@ -1527,6 +1527,14 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                     }
                     break;
+
+                case ProjectileID.Trimarang:
+                    if (PerformSafetyChecks(projectile, ItemID.Trimarang, out Player pl3) && pl3.whoAmI == Main.myPlayer && projectile.ai[0] == 1f)
+                    {
+                        projectile.extraUpdates = 1;
+                        projectile.netUpdate = true;
+                    }
+                    break;
             }
         }
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -2202,6 +2210,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.BombSkeletronPrime:
                     target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+                    if (sourceNPC is NPC && sourceNPC.type == NPCID.UndeadMiner)
+                        projectile.timeLeft = 0;
                     break;
 
                 case ProjectileID.DeathLaser:

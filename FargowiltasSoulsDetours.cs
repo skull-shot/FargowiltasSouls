@@ -81,7 +81,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown += ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer += SetSpawnPlayer;
-            On_Player.ApplyTouchDamage += HarmlessRollingCactus;
+            On_Player.ApplyTouchDamage += ApplyTouchDamage;
             On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
         }
@@ -122,7 +122,7 @@ namespace FargowiltasSouls
             On_Player.PutHallowedArmorSetBonusOnCooldown -= ShadowDodgeNerf;
 
             On_NPC.SpawnOnPlayer -= SetSpawnPlayer;
-            On_Player.ApplyTouchDamage -= HarmlessRollingCactus;
+            On_Player.ApplyTouchDamage -= ApplyTouchDamage;
             On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
         }
@@ -543,9 +543,11 @@ namespace FargowiltasSouls
                 }
             }
         }
-        private void HarmlessRollingCactus(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
+        private void ApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
         {
             if (((tileId == TileID.Cactus && Main.dontStarveWorld) || tileId == TileID.RollingCactus) && self.HasEffect<CactusPassiveEffect>())
+                return;
+            if (self.FargoSouls().PureHeart && (tileId == TileID.CorruptThorns || tileId == TileID.CrimsonThorns || tileId == TileID.JungleThorns)) //leave out plantera thorns
                 return;
             orig(self, tileId, x, y);
         }
@@ -558,17 +560,21 @@ namespace FargowiltasSouls
         public double IgnorePlayerImmunityCooldowns(On_Player.orig_Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float orig, Player self, PlayerDeathReason damageSource, int Damage, int hitDirection, out Player.HurtInfo info, bool pvp, bool quiet, int cooldownCounter, bool dodgeable, float armorPenetration, float scalingArmorPenetration, float knockback)
         {
             var value = orig(self, damageSource, Damage, hitDirection, out info, pvp, quiet, cooldownCounter, dodgeable, armorPenetration, scalingArmorPenetration, knockback);
-            if ((damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightning>() || damageSource.SourceProjectileType == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet && self.HasEffect<RemoteControlDR>() && !self.HasBuff<SuperchargedBuff>())
-            {// Below is checking for when every immunity cooldown time is equal and above 0 meaning the hit is directly AFTER a dodge
-                bool dodging = self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] > 0 && self.hurtCooldowns[0 /*ImmunityCooldownID.General*/ ] == self.hurtCooldowns[ImmunityCooldownID.Bosses] && self.hurtCooldowns[ImmunityCooldownID.Bosses] == self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] && self.hurtCooldowns[ImmunityCooldownID.DD2OgreKnockback] == self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] && self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] == self.hurtCooldowns[ImmunityCooldownID.Lava];
+            int proj = damageSource.SourceProjectileType;
+            if ((proj == ModContent.ProjectileType<RemoteLightning>() || proj == ModContent.ProjectileType<RemoteLightningExplosion>()) && cooldownCounter == ImmunityCooldownID.WrongBugNet && self.HasEffect<RemoteControlDR>() && !self.HasBuff<SuperchargedBuff>())
+            {
+                int general = 0; //ImmunityCooldownID.General
+                int boss = ImmunityCooldownID.Bosses;
+                int ogre = ImmunityCooldownID.DD2OgreKnockback;
+                int bugNet = ImmunityCooldownID.WrongBugNet;
+                int lava = ImmunityCooldownID.Lava;
+                int[] cooldown = self.hurtCooldowns; // Below is checking for when every immunity cooldown time is equal and above 0 meaning the hit is directly AFTER a dodge
+                bool dodging = cooldown[bugNet] > 0 && cooldown[general] == cooldown[boss] && cooldown[boss] == cooldown[ogre] && cooldown[ogre] == cooldown[bugNet] && cooldown[bugNet] == cooldown[lava];
                 if (dodging)
                 {
-                    self.hurtCooldowns[ImmunityCooldownID.WrongBugNet] = 0;
-                    bool immuneCheck = false;
-                    immuneCheck = self.immune;
+                    self.hurtCooldowns[bugNet] = 0;
+                    bool immuneCheck = self.immune;
                     self.immune = false;
-                    dodgeable = false;
-                    quiet = true;
                     value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
                     if (!self.immune)
                         self.immune = immuneCheck;

@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
     public class TimsInspectEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<BionomicHeader>();
+        public override Header ToggleHeader => null;
         public override bool ActiveSkill =>  true;
         public override int ToggleItemType => ModContent.ItemType<TimsConcoction>();
 

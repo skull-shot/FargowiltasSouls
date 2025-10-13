@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             {
                 if (Projectile.localAI[0] == 0 && Projectile.localAI[1] == 0)
                 {
-                    Vector2 offset = Projectile.Center - eye.Center;
+                    Vector2 offset = (Projectile.Center - eye.Center) / 1.5f;
                     Projectile.localAI[0] = offset.X;
                     Projectile.localAI[1] = offset.Y;
                 }
@@ -83,7 +83,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             Projectile.alpha -= 5;
             if (Projectile.alpha < 0)
                 Projectile.alpha = 0;
-            Projectile.scale = 0.65f - 0.65f * Projectile.alpha / 255f;
+            Projectile.scale = 0.4f - 0.4f * Projectile.alpha / 255f;
 
             Projectile.frameCounter++;
             if (Projectile.frameCounter >= 6)

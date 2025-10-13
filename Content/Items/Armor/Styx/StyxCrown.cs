@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Achievements;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Projectiles.Armor;
 using FargowiltasSouls.Content.Rarities;
@@ -98,6 +99,11 @@ namespace FargowiltasSouls.Content.Items.Armor.Styx
                     player.controlUseItem = false; //this kills other heldprojs
                     player.releaseUseItem = true;
                     modPlayer.StyxAttackReadyTimer = 0;
+
+                    if (Main.myPlayer == player.whoAmI)
+                    {
+                        ModContent.GetInstance<SuperAttackAchievement>().Condition.Complete();
+                    }
                 }
             }
         }

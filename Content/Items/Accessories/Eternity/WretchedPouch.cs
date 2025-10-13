@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void PostUpdateEquips(Player player)
         {
-            if (player.HasEffect<LithosphericEffect>() && player.HasEffect<PungentMinion>()) // combined
+            if (player.HasEffect<LithosphericEffect>()) // combined
                 return;
             const int MaxChargeTime = 60 * 8;
 

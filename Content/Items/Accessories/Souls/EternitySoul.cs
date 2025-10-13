@@ -98,12 +98,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.defense = 100;
 
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useTime = 90;
-            Item.useAnimation = 90;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
             Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
+        public override void UseItemFrame(Player player) => SandsofTime.Use(player, Item);
         public override bool? UseItem(Player player) => true;
 
         void PassiveEffect(Player player)

@@ -127,20 +127,20 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
-                /*
-            case ItemID.NorthPole:
-                balanceTextKeys = ["Damage"];
-                balanceNumber = 1.12f;
-                return EModeChange.Buff;
 
-            case ItemID.ElfMelter:
-                balanceTextKeys = ["Damage"];
-                balanceNumber = 1.1f;
-                return EModeChange.Buff;
-                */
+                /*case ItemID.NorthPole:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.12f;
+                    return EModeChange.Buff;
+
+                case ItemID.ElfMelter:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 1.1f;
+                    return EModeChange.Buff;*/
+
                 case ItemID.Razorpine:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.8f;
+                    balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
                 case ItemID.BlizzardStaff:
@@ -170,12 +170,12 @@ namespace FargowiltasSouls.Content.Items
                         return EModeChange.None;
                     }*/
 
-                /*
-            case ItemID.FetidBaghnakhs:
-                balanceTextKeys = ["Speed"];
-                balanceNumber = 0.75f;
-                return EModeChange.Nerf;
-                */
+
+                /*case ItemID.FetidBaghnakhs:
+                    balanceTextKeys = ["Speed"];
+                    balanceNumber = 0.75f;
+                    return EModeChange.Nerf;*/
+
 
                 case ItemID.MoonlordTurretStaff:
                     balanceTextKeys = ["Damage"];
@@ -406,10 +406,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
 
-                case ItemID.SnowmanCannon:
+                /*case ItemID.SnowmanCannon:
                     balanceTextKeys = ["Speed"];
                     balanceNumber = 0.85f;
-                    return EModeChange.Nerf;
+                    return EModeChange.Nerf;*/
 
                 case ItemID.BouncingShield: //sergeant united shield
                     balanceTextKeys = ["Damage"];
@@ -586,10 +586,24 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
 
+                case ItemID.Trimarang:
+                    balanceTextKeys = ["Trimarang"];
+                    return EModeChange.Buff;
+
+                case ItemID.BatScepter:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {
                         balanceTextKeys = ["ChlorophyteBullet"];
+                        return EModeChange.Nerf;
+                    }
+                    else if (ContentSamples.ItemsByType[itemType] is Item item2 && item2.buffType == BuffID.Tipsy)
+                    {
+                        balanceTextKeys = ["Tipsy"];
                         return EModeChange.Nerf;
                     }
                     return EModeChange.None;

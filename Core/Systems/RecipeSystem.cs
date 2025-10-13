@@ -139,11 +139,14 @@ namespace FargowiltasSouls.Core.Systems
             group = new RecipeGroup(() => ItemXOrY(ItemID.FlameWings, ItemID.FrozenWings), ItemID.FlameWings, ItemID.FrozenWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyElementWings", group);
             //holiday wings
-            group = new RecipeGroup(() => ItemXOrY(ItemID.FestiveWings, ItemID.SpookyWings), ItemID.FestiveWings, ItemID.SpookyWings);
+            group = new RecipeGroup(() => AnyItem("HolidayWings"), ItemID.FestiveWings, ItemID.SpookyWings, ItemID.TatteredFairyWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyHolidayWings", group);
             //boss wings
             group = new RecipeGroup(() => AnyItem("BossWings"), ItemID.BetsyWings, ItemID.FishronWings, ItemID.RainbowWings);
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnyBossWings", group);
+            //lunar wings
+            group = new RecipeGroup(() => AnyItem("LunarWings"), ItemID.WingsSolar, ItemID.WingsVortex, ItemID.WingsNebula, ItemID.WingsStardust);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyLunarWings", group);
 
             //            //phasesabers
             //            group = new RecipeGroup(() => AnyItem("Phasesaber"), ItemID.RedPhasesaber, ItemID.BluePhasesaber, ItemID.GreenPhasesaber, ItemID.PurplePhasesaber, ItemID.WhitePhasesaber,
@@ -183,6 +186,24 @@ namespace FargowiltasSouls.Core.Systems
                 ModContent.Find<ModItem>("Fargowiltas", "Squirrel").Type
             );
             RecipeGroup.RegisterGroup("FargowiltasSouls:AnySquirrel", group);
+
+            //vanilla fruits
+            group = new RecipeGroup(() => AnyItem("ForestFruit"), ItemID.Apple, ItemID.Grapefruit, ItemID.Lemon);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:AnyForestFruit", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Plum, ItemID.Cherry), ItemID.Plum, ItemID.Cherry);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:PlumOrCherry", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Mango, ItemID.Pineapple), ItemID.Mango, ItemID.Pineapple);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:MangoOrPineapple", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Elderberry, ItemID.BlackCurrant), ItemID.Elderberry, ItemID.BlackCurrant);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:ElderberryOrBlackcurrant", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Rambutan, ItemID.BloodOrange), ItemID.Rambutan, ItemID.BloodOrange);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:RambutanOrBloodOrange", group);
+            //group = new RecipeGroup(() => ItemXOrY(ItemID.Coconut, ItemID.Banana), ItemID.Coconut, ItemID.Banana);
+            //RecipeGroup.RegisterGroup("FargowiltasSouls:CoconutOrBanana", group); //uses both rn
+            group = new RecipeGroup(() => ItemXOrY(ItemID.SpicyPepper, ItemID.Pomegranate), ItemID.SpicyPepper, ItemID.Pomegranate);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:SpicyPepperOrPomegranate", group);
+            group = new RecipeGroup(() => ItemXOrY(ItemID.Starfruit, ItemID.Dragonfruit), ItemID.Starfruit, ItemID.Dragonfruit);
+            RecipeGroup.RegisterGroup("FargowiltasSouls:StarfruitOrDragonfruit", group);
 
             //            //vanilla fish
             //            group = new RecipeGroup(() => AnyItem("CommonFish"), ItemID.AtlanticCod, ItemID.Bass, ItemID.Trout, ItemID.RedSnapper, ItemID.Salmon, ItemID.Tuna);

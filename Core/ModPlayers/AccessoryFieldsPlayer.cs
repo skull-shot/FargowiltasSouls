@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
+using System.Security.Cryptography.Pkcs;
 using Terraria;
 using static FargowiltasSouls.Core.Systems.DashManager;
 
@@ -235,6 +236,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int HurtTimer;
         public bool Eternity;
         public float TinEternityDamage;
+
+        public int MinionSlotsNonstack;
+        public int SentrySlotsNonstack;
 
         //maso items
         public Item SlimyShieldItem;

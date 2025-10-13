@@ -38,8 +38,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void AddEffects(Player player, Item item)
         {
             PassiveEffects(player, item);
-            player.AddEffect<IronPickupEffect>(item);
             player.AddEffect<IronEquippedEffect>(item);
+            if (item.type == ModContent.ItemType<IronEnchant>())
+                player.AddEffect<IronPickupEffect>(item);
         }
 
         public override void AddRecipes()

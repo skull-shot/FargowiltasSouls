@@ -861,13 +861,14 @@ LithoFlame.DisplayName: Мрачные духи
 CactusBall.DisplayName: Кактус
 DarkBall.DisplayName: Шар тьмы
 RoseFruitTransform.DisplayName: Трансформация
-// JavelinSpin.DisplayName: Spinning Javelin
-// WyvernClone.DisplayName: Wyvern Clone
-// StinkBomb.DisplayName: Stink Bomb
-// StinkBombProj.DisplayName: Lingering Stink Cloud
-// SnotBaseball.DisplayName: Spit Ball
-// SnotBaseballSplit.DisplayName: Spit Chunk
-// TwilightStar.DisplayName: Twilight Star
-// TwilightStarSpawn.DisplayName: Twilight Star Spawn
-// TimInspectProjectile.DisplayName: Tim Inspect Projectile
-// TimsInspectProjectile.DisplayName: Tims Inspect Projectile
+JavelinSpin.DisplayName: Кружащееся копьё
+WyvernClone.DisplayName: Клон виверны
+StinkBomb.DisplayName: Вонючая бомба
+StinkBombProj.DisplayName: Висящее вонючее облако
+SnotBaseball.DisplayName: Шар слюней
+SnotBaseballSplit.DisplayName: Шарик слюнж
+TwilightStar.DisplayName: Сумеречная звезда
+TwilightStarSpawn.DisplayName: Сумеречная звезда
+TimInspectProjectile.DisplayName: Tim Inspect Projectile
+TimsInspectProjectile.DisplayName: Tims Inspect Projectile
+BloodTrail.DisplayName: Кровавый след

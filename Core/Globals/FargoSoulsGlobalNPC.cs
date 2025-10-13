@@ -763,7 +763,7 @@ namespace FargowiltasSouls.Core.Globals
                     dot *= 3;
                 }
 
-                bool terraEffect = Main.player.Any(p => p.Alive() && p.HasEffect<TerraLightningEffect>());
+                bool terraEffect = Main.player.Any(p => p.Alive() && p.HasEffect<TerraEffect>());
                 if (terraEffect)
                     dot = 250;
 

@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,11 +12,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     //[AutoloadEquip(EquipType.Shoes)]
     public class SupersonicSoul : BaseSoul
     {
-
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 37));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
-
             Item.value = 750000;
         }
         public static readonly Color ItemColor = new(238, 0, 69);

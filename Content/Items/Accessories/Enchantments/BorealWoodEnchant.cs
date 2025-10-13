@@ -40,7 +40,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.BorealWoodBreastplate)
                 .AddIngredient(ItemID.BorealWoodGreaves)
                 .AddIngredient(ItemID.Shiverthorn)
-                .AddIngredient(ItemID.Plum)
+                .AddRecipeGroup("FargowiltasSouls:PlumOrCherry")
                 .AddIngredient(ItemID.Snowball, 300)
 
                 .AddTile<EnchantedTreeSheet>()

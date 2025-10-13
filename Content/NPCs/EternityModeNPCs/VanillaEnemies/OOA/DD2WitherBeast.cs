@@ -69,13 +69,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
                 if (npc.Center.Distance(EModeDD2Event.GetEterniaCrystal().Center) > 900)
                 {
-                    npc.velocity.X = 0.5f * npc.direction;
                     int j = (int)(npc.Bottom.X / 16);
                     int y = (int)((npc.Bottom.Y + 1) / 16);
                     if (Timer % 12 == 0)
-                        SoundEngine.PlaySound(SoundID.DD2_WitherBeastCrystalImpact with { Volume = 0.7f }, npc.Center);
-                    if (Timer % 12 == 0)
                     {
+                        npc.velocity.X = 0.8f * npc.direction;
+                        SoundEngine.PlaySound(SoundID.DD2_WitherBeastCrystalImpact with { Volume = 0.7f }, npc.Center);
                         for (int x = j - 2; x <= j + 2; x++)
                         {
                             WorldGen.KillTile(x, y, true, true);
@@ -84,6 +83,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     }
                     new SparkParticle(npc.Top + 2 * -npc.direction * npc.width / 2 * Vector2.UnitX + Main.rand.NextFloat(0, npc.height) * Vector2.UnitY, -npc.direction * Vector2.UnitX, Color.Pink, 0.1f, 4).Spawn();
                 }
+                npc.ai[1] = 30; // kill heal
             }
             return base.SafePreAI(npc);
         }

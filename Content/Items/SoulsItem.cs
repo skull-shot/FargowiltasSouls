@@ -236,7 +236,7 @@ namespace FargowiltasSouls.Content.Items
             }
         }
 
-        public static bool IsNotRuminating(Item item) => !(Language.GetTextValue($"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip" && FargowiltasSouls.RuminateKey.Current);
+        public static bool IsNotRuminating(Item item) => !(Language.GetTextValue($"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.FargowiltasSouls.Items.{item.ModItem.Name}.RuminateTooltip" && FargowiltasSouls.RuminateKey.Current && !FargoGlobalItem.NoRuminateText.Contains(item.type));
 
         public static Color DamageClassColor(DamageClass damageClass)
         {

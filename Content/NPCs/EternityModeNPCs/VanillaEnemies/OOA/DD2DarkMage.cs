@@ -32,10 +32,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override void SetDefaults(NPC entity)
         {
             base.SetDefaults(entity);
+            float mult = entity.type == NPCID.DD2DarkMageT1 ? 2 : 1.5f;
+            entity.lifeMax = (int)(entity.lifeMax * mult);
         }
 
         public int AnimState = -1;
         public int AnimStartTime = -1;
+        public bool NormalAI = false;
 
         public int State = -1;
         public int PreviousState = 0;
@@ -49,6 +52,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             binaryWriter.Write7BitEncodedInt(State);
             binaryWriter.Write7BitEncodedInt(Timer);
             binaryWriter.Write7BitEncodedInt(PreviousState);
+            binaryWriter.Write(NormalAI);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -59,6 +63,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             State = binaryReader.Read7BitEncodedInt();
             Timer = binaryReader.Read7BitEncodedInt();
             PreviousState = binaryReader.Read7BitEncodedInt();
+            NormalAI = binaryReader.ReadBoolean();
         }
 
         public enum States
@@ -73,10 +78,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override bool SafePreAI(NPC npc)
         {
+            NormalAI = false;
             EModeGlobalNPC.mageBoss = npc.whoAmI;
 
             npc.TargetClosest();
-            if (npc.HasValidTarget && Main.player[npc.target].Center.Distance(npc.Center) > 2000)
+            if ((npc.HasValidTarget && Main.player[npc.target].Center.Distance(npc.Center) > 2000))
             {
                 return base.SafePreAI(npc);
             }
@@ -112,12 +118,19 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             return false;
         }
 
+        public override void AI(NPC npc)
+        {
+            NormalAI = true;
+            base.AI(npc);
+        }
+
         #region States
         public void SummonSkeletons(NPC npc)
         {
-            if (Timer == 1 && NPC.CountNPCS(NPCID.DD2SkeletonT1) >= 4)
+            int skeleType = npc.type == NPCID.DD2DarkMageT1 ? NPCID.DD2SkeletonT1 : NPCID.DD2SkeletonT3;
+            if (Timer == 1 && NPC.CountNPCS(skeleType) >= 4)
                 ResetToIdle(npc);
-            if (Timer == 1 && NPC.CountNPCS(NPCID.DD2SkeletonT1) < 4)
+            if (Timer == 1 && NPC.CountNPCS(skeleType) < 4)
             {
                 SoundEngine.PlaySound(SoundID.DD2_DarkMageSummonSkeleton, npc.Center);
                 BeginAnimation(npc, (int)AnimStates.Conjuring);
@@ -125,8 +138,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 {
                     for (int i = 1; i < 3; i++)
                     {
-                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), new Vector2(npc.Bottom.X - i * 75, npc.Bottom.Y), NPCID.DD2SkeletonT1);
-                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), new Vector2(npc.Bottom.X + i * 75, npc.Bottom.Y), NPCID.DD2SkeletonT1);
+                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), new Vector2(npc.Bottom.X - i * 75, npc.Bottom.Y), skeleType);
+                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromThis(), new Vector2(npc.Bottom.X + i * 75, npc.Bottom.Y), skeleType);
                     }
                 }
             }
@@ -322,7 +335,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Animate(npc);
+            if (!NormalAI)
+                Animate(npc);
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
         #endregion

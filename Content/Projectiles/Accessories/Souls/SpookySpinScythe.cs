@@ -183,9 +183,9 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             }
             target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), player.HasEffect<ShadowForceDashEffect>() ? 60 * 5 : 60 * 6);
         }
-        public override void OnKill(int timeLeft)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            
+            modifiers.DisableCrit();
         }
 
         public override bool PreDraw(ref Color lightColor)

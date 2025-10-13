@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.FargoSouls().GelicWingsItem = Item;
             player.AddEffect<GelicWingJump>(Item);
             player.AddEffect<GelicWingSpikes>(Item);

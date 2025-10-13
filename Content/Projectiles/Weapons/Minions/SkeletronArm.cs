@@ -39,6 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
             
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
+            Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
 
         public override bool? CanCutTiles()
@@ -64,7 +65,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
 
             Vector2 restingPos = player.Center + new Vector2(140 * Projectile.ai[0], -40);
             NPC npc = FargoSoulsUtil.NPCExists(FargoSoulsUtil.FindClosestHostileNPCPrioritizingMinionFocus(Projectile, 350, center: player.Center));
-            if (npc != null)
+            if (npc != null && (Collision.CanHitLine(player.Center, 0, 0, npc.Center, 0, 0) || player.Center.Distance(npc.Center) <= 160)) //line of collision or if enemy is too close
             {
                 if (Projectile.ai[1] == -2)
                 {

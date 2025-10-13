@@ -62,8 +62,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.FargoSouls().Eternity)
                 return 50;
-            if (player.HasEffect<TerraLightningEffect>())
-                return 5;
+            if (player.HasEffect<TerraEffect>())
+                return 0;
             return 5;
         }
 

@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
         private bool firstTick = true;
         private readonly bool CanBeDangerSensed = !Main.gamePaused && Main.instance.IsActive && Main.netMode != NetmodeID.Server && Main.LocalPlayer.dangerSense;
 
-        public const int telegraphTime = 20;
+        public const int telegraphTime = 40;
         public override void AI()
         {
             if (firstTick)
@@ -77,8 +77,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 }
             }
 
-            if (target == null || Projectile.Center.Distance(target.Center) > 500)
+            bool hasTop = Main.tile[new Vector2(Projectile.position.X, Projectile.position.Y - 8f).ToTileCoordinates16()].HasTile ? true : false; // TODO: Make this better later so that it makes icicle fall instead
+
+            if (target == null || Projectile.Center.Distance(target.Center) > 500 || (Projectile.ai[0] == 0 && !hasTop))
             {
+                if (!hasTop)
+                    Projectile.ai[0]++;
                 Projectile.Kill();
             }
 
@@ -102,6 +106,11 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 {
                     target = nPC;
                 }
+            }
+
+            foreach (Projectile projectile in Main.projectile.Where(p => p.active && p.friendly && p.type != Type && p.Hitbox.Intersects(Projectile.Hitbox) && Projectile.ai[0] == 0))
+            {
+                Projectile.ai[0]++;
             }
 
             //waits for target to walk below
@@ -153,6 +162,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
             Projectile.hide = false;
 
         }
+
+        public override bool CanHitPlayer(Player target) => !target.FargoSouls().PureHeart;
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -34,6 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
             fargoPlayer.PureHeart = true;
+            player.AddEffect<LightningImmunity>(Item);
 
             //rotting effect
             player.buffImmune[ModContent.BuffType<RottingBuff>()] = true;

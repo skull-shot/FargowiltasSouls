@@ -131,15 +131,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             NPC.width = 120;//34;
             NPC.height = 120;//50;
-            if (Main.getGoodWorld)
+            /*if (Main.getGoodWorld)
             {
                 NPC.width = Player.defaultWidth;
                 NPC.height = Player.defaultHeight;
-            }
-            NPC.damage = 444+44;
-            NPC.defense = 255;
+            }*/
+            NPC.damage = 400;
+            NPC.defense = 200;
             NPC.value = Item.buyPrice(15);
-            NPC.lifeMax = Main.expertMode ? 5700000 : 3700000;
+            NPC.lifeMax = Main.expertMode ? 7500000 : 5000000;
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
