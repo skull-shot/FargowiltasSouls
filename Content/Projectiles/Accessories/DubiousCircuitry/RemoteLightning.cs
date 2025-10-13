@@ -32,7 +32,8 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry
                 Projectile.tileCollide = true;
             Player player = Main.player[Main.myPlayer];
             int distance = (int)Projectile.Distance(player.Center);
-            if (distance < 60 && player.HasEffect<RemoteControlDR>() && !player.HasBuff<SuperchargedBuff>())
+            bool safe = player.creativeGodMode || PlayerLoader.CanBeHitByProjectile(player, Projectile) == false || PlayerLoader.ImmuneTo(player, PlayerDeathReason.ByProjectile(player.whoAmI, Projectile.identity), ImmunityCooldownID.WrongBugNet, false) == true;
+            if (distance < 60 && !safe && player.HasEffect<RemoteControlDR>() && !player.HasBuff<SuperchargedBuff>())
                 Projectile.velocity = Projectile.SafeDirectionTo(player.Center) * 20f;
             return base.PreAI();
         }
