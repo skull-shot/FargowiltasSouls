@@ -406,6 +406,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;
         public bool HasJungleRose;
+        public bool Quicksanding;
 
 
         public int ReallyAwfulDebuffCooldown;

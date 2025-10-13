@@ -426,6 +426,14 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void DesertDebuffs(Tile currentTile)
         {
+
+           // Main.NewText("hi " + Player.ZoneDirtLayerHeight + " " + Player.ZoneRockLayerHeight);
+
+            if ((Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight) && Player.wet)
+            {
+                Player.AddBuff(ModContent.BuffType<QuicksandBuff>(), 60);
+            }
+
             /*
             if (Player.ZoneOverworldHeight && currentTile.WallType == WallID.None)
             {

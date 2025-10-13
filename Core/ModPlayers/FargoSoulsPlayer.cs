@@ -495,6 +495,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             Berserked = false;
             Stunned = false;
             HasJungleRose = false;
+            Quicksanding = false;
             HaveCheckedAttackSpeed = false;
             SquirrelCharm = null;
             OxygenTank = false;

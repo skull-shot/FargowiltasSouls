@@ -201,6 +201,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.gravControl = false;
                 Player.gravControl2 = false;
             }
+
+            if (Quicksanding)
+            {
+
+            }
         }
         public override void PostUpdateEquips()
         {
