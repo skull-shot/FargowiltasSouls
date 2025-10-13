@@ -14,11 +14,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
 
-        public override int NumFrames => 7;
+        public override int NumFrames => 5;
 
         public override void SetStaticDefaults()
         {
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 7));
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 5));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

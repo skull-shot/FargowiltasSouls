@@ -1315,7 +1315,7 @@ MutantEye: {
 }
 
 MysticSkull: {
-	DisplayName: Mystic Skull
+	DisplayName: Runic Candle
 	Tooltip:
 		'''
 		Works from inventory or vanity slots
@@ -1332,7 +1332,7 @@ MysticSkull: {
 }
 
 MysticSkullInactive: {
-	DisplayName: Mystic Skull (Inactive)
+	DisplayName: Runic Candle (Inactive)
 	Tooltip:
 		'''
 		Currently inactive, Right click to activate
