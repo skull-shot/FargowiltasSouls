@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Placables;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert;
 using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
@@ -640,7 +641,8 @@ namespace FargowiltasSouls.Core.Globals
             switch (npc.type)
             {
                 case NPCID.BlueSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion, 3));
+                    if (npc.type != NPCID.BabySlime)
+                        TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion, 3));
                     break;
 
                 case NPCID.DemonEye:
@@ -657,13 +659,13 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.HornetLeafy:
                 case NPCID.HornetSpikey:
                 case NPCID.HornetStingy:
-                    TimsConcoctionDrop(new CommonDrop(ItemID.SwiftnessPotion, 3, 1, 2, 2));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.BattlePotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.GoblinPeon:
                 case NPCID.GoblinThief:
                 case NPCID.GoblinWarrior:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BattlePotion, 4));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion, 4));
                     break;
 
                 case NPCID.JungleBat:
@@ -751,9 +753,19 @@ namespace FargowiltasSouls.Core.Globals
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion, 5));
                     break;
 
-                case NPCID.Antlion:
                 case NPCID.WalkingAntlion:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion));
+                case NPCID.GiantWalkingAntlion:
+                case NPCID.FlyingAntlion:
+                case NPCID.GiantFlyingAntlion:
+                case NPCID.Tumbleweed:
+                case NPCID.DesertBeast:
+                    TimsConcoctionDrop(new CommonDrop(ItemID.SwiftnessPotion, 3, chanceNumerator: 2));
+                    break;
+
+                case NPCID.Antlion:
+                case NPCID.TombCrawlerHead:
+                case NPCID.DuneSplicerHead:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 2));
                     break;
 
                 case NPCID.WallCreeper:
@@ -869,16 +881,6 @@ namespace FargowiltasSouls.Core.Globals
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.LovePotion, 1, 1, 3));
                     break;
 
-                case NPCID.Tumbleweed:
-                case NPCID.DesertBeast:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SwiftnessPotion));
-                    break;
-
-                case NPCID.TombCrawlerHead:
-                case NPCID.DuneSplicerHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 2));
-                    break;
-
                 case NPCID.DoctorBones:
                 case NPCID.Mimic:
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.SpelunkerPotion, 1, 2, 3));
@@ -957,7 +959,13 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.CrimsonPenguin:
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.BiomeSightPotion, 1));
                     break;
-                default: break;
+                default:
+                    if (npc.ModNPC != null)
+                    {
+                        if (npc.type == ModContent.NPCType<CactusMimic>())
+                            TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 2));
+                    }
+                    break;
             }
             #endregion
             //if (npc.ModNPC == null || npc.ModNPC.Mod is FargowiltasSouls) //not for other mods
