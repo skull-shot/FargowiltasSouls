@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     {
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<CrimsonEnchant>(),
