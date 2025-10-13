@@ -406,10 +406,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.3f;
                     return EModeChange.Buff;
 
-                case ItemID.SnowmanCannon:
+                /*case ItemID.SnowmanCannon:
                     balanceTextKeys = ["Speed"];
                     balanceNumber = 0.85f;
-                    return EModeChange.Nerf;
+                    return EModeChange.Nerf;*/
 
                 case ItemID.BouncingShield: //sergeant united shield
                     balanceTextKeys = ["Damage"];
