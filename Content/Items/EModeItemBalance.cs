@@ -590,6 +590,11 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["Trimarang"];
                     return EModeChange.Buff;
 
+                case ItemID.BatScepter:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.8f;
+                    return EModeChange.Nerf;
+
                 default:
                     if (ContentSamples.ItemsByType[itemType] is Item item && item.ammo == AmmoID.Bullet && item.shoot == ProjectileID.ChlorophyteBullet)
                     {
