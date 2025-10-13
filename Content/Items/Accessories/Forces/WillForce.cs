@@ -14,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             [AccessoryEffectLoader.GetEffect<GoldKeyEffect>()];
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<GoldEnchant>(),
