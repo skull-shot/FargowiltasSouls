@@ -72,7 +72,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
-            if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
+            var critDisabled = typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool?;
+            if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
             {
                 float crit = 0f; // spider enchant crits don't deal extra damage, but summon spiderlings
                 if (EridanusSet || Player.HasEffect<LifeForceEffect>())
@@ -101,7 +102,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                             Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), spawnPos, vel, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer, ai2: target.whoAmI);
                         }
                     }
-                    if (UniverseCore) // cosmic core
+                    if (UniverseCore && !damageClass.CountsAsClass(DamageClass.Summon)) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
                         if (Main.rand.NextFloat(100) < crit) //supercrit
@@ -113,6 +114,17 @@ namespace FargowiltasSouls.Core.ModPlayers
                     }
 
 
+                }
+
+                if (UniverseCore && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
+                {
+                    float crit = Player.GetTotalCritChance(damageClass) / 2;
+                    if (Main.rand.NextFloat(100) < crit)
+                    {
+                        hitInfo.Damage *= 2;
+                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
+                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
+                    }
                 }
 
                 if (Hexed && HexedInflictor == target.whoAmI)

@@ -139,7 +139,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
 
                 if (Projectile.velocity != Vector2.Zero)
                 {
-                    Projectile.rotation = Projectile.velocity.ToRotation();
+                    Projectile.rotation = Angle;
 
                     if (++Projectile.frameCounter > 6 * (Projectile.extraUpdates + 1))
                     {
@@ -254,6 +254,19 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh
                 Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, color * opacity, rot, new Vector2(0, line.Height() * 0.5f), new Vector2(0.47f, Projectile.scale * 7), SpriteEffects.None);
             }
             */
+
+            if (CanDamage() != false)
+            {
+                Main.spriteBatch.UseBlendState(BlendState.Additive);
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 4f;
+                    Color glowColor = Color.Purple;
+
+                    Main.EntitySpriteDraw(texture2D13, Projectile.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+                }
+                Main.spriteBatch.ResetToDefault();
+            }
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
 

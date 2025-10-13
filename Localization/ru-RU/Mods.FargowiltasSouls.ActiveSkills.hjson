@@ -196,11 +196,11 @@ SpiritTornadoEffect: {
 }
 
 SoulLanternEffect: {
-	// DisplayName: Soul Prison
-	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
+	DisplayName: Тюрьма для душ
+	Tooltip: Используйте на враге, чтобы поймать частичку его души в лампу
 }
 
 TimsInspectEffect: {
-	// DisplayName: Potion Sense
-	// Tooltip: Grants an aura that reveals potions dropped by nearby enemies
+	DisplayName: Нюх на зелья
+	Tooltip: Даёт ауру, показывающую, какие зелья выпадают из врагов.
 }

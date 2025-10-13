@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -28,6 +29,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 ModContent.ItemType<TungstenEnchant>(),
                 ModContent.ItemType<ObsidianEnchant>()
             ];
+
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationRectangularV(6, 5, 10));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
 
         public override void UpdateInventory(Player player)

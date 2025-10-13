@@ -732,3 +732,8 @@ ExpixiveBuff: {
 	DisplayName: Взрывофея
 	Description: Малые феи сражаются за вас до последнего
 }
+
+QuicksandBuff: {
+	// DisplayName: Quicksand Buff
+	// Description: Mods.FargowiltasSouls.Buffs.QuicksandBuff.Description
+}

@@ -201,6 +201,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.gravControl = false;
                 Player.gravControl2 = false;
             }
+
+            if (Quicksanding)
+            {
+
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -564,6 +569,11 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void PostUpdateMiscEffects()
         {
             TimeSinceHurt++;
+
+            if (MinionSlotsNonstack > 0)
+                Player.maxMinions += MinionSlotsNonstack;
+            if (SentrySlotsNonstack > 0)
+                Player.maxTurrets += SentrySlotsNonstack;
 
             if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
                 Toggler_MinionsDisabled = false;

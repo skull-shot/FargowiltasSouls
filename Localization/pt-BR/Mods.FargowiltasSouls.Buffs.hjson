@@ -732,3 +732,8 @@ ExpixiveBuff: {
 	// DisplayName: Expixive Buff
 	// Description: The lesser fairies will fight to the end for you
 }
+
+QuicksandBuff: {
+	// DisplayName: Quicksand Buff
+	// Description: Mods.FargowiltasSouls.Buffs.QuicksandBuff.Description
+}

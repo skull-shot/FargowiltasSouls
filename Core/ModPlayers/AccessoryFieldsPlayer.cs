@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
+using System.Security.Cryptography.Pkcs;
 using Terraria;
 using static FargowiltasSouls.Core.Systems.DashManager;
 
@@ -236,6 +237,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Eternity;
         public float TinEternityDamage;
 
+        public int MinionSlotsNonstack;
+        public int SentrySlotsNonstack;
+
         //maso items
         public Item SlimyShieldItem;
         public bool SlimyShieldFalling;
@@ -406,6 +410,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;
         public bool HasJungleRose;
+        public bool Quicksanding;
 
 
         public int ReallyAwfulDebuffCooldown;

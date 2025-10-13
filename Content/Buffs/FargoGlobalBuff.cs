@@ -79,6 +79,11 @@ namespace FargowiltasSouls.Content.Buffs
                         SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));
                     break;
 
+                case BuffID.Tipsy:
+                    if (player.whoAmI == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.Ale))
+                        player.statDefense -= 2;
+                    break;
+
                 default:
                     break;
             }
