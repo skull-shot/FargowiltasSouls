@@ -1529,7 +1529,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Trimarang:
-                    if (PerformSafetyChecks(projectile, ItemID.Trimarang, out Player pl3) && pl3.whoAmI == Main.myPlayer && projectile.ai[0] == 1f)
+                    if (PerformSafetyChecks(projectile, ItemID.Trimarang, out Player pl3) && pl3.whoAmI == Main.myPlayer/* && projectile.ai[0] == 1f*/)
                     {
                         projectile.extraUpdates = 1;
                         projectile.netUpdate = true;
