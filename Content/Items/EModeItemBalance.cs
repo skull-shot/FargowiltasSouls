@@ -140,7 +140,7 @@ namespace FargowiltasSouls.Content.Items
                 */
                 case ItemID.Razorpine:
                     balanceTextKeys = ["Damage"];
-                    balanceNumber = 0.8f;
+                    balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
                 case ItemID.BlizzardStaff:
