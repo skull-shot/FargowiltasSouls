@@ -108,7 +108,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Environment
                 }
             }
 
-            foreach (Projectile projectile in Main.projectile.Where(p => p.active && p.friendly && p.type != Type && p.damage > 0 && p.Hitbox.Intersects(Projectile.Hitbox) && Projectile.ai[0] == 0 && ProjectileLoader.CanDamage(p) != false && ProjectileLoader.CanCutTiles(p) != false))
+            foreach (Projectile projectile in Main.projectile.Where(p => p.active && p.friendly && p.type != Type && p.damage > 0 && !FargoSoulsUtil.IsSummonDamage(p, false, false) && p.Hitbox.Intersects(Projectile.Hitbox) && Projectile.ai[0] == 0 && ProjectileLoader.CanDamage(p) != false && ProjectileLoader.CanCutTiles(p) != false))
             {
                 Projectile.ai[0]++;
             }
