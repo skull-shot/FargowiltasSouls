@@ -89,7 +89,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!modPlayer.HeldItemAdamantiteValid)
                 return;
             float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.33f : 0.2f;
-            if (ProjectileID.Sets.CultistIsResistantTo[item.shoot])
+            bool[] homing = ProjectileID.Sets.CultistIsResistantTo;
+            if (item.useAmmo > AmmoID.None && player.PickAmmo(item, out int type, out _, out _, out _, out _, true) && type > 0 && homing[type])
+                maxSpeed /= 2;
+            else if (item.useAmmo == AmmoID.None && homing[item.shoot])
                 maxSpeed /= 2;
 
             float ratio = Math.Max((float)modPlayer.AdamantiteSpread / SpreadCap, 0);
