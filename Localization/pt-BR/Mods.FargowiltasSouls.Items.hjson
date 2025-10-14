@@ -69,8 +69,8 @@ BeeEnchant: {
 	/* Tooltip:
 		'''
 		Allows flight and slow fall
-		While flying, leave behind flowers that form petals over time
-		Touching fully formed flowers gives you the Honey buff and creates a swarm of bees
+		While flying, your wings plant flowers that form petals over time
+		Touching fully formed flowers covers you in honey and creates a swarm of bees
 		Enemies touching the flowers also trigger the bee swarm
 		[i:HiveBackpack] Effects of Hive Pack
 		'According to all known laws of aviation, there is no way a bee should be able to fly'
