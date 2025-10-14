@@ -34,9 +34,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void PreUpdate()
         {
-            if (FargoSoulsUtil.HostCheck)
-                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("yeah server"), Color.White);
-
             if (!WorldSavingSystem.EternityMode)
                 return;
 
@@ -45,9 +42,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (LumUtils.AnyBosses())
                 return;
-
-            if (FargoSoulsUtil.HostCheck)
-                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("yeah valid"), Color.White);
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
 
@@ -197,8 +191,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!FargoSoulsUtil.HostCheck)
                 return;
 
-            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("yeah icicles"), Color.White);
-
             if (Player.townNPCs >= 2f)
                 return;
 
@@ -210,7 +202,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //icicle spawning 
             if (Main.rand.NextBool(30) && LumUtils.CountProjectiles([ModContent.ProjectileType<FallingIcicle>()]) < maxIcicles)
             {
-                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("yeah random"), Color.White);
 
                 Vector2 playerPos = Player.Center;
                 bool icicleSpawned = false;
@@ -272,8 +263,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                         if (!icicleNearby)
                         {
-                            if (FargoSoulsUtil.HostCheck)
-                            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("yeah spawned"), Color.White);
                             Projectile icicle = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_NaturalSpawn(), spawnPos, Vector2.Zero, ModContent.ProjectileType<FallingIcicle>(), icicleDamage, 1, Main.myPlayer);
                             icicleSpawned = true;
                         }
