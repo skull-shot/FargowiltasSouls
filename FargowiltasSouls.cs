@@ -66,6 +66,7 @@ namespace FargowiltasSouls
         public static Mod CalamityMod;
         public static Mod MusicDisplay;
 
+
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
         //internal static ModKeybind SmokeBombKey;
@@ -659,7 +660,6 @@ namespace FargowiltasSouls
             SyncAntlionGrab,
             SyncTuskRip,
             DropMutantGift,
-            RequestEnvironmentalProjectile,
             ToggleEternityMode,
             WakeUpDeviantt,
             WakeUpMutant,
@@ -931,36 +931,6 @@ namespace FargowiltasSouls
                             int i = reader.ReadInt32();
                             int j = reader.ReadInt32();
                             WorldGen.KillTile(i, j);
-                        }
-                        break;
-                    case PacketID.RequestEnvironmentalProjectile:
-                        {
-                            if (Main.netMode == NetmodeID.Server)
-                            {
-                                int type = reader.ReadInt32();
-                                Vector2 pos = reader.ReadVector2();
-                                if (type == ModContent.ProjectileType<DeerclopsDarknessHand>())
-                                {
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    int p = Projectile.NewProjectile(Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer);
-                                    if (p.IsWithinBounds(Main.maxProjectiles))
-                                    {
-                                        Main.projectile[p].light = 1f;
-                                    }
-                                    Lighting.AddLight(pos, 1f, 1f, 1f);
-                                }
-                                else if (type == ModContent.ProjectileType<LifelightEnvironmentStar>())
-                                {
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer, -120);
-                                }
-                                else if (type == ModContent.ProjectileType<RainLightning>())
-                                {
-                                    float ai1 = reader.ReadSingle();
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer, Vector2.UnitY.ToRotation(), ai1);
-                                }
-                            }
                         }
                         break;
 

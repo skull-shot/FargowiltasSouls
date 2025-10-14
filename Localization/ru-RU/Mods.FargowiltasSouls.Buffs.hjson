@@ -734,6 +734,6 @@ ExpixiveBuff: {
 }
 
 QuicksandBuff: {
-	// DisplayName: Quicksand Buff
+	DisplayName: Зыбучие пески
 	// Description: Mods.FargowiltasSouls.Buffs.QuicksandBuff.Description
 }
