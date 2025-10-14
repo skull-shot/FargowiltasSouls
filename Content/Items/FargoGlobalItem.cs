@@ -14,12 +14,14 @@ using FargowiltasSouls.Core.Systems;
 //using FargowiltasSouls.Content.Buffs.Souls;
 //using FargowiltasSouls.Content.Projectiles.Critters;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.Map;
@@ -617,7 +619,7 @@ namespace FargowiltasSouls.Content.Items
                 string rumination = Language.GetTextValue(ruminateKey);
                 if (rumination != ruminateKey)
                 {
-                    if (FargowiltasSouls.RuminateKey.Current)
+                    if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                     {
                         string unmodifiedTooltip = Language.GetTextValue($"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.Tooltip");
                         foreach (var tooltip in tooltips)
@@ -655,10 +657,8 @@ namespace FargowiltasSouls.Content.Items
                     }
                     else
                     {
-                        string key = $"({Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound")})";
-                        var keys = FargowiltasSouls.RuminateKey.GetAssignedKeys();
-                        if (keys.Count > 0)
-                            key = keys[0];
+                        string key = "LeftShift";
+
                         if (!NoRuminateText.Contains(item.type))
                             tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
                         else
