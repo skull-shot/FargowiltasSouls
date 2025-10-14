@@ -66,6 +66,7 @@ namespace FargowiltasSouls
         public static Mod CalamityMod;
         public static Mod MusicDisplay;
 
+
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
         //internal static ModKeybind SmokeBombKey;

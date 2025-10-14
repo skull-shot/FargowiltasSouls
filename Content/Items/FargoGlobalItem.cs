@@ -203,7 +203,6 @@ namespace FargowiltasSouls.Content.Items
             ModContent.ItemType<VerdantDoomsayerMask>(),
             ModContent.ItemType<HeartoftheMasochist>()
         ];
-        public static List<string> SoulsMods = ["FargowiltasSouls", "FargowiltasCrossmod", "FargowiltasSoulsDLC"];
 
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
@@ -612,7 +611,7 @@ namespace FargowiltasSouls.Content.Items
                 }
             }
 
-            if (item.ModItem != null && SoulsMods.Contains(item.ModItem.Mod.Name))
+            if (item.ModItem != null && Fargowiltas.Fargowiltas.SoulsMods.Contains(item.ModItem.Mod.Name))
             {
                 string ruminateKey = $"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip";
                 string rumination = Language.GetTextValue(ruminateKey);
