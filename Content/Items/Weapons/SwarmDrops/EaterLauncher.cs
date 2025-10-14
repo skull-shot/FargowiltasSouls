@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return Main.rand.NextBool();
+            return Main.rand.NextBool() && player.channel && player.ownedProjectileCounts[Item.shoot] > 0;
         }
 
         public override void AddRecipes()
