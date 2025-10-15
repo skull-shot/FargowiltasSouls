@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	// DisplayName: Abominable Presence
-	// Description: Lifesteal and dodge effects don't work
+	// Description: Unable to steal life
 }
 
 BaronsBurdenBuff: {
