@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 ModContent.ItemType<TurtleEnchant>(),
                 ModContent.ItemType<BeetleEnchant>()
             ];
-            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new Terraria.DataStructures.WingStats(1000);
+            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new Terraria.DataStructures.WingStats(1200);
         }
         public override void UpdateInventory(Player player) => player.AddEffect<CactusPassiveEffect>(Item);
         public override void UpdateVanity(Player player) => player.AddEffect<CactusPassiveEffect>(Item);

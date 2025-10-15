@@ -353,7 +353,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Oiled;
         public bool DeathMarked;
         public bool noDodge;
-        public bool noSupersonic;
         public bool NoMomentum;
         public bool Bloodthirsty;
         public bool Unlucky;

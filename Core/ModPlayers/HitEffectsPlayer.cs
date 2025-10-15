@@ -76,12 +76,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
             {
                 float crit = 0f; // spider enchant crits don't deal extra damage, but summon spiderlings
-                if (EridanusSet || Player.HasEffect<LifeForceEffect>())
+                /*if (EridanusSet || Player.HasEffect<LifeForceEffect>())
                 {
                     crit = 0.25f; // crits deal 1.25x damage
                     if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                         crit = 0.15f; // crits reduced to 1.15x
-                }
+                }*/
 
                 modifiers.CritDamage -= (modifiers.CritDamage.Additive - 1) * (1 - crit);
             }

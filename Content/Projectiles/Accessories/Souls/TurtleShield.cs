@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System.Collections.Generic;
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -24,6 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.tileCollide = false;
+            Projectile.hide = true;
         }
 
         public override void AI()
@@ -48,7 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 Projectile.Kill();
             }
         }
-
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI) => overPlayers.Add(index);
         public override bool? CanDamage() => false;
     }
 }

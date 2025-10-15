@@ -18,10 +18,9 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.FargoSouls().noDodge = true;
-            player.FargoSouls().noSupersonic = true;
+            //player.FargoSouls().noDodge = true;
             player.moonLeech = true;
-            player.bleed = true;
+            //player.bleed = true;
         }
     }
 }

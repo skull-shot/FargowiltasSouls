@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (!broken)
             {
-                if (!player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer)
+                if (player.HasEffectEnchant<TurtleEffect>() && player.velocity.X == 0 && player.velocity.Y == 0 && !player.controlUseItem && !player.controlUseTile && player.whoAmI == Main.myPlayer)
                 {
                     modPlayer.TurtleCounter++;
 
@@ -109,7 +109,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                         modPlayer.ShellHide = true;
                     }
                 }
-                else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer)
+                else if (player.HasEffect<LifeForceEffect>() && player.velocity.X == 0 && player.velocity.Y < 0.0001 && player.velocity.Y > -0.0001 && player.controlJump && player.TryingToHoverDown == true && !player.controlUseItem && player.whoAmI == Main.myPlayer)
                 {
                     modPlayer.TurtleCounter++;
 

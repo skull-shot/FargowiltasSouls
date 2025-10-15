@@ -23,14 +23,14 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         private static readonly SoundStyle badtothebone = new SoundStyle("FargowiltasSouls/Assets/Sounds/Boneriff/boneriff") with { Variants = RiffVariants, Volume = 0.2f, MaxInstances = 10, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew };
         public override void SetDefaults()
         {
-            Item.damage = 75; //
+            Item.damage = 60;
             Item.knockBack = 4f;
-            Item.shootSpeed = 12f; //
+            Item.shootSpeed = 12f;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.autoReuse = true;
-            Item.useAnimation = 4;
-            Item.useTime = 4;
+            Item.useAnimation = 5;
+            Item.useTime = 5;
             Item.width = 54;
             Item.height = 14;
             Item.shoot = ModContent.ProjectileType<HellSkull2>();

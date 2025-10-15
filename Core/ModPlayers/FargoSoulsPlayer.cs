@@ -458,7 +458,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Oiled = false;
             Slimed = false;
             noDodge = false;
-            noSupersonic = false;
             NoMomentum = false;
             Bloodthirsty = false;
             DisruptedFocus = false;
@@ -1481,7 +1480,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void HideDrawLayers(PlayerDrawSet drawInfo)
         {
-            if (BetsyDashing || ShellHide || GoldShell || SpectreGhostTime > 0)
+            if (BetsyDashing || ShellHide && TurtleCounter >= 70 || GoldShell || SpectreGhostTime > 0)
             {
                 foreach (var layer in PlayerDrawLayerLoader.Layers)
                 {

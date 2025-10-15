@@ -86,6 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                         if (Main.projectile[i].localAI[0] < 120)
                             Main.projectile[i].localAI[0] += 60;
                         else Main.projectile[i].localAI[0] = 120;
+                        Main.projectile[i].netUpdate = true;
                         break;
                     }
                 }
