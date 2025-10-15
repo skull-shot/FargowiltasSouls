@@ -364,6 +364,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             WorldShaperSoul = false;
             FlightMasterySoul = false;
             BuilderMode = false;
+            DimensionSoul = false;
             if (!UniverseSoulBuffer)
             {
                 UniverseSoul = false;

@@ -1,37 +1,51 @@
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 
 namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public class TrojanSquirrelHead : TrojanSquirrelLimb
     {
+        public bool ReverseHeadAnimation = false;
+
+        public int HeadAnimationType;
+        public override void SetStaticDefaults()
+        {
+            Main.npcFrameCount[Type] = 5;
+            base.SetStaticDefaults();
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
 
             NPC.lifeMax = 600;
             NPC.DeathSound = FargosSoundRegistry.TrojanHeadDeath;
-            NPC.width = baseWidth = 80;
-            NPC.height = baseHeight = 76;
+            NPC.width = baseWidth = 90;
+            NPC.height = baseHeight = 78;
         }
 
         public override void AI()
         {
+            //return;
             base.AI();
 
             if (body == null)
                 return;
 
+            //NPC.ai[0] = 1;
+
             NPC.velocity = Vector2.Zero;
             NPC.target = body.target;
             NPC.direction = NPC.spriteDirection = body.direction;
-            NPC.Center = body.Bottom + new Vector2(42f * NPC.direction, -153f) * body.scale;
+            NPC.Center = body.Bottom + new Vector2(NPC.direction < 0 ? -10 : 30f * NPC.direction, -163f) * body.scale;
 
             switch ((int)NPC.ai[0])
             {
@@ -39,6 +53,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     if (body.ai[0] == 0 && body.localAI[0] <= 0)
                     {
                         NPC.ai[1] += WorldSavingSystem.EternityMode ? 1.5f : 1f;
+
+                        //HeadAnimationType = 1;
 
                         if (body.dontTakeDamage)
                             NPC.ai[1] += 1f;
@@ -61,6 +77,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             if (Main.expertMode)
                                 NPC.ai[2] = NPC.ai[2] == 0 ? 1 : 0;
                             NPC.netUpdate = true;
+                            
                         }
                     }
                     break;
@@ -70,6 +87,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         //telegraph
                         SoundEngine.PlaySound(FargosSoundRegistry.TrojanGunStartup, NPC.Center);
+                        HeadAnimationType = 2;
+                        
 
                         Vector2 pos = NPC.Center;
                         pos.X += 22 * NPC.direction; //FUCKING LAUGH
@@ -125,11 +144,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         NPC.ai[0] = 0;
                         NPC.ai[1] = 0;
                         NPC.netUpdate = true;
+                        //HeadAnimationType = 1;
                     }
                     break;
 
                 case 2: //squirrel barrage
                     {
+                        HeadAnimationType = 4;
                         if (WorldSavingSystem.MasochistModeReal && NPC.ai[1] == 90)
                         {
                             NPC arms = (body.ModNPC as TrojanSquirrel).arms;
@@ -172,10 +193,225 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             NPC.ai[0] = 0;
                             NPC.ai[1] = 0;
                             NPC.netUpdate = true;
+                            //HeadAnimationType = 1;
                         }
                     }
                     break;
             }
+        }
+
+        public override void FindFrame(int frameHeight)
+        {
+            //Main.NewText("X Frame:" + NPC.frame.X);
+            //Main.NewText("Y Frame:" + NPC.frame.Y);
+            //Main.NewText("AnimationType:" + HeadAnimationType);
+            switch (HeadAnimationType)
+            {   
+                //Walking.
+                case 1:
+                    {
+                        NPC.frame.X = 0;
+                        if (++NPC.frameCounter >= 12)
+                        {
+                            NPC.frameCounter = 0;
+
+                            if (NPC.frame.Y >= frameHeight * 2)
+                                ReverseHeadAnimation = true;
+
+                            if (NPC.frame.Y <= 0)
+                                ReverseHeadAnimation = false;
+
+                            if (ReverseHeadAnimation)
+                            {
+                                NPC.frame.Y -= frameHeight;
+                            }
+                            else
+                                NPC.frame.Y += frameHeight;
+                        }
+                    }
+                    break;
+                
+                //Acorns
+                case 2:
+                    {
+                        if (NPC.frame.X == 0)
+                            NPC.frame.X = 138;
+                        if (NPC.frame.X == 138)
+                        {
+                            if (++NPC.frameCounter >= 12)
+                            {
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+                            }
+                            if (NPC.frame.Y == frameHeight * 4)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = 0;
+                                NPC.frame.X += 138;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 2)
+                        {
+                            if (++NPC.frameCounter >= 12)
+                            {
+                               
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+
+                            }
+                            if (NPC.frame.Y == frameHeight * 4)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = 0;
+                                NPC.frame.X += 138;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 3)
+                        {
+                            if (++NPC.frameCounter >= 12)
+                            {
+                                if (NPC.frame.Y >= frameHeight * 3)
+                                    NPC.frame.Y = 0;
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+
+                            }
+                        }
+
+                        if (NPC.ai[0] != 1)
+                            HeadAnimationType = 3;
+                        
+                    }
+                    break;
+
+                //Close head again.
+                case 3:
+                    {
+                        if (NPC.frame.X > 138 * 3)
+                            NPC.frame.X = 138 * 3;
+                        if (NPC.frame.X == 138)
+                        {
+                            if (++NPC.frameCounter >= 6)
+                            {
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y -= frameHeight;
+                            }
+                            if (NPC.frame.Y == 0)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = 0;
+                                NPC.frame.X = 0;
+                                HeadAnimationType = 1;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 2)
+                        {
+                            if (++NPC.frameCounter >= 6)
+                            {
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y -= frameHeight;
+
+                            }
+                            if (NPC.frame.Y == 0)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = frameHeight * 4;
+                                NPC.frame.X -= 138;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 3)
+                        {
+                            if (++NPC.frameCounter >= 6)
+                            {
+                                if (NPC.frame.Y == 0)
+                                {
+                                    NPC.frameCounter--;
+                                    NPC.frame.Y = frameHeight * 4;
+                                    NPC.frame.X -= 138;
+                                }
+                                    
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y -= frameHeight;
+
+                            }
+                        }
+
+                    }
+                    break;
+                
+                //Squirrel Rain
+                case 4:
+                    {
+                        if (NPC.frame.X == 0)
+                            NPC.frame.X = 138;
+                        if (NPC.frame.X == 138)
+                        {
+                            if (++NPC.frameCounter >= 3)
+                            {
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+                            }
+                            if (NPC.frame.Y == frameHeight * 4)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = 0;
+                                NPC.frame.X += 138;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 2)
+                        {
+                            if (++NPC.frameCounter >= 3)
+                            {
+
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+
+                            }
+                            if (NPC.frame.Y == frameHeight * 4)
+                            {
+                                NPC.frameCounter--;
+                                NPC.frame.Y = 0;
+                                NPC.frame.X += 138;
+                            }
+                        }
+                        if (NPC.frame.X == 138 * 3)
+                        {
+                            if (++NPC.frameCounter >= 3)
+                            {
+                                if (NPC.frame.Y >= frameHeight * 3)
+                                    NPC.frame.Y = 0;
+                                NPC.frameCounter = 0;
+                                NPC.frame.Y += frameHeight;
+
+                            }
+                        }
+
+                        if (NPC.ai[0] != 2)
+                            HeadAnimationType = 3;
+                    }
+                    break;
+                default:
+                    goto case 1;
+            }
+           
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture2D13 = TextureAssets.Npc[NPC.type].Value;
+            Rectangle rectangle = new Rectangle(NPC.frame.X, NPC.frame.Y, NPC.frame.Width / 4, NPC.frame.Height);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            //NPC.direction = 1;
+
+
+            Color color26 = drawColor;
+            color26 = NPC.GetAlpha(color26);
+
+            SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+            Main.EntitySpriteDraw(texture2D13, body.Top - screenPos + new Vector2(10f, NPC.gfxOffY - 30 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+
+            return false;
         }
 
         private void ShootSquirrelAt(Vector2 target)
