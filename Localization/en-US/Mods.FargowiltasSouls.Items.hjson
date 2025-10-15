@@ -813,20 +813,18 @@ LifeForce: {
 	Tooltip:
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings and effects of Hive Pack
-		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
-		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/SpiderEnchant][i:FargowiltasSouls/CactusEnchant][i:FargowiltasSouls/BeetleEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		'Rare is a living thing that dare disobey your will'
 		'''
 	RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
-		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings that plant flowers while flying
+		[i:FargowiltasSouls/SpiderEnchant] Various bugs will accumulate onto blooming flowers, and target nearby enemies when provoked
+		[i:FargowiltasSouls/PumpkinEnchant] When touched by you the flowers grant the Ambrosia buff and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
-		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
 		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
