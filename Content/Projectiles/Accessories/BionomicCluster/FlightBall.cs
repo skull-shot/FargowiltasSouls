@@ -1,17 +1,21 @@
-﻿using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Content.Items;
+﻿using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Luminance.Core.Graphics;
 using Terraria;
+using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
 {
     public class FlightBall : LightBall, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
-
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            ProjectileID.Sets.TrailingMode[Type] = 1;
+            ProjectileID.Sets.TrailCacheLength[Type] = 20;
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -26,7 +30,13 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
 
         public override void AI()
         {
-            base.AI();
+            ++Projectile.localAI[0];
+            for (int i = 0; i < 2; i++)
+            {
+                if (Projectile.velocity.X != 0)
+                    Projectile.spriteDirection = Projectile.direction = Projectile.velocity.X > 0 ? 1 : -1;
+                Projectile.rotation += 0.05f * Projectile.direction;
+            }
 
             bool slowdown = true;
             if (Projectile.localAI[0] > 90f)
@@ -34,7 +44,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
                 Player p = Main.player[Player.FindClosest(Projectile.Center, 0, 0)];
                 if (p.active && !p.dead && !p.ghost)
                 {
-                    int distance = p.HasEffect<IronEquippedEffect>() ? 80 + (IronEquippedEffect.GrabRangeBonus(p) / 2) : 80;
+                    int distance = p.HasEffect<IronEquippedEffect>() ? 80 + IronEquippedEffect.GrabRangeBonus(p) / 2 : 80;
                     if (p.Distance(Projectile.Center) < distance)
                     {
                         slowdown = false;
