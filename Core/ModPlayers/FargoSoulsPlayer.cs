@@ -458,7 +458,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Oiled = false;
             Slimed = false;
             noDodge = false;
-            noSupersonic = false;
             NoMomentum = false;
             Bloodthirsty = false;
             DisruptedFocus = false;

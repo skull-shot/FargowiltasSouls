@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	// DisplayName: Abominable Presence
-	// Description: Life regen reduced; Moon Leech effect
+	// Description: Lifesteal and dodge effects don't work
 }
 
 BaronsBurdenBuff: {
