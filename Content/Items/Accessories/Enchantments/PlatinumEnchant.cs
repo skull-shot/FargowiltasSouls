@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PlatinumChainmail)
                 .AddIngredient(ItemID.PlatinumGreaves)
                 .AddIngredient(ItemID.DiamondStaff)
-                .AddIngredient(ItemID.WhitePearl)
+                .AddIngredient(ItemID.PlatinumCoin)
                 .AddIngredient(ItemID.GemSquirrelDiamond)
 
                 .AddTile<EnchantedTreeSheet>()
